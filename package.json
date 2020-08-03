@@ -8,6 +8,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "chota": "^0.8.0",
     "next": "9.5.1",
     "react": "16.13.1",
     "react-dom": "16.13.1"

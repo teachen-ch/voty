@@ -1,0 +1,79 @@
+:root {
+  --bg-color: #ffffff;
+  --bg-secondary-color: #f3f3f6;
+  --color-primary: #7aace0;
+  --color-lightGrey: #ebedf1;
+  --color-grey: #747681;
+  --color-darkGrey: #3f4144;
+  --color-error: #c31621;
+  --color-success: #258f17;
+  --grid-maxWidth: 120rem;
+  --grid-gutter: 2rem;
+  --font-size: 1.6rem;
+  --font-color: #444;
+  --font-family-sans: -apple-system, BlinkMacSystemFont, Avenir, "Avenir Next",
+    "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
+    "Droid Sans", "Helvetica Neue", sans-serif;
+  --font-family-mono: monaco, "Consolas", "Lucida Console", monospace;
+}
+
+.card {
+  border-radius: 0px;
+  background: var(--bg-color);
+  -webkit-box-shadow: 0 1px 3px var(--color-lightGrey);
+  box-shadow: 0 1px 3px var(--color-lightGrey);
+}
+
+.container {
+  min-height: 100vh;
+  padding: 0 0.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+button {
+  font-weight: bold;
+}
+
+.main {
+  padding: 5rem 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+footer {
+  margin-top: 4rem;
+  width: 100%;
+  height: 100px;
+  text-align: center;
+  margin-bottom: 4rem;
+  /* display: flex;
+  justify-content: center;
+  align-items: center;*/
+}
+
+.logo {
+  height: 2em;
+  margin-right: 0.5rem;
+}
+
+h1 {
+  font-family: "Avenir Next";
+  text-align: center;
+  font-size: 8rem;
+  font-weight: bolder;
+  margin-top: 5rem;
+  margin-bottom: 0rem;
+}
+
+h2 {
+  margin-top: 0rem;
+  margin-bottom: 3rem;
+  text-align: center;
+  font-size: 3rem;
+}
