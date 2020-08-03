@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "export": "rm -rf ./.next/ && next build && next export && cd out/ && sftp root@dev.votyapp.ch:/voty/",
     "start": "next start"
   },
   "dependencies": {

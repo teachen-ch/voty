@@ -37,7 +37,7 @@ export default function Home() {
               Urnengängen durchführen und die Resultate diskutieren
             </p>
             <button className="button primary is-full-width">
-              Wir wollen auch!
+              Wollen wir auch!
             </button>
           </div>
           <div className="col-12 col-4-md  card bg-light">
@@ -55,26 +55,6 @@ export default function Home() {
           </div>
         </div>
       </main>
-
-      <footer>
-        <p>
-          voty ist ein Projekt des{" "}
-          <a href="https://teachen.ch">«Verein Teachen!»</a>
-        </p>
-        <p>
-          <img src="/pf_logo.png" alt="Prototypefund Logo" className="logo" />
-          mit tatkräftiger Unterstützung durch den&nbsp;
-          <a href="https://prototypefund.opendata.ch" target="_blank">
-            PrototypeFund.ch
-          </a>
-        </p>
-
-        <nav>
-          <a href="#">Impressum</a>&nbsp;&nbsp;|&nbsp;&nbsp;
-          <a href="#">Datenschutz</a>&nbsp;&nbsp;|&nbsp;&nbsp;
-          <a href="#">Kontakt</a>
-        </nav>
-      </footer>
     </div>
   );
 }
