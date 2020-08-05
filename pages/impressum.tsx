@@ -2,7 +2,7 @@ import Head from "next/head";
 
 export default function Impressum() {
   return (
-    <div className="container">
+    <div>
       <Head>
         <title>voty - Datenschutz</title>
         <link rel="icon" href="/favicon.ico" />

@@ -2,7 +2,7 @@ import Head from "next/head";
 
 export default function Datenschutz() {
   return (
-    <div className="container">
+    <div>
       <Head>
         <title>voty - Datenschutz</title>
         <link rel="icon" href="/favicon.ico" />
@@ -11,9 +11,7 @@ export default function Datenschutz() {
       <main className="max-800">
         <h1>voty</h1>
         <h2>Datenschutz</h2>
-        <h3>
-          Welche personenbezogenen Daten wir sammeln und warum wir sie sammeln
-        </h3>
+        <h3>Welche personenbezogenen Daten wir sammeln und warum</h3>
         <p>
           Wenn Sie auf diese Webseite zugreifen werden automatisch Informationen
           allgemeiner Natur erfasst. Diese Informationen werden im

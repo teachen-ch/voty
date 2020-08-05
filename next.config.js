@@ -9,6 +9,7 @@ module.exports = {
       "/impressum/index": { page: "/impressum" },
       "/kontakt/index": { page: "/kontakt" },
       "/datenschutz/index": { page: "/datenschutz" },
+      "/demokratie/index": { page: "/demokratie" },
     };
   },
 };

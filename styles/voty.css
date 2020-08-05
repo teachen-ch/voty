@@ -24,7 +24,7 @@
   box-shadow: 0 1px 3px var(--color-lightGrey);
 }
 
-.container {
+.nocontainer {
   min-height: 100vh;
   padding: 0 0.5rem;
   display: flex;
@@ -33,7 +33,8 @@
   align-items: center;
 }
 
-button {
+button,
+a[role="button"] {
   font-weight: bold;
 }
 
@@ -70,5 +71,5 @@ h2 {
 }
 
 .max-800 {
-  max-width: 50rem;
+  margin: 0 calc(50% - 25rem);
 }

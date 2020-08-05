@@ -3,7 +3,7 @@ import Head from "next/head";
 
 export default function Home() {
   return (
-    <div className="container">
+    <div>
       <Head>
         <title>voty – Demokratie an die Schule</title>
         <link rel="icon" href="/favicon.ico" />
@@ -23,9 +23,13 @@ export default function Home() {
               so wertvoll? Wir möchten Jugendliche von 12-18 Jahren motivieren,
               sich mit unserem politischen System auseinanderzusetzen.
             </p>
-            <button className="button primary is-full-width">
+            <a
+              href="kontakt/#newsletter"
+              role="button"
+              className="button primary is-full-width"
+            >
               Anmeldung Newsletter
-            </button>
+            </a>
           </div>
           <div className="col-12 col-4-md  card bg-light">
             <header>
@@ -36,11 +40,15 @@ export default function Home() {
               Meinung! Wir möchten Test-Abstimmungen zeitgleich zu nationalen
               Urnengängen durchführen und die Resultate diskutieren
             </p>
-            <button className="button primary is-full-width">
+            <a
+              href="kontakt/"
+              role="button"
+              className="button primary is-full-width"
+            >
               Wollen wir auch!
-            </button>
+            </a>
           </div>
-          <div className="col-12 col-4-md  card bg-light">
+          <div className="col-12 col-4-md card bg-light">
             <header>
               <h3>Demokratie erleben</h3>
             </header>
@@ -49,9 +57,14 @@ export default function Home() {
               mitreden und Vorschläge einbringen? Wir möchten gemeinsam testen,
               wie wir Demokratie in Schulhäuser bringen können.
             </p>
-            <button className="button primary is-full-width">
+
+            <a
+              href="kontakt/"
+              role="button"
+              className="button primary is-full-width"
+            >
               Das interessiert uns!
-            </button>
+            </a>
           </div>
         </div>
       </main>
