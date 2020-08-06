@@ -1,0 +1,56 @@
+---
+- hosts: dev
+  vars:
+    git_repo: git@github.com:teachen-ch/voty.git
+    git_user: git
+    app_dir: /voty
+  tasks:
+    - name: Deploy Voty Web Frontend -
+      block:
+        - name: Create User .ssh directory
+          file: { path: ~/.ssh, state: "directory", mode: "0700" }
+        - name: Copy GitHub Deploy Key
+          copy: { src: ./deploy_key, dest: ~/.ssh/deploy_key, mode: "0600" }
+        - name: Copy GitHub Deploy Key Pub
+          copy: { src: ./deploy_key.pub, dest: ~/.ssh/deploy_key.pub }
+        - name: Download latest Frontend Code from Git
+          git:
+            {
+              repo: "{{git_repo}}",
+              dest: "{{app_dir}}",
+              force: yes,
+              key_file: "~/.ssh/deploy_key",
+              accept_hostkey: "yes",
+            }
+        #- name: Install node_modules for Next Frontend
+        #  command: npm install
+        #  args:
+        #    chdir: "{{app_dir}}"
+        #- name: Build Next Web Frontend
+        #  command: npm run build
+        #  args:
+        #    chdir: "{{app_dir}}"
+      become: yes
+      become_user: voty
+    - name: Build and Deploy Docker Image
+      block:
+        - name: Build Docker Image
+          docker_image:
+            name: "voty-web"
+            source: Build
+            build:
+              pull: "no"
+              path: "{{app_dir}}"
+        - name: Start Docker Container
+          docker_container:
+            name: "voty-web"
+            image: "voty-web"
+            state: present
+            recreate: yes
+            exposed_ports: 3000
+      become: yes
+      become_method: sudo
+    - name: Restart Voty Frontend
+      service: { name: voty, enabled: yes, state: restarted }
+      become: yes
+      become_method: sudo

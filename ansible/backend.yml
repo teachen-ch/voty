@@ -1,0 +1,75 @@
+---
+- hosts: dev
+  vars:
+    app_dir: /voty
+  module_defaults:
+    apt:
+      force_apt_get: yes
+  tasks:
+    - name: Install Software and Add User
+      block:
+        - name: Install the gpg key for nodejs LTS
+          apt_key:
+            url: "https://deb.nodesource.com/gpgkey/nodesource.gpg.key"
+            state: present
+        - name: add nodejs repository
+          apt_repository:
+            repo: "deb https://deb.nodesource.com/node_13.x focal main"
+            state: "present"
+        - name: Install the gpg key for Docker Repo
+          apt_key:
+            url: "https://download.docker.com/linux/ubuntu/gpg"
+            state: present
+        - name: Add Docker Repository
+          apt_repository:
+            repo: "deb https://download.docker.com/linux/ubuntu focal stable"
+            state: "present"
+        - name: Update and upgrade apt packages
+          apt: { upgrade: "yes", update_cache: "yes" }
+        - name: Install backend modules
+          apt:
+            name: "{{ packages }}"
+          vars:
+            packages:
+              - nginx
+              - nodejs
+              - git
+              - python2
+              - python3
+              - python3-pip
+              - docker-ce
+        - name: Install Docker Module for Python
+          pip: { name: docker }
+        - name: Add voty user
+          user: { name: voty }
+        - name: Create Backend Root Directory
+          file: { path: "{{app_dir}}", owner: voty, state: directory }
+      become: yes
+      become_method: sudo
+    - name: Configure Webserver and Run Services
+      block:
+        - name: Configure votyapp.ch
+          copy: { src: ./nginx.cfg, dest: /etc/nginx/sites-enabled/voty.cfg }
+          notify: restart nginx
+        - name: Start Webserver (Reverse-Proxy)
+          service: { name: nginx, state: started }
+        - name: Create Systemd Service Configuration
+          copy:
+            {
+              src: voty.service,
+              mode: 0755,
+              dest: /etc/systemd/system/voty.service,
+            }
+        - name: Enable Web Backend Service
+          service: { name: voty, enabled: yes, state: restarted }
+      become: yes
+      become_method: sudo
+  handlers:
+    - name: restart nginx
+      service: { name: nginx, state: restarted }
+      become: yes
+      become_method: sudo
+    - name: restart voty
+      service: { name: voty, state: restarted }
+      become: yes
+      become_method: sudo

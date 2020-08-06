@@ -1,0 +1,15 @@
+[Unit]
+Description=Voty - Web Frontend
+After=network.target
+
+[Service]
+Type=simple
+# Another Type: forking
+User=lumi
+WorkingDirectory=/voty
+ExecStart=npm run start
+Restart=on-failure
+# Other restart options: always, on-abort, etc
+
+[Install]
+WantedBy=multi-user.target
