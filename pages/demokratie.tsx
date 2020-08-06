@@ -36,8 +36,8 @@ export default function Kontakt() {
         </p>
         <h3>Klingt spannend? </h3>
         <p>
-          Tragen sie sich doch gleich unverbindlich auf unsere Liste ein und wir
-          halten sie auf dem Laufenden.
+          Tragen Sie sich doch gleich unverbindlich auf unsere Liste ein und wir
+          halten Sie auf dem Laufenden.
         </p>
         <div className="card bg-light" id="newsletter">
           <Newsletter />

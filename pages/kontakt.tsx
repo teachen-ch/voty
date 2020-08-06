@@ -2,6 +2,10 @@ import Head from "next/head";
 import Newsletter from "../components/Newsletter";
 
 export default function Kontakt() {
+  function sendMail() {
+    const email = "hc.nehcaet@ytov:otliam";
+    document.location.href = email.split("").reverse().join("");
+  }
   return (
     <div>
       <Head>
@@ -18,7 +22,9 @@ export default function Kontakt() {
         </p>
         <br />
         <p>
-          <strong>Email:</strong> voty&#64;teachen.ch
+          <a onClick={sendMail} role="button" className="button primary">
+            Email senden
+          </a>
         </p>
         <br />
 

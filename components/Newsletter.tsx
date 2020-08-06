@@ -30,7 +30,7 @@ export default function Newsletter() {
 export function Field({ id, label }: { id: string; label: string }) {
   return (
     <div className="row is-vertical-align">
-      <div className="col-3 text-right">
+      <div className="col-3">
         <label htmlFor={id}>{label}</label>
       </div>
       <div className="col">
@@ -62,7 +62,7 @@ export function Select({
 }) {
   return (
     <div className="row is-vertical-align">
-      <div className="col-3 text-right">
+      <div className="col-3">
         <label htmlFor={id}>{label}</label>
       </div>
       <div className="col">

@@ -130,9 +130,6 @@ export default function Datenschutz() {
           Ihrer Interaktion mit dem eingebetteten Inhalt, falls Sie ein Konto
           haben und auf dieser Website angemeldet sind.
         </p>
-        <p>
-          <br />
-        </p>
         <h3>Analytics</h3>
         <p>
           Für die Analyse und Verbesserung dieser Webseite werden Web-Analytics

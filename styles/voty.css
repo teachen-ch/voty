@@ -1,36 +1,11 @@
-:root {
-  --bg-color: #ffffff;
-  --bg-secondary-color: #f3f3f6;
-  --color-primary: #7aace0;
-  --color-lightGrey: #ebedf1;
-  --color-grey: #747681;
-  --color-darkGrey: #3f4144;
-  --color-error: #c31621;
-  --color-success: #258f17;
-  --grid-maxWidth: 120rem;
-  --grid-gutter: 2rem;
-  --font-size: 1.6rem;
-  --font-color: #444;
-  --font-family-sans: -apple-system, BlinkMacSystemFont, Avenir, "Avenir Next",
-    "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
-    "Droid Sans", "Helvetica Neue", sans-serif;
-  --font-family-mono: monaco, "Consolas", "Lucida Console", monospace;
-}
+@import url("theme.css");
+@import url("menu.css");
 
 .card {
   border-radius: 0px;
   background: var(--bg-color);
   -webkit-box-shadow: 0 1px 3px var(--color-lightGrey);
   box-shadow: 0 1px 3px var(--color-lightGrey);
-}
-
-.nocontainer {
-  min-height: 100vh;
-  padding: 0 0.5rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
 }
 
 button,
@@ -47,6 +22,10 @@ footer {
   /* display: flex;
   justify-content: center;
   align-items: center;*/
+}
+
+blockquote {
+  margin-left: 0;
 }
 
 .logo {
@@ -68,8 +47,15 @@ h2 {
   margin-bottom: 3rem;
   text-align: center;
   font-size: 3rem;
+  line-height: 1em;
 }
 
-.max-800 {
-  margin: 0 calc(50% - 25rem);
+h3 {
+  line-height: 1.2em;
+}
+
+@media screen and (min-width: 800px) {
+  .max-800 {
+    margin: 0 calc(50% - 25rem);
+  }
 }

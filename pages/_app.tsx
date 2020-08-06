@@ -1,11 +1,13 @@
 import "chota";
 import "../styles/voty.css";
 import Head from "next/head";
+import Menu from "../components/Menu";
 
 function MyApp({ Component, pageProps }) {
   return (
     <div className="container">
       <Header />
+      <Menu />
       <Component {...pageProps} />
       <Footer />
     </div>
