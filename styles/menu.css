@@ -4,13 +4,13 @@
   position: absolute;
   width: 36px;
   height: 30px;
-  left: 36px;
+  right: 36px;
   top: 36px;
 }
 
 @media screen and (max-width: 599px) {
   .bm-burger-button {
-    left: 16px;
+    right: 16px;
     top: 16px;
   }
 }
@@ -27,8 +27,10 @@
 
 /* Position and sizing of clickable cross button */
 .bm-cross-button {
-  height: 24px;
-  width: 24px;
+  height: 36px !important;
+  width: 36px !important;
+  right: 36px !important;
+  top: 36px !important;
 }
 
 /* Color/shape of close button cross */
@@ -45,7 +47,7 @@ Note: Beware of modifying this element as it can break the animations - you shou
   height: 100%;
   max-width: 70%;
   top: 0;
-  left: 0;
+  right: 0;
 }
 
 /* General sidebar styles */

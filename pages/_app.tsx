@@ -30,6 +30,7 @@ function Footer() {
       </p>
 
       <nav>
+        <a href="/user/login">Anmelden / Login</a>&nbsp;&nbsp;|&nbsp;&nbsp;
         <a href="/impressum">Impressum</a>&nbsp;&nbsp;|&nbsp;&nbsp;
         <a href="/datenschutz">Datenschutz</a>&nbsp;&nbsp;|&nbsp;&nbsp;
         <a href="/kontakt">Kontakt</a>

@@ -1,8 +1,8 @@
-import { stack as Hamburger } from "react-burger-menu";
+import { slide as Hamburger } from "react-burger-menu";
 
 export default function Menu() {
   return (
-    <Hamburger>
+    <Hamburger right>
       <a id="home" className="menu-item" href="/">
         Start
       </a>

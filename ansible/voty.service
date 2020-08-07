@@ -1,13 +1,16 @@
 [Unit]
 Description=Voty - Web Frontend
-After=network.target
+Requires=docker.service
+After=docker.service
 
 [Service]
 Type=simple
 # Another Type: forking
-User=lumi
-WorkingDirectory=/voty
-ExecStart=npm run start
+User=root
+# WorkingDirectory=/voty
+# ExecStart=npm run start
+ExecStart=/usr/bin/docker start -a voty-web
+ExecStop=/usr/bin/docker stop -t 2 voty-web
 Restart=on-failure
 # Other restart options: always, on-abort, etc
 

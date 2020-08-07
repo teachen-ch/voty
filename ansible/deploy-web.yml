@@ -37,7 +37,7 @@
         - name: Build Docker Image
           docker_image:
             name: "voty-web"
-            source: Build
+            source: "build"
             build:
               pull: "no"
               path: "{{app_dir}}"
@@ -45,9 +45,10 @@
           docker_container:
             name: "voty-web"
             image: "voty-web"
-            state: present
+            state: started
+            restart: yes
+            ports: 3000:3000
             recreate: yes
-            exposed_ports: 3000
       become: yes
       become_method: sudo
     - name: Restart Voty Frontend
