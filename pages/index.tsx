@@ -11,15 +11,15 @@ export default function Home() {
 
       <main>
         <h1>
-          <img src="/images/voty_logo.svg" alt="voty" />
+          <img src="/images/voty_logo.svg" alt="voty" className="logo" />
         </h1>
         <h2>Demokratie an die Schule!</h2>
-        <p className="text-center max-800">
+        <h4 className="text-center max-800 bold">
           Kurzer, knackiger Introtext: Die Demokratie ist das wohl wichtigste
           Gut der Schweiz, das wird uns bei der aktuellen Weltlage bewusster
           denn je. Aber wie gelingt es uns, die Jugend für die Demokratie zu
           begeistern?
-        </p>
+        </h4>
         <br />
 
         <div className="row">

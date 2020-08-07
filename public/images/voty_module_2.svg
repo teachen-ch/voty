@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg width="214px" height="248px" viewBox="0 0 214 248" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg width="218px" height="252px" viewBox="0 0 218 252" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <title>Modul 2</title>
     <g id="Modul-2" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="Modul-Icon">
+        <g id="Modul-Icon" transform="translate(2.000000, 2.000000)">
             <path d="M213.6655,192.5397 C213.6655,202.6307 205.4855,210.8107 195.3945,210.8107 L19.1845,210.8107 C15.6005,210.8107 12.0375,209.9077 9.0115,207.9877 C3.5535,204.5227 0.4205,198.5567 0.49996718,192.2977 L0.49996718,76.6297 C0.49996718,66.5307 8.6755,58.3367 18.7735,58.3097 L36.5615,58.3097 L197.7915,58.3097 C206.5595,58.3097 213.6655,65.4167 213.6655,74.1837 L213.6655,192.2977 L213.6655,186.2077 L213.6655,165.4227" id="Stroke-1" stroke="#000000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"></path>
             <path d="M195.395,210.810275 C205.466,210.810275 213.639,202.6602 213.666,192.5872 L213.666,186.2072 L0.499480263,186.2072 L0.499480263,192.3462 C0.438,197.2292 2.336,201.9342 5.771,205.4052 C9.207,208.8762 13.891,210.8242 18.774,210.810275 L195.395,210.810275 Z" id="Stroke-3" stroke="#000000" stroke-width="5" fill="#B9C2C6" stroke-linecap="round" stroke-linejoin="round"></path>
             <polygon id="Stroke-5" stroke="#000000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" points="125.3559 234.9782 88.8129 234.9782 91.8589 210.5692 122.3099 210.5692"></polygon>

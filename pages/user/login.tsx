@@ -1,6 +1,6 @@
 import { csrfToken } from "next-auth/client";
 
-export default function Login({ csrfToken }: { csrfToken: String }) {
+export default function Login({ csrfToken }: { csrfToken: string }) {
   return (
     <main className="max-800">
       <h1>voty</h1>

@@ -38,6 +38,7 @@
           docker_image:
             name: "voty-web"
             source: "build"
+            force_source: "yes"
             build:
               pull: "no"
               path: "{{app_dir}}"
