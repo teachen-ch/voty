@@ -10,13 +10,23 @@ export default function Home() {
       </Head>
 
       <main>
-        <h1>voty</h1>
+        <h1>
+          <img src="/images/voty_logo.svg" alt="voty" />
+        </h1>
         <h2>Demokratie an die Schule!</h2>
+        <p className="text-center max-800">
+          Kurzer, knackiger Introtext: Die Demokratie ist das wohl wichtigste
+          Gut der Schweiz, das wird uns bei der aktuellen Weltlage bewusster
+          denn je. Aber wie gelingt es uns, die Jugend für die Demokratie zu
+          begeistern?
+        </p>
+        <br />
 
         <div className="row">
-          <div className="col-12 col-4-md card bg-light">
+          <div className="col-12 col-4-md card bg-light text-center">
             <header>
               <h3>Demokratie verstehen</h3>
+              <img src="images/voty_module_1.svg" alt="Bundehaus" />
             </header>
             <p>
               Wie funktioniert die Demokratie in der Schweiz und warum ist sie
@@ -31,9 +41,10 @@ export default function Home() {
               Anmeldung Newsletter
             </a>
           </div>
-          <div className="col-12 col-4-md  card bg-light">
+          <div className="col-12 col-4-md card bg-light text-center">
             <header>
               <h3>Demokratie testen</h3>
+              <img src="images/voty_module_2.svg" alt="Abstimmen" />
             </header>
             <p>
               Nur Erwachsene dürfen abstimmen, aber auch Jugendliche haben eine
@@ -48,9 +59,10 @@ export default function Home() {
               Wollen wir auch!
             </a>
           </div>
-          <div className="col-12 col-4-md card bg-light">
+          <div className="col-12 col-4-md card bg-light text-center">
             <header>
               <h3>Demokratie erleben</h3>
+              <img src="images/voty_module_3.svg" alt="Diskutieren" />
             </header>
             <p>
               Wer entscheidet an Eurer Schule? Dürfen Schülerinnen und Schüler

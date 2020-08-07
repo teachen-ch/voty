@@ -22,7 +22,11 @@ function Footer() {
         <a href="https://teachen.ch/verein-teachen">«Teachen!»</a>
       </p>
       <p>
-        <img src="/pf_logo.png" alt="Prototypefund Logo" className="logo" />
+        <img
+          src="/images/pf_logo.png"
+          alt="Prototypefund Logo"
+          className="logo"
+        />
         mit tatkräftiger Unterstützung durch den&nbsp;
         <a href="https://prototypefund.opendata.ch" target="_blank">
           PrototypeFund.ch

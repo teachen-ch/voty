@@ -3,9 +3,9 @@
 
 .card {
   border-radius: 0px;
-  background: var(--bg-color);
-  -webkit-box-shadow: 0 1px 3px var(--color-lightGrey);
-  box-shadow: 0 1px 3px var(--color-lightGrey);
+  background: transparent !important;
+  -webkit-box-shadow: none;
+  box-shadow: none;
 }
 
 button,
@@ -37,7 +37,7 @@ h1 {
   font-family: "Avenir Next";
   text-align: center;
   font-size: 8rem;
-  font-weight: bolder;
+  font-weight: 900;
   margin-top: 5rem;
   margin-bottom: 0rem;
 }
@@ -45,6 +45,7 @@ h1 {
 h2 {
   margin-top: 0rem;
   margin-bottom: 3rem;
+  font-weight: 900;
   text-align: center;
   font-size: 3rem;
   line-height: 1em;
