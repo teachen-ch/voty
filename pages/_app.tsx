@@ -19,19 +19,31 @@ function Footer() {
     <footer>
       <p>
         voty ist ein Projekt des Vereins{" "}
-        <a href="https://teachen.ch/verein-teachen">«Teachen!»</a>
+        <a href="https://teachen.ch/verein-teachen" className="underline">
+          «Teachen!»
+        </a>
       </p>
       <p>
+        mit tatkräftiger Unterstützung durch den
+        <br />
+        <a
+          href="https://prototypefund.opendata.ch"
+          target="_blank"
+          className="underline"
+        >
+          PrototypeFund
+        </a>
+      </p>
+
+      <a href="https://prototypefund.opendata.ch" target="_blank">
         <img
           src="/images/pf_logo.png"
           alt="Prototypefund Logo"
-          className="logo"
+          style={{ width: "40px" }}
         />
-        mit tatkräftiger Unterstützung durch den&nbsp;
-        <a href="https://prototypefund.opendata.ch" target="_blank">
-          PrototypeFund.ch
-        </a>
-      </p>
+      </a>
+
+      <hr />
 
       <nav>
         <a href="/user/login">Anmelden / Login</a>&nbsp;&nbsp;|&nbsp;&nbsp;
@@ -39,6 +51,9 @@ function Footer() {
         <a href="/datenschutz">Datenschutz</a>&nbsp;&nbsp;|&nbsp;&nbsp;
         <a href="/kontakt">Kontakt</a>
       </nav>
+      <br />
+      <br />
+      <br />
     </footer>
   );
 }

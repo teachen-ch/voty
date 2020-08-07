@@ -22,7 +22,7 @@ export default function Home() {
         </h4>
         <br />
 
-        <div className="row">
+        <div className="row" style={{ alignItems: "stretch" }}>
           <div className="col-12 col-4-md card bg-light text-center">
             <header>
               <h3>Demokratie verstehen</h3>

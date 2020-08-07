@@ -6,6 +6,9 @@
   background: transparent !important;
   -webkit-box-shadow: none;
   box-shadow: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 button,
@@ -19,9 +22,19 @@ footer {
   height: 100px;
   text-align: center;
   margin-bottom: 4rem;
-  /* display: flex;
-  justify-content: center;
-  align-items: center;*/
+}
+
+.underline {
+  text-decoration: underline;
+}
+footer a {
+  color: #000;
+}
+
+footer hr {
+  border: 0.5px solid #979797;
+  width: 420px;
+  margin: 1rem auto;
 }
 
 blockquote {
@@ -35,6 +48,12 @@ blockquote {
 .logo {
   margin-right: 0.5rem;
   max-width: 60%;
+}
+
+@media screen and (min-width: 800px) {
+  .logo {
+    margin-top: 5rem;
+  }
 }
 
 h1 {
