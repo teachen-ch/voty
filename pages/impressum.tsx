@@ -1,4 +1,5 @@
 import Head from "next/head";
+import Page from "../components/Page";
 
 export default function Impressum() {
   function sendMail() {
@@ -6,40 +7,30 @@ export default function Impressum() {
     document.location.href = email.split("").reverse().join("");
   }
   return (
-    <div>
+    <Page>
       <Head>
         <title>voty - Datenschutz</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
-      <main className="max-800">
-        <h1>voty</h1>
-        <h2>Impressum</h2>
-        <p>
-          Voty ist ein Projekt des Vereins{" "}
-          <a href="https://teachen.ch/verein-teachen/">«Teachen!»</a>
-        </p>
-        <blockquote>
+      <h2>Impressum</h2>
+      <p>
+        Voty ist ein Projekt des Vereins{" "}
+        <a href="https://teachen.ch/verein-teachen/">«Teachen!»</a>
+      </p>
+      <div className="marginBottom">
+        <pre>
           Verein «Teachen!»
           <br />
           Alpenweg 11
           <br />
           3110 Münsingen
-        </blockquote>
-
+        </pre>
+      </div>
+      <p>
         <a onClick={sendMail} role="button" className="button primary">
           Email senden
         </a>
-        <p>
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-        </p>
-      </main>
-    </div>
+      </p>
+    </Page>
   );
 }

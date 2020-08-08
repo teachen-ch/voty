@@ -14,14 +14,14 @@ export default function Home() {
           <img src="/images/voty_logo.svg" alt="voty" className="logo" />
         </h1>
         <h2>Demokratie an die Schule!</h2>
-        <p className="text-center max-800">
-          Die Demokratie ist das wohl wichtigste Gut der Schweiz? Aber wie
+        <p className="text-center max-600">
+          Die Demokratie ist das wohl wichtigste Gut der Schweiz. Aber wie
           gelingt es uns, die Jugend für die Demokratie zu begeistern? Voty ist
           ein Projekt für die Demokratieförderung an schweizer Schulen.
         </p>
         <br />
 
-        <div className="row is-center" style={{ alignItems: "stretch" }}>
+        <div className="row stretch is-center ">
           <div className="col-6 col-4-md card bg-light text-center">
             <header>
               <h3 className="nowrap">Demokratie verstehen</h3>

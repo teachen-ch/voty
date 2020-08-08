@@ -3,15 +3,15 @@
 .bm-burger-button {
   position: absolute;
   width: 36px;
-  height: 30px;
-  right: 36px;
-  top: 36px;
+  height: 36px;
+  right: 2rem;
+  top: 2rem;
 }
 
 @media screen and (max-width: 599px) {
   .bm-burger-button {
-    right: 16px;
-    top: 16px;
+    right: 1rem;
+    top: 1rem;
   }
 }
 
@@ -27,10 +27,10 @@
 
 /* Position and sizing of clickable cross button */
 .bm-cross-button {
-  height: 36px !important;
-  width: 36px !important;
-  right: 36px !important;
-  top: 36px !important;
+  height: 2rem !important;
+  width: 2rem !important;
+  right: 2rem !important;
+  top: 2rem !important;
 }
 
 /* Color/shape of close button cross */

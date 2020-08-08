@@ -21,25 +21,12 @@ a[role="button"] {
   white-space: nowrap;
 }
 
-footer {
-  margin-top: 4rem;
-  width: 100%;
-  height: 100px;
-  text-align: center;
-  margin-bottom: 4rem;
+.stretch {
+  align-items: stretch;
 }
 
 .underline {
   text-decoration: underline;
-}
-footer a {
-  color: #000;
-}
-
-footer hr {
-  border: 0.5px solid #979797;
-  width: 450px;
-  margin: 1rem auto;
 }
 
 blockquote {
@@ -53,7 +40,38 @@ blockquote {
 .logo {
   max-width: 60%;
 }
+.logoPage {
+  margin-top: 2rem;
+  height: 45px;
+}
 
+.padding-1 {
+  padding: 1rem;
+}
+
+.padding-2 {
+  padding: 2rem;
+}
+
+.marginBottom {
+  margin-bottom: 2rem;
+}
+
+main {
+  margin-top: 2rem !important;
+}
+
+@media screen and (min-width: 600px) {
+  main {
+    margin-top: 5rem !important;
+  }
+}
+
+@media screen and (max-width: 599px) {
+  .logoPage {
+    margin-top: 1rem;
+  }
+}
 @media screen and (min-width: 800px) {
   .logo {
     margin-top: 5rem;
@@ -64,7 +82,7 @@ h1 {
   text-align: center;
   font-size: 4rem;
   font-weight: 900;
-  margin-top: 4rem;
+  margin-top: 5rem;
   margin-bottom: 0rem;
 }
 
@@ -73,7 +91,7 @@ h2 {
   margin-bottom: 1rem;
   font-weight: 900;
   text-align: center;
-  font-size: 3rem;
+  font-size: 4rem;
   line-height: 1em;
 }
 
@@ -85,12 +103,36 @@ h2 {
 
 h3 {
   line-height: 1.2em;
+  font-size: 2rem;
   margin-bottom: 0.8em !important;
   font-weight: 700;
 }
 
+.page h2 {
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #979797;
+}
+
 @media screen and (min-width: 800px) {
   .max-800 {
+    /* 50rem = 800px indeed */
     margin: 0 calc(50% - 25rem);
   }
+  .max-600 {
+    margin: 0 calc(50% - 19rem);
+  }
+}
+
+/* Footer */
+
+footer {
+  margin: 4rem 0;
+  text-align: center;
+}
+footer a {
+  color: #000;
+}
+footer hr {
+  border-bottom: 1px solid #979797;
+  margin: 1rem 0;
 }

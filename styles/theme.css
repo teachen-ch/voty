@@ -4,13 +4,13 @@
 :root {
   --bg-color: #ffffff;
   --bg-secondary-color: #f3f3f6;
-  --color-primary: #c00;
-  --color-lightGrey: #ebedf1;
-  --color-grey: #747681;
-  --color-darkGrey: #3f4144;
+  --color-primary: #d90000;
+  --color-lightGrey: #b9c2c6;
+  --color-grey: #8f969b;
+  --color-darkGrey: #323232;
   --color-error: #c31621;
   --color-success: #258f17;
-  --grid-maxWidth: 120rem;
+  --grid-maxWidth: 100%;
   --grid-gutter: 2rem;
   --font-size: 1.8rem;
   --font-color: #000;
