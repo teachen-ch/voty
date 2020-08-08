@@ -8,9 +8,8 @@ export function Footer() {
             <a href="https://teachen.ch/verein-teachen" className="underline">
               «Teachen!»
             </a>
-          </p>
-          <p>
-            mit tatkräftiger Unterstützung durch den
+            <br />
+            mit tatkräftiger Unterstützung des
             <br />
             <a
               href="https://prototypefund.opendata.ch"

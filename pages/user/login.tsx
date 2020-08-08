@@ -1,9 +1,13 @@
 import { csrfToken } from "next-auth/client";
+import Head from "next/head";
+import Page from "../../components/Page";
 
 export default function Login({ csrfToken }: { csrfToken: string }) {
   return (
-    <main className="max-800">
-      <h1>voty</h1>
+    <Page>
+      <Head>
+        <title>voty - Anmeldung</title>
+      </Head>
       <h2>Login</h2>
       <p>
         Hier kannst Du dich mit Deiner Schul-Emailadresse anmelden. Wir schicken
@@ -18,10 +22,12 @@ export default function Login({ csrfToken }: { csrfToken: string }) {
           <input id="email" name="email" />
         </div>
         <div className="col-4">
-          <input type="submit" value="Login Link schicken" />
+          <button type="submit" className="button primary">
+            Login Link schicken
+          </button>
         </div>
       </form>
-    </main>
+    </Page>
   );
 }
 

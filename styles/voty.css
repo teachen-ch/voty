@@ -12,9 +12,11 @@
 }
 
 button,
-a[role="button"] {
+a[role="button"],
+input[type="submit"] {
   font-weight: bold;
   padding: 1rem 1.5rem;
+  border-radius: 0px !important;
 }
 
 .nowrap {

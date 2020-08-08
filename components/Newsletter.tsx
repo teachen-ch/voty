@@ -45,7 +45,9 @@ export function Submit({ name, value }: { name: string; value: string }) {
     <div className="row is-vertical-align">
       <div className="col-3"></div>
       <div className="col">
-        <input type="submit" name={name} value={value} />
+        <button type="submit" name={name} className="is-full-width">
+          {value}
+        </button>
       </div>
     </div>
   );
