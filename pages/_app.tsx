@@ -52,8 +52,6 @@ function Footer() {
         <a href="/kontakt">Kontakt</a>
       </nav>
       <br />
-      <br />
-      <br />
     </footer>
   );
 }

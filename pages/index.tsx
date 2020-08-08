@@ -14,18 +14,17 @@ export default function Home() {
           <img src="/images/voty_logo.svg" alt="voty" className="logo" />
         </h1>
         <h2>Demokratie an die Schule!</h2>
-        <h4 className="text-center max-800 bold">
-          Kurzer, knackiger Introtext: Die Demokratie ist das wohl wichtigste
-          Gut der Schweiz, das wird uns bei der aktuellen Weltlage bewusster
-          denn je. Aber wie gelingt es uns, die Jugend für die Demokratie zu
-          begeistern?
-        </h4>
+        <p className="text-center max-800">
+          Die Demokratie ist das wohl wichtigste Gut der Schweiz? Aber wie
+          gelingt es uns, die Jugend für die Demokratie zu begeistern? Voty ist
+          ein Projekt für die Demokratieförderung an schweizer Schulen.
+        </p>
         <br />
 
-        <div className="row" style={{ alignItems: "stretch" }}>
-          <div className="col-12 col-4-md card bg-light text-center">
+        <div className="row is-center" style={{ alignItems: "stretch" }}>
+          <div className="col-6 col-4-md card bg-light text-center">
             <header>
-              <h3>Demokratie verstehen</h3>
+              <h3 className="nowrap">Demokratie verstehen</h3>
               <img src="images/voty_module_1.svg" alt="Bundehaus" />
             </header>
             <p>
@@ -36,12 +35,12 @@ export default function Home() {
             <a
               href="kontakt/#newsletter"
               role="button"
-              className="button primary is-full-width"
+              className="button primary is-full-width nowrap"
             >
               Anmeldung Newsletter
             </a>
           </div>
-          <div className="col-12 col-4-md card bg-light text-center">
+          <div className="col-6 col-4-md card bg-light text-center">
             <header>
               <h3>Demokratie testen</h3>
               <img src="images/voty_module_2.svg" alt="Abstimmen" />
@@ -49,17 +48,17 @@ export default function Home() {
             <p>
               Nur Erwachsene dürfen abstimmen, aber auch Jugendliche haben eine
               Meinung! Wir möchten Test-Abstimmungen zeitgleich zu nationalen
-              Urnengängen durchführen und die Resultate diskutieren
+              Urnengängen durchführen und die Resultate diskutieren.
             </p>
             <a
               href="kontakt/"
               role="button"
-              className="button primary is-full-width"
+              className="button primary is-full-width nowrap"
             >
               Wollen wir auch!
             </a>
           </div>
-          <div className="col-12 col-4-md card bg-light text-center">
+          <div className="col-6 col-4-md card bg-light text-center">
             <header>
               <h3>Demokratie erleben</h3>
               <img src="images/voty_module_3.svg" alt="Diskutieren" />
@@ -73,7 +72,7 @@ export default function Home() {
             <a
               href="kontakt/"
               role="button"
-              className="button primary is-full-width"
+              className="button primary is-full-width nowrap"
             >
               Das interessiert uns!
             </a>

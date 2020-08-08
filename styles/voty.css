@@ -14,6 +14,11 @@
 button,
 a[role="button"] {
   font-weight: bold;
+  padding: 1rem 1.5rem;
+}
+
+.nowrap {
+  white-space: nowrap;
 }
 
 footer {
@@ -33,7 +38,7 @@ footer a {
 
 footer hr {
   border: 0.5px solid #979797;
-  width: 420px;
+  width: 450px;
   margin: 1rem auto;
 }
 
@@ -46,7 +51,6 @@ blockquote {
 }
 
 .logo {
-  margin-right: 0.5rem;
   max-width: 60%;
 }
 
@@ -57,11 +61,10 @@ blockquote {
 }
 
 h1 {
-  font-family: "Avenir Next";
   text-align: center;
-  font-size: 8rem;
+  font-size: 4rem;
   font-weight: 900;
-  margin-top: 5rem;
+  margin-top: 4rem;
   margin-bottom: 0rem;
 }
 
@@ -72,6 +75,12 @@ h2 {
   text-align: center;
   font-size: 3rem;
   line-height: 1em;
+}
+
+@media screen and (max-width: 599px) {
+  h2 {
+    font-size: 2.3rem;
+  }
 }
 
 h3 {
