@@ -1,0 +1,41 @@
+server {
+	listen 80;
+	listen [::]:80;
+	server_name {{ server_name }};
+	return 301 https://$host$request_uri;
+}
+
+server {
+	listen 80;
+	listen [::]:80;
+	server_name www.{{ server_name }};
+	return 301 https://{{ server_name }}$request_uri;
+}
+server {
+	listen 443;
+	listen [::]:443 ssl;
+	server_name www.{{ server_name }};
+	return 301 https://{{ server_name }}$request_uri;
+}
+
+server {
+	listen 443 ssl;
+	listen [::]:443 ssl;
+	server_name {{ server_name }};
+
+	location / {
+		proxy_pass http://localhost:3000/;
+		proxy_http_version 1.1;
+		proxy_set_header Upgrade $http_upgrade;
+		proxy_set_header Connection "upgrade";
+		proxy_read_timeout 300s;
+	}
+
+	ssl_certificate /etc/letsencrypt/live/{{ server_name }}/fullchain.pem;
+	ssl_certificate_key /etc/letsencrypt/live/{{ server_name }}/privkey.pem;
+	
+	ssl_session_cache shared:le_nginx_SSL:10m;
+	ssl_session_timeout 1440m;
+	ssl_session_tickets off;
+	ssl_protocols TLSv1.2 TLSv1.3;
+}

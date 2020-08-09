@@ -1,0 +1,18 @@
+- hosts: web
+  vars:
+    certbot_auto_renew_user: root
+    certbot_auto_renew_minute: "0"
+    certbot_auto_renew_hour: "5"
+    certbot_admin_email: voty@teachen.ch
+    certbot_create_if_missing: true
+    certbot_certs:
+      - domains:
+          - "{{ server_name }}"
+          - "www.{{server_name}}"
+  roles:
+    - role: common
+      tags: common
+    - role: ansible-role-certbot
+      tags: cert
+    - role: app
+      tags: app

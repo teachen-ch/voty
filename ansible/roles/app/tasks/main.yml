@@ -1,0 +1,47 @@
+---
+- name: Deploy Voty Web Frontend
+  block:
+    - name: Download latest Frontend Code from Git
+      git:
+        {
+          repo: "{{git_repo}}",
+          dest: "{{app_dir}}",
+          force: yes,
+          key_file: "~/.ssh/deploy_key",
+          accept_hostkey: "yes",
+        }
+    ### This is now done within Dockerfile
+    #- name: Install node_modules for Next Frontend
+    #  command: npm install
+    #  args:
+    #    chdir: "{{app_dir}}"
+    #- name: Build Next Web Frontend
+    #  command: npm run build
+    #  args:
+    #    chdir: "{{app_dir}}"
+  become: yes
+  become_user: voty
+- name: Build and Deploy Docker Image
+  block:
+    - name: Build Docker Image
+      docker_image:
+        name: "voty-web"
+        source: "build"
+        force_source: "yes"
+        build:
+          pull: "no"
+          path: "{{app_dir}}"
+    - name: Start Docker Container
+      docker_container:
+        name: "voty-web"
+        image: "voty-web"
+        state: started
+        restart: yes
+        ports: 3000:3000
+        recreate: yes
+  become: yes
+  become_method: sudo
+- name: Restart Voty Frontend
+  service: { name: voty, enabled: yes, state: restarted }
+  become: yes
+  become_method: sudo

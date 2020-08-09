@@ -17,7 +17,7 @@ export default function Home() {
         <p className="text-center max-600">
           Die Demokratie ist das wohl wichtigste Gut der Schweiz. Aber wie
           gelingt es uns, die Jugend für die Demokratie zu begeistern? Voty ist
-          ein Projekt für die Demokratieförderung an schweizer Schulen.
+          ein Projekt für die Demokratieförderung an Schweizer Schulen.
         </p>
         <br />
 

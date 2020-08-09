@@ -1,0 +1,5 @@
+[web]
+votyapp.ch			ansible_user=root
+
+[db]
+votyapp.ch			ansible_user=root
