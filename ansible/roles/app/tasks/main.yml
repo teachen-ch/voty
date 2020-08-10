@@ -23,22 +23,19 @@
   become_user: voty
 - name: Build and Deploy Docker Image
   block:
-    - name: Build Docker Image
-      docker_image:
-        name: "voty-web"
-        source: "build"
-        force_source: "yes"
-        build:
-          pull: "no"
-          path: "{{app_dir}}"
-    - name: Start Docker Container
-      docker_container:
-        name: "voty-web"
-        image: "voty-web"
-        state: started
-        restart: yes
-        ports: 3000:3000
-        recreate: yes
+    # - name: Build Docker Image
+    #   docker_image:
+    #     name: "voty-web"
+    #     source: "build"
+    #     force_source: "yes"
+    #     build:
+    #       pull: "no"
+    #       path: "{{app_dir}}"
+    - name: Start Docker Containers
+      docker_compose:
+        project_src: "{{app_dir}}"
+        build: "yes"
+        restarted: yes
   become: yes
   become_method: sudo
 - name: Restart Voty Frontend

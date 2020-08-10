@@ -32,7 +32,9 @@
           - python3-pip
           - docker-ce
     - name: Install Docker Module for Python
-      pip: { name: docker }
+      pip: { name: "docker" }
+    - name: Install Docker-Compose for Python
+      pip: { name: "docker-compose" }
     - name: Add voty user
       user: { name: voty }
     - name: Create Backend Root Directory

@@ -1,0 +1,37 @@
+# docker-compose.yml
+version: "3.8"
+services:
+  app:
+    container_name: "app"
+    build: .
+    depends_on:
+      - postgres
+    environment:
+      DATABASE_URL: postgres://voty:voty@postgres:5432/voty
+      NODE_ENV: production
+      PORT: 3000
+      NEXT_TELEMETRY_DISABLED: 1
+    ports:
+      - "3000:3000"
+    command: npm run start
+    volumes:
+      - .:/app/
+      - /app/node_modules
+    #deploy:  # only relevant in docker swarm config...
+    #  restart_policy:
+    #    condition: on-failure
+    #    delay: 3s
+    #    max_attempts: 5
+    #    window: 60s
+
+  postgres:
+    image: "postgres:12"
+    container_name: "postgres"
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: voty
+      POSTGRES_PASSWORD: voty
+      POSTGRES_DB: voty

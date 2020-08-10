@@ -2,7 +2,16 @@ import Head from "next/head";
 export function Header() {
   return (
     <Head>
-      <link rel="icon" href="/favicon.ico" />
+      <link rel="icon" href="/images/favicon16.png" sizes="16x16" />
+      <link rel="icon" href="/images/favicon32.png" sizes="32x32" />
+      <link rel="icon" href="/images/favicon192.png" sizes="192x192" />
+      <link rel="apple-touch-icon" href="/images/favicon16.png" sizes="16x16" />
+      <link rel="apple-touch-icon" href="/images/favicon32.png" sizes="32x32" />
+      <link
+        rel="apple-touch-icon"
+        href="/images/favicon192.png"
+        sizes="192x192"
+      />
       <script
         dangerouslySetInnerHTML={{
           __html: `

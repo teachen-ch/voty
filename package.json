@@ -6,7 +6,7 @@
     "dev": "NODE_OPTIONS='--inspect' next dev",
     "build": "next build",
     "start": "next start",
-    "prisma": "npx prisma migrate save && npx prisma migrate save && npx prisma generate"
+    "prisma": "npx prisma migrate save --experimental && npx prisma migrate up --experimental && npx prisma generate"
   },
   "dependencies": {
     "@prisma/client": "^2.4.1",
