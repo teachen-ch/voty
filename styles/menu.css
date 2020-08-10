@@ -98,7 +98,7 @@ Note: Beware of modifying this element as it can break the animations - you shou
   margin-bottom: 1.7rem;
 }
 
-@media screen and (max-width: 599px) {
+@media screen and (max-width: 340px) {
   .bm-burger-button,
   .bm-cross-button {
     right: 1rem !important;
