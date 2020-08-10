@@ -16,9 +16,12 @@ export default function Kontakt() {
         der aktuellen Weltlage bewusster denn je. Aber wie gelingt es uns, die
         Jugend für die Demokratie zu begeistern? Das Projekt «voty» will sich
         diesem Thema annehmen und das Demokratieverständnis fördern. Unterstützt
-        durch den https://prototypefund.opendata.ch und in Zusammenarbeit mit
-        easyvote.ch und SRF werden wir in den nächsten Monaten gemeinsam mit
-        Schulen einen Prototypen entwickeln und testen.
+        durch den{" "}
+        <a href="https://prototypefund.opendata.ch" target="_blank">
+          prototypefund.opendata.ch
+        </a>{" "}
+        und in Zusammenarbeit mit easyvote.ch und SRF werden wir in den nächsten
+        Monaten gemeinsam mit Schulen einen Prototypen entwickeln und testen.
       </p>
       <p className="is-center margin-vertical">
         <img src="/images/voty_module_1.svg" alt="Bundeshaus" />
@@ -36,8 +39,8 @@ export default function Kontakt() {
       </p>
       <h2>Klingt spannend? </h2>
       <p>
-        Tragen Sie sich doch gleich unverbindlich auf unsere Liste ein und wir
-        halten Sie auf dem Laufenden.
+        Wäre das etwas für sie und ihrer Klasse? Dann tragen Sie sich auf unsere
+        Liste ein und wir nehmen gerne mit ihnen Kontakt auf.
       </p>
       <div className="card bg-light" id="newsletter">
         <header>
