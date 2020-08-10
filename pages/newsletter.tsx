@@ -14,6 +14,7 @@ export default function Kontakt() {
       </Head>
       <h1>Newsletter</h1>
 
+      <p className="marginBottom">&nbsp;</p>
       <div className="card" id="newsletter">
         <header>
           <h2>Möchtet ihr regelmässig über «voty» informiert werden?</h2>

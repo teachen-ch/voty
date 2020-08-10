@@ -39,8 +39,8 @@ export default function Kontakt() {
       </p>
       <h2>Klingt spannend? </h2>
       <p>
-        Wäre das etwas für sie und ihrer Klasse? Dann tragen Sie sich auf unsere
-        Liste ein und wir nehmen gerne mit ihnen Kontakt auf.
+        Wäre das etwas für sie und ihre Klasse? Dann tragen Sie sich auf unsere
+        Liste ein und wir nehmen gerne Kontakt auf.
       </p>
       <div className="card bg-light" id="newsletter">
         <header>
