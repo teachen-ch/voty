@@ -11,6 +11,7 @@ export default function Newsletter() {
           <option>Schüler/-in</option>
           <option>Schulleiter/-in</option>
         </Select>
+        <Field id="klasse" label="Klasse" />
 
         <Field id="email" label="Email" />
 

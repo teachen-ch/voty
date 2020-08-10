@@ -1,14 +1,18 @@
 @import url("theme.css");
 @import url("menu.css");
 
-.card {
-  border-radius: 0px;
-  background: transparent !important;
-  -webkit-box-shadow: none;
-  box-shadow: none;
+.module {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  text-align: center;
+}
+
+.card {
+  border-radius: 0px;
+  background: var(--color-lightGrey);
+  -webkit-box-shadow: none;
+  box-shadow: none;
 }
 
 button,
@@ -42,7 +46,7 @@ blockquote {
 .logo {
   max-width: 60%;
 }
-.logoPage {
+.logo-page {
   margin-top: 2rem;
   height: 45px;
 }
@@ -55,7 +59,16 @@ blockquote {
   padding: 2rem;
 }
 
-.marginBottom {
+.margin-vertical {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.margin-top {
+  margin-top: 2rem;
+}
+
+.margin-bottom {
   margin-bottom: 2rem;
 }
 
@@ -70,8 +83,11 @@ main {
 }
 
 @media screen and (max-width: 599px) {
-  .logoPage {
+  .logo-page {
     margin-top: 1rem;
+  }
+  body {
+    line-height: 1.4em;
   }
 }
 @media screen and (min-width: 800px) {
@@ -86,49 +102,69 @@ h1 {
   font-weight: 900;
   margin-top: 5rem;
   margin-bottom: 0rem;
+  line-height: 1.3em;
 }
 
 h2 {
-  margin-top: 0rem;
-  margin-bottom: 1rem;
-  font-weight: 900;
-  text-align: center;
-  font-size: 4rem;
-  line-height: 1em;
-}
-
-@media screen and (max-width: 599px) {
-  h2 {
-    font-size: 2.3rem;
-  }
-}
-
-h3 {
-  line-height: 1.2em;
+  line-height: 1.4em;
   font-size: 2rem;
+  margin-top: 2.5em;
   margin-bottom: 0.8em !important;
   font-weight: 700;
 }
 
-.page h2 {
+h3 {
+  line-height: 1.4em;
+  font-size: 2.3rem;
+  font-weight: 700;
+}
+
+@media screen and (max-width: 340px) {
+  .container {
+    padding: 0 calc(var(--grid-gutter) / 2);
+  }
+}
+
+@media screen and (max-width: 599px) {
+  h1 {
+    font-size: 2.3rem;
+  }
+  .start .module:nth-child(2) h3,
+  .start .module:nth-child(3) h3 {
+    margin-top: 6rem;
+  }
+}
+
+.page h1 {
   padding-bottom: 1rem;
   border-bottom: 1px solid #979797;
+}
+
+.start h2 {
+  font-size: inherit;
+  font-weight: normal;
+  line-height: inherit;
+  margin-top: 0;
+}
+
+.card header > * {
+  margin-top: 1rem;
 }
 
 @media screen and (min-width: 800px) {
   .max-800 {
     /* 50rem = 800px indeed */
-    margin: 0 calc(50% - 25rem);
+    margin: 0 calc(50% - 400px);
   }
   .max-600 {
-    margin: 0 calc(50% - 19rem);
+    margin: 0 calc(50% - 300px);
   }
 }
 
 /* Footer */
 
 footer {
-  margin: 4rem 0;
+  margin: 9rem 0 2rem 0;
   text-align: center;
 }
 footer a {

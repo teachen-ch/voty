@@ -9,20 +9,22 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main>
+      <main className="start">
         <h1>
           <img src="/images/voty_logo.svg" alt="voty" className="logo" />
+          <br />
+          Demokratie an die Schule!
         </h1>
-        <h2>Demokratie an die Schule!</h2>
-        <p className="text-center max-600">
+        <h2 className="text-center max-800">
           Die Demokratie ist das wohl wichtigste Gut der Schweiz. Aber wie
           gelingt es uns, die Jugend für die Demokratie zu begeistern? Voty ist
-          ein Projekt für die Demokratieförderung an Schweizer Schulen.
-        </p>
+          ein Projekt für die Demokratieförderung an Schweizer Schulen in drei
+          Modulen.
+        </h2>
         <br />
 
         <div className="row stretch is-center ">
-          <div className="col-6 col-4-md card bg-light text-center">
+          <div className="col-6 col-4-md module">
             <header>
               <h3 className="nowrap">Demokratie verstehen</h3>
               <img src="images/voty_module_1.svg" alt="Bundehaus" />
@@ -33,14 +35,14 @@ export default function Home() {
               sich mit unserem politischen System auseinanderzusetzen.
             </p>
             <a
-              href="kontakt/#newsletter"
+              href="/newsletter"
               role="button"
               className="button primary is-full-width nowrap"
             >
               Anmeldung Newsletter
             </a>
           </div>
-          <div className="col-6 col-4-md card bg-light text-center">
+          <div className="col-6 col-4-md module">
             <header>
               <h3>Demokratie testen</h3>
               <img src="images/voty_module_2.svg" alt="Abstimmen" />
@@ -51,14 +53,14 @@ export default function Home() {
               Urnengängen durchführen und die Resultate diskutieren.
             </p>
             <a
-              href="kontakt/"
+              href="/newsletter"
               role="button"
               className="button primary is-full-width nowrap"
             >
               Wollen wir auch!
             </a>
           </div>
-          <div className="col-6 col-4-md card bg-light text-center">
+          <div className="col-6 col-4-md module">
             <header>
               <h3>Demokratie erleben</h3>
               <img src="images/voty_module_3.svg" alt="Diskutieren" />
@@ -70,7 +72,7 @@ export default function Home() {
             </p>
 
             <a
-              href="kontakt/"
+              href="/kontakt"
               role="button"
               className="button primary is-full-width nowrap"
             >

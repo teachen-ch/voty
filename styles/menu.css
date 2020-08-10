@@ -8,13 +8,6 @@
   top: 2rem;
 }
 
-@media screen and (max-width: 599px) {
-  .bm-burger-button {
-    right: 1rem;
-    top: 1rem;
-  }
-}
-
 /* Color/shape of burger icon bars */
 .bm-burger-bars {
   background: #c00;
@@ -31,6 +24,22 @@
   width: 2rem !important;
   right: 2rem !important;
   top: 2rem !important;
+}
+
+.bm-cross-button .bm-cross {
+  width: 6px !important;
+  height: 40px !important;
+}
+
+.bm-cross-button > span {
+  top: 0px !important;
+  right: 24px !important;
+}
+
+.bm-cross-button button {
+  left: -10px !important;
+  width: 36px !important;
+  height: 36px !important;
 }
 
 /* Color/shape of close button cross */
@@ -83,3 +92,27 @@ Note: Beware of modifying this element as it can break the animations - you shou
   top: 0;
   left: 0;
 }
+
+.bm-menu hr {
+  margin-top: 1.7rem;
+  margin-bottom: 1.7rem;
+}
+
+@media screen and (max-width: 599px) {
+  .bm-burger-button,
+  .bm-cross-button {
+    right: 1rem !important;
+    top: 1rem !important;
+  }
+}
+
+@media screen and (max-width: 340px) {
+  .bm-menu {
+    padding: 1.5em 1em 0;
+  }
+}
+/*@media screen and (min-width: 1050px) {
+  .bm-burger-button {
+    right: calc((100% - var(--grid-maxWidth)) / 2 + 2rem);
+  }
+}*/

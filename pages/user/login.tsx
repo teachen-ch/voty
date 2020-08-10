@@ -8,7 +8,7 @@ export default function Login({ csrfToken }: { csrfToken: string }) {
       <Head>
         <title>voty - Anmeldung</title>
       </Head>
-      <h2>Login</h2>
+      <h1>Login</h1>
       <p>
         Hier kannst Du dich mit Deiner Schul-Emailadresse anmelden. Wir schicken
         per Email einen Link mit dem Du dich ohne Passwort anmelden kannst.

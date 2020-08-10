@@ -12,15 +12,7 @@ export default function Kontakt() {
       <Head>
         <title>voty - Kontakt</title>
       </Head>
-      <h1>Kontakt</h1>
-      <h2>Feedback oder Fragen?</h2>
-      <p>Für Feedback, Anregungen und Fragen freuen wir uns auf eure Email:</p>
-      <p className="text-center">
-        <a onClick={sendMail} role="button" className="button primary">
-          Email öffnen
-        </a>
-      </p>
-      <br />
+      <h1>Newsletter</h1>
 
       <div className="card" id="newsletter">
         <header>

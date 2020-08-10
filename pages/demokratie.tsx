@@ -9,7 +9,8 @@ export default function Kontakt() {
         <title>voty - Demokratie an die Schule!</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <h2>Demokratie an die Schule!</h2>
+      <h1>Demokratie an die Schule!</h1>
+      <h2>27. September – ein spannendes Abstimmungswochenende</h2>
       <p>
         Die Demokratie ist das wohl wichtigste Gut der Schweiz, das wird uns bei
         der aktuellen Weltlage bewusster denn je. Aber wie gelingt es uns, die
@@ -19,7 +20,9 @@ export default function Kontakt() {
         easyvote.ch und SRF werden wir in den nächsten Monaten gemeinsam mit
         Schulen einen Prototypen entwickeln und testen.
       </p>
-      <h3>27. September – ein spannendes Abstimmungswochenende!</h3>
+      <p className="is-center margin-vertical">
+        <img src="/images/voty_module_1.svg" alt="Bundeshaus" />
+      </p>
       <p>
         Nun stehen am 27. September bereits wichtige Abstimmungen an, welche
         auch für Jugendliche greifbar und relevant sind (Kampfjets,
@@ -31,12 +34,15 @@ export default function Kontakt() {
         Lektionen diesem Thema widmen möchten. «voty» stellt dazu
         Unterrichtsmaterialien und eine Austauschplatform zur Verfügung.
       </p>
-      <h3>Klingt spannend? </h3>
+      <h2>Klingt spannend? </h2>
       <p>
         Tragen Sie sich doch gleich unverbindlich auf unsere Liste ein und wir
         halten Sie auf dem Laufenden.
       </p>
       <div className="card bg-light" id="newsletter">
+        <header>
+          <h2>Das interessiert mich!</h2>
+        </header>
         <Newsletter />
       </div>
     </Page>

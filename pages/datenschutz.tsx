@@ -8,8 +8,8 @@ export default function Datenschutz() {
         <title>voty - Datenschutz</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <h2>Datenschutz</h2>
-      <h3>Welche personenbezogenen Daten wir sammeln und warum</h3>
+      <h1>Datenschutz</h1>
+      <h2>Welche personenbezogenen Daten wir sammeln und warum</h2>
       <p>
         Wenn Sie auf diese Webseite zugreifen werden automatisch Informationen
         allgemeiner Natur erfasst. Diese Informationen werden im Server-Logfile
@@ -32,14 +32,14 @@ export default function Datenschutz() {
         ausgewertet, um unseren Internetauftritt und die dahinterstehende
         Technik zu optimieren.
       </p>
-      <h3>Speicherdauer</h3>
+      <h2>Speicherdauer</h2>
       <p>
         Die Daten werden gelöscht, sobald diese für den Zweck der Erhebung nicht
         mehr erforderlich sind. Dies ist für die Daten, die der Bereitstellung
         der Webseite dienen, grundsätzlich der Fall, wenn die jeweilige Sitzung
         beendet ist.
       </p>
-      <h3>Kommentare</h3>
+      <h2>Kommentare</h2>
       <p>
         Wenn Besucher Kommentare auf der Website schreiben, sammeln wir die
         Daten, die im Kommentar-Formular angezeigt werden, ausserdem die
@@ -54,7 +54,7 @@ export default function Datenschutz() {
         Nachdem Ihr Kommentar freigegeben wurde, ist Ihr Profilbild öffentlich
         im Kontext Ihres Kommentars sichtbar.
       </p>
-      <h3>Medien</h3>
+      <h2>Medien</h2>
       <p>
         Wenn Sie ein registrierter Benutzer sind und Fotos auf diese Website
         laden, sollten Sie vermeiden, Fotos mit einem EXIF-GPS-Standort
@@ -62,7 +62,7 @@ export default function Datenschutz() {
         Website gespeichert sind, downloaden und deren Standort-Informationen
         extrahieren.
       </p>
-      <h3>Kontaktformulare</h3>
+      <h2>Kontaktformulare</h2>
       <p>
         Die von Ihnen eingegebenen Daten werden zum Zweck der individuellen
         Kommunikation mit Ihnen gespeichert. Hierfür ist die Angabe einer
@@ -70,7 +70,7 @@ export default function Datenschutz() {
         Zuordnung der Anfrage und der anschließenden Beantwortung derselben. Die
         Angabe weiterer Daten ist optional.
       </p>
-      <h3>Cookies</h3>
+      <h2>Cookies</h2>
       <p>
         Wenn Sie einen Kommentar auf unserer Website schreiben, kann das eine
         Einwilligung sein, Ihren Namen, E-Mail-Adresse und Website in Cookies zu
@@ -100,7 +100,7 @@ export default function Datenschutz() {
         Artikels, den Sie gerade bearbeitet haben. Der Cookie verfällt nach
         einem Tag.
       </p>
-      <h3>Verwendung von Scriptbibliotheken (Google Webfonts)</h3>
+      <h2>Verwendung von Scriptbibliotheken (Google Webfonts)</h2>
       <p>
         Um unsere Inhalte browserübergreifend korrekt und grafisch ansprechend
         darzustellen, verwenden wir auf dieser Website „Google Web Fonts“ der
@@ -110,11 +110,11 @@ export default function Datenschutz() {
       <p>
         Die Datenschutzrichtlinie des Bibliothekbetreibers Google finden Sie
         hier:&nbsp;
-        <a href="https://www.google.com/policies/privacy/">
-          https://www.google.com/policies/privacy/
+        <a href="www.google.com/policies/privacy/">
+          google.com/policies/privacy/
         </a>
       </p>
-      <h3>Eingebettete Inhalte von anderen Websites</h3>
+      <h2>Eingebettete Inhalte von anderen Websites</h2>
       <p>
         Beiträge auf dieser Website können eingebettete Inhalte beinhalten
         (z.&nbsp;B. Videos, Bilder, Beiträge etc.). Eingebettete Inhalte von
@@ -128,13 +128,13 @@ export default function Datenschutz() {
         mit dem eingebetteten Inhalt, falls Sie ein Konto haben und auf dieser
         Website angemeldet sind.
       </p>
-      <h3>Analytics</h3>
+      <h2>Analytics</h2>
       <p>
         Für die Analyse und Verbesserung dieser Webseite werden Web-Analytics
         aufgezeichnet. Diese Analyse-Daten werden jedoch nur auf unseren Server
         gespeichert und nicht an Cloud-Provider wie Google o.ä. geschickt.
       </p>
-      <h3>Wie lange wir Ihre Daten speichern</h3>
+      <h2>Wie lange wir Ihre Daten speichern</h2>
       <p>
         Wenn Sie einen Kommentar schreiben, wird dieser inklusive Metadaten
         zeitlich unbegrenzt gespeichert. Auf diese Art können wir
@@ -149,7 +149,7 @@ export default function Datenschutz() {
         Administratoren der Website können diese Informationen ebenfalls
         einsehen und verändern.
       </p>
-      <h3>Welche Rechte Sie an Ihren Daten haben</h3>
+      <h2>Welche Rechte Sie an Ihren Daten haben</h2>
       <p>
         Wenn Sie ein Konto auf dieser Website besitzen oder Kommentare
         geschrieben haben, können Sie einen Export Ihrer personenbezogenen Daten
@@ -160,7 +160,7 @@ export default function Datenschutz() {
         sicherheitsrelevanter Notwendigkeiten aufbewahren müssen.
       </p>
       {/*}
-        <h3>Wohin wir Ihre Daten senden</h3>
+        <h2>Wohin wir Ihre Daten senden</h2>
         <p>
           Besucher-Kommentare werden von einem automatisierten Dienst zur
           Spam-Erkennung untersucht.

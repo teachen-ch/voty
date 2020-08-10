@@ -12,12 +12,12 @@ export default function Impressum() {
         <title>voty - Datenschutz</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <h2>Impressum</h2>
+      <h1>Impressum</h1>
       <p>
         Voty ist ein Projekt des Vereins{" "}
         <a href="https://teachen.ch/verein-teachen/">«Teachen!»</a>
       </p>
-      <div className="marginBottom">
+      <div className="margin-bottom">
         <pre>
           Verein «Teachen!»
           <br />

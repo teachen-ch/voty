@@ -1,4 +1,4 @@
-import "chota";
+import "../styles/chota.css";
 import "../styles/voty.css";
 import Menu from "../components/Menu";
 import { Footer } from "../components/Footer";
