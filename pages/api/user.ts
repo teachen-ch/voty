@@ -20,5 +20,9 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   });*/
   const users = await prisma.user.findMany();
   // res.status(200).json({ users });
-  res.status(200).json({ session, users });
+  const data: any = { session };
+  if (session.user.email === "stefan@teachen.ch") {
+    data.users = users;
+  }
+  res.status(200).json({ data });
 };
