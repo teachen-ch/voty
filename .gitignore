@@ -12,6 +12,9 @@
 /.next/
 /out/
 
+# pg data directory from docker
+/data
+
 # production
 /build
 

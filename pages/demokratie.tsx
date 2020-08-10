@@ -20,8 +20,9 @@ export default function Kontakt() {
         <a href="https://prototypefund.opendata.ch" target="_blank">
           prototypefund.opendata.ch
         </a>{" "}
-        und in Zusammenarbeit mit easyvote.ch und SRF werden wir in den nächsten
-        Monaten gemeinsam mit Schulen einen Prototypen entwickeln und testen.
+        und in Zusammenarbeit mit SRF und weiteren Partnern werden wir in den
+        nächsten Monaten gemeinsam mit Schulen einen Prototypen entwickeln und
+        testen.
       </p>
       <p className="is-center margin-vertical">
         <img src="/images/voty_module_1.svg" alt="Bundeshaus" />

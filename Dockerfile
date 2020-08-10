@@ -20,6 +20,8 @@ EXPOSE 3000
 
 # Build and Start node app
 RUN yarn run build
+RUN npx prisma generate
+## RUN npx prisma migrate up --experimental
 CMD [ "yarn", "run", "start"]
 
 
