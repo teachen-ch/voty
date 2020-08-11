@@ -28,7 +28,7 @@ export function Footer() {
           </a>
           <hr />
           <nav>
-            <a href="/user/login">Anmelden</a>&nbsp;&nbsp;| &nbsp;
+            <a href="/api/auth/signin">Anmelden</a>&nbsp;&nbsp;| &nbsp;
             <a href="/impressum">Impressum</a>&nbsp;&nbsp;| &nbsp;
             <a href="/datenschutz">Datenschutz</a>&nbsp;&nbsp;| &nbsp;
             <a href="/kontakt">Kontakt</a>
