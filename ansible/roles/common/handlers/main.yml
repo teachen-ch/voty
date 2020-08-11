@@ -1,0 +1,14 @@
+---
+# handlers
+- name: restart nginx
+  service:
+    name: nginx
+    state: restarted
+- name: reload systemd
+  command: "systemctl daemon-reload"
+  become: yes
+  become_method: sudo
+- name: restart voty
+  service:
+    name: voty
+    state: restarted

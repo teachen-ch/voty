@@ -45,25 +45,20 @@
   block:
     - name: Configure votyapp.ch
       template: { src: nginx.cfg.j2, dest: /etc/nginx/sites-enabled/voty.cfg }
-      #notify: restart nginx
+      notify: restart nginx
     - name: Start Webserver (Reverse-Proxy)
       service: { name: nginx, state: started }
     - name: Create Systemd Service Configuration
-      copy:
+      template:
         {
-          src: voty.service,
-          mode: 0755,
+          src: voty.service.j2,
           dest: /etc/systemd/system/voty.service,
+          mode: 0444,
         }
+      notify: reload systemd
+    - name: Flush Handlers
+      meta: flush_handlers
     - name: Enable Web Backend Service
       service: { name: voty, enabled: yes, state: restarted }
   become: yes
   become_method: sudo
-# - name: Install GitHub Deploy Key
-#   block:
-#     - name: Create User .ssh directory
-#       file: { path: ~/.ssh, state: "directory", mode: "0700" }
-#     - name: Copy GitHub Deploy Key
-#       copy: { src: ./deploy_key, dest: ~/.ssh/deploy_key, mode: "0600" }
-#     - name: Copy GitHub Deploy Key Pub
-#       copy: { src: ./deploy_key.pub, dest: ~/.ssh/deploy_key.pub }

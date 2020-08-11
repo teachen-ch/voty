@@ -1,0 +1,33 @@
+#
+#  _  _   __  ____  _  _   ____  ____  ____  _  _  __  ___  ____ 
+# / )( \ /  \(_  _)( \/ ) / ___)(  __)(  _ \/ )( \(  )/ __)(  __)
+# \ \/ /(  O ) )(   )  /_ \___ \ ) _)  )   /\ \/ / )(( (__  ) _) 
+#  \__/  \__/ (__) (__/( )(____/(____)(__\_) \__/ (__)\___)(____)
+#
+
+[Unit]
+Description=Voty - Web Frontend
+Requires=docker.service
+After=docker.service
+StartLimitIntervalSec=500
+StartLimitBurst=5
+
+[Service]
+Type=simple
+# Another Type: forking
+User=root
+WorkingDirectory={{ app_dir }}
+
+# Remove old containers, images and volumes
+ExecStartPre=docker-compose down -v
+ExecStartPre=docker-compose rm -v
+# Start / Stop docker-compose
+ExecStart=docker-compose up
+ExecStop=docker-compose down
+
+Restart=on-failure
+RestartSec=20s
+
+
+[Install]
+WantedBy=multi-user.target

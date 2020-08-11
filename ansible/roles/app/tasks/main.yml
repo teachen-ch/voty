@@ -15,6 +15,13 @@
     #  args:
     #    chdir: "{{app_dir}}"
 
+    - name: Create docker-compose file for Backend
+      template:
+        {
+          src: "../docker-compose.yml",
+          dest: "{{app_dir}}/docker-compose.yml",
+          mode: 0600,
+        }
     - name: Create .env file for Backend
       template:
         { src: "{{ env_file }}", dest: "{{app_dir}}/.env.local", mode: 0600 }
@@ -38,12 +45,10 @@
         username: "stefannn"
         password: "\u0032\u0031\u0038\u0062\u0064\u0066\u0065\u0038\u0065\u0035\u0039\u0036\u0063\u0037\u0065\u0064\u0036\u0035\u0031\u0062\u0030\u0036\u0034\u0030\u0066\u0062\u0061\u0064\u0066\u0033\u0064\u0032\u0037\u0063\u0037\u0061\u0062\u0030\u0065\u0034"
     - name: Start Docker Containers
+      #notify: restart voty
       docker_compose:
+        build: "yes"
         project_src: "{{app_dir}}"
         restarted: yes
-  become: yes
-  become_method: sudo
-- name: Restart Voty Frontend
-  service: { name: voty, enabled: yes, state: restarted }
   become: yes
   become_method: sudo
