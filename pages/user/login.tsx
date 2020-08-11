@@ -11,7 +11,7 @@ export default function Login({ csrfToken }: { csrfToken: string }) {
       <h1>Login</h1>
       <p>
         Hier kannst Du dich mit Deiner Schul-Emailadresse anmelden. Wir schicken
-        per Email einen Link mit dem Du dich ohne Passwort anmelden kannst.
+        Dir per Email einen Link mit dem Du Dich ohne Passwort anmelden kannst.
       </p>
       <form method="post" action="/api/auth/signin/email" className="row">
         <input type="hidden" name="csrfToken" value={csrfToken} />

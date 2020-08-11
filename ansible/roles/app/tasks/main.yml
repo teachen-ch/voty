@@ -1,20 +1,6 @@
 ---
 - name: Deploy Voty Web Frontend
   block:
-    #- name: Download latest Frontend Code from Git
-    #  git: { repo: "{{git_repo}}", dest: "{{app_dir}}", force: yes }
-    #key_file: "~/.ssh/deploy_key",
-    #accept_hostkey: "yes",
-    ### This is now done within Dockerfile
-    #- name: Install node_modules for Next Frontend
-    #  command: npm install
-    #  args:
-    #    chdir: "{{app_dir}}"
-    #- name: Build Next Web Frontend
-    #  command: npm run build
-    #  args:
-    #    chdir: "{{app_dir}}"
-
     - name: Create docker-compose file for Backend
       template:
         {
@@ -45,10 +31,11 @@
         username: "stefannn"
         password: "\u0032\u0031\u0038\u0062\u0064\u0066\u0065\u0038\u0065\u0035\u0039\u0036\u0063\u0037\u0065\u0064\u0036\u0035\u0031\u0062\u0030\u0036\u0034\u0030\u0066\u0062\u0061\u0064\u0066\u0033\u0064\u0032\u0037\u0063\u0037\u0061\u0062\u0030\u0065\u0034"
     - name: Start Docker Containers
-      #notify: restart voty
+      notify: restart voty
       docker_compose:
-        build: "yes"
+        pull: "yes"
         project_src: "{{app_dir}}"
+        state: "present"
         restarted: yes
   become: yes
   become_method: sudo
