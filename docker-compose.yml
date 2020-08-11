@@ -3,7 +3,8 @@ version: "3.8"
 services:
   app:
     container_name: "app"
-    build: .
+    #   build: .
+    image: docker.pkg.github.com/teachen-ch/voty/voty
     depends_on:
       - postgres
     environment:
@@ -14,15 +15,9 @@ services:
     ports:
       - "3000:3000"
     command: npm run start
-    volumes:
-      - .:/app/
-      - /app/node_modules
-    #deploy:  # only relevant in docker swarm config...
-    #  restart_policy:
-    #    condition: on-failure
-    #    delay: 3s
-    #    max_attempts: 5
-    #    window: 60s
+    #volumes:
+    #  - .:/app/
+    #  - /app/
 
   postgres:
     image: "postgres:12"

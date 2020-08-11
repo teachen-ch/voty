@@ -142,7 +142,7 @@ h3 {
   }
 }
 
-.page h1 {
+.page h1:first-child {
   padding-bottom: 1rem;
   border-bottom: 1px solid #979797;
 }

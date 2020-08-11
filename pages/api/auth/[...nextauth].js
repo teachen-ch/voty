@@ -43,7 +43,7 @@ const options = {
           "Login-Link für voty",
           "verification",
           {
-            email, // : `${email.replace(/\./g, "&#8203;.")}`,
+            email: email.replace(/\./g, " ."),
             url,
             site,
           }

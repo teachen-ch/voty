@@ -5,7 +5,7 @@ export default function Verify() {
   return (
     <Page>
       <h1>Email verschickt</h1>
-      Wir haben Dir einen Login-Link an Deine Email-Adresse geschickt.
+      <h2>Wir haben Dir einen Login-Link an Deine Email-Adresse geschickt.</h2>
       <h1>💌</h1>
     </Page>
   );

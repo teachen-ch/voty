@@ -59,11 +59,11 @@
       service: { name: voty, enabled: yes, state: restarted }
   become: yes
   become_method: sudo
-- name: Install GitHub Deploy Key
-  block:
-    - name: Create User .ssh directory
-      file: { path: ~/.ssh, state: "directory", mode: "0700" }
-    - name: Copy GitHub Deploy Key
-      copy: { src: ./deploy_key, dest: ~/.ssh/deploy_key, mode: "0600" }
-    - name: Copy GitHub Deploy Key Pub
-      copy: { src: ./deploy_key.pub, dest: ~/.ssh/deploy_key.pub }
+# - name: Install GitHub Deploy Key
+#   block:
+#     - name: Create User .ssh directory
+#       file: { path: ~/.ssh, state: "directory", mode: "0700" }
+#     - name: Copy GitHub Deploy Key
+#       copy: { src: ./deploy_key, dest: ~/.ssh/deploy_key, mode: "0600" }
+#     - name: Copy GitHub Deploy Key Pub
+#       copy: { src: ./deploy_key.pub, dest: ~/.ssh/deploy_key.pub }
