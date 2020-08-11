@@ -7,11 +7,18 @@ After=docker.service
 Type=simple
 # Another Type: forking
 User=root
-# WorkingDirectory=/voty
-# ExecStart=npm run start
-ExecStart=/usr/bin/docker start -a voty-web
-ExecStop=/usr/bin/docker stop -t 2 voty-web
-Restart=on-failure
+WorkingDirectory=/voty
+
+# Remove old containers, images and volumes
+ExecStartPre=/usr/bin/docker-compose -f my.yml down -v
+ExecStartPre=/usr/bin/docker-compose -f my.yml rm -v
+ExecStartPre=-/bin/bash -c 'docker volume rm $(docker volume ls -q)'
+ExecStartPre=-/bin/bash -c 'docker rmi $(docker images | grep "<none>" | awk \'{print $3}\')'
+ExecStartPre=-/bin/bash -c 'docker rm -v $(docker ps -aq)'
+
+ExecStart=/usr/bin/docker-compose up -d
+ExecStop=/usr/bin/docker-compose down
+Restart=always
 # Other restart options: always, on-abort, etc
 
 [Install]

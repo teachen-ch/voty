@@ -14,6 +14,7 @@ services:
       NEXT_TELEMETRY_DISABLED: 1
     ports:
       - "3000:3000"
+    env_file: ".env.local"
     command: npm run start
     #volumes:
     #  - .:/app/

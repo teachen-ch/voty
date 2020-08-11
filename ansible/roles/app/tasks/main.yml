@@ -1,8 +1,8 @@
 ---
 - name: Deploy Voty Web Frontend
   block:
-    - name: Download latest Frontend Code from Git
-      git: { repo: "{{git_repo}}", dest: "{{app_dir}}", force: yes }
+    #- name: Download latest Frontend Code from Git
+    #  git: { repo: "{{git_repo}}", dest: "{{app_dir}}", force: yes }
     #key_file: "~/.ssh/deploy_key",
     #accept_hostkey: "yes",
     ### This is now done within Dockerfile
@@ -16,7 +16,8 @@
     #    chdir: "{{app_dir}}"
 
     - name: Create .env file for Backend
-      template: { src: env.j2, dest: "/{{app_dir}}/.env", mode: 0600 }
+      template:
+        { src: "{{ env_file }}", dest: "{{app_dir}}/.env.local", mode: 0600 }
   become: yes
   become_user: voty
 - name: Build and Deploy Docker Image
@@ -39,7 +40,6 @@
     - name: Start Docker Containers
       docker_compose:
         project_src: "{{app_dir}}"
-        build: "yes"
         restarted: yes
   become: yes
   become_method: sudo
