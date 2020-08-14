@@ -14,7 +14,10 @@
     "prisma": "npx prisma migrate save --experimental && npx prisma migrate up --experimental && npx prisma generate"
   },
   "dependencies": {
+    "@mdx-js/loader": "^1.6.16",
+    "@next/mdx": "^9.5.2",
     "@prisma/client": "^2.4.1",
+    "@rebass/forms": "^4.0.6",
     "aws-sdk": "^2.727.1",
     "mjml": "^4.6.3",
     "mustache": "^4.0.1",
@@ -22,7 +25,8 @@
     "next-auth": "^3.1.0",
     "react": "16.13.1",
     "react-burger-menu": "^2.7.1",
-    "react-dom": "16.13.1"
+    "react-dom": "16.13.1",
+    "rebass": "^4.0.7"
   },
   "devDependencies": {
     "@prisma/cli": "^2.4.1",

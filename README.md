@@ -6,11 +6,11 @@
 
 Democracy is one of Switzerland's most valuable assets. But how can we motivate our youth to care about it? Voty tries to increase the understanding of democracy for children aged 12-18 years with 3 modules.
 
-### Understanding Democracy
+### Understand Democracy
 
 How does democracy actually work in Switzerland and why is it so indispensible? We would like to motivate our youth to understand and discuss the building blocks of our political system using existing and newly created learning material.
 
-### Testing Democracy
+### Test Democracy
 
 Only adults may cast a vote. But young people have an opinion too! We would like to offer test votings to young people during national ballots. And we would like to discuss the results of what the youth thinks.
 

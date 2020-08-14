@@ -78,6 +78,12 @@ export default function Home() {
             </a>
           </div>
         </div>
+
+        <div className="survey">
+          <a href="https://forms.gle/gt3LFsAC3Q3mGNGS8" target="_blank">
+            Ihre Erfahrung mit Demokratie an der Schule?
+          </a>
+        </div>
       </main>
     </div>
   );
