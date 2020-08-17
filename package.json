@@ -26,7 +26,9 @@
     "react": "16.13.1",
     "react-burger-menu": "^2.7.1",
     "react-dom": "16.13.1",
-    "rebass": "^4.0.7"
+    "react-player": "^2.6.0",
+    "rebass": "^4.0.7",
+    "theme-ui": "^0.3.1"
   },
   "devDependencies": {
     "@prisma/cli": "^2.4.1",
