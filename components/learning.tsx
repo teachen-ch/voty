@@ -75,7 +75,7 @@ export const Include = (props) => {
           ),
         }}
       >
-        <div {...props} />
+        <div>{props.children}</div>
       </MDXProvider>
     </Wrapper>
   );

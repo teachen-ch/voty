@@ -80,7 +80,7 @@ export default function Home() {
         </div>
 
         <div className="survey">
-          <a href="https://forms.gle/gt3LFsAC3Q3mGNGS8" target="_blank">
+          <a href="/umfrage" target="_blank">
             Ihre Erfahrung mit Demokratie an der Schule?
           </a>
         </div>
