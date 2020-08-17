@@ -1,5 +1,5 @@
 import { csrfToken } from "next-auth/client";
-import Page from "../../components/Page";
+import Page from "components/Page";
 
 export default function Verify() {
   return (

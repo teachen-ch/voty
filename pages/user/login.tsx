@@ -1,6 +1,6 @@
 import { csrfToken } from "next-auth/client";
 import Head from "next/head";
-import Page from "../../components/Page";
+import Page from "components/Page";
 
 export default function Login({ csrfToken }: { csrfToken: string }) {
   return (

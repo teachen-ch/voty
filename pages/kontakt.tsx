@@ -1,6 +1,6 @@
 import Head from "next/head";
-import Newsletter from "../components/Newsletter";
-import Page from "../components/Page";
+import Newsletter from "components/Newsletter";
+import Page from "components/Page";
 
 export default function Kontakt() {
   function sendMail() {
