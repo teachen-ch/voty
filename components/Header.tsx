@@ -26,7 +26,8 @@ function Icons() {
 }
 
 function Stats() {
-  return process.env.NEXT_PUBLIC_ENV === "production" ? (
+  //return process.env.NEXT_PUBLIC_ENV === "production" ?
+  return (
     <script
       dangerouslySetInnerHTML={{
         __html: `
@@ -46,5 +47,5 @@ function Stats() {
   `,
       }}
     />
-  ) : null;
+  ); // : null;
 }
