@@ -11,7 +11,7 @@
     "deploy_prod": "ansible-playbook -i ansible/prod ansible/site.yml --tags app",
     "site_dev": "ansible-playbook -i ansible/dev ansible/site.yml",
     "site_prod": "ansible-playbook -i ansible/prod ansible/site.yml",
-    "prisma": "npx prisma migrate save --experimental && npx prisma migrate up --experimental && npx prisma generate"
+    "prisma": "cd prisma && npx prisma migrate save --experimental && npx prisma migrate up --experimental && npx prisma generate && cd ../"
   },
   "dependencies": {
     "@mdx-js/loader": "^1.6.16",

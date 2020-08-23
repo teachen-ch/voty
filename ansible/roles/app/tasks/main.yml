@@ -11,6 +11,9 @@
     - name: Create .env file for Backend
       template:
         { src: "{{ env_file }}", dest: "{{app_dir}}/.env.local", mode: 0600 }
+    - name: Copy .env file for Prisma
+      template:
+        { src: "{{ env_file }}", dest: "{{app_dir}}/prisma/.env", mode: 0600 }
   become: yes
   become_user: voty
 - name: Build and Deploy Docker Image

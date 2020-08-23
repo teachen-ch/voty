@@ -35,6 +35,7 @@ yarn-error.log*
 .env.test.local
 .env.production
 .env.production.local
+prisma/.env
 
 # vercel
 .vercel
