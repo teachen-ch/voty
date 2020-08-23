@@ -1,0 +1,4 @@
+- hosts: web
+  roles:
+    - role: migrate
+      tags: migrate

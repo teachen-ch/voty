@@ -1,6 +1,6 @@
 datasource db {
   provider = "postgres"
-  url      = env("DATABASE_URL")
+  url = "***"
 }
 
 generator client {
@@ -61,6 +61,7 @@ model User {
   image         String?
 
   password String?
+  salt     String?
   gender   Gender  @default(UNKOWN)
 
   role    Role    @default(STUDENT)

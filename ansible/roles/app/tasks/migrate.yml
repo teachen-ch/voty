@@ -1,7 +1,0 @@
----
-- name: Migrate Prism Database Schema
-  block:
-    - name: Migrate DB Scheme
-      command: docker exec -it web yarn run prisma
-  become: yes
-  become_method: sudo
