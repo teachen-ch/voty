@@ -1,2 +1,2 @@
 server_name: votyapp.ch
-env_file: ../.env.production.local
+env_file: ../.env.production
