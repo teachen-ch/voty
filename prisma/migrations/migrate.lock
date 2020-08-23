@@ -4,3 +4,4 @@
 20200807054749-init
 20200823081745-added-roles--schools--teams-and-relations
 20200823161832-add-password--salt-and-gender
+20200823175241-remove-salt--as-it-is-not-needed

@@ -2,10 +2,11 @@
 - name: Migrate Prism Database Schema
   block:
     - name: Fix git config
-      command: docker exec -it app git config --unset "http.https://github.com/.extraheader"
+      command: docker exec app git config --unset "http.https://github.com/.extraheader"
+      ignore_errors: yes
     - name: git pull
-      command: docker exec -it app git pull
+      command: docker exec app git pull
     - name: Migrate DB Scheme
-      command: docker exec -it app yarn run prisma
+      command: docker exec -t app npx prisma migrate up --experimental
   become: yes
   become_method: sudo
