@@ -3,6 +3,7 @@ import Providers from "next-auth/providers";
 import Adapters from "next-auth/adapters";
 import { PrismaClient } from "@prisma/client";
 import { sendMail } from "../../../util/email";
+import bcrypt from "bcrypt";
 
 // use global.prisma in dev due to hot-module loading
 let prisma;
@@ -20,6 +21,34 @@ process.env.NEXTAUTH_URL = process.env.BASE_URL;
 const options = {
   site: process.env.BASE_URL,
   providers: [
+    Providers.Credentials({
+      name: "credentials",
+      credentials: {
+        email: {
+          label: "Email",
+          type: "text",
+          placeholder: "hans@musterschule.ch",
+        },
+        password: { label: "Password", type: "password" },
+      },
+      signIn: async (form, req) => {
+        console.log("SIGNIN", form, req);
+      },
+      authorize: async (credentials) => {
+        const { email, password } = credentials;
+        console.log("Credentials", credentials);
+        // Add logic here to look up the user from the credentials supplied
+        const user = await prisma.user.findOne({ where: { email } });
+        console.log("User", user);
+        // return Promise.reject('/path/to/redirect')        // Redirect to a URL
+        if (!user) return Promise.resolve(null);
+
+        const matches = await bcrypt.compare(password, user.password);
+        if (!matches) return Promise.resolve(null);
+
+        return Promise.resolve(user);
+      },
+    }),
     Providers.Email({
       server: {
         host: process.env.SMTP_HOST,
@@ -54,7 +83,7 @@ const options = {
   adapter: Adapters.Prisma.Adapter({ prisma }),
 
   pages: {
-    signIn: "/user/login",
+    signIn: "/user/login1",
     signOut: "/user/logout",
     error: "/user/error", // Error code passed in query string as ?error=
     verifyRequest: "/user/verify", // (used for check email message)
@@ -65,13 +94,13 @@ const options = {
     // Use JSON Web Tokens for session instead of database sessions.
     // This option can be used with or without a database for users/accounts.
     // Note: `jwt` is automatically set to `true` if no database is specified.
-    // jwt: false,
+    jwt: true,
     // Seconds - How long until an idle session expires and is no longer valid.
-    // maxAge: 30 * 24 * 60 * 60, // 30 days
+    maxAge: 30 * 24 * 60 * 60, // 30 days
     // Seconds - Throttle how frequently to write to database to extend a session.
     // Use it to limit write operations. Set to 0 to always update the database.
     // Note: This option is ignored if using JSON Web Tokens
-    // updateAge: 24 * 60 * 60, // 24 hours
+    updateAge: 24 * 60 * 60, // 24 hours
     // Easily add custom properties to response from `/api/auth/session`.
     // Note: This should not return any sensitive information.
     /*
