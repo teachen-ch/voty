@@ -83,7 +83,7 @@ const options = {
   adapter: Adapters.Prisma.Adapter({ prisma }),
 
   pages: {
-    signIn: "/user/login1",
+    signIn: "/user/login",
     signOut: "/user/logout",
     error: "/user/error", // Error code passed in query string as ?error=
     verifyRequest: "/user/verify", // (used for check email message)

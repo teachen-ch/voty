@@ -13,8 +13,21 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
-    "baseUrl": "."
+    "baseUrl": ".",
+    "rootDir": ".",
+    // nexus:
+    "typeRoots": ["node_modules/@types", "types"]
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "styles/theme.js"],
-  "exclude": ["node_modules"]
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "styles/theme.js",
+    "types.d.ts",
+    "."
+  ],
+  "exclude": ["node_modules"],
+
+  // nexus
+  "plugins": [{ "name": "nexus/typescript-language-service" }]
 }

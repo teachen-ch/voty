@@ -13,19 +13,23 @@
     "site_prod": "ansible-playbook -i ansible/prod ansible/site.yml",
     "migrate_dev": "ansible-playbook -i ansible/dev ansible/migrate.yml",
     "migrate_prod": "ansible-playbook -i ansible/prod ansible/migrate.yml",
+    "nexus:reflection": "nexus dev --reflection --entrypoint pages/api/graphql.ts",
     "prisma": "cd prisma && npx prisma migrate save --experimental && npx prisma migrate up --experimental && npx prisma generate && cd ../"
   },
   "dependencies": {
     "@mdx-js/loader": "^1.6.16",
     "@next/mdx": "^9.5.2",
-    "@prisma/client": "^2.4.1",
     "@rebass/forms": "^4.0.6",
     "aws-sdk": "^2.727.1",
     "bcrypt": "^5.0.0",
+    "jsonwebtoken": "^8.5.1",
     "mjml": "^4.6.3",
     "mustache": "^4.0.1",
     "next": "9.5.1",
     "next-auth": "^3.1.0",
+    "nexus": "^0.26.1",
+    "nexus-plugin-prisma": "^0.17.0",
+    "nexus-plugin-shield": "^0.2.0",
     "react": "16.13.1",
     "react-burger-menu": "^2.7.1",
     "react-dom": "16.13.1",
@@ -34,7 +38,6 @@
     "theme-ui": "^0.3.1"
   },
   "devDependencies": {
-    "@prisma/cli": "^2.4.1",
     "@types/node": "^14.0.27",
     "@types/react": "^16.9.44",
     "typescript": "^3.9.7"
