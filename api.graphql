@@ -320,9 +320,18 @@ The `JSON` scalar type represents JSON objects as specified by [ECMA-404](http:/
 """
 scalar Json
 
+type MinUser {
+  gender: String
+  id: String
+  lastname: String
+  name: String
+}
+
 type Mutation {
   createOneSchool(data: SchoolCreateInput!): School!
+  createUser(data: UserCreateInput!): User!
   deleteOneSchool(where: SchoolWhereUniqueInput!): School
+  login(email: String, password: String): ResponseLogin
 }
 
 input NestedBoolFilter {
@@ -405,6 +414,7 @@ input NestedStringNullableFilter {
 type Query {
   ballot(where: BallotWhereUniqueInput!): Ballot
   ballots(after: BallotWhereUniqueInput, before: BallotWhereUniqueInput, first: Int, last: Int): [Ballot!]!
+  me: User
   school(where: SchoolWhereUniqueInput!): School
   schools(after: SchoolWhereUniqueInput, before: SchoolWhereUniqueInput, first: Int, last: Int, orderBy: [SchoolOrderByInput!], where: SchoolWhereInput): [School!]!
   team(where: TeamWhereUniqueInput!): Team
@@ -466,6 +476,11 @@ input ReactionWhereInput {
 
 input ReactionWhereUniqueInput {
   id: Int
+}
+
+type ResponseLogin {
+  token: String
+  user: MinUser
 }
 
 enum Role {
@@ -863,6 +878,26 @@ type User {
   teaches(after: TeamWhereUniqueInput, before: TeamWhereUniqueInput, first: Int, last: Int): [Team!]!
   team: Team
   threads(after: ThreadWhereUniqueInput, before: ThreadWhereUniqueInput, first: Int, last: Int): [Thread!]!
+}
+
+input UserCreateInput {
+  attachments: AttachmentCreateManyWithoutUserInput
+  ballots: BallotCreateManyWithoutCreatorInput
+  createdAt: DateTime
+  email: String
+  emailVerified: DateTime
+  gender: Gender
+  image: String
+  lastname: String
+  name: String
+  password: String
+  reactions: ReactionCreateManyWithoutUserInput
+  role: Role
+  school: SchoolCreateOneWithoutMembersInput
+  teaches: TeamCreateManyWithoutTeacherInput
+  team: TeamCreateOneWithoutMembersInput
+  threads: ThreadCreateManyWithoutUserInput
+  updatedAt: DateTime
 }
 
 input UserCreateManyWithoutSchoolInput {
