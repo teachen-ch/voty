@@ -10,8 +10,8 @@ export default function Newsletter() {
           <option>Lehrer/-in</option>
           <option>Schüler/-in</option>
           <option>Schulleiter/-in</option>
+          <option>Weltenbürger/-in</option>
         </Select>
-        <Field id="klasse" label="Klasse" />
 
         <Field id="email" label="Email" />
 
