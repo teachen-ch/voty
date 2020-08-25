@@ -6,3 +6,6 @@
 20200823161832-add-password--salt-and-gender
 20200823175241-remove-salt--as-it-is-not-needed
 20200824120050-added-a-few-ballot-modules-incl--threads-and-attachments
+20200824131042-changed-domain-attribute-in-school-to-relation
+20200824165329-added-minor-fields-and-fixed-relations
+20200824170525-added-address--city--street-to-school
