@@ -1,6 +1,7 @@
 import { csrfToken } from "next-auth/client";
-import Page from "components/Page";
+import { Page, PageHeading } from "components/Page";
 import { useRouter } from "next/router";
+import { Heading, Link, Text } from "rebass";
 
 export default function Verify() {
   const router = useRouter();
@@ -17,14 +18,16 @@ export default function Verify() {
 
   return (
     <Page>
-      <h1>Login - Fehler</h1>
-      <h2>Es ist ein Fehler bei der Anmeldung aufgetreten:</h2>
+      <PageHeading>Login - Fehler</PageHeading>
+      <Heading as="h2">
+        Es ist ein Fehler bei der Anmeldung aufgetreten:
+      </Heading>
       <blockquote>{message}</blockquote>
-      <p className="is-center">
-        <a href="/user/login" role="button" className="button primary">
+      <Text textAlign="center">
+        <Link href="/user/login" role="button" className="button primary">
           Nochmals versuchen
-        </a>
-      <Text>
+        </Link>
+      </Text>
       <h1>🐛</h1>
     </Page>
   );

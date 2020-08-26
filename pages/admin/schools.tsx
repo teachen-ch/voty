@@ -1,6 +1,6 @@
 import { gql, useQuery } from "@apollo/client";
 
-import Page from "components/Page";
+import { Page } from "components/Page";
 
 const GET_SCHOOLS = gql`
   query users {

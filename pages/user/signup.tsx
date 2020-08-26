@@ -1,6 +1,7 @@
 import { csrfToken } from "next-auth/client";
 import Head from "next/head";
-import Page from "components/Page";
+import { Page, PageHeading } from "components/Page";
+import { Text } from "rebass";
 
 export default function Login({ csrfToken }: { csrfToken: string }) {
   return (
@@ -8,11 +9,10 @@ export default function Login({ csrfToken }: { csrfToken: string }) {
       <Head>
         <title>voty - Anmeldung</title>
       </Head>
-      <h1>Anmeldung</h1>
-      <h2></h2>
+      <PageHeading>Anmeldung</PageHeading>
       <Text>
         Erstelle einen neuen Account für Voty. Bitte nutze Deine Schul-Email.
-      <Text>
+      </Text>
       <form method="post" action="/api/auth/signup">
         <input type="hidden" name="csrfToken" value={csrfToken} />
         <input type="hidden" name="role" value="STUDENT" />

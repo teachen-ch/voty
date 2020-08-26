@@ -1,13 +1,14 @@
 import { csrfToken } from "next-auth/client";
-import Page from "components/Page";
+import { Page, PageHeading } from "components/Page";
+import { Text, Heading } from "rebass";
 
 export default function Verify() {
   return (
     <Page>
-      <h1>Email verschickt</h1>
-      <h2 className="is-center">
+      <PageHeading>Email verschickt</PageHeading>
+      <Heading as="h2" textAlign="center">
         Wir haben Dir einen Login-Link an Deine Email-Adresse geschickt.
-      </h2>
+      </Heading>
       <h1>💌</h1>
     </Page>
   );
