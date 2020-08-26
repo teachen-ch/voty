@@ -1,5 +1,6 @@
 import Head from "next/head";
-import Page from "components/Page";
+import { Page, PageHeading } from "components/Page";
+import { Box, Heading, Button, Text } from "rebass";
 
 export default function Impressum() {
   function sendMail() {
@@ -10,14 +11,14 @@ export default function Impressum() {
     <Page>
       <Head>
         <title>voty - Datenschutz</title>
-        <link rel="icon" href="/favicon.ico" />
       </Head>
-      <h1>Impressum</h1>
-      <p>
+
+      <PageHeading>Impressum</PageHeading>
+      <Text>
         Voty ist ein Projekt des Vereins{" "}
         <a href="https://teachen.ch/verein-teachen/">«Teachen!»</a>
-      </p>
-      <div className="margin-bottom">
+      </Text>
+      <Box my={3} bg="lightgray" p={3} px={4}>
         <pre>
           Verein «Teachen!»
           <br />
@@ -25,12 +26,12 @@ export default function Impressum() {
           <br />
           3110 Münsingen
         </pre>
-      </div>
-      <p>
-        <a onClick={sendMail} role="button" className="button primary">
+      </Box>
+      <Text>
+        <Button onClick={sendMail} role="button" className="button primary">
           Email senden
-        </a>
-      </p>
+        </Button>
+      </Text>
     </Page>
   );
 }

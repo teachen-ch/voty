@@ -24,7 +24,7 @@ export default function Verify() {
         <a href="/user/login" role="button" className="button primary">
           Nochmals versuchen
         </a>
-      </p>
+      <Text>
       <h1>🐛</h1>
     </Page>
   );

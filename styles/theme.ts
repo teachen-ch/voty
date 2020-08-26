@@ -1,7 +1,8 @@
-// example theme.js
+// Rebass Theme-UI theme for voty
 export default {
-  breakpoints: ["40em", "52em", "64em"],
-  fontSizes: [12, 14, 16, 20, 24, 32, 48, 64],
+  // [ iphone SE / iPhone 6+ / iPad High / Desktop+iPad / Big Screen]
+  breakpoints: ["340px", "400px", "600px", "1200px", "2000px"],
+  fontSizes: [11, 13, 17.5, 20, 24, 32, 40, 50],
   colors: {
     text: "black",
     background: "white",
@@ -34,7 +35,7 @@ export default {
     bold: 700,
   },
   lineHeights: {
-    body: 1.5,
+    body: 1.3,
     heading: 1.25,
   },
   shadows: {
@@ -55,6 +56,7 @@ export default {
     },
     link: {
       color: "primary",
+      textDecoration: "none",
     },
     nav: {
       fontSize: 1,
@@ -73,6 +75,23 @@ export default {
       fontFamily: "body",
       fontWeight: "body",
       lineHeight: "body",
+      fontSize: 2,
+      backgroundImage: [
+        "url(/images/voty_bg_mobile_1.svg)",
+        "url(/images/voty_bg_mobile_1.svg)",
+        "url(/images/voty_bg_mobile_1.svg)",
+        "url(/images/voty_bg_1.svg)",
+      ],
+      backgroundPosition: "51% 28.5%",
+      backgroundAttachment: "fixed",
+      backgroundRepeat: "no-repeat",
+    },
+    h2: {
+      variant: "text.heading",
+      fontSize: [4, 5],
+      mt: 4,
+      mb: 2,
+      color: "blue",
     },
   },
   text: {
@@ -80,6 +99,8 @@ export default {
       fontFamily: "heading",
       lineHeight: "heading",
       fontWeight: "heading",
+      mt: 5,
+      mb: 2,
     },
     display: {
       fontFamily: "heading",
@@ -96,6 +117,7 @@ export default {
     primary: {
       color: "white",
       bg: "primary",
+      fontWeight: "bold",
     },
     secondary: {
       variant: "buttons.primary",
@@ -108,5 +130,18 @@ export default {
       bg: "transparent",
       boxShadow: "inset 0 0 2px",
     },
+    full: {
+      width: "100%",
+      whiteSpace: "nowrap",
+      fontWeight: "bold",
+    },
+  },
+  input: {
+    bg: "white",
+    border: "none",
+  },
+  select: {
+    bg: "white",
+    border: "none",
   },
 };

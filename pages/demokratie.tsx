@@ -1,6 +1,7 @@
 import Head from "next/head";
 import Newsletter from "components/Newsletter";
-import Page from "components/Page";
+import { Page, PageHeading } from "components/Page";
+import { Box, Heading, Text, Link } from "rebass";
 
 export default function Kontakt() {
   return (
@@ -9,25 +10,27 @@ export default function Kontakt() {
         <title>voty - Demokratie an die Schule!</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <h1>Demokratie an die Schule!</h1>
-      <h2>27. September – ein spannendes Abstimmungswochenende</h2>
-      <p>
+      <PageHeading>Demokratie an die Schule</PageHeading>
+      <Heading as="h2">
+        27. September – ein spannendes Abstimmungswochenende
+      </Heading>
+      <Text>
         Die Demokratie ist das wohl wichtigste Gut der Schweiz, das wird uns bei
         der aktuellen Weltlage bewusster denn je. Aber wie gelingt es uns, die
         Jugend für die Demokratie zu begeistern? Das Projekt «voty» will sich
         diesem Thema annehmen und das Demokratieverständnis fördern. Unterstützt
         durch den{" "}
-        <a href="https://prototypefund.opendata.ch" target="_blank">
+        <Link href="https://prototypefund.opendata.ch" target="_blank">
           prototypefund.opendata.ch
-        </a>{" "}
+        </Link>{" "}
         und in Zusammenarbeit mit SRF und weiteren Partnern werden wir in den
         nächsten Monaten gemeinsam mit Schulen einen Prototypen entwickeln und
         testen.
-      </p>
-      <p className="is-center margin-vertical">
+      </Text>
+      <Text textAlign="center" my={4}>
         <img src="/images/voty_module_1.svg" alt="Bundeshaus" />
-      </p>
-      <p>
+      </Text>
+      <Text>
         Nun stehen am 27. September bereits wichtige Abstimmungen an, welche
         auch für Jugendliche greifbar und relevant sind (Kampfjets,
         Begrenzungsinitiative, Kinderdrittbetreuungskosten, Vaterschaftsurlaub,
@@ -37,18 +40,18 @@ export default function Kontakt() {
         Lehrer der Oberstufe (Sek I + II), welche im September mindestens 8
         Lektionen diesem Thema widmen möchten. «voty» stellt dazu
         Unterrichtsmaterialien und eine Austauschplatform zur Verfügung.
-      </p>
-      <h2>Klingt spannend? </h2>
-      <p>
+      </Text>
+      <Heading as="h2">Klingt spannend? </Heading>
+      <Text>
         Wäre das etwas für sie und ihre Klasse? Dann tragen Sie sich auf unsere
         Liste ein und wir nehmen gerne Kontakt auf.
-      </p>
-      <div className="card bg-light" id="newsletter">
-        <header>
-          <h2>Das interessiert mich!</h2>
-        </header>
+      </Text>
+      <Box bg="lightgray" my={3} p={3} id="newsletter">
+        <Heading as="h2" mt={0}>
+          Das interessiert mich!
+        </Heading>
         <Newsletter />
-      </div>
+      </Box>
     </Page>
   );
 }

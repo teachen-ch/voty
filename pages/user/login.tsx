@@ -1,6 +1,8 @@
 import { csrfToken } from "next-auth/client";
 import Head from "next/head";
-import Page from "components/Page";
+import { Page, PageHeading } from "components/Page";
+import { Box, Flex, Text, Link, Button } from "rebass";
+import { Label, Input } from "@rebass/forms";
 
 export default function Login({ csrfToken }: { csrfToken: string }) {
   return (
@@ -8,25 +10,24 @@ export default function Login({ csrfToken }: { csrfToken: string }) {
       <Head>
         <title>voty - Anmeldung</title>
       </Head>
-      <h1>Anmeldung</h1>
-      <h2></h2>
-      <p>
+      <PageHeading>Anmeldung</PageHeading>
+      <Text>
         Hier kannst Du dich mit Deiner Schul-Emailadresse anmelden. Wir schicken
         Dir per Email einen Link mit dem Du Dich ohne Passwort anmelden kannst.
-      </p>
+      </Text>
       <form method="post" action="/api/auth/signin/email" className="row">
-        <input type="hidden" name="csrfToken" value={csrfToken} />
-        <div className="col-1 is-vertical-align">
-          <label htmlFor="email">Email: </label>
-        </div>
-        <div className="col-7">
-          <input id="email" name="email" />
-        </div>
-        <div className="col-4">
-          <button type="submit" className="button primary">
-            Login Link schicken
-          </button>
-        </div>
+        <Flex my={4} justifyContent="space-between">
+          <Box width={1 / 6}>
+            <input type="hidden" name="csrfToken" value={csrfToken} />
+            <Label htmlFor="email">Email: </Label>
+          </Box>
+          <Box width={1 / 2}>
+            <Input id="email" name="email" />
+          </Box>
+          <Box width={1 / 4}>
+            <Button type="submit">Login Link schicken</Button>
+          </Box>
+        </Flex>
       </form>
     </Page>
   );

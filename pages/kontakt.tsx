@@ -1,6 +1,7 @@
 import Head from "next/head";
 import Newsletter from "components/Newsletter";
-import Page from "components/Page";
+import { Page, PageHeading } from "components/Page";
+import { Box, Heading, Text, Button } from "rebass";
 
 export default function Kontakt() {
   function sendMail() {
@@ -12,22 +13,21 @@ export default function Kontakt() {
       <Head>
         <title>voty - Kontakt</title>
       </Head>
-      <h1>Kontakt</h1>
-      <h2>Feedback oder Fragen?</h2>
-      <p>Für Feedback, Anregungen und Fragen freuen wir uns auf eure Email:</p>
-      <p className="text-center">
-        <a onClick={sendMail} role="button" className="button primary">
-          Email öffnen
-        </a>
-      </p>
-      <br />
+      <PageHeading>Kontakt</PageHeading>
+      <Heading as="h2">Feedback oder Fragen?</Heading>
+      <Text>
+        Für Feedback, Anregungen und Fragen freuen wir uns auf eure Email:
+      </Text>
+      <Text my={4}>
+        <Button onClick={sendMail}>Email schreiben</Button>
+      </Text>
 
-      <div className="card" id="newsletter">
-        <header>
-          <h2>Möchtet ihr regelmässig über «voty» informiert werden?</h2>
-        </header>
+      <Box bg="lightgray" id="newsletter" my={3} p={3}>
+        <Heading as="h2" my={0}>
+          Möchtet ihr regelmässig über «voty» informiert werden?
+        </Heading>
         <Newsletter />
-      </div>
+      </Box>
     </Page>
   );
 }

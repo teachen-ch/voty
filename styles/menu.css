@@ -77,6 +77,12 @@ Note: Beware of modifying this element as it can break the animations - you shou
   padding: 0.8em;
 }
 
+/* Wrapper for item list */
+.bm-item-list a {
+  text-decoration: none;
+  font-weight: bold;
+}
+
 /* Individual item */
 .bm-item {
   display: block;

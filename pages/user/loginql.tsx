@@ -1,7 +1,9 @@
 import Head from "next/head";
-import Page from "components/Page";
+import { Page, PageHeading } from "components/Page";
 import { gql, useMutation, useQuery } from "@apollo/client";
 import { useState } from "react";
+import { Box, Flex, Text, Link, Button } from "rebass";
+import { Label, Input } from "@rebass/forms";
 
 export const LOGIN = gql`
   mutation($email: String!, $password: String!) {
@@ -80,9 +82,9 @@ export default function Login() {
         <Head>
           <title>voty - Anmeldung</title>
         </Head>
-        <p>
+        <Text>
           <b>Current User:</b> {user.name} {user.lastname}
-        </p>
+        </Text>
         <button onClick={() => onLogout()}>Logout</button>
       </Page>
     );
@@ -92,16 +94,16 @@ export default function Login() {
         <Head>
           <title>voty - Anmeldung</title>
         </Head>
-        <h1>Anmeldung</h1>
-        <h2></h2>
-        <p>
+        <PageHeading>Anmeldung</PageHeading>
+
+        <Text>
           Hier kannst Du dich mit Deiner Schul-Emailadresse anmelden, wenn Du
           bereits einen Benutzeraccount bei voty hast.
-        </p>
+        </Text>
         <div>
-          <label>
+          <Label>
             Email:
-            <input
+            <Input
               autoFocus
               autoCapitalize="none"
               value={email}
@@ -110,8 +112,8 @@ export default function Login() {
                 setEmail(event.currentTarget.value)
               }
             />
-          </label>
-          <label>
+          </Label>
+          <Label>
             Password:
             <input
               value={password}
@@ -121,11 +123,9 @@ export default function Login() {
                 setPassword(event.currentTarget.value)
               }
             />
-          </label>
-          <button onClick={() => onLogin()} className="button primary">
-            Anmelden
-          </button>
-          <p>{message}</p>
+          </Label>
+          <Button onClick={() => onLogin()}>Anmelden</Button>
+          <Text>{message}</Text>
         </div>
       </Page>
     );

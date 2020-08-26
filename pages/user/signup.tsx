@@ -10,9 +10,9 @@ export default function Login({ csrfToken }: { csrfToken: string }) {
       </Head>
       <h1>Anmeldung</h1>
       <h2></h2>
-      <p>
+      <Text>
         Erstelle einen neuen Account für Voty. Bitte nutze Deine Schul-Email.
-      </p>
+      <Text>
       <form method="post" action="/api/auth/signup">
         <input type="hidden" name="csrfToken" value={csrfToken} />
         <input type="hidden" name="role" value="STUDENT" />

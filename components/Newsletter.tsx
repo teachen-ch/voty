@@ -1,60 +1,58 @@
+import { Box, Flex, Button } from "rebass";
+import { Label, Input, Select } from "@rebass/forms";
+
 export default function Newsletter() {
   return (
-    <div className="newsletter">
+    <Box>
       <form action="https://newsletter.teachen.ch/subscribe" method="POST">
         <Field id="Vorname" label="Vorname" />
         <Field id="name" label="Nachname" />
 
-        <Select id="Funktion" label="Ich bin">
+        <SelectField id="Funktion" label="Ich bin">
           <option>---</option>
           <option>Lehrer/-in</option>
           <option>Schüler/-in</option>
           <option>Schulleiter/-in</option>
           <option>Weltenbürger/-in</option>
-        </Select>
+        </SelectField>
 
         <Field id="email" label="Email" />
 
-        <div className="is-hidden">
-          <label htmlFor="hp">HP</label>
-          <br />
-          <input type="text" name="hp" id="hp" />
-        </div>
         <input type="hidden" name="list" value="tpTmOmECEZr7Zjk76307UvTA" />
         <input type="hidden" name="subform" value="yes" />
         <Submit name="submit" value="Newsletter anmelden" />
       </form>
-    </div>
+    </Box>
   );
 }
 
 export function Field({ id, label }: { id: string; label: string }) {
   return (
-    <div className="row is-vertical-align">
-      <div className="col-3">
-        <label htmlFor={id}>{label}</label>
-      </div>
-      <div className="col">
-        <input type="text" name={id} id={id} />
-      </div>
-    </div>
+    <Flex my={3} flexWrap="wrap">
+      <Box width={1 / 4} minWidth="100px">
+        <Label htmlFor={id}>{label}</Label>
+      </Box>
+      <Box width={3 / 4}>
+        <Input type="text" name={id} id={id} />
+      </Box>
+    </Flex>
   );
 }
 
 export function Submit({ name, value }: { name: string; value: string }) {
   return (
-    <div className="row is-vertical-align">
-      <div className="col-3"></div>
-      <div className="col">
-        <button type="submit" name={name} className="is-full-width">
+    <Flex my={3} flexWrap="wrap">
+      <Box width={1 / 4} minWidth="100px"></Box>
+      <Box width={3 / 4}>
+        <Button type="submit" name={name} variant="primary">
           {value}
-        </button>
-      </div>
-    </div>
+        </Button>
+      </Box>
+    </Flex>
   );
 }
 
-export function Select({
+export function SelectField({
   id,
   label,
   children,
@@ -64,15 +62,15 @@ export function Select({
   children: React.ReactNode;
 }) {
   return (
-    <div className="row is-vertical-align">
-      <div className="col-3">
-        <label htmlFor={id}>{label}</label>
-      </div>
-      <div className="col">
-        <select name={id} id={id}>
+    <Flex my={3} flexWrap="wrap">
+      <Box width={1 / 4} minWidth="100px">
+        <Label htmlFor={id}>{label}</Label>
+      </Box>
+      <Box width={3 / 4}>
+        <Select name={id} id={id} sx={{ width: "100%" }}>
           {children}
-        </select>
-      </div>
-    </div>
+        </Select>
+      </Box>
+    </Flex>
   );
 }
