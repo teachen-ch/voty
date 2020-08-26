@@ -11,16 +11,27 @@ export function Header() {
 function Icons() {
   return (
     <>
-      <link rel="icon" href="/images/favicon16.png" sizes="16x16" />
-      <link rel="icon" href="/images/favicon32.png" sizes="32x32" />
-      <link rel="icon" href="/images/favicon192.png" sizes="192x192" />
-      <link rel="apple-touch-icon" href="/images/favicon16.png" sizes="16x16" />
-      <link rel="apple-touch-icon" href="/images/favicon32.png" sizes="32x32" />
       <link
         rel="apple-touch-icon"
-        href="/images/favicon192.png"
-        sizes="192x192"
+        sizes="180x180"
+        href="/apple-touch-icon.png"
       />
+      <link
+        rel="icon"
+        type="image/png"
+        sizes="32x32"
+        href="/favicon-32x32.png"
+      />
+      <link
+        rel="icon"
+        type="image/png"
+        sizes="16x16"
+        href="/favicon-16x16.png"
+      />
+      <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#d9000d" />
+      <link rel="manifest" href="/site.webmanifest" />
+      <meta name="msapplication-TileColor" content="#d9000d" />
+      <meta name="theme-color" content="#ffffff" />
     </>
   );
 }
