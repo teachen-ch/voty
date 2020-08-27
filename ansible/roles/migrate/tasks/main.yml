@@ -1,11 +1,6 @@
 ---
 - name: Migrate Prism Database Schema
   block:
-    - name: Fix git config
-      command: docker exec app git config --unset-all "http.https://github.com/.extraheader"
-      register: result
-      changed_when: result.rc == 0
-      failed_when: result.rc != 0 and result.rc != 5
     - name: git pull
       command: docker exec app git pull
     - name: Migrate DB Scheme

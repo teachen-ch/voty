@@ -1,0 +1,16 @@
+---
+- name: Pull latest version and restart server
+  block:
+    - name: Fix git config
+      command: docker exec app git config --unset-all "http.https://github.com/.extraheader"
+      register: result
+      changed_when: result.rc == 0
+      failed_when: result.rc != 0 and result.rc != 5
+    - name: git pull
+      command: docker exec app git pull
+    - name: Restart Voty Service
+      service:
+        name: voty
+        state: restarted
+  become: yes
+  become_method: sudo

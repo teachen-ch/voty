@@ -123,6 +123,7 @@ export default {
   },
   buttons: {
     primary: {
+      cursor: "pointer",
       color: "white",
       bg: "primary",
       fontWeight: "bold",
@@ -133,6 +134,7 @@ export default {
       color: "background",
       bg: "secondary",
       borderRadius: "0px",
+      cursor: "pointer",
     },
     outline: {
       variant: "buttons.primary",
@@ -140,12 +142,14 @@ export default {
       bg: "transparent",
       boxShadow: "inset 0 0 2px",
       borderRadius: "0px",
+      cursor: "pointer",
     },
     full: {
       width: "100%",
       whiteSpace: "nowrap",
       fontWeight: "bold",
       borderRadius: "0px",
+      cursor: "pointer",
     },
   },
   input: {
