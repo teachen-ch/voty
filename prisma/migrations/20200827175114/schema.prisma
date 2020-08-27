@@ -1,6 +1,6 @@
 datasource db {
   provider = "postgres"
-  url      = env("DATABASE_URL")
+  url = "***"
 }
 
 generator client {
@@ -102,9 +102,6 @@ model Team {
   teacherId Int
   members   User[]   @relation("TeamMembers")
   ballots   Ballot[]
-  invite    String?
-  domain    Domain?  @relation(fields: [domainId], references: [id])
-  domainId  Int?
 
   @@map(name: "teams")
 }
@@ -132,7 +129,6 @@ model Domain {
   schools  School[]
 
   @@map(name: "domains")
-  Team Team[]
 }
 
 enum Scope {
