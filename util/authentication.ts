@@ -3,7 +3,7 @@ import { PrismaClient, User } from "@prisma/client";
 import { NextApiRequest } from "next";
 import bcrypt from "bcrypt";
 import { Request } from "nexus/dist/runtime/schema/schema";
-import { sendMail } from "util/email";
+import { sendMail } from "./email";
 
 const secret = process.env.SESSION_SECRET;
 const expires = process.env.SESSION_EXPIRES;
