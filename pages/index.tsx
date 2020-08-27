@@ -22,13 +22,17 @@ export default function Home() {
           Demokratie an die Schule!
         </Heading>
 
-        <img src="/images/voty_logo.svg" alt="voty" />
+        <img
+          src="/images/voty_logo.svg"
+          alt="voty"
+          style={{ maxWidth: "85%", margin: "0 auto" }}
+        />
 
         <Text
           as="h2"
-          fontWeight="normal"
+          fontWeight="semi"
           fontSize={2}
-          my={4}
+          my={[3, 3, 4]}
           mx={[0, 3, "20%", 230]}
         >
           Die Demokratie ist das wohl wichtigste Gut der Schweiz. Aber wie
@@ -104,8 +108,7 @@ export default function Home() {
         </Grid>
 
         <Banner href="/umfrage">
-          Ihre Erfahrung mit <br />
-          Demokratie an der Schule?
+          Ihre Erfahrung mit Demokratie an der Schule?
         </Banner>
       </Container>
     </>
@@ -123,16 +126,21 @@ const Banner = ({
     bg="primary"
     px="70px"
     py={3}
+    pb={[55, 55, 3]}
     sx={{
-      top: 40,
-      left: -80,
-      position: "absolute",
+      top: [null, null, 40],
+      left: [null, null, -95],
+      bottom: [-18, -18, "inherit", "inherit"],
+      right: [-97, -97, "inherit", "inherit"],
+      position: "fixed",
+      maxWidth: ["290px", "290px", "353px"],
       display: "block",
       transform: "rotate(-45deg)",
-      boxShadow: "0 2px 10px 0 #967676",
-      "@media screen and (max-width: 800px)": {
-        display: "none",
-      },
+      boxShadow: [
+        "0 -2px 10px 0 #967676",
+        "0 -2px 10px 0 #967676",
+        "0 2px 10px 0 #967676",
+      ],
     }}
     textAlign="center"
     href={href}

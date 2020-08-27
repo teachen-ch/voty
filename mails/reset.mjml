@@ -1,0 +1,23 @@
+<mjml>
+  <mj-body>
+    <mj-section>
+      <mj-column>
+
+        <mj-text font-size="30px" font-weight="bold">voty</mj-text>
+        <mj-divider border-color="#000"></mj-divider>
+
+        <mj-text font-size="20px" color="#000" font-family="helvetica">Mit diesem Link kannst Du Dein Passwort für den Benutzer «<strong>{{email}}</strong>» bei voty ändern</mj-text>
+      </mj-column>
+    </mj-section>
+    <mj-section>
+      <mj-column>
+        <mj-button href="{{url}}" background-color="#c00" font-weight="bold" font-size="20px">Jetzt Passwort ändern</mj-button>
+      </mj-column>
+    </mj-section>
+    <mj-section>
+      <mj-column>
+        Wenn Du nicht soeben eine Passwort-Anfrage gestartet hast, dann lösche dieses Mail.
+      </mj-column>
+    </mj-section>
+  </mj-body>
+</mjml>

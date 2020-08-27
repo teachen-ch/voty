@@ -40,10 +40,5 @@
         project_src: "{{app_dir}}"
         state: "present"
         restarted: yes
-    - name: Fix git config
-      command: docker exec app git config --unset-all "http.https://github.com/.extraheader"
-      register: result
-      changed_when: result.rc == 0
-      failed_when: result.rc != 0 and result.rc != 5
   become: yes
   become_method: sudo

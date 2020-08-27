@@ -9,14 +9,16 @@ export function Page({ children }: { children: React.ReactNode }) {
       flexDirection="column"
       justifyContent="center"
     >
-      <a href="/">
-        <img
-          src="/images/voty_logo.svg"
-          alt="voty"
-          className="logo-page"
-          style={{ height: 45, marginTop: 20, marginLeft: 20 }}
-        />
-      </a>
+      <Box mt={["2rem", "2rem", 32]} ml={[0, 0, 0, 20]}>
+        <a href="/">
+          <img
+            src="/images/voty_logo.svg"
+            alt="voty"
+            className="logo-page"
+            height="45"
+          />
+        </a>
+      </Box>
       <Box
         as="main"
         mx="auto"

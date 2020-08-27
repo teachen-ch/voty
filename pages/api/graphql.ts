@@ -14,6 +14,7 @@ settings.change({ logger: { filter: { level: "error" } } });
 // Do not write them inline, since the Nexus API is typed `any` because of `require` import.
 // require('...')
 require("../../graphql/schema");
+require("../../graphql/user");
 
 app.assemble();
 

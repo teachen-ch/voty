@@ -33,6 +33,7 @@ export default {
   fontWeights: {
     body: 500,
     heading: 700,
+    semi: 600,
     bold: 700,
   },
   lineHeights: {
@@ -77,14 +78,33 @@ export default {
       fontWeight: "body",
       lineHeight: "body",
       fontSize: 2,
+      /*
       backgroundImage: [
         "url(/images/voty_bg_mobile_1.svg)",
         "url(/images/voty_bg_mobile_1.svg)",
         "url(/images/voty_bg_1.svg)",
       ],
-      backgroundPosition: "51% 28.5%",
+      backgroundPosition: ["50% -5%", "50% -10%", "51% 28.5%"],
       backgroundAttachment: "fixed",
       backgroundRepeat: "no-repeat",
+      backgroundSize: "cover",*/
+      ":before": {
+        content: '""',
+        display: "block",
+        position: "fixed",
+        left: 0,
+        top: 0,
+        width: "100%",
+        height: "100%",
+        zIndex: "-10",
+        backgroundImage: [
+          "url(/images/voty_bg_mobile_1.svg)",
+          "url(/images/voty_bg_mobile_1.svg)",
+          "url(/images/voty_bg_1.svg)",
+        ],
+        backgroundRepeat: "no-repeat",
+        backgroundPosition: ["50% -5%", "50% -10%", "51% 28.5%"],
+      },
     },
     h2: {
       variant: "text.heading",

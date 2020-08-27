@@ -2,7 +2,7 @@
 - name: Migrate Prism Database Schema
   block:
     - name: git pull
-      command: docker exec app git pull
+      command: docker exec app git -c http.https://github.com/.extraheader="" pull
     - name: Migrate DB Scheme
       command: docker exec -t app npx prisma migrate up --experimental
   become: yes
