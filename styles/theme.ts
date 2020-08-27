@@ -80,7 +80,6 @@ export default {
       backgroundImage: [
         "url(/images/voty_bg_mobile_1.svg)",
         "url(/images/voty_bg_mobile_1.svg)",
-        "url(/images/voty_bg_mobile_1.svg)",
         "url(/images/voty_bg_1.svg)",
       ],
       backgroundPosition: "51% 28.5%",

@@ -1,6 +1,7 @@
 import Head from "next/head";
-import { Box, Flex, Card, Heading, Text, Link, Button } from "rebass";
+import { Flex, Heading, Text, Link, Button } from "rebass";
 import { Container } from "components/Page";
+import { Grid } from "theme-ui";
 
 export default function Home() {
   return (
@@ -35,18 +36,13 @@ export default function Home() {
           ein Projekt für die Demokratieförderung an Schweizer Schulen in drei
           Modulen.
         </Text>
-        <Box
+        <Grid
           mt={2}
           mb={-6}
-          sx={{
-            display: "grid",
-            "@media screen and (max-width: 800px)": {
-              display: "block",
-            },
-            gridGap: [0, 0, "30px", "80px"],
-            gridAutoColumns: "minmax(230px, 1fr)",
-            gridAutoFlow: "column",
-          }}
+          gap={[0, "20px", "30px", "80px"]}
+          columns={[1, 1, 3]}
+          width="250px"
+          justifyContent="center"
         >
           <Flex
             textAlign="center"
@@ -105,7 +101,7 @@ export default function Home() {
               Das interessiert uns!
             </Button>
           </Flex>
-        </Box>
+        </Grid>
 
         <Banner href="/umfrage">
           Ihre Erfahrung mit <br />
