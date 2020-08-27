@@ -1,10 +1,11 @@
 import { Box, Flex, Button } from "rebass";
 import { Label, Input, Select } from "@rebass/forms";
+import { Grid } from "theme-ui";
 
 export default function Newsletter() {
   return (
-    <Box>
-      <form action="https://newsletter.teachen.ch/subscribe" method="POST">
+    <form action="https://newsletter.teachen.ch/subscribe" method="POST">
+      <Grid gap={2} py={4} columns={[0, 0, "1fr 3fr"]}>
         <Field id="Vorname" label="Vorname" />
         <Field id="name" label="Nachname" />
 
@@ -21,34 +22,28 @@ export default function Newsletter() {
         <input type="hidden" name="list" value="tpTmOmECEZr7Zjk76307UvTA" />
         <input type="hidden" name="subform" value="yes" />
         <Submit name="submit" value="Newsletter anmelden" />
-      </form>
-    </Box>
+      </Grid>
+    </form>
   );
 }
 
 export function Field({ id, label }: { id: string; label: string }) {
   return (
-    <Flex my={3} flexWrap="wrap">
-      <Box width={1 / 4} minWidth="100px">
-        <Label htmlFor={id}>{label}</Label>
-      </Box>
-      <Box width={3 / 4}>
-        <Input type="text" name={id} id={id} />
-      </Box>
-    </Flex>
+    <>
+      <Label htmlFor={id}>{label}</Label>
+      <Input type="text" name={id} id={id} />
+    </>
   );
 }
 
 export function Submit({ name, value }: { name: string; value: string }) {
   return (
-    <Flex my={3} flexWrap="wrap">
-      <Box width={1 / 4} minWidth="100px"></Box>
-      <Box width={3 / 4}>
-        <Button type="submit" name={name} variant="primary">
-          {value}
-        </Button>
-      </Box>
-    </Flex>
+    <>
+      <span />
+      <Button type="submit" name={name} variant="primary">
+        {value}
+      </Button>
+    </>
   );
 }
 
@@ -62,15 +57,11 @@ export function SelectField({
   children: React.ReactNode;
 }) {
   return (
-    <Flex my={3} flexWrap="wrap">
-      <Box width={1 / 4} minWidth="100px">
-        <Label htmlFor={id}>{label}</Label>
-      </Box>
-      <Box width={3 / 4}>
-        <Select name={id} id={id} sx={{ width: "100%" }}>
-          {children}
-        </Select>
-      </Box>
-    </Flex>
+    <>
+      <Label htmlFor={id}>{label}</Label>
+      <Select name={id} id={id} sx={{ width: "100%" }}>
+        {children}
+      </Select>
+    </>
   );
 }

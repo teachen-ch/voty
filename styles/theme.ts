@@ -1,7 +1,7 @@
 // Rebass Theme-UI theme for voty
 export default {
   // [ iphone SE / iPhone 6+ / iPad High / Desktop+iPad / Big Screen]
-  breakpoints: ["340px", "400px", "600px", "1200px", "2000px"],
+  breakpoints: ["400px", "600px", "1200px", "2000px"],
   fontSizes: [11, 13, 17.5, 20, 24, 32, 40, 50],
   colors: {
     text: "black",
@@ -20,7 +20,8 @@ export default {
     avatar: 48,
   },
   radii: {
-    default: 4,
+    default: 0,
+    square: 0,
     circle: 99999,
   },
   space: [0, 4, 8, 16, 32, 64, 128, 256],
@@ -88,10 +89,18 @@ export default {
     },
     h2: {
       variant: "text.heading",
-      fontSize: [4, 5],
-      mt: 4,
-      mb: 2,
-      color: "blue",
+      fontSize: [3, 4],
+    },
+    h3: {
+      variant: "text.heading",
+      fontSize: [2, 3],
+    },
+    h4: {
+      variant: "text.heading",
+      fontSize: [1, 2],
+    },
+    img: {
+      maxWidth: "100%",
     },
   },
   text: {
@@ -99,8 +108,8 @@ export default {
       fontFamily: "heading",
       lineHeight: "heading",
       fontWeight: "heading",
-      mt: 5,
-      mb: 2,
+      mt: "2em",
+      mb: "0.5em",
     },
     display: {
       fontFamily: "heading",
@@ -118,22 +127,26 @@ export default {
       color: "white",
       bg: "primary",
       fontWeight: "bold",
+      borderRadius: "0px",
     },
     secondary: {
       variant: "buttons.primary",
       color: "background",
       bg: "secondary",
+      borderRadius: "0px",
     },
     outline: {
       variant: "buttons.primary",
       color: "primary",
       bg: "transparent",
       boxShadow: "inset 0 0 2px",
+      borderRadius: "0px",
     },
     full: {
       width: "100%",
       whiteSpace: "nowrap",
       fontWeight: "bold",
+      borderRadius: "0px",
     },
   },
   input: {

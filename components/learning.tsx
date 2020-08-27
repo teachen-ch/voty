@@ -10,7 +10,7 @@ export { Info, Link, Video };
 export const Ref = (props) => (
   <Card border={10}>
     <Show if={props.title}>
-      <Heading>{props.title}</Heading>
+      <Heading mt={0}>{props.title}</Heading>
     </Show>
     <Show if={props.href}>
       <strong>Link: </strong>
@@ -67,7 +67,7 @@ export const Include = (props) => {
     <Wrapper>
       <MDXProvider
         components={{
-          h1: Heading,
+          h1: (props) => <Heading mt={2}>{props.children}</Heading>,
           wrapper: (props: any) => (
             <Box my={2} p={3} bg="lightgray">
               {props.children}

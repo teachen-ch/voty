@@ -1,18 +1,9 @@
 import { Flex, Box, Text, Link } from "rebass";
+import { Container } from "./Page";
 
 export function Footer() {
   return (
-    <Box
-      as="footer"
-      p={1}
-      textAlign="center"
-      maxWidth={["100%", "100%", "1000px", "1200px"]}
-      mx="auto"
-      pt={6}
-      pb={3}
-      px={[2, 3, 0]}
-      fontSize={"14px"}
-    >
+    <Container as="footer" pt={6} pb={3} fontSize={"0.8em"}>
       <Text>
         voty ist ein Projekt des Vereins{" "}
         <Link
@@ -63,6 +54,6 @@ export function Footer() {
           </nav>
         </Box>
       </Flex>
-    </Box>
+    </Container>
   );
 }

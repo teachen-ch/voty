@@ -1,11 +1,11 @@
 import { Flex, Box, Heading } from "rebass";
-import { callbackify } from "util";
+
 export function Page({ children }: { children: React.ReactNode }) {
   return (
     <Flex
       maxWidth={["100%", "100%", "1000px", "1200px"]}
       mx="auto"
-      px={[3, 3, 3, 4]}
+      px={[3, 3, 4]}
       flexDirection="column"
       justifyContent="center"
     >
@@ -32,7 +32,7 @@ export function Page({ children }: { children: React.ReactNode }) {
 export const PageHeading = ({ children }: { children: React.ReactNode }) => (
   <Heading
     as="h1"
-    fontSize={[3, 4, 5, 6, 6]}
+    fontSize={[4, 5, 6, 6]}
     textAlign="center"
     mt={40}
     sx={{ borderBottom: "1px solid #979797" }}
@@ -40,4 +40,16 @@ export const PageHeading = ({ children }: { children: React.ReactNode }) => (
   >
     {children}
   </Heading>
+);
+
+export const Container = (props) => (
+  <Flex mx={[3, 3, 4]} justifyContent="center" textAlign="center" {...props}>
+    <Flex
+      justifyItems="center"
+      flexDirection="column"
+      maxWidth={["100%", "100%", "100%", "1160px"]}
+    >
+      {props.children}
+    </Flex>
+  </Flex>
 );
