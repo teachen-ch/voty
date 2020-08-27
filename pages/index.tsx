@@ -1,7 +1,8 @@
 import Head from "next/head";
-import { Flex, Heading, Text, Link, Button } from "rebass";
+import { Flex, Heading, Text, Button } from "rebass";
 import { Container } from "components/Page";
 import { Grid } from "theme-ui";
+import { Banner } from "../components/Banner";
 
 export default function Home() {
   return (
@@ -114,40 +115,3 @@ export default function Home() {
     </>
   );
 }
-
-const Banner = ({
-  href,
-  children,
-}: {
-  href: string;
-  children: React.ReactNode;
-}) => (
-  <Link
-    bg="primary"
-    px="70px"
-    py={3}
-    pb={[55, 55, 3]}
-    sx={{
-      top: [null, null, 40],
-      left: [null, null, -95],
-      bottom: [-18, -18, "inherit", "inherit"],
-      right: [-97, -97, "inherit", "inherit"],
-      position: "fixed",
-      maxWidth: ["290px", "290px", "353px"],
-      display: "block",
-      transform: "rotate(-45deg)",
-      boxShadow: [
-        "0 -2px 10px 0 #967676",
-        "0 -2px 10px 0 #967676",
-        "0 2px 10px 0 #967676",
-      ],
-    }}
-    textAlign="center"
-    href={href}
-    color="white"
-    fontWeight="bold"
-    target="_blank"
-  >
-    {children}
-  </Link>
-);
