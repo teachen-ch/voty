@@ -34,6 +34,8 @@ export const permissions = shield({
     Mutation: {
       login: allow,
       createUser: allow,
+      emailVerification: allow,
+      checkVerification: allow,
     },
     School: isUser,
     MinUser: allow,
@@ -42,6 +44,7 @@ export const permissions = shield({
     ResponseLogin: allow,
   },
   options: {
+    allowExternalErrors: true,
     debug: process.env.NODE_ENV !== "production",
     fallbackRule: deny,
   },

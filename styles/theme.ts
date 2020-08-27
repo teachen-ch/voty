@@ -171,6 +171,11 @@ export default {
       borderRadius: "0px",
       cursor: "pointer",
     },
+    muted: {
+      bg: "muted",
+      color: "white",
+      fontWeight: "bold",
+    },
   },
   input: {
     bg: "white",

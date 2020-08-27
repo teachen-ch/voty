@@ -1,5 +1,11 @@
 import { schema } from "nexus";
-import { createUser, getUser, login } from "../util/authentication";
+import {
+  createUser,
+  getUser,
+  login,
+  sendVerificationEmail,
+  checkVerification,
+} from "../util/authentication";
 import { stringArg } from "nexus/components/schema";
 
 schema.objectType({
@@ -25,7 +31,7 @@ schema.objectType({
 schema.objectType({
   name: "MinUser",
   definition(t) {
-    t.string("id");
+    t.int("id");
     t.string("name");
     t.string("lastname");
     t.string("gender");
@@ -35,7 +41,7 @@ schema.objectType({
   name: "ResponseLogin",
   definition(t) {
     t.string("token");
-
+    t.string("error");
     t.field("user", { type: "MinUser" });
   },
 });
@@ -71,6 +77,23 @@ schema.extendType({
       },
       resolve: async (_root, args, ctx) =>
         login(args.email, args.password, ctx.db),
+    });
+    t.field("emailVerification", {
+      type: "ResponseLogin",
+      args: {
+        email: stringArg(),
+        purpose: stringArg(),
+      },
+      resolve: async (_root, args, ctx) =>
+        sendVerificationEmail(args.email, args.purpose, ctx.db),
+    });
+    t.field("checkVerification", {
+      type: "ResponseLogin",
+      args: {
+        token: stringArg(),
+      },
+      resolve: async (_root, args, ctx) =>
+        checkVerification(args.token, ctx.db),
     });
     t.crud.createOneSchool();
     t.crud.deleteOneSchool();

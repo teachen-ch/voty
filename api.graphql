@@ -232,6 +232,11 @@ input BoolFilter {
   not: NestedBoolFilter
 }
 
+input BoolNullableFilter {
+  equals: Boolean
+  not: NestedBoolNullableFilter
+}
+
 """
 A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the
 `date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO
@@ -266,9 +271,21 @@ input DomainCreateOneWithoutSchoolsInput {
   create: DomainCreateWithoutSchoolsInput
 }
 
+input DomainCreateOneWithoutTeamInput {
+  connect: DomainWhereUniqueInput
+  create: DomainCreateWithoutTeamInput
+}
+
 input DomainCreateWithoutSchoolsInput {
   approved: Boolean
   name: String!
+  Team: TeamCreateManyWithoutDomainInput
+}
+
+input DomainCreateWithoutTeamInput {
+  approved: Boolean
+  name: String!
+  schools: SchoolCreateManyWithoutDomainInput
 }
 
 input DomainWhereInput {
@@ -279,6 +296,7 @@ input DomainWhereInput {
   NOT: [DomainWhereInput!]
   OR: [DomainWhereInput!]
   schools: SchoolListRelationFilter
+  Team: TeamListRelationFilter
 }
 
 input DomainWhereUniqueInput {
@@ -322,21 +340,28 @@ scalar Json
 
 type MinUser {
   gender: String
-  id: String
+  id: Int
   lastname: String
   name: String
 }
 
 type Mutation {
+  checkVerification(token: String): ResponseLogin
   createOneSchool(data: SchoolCreateInput!): School!
   createUser(data: UserCreateInput!): User!
   deleteOneSchool(where: SchoolWhereUniqueInput!): School
+  emailVerification(email: String, purpose: String): ResponseLogin
   login(email: String, password: String): ResponseLogin
 }
 
 input NestedBoolFilter {
   equals: Boolean
   not: NestedBoolFilter
+}
+
+input NestedBoolNullableFilter {
+  equals: Boolean
+  not: NestedBoolNullableFilter
 }
 
 input NestedDateTimeFilter {
@@ -479,6 +504,7 @@ input ReactionWhereUniqueInput {
 }
 
 type ResponseLogin {
+  error: String
   token: String
   user: MinUser
 }
@@ -512,6 +538,11 @@ input SchoolCreateInput {
   zip: String
 }
 
+input SchoolCreateManyWithoutDomainInput {
+  connect: [SchoolWhereUniqueInput!]
+  create: [SchoolCreateWithoutDomainInput!]
+}
+
 input SchoolCreateOneWithoutBallotsInput {
   connect: SchoolWhereUniqueInput
   create: SchoolCreateWithoutBallotsInput
@@ -532,6 +563,17 @@ input SchoolCreateWithoutBallotsInput {
   canton: String
   city: String
   domain: DomainCreateOneWithoutSchoolsInput
+  members: UserCreateManyWithoutSchoolInput
+  name: String!
+  teams: TeamCreateManyWithoutSchoolInput
+  zip: String
+}
+
+input SchoolCreateWithoutDomainInput {
+  address: String
+  ballots: BallotCreateManyWithoutSchoolInput
+  canton: String
+  city: String
   members: UserCreateManyWithoutSchoolInput
   name: String!
   teams: TeamCreateManyWithoutSchoolInput
@@ -647,6 +689,11 @@ type Team {
   teacher: User!
 }
 
+input TeamCreateManyWithoutDomainInput {
+  connect: [TeamWhereUniqueInput!]
+  create: [TeamCreateWithoutDomainInput!]
+}
+
 input TeamCreateManyWithoutSchoolInput {
   connect: [TeamWhereUniqueInput!]
   create: [TeamCreateWithoutSchoolInput!]
@@ -668,6 +715,17 @@ input TeamCreateOneWithoutMembersInput {
 }
 
 input TeamCreateWithoutBallotsInput {
+  domain: DomainCreateOneWithoutTeamInput
+  invite: String
+  members: UserCreateManyWithoutTeamInput
+  name: String!
+  school: SchoolCreateOneWithoutTeamsInput!
+  teacher: UserCreateOneWithoutTeachesInput!
+}
+
+input TeamCreateWithoutDomainInput {
+  ballots: BallotCreateManyWithoutTeamInput
+  invite: String
   members: UserCreateManyWithoutTeamInput
   name: String!
   school: SchoolCreateOneWithoutTeamsInput!
@@ -676,6 +734,8 @@ input TeamCreateWithoutBallotsInput {
 
 input TeamCreateWithoutMembersInput {
   ballots: BallotCreateManyWithoutTeamInput
+  domain: DomainCreateOneWithoutTeamInput
+  invite: String
   name: String!
   school: SchoolCreateOneWithoutTeamsInput!
   teacher: UserCreateOneWithoutTeachesInput!
@@ -683,6 +743,8 @@ input TeamCreateWithoutMembersInput {
 
 input TeamCreateWithoutSchoolInput {
   ballots: BallotCreateManyWithoutTeamInput
+  domain: DomainCreateOneWithoutTeamInput
+  invite: String
   members: UserCreateManyWithoutTeamInput
   name: String!
   teacher: UserCreateOneWithoutTeachesInput!
@@ -690,6 +752,8 @@ input TeamCreateWithoutSchoolInput {
 
 input TeamCreateWithoutTeacherInput {
   ballots: BallotCreateManyWithoutTeamInput
+  domain: DomainCreateOneWithoutTeamInput
+  invite: String
   members: UserCreateManyWithoutTeamInput
   name: String!
   school: SchoolCreateOneWithoutTeamsInput!
@@ -704,7 +768,10 @@ input TeamListRelationFilter {
 input TeamWhereInput {
   AND: [TeamWhereInput!]
   ballots: BallotListRelationFilter
+  domain: DomainWhereInput
+  domainId: IntNullableFilter
   id: IntFilter
+  invite: StringNullableFilter
   members: UserListRelationFilter
   name: StringFilter
   NOT: [TeamWhereInput!]
@@ -898,6 +965,7 @@ input UserCreateInput {
   team: TeamCreateOneWithoutMembersInput
   threads: ThreadCreateManyWithoutUserInput
   updatedAt: DateTime
+  verified: Boolean
 }
 
 input UserCreateManyWithoutSchoolInput {
@@ -952,6 +1020,7 @@ input UserCreateWithoutAttachmentsInput {
   team: TeamCreateOneWithoutMembersInput
   threads: ThreadCreateManyWithoutUserInput
   updatedAt: DateTime
+  verified: Boolean
 }
 
 input UserCreateWithoutBallotsInput {
@@ -971,6 +1040,7 @@ input UserCreateWithoutBallotsInput {
   team: TeamCreateOneWithoutMembersInput
   threads: ThreadCreateManyWithoutUserInput
   updatedAt: DateTime
+  verified: Boolean
 }
 
 input UserCreateWithoutReactionsInput {
@@ -990,6 +1060,7 @@ input UserCreateWithoutReactionsInput {
   team: TeamCreateOneWithoutMembersInput
   threads: ThreadCreateManyWithoutUserInput
   updatedAt: DateTime
+  verified: Boolean
 }
 
 input UserCreateWithoutSchoolInput {
@@ -1009,6 +1080,7 @@ input UserCreateWithoutSchoolInput {
   team: TeamCreateOneWithoutMembersInput
   threads: ThreadCreateManyWithoutUserInput
   updatedAt: DateTime
+  verified: Boolean
 }
 
 input UserCreateWithoutTeachesInput {
@@ -1028,6 +1100,7 @@ input UserCreateWithoutTeachesInput {
   team: TeamCreateOneWithoutMembersInput
   threads: ThreadCreateManyWithoutUserInput
   updatedAt: DateTime
+  verified: Boolean
 }
 
 input UserCreateWithoutTeamInput {
@@ -1047,6 +1120,7 @@ input UserCreateWithoutTeamInput {
   teaches: TeamCreateManyWithoutTeacherInput
   threads: ThreadCreateManyWithoutUserInput
   updatedAt: DateTime
+  verified: Boolean
 }
 
 input UserCreateWithoutThreadsInput {
@@ -1066,6 +1140,7 @@ input UserCreateWithoutThreadsInput {
   teaches: TeamCreateManyWithoutTeacherInput
   team: TeamCreateOneWithoutMembersInput
   updatedAt: DateTime
+  verified: Boolean
 }
 
 input UserListRelationFilter {
@@ -1098,6 +1173,7 @@ input UserWhereInput {
   teamId: IntNullableFilter
   threads: ThreadListRelationFilter
   updatedAt: DateTimeFilter
+  verified: BoolNullableFilter
 }
 
 input UserWhereUniqueInput {

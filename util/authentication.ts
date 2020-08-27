@@ -4,38 +4,46 @@ import { NextApiRequest } from "next";
 import bcrypt from "bcrypt";
 import { Request } from "nexus/dist/runtime/schema/schema";
 import { sendMail } from "./email";
+import { randomBytes, createHash } from "crypto";
 
 const secret = process.env.SESSION_SECRET;
 const expires = process.env.SESSION_EXPIRES;
 
-export async function loginReq(req: NextApiRequest, prisma: PrismaClient) {
-  // TODO: disable login via get / req.query
-  const email = req.body.email || req.query.email;
-  const password = req.body.password || req.query.password;
-  return login(email, password, prisma);
-}
+type ResponseLogin = {
+  error?: string;
+  token?: string;
+  user?: User;
+};
 
 export async function login(
   email: string,
   password: string,
   prisma: PrismaClient
-) {
+): Promise<ResponseLogin> {
   try {
     const user = await prisma.user.findOne({ where: { email } });
-    if (!user) return null;
+    if (!user) return { error: "ERR_USER_PASSWORD" };
 
     const matches = await bcrypt.compare(password, user.password);
-    if (!matches) return null;
+    if (!matches) return { error: "ERR_USER_PASSWORD" };
 
-    const expiry = Math.round(Date.now() / 1000) + expires;
-    const token: string = jwt.sign({ user, expiry }, secret, {
-      expiresIn: expires,
-    });
-    return { token, user };
+    if (!user.emailVerified) {
+      return { error: "ERR_EMAIL_NOT_VERIFIED" };
+    }
+
+    return startJWTSession(user);
   } catch (err) {
     console.error(err);
-    return err.message;
+    return { error: err.message };
   }
+}
+
+function startJWTSession(user: User): ResponseLogin {
+  const expiry = Math.round(Date.now() / 1000) + expires;
+  const token: string = jwt.sign({ user, expiry }, secret, {
+    expiresIn: expires,
+  });
+  return { token, user };
 }
 
 export async function createUserReq(req: NextApiRequest, prisma: PrismaClient) {
@@ -91,22 +99,41 @@ export function verifyJWT(token) {
 }
 
 // purpose: ["verification", "reset", "login"]
-export async function sendVerificationEmail(prisma, email, purpose, subject) {
-  const from = process.env.EMAIL;
-  const site = "«voty»";
-  const token = createVerificationToken(prisma, email);
-  const url = `${process.env.BASE_URL}user/{purpose}?t=${token}`;
+export async function sendVerificationEmail(
+  email: string,
+  purpose: string,
+  prisma: PrismaClient
+) {
+  try {
+    const from = process.env.EMAIL;
+    const site = `voty${
+      process.env.NODE_ENV !== "production" ? process.env.NODE_ENV : ""
+    }`;
+    const token = await createVerificationToken(prisma, email);
+    const url = `${process.env.BASE_URL}user/${purpose}?t=${token}`;
+    const subjects = {
+      verification: "voty: Bitte Email bestätigen",
+      reset: "voty: Passwort zurücksetzen?",
+      login: "voty: Jetzt anmelden?",
+    };
+    const subject = subjects[purpose];
 
-  const conf = { email: email.replace(/\./g, " ."), url, site };
-  return await sendMail(from, email, subject, purpose, conf);
+    const conf = { email: email.replace(/\./g, " ."), url, site };
+
+    await sendMail(from, email, subject, purpose, conf);
+    return { token: "SENT..." };
+  } catch (err) {
+    console.error("Error sending verification email", err);
+    return { error: "ERR_SEND_EMAIL_VERIFICATION" };
+  }
 }
 
 async function createVerificationToken(prisma: PrismaClient, identifier) {
   const secret = process.env.SESSION_SECRET;
   const maxAge = 24 * 60 * 60 * 1000;
   const expires = new Date(Date.now() + maxAge);
-  const token = randomString(32);
-  const hashed = bcrypt.sign(token, secret);
+  const token = randomBytes(32).toString("hex");
+  const hashed = createHash("sha256").update(`${token}${secret}`).digest("hex");
   await prisma.verificationRequest.create({
     data: {
       identifier,
@@ -117,30 +144,37 @@ async function createVerificationToken(prisma: PrismaClient, identifier) {
   return token;
 }
 
-async function verifyToken(prisma, token) {
+export async function checkVerification(token: string, prisma: PrismaClient) {
+  const found = await verifyToken(token, prisma);
+  if (!found) {
+    return { error: "ERR_TOKEN_NOT_FOUND" };
+  }
+  const email = found.identifier;
+  const user = await prisma.user.findOne({ where: { email } });
+  if (!user) {
+    return { error: "ERR_EMAIL_NOT_FOUND" };
+  }
+
+  await prisma.user.update({
+    where: { email },
+    data: { emailVerified: new Date() },
+  });
+  return startJWTSession(user);
+}
+
+async function verifyToken(token, prisma: PrismaClient) {
   const secret = process.env.SESSION_SECRET;
-  const hashed = bcrypt.sign(token, secret);
+  const hashed = createHash("sha256").update(`${token}${secret}`).digest("hex");
   const found = await prisma.verificationRequest.findOne({
     where: { token: hashed },
   });
   if (!found) return false;
-  console.log("Found token: ", found);
-  console.log("now: ", Date.now());
-  if (found.expires > Date.now()) return false;
-  return true;
-}
-
-function randomCode(len = 4) {
-  return Math.round(Math.random() * 0.9 * 10 ** len) + 10 ** (len - 1);
-}
-
-function randomString(len = 10) {
-  const ch = "qwertyupasdfghjklzxcvbnmQWERTYUIPASDFGHJKLZXCVBNM23456789!-_";
-  const l = ch.length - 1;
-  let pw = "";
-  while (len > 0) {
-    pw += ch[(Math.random() * l).toFixed(0)];
-    len -= 1;
-  }
-  return pw;
+  await prisma.verificationRequest.delete({ where: { token: hashed } });
+  const maxAge = 24 * 60 * 60 * 1000;
+  const expired = new Date(Date.now() - 2 * maxAge);
+  await prisma.verificationRequest.deleteMany({
+    where: { expires: { lt: expired } },
+  });
+  if (found.expires.getMilliseconds() > Date.now()) return undefined;
+  return found;
 }

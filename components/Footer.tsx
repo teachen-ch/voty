@@ -36,7 +36,7 @@ export function Footer() {
           </Link>
           <hr />
           <nav>
-            <Link href="/api/auth/signin" color="black">
+            <Link href="/user/login" color="black">
               Anmelden
             </Link>
             &nbsp;&nbsp;| &nbsp;

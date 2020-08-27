@@ -12,7 +12,7 @@ export function Banner({
   const opacity = useTransform(
     scrollYProgress,
     [0, 0.2, 0.4, 0.6, 0.8, 1],
-    [1, 1, 1, 1, 0, 0]
+    [1, 1, 1, 1, 0.5, 0]
   );
 
   return (
