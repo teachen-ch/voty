@@ -51,10 +51,12 @@ export default {
     },
     card: {
       p: 3,
-      bg: "background",
-      borderWidth: 2,
-      borderColor: "gray",
+      my: 3,
+      bg: "rgba(0,0,0,0.1)",
+      borderWidth: 0,
+      borderColor: "lightgray",
       borderStyle: "solid",
+      borderRadius: 0,
     },
     link: {
       color: "primary",

@@ -1,7 +1,7 @@
 import Head from "next/head";
 import Newsletter from "components/Newsletter";
 import { Page, PageHeading } from "components/Page";
-import { Box, Heading, Text, Link } from "rebass";
+import { Card, Heading, Text, Link } from "rebass";
 
 export default function Kontakt() {
   return (
@@ -46,12 +46,12 @@ export default function Kontakt() {
         Wäre das etwas für sie und ihre Klasse? Dann tragen Sie sich auf unsere
         Liste ein und wir nehmen gerne Kontakt auf.
       </Text>
-      <Box bg="lightgray" my={3} p={3} id="newsletter">
+      <Card id="newsletter">
         <Heading as="h2" mt={0}>
           Das interessiert mich!
         </Heading>
         <Newsletter />
-      </Box>
+      </Card>
     </Page>
   );
 }

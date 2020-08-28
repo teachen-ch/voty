@@ -2,7 +2,7 @@ import Head from "next/head";
 import { Page, PageHeading } from "components/Page";
 import { gql, useMutation, useQuery } from "@apollo/client";
 import { useState } from "react";
-import { Box, Flex, Text, Link, Button } from "rebass";
+import { Card, Text, Link, Button } from "rebass";
 import { Grid } from "theme-ui";
 import { Label, Input } from "@rebass/forms";
 
@@ -141,40 +141,35 @@ export default function Login() {
           Hier kannst Du dich mit Deiner Schul-Emailadresse anmelden, wenn Du
           bereits einen Benutzeraccount bei voty hast.
         </Text>
-        <Grid
-          gap={2}
-          py={4}
-          columns={[0, 0, "1fr 3fr"]}
-          bg="lightgray"
-          p={3}
-          my={3}
-        >
-          <Label>Email:</Label>
-          <Input
-            autoFocus
-            autoCapitalize="none"
-            value={email}
-            name="email"
-            onChange={(event: React.FormEvent<HTMLInputElement>) =>
-              setEmail(event.currentTarget.value)
-            }
-          />
-          <Label>Password:</Label>
-          <Input
-            value={password}
-            name="password"
-            type="password"
-            onChange={(event: React.FormEvent<HTMLInputElement>) =>
-              setPassword(event.currentTarget.value)
-            }
-          />
-          <span />
-          <Button onClick={() => onLogin()}>Anmelden</Button>
-          <Text sx={{ gridColumn: "2" }} fontWeight="bold" color="primary">
-            {message}
-          </Text>
-        </Grid>
-        {loading || (resultLogin.loading && "Loading...")}
+        <Card my={3}>
+          <Grid gap={2} columns={[0, 0, "1fr 3fr"]}>
+            <Label>Email:</Label>
+            <Input
+              autoFocus
+              autoCapitalize="none"
+              value={email}
+              name="email"
+              onChange={(event: React.FormEvent<HTMLInputElement>) =>
+                setEmail(event.currentTarget.value)
+              }
+            />
+            <Label>Password:</Label>
+            <Input
+              value={password}
+              name="password"
+              type="password"
+              onChange={(event: React.FormEvent<HTMLInputElement>) =>
+                setPassword(event.currentTarget.value)
+              }
+            />
+            <span />
+            <Button onClick={() => onLogin()}>Anmelden</Button>
+            <Text sx={{ gridColumn: "2" }} fontWeight="bold" color="primary">
+              {message}
+            </Text>
+          </Grid>
+          {loading || (resultLogin.loading && "Loading...")}
+        </Card>
       </Page>
     );
   }

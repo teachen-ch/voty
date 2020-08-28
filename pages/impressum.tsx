@@ -1,6 +1,6 @@
 import Head from "next/head";
 import { Page, PageHeading } from "components/Page";
-import { Box, Heading, Button, Text } from "rebass";
+import { Card, Button, Text } from "rebass";
 
 export default function Impressum() {
   function sendMail() {
@@ -18,7 +18,7 @@ export default function Impressum() {
         Voty ist ein Projekt des Vereins{" "}
         <a href="https://teachen.ch/verein-teachen/">«Teachen!»</a>
       </Text>
-      <Box my={3} bg="lightgray" p={3} px={4}>
+      <Card>
         <pre>
           Verein «Teachen!»
           <br />
@@ -26,7 +26,7 @@ export default function Impressum() {
           <br />
           3110 Münsingen
         </pre>
-      </Box>
+      </Card>
       <Text>
         <Button onClick={sendMail} role="button" className="button primary">
           Email senden
