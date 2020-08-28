@@ -36,6 +36,7 @@ export const permissions = shield({
       createUser: allow,
       emailVerification: allow,
       checkVerification: allow,
+      changePassword: isUser,
     },
     School: isUser,
     MinUser: allow,

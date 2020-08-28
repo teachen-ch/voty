@@ -5,6 +5,7 @@ import {
   login,
   sendVerificationEmail,
   checkVerification,
+  changePassword,
 } from "../util/authentication";
 import { stringArg } from "nexus/components/schema";
 
@@ -95,7 +96,13 @@ schema.extendType({
       resolve: async (_root, args, ctx) =>
         checkVerification(args.token, ctx.db),
     });
-    t.crud.createOneSchool();
-    t.crud.deleteOneSchool();
+    t.field("changePassword", {
+      type: "ResponseLogin",
+      args: {
+        password: stringArg(),
+      },
+      resolve: async (_root, args, ctx) =>
+        changePassword(args.password, ctx.req, ctx.db),
+    });
   },
 });

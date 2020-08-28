@@ -7,8 +7,10 @@ const httpLink = createHttpLink({
 });
 
 const authLink = setContext((_, { headers = {} }) => {
-  const token = localStorage.getItem("@token");
-  headers["x-access-token"] = token;
+  if (typeof localStorage !== "undefined") {
+    const token = localStorage.getItem("@token");
+    headers["x-access-token"] = token;
+  }
   return { headers };
 });
 const link = authLink.concat(httpLink);

@@ -110,7 +110,7 @@ export async function sendVerificationEmail(
       process.env.NODE_ENV !== "production" ? process.env.NODE_ENV : ""
     }`;
     const token = await createVerificationToken(prisma, email);
-    const url = `${process.env.BASE_URL}user/${purpose}?t=${token}`;
+    const url = `${process.env.BASE_URL}user/login?t=${token}&p=${purpose}`;
     const subjects = {
       verification: "voty: Bitte Email bestätigen",
       reset: "voty: Passwort zurücksetzen?",
@@ -121,6 +121,7 @@ export async function sendVerificationEmail(
     const conf = { email: email.replace(/\./g, " ."), url, site };
 
     await sendMail(from, email, subject, purpose, conf);
+    console.log("SEND SUCCESSFUL", email);
     return { token: "SENT..." };
   } catch (err) {
     console.error("Error sending verification email", err);
@@ -162,6 +163,27 @@ export async function checkVerification(token: string, prisma: PrismaClient) {
   return startJWTSession(user);
 }
 
+export async function changePassword(
+  password: string,
+  req: Request,
+  prisma: PrismaClient
+) {
+  console.log("password Change... check user");
+  const user = await getUser(req, prisma);
+  console.log("user: ", user);
+  const salt = await bcrypt.genSalt(10);
+  const hashed = await bcrypt.hash(password, salt);
+  const ok = await prisma.user.update({
+    where: { id: user.id },
+    data: { password: hashed },
+  });
+  if (ok) {
+    return startJWTSession(user);
+  } else {
+    return { error: "ERR_PASSWORD_CHANGE" };
+  }
+}
+
 async function verifyToken(token, prisma: PrismaClient) {
   const secret = process.env.SESSION_SECRET;
   const hashed = createHash("sha256").update(`${token}${secret}`).digest("hex");
@@ -169,12 +191,16 @@ async function verifyToken(token, prisma: PrismaClient) {
     where: { token: hashed },
   });
   if (!found) return false;
-  await prisma.verificationRequest.delete({ where: { token: hashed } });
+  if (found.expires.getMilliseconds() > Date.now()) return undefined;
+  deleteExpiredTokens(prisma);
+  return found;
+}
+
+async function deleteExpiredTokens(prisma) {
   const maxAge = 24 * 60 * 60 * 1000;
   const expired = new Date(Date.now() - 2 * maxAge);
+  // TODO: deleting old verification requests could be done in cronjob
   await prisma.verificationRequest.deleteMany({
     where: { expires: { lt: expired } },
   });
-  if (found.expires.getMilliseconds() > Date.now()) return undefined;
-  return found;
 }

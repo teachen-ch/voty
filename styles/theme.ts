@@ -61,6 +61,7 @@ export default {
     link: {
       color: "primary",
       textDecoration: "none",
+      cursor: "pointer",
     },
     nav: {
       fontSize: 1,
@@ -176,6 +177,7 @@ export default {
     muted: {
       bg: "muted",
       color: "white",
+      borderRadius: "0px",
       fontWeight: "bold",
     },
   },

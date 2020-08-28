@@ -1,4 +1,4 @@
-import { Flex, Box, Heading } from "rebass";
+import { Flex, Box, Heading, Text } from "rebass";
 
 export function Page({ children }: { children: React.ReactNode }) {
   return (
@@ -54,4 +54,12 @@ export const Container = (props) => (
       {props.children}
     </Flex>
   </Flex>
+);
+
+export const ErrorPage = (props) => (
+  <Page>
+    <PageHeading>Fehler</PageHeading>
+    <Heading as="h2">Oh je, es ist ein Fehler aufgetreten</Heading>
+    <Text>{props.children}</Text>
+  </Page>
 );

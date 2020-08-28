@@ -6,9 +6,11 @@ const app = require("nexus").default;
 const settings = require("nexus").settings;
 
 settings.change({
-  server: { path: "/api/graphql", cors: false },
+  server: { path: "/api/graphql" },
   logger: { filter: { level: "error" } },
 });
+
+settings.change({ server: { corse: false } });
 
 // Require your nexus modules here.
 // Do not write them inline, since the Nexus API is typed `any` because of `require` import.

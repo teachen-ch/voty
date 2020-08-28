@@ -346,6 +346,7 @@ type MinUser {
 }
 
 type Mutation {
+  changePassword(password: String): ResponseLogin
   checkVerification(token: String): ResponseLogin
   createOneSchool(data: SchoolCreateInput!): School!
   createUser(data: UserCreateInput!): User!
