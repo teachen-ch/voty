@@ -47,7 +47,6 @@ export default function Home() {
           gap={[0, "20px", "30px", "80px"]}
           columns={[1, 1, 3]}
           width="250px"
-          justifyContent="center"
         >
           <Flex
             textAlign="center"
