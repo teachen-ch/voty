@@ -109,6 +109,7 @@ function LoginForm({ setEmailError, setUser, setRequestReset }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const router = useRouter();
   const [doLogin, resultLogin] = useMutation(LOGIN, {
     onCompleted: (data) => {
       const err = data.login?.error;
@@ -162,6 +163,10 @@ function LoginForm({ setEmailError, setUser, setRequestReset }) {
           <span />
           <Button onClick={() => doLogin({ variables: { email, password } })}>
             Anmelden
+          </Button>
+          <span />
+          <Button onClick={() => router.push("/user/signup")} variant="outline">
+            Ich habe noch keinen Account
           </Button>
           <ErrorBox error={error} />
           <Text sx={{ gridColumn: "2" }}>

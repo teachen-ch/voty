@@ -1,11 +1,11 @@
 import Head from "next/head";
 import { Page, PageHeading } from "components/Page";
 import { Card, Text, Button } from "rebass";
-import { Input, Label, Select } from "@rebass/forms";
 import { Grid } from "theme-ui";
 import { gql, useMutation } from "@apollo/client";
 import { useState } from "react";
 import { useRouter } from "next/router";
+import { Formik, Form, Input, Select, Yup } from "../../components/forms";
 
 export const CREATE_USER = gql`
   mutation($data: UserCreateInput!) {
@@ -45,8 +45,10 @@ function Success({ user }) {
 function CreateUserForm({ setUser }) {
   const router = useRouter();
   const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
+  const [lastname, setLastname] = useState("");
   const [password, setPassword] = useState("");
-  const [role, setRole] = useState("");
+  const [role, setRole] = useState("USER");
   const [error, setError] = useState("");
   const [showLogin, setShowLogin] = useState(false);
   const [doCreateUser] = useMutation(CREATE_USER, {
@@ -74,58 +76,64 @@ function CreateUserForm({ setUser }) {
         Erstelle einen neuen Account für Voty. <br />
         Bitte nutze die Email-Adresse Deiner Schule.
       </Text>
-      <Card>
-        <Grid gap={2} columns={[0, 0, "1fr 3fr"]}>
-          <Label htmlFor="email">Email: </Label>
-          <Input
-            id="email"
-            name="email"
-            placeholder="name@meineschule.ch"
-            onChange={(event: React.FormEvent<HTMLInputElement>) =>
-              setEmail(event.currentTarget.value)
-            }
-          />
-          <Label htmlFor="password">Passwort: </Label>
-          <Input
-            id="password"
-            name="password"
-            type="password"
-            onChange={(event: React.FormEvent<HTMLInputElement>) =>
-              setPassword(event.currentTarget.value)
-            }
-          />
-          <Label htmlFor="role">Ich bin: </Label>
-          <Select
-            id="role"
-            onChange={(event: React.FormEvent<HTMLInputElement>) =>
-              setRole(event.currentTarget.value)
-            }
-          >
-            <option value="USER">---</option>
-            <option value="STUDENT">Schüler/-in</option>
-            <option value="TEACHER">Lehrer/-in</option>
-            <option value="PRINCIPAL">Schulleiter/-in</option>
-            <option value="USER">Weltenbürger/-in</option>
-          </Select>
-          <span />
-          <Button
-            onClick={() =>
-              doCreateUser({ variables: { data: { email, password, role } } })
-            }
-          >
-            Account erstellen
-          </Button>
-          <ErrorBox error={error} />
-          {showLogin && (
-            <>
+      <Formik
+        initialValues={{
+          email: "",
+          name: "",
+          lastname: "",
+          password: "",
+          role: "",
+        }}
+        onSubmit={(values) =>
+          doCreateUser({
+            variables: { data: values },
+          })
+        }
+        validationSchema={Yup.object({
+          name: Yup.string()
+            .min(3, "Bitte gib Deinen Vornamen an")
+            .required("Pflichtfeld"),
+          lastname: Yup.string()
+            .min(3, "Bitte gib Deinen Nachnamen an")
+            .required("Pflichtfeld"),
+          email: Yup.string()
+            .email("Bitte gib eine gültige Email-Adresse an")
+            .required("Pflichtfeld"),
+        })}
+      >
+        <Form>
+          <Card>
+            <Grid gap={2} columns={[0, 0, "1fr 3fr"]}>
+              <Input autoFocus label="Vorname:" name="name" />
+              <Input label="Nachname:" name="lastname" />
+              <Input
+                label="Email:"
+                name="email"
+                placeholder="name@meineschule.ch"
+              />
+              <Input label="Passwort" name="password" type="password" />
+              <Select label="Ich bin:" name="role">
+                <option value="USER">---</option>
+                <option value="STUDENT">Schüler/-in</option>
+                <option value="TEACHER">Lehrer/-in</option>
+                <option value="PRINCIPAL">Schulleiter/-in</option>
+                <option value="USER">Weltenbürger/-in</option>
+              </Select>
               <span />
-              <Button onClick={() => router.push("/user/login")}>
-                Möchstest Du Dich anmelden?
-              </Button>
-            </>
-          )}
-        </Grid>
-      </Card>
+              <Button type="submit">Account erstellen</Button>
+              <ErrorBox error={error} />
+              {showLogin && (
+                <>
+                  <span />
+                  <Button onClick={() => router.push("/user/login")}>
+                    Möchstest Du Dich anmelden?
+                  </Button>
+                </>
+              )}
+            </Grid>
+          </Card>
+        </Form>
+      </Formik>
     </Page>
   );
 }

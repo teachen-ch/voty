@@ -27,6 +27,7 @@
     "@types/theme-ui": "^0.3.6",
     "aws-sdk": "^2.727.1",
     "bcrypt": "^5.0.0",
+    "formik": "^2.1.5",
     "framer-motion": "^2.6.3",
     "jsonwebtoken": "^8.5.1",
     "mjml": "^4.6.3",
@@ -41,7 +42,8 @@
     "react-dom": "16.13.1",
     "react-player": "^2.6.0",
     "rebass": "^4.0.7",
-    "theme-ui": "^0.3.1"
+    "theme-ui": "^0.3.1",
+    "yup": "^0.29.3"
   },
   "devDependencies": {
     "@types/node": "^14.0.27",

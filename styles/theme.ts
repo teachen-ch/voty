@@ -2,7 +2,7 @@
 export default {
   // [ iphone SE / iPhone 6+ / iPad High / Desktop+iPad / Big Screen]
   breakpoints: ["400px", "600px", "1200px", "2000px"],
-  fontSizes: [11, 13, 17.5, 20, 24, 32, 40, 50],
+  fontSizes: [12, 13, 17.5, 20, 24, 32, 40, 50],
   colors: {
     text: "black",
     background: "white",

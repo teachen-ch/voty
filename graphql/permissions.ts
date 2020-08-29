@@ -40,7 +40,7 @@ export const permissions = shield({
     },
     School: isUser,
     MinUser: allow,
-    User: or(isOwn, isAdmin),
+    User: allow,
     Team: isUser,
     ResponseLogin: allow,
   },
