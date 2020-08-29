@@ -512,8 +512,10 @@ type ResponseLogin {
 
 enum Role {
   ADMIN
+  PRINCIPAL
   STUDENT
   TEACHER
+  USER
 }
 
 type School {

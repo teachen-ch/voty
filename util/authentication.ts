@@ -52,20 +52,28 @@ export async function createUserReq(req: NextApiRequest, prisma: PrismaClient) {
 }
 
 export async function createUser(input: any, prisma: PrismaClient) {
-  const { email, password, name, lastname, role } = input;
-  const salt = await bcrypt.genSalt(10);
-  const hashed = await bcrypt.hash(password, salt);
-  const user = await prisma.user.create({
-    data: {
-      name,
-      lastname,
-      email,
-      password: hashed,
-      role,
-    },
-  });
-  // console.log("User created", user);
-  return user;
+  try {
+    const { email, password, name, lastname, role } = input;
+    const salt = await bcrypt.genSalt(10);
+    const hashed = await bcrypt.hash(password, salt);
+
+    const user = await prisma.user.create({
+      data: {
+        name,
+        lastname,
+        email,
+        password: hashed,
+        role,
+      },
+    });
+
+    await sendVerificationEmail(email, "verification", prisma);
+    return user;
+  } catch (err) {
+    if (err.meta?.target && err.meta.target.indexOf("email") >= 0)
+      throw new Error("ERR_DUPLICATE_EMAIL");
+    else throw new Error("ERR_CREATE_USER");
+  }
 }
 
 export function getSession(req: NextApiRequest): any {

@@ -46,7 +46,7 @@ export const permissions = shield({
   },
   options: {
     allowExternalErrors: true,
-    debug: process.env.NODE_ENV !== "production",
+    debug: true,
     fallbackRule: deny,
   },
 });
