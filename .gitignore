@@ -32,12 +32,7 @@ yarn-debug.log*
 yarn-error.log*
 
 # local env files
-.env.local
-.env.development
-.env.development.local
-.env.test.local
-.env.production
-.env.production.local
+.env.*
 prisma/.env
 
 # vercel

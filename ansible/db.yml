@@ -1,0 +1,5 @@
+- hosts: web
+  vars_files: ../.env.ansible
+  roles:
+    - role: cron
+      tags: cron
