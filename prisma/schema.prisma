@@ -104,7 +104,7 @@ model Team {
   teacherId Int
   members   User[]   @relation("TeamMembers")
   ballots   Ballot[]
-  invite    String?
+  invite    String?  @unique
   domain    Domain?  @relation(fields: [domainId], references: [id])
   domainId  Int?
 

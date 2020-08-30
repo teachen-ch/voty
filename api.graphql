@@ -787,6 +787,7 @@ input TeamWhereInput {
 
 input TeamWhereUniqueInput {
   id: Int
+  invite: String
 }
 
 type Thread {

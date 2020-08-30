@@ -196,7 +196,6 @@ function VerificationForm({ email }) {
 
   const [doVerification, resultVerification] = useMutation(EMAIL_VERIFICATION, {
     onCompleted: (data) => {
-      console.log("DONE: ", data);
       if (data.emailVerification?.error) {
         setError(data.emailVerification.error);
       } else {
@@ -309,7 +308,6 @@ function RequestReset({ email }) {
   const [error, setError] = useState("");
   const [doRequestReset] = useMutation(EMAIL_VERIFICATION, {
     onCompleted: (data) => {
-      console.log("Email verification done", data);
       if (data.emailVerification?.error) {
         setError("Es ist ein Fehler aufgetreten.");
       } else {

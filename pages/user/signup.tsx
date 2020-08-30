@@ -86,7 +86,12 @@ function CreateUserForm({ setUser }) {
               validate: yup.string().min(3, "Dein Vorname ist etwas kurz"),
             },
             lastname: { label: "Nachname:", required: true },
-            email: { label: "Email:", required: true, type: "email" },
+            email: {
+              label: "Email:",
+              required: true,
+              type: "email",
+              placeholder: "name@meineschule.ch",
+            },
             password: {
               label: "Passwort:",
               type: "password",

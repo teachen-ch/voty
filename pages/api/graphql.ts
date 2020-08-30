@@ -24,6 +24,5 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   const session = await getSession(req);
   const user = session ? session.user : null;
   const reqWithSession = { ...req, session, user };
-  // console.log("Session: ", reqWithSession.user, reqWithSession.session);
   return app.server.handlers.graphql(reqWithSession, res);
 };

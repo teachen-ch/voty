@@ -25,6 +25,7 @@
     "@next/mdx": "^9.5.2",
     "@rebass/forms": "^4.0.6",
     "@types/theme-ui": "^0.3.6",
+    "@types/winston-mail": "^1.5.1",
     "aws-sdk": "^2.727.1",
     "bcrypt": "^5.0.0",
     "formik": "^2.1.5",
@@ -44,6 +45,8 @@
     "react-player": "^2.6.0",
     "rebass": "^4.0.7",
     "theme-ui": "^0.3.1",
+    "winston": "^3.3.3",
+    "winston-mail": "^2.0.0",
     "yup": "^0.29.3"
   },
   "devDependencies": {

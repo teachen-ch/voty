@@ -2,6 +2,7 @@ import nodemailer from "nodemailer";
 import { promises as fs } from "fs";
 import Mustache from "mustache";
 import mjml2html from "mjml";
+import logger from "./logger";
 
 const server = {
   host: process.env.SMTP_HOST,
@@ -32,7 +33,7 @@ export async function sendMail(
       html,
     });
   } catch (error) {
-    console.error("SEND_VERIFICATION_EMAIL_ERROR", to, error);
+    logger.error("SEND_VERIFICATION_EMAIL_ERROR", to, error);
     throw new Error("SEND_VERIFICATION_EMAIL_ERROR" + error);
   }
 }

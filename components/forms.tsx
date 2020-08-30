@@ -49,9 +49,16 @@ export function QForm({ fields, mutation, ...props }) {
     const initialValues = {};
 
     Object.keys(fields).forEach((name) => {
-      let { label, type, required, options, validate, init } = fields[name];
+      let {
+        label,
+        type,
+        required,
+        options,
+        validate,
+        init,
+        placeholder,
+      } = fields[name];
       initialValues[name] = typeof init !== "undefined" ? init : "";
-      // console.error("INIT", name, label, type, required ? "true" : "no");
       if (!validate) {
         const yupTypes = {
           string: yup.string(),
@@ -69,8 +76,7 @@ export function QForm({ fields, mutation, ...props }) {
         validate = validate.required("Pflichtfeld");
       }
       if (validate) validationSchema[name] = validate;
-      // console.log("FIELD: ", { name, label, type, required, options, validate });
-      fieldArr.push({ name, label, type, required, options });
+      fieldArr.push({ name, label, type, required, options, placeholder });
     });
 
     return {
@@ -104,10 +110,11 @@ export function QForm({ fields, mutation, ...props }) {
     } else {
       return (
         <Input
+          type={field.type}
           key={field.name}
           label={field.label}
           name={field.name}
-          type={field.type}
+          placeholder={field.placeholder}
         />
       );
     }

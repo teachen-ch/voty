@@ -5,6 +5,7 @@ import bcrypt from "bcrypt";
 import { Request } from "nexus/dist/runtime/schema/schema";
 import { sendMail } from "./email";
 import { randomBytes, createHash } from "crypto";
+import logger from "./logger";
 
 const secret = process.env.SESSION_SECRET;
 const expires = process.env.SESSION_EXPIRES;
@@ -30,10 +31,12 @@ export async function login(
     if (!user.emailVerified) {
       return { error: "ERR_EMAIL_NOT_VERIFIED" };
     }
-
+    logger.mail("a user logged in... " + user.email);
+    logger.info("we will rock you");
+    throw new Error("Bllaa");
     return startJWTSession(user);
   } catch (err) {
-    console.error(err);
+    logger.error(err.message);
     return { error: err.message };
   }
 }
@@ -48,10 +51,8 @@ function startJWTSession(user: User): ResponseLogin {
 export async function createUser(input: any, prisma: PrismaClient) {
   try {
     const { email, password, name, lastname, role } = input;
-    console.log("Trying... ", email, password);
     const salt = await bcrypt.genSalt(10);
     const hashed = await bcrypt.hash(password, salt);
-    console.log(hashed);
     const user = await prisma.user.create({
       data: {
         name,
@@ -63,12 +64,13 @@ export async function createUser(input: any, prisma: PrismaClient) {
     });
 
     await sendVerificationEmail(email, "verification", prisma);
+    logger.mail(`New user created: ${name} ${lastname} <${email}>: ${role}`);
     return user;
   } catch (err) {
     if (err.meta?.target && err.meta.target.indexOf("email") >= 0) {
       throw new Error("ERR_DUPLICATE_EMAIL");
     }
-    console.error(err);
+    logger.error(err);
     throw new Error("ERR_CREATE_USER");
   }
 }
@@ -90,7 +92,7 @@ export async function getUser(
       return await prisma.user.findOne({ where: { email: req.user.email } });
     }
   } catch (err) {
-    console.log("error calling /me", err);
+    logger.info("error calling /me", err);
   }
 }
 
@@ -98,7 +100,7 @@ export function verifyJWT(token) {
   try {
     return jwt.verify(token, secret);
   } catch (err) {
-    // console.log("Error verifying token", err.message, token);
+    // logger.info("Error verifying token", err.message, token);
     return null;
   }
 }
@@ -126,10 +128,10 @@ export async function sendVerificationEmail(
     const conf = { email: email.replace(/\./g, " ."), url, site };
 
     await sendMail(from, email, subject, purpose, conf);
-    console.log("SEND SUCCESSFUL", email);
+    logger.info("SEND SUCCESSFUL", email);
     return { token: "SENT..." };
   } catch (err) {
-    console.error("Error sending verification email", err);
+    logger.error("Error sending verification email", err);
     return { error: "ERR_SEND_EMAIL_VERIFICATION" };
   }
 }
@@ -173,9 +175,9 @@ export async function changePassword(
   req: Request,
   prisma: PrismaClient
 ) {
-  console.log("password Change... check user");
+  logger.info("password Change... check user");
   const user = await getUser(req, prisma);
-  console.log("user: ", user);
+  logger.info("user: ", user);
   const salt = await bcrypt.genSalt(10);
   const hashed = await bcrypt.hash(password, salt);
   const ok = await prisma.user.update({
