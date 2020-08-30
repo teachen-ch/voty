@@ -30,6 +30,7 @@
     "formik": "^2.1.5",
     "framer-motion": "^2.6.3",
     "jsonwebtoken": "^8.5.1",
+    "lodash": "^4.17.20",
     "mjml": "^4.6.3",
     "mustache": "^4.0.1",
     "next": "9.5.1",

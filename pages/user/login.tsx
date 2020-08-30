@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { useRouter, Router } from "next/router";
+import { useRouter } from "next/router";
 import { Page, PageHeading, ErrorPage } from "components/Page";
 import { gql, useMutation, useQuery } from "@apollo/client";
 import { useState, useEffect } from "react";
@@ -70,7 +70,10 @@ export default function Login() {
   const [user, setUser] = useState();
   const [requestReset, setRequestReset] = useState("");
   const [emailError, setEmailError] = useState("");
-  useQuery(ME, {
+
+  // check, whether there is already an active session
+  const { loading: checkLogin } = useQuery(ME, {
+    fetchPolicy: "network-only",
     onCompleted: (data) => {
       if (data) {
         setUser(data.me);
@@ -80,6 +83,14 @@ export default function Login() {
     },
   });
 
+  if (checkLogin) {
+    return (
+      <Page>
+        <PageHeading>Anmelden</PageHeading>
+        <Text>Einen kurzen Moment…</Text>
+      </Page>
+    );
+  }
   if (user) {
     return <LoggedIn user={user} setUser={setUser} />;
   }

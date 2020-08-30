@@ -159,12 +159,18 @@ export default {
       borderRadius: "0px",
       cursor: "pointer",
     },
+    white: {
+      variant: "buttons.primary",
+      color: "primary",
+      bg: "rgba(255,255,255,0.5)",
+      borderRadius: "0px",
+      borderWidth: "3px",
+      cursor: "pointer",
+    },
     outline: {
       variant: "buttons.primary",
       color: "primary",
-      bg: "transparent",
-      boxShadow: "inset 0 0 2px",
-      borderRadius: "0px",
+      bg: "white",
       cursor: "pointer",
     },
     full: {

@@ -39,24 +39,19 @@ export async function login(
 }
 
 function startJWTSession(user: User): ResponseLogin {
-  const expiry = Math.round(Date.now() / 1000) + expires;
-  const token: string = jwt.sign({ user, expiry }, secret, {
-    expiresIn: expires,
+  const token: string = jwt.sign({ user }, secret, {
+    expiresIn: "1d",
   });
   return { token, user };
-}
-
-export async function createUserReq(req: NextApiRequest, prisma: PrismaClient) {
-  const { email, password, name, lastname, role } = req.body;
-  return createUser({ email, password, name, lastname, role }, prisma);
 }
 
 export async function createUser(input: any, prisma: PrismaClient) {
   try {
     const { email, password, name, lastname, role } = input;
+    console.log("Trying... ", email, password);
     const salt = await bcrypt.genSalt(10);
     const hashed = await bcrypt.hash(password, salt);
-
+    console.log(hashed);
     const user = await prisma.user.create({
       data: {
         name,
@@ -70,9 +65,11 @@ export async function createUser(input: any, prisma: PrismaClient) {
     await sendVerificationEmail(email, "verification", prisma);
     return user;
   } catch (err) {
-    if (err.meta?.target && err.meta.target.indexOf("email") >= 0)
+    if (err.meta?.target && err.meta.target.indexOf("email") >= 0) {
       throw new Error("ERR_DUPLICATE_EMAIL");
-    else throw new Error("ERR_CREATE_USER");
+    }
+    console.error(err);
+    throw new Error("ERR_CREATE_USER");
   }
 }
 
@@ -101,7 +98,7 @@ export function verifyJWT(token) {
   try {
     return jwt.verify(token, secret);
   } catch (err) {
-    console.log("Error verifying token", err.message, token);
+    // console.log("Error verifying token", err.message, token);
     return null;
   }
 }

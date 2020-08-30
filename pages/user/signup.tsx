@@ -5,7 +5,7 @@ import { Grid } from "theme-ui";
 import { gql, useMutation } from "@apollo/client";
 import { useState } from "react";
 import { useRouter } from "next/router";
-import { Formik, Form, Input, Select, Yup } from "../../components/forms";
+import { QForm, yup } from "../../components/forms";
 
 export const CREATE_USER = gql`
   mutation($data: UserCreateInput!) {
@@ -76,64 +76,53 @@ function CreateUserForm({ setUser }) {
         Erstelle einen neuen Account für Voty. <br />
         Bitte nutze die Email-Adresse Deiner Schule.
       </Text>
-      <Formik
-        initialValues={{
-          email: "",
-          name: "",
-          lastname: "",
-          password: "",
-          role: "",
-        }}
-        onSubmit={(values) =>
-          doCreateUser({
-            variables: { data: values },
-          })
-        }
-        validationSchema={Yup.object({
-          name: Yup.string()
-            .min(3, "Bitte gib Deinen Vornamen an")
-            .required("Pflichtfeld"),
-          lastname: Yup.string()
-            .min(3, "Bitte gib Deinen Nachnamen an")
-            .required("Pflichtfeld"),
-          email: Yup.string()
-            .email("Bitte gib eine gültige Email-Adresse an")
-            .required("Pflichtfeld"),
-        })}
-      >
-        <Form>
-          <Card>
-            <Grid gap={2} columns={[0, 0, "1fr 3fr"]}>
-              <Input autoFocus label="Vorname:" name="name" />
-              <Input label="Nachname:" name="lastname" />
-              <Input
-                label="Email:"
-                name="email"
-                placeholder="name@meineschule.ch"
-              />
-              <Input label="Passwort" name="password" type="password" />
-              <Select label="Ich bin:" name="role">
-                <option value="USER">---</option>
-                <option value="STUDENT">Schüler/-in</option>
-                <option value="TEACHER">Lehrer/-in</option>
-                <option value="PRINCIPAL">Schulleiter/-in</option>
-                <option value="USER">Weltenbürger/-in</option>
-              </Select>
+      <Card>
+        <QForm
+          mutation={doCreateUser}
+          fields={{
+            name: {
+              label: "Vorname:",
+              required: true,
+              validate: yup.string().min(3, "Dein Vorname ist etwas kurz"),
+            },
+            lastname: { label: "Nachname:", required: true },
+            email: { label: "Email:", required: true, type: "email" },
+            password: {
+              label: "Passwort:",
+              type: "password",
+              required: true,
+              validate: yup
+                .string()
+                .min(6, "Dein Passwort ist etwas sehr kurz..."),
+            },
+            // watch out: password2 would also be sent to server which barks
+            //password2: yup.string().oneOf([yup.ref('password'), null], 'Passwords must match')
+            role: {
+              label: "Ich bin:",
+              init: "STUDENT",
+              required: true,
+              options: {
+                "---": "UNKOWN",
+                "Schüler/-in": "STUDENT",
+                "Lehrer/-in": "TEACHER",
+                "Schulleiter/-in": "PRINCIPAL",
+                "Weltenbürger/-in": "UNKOWN",
+              },
+            },
+            submit: { type: "submit", label: "Account erstellen" },
+          }}
+        >
+          <ErrorBox error={error} my={4} />
+          {showLogin && (
+            <>
               <span />
-              <Button type="submit">Account erstellen</Button>
-              <ErrorBox error={error} />
-              {showLogin && (
-                <>
-                  <span />
-                  <Button onClick={() => router.push("/user/login")}>
-                    Möchstest Du Dich anmelden?
-                  </Button>
-                </>
-              )}
-            </Grid>
-          </Card>
-        </Form>
-      </Formik>
+              <Button onClick={() => router.push("/user/login")}>
+                Möchstest Du Dich anmelden?
+              </Button>
+            </>
+          )}
+        </QForm>
+      </Card>
     </Page>
   );
 }
