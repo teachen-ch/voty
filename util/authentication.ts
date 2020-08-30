@@ -31,9 +31,7 @@ export async function login(
     if (!user.emailVerified) {
       return { error: "ERR_EMAIL_NOT_VERIFIED" };
     }
-    logger.mail("a user logged in... " + user.email);
-    logger.info("we will rock you");
-    throw new Error("Bllaa");
+    // logger.mail("a user logged in... " + user.email);
     return startJWTSession(user);
   } catch (err) {
     logger.error(err.message);

@@ -37,3 +37,6 @@ prisma/.env
 
 # vercel
 .vercel
+
+# voty
+logs/
