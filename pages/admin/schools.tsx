@@ -19,7 +19,15 @@ const GET_SCHOOLS = gql`
   }
 `;
 
-export default function Schools() {
+export default function SchoolsPage() {
+  return (
+    <Page heading="Schulen">
+      <Schools />
+    </Page>
+  );
+}
+
+export function Schools() {
   const schools = useQuery(GET_SCHOOLS);
 
   if (schools.error) {
@@ -37,26 +45,28 @@ export default function Schools() {
     );
   }
   return (
-    <Page>
-      <h1>Schulen</h1>
-      <h2>Auflistung aller voty Schulen</h2>
+    <>
       <table>
-        <tr>
-          <th>#</th>
-          <th>Name</th>
-          <th>City</th>
-          <th>Members</th>
-        </tr>
-
-        {schools.data.schools.map((school: any) => (
-          <tr key={school.id}>
-            <td>{school.id}</td>
-            <td>{school.name}</td>
-            <td>{school.city}</td>
-            <td>{school.members ? school.members.length : "-"}</td>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>City</th>
+            <th>Members</th>
           </tr>
-        ))}
+        </thead>
+
+        <tbody>
+          {schools.data.schools.map((school: any) => (
+            <tr key={school.id}>
+              <td>{school.id}</td>
+              <td>{school.name}</td>
+              <td>{school.city}</td>
+              <td>{school.members ? school.members.length : "-"}</td>
+            </tr>
+          ))}
+        </tbody>
       </table>
-    </Page>
+    </>
   );
 }

@@ -1,6 +1,5 @@
-import Head from "next/head";
 import Newsletter from "components/Newsletter";
-import { Page, PageHeading } from "components/Page";
+import { Page } from "components/Page";
 import { Card, Heading, Text, Button } from "rebass";
 
 export default function Kontakt() {
@@ -9,11 +8,7 @@ export default function Kontakt() {
     document.location.href = email.split("").reverse().join("");
   }
   return (
-    <Page>
-      <Head>
-        <title>voty - Kontakt</title>
-      </Head>
-      <PageHeading>Kontakt</PageHeading>
+    <Page heading="Kontakt">
       <Heading as="h2">Feedback oder Fragen?</Heading>
       <Text>
         Für Feedback, Anregungen und Fragen freuen wir uns auf eure Email:

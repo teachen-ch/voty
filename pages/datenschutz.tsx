@@ -1,15 +1,14 @@
 import Head from "next/head";
-import { Page, PageHeading } from "components/Page";
+import { Page } from "components/Page";
 import { Box, Link, Heading, Text } from "rebass";
 
 export default function Datenschutz() {
   return (
-    <Page>
+    <Page heading="Datenschutz">
       <Head>
         <title>voty - Datenschutz</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <PageHeading>Datenschutz</PageHeading>
       <Heading as="h2">
         Welche personenbezogenen Daten wir sammeln und warum
       </Heading>

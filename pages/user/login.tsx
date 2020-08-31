@@ -1,11 +1,16 @@
-import Head from "next/head";
 import { useRouter } from "next/router";
-import { Page, PageHeading, ErrorPage } from "components/Page";
+import { Page } from "components/Page";
 import { gql, useMutation, useQuery } from "@apollo/client";
 import { useState, useEffect } from "react";
-import { Card, Text, Link, Button } from "rebass";
+import { Card, Text, Link, Button, Heading } from "rebass";
 import { Grid } from "theme-ui";
 import { Label, Input } from "@rebass/forms";
+import {
+  useAccessToken,
+  useSetAccessToken,
+  useUser,
+  useSetUser,
+} from "../../state/user";
 
 export const LOGIN = gql`
   mutation($email: String!, $password: String!) {
@@ -15,6 +20,8 @@ export const LOGIN = gql`
         id
         name
         lastname
+        role
+        email
       }
       error
     }
@@ -57,6 +64,8 @@ export const CHECK_VERIFICATION = gql`
         id
         name
         lastname
+        email
+        role
       }
       error
     }
@@ -66,10 +75,8 @@ export const CHECK_VERIFICATION = gql`
 export default function Login() {
   const { t: token } = useRouter().query;
   const { p: purpose } = useRouter().query;
-
-  const [user, setUser] = useState();
-  const [requestReset, setRequestReset] = useState("");
-  const [emailError, setEmailError] = useState("");
+  const user = useUser();
+  const setUser = useSetUser();
 
   // check, whether there is already an active session
   const { loading: checkLogin } = useQuery(ME, {
@@ -85,42 +92,48 @@ export default function Login() {
 
   if (checkLogin) {
     return (
-      <Page>
-        <PageHeading>Anmelden</PageHeading>
+      <Page heading="Anmelden">
         <Text>Einen kurzen Moment…</Text>
       </Page>
     );
   }
   if (user) {
-    return <LoggedIn user={user} setUser={setUser} />;
-  }
-  if (requestReset) {
-    return <RequestReset email={requestReset} />;
-  }
-
-  if (emailError) {
-    return <VerificationForm email={emailError} />;
+    return (
+      <Page heading="Angemeldet">
+        <AfterLogin />
+      </Page>
+    );
   }
 
   // purpose: verification, reset, login
   if (token) {
-    return <CheckToken token={token} purpose={purpose} setUser={setUser} />;
+    return (
+      <Page heading="Anmelden">
+        <CheckToken token={token} purpose={purpose} />
+      </Page>
+    );
   } else {
     return (
-      <LoginForm
-        setEmailError={setEmailError}
-        setUser={setUser}
-        setRequestReset={setRequestReset}
-      />
+      <Page heading="Anmelden">
+        <Text>
+          Hier kannst Du dich mit Deiner Schul-Emailadresse anmelden, wenn Du
+          bereits einen Benutzeraccount bei voty hast.
+        </Text>
+        <LoginForm />
+      </Page>
     );
   }
 }
 
-function LoginForm({ setEmailError, setUser, setRequestReset }) {
+export function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [emailError, setEmailError] = useState("");
+  const [requestReset, setRequestReset] = useState(undefined);
   const [error, setError] = useState("");
   const router = useRouter();
+  const setUser = useSetUser();
+  const setAccessToken = useSetAccessToken();
   const [doLogin, resultLogin] = useMutation(LOGIN, {
     onCompleted: (data) => {
       const err = data.login?.error;
@@ -132,24 +145,19 @@ function LoginForm({ setEmailError, setUser, setRequestReset }) {
       }
       if (!err) {
         setUser(data.login.user);
-        localStorage.setItem("@token", data.login.token);
+        setAccessToken(data.login.token);
       }
     },
   });
-  function requestReset() {
-    if (email) {
-      setRequestReset(email);
-    } else {
-      setError("Bitte gib Deine Email-Adresse ein");
-    }
+  if (typeof requestReset === "string") {
+    return <RequestReset email={requestReset} />;
+  }
+
+  if (emailError) {
+    return <VerificationForm email={emailError} />;
   }
   return (
-    <Page>
-      <PageHeading>Anmeldung</PageHeading>
-      <Text>
-        Hier kannst Du dich mit Deiner Schul-Emailadresse anmelden, wenn Du
-        bereits einen Benutzeraccount bei voty hast.
-      </Text>
+    <>
       <Card my={3}>
         <Grid gap={2} columns={[0, 0, "1fr 3fr"]}>
           <Label>Email:</Label>
@@ -163,6 +171,7 @@ function LoginForm({ setEmailError, setUser, setRequestReset }) {
             }
           />
           <Label>Password:</Label>
+
           <Input
             value={password}
             name="password"
@@ -171,9 +180,10 @@ function LoginForm({ setEmailError, setUser, setRequestReset }) {
               setPassword(event.currentTarget.value)
             }
           />
+
           <span />
           <Button onClick={() => doLogin({ variables: { email, password } })}>
-            Anmelden
+            "Anmelden"
           </Button>
           <span />
           <Button onClick={() => router.push("/user/signup")} variant="outline">
@@ -181,12 +191,14 @@ function LoginForm({ setEmailError, setUser, setRequestReset }) {
           </Button>
           <ErrorBox error={error} />
           <Text sx={{ gridColumn: "2" }}>
-            <Link onClick={requestReset}>Passwort vergessen?</Link> Wir können
-            Dir ein Email schicken…
+            <Link onClick={() => setRequestReset(email ? email : "")}>
+              Passwort vergessen?
+            </Link>{" "}
+            Wir können Dir ein Email schicken…
           </Text>
         </Grid>
       </Card>
-    </Page>
+    </>
   );
 }
 
@@ -204,8 +216,8 @@ function VerificationForm({ email }) {
     },
   });
   return (
-    <Page>
-      <PageHeading>Email bestätigen</PageHeading>
+    <>
+      <Heading as="h2">Email bestätigen</Heading>
       <Text mb={4}>
         Deine Email-Adresse «{email}» wurde noch nicht bestätigt.
         <br />
@@ -222,30 +234,67 @@ function VerificationForm({ email }) {
       >
         {mailSent ? "Email verschickt!" : "Email schicken"}
       </Button>
-    </Page>
+    </>
   );
 }
 
-function LoggedIn({ user, setUser }) {
+function AfterLogin() {
+  const user = useUser();
+  const router = useRouter();
+
+  if (user && user.role) {
+    let page = "";
+    switch (user.role) {
+      case "TEACHER":
+        page = "/user/teacher";
+        break;
+      case "STUDENT":
+        page = "/user/student";
+        break;
+      case "ADMIN":
+        page = "/admin";
+        break;
+      default:
+        page = "/";
+    }
+
+    const next = () => router.push(page);
+    setTimeout(next, 2000);
+    return (
+      <>
+        <Heading as="h2">Super, Du bist angemeldet.</Heading>
+        <Button onClick={next}>Zu Deiner Startseite</Button>
+      </>
+    );
+  } else {
+    return (
+      <Heading as="h2">
+        Etwas ist hier schief... Du hast keine Rolle im System hinterlegt :-/
+      </Heading>
+    );
+  }
+}
+
+export function LogoutButton({ onSuccess = null, ...props }) {
+  const setUser = useSetUser();
+  const setAccessToken = useSetAccessToken();
+  const router = useRouter();
+
   function onLogout() {
-    localStorage.setItem("@token", "");
+    setAccessToken("");
     setUser(undefined);
-    /*setPassword("");
-    setEmail("");
-    setError("");*/
+    if (onSuccess) onSuccess();
   }
   return (
-    <Page>
-      <PageHeading>Angemeldet</PageHeading>
-      <Text mb={4}>
-        Du bist angemeldet als «{user.name} {user.lastname}»
-      </Text>
-      <Button onClick={() => onLogout()}>Abmelden</Button>
-    </Page>
+    <Button onClick={() => onLogout()} {...props}>
+      Abmelden
+    </Button>
   );
 }
 
-function CheckToken({ token, purpose, setUser }) {
+function CheckToken({ token, purpose }) {
+  const setUser = useSetUser();
+  const setAccessToken = useSetAccessToken();
   const [error, setError] = useState("");
   const [tempUser, setTempUser] = useState();
   const router = useRouter();
@@ -255,7 +304,7 @@ function CheckToken({ token, purpose, setUser }) {
         setError("Dieser Email-Link ist leider nicht mehr gültig.");
       } else {
         setTempUser(data.checkVerification.user);
-        localStorage.setItem("@token", data.checkVerification.token);
+        setAccessToken(data.checkVerification.token);
       }
     },
   });
@@ -272,11 +321,11 @@ function CheckToken({ token, purpose, setUser }) {
     }
     if (purpose === "verification") {
       return (
-        <Page>
-          <PageHeading>Email bestätigt</PageHeading>
+        <>
+          <Heading as="h2">Email bestätigt</Heading>
           <Text mb={4}>Super, Deine Email-Adresse ist nun bestätigt.</Text>
           <Button onClick={() => router.push("/")}>Weiter geht's</Button>
-        </Page>
+        </>
       );
     }
     if (purpose === "reset") {
@@ -286,25 +335,22 @@ function CheckToken({ token, purpose, setUser }) {
 
   if (error) {
     return (
-      <Page>
-        <PageHeading>Fehler</PageHeading>
+      <>
+        <Heading as="h2">Fehler</Heading>
         <Text mb={4}>{error}</Text>
         <Button as="a" href="/user/login">
           zurück
         </Button>
-      </Page>
+      </>
     );
   }
 
-  return (
-    <Page>
-      <PageHeading>Überprüfen…</PageHeading>
-    </Page>
-  );
+  return <Text>Überprüfen</Text>;
 }
 
 function RequestReset({ email }) {
   const [mailSent, setMailSent] = useState(false);
+  const [emailField, setEmailField] = useState(email);
   const [error, setError] = useState("");
   const [doRequestReset] = useMutation(EMAIL_VERIFICATION, {
     onCompleted: (data) => {
@@ -317,24 +363,43 @@ function RequestReset({ email }) {
   });
 
   return (
-    <Page>
-      <PageHeading>Passwort zurücksetzen</PageHeading>
-      <Text>Du hast Dein Passwort vergessen?</Text>
-      <Text mb={4}>
-        Wir schicken Dir eine Email an «{email}
-        », dann kannst Du es zurücksetzen.
-      </Text>
-      <Button
-        onClick={() =>
-          doRequestReset({ variables: { email, purpose: "reset" } })
-        }
-        variant={mailSent ? "muted" : "primary"}
-        disabled={mailSent}
-      >
-        {mailSent ? "Email verschickt!" : "Email schicken"}
-      </Button>
-      <ErrorBox error={error} />
-    </Page>
+    <>
+      <Card my={3}>
+        <Heading as="h2" mt={0}>
+          Passwort zurücksetzen
+        </Heading>
+        <Text mb={4}>
+          Du hast Dein Passwort vergessen? Wir schicken Dir eine Email, dann
+          kannst Du es zurücksetzen.
+        </Text>
+        <Grid gap={2} columns={[0, 0, "1fr 3fr"]}>
+          <Label>Email:</Label>
+          <Input
+            autoFocus
+            autoCapitalize="none"
+            value={emailField}
+            name="email"
+            onChange={(event: React.FormEvent<HTMLInputElement>) =>
+              setEmailField(event.currentTarget.value)
+            }
+          />
+          <span />
+          <Button
+            onClick={() =>
+              doRequestReset({
+                variables: { email: emailField, purpose: "reset" },
+              })
+            }
+            variant={mailSent ? "muted" : "primary"}
+            disabled={mailSent}
+          >
+            {mailSent ? "Email verschickt!" : "Email schicken"}
+          </Button>
+          <span />
+          <ErrorBox error={error} />
+        </Grid>
+      </Card>
+    </>
   );
 }
 
@@ -363,16 +428,16 @@ function PasswordResetForm({ finished }) {
   }
   if (success) {
     return (
-      <Page>
-        <PageHeading>Passwort geändert</PageHeading>
+      <>
+        <Heading as="h2">Passwort geändert</Heading>
         <Text mb={4}>Super, das hat geklappt.</Text>
         <Button onClick={() => router.push("/")}>Weiter geht's</Button>
-      </Page>
+      </>
     );
   }
   return (
-    <Page>
-      <PageHeading>Passwort ändern</PageHeading>
+    <>
+      <Heading as="h2">Passwort ändern</Heading>
       <Card my={3}>
         <Grid gap={2} columns={[0, 0, "1fr 3fr"]}>
           <Label>Neues Passwort:</Label>
@@ -402,7 +467,7 @@ function PasswordResetForm({ finished }) {
           <ErrorBox error={error} />
         </Grid>
       </Card>
-    </Page>
+    </>
   );
 }
 

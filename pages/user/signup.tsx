@@ -1,5 +1,4 @@
-import Head from "next/head";
-import { Page, PageHeading } from "components/Page";
+import { Page } from "components/Page";
 import { Card, Text, Button } from "rebass";
 import { Grid } from "theme-ui";
 import { gql, useMutation } from "@apollo/client";
@@ -28,11 +27,7 @@ export default function Signup() {
 
 function Success({ user }) {
   return (
-    <Page>
-      <Head>
-        <title>voty - Neuer Account</title>
-      </Head>
-      <PageHeading>Account erstellt</PageHeading>
+    <Page heading="Account erstellt">
       <Text>
         Hallo {user.name} 👋 Dein neuer Account wurde gestellt und wir haben
         eine Email an «{user.email}» geschickt. Bitte öffne den Link in diesem
@@ -67,11 +62,7 @@ function CreateUserForm({ setUser }) {
     },
   });
   return (
-    <Page>
-      <Head>
-        <title>voty - Neuer Account</title>
-      </Head>
-      <PageHeading>Erstelle einen neuen Account</PageHeading>
+    <Page heading="Erstelle einen neuen Account">
       <Text>
         Erstelle einen neuen Account für Voty. <br />
         Bitte nutze die Email-Adresse Deiner Schule.

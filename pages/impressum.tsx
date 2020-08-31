@@ -1,5 +1,4 @@
-import Head from "next/head";
-import { Page, PageHeading } from "components/Page";
+import { Page } from "components/Page";
 import { Card, Button, Text } from "rebass";
 
 export default function Impressum() {
@@ -8,12 +7,7 @@ export default function Impressum() {
     document.location.href = email.split("").reverse().join("");
   }
   return (
-    <Page>
-      <Head>
-        <title>voty - Datenschutz</title>
-      </Head>
-
-      <PageHeading>Impressum</PageHeading>
+    <Page heading="Impressum">
       <Text>
         Voty ist ein Projekt des Vereins{" "}
         <a href="https://teachen.ch/verein-teachen/">«Teachen!»</a>

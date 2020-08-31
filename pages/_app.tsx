@@ -1,5 +1,3 @@
-// import "../styles/chota.css";
-// import "../styles/voty.css";
 import "../styles/new.css";
 
 import { ApolloProvider } from "@apollo/client";
@@ -8,6 +6,7 @@ import theme from "styles/theme";
 import { ThemeProvider } from "theme-ui";
 
 import apollo from "util/apollo";
+import { RecoilRoot } from "recoil";
 import Menu from "components/Menu";
 import { Footer } from "components/Footer";
 import { Header } from "components/Header";
@@ -17,14 +16,16 @@ function MyApp({ Component, pageProps }) {
   return (
     <div className="container">
       <ApolloProvider client={apollo}>
-        <ThemeProvider theme={theme}>
-          <MDXProvider components={{ wrapper: MDXWrapper }}>
-            <Header />
-            <Menu />
-            <Component {...pageProps} />
-            <Footer />
-          </MDXProvider>
-        </ThemeProvider>
+        <RecoilRoot>
+          <ThemeProvider theme={theme}>
+            <MDXProvider components={{ wrapper: MDXWrapper }}>
+              <Header />
+              <Menu />
+              <Component {...pageProps} />
+              <Footer />
+            </MDXProvider>
+          </ThemeProvider>
+        </RecoilRoot>
       </ApolloProvider>
     </div>
   );

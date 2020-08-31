@@ -1,6 +1,5 @@
-import Head from "next/head";
 import Newsletter from "components/Newsletter";
-import { Page, PageHeading } from "components/Page";
+import { Page } from "components/Page";
 import { Card, Heading, Text } from "rebass";
 
 export default function Kontakt() {
@@ -9,12 +8,7 @@ export default function Kontakt() {
     document.location.href = email.split("").reverse().join("");
   }
   return (
-    <Page>
-      <Head>
-        <title>voty - Kontakt</title>
-      </Head>
-      <PageHeading>Newsletter</PageHeading>
-
+    <Page heading="Newsletter">
       <Text mb={2}>&nbsp;</Text>
       <Card id="newsletter">
         <Heading as="h2" my={0}>

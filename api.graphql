@@ -507,7 +507,7 @@ input ReactionWhereUniqueInput {
 type ResponseLogin {
   error: String
   token: String
-  user: MinUser
+  user: User
 }
 
 enum Role {

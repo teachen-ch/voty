@@ -1,6 +1,17 @@
 import { Flex, Box, Heading, Text } from "rebass";
+import Head from "next/head";
+import { Role } from "@prisma/client";
+import { useUser } from "state/user";
+import { LoginForm } from "pages/user/login";
+import { ReactNode } from "react";
 
-export function Page({ children }: { children: React.ReactNode }) {
+export function Page({
+  children,
+  heading,
+}: {
+  children?: React.ReactNode;
+  heading?: String;
+}) {
   return (
     <Flex
       maxWidth={["100%", "100%", "1000px", "1200px"]}
@@ -25,10 +36,41 @@ export function Page({ children }: { children: React.ReactNode }) {
         sx={{ minWidth: "min(100%, 800px)" }}
         maxWidth="800px"
       >
+        {heading && <PageHeading>{heading}</PageHeading>}
+        {heading && (
+          <Head>
+            <title>voty – {heading}</title>
+          </Head>
+        )}
         {children}
       </Box>
     </Flex>
   );
+}
+
+export function LoggedInPage({
+  role,
+  children,
+  heading,
+}: {
+  role?: Role;
+  children?: ReactNode;
+  heading?: String;
+}) {
+  const user = useUser();
+  const allowed = role ? user.role === role || user.role === "ADMIN" : true;
+  if (user && allowed) {
+    return <Page heading={heading}>{children}</Page>;
+  } else {
+    return (
+      <Page heading={heading}>
+        <Text>
+          Diese Seite benötigt eine Anmeldung. Bitte benutze Deine Schul-Email.{" "}
+        </Text>
+        <LoginForm />
+      </Page>
+    );
+  }
 }
 
 export const PageHeading = ({ children }: { children: React.ReactNode }) => (

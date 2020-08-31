@@ -13,6 +13,12 @@
     "cSpell.words": [
       "ansible",
       "docker"
-    ]
+    ],
+    "files.exclude": {
+      ".next/": true,
+      ".nexus/": true,
+      "data/": true,
+      "yarn.lock": true
+    }
   }
 }

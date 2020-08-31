@@ -1,16 +1,10 @@
-import Head from "next/head";
 import Newsletter from "components/Newsletter";
-import { Page, PageHeading } from "components/Page";
+import { Page } from "components/Page";
 import { Card, Heading, Text, Link } from "rebass";
 
 export default function Kontakt() {
   return (
-    <Page>
-      <Head>
-        <title>voty - Demokratie an die Schule!</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-      <PageHeading>Demokratie an die Schule</PageHeading>
+    <Page heading="Demokratie an die Schule">
       <Heading as="h2">
         27. September – ein spannendes Abstimmungswochenende
       </Heading>
