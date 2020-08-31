@@ -14,9 +14,8 @@ export default function Kontakt() {
         Jugend für die Demokratie zu begeistern? Das Projekt «voty» will sich
         diesem Thema annehmen und das Demokratieverständnis fördern. Unterstützt
         durch den{" "}
-        <Link href="https://prototypefund.opendata.ch" target="_blank">
-          prototypefund.opendata.ch
-        </Link>{" "}
+        {/*<Link href="https://prototypefund.opendata.ch" target="_blank">prototypefund.opendata.ch</Link>*/}
+        PrototypeFund {/*</Link>{" "}*/}
         und in Zusammenarbeit mit SRF und weiteren Partnern werden wir in den
         nächsten Monaten gemeinsam mit Schulen einen Prototypen entwickeln und
         testen.

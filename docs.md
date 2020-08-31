@@ -22,6 +22,10 @@ Here we compile a handy list of links to the documentation of (some) of the 3rd-
 
 - GraphQL-Shield: https://github.com/maticzav/graphql-shield
 
+#### State Management
+
+- Recoil: https://recoiljs.org/docs/guides/asynchronous-state-sync
+
 ### Frontend
 
 #### Frontend Framework
@@ -44,7 +48,7 @@ Here we compile a handy list of links to the documentation of (some) of the 3rd-
 
 - MjMl: https://mjml.io/documentation/
 
-### CI / CD
+### Operations ( CI / CD )
 
 #### Host Virtualization
 

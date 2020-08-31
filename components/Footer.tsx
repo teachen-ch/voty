@@ -16,24 +16,22 @@ export function Footer() {
         <br />
         mit tatkräftiger Unterstützung des
         <br />
-        <Link
+        {/*<Link
           href="https://prototypefund.opendata.ch"
           target="_blank"
           color="black"
           sx={{ textDecoration: "underline" }}
-        >
-          PrototypeFund
-        </Link>
+        >PrototypeFund</Link>*/}
+        PrototypeFund
       </Text>
       <Flex justifyContent="center" flexDirection="column">
         <Box mt={3} mx="auto">
-          <Link href="https://prototypefund.opendata.ch" target="_blank">
-            <img
-              src="/images/pf_logo.png"
-              alt="Prototypefund Logo"
-              style={{ width: "40px" }}
-            />
-          </Link>
+          {/*<Link href="https://prototypefund.opendata.ch" target="_blank"></Link>*/}
+          <img
+            src="/images/pf_logo.png"
+            alt="Prototypefund Logo"
+            style={{ width: "40px" }}
+          />
           <hr />
           <nav>
             <Link href="/user/login" color="black">
