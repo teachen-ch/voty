@@ -24,8 +24,6 @@
     "@mdx-js/loader": "^1.6.16",
     "@next/mdx": "^9.5.2",
     "@rebass/forms": "^4.0.6",
-    "@types/theme-ui": "^0.3.6",
-    "@types/winston-mail": "^1.5.1",
     "aws-sdk": "^2.727.1",
     "bcrypt": "^5.0.0",
     "formik": "^2.1.5",
@@ -53,6 +51,8 @@
   "devDependencies": {
     "@types/node": "^14.0.27",
     "@types/react": "^16.9.44",
+    "@types/theme-ui": "^0.3.6",
+    "@types/winston-mail": "^1.5.1",
     "typescript": "^3.9.7"
   }
 }
