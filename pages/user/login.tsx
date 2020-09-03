@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import { Card, Text, Link, Button, Heading } from "rebass";
 import { Grid } from "theme-ui";
 import { Label, Input } from "@rebass/forms";
+import CheckLogin from "components/CheckLogin";
 import {
   useAccessToken,
   useSetAccessToken,
@@ -44,18 +45,6 @@ export const CHANGE_PASSWORD = gql`
   }
 `;
 
-export const ME = gql`
-  query {
-    me {
-      id
-      name
-      lastname
-      email
-      role
-    }
-  }
-`;
-
 export const CHECK_VERIFICATION = gql`
   mutation($token: String!) {
     checkVerification(token: $token) {
@@ -76,27 +65,7 @@ export default function Login() {
   const { t: token } = useRouter().query;
   const { p: purpose } = useRouter().query;
   const user = useUser();
-  const setUser = useSetUser();
 
-  // check, whether there is already an active session
-  const { loading: checkLogin } = useQuery(ME, {
-    fetchPolicy: "network-only",
-    onCompleted: (data) => {
-      if (data) {
-        setUser(data.me);
-      } else {
-        setUser(undefined);
-      }
-    },
-  });
-
-  if (checkLogin) {
-    return (
-      <Page heading="Anmelden">
-        <Text>Einen kurzen Moment…</Text>
-      </Page>
-    );
-  }
   if (user) {
     return (
       <Page heading="Angemeldet">
@@ -115,6 +84,7 @@ export default function Login() {
   } else {
     return (
       <Page heading="Anmelden">
+        <CheckLogin />
         <Text>
           Hier kannst Du dich mit Deiner Schul-Emailadresse anmelden, wenn Du
           bereits einen Benutzeraccount bei voty hast.

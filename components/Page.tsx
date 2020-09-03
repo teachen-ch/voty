@@ -4,6 +4,7 @@ import { Role } from "@prisma/client";
 import { useUser } from "state/user";
 import { LoginForm } from "pages/user/login";
 import { ReactNode } from "react";
+import CheckLogin from "./CheckLogin";
 
 export function Page({
   children,
@@ -64,6 +65,7 @@ export function LoggedInPage({
   } else {
     return (
       <Page heading={heading}>
+        <CheckLogin />
         <Text>
           Diese Seite benötigt eine Anmeldung. Bitte benutze Deine Schul-Email.{" "}
         </Text>
