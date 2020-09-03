@@ -31,6 +31,8 @@ schema.objectType({
   definition(t) {
     t.model.id();
     t.model.name();
+    t.model.invite();
+    t.model.domain();
     t.model.school();
     t.model.teacher();
     t.model.members();
@@ -61,6 +63,16 @@ schema.objectType({
     t.model.emoij();
     t.model.user();
     t.model.thread();
+  },
+});
+
+schema.objectType({
+  name: "Domain",
+  definition(t) {
+    t.model.id();
+    t.model.name();
+    t.model.approved();
+    t.model.schools();
   },
 });
 
@@ -102,7 +114,10 @@ schema.queryType({
       filtering: true,
     });
     t.crud.team();
-    t.crud.teams();
+    t.crud.teams({
+      ordering: true,
+      filtering: true,
+    });
 
     t.crud.ballot();
     t.crud.ballots();

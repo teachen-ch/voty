@@ -107,16 +107,17 @@ export function LoginForm() {
   const [doLogin, resultLogin] = useMutation(LOGIN, {
     onCompleted: (data) => {
       const err = data.login?.error;
+      console.log(err, data.login.user);
       if (err === "ERR_USER_PASSWORD") {
-        setError("Email oder Passwort passen leider nicht zueinander…");
+        return setError("Email oder Passwort passen leider nicht zueinander…");
+      } else if (err === "ERR_EMAIL_NOT_VERIFIED") {
+        return setEmailError(email);
+      } else if (err) {
+        return setError(err);
       }
-      if (err === "ERR_EMAIL_NOT_VERIFIED") {
-        setEmailError(email);
-      }
-      if (!err) {
-        setUser(data.login.user);
-        setAccessToken(data.login.token);
-      }
+      console.log(data.login.user);
+      setUser(data.login.user);
+      setAccessToken(data.login.token);
     },
   });
   if (typeof requestReset === "string") {
@@ -153,7 +154,7 @@ export function LoginForm() {
 
           <span />
           <Button onClick={() => doLogin({ variables: { email, password } })}>
-            "Anmelden"
+            Anmelden
           </Button>
           <span />
           <Button onClick={() => router.push("/user/signup")} variant="outline">
@@ -253,7 +254,11 @@ export function LogoutButton({ onSuccess = null, ...props }) {
   function onLogout() {
     setAccessToken("");
     setUser(undefined);
-    if (onSuccess) onSuccess();
+    if (onSuccess) {
+      onSuccess();
+    } else {
+      router.push("/");
+    }
   }
   return (
     <Button onClick={() => onLogout()} {...props}>

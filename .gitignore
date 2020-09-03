@@ -40,3 +40,4 @@ prisma/.env
 
 # voty
 logs/
+*.swp

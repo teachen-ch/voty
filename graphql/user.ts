@@ -13,9 +13,19 @@ schema.objectType({
   name: "User",
   definition(t) {
     t.model.id();
-    t.model.email();
+    t.string("email", {
+      nullable: true,
+      resolve({ email }, args, ctx) {
+        return email;
+      },
+    });
     t.model.name();
     t.model.lastname();
+    t.string("shortname", {
+      resolve({ name, lastname }, args, ctx) {
+        return `${name} ${lastname.substring(0, 1).toUpperCase()}.`;
+      },
+    });
     t.model.gender();
     t.model.image();
     t.model.role();
@@ -29,15 +39,6 @@ schema.objectType({
   },
 });
 
-schema.objectType({
-  name: "MinUser",
-  definition(t) {
-    t.int("id");
-    t.string("name");
-    t.string("lastname");
-    t.string("gender");
-  },
-});
 schema.objectType({
   name: "ResponseLogin",
   definition(t) {
@@ -76,8 +77,12 @@ schema.extendType({
         email: stringArg(),
         password: stringArg(),
       },
-      resolve: async (_root, args, ctx) =>
-        login(args.email, args.password, ctx.db),
+      resolve: async (_root, args, ctx) => {
+        // TODO: only if we add req.user we can check it in permissions.ts
+        const { token, user } = await login(args.email, args.password, ctx.db); // @ts-ignore
+        ctx.req.user = user;
+        return { token, user };
+      },
     });
     t.field("emailVerification", {
       type: "ResponseLogin",

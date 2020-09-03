@@ -266,6 +266,13 @@ input DateTimeNullableFilter {
   notIn: [DateTime!]
 }
 
+type Domain {
+  approved: Boolean!
+  id: Int!
+  name: String!
+  schools(after: SchoolWhereUniqueInput, before: SchoolWhereUniqueInput, first: Int, last: Int): [School!]!
+}
+
 input DomainCreateOneWithoutSchoolsInput {
   connect: DomainWhereUniqueInput
   create: DomainCreateWithoutSchoolsInput
@@ -337,13 +344,6 @@ input IntNullableFilter {
 The `JSON` scalar type represents JSON objects as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
 """
 scalar Json
-
-type MinUser {
-  gender: String
-  id: Int
-  lastname: String
-  name: String
-}
 
 type Mutation {
   changePassword(password: String): ResponseLogin
@@ -444,7 +444,7 @@ type Query {
   school(where: SchoolWhereUniqueInput!): School
   schools(after: SchoolWhereUniqueInput, before: SchoolWhereUniqueInput, first: Int, last: Int, orderBy: [SchoolOrderByInput!], where: SchoolWhereInput): [School!]!
   team(where: TeamWhereUniqueInput!): Team
-  teams(after: TeamWhereUniqueInput, before: TeamWhereUniqueInput, first: Int, last: Int): [Team!]!
+  teams(after: TeamWhereUniqueInput, before: TeamWhereUniqueInput, first: Int, last: Int, orderBy: [TeamOrderByInput!], where: TeamWhereInput): [Team!]!
   user(where: UserWhereUniqueInput!): User
   users(after: UserWhereUniqueInput, before: UserWhereUniqueInput, first: Int, last: Int): [User!]!
 }
@@ -685,7 +685,9 @@ input StringNullableFilter {
 
 type Team {
   ballots(after: BallotWhereUniqueInput, before: BallotWhereUniqueInput, first: Int, last: Int): [Ballot!]!
+  domain: Domain
   id: Int!
+  invite: String
   members(after: UserWhereUniqueInput, before: UserWhereUniqueInput, first: Int, last: Int): [User!]!
   name: String!
   school: School!
@@ -766,6 +768,15 @@ input TeamListRelationFilter {
   every: TeamWhereInput
   none: TeamWhereInput
   some: TeamWhereInput
+}
+
+input TeamOrderByInput {
+  domainId: SortOrder
+  id: SortOrder
+  invite: SortOrder
+  name: SortOrder
+  schoolId: SortOrder
+  teacherId: SortOrder
 }
 
 input TeamWhereInput {
@@ -946,6 +957,7 @@ type User {
   reactions(after: ReactionWhereUniqueInput, before: ReactionWhereUniqueInput, first: Int, last: Int): [Reaction!]!
   role: Role!
   school: School
+  shortname: String
   teaches(after: TeamWhereUniqueInput, before: TeamWhereUniqueInput, first: Int, last: Int): [Team!]!
   team: Team
   threads(after: ThreadWhereUniqueInput, before: ThreadWhereUniqueInput, first: Int, last: Int): [Thread!]!

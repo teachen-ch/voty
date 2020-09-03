@@ -48,7 +48,7 @@ function startJWTSession(user: User): ResponseLogin {
 
 export async function createUser(input: any, prisma: PrismaClient) {
   try {
-    const { email, password, name, lastname, role } = input;
+    const { email, password, name, lastname, role, team } = input;
     const salt = await bcrypt.genSalt(10);
     const hashed = await bcrypt.hash(password, salt);
     const user = await prisma.user.create({
@@ -58,6 +58,7 @@ export async function createUser(input: any, prisma: PrismaClient) {
         email,
         password: hashed,
         role,
+        team,
       },
     });
 
