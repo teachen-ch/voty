@@ -20,4 +20,4 @@ Who decides at your school? Are students invited to propose initiatives and disc
 
 ## About Voty
 
-Voty is developed as an open source project by «Teachen!» (https://teachen.ch/). Teachen is a not-for-profit association founded during the COVID-19 lockdown by a group of motivated parents, teachers and techies. The Voty project is sponsored by https://prototypefund.opendata.ch
+Voty is developed as an open source project by «Teachen!» (https://teachen.ch/). Teachen is a not-for-profit association founded during the COVID-19 lockdown by a group of motivated parents, teachers and techies. The Voty project is suppored by the Swiss PrototypeFund.
