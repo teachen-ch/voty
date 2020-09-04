@@ -41,4 +41,3 @@ prisma/.env
 # voty
 /logs/
 *.swp
-logs/voty.log
