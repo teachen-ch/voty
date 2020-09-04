@@ -2,3 +2,26 @@
 [[32minfo[39m]     SEND SUCCESSFUL
 [[32minfo[39m]     password Change... check user
 [[32minfo[39m]     user: 
+[[31merror[39m]    ERR_USER_PASSWORD
+[[31merror[39m]    ERR_USER_PASSWORD
+[[31merror[39m]    ERR_USER_PASSWORD
+[[31merror[39m]    ERR_USER_PASSWORD
+[[31merror[39m]    ERR_USER_PASSWORD
+[[31merror[39m]    ERR_USER_PASSWORD
+[[31merror[39m]    ERR_USER_PASSWORD
+[[31merror[39m]    ERR_USER_PASSWORD
+[[31merror[39m]    ERR_USER_PASSWORD
+[[31merror[39m]    ERR_USER_PASSWORD
+[[31merror[39m]    ERR_USER_PASSWORD
+[[31merror[39m]    ERR_USER_PASSWORD
+[[31merror[39m]    ERR_USER_PASSWORD
+[[32minfo[39m]     SEND SUCCESSFUL
+[[31merror[39m]    SEND_VERIFICATION_EMAIL_ERROR
+[[31merror[39m]    Error sending verification email SEND_VERIFICATION_EMAIL_ERRORError: connect ENETUNREACH 52.29.142.246:587 - Local (0.0.0.0:53215)
+[[31merror[39m]    SEND_VERIFICATION_EMAIL_ERROR
+[[31merror[39m]    Error sending verification email SEND_VERIFICATION_EMAIL_ERRORError: connect ENETUNREACH 52.29.142.246:587 - Local (0.0.0.0:53225)
+[[31merror[39m]    SEND_VERIFICATION_EMAIL_ERROR
+[[31merror[39m]    Error sending verification email SEND_VERIFICATION_EMAIL_ERRORError: connect ENETUNREACH 52.29.142.246:587 - Local (0.0.0.0:53236)
+[[31merror[39m]    ERR_USER_PASSWORD
+[[31merror[39m]    SEND_VERIFICATION_EMAIL_ERROR
+[[31merror[39m]    Error sending verification email SEND_VERIFICATION_EMAIL_ERRORError: No recipients defined

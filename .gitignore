@@ -39,5 +39,6 @@ prisma/.env
 .vercel
 
 # voty
-logs/
+/logs/
 *.swp
+logs/voty.log

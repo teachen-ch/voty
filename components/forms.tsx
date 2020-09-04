@@ -1,16 +1,16 @@
 import { Formik, Form, useField } from "formik";
-import { Text, Box, Button } from "rebass";
+import { Text, Button, Card, Box } from "rebass";
+import { Grid } from "theme-ui";
 import {
   Input as RInput,
   Label as RLabel,
   Select as RSelect,
 } from "@rebass/forms";
 import * as yup from "yup";
-import { Grid } from "theme-ui";
 import React, { useMemo } from "react";
 import _ from "lodash";
 
-export { Formik, Form, yup };
+export { Formik, Form, yup, Grid, Card };
 
 export function Input({ label, ...props }) {
   const [field, meta] = useField(props as any);
@@ -85,7 +85,6 @@ export function QForm({ fields, mutation, ...props }) {
       initialValues,
     };
   }
-
   function generateField(field) {
     if (field.type === "submit") {
       return (
@@ -153,5 +152,26 @@ export function Select({ label, ...props }) {
         </>
       ) : null}
     </>
+  );
+}
+
+export function ErrorBox(props) {
+  if (!props.error) return null;
+  return (
+    <Box
+      pl={3}
+      py={2}
+      sx={{
+        gridColumn: "2",
+        borderLeftColor: "primary",
+        borderLeftStyle: "solid",
+        borderLeftWidth: 4,
+      }}
+    >
+      <Text>
+        <b>Fehler: </b>
+        {props.error}
+      </Text>
+    </Box>
   );
 }
