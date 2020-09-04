@@ -23,19 +23,19 @@ export async function login(
 ): Promise<ResponseLogin> {
   try {
     const user = await prisma.user.findOne({ where: { email } });
-    if (!user) return { error: "ERR_USER_PASSWORD" };
+    if (!user) throw Error("ERR_USER_PASSWORD");
 
     const matches = await bcrypt.compare(password, user.password);
-    if (!matches) return { error: "ERR_USER_PASSWORD" };
+    if (!matches) throw Error("ERR_USER_PASSWORD");
 
     if (!user.emailVerified) {
-      return { error: "ERR_EMAIL_NOT_VERIFIED" };
+      throw Error("ERR_EMAIL_NOT_VERIFIED");
     }
     // logger.mail("a user logged in... " + user.email);
     return startJWTSession(user);
   } catch (err) {
     logger.error(err.message);
-    return { error: err.message };
+    throw err;
   }
 }
 
@@ -131,7 +131,7 @@ export async function sendVerificationEmail(
     return { token: "SENT..." };
   } catch (err) {
     logger.error("Error sending verification email", err);
-    return { error: "ERR_SEND_EMAIL_VERIFICATION" };
+    throw Error("ERR_SEND_EMAIL_VERIFICATION");
   }
 }
 
@@ -154,12 +154,12 @@ async function createVerificationToken(prisma: PrismaClient, identifier) {
 export async function checkVerification(token: string, prisma: PrismaClient) {
   const found = await verifyToken(token, prisma);
   if (!found) {
-    return { error: "ERR_TOKEN_NOT_FOUND" };
+    throw Error("ERR_TOKEN_NOT_FOUND");
   }
   const email = found.identifier;
   const user = await prisma.user.findOne({ where: { email } });
   if (!user) {
-    return { error: "ERR_EMAIL_NOT_FOUND" };
+    throw Error("ERR_EMAIL_NOT_FOUND");
   }
 
   await prisma.user.update({
@@ -186,7 +186,7 @@ export async function changePassword(
   if (ok) {
     return startJWTSession(user);
   } else {
-    return { error: "ERR_PASSWORD_CHANGE" };
+    throw Error("ERR_PASSWORD_CHANGE");
   }
 }
 

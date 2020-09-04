@@ -6,6 +6,7 @@ import { Card, Text, Link, Button, Heading } from "rebass";
 import { Grid } from "theme-ui";
 import { Label, Input } from "@rebass/forms";
 import CheckLogin from "components/CheckLogin";
+import { QForm, ErrorBox } from "components/forms";
 import {
   useAccessToken,
   useSetAccessToken,
@@ -18,15 +19,12 @@ export const LOGIN = gql`
     login(email: $email, password: $password) {
       token
       user {
-        id
-        name
-        lastname
-        role
-        email
+        ...LoginFields
       }
       error
     }
   }
+  ${CheckLogin.fragments.LoginFields}
 `;
 
 export const EMAIL_VERIFICATION = gql`
@@ -50,15 +48,12 @@ export const CHECK_VERIFICATION = gql`
     checkVerification(token: $token) {
       token
       user {
-        id
-        name
-        lastname
-        email
-        role
+        ...LoginFields
       }
       error
     }
   }
+  ${CheckLogin.fragments.LoginFields}
 `;
 
 export default function Login() {
@@ -105,19 +100,20 @@ export function LoginForm() {
   const setUser = useSetUser();
   const setAccessToken = useSetAccessToken();
   const [doLogin, resultLogin] = useMutation(LOGIN, {
-    onCompleted: (data) => {
-      const err = data.login?.error;
-      console.log(err, data.login.user);
-      if (err === "ERR_USER_PASSWORD") {
-        return setError("Email oder Passwort passen leider nicht zueinander…");
-      } else if (err === "ERR_EMAIL_NOT_VERIFIED") {
-        return setEmailError(email);
-      } else if (err) {
-        return setError(err);
-      }
-      console.log(data.login.user);
+    onCompleted(data) {
+      console.log("User: ", data);
       setUser(data.login.user);
       setAccessToken(data.login.token);
+    },
+    onError(error) {
+      console.log("Test: ", error.message);
+      if (error.message === "ERR_USER_PASSWORD") {
+        return setError("Email oder Passwort passen leider nicht zueinander…");
+      } else if (error.message === "ERR_EMAIL_NOT_VERIFIED") {
+        return setEmailError(email);
+      } else {
+        return setError(error.message);
+      }
     },
   });
   if (typeof requestReset === "string") {
@@ -156,17 +152,22 @@ export function LoginForm() {
           <Button onClick={() => doLogin({ variables: { email, password } })}>
             Anmelden
           </Button>
-          <span />
-          <Button onClick={() => router.push("/user/signup")} variant="outline">
-            Ich habe noch keinen Account
-          </Button>
           <ErrorBox error={error} />
-          <Text sx={{ gridColumn: "2" }}>
-            <Link onClick={() => setRequestReset(email ? email : "")}>
+          <span />
+          <Grid gap={2} columns={[0, 0, "3fr 2fr"]}>
+            <Button
+              onClick={() => router.push("/user/signup")}
+              variant="outline"
+            >
+              Ich habe noch keinen Account
+            </Button>
+            <Button
+              onClick={() => setRequestReset(email ? email : "")}
+              variant="outline"
+            >
               Passwort vergessen?
-            </Link>{" "}
-            Wir können Dir ein Email schicken…
-          </Text>
+            </Button>
+          </Grid>
         </Grid>
       </Card>
     </>
@@ -328,12 +329,11 @@ function RequestReset({ email }) {
   const [emailField, setEmailField] = useState(email);
   const [error, setError] = useState("");
   const [doRequestReset] = useMutation(EMAIL_VERIFICATION, {
-    onCompleted: (data) => {
-      if (data.emailVerification?.error) {
-        setError("Es ist ein Fehler aufgetreten.");
-      } else {
-        setMailSent(true);
-      }
+    onCompleted(data) {
+      setMailSent(true);
+    },
+    onError(error) {
+      setError("Es ist ein Fehler aufgetreten.");
     },
   });
 
@@ -445,9 +445,3 @@ function PasswordResetForm({ finished }) {
     </>
   );
 }
-
-const ErrorBox = (props) => (
-  <Text sx={{ gridColumn: "2" }} fontWeight="bold" color="primary">
-    {props.error}
-  </Text>
-);

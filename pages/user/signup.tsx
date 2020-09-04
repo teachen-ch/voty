@@ -1,10 +1,9 @@
 import { Page } from "components/Page";
 import { Card, Text, Button } from "rebass";
-import { Grid } from "theme-ui";
 import { gql, useMutation } from "@apollo/client";
 import { useState } from "react";
 import { useRouter } from "next/router";
-import { QForm, yup } from "../../components/forms";
+import { QForm, yup, ErrorBox } from "../../components/forms";
 
 export const CREATE_USER = gql`
   mutation($data: UserCreateInput!) {
@@ -112,7 +111,10 @@ function CreateUserForm({ setUser }) {
           {showLogin && (
             <>
               <span />
-              <Button onClick={() => router.push("/user/login")}>
+              <Button
+                onClick={() => router.push("/user/login")}
+                variant="outline"
+              >
                 Möchstest Du Dich anmelden?
               </Button>
             </>
@@ -122,9 +124,3 @@ function CreateUserForm({ setUser }) {
     </Page>
   );
 }
-
-const ErrorBox = (props) => (
-  <Text sx={{ gridColumn: "2" }} fontWeight="bold" color="primary">
-    {props.error}
-  </Text>
-);
