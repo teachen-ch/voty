@@ -1,6 +1,7 @@
 import { schema, use } from "nexus";
 import { prisma } from "nexus-plugin-prisma";
 import { permissions } from "./permissions";
+import { randomBytes } from "crypto";
 
 use(
   prisma({
@@ -128,5 +129,11 @@ schema.mutationType({
   definition(t) {
     t.crud.createOneSchool();
     t.crud.deleteOneSchool();
+    t.crud.createOneTeam({
+      computedInputs: {
+        invite: () => randomBytes(6).toString("hex"),
+      },
+    });
+    t.crud.deleteOneTeam();
   },
 });

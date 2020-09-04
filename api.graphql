@@ -349,8 +349,10 @@ type Mutation {
   changePassword(password: String): ResponseLogin
   checkVerification(token: String): ResponseLogin
   createOneSchool(data: SchoolCreateInput!): School!
+  createOneTeam(data: TeamCreateInput!): Team!
   createUser(data: UserCreateInput!): User!
   deleteOneSchool(where: SchoolWhereUniqueInput!): School
+  deleteOneTeam(where: TeamWhereUniqueInput!): Team
   emailVerification(email: String, purpose: String): ResponseLogin
   login(email: String, password: String): ResponseLogin
 }
@@ -692,6 +694,16 @@ type Team {
   name: String!
   school: School!
   teacher: User!
+}
+
+input TeamCreateInput {
+  ballots: BallotCreateManyWithoutTeamInput
+  domain: DomainCreateOneWithoutTeamInput
+  invite: String
+  members: UserCreateManyWithoutTeamInput
+  name: String!
+  school: SchoolCreateOneWithoutTeamsInput!
+  teacher: UserCreateOneWithoutTeachesInput!
 }
 
 input TeamCreateManyWithoutDomainInput {

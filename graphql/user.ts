@@ -79,9 +79,21 @@ schema.extendType({
       },
       resolve: async (_root, args, ctx) => {
         // TODO: only if we add req.user we can check it in permissions.ts
-        const { token, user } = await login(args.email, args.password, ctx.db); // @ts-ignore
-        ctx.req.user = user;
-        return { token, user };
+        try {
+          console.log("Start");
+          const { token, user } = await login(
+            args.email,
+            args.password,
+            ctx.db
+          );
+          console.log("mor", token, user);
+          // @ts-ignore
+          ctx.req.user = user;
+          return { token, user };
+        } catch (error) {
+          console.log("som err: ", error);
+          throw error;
+        }
       },
     });
     t.field("emailVerification", {

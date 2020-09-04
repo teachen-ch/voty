@@ -9,6 +9,20 @@ const isUser = rule({ cache: "contextual" })(
   }
 );
 
+const isTeacher = rule({ cache: "contextual" })(
+  async (parent, args, ctx: NexusContext, info) => {
+    // @ts-ignore
+    switch (ctx.req?.user?.role) {
+      case "TEACHER":
+      case "PRINCIPAL":
+      case "ADMIN":
+        return true;
+      default:
+        return false;
+    }
+  }
+);
+
 const isAdmin = rule({ cache: "contextual" })(
   async (parent, args, ctx: NexusContext, info) => {
     // @ts-ignore
@@ -25,8 +39,10 @@ const isTeamMember = rule({ cache: "strict" })(
 );
 
 // Teacher may view his students
-const isTeacher = rule({ cache: "strict" })(
+const isTeamTeacher = rule({ cache: "strict" })(
   async (parent, args, ctx: NexusContext, info) => {
+    // @ts-ignore
+    // console.log("isTeaher?", parent.id, ctx.req.user.id);
     // @ts-ignore
     if (!ctx.req?.user || ctx.req.user.role !== "TEACHER") return false; // @ts-ignore
     const student = parent.id; // @ts-ignore
@@ -53,7 +69,13 @@ const isOwn = (field) =>
 export const permissions = shield({
   rules: {
     Query: {
-      "*": isUser,
+      user: isAdmin,
+      users: isAdmin,
+      me: allow,
+      school: isUser,
+      schools: isUser,
+      team: isUser,
+      teams: isUser,
     },
     Mutation: {
       login: allow,
@@ -61,7 +83,10 @@ export const permissions = shield({
       emailVerification: allow,
       checkVerification: allow,
       changePassword: isUser,
-      "*": isUser,
+      createOneTeam: or(isTeacher, isAdmin),
+      deleteOneTeam: or(isTeamTeacher, isAdmin),
+      createOneSchool: isTeacher,
+      deleteOneSchool: isAdmin,
     },
     School: isUser,
     User: {
@@ -74,14 +99,17 @@ export const permissions = shield({
       school: isUser,
       team: isUser,
       teaches: isUser,
-      lastname: or(isOwn("id"), isTeacher, isAdmin),
-      email: or(isOwn("id"), isTeacher, isAdmin),
-      ballots: or(isOwn("id"), isTeacher, isAdmin),
-      attachments: or(isOwn("id"), isTeacher, isAdmin),
-      threads: or(isOwn("id"), isTeacher, isAdmin),
-      reactions: or(isOwn("id"), isTeacher, isAdmin),
+      lastname: or(isOwn("id"), isTeamTeacher, isAdmin),
+      email: or(isOwn("id"), isTeamTeacher, isAdmin),
+      ballots: or(isOwn("id"), isTeamTeacher, isAdmin),
+      attachments: or(isOwn("id"), isTeamTeacher, isAdmin),
+      threads: or(isOwn("id"), isTeamTeacher, isAdmin),
+      reactions: or(isOwn("id"), isTeamTeacher, isAdmin),
     },
-    Team: isUser,
+    Team: {
+      invite: isOwn("teacherId"),
+      "*": isUser,
+    },
     ResponseLogin: allow,
   },
   options: {

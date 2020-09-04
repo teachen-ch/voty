@@ -2,16 +2,40 @@ import { gql, useQuery } from "@apollo/client";
 import { useUser, useSetUser } from "../state/user";
 import { Heading } from "rebass";
 
-export const ME = gql`
-  query {
-    me {
+CheckLogin.fragments = {
+  LoginFields: gql`
+    fragment LoginFields on User {
       id
       name
       lastname
-      email
+      shortname
       role
+      email
+      school {
+        id
+        name
+        city
+      }
+      team {
+        id
+        name
+        teacher {
+          id
+          name
+          shortname
+        }
+      }
+    }
+  `,
+};
+
+export const ME = gql`
+  query {
+    me {
+      ...LoginFields
     }
   }
+  ${CheckLogin.fragments.LoginFields}
 `;
 
 export default function CheckLogin() {
