@@ -49,8 +49,7 @@ schema.extendType({
     t.field("me", {
       type: "User",
       nullable: true,
-      resolve: async (_root, args, ctx) =>
-        authentication.getUser(ctx.req, ctx.db),
+      resolve: async (_root, args, ctx) => authentication.getUser(ctx),
     });
   },
 });

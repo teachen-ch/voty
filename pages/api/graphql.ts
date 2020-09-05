@@ -21,8 +21,7 @@ require("../../graphql/user");
 app.assemble();
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
-  const session = await getSession(req);
-  const user = session ? session.user : null;
-  const reqWithSession = { ...req, session, user };
-  return app.server.handlers.graphql(reqWithSession, res);
+  await getSession(req);
+  console.log("User: ", req.headers["x-user-id"], req.headers["x-user-role"]);
+  return app.server.handlers.graphql(req, res);
 };
