@@ -346,8 +346,10 @@ The `JSON` scalar type represents JSON objects as specified by [ECMA-404](http:/
 scalar Json
 
 type Mutation {
+  acceptInvite(invite: String): Team
   changePassword(password: String): ResponseLogin
   checkVerification(token: String): ResponseLogin
+  createInvitedUser(email: String, invite: String, lastname: String, name: String, password: String): User
   createOneSchool(data: SchoolCreateInput!): School!
   createOneTeam(data: TeamCreateInput!): Team!
   createUser(data: UserCreateInput!): User!
@@ -507,7 +509,6 @@ input ReactionWhereUniqueInput {
 }
 
 type ResponseLogin {
-  error: String
   token: String
   user: User
 }

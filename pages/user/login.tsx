@@ -21,7 +21,6 @@ export const LOGIN = gql`
       user {
         ...LoginFields
       }
-      error
     }
   }
   ${CheckLogin.fragments.LoginFields}
@@ -30,7 +29,7 @@ export const LOGIN = gql`
 export const EMAIL_VERIFICATION = gql`
   mutation($email: String!, $purpose: String!) {
     emailVerification(email: $email, purpose: $purpose) {
-      error
+      token # this is not really need, just a placeholder
     }
   }
 `;
@@ -38,7 +37,7 @@ export const EMAIL_VERIFICATION = gql`
 export const CHANGE_PASSWORD = gql`
   mutation($password: String!) {
     changePassword(password: $password) {
-      error
+      token # this is not really need, just a placeholder
     }
   }
 `;
@@ -50,7 +49,6 @@ export const CHECK_VERIFICATION = gql`
       user {
         ...LoginFields
       }
-      error
     }
   }
   ${CheckLogin.fragments.LoginFields}
@@ -101,12 +99,10 @@ export function LoginForm() {
   const setAccessToken = useSetAccessToken();
   const [doLogin, resultLogin] = useMutation(LOGIN, {
     onCompleted(data) {
-      console.log("User: ", data);
       setUser(data.login.user);
       setAccessToken(data.login.token);
     },
     onError(error) {
-      console.log("Test: ", error.message);
       if (error.message === "ERR_USER_PASSWORD") {
         return setError("Email oder Passwort passen leider nicht zueinander…");
       } else if (error.message === "ERR_EMAIL_NOT_VERIFIED") {
@@ -179,12 +175,11 @@ function VerificationForm({ email }) {
   const [error, setError] = useState("");
 
   const [doVerification, resultVerification] = useMutation(EMAIL_VERIFICATION, {
-    onCompleted: (data) => {
-      if (data.emailVerification?.error) {
-        setError(data.emailVerification.error);
-      } else {
-        setMailSent(true);
-      }
+    onCompleted(data) {
+      setMailSent(true);
+    },
+    onError(error) {
+      setError(error.message);
     },
   });
   return (
@@ -276,12 +271,12 @@ function CheckToken({ token, purpose }) {
   const router = useRouter();
   const [doVerification, resultVerification] = useMutation(CHECK_VERIFICATION, {
     onCompleted: (data) => {
-      if (data.checkVerification?.error) {
-        setError("Dieser Email-Link ist leider nicht mehr gültig.");
-      } else {
-        setTempUser(data.checkVerification.user);
-        setAccessToken(data.checkVerification.token);
-      }
+      setTempUser(data.checkVerification.user);
+      setAccessToken(data.checkVerification.token);
+    },
+    onError(error) {
+      setError("Dieser Email-Link ist leider nicht mehr gültig.");
+      console.log(error.message);
     },
   });
 
@@ -331,6 +326,7 @@ function RequestReset({ email }) {
   const [doRequestReset] = useMutation(EMAIL_VERIFICATION, {
     onCompleted(data) {
       setMailSent(true);
+      setError("");
     },
     onError(error) {
       setError("Es ist ein Fehler aufgetreten.");
@@ -386,12 +382,11 @@ function PasswordResetForm({ finished }) {
   const router = useRouter();
 
   const [doChangePassword] = useMutation(CHANGE_PASSWORD, {
-    onCompleted: (data) => {
-      if (data.changePassword?.error) {
-        setError("Es ist ein Fehler aufgetreten.");
-      } else {
-        setSuccess(true);
-      }
+    onCompleted(data) {
+      setSuccess(true);
+    },
+    onError(error) {
+      setError("Es ist ein Fehler aufgetreten.");
     },
   });
 

@@ -38,22 +38,17 @@ function Success({ user }) {
 
 function CreateUserForm({ setUser }) {
   const router = useRouter();
-  const [email, setEmail] = useState("");
-  const [name, setName] = useState("");
-  const [lastname, setLastname] = useState("");
-  const [password, setPassword] = useState("");
-  const [role, setRole] = useState("USER");
   const [error, setError] = useState("");
   const [showLogin, setShowLogin] = useState(false);
   const [doCreateUser] = useMutation(CREATE_USER, {
-    onCompleted: (data) => {
+    onCompleted(data) {
       if (data) {
         setUser(data.createUser);
       } else {
         setUser(undefined);
       }
     },
-    onError: (error) => {
+    onError(error) {
       if (error.message === "ERR_DUPLICATE_EMAIL") {
         setError("Diese Email ist bereits registriert");
         setShowLogin(true);

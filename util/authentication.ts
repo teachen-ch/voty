@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken";
-import { PrismaClient, User } from "@prisma/client";
+import { PrismaClient, User, Team } from "@prisma/client";
 import { NextApiRequest } from "next";
 import bcrypt from "bcrypt";
 import { Request } from "nexus/dist/runtime/schema/schema";
@@ -16,53 +16,52 @@ type ResponseLogin = {
   user?: User;
 };
 
-export async function login(
-  email: string,
-  password: string,
-  prisma: PrismaClient
-): Promise<ResponseLogin> {
+export async function login(_root, args, ctx): Promise<ResponseLogin> {
   try {
-    const user = await prisma.user.findOne({ where: { email } });
+    const user = await ctx.db.user.findOne({ where: { email: args.email } });
     if (!user) throw Error("ERR_USER_PASSWORD");
 
-    const matches = await bcrypt.compare(password, user.password);
+    const matches = await bcrypt.compare(args.password, user.password);
     if (!matches) throw Error("ERR_USER_PASSWORD");
 
     if (!user.emailVerified) {
       throw Error("ERR_EMAIL_NOT_VERIFIED");
     }
     // logger.mail("a user logged in... " + user.email);
-    return startJWTSession(user);
+    return startJWTSession(user, ctx);
   } catch (err) {
     logger.error(err.message);
     throw err;
   }
 }
 
-function startJWTSession(user: User): ResponseLogin {
+function startJWTSession(user: User, ctx: NexusContext): ResponseLogin {
   const token: string = jwt.sign({ user }, secret, {
     expiresIn: "1d",
   });
+
+  // @ts-ignore
+  // TODO: only if we add req.user we can check it in permissions.ts (e.g. for /me)
+  ctx.req.user = user;
   return { token, user };
 }
 
-export async function createUser(input: any, prisma: PrismaClient) {
+export async function createUser(_root, args, ctx: NexusContext) {
   try {
-    const { email, password, name, lastname, role, team } = input;
+    const { email, password, name, lastname, role } = args.data;
     const salt = await bcrypt.genSalt(10);
     const hashed = await bcrypt.hash(password, salt);
-    const user = await prisma.user.create({
+    const user = await ctx.db.user.create({
       data: {
         name,
         lastname,
         email,
         password: hashed,
         role,
-        team,
       },
     });
 
-    await sendVerificationEmail(email, "verification", prisma);
+    await sendVerificationEmail(email, "verification", ctx.db);
     logger.mail(`New user created: ${name} ${lastname} <${email}>: ${role}`);
     return user;
   } catch (err) {
@@ -72,6 +71,35 @@ export async function createUser(input: any, prisma: PrismaClient) {
     logger.error(err);
     throw new Error("ERR_CREATE_USER");
   }
+}
+
+export async function acceptInvite(_root, args, ctx: NexusContext) {
+  const team = await ctx.db.team.findOne({ where: { invite: args.invite } });
+  if (!team) throw new Error("INVITE_NOT_FOUND");
+  // @ts-ignore
+  const user = ctx.req.user;
+  if (!user) throw new Error("NEEDS_LOGIN");
+  const success = connectUserTeam(user, team, ctx);
+  if (!success) throw new Error("DB_ERROR");
+  else return team;
+}
+
+async function connectUserTeam(user: User, team: Team, ctx: NexusContext) {
+  if (user.teamId) throw new Error("ALREADY_IN_TEAM");
+  return await ctx.db.user.update({
+    where: { id: user.id },
+    data: { team: { connect: { id: team.id } } },
+  });
+}
+
+export async function createInvitedUser(_root, args, ctx) {
+  args.role = "STUDENT";
+  const team = await ctx.db.findOne({ where: { invite: args.invite } });
+  if (!team) throw new Error("INVITE_NOT_FOUND");
+  args.team = team.id;
+  const user = await createUser(_root, args, ctx);
+  await connectUserTeam(user, team, ctx);
+  return user;
 }
 
 export function getSession(req: NextApiRequest): any {
@@ -151,40 +179,36 @@ async function createVerificationToken(prisma: PrismaClient, identifier) {
   return token;
 }
 
-export async function checkVerification(token: string, prisma: PrismaClient) {
-  const found = await verifyToken(token, prisma);
+export async function checkVerification(_root, args, ctx) {
+  const found = await verifyToken(args.token, ctx.db);
   if (!found) {
     throw Error("ERR_TOKEN_NOT_FOUND");
   }
   const email = found.identifier;
-  const user = await prisma.user.findOne({ where: { email } });
+  const user = await ctx.db.user.findOne({ where: { email } });
   if (!user) {
     throw Error("ERR_EMAIL_NOT_FOUND");
   }
 
-  await prisma.user.update({
+  await ctx.db.user.update({
     where: { email },
     data: { emailVerified: new Date() },
   });
-  return startJWTSession(user);
+  return startJWTSession(user, ctx);
 }
 
-export async function changePassword(
-  password: string,
-  req: Request,
-  prisma: PrismaClient
-) {
+export async function changePassword(_root, args, ctx) {
   logger.info("password Change... check user");
-  const user = await getUser(req, prisma);
+  const user = await getUser(ctx.req, ctx.db);
   logger.info("user: ", user);
   const salt = await bcrypt.genSalt(10);
-  const hashed = await bcrypt.hash(password, salt);
-  const ok = await prisma.user.update({
+  const hashed = await bcrypt.hash(args.password, salt);
+  const ok = await ctx.db.user.update({
     where: { id: user.id },
     data: { password: hashed },
   });
   if (ok) {
-    return startJWTSession(user);
+    return startJWTSession(user, ctx);
   } else {
     throw Error("ERR_PASSWORD_CHANGE");
   }

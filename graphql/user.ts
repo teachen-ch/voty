@@ -1,12 +1,5 @@
 import { schema } from "nexus";
-import {
-  createUser,
-  getUser,
-  login,
-  sendVerificationEmail,
-  checkVerification,
-  changePassword,
-} from "../util/authentication";
+import * as authentication from "../util/authentication";
 import { stringArg } from "nexus/components/schema";
 
 schema.objectType({
@@ -43,7 +36,6 @@ schema.objectType({
   name: "ResponseLogin",
   definition(t) {
     t.string("token");
-    t.string("error");
     t.field("user", { type: "User" });
   },
 });
@@ -57,7 +49,8 @@ schema.extendType({
     t.field("me", {
       type: "User",
       nullable: true,
-      resolve: async (_root, args, ctx) => getUser(ctx.req, ctx.db),
+      resolve: async (_root, args, ctx) =>
+        authentication.getUser(ctx.req, ctx.db),
     });
   },
 });
@@ -67,9 +60,7 @@ schema.extendType({
   definition(t) {
     t.crud.createOneUser({
       alias: "createUser",
-      resolve: async (_root, args, ctx) => {
-        return createUser(args.data, ctx.db);
-      },
+      resolve: authentication.createUser,
     });
     t.field("login", {
       type: "ResponseLogin",
@@ -77,24 +68,7 @@ schema.extendType({
         email: stringArg(),
         password: stringArg(),
       },
-      resolve: async (_root, args, ctx) => {
-        // TODO: only if we add req.user we can check it in permissions.ts
-        try {
-          console.log("Start");
-          const { token, user } = await login(
-            args.email,
-            args.password,
-            ctx.db
-          );
-          console.log("mor", token, user);
-          // @ts-ignore
-          ctx.req.user = user;
-          return { token, user };
-        } catch (error) {
-          console.log("som err: ", error);
-          throw error;
-        }
-      },
+      resolve: authentication.login,
     });
     t.field("emailVerification", {
       type: "ResponseLogin",
@@ -103,23 +77,39 @@ schema.extendType({
         purpose: stringArg(),
       },
       resolve: async (_root, args, ctx) =>
-        sendVerificationEmail(args.email, args.purpose, ctx.db),
+        authentication.sendVerificationEmail(args.email, args.purpose, ctx.db),
     });
     t.field("checkVerification", {
       type: "ResponseLogin",
       args: {
         token: stringArg(),
       },
-      resolve: async (_root, args, ctx) =>
-        checkVerification(args.token, ctx.db),
+      resolve: authentication.checkVerification,
     });
     t.field("changePassword", {
       type: "ResponseLogin",
       args: {
         password: stringArg(),
       },
-      resolve: async (_root, args, ctx) =>
-        changePassword(args.password, ctx.req, ctx.db),
+      resolve: authentication.changePassword,
+    });
+    t.field("createInvitedUser", {
+      type: "User",
+      args: {
+        name: stringArg(),
+        lastname: stringArg(),
+        email: stringArg(),
+        password: stringArg(),
+        invite: stringArg(),
+      },
+      resolve: authentication.createInvitedUser,
+    });
+    t.field("acceptInvite", {
+      type: "Team",
+      args: {
+        invite: stringArg(),
+      },
+      resolve: authentication.acceptInvite,
     });
   },
 });

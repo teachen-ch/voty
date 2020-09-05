@@ -79,10 +79,12 @@ export const permissions = shield({
     },
     Mutation: {
       login: allow,
-      createUser: allow,
-      emailVerification: allow,
-      checkVerification: allow,
-      changePassword: isUser,
+      createUser: allow, // default crud.createOneUser
+      createInvitedUser: allow, // create user with invite-code
+      emailVerification: allow, // send out email (verification, pw, login)
+      checkVerification: allow, // check, wether email code is still valid
+      changePassword: isUser, // actual password change
+      acceptInvite: isUser, // accept team invite if already logged in
       createOneTeam: or(isTeacher, isAdmin),
       deleteOneTeam: or(isTeamTeacher, isAdmin),
       createOneSchool: isTeacher,
