@@ -72,9 +72,9 @@ export const permissions = shield({
       user: isAdmin,
       users: isAdmin,
       me: allow,
-      school: isUser,
+      school: allow,
       schools: isUser,
-      team: isUser,
+      team: allow,
       teams: isUser,
     },
     Mutation: {
@@ -90,7 +90,6 @@ export const permissions = shield({
       createOneSchool: isTeacher,
       deleteOneSchool: isAdmin,
     },
-    School: isUser,
     User: {
       id: isUser,
       name: isUser,
@@ -108,7 +107,17 @@ export const permissions = shield({
       threads: or(isOwn("id"), isTeamTeacher, isAdmin),
       reactions: or(isOwn("id"), isTeamTeacher, isAdmin),
     },
+    School: {
+      id: allow,
+      name: allow,
+      city: allow,
+      zip: allow,
+      teams: allow,
+    },
     Team: {
+      id: allow,
+      name: allow,
+      school: allow,
       invite: isOwn("teacherId"),
       "*": isUser,
     },

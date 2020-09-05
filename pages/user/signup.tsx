@@ -21,10 +21,18 @@ export default function Signup() {
   if (user) {
     return <Success user={user} />;
   }
-  return <CreateUserForm setUser={setUser} />;
+  return (
+    <Page heading="Erstelle einen neuen Account">
+      <Text>
+        Erstelle einen neuen Account für Voty. <br />
+        Bitte nutze die Email-Adresse Deiner Schule.
+      </Text>
+      <CreateUserForm setUser={setUser} />
+    </Page>
+  );
 }
 
-function Success({ user }) {
+export function Success({ user }) {
   return (
     <Page heading="Account erstellt">
       <Text>
@@ -36,7 +44,13 @@ function Success({ user }) {
   );
 }
 
-function CreateUserForm({ setUser }) {
+export function CreateUserForm({
+  setUser,
+  onSubmit,
+}: {
+  setUser: Function;
+  onSubmit?: Function;
+}) {
   const router = useRouter();
   const [error, setError] = useState("");
   const [showLogin, setShowLogin] = useState(false);
@@ -56,66 +70,61 @@ function CreateUserForm({ setUser }) {
     },
   });
   return (
-    <Page heading="Erstelle einen neuen Account">
-      <Text>
-        Erstelle einen neuen Account für Voty. <br />
-        Bitte nutze die Email-Adresse Deiner Schule.
-      </Text>
-      <Card>
-        <QForm
-          mutation={doCreateUser}
-          fields={{
-            name: {
-              label: "Vorname:",
-              required: true,
-              validate: yup.string().min(3, "Dein Vorname ist etwas kurz"),
+    <Card>
+      <QForm
+        mutation={doCreateUser}
+        onSubmit={onSubmit}
+        fields={{
+          name: {
+            label: "Vorname:",
+            required: true,
+            validate: yup.string().min(3, "Dein Vorname ist etwas kurz"),
+          },
+          lastname: { label: "Nachname:", required: true },
+          email: {
+            label: "Email:",
+            required: true,
+            type: "email",
+            placeholder: "name@meineschule.ch",
+          },
+          password: {
+            label: "Passwort:",
+            type: "password",
+            required: true,
+            validate: yup
+              .string()
+              .min(6, "Dein Passwort ist etwas sehr kurz..."),
+          },
+          // watch out: password2 would also be sent to server which barks
+          //password2: yup.string().oneOf([yup.ref('password'), null], 'Passwords must match')
+          role: {
+            label: "Ich bin:",
+            init: "STUDENT",
+            required: true,
+            options: {
+              "---": "UNKOWN",
+              "Schüler/-in": "STUDENT",
+              "Lehrer/-in": "TEACHER",
+              "Schulleiter/-in": "PRINCIPAL",
+              "Weltenbürger/-in": "UNKOWN",
             },
-            lastname: { label: "Nachname:", required: true },
-            email: {
-              label: "Email:",
-              required: true,
-              type: "email",
-              placeholder: "name@meineschule.ch",
-            },
-            password: {
-              label: "Passwort:",
-              type: "password",
-              required: true,
-              validate: yup
-                .string()
-                .min(6, "Dein Passwort ist etwas sehr kurz..."),
-            },
-            // watch out: password2 would also be sent to server which barks
-            //password2: yup.string().oneOf([yup.ref('password'), null], 'Passwords must match')
-            role: {
-              label: "Ich bin:",
-              init: "STUDENT",
-              required: true,
-              options: {
-                "---": "UNKOWN",
-                "Schüler/-in": "STUDENT",
-                "Lehrer/-in": "TEACHER",
-                "Schulleiter/-in": "PRINCIPAL",
-                "Weltenbürger/-in": "UNKOWN",
-              },
-            },
-            submit: { type: "submit", label: "Account erstellen" },
-          }}
-        >
-          <ErrorBox error={error} my={4} />
-          {showLogin && (
-            <>
-              <span />
-              <Button
-                onClick={() => router.push("/user/login")}
-                variant="outline"
-              >
-                Möchstest Du Dich anmelden?
-              </Button>
-            </>
-          )}
-        </QForm>
-      </Card>
-    </Page>
+          },
+          submit: { type: "submit", label: "Account erstellen" },
+        }}
+      >
+        <ErrorBox error={error} my={4} />
+        {showLogin && (
+          <>
+            <span />
+            <Button
+              onClick={() => router.push("/user/login")}
+              variant="outline"
+            >
+              Möchstest Du Dich anmelden?
+            </Button>
+          </>
+        )}
+      </QForm>
+    </Card>
   );
 }

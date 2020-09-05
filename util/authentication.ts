@@ -63,6 +63,9 @@ export async function createUser(_root, args, ctx: NexusContext) {
 
     await sendVerificationEmail(email, "verification", ctx.db);
     logger.mail(`New user created: ${name} ${lastname} <${email}>: ${role}`);
+    // @ts-ignore
+    // TODO: only if we add req.user we can check it in permissions.ts (e.g. for /me)
+    ctx.req.user = user;
     return user;
   } catch (err) {
     if (err.meta?.target && err.meta.target.indexOf("email") >= 0) {
@@ -93,10 +96,16 @@ async function connectUserTeam(user: User, team: Team, ctx: NexusContext) {
 }
 
 export async function createInvitedUser(_root, args, ctx) {
-  args.role = "STUDENT";
-  const team = await ctx.db.findOne({ where: { invite: args.invite } });
+  const team = await ctx.db.team.findOne({ where: { invite: args.invite } });
   if (!team) throw new Error("INVITE_NOT_FOUND");
-  args.team = team.id;
+  const { name, lastname, email, password } = args;
+  args.data = {
+    name,
+    lastname,
+    email,
+    password,
+    role: "STUDENT",
+  };
   const user = await createUser(_root, args, ctx);
   await connectUserTeam(user, team, ctx);
   return user;
@@ -155,7 +164,7 @@ export async function sendVerificationEmail(
     const conf = { email: email.replace(/\./g, " ."), url, site };
 
     await sendMail(from, email, subject, purpose, conf);
-    logger.info("SEND SUCCESSFUL", email);
+    logger.info("Sending verification email for new account: " + email);
     return { token: "SENT..." };
   } catch (err) {
     logger.error("Error sending verification email", err);

@@ -1,7 +1,12 @@
 import { useRouter } from "next/router";
 import { Page } from "../../components/Page";
-import { gql, useQuery } from "@apollo/client";
+import { gql, useQuery, useMutation } from "@apollo/client";
 import { ErrorBox } from "../../components/forms";
+import { Heading, Button, Text } from "rebass";
+import { useState } from "react";
+import { CreateUserForm, Success } from "../user/signup";
+import { useUser } from "../../state/user";
+import _ from "lodash";
 
 const GET_INVITE_TEAM = gql`
   query($invite: String!) {
@@ -22,17 +27,15 @@ const CREATE_INVITED_USER = gql`
     $invite: String!
     $name: String
     $lastname: String
-    $email: email
-    $password: password
+    $email: String!
+    $password: String
   ) {
     createInvitedUser(
-      data: {
-        invite: $invite
-        name: $name
-        lastname: $lastname
-        email: $email
-        password: $password
-      }
+      invite: $invite
+      name: $name
+      lastname: $lastname
+      email: $email
+      password: $password
     ) {
       id
       name
@@ -42,12 +45,26 @@ const CREATE_INVITED_USER = gql`
   }
 `;
 export default function Invite(props) {
+  const existingUser = useUser();
+  const [newUser, setUser] = useState();
   const router = useRouter();
   const invite = String(router.query.invite);
   const teamQuery = useQuery(GET_INVITE_TEAM, {
     variables: { invite },
   });
   const team = teamQuery.data?.team;
+
+  const [doCreateInvitedUser] = useMutation(CREATE_INVITED_USER, {
+    onCompleted(data) {
+      setUser(data.createInvitedUser);
+      console.log("Success");
+    },
+    onError(error) {
+      console.error(error.message);
+    },
+  });
+  const onSubmit = (values) =>
+    doCreateInvitedUser({ variables: { ..._.omit(values, "submit"), invite } });
 
   if (teamQuery.error) {
     return (
@@ -61,11 +78,34 @@ export default function Invite(props) {
   }
 
   if (team) {
+    if (existingUser) {
+      return (
+        <Page heading="Klassen-Einladung">
+          Du bist bereits eingeloggt.
+          <Heading as="h2">
+            Einladung für die Klasse «{team.name}» im Schulhaus «
+            {team.school?.name}»
+          </Heading>
+          <Button onClick="() => {}">Einladung annehmen</Button>
+        </Page>
+      );
+    }
+
+    if (newUser) {
+      return <Success user={newUser} />;
+    }
+
     return (
       <Page heading="Klassen-Einladung">
-        Name: {team.name}
-        <br />
-        Schulhaus: {team.school?.name}
+        <Heading as="h2">
+          Einladung für die Klasse «{team.name}» im Schulhaus «
+          {team.school?.name}»
+        </Heading>
+        <Text>
+          Erstelle einen neuen Account für Voty. Bitte nutze die Email-Adresse
+          Deiner Schule.
+        </Text>
+        <CreateUserForm setUser={setUser} onSubmit={onSubmit} />
       </Page>
     );
   } else {

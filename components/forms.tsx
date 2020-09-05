@@ -86,6 +86,9 @@ export function QForm({ fields, mutation, ...props }) {
     };
   }
   function generateField(field) {
+    if (field.type === "hidden") {
+      return null;
+    }
     if (field.type === "submit") {
       return (
         <React.Fragment key={`${field.name}-frag`}>
