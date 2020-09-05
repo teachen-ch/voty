@@ -40,10 +40,19 @@ function startJWTSession(user: User, ctx: NexusContext): ResponseLogin {
     expiresIn: "1d",
   });
 
-  // @ts-ignore
-  // TODO: only if we add req.user we can check it in permissions.ts (e.g. for /me)
-  ctx.req.user = user;
+  setHeaderUser(user, ctx);
   return { token, user };
+}
+
+export function setHeaderUser(user, ctx: NexusContext) {
+  ctx.req.headers["x-user-id"] = user?.id ? String(user?.id) : "";
+  ctx.req.headers["x-user-role"] = user?.role || "";
+}
+
+export function getUserHeader(ctx: NexusContext) {
+  const userId = parseInt(String(ctx.req.headers["x-user-id"]));
+  const role = ctx.req.headers["x-user-role"];
+  return { userId, role };
 }
 
 export async function createUser(_root, args, ctx: NexusContext) {
@@ -51,6 +60,7 @@ export async function createUser(_root, args, ctx: NexusContext) {
     const { email, password, name, lastname, role } = args.data;
     const salt = await bcrypt.genSalt(10);
     const hashed = await bcrypt.hash(password, salt);
+    if (role === "ADMIN") throw new Error("NAH");
     const user = await ctx.db.user.create({
       data: {
         name,
@@ -63,9 +73,7 @@ export async function createUser(_root, args, ctx: NexusContext) {
 
     await sendVerificationEmail(email, "verification", ctx.db);
     logger.mail(`New user created: ${name} ${lastname} <${email}>: ${role}`);
-    // @ts-ignore
-    // TODO: only if we add req.user we can check it in permissions.ts (e.g. for /me)
-    ctx.req.user = user;
+    setHeaderUser(user, ctx);
     return user;
   } catch (err) {
     if (err.meta?.target && err.meta.target.indexOf("email") >= 0) {
@@ -79,8 +87,8 @@ export async function createUser(_root, args, ctx: NexusContext) {
 export async function acceptInvite(_root, args, ctx: NexusContext) {
   const team = await ctx.db.team.findOne({ where: { invite: args.invite } });
   if (!team) throw new Error("INVITE_NOT_FOUND");
-  // @ts-ignore
-  const user = ctx.req.user;
+  const { userId } = getUserHeader(ctx);
+  const user = await ctx.db.user.findOne({ where: { id: userId } });
   if (!user) throw new Error("NEEDS_LOGIN");
   const success = connectUserTeam(user, team, ctx);
   if (!success) throw new Error("DB_ERROR");
@@ -114,18 +122,21 @@ export async function createInvitedUser(_root, args, ctx) {
 export function getSession(req: NextApiRequest): any {
   const token =
     req.body.token || req.query.token || req.headers["x-access-token"];
-  if (token && token != "null") return verifyJWT(token);
+
+  // ensure that headers are set anyway, otherwise they might be set by client :-/
+  let jwt = { user: {} };
+  if (token && token != "null") {
+    jwt = verifyJWT(token);
+  }
+  const ctx: any = { req: req };
+  return setHeaderUser(jwt.user, ctx);
 }
 
-export async function getUser(
-  req: Request,
-  prisma: PrismaClient
-): Promise<User> {
+export async function getUser(ctx: NexusContext): Promise<User> {
   try {
-    // @ts-ignore
-    if (req.user) {
-      // @ts-ignore
-      return await prisma.user.findOne({ where: { email: req.user.email } });
+    const { userId, role } = getUserHeader(ctx);
+    if (userId) {
+      return await ctx.db.user.findOne({ where: { id: userId } });
     }
   } catch (err) {
     logger.info("error calling /me", err);
@@ -208,7 +219,7 @@ export async function checkVerification(_root, args, ctx) {
 
 export async function changePassword(_root, args, ctx) {
   logger.info("password Change... check user");
-  const user = await getUser(ctx.req, ctx.db);
+  const user = await getUser(ctx);
   logger.info("user: ", user);
   const salt = await bcrypt.genSalt(10);
   const hashed = await bcrypt.hash(args.password, salt);

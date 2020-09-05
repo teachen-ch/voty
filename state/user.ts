@@ -16,6 +16,12 @@ type User = {
   name: string;
   lastname: string;
   role: string;
+  team: Team;
+};
+
+type Team = {
+  id: number;
+  name: string;
 };
 
 export const userState = atom({
