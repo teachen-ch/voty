@@ -70,3 +70,7 @@ What follows are a few random notes which eventually should go into some docs
 
 sudo apt install s3cmd
 sudo s3cmd --configure
+
+### How to test graphql API with curl
+
+curl -H "x-access-token: <<<token>>>" -d '{"query": "{me {name id }}"}' -H "Content-Type: application/json" localhost:3000/api/graphql

@@ -7,6 +7,7 @@ import { useState } from "react";
 import { CreateUserForm, Success } from "../user/signup";
 import { useUser } from "../../state/user";
 import _ from "lodash";
+import CheckLogin from "../../components/CheckLogin";
 
 const GET_INVITE_TEAM = gql`
   query($invite: String!) {
@@ -44,6 +45,21 @@ const CREATE_INVITED_USER = gql`
     }
   }
 `;
+
+const ACCEPT_INVITE = gql`
+  mutation($invite: String!) {
+    acceptInvite(invite: $invite) {
+      id
+      name
+      school {
+        id
+        name
+        city
+      }
+    }
+  }
+`;
+
 export default function Invite(props) {
   const existingUser = useUser();
   const [newUser, setUser] = useState();
@@ -79,16 +95,7 @@ export default function Invite(props) {
 
   if (team) {
     if (existingUser) {
-      return (
-        <Page heading="Klassen-Einladung">
-          Du bist bereits eingeloggt.
-          <Heading as="h2">
-            Einladung für die Klasse «{team.name}» im Schulhaus «
-            {team.school?.name}»
-          </Heading>
-          <Button onClick="() => {}">Einladung annehmen</Button>
-        </Page>
-      );
+      return <AcceptInvite user={existingUser} invite={invite} team={team} />;
     }
 
     if (newUser) {
@@ -97,6 +104,7 @@ export default function Invite(props) {
 
     return (
       <Page heading="Klassen-Einladung">
+        <CheckLogin />
         <Heading as="h2">
           Einladung für die Klasse «{team.name}» im Schulhaus «
           {team.school?.name}»
@@ -111,4 +119,43 @@ export default function Invite(props) {
   } else {
     return <Page heading="Klassen-Einladung">Lade Einladung</Page>;
   }
+}
+
+function AcceptInvite({ invite, user, team }) {
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState(false);
+  const router = useRouter();
+  const [doAcceptInvite] = useMutation(ACCEPT_INVITE, {
+    variables: { invite },
+    onCompleted(data) {
+      setSuccess(true);
+      setError("");
+    },
+    onError(error) {
+      if (error.message === "ALREADY_IN_TEAM") {
+        setError("Du bist bereits in einer Klasse angemeldet.");
+      } else {
+        setError(error.message);
+      }
+    },
+  });
+  if (success) {
+    return (
+      <Page heading="Klassen-Einladung">
+        <Text my={4}>Du bist angemeldet in der Klasse «{team.name}»</Text>
+        <Button onClick={() => router.push("/")}>Weiter geht's</Button>
+      </Page>
+    );
+  }
+  return (
+    <Page heading="Klassen-Einladung">
+      <Text>
+        Einladung für Klasse «{team.name}» im Schulhaus «{team.school?.name}»
+      </Text>
+      <Button my={4} onClick={doAcceptInvite}>
+        Einladung annehmen
+      </Button>
+      <ErrorBox error={error} />
+    </Page>
+  );
 }

@@ -90,7 +90,7 @@ export async function acceptInvite(_root, args, ctx: NexusContext) {
   const { userId } = getUserHeader(ctx);
   const user = await ctx.db.user.findOne({ where: { id: userId } });
   if (!user) throw new Error("NEEDS_LOGIN");
-  const success = connectUserTeam(user, team, ctx);
+  const success = await connectUserTeam(user, team, ctx);
   if (!success) throw new Error("DB_ERROR");
   else return team;
 }
@@ -129,7 +129,7 @@ export function getSession(req: NextApiRequest): any {
     jwt = verifyJWT(token);
   }
   const ctx: any = { req: req };
-  return setHeaderUser(jwt.user, ctx);
+  return setHeaderUser(jwt?.user, ctx);
 }
 
 export async function getUser(ctx: NexusContext): Promise<User> {

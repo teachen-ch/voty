@@ -19,7 +19,12 @@ export function Input({ label, ...props }) {
       <RLabel key={label} htmlFor={props.id || props.name}>
         {label}
       </RLabel>
-      <RInput key={"i" + label} {...field} {...props} />
+      <RInput
+        key={"i" + label}
+        id={props.id || props.name}
+        {...field}
+        {...props}
+      />
       {meta.touched && meta.error ? (
         <>
           <span key={"s" + label} />
@@ -35,7 +40,7 @@ export function Input({ label, ...props }) {
 export function QForm({ fields, mutation, ...props }) {
   // default onSubmit = execute mutation handler
   const doMutation = (values) =>
-    mutation({ variables: { data: _.omit(values, "submit") } });
+    mutation({ variables: _.omit(values, "submit") });
   const onSubmit = props.onSubmit ? props.onSubmit : doMutation;
 
   const { fieldArr, validationSchema, initialValues } = useMemo(
@@ -145,7 +150,7 @@ export function Select({ label, ...props }) {
       <RLabel key={label} htmlFor={props.id || props.name}>
         {label}
       </RLabel>
-      <RSelect {...field} {...props} />
+      <RSelect id={props.id || props.name} {...field} {...props} />
       {meta.touched && meta.error ? (
         <>
           <span key={"s" + label} />

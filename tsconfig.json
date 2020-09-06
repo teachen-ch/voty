@@ -18,7 +18,9 @@
     // nexus:
     "typeRoots": ["node_modules/@types", "types"],
     // nexus
-    "plugins": [{ "name": "nexus/typescript-language-service" }]
+    "plugins": [{ "name": "nexus/typescript-language-service" }],
+    // @testing-library
+    "types": ["cypress", "@testing-library/cypress"]
   },
   "include": [
     "next-env.d.ts",

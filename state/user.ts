@@ -12,16 +12,25 @@ export const accessTokenState = atom({
 
 type User = {
   id: number;
-  email: number;
+  email?: number;
   name: string;
-  lastname: string;
+  lastname?: string;
+  shortname: string;
   role: string;
-  team: Team;
+  team?: Team;
+  school?: School;
 };
 
 type Team = {
   id: number;
   name: string;
+};
+
+type School = {
+  id: number;
+  name: string;
+  city?: string;
+  zip?: string;
 };
 
 export const userState = atom({

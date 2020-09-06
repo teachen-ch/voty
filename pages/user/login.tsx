@@ -120,53 +120,39 @@ export function LoginForm() {
     return <VerificationForm email={emailError} />;
   }
   return (
-    <>
-      <Card my={3}>
-        <Grid gap={2} columns={[0, 0, "1fr 3fr"]}>
-          <Label>Email:</Label>
-          <Input
-            autoFocus
-            autoCapitalize="none"
-            value={email}
-            name="email"
-            onChange={(event: React.FormEvent<HTMLInputElement>) =>
-              setEmail(event.currentTarget.value)
-            }
-          />
-          <Label>Password:</Label>
-
-          <Input
-            value={password}
-            name="password"
-            type="password"
-            onChange={(event: React.FormEvent<HTMLInputElement>) =>
-              setPassword(event.currentTarget.value)
-            }
-          />
-
-          <span />
-          <Button onClick={() => doLogin({ variables: { email, password } })}>
-            Anmelden
+    <Card>
+      <QForm
+        mutation={doLogin}
+        fields={{
+          email: {
+            label: "Email:",
+            required: true,
+            type: "email",
+            placeholder: "name@meineschule.ch",
+          },
+          password: {
+            label: "Passwort:",
+            type: "password",
+            required: true,
+          },
+          submit: { type: "submit", label: "Anmelden" },
+        }}
+      >
+        <ErrorBox error={error} my={4} />
+        <span />
+        <Grid gap={2} columns={[0, 0, "3fr 2fr"]}>
+          <Button onClick={() => router.push("/user/signup")} variant="outline">
+            Ich habe noch keinen Account
           </Button>
-          <ErrorBox error={error} />
-          <span />
-          <Grid gap={2} columns={[0, 0, "3fr 2fr"]}>
-            <Button
-              onClick={() => router.push("/user/signup")}
-              variant="outline"
-            >
-              Ich habe noch keinen Account
-            </Button>
-            <Button
-              onClick={() => setRequestReset(email ? email : "")}
-              variant="outline"
-            >
-              Passwort vergessen?
-            </Button>
-          </Grid>
+          <Button
+            onClick={() => setRequestReset(email ? email : "")}
+            variant="outline"
+          >
+            Passwort vergessen?
+          </Button>
         </Grid>
-      </Card>
-    </>
+      </QForm>
+    </Card>
   );
 }
 

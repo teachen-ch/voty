@@ -1,0 +1,5 @@
+{
+  "name": "test",
+  "email": "hello@votyapp.ch",
+  "body": "Fixtures are a great way to mock data for responses to routes"
+}
