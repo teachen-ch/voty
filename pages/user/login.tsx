@@ -106,6 +106,7 @@ export function LoginForm() {
       if (error.message === "ERR_USER_PASSWORD") {
         return setError("Email oder Passwort passen leider nicht zueinander…");
       } else if (error.message === "ERR_EMAIL_NOT_VERIFIED") {
+        console.log(error, resultLogin.data);
         return setEmailError(email);
       } else {
         return setError(error.message);
@@ -128,6 +129,7 @@ export function LoginForm() {
             label: "Email:",
             required: true,
             type: "email",
+            setter: setEmail,
             placeholder: "name@meineschule.ch",
           },
           password: {

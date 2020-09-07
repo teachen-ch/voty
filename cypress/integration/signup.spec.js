@@ -1,4 +1,8 @@
 describe("Test Signup Page", () => {
+  beforeEach(() => {
+    cy.task("prismaLoader", "testdb.yml");
+  });
+
   it("Barks on existing user", () => {
     cy.visit("/user/signup");
     cy.findByLabelText("Vorname:").type("Test");
@@ -20,14 +24,24 @@ describe("Test Signup Page", () => {
   });
 });
 
-describe("Test Login", () => {
+describe.only("Create a new user", () => {
   beforeEach(() => {
-    cy.login();
+    cy.task("prismaLoader", "testdb.yml");
   });
 
-  it("Logs is already logged in!", () => {
+  it("Creates a new user!", () => {
+    cy.visit("/user/signup");
+    cy.findByLabelText("Vorname:").type("Test");
+    cy.findByLabelText("Nachname:").type("Test");
+    cy.findByLabelText("Email:").type("other@teachen.ch");
+    cy.findByLabelText("Passwort:").type("Password2007");
+    cy.get("button").contains("Account erstellen").click();
+    cy.contains("Account erstellt");
     cy.visit("/user/login");
-    cy.contains("Startseite").click();
-    cy.url().should("include", "/user/teacher");
+
+    cy.findByLabelText("Email:").type("other@teachen.ch");
+    cy.findByLabelText("Passwort:").type("Password2007");
+    cy.get("button").contains("Anmelden").click();
+    cy.contains("Email bestätigen");
   });
 });

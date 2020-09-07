@@ -1,5 +1,8 @@
 describe("Test Login Page", () => {
-  it("logs in with a valid user!", () => {
+  beforeEach(() => {
+    cy.task("prismaLoader", "testdb.yml");
+  });
+  it("logs in with a valid user (role: teacher)!", () => {
     cy.visit("/");
     cy.contains("Anmelden").click();
     cy.url().should("include", "/user/login");
@@ -21,10 +24,11 @@ describe("Test Login Page", () => {
 
 describe("Test Login", () => {
   beforeEach(() => {
+    cy.task("prismaLoader", "testdb.yml");
     cy.login();
   });
 
-  it("Logs is already logged in!", () => {
+  it("User is already logged in!", () => {
     cy.visit("/user/login");
     cy.contains("Startseite").click();
     cy.url().should("include", "/user/teacher");

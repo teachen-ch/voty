@@ -24,6 +24,8 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
 
+import "@testing-library/cypress/add-commands";
+
 Cypress.Commands.add("login", (email, password) => {
   email = email || Cypress.env("USER");
   password = password || Cypress.env("PASS");
@@ -33,5 +35,3 @@ Cypress.Commands.add("login", (email, password) => {
     window.localStorage.setItem("@token", resp.body.data.login.token);
   });
 });
-
-import "@testing-library/cypress/add-commands";

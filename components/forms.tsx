@@ -14,6 +14,15 @@ export { Formik, Form, yup, Grid, Card };
 
 export function Input({ label, ...props }) {
   const [field, meta] = useField(props as any);
+  // TODO: this is a really hacky way to get values out of the form again
+  // e.g. on login.tsx email field
+  const onChange = props.setter
+    ? (value) => {
+        props.setter(value.target.value);
+        field.onChange(value);
+      }
+    : field.onChange;
+
   return (
     <>
       <RLabel key={label} htmlFor={props.id || props.name}>
@@ -22,7 +31,8 @@ export function Input({ label, ...props }) {
       <RInput
         key={"i" + label}
         id={props.id || props.name}
-        {...field}
+        onChange={onChange}
+        onBlur={field.onBlur}
         {...props}
       />
       {meta.touched && meta.error ? (
@@ -61,6 +71,7 @@ export function QForm({ fields, mutation, ...props }) {
         options,
         validate,
         init,
+        setter,
         placeholder,
       } = fields[name];
       initialValues[name] = typeof init !== "undefined" ? init : "";
@@ -81,7 +92,15 @@ export function QForm({ fields, mutation, ...props }) {
         validate = validate.required("Pflichtfeld");
       }
       if (validate) validationSchema[name] = validate;
-      fieldArr.push({ name, label, type, required, options, placeholder });
+      fieldArr.push({
+        name,
+        label,
+        type,
+        required,
+        options,
+        setter,
+        placeholder,
+      });
     });
 
     return {
@@ -121,6 +140,7 @@ export function QForm({ fields, mutation, ...props }) {
           key={field.name}
           label={field.label}
           name={field.name}
+          setter={field.setter}
           placeholder={field.placeholder}
         />
       );

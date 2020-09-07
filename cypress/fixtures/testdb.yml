@@ -1,0 +1,84 @@
+# under delete, you can specify which objects to clean up before creation
+delete:
+  - team
+  - ballot
+  - verificationRequest
+  - domain
+  - attachment
+  - thread
+  - reaction
+  - user
+  - school
+
+# This is a prisma type with a list of objects to create
+user:
+  - name: Admin
+    lastname: Voty
+    email: voty@teachen.ch
+    password: $2b$10$3ZxdzTwtAjW3A1QSi.zDJ.IFSyUIqnE00kRMgwhsYaJujv5xMbB4S
+    role: ADMIN
+    emailVerified: !!timestamp "2020-01-01"
+
+# Another prisma type with objects to create
+school:
+  - name: School One
+    address: Somestreet 2
+    city: City One
+    zip: "1000"
+    canton: CA
+    teams:
+      # relations can be deep-created with the create property
+      create:
+        - name: Class 1
+          invite: abcd1000
+          teacher:
+            create:
+              name: Teacher-1
+              lastname: Teacher
+              email: teacher@teachen.ch
+              password: $2b$10$3ZxdzTwtAjW3A1QSi.zDJ.IFSyUIqnE00kRMgwhsYaJujv5xMbB4S
+              emailVerified: !!timestamp "2020-01-01"
+              role: TEACHER
+          members:
+            # alternatively you can also relate to existing instances
+            # however, you will not know the id, so you need another
+            # unique attribute to relate to
+            connect:
+              - email: voty@teachen.ch
+            create:
+              - name: Student-1
+                lastname: Student
+                email: student@teachen.ch
+                password: $2b$10$3ZxdzTwtAjW3A1QSi.zDJ.IFSyUIqnE00kRMgwhsYaJujv5xMbB4S
+                role: STUDENT
+                emailVerified: !!timestamp "2020-01-01"
+              - name: Student-2
+                lastname: Student
+                email: student2@teachen.ch
+                password: $2b$10$3ZxdzTwtAjW3A1QSi.zDJ.IFSyUIqnE00kRMgwhsYaJujv5xMbB4S
+                role: STUDENT
+                emailVerified: !!timestamp "2020-01-01"
+
+        - name: Class 2
+          invite: abcd2000
+          teacher:
+            create:
+              name: Teacher-2
+              lastname: Teacher
+              email: teacher2@teachen.ch
+              emailVerified: !!timestamp "2020-01-01"
+              role: TEACHER
+              password: $2b$10$3ZxdzTwtAjW3A1QSi.zDJ.IFSyUIqnE00kRMgwhsYaJujv5xMbB4S
+          members:
+            create:
+              - name: Student-3
+                lastname: Student
+                email: student3@teachen.ch
+                password: $2b$10$3ZxdzTwtAjW3A1QSi.zDJ.IFSyUIqnE00kRMgwhsYaJujv5xMbB4S
+                role: STUDENT
+
+  - name: School Two
+    address: Somestreet 2
+    city: City Two
+    zip: "2000"
+    canton: CB
