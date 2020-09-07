@@ -24,7 +24,7 @@ jobs:
 
     steps:
       - name: Checkout latest version
-      - uses: actions/checkout@v2
+        uses: actions/checkout@v2
 
       - name: Run tests
         uses: cypress-io/github-action@v2
