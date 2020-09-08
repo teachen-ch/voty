@@ -17,35 +17,57 @@ env:
   IMAGE_NAME: voty
 
 jobs:
-  # Run tests.
-  # See also https://docs.docker.com/docker-hub/builds/automated-testing/
-  test:
+  cypress:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout latest version
-        uses: actions/checkout@v2
+      - run: docker-compose -f docker-compose-test.yml up
 
-      - name: Run tests
-        uses: cypress-io/github-action@v2
-        with:
-          start: npm run dev
-          wait-on: "http://localhost:3000"
+  # # Run tests.
+  # # See also https://docs.docker.com/docker-hub/builds/automated-testing/
+  # test:
+  #   runs-on: ubuntu-latest
+
+  #   steps:
+  #     - name: Checkout latest version
+  #       uses: actions/checkout@v2
+
+  #     - name: Run tests
+  #       uses: cypress-io/github-action@v2
+  #       with:
+  #         start: npm run dev
+  #         wait-on: "http://localhost:3000"
+  #         record: true
+  #       env:
+  #         # pass the Dashboard record key as an environment variable
+  #         CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+  #         # pass GitHub token to allow accurately detecting a build vs a re-run build
+  #         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   # Push image to GitHub Packages.
   # See also https://docs.docker.com/docker-hub/builds/
   push:
     # Ensure test job passes before pushing image.
-    needs: test
+    #needs: test
 
     runs-on: ubuntu-latest
     if: github.event_name == 'push'
 
     steps:
-      - uses: actions/checkout@v2
+      #- uses: actions/checkout@v2
 
       - name: Build image
         run: docker build . --file Dockerfile --tag $IMAGE_NAME
+      # - name: Run tests
+      #   uses: cypress-io/github-action@v2
+      #   with:
+      #     start: npm run dev
+      #     wait-on: "http://localhost:3000"
+      #     record: true
+      #   env:
+      #     # pass the Dashboard record key as an environment variable
+      #     CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+      #     # pass GitHub token to allow accurately detecting a build vs a re-run build
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Log into registry
         run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login docker.pkg.github.com -u ${{ github.actor }} --password-stdin

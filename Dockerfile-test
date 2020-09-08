@@ -1,5 +1,6 @@
 # Start from node.js v12
-FROM node:14
+#FROM node:14
+FROM cypress/base
 WORKDIR /usr/src/app
 
 # Install app dependencies
@@ -19,7 +20,6 @@ COPY . .
 EXPOSE 3000
 
 # Build and Start node app
-RUN npx prisma generate
 RUN yarn run build
 ## RUN npx prisma migrate up --experimental
 CMD [ "yarn", "run", "start"]

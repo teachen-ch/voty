@@ -41,4 +41,6 @@ prisma/.env
 # voty
 /logs/
 /backup/
+/cypress/screenshots
+/cypress/videos
 *.swp

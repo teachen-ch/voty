@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "NODE_OPTIONS='--inspect' next dev",
     "build": "npx nexus build && next build",
-    "start": "next start",
+    "start": "next start &",
+    "test": "node_modules/.bin/cypress run",
     "docker-rm": "docker rm -f $(docker ps -a -q)",
     "deploy_dev": "ansible-playbook -i ansible/dev ansible/site.yml --tags app",
     "deploy_prod": "ansible-playbook -i ansible/prod ansible/site.yml --tags app",
