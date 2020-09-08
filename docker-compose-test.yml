@@ -15,7 +15,7 @@ services:
       NEXT_TELEMETRY_DISABLED: 1
     ports:
       - "3000:3000"
-    env_file: ".env.local"
+    env_file: ".env"
     command: sh -c "yarn run prisma && yarn start && yarn test"
     #volumes:
     #  - .:/app/

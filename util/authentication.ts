@@ -2,13 +2,17 @@ import jwt from "jsonwebtoken";
 import { PrismaClient, User, Team } from "@prisma/client";
 import { NextApiRequest } from "next";
 import bcrypt from "bcrypt";
-import { Request } from "nexus/dist/runtime/schema/schema";
 import { sendMail } from "./email";
 import { randomBytes, createHash } from "crypto";
 import logger from "./logger";
 
-const secret = process.env.SESSION_SECRET;
-const expires = process.env.SESSION_EXPIRES;
+let secret = process.env.SESSION_SECRET;
+let expires = process.env.SESSION_EXPIRES || "1d";
+
+if (!secret) {
+  logger.warn(".env.SESSION_SECRET is not defined! using random secret");
+  secret = randomBytes(32).toString("hex");
+}
 
 type ResponseLogin = {
   error?: string;
@@ -37,7 +41,7 @@ export async function login(_root, args, ctx): Promise<ResponseLogin> {
 
 function startJWTSession(user: User, ctx: NexusContext): ResponseLogin {
   const token: string = jwt.sign({ user }, secret, {
-    expiresIn: "1d",
+    expiresIn: expires,
   });
 
   setHeaderUser(user, ctx);

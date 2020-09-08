@@ -2,7 +2,7 @@ import nodemailer from "nodemailer";
 import { promises as fs } from "fs";
 import Mustache from "mustache";
 import mjml2html from "mjml";
-import logger from "./logger";
+import { logger } from "./logger";
 
 const server = {
   host: process.env.SMTP_HOST,
@@ -13,7 +13,6 @@ const server = {
   },
 };
 
-const mailer = nodemailer.createTransport(server);
 const templatesDir = "./mails/";
 
 export async function sendMail(
@@ -24,6 +23,14 @@ export async function sendMail(
   data: any
 ) {
   const { html, text } = await renderTemplate(template, data);
+
+  // No email configured, e.g. on dev?
+  if (!server.auth.pass) {
+    logger.info(`Now I'd send mail to ${to}`);
+    return;
+  }
+
+  const mailer = nodemailer.createTransport(server);
   try {
     await mailer.sendMail({
       to,
