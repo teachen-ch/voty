@@ -58,7 +58,6 @@ school:
                 password: $2b$10$3ZxdzTwtAjW3A1QSi.zDJ.IFSyUIqnE00kRMgwhsYaJujv5xMbB4S
                 role: STUDENT
                 emailVerified: !!timestamp "2020-01-01"
-
         - name: Class 2
           invite: abcd2000
           teacher:
@@ -77,8 +76,32 @@ school:
                 password: $2b$10$3ZxdzTwtAjW3A1QSi.zDJ.IFSyUIqnE00kRMgwhsYaJujv5xMbB4S
                 role: STUDENT
 
+    members:
+      connect:
+        - email: student@teachen.ch
+        - email: student2@teachen.ch
+        - email: student3@teachen.ch
+        - email: teacher@teachen.ch
+        - email: teacher2@teachen.ch
+        - email: voty@teachen.ch
+
   - name: School Two
     address: Somestreet 2
     city: City Two
     zip: "2000"
     canton: CB
+    teams:
+      create:
+        - name: Class 3
+          invite: abcd3000
+          teacher:
+            create:
+              name: Teacher-3
+              lastname: Teacher
+              email: teacher3@teachen.ch
+              password: $2b$10$3ZxdzTwtAjW3A1QSi.zDJ.IFSyUIqnE00kRMgwhsYaJujv5xMbB4S
+              emailVerified: !!timestamp "2020-01-01"
+              role: TEACHER
+    members:
+      connect:
+        - email: teacher3@teachen.ch

@@ -32,6 +32,7 @@ Cypress.Commands.add("login", (email, password) => {
   cy.request("POST", "/api/graphql", {
     query: `mutation {login (email: "${email}", password: "${password}") { token }}`,
   }).then((resp) => {
+    // console.log("Logged in: ", resp.body.data.login.token);
     window.localStorage.setItem("@token", resp.body.data.login.token);
   });
 });

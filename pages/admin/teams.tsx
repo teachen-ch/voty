@@ -3,7 +3,7 @@ import { Text, Card, Link as A } from "rebass";
 import { Page, LoggedInPage } from "../../components/Page";
 import { QForm, ErrorBox } from "../../components/forms";
 import { useUser } from "../../state/user";
-import { useState } from "react";
+import { useState, Fragment } from "react";
 import Link from "next/link";
 import { TeamWhereInput } from "@prisma/client";
 import { Users } from "./users";
@@ -83,8 +83,8 @@ export function Teams({ where }: { where?: TeamWhereInput }) {
 
         <tbody>
           {teams.data.teams.map((team: any) => (
-            <>
-              <tr key={team.id}>
+            <Fragment key={team.id}>
+              <tr>
                 <td>{team.id}</td>
                 <td>{team.name}</td>
                 <td>
@@ -115,7 +115,7 @@ export function Teams({ where }: { where?: TeamWhereInput }) {
                   </td>
                 </tr>
               )}
-            </>
+            </Fragment>
           ))}
         </tbody>
       </table>
@@ -138,12 +138,12 @@ const CREATE_TEAM = gql`
   ${Teams.fragments.TeamTeacherFields}
 `;
 
-export function CreateTeamForm() {
+export function CreateTeamForm({ onCompleted }: { onCompleted?: () => void }) {
   const user = useUser();
   console.log(user);
   const [error, setError] = useState("");
   const [doCreateTeam, mutation] = useMutation(CREATE_TEAM, {
-    onCompleted: (data) => {},
+    onCompleted: onCompleted,
     onError: (error) => {
       setError(error.message);
     },
@@ -161,18 +161,6 @@ export function CreateTeamForm() {
       });
     },
   });
-
-  if (mutation.data) {
-    return (
-      <Card>
-        <Text>
-          Klasse «{mutation.data.createOneTeam?.name}» erfolgreich erstellt.
-          <br />
-          <Link href="/user/teacher">Weitere Klasse erstellen</Link>
-        </Text>
-      </Card>
-    );
-  }
 
   return (
     <Card>

@@ -60,13 +60,13 @@ const AnAbmelden = () => {
   const user = useUser();
   if (user) {
     return (
-      <Link href="/user/logout" color="black">
+      <Link href="/user/logout">
         <A color="black">Abmelden</A>
       </Link>
     );
   } else
     return (
-      <Link href="/user/login" color="black">
+      <Link href="/user/login">
         <A color="black">Anmelden</A>
       </Link>
     );
