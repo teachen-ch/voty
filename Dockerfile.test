@@ -18,10 +18,12 @@ COPY . .
 # Expose port 3000
 EXPOSE 3000
 
-# Build and Start node app
+# Initialize database with migrations
 RUN yarn run prisma
+# build app
 RUN yarn run nexus:build
 RUN yarn run build
+# Start app in the background
 RUN yarn run start &
 ## RUN npx prisma migrate up --experimental
 CMD [ "yarn", "run", "test"]
