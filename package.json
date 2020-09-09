@@ -19,7 +19,8 @@
     "nexus:reflection": "nexus dev --reflection --entrypoint pages/api/graphql.ts",
     "nexus:build": "npx nexus build",
     "prisma": "cd prisma && npx prisma migrate save --experimental && npx prisma migrate up --experimental && npx prisma generate && cd ../",
-    "dump_dev": "pg_dump --clean voty | ssh root@dev.votyapp.ch docker exec -i postgres psql -U voty voty"
+    "dump_dev": "pg_dump --clean voty | ssh root@dev.votyapp.ch docker exec -i postgres psql -U voty voty",
+    "init:test": "yarn run prisma && yarn run test"
   },
   "dependencies": {
     "@apollo/client": "^3.1.3",

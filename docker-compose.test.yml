@@ -7,6 +7,7 @@ services:
       dockerfile: "Dockerfile.test"
     env_file: ".env"
     environment:
+      # we need this, because we run the db-initialization form this volume
       - DATABASE_URL=postgres://voty:voty@postgres:5432/voty
       - CYPRESS_RECORD_KEY
       - GITHUB_TOKEN
@@ -19,6 +20,7 @@ services:
       - app
     links:
       - app
+    command: yarn run test:init
 
   app:
     container_name: "app"
@@ -27,7 +29,7 @@ services:
       - DATABASE_URL=postgres://voty:voty@postgres:5432/voty
       - NODE_ENV=dev
       - PORT=3000
-      - INITDB=1 # not yet implemented
+      - INIT_DB=1
       - NEXT_TELEMETRY_DISABLED=1
     ports:
       - "3000:3000"
