@@ -2,46 +2,21 @@
 version: "3.8"
 services:
   sut:
-    build:
-      context: .
-      dockerfile: "Dockerfile.test"
-    env_file: ".env"
-    environment:
-      # we need this, because we run the db-initialization form this volume
-      - DATABASE_URL=postgres://voty:voty@postgres:5432/voty
-      - CYPRESS_RECORD_KEY
-      - GITHUB_TOKEN
-      - NODE_ENV=dev
-      - PORT=3000
-      - NEXT_TELEMETRY_DISABLED=1
-      - CYPRESS_BASEURL=http://app:3000/
-      - CYPRESS_baseUrl=http://app:3000/
-    depends_on:
-      - app
-    links:
-      - app
-    command: yarn run test:init
-
-  app:
-    container_name: "app"
+    image: voty
     build: .
+    env_file: ".env"
     environment:
       - DATABASE_URL=postgres://voty:voty@postgres:5432/voty
-      - NODE_ENV=dev
+      - CYPRESS_RECORD_KEY # pass on from GitHub-Actions or cmdline
+      - GITHUB_TOKEN # pass on from GitHub-Actions or cmdline
+      - NODE_ENV=test
       - PORT=3000
-      - INIT_DB=1
       - NEXT_TELEMETRY_DISABLED=1
-    ports:
-      - "3000:3000"
-    env_file: ".env"
-    command: yarn start
     depends_on:
       - postgres
     links:
       - postgres
-    #volumes:
-    #  - .:/app/
-    #  - /app/
+    command: yarn run ci:test
 
   postgres:
     image: "postgres:12"

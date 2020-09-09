@@ -6,7 +6,8 @@
     "dev": "NODE_OPTIONS='--inspect' next dev",
     "build": "next build",
     "start": "next start",
-    "test": "node_modules/.bin/cypress run",
+    "start:bg": "next start &",
+    "test": "node_modules/.bin/cypress",
     "docker-rm": "docker rm -f $(docker ps -a -q)",
     "deploy_dev": "ansible-playbook -i ansible/dev ansible/site.yml --tags app",
     "deploy_prod": "ansible-playbook -i ansible/prod ansible/site.yml --tags app",
@@ -20,7 +21,7 @@
     "nexus:build": "npx nexus build",
     "prisma": "cd prisma && npx prisma migrate save --experimental && npx prisma migrate up --experimental && npx prisma generate && cd ../",
     "dump_dev": "pg_dump --clean voty | ssh root@dev.votyapp.ch docker exec -i postgres psql -U voty voty",
-    "init:test": "yarn run prisma && yarn run test"
+    "ci:test": "yarn run prisma && yarn run start:bg && node_modules/.bin/cypress run --record"
   },
   "dependencies": {
     "@apollo/client": "^3.1.3",

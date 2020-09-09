@@ -24,8 +24,8 @@ export async function sendMail(
 ) {
   const { html, text } = await renderTemplate(template, data);
 
-  // No email configured, e.g. on dev?
-  if (!server.auth.pass) {
+  // No email configured
+  if (!server.auth.pass || process.env.NODE_ENV === "test") {
     logger.info(`Now I'd send mail to ${to}`);
     return;
   }
