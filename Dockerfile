@@ -20,7 +20,7 @@ EXPOSE 3000
 
 # Build and Start node app
 RUN npx prisma generate
-RUN npx nexus:build
+RUN yarn run nexus:build
 RUN yarn run build
 ## RUN npx prisma migrate up --experimental
 CMD [ "yarn", "run", "start"]
