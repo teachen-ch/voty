@@ -5,6 +5,7 @@ services:
     build:
       context: .
       dockerfile: "Dockerfile.test"
+    env_file: ".env"
     environment:
       - DATABASE_URL=postgres://voty:voty@postgres:5432/voty
       - CYPRESS_RECORD_KEY
