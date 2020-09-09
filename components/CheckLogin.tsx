@@ -55,6 +55,6 @@ export default function CheckLogin() {
     },
   });
 
-  if (checkLogin) return <Heading as="h2">Einen kurzen Moment…</Heading>;
+  // if (checkLogin) return <Heading as="h2">Einen kurzen Moment…</Heading>;
   return null;
 }

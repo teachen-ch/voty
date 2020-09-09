@@ -1,5 +1,6 @@
 import { Flex, Box, Text, Link } from "rebass";
 import { Container } from "./Page";
+import { useUser } from "state/user";
 
 export function Footer() {
   return (
@@ -34,9 +35,7 @@ export function Footer() {
           />
           <hr />
           <nav>
-            <Link href="/user/login" color="black">
-              Anmelden
-            </Link>
+            <AnAbmelden />
             &nbsp;&nbsp;| &nbsp;
             <Link href="/impressum" color="black">
               Impressum
@@ -55,3 +54,19 @@ export function Footer() {
     </Container>
   );
 }
+
+const AnAbmelden = () => {
+  const user = useUser();
+  if (user) {
+    return (
+      <Link href="/user/logout" color="black">
+        Abmelden
+      </Link>
+    );
+  } else
+    return (
+      <Link href="/user/login" color="black">
+        Anmelden
+      </Link>
+    );
+};

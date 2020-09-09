@@ -9,7 +9,6 @@ describe("Test Login Page", () => {
     cy.findByLabelText("Email:").type(Cypress.env("USER"));
     cy.findByLabelText("Passwort:").type(Cypress.env("PASS"));
     cy.get("button").contains("Anmelden").click();
-    cy.contains("Startseite").click();
     cy.url().should("include", "/user/teacher");
   });
 
@@ -30,7 +29,6 @@ describe("Test Login", () => {
 
   it("User is already logged in!", () => {
     cy.visit("/user/login");
-    cy.contains("Startseite").click();
     cy.url().should("include", "/user/teacher");
   });
 });

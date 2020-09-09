@@ -22,6 +22,6 @@ app.assemble();
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   await getSession(req);
-  console.log("User: ", req.headers["x-user-id"], req.headers["x-user-role"]);
+  // console.log("User: ", req.headers["x-user-id"], req.headers["x-user-role"]);
   return app.server.handlers.graphql(req, res);
 };

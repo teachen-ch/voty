@@ -2,7 +2,7 @@ import { useUser } from "../../state/user";
 import { LoggedInPage } from "../../components/Page";
 import { Heading } from "rebass";
 import { Teams, CreateTeamForm } from "../admin/teams";
-import { LogoutButton } from "../user/login";
+import { LogoutButton } from "../user/logout";
 
 export default function Teacher() {
   const user = useUser();

@@ -213,6 +213,9 @@ function AfterLogin() {
         page = "/";
     }
 
+    router.push(page);
+    return null;
+    /*
     const next = () => router.push(page);
     setTimeout(next, 2000);
     return (
@@ -220,7 +223,7 @@ function AfterLogin() {
         <Heading as="h2">Super, Du bist angemeldet.</Heading>
         <Button onClick={next}>Zu Deiner Startseite</Button>
       </>
-    );
+    );*/
   } else {
     return (
       <Heading as="h2">
@@ -228,27 +231,6 @@ function AfterLogin() {
       </Heading>
     );
   }
-}
-
-export function LogoutButton({ onSuccess = null, ...props }) {
-  const setUser = useSetUser();
-  const setAccessToken = useSetAccessToken();
-  const router = useRouter();
-
-  function onLogout() {
-    setAccessToken("");
-    setUser(undefined);
-    if (onSuccess) {
-      onSuccess();
-    } else {
-      router.push("/");
-    }
-  }
-  return (
-    <Button onClick={() => onLogout()} {...props}>
-      Abmelden
-    </Button>
-  );
 }
 
 function CheckToken({ token, purpose }) {
