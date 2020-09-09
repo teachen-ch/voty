@@ -6,8 +6,14 @@ services:
       context: .
       dockerfile: "Dockerfile.test"
     environment:
-      CYPRESS_RECORD_KEY: $secrets.CYPRESS_RECORD_KEY
-      GITHUB_TOKEN: $secrets.GITHUB_TOKEN
+      - DATABASE_URL=postgres://voty:voty@postgres:5432/voty
+      - CYPRESS_RECORD_KEY
+      - GITHUB_TOKEN
+      - NODE_ENV=dev
+      - PORT=3000
+      - NEXT_TELEMETRY_DISABLED=1
+      - CYPRESS_BASEURL=http://app:3000/
+      - CYPRESS_baseUrl=http://app:3000/
     depends_on:
       - app
     links:
@@ -17,10 +23,11 @@ services:
     container_name: "app"
     build: .
     environment:
-      DATABASE_URL: postgres://voty:voty@postgres:5432/voty
-      NODE_ENV: test
-      PORT: 3000
-      NEXT_TELEMETRY_DISABLED: 1
+      - DATABASE_URL=postgres://voty:voty@postgres:5432/voty
+      - NODE_ENV=dev
+      - PORT=3000
+      - INITDB=1 # not yet implemented
+      - NEXT_TELEMETRY_DISABLED=1
     ports:
       - "3000:3000"
     env_file: ".env"
