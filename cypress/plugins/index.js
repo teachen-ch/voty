@@ -27,4 +27,10 @@ module.exports = (on, config) => {
       return null;
     },
   });
+
+  require("cypress-image-snapshot/plugin").addMatchImageSnapshotPlugin(
+    on,
+    config
+  );
+  // return config;
 };

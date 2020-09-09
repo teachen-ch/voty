@@ -25,6 +25,9 @@
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
 
 import "@testing-library/cypress/add-commands";
+import { addMatchImageSnapshotCommand } from "cypress-image-snapshot/command";
+
+addMatchImageSnapshotCommand();
 
 Cypress.Commands.add("login", (email, password) => {
   email = email || Cypress.env("USER");

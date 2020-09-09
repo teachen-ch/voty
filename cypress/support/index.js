@@ -14,3 +14,4 @@
 // ***********************************************************
 
 import "./commands";
+require("cypress-image-snapshot/command").addMatchImageSnapshotCommand();
