@@ -16,7 +16,7 @@ services:
       - postgres
     links:
       - postgres
-    command: wait-for-db.sh $DATABASE_URL -- yarn run ci:test
+    command: /bin/sh wait-for-db.sh $DATABASE_URL -- yarn run ci:test
 
   postgres:
     image: "postgres:12"
