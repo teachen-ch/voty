@@ -62,11 +62,15 @@ Here we compile a handy list of links to the documentation of (some) of the 3rd-
 
 - GitHub Actions: https://docs.github.com/en/actions
 
+#### Integration Testing (E2E)
+
+- Cypress: https://docs.cypress.io/
+
 ## Random Notes
 
 What follows are a few random notes which eventually should go into some docs
 
-### Database backups
+### Database backup
 
 sudo apt install s3cmd
 sudo s3cmd --configure
@@ -74,3 +78,14 @@ sudo s3cmd --configure
 ### How to test graphql API with curl
 
 curl -H "x-access-token: <<<token>>>" -d '{"query": "{me {name id }}"}' -H "Content-Type: application/json" localhost:3000/api/graphql
+
+### Deployment
+
+Our CI/CD pipelines runs on GitHub Actions. On each commit, deploy-publish.yml will build a docker image of voty, run cypress E2E tests and, if successful, push the latest image to packages.github.com. From there it can be deployed to migration as follows:
+
+```
+yarn run migrate_dev
+yarn run deploy_dev
+```
+
+The first command will migrate the database schema, the second will fetch the latest image from packages.github.com and docker-compose the app.
