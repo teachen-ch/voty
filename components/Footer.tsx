@@ -1,19 +1,20 @@
-import { Flex, Box, Text, Link } from "rebass";
+import { Flex, Box, Text, Link as A } from "rebass";
 import { Container } from "./Page";
 import { useUser } from "state/user";
+import Link from "next/link";
 
 export function Footer() {
   return (
     <Container as="footer" pt={6} pb={3} fontSize={"0.8em"}>
       <Text>
         voty ist ein Projekt des Vereins{" "}
-        <Link
+        <A
           href="https://teachen.ch/verein-teachen"
           color="black"
           sx={{ textDecoration: "underline" }}
         >
           «Teachen!»
-        </Link>
+        </A>
         <br />
         mit tatkräftiger Unterstützung des
         <br />
@@ -37,16 +38,16 @@ export function Footer() {
           <nav>
             <AnAbmelden />
             &nbsp;&nbsp;| &nbsp;
-            <Link href="/impressum" color="black">
-              Impressum
+            <Link href="/impressum">
+              <A color="black">Impressum</A>
             </Link>
             &nbsp;&nbsp;| &nbsp;
-            <Link href="/datenschutz" color="black">
-              Datenschutz
+            <Link href="/datenschutz">
+              <A color="black">Datenschutz</A>
             </Link>
             &nbsp;&nbsp;| &nbsp;
-            <Link href="/kontakt" color="black">
-              Kontakt
+            <Link href="/kontakt">
+              <A color="black">Kontakt</A>
             </Link>
           </nav>
         </Box>
@@ -60,13 +61,13 @@ const AnAbmelden = () => {
   if (user) {
     return (
       <Link href="/user/logout" color="black">
-        Abmelden
+        <A color="black">Abmelden</A>
       </Link>
     );
   } else
     return (
       <Link href="/user/login" color="black">
-        Anmelden
+        <A color="black">Anmelden</A>
       </Link>
     );
 };

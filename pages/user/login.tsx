@@ -1,8 +1,8 @@
 import { useRouter } from "next/router";
 import { Page } from "components/Page";
-import { gql, useMutation, useQuery } from "@apollo/client";
+import { gql, useMutation } from "@apollo/client";
 import { useState, useEffect } from "react";
-import { Card, Text, Link, Button, Heading } from "rebass";
+import { Card, Text, Button, Heading } from "rebass";
 import { Grid } from "theme-ui";
 import { Label, Input } from "@rebass/forms";
 import CheckLogin from "components/CheckLogin";

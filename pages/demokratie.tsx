@@ -1,6 +1,6 @@
 import Newsletter from "components/Newsletter";
 import { Page } from "components/Page";
-import { Card, Heading, Text, Link } from "rebass";
+import { Card, Heading, Text, Link as A } from "rebass";
 
 export default function Kontakt() {
   return (
@@ -14,8 +14,8 @@ export default function Kontakt() {
         Jugend für die Demokratie zu begeistern? Das Projekt «voty» will sich
         diesem Thema annehmen und das Demokratieverständnis fördern. Unterstützt
         durch den{" "}
-        {/*<Link href="https://prototypefund.opendata.ch" target="_blank">prototypefund.opendata.ch</Link>*/}
-        PrototypeFund {/*</Link>{" "}*/}
+        {/*<A href="https://prototypefund.opendata.ch" target="_blank">prototypefund.opendata.ch</Link>*/}
+        PrototypeFund {/*</A>{" "}*/}
         und in Zusammenarbeit mit SRF und weiteren Partnern werden wir in den
         nächsten Monaten gemeinsam mit Schulen einen Prototypen entwickeln und
         testen.

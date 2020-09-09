@@ -1,6 +1,6 @@
 import Head from "next/head";
 import { Page } from "components/Page";
-import { Box, Link, Heading, Text } from "rebass";
+import { Box, Link as A, Heading, Text } from "rebass";
 
 export default function Datenschutz() {
   return (
@@ -114,9 +114,9 @@ export default function Datenschutz() {
       <Text>
         Die Datenschutzrichtlinie des Bibliothekbetreibers Google finden Sie
         hier:&nbsp;
-        <Link href="www.google.com/policies/privacy/">
+        <A href="www.google.com/policies/privacy/">
           google.com/policies/privacy/
-        </Link>
+        </A>
       </Text>
       <Heading as="h2">Eingebettete Inhalte von anderen Websites</Heading>
       <Text>

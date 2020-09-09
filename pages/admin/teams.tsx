@@ -1,10 +1,12 @@
 import { gql, useQuery, useMutation } from "@apollo/client";
-
-import { Text, Card, Link } from "rebass";
-import { Page } from "../../components/Page";
+import { Text, Card, Link as A } from "rebass";
+import { Page, LoggedInPage } from "../../components/Page";
 import { QForm, ErrorBox } from "../../components/forms";
 import { useUser } from "../../state/user";
 import { useState } from "react";
+import Link from "next/link";
+import { TeamWhereInput } from "@prisma/client";
+import { Users } from "./users";
 
 Teams.fragments = {
   TeamTeacherFields: gql`
@@ -27,8 +29,8 @@ Teams.fragments = {
 };
 
 const GET_TEAMS = gql`
-  query($id: Int) {
-    teams(where: { teacher: { id: { equals: $id } } }) {
+  query($where: TeamWhereInput) {
+    teams(where: $where) {
       ...TeamTeacherFields
     }
   }
@@ -37,15 +39,16 @@ const GET_TEAMS = gql`
 
 export default function TeamsPage() {
   return (
-    <Page heading="Schulklassen">
+    <LoggedInPage heading="Schulklassen">
       <Teams />
-    </Page>
+    </LoggedInPage>
   );
 }
 
-export function Teams() {
+export function Teams({ where }: { where?: TeamWhereInput }) {
   const user = useUser();
-  const teams = useQuery(GET_TEAMS, { variables: { id: user?.id } });
+  const [focus, setFocus] = useState();
+  const teams = useQuery(GET_TEAMS, { variables: { where } });
 
   if (teams.error) {
     return (
@@ -80,17 +83,39 @@ export function Teams() {
 
         <tbody>
           {teams.data.teams.map((team: any) => (
-            <tr key={team.id}>
-              <td>{team.id}</td>
-              <td>{team.name}</td>
-              <td>
-                {team.school?.name} ({team.school?.city})
-              </td>
-              <td>{team.members ? team.members.length : "-"}</td>
-              <td>
-                <Link href={`/i/${team.invite}`}>Einladung</Link>
-              </td>
-            </tr>
+            <>
+              <tr key={team.id}>
+                <td>{team.id}</td>
+                <td>{team.name}</td>
+                <td>
+                  {team.school?.name} ({team.school?.city})
+                </td>
+                <td>
+                  <A
+                    onClick={() => setFocus(focus == team.id ? null : team.id)}
+                  >
+                    {team.members ? team.members.length : "-"}
+                  </A>
+                </td>
+                <td>
+                  <Link href={`/i/${team.invite}`}>
+                    <A>Einladung</A>
+                  </Link>
+                </td>
+              </tr>
+              {focus === team.id && (
+                <tr
+                  style={{
+                    backgroundColor: "#ddd",
+                    border: "1px solid gray",
+                  }}
+                >
+                  <td colSpan={10}>
+                    <Users where={{ team: { id: { equals: team.id } } }} />
+                  </td>
+                </tr>
+              )}
+            </>
           ))}
         </tbody>
       </table>

@@ -38,15 +38,21 @@ const isTeamMember = rule({ cache: "strict" })(
     const { userId, role } = getUserHeader(ctx);
     if (!userId) return false;
     const user = await ctx.db.user.findOne({ where: { id: userId } });
-    return user && user.teamId === parent.id;
+    // check if student is part of team
+    if (user && user.teamId === parent.id) return true;
+    // check if teacher teaches this team
+    if (user && user.id === parent.teacherId) return true;
+    return false;
   }
 );
 
 // Teacher may view his students
-const isTeamTeacher = rule({ cache: "strict" })(
+const teachesTeam = rule({ cache: "strict" })(
   async (parent, args, ctx: NexusContext, info) => {
     const { userId, role } = getUserHeader(ctx);
     if (!userId || role !== "TEACHER") return false;
+    if (!parent.role)
+      throw new Error("teachesTeam can only be applied to User");
     const student = parent.id;
     const teacher = userId;
     const found = await ctx.db.user.findMany({
@@ -69,8 +75,8 @@ const isOwn = (field) =>
 export const permissions = shield({
   rules: {
     Query: {
-      user: isAdmin,
-      users: isAdmin,
+      user: or(isAdmin, teachesTeam),
+      users: or(isAdmin, isTeacher),
       me: allow,
       school: allow,
       schools: isUser,
@@ -86,7 +92,7 @@ export const permissions = shield({
       changePassword: isUser, // actual password change
       acceptInvite: isUser, // accept team invite if already logged in
       createOneTeam: or(isTeacher, isAdmin),
-      deleteOneTeam: or(isTeamTeacher, isAdmin),
+      deleteOneTeam: or(teachesTeam, isAdmin),
       createOneSchool: isTeacher,
       deleteOneSchool: isAdmin,
     },
@@ -100,25 +106,27 @@ export const permissions = shield({
       school: isUser,
       team: isUser,
       teaches: isUser,
-      lastname: or(isOwn("id"), isTeamTeacher, isAdmin),
-      email: or(isOwn("id"), isTeamTeacher, isAdmin),
-      ballots: or(isOwn("id"), isTeamTeacher, isAdmin),
-      attachments: or(isOwn("id"), isTeamTeacher, isAdmin),
-      threads: or(isOwn("id"), isTeamTeacher, isAdmin),
-      reactions: or(isOwn("id"), isTeamTeacher, isAdmin),
+      lastname: or(isOwn("id"), teachesTeam, isAdmin),
+      email: or(isOwn("id"), teachesTeam, isAdmin),
+      ballots: or(isOwn("id"), teachesTeam, isAdmin),
+      attachments: or(isOwn("id"), teachesTeam, isAdmin),
+      threads: or(isOwn("id"), teachesTeam, isAdmin),
+      reactions: or(isOwn("id"), teachesTeam, isAdmin),
     },
     School: {
       id: allow,
       name: allow,
       city: allow,
       zip: allow,
+      canton: allow,
       teams: allow,
+      members: isAdmin,
     },
     Team: {
       id: allow,
       name: allow,
       school: allow,
-      invite: isOwn("teacherId"),
+      invite: or(isOwn("teacherId"), isAdmin),
       "*": isUser,
     },
     ResponseLogin: allow,
@@ -126,6 +134,6 @@ export const permissions = shield({
   options: {
     allowExternalErrors: true,
     debug: true,
-    fallbackRule: deny,
+    fallbackRule: isAdmin,
   },
 });

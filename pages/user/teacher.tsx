@@ -11,7 +11,7 @@ export default function Teacher() {
     <LoggedInPage heading="Startseite für Lehrpersonen">
       <Heading as="h2">Willkommen {user && user.name}</Heading>
       <Heading as="h3">Deine Klassen auf voty</Heading>
-      <Teams />
+      <Teams where={{ teacher: { id: { equals: user?.id } } }} />
       <Heading as="h3">Neue Klasse erfassen</Heading>
       <CreateTeamForm />
       <LogoutButton my={4} />

@@ -1,6 +1,7 @@
 import { gql, useQuery } from "@apollo/client";
 
-import { Page } from "components/Page";
+import { LoggedInPage } from "components/Page";
+import { useUser } from "state/user";
 
 const GET_SCHOOLS = gql`
   query {
@@ -20,10 +21,11 @@ const GET_SCHOOLS = gql`
 `;
 
 export default function SchoolsPage() {
+  const user = useUser();
   return (
-    <Page heading="Schulen">
+    <LoggedInPage heading="Schulen">
       <Schools />
-    </Page>
+    </LoggedInPage>
   );
 }
 
@@ -31,18 +33,10 @@ export function Schools() {
   const schools = useQuery(GET_SCHOOLS);
 
   if (schools.error) {
-    return (
-      <Page>
-        <h1>Error loading data: {schools.error.message}</h1>
-      </Page>
-    );
+    return <h1>Error loading data: {schools.error.message}</h1>;
   }
   if (schools.loading) {
-    return (
-      <Page>
-        <h1>Loading data</h1>
-      </Page>
-    );
+    return <h1>Loading data</h1>;
   }
   return (
     <>

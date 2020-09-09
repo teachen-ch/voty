@@ -108,6 +108,15 @@ export default {
         backgroundRepeat: "no-repeat",
         backgroundPosition: ["50% -5%", "50% -10%", "51% 28.5%"],
       },
+      table: {
+        width: "100%",
+      },
+      th: {
+        textAlign: "left",
+      },
+      td: {
+        py: 2,
+      },
     },
     h2: {
       variant: "text.heading",

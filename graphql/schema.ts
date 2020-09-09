@@ -121,7 +121,10 @@ schema.queryType({
     });
 
     t.crud.ballot();
-    t.crud.ballots();
+    t.crud.ballots({
+      ordering: true,
+      filtering: true,
+    });
   },
 });
 

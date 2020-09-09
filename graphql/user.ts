@@ -44,7 +44,10 @@ schema.extendType({
   type: "Query",
   definition(t) {
     t.crud.user();
-    t.crud.users();
+    t.crud.users({
+      ordering: true,
+      filtering: true,
+    });
 
     t.field("me", {
       type: "User",
