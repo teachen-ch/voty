@@ -1,5 +1,4 @@
 # Start from node.js v12
-#FROM node:14
 FROM cypress/base
 WORKDIR /usr/src/app
 
@@ -20,8 +19,11 @@ COPY . .
 EXPOSE 3000
 
 # Build and Start node app
+RUN yarn run prisma
+RUN yarn run nexus:build
 RUN yarn run build
+RUN yarn run start &
 ## RUN npx prisma migrate up --experimental
-CMD [ "yarn", "run", "start"]
+CMD [ "yarn", "run", "test"]
 
 

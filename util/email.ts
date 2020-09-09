@@ -2,7 +2,7 @@ import nodemailer from "nodemailer";
 import { promises as fs } from "fs";
 import Mustache from "mustache";
 import mjml2html from "mjml";
-import { logger } from "./logger";
+import logger from "./logger";
 
 const server = {
   host: process.env.SMTP_HOST,
