@@ -24,7 +24,7 @@ describe("Test Signup Page", () => {
   });
 });
 
-describe.only("Create a new user", () => {
+describe("Create a new user", () => {
   beforeEach(() => {
     cy.task("prismaLoader", "testdb.yml");
   });

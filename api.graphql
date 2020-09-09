@@ -82,7 +82,7 @@ input AttachmentWhereUniqueInput {
 type Ballot {
   canton: String
   createdAt: DateTime!
-  creator: User!
+  creator: User
   description: String!
   end: DateTime!
   id: Int!
@@ -118,12 +118,18 @@ input BallotCreateOneWithoutThreadInput {
   create: BallotCreateWithoutThreadInput
 }
 
+input BallotCreateOneWithoutVotedInput {
+  connect: BallotWhereUniqueInput
+  create: BallotCreateWithoutVotedInput
+}
+
 input BallotCreateWithoutAttachmentsInput {
   canton: String
   createdAt: DateTime
-  creator: UserCreateOneWithoutBallotsInput!
+  creator: UserCreateOneWithoutBallotsInput
   description: String!
   end: DateTime!
+  options: OptionsCreateManyWithoutBallotInput
   school: SchoolCreateOneWithoutBallotsInput
   scope: Scope
   start: DateTime!
@@ -131,6 +137,8 @@ input BallotCreateWithoutAttachmentsInput {
   thread: ThreadCreateOneWithoutBallotInput
   title: String!
   updatedAt: DateTime
+  voted: VotedCreateManyWithoutBallotInput
+  votes: VotesCreateManyWithoutBallotInput
 }
 
 input BallotCreateWithoutCreatorInput {
@@ -139,6 +147,7 @@ input BallotCreateWithoutCreatorInput {
   createdAt: DateTime
   description: String!
   end: DateTime!
+  options: OptionsCreateManyWithoutBallotInput
   school: SchoolCreateOneWithoutBallotsInput
   scope: Scope
   start: DateTime!
@@ -146,51 +155,80 @@ input BallotCreateWithoutCreatorInput {
   thread: ThreadCreateOneWithoutBallotInput
   title: String!
   updatedAt: DateTime
+  voted: VotedCreateManyWithoutBallotInput
+  votes: VotesCreateManyWithoutBallotInput
 }
 
 input BallotCreateWithoutSchoolInput {
   attachments: AttachmentCreateManyWithoutBallotInput
   canton: String
   createdAt: DateTime
-  creator: UserCreateOneWithoutBallotsInput!
+  creator: UserCreateOneWithoutBallotsInput
   description: String!
   end: DateTime!
+  options: OptionsCreateManyWithoutBallotInput
   scope: Scope
   start: DateTime!
   team: TeamCreateOneWithoutBallotsInput
   thread: ThreadCreateOneWithoutBallotInput
   title: String!
   updatedAt: DateTime
+  voted: VotedCreateManyWithoutBallotInput
+  votes: VotesCreateManyWithoutBallotInput
 }
 
 input BallotCreateWithoutTeamInput {
   attachments: AttachmentCreateManyWithoutBallotInput
   canton: String
   createdAt: DateTime
-  creator: UserCreateOneWithoutBallotsInput!
+  creator: UserCreateOneWithoutBallotsInput
   description: String!
   end: DateTime!
+  options: OptionsCreateManyWithoutBallotInput
   school: SchoolCreateOneWithoutBallotsInput
   scope: Scope
   start: DateTime!
   thread: ThreadCreateOneWithoutBallotInput
   title: String!
   updatedAt: DateTime
+  voted: VotedCreateManyWithoutBallotInput
+  votes: VotesCreateManyWithoutBallotInput
 }
 
 input BallotCreateWithoutThreadInput {
   attachments: AttachmentCreateManyWithoutBallotInput
   canton: String
   createdAt: DateTime
-  creator: UserCreateOneWithoutBallotsInput!
+  creator: UserCreateOneWithoutBallotsInput
   description: String!
   end: DateTime!
+  options: OptionsCreateManyWithoutBallotInput
   school: SchoolCreateOneWithoutBallotsInput
   scope: Scope
   start: DateTime!
   team: TeamCreateOneWithoutBallotsInput
   title: String!
   updatedAt: DateTime
+  voted: VotedCreateManyWithoutBallotInput
+  votes: VotesCreateManyWithoutBallotInput
+}
+
+input BallotCreateWithoutVotedInput {
+  attachments: AttachmentCreateManyWithoutBallotInput
+  canton: String
+  createdAt: DateTime
+  creator: UserCreateOneWithoutBallotsInput
+  description: String!
+  end: DateTime!
+  options: OptionsCreateManyWithoutBallotInput
+  school: SchoolCreateOneWithoutBallotsInput
+  scope: Scope
+  start: DateTime!
+  team: TeamCreateOneWithoutBallotsInput
+  thread: ThreadCreateOneWithoutBallotInput
+  title: String!
+  updatedAt: DateTime
+  votes: VotesCreateManyWithoutBallotInput
 }
 
 input BallotListRelationFilter {
@@ -199,17 +237,34 @@ input BallotListRelationFilter {
   some: BallotWhereInput
 }
 
+input BallotOrderByInput {
+  canton: SortOrder
+  createdAt: SortOrder
+  creatorId: SortOrder
+  description: SortOrder
+  end: SortOrder
+  id: SortOrder
+  schoolId: SortOrder
+  scope: SortOrder
+  start: SortOrder
+  teamId: SortOrder
+  threadId: SortOrder
+  title: SortOrder
+  updatedAt: SortOrder
+}
+
 input BallotWhereInput {
   AND: [BallotWhereInput!]
   attachments: AttachmentListRelationFilter
   canton: StringNullableFilter
   createdAt: DateTimeFilter
   creator: UserWhereInput
-  creatorId: IntFilter
+  creatorId: IntNullableFilter
   description: StringFilter
   end: DateTimeFilter
   id: IntFilter
   NOT: [BallotWhereInput!]
+  options: OptionsListRelationFilter
   OR: [BallotWhereInput!]
   school: SchoolWhereInput
   schoolId: IntNullableFilter
@@ -221,6 +276,8 @@ input BallotWhereInput {
   threadId: IntNullableFilter
   title: StringFilter
   updatedAt: DateTimeFilter
+  voted: VotedListRelationFilter
+  votes: VotesListRelationFilter
 }
 
 input BallotWhereUniqueInput {
@@ -441,16 +498,47 @@ input NestedStringNullableFilter {
   startsWith: String
 }
 
+input OptionsCreateManyWithoutBallotInput {
+  connect: [OptionsWhereUniqueInput!]
+  create: [OptionsCreateWithoutBallotInput!]
+}
+
+input OptionsCreateWithoutBallotInput {
+  title: String!
+  vote: Int!
+}
+
+input OptionsListRelationFilter {
+  every: OptionsWhereInput
+  none: OptionsWhereInput
+  some: OptionsWhereInput
+}
+
+input OptionsWhereInput {
+  AND: [OptionsWhereInput!]
+  ballot: BallotWhereInput
+  ballotId: IntFilter
+  id: IntFilter
+  NOT: [OptionsWhereInput!]
+  OR: [OptionsWhereInput!]
+  title: StringFilter
+  vote: IntFilter
+}
+
+input OptionsWhereUniqueInput {
+  id: Int
+}
+
 type Query {
   ballot(where: BallotWhereUniqueInput!): Ballot
-  ballots(after: BallotWhereUniqueInput, before: BallotWhereUniqueInput, first: Int, last: Int): [Ballot!]!
+  ballots(after: BallotWhereUniqueInput, before: BallotWhereUniqueInput, first: Int, last: Int, orderBy: [BallotOrderByInput!], where: BallotWhereInput): [Ballot!]!
   me: User
   school(where: SchoolWhereUniqueInput!): School
   schools(after: SchoolWhereUniqueInput, before: SchoolWhereUniqueInput, first: Int, last: Int, orderBy: [SchoolOrderByInput!], where: SchoolWhereInput): [School!]!
   team(where: TeamWhereUniqueInput!): Team
   teams(after: TeamWhereUniqueInput, before: TeamWhereUniqueInput, first: Int, last: Int, orderBy: [TeamOrderByInput!], where: TeamWhereInput): [Team!]!
   user(where: UserWhereUniqueInput!): User
-  users(after: UserWhereUniqueInput, before: UserWhereUniqueInput, first: Int, last: Int): [User!]!
+  users(after: UserWhereUniqueInput, before: UserWhereUniqueInput, first: Int, last: Int, orderBy: [UserOrderByInput!], where: UserWhereInput): [User!]!
 }
 
 type Reaction {
@@ -862,6 +950,7 @@ input ThreadCreateWithoutAttachmentsInput {
   createdAt: DateTime
   parent: ThreadCreateOneWithoutChildrenInput
   reactions: ReactionCreateManyWithoutThreadInput
+  ref: String
   text: String
   title: String
   updatedAt: DateTime
@@ -874,6 +963,7 @@ input ThreadCreateWithoutBallotInput {
   createdAt: DateTime
   parent: ThreadCreateOneWithoutChildrenInput
   reactions: ReactionCreateManyWithoutThreadInput
+  ref: String
   text: String
   title: String
   updatedAt: DateTime
@@ -886,6 +976,7 @@ input ThreadCreateWithoutChildrenInput {
   createdAt: DateTime
   parent: ThreadCreateOneWithoutChildrenInput
   reactions: ReactionCreateManyWithoutThreadInput
+  ref: String
   text: String
   title: String
   updatedAt: DateTime
@@ -898,6 +989,7 @@ input ThreadCreateWithoutParentInput {
   children: ThreadCreateManyWithoutParentInput
   createdAt: DateTime
   reactions: ReactionCreateManyWithoutThreadInput
+  ref: String
   text: String
   title: String
   updatedAt: DateTime
@@ -910,6 +1002,7 @@ input ThreadCreateWithoutReactionsInput {
   children: ThreadCreateManyWithoutParentInput
   createdAt: DateTime
   parent: ThreadCreateOneWithoutChildrenInput
+  ref: String
   text: String
   title: String
   updatedAt: DateTime
@@ -923,6 +1016,7 @@ input ThreadCreateWithoutUserInput {
   createdAt: DateTime
   parent: ThreadCreateOneWithoutChildrenInput
   reactions: ReactionCreateManyWithoutThreadInput
+  ref: String
   text: String
   title: String
   updatedAt: DateTime
@@ -946,6 +1040,7 @@ input ThreadWhereInput {
   parent: ThreadWhereInput
   parentId: IntNullableFilter
   reactions: ReactionListRelationFilter
+  ref: StringNullableFilter
   text: StringFilter
   title: StringFilter
   updatedAt: DateTimeFilter
@@ -994,6 +1089,7 @@ input UserCreateInput {
   threads: ThreadCreateManyWithoutUserInput
   updatedAt: DateTime
   verified: Boolean
+  voted: VotedCreateManyWithoutUserInput
 }
 
 input UserCreateManyWithoutSchoolInput {
@@ -1031,6 +1127,11 @@ input UserCreateOneWithoutThreadsInput {
   create: UserCreateWithoutThreadsInput
 }
 
+input UserCreateOneWithoutVotedInput {
+  connect: UserWhereUniqueInput
+  create: UserCreateWithoutVotedInput
+}
+
 input UserCreateWithoutAttachmentsInput {
   ballots: BallotCreateManyWithoutCreatorInput
   createdAt: DateTime
@@ -1049,6 +1150,7 @@ input UserCreateWithoutAttachmentsInput {
   threads: ThreadCreateManyWithoutUserInput
   updatedAt: DateTime
   verified: Boolean
+  voted: VotedCreateManyWithoutUserInput
 }
 
 input UserCreateWithoutBallotsInput {
@@ -1069,6 +1171,7 @@ input UserCreateWithoutBallotsInput {
   threads: ThreadCreateManyWithoutUserInput
   updatedAt: DateTime
   verified: Boolean
+  voted: VotedCreateManyWithoutUserInput
 }
 
 input UserCreateWithoutReactionsInput {
@@ -1089,6 +1192,7 @@ input UserCreateWithoutReactionsInput {
   threads: ThreadCreateManyWithoutUserInput
   updatedAt: DateTime
   verified: Boolean
+  voted: VotedCreateManyWithoutUserInput
 }
 
 input UserCreateWithoutSchoolInput {
@@ -1109,6 +1213,7 @@ input UserCreateWithoutSchoolInput {
   threads: ThreadCreateManyWithoutUserInput
   updatedAt: DateTime
   verified: Boolean
+  voted: VotedCreateManyWithoutUserInput
 }
 
 input UserCreateWithoutTeachesInput {
@@ -1129,6 +1234,7 @@ input UserCreateWithoutTeachesInput {
   threads: ThreadCreateManyWithoutUserInput
   updatedAt: DateTime
   verified: Boolean
+  voted: VotedCreateManyWithoutUserInput
 }
 
 input UserCreateWithoutTeamInput {
@@ -1149,6 +1255,7 @@ input UserCreateWithoutTeamInput {
   threads: ThreadCreateManyWithoutUserInput
   updatedAt: DateTime
   verified: Boolean
+  voted: VotedCreateManyWithoutUserInput
 }
 
 input UserCreateWithoutThreadsInput {
@@ -1169,12 +1276,51 @@ input UserCreateWithoutThreadsInput {
   team: TeamCreateOneWithoutMembersInput
   updatedAt: DateTime
   verified: Boolean
+  voted: VotedCreateManyWithoutUserInput
+}
+
+input UserCreateWithoutVotedInput {
+  attachments: AttachmentCreateManyWithoutUserInput
+  ballots: BallotCreateManyWithoutCreatorInput
+  createdAt: DateTime
+  email: String
+  emailVerified: DateTime
+  gender: Gender
+  image: String
+  lastname: String
+  name: String
+  password: String
+  reactions: ReactionCreateManyWithoutUserInput
+  role: Role
+  school: SchoolCreateOneWithoutMembersInput
+  teaches: TeamCreateManyWithoutTeacherInput
+  team: TeamCreateOneWithoutMembersInput
+  threads: ThreadCreateManyWithoutUserInput
+  updatedAt: DateTime
+  verified: Boolean
 }
 
 input UserListRelationFilter {
   every: UserWhereInput
   none: UserWhereInput
   some: UserWhereInput
+}
+
+input UserOrderByInput {
+  createdAt: SortOrder
+  email: SortOrder
+  emailVerified: SortOrder
+  gender: SortOrder
+  id: SortOrder
+  image: SortOrder
+  lastname: SortOrder
+  name: SortOrder
+  password: SortOrder
+  role: SortOrder
+  schoolId: SortOrder
+  teamId: SortOrder
+  updatedAt: SortOrder
+  verified: SortOrder
 }
 
 input UserWhereInput {
@@ -1202,9 +1348,80 @@ input UserWhereInput {
   threads: ThreadListRelationFilter
   updatedAt: DateTimeFilter
   verified: BoolNullableFilter
+  voted: VotedListRelationFilter
 }
 
 input UserWhereUniqueInput {
   email: String
+  id: Int
+}
+
+input VotedCreateManyWithoutBallotInput {
+  connect: [VotedWhereUniqueInput!]
+  create: [VotedCreateWithoutBallotInput!]
+}
+
+input VotedCreateManyWithoutUserInput {
+  connect: [VotedWhereUniqueInput!]
+  create: [VotedCreateWithoutUserInput!]
+}
+
+input VotedCreateWithoutBallotInput {
+  user: UserCreateOneWithoutVotedInput!
+}
+
+input VotedCreateWithoutUserInput {
+  ballot: BallotCreateOneWithoutVotedInput!
+}
+
+input VotedListRelationFilter {
+  every: VotedWhereInput
+  none: VotedWhereInput
+  some: VotedWhereInput
+}
+
+input VotedWhereInput {
+  AND: [VotedWhereInput!]
+  ballot: BallotWhereInput
+  ballotId: IntFilter
+  id: IntFilter
+  NOT: [VotedWhereInput!]
+  OR: [VotedWhereInput!]
+  user: UserWhereInput
+  userId: IntFilter
+}
+
+input VotedWhereUniqueInput {
+  id: Int
+}
+
+input VotesCreateManyWithoutBallotInput {
+  connect: [VotesWhereUniqueInput!]
+  create: [VotesCreateWithoutBallotInput!]
+}
+
+input VotesCreateWithoutBallotInput {
+  verify: String
+  vote: Int!
+}
+
+input VotesListRelationFilter {
+  every: VotesWhereInput
+  none: VotesWhereInput
+  some: VotesWhereInput
+}
+
+input VotesWhereInput {
+  AND: [VotesWhereInput!]
+  ballot: BallotWhereInput
+  ballotId: IntFilter
+  id: IntFilter
+  NOT: [VotesWhereInput!]
+  OR: [VotesWhereInput!]
+  verify: StringNullableFilter
+  vote: IntFilter
+}
+
+input VotesWhereUniqueInput {
   id: Int
 }
