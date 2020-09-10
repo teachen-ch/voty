@@ -6,7 +6,7 @@
     "dev": "NODE_OPTIONS='--inspect' next dev",
     "build": "next build",
     "start": "next start",
-    "start:bg": "next start &",
+    "start:bg": "next start </dev/null &>/dev/null &",
     "test": "node_modules/.bin/cypress run",
     "cypress:open": "node_modules/.bin/cypress open",
     "docker-rm": "docker rm -f $(docker ps -a -q)",

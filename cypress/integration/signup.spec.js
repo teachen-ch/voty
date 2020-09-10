@@ -9,7 +9,7 @@ describe("Test Signup Page", () => {
     cy.findByLabelText("Nachname:").type("Testerich");
     cy.findByLabelText("Email:").type(Cypress.env("USER"));
     cy.findByLabelText("Passwort:").type("Password2007");
-    cy.get("button").contains("Account erstellen").click();
+    cy.get("button").contains("Konto erstellen").click();
     cy.contains("Diese Email ist bereits registriert");
   });
 
@@ -19,7 +19,7 @@ describe("Test Signup Page", () => {
     cy.findByLabelText("Nachname:").type("Testerich");
     cy.findByLabelText("Email:").type("noemail@bla");
     cy.findByLabelText("Passwort:").type("Password2007");
-    cy.get("button").contains("Account erstellen").click();
+    cy.get("button").contains("Konto erstellen").click();
     cy.contains("Bitte gültige Email-Adresse angeben");
   });
 });
@@ -35,8 +35,8 @@ describe("Create a new user", () => {
     cy.findByLabelText("Nachname:").type("Test");
     cy.findByLabelText("Email:").type("other@teachen.ch");
     cy.findByLabelText("Passwort:").type("Password2007");
-    cy.get("button").contains("Account erstellen").click();
-    cy.contains("Account erstellt");
+    cy.get("button").contains("Konto erstellen").click();
+    cy.contains("Konto erstellt");
     cy.visit("/user/login");
 
     cy.findByLabelText("Email:").type("other@teachen.ch");

@@ -80,7 +80,7 @@ export default function Login() {
         <CheckLogin />
         <Text>
           Hier kannst Du dich mit Deiner Schul-Emailadresse anmelden, wenn Du
-          bereits einen Benutzeraccount bei voty hast.
+          bereits ein Benutzer-Konto bei voty hast.
         </Text>
         <LoginForm />
       </Page>
@@ -144,7 +144,7 @@ export function LoginForm() {
         <span />
         <Grid gap={2} columns={[0, 0, "3fr 2fr"]}>
           <Button onClick={() => router.push("/user/signup")} variant="outline">
-            Ich habe noch keinen Account
+            Ich habe noch kein Benutzer-Konto
           </Button>
           <Button
             onClick={() => setRequestReset(email ? email : "")}
@@ -245,7 +245,7 @@ function CheckToken({ token, purpose }) {
       setAccessToken(data.checkVerification.token);
     },
     onError(error) {
-      setError("Dieser Email-Link ist leider nicht mehr gültig.");
+      setError("Dieser Email-Link ist leider nicht mehr gültig!");
       console.log(error.message);
     },
   });

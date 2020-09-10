@@ -23,9 +23,9 @@ export default function Signup() {
     return <Success user={user} />;
   }
   return (
-    <Page heading="Erstelle einen neuen Account">
+    <Page heading="Erstelle ein neues Benutzer-Konto">
       <Text>
-        Erstelle einen neuen Account für Voty. <br />
+        Erstelle ein neuen Konto für Voty. <br />
         Bitte nutze die Email-Adresse Deiner Schule.
       </Text>
       <CreateUserForm setUser={setUser} />
@@ -35,11 +35,11 @@ export default function Signup() {
 
 export function Success({ user }) {
   return (
-    <Page heading="Account erstellt">
+    <Page heading="Konto erstellt">
       <Text>
-        Hallo {user.name} 👋 Dein neuer Account wurde gestellt und wir haben
-        eine Email an «{user.email}» geschickt. Bitte öffne den Link in diesem
-        Email, um dich anzumelden.
+        Hallo {user.name} 👋 Dein neues Konto wurde gestellt und wir haben eine
+        Email an «{user.email}» geschickt. Bitte öffne den Link in diesem Email,
+        um dich anzumelden.
       </Text>
     </Page>
   );
@@ -115,7 +115,7 @@ export function CreateUserForm({
               "Weltenbürger/-in": "UNKOWN",
             },
           },
-          submit: { type: "submit", label: "Account erstellen" },
+          submit: { type: "submit", label: "Konto erstellen" },
         }}
       >
         <ErrorBox error={error} my={4} />
