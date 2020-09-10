@@ -6,7 +6,7 @@ describe("Test Teacher Startpage", () => {
 
   it("shows Teacher page with teacher's teams!", () => {
     cy.visit("/user/teacher");
-    cy.contains("Startseite für Lehrpersonen");
+    cy.contains("Willkommen");
     cy.contains("Class 1");
   });
 
