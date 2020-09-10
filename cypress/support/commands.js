@@ -29,13 +29,23 @@ import { addMatchImageSnapshotCommand } from "cypress-image-snapshot/command";
 
 addMatchImageSnapshotCommand();
 
-Cypress.Commands.add("login", (email, password) => {
+Cypress.Commands.add("login", (email, password, failed = 0) => {
   email = email || Cypress.env("USER");
   password = password || Cypress.env("PASS");
+  if (failed > 5) return;
   cy.request("POST", "/api/graphql", {
     query: `mutation {login (email: "${email}", password: "${password}") { token }}`,
   }).then((resp) => {
-    // console.log("Logged in: ", resp.body.data.login.token);
+    if (
+      !resp ||
+      !resp.body ||
+      !resp.body.data ||
+      !resp.body.data.login ||
+      !resp.body.data.login.token
+    ) {
+      console.log("Login Failed: ", failed);
+      return cy.login(email, password, failed + 1);
+    }
     window.localStorage.setItem("@token", resp.body.data.login.token);
   });
 });
