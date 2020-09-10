@@ -130,13 +130,11 @@ export async function updateUser(_root, args, ctx: NexusContext) {
   if (id !== userId && role !== "ADMIN")
     throw new Error("ERR_ONLY_UPDATE_SELF");
   if (args.role && role !== "ADMIN") delete args.role;
-  const success = await ctx.db.user.update({
+  const user = await ctx.db.user.update({
     where: { id },
     data: args,
   });
-  if (success) {
-    return;
-  }
+  return user;
 }
 
 export function getSession(req: NextApiRequest): any {

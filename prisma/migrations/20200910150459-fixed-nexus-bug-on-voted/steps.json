@@ -1,0 +1,90 @@
+{
+  "version": "0.3.14-fixed",
+  "steps": [
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "User",
+          "field": "voted"
+        },
+        "directive": "relation"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "User",
+          "field": "voted"
+        },
+        "directive": "relation"
+      },
+      "argument": "",
+      "value": "\"VotedUser\""
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "Ballot",
+          "field": "voted"
+        },
+        "directive": "relation"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "Ballot",
+          "field": "voted"
+        },
+        "directive": "relation"
+      },
+      "argument": "",
+      "value": "\"VotedBallot\""
+    },
+    {
+      "tag": "CreateField",
+      "model": "Voted",
+      "field": "signature",
+      "type": "String",
+      "arity": "Optional"
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "Voted",
+          "field": "user"
+        },
+        "directive": "relation"
+      },
+      "argument": "name",
+      "value": "\"VotedUser\""
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "Voted",
+          "field": "ballot"
+        },
+        "directive": "relation"
+      },
+      "argument": "name",
+      "value": "\"VotedBallot\""
+    }
+  ]
+}

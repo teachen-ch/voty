@@ -1,6 +1,6 @@
 datasource db {
   provider = "postgres"
-  url      = env("DATABASE_URL")
+  url = "***"
 }
 
 generator client {
@@ -77,7 +77,7 @@ model User {
   attachments Attachment[]
   threads     Thread[]
   reactions   Reaction[]
-  voted       Voted[]      @relation("VotedUser")
+  voted       Voted[]
 
   createdAt DateTime @default(now()) @map(name: "created_at")
   updatedAt DateTime @default(now()) @map(name: "updated_at")
@@ -169,7 +169,7 @@ model Ballot {
   threadId  Int?    @map(name: "thread_id")
 
   options     Options[]
-  voted       Voted[]      @relation("VotedBallot")
+  voted       Voted[]
   votes       Votes[]
   attachments Attachment[]
 
@@ -192,11 +192,9 @@ model Options {
 model Voted {
   id Int @default(autoincrement()) @id
 
-  signature String? // encrypted signature of the user
-
-  user     User   @relation(name: "VotedUser", fields: [userId], references: [id])
+  user     User   @relation(fields: [userId], references: [id])
   userId   Int    @map(name: "user_id")
-  ballot   Ballot @relation(name: "VotedBallot", fields: [ballotId], references: [id])
+  ballot   Ballot @relation(fields: [ballotId], references: [id])
   ballotId Int    @map(name: "ballot_id")
 
   @@map(name: "voted")

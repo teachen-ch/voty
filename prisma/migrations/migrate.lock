@@ -17,3 +17,5 @@
 20200909124648-added-votes-and-options-to-ballots
 20200909125303-changed-db-field-names-for-id-fields-to-_id
 20200909195417-further-migration-from-team-id-to-team_id
+20200910144622-clean-up-of-fields
+20200910150459-fixed-nexus-bug-on-voted

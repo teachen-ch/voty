@@ -12,7 +12,7 @@
 // This function is called when a project is opened or re-opened (e.g. due to
 // the project's config changing)
 
-const { loadFixture } = require("prisma-loader");
+const { loadFixture } = require("../../util/prisma-loader");
 
 /**
  * @type {Cypress.PluginConfig}
