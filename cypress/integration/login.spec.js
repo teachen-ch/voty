@@ -1,3 +1,15 @@
+describe("Test Login", () => {
+  beforeEach(() => {
+    cy.task("prismaLoader", "testdb.yml");
+    cy.login();
+  });
+
+  it("User is already logged in!", () => {
+    cy.visit("/user/login");
+    cy.url().should("include", "/user/teacher");
+  });
+});
+
 describe("Test Login Page", () => {
   beforeEach(() => {
     cy.task("prismaLoader", "testdb.yml");
@@ -21,17 +33,5 @@ describe("Test Login Page", () => {
     cy.findByLabelText("Passwort:").type("wrongpass");
     cy.get("button").contains("Anmelden").click();
     cy.contains("Email oder Passwort");
-  });
-});
-
-describe("Test Login", () => {
-  beforeEach(() => {
-    cy.task("prismaLoader", "testdb.yml");
-    cy.login();
-  });
-
-  it("User is already logged in!", () => {
-    cy.visit("/user/login");
-    cy.url().should("include", "/user/teacher");
   });
 });
