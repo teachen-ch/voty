@@ -1,6 +1,6 @@
 import { schema } from "nexus";
 import * as authentication from "../util/authentication";
-import { stringArg } from "nexus/components/schema";
+import { stringArg, intArg } from "nexus/components/schema";
 
 schema.objectType({
   name: "User",
@@ -64,6 +64,10 @@ schema.extendType({
       alias: "createUser",
       resolve: authentication.createUser,
     });
+    t.crud.updateOneUser({
+      alias: "updateUser",
+      resolve: authentication.updateUser,
+    });
     t.field("login", {
       type: "ResponseLogin",
       args: {
@@ -112,6 +116,16 @@ schema.extendType({
         invite: stringArg(),
       },
       resolve: authentication.acceptInvite,
+    });
+    t.field("setSchool", {
+      type: "User",
+      args: {
+        school: intArg(),
+      },
+      resolve: async (_root, { school }, ctx) => {
+        const user = await authentication.updateUser(_root, { school }, ctx);
+        return user;
+      },
     });
   },
 });

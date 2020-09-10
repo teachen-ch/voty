@@ -123,6 +123,22 @@ export async function createInvitedUser(_root, args, ctx) {
   return user;
 }
 
+export async function updateUser(_root, args, ctx: NexusContext) {
+  // TODO: ensure this is not called with variable args by user
+  const { userId, role } = getUserHeader(ctx);
+  const id = args.id || userId;
+  if (id !== userId && role !== "ADMIN")
+    throw new Error("ERR_ONLY_UPDATE_SELF");
+  if (args.role && role !== "ADMIN") delete args.role;
+  const success = await ctx.db.user.update({
+    where: { id },
+    data: args,
+  });
+  if (success) {
+    return;
+  }
+}
+
 export function getSession(req: NextApiRequest): any {
   const token =
     req.body.token || req.query.token || req.headers["x-access-token"];

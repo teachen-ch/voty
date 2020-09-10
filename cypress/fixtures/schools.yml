@@ -1,0 +1,45 @@
+#delete:
+#  - school
+
+school:
+  - name: Gymnasium Laufen
+    address: Steinackerweg 7
+    city: Laufen
+    zip: "4242"
+    canton: BL
+
+  - name: Gymnasium Leonhard
+    address: Kohlenberg 17
+    city: Basel
+    zip: "4051"
+    canton: BS
+
+  - name: Sekundarschule Aesch
+    address: Reinacherstrasse 3
+    city: Aesch
+    zip: "4147"
+    canton: BL
+
+  - name: Sekundarschule Arlesheim-Münchenstein
+    address: Mattweg 54
+    city: Arlesheim
+    zip: "4144"
+    canton: BL
+
+  - name: Sekundarschule Bäumlihof
+    address: Zu den drei Linden 80
+    city: Basel
+    zip: "4058"
+    canton: BS
+
+  - name: Sekundarschule Bäumlihof
+    address: Zu den drei Linden 80
+    city: Basel
+    zip: "4058"
+    canton: BS
+
+  - name: Primarschule Scherr
+    address: Stapferstrasse 54
+    city: Zürich
+    zip: "8006"
+    canton: ZH
