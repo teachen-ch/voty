@@ -147,3 +147,10 @@ school:
     city: Zürich
     zip: "8006"
     canton: ZH
+
+ballot:
+  - title: Kampfflugzeuge
+    description: Der Bund soll neue Kampfflugzeuge kaufen. Dafür soll er höchstens 6 Milliarden Franken ausgeben
+    body: Siehe hier https://www.easyvote.ch/de/abstimmungen/27-9-20/kampfflugzeuge
+    start: !!timestamp "2020-07-01"
+    end: !!timestamp "2020-09-21"

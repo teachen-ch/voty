@@ -246,6 +246,7 @@ input BallotCreateOneWithoutVotedInput {
 }
 
 input BallotCreateWithoutAttachmentsInput {
+  body: String!
   canton: String
   createdAt: DateTime
   creator: UserCreateOneWithoutBallotsInput
@@ -265,6 +266,7 @@ input BallotCreateWithoutAttachmentsInput {
 
 input BallotCreateWithoutCreatorInput {
   attachments: AttachmentCreateManyWithoutBallotInput
+  body: String!
   canton: String
   createdAt: DateTime
   description: String!
@@ -283,6 +285,7 @@ input BallotCreateWithoutCreatorInput {
 
 input BallotCreateWithoutSchoolInput {
   attachments: AttachmentCreateManyWithoutBallotInput
+  body: String!
   canton: String
   createdAt: DateTime
   creator: UserCreateOneWithoutBallotsInput
@@ -301,6 +304,7 @@ input BallotCreateWithoutSchoolInput {
 
 input BallotCreateWithoutTeamInput {
   attachments: AttachmentCreateManyWithoutBallotInput
+  body: String!
   canton: String
   createdAt: DateTime
   creator: UserCreateOneWithoutBallotsInput
@@ -319,6 +323,7 @@ input BallotCreateWithoutTeamInput {
 
 input BallotCreateWithoutThreadInput {
   attachments: AttachmentCreateManyWithoutBallotInput
+  body: String!
   canton: String
   createdAt: DateTime
   creator: UserCreateOneWithoutBallotsInput
@@ -337,6 +342,7 @@ input BallotCreateWithoutThreadInput {
 
 input BallotCreateWithoutVotedInput {
   attachments: AttachmentCreateManyWithoutBallotInput
+  body: String!
   canton: String
   createdAt: DateTime
   creator: UserCreateOneWithoutBallotsInput
@@ -360,6 +366,7 @@ input BallotListRelationFilter {
 }
 
 input BallotOrderByInput {
+  body: SortOrder
   canton: SortOrder
   createdAt: SortOrder
   creatorId: SortOrder
@@ -377,6 +384,7 @@ input BallotOrderByInput {
 
 input BallotScalarWhereInput {
   AND: [BallotScalarWhereInput!]
+  body: StringFilter
   canton: StringNullableFilter
   createdAt: DateTimeFilter
   creatorId: IntNullableFilter
@@ -395,6 +403,7 @@ input BallotScalarWhereInput {
 }
 
 input BallotUpdateManyDataInput {
+  body: StringFieldUpdateOperationsInput
   canton: NullableStringFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   description: StringFieldUpdateOperationsInput
@@ -472,6 +481,7 @@ input BallotUpdateOneWithoutThreadInput {
 }
 
 input BallotUpdateWithoutAttachmentsDataInput {
+  body: StringFieldUpdateOperationsInput
   canton: NullableStringFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   creator: UserUpdateOneWithoutBallotsInput
@@ -491,6 +501,7 @@ input BallotUpdateWithoutAttachmentsDataInput {
 
 input BallotUpdateWithoutCreatorDataInput {
   attachments: AttachmentUpdateManyWithoutBallotInput
+  body: StringFieldUpdateOperationsInput
   canton: NullableStringFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   description: StringFieldUpdateOperationsInput
@@ -509,6 +520,7 @@ input BallotUpdateWithoutCreatorDataInput {
 
 input BallotUpdateWithoutSchoolDataInput {
   attachments: AttachmentUpdateManyWithoutBallotInput
+  body: StringFieldUpdateOperationsInput
   canton: NullableStringFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   creator: UserUpdateOneWithoutBallotsInput
@@ -527,6 +539,7 @@ input BallotUpdateWithoutSchoolDataInput {
 
 input BallotUpdateWithoutTeamDataInput {
   attachments: AttachmentUpdateManyWithoutBallotInput
+  body: StringFieldUpdateOperationsInput
   canton: NullableStringFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   creator: UserUpdateOneWithoutBallotsInput
@@ -545,6 +558,7 @@ input BallotUpdateWithoutTeamDataInput {
 
 input BallotUpdateWithoutThreadDataInput {
   attachments: AttachmentUpdateManyWithoutBallotInput
+  body: StringFieldUpdateOperationsInput
   canton: NullableStringFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   creator: UserUpdateOneWithoutBallotsInput
@@ -563,6 +577,7 @@ input BallotUpdateWithoutThreadDataInput {
 
 input BallotUpdateWithoutVotedDataInput {
   attachments: AttachmentUpdateManyWithoutBallotInput
+  body: StringFieldUpdateOperationsInput
   canton: NullableStringFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   creator: UserUpdateOneWithoutBallotsInput
@@ -630,6 +645,7 @@ input BallotUpsertWithWhereUniqueWithoutTeamInput {
 input BallotWhereInput {
   AND: [BallotWhereInput!]
   attachments: AttachmentListRelationFilter
+  body: StringFilter
   canton: StringNullableFilter
   createdAt: DateTimeFilter
   creator: UserWhereInput

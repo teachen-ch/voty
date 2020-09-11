@@ -2,6 +2,7 @@ import { schema, use } from "nexus";
 import { prisma } from "nexus-plugin-prisma";
 import { permissions } from "./permissions";
 import { randomBytes } from "crypto";
+import { getSessionUser } from "util/authentication";
 
 use(
   prisma({
@@ -12,6 +13,12 @@ use(
 );
 
 use(permissions);
+
+schema.addToContext(async ({ req, res }) => {
+  return {
+    user: getSessionUser(req as any),
+  };
+});
 
 schema.objectType({
   name: "School",

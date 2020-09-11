@@ -49,11 +49,11 @@ function startJWTSession(user: User, ctx: NexusContext): ResponseLogin {
 }
 
 export function setRequestUser(user, ctx: NexusContext) {
-  ctx.req.user = user;
+  ctx.user = user;
 }
 
-export function getRequestUser(ctx: NexusContext) {
-  return ctx.req.user || {};
+export function getRequestUser(ctx: NexusContext): User | undefined {
+  return ctx.user;
 }
 
 export async function createUser(_root, args, ctx: NexusContext) {
@@ -88,8 +88,7 @@ export async function createUser(_root, args, ctx: NexusContext) {
 export async function acceptInvite(_root, args, ctx: NexusContext) {
   const team = await ctx.db.team.findOne({ where: { invite: args.invite } });
   if (!team) throw new Error("INVITE_NOT_FOUND");
-  const { id: userId, role } = getRequestUser(ctx);
-  const user = await ctx.db.user.findOne({ where: { id: userId } });
+  const user = getRequestUser(ctx);
   if (!user) throw new Error("NEEDS_LOGIN");
   const success = await connectUserTeam(user, team, ctx);
   if (!success) throw new Error("DB_ERROR");
@@ -134,9 +133,9 @@ export async function updateUser(_root, args, ctx: NexusContext) {
   return user;
 }
 
-export function getSessionUser(req: NextApiRequest): any {
-  const token =
-    req.body.token || req.query.token || req.headers["x-access-token"];
+export function getSessionUser(req: Request): User | undefined {
+  // what about req.body.token || req.query.token ?
+  const token = req.headers["x-access-token"];
 
   if (token && token != "null") {
     const jwt = verifyJWT(token);
@@ -146,9 +145,9 @@ export function getSessionUser(req: NextApiRequest): any {
 
 export async function getUser(ctx: NexusContext): Promise<User> {
   try {
-    const { id: userId, role } = getRequestUser(ctx);
-    if (userId) {
-      return await ctx.db.user.findOne({ where: { id: userId } });
+    const { id, role } = getRequestUser(ctx);
+    if (id) {
+      return await ctx.db.user.findOne({ where: { id } });
     }
   } catch (err) {
     logger.info("error calling /me", err);

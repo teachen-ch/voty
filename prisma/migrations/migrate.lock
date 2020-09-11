@@ -19,3 +19,4 @@
 20200909195417-further-migration-from-team-id-to-team_id
 20200910144622-clean-up-of-fields
 20200910150459-fixed-nexus-bug-on-voted
+20200911090143-added-body-to-ballots

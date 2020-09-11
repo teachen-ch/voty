@@ -44,3 +44,4 @@ prisma/.env
 /cypress/screenshots
 /cypress/videos
 *.swp
+/.tmp

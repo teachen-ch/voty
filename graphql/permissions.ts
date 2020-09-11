@@ -4,13 +4,13 @@ import { shield, rule, allow, or } from "nexus-plugin-shield";
 // or "strict": relies on parent or args
 const isUser = rule({ cache: "contextual" })(
   async (parent, args, ctx: NexusContext, info) => {
-    return ctx.req.user?.id !== undefined;
+    return ctx.user?.id !== undefined;
   }
 );
 
 const isTeacher = rule({ cache: "contextual" })(
   async (parent, args, ctx: NexusContext, info) => {
-    switch (ctx.req.user?.role) {
+    switch (ctx.user?.role) {
       case "TEACHER":
       case "PRINCIPAL":
       case "ADMIN":
@@ -23,14 +23,14 @@ const isTeacher = rule({ cache: "contextual" })(
 
 const isAdmin = rule({ cache: "contextual" })(
   async (parent, args, ctx: NexusContext, info) => {
-    return ctx.req.user?.role === "ADMIN";
+    return ctx.user?.role === "ADMIN";
   }
 );
 
 // team members can view team
 const isTeamMember = rule({ cache: "strict" })(
   async (parent, args, ctx: NexusContext, info) => {
-    const { id, teamId } = ctx.req.user || {};
+    const { id, teamId } = ctx.user || {};
     if (!id) return false;
     // check if student is part of team
     if (teamId === parent.id) return true;
@@ -43,7 +43,7 @@ const isTeamMember = rule({ cache: "strict" })(
 // Teacher may view his students
 const teachesTeam = rule({ cache: "strict" })(
   async (parent, args, ctx: NexusContext, info) => {
-    const { id, role } = ctx.req.user || {};
+    const { id, role } = ctx.user || {};
     if (!id || role !== "TEACHER") return false;
     if (!parent.role)
       throw new Error("teachesTeam can only be applied to Users");
@@ -60,7 +60,7 @@ const teachesTeam = rule({ cache: "strict" })(
 const isOwn = (field) =>
   rule(`own-${field}`, { cache: "strict" })(
     async (parent, args, ctx: NexusContext, info) => {
-      const { id, role } = ctx.req.user || {};
+      const { id, role } = ctx.user || {};
       if (!id) return false;
       return parent[field] === id;
     }

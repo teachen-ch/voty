@@ -1,7 +1,5 @@
 if (process.env.NODE_ENV === "development") require("nexus").default.reset();
 import { NextApiRequest, NextApiResponse } from "next";
-import { getSessionUser } from "../../util/authentication";
-import { User } from "@prisma/client";
 
 const app = require("nexus").default;
 const settings = require("nexus").settings;
@@ -21,13 +19,13 @@ require("../../graphql/user");
 
 app.assemble();
 
-type NextApiRequestWithUser = NextApiRequest & {
+/*type NextApiRequestWithUser = NextApiRequest & {
   user?: User;
-};
+};*/
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
-  const reqWithUser: NextApiRequestWithUser = req;
-  const user = await getSessionUser(req);
-  reqWithUser.user = user;
-  return app.server.handlers.graphql(reqWithUser, res);
+  //const reqWithUser: NextApiRequestWithUser = req;
+  //const user = await getSessionUser(req);
+  //reqWithUser.user = user;
+  return app.server.handlers.graphql(req, res);
 };
