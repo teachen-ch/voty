@@ -1,6 +1,8 @@
 describe("Test Teacher Startpage", () => {
-  beforeEach(() => {
+  before(() => {
     cy.task("prismaLoader", "testdb.yml");
+  });
+  beforeEach(() => {
     cy.login();
   });
 
@@ -10,13 +12,12 @@ describe("Test Teacher Startpage", () => {
     cy.contains("Class 1");
   });
 
-  it("allows teacher to create a new team", () => {
+  it("allows teacher to create a new team and see invite", () => {
     cy.visit("/user/teacher");
     cy.contains("Neue Klasse erfassen").click();
     cy.get("#name").type("Testclass");
     cy.get("button").contains("Klasse erstellen").click();
-
-    cy.wait(100);
+    cy.get("table tr").should("have.length", 3);
     cy.get("table tr:last").as("classrow");
     cy.get("@classrow").contains("Einladung").click();
     cy.url().should("include", "/i/");
