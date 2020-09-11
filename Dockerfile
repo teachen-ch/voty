@@ -12,7 +12,7 @@ COPY package*.json ./
 COPY yarn.lock ./
 
 # Install node libraries
-RUN yarn install
+RUN yarn install --frozen-lockfile
 
 # If you are building your code for production
 # RUN npm ci --only=production

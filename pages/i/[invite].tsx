@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import { Page } from "../../components/Page";
 import { gql, useQuery, useMutation } from "@apollo/client";
-import { ErrorBox } from "../../components/forms";
+import { ErrorBox } from "../../components/Forms";
 import { Heading, Button, Text } from "rebass";
 import { useState } from "react";
 import { CreateUserForm, Success } from "../user/signup";

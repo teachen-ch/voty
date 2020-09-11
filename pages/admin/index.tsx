@@ -1,4 +1,3 @@
-import { useUser } from "../../state/user";
 import { LoggedInPage } from "../../components/Page";
 import { Text, Link as A } from "rebass";
 import { LogoutButton } from "../user/logout";

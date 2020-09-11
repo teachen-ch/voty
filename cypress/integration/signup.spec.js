@@ -1,5 +1,5 @@
-describe.skip("Test Signup Page", () => {
-  before(() => {
+describe("Test Signup Page", () => {
+  beforeEach(() => {
     cy.task("prismaLoader", "testdb.yml");
   });
 

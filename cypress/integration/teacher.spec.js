@@ -2,17 +2,16 @@ describe("Test Teacher Startpage", () => {
   before(() => {
     cy.task("prismaLoader", "testdb.yml");
   });
-  beforeEach(() => {
-    cy.login();
-  });
 
   it("shows Teacher page with teacher's teams!", () => {
+    cy.login();
     cy.visit("/user/teacher");
     cy.contains("Willkommen");
     cy.contains("Class 1");
   });
 
   it("allows teacher to create a new team and see invite", () => {
+    cy.login();
     cy.visit("/user/teacher");
     cy.contains("Neue Klasse erfassen").click();
     cy.get("#name").type("Testclass");

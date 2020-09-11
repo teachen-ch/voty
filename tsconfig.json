@@ -18,7 +18,10 @@
     // nexus:
     "typeRoots": ["node_modules/@types", "types"],
     // nexus
-    "plugins": [{ "name": "nexus/typescript-language-service" }]
+    "plugins": [
+      { "name": "nexus/typescript-language-service" },
+      { "name": "@divyenduz/ts-graphql-plugin" }
+    ]
     // @testing-library
     // eek. this breaks nexus: https://github.com/graphql-nexus/nexus/issues/1036
     // "types": ["cypress", "@testing-library/cypress"]

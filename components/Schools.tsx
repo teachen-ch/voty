@@ -56,15 +56,34 @@ export function Schools() {
 // update
 export const SET_USER_SCHOOL = gql`
   mutation($school: Int) {
-    setSchool(school: { connect: { id: $school } }) {
+    setSchool(school: $school) {
       id
       name
       shortname
+      school {
+        id
+        name
+        city
+        zip
+      }
     }
   }
 `;
 
-export async function useSchoolList() {
-  const schools = useQuery(GET_SCHOOLS);
-  return schools.data?.schools;
+const GET_SCHOOL_LIST = gql`
+  query {
+    schools {
+      id
+      name
+      city
+      zip
+      canton
+    }
+  }
+`;
+
+export function useSchoolList() {
+  const { data } = useQuery(GET_SCHOOL_LIST);
+  console.log("useSchools: ", data?.schools);
+  return data?.schools;
 }

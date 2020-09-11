@@ -3,7 +3,7 @@ import { Card, Text, Button } from "rebass";
 import { gql, useMutation } from "@apollo/client";
 import { useState } from "react";
 import { useRouter } from "next/router";
-import { QForm, yup, ErrorBox } from "../../components/forms";
+import { QForm, yup, ErrorBox, Grid } from "../../components/Forms";
 import _ from "lodash";
 
 export const CREATE_USER = gql`
@@ -130,6 +130,10 @@ export function CreateUserForm({
             </Button>
           </>
         )}
+        <span />
+        <Button onClick={() => router.push("/user/login")} variant="outline">
+          Ich habe bereits ein Benutzer-Konto
+        </Button>
       </QForm>
     </Card>
   );

@@ -1,7 +1,7 @@
 import { gql, useQuery, useMutation } from "@apollo/client";
 import { Text, Card, Link as A } from "rebass";
 import { Page, LoggedInPage } from "../../components/Page";
-import { QForm, ErrorBox } from "../../components/forms";
+import { QForm, ErrorBox } from "../../components/Forms";
 import { useUser } from "../../state/user";
 import { useState, Fragment } from "react";
 import Link from "next/link";

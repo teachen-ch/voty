@@ -123,7 +123,11 @@ schema.extendType({
         school: intArg(),
       },
       resolve: async (_root, { school }, ctx) => {
-        const user = await authentication.updateUser(_root, { school }, ctx);
+        const user = await authentication.updateUser(
+          _root,
+          { school: { connect: { id: school } } },
+          ctx
+        );
         return user;
       },
     });

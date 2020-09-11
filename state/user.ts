@@ -10,6 +10,8 @@ export const accessTokenState = atom({
   default: "",
 });
 
+// redefining types here, because @prisma/client just has schoolId
+
 type User = {
   id: number;
   email?: number;
