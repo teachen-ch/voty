@@ -91,7 +91,6 @@ const GET_SCHOOL_LIST = gql`
 
 export function useSchoolList() {
   const { data } = useQuery(GET_SCHOOL_LIST);
-  console.log("useSchools: ", data?.schools);
   return data?.schools;
 }
 
@@ -132,7 +131,6 @@ export function SelectSchool() {
       {create ? (
         <CreateSchool
           onCompleted={({ createOneSchool }) => {
-            console.log("GOT IT: ", createOneSchool);
             setCreate(false);
             setUserSchool({
               variables: { school: parseInt(createOneSchool.id) },
@@ -191,7 +189,6 @@ export function CreateSchool({
   onCompleted?: (data: any) => void;
 }) {
   const user = useUser();
-  console.log(user);
   const [error, setError] = useState("");
   const [createSchool, mutation] = useMutation(CREATE_SCHOOL, {
     onCompleted: onCompleted,

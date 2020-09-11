@@ -101,7 +101,7 @@ export function LoginForm() {
       if (error.message === "ERR_USER_PASSWORD") {
         return setError("Email oder Passwort passen leider nicht zueinander…");
       } else if (error.message === "ERR_EMAIL_NOT_VERIFIED") {
-        console.log(error, resultLogin.data);
+        console.error(error, resultLogin.data);
         return setEmailError(email);
       } else {
         return setError(error.message);
@@ -196,10 +196,10 @@ function AfterLogin() {
     let page = "";
     switch (user.role) {
       case "TEACHER":
-        page = "/user/teacher";
+        page = "/teacher";
         break;
       case "STUDENT":
-        page = "/user/student";
+        page = "/student";
         break;
       case "ADMIN":
         page = "/admin";
@@ -241,7 +241,7 @@ function CheckToken({ token, purpose }) {
     },
     onError(error) {
       setError("Dieser Email-Link ist leider nicht mehr gültig!");
-      console.log(error.message);
+      console.error(error.message);
     },
   });
 

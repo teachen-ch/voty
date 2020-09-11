@@ -73,7 +73,6 @@ export default function Invite(props) {
   const [doCreateInvitedUser] = useMutation(CREATE_INVITED_USER, {
     onCompleted(data) {
       setUser(data.createInvitedUser);
-      console.log("Success");
     },
     onError(error) {
       console.error(error.message);

@@ -6,7 +6,7 @@ describe("Test Login", () => {
 
   it("User is already logged in!", () => {
     cy.visit("/user/login");
-    cy.url().should("include", "/user/teacher");
+    cy.url().should("include", "/teacher");
   });
 });
 
@@ -21,7 +21,7 @@ describe("Test Login Page", () => {
     cy.findByLabelText("Email:").type(Cypress.env("USER"));
     cy.findByLabelText("Passwort:").type(Cypress.env("PASS"));
     cy.get("button").contains("Anmelden").click();
-    cy.url().should("include", "/user/teacher");
+    cy.url().should("include", "/teacher");
     cy.get("button").contains("Abmelden").click();
     cy.contains("Anmelden").click();
     cy.contains("Hier kannst Du dich");

@@ -43,7 +43,7 @@ Cypress.Commands.add("login", (email, password, failed = 0) => {
       !resp.body.data.login ||
       !resp.body.data.login.token
     ) {
-      console.log("Login Failed: ", failed);
+      console.error("Login Failed: ", failed);
       return cy.login(email, password, failed + 1);
     }
     window.localStorage.setItem("@token", resp.body.data.login.token);
