@@ -2,7 +2,7 @@ import { schema, use } from "nexus";
 import { prisma } from "nexus-plugin-prisma";
 import { permissions } from "./permissions";
 import { randomBytes } from "crypto";
-import { getSessionUser } from "util/authentication";
+import { getSessionUser } from "../util/authentication";
 
 use(
   prisma({
