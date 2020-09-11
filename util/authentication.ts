@@ -44,19 +44,16 @@ function startJWTSession(user: User, ctx: NexusContext): ResponseLogin {
     expiresIn: expires,
   });
 
-  setHeaderUser(user, ctx);
+  setRequestUser(user, ctx);
   return { token, user };
 }
 
-export function setHeaderUser(user, ctx: NexusContext) {
-  ctx.req.headers["x-user-id"] = user?.id ? String(user?.id) : "";
-  ctx.req.headers["x-user-role"] = user?.role || "";
+export function setRequestUser(user, ctx: NexusContext) {
+  ctx.req.user = user;
 }
 
-export function getUserHeader(ctx: NexusContext) {
-  const userId = parseInt(String(ctx.req.headers["x-user-id"]));
-  const role = ctx.req.headers["x-user-role"];
-  return { userId, role };
+export function getRequestUser(ctx: NexusContext) {
+  return ctx.req.user || {};
 }
 
 export async function createUser(_root, args, ctx: NexusContext) {
@@ -77,7 +74,7 @@ export async function createUser(_root, args, ctx: NexusContext) {
 
     await sendVerificationEmail(email, "verification", ctx.db);
     logger.mail(`New user created: ${name} ${lastname} <${email}>: ${role}`);
-    setHeaderUser(user, ctx);
+    setRequestUser(user, ctx);
     return user;
   } catch (err) {
     if (err.meta?.target && err.meta.target.indexOf("email") >= 0) {
@@ -91,7 +88,7 @@ export async function createUser(_root, args, ctx: NexusContext) {
 export async function acceptInvite(_root, args, ctx: NexusContext) {
   const team = await ctx.db.team.findOne({ where: { invite: args.invite } });
   if (!team) throw new Error("INVITE_NOT_FOUND");
-  const { userId } = getUserHeader(ctx);
+  const { id: userId, role } = getRequestUser(ctx);
   const user = await ctx.db.user.findOne({ where: { id: userId } });
   if (!user) throw new Error("NEEDS_LOGIN");
   const success = await connectUserTeam(user, team, ctx);
@@ -125,7 +122,7 @@ export async function createInvitedUser(_root, args, ctx) {
 
 export async function updateUser(_root, args, ctx: NexusContext) {
   // TODO: ensure this is not called with variable args by user
-  const { userId, role } = getUserHeader(ctx);
+  const { id: userId, role } = getRequestUser(ctx);
   const id = args.id || userId;
   if (id !== userId && role !== "ADMIN")
     throw new Error("ERR_ONLY_UPDATE_SELF");
@@ -137,22 +134,19 @@ export async function updateUser(_root, args, ctx: NexusContext) {
   return user;
 }
 
-export function getSession(req: NextApiRequest): any {
+export function getSessionUser(req: NextApiRequest): any {
   const token =
     req.body.token || req.query.token || req.headers["x-access-token"];
 
-  // ensure that headers are set anyway, otherwise they might be set by client :-/
-  let jwt = { user: {} };
   if (token && token != "null") {
-    jwt = verifyJWT(token);
+    const jwt = verifyJWT(token);
+    return jwt?.user;
   }
-  const ctx: any = { req: req };
-  return setHeaderUser(jwt?.user, ctx);
 }
 
 export async function getUser(ctx: NexusContext): Promise<User> {
   try {
-    const { userId, role } = getUserHeader(ctx);
+    const { id: userId, role } = getRequestUser(ctx);
     if (userId) {
       return await ctx.db.user.findOne({ where: { id: userId } });
     }

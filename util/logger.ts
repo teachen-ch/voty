@@ -1,5 +1,6 @@
 import winston, { createLogger, transports, format } from "winston";
-const { Mail } = require("winston-mail");
+import { Mail } from "winston-mail";
+import { Loggly } from "winston-loggly-bulk";
 
 const env = process.env.NODE_ENV;
 const prod = env === "production";
@@ -27,13 +28,7 @@ let logger = createLogger({
     info: 4,
     debug: 5,
   },
-  format: format.combine(
-    format.padLevels(),
-    format.colorize(),
-    format.printf(({ level, message }) => {
-      return `[${level}] ${message}`;
-    })
-  ),
+  format: winston.format.json(),
 });
 
 winston.addColors({
@@ -47,6 +42,13 @@ winston.addColors({
 
 const consoleLogger = new transports.Console({
   level: prod ? "error" : "info",
+  format: format.combine(
+    format.padLevels(),
+    format.colorize(),
+    format.printf(({ level, message }) => {
+      return `[${level}] ${message}`;
+    })
+  ),
 });
 const fileLogger = new transports.File({
   filename: "./logs/voty.log",
@@ -54,9 +56,24 @@ const fileLogger = new transports.File({
   handleExceptions: true,
   maxsize: 1024 * 1024 * (prod ? 10 : 1),
   maxFiles: prod ? 3 : 1,
+  format: format.combine(
+    format.padLevels(),
+    format.printf(({ level, message }) => {
+      return `[${level}] ${message}`;
+    })
+  ),
 });
 
-const mailLogger = new Mail({
+const logglyLogger = new Loggly({
+  level: "info",
+  subdomain: "teachen.ch",
+  inputToken: "d678db9a-c0dd-49b0-a885-f168172332c6",
+  stripColors: true,
+  json: true,
+  tags: [process.env.NODE_ENV],
+});
+
+const mailLogger: any = new Mail({
   level: "mail",
   to: "stefan@teachen.ch",
   from: "voty@teachen.ch",
@@ -67,14 +84,14 @@ const mailLogger = new Mail({
   ssl: true,
 });
 
+logger.add(fileLogger);
+logger.add(logglyLogger);
+
 if (env === "production") {
-  logger.add(fileLogger);
   logger.add(mailLogger);
   logger.exceptions.handle(mailLogger);
 } else {
   logger.add(consoleLogger);
-  logger.add(fileLogger);
-  logger.exceptions.handle(mailLogger);
 }
 
 interface MailLogger extends winston.Logger {

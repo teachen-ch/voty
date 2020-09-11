@@ -1,20 +1,16 @@
-import { shield, rule, allow, deny, or } from "nexus-plugin-shield";
-import { getUserHeader } from "../util/authentication";
+import { shield, rule, allow, or } from "nexus-plugin-shield";
 
 // rule caching: "no_cache", "contextual" (relies on context, eg. authentication,
 // or "strict": relies on parent or args
 const isUser = rule({ cache: "contextual" })(
   async (parent, args, ctx: NexusContext, info) => {
-    const { userId, role } = getUserHeader(ctx);
-    // TODO: userId = 0 does not work here.
-    return userId ? true : false;
+    return ctx.req.user?.id !== undefined;
   }
 );
 
 const isTeacher = rule({ cache: "contextual" })(
   async (parent, args, ctx: NexusContext, info) => {
-    const { userId, role } = getUserHeader(ctx);
-    switch (role) {
+    switch (ctx.req.user?.role) {
       case "TEACHER":
       case "PRINCIPAL":
       case "ADMIN":
@@ -27,21 +23,19 @@ const isTeacher = rule({ cache: "contextual" })(
 
 const isAdmin = rule({ cache: "contextual" })(
   async (parent, args, ctx: NexusContext, info) => {
-    const { userId, role } = getUserHeader(ctx);
-    return role === "ADMIN";
+    return ctx.req.user?.role === "ADMIN";
   }
 );
 
 // team members can view team
 const isTeamMember = rule({ cache: "strict" })(
   async (parent, args, ctx: NexusContext, info) => {
-    const { userId, role } = getUserHeader(ctx);
-    if (!userId) return false;
-    const user = await ctx.db.user.findOne({ where: { id: userId } });
+    const { id, teamId } = ctx.req.user || {};
+    if (!id) return false;
     // check if student is part of team
-    if (user && user.teamId === parent.id) return true;
+    if (teamId === parent.id) return true;
     // check if teacher teaches this team
-    if (user && user.id === parent.teacherId) return true;
+    if (id === parent.teacherId) return true;
     return false;
   }
 );
@@ -49,12 +43,12 @@ const isTeamMember = rule({ cache: "strict" })(
 // Teacher may view his students
 const teachesTeam = rule({ cache: "strict" })(
   async (parent, args, ctx: NexusContext, info) => {
-    const { userId, role } = getUserHeader(ctx);
-    if (!userId || role !== "TEACHER") return false;
+    const { id, role } = ctx.req.user || {};
+    if (!id || role !== "TEACHER") return false;
     if (!parent.role)
-      throw new Error("teachesTeam can only be applied to User");
+      throw new Error("teachesTeam can only be applied to Users");
     const student = parent.id;
-    const teacher = userId;
+    const teacher = id;
     const found = await ctx.db.user.findMany({
       where: { id: { equals: student }, team: { teacher: { id: teacher } } },
     });
@@ -66,9 +60,9 @@ const teachesTeam = rule({ cache: "strict" })(
 const isOwn = (field) =>
   rule(`own-${field}`, { cache: "strict" })(
     async (parent, args, ctx: NexusContext, info) => {
-      const { userId, role } = getUserHeader(ctx);
-      if (!userId) return false;
-      return parent[field] === userId;
+      const { id, role } = ctx.req.user || {};
+      if (!id) return false;
+      return parent[field] === id;
     }
   );
 
