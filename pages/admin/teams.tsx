@@ -182,9 +182,7 @@ export function CreateTeamForm({ onCompleted }: { onCompleted?: () => void }) {
           },
           submit: { type: "submit", label: "Klasse erstellen" },
         }}
-      >
-        <ErrorBox error={error} my={4} />
-      </QForm>
+      ></QForm>
     </Card>
   );
 }

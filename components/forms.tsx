@@ -8,7 +8,7 @@ import {
 } from "@rebass/forms";
 import * as yup from "yup";
 import React, { useMemo } from "react";
-import _ from "lodash";
+import { omit } from "lodash";
 
 export { Formik, Form, yup, Grid, Card };
 
@@ -50,7 +50,7 @@ export function Input({ label, ...props }) {
 export function QForm({ fields, mutation, ...props }) {
   // default onSubmit = execute mutation handler
   const doMutation = (values) =>
-    mutation({ variables: _.omit(values, "submit") });
+    mutation({ variables: omit(values, "submit") });
   const onSubmit = props.onSubmit ? props.onSubmit : doMutation;
 
   const { fieldArr, validationSchema, initialValues } = useMemo(
@@ -152,6 +152,8 @@ export function QForm({ fields, mutation, ...props }) {
       initialValues={initialValues}
       onSubmit={onSubmit}
       validationSchema={validationSchema}
+      validateOnBlur={false}
+      validateOnChange={false}
     >
       <Form>
         <Grid gap={2} columns={[0, 0, "1fr 3fr"]}>

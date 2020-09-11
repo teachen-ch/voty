@@ -4,7 +4,7 @@ import { gql, useMutation } from "@apollo/client";
 import { useState } from "react";
 import { useRouter } from "next/router";
 import { QForm, yup, ErrorBox, Grid } from "../../components/Forms";
-import _ from "lodash";
+import { omit } from "lodash";
 
 export const CREATE_USER = gql`
   mutation($data: UserCreateInput!) {
@@ -73,7 +73,7 @@ export function CreateUserForm({
 
   if (!onSubmit) {
     onSubmit = (values) =>
-      doCreateUser({ variables: { data: _.omit(values, "submit") } });
+      doCreateUser({ variables: { data: omit(values, "submit") } });
   }
   return (
     <Card>

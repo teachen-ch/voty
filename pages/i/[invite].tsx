@@ -6,7 +6,7 @@ import { Heading, Button, Text } from "rebass";
 import { useState } from "react";
 import { CreateUserForm, Success } from "../user/signup";
 import { useUser } from "../../state/user";
-import _ from "lodash";
+import { omit } from "lodash";
 import CheckLogin from "../../components/CheckLogin";
 
 const GET_INVITE_TEAM = gql`
@@ -80,7 +80,7 @@ export default function Invite(props) {
     },
   });
   const onSubmit = (values) =>
-    doCreateInvitedUser({ variables: { ..._.omit(values, "submit"), invite } });
+    doCreateInvitedUser({ variables: { ...omit(values, "submit"), invite } });
 
   if (teamQuery.error) {
     return (

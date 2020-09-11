@@ -9,5 +9,12 @@ describe("Test Admin Area", () => {
     cy.contains("Admin Bereich");
     cy.contains("Teams").click();
     cy.contains("Class 1");
+    cy.go("back");
+    cy.contains("Schools").click();
+    cy.contains("School One");
+    cy.go("back");
+    cy.contains("Users").click();
+    cy.contains("Teacher-1");
+    cy.go("back");
   });
 });

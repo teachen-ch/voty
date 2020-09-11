@@ -60,7 +60,7 @@ const teachesTeam = rule({ cache: "strict" })(
 const isOwn = (field) =>
   rule(`own-${field}`, { cache: "strict" })(
     async (parent, args, ctx: NexusContext, info) => {
-      const { id, role } = ctx.user || {};
+      const { id } = ctx.user || {};
       if (!id) return false;
       return parent[field] === id;
     }
@@ -112,6 +112,7 @@ export const permissions = shield({
     School: {
       id: allow,
       name: allow,
+      address: allow,
       city: allow,
       zip: allow,
       canton: allow,

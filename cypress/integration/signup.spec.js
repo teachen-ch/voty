@@ -22,14 +22,8 @@ describe("Test Signup Page", () => {
     cy.get("button").contains("Konto erstellen").click();
     cy.contains("Bitte gültige Email-Adresse angeben");
   });
-});
 
-describe("Create a new user", () => {
-  beforeEach(() => {
-    cy.task("prismaLoader", "testdb.yml");
-  });
-
-  it("Creates a new user!", () => {
+  it("Creates a new (inactive) user!", () => {
     cy.visit("/user/signup");
     cy.findByLabelText("Vorname:").type("Test");
     cy.findByLabelText("Nachname:").type("Test");
@@ -37,11 +31,20 @@ describe("Create a new user", () => {
     cy.findByLabelText("Passwort:").type("Password2007");
     cy.get("button").contains("Konto erstellen").click();
     cy.contains("Konto erstellt");
-    cy.visit("/user/login");
 
+    // test that user is not active yet (missing email verification)
+    cy.visit("/user/login");
     cy.findByLabelText("Email:").type("other@teachen.ch");
     cy.findByLabelText("Passwort:").type("Password2007");
     cy.get("button").contains("Anmelden").click();
     cy.contains("Email bestätigen");
+  });
+
+  it("TODO: Activates user with verification url", () => {
+    cy.visit("/user/signup");
+    // TODO: find a way to get verification token...
+    /*cy.request("/api/graphql", ```
+      
+```)*/
   });
 });
