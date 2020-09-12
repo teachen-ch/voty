@@ -90,6 +90,7 @@ schema.objectType({
     t.model.id();
     t.model.title();
     t.model.description();
+    t.model.body();
     t.model.start();
     t.model.end();
     t.model.scope();

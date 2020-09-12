@@ -149,8 +149,37 @@ school:
     canton: ZH
 
 ballot:
-  - title: Kampfflugzeuge
-    description: Der Bund soll neue Kampfflugzeuge kaufen. Dafür soll er höchstens 6 Milliarden Franken ausgeben
-    body: Siehe hier https://www.easyvote.ch/de/abstimmungen/27-9-20/kampfflugzeuge
+  - title: Begrenzungsinitiative
+    description: Das Freizügigkeitsabkommen zwischen der Schweiz und der Europäischen Union soll beendet werden.
+    body: https://www.easyvote.ch/de/abstimmungen/27-9-20/begrenzungsinitiative
     start: !!timestamp "2020-07-01"
     end: !!timestamp "2020-09-21"
+    scope: NATIONAL
+
+  - title: Kampfflugzeuge
+    description: Der Bund soll neue Kampfflugzeuge kaufen. Dafür soll er höchstens 6 Milliarden Franken ausgeben
+    body: Easyvote Erklärungen https://www.easyvote.ch/de/abstimmungen/27-9-20/kampfflugzeuge
+    start: !!timestamp "2020-07-01"
+    end: !!timestamp "2020-09-21"
+    scope: NATIONAL
+
+  - title: Vaterschaftsurlaub
+    description: Es soll ein zweiwöchiger Vaterschaftsurlaub eingeführt werden.
+    body: Easyvote Erklärungen https://www.easyvote.ch/de/abstimmungen/27-9-20/vaterschaftsurlaub
+    start: !!timestamp "2020-07-01"
+    end: !!timestamp "2020-09-21"
+    scope: NATIONAL
+
+  - title: Kinderabzüge
+    description: Die Steuerabzüge für Kinder und Kinderdrittbetreuung sollen erhöht werden.
+    body: Easyvote Erklärungen https://www.easyvote.ch/de/abstimmungen/27-9-20/kinderabzuege
+    start: !!timestamp "2020-07-01"
+    end: !!timestamp "2020-09-21"
+    scope: NATIONAL
+
+  - title: Jagdgesetz
+    description: Das Jagdgesetz soll geändert werden. Die Änderung betrifft den Schutz und den Abschuss von Wildtieren
+    body: Easyvote Erklärungen https://www.easyvote.ch/de/abstimmungen/27-9-20/jagdgesetz
+    start: !!timestamp "2020-07-01"
+    end: !!timestamp "2020-09-21"
+    scope: NATIONAL

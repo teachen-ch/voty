@@ -21,3 +21,7 @@ Who decides at your school? Are students invited to propose initiatives and disc
 ## About Voty
 
 Voty is developed as an open source project by «Teachen!» (https://teachen.ch/). Teachen is a not-for-profit association founded during the COVID-19 lockdown by a group of motivated parents, teachers and techies. The Voty project is suppored by the Swiss PrototypeFund.
+
+## How to contribute
+
+We are currently in an early stage of the project. If you know teachers (e.g. history), who have experience in teaching democracy at school, then please [get in touch](https://votyapp.ch/kontakt). If you want to help out with content, we are very much open to your contributions. If you want to dive into the code, have a look at [our stack](/docs.md).

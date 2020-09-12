@@ -1,5 +1,5 @@
 import { LoggedInPage, Page } from "../../../components/Page";
-import { Heading, Card, Text, Button, Link as A } from "rebass";
+import { Heading, Flex, Box, Card, Text, Button, Link as A } from "rebass";
 import { useTeamTeacher } from "../../../components/Teams";
 import { useRouter } from "next/router";
 import { Users } from "../../../components/Users";
@@ -7,14 +7,14 @@ import { Input } from "@rebass/forms";
 import { Grid } from "theme-ui";
 import { useRef, useState } from "react";
 import { useUser } from "state/user";
+import { Ballots, BallotScope } from "components/Ballots";
 
-export default function Team() {
+export default function TeamPage() {
   const user = useUser();
   const router = useRouter();
+  const [active, setActive] = useState("admin");
   const id = parseInt(String(router.query.id));
   const team = useTeamTeacher(id, user);
-  const inviteRef = useRef(null);
-  const [status, setStatus] = useState("");
 
   if (!team)
     return (
@@ -23,18 +23,53 @@ export default function Team() {
       </LoggedInPage>
     );
 
-  function copyInvite() {
-    if (inviteRef && inviteRef.current) {
-      inviteRef.current.select();
+  return (
+    <LoggedInPage heading="Klassenseite">
+      <TeamNavigation active={active} setActive={setActive} />
+      {active === "admin" ? (
+        <TeamAdmin team={team} />
+      ) : (
+        <TeamTest team={team} />
+      )}
+    </LoggedInPage>
+  );
+}
+
+function TeamNavigation({ active, setActive }) {
+  return (
+    <Grid gap={3} columns={[0, 0, "1fr 1fr 1fr 1fr"]}>
+      <Button
+        variant={active === "admin" ? "primary" : "secondary"}
+        onClick={() => setActive("admin")}
+      >
+        Administration
+      </Button>
+      <Button
+        variant={active === "learn" ? "primary" : "secondary"}
+        onClick={() => setActive("learn")}
+      >
+        Demokratie testen
+      </Button>
+      <Button variant="muted">Demokratie verstehen</Button>
+      <Button variant="muted">Demokratie erleben</Button>
+    </Grid>
+  );
+}
+
+function TeamAdmin({ team }) {
+  const inviteRef = useRef(null);
+  const [status, setStatus] = useState("");
+
+  function copyInvite(ref) {
+    if (ref && ref.current) {
+      ref.current.select();
       document.execCommand("copy");
       setStatus("Einladungslink erfolgreich in Zwischenablage kopiert");
     }
   }
-
   return (
-    <LoggedInPage heading="Klassenseite">
-      <Heading as="h2">Seite der Klasse {team && `«${team.name}»`}</Heading>
-      <Heading as="h3">Schüler|innen</Heading>
+    <>
+      <Heading as="h2">Schüler|innen</Heading>
       <Users where={{ team: { id: { equals: team.id } } }} />
 
       <Card>
@@ -44,11 +79,24 @@ export default function Team() {
             ref={inviteRef}
             value={`${document?.location.origin}/i/${team.invite}`}
           />
-          <Button onClick={copyInvite}>Copy</Button>
+          <Button onClick={() => copyInvite(inviteRef)}>Copy</Button>
           <span />
           <Text>{status}</Text>
         </Grid>
       </Card>
-    </LoggedInPage>
+    </>
+  );
+}
+
+function TeamTest({ team }) {
+  const router = useRouter();
+  function selectBallot(ballot) {
+    router.push("/ballots/[id]", `/ballots/${ballot.id}`);
+  }
+  return (
+    <>
+      <Heading as="h2">Demokratie Testen: Nationale Abstimmungen</Heading>
+      <Ballots where={{ scope: BallotScope.NATIONAL }} onClick={selectBallot} />
+    </>
   );
 }

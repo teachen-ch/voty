@@ -6,18 +6,25 @@ import Link from "next/link";
 export function Footer() {
   return (
     <Container as="footer" pt={6} pb={3} fontSize={"0.8em"}>
-      <Text>
-        voty ist ein Projekt des Vereins{" "}
+      <Text width={["100%", "100%", 400]} mx="auto">
+        voty ist ein{" "}
+        <A
+          href="https://github.com/teachen-ch/voty"
+          target="_blank"
+          color="black"
+          sx={{ textDecoration: "underline" }}
+        >
+          Open-Source
+        </A>{" "}
+        Projekt des Vereins{" "}
         <A
           href="https://teachen.ch/verein-teachen"
           color="black"
           sx={{ textDecoration: "underline" }}
         >
           «Teachen!»
-        </A>
-        <br />
-        mit tatkräftiger Unterstützung des
-        <br />
+        </A>{" "}
+        mit tatkräftiger Unterstützung des{" "}
         {/*<Link
           href="https://prototypefund.opendata.ch"
           target="_blank"
@@ -49,6 +56,18 @@ export function Footer() {
             <Link href="/kontakt">
               <A color="black">Kontakt</A>
             </Link>
+            &nbsp;&nbsp;| &nbsp;
+            <A href="https://twitter.com/voty_ch" target="_blank" color="black">
+              Twitter
+            </A>
+            &nbsp;&nbsp;| &nbsp;
+            <A
+              href="https://github.com/teachen-ch/voty"
+              target="_blank"
+              color="black"
+            >
+              GitHub
+            </A>
           </nav>
         </Box>
       </Flex>

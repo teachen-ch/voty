@@ -202,6 +202,7 @@ input AttachmentWhereUniqueInput {
 }
 
 type Ballot {
+  body: String!
   canton: String
   createdAt: DateTime!
   creator: User
@@ -209,7 +210,7 @@ type Ballot {
   end: DateTime!
   id: Int!
   school: School
-  scope: Scope!
+  scope: BallotScope!
   start: DateTime!
   title: String!
   updatedAt: DateTime!
@@ -254,7 +255,7 @@ input BallotCreateWithoutAttachmentsInput {
   end: DateTime!
   options: OptionsCreateManyWithoutBallotInput
   school: SchoolCreateOneWithoutBallotsInput
-  scope: Scope
+  scope: BallotScope
   start: DateTime!
   team: TeamCreateOneWithoutBallotsInput
   thread: ThreadCreateOneWithoutBallotInput
@@ -273,7 +274,7 @@ input BallotCreateWithoutCreatorInput {
   end: DateTime!
   options: OptionsCreateManyWithoutBallotInput
   school: SchoolCreateOneWithoutBallotsInput
-  scope: Scope
+  scope: BallotScope
   start: DateTime!
   team: TeamCreateOneWithoutBallotsInput
   thread: ThreadCreateOneWithoutBallotInput
@@ -292,7 +293,7 @@ input BallotCreateWithoutSchoolInput {
   description: String!
   end: DateTime!
   options: OptionsCreateManyWithoutBallotInput
-  scope: Scope
+  scope: BallotScope
   start: DateTime!
   team: TeamCreateOneWithoutBallotsInput
   thread: ThreadCreateOneWithoutBallotInput
@@ -312,7 +313,7 @@ input BallotCreateWithoutTeamInput {
   end: DateTime!
   options: OptionsCreateManyWithoutBallotInput
   school: SchoolCreateOneWithoutBallotsInput
-  scope: Scope
+  scope: BallotScope
   start: DateTime!
   thread: ThreadCreateOneWithoutBallotInput
   title: String!
@@ -331,7 +332,7 @@ input BallotCreateWithoutThreadInput {
   end: DateTime!
   options: OptionsCreateManyWithoutBallotInput
   school: SchoolCreateOneWithoutBallotsInput
-  scope: Scope
+  scope: BallotScope
   start: DateTime!
   team: TeamCreateOneWithoutBallotsInput
   title: String!
@@ -350,7 +351,7 @@ input BallotCreateWithoutVotedInput {
   end: DateTime!
   options: OptionsCreateManyWithoutBallotInput
   school: SchoolCreateOneWithoutBallotsInput
-  scope: Scope
+  scope: BallotScope
   start: DateTime!
   team: TeamCreateOneWithoutBallotsInput
   thread: ThreadCreateOneWithoutBallotInput
@@ -394,12 +395,20 @@ input BallotScalarWhereInput {
   NOT: [BallotScalarWhereInput!]
   OR: [BallotScalarWhereInput!]
   schoolId: IntNullableFilter
-  scope: Scope
+  scope: BallotScope
   start: DateTimeFilter
   teamId: IntNullableFilter
   threadId: IntNullableFilter
   title: StringFilter
   updatedAt: DateTimeFilter
+}
+
+enum BallotScope {
+  CANTONAL
+  NATIONAL
+  PUBLIC
+  SCHOOL
+  TEAM
 }
 
 input BallotUpdateManyDataInput {
@@ -408,7 +417,7 @@ input BallotUpdateManyDataInput {
   createdAt: DateTimeFieldUpdateOperationsInput
   description: StringFieldUpdateOperationsInput
   end: DateTimeFieldUpdateOperationsInput
-  scope: Scope
+  scope: BallotScope
   start: DateTimeFieldUpdateOperationsInput
   title: StringFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
@@ -489,7 +498,7 @@ input BallotUpdateWithoutAttachmentsDataInput {
   end: DateTimeFieldUpdateOperationsInput
   options: OptionsUpdateManyWithoutBallotInput
   school: SchoolUpdateOneWithoutBallotsInput
-  scope: Scope
+  scope: BallotScope
   start: DateTimeFieldUpdateOperationsInput
   team: TeamUpdateOneWithoutBallotsInput
   thread: ThreadUpdateOneWithoutBallotInput
@@ -508,7 +517,7 @@ input BallotUpdateWithoutCreatorDataInput {
   end: DateTimeFieldUpdateOperationsInput
   options: OptionsUpdateManyWithoutBallotInput
   school: SchoolUpdateOneWithoutBallotsInput
-  scope: Scope
+  scope: BallotScope
   start: DateTimeFieldUpdateOperationsInput
   team: TeamUpdateOneWithoutBallotsInput
   thread: ThreadUpdateOneWithoutBallotInput
@@ -527,7 +536,7 @@ input BallotUpdateWithoutSchoolDataInput {
   description: StringFieldUpdateOperationsInput
   end: DateTimeFieldUpdateOperationsInput
   options: OptionsUpdateManyWithoutBallotInput
-  scope: Scope
+  scope: BallotScope
   start: DateTimeFieldUpdateOperationsInput
   team: TeamUpdateOneWithoutBallotsInput
   thread: ThreadUpdateOneWithoutBallotInput
@@ -547,7 +556,7 @@ input BallotUpdateWithoutTeamDataInput {
   end: DateTimeFieldUpdateOperationsInput
   options: OptionsUpdateManyWithoutBallotInput
   school: SchoolUpdateOneWithoutBallotsInput
-  scope: Scope
+  scope: BallotScope
   start: DateTimeFieldUpdateOperationsInput
   thread: ThreadUpdateOneWithoutBallotInput
   title: StringFieldUpdateOperationsInput
@@ -566,7 +575,7 @@ input BallotUpdateWithoutThreadDataInput {
   end: DateTimeFieldUpdateOperationsInput
   options: OptionsUpdateManyWithoutBallotInput
   school: SchoolUpdateOneWithoutBallotsInput
-  scope: Scope
+  scope: BallotScope
   start: DateTimeFieldUpdateOperationsInput
   team: TeamUpdateOneWithoutBallotsInput
   title: StringFieldUpdateOperationsInput
@@ -585,7 +594,7 @@ input BallotUpdateWithoutVotedDataInput {
   end: DateTimeFieldUpdateOperationsInput
   options: OptionsUpdateManyWithoutBallotInput
   school: SchoolUpdateOneWithoutBallotsInput
-  scope: Scope
+  scope: BallotScope
   start: DateTimeFieldUpdateOperationsInput
   team: TeamUpdateOneWithoutBallotsInput
   thread: ThreadUpdateOneWithoutBallotInput
@@ -658,7 +667,7 @@ input BallotWhereInput {
   OR: [BallotWhereInput!]
   school: SchoolWhereInput
   schoolId: IntNullableFilter
-  scope: Scope
+  scope: BallotScope
   start: DateTimeFilter
   team: TeamWhereInput
   teamId: IntNullableFilter
@@ -1451,14 +1460,6 @@ input SchoolWhereInput {
 
 input SchoolWhereUniqueInput {
   id: Int
-}
-
-enum Scope {
-  CANTONAL
-  NATIONAL
-  PUBLIC
-  SCHOOL
-  TEAM
 }
 
 enum SortOrder {

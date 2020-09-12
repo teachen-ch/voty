@@ -1,0 +1,26 @@
+{
+  "version": "0.3.14-fixed",
+  "steps": [
+    {
+      "tag": "CreateEnum",
+      "enum": "BallotScope",
+      "values": [
+        "PUBLIC",
+        "NATIONAL",
+        "CANTONAL",
+        "SCHOOL",
+        "TEAM"
+      ]
+    },
+    {
+      "tag": "DeleteEnum",
+      "enum": "Scope"
+    },
+    {
+      "tag": "UpdateField",
+      "model": "Ballot",
+      "field": "scope",
+      "type": "BallotScope"
+    }
+  ]
+}

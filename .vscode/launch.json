@@ -8,11 +8,9 @@
       "type": "node",
       "request": "attach",
       "name": "Attach Next",
-      "skipFiles": [
-        "<node_internals>/**"
-      ],
+      "skipFiles": ["<node_internals>/**"],
+      "outFiles": ["${workspaceFolder}/packages/next/dist/**/*"],
       "port": 9229
-      ]
     }
   ]
 }

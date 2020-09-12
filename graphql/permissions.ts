@@ -1,4 +1,15 @@
 import { shield, rule, allow, or } from "nexus-plugin-shield";
+import { Role } from "@prisma/client";
+
+// TODO: Completely puzzled why nexus build complains about this import...
+// import { BallotScope } from "../components/Ballots";
+export enum BallotScope {
+  PUBLIC = "PUBLIC",
+  NATIONAL = "NATIONAL",
+  CANTONAL = "CANTONAL",
+  SCHOOL = "SCHOOL",
+  TEAM = "TEAM",
+}
 
 // rule caching: "no_cache", "contextual" (relies on context, eg. authentication,
 // or "strict": relies on parent or args
@@ -11,9 +22,9 @@ const isUser = rule({ cache: "contextual" })(
 const isTeacher = rule({ cache: "contextual" })(
   async (parent, args, ctx: NexusContext, info) => {
     switch (ctx.user?.role) {
-      case "TEACHER":
-      case "PRINCIPAL":
-      case "ADMIN":
+      case Role.TEACHER:
+      case Role.PRINCIPAL:
+      case Role.ADMIN:
         return true;
       default:
         return false;
@@ -23,7 +34,7 @@ const isTeacher = rule({ cache: "contextual" })(
 
 const isAdmin = rule({ cache: "contextual" })(
   async (parent, args, ctx: NexusContext, info) => {
-    return ctx.user?.role === "ADMIN";
+    return ctx.user?.role === Role.ADMIN;
   }
 );
 
@@ -44,7 +55,7 @@ const isTeamMember = rule({ cache: "strict" })(
 const teachesTeam = rule({ cache: "strict" })(
   async (parent, args, ctx: NexusContext, info) => {
     const { id, role } = ctx.user || {};
-    if (!id || role !== "TEACHER") return false;
+    if (!id || role !== Role.TEACHER) return false;
     if (!parent.role)
       throw new Error("teachesTeam can only be applied to Users");
     const student = parent.id;
@@ -66,6 +77,29 @@ const isOwn = (field) =>
     }
   );
 
+// ever
+const checkBallot = rule({ cache: "strict" })(
+  async (parent, args, ctx: NexusContext, info) => {
+    if (ctx.user?.role === Role.ADMIN) return true;
+    switch (parent.scope) {
+      case BallotScope.PUBLIC:
+      case BallotScope.NATIONAL:
+      case BallotScope.CANTONAL:
+        return true;
+      case BallotScope.SCHOOL:
+        return parent.schoolId === ctx.user?.schoolId;
+      case BallotScope.TEAM:
+        // for students:
+        if (parent.teamId === ctx.user?.teamId) return true;
+        // for teacher:
+        const team = await ctx.db.team.findOne({
+          where: { id: parent.teamId },
+        });
+        return team?.teacherId === ctx.user?.id;
+    }
+  }
+);
+
 export const permissions = shield({
   rules: {
     Query: {
@@ -76,6 +110,8 @@ export const permissions = shield({
       schools: isUser,
       team: allow,
       teams: isUser,
+      ballot: allow,
+      ballots: allow,
     },
     Mutation: {
       login: allow,
@@ -126,6 +162,7 @@ export const permissions = shield({
       invite: or(isOwn("teacherId"), isAdmin),
       "*": isUser,
     },
+    Ballot: checkBallot,
     ResponseLogin: allow,
   },
   options: {
