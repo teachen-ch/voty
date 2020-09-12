@@ -80,7 +80,7 @@ const GET_TEAM_TEACHER = gql`
   ${Teams.fragments.TeamTeacherFields}
 `;
 
-export function useTeamTeacher(id: Number) {
+export function useTeamTeacher(id: Number, user: any) {
   const { data } = useQuery(GET_TEAM_TEACHER, {
     variables: { where: { id } },
     skip: !id,

@@ -1,4 +1,4 @@
-import { LoggedInPage } from "../../../components/Page";
+import { LoggedInPage, Page } from "../../../components/Page";
 import { Heading, Card, Text, Button, Link as A } from "rebass";
 import { useTeamTeacher } from "../../../components/Teams";
 import { useRouter } from "next/router";
@@ -6,15 +6,22 @@ import { Users } from "../../../components/Users";
 import { Input } from "@rebass/forms";
 import { Grid } from "theme-ui";
 import { useRef, useState } from "react";
+import { useUser } from "state/user";
 
 export default function Team() {
+  const user = useUser();
   const router = useRouter();
   const id = parseInt(String(router.query.id));
-  const team = useTeamTeacher(id);
+  const team = useTeamTeacher(id, user);
   const inviteRef = useRef(null);
   const [status, setStatus] = useState("");
 
-  if (!team) return null;
+  if (!team)
+    return (
+      <LoggedInPage heading="Klassenseite">
+        Team konnte nicht gefunden werden
+      </LoggedInPage>
+    );
 
   function copyInvite() {
     if (inviteRef && inviteRef.current) {
