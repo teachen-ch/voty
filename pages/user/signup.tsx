@@ -3,7 +3,7 @@ import { Card, Text, Button } from "rebass";
 import { gql, useMutation } from "@apollo/client";
 import { useState } from "react";
 import { useRouter } from "next/router";
-import { QForm, yup, ErrorBox, Grid } from "../../components/Forms";
+import { QForm, yup, ErrorBox, Grid } from "../../components/Form";
 import { omit } from "lodash";
 
 export const CREATE_USER = gql`

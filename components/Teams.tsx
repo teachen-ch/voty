@@ -2,7 +2,7 @@ import { gql, useQuery } from "@apollo/client";
 import { useUser } from "../state/user";
 import { Button, Text, Card, Link as A } from "rebass";
 import Link from "next/link";
-import { QForm } from "./Forms";
+import { QForm } from "./Form";
 import { useMutation } from "@apollo/client";
 import { useState, Fragment } from "react";
 import { Team, TeamWhereInput } from "@prisma/client";

@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import { Card, Text, Button, Heading } from "rebass";
 import { Grid } from "theme-ui";
 import { Label, Input } from "@rebass/forms";
-import { QForm, ErrorBox } from "components/Forms";
+import { QForm, ErrorBox } from "components/Form";
 import CheckLogin from "components/CheckLogin";
 import { useSetAccessToken, useUser, useSetUser } from "../../state/user";
 

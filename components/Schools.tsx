@@ -2,7 +2,7 @@ import { gql, useQuery } from "@apollo/client";
 import { useUser, useSetUser } from "../state/user";
 import { Heading, Button, Text, Card } from "rebass";
 import { omit } from "lodash";
-import { QForm, ErrorBox } from "./Forms";
+import { QForm, ErrorBox } from "./Form";
 import { useMutation } from "@apollo/client";
 import { cantonNames } from "../util/cantons";
 import { useState } from "react";
