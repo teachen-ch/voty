@@ -9,8 +9,15 @@
       "request": "attach",
       "name": "Attach Next",
       "skipFiles": ["<node_internals>/**"],
-      "outFiles": ["${workspaceFolder}/packages/next/dist/**/*"],
+      "outFiles": ["${workspaceFolder}/.next/**/*"],
       "port": 9229
+    },
+    {
+      "type": "chrome",
+      "request": "launch",
+      "name": "Launch Chrome against localhost",
+      "url": "http://localhost:3000/",
+      "webRoot": "${workspaceFolder}"
     }
   ]
 }
