@@ -1,5 +1,5 @@
 import { LoggedInPage, ErrorPage } from "components/Page";
-import { Text } from "rebass";
+import { Text, Heading, Box } from "rebass";
 import { useRouter } from "next/router";
 import { useUser } from "state/user";
 import { useBallot } from "components/Ballots";
@@ -24,10 +24,24 @@ export default function BallotPage() {
     );
 
   return (
-    <LoggedInPage heading={ballot.title}>
-      <Text my={2}>Dauer: {formatFromTo(ballot.start, ballot.end)}</Text>
-      <Text my={2}>Kurzbeschrieb: {ballot.description}</Text>
-      <Text my={2}>{ballot.body}</Text>
+    <LoggedInPage heading="Abstimmungsseite">
+      <Heading as="h2">{ballot.title}</Heading>
+      <Text my={2}>{ballot.description}</Text>
+      <Text my={2}>📅 Dauer: {formatFromTo(ballot.start, ballot.end)}</Text>
+      <div dangerouslySetInnerHTML={parseMarkdown(ballot.body)} />
     </LoggedInPage>
   );
+}
+
+// TODO: this is a joke markdown parser after being frustrated with mdx-js
+function parseMarkdown(str: string) {
+  str = str.replace(/^\s*\#\s+(.*?)$/gm, "<h1>$1</h1>");
+  str = str.replace(/^\s*\#\#\s+(.*?)$/gm, "<h2>$1</h2>");
+  str = str.replace(/^\s*\#\#\#\s+(.*?)$/gm, "<h3>$1</h3>");
+  str = str.replace(/^\s*\#\#\#\#\s+(.*?)$/gm, "<h4>$1</h4>");
+  str = str.replace(/^\s*-\s+(.*?)$/gm, "<li>$1</li>");
+  str = str.replace(/\n/g, "<br/>");
+  str = str.replace(/(<\/h\d>)<br\/>\s*/g, "$1");
+  str = str.replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2">$1</a>');
+  return { __html: str };
 }

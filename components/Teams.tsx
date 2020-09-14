@@ -46,7 +46,7 @@ export const fragments = {
 };
 
 const GET_TEAMS = gql`
-  query($where: TeamWhereInput) {
+  query teams($where: TeamWhereInput) {
     teams(where: $where) {
       ...TeamTeacherFields
     }
@@ -55,7 +55,7 @@ const GET_TEAMS = gql`
 `;
 
 const GET_TEAM_USER = gql`
-  query($where: TeamWhereUniqueInput!) {
+  query teamUser($where: TeamWhereUniqueInput!) {
     team(where: $where) {
       ...TeamUserFields
     }
@@ -72,7 +72,7 @@ export function useTeamUser(id: Number) {
 }
 
 const GET_TEAM_TEACHER = gql`
-  query($where: TeamWhereUniqueInput!) {
+  query teamTeacher($where: TeamWhereUniqueInput!) {
     team(where: $where) {
       ...TeamTeacherFields
     }
@@ -174,7 +174,7 @@ export const Teams: React.FC<TeamsProps> = ({ where, teamClick }) => {
 };
 
 const CREATE_TEAM = gql`
-  mutation($name: String!, $school: Int!, $teacher: Int!) {
+  mutation createOneTeam($name: String!, $school: Int!, $teacher: Int!) {
     createOneTeam(
       data: {
         name: $name

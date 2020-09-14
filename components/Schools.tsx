@@ -8,8 +8,8 @@ import { cantonNames } from "../util/cantons";
 import { useState } from "react";
 import { School } from "@prisma/client";
 
-const GET_SCHOOLS = gql`
-  query {
+const GET_SCHOOLS_WITH_MEMBERS = gql`
+  query schoolsWithMembers {
     schools {
       id
       name
@@ -26,7 +26,7 @@ const GET_SCHOOLS = gql`
 `;
 
 export function Schools() {
-  const schools = useQuery(GET_SCHOOLS);
+  const schools = useQuery(GET_SCHOOLS_WITH_MEMBERS);
 
   if (schools.error) {
     return <h1>Error loading data: {schools.error.message}</h1>;
@@ -63,7 +63,7 @@ export function Schools() {
 
 // update
 export const SET_USER_SCHOOL = gql`
-  mutation($school: Int) {
+  mutation setSchool($school: Int) {
     setSchool(school: $school) {
       id
       name
@@ -79,7 +79,7 @@ export const SET_USER_SCHOOL = gql`
 `;
 
 const GET_SCHOOL_LIST = gql`
-  query {
+  query schools {
     schools {
       id
       name
@@ -172,7 +172,7 @@ export function SelectSchool() {
 }
 
 const CREATE_SCHOOL = gql`
-  mutation($data: SchoolCreateInput!) {
+  mutation createOneSchool($data: SchoolCreateInput!) {
     createOneSchool(data: $data) {
       id
       name

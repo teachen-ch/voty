@@ -10,7 +10,7 @@ import { omit } from "lodash";
 import CheckLogin from "../../components/CheckLogin";
 
 const GET_INVITE_TEAM = gql`
-  query($invite: String!) {
+  query team($invite: String!) {
     team(where: { invite: $invite }) {
       id
       name
@@ -24,7 +24,7 @@ const GET_INVITE_TEAM = gql`
 `;
 
 const CREATE_INVITED_USER = gql`
-  mutation(
+  mutation createInvitedUser(
     $invite: String!
     $name: String
     $lastname: String
@@ -47,7 +47,7 @@ const CREATE_INVITED_USER = gql`
 `;
 
 const ACCEPT_INVITE = gql`
-  mutation($invite: String!) {
+  mutation acceptInvite($invite: String!) {
     acceptInvite(invite: $invite) {
       id
       name

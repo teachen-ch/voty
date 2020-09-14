@@ -22,7 +22,7 @@
     "migrate_dev": "ansible-playbook -i ansible/dev ansible/migrate.yml",
     "migrate_prod": "ansible-playbook -i ansible/prod ansible/migrate.yml",
     "nexus:reflection": "nexus dev --reflection --entrypoint pages/api/graphql.ts",
-    "nexus:build": "npx nexus build",
+    "nexus:build": "npx nexus build && npx graphql-codegen",
     "migrate": "cd prisma && npx prisma migrate save --experimental && npx prisma migrate up --experimental && npx prisma generate && cd ../",
     "dump_dev": "pg_dump --clean voty | ssh root@dev.votyapp.ch docker exec -i postgres psql -U voty voty",
     "ci:test": "yarn run migrate && yarn run start:bg && cypress run --record",
@@ -31,6 +31,7 @@
   "dependencies": {
     "@apollo/client": "^3.1.3",
     "@mdx-js/loader": "^1.6.16",
+    "@mdx-js/runtime": "^1.6.16",
     "@next/mdx": "^9.5.2",
     "@rebass/forms": "^4.0.6",
     "aws-sdk": "^2.727.1",

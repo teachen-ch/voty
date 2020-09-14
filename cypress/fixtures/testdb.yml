@@ -151,35 +151,89 @@ school:
 ballot:
   - title: Begrenzungsinitiative
     description: Das Freizügigkeitsabkommen zwischen der Schweiz und der Europäischen Union soll beendet werden.
-    body: https://www.easyvote.ch/de/abstimmungen/27-9-20/begrenzungsinitiative
     start: !!timestamp "2020-07-01"
     end: !!timestamp "2020-09-21"
     scope: NATIONAL
+    body: |
+      ### Ausgangslage
+      Seit 2002 gilt zwischen der Schweiz und der Europäischen Union (EU) das Freizügigkeitsabkommen (FZA). Das FZA ist einer von sieben Verträgen, die zusammen Bilaterale I genannt werden. Die Verträge der Bilateralen I sind miteinander verknüpft. Wird ein Vertrag gekündigt, werden alle sieben Verträge der Bilateralen I ausser Kraft gesetzt. Dies wird Guillotine-Klausel genannt.
+
+      Um das Freizügigkeitsabkommen zu beenden, wurde eine Initiative eingereicht. Deshalb stimmen wir nun darüber ab.
+
+      ### Was würde sich ändern?
+      Wird die Initiative angenommen, beendet die Schweiz das FZA mit der EU. Der Bundesrat hat nach Annahme der Initiative ein Jahr Zeit, die Auflösung des FZA zu verhandeln. Ziel dieser Verhandlungen ist das FZA zu beenden, ohne die Guillotine-Klausel auszulösen.
+
+      Sind die Verhandlungen nicht erfolgreich, muss der Bundesrat das FZA innerhalb von weiteren 30 Tagen kündigen. Zudem darf der Bundesrat keine neuen Freizügigkeitsabkommen abschliessen.
+
+      ### Argumente der Befürworter|innen
+      - Unbegrenzte Zuwanderung führt zu steigender Arbeitslosigkeit und gefährdet den Wohlstand in der Schweiz.
+      - Fachkräfte, die die Schweiz braucht, dürfen weiterhin hier leben und arbeiten. Die Schweiz ist auch ohne FZA ein offenes Land.
+      - Die Initiative will nur das FZA beenden. Die anderen bilateralen Verträge mit der EU sollen bestehen bleiben. Das muss der Bundesrat verhandeln.
+
+      ### Argumente der Gegner|innen
+      - Die Bilateralen I sind auf die Schweiz zugeschnitten. Sie sichern besonders die guten wirtschaftlichen Beziehungen zur EU.
+      - Die Personenfreizügigkeit ist zentral für die EU. Darüber zu verhandeln und damit die Guillotine-Klausel zu umgehen, ist unrealistisch.
+      - Schweizer Unternehmen verlieren den direkten Zugang zu ihrem wichtigsten Markt. Dies erschwert den Handel mit der EU.
+
+      ### Weitere Informationen: 
+      👉 Weitere Informationen findest Du auf [easyvote.ch](https://www.easyvote.ch/de/abstimmungen/27-9-20/begrenzungsinitiative)
 
   - title: Kampfflugzeuge
     description: Der Bund soll neue Kampfflugzeuge kaufen. Dafür soll er höchstens 6 Milliarden Franken ausgeben
-    body: Easyvote Erklärungen https://www.easyvote.ch/de/abstimmungen/27-9-20/kampfflugzeuge
     start: !!timestamp "2020-07-01"
     end: !!timestamp "2020-09-21"
     scope: NATIONAL
+    body: |
+      ### Ausgangslage
+      Die Schweizer Luftflotte verfügt heute über zwei Typen von Kampfflugzeugen: 26 Kampfflugzeuge sind rund 40-jährig und werden nur noch für die Ausbildung von PilotInnen eingesetzt. 30 weitere Kampfflugzeuge wurden in den 1990er-Jahren angeschafft und werden heute zur Kontrolle und zum Schutz des Luftraums eingesetzt. Die heutigen Kampfflugzeuge erreichen etwa 2030 das Ende ihrer Nutzungsdauer.      
+
+      Der Bundesrat hat entschieden, die Luftflotte ab 2030 zu erneuern. Darum hat er dem Parlament einen sogenannten Planungsbeschluss vorgelegt. Das Parlament hat den Planungsbeschluss genehmigt. Gegen diesen Beschluss wurde das fakultative Referendum ergriffen. Deshalb stimmen wir nun darüber ab.
+
+      ### Weitere Informationen: 
+      👉 Weitere Informationen findest Du auf [easyvote.ch](https://www.easyvote.ch/de/abstimmungen/27-9-20/kampfflugzeuge)
 
   - title: Vaterschaftsurlaub
     description: Es soll ein zweiwöchiger Vaterschaftsurlaub eingeführt werden.
-    body: Easyvote Erklärungen https://www.easyvote.ch/de/abstimmungen/27-9-20/vaterschaftsurlaub
     start: !!timestamp "2020-07-01"
     end: !!timestamp "2020-09-21"
     scope: NATIONAL
+    body: |
+      ### Ausgangslage
+      In der Schweiz haben Väter Anspruch auf ein bis zwei Tage bezahlten Vaterschaftsurlaub. Es gibt Unternehmen, die freiwillig einen längeren Vaterschaftsurlaub ermöglichen.
+
+      Ursprünglich wurde die Volksinitiative «Für einen vernünftigen Vaterschaftsurlaub – zum Nutzen der ganzen Familie» eingereicht. Die Initiative fordert einen Vaterschaftsurlaub von vier Wochen. Das Parlament hat als indirekten Gegenvorschlag zur dieser Volksinitiative die Einführung eines zweiwöchigen Vaterschaftsurlaubs beschlossen. Gegen den Beschluss des Parlaments wurde das fakultative Referendum ergriffen. Deshalb stimmen wir nun darüber ab.
+
+      ### Weitere Informationen: 
+      👉 Weitere Informationen findest Du auf [easyvote.ch](https://www.easyvote.ch/de/abstimmungen/27-9-20/vaterschaftsurlaub)
 
   - title: Kinderabzüge
     description: Die Steuerabzüge für Kinder und Kinderdrittbetreuung sollen erhöht werden.
-    body: Easyvote Erklärungen https://www.easyvote.ch/de/abstimmungen/27-9-20/kinderabzuege
     start: !!timestamp "2020-07-01"
     end: !!timestamp "2020-09-21"
     scope: NATIONAL
+    body: |
+      ### Ausgangslage
+      In der Schweiz bezahlt man Einkommenssteuern. Einen Teil seines Einkommens muss man als Steuer an Bund und Kanton bezahlen. Die Höhe dieser Einkommenssteuern hängt davon ab, wie hoch das Einkommen und die Steuerabzüge sind.
+
+      Pro Kind können Eltern 6 500 Franken jährlich vom Einkommen abziehen. Voraussetzung ist, dass die Kinder unter 18 Jahren oder in Ausbildung sind. Falls zusätzlich Kosten für eine Kinderdrittbetreuung (z.B. Kita-Kosten) anfallen, können dafür ebenfalls bis zu 10 100 Franken jährlich pro Kind abgezogen werden. Dies gilt für Kinder unter 14 Jahren.
+
+      Das Parlament hat beschlossen, die Kinderabzüge zu erhöhen. Dafür muss das Bundesgesetz über die direkte Bundessteuer geändert werden. Gegen diese Änderung wurde das fakultative Referendum ergriffen. Deshalb stimmen wir nun darüber ab.
+
+      ### Weitere Informationen: 
+      👉 Weitere Informationen findest Du auf [easyvote.ch](https://www.easyvote.ch/de/abstimmungen/27-9-20/kinderabzuege)
 
   - title: Jagdgesetz
     description: Das Jagdgesetz soll geändert werden. Die Änderung betrifft den Schutz und den Abschuss von Wildtieren
-    body: Easyvote Erklärungen https://www.easyvote.ch/de/abstimmungen/27-9-20/jagdgesetz
     start: !!timestamp "2020-07-01"
     end: !!timestamp "2020-09-21"
     scope: NATIONAL
+    body: |
+      ### Ausgangslage
+      Das aktuelle Jagdgesetz stammt aus dem Jahr 1986. Das Jagdgesetz regelt zum Beispiel, wann und wo wie viele Tiere von welcher Tierart geschossen werden dürfen.
+
+      Wölfe gelten im aktuellen Jagdgesetz als geschützte Tierart. Ein Wolf darf nur geschossen werden, wenn er Schafe oder Ziegen angreift, die durch einen Zaun oder einen Hund geschützt sind. Der Abschuss eines Wolfes muss vom Bund bewilligt werden. Gegen den Abschuss eines Wolfes können der Bund oder Naturschutzorganisationen Beschwerde einreichen. Hat ein Wolf Schaden verursacht, werden Bäuerinnen und Bauern dafür entschädigt.
+
+      Das Parlament hat eine Änderung des Jagdgesetzes beschlossen. Gegen die Änderung des Jagdgesetzes wurde das fakultative Referendum ergriffen. Deshalb stimmen wir nun darüber ab.
+
+      ### Weitere Informationen: 
+      👉 Weitere Informationen findest Du auf [easyvote.ch](https://www.easyvote.ch/de/abstimmungen/27-9-20/jagdgesetz)

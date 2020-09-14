@@ -1,7 +1,7 @@
 import { gql, useQuery } from "@apollo/client";
-import { Heading, Text, Link as A } from "rebass";
+import { Heading, Text, Link as A, Box, Button } from "rebass";
 import { useState, Fragment } from "react";
-import { Ballot, BallotWhereInput } from "@prisma/client";
+import { Ballot, BallotWhereInput } from "graphql/types";
 import { formatFromTo } from "../util/date";
 
 export const fragments = {
@@ -20,7 +20,7 @@ export const fragments = {
 };
 
 const GET_BALLOTS = gql`
-  query($where: BallotWhereInput) {
+  query ballots($where: BallotWhereInput) {
     ballots(where: $where) {
       ...BallotFields
     }
@@ -35,7 +35,7 @@ export function useBallots(where?: BallotWhereInput) {
 }
 
 const GET_BALLOT = gql`
-  query($where: BallotWhereUniqueInput!) {
+  query ballot($where: BallotWhereUniqueInput!) {
     ballot(where: $where) {
       ...BallotFields
     }
@@ -46,12 +46,14 @@ const GET_BALLOT = gql`
 // TODO: have to redefine enum here, otherwise hiting this issue
 // https://github.com/prisma/prisma/issues/3252
 export enum BallotScope {
-  PUBLIC = "PUBLIC",
-  NATIONAL = "NATIONAL",
-  CANTONAL = "CANTONAL",
-  SCHOOL = "SCHOOL",
-  TEAM = "TEAM",
+  Public = "PUBLIC",
+  National = "NATIONAL",
+  Cantonal = "CANTONAL",
+  School = "SCHOOL",
+  Team = "TEAM",
 }
+
+//export { BallotScope };
 
 export function useBallot(id: Number) {
   return useQuery(GET_BALLOT, {
@@ -79,50 +81,58 @@ export const Ballots: React.FC<BallotsProps> = ({ where, onClick }) => {
   if (ballots.data.length === 0) {
     return <Text>Noch keine Abstimmungen erfasst</Text>;
   }
+
   return (
     <>
-      <table width="100%">
-        <thead>
-          <tr>
-            <th align="left">Titel</th>
-            <th align="left">Dauer</th>
-            <th align="left">Status</th>
-          </tr>
-        </thead>
-
-        <tbody>
-          {ballots.data.ballots.map((ballot: any) => (
-            <Fragment key={ballot.id}>
-              <tr>
-                <td>
-                  <A onClick={() => onClick(ballot)}>{ballot.title}</A>
-                </td>
-                <td>{formatFromTo(ballot.start, ballot.end)}</td>
-                <td>{getBallotStatus(ballot)}</td>
-                <td></td>
-              </tr>
-              <tr>
-                <td colSpan={4}>
-                  <small>{ballot.description}</small>
-                </td>
-              </tr>
-            </Fragment>
-          ))}
-        </tbody>
-      </table>
+      {ballots.data.ballots.map((ballot: any) => (
+        <Fragment key={ballot.id}>
+          <A
+            fontSize={3}
+            sx={{ fontWeight: "bold" }}
+            onClick={() => onClick(ballot)}
+          >
+            👉 {ballot.title}
+          </A>
+          <Text fontSize={2}>{ballot.description}</Text>
+          <Box mt={2} mb={4}>
+            <Button
+              onClick={() => onClick(ballot)}
+              bg={
+                getBallotStatus(ballot) === BallotStatus.Started
+                  ? "primary"
+                  : "muted"
+              }
+            >
+              {getBallotLink(ballot)} ({formatFromTo(ballot.start, ballot.end)})
+            </Button>
+          </Box>
+        </Fragment>
+      ))}
     </>
   );
 };
 
 enum BallotStatus {
-  NOT_STARTED = "Nicht gestartet",
-  STARTED = "Gestartet",
-  ENDED = "Beendet",
+  Not_Started = "Nicht gestartet",
+  Started = "Gestartet",
+  Ended = "Beendet",
 }
 
 export const getBallotStatus = (ballot: Ballot) => {
   const now = new Date();
-  if (ballot.start < now) return BallotStatus.NOT_STARTED;
-  if (ballot.end < now) return BallotStatus.ENDED;
-  else return BallotStatus.STARTED;
+  if (ballot.start < now) return BallotStatus.Not_Started;
+  if (ballot.end < now) return BallotStatus.Ended;
+  else return BallotStatus.Started;
+};
+
+export const getBallotLink = (ballot: Ballot) => {
+  const status = getBallotStatus(ballot);
+  switch (status) {
+    case BallotStatus.Started:
+      return "Jetzt abstimmen";
+    case BallotStatus.Not_Started:
+      return "Nicht gestartet";
+    case BallotStatus.Ended:
+      return "Beendet";
+  }
 };

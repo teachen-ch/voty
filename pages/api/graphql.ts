@@ -19,13 +19,6 @@ require("../../graphql/user");
 
 app.assemble();
 
-/*type NextApiRequestWithUser = NextApiRequest & {
-  user?: User;
-};*/
-
 export default async (req: NextApiRequest, res: NextApiResponse) => {
-  //const reqWithUser: NextApiRequestWithUser = req;
-  //const user = await getSessionUser(req);
-  //reqWithUser.user = user;
   return app.server.handlers.graphql(req, res);
 };

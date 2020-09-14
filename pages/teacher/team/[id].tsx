@@ -15,18 +15,18 @@ import {
   SetStateAction,
 } from "react";
 import { useUser } from "state/user";
-import { Ballots, BallotScope } from "components/Ballots";
-import { Ballot, Team } from "@prisma/client";
+import { Ballots } from "components/Ballots";
+import { Ballot, Team } from "graphql/types";
+import { BallotScope } from "components/Ballots";
 
-function useNavHash(): [string, (s: string) => void] {
-  const [navHash, setStateHash] = useState<string>("#");
+function useNavHash(init?: string): [string, (s: string) => void] {
+  const [navHash, setStateHash] = useState<string>(init || "#");
   const router = useRouter();
   useEffect(() => {
     if (!navHash && window.location.hash) {
       setStateHash(window.location.hash);
     }
     function hashChangeComplete(url: string) {
-      console.log(url);
       if (url.indexOf("#") >= 0) {
         const newHash = url.substring(url.indexOf("#"));
         setStateHash(newHash);
@@ -51,7 +51,7 @@ function useNavHash(): [string, (s: string) => void] {
 export default function TeamPage() {
   const user = useUser();
   const router = useRouter();
-  const [hash, navHash] = useNavHash();
+  const [hash, navHash] = useNavHash("#admin");
   const id = parseInt(String(router.query.id));
   const team = useTeamTeacher(id, user);
 
@@ -139,7 +139,7 @@ function TeamTest({ team }: { team: Team }) {
   return (
     <>
       <Heading as="h2">Demokratie Testen: Nationale Abstimmungen</Heading>
-      <Ballots where={{ scope: BallotScope.NATIONAL }} onClick={selectBallot} />
+      <Ballots where={{ scope: BallotScope.National }} onClick={selectBallot} />
     </>
   );
 }

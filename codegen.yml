@@ -1,8 +1,8 @@
 overwrite: true
 schema: "api.graphql"
-documents: "components/Ballots.tsx"
+documents: ["**/*.tsx"]
 generates:
-  util/types.ts:
+  graphql/types.d.ts:
     plugins:
       - "typescript"
       - "typescript-operations"

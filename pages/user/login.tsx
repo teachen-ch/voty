@@ -11,7 +11,7 @@ import { useSetAccessToken, useUser, useSetUser } from "../../state/user";
 import { useQueryParam } from "util/hooks";
 
 export const LOGIN = gql`
-  mutation($email: String!, $password: String!) {
+  mutation login($email: String!, $password: String!) {
     login(email: $email, password: $password) {
       token
       user {
@@ -23,7 +23,7 @@ export const LOGIN = gql`
 `;
 
 export const EMAIL_VERIFICATION = gql`
-  mutation($email: String!, $purpose: String!) {
+  mutation emailVerification($email: String!, $purpose: String!) {
     emailVerification(email: $email, purpose: $purpose) {
       token # this is not really need, just a placeholder
     }
@@ -31,7 +31,7 @@ export const EMAIL_VERIFICATION = gql`
 `;
 
 export const CHANGE_PASSWORD = gql`
-  mutation($password: String!) {
+  mutation changePassword($password: String!) {
     changePassword(password: $password) {
       token # this is not really need, just a placeholder
     }
@@ -39,7 +39,7 @@ export const CHANGE_PASSWORD = gql`
 `;
 
 export const CHECK_VERIFICATION = gql`
-  mutation($token: String!) {
+  mutation checkVerification($token: String!) {
     checkVerification(token: $token) {
       token
       user {

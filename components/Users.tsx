@@ -1,8 +1,9 @@
 import { gql, useQuery } from "@apollo/client";
 import { Text } from "rebass";
-import { UserWhereInput } from "@prisma/client";
+import { UserWhereInput } from "graphql/types";
+
 const GET_USERS = gql`
-  query($where: UserWhereInput) {
+  query users($where: UserWhereInput) {
     users(where: $where) {
       id
       shortname
