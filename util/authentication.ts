@@ -6,7 +6,8 @@ import { sendMail } from "./email";
 import { randomBytes, createHash } from "crypto";
 import logger from "./logger";
 
-let secret = process.env.SESSION_SECRET;
+let secret = process.env.SESSION_SECRET!;
+if (!secret) throw new Error("New SESSION_SECRET defined in .env");
 let expires = process.env.SESSION_EXPIRES || "1d";
 
 if (!secret) {
@@ -20,12 +21,16 @@ type ResponseLogin = {
   user?: User;
 };
 
-export async function login(_root, args, ctx): Promise<ResponseLogin> {
+export async function login(
+  _root: any,
+  args: any,
+  ctx: NexusContext
+): Promise<ResponseLogin> {
   try {
     const user = await ctx.db.user.findOne({ where: { email: args.email } });
     if (!user) throw Error("ERR_USER_PASSWORD");
 
-    const matches = await bcrypt.compare(args.password, user.password);
+    const matches = await bcrypt.compare(args.password, user.password!);
     if (!matches) throw Error("ERR_USER_PASSWORD");
 
     if (!user.emailVerified) {
@@ -48,7 +53,7 @@ function startJWTSession(user: User, ctx: NexusContext): ResponseLogin {
   return { token, user };
 }
 
-export function setRequestUser(user, ctx: NexusContext) {
+export function setRequestUser(user: User, ctx: NexusContext) {
   ctx.user = user;
 }
 
@@ -56,7 +61,7 @@ export function getRequestUser(ctx: NexusContext): User | undefined {
   return ctx.user;
 }
 
-export async function createUser(_root, args, ctx: NexusContext) {
+export async function createUser(_root: any, args: any, ctx: NexusContext) {
   try {
     const { email, password, name, lastname, role } = args.data;
     const salt = await bcrypt.genSalt(10);
@@ -85,7 +90,7 @@ export async function createUser(_root, args, ctx: NexusContext) {
   }
 }
 
-export async function acceptInvite(_root, args, ctx: NexusContext) {
+export async function acceptInvite(_root: any, args: any, ctx: NexusContext) {
   const team = await ctx.db.team.findOne({ where: { invite: args.invite } });
   if (!team) throw new Error("INVITE_NOT_FOUND");
   const user = getRequestUser(ctx);
@@ -103,7 +108,11 @@ async function connectUserTeam(user: User, team: Team, ctx: NexusContext) {
   });
 }
 
-export async function createInvitedUser(_root, args, ctx) {
+export async function createInvitedUser(
+  _root: any,
+  args: any,
+  ctx: NexusContext
+) {
   const team = await ctx.db.team.findOne({ where: { invite: args.invite } });
   if (!team) throw new Error("INVITE_NOT_FOUND");
   const { name, lastname, email, password } = args;
@@ -119,42 +128,45 @@ export async function createInvitedUser(_root, args, ctx) {
   return user;
 }
 
-export async function updateUser(_root, args, ctx: NexusContext) {
+export async function updateUser(_root: any, args: any, ctx: NexusContext) {
   // TODO: ensure this is not called with variable args by user
-  const { id: userId, role } = getRequestUser(ctx);
-  const id = args.id || userId;
-  if (id !== userId && role !== "ADMIN")
+  const user = getRequestUser(ctx);
+  const id = args.id || user?.id;
+  if (id !== user?.id && user?.role !== "ADMIN")
     throw new Error("ERR_ONLY_UPDATE_SELF");
-  if (args.role && role !== "ADMIN") delete args.role;
-  const user = await ctx.db.user.update({
+  if (args.role && user?.role !== "ADMIN") delete args.role;
+  const result = await ctx.db.user.update({
     where: { id },
     data: args,
   });
-  return user;
+  return result;
 }
 
 export function getSessionUser(req: Request): User | undefined {
   // what about req.body.token || req.query.token ?
+  // @ts-ignore
   const token = req.headers["x-access-token"];
 
   if (token && token != "null") {
-    const jwt = verifyJWT(token);
+    const jwt: any = verifyJWT(token);
     return jwt?.user;
   }
 }
 
-export async function getUser(ctx: NexusContext): Promise<User> {
+export async function getUser(ctx: NexusContext): Promise<User | null> {
   try {
-    const { id, role } = getRequestUser(ctx);
-    if (id) {
-      return await ctx.db.user.findOne({ where: { id } });
+    const user = getRequestUser(ctx);
+    if (user?.id) {
+      return await ctx.db.user.findOne({ where: { id: user?.id } });
     }
+    return null;
   } catch (err) {
     logger.info("error calling /me", err);
+    return null;
   }
 }
 
-export function verifyJWT(token) {
+export function verifyJWT(token: string) {
   try {
     return jwt.verify(token, secret);
   } catch (err) {
@@ -170,13 +182,16 @@ export async function sendVerificationEmail(
   prisma: PrismaClient
 ) {
   try {
-    const from = process.env.EMAIL;
+    const from = process.env.EMAIL!;
+    if (!from)
+      throw new Error("Please define EMAIL env variable (sender-email)");
+
     const site = `voty${
       process.env.NODE_ENV !== "production" ? process.env.NODE_ENV : ""
     }`;
     const token = await createVerificationToken(prisma, email);
     const url = `${process.env.BASE_URL}user/login?t=${token}&p=${purpose}`;
-    const subjects = {
+    const subjects: { [key: string]: string } = {
       verification: "voty: Bitte Email bestätigen",
       reset: "voty: Passwort zurücksetzen?",
       login: "voty: Jetzt anmelden?",
@@ -194,7 +209,10 @@ export async function sendVerificationEmail(
   }
 }
 
-async function createVerificationToken(prisma: PrismaClient, identifier) {
+async function createVerificationToken(
+  prisma: PrismaClient,
+  identifier: string
+) {
   const secret = process.env.SESSION_SECRET;
   const maxAge = 24 * 60 * 60 * 1000;
   const expires = new Date(Date.now() + maxAge);
@@ -210,7 +228,11 @@ async function createVerificationToken(prisma: PrismaClient, identifier) {
   return token;
 }
 
-export async function checkVerification(_root, args, ctx) {
+export async function checkVerification(
+  _root: any,
+  args: any,
+  ctx: NexusContext
+) {
   const found = await verifyToken(args.token, ctx.db);
   if (!found) {
     throw Error("ERR_TOKEN_NOT_FOUND");
@@ -228,10 +250,9 @@ export async function checkVerification(_root, args, ctx) {
   return startJWTSession(user, ctx);
 }
 
-export async function changePassword(_root, args, ctx) {
-  logger.info("password Change... check user");
+export async function changePassword(_root: any, args: any, ctx: NexusContext) {
   const user = await getUser(ctx);
-  logger.info("user: ", user);
+  if (!user) throw new Error("ERR_USER_NOT_FOUND");
   const salt = await bcrypt.genSalt(10);
   const hashed = await bcrypt.hash(args.password, salt);
   const ok = await ctx.db.user.update({
@@ -245,7 +266,7 @@ export async function changePassword(_root, args, ctx) {
   }
 }
 
-async function verifyToken(token, prisma: PrismaClient) {
+async function verifyToken(token: string, prisma: PrismaClient) {
   const secret = process.env.SESSION_SECRET;
   const hashed = createHash("sha256").update(`${token}${secret}`).digest("hex");
   const found = await prisma.verificationRequest.findOne({
@@ -257,7 +278,7 @@ async function verifyToken(token, prisma: PrismaClient) {
   return found;
 }
 
-async function deleteExpiredTokens(prisma) {
+async function deleteExpiredTokens(prisma: PrismaClient) {
   const maxAge = 24 * 60 * 60 * 1000;
   const expired = new Date(Date.now() - 2 * maxAge);
   // TODO: deleting old verification requests could be done in cronjob

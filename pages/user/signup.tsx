@@ -5,6 +5,7 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 import { QForm, yup, ErrorBox, Grid } from "../../components/Form";
 import { omit } from "lodash";
+import { User } from "@prisma/client";
 
 export const CREATE_USER = gql`
   mutation($data: UserCreateInput!) {
@@ -20,7 +21,7 @@ export const CREATE_USER = gql`
 export default function Signup() {
   const [user, setUser] = useState();
   if (user) {
-    return <Success user={user} />;
+    return <Success user={user!} />;
   }
   return (
     <Page heading="Erstelle ein neues Benutzer-Konto">
@@ -33,7 +34,7 @@ export default function Signup() {
   );
 }
 
-export function Success({ user }) {
+export function Success({ user }: { user: User }) {
   return (
     <Page heading="Konto erstellt">
       <Text>
@@ -50,7 +51,7 @@ export function CreateUserForm({
   onSubmit,
 }: {
   setUser: Function;
-  onSubmit?: Function;
+  onSubmit?: (values: { [key: string]: any }) => void;
 }) {
   const router = useRouter();
   const [error, setError] = useState("");
@@ -72,7 +73,7 @@ export function CreateUserForm({
   });
 
   if (!onSubmit) {
-    onSubmit = (values) =>
+    onSubmit = (values: any) =>
       doCreateUser({ variables: { data: omit(values, "submit") } });
   }
   return (
@@ -104,6 +105,7 @@ export function CreateUserForm({
           // watch out: password2 would also be sent to server which barks
           //password2: yup.string().oneOf([yup.ref('password'), null], 'Passwords must match')
           role: {
+            type: "select",
             label: "Ich bin:",
             init: "STUDENT",
             required: true,

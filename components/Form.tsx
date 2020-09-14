@@ -1,34 +1,52 @@
-import { Formik, Form, useField } from "formik";
-import { Text, Button, Card, Box } from "rebass";
+import { Formik, Form, useField, FormikFormProps } from "formik";
+import { Text, Button, Card, Box, BoxProps } from "rebass";
 import { Grid } from "theme-ui";
 import {
-  Input as RInput,
-  Label as RLabel,
+  Input as RebassInput,
+  Label as RebassLabel,
   Select as RSelect,
+  InputProps as RebassInputProps,
+  SelectProps as RebassSelectProps,
 } from "@rebass/forms";
 import * as yup from "yup";
 import React, { useMemo } from "react";
 import { omit } from "lodash";
+import {
+  DocumentNode,
+  MutationFunctionOptions,
+  MutationOptions,
+  FetchResult,
+} from "@apollo/client";
 
 export { Formik, Form, yup, Grid, Card };
 
-export function Input({ label, ...props }) {
+type InputProps = RebassInputProps & {
+  label: string;
+  setter?: (s: string) => void;
+};
+
+export const Input: React.FC<InputProps> = ({ label, setter, ...props }) => {
   const [field, meta] = useField(props as any);
   // TODO: this is a really hacky way to get values out of the form again
   // e.g. on login.tsx email field
-  const onChange = props.setter
-    ? (value) => {
-        props.setter(value.target.value);
-        field.onChange(value);
+  const onChange = setter
+    ? (evt: React.ChangeEvent<HTMLInputElement>) => {
+        setter(evt.target.value);
+        field.onChange(evt);
       }
     : field.onChange;
 
   return (
     <>
-      <RLabel key={label} htmlFor={props.id || props.name}>
+      <RebassLabel
+        sx={{ alignSelf: "center" }}
+        key={label}
+        htmlFor={props.id || props.name}
+      >
         {label}
-      </RLabel>
-      <RInput
+      </RebassLabel>
+      {/* @ts-ignore */}
+      <RebassInput
         key={"i" + label}
         id={props.id || props.name}
         onChange={onChange}
@@ -45,11 +63,33 @@ export function Input({ label, ...props }) {
       ) : null}
     </>
   );
-}
+};
 
-export function QForm({ fields, mutation, ...props }) {
+type QFormField = {
+  name?: string;
+  type?: string;
+  label?: string;
+  placeholder?: string;
+  init?: string | number;
+  required?: boolean;
+  setter?: (s: string) => void;
+  validate?: YupType;
+  options?: { [key: string]: string | number };
+};
+
+type YupType =
+  | yup.StringSchema<string | undefined>
+  | yup.NumberSchema<number | undefined>;
+
+type QFormProps = FormikFormProps & {
+  fields: { [key: string]: QFormField };
+  onSubmit?: (values: { [key: string]: any }) => void;
+  mutation: (options?: any) => Promise<FetchResult>;
+};
+
+export const QForm: React.FC<QFormProps> = ({ fields, mutation, ...props }) => {
   // default onSubmit = execute mutation handler
-  const doMutation = (values) =>
+  const doMutation = (values: { [key: string]: any }) =>
     mutation({ variables: omit(values, "submit") });
   const onSubmit = props.onSubmit ? props.onSubmit : doMutation;
 
@@ -59,48 +99,36 @@ export function QForm({ fields, mutation, ...props }) {
   );
 
   function configureFields() {
-    const fieldArr = [];
-    const validationSchema = {};
-    const initialValues = {};
+    const fieldArr: QFormField[] = [];
+    const validationSchema: {
+      [key: string]: YupType;
+    } = {};
+    const initialValues: { [key: string]: string | number } = {};
 
     Object.keys(fields).forEach((name) => {
-      let {
-        label,
-        type,
-        required,
-        options,
-        validate,
-        init,
-        setter,
-        placeholder,
-      } = fields[name];
-      initialValues[name] = typeof init !== "undefined" ? init : "";
-      if (!validate) {
-        const yupTypes = {
+      const f = fields[name];
+      f.type = f.type || "string";
+      if (f.options) f.type = "select";
+      f.name = f.name || name;
+
+      initialValues[name] = typeof f.init !== "undefined" ? f.init : "";
+      if (!f.validate) {
+        const yupTypes: {
+          [key: string]: YupType;
+        } = {
           string: yup.string(),
           number: yup.number(),
           email: yup.string().email("Bitte gültige Email-Adresse angeben"),
         };
-        validate = yupTypes[type] || yup.string();
+        f.validate = yupTypes[f.type] || yup.string();
       }
-      if (options) {
-        type = "select";
+      if (typeof f.label === "undefined")
+        f.label = name[0].toUpperCase() + name.substring(1);
+      if (f.required) {
+        f.validate = f.validate!.required("Pflichtfeld");
       }
-      if (typeof label === "undefined")
-        label = name[0].toUpperCase() + name.substring(1);
-      if (required) {
-        validate = validate.required("Pflichtfeld");
-      }
-      if (validate) validationSchema[name] = validate;
-      fieldArr.push({
-        name,
-        label,
-        type,
-        required,
-        options,
-        setter,
-        placeholder,
-      });
+      if (f.validate) validationSchema[name] = f.validate;
+      fieldArr.push(f);
     });
 
     return {
@@ -109,14 +137,15 @@ export function QForm({ fields, mutation, ...props }) {
       initialValues,
     };
   }
-  function generateField(field) {
+
+  function generateField(field: QFormField) {
     if (field.type === "hidden") {
       return null;
     }
     if (field.type === "submit") {
       return (
         <React.Fragment key={`${field.name}-frag`}>
-          <span key={`${field.name}-span`} />
+          <span />
           <Button type="submit" key={field.name}>
             {field.label}
           </Button>
@@ -124,10 +153,11 @@ export function QForm({ fields, mutation, ...props }) {
       );
     }
     if (field.type === "select") {
+      if (!field.options) throw new Error("You need to specify options");
       return (
-        <Select label={field.label} name={field.name} key={field.name}>
+        <Select label={field.label || ""} name={field.name} key={field.name}>
           {Object.keys(field.options).map((label) => (
-            <option key={label} value={field.options[label]}>
+            <option key={label} value={field.options![label]}>
               {label}
             </option>
           ))}
@@ -138,7 +168,7 @@ export function QForm({ fields, mutation, ...props }) {
         <Input
           type={field.type}
           key={field.name}
-          label={field.label}
+          label={field.label || field.name || ""}
           name={field.name}
           setter={field.setter}
           placeholder={field.placeholder}
@@ -163,15 +193,21 @@ export function QForm({ fields, mutation, ...props }) {
       </Form>
     </Formik>
   );
-}
+};
 
-export function Select({ label, ...props }) {
+type SelectProps = RebassSelectProps & {
+  label: string;
+  setter?: (s: string) => void;
+};
+
+export const Select: React.FC<SelectProps> = ({ label, ...props }) => {
   const [field, meta] = useField(props as any);
   return (
     <>
-      <RLabel key={label} htmlFor={props.id || props.name}>
+      <RebassLabel key={label} htmlFor={props.id || props.name}>
         {label}
-      </RLabel>
+      </RebassLabel>
+      {/* @ts-ignore */}
       <RSelect id={props.id || props.name} {...field} {...props} />
       {meta.touched && meta.error ? (
         <>
@@ -183,10 +219,14 @@ export function Select({ label, ...props }) {
       ) : null}
     </>
   );
-}
+};
 
-export function ErrorBox(props) {
-  if (!props.error) return null;
+type ErrorBoxProps = BoxProps & {
+  error: string;
+};
+
+export const ErrorBox: React.FC<ErrorBoxProps> = ({ error, ...props }) => {
+  if (!error) return null;
   return (
     <Box
       pl={3}
@@ -197,11 +237,12 @@ export function ErrorBox(props) {
         borderLeftStyle: "solid",
         borderLeftWidth: 4,
       }}
+      {...props}
     >
       <Text>
         <b>Fehler: </b>
-        {props.error}
+        {error}
       </Text>
     </Box>
   );
-}
+};

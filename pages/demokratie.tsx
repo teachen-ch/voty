@@ -39,7 +39,7 @@ export default function Kontakt() {
         Wäre das etwas für sie und ihre Klasse? Dann tragen Sie sich auf unsere
         Liste ein und wir nehmen gerne Kontakt auf.
       </Text>
-      <Card id="newsletter">
+      <Card>
         <Heading as="h2" mt={0}>
           Das interessiert mich!
         </Heading>

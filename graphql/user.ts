@@ -16,7 +16,7 @@ schema.objectType({
     t.model.lastname();
     t.string("shortname", {
       resolve({ name, lastname }, args, ctx) {
-        return `${name} ${lastname.substring(0, 1).toUpperCase()}.`;
+        return `${name} ${(lastname || "").substring(0, 1).toUpperCase()}.`;
       },
     });
     t.model.gender();
@@ -79,8 +79,8 @@ schema.extendType({
     t.field("emailVerification", {
       type: "ResponseLogin",
       args: {
-        email: stringArg(),
-        purpose: stringArg(),
+        email: stringArg({ required: true }),
+        purpose: stringArg({ required: true }),
       },
       resolve: async (_root, args, ctx) =>
         authentication.sendVerificationEmail(args.email, args.purpose, ctx.db),

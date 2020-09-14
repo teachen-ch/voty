@@ -60,7 +60,7 @@ const ACCEPT_INVITE = gql`
   }
 `;
 
-export default function Invite(props) {
+export default function Invite(props: React.Props<{}>) {
   const existingUser = useUser();
   const [newUser, setUser] = useState();
   const router = useRouter();
@@ -78,7 +78,7 @@ export default function Invite(props) {
       console.error(error.message);
     },
   });
-  const onSubmit = (values) =>
+  const onSubmit = (values: { [key: string]: string }) =>
     doCreateInvitedUser({ variables: { ...omit(values, "submit"), invite } });
 
   if (teamQuery.error) {
@@ -98,7 +98,7 @@ export default function Invite(props) {
     }
 
     if (newUser) {
-      return <Success user={newUser} />;
+      return <Success user={newUser!} />;
     }
 
     return (
@@ -120,7 +120,12 @@ export default function Invite(props) {
   }
 }
 
-function AcceptInvite({ invite, user, team }) {
+type AcceptInviteProps = {
+  invite: string;
+  user: any; // TODO: NEXUSTYPE find out how to import Nexus Types here
+  team: any; // TODO: NEXUSTYPE find out how to import Nexus Types here
+};
+const AcceptInvite: React.FC<AcceptInviteProps> = ({ invite, user, team }) => {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
   const router = useRouter();
@@ -151,10 +156,10 @@ function AcceptInvite({ invite, user, team }) {
       <Text>
         Einladung für Klasse «{team.name}» im Schulhaus «{team.school?.name}»
       </Text>
-      <Button my={4} onClick={doAcceptInvite}>
+      <Button my={4} onClick={() => doAcceptInvite()}>
         Einladung annehmen
       </Button>
       <ErrorBox error={error} />
     </Page>
   );
-}
+};

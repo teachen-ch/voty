@@ -17,8 +17,8 @@ export default function Kontakt() {
         <Button onClick={sendMail}>Email schreiben</Button>
       </Text>
 
-      <Card id="newsletter">
-        <Heading as="h2" my={0}>
+      <Card>
+        <Heading as="h2" my={0} id="newsletter">
           Möchtet ihr regelmässig über «voty» informiert werden?
         </Heading>
         <Newsletter />

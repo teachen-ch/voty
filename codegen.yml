@@ -1,0 +1,15 @@
+overwrite: true
+schema: "api.graphql"
+documents: "components/Ballots.tsx"
+generates:
+  util/types.ts:
+    plugins:
+      - "typescript"
+      - "typescript-operations"
+      - "typescript-react-apollo"
+      - "typescript-graphql-files-modules"
+      - "typescript-document-nodes"
+      - "fragment-matcher"
+  #./graphql.schema.json:
+  #  plugins:
+  #    - "introspection"

@@ -68,7 +68,7 @@ const teachesTeam = rule({ cache: "strict" })(
 );
 
 // check for parent.id, or parent.schoolId, or parent.teacherId...
-const isOwn = (field) =>
+const isOwn = (field: string) =>
   rule(`own-${field}`, { cache: "strict" })(
     async (parent, args, ctx: NexusContext, info) => {
       const { id } = ctx.user || {};
@@ -96,6 +96,8 @@ const checkBallot = rule({ cache: "strict" })(
           where: { id: parent.teamId },
         });
         return team?.teacherId === ctx.user?.id;
+      default:
+        return false;
     }
   }
 );

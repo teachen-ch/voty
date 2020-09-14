@@ -1,9 +1,4 @@
-import {
-  atom,
-  useRecoilState,
-  useRecoilValue,
-  useSetRecoilState,
-} from "recoil";
+import { atom, useRecoilValue, useSetRecoilState } from "recoil";
 
 export const accessTokenState = atom({
   key: "accessTokenState",
@@ -26,6 +21,7 @@ type User = {
 type Team = {
   id: number;
   name: string;
+  school?: School;
 };
 
 type School = {
@@ -37,7 +33,7 @@ type School = {
 
 export const userState = atom({
   key: "userState",
-  default: undefined as User,
+  default: undefined as User | undefined,
 });
 
 export function useAccessToken() {
@@ -46,7 +42,7 @@ export function useAccessToken() {
 
 export function useSetAccessToken() {
   const setState = useSetRecoilState(accessTokenState);
-  return (token) => {
+  return (token: string) => {
     localStorage.setItem("@token", token);
     setState(token);
   };
@@ -58,7 +54,7 @@ export function useUser() {
 
 export function useSetUser() {
   const setState = useSetRecoilState(userState);
-  return (user) => {
+  return (user: User | undefined) => {
     setState(user);
   };
 }

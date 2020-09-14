@@ -4,7 +4,7 @@ import { useState, Fragment } from "react";
 import { Ballot, BallotWhereInput } from "@prisma/client";
 import { formatFromTo } from "../util/date";
 
-Ballots.fragments = {
+export const fragments = {
   BallotFields: gql`
     fragment BallotFields on Ballot {
       id
@@ -25,7 +25,22 @@ const GET_BALLOTS = gql`
       ...BallotFields
     }
   }
-  ${Ballots.fragments.BallotFields}
+  ${fragments.BallotFields}
+`;
+
+export function useBallots(where?: BallotWhereInput) {
+  return useQuery(GET_BALLOTS, {
+    variables: { where },
+  });
+}
+
+const GET_BALLOT = gql`
+  query($where: BallotWhereUniqueInput!) {
+    ballot(where: $where) {
+      ...BallotFields
+    }
+  }
+  ${fragments.BallotFields}
 `;
 
 // TODO: have to redefine enum here, otherwise hiting this issue
@@ -38,21 +53,6 @@ export enum BallotScope {
   TEAM = "TEAM",
 }
 
-export function useBallots(where: BallotWhereInput) {
-  return useQuery(GET_BALLOTS, {
-    variables: { where },
-  });
-}
-
-const GET_BALLOT = gql`
-  query($where: BallotWhereUniqueInput!) {
-    ballot(where: $where) {
-      ...BallotFields
-    }
-  }
-  ${Ballots.fragments.BallotFields}
-`;
-
 export function useBallot(id: Number) {
   return useQuery(GET_BALLOT, {
     variables: { where: { id } },
@@ -60,13 +60,12 @@ export function useBallot(id: Number) {
   });
 }
 
-export function Ballots({
-  where,
-  onClick,
-}: {
+type BallotsProps = {
   where?: BallotWhereInput;
-  onClick?: (ballot: Ballot) => void;
-}) {
+  onClick: (ballot: Ballot) => void;
+};
+
+export const Ballots: React.FC<BallotsProps> = ({ where, onClick }) => {
   const [] = useState();
   const ballots = useBallots(where);
 
@@ -113,7 +112,7 @@ export function Ballots({
       </table>
     </>
   );
-}
+};
 
 enum BallotStatus {
   NOT_STARTED = "Nicht gestartet",
@@ -121,9 +120,9 @@ enum BallotStatus {
   ENDED = "Beendet",
 }
 
-export function getBallotStatus(ballot) {
-  const now = Date.now();
+export const getBallotStatus = (ballot: Ballot) => {
+  const now = new Date();
   if (ballot.start < now) return BallotStatus.NOT_STARTED;
   if (ballot.end < now) return BallotStatus.ENDED;
   else return BallotStatus.STARTED;
-}
+};

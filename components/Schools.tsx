@@ -6,6 +6,7 @@ import { QForm, ErrorBox } from "./Form";
 import { useMutation } from "@apollo/client";
 import { cantonNames } from "../util/cantons";
 import { useState } from "react";
+import { School } from "@prisma/client";
 
 const GET_SCHOOLS = gql`
   query {
@@ -119,7 +120,7 @@ export function SelectSchool() {
   }
 
   const options = schools.reduce(
-    (o, i) => {
+    (o: any, i: School) => {
       const label = `${i.zip} ${i.city} – ${i.name}`;
       o[label] = i.id;
       return o;
@@ -155,7 +156,7 @@ export function SelectSchool() {
               },
             }}
             mutation={setUserSchool}
-            onSubmit={(values) =>
+            onSubmit={(values: any) =>
               setUserSchool({ variables: { school: parseInt(values.school) } })
             }
           >
@@ -202,7 +203,7 @@ export function CreateSchool({
             const newSchoolRef = cache.writeFragment({
               data: createOneSchool,
               fragment: gql`
-                fragment NewSchool on Todo {
+                fragment NewSchool on School {
                   name
                   address
                   zip
@@ -245,7 +246,7 @@ export function CreateSchool({
           },
         }}
         mutation={createSchool}
-        onSubmit={(values) =>
+        onSubmit={(values: any) =>
           createSchool({ variables: { data: omit(values, "submit") } })
         }
       >

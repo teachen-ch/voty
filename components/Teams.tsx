@@ -9,7 +9,7 @@ import { Team, TeamWhereInput } from "@prisma/client";
 import { Page } from "./Page";
 import { Users } from "./Users";
 
-Teams.fragments = {
+export const fragments = {
   TeamUserFields: gql`
     fragment TeamUserFields on Team {
       id
@@ -51,7 +51,7 @@ const GET_TEAMS = gql`
       ...TeamTeacherFields
     }
   }
-  ${Teams.fragments.TeamTeacherFields}
+  ${fragments.TeamTeacherFields}
 `;
 
 const GET_TEAM_USER = gql`
@@ -60,7 +60,7 @@ const GET_TEAM_USER = gql`
       ...TeamUserFields
     }
   }
-  ${Teams.fragments.TeamUserFields}
+  ${fragments.TeamUserFields}
 `;
 
 export function useTeamUser(id: Number) {
@@ -77,7 +77,7 @@ const GET_TEAM_TEACHER = gql`
       ...TeamTeacherFields
     }
   }
-  ${Teams.fragments.TeamTeacherFields}
+  ${fragments.TeamTeacherFields}
 `;
 
 export function useTeamTeacher(id: Number, user: any) {
@@ -88,13 +88,12 @@ export function useTeamTeacher(id: Number, user: any) {
   return data?.team;
 }
 
-export function Teams({
-  where,
-  teamClick,
-}: {
+type TeamsProps = {
   where?: TeamWhereInput;
-  teamClick?: (team: Team) => void;
-}) {
+  teamClick: (team: Team) => void;
+};
+
+export const Teams: React.FC<TeamsProps> = ({ where, teamClick }) => {
   const user = useUser();
   const [focus, setFocus] = useState();
   const teams = useQuery(GET_TEAMS, { variables: { where } });
@@ -172,7 +171,7 @@ export function Teams({
       </table>
     </>
   );
-}
+};
 
 const CREATE_TEAM = gql`
   mutation($name: String!, $school: Int!, $teacher: Int!) {
@@ -186,7 +185,7 @@ const CREATE_TEAM = gql`
       ...TeamTeacherFields
     }
   }
-  ${Teams.fragments.TeamTeacherFields}
+  ${fragments.TeamTeacherFields}
 `;
 
 export function CreateTeamForm({ onCompleted }: { onCompleted?: () => void }) {
@@ -203,7 +202,7 @@ export function CreateTeamForm({ onCompleted }: { onCompleted?: () => void }) {
           teams(existingTeams = []) {
             const newTeamRef = cache.writeFragment({
               data: createOneTeam,
-              fragment: Teams.fragments.TeamTeacherFields,
+              fragment: fragments.TeamTeacherFields,
             });
             return [...existingTeams, newTeamRef];
           },
@@ -220,8 +219,8 @@ export function CreateTeamForm({ onCompleted }: { onCompleted?: () => void }) {
           doCreateTeam({
             variables: {
               name: values.name,
-              teacher: user.id,
-              school: user.school?.id,
+              teacher: user?.id,
+              school: user?.school?.id,
             },
           })
         }

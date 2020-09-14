@@ -1,8 +1,9 @@
 import { Box } from "rebass";
+import { PropsWithChildren } from "react";
 
-export default function Info(props) {
+export default function Info(props: PropsWithChildren<{ type: string }>) {
   const type = props.type || "default";
-  const typeColors = {
+  const typeColors: { [key: string]: string } = {
     important: "#d90000",
     info: "#000099",
     light: "lightgray",

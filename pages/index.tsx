@@ -48,11 +48,7 @@ export default function Home() {
           columns={[1, 1, 3]}
           width="250px"
         >
-          <Flex
-            textAlign="center"
-            flexDirection="column"
-            justifyContent="space-between"
-          >
+          <Flex flexDirection="column" justifyContent="space-between">
             <img src="images/voty_module_1.svg" alt="Bundehaus" />
             <Heading as="h3" py={3} my={0} textAlign="center">
               Demokratie verstehen
@@ -67,11 +63,7 @@ export default function Home() {
             </Button>
           </Flex>
 
-          <Flex
-            textAlign="center"
-            flexDirection="column"
-            justifyContent="space-between"
-          >
+          <Flex flexDirection="column" justifyContent="space-between">
             <img src="images/voty_module_2.svg" alt="Abstimmen" />
             <Heading as="h3" py={3} my={0} textAlign="center">
               Demokratie testen
@@ -86,11 +78,7 @@ export default function Home() {
             </Button>
           </Flex>
 
-          <Flex
-            textAlign="center"
-            flexDirection="column"
-            justifyContent="space-between"
-          >
+          <Flex flexDirection="column" justifyContent="space-between">
             <img src="images/voty_module_3.svg" alt="Diskutieren" />
             <Heading as="h3" py={3} my={0} textAlign="center">
               Demokratie erleben

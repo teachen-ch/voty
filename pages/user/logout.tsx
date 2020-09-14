@@ -2,7 +2,7 @@ import { useSetAccessToken, useSetUser } from "../../state/user";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { Page } from "../../components/Page";
-import { Button } from "rebass";
+import { Button, ButtonProps } from "rebass";
 
 export default function LogoutPage() {
   const setUser = useSetUser();
@@ -18,7 +18,14 @@ export default function LogoutPage() {
   return <Page heading="Abmelden"></Page>;
 }
 
-export function LogoutButton({ onSuccess = null, ...props }) {
+type LogoutButtonProps = ButtonProps & {
+  onSuccess?: Function;
+};
+
+export const LogoutButton: React.FC<LogoutButtonProps> = ({
+  onSuccess,
+  ...props
+}) => {
   const setUser = useSetUser();
   const setAccessToken = useSetAccessToken();
   const router = useRouter();
@@ -40,4 +47,4 @@ export function LogoutButton({ onSuccess = null, ...props }) {
       Abmelden
     </Button>
   );
-}
+};

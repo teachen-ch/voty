@@ -1,13 +1,11 @@
 import { motion, useViewportScroll, useTransform } from "framer-motion";
-import { Link } from "rebass";
+import { Link, Text } from "rebass";
 
-export function Banner({
-  href,
-  children,
-}: {
+type BannerProps = {
   href: string;
   children: React.ReactNode;
-}) {
+};
+export const Banner: React.FC<BannerProps> = ({ href, children }) => {
   const { scrollYProgress } = useViewportScroll();
   const opacity = useTransform(
     scrollYProgress,
@@ -40,14 +38,14 @@ export function Banner({
             "0 2px 10px 0 #967676",
           ],
         }}
-        textAlign="center"
         href={href}
         color="white"
-        fontWeight="bold"
         target="_blank"
       >
-        {children}
+        <Text textAlign="center" fontWeight="bold">
+          {children}
+        </Text>
       </Link>
     </motion.div>
   );
-}
+};

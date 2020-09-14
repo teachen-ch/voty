@@ -7,8 +7,15 @@ import { MDXProvider } from "@mdx-js/react";
 
 export { Info, Link, Video };
 
-export const Ref = (props) => (
-  <Card border={10}>
+type RefProps = {
+  title?: string;
+  href?: string;
+  level?: string;
+  time?: string;
+};
+
+export const Ref: React.FC<RefProps> = (props) => (
+  <Card>
     <Show if={props.title}>
       <Heading mt={0}>{props.title}</Heading>
     </Show>
@@ -28,28 +35,32 @@ export const Ref = (props) => (
     </Show>
     <hr />
     {props.children}
-    <Box textAlign="right" fontSize={1}>
-      ↪ Quelle: <Source href={props.href} />
-    </Box>
+    {props.href && (
+      <Box sx={{ textAlign: "right" }} fontSize={1}>
+        ↪ Quelle: <Source href={props.href} />
+      </Box>
+    )}
   </Card>
 );
 
-export const Source = (props) => {
+export const Source: React.FC<{ href: string }> = (props) => {
   const domain = props.href.replace(/^https?\:\/\/(?:www\.)?(.*?)\/.*$/, "$1");
   const start = props.href.replace(/^(https?\:\/\/(?:www\.)?).*/, "$1");
   return <a href={`${start}${domain}`}>{domain}</a>;
 };
 
-export const Show = (props) => {
-  if (props.if) return props.children;
+export const Show: React.FC<{ if: boolean | string | number | undefined }> = (
+  props
+) => {
+  if (props.if) return <>{props.children}</>;
   else return null;
 };
 
-export const Center = (props) => (
+export const Center: React.FC<{}> = (props) => (
   <Flex justifyContent="center">{props.children}</Flex>
 );
 
-export const Toggle = (props) => {
+export const Toggle: React.FC<{}> = (props) => {
   const [open, setOpen] = useState(false);
   return (
     <>
@@ -61,13 +72,13 @@ export const Toggle = (props) => {
   );
 };
 
-export const Include = (props) => {
+export const Include: React.FC<{ toggle: boolean }> = (props) => {
   const Wrapper = props.toggle ? Toggle : () => <div />;
   return (
     <Wrapper>
       <MDXProvider
         components={{
-          h1: (props) => <Heading mt={2}>{props.children}</Heading>,
+          h1: (props: any) => <Heading mt={2}>{props.children}</Heading>,
           wrapper: (props: any) => (
             <Box my={2} p={3} bg="lightgray">
               {props.children}

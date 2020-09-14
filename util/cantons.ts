@@ -1,4 +1,4 @@
-const cantonCodes = {
+const cantonCodes: { [key: string]: string } = {
   AG: "Aargau",
   AI: "Appenzell Innerrhoden",
   AR: "Appenzell Ausserrhoden",
@@ -30,6 +30,6 @@ const cantonCodes = {
 const cantonNames = Object.keys(cantonCodes).reduce((o, k) => {
   o[cantonCodes[k]] = k;
   return o;
-}, {});
+}, {} as { [key: string]: string });
 
 export { cantonCodes, cantonNames };

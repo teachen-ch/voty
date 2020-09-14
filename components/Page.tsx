@@ -11,7 +11,7 @@ export function Page({
   heading,
 }: {
   children?: React.ReactNode;
-  heading?: String;
+  heading?: string;
 }) {
   return (
     <Flex
@@ -49,17 +49,15 @@ export function Page({
   );
 }
 
-export function LoggedInPage({
-  role,
-  children,
-  heading,
-}: {
+type LoggedInPageProps = {
   role?: Role;
   children?: ReactNode;
-  heading?: String;
-}) {
+  heading?: string;
+};
+
+export function LoggedInPage({ role, children, heading }: LoggedInPageProps) {
   const user = useUser();
-  const allowed = role ? user.role === role || user.role === "ADMIN" : true;
+  const allowed = role ? user?.role === role || user?.role === "ADMIN" : true;
   if (user && allowed) {
     return <Page heading={heading}>{children}</Page>;
   } else {
@@ -88,7 +86,7 @@ export const PageHeading = ({ children }: { children: React.ReactNode }) => (
   </Heading>
 );
 
-export const Container = (props) => (
+export const Container = (props: any) => (
   <Flex mx={[3, 3, 4]} justifyContent="center" textAlign="center" {...props}>
     <Flex
       justifyItems="center"
@@ -100,7 +98,7 @@ export const Container = (props) => (
   </Flex>
 );
 
-export const ErrorPage = (props) => (
+export const ErrorPage = (props: any) => (
   <Page>
     <PageHeading>Fehler</PageHeading>
     <Heading as="h2">Oh je, es ist ein Fehler aufgetreten</Heading>

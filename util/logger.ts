@@ -67,10 +67,10 @@ const fileLogger = new transports.File({
 const logglyLogger = new Loggly({
   level: "info",
   subdomain: "teachen.ch",
-  inputToken: "d678db9a-c0dd-49b0-a885-f168172332c6",
+  token: "d678db9a-c0dd-49b0-a885-f168172332c6",
   stripColors: true,
   json: true,
-  tags: [process.env.NODE_ENV],
+  tags: [process.env.NODE_ENV!],
 });
 
 const mailLogger: any = new Mail({
@@ -94,10 +94,11 @@ if (env === "production") {
   logger.add(consoleLogger);
 }
 
-interface MailLogger extends winston.Logger {
-  mail?: (message: string) => {};
-}
+type MailLogger = winston.Logger & {
+  mail: (message: string) => {};
+};
 
+// @ts-ignore
 const mLogger: MailLogger = logger;
 mLogger.mail = (message: string) => logger.log("mail", message);
 export default mLogger;

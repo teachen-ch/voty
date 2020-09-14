@@ -3,8 +3,9 @@ import { promises as fs } from "fs";
 import Mustache from "mustache";
 import mjml2html from "mjml";
 import logger from "./logger";
+import SMTPTransport from "nodemailer/lib/smtp-transport";
 
-const server = {
+const server: any = {
   host: process.env.SMTP_HOST,
   port: process.env.SMTP_PORT,
   auth: {
@@ -63,7 +64,7 @@ async function renderTemplate(template: string, data: any) {
 
   const { html, errors } = mjml2html(Mustache.render(mjml, data));
   if (errors.length) {
-    throw new Error(errors);
+    throw new Error(String(errors));
   }
   text = Mustache.render(text, data);
 

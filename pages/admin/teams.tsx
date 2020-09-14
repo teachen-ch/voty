@@ -4,7 +4,7 @@ import { Teams } from "../../components/Teams";
 export default function TeamsPage() {
   return (
     <LoggedInPage heading="Schulklassen">
-      <Teams />
+      <Teams teamClick={(team) => {}} />
     </LoggedInPage>
   );
 }

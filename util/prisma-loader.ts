@@ -6,7 +6,7 @@ const prisma = new PrismaClient();
 
 export async function loadFixture(
   fixtureFile: string,
-  logger?: (msg: String) => void
+  logger?: (msg: string) => void
 ) {
   logger && logger(`📦 Loading data from ${fixtureFile}`);
   const data: any = parseYAML(fixtureFile);
@@ -32,7 +32,7 @@ function parseYAML(filename: string) {
   return data;
 }
 
-async function deleteObjects(list: string[], logger?: (msg: String) => void) {
+async function deleteObjects(list: string[], logger?: (msg: string) => void) {
   logger && logger("💥 Let's first wipe out existing objects:");
   for (const i in list) {
     const type = list[i];
@@ -46,7 +46,7 @@ async function deleteObjects(list: string[], logger?: (msg: String) => void) {
   }
 }
 
-async function createObjects(data: any, logger?: (msg: String) => void) {
+async function createObjects(data: any, logger?: (msg: string) => void) {
   logger && logger("🐣 Let's create new objects:");
   for (const type in data) {
     // @ts-ignore  what's the type for generic PrismaDelegates?

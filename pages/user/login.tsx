@@ -8,6 +8,7 @@ import { Label, Input } from "@rebass/forms";
 import { QForm, ErrorBox } from "components/Form";
 import CheckLogin from "components/CheckLogin";
 import { useSetAccessToken, useUser, useSetUser } from "../../state/user";
+import { useQueryParam } from "util/hooks";
 
 export const LOGIN = gql`
   mutation($email: String!, $password: String!) {
@@ -50,8 +51,8 @@ export const CHECK_VERIFICATION = gql`
 `;
 
 export default function Login() {
-  const { t: token } = useRouter().query;
-  const { p: purpose } = useRouter().query;
+  const token = useQueryParam("t");
+  const purpose = useQueryParam("p");
   const user = useUser();
 
   if (user) {
@@ -63,7 +64,7 @@ export default function Login() {
   }
 
   // purpose: verification, reset, login
-  if (token) {
+  if (token && purpose) {
     return (
       <Page heading="Anmelden">
         <CheckToken token={token} purpose={purpose} />
@@ -87,7 +88,9 @@ export function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [emailError, setEmailError] = useState("");
-  const [requestReset, setRequestReset] = useState(undefined);
+  const [requestReset, setRequestReset] = useState<string | undefined>(
+    undefined
+  );
   const [error, setError] = useState("");
   const router = useRouter();
   const setUser = useSetUser();
@@ -135,7 +138,7 @@ export function LoginForm() {
           submit: { type: "submit", label: "Anmelden" },
         }}
       >
-        <ErrorBox error={error} my={4} />
+        <ErrorBox error={error} />
         <span />
         <Grid gap={2} columns={[0, 0, "3fr 2fr"]}>
           <Button onClick={() => router.push("/user/signup")} variant="outline">
@@ -153,7 +156,7 @@ export function LoginForm() {
   );
 }
 
-function VerificationForm({ email }) {
+function VerificationForm({ email }: { email: string }) {
   const [mailSent, setMailSent] = useState(false);
   const [error, setError] = useState("");
 
@@ -228,11 +231,11 @@ function AfterLogin() {
   }
 }
 
-function CheckToken({ token, purpose }) {
+function CheckToken({ token, purpose }: { token: string; purpose: string }) {
   const setUser = useSetUser();
   const setAccessToken = useSetAccessToken();
   const [error, setError] = useState("");
-  const [tempUser, setTempUser] = useState();
+  const [tempUser, setTempUser] = useState<any | undefined>(); // TODO: NEXUSTYPE
   const router = useRouter();
   const [doVerification, resultVerification] = useMutation(CHECK_VERIFICATION, {
     onCompleted: (data) => {
@@ -250,7 +253,7 @@ function CheckToken({ token, purpose }) {
   }, []);
 
   // token verification succeded, we have a session & user
-  if (tempUser) {
+  if (tempUser !== undefined) {
     // login -> go straight back
     if (purpose === "login") {
       setUser(tempUser);
@@ -284,7 +287,7 @@ function CheckToken({ token, purpose }) {
   return <Text>Überprüfen</Text>;
 }
 
-function RequestReset({ email }) {
+function RequestReset({ email }: { email: string }) {
   const [mailSent, setMailSent] = useState(false);
   const [emailField, setEmailField] = useState(email);
   const [error, setError] = useState("");
@@ -339,7 +342,7 @@ function RequestReset({ email }) {
   );
 }
 
-function PasswordResetForm({ finished }) {
+function PasswordResetForm({ finished }: { finished: () => void }) {
   const [password, setPassword] = useState("");
   const [password2, setPassword2] = useState("");
   const [error, setError] = useState("");
@@ -355,7 +358,7 @@ function PasswordResetForm({ finished }) {
     },
   });
 
-  function checkPasswords(pw1, pw2) {
+  function checkPasswords(pw1: string, pw2: string) {
     if (pw1 !== pw2) {
       setError("Die beiden Passwörter stimmen nicht überein…");
     }

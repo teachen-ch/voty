@@ -1,6 +1,13 @@
 import ReactPlayer from "react-player";
 
-export default function Video(props) {
+type VideoProps = {
+  width: number;
+  height: number;
+  url: string;
+};
+
+let Video: React.FC<VideoProps>;
+export default Video = (props) => {
   const width = props.width || 300;
   const height = (width / 640) * 360;
 
@@ -19,16 +26,16 @@ export default function Video(props) {
       height={height}
     />
   );
-}
+};
 
-const Play = () => (
+const Play: React.FC = () => (
   <img
     src="https://img.icons8.com/ios-glyphs/1600/circled-play.png"
     width={70}
   />
 );
 
-const SRFVideo = (props) => {
+const SRFVideo: React.FC<VideoProps> = (props) => {
   const width = props.width || 300;
   const height = (width / 560) * 315;
   // We know the following URL patterns:
@@ -48,8 +55,9 @@ const SRFVideo = (props) => {
   );
 };
 
-function extractSRFUrl(url) {
-  let [m, id] = [null, null];
+function extractSRFUrl(url: string) {
+  let id: string;
+  let m: RegExpMatchArray | null;
   if ((m = url.match(/.*id=([^&]*).*$/))) {
     id = m[1];
   } else if ((m = url.match(/srf\.ch\/play\/tv\/redirect\/detail\/([^\?]*)/))) {

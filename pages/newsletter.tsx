@@ -10,8 +10,8 @@ export default function Kontakt() {
   return (
     <Page heading="Newsletter">
       <Text mb={2}>&nbsp;</Text>
-      <Card id="newsletter">
-        <Heading as="h2" my={0}>
+      <Card>
+        <Heading as="h2" my={0} id="newsletter">
           Möchtet ihr regelmässig über «voty» informiert werden?
         </Heading>
         <Newsletter />
