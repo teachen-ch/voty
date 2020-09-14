@@ -23,9 +23,9 @@ COPY . .
 # Expose port 3000
 EXPOSE 3000
 
+RUN npx prisma generate
 # Build and Start node app
 RUN yarn run build
-
 ## RUN npx prisma migrate up --experimental
 CMD [ "yarn", "run", "start"]
 

@@ -7,7 +7,6 @@
     "devdev": "concurrently \"yarn:dev\" \"yarn:nexus:reflection\" \"yarn:cypress:open\"",
     "prebuild": "nexus build",
     "build": "next build",
-    "postinstall": "prisma generate",
     "check": "nexus build && next build && yarn test",
     "cypress:open": "cypress open",
     "start": "next start",
