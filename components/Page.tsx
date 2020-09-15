@@ -3,7 +3,7 @@ import Head from "next/head";
 import { Role } from "@prisma/client";
 import { useUser } from "state/user";
 import { LoginForm } from "pages/user/login";
-import { ReactNode } from "react";
+import { ReactNode, useState } from "react";
 import CheckLogin from "./CheckLogin";
 
 export function Page({
@@ -57,17 +57,24 @@ type LoggedInPageProps = {
 
 export function LoggedInPage({ role, children, heading }: LoggedInPageProps) {
   const user = useUser();
+  const [loading, setLoading] = useState(true);
   const allowed = role ? user?.role === role || user?.role === "ADMIN" : true;
   if (user && allowed) {
     return <Page heading={heading}>{children}</Page>;
   } else {
     return (
-      <Page heading={heading}>
-        <CheckLogin />
-        <Text>
-          Diese Seite benötigt eine Anmeldung. Bitte benutze Deine Schul-Email.{" "}
-        </Text>
-        <LoginForm />
+      <Page heading={loading ? heading : heading}>
+        <CheckLogin setLoading={setLoading} />
+        {!loading && (
+          <>
+            <Text>
+              Diese Seite benötigt eine Anmeldung. Bitte benutze Deine
+              Schul-Email.
+            </Text>
+            <LoginForm />
+          </>
+        )}
+        <Box height={500} />
       </Page>
     );
   }

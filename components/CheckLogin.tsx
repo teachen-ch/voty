@@ -1,6 +1,7 @@
 import { gql, useQuery } from "@apollo/client";
 import { useUser, useSetUser } from "../state/user";
 import { Heading } from "rebass";
+import { Dispatch, SetStateAction } from "react";
 
 CheckLogin.fragments = {
   LoginFields: gql`
@@ -38,7 +39,10 @@ export const ME = gql`
   ${CheckLogin.fragments.LoginFields}
 `;
 
-export default function CheckLogin() {
+type CheckLoginProps = {
+  setLoading?: Dispatch<SetStateAction<boolean>>;
+};
+export default function CheckLogin({ setLoading }: CheckLoginProps) {
   const user = useUser();
   const setUser = useSetUser();
   // check, whether there is already an active session
@@ -47,6 +51,7 @@ export default function CheckLogin() {
     fetchPolicy: "network-only",
     skip: user ? true : false,
     onCompleted: (data) => {
+      if (setLoading) setLoading(false);
       if (data) {
         setUser(data.me);
       } else {

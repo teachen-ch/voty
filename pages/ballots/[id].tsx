@@ -1,9 +1,10 @@
 import { LoggedInPage, ErrorPage } from "components/Page";
-import { Text, Heading, Box } from "rebass";
+import { Text, Heading, Box, Card } from "rebass";
 import { useRouter } from "next/router";
 import { useUser } from "state/user";
 import { useBallot } from "components/Ballots";
 import { formatFromTo } from "util/date";
+import { Center } from "components/Learning";
 
 export default function BallotPage() {
   const user = useUser();
@@ -11,7 +12,7 @@ export default function BallotPage() {
   const id = parseInt(String(router.query.id));
   const { data, loading, error } = useBallot(id);
 
-  if (loading) return <LoggedInPage heading="Laden"></LoggedInPage>;
+  if (loading) return <LoggedInPage heading="Abstimmungsseite"></LoggedInPage>;
   if (error) return <ErrorPage>{error.message}</ErrorPage>;
 
   const ballot = data?.ballot;
@@ -28,7 +29,15 @@ export default function BallotPage() {
       <Heading as="h2">{ballot.title}</Heading>
       <Text my={2}>{ballot.description}</Text>
       <Text my={2}>📅 Dauer: {formatFromTo(ballot.start, ballot.end)}</Text>
-      <div dangerouslySetInnerHTML={parseMarkdown(ballot.body)} />
+      <Card>
+        <Text textAlign="center">
+          <img
+            width={150}
+            src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.engage.ch%2Fsites%2Fdefault%2Ffiles%2Frequests%2Feasyvote.png&f=1&nofb=1"
+          />
+        </Text>
+        <div dangerouslySetInnerHTML={parseMarkdown(ballot.body)} />
+      </Card>
     </LoggedInPage>
   );
 }

@@ -1,57 +1,21 @@
-import { LoggedInPage, Page } from "../../../components/Page";
-import { Heading, Flex, Box, Card, Text, Button, Link as A } from "rebass";
+import { LoggedInPage } from "../../../components/Page";
+import { Heading, Card, Text, Button } from "rebass";
 import { useTeamTeacher } from "../../../components/Teams";
 import { useRouter } from "next/router";
 import { Users } from "../../../components/Users";
 import { Input } from "@rebass/forms";
-import { Grid } from "theme-ui";
-import {
-  useRef,
-  useState,
-  useEffect,
-  Ref,
-  RefObject,
-  Dispatch,
-  SetStateAction,
-} from "react";
+import { Grid, Label } from "theme-ui";
+import { useRef, useState, RefObject } from "react";
 import { useUser } from "state/user";
 import { Ballots } from "components/Ballots";
 import { Ballot, Team } from "graphql/types";
 import { BallotScope } from "components/Ballots";
-
-function useNavHash(init?: string): [string, (s: string) => void] {
-  const [navHash, setStateHash] = useState<string>(init || "#");
-  const router = useRouter();
-  useEffect(() => {
-    if (!navHash && window.location.hash) {
-      setStateHash(window.location.hash);
-    }
-    function hashChangeComplete(url: string) {
-      if (url.indexOf("#") >= 0) {
-        const newHash = url.substring(url.indexOf("#"));
-        setStateHash(newHash);
-      } else {
-        setStateHash("#");
-      }
-    }
-    router.events.on("hashChangeStart", hashChangeComplete);
-    return () => {
-      router.events.off("hashChangeStart", hashChangeComplete);
-    };
-  }, []);
-  function setNavHash(newHash: string) {
-    if (navHash !== newHash) {
-      const path = window.location.pathname + newHash;
-      router.push(path, path);
-    }
-  }
-  return [navHash, setNavHash];
-}
+import { useNavHash } from "util/hooks";
 
 export default function TeamPage() {
   const user = useUser();
   const router = useRouter();
-  const [hash, navHash] = useNavHash("#admin");
+  const [hash, navHash] = useNavHash("/teacher/team/[id]", "#admin");
   const id = parseInt(String(router.query.id));
   const team = useTeamTeacher(id, user);
 
@@ -77,7 +41,6 @@ function TeamNavigation({
   hash: string;
   navHash: (hash: string) => void;
 }) {
-  const router = useRouter();
   return (
     <Grid gap={3} columns={[0, 0, "1fr 1fr 1fr 1fr"]}>
       <Button
@@ -116,7 +79,9 @@ function TeamAdmin({ team }: { team: Team }) {
 
       <Card>
         <Grid my={1} gap={2} columns={[0, 0, "1fr 3fr 1fr"]}>
-          <b>Einladungslink: </b>
+          <Label sx={{ alignSelf: "center", fontWeight: "bold" }}>
+            Einladungslink:{" "}
+          </Label>
           <Input
             ref={inviteRef}
             readOnly
@@ -131,7 +96,7 @@ function TeamAdmin({ team }: { team: Team }) {
   );
 }
 
-function TeamTest({ team }: { team: Team }) {
+function TeamTest() {
   const router = useRouter();
   function selectBallot(ballot: Ballot) {
     router.push("/ballots/[id]", `/ballots/${ballot.id}`);
