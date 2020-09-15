@@ -29,7 +29,7 @@ export default function TeamPage() {
   return (
     <LoggedInPage heading="Klassenseite">
       <TeamNavigation hash={hash} navHash={navHash} />
-      {hash === "#admin" ? <TeamAdmin team={team} /> : <TeamTest team={team} />}
+      {hash === "#admin" ? <TeamAdmin team={team} /> : <TeamTest />}
     </LoggedInPage>
   );
 }
