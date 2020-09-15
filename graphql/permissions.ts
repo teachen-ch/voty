@@ -1,15 +1,6 @@
 import { shield, rule, allow, or } from "nexus-plugin-shield";
-import { Role } from "@prisma/client";
-
-// TODO: Completely puzzled why nexus build complains about this import...
-// import { BallotScope } from "../components/Ballots";
-export enum BallotScope {
-  PUBLIC = "PUBLIC",
-  NATIONAL = "NATIONAL",
-  CANTONAL = "CANTONAL",
-  SCHOOL = "SCHOOL",
-  TEAM = "TEAM",
-}
+import { Role, BallotScope } from "@prisma/client";
+import { ballots } from "./resolvers";
 
 // rule caching: "no_cache", "contextual" (relies on context, eg. authentication,
 // or "strict": relies on parent or args
@@ -22,9 +13,9 @@ const isUser = rule({ cache: "contextual" })(
 const isTeacher = rule({ cache: "contextual" })(
   async (parent, args, ctx: NexusContext, info) => {
     switch (ctx.user?.role) {
-      case Role.TEACHER:
-      case Role.PRINCIPAL:
-      case Role.ADMIN:
+      case Role.Teacher:
+      case Role.Principal:
+      case Role.Admin:
         return true;
       default:
         return false;
@@ -34,7 +25,7 @@ const isTeacher = rule({ cache: "contextual" })(
 
 const isAdmin = rule({ cache: "contextual" })(
   async (parent, args, ctx: NexusContext, info) => {
-    return ctx.user?.role === Role.ADMIN;
+    return ctx.user?.role === Role.Admin;
   }
 );
 
@@ -55,7 +46,7 @@ const isTeamMember = rule({ cache: "strict" })(
 const teachesTeam = rule({ cache: "strict" })(
   async (parent, args, ctx: NexusContext, info) => {
     const { id, role } = ctx.user || {};
-    if (!id || role !== Role.TEACHER) return false;
+    if (!id || role !== Role.Teacher) return false;
     if (!parent.role)
       throw new Error("teachesTeam can only be applied to Users");
     const student = parent.id;
@@ -77,30 +68,31 @@ const isOwn = (field: string) =>
     }
   );
 
-// ever
-const checkBallot = rule({ cache: "strict" })(
+const canViewBallot = rule({ cache: "strict" })(
   async (parent, args, ctx: NexusContext, info) => {
-    if (ctx.user?.role === Role.ADMIN) return true;
-    switch (parent.scope) {
-      case BallotScope.PUBLIC:
-      case BallotScope.NATIONAL:
-      case BallotScope.CANTONAL:
-        return true;
-      case BallotScope.SCHOOL:
-        return parent.schoolId === ctx.user?.schoolId;
-      case BallotScope.TEAM:
-        // for students:
-        if (parent.teamId === ctx.user?.teamId) return true;
-        // for teacher:
-        const team = await ctx.db.team.findOne({
-          where: { id: parent.teamId },
-        });
-        return team?.teacherId === ctx.user?.id;
-      default:
-        return false;
-    }
+    if (ctx.user?.role === Role.Admin) return true;
+    return await ballots.viewPermission({
+      ballot: parent,
+      user: ctx.user,
+      db: ctx.db,
+    });
   }
 );
+
+/* Already checked in resolver
+const canVoteBallot = rule({ cache: "strict" })(
+  async (parent, args, ctx: NexusContext, info) => {
+    const id = args.ballot;
+    const ballot = await ctx.db.ballot.findOne({ where: { id } });
+    if (!ballot) return false;
+    if (ctx.user?.role === Role.Admin) return true;
+    return await ballots.votingPermission({
+      ballot,
+      user: ctx.user,
+      db: ctx.db,
+    });
+  }
+);*/
 
 export const permissions = shield({
   rules: {
@@ -129,6 +121,7 @@ export const permissions = shield({
       deleteOneSchool: isAdmin,
       updateUser: isAdmin, // this is dangerous! role, verification, team, etc.
       setSchool: isUser,
+      vote: isUser,
     },
     User: {
       id: isUser,
@@ -164,8 +157,9 @@ export const permissions = shield({
       invite: or(isOwn("teacherId"), isAdmin),
       "*": isUser,
     },
-    Ballot: checkBallot,
+    Ballot: canViewBallot,
     ResponseLogin: allow,
+    Votes: isUser,
   },
   options: {
     allowExternalErrors: true,

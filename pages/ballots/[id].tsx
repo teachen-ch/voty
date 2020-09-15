@@ -1,13 +1,15 @@
 import { LoggedInPage, ErrorPage } from "components/Page";
-import { Text, Heading, Box, Card } from "rebass";
+import { Text, Heading, Box, Card, Flex, Button } from "rebass";
 import { useRouter } from "next/router";
 import { useUser } from "state/user";
 import { useBallot } from "components/Ballots";
 import { formatFromTo } from "util/date";
-import { Center } from "components/Learning";
+import { Ballot } from "graphql/types";
+import { useState } from "react";
+import { useMutation, gql } from "@apollo/client";
+import { ErrorBox } from "components/Form";
 
 export default function BallotPage() {
-  const user = useUser();
   const router = useRouter();
   const id = parseInt(String(router.query.id));
   const { data, loading, error } = useBallot(id);
@@ -15,7 +17,7 @@ export default function BallotPage() {
   if (loading) return <LoggedInPage heading="Abstimmungsseite"></LoggedInPage>;
   if (error) return <ErrorPage>{error.message}</ErrorPage>;
 
-  const ballot = data?.ballot;
+  const ballot: Ballot = data?.ballot;
 
   if (!ballot)
     return (
@@ -29,6 +31,7 @@ export default function BallotPage() {
       <Heading as="h2">{ballot.title}</Heading>
       <Text my={2}>{ballot.description}</Text>
       <Text my={2}>📅 Dauer: {formatFromTo(ballot.start, ballot.end)}</Text>
+
       <Card>
         <Text textAlign="center">
           <img
@@ -38,9 +41,91 @@ export default function BallotPage() {
         </Text>
         <div dangerouslySetInnerHTML={parseMarkdown(ballot.body)} />
       </Card>
+      <VotyNow ballot={ballot} />
     </LoggedInPage>
   );
 }
+
+const VOTE = gql`
+  mutation vote($ballot: Int!, $vote: Int!) {
+    vote(ballot: $ballot, vote: $vote) {
+      verify
+      ballot {
+        id
+        canVote
+        hasVoted
+      }
+    }
+  }
+`;
+
+const VotyNow: React.FC<{ ballot: Ballot }> = ({ ballot }) => {
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState(false);
+  const [doVote] = useMutation(VOTE, {
+    onCompleted(data) {
+      setSuccess(true);
+    },
+    onError(err) {
+      setError(err.message);
+    },
+  });
+
+  function vote(vote: number) {
+    doVote({ variables: { ballot: ballot.id, vote } });
+  }
+
+  if (ballot.hasVoted === true || success) {
+    return (
+      <BigButton color="gray" width="100%">
+        Du hast erfolgreich abgestimmt ✅
+      </BigButton>
+    );
+  }
+
+  if (ballot.canVote === false) {
+    return (
+      <BigButton color="gray" width="100%">
+        Du bist nicht für die Abstimmung berechtigt
+      </BigButton>
+    );
+  }
+
+  return (
+    <Box my={4}>
+      <Flex>
+        <BigButton color="green" onClick={() => vote(1)}>
+          Ja, ich stimme zu
+        </BigButton>
+        <BigButton color="primary" onClick={() => vote(2)}>
+          Nein, ich lehne ab
+        </BigButton>
+      </Flex>
+      <ErrorBox my={2} error={error} />
+    </Box>
+  );
+};
+
+const BigButton: React.FC<{
+  color: string;
+  onClick?: () => void;
+  width?: string;
+}> = (props) => (
+  <Button
+    sx={{ border: "5px solid", borderColor: props.color }}
+    fontSize={[3, 3, 4]}
+    bg="white"
+    color={props.color}
+    mr={2}
+    py={4}
+    flex="1"
+    disabled={!props.onClick}
+    onClick={props.onClick}
+    width={props.width}
+  >
+    {props.children}
+  </Button>
+);
 
 // TODO: this is a joke markdown parser after being frustrated with mdx-js
 function parseMarkdown(str: string) {

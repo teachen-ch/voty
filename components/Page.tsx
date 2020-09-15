@@ -1,10 +1,10 @@
-import { Flex, Box, Heading, Text } from "rebass";
+import { Flex, Box, Heading, Text, Link as A } from "rebass";
 import Head from "next/head";
-import { Role } from "@prisma/client";
 import { useUser } from "state/user";
 import { LoginForm } from "pages/user/login";
 import { ReactNode, useState } from "react";
-import CheckLogin from "./CheckLogin";
+import CheckLogin, { Role } from "./CheckLogin";
+import Link from "next/link";
 
 export function Page({
   children,
@@ -58,9 +58,37 @@ type LoggedInPageProps = {
 export function LoggedInPage({ role, children, heading }: LoggedInPageProps) {
   const user = useUser();
   const [loading, setLoading] = useState(true);
-  const allowed = role ? user?.role === role || user?.role === "ADMIN" : true;
+  let allowed = role ? user?.role === role || user?.role === Role.Admin : true;
+  const startpage = `/${user?.role?.toLowerCase()}`;
+
   if (user && allowed) {
-    return <Page heading={heading}>{children}</Page>;
+    return (
+      <Page>
+        <Flex
+          mt={40}
+          justifyContent="space-between"
+          alignItems="flex-end"
+          pb={1}
+          mb={2}
+          sx={{ borderBottom: "1px solid #979797" }}
+        >
+          <Link href={startpage}>
+            <A color="black" py={1} sx={{ fontWeight: "bold" }}>
+              🚀 Startseite
+            </A>
+          </Link>
+          <Heading my={0} as="h1" fontSize={[4, 5, 6, 6]} textAlign="center">
+            {heading}
+          </Heading>
+          <Link href="/user/logout">
+            <A color="black" py={1} sx={{ fontWeight: "bold" }}>
+              Abmelden 👋
+            </A>
+          </Link>
+        </Flex>
+        {children}
+      </Page>
+    );
   } else {
     return (
       <Page heading={loading ? heading : heading}>
@@ -80,7 +108,7 @@ export function LoggedInPage({ role, children, heading }: LoggedInPageProps) {
   }
 }
 
-export const PageHeading = ({ children }: { children: React.ReactNode }) => (
+export const PageHeading: React.FC<{}> = (props) => (
   <Heading
     as="h1"
     fontSize={[4, 5, 6, 6]}
@@ -89,7 +117,7 @@ export const PageHeading = ({ children }: { children: React.ReactNode }) => (
     sx={{ borderBottom: "1px solid #979797" }}
     pb={1}
   >
-    {children}
+    {props.children}
   </Heading>
 );
 

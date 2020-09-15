@@ -9,6 +9,7 @@ import { QForm, ErrorBox } from "components/Form";
 import CheckLogin from "components/CheckLogin";
 import { useSetAccessToken, useUser, useSetUser } from "../../state/user";
 import { useQueryParam } from "util/hooks";
+import { Role } from "components/CheckLogin";
 
 export const LOGIN = gql`
   mutation login($email: String!, $password: String!) {
@@ -198,13 +199,13 @@ function AfterLogin() {
   if (user && user.role) {
     let page = "";
     switch (user.role) {
-      case "TEACHER":
+      case Role.Teacher:
         page = "/teacher";
         break;
-      case "STUDENT":
+      case Role.Student:
         page = "/student";
         break;
-      case "ADMIN":
+      case Role.Admin:
         page = "/admin";
         break;
       default:

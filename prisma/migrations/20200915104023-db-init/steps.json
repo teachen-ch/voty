@@ -5,32 +5,43 @@
       "tag": "CreateEnum",
       "enum": "Role",
       "values": [
-        "USER",
-        "ADMIN",
-        "STUDENT",
-        "TEACHER",
-        "PRINCIPAL"
+        "User",
+        "Admin",
+        "Student",
+        "Teacher",
+        "Principal"
       ]
     },
     {
       "tag": "CreateEnum",
       "enum": "Gender",
       "values": [
-        "UNKOWN",
-        "MALE",
-        "FEMALE",
-        "OTHER"
+        "Unkown",
+        "Male",
+        "Female",
+        "Other"
       ]
     },
     {
       "tag": "CreateEnum",
       "enum": "BallotScope",
       "values": [
-        "PUBLIC",
-        "NATIONAL",
-        "CANTONAL",
-        "SCHOOL",
-        "TEAM"
+        "Public",
+        "National",
+        "Cantonal",
+        "School",
+        "Team"
+      ]
+    },
+    {
+      "tag": "CreateEnum",
+      "enum": "VotingStatus",
+      "values": [
+        "Restricted",
+        "Open",
+        "Voted",
+        "NotStarted",
+        "Closed"
       ]
     },
     {
@@ -1062,7 +1073,14 @@
         "directive": "default"
       },
       "argument": "",
-      "value": "UNKOWN"
+      "value": "Unkown"
+    },
+    {
+      "tag": "CreateField",
+      "model": "User",
+      "field": "year",
+      "type": "Int",
+      "arity": "Optional"
     },
     {
       "tag": "CreateField",
@@ -1094,7 +1112,7 @@
         "directive": "default"
       },
       "argument": "",
-      "value": "STUDENT"
+      "value": "Student"
     },
     {
       "tag": "CreateField",
@@ -1828,6 +1846,13 @@
         },
         "directive": "unique"
       }
+    },
+    {
+      "tag": "CreateField",
+      "model": "Team",
+      "field": "year",
+      "type": "Int",
+      "arity": "Optional"
     },
     {
       "tag": "CreateField",
@@ -2696,7 +2721,7 @@
         "directive": "default"
       },
       "argument": "",
-      "value": "PUBLIC"
+      "value": "Public"
     },
     {
       "tag": "CreateField",

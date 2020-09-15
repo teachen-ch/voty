@@ -1,5 +1,5 @@
 import { gql, useQuery } from "@apollo/client";
-import { Heading, Text, Link as A, Box, Button } from "rebass";
+import { Heading, Text, Link as A, Box, Button, Flex } from "rebass";
 import { useState, Fragment } from "react";
 import { Ballot, BallotWhereInput } from "graphql/types";
 import { formatFromTo } from "../util/date";
@@ -38,6 +38,8 @@ const GET_BALLOT = gql`
   query ballot($where: BallotWhereUniqueInput!) {
     ballot(where: $where) {
       ...BallotFields
+      canVote
+      hasVoted
     }
   }
   ${fragments.BallotFields}
@@ -46,14 +48,12 @@ const GET_BALLOT = gql`
 // TODO: have to redefine enum here, otherwise hiting this issue
 // https://github.com/prisma/prisma/issues/3252
 export enum BallotScope {
-  Public = "PUBLIC",
-  National = "NATIONAL",
-  Cantonal = "CANTONAL",
-  School = "SCHOOL",
-  Team = "TEAM",
+  Public = "Public",
+  National = "National",
+  Cantonal = "Cantonal",
+  School = "School",
+  Team = "Team",
 }
-
-//export { BallotScope };
 
 export function useBallot(id: Number) {
   return useQuery(GET_BALLOT, {
@@ -94,18 +94,19 @@ export const Ballots: React.FC<BallotsProps> = ({ where, onClick }) => {
             👉 {ballot.title}
           </A>
           <Text fontSize={2}>{ballot.description}</Text>
-          <Box mt={2} mb={4}>
+          <Flex mt={2} mb={4} justifyContent="space-between">
+            Abstimmungzeitraum: {formatFromTo(ballot.start, ballot.end)}
             <Button
               onClick={() => onClick(ballot)}
-              bg={
+              variant={
                 getBallotStatus(ballot) === BallotStatus.Started
                   ? "primary"
                   : "muted"
               }
             >
-              {getBallotLink(ballot)} ({formatFromTo(ballot.start, ballot.end)})
+              {getBallotLink(ballot)}
             </Button>
-          </Box>
+          </Flex>
         </Fragment>
       ))}
     </>

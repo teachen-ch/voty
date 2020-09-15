@@ -1,10 +1,10 @@
 import jwt from "jsonwebtoken";
-import { PrismaClient, User, Team } from "@prisma/client";
+import { PrismaClient, User, Team, Role } from "@prisma/client";
 import { NextApiRequest } from "next";
 import bcrypt from "bcrypt";
-import { sendMail } from "./email";
+import { sendMail } from "../../util/email";
 import { randomBytes, createHash } from "crypto";
-import logger from "./logger";
+import logger from "../../util/logger";
 
 let secret = process.env.SESSION_SECRET!;
 if (!secret) throw new Error("New SESSION_SECRET defined in .env");
@@ -66,7 +66,7 @@ export async function createUser(_root: any, args: any, ctx: NexusContext) {
     const { email, password, name, lastname, role } = args.data;
     const salt = await bcrypt.genSalt(10);
     const hashed = await bcrypt.hash(password, salt);
-    if (role === "ADMIN") throw new Error("NAH");
+    if (role === Role.Admin) throw new Error("NAH");
     const user = await ctx.db.user.create({
       data: {
         name,
@@ -121,7 +121,7 @@ export async function createInvitedUser(
     lastname,
     email,
     password,
-    role: "STUDENT",
+    role: Role.Student,
   };
   const user = await createUser(_root, args, ctx);
   await connectUserTeam(user, team, ctx);
@@ -132,9 +132,9 @@ export async function updateUser(_root: any, args: any, ctx: NexusContext) {
   // TODO: ensure this is not called with variable args by user
   const user = getRequestUser(ctx);
   const id = args.id || user?.id;
-  if (id !== user?.id && user?.role !== "ADMIN")
+  if (id !== user?.id && user?.role !== Role.Admin)
     throw new Error("ERR_ONLY_UPDATE_SELF");
-  if (args.role && user?.role !== "ADMIN") delete args.role;
+  if (args.role && user?.role !== Role.Admin) delete args.role;
   const result = await ctx.db.user.update({
     where: { id },
     data: args,

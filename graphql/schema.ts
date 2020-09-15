@@ -2,7 +2,8 @@ import { schema, use } from "nexus";
 import { prisma } from "nexus-plugin-prisma";
 import { permissions } from "./permissions";
 import { randomBytes } from "crypto";
-import { getSessionUser } from "../util/authentication";
+import resolvers from "./resolvers";
+import { intArg } from "nexus/components/schema";
 
 use(
   prisma({
@@ -16,7 +17,7 @@ use(permissions);
 
 schema.addToContext(async ({ req, res }) => {
   return {
-    user: getSessionUser(req as any),
+    user: resolvers.users.getSessionUser(req as any),
   };
 });
 
@@ -98,6 +99,12 @@ schema.objectType({
     t.model.school();
     t.model.creator();
 
+    t.boolean("canVote", {
+      resolve: resolvers.ballots.canVote,
+    });
+    t.boolean("hasVoted", {
+      resolve: resolvers.ballots.hasVoted,
+    });
     t.model.createdAt();
     t.model.updatedAt();
   },
@@ -112,6 +119,14 @@ schema.objectType({
 
     t.model.createdAt();
     t.model.updatedAt();
+  },
+});
+
+schema.objectType({
+  name: "Votes",
+  definition(t) {
+    t.model.verify();
+    t.model.ballot();
   },
 });
 
@@ -146,5 +161,14 @@ schema.mutationType({
       },
     });
     t.crud.deleteOneTeam();
+
+    t.field("vote", {
+      type: "Votes",
+      args: {
+        ballot: intArg({ required: true }),
+        vote: intArg({ required: true }),
+      },
+      resolve: resolvers.ballots.vote,
+    });
   },
 });

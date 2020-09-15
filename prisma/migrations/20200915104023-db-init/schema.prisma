@@ -40,18 +40,18 @@ model Session {
 }
 
 enum Role {
-  USER
-  ADMIN
-  STUDENT
-  TEACHER
-  PRINCIPAL
+  User
+  Admin
+  Student
+  Teacher
+  Principal
 }
 
 enum Gender {
-  UNKOWN
-  MALE
-  FEMALE
-  OTHER
+  Unkown
+  Male
+  Female
+  Other
 }
 
 model User {
@@ -64,9 +64,10 @@ model User {
   image         String?
 
   password String?
-  gender   Gender  @default(UNKOWN)
+  gender   Gender  @default(Unkown)
+  year     Int? // year born
 
-  role     Role    @default(STUDENT)
+  role     Role    @default(Student)
   school   School? @relation(fields: [schoolId], references: [id])
   team     Team?   @relation(fields: [teamId], references: [id])
   teaches  Team[]  @relation("Teacher")
@@ -100,6 +101,7 @@ model Team {
   id     Int     @default(autoincrement()) @id
   name   String
   invite String? @unique
+  year   Int? // in what year (roughly) were kids born (now - schoolyear - 5y)
 
   school    School   @relation(fields: [schoolId], references: [id])
   schoolId  Int      @map(name: "school_id")
@@ -143,11 +145,19 @@ model Domain {
 }
 
 enum BallotScope {
-  PUBLIC // Open ballot
-  NATIONAL // Official national ballots
-  CANTONAL // Official canontal ballots
-  SCHOOL // School ballots
-  TEAM // class ballots
+  Public // Open ballot
+  National // Official national ballots
+  Cantonal // Official canontal ballots
+  School // School ballots
+  Team // class ballots
+}
+
+enum VotingStatus {
+  Restricted // User is not allowed to vote 
+  Open // User may vote
+  Voted // User has already voted
+  NotStarted // Ballot is not open yet
+  Closed // Ballot is already closed
 }
 
 model Ballot {
@@ -157,7 +167,7 @@ model Ballot {
   body        String
   start       DateTime
   end         DateTime
-  scope       BallotScope @default(PUBLIC)
+  scope       BallotScope @default(Public)
   canton      String?
 
   school    School? @relation(fields: [schoolId], references: [id])

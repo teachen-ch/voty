@@ -19,8 +19,8 @@ export function formatFromTo(from: number, to: number) {
   if (s.endOf("month") === e.endOf("month"))
     return s.format("D.") + " – " + e.format("D. MMM YYYY");
   if (s.endOf("year") === e.endOf("year"))
-    return s.format("D.M") + " – " + e.format("D.M YYYY");
-  else return s.format("D.M.YY") + " – " + e.format("D.M.YY");
+    return s.format("D. MMM") + " – " + e.format("D. MMM YYYY");
+  else return s.format("D. MMM YYYY") + " – " + e.format("D. MMM YYYY");
 }
 
 export function formatDate(ts: number) {

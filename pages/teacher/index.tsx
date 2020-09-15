@@ -19,7 +19,10 @@ export default function Teacher() {
       <Teams
         where={{ teacher: { id: { equals: user?.id } } }}
         teamClick={(team) =>
-          router.push("/teacher/team/[id]", `/teacher/team/${team.id}`)
+          router.push(
+            "/teacher/team/[id]/admin",
+            `/teacher/team/${team.id}/admin`
+          )
         }
       />
       {showForm ? (

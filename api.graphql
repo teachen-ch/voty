@@ -204,10 +204,12 @@ input AttachmentWhereUniqueInput {
 type Ballot {
   body: String!
   canton: String
+  canVote: Boolean
   createdAt: DateTime!
   creator: User
   description: String!
   end: DateTime!
+  hasVoted: Boolean
   id: Int!
   school: School
   scope: BallotScope!
@@ -404,11 +406,11 @@ input BallotScalarWhereInput {
 }
 
 enum BallotScope {
-  CANTONAL
-  NATIONAL
-  PUBLIC
-  SCHOOL
-  TEAM
+  Cantonal
+  National
+  Public
+  School
+  Team
 }
 
 input BallotUpdateManyDataInput {
@@ -816,10 +818,10 @@ input DomainWhereUniqueInput {
 }
 
 enum Gender {
-  FEMALE
-  MALE
-  OTHER
-  UNKOWN
+  Female
+  Male
+  Other
+  Unkown
 }
 
 input IntFieldUpdateOperationsInput {
@@ -867,6 +869,7 @@ type Mutation {
   login(email: String, password: String): ResponseLogin
   setSchool(school: Int): User
   updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
+  vote(ballot: Int!, vote: Int!): Votes
 }
 
 input NestedBoolFilter {
@@ -957,6 +960,10 @@ input NullableBoolFieldUpdateOperationsInput {
 
 input NullableDateTimeFieldUpdateOperationsInput {
   set: DateTime
+}
+
+input NullableIntFieldUpdateOperationsInput {
+  set: Int
 }
 
 input NullableStringFieldUpdateOperationsInput {
@@ -1198,11 +1205,11 @@ type ResponseLogin {
 }
 
 enum Role {
-  ADMIN
-  PRINCIPAL
-  STUDENT
-  TEACHER
-  USER
+  Admin
+  Principal
+  Student
+  Teacher
+  User
 }
 
 type School {
@@ -1518,6 +1525,7 @@ input TeamCreateInput {
   school: SchoolCreateOneWithoutTeamsInput!
   teacher: UserCreateOneWithoutTeachesInput!
   User: UserCreateManyWithoutTeamInput
+  year: Int
 }
 
 input TeamCreateManyWithoutDomainInput {
@@ -1558,6 +1566,7 @@ input TeamCreateWithoutBallotsInput {
   school: SchoolCreateOneWithoutTeamsInput!
   teacher: UserCreateOneWithoutTeachesInput!
   User: UserCreateManyWithoutTeamInput
+  year: Int
 }
 
 input TeamCreateWithoutDomainInput {
@@ -1568,6 +1577,7 @@ input TeamCreateWithoutDomainInput {
   school: SchoolCreateOneWithoutTeamsInput!
   teacher: UserCreateOneWithoutTeachesInput!
   User: UserCreateManyWithoutTeamInput
+  year: Int
 }
 
 input TeamCreateWithoutMembersInput {
@@ -1578,6 +1588,7 @@ input TeamCreateWithoutMembersInput {
   school: SchoolCreateOneWithoutTeamsInput!
   teacher: UserCreateOneWithoutTeachesInput!
   User: UserCreateManyWithoutTeamInput
+  year: Int
 }
 
 input TeamCreateWithoutSchoolInput {
@@ -1588,6 +1599,7 @@ input TeamCreateWithoutSchoolInput {
   name: String!
   teacher: UserCreateOneWithoutTeachesInput!
   User: UserCreateManyWithoutTeamInput
+  year: Int
 }
 
 input TeamCreateWithoutTeacherInput {
@@ -1598,6 +1610,7 @@ input TeamCreateWithoutTeacherInput {
   name: String!
   school: SchoolCreateOneWithoutTeamsInput!
   User: UserCreateManyWithoutTeamInput
+  year: Int
 }
 
 input TeamCreateWithoutUserInput {
@@ -1608,6 +1621,7 @@ input TeamCreateWithoutUserInput {
   name: String!
   school: SchoolCreateOneWithoutTeamsInput!
   teacher: UserCreateOneWithoutTeachesInput!
+  year: Int
 }
 
 input TeamListRelationFilter {
@@ -1623,6 +1637,7 @@ input TeamOrderByInput {
   name: SortOrder
   schoolId: SortOrder
   teacherId: SortOrder
+  year: SortOrder
 }
 
 input TeamScalarWhereInput {
@@ -1635,11 +1650,13 @@ input TeamScalarWhereInput {
   OR: [TeamScalarWhereInput!]
   schoolId: IntFilter
   teacherId: IntFilter
+  year: IntNullableFilter
 }
 
 input TeamUpdateManyDataInput {
   invite: NullableStringFieldUpdateOperationsInput
   name: StringFieldUpdateOperationsInput
+  year: NullableIntFieldUpdateOperationsInput
 }
 
 input TeamUpdateManyWithoutDomainInput {
@@ -1718,6 +1735,7 @@ input TeamUpdateWithoutBallotsDataInput {
   school: SchoolUpdateOneRequiredWithoutTeamsInput
   teacher: UserUpdateOneRequiredWithoutTeachesInput
   User: UserUpdateManyWithoutTeamInput
+  year: NullableIntFieldUpdateOperationsInput
 }
 
 input TeamUpdateWithoutDomainDataInput {
@@ -1728,6 +1746,7 @@ input TeamUpdateWithoutDomainDataInput {
   school: SchoolUpdateOneRequiredWithoutTeamsInput
   teacher: UserUpdateOneRequiredWithoutTeachesInput
   User: UserUpdateManyWithoutTeamInput
+  year: NullableIntFieldUpdateOperationsInput
 }
 
 input TeamUpdateWithoutMembersDataInput {
@@ -1738,6 +1757,7 @@ input TeamUpdateWithoutMembersDataInput {
   school: SchoolUpdateOneRequiredWithoutTeamsInput
   teacher: UserUpdateOneRequiredWithoutTeachesInput
   User: UserUpdateManyWithoutTeamInput
+  year: NullableIntFieldUpdateOperationsInput
 }
 
 input TeamUpdateWithoutSchoolDataInput {
@@ -1748,6 +1768,7 @@ input TeamUpdateWithoutSchoolDataInput {
   name: StringFieldUpdateOperationsInput
   teacher: UserUpdateOneRequiredWithoutTeachesInput
   User: UserUpdateManyWithoutTeamInput
+  year: NullableIntFieldUpdateOperationsInput
 }
 
 input TeamUpdateWithoutTeacherDataInput {
@@ -1758,6 +1779,7 @@ input TeamUpdateWithoutTeacherDataInput {
   name: StringFieldUpdateOperationsInput
   school: SchoolUpdateOneRequiredWithoutTeamsInput
   User: UserUpdateManyWithoutTeamInput
+  year: NullableIntFieldUpdateOperationsInput
 }
 
 input TeamUpdateWithoutUserDataInput {
@@ -1768,6 +1790,7 @@ input TeamUpdateWithoutUserDataInput {
   name: StringFieldUpdateOperationsInput
   school: SchoolUpdateOneRequiredWithoutTeamsInput
   teacher: UserUpdateOneRequiredWithoutTeachesInput
+  year: NullableIntFieldUpdateOperationsInput
 }
 
 input TeamUpdateWithWhereUniqueWithoutDomainInput {
@@ -1834,6 +1857,7 @@ input TeamWhereInput {
   teacher: UserWhereInput
   teacherId: IntFilter
   User: UserListRelationFilter
+  year: IntNullableFilter
 }
 
 input TeamWhereUniqueInput {
@@ -2238,6 +2262,7 @@ input UserCreateInput {
   updatedAt: DateTime
   verified: Boolean
   voted: VotedCreateManyWithoutUserInput
+  year: Int
 }
 
 input UserCreateManyWithoutSchoolInput {
@@ -2300,6 +2325,7 @@ input UserCreateWithoutAttachmentsInput {
   updatedAt: DateTime
   verified: Boolean
   voted: VotedCreateManyWithoutUserInput
+  year: Int
 }
 
 input UserCreateWithoutBallotsInput {
@@ -2322,6 +2348,7 @@ input UserCreateWithoutBallotsInput {
   updatedAt: DateTime
   verified: Boolean
   voted: VotedCreateManyWithoutUserInput
+  year: Int
 }
 
 input UserCreateWithoutReactionsInput {
@@ -2344,6 +2371,7 @@ input UserCreateWithoutReactionsInput {
   updatedAt: DateTime
   verified: Boolean
   voted: VotedCreateManyWithoutUserInput
+  year: Int
 }
 
 input UserCreateWithoutSchoolInput {
@@ -2366,6 +2394,7 @@ input UserCreateWithoutSchoolInput {
   updatedAt: DateTime
   verified: Boolean
   voted: VotedCreateManyWithoutUserInput
+  year: Int
 }
 
 input UserCreateWithoutTeachesInput {
@@ -2388,6 +2417,7 @@ input UserCreateWithoutTeachesInput {
   updatedAt: DateTime
   verified: Boolean
   voted: VotedCreateManyWithoutUserInput
+  year: Int
 }
 
 input UserCreateWithoutTeamInput {
@@ -2410,6 +2440,7 @@ input UserCreateWithoutTeamInput {
   updatedAt: DateTime
   verified: Boolean
   voted: VotedCreateManyWithoutUserInput
+  year: Int
 }
 
 input UserCreateWithoutThreadsInput {
@@ -2432,6 +2463,7 @@ input UserCreateWithoutThreadsInput {
   updatedAt: DateTime
   verified: Boolean
   voted: VotedCreateManyWithoutUserInput
+  year: Int
 }
 
 input UserCreateWithoutVotedInput {
@@ -2454,6 +2486,7 @@ input UserCreateWithoutVotedInput {
   threads: ThreadCreateManyWithoutUserInput
   updatedAt: DateTime
   verified: Boolean
+  year: Int
 }
 
 input UserListRelationFilter {
@@ -2477,6 +2510,7 @@ input UserOrderByInput {
   teamId: SortOrder
   updatedAt: SortOrder
   verified: SortOrder
+  year: SortOrder
 }
 
 input UserScalarWhereInput {
@@ -2497,6 +2531,7 @@ input UserScalarWhereInput {
   teamId: IntNullableFilter
   updatedAt: DateTimeFilter
   verified: BoolNullableFilter
+  year: IntNullableFilter
 }
 
 input UserUpdateInput {
@@ -2520,6 +2555,7 @@ input UserUpdateInput {
   updatedAt: DateTimeFieldUpdateOperationsInput
   verified: NullableBoolFieldUpdateOperationsInput
   voted: VotedUpdateManyWithoutUserInput
+  year: NullableIntFieldUpdateOperationsInput
 }
 
 input UserUpdateManyDataInput {
@@ -2534,6 +2570,7 @@ input UserUpdateManyDataInput {
   role: Role
   updatedAt: DateTimeFieldUpdateOperationsInput
   verified: NullableBoolFieldUpdateOperationsInput
+  year: NullableIntFieldUpdateOperationsInput
 }
 
 input UserUpdateManyWithoutSchoolInput {
@@ -2629,6 +2666,7 @@ input UserUpdateWithoutAttachmentsDataInput {
   updatedAt: DateTimeFieldUpdateOperationsInput
   verified: NullableBoolFieldUpdateOperationsInput
   voted: VotedUpdateManyWithoutUserInput
+  year: NullableIntFieldUpdateOperationsInput
 }
 
 input UserUpdateWithoutBallotsDataInput {
@@ -2651,6 +2689,7 @@ input UserUpdateWithoutBallotsDataInput {
   updatedAt: DateTimeFieldUpdateOperationsInput
   verified: NullableBoolFieldUpdateOperationsInput
   voted: VotedUpdateManyWithoutUserInput
+  year: NullableIntFieldUpdateOperationsInput
 }
 
 input UserUpdateWithoutReactionsDataInput {
@@ -2673,6 +2712,7 @@ input UserUpdateWithoutReactionsDataInput {
   updatedAt: DateTimeFieldUpdateOperationsInput
   verified: NullableBoolFieldUpdateOperationsInput
   voted: VotedUpdateManyWithoutUserInput
+  year: NullableIntFieldUpdateOperationsInput
 }
 
 input UserUpdateWithoutSchoolDataInput {
@@ -2695,6 +2735,7 @@ input UserUpdateWithoutSchoolDataInput {
   updatedAt: DateTimeFieldUpdateOperationsInput
   verified: NullableBoolFieldUpdateOperationsInput
   voted: VotedUpdateManyWithoutUserInput
+  year: NullableIntFieldUpdateOperationsInput
 }
 
 input UserUpdateWithoutTeachesDataInput {
@@ -2717,6 +2758,7 @@ input UserUpdateWithoutTeachesDataInput {
   updatedAt: DateTimeFieldUpdateOperationsInput
   verified: NullableBoolFieldUpdateOperationsInput
   voted: VotedUpdateManyWithoutUserInput
+  year: NullableIntFieldUpdateOperationsInput
 }
 
 input UserUpdateWithoutTeamDataInput {
@@ -2739,6 +2781,7 @@ input UserUpdateWithoutTeamDataInput {
   updatedAt: DateTimeFieldUpdateOperationsInput
   verified: NullableBoolFieldUpdateOperationsInput
   voted: VotedUpdateManyWithoutUserInput
+  year: NullableIntFieldUpdateOperationsInput
 }
 
 input UserUpdateWithoutThreadsDataInput {
@@ -2761,6 +2804,7 @@ input UserUpdateWithoutThreadsDataInput {
   updatedAt: DateTimeFieldUpdateOperationsInput
   verified: NullableBoolFieldUpdateOperationsInput
   voted: VotedUpdateManyWithoutUserInput
+  year: NullableIntFieldUpdateOperationsInput
 }
 
 input UserUpdateWithoutVotedDataInput {
@@ -2783,6 +2827,7 @@ input UserUpdateWithoutVotedDataInput {
   threads: ThreadUpdateManyWithoutUserInput
   updatedAt: DateTimeFieldUpdateOperationsInput
   verified: NullableBoolFieldUpdateOperationsInput
+  year: NullableIntFieldUpdateOperationsInput
 }
 
 input UserUpdateWithWhereUniqueWithoutSchoolInput {
@@ -2864,6 +2909,7 @@ input UserWhereInput {
   updatedAt: DateTimeFilter
   verified: BoolNullableFilter
   voted: VotedListRelationFilter
+  year: IntNullableFilter
 }
 
 input UserWhereUniqueInput {
@@ -2986,6 +3032,11 @@ input VotedWhereInput {
 
 input VotedWhereUniqueInput {
   id: Int
+}
+
+type Votes {
+  ballot: Ballot!
+  verify: String
 }
 
 input VotesCreateManyWithoutBallotInput {

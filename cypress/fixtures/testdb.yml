@@ -1,6 +1,8 @@
 # under delete, you can specify which objects to clean up before creation
 delete:
   - team
+  - voted
+  - votes
   - ballot
   - verificationRequest
   - domain
@@ -16,7 +18,7 @@ user:
     lastname: Voty
     email: voty@teachen.ch
     password: $2b$10$3ZxdzTwtAjW3A1QSi.zDJ.IFSyUIqnE00kRMgwhsYaJujv5xMbB4S
-    role: ADMIN
+    role: Admin
     emailVerified: !!timestamp "2020-01-01"
 
 # Another prisma type with objects to create
@@ -38,7 +40,7 @@ school:
               email: teacher@teachen.ch
               password: $2b$10$3ZxdzTwtAjW3A1QSi.zDJ.IFSyUIqnE00kRMgwhsYaJujv5xMbB4S
               emailVerified: !!timestamp "2020-01-01"
-              role: TEACHER
+              role: Teacher
           members:
             # alternatively you can also relate to existing instances
             # however, you will not know the id, so you need another
@@ -50,13 +52,13 @@ school:
                 lastname: Student
                 email: student@teachen.ch
                 password: $2b$10$3ZxdzTwtAjW3A1QSi.zDJ.IFSyUIqnE00kRMgwhsYaJujv5xMbB4S
-                role: STUDENT
+                role: Student
                 emailVerified: !!timestamp "2020-01-01"
               - name: Student-2
                 lastname: Student
                 email: student2@teachen.ch
                 password: $2b$10$3ZxdzTwtAjW3A1QSi.zDJ.IFSyUIqnE00kRMgwhsYaJujv5xMbB4S
-                role: STUDENT
+                role: Student
                 emailVerified: !!timestamp "2020-01-01"
         - name: Class 2
           invite: abcd2000
@@ -66,7 +68,7 @@ school:
               lastname: Teacher
               email: teacher2@teachen.ch
               emailVerified: !!timestamp "2020-01-01"
-              role: TEACHER
+              role: Teacher
               password: $2b$10$3ZxdzTwtAjW3A1QSi.zDJ.IFSyUIqnE00kRMgwhsYaJujv5xMbB4S
           members:
             create:
@@ -74,7 +76,7 @@ school:
                 lastname: Student
                 email: student3@teachen.ch
                 password: $2b$10$3ZxdzTwtAjW3A1QSi.zDJ.IFSyUIqnE00kRMgwhsYaJujv5xMbB4S
-                role: STUDENT
+                role: Student
 
     members:
       connect:
@@ -101,7 +103,7 @@ school:
               email: teacher3@teachen.ch
               password: $2b$10$3ZxdzTwtAjW3A1QSi.zDJ.IFSyUIqnE00kRMgwhsYaJujv5xMbB4S
               emailVerified: !!timestamp "2020-01-01"
-              role: TEACHER
+              role: Teacher
     members:
       connect:
         - email: teacher3@teachen.ch
@@ -153,7 +155,7 @@ ballot:
     description: Das Freizügigkeitsabkommen zwischen der Schweiz und der Europäischen Union soll beendet werden.
     start: !!timestamp "2020-07-01"
     end: !!timestamp "2020-09-21"
-    scope: NATIONAL
+    scope: National
     body: |
       ### Ausgangslage
       Seit 2002 gilt zwischen der Schweiz und der Europäischen Union (EU) das Freizügigkeitsabkommen (FZA). Das FZA ist einer von sieben Verträgen, die zusammen Bilaterale I genannt werden. Die Verträge der Bilateralen I sind miteinander verknüpft. Wird ein Vertrag gekündigt, werden alle sieben Verträge der Bilateralen I ausser Kraft gesetzt. Dies wird Guillotine-Klausel genannt.
@@ -182,7 +184,7 @@ ballot:
     description: Der Bund soll neue Kampfflugzeuge kaufen. Dafür soll er höchstens 6 Milliarden Franken ausgeben
     start: !!timestamp "2020-07-01"
     end: !!timestamp "2020-09-21"
-    scope: NATIONAL
+    scope: National
     body: |
       ### Ausgangslage
       Die Schweizer Luftflotte verfügt heute über zwei Typen von Kampfflugzeugen: 26 Kampfflugzeuge sind rund 40-jährig und werden nur noch für die Ausbildung von PilotInnen eingesetzt. 30 weitere Kampfflugzeuge wurden in den 1990er-Jahren angeschafft und werden heute zur Kontrolle und zum Schutz des Luftraums eingesetzt. Die heutigen Kampfflugzeuge erreichen etwa 2030 das Ende ihrer Nutzungsdauer.      
@@ -196,7 +198,7 @@ ballot:
     description: Es soll ein zweiwöchiger Vaterschaftsurlaub eingeführt werden.
     start: !!timestamp "2020-07-01"
     end: !!timestamp "2020-09-21"
-    scope: NATIONAL
+    scope: National
     body: |
       ### Ausgangslage
       In der Schweiz haben Väter Anspruch auf ein bis zwei Tage bezahlten Vaterschaftsurlaub. Es gibt Unternehmen, die freiwillig einen längeren Vaterschaftsurlaub ermöglichen.
@@ -210,7 +212,7 @@ ballot:
     description: Die Steuerabzüge für Kinder und Kinderdrittbetreuung sollen erhöht werden.
     start: !!timestamp "2020-07-01"
     end: !!timestamp "2020-09-21"
-    scope: NATIONAL
+    scope: National
     body: |
       ### Ausgangslage
       In der Schweiz bezahlt man Einkommenssteuern. Einen Teil seines Einkommens muss man als Steuer an Bund und Kanton bezahlen. Die Höhe dieser Einkommenssteuern hängt davon ab, wie hoch das Einkommen und die Steuerabzüge sind.
@@ -226,7 +228,7 @@ ballot:
     description: Das Jagdgesetz soll geändert werden. Die Änderung betrifft den Schutz und den Abschuss von Wildtieren
     start: !!timestamp "2020-07-01"
     end: !!timestamp "2020-09-21"
-    scope: NATIONAL
+    scope: National
     body: |
       ### Ausgangslage
       Das aktuelle Jagdgesetz stammt aus dem Jahr 1986. Das Jagdgesetz regelt zum Beispiel, wann und wo wie viele Tiere von welcher Tierart geschossen werden dürfen.

@@ -3,6 +3,16 @@ import { useUser, useSetUser } from "../state/user";
 import { Heading } from "rebass";
 import { Dispatch, SetStateAction } from "react";
 
+// TODO: have to redefine enum here, otherwise hiting this issue
+// https://github.com/prisma/prisma/issues/3252
+export enum Role {
+  Admin = "Admin",
+  Principal = "Principal",
+  Student = "Student",
+  Teacher = "Teacher",
+  User = "User",
+}
+
 CheckLogin.fragments = {
   LoginFields: gql`
     fragment LoginFields on User {

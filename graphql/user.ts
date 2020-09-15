@@ -1,5 +1,5 @@
 import { schema } from "nexus";
-import * as authentication from "../util/authentication";
+import { users } from "./resolvers";
 import { stringArg, intArg } from "nexus/components/schema";
 
 schema.objectType({
@@ -52,7 +52,7 @@ schema.extendType({
     t.field("me", {
       type: "User",
       nullable: true,
-      resolve: async (_root, args, ctx) => authentication.getUser(ctx),
+      resolve: async (_root, args, ctx) => users.getUser(ctx),
     });
   },
 });
@@ -62,11 +62,11 @@ schema.extendType({
   definition(t) {
     t.crud.createOneUser({
       alias: "createUser",
-      resolve: authentication.createUser,
+      resolve: users.createUser,
     });
     t.crud.updateOneUser({
       alias: "updateUser",
-      resolve: authentication.updateUser,
+      resolve: users.updateUser,
     });
     t.field("login", {
       type: "ResponseLogin",
@@ -74,7 +74,7 @@ schema.extendType({
         email: stringArg(),
         password: stringArg(),
       },
-      resolve: authentication.login,
+      resolve: users.login,
     });
     t.field("emailVerification", {
       type: "ResponseLogin",
@@ -83,21 +83,21 @@ schema.extendType({
         purpose: stringArg({ required: true }),
       },
       resolve: async (_root, args, ctx) =>
-        authentication.sendVerificationEmail(args.email, args.purpose, ctx.db),
+        users.sendVerificationEmail(args.email, args.purpose, ctx.db),
     });
     t.field("checkVerification", {
       type: "ResponseLogin",
       args: {
         token: stringArg(),
       },
-      resolve: authentication.checkVerification,
+      resolve: users.checkVerification,
     });
     t.field("changePassword", {
       type: "ResponseLogin",
       args: {
         password: stringArg(),
       },
-      resolve: authentication.changePassword,
+      resolve: users.changePassword,
     });
     t.field("createInvitedUser", {
       type: "User",
@@ -108,14 +108,14 @@ schema.extendType({
         password: stringArg(),
         invite: stringArg(),
       },
-      resolve: authentication.createInvitedUser,
+      resolve: users.createInvitedUser,
     });
     t.field("acceptInvite", {
       type: "Team",
       args: {
         invite: stringArg(),
       },
-      resolve: authentication.acceptInvite,
+      resolve: users.acceptInvite,
     });
     t.field("setSchool", {
       type: "User",
@@ -123,7 +123,7 @@ schema.extendType({
         school: intArg(),
       },
       resolve: async (_root, { school }, ctx) => {
-        const user = await authentication.updateUser(
+        const user = await users.updateUser(
           _root,
           { school: { connect: { id: school } } },
           ctx
