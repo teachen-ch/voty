@@ -1,4 +1,4 @@
-import { useRouter } from "next/router";
+import { useRouter, NextRouter } from "next/router";
 import { Page } from "components/Page";
 import { gql, useMutation } from "@apollo/client";
 import { useState, useEffect } from "react";
@@ -10,6 +10,7 @@ import CheckLogin from "components/CheckLogin";
 import { useSetAccessToken, useUser, useSetUser } from "../../state/user";
 import { useQueryParam } from "util/hooks";
 import { Role } from "components/CheckLogin";
+import { User } from "graphql/types";
 
 export const LOGIN = gql`
   mutation login($email: String!, $password: String!) {
@@ -192,26 +193,30 @@ function VerificationForm({ email }: { email: string }) {
   );
 }
 
+function getStartpage(role?: string) {
+  let page = "";
+  switch (role) {
+    case Role.Teacher:
+      page = "/teacher";
+      break;
+    case Role.Student:
+      page = "/student";
+      break;
+    case Role.Admin:
+      page = "/admin";
+      break;
+    default:
+      page = "/";
+  }
+  return page;
+}
+
 function AfterLogin() {
   const user = useUser();
   const router = useRouter();
 
   if (user && user.role) {
-    let page = "";
-    switch (user.role) {
-      case Role.Teacher:
-        page = "/teacher";
-        break;
-      case Role.Student:
-        page = "/student";
-        break;
-      case Role.Admin:
-        page = "/admin";
-        break;
-      default:
-        page = "/";
-    }
-
+    const page = getStartpage(user.role);
     router.push(page);
     return null;
     /*
@@ -233,6 +238,7 @@ function AfterLogin() {
 }
 
 function CheckToken({ token, purpose }: { token: string; purpose: string }) {
+  const user = useUser();
   const setUser = useSetUser();
   const setAccessToken = useSetAccessToken();
   const [error, setError] = useState("");
@@ -264,7 +270,9 @@ function CheckToken({ token, purpose }: { token: string; purpose: string }) {
         <>
           <Heading as="h2">Email bestätigt</Heading>
           <Text mb={4}>Super, Deine Email-Adresse ist nun bestätigt.</Text>
-          <Button onClick={() => router.push("/")}>Weiter geht's</Button>
+          <Button onClick={() => router.push(getStartpage(user?.role))}>
+            Weiter geht's
+          </Button>
         </>
       );
     }
@@ -344,6 +352,7 @@ function RequestReset({ email }: { email: string }) {
 }
 
 function PasswordResetForm({ finished }: { finished: () => void }) {
+  const user = useUser();
   const [password, setPassword] = useState("");
   const [password2, setPassword2] = useState("");
   const [error, setError] = useState("");
@@ -370,7 +379,9 @@ function PasswordResetForm({ finished }: { finished: () => void }) {
       <>
         <Heading as="h2">Passwort geändert</Heading>
         <Text mb={4}>Super, das hat geklappt.</Text>
-        <Button onClick={() => router.push("/")}>Weiter geht's</Button>
+        <Button onClick={() => router.push(getStartpage(user?.role))}>
+          Weiter geht's
+        </Button>
       </>
     );
   }
