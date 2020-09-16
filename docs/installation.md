@@ -42,7 +42,11 @@ docker exec -it postgres psql -U voty -c "update users set email_verified=NOW() 
 ## Next Steps
 
 👉 Now go have a look at our [tech stack](./stack.md)
+
 👉 Study our Prisma Schema: [schema.prisma](../prisma/schema.prisma)
-👉 Have a look at how the [GraphQL Backend is defined](../graphql/schema.ts)
-👉 How permissions are handled with [GraphQL-Shield](https://github.com/maticzav/graphql-shield) in [/graphql/permissions.ts]](../graphql/permissions.ts)
+
+👉 See how the [GraphQL Backend is defined](../graphql/schema.ts)
+
+👉 How permissions are handled with [GraphQL-Shield](https://github.com/maticzav/graphql-shield) in [/graphql/permissions.ts](../graphql/permissions.ts)
+
 👉 Have a look at the [open issues](https://github.com/teachen-ch/voty/issues) and see if you want to tackle one 🙏
