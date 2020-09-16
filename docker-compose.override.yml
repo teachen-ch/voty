@@ -9,7 +9,6 @@ services:
     build: .
     environment:
       NODE_ENV: development
-    env_file: ".env.local"
     command: npm run dev
     volumes:
       - .:/usr/src/app

@@ -33,4 +33,16 @@ If you (we?) are lucky, all the tests will pass 🎉. We are still struggling a 
 http://localhost:3000/
 ```
 
-You can now log in with the user «teacher@teachen.ch» or «student@teachen.ch». The password will be «teachen». Unfortunately it is currently not trivial to create a new user the dev environment. You can create one (http://localhost:3000/user/signup), but the activation email will not be sent if NODE_ENV=development. So you'll have to manually activate the user in the database.
+You can now log in with the user «teacher@teachen.ch» or «student@teachen.ch». The password will be «teachen». Unfortunately it is currently not trivial to create a new user the dev environment. You can create one (http://localhost:3000/user/signup), but the activation email will not be sent if NODE_ENV=development. So you'll have to manually activate the user in the database (users.email_verified = date).
+
+```bash
+docker exec -it postgres psql -U voty -c "update users set email_verified=NOW() where email='name@email.com'";
+```
+
+## Next Steps
+
+👉 Now go have a look at our [tech stack](./stack.md)
+👉 Study our Prisma Schema: [schema.prisma](../prisma/schema.prisma)
+👉 Have a look at how the [GraphQL Backend is defined](../graphql/schema.ts)
+👉 How permissions are handled with [GraphQL-Shield](https://github.com/maticzav/graphql-shield) in [/graphql/permissions.ts]](../graphql/permissions.ts)
+👉 Have a look at the [open issues](https://github.com/teachen-ch/voty/issues) and see if you want to tackle one 🙏

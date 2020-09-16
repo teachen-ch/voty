@@ -2,6 +2,8 @@
 
 👉 https://votyapp.ch/
 
+💪 Would you like to contribute to to voty? Check out the [docs/installation.md](installation instructions)
+
 ## Let's bring democracy to schools!
 
 Democracy is one of Switzerland's most valuable assets. But how can we motivate our youth to care about it? Voty tries to increase the understanding of democracy for children aged 12-18 years with 3 modules.
@@ -24,4 +26,4 @@ Voty is developed as an open source project by «Teachen!» (https://teachen.ch/
 
 ## How to contribute
 
-We are currently in an early stage of the project. If you know teachers (e.g. history), who have experience in teaching democracy at school, then please [get in touch](https://votyapp.ch/kontakt). If you want to help out with content, we are very much open to your contributions. If you want to dive into the code, have a look at [our stack](/docs.md).
+We are currently in an early stage of the project. If you know teachers (e.g. history), who have experience in teaching democracy at school, then please [get in touch](https://votyapp.ch/kontakt). If you want to help out with content, we are very much open to your contributions. If you want to dive into the code, have a look at [our installation instructions](/docs/installation.md) and at our [tech stack](/docs/stack.md).
