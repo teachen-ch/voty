@@ -1,3 +1,10 @@
-node_modules
+.git/
+.next/
+.dockerignore
+Dockerfile*
+docker-compose.*
+nginx/
+node_modules/
 npm-debug.log
-
+data/
+backup/

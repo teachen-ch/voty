@@ -1,0 +1,12 @@
+# docker-compose.production.yml
+#
+# start docker in prod with docker-compose -f docker-compose.yml -f docker-compose.production.yml
+#
+version: "3.8"
+services:
+  app:
+    build: .
+    environment:
+      NODE_ENV: production
+    env_file: ".env.local"
+    command: npm run start

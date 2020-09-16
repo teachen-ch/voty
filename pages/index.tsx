@@ -36,7 +36,7 @@ export default function Home() {
           my={[3, 3, 4]}
           mx={[0, 3, "20%", 230]}
         >
-          Die Demokratie ist das wohl wichtigste Gut der Schweiz. Aber wie
+           Die Demokratie ist das wohl wichtigste Gut der Schweiz. Aber wie
           gelingt es uns, die Jugend für die Demokratie zu begeistern? Voty ist
           ein Projekt für die Demokratieförderung an Schweizer Schulen in drei
           Modulen.

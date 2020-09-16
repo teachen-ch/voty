@@ -1,0 +1,16 @@
+# docker-compose.override.yml
+#
+# this override file is loaded by default by using docker-compose up
+# if you specifcy another yml file with -f docker-compose.production, then it won't be loaded
+# so here goes the «local dev» only config:
+version: "3.8"
+services:
+  app:
+    build: .
+    environment:
+      NODE_ENV: development
+    env_file: ".env.local"
+    command: npm run dev
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
