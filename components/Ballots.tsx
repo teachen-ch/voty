@@ -95,7 +95,7 @@ export const Ballots: React.FC<BallotsProps> = ({ where, onClick }) => {
           </A>
           <Text fontSize={2}>{ballot.description}</Text>
           <Flex mt={2} mb={4} justifyContent="space-between">
-            Abstimmungzeitraum: {formatFromTo(ballot.start, ballot.end)}
+            Abstimmungszeitraum: {formatFromTo(ballot.start, ballot.end)}
             <Button
               onClick={() => onClick(ballot)}
               variant={

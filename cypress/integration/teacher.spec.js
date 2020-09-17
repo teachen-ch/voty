@@ -3,15 +3,15 @@ describe("Test Teacher Startpage", () => {
     cy.task("prismaLoader", "testdb.yml");
   });
 
-  it("shows Teacher page with teacher's teams!", () => {
-    /* cy.login();
+  it("opens Teacher page with teacher's teams!", () => {
+    cy.login();
     cy.visit("/teacher");
     cy.contains("Willkommen");
-    cy.contains("Class 1"); */
+    cy.contains("Class 1");
   });
 
   it("allows teacher to create a new team and see invite", () => {
-    /* cy.login();
+    cy.login();
     cy.visit("/teacher");
     cy.contains("Neue Klasse erfassen").click();
     cy.get("#name").type("Testclass");
@@ -29,6 +29,6 @@ describe("Test Teacher Startpage", () => {
     cy.go("back");
     cy.contains("Testclass").click();
     cy.url().should("include", "/teacher/team/");
-    cy.contains("Klassenseite"); */
+    cy.contains("Klassenseite");
   });
 });
