@@ -131,14 +131,21 @@ export default function Demokratie() {
       <Heading as="h3">Macht auch die Romandie und das Tessin mit?</Heading>
       <Text>
         Wenn Sie Kontakte in diese Sprachregionen haben, dann freuen wir uns
-        sehr über eine <Link href="/kontakt">Email</Link>!
+        sehr über eine{" "}
+        <Link href="/kontakt">
+          <a>Email</a>
+        </Link>
+        !
       </Text>
       <Heading as="h3">
         Ich habe keine Frage, aber eine kritische Anmerkung!
       </Heading>
       <Text>
         Wir sind auf Ihr Feedback angewiesen und freuen uns sehr über kritische
-        Fragen. Bitte nehmen sie mit uns <Link href="/kontakt">Kontakt</Link>{" "}
+        Fragen. Bitte nehmen sie mit uns{" "}
+        <Link href="/kontakt">
+          <a>Kontakt</a>
+        </Link>{" "}
         auf.
       </Text>
     </Page>
