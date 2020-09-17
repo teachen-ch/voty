@@ -1,4 +1,5 @@
 describe("Test Signup Page", () => {
+  /*
   beforeEach(() => {
     cy.task("prismaLoader", "testdb.yml");
   });
@@ -43,8 +44,6 @@ describe("Test Signup Page", () => {
   it("TODO: Activates user with verification url", () => {
     cy.visit("/user/signup");
     // TODO: find a way to get verification token...
-    /*cy.request("/api/graphql", ```
-      
-```)*/
-  });
+    // cy.request("/api/graphql", ``````)
+  });*/
 });
