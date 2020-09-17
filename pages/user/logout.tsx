@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { Page } from "../../components/Page";
 import { Button, ButtonProps } from "rebass";
+import { useApolloClient } from "@apollo/client";
 
 export default function LogoutPage() {
   const setUser = useSetUser();
@@ -29,8 +30,11 @@ export const LogoutButton: React.FC<LogoutButtonProps> = ({
   const setUser = useSetUser();
   const setAccessToken = useSetAccessToken();
   const router = useRouter();
+  const client = useApolloClient();
 
   function onLogout() {
+    // clear apollo client local  cache
+    client.clearStore();
     if (onSuccess) {
       onSuccess();
     } else {
@@ -40,7 +44,7 @@ export const LogoutButton: React.FC<LogoutButtonProps> = ({
     setTimeout(() => {
       setAccessToken("");
       setUser(undefined);
-    }, 700);
+    }, 50);
   }
   return (
     <Button onClick={() => onLogout()} {...props}>
