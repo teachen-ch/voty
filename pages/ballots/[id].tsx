@@ -1,4 +1,4 @@
-import { LoggedInPage, ErrorPage } from "components/Page";
+import { Page, LoggedInPage, ErrorPage } from "components/Page";
 import { Text, Heading, Box, Card, Flex, Button } from "rebass";
 import { useRouter } from "next/router";
 import { useUser } from "state/user";
@@ -8,6 +8,8 @@ import { Ballot } from "graphql/types";
 import { useState } from "react";
 import { useMutation, gql } from "@apollo/client";
 import { ErrorBox } from "components/Form";
+import Info from "components/Info";
+import Link from "next/link";
 
 export default function BallotPage() {
   const router = useRouter();
@@ -21,13 +23,13 @@ export default function BallotPage() {
 
   if (!ballot)
     return (
-      <LoggedInPage heading="Abstimmungsseite">
+      <Page heading="Abstimmungsseite">
         Abstimmung konnte nicht gefunden werden
-      </LoggedInPage>
+      </Page>
     );
 
   return (
-    <LoggedInPage heading="Abstimmungsseite">
+    <Page heading="Abstimmungsseite">
       <Heading as="h2">{ballot.title}</Heading>
       <Text my={2}>{ballot.description}</Text>
       <Text my={2}>📅 Dauer: {formatFromTo(ballot.start, ballot.end)}</Text>
@@ -42,7 +44,7 @@ export default function BallotPage() {
         <div dangerouslySetInnerHTML={parseMarkdown(ballot.body)} />
       </Card>
       <VotyNow ballot={ballot} />
-    </LoggedInPage>
+    </Page>
   );
 }
 
@@ -61,6 +63,7 @@ const VOTE = gql`
 
 const VotyNow: React.FC<{ ballot: Ballot }> = ({ ballot }) => {
   const [error, setError] = useState("");
+  const user = useUser();
   const [success, setSuccess] = useState(false);
   const [doVote] = useMutation(VOTE, {
     onCompleted(data) {
@@ -70,6 +73,15 @@ const VotyNow: React.FC<{ ballot: Ballot }> = ({ ballot }) => {
       setError(err.message);
     },
   });
+
+  if (!user) {
+    return (
+      <Info type="default">
+        Um über diese Abstimmung abzustimmen, musst Du dich zu erst{" "}
+        <Link href="/user/login">anmelden</Link>.
+      </Info>
+    );
+  }
 
   function vote(vote: number) {
     doVote({ variables: { ballot: ballot.id, vote } });

@@ -107,7 +107,7 @@ export async function votingPermission({ ballot, user, db }: PermissionArgs) {
 
 export async function getHasVoted({ ballot, user, db }: PermissionArgs) {
   const voted = await db.voted.findMany({
-    where: { user: { id: { equals: user!.id } } },
+    where: { user: { id: { equals: user?.id } } },
   });
   return voted.length > 0 ? true : false;
 }

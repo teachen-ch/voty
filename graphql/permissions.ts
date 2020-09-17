@@ -79,21 +79,6 @@ const canViewBallot = rule({ cache: "strict" })(
   }
 );
 
-/* Already checked in resolver
-const canVoteBallot = rule({ cache: "strict" })(
-  async (parent, args, ctx: NexusContext, info) => {
-    const id = args.ballot;
-    const ballot = await ctx.db.ballot.findOne({ where: { id } });
-    if (!ballot) return false;
-    if (ctx.user?.role === Role.Admin) return true;
-    return await ballots.votingPermission({
-      ballot,
-      user: ctx.user,
-      db: ctx.db,
-    });
-  }
-);*/
-
 export const permissions = shield({
   rules: {
     Query: {
