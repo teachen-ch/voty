@@ -30,7 +30,9 @@ export default function Newsletter() {
 export function Field({ id, label }: { id: string; label: string }) {
   return (
     <>
-      <Label htmlFor={id}>{label}</Label>
+      <Label htmlFor={id} alignSelf="center">
+        {label}:
+      </Label>
       <Input type="text" name={id} id={id} />
     </>
   );

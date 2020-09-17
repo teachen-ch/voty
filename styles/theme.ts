@@ -117,18 +117,21 @@ export default {
       td: {
         py: 2,
       },
-    },
-    h2: {
-      variant: "text.heading",
-      fontSize: [3, 4],
-    },
-    h3: {
-      variant: "text.heading",
-      fontSize: [2, 3],
-    },
-    h4: {
-      variant: "text.heading",
-      fontSize: [1, 2],
+      "a:visited": {
+        color: "gray",
+      },
+      h2: {
+        variant: "text.heading",
+        fontSize: [3, 4],
+      },
+      h3: {
+        variant: "text.heading",
+        fontSize: [2, 3],
+      },
+      h4: {
+        variant: "text.heading",
+        fontSize: [1, 2],
+      },
     },
     img: {
       maxWidth: "100%",
