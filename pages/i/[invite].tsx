@@ -7,7 +7,6 @@ import { useState } from "react";
 import { CreateUserForm, Success } from "../user/signup";
 import { useUser } from "../../state/user";
 import { omit } from "lodash";
-import CheckLogin from "../../components/CheckLogin";
 
 const GET_INVITE_TEAM = gql`
   query team($invite: String!) {
@@ -103,7 +102,6 @@ export default function Invite(props: React.Props<{}>) {
 
     return (
       <Page heading="Klassen-Einladung">
-        <CheckLogin />
         <Heading as="h2">
           Einladung für die Klasse «{team.name}» im Schulhaus «
           {team.school?.name}»

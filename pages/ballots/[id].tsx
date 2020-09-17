@@ -1,4 +1,4 @@
-import { Page, LoggedInPage, ErrorPage } from "components/Page";
+import { Page, ErrorPage } from "components/Page";
 import { Text, Heading, Box, Card, Flex, Button } from "rebass";
 import { useRouter } from "next/router";
 import { useUser } from "state/user";
@@ -16,7 +16,7 @@ export default function BallotPage() {
   const id = parseInt(String(router.query.id));
   const { data, loading, error } = useBallot(id);
 
-  if (loading) return <LoggedInPage heading="Abstimmungsseite"></LoggedInPage>;
+  if (loading) return <Page heading="Abstimmungsseite"></Page>;
   if (error) return <ErrorPage>{error.message}</ErrorPage>;
 
   const ballot: Ballot = data?.ballot;

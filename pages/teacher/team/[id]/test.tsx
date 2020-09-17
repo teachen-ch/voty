@@ -18,14 +18,14 @@ export default function TeacherTest() {
   }
   if (!team) {
     return (
-      <LoggedInPage heading="Klassenseite">
+      <LoggedInPage heading="Demokratie testen">
         Team konnte nicht gefunden werden
       </LoggedInPage>
     );
   }
 
   return (
-    <LoggedInPage heading="Klassenseite">
+    <LoggedInPage heading="Demokratie testen">
       <TeacherTeamNavigation team={team} />
       <Heading as="h2">Demokratie Testen: Nationale Abstimmungen</Heading>
       <Ballots where={{ scope: BallotScope.National }} onClick={selectBallot} />
