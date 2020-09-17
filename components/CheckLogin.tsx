@@ -59,6 +59,7 @@ export default function CheckLogin({ setLoading }: CheckLoginProps) {
   // unless user is already set
   const { loading: checkLogin } = useQuery(ME, {
     fetchPolicy: "network-only",
+    // skip query if user is already defined
     skip: user ? true : false,
     onCompleted: (data) => {
       if (setLoading) setLoading(false);

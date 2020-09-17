@@ -11,6 +11,7 @@ import Menu from "components/Menu";
 import { Footer } from "components/Footer";
 import { Header } from "components/Header";
 import { Page } from "components/Page";
+import CheckLogin from "components/CheckLogin";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -19,6 +20,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <RecoilRoot>
           <ThemeProvider theme={theme}>
             <MDXProvider components={{ wrapper: MDXWrapper }}>
+              <CheckLogin />
               <Header />
               <Menu />
               <Component {...pageProps} />

@@ -75,7 +75,6 @@ export default function Login() {
   } else {
     return (
       <Page heading="Anmelden">
-        <CheckLogin />
         <Text>
           Hier kannst Du dich mit Deiner Schul-Emailadresse anmelden, wenn Du
           bereits ein Benutzer-Konto bei voty hast.

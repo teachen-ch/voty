@@ -13,6 +13,8 @@ export function Page({
   children?: React.ReactNode;
   heading?: string;
 }) {
+  const user = useUser();
+  const startpage = `/${user?.role?.toLowerCase()}`;
   return (
     <Flex
       maxWidth={["100%", "100%", "1000px", "1200px"]}
@@ -21,6 +23,9 @@ export function Page({
       flexDirection="column"
       justifyContent="center"
     >
+      <Head>
+        <title>voty – {heading}</title>
+      </Head>
       <Box mt={["2rem", "2rem", 32]} ml={[0, 0, 0, 20]}>
         <a href="/">
           <img
@@ -37,11 +42,10 @@ export function Page({
         sx={{ minWidth: "min(100%, 800px)" }}
         maxWidth="800px"
       >
-        {heading && <PageHeading>{heading}</PageHeading>}
-        {heading && (
-          <Head>
-            <title>voty – {heading}</title>
-          </Head>
+        {user ? (
+          <LoggedInHeader heading={heading} startpage={startpage} />
+        ) : (
+          <PageHeading>{heading}</PageHeading>
         )}
         {children}
       </Box>
@@ -59,39 +63,12 @@ export function LoggedInPage({ role, children, heading }: LoggedInPageProps) {
   const user = useUser();
   const [loading, setLoading] = useState(true);
   let allowed = role ? user?.role === role || user?.role === Role.Admin : true;
-  const startpage = `/${user?.role?.toLowerCase()}`;
 
   if (user && allowed) {
-    return (
-      <Page>
-        <Flex
-          mt={40}
-          justifyContent="space-between"
-          alignItems="flex-end"
-          pb={1}
-          mb={2}
-          sx={{ borderBottom: "1px solid #979797" }}
-        >
-          <Link href={startpage}>
-            <A color="black" py={1} sx={{ fontWeight: "bold" }}>
-              🚀 Startseite
-            </A>
-          </Link>
-          <Heading my={0} as="h1" fontSize={[4, 5, 6, 6]} textAlign="center">
-            {heading}
-          </Heading>
-          <Link href="/user/logout">
-            <A color="black" py={1} sx={{ fontWeight: "bold" }}>
-              Abmelden 👋
-            </A>
-          </Link>
-        </Flex>
-        {children}
-      </Page>
-    );
+    return <Page heading={heading}>{children}</Page>;
   } else {
     return (
-      <Page heading={loading ? heading : heading}>
+      <Page heading={heading}>
         <CheckLogin setLoading={setLoading} />
         {!loading && (
           <>
@@ -107,6 +84,34 @@ export function LoggedInPage({ role, children, heading }: LoggedInPageProps) {
     );
   }
 }
+
+export const LoggedInHeader: React.FC<{
+  heading?: string;
+  startpage: string;
+}> = (props) => (
+  <Flex
+    mt={40}
+    justifyContent="space-between"
+    alignItems="flex-end"
+    pb={1}
+    mb={2}
+    sx={{ borderBottom: "1px solid #979797" }}
+  >
+    <Link href={props.startpage}>
+      <A color="black" py={1} sx={{ fontWeight: "bold" }}>
+        🚀 Startseite
+      </A>
+    </Link>
+    <Heading my={0} as="h1" fontSize={[4, 5, 6, 6]} textAlign="center">
+      {props.heading}
+    </Heading>
+    <Link href="/user/logout">
+      <A color="black" py={1} sx={{ fontWeight: "bold" }}>
+        Abmelden 👋
+      </A>
+    </Link>
+  </Flex>
+);
 
 export const PageHeading: React.FC<{}> = (props) => (
   <Heading
