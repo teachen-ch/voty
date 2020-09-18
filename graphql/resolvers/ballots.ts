@@ -18,8 +18,10 @@ export async function vote(_root: any, args: any, ctx: NexusContext) {
   const vote = args.vote;
   console.log("ID: ", id, vote);
   const ballot = await ctx.db.ballot.findOne({ where: { id } });
-
-  const user = ctx.user;
+  const user = await ctx.db.user.findOne({
+    where: { id: ctx.user?.id },
+    include: { school: true, team: true },
+  });
   const db = ctx.db;
   console.log("Ball", ballot);
   if (!ballot) throw new Error("ERR_BALLOT_NOT_FOUND");
@@ -45,6 +47,9 @@ export async function vote(_root: any, args: any, ctx: NexusContext) {
       ballot: { connect: { id: ballot.id } },
       vote,
       verify,
+      year: user.year || user.team?.year,
+      canton: user.canton || user.school?.canton,
+      schooltype: user.school?.type,
     },
     include: { ballot: true },
   });
