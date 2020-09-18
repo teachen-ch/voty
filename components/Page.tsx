@@ -99,7 +99,7 @@ export const LoggedInHeader: React.FC<{
   >
     <Link href={props.startpage}>
       <A color="black" py={1} sx={{ fontWeight: "bold" }}>
-        🚀 Startseite
+        Startseite
       </A>
     </Link>
     <Heading my={0} as="h1" fontSize={[4, 5, 6, 6]} textAlign="center">
@@ -107,7 +107,7 @@ export const LoggedInHeader: React.FC<{
     </Heading>
     <Link href="/user/logout">
       <A color="black" py={1} sx={{ fontWeight: "bold" }}>
-        Abmelden 👋
+        Abmelden
       </A>
     </Link>
   </Flex>

@@ -91,7 +91,7 @@ export const Ballots: React.FC<BallotsProps> = ({ where, onClick }) => {
             sx={{ fontWeight: "bold" }}
             onClick={() => onClick(ballot)}
           >
-            👉 {ballot.title}
+            {ballot.title}
           </A>
           <Text fontSize={2}>{ballot.description}</Text>
           <Flex mt={2} mb={4} justifyContent="space-between">
@@ -127,6 +127,8 @@ export const getBallotStatus = (ballot: Ballot) => {
 };
 
 export const getBallotLink = (ballot: Ballot) => {
+  return "Zur Abstimmung";
+  /*
   const status = getBallotStatus(ballot);
   switch (status) {
     case BallotStatus.Started:
@@ -135,5 +137,5 @@ export const getBallotLink = (ballot: Ballot) => {
       return "Nicht gestartet";
     case BallotStatus.Ended:
       return "Beendet";
-  }
+  }*/
 };
