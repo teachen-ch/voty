@@ -1,6 +1,5 @@
 describe("Test Signup Page", () => {
-  /*
-  beforeEach(() => {
+  before(() => {
     cy.task("prismaLoader", "testdb.yml");
   });
 
@@ -24,6 +23,8 @@ describe("Test Signup Page", () => {
     cy.contains("Bitte gültige Email-Adresse angeben");
   });
 
+  // TODO: This test crashes the server on production, not sure why
+  /*
   it("Creates a new (inactive) user!", () => {
     cy.visit("/user/signup");
     cy.findByLabelText("Vorname:").type("Test");
@@ -39,11 +40,11 @@ describe("Test Signup Page", () => {
     cy.findByLabelText("Passwort:").type("Password2007");
     cy.get("button").contains("Anmelden").click();
     cy.contains("Email bestätigen");
-  });
+  });*/
 
   it("TODO: Activates user with verification url", () => {
     cy.visit("/user/signup");
     // TODO: find a way to get verification token...
     // cy.request("/api/graphql", ``````)
-  });*/
+  });
 });
