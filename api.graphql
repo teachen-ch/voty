@@ -1232,6 +1232,7 @@ input SchoolCreateInput {
   members: UserCreateManyWithoutSchoolInput
   name: String!
   teams: TeamCreateManyWithoutSchoolInput
+  type: String
   zip: String
 }
 
@@ -1263,6 +1264,7 @@ input SchoolCreateWithoutBallotsInput {
   members: UserCreateManyWithoutSchoolInput
   name: String!
   teams: TeamCreateManyWithoutSchoolInput
+  type: String
   zip: String
 }
 
@@ -1274,6 +1276,7 @@ input SchoolCreateWithoutDomainInput {
   members: UserCreateManyWithoutSchoolInput
   name: String!
   teams: TeamCreateManyWithoutSchoolInput
+  type: String
   zip: String
 }
 
@@ -1285,6 +1288,7 @@ input SchoolCreateWithoutMembersInput {
   domain: DomainCreateOneWithoutSchoolsInput
   name: String!
   teams: TeamCreateManyWithoutSchoolInput
+  type: String
   zip: String
 }
 
@@ -1296,6 +1300,7 @@ input SchoolCreateWithoutTeamsInput {
   domain: DomainCreateOneWithoutSchoolsInput
   members: UserCreateManyWithoutSchoolInput
   name: String!
+  type: String
   zip: String
 }
 
@@ -1312,6 +1317,7 @@ input SchoolOrderByInput {
   domainId: SortOrder
   id: SortOrder
   name: SortOrder
+  type: SortOrder
   zip: SortOrder
 }
 
@@ -1325,6 +1331,7 @@ input SchoolScalarWhereInput {
   name: StringFilter
   NOT: [SchoolScalarWhereInput!]
   OR: [SchoolScalarWhereInput!]
+  type: StringFilter
   zip: StringFilter
 }
 
@@ -1333,6 +1340,7 @@ input SchoolUpdateManyDataInput {
   canton: StringFieldUpdateOperationsInput
   city: StringFieldUpdateOperationsInput
   name: StringFieldUpdateOperationsInput
+  type: StringFieldUpdateOperationsInput
   zip: StringFieldUpdateOperationsInput
 }
 
@@ -1386,6 +1394,7 @@ input SchoolUpdateWithoutBallotsDataInput {
   members: UserUpdateManyWithoutSchoolInput
   name: StringFieldUpdateOperationsInput
   teams: TeamUpdateManyWithoutSchoolInput
+  type: StringFieldUpdateOperationsInput
   zip: StringFieldUpdateOperationsInput
 }
 
@@ -1397,6 +1406,7 @@ input SchoolUpdateWithoutDomainDataInput {
   members: UserUpdateManyWithoutSchoolInput
   name: StringFieldUpdateOperationsInput
   teams: TeamUpdateManyWithoutSchoolInput
+  type: StringFieldUpdateOperationsInput
   zip: StringFieldUpdateOperationsInput
 }
 
@@ -1408,6 +1418,7 @@ input SchoolUpdateWithoutMembersDataInput {
   domain: DomainUpdateOneWithoutSchoolsInput
   name: StringFieldUpdateOperationsInput
   teams: TeamUpdateManyWithoutSchoolInput
+  type: StringFieldUpdateOperationsInput
   zip: StringFieldUpdateOperationsInput
 }
 
@@ -1419,6 +1430,7 @@ input SchoolUpdateWithoutTeamsDataInput {
   domain: DomainUpdateOneWithoutSchoolsInput
   members: UserUpdateManyWithoutSchoolInput
   name: StringFieldUpdateOperationsInput
+  type: StringFieldUpdateOperationsInput
   zip: StringFieldUpdateOperationsInput
 }
 
@@ -1462,6 +1474,7 @@ input SchoolWhereInput {
   NOT: [SchoolWhereInput!]
   OR: [SchoolWhereInput!]
   teams: TeamListRelationFilter
+  type: StringFilter
   zip: StringFilter
 }
 
@@ -2244,6 +2257,7 @@ type User {
 input UserCreateInput {
   attachments: AttachmentCreateManyWithoutUserInput
   ballots: BallotCreateManyWithoutCreatorInput
+  canton: String
   createdAt: DateTime
   email: String
   emailVerified: DateTime
@@ -2307,6 +2321,7 @@ input UserCreateOneWithoutVotedInput {
 
 input UserCreateWithoutAttachmentsInput {
   ballots: BallotCreateManyWithoutCreatorInput
+  canton: String
   createdAt: DateTime
   email: String
   emailVerified: DateTime
@@ -2330,6 +2345,7 @@ input UserCreateWithoutAttachmentsInput {
 
 input UserCreateWithoutBallotsInput {
   attachments: AttachmentCreateManyWithoutUserInput
+  canton: String
   createdAt: DateTime
   email: String
   emailVerified: DateTime
@@ -2354,6 +2370,7 @@ input UserCreateWithoutBallotsInput {
 input UserCreateWithoutReactionsInput {
   attachments: AttachmentCreateManyWithoutUserInput
   ballots: BallotCreateManyWithoutCreatorInput
+  canton: String
   createdAt: DateTime
   email: String
   emailVerified: DateTime
@@ -2377,6 +2394,7 @@ input UserCreateWithoutReactionsInput {
 input UserCreateWithoutSchoolInput {
   attachments: AttachmentCreateManyWithoutUserInput
   ballots: BallotCreateManyWithoutCreatorInput
+  canton: String
   createdAt: DateTime
   email: String
   emailVerified: DateTime
@@ -2400,6 +2418,7 @@ input UserCreateWithoutSchoolInput {
 input UserCreateWithoutTeachesInput {
   attachments: AttachmentCreateManyWithoutUserInput
   ballots: BallotCreateManyWithoutCreatorInput
+  canton: String
   createdAt: DateTime
   email: String
   emailVerified: DateTime
@@ -2423,6 +2442,7 @@ input UserCreateWithoutTeachesInput {
 input UserCreateWithoutTeamInput {
   attachments: AttachmentCreateManyWithoutUserInput
   ballots: BallotCreateManyWithoutCreatorInput
+  canton: String
   createdAt: DateTime
   email: String
   emailVerified: DateTime
@@ -2446,6 +2466,7 @@ input UserCreateWithoutTeamInput {
 input UserCreateWithoutThreadsInput {
   attachments: AttachmentCreateManyWithoutUserInput
   ballots: BallotCreateManyWithoutCreatorInput
+  canton: String
   createdAt: DateTime
   email: String
   emailVerified: DateTime
@@ -2469,6 +2490,7 @@ input UserCreateWithoutThreadsInput {
 input UserCreateWithoutVotedInput {
   attachments: AttachmentCreateManyWithoutUserInput
   ballots: BallotCreateManyWithoutCreatorInput
+  canton: String
   createdAt: DateTime
   email: String
   emailVerified: DateTime
@@ -2496,6 +2518,7 @@ input UserListRelationFilter {
 }
 
 input UserOrderByInput {
+  canton: SortOrder
   createdAt: SortOrder
   email: SortOrder
   emailVerified: SortOrder
@@ -2515,6 +2538,7 @@ input UserOrderByInput {
 
 input UserScalarWhereInput {
   AND: [UserScalarWhereInput!]
+  canton: StringNullableFilter
   createdAt: DateTimeFilter
   email: StringNullableFilter
   emailVerified: DateTimeNullableFilter
@@ -2537,6 +2561,7 @@ input UserScalarWhereInput {
 input UserUpdateInput {
   attachments: AttachmentUpdateManyWithoutUserInput
   ballots: BallotUpdateManyWithoutCreatorInput
+  canton: NullableStringFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   email: NullableStringFieldUpdateOperationsInput
   emailVerified: NullableDateTimeFieldUpdateOperationsInput
@@ -2559,6 +2584,7 @@ input UserUpdateInput {
 }
 
 input UserUpdateManyDataInput {
+  canton: NullableStringFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   email: NullableStringFieldUpdateOperationsInput
   emailVerified: NullableDateTimeFieldUpdateOperationsInput
@@ -2648,6 +2674,7 @@ input UserUpdateOneWithoutBallotsInput {
 
 input UserUpdateWithoutAttachmentsDataInput {
   ballots: BallotUpdateManyWithoutCreatorInput
+  canton: NullableStringFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   email: NullableStringFieldUpdateOperationsInput
   emailVerified: NullableDateTimeFieldUpdateOperationsInput
@@ -2671,6 +2698,7 @@ input UserUpdateWithoutAttachmentsDataInput {
 
 input UserUpdateWithoutBallotsDataInput {
   attachments: AttachmentUpdateManyWithoutUserInput
+  canton: NullableStringFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   email: NullableStringFieldUpdateOperationsInput
   emailVerified: NullableDateTimeFieldUpdateOperationsInput
@@ -2695,6 +2723,7 @@ input UserUpdateWithoutBallotsDataInput {
 input UserUpdateWithoutReactionsDataInput {
   attachments: AttachmentUpdateManyWithoutUserInput
   ballots: BallotUpdateManyWithoutCreatorInput
+  canton: NullableStringFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   email: NullableStringFieldUpdateOperationsInput
   emailVerified: NullableDateTimeFieldUpdateOperationsInput
@@ -2718,6 +2747,7 @@ input UserUpdateWithoutReactionsDataInput {
 input UserUpdateWithoutSchoolDataInput {
   attachments: AttachmentUpdateManyWithoutUserInput
   ballots: BallotUpdateManyWithoutCreatorInput
+  canton: NullableStringFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   email: NullableStringFieldUpdateOperationsInput
   emailVerified: NullableDateTimeFieldUpdateOperationsInput
@@ -2741,6 +2771,7 @@ input UserUpdateWithoutSchoolDataInput {
 input UserUpdateWithoutTeachesDataInput {
   attachments: AttachmentUpdateManyWithoutUserInput
   ballots: BallotUpdateManyWithoutCreatorInput
+  canton: NullableStringFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   email: NullableStringFieldUpdateOperationsInput
   emailVerified: NullableDateTimeFieldUpdateOperationsInput
@@ -2764,6 +2795,7 @@ input UserUpdateWithoutTeachesDataInput {
 input UserUpdateWithoutTeamDataInput {
   attachments: AttachmentUpdateManyWithoutUserInput
   ballots: BallotUpdateManyWithoutCreatorInput
+  canton: NullableStringFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   email: NullableStringFieldUpdateOperationsInput
   emailVerified: NullableDateTimeFieldUpdateOperationsInput
@@ -2787,6 +2819,7 @@ input UserUpdateWithoutTeamDataInput {
 input UserUpdateWithoutThreadsDataInput {
   attachments: AttachmentUpdateManyWithoutUserInput
   ballots: BallotUpdateManyWithoutCreatorInput
+  canton: NullableStringFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   email: NullableStringFieldUpdateOperationsInput
   emailVerified: NullableDateTimeFieldUpdateOperationsInput
@@ -2810,6 +2843,7 @@ input UserUpdateWithoutThreadsDataInput {
 input UserUpdateWithoutVotedDataInput {
   attachments: AttachmentUpdateManyWithoutUserInput
   ballots: BallotUpdateManyWithoutCreatorInput
+  canton: NullableStringFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   email: NullableStringFieldUpdateOperationsInput
   emailVerified: NullableDateTimeFieldUpdateOperationsInput
@@ -2886,6 +2920,7 @@ input UserWhereInput {
   AND: [UserWhereInput!]
   attachments: AttachmentListRelationFilter
   ballots: BallotListRelationFilter
+  canton: StringNullableFilter
   createdAt: DateTimeFilter
   email: StringNullableFilter
   emailVerified: DateTimeNullableFilter

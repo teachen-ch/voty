@@ -1410,6 +1410,7 @@ export type SchoolCreateInput = {
   members?: Maybe<UserCreateManyWithoutSchoolInput>;
   name: Scalars['String'];
   teams?: Maybe<TeamCreateManyWithoutSchoolInput>;
+  type?: Maybe<Scalars['String']>;
   zip?: Maybe<Scalars['String']>;
 };
 
@@ -1441,6 +1442,7 @@ export type SchoolCreateWithoutBallotsInput = {
   members?: Maybe<UserCreateManyWithoutSchoolInput>;
   name: Scalars['String'];
   teams?: Maybe<TeamCreateManyWithoutSchoolInput>;
+  type?: Maybe<Scalars['String']>;
   zip?: Maybe<Scalars['String']>;
 };
 
@@ -1452,6 +1454,7 @@ export type SchoolCreateWithoutDomainInput = {
   members?: Maybe<UserCreateManyWithoutSchoolInput>;
   name: Scalars['String'];
   teams?: Maybe<TeamCreateManyWithoutSchoolInput>;
+  type?: Maybe<Scalars['String']>;
   zip?: Maybe<Scalars['String']>;
 };
 
@@ -1463,6 +1466,7 @@ export type SchoolCreateWithoutMembersInput = {
   domain?: Maybe<DomainCreateOneWithoutSchoolsInput>;
   name: Scalars['String'];
   teams?: Maybe<TeamCreateManyWithoutSchoolInput>;
+  type?: Maybe<Scalars['String']>;
   zip?: Maybe<Scalars['String']>;
 };
 
@@ -1474,6 +1478,7 @@ export type SchoolCreateWithoutTeamsInput = {
   domain?: Maybe<DomainCreateOneWithoutSchoolsInput>;
   members?: Maybe<UserCreateManyWithoutSchoolInput>;
   name: Scalars['String'];
+  type?: Maybe<Scalars['String']>;
   zip?: Maybe<Scalars['String']>;
 };
 
@@ -1490,6 +1495,7 @@ export type SchoolOrderByInput = {
   domainId?: Maybe<SortOrder>;
   id?: Maybe<SortOrder>;
   name?: Maybe<SortOrder>;
+  type?: Maybe<SortOrder>;
   zip?: Maybe<SortOrder>;
 };
 
@@ -1503,6 +1509,7 @@ export type SchoolScalarWhereInput = {
   name?: Maybe<StringFilter>;
   NOT?: Maybe<Array<SchoolScalarWhereInput>>;
   OR?: Maybe<Array<SchoolScalarWhereInput>>;
+  type?: Maybe<StringFilter>;
   zip?: Maybe<StringFilter>;
 };
 
@@ -1511,6 +1518,7 @@ export type SchoolUpdateManyDataInput = {
   canton?: Maybe<StringFieldUpdateOperationsInput>;
   city?: Maybe<StringFieldUpdateOperationsInput>;
   name?: Maybe<StringFieldUpdateOperationsInput>;
+  type?: Maybe<StringFieldUpdateOperationsInput>;
   zip?: Maybe<StringFieldUpdateOperationsInput>;
 };
 
@@ -1564,6 +1572,7 @@ export type SchoolUpdateWithoutBallotsDataInput = {
   members?: Maybe<UserUpdateManyWithoutSchoolInput>;
   name?: Maybe<StringFieldUpdateOperationsInput>;
   teams?: Maybe<TeamUpdateManyWithoutSchoolInput>;
+  type?: Maybe<StringFieldUpdateOperationsInput>;
   zip?: Maybe<StringFieldUpdateOperationsInput>;
 };
 
@@ -1575,6 +1584,7 @@ export type SchoolUpdateWithoutDomainDataInput = {
   members?: Maybe<UserUpdateManyWithoutSchoolInput>;
   name?: Maybe<StringFieldUpdateOperationsInput>;
   teams?: Maybe<TeamUpdateManyWithoutSchoolInput>;
+  type?: Maybe<StringFieldUpdateOperationsInput>;
   zip?: Maybe<StringFieldUpdateOperationsInput>;
 };
 
@@ -1586,6 +1596,7 @@ export type SchoolUpdateWithoutMembersDataInput = {
   domain?: Maybe<DomainUpdateOneWithoutSchoolsInput>;
   name?: Maybe<StringFieldUpdateOperationsInput>;
   teams?: Maybe<TeamUpdateManyWithoutSchoolInput>;
+  type?: Maybe<StringFieldUpdateOperationsInput>;
   zip?: Maybe<StringFieldUpdateOperationsInput>;
 };
 
@@ -1597,6 +1608,7 @@ export type SchoolUpdateWithoutTeamsDataInput = {
   domain?: Maybe<DomainUpdateOneWithoutSchoolsInput>;
   members?: Maybe<UserUpdateManyWithoutSchoolInput>;
   name?: Maybe<StringFieldUpdateOperationsInput>;
+  type?: Maybe<StringFieldUpdateOperationsInput>;
   zip?: Maybe<StringFieldUpdateOperationsInput>;
 };
 
@@ -1640,6 +1652,7 @@ export type SchoolWhereInput = {
   NOT?: Maybe<Array<SchoolWhereInput>>;
   OR?: Maybe<Array<SchoolWhereInput>>;
   teams?: Maybe<TeamListRelationFilter>;
+  type?: Maybe<StringFilter>;
   zip?: Maybe<StringFilter>;
 };
 
@@ -2505,6 +2518,7 @@ export type UserThreadsArgs = {
 export type UserCreateInput = {
   attachments?: Maybe<AttachmentCreateManyWithoutUserInput>;
   ballots?: Maybe<BallotCreateManyWithoutCreatorInput>;
+  canton?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['DateTime']>;
   email?: Maybe<Scalars['String']>;
   emailVerified?: Maybe<Scalars['DateTime']>;
@@ -2568,6 +2582,7 @@ export type UserCreateOneWithoutVotedInput = {
 
 export type UserCreateWithoutAttachmentsInput = {
   ballots?: Maybe<BallotCreateManyWithoutCreatorInput>;
+  canton?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['DateTime']>;
   email?: Maybe<Scalars['String']>;
   emailVerified?: Maybe<Scalars['DateTime']>;
@@ -2591,6 +2606,7 @@ export type UserCreateWithoutAttachmentsInput = {
 
 export type UserCreateWithoutBallotsInput = {
   attachments?: Maybe<AttachmentCreateManyWithoutUserInput>;
+  canton?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['DateTime']>;
   email?: Maybe<Scalars['String']>;
   emailVerified?: Maybe<Scalars['DateTime']>;
@@ -2615,6 +2631,7 @@ export type UserCreateWithoutBallotsInput = {
 export type UserCreateWithoutReactionsInput = {
   attachments?: Maybe<AttachmentCreateManyWithoutUserInput>;
   ballots?: Maybe<BallotCreateManyWithoutCreatorInput>;
+  canton?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['DateTime']>;
   email?: Maybe<Scalars['String']>;
   emailVerified?: Maybe<Scalars['DateTime']>;
@@ -2638,6 +2655,7 @@ export type UserCreateWithoutReactionsInput = {
 export type UserCreateWithoutSchoolInput = {
   attachments?: Maybe<AttachmentCreateManyWithoutUserInput>;
   ballots?: Maybe<BallotCreateManyWithoutCreatorInput>;
+  canton?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['DateTime']>;
   email?: Maybe<Scalars['String']>;
   emailVerified?: Maybe<Scalars['DateTime']>;
@@ -2661,6 +2679,7 @@ export type UserCreateWithoutSchoolInput = {
 export type UserCreateWithoutTeachesInput = {
   attachments?: Maybe<AttachmentCreateManyWithoutUserInput>;
   ballots?: Maybe<BallotCreateManyWithoutCreatorInput>;
+  canton?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['DateTime']>;
   email?: Maybe<Scalars['String']>;
   emailVerified?: Maybe<Scalars['DateTime']>;
@@ -2684,6 +2703,7 @@ export type UserCreateWithoutTeachesInput = {
 export type UserCreateWithoutTeamInput = {
   attachments?: Maybe<AttachmentCreateManyWithoutUserInput>;
   ballots?: Maybe<BallotCreateManyWithoutCreatorInput>;
+  canton?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['DateTime']>;
   email?: Maybe<Scalars['String']>;
   emailVerified?: Maybe<Scalars['DateTime']>;
@@ -2707,6 +2727,7 @@ export type UserCreateWithoutTeamInput = {
 export type UserCreateWithoutThreadsInput = {
   attachments?: Maybe<AttachmentCreateManyWithoutUserInput>;
   ballots?: Maybe<BallotCreateManyWithoutCreatorInput>;
+  canton?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['DateTime']>;
   email?: Maybe<Scalars['String']>;
   emailVerified?: Maybe<Scalars['DateTime']>;
@@ -2730,6 +2751,7 @@ export type UserCreateWithoutThreadsInput = {
 export type UserCreateWithoutVotedInput = {
   attachments?: Maybe<AttachmentCreateManyWithoutUserInput>;
   ballots?: Maybe<BallotCreateManyWithoutCreatorInput>;
+  canton?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['DateTime']>;
   email?: Maybe<Scalars['String']>;
   emailVerified?: Maybe<Scalars['DateTime']>;
@@ -2757,6 +2779,7 @@ export type UserListRelationFilter = {
 };
 
 export type UserOrderByInput = {
+  canton?: Maybe<SortOrder>;
   createdAt?: Maybe<SortOrder>;
   email?: Maybe<SortOrder>;
   emailVerified?: Maybe<SortOrder>;
@@ -2776,6 +2799,7 @@ export type UserOrderByInput = {
 
 export type UserScalarWhereInput = {
   AND?: Maybe<Array<UserScalarWhereInput>>;
+  canton?: Maybe<StringNullableFilter>;
   createdAt?: Maybe<DateTimeFilter>;
   email?: Maybe<StringNullableFilter>;
   emailVerified?: Maybe<DateTimeNullableFilter>;
@@ -2798,6 +2822,7 @@ export type UserScalarWhereInput = {
 export type UserUpdateInput = {
   attachments?: Maybe<AttachmentUpdateManyWithoutUserInput>;
   ballots?: Maybe<BallotUpdateManyWithoutCreatorInput>;
+  canton?: Maybe<NullableStringFieldUpdateOperationsInput>;
   createdAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
   email?: Maybe<NullableStringFieldUpdateOperationsInput>;
   emailVerified?: Maybe<NullableDateTimeFieldUpdateOperationsInput>;
@@ -2820,6 +2845,7 @@ export type UserUpdateInput = {
 };
 
 export type UserUpdateManyDataInput = {
+  canton?: Maybe<NullableStringFieldUpdateOperationsInput>;
   createdAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
   email?: Maybe<NullableStringFieldUpdateOperationsInput>;
   emailVerified?: Maybe<NullableDateTimeFieldUpdateOperationsInput>;
@@ -2909,6 +2935,7 @@ export type UserUpdateOneWithoutBallotsInput = {
 
 export type UserUpdateWithoutAttachmentsDataInput = {
   ballots?: Maybe<BallotUpdateManyWithoutCreatorInput>;
+  canton?: Maybe<NullableStringFieldUpdateOperationsInput>;
   createdAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
   email?: Maybe<NullableStringFieldUpdateOperationsInput>;
   emailVerified?: Maybe<NullableDateTimeFieldUpdateOperationsInput>;
@@ -2932,6 +2959,7 @@ export type UserUpdateWithoutAttachmentsDataInput = {
 
 export type UserUpdateWithoutBallotsDataInput = {
   attachments?: Maybe<AttachmentUpdateManyWithoutUserInput>;
+  canton?: Maybe<NullableStringFieldUpdateOperationsInput>;
   createdAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
   email?: Maybe<NullableStringFieldUpdateOperationsInput>;
   emailVerified?: Maybe<NullableDateTimeFieldUpdateOperationsInput>;
@@ -2956,6 +2984,7 @@ export type UserUpdateWithoutBallotsDataInput = {
 export type UserUpdateWithoutReactionsDataInput = {
   attachments?: Maybe<AttachmentUpdateManyWithoutUserInput>;
   ballots?: Maybe<BallotUpdateManyWithoutCreatorInput>;
+  canton?: Maybe<NullableStringFieldUpdateOperationsInput>;
   createdAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
   email?: Maybe<NullableStringFieldUpdateOperationsInput>;
   emailVerified?: Maybe<NullableDateTimeFieldUpdateOperationsInput>;
@@ -2979,6 +3008,7 @@ export type UserUpdateWithoutReactionsDataInput = {
 export type UserUpdateWithoutSchoolDataInput = {
   attachments?: Maybe<AttachmentUpdateManyWithoutUserInput>;
   ballots?: Maybe<BallotUpdateManyWithoutCreatorInput>;
+  canton?: Maybe<NullableStringFieldUpdateOperationsInput>;
   createdAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
   email?: Maybe<NullableStringFieldUpdateOperationsInput>;
   emailVerified?: Maybe<NullableDateTimeFieldUpdateOperationsInput>;
@@ -3002,6 +3032,7 @@ export type UserUpdateWithoutSchoolDataInput = {
 export type UserUpdateWithoutTeachesDataInput = {
   attachments?: Maybe<AttachmentUpdateManyWithoutUserInput>;
   ballots?: Maybe<BallotUpdateManyWithoutCreatorInput>;
+  canton?: Maybe<NullableStringFieldUpdateOperationsInput>;
   createdAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
   email?: Maybe<NullableStringFieldUpdateOperationsInput>;
   emailVerified?: Maybe<NullableDateTimeFieldUpdateOperationsInput>;
@@ -3025,6 +3056,7 @@ export type UserUpdateWithoutTeachesDataInput = {
 export type UserUpdateWithoutTeamDataInput = {
   attachments?: Maybe<AttachmentUpdateManyWithoutUserInput>;
   ballots?: Maybe<BallotUpdateManyWithoutCreatorInput>;
+  canton?: Maybe<NullableStringFieldUpdateOperationsInput>;
   createdAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
   email?: Maybe<NullableStringFieldUpdateOperationsInput>;
   emailVerified?: Maybe<NullableDateTimeFieldUpdateOperationsInput>;
@@ -3048,6 +3080,7 @@ export type UserUpdateWithoutTeamDataInput = {
 export type UserUpdateWithoutThreadsDataInput = {
   attachments?: Maybe<AttachmentUpdateManyWithoutUserInput>;
   ballots?: Maybe<BallotUpdateManyWithoutCreatorInput>;
+  canton?: Maybe<NullableStringFieldUpdateOperationsInput>;
   createdAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
   email?: Maybe<NullableStringFieldUpdateOperationsInput>;
   emailVerified?: Maybe<NullableDateTimeFieldUpdateOperationsInput>;
@@ -3071,6 +3104,7 @@ export type UserUpdateWithoutThreadsDataInput = {
 export type UserUpdateWithoutVotedDataInput = {
   attachments?: Maybe<AttachmentUpdateManyWithoutUserInput>;
   ballots?: Maybe<BallotUpdateManyWithoutCreatorInput>;
+  canton?: Maybe<NullableStringFieldUpdateOperationsInput>;
   createdAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
   email?: Maybe<NullableStringFieldUpdateOperationsInput>;
   emailVerified?: Maybe<NullableDateTimeFieldUpdateOperationsInput>;
@@ -3147,6 +3181,7 @@ export type UserWhereInput = {
   AND?: Maybe<Array<UserWhereInput>>;
   attachments?: Maybe<AttachmentListRelationFilter>;
   ballots?: Maybe<BallotListRelationFilter>;
+  canton?: Maybe<StringNullableFilter>;
   createdAt?: Maybe<DateTimeFilter>;
   email?: Maybe<StringNullableFilter>;
   emailVerified?: Maybe<DateTimeNullableFilter>;

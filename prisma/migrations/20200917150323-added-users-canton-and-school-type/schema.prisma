@@ -1,6 +1,6 @@
 datasource db {
   provider = "postgres"
-  url      = env("DATABASE_URL")
+  url = "***"
 }
 
 generator client {
@@ -218,12 +218,9 @@ model Voted {
 
 // TODO: rename to singular.. but it's dangerous with automigration
 model Votes {
-  id         Int     @default(autoincrement()) @id
-  vote       Int // 0 = abstention, 1-x = chosen option
-  verify     String? // encrypted verification token
-  year       Int?
-  canton     String?
-  schooltype String?
+  id     Int     @default(autoincrement()) @id
+  vote   Int // 0 = abstention, 1-x = chosen option
+  verify String? // encrypted verification token
 
   ballot   Ballot @relation(fields: [ballotId], references: [id])
   ballotId Int    @map(name: "ballot_id")

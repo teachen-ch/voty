@@ -10,7 +10,7 @@
     "check": "nexus build && next build && yarn test",
     "cypress:open": "cypress open",
     "start": "next start",
-    "start:bg": "next start </dev/null &>/dev/null &",
+    "start:bg": "next start &",
     "test": "cypress run",
     "docker-rm": "docker rm -f $(docker ps -a -q)",
     "deploy_dev": "ansible-playbook -i ansible/dev ansible/site.yml --tags app",
