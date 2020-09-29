@@ -7,7 +7,7 @@ import Link from "next/link";
 
 export default function Demokratie() {
   return (
-    <Page heading="Jugendliche stimmen ab – Ein Experiment">
+    <Page heading="Jugendliche stimmen ab – ein Experiment">
       <Text mt={3}>
         <img
           src="/images/voty_module_2.svg"
@@ -16,15 +16,17 @@ export default function Demokratie() {
         />
         Wie motivieren wir Jugendliche für unsere Demokratie? Wir möchten
         gemeinsam mit engagierten Lehrpersonen ein Experiment starten und im
-        November Test-Abstimmungen für Schülerinnen und Schüler durchführen.
+        November Abstimmungen für Schülerinnen und Schüler durchführen. Wir sind
+        überzeugt: Interesse für Politik entsteht dann, wenn man diskutieren und
+        mitentscheiden kann. Eine solche Gelegenheit möchten wir erschaffen.
       </Text>
       <Text my={4}>
-        Wenn die Schweiz am 29. November über die
+        Wenn die Schweiz am 29. November über die{" "}
         <b>«Konzernverantwortungsinitiative»</b> und das{" "}
-        <b>«Stop Palmöl – Referendum</b>
-        abstimmt, sind das Themen, zu denen auch Jugendliche eine Meinung haben.
-        Wir möchten mit mindestens 50 Klassen in der Schweiz eine
-        <b>Test-Abstimmung</b> durchführen und dazu brauchen wir eure Hilfe:
+        <b>«Stop Palmöl – Referendum</b> abstimmt, sind das Themen, zu denen
+        auch Jugendliche eine Meinung haben. Wir möchten mit mindestens 50
+        Klassen in der Schweiz eine
+        <b>Abstimmung</b> durchführen und dazu brauchen wir Ihre Hilfe:
       </Text>
       <Flex my={4} alignItems="center" flexDirection="column">
         <Flex my={2}>
@@ -50,7 +52,7 @@ export default function Demokratie() {
             ✅
           </Text>
           <Text maxWidth="600px">
-            Ich führe die Test-Abstimmung mit meiner Klasse online durch und
+            Ich führe die Abstimmung mit meiner Klasse online durch und
             bespreche im Nachgang das Resultat mit der Klasse
           </Text>
         </Flex>
@@ -66,32 +68,33 @@ export default function Demokratie() {
             <em>
               Wir sind uns bewusst, das die Zeit bis Ende November in der
               Planung knapp ist. Aber wenn wir es gemeinsam schaffen, genügend
-              Klassen zu motivieren, dann hat das Ergebnis der Test-Abstimmung
-              auch eine statistische Signifikanz und repräsentiert die Meinung
-              der Jugend zu relevanten Themen.
+              Klassen zu motivieren, dann hat das Ergebnis der Abstimmung auch
+              eine statistische Signifikanz und repräsentiert die Meinung der
+              Jugend zu relevanten Themen. Herzlichen Dank für Ihre Mithilfe!
             </em>
           </Text>
         </Box>
       </Card>
 
-      <Box mt={3}>
-        <Text>
+      <Box mt={5} mb={100} maxWidth="600px" mx={"auto"}>
+        <Text fontSize={4} textAlign="center" sx={{ lineHeight: "1.5" }}>
           Kennen Sie interessierte Lehrpersonen, welche ebenfalls politische
           Bildung unterrichten (Sekundarstufe, Gymnasium, Berufsschulen). Dann
-          versuchen Sie unbedingt, sie für dieses Experiment zu gewinnen.
+          versuchen Sie doch, sie ebenfalls für dieses Experiment zu engagieren.
         </Text>
       </Box>
+
+      <Stats />
+
       <PageHeading>Fragen und Antworten</PageHeading>
       <Heading as="h3">Wer steht hinter https://votyapp.ch/?</Heading>
       <Text>
         voty ist ein Projekt des Vereins «Teachen!», welcher während des
         Corona-Lockdowns von engagierten Eltern, Lehrpersonen und
-        Informatiker|innen gegründet wurde. Das Projekt wird unterstützt vom
-        prototypefund.opendata.ch.
+        Informatiker|innen gegründet wurde. Das Projekt wird unterstützt durch
+        den prototypefund.opendata.ch.
       </Text>
-      <Heading as="h3">
-        Wie funktionieren die Online – Testabstimmungen?
-      </Heading>
+      <Heading as="h3">Wie funktioniert die Online – Abstimmung?</Heading>
       <Text>
         Auf unserer Website können Lehrpersonen mit ihren Klassen die Abstimmung
         auf Laptops, iPads oder Smartphones durchführen. Wir stellen sicher, das
@@ -119,14 +122,13 @@ export default function Demokratie() {
       </Text>
       <Heading as="h3">Wie stellt ihr statistische Signifikanz sicher?</Heading>
       <Text>
-        Wir sind in Kontakt mit{" "}
+        Wir möchten gemeinsam mit{" "}
         <a href="https://twitter.com/claudelongchamp" target="_blank">
           Claude Longchamps
         </a>{" "}
-        und werden sicherstellen, das unser Vorgehen wissenschaftlich kompetent
-        begleitet wird. Je diverser unsere Test-Klassen sind (Kantone,
-        Altersstufen, Schultypen), desto solider wird die Aussagekraft der
-        Resultate.
+        sicherstellen, das unser Vorgehen wissenschaftlich kompetent begleitet
+        wird. Je diverser unsere Test-Klassen sind (Kantone, Altersstufen,
+        Schultypen), desto solider wird die Aussagekraft der Resultate.
       </Text>
       <Heading as="h3">Macht auch die Romandie und das Tessin mit?</Heading>
       <Text>
@@ -141,8 +143,7 @@ export default function Demokratie() {
         Ich habe keine Frage, aber eine kritische Anmerkung!
       </Heading>
       <Text>
-        Wir sind auf Ihr Feedback angewiesen und freuen uns sehr über kritische
-        Fragen. Bitte nehmen sie mit uns{" "}
+        Wir sind auf Ihr Feedback angewiesen. Bitte nehmen sie mit uns{" "}
         <Link href="/kontakt">
           <a>Kontakt</a>
         </Link>{" "}
@@ -164,4 +165,99 @@ const Signup = () => (
       </Button>
     </Grid>
   </form>
+);
+
+const Stats = () => (
+  <Card>
+    <Heading mt={0}>Aktueller Stand</Heading>
+    <Grid columns="1fr 4fr">
+      <label>Anzahl Klassen:</label>
+      <ClassBar classes={7} total={50} />
+
+      <label>Diversität Kantone:</label>
+      <CantonsBar cantons="BS, BE, LU, ZH" diversity={23} />
+
+      <label>Verteilung Typus:</label>
+      <TypeBar
+        types={{ Berufsschulen: 0.2, "Sekundarstufe I": 0.5, Gymnasien: 0.3 }}
+      />
+    </Grid>
+  </Card>
+);
+
+const ClassBar = ({ classes, total }: { classes: number; total: number }) => (
+  <Flex height="30px" width="100%">
+    <Box
+      width={classes / total}
+      sx={{
+        borderTopLeftRadius: 20,
+        borderBottomLeftRadius: 20,
+        textAlign: "center",
+        lineHeight: 1.7,
+      }}
+      bg="primary"
+      color="white"
+    >
+      {classes}
+    </Box>
+    <Box
+      width={(total - classes) / total}
+      bg="white"
+      sx={{
+        borderTopRightRadius: 20,
+        borderBottomRightRadius: 20,
+        lineHeight: 1.7,
+      }}
+    >
+      &nbsp; mindestens {total} Klassen
+    </Box>
+  </Flex>
+);
+
+const CantonsBar = ({
+  cantons,
+  diversity,
+}: {
+  cantons: string;
+  diversity: number;
+}) => (
+  <Box
+    height="30px"
+    pl={3}
+    sx={{
+      borderRadius: 20,
+      lineHeight: 1.7,
+      backgroundImage: `linear-gradient(133deg, rgba(36,185,7,0.5) 0%, rgba(255,255,255,1) ${diversity}%)`,
+    }}
+  >
+    {cantons}
+  </Box>
+);
+
+const TypeBar = ({ types }: { types: any }) => (
+  <Box
+    height="30px"
+    pl={3}
+    bg="white"
+    sx={{
+      borderRadius: 20,
+    }}
+  >
+    <Flex>
+      {Object.keys(types).map((name, ix) => (
+        <Box
+          width={`${types[name] * 100}%`}
+          sx={{
+            textAlign: "center",
+            textOverflow: "ellipsis",
+            overflow: "hidden",
+            lineHeight: 1.7,
+            borderRight: ix < 2 ? "3px solid lightgray" : "",
+          }}
+        >
+          {name}
+        </Box>
+      ))}
+    </Flex>
+  </Box>
 );
