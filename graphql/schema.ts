@@ -3,7 +3,7 @@ import { prisma } from "nexus-plugin-prisma";
 import { permissions } from "./permissions";
 import { randomBytes } from "crypto";
 import resolvers from "./resolvers";
-import { intArg } from "nexus/components/schema";
+import { intArg, stringArg } from "nexus/components/schema";
 
 use(
   prisma({
@@ -169,6 +169,15 @@ schema.mutationType({
         vote: intArg({ required: true }),
       },
       resolve: resolvers.ballots.vote,
+    });
+
+    t.field("inviteStudents", {
+      type: "Team",
+      args: {
+        team: intArg({ required: true }),
+        emails: stringArg({ list: true, required: true }),
+      },
+      resolve: resolvers.teams.inviteStudents,
     });
   },
 });

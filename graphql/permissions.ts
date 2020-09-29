@@ -54,6 +54,7 @@ const teachesTeam = rule({ cache: "strict" })(
     const found = await ctx.db.user.findMany({
       where: { id: { equals: student }, team: { teacher: { id: teacher } } },
     });
+    console.log("FOUND? ", found.length, found, student, teacher);
     return found.length ? true : false;
   }
 );
@@ -107,6 +108,7 @@ export const permissions = shield({
       updateUser: isAdmin, // this is dangerous! role, verification, team, etc.
       setSchool: isUser,
       vote: isUser,
+      inviteStudents: isTeacher,
     },
     User: {
       id: isUser,

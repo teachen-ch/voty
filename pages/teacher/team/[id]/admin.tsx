@@ -10,6 +10,17 @@ import { Team } from "graphql/types";
 import { Navigation, Route } from "components/Navigation";
 import { useRouter } from "next/router";
 import _ from "lodash";
+import { gql, useMutation } from "@apollo/client";
+import { fragments } from "components/Teams";
+
+const INVITE_STUDENTS = gql`
+  mutation inviteStudents($team: Int!, $emails: [String!]!) {
+    inviteStudents(team: $team, emails: $emails) {
+      ...TeamUserFields
+    }
+  }
+  ${fragments.TeamUserFields}
+`;
 
 export default function TeamPage() {
   const user = useUser();
@@ -17,8 +28,17 @@ export default function TeamPage() {
   const id = parseInt(String(router.query.id));
   const team = useTeamTeacher(id, user);
   const [emails, setEmails] = useState<string[]>([]);
-  const [matches, setMatches] = useState<number>();
+  const [matches, setMatches] = useState<number | undefined>();
   const [showInviteLink, setShowInviteLink] = useState(false);
+
+  const [doInviteStudents] = useMutation(INVITE_STUDENTS, {
+    onCompleted({ team }) {
+      console.log(team);
+      setEmails([]);
+      setMatches(undefined);
+      setShowInviteLink(false);
+    },
+  });
 
   function checkEmails(evt: React.ChangeEvent<HTMLTextAreaElement>) {
     const str = evt.target.value.toLowerCase();
@@ -29,7 +49,7 @@ export default function TeamPage() {
   }
 
   async function inviteStudents() {
-    alert(emails);
+    doInviteStudents({ variables: { team: team.id, emails } });
   }
 
   if (!team) {
@@ -74,7 +94,7 @@ export default function TeamPage() {
               <small>
                 {matches} Email{matches == 1 ? "" : "s"} werden verschickt an:{" "}
                 {emails.map((email) => (
-                  <li>{email}</li>
+                  <li key={email}>{email}</li>
                 ))}
               </small>
             </>
@@ -85,7 +105,9 @@ export default function TeamPage() {
             <br />
             Alternativ können Sie Schüler|innen auch mit einem{" "}
             <Link>
-              <a onClick={() => setShowInviteLink(true)}>Einladungslink</a>
+              <button onClick={() => setShowInviteLink(true)}>
+                Einladungslink
+              </button>
             </Link>{" "}
             einladen
           </small>

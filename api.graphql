@@ -866,6 +866,7 @@ type Mutation {
   deleteOneSchool(where: SchoolWhereUniqueInput!): School
   deleteOneTeam(where: TeamWhereUniqueInput!): Team
   emailVerification(email: String!, purpose: String!): ResponseLogin
+  inviteStudents(emails: [String!]!, team: Int!): Team
   login(email: String, password: String): ResponseLogin
   setSchool(school: Int): User
   updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
@@ -3080,8 +3081,11 @@ input VotesCreateManyWithoutBallotInput {
 }
 
 input VotesCreateWithoutBallotInput {
+  canton: String
+  schooltype: String
   verify: String
   vote: Int!
+  year: Int
 }
 
 input VotesListRelationFilter {
@@ -3093,16 +3097,22 @@ input VotesListRelationFilter {
 input VotesScalarWhereInput {
   AND: [VotesScalarWhereInput!]
   ballotId: IntFilter
+  canton: StringNullableFilter
   id: IntFilter
   NOT: [VotesScalarWhereInput!]
   OR: [VotesScalarWhereInput!]
+  schooltype: StringNullableFilter
   verify: StringNullableFilter
   vote: IntFilter
+  year: IntNullableFilter
 }
 
 input VotesUpdateManyDataInput {
+  canton: NullableStringFieldUpdateOperationsInput
+  schooltype: NullableStringFieldUpdateOperationsInput
   verify: NullableStringFieldUpdateOperationsInput
   vote: IntFieldUpdateOperationsInput
+  year: NullableIntFieldUpdateOperationsInput
 }
 
 input VotesUpdateManyWithoutBallotInput {
@@ -3123,8 +3133,11 @@ input VotesUpdateManyWithWhereNestedInput {
 }
 
 input VotesUpdateWithoutBallotDataInput {
+  canton: NullableStringFieldUpdateOperationsInput
+  schooltype: NullableStringFieldUpdateOperationsInput
   verify: NullableStringFieldUpdateOperationsInput
   vote: IntFieldUpdateOperationsInput
+  year: NullableIntFieldUpdateOperationsInput
 }
 
 input VotesUpdateWithWhereUniqueWithoutBallotInput {
@@ -3142,11 +3155,14 @@ input VotesWhereInput {
   AND: [VotesWhereInput!]
   ballot: BallotWhereInput
   ballotId: IntFilter
+  canton: StringNullableFilter
   id: IntFilter
   NOT: [VotesWhereInput!]
   OR: [VotesWhereInput!]
+  schooltype: StringNullableFilter
   verify: StringNullableFilter
   vote: IntFilter
+  year: IntNullableFilter
 }
 
 input VotesWhereUniqueInput {

@@ -100,7 +100,11 @@ export async function acceptInvite(_root: any, args: any, ctx: NexusContext) {
   else return team;
 }
 
-async function connectUserTeam(user: User, team: Team, ctx: NexusContext) {
+export async function connectUserTeam(
+  user: User,
+  team: Team,
+  ctx: NexusContext
+) {
   if (user.teamId) throw new Error("ALREADY_IN_TEAM");
   return await ctx.db.user.update({
     where: { id: user.id },

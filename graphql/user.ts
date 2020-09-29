@@ -1,6 +1,7 @@
 import { schema } from "nexus";
 import { users } from "./resolvers";
 import { stringArg, intArg } from "nexus/components/schema";
+import { upperFirst } from "lodash";
 
 schema.objectType({
   name: "User",
@@ -16,7 +17,7 @@ schema.objectType({
     t.model.lastname();
     t.string("shortname", {
       resolve({ name, lastname }, args, ctx) {
-        return `${name} ${(lastname || "").substring(0, 1).toUpperCase()}.`;
+        return name + (lastname ? `${upperFirst(lastname)}.` : "");
       },
     });
     t.model.gender();
