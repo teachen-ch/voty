@@ -117,9 +117,6 @@ export default {
       td: {
         py: 2,
       },
-      "a:visited": {
-        color: "gray",
-      },
       h2: {
         variant: "text.heading",
         fontSize: [3, 4],
