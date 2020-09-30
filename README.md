@@ -2,7 +2,7 @@
 
 👉 https://votyapp.ch/
 
-💪 Would you like to contribute to to voty? Check out the [docs/installation.md](installation instructions)
+💪 Would you like to contribute to to voty? Check out the [installation instructions](/docs/installation.md)
 
 ## Let's bring democracy to schools!
 
