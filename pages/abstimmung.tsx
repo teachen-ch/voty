@@ -22,8 +22,8 @@ export default function Demokratie() {
       </Text>
       <Text my={4}>
         Wenn die Schweiz am 29. November über die{" "}
-        <b>«Konzernverantwortungsinitiative»</b> und das{" "}
-        <b>«Stop Palmöl – Referendum</b> abstimmt, sind das Themen, zu denen
+        <b>«Konzernverantwortungsinitiative»</b> und die{" "}
+        <b>«Kriegsgeschäfte Initiative»</b> abstimmt, sind das Themen, zu denen
         auch Jugendliche eine Meinung haben. Wir möchten mit mindestens 50
         Klassen in der Schweiz eine <b>Abstimmung</b> durchführen und dazu
         brauchen wir Ihre Hilfe:
