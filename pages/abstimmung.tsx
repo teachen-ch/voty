@@ -25,8 +25,8 @@ export default function Demokratie() {
         <b>«Konzernverantwortungsinitiative»</b> und das{" "}
         <b>«Stop Palmöl – Referendum</b> abstimmt, sind das Themen, zu denen
         auch Jugendliche eine Meinung haben. Wir möchten mit mindestens 50
-        Klassen in der Schweiz eine
-        <b>Abstimmung</b> durchführen und dazu brauchen wir Ihre Hilfe:
+        Klassen in der Schweiz eine <b>Abstimmung</b> durchführen und dazu
+        brauchen wir Ihre Hilfe:
       </Text>
       <Flex my={4} alignItems="center" flexDirection="column">
         <Flex my={2}>
