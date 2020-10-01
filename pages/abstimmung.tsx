@@ -155,9 +155,8 @@ export default function Demokratie() {
 
 const Signup = () => (
   <form action="https://newsletter.teachen.ch/subscribe" method="POST">
-    <input type="hidden" name="Funktion" value="Lehrer/-in" />
     <input type="hidden" name="subform" value="yes" />
-    <input type="hidden" name="list" value="tpTmOmECEZr7Zjk76307UvTA" />
+    <input type="hidden" name="list" value="OBApcqKWRIftOg4d892voU2A" />
     <Grid gap={3} pb={4} columns={[0, 0, "100px 3fr 1fr"]}>
       <Field id="email" label="Email" />
       <Button type="submit" name="submit" variant="primary">
