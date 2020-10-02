@@ -87,6 +87,10 @@ export async function viewPermission({ ballot, user, db }: PermissionArgs) {
 // everyone can view public/national/cantonal, but only students can vote
 export async function votingPermission({ ballot, user, db }: PermissionArgs) {
   const isStudent = user?.role === Role.Student;
+  const now = new Date();
+  if (ballot.start > now || ballot.end < now) {
+    return false;
+  }
   const voted = await getHasVoted({ ballot, user, db });
   if (voted) return false;
 
@@ -112,7 +116,10 @@ export async function votingPermission({ ballot, user, db }: PermissionArgs) {
 
 export async function getHasVoted({ ballot, user, db }: PermissionArgs) {
   const voted = await db.voted.findMany({
-    where: { user: { id: { equals: user?.id } } },
+    where: {
+      ballot: { id: { equals: ballot.id } },
+      user: { id: { equals: user?.id } },
+    },
   });
   return voted.length > 0 ? true : false;
 }

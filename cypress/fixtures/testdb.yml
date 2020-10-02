@@ -223,3 +223,24 @@ ballot:
 
       ### Weitere Informationen: 
       👉 Weitere Informationen findest Du auf [easyvote.ch](https://www.easyvote.ch/de/abstimmungen/27-9-20/jagdgesetz)
+
+  - title: Testinitiative
+    description: Diese Testabstimmung dauert seit ewig
+    start: !!timestamp "2000-01-01"
+    end: !!timestamp "2099-12-31"
+    scope: National
+    body: Testabstimmung
+
+  - title: Abgelaufene Initiative
+    description: Diese Testabstimmung dauert ist bereits beendet
+    start: !!timestamp "2000-01-01"
+    end: !!timestamp "2000-12-31"
+    scope: National
+    body: Beendete Testabstimmung
+
+  - title: Zukunftsinitiative
+    description: Diese Testabstimmung dauert ist bereits beendet
+    start: !!timestamp "2099-01-01"
+    end: !!timestamp "2099-12-31"
+    scope: National
+    body: Zukünftige Testabstimmung

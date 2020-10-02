@@ -2,7 +2,7 @@ import { Page, ErrorPage } from "components/Page";
 import { Text, Heading, Box, Card, Flex, Button } from "rebass";
 import { useRouter } from "next/router";
 import { useUser } from "state/user";
-import { useBallot } from "components/Ballots";
+import { useBallot, getBallotStatus } from "components/Ballots";
 import { formatFromTo } from "util/date";
 import { Ballot } from "graphql/types";
 import { useState } from "react";
@@ -83,14 +83,26 @@ const VotyNow: React.FC<{ ballot: Ballot }> = ({ ballot }) => {
     );
   }
 
-  function vote(vote: number) {
-    doVote({ variables: { ballot: ballot.id, vote } });
-  }
-
   if (ballot.hasVoted === true || success) {
     return (
       <BigButton color="gray" width="100%">
         Du hast erfolgreich abgestimmt ✅
+      </BigButton>
+    );
+  }
+
+  const now = new Date();
+  if (new Date(ballot.start) > now) {
+    return (
+      <BigButton color="gray" width="100%">
+        Abstimmung noch nicht gestartet
+      </BigButton>
+    );
+  }
+  if (new Date(ballot.end) < now) {
+    return (
+      <BigButton color="gray" width="100%">
+        Abstimmung ist beendet
       </BigButton>
     );
   }
@@ -101,6 +113,10 @@ const VotyNow: React.FC<{ ballot: Ballot }> = ({ ballot }) => {
         Du bist nicht für die Abstimmung berechtigt
       </BigButton>
     );
+  }
+
+  function vote(vote: number) {
+    doVote({ variables: { ballot: ballot.id, vote } });
   }
 
   return (
