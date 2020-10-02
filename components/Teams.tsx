@@ -9,41 +9,32 @@ import { Team, TeamWhereInput } from "@prisma/client";
 import { Page } from "./Page";
 import { Users } from "./Users";
 
-export const fragments = {
-  TeamUserFields: gql`
-    fragment TeamUserFields on Team {
+const TeamUserFields = gql`
+  fragment TeamUserFields on Team {
+    id
+    name
+    school {
       id
       name
-      school {
-        id
-        name
-        city
-      }
-      members {
-        id
-        name
-        shortname
-      }
+      city
     }
-  `,
-  TeamTeacherFields: gql`
-    fragment TeamTeacherFields on Team {
-      invite
+    members {
       id
       name
-      school {
-        id
-        name
-        city
-      }
-      members {
-        id
-        name
-        shortname
-      }
+      shortname
     }
-  `,
-};
+  }
+`;
+
+const TeamTeacherFields = gql`
+  fragment TeamTeacherFields on Team {
+    invite
+    ...TeamUserFields
+  }
+  ${TeamUserFields}
+`;
+
+export const fragments = { TeamUserFields, TeamTeacherFields };
 
 const GET_TEAMS = gql`
   query teams($where: TeamWhereInput) {
