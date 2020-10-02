@@ -30,17 +30,21 @@ export default function TeamPage() {
   const [emails, setEmails] = useState<string[]>([]);
   const [matches, setMatches] = useState<number | undefined>();
   const [showInviteLink, setShowInviteLink] = useState(false);
+  const [importEmails, setImportEmails] = useState("");
 
   const [doInviteStudents] = useMutation(INVITE_STUDENTS, {
-    onCompleted({ team }) {
-      console.log(team);
+    onCompleted({ inviteStudents }) {
+      const updatedTeam = inviteStudents;
+      console.log(updatedTeam);
       setEmails([]);
       setMatches(undefined);
       setShowInviteLink(false);
+      setImportEmails("");
     },
   });
 
   function checkEmails(evt: React.ChangeEvent<HTMLTextAreaElement>) {
+    setImportEmails(evt.target.value);
     const str = evt.target.value.toLowerCase();
     const re = /[^@\s<>,;]+@[^@\s]+\.[^@\s<>,;]+/g;
     const emails = _.uniq(str.match(re) || []);
@@ -64,21 +68,23 @@ export default function TeamPage() {
     <LoggedInPage heading="Klassenseite">
       <TeacherTeamNavigation team={team} />
       <Heading as="h2">Schüler|innen</Heading>
-      <Users where={{ team: { id: { equals: team.id } } }} />
+      <Users data={team.members} school={team.school} team={team} />
 
       <Card>
         <Heading mt={0}>Schülerinnen und Schüler einladen</Heading>
         <Grid my={1} gap={2} columns={[0, 0, "1fr 4fr"]}>
           <span />
-          <small>Neue Schüler|innen per Email einladen:</small>
+          <small>All diesen Email-Adressen eine Einladung schicken:</small>
           <Label sx={{ alignSelf: "top", fontWeight: "bold" }}>
             Email-Adressen:
           </Label>
           <Textarea
+            value={importEmails}
             bg="white"
             sx={{ border: "white" }}
             onChange={checkEmails}
             fontSize={1}
+            placeholder="name1@schule.ch, name2@schule; name3.schule.ch; ..."
           />
           <span />
           <Button

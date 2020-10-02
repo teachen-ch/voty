@@ -22,7 +22,7 @@ export const fragments = {
       members {
         id
         name
-        lastname
+        shortname
       }
     }
   `,
@@ -39,7 +39,7 @@ export const fragments = {
       members {
         id
         name
-        lastname
+        shortname
       }
     }
   `,
@@ -161,7 +161,11 @@ export const Teams: React.FC<TeamsProps> = ({ where, teamClick }) => {
                   }}
                 >
                   <td colSpan={10}>
-                    <Users where={{ team: { id: { equals: team.id } } }} />
+                    <Users
+                      data={team.members}
+                      school={team.school}
+                      team={team}
+                    />
                   </td>
                 </tr>
               )}

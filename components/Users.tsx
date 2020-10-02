@@ -1,6 +1,6 @@
 import { gql, useQuery } from "@apollo/client";
 import { Text } from "rebass";
-import { UserWhereInput } from "graphql/types";
+import { UserWhereInput, User, Team, School } from "graphql/types";
 
 const GET_USERS = gql`
   query users($where: UserWhereInput) {
@@ -18,18 +18,26 @@ const GET_USERS = gql`
     }
   }
 `;
-export function Users({ where }: { where?: UserWhereInput }) {
+
+export function useUsers(where?: UserWhereInput) {
   const users = useQuery(GET_USERS, { variables: { where } });
+  return users.data?.users;
+}
 
-  if (users.error) {
-    return <h1>Error loading data: {users.error.message}</h1>;
+export function Users({
+  data,
+  team,
+  school,
+}: {
+  data: User[];
+  team?: Team;
+  school?: School;
+}) {
+  if (!data) {
+    return <span>Loading…</span>;
   }
-  if (users.loading) {
-    return <h1>Loading data</h1>;
-  }
-
-  if (users.data.length === 0) {
-    return <Text>Keine Benutzer gefunden</Text>;
+  if (data.length === 0) {
+    return <span>Keine Benutzer gefunden…</span>;
   }
   return (
     <>
@@ -44,12 +52,12 @@ export function Users({ where }: { where?: UserWhereInput }) {
         </thead>
 
         <tbody>
-          {users.data.users.map((user: any) => (
+          {data!.map((user: User) => (
             <tr key={user.id}>
               <td>{user.id}</td>
               <td>{user.shortname}</td>
-              <td>{user.team?.name || "–"}</td>
-              <td>{user.team?.school?.name || "–"}</td>
+              <td>{user.team?.name || team?.name}</td>
+              <td>{user.team?.school?.name || school?.name}</td>
             </tr>
           ))}
         </tbody>

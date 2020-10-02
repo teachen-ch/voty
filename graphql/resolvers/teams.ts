@@ -43,5 +43,6 @@ export async function inviteStudents(_root: any, args: any, ctx: NexusContext) {
     where: { id },
     include: { members: true, school: true },
   });
+  console.log("Returning: ", team);
   return team;
 }

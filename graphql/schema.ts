@@ -10,6 +10,9 @@ use(
     features: {
       crud: true,
     },
+    /*client: {
+      options: { log: ["query", "info", "warn"] },
+    },*/
   })
 );
 

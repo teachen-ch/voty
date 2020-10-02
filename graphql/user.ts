@@ -17,7 +17,9 @@ schema.objectType({
     t.model.lastname();
     t.string("shortname", {
       resolve({ name, lastname }, args, ctx) {
-        return name + (lastname ? `${upperFirst(lastname)}.` : "");
+        return (
+          name + (lastname ? ` ${upperFirst(lastname).substr(0, 1)}.` : "")
+        );
       },
     });
     t.model.gender();
