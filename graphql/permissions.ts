@@ -46,7 +46,6 @@ const isTeamMember = rule({ cache: "strict" })(
 const teachesTeam = rule({ cache: "strict" })(
   async (parent, args, ctx: NexusContext, info) => {
     const { id, role } = ctx.user || {};
-    console.log("isTeacher? ", role === Role.Teacher);
     if (!id || role !== Role.Teacher) return false;
     if (!parent.role)
       throw new Error("teachesTeam can only be applied to Users");
@@ -56,7 +55,6 @@ const teachesTeam = rule({ cache: "strict" })(
     const found = await ctx.db.user.findMany({
       where: { id: { equals: student }, team: { teacher: { id: teacher } } },
     });
-    console.log("FOUND? ", found.length, found, student, teacher);
     return found.length ? true : false;
   }
 );

@@ -108,7 +108,10 @@ export async function connectUserTeam(
   if (user.teamId) throw new Error("ALREADY_IN_TEAM");
   return await ctx.db.user.update({
     where: { id: user.id },
-    data: { team: { connect: { id: team.id } } },
+    data: {
+      team: { connect: { id: team.id } },
+      school: { connect: { id: team.schoolId } },
+    },
   });
 }
 
