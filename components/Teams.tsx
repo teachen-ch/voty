@@ -198,6 +198,7 @@ export function CreateTeamForm({ onCompleted }: { onCompleted?: () => void }) {
             const newTeamRef = cache.writeFragment({
               data: createOneTeam,
               fragment: fragments.TeamTeacherFields,
+              fragmentName: "TeamTeacherFields",
             });
             return [...existingTeams, newTeamRef];
           },
