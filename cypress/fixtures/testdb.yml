@@ -229,7 +229,7 @@ ballot:
     start: !!timestamp "2000-01-01"
     end: !!timestamp "2099-12-31"
     scope: National
-    body: Testabstimmung
+    body: Testabstimmung ohne Inhalt
 
   - title: Abgelaufene Initiative
     description: Diese Testabstimmung dauert ist bereits beendet

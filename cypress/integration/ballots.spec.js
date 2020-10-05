@@ -7,7 +7,7 @@ describe("Test Ballots", () => {
     cy.visit("/ballots");
     cy.contains("Nationale Abstimmungen");
     cy.contains("Testinitiative").click();
-    cy.contains("Freizügigkeitsabkommen");
+    cy.contains("ohne Inhalt");
     cy.contains("Um über diese Abstimmung");
   });
 
