@@ -11,12 +11,7 @@ import {
 import * as yup from "yup";
 import React, { useMemo } from "react";
 import { omit } from "lodash";
-import {
-  DocumentNode,
-  MutationFunctionOptions,
-  MutationOptions,
-  FetchResult,
-} from "@apollo/client";
+import { FetchResult } from "@apollo/client";
 
 export { Formik, Form, yup, Grid, Card };
 
@@ -125,7 +120,7 @@ export const QForm: React.FC<QFormProps> = ({ fields, mutation, ...props }) => {
       if (typeof f.label === "undefined")
         f.label = name[0].toUpperCase() + name.substring(1);
       if (f.required) {
-        f.validate = f.validate!.required("Pflichtfeld");
+        f.validate = f.validate.required("Pflichtfeld");
       }
       if (f.validate) validationSchema[name] = f.validate;
       fieldArr.push(f);
@@ -154,10 +149,11 @@ export const QForm: React.FC<QFormProps> = ({ fields, mutation, ...props }) => {
     }
     if (field.type === "select") {
       if (!field.options) throw new Error("You need to specify options");
+      const opts = field.options;
       return (
         <Select label={field.label || ""} name={field.name} key={field.name}>
-          {Object.keys(field.options).map((label) => (
-            <option key={label} value={field.options![label]}>
+          {Object.keys(opts).map((label) => (
+            <option key={label} value={opts[label]}>
               {label}
             </option>
           ))}

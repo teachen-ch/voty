@@ -7,7 +7,7 @@ const prisma = new PrismaClient();
 export async function loadFixture(
   fixtureFile: string,
   logger?: (msg: string) => void
-) {
+): Promise<void> {
   logger && logger(`📦 Loading data from ${fixtureFile}`);
   const data: any = parseYAML(fixtureFile);
   if (typeof data === "undefined") {
@@ -18,7 +18,7 @@ export async function loadFixture(
       "Please specify YAML file as an object, e.g. no '- xyz' on top-level."
     );
   }
-  if (data.hasOwnProperty("delete")) {
+  if (Object.prototype.hasOwnProperty.call(data, "delete")) {
     await deleteObjects(data.delete, logger);
     delete data.delete;
   }

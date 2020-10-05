@@ -3,7 +3,6 @@ import { promises as fs } from "fs";
 import Mustache from "mustache";
 import mjml2html from "mjml";
 import logger from "./logger";
-import SMTPTransport from "nodemailer/lib/smtp-transport";
 
 const server: any = {
   host: process.env.SMTP_HOST,
@@ -21,8 +20,8 @@ export async function sendMail(
   to: string,
   subject: string,
   template: string,
-  data: any
-) {
+  data: Record<string, any>
+): Promise<any> {
   const { html, text } = await renderTemplate(template, data);
 
   // No email configured

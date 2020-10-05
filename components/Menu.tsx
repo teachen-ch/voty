@@ -1,13 +1,11 @@
 import { slide as Hamburger } from "react-burger-menu";
+import { ReactElement } from "react";
 
-export default function Menu() {
+export default function Menu(): ReactElement {
   return (
     <Hamburger right>
       <a id="home" className="menu-item" href="/">
         Start
-      </a>
-      <a className="menu-item--small" href="/demokratie">
-        27. September
       </a>
       <hr />
       <a id="about" className="menu-item" href="/impressum">

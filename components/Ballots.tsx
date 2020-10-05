@@ -1,6 +1,6 @@
-import { gql, useQuery } from "@apollo/client";
-import { Heading, Text, Link as A, Box, Button, Flex } from "rebass";
-import { useState, Fragment } from "react";
+import { gql, useQuery, QueryResult } from "@apollo/client";
+import { Heading, Text, Link as A, Button, Flex } from "rebass";
+import { Fragment } from "react";
 import { Ballot, BallotWhereInput } from "graphql/types";
 import { formatFromTo } from "../util/date";
 
@@ -28,8 +28,14 @@ const GET_BALLOTS = gql`
   ${fragments.BallotFields}
 `;
 
-export function useBallots(where?: BallotWhereInput) {
-  return useQuery(GET_BALLOTS, {
+type BallotsAnswer = {
+  ballots: Ballot[];
+};
+
+export function useBallots(
+  where?: BallotWhereInput
+): QueryResult<BallotsAnswer, Record<string, any>> {
+  return useQuery<BallotsAnswer>(GET_BALLOTS, {
     variables: { where },
   });
 }
@@ -55,7 +61,10 @@ export enum BallotScope {
   Team = "Team",
 }
 
-export function useBallot(id: Number) {
+type BallotAnswer = {
+  ballot: Ballot;
+};
+export function useBallot(id: number): QueryResult<BallotAnswer> {
   return useQuery(GET_BALLOT, {
     variables: { where: { id } },
     skip: !id,
@@ -68,7 +77,6 @@ type BallotsProps = {
 };
 
 export const Ballots: React.FC<BallotsProps> = ({ where, onClick }) => {
-  const [] = useState();
   const ballots = useBallots(where);
 
   if (ballots.error) {
@@ -78,7 +86,7 @@ export const Ballots: React.FC<BallotsProps> = ({ where, onClick }) => {
     return <Heading>Loading data</Heading>;
   }
 
-  if (ballots.data.length === 0) {
+  if (!ballots.data?.ballots?.length) {
     return <Text>Noch keine Abstimmungen erfasst</Text>;
   }
 
@@ -104,7 +112,7 @@ export const Ballots: React.FC<BallotsProps> = ({ where, onClick }) => {
                   : "muted"
               }
             >
-              {getBallotLink(ballot)}
+              Zur Abstimmung
             </Button>
           </Flex>
         </Fragment>
@@ -119,23 +127,9 @@ enum BallotStatus {
   Ended = "Beendet",
 }
 
-export const getBallotStatus = (ballot: Ballot) => {
+export const getBallotStatus = (ballot: Ballot): string => {
   const now = new Date();
   if (ballot.start < now) return BallotStatus.Not_Started;
   if (ballot.end < now) return BallotStatus.Ended;
   else return BallotStatus.Started;
-};
-
-export const getBallotLink = (ballot: Ballot) => {
-  return "Zur Abstimmung";
-  /*
-  const status = getBallotStatus(ballot);
-  switch (status) {
-    case BallotStatus.Started:
-      return "Jetzt abstimmen";
-    case BallotStatus.Not_Started:
-      return "Nicht gestartet";
-    case BallotStatus.Ended:
-      return "Beendet";
-  }*/
 };

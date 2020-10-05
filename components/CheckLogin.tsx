@@ -1,7 +1,6 @@
 import { gql, useQuery } from "@apollo/client";
 import { useUser, useSetUser } from "../state/user";
-import { Heading } from "rebass";
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction, ReactElement } from "react";
 
 // TODO: have to redefine enum here, otherwise hiting this issue
 // https://github.com/prisma/prisma/issues/3252
@@ -52,12 +51,14 @@ export const ME = gql`
 type CheckLoginProps = {
   setLoading?: Dispatch<SetStateAction<boolean>>;
 };
-export default function CheckLogin({ setLoading }: CheckLoginProps) {
+export default function CheckLogin({
+  setLoading,
+}: CheckLoginProps): ReactElement | null {
   const user = useUser();
   const setUser = useSetUser();
   // check, whether there is already an active session
   // unless user is already set
-  const { loading: checkLogin } = useQuery(ME, {
+  useQuery(ME, {
     fetchPolicy: "network-only",
     // skip query if user is already defined
     skip: user ? true : false,

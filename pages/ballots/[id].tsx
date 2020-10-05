@@ -2,16 +2,16 @@ import { Page, ErrorPage } from "components/Page";
 import { Text, Heading, Box, Card, Flex, Button } from "rebass";
 import { useRouter } from "next/router";
 import { useUser } from "state/user";
-import { useBallot, getBallotStatus } from "components/Ballots";
+import { useBallot } from "components/Ballots";
 import { formatFromTo } from "util/date";
 import { Ballot } from "graphql/types";
-import { useState } from "react";
+import { useState, ReactElement } from "react";
 import { useMutation, gql } from "@apollo/client";
 import { ErrorBox } from "components/Form";
 import Info from "components/Info";
 import Link from "next/link";
 
-export default function BallotPage() {
+export default function BallotPage(): ReactElement {
   const router = useRouter();
   const id = parseInt(String(router.query.id));
   const { data, loading, error } = useBallot(id);
@@ -19,7 +19,7 @@ export default function BallotPage() {
   if (loading) return <Page heading="Abstimmungsseite"></Page>;
   if (error) return <ErrorPage>{error.message}</ErrorPage>;
 
-  const ballot: Ballot = data?.ballot;
+  const ballot: Ballot | undefined = data?.ballot;
 
   if (!ballot)
     return (
@@ -66,7 +66,7 @@ const VotyNow: React.FC<{ ballot: Ballot }> = ({ ballot }) => {
   const user = useUser();
   const [success, setSuccess] = useState(false);
   const [doVote] = useMutation(VOTE, {
-    onCompleted(data) {
+    onCompleted() {
       setSuccess(true);
     },
     onError(err) {
@@ -157,10 +157,10 @@ const BigButton: React.FC<{
 
 // TODO: this is a joke markdown parser after being frustrated with mdx-js
 function parseMarkdown(str: string) {
-  str = str.replace(/^\s*\#\s+(.*?)$/gm, "<h1>$1</h1>");
-  str = str.replace(/^\s*\#\#\s+(.*?)$/gm, "<h2>$1</h2>");
-  str = str.replace(/^\s*\#\#\#\s+(.*?)$/gm, "<h3>$1</h3>");
-  str = str.replace(/^\s*\#\#\#\#\s+(.*?)$/gm, "<h4>$1</h4>");
+  str = str.replace(/^\s*#\s+(.*?)$/gm, "<h1>$1</h1>");
+  str = str.replace(/^\s*##\s+(.*?)$/gm, "<h2>$1</h2>");
+  str = str.replace(/^\s*###\s+(.*?)$/gm, "<h3>$1</h3>");
+  str = str.replace(/^\s*####\s+(.*?)$/gm, "<h4>$1</h4>");
   str = str.replace(/^\s*-\s+(.*?)$/gm, "<li>$1</li>");
   str = str.replace(/\n/g, "<br/>");
   str = str.replace(/(<\/h\d>)<br\/>\s*/g, "$1");

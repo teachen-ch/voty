@@ -6,8 +6,7 @@ type VideoProps = {
   url: string;
 };
 
-let Video: React.FC<VideoProps>;
-export default Video = (props) => {
+const Video: React.FC<VideoProps> = (props) => {
   const width = props.width || 300;
   const height = (width / 640) * 360;
 
@@ -27,6 +26,7 @@ export default Video = (props) => {
     />
   );
 };
+export default Video;
 
 const Play: React.FC = () => (
   <img
@@ -60,10 +60,10 @@ function extractSRFUrl(url: string) {
   let m: RegExpMatchArray | null;
   if ((m = url.match(/.*id=([^&]*).*$/))) {
     id = m[1];
-  } else if ((m = url.match(/srf\.ch\/play\/tv\/redirect\/detail\/([^\?]*)/))) {
+  } else if ((m = url.match(/srf\.ch\/play\/tv\/redirect\/detail\/([^?]*)/))) {
     id = m[1];
   } else if (
-    (m = url.match(/srf\.ch\/play\/embed\?urn=urn:srf:video:([^\?]*)/))
+    (m = url.match(/srf\.ch\/play\/embed\?urn=urn:srf:video:([^?]*)/))
   ) {
     id = m[1];
   } else {

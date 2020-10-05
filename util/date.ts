@@ -13,7 +13,7 @@ export const Days = 24 * Hours;
 const date = dayjs;
 export default date;
 
-export function formatFromTo(from: number, to: number) {
+export function formatFromTo(from: number, to: number): string {
   const s = dayjs(from);
   const e = dayjs(to);
   if (s.endOf("month") === e.endOf("month"))
@@ -23,23 +23,23 @@ export function formatFromTo(from: number, to: number) {
   else return s.format("D. MMM YYYY") + " – " + e.format("D. MMM YYYY");
 }
 
-export function formatDate(ts: number) {
+export function formatDate(ts: number): string {
   return dayjs(ts).format("dddd, D. MMM");
 }
 
-export function formatDuration(ts: number, duration: number) {
+export function formatDuration(ts: number, duration: number): string {
   return formatTime(ts) + " – " + formatTime(ts + duration * 60 * 1000);
 }
 
-export function formatFull(ts: number, duration: number) {
+export function formatFull(ts: number, duration: number): string {
   return formatDate(ts) + ", " + formatDuration(ts, duration);
 }
 
-export function formatTime(ts: number) {
+export function formatTime(ts: number): string {
   return dayjs(ts).format("HH:mm");
 }
 
-export function tonight() {
+export function tonight(): number {
   return dayjs().endOf("day").valueOf();
 }
 

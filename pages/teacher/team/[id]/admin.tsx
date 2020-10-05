@@ -4,8 +4,7 @@ import { useTeamTeacher } from "../../../../components/Teams";
 import { Users } from "../../../../components/Users";
 import { Input, Textarea } from "@rebass/forms";
 import { Grid, Label } from "theme-ui";
-import { useRef, useState, RefObject } from "react";
-import { useUser } from "state/user";
+import { useRef, useState, RefObject, ReactElement } from "react";
 import { Team } from "graphql/types";
 import { Navigation, Route } from "components/Navigation";
 import { useRouter } from "next/router";
@@ -22,20 +21,20 @@ const INVITE_STUDENTS = gql`
   ${fragments.TeamUserFields}
 `;
 
-export default function TeamPage() {
-  const user = useUser();
+export default function TeamPage(): ReactElement {
   const router = useRouter();
   const id = parseInt(String(router.query.id));
-  const team = useTeamTeacher(id, user);
+  const team = useTeamTeacher(id);
   const [emails, setEmails] = useState<string[]>([]);
   const [matches, setMatches] = useState<number | undefined>();
   const [showInviteLink, setShowInviteLink] = useState(false);
   const [importEmails, setImportEmails] = useState("");
 
   const [doInviteStudents] = useMutation(INVITE_STUDENTS, {
-    onCompleted({ inviteStudents }) {
-      const updatedTeam = inviteStudents;
-      console.log(updatedTeam);
+    onCompleted(/*{ inviteStudents }*/) {
+      // TODO: currently we get the page updated via cache
+      // but we do not show (or send over the API) errors
+      // const updatedTeam = inviteStudents;
       setEmails([]);
       setMatches(undefined);
       setShowInviteLink(false);
@@ -52,11 +51,11 @@ export default function TeamPage() {
     setMatches(emails.length ? emails.length : undefined);
   }
 
-  async function inviteStudents() {
+  async function inviteStudents(team: Team) {
     doInviteStudents({ variables: { team: team.id, emails } });
   }
 
-  if (!team) {
+  if (team === undefined) {
     return (
       <LoggedInPage heading="Klassenseite">
         Team konnte nicht gefunden werden
@@ -88,7 +87,7 @@ export default function TeamPage() {
           />
           <span />
           <Button
-            onClick={inviteStudents}
+            onClick={() => inviteStudents(team)}
             disabled={!matches}
             bg={matches ? "primary" : "muted"}
           >
@@ -153,7 +152,7 @@ function InviteLink({ team }: { team: Team }) {
   );
 }
 
-export function TeacherTeamNavigation({ team }: { team: Team }) {
+export function TeacherTeamNavigation({ team }: { team: Team }): ReactElement {
   return (
     <Navigation>
       <Route

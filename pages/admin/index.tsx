@@ -2,8 +2,9 @@ import { LoggedInPage } from "../../components/Page";
 import { Text, Link as A } from "rebass";
 import { LogoutButton } from "../user/logout";
 import Link from "next/link";
+import { ReactElement } from "react";
 
-export default function Teacher() {
+export default function Teacher(): ReactElement {
   return (
     <LoggedInPage heading="Admin Bereich">
       <Text>

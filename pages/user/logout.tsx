@@ -1,11 +1,11 @@
 import { useSetAccessToken, useSetUser } from "../../state/user";
 import { useRouter } from "next/router";
-import { useEffect } from "react";
+import { useEffect, ReactElement } from "react";
 import { Page } from "../../components/Page";
 import { Button, ButtonProps } from "rebass";
 import { useApolloClient } from "@apollo/client";
 
-export default function LogoutPage() {
+export default function LogoutPage(): ReactElement {
   const setUser = useSetUser();
   const setAccessToken = useSetAccessToken();
   const router = useRouter();
@@ -20,7 +20,7 @@ export default function LogoutPage() {
 }
 
 type LogoutButtonProps = ButtonProps & {
-  onSuccess?: Function;
+  onSuccess?: () => void;
 };
 
 export const LogoutButton: React.FC<LogoutButtonProps> = ({

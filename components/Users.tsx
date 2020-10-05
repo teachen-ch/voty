@@ -1,6 +1,6 @@
 import { gql, useQuery } from "@apollo/client";
-import { Text } from "rebass";
 import { UserWhereInput, User, Team, School } from "graphql/types";
+import { ReactElement } from "react";
 
 const GET_USERS = gql`
   query users($where: UserWhereInput) {
@@ -19,7 +19,7 @@ const GET_USERS = gql`
   }
 `;
 
-export function useUsers(where?: UserWhereInput) {
+export function useUsers(where?: UserWhereInput): User[] | undefined {
   const users = useQuery(GET_USERS, { variables: { where } });
   return users.data?.users;
 }
@@ -29,10 +29,10 @@ export function Users({
   team,
   school,
 }: {
-  data: User[];
+  data?: User[];
   team?: Team;
   school?: School;
-}) {
+}): ReactElement {
   if (!data) {
     return <span>Loading…</span>;
   }
@@ -52,7 +52,7 @@ export function Users({
         </thead>
 
         <tbody>
-          {data!.map((user: User) => (
+          {data?.map((user: User) => (
             <tr key={user.id}>
               <td>{user.id}</td>
               <td>{user.shortname}</td>

@@ -12,7 +12,10 @@
 // This function is called when a project is opened or re-opened (e.g. due to
 // the project's config changing)
 
-const { loadFixture } = require("../../util/prisma-loader");
+// const { loadFixture } = require("../../util/prisma-loader");
+import { loadFixture } from "../../util/prisma-loader";
+// const { imageSnapshot } = require("cypress-image-snapshot/plugin");
+// import imageSnapshot from "cypress-image-snapshot/plugin";
 
 /**
  * @type {Cypress.PluginConfig}
@@ -28,9 +31,6 @@ module.exports = (on, config) => {
     },
   });
 
-  require("cypress-image-snapshot/plugin").addMatchImageSnapshotPlugin(
-    on,
-    config
-  );
+  // imageSnapshot.addMatchImageSnapshotPlugin(on, config);
   // return config;
 };

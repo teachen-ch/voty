@@ -12,8 +12,9 @@ import { Footer } from "components/Footer";
 import { Header } from "components/Header";
 import { Page } from "components/Page";
 import CheckLogin from "components/CheckLogin";
+import { ReactElement } from "react";
 
-function MyApp({ Component, pageProps }: AppProps) {
+function MyApp({ Component, pageProps }: AppProps): ReactElement {
   return (
     <div className="container">
       <ApolloProvider client={apollo}>

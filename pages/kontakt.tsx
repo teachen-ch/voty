@@ -1,8 +1,9 @@
 import Newsletter from "components/Newsletter";
 import { Page } from "components/Page";
 import { Card, Heading, Text, Button } from "rebass";
+import { ReactElement } from "react";
 
-export default function Kontakt() {
+export default function Kontakt(): ReactElement {
   function sendMail() {
     const email = "hc.nehcaet@ytov:otliam";
     document.location.href = email.split("").reverse().join("");

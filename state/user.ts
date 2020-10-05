@@ -1,46 +1,21 @@
 import { atom, useRecoilValue, useSetRecoilState } from "recoil";
+import { User } from "graphql/types";
 
 export const accessTokenState = atom({
   key: "accessTokenState",
   default: "",
 });
 
-// redefining types here, because @prisma/client just has schoolId
-
-type User = {
-  id: number;
-  email?: number;
-  name: string;
-  lastname?: string;
-  shortname: string;
-  role: string;
-  team?: Team;
-  school?: School;
-};
-
-type Team = {
-  id: number;
-  name: string;
-  school?: School;
-};
-
-type School = {
-  id: number;
-  name: string;
-  city?: string;
-  zip?: string;
-};
-
 export const userState = atom({
   key: "userState",
   default: undefined as User | undefined,
 });
 
-export function useAccessToken() {
+export function useAccessToken(): string {
   return useRecoilValue(accessTokenState);
 }
 
-export function useSetAccessToken() {
+export function useSetAccessToken(): (token: string) => void {
   const setState = useSetRecoilState(accessTokenState);
   return (token: string) => {
     localStorage.setItem("@token", token);
@@ -48,11 +23,11 @@ export function useSetAccessToken() {
   };
 }
 
-export function useUser() {
+export function useUser(): User | undefined {
   return useRecoilValue(userState);
 }
 
-export function useSetUser() {
+export function useSetUser(): (user: User | undefined) => void {
   const setState = useSetRecoilState(userState);
   return (user: User | undefined) => {
     setState(user);

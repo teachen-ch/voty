@@ -3,12 +3,13 @@ import { Flex, Heading, Text, Button } from "rebass";
 import { Container } from "components/Page";
 import { Grid } from "theme-ui";
 import { Banner } from "../components/Banner";
+import { ReactElement } from "react";
 
-export default function Home() {
+export default function Home(): ReactElement {
   return (
     <>
       <Head>
-        <title>voty – Demokratie an die Schule</title>
+        <title>voty – Demokratie an die Schule</title>
       </Head>
 
       <Container as="main">
@@ -36,7 +37,7 @@ export default function Home() {
           my={[3, 3, 4]}
           mx={[0, 3, "20%", 230]}
         >
-           Die Demokratie ist das wohl wichtigste Gut der Schweiz. Aber wie
+          Die Demokratie ist das wohl wichtigste Gut der Schweiz. Aber wie
           gelingt es uns, die Jugend für die Demokratie zu begeistern? Voty ist
           ein Projekt für die Demokratieförderung an Schweizer Schulen in drei
           Modulen.

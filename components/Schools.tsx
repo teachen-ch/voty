@@ -5,7 +5,7 @@ import { omit } from "lodash";
 import { QForm, ErrorBox } from "./Form";
 import { useMutation } from "@apollo/client";
 import { cantonNames } from "../util/cantons";
-import { useState } from "react";
+import { useState, ReactElement } from "react";
 import { School } from "@prisma/client";
 
 const GET_SCHOOLS_WITH_MEMBERS = gql`
@@ -25,7 +25,7 @@ const GET_SCHOOLS_WITH_MEMBERS = gql`
   }
 `;
 
-export function Schools() {
+export const Schools: React.FC = () => {
   const schools = useQuery(GET_SCHOOLS_WITH_MEMBERS);
 
   if (schools.error) {
@@ -59,11 +59,11 @@ export function Schools() {
       </table>
     </>
   );
-}
+};
 
 // update
 export const SET_USER_SCHOOL = gql`
-  mutation setSchool($school: Int) {
+  mutation setSchool($school: Int!) {
     setSchool(school: $school) {
       id
       name
@@ -90,12 +90,12 @@ const GET_SCHOOL_LIST = gql`
   }
 `;
 
-export function useSchoolList() {
+export function useSchoolList(): School[] | null {
   const { data } = useQuery(GET_SCHOOL_LIST);
   return data?.schools;
 }
 
-export function SelectSchool() {
+export const SelectSchool: React.FC = () => {
   const user = useUser();
   const setUser = useSetUser();
   const schools = useSchoolList();
@@ -121,7 +121,7 @@ export function SelectSchool() {
 
   const options = schools.reduce(
     (o: any, i: School) => {
-      const label = `${i.zip} ${i.city} – ${i.name}`;
+      const label = `${i.zip} ${i.city} - ${i.name}`;
       o[label] = i.id;
       return o;
     },
@@ -169,7 +169,7 @@ export function SelectSchool() {
       )}
     </>
   );
-}
+};
 
 const CREATE_SCHOOL = gql`
   mutation createOneSchool($data: SchoolCreateInput!) {
@@ -188,10 +188,9 @@ export function CreateSchool({
   onCompleted,
 }: {
   onCompleted?: (data: any) => void;
-}) {
-  const user = useUser();
+}): ReactElement {
   const [error, setError] = useState("");
-  const [createSchool, mutation] = useMutation(CREATE_SCHOOL, {
+  const [createSchool] = useMutation(CREATE_SCHOOL, {
     onCompleted: onCompleted,
     onError: (error) => {
       setError(error.message);

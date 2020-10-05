@@ -1,8 +1,9 @@
-import { Box, Flex, Button } from "rebass";
+import { Button } from "rebass";
 import { Label, Input, Select } from "@rebass/forms";
 import { Grid } from "theme-ui";
+import { ReactElement } from "react";
 
-export default function Newsletter() {
+export default function Newsletter(): ReactElement {
   return (
     <form action="https://newsletter.teachen.ch/subscribe" method="POST">
       <Grid gap={2} py={4} columns={[0, 0, "1fr 3fr"]}>
@@ -27,7 +28,13 @@ export default function Newsletter() {
   );
 }
 
-export function Field({ id, label }: { id: string; label: string }) {
+export function Field({
+  id,
+  label,
+}: {
+  id: string;
+  label: string;
+}): ReactElement {
   return (
     <>
       <Label htmlFor={id} alignSelf="center">
@@ -38,7 +45,13 @@ export function Field({ id, label }: { id: string; label: string }) {
   );
 }
 
-export function Submit({ name, value }: { name: string; value: string }) {
+export function Submit({
+  name,
+  value,
+}: {
+  name: string;
+  value: string;
+}): ReactElement {
   return (
     <>
       <span />
@@ -57,7 +70,7 @@ export function SelectField({
   id: string;
   label: string;
   children: React.ReactNode;
-}) {
+}): ReactElement {
   return (
     <>
       <Label htmlFor={id}>{label}</Label>

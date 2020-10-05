@@ -7,6 +7,7 @@ import { useState } from "react";
 import { CreateUserForm, Success } from "../user/signup";
 import { useUser } from "../../state/user";
 import { omit } from "lodash";
+import { User } from "graphql/types";
 
 const GET_INVITE_TEAM = gql`
   query team($invite: String!) {
@@ -59,9 +60,9 @@ const ACCEPT_INVITE = gql`
   }
 `;
 
-export default function Invite(props: React.Props<{}>) {
+const Invite: React.FC = () => {
   const existingUser = useUser();
-  const [newUser, setUser] = useState();
+  const [newUser, setUser] = useState<User | undefined>(undefined);
   const router = useRouter();
   const invite = String(router.query.invite);
   const teamQuery = useQuery(GET_INVITE_TEAM, {
@@ -96,8 +97,8 @@ export default function Invite(props: React.Props<{}>) {
       return <AcceptInvite user={existingUser} invite={invite} team={team} />;
     }
 
-    if (newUser) {
-      return <Success user={newUser!} />;
+    if (newUser !== undefined) {
+      return <Success user={newUser} />;
     }
 
     return (
@@ -116,20 +117,22 @@ export default function Invite(props: React.Props<{}>) {
   } else {
     return <Page heading="Klassen-Einladung">Lade Einladung</Page>;
   }
-}
+};
+
+export default Invite;
 
 type AcceptInviteProps = {
   invite: string;
   user: any; // TODO: NEXUSTYPE find out how to import Nexus Types here
   team: any; // TODO: NEXUSTYPE find out how to import Nexus Types here
 };
-const AcceptInvite: React.FC<AcceptInviteProps> = ({ invite, user, team }) => {
+const AcceptInvite: React.FC<AcceptInviteProps> = ({ invite, team }) => {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
   const router = useRouter();
   const [doAcceptInvite] = useMutation(ACCEPT_INVITE, {
     variables: { invite },
-    onCompleted(data) {
+    onCompleted() {
       setSuccess(true);
       setError("");
     },
@@ -145,7 +148,7 @@ const AcceptInvite: React.FC<AcceptInviteProps> = ({ invite, user, team }) => {
     return (
       <Page heading="Klassen-Einladung">
         <Text my={4}>Du bist angemeldet in der Klasse «{team.name}»</Text>
-        <Button onClick={() => router.push("/")}>Weiter geht's</Button>
+        <Button onClick={() => router.push("/")}>Weiter geht&apos;s</Button>
       </Page>
     );
   }

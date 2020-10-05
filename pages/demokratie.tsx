@@ -1,8 +1,9 @@
 import Newsletter from "components/Newsletter";
 import { Page } from "components/Page";
-import { Card, Heading, Text, Link as A } from "rebass";
+import { Card, Heading, Text } from "rebass";
+import { ReactElement } from "react";
 
-export default function Kontakt() {
+export default function Kontakt(): ReactElement {
   return (
     <Page heading="Demokratie an die Schule">
       <Heading as="h2">

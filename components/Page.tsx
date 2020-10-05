@@ -2,9 +2,10 @@ import { Flex, Box, Heading, Text, Link as A } from "rebass";
 import Head from "next/head";
 import { useUser } from "state/user";
 import { LoginForm } from "pages/user/login";
-import { ReactNode, useState } from "react";
+import { ReactNode, useState, ReactElement } from "react";
 import CheckLogin, { Role } from "./CheckLogin";
 import Link from "next/link";
+import { FlexProps } from "rebass";
 
 export function Page({
   children,
@@ -12,7 +13,7 @@ export function Page({
 }: {
   children?: React.ReactNode;
   heading?: string;
-}) {
+}): ReactElement {
   const user = useUser();
   const startpage = `/${user?.role?.toLowerCase()}`;
   return (
@@ -24,7 +25,7 @@ export function Page({
       justifyContent="center"
     >
       <Head>
-        <title>voty – {heading}</title>
+        <title>voty – {heading}</title>
       </Head>
       <Box mt={["2rem", "2rem", 32]} ml={[0, 0, 0, 20]}>
         <a href="/">
@@ -59,10 +60,16 @@ type LoggedInPageProps = {
   heading?: string;
 };
 
-export function LoggedInPage({ role, children, heading }: LoggedInPageProps) {
+export function LoggedInPage({
+  role,
+  children,
+  heading,
+}: LoggedInPageProps): ReactElement {
   const user = useUser();
   const [loading, setLoading] = useState(true);
-  let allowed = role ? user?.role === role || user?.role === Role.Admin : true;
+  const allowed = role
+    ? user?.role === role || user?.role === Role.Admin
+    : true;
 
   if (user && allowed) {
     return <Page heading={heading}>{children}</Page>;
@@ -113,7 +120,7 @@ export const LoggedInHeader: React.FC<{
   </Flex>
 );
 
-export const PageHeading: React.FC<{}> = (props) => (
+export const PageHeading: React.FC = (props) => (
   <Heading
     as="h1"
     fontSize={[4, 5, 6, 6]}
@@ -126,8 +133,8 @@ export const PageHeading: React.FC<{}> = (props) => (
   </Heading>
 );
 
-export const Container = (props: any) => (
-  <Flex mx={[3, 3, 4]} justifyContent="center" textAlign="center" {...props}>
+export const Container: React.FC<FlexProps> = (props) => (
+  <Flex mx={[3, 3, 4]} justifyContent="center" {...props}>
     <Flex
       justifyItems="center"
       flexDirection="column"
@@ -138,7 +145,7 @@ export const Container = (props: any) => (
   </Flex>
 );
 
-export const ErrorPage = (props: any) => (
+export const ErrorPage: React.FC = (props) => (
   <Page>
     <PageHeading>Fehler</PageHeading>
     <Heading as="h2">Oh je, es ist ein Fehler aufgetreten</Heading>

@@ -14,12 +14,7 @@ const mailConfig = {
   },
 };
 
-let winstonFormat = format.json();
-if (!prod) {
-  winstonFormat = format.combine(format.json(), format.prettyPrint());
-}
-
-let logger = createLogger({
+const logger = createLogger({
   levels: {
     mail: 0,
     alert: 1,
@@ -70,7 +65,7 @@ const logglyLogger = new Loggly({
   token: "d678db9a-c0dd-49b0-a885-f168172332c6",
   stripColors: true,
   json: true,
-  tags: [process.env.NODE_ENV!],
+  tags: [process.env.NODE_ENV],
 });
 
 const mailLogger: any = new Mail({
@@ -95,7 +90,7 @@ if (env === "production") {
 }
 
 type MailLogger = winston.Logger & {
-  mail: (message: string) => {};
+  mail: (message: string) => void;
 };
 
 // @ts-ignore

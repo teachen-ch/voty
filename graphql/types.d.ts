@@ -886,6 +886,7 @@ export type Mutation = {
   deleteOneSchool?: Maybe<School>;
   deleteOneTeam?: Maybe<Team>;
   emailVerification?: Maybe<ResponseLogin>;
+  inviteStudents?: Maybe<Team>;
   login?: Maybe<ResponseLogin>;
   setSchool?: Maybe<User>;
   updateUser?: Maybe<User>;
@@ -948,6 +949,12 @@ export type MutationEmailVerificationArgs = {
 };
 
 
+export type MutationInviteStudentsArgs = {
+  emails: Array<Scalars['String']>;
+  team: Scalars['Int'];
+};
+
+
 export type MutationLoginArgs = {
   email?: Maybe<Scalars['String']>;
   password?: Maybe<Scalars['String']>;
@@ -955,7 +962,7 @@ export type MutationLoginArgs = {
 
 
 export type MutationSetSchoolArgs = {
-  school?: Maybe<Scalars['Int']>;
+  school: Scalars['Int'];
 };
 
 
@@ -3342,8 +3349,11 @@ export type VotesCreateManyWithoutBallotInput = {
 };
 
 export type VotesCreateWithoutBallotInput = {
+  canton?: Maybe<Scalars['String']>;
+  schooltype?: Maybe<Scalars['String']>;
   verify?: Maybe<Scalars['String']>;
   vote: Scalars['Int'];
+  year?: Maybe<Scalars['Int']>;
 };
 
 export type VotesListRelationFilter = {
@@ -3355,16 +3365,22 @@ export type VotesListRelationFilter = {
 export type VotesScalarWhereInput = {
   AND?: Maybe<Array<VotesScalarWhereInput>>;
   ballotId?: Maybe<IntFilter>;
+  canton?: Maybe<StringNullableFilter>;
   id?: Maybe<IntFilter>;
   NOT?: Maybe<Array<VotesScalarWhereInput>>;
   OR?: Maybe<Array<VotesScalarWhereInput>>;
+  schooltype?: Maybe<StringNullableFilter>;
   verify?: Maybe<StringNullableFilter>;
   vote?: Maybe<IntFilter>;
+  year?: Maybe<IntNullableFilter>;
 };
 
 export type VotesUpdateManyDataInput = {
+  canton?: Maybe<NullableStringFieldUpdateOperationsInput>;
+  schooltype?: Maybe<NullableStringFieldUpdateOperationsInput>;
   verify?: Maybe<NullableStringFieldUpdateOperationsInput>;
   vote?: Maybe<IntFieldUpdateOperationsInput>;
+  year?: Maybe<NullableIntFieldUpdateOperationsInput>;
 };
 
 export type VotesUpdateManyWithoutBallotInput = {
@@ -3385,8 +3401,11 @@ export type VotesUpdateManyWithWhereNestedInput = {
 };
 
 export type VotesUpdateWithoutBallotDataInput = {
+  canton?: Maybe<NullableStringFieldUpdateOperationsInput>;
+  schooltype?: Maybe<NullableStringFieldUpdateOperationsInput>;
   verify?: Maybe<NullableStringFieldUpdateOperationsInput>;
   vote?: Maybe<IntFieldUpdateOperationsInput>;
+  year?: Maybe<NullableIntFieldUpdateOperationsInput>;
 };
 
 export type VotesUpdateWithWhereUniqueWithoutBallotInput = {
@@ -3404,11 +3423,14 @@ export type VotesWhereInput = {
   AND?: Maybe<Array<VotesWhereInput>>;
   ballot?: Maybe<BallotWhereInput>;
   ballotId?: Maybe<IntFilter>;
+  canton?: Maybe<StringNullableFilter>;
   id?: Maybe<IntFilter>;
   NOT?: Maybe<Array<VotesWhereInput>>;
   OR?: Maybe<Array<VotesWhereInput>>;
+  schooltype?: Maybe<StringNullableFilter>;
   verify?: Maybe<StringNullableFilter>;
   vote?: Maybe<IntFilter>;
+  year?: Maybe<IntNullableFilter>;
 };
 
 export type VotesWhereUniqueInput = {
@@ -3490,7 +3512,7 @@ export type SchoolsWithMembersQuery = (
 );
 
 export type SetSchoolMutationVariables = Exact<{
-  school?: Maybe<Scalars['Int']>;
+  school: Scalars['Int'];
 }>;
 
 
@@ -3543,20 +3565,14 @@ export type TeamUserFieldsFragment = (
     & Pick<School, 'id' | 'name' | 'city'>
   ), members: Array<(
     { __typename?: 'User' }
-    & Pick<User, 'id' | 'name' | 'lastname'>
+    & Pick<User, 'id' | 'name' | 'shortname'>
   )> }
 );
 
 export type TeamTeacherFieldsFragment = (
   { __typename?: 'Team' }
-  & Pick<Team, 'invite' | 'id' | 'name'>
-  & { school: (
-    { __typename?: 'School' }
-    & Pick<School, 'id' | 'name' | 'city'>
-  ), members: Array<(
-    { __typename?: 'User' }
-    & Pick<User, 'id' | 'name' | 'lastname'>
-  )> }
+  & Pick<Team, 'invite'>
+  & TeamUserFieldsFragment
 );
 
 export type TeamsQueryVariables = Exact<{
@@ -3703,6 +3719,20 @@ export type AcceptInviteMutation = (
   )> }
 );
 
+export type InviteStudentsMutationVariables = Exact<{
+  team: Scalars['Int'];
+  emails: Array<Scalars['String']>;
+}>;
+
+
+export type InviteStudentsMutation = (
+  { __typename?: 'Mutation' }
+  & { inviteStudents?: Maybe<(
+    { __typename?: 'Team' }
+    & TeamUserFieldsFragment
+  )> }
+);
+
 export type LoginMutationVariables = Exact<{
   email: Scalars['String'];
   password: Scalars['String'];
@@ -3835,27 +3865,16 @@ export const TeamUserFieldsFragmentDoc = gql`
   members {
     id
     name
-    lastname
+    shortname
   }
 }
     `;
 export const TeamTeacherFieldsFragmentDoc = gql`
     fragment TeamTeacherFields on Team {
   invite
-  id
-  name
-  school {
-    id
-    name
-    city
-  }
-  members {
-    id
-    name
-    lastname
-  }
+  ...TeamUserFields
 }
-    `;
+    ${TeamUserFieldsFragmentDoc}`;
 export const BallotsDocument = gql`
     query ballots($where: BallotWhereInput) {
   ballots(where: $where) {
@@ -3966,7 +3985,7 @@ export type SchoolsWithMembersQueryHookResult = ReturnType<typeof useSchoolsWith
 export type SchoolsWithMembersLazyQueryHookResult = ReturnType<typeof useSchoolsWithMembersLazyQuery>;
 export type SchoolsWithMembersQueryResult = Apollo.QueryResult<SchoolsWithMembersQuery, SchoolsWithMembersQueryVariables>;
 export const SetSchoolDocument = gql`
-    mutation setSchool($school: Int) {
+    mutation setSchool($school: Int!) {
   setSchool(school: $school) {
     id
     name
@@ -4407,6 +4426,39 @@ export function useAcceptInviteMutation(baseOptions?: Apollo.MutationHookOptions
 export type AcceptInviteMutationHookResult = ReturnType<typeof useAcceptInviteMutation>;
 export type AcceptInviteMutationResult = Apollo.MutationResult<AcceptInviteMutation>;
 export type AcceptInviteMutationOptions = Apollo.BaseMutationOptions<AcceptInviteMutation, AcceptInviteMutationVariables>;
+export const InviteStudentsDocument = gql`
+    mutation inviteStudents($team: Int!, $emails: [String!]!) {
+  inviteStudents(team: $team, emails: $emails) {
+    ...TeamUserFields
+  }
+}
+    ${TeamUserFieldsFragmentDoc}`;
+export type InviteStudentsMutationFn = Apollo.MutationFunction<InviteStudentsMutation, InviteStudentsMutationVariables>;
+
+/**
+ * __useInviteStudentsMutation__
+ *
+ * To run a mutation, you first call `useInviteStudentsMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useInviteStudentsMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [inviteStudentsMutation, { data, loading, error }] = useInviteStudentsMutation({
+ *   variables: {
+ *      team: // value for 'team'
+ *      emails: // value for 'emails'
+ *   },
+ * });
+ */
+export function useInviteStudentsMutation(baseOptions?: Apollo.MutationHookOptions<InviteStudentsMutation, InviteStudentsMutationVariables>) {
+        return Apollo.useMutation<InviteStudentsMutation, InviteStudentsMutationVariables>(InviteStudentsDocument, baseOptions);
+      }
+export type InviteStudentsMutationHookResult = ReturnType<typeof useInviteStudentsMutation>;
+export type InviteStudentsMutationResult = Apollo.MutationResult<InviteStudentsMutation>;
+export type InviteStudentsMutationOptions = Apollo.BaseMutationOptions<InviteStudentsMutation, InviteStudentsMutationVariables>;
 export const LoginDocument = gql`
     mutation login($email: String!, $password: String!) {
   login(email: $email, password: $password) {
@@ -4620,6 +4672,15 @@ export const acceptInvite: DocumentNode;
 }
     
 
+declare module '*/admin.tsx' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const inviteStudents: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
 declare module '*/login.tsx' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
@@ -4697,27 +4758,16 @@ export const TeamUserFields = gql`
   members {
     id
     name
-    lastname
+    shortname
   }
 }
     `;
 export const TeamTeacherFields = gql`
     fragment TeamTeacherFields on Team {
   invite
-  id
-  name
-  school {
-    id
-    name
-    city
-  }
-  members {
-    id
-    name
-    lastname
-  }
+  ...TeamUserFields
 }
-    `;
+    ${TeamUserFields}`;
 export const Ballots = gql`
     query ballots($where: BallotWhereInput) {
   ballots(where: $where) {
@@ -4751,7 +4801,7 @@ export const SchoolsWithMembers = gql`
 }
     `;
 export const SetSchool = gql`
-    mutation setSchool($school: Int) {
+    mutation setSchool($school: Int!) {
   setSchool(school: $school) {
     id
     name
@@ -4880,6 +4930,13 @@ export const AcceptInvite = gql`
   }
 }
     `;
+export const InviteStudents = gql`
+    mutation inviteStudents($team: Int!, $emails: [String!]!) {
+  inviteStudents(team: $team, emails: $emails) {
+    ...TeamUserFields
+  }
+}
+    ${TeamUserFields}`;
 export const Login = gql`
     mutation login($email: String!, $password: String!) {
   login(email: $email, password: $password) {

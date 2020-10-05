@@ -1,11 +1,11 @@
-import Newsletter, { Field, SelectField, Submit } from "components/Newsletter";
+import { Field } from "components/Newsletter";
 import { Page, PageHeading } from "components/Page";
-import { Card, Heading, Text, Link as A, Box, Flex, Button } from "rebass";
-import { Center, Info } from "components/Learning";
+import { Card, Heading, Text, Box, Flex, Button } from "rebass";
 import { Grid } from "theme-ui";
 import Link from "next/link";
+import { ReactElement } from "react";
 
-export default function Demokratie() {
+export default function Demokratie(): ReactElement {
   return (
     <Page heading="Jugendliche stimmen ab – ein Experiment">
       <Text mt={3}>
@@ -123,7 +123,11 @@ export default function Demokratie() {
       <Heading as="h3">Wie stellt ihr statistische Signifikanz sicher?</Heading>
       <Text>
         Wir möchten gemeinsam mit{" "}
-        <a href="https://twitter.com/claudelongchamp" target="_blank">
+        <a
+          href="https://twitter.com/claudelongchamp"
+          target="_blank"
+          rel="noreferrer"
+        >
           Claude Longchamps
         </a>{" "}
         sicherstellen, das unser Vorgehen wissenschaftlich kompetent begleitet
@@ -245,6 +249,7 @@ const TypeBar = ({ types }: { types: any }) => (
     <Flex>
       {Object.keys(types).map((name, ix) => (
         <Box
+          key={name}
           width={`${types[name] * 100}%`}
           sx={{
             textAlign: "center",

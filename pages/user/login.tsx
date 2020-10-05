@@ -1,7 +1,7 @@
-import { useRouter, NextRouter } from "next/router";
+import { useRouter } from "next/router";
 import { Page } from "components/Page";
 import { gql, useMutation } from "@apollo/client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, ReactElement } from "react";
 import { Card, Text, Button, Heading } from "rebass";
 import { Grid } from "theme-ui";
 import { Label, Input } from "@rebass/forms";
@@ -10,7 +10,6 @@ import CheckLogin from "components/CheckLogin";
 import { useSetAccessToken, useUser, useSetUser } from "../../state/user";
 import { useQueryParam } from "util/hooks";
 import { Role } from "components/CheckLogin";
-import { User } from "graphql/types";
 
 export const LOGIN = gql`
   mutation login($email: String!, $password: String!) {
@@ -52,7 +51,7 @@ export const CHECK_VERIFICATION = gql`
   ${CheckLogin.fragments.LoginFields}
 `;
 
-export default function Login() {
+export default function Login(): ReactElement {
   const token = useQueryParam("t");
   const purpose = useQueryParam("p");
   const user = useUser();
@@ -85,9 +84,8 @@ export default function Login() {
   }
 }
 
-export function LoginForm() {
+export function LoginForm(): ReactElement {
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const [emailError, setEmailError] = useState("");
   const [requestReset, setRequestReset] = useState<string | undefined>(
     undefined
@@ -157,12 +155,12 @@ export function LoginForm() {
   );
 }
 
-function VerificationForm({ email }: { email: string }) {
+function VerificationForm({ email }: { email: string }): ReactElement {
   const [mailSent, setMailSent] = useState(false);
   const [error, setError] = useState("");
 
-  const [doVerification, resultVerification] = useMutation(EMAIL_VERIFICATION, {
-    onCompleted(data) {
+  const [doVerification] = useMutation(EMAIL_VERIFICATION, {
+    onCompleted() {
       setMailSent(true);
     },
     onError(error) {
@@ -188,6 +186,7 @@ function VerificationForm({ email }: { email: string }) {
       >
         {mailSent ? "Email verschickt!" : "Email schicken"}
       </Button>
+      <ErrorBox error={error} />
     </>
   );
 }
@@ -243,7 +242,7 @@ function CheckToken({ token, purpose }: { token: string; purpose: string }) {
   const [error, setError] = useState("");
   const [tempUser, setTempUser] = useState<any | undefined>(); // TODO: NEXUSTYPE
   const router = useRouter();
-  const [doVerification, resultVerification] = useMutation(CHECK_VERIFICATION, {
+  const [doVerification] = useMutation(CHECK_VERIFICATION, {
     onCompleted: (data) => {
       setTempUser(data.checkVerification.user);
       setAccessToken(data.checkVerification.token);
@@ -270,13 +269,13 @@ function CheckToken({ token, purpose }: { token: string; purpose: string }) {
           <Heading as="h2">Email bestätigt</Heading>
           <Text mb={4}>Super, Deine Email-Adresse ist nun bestätigt.</Text>
           <Button onClick={() => router.push(getStartpage(user?.role))}>
-            Weiter geht's
+            Weiter geht&apos;s
           </Button>
         </>
       );
     }
     if (purpose === "reset") {
-      return <PasswordResetForm finished={() => setUser(tempUser)} />;
+      return <PasswordResetForm />;
     }
   }
 
@@ -300,11 +299,11 @@ function RequestReset({ email }: { email: string }) {
   const [emailField, setEmailField] = useState(email);
   const [error, setError] = useState("");
   const [doRequestReset] = useMutation(EMAIL_VERIFICATION, {
-    onCompleted(data) {
+    onCompleted() {
       setMailSent(true);
       setError("");
     },
-    onError(error) {
+    onError() {
       setError("Es ist ein Fehler aufgetreten.");
     },
   });
@@ -350,7 +349,7 @@ function RequestReset({ email }: { email: string }) {
   );
 }
 
-function PasswordResetForm({ finished }: { finished: () => void }) {
+function PasswordResetForm() {
   const user = useUser();
   const [password, setPassword] = useState("");
   const [password2, setPassword2] = useState("");
@@ -359,10 +358,10 @@ function PasswordResetForm({ finished }: { finished: () => void }) {
   const router = useRouter();
 
   const [doChangePassword] = useMutation(CHANGE_PASSWORD, {
-    onCompleted(data) {
+    onCompleted() {
       setSuccess(true);
     },
-    onError(error) {
+    onError() {
       setError("Es ist ein Fehler aufgetreten.");
     },
   });
@@ -379,7 +378,7 @@ function PasswordResetForm({ finished }: { finished: () => void }) {
         <Heading as="h2">Passwort geändert</Heading>
         <Text mb={4}>Super, das hat geklappt.</Text>
         <Button onClick={() => router.push(getStartpage(user?.role))}>
-          Weiter geht's
+          Weiter geht&apos;s
         </Button>
       </>
     );

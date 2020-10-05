@@ -1,9 +1,9 @@
 import { Page } from "components/Page";
 import { Card, Text, Button } from "rebass";
 import { gql, useMutation } from "@apollo/client";
-import { useState } from "react";
+import { useState, ReactElement, Dispatch, SetStateAction } from "react";
 import { useRouter } from "next/router";
-import { QForm, yup, ErrorBox, Grid } from "../../components/Form";
+import { QForm, yup, ErrorBox } from "../../components/Form";
 import { omit } from "lodash";
 import { User } from "@prisma/client";
 
@@ -18,10 +18,10 @@ export const CREATE_USER = gql`
   }
 `;
 
-export default function Signup() {
-  const [user, setUser] = useState();
+export default function Signup(): ReactElement {
+  const [user, setUser] = useState<User | undefined>(undefined);
   if (user) {
-    return <Success user={user!} />;
+    return <Success user={user} />;
   }
   return (
     <Page heading="Erstelle ein neues Benutzer-Konto">
@@ -34,13 +34,13 @@ export default function Signup() {
   );
 }
 
-export function Success({ user }: { user: User }) {
+export function Success({ user }: { user?: User }): ReactElement {
   return (
     <Page heading="Konto erstellt">
       <Text>
-        Hallo {user.name} 👋 Dein neues Konto wurde gestellt und wir haben eine
-        Email an «{user.email}» geschickt. Bitte öffne den Link in diesem Email,
-        um dich anzumelden.
+        Hallo {user?.name} 👋 Dein neues Konto wurde gestellt und wir haben eine
+        Email an «{user?.email}» geschickt. Bitte öffne den Link in diesem
+        Email, um dich anzumelden.
       </Text>
     </Page>
   );
@@ -50,9 +50,9 @@ export function CreateUserForm({
   setUser,
   onSubmit,
 }: {
-  setUser: Function;
+  setUser: Dispatch<SetStateAction<User | undefined>>;
   onSubmit?: (values: { [key: string]: any }) => void;
-}) {
+}): ReactElement {
   const router = useRouter();
   const [error, setError] = useState("");
   const [showLogin, setShowLogin] = useState(false);

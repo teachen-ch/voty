@@ -1,8 +1,7 @@
-import Newsletter from "components/Newsletter";
 import { Page } from "components/Page";
-import { Card, Heading, Text } from "rebass";
+import { Heading } from "rebass";
 
-export default function NewsletterSuccess() {
+export default function NewsletterSuccess(): ReactElement {
   return (
     <Page heading="Es hat geklappt!">
       <Heading as="h2" id="newsletter">

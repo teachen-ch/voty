@@ -1,8 +1,9 @@
 import Head from "next/head";
 import { Page } from "components/Page";
-import { Box, Link as A, Heading, Text } from "rebass";
+import { Link as A, Heading, Text } from "rebass";
+import { ReactElement } from "react";
 
-export default function Datenschutz() {
+export default function Datenschutz(): ReactElement {
   return (
     <Page heading="Datenschutz">
       <Head>

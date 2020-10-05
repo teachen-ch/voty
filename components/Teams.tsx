@@ -1,11 +1,11 @@
 import { gql, useQuery } from "@apollo/client";
 import { useUser } from "../state/user";
-import { Button, Text, Card, Link as A } from "rebass";
+import { Text, Card, Link as A } from "rebass";
 import Link from "next/link";
-import { QForm } from "./Form";
+import { QForm, ErrorBox } from "./Form";
 import { useMutation } from "@apollo/client";
-import { useState, Fragment } from "react";
-import { Team, TeamWhereInput } from "@prisma/client";
+import { useState, Fragment, ReactElement } from "react";
+import { Team, TeamWhereInput } from "graphql/types";
 import { Page } from "./Page";
 import { Users } from "./Users";
 
@@ -54,7 +54,7 @@ const GET_TEAM_USER = gql`
   ${fragments.TeamUserFields}
 `;
 
-export function useTeamUser(id: Number) {
+export function useTeamUser(id: number): Team | undefined {
   const { data } = useQuery(GET_TEAM_USER, {
     variables: { where: { id } },
     skip: !id,
@@ -71,7 +71,7 @@ const GET_TEAM_TEACHER = gql`
   ${fragments.TeamTeacherFields}
 `;
 
-export function useTeamTeacher(id: Number, user: any) {
+export function useTeamTeacher(id: number): Team | undefined {
   const { data } = useQuery(GET_TEAM_TEACHER, {
     variables: { where: { id } },
     skip: !id,
@@ -85,7 +85,6 @@ type TeamsProps = {
 };
 
 export const Teams: React.FC<TeamsProps> = ({ where, teamClick }) => {
-  const user = useUser();
   const [focus, setFocus] = useState();
   const teams = useQuery(GET_TEAMS, { variables: { where } });
 
@@ -183,10 +182,14 @@ const CREATE_TEAM = gql`
   ${fragments.TeamTeacherFields}
 `;
 
-export function CreateTeamForm({ onCompleted }: { onCompleted?: () => void }) {
+export function CreateTeamForm({
+  onCompleted,
+}: {
+  onCompleted?: () => void;
+}): ReactElement {
   const user = useUser();
   const [error, setError] = useState("");
-  const [doCreateTeam, mutation] = useMutation(CREATE_TEAM, {
+  const [doCreateTeam] = useMutation(CREATE_TEAM, {
     onCompleted: onCompleted,
     onError: (error) => {
       setError(error.message);
@@ -228,6 +231,7 @@ export function CreateTeamForm({ onCompleted }: { onCompleted?: () => void }) {
           submit: { type: "submit", label: "Klasse erstellen" },
         }}
       ></QForm>
+      <ErrorBox error={error} />
     </Card>
   );
 }

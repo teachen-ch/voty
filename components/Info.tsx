@@ -1,7 +1,9 @@
-import { Box, Card } from "rebass";
-import { PropsWithChildren } from "react";
+import { Card } from "rebass";
+import { PropsWithChildren, ReactElement } from "react";
 
-export default function Info(props: PropsWithChildren<{ type?: string }>) {
+export default function Info(
+  props: PropsWithChildren<{ type?: string }>
+): ReactElement {
   const type = props.type || "default";
   const typeColors: { [key: string]: string } = {
     important: "#d90000",

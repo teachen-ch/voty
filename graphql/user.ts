@@ -9,14 +9,14 @@ schema.objectType({
     t.model.id();
     t.string("email", {
       nullable: true,
-      resolve({ email }, args, ctx) {
+      resolve({ email }) {
         return email;
       },
     });
     t.model.name();
     t.model.lastname();
     t.string("shortname", {
-      resolve({ name, lastname }, args, ctx) {
+      resolve({ name, lastname }) {
         return (
           name + (lastname ? ` ${upperFirst(lastname).substr(0, 1)}.` : "")
         );
@@ -123,16 +123,9 @@ schema.extendType({
     t.field("setSchool", {
       type: "User",
       args: {
-        school: intArg(),
+        school: intArg({ required: true }),
       },
-      resolve: async (_root, { school }, ctx) => {
-        const user = await users.updateUser(
-          _root,
-          { school: { connect: { id: school } } },
-          ctx
-        );
-        return user;
-      },
+      resolve: users.setSchool,
     });
   },
 });

@@ -3,7 +3,9 @@ import { LoggedInPage } from "../../components/Page";
 import { Heading, Text } from "rebass";
 import { LogoutButton } from "../user/logout";
 import { Navigation, Route } from "components/Navigation";
-export default function Teacher() {
+import { ReactElement } from "react";
+
+export default function Teacher(): ReactElement {
   const user = useUser();
 
   return (
@@ -17,7 +19,7 @@ export default function Teacher() {
   );
 }
 
-export function StudentTeamNavigation() {
+export function StudentTeamNavigation(): ReactElement {
   return (
     <Navigation>
       <Route href="/student" label="Dein Profil" />

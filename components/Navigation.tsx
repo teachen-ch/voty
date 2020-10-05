@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 
 type NavigationProps = { admin?: boolean };
 
-export const Navigation: React.FC<NavigationProps> = ({ admin, children }) => {
+export const Navigation: React.FC<NavigationProps> = ({ children }) => {
   return (
     <Flex flexDirection="row" flexWrap="wrap" m={-1}>
       {children}

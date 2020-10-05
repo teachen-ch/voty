@@ -1,14 +1,14 @@
 import jwt from "jsonwebtoken";
 import { PrismaClient, User, Team, Role } from "@prisma/client";
-import { NextApiRequest } from "next";
 import bcrypt from "bcrypt";
 import { sendMail } from "../../util/email";
 import { randomBytes, createHash } from "crypto";
 import logger from "../../util/logger";
+import { FieldResolver } from "nexus/components/schema";
 
-let secret = process.env.SESSION_SECRET!;
+let secret = process.env.SESSION_SECRET || "";
 if (!secret) throw new Error("New SESSION_SECRET defined in .env");
-let expires = process.env.SESSION_EXPIRES || "1d";
+const expires = process.env.SESSION_EXPIRES || "1d";
 
 if (!secret) {
   logger.warn(".env.SESSION_SECRET is not defined! using random secret");
@@ -21,17 +21,18 @@ type ResponseLogin = {
   user?: User;
 };
 
-export async function login(
-  _root: any,
-  args: any,
-  ctx: NexusContext
-): Promise<ResponseLogin> {
+export const login: FieldResolver<"Mutation", "login"> = async (
+  _root,
+  args,
+  ctx
+): Promise<ResponseLogin> => {
   try {
     const user = await ctx.db.user.findOne({ where: { email: args.email } });
-    if (!user) throw Error("ERR_USER_PASSWORD");
+    if (!user) throw Error("ERR_USER_PASSWORD"); // generic error, do not say why
+    if (!user.password) throw Error("ERR_PASSWORD_NOT_SET");
 
-    const matches = await bcrypt.compare(args.password, user.password!);
-    if (!matches) throw Error("ERR_USER_PASSWORD");
+    const matches = await bcrypt.compare(args.password, user.password);
+    if (!matches) throw Error("ERR_USER_PASSWORD"); // generic error, do not say why
 
     if (!user.emailVerified) {
       throw Error("ERR_EMAIL_NOT_VERIFIED");
@@ -42,7 +43,7 @@ export async function login(
     logger.error(err.message);
     throw err;
   }
-}
+};
 
 function startJWTSession(user: User, ctx: NexusContext): ResponseLogin {
   const token: string = jwt.sign({ user }, secret, {
@@ -53,7 +54,7 @@ function startJWTSession(user: User, ctx: NexusContext): ResponseLogin {
   return { token, user };
 }
 
-export function setRequestUser(user: User, ctx: NexusContext) {
+export function setRequestUser(user: User, ctx: NexusContext): void {
   ctx.user = user;
 }
 
@@ -61,9 +62,15 @@ export function getRequestUser(ctx: NexusContext): User | undefined {
   return ctx.user;
 }
 
-export async function createUser(_root: any, args: any, ctx: NexusContext) {
+export const createUser: FieldResolver<"Mutation", "createUser"> = async (
+  _root,
+  args,
+  ctx
+) => {
   try {
     const { email, password, name, lastname, role } = args.data;
+    if (!email) throw new Error("ERR_NO_EMAIL");
+    if (!password) throw new Error("ERR_NO_PASSWORD");
     const salt = await bcrypt.genSalt(10);
     const hashed = await bcrypt.hash(password, salt);
     if (role === Role.Admin) throw new Error("NAH");
@@ -73,7 +80,7 @@ export async function createUser(_root: any, args: any, ctx: NexusContext) {
         lastname,
         email,
         password: hashed,
-        role,
+        role: role || undefined,
       },
     });
 
@@ -88,9 +95,13 @@ export async function createUser(_root: any, args: any, ctx: NexusContext) {
     logger.error(err);
     throw new Error("ERR_CREATE_USER");
   }
-}
+};
 
-export async function acceptInvite(_root: any, args: any, ctx: NexusContext) {
+export const acceptInvite: FieldResolver<"Mutation", "acceptInvite"> = async (
+  _root,
+  args,
+  ctx
+): Promise<Team> => {
   const team = await ctx.db.team.findOne({ where: { invite: args.invite } });
   if (!team) throw new Error("INVITE_NOT_FOUND");
   const user = getRequestUser(ctx);
@@ -98,13 +109,14 @@ export async function acceptInvite(_root: any, args: any, ctx: NexusContext) {
   const success = await connectUserTeam(user, team, ctx);
   if (!success) throw new Error("DB_ERROR");
   else return team;
-}
+};
 
 export async function connectUserTeam(
-  user: User,
+  // TODO: struggling with return value from createUser
+  user: User | any,
   team: Team,
   ctx: NexusContext
-) {
+): Promise<User> {
   if (user.teamId) throw new Error("ALREADY_IN_TEAM");
   return await ctx.db.user.update({
     where: { id: user.id },
@@ -115,42 +127,70 @@ export async function connectUserTeam(
   });
 }
 
-export async function createInvitedUser(
-  _root: any,
-  args: any,
-  ctx: NexusContext
-) {
+// @ts-ignore: struggling with return type
+export const createInvitedUser: FieldResolver<
+  "Mutation",
+  "createInvitedUser"
+> = async (_root, args, ctx, info) => {
   const team = await ctx.db.team.findOne({ where: { invite: args.invite } });
   if (!team) throw new Error("INVITE_NOT_FOUND");
   const { name, lastname, email, password } = args;
-  args.data = {
-    name,
-    lastname,
-    email,
-    password,
-    role: Role.Student,
+  const newArgs = {
+    data: {
+      name,
+      lastname,
+      email,
+      password,
+      role: Role.Student,
+    },
   };
-  const user = await createUser(_root, args, ctx);
+  const user = await createUser(_root, newArgs, ctx, info);
   await connectUserTeam(user, team, ctx);
   return user;
-}
+};
 
-export async function updateUser(_root: any, args: any, ctx: NexusContext) {
+export const updateUser: FieldResolver<"Mutation", "updateUser"> = async (
+  _root,
+  args,
+  ctx
+) => {
   // TODO: ensure this is not called with variable args by user
   const user = getRequestUser(ctx);
-  const id = args.id || user?.id;
+  const id = args.where.id;
   if (id !== user?.id && user?.role !== Role.Admin)
     throw new Error("ERR_ONLY_UPDATE_SELF");
-  if (args.role && user?.role !== Role.Admin) delete args.role;
+  if (args.data.role && user?.role !== Role.Admin) delete args.data.role;
   const result = await ctx.db.user.update({
-    where: { id },
-    data: args,
+    where: { id: id || undefined },
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore    TODO: this barks on a mismatch in the Gender Enum defined by Nexus and Prisma??!
+    data: args.data,
   });
   return result;
-}
+};
+
+export const setSchool: FieldResolver<"Mutation", "setSchool"> = async (
+  _root,
+  args,
+  ctx,
+  info
+) => {
+  const user = getRequestUser(ctx);
+  const updated = await updateUser(
+    _root,
+    {
+      data: { school: { connect: { id: args.school } } },
+      where: { id: user?.id },
+    },
+    ctx,
+    info
+  );
+  return updated;
+};
 
 export function getSessionUser(req: Request): User | undefined {
   // what about req.body.token || req.query.token ?
+  // const token = req.headers.get("x-access-token");
   // @ts-ignore
   const token = req.headers["x-access-token"];
 
@@ -173,7 +213,7 @@ export async function getUser(ctx: NexusContext): Promise<User | null> {
   }
 }
 
-export function verifyJWT(token: string) {
+export function verifyJWT(token: string): string | any | null {
   try {
     return jwt.verify(token, secret);
   } catch (err) {
@@ -187,9 +227,9 @@ export async function sendVerificationEmail(
   email: string,
   purpose: string,
   prisma: PrismaClient
-) {
+): Promise<ResponseLogin> {
   try {
-    const from = process.env.EMAIL!;
+    const from = process.env.EMAIL;
     if (!from)
       throw new Error("Please define EMAIL env variable (sender-email)");
 
@@ -235,11 +275,11 @@ async function createVerificationToken(
   return token;
 }
 
-export async function checkVerification(
-  _root: any,
-  args: any,
-  ctx: NexusContext
-) {
+export const checkVerification: FieldResolver<
+  "Mutation",
+  "checkVerification"
+> = async (_root, args, ctx): Promise<ResponseLogin> => {
+  if (!args.token) throw new Error("ERR_NO_TOKEN");
   const found = await verifyToken(args.token, ctx.db);
   if (!found) {
     throw Error("ERR_TOKEN_NOT_FOUND");
@@ -255,9 +295,12 @@ export async function checkVerification(
     data: { emailVerified: new Date() },
   });
   return startJWTSession(user, ctx);
-}
+};
 
-export async function changePassword(_root: any, args: any, ctx: NexusContext) {
+export const changePassword: FieldResolver<
+  "Mutation",
+  "changePassword"
+> = async (_root, args, ctx): Promise<ResponseLogin> => {
   const user = await getUser(ctx);
   if (!user) throw new Error("ERR_USER_NOT_FOUND");
   const salt = await bcrypt.genSalt(10);
@@ -271,7 +314,7 @@ export async function changePassword(_root: any, args: any, ctx: NexusContext) {
   } else {
     throw Error("ERR_PASSWORD_CHANGE");
   }
-}
+};
 
 async function verifyToken(token: string, prisma: PrismaClient) {
   const secret = process.env.SESSION_SECRET;

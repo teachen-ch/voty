@@ -1,7 +1,8 @@
 import { Page } from "components/Page";
 import { Card, Button, Text } from "rebass";
+import { ReactElement } from "react";
 
-export default function Impressum() {
+export default function Impressum(): ReactElement {
   function sendMail() {
     const email = "hc.nehcaet@ytov:otliam";
     document.location.href = email.split("").reverse().join("");

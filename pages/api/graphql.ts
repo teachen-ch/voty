@@ -1,7 +1,11 @@
+// this is the require-style from nexus docs
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 if (process.env.NODE_ENV === "development") require("nexus").default.reset();
 import { NextApiRequest, NextApiResponse } from "next";
 
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const app = require("nexus").default;
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const settings = require("nexus").settings;
 
 settings.change({
@@ -19,6 +23,9 @@ require("../../graphql/user");
 
 app.assemble();
 
-export default async (req: NextApiRequest, res: NextApiResponse) => {
+export default async (
+  req: NextApiRequest,
+  res: NextApiResponse
+): Promise<any> => {
   return app.server.handlers.graphql(req, res);
 };

@@ -1,5 +1,6 @@
 import Head from "next/head";
-export function Header() {
+import { ReactElement } from "react";
+export function Header(): ReactElement {
   return (
     <Head>
       <Icons />

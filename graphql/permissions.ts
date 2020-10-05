@@ -1,17 +1,17 @@
 import { shield, rule, allow, or } from "nexus-plugin-shield";
-import { Role, BallotScope } from "@prisma/client";
+import { Role } from "@prisma/client";
 import { ballots } from "./resolvers";
 
 // rule caching: "no_cache", "contextual" (relies on context, eg. authentication,
 // or "strict": relies on parent or args
 const isUser = rule({ cache: "contextual" })(
-  async (parent, args, ctx: NexusContext, info) => {
+  async (parent, args, ctx: NexusContext) => {
     return ctx.user?.id !== undefined;
   }
 );
 
 const isTeacher = rule({ cache: "contextual" })(
-  async (parent, args, ctx: NexusContext, info) => {
+  async (parent, args, ctx: NexusContext) => {
     switch (ctx.user?.role) {
       case Role.Teacher:
       case Role.Principal:
@@ -24,14 +24,15 @@ const isTeacher = rule({ cache: "contextual" })(
 );
 
 const isAdmin = rule({ cache: "contextual" })(
-  async (parent, args, ctx: NexusContext, info) => {
+  async (parent, args, ctx: NexusContext) => {
     return ctx.user?.role === Role.Admin;
   }
 );
 
 // team members can view team
+/*
 const isTeamMember = rule({ cache: "strict" })(
-  async (parent, args, ctx: NexusContext, info) => {
+  async (parent, args, ctx: NexusContext) => {
     const { id, teamId } = ctx.user || {};
     if (!id) return false;
     // check if student is part of team
@@ -40,11 +41,11 @@ const isTeamMember = rule({ cache: "strict" })(
     if (id === parent.teacherId) return true;
     return false;
   }
-);
+);*/
 
 // Teacher may view his students
 const teachesTeam = rule({ cache: "strict" })(
-  async (parent, args, ctx: NexusContext, info) => {
+  async (parent, args, ctx: NexusContext) => {
     const { id, role } = ctx.user || {};
     if (!id || role !== Role.Teacher) return false;
     if (!parent.role)
@@ -62,7 +63,7 @@ const teachesTeam = rule({ cache: "strict" })(
 // check for parent.id, or parent.schoolId, or parent.teacherId...
 const isOwn = (field: string) =>
   rule(`own-${field}`, { cache: "strict" })(
-    async (parent, args, ctx: NexusContext, info) => {
+    async (parent, args, ctx: NexusContext) => {
       const { id } = ctx.user || {};
       if (!id) return false;
       return parent[field] === id;
@@ -70,7 +71,7 @@ const isOwn = (field: string) =>
   );
 
 const canViewBallot = rule({ cache: "strict" })(
-  async (parent, args, ctx: NexusContext, info) => {
+  async (parent, args, ctx: NexusContext) => {
     if (ctx.user?.role === Role.Admin) return true;
     return await ballots.viewPermission({
       ballot: parent,

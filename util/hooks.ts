@@ -19,11 +19,8 @@ export function useNavHash(
   const [navHash, setStateHash] = useState<string>(initialHash);
   const router = useRouter();
 
-  console.log(router.asPath);
-
   useEffect(() => {
     function hashChangeStart(url: string) {
-      console.log("Hash changed", window.location);
       if (url.indexOf("#") >= 0) {
         const newHash = url.substring(url.indexOf("#"));
         setStateHash(newHash);

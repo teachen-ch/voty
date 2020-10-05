@@ -1,8 +1,8 @@
 import { LoggedInPage } from "components/Page";
-import { useUser } from "state/user";
 import { Schools } from "../../components/Schools";
+import { ReactElement } from "react";
 
-export default function SchoolsPage() {
+export default function SchoolsPage(): ReactElement {
   return (
     <LoggedInPage heading="Schulen">
       <Schools />

@@ -1,17 +1,16 @@
 import { LoggedInPage } from "components/Page";
 import { Heading } from "rebass";
 import { useTeamTeacher } from "components/Teams";
-import { useUser } from "state/user";
 import { Ballots, BallotScope } from "components/Ballots";
 import { Ballot } from "graphql/types";
 import { useRouter } from "next/router";
 import { TeacherTeamNavigation } from "./admin";
+import { ReactElement } from "react";
 
-export default function TeacherTest() {
-  const user = useUser();
+export default function TeacherTest(): ReactElement {
   const router = useRouter();
   const id = parseInt(String(router.query.id));
-  const team = useTeamTeacher(id, user);
+  const team = useTeamTeacher(id);
 
   function selectBallot(ballot: Ballot) {
     router.push("/ballots/[id]", `/ballots/${ballot.id}`);

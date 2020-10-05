@@ -27,12 +27,16 @@ declare module "rebass" {
 }
 
 declare module "react" {
+  // TODO: not sure if I need to import T here
+  // eslint-disable-next-line
   interface DOMAttributes<T> {
     css?: InterpolationWithTheme<any>;
   }
 }
 
+// TODO: Not sure how to fix this linting error
 declare global {
+  // eslint-disable-next-line
   namespace JSX {
     interface IntrinsicAttributes {
       css?: InterpolationWithTheme<any>;

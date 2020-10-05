@@ -44,8 +44,8 @@ export const Ref: React.FC<RefProps> = (props) => (
 );
 
 export const Source: React.FC<{ href: string }> = (props) => {
-  const domain = props.href.replace(/^https?\:\/\/(?:www\.)?(.*?)\/.*$/, "$1");
-  const start = props.href.replace(/^(https?\:\/\/(?:www\.)?).*/, "$1");
+  const domain = props.href.replace(/^https?:\/\/(?:www\.)?(.*?)\/.*$/, "$1");
+  const start = props.href.replace(/^(https?:\/\/(?:www\.)?).*/, "$1");
   return <a href={`${start}${domain}`}>{domain}</a>;
 };
 
@@ -56,11 +56,11 @@ export const Show: React.FC<{ if: boolean | string | number | undefined }> = (
   else return null;
 };
 
-export const Center: React.FC<{}> = (props) => (
+export const Center: React.FC = (props) => (
   <Flex justifyContent="center">{props.children}</Flex>
 );
 
-export const Toggle: React.FC<{}> = (props) => {
+export const Toggle: React.FC = (props) => {
   const [open, setOpen] = useState(false);
   return (
     <>
@@ -78,7 +78,9 @@ export const Include: React.FC<{ toggle: boolean }> = (props) => {
     <Wrapper>
       <MDXProvider
         components={{
+          // eslint-disable-next-line react/display-name
           h1: (props: any) => <Heading mt={2}>{props.children}</Heading>,
+          // eslint-disable-next-line react/display-name
           wrapper: (props: any) => (
             <Box my={2} p={3} bg="lightgray">
               {props.children}

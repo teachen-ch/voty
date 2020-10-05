@@ -1,11 +1,11 @@
 import { Page } from "components/Page";
 import { Heading } from "rebass";
-import { useTeamTeacher } from "components/Teams";
 import { Ballots, BallotScope } from "components/Ballots";
 import { Ballot } from "graphql/types";
 import { useRouter } from "next/router";
+import { ReactElement } from "react";
 
-export default function TeacherTest() {
+export default function TeacherTest(): ReactElement {
   const router = useRouter();
 
   function selectBallot(ballot: Ballot) {

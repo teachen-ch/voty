@@ -1,13 +1,13 @@
 import { useUser } from "../../state/user";
 import { LoggedInPage } from "../../components/Page";
-import { Heading, Button, Text, Card } from "rebass";
+import { Heading, Button, Text } from "rebass";
 import { Teams, CreateTeamForm } from "../../components/Teams";
 import { LogoutButton } from "../user/logout";
-import { useState } from "react";
+import { useState, ReactElement } from "react";
 import { SelectSchool } from "../../components/Schools";
 import router from "next/router";
 
-export default function Teacher() {
+export default function Teacher(): ReactElement {
   const user = useUser();
   const [showForm, setShowForm] = useState(false);
 

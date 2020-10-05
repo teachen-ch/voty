@@ -1,10 +1,13 @@
-import { Team, User, PrismaClient } from "@prisma/client";
 import { createUser, connectUserTeam } from "./users";
 import { Role } from "@prisma/client";
 import { randomBytes } from "crypto";
 import { upperFirst } from "lodash";
+import { FieldResolver } from "nexus/components/schema";
 
-export async function inviteStudents(_root: any, args: any, ctx: NexusContext) {
+export const inviteStudents: FieldResolver<
+  "Mutation",
+  "inviteStudents"
+> = async (_root, args, ctx) => {
   const { team: id, emails } = args;
   const user = ctx.user;
   const errors: string[] = [];
@@ -29,7 +32,7 @@ export async function inviteStudents(_root: any, args: any, ctx: NexusContext) {
       },
     };
     try {
-      const invited = await createUser(_root, args, ctx);
+      const invited = await createUser(_root, args, ctx, undefined as any);
       await connectUserTeam(invited, team, ctx);
       success.push(email);
     } catch (err) {
@@ -37,12 +40,9 @@ export async function inviteStudents(_root: any, args: any, ctx: NexusContext) {
     }
   }
 
-  console.log("Successfully invited: ", success);
-  console.log("Error with invitations: ", errors);
   team = await ctx.db.team.findOne({
     where: { id },
     include: { members: true, school: true },
   });
-  console.log("Returning: ", team);
   return team;
-}
+};

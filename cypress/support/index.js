@@ -14,4 +14,5 @@
 // ***********************************************************
 
 import "./commands";
-require("cypress-image-snapshot/command").addMatchImageSnapshotCommand();
+/* import imageSnapshot from "cypress-image-snapshot/command";
+imageSnapshot.addMatchImageSnapshotCommand();*/

@@ -868,7 +868,7 @@ type Mutation {
   emailVerification(email: String!, purpose: String!): ResponseLogin
   inviteStudents(emails: [String!]!, team: Int!): Team
   login(email: String, password: String): ResponseLogin
-  setSchool(school: Int): User
+  setSchool(school: Int!): User
   updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
   vote(ballot: Int!, vote: Int!): Votes
 }
