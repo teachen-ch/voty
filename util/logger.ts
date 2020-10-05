@@ -65,7 +65,7 @@ const logglyLogger = new Loggly({
   token: "d678db9a-c0dd-49b0-a885-f168172332c6",
   stripColors: true,
   json: true,
-  tags: [process.env.NODE_ENV],
+  tags: [process.env.NODE_ENV || ""],
 });
 
 const mailLogger: any = new Mail({

@@ -5,7 +5,7 @@ import { useState, ReactElement, Dispatch, SetStateAction } from "react";
 import { useRouter } from "next/router";
 import { QForm, yup, ErrorBox } from "../../components/Form";
 import { omit } from "lodash";
-import { User } from "@prisma/client";
+import { User } from "graphql/types";
 
 export const CREATE_USER = gql`
   mutation($data: UserCreateInput!) {

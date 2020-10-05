@@ -5,7 +5,7 @@ import { Grid } from "theme-ui";
 import Link from "next/link";
 import { ReactElement } from "react";
 
-export default function Demokratie(): ReactElement {
+export default function Abstimmung(): ReactElement {
   return (
     <Page heading="Jugendliche stimmen ab – ein Experiment">
       <Text mt={3}>

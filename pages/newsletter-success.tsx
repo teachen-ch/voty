@@ -1,5 +1,6 @@
 import { Page } from "components/Page";
 import { Heading } from "rebass";
+import { ReactElement } from "react";
 
 export default function NewsletterSuccess(): ReactElement {
   return (
