@@ -10,6 +10,7 @@ import CheckLogin from "components/CheckLogin";
 import { useSetAccessToken, useUser, useSetUser } from "../../state/user";
 import { useQueryParam } from "util/hooks";
 import { Role } from "components/CheckLogin";
+import { User } from "graphql/types";
 
 export const LOGIN = gql`
   mutation login($email: String!, $password: String!) {
@@ -240,7 +241,7 @@ function CheckToken({ token, purpose }: { token: string; purpose: string }) {
   const setUser = useSetUser();
   const setAccessToken = useSetAccessToken();
   const [error, setError] = useState("");
-  const [tempUser, setTempUser] = useState<any | undefined>(); // TODO: NEXUSTYPE
+  const [tempUser, setTempUser] = useState<User | undefined>();
   const router = useRouter();
   const [doVerification] = useMutation(CHECK_VERIFICATION, {
     onCompleted: (data) => {
@@ -268,7 +269,7 @@ function CheckToken({ token, purpose }: { token: string; purpose: string }) {
         <>
           <Heading as="h2">Email bestätigt</Heading>
           <Text mb={4}>Super, Deine Email-Adresse ist nun bestätigt.</Text>
-          <Button onClick={() => router.push(getStartpage(user?.role))}>
+          <Button onClick={() => router.push(getStartpage(tempUser?.role))}>
             Weiter geht&apos;s
           </Button>
         </>
