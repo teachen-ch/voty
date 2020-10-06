@@ -8,7 +8,7 @@
           dest: "{{app_dir}}/docker-compose.yml",
           mode: 0600,
         }
-    - name: Create .env file for Backend
+    - name: Create .env.local file for Backend
       template:
         { src: "{{ env_file }}", dest: "{{app_dir}}/.env.local", mode: 0600 }
     - name: Copy .env file for Prisma
@@ -26,6 +26,8 @@
     #     build:
     #       pull: "no"
     #       path: "{{app_dir}}"
+    - name: Clean up old docker files
+      command: docker system prune -a -f
     - name: Login to docker registry (GitHub Packages)
       ### this is an ugly hack using a personal access token with read-only reg access
       # see https://github.community/t/download-from-github-package-registry-without-authentication/14407/44
