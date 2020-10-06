@@ -39,6 +39,22 @@ You can now log in with the user «teacher@teachen.ch» or «student@teachen.ch�
 docker exec -it postgres psql -U voty -c "update users set email_verified=NOW() where email='name@email.com'";
 ```
 
+## Build Process
+
+Once you start changing the software, you need to have a basic understanding of the build process and how to generate the various (typing-) artifacts with prisma, nexus and graphql-codegen.
+
+When you change the [schema.prisma](../prisma/schema.prisma), then you will need to rebuild the prisma client and run database migrations (currently we are running in Prisma's [automatic migration mode](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-migrate)):
+
+```bash
+yarn run migrate # runs experimental db migration and generates prisma client
+```
+
+When you change the [GraphQL Schema](../graphql/schema.ts), then you will need to update the typings which are used in the frontend code (we can't use "@prisma/client" because of a next.js bug:
+
+```bash
+yarn run graphql # generates graphql/types.d.ts
+```
+
 ## Next Steps
 
 👉 Now go have a look at our [tech stack](./stack.md)
