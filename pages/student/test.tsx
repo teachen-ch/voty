@@ -14,9 +14,9 @@ export default function StudentTest(): ReactElement {
   }
 
   return (
-    <LoggedInPage heading="Demokratie Testen">
+    <LoggedInPage heading="Abstimmen">
       <StudentTeamNavigation />
-      <Heading as="h2">Demokratie Testen: Nationale Abstimmungen</Heading>
+      <Heading as="h2">Nationale Abstimmungen</Heading>
       <Ballots where={{ scope: BallotScope.National }} onClick={selectBallot} />
     </LoggedInPage>
   );

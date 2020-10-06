@@ -23,13 +23,11 @@ export default function BallotPage(): ReactElement {
 
   if (!ballot)
     return (
-      <Page heading="Abstimmungsseite">
-        Abstimmung konnte nicht gefunden werden
-      </Page>
+      <Page heading="Abstimmung">Abstimmung konnte nicht gefunden werden</Page>
     );
 
   return (
-    <Page heading="Abstimmungsseite">
+    <Page heading="Abstimmung">
       <Heading as="h2">{ballot.title}</Heading>
       <Text my={2}>{ballot.description}</Text>
       <Text my={2}>📅 Dauer: {formatFromTo(ballot.start, ballot.end)}</Text>

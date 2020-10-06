@@ -1,20 +1,27 @@
 import { useUser } from "../../state/user";
 import { LoggedInPage } from "../../components/Page";
-import { Heading, Text } from "rebass";
+import { Heading, Text, Link as A } from "rebass";
 import { LogoutButton } from "../user/logout";
 import { Navigation, Route } from "components/Navigation";
 import { ReactElement } from "react";
+import Link from "next/link";
 
 export default function Teacher(): ReactElement {
   const user = useUser();
 
   return (
-    <LoggedInPage heading="Startseite für Schüler/-innen">
+    <LoggedInPage heading="Startseite">
       <StudentTeamNavigation />
       <Heading as="h2">Hey {user?.name} 👋</Heading>
       <Text>{user && "Deine Klasse: " + user?.team?.name}</Text>
+      <Text my={3}>
+        Hier geht es zu den 👉{" "}
+        <Link href="/student/test">
+          <A>Abstimmungen</A>
+        </Link>
+      </Text>
 
-      <LogoutButton my={4} />
+      <LogoutButton my={5} />
     </LoggedInPage>
   );
 }
@@ -24,8 +31,6 @@ export function StudentTeamNavigation(): ReactElement {
     <Navigation>
       <Route href="/student" label="Dein Profil" />
       <Route href="/student/test" label="Demokratie testen" />
-      <Route href="/student/learn" label="Demokratie lernen" disabled />
-      <Route href="/student/experience" label="Demokratie leben" disabled />
     </Navigation>
   );
 }

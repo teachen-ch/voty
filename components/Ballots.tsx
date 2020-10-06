@@ -1,8 +1,9 @@
 import { gql, useQuery, QueryResult } from "@apollo/client";
-import { Heading, Text, Link as A, Button, Flex } from "rebass";
+import { Heading, Text, Link as A, Button } from "rebass";
 import { Fragment } from "react";
 import { Ballot, BallotWhereInput } from "graphql/types";
 import { formatFromTo } from "../util/date";
+import { Grid } from "./Form";
 
 export const fragments = {
   BallotFields: gql`
@@ -102,8 +103,8 @@ export const Ballots: React.FC<BallotsProps> = ({ where, onClick }) => {
             {ballot.title}
           </A>
           <Text fontSize={2}>{ballot.description}</Text>
-          <Flex mt={2} mb={4} justifyContent="space-between">
-            Abstimmungszeitraum: {formatFromTo(ballot.start, ballot.end)}
+          <Grid mt={2} mb={4} columns={[0, 0, "2fr 1fr"]}>
+            Zeit: {formatFromTo(ballot.start, ballot.end)}
             <Button
               onClick={() => onClick(ballot)}
               variant={
@@ -114,7 +115,7 @@ export const Ballots: React.FC<BallotsProps> = ({ where, onClick }) => {
             >
               Zur Abstimmung
             </Button>
-          </Flex>
+          </Grid>
         </Fragment>
       ))}
     </>

@@ -31,7 +31,13 @@ export const Route: React.FC<RouteProps> = (props) => {
   }
 
   return (
-    <Button m={1} variant={variant} onClick={onClick} minWidth="24%">
+    <Button
+      m={1}
+      variant={variant}
+      onClick={onClick}
+      minWidth="24%"
+      fontSize={[1, 1, 2]}
+    >
       {props.label}
     </Button>
   );
