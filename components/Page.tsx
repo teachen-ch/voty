@@ -137,6 +137,7 @@ export const Container: React.FC<FlexProps> = (props) => (
   <Flex mx={[3, 3, 4]} justifyContent="center" {...props}>
     <Flex
       justifyItems="center"
+      textAlign="center"
       flexDirection="column"
       maxWidth={["100%", "100%", "100%", "1160px"]}
     >

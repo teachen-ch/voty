@@ -6,6 +6,7 @@ import { InterpolationWithTheme } from "@emotion/core";
 declare module "rebass" {
   interface FlexProps {
     as?: React.ElementType;
+    textAlign?: string;
     css?: InterpolationWithTheme<any>;
   }
   interface BoxProps {
