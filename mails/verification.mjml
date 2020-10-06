@@ -2,21 +2,19 @@
   <mj-body>
     <mj-section>
       <mj-column>
-
-        <mj-text font-size="30px" font-weight="bold">voty</mj-text>
-        <mj-divider border-color="#000"></mj-divider>
-
-        <mj-text font-size="20px" color="#000" font-family="helvetica">Mit diesem Link kannst Du dich als <strong>{{email}}</strong> bei voty einloggen</mj-text>
+        <mj-text font-size="30px" font-weight="bold">Willkommen bei voty</mj-text>
+        <mj-divider border-width="1px" border-color="#000"></mj-divider>
+        <mj-text font-size="20px" color="#000" font-family="helvetica">Um Dein neues Konto zu eröffnen und Deine Email-Adresse zu bestätigen, kannst Du auf diesen Link klicken:</mj-text>
       </mj-column>
     </mj-section>
     <mj-section>
       <mj-column>
-        <mj-button href="{{url}}" background-color="#c00" font-weight="bold" font-size="20px">Jetzt anmelden</mj-button>
+        <mj-button href="{{url}}" background-color="#d90000" font-weight="bold" font-size="20px">Jetzt bestätigen</mj-button>
       </mj-column>
     </mj-section>
     <mj-section>
       <mj-column>
-        Wenn Du Dich nicht gerade bei voty anmelden wolltest, kannst Du dieses Mail löschen.
+        Wenn Du Dich nicht bei voty registrieren wolltest, kannst Du dieses Mail löschen.
       </mj-column>
     </mj-section>
   </mj-body>
