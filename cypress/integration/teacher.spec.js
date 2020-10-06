@@ -18,15 +18,16 @@ describe("Test Teacher Startpage", () => {
     cy.get("button").contains("Klasse erstellen").click();
 
     // Test invite link
+    /*
     cy.get("table tr").should("have.length", 3);
     cy.get("table tr:last").as("classrow");
     cy.get("@classrow").contains("Einladung").click();
     cy.url().should("include", "/i/");
     cy.contains("Klassen-Einladung");
     cy.contains("Klasse «Testclass»");
+    cy.go("back");*/
 
     // Test team detail page
-    cy.go("back");
     cy.contains("Testclass").click();
     cy.url().should("include", "/teacher/team/");
     cy.contains("Klassenseite");
