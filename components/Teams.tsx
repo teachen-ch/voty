@@ -111,11 +111,10 @@ export const Teams: React.FC<TeamsProps> = ({ where, teamClick }) => {
       <table width="100%">
         <thead>
           <tr>
-            <th align="left">#</th>
             <th align="left">Klasse</th>
             <th align="left">Schulhaus</th>
             <th align="left">Schüler|innen</th>
-            <th align="left">Link</th>
+            <th align="left">Bearbeiten</th>
           </tr>
         </thead>
 
@@ -123,7 +122,6 @@ export const Teams: React.FC<TeamsProps> = ({ where, teamClick }) => {
           {teams.data.teams.map((team: any) => (
             <Fragment key={team.id}>
               <tr>
-                <td>{team.id}</td>
                 <td>
                   <A onClick={() => teamClick(team)}>{team.name}</A>
                 </td>
@@ -138,9 +136,7 @@ export const Teams: React.FC<TeamsProps> = ({ where, teamClick }) => {
                   </A>
                 </td>
                 <td>
-                  <Link href={`/i/${team.invite}`}>
-                    <A>Einladung</A>
-                  </Link>
+                  <A onClick={() => teamClick(team)}>Bearbeiten</A>
                 </td>
               </tr>
               {focus === team.id && (

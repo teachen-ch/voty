@@ -44,7 +44,6 @@ export function Users({
       <table>
         <thead>
           <tr>
-            <th>#</th>
             <th>Name</th>
             <th>Klasse</th>
             <th>Schulhaus</th>
@@ -54,7 +53,6 @@ export function Users({
         <tbody>
           {data?.map((user: User) => (
             <tr key={user.id}>
-              <td>{user.id}</td>
               <td>{user.shortname}</td>
               <td>{user.team?.name || team?.name}</td>
               <td>{user.team?.school?.name || school?.name}</td>

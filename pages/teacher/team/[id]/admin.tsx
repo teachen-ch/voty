@@ -73,7 +73,7 @@ export default function TeamPage(): ReactElement {
         <Heading mt={0}>Schülerinnen und Schüler einladen</Heading>
         <Grid my={1} gap={2} columns={[0, 0, "1fr 4fr"]}>
           <span />
-          <small>All diesen Email-Adressen eine Einladung schicken:</small>
+          <small>An alle diese Email-Adressen eine Einladung schicken:</small>
           <Label sx={{ alignSelf: "top", fontWeight: "bold" }}>
             Email-Adressen:
           </Label>

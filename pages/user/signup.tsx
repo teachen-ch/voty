@@ -107,7 +107,7 @@ export function CreateUserForm({
           role: {
             type: "select",
             label: "Ich bin:",
-            init: "Student",
+            init: "Teacher",
             required: true,
             options: {
               "---": "Unkown",
