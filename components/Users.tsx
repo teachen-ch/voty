@@ -28,11 +28,9 @@ export function useUsers(where?: UserWhereInput): User[] | undefined {
 export function Users({
   data,
   team,
-  school,
 }: {
   data?: User[];
   team?: Team;
-  school?: School;
 }): ReactElement {
   if (!data) {
     return <span>Loading…</span>;

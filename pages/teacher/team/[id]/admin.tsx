@@ -67,7 +67,7 @@ export default function TeamPage(): ReactElement {
     <LoggedInPage heading="Klassenseite">
       <TeacherTeamNavigation team={team} />
       <Heading as="h2">Schüler|innen</Heading>
-      <Users data={team.members} school={team.school} team={team} />
+      <Users data={team.members} team={team} />
 
       <Card>
         <Heading mt={0}>Schülerinnen und Schüler einladen</Heading>
