@@ -23,6 +23,7 @@ schema.objectType({
       },
     });
     t.model.gender();
+    t.model.emailVerified();
     t.model.image();
     t.model.role();
     t.model.school();

@@ -86,7 +86,17 @@ export const createUser: FieldResolver<"Mutation", "createUser"> = async (
 
     await sendVerificationEmail(email, "verification", ctx.db);
     logger.mail(`New user created: ${name} ${lastname} <${email}>: ${role}`);
-    setRequestUser(user, ctx);
+
+    // TODO: we need some cleanup here...
+    // currently, we need to setRequestUser in order to return to the just created user
+    // his own data. This goes through graphql-shield which will then check in the header
+    // for a user.
+    // However: if a logged-in teacher creates student-users, this same method here will be used
+    // and we don't want to change the request header in this case...
+    const loggedIn = getRequestUser(ctx);
+    if (!loggedIn) {
+      setRequestUser(user, ctx);
+    }
     return user;
   } catch (err) {
     if (err.meta?.target && err.meta.target.indexOf("email") >= 0) {

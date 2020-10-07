@@ -1,6 +1,7 @@
 import { gql, useQuery } from "@apollo/client";
 import { UserWhereInput, User, Team, School } from "graphql/types";
 import { ReactElement } from "react";
+import { Link } from "rebass";
 
 const GET_USERS = gql`
   query users($where: UserWhereInput) {
@@ -45,8 +46,9 @@ export function Users({
         <thead>
           <tr>
             <th>Name</th>
+            <th>Email</th>
             <th>Klasse</th>
-            <th>Schulhaus</th>
+            <th>Status</th>
           </tr>
         </thead>
 
@@ -54,8 +56,11 @@ export function Users({
           {data?.map((user: User) => (
             <tr key={user.id}>
               <td>{user.shortname}</td>
+              <td>
+                <Link href={`mailto:${user.email}`}>{user.email}</Link>
+              </td>
               <td>{user.team?.name || team?.name}</td>
-              <td>{user.team?.school?.name || school?.name}</td>
+              <td>{user.emailVerified ? "✅ Bestätigt" : "☑️ Verschickt"}</td>
             </tr>
           ))}
         </tbody>

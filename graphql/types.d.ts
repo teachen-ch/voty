@@ -2468,6 +2468,7 @@ export type User = {
   attachments: Array<Attachment>;
   ballots: Array<Ballot>;
   email?: Maybe<Scalars['String']>;
+  emailVerified?: Maybe<Scalars['DateTime']>;
   gender: Gender;
   id: Scalars['Int'];
   image?: Maybe<Scalars['String']>;
@@ -3571,8 +3572,14 @@ export type TeamUserFieldsFragment = (
 
 export type TeamTeacherFieldsFragment = (
   { __typename?: 'Team' }
-  & Pick<Team, 'invite'>
-  & TeamUserFieldsFragment
+  & Pick<Team, 'id' | 'name'>
+  & { school: (
+    { __typename?: 'School' }
+    & Pick<School, 'id' | 'name' | 'city'>
+  ), members: Array<(
+    { __typename?: 'User' }
+    & Pick<User, 'id' | 'email' | 'emailVerified' | 'name' | 'shortname'>
+  )> }
 );
 
 export type TeamsQueryVariables = Exact<{
@@ -3871,10 +3878,22 @@ export const TeamUserFieldsFragmentDoc = gql`
     `;
 export const TeamTeacherFieldsFragmentDoc = gql`
     fragment TeamTeacherFields on Team {
-  invite
-  ...TeamUserFields
+  id
+  name
+  school {
+    id
+    name
+    city
+  }
+  members {
+    id
+    email
+    emailVerified
+    name
+    shortname
+  }
 }
-    ${TeamUserFieldsFragmentDoc}`;
+    `;
 export const BallotsDocument = gql`
     query ballots($where: BallotWhereInput) {
   ballots(where: $where) {
@@ -4764,10 +4783,22 @@ export const TeamUserFields = gql`
     `;
 export const TeamTeacherFields = gql`
     fragment TeamTeacherFields on Team {
-  invite
-  ...TeamUserFields
+  id
+  name
+  school {
+    id
+    name
+    city
+  }
+  members {
+    id
+    email
+    emailVerified
+    name
+    shortname
+  }
 }
-    ${TeamUserFields}`;
+    `;
 export const Ballots = gql`
     query ballots($where: BallotWhereInput) {
   ballots(where: $where) {

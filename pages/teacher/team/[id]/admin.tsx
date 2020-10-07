@@ -15,10 +15,10 @@ import { fragments } from "components/Teams";
 const INVITE_STUDENTS = gql`
   mutation inviteStudents($team: Int!, $emails: [String!]!) {
     inviteStudents(team: $team, emails: $emails) {
-      ...TeamUserFields
+      ...TeamTeacherFields
     }
   }
-  ${fragments.TeamUserFields}
+  ${fragments.TeamTeacherFields}
 `;
 
 export default function TeamPage(): ReactElement {
