@@ -131,10 +131,11 @@ export const SelectSchool: React.FC = () => {
     <>
       {create ? (
         <CreateSchool
-          onCompleted={({ createOneSchool }) => {
+          onCancel={() => setCreate(false)}
+          onCompleted={({ createOneSchool }: { createOneSchool: School }) => {
             setCreate(false);
             setUserSchool({
-              variables: { school: parseInt(createOneSchool.id) },
+              variables: { school: createOneSchool.id },
             });
           }}
         />
@@ -186,8 +187,10 @@ const CREATE_SCHOOL = gql`
 
 export function CreateSchool({
   onCompleted,
+  onCancel,
 }: {
   onCompleted?: (data: any) => void;
+  onCancel?: () => void;
 }): ReactElement {
   const [error, setError] = useState("");
   const [createSchool] = useMutation(CREATE_SCHOOL, {
@@ -249,6 +252,10 @@ export function CreateSchool({
           createSchool({ variables: { data: omit(values, "submit") } })
         }
       >
+        <span />
+        <Button onClick={onCancel} variant="outline">
+          Abbrechen
+        </Button>
         <ErrorBox error={error} my={4} />
       </QForm>
     </Card>
