@@ -129,6 +129,11 @@ export default {
         variant: "text.heading",
         fontSize: [1, 2],
       },
+      "button:disabled": {
+        cursor: "inherit",
+        bg: "muted",
+        color: "white",
+      },
     },
     img: {
       maxWidth: "100%",

@@ -9,7 +9,7 @@ import {
   SelectProps as RebassSelectProps,
 } from "@rebass/forms";
 import * as yup from "yup";
-import React, { useMemo } from "react";
+import React, { useMemo, useState } from "react";
 import { omit } from "lodash";
 import { FetchResult } from "@apollo/client";
 
@@ -87,6 +87,7 @@ export const QForm: React.FC<QFormProps> = ({ fields, mutation, ...props }) => {
   const doMutation = (values: { [key: string]: any }) =>
     mutation({ variables: omit(values, "submit") });
   const onSubmit = props.onSubmit ? props.onSubmit : doMutation;
+  const [submitted, setSubmitted] = useState(false);
 
   const { fieldArr, validationSchema, initialValues } = useMemo(
     configureFields,
@@ -141,7 +142,7 @@ export const QForm: React.FC<QFormProps> = ({ fields, mutation, ...props }) => {
       return (
         <React.Fragment key={`${field.name}-frag`}>
           <span />
-          <Button type="submit" key={field.name}>
+          <Button type="submit" key={field.name} disabled={submitted}>
             {field.label}
           </Button>
         </React.Fragment>
@@ -176,7 +177,12 @@ export const QForm: React.FC<QFormProps> = ({ fields, mutation, ...props }) => {
   return (
     <Formik
       initialValues={initialValues}
-      onSubmit={onSubmit}
+      onSubmit={(values) => {
+        console.log("SUBMIT: ", submitted);
+        if (submitted) return;
+        setSubmitted(true);
+        return onSubmit(values);
+      }}
       validationSchema={validationSchema}
       validateOnBlur={false}
       validateOnChange={false}
