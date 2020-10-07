@@ -107,6 +107,7 @@ export default {
         ],
         backgroundRepeat: "no-repeat",
         backgroundPosition: ["50% -5%", "50% -10%", "51% 28.5%"],
+        opacity: "0.4",
       },
       table: {
         width: "100%",
