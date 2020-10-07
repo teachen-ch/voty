@@ -1,7 +1,6 @@
 import { useUser } from "../../state/user";
 import { LoggedInPage } from "../../components/Page";
 import { Heading, Text, Link as A } from "rebass";
-import { LogoutButton } from "../user/logout";
 import { Navigation, Route } from "components/Navigation";
 import { ReactElement } from "react";
 import Link from "next/link";
@@ -20,8 +19,6 @@ export default function Teacher(): ReactElement {
           <A>Abstimmungen</A>
         </Link>
       </Text>
-
-      <LogoutButton my={5} />
     </LoggedInPage>
   );
 }

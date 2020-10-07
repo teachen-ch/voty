@@ -2,7 +2,6 @@ import { useUser } from "../../state/user";
 import { LoggedInPage } from "../../components/Page";
 import { Heading, Button, Text } from "rebass";
 import { Teams, CreateTeamForm } from "../../components/Teams";
-import { LogoutButton } from "../user/logout";
 import { useState, ReactElement } from "react";
 import { SelectSchool } from "../../components/Schools";
 import router from "next/router";
@@ -33,7 +32,6 @@ export default function Teacher(): ReactElement {
         </Button>
       )}
       <Text />
-      <LogoutButton my={4} />
     </LoggedInPage>
   );
 }
