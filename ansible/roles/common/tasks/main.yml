@@ -58,7 +58,5 @@
       notify: reload systemd
     - name: Flush Handlers
       meta: flush_handlers
-    - name: Enable Web Backend Service
-      service: { name: voty, enabled: yes, state: restarted }
   become: yes
   become_method: sudo

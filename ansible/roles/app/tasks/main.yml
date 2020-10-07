@@ -11,9 +11,9 @@
     - name: Create .env.local file for Backend
       template:
         { src: "{{ env_file }}", dest: "{{app_dir}}/.env.local", mode: 0600 }
-    - name: Copy .env file for Prisma
-      template:
-        { src: "{{ env_file }}", dest: "{{app_dir}}/prisma/.env", mode: 0600 }
+    #- name: Copy .env file for Prisma
+    #  template:
+    #    { src: "{{ env_file }}", dest: "{{app_dir}}/prisma/.env", mode: 0600 }
   become: yes
   become_user: voty
 - name: Build and Deploy Docker Image
@@ -42,5 +42,7 @@
         project_src: "{{app_dir}}"
         state: "present"
         restarted: yes
+    - name: Enable Web Backend Service
+      service: { name: voty, enabled: yes, state: restarted }
   become: yes
   become_method: sudo
