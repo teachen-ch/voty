@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import { Page } from "components/Page";
-import { gql, useMutation } from "@apollo/client";
+import { gql, useMutation, useApolloClient } from "@apollo/client";
 import { useState, useEffect, ReactElement } from "react";
 import { Card, Text, Button, Heading } from "rebass";
 import { Grid } from "theme-ui";
@@ -237,12 +237,12 @@ function AfterLogin() {
 }
 
 function CheckToken({ token, purpose }: { token: string; purpose: string }) {
-  const user = useUser();
   const setUser = useSetUser();
   const setAccessToken = useSetAccessToken();
   const [error, setError] = useState("");
   const [tempUser, setTempUser] = useState<User | undefined>();
   const router = useRouter();
+  const client = useApolloClient();
   const [doVerification] = useMutation(CHECK_VERIFICATION, {
     onCompleted: (data) => {
       setTempUser(data.checkVerification.user);
@@ -255,6 +255,10 @@ function CheckToken({ token, purpose }: { token: string; purpose: string }) {
   });
 
   useEffect(() => {
+    // first logout current user, as doVerification will auto-login user based on token
+    client.clearStore();
+    setAccessToken("");
+    setUser(undefined);
     doVerification({ variables: { token } });
   }, []);
 
