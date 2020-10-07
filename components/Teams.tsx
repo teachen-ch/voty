@@ -28,6 +28,7 @@ const TeamUserFields = gql`
 const TeamTeacherFields = gql`
   fragment TeamTeacherFields on Team {
     id
+    invite
     name
     school {
       id
