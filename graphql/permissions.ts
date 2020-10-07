@@ -121,6 +121,7 @@ export const permissions = shield({
       school: isUser,
       team: isUser,
       teaches: isUser,
+      emailVerified: isUser,
       lastname: or(isOwn("id"), teachesTeam, isAdmin),
       email: or(isOwn("id"), teachesTeam, isAdmin),
       ballots: or(isOwn("id"), teachesTeam, isAdmin),
