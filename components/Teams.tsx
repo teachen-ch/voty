@@ -28,6 +28,7 @@ const TeamUserFields = gql`
 const TeamTeacherFields = gql`
   fragment TeamTeacherFields on Team {
     id
+    invite
     name
     school {
       id
@@ -159,7 +160,6 @@ export const Teams: React.FC<TeamsProps> = ({ where, teamClick }) => {
                   <td colSpan={10}>
                     <Users
                       data={team.members}
-                      school={team.school}
                       team={team}
                     />
                   </td>
