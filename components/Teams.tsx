@@ -158,10 +158,7 @@ export const Teams: React.FC<TeamsProps> = ({ where, teamClick }) => {
                   }}
                 >
                   <td colSpan={10}>
-                    <Users
-                      data={team.members}
-                      team={team}
-                    />
+                    <Users users={team.members} />
                   </td>
                 </tr>
               )}

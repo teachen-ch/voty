@@ -1,5 +1,5 @@
 import { gql, useQuery } from "@apollo/client";
-import { UserWhereInput, User, Team, School } from "graphql/types";
+import { UserWhereInput, User } from "graphql/types";
 import { ReactElement } from "react";
 import { Link } from "rebass";
 
@@ -25,17 +25,11 @@ export function useUsers(where?: UserWhereInput): User[] | undefined {
   return users.data?.users;
 }
 
-export function Users({
-  data,
-  team,
-}: {
-  data?: User[];
-  team?: Team;
-}): ReactElement {
-  if (!data) {
+export function Users({ users }: { users?: User[] }): ReactElement {
+  if (!users) {
     return <span>Loading…</span>;
   }
-  if (data.length === 0) {
+  if (users.length === 0) {
     return <span>Keine Benutzer gefunden…</span>;
   }
   return (
@@ -45,19 +39,17 @@ export function Users({
           <tr>
             <th>Name</th>
             <th>Email</th>
-            <th>Klasse</th>
             <th>Status</th>
           </tr>
         </thead>
 
         <tbody>
-          {data?.map((user: User) => (
+          {users?.map((user: User) => (
             <tr key={user.id}>
               <td>{user.shortname}</td>
               <td>
                 <Link href={`mailto:${user.email}`}>{user.email}</Link>
               </td>
-              <td>{user.team?.name || team?.name}</td>
               <td>{user.emailVerified ? "✅ Bestätigt" : "☑️ Verschickt"}</td>
             </tr>
           ))}

@@ -6,7 +6,7 @@ export default function UsersPage(): ReactElement {
   const users = useUsers();
   return (
     <LoggedInPage heading="Benutzer">
-      <Users data={users} />
+      <Users users={users} />
     </LoggedInPage>
   );
 }
