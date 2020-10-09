@@ -9,32 +9,31 @@
     #  apt_repository:
     #    repo: "deb https://deb.nodesource.com/node_13.x focal main"
     #    state: "present"
-    - name: Install the gpg key for Docker Repo
-      apt_key:
-        url: "https://download.docker.com/linux/ubuntu/gpg"
-        state: present
-    - name: Add Docker Repository
-      apt_repository:
-        repo: "deb https://download.docker.com/linux/ubuntu focal stable"
-        state: "present"
+    #- name: Install the gpg key for Docker Repo
+    #  apt_key:
+    #    url: "https://download.docker.com/linux/ubuntu/gpg"
+    #    state: present
+    #- name: Add Docker Repository
+    #  apt_repository:
+    #    repo: "deb https://download.docker.com/linux/ubuntu focal stable"
+    #    state: "present"
     - name: Update and upgrade apt packages
-      apt: { upgrade: "yes", update_cache: "yes" }
+      package: { upgrade: "yes", update_cache: "yes" }
     - name: Install backend modules
-      apt:
-        name: "{{ packages }}"
-      vars:
-        packages:
+      package:
+        name:
+          #- nodejs
+          #- git
+          #- python2
           - nginx
-          - nodejs
-          - git
-          - python2
           - python3
           - python3-pip
-          - docker-ce
-    - name: Install Docker Module for Python
-      pip: { name: "docker" }
-    - name: Install Docker-Compose for Python
-      pip: { name: "docker-compose" }
+          - docker
+    - name: Install Docker Modules for Python
+      pip:
+        name:
+          - docker
+          - docker-compose
     - name: Add voty user
       user: { name: voty }
     - name: Create Backend Root Directory
