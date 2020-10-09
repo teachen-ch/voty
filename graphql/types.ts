@@ -1,6 +1,5 @@
 import { gql } from '@apollo/client';
 import * as Apollo from '@apollo/client';
-import gql from 'graphql-tag';
 export type Maybe<T> = T | null;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
 /** All built-in and custom scalars, mapped to their actual values */
@@ -3440,7 +3439,7 @@ export type VotesWhereUniqueInput = {
 
 export type BallotFieldsFragment = (
   { __typename?: 'Ballot' }
-  & Pick<Ballot, 'title' | 'id' | 'description' | 'body' | 'start' | 'end' | 'scope' | 'canton'>
+  & Pick<Ballot, 'id' | 'title' | 'description' | 'body' | 'start' | 'end' | 'scope' | 'canton'>
 );
 
 export type BallotsQueryVariables = Exact<{
@@ -3675,12 +3674,12 @@ export type VoteMutation = (
   )> }
 );
 
-export type TeamQueryVariables = Exact<{
+export type TeamByInviteQueryVariables = Exact<{
   invite: Scalars['String'];
 }>;
 
 
-export type TeamQuery = (
+export type TeamByInviteQuery = (
   { __typename?: 'Query' }
   & { team?: Maybe<(
     { __typename?: 'Team' }
@@ -3705,7 +3704,7 @@ export type CreateInvitedUserMutation = (
   { __typename?: 'Mutation' }
   & { createInvitedUser?: Maybe<(
     { __typename?: 'User' }
-    & Pick<User, 'id' | 'name' | 'email' | 'lastname'>
+    & Pick<User, 'id' | 'name' | 'email' | 'lastname' | 'shortname' | 'role'>
   )> }
 );
 
@@ -3817,8 +3816,8 @@ export type CreateUserMutation = (
 
 export const BallotFieldsFragmentDoc = gql`
     fragment BallotFields on Ballot {
-  title
   id
+  title
   description
   body
   start
@@ -4362,8 +4361,8 @@ export function useVoteMutation(baseOptions?: Apollo.MutationHookOptions<VoteMut
 export type VoteMutationHookResult = ReturnType<typeof useVoteMutation>;
 export type VoteMutationResult = Apollo.MutationResult<VoteMutation>;
 export type VoteMutationOptions = Apollo.BaseMutationOptions<VoteMutation, VoteMutationVariables>;
-export const TeamDocument = gql`
-    query team($invite: String!) {
+export const TeamByInviteDocument = gql`
+    query teamByInvite($invite: String!) {
   team(where: {invite: $invite}) {
     id
     name
@@ -4377,30 +4376,30 @@ export const TeamDocument = gql`
     `;
 
 /**
- * __useTeamQuery__
+ * __useTeamByInviteQuery__
  *
- * To run a query within a React component, call `useTeamQuery` and pass it any options that fit your needs.
- * When your component renders, `useTeamQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `useTeamByInviteQuery` and pass it any options that fit your needs.
+ * When your component renders, `useTeamByInviteQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useTeamQuery({
+ * const { data, loading, error } = useTeamByInviteQuery({
  *   variables: {
  *      invite: // value for 'invite'
  *   },
  * });
  */
-export function useTeamQuery(baseOptions?: Apollo.QueryHookOptions<TeamQuery, TeamQueryVariables>) {
-        return Apollo.useQuery<TeamQuery, TeamQueryVariables>(TeamDocument, baseOptions);
+export function useTeamByInviteQuery(baseOptions?: Apollo.QueryHookOptions<TeamByInviteQuery, TeamByInviteQueryVariables>) {
+        return Apollo.useQuery<TeamByInviteQuery, TeamByInviteQueryVariables>(TeamByInviteDocument, baseOptions);
       }
-export function useTeamLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<TeamQuery, TeamQueryVariables>) {
-          return Apollo.useLazyQuery<TeamQuery, TeamQueryVariables>(TeamDocument, baseOptions);
+export function useTeamByInviteLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<TeamByInviteQuery, TeamByInviteQueryVariables>) {
+          return Apollo.useLazyQuery<TeamByInviteQuery, TeamByInviteQueryVariables>(TeamByInviteDocument, baseOptions);
         }
-export type TeamQueryHookResult = ReturnType<typeof useTeamQuery>;
-export type TeamLazyQueryHookResult = ReturnType<typeof useTeamLazyQuery>;
-export type TeamQueryResult = Apollo.QueryResult<TeamQuery, TeamQueryVariables>;
+export type TeamByInviteQueryHookResult = ReturnType<typeof useTeamByInviteQuery>;
+export type TeamByInviteLazyQueryHookResult = ReturnType<typeof useTeamByInviteLazyQuery>;
+export type TeamByInviteQueryResult = Apollo.QueryResult<TeamByInviteQuery, TeamByInviteQueryVariables>;
 export const CreateInvitedUserDocument = gql`
     mutation createInvitedUser($invite: String!, $name: String, $lastname: String, $email: String!, $password: String) {
   createInvitedUser(invite: $invite, name: $name, lastname: $lastname, email: $email, password: $password) {
@@ -4408,6 +4407,9 @@ export const CreateInvitedUserDocument = gql`
     name
     email
     lastname
+    shortname
+    role
+    email
   }
 }
     `;
@@ -4682,429 +4684,3 @@ export function useCreateUserMutation(baseOptions?: Apollo.MutationHookOptions<C
 export type CreateUserMutationHookResult = ReturnType<typeof useCreateUserMutation>;
 export type CreateUserMutationResult = Apollo.MutationResult<CreateUserMutation>;
 export type CreateUserMutationOptions = Apollo.BaseMutationOptions<CreateUserMutation, CreateUserMutationVariables>;
-
-declare module '*/Ballots.tsx' {
-  import { DocumentNode } from 'graphql';
-  const defaultDocument: DocumentNode;
-  export const BallotFields: DocumentNode;
-export const ballots: DocumentNode;
-export const ballot: DocumentNode;
-
-  export default defaultDocument;
-}
-    
-
-declare module '*/CheckLogin.tsx' {
-  import { DocumentNode } from 'graphql';
-  const defaultDocument: DocumentNode;
-  export const LoginFields: DocumentNode;
-export const me: DocumentNode;
-
-  export default defaultDocument;
-}
-    
-
-declare module '*/Schools.tsx' {
-  import { DocumentNode } from 'graphql';
-  const defaultDocument: DocumentNode;
-  export const schoolsWithMembers: DocumentNode;
-export const setSchool: DocumentNode;
-export const schools: DocumentNode;
-export const createOneSchool: DocumentNode;
-export const NewSchool: DocumentNode;
-
-  export default defaultDocument;
-}
-    
-
-declare module '*/Teams.tsx' {
-  import { DocumentNode } from 'graphql';
-  const defaultDocument: DocumentNode;
-  export const TeamUserFields: DocumentNode;
-export const TeamTeacherFields: DocumentNode;
-export const teams: DocumentNode;
-export const teamUser: DocumentNode;
-export const teamTeacher: DocumentNode;
-export const createOneTeam: DocumentNode;
-
-  export default defaultDocument;
-}
-    
-
-declare module '*/Users.tsx' {
-  import { DocumentNode } from 'graphql';
-  const defaultDocument: DocumentNode;
-  export const users: DocumentNode;
-
-  export default defaultDocument;
-}
-    
-
-declare module '*/[id].tsx' {
-  import { DocumentNode } from 'graphql';
-  const defaultDocument: DocumentNode;
-  export const vote: DocumentNode;
-
-  export default defaultDocument;
-}
-    
-
-declare module '*/[invite].tsx' {
-  import { DocumentNode } from 'graphql';
-  const defaultDocument: DocumentNode;
-  export const team: DocumentNode;
-export const createInvitedUser: DocumentNode;
-export const acceptInvite: DocumentNode;
-
-  export default defaultDocument;
-}
-    
-
-declare module '*/admin.tsx' {
-  import { DocumentNode } from 'graphql';
-  const defaultDocument: DocumentNode;
-  export const inviteStudents: DocumentNode;
-
-  export default defaultDocument;
-}
-    
-
-declare module '*/login.tsx' {
-  import { DocumentNode } from 'graphql';
-  const defaultDocument: DocumentNode;
-  export const login: DocumentNode;
-export const emailVerification: DocumentNode;
-export const changePassword: DocumentNode;
-export const checkVerification: DocumentNode;
-
-  export default defaultDocument;
-}
-    
-
-declare module '*/signup.tsx' {
-  import { DocumentNode } from 'graphql';
-  const defaultDocument: DocumentNode;
-  export const createUser: DocumentNode;
-
-  export default defaultDocument;
-}
-    
-export const BallotFields = gql`
-    fragment BallotFields on Ballot {
-  title
-  id
-  description
-  body
-  start
-  end
-  scope
-  canton
-}
-    `;
-export const LoginFields = gql`
-    fragment LoginFields on User {
-  id
-  name
-  lastname
-  shortname
-  role
-  email
-  school {
-    id
-    name
-    city
-  }
-  team {
-    id
-    name
-    teacher {
-      id
-      name
-      shortname
-    }
-  }
-}
-    `;
-export const NewSchool = gql`
-    fragment NewSchool on School {
-  name
-  address
-  zip
-  city
-  canton
-}
-    `;
-export const TeamUserFields = gql`
-    fragment TeamUserFields on Team {
-  id
-  name
-  school {
-    id
-    name
-    city
-  }
-  members {
-    id
-    name
-    shortname
-  }
-}
-    `;
-export const TeamTeacherFields = gql`
-    fragment TeamTeacherFields on Team {
-  id
-  invite
-  name
-  school {
-    id
-    name
-    city
-  }
-  members {
-    id
-    name
-    shortname
-    email
-    emailVerified
-  }
-}
-    `;
-export const Ballots = gql`
-    query ballots($where: BallotWhereInput) {
-  ballots(where: $where) {
-    ...BallotFields
-  }
-}
-    ${BallotFields}`;
-export const Ballot = gql`
-    query ballot($where: BallotWhereUniqueInput!) {
-  ballot(where: $where) {
-    ...BallotFields
-    canVote
-    hasVoted
-  }
-}
-    ${BallotFields}`;
-export const Me = gql`
-    query me {
-  me {
-    ...LoginFields
-  }
-}
-    ${LoginFields}`;
-export const SchoolsWithMembers = gql`
-    query schoolsWithMembers {
-  schools {
-    id
-    name
-    city
-    zip
-    canton
-    members {
-      id
-      name
-      lastname
-    }
-  }
-}
-    `;
-export const SetSchool = gql`
-    mutation setSchool($school: Int!) {
-  setSchool(school: $school) {
-    id
-    name
-    shortname
-    school {
-      id
-      name
-      city
-      zip
-    }
-  }
-}
-    `;
-export const Schools = gql`
-    query schools {
-  schools {
-    id
-    name
-    city
-    zip
-    canton
-  }
-}
-    `;
-export const CreateOneSchool = gql`
-    mutation createOneSchool($data: SchoolCreateInput!) {
-  createOneSchool(data: $data) {
-    id
-    name
-    address
-    zip
-    city
-    canton
-  }
-}
-    `;
-export const Teams = gql`
-    query teams($where: TeamWhereInput) {
-  teams(where: $where) {
-    ...TeamTeacherFields
-  }
-}
-    ${TeamTeacherFields}`;
-export const TeamUser = gql`
-    query teamUser($where: TeamWhereUniqueInput!) {
-  team(where: $where) {
-    ...TeamUserFields
-  }
-}
-    ${TeamUserFields}`;
-export const TeamTeacher = gql`
-    query teamTeacher($where: TeamWhereUniqueInput!) {
-  team(where: $where) {
-    ...TeamTeacherFields
-  }
-}
-    ${TeamTeacherFields}`;
-export const CreateOneTeam = gql`
-    mutation createOneTeam($name: String!, $school: Int!, $teacher: Int!) {
-  createOneTeam(data: {name: $name, school: {connect: {id: $school}}, teacher: {connect: {id: $teacher}}}) {
-    ...TeamTeacherFields
-  }
-}
-    ${TeamTeacherFields}`;
-export const Users = gql`
-    query users($where: UserWhereInput) {
-  users(where: $where) {
-    id
-    shortname
-    team {
-      id
-      name
-      school {
-        id
-        name
-      }
-    }
-  }
-}
-    `;
-export const Vote = gql`
-    mutation vote($ballot: Int!, $vote: Int!) {
-  vote(ballot: $ballot, vote: $vote) {
-    verify
-    ballot {
-      id
-      canVote
-      hasVoted
-    }
-  }
-}
-    `;
-export const Team = gql`
-    query team($invite: String!) {
-  team(where: {invite: $invite}) {
-    id
-    name
-    school {
-      id
-      name
-      city
-    }
-  }
-}
-    `;
-export const CreateInvitedUser = gql`
-    mutation createInvitedUser($invite: String!, $name: String, $lastname: String, $email: String!, $password: String) {
-  createInvitedUser(invite: $invite, name: $name, lastname: $lastname, email: $email, password: $password) {
-    id
-    name
-    email
-    lastname
-  }
-}
-    `;
-export const AcceptInvite = gql`
-    mutation acceptInvite($invite: String!) {
-  acceptInvite(invite: $invite) {
-    id
-    name
-    school {
-      id
-      name
-      city
-    }
-  }
-}
-    `;
-export const InviteStudents = gql`
-    mutation inviteStudents($team: Int!, $emails: [String!]!) {
-  inviteStudents(team: $team, emails: $emails) {
-    ...TeamTeacherFields
-  }
-}
-    ${TeamTeacherFields}`;
-export const Login = gql`
-    mutation login($email: String!, $password: String!) {
-  login(email: $email, password: $password) {
-    token
-    user {
-      ...LoginFields
-    }
-  }
-}
-    ${LoginFields}`;
-export const EmailVerification = gql`
-    mutation emailVerification($email: String!, $purpose: String!) {
-  emailVerification(email: $email, purpose: $purpose) {
-    token
-  }
-}
-    `;
-export const ChangePassword = gql`
-    mutation changePassword($password: String!) {
-  changePassword(password: $password) {
-    token
-  }
-}
-    `;
-export const CheckVerification = gql`
-    mutation checkVerification($token: String!) {
-  checkVerification(token: $token) {
-    token
-    user {
-      ...LoginFields
-    }
-  }
-}
-    ${LoginFields}`;
-export const CreateUser = gql`
-    mutation createUser($data: UserCreateInput!) {
-  createUser(data: $data) {
-    id
-    name
-    email
-    lastname
-  }
-}
-    `;
-
-      export interface IntrospectionResultData {
-        __schema: {
-          types: {
-            kind: string;
-            name: string;
-            possibleTypes: {
-              name: string;
-            }[];
-          }[];
-        };
-      }
-      const result: IntrospectionResultData = {
-  "__schema": {
-    "types": []
-  }
-};
-      export default result;
-    

@@ -1,5 +1,7 @@
 import { atom, useRecoilValue, useSetRecoilState } from "recoil";
-import { User } from "graphql/types";
+import { MeQuery } from "graphql/types";
+
+export type SessionUser = MeQuery["me"];
 
 export const accessTokenState = atom({
   key: "accessTokenState",
@@ -8,7 +10,7 @@ export const accessTokenState = atom({
 
 export const userState = atom({
   key: "userState",
-  default: undefined as User | undefined,
+  default: undefined as SessionUser | undefined,
 });
 
 export function useAccessToken(): string {
@@ -23,13 +25,13 @@ export function useSetAccessToken(): (token: string) => void {
   };
 }
 
-export function useUser(): User | undefined {
+export function useUser(): SessionUser | undefined {
   return useRecoilValue(userState);
 }
 
-export function useSetUser(): (user: User | undefined) => void {
+export function useSetUser(): (user: SessionUser | undefined) => void {
   const setState = useSetRecoilState(userState);
-  return (user: User | undefined) => {
+  return (user: SessionUser | undefined) => {
     setState(user);
   };
 }

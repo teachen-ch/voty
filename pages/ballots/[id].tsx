@@ -2,9 +2,8 @@ import { Page, ErrorPage } from "components/Page";
 import { Text, Heading, Box, Card, Flex, Button } from "rebass";
 import { useRouter } from "next/router";
 import { useUser } from "state/user";
-import { useBallot } from "components/Ballots";
 import { formatFromTo } from "util/date";
-import { Ballot } from "graphql/types";
+import { useBallotQuery, BallotQuery } from "graphql/types";
 import { useState, ReactElement } from "react";
 import { useMutation, gql } from "@apollo/client";
 import { ErrorBox } from "components/Form";
@@ -14,12 +13,13 @@ import Link from "next/link";
 export default function BallotPage(): ReactElement {
   const router = useRouter();
   const id = parseInt(String(router.query.id));
-  const { data, loading, error } = useBallot(id);
+  const ballotQuery = useBallotQuery({ variables: { where: { id } } });
 
-  if (loading) return <Page heading="Abstimmungsseite"></Page>;
-  if (error) return <ErrorPage>{error.message}</ErrorPage>;
+  if (ballotQuery.loading) return <Page heading="Abstimmungsseite"></Page>;
+  if (ballotQuery.error)
+    return <ErrorPage>{ballotQuery.error.message}</ErrorPage>;
 
-  const ballot: Ballot | undefined = data?.ballot;
+  const ballot = ballotQuery.data?.ballot;
 
   if (!ballot)
     return (
@@ -59,7 +59,8 @@ const VOTE = gql`
   }
 `;
 
-const VotyNow: React.FC<{ ballot: Ballot }> = ({ ballot }) => {
+const VotyNow: React.FC<{ ballot: BallotQuery["ballot"] }> = ({ ballot }) => {
+  if (!ballot) return null;
   const [error, setError] = useState("");
   const user = useUser();
   const [success, setSuccess] = useState(false);
@@ -113,17 +114,17 @@ const VotyNow: React.FC<{ ballot: Ballot }> = ({ ballot }) => {
     );
   }
 
-  function vote(vote: number) {
-    doVote({ variables: { ballot: ballot.id, vote } });
+  function vote(ballot: BallotQuery["ballot"], vote: number) {
+    doVote({ variables: { ballot: ballot?.id, vote } });
   }
 
   return (
     <Box my={4}>
       <Flex>
-        <BigButton color="green" onClick={() => vote(1)}>
+        <BigButton color="green" onClick={() => vote(ballot, 1)}>
           Ja, ich stimme zu
         </BigButton>
-        <BigButton color="primary" onClick={() => vote(2)}>
+        <BigButton color="primary" onClick={() => vote(ballot, 2)}>
           Nein, ich lehne ab
         </BigButton>
       </Flex>

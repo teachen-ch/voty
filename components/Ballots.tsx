@@ -1,7 +1,7 @@
-import { gql, useQuery, QueryResult } from "@apollo/client";
+import { gql } from "@apollo/client";
 import { Heading, Text, Link as A, Button } from "rebass";
 import { Fragment } from "react";
-import { Ballot, BallotWhereInput } from "graphql/types";
+import { Ballot, BallotWhereInput, useBallotsQuery } from "graphql/types";
 import { formatFromTo } from "../util/date";
 import { Grid } from "./Form";
 
@@ -20,7 +20,7 @@ export const fragments = {
   `,
 };
 
-const GET_BALLOTS = gql`
+export const GET_BALLOTS = gql`
   query ballots($where: BallotWhereInput) {
     ballots(where: $where) {
       ...BallotFields
@@ -29,19 +29,7 @@ const GET_BALLOTS = gql`
   ${fragments.BallotFields}
 `;
 
-type BallotsAnswer = {
-  ballots: Ballot[];
-};
-
-export function useBallots(
-  where?: BallotWhereInput
-): QueryResult<BallotsAnswer, Record<string, any>> {
-  return useQuery<BallotsAnswer>(GET_BALLOTS, {
-    variables: { where },
-  });
-}
-
-const GET_BALLOT = gql`
+export const GET_BALLOT = gql`
   query ballot($where: BallotWhereUniqueInput!) {
     ballot(where: $where) {
       ...BallotFields
@@ -62,38 +50,28 @@ export enum BallotScope {
   Team = "Team",
 }
 
-type BallotAnswer = {
-  ballot: Ballot;
-};
-export function useBallot(id: number): QueryResult<BallotAnswer> {
-  return useQuery(GET_BALLOT, {
-    variables: { where: { id } },
-    skip: !id,
-  });
-}
-
 type BallotsProps = {
   where?: BallotWhereInput;
   onClick: (ballot: Ballot) => void;
 };
 
 export const Ballots: React.FC<BallotsProps> = ({ where, onClick }) => {
-  const ballots = useBallots(where);
+  const ballotsQuery = useBallotsQuery({ variables: { where } });
 
-  if (ballots.error) {
-    return <Heading>Error loading data: {ballots.error.message}</Heading>;
+  if (ballotsQuery.error) {
+    return <Heading>Error loading data: {ballotsQuery.error.message}</Heading>;
   }
-  if (ballots.loading) {
+  if (ballotsQuery.loading) {
     return <Heading>Loading data</Heading>;
   }
 
-  if (!ballots.data?.ballots?.length) {
+  if (!ballotsQuery.data?.ballots?.length) {
     return <Text>Noch keine Abstimmungen erfasst</Text>;
   }
 
   return (
     <>
-      {ballots.data.ballots.map((ballot: any) => (
+      {ballotsQuery.data.ballots.map((ballot: any) => (
         <Fragment key={ballot.id}>
           <A
             fontSize={3}

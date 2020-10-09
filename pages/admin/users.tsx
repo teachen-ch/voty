@@ -1,9 +1,14 @@
 import { LoggedInPage } from "../../components/Page";
-import { Users, useUsers } from "../../components/Users";
+import { Users } from "../../components/Users";
 import { ReactElement } from "react";
+import { useUsersQuery } from "graphql/types";
 
 export default function UsersPage(): ReactElement {
-  const users = useUsers();
+  const usersQuery = useUsersQuery();
+  if (usersQuery.loading) {
+    return <LoggedInPage heading="Benutzer">Loading...</LoggedInPage>;
+  }
+  const users = usersQuery.data?.users;
   return (
     <LoggedInPage heading="Benutzer">
       <Users users={users} />

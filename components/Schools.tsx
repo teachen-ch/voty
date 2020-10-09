@@ -1,4 +1,4 @@
-import { gql, useQuery } from "@apollo/client";
+import { gql } from "@apollo/client";
 import { useUser, useSetUser } from "../state/user";
 import { Heading, Button, Text, Card } from "rebass";
 import { omit } from "lodash";
@@ -7,8 +7,9 @@ import { useMutation } from "@apollo/client";
 import { cantonNames } from "../util/cantons";
 import { useState, ReactElement } from "react";
 import { School } from "@prisma/client";
+import { useSchoolsWithMembersQuery, useSchoolsQuery } from "graphql/types";
 
-const GET_SCHOOLS_WITH_MEMBERS = gql`
+export const GET_SCHOOLS_WITH_MEMBERS = gql`
   query schoolsWithMembers {
     schools {
       id
@@ -26,12 +27,13 @@ const GET_SCHOOLS_WITH_MEMBERS = gql`
 `;
 
 export const Schools: React.FC = () => {
-  const schools = useQuery(GET_SCHOOLS_WITH_MEMBERS);
+  const schoolsQuery = useSchoolsWithMembersQuery();
+  const schools = schoolsQuery.data?.schools;
 
-  if (schools.error) {
-    return <h1>Error loading data: {schools.error.message}</h1>;
+  if (schoolsQuery.error) {
+    return <h1>Error loading data: {schoolsQuery.error.message}</h1>;
   }
-  if (schools.loading) {
+  if (schoolsQuery.loading) {
     return <h1>Loading data</h1>;
   }
   return (
@@ -47,7 +49,7 @@ export const Schools: React.FC = () => {
         </thead>
 
         <tbody>
-          {schools.data.schools.map((school: any) => (
+          {schools?.map((school: any) => (
             <tr key={school.id}>
               <td>{school.id}</td>
               <td>{school.name}</td>
@@ -78,7 +80,7 @@ export const SET_USER_SCHOOL = gql`
   }
 `;
 
-const GET_SCHOOL_LIST = gql`
+export const GET_SCHOOL_LIST = gql`
   query schools {
     schools {
       id
@@ -90,15 +92,11 @@ const GET_SCHOOL_LIST = gql`
   }
 `;
 
-export function useSchoolList(): School[] | null {
-  const { data } = useQuery(GET_SCHOOL_LIST);
-  return data?.schools;
-}
-
 export const SelectSchool: React.FC = () => {
   const user = useUser();
   const setUser = useSetUser();
-  const schools = useSchoolList();
+  const schoolsQuery = useSchoolsQuery();
+  const schools = schoolsQuery.data?.schools;
   const [create, setCreate] = useState(false);
   const [setUserSchool] = useMutation(SET_USER_SCHOOL, {
     onCompleted({ user }) {
@@ -119,8 +117,8 @@ export const SelectSchool: React.FC = () => {
     return <p>Loading...</p>;
   }
 
-  const options = schools.reduce(
-    (o: any, i: School) => {
+  const options = schools?.reduce(
+    (o: any, i) => {
       const label = `${i.zip} ${i.city} - ${i.name}`;
       o[label] = i.id;
       return o;
@@ -132,7 +130,14 @@ export const SelectSchool: React.FC = () => {
       {create ? (
         <CreateSchool
           onCancel={() => setCreate(false)}
-          onCompleted={({ createOneSchool }: { createOneSchool: School }) => {
+          onCompleted={({
+            createOneSchool,
+          }: {
+            createOneSchool: Pick<
+              School,
+              "id" | "name" | "city" | "zip" | "canton"
+            >;
+          }) => {
             setCreate(false);
             setUserSchool({
               variables: { school: createOneSchool.id },
@@ -240,6 +245,7 @@ export function CreateSchool({
           canton: {
             label: "Kanton:",
             required: true,
+            init: "Aargau",
             options: cantonNames,
           },
           submit: {

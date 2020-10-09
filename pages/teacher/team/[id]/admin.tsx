@@ -1,16 +1,15 @@
-import { LoggedInPage } from "../../../../components/Page";
+import { LoggedInPage } from "components/Page";
 import { Heading, Card, Text, Button, Link } from "rebass";
-import { useTeamTeacher } from "../../../../components/Teams";
-import { Users } from "../../../../components/Users";
+import { Users } from "components/Users";
 import { Input, Textarea } from "@rebass/forms";
 import { Grid, Label } from "theme-ui";
 import { useRef, useState, RefObject, ReactElement } from "react";
-import { Team } from "graphql/types";
 import { Navigation, Route } from "components/Navigation";
 import { useRouter } from "next/router";
 import _ from "lodash";
 import { gql, useMutation } from "@apollo/client";
 import { fragments } from "components/Teams";
+import { useTeamTeacherQuery, TeamTeacherFieldsFragment } from "graphql/types";
 
 const INVITE_STUDENTS = gql`
   mutation inviteStudents($team: Int!, $emails: [String!]!) {
@@ -24,7 +23,10 @@ const INVITE_STUDENTS = gql`
 export default function TeamPage(): ReactElement {
   const router = useRouter();
   const id = parseInt(String(router.query.id));
-  const team = useTeamTeacher(id);
+  const teamQuery = useTeamTeacherQuery({
+    variables: { where: { id } },
+    skip: !id,
+  });
   const [emails, setEmails] = useState<string[]>([]);
   const [matches, setMatches] = useState<number | undefined>();
   const [showInviteLink, setShowInviteLink] = useState(false);
@@ -51,11 +53,18 @@ export default function TeamPage(): ReactElement {
     setMatches(emails.length ? emails.length : undefined);
   }
 
-  async function inviteStudents(team: Team) {
+  async function inviteStudents(team: TeamTeacherFieldsFragment) {
     doInviteStudents({ variables: { team: team.id, emails } });
   }
 
-  if (team === undefined) {
+  if (teamQuery.loading) {
+    return (
+      <LoggedInPage heading="Klassenseite">Team wird geladen…</LoggedInPage>
+    );
+  }
+
+  const team = teamQuery.data?.team;
+  if (!team) {
     return (
       <LoggedInPage heading="Klassenseite">
         Team konnte nicht gefunden werden
@@ -123,11 +132,11 @@ export default function TeamPage(): ReactElement {
   );
 }
 
-function InviteLink({ team }: { team: Team }) {
+function InviteLink({ team }: { team: TeamTeacherFieldsFragment }) {
   const inviteRef = useRef<HTMLInputElement>(null);
   const [status, setStatus] = useState("");
 
-  function copyInvite(ref: RefObject<any>) {
+  function copyInvite(ref: RefObject<HTMLInputElement>) {
     if (ref && ref.current) {
       ref.current.select();
       document.execCommand("copy");
@@ -152,7 +161,11 @@ function InviteLink({ team }: { team: Team }) {
   );
 }
 
-export function TeacherTeamNavigation({ team }: { team: Team }): ReactElement {
+export function TeacherTeamNavigation({
+  team,
+}: {
+  team: TeamTeacherFieldsFragment;
+}): ReactElement {
   return (
     <Navigation>
       <Route

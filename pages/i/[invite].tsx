@@ -1,16 +1,21 @@
 import { useRouter } from "next/router";
 import { Page } from "../../components/Page";
-import { gql, useQuery, useMutation } from "@apollo/client";
+import { gql } from "@apollo/client";
 import { ErrorBox } from "../../components/Form";
 import { Heading, Button, Text } from "rebass";
 import { useState } from "react";
 import { CreateUserForm, Success } from "../user/signup";
 import { useUser } from "../../state/user";
 import { omit } from "lodash";
-import { User } from "graphql/types";
+import { SessionUser } from "state/user";
+import {
+  useTeamByInviteQuery,
+  useCreateInvitedUserMutation,
+  useAcceptInviteMutation,
+} from "graphql/types";
 
-const GET_INVITE_TEAM = gql`
-  query team($invite: String!) {
+export const GET_INVITE_TEAM = gql`
+  query teamByInvite($invite: String!) {
     team(where: { invite: $invite }) {
       id
       name
@@ -23,7 +28,7 @@ const GET_INVITE_TEAM = gql`
   }
 `;
 
-const CREATE_INVITED_USER = gql`
+export const CREATE_INVITED_USER = gql`
   mutation createInvitedUser(
     $invite: String!
     $name: String
@@ -42,11 +47,14 @@ const CREATE_INVITED_USER = gql`
       name
       email
       lastname
+      shortname
+      role
+      email
     }
   }
 `;
 
-const ACCEPT_INVITE = gql`
+export const ACCEPT_INVITE = gql`
   mutation acceptInvite($invite: String!) {
     acceptInvite(invite: $invite) {
       id
@@ -62,15 +70,13 @@ const ACCEPT_INVITE = gql`
 
 const Invite: React.FC = () => {
   const existingUser = useUser();
-  const [newUser, setUser] = useState<User | undefined>(undefined);
+  const [newUser, setUser] = useState<SessionUser | undefined>(undefined);
   const router = useRouter();
   const invite = String(router.query.invite);
-  const teamQuery = useQuery(GET_INVITE_TEAM, {
-    variables: { invite },
-  });
+  const teamQuery = useTeamByInviteQuery({ variables: { invite } });
   const team = teamQuery.data?.team;
 
-  const [doCreateInvitedUser] = useMutation(CREATE_INVITED_USER, {
+  const [doCreateInvitedUser] = useCreateInvitedUserMutation({
     onCompleted(data) {
       setUser(data.createInvitedUser);
     },
@@ -79,7 +85,10 @@ const Invite: React.FC = () => {
     },
   });
   const onSubmit = (values: { [key: string]: string }) =>
-    doCreateInvitedUser({ variables: { ...omit(values, "submit"), invite } });
+    doCreateInvitedUser({
+      // TODO: our QForm component is not typed yet hence "as any"...
+      variables: { ...(omit(values, "submit") as any), invite },
+    });
 
   if (teamQuery.error) {
     return (
@@ -130,7 +139,7 @@ const AcceptInvite: React.FC<AcceptInviteProps> = ({ invite, team }) => {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
   const router = useRouter();
-  const [doAcceptInvite] = useMutation(ACCEPT_INVITE, {
+  const [doAcceptInvite] = useAcceptInviteMutation({
     variables: { invite },
     onCompleted() {
       setSuccess(true);

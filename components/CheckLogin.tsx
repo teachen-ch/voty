@@ -1,6 +1,7 @@
-import { gql, useQuery } from "@apollo/client";
+import { gql } from "@apollo/client";
 import { useUser, useSetUser } from "../state/user";
 import { Dispatch, SetStateAction, ReactElement } from "react";
+import { useMeQuery } from "graphql/types";
 
 // TODO: have to redefine enum here, otherwise hiting this issue
 // https://github.com/prisma/prisma/issues/3252
@@ -58,17 +59,13 @@ export default function CheckLogin({
   const setUser = useSetUser();
   // check, whether there is already an active session
   // unless user is already set
-  useQuery(ME, {
+  useMeQuery({
     fetchPolicy: "network-only",
     // skip query if user is already defined
     skip: user ? true : false,
     onCompleted: (data) => {
       if (setLoading) setLoading(false);
-      if (data) {
-        setUser(data.me);
-      } else {
-        setUser(undefined);
-      }
+      setUser(data?.me); // could be undefined!
     },
   });
 

@@ -1,5 +1,5 @@
 describe("Test Teacher Startpage", () => {
-  before(() => {
+  beforeEach(() => {
     cy.task("prismaLoader", "testdb.yml");
   });
 

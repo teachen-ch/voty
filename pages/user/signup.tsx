@@ -5,7 +5,7 @@ import { useState, ReactElement, Dispatch, SetStateAction } from "react";
 import { useRouter } from "next/router";
 import { QForm, yup, ErrorBox } from "../../components/Form";
 import { omit } from "lodash";
-import { User } from "graphql/types";
+import { SessionUser } from "state/user";
 
 export const CREATE_USER = gql`
   mutation createUser($data: UserCreateInput!) {
@@ -19,7 +19,7 @@ export const CREATE_USER = gql`
 `;
 
 export default function Signup(): ReactElement {
-  const [user, setUser] = useState<User | undefined>(undefined);
+  const [user, setUser] = useState<SessionUser | undefined>(undefined);
   if (user) {
     return <Success user={user} />;
   }
@@ -34,7 +34,7 @@ export default function Signup(): ReactElement {
   );
 }
 
-export function Success({ user }: { user?: User }): ReactElement {
+export function Success({ user }: { user?: SessionUser }): ReactElement {
   return (
     <Page heading="Konto erstellt">
       <Text>
@@ -50,7 +50,7 @@ export function CreateUserForm({
   setUser,
   onSubmit,
 }: {
-  setUser: Dispatch<SetStateAction<User | undefined>>;
+  setUser: Dispatch<SetStateAction<SessionUser | undefined>>;
   onSubmit?: (values: { [key: string]: any }) => void;
 }): ReactElement {
   const router = useRouter();

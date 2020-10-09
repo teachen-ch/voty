@@ -1,10 +1,10 @@
-import { gql, useQuery } from "@apollo/client";
+import { gql } from "@apollo/client";
 import { useUser } from "../state/user";
 import { Text, Card, Link as A } from "rebass";
 import { QForm, ErrorBox } from "./Form";
 import { useMutation } from "@apollo/client";
 import { useState, Fragment, ReactElement } from "react";
-import { Team, TeamWhereInput } from "graphql/types";
+import { Team, TeamWhereInput, useTeamsQuery } from "graphql/types";
 import { Page } from "./Page";
 import { Users } from "./Users";
 
@@ -47,7 +47,7 @@ const TeamTeacherFields = gql`
 
 export const fragments = { TeamUserFields, TeamTeacherFields };
 
-const GET_TEAMS = gql`
+export const GET_TEAMS = gql`
   query teams($where: TeamWhereInput) {
     teams(where: $where) {
       ...TeamTeacherFields
@@ -56,7 +56,7 @@ const GET_TEAMS = gql`
   ${fragments.TeamTeacherFields}
 `;
 
-const GET_TEAM_USER = gql`
+export const GET_TEAM_USER = gql`
   query teamUser($where: TeamWhereUniqueInput!) {
     team(where: $where) {
       ...TeamUserFields
@@ -65,15 +65,7 @@ const GET_TEAM_USER = gql`
   ${fragments.TeamUserFields}
 `;
 
-export function useTeamUser(id: number): Team | undefined {
-  const { data } = useQuery(GET_TEAM_USER, {
-    variables: { where: { id } },
-    skip: !id,
-  });
-  return data?.team;
-}
-
-const GET_TEAM_TEACHER = gql`
+export const GET_TEAM_TEACHER = gql`
   query teamTeacher($where: TeamWhereUniqueInput!) {
     team(where: $where) {
       ...TeamTeacherFields
@@ -82,14 +74,6 @@ const GET_TEAM_TEACHER = gql`
   ${fragments.TeamTeacherFields}
 `;
 
-export function useTeamTeacher(id: number): Team | undefined {
-  const { data } = useQuery(GET_TEAM_TEACHER, {
-    variables: { where: { id } },
-    skip: !id,
-  });
-  return data?.team;
-}
-
 type TeamsProps = {
   where?: TeamWhereInput;
   teamClick: (team: Team) => void;
@@ -97,16 +81,17 @@ type TeamsProps = {
 
 export const Teams: React.FC<TeamsProps> = ({ where, teamClick }) => {
   const [focus, setFocus] = useState();
-  const teams = useQuery(GET_TEAMS, { variables: { where } });
+  const teamsQuery = useTeamsQuery({ variables: { where } });
+  const teams = teamsQuery.data?.teams;
 
-  if (teams.error) {
+  if (teamsQuery.error) {
     return (
       <Page>
-        <h1>Error loading data: {teams.error.message}</h1>
+        <h1>Error loading data: {teamsQuery.error.message}</h1>
       </Page>
     );
   }
-  if (teams.loading) {
+  if (teamsQuery.loading) {
     return (
       <Page>
         <h1>Loading data</h1>
@@ -114,7 +99,7 @@ export const Teams: React.FC<TeamsProps> = ({ where, teamClick }) => {
     );
   }
 
-  if (teams.data.length === 0) {
+  if (teams?.length === 0) {
     return <Text>Noch keine Klassen erfasst</Text>;
   }
   return (
@@ -130,7 +115,7 @@ export const Teams: React.FC<TeamsProps> = ({ where, teamClick }) => {
         </thead>
 
         <tbody>
-          {teams.data.teams.map((team: any) => (
+          {teams?.map((team: any) => (
             <Fragment key={team.id}>
               <tr>
                 <td>

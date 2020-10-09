@@ -2,14 +2,13 @@ overwrite: true
 schema: "api.graphql"
 documents: ["**/*.tsx"]
 generates:
-  graphql/types.d.ts:
+  graphql/types.ts:
     plugins:
       - "typescript"
       - "typescript-operations"
       - "typescript-react-apollo"
+      #- "typescript-document-nodes"
+      #- "fragment-matcher"
+  graphql/modules.d.ts:
+    plugins:
       - "typescript-graphql-files-modules"
-      - "typescript-document-nodes"
-      - "fragment-matcher"
-  #./graphql.schema.json:
-  #  plugins:
-  #    - "introspection"
