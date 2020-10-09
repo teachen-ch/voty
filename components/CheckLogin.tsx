@@ -40,7 +40,7 @@ CheckLogin.fragments = {
 };
 
 export const ME = gql`
-  query {
+  query me {
     me {
       ...LoginFields
     }

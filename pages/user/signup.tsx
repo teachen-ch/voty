@@ -8,7 +8,7 @@ import { omit } from "lodash";
 import { User } from "graphql/types";
 
 export const CREATE_USER = gql`
-  mutation($data: UserCreateInput!) {
+  mutation createUser($data: UserCreateInput!) {
     createUser(data: $data) {
       id
       name

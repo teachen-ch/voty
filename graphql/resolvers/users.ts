@@ -270,7 +270,6 @@ async function createVerificationToken(
   prisma: PrismaClient,
   identifier: string
 ) {
-  const secret = process.env.SESSION_SECRET;
   const maxAge = 24 * 60 * 60 * 1000;
   const expires = new Date(Date.now() + maxAge);
   const token = randomBytes(32).toString("hex");
@@ -327,12 +326,11 @@ export const changePassword: FieldResolver<
 };
 
 async function verifyToken(token: string, prisma: PrismaClient) {
-  const secret = process.env.SESSION_SECRET;
   const hashed = createHash("sha256").update(`${token}${secret}`).digest("hex");
   const found = await prisma.verificationRequest.findOne({
     where: { token: hashed },
   });
-  if (!found) return false;
+  if (!found) return undefined;
   if (found.expires.getMilliseconds() > Date.now()) return undefined;
   deleteExpiredTokens(prisma);
   return found;

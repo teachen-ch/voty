@@ -3440,7 +3440,7 @@ export type VotesWhereUniqueInput = {
 
 export type BallotFieldsFragment = (
   { __typename?: 'Ballot' }
-  & Pick<Ballot, 'id' | 'title' | 'description' | 'body' | 'start' | 'end' | 'scope' | 'canton'>
+  & Pick<Ballot, 'title' | 'id' | 'description' | 'body' | 'start' | 'end' | 'scope' | 'canton'>
 );
 
 export type BallotsQueryVariables = Exact<{
@@ -3486,10 +3486,10 @@ export type LoginFieldsFragment = (
   )> }
 );
 
-export type Unnamed_1_QueryVariables = Exact<{ [key: string]: never; }>;
+export type MeQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_1_Query = (
+export type MeQuery = (
   { __typename?: 'Query' }
   & { me?: Maybe<(
     { __typename?: 'User' }
@@ -3572,13 +3572,13 @@ export type TeamUserFieldsFragment = (
 
 export type TeamTeacherFieldsFragment = (
   { __typename?: 'Team' }
-  & Pick<Team, 'id' | 'name'>
+  & Pick<Team, 'id' | 'invite' | 'name'>
   & { school: (
     { __typename?: 'School' }
     & Pick<School, 'id' | 'name' | 'city'>
   ), members: Array<(
     { __typename?: 'User' }
-    & Pick<User, 'id' | 'email' | 'emailVerified' | 'name' | 'shortname'>
+    & Pick<User, 'id' | 'name' | 'shortname' | 'email' | 'emailVerified'>
   )> }
 );
 
@@ -3736,7 +3736,7 @@ export type InviteStudentsMutation = (
   { __typename?: 'Mutation' }
   & { inviteStudents?: Maybe<(
     { __typename?: 'Team' }
-    & TeamUserFieldsFragment
+    & TeamTeacherFieldsFragment
   )> }
 );
 
@@ -3802,12 +3802,12 @@ export type CheckVerificationMutation = (
   )> }
 );
 
-export type Unnamed_2_MutationVariables = Exact<{
+export type CreateUserMutationVariables = Exact<{
   data: UserCreateInput;
 }>;
 
 
-export type Unnamed_2_Mutation = (
+export type CreateUserMutation = (
   { __typename?: 'Mutation' }
   & { createUser: (
     { __typename?: 'User' }
@@ -3817,8 +3817,8 @@ export type Unnamed_2_Mutation = (
 
 export const BallotFieldsFragmentDoc = gql`
     fragment BallotFields on Ballot {
-  id
   title
+  id
   description
   body
   start
@@ -3879,6 +3879,7 @@ export const TeamUserFieldsFragmentDoc = gql`
 export const TeamTeacherFieldsFragmentDoc = gql`
     fragment TeamTeacherFields on Team {
   id
+  invite
   name
   school {
     id
@@ -3887,10 +3888,10 @@ export const TeamTeacherFieldsFragmentDoc = gql`
   }
   members {
     id
-    email
-    emailVerified
     name
     shortname
+    email
+    emailVerified
   }
 }
     `;
@@ -3962,6 +3963,38 @@ export function useBallotLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<Bal
 export type BallotQueryHookResult = ReturnType<typeof useBallotQuery>;
 export type BallotLazyQueryHookResult = ReturnType<typeof useBallotLazyQuery>;
 export type BallotQueryResult = Apollo.QueryResult<BallotQuery, BallotQueryVariables>;
+export const MeDocument = gql`
+    query me {
+  me {
+    ...LoginFields
+  }
+}
+    ${LoginFieldsFragmentDoc}`;
+
+/**
+ * __useMeQuery__
+ *
+ * To run a query within a React component, call `useMeQuery` and pass it any options that fit your needs.
+ * When your component renders, `useMeQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useMeQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useMeQuery(baseOptions?: Apollo.QueryHookOptions<MeQuery, MeQueryVariables>) {
+        return Apollo.useQuery<MeQuery, MeQueryVariables>(MeDocument, baseOptions);
+      }
+export function useMeLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<MeQuery, MeQueryVariables>) {
+          return Apollo.useLazyQuery<MeQuery, MeQueryVariables>(MeDocument, baseOptions);
+        }
+export type MeQueryHookResult = ReturnType<typeof useMeQuery>;
+export type MeLazyQueryHookResult = ReturnType<typeof useMeLazyQuery>;
+export type MeQueryResult = Apollo.QueryResult<MeQuery, MeQueryVariables>;
 export const SchoolsWithMembersDocument = gql`
     query schoolsWithMembers {
   schools {
@@ -4448,10 +4481,10 @@ export type AcceptInviteMutationOptions = Apollo.BaseMutationOptions<AcceptInvit
 export const InviteStudentsDocument = gql`
     mutation inviteStudents($team: Int!, $emails: [String!]!) {
   inviteStudents(team: $team, emails: $emails) {
-    ...TeamUserFields
+    ...TeamTeacherFields
   }
 }
-    ${TeamUserFieldsFragmentDoc}`;
+    ${TeamTeacherFieldsFragmentDoc}`;
 export type InviteStudentsMutationFn = Apollo.MutationFunction<InviteStudentsMutation, InviteStudentsMutationVariables>;
 
 /**
@@ -4614,6 +4647,41 @@ export function useCheckVerificationMutation(baseOptions?: Apollo.MutationHookOp
 export type CheckVerificationMutationHookResult = ReturnType<typeof useCheckVerificationMutation>;
 export type CheckVerificationMutationResult = Apollo.MutationResult<CheckVerificationMutation>;
 export type CheckVerificationMutationOptions = Apollo.BaseMutationOptions<CheckVerificationMutation, CheckVerificationMutationVariables>;
+export const CreateUserDocument = gql`
+    mutation createUser($data: UserCreateInput!) {
+  createUser(data: $data) {
+    id
+    name
+    email
+    lastname
+  }
+}
+    `;
+export type CreateUserMutationFn = Apollo.MutationFunction<CreateUserMutation, CreateUserMutationVariables>;
+
+/**
+ * __useCreateUserMutation__
+ *
+ * To run a mutation, you first call `useCreateUserMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateUserMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createUserMutation, { data, loading, error }] = useCreateUserMutation({
+ *   variables: {
+ *      data: // value for 'data'
+ *   },
+ * });
+ */
+export function useCreateUserMutation(baseOptions?: Apollo.MutationHookOptions<CreateUserMutation, CreateUserMutationVariables>) {
+        return Apollo.useMutation<CreateUserMutation, CreateUserMutationVariables>(CreateUserDocument, baseOptions);
+      }
+export type CreateUserMutationHookResult = ReturnType<typeof useCreateUserMutation>;
+export type CreateUserMutationResult = Apollo.MutationResult<CreateUserMutation>;
+export type CreateUserMutationOptions = Apollo.BaseMutationOptions<CreateUserMutation, CreateUserMutationVariables>;
 
 declare module '*/Ballots.tsx' {
   import { DocumentNode } from 'graphql';
@@ -4630,6 +4698,7 @@ declare module '*/CheckLogin.tsx' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
   export const LoginFields: DocumentNode;
+export const me: DocumentNode;
 
   export default defaultDocument;
 }
@@ -4715,15 +4784,15 @@ export const checkVerification: DocumentNode;
 declare module '*/signup.tsx' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
-  
+  export const createUser: DocumentNode;
 
   export default defaultDocument;
 }
     
 export const BallotFields = gql`
     fragment BallotFields on Ballot {
-  id
   title
+  id
   description
   body
   start
@@ -4784,6 +4853,7 @@ export const TeamUserFields = gql`
 export const TeamTeacherFields = gql`
     fragment TeamTeacherFields on Team {
   id
+  invite
   name
   school {
     id
@@ -4792,10 +4862,10 @@ export const TeamTeacherFields = gql`
   }
   members {
     id
-    email
-    emailVerified
     name
     shortname
+    email
+    emailVerified
   }
 }
     `;
@@ -4815,6 +4885,13 @@ export const Ballot = gql`
   }
 }
     ${BallotFields}`;
+export const Me = gql`
+    query me {
+  me {
+    ...LoginFields
+  }
+}
+    ${LoginFields}`;
 export const SchoolsWithMembers = gql`
     query schoolsWithMembers {
   schools {
@@ -4964,10 +5041,10 @@ export const AcceptInvite = gql`
 export const InviteStudents = gql`
     mutation inviteStudents($team: Int!, $emails: [String!]!) {
   inviteStudents(team: $team, emails: $emails) {
-    ...TeamUserFields
+    ...TeamTeacherFields
   }
 }
-    ${TeamUserFields}`;
+    ${TeamTeacherFields}`;
 export const Login = gql`
     mutation login($email: String!, $password: String!) {
   login(email: $email, password: $password) {
@@ -5002,6 +5079,16 @@ export const CheckVerification = gql`
   }
 }
     ${LoginFields}`;
+export const CreateUser = gql`
+    mutation createUser($data: UserCreateInput!) {
+  createUser(data: $data) {
+    id
+    name
+    email
+    lastname
+  }
+}
+    `;
 
       export interface IntrospectionResultData {
         __schema: {
