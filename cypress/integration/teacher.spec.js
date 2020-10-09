@@ -17,19 +17,31 @@ describe("Test Teacher Startpage", () => {
     cy.get("#name").type("Testclass");
     cy.get("button").contains("Klasse erstellen").click();
 
-    // Test invite link
-    /*
-    cy.get("table tr").should("have.length", 3);
-    cy.get("table tr:last").as("classrow");
-    cy.get("@classrow").contains("Einladung").click();
-    cy.url().should("include", "/i/");
-    cy.contains("Klassen-Einladung");
-    cy.contains("Klasse «Testclass»");
-    cy.go("back");*/
-
     // Test team detail page
     cy.contains("Testclass").click();
     cy.url().should("include", "/teacher/team/");
     cy.contains("Klassenseite");
+  });
+
+  it("allows teacher to select an existing school", () => {
+    cy.login("teacher4@teachen.ch", "teachen");
+    cy.visit("/teacher");
+    cy.contains("Bitte wähle Dein Schulhaus");
+    cy.findByLabelText("Deine Schule:").select("1000 City One - School One");
+    cy.contains("Bestätigen").click();
+    cy.contains("Dein Schulhaus: School One");
+  });
+
+  it("allows teacher to create a new school", () => {
+    cy.login("teacher4@teachen.ch", "teachen");
+    cy.visit("/teacher");
+    cy.contains("Neues Schulhaus erfassen").click();
+    cy.findByLabelText("Schulhaus:").type("Testschule");
+    cy.findByLabelText("Adresse:").type("Teststrasse 5");
+    cy.findByLabelText("PLZ:").type("3333");
+    cy.findByLabelText("Ort:").type("Testort");
+    cy.findByLabelText("Kanton:").select("Bern");
+    cy.contains("Bestätigen").click();
+    cy.contains("Dein Schulhaus: Testschule");
   });
 });

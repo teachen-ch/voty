@@ -20,6 +20,11 @@ user:
     password: $2b$10$3ZxdzTwtAjW3A1QSi.zDJ.IFSyUIqnE00kRMgwhsYaJujv5xMbB4S
     role: Admin
     emailVerified: !!timestamp "2020-01-01"
+  - name: Teacher-4 # Teacher which does not have a school associated used in teacher.spec.js
+    email: teacher4@teachen.ch
+    password: $2b$10$3ZxdzTwtAjW3A1QSi.zDJ.IFSyUIqnE00kRMgwhsYaJujv5xMbB4S
+    role: Teacher
+    emailVerified: !!timestamp "2020-01-01"
 
 # Another prisma type with objects to create
 school:
