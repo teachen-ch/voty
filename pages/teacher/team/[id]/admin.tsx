@@ -54,7 +54,7 @@ export default function TeamPage(): ReactElement {
   }
 
   async function inviteStudents(team: TeamTeacherFieldsFragment) {
-    doInviteStudents({ variables: { team: team.id, emails } });
+    return doInviteStudents({ variables: { team: team.id, emails } });
   }
 
   if (teamQuery.loading) {
@@ -135,6 +135,9 @@ export default function TeamPage(): ReactElement {
 function InviteLink({ team }: { team: TeamTeacherFieldsFragment }) {
   const inviteRef = useRef<HTMLInputElement>(null);
   const [status, setStatus] = useState("");
+  if (!team.invite) {
+    return null;
+  }
 
   function copyInvite(ref: RefObject<HTMLInputElement>) {
     if (ref && ref.current) {

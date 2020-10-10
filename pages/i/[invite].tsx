@@ -12,20 +12,17 @@ import {
   useTeamByInviteQuery,
   useCreateInvitedUserMutation,
   useAcceptInviteMutation,
+  TeamUserFieldsFragment,
 } from "graphql/types";
+import { fragments } from "components/Teams";
 
 export const GET_INVITE_TEAM = gql`
   query teamByInvite($invite: String!) {
     team(where: { invite: $invite }) {
-      id
-      name
-      school {
-        id
-        name
-        city
-      }
+      ...TeamUserFields
     }
   }
+  ${fragments.TeamUserFields}
 `;
 
 export const CREATE_INVITED_USER = gql`
@@ -87,7 +84,9 @@ const Invite: React.FC = () => {
   const onSubmit = (values: { [key: string]: string }) =>
     doCreateInvitedUser({
       // TODO: our QForm component is not typed yet hence "as any"...
-      variables: { ...(omit(values, "submit") as any), invite },
+      // @ts-ignore
+      // eslint-disable-next-line
+      variables: { ...omit(values, "submit"), invite },
     });
 
   if (teamQuery.error) {
@@ -132,8 +131,8 @@ export default Invite;
 
 type AcceptInviteProps = {
   invite: string;
-  user: any; // TODO: NEXUSTYPE find out how to import Nexus Types here
-  team: any; // TODO: NEXUSTYPE find out how to import Nexus Types here
+  user: SessionUser; // TODO: NEXUSTYPE find out how to import Nexus Types here
+  team: TeamUserFieldsFragment; // TODO: NEXUSTYPE find out how to import Nexus Types here
 };
 const AcceptInvite: React.FC<AcceptInviteProps> = ({ invite, team }) => {
   const [error, setError] = useState("");

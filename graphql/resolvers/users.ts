@@ -40,7 +40,7 @@ export const login: FieldResolver<"Mutation", "login"> = async (
     // logger.mail("a user logged in... " + user.email);
     return startJWTSession(user, ctx);
   } catch (err) {
-    logger.error(err.message);
+    if ("message" in err) logger.error(err.message);
     throw err;
   }
 };
@@ -99,6 +99,7 @@ export const createUser: FieldResolver<"Mutation", "createUser"> = async (
     }
     return user;
   } catch (err) {
+    // eslint-disable-next-line
     if (err.meta?.target && err.meta.target.indexOf("email") >= 0) {
       throw new Error("ERR_DUPLICATE_EMAIL");
     }
@@ -122,8 +123,7 @@ export const acceptInvite: FieldResolver<"Mutation", "acceptInvite"> = async (
 };
 
 export async function connectUserTeam(
-  // TODO: struggling with return value from createUser
-  user: User | any,
+  user: User,
   team: Team,
   ctx: NexusContext
 ): Promise<User> {
@@ -155,7 +155,7 @@ export const createInvitedUser: FieldResolver<
     },
   };
   const user = await createUser(_root, newArgs, ctx, info);
-  await connectUserTeam(user, team, ctx);
+  await connectUserTeam(user as User, team, ctx);
   return user;
 };
 
@@ -202,10 +202,11 @@ export function getSessionUser(req: Request): User | undefined {
   // what about req.body.token || req.query.token ?
   // const token = req.headers.get("x-access-token");
   // @ts-ignore
+  // eslint-disable-next-line
   const token = req.headers["x-access-token"];
 
   if (token && token != "null") {
-    const jwt: any = verifyJWT(token);
+    const jwt = verifyJWT(token);
     return jwt?.user;
   }
 }
@@ -223,12 +224,21 @@ export async function getUser(ctx: NexusContext): Promise<User | null> {
   }
 }
 
-export function verifyJWT(token: string): string | any | null {
+type JWTSession = {
+  user: User;
+};
+
+export function verifyJWT(token: string): JWTSession | undefined {
   try {
-    return jwt.verify(token, secret);
+    const result = jwt.verify(token, secret);
+    if (typeof result !== "object") {
+      throw new Error("JWT Token was string instead of object");
+    }
+    if ("user" in result) return result as JWTSession;
+    else throw new Error("No user in JWT Session");
   } catch (err) {
     logger.info("Error verifying token", err.message, token);
-    return null;
+    return undefined;
   }
 }
 
@@ -332,7 +342,7 @@ async function verifyToken(token: string, prisma: PrismaClient) {
   });
   if (!found) return undefined;
   if (found.expires.getMilliseconds() > Date.now()) return undefined;
-  deleteExpiredTokens(prisma);
+  void deleteExpiredTokens(prisma);
   return found;
 }
 

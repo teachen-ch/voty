@@ -2,9 +2,13 @@ import { gql } from "@apollo/client";
 import { useUser } from "../state/user";
 import { Text, Card, Link as A } from "rebass";
 import { QForm, ErrorBox } from "./Form";
-import { useMutation } from "@apollo/client";
 import { useState, Fragment, ReactElement } from "react";
-import { Team, TeamWhereInput, useTeamsQuery } from "graphql/types";
+import {
+  TeamWhereInput,
+  useTeamsQuery,
+  TeamUserFieldsFragment,
+  useCreateOneTeamMutation,
+} from "graphql/types";
 import { Page } from "./Page";
 import { Users } from "./Users";
 
@@ -76,11 +80,11 @@ export const GET_TEAM_TEACHER = gql`
 
 type TeamsProps = {
   where?: TeamWhereInput;
-  teamClick: (team: Team) => void;
+  teamClick: (team: TeamUserFieldsFragment) => void;
 };
 
 export const Teams: React.FC<TeamsProps> = ({ where, teamClick }) => {
-  const [focus, setFocus] = useState();
+  const [focus, setFocus] = useState<number>();
   const teamsQuery = useTeamsQuery({ variables: { where } });
   const teams = teamsQuery.data?.teams;
 
@@ -115,7 +119,7 @@ export const Teams: React.FC<TeamsProps> = ({ where, teamClick }) => {
         </thead>
 
         <tbody>
-          {teams?.map((team: any) => (
+          {teams?.map((team) => (
             <Fragment key={team.id}>
               <tr>
                 <td>
@@ -126,7 +130,9 @@ export const Teams: React.FC<TeamsProps> = ({ where, teamClick }) => {
                 </td>
                 <td>
                   <A
-                    onClick={() => setFocus(focus == team.id ? null : team.id)}
+                    onClick={() =>
+                      setFocus(focus == team.id ? undefined : team.id)
+                    }
                   >
                     {team.members ? team.members.length : "-"}
                   </A>
@@ -155,7 +161,7 @@ export const Teams: React.FC<TeamsProps> = ({ where, teamClick }) => {
   );
 };
 
-const CREATE_TEAM = gql`
+export const CREATE_TEAM = gql`
   mutation createOneTeam($name: String!, $school: Int!, $teacher: Int!) {
     createOneTeam(
       data: {
@@ -174,20 +180,20 @@ export function CreateTeamForm({
   onCompleted,
 }: {
   onCompleted?: () => void;
-}): ReactElement {
+}): ReactElement | null {
   const user = useUser();
   const [error, setError] = useState("");
-  const [doCreateTeam] = useMutation(CREATE_TEAM, {
+  const [doCreateTeam] = useCreateOneTeamMutation({
     onCompleted: onCompleted,
     onError: (error) => {
       setError(error.message);
     },
-    update: (cache, { data: { createOneTeam } }) => {
+    update: (cache, result) => {
       cache.modify({
         fields: {
-          teams(existingTeams = []) {
+          teams(existingTeams: typeof TeamTeacherFields[] = []) {
             const newTeamRef = cache.writeFragment({
-              data: createOneTeam,
+              data: result.data?.createOneTeam,
               fragment: fragments.TeamTeacherFields,
               fragmentName: "TeamTeacherFields",
             });
@@ -198,6 +204,11 @@ export function CreateTeamForm({
     },
   });
 
+  if (!user || !user.school) {
+    return null;
+  }
+  const schoolId = user.school.id;
+
   return (
     <Card>
       <QForm
@@ -205,9 +216,11 @@ export function CreateTeamForm({
         onSubmit={(values) =>
           doCreateTeam({
             variables: {
+              // TODO: typify Forms.tsx
+              // eslint-disable-next-line
               name: values.name,
-              teacher: user?.id,
-              school: user?.school?.id,
+              teacher: user.id,
+              school: schoolId,
             },
           })
         }

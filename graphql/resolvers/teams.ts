@@ -3,6 +3,7 @@ import { Role } from "@prisma/client";
 import { randomBytes } from "crypto";
 import { upperFirst } from "lodash";
 import { FieldResolver } from "nexus/components/schema";
+import { User } from "@prisma/client";
 
 export const inviteStudents: FieldResolver<
   "Mutation",
@@ -33,7 +34,7 @@ export const inviteStudents: FieldResolver<
     };
     try {
       const invited = await createUser(_root, args, ctx, undefined as any);
-      await connectUserTeam(invited, team, ctx);
+      await connectUserTeam(invited as User, team, ctx);
       success.push(email);
     } catch (err) {
       errors.push(email);

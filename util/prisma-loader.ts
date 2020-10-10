@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { PrismaClient } from "@prisma/client";
 import yaml from "js-yaml";
 import fs from "fs";
@@ -9,7 +10,10 @@ export async function loadFixture(
   logger?: (msg: string) => void
 ): Promise<void> {
   logger && logger(`📦 Loading data from ${fixtureFile}`);
-  const data: any = parseYAML(fixtureFile);
+  const data = parseYAML(fixtureFile);
+  if (typeof data !== "object") {
+    throw new Error("malformed YAML");
+  }
   if (typeof data === "undefined") {
     throw new Error(`Could not parse YAML file ${fixtureFile}`);
   }
@@ -19,7 +23,9 @@ export async function loadFixture(
     );
   }
   if (Object.prototype.hasOwnProperty.call(data, "delete")) {
+    // @ts-ignore
     await deleteObjects(data.delete, logger);
+    // @ts-ignore
     delete data.delete;
   }
   await createObjects(data, logger);
@@ -34,7 +40,7 @@ function parseYAML(filename: string) {
 
 async function deleteObjects(list: string[], logger?: (msg: string) => void) {
   logger && logger("💥 Let's first wipe out existing objects:");
-  for (const i in list) {
+  for (let i = 0; i < list.length; ++i) {
     const type = list[i];
     // @ts-ignore  what's the type for generic PrismaDelegates?
     const obj: any = prisma[type];

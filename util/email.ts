@@ -3,15 +3,16 @@ import { promises as fs } from "fs";
 import Mustache from "mustache";
 import mjml2html from "mjml";
 import logger from "./logger";
+import SMTPTransport from "nodemailer/lib/smtp-transport";
 
-const server: any = {
+const server = new SMTPTransport({
   host: process.env.SMTP_HOST,
-  port: process.env.SMTP_PORT,
   auth: {
-    user: process.env.SMTP_USER,
-    pass: process.env.SMTP_PASSWORD,
+    type: "LOGIN",
+    user: process.env.SMTP_USER || "",
+    pass: process.env.SMTP_PASSWORD || "",
   },
-};
+});
 
 const templatesDir = "./mails/";
 
@@ -25,7 +26,7 @@ export async function sendMail(
   const { html, text } = await renderTemplate(template, data);
 
   // No email configured
-  if (!server.auth.pass || process.env.NODE_ENV === "test") {
+  if (!process.env.SMTP_PASSWORD || process.env.NODE_ENV === "test") {
     logger.info(`Now I'd send mail to ${to}`);
     return;
   }
@@ -41,7 +42,7 @@ export async function sendMail(
     });
   } catch (error) {
     logger.error("SEND_VERIFICATION_EMAIL_ERROR", to, error);
-    throw new Error("SEND_VERIFICATION_EMAIL_ERROR" + error);
+    throw new Error(`SEND_VERIFICATION_EMAIL_ERROR ${String(error)}`);
   }
 }
 

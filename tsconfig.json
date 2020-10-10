@@ -26,6 +26,6 @@
     // eek. this breaks nexus: https://github.com/graphql-nexus/nexus/issues/1036
     // "types": ["cypress", "@testing-library/cypress"]
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "."],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "types.d.ts", "."],
   "exclude": ["node_modules"]
 }

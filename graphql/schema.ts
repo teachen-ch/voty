@@ -18,7 +18,7 @@ use(
 
 use(permissions);
 
-schema.addToContext(async ({ req }) => {
+schema.addToContext(({ req }) => {
   return {
     user: resolvers.users.getSessionUser(req as any),
   };

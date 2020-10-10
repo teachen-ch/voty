@@ -7,10 +7,15 @@ import { Grid } from "theme-ui";
 import { Label, Input } from "@rebass/forms";
 import { QForm, ErrorBox } from "components/Form";
 import CheckLogin from "components/CheckLogin";
-import { useSetAccessToken, useUser, useSetUser } from "../../state/user";
+import {
+  useSetAccessToken,
+  useUser,
+  useSetUser,
+  SessionUser,
+} from "../../state/user";
 import { useQueryParam } from "util/hooks";
 import { Role } from "components/CheckLogin";
-import { User } from "graphql/types";
+import { useLoginMutation, useCheckVerificationMutation } from "graphql/types";
 
 export const LOGIN = gql`
   mutation login($email: String!, $password: String!) {
@@ -95,10 +100,12 @@ export function LoginForm(): ReactElement {
   const router = useRouter();
   const setUser = useSetUser();
   const setAccessToken = useSetAccessToken();
-  const [doLogin, resultLogin] = useMutation(LOGIN, {
+  const [doLogin, resultLogin] = useLoginMutation({
     onCompleted(data) {
-      setUser(data.login.user);
-      setAccessToken(data.login.token);
+      if (data.login && data.login.token) {
+        setUser(data.login.user);
+        setAccessToken(data.login.token);
+      }
     },
     onError(error) {
       if (error.message === "ERR_USER_PASSWORD") {
@@ -216,17 +223,8 @@ function AfterLogin() {
 
   if (user && user.role) {
     const page = getStartpage(user.role);
-    router.push(page);
+    void router.push(page);
     return null;
-    /*
-    const next = () => router.push(page);
-    setTimeout(next, 2000);
-    return (
-      <>
-        <Heading as="h2">Super, Du bist angemeldet.</Heading>
-        <Button onClick={next}>Zu Deiner Startseite</Button>
-      </>
-    );*/
   } else {
     return (
       <Heading as="h2">
@@ -240,13 +238,15 @@ function CheckToken({ token, purpose }: { token: string; purpose: string }) {
   const setUser = useSetUser();
   const setAccessToken = useSetAccessToken();
   const [error, setError] = useState("");
-  const [tempUser, setTempUser] = useState<User | undefined>();
+  const [tempUser, setTempUser] = useState<SessionUser | undefined | null>();
   const router = useRouter();
   const client = useApolloClient();
-  const [doVerification] = useMutation(CHECK_VERIFICATION, {
+  const [doVerification] = useCheckVerificationMutation({
     onCompleted: (data) => {
-      setTempUser(data.checkVerification.user);
-      setAccessToken(data.checkVerification.token);
+      if (data.checkVerification && data.checkVerification.token) {
+        setTempUser(data.checkVerification.user);
+        setAccessToken(data.checkVerification.token);
+      }
     },
     onError(error) {
       setError("Dieser Email-Link ist leider nicht mehr gültig!");
@@ -256,10 +256,10 @@ function CheckToken({ token, purpose }: { token: string; purpose: string }) {
 
   useEffect(() => {
     // first logout current user, as doVerification will auto-login user based on token
-    client.clearStore();
+    void client.clearStore();
     setAccessToken("");
     setUser(undefined);
-    doVerification({ variables: { token } });
+    void doVerification({ variables: { token } });
   }, []);
 
   // token verification succeded, we have a session & user
@@ -371,11 +371,11 @@ function PasswordResetForm() {
     },
   });
 
-  function checkPasswords(pw1: string, pw2: string) {
+  async function checkPasswords(pw1: string, pw2: string) {
     if (pw1 !== pw2) {
       setError("Die beiden Passwörter stimmen nicht überein…");
     }
-    doChangePassword({ variables: { password } });
+    return doChangePassword({ variables: { password } });
   }
   if (success) {
     return (

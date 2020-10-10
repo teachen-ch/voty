@@ -33,10 +33,10 @@ export function useNavHash(
       router.events.off("hashChangeStart", hashChangeStart);
     };
   }, []);
-  function setNavHash(newHash: string) {
+  async function setNavHash(newHash: string) {
     if (navHash !== newHash) {
       const path = window.location.pathname + newHash;
-      router.push(page, path);
+      await router.push(page, path);
     }
   }
   return [navHash, setNavHash];

@@ -27,7 +27,9 @@ export const Route: React.FC<RouteProps> = (props) => {
   if (path === props.href) variant = "primary";
 
   function onClick() {
-    if (!props.disabled && path != props.href) router.push(props.href, as);
+    if (!props.disabled && path != props.href) {
+      void router.push(props.href, as);
+    }
   }
 
   return (

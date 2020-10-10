@@ -14,5 +14,3 @@
 // ***********************************************************
 
 import "./commands";
-/* import imageSnapshot from "cypress-image-snapshot/command";
-imageSnapshot.addMatchImageSnapshotCommand();*/

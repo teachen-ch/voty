@@ -1,7 +1,11 @@
 import { gql } from "@apollo/client";
 import { Heading, Text, Link as A, Button } from "rebass";
 import { Fragment } from "react";
-import { Ballot, BallotWhereInput, useBallotsQuery } from "graphql/types";
+import {
+  BallotWhereInput,
+  useBallotsQuery,
+  BallotFieldsFragment,
+} from "graphql/types";
 import { formatFromTo } from "../util/date";
 import { Grid } from "./Form";
 
@@ -52,7 +56,7 @@ export enum BallotScope {
 
 type BallotsProps = {
   where?: BallotWhereInput;
-  onClick: (ballot: Ballot) => void;
+  onClick: (ballot: BallotFieldsFragment) => void;
 };
 
 export const Ballots: React.FC<BallotsProps> = ({ where, onClick }) => {
@@ -71,7 +75,7 @@ export const Ballots: React.FC<BallotsProps> = ({ where, onClick }) => {
 
   return (
     <>
-      {ballotsQuery.data.ballots.map((ballot: any) => (
+      {ballotsQuery.data.ballots.map((ballot) => (
         <Fragment key={ballot.id}>
           <A
             fontSize={3}
@@ -106,7 +110,7 @@ enum BallotStatus {
   Ended = "Beendet",
 }
 
-export const getBallotStatus = (ballot: Ballot): string => {
+export const getBallotStatus = (ballot: BallotFieldsFragment): string => {
   const now = new Date();
   if (ballot.start < now) return BallotStatus.Not_Started;
   if (ballot.end < now) return BallotStatus.Ended;

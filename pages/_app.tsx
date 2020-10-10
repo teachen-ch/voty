@@ -34,6 +34,6 @@ function MyApp({ Component, pageProps }: AppProps): ReactElement {
   );
 }
 
-const MDXWrapper = (props: any) => <Page>{props.children}</Page>;
+const MDXWrapper: React.FC = (props) => <Page>{props.children}</Page>;
 
 export default MyApp;

@@ -237,7 +237,7 @@ const CantonsBar = ({
   </Box>
 );
 
-const TypeBar = ({ types }: { types: any }) => (
+const TypeBar = ({ types }: { types: { [key: string]: number } }) => (
   <Box
     height="30px"
     pl={3}

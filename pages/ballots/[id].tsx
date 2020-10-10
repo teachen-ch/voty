@@ -114,8 +114,8 @@ const VotyNow: React.FC<{ ballot: BallotQuery["ballot"] }> = ({ ballot }) => {
     );
   }
 
-  function vote(ballot: BallotQuery["ballot"], vote: number) {
-    doVote({ variables: { ballot: ballot?.id, vote } });
+  async function vote(ballot: BallotQuery["ballot"], vote: number) {
+    return doVote({ variables: { ballot: ballot?.id, vote } });
   }
 
   return (

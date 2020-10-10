@@ -1,7 +1,7 @@
 import { LoggedInPage } from "components/Page";
 import { Heading } from "rebass";
 import { Ballots, BallotScope } from "components/Ballots";
-import { Ballot, useTeamTeacherQuery } from "graphql/types";
+import { useTeamTeacherQuery, BallotFieldsFragment } from "graphql/types";
 import { useRouter } from "next/router";
 import { TeacherTeamNavigation } from "./admin";
 import { ReactElement } from "react";
@@ -15,8 +15,8 @@ export default function TeacherTest(): ReactElement {
   });
   const team = teamQuery.data?.team;
 
-  function selectBallot(ballot: Ballot) {
-    router.push("/ballots/[id]", `/ballots/${ballot.id}`);
+  function selectBallot(ballot: BallotFieldsFragment) {
+    void router.push("/ballots/[id]", `/ballots/${ballot.id}`);
   }
   if (!team) {
     return (

@@ -1,19 +1,23 @@
 import { Page } from "components/Page";
 import { Card, Text, Button } from "rebass";
-import { gql, useMutation } from "@apollo/client";
+import { gql } from "@apollo/client";
 import { useState, ReactElement, Dispatch, SetStateAction } from "react";
 import { useRouter } from "next/router";
 import { QForm, yup, ErrorBox } from "../../components/Form";
 import { omit } from "lodash";
 import { SessionUser } from "state/user";
+import { useCreateUserMutation } from "graphql/types";
 
+// TODO use fragment for these fields
 export const CREATE_USER = gql`
   mutation createUser($data: UserCreateInput!) {
     createUser(data: $data) {
       id
       name
       email
+      shortname
       lastname
+      role
     }
   }
 `;
@@ -56,13 +60,9 @@ export function CreateUserForm({
   const router = useRouter();
   const [error, setError] = useState("");
   const [showLogin, setShowLogin] = useState(false);
-  const [doCreateUser] = useMutation(CREATE_USER, {
+  const [doCreateUser] = useCreateUserMutation({
     onCompleted(data) {
-      if (data) {
-        setUser(data.createUser);
-      } else {
-        setUser(undefined);
-      }
+      setUser(data.createUser);
     },
     onError(error) {
       if (error.message === "ERR_DUPLICATE_EMAIL") {

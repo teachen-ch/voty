@@ -12,7 +12,7 @@ export default function Teacher(): ReactElement {
     <LoggedInPage heading="Startseite">
       <StudentTeamNavigation />
       <Heading as="h2">Hey {user?.name} 👋</Heading>
-      <Text>{user && "Deine Klasse: " + user?.team?.name}</Text>
+      <Text>{user && `Deine Klasse: ${user?.team?.name}`}</Text>
       <Text my={3}>
         Hier geht es zu den 👉{" "}
         <Link href="/student/test">

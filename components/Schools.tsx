@@ -3,11 +3,16 @@ import { useUser, useSetUser } from "../state/user";
 import { Heading, Button, Text, Card } from "rebass";
 import { omit } from "lodash";
 import { QForm, ErrorBox } from "./Form";
-import { useMutation } from "@apollo/client";
 import { cantonNames } from "../util/cantons";
 import { useState, ReactElement } from "react";
 import { School } from "@prisma/client";
-import { useSchoolsWithMembersQuery, useSchoolsQuery } from "graphql/types";
+import {
+  useSchoolsWithMembersQuery,
+  useSetSchoolMutation,
+  useSchoolsQuery,
+  useCreateOneSchoolMutation,
+  SchoolsDocument,
+} from "graphql/types";
 
 export const GET_SCHOOLS_WITH_MEMBERS = gql`
   query schoolsWithMembers {
@@ -49,7 +54,7 @@ export const Schools: React.FC = () => {
         </thead>
 
         <tbody>
-          {schools?.map((school: any) => (
+          {schools?.map((school) => (
             <tr key={school.id}>
               <td>{school.id}</td>
               <td>{school.name}</td>
@@ -70,6 +75,9 @@ export const SET_USER_SCHOOL = gql`
       id
       name
       shortname
+      role
+      email
+      lastname
       school {
         id
         name
@@ -98,9 +106,9 @@ export const SelectSchool: React.FC = () => {
   const schoolsQuery = useSchoolsQuery();
   const schools = schoolsQuery.data?.schools;
   const [create, setCreate] = useState(false);
-  const [setUserSchool] = useMutation(SET_USER_SCHOOL, {
-    onCompleted({ user }) {
-      setUser(user);
+  const [setUserSchool] = useSetSchoolMutation({
+    onCompleted(data) {
+      setUser(data.setSchool);
     },
   });
 
@@ -118,12 +126,12 @@ export const SelectSchool: React.FC = () => {
   }
 
   const options = schools?.reduce(
-    (o: any, i) => {
+    (o, i) => {
       const label = `${i.zip} ${i.city} - ${i.name}`;
       o[label] = i.id;
       return o;
     },
-    { "-- Bitte wählen --": undefined }
+    { "-- Bitte wählen --": null } as Record<string, any>
   );
   return (
     <>
@@ -139,7 +147,7 @@ export const SelectSchool: React.FC = () => {
             >;
           }) => {
             setCreate(false);
-            setUserSchool({
+            void setUserSchool({
               variables: { school: createOneSchool.id },
             });
           }}
@@ -177,7 +185,7 @@ export const SelectSchool: React.FC = () => {
   );
 };
 
-const CREATE_SCHOOL = gql`
+export const CREATE_SCHOOL = gql`
   mutation createOneSchool($data: SchoolCreateInput!) {
     createOneSchool(data: $data) {
       id
@@ -198,17 +206,17 @@ export function CreateSchool({
   onCancel?: () => void;
 }): ReactElement {
   const [error, setError] = useState("");
-  const [createSchool] = useMutation(CREATE_SCHOOL, {
+  const [createSchool] = useCreateOneSchoolMutation({
     onCompleted: onCompleted,
     onError: (error) => {
       setError(error.message);
     },
-    update: (cache, { data: { createOneSchool } }) => {
+    update: (cache, result) => {
       cache.modify({
         fields: {
-          schools(existingSchools = []) {
+          schools(existingSchools: typeof SchoolsDocument[] = []) {
             const newSchoolRef = cache.writeFragment({
-              data: createOneSchool,
+              data: result.data?.createOneSchool,
               fragment: gql`
                 fragment NewSchool on School {
                   name
@@ -255,6 +263,9 @@ export function CreateSchool({
         }}
         mutation={createSchool}
         onSubmit={(values: any) =>
+          // TODO: typify Forms.tsx
+          // @ts-ignore
+          // eslint-disable-next-line
           createSchool({ variables: { data: omit(values, "submit") } })
         }
       >

@@ -3520,7 +3520,7 @@ export type SetSchoolMutation = (
   { __typename?: 'Mutation' }
   & { setSchool?: Maybe<(
     { __typename?: 'User' }
-    & Pick<User, 'id' | 'name' | 'shortname'>
+    & Pick<User, 'id' | 'name' | 'shortname' | 'role' | 'email' | 'lastname'>
     & { school?: Maybe<(
       { __typename?: 'School' }
       & Pick<School, 'id' | 'name' | 'city' | 'zip'>
@@ -3683,11 +3683,7 @@ export type TeamByInviteQuery = (
   { __typename?: 'Query' }
   & { team?: Maybe<(
     { __typename?: 'Team' }
-    & Pick<Team, 'id' | 'name'>
-    & { school: (
-      { __typename?: 'School' }
-      & Pick<School, 'id' | 'name' | 'city'>
-    ) }
+    & TeamUserFieldsFragment
   )> }
 );
 
@@ -3810,7 +3806,7 @@ export type CreateUserMutation = (
   { __typename?: 'Mutation' }
   & { createUser: (
     { __typename?: 'User' }
-    & Pick<User, 'id' | 'name' | 'email' | 'lastname'>
+    & Pick<User, 'id' | 'name' | 'email' | 'shortname' | 'lastname' | 'role'>
   ) }
 );
 
@@ -4041,6 +4037,9 @@ export const SetSchoolDocument = gql`
     id
     name
     shortname
+    role
+    email
+    lastname
     school {
       id
       name
@@ -4364,16 +4363,10 @@ export type VoteMutationOptions = Apollo.BaseMutationOptions<VoteMutation, VoteM
 export const TeamByInviteDocument = gql`
     query teamByInvite($invite: String!) {
   team(where: {invite: $invite}) {
-    id
-    name
-    school {
-      id
-      name
-      city
-    }
+    ...TeamUserFields
   }
 }
-    `;
+    ${TeamUserFieldsFragmentDoc}`;
 
 /**
  * __useTeamByInviteQuery__
@@ -4655,7 +4648,9 @@ export const CreateUserDocument = gql`
     id
     name
     email
+    shortname
     lastname
+    role
   }
 }
     `;

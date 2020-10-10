@@ -38,7 +38,7 @@ export const vote: FieldResolver<"Mutation", "vote"> = async (
 
   if (!ballot) throw new Error("ERR_BALLOT_NOT_FOUND");
   if (!user) throw new Error("ERR_VOTING_NEEDS_LOGIN");
-  if (!votingPermission({ ballot, user, db })) {
+  if (!(await votingPermission({ ballot, user, db }))) {
     throw new Error("ERR_VOTING_NOT_ALLOWED");
   }
 

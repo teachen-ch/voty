@@ -13,7 +13,7 @@ export default function LogoutPage(): ReactElement {
   useEffect(() => {
     setAccessToken("");
     setUser(undefined);
-    router.push("/");
+    void router.push("/");
   }, []);
 
   return <Page heading="Abmelden"></Page>;
@@ -34,11 +34,11 @@ export const LogoutButton: React.FC<LogoutButtonProps> = ({
 
   function onLogout() {
     // clear apollo client local  cache
-    client.clearStore();
+    void client.clearStore();
     if (onSuccess) {
       onSuccess();
     } else {
-      router.push("/");
+      void router.push("/");
     }
     // otherwise we get flickering / page redrawing...
     setTimeout(() => {

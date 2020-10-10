@@ -20,7 +20,10 @@ import { loadFixture } from "../../util/prisma-loader";
 /**
  * @type {Cypress.PluginConfig}
  */
-module.exports = (on, config) => {
+module.exports = (
+  on: Cypress.PluginEvents,
+  config: Cypress.PluginConfigOptions
+) => {
   // `on` is used to hook into various events Cypress emits
   // `config` is the resolved Cypress config
   on("task", {
@@ -30,7 +33,4 @@ module.exports = (on, config) => {
       return null;
     },
   });
-
-  // imageSnapshot.addMatchImageSnapshotPlugin(on, config);
-  // return config;
 };

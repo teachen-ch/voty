@@ -58,12 +58,12 @@ const SRFVideo: React.FC<VideoProps> = (props) => {
 function extractSRFUrl(url: string) {
   let id: string;
   let m: RegExpMatchArray | null;
-  if ((m = url.match(/.*id=([^&]*).*$/))) {
+  if ((m = /.*id=([^&]*).*$/.exec(url))) {
     id = m[1];
-  } else if ((m = url.match(/srf\.ch\/play\/tv\/redirect\/detail\/([^?]*)/))) {
+  } else if ((m = /srf\.ch\/play\/tv\/redirect\/detail\/([^?]*)/.exec(url))) {
     id = m[1];
   } else if (
-    (m = url.match(/srf\.ch\/play\/embed\?urn=urn:srf:video:([^?]*)/))
+    (m = /srf\.ch\/play\/embed\?urn=urn:srf:video:([^?]*)/.exec(url))
   ) {
     id = m[1];
   } else {
