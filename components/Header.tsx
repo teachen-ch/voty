@@ -2,16 +2,16 @@ import Head from "next/head";
 import { ReactElement } from "react";
 export function Header(): ReactElement {
   return (
-    <Head>
+    <>
       <Icons />
       <Stats />
-    </Head>
+    </>
   );
 }
 
 function Icons() {
   return (
-    <>
+    <Head>
       <link
         rel="apple-touch-icon"
         sizes="180x180"
@@ -33,7 +33,7 @@ function Icons() {
       <link rel="manifest" href="/site.webmanifest" />
       <meta name="msapplication-TileColor" content="#d9000d" />
       <meta name="theme-color" content="#ffffff" />
-    </>
+    </Head>
   );
 }
 
