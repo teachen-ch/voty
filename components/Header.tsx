@@ -12,6 +12,7 @@ export function Header(): ReactElement {
 function Icons() {
   return (
     <Head>
+      <html lang={"de"} />
       <link
         rel="apple-touch-icon"
         sizes="180x180"

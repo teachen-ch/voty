@@ -8,13 +8,13 @@ export default function Menu(): ReactElement {
         Start
       </a>
       <hr />
-      <a id="about" className="menu-item" href="/impressum">
+      <a id="impressum" className="menu-item" href="/impressum">
         Impressum
       </a>
-      <a id="about" className="menu-item" href="/datenschutz">
+      <a id="datenschutz" className="menu-item" href="/datenschutz">
         Datenschutz
       </a>
-      <a id="contact" className="menu-item" href="/kontakt">
+      <a id="kontakt" className="menu-item" href="/kontakt">
         Kontakt
       </a>
     </Hamburger>
