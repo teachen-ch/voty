@@ -70,7 +70,7 @@ export const Schools: React.FC = () => {
 
 // update
 export const SET_USER_SCHOOL = gql`
-  mutation setSchool($school: Int!) {
+  mutation setSchool($school: String!) {
     setSchool(school: $school) {
       id
       name
@@ -171,7 +171,7 @@ export const SelectSchool: React.FC = () => {
             }}
             mutation={setUserSchool}
             onSubmit={(values: any) =>
-              setUserSchool({ variables: { school: parseInt(values.school) } })
+              setUserSchool({ variables: { school: String(values.school) } })
             }
           >
             <span />

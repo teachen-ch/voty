@@ -7,12 +7,16 @@ import { useRef, useState, RefObject, ReactElement } from "react";
 import { Navigation, Route } from "components/Navigation";
 import { useRouter } from "next/router";
 import _ from "lodash";
-import { gql, useMutation } from "@apollo/client";
+import { gql } from "@apollo/client";
 import { fragments } from "components/Teams";
-import { useTeamTeacherQuery, TeamTeacherFieldsFragment } from "graphql/types";
+import {
+  useTeamTeacherQuery,
+  TeamTeacherFieldsFragment,
+  useInviteStudentsMutation,
+} from "graphql/types";
 
-const INVITE_STUDENTS = gql`
-  mutation inviteStudents($team: Int!, $emails: [String!]!) {
+export const INVITE_STUDENTS = gql`
+  mutation inviteStudents($team: String!, $emails: [String!]!) {
     inviteStudents(team: $team, emails: $emails) {
       ...TeamTeacherFields
     }
@@ -22,7 +26,7 @@ const INVITE_STUDENTS = gql`
 
 export default function TeamPage(): ReactElement {
   const router = useRouter();
-  const id = parseInt(String(router.query.id));
+  const id = String(router.query.id);
   const teamQuery = useTeamTeacherQuery({
     variables: { where: { id } },
     skip: !id,
@@ -32,7 +36,7 @@ export default function TeamPage(): ReactElement {
   const [showInviteLink, setShowInviteLink] = useState(false);
   const [importEmails, setImportEmails] = useState("");
 
-  const [doInviteStudents] = useMutation(INVITE_STUDENTS, {
+  const [doInviteStudents] = useInviteStudentsMutation({
     onCompleted(/*{ inviteStudents }*/) {
       // TODO: currently we get the page updated via cache
       // but we do not show (or send over the API) errors

@@ -12,7 +12,7 @@ import Link from "next/link";
 
 export default function BallotPage(): ReactElement {
   const router = useRouter();
-  const id = parseInt(String(router.query.id));
+  const id = String(router.query.id);
   const ballotQuery = useBallotQuery({ variables: { where: { id } } });
 
   if (ballotQuery.loading) return <Page heading="Abstimmungsseite"></Page>;
@@ -47,7 +47,7 @@ export default function BallotPage(): ReactElement {
 }
 
 const VOTE = gql`
-  mutation vote($ballot: Int!, $vote: Int!) {
+  mutation vote($ballot: String!, $vote: Int!) {
     vote(ballot: $ballot, vote: $vote) {
       verify
       ballot {

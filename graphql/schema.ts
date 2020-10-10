@@ -168,7 +168,7 @@ schema.mutationType({
     t.field("vote", {
       type: "Votes",
       args: {
-        ballot: intArg({ required: true }),
+        ballot: stringArg({ required: true }),
         vote: intArg({ required: true }),
       },
       resolve: resolvers.ballots.vote,
@@ -177,7 +177,7 @@ schema.mutationType({
     t.field("inviteStudents", {
       type: "Team",
       args: {
-        team: intArg({ required: true }),
+        team: stringArg({ required: true }),
         emails: stringArg({ list: true, required: true }),
       },
       resolve: resolvers.teams.inviteStudents,

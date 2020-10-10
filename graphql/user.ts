@@ -1,6 +1,6 @@
 import { schema } from "nexus";
 import { users } from "./resolvers";
-import { stringArg, intArg } from "nexus/components/schema";
+import { stringArg } from "nexus/components/schema";
 import { upperFirst } from "lodash";
 
 schema.objectType({
@@ -123,7 +123,7 @@ schema.extendType({
     t.field("setSchool", {
       type: "User",
       args: {
-        school: intArg({ required: true }),
+        school: stringArg({ required: true }),
       },
       resolve: users.setSchool,
     });

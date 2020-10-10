@@ -84,7 +84,7 @@ type TeamsProps = {
 };
 
 export const Teams: React.FC<TeamsProps> = ({ where, teamClick }) => {
-  const [focus, setFocus] = useState<number>();
+  const [focus, setFocus] = useState<string>();
   const teamsQuery = useTeamsQuery({ variables: { where } });
   const teams = teamsQuery.data?.teams;
 
@@ -162,7 +162,7 @@ export const Teams: React.FC<TeamsProps> = ({ where, teamClick }) => {
 };
 
 export const CREATE_TEAM = gql`
-  mutation createOneTeam($name: String!, $school: Int!, $teacher: Int!) {
+  mutation createOneTeam($name: String!, $school: String!, $teacher: String!) {
     createOneTeam(
       data: {
         name: $name
