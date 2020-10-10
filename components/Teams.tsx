@@ -216,9 +216,7 @@ export function CreateTeamForm({
         onSubmit={(values) =>
           doCreateTeam({
             variables: {
-              // TODO: typify Forms.tsx
-              // eslint-disable-next-line
-              name: values.name,
+              name: String(values.name),
               teacher: user.id,
               school: schoolId,
             },

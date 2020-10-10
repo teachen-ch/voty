@@ -81,7 +81,7 @@ const Invite: React.FC = () => {
       console.error(error.message);
     },
   });
-  const onSubmit = (values: { [key: string]: string }) =>
+  const onSubmit = (values: Record<string, string | number>) =>
     doCreateInvitedUser({
       // TODO: our QForm component is not typed yet hence "as any"...
       // @ts-ignore

@@ -46,7 +46,7 @@ export async function sendMail(
   }
 }
 
-async function renderTemplate(template: string, data: any) {
+async function renderTemplate(template: string, data: Record<string, string>) {
   let mjml: string;
   let text: string;
   const mjmlTemplate = templatesDir + template + ".mjml";

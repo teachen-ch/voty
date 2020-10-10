@@ -55,7 +55,7 @@ export function CreateUserForm({
   onSubmit,
 }: {
   setUser: Dispatch<SetStateAction<SessionUser | undefined>>;
-  onSubmit?: (values: { [key: string]: any }) => void;
+  onSubmit?: (values: Record<string, string | number>) => void;
 }): ReactElement {
   const router = useRouter();
   const [error, setError] = useState("");
@@ -73,7 +73,7 @@ export function CreateUserForm({
   });
 
   if (!onSubmit) {
-    onSubmit = (values: any) =>
+    onSubmit = (values) =>
       doCreateUser({ variables: { data: omit(values, "submit") } });
   }
   return (

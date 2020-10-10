@@ -79,9 +79,9 @@ export const Include: React.FC<{ toggle: boolean }> = (props) => {
       <MDXProvider
         components={{
           // eslint-disable-next-line react/display-name
-          h1: (props: any) => <Heading mt={2}>{props.children}</Heading>,
+          h1: (props) => <Heading mt={2}>{props.children}</Heading>,
           // eslint-disable-next-line react/display-name
-          wrapper: (props: any) => (
+          wrapper: (props) => (
             <Box my={2} p={3} bg="lightgray">
               {props.children}
             </Box>

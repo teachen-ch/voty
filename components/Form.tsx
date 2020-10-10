@@ -11,7 +11,7 @@ import {
 import * as yup from "yup";
 import React, { useMemo } from "react";
 import { omit } from "lodash";
-import { FetchResult } from "@apollo/client";
+import { MutationFunction } from "@apollo/client";
 
 export { Formik, Form, yup, Grid, Card };
 
@@ -69,7 +69,7 @@ type QFormField = {
   required?: boolean;
   setter?: (s: string) => void;
   validate?: YupType;
-  options?: { [key: string]: string | number };
+  options?: Record<string, string | number>;
 };
 
 type YupType =
@@ -77,14 +77,14 @@ type YupType =
   | yup.NumberSchema<number | undefined>;
 
 type QFormProps = FormikFormProps & {
-  fields: { [key: string]: QFormField };
-  onSubmit?: (values: { [key: string]: any }) => void;
-  mutation: (options?: any) => Promise<FetchResult>;
+  fields: Record<string, QFormField>;
+  onSubmit?: (values: Record<string, string | number>) => void;
+  mutation: MutationFunction<any, any>;
 };
 
 export const QForm: React.FC<QFormProps> = ({ fields, mutation, ...props }) => {
   // default onSubmit = execute mutation handler
-  const doMutation = (values: { [key: string]: any }) =>
+  const doMutation = (values: Record<string, string | number>) =>
     mutation({ variables: omit(values, "submit") });
   const onSubmit = props.onSubmit ? props.onSubmit : doMutation;
 
@@ -95,10 +95,8 @@ export const QForm: React.FC<QFormProps> = ({ fields, mutation, ...props }) => {
 
   function configureFields() {
     const fieldArr: QFormField[] = [];
-    const validationSchema: {
-      [key: string]: YupType;
-    } = {};
-    const initialValues: { [key: string]: string | number } = {};
+    const validationSchema: Record<string, YupType> = {};
+    const initialValues: Record<string, string | number> = {};
 
     Object.keys(fields).forEach((name) => {
       const f = fields[name];
@@ -108,9 +106,7 @@ export const QForm: React.FC<QFormProps> = ({ fields, mutation, ...props }) => {
 
       initialValues[name] = typeof f.init !== "undefined" ? f.init : "";
       if (!f.validate) {
-        const yupTypes: {
-          [key: string]: YupType;
-        } = {
+        const yupTypes: Record<string, YupType> = {
           string: yup.string(),
           number: yup.number(),
           email: yup.string().email("Bitte gültige Email-Adresse angeben"),

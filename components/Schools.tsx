@@ -100,6 +100,8 @@ export const GET_SCHOOL_LIST = gql`
   }
 `;
 
+type ResultSchool = Pick<School, "id" | "name" | "city" | "zip" | "canton">;
+
 export const SelectSchool: React.FC = () => {
   const user = useUser();
   const setUser = useSetUser();
@@ -141,10 +143,7 @@ export const SelectSchool: React.FC = () => {
           onCompleted={({
             createOneSchool,
           }: {
-            createOneSchool: Pick<
-              School,
-              "id" | "name" | "city" | "zip" | "canton"
-            >;
+            createOneSchool: ResultSchool;
           }) => {
             setCreate(false);
             void setUserSchool({
@@ -170,7 +169,7 @@ export const SelectSchool: React.FC = () => {
               },
             }}
             mutation={setUserSchool}
-            onSubmit={(values: any) =>
+            onSubmit={(values) =>
               setUserSchool({ variables: { school: String(values.school) } })
             }
           >
@@ -202,7 +201,11 @@ export function CreateSchool({
   onCompleted,
   onCancel,
 }: {
-  onCompleted?: (data: any) => void;
+  onCompleted?: ({
+    createOneSchool,
+  }: {
+    createOneSchool: ResultSchool;
+  }) => void;
   onCancel?: () => void;
 }): ReactElement {
   const [error, setError] = useState("");
@@ -262,7 +265,7 @@ export function CreateSchool({
           },
         }}
         mutation={createSchool}
-        onSubmit={(values: any) =>
+        onSubmit={(values) =>
           // TODO: typify Forms.tsx
           // @ts-ignore
           // eslint-disable-next-line

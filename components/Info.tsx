@@ -5,7 +5,7 @@ export default function Info(
   props: PropsWithChildren<{ type?: string }>
 ): ReactElement {
   const type = props.type || "default";
-  const typeColors: { [key: string]: string } = {
+  const typeColors: Record<string, string> = {
     important: "#d90000",
     info: "#000099",
     light: "lightgray",

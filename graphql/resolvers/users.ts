@@ -258,7 +258,7 @@ export async function sendVerificationEmail(
     }`;
     const token = await createVerificationToken(prisma, email);
     const url = `${process.env.BASE_URL}user/login?t=${token}&p=${purpose}`;
-    const subjects: { [key: string]: string } = {
+    const subjects: Record<string, string> = {
       verification: "voty: Bitte Email bestätigen",
       reset: "voty: Passwort zurücksetzen?",
       login: "voty: Jetzt anmelden?",
