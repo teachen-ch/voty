@@ -68,834 +68,25 @@
     },
     {
       "tag": "CreateModel",
-      "model": "Account"
-    },
-    {
-      "tag": "CreateField",
-      "model": "Account",
-      "field": "id",
-      "type": "Int",
-      "arity": "Required"
-    },
-    {
-      "tag": "CreateDirective",
-      "location": {
-        "path": {
-          "tag": "Field",
-          "model": "Account",
-          "field": "id"
-        },
-        "directive": "default"
-      }
-    },
-    {
-      "tag": "CreateArgument",
-      "location": {
-        "tag": "Directive",
-        "path": {
-          "tag": "Field",
-          "model": "Account",
-          "field": "id"
-        },
-        "directive": "default"
-      },
-      "argument": "",
-      "value": "autoincrement()"
-    },
-    {
-      "tag": "CreateDirective",
-      "location": {
-        "path": {
-          "tag": "Field",
-          "model": "Account",
-          "field": "id"
-        },
-        "directive": "id"
-      }
-    },
-    {
-      "tag": "CreateField",
-      "model": "Account",
-      "field": "compoundId",
-      "type": "String",
-      "arity": "Required"
-    },
-    {
-      "tag": "CreateDirective",
-      "location": {
-        "path": {
-          "tag": "Field",
-          "model": "Account",
-          "field": "compoundId"
-        },
-        "directive": "unique"
-      }
-    },
-    {
-      "tag": "CreateDirective",
-      "location": {
-        "path": {
-          "tag": "Field",
-          "model": "Account",
-          "field": "compoundId"
-        },
-        "directive": "map"
-      }
-    },
-    {
-      "tag": "CreateArgument",
-      "location": {
-        "tag": "Directive",
-        "path": {
-          "tag": "Field",
-          "model": "Account",
-          "field": "compoundId"
-        },
-        "directive": "map"
-      },
-      "argument": "name",
-      "value": "\"compound_id\""
-    },
-    {
-      "tag": "CreateField",
-      "model": "Account",
-      "field": "userId",
-      "type": "Int",
-      "arity": "Required"
-    },
-    {
-      "tag": "CreateDirective",
-      "location": {
-        "path": {
-          "tag": "Field",
-          "model": "Account",
-          "field": "userId"
-        },
-        "directive": "map"
-      }
-    },
-    {
-      "tag": "CreateArgument",
-      "location": {
-        "tag": "Directive",
-        "path": {
-          "tag": "Field",
-          "model": "Account",
-          "field": "userId"
-        },
-        "directive": "map"
-      },
-      "argument": "name",
-      "value": "\"user_id\""
-    },
-    {
-      "tag": "CreateField",
-      "model": "Account",
-      "field": "providerType",
-      "type": "String",
-      "arity": "Required"
-    },
-    {
-      "tag": "CreateDirective",
-      "location": {
-        "path": {
-          "tag": "Field",
-          "model": "Account",
-          "field": "providerType"
-        },
-        "directive": "map"
-      }
-    },
-    {
-      "tag": "CreateArgument",
-      "location": {
-        "tag": "Directive",
-        "path": {
-          "tag": "Field",
-          "model": "Account",
-          "field": "providerType"
-        },
-        "directive": "map"
-      },
-      "argument": "name",
-      "value": "\"provider_type\""
-    },
-    {
-      "tag": "CreateField",
-      "model": "Account",
-      "field": "providerId",
-      "type": "String",
-      "arity": "Required"
-    },
-    {
-      "tag": "CreateDirective",
-      "location": {
-        "path": {
-          "tag": "Field",
-          "model": "Account",
-          "field": "providerId"
-        },
-        "directive": "map"
-      }
-    },
-    {
-      "tag": "CreateArgument",
-      "location": {
-        "tag": "Directive",
-        "path": {
-          "tag": "Field",
-          "model": "Account",
-          "field": "providerId"
-        },
-        "directive": "map"
-      },
-      "argument": "name",
-      "value": "\"provider_id\""
-    },
-    {
-      "tag": "CreateField",
-      "model": "Account",
-      "field": "providerAccountId",
-      "type": "String",
-      "arity": "Required"
-    },
-    {
-      "tag": "CreateDirective",
-      "location": {
-        "path": {
-          "tag": "Field",
-          "model": "Account",
-          "field": "providerAccountId"
-        },
-        "directive": "map"
-      }
-    },
-    {
-      "tag": "CreateArgument",
-      "location": {
-        "tag": "Directive",
-        "path": {
-          "tag": "Field",
-          "model": "Account",
-          "field": "providerAccountId"
-        },
-        "directive": "map"
-      },
-      "argument": "name",
-      "value": "\"provider_account_id\""
-    },
-    {
-      "tag": "CreateField",
-      "model": "Account",
-      "field": "refreshToken",
-      "type": "String",
-      "arity": "Optional"
-    },
-    {
-      "tag": "CreateDirective",
-      "location": {
-        "path": {
-          "tag": "Field",
-          "model": "Account",
-          "field": "refreshToken"
-        },
-        "directive": "map"
-      }
-    },
-    {
-      "tag": "CreateArgument",
-      "location": {
-        "tag": "Directive",
-        "path": {
-          "tag": "Field",
-          "model": "Account",
-          "field": "refreshToken"
-        },
-        "directive": "map"
-      },
-      "argument": "name",
-      "value": "\"refresh_token\""
-    },
-    {
-      "tag": "CreateField",
-      "model": "Account",
-      "field": "accessToken",
-      "type": "String",
-      "arity": "Optional"
-    },
-    {
-      "tag": "CreateDirective",
-      "location": {
-        "path": {
-          "tag": "Field",
-          "model": "Account",
-          "field": "accessToken"
-        },
-        "directive": "map"
-      }
-    },
-    {
-      "tag": "CreateArgument",
-      "location": {
-        "tag": "Directive",
-        "path": {
-          "tag": "Field",
-          "model": "Account",
-          "field": "accessToken"
-        },
-        "directive": "map"
-      },
-      "argument": "name",
-      "value": "\"access_token\""
-    },
-    {
-      "tag": "CreateField",
-      "model": "Account",
-      "field": "accessTokenExpires",
-      "type": "DateTime",
-      "arity": "Optional"
-    },
-    {
-      "tag": "CreateDirective",
-      "location": {
-        "path": {
-          "tag": "Field",
-          "model": "Account",
-          "field": "accessTokenExpires"
-        },
-        "directive": "map"
-      }
-    },
-    {
-      "tag": "CreateArgument",
-      "location": {
-        "tag": "Directive",
-        "path": {
-          "tag": "Field",
-          "model": "Account",
-          "field": "accessTokenExpires"
-        },
-        "directive": "map"
-      },
-      "argument": "name",
-      "value": "\"access_token_expires\""
-    },
-    {
-      "tag": "CreateField",
-      "model": "Account",
-      "field": "createdAt",
-      "type": "DateTime",
-      "arity": "Required"
-    },
-    {
-      "tag": "CreateDirective",
-      "location": {
-        "path": {
-          "tag": "Field",
-          "model": "Account",
-          "field": "createdAt"
-        },
-        "directive": "default"
-      }
-    },
-    {
-      "tag": "CreateArgument",
-      "location": {
-        "tag": "Directive",
-        "path": {
-          "tag": "Field",
-          "model": "Account",
-          "field": "createdAt"
-        },
-        "directive": "default"
-      },
-      "argument": "",
-      "value": "now()"
-    },
-    {
-      "tag": "CreateDirective",
-      "location": {
-        "path": {
-          "tag": "Field",
-          "model": "Account",
-          "field": "createdAt"
-        },
-        "directive": "map"
-      }
-    },
-    {
-      "tag": "CreateArgument",
-      "location": {
-        "tag": "Directive",
-        "path": {
-          "tag": "Field",
-          "model": "Account",
-          "field": "createdAt"
-        },
-        "directive": "map"
-      },
-      "argument": "name",
-      "value": "\"created_at\""
-    },
-    {
-      "tag": "CreateField",
-      "model": "Account",
-      "field": "updatedAt",
-      "type": "DateTime",
-      "arity": "Required"
-    },
-    {
-      "tag": "CreateDirective",
-      "location": {
-        "path": {
-          "tag": "Field",
-          "model": "Account",
-          "field": "updatedAt"
-        },
-        "directive": "default"
-      }
-    },
-    {
-      "tag": "CreateArgument",
-      "location": {
-        "tag": "Directive",
-        "path": {
-          "tag": "Field",
-          "model": "Account",
-          "field": "updatedAt"
-        },
-        "directive": "default"
-      },
-      "argument": "",
-      "value": "now()"
-    },
-    {
-      "tag": "CreateDirective",
-      "location": {
-        "path": {
-          "tag": "Field",
-          "model": "Account",
-          "field": "updatedAt"
-        },
-        "directive": "map"
-      }
-    },
-    {
-      "tag": "CreateArgument",
-      "location": {
-        "tag": "Directive",
-        "path": {
-          "tag": "Field",
-          "model": "Account",
-          "field": "updatedAt"
-        },
-        "directive": "map"
-      },
-      "argument": "name",
-      "value": "\"updated_at\""
-    },
-    {
-      "tag": "CreateDirective",
-      "location": {
-        "path": {
-          "tag": "Model",
-          "model": "Account"
-        },
-        "directive": "map"
-      }
-    },
-    {
-      "tag": "CreateArgument",
-      "location": {
-        "tag": "Directive",
-        "path": {
-          "tag": "Model",
-          "model": "Account"
-        },
-        "directive": "map"
-      },
-      "argument": "name",
-      "value": "\"accounts\""
-    },
-    {
-      "tag": "CreateDirective",
-      "location": {
-        "path": {
-          "tag": "Model",
-          "model": "Account",
-          "arguments": [
-            {
-              "name": "",
-              "value": "[providerAccountId]"
-            },
-            {
-              "name": "name",
-              "value": "\"providerAccountId\""
-            }
-          ]
-        },
-        "directive": "index"
-      }
-    },
-    {
-      "tag": "CreateDirective",
-      "location": {
-        "path": {
-          "tag": "Model",
-          "model": "Account",
-          "arguments": [
-            {
-              "name": "",
-              "value": "[providerId]"
-            },
-            {
-              "name": "name",
-              "value": "\"providerId\""
-            }
-          ]
-        },
-        "directive": "index"
-      }
-    },
-    {
-      "tag": "CreateDirective",
-      "location": {
-        "path": {
-          "tag": "Model",
-          "model": "Account",
-          "arguments": [
-            {
-              "name": "",
-              "value": "[userId]"
-            },
-            {
-              "name": "name",
-              "value": "\"userId\""
-            }
-          ]
-        },
-        "directive": "index"
-      }
-    },
-    {
-      "tag": "CreateModel",
-      "model": "Session"
-    },
-    {
-      "tag": "CreateField",
-      "model": "Session",
-      "field": "id",
-      "type": "Int",
-      "arity": "Required"
-    },
-    {
-      "tag": "CreateDirective",
-      "location": {
-        "path": {
-          "tag": "Field",
-          "model": "Session",
-          "field": "id"
-        },
-        "directive": "default"
-      }
-    },
-    {
-      "tag": "CreateArgument",
-      "location": {
-        "tag": "Directive",
-        "path": {
-          "tag": "Field",
-          "model": "Session",
-          "field": "id"
-        },
-        "directive": "default"
-      },
-      "argument": "",
-      "value": "autoincrement()"
-    },
-    {
-      "tag": "CreateDirective",
-      "location": {
-        "path": {
-          "tag": "Field",
-          "model": "Session",
-          "field": "id"
-        },
-        "directive": "id"
-      }
-    },
-    {
-      "tag": "CreateField",
-      "model": "Session",
-      "field": "userId",
-      "type": "Int",
-      "arity": "Required"
-    },
-    {
-      "tag": "CreateDirective",
-      "location": {
-        "path": {
-          "tag": "Field",
-          "model": "Session",
-          "field": "userId"
-        },
-        "directive": "map"
-      }
-    },
-    {
-      "tag": "CreateArgument",
-      "location": {
-        "tag": "Directive",
-        "path": {
-          "tag": "Field",
-          "model": "Session",
-          "field": "userId"
-        },
-        "directive": "map"
-      },
-      "argument": "name",
-      "value": "\"user_id\""
-    },
-    {
-      "tag": "CreateField",
-      "model": "Session",
-      "field": "expires",
-      "type": "DateTime",
-      "arity": "Required"
-    },
-    {
-      "tag": "CreateField",
-      "model": "Session",
-      "field": "sessionToken",
-      "type": "String",
-      "arity": "Required"
-    },
-    {
-      "tag": "CreateDirective",
-      "location": {
-        "path": {
-          "tag": "Field",
-          "model": "Session",
-          "field": "sessionToken"
-        },
-        "directive": "unique"
-      }
-    },
-    {
-      "tag": "CreateDirective",
-      "location": {
-        "path": {
-          "tag": "Field",
-          "model": "Session",
-          "field": "sessionToken"
-        },
-        "directive": "map"
-      }
-    },
-    {
-      "tag": "CreateArgument",
-      "location": {
-        "tag": "Directive",
-        "path": {
-          "tag": "Field",
-          "model": "Session",
-          "field": "sessionToken"
-        },
-        "directive": "map"
-      },
-      "argument": "name",
-      "value": "\"session_token\""
-    },
-    {
-      "tag": "CreateField",
-      "model": "Session",
-      "field": "accessToken",
-      "type": "String",
-      "arity": "Required"
-    },
-    {
-      "tag": "CreateDirective",
-      "location": {
-        "path": {
-          "tag": "Field",
-          "model": "Session",
-          "field": "accessToken"
-        },
-        "directive": "unique"
-      }
-    },
-    {
-      "tag": "CreateDirective",
-      "location": {
-        "path": {
-          "tag": "Field",
-          "model": "Session",
-          "field": "accessToken"
-        },
-        "directive": "map"
-      }
-    },
-    {
-      "tag": "CreateArgument",
-      "location": {
-        "tag": "Directive",
-        "path": {
-          "tag": "Field",
-          "model": "Session",
-          "field": "accessToken"
-        },
-        "directive": "map"
-      },
-      "argument": "name",
-      "value": "\"access_token\""
-    },
-    {
-      "tag": "CreateField",
-      "model": "Session",
-      "field": "createdAt",
-      "type": "DateTime",
-      "arity": "Required"
-    },
-    {
-      "tag": "CreateDirective",
-      "location": {
-        "path": {
-          "tag": "Field",
-          "model": "Session",
-          "field": "createdAt"
-        },
-        "directive": "default"
-      }
-    },
-    {
-      "tag": "CreateArgument",
-      "location": {
-        "tag": "Directive",
-        "path": {
-          "tag": "Field",
-          "model": "Session",
-          "field": "createdAt"
-        },
-        "directive": "default"
-      },
-      "argument": "",
-      "value": "now()"
-    },
-    {
-      "tag": "CreateDirective",
-      "location": {
-        "path": {
-          "tag": "Field",
-          "model": "Session",
-          "field": "createdAt"
-        },
-        "directive": "map"
-      }
-    },
-    {
-      "tag": "CreateArgument",
-      "location": {
-        "tag": "Directive",
-        "path": {
-          "tag": "Field",
-          "model": "Session",
-          "field": "createdAt"
-        },
-        "directive": "map"
-      },
-      "argument": "name",
-      "value": "\"created_at\""
-    },
-    {
-      "tag": "CreateField",
-      "model": "Session",
-      "field": "updatedAt",
-      "type": "DateTime",
-      "arity": "Required"
-    },
-    {
-      "tag": "CreateDirective",
-      "location": {
-        "path": {
-          "tag": "Field",
-          "model": "Session",
-          "field": "updatedAt"
-        },
-        "directive": "default"
-      }
-    },
-    {
-      "tag": "CreateArgument",
-      "location": {
-        "tag": "Directive",
-        "path": {
-          "tag": "Field",
-          "model": "Session",
-          "field": "updatedAt"
-        },
-        "directive": "default"
-      },
-      "argument": "",
-      "value": "now()"
-    },
-    {
-      "tag": "CreateDirective",
-      "location": {
-        "path": {
-          "tag": "Field",
-          "model": "Session",
-          "field": "updatedAt"
-        },
-        "directive": "map"
-      }
-    },
-    {
-      "tag": "CreateArgument",
-      "location": {
-        "tag": "Directive",
-        "path": {
-          "tag": "Field",
-          "model": "Session",
-          "field": "updatedAt"
-        },
-        "directive": "map"
-      },
-      "argument": "name",
-      "value": "\"updated_at\""
-    },
-    {
-      "tag": "CreateDirective",
-      "location": {
-        "path": {
-          "tag": "Model",
-          "model": "Session"
-        },
-        "directive": "map"
-      }
-    },
-    {
-      "tag": "CreateArgument",
-      "location": {
-        "tag": "Directive",
-        "path": {
-          "tag": "Model",
-          "model": "Session"
-        },
-        "directive": "map"
-      },
-      "argument": "name",
-      "value": "\"sessions\""
-    },
-    {
-      "tag": "CreateModel",
       "model": "User"
     },
     {
       "tag": "CreateField",
       "model": "User",
       "field": "id",
-      "type": "Int",
+      "type": "String",
       "arity": "Required"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "User",
+          "field": "id"
+        },
+        "directive": "id"
+      }
     },
     {
       "tag": "CreateDirective",
@@ -920,18 +111,7 @@
         "directive": "default"
       },
       "argument": "",
-      "value": "autoincrement()"
-    },
-    {
-      "tag": "CreateDirective",
-      "location": {
-        "path": {
-          "tag": "Field",
-          "model": "User",
-          "field": "id"
-        },
-        "directive": "id"
-      }
+      "value": "cuid()"
     },
     {
       "tag": "CreateField",
@@ -1085,6 +265,13 @@
     {
       "tag": "CreateField",
       "model": "User",
+      "field": "canton",
+      "type": "String",
+      "arity": "Optional"
+    },
+    {
+      "tag": "CreateField",
+      "model": "User",
       "field": "role",
       "type": "Role",
       "arity": "Required"
@@ -1209,6 +396,38 @@
     {
       "tag": "CreateField",
       "model": "User",
+      "field": "teamId",
+      "type": "String",
+      "arity": "Optional"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "User",
+          "field": "teamId"
+        },
+        "directive": "map"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "User",
+          "field": "teamId"
+        },
+        "directive": "map"
+      },
+      "argument": "name",
+      "value": "\"team_id\""
+    },
+    {
+      "tag": "CreateField",
+      "model": "User",
       "field": "teaches",
       "type": "Team",
       "arity": "List"
@@ -1242,7 +461,7 @@
       "tag": "CreateField",
       "model": "User",
       "field": "schoolId",
-      "type": "Int",
+      "type": "String",
       "arity": "Optional"
     },
     {
@@ -1269,38 +488,6 @@
       },
       "argument": "name",
       "value": "\"school_id\""
-    },
-    {
-      "tag": "CreateField",
-      "model": "User",
-      "field": "teamId",
-      "type": "Int",
-      "arity": "Optional"
-    },
-    {
-      "tag": "CreateDirective",
-      "location": {
-        "path": {
-          "tag": "Field",
-          "model": "User",
-          "field": "teamId"
-        },
-        "directive": "map"
-      }
-    },
-    {
-      "tag": "CreateArgument",
-      "location": {
-        "tag": "Directive",
-        "path": {
-          "tag": "Field",
-          "model": "User",
-          "field": "teamId"
-        },
-        "directive": "map"
-      },
-      "argument": "name",
-      "value": "\"team_id\""
     },
     {
       "tag": "CreateField",
@@ -1567,8 +754,19 @@
       "tag": "CreateField",
       "model": "VerificationRequest",
       "field": "id",
-      "type": "Int",
+      "type": "String",
       "arity": "Required"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "VerificationRequest",
+          "field": "id"
+        },
+        "directive": "id"
+      }
     },
     {
       "tag": "CreateDirective",
@@ -1593,18 +791,7 @@
         "directive": "default"
       },
       "argument": "",
-      "value": "autoincrement()"
-    },
-    {
-      "tag": "CreateDirective",
-      "location": {
-        "path": {
-          "tag": "Field",
-          "model": "VerificationRequest",
-          "field": "id"
-        },
-        "directive": "id"
-      }
+      "value": "cuid()"
     },
     {
       "tag": "CreateField",
@@ -1783,8 +970,19 @@
       "tag": "CreateField",
       "model": "Team",
       "field": "id",
-      "type": "Int",
+      "type": "String",
       "arity": "Required"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "Team",
+          "field": "id"
+        },
+        "directive": "id"
+      }
     },
     {
       "tag": "CreateDirective",
@@ -1809,18 +1007,7 @@
         "directive": "default"
       },
       "argument": "",
-      "value": "autoincrement()"
-    },
-    {
-      "tag": "CreateDirective",
-      "location": {
-        "path": {
-          "tag": "Field",
-          "model": "Team",
-          "field": "id"
-        },
-        "directive": "id"
-      }
+      "value": "cuid()"
     },
     {
       "tag": "CreateField",
@@ -1904,7 +1091,7 @@
       "tag": "CreateField",
       "model": "Team",
       "field": "schoolId",
-      "type": "Int",
+      "type": "String",
       "arity": "Required"
     },
     {
@@ -1996,7 +1183,7 @@
       "tag": "CreateField",
       "model": "Team",
       "field": "teacherId",
-      "type": "Int",
+      "type": "String",
       "arity": "Required"
     },
     {
@@ -2022,7 +1209,7 @@
         "directive": "map"
       },
       "argument": "name",
-      "value": "\"team_id\""
+      "value": "\"teacher_id\""
     },
     {
       "tag": "CreateField",
@@ -2113,7 +1300,7 @@
       "tag": "CreateField",
       "model": "Team",
       "field": "domainId",
-      "type": "Int",
+      "type": "String",
       "arity": "Optional"
     },
     {
@@ -2179,8 +1366,19 @@
       "tag": "CreateField",
       "model": "School",
       "field": "id",
-      "type": "Int",
+      "type": "String",
       "arity": "Required"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "School",
+          "field": "id"
+        },
+        "directive": "id"
+      }
     },
     {
       "tag": "CreateDirective",
@@ -2205,18 +1403,7 @@
         "directive": "default"
       },
       "argument": "",
-      "value": "autoincrement()"
-    },
-    {
-      "tag": "CreateDirective",
-      "location": {
-        "path": {
-          "tag": "Field",
-          "model": "School",
-          "field": "id"
-        },
-        "directive": "id"
-      }
+      "value": "cuid()"
     },
     {
       "tag": "CreateField",
@@ -2356,6 +1543,38 @@
     {
       "tag": "CreateField",
       "model": "School",
+      "field": "type",
+      "type": "String",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "School",
+          "field": "type"
+        },
+        "directive": "default"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "School",
+          "field": "type"
+        },
+        "directive": "default"
+      },
+      "argument": "",
+      "value": "\"\""
+    },
+    {
+      "tag": "CreateField",
+      "model": "School",
       "field": "domain",
       "type": "Domain",
       "arity": "Optional"
@@ -2403,7 +1622,7 @@
       "tag": "CreateField",
       "model": "School",
       "field": "domainId",
-      "type": "Int",
+      "type": "String",
       "arity": "Optional"
     },
     {
@@ -2483,8 +1702,19 @@
       "tag": "CreateField",
       "model": "Domain",
       "field": "id",
-      "type": "Int",
+      "type": "String",
       "arity": "Required"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "Domain",
+          "field": "id"
+        },
+        "directive": "id"
+      }
     },
     {
       "tag": "CreateDirective",
@@ -2509,18 +1739,7 @@
         "directive": "default"
       },
       "argument": "",
-      "value": "autoincrement()"
-    },
-    {
-      "tag": "CreateDirective",
-      "location": {
-        "path": {
-          "tag": "Field",
-          "model": "Domain",
-          "field": "id"
-        },
-        "directive": "id"
-      }
+      "value": "cuid()"
     },
     {
       "tag": "CreateField",
@@ -2617,8 +1836,19 @@
       "tag": "CreateField",
       "model": "Ballot",
       "field": "id",
-      "type": "Int",
+      "type": "String",
       "arity": "Required"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "Ballot",
+          "field": "id"
+        },
+        "directive": "id"
+      }
     },
     {
       "tag": "CreateDirective",
@@ -2643,18 +1873,7 @@
         "directive": "default"
       },
       "argument": "",
-      "value": "autoincrement()"
-    },
-    {
-      "tag": "CreateDirective",
-      "location": {
-        "path": {
-          "tag": "Field",
-          "model": "Ballot",
-          "field": "id"
-        },
-        "directive": "id"
-      }
+      "value": "cuid()"
     },
     {
       "tag": "CreateField",
@@ -2780,7 +1999,7 @@
       "tag": "CreateField",
       "model": "Ballot",
       "field": "schoolId",
-      "type": "Int",
+      "type": "String",
       "arity": "Optional"
     },
     {
@@ -2858,7 +2077,7 @@
       "tag": "CreateField",
       "model": "Ballot",
       "field": "teamId",
-      "type": "Int",
+      "type": "String",
       "arity": "Optional"
     },
     {
@@ -2936,7 +2155,7 @@
       "tag": "CreateField",
       "model": "Ballot",
       "field": "creatorId",
-      "type": "Int",
+      "type": "String",
       "arity": "Optional"
     },
     {
@@ -3014,7 +2233,7 @@
       "tag": "CreateField",
       "model": "Ballot",
       "field": "threadId",
-      "type": "Int",
+      "type": "String",
       "arity": "Optional"
     },
     {
@@ -3046,7 +2265,7 @@
       "tag": "CreateField",
       "model": "Ballot",
       "field": "options",
-      "type": "Options",
+      "type": "Option",
       "arity": "List"
     },
     {
@@ -3085,7 +2304,7 @@
       "tag": "CreateField",
       "model": "Ballot",
       "field": "votes",
-      "type": "Votes",
+      "type": "Vote",
       "arity": "List"
     },
     {
@@ -3234,13 +2453,13 @@
     },
     {
       "tag": "CreateModel",
-      "model": "Options"
+      "model": "BallotRun"
     },
     {
       "tag": "CreateField",
-      "model": "Options",
+      "model": "BallotRun",
       "field": "id",
-      "type": "Int",
+      "type": "String",
       "arity": "Required"
     },
     {
@@ -3248,7 +2467,18 @@
       "location": {
         "path": {
           "tag": "Field",
-          "model": "Options",
+          "model": "BallotRun",
+          "field": "id"
+        },
+        "directive": "id"
+      }
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "BallotRun",
           "field": "id"
         },
         "directive": "default"
@@ -3260,42 +2490,31 @@
         "tag": "Directive",
         "path": {
           "tag": "Field",
-          "model": "Options",
+          "model": "BallotRun",
           "field": "id"
         },
         "directive": "default"
       },
       "argument": "",
-      "value": "autoincrement()"
-    },
-    {
-      "tag": "CreateDirective",
-      "location": {
-        "path": {
-          "tag": "Field",
-          "model": "Options",
-          "field": "id"
-        },
-        "directive": "id"
-      }
+      "value": "cuid()"
     },
     {
       "tag": "CreateField",
-      "model": "Options",
-      "field": "vote",
-      "type": "Int",
-      "arity": "Required"
+      "model": "BallotRun",
+      "field": "start",
+      "type": "DateTime",
+      "arity": "Optional"
     },
     {
       "tag": "CreateField",
-      "model": "Options",
-      "field": "title",
-      "type": "String",
-      "arity": "Required"
+      "model": "BallotRun",
+      "field": "end",
+      "type": "DateTime",
+      "arity": "Optional"
     },
     {
       "tag": "CreateField",
-      "model": "Options",
+      "model": "BallotRun",
       "field": "ballot",
       "type": "Ballot",
       "arity": "Required"
@@ -3305,7 +2524,7 @@
       "location": {
         "path": {
           "tag": "Field",
-          "model": "Options",
+          "model": "BallotRun",
           "field": "ballot"
         },
         "directive": "relation"
@@ -3317,7 +2536,7 @@
         "tag": "Directive",
         "path": {
           "tag": "Field",
-          "model": "Options",
+          "model": "BallotRun",
           "field": "ballot"
         },
         "directive": "relation"
@@ -3331,7 +2550,7 @@
         "tag": "Directive",
         "path": {
           "tag": "Field",
-          "model": "Options",
+          "model": "BallotRun",
           "field": "ballot"
         },
         "directive": "relation"
@@ -3341,9 +2560,9 @@
     },
     {
       "tag": "CreateField",
-      "model": "Options",
+      "model": "BallotRun",
       "field": "ballotId",
-      "type": "Int",
+      "type": "String",
       "arity": "Required"
     },
     {
@@ -3351,7 +2570,7 @@
       "location": {
         "path": {
           "tag": "Field",
-          "model": "Options",
+          "model": "BallotRun",
           "field": "ballotId"
         },
         "directive": "map"
@@ -3363,7 +2582,247 @@
         "tag": "Directive",
         "path": {
           "tag": "Field",
-          "model": "Options",
+          "model": "BallotRun",
+          "field": "ballotId"
+        },
+        "directive": "map"
+      },
+      "argument": "name",
+      "value": "\"ballot_id\""
+    },
+    {
+      "tag": "CreateField",
+      "model": "BallotRun",
+      "field": "team",
+      "type": "Team",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "BallotRun",
+          "field": "team"
+        },
+        "directive": "relation"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "BallotRun",
+          "field": "team"
+        },
+        "directive": "relation"
+      },
+      "argument": "fields",
+      "value": "[teamId]"
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "BallotRun",
+          "field": "team"
+        },
+        "directive": "relation"
+      },
+      "argument": "references",
+      "value": "[id]"
+    },
+    {
+      "tag": "CreateField",
+      "model": "BallotRun",
+      "field": "teamId",
+      "type": "String",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "BallotRun",
+          "field": "teamId"
+        },
+        "directive": "map"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "BallotRun",
+          "field": "teamId"
+        },
+        "directive": "map"
+      },
+      "argument": "name",
+      "value": "\"team_id\""
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Model",
+          "model": "BallotRun"
+        },
+        "directive": "map"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Model",
+          "model": "BallotRun"
+        },
+        "directive": "map"
+      },
+      "argument": "name",
+      "value": "\"ballot_runs\""
+    },
+    {
+      "tag": "CreateModel",
+      "model": "Option"
+    },
+    {
+      "tag": "CreateField",
+      "model": "Option",
+      "field": "id",
+      "type": "String",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "Option",
+          "field": "id"
+        },
+        "directive": "id"
+      }
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "Option",
+          "field": "id"
+        },
+        "directive": "default"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "Option",
+          "field": "id"
+        },
+        "directive": "default"
+      },
+      "argument": "",
+      "value": "cuid()"
+    },
+    {
+      "tag": "CreateField",
+      "model": "Option",
+      "field": "vote",
+      "type": "Int",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateField",
+      "model": "Option",
+      "field": "title",
+      "type": "String",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateField",
+      "model": "Option",
+      "field": "ballot",
+      "type": "Ballot",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "Option",
+          "field": "ballot"
+        },
+        "directive": "relation"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "Option",
+          "field": "ballot"
+        },
+        "directive": "relation"
+      },
+      "argument": "fields",
+      "value": "[ballotId]"
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "Option",
+          "field": "ballot"
+        },
+        "directive": "relation"
+      },
+      "argument": "references",
+      "value": "[id]"
+    },
+    {
+      "tag": "CreateField",
+      "model": "Option",
+      "field": "ballotId",
+      "type": "String",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "Option",
+          "field": "ballotId"
+        },
+        "directive": "map"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "Option",
           "field": "ballotId"
         },
         "directive": "map"
@@ -3376,7 +2835,7 @@
       "location": {
         "path": {
           "tag": "Model",
-          "model": "Options"
+          "model": "Option"
         },
         "directive": "map"
       }
@@ -3387,7 +2846,7 @@
         "tag": "Directive",
         "path": {
           "tag": "Model",
-          "model": "Options"
+          "model": "Option"
         },
         "directive": "map"
       },
@@ -3402,8 +2861,19 @@
       "tag": "CreateField",
       "model": "Voted",
       "field": "id",
-      "type": "Int",
+      "type": "String",
       "arity": "Required"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "Voted",
+          "field": "id"
+        },
+        "directive": "id"
+      }
     },
     {
       "tag": "CreateDirective",
@@ -3428,18 +2898,7 @@
         "directive": "default"
       },
       "argument": "",
-      "value": "autoincrement()"
-    },
-    {
-      "tag": "CreateDirective",
-      "location": {
-        "path": {
-          "tag": "Field",
-          "model": "Voted",
-          "field": "id"
-        },
-        "directive": "id"
-      }
+      "value": "cuid()"
     },
     {
       "tag": "CreateField",
@@ -3512,7 +2971,7 @@
       "tag": "CreateField",
       "model": "Voted",
       "field": "userId",
-      "type": "Int",
+      "type": "String",
       "arity": "Required"
     },
     {
@@ -3604,7 +3063,7 @@
       "tag": "CreateField",
       "model": "Voted",
       "field": "ballotId",
-      "type": "Int",
+      "type": "String",
       "arity": "Required"
     },
     {
@@ -3657,13 +3116,13 @@
     },
     {
       "tag": "CreateModel",
-      "model": "Votes"
+      "model": "Vote"
     },
     {
       "tag": "CreateField",
-      "model": "Votes",
+      "model": "Vote",
       "field": "id",
-      "type": "Int",
+      "type": "String",
       "arity": "Required"
     },
     {
@@ -3671,7 +3130,18 @@
       "location": {
         "path": {
           "tag": "Field",
-          "model": "Votes",
+          "model": "Vote",
+          "field": "id"
+        },
+        "directive": "id"
+      }
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "Vote",
           "field": "id"
         },
         "directive": "default"
@@ -3683,42 +3153,52 @@
         "tag": "Directive",
         "path": {
           "tag": "Field",
-          "model": "Votes",
+          "model": "Vote",
           "field": "id"
         },
         "directive": "default"
       },
       "argument": "",
-      "value": "autoincrement()"
-    },
-    {
-      "tag": "CreateDirective",
-      "location": {
-        "path": {
-          "tag": "Field",
-          "model": "Votes",
-          "field": "id"
-        },
-        "directive": "id"
-      }
+      "value": "cuid()"
     },
     {
       "tag": "CreateField",
-      "model": "Votes",
+      "model": "Vote",
       "field": "vote",
       "type": "Int",
       "arity": "Required"
     },
     {
       "tag": "CreateField",
-      "model": "Votes",
+      "model": "Vote",
       "field": "verify",
       "type": "String",
       "arity": "Optional"
     },
     {
       "tag": "CreateField",
-      "model": "Votes",
+      "model": "Vote",
+      "field": "year",
+      "type": "Int",
+      "arity": "Optional"
+    },
+    {
+      "tag": "CreateField",
+      "model": "Vote",
+      "field": "canton",
+      "type": "String",
+      "arity": "Optional"
+    },
+    {
+      "tag": "CreateField",
+      "model": "Vote",
+      "field": "schooltype",
+      "type": "String",
+      "arity": "Optional"
+    },
+    {
+      "tag": "CreateField",
+      "model": "Vote",
       "field": "ballot",
       "type": "Ballot",
       "arity": "Required"
@@ -3728,7 +3208,7 @@
       "location": {
         "path": {
           "tag": "Field",
-          "model": "Votes",
+          "model": "Vote",
           "field": "ballot"
         },
         "directive": "relation"
@@ -3740,7 +3220,7 @@
         "tag": "Directive",
         "path": {
           "tag": "Field",
-          "model": "Votes",
+          "model": "Vote",
           "field": "ballot"
         },
         "directive": "relation"
@@ -3754,7 +3234,7 @@
         "tag": "Directive",
         "path": {
           "tag": "Field",
-          "model": "Votes",
+          "model": "Vote",
           "field": "ballot"
         },
         "directive": "relation"
@@ -3764,9 +3244,9 @@
     },
     {
       "tag": "CreateField",
-      "model": "Votes",
+      "model": "Vote",
       "field": "ballotId",
-      "type": "Int",
+      "type": "String",
       "arity": "Required"
     },
     {
@@ -3774,7 +3254,7 @@
       "location": {
         "path": {
           "tag": "Field",
-          "model": "Votes",
+          "model": "Vote",
           "field": "ballotId"
         },
         "directive": "map"
@@ -3786,7 +3266,7 @@
         "tag": "Directive",
         "path": {
           "tag": "Field",
-          "model": "Votes",
+          "model": "Vote",
           "field": "ballotId"
         },
         "directive": "map"
@@ -3799,7 +3279,7 @@
       "location": {
         "path": {
           "tag": "Model",
-          "model": "Votes"
+          "model": "Vote"
         },
         "directive": "map"
       }
@@ -3810,7 +3290,7 @@
         "tag": "Directive",
         "path": {
           "tag": "Model",
-          "model": "Votes"
+          "model": "Vote"
         },
         "directive": "map"
       },
@@ -3825,8 +3305,19 @@
       "tag": "CreateField",
       "model": "Attachment",
       "field": "id",
-      "type": "Int",
+      "type": "String",
       "arity": "Required"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "Attachment",
+          "field": "id"
+        },
+        "directive": "id"
+      }
     },
     {
       "tag": "CreateDirective",
@@ -3851,18 +3342,7 @@
         "directive": "default"
       },
       "argument": "",
-      "value": "autoincrement()"
-    },
-    {
-      "tag": "CreateDirective",
-      "location": {
-        "path": {
-          "tag": "Field",
-          "model": "Attachment",
-          "field": "id"
-        },
-        "directive": "id"
-      }
+      "value": "cuid()"
     },
     {
       "tag": "CreateField",
@@ -3953,7 +3433,7 @@
       "tag": "CreateField",
       "model": "Attachment",
       "field": "userId",
-      "type": "Int",
+      "type": "String",
       "arity": "Required"
     },
     {
@@ -4031,7 +3511,7 @@
       "tag": "CreateField",
       "model": "Attachment",
       "field": "ballotId",
-      "type": "Int",
+      "type": "String",
       "arity": "Optional"
     },
     {
@@ -4109,7 +3589,7 @@
       "tag": "CreateField",
       "model": "Attachment",
       "field": "threadId",
-      "type": "Int",
+      "type": "String",
       "arity": "Optional"
     },
     {
@@ -4282,8 +3762,19 @@
       "tag": "CreateField",
       "model": "Thread",
       "field": "id",
-      "type": "Int",
+      "type": "String",
       "arity": "Required"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "Thread",
+          "field": "id"
+        },
+        "directive": "id"
+      }
     },
     {
       "tag": "CreateDirective",
@@ -4308,18 +3799,7 @@
         "directive": "default"
       },
       "argument": "",
-      "value": "autoincrement()"
-    },
-    {
-      "tag": "CreateDirective",
-      "location": {
-        "path": {
-          "tag": "Field",
-          "model": "Thread",
-          "field": "id"
-        },
-        "directive": "id"
-      }
+      "value": "cuid()"
     },
     {
       "tag": "CreateField",
@@ -4442,7 +3922,7 @@
       "tag": "CreateField",
       "model": "Thread",
       "field": "userId",
-      "type": "Int",
+      "type": "String",
       "arity": "Required"
     },
     {
@@ -4520,7 +4000,7 @@
       "tag": "CreateField",
       "model": "Thread",
       "field": "parentId",
-      "type": "Int",
+      "type": "String",
       "arity": "Optional"
     },
     {
@@ -4746,8 +4226,19 @@
       "tag": "CreateField",
       "model": "Reaction",
       "field": "id",
-      "type": "Int",
+      "type": "String",
       "arity": "Required"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "Reaction",
+          "field": "id"
+        },
+        "directive": "id"
+      }
     },
     {
       "tag": "CreateDirective",
@@ -4772,18 +4263,7 @@
         "directive": "default"
       },
       "argument": "",
-      "value": "autoincrement()"
-    },
-    {
-      "tag": "CreateDirective",
-      "location": {
-        "path": {
-          "tag": "Field",
-          "model": "Reaction",
-          "field": "id"
-        },
-        "directive": "id"
-      }
+      "value": "cuid()"
     },
     {
       "tag": "CreateField",
@@ -4842,7 +4322,7 @@
       "tag": "CreateField",
       "model": "Reaction",
       "field": "userId",
-      "type": "Int",
+      "type": "String",
       "arity": "Required"
     },
     {
@@ -4920,7 +4400,7 @@
       "tag": "CreateField",
       "model": "Reaction",
       "field": "threadId",
-      "type": "Int",
+      "type": "String",
       "arity": "Optional"
     },
     {

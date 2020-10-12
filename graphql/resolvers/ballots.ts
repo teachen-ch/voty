@@ -54,7 +54,7 @@ export const vote: FieldResolver<"Mutation", "vote"> = async (
 
   // TODO: This should something which allows the user to check his vote was counter
   const verify = randomBytes(32).toString("hex");
-  const result = await db.votes.create({
+  const result = await db.vote.create({
     data: {
       ballot: { connect: { id: ballot.id } },
       vote,

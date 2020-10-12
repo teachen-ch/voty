@@ -7,38 +7,6 @@ generator client {
   provider = "prisma-client-js"
 }
 
-model Account {
-  id                 Int       @default(autoincrement()) @id
-  compoundId         String    @unique @map(name: "compound_id")
-  userId             Int       @map(name: "user_id")
-  providerType       String    @map(name: "provider_type")
-  providerId         String    @map(name: "provider_id")
-  providerAccountId  String    @map(name: "provider_account_id")
-  refreshToken       String?   @map(name: "refresh_token")
-  accessToken        String?   @map(name: "access_token")
-  accessTokenExpires DateTime? @map(name: "access_token_expires")
-  createdAt          DateTime  @default(now()) @map(name: "created_at")
-  updatedAt          DateTime  @default(now()) @map(name: "updated_at")
-
-  @@index([providerAccountId], name: "providerAccountId")
-  @@index([providerId], name: "providerId")
-  @@index([userId], name: "userId")
-
-  @@map(name: "accounts")
-}
-
-model Session {
-  id           Int      @default(autoincrement()) @id
-  userId       Int      @map(name: "user_id")
-  expires      DateTime
-  sessionToken String   @unique @map(name: "session_token")
-  accessToken  String   @unique @map(name: "access_token")
-  createdAt    DateTime @default(now()) @map(name: "created_at")
-  updatedAt    DateTime @default(now()) @map(name: "updated_at")
-
-  @@map(name: "sessions")
-}
-
 enum Role {
   User
   Admin
@@ -55,7 +23,7 @@ enum Gender {
 }
 
 model User {
-  id            Int       @default(autoincrement()) @id
+  id            String    @id @default(cuid())
   name          String?
   email         String?   @unique
   emailVerified DateTime? @map(name: "email_verified")
@@ -71,9 +39,9 @@ model User {
   role     Role    @default(Student)
   school   School? @relation(fields: [schoolId], references: [id])
   team     Team?   @relation(fields: [teamId], references: [id])
+  teamId   String? @map(name: "team_id")
   teaches  Team[]  @relation("Teacher")
-  schoolId Int?    @map(name: "school_id")
-  teamId   Int?    @map(name: "team_id")
+  schoolId String? @map(name: "school_id")
 
   ballots     Ballot[]
   attachments Attachment[]
@@ -83,12 +51,12 @@ model User {
 
   createdAt DateTime @default(now()) @map(name: "created_at")
   updatedAt DateTime @default(now()) @map(name: "updated_at")
+  Team      Team?    @relation("TeamMembers", fields: [teamId], references: [id])
   @@map(name: "users")
-  Team Team? @relation("TeamMembers", fields: [teamId], references: [id])
 }
 
 model VerificationRequest {
-  id         Int      @default(autoincrement()) @id
+  id         String   @id @default(cuid())
   identifier String
   token      String   @unique
   expires    DateTime
@@ -99,26 +67,26 @@ model VerificationRequest {
 }
 
 model Team {
-  id     Int     @default(autoincrement()) @id
+  id     String  @id @default(cuid())
   name   String
   invite String? @unique
   year   Int? // in what year (roughly) were kids born (now - schoolyear - 5y)
 
   school    School   @relation(fields: [schoolId], references: [id])
-  schoolId  Int      @map(name: "school_id")
+  schoolId  String   @map(name: "school_id")
   teacher   User     @relation(name: "Teacher", fields: [teacherId], references: [id])
-  teacherId Int      @map(name: "team_id")
+  teacherId String   @map(name: "teacher_id")
   members   User[]   @relation("TeamMembers")
   ballots   Ballot[]
   domain    Domain?  @relation(fields: [domainId], references: [id])
-  domainId  Int?     @map(name: "domain_id")
+  domainId  String?  @map(name: "domain_id")
 
-  @@map(name: "teams")
   User User[]
+  @@map(name: "teams")
 }
 
 model School {
-  id      Int    @default(autoincrement()) @id
+  id      String @id @default(cuid())
   name    String
   city    String @default("")
   canton  String @default("")
@@ -126,8 +94,8 @@ model School {
   address String @default("")
   type    String @default("")
 
-  domain   Domain?  @relation(fields: [domainId], references: [id])
-  domainId Int?     @map(name: "domain_id")
+  domain   Domain? @relation(fields: [domainId], references: [id])
+  domainId String? @map(name: "domain_id")
   members  User[]
   teams    Team[]
   ballots  Ballot[]
@@ -136,7 +104,7 @@ model School {
 }
 
 model Domain {
-  id       Int     @default(autoincrement()) @id
+  id       String  @id @default(cuid())
   name     String  @unique
   approved Boolean @default(false)
 
@@ -163,7 +131,7 @@ enum VotingStatus {
 }
 
 model Ballot {
-  id          Int         @default(autoincrement()) @id
+  id          String      @id @default(cuid())
   title       String
   description String
   body        String
@@ -173,17 +141,17 @@ model Ballot {
   canton      String?
 
   school    School? @relation(fields: [schoolId], references: [id])
-  schoolId  Int?    @map(name: "school_id")
+  schoolId  String? @map(name: "school_id")
   team      Team?   @relation(fields: [teamId], references: [id])
-  teamId    Int?    @map(name: "team_id")
+  teamId    String? @map(name: "team_id")
   creator   User?   @relation(fields: [creatorId], references: [id])
-  creatorId Int?    @map(name: "creator_id")
+  creatorId String? @map(name: "creator_id")
   thread    Thread? @relation(fields: [threadId], references: [id])
-  threadId  Int?    @map(name: "thread_id")
+  threadId  String? @map(name: "thread_id")
 
-  options     Options[]
+  options     Option[]
   voted       Voted[]      @relation("VotedBallot")
-  votes       Votes[]
+  votes       Vote[]
   attachments Attachment[]
 
   createdAt DateTime @default(now()) @map(name: "created_at")
@@ -191,57 +159,68 @@ model Ballot {
   @@map(name: "ballots")
 }
 
-model Options {
-  id    Int    @default(autoincrement()) @id
+model BallotRun {
+  id        String   @id @default(cuid())
+  start     DateTime?
+  end       DateTime?
+
+  ballot    Ballot   @relation(fields: [ballotId], references: [id])
+  ballotId  String   @map(name: "ballot_id")
+  team      Team     @relation(fields: [teamId], references: [id])
+  teamId    String   @map(name: "team_id")
+
+  @@map(name: "ballot_runs")
+}
+
+model Option {
+  id    String       @id @default(cuid())
   vote  Int
   title String
 
   ballot   Ballot @relation(fields: [ballotId], references: [id])
-  ballotId Int    @map(name: "ballot_id")
+  ballotId String @map(name: "ballot_id")
 
   @@map(name: "options")
 }
 
-// todo: make user-relation 1:1
 model Voted {
-  id Int @default(autoincrement()) @id
+  id        String  @id @default(cuid())
 
   signature String? // encrypted signature of the user
 
-  user     User   @relation(name: "VotedUser", fields: [userId], references: [id])
-  userId   Int    @map(name: "user_id")
-  ballot   Ballot @relation(name: "VotedBallot", fields: [ballotId], references: [id])
-  ballotId Int    @map(name: "ballot_id")
+  user      User    @relation(name: "VotedUser", fields: [userId], references: [id])
+  userId    String  @map(name: "user_id")
+  ballot    Ballot  @relation(name: "VotedBallot", fields: [ballotId], references: [id])
+  ballotId  String  @map(name: "ballot_id")
 
   @@map(name: "voted")
 }
 
-// TODO: rename to singular.. but it's dangerous with automigration
-model Votes {
-  id         Int     @default(autoincrement()) @id
-  vote       Int // 0 = abstention, 1-x = chosen option
+model Vote {
+  id         String   @id @default(cuid())
+  vote       Int      // 0 = abstention, 1-x = chosen option
   verify     String? // encrypted verification token
   year       Int?
   canton     String?
   schooltype String?
 
-  ballot   Ballot @relation(fields: [ballotId], references: [id])
-  ballotId Int    @map(name: "ballot_id")
+  ballot     Ballot   @relation(fields: [ballotId], references: [id])
+  ballotId   String   @map(name: "ballot_id")
 
   @@map(name: "votes")
 }
 
 model Attachment {
-  id    Int    @default(autoincrement()) @id
+  id    String   @id @default(cuid())
   file  String
-  title String @default("")
+  title String   @default("")
 
-  user     User    @relation(fields: [userId], references: [id])
-  userId   Int     @map(name: "user_id")
-  ballot   Ballot? @relation(fields: [ballotId], references: [id])
-  ballotId Int?    @map(name: "ballot_id")
-  thread   Thread? @relation(fields: [threadId], references: [id])
-  threadId Int?    @map(name: "thread_id")
+  user     User     @relation(fields: [userId], references: [id])
+  userId   String   @map(name: "user_id")
+  ballot   Ballot?  @relation(fields: [ballotId], references: [id])
+  ballotId String?  @map(name: "ballot_id")
+  thread   Thread?  @relation(fields: [threadId], references: [id])
+  threadId String?  @map(name: "thread_id")
 
   createdAt DateTime @default(now()) @map(name: "created_at")
   updatedAt DateTime @default(now()) @map(name: "updated_at")
@@ -249,15 +228,15 @@ model Attachment {
 }
 
 model Thread {
-  id    Int     @default(autoincrement()) @id
+  id    String  @id @default(cuid())
   title String  @default("")
   text  String  @default("")
   ref   String? // this can be used to reference a thread to content
 
   user     User    @relation(fields: [userId], references: [id])
-  userId   Int     @map(name: "user_id")
+  userId   String  @map(name: "user_id")
   parent   Thread? @relation(fields: [parentId], references: [id])
-  parentId Int?    @map(name: "parent_id")
+  parentId String? @map(name: "parent_id")
 
   ballot      Ballot?
   children    Thread[]     @relation("ThreadToThread")
@@ -270,13 +249,13 @@ model Thread {
 }
 
 model Reaction {
-  id    Int    @default(autoincrement()) @id
+  id    String     @id @default(cuid())
   emoij String
 
   user     User    @relation(fields: [userId], references: [id])
-  userId   Int     @map(name: "user_id")
+  userId   String  @map(name: "user_id")
   thread   Thread? @relation(fields: [threadId], references: [id])
-  threadId Int?    @map(name: "thread_id")
+  threadId String? @map(name: "thread_id")
 
   createdAt DateTime @default(now()) @map(name: "created_at")
   updatedAt DateTime @default(now()) @map(name: "updated_at")

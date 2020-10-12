@@ -1,6 +1,4 @@
 # Prisma Migrate lockfile v1
 
-20200915104023-db-init
-20200917150323-added-users-canton-and-school-type
-20200918064032-added-votes-schooltype---age-and--cantting
-20201010082501-moved-to-uuids-and-removed-accounts-and-sessions
+20201012131749-schema--re---initialization
+20201012140134-added-team-and-school-to-votes

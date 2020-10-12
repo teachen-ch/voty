@@ -152,7 +152,7 @@ export const permissions = shield({
     },
     Ballot: canViewBallot,
     ResponseLogin: allow,
-    Votes: isUser,
+    Vote: isUser,
   },
   options: {
     allowExternalErrors: true,

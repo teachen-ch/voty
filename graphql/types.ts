@@ -264,6 +264,11 @@ export type BallotCreateOneWithoutAttachmentsInput = {
   create?: Maybe<BallotCreateWithoutAttachmentsInput>;
 };
 
+export type BallotCreateOneWithoutBallotRunInput = {
+  connect?: Maybe<BallotWhereUniqueInput>;
+  create?: Maybe<BallotCreateWithoutBallotRunInput>;
+};
+
 export type BallotCreateOneWithoutThreadInput = {
   connect?: Maybe<BallotWhereUniqueInput>;
   create?: Maybe<BallotCreateWithoutThreadInput>;
@@ -275,6 +280,7 @@ export type BallotCreateOneWithoutVotedInput = {
 };
 
 export type BallotCreateWithoutAttachmentsInput = {
+  BallotRun?: Maybe<BallotRunCreateManyWithoutBallotInput>;
   body: Scalars['String'];
   canton?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['DateTime']>;
@@ -282,7 +288,7 @@ export type BallotCreateWithoutAttachmentsInput = {
   description: Scalars['String'];
   end: Scalars['DateTime'];
   id?: Maybe<Scalars['String']>;
-  options?: Maybe<OptionsCreateManyWithoutBallotInput>;
+  options?: Maybe<OptionCreateManyWithoutBallotInput>;
   school?: Maybe<SchoolCreateOneWithoutBallotsInput>;
   scope?: Maybe<BallotScope>;
   start: Scalars['DateTime'];
@@ -291,18 +297,40 @@ export type BallotCreateWithoutAttachmentsInput = {
   title: Scalars['String'];
   updatedAt?: Maybe<Scalars['DateTime']>;
   voted?: Maybe<VotedCreateManyWithoutBallotInput>;
-  votes?: Maybe<VotesCreateManyWithoutBallotInput>;
+  votes?: Maybe<VoteCreateManyWithoutBallotInput>;
+};
+
+export type BallotCreateWithoutBallotRunInput = {
+  attachments?: Maybe<AttachmentCreateManyWithoutBallotInput>;
+  body: Scalars['String'];
+  canton?: Maybe<Scalars['String']>;
+  createdAt?: Maybe<Scalars['DateTime']>;
+  creator?: Maybe<UserCreateOneWithoutBallotsInput>;
+  description: Scalars['String'];
+  end: Scalars['DateTime'];
+  id?: Maybe<Scalars['String']>;
+  options?: Maybe<OptionCreateManyWithoutBallotInput>;
+  school?: Maybe<SchoolCreateOneWithoutBallotsInput>;
+  scope?: Maybe<BallotScope>;
+  start: Scalars['DateTime'];
+  team?: Maybe<TeamCreateOneWithoutBallotsInput>;
+  thread?: Maybe<ThreadCreateOneWithoutBallotInput>;
+  title: Scalars['String'];
+  updatedAt?: Maybe<Scalars['DateTime']>;
+  voted?: Maybe<VotedCreateManyWithoutBallotInput>;
+  votes?: Maybe<VoteCreateManyWithoutBallotInput>;
 };
 
 export type BallotCreateWithoutCreatorInput = {
   attachments?: Maybe<AttachmentCreateManyWithoutBallotInput>;
+  BallotRun?: Maybe<BallotRunCreateManyWithoutBallotInput>;
   body: Scalars['String'];
   canton?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['DateTime']>;
   description: Scalars['String'];
   end: Scalars['DateTime'];
   id?: Maybe<Scalars['String']>;
-  options?: Maybe<OptionsCreateManyWithoutBallotInput>;
+  options?: Maybe<OptionCreateManyWithoutBallotInput>;
   school?: Maybe<SchoolCreateOneWithoutBallotsInput>;
   scope?: Maybe<BallotScope>;
   start: Scalars['DateTime'];
@@ -311,11 +339,12 @@ export type BallotCreateWithoutCreatorInput = {
   title: Scalars['String'];
   updatedAt?: Maybe<Scalars['DateTime']>;
   voted?: Maybe<VotedCreateManyWithoutBallotInput>;
-  votes?: Maybe<VotesCreateManyWithoutBallotInput>;
+  votes?: Maybe<VoteCreateManyWithoutBallotInput>;
 };
 
 export type BallotCreateWithoutSchoolInput = {
   attachments?: Maybe<AttachmentCreateManyWithoutBallotInput>;
+  BallotRun?: Maybe<BallotRunCreateManyWithoutBallotInput>;
   body: Scalars['String'];
   canton?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['DateTime']>;
@@ -323,7 +352,7 @@ export type BallotCreateWithoutSchoolInput = {
   description: Scalars['String'];
   end: Scalars['DateTime'];
   id?: Maybe<Scalars['String']>;
-  options?: Maybe<OptionsCreateManyWithoutBallotInput>;
+  options?: Maybe<OptionCreateManyWithoutBallotInput>;
   scope?: Maybe<BallotScope>;
   start: Scalars['DateTime'];
   team?: Maybe<TeamCreateOneWithoutBallotsInput>;
@@ -331,11 +360,12 @@ export type BallotCreateWithoutSchoolInput = {
   title: Scalars['String'];
   updatedAt?: Maybe<Scalars['DateTime']>;
   voted?: Maybe<VotedCreateManyWithoutBallotInput>;
-  votes?: Maybe<VotesCreateManyWithoutBallotInput>;
+  votes?: Maybe<VoteCreateManyWithoutBallotInput>;
 };
 
 export type BallotCreateWithoutTeamInput = {
   attachments?: Maybe<AttachmentCreateManyWithoutBallotInput>;
+  BallotRun?: Maybe<BallotRunCreateManyWithoutBallotInput>;
   body: Scalars['String'];
   canton?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['DateTime']>;
@@ -343,7 +373,7 @@ export type BallotCreateWithoutTeamInput = {
   description: Scalars['String'];
   end: Scalars['DateTime'];
   id?: Maybe<Scalars['String']>;
-  options?: Maybe<OptionsCreateManyWithoutBallotInput>;
+  options?: Maybe<OptionCreateManyWithoutBallotInput>;
   school?: Maybe<SchoolCreateOneWithoutBallotsInput>;
   scope?: Maybe<BallotScope>;
   start: Scalars['DateTime'];
@@ -351,11 +381,12 @@ export type BallotCreateWithoutTeamInput = {
   title: Scalars['String'];
   updatedAt?: Maybe<Scalars['DateTime']>;
   voted?: Maybe<VotedCreateManyWithoutBallotInput>;
-  votes?: Maybe<VotesCreateManyWithoutBallotInput>;
+  votes?: Maybe<VoteCreateManyWithoutBallotInput>;
 };
 
 export type BallotCreateWithoutThreadInput = {
   attachments?: Maybe<AttachmentCreateManyWithoutBallotInput>;
+  BallotRun?: Maybe<BallotRunCreateManyWithoutBallotInput>;
   body: Scalars['String'];
   canton?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['DateTime']>;
@@ -363,7 +394,7 @@ export type BallotCreateWithoutThreadInput = {
   description: Scalars['String'];
   end: Scalars['DateTime'];
   id?: Maybe<Scalars['String']>;
-  options?: Maybe<OptionsCreateManyWithoutBallotInput>;
+  options?: Maybe<OptionCreateManyWithoutBallotInput>;
   school?: Maybe<SchoolCreateOneWithoutBallotsInput>;
   scope?: Maybe<BallotScope>;
   start: Scalars['DateTime'];
@@ -371,11 +402,12 @@ export type BallotCreateWithoutThreadInput = {
   title: Scalars['String'];
   updatedAt?: Maybe<Scalars['DateTime']>;
   voted?: Maybe<VotedCreateManyWithoutBallotInput>;
-  votes?: Maybe<VotesCreateManyWithoutBallotInput>;
+  votes?: Maybe<VoteCreateManyWithoutBallotInput>;
 };
 
 export type BallotCreateWithoutVotedInput = {
   attachments?: Maybe<AttachmentCreateManyWithoutBallotInput>;
+  BallotRun?: Maybe<BallotRunCreateManyWithoutBallotInput>;
   body: Scalars['String'];
   canton?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['DateTime']>;
@@ -383,7 +415,7 @@ export type BallotCreateWithoutVotedInput = {
   description: Scalars['String'];
   end: Scalars['DateTime'];
   id?: Maybe<Scalars['String']>;
-  options?: Maybe<OptionsCreateManyWithoutBallotInput>;
+  options?: Maybe<OptionCreateManyWithoutBallotInput>;
   school?: Maybe<SchoolCreateOneWithoutBallotsInput>;
   scope?: Maybe<BallotScope>;
   start: Scalars['DateTime'];
@@ -391,7 +423,7 @@ export type BallotCreateWithoutVotedInput = {
   thread?: Maybe<ThreadCreateOneWithoutBallotInput>;
   title: Scalars['String'];
   updatedAt?: Maybe<Scalars['DateTime']>;
-  votes?: Maybe<VotesCreateManyWithoutBallotInput>;
+  votes?: Maybe<VoteCreateManyWithoutBallotInput>;
 };
 
 export type BallotListRelationFilter = {
@@ -415,6 +447,135 @@ export type BallotOrderByInput = {
   threadId?: Maybe<SortOrder>;
   title?: Maybe<SortOrder>;
   updatedAt?: Maybe<SortOrder>;
+};
+
+export type BallotRunCreateManyWithoutBallotInput = {
+  connect?: Maybe<Array<BallotRunWhereUniqueInput>>;
+  create?: Maybe<Array<BallotRunCreateWithoutBallotInput>>;
+};
+
+export type BallotRunCreateManyWithoutTeamInput = {
+  connect?: Maybe<Array<BallotRunWhereUniqueInput>>;
+  create?: Maybe<Array<BallotRunCreateWithoutTeamInput>>;
+};
+
+export type BallotRunCreateWithoutBallotInput = {
+  end?: Maybe<Scalars['DateTime']>;
+  id?: Maybe<Scalars['String']>;
+  start?: Maybe<Scalars['DateTime']>;
+  team: TeamCreateOneWithoutBallotRunInput;
+};
+
+export type BallotRunCreateWithoutTeamInput = {
+  ballot: BallotCreateOneWithoutBallotRunInput;
+  end?: Maybe<Scalars['DateTime']>;
+  id?: Maybe<Scalars['String']>;
+  start?: Maybe<Scalars['DateTime']>;
+};
+
+export type BallotRunListRelationFilter = {
+  every?: Maybe<BallotRunWhereInput>;
+  none?: Maybe<BallotRunWhereInput>;
+  some?: Maybe<BallotRunWhereInput>;
+};
+
+export type BallotRunScalarWhereInput = {
+  AND?: Maybe<Array<BallotRunScalarWhereInput>>;
+  ballotId?: Maybe<StringFilter>;
+  end?: Maybe<DateTimeNullableFilter>;
+  id?: Maybe<StringFilter>;
+  NOT?: Maybe<Array<BallotRunScalarWhereInput>>;
+  OR?: Maybe<Array<BallotRunScalarWhereInput>>;
+  start?: Maybe<DateTimeNullableFilter>;
+  teamId?: Maybe<StringFilter>;
+};
+
+export type BallotRunUpdateManyDataInput = {
+  end?: Maybe<NullableDateTimeFieldUpdateOperationsInput>;
+  id?: Maybe<StringFieldUpdateOperationsInput>;
+  start?: Maybe<NullableDateTimeFieldUpdateOperationsInput>;
+};
+
+export type BallotRunUpdateManyWithoutBallotInput = {
+  connect?: Maybe<Array<BallotRunWhereUniqueInput>>;
+  create?: Maybe<Array<BallotRunCreateWithoutBallotInput>>;
+  delete?: Maybe<Array<BallotRunWhereUniqueInput>>;
+  deleteMany?: Maybe<Array<BallotRunScalarWhereInput>>;
+  disconnect?: Maybe<Array<BallotRunWhereUniqueInput>>;
+  set?: Maybe<Array<BallotRunWhereUniqueInput>>;
+  update?: Maybe<Array<BallotRunUpdateWithWhereUniqueWithoutBallotInput>>;
+  updateMany?: Maybe<Array<BallotRunUpdateManyWithWhereNestedInput>>;
+  upsert?: Maybe<Array<BallotRunUpsertWithWhereUniqueWithoutBallotInput>>;
+};
+
+export type BallotRunUpdateManyWithoutTeamInput = {
+  connect?: Maybe<Array<BallotRunWhereUniqueInput>>;
+  create?: Maybe<Array<BallotRunCreateWithoutTeamInput>>;
+  delete?: Maybe<Array<BallotRunWhereUniqueInput>>;
+  deleteMany?: Maybe<Array<BallotRunScalarWhereInput>>;
+  disconnect?: Maybe<Array<BallotRunWhereUniqueInput>>;
+  set?: Maybe<Array<BallotRunWhereUniqueInput>>;
+  update?: Maybe<Array<BallotRunUpdateWithWhereUniqueWithoutTeamInput>>;
+  updateMany?: Maybe<Array<BallotRunUpdateManyWithWhereNestedInput>>;
+  upsert?: Maybe<Array<BallotRunUpsertWithWhereUniqueWithoutTeamInput>>;
+};
+
+export type BallotRunUpdateManyWithWhereNestedInput = {
+  data: BallotRunUpdateManyDataInput;
+  where: BallotRunScalarWhereInput;
+};
+
+export type BallotRunUpdateWithoutBallotDataInput = {
+  end?: Maybe<NullableDateTimeFieldUpdateOperationsInput>;
+  id?: Maybe<StringFieldUpdateOperationsInput>;
+  start?: Maybe<NullableDateTimeFieldUpdateOperationsInput>;
+  team?: Maybe<TeamUpdateOneRequiredWithoutBallotRunInput>;
+};
+
+export type BallotRunUpdateWithoutTeamDataInput = {
+  ballot?: Maybe<BallotUpdateOneRequiredWithoutBallotRunInput>;
+  end?: Maybe<NullableDateTimeFieldUpdateOperationsInput>;
+  id?: Maybe<StringFieldUpdateOperationsInput>;
+  start?: Maybe<NullableDateTimeFieldUpdateOperationsInput>;
+};
+
+export type BallotRunUpdateWithWhereUniqueWithoutBallotInput = {
+  data: BallotRunUpdateWithoutBallotDataInput;
+  where: BallotRunWhereUniqueInput;
+};
+
+export type BallotRunUpdateWithWhereUniqueWithoutTeamInput = {
+  data: BallotRunUpdateWithoutTeamDataInput;
+  where: BallotRunWhereUniqueInput;
+};
+
+export type BallotRunUpsertWithWhereUniqueWithoutBallotInput = {
+  create: BallotRunCreateWithoutBallotInput;
+  update: BallotRunUpdateWithoutBallotDataInput;
+  where: BallotRunWhereUniqueInput;
+};
+
+export type BallotRunUpsertWithWhereUniqueWithoutTeamInput = {
+  create: BallotRunCreateWithoutTeamInput;
+  update: BallotRunUpdateWithoutTeamDataInput;
+  where: BallotRunWhereUniqueInput;
+};
+
+export type BallotRunWhereInput = {
+  AND?: Maybe<Array<BallotRunWhereInput>>;
+  ballot?: Maybe<BallotWhereInput>;
+  ballotId?: Maybe<StringFilter>;
+  end?: Maybe<DateTimeNullableFilter>;
+  id?: Maybe<StringFilter>;
+  NOT?: Maybe<Array<BallotRunWhereInput>>;
+  OR?: Maybe<Array<BallotRunWhereInput>>;
+  start?: Maybe<DateTimeNullableFilter>;
+  team?: Maybe<TeamWhereInput>;
+  teamId?: Maybe<StringFilter>;
+};
+
+export type BallotRunWhereUniqueInput = {
+  id?: Maybe<Scalars['String']>;
 };
 
 export type BallotScalarWhereInput = {
@@ -499,6 +660,13 @@ export type BallotUpdateManyWithWhereNestedInput = {
   where: BallotScalarWhereInput;
 };
 
+export type BallotUpdateOneRequiredWithoutBallotRunInput = {
+  connect?: Maybe<BallotWhereUniqueInput>;
+  create?: Maybe<BallotCreateWithoutBallotRunInput>;
+  update?: Maybe<BallotUpdateWithoutBallotRunDataInput>;
+  upsert?: Maybe<BallotUpsertWithoutBallotRunInput>;
+};
+
 export type BallotUpdateOneRequiredWithoutVotedInput = {
   connect?: Maybe<BallotWhereUniqueInput>;
   create?: Maybe<BallotCreateWithoutVotedInput>;
@@ -525,6 +693,7 @@ export type BallotUpdateOneWithoutThreadInput = {
 };
 
 export type BallotUpdateWithoutAttachmentsDataInput = {
+  BallotRun?: Maybe<BallotRunUpdateManyWithoutBallotInput>;
   body?: Maybe<StringFieldUpdateOperationsInput>;
   canton?: Maybe<NullableStringFieldUpdateOperationsInput>;
   createdAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
@@ -532,7 +701,7 @@ export type BallotUpdateWithoutAttachmentsDataInput = {
   description?: Maybe<StringFieldUpdateOperationsInput>;
   end?: Maybe<DateTimeFieldUpdateOperationsInput>;
   id?: Maybe<StringFieldUpdateOperationsInput>;
-  options?: Maybe<OptionsUpdateManyWithoutBallotInput>;
+  options?: Maybe<OptionUpdateManyWithoutBallotInput>;
   school?: Maybe<SchoolUpdateOneWithoutBallotsInput>;
   scope?: Maybe<BallotScope>;
   start?: Maybe<DateTimeFieldUpdateOperationsInput>;
@@ -541,18 +710,40 @@ export type BallotUpdateWithoutAttachmentsDataInput = {
   title?: Maybe<StringFieldUpdateOperationsInput>;
   updatedAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
   voted?: Maybe<VotedUpdateManyWithoutBallotInput>;
-  votes?: Maybe<VotesUpdateManyWithoutBallotInput>;
+  votes?: Maybe<VoteUpdateManyWithoutBallotInput>;
+};
+
+export type BallotUpdateWithoutBallotRunDataInput = {
+  attachments?: Maybe<AttachmentUpdateManyWithoutBallotInput>;
+  body?: Maybe<StringFieldUpdateOperationsInput>;
+  canton?: Maybe<NullableStringFieldUpdateOperationsInput>;
+  createdAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
+  creator?: Maybe<UserUpdateOneWithoutBallotsInput>;
+  description?: Maybe<StringFieldUpdateOperationsInput>;
+  end?: Maybe<DateTimeFieldUpdateOperationsInput>;
+  id?: Maybe<StringFieldUpdateOperationsInput>;
+  options?: Maybe<OptionUpdateManyWithoutBallotInput>;
+  school?: Maybe<SchoolUpdateOneWithoutBallotsInput>;
+  scope?: Maybe<BallotScope>;
+  start?: Maybe<DateTimeFieldUpdateOperationsInput>;
+  team?: Maybe<TeamUpdateOneWithoutBallotsInput>;
+  thread?: Maybe<ThreadUpdateOneWithoutBallotInput>;
+  title?: Maybe<StringFieldUpdateOperationsInput>;
+  updatedAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
+  voted?: Maybe<VotedUpdateManyWithoutBallotInput>;
+  votes?: Maybe<VoteUpdateManyWithoutBallotInput>;
 };
 
 export type BallotUpdateWithoutCreatorDataInput = {
   attachments?: Maybe<AttachmentUpdateManyWithoutBallotInput>;
+  BallotRun?: Maybe<BallotRunUpdateManyWithoutBallotInput>;
   body?: Maybe<StringFieldUpdateOperationsInput>;
   canton?: Maybe<NullableStringFieldUpdateOperationsInput>;
   createdAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
   description?: Maybe<StringFieldUpdateOperationsInput>;
   end?: Maybe<DateTimeFieldUpdateOperationsInput>;
   id?: Maybe<StringFieldUpdateOperationsInput>;
-  options?: Maybe<OptionsUpdateManyWithoutBallotInput>;
+  options?: Maybe<OptionUpdateManyWithoutBallotInput>;
   school?: Maybe<SchoolUpdateOneWithoutBallotsInput>;
   scope?: Maybe<BallotScope>;
   start?: Maybe<DateTimeFieldUpdateOperationsInput>;
@@ -561,11 +752,12 @@ export type BallotUpdateWithoutCreatorDataInput = {
   title?: Maybe<StringFieldUpdateOperationsInput>;
   updatedAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
   voted?: Maybe<VotedUpdateManyWithoutBallotInput>;
-  votes?: Maybe<VotesUpdateManyWithoutBallotInput>;
+  votes?: Maybe<VoteUpdateManyWithoutBallotInput>;
 };
 
 export type BallotUpdateWithoutSchoolDataInput = {
   attachments?: Maybe<AttachmentUpdateManyWithoutBallotInput>;
+  BallotRun?: Maybe<BallotRunUpdateManyWithoutBallotInput>;
   body?: Maybe<StringFieldUpdateOperationsInput>;
   canton?: Maybe<NullableStringFieldUpdateOperationsInput>;
   createdAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
@@ -573,7 +765,7 @@ export type BallotUpdateWithoutSchoolDataInput = {
   description?: Maybe<StringFieldUpdateOperationsInput>;
   end?: Maybe<DateTimeFieldUpdateOperationsInput>;
   id?: Maybe<StringFieldUpdateOperationsInput>;
-  options?: Maybe<OptionsUpdateManyWithoutBallotInput>;
+  options?: Maybe<OptionUpdateManyWithoutBallotInput>;
   scope?: Maybe<BallotScope>;
   start?: Maybe<DateTimeFieldUpdateOperationsInput>;
   team?: Maybe<TeamUpdateOneWithoutBallotsInput>;
@@ -581,11 +773,12 @@ export type BallotUpdateWithoutSchoolDataInput = {
   title?: Maybe<StringFieldUpdateOperationsInput>;
   updatedAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
   voted?: Maybe<VotedUpdateManyWithoutBallotInput>;
-  votes?: Maybe<VotesUpdateManyWithoutBallotInput>;
+  votes?: Maybe<VoteUpdateManyWithoutBallotInput>;
 };
 
 export type BallotUpdateWithoutTeamDataInput = {
   attachments?: Maybe<AttachmentUpdateManyWithoutBallotInput>;
+  BallotRun?: Maybe<BallotRunUpdateManyWithoutBallotInput>;
   body?: Maybe<StringFieldUpdateOperationsInput>;
   canton?: Maybe<NullableStringFieldUpdateOperationsInput>;
   createdAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
@@ -593,7 +786,7 @@ export type BallotUpdateWithoutTeamDataInput = {
   description?: Maybe<StringFieldUpdateOperationsInput>;
   end?: Maybe<DateTimeFieldUpdateOperationsInput>;
   id?: Maybe<StringFieldUpdateOperationsInput>;
-  options?: Maybe<OptionsUpdateManyWithoutBallotInput>;
+  options?: Maybe<OptionUpdateManyWithoutBallotInput>;
   school?: Maybe<SchoolUpdateOneWithoutBallotsInput>;
   scope?: Maybe<BallotScope>;
   start?: Maybe<DateTimeFieldUpdateOperationsInput>;
@@ -601,11 +794,12 @@ export type BallotUpdateWithoutTeamDataInput = {
   title?: Maybe<StringFieldUpdateOperationsInput>;
   updatedAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
   voted?: Maybe<VotedUpdateManyWithoutBallotInput>;
-  votes?: Maybe<VotesUpdateManyWithoutBallotInput>;
+  votes?: Maybe<VoteUpdateManyWithoutBallotInput>;
 };
 
 export type BallotUpdateWithoutThreadDataInput = {
   attachments?: Maybe<AttachmentUpdateManyWithoutBallotInput>;
+  BallotRun?: Maybe<BallotRunUpdateManyWithoutBallotInput>;
   body?: Maybe<StringFieldUpdateOperationsInput>;
   canton?: Maybe<NullableStringFieldUpdateOperationsInput>;
   createdAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
@@ -613,7 +807,7 @@ export type BallotUpdateWithoutThreadDataInput = {
   description?: Maybe<StringFieldUpdateOperationsInput>;
   end?: Maybe<DateTimeFieldUpdateOperationsInput>;
   id?: Maybe<StringFieldUpdateOperationsInput>;
-  options?: Maybe<OptionsUpdateManyWithoutBallotInput>;
+  options?: Maybe<OptionUpdateManyWithoutBallotInput>;
   school?: Maybe<SchoolUpdateOneWithoutBallotsInput>;
   scope?: Maybe<BallotScope>;
   start?: Maybe<DateTimeFieldUpdateOperationsInput>;
@@ -621,11 +815,12 @@ export type BallotUpdateWithoutThreadDataInput = {
   title?: Maybe<StringFieldUpdateOperationsInput>;
   updatedAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
   voted?: Maybe<VotedUpdateManyWithoutBallotInput>;
-  votes?: Maybe<VotesUpdateManyWithoutBallotInput>;
+  votes?: Maybe<VoteUpdateManyWithoutBallotInput>;
 };
 
 export type BallotUpdateWithoutVotedDataInput = {
   attachments?: Maybe<AttachmentUpdateManyWithoutBallotInput>;
+  BallotRun?: Maybe<BallotRunUpdateManyWithoutBallotInput>;
   body?: Maybe<StringFieldUpdateOperationsInput>;
   canton?: Maybe<NullableStringFieldUpdateOperationsInput>;
   createdAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
@@ -633,7 +828,7 @@ export type BallotUpdateWithoutVotedDataInput = {
   description?: Maybe<StringFieldUpdateOperationsInput>;
   end?: Maybe<DateTimeFieldUpdateOperationsInput>;
   id?: Maybe<StringFieldUpdateOperationsInput>;
-  options?: Maybe<OptionsUpdateManyWithoutBallotInput>;
+  options?: Maybe<OptionUpdateManyWithoutBallotInput>;
   school?: Maybe<SchoolUpdateOneWithoutBallotsInput>;
   scope?: Maybe<BallotScope>;
   start?: Maybe<DateTimeFieldUpdateOperationsInput>;
@@ -641,7 +836,7 @@ export type BallotUpdateWithoutVotedDataInput = {
   thread?: Maybe<ThreadUpdateOneWithoutBallotInput>;
   title?: Maybe<StringFieldUpdateOperationsInput>;
   updatedAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
-  votes?: Maybe<VotesUpdateManyWithoutBallotInput>;
+  votes?: Maybe<VoteUpdateManyWithoutBallotInput>;
 };
 
 export type BallotUpdateWithWhereUniqueWithoutCreatorInput = {
@@ -662,6 +857,11 @@ export type BallotUpdateWithWhereUniqueWithoutTeamInput = {
 export type BallotUpsertWithoutAttachmentsInput = {
   create: BallotCreateWithoutAttachmentsInput;
   update: BallotUpdateWithoutAttachmentsDataInput;
+};
+
+export type BallotUpsertWithoutBallotRunInput = {
+  create: BallotCreateWithoutBallotRunInput;
+  update: BallotUpdateWithoutBallotRunDataInput;
 };
 
 export type BallotUpsertWithoutThreadInput = {
@@ -695,6 +895,7 @@ export type BallotUpsertWithWhereUniqueWithoutTeamInput = {
 export type BallotWhereInput = {
   AND?: Maybe<Array<BallotWhereInput>>;
   attachments?: Maybe<AttachmentListRelationFilter>;
+  BallotRun?: Maybe<BallotRunListRelationFilter>;
   body?: Maybe<StringFilter>;
   canton?: Maybe<StringNullableFilter>;
   createdAt?: Maybe<DateTimeFilter>;
@@ -704,7 +905,7 @@ export type BallotWhereInput = {
   end?: Maybe<DateTimeFilter>;
   id?: Maybe<StringFilter>;
   NOT?: Maybe<Array<BallotWhereInput>>;
-  options?: Maybe<OptionsListRelationFilter>;
+  options?: Maybe<OptionListRelationFilter>;
   OR?: Maybe<Array<BallotWhereInput>>;
   school?: Maybe<SchoolWhereInput>;
   schoolId?: Maybe<StringNullableFilter>;
@@ -717,7 +918,7 @@ export type BallotWhereInput = {
   title?: Maybe<StringFilter>;
   updatedAt?: Maybe<DateTimeFilter>;
   voted?: Maybe<VotedListRelationFilter>;
-  votes?: Maybe<VotesListRelationFilter>;
+  votes?: Maybe<VoteListRelationFilter>;
 };
 
 export type BallotWhereUniqueInput = {
@@ -913,7 +1114,7 @@ export type Mutation = {
   login?: Maybe<ResponseLogin>;
   setSchool?: Maybe<User>;
   updateUser?: Maybe<User>;
-  vote?: Maybe<Votes>;
+  vote?: Maybe<Vote>;
 };
 
 
@@ -1098,85 +1299,85 @@ export type NullableStringFieldUpdateOperationsInput = {
   set?: Maybe<Scalars['String']>;
 };
 
-export type OptionsCreateManyWithoutBallotInput = {
-  connect?: Maybe<Array<OptionsWhereUniqueInput>>;
-  create?: Maybe<Array<OptionsCreateWithoutBallotInput>>;
+export type OptionCreateManyWithoutBallotInput = {
+  connect?: Maybe<Array<OptionWhereUniqueInput>>;
+  create?: Maybe<Array<OptionCreateWithoutBallotInput>>;
 };
 
-export type OptionsCreateWithoutBallotInput = {
+export type OptionCreateWithoutBallotInput = {
   id?: Maybe<Scalars['String']>;
   title: Scalars['String'];
   vote: Scalars['Int'];
 };
 
-export type OptionsListRelationFilter = {
-  every?: Maybe<OptionsWhereInput>;
-  none?: Maybe<OptionsWhereInput>;
-  some?: Maybe<OptionsWhereInput>;
+export type OptionListRelationFilter = {
+  every?: Maybe<OptionWhereInput>;
+  none?: Maybe<OptionWhereInput>;
+  some?: Maybe<OptionWhereInput>;
 };
 
-export type OptionsScalarWhereInput = {
-  AND?: Maybe<Array<OptionsScalarWhereInput>>;
+export type OptionScalarWhereInput = {
+  AND?: Maybe<Array<OptionScalarWhereInput>>;
   ballotId?: Maybe<StringFilter>;
   id?: Maybe<StringFilter>;
-  NOT?: Maybe<Array<OptionsScalarWhereInput>>;
-  OR?: Maybe<Array<OptionsScalarWhereInput>>;
+  NOT?: Maybe<Array<OptionScalarWhereInput>>;
+  OR?: Maybe<Array<OptionScalarWhereInput>>;
   title?: Maybe<StringFilter>;
   vote?: Maybe<IntFilter>;
 };
 
-export type OptionsUpdateManyDataInput = {
+export type OptionUpdateManyDataInput = {
   id?: Maybe<StringFieldUpdateOperationsInput>;
   title?: Maybe<StringFieldUpdateOperationsInput>;
   vote?: Maybe<IntFieldUpdateOperationsInput>;
 };
 
-export type OptionsUpdateManyWithoutBallotInput = {
-  connect?: Maybe<Array<OptionsWhereUniqueInput>>;
-  create?: Maybe<Array<OptionsCreateWithoutBallotInput>>;
-  delete?: Maybe<Array<OptionsWhereUniqueInput>>;
-  deleteMany?: Maybe<Array<OptionsScalarWhereInput>>;
-  disconnect?: Maybe<Array<OptionsWhereUniqueInput>>;
-  set?: Maybe<Array<OptionsWhereUniqueInput>>;
-  update?: Maybe<Array<OptionsUpdateWithWhereUniqueWithoutBallotInput>>;
-  updateMany?: Maybe<Array<OptionsUpdateManyWithWhereNestedInput>>;
-  upsert?: Maybe<Array<OptionsUpsertWithWhereUniqueWithoutBallotInput>>;
+export type OptionUpdateManyWithoutBallotInput = {
+  connect?: Maybe<Array<OptionWhereUniqueInput>>;
+  create?: Maybe<Array<OptionCreateWithoutBallotInput>>;
+  delete?: Maybe<Array<OptionWhereUniqueInput>>;
+  deleteMany?: Maybe<Array<OptionScalarWhereInput>>;
+  disconnect?: Maybe<Array<OptionWhereUniqueInput>>;
+  set?: Maybe<Array<OptionWhereUniqueInput>>;
+  update?: Maybe<Array<OptionUpdateWithWhereUniqueWithoutBallotInput>>;
+  updateMany?: Maybe<Array<OptionUpdateManyWithWhereNestedInput>>;
+  upsert?: Maybe<Array<OptionUpsertWithWhereUniqueWithoutBallotInput>>;
 };
 
-export type OptionsUpdateManyWithWhereNestedInput = {
-  data: OptionsUpdateManyDataInput;
-  where: OptionsScalarWhereInput;
+export type OptionUpdateManyWithWhereNestedInput = {
+  data: OptionUpdateManyDataInput;
+  where: OptionScalarWhereInput;
 };
 
-export type OptionsUpdateWithoutBallotDataInput = {
+export type OptionUpdateWithoutBallotDataInput = {
   id?: Maybe<StringFieldUpdateOperationsInput>;
   title?: Maybe<StringFieldUpdateOperationsInput>;
   vote?: Maybe<IntFieldUpdateOperationsInput>;
 };
 
-export type OptionsUpdateWithWhereUniqueWithoutBallotInput = {
-  data: OptionsUpdateWithoutBallotDataInput;
-  where: OptionsWhereUniqueInput;
+export type OptionUpdateWithWhereUniqueWithoutBallotInput = {
+  data: OptionUpdateWithoutBallotDataInput;
+  where: OptionWhereUniqueInput;
 };
 
-export type OptionsUpsertWithWhereUniqueWithoutBallotInput = {
-  create: OptionsCreateWithoutBallotInput;
-  update: OptionsUpdateWithoutBallotDataInput;
-  where: OptionsWhereUniqueInput;
+export type OptionUpsertWithWhereUniqueWithoutBallotInput = {
+  create: OptionCreateWithoutBallotInput;
+  update: OptionUpdateWithoutBallotDataInput;
+  where: OptionWhereUniqueInput;
 };
 
-export type OptionsWhereInput = {
-  AND?: Maybe<Array<OptionsWhereInput>>;
+export type OptionWhereInput = {
+  AND?: Maybe<Array<OptionWhereInput>>;
   ballot?: Maybe<BallotWhereInput>;
   ballotId?: Maybe<StringFilter>;
   id?: Maybe<StringFilter>;
-  NOT?: Maybe<Array<OptionsWhereInput>>;
-  OR?: Maybe<Array<OptionsWhereInput>>;
+  NOT?: Maybe<Array<OptionWhereInput>>;
+  OR?: Maybe<Array<OptionWhereInput>>;
   title?: Maybe<StringFilter>;
   vote?: Maybe<IntFilter>;
 };
 
-export type OptionsWhereUniqueInput = {
+export type OptionWhereUniqueInput = {
   id?: Maybe<Scalars['String']>;
 };
 
@@ -1774,6 +1975,7 @@ export type TeamMembersArgs = {
 };
 
 export type TeamCreateInput = {
+  BallotRun?: Maybe<BallotRunCreateManyWithoutTeamInput>;
   ballots?: Maybe<BallotCreateManyWithoutTeamInput>;
   domain?: Maybe<DomainCreateOneWithoutTeamInput>;
   id?: Maybe<Scalars['String']>;
@@ -1800,6 +2002,11 @@ export type TeamCreateManyWithoutTeacherInput = {
   create?: Maybe<Array<TeamCreateWithoutTeacherInput>>;
 };
 
+export type TeamCreateOneWithoutBallotRunInput = {
+  connect?: Maybe<TeamWhereUniqueInput>;
+  create?: Maybe<TeamCreateWithoutBallotRunInput>;
+};
+
 export type TeamCreateOneWithoutBallotsInput = {
   connect?: Maybe<TeamWhereUniqueInput>;
   create?: Maybe<TeamCreateWithoutBallotsInput>;
@@ -1815,7 +2022,21 @@ export type TeamCreateOneWithoutUserInput = {
   create?: Maybe<TeamCreateWithoutUserInput>;
 };
 
+export type TeamCreateWithoutBallotRunInput = {
+  ballots?: Maybe<BallotCreateManyWithoutTeamInput>;
+  domain?: Maybe<DomainCreateOneWithoutTeamInput>;
+  id?: Maybe<Scalars['String']>;
+  invite?: Maybe<Scalars['String']>;
+  members?: Maybe<UserCreateManyWithoutTeamInput>;
+  name: Scalars['String'];
+  school: SchoolCreateOneWithoutTeamsInput;
+  teacher: UserCreateOneWithoutTeachesInput;
+  User?: Maybe<UserCreateManyWithoutTeamInput>;
+  year?: Maybe<Scalars['Int']>;
+};
+
 export type TeamCreateWithoutBallotsInput = {
+  BallotRun?: Maybe<BallotRunCreateManyWithoutTeamInput>;
   domain?: Maybe<DomainCreateOneWithoutTeamInput>;
   id?: Maybe<Scalars['String']>;
   invite?: Maybe<Scalars['String']>;
@@ -1828,6 +2049,7 @@ export type TeamCreateWithoutBallotsInput = {
 };
 
 export type TeamCreateWithoutDomainInput = {
+  BallotRun?: Maybe<BallotRunCreateManyWithoutTeamInput>;
   ballots?: Maybe<BallotCreateManyWithoutTeamInput>;
   id?: Maybe<Scalars['String']>;
   invite?: Maybe<Scalars['String']>;
@@ -1840,6 +2062,7 @@ export type TeamCreateWithoutDomainInput = {
 };
 
 export type TeamCreateWithoutMembersInput = {
+  BallotRun?: Maybe<BallotRunCreateManyWithoutTeamInput>;
   ballots?: Maybe<BallotCreateManyWithoutTeamInput>;
   domain?: Maybe<DomainCreateOneWithoutTeamInput>;
   id?: Maybe<Scalars['String']>;
@@ -1852,6 +2075,7 @@ export type TeamCreateWithoutMembersInput = {
 };
 
 export type TeamCreateWithoutSchoolInput = {
+  BallotRun?: Maybe<BallotRunCreateManyWithoutTeamInput>;
   ballots?: Maybe<BallotCreateManyWithoutTeamInput>;
   domain?: Maybe<DomainCreateOneWithoutTeamInput>;
   id?: Maybe<Scalars['String']>;
@@ -1864,6 +2088,7 @@ export type TeamCreateWithoutSchoolInput = {
 };
 
 export type TeamCreateWithoutTeacherInput = {
+  BallotRun?: Maybe<BallotRunCreateManyWithoutTeamInput>;
   ballots?: Maybe<BallotCreateManyWithoutTeamInput>;
   domain?: Maybe<DomainCreateOneWithoutTeamInput>;
   id?: Maybe<Scalars['String']>;
@@ -1876,6 +2101,7 @@ export type TeamCreateWithoutTeacherInput = {
 };
 
 export type TeamCreateWithoutUserInput = {
+  BallotRun?: Maybe<BallotRunCreateManyWithoutTeamInput>;
   ballots?: Maybe<BallotCreateManyWithoutTeamInput>;
   domain?: Maybe<DomainCreateOneWithoutTeamInput>;
   id?: Maybe<Scalars['String']>;
@@ -1964,6 +2190,13 @@ export type TeamUpdateManyWithWhereNestedInput = {
   where: TeamScalarWhereInput;
 };
 
+export type TeamUpdateOneRequiredWithoutBallotRunInput = {
+  connect?: Maybe<TeamWhereUniqueInput>;
+  create?: Maybe<TeamCreateWithoutBallotRunInput>;
+  update?: Maybe<TeamUpdateWithoutBallotRunDataInput>;
+  upsert?: Maybe<TeamUpsertWithoutBallotRunInput>;
+};
+
 export type TeamUpdateOneWithoutBallotsInput = {
   connect?: Maybe<TeamWhereUniqueInput>;
   create?: Maybe<TeamCreateWithoutBallotsInput>;
@@ -1991,7 +2224,21 @@ export type TeamUpdateOneWithoutUserInput = {
   upsert?: Maybe<TeamUpsertWithoutUserInput>;
 };
 
+export type TeamUpdateWithoutBallotRunDataInput = {
+  ballots?: Maybe<BallotUpdateManyWithoutTeamInput>;
+  domain?: Maybe<DomainUpdateOneWithoutTeamInput>;
+  id?: Maybe<StringFieldUpdateOperationsInput>;
+  invite?: Maybe<NullableStringFieldUpdateOperationsInput>;
+  members?: Maybe<UserUpdateManyWithoutTeamInput>;
+  name?: Maybe<StringFieldUpdateOperationsInput>;
+  school?: Maybe<SchoolUpdateOneRequiredWithoutTeamsInput>;
+  teacher?: Maybe<UserUpdateOneRequiredWithoutTeachesInput>;
+  User?: Maybe<UserUpdateManyWithoutTeamInput>;
+  year?: Maybe<NullableIntFieldUpdateOperationsInput>;
+};
+
 export type TeamUpdateWithoutBallotsDataInput = {
+  BallotRun?: Maybe<BallotRunUpdateManyWithoutTeamInput>;
   domain?: Maybe<DomainUpdateOneWithoutTeamInput>;
   id?: Maybe<StringFieldUpdateOperationsInput>;
   invite?: Maybe<NullableStringFieldUpdateOperationsInput>;
@@ -2004,6 +2251,7 @@ export type TeamUpdateWithoutBallotsDataInput = {
 };
 
 export type TeamUpdateWithoutDomainDataInput = {
+  BallotRun?: Maybe<BallotRunUpdateManyWithoutTeamInput>;
   ballots?: Maybe<BallotUpdateManyWithoutTeamInput>;
   id?: Maybe<StringFieldUpdateOperationsInput>;
   invite?: Maybe<NullableStringFieldUpdateOperationsInput>;
@@ -2016,6 +2264,7 @@ export type TeamUpdateWithoutDomainDataInput = {
 };
 
 export type TeamUpdateWithoutMembersDataInput = {
+  BallotRun?: Maybe<BallotRunUpdateManyWithoutTeamInput>;
   ballots?: Maybe<BallotUpdateManyWithoutTeamInput>;
   domain?: Maybe<DomainUpdateOneWithoutTeamInput>;
   id?: Maybe<StringFieldUpdateOperationsInput>;
@@ -2028,6 +2277,7 @@ export type TeamUpdateWithoutMembersDataInput = {
 };
 
 export type TeamUpdateWithoutSchoolDataInput = {
+  BallotRun?: Maybe<BallotRunUpdateManyWithoutTeamInput>;
   ballots?: Maybe<BallotUpdateManyWithoutTeamInput>;
   domain?: Maybe<DomainUpdateOneWithoutTeamInput>;
   id?: Maybe<StringFieldUpdateOperationsInput>;
@@ -2040,6 +2290,7 @@ export type TeamUpdateWithoutSchoolDataInput = {
 };
 
 export type TeamUpdateWithoutTeacherDataInput = {
+  BallotRun?: Maybe<BallotRunUpdateManyWithoutTeamInput>;
   ballots?: Maybe<BallotUpdateManyWithoutTeamInput>;
   domain?: Maybe<DomainUpdateOneWithoutTeamInput>;
   id?: Maybe<StringFieldUpdateOperationsInput>;
@@ -2052,6 +2303,7 @@ export type TeamUpdateWithoutTeacherDataInput = {
 };
 
 export type TeamUpdateWithoutUserDataInput = {
+  BallotRun?: Maybe<BallotRunUpdateManyWithoutTeamInput>;
   ballots?: Maybe<BallotUpdateManyWithoutTeamInput>;
   domain?: Maybe<DomainUpdateOneWithoutTeamInput>;
   id?: Maybe<StringFieldUpdateOperationsInput>;
@@ -2076,6 +2328,11 @@ export type TeamUpdateWithWhereUniqueWithoutSchoolInput = {
 export type TeamUpdateWithWhereUniqueWithoutTeacherInput = {
   data: TeamUpdateWithoutTeacherDataInput;
   where: TeamWhereUniqueInput;
+};
+
+export type TeamUpsertWithoutBallotRunInput = {
+  create: TeamCreateWithoutBallotRunInput;
+  update: TeamUpdateWithoutBallotRunDataInput;
 };
 
 export type TeamUpsertWithoutBallotsInput = {
@@ -2113,6 +2370,7 @@ export type TeamUpsertWithWhereUniqueWithoutTeacherInput = {
 
 export type TeamWhereInput = {
   AND?: Maybe<Array<TeamWhereInput>>;
+  BallotRun?: Maybe<BallotRunListRelationFilter>;
   ballots?: Maybe<BallotListRelationFilter>;
   domain?: Maybe<DomainWhereInput>;
   domainId?: Maybe<StringNullableFilter>;
@@ -3308,6 +3566,26 @@ export type UserWhereUniqueInput = {
   id?: Maybe<Scalars['String']>;
 };
 
+export type Vote = {
+  __typename?: 'Vote';
+  ballot: Ballot;
+  verify?: Maybe<Scalars['String']>;
+};
+
+export type VoteCreateManyWithoutBallotInput = {
+  connect?: Maybe<Array<VoteWhereUniqueInput>>;
+  create?: Maybe<Array<VoteCreateWithoutBallotInput>>;
+};
+
+export type VoteCreateWithoutBallotInput = {
+  canton?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['String']>;
+  schooltype?: Maybe<Scalars['String']>;
+  verify?: Maybe<Scalars['String']>;
+  vote: Scalars['Int'];
+  year?: Maybe<Scalars['Int']>;
+};
+
 export type VotedCreateManyWithoutBallotInput = {
   connect?: Maybe<Array<VotedWhereUniqueInput>>;
   create?: Maybe<Array<VotedCreateWithoutBallotInput>>;
@@ -3430,46 +3708,26 @@ export type VotedWhereUniqueInput = {
   id?: Maybe<Scalars['String']>;
 };
 
-export type Votes = {
-  __typename?: 'Votes';
-  ballot: Ballot;
-  verify?: Maybe<Scalars['String']>;
+export type VoteListRelationFilter = {
+  every?: Maybe<VoteWhereInput>;
+  none?: Maybe<VoteWhereInput>;
+  some?: Maybe<VoteWhereInput>;
 };
 
-export type VotesCreateManyWithoutBallotInput = {
-  connect?: Maybe<Array<VotesWhereUniqueInput>>;
-  create?: Maybe<Array<VotesCreateWithoutBallotInput>>;
-};
-
-export type VotesCreateWithoutBallotInput = {
-  canton?: Maybe<Scalars['String']>;
-  id?: Maybe<Scalars['String']>;
-  schooltype?: Maybe<Scalars['String']>;
-  verify?: Maybe<Scalars['String']>;
-  vote: Scalars['Int'];
-  year?: Maybe<Scalars['Int']>;
-};
-
-export type VotesListRelationFilter = {
-  every?: Maybe<VotesWhereInput>;
-  none?: Maybe<VotesWhereInput>;
-  some?: Maybe<VotesWhereInput>;
-};
-
-export type VotesScalarWhereInput = {
-  AND?: Maybe<Array<VotesScalarWhereInput>>;
+export type VoteScalarWhereInput = {
+  AND?: Maybe<Array<VoteScalarWhereInput>>;
   ballotId?: Maybe<StringFilter>;
   canton?: Maybe<StringNullableFilter>;
   id?: Maybe<StringFilter>;
-  NOT?: Maybe<Array<VotesScalarWhereInput>>;
-  OR?: Maybe<Array<VotesScalarWhereInput>>;
+  NOT?: Maybe<Array<VoteScalarWhereInput>>;
+  OR?: Maybe<Array<VoteScalarWhereInput>>;
   schooltype?: Maybe<StringNullableFilter>;
   verify?: Maybe<StringNullableFilter>;
   vote?: Maybe<IntFilter>;
   year?: Maybe<IntNullableFilter>;
 };
 
-export type VotesUpdateManyDataInput = {
+export type VoteUpdateManyDataInput = {
   canton?: Maybe<NullableStringFieldUpdateOperationsInput>;
   id?: Maybe<StringFieldUpdateOperationsInput>;
   schooltype?: Maybe<NullableStringFieldUpdateOperationsInput>;
@@ -3478,24 +3736,24 @@ export type VotesUpdateManyDataInput = {
   year?: Maybe<NullableIntFieldUpdateOperationsInput>;
 };
 
-export type VotesUpdateManyWithoutBallotInput = {
-  connect?: Maybe<Array<VotesWhereUniqueInput>>;
-  create?: Maybe<Array<VotesCreateWithoutBallotInput>>;
-  delete?: Maybe<Array<VotesWhereUniqueInput>>;
-  deleteMany?: Maybe<Array<VotesScalarWhereInput>>;
-  disconnect?: Maybe<Array<VotesWhereUniqueInput>>;
-  set?: Maybe<Array<VotesWhereUniqueInput>>;
-  update?: Maybe<Array<VotesUpdateWithWhereUniqueWithoutBallotInput>>;
-  updateMany?: Maybe<Array<VotesUpdateManyWithWhereNestedInput>>;
-  upsert?: Maybe<Array<VotesUpsertWithWhereUniqueWithoutBallotInput>>;
+export type VoteUpdateManyWithoutBallotInput = {
+  connect?: Maybe<Array<VoteWhereUniqueInput>>;
+  create?: Maybe<Array<VoteCreateWithoutBallotInput>>;
+  delete?: Maybe<Array<VoteWhereUniqueInput>>;
+  deleteMany?: Maybe<Array<VoteScalarWhereInput>>;
+  disconnect?: Maybe<Array<VoteWhereUniqueInput>>;
+  set?: Maybe<Array<VoteWhereUniqueInput>>;
+  update?: Maybe<Array<VoteUpdateWithWhereUniqueWithoutBallotInput>>;
+  updateMany?: Maybe<Array<VoteUpdateManyWithWhereNestedInput>>;
+  upsert?: Maybe<Array<VoteUpsertWithWhereUniqueWithoutBallotInput>>;
 };
 
-export type VotesUpdateManyWithWhereNestedInput = {
-  data: VotesUpdateManyDataInput;
-  where: VotesScalarWhereInput;
+export type VoteUpdateManyWithWhereNestedInput = {
+  data: VoteUpdateManyDataInput;
+  where: VoteScalarWhereInput;
 };
 
-export type VotesUpdateWithoutBallotDataInput = {
+export type VoteUpdateWithoutBallotDataInput = {
   canton?: Maybe<NullableStringFieldUpdateOperationsInput>;
   id?: Maybe<StringFieldUpdateOperationsInput>;
   schooltype?: Maybe<NullableStringFieldUpdateOperationsInput>;
@@ -3504,32 +3762,32 @@ export type VotesUpdateWithoutBallotDataInput = {
   year?: Maybe<NullableIntFieldUpdateOperationsInput>;
 };
 
-export type VotesUpdateWithWhereUniqueWithoutBallotInput = {
-  data: VotesUpdateWithoutBallotDataInput;
-  where: VotesWhereUniqueInput;
+export type VoteUpdateWithWhereUniqueWithoutBallotInput = {
+  data: VoteUpdateWithoutBallotDataInput;
+  where: VoteWhereUniqueInput;
 };
 
-export type VotesUpsertWithWhereUniqueWithoutBallotInput = {
-  create: VotesCreateWithoutBallotInput;
-  update: VotesUpdateWithoutBallotDataInput;
-  where: VotesWhereUniqueInput;
+export type VoteUpsertWithWhereUniqueWithoutBallotInput = {
+  create: VoteCreateWithoutBallotInput;
+  update: VoteUpdateWithoutBallotDataInput;
+  where: VoteWhereUniqueInput;
 };
 
-export type VotesWhereInput = {
-  AND?: Maybe<Array<VotesWhereInput>>;
+export type VoteWhereInput = {
+  AND?: Maybe<Array<VoteWhereInput>>;
   ballot?: Maybe<BallotWhereInput>;
   ballotId?: Maybe<StringFilter>;
   canton?: Maybe<StringNullableFilter>;
   id?: Maybe<StringFilter>;
-  NOT?: Maybe<Array<VotesWhereInput>>;
-  OR?: Maybe<Array<VotesWhereInput>>;
+  NOT?: Maybe<Array<VoteWhereInput>>;
+  OR?: Maybe<Array<VoteWhereInput>>;
   schooltype?: Maybe<StringNullableFilter>;
   verify?: Maybe<StringNullableFilter>;
   vote?: Maybe<IntFilter>;
   year?: Maybe<IntNullableFilter>;
 };
 
-export type VotesWhereUniqueInput = {
+export type VoteWhereUniqueInput = {
   id?: Maybe<Scalars['String']>;
 };
 
@@ -3759,8 +4017,8 @@ export type VoteMutationVariables = Exact<{
 export type VoteMutation = (
   { __typename?: 'Mutation' }
   & { vote?: Maybe<(
-    { __typename?: 'Votes' }
-    & Pick<Votes, 'verify'>
+    { __typename?: 'Vote' }
+    & Pick<Vote, 'verify'>
     & { ballot: (
       { __typename?: 'Ballot' }
       & Pick<Ballot, 'id' | 'canVote' | 'hasVoted'>

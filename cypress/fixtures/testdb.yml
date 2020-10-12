@@ -2,7 +2,7 @@
 delete:
   - team
   - voted
-  - votes
+  - vote
   - ballot
   - verificationRequest
   - domain
@@ -11,6 +11,7 @@ delete:
   - reaction
   - user
   - school
+  - ballotRun
 
 # This is a prisma type with a list of objects to create
 user:

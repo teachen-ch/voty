@@ -126,7 +126,7 @@ schema.objectType({
 });
 
 schema.objectType({
-  name: "Votes",
+  name: "Vote",
   definition(t) {
     t.model.verify();
     t.model.ballot();
@@ -166,7 +166,7 @@ schema.mutationType({
     t.crud.deleteOneTeam();
 
     t.field("vote", {
-      type: "Votes",
+      type: "Vote",
       args: {
         ballot: stringArg({ required: true }),
         vote: intArg({ required: true }),
