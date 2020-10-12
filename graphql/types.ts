@@ -3667,14 +3667,12 @@ export type TeamUserFieldsFragment = (
 
 export type TeamTeacherFieldsFragment = (
   { __typename?: 'Team' }
-  & Pick<Team, 'id' | 'invite' | 'name'>
-  & { school: (
-    { __typename?: 'School' }
-    & Pick<School, 'id' | 'name' | 'city'>
-  ), members: Array<(
+  & Pick<Team, 'invite'>
+  & { members: Array<(
     { __typename?: 'User' }
-    & Pick<User, 'id' | 'name' | 'shortname' | 'email' | 'emailVerified'>
+    & Pick<User, 'email' | 'emailVerified'>
   )> }
+  & TeamUserFieldsFragment
 );
 
 export type TeamsQueryVariables = Exact<{
@@ -3969,23 +3967,14 @@ export const TeamUserFieldsFragmentDoc = gql`
     `;
 export const TeamTeacherFieldsFragmentDoc = gql`
     fragment TeamTeacherFields on Team {
-  id
+  ...TeamUserFields
   invite
-  name
-  school {
-    id
-    name
-    city
-  }
   members {
-    id
-    name
-    shortname
     email
     emailVerified
   }
 }
-    `;
+    ${TeamUserFieldsFragmentDoc}`;
 export const BallotsDocument = gql`
     query ballots($where: BallotWhereInput) {
   ballots(where: $where) {

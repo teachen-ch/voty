@@ -31,22 +31,14 @@ const TeamUserFields = gql`
 
 const TeamTeacherFields = gql`
   fragment TeamTeacherFields on Team {
-    id
+    ...TeamUserFields
     invite
-    name
-    school {
-      id
-      name
-      city
-    }
     members {
-      id
-      name
-      shortname
       email
       emailVerified
     }
   }
+  ${TeamUserFields}
 `;
 
 export const fragments = { TeamUserFields, TeamTeacherFields };
