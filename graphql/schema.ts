@@ -114,6 +114,17 @@ schema.objectType({
 });
 
 schema.objectType({
+  name: "BallotRun",
+  definition(t) {
+    t.model.id();
+    t.model.ballot();
+    t.model.team();
+    t.model.start();
+    t.model.end();
+  },
+});
+
+schema.objectType({
   name: "Attachment",
   definition(t) {
     t.model.id();
@@ -169,10 +180,20 @@ schema.mutationType({
     t.field("vote", {
       type: "Vote",
       args: {
-        ballot: stringArg({ required: true }),
+        ballotId: stringArg({ required: true }),
         vote: intArg({ required: true }),
       },
       resolve: resolvers.ballots.vote,
+    });
+
+    t.field("voteCode", {
+      type: "Vote",
+      args: {
+        ballotId: stringArg({ required: true }),
+        vote: intArg({ required: true }),
+        code: stringArg({ required: true }),
+      },
+      resolve: resolvers.ballots.voteCode,
     });
 
     t.field("inviteStudents", {
@@ -182,6 +203,48 @@ schema.mutationType({
         emails: stringArg({ list: true, required: true }),
       },
       resolve: resolvers.teams.inviteStudents,
+    });
+
+    t.field("addBallotRun", {
+      type: "BallotRun",
+      args: {
+        ballotId: stringArg({ required: true }),
+        teamId: stringArg({ required: true }),
+      },
+      resolve: resolvers.ballots.addBallotRun,
+    });
+
+    t.field("removeBallotRun", {
+      type: "BallotRun",
+      args: {
+        ballotRunId: stringArg({ required: true }),
+      },
+      resolve: resolvers.ballots.removeBallotRun,
+    });
+
+    t.field("startBallotRun", {
+      type: "BallotRun",
+      args: {
+        ballotRunId: stringArg({ required: true }),
+      },
+      resolve: resolvers.ballots.startBallotRun,
+    });
+
+    t.field("endBallotRun", {
+      type: "BallotRun",
+      args: {
+        ballotRunId: stringArg({ required: true }),
+      },
+      resolve: resolvers.ballots.endBallotRun,
+    });
+
+    t.field("getBallotRuns", {
+      type: "BallotRun",
+      list: true,
+      args: {
+        teamId: stringArg({ required: true }),
+      },
+      resolve: resolvers.ballots.getBallotRuns,
     });
   },
 });

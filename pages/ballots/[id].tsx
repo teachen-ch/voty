@@ -47,8 +47,8 @@ export default function BallotPage(): ReactElement {
 }
 
 const VOTE = gql`
-  mutation vote($ballot: String!, $vote: Int!) {
-    vote(ballot: $ballot, vote: $vote) {
+  mutation vote($ballotId: String!, $vote: Int!) {
+    vote(ballotId: $ballotId, vote: $vote) {
       verify
       ballot {
         id
@@ -115,7 +115,7 @@ const VotyNow: React.FC<{ ballot: BallotQuery["ballot"] }> = ({ ballot }) => {
   }
 
   async function vote(ballot: BallotQuery["ballot"], vote: number) {
-    return doVote({ variables: { ballot: ballot?.id, vote } });
+    return doVote({ variables: { ballotId: ballot?.id, vote } });
   }
 
   return (
