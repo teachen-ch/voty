@@ -4,6 +4,7 @@
     "USER": "teacher@teachen.ch",
     "PASS": "teachen"
   },
+  "video": false,
   "pluginsFile": "./cypress/plugins/index.ts",
   "projectId": "19hfnd"
 }
