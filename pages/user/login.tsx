@@ -15,7 +15,11 @@ import {
 } from "../../state/user";
 import { useQueryParam } from "util/hooks";
 import { Role } from "components/CheckLogin";
-import { useLoginMutation, useCheckVerificationMutation } from "graphql/types";
+import {
+  useLoginMutation,
+  useCheckVerificationMutation,
+  useEmailVerificationMutation,
+} from "graphql/types";
 
 export const LOGIN = gql`
   mutation login($email: String!, $password: String!) {
@@ -119,7 +123,12 @@ export function LoginForm(): ReactElement {
     },
   });
   if (typeof requestReset === "string") {
-    return <RequestReset email={requestReset} />;
+    return (
+      <RequestReset
+        email={requestReset}
+        onCancel={() => setRequestReset(undefined)}
+      />
+    );
   }
 
   if (emailError) {
@@ -299,11 +308,16 @@ function CheckToken({ token, purpose }: { token: string; purpose: string }) {
   return <Text>Überprüfen</Text>;
 }
 
-function RequestReset({ email }: { email: string }) {
+function RequestReset({
+  email,
+  onCancel,
+}: {
+  email: string;
+  onCancel: () => void;
+}) {
   const [mailSent, setMailSent] = useState(false);
-  const [emailField, setEmailField] = useState(email);
   const [error, setError] = useState("");
-  const [doRequestReset] = useMutation(EMAIL_VERIFICATION, {
+  const [doRequestReset] = useEmailVerificationMutation({
     onCompleted() {
       setMailSent(true);
       setError("");
@@ -323,32 +337,41 @@ function RequestReset({ email }: { email: string }) {
           Du hast Dein Passwort vergessen? Wir schicken Dir eine Email, dann
           kannst Du es zurücksetzen.
         </Text>
-        <Grid gap={2} columns={[0, 0, "1fr 3fr"]}>
-          <Label>Email:</Label>
-          <Input
-            autoFocus
-            autoCapitalize="none"
-            value={emailField}
-            name="email"
-            onChange={(event: React.FormEvent<HTMLInputElement>) =>
-              setEmailField(event.currentTarget.value)
+        <QForm
+          mutation={doRequestReset}
+          onSubmit={(values) => {
+            if (mailSent) onCancel();
+            else {
+              void doRequestReset({
+                variables: { email: String(values.email), purpose: "reset" },
+              });
             }
-          />
+          }}
+          fields={{
+            email: {
+              label: "Email:",
+              required: true,
+              type: "email",
+              placeholder: "name@meineschule.ch",
+            },
+            submit: {
+              type: "submit",
+              label: mailSent ? "Login" : "Email verschicken",
+            },
+          }}
+        >
           <span />
-          <Button
-            onClick={() =>
-              doRequestReset({
-                variables: { email: emailField, purpose: "reset" },
-              })
-            }
-            variant={mailSent ? "muted" : "primary"}
-            disabled={mailSent}
-          >
-            {mailSent ? "Email verschickt!" : "Email schicken"}
+          <Button onClick={onCancel} variant="outline">
+            Abbrechen
           </Button>
           <span />
           <ErrorBox error={error} />
-        </Grid>
+          {mailSent && (
+            <>
+              <span>Wir haben Dir ein Email geschickt</span>
+            </>
+          )}
+        </QForm>
       </Card>
     </>
   );
