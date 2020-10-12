@@ -75,6 +75,7 @@
     "@graphql-codegen/typescript-react-apollo": "^2.0.6",
     "@testing-library/cypress": "^7.0.0",
     "@types/bcrypt": "^3.0.0",
+    "@types/cookie": "^0.4.0",
     "@types/lodash": "^4.14.161",
     "@types/mdx-js__react": "^1.5.2",
     "@types/mjml": "^4.0.4",
