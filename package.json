@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "NODE_OPTIONS='--inspect' next dev",
-    "devdev": "concurrently \"yarn:dev\" \"yarn:nexus:reflection\" \"yarn:cypress:open\"",
+    "dev": "concurrently \"yarn:next\" \"yarn:nexus:reflection\" \"graphql\"",
+    "next": "NODE_OPTIONS='--inspect' next dev",
     "prebuild": "nexus build",
     "build": "next build",
     "check": "nexus build && next build && yarn test",
@@ -27,7 +27,7 @@
     "migrate": "cd prisma && npx prisma migrate save -c --experimental && npx prisma migrate up -c --experimental && npx prisma generate && cd ../",
     "dump_dev": "pg_dump --clean voty | ssh root@dev.votyapp.ch docker exec -i postgres psql -U voty voty",
     "ci:test": "yarn run migrate && yarn run start:bg && cypress run",
-    "graphql": "graphql-codegen --config codegen.yml"
+    "graphql": "graphql-codegen --config codegen.yml --watch"
   },
   "dependencies": {
     "@apollo/client": "^3.1.3",
