@@ -11,6 +11,7 @@ export const Footer: React.FC = () => (
         href="https://github.com/teachen-ch/voty"
         target="_blank"
         color="black"
+        rel="noreferrer"
         sx={{ textDecoration: "underline" }}
       >
         Open-Source
@@ -28,6 +29,7 @@ export const Footer: React.FC = () => (
           href="https://prototypefund.opendata.ch"
           target="_blank"
           color="black"
+          rel="noreferrer"
           sx={{ textDecoration: "underline" }}
         >PrototypeFund</Link>*/}
       PrototypeFund
@@ -56,7 +58,12 @@ export const Footer: React.FC = () => (
             <A color="black">Kontakt</A>
           </Link>
           &nbsp;&nbsp;| &nbsp;
-          <A href="https://twitter.com/voty_ch" target="_blank" color="black">
+          <A
+            href="https://twitter.com/voty_ch"
+            target="_blank"
+            color="black"
+            rel="noreferrer"
+          >
             Twitter
           </A>
           &nbsp;&nbsp;| &nbsp;
@@ -64,6 +71,7 @@ export const Footer: React.FC = () => (
             href="https://github.com/teachen-ch/voty"
             target="_blank"
             color="black"
+            rel="noreferrer"
           >
             GitHub
           </A>

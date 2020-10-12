@@ -34,6 +34,10 @@ function Icons() {
       <link rel="manifest" href="/site.webmanifest" />
       <meta name="msapplication-TileColor" content="#d9000d" />
       <meta name="theme-color" content="#ffffff" />
+      <meta
+        name="description"
+        content="Voty bringt Demokratie an die Schule und fördert das De­mo­kra­tie­ver­ständ­nis der Jugend nachhaltig mit drei Modulen: Demokratie verstehen + testen + leben."
+      />
     </Head>
   );
 }

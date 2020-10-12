@@ -5,7 +5,7 @@ export default function Menu(): ReactElement {
   return (
     <Hamburger right>
       <a id="home" className="menu-item" href="/">
-        Start
+        Startseite
       </a>
       <hr />
       <a id="impressum" className="menu-item" href="/impressum">
