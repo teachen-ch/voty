@@ -4,7 +4,7 @@ import { permissions } from "./permissions";
 import { randomBytes } from "crypto";
 import resolvers from "./resolvers";
 import { intArg, stringArg } from "nexus/components/schema";
-
+import { random } from "lodash";
 use(
   prisma({
     features: {
@@ -161,6 +161,7 @@ schema.mutationType({
     t.crud.createOneTeam({
       computedInputs: {
         invite: () => randomBytes(6).toString("hex"),
+        code: () => String(random(10 ** 7, 10 ** 8 - 1)),
       },
     });
     t.crud.deleteOneTeam();
