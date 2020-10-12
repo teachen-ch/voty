@@ -8,7 +8,7 @@ import { ReactElement } from "react";
 
 export default function TeacherTest(): ReactElement {
   const router = useRouter();
-  const id = parseInt(String(router.query.id));
+  const id = String(router.query.id);
   const teamQuery = useTeamTeacherQuery({
     variables: { where: { id } },
     skip: !id,
