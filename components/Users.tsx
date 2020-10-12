@@ -1,5 +1,5 @@
 import { gql } from "@apollo/client";
-import { TeamTeacherFieldsFragment } from "graphql/types";
+import { TeamTeacherFieldsFragment, User } from "graphql/types";
 import { ReactElement } from "react";
 import { Link } from "rebass";
 
@@ -19,6 +19,11 @@ export const GET_USERS = gql`
     }
   }
 `;
+
+type myUser = Pick<
+  User,
+  "email" | "emailVerified" | "id" | "name" | "shortname"
+>;
 
 export function Users({
   users,
@@ -40,7 +45,7 @@ export function Users({
         </thead>
 
         <tbody>
-          {users?.map((user) => (
+          {users?.map((user: myUser) => (
             <tr key={user.id}>
               <td>{user.shortname}</td>
               <td>
