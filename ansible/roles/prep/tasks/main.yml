@@ -1,0 +1,6 @@
+---
+- name: install python3
+  become: yes
+  pre_tasks:
+    - name: "install python3"
+      raw: "sudo apk add python3"

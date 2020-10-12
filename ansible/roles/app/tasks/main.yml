@@ -42,6 +42,10 @@
         project_src: "{{app_dir}}"
         state: "present"
         restarted: yes
+
+    - name: Start Webserver (Reverse-Proxy)
+      service: { name: nginx, state: started }
+
     - name: Enable Web Backend Service
       service: { name: voty, enabled: yes, state: restarted }
   become: yes

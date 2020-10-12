@@ -1,0 +1,35 @@
+#!/sbin/openrc-run
+#
+#  _  _   __  ____  _  _   ____  ____  ____  _  _  __  ___  ____ 
+# / )( \ /  \(_  _)( \/ ) / ___)(  __)(  _ \/ )( \(  )/ __)(  __)
+# \ \/ /(  O ) )(   )  /_ \___ \ ) _)  )   /\ \/ / )(( (__  ) _) 
+#  \__/  \__/ (__) (__/( )(____/(____)(__\_) \__/ (__)\___)(____)
+#
+
+depend() {
+  need docker
+}
+
+
+# Remove old containers, images and volumes
+start_pre() {
+  cd {{ app_dir }}
+  docker-compose down -v
+  docker-compose rm -v
+ }
+
+start() {
+  cd {{ app_dir }}
+  docker-compose up
+}
+
+start() {
+  cd {{ app_dir }}
+  docker-compose down
+}
+
+restart() {
+  cd {{ app_dir }}
+  docker-compose down
+  docker-compose up
+}

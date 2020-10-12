@@ -5,7 +5,7 @@
     name: nginx
     state: restarted
 - name: reload systemd
-  command: "systemctl daemon-reload"
+  command: "{{reload_systemd}}"
   become: yes
   become_method: sudo
 - name: restart voty

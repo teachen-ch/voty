@@ -1,2 +1,2 @@
-server_name: votyapp.ch
+server_name: prod.votyapp.ch
 env_file: ../.env.production
