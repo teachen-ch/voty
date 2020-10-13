@@ -14,8 +14,8 @@ import {
   SessionUser,
 } from "../../state/user";
 import { useQueryParam } from "util/hooks";
-import { Role } from "components/CheckLogin";
 import {
+  Role,
   useLoginMutation,
   useCheckVerificationMutation,
   useEmailVerificationMutation,
@@ -107,6 +107,7 @@ export function LoginForm(): ReactElement {
   const [doLogin, resultLogin] = useLoginMutation({
     onCompleted(data) {
       if (data.login && data.login.token) {
+        console.log("LOGIN", data.login.token);
         setUser(data.login.user);
         setAccessToken(data.login.token);
       }

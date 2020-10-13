@@ -3,9 +3,10 @@ import Head from "next/head";
 import { useUser } from "state/user";
 import { LoginForm } from "pages/user/login";
 import { ReactNode, useState, ReactElement } from "react";
-import CheckLogin, { Role } from "./CheckLogin";
+import CheckLogin from "./CheckLogin";
 import Link from "next/link";
 import { FlexProps } from "rebass";
+import { Role } from "graphql/types";
 
 export function Page({
   children,
@@ -80,7 +81,8 @@ export function LoggedInPage({
         {!loading && (
           <>
             <Text>
-              Diese Seite benötigt eine Anmeldung. Bitte benutze Deine
+              Diese Seite benötigt eine Anmeldung
+              {role && ` als ${getRoleName(role)}`}. Bitte benutze Deine
               Schul-Email.
             </Text>
             <LoginForm />
@@ -90,6 +92,15 @@ export function LoggedInPage({
       </Page>
     );
   }
+}
+
+export function getRoleName(role: Role): string {
+  const translations: Record<string, string> = {
+    Teacher: "Lehrer/-in",
+    Student: "Schüler/-in",
+    Principal: "Schulleiter/-in",
+  };
+  return translations[String(role)] || String(role);
 }
 
 export const LoggedInHeader: React.FC<{
@@ -147,9 +158,14 @@ export const Container: React.FC<FlexProps> = (props) => (
 );
 
 export const ErrorPage: React.FC = (props) => (
-  <Page>
-    <PageHeading>Fehler</PageHeading>
+  <Page heading="Fehler">
     <Heading as="h2">Oh je, es ist ein Fehler aufgetreten</Heading>
+    <Text>{props.children}</Text>
+  </Page>
+);
+
+export const LoadingPage: React.FC = (props) => (
+  <Page heading="Seite wird geladen...">
     <Text>{props.children}</Text>
   </Page>
 );

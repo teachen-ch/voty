@@ -1,17 +1,7 @@
 import { gql } from "@apollo/client";
 import { useUser, useSetUser } from "../state/user";
-import { Dispatch, SetStateAction, ReactElement } from "react";
+import { Dispatch, SetStateAction, ReactElement, useEffect } from "react";
 import { useMeQuery } from "graphql/types";
-
-// TODO: have to redefine enum here, otherwise hiting this issue
-// https://github.com/prisma/prisma/issues/3252
-export enum Role {
-  Admin = "Admin",
-  Principal = "Principal",
-  Student = "Student",
-  Teacher = "Teacher",
-  User = "User",
-}
 
 CheckLogin.fragments = {
   LoginFields: gql`
@@ -68,6 +58,10 @@ export default function CheckLogin({
       setUser(data?.me); // could be undefined!
     },
   });
+  useEffect(() => {
+    // if we skip above query, because user is already loaded
+    if (user && setLoading) setLoading(false);
+  }, [user]);
 
   // if (checkLogin) return <Heading as="h2">Einen kurzen Moment…</Heading>;
   return null;
