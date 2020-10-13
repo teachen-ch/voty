@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import { isBrowser } from "util/isBrowser";
 
 export function useQueryParam(name: string): string | undefined {
   const query = useRouter().query;
@@ -13,7 +14,7 @@ export function useNavHash(
   init?: string
 ): [string, (s: string) => void] {
   let initialHash = init || "#";
-  if (typeof window !== "undefined") {
+  if (isBrowser()) {
     if (window.location.hash) initialHash = window.location.hash;
   }
   const [navHash, setStateHash] = useState<string>(initialHash);
