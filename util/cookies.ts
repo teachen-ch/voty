@@ -1,6 +1,6 @@
 import { serialize, parse, CookieSerializeOptions } from "cookie";
 import { NextApiResponse, NextApiRequest } from "next";
-import { isBrowser } from "util/isBrowser";
+import { isBrowser } from "./isBrowser";
 
 /**
  * Set a cookie

@@ -212,17 +212,13 @@ type Ballot {
   body: String!
   canton: String
   canVote: Boolean
-  createdAt: DateTime!
-  creator: User
   description: String!
   end: DateTime!
   hasVoted: Boolean
   id: String!
-  school: School
   scope: BallotScope!
   start: DateTime!
   title: String!
-  updatedAt: DateTime!
 }
 
 input BallotCreateManyWithoutCreatorInput {
@@ -433,6 +429,11 @@ input BallotCreateWithoutVotesInput {
   voted: VotedCreateManyWithoutBallotInput
 }
 
+input BallotIdTeamIdCompoundUniqueInput {
+  ballotId: String!
+  teamId: String!
+}
+
 input BallotListRelationFilter {
   every: BallotWhereInput
   none: BallotWhereInput
@@ -590,6 +591,7 @@ input BallotRunWhereInput {
 }
 
 input BallotRunWhereUniqueInput {
+  ballotId_teamId: BallotIdTeamIdCompoundUniqueInput
   id: String
 }
 
@@ -1160,15 +1162,14 @@ type Mutation {
   deleteOneTeam(where: TeamWhereUniqueInput!): Team
   emailVerification(email: String!, purpose: String!): ResponseLogin
   endBallotRun(ballotRunId: String!): BallotRun
-  getBallotRuns(teamId: String!): [BallotRun!]
   inviteStudents(emails: [String!]!, team: String!): Team
   login(email: String, password: String): ResponseLogin
-  removeBallotRun(ballotRunId: String!): BallotRun
+  removeBallotRun(ballotRunId: String!): Response
   setSchool(school: String!): User
   startBallotRun(ballotRunId: String!): BallotRun
   updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
   vote(ballotId: String!, vote: Int!): Vote
-  voteCode(ballotId: String!, code: String!, vote: Int!): Vote
+  voteCode(ballotRunId: String!, code: String!, vote: Int!): Response
 }
 
 input NestedBoolFilter {
@@ -1354,6 +1355,7 @@ input OptionWhereUniqueInput {
 type Query {
   ballot(where: BallotWhereUniqueInput!): Ballot
   ballots(after: BallotWhereUniqueInput, before: BallotWhereUniqueInput, first: Int, last: Int, orderBy: [BallotOrderByInput!], where: BallotWhereInput): [Ballot!]!
+  getBallotRuns(teamId: String!): [BallotRun!]
   me: User
   school(where: SchoolWhereUniqueInput!): School
   schools(after: SchoolWhereUniqueInput, before: SchoolWhereUniqueInput, first: Int, last: Int, orderBy: [SchoolOrderByInput!], where: SchoolWhereInput): [School!]!
@@ -1504,6 +1506,12 @@ input ReactionWhereInput {
 
 input ReactionWhereUniqueInput {
   id: String
+}
+
+type Response {
+  error: Boolean
+  message: String
+  success: Boolean
 }
 
 type ResponseLogin {
@@ -1956,6 +1964,7 @@ input StringNullableFilter {
 
 type Team {
   ballots(after: BallotWhereUniqueInput, before: BallotWhereUniqueInput, first: Int, last: Int): [Ballot!]!
+  code: String
   domain: Domain
   id: String!
   invite: String

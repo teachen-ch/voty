@@ -231,17 +231,13 @@ export type Ballot = {
   body: Scalars['String'];
   canton?: Maybe<Scalars['String']>;
   canVote?: Maybe<Scalars['Boolean']>;
-  createdAt: Scalars['DateTime'];
-  creator?: Maybe<User>;
   description: Scalars['String'];
   end: Scalars['DateTime'];
   hasVoted?: Maybe<Scalars['Boolean']>;
   id: Scalars['String'];
-  school?: Maybe<School>;
   scope: BallotScope;
   start: Scalars['DateTime'];
   title: Scalars['String'];
-  updatedAt: Scalars['DateTime'];
 };
 
 export type BallotCreateManyWithoutCreatorInput = {
@@ -452,6 +448,11 @@ export type BallotCreateWithoutVotesInput = {
   voted?: Maybe<VotedCreateManyWithoutBallotInput>;
 };
 
+export type BallotIdTeamIdCompoundUniqueInput = {
+  ballotId: Scalars['String'];
+  teamId: Scalars['String'];
+};
+
 export type BallotListRelationFilter = {
   every?: Maybe<BallotWhereInput>;
   none?: Maybe<BallotWhereInput>;
@@ -610,6 +611,7 @@ export type BallotRunWhereInput = {
 };
 
 export type BallotRunWhereUniqueInput = {
+  ballotId_teamId?: Maybe<BallotIdTeamIdCompoundUniqueInput>;
   id?: Maybe<Scalars['String']>;
 };
 
@@ -1180,15 +1182,14 @@ export type Mutation = {
   deleteOneTeam?: Maybe<Team>;
   emailVerification?: Maybe<ResponseLogin>;
   endBallotRun?: Maybe<BallotRun>;
-  getBallotRuns?: Maybe<Array<BallotRun>>;
   inviteStudents?: Maybe<Team>;
   login?: Maybe<ResponseLogin>;
-  removeBallotRun?: Maybe<BallotRun>;
+  removeBallotRun?: Maybe<Response>;
   setSchool?: Maybe<User>;
   startBallotRun?: Maybe<BallotRun>;
   updateUser?: Maybe<User>;
   vote?: Maybe<Vote>;
-  voteCode?: Maybe<Vote>;
+  voteCode?: Maybe<Response>;
 };
 
 
@@ -1258,11 +1259,6 @@ export type MutationEndBallotRunArgs = {
 };
 
 
-export type MutationGetBallotRunsArgs = {
-  teamId: Scalars['String'];
-};
-
-
 export type MutationInviteStudentsArgs = {
   emails: Array<Scalars['String']>;
   team: Scalars['String'];
@@ -1303,7 +1299,7 @@ export type MutationVoteArgs = {
 
 
 export type MutationVoteCodeArgs = {
-  ballotId: Scalars['String'];
+  ballotRunId: Scalars['String'];
   code: Scalars['String'];
   vote: Scalars['Int'];
 };
@@ -1492,6 +1488,7 @@ export type Query = {
   __typename?: 'Query';
   ballot?: Maybe<Ballot>;
   ballots: Array<Ballot>;
+  getBallotRuns?: Maybe<Array<BallotRun>>;
   me?: Maybe<User>;
   school?: Maybe<School>;
   schools: Array<School>;
@@ -1514,6 +1511,11 @@ export type QueryBallotsArgs = {
   last?: Maybe<Scalars['Int']>;
   orderBy?: Maybe<Array<BallotOrderByInput>>;
   where?: Maybe<BallotWhereInput>;
+};
+
+
+export type QueryGetBallotRunsArgs = {
+  teamId: Scalars['String'];
 };
 
 
@@ -1703,6 +1705,13 @@ export type ReactionWhereInput = {
 
 export type ReactionWhereUniqueInput = {
   id?: Maybe<Scalars['String']>;
+};
+
+export type Response = {
+  __typename?: 'Response';
+  error?: Maybe<Scalars['Boolean']>;
+  message?: Maybe<Scalars['String']>;
+  success?: Maybe<Scalars['Boolean']>;
 };
 
 export type ResponseLogin = {
@@ -2174,6 +2183,7 @@ export type StringNullableFilter = {
 export type Team = {
   __typename?: 'Team';
   ballots: Array<Ballot>;
+  code?: Maybe<Scalars['String']>;
   domain?: Maybe<Domain>;
   id: Scalars['String'];
   invite?: Maybe<Scalars['String']>;
@@ -4386,6 +4396,15 @@ export type BallotFieldsFragment = (
   & Pick<Ballot, 'id' | 'title' | 'description' | 'body' | 'start' | 'end' | 'scope' | 'canton'>
 );
 
+export type BallotRunFieldsFragment = (
+  { __typename?: 'BallotRun' }
+  & Pick<BallotRun, 'id' | 'start' | 'end'>
+  & { ballot: (
+    { __typename?: 'Ballot' }
+    & BallotFieldsFragment
+  ) }
+);
+
 export type BallotsQueryVariables = Exact<{
   where?: Maybe<BallotWhereInput>;
 }>;
@@ -4410,6 +4429,105 @@ export type BallotQuery = (
     { __typename?: 'Ballot' }
     & Pick<Ballot, 'canVote' | 'hasVoted'>
     & BallotFieldsFragment
+  )> }
+);
+
+export type GetBallotRunsQueryVariables = Exact<{
+  teamId: Scalars['String'];
+}>;
+
+
+export type GetBallotRunsQuery = (
+  { __typename?: 'Query' }
+  & { getBallotRuns?: Maybe<Array<(
+    { __typename?: 'BallotRun' }
+    & BallotRunFieldsFragment
+  )>> }
+);
+
+export type AddBallotRunMutationVariables = Exact<{
+  ballotId: Scalars['String'];
+  teamId: Scalars['String'];
+}>;
+
+
+export type AddBallotRunMutation = (
+  { __typename?: 'Mutation' }
+  & { addBallotRun?: Maybe<(
+    { __typename?: 'BallotRun' }
+    & BallotRunFieldsFragment
+  )> }
+);
+
+export type RemoveBallotRunMutationVariables = Exact<{
+  ballotRunId: Scalars['String'];
+}>;
+
+
+export type RemoveBallotRunMutation = (
+  { __typename?: 'Mutation' }
+  & { removeBallotRun?: Maybe<(
+    { __typename?: 'Response' }
+    & Pick<Response, 'success' | 'error' | 'message'>
+  )> }
+);
+
+export type StartBallotRunMutationVariables = Exact<{
+  ballotRunId: Scalars['String'];
+}>;
+
+
+export type StartBallotRunMutation = (
+  { __typename?: 'Mutation' }
+  & { startBallotRun?: Maybe<(
+    { __typename?: 'BallotRun' }
+    & BallotRunFieldsFragment
+  )> }
+);
+
+export type EndBallotRunMutationVariables = Exact<{
+  ballotRunId: Scalars['String'];
+}>;
+
+
+export type EndBallotRunMutation = (
+  { __typename?: 'Mutation' }
+  & { endBallotRun?: Maybe<(
+    { __typename?: 'BallotRun' }
+    & BallotRunFieldsFragment
+  )> }
+);
+
+export type VoteMutationVariables = Exact<{
+  ballotId: Scalars['String'];
+  vote: Scalars['Int'];
+}>;
+
+
+export type VoteMutation = (
+  { __typename?: 'Mutation' }
+  & { vote?: Maybe<(
+    { __typename?: 'Vote' }
+    & Pick<Vote, 'verify'>
+    & { ballot: (
+      { __typename?: 'Ballot' }
+      & Pick<Ballot, 'id' | 'canVote' | 'hasVoted'>
+    ) }
+  )> }
+);
+
+export type VoteCodeMutationVariables = Exact<{
+  code: Scalars['String'];
+  ballotRunId: Scalars['String'];
+  vote: Scalars['Int'];
+}>;
+
+
+export type VoteCodeMutation = (
+  { __typename?: 'Mutation' }
+  & { voteCode?: Maybe<(
+    { __typename?: 'Response' }
+    & Pick<Response, 'success' | 'error' | 'message'>
   )> }
 );
 
@@ -4501,21 +4619,27 @@ export type NewSchoolFragment = (
   & Pick<School, 'name' | 'address' | 'zip' | 'city' | 'canton'>
 );
 
-export type TeamUserFieldsFragment = (
+export type TeamAnonFieldsFragment = (
   { __typename?: 'Team' }
   & Pick<Team, 'id' | 'name'>
   & { school: (
     { __typename?: 'School' }
     & Pick<School, 'id' | 'name' | 'city'>
-  ), members: Array<(
+  ) }
+);
+
+export type TeamUserFieldsFragment = (
+  { __typename?: 'Team' }
+  & { members: Array<(
     { __typename?: 'User' }
     & Pick<User, 'id' | 'name' | 'shortname'>
   )> }
+  & TeamAnonFieldsFragment
 );
 
 export type TeamTeacherFieldsFragment = (
   { __typename?: 'Team' }
-  & Pick<Team, 'invite'>
+  & Pick<Team, 'invite' | 'code'>
   & { members: Array<(
     { __typename?: 'User' }
     & Pick<User, 'email' | 'emailVerified'>
@@ -4562,6 +4686,32 @@ export type TeamTeacherQuery = (
   )> }
 );
 
+export type TeamByInviteQueryVariables = Exact<{
+  invite: Scalars['String'];
+}>;
+
+
+export type TeamByInviteQuery = (
+  { __typename?: 'Query' }
+  & { team?: Maybe<(
+    { __typename?: 'Team' }
+    & TeamUserFieldsFragment
+  )> }
+);
+
+export type TeamByCodeQueryVariables = Exact<{
+  code: Scalars['String'];
+}>;
+
+
+export type TeamByCodeQuery = (
+  { __typename?: 'Query' }
+  & { team?: Maybe<(
+    { __typename?: 'Team' }
+    & TeamAnonFieldsFragment
+  )> }
+);
+
 export type CreateOneTeamMutationVariables = Exact<{
   name: Scalars['String'];
   school: Scalars['String'];
@@ -4595,37 +4745,6 @@ export type UsersQuery = (
         & Pick<School, 'id' | 'name'>
       ) }
     )> }
-  )> }
-);
-
-export type VoteMutationVariables = Exact<{
-  ballotId: Scalars['String'];
-  vote: Scalars['Int'];
-}>;
-
-
-export type VoteMutation = (
-  { __typename?: 'Mutation' }
-  & { vote?: Maybe<(
-    { __typename?: 'Vote' }
-    & Pick<Vote, 'verify'>
-    & { ballot: (
-      { __typename?: 'Ballot' }
-      & Pick<Ballot, 'id' | 'canVote' | 'hasVoted'>
-    ) }
-  )> }
-);
-
-export type TeamByInviteQueryVariables = Exact<{
-  invite: Scalars['String'];
-}>;
-
-
-export type TeamByInviteQuery = (
-  { __typename?: 'Query' }
-  & { team?: Maybe<(
-    { __typename?: 'Team' }
-    & TeamUserFieldsFragment
   )> }
 );
 
@@ -4764,6 +4883,16 @@ export const BallotFieldsFragmentDoc = gql`
   canton
 }
     `;
+export const BallotRunFieldsFragmentDoc = gql`
+    fragment BallotRunFields on BallotRun {
+  id
+  start
+  end
+  ballot {
+    ...BallotFields
+  }
+}
+    ${BallotFieldsFragmentDoc}`;
 export const LoginFieldsFragmentDoc = gql`
     fragment LoginFields on User {
   id
@@ -4797,8 +4926,8 @@ export const NewSchoolFragmentDoc = gql`
   canton
 }
     `;
-export const TeamUserFieldsFragmentDoc = gql`
-    fragment TeamUserFields on Team {
+export const TeamAnonFieldsFragmentDoc = gql`
+    fragment TeamAnonFields on Team {
   id
   name
   school {
@@ -4806,17 +4935,23 @@ export const TeamUserFieldsFragmentDoc = gql`
     name
     city
   }
+}
+    `;
+export const TeamUserFieldsFragmentDoc = gql`
+    fragment TeamUserFields on Team {
+  ...TeamAnonFields
   members {
     id
     name
     shortname
   }
 }
-    `;
+    ${TeamAnonFieldsFragmentDoc}`;
 export const TeamTeacherFieldsFragmentDoc = gql`
     fragment TeamTeacherFields on Team {
   ...TeamUserFields
   invite
+  code
   members {
     email
     emailVerified
@@ -4891,6 +5026,244 @@ export function useBallotLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<Bal
 export type BallotQueryHookResult = ReturnType<typeof useBallotQuery>;
 export type BallotLazyQueryHookResult = ReturnType<typeof useBallotLazyQuery>;
 export type BallotQueryResult = Apollo.QueryResult<BallotQuery, BallotQueryVariables>;
+export const GetBallotRunsDocument = gql`
+    query getBallotRuns($teamId: String!) {
+  getBallotRuns(teamId: $teamId) {
+    ...BallotRunFields
+  }
+}
+    ${BallotRunFieldsFragmentDoc}`;
+
+/**
+ * __useGetBallotRunsQuery__
+ *
+ * To run a query within a React component, call `useGetBallotRunsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetBallotRunsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetBallotRunsQuery({
+ *   variables: {
+ *      teamId: // value for 'teamId'
+ *   },
+ * });
+ */
+export function useGetBallotRunsQuery(baseOptions?: Apollo.QueryHookOptions<GetBallotRunsQuery, GetBallotRunsQueryVariables>) {
+        return Apollo.useQuery<GetBallotRunsQuery, GetBallotRunsQueryVariables>(GetBallotRunsDocument, baseOptions);
+      }
+export function useGetBallotRunsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetBallotRunsQuery, GetBallotRunsQueryVariables>) {
+          return Apollo.useLazyQuery<GetBallotRunsQuery, GetBallotRunsQueryVariables>(GetBallotRunsDocument, baseOptions);
+        }
+export type GetBallotRunsQueryHookResult = ReturnType<typeof useGetBallotRunsQuery>;
+export type GetBallotRunsLazyQueryHookResult = ReturnType<typeof useGetBallotRunsLazyQuery>;
+export type GetBallotRunsQueryResult = Apollo.QueryResult<GetBallotRunsQuery, GetBallotRunsQueryVariables>;
+export const AddBallotRunDocument = gql`
+    mutation addBallotRun($ballotId: String!, $teamId: String!) {
+  addBallotRun(ballotId: $ballotId, teamId: $teamId) {
+    ...BallotRunFields
+  }
+}
+    ${BallotRunFieldsFragmentDoc}`;
+export type AddBallotRunMutationFn = Apollo.MutationFunction<AddBallotRunMutation, AddBallotRunMutationVariables>;
+
+/**
+ * __useAddBallotRunMutation__
+ *
+ * To run a mutation, you first call `useAddBallotRunMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useAddBallotRunMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [addBallotRunMutation, { data, loading, error }] = useAddBallotRunMutation({
+ *   variables: {
+ *      ballotId: // value for 'ballotId'
+ *      teamId: // value for 'teamId'
+ *   },
+ * });
+ */
+export function useAddBallotRunMutation(baseOptions?: Apollo.MutationHookOptions<AddBallotRunMutation, AddBallotRunMutationVariables>) {
+        return Apollo.useMutation<AddBallotRunMutation, AddBallotRunMutationVariables>(AddBallotRunDocument, baseOptions);
+      }
+export type AddBallotRunMutationHookResult = ReturnType<typeof useAddBallotRunMutation>;
+export type AddBallotRunMutationResult = Apollo.MutationResult<AddBallotRunMutation>;
+export type AddBallotRunMutationOptions = Apollo.BaseMutationOptions<AddBallotRunMutation, AddBallotRunMutationVariables>;
+export const RemoveBallotRunDocument = gql`
+    mutation removeBallotRun($ballotRunId: String!) {
+  removeBallotRun(ballotRunId: $ballotRunId) {
+    success
+    error
+    message
+  }
+}
+    `;
+export type RemoveBallotRunMutationFn = Apollo.MutationFunction<RemoveBallotRunMutation, RemoveBallotRunMutationVariables>;
+
+/**
+ * __useRemoveBallotRunMutation__
+ *
+ * To run a mutation, you first call `useRemoveBallotRunMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useRemoveBallotRunMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [removeBallotRunMutation, { data, loading, error }] = useRemoveBallotRunMutation({
+ *   variables: {
+ *      ballotRunId: // value for 'ballotRunId'
+ *   },
+ * });
+ */
+export function useRemoveBallotRunMutation(baseOptions?: Apollo.MutationHookOptions<RemoveBallotRunMutation, RemoveBallotRunMutationVariables>) {
+        return Apollo.useMutation<RemoveBallotRunMutation, RemoveBallotRunMutationVariables>(RemoveBallotRunDocument, baseOptions);
+      }
+export type RemoveBallotRunMutationHookResult = ReturnType<typeof useRemoveBallotRunMutation>;
+export type RemoveBallotRunMutationResult = Apollo.MutationResult<RemoveBallotRunMutation>;
+export type RemoveBallotRunMutationOptions = Apollo.BaseMutationOptions<RemoveBallotRunMutation, RemoveBallotRunMutationVariables>;
+export const StartBallotRunDocument = gql`
+    mutation startBallotRun($ballotRunId: String!) {
+  startBallotRun(ballotRunId: $ballotRunId) {
+    ...BallotRunFields
+  }
+}
+    ${BallotRunFieldsFragmentDoc}`;
+export type StartBallotRunMutationFn = Apollo.MutationFunction<StartBallotRunMutation, StartBallotRunMutationVariables>;
+
+/**
+ * __useStartBallotRunMutation__
+ *
+ * To run a mutation, you first call `useStartBallotRunMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useStartBallotRunMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [startBallotRunMutation, { data, loading, error }] = useStartBallotRunMutation({
+ *   variables: {
+ *      ballotRunId: // value for 'ballotRunId'
+ *   },
+ * });
+ */
+export function useStartBallotRunMutation(baseOptions?: Apollo.MutationHookOptions<StartBallotRunMutation, StartBallotRunMutationVariables>) {
+        return Apollo.useMutation<StartBallotRunMutation, StartBallotRunMutationVariables>(StartBallotRunDocument, baseOptions);
+      }
+export type StartBallotRunMutationHookResult = ReturnType<typeof useStartBallotRunMutation>;
+export type StartBallotRunMutationResult = Apollo.MutationResult<StartBallotRunMutation>;
+export type StartBallotRunMutationOptions = Apollo.BaseMutationOptions<StartBallotRunMutation, StartBallotRunMutationVariables>;
+export const EndBallotRunDocument = gql`
+    mutation endBallotRun($ballotRunId: String!) {
+  endBallotRun(ballotRunId: $ballotRunId) {
+    ...BallotRunFields
+  }
+}
+    ${BallotRunFieldsFragmentDoc}`;
+export type EndBallotRunMutationFn = Apollo.MutationFunction<EndBallotRunMutation, EndBallotRunMutationVariables>;
+
+/**
+ * __useEndBallotRunMutation__
+ *
+ * To run a mutation, you first call `useEndBallotRunMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useEndBallotRunMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [endBallotRunMutation, { data, loading, error }] = useEndBallotRunMutation({
+ *   variables: {
+ *      ballotRunId: // value for 'ballotRunId'
+ *   },
+ * });
+ */
+export function useEndBallotRunMutation(baseOptions?: Apollo.MutationHookOptions<EndBallotRunMutation, EndBallotRunMutationVariables>) {
+        return Apollo.useMutation<EndBallotRunMutation, EndBallotRunMutationVariables>(EndBallotRunDocument, baseOptions);
+      }
+export type EndBallotRunMutationHookResult = ReturnType<typeof useEndBallotRunMutation>;
+export type EndBallotRunMutationResult = Apollo.MutationResult<EndBallotRunMutation>;
+export type EndBallotRunMutationOptions = Apollo.BaseMutationOptions<EndBallotRunMutation, EndBallotRunMutationVariables>;
+export const VoteDocument = gql`
+    mutation vote($ballotId: String!, $vote: Int!) {
+  vote(ballotId: $ballotId, vote: $vote) {
+    verify
+    ballot {
+      id
+      canVote
+      hasVoted
+    }
+  }
+}
+    `;
+export type VoteMutationFn = Apollo.MutationFunction<VoteMutation, VoteMutationVariables>;
+
+/**
+ * __useVoteMutation__
+ *
+ * To run a mutation, you first call `useVoteMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useVoteMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [voteMutation, { data, loading, error }] = useVoteMutation({
+ *   variables: {
+ *      ballotId: // value for 'ballotId'
+ *      vote: // value for 'vote'
+ *   },
+ * });
+ */
+export function useVoteMutation(baseOptions?: Apollo.MutationHookOptions<VoteMutation, VoteMutationVariables>) {
+        return Apollo.useMutation<VoteMutation, VoteMutationVariables>(VoteDocument, baseOptions);
+      }
+export type VoteMutationHookResult = ReturnType<typeof useVoteMutation>;
+export type VoteMutationResult = Apollo.MutationResult<VoteMutation>;
+export type VoteMutationOptions = Apollo.BaseMutationOptions<VoteMutation, VoteMutationVariables>;
+export const VoteCodeDocument = gql`
+    mutation voteCode($code: String!, $ballotRunId: String!, $vote: Int!) {
+  voteCode(code: $code, ballotRunId: $ballotRunId, vote: $vote) {
+    success
+    error
+    message
+  }
+}
+    `;
+export type VoteCodeMutationFn = Apollo.MutationFunction<VoteCodeMutation, VoteCodeMutationVariables>;
+
+/**
+ * __useVoteCodeMutation__
+ *
+ * To run a mutation, you first call `useVoteCodeMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useVoteCodeMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [voteCodeMutation, { data, loading, error }] = useVoteCodeMutation({
+ *   variables: {
+ *      code: // value for 'code'
+ *      ballotRunId: // value for 'ballotRunId'
+ *      vote: // value for 'vote'
+ *   },
+ * });
+ */
+export function useVoteCodeMutation(baseOptions?: Apollo.MutationHookOptions<VoteCodeMutation, VoteCodeMutationVariables>) {
+        return Apollo.useMutation<VoteCodeMutation, VoteCodeMutationVariables>(VoteCodeDocument, baseOptions);
+      }
+export type VoteCodeMutationHookResult = ReturnType<typeof useVoteCodeMutation>;
+export type VoteCodeMutationResult = Apollo.MutationResult<VoteCodeMutation>;
+export type VoteCodeMutationOptions = Apollo.BaseMutationOptions<VoteCodeMutation, VoteCodeMutationVariables>;
 export const MeDocument = gql`
     query me {
   me {
@@ -5179,6 +5552,72 @@ export function useTeamTeacherLazyQuery(baseOptions?: Apollo.LazyQueryHookOption
 export type TeamTeacherQueryHookResult = ReturnType<typeof useTeamTeacherQuery>;
 export type TeamTeacherLazyQueryHookResult = ReturnType<typeof useTeamTeacherLazyQuery>;
 export type TeamTeacherQueryResult = Apollo.QueryResult<TeamTeacherQuery, TeamTeacherQueryVariables>;
+export const TeamByInviteDocument = gql`
+    query teamByInvite($invite: String!) {
+  team(where: {invite: $invite}) {
+    ...TeamUserFields
+  }
+}
+    ${TeamUserFieldsFragmentDoc}`;
+
+/**
+ * __useTeamByInviteQuery__
+ *
+ * To run a query within a React component, call `useTeamByInviteQuery` and pass it any options that fit your needs.
+ * When your component renders, `useTeamByInviteQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useTeamByInviteQuery({
+ *   variables: {
+ *      invite: // value for 'invite'
+ *   },
+ * });
+ */
+export function useTeamByInviteQuery(baseOptions?: Apollo.QueryHookOptions<TeamByInviteQuery, TeamByInviteQueryVariables>) {
+        return Apollo.useQuery<TeamByInviteQuery, TeamByInviteQueryVariables>(TeamByInviteDocument, baseOptions);
+      }
+export function useTeamByInviteLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<TeamByInviteQuery, TeamByInviteQueryVariables>) {
+          return Apollo.useLazyQuery<TeamByInviteQuery, TeamByInviteQueryVariables>(TeamByInviteDocument, baseOptions);
+        }
+export type TeamByInviteQueryHookResult = ReturnType<typeof useTeamByInviteQuery>;
+export type TeamByInviteLazyQueryHookResult = ReturnType<typeof useTeamByInviteLazyQuery>;
+export type TeamByInviteQueryResult = Apollo.QueryResult<TeamByInviteQuery, TeamByInviteQueryVariables>;
+export const TeamByCodeDocument = gql`
+    query teamByCode($code: String!) {
+  team(where: {code: $code}) {
+    ...TeamAnonFields
+  }
+}
+    ${TeamAnonFieldsFragmentDoc}`;
+
+/**
+ * __useTeamByCodeQuery__
+ *
+ * To run a query within a React component, call `useTeamByCodeQuery` and pass it any options that fit your needs.
+ * When your component renders, `useTeamByCodeQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useTeamByCodeQuery({
+ *   variables: {
+ *      code: // value for 'code'
+ *   },
+ * });
+ */
+export function useTeamByCodeQuery(baseOptions?: Apollo.QueryHookOptions<TeamByCodeQuery, TeamByCodeQueryVariables>) {
+        return Apollo.useQuery<TeamByCodeQuery, TeamByCodeQueryVariables>(TeamByCodeDocument, baseOptions);
+      }
+export function useTeamByCodeLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<TeamByCodeQuery, TeamByCodeQueryVariables>) {
+          return Apollo.useLazyQuery<TeamByCodeQuery, TeamByCodeQueryVariables>(TeamByCodeDocument, baseOptions);
+        }
+export type TeamByCodeQueryHookResult = ReturnType<typeof useTeamByCodeQuery>;
+export type TeamByCodeLazyQueryHookResult = ReturnType<typeof useTeamByCodeLazyQuery>;
+export type TeamByCodeQueryResult = Apollo.QueryResult<TeamByCodeQuery, TeamByCodeQueryVariables>;
 export const CreateOneTeamDocument = gql`
     mutation createOneTeam($name: String!, $school: String!, $teacher: String!) {
   createOneTeam(data: {name: $name, school: {connect: {id: $school}}, teacher: {connect: {id: $teacher}}}) {
@@ -5255,77 +5694,6 @@ export function useUsersLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<User
 export type UsersQueryHookResult = ReturnType<typeof useUsersQuery>;
 export type UsersLazyQueryHookResult = ReturnType<typeof useUsersLazyQuery>;
 export type UsersQueryResult = Apollo.QueryResult<UsersQuery, UsersQueryVariables>;
-export const VoteDocument = gql`
-    mutation vote($ballotId: String!, $vote: Int!) {
-  vote(ballotId: $ballotId, vote: $vote) {
-    verify
-    ballot {
-      id
-      canVote
-      hasVoted
-    }
-  }
-}
-    `;
-export type VoteMutationFn = Apollo.MutationFunction<VoteMutation, VoteMutationVariables>;
-
-/**
- * __useVoteMutation__
- *
- * To run a mutation, you first call `useVoteMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useVoteMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [voteMutation, { data, loading, error }] = useVoteMutation({
- *   variables: {
- *      ballotId: // value for 'ballotId'
- *      vote: // value for 'vote'
- *   },
- * });
- */
-export function useVoteMutation(baseOptions?: Apollo.MutationHookOptions<VoteMutation, VoteMutationVariables>) {
-        return Apollo.useMutation<VoteMutation, VoteMutationVariables>(VoteDocument, baseOptions);
-      }
-export type VoteMutationHookResult = ReturnType<typeof useVoteMutation>;
-export type VoteMutationResult = Apollo.MutationResult<VoteMutation>;
-export type VoteMutationOptions = Apollo.BaseMutationOptions<VoteMutation, VoteMutationVariables>;
-export const TeamByInviteDocument = gql`
-    query teamByInvite($invite: String!) {
-  team(where: {invite: $invite}) {
-    ...TeamUserFields
-  }
-}
-    ${TeamUserFieldsFragmentDoc}`;
-
-/**
- * __useTeamByInviteQuery__
- *
- * To run a query within a React component, call `useTeamByInviteQuery` and pass it any options that fit your needs.
- * When your component renders, `useTeamByInviteQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useTeamByInviteQuery({
- *   variables: {
- *      invite: // value for 'invite'
- *   },
- * });
- */
-export function useTeamByInviteQuery(baseOptions?: Apollo.QueryHookOptions<TeamByInviteQuery, TeamByInviteQueryVariables>) {
-        return Apollo.useQuery<TeamByInviteQuery, TeamByInviteQueryVariables>(TeamByInviteDocument, baseOptions);
-      }
-export function useTeamByInviteLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<TeamByInviteQuery, TeamByInviteQueryVariables>) {
-          return Apollo.useLazyQuery<TeamByInviteQuery, TeamByInviteQueryVariables>(TeamByInviteDocument, baseOptions);
-        }
-export type TeamByInviteQueryHookResult = ReturnType<typeof useTeamByInviteQuery>;
-export type TeamByInviteLazyQueryHookResult = ReturnType<typeof useTeamByInviteLazyQuery>;
-export type TeamByInviteQueryResult = Apollo.QueryResult<TeamByInviteQuery, TeamByInviteQueryVariables>;
 export const CreateInvitedUserDocument = gql`
     mutation createInvitedUser($invite: String!, $name: String, $lastname: String, $email: String!, $password: String) {
   createInvitedUser(invite: $invite, name: $name, lastname: $lastname, email: $email, password: $password) {

@@ -9,19 +9,33 @@ import {
 import { formatFromTo } from "../util/date";
 import { Grid } from "./Form";
 
-export const fragments = {
-  BallotFields: gql`
-    fragment BallotFields on Ballot {
-      id
-      title
-      description
-      body
-      start
-      end
-      scope
-      canton
+const BallotFields = gql`
+  fragment BallotFields on Ballot {
+    id
+    title
+    description
+    body
+    start
+    end
+    scope
+    canton
+  }
+`;
+const BallotRunFields = gql`
+  fragment BallotRunFields on BallotRun {
+    id
+    start
+    end
+    ballot {
+      ...BallotFields
     }
-  `,
+  }
+  ${BallotFields}
+`;
+
+export const fragments = {
+  BallotFields,
+  BallotRunFields,
 };
 
 export const GET_BALLOTS = gql`
@@ -44,6 +58,71 @@ export const GET_BALLOT = gql`
   ${fragments.BallotFields}
 `;
 
+export const GET_BALLOT_RUNS = gql`
+  query getBallotRuns($teamId: String!) {
+    getBallotRuns(teamId: $teamId) {
+      ...BallotRunFields
+    }
+  }
+  ${fragments.BallotFields}
+`;
+
+export const ADD_BALLOT_RUN = gql`
+  mutation addBallotRun($ballotId: String!, $teamId: String!) {
+    addBallotRun(ballotId: $ballotId, teamId: $teamId) {
+      ...BallotRunFields
+    }
+  }
+`;
+
+export const REMOVE_BALLOT_RUN = gql`
+  mutation removeBallotRun($ballotRunId: String!) {
+    removeBallotRun(ballotRunId: $ballotRunId) {
+      success
+      error
+      message
+    }
+  }
+`;
+
+export const START_BALLOT_RUN = gql`
+  mutation startBallotRun($ballotRunId: String!) {
+    startBallotRun(ballotRunId: $ballotRunId) {
+      ...BallotRunFields
+    }
+  }
+`;
+
+export const END_BALLOT_RUN = gql`
+  mutation endBallotRun($ballotRunId: String!) {
+    endBallotRun(ballotRunId: $ballotRunId) {
+      ...BallotRunFields
+    }
+  }
+`;
+
+export const VOTE = gql`
+  mutation vote($ballotId: String!, $vote: Int!) {
+    vote(ballotId: $ballotId, vote: $vote) {
+      verify
+      ballot {
+        id
+        canVote
+        hasVoted
+      }
+    }
+  }
+`;
+
+export const VOTE_CODE = gql`
+  mutation voteCode($code: String!, $ballotRunId: String!, $vote: Int!) {
+    voteCode(code: $code, ballotRunId: $ballotRunId, vote: $vote) {
+      success
+      error
+      message
+    }
+  }
+`;
 // TODO: have to redefine enum here, otherwise hiting this issue
 // https://github.com/prisma/prisma/issues/3252
 export enum BallotScope {
@@ -76,31 +155,43 @@ export const Ballots: React.FC<BallotsProps> = ({ where, onClick }) => {
   return (
     <>
       {ballotsQuery.data.ballots.map((ballot) => (
-        <Fragment key={ballot.id}>
-          <A
-            fontSize={3}
-            sx={{ fontWeight: "bold" }}
-            onClick={() => onClick(ballot)}
-          >
-            {ballot.title}
-          </A>
-          <Text fontSize={2}>{ballot.description}</Text>
-          <Grid mt={2} mb={4} columns={[0, 0, "2fr 1fr"]}>
-            Zeit: {formatFromTo(ballot.start, ballot.end)}
-            <Button
-              onClick={() => onClick(ballot)}
-              variant={
-                getBallotStatus(ballot) === BallotStatus.Started
-                  ? "primary"
-                  : "muted"
-              }
-            >
-              Zur Abstimmung
-            </Button>
-          </Grid>
-        </Fragment>
+        <Ballot
+          key={ballot.id}
+          ballot={ballot}
+          buttonText="zur Abstimmung"
+          onDetail={onClick}
+          onButton={onClick}
+        />
       ))}
     </>
+  );
+};
+
+export const Ballot: React.FC<{
+  ballot: BallotFieldsFragment;
+  buttonText: string;
+  onButton: (ballot: BallotFieldsFragment) => void;
+  onDetail: (ballot: BallotFieldsFragment) => void;
+}> = ({ ballot, buttonText, onButton, onDetail }) => {
+  return (
+    <div className="ballot">
+      <A
+        fontSize={3}
+        sx={{ fontWeight: "bold" }}
+        onClick={() => onDetail(ballot)}
+      >
+        {ballot.title}
+      </A>
+      <Text fontSize={2}>{ballot.description}</Text>
+      <Grid mt={2} mb={4} columns={[0, 0, "2fr 1fr"]}>
+        Zeit: {formatFromTo(ballot.start, ballot.end)}
+        {buttonText && (
+          <Button onClick={() => onButton(ballot)} variant="primary">
+            {buttonText}
+          </Button>
+        )}
+      </Grid>
+    </div>
   );
 };
 

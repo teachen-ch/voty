@@ -44,6 +44,7 @@ schema.objectType({
     t.model.id();
     t.model.name();
     t.model.invite();
+    t.model.code();
     t.model.domain();
     t.model.school();
     t.model.teacher();
@@ -99,8 +100,10 @@ schema.objectType({
     t.model.end();
     t.model.scope();
     t.model.canton();
-    t.model.school();
-    t.model.creator();
+    // t.model.school();
+    // t.model.creator();
+    // t.model.createdAt();
+    // t.model.updatedAt();
 
     t.boolean("canVote", {
       resolve: resolvers.ballots.canVote,
@@ -108,8 +111,6 @@ schema.objectType({
     t.boolean("hasVoted", {
       resolve: resolvers.ballots.hasVoted,
     });
-    t.model.createdAt();
-    t.model.updatedAt();
   },
 });
 
@@ -144,6 +145,15 @@ schema.objectType({
   },
 });
 
+schema.objectType({
+  name: "Response",
+  definition(t) {
+    t.boolean("success");
+    t.boolean("error");
+    t.string("message");
+  },
+});
+
 schema.queryType({
   definition(t) {
     t.crud.school();
@@ -161,6 +171,15 @@ schema.queryType({
     t.crud.ballots({
       ordering: true,
       filtering: true,
+    });
+
+    t.field("getBallotRuns", {
+      type: "BallotRun",
+      list: true,
+      args: {
+        teamId: stringArg({ required: true }),
+      },
+      resolve: resolvers.ballots.getBallotRuns,
     });
   },
 });
@@ -187,9 +206,9 @@ schema.mutationType({
     });
 
     t.field("voteCode", {
-      type: "Vote",
+      type: "Response",
       args: {
-        ballotId: stringArg({ required: true }),
+        ballotRunId: stringArg({ required: true }),
         vote: intArg({ required: true }),
         code: stringArg({ required: true }),
       },
@@ -215,7 +234,7 @@ schema.mutationType({
     });
 
     t.field("removeBallotRun", {
-      type: "BallotRun",
+      type: "Response",
       args: {
         ballotRunId: stringArg({ required: true }),
       },
@@ -236,15 +255,6 @@ schema.mutationType({
         ballotRunId: stringArg({ required: true }),
       },
       resolve: resolvers.ballots.endBallotRun,
-    });
-
-    t.field("getBallotRuns", {
-      type: "BallotRun",
-      list: true,
-      args: {
-        teamId: stringArg({ required: true }),
-      },
-      resolve: resolvers.ballots.getBallotRuns,
     });
   },
 });

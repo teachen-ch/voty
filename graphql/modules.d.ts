@@ -3,8 +3,16 @@ declare module '*/Ballots.tsx' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
   export const BallotFields: DocumentNode;
+export const BallotRunFields: DocumentNode;
 export const ballots: DocumentNode;
 export const ballot: DocumentNode;
+export const getBallotRuns: DocumentNode;
+export const addBallotRun: DocumentNode;
+export const removeBallotRun: DocumentNode;
+export const startBallotRun: DocumentNode;
+export const endBallotRun: DocumentNode;
+export const vote: DocumentNode;
+export const voteCode: DocumentNode;
 
   export default defaultDocument;
 }
@@ -36,11 +44,14 @@ export const NewSchool: DocumentNode;
 declare module '*/Teams.tsx' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
-  export const TeamUserFields: DocumentNode;
+  export const TeamAnonFields: DocumentNode;
+export const TeamUserFields: DocumentNode;
 export const TeamTeacherFields: DocumentNode;
 export const teams: DocumentNode;
 export const teamUser: DocumentNode;
 export const teamTeacher: DocumentNode;
+export const teamByInvite: DocumentNode;
+export const teamByCode: DocumentNode;
 export const createOneTeam: DocumentNode;
 
   export default defaultDocument;
@@ -56,20 +67,10 @@ declare module '*/Users.tsx' {
 }
     
 
-declare module '*/[id].tsx' {
-  import { DocumentNode } from 'graphql';
-  const defaultDocument: DocumentNode;
-  export const vote: DocumentNode;
-
-  export default defaultDocument;
-}
-    
-
 declare module '*/[invite].tsx' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
-  export const teamByInvite: DocumentNode;
-export const createInvitedUser: DocumentNode;
+  export const createInvitedUser: DocumentNode;
 export const acceptInvite: DocumentNode;
 
   export default defaultDocument;

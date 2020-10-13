@@ -74,7 +74,7 @@ const isOwn = (field: string) =>
     }
   );
 
-const canViewBallot = rule({ cache: "strict" })(
+export const canViewBallot = rule({ cache: "strict" })(
   async (parent: Ballot, args, ctx: NexusContext) => {
     if (ctx.user?.role === Role.Admin) return true;
     return await ballots.viewPermission({
@@ -97,6 +97,7 @@ export const permissions = shield({
       teams: isUser,
       ballot: allow,
       ballots: allow,
+      getBallotRuns: allow,
     },
     Mutation: {
       login: allow,
@@ -113,7 +114,12 @@ export const permissions = shield({
       updateUser: isAdmin, // this is dangerous! role, verification, team, etc.
       setSchool: isUser,
       vote: isUser,
+      voteCode: allow,
       inviteStudents: isTeacher,
+      addBallotRun: isTeacher,
+      removeBallotRun: isTeacher,
+      startBallotRun: isTeacher,
+      endBallotRun: isTeacher,
     },
     User: {
       id: isUser,
@@ -148,9 +154,12 @@ export const permissions = shield({
       name: allow,
       school: allow,
       invite: or(isOwn("teacherId"), isAdmin),
+      code: or(isOwn("teacherId"), isAdmin),
       "*": isUser,
     },
-    Ballot: canViewBallot,
+    Response: allow,
+    Ballot: allow, //canViewBallot : if we want to protect class/school Ballots
+    BallotRun: allow,
     ResponseLogin: allow,
     Vote: isUser,
   },

@@ -14,16 +14,6 @@ import {
   useAcceptInviteMutation,
   TeamUserFieldsFragment,
 } from "graphql/types";
-import { fragments } from "components/Teams";
-
-export const GET_INVITE_TEAM = gql`
-  query teamByInvite($invite: String!) {
-    team(where: { invite: $invite }) {
-      ...TeamUserFields
-    }
-  }
-  ${fragments.TeamUserFields}
-`;
 
 export const CREATE_INVITED_USER = gql`
   mutation createInvitedUser(

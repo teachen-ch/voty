@@ -12,8 +12,8 @@ import {
 import { Page } from "./Page";
 import { Users } from "./Users";
 
-const TeamUserFields = gql`
-  fragment TeamUserFields on Team {
+const TeamAnonFields = gql`
+  fragment TeamAnonFields on Team {
     id
     name
     school {
@@ -21,18 +21,26 @@ const TeamUserFields = gql`
       name
       city
     }
+  }
+`;
+
+const TeamUserFields = gql`
+  fragment TeamUserFields on Team {
+    ...TeamAnonFields
     members {
       id
       name
       shortname
     }
   }
+  ${TeamAnonFields}
 `;
 
 const TeamTeacherFields = gql`
   fragment TeamTeacherFields on Team {
     ...TeamUserFields
     invite
+    code
     members {
       email
       emailVerified
@@ -41,7 +49,7 @@ const TeamTeacherFields = gql`
   ${TeamUserFields}
 `;
 
-export const fragments = { TeamUserFields, TeamTeacherFields };
+export const fragments = { TeamUserFields, TeamTeacherFields, TeamAnonFields };
 
 export const GET_TEAMS = gql`
   query teams($where: TeamWhereInput) {
@@ -68,6 +76,24 @@ export const GET_TEAM_TEACHER = gql`
     }
   }
   ${fragments.TeamTeacherFields}
+`;
+
+export const GET_INVITE_TEAM = gql`
+  query teamByInvite($invite: String!) {
+    team(where: { invite: $invite }) {
+      ...TeamUserFields
+    }
+  }
+  ${fragments.TeamUserFields}
+`;
+
+export const GET_CODE_TEAM = gql`
+  query teamByCode($code: String!) {
+    team(where: { code: $code }) {
+      ...TeamAnonFields
+    }
+  }
+  ${fragments.TeamAnonFields}
 `;
 
 type TeamsProps = {

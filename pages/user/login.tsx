@@ -309,13 +309,7 @@ function CheckToken({ token, purpose }: { token: string; purpose: string }) {
   return <Text>Überprüfen</Text>;
 }
 
-function RequestReset({
-  email,
-  onCancel,
-}: {
-  email: string;
-  onCancel: () => void;
-}) {
+function RequestReset({ onCancel }: { email: string; onCancel: () => void }) {
   const [mailSent, setMailSent] = useState(false);
   const [error, setError] = useState("");
   const [doRequestReset] = useEmailVerificationMutation({

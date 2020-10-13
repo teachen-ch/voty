@@ -1,7 +1,7 @@
 import { Role, Ballot, BallotScope, User, PrismaClient } from "@prisma/client";
 import { randomBytes } from "crypto";
 import { FieldResolver } from "nexus/components/schema";
-import { setCookie, getCookie } from "util/cookies";
+import { setCookie, getCookie } from "../../util/cookies";
 import { NextApiRequest, NextApiResponse } from "next";
 
 export const canVote: FieldResolver<"Ballot", "canVote"> = async (
@@ -77,23 +77,21 @@ export const voteCode: FieldResolver<"Mutation", "voteCode"> = async (
   args,
   ctx
 ) => {
-  const { ballotId, vote, code } = args;
-  const ballot = await ctx.db.ballot.findOne({ where: { id: ballotId } });
-  const team = await ctx.db.team.findOne({
-    where: { code },
-    include: { school: true },
+  const { ballotRunId, vote, code } = args;
+  const ballotRun = await ctx.db.ballotRun.findOne({
+    where: { id: ballotRunId },
+    include: { team: { include: { school: true } }, ballot: true },
   });
-  if (!team) throw new Error("ERR_CODE_NOT_FOUND");
-  if (!ballot) throw new Error("ERR_BALLOT_NOT_FOUND");
+  if (!ballotRun) throw new Error("ERR_BALLOTRUN_NOT_FOUND");
 
-  const exists = await ctx.db.ballotRun.findMany({
-    where: { team: { id: team.id }, ballot: { id: ballot.id } },
-  });
-  if (!exists || !exists.length) throw new Error("ERR_BALLOT_CODE_NOT_FOUND");
+  const ballot = ballotRun.ballot;
+  const team = ballotRun?.team;
+  if (team.code !== code) throw new Error("ERR_BALLOTCODE_WRONG");
 
   const voted = getCookie((ctx.req as unknown) as NextApiRequest, "voty", {});
+  console.log("Cookie Before: ", voted);
   if (typeof voted !== "object") throw new Error("ERR_STRANGE_COOKIE");
-  if (ballotId in voted) {
+  if (ballotRunId in voted) {
     throw new Error("ERR_ALREADY_VOTED");
   }
 
@@ -109,13 +107,15 @@ export const voteCode: FieldResolver<"Mutation", "voteCode"> = async (
       school: { connect: { id: team.school.id } },
       team: { connect: { id: team.id } },
     },
-    include: { ballot: true },
   });
-  if (!result) throw new Error("ERR_VOTE_ERROR");
+  if (!result) throw new Error("ERR_VOTECODE_FAILED");
 
-  voted[ballotId] = Date.now();
-  setCookie((ctx.req as unknown) as NextApiResponse, "voty", voted);
-  return result;
+  voted[ballotRunId] = Date.now();
+  const exp = 10 ** 11; // sometime in roughly 3.17 years...
+  setCookie((ctx.res as unknown) as NextApiResponse, "voty", voted, {
+    maxAge: exp,
+  });
+  return { success: true, message: "OK_VOTED" };
 };
 
 export const addBallotRun: FieldResolver<"Mutation", "addBallotRun"> = async (
@@ -131,10 +131,17 @@ export const addBallotRun: FieldResolver<"Mutation", "addBallotRun"> = async (
   if (!ballot) throw new Error("ERR_BALLOT_NOT_FOUND");
   if (!team) throw new Error("ERR_TEAM_NOT_FOUND");
 
-  const ballotRun = await ctx.db.ballotRun.create({
-    data: {
+  const ballotRun = await ctx.db.ballotRun.upsert({
+    create: {
       ballot: { connect: { id: ballotId } },
       team: { connect: { id: teamId } },
+    },
+    update: {
+      ballot: { connect: { id: ballotId } },
+      team: { connect: { id: teamId } },
+    },
+    where: {
+      ballotId_teamId: { ballotId, teamId },
     },
   });
   if (!ballotRun) throw new Error("ERR_CANNOT_CREATE_BALLOTRUN");
@@ -152,10 +159,13 @@ export const removeBallotRun: FieldResolver<
   });
   if (!ballotRun) throw new Error("ERR_BALLOTRUN_NOT_FOUND");
 
-  const success = await ctx.db.ballotRun.delete({ where: { id: ballotRunId } });
-  if (!success) throw new Error("ERR_BALLOTRUN_CANNOT_REMOVE");
+  const success = await ctx.db.ballotRun.delete({
+    where: { id: ballotRunId },
+    include: { ballot: true },
+  });
 
-  return ballotRun;
+  if (!success) throw new Error("ERR_BALLOTRUN_CANNOT_REMOVE");
+  return { success: true };
 };
 
 export const startBallotRun: FieldResolver<
@@ -189,7 +199,7 @@ export const endBallotRun: FieldResolver<"Mutation", "endBallotRun"> = async (
   return ballotRun;
 };
 
-export const getBallotRuns: FieldResolver<"Mutation", "getBallotRuns"> = async (
+export const getBallotRuns: FieldResolver<"Query", "getBallotRuns"> = async (
   _root,
   args,
   ctx

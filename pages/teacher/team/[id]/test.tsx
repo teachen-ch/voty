@@ -1,10 +1,21 @@
 import { LoggedInPage } from "components/Page";
-import { Heading } from "rebass";
-import { Ballots, BallotScope } from "components/Ballots";
-import { useTeamTeacherQuery, BallotFieldsFragment } from "graphql/types";
+import { Heading, Text, Button } from "rebass";
+import Link from "next/link";
+import { Ballot } from "components/Ballots";
+import {
+  useBallotsQuery,
+  BallotScope,
+  TeamTeacherFieldsFragment,
+  useTeamTeacherQuery,
+  BallotFieldsFragment,
+  useGetBallotRunsQuery,
+  useAddBallotRunMutation,
+  useRemoveBallotRunMutation,
+} from "graphql/types";
 import { useRouter } from "next/router";
 import { TeacherTeamNavigation } from "./admin";
 import { ReactElement } from "react";
+import { find } from "lodash";
 
 export default function TeacherTest(): ReactElement {
   const router = useRouter();
@@ -14,10 +25,28 @@ export default function TeacherTest(): ReactElement {
     skip: !id,
   });
   const team = teamQuery.data?.team;
+  const [doAddBallotRun] = useAddBallotRunMutation();
+  const [doRemoveBallotRun] = useRemoveBallotRunMutation({
+    /* onError: (err) => {
+      console.log("some error...", err);
+    }, */
+  });
 
-  function selectBallot(ballot: BallotFieldsFragment) {
-    void router.push("/ballots/[id]", `/ballots/${ballot.id}`);
-  }
+  const ballotRunsQuery = useGetBallotRunsQuery({
+    variables: { teamId: String(team?.id) },
+    skip: !team,
+  });
+  const ballotRuns = ballotRunsQuery.data?.getBallotRuns;
+
+  const ballotsQuery = useBallotsQuery({
+    variables: { where: { scope: BallotScope.National } },
+  });
+
+  const ballots = ballotsQuery.data?.ballots;
+  const unselectedBallots = ballots
+    ? ballots.filter(({ id }) => !find(ballotRuns, { ballot: { id } }))
+    : [];
+
   if (!team) {
     return (
       <LoggedInPage heading="Demokratie testen">
@@ -26,11 +55,71 @@ export default function TeacherTest(): ReactElement {
     );
   }
 
+  function detailBallot(ballot: BallotFieldsFragment) {
+    void router.push("/ballots/[id]", `/ballots/${ballot.id}`);
+  }
+
+  async function addBallot(ballotId: string, teamId: string) {
+    await doAddBallotRun({
+      variables: { ballotId, teamId },
+      refetchQueries: ["getBallotRuns"],
+    });
+    window.scrollTo(0, 0);
+  }
+
+  async function removeBallot(ballotRunId: string) {
+    await doRemoveBallotRun({
+      variables: { ballotRunId },
+      refetchQueries: ["getBallotRuns"],
+    });
+    window.scrollTo(0, 0);
+  }
+
   return (
     <LoggedInPage heading="Demokratie testen">
       <TeacherTeamNavigation team={team} />
-      <Heading as="h2">Demokratie Testen: Nationale Abstimmungen</Heading>
-      <Ballots where={{ scope: BallotScope.National }} onClick={selectBallot} />
+      <Heading as="h2">Diese Abstimmungen wurden ausgewählt:</Heading>
+      <div id="selectedBallots">
+        {ballotRuns?.length
+          ? ballotRuns.map((run) => (
+              <Ballot
+                key={run.id}
+                ballot={run.ballot}
+                buttonText="Entfernen"
+                onButton={() => removeBallot(run.id)}
+                onDetail={detailBallot}
+              />
+            ))
+          : "Noch keine Abstimmungen ausgewählt."}
+      </div>
+      <PanelCode team={team} hasRuns={ballotRuns?.length ? true : false} />
+      <Heading as="h2">Aktuelle Abstimmungen zur Auswahl:</Heading>
+      <div id="unselectedBallots">
+        {unselectedBallots.map((ballot) => (
+          <Ballot
+            key={ballot.id}
+            ballot={ballot}
+            buttonText="Auswählen"
+            onButton={() => addBallot(ballot.id, team.id)}
+            onDetail={detailBallot}
+          />
+        ))}
+      </div>
     </LoggedInPage>
   );
 }
+
+const PanelCode: React.FC<{
+  team: TeamTeacherFieldsFragment;
+  hasRuns: boolean;
+}> = ({ team, hasRuns }) => {
+  if (!team?.code || !hasRuns) return null;
+  return (
+    <Text id="livepanel">
+      Seite für Live-Abstimmungen:{" "}
+      <Link href="/panel/[code]/present" as={`/panel/${team.code}/present`}>
+        <Button variant="secondary">Code: {team.code}</Button>
+      </Link>
+    </Text>
+  );
+};

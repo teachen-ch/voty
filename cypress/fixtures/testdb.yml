@@ -1,6 +1,6 @@
 # under delete, you can specify which objects to clean up before creation
 delete:
-  - team
+  - ballotRun
   - voted
   - vote
   - ballot
@@ -9,9 +9,9 @@ delete:
   - attachment
   - thread
   - reaction
+  - team
   - user
   - school
-  - ballotRun
 
 # This is a prisma type with a list of objects to create
 user:
@@ -39,6 +39,7 @@ school:
       create:
         - name: Class 1
           invite: abcd1000
+          code: "1999999"
           teacher:
             create:
               name: Teacher-1
@@ -68,6 +69,7 @@ school:
                 emailVerified: !!timestamp "2020-01-01"
         - name: Class 2
           invite: abcd2000
+          code: "2999999"
           teacher:
             create:
               name: Teacher-2
@@ -102,6 +104,7 @@ school:
       create:
         - name: Class 3
           invite: abcd3000
+          code: "3999999"
           teacher:
             create:
               name: Teacher-3
@@ -238,7 +241,7 @@ ballot:
     body: Testabstimmung ohne Inhalt
 
   - title: Abgelaufene Initiative
-    description: Diese Testabstimmung dauert ist bereits beendet
+    description: Diese Testabstimmung ist bereits beendet
     start: !!timestamp "2000-01-01"
     end: !!timestamp "2000-12-31"
     scope: National
