@@ -33,7 +33,7 @@ export default function StudentTest(): ReactElement {
           <Ballot
             key={run.id}
             ballot={run.ballot}
-            buttonText="Abstimmmen"
+            buttonText="Abstimmen"
             onButton={detailBallot}
             onDetail={detailBallot}
           />

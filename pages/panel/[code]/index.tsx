@@ -57,7 +57,7 @@ export default function PanelBallots(): ReactElement {
               <Ballot
                 key={run.id}
                 ballot={run.ballot}
-                buttonText={cookie[run.id] ? "" : "Abstimmmen"}
+                buttonText={cookie[run.id] ? "" : "Abstimmen"}
                 onButton={detailBallot}
                 onDetail={detailBallot}
               />
