@@ -13,6 +13,7 @@ export const startBallotRun: DocumentNode;
 export const endBallotRun: DocumentNode;
 export const vote: DocumentNode;
 export const voteCode: DocumentNode;
+export const getBallotResults: DocumentNode;
 
   export default defaultDocument;
 }

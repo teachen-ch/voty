@@ -457,6 +457,13 @@ input BallotOrderByInput {
   updatedAt: SortOrder
 }
 
+type BallotResults {
+  abs: Int
+  no: Int
+  total: Int
+  yes: Int
+}
+
 type BallotRun {
   ballot: Ballot!
   end: DateTime
@@ -475,11 +482,17 @@ input BallotRunCreateManyWithoutTeamInput {
   create: [BallotRunCreateWithoutTeamInput!]
 }
 
+input BallotRunCreateOneWithoutVoteInput {
+  connect: BallotRunWhereUniqueInput
+  create: BallotRunCreateWithoutVoteInput
+}
+
 input BallotRunCreateWithoutBallotInput {
   end: DateTime
   id: String
   start: DateTime
   team: TeamCreateOneWithoutBallotRunsInput!
+  Vote: VoteCreateManyWithoutBallotRunInput
 }
 
 input BallotRunCreateWithoutTeamInput {
@@ -487,6 +500,15 @@ input BallotRunCreateWithoutTeamInput {
   end: DateTime
   id: String
   start: DateTime
+  Vote: VoteCreateManyWithoutBallotRunInput
+}
+
+input BallotRunCreateWithoutVoteInput {
+  ballot: BallotCreateOneWithoutBallotRunsInput!
+  end: DateTime
+  id: String
+  start: DateTime
+  team: TeamCreateOneWithoutBallotRunsInput!
 }
 
 input BallotRunListRelationFilter {
@@ -541,11 +563,21 @@ input BallotRunUpdateManyWithWhereNestedInput {
   where: BallotRunScalarWhereInput!
 }
 
+input BallotRunUpdateOneWithoutVoteInput {
+  connect: BallotRunWhereUniqueInput
+  create: BallotRunCreateWithoutVoteInput
+  delete: Boolean
+  disconnect: Boolean
+  update: BallotRunUpdateWithoutVoteDataInput
+  upsert: BallotRunUpsertWithoutVoteInput
+}
+
 input BallotRunUpdateWithoutBallotDataInput {
   end: NullableDateTimeFieldUpdateOperationsInput
   id: StringFieldUpdateOperationsInput
   start: NullableDateTimeFieldUpdateOperationsInput
   team: TeamUpdateOneRequiredWithoutBallotRunsInput
+  Vote: VoteUpdateManyWithoutBallotRunInput
 }
 
 input BallotRunUpdateWithoutTeamDataInput {
@@ -553,6 +585,15 @@ input BallotRunUpdateWithoutTeamDataInput {
   end: NullableDateTimeFieldUpdateOperationsInput
   id: StringFieldUpdateOperationsInput
   start: NullableDateTimeFieldUpdateOperationsInput
+  Vote: VoteUpdateManyWithoutBallotRunInput
+}
+
+input BallotRunUpdateWithoutVoteDataInput {
+  ballot: BallotUpdateOneRequiredWithoutBallotRunsInput
+  end: NullableDateTimeFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  start: NullableDateTimeFieldUpdateOperationsInput
+  team: TeamUpdateOneRequiredWithoutBallotRunsInput
 }
 
 input BallotRunUpdateWithWhereUniqueWithoutBallotInput {
@@ -563,6 +604,11 @@ input BallotRunUpdateWithWhereUniqueWithoutBallotInput {
 input BallotRunUpdateWithWhereUniqueWithoutTeamInput {
   data: BallotRunUpdateWithoutTeamDataInput!
   where: BallotRunWhereUniqueInput!
+}
+
+input BallotRunUpsertWithoutVoteInput {
+  create: BallotRunCreateWithoutVoteInput!
+  update: BallotRunUpdateWithoutVoteDataInput!
 }
 
 input BallotRunUpsertWithWhereUniqueWithoutBallotInput {
@@ -588,6 +634,7 @@ input BallotRunWhereInput {
   start: DateTimeNullableFilter
   team: TeamWhereInput
   teamId: StringFilter
+  Vote: VoteListRelationFilter
 }
 
 input BallotRunWhereUniqueInput {
@@ -1355,6 +1402,7 @@ input OptionWhereUniqueInput {
 type Query {
   ballot(where: BallotWhereUniqueInput!): Ballot
   ballots(after: BallotWhereUniqueInput, before: BallotWhereUniqueInput, first: Int, last: Int, orderBy: [BallotOrderByInput!], where: BallotWhereInput): [Ballot!]!
+  getBallotResults(ballotId: String!, ballotRunId: String, canton: String, schoolId: String, teamId: String): BallotResults
   getBallotRuns(teamId: String!): [BallotRun!]
   me: User
   school(where: SchoolWhereUniqueInput!): School
@@ -3663,6 +3711,11 @@ input VoteCreateManyWithoutBallotInput {
   create: [VoteCreateWithoutBallotInput!]
 }
 
+input VoteCreateManyWithoutBallotRunInput {
+  connect: [VoteWhereUniqueInput!]
+  create: [VoteCreateWithoutBallotRunInput!]
+}
+
 input VoteCreateManyWithoutSchoolInput {
   connect: [VoteWhereUniqueInput!]
   create: [VoteCreateWithoutSchoolInput!]
@@ -3674,6 +3727,19 @@ input VoteCreateManyWithoutTeamInput {
 }
 
 input VoteCreateWithoutBallotInput {
+  ballotRun: BallotRunCreateOneWithoutVoteInput
+  canton: String
+  id: String
+  school: SchoolCreateOneWithoutVoteInput
+  schooltype: String
+  team: TeamCreateOneWithoutVoteInput
+  verify: String
+  vote: Int!
+  year: Int
+}
+
+input VoteCreateWithoutBallotRunInput {
+  ballot: BallotCreateOneWithoutVotesInput!
   canton: String
   id: String
   school: SchoolCreateOneWithoutVoteInput
@@ -3686,6 +3752,7 @@ input VoteCreateWithoutBallotInput {
 
 input VoteCreateWithoutSchoolInput {
   ballot: BallotCreateOneWithoutVotesInput!
+  ballotRun: BallotRunCreateOneWithoutVoteInput
   canton: String
   id: String
   schooltype: String
@@ -3697,6 +3764,7 @@ input VoteCreateWithoutSchoolInput {
 
 input VoteCreateWithoutTeamInput {
   ballot: BallotCreateOneWithoutVotesInput!
+  ballotRun: BallotRunCreateOneWithoutVoteInput
   canton: String
   id: String
   school: SchoolCreateOneWithoutVoteInput
@@ -3939,6 +4007,7 @@ input VoteListRelationFilter {
 input VoteScalarWhereInput {
   AND: [VoteScalarWhereInput!]
   ballotId: StringFilter
+  ballotRunId: StringNullableFilter
   canton: StringNullableFilter
   id: StringFilter
   NOT: [VoteScalarWhereInput!]
@@ -3972,6 +4041,18 @@ input VoteUpdateManyWithoutBallotInput {
   upsert: [VoteUpsertWithWhereUniqueWithoutBallotInput!]
 }
 
+input VoteUpdateManyWithoutBallotRunInput {
+  connect: [VoteWhereUniqueInput!]
+  create: [VoteCreateWithoutBallotRunInput!]
+  delete: [VoteWhereUniqueInput!]
+  deleteMany: [VoteScalarWhereInput!]
+  disconnect: [VoteWhereUniqueInput!]
+  set: [VoteWhereUniqueInput!]
+  update: [VoteUpdateWithWhereUniqueWithoutBallotRunInput!]
+  updateMany: [VoteUpdateManyWithWhereNestedInput!]
+  upsert: [VoteUpsertWithWhereUniqueWithoutBallotRunInput!]
+}
+
 input VoteUpdateManyWithoutSchoolInput {
   connect: [VoteWhereUniqueInput!]
   create: [VoteCreateWithoutSchoolInput!]
@@ -4002,6 +4083,19 @@ input VoteUpdateManyWithWhereNestedInput {
 }
 
 input VoteUpdateWithoutBallotDataInput {
+  ballotRun: BallotRunUpdateOneWithoutVoteInput
+  canton: NullableStringFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  school: SchoolUpdateOneWithoutVoteInput
+  schooltype: NullableStringFieldUpdateOperationsInput
+  team: TeamUpdateOneWithoutVoteInput
+  verify: NullableStringFieldUpdateOperationsInput
+  vote: IntFieldUpdateOperationsInput
+  year: NullableIntFieldUpdateOperationsInput
+}
+
+input VoteUpdateWithoutBallotRunDataInput {
+  ballot: BallotUpdateOneRequiredWithoutVotesInput
   canton: NullableStringFieldUpdateOperationsInput
   id: StringFieldUpdateOperationsInput
   school: SchoolUpdateOneWithoutVoteInput
@@ -4014,6 +4108,7 @@ input VoteUpdateWithoutBallotDataInput {
 
 input VoteUpdateWithoutSchoolDataInput {
   ballot: BallotUpdateOneRequiredWithoutVotesInput
+  ballotRun: BallotRunUpdateOneWithoutVoteInput
   canton: NullableStringFieldUpdateOperationsInput
   id: StringFieldUpdateOperationsInput
   schooltype: NullableStringFieldUpdateOperationsInput
@@ -4025,6 +4120,7 @@ input VoteUpdateWithoutSchoolDataInput {
 
 input VoteUpdateWithoutTeamDataInput {
   ballot: BallotUpdateOneRequiredWithoutVotesInput
+  ballotRun: BallotRunUpdateOneWithoutVoteInput
   canton: NullableStringFieldUpdateOperationsInput
   id: StringFieldUpdateOperationsInput
   school: SchoolUpdateOneWithoutVoteInput
@@ -4036,6 +4132,11 @@ input VoteUpdateWithoutTeamDataInput {
 
 input VoteUpdateWithWhereUniqueWithoutBallotInput {
   data: VoteUpdateWithoutBallotDataInput!
+  where: VoteWhereUniqueInput!
+}
+
+input VoteUpdateWithWhereUniqueWithoutBallotRunInput {
+  data: VoteUpdateWithoutBallotRunDataInput!
   where: VoteWhereUniqueInput!
 }
 
@@ -4055,6 +4156,12 @@ input VoteUpsertWithWhereUniqueWithoutBallotInput {
   where: VoteWhereUniqueInput!
 }
 
+input VoteUpsertWithWhereUniqueWithoutBallotRunInput {
+  create: VoteCreateWithoutBallotRunInput!
+  update: VoteUpdateWithoutBallotRunDataInput!
+  where: VoteWhereUniqueInput!
+}
+
 input VoteUpsertWithWhereUniqueWithoutSchoolInput {
   create: VoteCreateWithoutSchoolInput!
   update: VoteUpdateWithoutSchoolDataInput!
@@ -4071,6 +4178,8 @@ input VoteWhereInput {
   AND: [VoteWhereInput!]
   ballot: BallotWhereInput
   ballotId: StringFilter
+  ballotRun: BallotRunWhereInput
+  ballotRunId: StringNullableFilter
   canton: StringNullableFilter
   id: StringFilter
   NOT: [VoteWhereInput!]

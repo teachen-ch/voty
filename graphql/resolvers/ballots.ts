@@ -1,4 +1,11 @@
-import { Role, Ballot, BallotScope, User, PrismaClient } from "@prisma/client";
+import {
+  Role,
+  Ballot,
+  BallotScope,
+  User,
+  PrismaClient,
+  VoteWhereInput,
+} from "@prisma/client";
 import { randomBytes } from "crypto";
 import { FieldResolver } from "nexus/components/schema";
 import { setCookie, getCookie } from "../../util/cookies";
@@ -80,16 +87,26 @@ export const voteCode: FieldResolver<"Mutation", "voteCode"> = async (
   const { ballotRunId, vote, code } = args;
   const ballotRun = await ctx.db.ballotRun.findOne({
     where: { id: ballotRunId },
-    include: { team: { include: { school: true } }, ballot: true },
+    include: {
+      team: {
+        include: { school: { select: { id: true, type: true, canton: true } } },
+      },
+    },
   });
   if (!ballotRun) throw new Error("ERR_BALLOTRUN_NOT_FOUND");
 
-  const ballot = ballotRun.ballot;
+  const now = new Date();
+  if (!ballotRun.start || ballotRun.start > now) {
+    throw new Error("ERR_BALLOT_NOT_STARTED");
+  }
+  if (ballotRun.end && ballotRun.end < now) {
+    throw new Error("ERR_BALLOT_ENDED");
+  }
+
   const team = ballotRun?.team;
   if (team.code !== code) throw new Error("ERR_BALLOTCODE_WRONG");
 
   const voted = getCookie((ctx.req as unknown) as NextApiRequest, "voty", {});
-  console.log("Cookie Before: ", voted);
   if (typeof voted !== "object") throw new Error("ERR_STRANGE_COOKIE");
   if (ballotRunId in voted) {
     throw new Error("ERR_ALREADY_VOTED");
@@ -98,7 +115,8 @@ export const voteCode: FieldResolver<"Mutation", "voteCode"> = async (
   const verify = randomBytes(32).toString("hex");
   const result = await ctx.db.vote.create({
     data: {
-      ballot: { connect: { id: ballot.id } },
+      ballot: { connect: { id: ballotRun.ballotId } },
+      ballotRun: { connect: { id: ballotRunId } },
       vote,
       verify,
       year: team.year,
@@ -210,6 +228,56 @@ export const getBallotRuns: FieldResolver<"Query", "getBallotRuns"> = async (
   if (!team) throw new Error("ERR_TEAM_NOT_FOUND");
 
   return await ctx.db.ballotRun.findMany({ where: { teamId } });
+};
+
+/*
+ * Returns number of yes/no/abs/total votes on a ballot, can be filtered on:
+ * - no filter: AUTH: depends on Ballot.scope. Anon for National / Cantonal
+ * - ballotRunId: everyone participating anonymously with a login code. AUTH: team teacher!
+ * - teamId: filter votes by team. AUTH: team teacher or team member
+ * - schoolId: filter. AUTH: school member
+ * - canton: filter by canton. AUTH: anon
+ */
+export const getBallotResults: FieldResolver<
+  "Query",
+  "getBallotResults"
+> = async (_root, args, ctx) => {
+  const { ballotId, ballotRunId, canton, teamId, schoolId } = args;
+  const user = ctx.user;
+  let ballotRun;
+  const where: VoteWhereInput = {};
+
+  if (ballotRunId) {
+    ballotRun = await ctx.db.ballotRun.findOne({
+      where: { id: ballotRunId },
+      include: { team: { select: { teacherId: true } } },
+    });
+    if (!ballotRun) throw new Error("ERR_BALLOTRUN_NOT_FOUND");
+    if (ballotRun.team.teacherId !== user?.id)
+      throw new Error("ERR_NO_PERMISSION");
+  }
+  if (teamId) {
+    where.teamId = teamId;
+  }
+  if (schoolId) {
+    where.schoolId = schoolId;
+  }
+  if (canton) {
+    where.canton = canton;
+  }
+  const id = String(ballotRun ? ballotRun.ballotId : ballotId);
+  const yes = await ctx.db.vote.count({
+    where: { ballotRunId, ballotId: id, vote: 1 },
+  });
+  const no = await ctx.db.vote.count({
+    where: { ballotRunId, ballotId: id, vote: 2 },
+  });
+  const abs = await ctx.db.vote.count({
+    where: { ballotRunId, ballotId: id, vote: 0 },
+  }); // abstentions
+  const total = yes + no + abs;
+
+  return { yes, no, abs, total };
 };
 
 type PermissionArgs = {

@@ -21,11 +21,6 @@ export function setCookie(
   if (options.path === undefined) {
     options.path = "/";
   }
-  console.log(
-    "setting cookie: ",
-    value,
-    serialize(name, String(stringValue), options)
-  );
 
   // @ts-ignore
   // @eslint-disable-next-line

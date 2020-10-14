@@ -31,8 +31,9 @@ export function formatDuration(ts: number, duration: number): string {
   return formatTime(ts) + " – " + formatTime(ts + duration * 60 * 1000);
 }
 
-export function formatFull(ts: number, duration: number): string {
-  return formatDate(ts) + ", " + formatDuration(ts, duration);
+export function formatFull(ts: number): string {
+  const date = isToday(ts) ? "Heute" : formatDate(ts);
+  return `${date}, ${formatTime(ts)}`;
 }
 
 export function formatTime(ts: number): string {
@@ -41,6 +42,10 @@ export function formatTime(ts: number): string {
 
 export function tonight(): number {
   return dayjs().endOf("day").valueOf();
+}
+
+export function isToday(ts: number): boolean {
+  return dayjs().endOf("day").valueOf() == dayjs(ts).endOf("day").valueOf();
 }
 
 /* 

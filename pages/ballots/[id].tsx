@@ -9,7 +9,7 @@ import { ErrorBox } from "components/Form";
 import Info from "components/Info";
 import Link from "next/link";
 import { parseMarkdownInner } from "util/markdown";
-import { BigButton } from "components/BigButton";
+import { BigButton, BigGray } from "components/BigButton";
 
 export default function BallotPage(): ReactElement {
   const router = useRouter();
@@ -70,36 +70,19 @@ const VotyNow: React.FC<{ ballot: BallotQuery["ballot"] }> = ({ ballot }) => {
     );
   }
 
-  if (ballot.hasVoted === true || success) {
-    return (
-      <BigButton color="gray" width="100%">
-        Du hast erfolgreich abgestimmt ✅
-      </BigButton>
-    );
-  }
-
   const now = new Date();
+  if (ballot.hasVoted === true || success) {
+    return <BigGray>Du hast erfolgreich abgestimmt ✅</BigGray>;
+  }
   if (new Date(ballot.start) > now) {
-    return (
-      <BigButton color="gray" width="100%">
-        Abstimmung noch nicht gestartet
-      </BigButton>
-    );
+    return <BigGray>Abstimmung noch nicht gestartet</BigGray>;
   }
   if (new Date(ballot.end) < now) {
-    return (
-      <BigButton color="gray" width="100%">
-        Abstimmung ist beendet
-      </BigButton>
-    );
+    return <BigGray>Abstimmung ist beendet</BigGray>;
   }
 
   if (ballot.canVote === false) {
-    return (
-      <BigButton color="gray" width="100%">
-        Du bist nicht für die Abstimmung berechtigt
-      </BigButton>
-    );
+    return <BigGray>Du bist nicht für die Abstimmung berechtigt</BigGray>;
   }
 
   async function vote(ballotId: string, vote: number) {

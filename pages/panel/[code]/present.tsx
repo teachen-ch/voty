@@ -1,15 +1,21 @@
+import { ReactElement } from "react";
 import { LoggedInPage, ErrorPage, LoadingPage } from "components/Page";
-import { Heading } from "rebass";
+import { Heading, Text, Card, Box, Flex } from "rebass";
 import { Ballot } from "components/Ballots";
 import { useRouter } from "next/router";
-import { ReactElement } from "react";
 import {
-  BallotFieldsFragment,
   useGetBallotRunsQuery,
   useTeamByCodeQuery,
   Role,
+  BallotRunFieldsFragment,
+  useStartBallotRunMutation,
+  useEndBallotRunMutation,
+  useGetBallotResultsQuery,
 } from "graphql/types";
 import { useUser } from "state/user";
+import { Grid } from "theme-ui";
+import { PieChart } from "react-minimal-pie-chart";
+import { LabelRenderFunction } from "react-minimal-pie-chart/types/commonTypes";
 
 export default function PanelBallots(): ReactElement {
   const router = useRouter();
@@ -36,24 +42,157 @@ export default function PanelBallots(): ReactElement {
     );
   }
 
-  function detailBallot(ballot: BallotFieldsFragment) {
-    void router.push("/ballots/[id]", `/ballots/${ballot.id}`);
-  }
-
   return (
-    <LoggedInPage role={Role.Teacher} heading="Abstimmen">
-      <Heading as="h2">Abstimmungen</Heading>
+    <LoggedInPage role={Role.Teacher} heading="Jetzt abstimmen">
       {ballotRuns?.length
-        ? ballotRuns.map((run) => (
-            <Ballot
-              key={run.id}
-              ballot={run.ballot}
-              buttonText="Abstimmmen"
-              onButton={detailBallot}
-              onDetail={detailBallot}
-            />
+        ? ballotRuns.map((ballotRun) => (
+            <BallotRunListing key={ballotRun.id} ballotRun={ballotRun} />
           ))
-        : "Keine Abstimmungen gefunden."}
+        : "Keine Abstimmungen wurden ausgewählt."}
     </LoggedInPage>
   );
 }
+
+const BallotRunListing: React.FC<{ ballotRun: BallotRunFieldsFragment }> = ({
+  ballotRun,
+}) => {
+  const ballotRunId = ballotRun.id;
+  const [doStartRun] = useStartBallotRunMutation({
+    variables: { ballotRunId },
+  });
+  const [doEndRun] = useEndBallotRunMutation({ variables: { ballotRunId } });
+
+  async function startStopBallot() {
+    if (!ballotRun.start) await doStartRun();
+    else if (ballotRun.start && !ballotRun.end) await doEndRun();
+  }
+  return (
+    <Box key={ballotRun.id} mb={5}>
+      <Ballot
+        ballot={ballotRun.ballot}
+        buttonText={
+          ballotRun.start ? (ballotRun.end ? "Beendet" : "Beenden") : "Starten"
+        }
+        buttonColor={
+          ballotRun.start ? (ballotRun.end ? "gray" : "#d90000") : "green"
+        }
+        onButton={startStopBallot}
+        onDetail={startStopBallot}
+      />
+      {true && <BallotRunDetail ballotRun={ballotRun} />}
+    </Box>
+  );
+};
+
+const BallotRunDetail: React.FC<{ ballotRun: BallotRunFieldsFragment }> = ({
+  ballotRun,
+}) => {
+  return (
+    <Card>
+      {ballotRun.start && (
+        <>
+          <Heading as="h2" mt={0} mb={4}>
+            {ballotRun.end ? "Endresultat:" : "Live-Resultat:"}{" "}
+            {ballotRun.ballot.title}
+          </Heading>
+          <Results ballotId={ballotRun.ballot.id} ballotRunId={ballotRun.id} />
+        </>
+      )}
+    </Card>
+  );
+};
+
+const Results: React.FC<{ ballotId: string; ballotRunId: string }> = ({
+  ballotId,
+  ballotRunId,
+}) => {
+  const resultsQuery = useGetBallotResultsQuery({
+    variables: { ballotId, ballotRunId },
+    pollInterval: 5000,
+  });
+
+  const results = resultsQuery.data?.getBallotResults;
+  console.log("POLLING: ", results);
+
+  if (!results) return null;
+  if (!results.total) return <Text>Noch keine Stimmen</Text>;
+
+  const votes = (i: number | null | undefined) =>
+    `${i === 0 ? "–" : i === 1 ? "Eine Stimme" : `${i} Stimmen`}`;
+
+  const data = [
+    { title: "Ja", value: Number(results.yes), color: "green" },
+    { title: "Nein", value: Number(results.no), color: "#d90000" },
+  ];
+  if (results.abs) {
+    data.push({
+      title: "Enthalten",
+      value: Number(results.abs),
+      color: "#aaa",
+    });
+  }
+
+  const pieLabel: LabelRenderFunction = (props) => {
+    const { title, percentage, color, key } = props.dataEntry;
+    const x = 50;
+    const y = results.abs ? 50 : 55;
+    const dx = 0;
+    const dy = title === "Ja" ? -8 : title === "Nein" ? 8 : 20;
+    const fontSize = title === "Enthalten" ? "8px" : "12px";
+    return (
+      <text
+        key={key}
+        dominantBaseline="central"
+        width={50}
+        textAnchor="middle"
+        dx={dx}
+        dy={dy}
+        x={x}
+        y={y}
+        fill={color}
+        style={{ fontSize }}
+      >
+        <tspan>{title}: </tspan>
+        <tspan>{Math.round(percentage)}%</tspan>
+      </text>
+    );
+  };
+
+  return (
+    <div className="results">
+      <Grid columns="1fr 1fr">
+        <Flex justifyItems="center" flex={1} justifySelf="center">
+          <Box
+            height={200}
+            width={200}
+            sx={{ backgroundColor: "white", borderRadius: 100 }}
+          >
+            <PieChart
+              data={data}
+              startAngle={-90}
+              paddingAngle={1}
+              lineWidth={20}
+              animate
+              label={pieLabel}
+              labelPosition={50}
+              style={{
+                fontWeight: "bold",
+                fontSize: "12px",
+              }}
+            />
+          </Box>
+        </Flex>
+        <Grid columns="2fr 3fr" gap={2}>
+          <Text>Ja:</Text>
+          <Text>{votes(results.yes)}</Text>
+          <Text>Nein:</Text>
+          <Text>{votes(results.no)}</Text>
+          <Text>Enthalten:</Text>
+          <Text>{votes(results.abs)}</Text>
+          <Text>Total:</Text>
+          <Text>{results.total} Stimmen</Text>
+        </Grid>
+      </Grid>
+    </div>
+  );
+};

@@ -98,6 +98,7 @@ export const permissions = shield({
       ballot: allow,
       ballots: allow,
       getBallotRuns: allow,
+      getBallotResults: allow,
     },
     Mutation: {
       login: allow,
@@ -157,10 +158,11 @@ export const permissions = shield({
       code: or(isOwn("teacherId"), isAdmin),
       "*": isUser,
     },
-    Response: allow,
     Ballot: allow, //canViewBallot : if we want to protect class/school Ballots
     BallotRun: allow,
+    BallotResults: allow,
     ResponseLogin: allow,
+    Response: allow,
     Vote: isUser,
   },
   options: {

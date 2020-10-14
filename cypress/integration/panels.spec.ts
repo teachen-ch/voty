@@ -15,14 +15,15 @@ describe("Test Panels", () => {
     cy.get("#unselectedBallots .ballot").first().contains("Auswählen").click();
     cy.get("#selectedBallots .ballot").first().contains("Entfernen").click();
     cy.get("#livepanel button").first().click();
+    cy.contains("Jetzt abstimmen");
+    cy.get(".ballot:first button").contains("Starten").click();
   });
 
   // WATCH OUT, this will only work if previous test ist running
   // not good
   it("allows to vode anonymously (once) with a code", () => {
     cy.visit("/panel/1999999");
-    cy.get(".ballot").first().contains("Abstimmen").click();
-    cy.get("button").contains("Ja, ich stimme zu").click();
+    cy.contains("Ja, ich stimme zu").click();
     cy.contains("Du hast erfolgreich abgestimmt");
     cy.reload();
     cy.contains("Du hast erfolgreich abgestimmt");

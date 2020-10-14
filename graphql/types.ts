@@ -476,6 +476,14 @@ export type BallotOrderByInput = {
   updatedAt?: Maybe<SortOrder>;
 };
 
+export type BallotResults = {
+  __typename?: 'BallotResults';
+  abs?: Maybe<Scalars['Int']>;
+  no?: Maybe<Scalars['Int']>;
+  total?: Maybe<Scalars['Int']>;
+  yes?: Maybe<Scalars['Int']>;
+};
+
 export type BallotRun = {
   __typename?: 'BallotRun';
   ballot: Ballot;
@@ -495,11 +503,17 @@ export type BallotRunCreateManyWithoutTeamInput = {
   create?: Maybe<Array<BallotRunCreateWithoutTeamInput>>;
 };
 
+export type BallotRunCreateOneWithoutVoteInput = {
+  connect?: Maybe<BallotRunWhereUniqueInput>;
+  create?: Maybe<BallotRunCreateWithoutVoteInput>;
+};
+
 export type BallotRunCreateWithoutBallotInput = {
   end?: Maybe<Scalars['DateTime']>;
   id?: Maybe<Scalars['String']>;
   start?: Maybe<Scalars['DateTime']>;
   team: TeamCreateOneWithoutBallotRunsInput;
+  Vote?: Maybe<VoteCreateManyWithoutBallotRunInput>;
 };
 
 export type BallotRunCreateWithoutTeamInput = {
@@ -507,6 +521,15 @@ export type BallotRunCreateWithoutTeamInput = {
   end?: Maybe<Scalars['DateTime']>;
   id?: Maybe<Scalars['String']>;
   start?: Maybe<Scalars['DateTime']>;
+  Vote?: Maybe<VoteCreateManyWithoutBallotRunInput>;
+};
+
+export type BallotRunCreateWithoutVoteInput = {
+  ballot: BallotCreateOneWithoutBallotRunsInput;
+  end?: Maybe<Scalars['DateTime']>;
+  id?: Maybe<Scalars['String']>;
+  start?: Maybe<Scalars['DateTime']>;
+  team: TeamCreateOneWithoutBallotRunsInput;
 };
 
 export type BallotRunListRelationFilter = {
@@ -561,11 +584,21 @@ export type BallotRunUpdateManyWithWhereNestedInput = {
   where: BallotRunScalarWhereInput;
 };
 
+export type BallotRunUpdateOneWithoutVoteInput = {
+  connect?: Maybe<BallotRunWhereUniqueInput>;
+  create?: Maybe<BallotRunCreateWithoutVoteInput>;
+  delete?: Maybe<Scalars['Boolean']>;
+  disconnect?: Maybe<Scalars['Boolean']>;
+  update?: Maybe<BallotRunUpdateWithoutVoteDataInput>;
+  upsert?: Maybe<BallotRunUpsertWithoutVoteInput>;
+};
+
 export type BallotRunUpdateWithoutBallotDataInput = {
   end?: Maybe<NullableDateTimeFieldUpdateOperationsInput>;
   id?: Maybe<StringFieldUpdateOperationsInput>;
   start?: Maybe<NullableDateTimeFieldUpdateOperationsInput>;
   team?: Maybe<TeamUpdateOneRequiredWithoutBallotRunsInput>;
+  Vote?: Maybe<VoteUpdateManyWithoutBallotRunInput>;
 };
 
 export type BallotRunUpdateWithoutTeamDataInput = {
@@ -573,6 +606,15 @@ export type BallotRunUpdateWithoutTeamDataInput = {
   end?: Maybe<NullableDateTimeFieldUpdateOperationsInput>;
   id?: Maybe<StringFieldUpdateOperationsInput>;
   start?: Maybe<NullableDateTimeFieldUpdateOperationsInput>;
+  Vote?: Maybe<VoteUpdateManyWithoutBallotRunInput>;
+};
+
+export type BallotRunUpdateWithoutVoteDataInput = {
+  ballot?: Maybe<BallotUpdateOneRequiredWithoutBallotRunsInput>;
+  end?: Maybe<NullableDateTimeFieldUpdateOperationsInput>;
+  id?: Maybe<StringFieldUpdateOperationsInput>;
+  start?: Maybe<NullableDateTimeFieldUpdateOperationsInput>;
+  team?: Maybe<TeamUpdateOneRequiredWithoutBallotRunsInput>;
 };
 
 export type BallotRunUpdateWithWhereUniqueWithoutBallotInput = {
@@ -583,6 +625,11 @@ export type BallotRunUpdateWithWhereUniqueWithoutBallotInput = {
 export type BallotRunUpdateWithWhereUniqueWithoutTeamInput = {
   data: BallotRunUpdateWithoutTeamDataInput;
   where: BallotRunWhereUniqueInput;
+};
+
+export type BallotRunUpsertWithoutVoteInput = {
+  create: BallotRunCreateWithoutVoteInput;
+  update: BallotRunUpdateWithoutVoteDataInput;
 };
 
 export type BallotRunUpsertWithWhereUniqueWithoutBallotInput = {
@@ -608,6 +655,7 @@ export type BallotRunWhereInput = {
   start?: Maybe<DateTimeNullableFilter>;
   team?: Maybe<TeamWhereInput>;
   teamId?: Maybe<StringFilter>;
+  Vote?: Maybe<VoteListRelationFilter>;
 };
 
 export type BallotRunWhereUniqueInput = {
@@ -1488,6 +1536,7 @@ export type Query = {
   __typename?: 'Query';
   ballot?: Maybe<Ballot>;
   ballots: Array<Ballot>;
+  getBallotResults?: Maybe<BallotResults>;
   getBallotRuns?: Maybe<Array<BallotRun>>;
   me?: Maybe<User>;
   school?: Maybe<School>;
@@ -1511,6 +1560,15 @@ export type QueryBallotsArgs = {
   last?: Maybe<Scalars['Int']>;
   orderBy?: Maybe<Array<BallotOrderByInput>>;
   where?: Maybe<BallotWhereInput>;
+};
+
+
+export type QueryGetBallotResultsArgs = {
+  ballotId?: Maybe<Scalars['String']>;
+  ballotRunId?: Maybe<Scalars['String']>;
+  canton?: Maybe<Scalars['String']>;
+  schoolId?: Maybe<Scalars['String']>;
+  teamId?: Maybe<Scalars['String']>;
 };
 
 
@@ -3965,6 +4023,11 @@ export type VoteCreateManyWithoutBallotInput = {
   create?: Maybe<Array<VoteCreateWithoutBallotInput>>;
 };
 
+export type VoteCreateManyWithoutBallotRunInput = {
+  connect?: Maybe<Array<VoteWhereUniqueInput>>;
+  create?: Maybe<Array<VoteCreateWithoutBallotRunInput>>;
+};
+
 export type VoteCreateManyWithoutSchoolInput = {
   connect?: Maybe<Array<VoteWhereUniqueInput>>;
   create?: Maybe<Array<VoteCreateWithoutSchoolInput>>;
@@ -3976,6 +4039,19 @@ export type VoteCreateManyWithoutTeamInput = {
 };
 
 export type VoteCreateWithoutBallotInput = {
+  ballotRun?: Maybe<BallotRunCreateOneWithoutVoteInput>;
+  canton?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['String']>;
+  school?: Maybe<SchoolCreateOneWithoutVoteInput>;
+  schooltype?: Maybe<Scalars['String']>;
+  team?: Maybe<TeamCreateOneWithoutVoteInput>;
+  verify?: Maybe<Scalars['String']>;
+  vote: Scalars['Int'];
+  year?: Maybe<Scalars['Int']>;
+};
+
+export type VoteCreateWithoutBallotRunInput = {
+  ballot: BallotCreateOneWithoutVotesInput;
   canton?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['String']>;
   school?: Maybe<SchoolCreateOneWithoutVoteInput>;
@@ -3988,6 +4064,7 @@ export type VoteCreateWithoutBallotInput = {
 
 export type VoteCreateWithoutSchoolInput = {
   ballot: BallotCreateOneWithoutVotesInput;
+  ballotRun?: Maybe<BallotRunCreateOneWithoutVoteInput>;
   canton?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['String']>;
   schooltype?: Maybe<Scalars['String']>;
@@ -3999,6 +4076,7 @@ export type VoteCreateWithoutSchoolInput = {
 
 export type VoteCreateWithoutTeamInput = {
   ballot: BallotCreateOneWithoutVotesInput;
+  ballotRun?: Maybe<BallotRunCreateOneWithoutVoteInput>;
   canton?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['String']>;
   school?: Maybe<SchoolCreateOneWithoutVoteInput>;
@@ -4241,6 +4319,7 @@ export type VoteListRelationFilter = {
 export type VoteScalarWhereInput = {
   AND?: Maybe<Array<VoteScalarWhereInput>>;
   ballotId?: Maybe<StringFilter>;
+  ballotRunId?: Maybe<StringNullableFilter>;
   canton?: Maybe<StringNullableFilter>;
   id?: Maybe<StringFilter>;
   NOT?: Maybe<Array<VoteScalarWhereInput>>;
@@ -4274,6 +4353,18 @@ export type VoteUpdateManyWithoutBallotInput = {
   upsert?: Maybe<Array<VoteUpsertWithWhereUniqueWithoutBallotInput>>;
 };
 
+export type VoteUpdateManyWithoutBallotRunInput = {
+  connect?: Maybe<Array<VoteWhereUniqueInput>>;
+  create?: Maybe<Array<VoteCreateWithoutBallotRunInput>>;
+  delete?: Maybe<Array<VoteWhereUniqueInput>>;
+  deleteMany?: Maybe<Array<VoteScalarWhereInput>>;
+  disconnect?: Maybe<Array<VoteWhereUniqueInput>>;
+  set?: Maybe<Array<VoteWhereUniqueInput>>;
+  update?: Maybe<Array<VoteUpdateWithWhereUniqueWithoutBallotRunInput>>;
+  updateMany?: Maybe<Array<VoteUpdateManyWithWhereNestedInput>>;
+  upsert?: Maybe<Array<VoteUpsertWithWhereUniqueWithoutBallotRunInput>>;
+};
+
 export type VoteUpdateManyWithoutSchoolInput = {
   connect?: Maybe<Array<VoteWhereUniqueInput>>;
   create?: Maybe<Array<VoteCreateWithoutSchoolInput>>;
@@ -4304,6 +4395,19 @@ export type VoteUpdateManyWithWhereNestedInput = {
 };
 
 export type VoteUpdateWithoutBallotDataInput = {
+  ballotRun?: Maybe<BallotRunUpdateOneWithoutVoteInput>;
+  canton?: Maybe<NullableStringFieldUpdateOperationsInput>;
+  id?: Maybe<StringFieldUpdateOperationsInput>;
+  school?: Maybe<SchoolUpdateOneWithoutVoteInput>;
+  schooltype?: Maybe<NullableStringFieldUpdateOperationsInput>;
+  team?: Maybe<TeamUpdateOneWithoutVoteInput>;
+  verify?: Maybe<NullableStringFieldUpdateOperationsInput>;
+  vote?: Maybe<IntFieldUpdateOperationsInput>;
+  year?: Maybe<NullableIntFieldUpdateOperationsInput>;
+};
+
+export type VoteUpdateWithoutBallotRunDataInput = {
+  ballot?: Maybe<BallotUpdateOneRequiredWithoutVotesInput>;
   canton?: Maybe<NullableStringFieldUpdateOperationsInput>;
   id?: Maybe<StringFieldUpdateOperationsInput>;
   school?: Maybe<SchoolUpdateOneWithoutVoteInput>;
@@ -4316,6 +4420,7 @@ export type VoteUpdateWithoutBallotDataInput = {
 
 export type VoteUpdateWithoutSchoolDataInput = {
   ballot?: Maybe<BallotUpdateOneRequiredWithoutVotesInput>;
+  ballotRun?: Maybe<BallotRunUpdateOneWithoutVoteInput>;
   canton?: Maybe<NullableStringFieldUpdateOperationsInput>;
   id?: Maybe<StringFieldUpdateOperationsInput>;
   schooltype?: Maybe<NullableStringFieldUpdateOperationsInput>;
@@ -4327,6 +4432,7 @@ export type VoteUpdateWithoutSchoolDataInput = {
 
 export type VoteUpdateWithoutTeamDataInput = {
   ballot?: Maybe<BallotUpdateOneRequiredWithoutVotesInput>;
+  ballotRun?: Maybe<BallotRunUpdateOneWithoutVoteInput>;
   canton?: Maybe<NullableStringFieldUpdateOperationsInput>;
   id?: Maybe<StringFieldUpdateOperationsInput>;
   school?: Maybe<SchoolUpdateOneWithoutVoteInput>;
@@ -4338,6 +4444,11 @@ export type VoteUpdateWithoutTeamDataInput = {
 
 export type VoteUpdateWithWhereUniqueWithoutBallotInput = {
   data: VoteUpdateWithoutBallotDataInput;
+  where: VoteWhereUniqueInput;
+};
+
+export type VoteUpdateWithWhereUniqueWithoutBallotRunInput = {
+  data: VoteUpdateWithoutBallotRunDataInput;
   where: VoteWhereUniqueInput;
 };
 
@@ -4357,6 +4468,12 @@ export type VoteUpsertWithWhereUniqueWithoutBallotInput = {
   where: VoteWhereUniqueInput;
 };
 
+export type VoteUpsertWithWhereUniqueWithoutBallotRunInput = {
+  create: VoteCreateWithoutBallotRunInput;
+  update: VoteUpdateWithoutBallotRunDataInput;
+  where: VoteWhereUniqueInput;
+};
+
 export type VoteUpsertWithWhereUniqueWithoutSchoolInput = {
   create: VoteCreateWithoutSchoolInput;
   update: VoteUpdateWithoutSchoolDataInput;
@@ -4373,6 +4490,8 @@ export type VoteWhereInput = {
   AND?: Maybe<Array<VoteWhereInput>>;
   ballot?: Maybe<BallotWhereInput>;
   ballotId?: Maybe<StringFilter>;
+  ballotRun?: Maybe<BallotRunWhereInput>;
+  ballotRunId?: Maybe<StringNullableFilter>;
   canton?: Maybe<StringNullableFilter>;
   id?: Maybe<StringFilter>;
   NOT?: Maybe<Array<VoteWhereInput>>;
@@ -4528,6 +4647,23 @@ export type VoteCodeMutation = (
   & { voteCode?: Maybe<(
     { __typename?: 'Response' }
     & Pick<Response, 'success' | 'error' | 'message'>
+  )> }
+);
+
+export type GetBallotResultsQueryVariables = Exact<{
+  ballotId: Scalars['String'];
+  ballotRunId?: Maybe<Scalars['String']>;
+  teamId?: Maybe<Scalars['String']>;
+  schoolId?: Maybe<Scalars['String']>;
+  canton?: Maybe<Scalars['String']>;
+}>;
+
+
+export type GetBallotResultsQuery = (
+  { __typename?: 'Query' }
+  & { getBallotResults?: Maybe<(
+    { __typename?: 'BallotResults' }
+    & Pick<BallotResults, 'yes' | 'no' | 'abs' | 'total'>
   )> }
 );
 
@@ -5264,6 +5400,46 @@ export function useVoteCodeMutation(baseOptions?: Apollo.MutationHookOptions<Vot
 export type VoteCodeMutationHookResult = ReturnType<typeof useVoteCodeMutation>;
 export type VoteCodeMutationResult = Apollo.MutationResult<VoteCodeMutation>;
 export type VoteCodeMutationOptions = Apollo.BaseMutationOptions<VoteCodeMutation, VoteCodeMutationVariables>;
+export const GetBallotResultsDocument = gql`
+    query getBallotResults($ballotId: String!, $ballotRunId: String, $teamId: String, $schoolId: String, $canton: String) {
+  getBallotResults(ballotRunId: $ballotRunId, ballotId: $ballotId, teamId: $teamId, schoolId: $schoolId, canton: $canton) {
+    yes
+    no
+    abs
+    total
+  }
+}
+    `;
+
+/**
+ * __useGetBallotResultsQuery__
+ *
+ * To run a query within a React component, call `useGetBallotResultsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetBallotResultsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetBallotResultsQuery({
+ *   variables: {
+ *      ballotId: // value for 'ballotId'
+ *      ballotRunId: // value for 'ballotRunId'
+ *      teamId: // value for 'teamId'
+ *      schoolId: // value for 'schoolId'
+ *      canton: // value for 'canton'
+ *   },
+ * });
+ */
+export function useGetBallotResultsQuery(baseOptions?: Apollo.QueryHookOptions<GetBallotResultsQuery, GetBallotResultsQueryVariables>) {
+        return Apollo.useQuery<GetBallotResultsQuery, GetBallotResultsQueryVariables>(GetBallotResultsDocument, baseOptions);
+      }
+export function useGetBallotResultsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetBallotResultsQuery, GetBallotResultsQueryVariables>) {
+          return Apollo.useLazyQuery<GetBallotResultsQuery, GetBallotResultsQueryVariables>(GetBallotResultsDocument, baseOptions);
+        }
+export type GetBallotResultsQueryHookResult = ReturnType<typeof useGetBallotResultsQuery>;
+export type GetBallotResultsLazyQueryHookResult = ReturnType<typeof useGetBallotResultsLazyQuery>;
+export type GetBallotResultsQueryResult = Apollo.QueryResult<GetBallotResultsQuery, GetBallotResultsQueryVariables>;
 export const MeDocument = gql`
     query me {
   me {

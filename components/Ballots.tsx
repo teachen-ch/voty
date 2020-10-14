@@ -123,6 +123,30 @@ export const VOTE_CODE = gql`
     }
   }
 `;
+
+export const GET_BALLOT_RESULTS = gql`
+  query getBallotResults(
+    $ballotId: String!
+    $ballotRunId: String
+    $teamId: String
+    $schoolId: String
+    $canton: String
+  ) {
+    getBallotResults(
+      ballotRunId: $ballotRunId
+      ballotId: $ballotId
+      teamId: $teamId
+      schoolId: $schoolId
+      canton: $canton
+    ) {
+      yes
+      no
+      abs
+      total
+    }
+  }
+`;
+
 // TODO: have to redefine enum here, otherwise hiting this issue
 // https://github.com/prisma/prisma/issues/3252
 export enum BallotScope {
@@ -169,16 +193,17 @@ export const Ballots: React.FC<BallotsProps> = ({ where, onClick }) => {
 
 export const Ballot: React.FC<{
   ballot: BallotFieldsFragment;
-  buttonText: string;
-  onButton: (ballot: BallotFieldsFragment) => void;
-  onDetail: (ballot: BallotFieldsFragment) => void;
-}> = ({ ballot, buttonText, onButton, onDetail }) => {
+  buttonText?: string;
+  buttonColor?: string;
+  onButton?: (ballot: BallotFieldsFragment) => void;
+  onDetail?: (ballot: BallotFieldsFragment) => void;
+}> = ({ ballot, buttonText, buttonColor = "primary", onButton, onDetail }) => {
   return (
     <div className="ballot">
       <A
         fontSize={3}
         sx={{ fontWeight: "bold" }}
-        onClick={() => onDetail(ballot)}
+        onClick={() => onDetail && onDetail(ballot)}
       >
         {ballot.title}
       </A>
@@ -186,7 +211,11 @@ export const Ballot: React.FC<{
       <Grid mt={2} mb={4} columns={[0, 0, "2fr 1fr"]}>
         Zeit: {formatFromTo(ballot.start, ballot.end)}
         {buttonText && (
-          <Button onClick={() => onButton(ballot)} variant="primary">
+          <Button
+            onClick={() => onButton && onButton(ballot)}
+            bg={buttonColor}
+            variant="primary"
+          >
             {buttonText}
           </Button>
         )}

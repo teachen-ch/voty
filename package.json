@@ -54,6 +54,7 @@
     "react": "16.13.1",
     "react-burger-menu": "^2.7.1",
     "react-dom": "16.13.1",
+    "react-minimal-pie-chart": "^8.0.1",
     "react-player": "^2.6.0",
     "rebass": "^4.0.7",
     "recoil": "^0.0.10",

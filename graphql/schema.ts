@@ -154,6 +154,16 @@ schema.objectType({
   },
 });
 
+schema.objectType({
+  name: "BallotResults",
+  definition(t) {
+    t.int("yes");
+    t.int("no");
+    t.int("abs");
+    t.int("total");
+  },
+});
+
 schema.queryType({
   definition(t) {
     t.crud.school();
@@ -180,6 +190,18 @@ schema.queryType({
         teamId: stringArg({ required: true }),
       },
       resolve: resolvers.ballots.getBallotRuns,
+    });
+
+    t.field("getBallotResults", {
+      type: "BallotResults",
+      args: {
+        ballotId: stringArg({ required: true }),
+        ballotRunId: stringArg({ required: false }),
+        teamId: stringArg({ required: false }),
+        schoolId: stringArg({ required: false }),
+        canton: stringArg({ required: false }),
+      },
+      resolve: resolvers.ballots.getBallotResults,
     });
   },
 });
