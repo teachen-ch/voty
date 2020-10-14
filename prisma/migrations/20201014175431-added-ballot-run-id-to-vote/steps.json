@@ -1,0 +1,90 @@
+{
+  "version": "0.3.14-fixed",
+  "steps": [
+    {
+      "tag": "CreateField",
+      "model": "BallotRun",
+      "field": "Vote",
+      "type": "Vote",
+      "arity": "List"
+    },
+    {
+      "tag": "CreateField",
+      "model": "Vote",
+      "field": "ballotRun",
+      "type": "BallotRun",
+      "arity": "Optional"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "Vote",
+          "field": "ballotRun"
+        },
+        "directive": "relation"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "Vote",
+          "field": "ballotRun"
+        },
+        "directive": "relation"
+      },
+      "argument": "fields",
+      "value": "[ballotRunId]"
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "Vote",
+          "field": "ballotRun"
+        },
+        "directive": "relation"
+      },
+      "argument": "references",
+      "value": "[id]"
+    },
+    {
+      "tag": "CreateField",
+      "model": "Vote",
+      "field": "ballotRunId",
+      "type": "String",
+      "arity": "Optional"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "Vote",
+          "field": "ballotRunId"
+        },
+        "directive": "map"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "Vote",
+          "field": "ballotRunId"
+        },
+        "directive": "map"
+      },
+      "argument": "name",
+      "value": "\"ballotrun_id\""
+    }
+  ]
+}
