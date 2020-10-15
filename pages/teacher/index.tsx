@@ -4,11 +4,19 @@ import { Heading, Button, Text } from "rebass";
 import { Teams, CreateTeamForm } from "../../components/Teams";
 import { useState, ReactElement } from "react";
 import { SelectSchool } from "../../components/Schools";
-import router from "next/router";
+import { useRouter } from "next/router";
 
 export default function Teacher(): ReactElement {
   const user = useUser();
   const [showForm, setShowForm] = useState(false);
+  const router = useRouter();
+
+  async function teamDetail(teamId: string) {
+    await router.push(
+      "/teacher/team/[id]/admin",
+      `/teacher/team/${teamId}/admin`
+    );
+  }
 
   return (
     <LoggedInPage heading="Startseite für Lehrpersonen">
@@ -17,15 +25,10 @@ export default function Teacher(): ReactElement {
       <Heading as="h3">Deine Klassen auf voty</Heading>
       <Teams
         where={{ teacher: { id: { equals: user?.id } } }}
-        teamClick={(team) =>
-          router.push(
-            "/teacher/team/[id]/admin",
-            `/teacher/team/${team.id}/admin`
-          )
-        }
+        teamClick={(team) => teamDetail(team.id)}
       />
       {showForm ? (
-        <CreateTeamForm onCompleted={() => setShowForm(false)} />
+        <CreateTeamForm onCompleted={teamDetail} />
       ) : (
         user?.school && (
           <Button onClick={() => setShowForm(!showForm)} my={4}>

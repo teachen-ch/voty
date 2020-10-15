@@ -1564,7 +1564,7 @@ export type QueryBallotsArgs = {
 
 
 export type QueryGetBallotResultsArgs = {
-  ballotId?: Maybe<Scalars['String']>;
+  ballotId: Scalars['String'];
   ballotRunId?: Maybe<Scalars['String']>;
   canton?: Maybe<Scalars['String']>;
   schoolId?: Maybe<Scalars['String']>;
@@ -4831,7 +4831,7 @@ export type TeamByInviteQuery = (
   { __typename?: 'Query' }
   & { team?: Maybe<(
     { __typename?: 'Team' }
-    & TeamUserFieldsFragment
+    & TeamAnonFieldsFragment
   )> }
 );
 
@@ -5731,10 +5731,10 @@ export type TeamTeacherQueryResult = Apollo.QueryResult<TeamTeacherQuery, TeamTe
 export const TeamByInviteDocument = gql`
     query teamByInvite($invite: String!) {
   team(where: {invite: $invite}) {
-    ...TeamUserFields
+    ...TeamAnonFields
   }
 }
-    ${TeamUserFieldsFragmentDoc}`;
+    ${TeamAnonFieldsFragmentDoc}`;
 
 /**
  * __useTeamByInviteQuery__

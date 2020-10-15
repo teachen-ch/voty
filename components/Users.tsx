@@ -31,7 +31,7 @@ export function Users({
   users?: TeamTeacherFieldsFragment["members"];
 }): ReactElement {
   if (!users || users.length === 0) {
-    return <span>Keine Benutzer gefunden…</span>;
+    return <span>Noch keine Schülerinnen und Schüler hinzugefügt</span>;
   }
   return (
     <>

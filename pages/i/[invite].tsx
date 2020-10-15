@@ -12,7 +12,7 @@ import {
   useTeamByInviteQuery,
   useCreateInvitedUserMutation,
   useAcceptInviteMutation,
-  TeamUserFieldsFragment,
+  TeamAnonFieldsFragment,
 } from "graphql/types";
 
 export const CREATE_INVITED_USER = gql`
@@ -122,7 +122,7 @@ export default Invite;
 type AcceptInviteProps = {
   invite: string;
   user: SessionUser; // TODO: NEXUSTYPE find out how to import Nexus Types here
-  team: TeamUserFieldsFragment; // TODO: NEXUSTYPE find out how to import Nexus Types here
+  team: TeamAnonFieldsFragment; // TODO: NEXUSTYPE find out how to import Nexus Types here
 };
 const AcceptInvite: React.FC<AcceptInviteProps> = ({ invite, team }) => {
   const [error, setError] = useState("");

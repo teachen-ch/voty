@@ -20,7 +20,7 @@ describe("Test Teacher Startpage", () => {
     // Test team detail page
     cy.contains("Testclass").click();
     cy.url().should("include", "/teacher/team/");
-    cy.contains("Klassenseite");
+    cy.contains("Schüler einladen");
   });
 
   it("allows teacher to select an existing school", () => {

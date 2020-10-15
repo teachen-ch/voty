@@ -63,7 +63,7 @@ export default function TeamPage(): ReactElement {
 
   if (teamQuery.loading) {
     return (
-      <LoggedInPage heading="Klassenseite">Team wird geladen…</LoggedInPage>
+      <LoggedInPage heading="Klasseseite">Klasse wird geladen…</LoggedInPage>
     );
   }
 
@@ -77,7 +77,7 @@ export default function TeamPage(): ReactElement {
   }
 
   return (
-    <LoggedInPage heading="Klassenseite">
+    <LoggedInPage heading={`${team.name}`}>
       <TeacherTeamNavigation team={team} />
       <Heading as="h2">Schüler|innen</Heading>
       <Users users={team.members} />
