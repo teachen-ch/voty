@@ -29,14 +29,14 @@ export function Page({
         <title>voty – {heading}</title>
       </Head>
       <Box mt={["2rem", "2rem", 32]} ml={[0, 0, 0, 20]}>
-        <a href="/">
+        <Link href="/">
           <img
             src="/images/voty_logo.svg"
             alt="voty"
             className="logo-page"
             height="45"
           />
-        </a>
+        </Link>
       </Box>
       <Box
         as="main"
@@ -94,7 +94,7 @@ export function LoggedInPage({
   }
 }
 
-export function getRoleName(role: Role): string {
+function getRoleName(role: Role): string {
   const translations: Record<string, string> = {
     Teacher: "Lehrer/-in",
     Student: "Schüler/-in",
