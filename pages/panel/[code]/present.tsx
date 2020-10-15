@@ -1,4 +1,4 @@
-import { ReactElement } from "react";
+import { ReactElement, useEffect } from "react";
 import { LoggedInPage, ErrorPage, LoadingPage } from "components/Page";
 import { Heading, Text, Card, Box, Flex } from "rebass";
 import { Ballot } from "components/Ballots";
@@ -108,11 +108,17 @@ const Results: React.FC<{ ballotId: string; ballotRunId: string }> = ({
 }) => {
   const resultsQuery = useGetBallotResultsQuery({
     variables: { ballotId, ballotRunId },
-    pollInterval: 5000,
+    // pollInterval: 5000,
   });
 
   const results = resultsQuery.data?.getBallotResults;
-  console.log("POLLING: ", results);
+
+  useEffect(() => {
+    resultsQuery.startPolling(1000);
+    return () => {
+      resultsQuery.stopPolling();
+    };
+  }, []);
 
   if (!results) return null;
   if (!results.total) return <Text>Noch keine Stimmen</Text>;
@@ -133,7 +139,7 @@ const Results: React.FC<{ ballotId: string; ballotRunId: string }> = ({
   }
 
   const pieLabel: LabelRenderFunction = (props) => {
-    const { title, percentage, color, key } = props.dataEntry;
+    const { title, percentage, color } = props.dataEntry;
     const x = 50;
     const y = results.abs ? 50 : 55;
     const dx = 0;
@@ -141,7 +147,7 @@ const Results: React.FC<{ ballotId: string; ballotRunId: string }> = ({
     const fontSize = title === "Enthalten" ? "8px" : "12px";
     return (
       <text
-        key={key}
+        key={title}
         dominantBaseline="central"
         width={50}
         textAnchor="middle"
