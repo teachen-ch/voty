@@ -127,7 +127,7 @@ export const Teams: React.FC<TeamsProps> = ({ where, teamClick }) => {
     return <Text>Noch keine Klassen erfasst</Text>;
   }
   return (
-    <>
+    <div class="teams">
       <table width="100%">
         <thead>
           <tr>
@@ -186,7 +186,7 @@ export const Teams: React.FC<TeamsProps> = ({ where, teamClick }) => {
           ))}
         </tbody>
       </table>
-    </>
+    </div>
   );
 };
 

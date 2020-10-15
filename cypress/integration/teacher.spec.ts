@@ -13,6 +13,8 @@ describe("Test Teacher Startpage", () => {
   it("allows teacher to create a new team and see invite", () => {
     cy.login();
     cy.visit("/teacher");
+    // wait for teams to load, otherwise a reload below can shake things up
+    cy.get(".teams");
     cy.contains("Neue Klasse erfassen").click();
     cy.get("#name").type("Testclass");
     cy.get("button").contains("Klasse erstellen").click();

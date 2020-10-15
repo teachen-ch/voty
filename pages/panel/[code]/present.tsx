@@ -17,6 +17,8 @@ import { Grid } from "theme-ui";
 import { PieChart } from "react-minimal-pie-chart";
 import { LabelRenderFunction } from "react-minimal-pie-chart/types/commonTypes";
 
+const POLLING_DELAY = Number(process.env.POLLING_DELAY) || 5000;
+
 export default function PanelBallots(): ReactElement {
   const router = useRouter();
   const user = useUser();
@@ -79,7 +81,7 @@ const BallotRunListing: React.FC<{ ballotRun: BallotRunFieldsFragment }> = ({
         onButton={startStopBallot}
         onDetail={startStopBallot}
       />
-      {true && <BallotRunDetail ballotRun={ballotRun} />}
+      {ballotRun.start && <BallotRunDetail ballotRun={ballotRun} />}
     </Box>
   );
 };
@@ -89,15 +91,13 @@ const BallotRunDetail: React.FC<{ ballotRun: BallotRunFieldsFragment }> = ({
 }) => {
   return (
     <Card>
-      {ballotRun.start && (
-        <>
-          <Heading as="h2" mt={0} mb={4}>
-            {ballotRun.end ? "Endresultat:" : "Live-Resultat:"}{" "}
-            {ballotRun.ballot.title}
-          </Heading>
-          <Results ballotId={ballotRun.ballot.id} ballotRunId={ballotRun.id} />
-        </>
-      )}
+      <>
+        <Heading as="h2" mt={0} mb={4}>
+          {ballotRun.end ? "Endresultat:" : "Live-Resultat:"}{" "}
+          {ballotRun.ballot.title}
+        </Heading>
+        <Results ballotId={ballotRun.ballot.id} ballotRunId={ballotRun.id} />
+      </>
     </Card>
   );
 };
@@ -108,13 +108,14 @@ const Results: React.FC<{ ballotId: string; ballotRunId: string }> = ({
 }) => {
   const resultsQuery = useGetBallotResultsQuery({
     variables: { ballotId, ballotRunId },
+    // had some issues with pollInterval when using next dev
     // pollInterval: 5000,
   });
 
   const results = resultsQuery.data?.getBallotResults;
 
   useEffect(() => {
-    resultsQuery.startPolling(1000);
+    resultsQuery.startPolling(POLLING_DELAY);
     return () => {
       resultsQuery.stopPolling();
     };
