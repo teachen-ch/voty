@@ -12,9 +12,15 @@ import { Footer } from "components/Footer";
 import { Header } from "components/Header";
 import { Page } from "components/Page";
 import CheckLogin from "components/CheckLogin";
-import { ReactElement } from "react";
+import { ReactElement, useEffect } from "react";
+// eslint-disable-next-line
+const stats = require("@socialgouv/matomo-next");
 
 function MyApp({ Component, pageProps }: AppProps): ReactElement {
+  useEffect(() => {
+    // eslint-disable-next-line
+    stats.init("https://stats.teachen.ch/", 2);
+  });
   return (
     <div className="container">
       <ApolloProvider client={apollo}>

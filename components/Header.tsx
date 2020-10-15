@@ -1,12 +1,7 @@
 import Head from "next/head";
 import { ReactElement } from "react";
-import { isBrowser } from "util/isBrowser";
-import { initStats } from "util/stats";
 
 export function Header(): ReactElement {
-  if (isBrowser()) {
-    initStats();
-  }
   return (
     <Head>
       <html lang={"de"} />
