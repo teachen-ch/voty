@@ -29,12 +29,12 @@ export default function Teacher(): ReactElement {
       />
       {showForm ? (
         <CreateTeamForm onCompleted={teamDetail} />
+      ) : user?.school ? (
+        <Button onClick={() => setShowForm(!showForm)} my={4}>
+          Neue Klasse erfassen
+        </Button>
       ) : (
-        user?.school && (
-          <Button onClick={() => setShowForm(!showForm)} my={4}>
-            Neue Klasse erfassen
-          </Button>
-        )
+        "Bitte wähle zuerst Dein Schulhaus."
       )}
       <Text />
     </LoggedInPage>

@@ -66,7 +66,7 @@ export default function Home(): ReactElement {
           <Flex flexDirection="column" justifyContent="space-between">
             <img src="images/voty_module_2.svg" alt="Abstimmen" />
             <Heading as="h3" py={3} my={0} textAlign="center">
-              demokratie testen
+              Demokratie testen
             </Heading>
             <Text>
               Nur Erwachsene dürfen abstimmen, aber auch Jugendliche haben eine

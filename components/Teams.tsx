@@ -124,7 +124,7 @@ export const Teams: React.FC<TeamsProps> = ({ where, teamClick }) => {
   }
 
   if (teams?.length === 0) {
-    return <Text>Noch keine Klassen erfasst</Text>;
+    return <Text>Noch keine Klassen erfasst.</Text>;
   }
   return (
     <div className="teams">
