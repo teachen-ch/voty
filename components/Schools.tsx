@@ -14,14 +14,21 @@ import {
   SchoolsDocument,
 } from "graphql/types";
 
+const SchoolFields = gql`
+  fragment SchoolFields on School {
+    id
+    name
+    type
+    city
+    zip
+    canton
+  }
+`;
+
 export const GET_SCHOOLS_WITH_MEMBERS = gql`
   query schoolsWithMembers {
     schools {
-      id
-      name
-      city
-      zip
-      canton
+      ...SchoolFields
       members {
         id
         name
@@ -29,6 +36,7 @@ export const GET_SCHOOLS_WITH_MEMBERS = gql`
       }
     }
   }
+  ${SchoolFields}
 `;
 
 export const Schools: React.FC = () => {
@@ -81,6 +89,7 @@ export const SET_USER_SCHOOL = gql`
       school {
         id
         name
+        type
         city
         zip
       }
@@ -91,13 +100,10 @@ export const SET_USER_SCHOOL = gql`
 export const GET_SCHOOL_LIST = gql`
   query schools {
     schools {
-      id
-      name
-      city
-      zip
-      canton
+      ...SchoolFields
     }
   }
+  ${SchoolFields}
 `;
 
 type ResultSchool = Pick<School, "id" | "name" | "city" | "zip" | "canton">;
@@ -159,6 +165,7 @@ export const SelectSchool: React.FC = () => {
           <QForm
             fields={{
               school: {
+                type: "select",
                 label: "Deine Schule: ",
                 required: true,
                 options,
@@ -244,6 +251,19 @@ export function CreateSchool({
           name: {
             label: "Schulhaus:",
           },
+          type: {
+            type: "select",
+            label: "Schultyp:",
+            required: true,
+            options: {
+              "Bitte wählen": "",
+              "Sek-1": "Sek-1",
+              Gymnasium: "Gymnasium",
+              Berufsschule: "Berufsschule",
+              Fachmittelschule: "Fachmittelschule",
+              Anderer: "Anderer",
+            },
+          },
           address: {
             label: "Adresse:",
           },
@@ -254,6 +274,7 @@ export function CreateSchool({
             label: "Ort:",
           },
           canton: {
+            type: "select",
             label: "Kanton:",
             required: true,
             init: "Aargau",
