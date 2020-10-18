@@ -1583,6 +1583,7 @@ type School {
   members(after: UserWhereUniqueInput, before: UserWhereUniqueInput, first: Int, last: Int): [User!]!
   name: String!
   teams(after: TeamWhereUniqueInput, before: TeamWhereUniqueInput, first: Int, last: Int): [Team!]!
+  type: String!
   zip: String!
 }
 
@@ -2970,7 +2971,7 @@ type User {
   ballots(after: BallotWhereUniqueInput, before: BallotWhereUniqueInput, first: Int, last: Int): [Ballot!]!
   email: String
   emailVerified: DateTime
-  gender: Gender!
+  gender: Gender
   id: String!
   image: String
   lastname: String
@@ -2982,6 +2983,7 @@ type User {
   teaches(after: TeamWhereUniqueInput, before: TeamWhereUniqueInput, first: Int, last: Int): [Team!]!
   team: Team
   threads(after: ThreadWhereUniqueInput, before: ThreadWhereUniqueInput, first: Int, last: Int): [Thread!]!
+  year: Int
 }
 
 input UserCreateInput {

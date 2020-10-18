@@ -32,7 +32,7 @@ model User {
   image         String?
 
   password String?
-  gender   Gender  @default(Unkown)
+  gender   Gender?
   year     Int? // year born
   canton   String? // if not set via school
 
@@ -176,9 +176,9 @@ model BallotRun {
   team     Team   @relation(fields: [teamId], references: [id])
   teamId   String @map(name: "team_id")
 
+  Vote Vote[]
   @@unique([ballotId, teamId])
   @@map(name: "ballot_runs")
-  Vote Vote[]
 }
 
 model Option {

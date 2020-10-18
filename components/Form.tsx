@@ -4,9 +4,10 @@ import { Grid } from "theme-ui";
 import {
   Input as RebassInput,
   Label as RebassLabel,
-  Select as RSelect,
+  Select as RebassSelect,
   InputProps as RebassInputProps,
   SelectProps as RebassSelectProps,
+  Radio as RebassRadio,
 } from "@rebass/forms";
 import * as yup from "yup";
 import React, { useMemo } from "react";
@@ -21,7 +22,7 @@ type InputProps = RebassInputProps & {
 };
 
 export const Input: React.FC<InputProps> = ({ label, setter, ...props }) => {
-  const [field, meta] = useField(props as any);
+  const [field, meta] = useField<string>(props as any);
   // TODO: this is a really hacky way to get values out of the form again
   // e.g. on login.tsx email field
   const onChange = setter
@@ -46,6 +47,7 @@ export const Input: React.FC<InputProps> = ({ label, setter, ...props }) => {
         id={props.id || props.name}
         onChange={onChange}
         onBlur={field.onBlur}
+        value={field.value}
         {...props}
       />
       {meta.touched && meta.error ? (
@@ -65,11 +67,11 @@ type QFormField = {
   type?: string;
   label?: string;
   placeholder?: string;
-  init?: string | number;
+  init?: string | number | null;
   required?: boolean;
   setter?: (s: string) => void;
   validate?: YupType;
-  options?: Record<string, string | number>;
+  options?: Record<string, any>;
 };
 
 type YupType =
@@ -78,7 +80,7 @@ type YupType =
 
 type QFormProps = FormikFormProps & {
   fields: Record<string, QFormField>;
-  onSubmit?: (values: Record<string, string | number>) => void;
+  onSubmit?: (values: Record<string, any>) => void;
   mutation: MutationFunction<any, any>;
 };
 
@@ -96,15 +98,14 @@ export const QForm: React.FC<QFormProps> = ({ fields, mutation, ...props }) => {
   function configureFields() {
     const fieldArr: QFormField[] = [];
     const validationSchema: Record<string, YupType> = {};
-    const initialValues: Record<string, string | number> = {};
+    const initialValues: Record<string, any> = {};
 
     Object.keys(fields).forEach((name) => {
       const f = fields[name];
       f.type = f.type || "string";
-      if (f.options) f.type = "select";
       f.name = f.name || name;
 
-      initialValues[name] = typeof f.init !== "undefined" ? f.init : "";
+      initialValues[name] = typeof f.init !== "undefined" ? f.init : undefined;
       if (!f.validate) {
         const yupTypes: Record<string, YupType> = {
           string: yup.string(),
@@ -143,13 +144,29 @@ export const QForm: React.FC<QFormProps> = ({ fields, mutation, ...props }) => {
         </React.Fragment>
       );
     }
+    if (field.type === "radio") {
+      if (!field.options) throw new Error("You need to specify options");
+      const opts = field.options;
+      return (
+        <RadioGroup
+          label={field.label || ""}
+          name={field.name || ""}
+          key={field.name}
+          opts={opts}
+        />
+      );
+    }
     if (field.type === "select") {
       if (!field.options) throw new Error("You need to specify options");
       const opts = field.options;
       return (
         <Select label={field.label || ""} name={field.name} key={field.name}>
           {Object.keys(opts).map((label) => (
-            <option key={label} value={opts[label]}>
+            <option
+              key={label}
+              value={String(opts[label])}
+              selected={opts[label] === field.init}
+            >
               {label}
             </option>
           ))}
@@ -189,6 +206,51 @@ export const QForm: React.FC<QFormProps> = ({ fields, mutation, ...props }) => {
   );
 };
 
+type RadioGroupProps = {
+  label: string;
+  opts: Record<string, string | number>;
+  name: string;
+};
+
+export const RadioGroup: React.FC<RadioGroupProps> = ({
+  label,
+  opts,
+  ...props
+}) => {
+  const [, meta] = useField(props.name);
+  return (
+    <>
+      <RebassLabel sx={{ alignSelf: "center" }} key={label}>
+        {label}
+      </RebassLabel>
+      <Grid columns="1fr 1fr">
+        {Object.keys(opts).map((name) => (
+          <RebassLabel sx={{ alignSelf: "center" }} key={name}>
+            <Radio id={label} name={props.name} value={opts[name]} />
+            {name}
+          </RebassLabel>
+        ))}
+      </Grid>
+
+      {meta.touched && meta.error ? (
+        <>
+          <span key={"s" + label} />
+          <Text key={"e" + label} variant="fielderror" fontSize={1}>
+            {meta.error}
+          </Text>
+        </>
+      ) : null}
+    </>
+  );
+};
+
+export const Radio: React.FC<{ id: string; name: string; value: any }> = (
+  props
+) => {
+  const [field] = useField(props);
+  return <RebassRadio id={props.id} {...field} />;
+};
+
 type SelectProps = RebassSelectProps & {
   label: string;
   setter?: (s: string) => void;
@@ -198,11 +260,15 @@ export const Select: React.FC<SelectProps> = ({ label, ...props }) => {
   const [field, meta] = useField(props as any);
   return (
     <>
-      <RebassLabel key={label} htmlFor={props.id || props.name}>
+      <RebassLabel
+        sx={{ alignSelf: "center" }}
+        key={label}
+        htmlFor={props.id || props.name}
+      >
         {label}
       </RebassLabel>
       {/* @ts-ignore */}
-      <RSelect id={props.id || props.name} {...field} {...props} />
+      <RebassSelect id={props.id || props.name} {...field} {...props} />
       {meta.touched && meta.error ? (
         <>
           <span key={"s" + label} />

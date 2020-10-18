@@ -32,7 +32,8 @@ export const me: DocumentNode;
 declare module '*/Schools.tsx' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
-  export const schoolsWithMembers: DocumentNode;
+  export const SchoolFields: DocumentNode;
+export const schoolsWithMembers: DocumentNode;
 export const setSchool: DocumentNode;
 export const schools: DocumentNode;
 export const createOneSchool: DocumentNode;
@@ -63,6 +64,7 @@ declare module '*/Users.tsx' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
   export const users: DocumentNode;
+export const updateUser: DocumentNode;
 
   export default defaultDocument;
 }

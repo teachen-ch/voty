@@ -29,6 +29,7 @@ schema.objectType({
   definition(t) {
     t.model.id();
     t.model.name();
+    t.model.type();
     t.model.teams();
     t.model.members();
     t.model.address();

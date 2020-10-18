@@ -39,6 +39,7 @@ describe("Test Teacher Startpage", () => {
     cy.visit("/teacher");
     cy.contains("Neues Schulhaus erfassen").click();
     cy.findByLabelText("Schulhaus:").type("Testschule");
+    cy.findByLabelText("Schultyp:").select("Sek-1");
     cy.findByLabelText("Adresse:").type("Teststrasse 5");
     cy.findByLabelText("PLZ:").type("3333");
     cy.findByLabelText("Ort:").type("Testort");

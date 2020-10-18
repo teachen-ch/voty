@@ -1795,6 +1795,7 @@ export type School = {
   members: Array<User>;
   name: Scalars['String'];
   teams: Array<Team>;
+  type: Scalars['String'];
   zip: Scalars['String'];
 };
 
@@ -3241,7 +3242,7 @@ export type User = {
   ballots: Array<Ballot>;
   email?: Maybe<Scalars['String']>;
   emailVerified?: Maybe<Scalars['DateTime']>;
-  gender: Gender;
+  gender?: Maybe<Gender>;
   id: Scalars['String'];
   image?: Maybe<Scalars['String']>;
   lastname?: Maybe<Scalars['String']>;
@@ -3253,6 +3254,7 @@ export type User = {
   teaches: Array<Team>;
   team?: Maybe<Team>;
   threads: Array<Thread>;
+  year?: Maybe<Scalars['Int']>;
 };
 
 
@@ -4669,7 +4671,7 @@ export type GetBallotResultsQuery = (
 
 export type LoginFieldsFragment = (
   { __typename?: 'User' }
-  & Pick<User, 'id' | 'name' | 'lastname' | 'shortname' | 'role' | 'email'>
+  & Pick<User, 'id' | 'name' | 'lastname' | 'shortname' | 'gender' | 'year' | 'role' | 'email'>
   & { school?: Maybe<(
     { __typename?: 'School' }
     & Pick<School, 'id' | 'name' | 'city'>
@@ -4694,6 +4696,11 @@ export type MeQuery = (
   )> }
 );
 
+export type SchoolFieldsFragment = (
+  { __typename?: 'School' }
+  & Pick<School, 'id' | 'name' | 'type' | 'city' | 'zip' | 'canton'>
+);
+
 export type SchoolsWithMembersQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -4701,11 +4708,11 @@ export type SchoolsWithMembersQuery = (
   { __typename?: 'Query' }
   & { schools: Array<(
     { __typename?: 'School' }
-    & Pick<School, 'id' | 'name' | 'city' | 'zip' | 'canton'>
     & { members: Array<(
       { __typename?: 'User' }
       & Pick<User, 'id' | 'name' | 'lastname'>
     )> }
+    & SchoolFieldsFragment
   )> }
 );
 
@@ -4721,7 +4728,7 @@ export type SetSchoolMutation = (
     & Pick<User, 'id' | 'name' | 'shortname' | 'role' | 'email' | 'lastname'>
     & { school?: Maybe<(
       { __typename?: 'School' }
-      & Pick<School, 'id' | 'name' | 'city' | 'zip'>
+      & Pick<School, 'id' | 'name' | 'type' | 'city' | 'zip'>
     )> }
   )> }
 );
@@ -4733,7 +4740,7 @@ export type SchoolsQuery = (
   { __typename?: 'Query' }
   & { schools: Array<(
     { __typename?: 'School' }
-    & Pick<School, 'id' | 'name' | 'city' | 'zip' | 'canton'>
+    & SchoolFieldsFragment
   )> }
 );
 
@@ -4881,6 +4888,20 @@ export type UsersQuery = (
         & Pick<School, 'id' | 'name'>
       ) }
     )> }
+  )> }
+);
+
+export type UpdateUserMutationVariables = Exact<{
+  data: UserUpdateInput;
+  where: UserWhereUniqueInput;
+}>;
+
+
+export type UpdateUserMutation = (
+  { __typename?: 'Mutation' }
+  & { updateUser?: Maybe<(
+    { __typename?: 'User' }
+    & LoginFieldsFragment
   )> }
 );
 
@@ -5035,6 +5056,8 @@ export const LoginFieldsFragmentDoc = gql`
   name
   lastname
   shortname
+  gender
+  year
   role
   email
   school {
@@ -5051,6 +5074,16 @@ export const LoginFieldsFragmentDoc = gql`
       shortname
     }
   }
+}
+    `;
+export const SchoolFieldsFragmentDoc = gql`
+    fragment SchoolFields on School {
+  id
+  name
+  type
+  city
+  zip
+  canton
 }
     `;
 export const NewSchoolFragmentDoc = gql`
@@ -5475,11 +5508,7 @@ export type MeQueryResult = Apollo.QueryResult<MeQuery, MeQueryVariables>;
 export const SchoolsWithMembersDocument = gql`
     query schoolsWithMembers {
   schools {
-    id
-    name
-    city
-    zip
-    canton
+    ...SchoolFields
     members {
       id
       name
@@ -5487,7 +5516,7 @@ export const SchoolsWithMembersDocument = gql`
     }
   }
 }
-    `;
+    ${SchoolFieldsFragmentDoc}`;
 
 /**
  * __useSchoolsWithMembersQuery__
@@ -5525,6 +5554,7 @@ export const SetSchoolDocument = gql`
     school {
       id
       name
+      type
       city
       zip
     }
@@ -5559,14 +5589,10 @@ export type SetSchoolMutationOptions = Apollo.BaseMutationOptions<SetSchoolMutat
 export const SchoolsDocument = gql`
     query schools {
   schools {
-    id
-    name
-    city
-    zip
-    canton
+    ...SchoolFields
   }
 }
-    `;
+    ${SchoolFieldsFragmentDoc}`;
 
 /**
  * __useSchoolsQuery__
@@ -5870,6 +5896,39 @@ export function useUsersLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<User
 export type UsersQueryHookResult = ReturnType<typeof useUsersQuery>;
 export type UsersLazyQueryHookResult = ReturnType<typeof useUsersLazyQuery>;
 export type UsersQueryResult = Apollo.QueryResult<UsersQuery, UsersQueryVariables>;
+export const UpdateUserDocument = gql`
+    mutation updateUser($data: UserUpdateInput!, $where: UserWhereUniqueInput!) {
+  updateUser(data: $data, where: $where) {
+    ...LoginFields
+  }
+}
+    ${LoginFieldsFragmentDoc}`;
+export type UpdateUserMutationFn = Apollo.MutationFunction<UpdateUserMutation, UpdateUserMutationVariables>;
+
+/**
+ * __useUpdateUserMutation__
+ *
+ * To run a mutation, you first call `useUpdateUserMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateUserMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateUserMutation, { data, loading, error }] = useUpdateUserMutation({
+ *   variables: {
+ *      data: // value for 'data'
+ *      where: // value for 'where'
+ *   },
+ * });
+ */
+export function useUpdateUserMutation(baseOptions?: Apollo.MutationHookOptions<UpdateUserMutation, UpdateUserMutationVariables>) {
+        return Apollo.useMutation<UpdateUserMutation, UpdateUserMutationVariables>(UpdateUserDocument, baseOptions);
+      }
+export type UpdateUserMutationHookResult = ReturnType<typeof useUpdateUserMutation>;
+export type UpdateUserMutationResult = Apollo.MutationResult<UpdateUserMutation>;
+export type UpdateUserMutationOptions = Apollo.BaseMutationOptions<UpdateUserMutation, UpdateUserMutationVariables>;
 export const CreateInvitedUserDocument = gql`
     mutation createInvitedUser($invite: String!, $name: String, $lastname: String, $email: String!, $password: String) {
   createInvitedUser(invite: $invite, name: $name, lastname: $lastname, email: $email, password: $password) {

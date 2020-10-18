@@ -74,6 +74,14 @@ const isOwn = (field: string) =>
     }
   );
 
+const updateUserCheck = rule({ cache: "strict" })(
+  (parent, args, ctx: NexusContext) => {
+    if (ctx.user?.role === Role.Admin) return true;
+    if (ctx.user && ctx.user.id === args.where?.id) return true;
+    else return false;
+  }
+);
+
 export const canViewBallot = rule({ cache: "strict" })(
   async (parent: Ballot, args, ctx: NexusContext) => {
     if (ctx.user?.role === Role.Admin) return true;
@@ -112,7 +120,7 @@ export const permissions = shield({
       deleteOneTeam: or(teachesTeam, isAdmin),
       createOneSchool: isTeacher,
       deleteOneSchool: isAdmin,
-      updateUser: isAdmin, // this is dangerous! role, verification, team, etc.
+      updateUser: or(updateUserCheck, isAdmin), // this is dangerous! role, verification, team, etc.
       setSchool: isUser,
       vote: isUser,
       voteCode: allow,
@@ -129,6 +137,7 @@ export const permissions = shield({
       role: isUser,
       image: isUser,
       gender: isUser,
+      year: isUser,
       school: isUser,
       team: isUser,
       teaches: isUser,
@@ -143,6 +152,7 @@ export const permissions = shield({
     School: {
       id: allow,
       name: allow,
+      type: allow,
       address: allow,
       city: allow,
       zip: allow,

@@ -10,6 +10,8 @@ CheckLogin.fragments = {
       name
       lastname
       shortname
+      gender
+      year
       role
       email
       school {

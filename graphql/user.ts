@@ -22,6 +22,7 @@ schema.objectType({
       },
     });
     t.model.gender();
+    t.model.year();
     t.model.emailVerified();
     t.model.image();
     t.model.role();
