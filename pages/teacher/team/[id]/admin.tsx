@@ -85,8 +85,9 @@ export default function TeamPage(): ReactElement {
       <Card>
         <Heading mt={0}>Schülerinnen und Schüler einladen</Heading>
         <Grid my={1} gap={2} columns={[0, 0, "1fr 4fr"]}>
-          <span />
-          <small>An alle diese Email-Adressen eine Einladung schicken:</small>
+          <Text fontSize={1} sx={{ gridColumn: 2 }}>
+            An alle diese Email-Adressen eine Einladung schicken:
+          </Text>
           <Label sx={{ alignSelf: "top", fontWeight: "bold" }}>
             Email-Adressen:
           </Label>
@@ -98,29 +99,25 @@ export default function TeamPage(): ReactElement {
             fontSize={1}
             placeholder="name1@schule.ch, name2@schule; name3.schule.ch; ..."
           />
-          <span />
           <Button
             onClick={() => inviteStudents(team)}
             disabled={!matches}
             bg={matches ? "primary" : "muted"}
+            sx={{ gridColumn: 2 }}
           >
             {matches} Einladungen verschicken
           </Button>
           {matches && (
             <>
-              <span />
-              <small>
+              <Text fontSize={1} sx={{ gridColumn: 2 }}>
                 {matches} Email{matches == 1 ? "" : "s"} werden verschickt an:{" "}
                 {emails.map((email) => (
                   <li key={email}>{email}</li>
                 ))}
-              </small>
+              </Text>
             </>
           )}
-          <span />
-          <small>
-            <br />
-            <br />
+          <Text fontSize={1} sx={{ gridColumn: 2 }} mt={4}>
             Alternativ können Sie Schüler|innen auch mit einem{" "}
             <Link>
               <button onClick={() => setShowInviteLink(true)}>
@@ -128,7 +125,7 @@ export default function TeamPage(): ReactElement {
               </button>
             </Link>{" "}
             einladen
-          </small>
+          </Text>
         </Grid>
         {showInviteLink && <InviteLink team={team} />}
       </Card>
@@ -162,8 +159,9 @@ function InviteLink({ team }: { team: TeamTeacherFieldsFragment }) {
         value={`${document?.location.origin}/i/${team.invite}`}
       />
       <Button onClick={() => copyInvite(inviteRef)}>Copy</Button>
-      <span />
-      <Text fontSize={1}>{status}</Text>
+      <Text fontSize={1} sx={{ gridColumn: 2 }}>
+        {status}
+      </Text>
     </Grid>
   );
 }

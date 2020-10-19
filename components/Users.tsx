@@ -168,8 +168,9 @@ export const StudentProfileEdit: React.FC<{ user: SessionUser }> = ({
             </Grid>
           </div>
           <FieldError name="gender" />
-          <span />
-          <Button type="submit">Angaben speichern</Button>
+          <Button type="submit" sx={{ gridColumn: 2 }}>
+            Angaben speichern
+          </Button>
           <ErrorBox error={error} my={4} />
         </Grid>
       </Form>
@@ -194,8 +195,7 @@ export const Input: React.FC<InputProps> = ({ label, name, placeholder }) => {
       <RebassInput {...field} id={name} placeholder={placeholder} />
       {meta.touched && meta.error ? (
         <>
-          <span />
-          <Text variant="fielderror" fontSize={1}>
+          <Text variant="fielderror" fontSize={1} sx={{ gridColumn: 2 }}>
             {meta.error}
           </Text>
         </>
@@ -206,12 +206,14 @@ export const Input: React.FC<InputProps> = ({ label, name, placeholder }) => {
 export const FieldError: React.FC<{ name: string }> = ({ name }) => (
   <ErrorMessage name={name}>
     {(msg) => (
-      <>
-        <span />
-        <Text fontSize={1} fontWeight="bold" color="primary">
-          {msg}
-        </Text>
-      </>
+      <Text
+        fontSize={1}
+        fontWeight="bold"
+        color="primary"
+        sx={{ gridColumn: 2 }}
+      >
+        {msg}
+      </Text>
     )}
   </ErrorMessage>
 );

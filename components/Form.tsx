@@ -141,7 +141,7 @@ export const QForm: React.FC<QFormProps> = ({ fields, mutation, ...props }) => {
       return null;
     }
     if (field.type === "submit") {
-      return <Submit name={field.name || ""} label={field.label || ""} />;
+      return <Submit key={`${field.name}-submit`} label={field.label || ""} />;
     }
     if (field.type === "radio") {
       if (!field.options) throw new Error("You need to specify options");
@@ -312,18 +312,12 @@ export const ErrorBox: React.FC<ErrorBoxProps> = ({ error, ...props }) => {
   );
 };
 
-export const Submit: React.FC<{ name: string; label: string }> = ({
-  name,
-  label,
-}) => {
+export const Submit: React.FC<{ label: string }> = ({ label }) => {
   const context = useFormikContext();
   const submitting = context.isSubmitting;
   return (
-    <React.Fragment key={`${name}-frag`}>
-      <span />
-      <Button type="submit" key={name} disabled={submitting}>
-        {submitting ? "Bitte warten..." : label}
-      </Button>
-    </React.Fragment>
+    <Button type="submit" disabled={submitting} sx={{ gridColumn: 2 }}>
+      {submitting ? "Bitte warten..." : label}
+    </Button>
   );
 };

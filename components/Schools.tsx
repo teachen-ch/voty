@@ -180,8 +180,11 @@ export const SelectSchool: React.FC = () => {
               setUserSchool({ variables: { school: String(values.school) } })
             }
           >
-            <span />
-            <Button onClick={() => setCreate(true)} variant="outline">
+            <Button
+              onClick={() => setCreate(true)}
+              variant="outline"
+              sx={{ gridColumn: 2 }}
+            >
               Neues Schulhaus erfassen
             </Button>
           </QForm>
@@ -293,8 +296,7 @@ export function CreateSchool({
           createSchool({ variables: { data: omit(values, "submit") } })
         }
       >
-        <span />
-        <Button onClick={onCancel} variant="outline">
+        <Button onClick={onCancel} variant="outline" sx={{ gridColumn: 2 }}>
           Abbrechen
         </Button>
         <ErrorBox error={error} my={4} />

@@ -156,8 +156,7 @@ export function LoginForm(): ReactElement {
         }}
       >
         <ErrorBox error={error} />
-        <span />
-        <Grid gap={2} columns={[0, 0, "3fr 2fr"]}>
+        <Grid gap={2} columns={[0, 0, "3fr 2fr"]} sx={{ gridColumn: 2 }}>
           <Button onClick={() => router.push("/user/signup")} variant="outline">
             Ich habe noch kein Benutzer-Konto
           </Button>
@@ -355,12 +354,10 @@ function RequestReset({ onCancel }: { email: string; onCancel: () => void }) {
             },
           }}
         >
-          <span />
-          <Button onClick={onCancel} variant="outline">
+          <Button onClick={onCancel} variant="outline" sx={{ gridColumn: 2 }}>
             Abbrechen
           </Button>
-          <span />
-          <ErrorBox error={error} />
+          <ErrorBox error={error} sx={{ gridColumn: 2 }} />
           {mailSent && (
             <>
               <span>Wir haben Dir ein Email geschickt</span>
@@ -431,8 +428,10 @@ function PasswordResetForm() {
               setPassword2(event.currentTarget.value)
             }
           />
-          <span />
-          <Button onClick={() => checkPasswords(password, password2)}>
+          <Button
+            onClick={() => checkPasswords(password, password2)}
+            sx={{ gridColumn: 2 }}
+          >
             Passwort ändern
           </Button>
           <ErrorBox error={error} />

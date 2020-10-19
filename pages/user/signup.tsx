@@ -126,18 +126,19 @@ export function CreateUserForm({
       >
         <ErrorBox error={error} my={4} />
         {showLogin && (
-          <>
-            <span />
-            <Button
-              onClick={() => router.push("/user/login")}
-              variant="outline"
-            >
-              Möchstest Du Dich anmelden?
-            </Button>
-          </>
+          <Button
+            onClick={() => router.push("/user/login")}
+            variant="outline"
+            sx={{ gridColumn: 2 }}
+          >
+            Möchstest Du Dich anmelden?
+          </Button>
         )}
-        <span />
-        <Button onClick={() => router.push("/user/login")} variant="outline">
+        <Button
+          onClick={() => router.push("/user/login")}
+          variant="outline"
+          sx={{ gridColumn: 2 }}
+        >
           Ich habe bereits ein Benutzer-Konto
         </Button>
       </QForm>
