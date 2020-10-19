@@ -20,7 +20,11 @@ export function useAccessToken(): string {
 export function useSetAccessToken(): (token: string) => void {
   const setState = useSetRecoilState(accessTokenState);
   return (token: string) => {
-    localStorage.setItem("@token", token);
+    if (token) {
+      localStorage.setItem("@token", token);
+    } else {
+      localStorage.removeItem("@token");
+    }
     setState(token);
   };
 }

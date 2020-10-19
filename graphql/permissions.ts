@@ -129,6 +129,7 @@ export const permissions = shield({
       removeBallotRun: isTeacher,
       startBallotRun: isTeacher,
       endBallotRun: isTeacher,
+      deleteAccount: isUser,
     },
     User: {
       id: isUser,

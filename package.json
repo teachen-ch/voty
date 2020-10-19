@@ -27,7 +27,8 @@
     "migrate": "cd prisma && npx prisma migrate save -c --experimental && npx prisma migrate up -c --experimental && npx prisma generate && cd ../",
     "dump_dev": "pg_dump --clean voty | ssh root@dev.votyapp.ch docker exec -i postgres psql -U voty voty",
     "ci:test": "yarn run migrate && yarn run start:bg && cypress run",
-    "graphql": "graphql-codegen --config codegen.yml"
+    "graphql": "graphql-codegen --config codegen.yml",
+    "lint": "npx eslint ./"
   },
   "dependencies": {
     "@apollo/client": "^3.1.3",

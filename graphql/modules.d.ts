@@ -89,6 +89,15 @@ declare module '*/admin.tsx' {
 }
     
 
+declare module '*/delete.tsx' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const deleteAccount: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
 declare module '*/login.tsx' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
