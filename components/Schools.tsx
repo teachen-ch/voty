@@ -257,10 +257,10 @@ export function CreateSchool({
             required: true,
             options: {
               "Bitte wählen": "",
-              "Sek-1": "Sek-1",
+              "Sekundarstufe I": "Sekundarstufe I",
               Gymnasium: "Gymnasium",
-              Berufsschule: "Berufsschule",
-              Fachmittelschule: "Fachmittelschule",
+              Gewerbeschule: "Gewerbeschule",
+              Mittelschule: "Fachmittelschule",
               Anderer: "Anderer",
             },
           },
