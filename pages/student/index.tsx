@@ -1,6 +1,6 @@
 import { useUser } from "../../state/user";
 import { LoggedInPage } from "../../components/Page";
-import { Heading, Text, Link as A, Card } from "rebass";
+import { Heading, Text, Link as A, Card, Box } from "rebass";
 import { Navigation, Route } from "components/Navigation";
 import { ReactElement } from "react";
 import Link from "next/link";
@@ -31,6 +31,12 @@ export default function Teacher(): ReactElement {
           <A>Abstimmungen</A>
         </Link>
       </Card>
+      <Box mt={5} textAlign="right">
+        Ich möchte mein Konto bei voty{" "}
+        <Link href="/user/delete">
+          <A>löschen</A>
+        </Link>
+      </Box>
     </LoggedInPage>
   );
 }

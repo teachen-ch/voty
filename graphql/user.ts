@@ -128,5 +128,9 @@ schema.extendType({
       },
       resolve: users.setSchool,
     });
+    t.field("deleteAccount", {
+      type: "Response",
+      resolve: users.deleteAccount,
+    });
   },
 });

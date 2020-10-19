@@ -39,12 +39,19 @@ describe("Test Teacher Startpage", () => {
     cy.visit("/teacher");
     cy.contains("Neues Schulhaus erfassen").click();
     cy.findByLabelText("Schulhaus:").type("Testschule");
-    cy.findByLabelText("Schultyp:").select("Sek-1");
+    cy.findByLabelText("Schultyp:").select("Gymnasium");
     cy.findByLabelText("Adresse:").type("Teststrasse 5");
     cy.findByLabelText("PLZ:").type("3333");
     cy.findByLabelText("Ort:").type("Testort");
     cy.findByLabelText("Kanton:").select("Bern");
     cy.contains("Bestätigen").click();
     cy.contains("Dein Schulhaus: Testschule");
+  });
+
+  it.only("lets a teacher delete her account", () => {
+    cy.login();
+    cy.visit("/user/delete");
+    cy.get("button").contains("Konto löschen").click();
+    cy.contains("erfolgreich");
   });
 });

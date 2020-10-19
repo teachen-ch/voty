@@ -1205,6 +1205,7 @@ type Mutation {
   createOneSchool(data: SchoolCreateInput!): School!
   createOneTeam(data: TeamCreateInput!): Team!
   createUser(data: UserCreateInput!): User!
+  deleteAccount: Response
   deleteOneSchool(where: SchoolWhereUniqueInput!): School
   deleteOneTeam(where: TeamWhereUniqueInput!): Team
   emailVerification(email: String!, purpose: String!): ResponseLogin

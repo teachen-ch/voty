@@ -11,6 +11,7 @@ declare module "rebass" {
   }
   interface BoxProps {
     as?: React.ElementType;
+    textAlign?: string;
     css?: InterpolationWithTheme<any>;
   }
   interface TextProps {

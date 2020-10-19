@@ -354,3 +354,35 @@ async function deleteExpiredTokens(prisma: PrismaClient) {
     where: { expires: { lt: expired } },
   });
 }
+
+export const deleteAccount: FieldResolver<"Mutation", "deleteAccount"> = async (
+  _root,
+  args,
+  ctx
+) => {
+  try {
+    const user = await getUser(ctx);
+    if (!user) throw new Error("ERR_NEEDS_LOGIN");
+
+    // delete classes (with BallotRuns) from this teacher
+    if (user.role === Role.Teacher) {
+      await ctx.db.ballotRun.deleteMany({
+        where: { team: { teacherId: user.id } },
+      });
+      await ctx.db.team.deleteMany({ where: { teacherId: user.id } });
+    }
+
+    // delete things the user has contributed
+    await ctx.db.voted.deleteMany({ where: { userId: user.id } });
+    await ctx.db.attachment.deleteMany({ where: { userId: user.id } });
+    await ctx.db.reaction.deleteMany({ where: { userId: user.id } });
+    await ctx.db.thread.deleteMany({ where: { userId: user.id } });
+
+    const deleted = await ctx.db.user.delete({ where: { id: user.id } });
+    if (!deleted) throw new Error("ERR_CANNOT_DELETE_ACCOUNT");
+    return { success: true };
+  } catch (err) {
+    console.log("Error deleting user: ", err);
+    throw new Error("ERR_CANNOT_DELETE_ACCOUNT");
+  }
+};
