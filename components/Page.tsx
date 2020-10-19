@@ -96,9 +96,9 @@ export function LoggedInPage({
 
 function getRoleName(role: Role): string {
   const translations: Record<string, string> = {
-    Teacher: "Lehrer/-in",
-    Student: "Schüler/-in",
-    Principal: "Schulleiter/-in",
+    Teacher: "Lehrer*in",
+    Student: "Schüler*in",
+    Principal: "Schulleiter*in",
   };
   return translations[String(role)] || String(role);
 }

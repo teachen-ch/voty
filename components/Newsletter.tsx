@@ -12,10 +12,10 @@ export default function Newsletter(): ReactElement {
 
         <SelectField id="Funktion" label="Ich bin">
           <option>---</option>
-          <option>Lehrer/-in</option>
-          <option>Schüler/-in</option>
-          <option>Schulleiter/-in</option>
-          <option>Weltenbürger/-in</option>
+          <option>Lehrer*in</option>
+          <option>Schüler*in</option>
+          <option>Schulleiter*in</option>
+          <option>Weltenbürger*in</option>
         </SelectField>
 
         <Field id="email" label="Email" />

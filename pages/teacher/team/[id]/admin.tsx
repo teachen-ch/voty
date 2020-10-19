@@ -79,7 +79,7 @@ export default function TeamPage(): ReactElement {
   return (
     <LoggedInPage heading={`${team.name}`}>
       <TeacherTeamNavigation team={team} />
-      <Heading as="h2">Schüler|innen</Heading>
+      <Heading as="h2">Schüler*innen</Heading>
       <Users users={team.members} />
 
       <Card>
@@ -118,7 +118,7 @@ export default function TeamPage(): ReactElement {
             </>
           )}
           <Text fontSize={1} sx={{ gridColumn: 2 }} mt={4}>
-            Alternativ können Sie Schüler|innen auch mit einem{" "}
+            Alternativ können Sie Schüler*innen auch mit einem{" "}
             <Link>
               <button onClick={() => setShowInviteLink(true)}>
                 Einladungslink

@@ -133,7 +133,7 @@ export const Teams: React.FC<TeamsProps> = ({ where, teamClick }) => {
           <tr>
             <th align="left">Klasse</th>
             <th align="left">Schulhaus</th>
-            <th align="left">Schüler|innen</th>
+            <th align="left">Schüler*innen</th>
             <th align="left">Bearbeiten</th>
           </tr>
         </thead>
@@ -142,20 +142,26 @@ export const Teams: React.FC<TeamsProps> = ({ where, teamClick }) => {
           {teams?.map((team) => (
             <Fragment key={team.id}>
               <tr>
-                <td>
-                  <A onClick={() => teamClick(team)}>{team.name}</A>
-                </td>
+                <td>{team.name}</td>
                 <td>
                   {team.school?.name} ({team.school?.city})
                 </td>
                 <td>
-                  <A
-                    onClick={() =>
-                      setFocus(focus == team.id ? undefined : team.id)
-                    }
-                  >
-                    {team.members ? team.members.length : "-"}
-                  </A>
+                  {team.members ? (
+                    <>
+                      {team.members.length} SuS (
+                      <A
+                        onClick={() =>
+                          setFocus(focus == team.id ? undefined : team.id)
+                        }
+                      >
+                        anzeigen
+                      </A>
+                      )
+                    </>
+                  ) : (
+                    "-"
+                  )}
                 </td>
                 <td>
                   <A onClick={() => teamClick(team)}>Bearbeiten</A>
@@ -175,7 +181,7 @@ export const Teams: React.FC<TeamsProps> = ({ where, teamClick }) => {
                             )
                           }
                         >
-                          Schüler/-innen einladen
+                          Schüler*innen einladen
                         </Button>
                       </Text>
                     </Card>

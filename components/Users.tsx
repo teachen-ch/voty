@@ -172,6 +172,10 @@ export const StudentProfileEdit: React.FC<{ user: SessionUser }> = ({
             Angaben speichern
           </Button>
           <ErrorBox error={error} my={4} />
+
+          <Text fontSize={1} sx={{ gridColumn: 2 }}>
+            <i>[TODO-Legal-Text]</i>
+          </Text>
         </Grid>
       </Form>
     </Formik>
