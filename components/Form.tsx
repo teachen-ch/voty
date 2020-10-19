@@ -141,7 +141,7 @@ export const QForm: React.FC<QFormProps> = ({ fields, mutation, ...props }) => {
       return null;
     }
     if (field.type === "submit") {
-      return <Submit name={field.name} label={field.label} />;
+      return <Submit name={field.name || ""} label={field.label || ""} />;
     }
     if (field.type === "radio") {
       if (!field.options) throw new Error("You need to specify options");
