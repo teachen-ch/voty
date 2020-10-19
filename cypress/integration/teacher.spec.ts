@@ -48,7 +48,7 @@ describe("Test Teacher Startpage", () => {
     cy.contains("Dein Schulhaus: Testschule");
   });
 
-  it.only("lets a teacher delete her account", () => {
+  it("lets a teacher delete her account", () => {
     cy.login();
     cy.visit("/user/delete");
     cy.get("button").contains("Konto löschen").click();

@@ -1,9 +1,9 @@
-describe("Test Panels", () => {
+describe("Test Live-Voting Panels", () => {
   before(() => {
     cy.task("prismaLoader", "testdb.yml");
   });
 
-  it("opens teacher page and select some ballots", () => {
+  it.skip("opens teacher page and selects some ballots", () => {
     cy.login();
     cy.visit("/teacher");
     cy.contains("Class 1").click();
