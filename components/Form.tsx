@@ -1,4 +1,10 @@
-import { Formik, Form, useField, FormikFormProps } from "formik";
+import {
+  Formik,
+  Form,
+  useField,
+  FormikFormProps,
+  useFormikContext,
+} from "formik";
 import { Text, Button, Card, Box, BoxProps } from "rebass";
 import { Grid } from "theme-ui";
 import {
@@ -135,14 +141,7 @@ export const QForm: React.FC<QFormProps> = ({ fields, mutation, ...props }) => {
       return null;
     }
     if (field.type === "submit") {
-      return (
-        <React.Fragment key={`${field.name}-frag`}>
-          <span />
-          <Button type="submit" key={field.name}>
-            {field.label}
-          </Button>
-        </React.Fragment>
-      );
+      return <Submit name={field.name} label={field.label} />;
     }
     if (field.type === "radio") {
       if (!field.options) throw new Error("You need to specify options");
@@ -310,5 +309,21 @@ export const ErrorBox: React.FC<ErrorBoxProps> = ({ error, ...props }) => {
         {error}
       </Text>
     </Box>
+  );
+};
+
+export const Submit: React.FC<{ name: string; label: string }> = ({
+  name,
+  label,
+}) => {
+  const context = useFormikContext();
+  const submitting = context.isSubmitting;
+  return (
+    <React.Fragment key={`${name}-frag`}>
+      <span />
+      <Button type="submit" key={name} disabled={submitting}>
+        {submitting ? "Bitte warten..." : label}
+      </Button>
+    </React.Fragment>
   );
 };
