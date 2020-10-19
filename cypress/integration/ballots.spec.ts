@@ -3,14 +3,6 @@ describe("Test Ballots", () => {
     cy.task("prismaLoader", "testdb.yml");
   });
 
-  it("opens ballots page and detail with no login!", () => {
-    cy.visit("/ballots");
-    cy.contains("Nationale Abstimmungen");
-    cy.contains("Testinitiative").click();
-    cy.contains("ohne Inhalt");
-    cy.contains("Um über diese Abstimmung");
-  });
-
   it("lets student vote on a ballot (only once)", () => {
     cy.login("student@teachen.ch", "teachen");
     cy.visit("/ballots/");

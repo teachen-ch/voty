@@ -175,14 +175,14 @@ const Stats = () => (
     <Heading mt={0}>Aktueller Stand</Heading>
     <Grid columns="1fr 4fr">
       <label>Anzahl Klassen:</label>
-      <ClassBar classes={8} total={50} />
+      <ClassBar classes={11} total={50} />
 
       <label>Diversität Kantone:</label>
-      <CantonsBar cantons="BS, BE, LU, ZH" diversity={23} />
+      <CantonsBar cantons="BE, BS, LU, SG, ZH, " diversity={25} />
 
       <label>Verteilung Typus:</label>
       <TypeBar
-        types={{ Berufsschulen: 0.2, "Sekundarstufe I": 0.55, Gymnasien: 0.25 }}
+        types={{ Berufsschulen: 0.2, "Sekundarstufe I": 0.53, Gymnasien: 0.27 }}
       />
     </Grid>
   </Card>

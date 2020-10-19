@@ -1,4 +1,4 @@
-import { Page } from "components/Page";
+import { LoggedInPage } from "components/Page";
 import { Heading } from "rebass";
 import { Ballots, BallotScope } from "components/Ballots";
 import { BallotFieldsFragment } from "graphql/types";
@@ -13,9 +13,9 @@ export default function TeacherTest(): ReactElement {
   }
 
   return (
-    <Page heading="Aktuelle Abstimmungen">
+    <LoggedInPage heading="Aktuelle Abstimmungen">
       <Heading as="h2">Nationale Abstimmungen</Heading>
       <Ballots where={{ scope: BallotScope.National }} onClick={selectBallot} />
-    </Page>
+    </LoggedInPage>
   );
 }

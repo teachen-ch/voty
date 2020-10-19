@@ -1,4 +1,4 @@
-import { Page, ErrorPage } from "components/Page";
+import { Page, LoggedInPage, ErrorPage } from "components/Page";
 import { Text, Heading, Box, Card, Flex } from "rebass";
 import { useRouter } from "next/router";
 import { useUser } from "state/user";
@@ -28,7 +28,7 @@ export default function BallotPage(): ReactElement {
     );
 
   return (
-    <Page heading="Abstimmung">
+    <LoggedInPage heading="Abstimmung">
       <Heading as="h2">{ballot.title}</Heading>
       <Text my={2}>{ballot.description}</Text>
       <Text my={2}>📅 Dauer: {formatFromTo(ballot.start, ballot.end)}</Text>
@@ -43,7 +43,7 @@ export default function BallotPage(): ReactElement {
         <div dangerouslySetInnerHTML={parseMarkdownInner(ballot.body)} />
       </Card>
       <VotyNow ballot={ballot} />
-    </Page>
+    </LoggedInPage>
   );
 }
 
