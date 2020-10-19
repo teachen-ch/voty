@@ -40,7 +40,6 @@ export const Banner: React.FC<BannerProps> = ({ href, children }) => {
         }}
         href={href}
         color="white"
-        target="_blank"
       >
         <Text textAlign="center" fontWeight="bold">
           {children}

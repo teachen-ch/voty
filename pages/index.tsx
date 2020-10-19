@@ -95,8 +95,8 @@ export default function Home(): ReactElement {
           </Flex>
         </Grid>
 
-        <Banner href="/umfrage">
-          Ihre Erfahrung mit Demokratie an der Schule?
+        <Banner href="/abstimmung">
+          Jetzt mitmachen: Jugendliche stimmen ab!
         </Banner>
       </Container>
     </>
