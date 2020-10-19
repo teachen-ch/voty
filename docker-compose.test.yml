@@ -21,7 +21,7 @@ services:
     command: sh -c "sleep 3 && yarn run ci:test"
 
   postgres:
-    image: "postgres:12"
+    image: "postgres:13"
     container_name: "postgres"
     ports:
       - "5432:5432"
