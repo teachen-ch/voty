@@ -53,9 +53,13 @@ export function Success({ user }: { user?: SessionUser }): ReactElement {
 export function CreateUserForm({
   setUser,
   onSubmit,
+  omitRole,
+  defaultRole = "Teacher",
 }: {
   setUser: Dispatch<SetStateAction<SessionUser | undefined>>;
   onSubmit?: (values: Record<string, string | number>) => void;
+  omitRole?: boolean;
+  defaultRole?: string;
 }): ReactElement {
   const router = useRouter();
   const [error, setError] = useState("");
@@ -105,9 +109,9 @@ export function CreateUserForm({
           // watch out: password2 would also be sent to server which barks
           //password2: yup.string().oneOf([yup.ref('password'), null], 'Passwords must match')
           role: {
-            type: "select",
+            type: omitRole ? "hidden" : "select",
             label: "Ich bin:",
-            init: "Teacher",
+            init: defaultRole,
             required: true,
             options: {
               "---": "Unkown",

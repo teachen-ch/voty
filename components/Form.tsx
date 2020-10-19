@@ -156,6 +156,12 @@ export const QForm: React.FC<QFormProps> = ({ fields, mutation, ...props }) => {
         />
       );
     }
+    if (field.type === "hidden") {
+      console.log("HIDDEN FIELD", field);
+      return (
+        <input type="hidden" name={field.name} value={String(field.init)} />
+      );
+    }
     if (field.type === "select") {
       if (!field.options) throw new Error("You need to specify options");
       const opts = field.options;
