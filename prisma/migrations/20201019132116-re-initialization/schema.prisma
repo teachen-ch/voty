@@ -32,7 +32,7 @@ model User {
   image         String?
 
   password String?
-  gender   Gender  @default(Unkown)
+  gender   Gender?
   year     Int? // year born
   canton   String? // if not set via school
 
@@ -176,6 +176,7 @@ model BallotRun {
   team     Team   @relation(fields: [teamId], references: [id])
   teamId   String @map(name: "team_id")
 
+  Vote Vote[]
   @@unique([ballotId, teamId])
   @@map(name: "ballot_runs")
 }
@@ -216,12 +217,14 @@ model Vote {
   canton     String?
   schooltype String?
 
-  ballot   Ballot  @relation(fields: [ballotId], references: [id])
-  ballotId String  @map(name: "ballot_id")
-  team     Team?   @relation(fields: [teamId], references: [id])
-  teamId   String? @map(name: "team_id")
-  school   School? @relation(fields: [schoolId], references: [id])
-  schoolId String? @map(name: "school_id")
+  ballot      Ballot     @relation(fields: [ballotId], references: [id])
+  ballotId    String     @map(name: "ballot_id")
+  ballotRun   BallotRun? @relation(fields: [ballotRunId], references: [id])
+  ballotRunId String?    @map(name: "ballotrun_id")
+  team        Team?      @relation(fields: [teamId], references: [id])
+  teamId      String?    @map(name: "team_id")
+  school      School?    @relation(fields: [schoolId], references: [id])
+  schoolId    String?    @map(name: "school_id")
 
   @@map(name: "votes")
 }

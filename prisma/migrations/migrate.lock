@@ -1,9 +1,3 @@
 # Prisma Migrate lockfile v1
 
-20201012131749-schema--re---initialization
-20201012140134-added-team-and-school-to-votes
-20201012145800-add--code--to-team--which-allows-anonymous-voting-for-teams-panels
-20201012160907-added-team-and-school-to--voted
-20201012161114-changed-ballot-run-to-ballot-runs-on-relations
-20201013090054-setting-ballot-run-unique-constrain-on-ballet-team
-20201014175431-added-ballot-run-id-to-vote
+20201019132116-re-initialization

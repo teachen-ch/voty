@@ -228,32 +228,7 @@
       "model": "User",
       "field": "gender",
       "type": "Gender",
-      "arity": "Required"
-    },
-    {
-      "tag": "CreateDirective",
-      "location": {
-        "path": {
-          "tag": "Field",
-          "model": "User",
-          "field": "gender"
-        },
-        "directive": "default"
-      }
-    },
-    {
-      "tag": "CreateArgument",
-      "location": {
-        "tag": "Directive",
-        "path": {
-          "tag": "Field",
-          "model": "User",
-          "field": "gender"
-        },
-        "directive": "default"
-      },
-      "argument": "",
-      "value": "Unkown"
+      "arity": "Optional"
     },
     {
       "tag": "CreateField",
@@ -346,6 +321,38 @@
       },
       "argument": "references",
       "value": "[id]"
+    },
+    {
+      "tag": "CreateField",
+      "model": "User",
+      "field": "schoolId",
+      "type": "String",
+      "arity": "Optional"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "User",
+          "field": "schoolId"
+        },
+        "directive": "map"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "User",
+          "field": "schoolId"
+        },
+        "directive": "map"
+      },
+      "argument": "name",
+      "value": "\"school_id\""
     },
     {
       "tag": "CreateField",
@@ -456,38 +463,6 @@
       },
       "argument": "",
       "value": "\"Teacher\""
-    },
-    {
-      "tag": "CreateField",
-      "model": "User",
-      "field": "schoolId",
-      "type": "String",
-      "arity": "Optional"
-    },
-    {
-      "tag": "CreateDirective",
-      "location": {
-        "path": {
-          "tag": "Field",
-          "model": "User",
-          "field": "schoolId"
-        },
-        "directive": "map"
-      }
-    },
-    {
-      "tag": "CreateArgument",
-      "location": {
-        "tag": "Directive",
-        "path": {
-          "tag": "Field",
-          "model": "User",
-          "field": "schoolId"
-        },
-        "directive": "map"
-      },
-      "argument": "name",
-      "value": "\"school_id\""
     },
     {
       "tag": "CreateField",
@@ -1037,6 +1012,24 @@
     {
       "tag": "CreateField",
       "model": "Team",
+      "field": "code",
+      "type": "String",
+      "arity": "Optional"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "Team",
+          "field": "code"
+        },
+        "directive": "unique"
+      }
+    },
+    {
+      "tag": "CreateField",
+      "model": "Team",
       "field": "year",
       "type": "Int",
       "arity": "Optional"
@@ -1333,6 +1326,27 @@
       "model": "Team",
       "field": "User",
       "type": "User",
+      "arity": "List"
+    },
+    {
+      "tag": "CreateField",
+      "model": "Team",
+      "field": "BallotRuns",
+      "type": "BallotRun",
+      "arity": "List"
+    },
+    {
+      "tag": "CreateField",
+      "model": "Team",
+      "field": "Vote",
+      "type": "Vote",
+      "arity": "List"
+    },
+    {
+      "tag": "CreateField",
+      "model": "Team",
+      "field": "Voted",
+      "type": "Voted",
       "arity": "List"
     },
     {
@@ -1669,6 +1683,20 @@
       "model": "School",
       "field": "ballots",
       "type": "Ballot",
+      "arity": "List"
+    },
+    {
+      "tag": "CreateField",
+      "model": "School",
+      "field": "Vote",
+      "type": "Vote",
+      "arity": "List"
+    },
+    {
+      "tag": "CreateField",
+      "model": "School",
+      "field": "Voted",
+      "type": "Voted",
       "arity": "List"
     },
     {
@@ -2429,6 +2457,13 @@
       "value": "\"updated_at\""
     },
     {
+      "tag": "CreateField",
+      "model": "Ballot",
+      "field": "BallotRuns",
+      "type": "BallotRun",
+      "arity": "List"
+    },
+    {
       "tag": "CreateDirective",
       "location": {
         "path": {
@@ -2669,6 +2704,13 @@
       "value": "\"team_id\""
     },
     {
+      "tag": "CreateField",
+      "model": "BallotRun",
+      "field": "Vote",
+      "type": "Vote",
+      "arity": "List"
+    },
+    {
       "tag": "CreateDirective",
       "location": {
         "path": {
@@ -2690,6 +2732,22 @@
       },
       "argument": "name",
       "value": "\"ballot_runs\""
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Model",
+          "model": "BallotRun",
+          "arguments": [
+            {
+              "name": "",
+              "value": "[ballotId, teamId]"
+            }
+          ]
+        },
+        "directive": "unique"
+      }
     },
     {
       "tag": "CreateModel",
@@ -3092,6 +3150,162 @@
       "value": "\"ballot_id\""
     },
     {
+      "tag": "CreateField",
+      "model": "Voted",
+      "field": "team",
+      "type": "Team",
+      "arity": "Optional"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "Voted",
+          "field": "team"
+        },
+        "directive": "relation"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "Voted",
+          "field": "team"
+        },
+        "directive": "relation"
+      },
+      "argument": "fields",
+      "value": "[teamId]"
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "Voted",
+          "field": "team"
+        },
+        "directive": "relation"
+      },
+      "argument": "references",
+      "value": "[id]"
+    },
+    {
+      "tag": "CreateField",
+      "model": "Voted",
+      "field": "teamId",
+      "type": "String",
+      "arity": "Optional"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "Voted",
+          "field": "teamId"
+        },
+        "directive": "map"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "Voted",
+          "field": "teamId"
+        },
+        "directive": "map"
+      },
+      "argument": "name",
+      "value": "\"team_id\""
+    },
+    {
+      "tag": "CreateField",
+      "model": "Voted",
+      "field": "school",
+      "type": "School",
+      "arity": "Optional"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "Voted",
+          "field": "school"
+        },
+        "directive": "relation"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "Voted",
+          "field": "school"
+        },
+        "directive": "relation"
+      },
+      "argument": "fields",
+      "value": "[schoolId]"
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "Voted",
+          "field": "school"
+        },
+        "directive": "relation"
+      },
+      "argument": "references",
+      "value": "[id]"
+    },
+    {
+      "tag": "CreateField",
+      "model": "Voted",
+      "field": "schoolId",
+      "type": "String",
+      "arity": "Optional"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "Voted",
+          "field": "schoolId"
+        },
+        "directive": "map"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "Voted",
+          "field": "schoolId"
+        },
+        "directive": "map"
+      },
+      "argument": "name",
+      "value": "\"school_id\""
+    },
+    {
       "tag": "CreateDirective",
       "location": {
         "path": {
@@ -3273,6 +3487,240 @@
       },
       "argument": "name",
       "value": "\"ballot_id\""
+    },
+    {
+      "tag": "CreateField",
+      "model": "Vote",
+      "field": "ballotRun",
+      "type": "BallotRun",
+      "arity": "Optional"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "Vote",
+          "field": "ballotRun"
+        },
+        "directive": "relation"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "Vote",
+          "field": "ballotRun"
+        },
+        "directive": "relation"
+      },
+      "argument": "fields",
+      "value": "[ballotRunId]"
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "Vote",
+          "field": "ballotRun"
+        },
+        "directive": "relation"
+      },
+      "argument": "references",
+      "value": "[id]"
+    },
+    {
+      "tag": "CreateField",
+      "model": "Vote",
+      "field": "ballotRunId",
+      "type": "String",
+      "arity": "Optional"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "Vote",
+          "field": "ballotRunId"
+        },
+        "directive": "map"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "Vote",
+          "field": "ballotRunId"
+        },
+        "directive": "map"
+      },
+      "argument": "name",
+      "value": "\"ballotrun_id\""
+    },
+    {
+      "tag": "CreateField",
+      "model": "Vote",
+      "field": "team",
+      "type": "Team",
+      "arity": "Optional"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "Vote",
+          "field": "team"
+        },
+        "directive": "relation"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "Vote",
+          "field": "team"
+        },
+        "directive": "relation"
+      },
+      "argument": "fields",
+      "value": "[teamId]"
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "Vote",
+          "field": "team"
+        },
+        "directive": "relation"
+      },
+      "argument": "references",
+      "value": "[id]"
+    },
+    {
+      "tag": "CreateField",
+      "model": "Vote",
+      "field": "teamId",
+      "type": "String",
+      "arity": "Optional"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "Vote",
+          "field": "teamId"
+        },
+        "directive": "map"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "Vote",
+          "field": "teamId"
+        },
+        "directive": "map"
+      },
+      "argument": "name",
+      "value": "\"team_id\""
+    },
+    {
+      "tag": "CreateField",
+      "model": "Vote",
+      "field": "school",
+      "type": "School",
+      "arity": "Optional"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "Vote",
+          "field": "school"
+        },
+        "directive": "relation"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "Vote",
+          "field": "school"
+        },
+        "directive": "relation"
+      },
+      "argument": "fields",
+      "value": "[schoolId]"
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "Vote",
+          "field": "school"
+        },
+        "directive": "relation"
+      },
+      "argument": "references",
+      "value": "[id]"
+    },
+    {
+      "tag": "CreateField",
+      "model": "Vote",
+      "field": "schoolId",
+      "type": "String",
+      "arity": "Optional"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "Vote",
+          "field": "schoolId"
+        },
+        "directive": "map"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "Vote",
+          "field": "schoolId"
+        },
+        "directive": "map"
+      },
+      "argument": "name",
+      "value": "\"school_id\""
     },
     {
       "tag": "CreateDirective",

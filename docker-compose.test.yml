@@ -6,6 +6,7 @@ services:
     build: .
     env_file: ".env"
     # --ipc=host see https://github.com/cypress-io/cypress/issues/350
+    #   add this if docker starts to crash on long-running test runs
     #ipc: host
     environment:
       - DATABASE_URL=postgres://voty:voty@postgres:5432/voty
@@ -25,11 +26,6 @@ services:
     container_name: "postgres"
     ports:
       - "5432:5432"
-    
-    # For some reason, tests start to fail on github actions
-    # trying to disable volumes
-    #volumes:
-    #  - ./data:/var/lib/postgresql/data
     environment:
       POSTGRES_USER: voty
       POSTGRES_PASSWORD: voty
