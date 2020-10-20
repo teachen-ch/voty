@@ -111,21 +111,26 @@ type ResultSchool = Pick<School, "id" | "name" | "city" | "zip" | "canton">;
 export const SelectSchool: React.FC = () => {
   const user = useUser();
   const setUser = useSetUser();
+  const [edit, setEdit] = useState(false);
   const schoolsQuery = useSchoolsQuery();
   const schools = schoolsQuery.data?.schools;
   const [create, setCreate] = useState(false);
   const [setUserSchool] = useSetSchoolMutation({
     onCompleted(data) {
       setUser(data.setSchool);
+      setEdit(false);
     },
   });
 
   if (!user) return null;
 
-  if (user.school) {
+  if (user.school && !edit) {
     return (
-      <Text>
+      <Text my={4}>
         <b>Dein Schulhaus</b>: {user.school.name}, {user.school.city}
+        <Button onClick={() => setEdit(true)} variant="inline">
+          Bearbeiten
+        </Button>
       </Text>
     );
   }
@@ -152,6 +157,7 @@ export const SelectSchool: React.FC = () => {
             createOneSchool: ResultSchool;
           }) => {
             setCreate(false);
+            setEdit(false);
             void setUserSchool({
               variables: { school: createOneSchool.id },
             });
@@ -160,13 +166,14 @@ export const SelectSchool: React.FC = () => {
       ) : (
         <Card>
           <Heading mt={0}>
-            Bitte wähle Dein Schulhaus aus oder erfasse eines:
+            Wähle Dein Schulhaus aus oder erfasse ein Neues:
           </Heading>
           <QForm
             fields={{
               school: {
                 type: "select",
                 label: "Deine Schule: ",
+                init: user?.school?.id,
                 required: true,
                 options,
               },

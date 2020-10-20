@@ -1,11 +1,11 @@
-import { useUser } from "../../state/user";
-import { LoggedInPage } from "../../components/Page";
-import { Heading, Button, Text, Box, Link as A } from "rebass";
-import { Teams, CreateTeamForm } from "../../components/Teams";
+import { useUser } from "state/user";
+import { LoggedInPage } from "components/Page";
+import { Heading, Button, Text } from "rebass";
+import { Teams, CreateTeamForm } from "components/Teams";
 import { useState, ReactElement } from "react";
-import { SelectSchool } from "../../components/Schools";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import { TeacherProfilePage } from "./profile";
 
 export default function Teacher(): ReactElement {
   const user = useUser();
@@ -19,10 +19,17 @@ export default function Teacher(): ReactElement {
     );
   }
 
+  if (user?.school === null) {
+    return <TeacherProfilePage firstRun />;
+  }
+
   return (
     <LoggedInPage heading="Startseite für Lehrpersonen">
       <Heading as="h2">Willkommen {user && user.name}</Heading>
-      <SelectSchool />
+
+      <Link href="/teacher/profile">
+        <Button>Profil bearbeiten</Button>
+      </Link>
       <Heading as="h3">Deine Klassen auf voty</Heading>
       <Teams
         where={{ teacher: { id: { equals: user?.id } } }}
@@ -38,12 +45,6 @@ export default function Teacher(): ReactElement {
         "Bitte wähle zuerst Dein Schulhaus."
       )}
       <Text />
-      <Box mt={5} textAlign="right">
-        Ich möchte mein Konto bei voty{" "}
-        <Link href="/user/delete">
-          <A>löschen</A>
-        </Link>
-      </Box>
     </LoggedInPage>
   );
 }

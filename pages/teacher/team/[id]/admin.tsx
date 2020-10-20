@@ -120,9 +120,9 @@ export default function TeamPage(): ReactElement {
           <Text fontSize={1} sx={{ gridColumn: 2 }} mt={4}>
             Alternativ können Sie Schüler*innen auch mit einem{" "}
             <Link>
-              <button onClick={() => setShowInviteLink(true)}>
+              <Button onClick={() => setShowInviteLink(true)} variant="inline">
                 Einladungslink
-              </button>
+              </Button>
             </Link>{" "}
             einladen
           </Text>

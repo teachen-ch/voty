@@ -4,6 +4,7 @@ import { Heading, Box, Text, Link as A, Card } from "rebass";
 import { ReactElement } from "react";
 import Link from "next/link";
 import { ProfileEdit } from "components/Users";
+import { SelectSchool } from "../../components/Schools";
 
 export default function TeacherProfilePage({
   firstRun,
@@ -14,6 +15,7 @@ export default function TeacherProfilePage({
 
   return (
     <LoggedInPage heading="Startseite">
+      <SelectSchool />
       <Card>
         <Heading as="h2" mt={0}>
           {firstRun ? "Bitte ergänze Deine Angaben…" : "Profil bearbeiten"}

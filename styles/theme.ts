@@ -188,6 +188,17 @@ export default {
       bg: "white",
       cursor: "pointer",
     },
+    inline: {
+      variant: "buttons.primary",
+      fontSize: 1,
+      color: "white",
+      bg: "primary",
+      cursor: "pointer",
+      p: 1,
+      px: 3,
+      borderRadius: 0,
+      mx: 3,
+    },
     full: {
       width: "100%",
       whiteSpace: "nowrap",

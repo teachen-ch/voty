@@ -1,4 +1,3 @@
-import { ReactElement } from "react";
 import { useUser } from "state/user";
 import { Role } from "graphql/types";
 import { StudentProfilePage } from "pages/student/profile";

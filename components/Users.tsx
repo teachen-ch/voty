@@ -99,7 +99,6 @@ export const ProfileEdit: React.FC<{
     onCompleted(data) {
       setUser(data.updateUser);
       setEdit(false);
-      console.log("SET EDIT FALSE");
     },
     onError(error) {
       if (error.message === "ERR_DUPLICATE_EMAIL") {
@@ -117,7 +116,6 @@ export const ProfileEdit: React.FC<{
   const numYears = 14;
 
   async function onSubmit(values: IProfileForm) {
-    console.log(values);
     await doUpdateUser({
       variables: {
         where: { id: user?.id },
@@ -145,6 +143,7 @@ export const ProfileEdit: React.FC<{
         .string()
         .required("Pflichtfeld")
         .min(3, "Dein Vorname ist etwas kurz"),
+      lastname: yup.string(),
     });
   } else {
     validationSchema = yup.object().shape({
