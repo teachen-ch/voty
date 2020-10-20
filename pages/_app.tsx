@@ -20,7 +20,7 @@ function MyApp({ Component, pageProps }: AppProps): ReactElement {
   useEffect(() => {
     // eslint-disable-next-line
     stats.init({ url: "https://stats.teachen.ch", siteId: 2 });
-  });
+  }, []);
   return (
     <div className="container">
       <ApolloProvider client={apollo}>

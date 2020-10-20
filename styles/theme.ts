@@ -31,9 +31,8 @@ export default {
     monospace: 'monaco, "Consolas", "Lucida Console", monospace',
   },
   fontWeights: {
-    body: 500,
+    body: 400,
     heading: 700,
-    semi: 600,
     bold: 700,
   },
   lineHeights: {
