@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "concurrently \"yarn:next\" \"yarn:nexus:reflection\" \"yarn:graphql\"",
+    "dev": "concurrently \"yarn:next\" \"yarn:nexus:reflection\"",
     "next": "NODE_OPTIONS='--inspect' next dev",
     "prebuild": "nexus build",
     "build": "next build",

@@ -19,7 +19,7 @@ const stats = require("@socialgouv/matomo-next");
 function MyApp({ Component, pageProps }: AppProps): ReactElement {
   useEffect(() => {
     // eslint-disable-next-line
-    stats.init("https://stats.teachen.ch/", 2);
+    stats.init({ url: "https://stats.teachen.ch", siteId: 2 });
   });
   return (
     <div className="container">

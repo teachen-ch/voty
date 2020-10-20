@@ -81,16 +81,6 @@ export default {
       fontWeight: "body",
       lineHeight: "body",
       fontSize: 2,
-      /*
-      backgroundImage: [
-        "url(/images/voty_bg_mobile_1.svg)",
-        "url(/images/voty_bg_mobile_1.svg)",
-        "url(/images/voty_bg_1.svg)",
-      ],
-      backgroundPosition: ["50% -5%", "50% -10%", "51% 28.5%"],
-      backgroundAttachment: "fixed",
-      backgroundRepeat: "no-repeat",
-      backgroundSize: "cover",*/
       ":before": {
         content: '""',
         display: "block",
