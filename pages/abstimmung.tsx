@@ -1,6 +1,6 @@
 import { Field } from "components/Newsletter";
 import { Page, PageHeading } from "components/Page";
-import { Card, Heading, Text, Box, Flex, Button } from "rebass";
+import { Card, Heading, Text, Box, Flex, Button, Link as A } from "rebass";
 import { Grid } from "theme-ui";
 import Link from "next/link";
 import { ReactElement } from "react";
@@ -18,12 +18,12 @@ export default function Abstimmung(): ReactElement {
         gemeinsam mit engagierten Lehrpersonen ein Experiment starten und im
         November Abstimmungen für Schülerinnen und Schüler durchführen. Wir sind
         überzeugt: Interesse für Politik entsteht dann, wenn man diskutieren und
-        mitentscheiden kann. Eine solche Gelegenheit möchten wir erschaffen.
+        mitentscheiden kann.
       </Text>
       <Text my={4}>
         Wenn die Schweiz am 29. November über die{" "}
-        <b>«Konzernverantwortungsinitiative»</b> und die{" "}
-        <b>«Kriegsgeschäfte Initiative»</b> abstimmt, sind das Themen, zu denen
+        <b>«Konzernverantwortungs-Initiative»</b> und die{" "}
+        <b>«Kriegsgeschäfte-Initiative»</b> abstimmt, sind das Themen, zu denen
         auch Jugendliche eine Meinung haben. Wir möchten mit mindestens 50
         Klassen in der Schweiz eine <b>Abstimmung</b> durchführen und dazu
         brauchen wir Ihre Hilfe:
@@ -44,7 +44,11 @@ export default function Abstimmung(): ReactElement {
           </Text>
           <Text maxWidth="600px">
             Ich nehme mir genügend Zeit im November, um die Vorlagen mit den
-            SchülerInnen zu diskutieren (z.B. mit easyvote.ch-Materialien)
+            SchülerInnen zu diskutieren (z.B. mit{" "}
+            <A href="https://www.easyvote.ch/de/school/" rel="noreferrer">
+              easyvote.ch
+            </A>{" "}
+            Materialien)
           </Text>
         </Flex>
         <Flex my={2}>
@@ -53,7 +57,7 @@ export default function Abstimmung(): ReactElement {
           </Text>
           <Text maxWidth="600px">
             Ich führe die Abstimmung mit meiner Klasse online durch und
-            bespreche im Nachgang das Resultat mit der Klasse
+            bespreche im Nachgang das Resultat
           </Text>
         </Flex>
       </Flex>
@@ -87,11 +91,11 @@ export default function Abstimmung(): ReactElement {
       <Stats />
 
       <PageHeading>Fragen und Antworten</PageHeading>
-      <Heading as="h3">Wer steht hinter https://voty.ch/?</Heading>
+      <Heading as="h3">Wer steht hinter voty.ch?</Heading>
       <Text>
         voty.ch ist ein Projekt des Vereins «Teachen!», welcher während des
         Corona-Lockdowns von engagierten Eltern, Lehrpersonen und
-        Informatiker|innen gegründet wurde. Das Projekt wird unterstützt durch
+        Informatiker*innen gegründet wurde. Das Projekt wird unterstützt durch
         den prototypefund.opendata.ch.
       </Text>
       <Heading as="h3">Wie funktioniert die Online – Abstimmung?</Heading>
@@ -106,7 +110,7 @@ export default function Abstimmung(): ReactElement {
       </Heading>
       <Text>
         Die abgegebenen Stimmen werden nicht mit Personen verknüpft. Es wird
-        einzig registriert, welche Benutzer|innen bereits ihre Stimme abgegeben
+        einzig registriert, welche Benutzer*innen bereits ihre Stimme abgegeben
         haben. Die Altersgruppe sowie der Kanton werden zu jeder Stimme
         gespeichert, eine «De-Anonymisierung» auf Ebene Person oder Schulklasse
         ist nicht möglich.

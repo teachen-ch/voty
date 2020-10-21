@@ -58,7 +58,7 @@ export default function Home(): ReactElement {
               so wertvoll? Wir möchten Jugendliche von 12-18 Jahren motivieren,
               sich mit unserem politischen System auseinanderzusetzen.
             </Text>
-            <Button as="a" href="/newsletter" variant="full" mt={3} mb={6}>
+            <Button as="a" href="/newsletter" variant="secondary" mt={3} mb={6}>
               Anmeldung Newsletter
             </Button>
           </Flex>
@@ -73,8 +73,8 @@ export default function Home(): ReactElement {
               Meinung! Wir möchten Test-Abstimmungen zeitgleich zu nationalen
               Urnengängen durchführen und die Resultate diskutieren.
             </Text>
-            <Button as="a" href="/newsletter" variant="full" mt={3} mb={6}>
-              Wollen wir auch!
+            <Button as="a" href="/abstimmung" variant="full" mt={3} mb={6}>
+              Jetzt mitmachen!
             </Button>
           </Flex>
 
@@ -89,7 +89,7 @@ export default function Home(): ReactElement {
               wie wir Demokratie in Schulhäuser bringen können.
             </Text>
 
-            <Button as="a" href="/kontakt" variant="full" mt={3} mb={6}>
+            <Button as="a" href="/kontakt" variant="secondary" mt={3} mb={6}>
               Das interessiert uns!
             </Button>
           </Flex>

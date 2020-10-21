@@ -30,12 +30,14 @@ export function Page({
       </Head>
       <Box mt={["2rem", "2rem", 32]} ml={[0, 0, 0, 20]}>
         <Link href="/">
-          <img
-            src="/images/voty_logo.svg"
-            alt="voty"
-            className="logo-page"
-            height="45"
-          />
+          <A>
+            <img
+              src="/images/voty_logo.svg"
+              alt="voty"
+              className="logo-page"
+              height="45"
+            />
+          </A>
         </Link>
       </Box>
       <Box
