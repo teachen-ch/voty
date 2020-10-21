@@ -1,15 +1,15 @@
 ---
 - name: Install cron jobs on server
   block:
-    - name: Install AWS S3 cmd tool
-      apt:
-        name: s3cmd
-    - name: Configure S3 for user root
-      template: { src: s3cfg.j2, dest: /root/.s3cfg, mode: "0600" }
+    #- name: Install AWS S3 cmd tool
+    #  apt:
+    #    name: s3cmd
+    #- name: Configure S3 for user root
+    #  template: { src: s3cfg.j2, dest: /root/.s3cfg, mode: "0600" }
     - name: Create Backup Directory
       file: { path: "/voty/backup", owner: voty, state: directory }
     - name: Copy db backup script into cron.daily
       template:
-        { src: db-backup.sh, dest: /etc/cron.daily/db-backup, mode: "0700" }
+        { src: db-backup.py, dest: /etc/cron.daily/db-backup.py, mode: "0700" }
   become: yes
   become_method: sudo

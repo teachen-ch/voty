@@ -37,3 +37,5 @@
       tags: common
     - role: app
       tags: app
+    - role: cron # this probably should only be in db role
+      tags: cron

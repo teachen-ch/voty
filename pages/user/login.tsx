@@ -322,50 +322,46 @@ function RequestReset({ onCancel }: { email: string; onCancel: () => void }) {
   });
 
   return (
-    <>
-      <Card my={3}>
-        <Heading as="h2" mt={0}>
-          Passwort zurücksetzen
-        </Heading>
-        <Text mb={4}>
-          Du hast Dein Passwort vergessen? Wir schicken Dir eine Email, dann
-          kannst Du es zurücksetzen.
-        </Text>
-        <QForm
-          mutation={doRequestReset}
-          onSubmit={(values) => {
-            if (mailSent) onCancel();
-            else {
-              void doRequestReset({
-                variables: { email: String(values.email), purpose: "reset" },
-              });
-            }
-          }}
-          fields={{
-            email: {
-              label: "Email:",
-              required: true,
-              type: "email",
-              placeholder: "name@meineschule.ch",
-            },
-            submit: {
-              type: "submit",
-              label: mailSent ? "Login" : "Email verschicken",
-            },
-          }}
-        >
-          <Button onClick={onCancel} variant="outline" sx={{ gridColumn: 2 }}>
-            Abbrechen
-          </Button>
-          <ErrorBox error={error} sx={{ gridColumn: 2 }} />
-          {mailSent && (
-            <>
-              <span>Wir haben Dir ein Email geschickt</span>
-            </>
-          )}
-        </QForm>
-      </Card>
-    </>
+    <Card my={3}>
+      <Heading as="h2" mt={0}>
+        Passwort zurücksetzen
+      </Heading>
+      <Text mb={4}>
+        Du hast Dein Passwort vergessen? Wir schicken Dir eine Email, dann
+        kannst Du es zurücksetzen.
+      </Text>
+      <QForm
+        mutation={doRequestReset}
+        onSubmit={async (values) => {
+          if (mailSent) onCancel();
+          else {
+            await doRequestReset({
+              variables: { email: String(values.email), purpose: "reset" },
+            });
+          }
+        }}
+        fields={{
+          email: {
+            label: "Email:",
+            required: true,
+            type: "email",
+            placeholder: "name@meineschule.ch",
+          },
+          submit: {
+            type: "submit",
+            label: mailSent ? "Login" : "Email verschicken",
+          },
+        }}
+      >
+        <Button onClick={onCancel} variant="outline" sx={{ gridColumn: 2 }}>
+          Abbrechen
+        </Button>
+        <ErrorBox error={error} sx={{ gridColumn: 2 }} />
+        {mailSent && (
+          <Text sx={{ gridColumn: 2 }}>Wir haben Dir ein Email geschickt</Text>
+        )}
+      </QForm>
+    </Card>
   );
 }
 

@@ -22,11 +22,11 @@ export default function Abstimmung(): ReactElement {
       </Text>
       <Text my={4}>
         Wenn die Schweiz am 29. November über die{" "}
-        <b>«Konzernverantwortungs-Initiative»</b> und die{" "}
-        <b>«Kriegsgeschäfte-Initiative»</b> abstimmt, sind das Themen, zu denen
-        auch Jugendliche eine Meinung haben. Wir möchten mit mindestens 50
-        Klassen in der Schweiz eine <b>Abstimmung</b> durchführen und dazu
-        brauchen wir Ihre Hilfe:
+        <b>«Konzern/Unternehmensverantwortungs-Initiative»</b> und die{" "}
+        <b>«Kriegsgeschäfte/Finanzierungsverbots-Initiative»</b> abstimmt, sind
+        das Themen, zu denen auch Jugendliche eine Meinung haben. Wir möchten
+        mit mindestens 50 Klassen in der Schweiz eine <b>Abstimmung</b>{" "}
+        durchführen und dazu brauchen wir Ihre Hilfe:
       </Text>
       <Flex my={4} alignItems="center" flexDirection="column">
         <Flex my={2}>
