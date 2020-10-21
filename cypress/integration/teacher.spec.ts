@@ -11,7 +11,7 @@ describe("Test Teacher Startpage", () => {
   });
 
   // TODO: Need to fix this test as is breaks on CI/CD
-  it.skip("allows teacher to create a new team and see invite", () => {
+  it("allows teacher to create a new team and see invite", () => {
     cy.login();
     cy.visit("/teacher");
     // wait for teams to load, otherwise a reload below can shake things up
@@ -37,7 +37,7 @@ describe("Test Teacher Startpage", () => {
     cy.contains("Dein Schulhaus: School One");
   });
 
-  it.only("allows teacher to create a new school", () => {
+  it("allows teacher to create a new school", () => {
     cy.login("teacher4@teachen.ch", "teachen");
     cy.visit("/teacher");
     cy.contains("Neues Schulhaus erfassen").click();

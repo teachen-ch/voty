@@ -1,5 +1,5 @@
 ---
-- name: Deploy Voty Web Frontend
+- name: Deploy voty.ch Web Frontend
   block:
     - name: Create docker-compose file for Backend
       template:

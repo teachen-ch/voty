@@ -87,9 +87,9 @@ export default function Abstimmung(): ReactElement {
       <Stats />
 
       <PageHeading>Fragen und Antworten</PageHeading>
-      <Heading as="h3">Wer steht hinter https://votyapp.ch/?</Heading>
+      <Heading as="h3">Wer steht hinter https://voty.ch/?</Heading>
       <Text>
-        voty ist ein Projekt des Vereins «Teachen!», welcher während des
+        voty.ch ist ein Projekt des Vereins «Teachen!», welcher während des
         Corona-Lockdowns von engagierten Eltern, Lehrpersonen und
         Informatiker|innen gegründet wurde. Das Projekt wird unterstützt durch
         den prototypefund.opendata.ch.

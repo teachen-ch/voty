@@ -106,8 +106,8 @@ const Invite: React.FC = () => {
           {team.school?.name}»
         </Heading>
         <Text>
-          Erstelle einen neuen Schüler*innen Account für Voty. Bitte nutze die
-          Email-Adresse Deiner Schule.
+          Erstelle einen neuen Schüler*innen Account für voty.ch. Bitte nutze
+          die Email-Adresse Deiner Schule.
         </Text>
         <CreateUserForm
           setUser={setUser}

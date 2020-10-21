@@ -12,7 +12,7 @@ export default function Kontakt(): ReactElement {
       <Text>
         Die Demokratie ist das wohl wichtigste Gut der Schweiz, das wird uns bei
         der aktuellen Weltlage bewusster denn je. Aber wie gelingt es uns, die
-        Jugend für die Demokratie zu begeistern? Das Projekt «voty» will sich
+        Jugend für die Demokratie zu begeistern? Das Projekt voty.ch will sich
         diesem Thema annehmen und das Demokratieverständnis fördern. Unterstützt
         durch den{" "}
         {/*<A href="https://prototypefund.opendata.ch" target="_blank">prototypefund.opendata.ch</Link>*/}
@@ -32,7 +32,7 @@ export default function Kontakt(): ReactElement {
         möchten wir die Chance unbedingt packen und mit einigen Klassen eine
         erste Iteration durchführen. Dazu suchen wir engagierte Lehrerinnen und
         Lehrer der Oberstufe (Sek I + II), welche im September mindestens 8
-        Lektionen diesem Thema widmen möchten. «voty» stellt dazu
+        Lektionen diesem Thema widmen möchten. voty.ch stellt dazu
         Unterrichtsmaterialien und eine Austauschplatform zur Verfügung.
       </Text>
       <Heading as="h2">Klingt spannend? </Heading>

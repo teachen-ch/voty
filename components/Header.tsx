@@ -28,7 +28,7 @@ export function Header(): ReactElement {
       <meta name="theme-color" content="#ffffff" />
       <meta
         name="description"
-        content="Voty bringt Demokratie an die Schule und fördert das De­mo­kra­tie­ver­ständ­nis der Jugend nachhaltig mit drei Modulen: Demokratie verstehen + testen + leben."
+        content="voty.ch bringt Demokratie an die Schule und fördert das De­mo­kra­tie­ver­ständ­nis der Jugend nachhaltig mit drei Modulen: Demokratie verstehen + testen + leben."
       />
     </Head>
   );

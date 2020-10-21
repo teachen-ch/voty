@@ -30,7 +30,7 @@ export default function Teacher(): ReactElement {
       <Link href="/teacher/profile">
         <Button>Profil bearbeiten</Button>
       </Link>
-      <Heading as="h3">Deine Klassen auf voty</Heading>
+      <Heading as="h3">Deine Klassen auf voty.ch</Heading>
       <Teams
         where={{ teacher: { id: { equals: user?.id } } }}
         teamClick={(team) => teamDetail(team.id)}

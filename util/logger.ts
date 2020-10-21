@@ -72,7 +72,7 @@ const mailLogger: any = new Mail({
   level: "mail",
   to: "stefan@teachen.ch",
   from: "voty@teachen.ch",
-  subject: "Voty Admin Mail",
+  subject: "voty.ch Admin Mail",
   host: mailConfig.host,
   username: mailConfig.auth.user,
   password: mailConfig.auth.pass,

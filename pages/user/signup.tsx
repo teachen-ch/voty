@@ -30,7 +30,7 @@ export default function Signup(): ReactElement {
   return (
     <Page heading="Erstelle ein neues Benutzer-Konto">
       <Text>
-        Erstelle ein neuen Konto für Voty. <br />
+        Erstelle ein neuen Konto für voty.ch. <br />
         Bitte nutze die Email-Adresse Deiner Schule.
       </Text>
       <CreateUserForm setUser={setUser} />

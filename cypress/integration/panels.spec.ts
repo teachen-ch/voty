@@ -3,7 +3,7 @@ describe("Test Live-Voting Panels", () => {
     cy.task("prismaLoader", "testdb.yml");
   });
 
-  it.skip("opens teacher page and selects some ballots", () => {
+  it("opens teacher page and selects some ballots", () => {
     cy.login();
     cy.visit("/teacher");
     cy.contains("Class 1").click();

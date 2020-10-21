@@ -1,2 +1,3 @@
-server_name: dev.votyapp.ch
+server_name: dev.voty.ch
+old_server_name: dev.votyapp.ch
 env_file: ../.env.development

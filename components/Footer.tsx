@@ -6,7 +6,7 @@ import Link from "next/link";
 export const Footer: React.FC = () => (
   <Container as="footer" pt={6} pb={3} fontSize={"0.8em"}>
     <Text width={["100%", "100%", 400]} mx="auto">
-      voty ist ein{" "}
+      voty.ch ist ein{" "}
       <A
         href="https://github.com/teachen-ch/voty"
         target="_blank"

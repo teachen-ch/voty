@@ -9,7 +9,7 @@ export default function Home(): ReactElement {
   return (
     <>
       <Head>
-        <title>voty – Demokratie an die Schule</title>
+        <title>voty.ch – Demokratie an die Schule</title>
       </Head>
 
       <Container as="main">
@@ -25,7 +25,7 @@ export default function Home(): ReactElement {
         </Heading>
         <img
           src="/images/voty_logo.svg"
-          alt="voty"
+          alt="voty.ch"
           style={{ maxWidth: "85%", margin: "0 auto" }}
         />
 
@@ -37,9 +37,9 @@ export default function Home(): ReactElement {
           mx={[0, 3, "20%", 230]}
         >
           Die Demokratie ist das wohl wichtigste Gut der Schweiz. Aber wie
-          gelingt es uns, die Jugend für die Demokratie zu begeistern? Voty ist
-          ein Projekt für die Demokratieförderung an Schweizer Schulen in drei
-          Modulen.
+          gelingt es uns, die Jugend für die Demokratie zu begeistern? voty.ch
+          ist ein Projekt für die Demokratieförderung an Schweizer Schulen in
+          drei Modulen.
         </Text>
         <Grid
           mt={2}

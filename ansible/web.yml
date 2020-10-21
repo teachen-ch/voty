@@ -1,10 +1,11 @@
 ---
 - hosts: web
-  # if you install on a fresh host without python, you need to set gather_facts to "No"
-  gather_facts: Yes
-  pre_tasks:
-    - name: "install python3"
-      raw: "sudo apk add python3"
+  # if you install on a fresh host without python, you need to set gather_facts to
+  # uncomment these lines
+  #gather_facts: No
+  #pre_tasks:
+  #  - name: "install python3"
+  #    raw: "sudo apk add python3"
   become: yes
   vars:
     certbot_auto_renew_user: root
@@ -16,23 +17,23 @@
     certbot_certs:
       - domains:
           - "{{ server_name }}"
-          #- "www.{{server_name}}"
+          - "www.{{server_name}}"
+          - "{{old_server_name}}"
+          - "www.{{old_server_name}}"
 
   tasks:
     - name: Include variables depending on OS distribution
-      include_vars: "{{ lookup('first_found', params) }}"
-      vars:
-        params:
-          files:
-            - "vars/{{ansible_distribution}}.yml"
-            - vars/Defaults.yaml
-          paths:
-            - "vars"
+      include_vars: "{{ item }}"
+      with_first_found:
+        - "{{ ansible_distribution }}-{{ ansible_distribution_version }}.yml"
+        - "{{ ansible_distribution }}.yml"
+        - "{{ ansible_os_family }}.yml"
+        - "Defaults.yml"
 
   roles:
-    - role: common
-      tags: common
     - role: ansible-role-certbot
       tags: cert
+    - role: common
+      tags: common
     - role: app
       tags: app

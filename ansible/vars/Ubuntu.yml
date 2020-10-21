@@ -1,6 +1,7 @@
 test: Ubuntu
 python3_pip: python3-pip
 nginx_sites: /etc/nginx/sites-enabled
+nginx_conf: nginx-ubuntu.conf
 service_dest: /etc/systemd/system/voty.service
 service_template: voty.service.j2
 reload_systemd: systemctl daemon-reload

@@ -86,7 +86,7 @@ export default function Login(): ReactElement {
       <Page heading="Anmelden">
         <Text>
           Hier kannst Du dich mit Deiner Schul-Emailadresse anmelden, wenn Du
-          bereits ein Benutzer-Konto bei voty hast.
+          bereits ein Benutzer-Konto bei voty.ch hast.
         </Text>
         <LoginForm />
       </Page>

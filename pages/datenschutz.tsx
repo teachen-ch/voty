@@ -7,7 +7,7 @@ export default function Datenschutz(): ReactElement {
   return (
     <Page heading="Datenschutz">
       <Head>
-        <title>voty - Datenschutz</title>
+        <title>voty.ch - Datenschutz</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Heading as="h2">Einleitung</Heading>
@@ -29,7 +29,7 @@ export default function Datenschutz(): ReactElement {
         Was für personenbezogenene Daten wir speichern (ohne Konto)
       </Heading>
       <Text>
-        Wenn Sie auf diese Webseite ohne ein voty-Konto zugreifen, werden
+        Wenn Sie auf diese Webseite ohne ein voty.ch-Konto zugreifen, werden
         automatisch die üblichen technischen Informationen (z.B. Art des
         Webbrowsers, Betriebssystem, IP-Adresse) erfasst und im Server-Logfile
         gespeichert. Ebenso werden diese Daten für unsere{" "}

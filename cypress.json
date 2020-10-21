@@ -6,5 +6,9 @@
   },
   "video": false,
   "pluginsFile": "./cypress/plugins/index.ts",
-  "projectId": "19hfnd"
+  "projectId": "19hfnd",
+  "retries": {
+    "runMode": 2,
+    "openMode": 0
+  }
 }

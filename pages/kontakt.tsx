@@ -20,7 +20,7 @@ export default function Kontakt(): ReactElement {
 
       <Card>
         <Heading as="h2" my={0} id="newsletter">
-          Möchtet ihr regelmässig über «voty» informiert werden?
+          Möchtet ihr regelmässig über voty.ch informiert werden?
         </Heading>
         <Newsletter />
       </Card>

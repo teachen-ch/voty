@@ -47,8 +47,8 @@
 - name: Configure Webserver and Run Services
   block:
     - name: Configure nginx (needed to set server_names_hash_bucket_size in Alpine)
-      template: { src: nginx.conf, dest: "/etc/nginx/nginx.conf" }
-    - name: Configure votyapp.ch
+      template: { src: "{{ nginx_conf }}", dest: "/etc/nginx/nginx.conf" }
+    - name: Configure voty.ch
       template: { src: voty.cfg.j2, dest: "{{nginx_sites}}/voty.conf" }
       notify: restart nginx
     - name: Create Systemd Service Configuration

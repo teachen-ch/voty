@@ -1,8 +1,8 @@
-# Installing Voty
+# Installing voty.ch
 
 ## Development Setup
 
-In order to get started with testing, developing and contributing to voty, you will need to first check out our repo and [install docker](https://docs.docker.com/get-docker/).
+In order to get started with testing, developing and contributing to voty.ch, you will need to first check out our repo and [install docker](https://docs.docker.com/get-docker/).
 
 ```bash
 git clone https://github.com/teachen-ch/voty.git

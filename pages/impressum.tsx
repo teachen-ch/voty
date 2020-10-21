@@ -10,7 +10,7 @@ export default function Impressum(): ReactElement {
   return (
     <Page heading="Impressum">
       <Text>
-        Voty ist ein Projekt des Vereins{" "}
+        voty.ch ist ein Projekt des Vereins{" "}
         <a href="https://teachen.ch/verein-teachen/">«Teachen!»</a>
       </Text>
       <Card>

@@ -18,7 +18,7 @@ export default function Delete(): ReactElement {
   const role = user?.role;
   return (
     <Page heading="Konto löschen">
-      <Heading as="h2">Ich möchte mein Konto auf voty löschen.</Heading>
+      <Heading as="h2">Ich möchte mein Konto auf voty.chlöschen.</Heading>
       {role === Role.Student || (true && <DeleteForm user={user} />)}
     </Page>
   );
@@ -80,7 +80,7 @@ const DeleteForm: React.FC<{ user: SessionUser }> = ({ user }) => {
     <>
       <Text>
         Schade! Wir würden uns freuen, wenn Du auch bei zukünftigen Abstimmungen
-        auf voty mitmachst! Möchtest Du wirklich Dein Konto mit der Email{" "}
+        auf voty.ch mitmachst! Möchtest Du wirklich Dein Konto mit der Email{" "}
         {user?.email} löschen.
       </Text>
       <Grid my={4} columns={[0, 0, "1fr 1fr"]}>
@@ -88,7 +88,7 @@ const DeleteForm: React.FC<{ user: SessionUser }> = ({ user }) => {
           Mein Konto löschen
         </Button>
         <Button onClick={() => router.push("/student")}>
-          Ich bleibe auf voty!
+          Ich bleibe auf voty.ch!
         </Button>
       </Grid>
     </>

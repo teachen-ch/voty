@@ -81,7 +81,7 @@ curl -H "x-access-token: <<<token>>>" -d '{"query": "{me {name id }}"}' -H "Cont
 
 ### Deployment
 
-Our CI/CD pipelines runs on GitHub Actions. On each commit, deploy-publish.yml will build a docker image of voty, run cypress E2E tests and, if successful, push the latest image to packages.github.com. From there it can be deployed to migration as follows:
+Our CI/CD pipelines runs on GitHub Actions. On each commit, deploy-publish.yml will build a docker image of voty.ch, run cypress E2E tests and, if successful, push the latest image to packages.github.com. From there it can be deployed to migration as follows:
 
 ```
 yarn run migrate_dev

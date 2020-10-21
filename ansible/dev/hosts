@@ -1,5 +1,5 @@
 [web]
-dev.votyapp.ch			ansible_user=root
+dev.voty.ch			ansible_user=root
 
 [db]
-dev.votyapp.ch			ansible_user=root
+dev.voty.ch			ansible_user=root
