@@ -297,7 +297,7 @@ export const ErrorBox: React.FC<ErrorBoxProps> = ({ error, ...props }) => {
       pl={3}
       py={2}
       sx={{
-        gridColumn: "2",
+        gridColumn: [0, 0, 2],
         borderLeftColor: "primary",
         borderLeftStyle: "solid",
         borderLeftWidth: 4,
@@ -316,7 +316,7 @@ export const Submit: React.FC<{ label: string }> = ({ label }) => {
   const context = useFormikContext();
   const submitting = context.isSubmitting;
   return (
-    <Button type="submit" disabled={submitting} sx={{ gridColumn: 2 }}>
+    <Button type="submit" disabled={submitting} sx={{ gridColumn: [0, 0, 2] }}>
       {submitting ? "Bitte warten..." : label}
     </Button>
   );

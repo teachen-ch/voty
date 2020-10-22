@@ -156,7 +156,11 @@ export function LoginForm(): ReactElement {
         }}
       >
         <ErrorBox error={error} />
-        <Grid gap={2} columns={[0, 0, "3fr 2fr"]} sx={{ gridColumn: 2 }}>
+        <Grid
+          gap={2}
+          columns={[0, 0, "3fr 2fr"]}
+          sx={{ gridColumn: [0, 0, 2] }}
+        >
           <Button onClick={() => router.push("/user/signup")} variant="outline">
             Ich habe noch kein Benutzer-Konto
           </Button>
@@ -353,12 +357,18 @@ function RequestReset({ onCancel }: { email: string; onCancel: () => void }) {
           },
         }}
       >
-        <Button onClick={onCancel} variant="outline" sx={{ gridColumn: 2 }}>
+        <Button
+          onClick={onCancel}
+          variant="outline"
+          sx={{ gridColumn: [0, 0, 2] }}
+        >
           Abbrechen
         </Button>
-        <ErrorBox error={error} sx={{ gridColumn: 2 }} />
+        <ErrorBox error={error} sx={{ gridColumn: [0, 0, 2] }} />
         {mailSent && (
-          <Text sx={{ gridColumn: 2 }}>Wir haben Dir ein Email geschickt</Text>
+          <Text sx={{ gridColumn: [0, 0, 2] }}>
+            Wir haben Dir ein Email geschickt
+          </Text>
         )}
       </QForm>
     </Card>
@@ -426,7 +436,7 @@ function PasswordResetForm() {
           />
           <Button
             onClick={() => checkPasswords(password, password2)}
-            sx={{ gridColumn: 2 }}
+            sx={{ gridColumn: [0, 0, 2] }}
           >
             Passwort ändern
           </Button>

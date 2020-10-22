@@ -1,8 +1,8 @@
 import { gql } from "@apollo/client";
 import { useUser } from "../state/user";
-import { Text, Card, Button, Link as A } from "rebass";
+import { Text, Card, Link as A } from "rebass";
 import { QForm, ErrorBox } from "./Form";
-import { useState, Fragment, ReactElement } from "react";
+import { useState, ReactElement } from "react";
 import {
   TeamWhereInput,
   useTeamsQuery,
@@ -10,8 +10,6 @@ import {
   useCreateOneTeamMutation,
 } from "graphql/types";
 import { Page } from "./Page";
-import { Users } from "./Users";
-import { useRouter } from "next/router";
 
 const TeamAnonFields = gql`
   fragment TeamAnonFields on Team {
@@ -103,10 +101,8 @@ type TeamsProps = {
 };
 
 export const Teams: React.FC<TeamsProps> = ({ where, teamClick }) => {
-  const [focus, setFocus] = useState<string>();
   const teamsQuery = useTeamsQuery({ variables: { where } });
   const teams = teamsQuery.data?.teams;
-  const router = useRouter();
 
   if (teamsQuery.error) {
     return (
@@ -133,62 +129,23 @@ export const Teams: React.FC<TeamsProps> = ({ where, teamClick }) => {
           <tr>
             <th align="left">Klasse</th>
             <th align="left">Schulhaus</th>
-            <th align="left">Schüler*innen</th>
+            <th align="left">SuS</th>
             <th align="left">Bearbeiten</th>
           </tr>
         </thead>
 
         <tbody>
           {teams?.map((team) => (
-            <Fragment key={team.id}>
-              <tr>
-                <td>{team.name}</td>
-                <td>
-                  {team.school?.name} ({team.school?.city})
-                </td>
-                <td>
-                  {team.members ? (
-                    <>
-                      {team.members.length} SuS (
-                      <A
-                        onClick={() =>
-                          setFocus(focus == team.id ? undefined : team.id)
-                        }
-                      >
-                        anzeigen
-                      </A>
-                      )
-                    </>
-                  ) : (
-                    "-"
-                  )}
-                </td>
-                <td>
-                  <A onClick={() => teamClick(team)}>Bearbeiten</A>
-                </td>
-              </tr>
-              {focus === team.id && (
-                <tr>
-                  <td colSpan={10}>
-                    <Card m={0}>
-                      <Users users={team.members} />
-                      <Text mt={2}>
-                        <Button
-                          onClick={() =>
-                            void router.push(
-                              "/teacher/team/[id]/admin",
-                              `/teacher/team/${team.id}/admin`
-                            )
-                          }
-                        >
-                          Schüler*innen einladen
-                        </Button>
-                      </Text>
-                    </Card>
-                  </td>
-                </tr>
-              )}
-            </Fragment>
+            <tr key={team.id}>
+              <td>{team.name}</td>
+              <td>
+                {team.school?.name} ({team.school?.city})
+              </td>
+              <td>{team.members ? <>{team.members.length} SuS</> : "-"}</td>
+              <td>
+                <A onClick={() => teamClick(team)}>Bearbeiten</A>
+              </td>
+            </tr>
           ))}
         </tbody>
       </table>

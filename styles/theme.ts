@@ -26,8 +26,10 @@ export default {
   },
   space: [0, 4, 8, 16, 32, 64, 128, 256],
   fonts: {
-    body: '"Source Sans Pro", sans',
-    heading: '"Source Sans Pro", sans',
+    body:
+      '"Source Sans Pro", -apple-system, "Helvetica Neue", BlinkMacSystemFont, Roboto, sans-serif;',
+    heading:
+      '"Source Sans Pro",  -apple-system, "Helvetica Neue", BlinkMacSystemFont, Roboto, sans-serif;',
     monospace: 'monaco, "Consolas", "Lucida Console", monospace',
   },
   fontWeights: {
@@ -186,7 +188,7 @@ export default {
       p: 1,
       px: 3,
       borderRadius: 0,
-      mx: 3,
+      mx: 2,
     },
     full: {
       width: "100%",

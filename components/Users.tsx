@@ -164,7 +164,7 @@ export const ProfileEdit: React.FC<{
         {isStudent && <ShowField label="Jahrgang:" value={user?.year} />}
         {isStudent && <ShowField label="Geschlecht:" value={user?.gender} />}
         <ShowField label="Email:" value={user?.email} />
-        <Button onClick={() => setEdit(true)} sx={{ gridColumn: 2 }}>
+        <Button onClick={() => setEdit(true)} sx={{ gridColumn: [0, 0, 2] }}>
           Profil bearbeiten
         </Button>
       </Grid>
@@ -225,12 +225,12 @@ export const ProfileEdit: React.FC<{
               label="Email:"
               value="Bitte kontaktiere uns, wenn Du Deine Email ändern möchtest"
             />
-            <Button type="submit" sx={{ gridColumn: 2 }}>
+            <Button type="submit" sx={{ gridColumn: [0, 0, 2] }}>
               Angaben speichern
             </Button>
             <ErrorBox error={error} my={4} />
 
-            <Text fontSize={1} sx={{ gridColumn: 2 }}>
+            <Text fontSize={1} sx={{ gridColumn: [0, 0, 2] }}>
               <i>[TODO-Legal-Text]</i>
             </Text>
           </Grid>
@@ -257,7 +257,11 @@ export const Input: React.FC<InputProps> = ({ label, name, placeholder }) => {
       <RebassInput {...field} id={name} placeholder={placeholder} />
       {meta.touched && meta.error ? (
         <>
-          <Text variant="fielderror" fontSize={1} sx={{ gridColumn: 2 }}>
+          <Text
+            variant="fielderror"
+            fontSize={1}
+            sx={{ gridColumn: [0, 0, 2] }}
+          >
             {meta.error}
           </Text>
         </>
@@ -273,7 +277,7 @@ export const FieldError: React.FC<{ name: string }> = ({ name }) => (
         fontSize={1}
         fontWeight="bold"
         color="primary"
-        sx={{ gridColumn: 2 }}
+        sx={{ gridColumn: [0, 0, 2] }}
       >
         {msg}
       </Text>

@@ -15,12 +15,12 @@ export default function TeacherProfilePage({
 
   return (
     <LoggedInPage heading="Startseite">
-      <SelectSchool />
       <Card>
         <Heading as="h2" mt={0}>
           {firstRun ? "Bitte ergänze Deine Angaben…" : "Profil bearbeiten"}
         </Heading>
         <ProfileEdit user={user} editMode={firstRun} />
+        <SelectSchool />
       </Card>
 
       {!firstRun && (

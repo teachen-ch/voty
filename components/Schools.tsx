@@ -190,7 +190,7 @@ export const SelectSchool: React.FC = () => {
             <Button
               onClick={() => setCreate(true)}
               variant="outline"
-              sx={{ gridColumn: 2 }}
+              sx={{ gridColumn: [0, 0, 2] }}
             >
               Neues Schulhaus erfassen
             </Button>
@@ -303,7 +303,11 @@ export function CreateSchool({
           createSchool({ variables: { data: omit(values, "submit") } })
         }
       >
-        <Button onClick={onCancel} variant="outline" sx={{ gridColumn: 2 }}>
+        <Button
+          onClick={onCancel}
+          variant="outline"
+          sx={{ gridColumn: [0, 0, 2] }}
+        >
           Abbrechen
         </Button>
         <ErrorBox error={error} my={4} />

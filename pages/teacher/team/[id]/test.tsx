@@ -92,7 +92,6 @@ export default function TeacherTest(): ReactElement {
             ))
           : "Noch keine Abstimmungen ausgewählt."}
       </div>
-      <PanelCode team={team} hasRuns={ballotRuns?.length ? true : false} />
       <Heading as="h2">Aktuelle Abstimmungen zur Auswahl:</Heading>
       <div id="unselectedBallots">
         {unselectedBallots.map((ballot) => (
@@ -105,6 +104,8 @@ export default function TeacherTest(): ReactElement {
           />
         ))}
       </div>
+
+      <PanelCode team={team} hasRuns={ballotRuns?.length ? true : false} />
     </LoggedInPage>
   );
 }

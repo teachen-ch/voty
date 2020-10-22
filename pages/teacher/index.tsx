@@ -5,7 +5,7 @@ import { Teams, CreateTeamForm } from "components/Teams";
 import { useState, ReactElement } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
-import { TeacherProfilePage } from "./profile";
+import { SelectSchool } from "components/Schools";
 
 export default function Teacher(): ReactElement {
   const user = useUser();
@@ -20,7 +20,11 @@ export default function Teacher(): ReactElement {
   }
 
   if (user?.school === null) {
-    return <TeacherProfilePage firstRun />;
+    return (
+      <LoggedInPage heading="Startseite für Lehrpersonen">
+        <SelectSchool />
+      </LoggedInPage>
+    );
   }
 
   return (

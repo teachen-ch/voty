@@ -129,7 +129,7 @@ export function CreateUserForm({
           <Button
             onClick={() => router.push("/user/login")}
             variant="outline"
-            sx={{ gridColumn: 2 }}
+            sx={{ gridColumn: [0, 0, 2] }}
           >
             Möchstest Du Dich anmelden?
           </Button>
@@ -137,7 +137,7 @@ export function CreateUserForm({
         <Button
           onClick={() => router.push("/user/login")}
           variant="outline"
-          sx={{ gridColumn: 2 }}
+          sx={{ gridColumn: [0, 0, 2] }}
         >
           Ich habe bereits ein Benutzer-Konto
         </Button>

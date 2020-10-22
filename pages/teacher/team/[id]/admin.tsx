@@ -85,7 +85,7 @@ export default function TeamPage(): ReactElement {
       <Card>
         <Heading mt={0}>Schülerinnen und Schüler einladen</Heading>
         <Grid my={1} gap={2} columns={[0, 0, "1fr 4fr"]}>
-          <Text fontSize={1} sx={{ gridColumn: 2 }}>
+          <Text fontSize={1} sx={{ gridColumn: [0, 0, 2] }}>
             An alle diese Email-Adressen eine Einladung schicken:
           </Text>
           <Label sx={{ alignSelf: "top", fontWeight: "bold" }}>
@@ -103,13 +103,13 @@ export default function TeamPage(): ReactElement {
             onClick={() => inviteStudents(team)}
             disabled={!matches}
             bg={matches ? "primary" : "muted"}
-            sx={{ gridColumn: 2 }}
+            sx={{ gridColumn: [0, 0, 2] }}
           >
             {matches} Einladungen verschicken
           </Button>
           {matches && (
             <>
-              <Text fontSize={1} sx={{ gridColumn: 2 }}>
+              <Text fontSize={1} sx={{ gridColumn: [0, 0, 2] }}>
                 {matches} Email{matches == 1 ? "" : "s"} werden verschickt an:{" "}
                 {emails.map((email) => (
                   <li key={email}>{email}</li>
@@ -117,7 +117,7 @@ export default function TeamPage(): ReactElement {
               </Text>
             </>
           )}
-          <Text fontSize={1} sx={{ gridColumn: 2 }} mt={4}>
+          <Text fontSize={1} sx={{ gridColumn: [0, 0, 2] }} mt={4}>
             Alternativ können Sie Schüler*innen auch mit einem{" "}
             <Link>
               <Button onClick={() => setShowInviteLink(true)} variant="inline">
@@ -159,7 +159,7 @@ function InviteLink({ team }: { team: TeamTeacherFieldsFragment }) {
         value={`${document?.location.origin}/i/${team.invite}`}
       />
       <Button onClick={() => copyInvite(inviteRef)}>Copy</Button>
-      <Text fontSize={1} sx={{ gridColumn: 2 }}>
+      <Text fontSize={1} sx={{ gridColumn: [0, 0, 2] }}>
         {status}
       </Text>
     </Grid>
