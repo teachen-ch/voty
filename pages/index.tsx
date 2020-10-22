@@ -70,11 +70,11 @@ export default function Home(): ReactElement {
             </Heading>
             <Text>
               Nur Erwachsene dürfen abstimmen, aber auch Jugendliche haben eine
-              Meinung! Wir möchten Test-Abstimmungen zeitgleich zu nationalen
-              Urnengängen durchführen und die Resultate diskutieren.
+              Meinung! Lassen sie ihre Klassen für die Urnengänge vom 29.
+              November abstimmen.
             </Text>
             <Button as="a" href="/abstimmung" variant="full" mt={3} mb={6}>
-              Jetzt mitmachen!
+              Jetzt anmelden!
             </Button>
           </Flex>
 
