@@ -10,7 +10,12 @@ server {
 		proxy_set_header Upgrade $http_upgrade;
 		proxy_set_header Connection "upgrade";
 		proxy_read_timeout 300s;
+    # error_page 502 = /maintenance/maintenance.html;
 	}
+
+  #location /maintenance/ {
+  #	root /gitvoty/public/;
+  #}
 
 	ssl_certificate /etc/letsencrypt/live/{{ server_name }}/fullchain.pem;
 	ssl_certificate_key /etc/letsencrypt/live/{{ server_name }}/privkey.pem;

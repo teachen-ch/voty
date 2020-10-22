@@ -1,0 +1,32 @@
+# docker-compose.yml
+version: "3.8"
+services:
+  app:
+    container_name: "app"
+    build: .
+    env_file: ".env.local"
+    volumes:
+      - .:/app/
+    image: docker.pkg.github.com/teachen-ch/voty/voty
+    depends_on:
+      - postgres
+    environment:
+      DATABASE_URL: postgres://voty:voty@postgres:5432/voty
+      NODE_ENV: production
+      PORT: 3000
+      NEXT_TELEMETRY_DISABLED: 1
+    ports:
+      - "3000:3000"
+    command: npm run start
+
+  postgres:
+    image: "postgres:13"
+    container_name: "postgres"
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: voty
+      POSTGRES_PASSWORD: voty
+      POSTGRES_DB: voty
