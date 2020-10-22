@@ -1,5 +1,5 @@
 import { Page, LoggedInPage, ErrorPage } from "components/Page";
-import { Text, Heading, Box, Card, Flex } from "rebass";
+import { Text, Heading, Box, Card, Flex, Link as A } from "rebass";
 import { useRouter } from "next/router";
 import { useUser } from "state/user";
 import { formatFromTo } from "util/date";
@@ -99,6 +99,10 @@ const VotyNow: React.FC<{ ballot: BallotQuery["ballot"] }> = ({ ballot }) => {
           Nein, ich lehne ab
         </BigButton>
       </Flex>
+      <Text my={2} textAlign="center">
+        Ich möchte mich{" "}
+        <A onClick={() => vote(ballot.id, 0)}>der Stimme enthalten</A>
+      </Text>
       <ErrorBox my={2} error={error} />
     </Box>
   );

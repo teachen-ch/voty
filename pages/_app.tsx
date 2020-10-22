@@ -1,4 +1,4 @@
-import "../styles/new.css";
+import "../styles/voty.css";
 
 import { ApolloProvider } from "@apollo/client";
 import { MDXProvider } from "@mdx-js/react";

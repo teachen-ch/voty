@@ -1,5 +1,5 @@
 import { Page, ErrorPage, LoadingPage } from "components/Page";
-import { Box, Flex, Button } from "rebass";
+import { Text, Box, Flex, Button, Link as A } from "rebass";
 import { Ballot } from "components/Ballots";
 import { useRouter } from "next/router";
 import { ReactElement, useState } from "react";
@@ -120,6 +120,12 @@ const VoteCode: React.FC<{
           Nein, ich lehne ab
         </BigButton>
       </Flex>
+      <Text my={2} textAlign="center">
+        Ich möchte mich{" "}
+        <A onClick={() => voteCode(ballotRun.id, code, 0)}>
+          der Stimme enthalten
+        </A>
+      </Text>
       <ErrorBox my={2} error={error} />
     </Box>
   );

@@ -139,20 +139,24 @@ export const ProfileEdit: React.FC<{
   let validationSchema: yup.ObjectSchema;
   if (isTeacher) {
     validationSchema = yup.object().shape({
-      name: yup
-        .string()
-        .required("Pflichtfeld")
-        .min(3, "Dein Vorname ist etwas kurz"),
+      name: yup.string().required("Pflichtfeld"),
       lastname: yup.string(),
     });
   } else {
     validationSchema = yup.object().shape({
-      name: yup
+      name: yup.string().required("Pflichtfeld"),
+      year: yup
         .string()
-        .required("Pflichtfeld")
-        .min(3, "Dein Vorname ist etwas kurz"),
-      year: yup.string().nullable().required("Pflichtfeld"),
-      gender: yup.string().nullable().required("Pflichtfeld"),
+        .nullable()
+        .required(
+          "Pflichtfeld. Du kannst aber auch «Möchte ich nicht angeben» wählen»"
+        ),
+      gender: yup
+        .string()
+        .nullable()
+        .required(
+          "Pflichtfeld. Du kannst aber auch «Möchte ich nicht angeben» wählen»"
+        ),
     });
   }
 
