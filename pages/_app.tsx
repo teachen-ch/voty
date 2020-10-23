@@ -25,7 +25,6 @@ function MyApp({ Component, pageProps }: AppProps): ReactElement {
         <RecoilRoot>
           <ThemeProvider theme={theme}>
             <MDXProvider components={{ wrapper: MDXWrapper }}>
-              <CheckLogin />
               <Header />
               <Component {...pageProps} />
             </MDXProvider>
