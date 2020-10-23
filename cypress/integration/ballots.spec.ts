@@ -8,7 +8,7 @@ describe("Test Ballots", () => {
     cy.visit("/ballots/");
     cy.contains("Testinitiative").click();
     cy.contains("Ja, ich stimme zu").click();
-    cy.contains("Du hast erfolgreich abgestimmt");
+    cy.contains("Du hast abgestimmt");
 
     // reload and ensure we can't vote again
     cy.reload();

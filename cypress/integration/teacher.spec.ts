@@ -31,7 +31,7 @@ describe("Test Teacher Startpage", () => {
     cy.findByLabelText("Deine Schule:").select("1000 City One - School One");
     cy.contains("Bestätigen").click();
     cy.contains("Profil").click();
-    cy.contains("Dein Schulhaus: School One");
+    cy.contains("School One");
   });
 
   it("allows teacher to create a new school", () => {
@@ -46,7 +46,7 @@ describe("Test Teacher Startpage", () => {
     cy.findByLabelText("Kanton:").select("Bern");
     cy.contains("Bestätigen").click();
     cy.contains("Profil").click();
-    cy.contains("Dein Schulhaus: Testschule");
+    cy.contains("Testschule");
   });
 
   it("lets a teacher delete her account", () => {

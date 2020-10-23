@@ -7,7 +7,7 @@ describe("Test Live-Voting Panels", () => {
     cy.login();
     cy.visit("/teacher");
     cy.get("a:contains('Bearbeiten')").click();
-    cy.contains("Demokratie testen").click();
+    cy.contains("Abstimmungen auswählen").click();
     cy.contains("Noch keine Abstimmungen ausgewählt");
     // select 1st ballot, wait for it to be shown, select and remove 2nd ballot
     cy.get("#unselectedBallots .ballot").first().contains("Auswählen").click();
