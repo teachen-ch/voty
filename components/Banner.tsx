@@ -33,15 +33,20 @@ export const Banner: React.FC<BannerProps> = ({ href, children }) => {
           display: "block",
           transform: "rotate(-45deg)",
           boxShadow: [
-            "0 -2px 10px 0 #967676",
-            "0 -2px 10px 0 #967676",
-            "0 2px 10px 0 #967676",
+            "0 -2px 10px 0 #333",
+            "0 -2px 10px 0 #333",
+            "0 2px 10px 0 #333",
           ],
         }}
         href={href}
         color="white"
       >
-        <Text textAlign="center" fontWeight="bold">
+        <Text
+          textAlign="center"
+          fontWeight="bold"
+          color="white"
+          fontSize="18px"
+        >
           {children}
         </Text>
       </Link>

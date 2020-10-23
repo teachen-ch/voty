@@ -2,17 +2,18 @@
 export default {
   // [ iphone SE / iPhone 6+ / iPad High / Desktop+iPad / Big Screen]
   breakpoints: ["400px", "600px", "1200px", "2000px"],
-  fontSizes: [12, 13, 17.5, 20, 24, 32, 40, 50],
+  fontSizes: [12, 14, 20, 22, 26, 34, 50, 50, 50],
   colors: {
     text: "black",
     background: "white",
     primary: "#d90000",
-    secondary: "#8f969b",
+    secondary: "#206DBB",
     accent: "#d90000",
     highlight: "#dee4e7",
     muted: "#dee4e7",
     lightgray: "#dee4e7",
-    gray: "#8f969b",
+    silver: "#A3AFB5",
+    gray: "#5a5a5a",
     success: "#258f17",
     green: "#258f17",
   },
@@ -22,7 +23,8 @@ export default {
   radii: {
     default: 0,
     square: 0,
-    circle: 99999,
+    card: 5,
+    circle: 1000,
   },
   space: [0, 4, 8, 16, 32, 64, 128, 256],
   fonts: {
@@ -34,6 +36,7 @@ export default {
   },
   fontWeights: {
     body: 400,
+    semi: 600,
     heading: 700,
     bold: 700,
   },
@@ -53,27 +56,13 @@ export default {
     card: {
       p: 3,
       my: 3,
-      bg: "rgba(0,0,0,0.1)",
-      borderWidth: 0,
-      borderColor: "lightgray",
-      borderStyle: "solid",
+      bg: "silver",
       borderRadius: 0,
     },
     link: {
-      color: "primary",
-      textDecoration: "none",
-      cursor: "pointer",
-    },
-    nav: {
-      fontSize: 1,
-      fontWeight: "bold",
-      display: "inline-block",
-      p: 2,
       color: "inherit",
       textDecoration: "none",
-      ":hover,:focus,.active": {
-        color: "primary",
-      },
+      cursor: "pointer",
     },
   },
   styles: {
@@ -81,25 +70,7 @@ export default {
       fontFamily: "body",
       fontWeight: "body",
       lineHeight: "body",
-      fontSize: 2,
-      ":before": {
-        content: '""',
-        display: "block",
-        position: "fixed",
-        left: 0,
-        top: 0,
-        width: "100%",
-        height: "100%",
-        zIndex: "-10",
-        backgroundImage: [
-          "url(/images/voty_bg_mobile_1.svg)",
-          "url(/images/voty_bg_mobile_1.svg)",
-          "url(/images/voty_bg_1.svg)",
-        ],
-        backgroundRepeat: "no-repeat",
-        backgroundPosition: ["50% -5%", "50% -10%", "51% 28.5%"],
-        opacity: "0.4",
-      },
+      fontSize: 4,
       table: {
         width: "100%",
       },
@@ -112,6 +83,7 @@ export default {
       h2: {
         variant: "text.heading",
         fontSize: [3, 4],
+        fontWeight: "semi",
       },
       h3: {
         variant: "text.heading",
@@ -125,6 +97,12 @@ export default {
         cursor: "inherit",
         bg: "muted",
         color: "white",
+      },
+      a: {
+        color: "inherit",
+        ":visited": {
+          color: "inherit",
+        },
       },
     },
     img: {
@@ -155,8 +133,9 @@ export default {
       cursor: "pointer",
       color: "white",
       bg: "primary",
-      fontWeight: "bold",
+      fontWeight: "semi",
       borderRadius: "0px",
+      fontSize: 4,
     },
     secondary: {
       variant: "buttons.primary",
@@ -173,15 +152,23 @@ export default {
       borderWidth: "3px",
       cursor: "pointer",
     },
-    outline: {
+    text: {
       variant: "buttons.primary",
-      color: "primary",
-      bg: "white",
+      color: "inherit",
+      bg: "transparent",
+      border: "none",
+      textDecoration: "underline",
       cursor: "pointer",
+      textAlign: "left",
+      fontWeight: "normal",
+      fontSize: 3,
+      my: 3,
+      p: 0,
+      m: 0,
     },
     inline: {
       variant: "buttons.primary",
-      fontSize: 1,
+      fontSize: 3,
       color: "white",
       bg: "primary",
       cursor: "pointer",
@@ -205,11 +192,29 @@ export default {
     },
   },
   input: {
+    color: "gray",
     bg: "white",
     border: "none",
+    height: 50,
+    px: 3,
+    my: 1,
+    fontSize: [2, 2, 4, 4],
+    "::-webkit-input-placeholder": {
+      color: "#CCC",
+      opacity: 1,
+    },
   },
   select: {
+    color: "gray",
     bg: "white",
     border: "none",
+    height: 50,
+    px: 3,
+    my: 1,
+    fontSize: [2, 2, 4, 4],
+    backgroundRepeat: "no-repeat",
+    backgroundImage: "url('/images/icon_dropdown.svg')",
+    backgroundPosition: "right .7em top 50%, 0 0",
+    backgroundSize: "1.5em auto, 100%",
   },
 };

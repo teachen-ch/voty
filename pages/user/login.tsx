@@ -1,8 +1,8 @@
 import { useRouter } from "next/router";
-import { Page } from "components/Page";
+import { AppPage } from "components/Page";
 import { gql, useMutation, useApolloClient } from "@apollo/client";
 import { useState, useEffect, ReactElement } from "react";
-import { Card, Text, Button, Heading } from "rebass";
+import { Text, Button, Heading, Flex } from "rebass";
 import { Grid } from "theme-ui";
 import { Label, Input } from "@rebass/forms";
 import { QForm, ErrorBox } from "components/Form";
@@ -65,31 +65,32 @@ export default function Login(): ReactElement {
   const token = useQueryParam("t");
   const purpose = useQueryParam("p");
   const user = useUser();
+  const router = useRouter();
 
   if (user) {
     return (
-      <Page heading="Angemeldet">
+      <AppPage heading="Angemeldet">
         <AfterLogin />
-      </Page>
+      </AppPage>
     );
   }
 
   // purpose: verification, reset, login
   if (token && purpose) {
     return (
-      <Page heading="Anmelden">
+      <AppPage heading="Anmelden" onClose={() => void router.push("/")}>
         <CheckToken token={token} purpose={purpose} />
-      </Page>
+      </AppPage>
     );
   } else {
     return (
-      <Page heading="Anmelden">
-        <Text>
+      <AppPage heading="Anmelden" onClose={() => void router.push("/")}>
+        <Text mb={3}>
           Hier kannst Du dich mit Deiner Schul-Emailadresse anmelden, wenn Du
           bereits ein Benutzer-Konto bei voty.ch hast.
         </Text>
         <LoginForm />
-      </Page>
+      </AppPage>
     );
   }
 }
@@ -136,43 +137,42 @@ export function LoginForm(): ReactElement {
     return <VerificationForm email={emailError} />;
   }
   return (
-    <Card>
-      <QForm
-        mutation={doLogin}
-        fields={{
-          email: {
-            label: "Email:",
-            required: true,
-            type: "email",
-            setter: setEmail,
-            placeholder: "name@meineschule.ch",
-          },
-          password: {
-            label: "Passwort:",
-            type: "password",
-            required: true,
-          },
-          submit: { type: "submit", label: "Anmelden" },
-        }}
+    <QForm
+      mutation={doLogin}
+      fields={{
+        email: {
+          label: "Email:",
+          required: true,
+          type: "email",
+          setter: setEmail,
+          placeholder: "name@meineschule.ch",
+        },
+        password: {
+          label: "Passwort:",
+          type: "password",
+          required: true,
+        },
+        submit: { type: "submit", label: "Anmelden" },
+      }}
+    >
+      <ErrorBox error={error} />
+      <Flex
+        flexDirection="row"
+        my={3}
+        sx={{ gridColumn: [0, 0, 2] }}
+        justifyContent="space-between"
       >
-        <ErrorBox error={error} />
-        <Grid
-          gap={2}
-          columns={[0, 0, "3fr 2fr"]}
-          sx={{ gridColumn: [0, 0, 2] }}
+        <Button
+          onClick={() => setRequestReset(email ? email : "")}
+          variant="text"
         >
-          <Button onClick={() => router.push("/user/signup")} variant="outline">
-            Ich habe noch kein Benutzer-Konto
-          </Button>
-          <Button
-            onClick={() => setRequestReset(email ? email : "")}
-            variant="outline"
-          >
-            Passwort vergessen?
-          </Button>
-        </Grid>
-      </QForm>
-    </Card>
+          Passwort vergessen?
+        </Button>
+        <Button onClick={() => router.push("/user/signup")} variant="text">
+          Neuer Benutzer? Konto anlegen!
+        </Button>
+      </Flex>
+    </QForm>
   );
 }
 
@@ -326,13 +326,9 @@ function RequestReset({ onCancel }: { email: string; onCancel: () => void }) {
   });
 
   return (
-    <Card my={3}>
-      <Heading as="h2" mt={0}>
-        Passwort zurücksetzen
-      </Heading>
+    <>
       <Text mb={4}>
-        Du hast Dein Passwort vergessen? Wir schicken Dir eine Email, dann
-        kannst Du es zurücksetzen.
+        <strong>Passwort zurücksetzen?</strong> Wir schicken Dir ein Email!
       </Text>
       <QForm
         mutation={doRequestReset}
@@ -359,7 +355,8 @@ function RequestReset({ onCancel }: { email: string; onCancel: () => void }) {
       >
         <Button
           onClick={onCancel}
-          variant="outline"
+          variant="text"
+          my={3}
           sx={{ gridColumn: [0, 0, 2] }}
         >
           Abbrechen
@@ -371,7 +368,7 @@ function RequestReset({ onCancel }: { email: string; onCancel: () => void }) {
           </Text>
         )}
       </QForm>
-    </Card>
+    </>
   );
 }
 
@@ -412,37 +409,35 @@ function PasswordResetForm() {
   return (
     <>
       <Heading as="h2">Passwort ändern</Heading>
-      <Card my={3}>
-        <Grid gap={2} columns={[0, 0, "1fr 3fr"]}>
-          <Label>Neues Passwort:</Label>
-          <Input
-            autoFocus
-            autoCapitalize="none"
-            value={password}
-            name="password"
-            type="password"
-            onChange={(event: React.FormEvent<HTMLInputElement>) =>
-              setPassword(event.currentTarget.value)
-            }
-          />
-          <Label>Password wiederholen:</Label>
-          <Input
-            value={password2}
-            name="password2"
-            type="password"
-            onChange={(event: React.FormEvent<HTMLInputElement>) =>
-              setPassword2(event.currentTarget.value)
-            }
-          />
-          <Button
-            onClick={() => checkPasswords(password, password2)}
-            sx={{ gridColumn: [0, 0, 2] }}
-          >
-            Passwort ändern
-          </Button>
-          <ErrorBox error={error} />
-        </Grid>
-      </Card>
+      <Grid gap={2} columns={[0, 0, "1fr 3fr"]}>
+        <Label>Neues Passwort:</Label>
+        <Input
+          autoFocus
+          autoCapitalize="none"
+          value={password}
+          name="password"
+          type="password"
+          onChange={(event: React.FormEvent<HTMLInputElement>) =>
+            setPassword(event.currentTarget.value)
+          }
+        />
+        <Label>Password wiederholen:</Label>
+        <Input
+          value={password2}
+          name="password2"
+          type="password"
+          onChange={(event: React.FormEvent<HTMLInputElement>) =>
+            setPassword2(event.currentTarget.value)
+          }
+        />
+        <Button
+          onClick={() => checkPasswords(password, password2)}
+          sx={{ gridColumn: [0, 0, 2] }}
+        >
+          Passwort ändern
+        </Button>
+        <ErrorBox error={error} />
+      </Grid>
     </>
   );
 }

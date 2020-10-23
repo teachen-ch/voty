@@ -20,6 +20,7 @@ declare module "rebass" {
   }
   interface ButtonProps {
     as?: React.ElementType;
+    textAlign?: string;
     css?: InterpolationWithTheme<any>;
   }
   interface CardProps {

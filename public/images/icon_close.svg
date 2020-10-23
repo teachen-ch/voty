@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="34px" height="34px" viewBox="0 0 34 34" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Button CloseCard</title>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Card-Master" transform="translate(-752.000000, -14.000000)" stroke="#FFFFFF" stroke-width="1.81515957">
+            <g id="Group" transform="translate(752.000000, 14.000000)">
+                <line x1="5.3125" y1="28.686445" x2="29.0492021" y2="4.94974291" id="Path" stroke-linecap="round" stroke-linejoin="round"></line>
+                <line x1="29.0492021" y1="28.686445" x2="5.3125" y2="4.94974291" id="Path" stroke-linecap="round" stroke-linejoin="round"></line>
+                <rect id="Rectangle" x="0.907579787" y="0.907579787" width="32.1848404" height="32.1848404"></rect>
+            </g>
+        </g>
+    </g>
+</svg>

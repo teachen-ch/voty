@@ -10,20 +10,21 @@ export default function Kontakt(): ReactElement {
   }
   return (
     <Page heading="Kontakt">
-      <Heading as="h2">Feedback oder Fragen?</Heading>
       <Text>
-        Für Feedback, Anregungen und Fragen freuen wir uns auf eure Email:
+        Möchtet ihr mit uns Kontakt aufnehmen? Wir freuen uns auf Feedback,
+        Anregungen und Fragen:
       </Text>
       <Text my={4}>
         <Button onClick={sendMail}>Email schreiben</Button>
       </Text>
 
-      <Card>
-        <Heading as="h2" my={0} id="newsletter">
-          Möchtet ihr regelmässig über voty.ch informiert werden?
-        </Heading>
-        <Newsletter />
-      </Card>
+      <Text mt={5}>
+        Möchtet ihr regelmässig über voty.ch informiert werden
+        <br /> (ca. 2-3 mal pro Semester):
+      </Text>
+      <Text my={4}>
+        <Button onClick={sendMail}>Newsletter anmelden</Button>
+      </Text>
     </Page>
   );
 }
