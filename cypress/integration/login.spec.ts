@@ -22,6 +22,7 @@ describe("Test Login Page", () => {
     cy.findByLabelText("Passwort:").type(Cypress.env("PASS"));
     cy.get("button").contains("Anmelden").click();
     cy.url().should("include", "/teacher");
+    cy.contains("Mein Konto").click();
     cy.contains("Abmelden").click();
     cy.contains("Anmelden").click();
     cy.contains("Hier kannst Du dich");

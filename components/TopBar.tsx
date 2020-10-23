@@ -90,7 +90,7 @@ const Account: React.FC = () => {
 
 const AccountMenu: React.FC = () => {
   return (
-    <Box sx={{ position: "absolute", marginTop: 110, marginLeft: "40px" }}>
+    <Box sx={{ position: "absolute", top: "80px", marginLeft: "40px" }}>
       <svg width="207px" height="123px" viewBox="0 0 207 123" version="1.1">
         <title>Rectangle</title>
         <g
@@ -113,14 +113,18 @@ const AccountMenu: React.FC = () => {
               fill="#FFFFFF"
             >
               <Link href="/user/profile">
-                <tspan x="19" y="58">
-                  Profil bearbeiten
-                </tspan>
+                <A>
+                  <tspan x="19" y="58">
+                    Profil bearbeiten
+                  </tspan>
+                </A>
               </Link>
               <Link href="/user/logout">
-                <tspan x="19" y="98">
-                  Abmelden
-                </tspan>
+                <A>
+                  <tspan x="19" y="98">
+                    Abmelden
+                  </tspan>
+                </A>
               </Link>
             </text>
           </g>

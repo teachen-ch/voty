@@ -10,6 +10,7 @@ import { RecoilRoot } from "recoil";
 import { Header } from "components/Header";
 import { Page } from "components/Page";
 import { ReactElement, useEffect } from "react";
+import CheckLogin from "components/CheckLogin";
 // eslint-disable-next-line
 const stats = require("@socialgouv/matomo-next");
 
@@ -24,6 +25,7 @@ function MyApp({ Component, pageProps }: AppProps): ReactElement {
         <RecoilRoot>
           <ThemeProvider theme={theme}>
             <MDXProvider components={{ wrapper: MDXWrapper }}>
+              <CheckLogin />
               <Header />
               <Component {...pageProps} />
             </MDXProvider>

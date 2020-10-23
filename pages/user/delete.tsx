@@ -18,7 +18,7 @@ export default function Delete(): ReactElement {
   const role = user?.role;
   return (
     <Page heading="Konto löschen">
-      <Heading as="h2">Ich möchte mein Konto auf voty.chlöschen.</Heading>
+      <Heading as="h2">Ich möchte mein Konto auf voty.ch löschen.</Heading>
       {role === Role.Student || (true && <DeleteForm user={user} />)}
     </Page>
   );

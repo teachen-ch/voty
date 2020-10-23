@@ -146,6 +146,7 @@ export function LoginForm(): ReactElement {
           type: "email",
           setter: setEmail,
           placeholder: "name@meineschule.ch",
+          focus: true,
         },
         password: {
           label: "Passwort:",
@@ -346,6 +347,7 @@ function RequestReset({ onCancel }: { email: string; onCancel: () => void }) {
             required: true,
             type: "email",
             placeholder: "name@meineschule.ch",
+            focus: true,
           },
           submit: {
             type: "submit",

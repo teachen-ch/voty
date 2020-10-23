@@ -7,7 +7,6 @@ import { Footer } from "components/Footer";
 import { ReadMore } from "components/ReadMore";
 import { FAQ } from "./abstimmung";
 import Link from "next/link";
-import CheckLogin from "components/CheckLogin";
 
 export default function Home(): React.ReactElement {
   return (
@@ -125,7 +124,6 @@ export default function Home(): React.ReactElement {
           Jetzt mitmachen: Jugendliche stimmen ab!
         </Banner>
         <Footer color="black" />
-        <CheckLogin />
       </Container>
     </>
   );
