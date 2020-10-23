@@ -204,25 +204,26 @@ export function CreateTeamForm({
   const schoolId = user.school.id;
 
   return (
-      <QForm
-        mutation={doCreateTeam}
-        onSubmit={(values) =>
-          doCreateTeam({
-            variables: {
-              name: String(values.name),
-              teacher: user.id,
-              school: schoolId,
-            },
-          })
-        }
-        fields={{
-          name: {
-            label: "Klasse:",
-            required: true,
+    <QForm
+      mutation={doCreateTeam}
+      onSubmit={(values) =>
+        doCreateTeam({
+          variables: {
+            name: String(values.name),
+            teacher: user.id,
+            school: schoolId,
           },
-          submit: { type: "submit", label: "Klasse erstellen" },
-        }}
-      ></QForm>
+        })
+      }
+      fields={{
+        name: {
+          label: "Klasse:",
+          required: true,
+        },
+        submit: { type: "submit", label: "Klasse erstellen" },
+      }}
+    >
       <ErrorBox error={error} />
+    </QForm>
   );
 }

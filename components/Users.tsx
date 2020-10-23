@@ -142,7 +142,7 @@ export const ProfileEdit: React.FC<{
   if (isTeacher) {
     validationSchema = yup.object().shape({
       name: yup.string().required("Pflichtfeld"),
-      lastname: yup.string(),
+      lastname: yup.string().nullable(),
     });
   } else {
     validationSchema = yup.object().shape({

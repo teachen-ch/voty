@@ -23,7 +23,7 @@ export default function StudentProfilePage({
         <Box mt={5}>
           Ich möchte mein Konto auf voty.ch{" "}
           <Link href="/user/delete">
-            <A>löschen</A>
+            <A variant="underline">löschen</A>
           </Link>
         </Box>
       )}

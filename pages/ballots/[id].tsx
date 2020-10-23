@@ -12,7 +12,9 @@ import { parseMarkdownInner } from "util/markdown";
 import { BigGray } from "components/BigButton";
 
 export default function BallotPage(): ReactElement {
+  const [success, setSuccess] = useState(false);
   const router = useRouter();
+  const user = useUser();
   const id = String(router.query.id);
   const ballotQuery = useBallotQuery({ variables: { where: { id } } });
 
@@ -22,10 +24,40 @@ export default function BallotPage(): ReactElement {
 
   const ballot = ballotQuery.data?.ballot;
 
-  if (!ballot)
+  if (!ballot) {
     return (
       <Page heading="Abstimmung">Abstimmung konnte nicht gefunden werden</Page>
     );
+  }
+  if (success) {
+    return (
+      <LoggedInPage heading="Du hast abgestimmt!">
+        <Box mt={4} mb={3} fontSize={2}>
+          <Link href="/student/">
+            <A variant="underline">Start</A>
+          </Link>
+          {" / "}
+          <Link href="/student/">
+            <A variant="underline">Abstimmungen</A>
+          </Link>
+          {" / "}
+          <A variant="underline" onClick={() => setSuccess(false)}>
+            {ballot.title}
+          </A>
+          {" / "}
+          <A variant="semi">Deine Stimme</A>
+        </Box>
+        <Text mb={4}>
+          Super, {user?.name}, Du hast nun anonym abgestimmt und Deine Stimme
+          wurde gezählt. Die Resultate der Abbstimmung könnt ihr mit Eurer
+          Lerhperson ansehen und besprechen.
+        </Text>
+        <Box textAlign="center">
+          <img src="/images/voty_success.svg" />
+        </Box>
+      </LoggedInPage>
+    );
+  }
 
   return (
     <LoggedInPage heading="Abstimmen">
@@ -57,21 +89,23 @@ export default function BallotPage(): ReactElement {
         </Text>
         <div dangerouslySetInnerHTML={parseMarkdownInner(ballot.body)} />
         <Box my={4}>
-          <VotyNow ballot={ballot} />
+          <VotyNow ballot={ballot} onSuccess={() => setSuccess(true)} />
         </Box>
       </Card>
     </LoggedInPage>
   );
 }
 
-const VotyNow: React.FC<{ ballot: BallotQuery["ballot"] }> = ({ ballot }) => {
+const VotyNow: React.FC<{
+  ballot: BallotQuery["ballot"];
+  onSuccess: () => void;
+}> = ({ ballot, onSuccess }) => {
   if (!ballot) return null;
   const [error, setError] = useState("");
   const user = useUser();
-  const [success, setSuccess] = useState(false);
   const [doVote] = useVoteMutation({
     onCompleted() {
-      setSuccess(true);
+      onSuccess();
     },
     onError(err) {
       setError(err.message);
@@ -88,8 +122,8 @@ const VotyNow: React.FC<{ ballot: BallotQuery["ballot"] }> = ({ ballot }) => {
   }
 
   const now = new Date();
-  if (ballot.hasVoted === true || success) {
-    return <BigGray>Du hast erfolgreich abgestimmt ✅</BigGray>;
+  if (ballot.hasVoted === true) {
+    return <BigGray>Du hast erfolgreich abgestimmt</BigGray>;
   }
   if (new Date(ballot.start) > now) {
     return <BigGray>Abstimmung noch nicht gestartet</BigGray>;

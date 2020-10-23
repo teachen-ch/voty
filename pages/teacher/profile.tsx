@@ -14,18 +14,21 @@ export default function TeacherProfilePage({
   const user = useUser();
 
   return (
-    <LoggedInPage heading="Startseite">
+    <LoggedInPage heading="Dein Profil">
       <Heading as="h2" mt={0}>
         {firstRun ? "Bitte ergänze Deine Angaben…" : "Profil bearbeiten"}
       </Heading>
       <ProfileEdit user={user} editMode={firstRun} />
-      <SelectSchool />
+
+      <Box mt={4}>
+        <SelectSchool />
+      </Box>
 
       {!firstRun && (
         <Box mt={5}>
           Ich möchte mein Konto auf voty.ch{" "}
           <Link href="/user/delete">
-            <A>löschen</A>
+            <A variant="underline">löschen</A>
           </Link>
           .
           <Text fontSize={1}>

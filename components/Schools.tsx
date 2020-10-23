@@ -1,6 +1,6 @@
 import { gql } from "@apollo/client";
 import { useUser, useSetUser } from "../state/user";
-import { Heading, Button, Text, Box } from "rebass";
+import { Heading, Flex, Button, Text, Box } from "rebass";
 import { omit } from "lodash";
 import { QForm, ErrorBox } from "./Form";
 import { cantonNames } from "../util/cantons";
@@ -126,12 +126,15 @@ export const SelectSchool: React.FC = () => {
 
   if (user.school && !edit) {
     return (
-      <Text my={4}>
-        <b>Dein Schulhaus</b>: {user.school.name}, {user.school.city}
-        <Button onClick={() => setEdit(true)} variant="inline">
-          Bearbeiten
+      <Box>
+        <Text fontWeight="bold">Dein Schulhaus</Text>
+        <Text>
+          {user.school.name}, {user.school.city}
+        </Text>
+        <Button onClick={() => setEdit(true)} variant="text">
+          Anderes Schulhaus auswählen
         </Button>
-      </Text>
+      </Box>
     );
   }
   if (!schools) {
@@ -165,9 +168,7 @@ export const SelectSchool: React.FC = () => {
         />
       ) : (
         <Box>
-          <Heading mt={0}>
-            Wähle Dein Schulhaus aus oder erfasse ein Neues:
-          </Heading>
+          <Text mb={3}>Wähle Dein Schulhaus aus oder erfasse ein Neues…</Text>
           <QForm
             fields={{
               school: {
@@ -187,13 +188,14 @@ export const SelectSchool: React.FC = () => {
               setUserSchool({ variables: { school: String(values.school) } })
             }
           >
-            <Button
-              onClick={() => setCreate(true)}
-              variant="text"
-              sx={{ gridColumn: [0, 0, 2] }}
-            >
-              Neues Schulhaus erfassen
-            </Button>
+            <Flex sx={{ gridColumn: [0, 0, 2] }} justifyContent="space-between">
+              <Button onClick={() => setEdit(false)} variant="text">
+                Abbrechen
+              </Button>
+              <Button onClick={() => setCreate(true)} variant="text">
+                Neues Schulhaus erfassen
+              </Button>
+            </Flex>
           </QForm>
         </Box>
       )}
