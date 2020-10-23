@@ -68,11 +68,7 @@ export default function Login(): ReactElement {
   const router = useRouter();
 
   if (user) {
-    return (
-      <AppPage heading="Angemeldet">
-        <AfterLogin />
-      </AppPage>
-    );
+    return <AfterLogin />;
   }
 
   // purpose: verification, reset, login
@@ -241,9 +237,11 @@ function AfterLogin() {
     return null;
   } else {
     return (
-      <Heading as="h2">
-        Etwas ist hier schief... Du hast keine Rolle im System hinterlegt :-/
-      </Heading>
+      <AppPage heading="Angemeldet">
+        <Heading as="h2">
+          Etwas ist hier schief... Du hast keine Rolle im System hinterlegt :-/
+        </Heading>
+      </AppPage>
     );
   }
 }

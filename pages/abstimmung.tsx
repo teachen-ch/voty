@@ -53,7 +53,7 @@ export default function Abstimmung(): ReactElement {
             <A
               href="https://www.easyvote.ch/de/school/"
               rel="noreferrer"
-              sx={{ textDecoration: "underline" }}
+              variant="underline"
             >
               easyvote.ch
             </A>{" "}

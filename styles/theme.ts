@@ -64,6 +64,15 @@ export default {
       textDecoration: "none",
       cursor: "pointer",
     },
+    underline: {
+      textDecoration: "underline",
+    },
+    semi: {
+      fontWeight: "semi",
+    },
+    bold: {
+      fontWeight: "bold",
+    },
   },
   styles: {
     root: {
@@ -126,6 +135,16 @@ export default {
     caps: {
       textTransform: "uppercase",
       letterSpacing: "0.1em",
+    },
+    fielderror: {
+      fontSize: 1,
+      fontWeight: "semi",
+      color: "white",
+      bg: "gray",
+      marginTop: "-11px",
+      marginLeft: "-1px",
+      p: 1,
+      px: 3,
     },
   },
   buttons: {

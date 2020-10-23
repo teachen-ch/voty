@@ -16,15 +16,12 @@ export const Footer: React.FC<{ color: string }> = ({ color }) => (
         href="https://github.com/teachen-ch/voty"
         target="_blank"
         rel="noreferrer"
-        sx={{ textDecoration: "underline" }}
+        variant="underline"
       >
         Open-Source
       </A>{" "}
       Projekt des Vereins{" "}
-      <A
-        href="https://teachen.ch/verein-teachen"
-        sx={{ textDecoration: "underline" }}
-      >
+      <A href="https://teachen.ch/verein-teachen" variant="underline">
         «Teachen!»
       </A>{" "}
       mit tatkräftiger Unterstützung des{" "}
@@ -32,7 +29,7 @@ export const Footer: React.FC<{ color: string }> = ({ color }) => (
           href="https://prototypefund.opendata.ch"
           target="_blank"
           rel="noreferrer"
-          sx={{ textDecoration: "underline" }}
+        variant="underline"
         >PrototypeFund</Link>*/}
       PrototypeFund
     </Text>

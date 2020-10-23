@@ -193,8 +193,8 @@ export const ProfileEdit: React.FC<{
             {isStudent && (
               <>
                 <label htmlFor="year">Jahrgang: </label>
-                <Field as={Select} id="year" name="year">
-                  <option value="">Bitte auswählen</option>
+                <Field as={Select} id="year" name="year" value={undefined}>
+                  <option value={undefined}>Bitte auswählen</option>
                   {[...Array(numYears).keys()].map((i) => (
                     <option key={i}>{i + startYear}</option>
                   ))}
@@ -218,17 +218,26 @@ export const ProfileEdit: React.FC<{
                     </label>
                     <label>
                       <Field type="radio" name="gender" value={Gender.Unkown} />{" "}
-                      Möchte ich nicht angeben
+                      <Text
+                        sx={{
+                          display: [
+                            "none",
+                            "none",
+                            "inline-block",
+                            "inline-block",
+                          ],
+                        }}
+                      >
+                        Möchte ich
+                      </Text>{" "}
+                      nicht angeben
                     </label>
                   </Grid>
                 </div>
                 <FieldError name="gender" />
               </>
             )}
-            <ShowField
-              label="Email:"
-              value="Bitte kontaktiere uns, wenn Du Deine Email ändern möchtest"
-            />
+            <ShowField label="Email:" value="Kontaktiere uns für Änderungen" />
             <Button type="submit" sx={{ gridColumn: [0, 0, 2] }}>
               Angaben speichern
             </Button>
@@ -261,11 +270,7 @@ export const Input: React.FC<InputProps> = ({ label, name, placeholder }) => {
       <RebassInput {...field} id={name} placeholder={placeholder} />
       {meta.touched && meta.error ? (
         <>
-          <Text
-            variant="fielderror"
-            fontSize={1}
-            sx={{ gridColumn: [0, 0, 2] }}
-          >
+          <Text variant="fielderror" sx={{ gridColumn: [0, 0, 2] }}>
             {meta.error}
           </Text>
         </>
@@ -277,12 +282,7 @@ export const Input: React.FC<InputProps> = ({ label, name, placeholder }) => {
 export const FieldError: React.FC<{ name: string }> = ({ name }) => (
   <ErrorMessage name={name}>
     {(msg) => (
-      <Text
-        fontSize={1}
-        fontWeight="bold"
-        color="primary"
-        sx={{ gridColumn: [0, 0, 2] }}
-      >
+      <Text variant="fielderror" sx={{ gridColumn: [0, 0, 2] }}>
         {msg}
       </Text>
     )}

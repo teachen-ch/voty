@@ -58,10 +58,8 @@ export const Input: React.FC<InputProps> = ({ label, setter, ...props }) => {
       />
       {meta.touched && meta.error ? (
         <>
-          <span key={"s" + label} />
-          <Text key={"e" + label} variant="fielderror" fontSize={1}>
-            {meta.error}
-          </Text>
+          <span />
+          <Text variant="fielderror">{meta.error}</Text>
         </>
       ) : null}
     </>
@@ -241,10 +239,8 @@ export const RadioGroup: React.FC<RadioGroupProps> = ({
 
       {meta.touched && meta.error ? (
         <>
-          <span key={"s" + label} />
-          <Text key={"e" + label} variant="fielderror" fontSize={1}>
-            {meta.error}
-          </Text>
+          <span />
+          <Text variant="fielderror">{meta.error}</Text>
         </>
       ) : null}
     </>
@@ -278,10 +274,8 @@ export const Select: React.FC<SelectProps> = ({ label, ...props }) => {
       <RebassSelect id={props.id || props.name} {...field} {...props} />
       {meta.touched && meta.error ? (
         <>
-          <span key={"s" + label} />
-          <Text key={"e" + label} variant="fielderror" fontSize={1}>
-            {meta.error}
-          </Text>
+          <span />
+          <Text variant="fielderror">{meta.error}</Text>
         </>
       ) : null}
     </>

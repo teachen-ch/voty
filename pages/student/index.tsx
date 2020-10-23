@@ -1,29 +1,52 @@
 import { useUser } from "../../state/user";
 import { LoggedInPage } from "../../components/Page";
-import { Heading, Box } from "rebass";
+import { Link as A, Box, Text } from "rebass";
 import { SessionUser } from "state/user";
 import { useRouter } from "next/router";
 import { Ballot, Ballots } from "components/Ballots";
 import { Navigation, Route } from "components/Navigation";
 import { ReactElement } from "react";
-import { StudentProfilePage } from "./profile";
 import {
   BallotScope,
   BallotFieldsFragment,
   useGetBallotRunsQuery,
 } from "graphql/types";
+import { ProfileEdit } from "components/Users";
+import Link from "next/link";
 
 export default function StudentHome(): ReactElement {
   const user = useUser();
 
   if (user?.year === null) {
-    return <StudentProfilePage firstRun />;
+    return (
+      <LoggedInPage heading={`Hallo ${user?.name}`}>
+        <Text>Willkommen auf voty.ch – schön bis Du da!</Text>
+        <Text my={2}>
+          Deine Klasse: {user?.team?.name}, {user?.school?.name}
+        </Text>
+        <Text fontWeight="bold" py={3}>
+          Bitte ergänze Deine Angaben…
+        </Text>
+        <ProfileEdit user={user} editMode={true} />
+      </LoggedInPage>
+    );
   }
 
   return (
-    <LoggedInPage heading="Startseite">
-      {/*<StudentTeamNavigation />*/}
-      <Heading as="h2">Aktuelle Abstimmungen</Heading>
+    <LoggedInPage heading="Aktuelle Abstimmungen">
+      <Text>
+        Hier kannst Du zu den aktuellen nationalen Abstimmungsvorlagen anonym
+        Deine Stimme abgeben.
+      </Text>
+      <Box mt={4} mb={3} fontSize={2}>
+        <Link href="/student/">
+          <A variant="underline">Start</A>
+        </Link>
+        {" / "}
+        <Link href="/student/test">
+          <A variant="semi">Abstimmungen</A>
+        </Link>
+      </Box>
       <ShowBallots user={user} />
     </LoggedInPage>
   );
