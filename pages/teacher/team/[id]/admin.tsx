@@ -1,5 +1,5 @@
 import { LoggedInPage } from "components/Page";
-import { Heading, Text, Button, Link } from "rebass";
+import { Heading, Text, Button, Link as A } from "rebass";
 import { Users } from "components/Users";
 import { Input, Textarea } from "@rebass/forms";
 import { Grid, Label } from "theme-ui";
@@ -7,6 +7,7 @@ import { useRef, useState, RefObject, ReactElement } from "react";
 import { Navigation, Route } from "components/Navigation";
 import { useRouter } from "next/router";
 import _ from "lodash";
+import Link from "next/link";
 import { gql } from "@apollo/client";
 import { fragments } from "components/Teams";
 import {
@@ -78,18 +79,23 @@ export default function TeamPage(): ReactElement {
 
   return (
     <LoggedInPage heading={`${team.name}`}>
-      <TeacherTeamNavigation team={team} />
+      {team.members.length && (
+        <Link
+          href="/teacher/team/[id]/test"
+          as={`/teacher/team/${team.id}/test`}
+        >
+          <Button>Abstimmungen auswählen</Button>
+        </Link>
+      )}
       <Heading as="h2">Schüler*innen</Heading>
       <Users users={team.members} />
 
-      <Heading mt={0}>Schülerinnen und Schüler einladen</Heading>
+      <Heading>Schülerinnen und Schüler einladen</Heading>
       <Grid my={1} gap={2} columns={[0, 0, "1fr 4fr"]}>
         <Text fontSize={1} sx={{ gridColumn: [0, 0, 2] }}>
           An alle diese Email-Adressen eine Einladung schicken:
         </Text>
-        <Label sx={{ alignSelf: "top", fontWeight: "bold" }}>
-          Email-Adressen:
-        </Label>
+        <Label sx={{ alignSelf: "top" }}>Emails:</Label>
         <Textarea
           value={importEmails}
           bg="white"
@@ -118,11 +124,9 @@ export default function TeamPage(): ReactElement {
         )}
         <Text fontSize={1} sx={{ gridColumn: [0, 0, 2] }} mt={4}>
           Alternativ können Sie Schüler*innen auch mit einem{" "}
-          <Link>
-            <Button onClick={() => setShowInviteLink(true)} variant="inline">
-              Einladungslink
-            </Button>
-          </Link>{" "}
+          <A onClick={() => setShowInviteLink(true)} variant="underline">
+            Einladungslink
+          </A>{" "}
           einladen
         </Text>
       </Grid>
@@ -148,9 +152,7 @@ function InviteLink({ team }: { team: TeamTeacherFieldsFragment }) {
 
   return (
     <Grid my={1} gap={2} columns={[0, 0, "1fr 3fr 1fr"]}>
-      <Label sx={{ alignSelf: "center", fontWeight: "bold" }}>
-        Einladungslink:
-      </Label>
+      <Label sx={{ alignSelf: "center" }}>Einladungslink:</Label>
       <Input
         ref={inviteRef}
         readOnly

@@ -143,7 +143,9 @@ export const Teams: React.FC<TeamsProps> = ({ where, teamClick }) => {
               </td>
               <td>{team.members ? <>{team.members.length} SuS</> : "-"}</td>
               <td>
-                <A onClick={() => teamClick(team)}>Bearbeiten</A>
+                <A onClick={() => teamClick(team)} variant="underline">
+                  Bearbeiten
+                </A>
               </td>
             </tr>
           ))}

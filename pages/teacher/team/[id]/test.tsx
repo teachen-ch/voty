@@ -13,7 +13,6 @@ import {
   useRemoveBallotRunMutation,
 } from "graphql/types";
 import { useRouter } from "next/router";
-import { TeacherTeamNavigation } from "./admin";
 import { ReactElement } from "react";
 import { find } from "lodash";
 
@@ -77,7 +76,6 @@ export default function TeacherTest(): ReactElement {
 
   return (
     <LoggedInPage heading="Demokratie testen">
-      <TeacherTeamNavigation team={team} />
       <Heading as="h2">Diese Abstimmungen wurden ausgewählt:</Heading>
       <div id="selectedBallots">
         {ballotRuns?.length
