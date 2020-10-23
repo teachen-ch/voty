@@ -26,7 +26,7 @@
     "init:db": "yarn run migrate",
     "migrate": "cd prisma && npx prisma migrate save -c --experimental && npx prisma migrate up -c --experimental && npx prisma generate && cd ../",
     "dump_dev": "pg_dump --clean voty | ssh root@dev.voty.ch docker exec -i postgres psql -U voty voty",
-    "ci:test": "yarn run migrate && yarn run start:bg && cypress run",
+    "ci:test": "yarn run migrate && yarn run start:bg && cypress run --record",
     "graphql": "graphql-codegen --config codegen.yml",
     "lint": "npx eslint ./"
   },

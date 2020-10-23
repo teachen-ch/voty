@@ -15,6 +15,7 @@
       "docker"
     ],
     "files.exclude": {
+      ".git/": true,
       ".next/": true,
       ".nexus/": true,
       "data/": true,
