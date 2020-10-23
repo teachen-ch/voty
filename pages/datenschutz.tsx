@@ -1,6 +1,6 @@
 import Head from "next/head";
 import { Page } from "components/Page";
-import { Card, Link as A, Heading, Text } from "rebass";
+import { Link as A, Heading, Text } from "rebass";
 import { ReactElement } from "react";
 
 export default function Datenschutz(): ReactElement {

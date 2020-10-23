@@ -1,6 +1,6 @@
 import { gql } from "@apollo/client";
 import { useUser, useSetUser } from "../state/user";
-import { Heading, Button, Text, Card } from "rebass";
+import { Heading, Button, Text, Box } from "rebass";
 import { omit } from "lodash";
 import { QForm, ErrorBox } from "./Form";
 import { cantonNames } from "../util/cantons";
@@ -164,7 +164,7 @@ export const SelectSchool: React.FC = () => {
           }}
         />
       ) : (
-        <Card>
+        <Box>
           <Heading mt={0}>
             Wähle Dein Schulhaus aus oder erfasse ein Neues:
           </Heading>
@@ -195,7 +195,7 @@ export const SelectSchool: React.FC = () => {
               Neues Schulhaus erfassen
             </Button>
           </QForm>
-        </Card>
+        </Box>
       )}
     </>
   );
@@ -254,7 +254,7 @@ export function CreateSchool({
     },
   });
   return (
-    <Card>
+    <Box>
       <Heading mt={0}>Neues Schulhaus erfassen:</Heading>
       <QForm
         fields={{
@@ -312,6 +312,6 @@ export function CreateSchool({
         </Button>
         <ErrorBox error={error} my={4} />
       </QForm>
-    </Card>
+    </Box>
   );
 }

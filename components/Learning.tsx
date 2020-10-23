@@ -1,7 +1,7 @@
 import Info from "components/Info";
 import Link from "next/link";
 import Video from "components/Video";
-import { Box, Card, Heading, Flex, Button } from "rebass";
+import { Box, Heading, Flex, Button } from "rebass";
 import { useState } from "react";
 import { MDXProvider } from "@mdx-js/react";
 
@@ -15,7 +15,7 @@ type RefProps = {
 };
 
 export const Ref: React.FC<RefProps> = (props) => (
-  <Card>
+  <Box>
     <Show if={props.title}>
       <Heading mt={0}>{props.title}</Heading>
     </Show>
@@ -40,7 +40,7 @@ export const Ref: React.FC<RefProps> = (props) => (
         ↪ Quelle: <Source href={props.href} />
       </Box>
     )}
-  </Card>
+  </Box>
 );
 
 export const Source: React.FC<{ href: string }> = (props) => {

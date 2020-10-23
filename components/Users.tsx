@@ -91,7 +91,8 @@ interface IProfileForm {
 export const ProfileEdit: React.FC<{
   user: SessionUser;
   editMode?: boolean;
-}> = ({ user, editMode }) => {
+  onFinish?: () => void;
+}> = ({ user, editMode, onFinish }) => {
   const [error, setError] = useState("");
   const [edit, setEdit] = useState(editMode);
   const setUser = useSetUser();
@@ -99,6 +100,7 @@ export const ProfileEdit: React.FC<{
     onCompleted(data) {
       setUser(data.updateUser);
       setEdit(false);
+      onFinish && onFinish();
     },
     onError(error) {
       if (error.message === "ERR_DUPLICATE_EMAIL") {

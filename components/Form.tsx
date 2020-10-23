@@ -5,7 +5,7 @@ import {
   FormikFormProps,
   useFormikContext,
 } from "formik";
-import { Text, Button, Card, Box, BoxProps } from "rebass";
+import { Text, Button, Box, BoxProps } from "rebass";
 import { Grid } from "theme-ui";
 import {
   Input as RebassInput,
@@ -20,7 +20,7 @@ import React, { useMemo } from "react";
 import { omit } from "lodash";
 import { MutationFunction } from "@apollo/client";
 
-export { Formik, Form, yup, Grid, Card };
+export { Formik, Form, yup, Grid };
 
 type InputProps = RebassInputProps & {
   label: string;

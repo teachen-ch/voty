@@ -7,7 +7,6 @@ services:
     env_file: ".env.local"
     volumes:
       - .:/app/
-    image: docker.pkg.github.com/teachen-ch/voty/voty
     depends_on:
       - postgres
     environment:

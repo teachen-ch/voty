@@ -1,5 +1,5 @@
 import { Page, LoggedInPage, ErrorPage } from "components/Page";
-import { Text, Heading, Box, Card, Flex, Link as A } from "rebass";
+import { Text, Box, Button, Card, Flex, Link as A } from "rebass";
 import { useRouter } from "next/router";
 import { useUser } from "state/user";
 import { formatFromTo } from "util/date";
@@ -9,7 +9,7 @@ import { ErrorBox } from "components/Form";
 import Info from "components/Info";
 import Link from "next/link";
 import { parseMarkdownInner } from "util/markdown";
-import { BigButton, BigGray } from "components/BigButton";
+import { BigGray } from "components/BigButton";
 
 export default function BallotPage(): ReactElement {
   const router = useRouter();
@@ -28,21 +28,38 @@ export default function BallotPage(): ReactElement {
     );
 
   return (
-    <LoggedInPage heading="Abstimmung">
-      <Heading as="h2">{ballot.title}</Heading>
-      <Text my={2}>{ballot.description}</Text>
-      <Text my={2}>📅 Dauer: {formatFromTo(ballot.start, ballot.end)}</Text>
+    <LoggedInPage heading="Abstimmen">
+      <Text>
+        Hier kannst Du zu den aktuellen nationalen Abstimmungsvorlagen anonym
+        Deine Stimme abgeben.
+      </Text>
+      <Box mt={4} mb={3} fontSize={2}>
+        <Link href="/student/">
+          <A variant="underline">Start</A>
+        </Link>
+        {" / "}
+        <Link href="/student/">
+          <A variant="underline">Abstimmungen</A>
+        </Link>
+        {" / "}
+        <A variant="semi">{ballot.title}</A>
+      </Box>
 
       <Card>
+        <Text fontWeight="bold">{ballot.title}</Text>
+        <Text mt={3}>{ballot.description}</Text>
+        <Text fontSize={2} my={4}>
+          <img src="/images/icon_cal.svg" /> &nbsp; Zeit:{" "}
+          {formatFromTo(ballot.start, ballot.end)}
+        </Text>
         <Text textAlign="center">
-          <img
-            width={150}
-            src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.engage.ch%2Fsites%2Fdefault%2Ffiles%2Frequests%2Feasyvote.png&f=1&nofb=1"
-          />
+          <img width={150} src="/images/easyvote.png" />
         </Text>
         <div dangerouslySetInnerHTML={parseMarkdownInner(ballot.body)} />
+        <Box my={4}>
+          <VotyNow ballot={ballot} />
+        </Box>
       </Card>
-      <VotyNow ballot={ballot} />
     </LoggedInPage>
   );
 }
@@ -90,19 +107,25 @@ const VotyNow: React.FC<{ ballot: BallotQuery["ballot"] }> = ({ ballot }) => {
   }
 
   return (
-    <Box my={4}>
-      <Flex>
-        <BigButton color="green" onClick={() => vote(ballot.id, 1)}>
-          Ja, ich stimme zu
-        </BigButton>
-        <BigButton color="primary" onClick={() => vote(ballot.id, 2)}>
-          Nein, ich lehne ab
-        </BigButton>
+    <Box>
+      <Flex justifyContent="space-between">
+        <A onClick={() => vote(ballot.id, 1)} flex={1}>
+          <Flex flexDirection="column" alignItems="center">
+            <img src="/images/icon_yes.svg" height="100px" />
+            Ja, ich stimme zu
+          </Flex>
+        </A>
+        <A onClick={() => vote(ballot.id, 2)} flex={1}>
+          <Flex flexDirection="column" alignItems="center">
+            <img src="/images/icon_no.svg" height="100px" />
+            Nein, ich lehne ab
+          </Flex>
+        </A>
       </Flex>
-      <Text my={2} textAlign="center">
+      <Button variant="text" my={4} textAlign="center" width="100%">
         Ich möchte mich{" "}
         <A onClick={() => vote(ballot.id, 0)}>der Stimme enthalten</A>
-      </Text>
+      </Button>
       <ErrorBox my={2} error={error} />
     </Box>
   );

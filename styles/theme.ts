@@ -4,7 +4,8 @@ export default {
   breakpoints: ["400px", "600px", "1200px", "2000px"],
   fontSizes: [12, 14, 20, 22, 26, 34, 50, 50, 50],
   colors: {
-    text: "black",
+    text: "#030303",
+    black: "#030303",
     background: "white",
     primary: "#d90000",
     secondary: "#206DBB",
@@ -56,7 +57,8 @@ export default {
     card: {
       p: 3,
       my: 3,
-      bg: "silver",
+      bg: "white",
+      color: "black",
       borderRadius: 0,
     },
     link: {
@@ -108,6 +110,7 @@ export default {
         color: "white",
       },
       a: {
+        cursor: "pointer",
         color: "inherit",
         ":visited": {
           color: "inherit",

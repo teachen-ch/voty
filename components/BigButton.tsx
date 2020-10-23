@@ -2,14 +2,12 @@ import { Button, ButtonProps, Text } from "rebass";
 
 export const BigButton: React.FC<
   ButtonProps & {
-    border?: string;
     color: string;
     onClick?: () => void;
     width?: string;
   }
-> = ({ border, color, onClick, width, ...props }) => (
+> = ({ color, onClick, width, ...props }) => (
   <Button
-    sx={{ border: "5px solid", borderColor: border || color }}
     mr={2}
     py={4}
     bg="white"

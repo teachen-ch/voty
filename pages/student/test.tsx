@@ -2,7 +2,6 @@ import { LoggedInPage } from "components/Page";
 import { Heading } from "rebass";
 import { Ballot, Ballots } from "components/Ballots";
 import { useRouter } from "next/router";
-import { StudentTeamNavigation } from "./index";
 import { useUser } from "state/user";
 import { ReactElement } from "react";
 import {
@@ -26,7 +25,6 @@ export default function StudentTest(): ReactElement {
   }
   return (
     <LoggedInPage heading="Abstimmen">
-      <StudentTeamNavigation />
       <Heading as="h2">Nationale Abstimmungen</Heading>
       {ballotRuns?.length ? (
         ballotRuns.map((run) => (

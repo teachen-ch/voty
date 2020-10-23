@@ -1,6 +1,5 @@
-import Newsletter from "components/Newsletter";
 import { Page } from "components/Page";
-import { Card, Heading, Text, Button } from "rebass";
+import { Text, Button } from "rebass";
 import { ReactElement } from "react";
 
 export default function Kontakt(): ReactElement {

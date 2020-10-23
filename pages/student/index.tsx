@@ -43,9 +43,7 @@ export default function StudentHome(): ReactElement {
           <A variant="underline">Start</A>
         </Link>
         {" / "}
-        <Link href="/student/test">
-          <A variant="semi">Abstimmungen</A>
-        </Link>
+        <A variant="semi">Abstimmungen</A>
       </Box>
       <ShowBallots user={user} />
     </LoggedInPage>

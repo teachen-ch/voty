@@ -1,5 +1,5 @@
 import { LoggedInPage } from "components/Page";
-import { Heading, Card, Text, Button, Link } from "rebass";
+import { Heading, Text, Button, Link } from "rebass";
 import { Users } from "components/Users";
 import { Input, Textarea } from "@rebass/forms";
 import { Grid, Label } from "theme-ui";
@@ -82,53 +82,51 @@ export default function TeamPage(): ReactElement {
       <Heading as="h2">Schüler*innen</Heading>
       <Users users={team.members} />
 
-      <Card>
-        <Heading mt={0}>Schülerinnen und Schüler einladen</Heading>
-        <Grid my={1} gap={2} columns={[0, 0, "1fr 4fr"]}>
-          <Text fontSize={1} sx={{ gridColumn: [0, 0, 2] }}>
-            An alle diese Email-Adressen eine Einladung schicken:
-          </Text>
-          <Label sx={{ alignSelf: "top", fontWeight: "bold" }}>
-            Email-Adressen:
-          </Label>
-          <Textarea
-            value={importEmails}
-            bg="white"
-            sx={{ border: "white" }}
-            onChange={checkEmails}
-            fontSize={1}
-            placeholder="name1@schule.ch, name2@schule; name3.schule.ch; ..."
-          />
-          <Button
-            onClick={() => inviteStudents(team)}
-            disabled={!matches}
-            bg={matches ? "primary" : "muted"}
-            sx={{ gridColumn: [0, 0, 2] }}
-          >
-            {matches} Einladungen verschicken
-          </Button>
-          {matches && (
-            <>
-              <Text fontSize={1} sx={{ gridColumn: [0, 0, 2] }}>
-                {matches} Email{matches == 1 ? "" : "s"} werden verschickt an:{" "}
-                {emails.map((email) => (
-                  <li key={email}>{email}</li>
-                ))}
-              </Text>
-            </>
-          )}
-          <Text fontSize={1} sx={{ gridColumn: [0, 0, 2] }} mt={4}>
-            Alternativ können Sie Schüler*innen auch mit einem{" "}
-            <Link>
-              <Button onClick={() => setShowInviteLink(true)} variant="inline">
-                Einladungslink
-              </Button>
-            </Link>{" "}
-            einladen
-          </Text>
-        </Grid>
-        {showInviteLink && <InviteLink team={team} />}
-      </Card>
+      <Heading mt={0}>Schülerinnen und Schüler einladen</Heading>
+      <Grid my={1} gap={2} columns={[0, 0, "1fr 4fr"]}>
+        <Text fontSize={1} sx={{ gridColumn: [0, 0, 2] }}>
+          An alle diese Email-Adressen eine Einladung schicken:
+        </Text>
+        <Label sx={{ alignSelf: "top", fontWeight: "bold" }}>
+          Email-Adressen:
+        </Label>
+        <Textarea
+          value={importEmails}
+          bg="white"
+          sx={{ border: "white" }}
+          onChange={checkEmails}
+          fontSize={1}
+          placeholder="name1@schule.ch, name2@schule; name3.schule.ch; ..."
+        />
+        <Button
+          onClick={() => inviteStudents(team)}
+          disabled={!matches}
+          bg={matches ? "primary" : "muted"}
+          sx={{ gridColumn: [0, 0, 2] }}
+        >
+          {matches} Einladungen verschicken
+        </Button>
+        {matches && (
+          <>
+            <Text fontSize={1} sx={{ gridColumn: [0, 0, 2] }}>
+              {matches} Email{matches == 1 ? "" : "s"} werden verschickt an:{" "}
+              {emails.map((email) => (
+                <li key={email}>{email}</li>
+              ))}
+            </Text>
+          </>
+        )}
+        <Text fontSize={1} sx={{ gridColumn: [0, 0, 2] }} mt={4}>
+          Alternativ können Sie Schüler*innen auch mit einem{" "}
+          <Link>
+            <Button onClick={() => setShowInviteLink(true)} variant="inline">
+              Einladungslink
+            </Button>
+          </Link>{" "}
+          einladen
+        </Text>
+      </Grid>
+      {showInviteLink && <InviteLink team={team} />}
     </LoggedInPage>
   );
 }

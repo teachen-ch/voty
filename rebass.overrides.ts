@@ -7,11 +7,15 @@ declare module "rebass" {
   interface FlexProps {
     as?: React.ElementType;
     textAlign?: string;
+    className?: string;
+    id?: string;
     css?: InterpolationWithTheme<any>;
   }
   interface BoxProps {
     as?: React.ElementType;
     textAlign?: string;
+    className?: string;
+    id?: string;
     css?: InterpolationWithTheme<any>;
   }
   interface TextProps {
@@ -25,6 +29,8 @@ declare module "rebass" {
   }
   interface CardProps {
     as?: React.ElementType;
+    className?: string;
+    id?: string;
     css?: InterpolationWithTheme<any>;
   }
 }

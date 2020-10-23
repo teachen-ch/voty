@@ -1,6 +1,6 @@
 import { gql } from "@apollo/client";
 import { useUser } from "../state/user";
-import { Text, Card, Link as A } from "rebass";
+import { Text, Link as A } from "rebass";
 import { QForm, ErrorBox } from "./Form";
 import { useState, ReactElement } from "react";
 import {
@@ -204,7 +204,6 @@ export function CreateTeamForm({
   const schoolId = user.school.id;
 
   return (
-    <Card>
       <QForm
         mutation={doCreateTeam}
         onSubmit={(values) =>
@@ -225,6 +224,5 @@ export function CreateTeamForm({
         }}
       ></QForm>
       <ErrorBox error={error} />
-    </Card>
   );
 }

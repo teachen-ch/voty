@@ -1,13 +1,11 @@
 import { gql } from "@apollo/client";
-import { Heading, Text, Link as A, Button } from "rebass";
-import { Fragment } from "react";
+import { Heading, Text, Link as A, Button, Card } from "rebass";
 import {
   BallotWhereInput,
   useBallotsQuery,
   BallotFieldsFragment,
 } from "graphql/types";
 import { formatFromTo } from "../util/date";
-import { Grid } from "./Form";
 
 const BallotFields = gql`
   fragment BallotFields on Ballot {
@@ -182,7 +180,7 @@ export const Ballots: React.FC<BallotsProps> = ({ where, onClick }) => {
         <Ballot
           key={ballot.id}
           ballot={ballot}
-          buttonText="zur Abstimmung"
+          buttonText="Informieren und abstimmen"
           onDetail={onClick}
           onButton={onClick}
         />
@@ -200,26 +198,27 @@ export const Ballot: React.FC<{
 }> = ({ ballot, buttonText, buttonColor = "primary", onButton, onDetail }) => {
   return (
     <div className="ballot">
-      <A
-        fontSize={3}
-        sx={{ fontWeight: "bold" }}
-        onClick={() => onDetail && onDetail(ballot)}
-      >
-        {ballot.title}
-      </A>
-      <Text fontSize={2}>{ballot.description}</Text>
-      <Grid mt={2} mb={4} columns={[0, 0, "2fr 1fr"]}>
-        Zeit: {formatFromTo(ballot.start, ballot.end)}
-        {buttonText && (
-          <Button
-            onClick={() => onButton && onButton(ballot)}
-            bg={buttonColor}
-            variant="primary"
-          >
-            {buttonText}
-          </Button>
-        )}
-      </Grid>
+      <Card>
+        <A variant="bold" onClick={() => onDetail && onDetail(ballot)}>
+          {ballot.title}
+        </A>
+        <Text mt={3}>{ballot.description}</Text>
+        <Text fontSize={2} my={4}>
+          <img src="/images/icon_cal.svg" /> &nbsp; Zeit:{" "}
+          {formatFromTo(ballot.start, ballot.end)}
+        </Text>
+      </Card>
+      {buttonText && (
+        <Button
+          onClick={() => onButton && onButton(ballot)}
+          bg={buttonColor}
+          variant="primary"
+          width="100%"
+          mb={4}
+        >
+          {buttonText}
+        </Button>
+      )}
     </div>
   );
 };

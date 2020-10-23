@@ -1,5 +1,5 @@
 import { Page } from "components/Page";
-import { Card, Button, Text } from "rebass";
+import { Button, Text } from "rebass";
 import { ReactElement } from "react";
 
 export default function Impressum(): ReactElement {

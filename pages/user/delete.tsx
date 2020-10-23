@@ -5,7 +5,7 @@ import {
   useSetUser,
   useSetAccessToken,
 } from "state/user";
-import { Heading, Text, Card, Button, Link as A } from "rebass";
+import { Heading, Text, Box, Button, Link as A } from "rebass";
 import { Page } from "components/Page";
 import { Role, useDeleteAccountMutation } from "graphql/types";
 import { useRouter } from "next/router";
@@ -55,16 +55,16 @@ const DeleteForm: React.FC<{ user: SessionUser }> = ({ user }) => {
 
   if (success) {
     return (
-      <Card>
+      <Box>
         <Text>Dein Konto wurde erfolgreich gelöscht.</Text>
         <Text fontSize={6}>👋</Text>
-      </Card>
+      </Box>
     );
   }
 
   if (error) {
     return (
-      <Card>
+      <Box>
         <Text>
           Leider hat die Löschung nicht geklappt! Bitte nimm mit uns{" "}
           <Link href="/kontakt">
@@ -72,7 +72,7 @@ const DeleteForm: React.FC<{ user: SessionUser }> = ({ user }) => {
           </Link>{" "}
           auf.
         </Text>
-      </Card>
+      </Box>
     );
   }
 

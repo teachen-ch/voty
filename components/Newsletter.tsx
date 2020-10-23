@@ -9,16 +9,15 @@ export default function Newsletter(): ReactElement {
       <Grid gap={2} py={4} columns={[0, 0, "1fr 3fr"]}>
         <Field id="Vorname" label="Vorname" />
         <Field id="name" label="Nachname" />
+        <Field id="email" label="Email" placeholder="name@meineschule.ch" />
 
         <SelectField id="Funktion" label="Ich bin">
-          <option>---</option>
+          <option>Bitte auswählen</option>
           <option>Lehrer*in</option>
           <option>Schüler*in</option>
           <option>Schulleiter*in</option>
           <option>Weltenbürger*in</option>
         </SelectField>
-
-        <Field id="email" label="Email" />
 
         <input type="hidden" name="list" value="tpTmOmECEZr7Zjk76307UvTA" />
         <input type="hidden" name="subform" value="yes" />
@@ -31,16 +30,18 @@ export default function Newsletter(): ReactElement {
 export function Field({
   id,
   label,
+  placeholder,
 }: {
   id: string;
   label: string;
+  placeholder?: string;
 }): ReactElement {
   return (
     <>
       <Label htmlFor={id} alignSelf="center">
         {label}:
       </Label>
-      <Input type="text" name={id} id={id} />
+      <Input type="text" name={id} id={id} placeholder={placeholder} />
     </>
   );
 }
