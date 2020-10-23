@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="40px" height="40px" viewBox="0 0 40 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Custom Preset</title>
+    <g id="Custom-Preset" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <rect fill="#FFFFFF" opacity="0" x="0" y="0" width="40" height="40"></rect>
+        <g id="Icon-Kreuz-2" transform="translate(4.000000, 4.000000)" fill="#000000">
+            <path d="M31,11 L31,20 L0,20 L5.5109106e-16,11 L31,11 Z" id="Combined-Shape"></path>
+        </g>
+        <g id="Icon-Kreuz-2" transform="translate(4.000000, 4.000000)" fill="#000000">
+            <path d="M20,0 L20,10.999 L31,11 L31,20 L20,19.999 L20,31 L11,31 L11,19.999 L0,20 L5.5109106e-16,11 L11,10.999 L11,0 L20,0 Z" id="Combined-Shape"></path>
+        </g>
+    </g>
+</svg>

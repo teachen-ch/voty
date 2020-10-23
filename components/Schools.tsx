@@ -189,7 +189,7 @@ export const SelectSchool: React.FC = () => {
           >
             <Button
               onClick={() => setCreate(true)}
-              variant="outline"
+              variant="text"
               sx={{ gridColumn: [0, 0, 2] }}
             >
               Neues Schulhaus erfassen
@@ -305,7 +305,7 @@ export function CreateSchool({
       >
         <Button
           onClick={onCancel}
-          variant="outline"
+          variant="text"
           sx={{ gridColumn: [0, 0, 2] }}
         >
           Abbrechen

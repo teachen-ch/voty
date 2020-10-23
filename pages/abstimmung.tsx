@@ -1,34 +1,39 @@
 import { Field } from "components/Newsletter";
-import { Page, PageHeading } from "components/Page";
-import { Card, Heading, Text, Box, Flex, Button, Link as A } from "rebass";
+import { Page } from "components/Page";
+import { Heading, Text, Box, Flex, Button, Link as A } from "rebass";
 import { Grid } from "theme-ui";
 import Link from "next/link";
 import { ReactElement } from "react";
 
 export default function Abstimmung(): ReactElement {
   return (
-    <Page heading="Jugendliche stimmen ab – ein Experiment">
+    <Page heading="Jugendliche stimmen ab – Jetzt Schulklasse anmelden">
       <Text mt={3}>
         <img
           src="/images/voty_module_2.svg"
           alt="Bundeshaus"
-          style={{ float: "right", marginLeft: 30, maxWidth: "30%" }}
+          style={{
+            float: "right",
+            marginLeft: 30,
+            width: "190px",
+            maxWidth: "30%",
+          }}
         />
         Wie motivieren wir Jugendliche für unsere Demokratie? Wir möchten
         gemeinsam mit engagierten Lehrpersonen ein Experiment starten und im
-        November Abstimmungen für Schülerinnen und Schüler durchführen. Wir sind
-        überzeugt: Interesse für Politik entsteht dann, wenn man diskutieren und
-        mitentscheiden kann.
+        November Abstimmungen für Schüler*innen durchführen. Wir sind überzeugt:
+        Interesse für Politik entsteht dann, wenn diskutiert und mitentschieden
+        wird.
       </Text>
       <Text my={4}>
         Wenn die Schweiz am 29. November über die{" "}
         <b>«Konzern/Unternehmensverantwortungs-Initiative»</b> und die{" "}
         <b>«Kriegsgeschäfte/Finanzierungsverbots-Initiative»</b> abstimmt, sind
         das Themen, zu denen auch Jugendliche eine Meinung haben. Wir möchten
-        mit mindestens 50 Klassen in der Schweiz eine <b>Abstimmung</b>{" "}
-        durchführen und dazu brauchen wir Ihre Hilfe:
+        mit mindestens 50 Schulklassen eine Abstimmung durchführen und dazu
+        brauchen wir Ihre Hilfe:
       </Text>
-      <Flex my={4} alignItems="center" flexDirection="column">
+      <Flex my={4} alignItems="center" flexDirection="column" fontSize={3}>
         <Flex my={2}>
           <Text px={3} textAlign="center">
             ✅
@@ -43,12 +48,16 @@ export default function Abstimmung(): ReactElement {
             ✅
           </Text>
           <Text maxWidth="600px">
-            Ich nehme mir genügend Zeit im November, um die Vorlagen mit den
-            SchülerInnen zu diskutieren (z.B. mit{" "}
-            <A href="https://www.easyvote.ch/de/school/" rel="noreferrer">
+            Ich nehme mir im November Zeit, um die Vorlagen mit den
+            Schüler*innen zu diskutieren (z.B. mit Material von{" "}
+            <A
+              href="https://www.easyvote.ch/de/school/"
+              rel="noreferrer"
+              sx={{ textDecoration: "underline" }}
+            >
               easyvote.ch
             </A>{" "}
-            Materialien)
+            )
           </Text>
         </Flex>
         <Flex my={2}>
@@ -61,27 +70,25 @@ export default function Abstimmung(): ReactElement {
           </Text>
         </Flex>
       </Flex>
-      <Card>
-        <Heading as="h2" mt={0}>
-          Klingt interessant? Dann tragen Sie sich ein für weitere
-          Informationen:
-        </Heading>
-        <Signup />
-        <Box mb={2} mt={-3} pl={[0, 0, 115]}>
-          <Text>
-            <em>
-              Wir sind uns bewusst, das die Zeit bis Ende November in der
-              Planung knapp ist. Aber wenn wir es gemeinsam schaffen, genügend
-              Klassen zu motivieren, dann hat das Ergebnis der Abstimmung auch
-              eine statistische Signifikanz und repräsentiert die Meinung der
-              Jugend zu relevanten Themen. Herzlichen Dank für Ihre Mithilfe!
-            </em>
-          </Text>
-        </Box>
-      </Card>
+      <Heading as="h2">
+        Interessiert? Melden sie jetzt ihre Klasse jetzt an
+      </Heading>
+      <Signup />
+      <Text fontSize={2} mt={3}>
+        Wir sind uns bewusst, dass die Zeit bis Ende November in der Planung
+        knapp ist. Aber wenn wir es gemeinsam schaffen, genügend Klassen zu
+        motivieren, dann hat das Ergebnis der Abstimmung auch eine statistische
+        Signifikanz und repräsentiert die Meinung der Jugend zu relevanten
+        Themen. Herzlichen Dank für Ihre Mithilfe!
+      </Text>
 
-      <Box mt={5} mb={100} maxWidth="600px" mx={"auto"}>
-        <Text fontSize={4} textAlign="center" sx={{ lineHeight: "1.5" }}>
+      <Box mt={5} mb={5} maxWidth="600px" mx={"auto"}>
+        <Text
+          fontSize={4}
+          fontWeight="semi"
+          textAlign="center"
+          sx={{ lineHeight: "1.5" }}
+        >
           Kennen Sie interessierte Lehrpersonen, welche ebenfalls politische
           Bildung unterrichten (Sekundarstufe, Gymnasium, Berufsschulen). Dann
           versuchen Sie doch, sie ebenfalls für dieses Experiment zu engagieren.
@@ -90,82 +97,90 @@ export default function Abstimmung(): ReactElement {
 
       <Stats />
 
-      <PageHeading>Fragen und Antworten</PageHeading>
-      <Heading as="h3">Wer steht hinter voty.ch?</Heading>
-      <Text>
-        voty.ch ist ein Projekt des Vereins «Teachen!», welcher während des
-        Corona-Lockdowns von engagierten Eltern, Lehrpersonen und
-        Informatiker*innen gegründet wurde. Das Projekt wird unterstützt durch
-        den prototypefund.opendata.ch.
-      </Text>
-      <Heading as="h3">Wie funktioniert die Online – Abstimmung?</Heading>
-      <Text>
-        Auf unserer Website können Lehrpersonen mit ihren Klassen die Abstimmung
-        auf Laptops, iPads oder Smartphones durchführen. Wir stellen sicher, das
-        nur registrierte Klassen mitmachen können, das jede Person nur einmal
-        abstimmen kann und das sämtliche Stimmabgaben anonym bleiben.
-      </Text>
-      <Heading as="h3">
-        Wie wird die Anonymität und der Datenschutz sichergestellt?
+      <Heading mt={70} as="h2" fontSize={[4, 5, 6, 6]} textAlign="center">
+        Fragen und Antworten
       </Heading>
-      <Text>
-        Die abgegebenen Stimmen werden nicht mit Personen verknüpft. Es wird
-        einzig registriert, welche Benutzer*innen bereits ihre Stimme abgegeben
-        haben. Die Altersgruppe sowie der Kanton werden zu jeder Stimme
-        gespeichert, eine «De-Anonymisierung» auf Ebene Person oder Schulklasse
-        ist nicht möglich.
-      </Text>
-      <Heading as="h3">
-        Wer sieht am Schluss die Resultate der Abstimmungen?
-      </Heading>
-      <Text>
-        Eine Auswertung der Resultate wird nur auf Ebene Kanton und Altersstufe
-        möglich sein. Wenn wir es gemeinsam schaffen, genügend Stimmen für ein
-        statistisch signifikantes Ergebnis zu sammeln, dann möchten wir die
-        Resultate in aggregierter Form der Öffentlichkeit vorstellen.
-      </Text>
-      <Heading as="h3">Wie stellt ihr statistische Signifikanz sicher?</Heading>
-      <Text>
-        Wir möchten gemeinsam mit{" "}
-        <a
-          href="https://twitter.com/claudelongchamp"
-          target="_blank"
-          rel="noreferrer"
-        >
-          Claude Longchamps
-        </a>{" "}
-        sicherstellen, das unser Vorgehen wissenschaftlich kompetent begleitet
-        wird. Je diverser unsere Test-Klassen sind (Kantone, Altersstufen,
-        Schultypen), desto solider wird die Aussagekraft der Resultate.
-      </Text>
-      <Heading as="h3">Macht auch die Romandie und das Tessin mit?</Heading>
-      <Text>
-        Wenn Sie Kontakte in diese Sprachregionen haben, dann freuen wir uns
-        sehr über eine{" "}
-        <Link href="/kontakt">
-          <a>Email</a>
-        </Link>
-        !
-      </Text>
-      <Heading as="h3">
-        Ich habe keine Frage, aber eine kritische Anmerkung!
-      </Heading>
-      <Text>
-        Wir sind auf Ihr Feedback angewiesen. Bitte nehmen sie mit uns{" "}
-        <Link href="/kontakt">
-          <a>Kontakt</a>
-        </Link>{" "}
-        auf.
-      </Text>
+      <FAQ />
     </Page>
   );
 }
 
-const Signup = () => (
+export const FAQ: React.FC = () => (
+  <Box className="faq" textAlign="left" fontSize={2}>
+    <Heading as="h3">Wer steht hinter voty.ch?</Heading>
+    <Text>
+      voty.ch ist ein Projekt des Vereins «Teachen!», welcher während des
+      Corona-Lockdowns von engagierten Eltern, Lehrpersonen und
+      Informatiker*innen gegründet wurde. Das Projekt wird unterstützt durch den
+      prototypefund.opendata.ch.
+    </Text>
+    <Heading as="h3">Wie funktioniert die Online – Abstimmung?</Heading>
+    <Text>
+      Auf unserer Website können Lehrpersonen mit ihren Klassen die Abstimmung
+      auf Laptops, iPads oder Smartphones durchführen. Wir stellen sicher, das
+      nur registrierte Klassen mitmachen können, dass jede Person nur einmal
+      abstimmen kann und dass sämtliche Stimmabgaben anonym bleiben.
+    </Text>
+    <Heading as="h3">
+      Wie wird die Anonymität und der Datenschutz sichergestellt?
+    </Heading>
+    <Text>
+      Die abgegebenen Stimmen werden nicht mit Personen verknüpft. Es wird
+      einzig registriert, welche Benutzer*innen bereits ihre Stimme abgegeben
+      haben. Die Altersgruppe sowie der Kanton werden zu jeder Stimme
+      gespeichert, eine «De-Anonymisierung» auf Ebene Person oder Schulklasse
+      ist nicht möglich.
+    </Text>
+    <Heading as="h3">
+      Wer sieht am Schluss die Resultate der Abstimmungen?
+    </Heading>
+    <Text>
+      Eine Auswertung der Resultate wird nur auf Ebene Kanton und Altersstufe
+      möglich sein. Wenn wir es gemeinsam schaffen, genügend Stimmen für ein
+      statistisch signifikantes Ergebnis zu sammeln, möchten wir die Resultate
+      in aggregierter Form der Öffentlichkeit vorstellen.
+    </Text>
+    <Heading as="h3">Wie stellt ihr statistische Signifikanz sicher?</Heading>
+    <Text>
+      Wir möchten gemeinsam mit{" "}
+      <a
+        href="https://twitter.com/claudelongchamp"
+        target="_blank"
+        rel="noreferrer"
+      >
+        Claude Longchamps
+      </a>{" "}
+      sicherstellen, dass unser Vorgehen wissenschaftlich kompetent begleitet
+      wird. Je diverser unsere Test-Klassen sind (Kantone, Altersstufen,
+      Schultypen), desto solider wird die Aussagekraft der Resultate.
+    </Text>
+    <Heading as="h3">Macht auch die Romandie und das Tessin mit?</Heading>
+    <Text>
+      Wenn Sie Kontakte in diese Sprachregionen haben, dann freuen wir uns sehr
+      über{" "}
+      <Link href="/kontakt">
+        <a>Email</a>
+      </Link>
+      !
+    </Text>
+    <Heading as="h3">
+      Ich habe keine Frage, aber eine kritische Anmerkung!
+    </Heading>
+    <Text>
+      Wir sind auf Ihr Feedback angewiesen. Bitte nehmen sie mit uns{" "}
+      <Link href="/kontakt">
+        <a>Kontakt</a>
+      </Link>{" "}
+      auf.
+    </Text>
+  </Box>
+);
+
+const Signup: React.FC = () => (
   <form action="https://newsletter.teachen.ch/subscribe" method="POST">
     <input type="hidden" name="subform" value="yes" />
     <input type="hidden" name="list" value="OBApcqKWRIftOg4d892voU2A" />
-    <Grid gap={3} pb={4} columns={[0, 0, "100px 3fr 1fr"]}>
+    <Grid gap={3} pb={4} columns={[0, 0, "80px 2fr 1fr"]}>
       <Field id="email" label="Email" />
       <Button type="submit" name="submit" variant="primary">
         Abschicken
@@ -174,10 +189,10 @@ const Signup = () => (
   </form>
 );
 
-const Stats = () => (
-  <Card>
+const Stats: React.FC = () => (
+  <Box fontSize={2}>
     <Heading mt={0}>Aktueller Stand</Heading>
-    <Grid columns="1fr 4fr">
+    <Grid columns={[0, 0, "160px auto"]}>
       <label>Anzahl Klassen:</label>
       <ClassBar classes={11} total={50} />
 
@@ -189,10 +204,13 @@ const Stats = () => (
         types={{ Berufsschulen: 0.2, "Sekundarstufe I": 0.53, Gymnasien: 0.27 }}
       />
     </Grid>
-  </Card>
+  </Box>
 );
 
-const ClassBar = ({ classes, total }: { classes: number; total: number }) => (
+const ClassBar: React.FC<{ classes: number; total: number }> = ({
+  classes,
+  total,
+}) => (
   <Flex height="30px" width="100%">
     <Box
       width={classes / total}
@@ -200,7 +218,7 @@ const ClassBar = ({ classes, total }: { classes: number; total: number }) => (
         borderTopLeftRadius: 20,
         borderBottomLeftRadius: 20,
         textAlign: "center",
-        lineHeight: 1.7,
+        lineHeight: 1.4,
       }}
       bg="primary"
       color="white"
@@ -210,10 +228,11 @@ const ClassBar = ({ classes, total }: { classes: number; total: number }) => (
     <Box
       width={(total - classes) / total}
       bg="white"
+      color="gray"
       sx={{
         borderTopRightRadius: 20,
         borderBottomRightRadius: 20,
-        lineHeight: 1.7,
+        lineHeight: 1.4,
       }}
     >
       &nbsp; mindestens {total} Klassen
@@ -221,19 +240,17 @@ const ClassBar = ({ classes, total }: { classes: number; total: number }) => (
   </Flex>
 );
 
-const CantonsBar = ({
-  cantons,
-  diversity,
-}: {
+const CantonsBar: React.FC<{
   cantons: string;
   diversity: number;
-}) => (
+}> = ({ cantons, diversity }) => (
   <Box
     height="30px"
+    color="gray"
     pl={3}
     sx={{
       borderRadius: 20,
-      lineHeight: 1.7,
+      lineHeight: 1.4,
       backgroundImage: `linear-gradient(133deg, rgba(36,185,7,0.5) 0%, rgba(255,255,255,1) ${diversity}%)`,
     }}
   >
@@ -241,11 +258,12 @@ const CantonsBar = ({
   </Box>
 );
 
-const TypeBar = ({ types }: { types: Record<string, number> }) => (
+const TypeBar: React.FC<{ types: Record<string, number> }> = ({ types }) => (
   <Box
     height="30px"
     pl={3}
     bg="white"
+    fontSize={1}
     sx={{
       borderRadius: 20,
     }}
@@ -255,11 +273,12 @@ const TypeBar = ({ types }: { types: Record<string, number> }) => (
         <Box
           key={name}
           width={`${types[name] * 100}%`}
+          color="gray"
           sx={{
             textAlign: "center",
             textOverflow: "ellipsis",
             overflow: "hidden",
-            lineHeight: 1.7,
+            lineHeight: 2.2,
             borderRight: ix < 2 ? "3px solid lightgray" : "",
           }}
         >

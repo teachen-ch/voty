@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="26px" height="14px" viewBox="0 0 26 14" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Pfeil</title>
+    <defs>
+        <filter id="filter-1">
+            <feColorMatrix in="SourceGraphic" type="matrix" values="0 0 0 0 1.000000 0 0 0 0 1.000000 0 0 0 0 1.000000 0 0 0 1.000000 0"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g id="Pfeil" transform="translate(-1334.000000, -29.000000)" filter="url(#filter-1)">
+            <g transform="translate(1347.000000, 35.500000) rotate(-180.000000) translate(-1347.000000, -35.500000) translate(1336.000000, 30.000000)">
+                <path d="M21.8552632,0.107105263 L11.5114035,10.45 C11.3758379,10.5857588 11.1918554,10.6620436 11,10.6620436 C10.8081446,10.6620436 10.6241621,10.5857588 10.4885965,10.45 L0.144736842,0.107105263" id="Path" stroke="#000000" stroke-width="2.5"></path>
+            </g>
+        </g>
+    </g>
+</svg>

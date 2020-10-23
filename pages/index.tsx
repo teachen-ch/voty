@@ -1,103 +1,129 @@
 import Head from "next/head";
-import { Flex, Heading, Text, Button } from "rebass";
+import { Flex, Heading, Box, Text, Button } from "rebass";
 import { Container } from "components/Page";
-import { Grid } from "theme-ui";
-import { Banner } from "../components/Banner";
-import { ReactElement } from "react";
+import { Banner } from "components/Banner";
+import { TopBar } from "components/TopBar";
+import { Footer } from "components/Footer";
+import { ReadMore } from "components/ReadMore";
+import { FAQ } from "./abstimmung";
+import Link from "next/link";
+import Logo from "../public/images/voty_logo.svg";
 
-export default function Home(): ReactElement {
+export default function Home(): React.ReactElement {
   return (
     <>
       <Head>
         <title>voty.ch – Demokratie an die Schule</title>
       </Head>
 
-      <Container as="main">
-        <Heading
-          as="h1"
-          my={0}
-          pt={["6rem", "6rem", 4]}
-          pb={[2, 3, 4]}
-          fontSize={[4, "28px", 6]}
-          color="primary"
-        >
-          Demokratie an die Schule!
-        </Heading>
-        <img
-          src="/images/voty_logo.svg"
+      <TopBar />
+
+      <Container as="main" pt="49px" color="black" light>
+        <Logo
           alt="voty.ch"
-          style={{ maxWidth: "85%", margin: "0 auto" }}
+          style={{ width: "426px", maxWidth: "85%", margin: "0 auto" }}
         />
-
-        <Text
-          as="h2"
-          fontWeight="semi"
-          fontSize={2}
-          my={[3, 3, 4]}
-          mx={[0, 3, "20%", 230]}
-        >
-          Die Demokratie ist das wohl wichtigste Gut der Schweiz. Aber wie
-          gelingt es uns, die Jugend für die Demokratie zu begeistern? voty.ch
-          ist ein Projekt für die Demokratieförderung an Schweizer Schulen in
-          drei Modulen.
-        </Text>
-        <Grid
-          mt={2}
-          mb={-6}
-          gap={[0, "20px", "30px", "80px"]}
-          columns={[1, 1, 3]}
-          width="250px"
-        >
-          <Flex flexDirection="column" justifyContent="space-between">
-            <img src="images/voty_module_1.svg" alt="Bundehaus" />
-            <Heading as="h3" py={3} my={0} textAlign="center">
-              Demokratie verstehen
+        <Flex flexDirection="row" justifyContent="center">
+          <Box sx={{ display: ["none", "none", "block"] }}>
+            <Flex alignItems="center" flexDirection="column" px={5}>
+              <img
+                src="images/voty_module_1_soon.svg"
+                alt="Bundehaus"
+                width="100%"
+              />
+              <Heading as="h3" py={2} my={0} fontSize={2} textAlign="center">
+                Demokratie verstehen
+              </Heading>
+            </Flex>
+          </Box>
+          <Box>
+            <Heading
+              as="h1"
+              my={0}
+              pt={3}
+              pb={[4, 4, 4, 4]}
+              fontSize={[5, 5, "34px", "40px"]}
+              textAlign="center"
+              color="primary"
+            >
+              Demokratie an die Schule!
             </Heading>
-            <Text>
-              Wie funktioniert die Demokratie in der Schweiz und warum ist sie
-              so wertvoll? Wir möchten Jugendliche von 12-18 Jahren motivieren,
-              sich mit unserem politischen System auseinanderzusetzen.
-            </Text>
-            <Button as="a" href="/newsletter" variant="secondary" mt={3} mb={6}>
-              Anmeldung Newsletter
-            </Button>
-          </Flex>
 
-          <Flex flexDirection="column" justifyContent="space-between">
-            <img src="images/voty_module_2.svg" alt="Abstimmen" />
-            <Heading as="h3" py={3} my={0} textAlign="center">
-              Demokratie testen
-            </Heading>
-            <Text>
-              Nur Erwachsene dürfen abstimmen, aber auch Jugendliche haben eine
-              Meinung! Lassen sie ihre Klassen für die Urnengänge vom 29.
-              November abstimmen.
-            </Text>
-            <Button as="a" href="/abstimmung" variant="full" mt={3} mb={6}>
-              Jetzt anmelden!
-            </Button>
-          </Flex>
+            <Flex
+              flexDirection="column"
+              alignItems="center"
+              justifyContent="space-between"
+            >
+              <img src="images/voty_module_2.svg" alt="Abstimmen" width="70%" />
+              <Heading as="h3" py={3} my={0} textAlign="center" fontSize={[5]}>
+                Demokratie testen
+              </Heading>
+            </Flex>
+          </Box>
 
-          <Flex flexDirection="column" justifyContent="space-between">
-            <img src="images/voty_module_3.svg" alt="Diskutieren" />
-            <Heading as="h3" py={3} my={0} textAlign="center">
-              Demokratie erleben
-            </Heading>
-            <Text>
-              Wer entscheidet an Eurer Schule? Dürfen Schülerinnen und Schüler
-              mitreden und Vorschläge einbringen? Wir möchten gemeinsam testen,
-              wie wir Demokratie in Schulhäuser bringen können.
-            </Text>
+          <Box sx={{ display: ["none", "none", "block"] }}>
+            <Flex alignItems="center" flexDirection="column" px={5}>
+              <img
+                src="images/voty_module_3_soon.svg"
+                alt="Diskutieren"
+                width="100%"
+              />
+              <Heading as="h3" py={2} my={0} fontSize={2} textAlign="center">
+                Demokratie erleben
+              </Heading>
+            </Flex>
+          </Box>
+        </Flex>
 
-            <Button as="a" href="/kontakt" variant="secondary" mt={3} mb={6}>
-              Das interessiert uns!
+        <Box maxWidth="800px" textAlign="center">
+          <Link href="/abstimmung">
+            <Button fontSize={5} width="100%" p={3} mt={4}>
+              Jetzt Schulklasse anmelden!
             </Button>
+          </Link>
+
+          <Heading as="h2" fontSize={5}>
+            Jugendliche stimmen ab – ein Experiment
+          </Heading>
+          <Text fontWeight="bold" lineHeight="1.5em" fontSize="18px" mb={5}>
+            <p>
+              Wie motivieren wir Jugendliche für unsere Demokratie? Wir möchten
+              gemeinsam mit engagierten Lehrpersonen ein Experiment starten und
+              im November mit mindestens 50 Schulklassen Abstimmungen zu den
+              beiden aktuellen Abstimmungsvorlagen
+              «Konzernverantwortungsinitiative» und die «Kriegsgeschäfte
+              Initiative» durchführen. Beide Vorlagen sind Themen, zu denen auch
+              Jugendliche eine Meinung haben.
+            </p>
+
+            <p>
+              Wir sind überzeugt: Interesse für Politik entsteht dann, wenn man
+              diskutieren und mitentscheiden kann. Eine solche Gelegenheit
+              möchten wir schaffen.
+            </p>
+          </Text>
+
+          <ReadMore title="Fragen und Antworten">
+            <FAQ />
+          </ReadMore>
+          <Flex justifyContent="space-between" mt={3}>
+            <Link href="/newsletter">
+              <Button variant="secondary" width="100%" mr={3}>
+                Newsletter abonnieren
+              </Button>
+            </Link>
+            <Link href="/abstimmung">
+              <Button variant="secondary" width="100%">
+                Schulklasse anmelden?
+              </Button>
+            </Link>
           </Flex>
-        </Grid>
+        </Box>
 
         <Banner href="/abstimmung">
           Jetzt mitmachen: Jugendliche stimmen ab!
         </Banner>
+        <Footer color="black" />
       </Container>
     </>
   );
