@@ -89,7 +89,13 @@ export default function BallotPage(): ReactElement {
         </Text>
         <div dangerouslySetInnerHTML={parseMarkdownInner(ballot.body)} />
         <Box my={4}>
-          <VotyNow ballot={ballot} onSuccess={() => setSuccess(true)} />
+          <VotyNow
+            ballot={ballot}
+            onSuccess={() => {
+              window.scrollTo(0, 0);
+              setSuccess(true);
+            }}
+          />
         </Box>
       </Card>
     </LoggedInPage>
