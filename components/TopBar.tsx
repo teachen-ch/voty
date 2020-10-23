@@ -6,10 +6,19 @@ import IconAccount from "../public/images/icon_account.svg";
 import IconUp from "../public/images/icon_up.svg";
 import IconDown from "../public/images/icon_down.svg";
 import { useUser } from "state/user";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export const TopBar: React.FC<{ showLogo?: boolean }> = (props) => {
   const user = useUser();
+  const [loaded, setLoaded] = useState(false);
+
+  useEffect(() => {
+    console.log(user);
+    if (user === undefined) {
+      setTimeout(() => setLoaded(true), 1000);
+    } else setLoaded(true);
+  }, [user]);
+
   return (
     <Flex
       bg="#505050"
@@ -41,7 +50,7 @@ export const TopBar: React.FC<{ showLogo?: boolean }> = (props) => {
             </Link>
           )}
         </div>
-        {user ? <Account /> : <RegisterLogin />}
+        {loaded && (user ? <Account /> : <RegisterLogin />)}
       </Flex>
     </Flex>
   );

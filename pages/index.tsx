@@ -7,6 +7,7 @@ import { Footer } from "components/Footer";
 import { ReadMore } from "components/ReadMore";
 import { FAQ } from "./abstimmung";
 import Link from "next/link";
+import { useRef } from "react";
 
 export default function Home(): React.ReactElement {
   return (
@@ -24,24 +25,21 @@ export default function Home(): React.ReactElement {
           style={{ width: "426px", maxWidth: "85%", margin: "0 auto" }}
         />
         <Flex flexDirection="row" justifyContent="center">
-          <Box sx={{ display: ["none", "none", "block"] }}>
-            <Flex alignItems="center" flexDirection="column" px={5}>
-              <img
-                src="images/voty_module_1_soon.svg"
-                alt="Bundehaus"
-                width="100%"
-              />
-              <Heading as="h3" py={2} my={0} fontSize={2} textAlign="center">
-                Demokratie verstehen
-              </Heading>
-            </Flex>
-          </Box>
+          <Module
+            title="Demokratie verstehen"
+            image="/images/voty_module_1_soon.svg"
+          >
+            Die Demokratie ist das wohl wichtigste Gut der Schweiz. Aber wie
+            gelingt es uns, die Jugend für die Demokratie zu begeistern? voty.ch
+            ist ein Projekt für die Demokratieförderung an Schweizer Schulen in
+            drei Modulen.
+          </Module>
           <Box>
             <Heading
               as="h1"
               my={0}
               pt={3}
-              pb={[4, 4, 4, 4]}
+              pb={4}
               fontSize={[5, 5, "34px", "40px"]}
               textAlign="center"
               color="primary"
@@ -61,18 +59,14 @@ export default function Home(): React.ReactElement {
             </Flex>
           </Box>
 
-          <Box sx={{ display: ["none", "none", "block"] }}>
-            <Flex alignItems="center" flexDirection="column" px={5}>
-              <img
-                src="images/voty_module_3_soon.svg"
-                alt="Diskutieren"
-                width="100%"
-              />
-              <Heading as="h3" py={2} my={0} fontSize={2} textAlign="center">
-                Demokratie erleben
-              </Heading>
-            </Flex>
-          </Box>
+          <Module
+            title="Demokratie erleben"
+            image="/images/voty_module_3_soon.svg"
+          >
+            Wer entscheidet an Eurer Schule? Dürfen Schülerinnen und Schüler
+            mitreden und Vorschläge einbringen? Wir möchten gemeinsam testen,
+            wie wir Demokratie in Schulhäuser bringen können.
+          </Module>
         </Flex>
 
         <Box maxWidth="800px" textAlign="center">
@@ -128,3 +122,40 @@ export default function Home(): React.ReactElement {
     </>
   );
 }
+
+const Module: React.FC<{ title: string; image: string }> = (props) => {
+  const img = useRef<HTMLImageElement>(null);
+  return (
+    <Box sx={{ display: ["none", "none", "block"] }}>
+      <Flex alignItems="center" flexDirection="column" px={5}>
+        <div className="flip-container">
+          <div className="flipper">
+            <div className="front">
+              <img
+                src={props.image}
+                alt="Bundehaus"
+                width="100%"
+                ref={img}
+                onTouchStart={() => img.current?.classList.toggle("hover")}
+                onClick={() => img.current?.classList.toggle("hover")}
+              />
+            </div>
+            <Box
+              className="back"
+              fontSize="17px"
+              color="white"
+              bg="gray"
+              p={3}
+              sx={{ borderRadius: 5 }}
+            >
+              {props.children}
+            </Box>
+          </div>
+        </div>
+        <Heading as="h3" py={2} my={0} fontSize={2} textAlign="center">
+          {props.title}
+        </Heading>
+      </Flex>
+    </Box>
+  );
+};

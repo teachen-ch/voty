@@ -10,7 +10,7 @@ export const ReadMore: React.FC<{ title: string }> = ({ title, children }) => {
     <Box className="readmore">
       <Button
         onClick={() => setOpen(!open)}
-        bg="#B8B8B8"
+        bg="#888"
         color="white"
         textAlign="left"
         width="100%"
