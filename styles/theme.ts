@@ -157,7 +157,7 @@ export default {
       bg: "primary",
       fontWeight: "semi",
       borderRadius: "0px",
-      fontSize: 4,
+      fontSize: [2, 3, 4],
     },
     secondary: {
       variant: "buttons.primary",
@@ -183,7 +183,7 @@ export default {
       cursor: "pointer",
       textAlign: "left",
       fontWeight: "normal",
-      fontSize: 3,
+      fontSize: [1, 2, 3],
       my: 3,
       p: 0,
       m: 0,

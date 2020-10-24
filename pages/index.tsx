@@ -69,9 +69,9 @@ export default function Home(): React.ReactElement {
           </Module>
         </Flex>
 
-        <Box maxWidth="800px" textAlign="center">
+        <Box maxWidth="800px" width="100%" textAlign="center">
           <Link href="/abstimmung">
-            <Button fontSize={5} width="100%" p={3} mt={4}>
+            <Button fontSize={[4, 4, 5, 5]} width="100%" p={3} mt={[2, 2, 4]}>
               Jetzt Schulklasse anmelden!
             </Button>
           </Link>

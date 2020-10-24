@@ -33,7 +33,8 @@ export const AppPage: React.FC<{
     <TopBar showLogo />
     <Container
       bgImage={props.bgImage}
-      pt="145px"
+      pt={[0, 0, 20, 145]}
+      mx={["-8px", "-16px", 0, 0]}
       light={props.light}
       color="white"
     >
@@ -154,12 +155,13 @@ export const Container: React.FC<
   return (
     <Flex
       mt={70}
-      px={[3, 3, 3, 4]}
+      px={[2, 3, 3, 4]}
       justifyContent="center"
       sx={{
         backgroundImage: `${darken}url('/images/${bgImage}')`,
         backgroundAttachment: "fixed",
         backgroundPositionY: 44,
+        backgroundPositionX: "center",
       }}
       {...props}
     >

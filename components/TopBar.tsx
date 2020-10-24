@@ -28,7 +28,7 @@ export const TopBar: React.FC<{ showLogo?: boolean }> = (props) => {
       justifyContent="center"
       color="white"
       fontSize={3}
-      px={[2, 2, 5, 0]}
+      px={[3, 3, 5, 0]}
       sx={{ position: "fixed", top: 0 }}
     >
       <Flex
@@ -52,8 +52,11 @@ export const TopBar: React.FC<{ showLogo?: boolean }> = (props) => {
             </Link>
           )}
         </Box>
-        <Box pt="10px">
+        <Box pt="10px" sx={{ display: ["none", "none", "block", "block"] }}>
           {loaded && (user ? <Account user={user} /> : <RegisterLogin />)}
+        </Box>
+        <Box pt="10px" sx={{ display: ["block", "block", "none", "none"] }}>
+          <MobileBurger user={user} />
         </Box>
       </Flex>
     </Flex>
@@ -137,5 +140,76 @@ const AccountMenu: React.FC<{ user: SessionUser }> = ({ user }) => {
         </Text>
       </Box>
     </Box>
+  );
+};
+
+const MobileBurger: React.FC<{ user: SessionUser }> = ({ user }) => {
+  const [open, setOpen] = useState(false);
+  return (
+    <Flex>
+      <A onClick={() => setOpen(!open)}>
+        <img src="/images/voty_hamburger_red.svg" />
+      </A>
+      {open && (
+        <>
+          <Box
+            bg="rgba(0,0,0,0.6)"
+            width="20%"
+            height="100%"
+            onClick={() => setOpen(false)}
+            sx={{ position: "fixed", top: 0, left: 0 }}
+          ></Box>
+          <Box
+            bg="primary"
+            width="80%"
+            height="100%"
+            sx={{
+              position: "fixed",
+              top: 0,
+              right: 0,
+              zIndex: 99,
+            }}
+          >
+            <Text textAlign="right">
+              <A onClick={() => setOpen(false)}>
+                <Box width="30" height="30" pt="18px" pr="18px">
+                  <img src="/images/voty_hamburger_cross_white.svg" />
+                </Box>
+              </A>
+            </Text>
+            <Text px={4} lineHeight="44px" fontWeight="semi">
+              {!user ? (
+                <nav>
+                  <Link href="/user/login">
+                    <A>Anmelden</A>
+                  </Link>
+                  <br />
+                  <Link href="/user/signup">
+                    <A>Registrieren</A>
+                  </Link>
+                  <br />
+                  <br />
+                </nav>
+              ) : (
+                <nav>
+                  <Link href="/user/home">
+                    <A>Startseite</A>
+                  </Link>
+                  <br />
+                  <Link href="/user/profile">
+                    <A>Profil bearbeiten</A>
+                  </Link>
+                  <br />
+                  <Link href="/user/logout">
+                    <A>Abmelden</A>
+                  </Link>
+                  <br />
+                </nav>
+              )}
+            </Text>
+          </Box>
+        </>
+      )}
+    </Flex>
   );
 };
