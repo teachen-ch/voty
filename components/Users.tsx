@@ -168,7 +168,9 @@ export const ProfileEdit: React.FC<{
         <ShowField label="Vorname:" value={user?.name} />
         {isTeacher && <ShowField label="Nachname:" value={user?.lastname} />}
         {isStudent && <ShowField label="Jahrgang:" value={user?.year} />}
-        {isStudent && <ShowField label="Geschlecht:" value={user?.gender} />}
+        {isStudent && (
+          <ShowField label="Geschlecht:" value={getGenderText(user?.gender)} />
+        )}
         <ShowField label="Email:" value={user?.email} />
         <Button onClick={() => setEdit(true)} sx={{ gridColumn: [0, 0, 2] }}>
           Profil bearbeiten
@@ -302,3 +304,10 @@ export const ShowField: React.FC<{
     </>
   );
 };
+
+export function getGenderText(gender?: Gender | null): string {
+  if (gender === Gender.Female) return "weiblich";
+  if (gender === Gender.Male) return "männlich";
+  if (gender === Gender.Other) return "anderes";
+  return "nicht angegeben";
+}

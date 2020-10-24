@@ -1,6 +1,6 @@
 import { useUser } from "../../state/user";
 import { LoggedInPage } from "../../components/Page";
-import { Heading, Box, Text, Link as A } from "rebass";
+import { Box, Text, Link as A } from "rebass";
 import { ReactElement } from "react";
 import Link from "next/link";
 import { ProfileEdit } from "components/Users";
@@ -15,9 +15,7 @@ export default function TeacherProfilePage({
 
   return (
     <LoggedInPage heading="Dein Profil">
-      <Heading as="h2" mt={0}>
-        {firstRun ? "Bitte ergänze Deine Angaben…" : "Profil bearbeiten"}
-      </Heading>
+      {firstRun && "Bitte ergänze Deine Angaben…"}
       <ProfileEdit user={user} editMode={firstRun} />
 
       <Box mt={4}>

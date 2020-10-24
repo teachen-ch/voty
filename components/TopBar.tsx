@@ -5,13 +5,15 @@ import IconLogin from "../public/images/icon_login.svg";
 import IconAccount from "../public/images/icon_account.svg";
 import IconUp from "../public/images/icon_up.svg";
 import IconDown from "../public/images/icon_down.svg";
-import { useUser } from "state/user";
+import { useUser, SessionUser } from "state/user";
 import { useState, useEffect } from "react";
+import { Role } from "graphql/types";
 
 export const TopBar: React.FC<{ showLogo?: boolean }> = (props) => {
   const user = useUser();
   const [loaded, setLoaded] = useState(false);
 
+  // Delay showing of the login icons until user is loaded
   useEffect(() => {
     console.log(user);
     if (user === undefined) {
@@ -31,12 +33,13 @@ export const TopBar: React.FC<{ showLogo?: boolean }> = (props) => {
       sx={{ position: "fixed", top: 0 }}
     >
       <Flex
-        alignItems="center"
+        alignItems="flex-start"
         justifyContent="space-between"
         maxWidth="1160px"
+        pt="8px"
         flex={1}
       >
-        <div>
+        <Box>
           {props.showLogo && (
             <Link href="/">
               <A>
@@ -49,8 +52,10 @@ export const TopBar: React.FC<{ showLogo?: boolean }> = (props) => {
               </A>
             </Link>
           )}
-        </div>
-        {loaded && (user ? <Account /> : <RegisterLogin />)}
+        </Box>
+        <Box pt="10px">
+          {loaded && (user ? <Account user={user} /> : <RegisterLogin />)}
+        </Box>
       </Flex>
     </Flex>
   );
@@ -81,64 +86,57 @@ const RegisterLogin: React.FC = () => {
   );
 };
 
-const Account: React.FC = () => {
+const Account: React.FC<{ user: SessionUser }> = ({ user }) => {
   const [open, setOpen] = useState(false);
   return (
-    <>
+    <Flex flexDirection="column">
       <A onClick={() => setOpen(!open)}>
-        <Flex alignItems="center" flexDirection="row">
+        <Flex
+          alignItems="center"
+          flexDirection="row"
+          justifyContent="flex-end"
+          mr="30px"
+        >
           <IconAccount />
           <Text mx={3}>Mein Konto</Text>
           {open ? <IconUp /> : <IconDown />}
-          {open && <AccountMenu />}
         </Flex>
       </A>
-    </>
+      {open && <AccountMenu user={user} />}
+    </Flex>
   );
 };
 
-const AccountMenu: React.FC = () => {
+const AccountMenu: React.FC<{ user: SessionUser }> = ({ user }) => {
   return (
-    <Box sx={{ position: "absolute", top: "80px", marginLeft: "40px" }}>
-      <svg width="207px" height="123px" viewBox="0 0 207 123" version="1.1">
-        <title>Rectangle</title>
-        <g
-          id="Symbols"
-          stroke="none"
-          strokeWidth="1"
-          fill="none"
-          fillRule="evenodd"
-        >
-          <g id="Group-3">
-            <path
-              d="M6,15.5821083 L113.845972,15.5821083 C114.956927,15.5821083 116.046068,15.2736635 116.992052,14.691138 L137.879389,1.82896487 C139.715599,0.69824895 142.017358,0.639872606 143.908523,1.67605626 L167.941764,14.8440466 C168.825551,15.32828 169.817068,15.5821083 170.824819,15.5821083 L201,15.5821083 C204.313708,15.5821083 207,18.2683998 207,21.5821083 L207,117 C207,120.313708 204.313708,123 201,123 L6,123 C2.6862915,123 -4.82366169e-16,120.313708 0,117 L0,21.5821083 C1.06576994e-15,18.2683998 2.6862915,15.5821083 6,15.5821083 Z"
-              id="Rectangle"
-              fill="#4F4F4F"
-            ></path>
-            <text
-              id="Profil-bearbeiten-Ab"
-              fontSize="22"
-              fontWeight="normal"
-              fill="#FFFFFF"
-            >
-              <Link href="/user/profile">
-                <A>
-                  <tspan x="19" y="58">
-                    Profil bearbeiten
-                  </tspan>
-                </A>
-              </Link>
-              <Link href="/user/logout">
-                <A>
-                  <tspan x="19" y="98">
-                    Abmelden
-                  </tspan>
-                </A>
-              </Link>
-            </text>
-          </g>
-        </g>
+    <Box width="207px" mt="22px" ml="30px" sx={{ lineHeight: "16px" }}>
+      <svg width="207px" height="15px" viewBox="-136 0 207 15" version="1.1">
+        <path
+          d="M2.95999555,15 L23.9609454,1.71229409 C25.7556788,0.648405241 27.974226,0.593219151 29.8196352,1.5665599 L53.9750193,14.3070506 C54.8378628,14.7621479 55.7986582,15 56.7741645,15 L93,15 L-114,15 L-0.0995490542,15 C0.977073975,15 2.03386354,14.7103124 2.95999555,14.1613164 Z"
+          fill="#505050"
+        ></path>
+        {/*
+        <path d="M116,15 L142,0 L169,15 L116,15" fill="#505050"></path>*/}
       </svg>
+      <Box bg="#505050" m={0} width="207px" p={3} sx={{ borderRadius: "card" }}>
+        <Text lineHeight="35px">
+          <Link
+            href={user?.role === Role.Teacher ? "/teacher" : "/student/test"}
+          >
+            <A>
+              {user?.role === Role.Teacher ? "Meine Klassen" : "Abstimmungen"}
+            </A>
+          </Link>
+          <br />
+          <Link href="/user/profile">
+            <A>Profil bearbeiten</A>
+          </Link>
+          <br />
+          <Link href="/user/logout">
+            <A>Abmelden</A>
+          </Link>
+        </Text>
+      </Box>
     </Box>
   );
 };

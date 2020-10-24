@@ -29,10 +29,9 @@ export default function Teacher(): ReactElement {
 
   return (
     <LoggedInPage heading="Startseite für Lehrpersonen">
-      <Heading as="h2">Willkommen {user && user.name}</Heading>
-
+      <Text>Willkommen {user && user.name}</Text>
       <Link href="/teacher/profile">
-        <Button>Profil bearbeiten</Button>
+        <Button variant="text">Profil bearbeiten</Button>
       </Link>
       <Heading as="h3">Deine Klassen auf voty.ch</Heading>
       <Teams

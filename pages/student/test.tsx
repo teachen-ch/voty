@@ -1,8 +1,9 @@
 import { LoggedInPage } from "components/Page";
-import { Heading } from "rebass";
+import { Text, Box, Link as A } from "rebass";
 import { Ballot, Ballots } from "components/Ballots";
 import { useRouter } from "next/router";
-import { useUser } from "state/user";
+import { useUser, SessionUser } from "state/user";
+import Link from "next/link";
 import { ReactElement } from "react";
 import {
   BallotScope,
@@ -12,6 +13,26 @@ import {
 
 export default function StudentTest(): ReactElement {
   const user = useUser();
+
+  return (
+    <LoggedInPage heading="Aktuelle Abstimmungen">
+      <Text>
+        Hier kannst Du zu den aktuellen nationalen Abstimmungsvorlagen anonym
+        Deine Stimme abgeben.
+      </Text>
+      <Box mt={4} mb={3} fontSize={2}>
+        <Link href="/student/">
+          <A variant="underline">Start</A>
+        </Link>
+        {" / "}
+        <A variant="semi">Abstimmungen</A>
+      </Box>
+      <ShowBallots user={user} />
+    </LoggedInPage>
+  );
+}
+
+const ShowBallots: React.FC<{ user: SessionUser }> = ({ user }) => {
   const router = useRouter();
 
   const ballotRunsQuery = useGetBallotRunsQuery({
@@ -24,8 +45,7 @@ export default function StudentTest(): ReactElement {
     void router.push("/ballots/[id]", `/ballots/${ballot.id}`);
   }
   return (
-    <LoggedInPage heading="Abstimmen">
-      <Heading as="h2">Nationale Abstimmungen</Heading>
+    <Box id="ballots">
       {ballotRuns?.length ? (
         ballotRuns.map((run) => (
           <Ballot
@@ -39,10 +59,9 @@ export default function StudentTest(): ReactElement {
       ) : (
         <AllBallots onClick={detailBallot} />
       )}
-    </LoggedInPage>
+    </Box>
   );
-}
-
+};
 const AllBallots: React.FC<{
   onClick: (ballot: BallotFieldsFragment) => void;
 }> = ({ onClick }) => {

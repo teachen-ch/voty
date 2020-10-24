@@ -16,7 +16,7 @@ services:
       NEXT_TELEMETRY_DISABLED: 1
     ports:
       - "3000:3000"
-    command: npm run start
+    command: npm run dev
 
   postgres:
     image: "postgres:13"
