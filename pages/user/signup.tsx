@@ -1,12 +1,15 @@
 import { AppPage } from "components/Page";
-import { Text, Button } from "rebass";
+import { Text, Flex, Button, Image } from "rebass";
 import { gql } from "@apollo/client";
 import { useState, ReactElement, Dispatch, SetStateAction } from "react";
 import { useRouter } from "next/router";
 import { QForm, yup, ErrorBox } from "../../components/Form";
 import { omit } from "lodash";
 import { SessionUser } from "state/user";
-import { useCreateUserMutation } from "graphql/types";
+import {
+  useCreateUserMutation,
+  useEmailVerificationMutation,
+} from "graphql/types";
 
 // TODO use fragment for these fields
 export const CREATE_USER = gql`
@@ -43,13 +46,51 @@ export default function Signup(): ReactElement {
 }
 
 export function Success({ user }: { user?: SessionUser }): ReactElement {
+  const [mailSent, setMailSent] = useState(false);
+  const [error, setError] = useState("");
+  const [doRequestReset] = useEmailVerificationMutation({
+    onCompleted() {
+      setMailSent(true);
+      setError("");
+    },
+    onError() {
+      setError("Es ist ein Fehler aufgetreten.");
+    },
+  });
+
+  async function doResend() {
+    await doRequestReset({
+      variables: { email: String(user?.email), purpose: "verification" },
+    });
+  }
   return (
-    <AppPage heading="Konto erstellt">
-      <Text>
-        Hallo {user?.name} 👋 Dein neues Konto wurde gestellt und wir haben eine
-        Email an «{user?.email}» geschickt. Bitte öffne den Link in diesem
-        Email, um dich anzumelden.
-      </Text>
+    <AppPage heading="Dein Benutzerkonto ist erstellt">
+      <Flex minHeight="450px" flexDirection="column">
+        <Image
+          src="/images/voty_welcome.svg"
+          maxWidth="80%"
+          sx={{ position: "absolute", alignSelf: "center" }}
+        />
+        <Text>
+          Hallo {user?.name}
+          <br />
+          Dein neues Benutzerkonto wurde erstellt und wir haben ein Email an die
+          Adresse «{user?.email}» geschickt. Bitte öffne den Link in diesem
+          Email, um Dich anzumelden.{" "}
+        </Text>
+        <Text my={4}>
+          Solltest Du kein Email von voty.ch in der Inbox Deines Email-Accounts
+          finden, dann schau doch bitte im Spam-Ordner nach.
+        </Text>
+        {!mailSent ? (
+          <Button variant="text" onClick={doResend}>
+            Bestätigungsmail nochmals senden
+          </Button>
+        ) : (
+          "Das Bestätigungsmail wurde nochmals verschickt!"
+        )}
+        <ErrorBox error={error} />
+      </Flex>
     </AppPage>
   );
 }

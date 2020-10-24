@@ -1,7 +1,7 @@
 import { atom, useRecoilValue, useSetRecoilState } from "recoil";
 import { LoginFieldsFragment } from "graphql/types";
 
-export type SessionUser = LoginFieldsFragment | null;
+export type SessionUser = LoginFieldsFragment | undefined | null;
 
 export const accessTokenState = atom({
   key: "accessTokenState",

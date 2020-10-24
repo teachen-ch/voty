@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import { AppPage } from "components/Page";
 import { gql, useMutation, useApolloClient } from "@apollo/client";
 import { useState, useEffect, ReactElement } from "react";
-import { Text, Button, Heading, Flex } from "rebass";
+import { Text, Box, Button, Heading, Flex } from "rebass";
 import { Grid } from "theme-ui";
 import { Label, Input } from "@rebass/forms";
 import { QForm, ErrorBox } from "components/Form";
@@ -280,13 +280,15 @@ function CheckToken({ token, purpose }: { token: string; purpose: string }) {
     }
     if (purpose === "verification") {
       return (
-        <>
-          <Heading as="h2">Email bestätigt</Heading>
-          <Text mb={4}>Super, Deine Email-Adresse ist nun bestätigt.</Text>
+        <Box>
+          <Text mb={4}>
+            Super, Deine Email-Adresse ist nun bestätigt und Du bist bereits
+            angemeldet.
+          </Text>
           <Button onClick={() => router.push(getStartpage(tempUser?.role))}>
             Weiter geht&apos;s
           </Button>
-        </>
+        </Box>
       );
     }
     if (purpose === "reset") {
