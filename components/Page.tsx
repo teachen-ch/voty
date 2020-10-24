@@ -102,7 +102,6 @@ export const LoggedInPage: React.FC<{
             <LoginForm />
           </>
         )}
-        <Box height={500} />
       </AppPage>
     );
   }
