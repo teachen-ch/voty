@@ -13,6 +13,8 @@ describe("Test Live-Voting Panels", () => {
     cy.get("#unselectedBallots .ballot").first().contains("Auswählen").click();
     cy.get("#selectedBallots .ballot").first().contains("Entfernen");
     cy.get("#selectedBallots .ballot").first().contains("Entfernen").click();
+    cy.get("#selectedBallots").contains("keine Abstimmungen ausgewählt");
+
     // add testinitiative
     cy.get("#unselectedBallots .ballot")
       .contains("Testinitiative")
