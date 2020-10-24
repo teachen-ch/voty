@@ -15,7 +15,6 @@ export const TopBar: React.FC<{ showLogo?: boolean }> = (props) => {
 
   // Delay showing of the login icons until user is loaded
   useEffect(() => {
-    console.log(user);
     if (user === undefined) {
       setTimeout(() => setLoaded(true), 1000);
     } else setLoaded(true);

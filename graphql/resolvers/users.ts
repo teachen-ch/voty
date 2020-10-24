@@ -382,7 +382,7 @@ export const deleteAccount: FieldResolver<"Mutation", "deleteAccount"> = async (
     if (!deleted) throw new Error("ERR_CANNOT_DELETE_ACCOUNT");
     return { success: true };
   } catch (err) {
-    console.log("Error deleting user: ", err);
+    logger.warn("Error deleting user: ", err);
     throw new Error("ERR_CANNOT_DELETE_ACCOUNT");
   }
 };

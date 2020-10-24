@@ -155,7 +155,6 @@ export const QForm: React.FC<QFormProps> = ({ fields, mutation, ...props }) => {
       );
     }
     if (field.type === "hidden") {
-      console.log("HIDDEN FIELD", field);
       return (
         <input type="hidden" name={field.name} value={String(field.init)} />
       );

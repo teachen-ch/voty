@@ -1,7 +1,7 @@
 import { ReactElement, useEffect } from "react";
 import { LoggedInPage, ErrorPage, LoadingPage } from "components/Page";
-import { Heading, Text, Card, Box, Flex } from "rebass";
-import { Ballot } from "components/Ballots";
+import { Heading, Text, Box, Flex } from "rebass";
+import { Ballot, getBallotStatus, BallotStatus } from "components/Ballots";
 import { useRouter } from "next/router";
 import {
   useGetBallotRunsQuery,
@@ -59,10 +59,29 @@ const BallotRunListing: React.FC<{ ballotRun: BallotRunFieldsFragment }> = ({
   ballotRun,
 }) => {
   const ballotRunId = ballotRun.id;
+  const ballot = ballotRun.ballot;
   const [doStartRun] = useStartBallotRunMutation({
     variables: { ballotRunId },
   });
   const [doEndRun] = useEndBallotRunMutation({ variables: { ballotRunId } });
+
+  let buttonText = "Abstimmung ist noch nicht gestartet";
+  let buttonColor = "gray";
+  let buttonAction;
+  const status = getBallotStatus(ballot);
+  if (status === BallotStatus.Started) {
+    if (ballotRun.start) {
+      buttonText = ballotRun.end ? "Beendet" : "Beenden";
+      buttonColor = ballotRun.end ? "gray" : "#d90000";
+    } else {
+      buttonText = "Starten";
+      buttonColor = "green";
+    }
+    buttonAction = startStopBallot;
+  }
+  if (status === BallotStatus.Ended) {
+    buttonText = "Abstimmung ist bereits beendet";
+  }
 
   async function startStopBallot() {
     if (!ballotRun.start) await doStartRun();
@@ -72,16 +91,12 @@ const BallotRunListing: React.FC<{ ballotRun: BallotRunFieldsFragment }> = ({
     <Box key={ballotRun.id} mb={5}>
       <Ballot
         ballot={ballotRun.ballot}
-        buttonText={
-          ballotRun.start ? (ballotRun.end ? "Beendet" : "Beenden") : "Starten"
-        }
-        buttonColor={
-          ballotRun.start ? (ballotRun.end ? "gray" : "#d90000") : "green"
-        }
-        onButton={startStopBallot}
-        onDetail={startStopBallot}
-      />
-      {ballotRun.start && <BallotRunDetail ballotRun={ballotRun} />}
+        buttonText={buttonText}
+        buttonColor={buttonColor}
+        onButton={buttonAction}
+      >
+        {ballotRun.start && <BallotRunDetail ballotRun={ballotRun} />}
+      </Ballot>
     </Box>
   );
 };
@@ -90,15 +105,12 @@ const BallotRunDetail: React.FC<{ ballotRun: BallotRunFieldsFragment }> = ({
   ballotRun,
 }) => {
   return (
-    <Card>
-      <>
-        <Heading as="h2" mt={0} mb={4}>
-          {ballotRun.end ? "Endresultat:" : "Live-Resultat:"}{" "}
-          {ballotRun.ballot.title}
-        </Heading>
-        <Results ballotId={ballotRun.ballot.id} ballotRunId={ballotRun.id} />
-      </>
-    </Card>
+    <>
+      <Heading as="h2" mt={0} mb={4}>
+        {ballotRun.end ? "Endresultat:" : "Live-Resultat:"}
+      </Heading>
+      <Results ballotId={ballotRun.ballot.id} ballotRunId={ballotRun.id} />
+    </>
   );
 };
 

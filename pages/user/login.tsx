@@ -104,7 +104,6 @@ export function LoginForm(): ReactElement {
   const [doLogin, resultLogin] = useLoginMutation({
     onCompleted(data) {
       if (data.login && data.login.token) {
-        console.log("LOGIN", data.login.token);
         setUser(data.login.user);
         setAccessToken(data.login.token);
       }

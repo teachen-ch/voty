@@ -78,7 +78,15 @@ const VoteCode: React.FC<{
       setSuccess(true);
     },
     onError(err) {
-      setError(err.message);
+      // TODO: Replace with translation solution once ready
+      const messages: Record<string, string> = {
+        ERR_BALLOT_NOT_STARTED: "Diese Abstimmung ist noch nicht gestartet",
+        ERR_BALLOT_ENDED: "Diese Abstimmung ist bereits beendet",
+        ERR_BALLOTCODE_WRONG: "Ungültiger Abstimmungscode",
+        ERR_ALREADY_VOTED: "Du hast bereits über diese Vorlage abgestimmt",
+        ERR_VOTECODE_FAILED: "Datenbank-Fehler",
+      };
+      setError(messages[err.message] || err.message);
     },
   });
 

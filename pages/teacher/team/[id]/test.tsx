@@ -25,11 +25,7 @@ export default function TeacherTest(): ReactElement {
   });
   const team = teamQuery.data?.team;
   const [doAddBallotRun] = useAddBallotRunMutation();
-  const [doRemoveBallotRun] = useRemoveBallotRunMutation({
-    /* onError: (err) => {
-      console.log("some error...", err);
-    }, */
-  });
+  const [doRemoveBallotRun] = useRemoveBallotRunMutation();
 
   const ballotRunsQuery = useGetBallotRunsQuery({
     variables: { teamId: String(team?.id) },

@@ -195,7 +195,14 @@ export const Ballot: React.FC<{
   buttonColor?: string;
   onButton?: (ballot: BallotFieldsFragment) => void;
   onDetail?: (ballot: BallotFieldsFragment) => void;
-}> = ({ ballot, buttonText, buttonColor = "primary", onButton, onDetail }) => {
+}> = ({
+  ballot,
+  children,
+  buttonText,
+  buttonColor = "primary",
+  onButton,
+  onDetail,
+}) => {
   return (
     <div className="ballot">
       <Card>
@@ -207,6 +214,7 @@ export const Ballot: React.FC<{
           <img src="/images/icon_cal.svg" /> &nbsp; Zeit:{" "}
           {formatFromTo(ballot.start, ballot.end)}
         </Text>
+        {children}
       </Card>
       {buttonText && (
         <Button
@@ -223,7 +231,7 @@ export const Ballot: React.FC<{
   );
 };
 
-enum BallotStatus {
+export enum BallotStatus {
   Not_Started = "Nicht gestartet",
   Started = "Gestartet",
   Ended = "Beendet",
@@ -231,7 +239,7 @@ enum BallotStatus {
 
 export const getBallotStatus = (ballot: BallotFieldsFragment): string => {
   const now = new Date();
-  if (ballot.start < now) return BallotStatus.Not_Started;
-  if (ballot.end < now) return BallotStatus.Ended;
+  if (new Date(ballot.start) > now) return BallotStatus.Not_Started;
+  if (new Date(ballot.end) < now) return BallotStatus.Ended;
   else return BallotStatus.Started;
 };

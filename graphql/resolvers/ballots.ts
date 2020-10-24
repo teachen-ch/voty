@@ -91,15 +91,27 @@ export const voteCode: FieldResolver<"Mutation", "voteCode"> = async (
       team: {
         include: { school: { select: { id: true, type: true, canton: true } } },
       },
+      ballot: true,
     },
   });
   if (!ballotRun) throw new Error("ERR_BALLOTRUN_NOT_FOUND");
 
+  const ballot = ballotRun.ballot;
+  const user = ctx.user;
+  if (user && getHasVoted({ ballot, user, db: ctx.db })) {
+    throw new Error("ERR_ALREADY_VOTED");
+  }
+
   const now = new Date();
-  if (!ballotRun.start || ballotRun.start > now) {
+  const ballotRunStarted = ballotRun.start && ballotRun.start < now;
+  const ballotStarted = ballot.start && ballot.start < now;
+  const ballotRunEnded = ballotRun.end && ballotRun.end < now;
+  const ballotEnded = ballot.end && ballot.end < now;
+
+  if (!ballotRunStarted || !ballotStarted) {
     throw new Error("ERR_BALLOT_NOT_STARTED");
   }
-  if (ballotRun.end && ballotRun.end < now) {
+  if (ballotRunEnded || ballotEnded) {
     throw new Error("ERR_BALLOT_ENDED");
   }
 
