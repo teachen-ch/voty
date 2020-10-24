@@ -188,9 +188,8 @@ function VerificationForm({ email }: { email: string }): ReactElement {
     <>
       <Heading as="h2">Email bestätigen</Heading>
       <Text mb={4}>
-        Deine Email-Adresse «{email}» wurde noch nicht bestätigt.
-        <br />
-        Bitte klicke den Link im Aktivierungs-Email.
+        Deine Email-Adresse «{email}» wurde noch nicht bestätigt. Bitte klicke
+        auf den Link im Aktivierungs-Email.
       </Text>
       <Text>Sollen wir Dir nochmals ein Email schicken?</Text>
       <Button
@@ -199,9 +198,9 @@ function VerificationForm({ email }: { email: string }): ReactElement {
         }
         my={3}
         disabled={mailSent}
-        variant={mailSent ? "muted" : "primary"}
+        variant={"text"}
       >
-        {mailSent ? "Email verschickt!" : "Email schicken"}
+        {mailSent ? "Email verschickt!" : "Nochmals Email schicken"}
       </Button>
       <ErrorBox error={error} />
     </>

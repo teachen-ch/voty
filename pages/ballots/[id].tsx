@@ -1,4 +1,4 @@
-import { Page, LoggedInPage, ErrorPage } from "components/Page";
+import { AppPage, LoggedInPage, ErrorPage } from "components/Page";
 import { Text, Box, Button, Card, Flex, Link as A } from "rebass";
 import { useRouter } from "next/router";
 import { useUser } from "state/user";
@@ -18,7 +18,8 @@ export default function BallotPage(): ReactElement {
   const id = String(router.query.id);
   const ballotQuery = useBallotQuery({ variables: { where: { id } } });
 
-  if (ballotQuery.loading) return <Page heading="Abstimmungsseite"></Page>;
+  if (ballotQuery.loading)
+    return <AppPage heading="Abstimmungsseite"></AppPage>;
   if (ballotQuery.error)
     return <ErrorPage>{ballotQuery.error.message}</ErrorPage>;
 
@@ -26,7 +27,9 @@ export default function BallotPage(): ReactElement {
 
   if (!ballot) {
     return (
-      <Page heading="Abstimmung">Abstimmung konnte nicht gefunden werden</Page>
+      <AppPage heading="Abstimmung">
+        Abstimmung konnte nicht gefunden werden
+      </AppPage>
     );
   }
   if (success) {

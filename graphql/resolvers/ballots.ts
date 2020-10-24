@@ -267,9 +267,16 @@ export const getBallotResults: FieldResolver<
     if (!ballotRun) throw new Error("ERR_BALLOTRUN_NOT_FOUND");
     if (ballotRun.team.teacherId !== user?.id)
       throw new Error("ERR_NO_PERMISSION");
+    where.ballotRunId = ballotRunId;
+    where.ballotId = ballotRun.ballotId;
+  } else {
+    if (!ballotId) throw new Error("ERR_NO_BALLOT_SPECIFIED");
+    where.ballotId = ballotId;
   }
+
   if (teamId) {
     where.teamId = teamId;
+    console.log("filtering by team: ", teamId);
   }
   if (schoolId) {
     where.schoolId = schoolId;
@@ -277,15 +284,14 @@ export const getBallotResults: FieldResolver<
   if (canton) {
     where.canton = canton;
   }
-  const id = String(ballotRun ? ballotRun.ballotId : ballotId);
   const yes = await ctx.db.vote.count({
-    where: { ballotRunId, ballotId: id, vote: 1 },
+    where: { ...where, vote: 1 },
   });
   const no = await ctx.db.vote.count({
-    where: { ballotRunId, ballotId: id, vote: 2 },
+    where: { ...where, vote: 2 },
   });
   const abs = await ctx.db.vote.count({
-    where: { ballotRunId, ballotId: id, vote: 0 },
+    where: { ...where, vote: 0 },
   }); // abstentions
   const total = yes + no + abs;
 

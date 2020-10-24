@@ -1,7 +1,7 @@
 import { atom, useRecoilValue, useSetRecoilState } from "recoil";
-import { MeQuery } from "graphql/types";
+import { LoginFieldsFragment } from "graphql/types";
 
-export type SessionUser = MeQuery["me"];
+export type SessionUser = LoginFieldsFragment | null;
 
 export const accessTokenState = atom({
   key: "accessTokenState",

@@ -3,7 +3,7 @@ import { Heading, Text, Button, Link as A } from "rebass";
 import { Users } from "components/Users";
 import { Input, Textarea } from "@rebass/forms";
 import { Grid, Label } from "theme-ui";
-import { useRef, useState, RefObject, ReactElement } from "react";
+import { useRef, useState, RefObject } from "react";
 import { Navigation, Route } from "components/Navigation";
 import { useRouter } from "next/router";
 import _ from "lodash";
@@ -25,7 +25,7 @@ export const INVITE_STUDENTS = gql`
   ${fragments.TeamTeacherFields}
 `;
 
-export default function TeamPage(): ReactElement {
+export default function TeacherTeamPage(): React.ReactElement {
   const router = useRouter();
   const id = String(router.query.id);
   const teamQuery = useTeamTeacherQuery({
@@ -78,7 +78,7 @@ export default function TeamPage(): ReactElement {
   }
 
   return (
-    <LoggedInPage heading={`${team.name}`}>
+    <LoggedInPage heading={`Klasse: ${team.name}`}>
       {team.members.length && (
         <Link
           href="/teacher/team/[id]/test"
@@ -170,7 +170,7 @@ export function TeacherTeamNavigation({
   team,
 }: {
   team: TeamTeacherFieldsFragment;
-}): ReactElement {
+}): React.ReactElement {
   return (
     <Navigation>
       <Route
