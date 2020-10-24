@@ -30,9 +30,8 @@ export default function TeacherProfilePage({
           </Link>
           .
           <Text fontSize={1}>
-            Achtung, dabei werden auch alle durch Dich erstellte Klassen
-            gelöscht. Konten der Schüler*innen werden nicht automatisch
-            gelöscht.
+            Achtung, dabei werden auch Deine Klassen gelöscht. Konten der
+            Schüler*innen werden nicht automatisch gelöscht.
           </Text>
         </Box>
       )}

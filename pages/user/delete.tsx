@@ -84,12 +84,10 @@ const DeleteForm: React.FC<{ user: SessionUser }> = ({ user }) => {
         {user?.email} löschen.
       </Text>
       <Grid my={4} columns={[0, 0, "1fr 1fr"]}>
-        <Button onClick={() => doDeleteAccount()} variant="secondary">
-          Mein Konto löschen
-        </Button>
-        <Button onClick={() => router.push("/student")}>
+        <Button onClick={() => router.push("/student")} variant="secondary">
           Ich bleibe auf voty.ch!
         </Button>
+        <Button onClick={() => doDeleteAccount()}>Mein Konto löschen</Button>
       </Grid>
     </>
   );
