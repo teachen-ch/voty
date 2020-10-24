@@ -4,6 +4,8 @@
 
 Would you like to contribute to to voty.ch? Check out the [installation instructions](/docs/installation.md)
 
+[![voty](https://img.shields.io/endpoint?url=https://dashboard.cypress.io/badge/simple/19hfnd/master&style=flat)](https://dashboard.cypress.io/projects/19hfnd/runs)
+
 ## Let's bring democracy to schools!
 
 Democracy is one of Switzerland's most valuable assets. But how can we motivate our youth to care about it? voty.ch tries to increase the understanding of democracy for children aged 12-18 years with 3 modules.

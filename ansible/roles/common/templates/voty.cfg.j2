@@ -24,7 +24,7 @@ server {
 
   location /maintenance.html {
   	root /voty/maintenance/;
-	 internal
+	 	internal;
   }
 
 	ssl_certificate /etc/letsencrypt/live/{{ server_name }}/fullchain.pem;
