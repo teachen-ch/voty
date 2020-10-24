@@ -9,11 +9,17 @@ describe("Test Live-Voting Panels", () => {
     cy.get("a:contains('Bearbeiten')").click();
     cy.contains("Abstimmungen auswählen").click();
     cy.contains("Noch keine Abstimmungen ausgewählt");
-    // select 1st ballot, wait for it to be shown, select and remove 2nd ballot
+    // select 1st ballot, then add and remove it
     cy.get("#unselectedBallots .ballot").first().contains("Auswählen").click();
     cy.get("#selectedBallots .ballot").first().contains("Entfernen");
-    cy.get("#unselectedBallots .ballot").first().contains("Auswählen").click();
     cy.get("#selectedBallots .ballot").first().contains("Entfernen").click();
+    // add testinitiative
+    cy.get("#unselectedBallots .ballot")
+      .contains("Testinitiative")
+      .parent()
+      .parent()
+      .contains("Auswählen")
+      .click();
     cy.get("#livepanel button").first().click();
     cy.contains("Jetzt abstimmen");
     cy.get(".ballot:first button:contains('Starten')").click();
