@@ -192,7 +192,7 @@ const MobileBurger: React.FC<{ user: SessionUser }> = ({ user }) => {
                 </nav>
               ) : (
                 <nav>
-                  <Link href="/user/home">
+                  <Link href="/user/login">
                     <A>Startseite</A>
                   </Link>
                   <br />
