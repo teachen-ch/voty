@@ -40,6 +40,14 @@
       user: { name: voty }
     - name: Create Backend Root Directory
       file: { path: "{{app_dir}}", owner: voty, state: directory }
+    - name: Create Maintenance-Site Directory
+      template:
+        {
+          src: "maintenance.html",
+          dest: "{{app_dir}}/maintenance/maintenance.html",
+        }
+    - name: Copy maintenance.html to /voty/maintenance
+      copy: { path: "{{app_dir}}/maintenance", owner: voty, state: directory }
     - name: Enable Docker Service
       service: { name: docker, enabled: yes, state: started }
   become: yes
