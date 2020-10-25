@@ -52,6 +52,8 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout latest version
+        uses: actions/checkout@v2
       - name: Run Tests
         run: docker-compose -f docker-compose.test.yml up --build --abort-on-container-exit
         env:
