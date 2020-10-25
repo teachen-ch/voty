@@ -1,23 +1,9 @@
-# Start from node.js v12
-FROM cypress/base
+FROM cypress/base:14
 WORKDIR /usr/src/app
-
-# Install app dependencies
-COPY package*.json ./
-COPY yarn.lock ./
-
-# Install node libraries
-RUN yarn install
-
-# If you are building your code for production
-# RUN npm ci --only=production
-
-# Bundle app source
-COPY . .
-
-# Expose port 3000
 EXPOSE 3000
-
-CMD [ "yarn", "run", "test"]
+COPY . .
+# Runs yarn install, generates Prisma client, runs nexus build and next build
+RUN yarn run ci:release
+CMD [ "yarn", "run", "ci:test"]
 
 

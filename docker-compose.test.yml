@@ -3,7 +3,9 @@ version: "3.8"
 services:
   sut:
     image: voty
-    build: .
+    build:
+      context: ./
+      dockerfile: Dockerfile.test
     env_file: ".env"
     # --ipc=host see https://github.com/cypress-io/cypress/issues/350
     #   add this if docker starts to crash on long-running test runs
@@ -19,10 +21,10 @@ services:
       - postgres
     links:
       - postgres
-    command: sh -c "sleep 3 && yarn run ci:test"
+    command: sh -c "sleep 2 && yarn run ci:test"
 
   postgres:
-    image: "postgres:13"
+    image: "postgres:13-alpine"
     container_name: "postgres"
     ports:
       - "5432:5432"
