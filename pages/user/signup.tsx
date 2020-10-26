@@ -165,7 +165,6 @@ export function CreateUserForm({
             "Schüler*in": "Student",
             "Lehrer*in": "Teacher",
             "Schulleiter*in": "Principal",
-            "Weltenbürger*in": "Unkown",
           },
         },
         submit: { type: "submit", label: "Konto erstellen" },
@@ -188,7 +187,7 @@ export function CreateUserForm({
         textAlign="right"
         sx={{ gridColumn: [0, 0, 2] }}
       >
-        Ich habe bereits ein Benutzer-Konto
+        Ich habe bereits ein Benutzerkonto
       </Button>
     </QForm>
   );

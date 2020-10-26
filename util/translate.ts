@@ -13,10 +13,10 @@ const messages: Record<string, string> = {
   ERR_BALLOT_NOT_FOUND: "Abstimmung nicht gefunden",
   ERR_CANNOT_CREATE_BALLOTRUN: "Abstimmung kann nicht ausgewählt werden",
   ERR_CANNOT_DELETE_ACCOUNT:
-    "Benutzer-Konto kann nicht gelöscht werden. Bitte kontaktiere uns",
-  ERR_CREATE_USER: "Benutzer-Konto kann nicht erstellt werden",
+    "Benutzerkonto kann nicht gelöscht werden. Bitte kontaktiere uns",
+  ERR_CREATE_USER: "Benutzerkonto kann nicht erstellt werden",
   ERR_DUPLICATE_EMAIL:
-    "Für diese Email-Adresse gibt es bereits ein Benutzer-Konto",
+    "Für diese Email-Adresse gibt es bereits ein Benutzerkonto",
   ERR_EMAIL_NOT_FOUND: "Email-Adresse wurde nicht gefunden",
   ERR_EMAIL_NOT_VERIFIED: "Deine Email-Adresse ist noch nicht bestätigt",
   ERR_NEEDS_LOGIN: "Eine Anmeldung wird benötigt für diese Funktion",
@@ -34,7 +34,7 @@ const messages: Record<string, string> = {
   ERR_STRANGE_COOKIE: "Fehlerhafte Anfrage",
   ERR_TEAM_NOT_FOUND: "Diese Klasse wurde nicht gefunden",
   ERR_TOKEN_NOT_FOUND: "Dieser Code wurde nicht gefunden",
-  ERR_USER_NOT_FOUND: "Dieses Benutzer-Konto wurde nicht gefunden",
+  ERR_USER_NOT_FOUND: "Dieses Benutzerkonto wurde nicht gefunden",
   ERR_USER_PASSWORD: "Email oder Passwort passen leider nicht zueinander…",
   ERR_VOTING_NEEDS_LOGIN: "Die Abstimmung benötigt eine Anmeldung",
   ERR_VOTING_NOT_ALLOWED: "Abstimmen nicht erlaubt",

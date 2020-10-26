@@ -62,6 +62,7 @@ export default function BallotPage(): ReactElement {
         <Button
           variant="secondary"
           mt={4}
+          width="100%"
           onClick={() => void router.push("/student/test")}
         >
           Zu den Abstimmungen
@@ -73,19 +74,21 @@ export default function BallotPage(): ReactElement {
   if (votyNow) {
     return (
       <LoggedInPage heading="Und jetzt Du!">
-        <Heading mt={0}>Jetzt bist du dran! Wie stimmst Du ab?</Heading>
-        <img src="/images/voty_now.svg" />
-        <VotyNow
-          ballot={ballot}
-          onSuccess={() => {
-            window.scrollTo(0, 0);
-            setSuccess(true);
-          }}
-        />
-        <Text>
-          <Button mt={4} variant="text" onClick={() => setVotyNow(false)}>
-            Abbrechen
-          </Button>
+        <Text textAlign="center" maxWidth="450px" sx={{ margin: "0 auto" }}>
+          <Heading mt={0}>Jetzt bist du dran! Wie stimmst Du ab?</Heading>
+          <img src="/images/voty_now.svg" />
+          <VotyNow
+            ballot={ballot}
+            onSuccess={() => {
+              window.scrollTo(0, 0);
+              setSuccess(true);
+            }}
+          />
+          <Text>
+            <Button mt={4} variant="text" onClick={() => setVotyNow(false)}>
+              Abbrechen
+            </Button>
+          </Text>
         </Text>
       </LoggedInPage>
     );

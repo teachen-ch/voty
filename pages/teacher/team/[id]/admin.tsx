@@ -7,7 +7,7 @@ import { useRef, useState, RefObject } from "react";
 import { Navigation, Route } from "components/Navigation";
 import { useRouter } from "next/router";
 import _ from "lodash";
-import Link from "next/link";
+import { SelectBallots } from "components/Ballots";
 import { gql } from "@apollo/client";
 import { fragments } from "components/Teams";
 import {
@@ -79,14 +79,8 @@ export default function TeacherTeamPage(): React.ReactElement {
 
   return (
     <LoggedInPage heading={`Klasse: ${team.name}`}>
-      {team.members.length > 0 && (
-        <Link
-          href="/teacher/team/[id]/test"
-          as={`/teacher/team/${team.id}/test`}
-        >
-          <Button>Abstimmungen auswählen</Button>
-        </Link>
-      )}
+      <Heading as="h3">Abstimmungen für Deine Klasse</Heading>
+      <SelectBallots team={team} />
       <Heading as="h2">Schüler*innen</Heading>
       <Users users={team.members} />
 

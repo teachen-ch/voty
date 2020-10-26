@@ -13,7 +13,7 @@ export default {
     highlight: "#dee4e7",
     muted: "#dee4e7",
     lightgray: "#dee4e7",
-    silver: "rgba(163,175,181,75)",
+    silver: "rgba(163,175,181,0.75)",
     gray: "#5a5a5a",
     success: "#258f17",
     green: "#258f17",
@@ -43,7 +43,7 @@ export default {
   },
   lineHeights: {
     body: 1.3,
-    heading: 1.25,
+    heading: 1.15,
   },
   shadows: {
     card: "0 0 4px rgba(0, 0, 0, .125)",
@@ -155,6 +155,7 @@ export default {
   },
   buttons: {
     primary: {
+      fontFamily: "body",
       cursor: "pointer",
       color: "white",
       bg: "primary",
@@ -229,6 +230,7 @@ export default {
     color: "gray",
   },
   input: {
+    fontFamily: "body",
     color: "gray",
     bg: "white",
     border: "none",
@@ -241,8 +243,12 @@ export default {
       color: "#CCC",
       opacity: 1,
     },
+    ":focus": {
+      outline: "none",
+    },
   },
   select: {
+    fontFamily: "body",
     color: "gray",
     bg: "white",
     border: "none",
@@ -255,5 +261,8 @@ export default {
     backgroundImage: "url('/images/icon_dropdown.svg')",
     backgroundPosition: "right .7em top 50%, 0 0",
     backgroundSize: "1.5em auto, 100%",
+    ":focus": {
+      outline: "none",
+    },
   },
 };

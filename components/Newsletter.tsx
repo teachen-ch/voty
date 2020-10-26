@@ -76,7 +76,7 @@ export function SelectField({
 }): ReactElement {
   return (
     <>
-      <Label htmlFor={id}>{label}</Label>
+      <Label htmlFor={id}>{label}:</Label>
       <Select name={id} id={id} sx={{ width: "100%" }}>
         {children}
       </Select>

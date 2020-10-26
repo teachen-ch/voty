@@ -5,7 +5,7 @@ export const Footer: React.FC<{ color: string | string[] }> = ({ color }) => (
   <Flex
     as="footer"
     pt={6}
-    pb={[200, 200, 3, 3]}
+    pb={3}
     textAlign="center"
     flexDirection="column"
     fontSize={1}

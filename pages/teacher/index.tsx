@@ -4,7 +4,6 @@ import { Heading, Button, Text } from "rebass";
 import { Teams, CreateTeamForm } from "components/Teams";
 import { useState, ReactElement } from "react";
 import { useRouter } from "next/router";
-import Link from "next/link";
 import { SelectSchool } from "components/Schools";
 
 export default function Teacher(): ReactElement {
@@ -30,9 +29,7 @@ export default function Teacher(): ReactElement {
   return (
     <LoggedInPage heading="Startseite für Lehrpersonen">
       <Text>Willkommen {user && user.name}</Text>
-      <Link href="/teacher/profile">
-        <Button variant="text">Profil bearbeiten</Button>
-      </Link>
+
       <Heading as="h3">Deine Klassen auf voty.ch</Heading>
       <Teams
         where={{ teacher: { id: { equals: user?.id } } }}

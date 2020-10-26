@@ -1,4 +1,4 @@
-import { Page } from "components/Page";
+import { AppPage } from "components/Page";
 import { Heading, Text, Box, Flex, Link as A } from "rebass";
 import { Grid } from "theme-ui";
 import Link from "next/link";
@@ -11,9 +11,9 @@ import { ReadMore } from "components/ReadMore";
 export default function Abstimmung(): ReactElement {
   const [user, setUser] = useState<SessionUser | undefined>(undefined);
   return (
-    <Page heading="Jugendliche stimmen ab – Jetzt Schulklasse anmelden">
+    <AppPage heading="Jugendliche stimmen ab – Jetzt Schulklasse anmelden">
       <Text textAlign="left">
-        <Text mt={3}>
+        <Text mt={4}>
           <img
             src="/images/voty_module_2.svg"
             alt="Bundeshaus"
@@ -35,9 +35,14 @@ export default function Abstimmung(): ReactElement {
           <b>
             «Konzern/Unternehmens
             <wbr />
-            verantwortungs-Initiative»
+            verantwortungsinitiative»
           </b>{" "}
-          und die <b>«Kriegsgeschäfte/Finanzierungsverbots-Initiative»</b>{" "}
+          und die{" "}
+          <b>
+            «Kriegsgeschäfte / Finanzierungs
+            <wbr />
+            verbotsinitiative»
+          </b>{" "}
           abstimmt, sind das Themen, zu denen auch Jugendliche eine Meinung
           haben. Wir möchten mit mindestens 50 Schulklassen eine Abstimmung
           durchführen und dazu brauchen wir Ihre Hilfe:
@@ -45,7 +50,7 @@ export default function Abstimmung(): ReactElement {
         <Flex my={4} alignItems="center" flexDirection="column" fontSize={3}>
           <Flex my={2}>
             <Text px={3} textAlign="center">
-              ✅
+              <IconCheckWhite />
             </Text>
             <Text maxWidth="600px">
               Ja, ich unterrichte politische Bildung in meiner Klasse und nehme
@@ -54,11 +59,11 @@ export default function Abstimmung(): ReactElement {
           </Flex>
           <Flex my={2}>
             <Text px={3} textAlign="center">
-              ✅
+              <IconCheckWhite />
             </Text>
             <Text maxWidth="600px">
               Ich nehme mir im November Zeit, um die Vorlagen mit den
-              Schüler*innen zu diskutieren (z.B. mit Material von{" "}
+              Schüler*innen zu diskutieren (z. B. mit Material von{" "}
               <A
                 href="https://www.easyvote.ch/de/school/"
                 rel="noreferrer"
@@ -71,7 +76,7 @@ export default function Abstimmung(): ReactElement {
           </Flex>
           <Flex my={2}>
             <Text px={3} textAlign="center">
-              ✅
+              <IconCheckWhite />
             </Text>
             <Text maxWidth="600px">
               Ich führe die Abstimmung mit meiner Klasse online durch und
@@ -82,7 +87,7 @@ export default function Abstimmung(): ReactElement {
         {!user ? (
           <>
             <Heading as="h2">
-              Interessiert? Melden sie jetzt ihre Klasse jetzt an
+              Interessiert? Melden Sie jetzt ihre Klasse jetzt an
             </Heading>
             <CreateUserForm
               noFocus
@@ -125,7 +130,7 @@ export default function Abstimmung(): ReactElement {
       <ReadMore title="Fragen und Antworten" color="secondary">
         <FAQ />
       </ReadMore>
-    </Page>
+    </AppPage>
   );
 }
 
@@ -140,12 +145,12 @@ export const FAQ: React.FC = () => (
       Informatiker*innen gegründet wurde. Das Projekt wird unterstützt durch den
       prototypefund.opendata.ch.
     </Text>
-    <Heading as="h3">Wie funktioniert die Online – Abstimmung?</Heading>
+    <Heading as="h3">Wie funktioniert die Onlineabstimmung?</Heading>
     <Text>
       Auf unserer Website können Lehrpersonen mit ihren Klassen die Abstimmung
-      auf Laptops, iPads oder Smartphones durchführen. Wir stellen sicher, das
-      nur registrierte Klassen mitmachen können, dass jede Person nur einmal
-      abstimmen kann und dass sämtliche Stimmabgaben anonym bleiben.
+      auf Laptops, Tablets oder Smartphones durchführen. Wir stellen sicher,
+      dass nur registrierte Klassen mitmachen können, dass jede Person nur
+      einmal abstimmen kann und dass sämtliche Stimmabgaben anonym bleiben.
     </Text>
     <Heading as="h3">
       Wie wird die Anonymität und der Datenschutz sichergestellt?
@@ -177,7 +182,7 @@ export const FAQ: React.FC = () => (
         Claude Longchamps
       </a>{" "}
       sicherstellen, dass unser Vorgehen wissenschaftlich kompetent begleitet
-      wird. Je diverser unsere Test-Klassen sind (Kantone, Altersstufen,
+      wird. Je diverser unsere Testklassen sind (Kantone, Altersstufen,
       Schultypen), desto solider wird die Aussagekraft der Resultate.
     </Text>
     <Heading as="h3">Macht auch die Romandie und das Tessin mit?</Heading>
@@ -193,7 +198,7 @@ export const FAQ: React.FC = () => (
       Ich habe keine Frage, aber eine kritische Anmerkung!
     </Heading>
     <Text>
-      Wir sind auf Ihr Feedback angewiesen. Bitte nehmen sie mit uns{" "}
+      Wir sind auf Ihr Feedback angewiesen. Bitte nehmen Sie mit uns{" "}
       <Link href="/kontakt">
         <a>Kontakt</a>
       </Link>{" "}
@@ -300,4 +305,12 @@ const TypeBar: React.FC<{ types: Record<string, number> }> = ({ types }) => (
       ))}
     </Flex>
   </Box>
+);
+
+export const IconCheckWhite: React.FC = () => (
+  <img
+    src="/images/icon_yes.svg"
+    height="25px"
+    style={{ filter: "brightness(100)" }}
+  />
 );

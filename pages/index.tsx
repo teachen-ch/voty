@@ -28,7 +28,7 @@ export default function Home(): React.ReactElement {
         <img
           src="/images/voty_logo.svg"
           alt="voty.ch"
-          style={{ width: "426px", maxWidth: "85%", margin: "0 auto" }}
+          style={{ width: "426px", maxWidth: "70%", margin: "0 auto" }}
         />
         <Flex flexDirection="row" justifyContent="center">
           <Module
@@ -45,8 +45,8 @@ export default function Home(): React.ReactElement {
               as="h1"
               my={0}
               pt={3}
-              pb={4}
-              fontSize={[3, 3, "34px", "40px"]}
+              pb={[3, 4, 4]}
+              fontSize={[3, 4, "34px", "40px"]}
               textAlign="center"
               color="primary"
             >
@@ -61,7 +61,7 @@ export default function Home(): React.ReactElement {
               <img src="images/voty_module_2.svg" alt="Abstimmen" width="70%" />
               <Heading
                 as="h3"
-                py={3}
+                py={[2, 2, 3]}
                 my={0}
                 textAlign="center"
                 fontSize={[4, 4, 5]}
@@ -88,7 +88,7 @@ export default function Home(): React.ReactElement {
             </Button>
           </Link>
 
-          <Heading as="h2" fontSize={["30px", "30px", 5]}>
+          <Heading as="h2" fontSize={["30px", "30px", 5]} mt={[4, 4, 5]}>
             Jugendliche stimmen ab – ein Experiment
           </Heading>
           <Text fontWeight="semi" lineHeight="1.5em" fontSize="18px" mb={5}>
@@ -130,9 +130,11 @@ export default function Home(): React.ReactElement {
           </Flex>
         </Box>
 
-        <Banner href="/abstimmung">
-          Jetzt mitmachen: Jugendliche stimmen ab!
-        </Banner>
+        <Box sx={{ display: ["none", "none", "block"] }}>
+          <Banner href="/abstimmung">
+            Jetzt mitmachen: Jugendliche stimmen ab!
+          </Banner>
+        </Box>
         <Footer color="black" />
       </Container>
     </>
@@ -142,7 +144,7 @@ export default function Home(): React.ReactElement {
 const Module: React.FC<{ title: string; image: string }> = (props) => {
   const img = useRef<HTMLImageElement>(null);
   return (
-    <Box sx={{ display: ["none", "none", "block"] }}>
+    <Box sx={{ display: ["none", "none", "block"], cursor: "pointer" }}>
       <Flex alignItems="center" flexDirection="column" px={5}>
         <div className="flip-container">
           <div className="flipper">

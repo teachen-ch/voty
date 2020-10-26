@@ -9,7 +9,7 @@ import { FlexProps } from "rebass";
 import { Role } from "graphql/types";
 import { Footer } from "components/Footer";
 import { TopBar } from "./TopBar";
-// import IconClose from "../public/images/icon_close.svg";
+import IconClose from "../public/images/icon_close.svg";
 
 export const Page: React.FC<{
   children?: React.ReactNode;
@@ -17,7 +17,7 @@ export const Page: React.FC<{
   bgImages?: string[];
 }> = ({ heading, bgImages, children }) => {
   return (
-    <AppPage heading={heading} bgImages={bgImages} light>
+    <AppPage heading={heading} bgImages={bgImages}>
       {children}
     </AppPage>
   );
@@ -44,10 +44,13 @@ export const AppPage: React.FC<{
         </Head>
         <Box
           as="main"
-          bg="rgba(163,175,181,.75)"
           px={[3, 3, 4]}
           py="25px"
-          sx={{ minWidth: "min(100%, 800px)", borderRadius: [0, 0, 5] }}
+          sx={{
+            minWidth: "min(100%, 800px)",
+            borderRadius: [0, 0, 5],
+            backgroundColor: "rgba(163,175,181,0.3)",
+          }}
           maxWidth="800px"
           textAlign={["center", "center", "left"]}
         >
@@ -58,17 +61,21 @@ export const AppPage: React.FC<{
             fontWeight="normal"
             sx={{ borderBottom: "2px solid white" }}
           >
-            {props.heading}
-            {/* <Flex justifyContent="space-between">
+            <Flex justifyContent="space-between">
+              {props.heading}
               {props.onClose && (
                 <A
                   onClick={props.onClose}
-                  sx={{ position: "relative", right: 0 }}
+                  sx={{
+                    position: "relative",
+                    right: 0,
+                    display: ["none", "none", "block"],
+                  }}
                 >
                   <IconClose />
                 </A>
               )}
-              </Flex>*/}
+            </Flex>
           </Heading>
           {props.children}
         </Box>

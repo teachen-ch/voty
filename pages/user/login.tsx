@@ -37,16 +37,24 @@ export const EMAIL_VERIFICATION = gql`
   mutation emailVerification($email: String!, $purpose: String!) {
     emailVerification(email: $email, purpose: $purpose) {
       token # this is not really need, just a placeholder
+      user {
+        ...LoginFields
+      }
     }
   }
+  ${CheckLogin.fragments.LoginFields}
 `;
 
 export const CHANGE_PASSWORD = gql`
   mutation changePassword($password: String!) {
     changePassword(password: $password) {
       token # this is not really need, just a placeholder
+      user {
+        ...LoginFields
+      }
     }
   }
+  ${CheckLogin.fragments.LoginFields}
 `;
 
 export const CHECK_VERIFICATION = gql`
@@ -83,7 +91,7 @@ export default function Login(): ReactElement {
       <AppPage heading="Anmelden" onClose={() => void router.push("/")}>
         <Text mb={3}>
           Hier kannst Du dich mit Deiner Schul-Emailadresse anmelden, wenn Du
-          bereits ein Benutzer-Konto bei voty.ch hast.
+          bereits ein Benutzerkonto bei voty.ch hast.
         </Text>
         <LoginForm />
       </AppPage>
@@ -348,7 +356,7 @@ function RequestReset({ onCancel }: { email: string; onCancel: () => void }) {
           },
           submit: {
             type: "submit",
-            label: mailSent ? "Login" : "Email verschicken",
+            label: mailSent ? "Email verschickt!" : "Email verschicken",
           },
         }}
       >
@@ -363,8 +371,8 @@ function RequestReset({ onCancel }: { email: string; onCancel: () => void }) {
         <ErrorBox error={error} sx={{ gridColumn: [0, 0, 2] }} />
         {mailSent && (
           <Text sx={{ gridColumn: [0, 0, 2] }}>
-            Falls ein Benutzer-Konto unter dieser E-Mail existiert, haben wir
-            Dir ein Email geschickt
+            Falls ein Benutzerkonto unter dieser E-Mail existiert, haben wir Dir
+            ein Email geschickt
           </Text>
         )}
       </QForm>
@@ -374,6 +382,8 @@ function RequestReset({ onCancel }: { email: string; onCancel: () => void }) {
 
 function PasswordResetForm() {
   const user = useUser();
+  const setUser = useSetUser();
+  const setAccessToken = useSetAccessToken();
   const [password, setPassword] = useState("");
   const [password2, setPassword2] = useState("");
   const [error, setError] = useState("");
@@ -381,7 +391,12 @@ function PasswordResetForm() {
   const router = useRouter();
 
   const [doChangePassword] = useMutation(CHANGE_PASSWORD, {
-    onCompleted() {
+    onCompleted({ changePassword }) {
+      if (changePassword && changePassword.token) {
+        console.log(changePassword.user);
+        setUser(changePassword.user);
+        setAccessToken(changePassword.token);
+      }
       setSuccess(true);
     },
     onError() {
@@ -409,8 +424,8 @@ function PasswordResetForm() {
   return (
     <>
       <Heading as="h2">Passwort ändern</Heading>
-      <Grid gap={2} columns={[0, 0, "1fr 3fr"]}>
-        <Label>Neues Passwort:</Label>
+      <Grid gap={2} columns={[0, 0, "2fr 3fr"]}>
+        <Label alignSelf="center">Neues Passwort:</Label>
         <Input
           autoFocus
           autoCapitalize="none"
@@ -421,7 +436,7 @@ function PasswordResetForm() {
             setPassword(event.currentTarget.value)
           }
         />
-        <Label>Password wiederholen:</Label>
+        <Label alignSelf="center">Password wiederholen:</Label>
         <Input
           value={password2}
           name="password2"

@@ -4,8 +4,15 @@ import {
   BallotWhereInput,
   useBallotsQuery,
   BallotFieldsFragment,
+  TeamTeacherFieldsFragment,
+  useAddBallotRunMutation,
+  useRemoveBallotRunMutation,
+  useGetBallotRunsQuery,
 } from "graphql/types";
 import { formatFromTo } from "../util/date";
+import { useRouter } from "next/router";
+import { find } from "lodash";
+import Link from "next/link";
 
 const BallotFields = gql`
   fragment BallotFields on Ballot {
@@ -241,4 +248,80 @@ export const getBallotStatus = (ballot: BallotFieldsFragment): string => {
   if (new Date(ballot.start) > now) return BallotStatus.Not_Started;
   if (new Date(ballot.end) < now) return BallotStatus.Ended;
   else return BallotStatus.Started;
+};
+
+export const SelectBallots: React.FC<{ team: TeamTeacherFieldsFragment }> = ({
+  team,
+}) => {
+  const router = useRouter();
+  const [doAddBallotRun] = useAddBallotRunMutation();
+  const [doRemoveBallotRun] = useRemoveBallotRunMutation();
+
+  const ballotRunsQuery = useGetBallotRunsQuery({
+    variables: { teamId: String(team?.id) },
+    skip: !team,
+  });
+  const ballotRuns = ballotRunsQuery.data?.getBallotRuns;
+
+  const ballotsQuery = useBallotsQuery({
+    variables: { where: { scope: BallotScope.National } },
+  });
+
+  const ballots = ballotsQuery.data?.ballots;
+
+  function detailBallot(ballot: BallotFieldsFragment) {
+    void router.push("/ballots/[id]", `/ballots/${ballot.id}`);
+  }
+
+  async function addBallot(ballotId: string, teamId: string) {
+    await doAddBallotRun({
+      variables: { ballotId, teamId },
+      refetchQueries: ["getBallotRuns"],
+    });
+    window.scrollTo(0, 0);
+  }
+
+  async function removeBallot(ballotRunId: string) {
+    await doRemoveBallotRun({
+      variables: { ballotRunId },
+      refetchQueries: ["getBallotRuns"],
+    });
+  }
+
+  if (!ballots) return <Text>Laden...</Text>;
+
+  return (
+    <>
+      <table id="ballots">
+        <tbody>
+          {ballots.map((ballot) => (
+            <tr key={ballot.id}>
+              <td>{ballot.title}</td>
+              <td>{ballot.end}</td>
+              <td>
+                {find(ballotRuns, { ballot: { id: ballot.id } })
+                  ? "ausgewählt"
+                  : "–"}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </>
+  );
+};
+
+export const PanelCode: React.FC<{
+  team: TeamTeacherFieldsFragment;
+  hasRuns: boolean;
+}> = ({ team, hasRuns }) => {
+  if (!team?.code || !hasRuns) return null;
+  return (
+    <Text id="livepanel">
+      Seite für Live-Abstimmungen:{" "}
+      <Link href="/panel/[code]/present" as={`/panel/${team.code}/present`}>
+        <Button variant="secondary">Code: {team.code}</Button>
+      </Link>
+    </Text>
+  );
 };

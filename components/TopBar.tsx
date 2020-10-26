@@ -5,6 +5,7 @@ import IconLogin from "../public/images/icon_login.svg";
 import IconAccount from "../public/images/icon_account.svg";
 import IconUp from "../public/images/icon_up.svg";
 import IconDown from "../public/images/icon_down.svg";
+import IconList from "../public/images/icon_list.svg";
 import { useUser, SessionUser } from "state/user";
 import { useState, useEffect } from "react";
 import { Role } from "graphql/types";
@@ -91,20 +92,34 @@ const RegisterLogin: React.FC = () => {
 const Account: React.FC<{ user: SessionUser }> = ({ user }) => {
   const [open, setOpen] = useState(false);
   return (
-    <Flex flexDirection="column">
-      <A onClick={() => setOpen(!open)}>
-        <Flex
-          alignItems="center"
-          flexDirection="row"
-          justifyContent="flex-end"
-          mr="30px"
-        >
-          <IconAccount />
-          <Text mx={3}>Mein Konto</Text>
-          {open ? <IconUp /> : <IconDown />}
-        </Flex>
-      </A>
-      {open && <AccountMenu user={user} />}
+    <Flex>
+      <Link href={user?.role === Role.Teacher ? "/teacher" : "/student/test"}>
+        <A>
+          <Flex
+            alignItems="center"
+            flexDirection="row"
+            justifyContent="flex-end"
+          >
+            <IconList style={{ marginRight: 8 }} width="30px" />
+            {user?.role === Role.Teacher ? "Meine Klassen" : "Abstimmungen"}
+          </Flex>
+        </A>
+      </Link>
+      <Flex flexDirection="column" width="262px">
+        <A onClick={() => setOpen(!open)}>
+          <Flex
+            alignItems="center"
+            flexDirection="row"
+            justifyContent="flex-end"
+            mr="30px"
+          >
+            <IconAccount />
+            <Text mx={2}>Mein Konto</Text>
+            {open ? <IconUp /> : <IconDown />}
+          </Flex>
+        </A>
+        {open && <AccountMenu user={user} />}
+      </Flex>
     </Flex>
   );
 };
@@ -122,14 +137,6 @@ const AccountMenu: React.FC<{ user: SessionUser }> = ({ user }) => {
       </svg>
       <Box bg="#505050" m={0} width="207px" p={3} sx={{ borderRadius: "card" }}>
         <Text lineHeight="35px">
-          <Link
-            href={user?.role === Role.Teacher ? "/teacher" : "/student/test"}
-          >
-            <A>
-              {user?.role === Role.Teacher ? "Meine Klassen" : "Abstimmungen"}
-            </A>
-          </Link>
-          <br />
           <Link href="/user/profile">
             <A>Profil bearbeiten</A>
           </Link>
