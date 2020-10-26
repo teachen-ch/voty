@@ -37,8 +37,8 @@ export default function Signup(): ReactElement {
       onClose={() => void router.push("/")}
     >
       <Text mb={4}>
-        Hier kannst Du Dir ein eigenes Benutzerkonto erstellen. Bitte benutze
-        die Email-Adresse Deiner Schule.
+        Hier kannst Du Dir ein eigenes Benutzerkonto erstellen. Bitte nutze die
+        Email-Adresse Deiner Schule.
       </Text>
       <CreateUserForm setUser={setUser} />
     </AppPage>
@@ -113,9 +113,9 @@ export function CreateUserForm({
     onCompleted(data) {
       setUser(data.createUser);
     },
-    onError(error) {
-      if (error.message === "ERR_DUPLICATE_EMAIL") {
-        setError("Diese Email ist bereits registriert");
+    onError(err) {
+      setError(err.message);
+      if (err.message === "ERR_DUPLICATE_EMAIL") {
         setShowLogin(true);
       }
     },

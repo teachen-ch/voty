@@ -13,6 +13,7 @@ import { BigButton, BigGray } from "components/BigButton";
 import { ErrorBox } from "components/Form";
 import { getBrowserCookie } from "util/cookies";
 import { isBrowser } from "util/isBrowser";
+import { tr } from "util/translate";
 
 export default function PanelBallots(): ReactElement {
   const router = useRouter();
@@ -78,15 +79,7 @@ const VoteCode: React.FC<{
       setSuccess(true);
     },
     onError(err) {
-      // TODO: Replace with translation solution once ready
-      const messages: Record<string, string> = {
-        ERR_BALLOT_NOT_STARTED: "Diese Abstimmung ist noch nicht gestartet",
-        ERR_BALLOT_ENDED: "Diese Abstimmung ist bereits beendet",
-        ERR_BALLOTCODE_WRONG: "Ungültiger Abstimmungscode",
-        ERR_ALREADY_VOTED: "Du hast bereits über diese Vorlage abgestimmt",
-        ERR_VOTECODE_FAILED: "Datenbank-Fehler",
-      };
-      setError(messages[err.message] || err.message);
+      setError(tr(err.message));
     },
   });
 

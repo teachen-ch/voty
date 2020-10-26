@@ -101,7 +101,7 @@ export function LoginForm(): ReactElement {
   const router = useRouter();
   const setUser = useSetUser();
   const setAccessToken = useSetAccessToken();
-  const [doLogin, resultLogin] = useLoginMutation({
+  const [doLogin] = useLoginMutation({
     onCompleted(data) {
       if (data.login && data.login.token) {
         setUser(data.login.user);
@@ -109,10 +109,7 @@ export function LoginForm(): ReactElement {
       }
     },
     onError(error) {
-      if (error.message === "ERR_USER_PASSWORD") {
-        return setError("Email oder Passwort passen leider nicht zueinander…");
-      } else if (error.message === "ERR_EMAIL_NOT_VERIFIED") {
-        console.error(error, resultLogin.data);
+      if (error.message === "ERR_EMAIL_NOT_VERIFIED") {
         return setEmailError(email);
       } else {
         return setError(error.message);
@@ -157,6 +154,7 @@ export function LoginForm(): ReactElement {
         my={3}
         sx={{ gridColumn: [0, 0, 2] }}
         justifyContent="space-between"
+        flexWrap="wrap"
       >
         <Button
           onClick={() => setRequestReset(email ? email : "")}
@@ -176,7 +174,7 @@ function VerificationForm({ email }: { email: string }): ReactElement {
   const [mailSent, setMailSent] = useState(false);
   const [error, setError] = useState("");
 
-  const [doVerification] = useMutation(EMAIL_VERIFICATION, {
+  const [doVerification, request] = useMutation(EMAIL_VERIFICATION, {
     onCompleted() {
       setMailSent(true);
     },
@@ -197,10 +195,11 @@ function VerificationForm({ email }: { email: string }): ReactElement {
           doVerification({ variables: { email, purpose: "verification" } })
         }
         my={3}
-        disabled={mailSent}
+        disabled={mailSent || request.loading}
         variant={"text"}
       >
         {mailSent ? "Email verschickt!" : "Nochmals Email schicken"}
+        {request.loading && " – Bitte warten..."}
       </Button>
       <ErrorBox error={error} />
     </>
@@ -364,7 +363,8 @@ function RequestReset({ onCancel }: { email: string; onCancel: () => void }) {
         <ErrorBox error={error} sx={{ gridColumn: [0, 0, 2] }} />
         {mailSent && (
           <Text sx={{ gridColumn: [0, 0, 2] }}>
-            Wir haben Dir ein Email geschickt
+            Falls ein Benutzer-Konto unter dieser E-Mail existiert, haben wir
+            Dir ein Email geschickt
           </Text>
         )}
       </QForm>
