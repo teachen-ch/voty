@@ -246,17 +246,23 @@ export function verifyJWT(token: string): JWTSession | undefined {
 export async function sendVerificationEmail(
   email: string,
   purpose: string,
-  prisma: PrismaClient
+  db: PrismaClient
 ): Promise<ResponseLogin> {
   try {
     const from = process.env.EMAIL;
     if (!from)
       throw new Error("Please define EMAIL env variable (sender-email)");
 
+    const user = await db.user.findOne({ where: { email } });
+    if (!user) {
+      logger.info(`Email not found, not sending: ${email}`);
+      return { token: "MAYBE..." };
+    }
+
     const site = `voty${
       process.env.NODE_ENV !== "production" ? process.env.NODE_ENV : ""
     }`;
-    const token = await createVerificationToken(prisma, email);
+    const token = await createVerificationToken(db, email);
     const url = `${process.env.BASE_URL}user/login?t=${token}&p=${purpose}`;
     const subjects: Record<string, string> = {
       verification: "voty: Bitte Email bestätigen",
@@ -269,7 +275,7 @@ export async function sendVerificationEmail(
 
     await sendMail(from, email, subject, purpose, conf);
     logger.info("Sending verification email for new account: " + email);
-    return { token: "SENT..." };
+    return { token: "MAYBE..." };
   } catch (err) {
     logger.error("Error sending verification email", err);
     throw Error("ERR_SEND_EMAIL_VERIFICATION");
