@@ -1,7 +1,7 @@
 import { Flex, Box, Text, Link as A } from "rebass";
 import Link from "next/link";
 
-export const Footer: React.FC<{ color: string }> = ({ color }) => (
+export const Footer: React.FC<{ color: string | string[] }> = ({ color }) => (
   <Flex
     as="footer"
     pt={6}

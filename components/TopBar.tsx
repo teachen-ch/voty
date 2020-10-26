@@ -9,7 +9,7 @@ import { useUser, SessionUser } from "state/user";
 import { useState, useEffect } from "react";
 import { Role } from "graphql/types";
 
-export const TopBar: React.FC<{ showLogo?: boolean }> = (props) => {
+export const TopBar: React.FC<{ hideLogo?: boolean }> = (props) => {
   const user = useUser();
   const [loaded, setLoaded] = useState(false);
 
@@ -22,14 +22,14 @@ export const TopBar: React.FC<{ showLogo?: boolean }> = (props) => {
 
   return (
     <Flex
-      bg="#505050"
+      bg={["inherit", "inherit", "#505050"]}
       height="70px"
       width="100%"
       justifyContent="center"
       color="white"
       fontSize={3}
       px={[3, 3, 5, 0]}
-      sx={{ position: "fixed", top: 0 }}
+      sx={{ position: ["absolute", "absolute", "fixed"], top: 0, zIndex: 10 }}
     >
       <Flex
         alignItems="flex-start"
@@ -39,7 +39,7 @@ export const TopBar: React.FC<{ showLogo?: boolean }> = (props) => {
         flex={1}
       >
         <Box>
-          {props.showLogo && (
+          {!props.hideLogo && (
             <Link href="/">
               <A>
                 <img
@@ -145,6 +145,11 @@ const AccountMenu: React.FC<{ user: SessionUser }> = ({ user }) => {
 
 const MobileBurger: React.FC<{ user: SessionUser }> = ({ user }) => {
   const [open, setOpen] = useState(false);
+  const burgerIcon = {
+    height: "1.4em",
+    verticalAlign: "sub",
+    marginLeft: "20px",
+  };
   return (
     <Flex>
       <A onClick={() => setOpen(!open)}>
@@ -178,22 +183,32 @@ const MobileBurger: React.FC<{ user: SessionUser }> = ({ user }) => {
               </A>
             </Text>
             <Text px={4} lineHeight="44px" fontWeight="semi">
+              <Link href="/">
+                <A>Startseite</A>
+              </Link>
+              <hr />
               {!user ? (
                 <nav>
                   <Link href="/user/login">
-                    <A>Anmelden</A>
+                    <A>
+                      Anmelden
+                      <IconLogin style={burgerIcon} />
+                    </A>
                   </Link>
                   <br />
                   <Link href="/user/signup">
                     <A>Registrieren</A>
                   </Link>
                   <br />
-                  <br />
                 </nav>
               ) : (
                 <nav>
                   <Link href="/user/login">
-                    <A>Startseite</A>
+                    <A>
+                      {user.role === Role.Teacher
+                        ? "Meine Klassen"
+                        : "Abstimmungen"}
+                    </A>
                   </Link>
                   <br />
                   <Link href="/user/profile">
@@ -206,6 +221,14 @@ const MobileBurger: React.FC<{ user: SessionUser }> = ({ user }) => {
                   <br />
                 </nav>
               )}
+              <hr />
+              <Link href="/newsletter">
+                <A>Newsletter</A>
+              </Link>
+              <br />
+              <Link href="/impressum">
+                <A>Impressum</A>
+              </Link>
             </Text>
           </Box>
         </>

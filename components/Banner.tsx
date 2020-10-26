@@ -27,6 +27,7 @@ export const Banner: React.FC<BannerProps> = ({ href, children }) => {
       sx={{
         top: [null, null, 40],
         left: [null, null, -95],
+        zIndex: 20,
         bottom: [-18, -18, "inherit", "inherit"],
         right: [-97, -97, "inherit", "inherit"],
         position: "fixed",

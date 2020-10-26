@@ -1,5 +1,5 @@
 import { AppPage, LoggedInPage, ErrorPage } from "components/Page";
-import { Text, Box, Button, Card, Flex, Link as A } from "rebass";
+import { Text, Box, Button, Card, Flex, Heading, Link as A } from "rebass";
 import { useRouter } from "next/router";
 import { useUser } from "state/user";
 import { formatFromTo } from "util/date";
@@ -13,6 +13,7 @@ import { BigGray } from "components/BigButton";
 
 export default function BallotPage(): ReactElement {
   const [success, setSuccess] = useState(false);
+  const [votyNow, setVotyNow] = useState(false);
   const router = useRouter();
   const user = useUser();
   const id = String(router.query.id);
@@ -58,6 +59,34 @@ export default function BallotPage(): ReactElement {
         <Box textAlign="center">
           <img src="/images/voty_success.svg" />
         </Box>
+        <Button
+          variant="secondary"
+          mt={4}
+          onClick={() => void router.push("/student/test")}
+        >
+          Zu den Abstimmungen
+        </Button>
+      </LoggedInPage>
+    );
+  }
+
+  if (votyNow) {
+    return (
+      <LoggedInPage heading="Und jetzt Du!">
+        <Heading mt={0}>Jetzt bist du dran! Wie stimmst Du ab?</Heading>
+        <img src="/images/voty_now.svg" />
+        <VotyNow
+          ballot={ballot}
+          onSuccess={() => {
+            window.scrollTo(0, 0);
+            setSuccess(true);
+          }}
+        />
+        <Text>
+          <Button mt={4} variant="text" onClick={() => setVotyNow(false)}>
+            Abbrechen
+          </Button>
+        </Text>
       </LoggedInPage>
     );
   }
@@ -90,16 +119,23 @@ export default function BallotPage(): ReactElement {
         <Text textAlign="center">
           <img width={150} src="/images/easyvote.png" />
         </Text>
-        <div dangerouslySetInnerHTML={parseMarkdownInner(ballot.body)} />
-        <Box my={4}>
-          <VotyNow
-            ballot={ballot}
-            onSuccess={() => {
-              window.scrollTo(0, 0);
-              setSuccess(true);
-            }}
-          />
-        </Box>
+        <div
+          dangerouslySetInnerHTML={parseMarkdownInner(ballot.body)}
+          style={{ textAlign: "left" }}
+        />
+        <Heading>
+          <hr />
+          Alles klar? Dann ab zur Abstimmung!
+        </Heading>
+        <Button
+          onClick={() => {
+            window.scrollTo(0, 0);
+            setVotyNow(true);
+          }}
+          variant="secondary"
+        >
+          Zur Abstimmung
+        </Button>
       </Card>
     </LoggedInPage>
   );

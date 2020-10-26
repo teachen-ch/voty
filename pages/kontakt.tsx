@@ -1,6 +1,7 @@
 import { Page } from "components/Page";
 import { Text, Button } from "rebass";
 import { ReactElement } from "react";
+import Link from "next/link";
 
 export default function Kontakt(): ReactElement {
   function sendMail() {
@@ -18,11 +19,13 @@ export default function Kontakt(): ReactElement {
       </Text>
 
       <Text mt={5}>
-        Möchtet ihr regelmässig über voty.ch informiert werden
-        <br /> (ca. 2-3 mal pro Semester):
+        Möchtet ihr regelmässig über voty.ch informiert werden (ca. 2-3 mal pro
+        Semester):
       </Text>
       <Text my={4}>
-        <Button onClick={sendMail}>Newsletter anmelden</Button>
+        <Link href="/newsletter">
+          <Button>Newsletter anmelden</Button>
+        </Link>
       </Text>
     </Page>
   );

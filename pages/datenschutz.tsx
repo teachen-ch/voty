@@ -11,7 +11,7 @@ export default function Datenschutz(): ReactElement {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Heading as="h2">Einleitung</Heading>
-      <Text fontWeight="semi">
+      <Text fontWeight="semi" fontSize={[2, 2, 3]}>
         Datenschutz und Sicherheit ist für uns zentral. Wir betreiben ein
         Angebot für Schülerinnen und Schüler und bieten die Möglichkeit der
         politischen Meinungsäusserung auf unserer Plattform. Deshalb setzen wir
@@ -23,20 +23,20 @@ export default function Datenschutz(): ReactElement {
         Abstimmungen sichtbar zu machen.
       </Text>
 
-      <Text fontSize="0.8em">
+      <Text fontSize={[2, 2, 2]} textAlign="left">
         <Heading as="h2">
           Was für personenbezogenene Daten wir speichern (ohne Konto)
         </Heading>
         <Text>
           Wenn Sie auf diese Webseite ohne ein voty.ch-Konto zugreifen, werden
-          automatisch die üblichen technischen Informationen (z.B. Art des
-          Webbrowsers, Betriebssystem, IP-Adresse) erfasst und im Server-Logfile
-          gespeichert. Ebenso werden diese Daten für unsere{" "}
+          automatisch technische Informationen (z.B. Art des Webbrowsers,
+          Betriebssystem, IP-Adresse) erfasst und im Server-Logfile gespeichert.
+          Ebenso werden diese Daten für unsere{" "}
           <A href="#analytics">Web-Analytics</A> verwendet. Dies dient der
-          Sicherstellung eines problemlosen Verbindungsaufbaus der Website und
-          dient uns zur Optimierung und Wartung unserer Website. Informationen
-          dieser Art werden lediglich statistisch ausgewertet, um unseren
-          Internetauftritt und die dahinterstehende Technik zu optimieren.
+          Sicherstellung eines problemlosen Verbindungsaufbaus, zur Optimierung
+          und Wartung unserer Website. Informationen dieser Art werden lediglich
+          statistisch nicht personenbezogen ausgewertet, um unseren
+          Internetauftritt und die dahinterstehende Technik zu verbessern.
         </Text>
         <Heading as="h2">
           Was für personenbezogenene Daten wir speichern (mit Konto)

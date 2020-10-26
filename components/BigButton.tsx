@@ -10,7 +10,8 @@ export const BigButton: React.FC<
   <Button
     mr={2}
     py={4}
-    bg="white"
+    mt={2}
+    bg="white !important"
     flex="1"
     disabled={!onClick}
     onClick={onClick}

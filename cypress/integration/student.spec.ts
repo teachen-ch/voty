@@ -6,7 +6,7 @@ describe("Test Teacher Startpage", () => {
   it("asks student to fill in profile", () => {
     cy.login("student@teachen.ch", "teachen");
     cy.visit("/student");
-    cy.contains("Bitte ergänze Deine Angaben");
+    cy.contains("Bitte ergänze hier noch Deine Angaben");
     cy.findByLabelText("Vorname:").clear().type("Student One");
     cy.findByLabelText("Jahrgang:").select("2004");
     cy.contains("männlich").click();

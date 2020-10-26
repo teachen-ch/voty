@@ -199,7 +199,7 @@ export const Ballot: React.FC<{
   ballot,
   children,
   buttonText,
-  buttonColor = "primary",
+  buttonColor = "",
   onButton,
   onDetail,
 }) => {
@@ -215,18 +215,17 @@ export const Ballot: React.FC<{
           {formatFromTo(ballot.start, ballot.end)}
         </Text>
         {children}
+        {buttonText && (
+          <Button
+            onClick={() => onButton && onButton(ballot)}
+            bg={buttonColor}
+            variant="secondary"
+            width="100%"
+          >
+            {buttonText}
+          </Button>
+        )}
       </Card>
-      {buttonText && (
-        <Button
-          onClick={() => onButton && onButton(ballot)}
-          bg={buttonColor}
-          variant="primary"
-          width="100%"
-          mb={4}
-        >
-          {buttonText}
-        </Button>
-      )}
     </div>
   );
 };

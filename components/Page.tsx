@@ -9,78 +9,81 @@ import { FlexProps } from "rebass";
 import { Role } from "graphql/types";
 import { Footer } from "components/Footer";
 import { TopBar } from "./TopBar";
-import IconClose from "../public/images/icon_close.svg";
+// import IconClose from "../public/images/icon_close.svg";
 
 export const Page: React.FC<{
   children?: React.ReactNode;
   heading?: string;
-  bgImage?: string;
-}> = ({ heading, bgImage, children }) => {
+  bgImages?: string[];
+}> = ({ heading, bgImages, children }) => {
   return (
-    <AppPage heading={heading} bgImage={bgImage} light>
+    <AppPage heading={heading} bgImages={bgImages} light>
       {children}
     </AppPage>
   );
 };
 
 export const AppPage: React.FC<{
-  bgImage?: string;
+  bgImages?: string[];
   heading?: string;
   light?: boolean;
   onClose?: () => void;
-}> = (props) => (
-  <>
-    <TopBar showLogo />
-    <Container
-      bgImage={props.bgImage}
-      pt={[0, 0, 20, 145]}
-      mx={["-8px", "-16px", 0, 0]}
-      light={props.light}
-      color="white"
-    >
-      <Head>
-        <title>voty.ch – {props.heading}</title>
-      </Head>
-      <Box
-        as="main"
-        bg="silver"
-        px="40px"
-        py="25px"
-        sx={{ minWidth: "min(100%, 800px)", borderRadius: 5 }}
-        maxWidth="800px"
-      >
-        <Heading
-          mt={0}
-          as="h1"
-          fontSize={[4, 5, "50px"]}
-          fontWeight="normal"
-          sx={{ borderBottom: "2px solid white" }}
+}> = (props) => {
+  const bgImages = props.bgImages || [
+    "voty_bg_mobile_dark.svg",
+    "voty_bg_mobile_dark.svg",
+    props.light ? "voty_bg_1.svg" : "voty_bg_1_dark.svg",
+  ];
+  return (
+    <>
+      <Background bgImages={bgImages} />
+      <TopBar />
+      <Container pt={[0, 0, 20, 145]} color="white">
+        <Head>
+          <title>voty.ch – {props.heading}</title>
+        </Head>
+        <Box
+          as="main"
+          bg="rgba(163,175,181,.75)"
+          px={[3, 3, 4]}
+          py="25px"
+          sx={{ minWidth: "min(100%, 800px)", borderRadius: [0, 0, 5] }}
+          maxWidth="800px"
+          textAlign={["center", "center", "left"]}
         >
-          <Flex justifyContent="space-between">
+          <Heading
+            mt={0}
+            as="h1"
+            fontSize={[5, 5, "34px", "50px"]}
+            fontWeight="normal"
+            sx={{ borderBottom: "2px solid white" }}
+          >
             {props.heading}
-            {props.onClose && (
-              <A
-                onClick={props.onClose}
-                sx={{ position: "relative", right: 0 }}
-              >
-                <IconClose />
-              </A>
-            )}
-          </Flex>
-        </Heading>
-        {props.children}
-      </Box>
-      <Footer color={props.light ? "black" : "white"} />
-    </Container>
-  </>
-);
+            {/* <Flex justifyContent="space-between">
+              {props.onClose && (
+                <A
+                  onClick={props.onClose}
+                  sx={{ position: "relative", right: 0 }}
+                >
+                  <IconClose />
+                </A>
+              )}
+              </Flex>*/}
+          </Heading>
+          {props.children}
+        </Box>
+        <Footer color={props.light ? ["white", "white", "black"] : "white"} />
+      </Container>
+    </>
+  );
+};
 
 export const LoggedInPage: React.FC<{
   role?: Role;
   children?: ReactNode;
   heading?: string;
-  bgImage?: string;
-}> = ({ role, children, heading, bgImage }) => {
+  bgImages?: string[];
+}> = ({ role, children, heading, bgImages }) => {
   const user = useUser();
   const [loading, setLoading] = useState(true);
   const allowed = role
@@ -91,7 +94,7 @@ export const LoggedInPage: React.FC<{
     return <AppPage heading={heading}>{children}</AppPage>;
   } else {
     return (
-      <AppPage heading={heading} bgImage={bgImage}>
+      <AppPage heading={heading} bgImages={bgImages}>
         <CheckLogin setLoading={setLoading} />
         {!loading && (
           <>
@@ -145,35 +148,20 @@ export const LoggedInHeader: React.FC<{
   </Flex>
 );
 
-export const Container: React.FC<
-  FlexProps & { bgImage?: string; light?: boolean }
-> = (props) => {
-  const darken = props.light
-    ? ""
-    : "linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), ";
-  const bgImage = props.bgImage || "voty_bg_1.svg";
+export const Container: React.FC<FlexProps> = (props) => {
   return (
-    <Flex
-      mt={70}
-      px={[2, 3, 3, 4]}
-      justifyContent="center"
-      sx={{
-        backgroundImage: `${darken}url('/images/${bgImage}')`,
-        backgroundAttachment: "fixed",
-        backgroundPositionY: 44,
-        backgroundPositionX: "center",
-      }}
-      {...props}
-    >
-      <Flex
-        alignItems="center"
-        flexDirection="column"
-        flex={1}
-        maxWidth={["100%", "100%", "100%", "1160px"]}
-      >
-        {props.children}
+    <>
+      <Flex mt={70} px={[0, 0, 3, 4]} justifyContent="center" {...props}>
+        <Flex
+          alignItems="center"
+          flexDirection="column"
+          flex={1}
+          maxWidth={["100%", "100%", "100%", "1160px"]}
+        >
+          {props.children}
+        </Flex>
       </Flex>
-    </Flex>
+    </>
   );
 };
 
@@ -189,3 +177,23 @@ export const LoadingPage: React.FC = (props) => (
     <Text>{props.children}</Text>
   </Page>
 );
+
+export const Background: React.FC<{ bgImages: string[] }> = (props) => {
+  const bgImagesUrl = props.bgImages.map((img) => `url("/images/${img}")`);
+  return (
+    <Box
+      sx={{
+        position: "fixed",
+        top: 0,
+        zIndex: -1,
+        width: "100%",
+        height: "100%",
+        backgroundImage: bgImagesUrl,
+        backgroundAttachment: "fixed",
+        backgroundPositionY: 0,
+        backgroundSize: "100%",
+        backgroundPositionX: "center",
+      }}
+    />
+  );
+};

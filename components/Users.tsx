@@ -7,7 +7,7 @@ import {
   Role,
 } from "graphql/types";
 import { ReactElement, useState } from "react";
-import { Link, Button, Text } from "rebass";
+import { Link, Box, Button, Text } from "rebass";
 import { Label, Input as RebassInput, Select } from "@rebass/forms";
 import { SessionUser, useSetUser } from "state/user";
 import { yup, ErrorBox } from "./Form";
@@ -206,7 +206,7 @@ export const ProfileEdit: React.FC<{
                 </Field>
                 <FieldError name="year" />
                 <label htmlFor="gender">Geschlecht: </label>
-                <div id="gender">
+                <Box id="gender" textAlign="left">
                   <Grid columns="1fr 2fr" gap={0}>
                     <label>
                       <Field type="radio" name="gender" value={Gender.Female} />{" "}
@@ -237,7 +237,7 @@ export const ProfileEdit: React.FC<{
                       nicht angeben
                     </label>
                   </Grid>
-                </div>
+                </Box>
                 <FieldError name="gender" />
               </>
             )}
@@ -247,7 +247,7 @@ export const ProfileEdit: React.FC<{
             </Button>
             <ErrorBox error={error} my={4} />
 
-            <Text fontSize={1} sx={{ gridColumn: [0, 0, 2] }}>
+            <Text fontSize={1} textAlign="left" sx={{ gridColumn: [0, 0, 2] }}>
               <i>[TODO-Legal-Text]</i>
             </Text>
           </Grid>
@@ -299,8 +299,12 @@ export const ShowField: React.FC<{
 }> = ({ label, value }) => {
   return (
     <>
-      <Text my={2}>{label}</Text>
-      <Text my={2}>{value || "–"}</Text>
+      <Text my={2} textAlign="left">
+        {label}
+      </Text>
+      <Text my={2} textAlign="left">
+        {value || "–"}
+      </Text>
     </>
   );
 };

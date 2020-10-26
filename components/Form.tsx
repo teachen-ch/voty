@@ -19,6 +19,7 @@ import * as yup from "yup";
 import React, { useMemo } from "react";
 import { omit } from "lodash";
 import { MutationFunction } from "@apollo/client";
+import { tr } from "util/translate";
 
 export { Formik, Form, yup, Grid };
 
@@ -291,6 +292,7 @@ export const ErrorBox: React.FC<ErrorBoxProps> = ({ error, ...props }) => {
     <Box
       pl={3}
       py={2}
+      textAlign="left"
       sx={{
         gridColumn: [0, 0, 2],
         borderLeftColor: "primary",
@@ -301,7 +303,7 @@ export const ErrorBox: React.FC<ErrorBoxProps> = ({ error, ...props }) => {
     >
       <Text>
         <b>Fehler: </b>
-        {error}
+        {tr(error)}
       </Text>
     </Box>
   );

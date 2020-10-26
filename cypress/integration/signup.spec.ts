@@ -1,3 +1,5 @@
+import { tr } from "../../util/translate";
+
 describe("Test Signup Page", () => {
   before(() => {
     cy.task("prismaLoader", "testdb.yml");
@@ -11,7 +13,7 @@ describe("Test Signup Page", () => {
     cy.findByLabelText("Passwort:").type("Password2007");
     cy.findByLabelText("Ich bin:").select("Lehrer*in");
     cy.get("button").contains("Konto erstellen").click();
-    cy.contains("Diese Email ist bereits registriert");
+    cy.contains(tr("ERR_DUPLICATE_EMAIL"));
   });
 
   it("Does not submit without correct email", () => {

@@ -78,7 +78,7 @@ const BallotRunListing: React.FC<{ ballotRun: BallotRunFieldsFragment }> = ({
     buttonAction = startStopBallot;
   }
   if (status === BallotStatus.Ended) {
-    buttonText = "Abstimmung ist bereits beendet";
+    buttonText = "Abstimmung bereits beendet";
   }
 
   async function startStopBallot() {

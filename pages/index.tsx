@@ -1,11 +1,11 @@
 import Head from "next/head";
 import { Flex, Heading, Box, Text, Button } from "rebass";
-import { Container } from "components/Page";
+import { Container, Background } from "components/Page";
 import { Banner } from "components/Banner";
-import { TopBar } from "components/TopBar";
 import { Footer } from "components/Footer";
 import { ReadMore } from "components/ReadMore";
 import { FAQ } from "./abstimmung";
+import { TopBar } from "components/TopBar";
 import Link from "next/link";
 import { useRef } from "react";
 
@@ -16,9 +16,15 @@ export default function Home(): React.ReactElement {
         <title>voty.ch – Demokratie an die Schule</title>
       </Head>
 
-      <TopBar />
-
-      <Container as="main" pt="49px" color="black" light>
+      <Background
+        bgImages={[
+          "voty_bg_mobile_1.svg",
+          "voty_bg_mobile_1.svg",
+          "voty_bg_1.svg",
+        ]}
+      />
+      <TopBar hideLogo={true} />
+      <Container as="main" pt={[2, 2, 49]} px={[3, 3, 0]} color="black">
         <img
           src="/images/voty_logo.svg"
           alt="voty.ch"
@@ -40,7 +46,7 @@ export default function Home(): React.ReactElement {
               my={0}
               pt={3}
               pb={4}
-              fontSize={[5, 5, "34px", "40px"]}
+              fontSize={[3, 3, "34px", "40px"]}
               textAlign="center"
               color="primary"
             >
@@ -53,7 +59,13 @@ export default function Home(): React.ReactElement {
               justifyContent="space-between"
             >
               <img src="images/voty_module_2.svg" alt="Abstimmen" width="70%" />
-              <Heading as="h3" py={3} my={0} textAlign="center" fontSize={[5]}>
+              <Heading
+                as="h3"
+                py={3}
+                my={0}
+                textAlign="center"
+                fontSize={[4, 4, 5]}
+              >
                 Demokratie testen
               </Heading>
             </Flex>
@@ -71,15 +83,15 @@ export default function Home(): React.ReactElement {
 
         <Box maxWidth="800px" width="100%" textAlign="center">
           <Link href="/abstimmung">
-            <Button fontSize={[4, 4, 5, 5]} width="100%" p={3} mt={[2, 2, 4]}>
+            <Button fontSize={[3, 3, 5, 5]} width="100%" p={3} mt={[2, 2, 4]}>
               Jetzt Schulklasse anmelden!
             </Button>
           </Link>
 
-          <Heading as="h2" fontSize={5}>
+          <Heading as="h2" fontSize={["30px", "30px", 5]}>
             Jugendliche stimmen ab – ein Experiment
           </Heading>
-          <Text fontWeight="bold" lineHeight="1.5em" fontSize="18px" mb={5}>
+          <Text fontWeight="semi" lineHeight="1.5em" fontSize="18px" mb={5}>
             <p>
               Wie motivieren wir Jugendliche für unsere Demokratie? Wir möchten
               gemeinsam mit engagierten Lehrpersonen ein Experiment starten und
@@ -100,14 +112,18 @@ export default function Home(): React.ReactElement {
           <ReadMore title="Fragen und Antworten">
             <FAQ />
           </ReadMore>
-          <Flex justifyContent="space-between" mt={3}>
+          <Flex
+            justifyContent="space-between"
+            mt={3}
+            flexWrap={["wrap", "wrap", "nowrap", "nowrap"]}
+          >
             <Link href="/newsletter">
-              <Button variant="secondary" width="100%" mr={3}>
+              <Button variant="secondary" width="100%" mr={[0, 0, 3]} mb={3}>
                 Newsletter abonnieren
               </Button>
             </Link>
             <Link href="/abstimmung">
-              <Button variant="secondary" width="100%">
+              <Button variant="secondary" width="100%" mb={3}>
                 Schulklasse anmelden?
               </Button>
             </Link>

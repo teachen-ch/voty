@@ -54,7 +54,7 @@ export const BallotResults: React.FC<{
 
   return (
     <div className="results">
-      <Grid columns="1fr 1fr">
+      <Grid columns={[0, 0, "1fr 1fr"]}>
         <Flex justifyItems="center" flex={1} justifySelf="center">
           <Box
             height={200}
@@ -76,16 +76,18 @@ export const BallotResults: React.FC<{
             />
           </Box>
         </Flex>
-        <Grid columns="2fr 3fr" gap={2}>
-          <Text>Ja:</Text>
-          <Text>{votes(results.yes)}</Text>
-          <Text>Nein:</Text>
-          <Text>{votes(results.no)}</Text>
-          <Text>Enthalten:</Text>
-          <Text>{votes(results.abs)}</Text>
-          <Text>Total:</Text>
-          <Text>{results.total} Stimmen</Text>
-        </Grid>
+        <Box textAlign="left" mb={2}>
+          <Grid columns="2fr 3fr" gap={2}>
+            <Text>Ja:</Text>
+            <Text>{votes(results.yes)}</Text>
+            <Text>Nein:</Text>
+            <Text>{votes(results.no)}</Text>
+            <Text>Enthalten:</Text>
+            <Text>{votes(results.abs)}</Text>
+            <Text>Total:</Text>
+            <Text>{results.total} Stimmen</Text>
+          </Grid>
+        </Box>
       </Grid>
     </div>
   );

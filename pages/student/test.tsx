@@ -51,7 +51,7 @@ const ShowBallots: React.FC<{ user: SessionUser }> = ({ user }) => {
           <Ballot
             key={run.id}
             ballot={run.ballot}
-            buttonText="Abstimmen"
+            buttonText="Informieren und abstimmen"
             onButton={detailBallot}
             onDetail={detailBallot}
           />

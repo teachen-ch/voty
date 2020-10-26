@@ -13,7 +13,7 @@ export default {
     highlight: "#dee4e7",
     muted: "#dee4e7",
     lightgray: "#dee4e7",
-    silver: "#A3AFB5",
+    silver: "rgba(163,175,181,75)",
     gray: "#5a5a5a",
     success: "#258f17",
     green: "#258f17",
@@ -81,7 +81,7 @@ export default {
       fontFamily: "body",
       fontWeight: "body",
       lineHeight: "body",
-      fontSize: 4,
+      fontSize: [2, 2, 4],
       table: {
         width: "100%",
       },
@@ -107,7 +107,7 @@ export default {
       "button:disabled": {
         cursor: "inherit",
         bg: "muted",
-        color: "white",
+        color: "gray",
       },
       a: {
         cursor: "pointer",
@@ -115,6 +115,9 @@ export default {
         ":visited": {
           color: "inherit",
         },
+      },
+      label: {
+        textAlign: "left",
       },
     },
     img: {
@@ -144,7 +147,7 @@ export default {
       fontWeight: "semi",
       color: "white",
       bg: "gray",
-      marginTop: "-11px",
+      marginTop: ["-24px", "-24px, -11px"],
       marginLeft: "-1px",
       p: 1,
       px: 3,
@@ -158,6 +161,8 @@ export default {
       fontWeight: "semi",
       borderRadius: "0px",
       fontSize: [2, 3, 4],
+      minHeight: "50px",
+      width: ["100%", "100%", "auto", "auto"],
     },
     secondary: {
       variant: "buttons.primary",
@@ -181,12 +186,19 @@ export default {
       border: "none",
       textDecoration: "underline",
       cursor: "pointer",
-      textAlign: "left",
+      textAlign: ["center", "center", "left"],
+      width: ["100%", "100%", "auto"],
       fontWeight: "normal",
-      fontSize: [1, 2, 3],
+      fontSize: [2, 2, 3],
       my: 3,
       p: 0,
       m: 0,
+      ":disabled": {
+        textDecoration: "none",
+        cursor: "inherit",
+        bg: "transparent",
+        color: "inherit",
+      },
     },
     inline: {
       variant: "buttons.primary",
@@ -213,13 +225,15 @@ export default {
       fontWeight: "bold",
     },
   },
+  label: { textAlign: "left" },
   input: {
     color: "gray",
     bg: "white",
     border: "none",
     height: 50,
     px: 3,
-    my: 1,
+    mt: [0, 0, 1],
+    mb: [3, 2, 1],
     fontSize: [2, 2, 4, 4],
     "::-webkit-input-placeholder": {
       color: "#CCC",
@@ -232,7 +246,8 @@ export default {
     border: "none",
     height: 50,
     px: 3,
-    my: 1,
+    mt: [0, 0, 1],
+    mb: [3, 2, 1],
     fontSize: [2, 2, 4, 4],
     backgroundRepeat: "no-repeat",
     backgroundImage: "url('/images/icon_dropdown.svg')",
