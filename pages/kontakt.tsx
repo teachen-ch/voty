@@ -15,7 +15,9 @@ export default function Kontakt(): ReactElement {
         Anregungen und Fragen:
       </Text>
       <Text my={4}>
-        <Button onClick={sendMail}>Email schreiben</Button>
+        <Button onClick={sendMail} width={["100%", "100%", "auto"]}>
+          Email schreiben
+        </Button>
       </Text>
 
       <Text mt={5}>
@@ -24,7 +26,7 @@ export default function Kontakt(): ReactElement {
       </Text>
       <Text my={4}>
         <Link href="/newsletter">
-          <Button>Newsletter anmelden</Button>
+          <Button width={["100%", "100%", "auto"]}>Newsletter anmelden</Button>
         </Link>
       </Text>
     </Page>

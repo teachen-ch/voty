@@ -10,7 +10,7 @@ export const Footer: React.FC<{ color: string | string[] }> = ({ color }) => (
     flexDirection="column"
     fontSize={1}
   >
-    <Text width={["100%", "100%", 400]} mx="auto" color={color}>
+    <Text width={["90%", "90%", 400]} mx="auto" color={color}>
       voty.ch ist ein{" "}
       <A
         href="https://github.com/teachen-ch/voty"

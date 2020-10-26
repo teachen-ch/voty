@@ -8,83 +8,89 @@ import { ReactElement } from "react";
 export default function Abstimmung(): ReactElement {
   return (
     <Page heading="Jugendliche stimmen ab – Jetzt Schulklasse anmelden">
-      <Text mt={3}>
-        <img
-          src="/images/voty_module_2.svg"
-          alt="Bundeshaus"
-          style={{
-            float: "right",
-            marginLeft: 30,
-            width: "190px",
-            maxWidth: "30%",
-          }}
-        />
-        Wie motivieren wir Jugendliche für unsere Demokratie? Wir möchten
-        gemeinsam mit engagierten Lehrpersonen ein Experiment starten und im
-        November Abstimmungen für Schüler*innen durchführen. Wir sind überzeugt:
-        Interesse für Politik entsteht dann, wenn diskutiert und mitentschieden
-        wird.
-      </Text>
-      <Text my={4}>
-        Wenn die Schweiz am 29. November über die{" "}
-        <b>«Konzern/Unternehmensverantwortungs-Initiative»</b> und die{" "}
-        <b>«Kriegsgeschäfte/Finanzierungsverbots-Initiative»</b> abstimmt, sind
-        das Themen, zu denen auch Jugendliche eine Meinung haben. Wir möchten
-        mit mindestens 50 Schulklassen eine Abstimmung durchführen und dazu
-        brauchen wir Ihre Hilfe:
-      </Text>
-      <Flex my={4} alignItems="center" flexDirection="column" fontSize={3}>
-        <Flex my={2}>
-          <Text px={3} textAlign="center">
-            ✅
-          </Text>
-          <Text maxWidth="600px">
-            Ja, ich unterrichte politische Bildung in meiner Klasse und nehme
-            auch Bezug auf aktuellen Themen und Abstimmungen
-          </Text>
+      <Text textAlign="left">
+        <Text mt={3}>
+          <img
+            src="/images/voty_module_2.svg"
+            alt="Bundeshaus"
+            style={{
+              float: "right",
+              marginLeft: 30,
+              width: "190px",
+              maxWidth: "30%",
+            }}
+          />
+          Wie motivieren wir Jugendliche für unsere Demokratie? Wir möchten
+          gemeinsam mit engagierten Lehrpersonen ein Experiment starten und im
+          November Abstimmungen für Schüler*innen durchführen. Wir sind
+          überzeugt: Interesse für Politik entsteht dann, wenn diskutiert und
+          mitentschieden wird.
+        </Text>
+        <Text my={4}>
+          Wenn die Schweiz am 29. November über die{" "}
+          <b>
+            «Konzern/Unternehmens
+            <wbr />
+            verantwortungs-Initiative»
+          </b>{" "}
+          und die <b>«Kriegsgeschäfte/Finanzierungsverbots-Initiative»</b>{" "}
+          abstimmt, sind das Themen, zu denen auch Jugendliche eine Meinung
+          haben. Wir möchten mit mindestens 50 Schulklassen eine Abstimmung
+          durchführen und dazu brauchen wir Ihre Hilfe:
+        </Text>
+        <Flex my={4} alignItems="center" flexDirection="column" fontSize={3}>
+          <Flex my={2}>
+            <Text px={3} textAlign="center">
+              ✅
+            </Text>
+            <Text maxWidth="600px">
+              Ja, ich unterrichte politische Bildung in meiner Klasse und nehme
+              auch Bezug auf aktuellen Themen und Abstimmungen
+            </Text>
+          </Flex>
+          <Flex my={2}>
+            <Text px={3} textAlign="center">
+              ✅
+            </Text>
+            <Text maxWidth="600px">
+              Ich nehme mir im November Zeit, um die Vorlagen mit den
+              Schüler*innen zu diskutieren (z.B. mit Material von{" "}
+              <A
+                href="https://www.easyvote.ch/de/school/"
+                rel="noreferrer"
+                variant="underline"
+              >
+                easyvote.ch
+              </A>{" "}
+              )
+            </Text>
+          </Flex>
+          <Flex my={2}>
+            <Text px={3} textAlign="center">
+              ✅
+            </Text>
+            <Text maxWidth="600px">
+              Ich führe die Abstimmung mit meiner Klasse online durch und
+              bespreche im Nachgang das Resultat
+            </Text>
+          </Flex>
         </Flex>
-        <Flex my={2}>
-          <Text px={3} textAlign="center">
-            ✅
-          </Text>
-          <Text maxWidth="600px">
-            Ich nehme mir im November Zeit, um die Vorlagen mit den
-            Schüler*innen zu diskutieren (z.B. mit Material von{" "}
-            <A
-              href="https://www.easyvote.ch/de/school/"
-              rel="noreferrer"
-              variant="underline"
-            >
-              easyvote.ch
-            </A>{" "}
-            )
-          </Text>
-        </Flex>
-        <Flex my={2}>
-          <Text px={3} textAlign="center">
-            ✅
-          </Text>
-          <Text maxWidth="600px">
-            Ich führe die Abstimmung mit meiner Klasse online durch und
-            bespreche im Nachgang das Resultat
-          </Text>
-        </Flex>
-      </Flex>
-      <Heading as="h2">
-        Interessiert? Melden sie jetzt ihre Klasse jetzt an
-      </Heading>
-      <Signup />
-      <Text fontSize={2} mt={3}>
-        Wir sind uns bewusst, dass die Zeit bis Ende November in der Planung
-        knapp ist. Aber wenn wir es gemeinsam schaffen, genügend Klassen zu
-        motivieren, dann hat das Ergebnis der Abstimmung auch eine statistische
-        Signifikanz und repräsentiert die Meinung der Jugend zu relevanten
-        Themen. Herzlichen Dank für Ihre Mithilfe!
+        <Heading as="h2">
+          Interessiert? Melden sie jetzt ihre Klasse jetzt an
+        </Heading>
+        <Signup />
+        <Text fontSize={2} mt={3}>
+          Wir sind uns bewusst, dass die Zeit bis Ende November in der Planung
+          knapp ist. Aber wenn wir es gemeinsam schaffen, genügend Klassen zu
+          motivieren, dann hat das Ergebnis der Abstimmung auch eine
+          statistische Signifikanz und repräsentiert die Meinung der Jugend zu
+          relevanten Themen. Herzlichen Dank für Ihre Mithilfe!
+        </Text>
       </Text>
 
       <Box mt={5} mb={5} maxWidth="600px" mx={"auto"}>
         <Text
-          fontSize={4}
+          fontSize={[3, 3, 4]}
           fontWeight="semi"
           textAlign="center"
           sx={{ lineHeight: "1.5" }}

@@ -162,7 +162,6 @@ export default {
       borderRadius: "0px",
       fontSize: [2, 3, 4],
       minHeight: "50px",
-      width: ["100%", "100%", "auto", "auto"],
     },
     secondary: {
       variant: "buttons.primary",
