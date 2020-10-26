@@ -99,6 +99,7 @@ export function Success({ user }: { user?: SessionUser }): ReactElement {
 
 export function CreateUserForm({
   setUser,
+  noFocus,
   onSubmit,
   omitRole,
   defaultRole,
@@ -107,6 +108,7 @@ export function CreateUserForm({
   onSubmit?: (values: Record<string, string | number>) => void;
   omitRole?: boolean;
   defaultRole?: string;
+  noFocus?: boolean;
 }): ReactElement {
   const router = useRouter();
   const [error, setError] = useState("");
@@ -133,7 +135,7 @@ export function CreateUserForm({
       onSubmit={onSubmit}
       fields={{
         name: {
-          focus: true,
+          focus: !noFocus,
           label: "Vorname:",
           required: true,
           validate: yup.string().min(3, "Dein Vorname ist etwas kurz"),

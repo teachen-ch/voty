@@ -1,6 +1,5 @@
-import { Field } from "components/Newsletter";
 import { Page } from "components/Page";
-import { Heading, Text, Box, Flex, Button, Link as A } from "rebass";
+import { Heading, Text, Box, Flex, Link as A } from "rebass";
 import { Grid } from "theme-ui";
 import Link from "next/link";
 import { ReactElement, useState } from "react";
@@ -86,6 +85,7 @@ export default function Abstimmung(): ReactElement {
               Interessiert? Melden sie jetzt ihre Klasse jetzt an
             </Heading>
             <CreateUserForm
+              noFocus
               setUser={setUser}
               omitRole
               defaultRole={Role.Teacher}
