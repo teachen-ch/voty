@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg width="31px" height="31px" viewBox="0 0 31 31" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-        <rect fill="#FFFFFF" x="11" y="-2.27373675e-13" width="9" height="31"/>
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0" y="0" width="31" height="31" viewBox="0, 0, 31, 31">
+  <g>
+    <path d="M31,11 L31,20 L0,20 L0,11 z" fill="#FFFFFF" />
+  </g>
 </svg>

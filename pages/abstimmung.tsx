@@ -3,9 +3,14 @@ import { Page } from "components/Page";
 import { Heading, Text, Box, Flex, Button, Link as A } from "rebass";
 import { Grid } from "theme-ui";
 import Link from "next/link";
-import { ReactElement } from "react";
+import { ReactElement, useState } from "react";
+import { CreateUserForm, Success } from "pages/user/signup";
+import { Role } from "graphql/types";
+import { SessionUser } from "state/user";
+import { ReadMore } from "components/ReadMore";
 
 export default function Abstimmung(): ReactElement {
+  const [user, setUser] = useState<SessionUser | undefined>(undefined);
   return (
     <Page heading="Jugendliche stimmen ab – Jetzt Schulklasse anmelden">
       <Text textAlign="left">
@@ -75,10 +80,23 @@ export default function Abstimmung(): ReactElement {
             </Text>
           </Flex>
         </Flex>
-        <Heading as="h2">
-          Interessiert? Melden sie jetzt ihre Klasse jetzt an
-        </Heading>
-        <Signup />
+        {!user ? (
+          <>
+            <Heading as="h2">
+              Interessiert? Melden sie jetzt ihre Klasse jetzt an
+            </Heading>
+            <CreateUserForm
+              setUser={setUser}
+              omitRole
+              defaultRole={Role.Teacher}
+            />
+          </>
+        ) : (
+          <>
+            <Heading as="h2">Die Anmeldung hat geklappt!</Heading>
+            <Success user={user} />
+          </>
+        )}
         <Text fontSize={2} mt={3}>
           Wir sind uns bewusst, dass die Zeit bis Ende November in der Planung
           knapp ist. Aber wenn wir es gemeinsam schaffen, genügend Klassen zu
@@ -103,17 +121,19 @@ export default function Abstimmung(): ReactElement {
 
       <Stats />
 
-      <Heading mt={70} as="h2" fontSize={[4, 5, 6, 6]} textAlign="center">
-        Fragen und Antworten
-      </Heading>
-      <FAQ />
+      <Box my={5} />
+      <ReadMore title="Fragen und Antworten" color="secondary">
+        <FAQ />
+      </ReadMore>
     </Page>
   );
 }
 
 export const FAQ: React.FC = () => (
   <Box className="faq" textAlign="left" fontSize={2}>
-    <Heading as="h3">Wer steht hinter voty.ch?</Heading>
+    <Heading as="h3" mt={3}>
+      Wer steht hinter voty.ch?
+    </Heading>
     <Text>
       voty.ch ist ein Projekt des Vereins «Teachen!», welcher während des
       Corona-Lockdowns von engagierten Eltern, Lehrpersonen und
@@ -182,32 +202,19 @@ export const FAQ: React.FC = () => (
   </Box>
 );
 
-const Signup: React.FC = () => (
-  <form action="https://newsletter.teachen.ch/subscribe" method="POST">
-    <input type="hidden" name="subform" value="yes" />
-    <input type="hidden" name="list" value="OBApcqKWRIftOg4d892voU2A" />
-    <Grid gap={3} pb={4} columns={[0, 0, "80px 2fr 1fr"]}>
-      <Field id="email" label="Email" />
-      <Button type="submit" name="submit" variant="primary">
-        Abschicken
-      </Button>
-    </Grid>
-  </form>
-);
-
 const Stats: React.FC = () => (
   <Box fontSize={2}>
     <Heading mt={0}>Aktueller Stand</Heading>
     <Grid columns={[0, 0, "160px auto"]}>
       <label>Anzahl Klassen:</label>
-      <ClassBar classes={11} total={50} />
+      <ClassBar classes={12} total={50} />
 
       <label>Diversität Kantone:</label>
       <CantonsBar cantons="BE, BS, LU, SG, ZH, " diversity={25} />
 
       <label>Verteilung Typus:</label>
       <TypeBar
-        types={{ Berufsschulen: 0.2, "Sekundarstufe I": 0.53, Gymnasien: 0.27 }}
+        types={{ Berufsschulen: 0.2, "Sekundarstufe I": 0.56, Gymnasien: 0.24 }}
       />
     </Grid>
   </Box>

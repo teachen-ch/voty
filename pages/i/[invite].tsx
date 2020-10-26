@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { Page } from "../../components/Page";
+import { AppPage } from "../../components/Page";
 import { gql } from "@apollo/client";
 import { ErrorBox } from "../../components/Form";
 import { Heading, Button, Text } from "rebass";
@@ -81,12 +81,12 @@ const Invite: React.FC = () => {
 
   if (teamQuery.error) {
     return (
-      <Page heading="Fehler">
+      <AppPage heading="Fehler">
         Diese Einladung ist nicht gültig. Bitte sprich mit Deiner Lehrperson.
         <br />
         <br />
         <ErrorBox error={teamQuery.error.message} />
-      </Page>
+      </AppPage>
     );
   }
 
@@ -96,11 +96,15 @@ const Invite: React.FC = () => {
     }
 
     if (newUser !== undefined) {
-      return <Success user={newUser} />;
+      return (
+        <AppPage heading="Dein Benutzerkonto ist erstellt">
+          <Success user={newUser} />
+        </AppPage>
+      );
     }
 
     return (
-      <Page heading="Klassen-Einladung">
+      <AppPage heading="Klassen-Einladung">
         <Heading as="h2">
           Einladung für die Klasse «{team.name}» im Schulhaus «
           {team.school?.name}»
@@ -115,10 +119,10 @@ const Invite: React.FC = () => {
           omitRole
           defaultRole="Student"
         />
-      </Page>
+      </AppPage>
     );
   } else {
-    return <Page heading="Klassen-Einladung">Lade Einladung</Page>;
+    return <AppPage heading="Klassen-Einladung">Lade Einladung</AppPage>;
   }
 };
 
@@ -149,14 +153,14 @@ const AcceptInvite: React.FC<AcceptInviteProps> = ({ invite, team }) => {
   });
   if (success) {
     return (
-      <Page heading="Klassen-Einladung">
+      <AppPage heading="Klassen-Einladung">
         <Text my={4}>Du bist angemeldet in der Klasse «{team.name}»</Text>
         <Button onClick={() => router.push("/")}>Weiter geht&apos;s</Button>
-      </Page>
+      </AppPage>
     );
   }
   return (
-    <Page heading="Klassen-Einladung">
+    <AppPage heading="Klassen-Einladung">
       <Text>
         Einladung für Klasse «{team.name}» im Schulhaus «{team.school?.name}»
       </Text>
@@ -164,6 +168,6 @@ const AcceptInvite: React.FC<AcceptInviteProps> = ({ invite, team }) => {
         Einladung annehmen
       </Button>
       <ErrorBox error={error} />
-    </Page>
+    </AppPage>
   );
 };

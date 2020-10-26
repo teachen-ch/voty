@@ -29,7 +29,11 @@ export default function Signup(): ReactElement {
   const [user, setUser] = useState<SessionUser | undefined>(undefined);
   const router = useRouter();
   if (user) {
-    return <Success user={user} />;
+    return (
+      <AppPage heading="Dein Benutzerkonto ist erstellt">
+        <Success user={user} />
+      </AppPage>
+    );
   }
   return (
     <AppPage
@@ -64,34 +68,32 @@ export function Success({ user }: { user?: SessionUser }): ReactElement {
     });
   }
   return (
-    <AppPage heading="Dein Benutzerkonto ist erstellt">
-      <Flex minHeight="450px" flexDirection="column">
-        <Image
-          src="/images/voty_welcome.svg"
-          maxWidth="80%"
-          sx={{ position: "absolute", alignSelf: "center" }}
-        />
-        <Text>
-          Hallo {user?.name}
-          <br />
-          Dein neues Benutzerkonto wurde erstellt und wir haben ein Email an die
-          Adresse «{user?.email}» geschickt. Bitte öffne den Link in diesem
-          Email, um Dich anzumelden.{" "}
-        </Text>
-        <Text my={4}>
-          Solltest Du kein Email von voty.ch in der Inbox Deines Email-Accounts
-          finden, dann schau doch bitte im Spam-Ordner nach.
-        </Text>
-        {!mailSent ? (
-          <Button variant="text" onClick={doResend}>
-            Bestätigungsmail nochmals senden
-          </Button>
-        ) : (
-          "Das Bestätigungsmail wurde nochmals verschickt!"
-        )}
-        <ErrorBox error={error} />
-      </Flex>
-    </AppPage>
+    <Flex flexDirection="column">
+      <Image
+        src="/images/voty_welcome.svg"
+        maxWidth="80%"
+        sx={{ position: "absolute", alignSelf: "center" }}
+      />
+      <Text>
+        Hallo {user?.name}
+        <br />
+        Dein neues Benutzerkonto wurde erstellt und wir haben ein Email an die
+        Adresse «{user?.email}» geschickt. Bitte öffne den Link in diesem Email,
+        um Dich anzumelden.{" "}
+      </Text>
+      <Text my={4}>
+        Solltest Du kein Email von voty.ch in der Inbox Deines Email-Accounts
+        finden, dann schau doch bitte im Spam-Ordner nach.
+      </Text>
+      {!mailSent ? (
+        <Button variant="text" onClick={doResend}>
+          Bestätigungsmail nochmals senden
+        </Button>
+      ) : (
+        "Das Bestätigungsmail wurde nochmals verschickt!"
+      )}
+      <ErrorBox error={error} />
+    </Flex>
   );
 }
 

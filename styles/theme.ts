@@ -225,6 +225,9 @@ export default {
     },
   },
   label: { textAlign: "left" },
+  textarea: {
+    color: "gray",
+  },
   input: {
     color: "gray",
     bg: "white",

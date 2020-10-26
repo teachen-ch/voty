@@ -79,7 +79,7 @@ export default function TeacherTeamPage(): React.ReactElement {
 
   return (
     <LoggedInPage heading={`Klasse: ${team.name}`}>
-      {team.members.length && (
+      {team.members.length > 0 && (
         <Link
           href="/teacher/team/[id]/test"
           as={`/teacher/team/${team.id}/test`}
