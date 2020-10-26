@@ -4,13 +4,14 @@ import Link from "next/link";
 export const Footer: React.FC<{ color: string | string[] }> = ({ color }) => (
   <Flex
     as="footer"
-    pt={6}
+    pt={[5, 5, 6]}
     pb={3}
     textAlign="center"
+    width={["100%", "100%", 400]}
     flexDirection="column"
     fontSize={1}
   >
-    <Text width={["90%", "90%", 400]} mx="auto" color={color}>
+    <Text mx="auto" color={color}>
       voty.ch ist ein{" "}
       <A
         href="https://github.com/teachen-ch/voty"
@@ -34,7 +35,7 @@ export const Footer: React.FC<{ color: string | string[] }> = ({ color }) => (
       PrototypeFund
     </Text>
     <Flex justifyContent="center" flexDirection="column">
-      <Box mt={3} mx="auto">
+      <Box mt={3}>
         {/*<Link href="https://prototypefund.opendata.ch" target="_blank"></Link>*/}
         <img
           src="/images/pf_logo.png"
@@ -42,37 +43,35 @@ export const Footer: React.FC<{ color: string | string[] }> = ({ color }) => (
           style={{ width: "40px" }}
         />
         <hr />
-        <Box as="nav" color={color}>
+        <Flex as="nav" color={color} justifyContent="space-between">
           <Link href="/impressum">
-            <A px={[1, 1, 2, 2]}>Impressum</A>
+            <A>Impressum</A>
           </Link>
-          |
+          {" | "}
           <Link href="/datenschutz">
-            <A px={[1, 1, 2, 2]}>Datenschutz</A>
+            <A>Datenschutz</A>
           </Link>
-          |
+          {" | "}
           <Link href="/kontakt">
-            <A px={[1, 1, 2, 2]}>Kontakt</A>
+            <A>Kontakt</A>
           </Link>
-          |
+          {" | "}
           <A
-            px={[1, 1, 2, 2]}
             href="https://twitter.com/voty_ch"
             target="_blank"
             rel="noreferrer"
           >
             Twitter
           </A>
-          |
+          {" | "}
           <A
-            px={[1, 1, 2, 2]}
             href="https://github.com/teachen-ch/voty"
             target="_blank"
             rel="noreferrer"
           >
             GitHub
           </A>
-        </Box>
+        </Flex>
       </Box>
     </Flex>
   </Flex>
@@ -84,13 +83,13 @@ const AnAbmelden: React.FC = () => {
   if (user) {
     return (
       <Link href="/user/logout">
-        <A px={[1, 1, 2, 2]}>Abmelden</A>
+        <A>Abmelden</A>
       </Link>
     );
   } else
     return (
       <Link href="/user/login">
-        <A px={[1, 1, 2, 2]}>Anmelden</A>
+        <A>Anmelden</A>
       </Link>
     );
 };

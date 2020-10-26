@@ -151,13 +151,13 @@ export const ProfileEdit: React.FC<{
         .string()
         .nullable()
         .required(
-          "Pflichtfeld. Du kannst aber auch «Möchte ich nicht angeben» wählen»"
+          "Pflichtfeld. Du kannst aber auch «möchte ich nicht angeben» wählen»"
         ),
       gender: yup
         .string()
         .nullable()
         .required(
-          "Pflichtfeld. Du kannst aber auch «Möchte ich nicht angeben» wählen»"
+          "Pflichtfeld. Du kannst aber auch «möchte ich nicht angeben» wählen»"
         ),
     });
   }
@@ -202,7 +202,7 @@ export const ProfileEdit: React.FC<{
                   {[...Array(numYears).keys()].map((i) => (
                     <option key={i}>{i + startYear}</option>
                   ))}
-                  <option value={0}>Möchte ich nicht angeben</option>
+                  <option value={0}>möchte ich nicht angeben</option>
                 </Field>
                 <FieldError name="year" />
                 <label htmlFor="gender">Geschlecht: </label>
@@ -232,7 +232,7 @@ export const ProfileEdit: React.FC<{
                           ],
                         }}
                       >
-                        Möchte ich
+                        möchte ich
                       </Text>{" "}
                       nicht angeben
                     </label>

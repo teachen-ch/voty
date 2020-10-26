@@ -6,7 +6,7 @@
 @font-face {
   font-family: "Source Sans Pro";
   font-style: normal;
-  font-display: swap;
+  font-display: fallback;
   font-weight: 400;
   src: local("Source Sans Pro Regular"), local("SourceSansPro-Regular"),
     url("/fonts/source-sans-pro-v14-latin-regular.woff2") format("woff2"),
@@ -18,7 +18,7 @@
   font-family: "Source Sans Pro";
   font-style: normal;
   font-weight: 600;
-  font-display: swap;
+  font-display: fallback;
   src: local("Source Sans Pro SemiBold"), local("SourceSansPro-SemiBold"),
     url("/fonts/source-sans-pro-v14-latin-600.woff2") format("woff2"),
     /* Chrome 26+, Opera 23+, Firefox 39+ */
@@ -29,7 +29,7 @@
   font-family: "Source Sans Pro";
   font-style: normal;
   font-weight: 700;
-  font-display: swap;
+  font-display: fallback;
   src: local("Source Sans Pro Bold"), local("SourceSansPro-Bold"),
     url("/fonts/source-sans-pro-v14-latin-700.woff2") format("woff2"),
     /* Chrome 26+, Opera 23+, Firefox 39+ */

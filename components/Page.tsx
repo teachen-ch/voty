@@ -49,7 +49,7 @@ export const AppPage: React.FC<{
           sx={{
             minWidth: "min(100%, 800px)",
             borderRadius: [0, 0, 5],
-            backgroundColor: "rgba(163,175,181,0.3)",
+            backgroundColor: ["silver_m", "silver_m", "silver"],
           }}
           maxWidth="800px"
           textAlign={["center", "center", "left"]}

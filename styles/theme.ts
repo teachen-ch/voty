@@ -2,7 +2,7 @@
 export default {
   // [ iphone SE / iPhone 6+ / iPad High / Desktop+iPad / Big Screen]
   breakpoints: ["400px", "600px", "1200px", "2000px"],
-  fontSizes: [12, 14, 20, 22, 26, 34, 50, 50, 50],
+  fontSizes: [12, 16, 20, 22, 26, 34, 50, 50, 50],
   colors: {
     text: "#030303",
     black: "#030303",
@@ -13,7 +13,8 @@ export default {
     highlight: "#dee4e7",
     muted: "#dee4e7",
     lightgray: "#dee4e7",
-    silver: "rgba(163,175,181,0.75)",
+    silver: ["rgba(163,175,181, 0.25)"],
+    silver_m: ["rgba(163,175,181, 0.75)"],
     gray: "#5a5a5a",
     success: "#258f17",
     green: "#258f17",
