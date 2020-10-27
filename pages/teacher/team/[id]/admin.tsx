@@ -9,7 +9,7 @@ import { useRouter } from "next/router";
 import _ from "lodash";
 import { SelectBallots } from "components/Ballots";
 import { gql } from "@apollo/client";
-import IconHint from "../../public/images/icon_hint.svg";
+import IconHint from "../../../../public/images/icon_hint.svg";
 import { fragments } from "components/Teams";
 import {
   useTeamTeacherQuery,
@@ -116,7 +116,7 @@ export default function TeacherTeamPage(): React.ReactElement {
       >
         {inviteQuery.loading
           ? "Bitte warten..."
-          : `${matches} Einladungen verschicken`}
+          : `${matches ? matches : ""} Einladungen verschicken`}
       </Button>
       {matches && (
         <>
@@ -129,8 +129,7 @@ export default function TeacherTeamPage(): React.ReactElement {
         </>
       )}
       <Text fontSize={2} sx={{ gridColumn: [0, 0, 2] }} mt={4}>
-        <img
-          src="/images/icon_hint.svg"
+        <IconHint
           height="24px"
           style={{ float: "left", marginRight: 8, verticalAlign: "center" }}
         />

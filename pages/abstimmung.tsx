@@ -26,17 +26,9 @@ export default function Abstimmung(): ReactElement {
           />
           Wie motivieren wir Jugendliche für unsere Demokratie? Wir möchten
           gemeinsam mit engagierten Lehrpersonen ein Experiment starten und im
-          November Abstimmungen für Schüler*innen durchführen. Wir sind
-          überzeugt: Interesse für Politik entsteht dann, wenn diskutiert und
-          mitentschieden wird.
-        </Text>
-        <Text my={4}>
-          Wenn die Schweiz am 29. November über die «Konzern /
-          Unternehmens&shy;verantwortungs&shy;initiative» und die
-          «Kriegsgeschäfte / Finanzierungs&shy;verbots&shy;initiative» abstimmt,
-          sind das Themen, zu denen auch Jugendliche eine Meinung haben. Wir
-          möchten mit mindestens 50 Schulklassen eine Abstimmung durchführen und
-          dazu brauchen wir Ihre Hilfe:
+          November mit mindestens 50 Schulklassen über die beiden nationalen
+          Vorlagen abstimmen. Interesse für Politik entsteht dann, wenn man
+          diskutieren und mitentscheiden kann. Helfen Sie mit!
         </Text>
         <Flex
           my={4}

@@ -59,7 +59,7 @@ export function Users({
           <tr>
             <th>Name</th>
             <th>Email</th>
-            <th style={{ textAlign: "center" }}>Status</th>
+            <th style={{ textAlign: "center", width: "1%" }}>Status</th>
           </tr>
         </thead>
 

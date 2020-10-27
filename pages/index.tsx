@@ -105,23 +105,21 @@ export default function Home(): React.ReactElement {
           <Heading as="h2" fontSize={["30px", "30px", 5]} mt={[4, 4, 5]}>
             Jugendliche stimmen ab – ein Experiment
           </Heading>
-          <Text fontWeight="semi" lineHeight="1.5em" fontSize="18px" mb={5}>
-            <p>
+          <Flex mb={5} justifyContent="space-around">
+            <Text
+              fontWeight="semi"
+              lineHeight="1.5em"
+              fontSize="18px"
+              maxWidth="700px"
+            >
               Wie motivieren wir Jugendliche für unsere Demokratie? Wir möchten
               gemeinsam mit engagierten Lehrpersonen ein Experiment starten und
-              im November mit mindestens 50 Schulklassen Abstimmungen zu den
-              beiden aktuellen Abstimmungsvorlagen
-              «Konzernverantwortungs&shy;initiative» und die
-              «Kriegsgeschäfte&shy;initiative» durchführen. Beide Vorlagen sind
-              Themen, zu denen auch Jugendliche eine Meinung haben.
-            </p>
-
-            <p>
-              Wir sind überzeugt: Interesse für Politik entsteht dann, wenn man
-              diskutieren und mitentscheiden kann. Eine solche Gelegenheit
-              möchten wir schaffen.
-            </p>
-          </Text>
+              im November mit mindestens 50 Schulklassen über die beiden
+              nationalen Vorlagen abstimmen. Interesse für Politik entsteht
+              dann, wenn man diskutieren und mitentscheiden kann. Helfen Sie
+              mit!
+            </Text>
+          </Flex>
 
           <ReadMore title="Fragen und Antworten">
             <FAQ />

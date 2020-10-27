@@ -4,6 +4,7 @@ import { Grid } from "theme-ui";
 import { PieChart } from "react-minimal-pie-chart";
 import { LabelRenderFunction } from "react-minimal-pie-chart/types/commonTypes";
 import { BallotResults as BallotResultsType } from "graphql/types";
+import type { Nullable } from "simplytyped";
 
 export const BallotResults: React.FC<{
   results?: BallotResultsType | null;
@@ -11,7 +12,7 @@ export const BallotResults: React.FC<{
   if (!results) return null;
   if (!results.total) return <Text>Noch keine Stimmen</Text>;
 
-  const votes = (i: number | null | undefined) =>
+  const votes = (i: Nullable<number>) =>
     `${i === 0 ? "–" : i === 1 ? "Eine Stimme" : `${i} Stimmen`}`;
 
   const data = [

@@ -1,5 +1,5 @@
 import { LoggedInPage, AppPage, ErrorPage } from "components/Page";
-import { Text } from "rebass";
+import { Text, Box } from "rebass";
 import { useRouter } from "next/router";
 import {
   useBallotQuery,
@@ -7,6 +7,7 @@ import {
   useGetBallotResultsQuery,
 } from "graphql/types";
 import { BallotResults } from "components/BallotResults";
+import { BallotDetails } from "components/Ballots";
 
 export default function TeacherBallotPage(): React.ReactElement {
   const router = useRouter();
@@ -44,10 +45,17 @@ export default function TeacherBallotPage(): React.ReactElement {
 
   return (
     <LoggedInPage heading={`${ballot.title}`}>
-      <Text mb={4}>
-        Hier sind die aktuellen Resultate für die Klasse «{team?.name}»:
-      </Text>
-      <BallotResults results={results} />
+      {!results?.total ? (
+        ""
+      ) : (
+        <Box my={4}>
+          <Text mb={4}>
+            Hier sind die aktuellen Resultate für die Klasse «{team?.name}»:
+          </Text>
+          <BallotResults results={results} />
+        </Box>
+      )}
+      <BallotDetails ballot={ballot} />
     </LoggedInPage>
   );
 }

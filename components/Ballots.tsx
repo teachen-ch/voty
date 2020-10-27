@@ -1,4 +1,5 @@
-import { gql } from "@apollo/client";
+import { gql, useApolloClient } from "@apollo/client";
+
 import { Heading, Text, Link as A, Button, Card } from "rebass";
 import {
   BallotWhereInput,
@@ -8,12 +9,19 @@ import {
   useAddBallotRunMutation,
   useRemoveBallotRunMutation,
   useGetBallotRunsQuery,
+  BallotResults,
+  BallotQuery,
+  GetBallotResultsQuery,
 } from "graphql/types";
 import { formatFromTo, formatDate } from "../util/date";
 import { useRouter } from "next/router";
 import { find } from "lodash";
 import Link from "next/link";
-import IconResults from "../public/images/icon_results.svg";
+import IconCheckOn from "../public/images/icon_check_on.svg";
+import IconCheckOff from "../public/images/icon_check_off.svg";
+import { MouseEvent } from "react";
+import type { Nullable } from "simplytyped";
+import { parseMarkdownInner } from "util/markdown";
 
 const BallotFields = gql`
   fragment BallotFields on Ballot {
@@ -256,6 +264,7 @@ export const SelectBallots: React.FC<{ team: TeamTeacherFieldsFragment }> = ({
   const router = useRouter();
   const [doAddBallotRun] = useAddBallotRunMutation();
   const [doRemoveBallotRun] = useRemoveBallotRunMutation();
+  const client = useApolloClient();
 
   const ballotRunsQuery = useGetBallotRunsQuery({
     variables: { teamId: String(team?.id) },
@@ -269,26 +278,48 @@ export const SelectBallots: React.FC<{ team: TeamTeacherFieldsFragment }> = ({
 
   const ballots = ballotsQuery.data?.ballots;
 
-  function detailBallot(ballot: BallotFieldsFragment) {
-    void router.push("/ballots/[id]", `/ballots/${ballot.id}`);
-  }
-
-  async function addBallot(ballotId: string, teamId: string) {
-    await doAddBallotRun({
-      variables: { ballotId, teamId },
-      refetchQueries: ["getBallotRuns"],
+  async function getResults(
+    ballotId: string,
+    ballotRunId: string
+  ): Promise<Nullable<BallotResults>> {
+    const query = await client.query<GetBallotResultsQuery>({
+      query: GET_BALLOT_RESULTS,
+      variables: { ballotId, ballotRunId },
     });
-    window.scrollTo(0, 0);
+    return query.data.getBallotResults;
   }
 
-  async function removeBallot(ballotRunId: string) {
-    await doRemoveBallotRun({
-      variables: { ballotRunId },
-      refetchQueries: ["getBallotRuns"],
-    });
+  function detailBallot(ballotId: string) {
+    void router.push(
+      "/teacher/team/[id]/[ballot_id]",
+      `/teacher/team/${team.id}/${ballotId}`
+    );
   }
 
-  if (!ballots) return <Text>Laden...</Text>;
+  async function toggleBallot(ballotId: string, teamId: string, e: MouseEvent) {
+    e.stopPropagation();
+    const run = find(ballotRuns, { ballot: { id: ballotId } });
+    if (run && typeof run == "object") {
+      const results = await getResults(ballotId, run.id);
+      if (results?.total === 0) {
+        await doRemoveBallotRun({
+          variables: { ballotRunId: run.id },
+          refetchQueries: ["getBallotRuns"],
+        });
+      } else {
+        alert(
+          "Diese Abstimmung kann nicht mehr entfernt werden, da bereits Stimmen abgegeben wurden."
+        );
+      }
+    } else {
+      await doAddBallotRun({
+        variables: { ballotId, teamId },
+        refetchQueries: ["getBallotRuns"],
+      });
+    }
+  }
+
+  if (!ballots || ballotRunsQuery.loading) return <Text>Laden...</Text>;
 
   return (
     <>
@@ -297,22 +328,33 @@ export const SelectBallots: React.FC<{ team: TeamTeacherFieldsFragment }> = ({
           <tr>
             <th>Abstimmung</th>
             <th>Deadline</th>
-            <th>Resultate</th>
-            <th>Status</th>
+            <th style={{ width: "1%" }}>Ausgewählt</th>
           </tr>
         </thead>
         <tbody>
           {ballots.map((ballot) => (
-            <tr key={ballot.id}>
-              <td>{ballot.title}</td>
-              <td>{formatDate(ballot.end)}</td>
+            <tr key={ballot.id} onClick={() => detailBallot(ballot.id)}>
               <td>
-                <IconResults sx={{ opacity: 1 }} />
+                <A variant="underline ">{ballot.title}</A>
               </td>
-              <td>
-                {find(ballotRuns, { ballot: { id: ballot.id } })
-                  ? "ausgewählt"
-                  : "–"}
+              <td>{formatDate(ballot.end)}</td>
+              <td
+                style={{ textAlign: "center" }}
+                onClick={(evt) => toggleBallot(ballot.id, team.id, evt)}
+              >
+                {find(ballotRuns, { ballot: { id: ballot.id } }) ? (
+                  <IconCheckOn
+                    width="18px"
+                    height="18px"
+                    style={{ marginTop: 2 }}
+                  />
+                ) : (
+                  <IconCheckOff
+                    width="18px"
+                    height="18px"
+                    style={{ marginTop: 2 }}
+                  />
+                )}
               </td>
             </tr>
           ))}
@@ -321,6 +363,27 @@ export const SelectBallots: React.FC<{ team: TeamTeacherFieldsFragment }> = ({
     </>
   );
 };
+
+export const BallotDetails: React.FC<{
+  ballot: NonNullable<BallotQuery["ballot"]>;
+}> = ({ ballot, children }) => (
+  <Card>
+    <Text fontWeight="bold">{ballot.title}</Text>
+    <Text mt={3}>{ballot.description}</Text>
+    <Text fontSize={2} my={4}>
+      <img src="/images/icon_cal.svg" /> &nbsp; Zeit:{" "}
+      {formatFromTo(ballot.start, ballot.end)}
+    </Text>
+    <Text textAlign="center">
+      <img width={150} src="/images/easyvote.png" />
+    </Text>
+    <div
+      dangerouslySetInnerHTML={parseMarkdownInner(ballot.body)}
+      style={{ textAlign: "left" }}
+    />
+    {children}
+  </Card>
+);
 
 export const PanelCode: React.FC<{
   team: TeamTeacherFieldsFragment;

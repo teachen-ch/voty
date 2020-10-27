@@ -55,10 +55,14 @@ def wait(min):
         sys.stdout.flush()
 
 
-sys.exit(0)
 log = initLogger()
+commitMessage = " ".join(sys.argv[1:]) or input("Commit message: ")
+if not commitMessage:
+    log.error("😠 I don't like empty commit messages.")
+    sys.exit(1)
+
 exec("git add .")
-exec("git commit -m \"%s\"" % (" ".join(sys.argv[1:])))
+exec("git commit -m \"%s\"" % commitMessage)
 exec("git push")
 wait(8)
 exec("yarn run deploy_dev")

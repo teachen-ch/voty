@@ -1,15 +1,14 @@
 import { AppPage, LoggedInPage, ErrorPage } from "components/Page";
-import { Text, Box, Button, Card, Flex, Heading, Link as A } from "rebass";
+import { Text, Box, Button, Flex, Heading, Link as A } from "rebass";
 import { useRouter } from "next/router";
 import { useUser } from "state/user";
-import { formatFromTo } from "util/date";
 import { useBallotQuery, BallotQuery, useVoteMutation } from "graphql/types";
 import { useState, ReactElement } from "react";
 import { ErrorBox } from "components/Form";
 import Info from "components/Info";
 import Link from "next/link";
-import { parseMarkdownInner } from "util/markdown";
 import { BigGray } from "components/BigButton";
+import { BallotDetails } from "components/Ballots";
 
 export default function BallotPage(): ReactElement {
   const [success, setSuccess] = useState(false);
@@ -111,20 +110,7 @@ export default function BallotPage(): ReactElement {
         <A variant="semi">{ballot.title}</A>
       </Box>
 
-      <Card>
-        <Text fontWeight="bold">{ballot.title}</Text>
-        <Text mt={3}>{ballot.description}</Text>
-        <Text fontSize={2} my={4}>
-          <img src="/images/icon_cal.svg" /> &nbsp; Zeit:{" "}
-          {formatFromTo(ballot.start, ballot.end)}
-        </Text>
-        <Text textAlign="center">
-          <img width={150} src="/images/easyvote.png" />
-        </Text>
-        <div
-          dangerouslySetInnerHTML={parseMarkdownInner(ballot.body)}
-          style={{ textAlign: "left" }}
-        />
+      <BallotDetails ballot={ballot}>
         <Heading>
           <hr />
           Alles klar? Dann ab zur Abstimmung!
@@ -137,12 +123,12 @@ export default function BallotPage(): ReactElement {
         >
           Zur Abstimmung
         </Button>
-      </Card>
+      </BallotDetails>
     </LoggedInPage>
   );
 }
 
-const VotyNow: React.FC<{
+export const VotyNow: React.FC<{
   ballot: BallotQuery["ballot"];
   onSuccess: () => void;
 }> = ({ ballot, onSuccess }) => {

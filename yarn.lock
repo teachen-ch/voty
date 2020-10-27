@@ -11593,6 +11593,11 @@ simple-swizzle@^0.2.2:
   dependencies:
     is-arrayish "^0.3.1"
 
+simplytyped@^3.3.0:
+  version "3.3.0"
+  resolved "https://registry.yarnpkg.com/simplytyped/-/simplytyped-3.3.0.tgz#ed46eef05ebb348ca67ca79df759c49130fd7569"
+  integrity sha512-mz4RaNdKTZiaKXgi6P1k/cdsxV3gz+y1Wh2NXHWD40dExktLh4Xx/h6MFakmQWODZHj/2rKe59acacpL74ZhQA==
+
 sisteransi@^1.0.4:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/sisteransi/-/sisteransi-1.0.5.tgz#134d681297756437cc05ca01370d3a7a571075ed"
