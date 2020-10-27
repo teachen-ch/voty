@@ -11,8 +11,8 @@
 
 import os
 import sys
+import select
 import time
-import re
 import logging
 
 
@@ -44,15 +44,25 @@ def exec(cmd):
         log.error("Error while executing last command: %s" % result)
         sys.exit(result)
     took = round((time.time() - start)/60, 1)
-    log.debug("Took: %.1fm" % took)
+    log.debug("Took %.1f minutes" % took)
 
 
 def wait(min):
-    log.debug("Waiting for %d minutes..." % min)
-    for _ in range(min):
-        time.sleep(60)
-        print('.', end='')
-        sys.stdout.flush()
+    log.debug("Waiting for %d minutes... " % min)
+    print("\t\tabort with: c < enter > to cancel")
+    print("\t\t   or with: g < enter > to start deploy")
+    print("[c|g] > ")
+    i, _, _ = select.select([sys.stdin], [], [], 10)
+    if (i):
+        char = sys.stdin.readline().strip().lower()
+        if (char == "c"):
+            log.error("Not starting deployment")
+            sys.exit(0)
+        elif (char == "g"):
+            log.error("Starting deployment now")
+        else:
+            log.error("'%s' is not a valid answer" % char)
+            wait(min)
 
 
 log = initLogger()
@@ -61,12 +71,14 @@ if not commitMessage:
     log.error("😠 I don't like empty commit messages.")
     sys.exit(1)
 
+start = time.time()
 exec("git add .")
 exec("git commit -m \"%s\"" % commitMessage)
 exec("git push")
-wait(8)
+wait(10)
 exec("yarn run deploy_dev")
-log.info("✅ Successfully deployed to dev")
+took = round((time.time() - start)/60, 1)
+log.info("✅ Successfully deployed to dev in %.1f minutes" % took)
 yesno = input("Would you like to push to production as well? (y/N) ")
 if (yesno.lower() == "y"):
     exec("yarn run deploy_prod")
