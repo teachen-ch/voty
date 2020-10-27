@@ -133,11 +133,7 @@ export const SelectSchool: React.FC = () => {
           label="Schule"
           value={`${user.school.name}, ${user.school.city}`}
         />
-        <Button
-          onClick={() => setEdit(true)}
-          sx={{ gridColumn: [0, 0, 2] }}
-          variant="secondary"
-        >
+        <Button onClick={() => setEdit(true)} sx={{ gridColumn: [0, 0, 2] }}>
           Anderes Schulhaus auswählen
         </Button>
       </Grid>

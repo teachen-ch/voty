@@ -20,7 +20,7 @@ export default function Teacher(): ReactElement {
 
   if (user?.school === null) {
     return (
-      <LoggedInPage heading="Startseite für Lehrpersonen">
+      <LoggedInPage heading="Willkommen auf voty.ch">
         <Text mb={3}>
           Wähle zuerst Dein Schulhaus aus oder erfasse ein Neues…
         </Text>
@@ -30,9 +30,9 @@ export default function Teacher(): ReactElement {
   }
 
   return (
-    <LoggedInPage heading="Startseite für Lehrpersonen">
-      <Text>Willkommen {user && user.name}</Text>
-
+    <LoggedInPage heading="Meine Schulklassen">
+      <Text fontWeight="bold">Willkommen {user && user.name}</Text>
+      <Text>Hier siehst Du eine Übersicht Deiner Klassen</Text>
       <Heading as="h3">Deine Klassen auf voty.ch</Heading>
       <Teams
         where={{ teacher: { id: { equals: user?.id } } }}

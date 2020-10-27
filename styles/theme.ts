@@ -158,7 +158,7 @@ export default {
       fontFamily: "body",
       cursor: "pointer",
       color: "white",
-      bg: "primary",
+      bg: "secondary",
       fontWeight: "semi",
       borderRadius: "0px",
       fontSize: [2, 3, 4],

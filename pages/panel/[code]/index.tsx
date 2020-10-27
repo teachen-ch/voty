@@ -93,7 +93,7 @@ const VoteCode: React.FC<{
     return (
       <BigGray>
         Abstimmung noch nicht gestartet{" "}
-        <Button variant="secondary" onClick={() => refetch()} fontSize={2}>
+        <Button onClick={() => refetch()} fontSize={2}>
           Seite Aktualisieren
         </Button>
       </BigGray>

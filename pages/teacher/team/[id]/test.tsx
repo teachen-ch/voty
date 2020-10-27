@@ -113,7 +113,7 @@ const PanelCode: React.FC<{
     <Text id="livepanel">
       Seite für Live-Abstimmungen:{" "}
       <Link href="/panel/[code]/present" as={`/panel/${team.code}/present`}>
-        <Button variant="secondary">Code: {team.code}</Button>
+        <Button>Code: {team.code}</Button>
       </Link>
     </Text>
   );

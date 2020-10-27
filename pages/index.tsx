@@ -90,6 +90,7 @@ export default function Home(): React.ReactElement {
         <Box maxWidth="800px" width="100%" textAlign="center">
           <Link href="/abstimmung">
             <Button
+              bg="primary"
               fontSize={[3, 3, 5, 5]}
               width="100%"
               p={3}
@@ -129,12 +130,12 @@ export default function Home(): React.ReactElement {
             flexWrap={["wrap", "wrap", "nowrap", "nowrap"]}
           >
             <Link href="/newsletter">
-              <Button variant="secondary" width="100%" mr={[0, 0, 3]} mb={3}>
+              <Button width="100%" mr={[0, 0, 3]} mb={3}>
                 Newsletter abonnieren
               </Button>
             </Link>
             <Link href="/abstimmung">
-              <Button variant="secondary" width="100%" mb={3}>
+              <Button width="100%" mb={3}>
                 Schulklasse anmelden?
               </Button>
             </Link>

@@ -111,7 +111,7 @@ const Account: React.FC<{ user: SessionUser }> = ({ user }) => {
             alignItems="center"
             flexDirection="row"
             justifyContent="flex-end"
-            mr="30px"
+            mr={0}
           >
             <IconAccount />
             <Text mx={2}>Mein Konto</Text>
@@ -126,7 +126,7 @@ const Account: React.FC<{ user: SessionUser }> = ({ user }) => {
 
 const AccountMenu: React.FC = () => {
   return (
-    <Box width="207px" mt="22px" ml="30px" sx={{ lineHeight: "16px" }}>
+    <Box width="207px" mt="22px" ml="60px" sx={{ lineHeight: "16px" }}>
       <svg width="207px" height="15px" viewBox="-136 0 207 15" version="1.1">
         <path
           d="M2.95999555,15 L23.9609454,1.71229409 C25.7556788,0.648405241 27.974226,0.593219151 29.8196352,1.5665599 L53.9750193,14.3070506 C54.8378628,14.7621479 55.7986582,15 56.7741645,15 L93,15 L-114,15 L-0.0995490542,15 C0.977073975,15 2.03386354,14.7103124 2.95999555,14.1613164 Z"

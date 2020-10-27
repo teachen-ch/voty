@@ -60,7 +60,6 @@ export default function BallotPage(): ReactElement {
           <img src="/images/voty_success.svg" />
         </Box>
         <Button
-          variant="secondary"
           mt={4}
           width="100%"
           onClick={() => void router.push("/student/test")}
@@ -135,7 +134,6 @@ export default function BallotPage(): ReactElement {
             window.scrollTo(0, 0);
             setVotyNow(true);
           }}
-          variant="secondary"
         >
           Zur Abstimmung
         </Button>

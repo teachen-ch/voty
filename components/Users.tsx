@@ -173,11 +173,7 @@ export const ProfileEdit: React.FC<{
           <ShowField label="Geschlecht" value={getGenderText(user?.gender)} />
         )}
         <ShowField label="Email" value={user?.email} />
-        <Button
-          onClick={() => setEdit(true)}
-          sx={{ gridColumn: [0, 0, 2] }}
-          variant="secondary"
-        >
+        <Button onClick={() => setEdit(true)} sx={{ gridColumn: [0, 0, 2] }}>
           Profil bearbeiten
         </Button>
         <Text fontSize={1} textAlign="left" sx={{ gridColumn: [0, 0, 2] }}>
@@ -255,11 +251,7 @@ export const ProfileEdit: React.FC<{
               </>
             )}
             <ShowField label="Email" value="Kontaktiere uns für Änderungen" />
-            <Button
-              type="submit"
-              sx={{ gridColumn: [0, 0, 2] }}
-              variant="secondary"
-            >
+            <Button type="submit" sx={{ gridColumn: [0, 0, 2] }}>
               Angaben speichern
             </Button>
             <ErrorBox error={error} my={4} />

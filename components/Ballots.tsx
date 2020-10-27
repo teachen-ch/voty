@@ -226,7 +226,6 @@ export const Ballot: React.FC<{
           <Button
             onClick={() => onButton && onButton(ballot)}
             bg={buttonColor}
-            variant="secondary"
             width="100%"
           >
             {buttonText}
@@ -320,7 +319,7 @@ export const PanelCode: React.FC<{
     <Text id="livepanel">
       Seite für Live-Abstimmungen:{" "}
       <Link href="/panel/[code]/present" as={`/panel/${team.code}/present`}>
-        <Button variant="secondary">Code: {team.code}</Button>
+        <Button>Code: {team.code}</Button>
       </Link>
     </Text>
   );
