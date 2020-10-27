@@ -22,6 +22,7 @@ export default function Home(): React.ReactElement {
           "voty_bg_mobile_1.svg",
           "voty_bg_1.svg",
         ]}
+        light
       />
       <TopBar hideLogo={true} />
       <Container as="main" pt={[0, 0, 49]} px={[3, 3, 0]} color="black">
@@ -96,12 +97,10 @@ export default function Home(): React.ReactElement {
               Wie motivieren wir Jugendliche für unsere Demokratie? Wir möchten
               gemeinsam mit engagierten Lehrpersonen ein Experiment starten und
               im November mit mindestens 50 Schulklassen Abstimmungen zu den
-              beiden aktuellen Abstimmungsvorlagen «Konzernverantwortungs
-              <wbr />
-              initiative» und die «Kriegsgeschäfte
-              <wbr />
-              initiative» durchführen. Beide Vorlagen sind Themen, zu denen auch
-              Jugendliche eine Meinung haben.
+              beiden aktuellen Abstimmungsvorlagen
+              «Konzernverantwortungs&shy;initiative» und die
+              «Kriegsgeschäfte&shy;initiative» durchführen. Beide Vorlagen sind
+              Themen, zu denen auch Jugendliche eine Meinung haben.
             </p>
 
             <p>

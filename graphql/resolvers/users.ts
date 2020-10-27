@@ -26,23 +26,28 @@ export const login: FieldResolver<"Mutation", "login"> = async (
   args,
   ctx
 ): Promise<ResponseLogin> => {
-  try {
-    const user = await ctx.db.user.findOne({ where: { email: args.email } });
-    if (!user) throw Error("ERR_USER_PASSWORD"); // generic error, do not say why
-    if (!user.password) throw Error("ERR_PASSWORD_NOT_SET");
-
-    const matches = await bcrypt.compare(args.password, user.password);
-    if (!matches) throw Error("ERR_USER_PASSWORD"); // generic error, do not say why
-
-    if (!user.emailVerified) {
-      throw Error("ERR_EMAIL_NOT_VERIFIED");
-    }
-    // logger.mail("a user logged in... " + user.email);
-    return startJWTSession(user, ctx);
-  } catch (err) {
-    if ("message" in err) logger.error(err.message);
-    throw err;
+  const user = await ctx.db.user.findOne({ where: { email: args.email } });
+  if (!user) {
+    logger.info("Login attempt - User not found", { meta: args.email });
+    throw Error("ERR_USER_PASSWORD"); // generic error, do not say why
   }
+  if (!user.password) {
+    logger.info("Login attempt - Password not set!", { meta: args.email });
+    throw Error("ERR_PASSWORD_NOT_SET");
+  }
+
+  const matches = await bcrypt.compare(args.password, user.password);
+  if (!matches) {
+    logger.info("Login attempt - Passwords don't match", { meta: args.email });
+    throw Error("ERR_USER_PASSWORD"); // generic error, do not say why
+  }
+
+  if (!user.emailVerified) {
+    logger.info("Login attempt - Email not verified", args.email);
+    throw Error("ERR_EMAIL_NOT_VERIFIED");
+  }
+  // logger.mail("a user logged in... " + user.email);
+  return startJWTSession(user, ctx);
 };
 
 function startJWTSession(user: User, ctx: NexusContext): ResponseLogin {
@@ -237,7 +242,7 @@ export function verifyJWT(token: string): JWTSession | undefined {
     if ("user" in result) return result as JWTSession;
     else throw new Error("No user in JWT Session");
   } catch (err) {
-    logger.info("Error verifying token", err.message, token);
+    logger.info("Error verifying token: ", err.message);
     return undefined;
   }
 }
@@ -255,7 +260,7 @@ export async function sendVerificationEmail(
 
     const user = await db.user.findOne({ where: { email } });
     if (!user) {
-      logger.info(`Email not found, not sending: ${email}`);
+      logger.info(`Error sending ${purpose} email to: ${email}`);
       return { token: "MAYBE..." };
     }
 
@@ -274,10 +279,10 @@ export async function sendVerificationEmail(
     const conf = { email: email.replace(/\./g, " ."), url, site };
 
     await sendMail(from, email, subject, purpose, conf);
-    logger.info("Sending verification email for new account: " + email);
+    logger.info(`Sending ${purpose} email to: ${email} `);
     return { token: "MAYBE..." };
   } catch (err) {
-    logger.error("Error sending verification email", err);
+    logger.error(`Error sending ${purpose} email`, err);
     throw Error("ERR_SEND_EMAIL_VERIFICATION");
   }
 }

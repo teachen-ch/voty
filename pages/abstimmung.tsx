@@ -32,17 +32,9 @@ export default function Abstimmung(): ReactElement {
         </Text>
         <Text my={4}>
           Wenn die Schweiz am 29. November über die{" "}
-          <b>
-            «Konzern/Unternehmens
-            <wbr />
-            verantwortungsinitiative»
-          </b>{" "}
-          und die{" "}
-          <b>
-            «Kriegsgeschäfte / Finanzierungs
-            <wbr />
-            verbotsinitiative»
-          </b>{" "}
+          <b>«Konzern / Unternehmens&shy;verantwortungs&shy;initiative»</b> und
+          die{" "}
+          <b>«Kriegsgeschäfte / Finanzierungs&shy;verbots&shy;initiative»</b>{" "}
           abstimmt, sind das Themen, zu denen auch Jugendliche eine Meinung
           haben. Wir möchten mit mindestens 50 Schulklassen eine Abstimmung
           durchführen und dazu brauchen wir Ihre Hilfe:
@@ -296,7 +288,7 @@ const TypeBar: React.FC<{ types: Record<string, number> }> = ({ types }) => (
             textAlign: "center",
             textOverflow: "ellipsis",
             overflow: "hidden",
-            lineHeight: 2.2,
+            lineHeight: 1.9,
             borderRight: ix < 2 ? "3px solid lightgray" : "",
           }}
         >

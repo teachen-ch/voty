@@ -118,13 +118,13 @@ const Account: React.FC<{ user: SessionUser }> = ({ user }) => {
             {open ? <IconUp /> : <IconDown />}
           </Flex>
         </A>
-        {open && <AccountMenu user={user} />}
+        {open && <AccountMenu />}
       </Flex>
     </Flex>
   );
 };
 
-const AccountMenu: React.FC<{ user: SessionUser }> = ({ user }) => {
+const AccountMenu: React.FC = () => {
   return (
     <Box width="207px" mt="22px" ml="30px" sx={{ lineHeight: "16px" }}>
       <svg width="207px" height="15px" viewBox="-136 0 207 15" version="1.1">
@@ -204,7 +204,10 @@ const MobileBurger: React.FC<{ user: SessionUser }> = ({ user }) => {
                   </Link>
                   <br />
                   <Link href="/user/signup">
-                    <A>Registrieren</A>
+                    <A>
+                      Registrieren
+                      <IconRegister style={burgerIcon} />
+                    </A>
                   </Link>
                   <br />
                 </nav>

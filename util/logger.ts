@@ -1,6 +1,6 @@
-import winston, { createLogger, transports, format } from "winston";
+import { createLogger, transports, format, Logger } from "winston";
 import { Mail } from "winston-mail";
-import { Loggly } from "winston-loggly-bulk";
+import { format as uformat } from "util";
 
 const env = process.env.NODE_ENV;
 const prod = env === "production";
@@ -23,16 +23,7 @@ const logger = createLogger({
     info: 4,
     debug: 5,
   },
-  format: winston.format.json(),
-});
-
-winston.addColors({
-  mail: "green",
-  alert: "purple",
-  error: "red",
-  warn: "orange",
-  info: "green",
-  debug: "gray",
+  format: format.json(),
 });
 
 const consoleLogger = new transports.Console({
@@ -52,20 +43,24 @@ const fileLogger = new transports.File({
   maxsize: 1024 * 1024 * (prod ? 10 : 1),
   maxFiles: prod ? 3 : 1,
   format: format.combine(
-    format.padLevels(),
-    format.printf(({ level, message }) => {
-      return `[${level}] ${message}`;
-    })
+    format.colorize(),
+    format.timestamp({ format: "ddd/D/MMM-HH:mm:ss" }),
+    format.align(),
+    format.printf(
+      (info) =>
+        `${info.timestamp}   [${info.level}] ${info.message}${
+          info.meta ? uformat("%s", info.meta) : ""
+        }`
+    )
   ),
 });
-
-const logglyLogger = new Loggly({
+const jsonLogger = new transports.File({
+  filename: "./logs/json.log",
   level: "info",
-  subdomain: "teachen.ch",
-  token: "d678db9a-c0dd-49b0-a885-f168172332c6",
-  stripColors: true,
-  json: true,
-  tags: [process.env.NODE_ENV || ""],
+  handleExceptions: true,
+  maxsize: 1024 * 1024 * (prod ? 10 : 1),
+  maxFiles: prod ? 3 : 1,
+  format: format.combine(format.timestamp(), format.logstash()),
 });
 
 const mailLogger: any = new Mail({
@@ -80,20 +75,29 @@ const mailLogger: any = new Mail({
 });
 
 logger.add(fileLogger);
-logger.add(logglyLogger);
 
 if (env === "production") {
   logger.add(mailLogger);
+  logger.add(jsonLogger);
   logger.exceptions.handle(mailLogger);
 } else {
   logger.add(consoleLogger);
+  logger.add(jsonLogger);
 }
 
-type MailLogger = winston.Logger & {
-  mail: (message: string) => void;
-};
+// the rest probably is not necessary, just didn't dig how to pass other objects to default Logger
 
-// @ts-ignore
-const mLogger: MailLogger = logger;
-mLogger.mail = (message: string) => logger.log("mail", message);
-export default mLogger;
+const logLevel = (level: string) => {
+  return (
+    message: string,
+    rest?: Record<string, any> | string | null
+  ): Logger => logger.log(level, message, { meta: rest });
+};
+const votyLogger = {
+  mail: logLevel("mail"),
+  info: logLevel("info"),
+  error: logLevel("error"),
+  warn: logLevel("warn"),
+  debug: logLevel("debug"),
+};
+export default votyLogger;
