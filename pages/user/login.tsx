@@ -141,7 +141,7 @@ export function LoginForm(): ReactElement {
       mutation={doLogin}
       fields={{
         email: {
-          label: "Email:",
+          label: "Email",
           required: true,
           type: "email",
           setter: setEmail,
@@ -149,7 +149,7 @@ export function LoginForm(): ReactElement {
           focus: true,
         },
         password: {
-          label: "Passwort:",
+          label: "Passwort",
           type: "password",
           required: true,
         },
@@ -348,7 +348,7 @@ function RequestReset({ onCancel }: { email: string; onCancel: () => void }) {
         }}
         fields={{
           email: {
-            label: "Email:",
+            label: "Email",
             required: true,
             type: "email",
             placeholder: "name@meineschule.ch",

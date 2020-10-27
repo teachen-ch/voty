@@ -14,6 +14,7 @@ import { yup, ErrorBox } from "./Form";
 import CheckLogin from "./CheckLogin";
 import { Formik, Form, Field, ErrorMessage, useField } from "formik";
 import { Grid } from "theme-ui";
+import { tr } from "util/translate";
 
 export const GET_USERS = gql`
   query users($where: UserWhereInput) {
@@ -165,16 +166,23 @@ export const ProfileEdit: React.FC<{
   if (!edit) {
     return (
       <Grid gap={2} columns={[0, 0, "1fr 3fr"]}>
-        <ShowField label="Vorname:" value={user?.name} />
-        {isTeacher && <ShowField label="Nachname:" value={user?.lastname} />}
-        {isStudent && <ShowField label="Jahrgang:" value={user?.year} />}
+        <ShowField label="Vorname" value={user?.name} />
+        {isTeacher && <ShowField label="Nachname" value={user?.lastname} />}
+        {isStudent && <ShowField label="Jahrgang" value={user?.year} />}
         {isStudent && (
-          <ShowField label="Geschlecht:" value={getGenderText(user?.gender)} />
+          <ShowField label="Geschlecht" value={getGenderText(user?.gender)} />
         )}
-        <ShowField label="Email:" value={user?.email} />
-        <Button onClick={() => setEdit(true)} sx={{ gridColumn: [0, 0, 2] }}>
+        <ShowField label="Email" value={user?.email} />
+        <Button
+          onClick={() => setEdit(true)}
+          sx={{ gridColumn: [0, 0, 2] }}
+          variant="secondary"
+        >
           Profil bearbeiten
         </Button>
+        <Text fontSize={1} textAlign="left" sx={{ gridColumn: [0, 0, 2] }}>
+          {tr("PROFILE_LEGAL_TEXT")}
+        </Text>
       </Grid>
     );
   } else {
@@ -186,17 +194,22 @@ export const ProfileEdit: React.FC<{
       >
         <Form>
           <Grid gap={2} columns={[0, 0, "1fr 3fr"]}>
-            <Input label="Vorname:" name="name" placeholder="Vorname"></Input>
+            <Input
+              label="Vorname"
+              name="name"
+              placeholder="Vorname"
+              focus
+            ></Input>
             {isTeacher && (
               <Input
-                label="Nachname:"
+                label="Nachname"
                 name="lastname"
                 placeholder="Nachname"
               ></Input>
             )}
             {isStudent && (
               <>
-                <label htmlFor="year">Jahrgang: </label>
+                <label htmlFor="year">Jahrgang</label>
                 <Field as={Select} id="year" name="year" value={undefined}>
                   <option value={undefined}>Bitte auswählen</option>
                   {[...Array(numYears).keys()].map((i) => (
@@ -205,7 +218,7 @@ export const ProfileEdit: React.FC<{
                   <option value={0}>möchte ich nicht angeben</option>
                 </Field>
                 <FieldError name="year" />
-                <label htmlFor="gender">Geschlecht: </label>
+                <label htmlFor="gender">Geschlecht</label>
                 <Box id="gender" textAlign="left">
                   <Grid columns="1fr 2fr" gap={0}>
                     <label>
@@ -241,14 +254,18 @@ export const ProfileEdit: React.FC<{
                 <FieldError name="gender" />
               </>
             )}
-            <ShowField label="Email:" value="Kontaktiere uns für Änderungen" />
-            <Button type="submit" sx={{ gridColumn: [0, 0, 2] }}>
+            <ShowField label="Email" value="Kontaktiere uns für Änderungen" />
+            <Button
+              type="submit"
+              sx={{ gridColumn: [0, 0, 2] }}
+              variant="secondary"
+            >
               Angaben speichern
             </Button>
             <ErrorBox error={error} my={4} />
 
             <Text fontSize={1} textAlign="left" sx={{ gridColumn: [0, 0, 2] }}>
-              <i>[TODO-Legal-Text]</i>
+              {tr("PROFILE_LEGAL_TEXT")}
             </Text>
           </Grid>
         </Form>
@@ -261,9 +278,15 @@ type InputProps = {
   label: string;
   name: string;
   placeholder?: string;
+  focus?: boolean;
 };
 
-export const Input: React.FC<InputProps> = ({ label, name, placeholder }) => {
+export const Input: React.FC<InputProps> = ({
+  label,
+  name,
+  placeholder,
+  focus,
+}) => {
   const [field, meta] = useField<string>(name);
   return (
     <>
@@ -271,7 +294,12 @@ export const Input: React.FC<InputProps> = ({ label, name, placeholder }) => {
         {label}
       </Label>
       {/* @ts-ignore */}
-      <RebassInput {...field} id={name} placeholder={placeholder} />
+      <RebassInput
+        {...field}
+        id={name}
+        placeholder={placeholder}
+        autoFocus={focus}
+      />
       {meta.touched && meta.error ? (
         <>
           <Text variant="fielderror" sx={{ gridColumn: [0, 0, 2] }}>
@@ -299,10 +327,16 @@ export const ShowField: React.FC<{
 }> = ({ label, value }) => {
   return (
     <>
-      <Text my={2} textAlign="left">
+      <Text my={1} textAlign="left" py={2}>
         {label}
       </Text>
-      <Text my={2} textAlign="left">
+      <Text
+        my={1}
+        py={"6px"}
+        px={3}
+        textAlign="left"
+        sx={{ border: "1px solid #fff", boxSizing: "border-box" }}
+      >
         {value || "–"}
       </Text>
     </>

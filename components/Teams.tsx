@@ -219,7 +219,7 @@ export function CreateTeamForm({
       }
       fields={{
         name: {
-          label: "Klasse:",
+          label: "Klasse",
           required: true,
         },
         submit: { type: "submit", label: "Klasse erstellen" },

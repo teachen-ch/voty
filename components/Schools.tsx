@@ -1,8 +1,10 @@
 import { gql } from "@apollo/client";
 import { useUser, useSetUser } from "../state/user";
-import { Heading, Flex, Button, Text, Box } from "rebass";
+import { Flex, Button, Box } from "rebass";
 import { omit } from "lodash";
+import { Grid } from "theme-ui";
 import { QForm, ErrorBox } from "./Form";
+import { ShowField } from "./Users";
 import { cantonNames } from "../util/cantons";
 import { useState, ReactElement } from "react";
 import { School } from "@prisma/client";
@@ -126,15 +128,19 @@ export const SelectSchool: React.FC = () => {
 
   if (user.school && !edit) {
     return (
-      <Box>
-        <Text fontWeight="bold">Dein Schulhaus</Text>
-        <Text>
-          {user.school.name}, {user.school.city}
-        </Text>
-        <Button onClick={() => setEdit(true)} variant="text">
+      <Grid gap={2} columns={[0, 0, "1fr 3fr"]}>
+        <ShowField
+          label="Schule"
+          value={`${user.school.name}, ${user.school.city}`}
+        />
+        <Button
+          onClick={() => setEdit(true)}
+          sx={{ gridColumn: [0, 0, 2] }}
+          variant="secondary"
+        >
           Anderes Schulhaus auswählen
         </Button>
-      </Box>
+      </Grid>
     );
   }
   if (!schools) {
@@ -168,12 +174,11 @@ export const SelectSchool: React.FC = () => {
         />
       ) : (
         <Box>
-          <Text mb={3}>Wähle Dein Schulhaus aus oder erfasse ein Neues…</Text>
           <QForm
             fields={{
               school: {
                 type: "select",
-                label: "Deine Schule: ",
+                label: "Schule",
                 init: user?.school?.id,
                 required: true,
                 options,
@@ -257,15 +262,14 @@ export function CreateSchool({
   });
   return (
     <Box>
-      <Heading mt={0}>Neues Schulhaus erfassen:</Heading>
       <QForm
         fields={{
           name: {
-            label: "Schulhaus:",
+            label: "Schule",
           },
           type: {
             type: "select",
-            label: "Schultyp:",
+            label: "Schultyp",
             required: true,
             options: {
               "Bitte wählen": "",
@@ -277,17 +281,17 @@ export function CreateSchool({
             },
           },
           address: {
-            label: "Adresse:",
+            label: "Adresse",
           },
           zip: {
-            label: "PLZ:",
+            label: "PLZ",
           },
           city: {
-            label: "Ort:",
+            label: "Ort",
           },
           canton: {
             type: "select",
-            label: "Kanton:",
+            label: "Kanton",
             required: true,
             init: "Aargau",
             options: cantonNames,

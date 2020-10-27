@@ -21,6 +21,9 @@ export default function Teacher(): ReactElement {
   if (user?.school === null) {
     return (
       <LoggedInPage heading="Startseite für Lehrpersonen">
+        <Text mb={3}>
+          Wähle zuerst Dein Schulhaus aus oder erfasse ein Neues…
+        </Text>
         <SelectSchool />
       </LoggedInPage>
     );

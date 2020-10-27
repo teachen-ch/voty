@@ -14,9 +14,7 @@ export default function StudentProfilePage({
 
   return (
     <LoggedInPage heading="Profil bearbeiten">
-      {firstRun && "Bitte ergänze Deine Angaben…"}
       <ProfileEdit user={user} editMode={firstRun} />
-
       {!firstRun && (
         <Box mt={5}>
           Ich möchte mein Konto auf voty.ch{" "}

@@ -313,7 +313,12 @@ export const Submit: React.FC<{ label: string }> = ({ label }) => {
   const context = useFormikContext();
   const submitting = context.isSubmitting;
   return (
-    <Button type="submit" disabled={submitting} sx={{ gridColumn: [0, 0, 2] }}>
+    <Button
+      type="submit"
+      disabled={submitting}
+      sx={{ gridColumn: [0, 0, 2] }}
+      variant="secondary"
+    >
       {submitting ? "Bitte warten..." : label}
     </Button>
   );

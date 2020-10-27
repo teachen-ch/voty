@@ -38,6 +38,7 @@ const messages: Record<string, string> = {
   ERR_USER_PASSWORD: "Email oder Passwort passen leider nicht zueinander…",
   ERR_VOTING_NEEDS_LOGIN: "Die Abstimmung benötigt eine Anmeldung",
   ERR_VOTING_NOT_ALLOWED: "Abstimmen nicht erlaubt",
+  PROFILE_LEGAL_TEXT: "[TODO-Legal-Text]",
 };
 
 export function tr(code: string): string {

@@ -23,13 +23,13 @@ export default function TeacherProfilePage({
       </Box>
 
       {!firstRun && (
-        <Box mt={5}>
+        <Box mt={5} ml={[0, 0, "26%"]}>
           Ich möchte mein Konto auf voty.ch{" "}
           <Link href="/user/delete">
             <A variant="underline">löschen</A>
           </Link>
           .
-          <Text fontSize={1}>
+          <Text fontSize={2}>
             Achtung, dabei werden auch Deine Klassen gelöscht. Konten der
             Schüler*innen werden nicht automatisch gelöscht.
           </Text>

@@ -28,7 +28,7 @@ describe("Test Teacher Startpage", () => {
     cy.login("teacher4@teachen.ch", "teachen");
     cy.visit("/teacher");
     cy.contains("Wähle Dein Schulhaus");
-    cy.findByLabelText("Deine Schule:").select("1000 City One - School One");
+    cy.findByLabelText("Deine Schule").select("1000 City One - School One");
     cy.contains("Bestätigen").click();
     cy.contains("Profil").click();
     cy.contains("School One");
@@ -38,12 +38,12 @@ describe("Test Teacher Startpage", () => {
     cy.login("teacher4@teachen.ch", "teachen");
     cy.visit("/teacher");
     cy.contains("Neues Schulhaus erfassen").click();
-    cy.findByLabelText("Schulhaus:").type("Testschule");
-    cy.findByLabelText("Schultyp:").select("Gymnasium");
-    cy.findByLabelText("Adresse:").type("Teststrasse 5");
-    cy.findByLabelText("PLZ:").type("3333");
-    cy.findByLabelText("Ort:").type("Testort");
-    cy.findByLabelText("Kanton:").select("Bern");
+    cy.findByLabelText("Schulhaus").type("Testschule");
+    cy.findByLabelText("Schultyp").select("Gymnasium");
+    cy.findByLabelText("Adresse").type("Teststrasse 5");
+    cy.findByLabelText("PLZ").type("3333");
+    cy.findByLabelText("Ort").type("Testort");
+    cy.findByLabelText("Kanton").select("Bern");
     cy.contains("Bestätigen").click();
     cy.contains("Profil").click();
     cy.contains("Testschule");
@@ -56,8 +56,8 @@ describe("Test Teacher Startpage", () => {
     cy.contains("erfolgreich");
     // user should automatically be logged out
     cy.contains("Anmelden").click();
-    cy.findByLabelText("Email:").type("teacher3@teachen.ch");
-    cy.findByLabelText("Passwort:").type("teachen");
+    cy.findByLabelText("Email").type("teacher3@teachen.ch");
+    cy.findByLabelText("Passwort").type("teachen");
     cy.get("button").contains("Anmelden").click();
     cy.contains("Fehler: Email oder Passwort");
   });

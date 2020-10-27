@@ -131,19 +131,19 @@ export const CreateUserForm: React.FC<{
       fields={{
         name: {
           focus: !props.noFocus,
-          label: "Vorname:",
+          label: "Vorname",
           required: true,
           validate: yup.string().min(3, "Dein Vorname ist etwas kurz"),
         },
-        lastname: { label: "Nachname:", required: true },
+        lastname: { label: "Nachname", required: true },
         email: {
-          label: "Email:",
+          label: "Email",
           required: true,
           type: "email",
           placeholder: "name@meineschule.ch",
         },
         password: {
-          label: "Passwort:",
+          label: "Passwort",
           type: "password",
           required: true,
           validate: yup.string().min(6, "Dein Passwort ist etwas sehr kurz..."),
@@ -152,7 +152,7 @@ export const CreateUserForm: React.FC<{
         //password2: yup.string().oneOf([yup.ref('password'), null], 'Passwords must match')
         role: {
           type: props.omitRole ? "hidden" : "select",
-          label: "Ich bin:",
+          label: "Ich bin",
           init: props.defaultRole,
           required: true,
           options: {

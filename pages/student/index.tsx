@@ -16,7 +16,9 @@ export default function StudentHome(): ReactElement {
         <Text my={2}>
           Deine Klasse: {user?.team?.name}, {user?.school?.name}
         </Text>
-        <Text my={2}>Bitte ergänze hier noch Deine Angaben:</Text>
+        <Text my={2} mt={4}>
+          Bitte ergänze hier noch Deine Angaben:
+        </Text>
         <ProfileEdit user={user} editMode={true} />
       </LoggedInPage>
     );
