@@ -27,7 +27,8 @@ def initLogger():
     log.setLevel(logging.DEBUG)
 
     ch = logging.StreamHandler()
-    formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
+    formatter = logging.Formatter(
+        '%(asctime)s - %(levelname)s\t - %(message)s')
     ch.setFormatter(formatter)
     log.addHandler(ch)
     return log
@@ -36,6 +37,7 @@ def initLogger():
 def exec(cmd):
     global log
     start = time.time()
+    print("–"*80)
     log.info("Executing: %s" % cmd)
     result = os.system(cmd)
     if (not result == 0):
@@ -50,8 +52,10 @@ def wait(min):
     for _ in range(min):
         time.sleep(60)
         print('.', end='')
+        sys.stdout.flush()
 
 
+sys.exit(0)
 log = initLogger()
 exec("git add .")
 exec("git commit -m \"%s\"" % (" ".join(sys.argv[1:])))
