@@ -55,6 +55,14 @@
   height: 252px;
 }
 
+@media only screen and (min-width: 600px) and (max-width: 1000px) {
+  .flip-container,
+  .front,
+  .back {
+    width: 135px;
+    height: 149px;
+  }
+}
 /* flip speed goes here */
 .flipper {
   transition: 0.6s;

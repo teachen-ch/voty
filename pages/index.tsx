@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { Flex, Heading, Box, Text, Button } from "rebass";
+import { Flex, Heading, Box, Text, Button, Image } from "rebass";
 import { Container, Background } from "components/Page";
 import { Banner } from "components/Banner";
 import { Footer } from "components/Footer";
@@ -25,11 +25,12 @@ export default function Home(): React.ReactElement {
         light
       />
       <TopBar hideLogo={true} />
-      <Container as="main" pt={[0, 0, 30, 49]} px={[3, 3, 0]} color="black">
-        <img
+      <Container as="main" pt={[0, 0, 30, 49]} px={[3, 3, 3, 0]} color="black">
+        <Image
+          alignSelf="center"
+          width={["70%", "70%", "40%", "426px"]}
           src="/images/voty_logo.svg"
           alt="voty.ch"
-          style={{ width: "426px", maxWidth: "70%", margin: "0 auto" }}
         />
         <Flex flexDirection="row" justifyContent="center">
           <Module
@@ -59,7 +60,11 @@ export default function Home(): React.ReactElement {
               alignItems="center"
               justifyContent="space-between"
             >
-              <img src="images/voty_module_2.svg" alt="Abstimmen" width="65%" />
+              <Image
+                src="images/voty_module_2.svg"
+                alt="Abstimmen"
+                width="65%"
+              />
               <Heading
                 as="h3"
                 py={[2, 2, 3]}
@@ -150,8 +155,11 @@ export default function Home(): React.ReactElement {
 const Module: React.FC<{ title: string; image: string }> = (props) => {
   const img = useRef<HTMLImageElement>(null);
   return (
-    <Box sx={{ display: ["none", "none", "block"], cursor: "pointer" }}>
-      <Flex alignItems="center" flexDirection="column" px={5}>
+    <Box
+      mx={4}
+      sx={{ display: ["none", "none", "block", "block"], cursor: "pointer" }}
+    >
+      <Flex alignItems="center" flexDirection="column">
         <div className="flip-container">
           <div className="flipper">
             <div className="front">
@@ -161,7 +169,6 @@ const Module: React.FC<{ title: string; image: string }> = (props) => {
                 width="100%"
                 ref={img}
                 onTouchStart={() => img.current?.classList.toggle("hover")}
-                onTouchEnd={() => img.current?.classList.toggle("hover")}
               />
             </div>
             <Box
@@ -171,6 +178,7 @@ const Module: React.FC<{ title: string; image: string }> = (props) => {
               bg="gray"
               p={3}
               sx={{ borderRadius: 5 }}
+              onTouchStart={() => img.current?.classList.toggle("hover")}
             >
               {props.children}
             </Box>

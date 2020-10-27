@@ -169,34 +169,6 @@ school:
     canton: ZH
 
 ballot:
-  - title: Kampfflugzeuge
-    description: Der Bund soll neue Kampfflugzeuge kaufen. Dafür soll er höchstens 6 Milliarden Franken ausgeben
-    start: !!timestamp "2020-07-01"
-    end: !!timestamp "2020-09-21"
-    scope: National
-    body: |
-      ### Ausgangslage
-      Die Schweizer Luftflotte verfügt heute über zwei Typen von Kampfflugzeugen: 26 Kampfflugzeuge sind rund 40-jährig und werden nur noch für die Ausbildung von PilotInnen eingesetzt. 30 weitere Kampfflugzeuge wurden in den 1990er-Jahren angeschafft und werden heute zur Kontrolle und zum Schutz des Luftraums eingesetzt. Die heutigen Kampfflugzeuge erreichen etwa 2030 das Ende ihrer Nutzungsdauer.      
-
-      Der Bundesrat hat entschieden, die Luftflotte ab 2030 zu erneuern. Darum hat er dem Parlament einen sogenannten Planungsbeschluss vorgelegt. Das Parlament hat den Planungsbeschluss genehmigt. Gegen diesen Beschluss wurde das fakultative Referendum ergriffen. Deshalb stimmen wir nun darüber ab.
-
-      ### Weitere Informationen: 
-      Weitere Informationen  zu dieser und allen anderen nationalen Abstimmungen findest Du auf [easyvote.ch](https://www.easyvote.ch/de/abstimmungen/27-9-20/kampfflugzeuge)
-
-  - title: Vaterschaftsurlaub
-    description: Es soll ein zweiwöchiger Vaterschaftsurlaub eingeführt werden.
-    start: !!timestamp "2020-07-01"
-    end: !!timestamp "2020-09-21"
-    scope: National
-    body: |
-      ### Ausgangslage
-      In der Schweiz haben Väter Anspruch auf ein bis zwei Tage bezahlten Vaterschaftsurlaub. Es gibt Unternehmen, die freiwillig einen längeren Vaterschaftsurlaub ermöglichen.
-
-      Ursprünglich wurde die Volksinitiative «Für einen vernünftigen Vaterschaftsurlaub – zum Nutzen der ganzen Familie» eingereicht. Die Initiative fordert einen Vaterschaftsurlaub von vier Wochen. Das Parlament hat als indirekten Gegenvorschlag zur dieser Volksinitiative die Einführung eines zweiwöchigen Vaterschaftsurlaubs beschlossen. Gegen den Beschluss des Parlaments wurde das fakultative Referendum ergriffen. Deshalb stimmen wir nun darüber ab.
-
-      ### Weitere Informationen: 
-      Weitere Informationen  zu dieser und allen anderen nationalen Abstimmungen findest Du auf [easyvote.ch](https://www.easyvote.ch/de/abstimmungen/27-9-20/vaterschaftsurlaub)
-
   - title: Testinitiative
     description: Diese Testabstimmung dauert seit ewig
     start: !!timestamp "2000-01-01"
@@ -212,7 +184,7 @@ ballot:
     body: Beendete Testabstimmung
 
   - title: Zukunftsinitiative
-    description: Diese Testabstimmung dauert ist bereits beendet
+    description: Diese Testabstimmung ist bereits beendet
     start: !!timestamp "2099-01-01"
     end: !!timestamp "2099-12-31"
     scope: National

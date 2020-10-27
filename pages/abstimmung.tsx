@@ -11,7 +11,7 @@ import { ReadMore } from "components/ReadMore";
 export default function Abstimmung(): ReactElement {
   const [user, setUser] = useState<SessionUser | undefined>(undefined);
   return (
-    <AppPage heading="Jugendliche stimmen ab – Jetzt Schulklasse anmelden">
+    <AppPage heading="Jugendliche stimmen ab – jetzt Schulklasse anmelden">
       <Text textAlign="left">
         <Text mt={4}>
           <img
