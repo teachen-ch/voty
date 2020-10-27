@@ -7,7 +7,7 @@ import {
   Role,
 } from "graphql/types";
 import { ReactElement, useState } from "react";
-import { Link, Box, Button, Text } from "rebass";
+import { Link, Box, Image, Button, Text } from "rebass";
 import { Label, Input as RebassInput, Select } from "@rebass/forms";
 import { SessionUser, useSetUser } from "state/user";
 import { yup, ErrorBox } from "./Form";
@@ -52,9 +52,6 @@ export function Users({
 }: {
   users?: TeamTeacherFieldsFragment["members"];
 }): ReactElement {
-  if (!users || users.length === 0) {
-    return <span>Noch keine Schülerinnen und Schüler hinzugefügt</span>;
-  }
   return (
     <>
       <table>
@@ -62,20 +59,39 @@ export function Users({
           <tr>
             <th>Name</th>
             <th>Email</th>
-            <th>Status</th>
+            <th style={{ textAlign: "center" }}>Status</th>
           </tr>
         </thead>
 
         <tbody>
-          {users?.map((user: myUser) => (
-            <tr key={user.id}>
-              <td>{user.shortname}</td>
-              <td>
-                <Link href={`mailto:${user.email}`}>{user.email}</Link>
+          {!users || users.length === 0 ? (
+            <tr>
+              <td colSpan={3}>
+                Es wurden noch keine Schüler*innen hinzugefügt
               </td>
-              <td>{user.emailVerified ? "✅ Bestätigt" : "☑️ Verschickt"}</td>
             </tr>
-          ))}
+          ) : (
+            users?.map((user: myUser) => (
+              <tr
+                key={user.id}
+                onClick={() =>
+                  (document.location.href = `mailto:${user.email}`)
+                }
+              >
+                <td>{user.shortname}</td>
+                <td>
+                  <Link href={`mailto:${user.email}`}>{user.email}</Link>
+                </td>
+                <td style={{ textAlign: "center" }}>
+                  {user.emailVerified ? (
+                    <Image src="/images/icon_user_ok.svg" height="18px" />
+                  ) : (
+                    <Image src="/images/icon_user_nok.svg" height="18px" />
+                  )}
+                </td>
+              </tr>
+            ))
+          )}
         </tbody>
       </table>
     </>

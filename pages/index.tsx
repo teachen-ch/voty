@@ -25,7 +25,7 @@ export default function Home(): React.ReactElement {
         light
       />
       <TopBar hideLogo={true} />
-      <Container as="main" pt={[0, 0, 30, 49]} px={[3, 3, 3, 0]} color="black">
+      <Container as="main" pt={[0, 0, 20, 49]} px={[3, 3, 3, 0]} color="black">
         <Image
           alignSelf="center"
           width={["70%", "70%", "40%", "426px"]}
@@ -38,16 +38,17 @@ export default function Home(): React.ReactElement {
             image="/images/voty_module_1_soon.svg"
           >
             Die Demokratie ist das wohl wichtigste Gut der Schweiz. Aber wie
-            gelingt es uns, die Jugend für die Demokratie zu begeistern? voty.ch
-            ist ein Projekt für die Demokratieförderung an Schweizer Schulen in
-            drei Modulen.
+            ge&shy;lingt es uns, die Ju&shy;gend für die Demo&shy;kratie zu
+            begeis&shy;tern? voty.ch ist ein Pro&shy;jekt für die
+            De&shy;mo&shy;kratie&shy;förderung an Schwei&shy;zer Schulen in drei
+            Modulen.
           </Module>
           <Box>
             <Heading
               as="h1"
               my={0}
               pt={3}
-              pb={[3, 4, 4]}
+              pb={[3, 3, 3, 4]}
               fontSize={[3, 4, "28px", "40px"]}
               textAlign="center"
               color="primary"
@@ -81,9 +82,10 @@ export default function Home(): React.ReactElement {
             title="Demokratie erleben"
             image="/images/voty_module_3_soon.svg"
           >
-            Wer entscheidet an Eurer Schule? Dürfen Schülerinnen und Schüler
-            mitreden und Vorschläge einbringen? Wir möchten gemeinsam testen,
-            wie wir Demokratie in Schulhäuser bringen können.
+            Wer entscheidet an Eurer Schule? Dürfen Schüler&shy;innen und
+            Schü&shy;ler mit&shy;reden und Vor&shy;schläge einbringen? Wir
+            möchten gemeinsam testen, wie wir Demo&shy;kratie in
+            Schul&shy;häuser bringen können.
           </Module>
         </Flex>
 
@@ -94,7 +96,7 @@ export default function Home(): React.ReactElement {
               fontSize={[3, 3, 5, 5]}
               width="100%"
               p={3}
-              mt={[2, 2, 2, 4]}
+              mt={[2, 2, 1, 4]}
             >
               Jetzt Schulklasse anmelden!
             </Button>
@@ -169,7 +171,7 @@ const Module: React.FC<{ title: string; image: string }> = (props) => {
                 alt="Bundehaus"
                 width="100%"
                 ref={img}
-                onTouchStart={() => img.current?.classList.toggle("hover")}
+                onTouchStart={() => img.current?.classList.add("hover")}
               />
             </div>
             <Box
@@ -179,7 +181,6 @@ const Module: React.FC<{ title: string; image: string }> = (props) => {
               bg="gray"
               p={3}
               sx={{ borderRadius: 5 }}
-              onTouchStart={() => img.current?.classList.toggle("hover")}
             >
               {props.children}
             </Box>

@@ -9,10 +9,11 @@ import {
   useRemoveBallotRunMutation,
   useGetBallotRunsQuery,
 } from "graphql/types";
-import { formatFromTo } from "../util/date";
+import { formatFromTo, formatDate } from "../util/date";
 import { useRouter } from "next/router";
 import { find } from "lodash";
 import Link from "next/link";
+import IconResults from "../public/images/icon_results.svg";
 
 const BallotFields = gql`
   fragment BallotFields on Ballot {
@@ -292,11 +293,22 @@ export const SelectBallots: React.FC<{ team: TeamTeacherFieldsFragment }> = ({
   return (
     <>
       <table id="ballots">
+        <thead>
+          <tr>
+            <th>Abstimmung</th>
+            <th>Deadline</th>
+            <th>Resultate</th>
+            <th>Status</th>
+          </tr>
+        </thead>
         <tbody>
           {ballots.map((ballot) => (
             <tr key={ballot.id}>
               <td>{ballot.title}</td>
-              <td>{ballot.end}</td>
+              <td>{formatDate(ballot.end)}</td>
+              <td>
+                <IconResults sx={{ opacity: 1 }} />
+              </td>
               <td>
                 {find(ballotRuns, { ballot: { id: ballot.id } })
                   ? "ausgewählt"

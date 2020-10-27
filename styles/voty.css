@@ -36,7 +36,7 @@
       url("/fonts/source-sans-pro-v14-latin-700.woff") format("woff"); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
 }
 
-/*** CSS Flip Animation on hover ***/
+/*** CSS Flip Animation on hover for startpage ***/
 
 /* entire container, keeps perspective */
 .flip-container {
@@ -61,6 +61,7 @@
   .back {
     width: 135px;
     height: 149px;
+    font-size: 10px;
   }
 }
 /* flip speed goes here */

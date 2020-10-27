@@ -1,6 +1,6 @@
 import { useUser } from "state/user";
 import { LoggedInPage } from "components/Page";
-import { Heading, Button, Text } from "rebass";
+import { Box, Button, Text } from "rebass";
 import { Teams, CreateTeamForm } from "components/Teams";
 import { useState, ReactElement } from "react";
 import { useRouter } from "next/router";
@@ -9,6 +9,7 @@ import { SelectSchool } from "components/Schools";
 export default function Teacher(): ReactElement {
   const user = useUser();
   const [showForm, setShowForm] = useState(false);
+  const [success, setSuccess] = useState(false);
   const router = useRouter();
 
   async function teamDetail(teamId: string) {
@@ -32,22 +33,33 @@ export default function Teacher(): ReactElement {
   return (
     <LoggedInPage heading="Meine Schulklassen">
       <Text fontWeight="bold">Willkommen {user && user.name}</Text>
-      <Text>Hier siehst Du eine Übersicht Deiner Klassen</Text>
-      <Heading as="h3">Deine Klassen auf voty.ch</Heading>
+      <Text mb={4}>Hier siehst Du eine Übersicht Deiner Klassen</Text>
       <Teams
         where={{ teacher: { id: { equals: user?.id } } }}
         teamClick={(team) => teamDetail(team.id)}
       />
-      {showForm ? (
-        <CreateTeamForm onCompleted={teamDetail} />
-      ) : user?.school ? (
-        <Button onClick={() => setShowForm(!showForm)} my={4}>
-          Neue Klasse erfassen
-        </Button>
-      ) : (
-        "Bitte wähle zuerst Dein Schulhaus."
-      )}
-      <Text />
+      <Box mt={4} minHeight="175px">
+        {success && (
+          <Text mb={4}>
+            Die neue Klasse wurde erfolgreich erstellt. Sie können diese nun in
+            der Tabelle anwählen um Schüler*innen hinzuzufügen und Abstimmungen
+            auszuwählen.
+          </Text>
+        )}
+        {showForm ? (
+          <CreateTeamForm
+            onCompleted={() => {
+              setShowForm(false);
+              setSuccess(true);
+            }}
+            onCancel={() => setShowForm(false)}
+          />
+        ) : (
+          <Button onClick={() => setShowForm(!showForm)} width="100%">
+            Neue Klasse erfassen
+          </Button>
+        )}
+      </Box>
     </LoggedInPage>
   );
 }

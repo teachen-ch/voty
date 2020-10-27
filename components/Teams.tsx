@@ -1,6 +1,6 @@
 import { gql } from "@apollo/client";
 import { useUser } from "../state/user";
-import { Text, Link as A } from "rebass";
+import { Link as A, Button } from "rebass";
 import { QForm, ErrorBox } from "./Form";
 import { useState, ReactElement } from "react";
 import {
@@ -111,17 +111,14 @@ export const Teams: React.FC<TeamsProps> = ({ where, teamClick }) => {
       </Page>
     );
   }
-  if (teamsQuery.loading) {
+  if (teamsQuery.loading || !teams) {
     return (
       <Page>
-        <h1>Loading data</h1>
+        <h1>Daten werden geladen</h1>
       </Page>
     );
   }
 
-  if (teams?.length === 0) {
-    return <Text>Noch keine Klassen erfasst.</Text>;
-  }
   return (
     <div className="teams">
       <table width="100%">
@@ -130,25 +127,31 @@ export const Teams: React.FC<TeamsProps> = ({ where, teamClick }) => {
             <th align="left">Klasse</th>
             <th align="left">Schulhaus</th>
             <th align="left">SuS</th>
-            <th align="left">Bearbeiten</th>
+            <th align="left"></th>
           </tr>
         </thead>
 
         <tbody>
-          {teams?.map((team) => (
-            <tr key={team.id}>
-              <td>{team.name}</td>
-              <td>
-                {team.school?.name} ({team.school?.city})
-              </td>
-              <td>{team.members ? <>{team.members.length} SuS</> : "-"}</td>
-              <td>
-                <A onClick={() => teamClick(team)} variant="underline">
-                  Bearbeiten
-                </A>
-              </td>
+          {teams.length === 0 ? (
+            <tr>
+              <td colSpan={4}>Es wurden noch keine Klassen erfasst.</td>
             </tr>
-          ))}
+          ) : (
+            teams?.map((team) => (
+              <tr key={team.id} onClick={() => teamClick(team)}>
+                <td>{team.name}</td>
+                <td>
+                  {team.school?.name} ({team.school?.city})
+                </td>
+                <td>{team.members ? <>{team.members.length} SuS</> : "-"}</td>
+                <td>
+                  <A onClick={() => teamClick(team)} variant="underline">
+                    Öffnen
+                  </A>
+                </td>
+              </tr>
+            ))
+          )}
         </tbody>
       </table>
     </div>
@@ -172,8 +175,10 @@ export const CREATE_TEAM = gql`
 
 export function CreateTeamForm({
   onCompleted,
+  onCancel,
 }: {
   onCompleted: (teamId: string) => void;
+  onCancel: () => void;
 }): ReactElement | null {
   const user = useUser();
   const [error, setError] = useState("");
@@ -219,6 +224,7 @@ export function CreateTeamForm({
       }
       fields={{
         name: {
+          focus: true,
           label: "Klasse",
           required: true,
         },
@@ -226,6 +232,9 @@ export function CreateTeamForm({
       }}
     >
       <ErrorBox error={error} />
+      <Button variant="text" onClick={onCancel} sx={{ gridColumn: [0, 0, 2] }}>
+        Abbrechen
+      </Button>
     </QForm>
   );
 }

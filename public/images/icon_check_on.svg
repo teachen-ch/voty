@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>icon checkbox online</title>
+    <g id="icon-checkbox-online" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group" stroke="#FFFFFF" stroke-width="1.53846154">
+            <path d="M19.2307692,0.769230769 L19.2307692,19.2307692 L0.769230769,19.2307692 L0.769230769,0.769230769 L19.2307692,0.769230769 Z" id="Path"></path>
+            <path d="M5.38461538,11.5384615 L8.53538462,14.0584615 C8.70989601,14.1980978 8.93651102,14.2549297 9.15626339,14.2141692 C9.37601576,14.1734086 9.56717477,14.0390865 9.68,13.8461538 L14.6153846,5.38461538" id="Path" stroke-linecap="round" stroke-linejoin="round"></path>
+        </g>
+    </g>
+</svg>

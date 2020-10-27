@@ -9,6 +9,7 @@ import { useRouter } from "next/router";
 import _ from "lodash";
 import { SelectBallots } from "components/Ballots";
 import { gql } from "@apollo/client";
+import IconHint from "../../public/images/icon_hint.svg";
 import { fragments } from "components/Teams";
 import {
   useTeamTeacherQuery,
@@ -37,7 +38,7 @@ export default function TeacherTeamPage(): React.ReactElement {
   const [showInviteLink, setShowInviteLink] = useState(false);
   const [importEmails, setImportEmails] = useState("");
 
-  const [doInviteStudents] = useInviteStudentsMutation({
+  const [doInviteStudents, inviteQuery] = useInviteStudentsMutation({
     onCompleted(/*{ inviteStudents }*/) {
       // TODO: currently we get the page updated via cache
       // but we do not show (or send over the API) errors
@@ -78,52 +79,67 @@ export default function TeacherTeamPage(): React.ReactElement {
   }
 
   return (
-    <LoggedInPage heading={`Klasse: ${team.name}`}>
-      <Heading as="h3">Abstimmungen für Deine Klasse</Heading>
+    <LoggedInPage heading="Detailansicht Schulklasse">
+      <Heading as="h3">
+        Folgende Abstimmungen sind für die Klasse verfügbar
+      </Heading>
       <SelectBallots team={team} />
-      <Heading as="h2">Schüler*innen</Heading>
+
+      <Heading as="h2">
+        {team.name} / {team.school.name}, {team.school.city}
+      </Heading>
       <Users users={team.members} />
 
-      <Heading>Schülerinnen und Schüler einladen</Heading>
-      <Grid my={1} gap={2} columns={[0, 0, "1fr 4fr"]}>
-        <Text fontSize={1} sx={{ gridColumn: [0, 0, 2] }}>
-          An alle diese Email-Adressen eine Einladung schicken:
-        </Text>
-        <Label sx={{ alignSelf: "top" }}>Emails:</Label>
-        <Textarea
-          value={importEmails}
-          bg="white"
-          sx={{ border: "white" }}
-          onChange={checkEmails}
-          fontSize={1}
-          placeholder="name1@schule.ch, name2@schule; name3.schule.ch; ..."
+      <Text fontWeight="bold" fontSize={[2, 2, 3]} mt={5}>
+        An alle diese Email-Adressen eine Einladung schicken:
+      </Text>
+      <Text fontSize={[1, 1, 2]} mb={3}>
+        Sie können die mehrere Adressen auf einmal aus ihrem Mailprogramm
+        kopieren
+      </Text>
+      <Textarea
+        value={importEmails}
+        bg="white"
+        sx={{ border: "white" }}
+        onChange={checkEmails}
+        fontSize={1}
+        height="auto"
+        rows={3}
+        placeholder="name1@schule.ch, name2@schule; name3.schule.ch; ..."
+      />
+      <Button
+        my={3}
+        onClick={() => inviteStudents(team)}
+        disabled={!matches || inviteQuery.loading}
+        width="100%"
+        bg={!matches || inviteQuery.loading ? "muted" : "secondary"}
+      >
+        {inviteQuery.loading
+          ? "Bitte warten..."
+          : `${matches} Einladungen verschicken`}
+      </Button>
+      {matches && (
+        <>
+          <Text fontSize={1}>
+            {matches} Email{matches == 1 ? "" : "s"} werden verschickt an:{" "}
+            {emails.map((email) => (
+              <li key={email}>{email}</li>
+            ))}
+          </Text>
+        </>
+      )}
+      <Text fontSize={2} sx={{ gridColumn: [0, 0, 2] }} mt={4}>
+        <img
+          src="/images/icon_hint.svg"
+          height="24px"
+          style={{ float: "left", marginRight: 8, verticalAlign: "center" }}
         />
-        <Button
-          onClick={() => inviteStudents(team)}
-          disabled={!matches}
-          bg={matches ? "primary" : "muted"}
-          sx={{ gridColumn: [0, 0, 2] }}
-        >
-          {matches} Einladungen verschicken
-        </Button>
-        {matches && (
-          <>
-            <Text fontSize={1} sx={{ gridColumn: [0, 0, 2] }}>
-              {matches} Email{matches == 1 ? "" : "s"} werden verschickt an:{" "}
-              {emails.map((email) => (
-                <li key={email}>{email}</li>
-              ))}
-            </Text>
-          </>
-        )}
-        <Text fontSize={1} sx={{ gridColumn: [0, 0, 2] }} mt={4}>
-          Alternativ können Sie Schüler*innen auch mit einem{" "}
-          <A onClick={() => setShowInviteLink(true)} variant="underline">
-            Einladungslink
-          </A>{" "}
-          einladen
-        </Text>
-      </Grid>
+        Alternativ können Sie Schüler*innen auch mit einem{" "}
+        <A onClick={() => setShowInviteLink(true)} variant="underline">
+          Einladungslink
+        </A>{" "}
+        einladen
+      </Text>
       {showInviteLink && <InviteLink team={team} />}
     </LoggedInPage>
   );
@@ -152,7 +168,7 @@ function InviteLink({ team }: { team: TeamTeacherFieldsFragment }) {
         readOnly
         value={`${document?.location.origin}/i/${team.invite}`}
       />
-      <Button onClick={() => copyInvite(inviteRef)}>Copy</Button>
+      <Button onClick={() => copyInvite(inviteRef)}>Kopieren</Button>
       <Text fontSize={1} sx={{ gridColumn: [0, 0, 2] }}>
         {status}
       </Text>

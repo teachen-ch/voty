@@ -84,14 +84,30 @@ export default {
       lineHeight: "body",
       fontSize: [2, 2, 4],
       table: {
+        borderSpacing: 0,
         width: "100%",
+        fontSize: [2, 2, 2],
+        borderBottom: "2px solid white",
       },
       th: {
+        px: 2,
+        py: 1,
         textAlign: "left",
+        borderBottom: "2px solid white",
       },
-      td: {
-        py: 2,
+      tbody: {
+        tr: {
+          ":nth-child(odd)": {
+            backgroundColor: "#88969D",
+          },
+          ":hover": {
+            // backgroundColor: "secondary",
+            opacity: "0.8",
+            cursor: "pointer",
+          },
+        },
       },
+      td: { px: 2 },
       h2: {
         variant: "text.heading",
         fontSize: [3, 4],

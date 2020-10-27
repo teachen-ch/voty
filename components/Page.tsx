@@ -198,7 +198,7 @@ export const Background: React.FC<{ bgImages: string[]; light?: boolean }> = (
         width: "100%",
         height: "100%",
         backgroundImage: bgImagesUrl,
-        backgroundAttachment: "fixed",
+        backgroundAttachment: "absolute",
         backgroundPositionY: 0,
         backgroundSize: "100%",
         backgroundPositionX: "center",

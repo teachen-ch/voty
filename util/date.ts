@@ -24,7 +24,7 @@ export function formatFromTo(from: number, to: number): string {
 }
 
 export function formatDate(ts: number): string {
-  return dayjs(ts).format("dddd, D. MMM");
+  return isToday(ts) ? "Heute" : dayjs(ts).format("DD.MM.YY");
 }
 
 export function formatDuration(ts: number, duration: number): string {
@@ -32,7 +32,6 @@ export function formatDuration(ts: number, duration: number): string {
 }
 
 export function formatFull(ts: number): string {
-  const date = isToday(ts) ? "Heute" : formatDate(ts);
   return `${date}, ${formatTime(ts)}`;
 }
 
