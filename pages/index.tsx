@@ -25,7 +25,7 @@ export default function Home(): React.ReactElement {
         light
       />
       <TopBar hideLogo={true} />
-      <Container as="main" pt={[0, 0, 49]} px={[3, 3, 0]} color="black">
+      <Container as="main" pt={[0, 0, 30, 49]} px={[3, 3, 0]} color="black">
         <img
           src="/images/voty_logo.svg"
           alt="voty.ch"
@@ -47,7 +47,7 @@ export default function Home(): React.ReactElement {
               my={0}
               pt={3}
               pb={[3, 4, 4]}
-              fontSize={[3, 4, "34px", "40px"]}
+              fontSize={[3, 4, "28px", "40px"]}
               textAlign="center"
               color="primary"
             >
@@ -65,7 +65,7 @@ export default function Home(): React.ReactElement {
                 py={[2, 2, 3]}
                 my={0}
                 textAlign="center"
-                fontSize={[4, 4, 5]}
+                fontSize={[4, 4, 4, 5]}
               >
                 Demokratie testen
               </Heading>
@@ -84,7 +84,12 @@ export default function Home(): React.ReactElement {
 
         <Box maxWidth="800px" width="100%" textAlign="center">
           <Link href="/abstimmung">
-            <Button fontSize={[3, 3, 5, 5]} width="100%" p={3} mt={[2, 2, 4]}>
+            <Button
+              fontSize={[3, 3, 5, 5]}
+              width="100%"
+              p={3}
+              mt={[2, 2, 2, 4]}
+            >
               Jetzt Schulklasse anmelden!
             </Button>
           </Link>
@@ -156,7 +161,7 @@ const Module: React.FC<{ title: string; image: string }> = (props) => {
                 width="100%"
                 ref={img}
                 onTouchStart={() => img.current?.classList.toggle("hover")}
-                onClick={() => img.current?.classList.toggle("hover")}
+                onTouchEnd={() => img.current?.classList.toggle("hover")}
               />
             </div>
             <Box

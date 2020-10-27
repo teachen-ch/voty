@@ -258,10 +258,7 @@ export default {
     mt: [0, 0, 1],
     mb: [3, 2, 1],
     fontSize: [2, 2, 4, 4],
-    backgroundRepeat: "no-repeat",
-    backgroundImage: "url('/images/icon_dropdown.svg')",
-    backgroundPosition: "right .7em top 50%, 0 0",
-    backgroundSize: "1.5em auto, 100%",
+    background: "url('/images/icon_dropdown.svg') 96% / 05% no-repeat #fff",
     ":focus": {
       outline: "none",
     },

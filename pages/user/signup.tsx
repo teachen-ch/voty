@@ -97,25 +97,19 @@ export function Success({ user }: { user?: SessionUser }): ReactElement {
   );
 }
 
-export function CreateUserForm({
-  setUser,
-  noFocus,
-  onSubmit,
-  omitRole,
-  defaultRole,
-}: {
+export const CreateUserForm: React.FC<{
   setUser: Dispatch<SetStateAction<SessionUser | undefined>>;
   onSubmit?: (values: Record<string, string | number>) => void;
   omitRole?: boolean;
   defaultRole?: string;
   noFocus?: boolean;
-}): ReactElement {
+}> = (props) => {
   const router = useRouter();
   const [error, setError] = useState("");
   const [showLogin, setShowLogin] = useState(false);
   const [doCreateUser] = useCreateUserMutation({
     onCompleted(data) {
-      setUser(data.createUser);
+      props.setUser(data.createUser);
     },
     onError(err) {
       setError(err.message);
@@ -125,17 +119,18 @@ export function CreateUserForm({
     },
   });
 
-  if (!onSubmit) {
-    onSubmit = (values) =>
-      doCreateUser({ variables: { data: omit(values, "submit") } });
+  function defaultSubmit(values: Record<string, any>) {
+    return doCreateUser({ variables: { data: omit(values, "submit") } });
   }
+
+  const onSubmit = props.onSubmit || defaultSubmit;
   return (
     <QForm
       mutation={doCreateUser}
       onSubmit={onSubmit}
       fields={{
         name: {
-          focus: !noFocus,
+          focus: !props.noFocus,
           label: "Vorname:",
           required: true,
           validate: yup.string().min(3, "Dein Vorname ist etwas kurz"),
@@ -156,9 +151,9 @@ export function CreateUserForm({
         // watch out: password2 would also be sent to server which barks
         //password2: yup.string().oneOf([yup.ref('password'), null], 'Passwords must match')
         role: {
-          type: omitRole ? "hidden" : "select",
+          type: props.omitRole ? "hidden" : "select",
           label: "Ich bin:",
-          init: defaultRole,
+          init: props.defaultRole,
           required: true,
           options: {
             "Bitte auswählen": "",
@@ -191,4 +186,4 @@ export function CreateUserForm({
       </Button>
     </QForm>
   );
-}
+};

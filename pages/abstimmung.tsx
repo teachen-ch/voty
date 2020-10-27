@@ -31,15 +31,19 @@ export default function Abstimmung(): ReactElement {
           mitentschieden wird.
         </Text>
         <Text my={4}>
-          Wenn die Schweiz am 29. November über die{" "}
-          <b>«Konzern / Unternehmens&shy;verantwortungs&shy;initiative»</b> und
-          die{" "}
-          <b>«Kriegsgeschäfte / Finanzierungs&shy;verbots&shy;initiative»</b>{" "}
-          abstimmt, sind das Themen, zu denen auch Jugendliche eine Meinung
-          haben. Wir möchten mit mindestens 50 Schulklassen eine Abstimmung
-          durchführen und dazu brauchen wir Ihre Hilfe:
+          Wenn die Schweiz am 29. November über die «Konzern /
+          Unternehmens&shy;verantwortungs&shy;initiative» und die
+          «Kriegsgeschäfte / Finanzierungs&shy;verbots&shy;initiative» abstimmt,
+          sind das Themen, zu denen auch Jugendliche eine Meinung haben. Wir
+          möchten mit mindestens 50 Schulklassen eine Abstimmung durchführen und
+          dazu brauchen wir Ihre Hilfe:
         </Text>
-        <Flex my={4} alignItems="center" flexDirection="column" fontSize={3}>
+        <Flex
+          my={4}
+          alignItems="center"
+          flexDirection="column"
+          fontSize={[2, 2, 3]}
+        >
           <Flex my={2}>
             <Text px={3} textAlign="center">
               <IconCheckWhite />
@@ -86,7 +90,15 @@ export default function Abstimmung(): ReactElement {
               setUser={setUser}
               omitRole
               defaultRole={Role.Teacher}
-            />
+            >
+              <Text mt={3} fontSize={3}>
+                Wir sind uns bewusst, dass die Zeit bis Ende November in der
+                Planung knapp ist. Aber wenn wir es gemeinsam schaffen, genügend
+                Klassen zu motivieren, dann hat das Ergebnis der Abstimmung auch
+                eine statistische Signifikanz und repräsentiert die Meinung der
+                Jugend zu relevanten Themen. Herzlichen Dank für Ihre Mithilfe!
+              </Text>
+            </CreateUserForm>
           </>
         ) : (
           <>
@@ -94,21 +106,14 @@ export default function Abstimmung(): ReactElement {
             <Success user={user} />
           </>
         )}
-        <Text fontSize={2} mt={3}>
-          Wir sind uns bewusst, dass die Zeit bis Ende November in der Planung
-          knapp ist. Aber wenn wir es gemeinsam schaffen, genügend Klassen zu
-          motivieren, dann hat das Ergebnis der Abstimmung auch eine
-          statistische Signifikanz und repräsentiert die Meinung der Jugend zu
-          relevanten Themen. Herzlichen Dank für Ihre Mithilfe!
-        </Text>
       </Text>
 
-      <Box mt={5} mb={5} maxWidth="600px" mx={"auto"}>
+      <Box mt={5} mb={5}>
         <Text
           fontSize={[3, 3, 4]}
+          pl={4}
           fontWeight="semi"
-          textAlign="center"
-          sx={{ lineHeight: "1.5" }}
+          sx={{ lineHeight: "1.5", borderLeft: "6px solid white" }}
         >
           Kennen Sie interessierte Lehrpersonen, welche ebenfalls politische
           Bildung unterrichten (Sekundarstufe, Gymnasium, Berufsschulen). Dann
@@ -119,7 +124,7 @@ export default function Abstimmung(): ReactElement {
       <Stats />
 
       <Box my={5} />
-      <ReadMore title="Fragen und Antworten" color="secondary">
+      <ReadMore title="Fragen und Antworten">
         <FAQ />
       </ReadMore>
     </AppPage>

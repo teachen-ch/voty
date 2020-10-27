@@ -41,7 +41,7 @@ export async function sendMail(
       html,
     });
   } catch (error) {
-    logger.error("SEND_VERIFICATION_EMAIL_ERROR", to, error);
+    logger.error(`Cannot send email to ${to}`, error);
     throw new Error(`SEND_VERIFICATION_EMAIL_ERROR ${String(error)}`);
   }
 }
