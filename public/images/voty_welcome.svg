@@ -1,19 +1,26 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg width="429px" height="428px" viewBox="0 0 429 428" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <title>Group</title>
-    <g id="Stefan" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" opacity="0.182314918" stroke-linecap="round" stroke-linejoin="round">
-        <g id="Artboard" transform="translate(-101.000000, -18.000000)" stroke="#FFFFFF" stroke-width="17.3674242">
-            <g id="Group" transform="translate(110.000000, 27.000000)">
-                <polygon id="Path" points="236 410 148 410 162.67272 328 221.34544 328"></polygon>
-                <line x1="103" y1="410" x2="280" y2="410" id="Path"></line>
-                <line x1="0" y1="246" x2="383" y2="246" id="Path"></line>
-                <path d="M383,246.000013 L383,273.333342 C383,303.524904 358.50358,328 328.285714,328 L54.7142857,328 C24.4964201,328 0,303.524904 0,273.333342 L0,54.6667104 C0,24.4751489 24.4964201,0 54.7142857,0 L328.285714,0 C336.781783,-0.0117328361 345.163083,1.96008921 352.761238,5.75827382" id="Path"></path>
-                <path d="M392.266124,164.573515 C388.522638,180.103105 374.981145,191.274573 359.061243,191.966894 L222.453121,191.966894 C215.687104,192.36337 209.208408,189.177145 205.37949,183.570075 C201.550572,177.963006 200.931081,170.754641 203.746915,164.573515 L229.574958,82.3933787 C234.359045,67.2264238 247.761123,56.4247555 263.563059,55 L390.426468,55 C397.071065,55.0438802 403.291141,58.2817679 407.149906,63.7054582 C411.008671,69.1291486 412.037446,76.0798899 409.915894,82.3933787 L392.266124,164.573515 Z" id="Path"></path>
-                <polyline id="Path" points="242 64 304.533997 137 407 64.0182637"></polyline>
-                <line x1="82" y1="192" x2="109" y2="192" id="Path"></line>
-                <line x1="82" y1="137" x2="137" y2="137" id="Path"></line>
-                <line x1="82" y1="82" x2="178" y2="82" id="Path"></line>
-            </g>
-        </g>
-    </g>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 24.3.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Ebene_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 429 428" style="enable-background:new 0 0 429 428;" xml:space="preserve">
+<style type="text/css">
+	.st0{opacity:0.1823;}
+	.st1{fill:none;stroke:#FFFFFF;stroke-width:17.3674;stroke-linecap:round;stroke-linejoin:round;}
+</style>
+<g id="Stefan" class="st0">
+	<g id="Artboard" transform="translate(-101.000000, -18.000000)">
+		<g id="Group" transform="translate(110.000000, 27.000000)">
+			<polygon id="Path" class="st1" points="236,410 148,410 162.7,328 221.3,328 			"/>
+			<line id="Path_1_" class="st1" x1="103" y1="410" x2="280" y2="410"/>
+			<line id="Path_2_" class="st1" x1="0" y1="246" x2="383" y2="246"/>
+			<path id="Path_3_" class="st1" d="M383,246v27.3c0,30.2-24.5,54.7-54.7,54.7H54.7C24.5,328,0,303.5,0,273.3V54.7
+				C0,24.5,24.5,0,54.7,0h273.6c8.5,0,16.9,2,24.5,5.8"/>
+			<path id="Path_4_" class="st1" d="M392.3,164.6c-3.7,15.5-17.3,26.7-33.2,27.4H222.5c-6.8,0.4-13.2-2.8-17.1-8.4
+				c-3.8-5.6-4.4-12.8-1.6-19l25.8-82.2c4.8-15.2,18.2-26,34-27.4h126.9c6.6,0,12.9,3.3,16.7,8.7s4.9,12.4,2.8,18.7L392.3,164.6z"/>
+			<polyline id="Path_5_" class="st1" points="242,64 304.5,137 407,64 			"/>
+			<line id="Path_6_" class="st1" x1="82" y1="192" x2="109" y2="192"/>
+			<line id="Path_7_" class="st1" x1="82" y1="137" x2="137" y2="137"/>
+			<line id="Path_8_" class="st1" x1="82" y1="82" x2="178" y2="82"/>
+		</g>
+	</g>
+</g>
 </svg>

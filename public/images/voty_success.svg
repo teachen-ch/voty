@@ -1,27 +1,34 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg width="392px" height="392px" viewBox="0 0 392 392" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <title>Picto</title>
-    <g id="Desktop-/-Schüler" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" opacity="0.202311198" stroke-linecap="round" stroke-linejoin="round">
-        <g id="Startseite-Desktop-Vote-Bestätigung-" transform="translate(-506.000000, -505.000000)" stroke="#000000" stroke-width="23.3333333">
-            <g id="Card" transform="translate(317.000000, 189.000000)">
-                <g id="Picto" transform="translate(201.000000, 328.000000)">
-                    <path d="M0,263.5 C0,286.972102 19.0278981,306 42.5,306 C65.9721019,306 85,286.972102 85,263.5 C85,240.027898 65.9721019,221 42.5,221 C19.0278981,221 0,240.027898 0,263.5 Z" id="Path"></path>
-                    <path d="M283,263.5 C283,278.683787 291.100454,292.714186 304.25,300.30608 C317.399546,307.897973 333.600454,307.897973 346.75,300.30608 C359.899546,292.714186 368,278.683787 368,263.5 C368,248.316213 359.899546,234.285814 346.75,226.69392 C333.600454,219.102027 317.399546,219.102027 304.25,226.69392 C291.100454,234.285814 283,248.316213 283,263.5 L283,263.5 Z" id="Path"></path>
-                    <path d="M142,263.5 C142,286.972102 161.027898,306 184.5,306 C207.972102,306 227,286.972102 227,263.5 C227,240.027898 207.972102,221 184.5,221 C161.027898,221 142,240.027898 142,263.5 Z" id="Path"></path>
-                    <path d="M114,368 C105.915107,346.183529 88.0937447,329.337274 65.7667108,322.405825 C43.4396769,315.474377 19.1400199,319.244123 0,332.608594" id="Path"></path>
-                    <path d="M254,368 C262.08195,346.18432 279.902829,329.337705 302.230777,322.40599 C324.558725,315.474275 348.859917,319.244088 368,332.608684" id="Path"></path>
-                    <path d="M255,368 C244.067212,338.546728 215.943859,319 184.5,319 C153.056141,319 124.932788,338.546728 114,368" id="Path"></path>
-                    <path d="M221,171 C221,171 233.2,110.166667 282,98" id="Path"></path>
-                    <line x1="319" y1="85" x2="368" y2="85" id="Path"></line>
-                    <line x1="344" y1="62" x2="344" y2="111" id="Path"></line>
-                    <path d="M147,171 C147,171 134.8,110.166667 86,98" id="Path"></path>
-                    <line x1="49" y1="85" x2="0" y2="85" id="Path"></line>
-                    <line x1="24" y1="62" x2="24" y2="111" id="Path"></line>
-                    <line x1="160" y1="24" x2="209" y2="24" id="Path"></line>
-                    <line x1="184" y1="0" x2="184" y2="49" id="Path"></line>
-                    <line x1="184" y1="171" x2="184" y2="98" id="Path"></line>
-                </g>
-            </g>
-        </g>
-    </g>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 24.3.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Ebene_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 392 392" style="enable-background:new 0 0 392 392;" xml:space="preserve">
+<style type="text/css">
+	.st0{opacity:0.2023;}
+	.st1{fill:none;stroke:#000000;stroke-width:23.3333;stroke-linecap:round;stroke-linejoin:round;}
+</style>
+<g id="Desktop-_x2F_-Schüler" class="st0">
+	<g id="Startseite-Desktop-Vote-Bestätigung-" transform="translate(-506.000000, -505.000000)">
+		<g id="Card" transform="translate(317.000000, 189.000000)">
+			<g id="Picto" transform="translate(201.000000, 328.000000)">
+				<path id="Path" class="st1" d="M0,263.5C0,287,19,306,42.5,306S85,287,85,263.5S66,221,42.5,221S0,240,0,263.5z"/>
+				<path id="Path_1_" class="st1" d="M283,263.5c0,15.2,8.1,29.2,21.2,36.8c13.1,7.6,29.4,7.6,42.5,0c13.1-7.6,21.2-21.6,21.2-36.8
+					c0-15.2-8.1-29.2-21.2-36.8c-13.1-7.6-29.4-7.6-42.5,0C291.1,234.3,283,248.3,283,263.5L283,263.5z"/>
+				<path id="Path_2_" class="st1" d="M142,263.5c0,23.5,19,42.5,42.5,42.5s42.5-19,42.5-42.5S208,221,184.5,221S142,240,142,263.5z
+					"/>
+				<path id="Path_3_" class="st1" d="M114,368c-8.1-21.8-25.9-38.7-48.2-45.6S19.1,319.2,0,332.6"/>
+				<path id="Path_4_" class="st1" d="M254,368c8.1-21.8,25.9-38.7,48.2-45.6c22.3-6.9,46.6-3.2,65.8,10.2"/>
+				<path id="Path_5_" class="st1" d="M255,368c-10.9-29.5-39.1-49-70.5-49s-59.6,19.5-70.5,49"/>
+				<path id="Path_6_" class="st1" d="M221,171c0,0,12.2-60.8,61-73"/>
+				<line id="Path_7_" class="st1" x1="319" y1="85" x2="368" y2="85"/>
+				<line id="Path_8_" class="st1" x1="344" y1="62" x2="344" y2="111"/>
+				<path id="Path_9_" class="st1" d="M147,171c0,0-12.2-60.8-61-73"/>
+				<line id="Path_10_" class="st1" x1="49" y1="85" x2="0" y2="85"/>
+				<line id="Path_11_" class="st1" x1="24" y1="62" x2="24" y2="111"/>
+				<line id="Path_12_" class="st1" x1="160" y1="24" x2="209" y2="24"/>
+				<line id="Path_13_" class="st1" x1="184" y1="0" x2="184" y2="49"/>
+				<line id="Path_14_" class="st1" x1="184" y1="171" x2="184" y2="98"/>
+			</g>
+		</g>
+	</g>
+</g>
 </svg>
