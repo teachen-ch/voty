@@ -70,11 +70,10 @@ export default {
     underline: {
       textDecoration: "underline",
     },
-    semi: {
-      fontWeight: "semi",
-    },
-    bold: {
-      fontWeight: "bold",
+    centered: {
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
     },
   },
   styles: {
@@ -88,15 +87,19 @@ export default {
         width: "100%",
         fontSize: [2, 2, 2],
         borderBottom: "2px solid white",
+        borderTop: "2px solid white",
+        textAlign: "left",
       },
       th: {
         px: 2,
         py: 1,
         textAlign: "left",
+        display: "none",
         borderBottom: "2px solid white",
       },
       tbody: {
         tr: {
+          height: "32px",
           ":nth-child(odd)": {
             backgroundColor: "#88969D",
           },
@@ -107,7 +110,9 @@ export default {
           },
         },
       },
-      td: { px: 2 },
+      td: {
+        px: 2,
+      },
       h2: {
         variant: "text.heading",
         fontSize: [3, 4],
@@ -167,6 +172,12 @@ export default {
       marginTop: "-8px",
       p: 1,
       px: 3,
+    },
+    semi: {
+      fontWeight: "semi",
+    },
+    bold: {
+      fontWeight: "bold",
     },
   },
   buttons: {

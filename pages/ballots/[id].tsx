@@ -9,6 +9,7 @@ import Info from "components/Info";
 import Link from "next/link";
 import { BigGray } from "components/BigButton";
 import { BallotDetails } from "components/Ballots";
+import { Breadcrumb } from "components/Breadcrumb";
 
 export default function BallotPage(): ReactElement {
   const [success, setSuccess] = useState(false);
@@ -35,21 +36,12 @@ export default function BallotPage(): ReactElement {
   if (success) {
     return (
       <LoggedInPage heading="Du hast abgestimmt!">
-        <Box mt={4} mb={3} fontSize={2}>
-          <Link href="/student/">
-            <A variant="underline">Start</A>
-          </Link>
-          {" / "}
-          <Link href="/student/">
-            <A variant="underline">Abstimmungen</A>
-          </Link>
-          {" / "}
-          <A variant="underline" onClick={() => setSuccess(false)}>
-            {ballot.title}
-          </A>
-          {" / "}
-          <A variant="semi">Deine Stimme</A>
-        </Box>
+        <Breadcrumb>
+          <A href="/student">Start</A>
+          <A href="/student">Abstimmungen</A>
+          <A onClick={() => setSuccess(false)}>{ballot.title}</A>
+          <Text>Deine Stimme</Text>
+        </Breadcrumb>
         <Text mb={4}>
           Super, {user?.name}, Du hast nun anonym abgestimmt und Deine Stimme
           wurde gezählt. Die Resultate der Abbstimmung könnt ihr mit Eurer

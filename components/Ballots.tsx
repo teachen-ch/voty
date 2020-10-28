@@ -1,6 +1,6 @@
 import { gql, useApolloClient } from "@apollo/client";
 
-import { Heading, Text, Link as A, Button, Card } from "rebass";
+import { Heading, Text, Link as A, Button, Card, Box } from "rebass";
 import {
   BallotWhereInput,
   useBallotsQuery,
@@ -17,6 +17,7 @@ import { formatFromTo, formatDate } from "../util/date";
 import { useRouter } from "next/router";
 import { find } from "lodash";
 import Link from "next/link";
+import IconResults from "../public/images/icon_results.svg";
 import IconCheckOn from "../public/images/icon_check_on.svg";
 import IconCheckOff from "../public/images/icon_check_off.svg";
 import { MouseEvent } from "react";
@@ -328,6 +329,7 @@ export const SelectBallots: React.FC<{ team: TeamTeacherFieldsFragment }> = ({
           <tr>
             <th>Abstimmung</th>
             <th>Deadline</th>
+            <th style={{ textAlign: "center" }}>Resultate</th>
             <th style={{ width: "1%" }}>Ausgewählt</th>
           </tr>
         </thead>
@@ -335,26 +337,26 @@ export const SelectBallots: React.FC<{ team: TeamTeacherFieldsFragment }> = ({
           {ballots.map((ballot) => (
             <tr key={ballot.id} onClick={() => detailBallot(ballot.id)}>
               <td>
-                <A variant="underline ">{ballot.title}</A>
+                <A variant="underline">{ballot.title}</A>
               </td>
               <td>{formatDate(ballot.end)}</td>
-              <td
-                style={{ textAlign: "center" }}
-                onClick={(evt) => toggleBallot(ballot.id, team.id, evt)}
-              >
-                {find(ballotRuns, { ballot: { id: ballot.id } }) ? (
-                  <IconCheckOn
-                    width="18px"
-                    height="18px"
-                    style={{ marginTop: 2 }}
-                  />
-                ) : (
-                  <IconCheckOff
-                    width="18px"
-                    height="18px"
-                    style={{ marginTop: 2 }}
-                  />
-                )}
+              <td style={{ textAlign: "center" }}>
+                <Box variant="centered">
+                  <IconResults width="20px" height="20px" />
+                </Box>
+              </td>
+              <td onClick={(evt) => toggleBallot(ballot.id, team.id, evt)}>
+                <Box variant="centered">
+                  {find(ballotRuns, { ballot: { id: ballot.id } }) ? (
+                    <IconCheckOn width="20px" height="20px" />
+                  ) : (
+                    <IconCheckOff
+                      width="20px"
+                      height="20px"
+                      verticalAlign="bottom"
+                    />
+                  )}
+                </Box>
               </td>
             </tr>
           ))}

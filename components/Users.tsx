@@ -83,11 +83,13 @@ export function Users({
                   <Link href={`mailto:${user.email}`}>{user.email}</Link>
                 </td>
                 <td style={{ textAlign: "center" }}>
-                  {user.emailVerified ? (
-                    <Image src="/images/icon_user_ok.svg" height="18px" />
-                  ) : (
-                    <Image src="/images/icon_user_nok.svg" height="18px" />
-                  )}
+                  <Box variant="centered">
+                    {user.emailVerified ? (
+                      <Image src="/images/icon_user_ok.svg" height="18px" />
+                    ) : (
+                      <Image src="/images/icon_user_nok.svg" height="18px" />
+                    )}
+                  </Box>
                 </td>
               </tr>
             ))
