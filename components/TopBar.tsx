@@ -1,11 +1,14 @@
-import { Flex, Text, Link as A, Box } from "rebass";
+import { Flex, Image, Text, Link as A, Box } from "rebass";
 import Link from "next/link";
 import IconRegister from "../public/images/icon_register.svg";
 import IconLogin from "../public/images/icon_login.svg";
+import IconLogout from "../public/images/icon_logout.svg";
 import IconAccount from "../public/images/icon_account.svg";
+import IconHome from "../public/images/icon_home.svg";
+import IconImpressum from "../public/images/icon_impressum.svg";
+import IconNewsletter from "../public/images/icon_newsletter.svg";
 import IconUp from "../public/images/icon_up.svg";
 import IconDown from "../public/images/icon_down.svg";
-import IconList from "../public/images/icon_list.svg";
 import { useUser, SessionUser } from "state/user";
 import { useState, useEffect } from "react";
 import { Role } from "graphql/types";
@@ -91,17 +94,22 @@ const RegisterLogin: React.FC = () => {
 
 const Account: React.FC<{ user: SessionUser }> = ({ user }) => {
   const [open, setOpen] = useState(false);
+  const isTeacher = user?.role === Role.Teacher;
   return (
     <Flex>
-      <Link href={user?.role === Role.Teacher ? "/teacher" : "/student/test"}>
+      <Link href={isTeacher ? "/teacher" : "/student/test"}>
         <A>
           <Flex
             alignItems="center"
             flexDirection="row"
             justifyContent="flex-end"
           >
-            <IconList style={{ marginRight: 8 }} width="30px" />
-            {user?.role === Role.Teacher ? "Meine Klassen" : "Abstimmungen"}
+            <Image
+              alt="Liste"
+              src={`/images/icon_${isTeacher ? "classes" : "list"}.svg`}
+              mr={2}
+            />
+            {isTeacher ? "Meine Klassen" : "Abstimmungen"}
           </Flex>
         </A>
       </Link>
@@ -153,14 +161,15 @@ const AccountMenu: React.FC = () => {
 const MobileBurger: React.FC<{ user: SessionUser }> = ({ user }) => {
   const [open, setOpen] = useState(false);
   const burgerIcon = {
-    height: "1.4em",
+    width: "1.2em",
     verticalAlign: "sub",
-    marginLeft: "20px",
+    marginRight: "20px",
   };
+  const isTeacher = user?.role === Role.Teacher;
   return (
     <Flex>
       <A onClick={() => setOpen(!open)}>
-        <img src="/images/voty_hamburger_red.svg" />
+        <img src="/images/voty_hamburger_red.svg" alt="Menu" />
       </A>
       {open && (
         <>
@@ -175,6 +184,7 @@ const MobileBurger: React.FC<{ user: SessionUser }> = ({ user }) => {
             bg="primary"
             width="80%"
             height="100%"
+            fontSize={4}
             sx={{
               position: "fixed",
               top: 0,
@@ -185,28 +195,34 @@ const MobileBurger: React.FC<{ user: SessionUser }> = ({ user }) => {
             <Text textAlign="right">
               <A onClick={() => setOpen(false)}>
                 <Box width="30" height="30" pt="18px" pr="18px">
-                  <img src="/images/voty_hamburger_cross_white.svg" />
+                  <img
+                    src="/images/voty_hamburger_cross_white.svg"
+                    alt="schliessen"
+                  />
                 </Box>
               </A>
             </Text>
-            <Text px={4} lineHeight="44px" fontWeight="semi">
+            <Text px={4} lineHeight="55px" fontWeight="semi">
               <Link href="/">
-                <A>Startseite</A>
+                <A>
+                  <IconHome style={burgerIcon} />
+                  Startseite
+                </A>
               </Link>
               <hr />
               {!user ? (
                 <nav>
                   <Link href="/user/login">
                     <A>
-                      Anmelden
                       <IconLogin style={burgerIcon} />
+                      Anmelden
                     </A>
                   </Link>
                   <br />
                   <Link href="/user/signup">
                     <A>
-                      Registrieren
                       <IconRegister style={burgerIcon} />
+                      Registrieren
                     </A>
                   </Link>
                   <br />
@@ -215,29 +231,46 @@ const MobileBurger: React.FC<{ user: SessionUser }> = ({ user }) => {
                 <nav>
                   <Link href="/user/login">
                     <A>
-                      {user.role === Role.Teacher
-                        ? "Meine Klassen"
-                        : "Abstimmungen"}
+                      <img
+                        alt="Liste"
+                        src={`/images/icon_${
+                          isTeacher ? "classes" : "list"
+                        }.svg`}
+                        style={burgerIcon}
+                      />
+                      {isTeacher ? "Klassen" : "Abstimmungen"}
                     </A>
                   </Link>
                   <br />
                   <Link href="/user/profile">
-                    <A>Profil bearbeiten</A>
+                    <A>
+                      <IconAccount style={burgerIcon} />
+                      Deine Daten
+                    </A>
                   </Link>
                   <br />
                   <Link href="/user/logout">
-                    <A>Abmelden</A>
+                    <A>
+                      <IconLogout style={burgerIcon} />
+                      Abmelden
+                    </A>
                   </Link>
                   <br />
                 </nav>
               )}
               <hr />
               <Link href="/newsletter">
-                <A>Newsletter</A>
+                <A>
+                  <IconNewsletter style={burgerIcon} />
+                  Newsletter
+                </A>
               </Link>
               <br />
               <Link href="/impressum">
-                <A>Impressum</A>
+                <A>
+                  <IconImpressum style={burgerIcon} />
+                  Impressum
+                </A>
               </Link>
             </Text>
           </Box>

@@ -20,6 +20,7 @@ import Link from "next/link";
 import IconResults from "../public/images/icon_results.svg";
 import IconCheckOn from "../public/images/icon_check_on.svg";
 import IconCheckOff from "../public/images/icon_check_off.svg";
+import IconDeadline from "../public/images/icon_deadline.svg";
 import { MouseEvent } from "react";
 import type { Nullable } from "simplytyped";
 import { parseMarkdownInner } from "util/markdown";
@@ -228,7 +229,7 @@ export const Ballot: React.FC<{
         </A>
         <Text mt={3}>{ballot.description}</Text>
         <Text fontSize={2} my={4}>
-          <img src="/images/icon_cal.svg" /> &nbsp; Zeit:{" "}
+          <IconDeadline alt="Deadline" /> &nbsp; Zeit:{" "}
           {formatFromTo(ballot.start, ballot.end)}
         </Text>
         {children}
@@ -339,18 +340,32 @@ export const SelectBallots: React.FC<{ team: TeamTeacherFieldsFragment }> = ({
               <td>
                 <A variant="underline">{ballot.title}</A>
               </td>
-              <td>{formatDate(ballot.end)}</td>
-              <td style={{ textAlign: "center" }}>
+              <td>
+                <Box
+                  variant="centered"
+                  sx={{ display: ["none", "none", "inline"] }}
+                >
+                  <IconDeadline
+                    height="20px"
+                    alt="Deadline"
+                    style={{ marginRight: 8 }}
+                  />
+                  &nbsp;
+                  {formatDate(ballot.end)}
+                </Box>
+              </td>
+              <td>
                 <Box variant="centered">
-                  <IconResults width="20px" height="20px" />
+                  <IconResults alt="Resultate" width="20px" height="20px" />
                 </Box>
               </td>
               <td onClick={(evt) => toggleBallot(ballot.id, team.id, evt)}>
                 <Box variant="centered">
                   {find(ballotRuns, { ballot: { id: ballot.id } }) ? (
-                    <IconCheckOn width="20px" height="20px" />
+                    <IconCheckOn alt="ausgewählt" width="20px" height="20px" />
                   ) : (
                     <IconCheckOff
+                      alt="abgewählt"
                       width="20px"
                       height="20px"
                       verticalAlign="bottom"
@@ -373,11 +388,11 @@ export const BallotDetails: React.FC<{
     <Text fontWeight="bold">{ballot.title}</Text>
     <Text mt={3}>{ballot.description}</Text>
     <Text fontSize={2} my={4}>
-      <img src="/images/icon_cal.svg" width="20px" /> &nbsp; Zeit:{" "}
+      <img src="/images/icon_cal.svg" width="20px" alt="Zeit" /> &nbsp; Zeit:{" "}
       {formatFromTo(ballot.start, ballot.end)}
     </Text>
     <Text textAlign="center">
-      <img width={150} src="/images/easyvote.png" />
+      <img width={150} src="/images/easyvote.png" alt="EasyVote" />
     </Text>
     <div
       dangerouslySetInnerHTML={parseMarkdownInner(ballot.body)}

@@ -48,7 +48,7 @@ export default function BallotPage(): ReactElement {
           Lerhperson ansehen und besprechen.
         </Text>
         <Box textAlign="center">
-          <img src="/images/voty_success.svg" />
+          <img src="/images/voty_success.svg" alt="Juhee" />
         </Box>
         <Button
           mt={4}
@@ -66,7 +66,7 @@ export default function BallotPage(): ReactElement {
       <LoggedInPage heading="Und jetzt Du!">
         <Text textAlign="center" maxWidth="450px" sx={{ margin: "0 auto" }}>
           <Heading mt={0}>Jetzt bist du dran! Wie stimmst Du ab?</Heading>
-          <img src="/images/voty_now.svg" />
+          <img src="/images/voty_now.svg" alt="Abstimmen" />
           <VotyNow
             ballot={ballot}
             onSuccess={() => {
@@ -169,13 +169,13 @@ export const VotyNow: React.FC<{
       <Flex justifyContent="space-between">
         <A onClick={() => vote(ballot.id, 1)} flex={1}>
           <Flex flexDirection="column" alignItems="center">
-            <img src="/images/icon_yes.svg" height="100px" />
+            <img src="/images/icon_yes.svg" height="100px" alt="Ja" />
             Ja, ich stimme zu
           </Flex>
         </A>
         <A onClick={() => vote(ballot.id, 2)} flex={1}>
           <Flex flexDirection="column" alignItems="center">
-            <img src="/images/icon_no.svg" height="100px" />
+            <img src="/images/icon_no.svg" height="100px" alt="Nein" />
             Nein, ich lehne ab
           </Flex>
         </A>

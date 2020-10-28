@@ -98,96 +98,99 @@ export default function TeacherTeamPage(): React.ReactElement {
 
   return (
     <LoggedInPage heading="Detailansicht Schulklasse">
-      <Heading as="h3">
-        Folgende Abstimmungen sind für die Klasse verfügbar
-      </Heading>
-      <Text fontSize={[1, 1, 2]} mb={3}>
-        Wähle die Abstimmungen aus, welche für Deine Schüler*innen angezeigt
-        werden. Hier kannst Du später auch die Abstimmungsresultate Deiner
-        Klasse anzeigen.
-      </Text>
-      <SelectBallots team={team} />
-
-      <Heading as="h2" mt="80px">
-        Schülerinnen und Schüler
-      </Heading>
-      {!team.members.length ? (
-        <Text fontSize={[1, 1, 2]}>
-          Hier kannst Du Schüler*innen einladen, indem Du ihre Email-Adressen
-          eingibst. Hast Du eine zweite Email-Adresse? Dann teste den einfachen
-          Ablauf doch kurz selbst:
+      <Text textAlign="left">
+        <Heading as="h3">
+          Folgende Abstimmungen sind für die Klasse verfügbar
+        </Heading>
+        <Text fontSize={[1, 1, 2]} mb={3}>
+          Wähle die Abstimmungen aus, welche für Deine Schüler*innen angezeigt
+          werden. Hier kannst Du später auch die Abstimmungsresultate Deiner
+          Klasse anzeigen.
         </Text>
-      ) : (
-        <>
-          <Text fontSize={[1, 1, 2]} my={3}>
-            Diese Einladungen wurden bereits verschickt. Hier sehen Sie auch,
-            wer die Einladung bereits akzeptiert hat.
-          </Text>
-          <Users users={team.members} />
-        </>
-      )}
-      <Textarea
-        mt={3}
-        value={importEmails}
-        bg="white"
-        sx={{ border: "white" }}
-        onChange={checkEmails}
-        fontSize={1}
-        height="auto"
-        rows={3}
-        placeholder="name1@schule.ch, name2@schule; name3.schule.ch; ..."
-      />
-      <Button
-        my={3}
-        onClick={() => inviteStudents(team)}
-        disabled={!matches || inviteQuery.loading}
-        width="100%"
-        bg={!matches || inviteQuery.loading ? "muted" : "secondary"}
-      >
-        {inviteQuery.loading
-          ? "Bitte warten..."
-          : `${matches ? matches : ""} Einladungen verschicken`}
-      </Button>
+        <SelectBallots team={team} />
 
-      {duplicated ? (
-        <ErrorBox
-          error={`Folgende Accounts existieren bereits: ${duplicatedEmails}`}
-        />
-      ) : (
-        ""
-      )}
-      {failed ? (
-        <ErrorBox
-          error={`Bei diesen Email-Adressen gab es einen Fehler: ${failedEmails}`}
-        />
-      ) : (
-        ""
-      )}
-      {matches && (
-        <>
-          <Text fontSize={1}>
-            {matches} Email{matches == 1 ? "" : "s"} werden verschickt an:{" "}
-            {emails.map((email) => (
-              <li key={email}>{email}</li>
-            ))}
+        <Heading as="h2" mt="80px">
+          Schülerinnen und Schüler
+        </Heading>
+        {!team.members.length ? (
+          <Text fontSize={[1, 1, 2]}>
+            Hier kannst Du Schüler*innen einladen, indem Du ihre Email-Adressen
+            eingibst. Hast Du eine zweite Email-Adresse? Dann teste den
+            einfachen Ablauf doch kurz selbst:
           </Text>
-        </>
-      )}
-      <Text fontSize={2} sx={{ gridColumn: [0, 0, 2] }} mt={4}>
-        <IconHint
-          height="24px"
-          style={{ float: "left", marginRight: 8, verticalAlign: "center" }}
+        ) : (
+          <>
+            <Text fontSize={[1, 1, 2]} my={3}>
+              Diese Einladungen wurden bereits verschickt. Hier sehen Sie auch,
+              wer die Einladung bereits akzeptiert hat.
+            </Text>
+            <Users users={team.members} />
+          </>
+        )}
+        <Textarea
+          mt={3}
+          value={importEmails}
+          bg="white"
+          sx={{ border: "white" }}
+          onChange={checkEmails}
+          fontSize={1}
+          height="auto"
+          rows={3}
+          placeholder="name1@schule.ch, name2@schule; name3.schule.ch; ..."
         />
-        Alternativ können Sie Schüler*innen auch mit einem{" "}
-        <A
-          onClick={() => setShowInviteLink(!showInviteLink)}
-          variant="underline"
+        <Button
+          my={3}
+          onClick={() => inviteStudents(team)}
+          disabled={!matches || inviteQuery.loading}
+          width="100%"
+          bg={!matches || inviteQuery.loading ? "muted" : "secondary"}
         >
-          Einladungslink
-        </A>{" "}
-        einladen
+          {inviteQuery.loading
+            ? "Bitte warten..."
+            : `${matches ? matches : ""} Einladungen verschicken`}
+        </Button>
+
+        {duplicated ? (
+          <ErrorBox
+            error={`Folgende Accounts existieren bereits: ${duplicatedEmails}`}
+          />
+        ) : (
+          ""
+        )}
+        {failed ? (
+          <ErrorBox
+            error={`Bei diesen Email-Adressen gab es einen Fehler: ${failedEmails}`}
+          />
+        ) : (
+          ""
+        )}
+        {matches && (
+          <>
+            <Text fontSize={1}>
+              {matches} Email{matches == 1 ? "" : "s"} werden verschickt an:{" "}
+              {emails.map((email) => (
+                <li key={email}>{email}</li>
+              ))}
+            </Text>
+          </>
+        )}
+        <Text fontSize={2} sx={{ gridColumn: [0, 0, 2] }} mt={4}>
+          <IconHint
+            alt="Hinweis"
+            height="24px"
+            style={{ float: "left", marginRight: 8, verticalAlign: "center" }}
+          />
+          Alternativ können Sie Schüler*innen auch mit einem{" "}
+          <A
+            onClick={() => setShowInviteLink(!showInviteLink)}
+            variant="underline"
+          >
+            Einladungslink
+          </A>{" "}
+          einladen
+        </Text>
+        {showInviteLink && <InviteLink team={team} />}
       </Text>
-      {showInviteLink && <InviteLink team={team} />}
     </LoggedInPage>
   );
 }

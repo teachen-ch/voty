@@ -85,7 +85,7 @@ export default {
       table: {
         borderSpacing: 0,
         width: "100%",
-        fontSize: [2, 2, 2],
+        fontSize: [1, 2, 2],
         textAlign: "left",
         borderBottom: "2px solid white",
       },
@@ -109,7 +109,7 @@ export default {
         },
       },
       td: {
-        px: 2,
+        px: [1, 2],
       },
       h2: {
         variant: "text.heading",
@@ -118,7 +118,7 @@ export default {
       },
       h3: {
         variant: "text.heading",
-        fontSize: [2, 3],
+        fontSize: [2, 2, 3],
       },
       h4: {
         variant: "text.heading",
@@ -138,6 +138,11 @@ export default {
       },
       label: {
         textAlign: "left",
+      },
+      hr: {
+        borderColor: "white",
+        borderWidth: "1.5px",
+        borderStyle: "solid",
       },
     },
     img: {
@@ -263,7 +268,7 @@ export default {
     px: 3,
     mt: [0, 0, 1],
     mb: [3, 2, 1],
-    fontSize: [2, 2, 4, 4],
+    fontSize: [4],
     "::-webkit-input-placeholder": {
       color: "#CCC",
       opacity: 1,

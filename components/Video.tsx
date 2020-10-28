@@ -30,6 +30,7 @@ export default Video;
 
 const Play: React.FC = () => (
   <img
+    alt="Play"
     src="https://img.icons8.com/ios-glyphs/1600/circled-play.png"
     width={70}
   />

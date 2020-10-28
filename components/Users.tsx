@@ -7,7 +7,7 @@ import {
   Role,
 } from "graphql/types";
 import { ReactElement, useState } from "react";
-import { Link, Box, Image, Button, Text } from "rebass";
+import { Link as A, Box, Image, Button, Text } from "rebass";
 import { Label, Input as RebassInput, Select } from "@rebass/forms";
 import { SessionUser, useSetUser } from "state/user";
 import { yup, ErrorBox } from "./Form";
@@ -81,14 +81,22 @@ export function Users({
               >
                 <td>{user.shortname}</td>
                 <td>
-                  <Link href={`mailto:${user.email}`}>{user.email}</Link>
+                  <A
+                    sx={{ display: ["none", "none", "inline"] }}
+                    href={`mailto:${user.email}`}
+                  >
+                    {user.email}
+                  </A>
                 </td>
-                <td style={{ textAlign: "center" }}>
+                <td>
                   <Box variant="centered">
                     {user.emailVerified ? (
-                      <Image src="/images/icon_user_ok.svg" />
+                      <Image src="/images/icon_user_ok.svg" alt="Bestätigt" />
                     ) : (
-                      <Image src="/images/icon_user_nok.svg" />
+                      <Image
+                        src="/images/icon_user_nok.svg"
+                        alt="Nicht bestätigt"
+                      />
                     )}
                   </Box>
                 </td>
@@ -338,13 +346,15 @@ export const ShowField: React.FC<{
 }> = ({ label, value }) => {
   return (
     <>
-      <Text my={1} textAlign="left" py={2}>
+      <Text my={[0, 0, 1]} textAlign="left" pt={[0, 0, 2]}>
         {label}
       </Text>
       <Text
         my={1}
-        py={"6px"}
+        py="7px"
+        mb={[3, 3, 0]}
         px={3}
+        fontSize={4}
         textAlign="left"
         sx={{ border: "1px solid #fff", boxSizing: "border-box" }}
       >

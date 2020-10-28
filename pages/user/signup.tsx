@@ -72,6 +72,7 @@ export function Success({ user }: { user?: SessionUser }): ReactElement {
   return (
     <Flex flexDirection="column">
       <Image
+        alt="Willkommen"
         src="/images/voty_welcome.svg"
         maxWidth="80%"
         sx={{ position: "absolute", alignSelf: "center" }}

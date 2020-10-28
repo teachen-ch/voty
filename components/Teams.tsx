@@ -1,6 +1,6 @@
 import { gql } from "@apollo/client";
 import { useUser } from "../state/user";
-import { Link as A, Button } from "rebass";
+import { Box, Link as A, Button } from "rebass";
 import { QForm, ErrorBox } from "./Form";
 import { useState, ReactElement } from "react";
 import {
@@ -144,9 +144,11 @@ export const Teams: React.FC<TeamsProps> = ({ where, teamClick }) => {
                   {team.school?.name} ({team.school?.city})
                 </td>
                 <td>{team.members ? <>{team.members.length} SuS</> : "-"}</td>
-                <td>
+                <td width="1%">
                   <A onClick={() => teamClick(team)} variant="underline">
-                    Öffnen
+                    <Box variant="centered">
+                      <img src="/images/icon_sus.svg" height="24px" alt="SuS" />
+                    </Box>
                   </A>
                 </td>
               </tr>

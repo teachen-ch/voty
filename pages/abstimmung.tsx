@@ -301,6 +301,7 @@ export const IconCheckWhite: React.FC = () => (
   <img
     src="/images/icon_yes.svg"
     height="25px"
+    alt="Checkmark"
     style={{ filter: "brightness(100)" }}
   />
 );

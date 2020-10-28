@@ -193,7 +193,11 @@ export const SelectSchool: React.FC = () => {
               <Button onClick={() => setEdit(false)} variant="text">
                 Abbrechen
               </Button>
-              <Button onClick={() => setCreate(true)} variant="text">
+              <Button
+                onClick={() => setCreate(true)}
+                variant="text"
+                width="200%"
+              >
                 Neues Schulhaus erfassen
               </Button>
             </Flex>
