@@ -13,7 +13,7 @@ describe("Test Signup Page", () => {
     cy.findByLabelText("Passwort").type("Password2007");
     cy.findByLabelText("Ich bin").select("Lehrer*in");
     cy.get("button").contains("Konto erstellen").click();
-    cy.contains(tr("ERR_DUPLICATE_EMAIL"));
+    cy.contains(tr("Error.DuplicateEmail"));
   });
 
   it("Does not submit without correct email", () => {

@@ -117,7 +117,7 @@ export function LoginForm(): ReactElement {
       }
     },
     onError(error) {
-      if (error.message === "ERR_EMAIL_NOT_VERIFIED") {
+      if (error.message === "Error.EmailNotVerified") {
         return setEmailError(email);
       } else {
         return setError(error.message);
@@ -146,7 +146,6 @@ export function LoginForm(): ReactElement {
           type: "email",
           setter: setEmail,
           placeholder: "name@meineschule.ch",
-          focus: true,
         },
         password: {
           label: "Passwort",
@@ -158,8 +157,7 @@ export function LoginForm(): ReactElement {
     >
       <ErrorBox error={error} />
       <Flex
-        flexDirection="row"
-        my={3}
+        my={2}
         sx={{ gridColumn: [0, 0, 2] }}
         justifyContent="space-between"
         flexWrap="wrap"
@@ -352,7 +350,6 @@ function RequestReset({ onCancel }: { email: string; onCancel: () => void }) {
             required: true,
             type: "email",
             placeholder: "name@meineschule.ch",
-            focus: true,
           },
           submit: {
             type: "submit",
@@ -393,7 +390,6 @@ function PasswordResetForm() {
   const [doChangePassword] = useMutation(CHANGE_PASSWORD, {
     onCompleted({ changePassword }) {
       if (changePassword && changePassword.token) {
-        console.log(changePassword.user);
         setUser(changePassword.user);
         setAccessToken(changePassword.token);
       }
@@ -427,7 +423,6 @@ function PasswordResetForm() {
       <Grid gap={2} columns={[0, 0, "2fr 3fr"]}>
         <Label alignSelf="center">Neues Passwort:</Label>
         <Input
-          autoFocus
           autoCapitalize="none"
           value={password}
           name="password"

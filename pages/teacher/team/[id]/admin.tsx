@@ -65,14 +65,16 @@ export default function TeacherTeamPage(): React.ReactElement {
 
   if (teamQuery.loading) {
     return (
-      <LoggedInPage heading="Klasseseite">Klasse wird geladen…</LoggedInPage>
+      <LoggedInPage heading="Detailansicht Schulklasse">
+        Klasse wird geladen…
+      </LoggedInPage>
     );
   }
 
   const team = teamQuery.data?.team;
   if (!team) {
     return (
-      <LoggedInPage heading="Klassenseite">
+      <LoggedInPage heading="Detailansicht Schulklasse">
         Team konnte nicht gefunden werden
       </LoggedInPage>
     );

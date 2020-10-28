@@ -78,7 +78,6 @@ export default function Abstimmung(): ReactElement {
               Interessiert? Melden Sie jetzt ihre Klasse jetzt an
             </Heading>
             <CreateUserForm
-              noFocus
               setUser={setUser}
               omitRole
               defaultRole={Role.Teacher}

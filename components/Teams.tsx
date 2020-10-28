@@ -224,7 +224,6 @@ export function CreateTeamForm({
       }
       fields={{
         name: {
-          focus: true,
           label: "Klasse",
           required: true,
         },

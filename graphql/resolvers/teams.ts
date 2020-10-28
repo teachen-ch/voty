@@ -15,9 +15,9 @@ export const inviteStudents: FieldResolver<
   const success: string[] = [];
 
   let team = await ctx.db.team.findOne({ where: { id } });
-  if (!team) throw Error("ERR_TEAM_NOT_FOUND");
-  if (!user) throw Error("ERR_NEEDS_LOGIN");
-  if (team.teacherId !== user.id) throw Error("ERR_NOT_YOUR_TEAM");
+  if (!team) throw Error("Error.TeamNotFound");
+  if (!user) throw Error("Error.NeedsLogin");
+  if (team.teacherId !== user.id) throw Error("Error.NotYourTeam");
 
   for (let i = 0; i < emails.length; ++i) {
     const email = emails[i];

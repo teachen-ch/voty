@@ -113,7 +113,7 @@ export const CreateUserForm: React.FC<{
     },
     onError(err) {
       setError(err.message);
-      if (err.message === "ERR_DUPLICATE_EMAIL") {
+      if (err.message === "Error.DuplicateEmail") {
         setShowLogin(true);
       }
     },
@@ -178,7 +178,7 @@ export const CreateUserForm: React.FC<{
       <Button
         onClick={() => router.push("/user/login")}
         variant="text"
-        my={3}
+        my={2}
         textAlign="right"
         sx={{ gridColumn: [0, 0, 2] }}
       >

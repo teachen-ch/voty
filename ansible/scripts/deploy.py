@@ -52,7 +52,7 @@ def wait(min):
     print("\t\tabort with: c < enter > to cancel")
     print("\t\t   or with: g < enter > to start deploy")
     print("[c|g] > ")
-    i, _, _ = select.select([sys.stdin], [], [], 10)
+    i, _, _ = select.select([sys.stdin], [], [], min * 60)
     if (i):
         char = sys.stdin.readline().strip().lower()
         if (char == "c"):

@@ -26,11 +26,20 @@ const logger = createLogger({
   format: format.json(),
 });
 
+const colors = {
+  mail: "green",
+  info: "green",
+  error: "red",
+  warn: "red",
+  debug: "gray",
+};
+
 const consoleLogger = new transports.Console({
   level: prod ? "error" : "info",
   format: format.combine(
+    format.errors({ stack: true }),
     format.padLevels(),
-    format.colorize(),
+    format.colorize({ level: true, all: false, colors }),
     format.printf(({ level, message }) => {
       return `[${level}] ${message}`;
     })
@@ -43,7 +52,8 @@ const fileLogger = new transports.File({
   maxsize: 1024 * 1024 * (prod ? 10 : 1),
   maxFiles: prod ? 3 : 1,
   format: format.combine(
-    format.colorize(),
+    format.errors({ stack: true }),
+    format.colorize({ level: true, all: false, colors }),
     format.timestamp({ format: "ddd/D/MMM-HH:mm:ss" }),
     format.align(),
     format.printf(

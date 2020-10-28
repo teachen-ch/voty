@@ -109,7 +109,7 @@ const Invite: React.FC = () => {
           Einladung für die Klasse «{team.name}» im Schulhaus «
           {team.school?.name}»
         </Heading>
-        <Text>
+        <Text mb={3} fontSize={[2, 2, 3]}>
           Erstelle einen neuen Schüler*innen Account für voty.ch. Bitte nutze
           die Email-Adresse Deiner Schule.
         </Text>

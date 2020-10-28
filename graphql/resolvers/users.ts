@@ -29,22 +29,22 @@ export const login: FieldResolver<"Mutation", "login"> = async (
   const user = await ctx.db.user.findOne({ where: { email: args.email } });
   if (!user) {
     logger.info("Login attempt - User not found", { meta: args.email });
-    throw Error("ERR_USER_PASSWORD"); // generic error, do not say why
+    throw Error("Error.UserPassword"); // generic error, do not say why
   }
   if (!user.password) {
     logger.info("Login attempt - Password not set!", { meta: args.email });
-    throw Error("ERR_PASSWORD_NOT_SET");
+    throw Error("Error.PasswordNotSet");
   }
 
   const matches = await bcrypt.compare(args.password, user.password);
   if (!matches) {
     logger.info("Login attempt - Passwords don't match", { meta: args.email });
-    throw Error("ERR_USER_PASSWORD"); // generic error, do not say why
+    throw Error("Error.UserPassword"); // generic error, do not say why
   }
 
   if (!user.emailVerified) {
     logger.info("Login attempt - Email not verified", args.email);
-    throw Error("ERR_EMAIL_NOT_VERIFIED");
+    throw Error("Error.EmailNotVerified");
   }
   // logger.mail("a user logged in... " + user.email);
   return startJWTSession(user, ctx);
@@ -74,8 +74,8 @@ export const createUser: FieldResolver<"Mutation", "createUser"> = async (
 ) => {
   try {
     const { email, password, name, lastname, role } = args.data;
-    if (!email) throw new Error("ERR_NO_EMAIL");
-    if (!password) throw new Error("ERR_NO_PASSWORD");
+    if (!email) throw new Error("Error.NoEmail");
+    if (!password) throw new Error("Error.NoPassword");
     const salt = await bcrypt.genSalt(10);
     const hashed = await bcrypt.hash(password, salt);
     if (role === Role.Admin) throw new Error("NAH");
@@ -106,10 +106,9 @@ export const createUser: FieldResolver<"Mutation", "createUser"> = async (
   } catch (err) {
     // eslint-disable-next-line
     if (err.meta?.target && err.meta.target.indexOf("email") >= 0) {
-      throw new Error("ERR_DUPLICATE_EMAIL");
+      throw new Error("Error.DuplicateEmail");
     }
-    logger.error(err);
-    throw new Error("ERR_CREATE_USER");
+    throw new Error("Error.CreateUser");
   }
 };
 
@@ -161,6 +160,7 @@ export const createInvitedUser: FieldResolver<
   };
   const user = await createUser(_root, newArgs, ctx, info);
   await connectUserTeam(user as User, team, ctx);
+  logger.info(`User ${email} created with invite code ${team.name}`);
   return user;
 };
 
@@ -173,7 +173,7 @@ export const updateUser: FieldResolver<"Mutation", "updateUser"> = async (
   const user = getRequestUser(ctx);
   const id = args.where.id;
   if (id !== user?.id && user?.role !== Role.Admin)
-    throw new Error("ERR_ONLY_UPDATE_SELF");
+    throw new Error("Error.OnlyUpdateSelf");
   if (args.data.role && user?.role !== Role.Admin) delete args.data.role;
   const result = await ctx.db.user.update({
     where: { id: id || undefined },
@@ -283,7 +283,7 @@ export async function sendVerificationEmail(
     return { token: "MAYBE..." };
   } catch (err) {
     logger.error(`Error sending ${purpose} email`, err);
-    throw Error("ERR_SEND_EMAIL_VERIFICATION");
+    throw Error("Error.SendEmailVerification");
   }
 }
 
@@ -309,15 +309,15 @@ export const checkVerification: FieldResolver<
   "Mutation",
   "checkVerification"
 > = async (_root, args, ctx): Promise<ResponseLogin> => {
-  if (!args.token) throw new Error("ERR_NO_TOKEN");
+  if (!args.token) throw new Error("Error.NoToken");
   const found = await verifyToken(args.token, ctx.db);
   if (!found) {
-    throw Error("ERR_TOKEN_NOT_FOUND");
+    throw Error("Error.TokenNotFound");
   }
   const email = found.identifier;
   const user = await ctx.db.user.findOne({ where: { email } });
   if (!user) {
-    throw Error("ERR_EMAIL_NOT_FOUND");
+    throw Error("Error.EmailNotFound");
   }
 
   await ctx.db.user.update({
@@ -332,7 +332,7 @@ export const changePassword: FieldResolver<
   "changePassword"
 > = async (_root, args, ctx): Promise<ResponseLogin> => {
   const user = await getUser(ctx);
-  if (!user) throw new Error("ERR_USER_NOT_FOUND");
+  if (!user) throw new Error("Error.UserNotFound");
   const salt = await bcrypt.genSalt(10);
   const hashed = await bcrypt.hash(args.password, salt);
   const ok = await ctx.db.user.update({
@@ -342,7 +342,7 @@ export const changePassword: FieldResolver<
   if (ok) {
     return startJWTSession(user, ctx);
   } else {
-    throw Error("ERR_PASSWORD_CHANGE");
+    throw Error("Error.PasswordChange");
   }
 };
 
@@ -373,7 +373,7 @@ export const deleteAccount: FieldResolver<"Mutation", "deleteAccount"> = async (
 ) => {
   try {
     const user = await getUser(ctx);
-    if (!user) throw new Error("ERR_NEEDS_LOGIN");
+    if (!user) throw new Error("Error.NeedsLogin");
 
     // delete classes (with BallotRuns) from this teacher
     if (user.role === Role.Teacher) {
@@ -390,10 +390,10 @@ export const deleteAccount: FieldResolver<"Mutation", "deleteAccount"> = async (
     await ctx.db.thread.deleteMany({ where: { userId: user.id } });
 
     const deleted = await ctx.db.user.delete({ where: { id: user.id } });
-    if (!deleted) throw new Error("ERR_CANNOT_DELETE_ACCOUNT");
+    if (!deleted) throw new Error("Error.CannotDeleteAccount");
     return { success: true };
   } catch (err) {
     logger.warn("Error deleting user: ", err);
-    throw new Error("ERR_CANNOT_DELETE_ACCOUNT");
+    throw new Error("Error.CannotDeleteAccount");
   }
 };

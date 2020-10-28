@@ -2,45 +2,73 @@
 // this is an ad-hoc translation solution until we invet into a proper
 // translation management system
 
-const messages: Record<string, string> = {
-  ERR_BALLOT_NOT_STARTED: "Diese Abstimmung ist noch nicht gestartet",
-  ERR_BALLOT_ENDED: "Diese Abstimmung ist bereits beendet",
-  ERR_BALLOTCODE_WRONG: "Ungültiger Abstimmungscode",
-  ERR_ALREADY_VOTED: "Du hast bereits über diese Vorlage abgestimmt",
-  ERR_VOTECODE_FAILED: "Datenbank-Fehler",
-  ERR_BALLOTRUN_CANNOT_REMOVE: "Abstimmung kann nicht abgewählt werden",
-  ERR_BALLOTRUN_NOT_FOUND: "Abstimmung nicht gefunden",
-  ERR_BALLOT_NOT_FOUND: "Abstimmung nicht gefunden",
-  ERR_CANNOT_CREATE_BALLOTRUN: "Abstimmung kann nicht ausgewählt werden",
-  ERR_CANNOT_DELETE_ACCOUNT:
-    "Benutzerkonto kann nicht gelöscht werden. Bitte kontaktiere uns",
-  ERR_CREATE_USER: "Benutzerkonto kann nicht erstellt werden",
-  ERR_DUPLICATE_EMAIL:
-    "Für diese Email-Adresse gibt es bereits ein Benutzerkonto",
-  ERR_EMAIL_NOT_FOUND: "Email-Adresse wurde nicht gefunden",
-  ERR_EMAIL_NOT_VERIFIED: "Deine Email-Adresse ist noch nicht bestätigt",
-  ERR_NEEDS_LOGIN: "Eine Anmeldung wird benötigt für diese Funktion",
-  ERR_NOT_YOUR_TEAM: "Du bist nicht in dieser Klasse angemeldet",
-  ERR_NO_BALLOT_SPECIFIED: "Keine Abstimmung ausgewählt",
-  ERR_NO_EMAIL: "Keine Email-Adresse angegeben",
-  ERR_NO_PASSWORD: "Kein Passwort angegeben",
-  ERR_NO_PERMISSION: "Berechtigung fehlt für diese Aktion",
-  ERR_NO_TOKEN: "Deine Anmeldung hat nicht geklappt",
-  ERR_ONLY_UPDATE_SELF: "Du darfst nur Dein eigenes Profil bearbeiten",
-  ERR_PASSWORD_CHANGE: "Das Passwort konnte nicht geändert werden",
-  ERR_PASSWORD_NOT_SET: "Es wurde kein Passwort gesetzt",
-  ERR_SEND_EMAIL_VERIFICATION:
-    "Das Bestätigungs-Email konnte nicht verschickt werden",
-  ERR_STRANGE_COOKIE: "Fehlerhafte Anfrage",
-  ERR_TEAM_NOT_FOUND: "Diese Klasse wurde nicht gefunden",
-  ERR_TOKEN_NOT_FOUND: "Dieser Code wurde nicht gefunden",
-  ERR_USER_NOT_FOUND: "Dieses Benutzerkonto wurde nicht gefunden",
-  ERR_USER_PASSWORD: "Email oder Passwort passen leider nicht zueinander…",
-  ERR_VOTING_NEEDS_LOGIN: "Die Abstimmung benötigt eine Anmeldung",
-  ERR_VOTING_NOT_ALLOWED: "Abstimmen nicht erlaubt",
-  PROFILE_LEGAL_TEXT: "[TODO-Legal-Text]",
+interface Translations {
+  [name: string]: Translations | string;
+}
+
+const messages: Translations = {
+  Error: {
+    BallotNotStarted: "Diese Abstimmung ist noch nicht gestartet",
+    BallotEnded: "Diese Abstimmung ist bereits beendet",
+    BallotcodeWrong: "Ungültiger Abstimmungscode",
+    AlreadyVoted: "Du hast bereits über diese Vorlage abgestimmt",
+    VotecodeFailed: "Datenbank-Fehler",
+    BallotrunCannotRemove: "Abstimmung kann nicht abgewählt werden",
+    BallotrunNotFound: "Abstimmung nicht gefunden",
+    BallotNotFound: "Abstimmung nicht gefunden",
+    CannotCreateBallotrun: "Abstimmung kann nicht ausgewählt werden",
+    CannotDeleteAccount:
+      "Benutzerkonto kann nicht gelöscht werden. Bitte kontaktiere uns",
+    CreateUser: "Benutzerkonto kann nicht erstellt werden",
+    DuplicateEmail: "Für diese Email-Adresse gibt es bereits ein Benutzerkonto",
+    EmailNotFound: "Email-Adresse wurde nicht gefunden",
+    EmailNotVerified: "Deine Email-Adresse ist noch nicht bestätigt",
+    NeedsLogin: "Eine Anmeldung wird benötigt für diese Funktion",
+    NotYourTeam: "Du bist nicht in dieser Klasse angemeldet",
+    NoBallotSpecified: "Keine Abstimmung ausgewählt",
+    NoEmail: "Keine Email-Adresse angegeben",
+    NoPassword: "Kein Passwort angegeben",
+    NoPermission: "Berechtigung fehlt für diese Aktion",
+    NoToken: "Deine Anmeldung hat nicht geklappt",
+    OnlyUpdateSelf: "Du darfst nur Dein eigenes Profil bearbeiten",
+    PasswordChange: "Das Passwort konnte nicht geändert werden",
+    PasswordNotSet: "Es wurde kein Passwort gesetzt",
+    SendEmailVerification:
+      "Das Bestätigungs-Email konnte nicht verschickt werden",
+    StrangeCookie: "Fehlerhafte Anfrage",
+    TeamNotFound: "Diese Klasse wurde nicht gefunden",
+    TokenNotFound: "Dieser Code wurde nicht gefunden",
+    UserNotFound: "Dieses Benutzerkonto wurde nicht gefunden",
+    UserPassword: "Email oder Passwort passen leider nicht zueinander…",
+    VotingNeedsLogin: "Die Abstimmung benötigt eine Anmeldung",
+    VotingNotAllowed: "Abstimmen nicht erlaubt",
+  },
+  Profile: { LegalText: "[TODO-Legal-Text]" },
 };
 
-export function tr(code: string): string {
-  return messages[code] || code;
+const matchNestedCode = new RegExp(/^\w+\.[\w.]+$/);
+
+export function tr(code: string, dict?: Translations): string {
+  // start with root Translations object
+  if (!dict) dict = messages;
+  // check for a nested key like Error.Login.ForgotPassword
+  if (matchNestedCode.exec(code)) {
+    const elems = code.split(".");
+    if (elems.length > 0) {
+      const [first, ...rest] = elems;
+      const result = dict[first];
+      if (typeof result !== "string") {
+        return tr(rest.join("."), result);
+      }
+    }
+  }
+  // we look for code in Translations. If nothing found, we take the original
+  const translated = dict[code] || code;
+  // the result should not be a list of Translations
+  if (typeof translated !== "string") {
+    throw new Error(
+      `Deep translation code ${code} does not follow Error.Login.ForgotPassword syntax`
+    );
+  }
+  return translated;
 }

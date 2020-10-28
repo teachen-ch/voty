@@ -42,10 +42,10 @@ export const vote: FieldResolver<"Mutation", "vote"> = async (
     where: { id: ctx.user?.id },
     include: { school: true, team: true },
   });
-  if (!user) throw new Error("ERR_VOTING_NEEDS_LOGIN");
-  if (!ballot) throw new Error("ERR_BALLOT_NOT_FOUND");
+  if (!user) throw new Error("Error.VotingNeedsLogin");
+  if (!ballot) throw new Error("Error.BallotNotFound");
   if (!(await votingPermission({ ballot, user, db: ctx.db }))) {
-    throw new Error("ERR_VOTING_NOT_ALLOWED");
+    throw new Error("Error.VotingNotAllowed");
   }
 
   // TODO: This should be e.g. the id of the vote hashed client side with users password
@@ -94,12 +94,12 @@ export const voteCode: FieldResolver<"Mutation", "voteCode"> = async (
       ballot: true,
     },
   });
-  if (!ballotRun) throw new Error("ERR_BALLOTRUN_NOT_FOUND");
+  if (!ballotRun) throw new Error("Error.BallotrunNotFound");
 
   const ballot = ballotRun.ballot;
   const user = ctx.user;
   if (user && getHasVoted({ ballot, user, db: ctx.db })) {
-    throw new Error("ERR_ALREADY_VOTED");
+    throw new Error("Error.AlreadyVoted");
   }
 
   const now = new Date();
@@ -109,19 +109,19 @@ export const voteCode: FieldResolver<"Mutation", "voteCode"> = async (
   const ballotEnded = ballot.end && ballot.end < now;
 
   if (!ballotRunStarted || !ballotStarted) {
-    throw new Error("ERR_BALLOT_NOT_STARTED");
+    throw new Error("Error.BallotNotStarted");
   }
   if (ballotRunEnded || ballotEnded) {
-    throw new Error("ERR_BALLOT_ENDED");
+    throw new Error("Error.BallotEnded");
   }
 
   const team = ballotRun?.team;
-  if (team.code !== code) throw new Error("ERR_BALLOTCODE_WRONG");
+  if (team.code !== code) throw new Error("Error.BallotcodeWrong");
 
   const voted = getCookie((ctx.req as unknown) as NextApiRequest, "voty", {});
-  if (typeof voted !== "object") throw new Error("ERR_STRANGE_COOKIE");
+  if (typeof voted !== "object") throw new Error("Error.StrangeCookie");
   if (ballotRunId in voted) {
-    throw new Error("ERR_ALREADY_VOTED");
+    throw new Error("Error.AlreadyVoted");
   }
 
   const verify = randomBytes(32).toString("hex");
@@ -138,7 +138,7 @@ export const voteCode: FieldResolver<"Mutation", "voteCode"> = async (
       team: { connect: { id: team.id } },
     },
   });
-  if (!result) throw new Error("ERR_VOTECODE_FAILED");
+  if (!result) throw new Error("Error.VotecodeFailed");
 
   voted[ballotRunId] = Date.now();
   const exp = 10 ** 11; // sometime in roughly 3.17 years...
@@ -158,8 +158,8 @@ export const addBallotRun: FieldResolver<"Mutation", "addBallotRun"> = async (
 
   const ballot = await ctx.db.ballot.findOne({ where: { id: ballotId } });
   const team = await ctx.db.team.findOne({ where: { id: teamId } });
-  if (!ballot) throw new Error("ERR_BALLOT_NOT_FOUND");
-  if (!team) throw new Error("ERR_TEAM_NOT_FOUND");
+  if (!ballot) throw new Error("Error.BallotNotFound");
+  if (!team) throw new Error("Error.TeamNotFound");
 
   const ballotRun = await ctx.db.ballotRun.upsert({
     create: {
@@ -174,7 +174,7 @@ export const addBallotRun: FieldResolver<"Mutation", "addBallotRun"> = async (
       ballotId_teamId: { ballotId, teamId },
     },
   });
-  if (!ballotRun) throw new Error("ERR_CANNOT_CREATE_BALLOTRUN");
+  if (!ballotRun) throw new Error("Error.CannotCreateBallotrun");
 
   return ballotRun;
 };
@@ -187,14 +187,14 @@ export const removeBallotRun: FieldResolver<
   const ballotRun = await ctx.db.ballotRun.findOne({
     where: { id: ballotRunId },
   });
-  if (!ballotRun) throw new Error("ERR_BALLOTRUN_NOT_FOUND");
+  if (!ballotRun) throw new Error("Error.BallotrunNotFound");
 
   const success = await ctx.db.ballotRun.delete({
     where: { id: ballotRunId },
     include: { ballot: true },
   });
 
-  if (!success) throw new Error("ERR_BALLOTRUN_CANNOT_REMOVE");
+  if (!success) throw new Error("Error.BallotrunCannotRemove");
   return { success: true };
 };
 
@@ -208,7 +208,7 @@ export const startBallotRun: FieldResolver<
     data: { start: new Date() },
     where: { id: ballotRunId },
   });
-  if (!ballotRun) throw new Error("ERR_BALLOTRUN_NOT_FOUND");
+  if (!ballotRun) throw new Error("Error.BallotrunNotFound");
 
   return ballotRun;
 };
@@ -224,7 +224,7 @@ export const endBallotRun: FieldResolver<"Mutation", "endBallotRun"> = async (
     data: { end: new Date() },
     where: { id: ballotRunId },
   });
-  if (!ballotRun) throw new Error("ERR_BALLOTRUN_NOT_FOUND");
+  if (!ballotRun) throw new Error("Error.BallotrunNotFound");
 
   return ballotRun;
 };
@@ -237,7 +237,7 @@ export const getBallotRuns: FieldResolver<"Query", "getBallotRuns"> = async (
   const teamId = args.teamId;
 
   const team = await ctx.db.team.findOne({ where: { id: teamId } });
-  if (!team) throw new Error("ERR_TEAM_NOT_FOUND");
+  if (!team) throw new Error("Error.TeamNotFound");
 
   return await ctx.db.ballotRun.findMany({ where: { teamId } });
 };
@@ -264,19 +264,18 @@ export const getBallotResults: FieldResolver<
       where: { id: ballotRunId },
       include: { team: { select: { teacherId: true } } },
     });
-    if (!ballotRun) throw new Error("ERR_BALLOTRUN_NOT_FOUND");
+    if (!ballotRun) throw new Error("Error.BallotrunNotFound");
     if (ballotRun.team.teacherId !== user?.id)
-      throw new Error("ERR_NO_PERMISSION");
+      throw new Error("Error.NoPermission");
     where.ballotRunId = ballotRunId;
     where.ballotId = ballotRun.ballotId;
   } else {
-    if (!ballotId) throw new Error("ERR_NO_BALLOT_SPECIFIED");
+    if (!ballotId) throw new Error("Error.NoBallotSpecified");
     where.ballotId = ballotId;
   }
 
   if (teamId) {
     where.teamId = teamId;
-    console.log("filtering by team: ", teamId);
   }
   if (schoolId) {
     where.schoolId = schoolId;

@@ -185,7 +185,6 @@ export const QForm: React.FC<QFormProps> = ({ fields, mutation, ...props }) => {
           name={field.name}
           setter={field.setter}
           placeholder={field.placeholder}
-          autoFocus={field.focus}
         />
       );
     }
