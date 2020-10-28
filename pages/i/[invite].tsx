@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import { AppPage } from "../../components/Page";
 import { gql } from "@apollo/client";
 import { ErrorBox } from "../../components/Form";
-import { Heading, Button, Text } from "rebass";
+import { Heading, Box, Button, Text } from "rebass";
 import { useState } from "react";
 import { CreateUserForm, Success } from "../user/signup";
 import { useUser } from "../../state/user";
@@ -14,6 +14,7 @@ import {
   useAcceptInviteMutation,
   TeamAnonFieldsFragment,
 } from "graphql/types";
+import CheckLogin from "components/CheckLogin";
 
 export const CREATE_INVITED_USER = gql`
   mutation createInvitedUser(
@@ -30,15 +31,10 @@ export const CREATE_INVITED_USER = gql`
       email: $email
       password: $password
     ) {
-      id
-      name
-      email
-      lastname
-      shortname
-      role
-      email
+      ...LoginFields
     }
   }
+  ${CheckLogin.fragments.LoginFields}
 `;
 
 export const ACCEPT_INVITE = gql`
@@ -58,6 +54,7 @@ export const ACCEPT_INVITE = gql`
 const Invite: React.FC = () => {
   const existingUser = useUser();
   const [newUser, setUser] = useState<SessionUser | undefined>(undefined);
+  const [error, setError] = useState("");
   const router = useRouter();
   const invite = String(router.query.invite);
   const teamQuery = useTeamByInviteQuery({ variables: { invite } });
@@ -67,8 +64,8 @@ const Invite: React.FC = () => {
     onCompleted(data) {
       setUser(data.createInvitedUser);
     },
-    onError(error) {
-      console.error(error.message);
+    onError(err) {
+      setError(err.message);
     },
   });
   const onSubmit = (values: Record<string, string | number>) =>
@@ -79,51 +76,54 @@ const Invite: React.FC = () => {
       variables: { ...omit(values, "submit"), invite },
     });
 
-  if (teamQuery.error) {
+  if (teamQuery.loading) {
+    return <AppPage heading="Klassen-Einladung">wird geladen...</AppPage>;
+  }
+  if (teamQuery.error || !team) {
     return (
       <AppPage heading="Fehler">
-        Diese Einladung ist nicht gültig. Bitte sprich mit Deiner Lehrperson.
-        <br />
-        <br />
-        <ErrorBox error={teamQuery.error.message} />
+        <Box minHeight="400px">
+          Diese Einladung ist nicht gültig. Bitte sprich mit Deiner Lehrperson.
+          {teamQuery.error?.message && (
+            <ErrorBox error={teamQuery.error.message} />
+          )}
+        </Box>
       </AppPage>
     );
   }
 
-  if (team) {
-    if (existingUser) {
-      return <AcceptInvite user={existingUser} invite={invite} team={team} />;
-    }
+  if (existingUser) {
+    return <AcceptInvite user={existingUser} invite={invite} team={team} />;
+  }
 
-    if (newUser !== undefined) {
-      return (
-        <AppPage heading="Dein Benutzerkonto ist erstellt">
-          <Success user={newUser} />
-        </AppPage>
-      );
-    }
-
+  if (newUser !== undefined) {
     return (
-      <AppPage heading="Klassen-Einladung">
-        <Heading as="h2">
-          Einladung für die Klasse «{team.name}» im Schulhaus «
-          {team.school?.name}»
-        </Heading>
-        <Text mb={3} fontSize={[2, 2, 3]}>
-          Erstelle einen neuen Schüler*innen Account für voty.ch. Bitte nutze
-          die Email-Adresse Deiner Schule.
-        </Text>
-        <CreateUserForm
-          setUser={setUser}
-          onSubmit={onSubmit}
-          omitRole
-          defaultRole="Student"
-        />
+      <AppPage heading="Dein Benutzerkonto ist erstellt">
+        <Success user={newUser} />
       </AppPage>
     );
-  } else {
-    return <AppPage heading="Klassen-Einladung">Lade Einladung</AppPage>;
   }
+
+  return (
+    <AppPage heading="Klassen-Einladung">
+      <Heading as="h2">
+        Einladung für die Klasse «{team.name}» im Schulhaus «{team.school?.name}
+        »
+      </Heading>
+      <Text mb={3} fontSize={[2, 2, 3]}>
+        Erstelle einen neuen Schüler*innen Account für voty.ch. Bitte nutze die
+        Email-Adresse Deiner Schule.
+      </Text>
+      <CreateUserForm
+        setUser={setUser}
+        onSubmit={onSubmit}
+        omitRole
+        defaultRole="Student"
+      >
+        <ErrorBox error={error} mb={4} />
+      </CreateUserForm>
+    </AppPage>
+  );
 };
 
 export default Invite;

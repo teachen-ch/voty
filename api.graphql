@@ -1191,6 +1191,13 @@ input IntNullableFilter {
   notIn: [Int!]
 }
 
+type InviteResponse {
+  created: [String!]
+  duplicated: [String!]
+  failed: [String!]
+  team: Team
+}
+
 """
 The `JSON` scalar type represents JSON objects as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
 """
@@ -1210,7 +1217,7 @@ type Mutation {
   deleteOneTeam(where: TeamWhereUniqueInput!): Team
   emailVerification(email: String!, purpose: String!): ResponseLogin
   endBallotRun(ballotRunId: String!): BallotRun
-  inviteStudents(emails: [String!]!, team: String!): Team
+  inviteStudents(emails: [String!]!, team: String!): InviteResponse
   login(email: String, password: String): ResponseLogin
   removeBallotRun(ballotRunId: String!): Response
   setSchool(school: String!): User

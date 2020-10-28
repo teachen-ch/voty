@@ -10,6 +10,7 @@ import {
   useCreateUserMutation,
   useEmailVerificationMutation,
 } from "graphql/types";
+import Abstimmung from "pages/abstimmung";
 
 // TODO use fragment for these fields
 export const CREATE_USER = gql`
@@ -26,6 +27,7 @@ export const CREATE_USER = gql`
 `;
 
 export default function Signup(): ReactElement {
+  return <Abstimmung />;
   const [user, setUser] = useState<SessionUser | undefined>(undefined);
   const router = useRouter();
   if (user) {
@@ -102,7 +104,6 @@ export const CreateUserForm: React.FC<{
   onSubmit?: (values: Record<string, string | number>) => void;
   omitRole?: boolean;
   defaultRole?: string;
-  noFocus?: boolean;
 }> = (props) => {
   const router = useRouter();
   const [error, setError] = useState("");
@@ -130,7 +131,6 @@ export const CreateUserForm: React.FC<{
       onSubmit={onSubmit}
       fields={{
         name: {
-          focus: !props.noFocus,
           label: "Vorname",
           required: true,
           validate: yup.string().min(3, "Dein Vorname ist etwas kurz"),
@@ -184,6 +184,7 @@ export const CreateUserForm: React.FC<{
       >
         Ich habe bereits ein Benutzerkonto
       </Button>
+      {props.children}
     </QForm>
   );
 };

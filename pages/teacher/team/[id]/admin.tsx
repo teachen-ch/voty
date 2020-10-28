@@ -11,16 +11,23 @@ import { SelectBallots } from "components/Ballots";
 import { gql } from "@apollo/client";
 import IconHint from "../../../../public/images/icon_hint.svg";
 import { fragments } from "components/Teams";
+import { ErrorBox } from "components/Form";
 import {
   useTeamTeacherQuery,
   TeamTeacherFieldsFragment,
   useInviteStudentsMutation,
 } from "graphql/types";
+import { Nullable } from "simplytyped";
 
 export const INVITE_STUDENTS = gql`
   mutation inviteStudents($team: String!, $emails: [String!]!) {
     inviteStudents(team: $team, emails: $emails) {
-      ...TeamTeacherFields
+      created
+      failed
+      duplicated
+      team {
+        ...TeamTeacherFields
+      }
     }
   }
   ${fragments.TeamTeacherFields}
@@ -35,18 +42,22 @@ export default function TeacherTeamPage(): React.ReactElement {
   });
   const [emails, setEmails] = useState<string[]>([]);
   const [matches, setMatches] = useState<number | undefined>();
+  const [results, setResults] = useState<
+    Nullable<{
+      created?: Nullable<string[]>;
+      failed?: Nullable<string[]>;
+      duplicated?: Nullable<string[]>;
+    }>
+  >();
   const [showInviteLink, setShowInviteLink] = useState(false);
   const [importEmails, setImportEmails] = useState("");
-
   const [doInviteStudents, inviteQuery] = useInviteStudentsMutation({
-    onCompleted(/*{ inviteStudents }*/) {
-      // TODO: currently we get the page updated via cache
-      // but we do not show (or send over the API) errors
-      // const updatedTeam = inviteStudents;
+    onCompleted({ inviteStudents }) {
       setEmails([]);
       setMatches(undefined);
       setShowInviteLink(false);
       setImportEmails("");
+      setResults(inviteStudents);
     },
   });
 
@@ -80,6 +91,11 @@ export default function TeacherTeamPage(): React.ReactElement {
     );
   }
 
+  const duplicated = results?.duplicated?.length;
+  const duplicatedEmails = results?.duplicated?.join(", ");
+  const failed = results?.failed?.length;
+  const failedEmails = results?.failed?.join(", ");
+
   return (
     <LoggedInPage heading="Detailansicht Schulklasse">
       <Heading as="h3">
@@ -104,7 +120,8 @@ export default function TeacherTeamPage(): React.ReactElement {
       ) : (
         <>
           <Text fontSize={[1, 1, 2]} my={3}>
-            An alle dies Email-Adressen Einladungen verschicken:
+            Diese Einladungen wurden bereits verschickt. Hier sehen Sie auch,
+            wer die Einladung bereits akzeptiert hat.
           </Text>
           <Users users={team.members} />
         </>
@@ -131,6 +148,21 @@ export default function TeacherTeamPage(): React.ReactElement {
           ? "Bitte warten..."
           : `${matches ? matches : ""} Einladungen verschicken`}
       </Button>
+
+      {duplicated ? (
+        <ErrorBox
+          error={`Folgende Accounts existieren bereits: ${duplicatedEmails}`}
+        />
+      ) : (
+        ""
+      )}
+      {failed ? (
+        <ErrorBox
+          error={`Bei diesen Email-Adressen gab es einen Fehler: ${failedEmails}`}
+        />
+      ) : (
+        ""
+      )}
       {matches && (
         <>
           <Text fontSize={1}>

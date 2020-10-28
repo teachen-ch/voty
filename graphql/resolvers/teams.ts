@@ -11,8 +11,9 @@ export const inviteStudents: FieldResolver<
 > = async (_root, args, ctx) => {
   const { team: id, emails } = args;
   const user = ctx.user;
-  const errors: string[] = [];
-  const success: string[] = [];
+  const failed: string[] = [];
+  const created: string[] = [];
+  const duplicated: string[] = [];
 
   let team = await ctx.db.team.findOne({ where: { id } });
   if (!team) throw Error("Error.TeamNotFound");
@@ -35,9 +36,13 @@ export const inviteStudents: FieldResolver<
     try {
       const invited = await createUser(_root, args, ctx, undefined as any);
       await connectUserTeam(invited as User, team, ctx);
-      success.push(email);
+      created.push(email);
     } catch (err) {
-      errors.push(email);
+      if (err.message === "Error.DuplicateEmail") {
+        duplicated.push(email);
+      } else {
+        failed.push(email);
+      }
     }
   }
 
@@ -45,5 +50,5 @@ export const inviteStudents: FieldResolver<
     where: { id },
     include: { members: true, school: true },
   });
-  return team;
+  return { created, failed, duplicated, team };
 };

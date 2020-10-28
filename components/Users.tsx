@@ -54,14 +54,15 @@ export function Users({
 }): ReactElement {
   return (
     <>
-      <table>
+      <table style={{ borderTop: "2px solid white" }}>
+        {/*
         <thead>
           <tr>
             <th>Name</th>
             <th>Email</th>
             <th style={{ textAlign: "center", width: "1%" }}>Status</th>
           </tr>
-        </thead>
+        </thead>*/}
 
         <tbody>
           {!users || users.length === 0 ? (

@@ -86,15 +86,13 @@ export default {
         borderSpacing: 0,
         width: "100%",
         fontSize: [2, 2, 2],
-        borderBottom: "2px solid white",
-        borderTop: "2px solid white",
         textAlign: "left",
+        borderBottom: "2px solid white",
       },
       th: {
         px: 2,
         py: 1,
         textAlign: "left",
-        display: "none",
         borderBottom: "2px solid white",
       },
       tbody: {

@@ -156,6 +156,16 @@ schema.objectType({
 });
 
 schema.objectType({
+  name: "InviteResponse",
+  definition(t) {
+    t.string("created", { list: true });
+    t.string("failed", { list: true });
+    t.string("duplicated", { list: true });
+    t.field("team", { type: "Team" });
+  },
+});
+
+schema.objectType({
   name: "BallotResults",
   definition(t) {
     t.int("yes");
@@ -239,7 +249,7 @@ schema.mutationType({
     });
 
     t.field("inviteStudents", {
-      type: "Team",
+      type: "InviteResponse",
       args: {
         team: stringArg({ required: true }),
         emails: stringArg({ list: true, required: true }),

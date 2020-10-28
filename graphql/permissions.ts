@@ -173,6 +173,7 @@ export const permissions = shield({
     BallotRun: allow,
     BallotResults: allow,
     ResponseLogin: allow,
+    InviteResponse: allow,
     Response: allow,
     Vote: isUser,
   },

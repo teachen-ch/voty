@@ -1215,6 +1215,14 @@ export type IntNullableFilter = {
   notIn?: Maybe<Array<Scalars['Int']>>;
 };
 
+export type InviteResponse = {
+  __typename?: 'InviteResponse';
+  created?: Maybe<Array<Scalars['String']>>;
+  duplicated?: Maybe<Array<Scalars['String']>>;
+  failed?: Maybe<Array<Scalars['String']>>;
+  team?: Maybe<Team>;
+};
+
 
 export type Mutation = {
   __typename?: 'Mutation';
@@ -1231,7 +1239,7 @@ export type Mutation = {
   deleteOneTeam?: Maybe<Team>;
   emailVerification?: Maybe<ResponseLogin>;
   endBallotRun?: Maybe<BallotRun>;
-  inviteStudents?: Maybe<Team>;
+  inviteStudents?: Maybe<InviteResponse>;
   login?: Maybe<ResponseLogin>;
   removeBallotRun?: Maybe<Response>;
   setSchool?: Maybe<User>;
@@ -4919,7 +4927,7 @@ export type CreateInvitedUserMutation = (
   { __typename?: 'Mutation' }
   & { createInvitedUser?: Maybe<(
     { __typename?: 'User' }
-    & Pick<User, 'id' | 'name' | 'email' | 'lastname' | 'shortname' | 'role'>
+    & LoginFieldsFragment
   )> }
 );
 
@@ -4949,8 +4957,12 @@ export type InviteStudentsMutationVariables = Exact<{
 export type InviteStudentsMutation = (
   { __typename?: 'Mutation' }
   & { inviteStudents?: Maybe<(
-    { __typename?: 'Team' }
-    & TeamTeacherFieldsFragment
+    { __typename?: 'InviteResponse' }
+    & Pick<InviteResponse, 'created' | 'failed' | 'duplicated'>
+    & { team?: Maybe<(
+      { __typename?: 'Team' }
+      & TeamTeacherFieldsFragment
+    )> }
   )> }
 );
 
@@ -4994,6 +5006,10 @@ export type EmailVerificationMutation = (
   & { emailVerification?: Maybe<(
     { __typename?: 'ResponseLogin' }
     & Pick<ResponseLogin, 'token'>
+    & { user?: Maybe<(
+      { __typename?: 'User' }
+      & LoginFieldsFragment
+    )> }
   )> }
 );
 
@@ -5007,6 +5023,10 @@ export type ChangePasswordMutation = (
   & { changePassword?: Maybe<(
     { __typename?: 'ResponseLogin' }
     & Pick<ResponseLogin, 'token'>
+    & { user?: Maybe<(
+      { __typename?: 'User' }
+      & LoginFieldsFragment
+    )> }
   )> }
 );
 
@@ -5944,16 +5964,10 @@ export type UpdateUserMutationOptions = Apollo.BaseMutationOptions<UpdateUserMut
 export const CreateInvitedUserDocument = gql`
     mutation createInvitedUser($invite: String!, $name: String, $lastname: String, $email: String!, $password: String) {
   createInvitedUser(invite: $invite, name: $name, lastname: $lastname, email: $email, password: $password) {
-    id
-    name
-    email
-    lastname
-    shortname
-    role
-    email
+    ...LoginFields
   }
 }
-    `;
+    ${LoginFieldsFragmentDoc}`;
 export type CreateInvitedUserMutationFn = Apollo.MutationFunction<CreateInvitedUserMutation, CreateInvitedUserMutationVariables>;
 
 /**
@@ -6024,7 +6038,12 @@ export type AcceptInviteMutationOptions = Apollo.BaseMutationOptions<AcceptInvit
 export const InviteStudentsDocument = gql`
     mutation inviteStudents($team: String!, $emails: [String!]!) {
   inviteStudents(team: $team, emails: $emails) {
-    ...TeamTeacherFields
+    created
+    failed
+    duplicated
+    team {
+      ...TeamTeacherFields
+    }
   }
 }
     ${TeamTeacherFieldsFragmentDoc}`;
@@ -6127,9 +6146,12 @@ export const EmailVerificationDocument = gql`
     mutation emailVerification($email: String!, $purpose: String!) {
   emailVerification(email: $email, purpose: $purpose) {
     token
+    user {
+      ...LoginFields
+    }
   }
 }
-    `;
+    ${LoginFieldsFragmentDoc}`;
 export type EmailVerificationMutationFn = Apollo.MutationFunction<EmailVerificationMutation, EmailVerificationMutationVariables>;
 
 /**
@@ -6160,9 +6182,12 @@ export const ChangePasswordDocument = gql`
     mutation changePassword($password: String!) {
   changePassword(password: $password) {
     token
+    user {
+      ...LoginFields
+    }
   }
 }
-    `;
+    ${LoginFieldsFragmentDoc}`;
 export type ChangePasswordMutationFn = Apollo.MutationFunction<ChangePasswordMutation, ChangePasswordMutationVariables>;
 
 /**

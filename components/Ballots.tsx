@@ -324,15 +324,15 @@ export const SelectBallots: React.FC<{ team: TeamTeacherFieldsFragment }> = ({
 
   return (
     <>
-      <table id="ballots">
-        <thead>
+      <table id="ballots" style={{ borderTop: "2px solid white" }}>
+        {/* <thead>
           <tr>
             <th>Abstimmung</th>
             <th>Deadline</th>
             <th style={{ textAlign: "center" }}>Resultate</th>
             <th style={{ width: "1%" }}>Ausgewählt</th>
           </tr>
-        </thead>
+        </thead>*/}
         <tbody>
           {ballots.map((ballot) => (
             <tr key={ballot.id} onClick={() => detailBallot(ballot.id)}>
