@@ -98,7 +98,7 @@ export default {
       tbody: {
         tr: {
           height: "32px",
-          ":nth-child(odd)": {
+          ":nth-of-type(odd)": {
             backgroundColor: "#88969D",
           },
           ":hover": {

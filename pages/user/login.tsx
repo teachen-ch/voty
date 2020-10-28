@@ -237,7 +237,7 @@ function AfterLogin() {
   if (user && user.role) {
     const page = getStartpage(user.role);
     void router.push(page);
-    return null;
+    return <AppPage heading=""></AppPage>;
   } else {
     return (
       <AppPage heading="Angemeldet">

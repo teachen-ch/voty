@@ -52,31 +52,34 @@ export const AppPage: React.FC<{
             backgroundColor: ["silver_m", "silver_m", "silver"],
           }}
           maxWidth="800px"
+          minHeight="450px"
           textAlign={["center", "center", "left"]}
         >
-          <Heading
-            mt={0}
-            as="h1"
-            fontSize={[5, 5, "34px", "50px"]}
-            fontWeight="normal"
-            sx={{ borderBottom: "2px solid white" }}
-          >
-            <Flex justifyContent="space-between">
-              {props.heading}
-              {props.onClose && (
-                <A
-                  onClick={props.onClose}
-                  sx={{
-                    position: "relative",
-                    right: 0,
-                    display: ["none", "none", "block"],
-                  }}
-                >
-                  <IconClose />
-                </A>
-              )}
-            </Flex>
-          </Heading>
+          {props.heading && (
+            <Heading
+              mt={0}
+              as="h1"
+              fontSize={[5, 5, "34px", "50px"]}
+              fontWeight="normal"
+              sx={{ borderBottom: "2px solid white" }}
+            >
+              <Flex justifyContent="space-between">
+                {props.heading}
+                {props.onClose && (
+                  <A
+                    onClick={props.onClose}
+                    sx={{
+                      position: "relative",
+                      right: 0,
+                      display: ["none", "none", "block"],
+                    }}
+                  >
+                    <IconClose />
+                  </A>
+                )}
+              </Flex>
+            </Heading>
+          )}
           {props.children}
         </Box>
         <Footer color={props.light ? ["white", "white", "black"] : "white"} />
@@ -105,10 +108,9 @@ export const LoggedInPage: React.FC<{
         <CheckLogin setLoading={setLoading} />
         {!loading && (
           <>
-            <Text>
+            <Text my={4}>
               Diese Seite benötigt eine Anmeldung
-              {role && ` als ${getRoleName(role)}`}. Bitte benutze Deine
-              Schul-Email.
+              {role && ` als ${getRoleName(role)}`}.
             </Text>
             <LoginForm />
           </>

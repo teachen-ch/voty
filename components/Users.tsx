@@ -86,9 +86,9 @@ export function Users({
                 <td style={{ textAlign: "center" }}>
                   <Box variant="centered">
                     {user.emailVerified ? (
-                      <Image src="/images/icon_user_ok.svg" height="18px" />
+                      <Image src="/images/icon_user_ok.svg" />
                     ) : (
-                      <Image src="/images/icon_user_nok.svg" height="18px" />
+                      <Image src="/images/icon_user_nok.svg" />
                     )}
                   </Box>
                 </td>

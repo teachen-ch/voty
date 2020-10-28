@@ -11,24 +11,26 @@ import { ReadMore } from "components/ReadMore";
 export default function Abstimmung(): ReactElement {
   const [user, setUser] = useState<SessionUser | undefined>(undefined);
   return (
-    <AppPage heading="Jugendliche stimmen ab – jetzt Schulklasse anmelden">
+    <AppPage heading="Jugendliche stimmen ab – jetzt Klasse anmelden">
       <Text textAlign="left">
-        <Text mt={4}>
+        <Text mt={4} fontSize={[2, 2, 3]}>
           <img
             src="/images/voty_module_2.svg"
             alt="Bundeshaus"
             style={{
               float: "right",
-              marginLeft: 30,
-              width: "190px",
+              marginLeft: 20,
+              marginRight: 20,
+              width: "160px",
               maxWidth: "30%",
             }}
           />
           Wie motivieren wir Jugendliche für unsere Demokratie? Wir möchten
           gemeinsam mit engagierten Lehrpersonen ein Experiment starten und im
-          November mit mindestens 50 Schulklassen über die beiden nationalen
-          Vorlagen abstimmen. Interesse für Politik entsteht dann, wenn man
-          diskutieren und mitentscheiden kann. Helfen Sie mit!
+          November mit mindes&shy;tens 50 Schulklassen über die beiden
+          nationalen Vorla&shy;gen ab&shy;stimmen. Interesse für Politik
+          entsteht dann, wenn disku&shy;tiert und mitentscheiden werden kann.
+          Helfen Sie mit!
         </Text>
         <Flex
           my={4}
@@ -82,7 +84,7 @@ export default function Abstimmung(): ReactElement {
               omitRole
               defaultRole={Role.Teacher}
             >
-              <Text mt={3} fontSize={3}>
+              <Text mt={3} fontSize={3} sx={{ gridColumn: [0, 0, 2] }}>
                 Wir sind uns bewusst, dass die Zeit bis Ende November in der
                 Planung knapp ist. Aber wenn wir es gemeinsam schaffen, genügend
                 Klassen zu motivieren, dann hat das Ergebnis der Abstimmung auch
@@ -99,7 +101,7 @@ export default function Abstimmung(): ReactElement {
         )}
       </Text>
 
-      <Box mt={5} mb={5}>
+      <Box my="80px">
         <Text
           fontSize={[3, 3, 4]}
           pl={4}

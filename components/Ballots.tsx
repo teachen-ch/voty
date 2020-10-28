@@ -373,7 +373,7 @@ export const BallotDetails: React.FC<{
     <Text fontWeight="bold">{ballot.title}</Text>
     <Text mt={3}>{ballot.description}</Text>
     <Text fontSize={2} my={4}>
-      <img src="/images/icon_cal.svg" /> &nbsp; Zeit:{" "}
+      <img src="/images/icon_cal.svg" width="20px" /> &nbsp; Zeit:{" "}
       {formatFromTo(ballot.start, ballot.end)}
     </Text>
     <Text textAlign="center">

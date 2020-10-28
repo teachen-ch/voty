@@ -3,8 +3,9 @@ import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { Button, ButtonProps } from "rebass";
 import { useApolloClient } from "@apollo/client";
+import { AppPage } from "components/Page";
 
-export default function LogoutPage(): null {
+export default function LogoutPage(): React.ReactElement {
   const setUser = useSetUser();
   const setAccessToken = useSetAccessToken();
   const router = useRouter();
@@ -15,7 +16,7 @@ export default function LogoutPage(): null {
     void router.push("/");
   }, []);
 
-  return null;
+  return <AppPage heading="" />;
 }
 
 type LogoutButtonProps = ButtonProps & {
