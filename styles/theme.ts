@@ -66,6 +66,9 @@ export default {
       color: "inherit",
       textDecoration: "none",
       cursor: "pointer",
+      ":hover": {
+        textDecoration: "underline",
+      },
     },
     underline: {
       textDecoration: "underline",
@@ -287,7 +290,7 @@ export default {
     mt: [0, 0, 1],
     mb: [3, 2, 1],
     fontSize: [2, 2, 4, 4],
-    background: "url('/images/icon_dropdown.svg') 96% / 05% no-repeat #fff",
+    background: "url('/images/icon_dropdown.svg') 96% / 5% no-repeat #fff",
     ":focus": {
       outline: "none",
     },

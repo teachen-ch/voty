@@ -98,7 +98,7 @@ const Invite: React.FC = () => {
 
   if (newUser !== undefined) {
     return (
-      <AppPage heading="Dein Benutzerkonto ist erstellt">
+      <AppPage heading="Dein Konto ist erstellt">
         <Success user={newUser} />
       </AppPage>
     );
@@ -107,8 +107,8 @@ const Invite: React.FC = () => {
   return (
     <AppPage heading="Klassen-Einladung">
       <Heading as="h2">
-        Einladung für die Klasse «{team.name}» im Schulhaus «{team.school?.name}
-        »
+        Einladung für die Klasse «{team.name}» in der Schule «
+        {team.school?.name}»
       </Heading>
       <Text mb={3} fontSize={[2, 2, 3]}>
         Erstelle einen neuen Schüler*innen Account für voty.ch. Bitte nutze die
@@ -162,7 +162,7 @@ const AcceptInvite: React.FC<AcceptInviteProps> = ({ invite, team }) => {
   return (
     <AppPage heading="Klassen-Einladung">
       <Text>
-        Einladung für Klasse «{team.name}» im Schulhaus «{team.school?.name}»
+        Einladung für Klasse «{team.name}» in der Schule «{team.school?.name}»
       </Text>
       <Button my={4} onClick={() => doAcceptInvite()}>
         Einladung annehmen

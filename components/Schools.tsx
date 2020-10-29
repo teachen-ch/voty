@@ -134,7 +134,7 @@ export const SelectSchool: React.FC = () => {
           value={`${user.school.name}, ${user.school.city}`}
         />
         <Button onClick={() => setEdit(true)} sx={{ gridColumn: [0, 0, 2] }}>
-          Anderes Schulhaus auswählen
+          Andere Schule auswählen
         </Button>
       </Grid>
     );
@@ -198,7 +198,7 @@ export const SelectSchool: React.FC = () => {
                 variant="text"
                 width="200%"
               >
-                Neues Schulhaus erfassen
+                Neue Schule erfassen
               </Button>
             </Flex>
           </QForm>
@@ -266,6 +266,7 @@ export function CreateSchool({
         fields={{
           name: {
             label: "Schule",
+            required: true,
           },
           type: {
             type: "select",

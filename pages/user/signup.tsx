@@ -32,18 +32,15 @@ export default function Signup(): ReactElement {
   const router = useRouter();
   if (user) {
     return (
-      <AppPage heading="Dein Benutzerkonto ist erstellt">
+      <AppPage heading="Dein Konto ist erstellt">
         <Success user={user} />
       </AppPage>
     );
   }
   return (
-    <AppPage
-      heading="Erstelle ein Benutzerkonto"
-      onClose={() => void router.push("/")}
-    >
+    <AppPage heading="Erstelle ein Konto" onClose={() => void router.push("/")}>
       <Text mb={4}>
-        Hier kannst Du Dir ein eigenes Benutzerkonto erstellen. Bitte nutze die
+        Hier kannst Du Dir ein eigenes Konto erstellen. Bitte nutze die
         Email-Adresse Deiner Schule.
       </Text>
       <CreateUserForm setUser={setUser} />
@@ -80,9 +77,9 @@ export function Success({ user }: { user?: SessionUser }): ReactElement {
       <Text>
         Hallo {user?.name}
         <br />
-        Dein neues Benutzerkonto wurde erstellt und wir haben ein Email an die
-        Adresse «{user?.email}» geschickt. Bitte öffne den Link in diesem Email,
-        um Dich anzumelden.{" "}
+        Dein neues Konto wurde erstellt und wir haben ein Email an die Adresse «
+        {user?.email}» geschickt. Bitte öffne den Link in diesem Email, um Dich
+        anzumelden.{" "}
       </Text>
       <Text my={4}>
         Solltest Du kein Email von voty.ch in der Inbox Deines Email-Accounts
@@ -183,7 +180,7 @@ export const CreateUserForm: React.FC<{
         textAlign="right"
         sx={{ gridColumn: [0, 0, 2] }}
       >
-        Ich habe bereits ein Benutzerkonto
+        Ich habe bereits ein Konto
       </Button>
       {props.children}
     </QForm>

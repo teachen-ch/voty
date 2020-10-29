@@ -391,7 +391,7 @@ export const BallotDetails: React.FC<{
       <img src="/images/icon_cal.svg" width="20px" alt="Zeit" /> &nbsp; Zeit:{" "}
       {formatFromTo(ballot.start, ballot.end)}
     </Text>
-    <Text textAlign="center">
+    <Text textAlign="center" mb="-50px">
       <img width={150} src="/images/easyvote.png" alt="EasyVote" />
     </Text>
     <div

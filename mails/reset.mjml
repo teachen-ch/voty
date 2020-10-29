@@ -3,7 +3,7 @@
     <mj-section>
       <mj-column>
 
-        <mj-text font-size="30px" font-weight="bold">voty</mj-text>
+        <mj-text font-size="30px" font-weight="bold">voty.&shy;ch</mj-text>
         <mj-divider border-color="#000"></mj-divider>
 
         <mj-text font-size="20px" color="#000" font-family="helvetica">Mit diesem Link kannst Du Dein Passwort für den Benutzer «<strong>{{email}}</strong>» bei voty ändern</mj-text>

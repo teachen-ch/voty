@@ -74,7 +74,7 @@ export const AppPage: React.FC<{
                       display: ["none", "none", "block"],
                     }}
                   >
-                    <IconClose alt="schliessen" />
+                    <IconClose alt="schliessen" width="20px" height="20px" />
                   </A>
                 )}
               </Flex>

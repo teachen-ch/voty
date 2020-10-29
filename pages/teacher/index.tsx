@@ -23,7 +23,7 @@ export default function Teacher(): ReactElement {
     return (
       <LoggedInPage heading="Willkommen auf voty.ch">
         <Text mb={3}>
-          Wähle zuerst Dein Schulhaus aus oder erfasse ein Neues…
+          Wähle zuerst Deine Schule aus oder erfasse eine Neue Schule…
         </Text>
         <SelectSchool />
       </LoggedInPage>
@@ -31,7 +31,7 @@ export default function Teacher(): ReactElement {
   }
 
   return (
-    <LoggedInPage heading="Meine Schulklassen">
+    <LoggedInPage heading="Meine Klassen">
       <Text fontWeight="bold">Willkommen {user && user.name}</Text>
       <Text mb={4}>Hier siehst Du eine Übersicht Deiner Klassen</Text>
       <Teams
@@ -41,7 +41,7 @@ export default function Teacher(): ReactElement {
       <Box mt={4} minHeight="175px">
         {success && (
           <Text mb={4}>
-            Die neue Klasse wurde erfolgreich erstellt. Sie können diese nun in
+            Die neue Klasse wurde erfolgreich erstellt. Du kannst diese nun in
             der Tabelle anwählen um Schüler*innen hinzuzufügen und Abstimmungen
             auszuwählen.
           </Text>

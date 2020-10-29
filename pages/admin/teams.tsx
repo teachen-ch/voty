@@ -4,7 +4,7 @@ import { ReactElement } from "react";
 
 export default function TeamsPage(): ReactElement {
   return (
-    <LoggedInPage heading="Schulklassen">
+    <LoggedInPage heading="Klassen">
       <Teams
         teamClick={() => {
           return;

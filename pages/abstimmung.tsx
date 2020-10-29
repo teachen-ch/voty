@@ -27,10 +27,9 @@ export default function Abstimmung(): ReactElement {
           />
           Wie motivieren wir Jugendliche für unsere Demokratie? Wir möchten
           gemeinsam mit engagierten Lehrpersonen ein Experiment starten und im
-          November mit mindes&shy;tens 50 Schulklassen über die beiden
-          nationalen Vorla&shy;gen ab&shy;stimmen. Interesse für Politik
-          entsteht dann, wenn disku&shy;tiert und mitentscheiden werden kann.
-          Helfen Sie mit!
+          November mit mindes&shy;tens 50 Klassen über die beiden nationalen
+          Vorla&shy;gen ab&shy;stimmen. Interesse für Politik entsteht dann,
+          wenn disku&shy;tiert und mitentscheiden werden kann.
         </Text>
         <Flex
           my={4}
@@ -44,7 +43,7 @@ export default function Abstimmung(): ReactElement {
             </Text>
             <Text maxWidth="600px">
               Ja, ich unterrichte politische Bildung in meiner Klasse und nehme
-              auch Bezug auf aktuellen Themen und Abstimmungen
+              auch Bezug auf aktuelle Themen und Abstimmungen
             </Text>
           </Flex>
           <Flex my={2}>
@@ -77,7 +76,7 @@ export default function Abstimmung(): ReactElement {
         {!user ? (
           <>
             <Heading as="h2">
-              Interessiert? Melden Sie jetzt ihre Klasse jetzt an
+              Interessiert? Melde Dich jetzt mit Deiner Klasse an
             </Heading>
             <CreateUserForm
               setUser={setUser}
@@ -89,7 +88,7 @@ export default function Abstimmung(): ReactElement {
                 Planung knapp ist. Aber wenn wir es gemeinsam schaffen, genügend
                 Klassen zu motivieren, dann hat das Ergebnis der Abstimmung auch
                 eine statistische Signifikanz und repräsentiert die Meinung der
-                Jugend zu relevanten Themen. Herzlichen Dank für Ihre Mithilfe!
+                Jugend zu relevanten Themen. Herzlichen Dank für Deine Mithilfe!
               </Text>
             </CreateUserForm>
           </>
@@ -108,9 +107,9 @@ export default function Abstimmung(): ReactElement {
           fontWeight="semi"
           sx={{ lineHeight: "1.5", borderLeft: "6px solid white" }}
         >
-          Kennen Sie interessierte Lehrpersonen, welche ebenfalls politische
+          Kennst Du interessierte Lehrpersonen, welche ebenfalls politische
           Bildung unterrichten (Sekundarstufe, Gymnasium, Berufsschulen). Dann
-          versuchen Sie doch, sie ebenfalls für dieses Experiment zu engagieren.
+          versuche doch, sie ebenfalls für dieses Experiment zu begeistern.
         </Text>
       </Box>
 
@@ -149,8 +148,8 @@ export const FAQ: React.FC = () => (
       Die abgegebenen Stimmen werden nicht mit Personen verknüpft. Es wird
       einzig registriert, welche Benutzer*innen bereits ihre Stimme abgegeben
       haben. Die Altersgruppe sowie der Kanton werden zu jeder Stimme
-      gespeichert, eine «De-Anonymisierung» auf Ebene Person oder Schulklasse
-      ist nicht möglich.
+      gespeichert, eine «De-Anonymisierung» auf Ebene Person oder Klasse ist
+      nicht möglich.
     </Text>
     <Heading as="h3">
       Wer sieht am Schluss die Resultate der Abstimmungen?
@@ -177,7 +176,7 @@ export const FAQ: React.FC = () => (
     </Text>
     <Heading as="h3">Macht auch die Romandie und das Tessin mit?</Heading>
     <Text>
-      Wenn Sie Kontakte in diese Sprachregionen haben, dann freuen wir uns sehr
+      Wenn Du Kontakte in diese Sprachregionen haben, dann freuen wir uns sehr
       über{" "}
       <Link href="/kontakt">
         <a>Email</a>
@@ -188,7 +187,7 @@ export const FAQ: React.FC = () => (
       Ich habe keine Frage, aber eine kritische Anmerkung!
     </Heading>
     <Text>
-      Wir sind auf Ihr Feedback angewiesen. Bitte nehmen Sie mit uns{" "}
+      Wir sind auf Ihr Feedback angewiesen. Bitte nimm mit uns{" "}
       <Link href="/kontakt">
         <a>Kontakt</a>
       </Link>{" "}
@@ -294,6 +293,7 @@ const TypeBar: React.FC<{ types: Record<string, number> }> = ({ types }) => (
         </Box>
       ))}
     </Flex>
+    <Text my={1}></Text>
   </Box>
 );
 

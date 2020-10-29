@@ -65,7 +65,11 @@ export default function BallotPage(): ReactElement {
     return (
       <LoggedInPage heading="Und jetzt Du!">
         <Text textAlign="center" maxWidth="450px" sx={{ margin: "0 auto" }}>
-          <Heading mt={0}>Jetzt bist du dran! Wie stimmst Du ab?</Heading>
+          <Text mb={3}>
+            Jetzt bist du dran! Hast Du Dir eine Meinung gebildet? Wie stimmst
+            Du ab? Deine Wahl ist anonym, niemand kann nachverfolgen, wie Du
+            abstimmst.
+          </Text>
           <img src="/images/voty_now.svg" alt="Abstimmen" />
           <VotyNow
             ballot={ballot}
@@ -139,7 +143,7 @@ export const VotyNow: React.FC<{
   if (!user) {
     return (
       <Info type="default">
-        Um über diese Abstimmung abzustimmen, musst Du dich zu erst{" "}
+        Um über diese Abstimmung abzustimmen, musst Du Dich zu erst{" "}
         <Link href="/user/login">anmelden</Link>.
       </Info>
     );

@@ -18,20 +18,20 @@ describe("Test Login Page", () => {
     cy.visit("/");
     cy.contains("Anmelden").click();
     cy.url().should("include", "/user/login");
-    cy.findByLabelText("Email").type(Cypress.env("USER"));
-    cy.findByLabelText("Passwort").type(Cypress.env("PASS"));
+    cy.findByLabelText("Email:").type(Cypress.env("USER"));
+    cy.findByLabelText("Passwort:").type(Cypress.env("PASS"));
     cy.get("button").contains("Anmelden").click();
     cy.url().should("include", "/teacher");
     cy.contains("Mein Konto").click();
     cy.contains("Abmelden").click();
     cy.contains("Anmelden").click();
-    cy.contains("Hier kannst Du dich");
+    cy.contains("Hier kannst Du Dich");
   });
 
   it("shows an error with wrong password", () => {
     cy.visit("/user/login");
-    cy.findByLabelText("Email").type(Cypress.env("USER"));
-    cy.findByLabelText("Passwort").type("wrongpass");
+    cy.findByLabelText("Email:").type(Cypress.env("USER"));
+    cy.findByLabelText("Passwort:").type("wrongpass");
     cy.get("button").contains("Anmelden").click();
     cy.contains("Email oder Passwort");
   });

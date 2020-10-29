@@ -7,24 +7,24 @@ describe("Test Signup Page", () => {
 
   it("Barks on existing user", () => {
     cy.visit("/user/signup");
-    cy.findByLabelText("Vorname").type("Test");
-    cy.findByLabelText("Nachname").type("Testerich");
-    cy.findByLabelText("Email").type("teacher@teachen.ch");
-    cy.findByLabelText("Passwort").type("Password2007");
+    cy.findByLabelText("Vorname:").type("Test");
+    cy.findByLabelText("Nachname:").type("Testerich");
+    cy.findByLabelText("Email:").type("teacher@teachen.ch");
+    cy.findByLabelText("Passwort:").type("Password2007");
     // we currently redirect registration to the campaign page
-    //cy.findByLabelText("Ich bin").select("Lehrer*in");
+    //cy.findByLabelText("Ich bin:").select("Lehrer*in");
     cy.get("button").contains("Konto erstellen").click();
     cy.contains(tr("Error.DuplicateEmail"));
   });
 
   it("Does not submit without correct email", () => {
     cy.visit("/user/signup");
-    cy.findByLabelText("Vorname").type("Test");
-    cy.findByLabelText("Nachname").type("Testerich");
-    cy.findByLabelText("Email").type("noemail@bla");
-    cy.findByLabelText("Passwort").type("Password2007");
+    cy.findByLabelText("Vorname:").type("Test");
+    cy.findByLabelText("Nachname:").type("Testerich");
+    cy.findByLabelText("Email:").type("noemail@bla");
+    cy.findByLabelText("Passwort:").type("Password2007");
     // we currently redirect registration to the campaign page
-    // cy.findByLabelText("Ich bin").select("Lehrer*in");
+    // cy.findByLabelText("Ich bin:").select("Lehrer*in");
     cy.get("button").contains("Konto erstellen").click();
     cy.contains("Bitte gültige Email-Adresse angeben");
   });
@@ -33,17 +33,17 @@ describe("Test Signup Page", () => {
   /*
   it("Creates a new (inactive) user!", () => {
     cy.visit("/user/signup");
-    cy.findByLabelText("Vorname").type("Test");
-    cy.findByLabelText("Nachname").type("Test");
-    cy.findByLabelText("Email").type("other@teachen.ch");
-    cy.findByLabelText("Passwort").type("Password2007");
+    cy.findByLabelText("Vorname:").type("Test");
+    cy.findByLabelText("Nachname:").type("Test");
+    cy.findByLabelText("Email:").type("other@teachen.ch");
+    cy.findByLabelText("Passwort:").type("Password2007");
     cy.get("button").contains("Konto erstellen").click();
     cy.contains("Konto erstellt");
 
     // test that user is not active yet (missing email verification)
     cy.visit("/user/login");
-    cy.findByLabelText("Email").type("other@teachen.ch");
-    cy.findByLabelText("Passwort").type("Password2007");
+    cy.findByLabelText("Email:").type("other@teachen.ch");
+    cy.findByLabelText("Passwort:").type("Password2007");
     cy.get("button").contains("Anmelden").click();
     cy.contains("Email bestätigen");
   });*/

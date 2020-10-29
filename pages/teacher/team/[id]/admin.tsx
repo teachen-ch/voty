@@ -76,7 +76,7 @@ export default function TeacherTeamPage(): React.ReactElement {
 
   if (teamQuery.loading) {
     return (
-      <LoggedInPage heading="Detailansicht Schulklasse">
+      <LoggedInPage heading="Detailansicht Klasse">
         Klasse wird geladen…
       </LoggedInPage>
     );
@@ -85,7 +85,7 @@ export default function TeacherTeamPage(): React.ReactElement {
   const team = teamQuery.data?.team;
   if (!team) {
     return (
-      <LoggedInPage heading="Detailansicht Schulklasse">
+      <LoggedInPage heading="Detailansicht Klasse">
         Team konnte nicht gefunden werden
       </LoggedInPage>
     );
@@ -97,15 +97,15 @@ export default function TeacherTeamPage(): React.ReactElement {
   const failedEmails = results?.failed?.join(", ");
 
   return (
-    <LoggedInPage heading="Detailansicht Schulklasse">
+    <LoggedInPage heading="Detailansicht Klasse">
       <Text textAlign="left">
         <Heading as="h3">
           Folgende Abstimmungen sind für die Klasse verfügbar
         </Heading>
         <Text fontSize={[1, 1, 2]} mb={3}>
-          Wähle die Abstimmungen aus, welche für Deine Schüler*innen angezeigt
-          werden. Hier kannst Du später auch die Abstimmungsresultate Deiner
-          Klasse anzeigen.
+          Wähle hier aus der Liste die Abstimmungen aus, welche Deinen
+          Schüler*innen gezeigt werden. Hier kannst Du später auch die
+          Abstimmungsresultate Deiner Klasse zeigen.
         </Text>
         <SelectBallots team={team} />
 
@@ -114,14 +114,15 @@ export default function TeacherTeamPage(): React.ReactElement {
         </Heading>
         {!team.members.length ? (
           <Text fontSize={[1, 1, 2]}>
-            Hier kannst Du Schüler*innen einladen, indem Du ihre Email-Adressen
-            eingibst. Hast Du eine zweite Email-Adresse? Dann teste den
-            einfachen Ablauf doch kurz selbst:
+            Hier kannst Du Deine Schüler*innen auf die Klassenseite von voty.ch
+            einladen. Kopiere einfach alle Email-Adressen auf einmal (aus Mail
+            oder Excel) in untenstehende Feld. Hast Du eine zweite
+            Email-Adresse? Dann teste den einfachen Ablauf doch kurz selbst:
           </Text>
         ) : (
           <>
             <Text fontSize={[1, 1, 2]} my={3}>
-              Diese Einladungen wurden bereits verschickt. Hier sehen Sie auch,
+              Diese Einladungen wurden bereits verschickt. Hier siehst Du auch,
               wer die Einladung bereits akzeptiert hat.
             </Text>
             <Users users={team.members} />
@@ -180,7 +181,7 @@ export default function TeacherTeamPage(): React.ReactElement {
             height="24px"
             style={{ float: "left", marginRight: 8, verticalAlign: "center" }}
           />
-          Alternativ können Sie Schüler*innen auch mit einem{" "}
+          Alternativ kannst Du Schüler*innen auch mit einem{" "}
           <A
             onClick={() => setShowInviteLink(!showInviteLink)}
             variant="underline"
@@ -206,19 +207,24 @@ function InviteLink({ team }: { team: TeamTeacherFieldsFragment }) {
     if (ref && ref.current) {
       ref.current.select();
       document.execCommand("copy");
-      setStatus("Einladungslink erfolgreich in Zwischenablage kopiert");
+      setStatus("Einladungslink erfolgreich in die Zwischenablage kopiert");
     }
   }
 
   return (
-    <Grid my={1} gap={2} columns={[0, 0, "1fr 3fr 1fr"]}>
-      <Label sx={{ alignSelf: "center" }}>Einladungslink:</Label>
+    <Grid my={1} gap={3} columns={[0, 0, "1fr 3fr 1fr"]}>
+      <Label sx={{ alignSelf: "center", fontSize: [1, 1, 1] }}>
+        Einladungslink:
+      </Label>
       <Input
         ref={inviteRef}
         readOnly
+        fontSize={[1, 1, 1]}
         value={`${document?.location.origin}/i/${team.invite}`}
       />
-      <Button onClick={() => copyInvite(inviteRef)}>Kopieren</Button>
+      <Button fontSize={[1, 1, 1]} onClick={() => copyInvite(inviteRef)}>
+        Kopieren
+      </Button>
       <Text fontSize={1} sx={{ gridColumn: [0, 0, 2] }}>
         {status}
       </Text>

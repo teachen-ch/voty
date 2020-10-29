@@ -232,7 +232,7 @@ export const ProfileEdit: React.FC<{
             )}
             {isStudent && (
               <>
-                <label htmlFor="year">Jahrgang</label>
+                <label htmlFor="year">Jahrgang:</label>
                 <Field as={Select} id="year" name="year" value={undefined}>
                   <option value={undefined}>Bitte auswählen</option>
                   {[...Array(numYears).keys()].map((i) => (
@@ -310,7 +310,7 @@ export const Input: React.FC<InputProps> = ({
   return (
     <>
       <Label sx={{ alignSelf: "center" }} htmlFor={name}>
-        {label}
+        {label}:
       </Label>
       {/* @ts-ignore */}
       <RebassInput
@@ -347,7 +347,7 @@ export const ShowField: React.FC<{
   return (
     <>
       <Text my={[0, 0, 1]} textAlign="left" pt={[0, 0, 2]}>
-        {label}
+        {label}:
       </Text>
       <Text
         my={1}

@@ -46,7 +46,7 @@ export const Input: React.FC<InputProps> = ({ label, setter, ...props }) => {
         key={label}
         htmlFor={props.id || props.name}
       >
-        {label}
+        {label}:
       </RebassLabel>
       {/* @ts-ignore */}
       <RebassInput
@@ -225,7 +225,7 @@ export const RadioGroup: React.FC<RadioGroupProps> = ({
   return (
     <>
       <RebassLabel sx={{ alignSelf: "center" }} key={label}>
-        {label}
+        {label}:
       </RebassLabel>
       <Grid columns="1fr 1fr">
         {Object.keys(opts).map((name) => (
@@ -267,7 +267,7 @@ export const Select: React.FC<SelectProps> = ({ label, ...props }) => {
         key={label}
         htmlFor={props.id || props.name}
       >
-        {label}
+        {label}:
       </RebassLabel>
       {/* @ts-ignore */}
       <RebassSelect id={props.id || props.name} {...field} {...props} />

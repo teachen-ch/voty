@@ -98,7 +98,7 @@ export default function Home(): React.ReactElement {
               p={3}
               mt={[2, 2, 1, 4]}
             >
-              Jetzt Schulklasse anmelden!
+              Jetzt Klasse anmelden!
             </Button>
           </Link>
 
@@ -114,10 +114,9 @@ export default function Home(): React.ReactElement {
             >
               Wie motivieren wir Jugendliche für unsere Demokratie? Wir möchten
               gemeinsam mit engagierten Lehrpersonen ein Experiment starten und
-              im November mit mindestens 50 Schulklassen über die beiden
-              nationalen Vorlagen abstimmen. Interesse für Politik entsteht
-              dann, wenn man diskutieren und mitentscheiden kann. Helfen Sie
-              mit!
+              im November mit mindestens 50 Klassen über die beiden nationalen
+              Vorlagen abstimmen. Interesse für Politik entsteht dann, wenn man
+              diskutieren und mitentscheiden kann. Helfen Sie mit!
             </Text>
           </Flex>
 
@@ -136,7 +135,7 @@ export default function Home(): React.ReactElement {
             </Link>
             <Link href="/abstimmung">
               <Button width="100%" mb={3}>
-                Schulklasse anmelden?
+                Klasse anmelden?
               </Button>
             </Link>
           </Flex>

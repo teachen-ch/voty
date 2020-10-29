@@ -90,8 +90,8 @@ export default function Login(): ReactElement {
     return (
       <AppPage heading="Anmelden" onClose={() => void router.push("/")}>
         <Text mb={3}>
-          Hier kannst Du dich mit Deiner Schul-Emailadresse anmelden, wenn Du
-          bereits ein Benutzerkonto bei voty.ch hast.
+          Hier kannst Du Dich mit Deiner Schul-Emailadresse anmelden, wenn Du
+          bereits ein Konto bei voty.ch hast.
         </Text>
         <LoginForm />
       </AppPage>
@@ -277,6 +277,7 @@ function CheckToken({ token, purpose }: { token: string; purpose: string }) {
     void doVerification({ variables: { token } });
   }, []);
 
+  const isTeacher = tempUser?.role === Role.Teacher;
   // token verification succeded, we have a session & user
   if (tempUser !== undefined) {
     // login -> go straight back
@@ -287,11 +288,15 @@ function CheckToken({ token, purpose }: { token: string; purpose: string }) {
       return (
         <Box>
           <Text mb={4}>
-            Super, Deine Email-Adresse ist nun bestätigt und Du bist bereits
-            angemeldet.
+            Super, Deine Email-Adresse ist nun bestätigt.{" "}
+            {isTeacher
+              ? "Dein Konto für Lehrpersonen ist nun eröffnet und Du bist bereits angemeldet."
+              : ""}
           </Text>
           <Button onClick={() => router.push(getStartpage(tempUser?.role))}>
-            Weiter geht&apos;s
+            {isTeacher
+              ? "Weiter geht's zur Auswahl Deiner Schule"
+              : "Weiter geht&apos;s"}
           </Button>
         </Box>
       );
@@ -368,8 +373,8 @@ function RequestReset({ onCancel }: { email: string; onCancel: () => void }) {
         <ErrorBox error={error} sx={{ gridColumn: [0, 0, 2] }} />
         {mailSent && (
           <Text sx={{ gridColumn: [0, 0, 2] }}>
-            Falls ein Benutzerkonto unter dieser E-Mail existiert, haben wir Dir
-            ein Email geschickt
+            Falls ein Konto unter dieser E-Mail existiert, haben wir Dir ein
+            Email geschickt
           </Text>
         )}
       </QForm>

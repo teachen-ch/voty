@@ -125,8 +125,8 @@ export const Teams: React.FC<TeamsProps> = ({ where, teamClick }) => {
         <thead>
           <tr>
             <th align="left">Klasse</th>
-            <th align="left">Schulhaus</th>
-            <th align="left">SuS</th>
+            <th align="left">Schule</th>
+            <th align="center">SuS</th>
             <th align="left"></th>
           </tr>
         </thead>
@@ -143,7 +143,9 @@ export const Teams: React.FC<TeamsProps> = ({ where, teamClick }) => {
                 <td>
                   {team.school?.name} ({team.school?.city})
                 </td>
-                <td>{team.members ? <>{team.members.length} SuS</> : "-"}</td>
+                <td align="center">
+                  {team.members ? <>{team.members.length}</> : "-"}
+                </td>
                 <td width="1%">
                   <A onClick={() => teamClick(team)} variant="underline">
                     <Box variant="centered">
