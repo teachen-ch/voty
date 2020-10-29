@@ -102,7 +102,7 @@ export default function TeacherTeamPage(): React.ReactElement {
         <Heading as="h3">
           Folgende Abstimmungen sind für die Klasse verfügbar
         </Heading>
-        <Text fontSize={[1, 1, 2]} mb={3}>
+        <Text fontSize={2} mb={3}>
           Wähle hier aus der Liste die Abstimmungen aus, welche Deinen
           Schüler*innen gezeigt werden. Hier kannst Du später auch die
           Abstimmungsresultate Deiner Klasse zeigen.
@@ -113,7 +113,7 @@ export default function TeacherTeamPage(): React.ReactElement {
           Schülerinnen und Schüler
         </Heading>
         {!team.members.length ? (
-          <Text fontSize={[1, 1, 2]}>
+          <Text fontSize={2}>
             Hier kannst Du Deine Schüler*innen auf die Klassenseite von voty.ch
             einladen. Kopiere einfach alle Email-Adressen auf einmal (aus Mail
             oder Excel) in untenstehende Feld. Hast Du eine zweite
@@ -121,7 +121,7 @@ export default function TeacherTeamPage(): React.ReactElement {
           </Text>
         ) : (
           <>
-            <Text fontSize={[1, 1, 2]} my={3}>
+            <Text fontSize={2} my={3}>
               Diese Einladungen wurden bereits verschickt. Hier siehst Du auch,
               wer die Einladung bereits akzeptiert hat.
             </Text>
@@ -175,7 +175,7 @@ export default function TeacherTeamPage(): React.ReactElement {
             </Text>
           </>
         )}
-        <Text fontSize={2} sx={{ gridColumn: [0, 0, 2] }} mt={4}>
+        <Text fontSize={[1, 1, 2]} sx={{ gridColumn: [0, 0, 2] }} mt={4}>
           <IconHint
             alt="Hinweis"
             height="24px"
@@ -213,16 +213,14 @@ function InviteLink({ team }: { team: TeamTeacherFieldsFragment }) {
 
   return (
     <Grid my={1} gap={3} columns={[0, 0, "1fr 3fr 1fr"]}>
-      <Label sx={{ alignSelf: "center", fontSize: [1, 1, 1] }}>
-        Einladungslink:
-      </Label>
+      <Label sx={{ alignSelf: "center", fontSize: 1 }}>Einladungslink:</Label>
       <Input
         ref={inviteRef}
         readOnly
-        fontSize={[1, 1, 1]}
+        fontSize={1}
         value={`${document?.location.origin}/i/${team.invite}`}
       />
-      <Button fontSize={[1, 1, 1]} onClick={() => copyInvite(inviteRef)}>
+      <Button fontSize={1} onClick={() => copyInvite(inviteRef)}>
         Kopieren
       </Button>
       <Text fontSize={1} sx={{ gridColumn: [0, 0, 2] }}>

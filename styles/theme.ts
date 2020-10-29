@@ -94,7 +94,7 @@ export default {
       table: {
         borderSpacing: 0,
         width: "100%",
-        fontSize: [1, 2, 2],
+        fontSize: 2,
         textAlign: "left",
         borderBottom: "2px solid white",
       },

@@ -66,14 +66,14 @@ def wait(min):
 
 
 log = initLogger()
-commitMessage = " ".join(sys.argv[1:]) or input("Commit message: ")
-if not commitMessage:
-    log.error("😠 I don't like empty commit messages.")
-    sys.exit(1)
+commitMessage = " ".join(sys.argv[1:]) or input(
+    "Commit message (empty to skip commit): ")
 
 start = time.time()
-exec("git add .")
-exec("git commit -m \"%s\"" % commitMessage)
+if commitMessage:
+    exec("git add .")
+    exec("git commit -m \"%s\"" % commitMessage)
+
 exec("git push")
 wait(10)
 exec("yarn run deploy_dev")
