@@ -276,7 +276,7 @@ export async function sendVerificationEmail(
     };
     const subject = subjects[purpose];
 
-    const conf = { email: email.replace(/\./g, " ."), url, site };
+    const conf = { email: email.replace(/\./g, "."), url, site };
 
     await sendMail(from, email, subject, purpose, conf);
     logger.info(`Sending ${purpose} email to: ${email} `);

@@ -1,20 +1,12 @@
 <mjml>
   <mj-body>
     <mj-section>
-      <mj-column>
-        <mj-text font-size="30px" font-weight="bold">Willkommen bei voty</mj-text>
-        <mj-divider border-width="1px" border-color="#000"></mj-divider>
-        <mj-text font-size="20px" color="#000" font-family="helvetica">Um Dein neues Konto zu eröffnen und Deine Email-Adresse zu bestätigen, kannst Du auf diesen Link klicken:</mj-text>
-      </mj-column>
-    </mj-section>
-    <mj-section>
-      <mj-column>
-        <mj-button href="{{url}}" background-color="#d90000" font-weight="bold" font-size="20px">Jetzt bestätigen</mj-button>
-      </mj-column>
-    </mj-section>
-    <mj-section>
-      <mj-column>
-        Wenn Du Dich nicht bei voty registrieren wolltest, kannst Du dieses Mail löschen.
+      <mj-column width="470px">
+          <mj-image width="470px" src="https://voty.ch/images/voty_email.png"/>
+          <mj-text align="center" font-size="30px" font-weight="bold">Willkommen bei voty.&shy;ch</mj-text>
+          <mj-text font-size="20px" color="#000" font-family="helvetica">Um Dein neues Konto zu eröffnen und Deine Email-Adresse zu bestätigen, kannst Du auf diesen Link klicken:</mj-text>
+          <mj-button href="{{url}}" background-color="#c00" font-weight="bold" font-size="20px">Jetzt bestätigen</mj-button>
+          <mj-text font-size="20px"> Wenn Du Dich nicht bei voty.&shy;ch registrieren wolltest, kannst Du dieses Mail löschen.</mj-text>
       </mj-column>
     </mj-section>
   </mj-body>

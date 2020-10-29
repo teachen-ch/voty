@@ -1,4 +1,4 @@
-server_name: prod.voty.ch
-old_server_name: prod.votyapp.ch
+server_name: voty.ch
+old_server_name: votyapp.ch
 env_file: ../.env.production
 cache_time: 10m

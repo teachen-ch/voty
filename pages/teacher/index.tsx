@@ -22,9 +22,7 @@ export default function Teacher(): ReactElement {
   if (user?.school === null) {
     return (
       <LoggedInPage heading="Willkommen auf voty.ch">
-        <Text mb={3}>
-          Wähle zuerst Deine Schule aus oder erfasse eine neue Schule…
-        </Text>
+        <Text mb={3}>Wähle zuerst Deine Schule aus oder erfasse eine Neue</Text>
         <SelectSchool />
       </LoggedInPage>
     );
