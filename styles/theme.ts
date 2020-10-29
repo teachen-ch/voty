@@ -105,7 +105,7 @@ export default {
       },
       tbody: {
         tr: {
-          height: "32px",
+          height: ["40px", "40px, 32px"],
           ":nth-of-type(odd)": {
             backgroundColor: "#88969D",
           },

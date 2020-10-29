@@ -74,13 +74,8 @@ export function Users({
           ) : (
             users?.map((user: myUser) => (
               <tr key={user.id}>
-                <td>
-                  <A
-                    sx={{ display: ["none", "none", "inline"] }}
-                    href={`mailto:${user.email}`}
-                  >
-                    {user.shortname}
-                  </A>
+                <td style={{ maxWidth: "200px" }}>
+                  <A href={`mailto:${user.email}`}>{user.shortname}</A>
                 </td>
                 <td>
                   <A

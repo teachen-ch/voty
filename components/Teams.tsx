@@ -139,10 +139,10 @@ export const Teams: React.FC<TeamsProps> = ({ where, teamClick }) => {
           ) : (
             teams?.map((team) => (
               <tr key={team.id} onClick={() => teamClick(team)}>
-                <td>
+                <td style={{ maxWidth: "100px" }}>
                   <A onClick={() => teamClick(team)}>{team.name}</A>
                 </td>
-                <td>
+                <td style={{ maxWidth: "100px" }}>
                   {team.school?.name} ({team.school?.city})
                 </td>
                 <td align="center">
