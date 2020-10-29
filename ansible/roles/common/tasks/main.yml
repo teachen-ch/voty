@@ -1,5 +1,5 @@
 ---
-- import_tasks: include-vars.yml
+- include_tasks: include-vars.yml
 
 - name: Install Software and Add User
   block:

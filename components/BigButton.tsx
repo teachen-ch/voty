@@ -25,7 +25,7 @@ export const BigButton: React.FC<
 );
 
 export const BigGray: React.FC = (props) => (
-  <BigButton color="gray" width="100%" mb={4}>
+  <BigButton color="gray" width="100%" mb={4} mt={4}>
     {props.children}
   </BigButton>
 );

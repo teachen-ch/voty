@@ -1,7 +1,7 @@
 ---
 - hosts: web
-  # if you install on a fresh host without python, you need to set gather_facts to
-  # uncomment these lines
+  # if you install on a fresh host without python, you need to set uncomment these lines
+  # WATCH OUT: After the first run (which fails) you need to recomment it, otherwise it won't gather_facts
   #gather_facts: No
   #pre_tasks:
   #  - name: "install python3"

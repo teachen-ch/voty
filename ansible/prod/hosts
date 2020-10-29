@@ -1,7 +1,8 @@
 [web]
-voty.ch			ansible_user=root
+prod.voty.ch  ansible_user=root
+#voty.ch			ansible_user=root
 #2a0a:e5c0:2:12:0:f0ff:fea9:c3d3 ansible_user=root
 
 [db]
-voty.ch			ansible_user=root
+#voty.ch			ansible_user=root
 #2a0a:e5c0:2:12:0:f0ff:fea9:c3d3	ansible_user=root

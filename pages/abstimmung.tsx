@@ -119,6 +119,7 @@ export default function Abstimmung(): ReactElement {
       <ReadMore title="Fragen und Antworten">
         <FAQ />
       </ReadMore>
+      <Box my={5} />
     </AppPage>
   );
 }

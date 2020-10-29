@@ -4,4 +4,5 @@ nginx_conf: nginx-alpine.conf
 nginx_sites: /etc/nginx/conf.d
 service_dest: /etc/init.d/voty
 service_template: voty.service-alpine.j2
-reload_systemd: cd /
+reload_systemd: pwd
+cron_daily: /etc/periodic

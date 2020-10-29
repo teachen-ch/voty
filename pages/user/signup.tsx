@@ -137,7 +137,6 @@ export const CreateUserForm: React.FC<{
         email: {
           label: "Email",
           required: true,
-          type: "email",
           placeholder: "name@meineschule.ch",
         },
         password: {

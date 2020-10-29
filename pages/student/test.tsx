@@ -1,9 +1,9 @@
 import { LoggedInPage } from "components/Page";
-import { Text, Box, Link as A } from "rebass";
+import { Text, Box } from "rebass";
 import { Ballot, Ballots } from "components/Ballots";
 import { useRouter } from "next/router";
 import { useUser, SessionUser } from "state/user";
-import Link from "next/link";
+import { Breadcrumb, A } from "components/Breadcrumb";
 import { ReactElement } from "react";
 import {
   BallotScope,
@@ -15,18 +15,15 @@ export default function StudentTest(): ReactElement {
   const user = useUser();
 
   return (
-    <LoggedInPage heading="Aktuelle Abstimmungen">
+    <LoggedInPage heading="Abstimmungen">
+      <Breadcrumb>
+        <A href="/">Start</A>
+        <b>Abstimmungen</b>
+      </Breadcrumb>
       <Text>
         Hier kannst Du zu den aktuellen nationalen Abstimmungsvorlagen anonym
         Deine Stimme abgeben.
       </Text>
-      <Box mt={4} mb={3} fontSize={2}>
-        <Link href="/student/">
-          <A variant="underline">Start</A>
-        </Link>
-        {" / "}
-        <A variant="semi">Abstimmungen</A>
-      </Box>
       <ShowBallots user={user} />
     </LoggedInPage>
   );

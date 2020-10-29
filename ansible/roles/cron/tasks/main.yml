@@ -10,6 +10,10 @@
       file: { path: "/voty/backup", owner: voty, state: directory }
     - name: Copy db backup script into cron.daily
       template:
-        { src: db-backup.py, dest: /etc/cron.daily/db-backup.py, mode: "0700" }
+        {
+          src: db-backup.py,
+          dest: "{{ cron_daily }}/db-backup.py",
+          mode: "0700",
+        }
   become: yes
   become_method: sudo

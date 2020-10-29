@@ -21,6 +21,7 @@ import IconResults from "../public/images/icon_results.svg";
 import IconCheckOn from "../public/images/icon_check_on.svg";
 import IconCheckOff from "../public/images/icon_check_off.svg";
 import IconDeadline from "../public/images/icon_deadline.svg";
+import IconCal from "../public/images/icon_cal.svg";
 import { MouseEvent } from "react";
 import type { Nullable } from "simplytyped";
 import { parseMarkdownInner } from "util/markdown";
@@ -229,7 +230,7 @@ export const Ballot: React.FC<{
         </A>
         <Text mt={3}>{ballot.description}</Text>
         <Text fontSize={2} my={4}>
-          <IconDeadline alt="Deadline" /> &nbsp; Zeit:{" "}
+          <IconCal alt="Deadline" width="20px" height="20px" /> &nbsp; Zeit:{" "}
           {formatFromTo(ballot.start, ballot.end)}
         </Text>
         {children}
@@ -391,7 +392,7 @@ export const BallotDetails: React.FC<{
       <img src="/images/icon_cal.svg" width="20px" alt="Zeit" /> &nbsp; Zeit:{" "}
       {formatFromTo(ballot.start, ballot.end)}
     </Text>
-    <Text textAlign="center" mb="-50px">
+    <Text textAlign="center">
       <img width={150} src="/images/easyvote.png" alt="EasyVote" />
     </Text>
     <div

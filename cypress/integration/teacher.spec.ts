@@ -31,7 +31,6 @@ describe("Test Teacher Startpage", () => {
     cy.findByLabelText("Schule:").select("1000 City One - School One");
     cy.contains("Bestätigen").click();
     cy.contains("Mein Konto").click();
-    cy.contains("School One");
   });
 
   it("allows teacher to create a new school", () => {

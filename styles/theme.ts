@@ -78,6 +78,12 @@ export default {
       justifyContent: "center",
       alignItems: "center",
     },
+    semi: {
+      fontWeight: "semi",
+    },
+    bold: {
+      fontWeight: "bold",
+    },
   },
   styles: {
     root: {
@@ -95,7 +101,6 @@ export default {
       th: {
         px: 2,
         py: 1,
-        textAlign: "left",
         borderBottom: "2px solid white",
       },
       tbody: {

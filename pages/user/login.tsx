@@ -296,7 +296,7 @@ function CheckToken({ token, purpose }: { token: string; purpose: string }) {
           <Button onClick={() => router.push(getStartpage(tempUser?.role))}>
             {isTeacher
               ? "Weiter geht's zur Auswahl Deiner Schule"
-              : "Weiter geht&apos;s"}
+              : "Weiter geht's"}
           </Button>
         </Box>
       );

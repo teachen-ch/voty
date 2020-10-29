@@ -217,12 +217,7 @@ export const ProfileEdit: React.FC<{
       >
         <Form>
           <Grid gap={2} columns={[0, 0, "1fr 3fr"]}>
-            <Input
-              label="Vorname"
-              name="name"
-              placeholder="Vorname"
-              focus
-            ></Input>
+            <Input label="Vorname" name="name" placeholder="Vorname"></Input>
             {isTeacher && (
               <Input
                 label="Nachname"
@@ -241,7 +236,7 @@ export const ProfileEdit: React.FC<{
                   <option value={0}>möchte ich nicht angeben</option>
                 </Field>
                 <FieldError name="year" />
-                <label htmlFor="gender">Geschlecht</label>
+                <label htmlFor="gender">Geschlecht:</label>
                 <Box id="gender" textAlign="left">
                   <Grid columns="1fr 2fr" gap={0}>
                     <label>
@@ -277,7 +272,9 @@ export const ProfileEdit: React.FC<{
                 <FieldError name="gender" />
               </>
             )}
-            <ShowField label="Email" value="Kontaktiere uns für Änderungen" />
+            {isTeacher && (
+              <ShowField label="Email" value="Kontaktiere uns für Änderungen" />
+            )}
             <Button type="submit" sx={{ gridColumn: [0, 0, 2] }}>
               Angaben speichern
             </Button>
@@ -349,15 +346,7 @@ export const ShowField: React.FC<{
       <Text my={[0, 0, 1]} textAlign="left" pt={[0, 0, 2]}>
         {label}:
       </Text>
-      <Text
-        my={1}
-        py="7px"
-        mb={[3, 3, 0]}
-        px={3}
-        fontSize={4}
-        textAlign="left"
-        sx={{ border: "1px solid #fff", boxSizing: "border-box" }}
-      >
+      <Text my={1} py="7px" mb={[3, 3, 0]} fontSize={4} textAlign="left">
         {value || "–"}
       </Text>
     </>

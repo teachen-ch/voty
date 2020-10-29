@@ -1,5 +1,5 @@
 import { AppPage, LoggedInPage, ErrorPage } from "components/Page";
-import { Text, Box, Button, Flex, Heading, Link as A } from "rebass";
+import { Text, Box, Button, Flex, Heading } from "rebass";
 import { useRouter } from "next/router";
 import { useUser } from "state/user";
 import { useBallotQuery, BallotQuery, useVoteMutation } from "graphql/types";
@@ -9,7 +9,7 @@ import Info from "components/Info";
 import Link from "next/link";
 import { BigGray } from "components/BigButton";
 import { BallotDetails } from "components/Ballots";
-import { Breadcrumb } from "components/Breadcrumb";
+import { Breadcrumb, A } from "components/Breadcrumb";
 
 export default function BallotPage(): ReactElement {
   const [success, setSuccess] = useState(false);
@@ -37,23 +37,30 @@ export default function BallotPage(): ReactElement {
     return (
       <LoggedInPage heading="Du hast abgestimmt!">
         <Breadcrumb>
-          <A href="/student">Start</A>
-          <A href="/student">Abstimmungen</A>
+          <A href="/">Start</A>
+          <A href="/student/test">Abstimmungen</A>
           <A onClick={() => setSuccess(false)}>{ballot.title}</A>
-          <Text>Deine Stimme</Text>
+          <b>Deine Stimme</b>
         </Breadcrumb>
         <Text mb={4}>
           Super, {user?.name}, Du hast nun anonym abgestimmt und Deine Stimme
           wurde gezählt. Die Resultate der Abbstimmung könnt ihr mit Eurer
-          Lerhperson ansehen und besprechen.
+          Lehrperson ansehen und besprechen.
         </Text>
         <Box textAlign="center">
-          <img src="/images/voty_success.svg" alt="Juhee" />
+          <img
+            src="/images/voty_success.svg"
+            alt="Juhee"
+            style={{ maxWidth: "400px" }}
+          />
         </Box>
         <Button
           mt={4}
           width="100%"
-          onClick={() => void router.push("/student/test")}
+          onClick={() => {
+            window.scrollTo(0, 0);
+            void router.push("/student/test");
+          }}
         >
           Zu den Abstimmungen
         </Button>
@@ -63,48 +70,50 @@ export default function BallotPage(): ReactElement {
 
   if (votyNow) {
     return (
-      <LoggedInPage heading="Und jetzt Du!">
-        <Text textAlign="center" maxWidth="450px" sx={{ margin: "0 auto" }}>
+      <LoggedInPage heading="Deine Stimme">
+        <Breadcrumb>
+          <A href="/">Start</A>
+          <A href="/student/test">Abstimmungen</A>
+          <A onClick={() => setVotyNow(false)}>{ballot.title}</A>
+          <b>Deine Stimme</b>
+        </Breadcrumb>
+        <Text textAlign="left" sx={{ margin: "0 auto" }}>
           <Text mb={3}>
             Jetzt bist du dran! Hast Du Dir eine Meinung gebildet? Wie stimmst
             Du ab? Deine Wahl ist anonym, niemand kann nachverfolgen, wie Du
             abstimmst.
           </Text>
-          <img src="/images/voty_now.svg" alt="Abstimmen" />
-          <VotyNow
-            ballot={ballot}
-            onSuccess={() => {
-              window.scrollTo(0, 0);
-              setSuccess(true);
-            }}
-          />
-          <Text>
-            <Button mt={4} variant="text" onClick={() => setVotyNow(false)}>
-              Abbrechen
-            </Button>
-          </Text>
+          <Box variant="centered">
+            <Box maxWidth="500px">
+              <img src="/images/voty_now.svg" alt="Abstimmen" width="100%" />
+              <Box px={[0, 0, 2]} mt={[0, 0, -20]}>
+                <VotyNow
+                  ballot={ballot}
+                  onSuccess={() => {
+                    window.scrollTo(0, 0);
+                    setSuccess(true);
+                  }}
+                />
+              </Box>
+            </Box>
+          </Box>
         </Text>
       </LoggedInPage>
     );
   }
 
   return (
-    <LoggedInPage heading="Abstimmen">
+    <LoggedInPage heading={ballot.title}>
+      <Breadcrumb>
+        <A href="/">Start</A>
+        <A href="/student/test">Abstimmungen</A>
+        <b>{ballot.title}</b>
+      </Breadcrumb>
+
       <Text>
         Hier kannst Du zu den aktuellen nationalen Abstimmungsvorlagen anonym
         Deine Stimme abgeben.
       </Text>
-      <Box mt={4} mb={3} fontSize={2}>
-        <Link href="/student/">
-          <A variant="underline">Start</A>
-        </Link>
-        {" / "}
-        <Link href="/student/">
-          <A variant="underline">Abstimmungen</A>
-        </Link>
-        {" / "}
-        <A variant="semi">{ballot.title}</A>
-      </Box>
 
       <BallotDetails ballot={ballot}>
         <Heading>
@@ -171,23 +180,25 @@ export const VotyNow: React.FC<{
   return (
     <Box>
       <Flex justifyContent="space-between">
-        <A onClick={() => vote(ballot.id, 1)} flex={1}>
+        <A onClick={() => vote(ballot.id, 1)}>
           <Flex flexDirection="column" alignItems="center">
             <img src="/images/icon_yes.svg" height="100px" alt="Ja" />
             Ja, ich stimme zu
           </Flex>
         </A>
-        <A onClick={() => vote(ballot.id, 2)} flex={1}>
+        <A onClick={() => vote(ballot.id, 2)}>
           <Flex flexDirection="column" alignItems="center">
             <img src="/images/icon_no.svg" height="100px" alt="Nein" />
-            Nein, ich lehne ab
+            <Text>Nein, ich lehne ab</Text>
           </Flex>
         </A>
       </Flex>
-      <Button variant="text" my={4} textAlign="center" width="100%">
-        Ich möchte mich{" "}
-        <A onClick={() => vote(ballot.id, 0)}>der Stimme enthalten</A>
-      </Button>
+      <Box variant="centered" my={4}>
+        <Button variant="text">
+          Ich möchte mich{" "}
+          <A onClick={() => vote(ballot.id, 0)}>der Stimme enthalten</A>
+        </Button>
+      </Box>
       <ErrorBox my={2} error={error} />
     </Box>
   );
