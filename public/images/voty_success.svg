@@ -1,34 +1,27 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Generator: Adobe Illustrator 24.3.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
-<svg version="1.1" id="Ebene_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 viewBox="0 0 392 392" style="enable-background:new 0 0 392 392;" xml:space="preserve">
-<style type="text/css">
-	.st0{opacity:0.2023;}
-	.st1{fill:none;stroke:#000000;stroke-width:23.3333;stroke-linecap:round;stroke-linejoin:round;}
-</style>
-<g id="Desktop-_x2F_-Schüler" class="st0">
-	<g id="Startseite-Desktop-Vote-Bestätigung-" transform="translate(-506.000000, -505.000000)">
-		<g id="Card" transform="translate(317.000000, 189.000000)">
-			<g id="Picto" transform="translate(201.000000, 328.000000)">
-				<path id="Path" class="st1" d="M0,263.5C0,287,19,306,42.5,306S85,287,85,263.5S66,221,42.5,221S0,240,0,263.5z"/>
-				<path id="Path_1_" class="st1" d="M283,263.5c0,15.2,8.1,29.2,21.2,36.8c13.1,7.6,29.4,7.6,42.5,0c13.1-7.6,21.2-21.6,21.2-36.8
-					c0-15.2-8.1-29.2-21.2-36.8c-13.1-7.6-29.4-7.6-42.5,0C291.1,234.3,283,248.3,283,263.5L283,263.5z"/>
-				<path id="Path_2_" class="st1" d="M142,263.5c0,23.5,19,42.5,42.5,42.5s42.5-19,42.5-42.5S208,221,184.5,221S142,240,142,263.5z
-					"/>
-				<path id="Path_3_" class="st1" d="M114,368c-8.1-21.8-25.9-38.7-48.2-45.6S19.1,319.2,0,332.6"/>
-				<path id="Path_4_" class="st1" d="M254,368c8.1-21.8,25.9-38.7,48.2-45.6c22.3-6.9,46.6-3.2,65.8,10.2"/>
-				<path id="Path_5_" class="st1" d="M255,368c-10.9-29.5-39.1-49-70.5-49s-59.6,19.5-70.5,49"/>
-				<path id="Path_6_" class="st1" d="M221,171c0,0,12.2-60.8,61-73"/>
-				<line id="Path_7_" class="st1" x1="319" y1="85" x2="368" y2="85"/>
-				<line id="Path_8_" class="st1" x1="344" y1="62" x2="344" y2="111"/>
-				<path id="Path_9_" class="st1" d="M147,171c0,0-12.2-60.8-61-73"/>
-				<line id="Path_10_" class="st1" x1="49" y1="85" x2="0" y2="85"/>
-				<line id="Path_11_" class="st1" x1="24" y1="62" x2="24" y2="111"/>
-				<line id="Path_12_" class="st1" x1="160" y1="24" x2="209" y2="24"/>
-				<line id="Path_13_" class="st1" x1="184" y1="0" x2="184" y2="49"/>
-				<line id="Path_14_" class="st1" x1="184" y1="171" x2="184" y2="98"/>
-			</g>
-		</g>
-	</g>
-</g>
+<svg xmlns="http://www.w3.org/2000/svg" width="472" height="472" viewBox="0 0 472 472">
+  <defs>
+    <filter id="icon_fireworks-finale-a" width="104.6%" height="104.6%" x="-2.3%" y="-2.3%" filterUnits="objectBoundingBox">
+      <feOffset dx="-2" dy="2" in="SourceAlpha" result="shadowOffsetOuter1"/>
+      <feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation="1.5"/>
+      <feColorMatrix in="shadowBlurOuter1" result="shadowMatrixOuter1" values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.5 0"/>
+      <feMerge>
+        <feMergeNode in="shadowMatrixOuter1"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <g fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round" stroke-width="22.149" filter="url(#icon_fireworks-finale-a)" transform="translate(8 8)">
+    <g transform="translate(26 26)">
+      <path stroke="#000" d="M0 276.5C0 302.181241 20.8187591 323 46.5 323 72.1812409 323 93 302.181241 93 276.5 93 250.818759 72.1812409 230 46.5 230 20.8187591 230 0 250.818759 0 276.5zM311 276.5C311 293.11285 319.862849 308.463756 334.25 316.770181 348.63715 325.076606 366.36285 325.076606 380.75 316.770181 395.137151 308.463756 404 293.11285 404 276.5 404 259.88715 395.137151 244.536244 380.75 236.229819 366.36285 227.923394 348.63715 227.923394 334.25 236.229819 319.862849 244.536244 311 259.88715 311 276.5L311 276.5zM156 276.5C156 302.181241 176.818759 323 202.5 323 228.181241 323 249 302.181241 249 276.5 249 250.818759 228.181241 230 202.5 230 176.818759 230 156 250.818759 156 276.5zM125 404C116.134986 379.957359 96.5940183 361.392098 72.1126215 353.753359 47.6312247 346.11462 20.9868639 350.269033 0 364.997226M279 404C287.861787 379.95823 307.402225 361.392572 331.884624 353.75354 356.367023 346.114508 383.013067 350.268995 404 364.997325"/>
+      <path stroke="#000" d="M280 404C267.981687 371.541292 237.065944 350 202.5 350 167.934056 350 137.018313 371.541292 125 404M243 188C243 188 256.4 121.333333 310 108"/>
+      <line x1="350" x2="404" y1="95" y2="95" stroke="#DB2A1B"/>
+      <line x1="377" x2="377" y1="68" y2="122" stroke="#DB2A1B"/>
+      <path stroke="#000" d="M161,188 C161,188 147.6,121.333333 94,108"/>
+      <line x1="54" y1="95" y2="95" stroke="#96CB6A"/>
+      <line x1="27" x2="27" y1="68" y2="122" stroke="#96CB6A"/>
+      <line x1="178" x2="232" y1="27" y2="27" stroke="#E77A2D"/>
+      <line x1="205" x2="205" y2="54" stroke="#E77A2D"/>
+      <line x1="205" x2="205" y1="191" y2="111" stroke="#000"/>
+    </g>
+  </g>
 </svg>

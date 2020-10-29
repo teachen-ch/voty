@@ -6,6 +6,7 @@ export const Footer: React.FC<{ color: string | string[] }> = ({ color }) => (
     as="footer"
     pt={[5, 5, 6]}
     pb={3}
+    px={2}
     textAlign="center"
     width={["100%", "100%", 400]}
     flexDirection="column"
@@ -42,7 +43,7 @@ export const Footer: React.FC<{ color: string | string[] }> = ({ color }) => (
           alt="Prototypefund Logo"
           style={{ width: "40px" }}
         />
-        <hr style={{ borderColor: "black", borderTopWidth: "0px" }} />
+        <hr style={{ borderColor: "inherit", borderTopWidth: "0px" }} />
         <Flex as="nav" color={color} justifyContent="space-between">
           <Link href="/impressum">
             <A>Impressum</A>

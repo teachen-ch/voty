@@ -7,8 +7,6 @@ import IconAccount from "../public/images/icon_account.svg";
 import IconHome from "../public/images/icon_home.svg";
 import IconImpressum from "../public/images/icon_impressum.svg";
 import IconNewsletter from "../public/images/icon_newsletter.svg";
-import IconUp from "../public/images/icon_up.svg";
-import IconDown from "../public/images/icon_down.svg";
 import { useUser, SessionUser } from "state/user";
 import { useState, useEffect } from "react";
 import { Role } from "graphql/types";
@@ -123,7 +121,11 @@ const Account: React.FC<{ user: SessionUser }> = ({ user }) => {
           >
             <IconAccount />
             <Text mx={2}>Mein Konto</Text>
-            {open ? <IconUp /> : <IconDown />}
+            {open ? (
+              <Image src="/images/icon_up.svg" />
+            ) : (
+              <Image src="/images/icon_down.svg" />
+            )}
           </Flex>
         </A>
         {open && <AccountMenu />}

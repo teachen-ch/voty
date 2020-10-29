@@ -43,7 +43,11 @@ const messages: Translations = {
     VotingNeedsLogin: "Die Abstimmung benötigt eine Anmeldung",
     VotingNotAllowed: "Abstimmen nicht erlaubt",
   },
-  Profile: { LegalText: "[TODO-Legal-Text]" },
+  Teacher: { LegalText: "[TODO-Legal-Text]" },
+  Student: {
+    LegalText:
+      "Wenn Du uns Deinen Jahrgang und Dein Geschlecht mitteilst, können wir bessere Hochrechnungen erstellen und die Meinung der Jugend in der Schweiz repräsentieren. Du darfst aber auch «möchte ich nicht angeben» auswählen. ",
+  },
 };
 
 const matchNestedCode = new RegExp(/^\w+\.[\w.]+$/);

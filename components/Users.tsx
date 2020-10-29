@@ -206,7 +206,7 @@ export const ProfileEdit: React.FC<{
           Profil bearbeiten
         </Button>
         <Text fontSize={1} textAlign="left" sx={{ gridColumn: [0, 0, 2] }}>
-          {tr("Profile.LegalText")}
+          {tr(`${user?.role}.LegalText`)}
         </Text>
       </Grid>
     );
@@ -283,7 +283,7 @@ export const ProfileEdit: React.FC<{
             <ErrorBox error={error} my={4} />
 
             <Text fontSize={1} textAlign="left" sx={{ gridColumn: [0, 0, 2] }}>
-              {tr("Profile.LegalText")}
+              {tr(`${user?.role}.LegalText`)}
             </Text>
           </Grid>
         </Form>
