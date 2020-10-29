@@ -42,7 +42,7 @@ export const Footer: React.FC<{ color: string | string[] }> = ({ color }) => (
           alt="Prototypefund Logo"
           style={{ width: "40px" }}
         />
-        <hr />
+        <hr style={{ borderColor: "black", borderTopWidth: "0px" }} />
         <Flex as="nav" color={color} justifyContent="space-between">
           <Link href="/impressum">
             <A>Impressum</A>

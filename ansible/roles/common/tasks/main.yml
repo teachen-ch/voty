@@ -60,6 +60,8 @@
     - name: Configure voty.ch
       template: { src: voty.cfg.j2, dest: "{{nginx_sites}}/voty.conf" }
       notify: restart nginx
+    - name: Enable Nginx service (need on Alpine)
+      service: { name: nginx, enabled: yes, state: started }
     - name: Create Systemd Service Configuration
       template:
         { src: "{{service_template}}", dest: "{{service_dest}}", mode: 0755 }

@@ -337,9 +337,9 @@ export const SelectBallots: React.FC<{ team: TeamTeacherFieldsFragment }> = ({
         </thead>*/}
         <tbody>
           {ballots.map((ballot) => (
-            <tr key={ballot.id} onClick={() => detailBallot(ballot.id)}>
+            <tr key={ballot.id}>
               <td>
-                <A variant="underline">{ballot.title}</A>
+                <A onClick={() => detailBallot(ballot.id)}>{ballot.title}</A>
               </td>
               <td>
                 <Box

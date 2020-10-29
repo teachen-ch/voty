@@ -116,7 +116,7 @@ export default function Home(): React.ReactElement {
               gemeinsam mit engagierten Lehrpersonen ein Experiment starten und
               im November mit mindestens 50 Klassen über die beiden nationalen
               Vorlagen abstimmen. Interesse für Politik entsteht dann, wenn man
-              diskutieren und mitentscheiden kann. Helfen Sie mit!
+              diskutieren und mitentscheiden kann.
             </Text>
           </Flex>
 

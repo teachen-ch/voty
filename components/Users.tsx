@@ -73,13 +73,15 @@ export function Users({
             </tr>
           ) : (
             users?.map((user: myUser) => (
-              <tr
-                key={user.id}
-                onClick={() =>
-                  (document.location.href = `mailto:${user.email}`)
-                }
-              >
-                <td>{user.shortname}</td>
+              <tr key={user.id}>
+                <td>
+                  <A
+                    sx={{ display: ["none", "none", "inline"] }}
+                    href={`mailto:${user.email}`}
+                  >
+                    {user.shortname}
+                  </A>
+                </td>
                 <td>
                   <A
                     sx={{ display: ["none", "none", "inline"] }}

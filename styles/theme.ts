@@ -112,7 +112,6 @@ export default {
           ":hover": {
             // backgroundColor: "secondary",
             opacity: "0.8",
-            cursor: "pointer",
           },
         },
       },
@@ -149,7 +148,7 @@ export default {
       },
       hr: {
         borderColor: "white",
-        borderWidth: "1.5px",
+        borderTopWidth: "3px",
         borderStyle: "solid",
       },
     },

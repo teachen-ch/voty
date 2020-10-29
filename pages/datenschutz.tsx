@@ -1,7 +1,8 @@
 import Head from "next/head";
 import { Page } from "components/Page";
-import { Link as A, Heading, Text } from "rebass";
+import { Heading, Text } from "rebass";
 import { ReactElement } from "react";
+import { A } from "components/Breadcrumb";
 
 export default function Datenschutz(): ReactElement {
   return (
@@ -117,6 +118,12 @@ export default function Datenschutz(): ReactElement {
           von Dir gespeichert haben, anfordern. Dies umfasst nicht die Daten,
           die wir aufgrund administrativer, rechtlicher oder
           sicherheitsrelevanter Notwendigkeiten aufbewahren müssen.
+        </Text>
+        <Heading as="h2">Fragen oder Kommentare?</Heading>
+        <Text mb={5}>
+          Haben diese Datenschutz-Erklärungen noch Fragen offen gelassen oder
+          hast Du einen Kommentar dazu? Dann bitte{" "}
+          <A href="/kontakt">kontaktiere</A> uns
         </Text>
       </Text>
     </Page>

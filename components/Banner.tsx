@@ -19,34 +19,34 @@ export const Banner: React.FC<BannerProps> = ({ href, children }) => {
       style={{ position: "fixed", opacity }}
       whileHover={{ opacity: 0.7 }}
     >*/
-    <Link
-      bg="primary"
-      px="70px"
-      py={3}
-      pb={[55, 55, 3]}
-      sx={{
-        top: [null, null, 40],
-        left: [null, null, -95],
-        zIndex: 20,
-        bottom: [-18, -18, "inherit", "inherit"],
-        right: [-97, -97, "inherit", "inherit"],
-        position: "fixed",
-        maxWidth: ["290px", "290px", "353px"],
-        display: "block",
-        transform: "rotate(-45deg)",
-        boxShadow: [
-          "0 -2px 10px 0 #333",
-          "0 -2px 10px 0 #333",
-          "0 2px 10px 0 #333",
-        ],
-      }}
-      href={href}
-      color="white"
-    >
-      <Text textAlign="center" fontWeight="bold" color="white" fontSize="17px">
-        {children}
-      </Text>
-    </Link> /*
-    </motion.div>*/
+    <Text color="white">
+      <Link
+        bg="primary"
+        px="70px"
+        py={3}
+        pb={[55, 55, 3]}
+        sx={{
+          top: [null, null, 40],
+          left: [null, null, -95],
+          zIndex: 20,
+          bottom: [-18, -18, "inherit", "inherit"],
+          right: [-97, -97, "inherit", "inherit"],
+          position: "fixed",
+          maxWidth: ["290px", "290px", "353px"],
+          display: "block",
+          transform: "rotate(-45deg)",
+          boxShadow: [
+            "0 -2px 10px 0 #333",
+            "0 -2px 10px 0 #333",
+            "0 2px 10px 0 #333",
+          ],
+        }}
+        href={href}
+      >
+        <Text textAlign="center" fontWeight="bold" fontSize="17px">
+          {children}
+        </Text>
+      </Link>
+    </Text>
   );
 };

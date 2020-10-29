@@ -188,7 +188,7 @@ export const FAQ: React.FC = () => (
       Ich habe keine Frage, aber eine kritische Anmerkung!
     </Heading>
     <Text>
-      Wir sind auf Ihr Feedback angewiesen. Bitte nimm mit uns{" "}
+      Wir sind auf Dein Feedback angewiesen. Bitte nimm mit uns{" "}
       <Link href="/kontakt">
         <a>Kontakt</a>
       </Link>{" "}

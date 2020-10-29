@@ -20,12 +20,12 @@ start_pre() {
 
 start() {
   cd {{ app_dir }}
-  docker-compose up
+  docker-compose up -d
 }
 
-start() {
+stop() {
   cd {{ app_dir }}
-  docker-compose down
+  docker-compose up -d
 }
 
 restart() {

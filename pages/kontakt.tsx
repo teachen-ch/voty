@@ -11,7 +11,7 @@ export default function Kontakt(): ReactElement {
   return (
     <Page heading="Kontakt">
       <Text>
-        Möchtet ihr mit uns Kontakt aufnehmen? Wir freuen uns auf Feedback,
+        Möchtet Iht mit uns Kontakt aufnehmen? Wir freuen uns auf Feedback,
         Anregungen und Fragen:
       </Text>
       <Text my={4}>
@@ -21,7 +21,7 @@ export default function Kontakt(): ReactElement {
       </Text>
 
       <Text mt={5}>
-        Möchtet ihr regelmässig über voty.ch informiert werden (ca. 2-3 mal pro
+        Möchtet Ihr regelmässig über voty.ch informiert werden (ca. 2-3 mal pro
         Semester):
       </Text>
       <Text my={4}>

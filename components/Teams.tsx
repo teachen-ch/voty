@@ -139,7 +139,9 @@ export const Teams: React.FC<TeamsProps> = ({ where, teamClick }) => {
           ) : (
             teams?.map((team) => (
               <tr key={team.id} onClick={() => teamClick(team)}>
-                <td>{team.name}</td>
+                <td>
+                  <A onClick={() => teamClick(team)}>{team.name}</A>
+                </td>
                 <td>
                   {team.school?.name} ({team.school?.city})
                 </td>
@@ -147,7 +149,7 @@ export const Teams: React.FC<TeamsProps> = ({ where, teamClick }) => {
                   {team.members ? <>{team.members.length}</> : "-"}
                 </td>
                 <td width="1%">
-                  <A onClick={() => teamClick(team)} variant="underline">
+                  <A onClick={() => teamClick(team)}>
                     <Box variant="centered">
                       <img src="/images/icon_sus.svg" height="24px" alt="SuS" />
                     </Box>

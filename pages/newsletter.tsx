@@ -7,7 +7,7 @@ export default function Kontakt(): ReactElement {
   return (
     <Page heading="Newsletter">
       <Text mb={2}>
-        Möchtet ihr regelmässig über voty.ch informiert werden?
+        Möchtet Ihr regelmässig über voty.ch informiert werden?
       </Text>
       <Newsletter />
     </Page>

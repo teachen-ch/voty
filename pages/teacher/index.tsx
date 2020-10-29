@@ -23,7 +23,7 @@ export default function Teacher(): ReactElement {
     return (
       <LoggedInPage heading="Willkommen auf voty.ch">
         <Text mb={3}>
-          Wähle zuerst Deine Schule aus oder erfasse eine Neue Schule…
+          Wähle zuerst Deine Schule aus oder erfasse eine neue Schule…
         </Text>
         <SelectSchool />
       </LoggedInPage>
