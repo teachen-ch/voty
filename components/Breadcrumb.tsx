@@ -24,7 +24,7 @@ export const Breadcrumb = ({
   </Box>
 );
 
-type AProps = LinkProps & {
+type AProps = Omit<LinkProps, "as"> & {
   as?: string;
 };
 

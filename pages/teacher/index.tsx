@@ -5,6 +5,7 @@ import { Teams, CreateTeamForm } from "components/Teams";
 import { useState, ReactElement } from "react";
 import { useRouter } from "next/router";
 import { SelectSchool } from "components/Schools";
+import { Breadcrumb, A } from "components/Breadcrumb";
 
 export default function Teacher(): ReactElement {
   const user = useUser();
@@ -30,6 +31,10 @@ export default function Teacher(): ReactElement {
 
   return (
     <LoggedInPage heading="Meine Klassen">
+      <Breadcrumb>
+        <A href="/">Start</A>
+        <b>Meine Klassen</b>
+      </Breadcrumb>
       <Text fontWeight="bold">Willkommen {user && user.name}</Text>
       <Text mb={4}>Hier siehst Du eine Übersicht Deiner Klassen</Text>
       <Teams

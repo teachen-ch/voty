@@ -9,6 +9,7 @@ import {
 import { BallotResults } from "components/BallotResults";
 import { BallotDetails } from "components/Ballots";
 import { usePageEvent } from "util/stats";
+import { Breadcrumb, A } from "components/Breadcrumb";
 
 export default function TeacherBallotPage(): React.ReactElement {
   usePageEvent({ category: "Teacher", action: "BallotDetails" });
@@ -47,6 +48,17 @@ export default function TeacherBallotPage(): React.ReactElement {
 
   return (
     <LoggedInPage heading={`${ballot.title}`}>
+      <Breadcrumb>
+        <A href="/">Start</A>
+        <A href="/teacher/">Meine Klassen</A>
+        <A
+          href="/teacher/team/[id]/admin"
+          as={`/teacher/team/${team?.id}/admin`}
+        >
+          {team?.name}
+        </A>
+        <b>{ballot.title}</b>
+      </Breadcrumb>
       {!results?.total ? (
         ""
       ) : (

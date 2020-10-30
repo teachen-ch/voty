@@ -1,5 +1,5 @@
 import { LoggedInPage } from "components/Page";
-import { Heading, Text, Button, Link as A } from "rebass";
+import { Heading, Text, Button } from "rebass";
 import { Users } from "components/Users";
 import { Input, Textarea } from "@rebass/forms";
 import { Grid, Label } from "theme-ui";
@@ -18,6 +18,7 @@ import {
   useInviteStudentsMutation,
 } from "graphql/types";
 import { Nullable } from "simplytyped";
+import { Breadcrumb, A } from "components/Breadcrumb";
 
 export const INVITE_STUDENTS = gql`
   mutation inviteStudents($team: String!, $emails: [String!]!) {
@@ -104,6 +105,11 @@ export default function TeacherTeamPage(): React.ReactElement {
 
   return (
     <LoggedInPage heading="Detailansicht Klasse">
+      <Breadcrumb>
+        <A href="/">Start</A>
+        <A href="/teacher/">Meine Klassen</A>
+        <b>{team.name}</b>
+      </Breadcrumb>
       <Text textAlign="left">
         <Heading as="h3">
           Folgende Abstimmungen sind für die Klasse verfügbar

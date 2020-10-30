@@ -67,7 +67,7 @@ export function tr(code: string, dict?: Translations): string {
     }
   }
   // we look for code in Translations. If nothing found, we take the original
-  const translated = dict[code] || code;
+  const translated = dict[code] !== undefined ? dict[code] : code;
   // the result should not be a list of Translations
   if (typeof translated !== "string") {
     throw new Error(
