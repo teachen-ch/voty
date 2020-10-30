@@ -15,14 +15,14 @@ services:
       PORT: 3000
       NEXT_TELEMETRY_DISABLED: 1
     ports:
-      - "3000:3000"
+      - "127.0.0.1:3000:3000"
     command: npm run dev
 
   postgres:
     image: "postgres:13-alpine"
     container_name: "postgres"
-    ports:
-      - "5432:5432"
+    expose:
+      - "5432"
     volumes:
       - ./data:/var/lib/postgresql/data
     environment:
