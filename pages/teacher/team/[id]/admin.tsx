@@ -4,7 +4,6 @@ import { Users } from "components/Users";
 import { Input, Textarea } from "@rebass/forms";
 import { Grid, Label } from "theme-ui";
 import { useRef, useState, RefObject } from "react";
-import { Navigation, Route } from "components/Navigation";
 import { useRouter } from "next/router";
 import _ from "lodash";
 import { SelectBallots } from "components/Ballots";
@@ -12,6 +11,7 @@ import { gql } from "@apollo/client";
 import IconHint from "../../../../public/images/icon_hint.svg";
 import { fragments } from "components/Teams";
 import { ErrorBox } from "components/Form";
+import { trackEvent, usePageEvent } from "util/stats";
 import {
   useTeamTeacherQuery,
   TeamTeacherFieldsFragment,
@@ -34,6 +34,7 @@ export const INVITE_STUDENTS = gql`
 `;
 
 export default function TeacherTeamPage(): React.ReactElement {
+  usePageEvent({ category: "Teacher", action: "Admin" });
   const router = useRouter();
   const id = String(router.query.id);
   const teamQuery = useTeamTeacherQuery({
@@ -71,6 +72,11 @@ export default function TeacherTeamPage(): React.ReactElement {
   }
 
   async function inviteStudents(team: TeamTeacherFieldsFragment) {
+    trackEvent({
+      category: "Teacher",
+      action: "Invited",
+      value: String(emails.length),
+    });
     return doInviteStudents({ variables: { team: team.id, emails } });
   }
 
@@ -197,6 +203,7 @@ export default function TeacherTeamPage(): React.ReactElement {
 }
 
 function InviteLink({ team }: { team: TeamTeacherFieldsFragment }) {
+  usePageEvent({ category: "Teacher", action: "InviteLink" });
   const inviteRef = useRef<HTMLInputElement>(null);
   const [status, setStatus] = useState("");
   if (!team.invite) {
@@ -227,38 +234,5 @@ function InviteLink({ team }: { team: TeamTeacherFieldsFragment }) {
         {status}
       </Text>
     </Grid>
-  );
-}
-
-export function TeacherTeamNavigation({
-  team,
-}: {
-  team: TeamTeacherFieldsFragment;
-}): React.ReactElement {
-  return (
-    <Navigation>
-      <Route
-        href="/teacher/team/[id]/admin"
-        as={`/teacher/team/${team?.id}/admin`}
-        label="Administration"
-      />
-      <Route
-        href="/teacher/team/[id]/test"
-        as={`/teacher/team/${team?.id}/test`}
-        label="Demokratie testen"
-      />
-      <Route
-        href="/teacher/team/[id]/learn"
-        as={`/teacher/team/${team?.id}/learn`}
-        label="Demokratie lernen"
-        disabled
-      />
-      <Route
-        href="/teacher/team/[id]/experience"
-        as={`/teacher/team/${team?.id}/experience`}
-        label="Demokratie leben"
-        disabled
-      />
-    </Navigation>
   );
 }

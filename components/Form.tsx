@@ -111,7 +111,7 @@ export const QForm: React.FC<QFormProps> = ({ fields, mutation, ...props }) => {
       f.type = f.type || "string";
       f.name = f.name || name;
 
-      initialValues[name] = typeof f.init !== "undefined" ? f.init : undefined;
+      initialValues[name] = typeof f.init !== "undefined" ? f.init : "";
       if (!f.validate) {
         const yupTypes: Record<string, YupType> = {
           string: yup.string(),

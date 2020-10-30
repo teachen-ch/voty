@@ -44,8 +44,6 @@ describe("Test Teacher Startpage", () => {
     cy.findByLabelText("Ort:").type("Testort");
     cy.findByLabelText("Kanton:").select("Bern");
     cy.contains("Bestätigen").click();
-    cy.contains("Mein Konto").click();
-    cy.contains("Testschule");
   });
 
   it("lets a teacher delete her account", () => {

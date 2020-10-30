@@ -1,5 +1,6 @@
 import { atom, useRecoilValue, useSetRecoilState } from "recoil";
 import { LoginFieldsFragment } from "graphql/types";
+import { trackVisit } from "util/stats";
 
 export type SessionUser = LoginFieldsFragment | undefined | null;
 
@@ -37,5 +38,8 @@ export function useSetUser(): (user: SessionUser | undefined) => void {
   const setState = useSetRecoilState(userState);
   return (user: SessionUser | undefined) => {
     setState(user);
+    if (user) {
+      trackVisit(user);
+    }
   };
 }

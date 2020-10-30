@@ -136,14 +136,12 @@ const Account: React.FC<{ user: SessionUser }> = ({ user }) => {
 
 const AccountMenu: React.FC = () => {
   return (
-    <Box width="207px" mt="22px" ml="60px" sx={{ lineHeight: "16px" }}>
+    <Box width="207px" mt="22px" ml="85px" sx={{ lineHeight: "16px" }}>
       <svg width="207px" height="15px" viewBox="-136 0 207 15" version="1.1">
         <path
           d="M2.95999555,15 L23.9609454,1.71229409 C25.7556788,0.648405241 27.974226,0.593219151 29.8196352,1.5665599 L53.9750193,14.3070506 C54.8378628,14.7621479 55.7986582,15 56.7741645,15 L93,15 L-114,15 L-0.0995490542,15 C0.977073975,15 2.03386354,14.7103124 2.95999555,14.1613164 Z"
           fill="#505050"
         ></path>
-        {/*
-        <path d="M116,15 L142,0 L169,15 L116,15" fill="#505050"></path>*/}
       </svg>
       <Box bg="#505050" m={0} width="207px" p={3} sx={{ borderRadius: "card" }}>
         <Text lineHeight="35px">

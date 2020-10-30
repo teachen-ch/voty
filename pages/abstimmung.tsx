@@ -3,13 +3,18 @@ import { Heading, Text, Box, Flex, Link as A } from "rebass";
 import { Grid } from "theme-ui";
 import Link from "next/link";
 import { ReactElement, useState } from "react";
-import { CreateUserForm, Success } from "pages/user/signup";
+import { CreateUserForm } from "pages/user/signup";
+import Success from "pages/user/success";
 import { Role } from "graphql/types";
 import { SessionUser } from "state/user";
 import { ReadMore } from "components/ReadMore";
 
 export default function Abstimmung(): ReactElement {
-  const [user, setUser] = useState<SessionUser | undefined>(undefined);
+  const [newUser, setNewUser] = useState<SessionUser | undefined>(undefined);
+  if (newUser) {
+    window.scrollTo(0, 0);
+    return <Success user={newUser} />;
+  }
   return (
     <AppPage heading="Jugendliche stimmen ab – jetzt Klasse anmelden">
       <Text textAlign="left">
@@ -73,13 +78,13 @@ export default function Abstimmung(): ReactElement {
             </Text>
           </Flex>
         </Flex>
-        {!user ? (
+        {!newUser ? (
           <>
             <Heading as="h2">
               Interessiert? Melde Dich jetzt mit Deiner Klasse an
             </Heading>
             <CreateUserForm
-              setUser={setUser}
+              setUser={setNewUser}
               omitRole
               defaultRole={Role.Teacher}
             >
@@ -95,7 +100,7 @@ export default function Abstimmung(): ReactElement {
         ) : (
           <>
             <Heading as="h2">Die Anmeldung hat geklappt!</Heading>
-            <Success user={user} />
+            <Success user={newUser} />
           </>
         )}
       </Text>

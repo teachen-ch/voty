@@ -8,8 +8,10 @@ import {
 } from "graphql/types";
 import { BallotResults } from "components/BallotResults";
 import { BallotDetails } from "components/Ballots";
+import { usePageEvent } from "util/stats";
 
 export default function TeacherBallotPage(): React.ReactElement {
+  usePageEvent({ category: "Teacher", action: "BallotDetails" });
   const router = useRouter();
   const ballotId = String(router.query.ballot_id);
   const teamId = String(router.query.id);

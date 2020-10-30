@@ -224,8 +224,11 @@ export const ProfileEdit: React.FC<{
             )}
             {isStudent && (
               <>
-                <label htmlFor="year">Jahrgang:</label>
-                <Field as={Select} id="year" name="year" value={undefined}>
+                <Label htmlFor="year" pt="6px">
+                  {" "}
+                  Jahrgang:
+                </Label>
+                <Field as={Select} id="year" name="year" value={user?.year}>
                   <option value={undefined}>Bitte auswählen</option>
                   {[...Array(numYears).keys()].map((i) => (
                     <option key={i}>{i + startYear}</option>

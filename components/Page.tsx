@@ -2,7 +2,7 @@ import { Flex, Box, Heading, Text, Link as A } from "rebass";
 import Head from "next/head";
 import { useUser } from "state/user";
 import { LoginForm } from "pages/user/login";
-import { ReactNode, useState } from "react";
+import { ReactNode } from "react";
 import CheckLogin from "./CheckLogin";
 import Link from "next/link";
 import { FlexProps } from "rebass";
@@ -95,7 +95,6 @@ export const LoggedInPage: React.FC<{
   bgImages?: string[];
 }> = ({ role, children, heading, bgImages }) => {
   const user = useUser();
-  const [loading, setLoading] = useState(true);
   const allowed = role
     ? user?.role === role || user?.role === Role.Admin
     : true;
@@ -105,16 +104,13 @@ export const LoggedInPage: React.FC<{
   } else {
     return (
       <AppPage heading={heading} bgImages={bgImages}>
-        <CheckLogin setLoading={setLoading} />
-        {!loading && (
-          <>
-            <Text my={4}>
-              Diese Seite benötigt eine Anmeldung
-              {role && ` als ${getRoleName(role)}`}.
-            </Text>
-            <LoginForm />
-          </>
-        )}
+        <CheckLogin>
+          <Text my={4}>
+            Diese Seite benötigt eine Anmeldung
+            {role && ` als ${getRoleName(role)}`}.
+          </Text>
+          <LoginForm />
+        </CheckLogin>
       </AppPage>
     );
   }

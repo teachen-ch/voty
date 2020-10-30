@@ -29,7 +29,8 @@
     "ci:test": "yarn run migrate && yarn run start:bg && cypress run --record",
     "ci:release": "yarn install --frozen-lockfile && npx prisma generate && yarn run build",
     "graphql": "graphql-codegen --config codegen.yml",
-    "lint": "npx eslint ./"
+    "lint": "npx eslint ./",
+    "deploy": "./ansible/scripts/deploy.py"
   },
   "dependencies": {
     "@apollo/client": "^3.1.3",

@@ -122,8 +122,8 @@ export default function Datenschutz(): ReactElement {
         <Heading as="h2">Fragen oder Kommentare?</Heading>
         <Text mb={5}>
           Haben diese Datenschutz-Erklärungen noch Fragen offen gelassen oder
-          hast Du einen Kommentar dazu? Dann bitte{" "}
-          <A href="/kontakt">kontaktiere</A> uns
+          hast Du einen Kommentar dazu? Dann <A href="/kontakt">kontaktiere</A>{" "}
+          uns!
         </Text>
       </Text>
     </Page>

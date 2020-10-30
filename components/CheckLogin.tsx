@@ -1,6 +1,6 @@
 import { gql } from "@apollo/client";
 import { useUser, useSetUser } from "../state/user";
-import { Dispatch, SetStateAction, ReactElement, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useMeQuery } from "graphql/types";
 
 CheckLogin.fragments = {
@@ -41,13 +41,13 @@ export const ME = gql`
   ${CheckLogin.fragments.LoginFields}
 `;
 
-type CheckLoginProps = {
-  setLoading?: Dispatch<SetStateAction<boolean>>;
-};
 export default function CheckLogin({
-  setLoading,
-}: CheckLoginProps): ReactElement | null {
+  children,
+}: {
+  children?: React.ReactNode;
+}): React.ReactElement | null {
   const user = useUser();
+  const [loading, setLoading] = useState(true);
   const setUser = useSetUser();
   // check, whether there is already an active session
   // unless user is already set
@@ -56,15 +56,22 @@ export default function CheckLogin({
     // skip query if user is already defined
     skip: user ? true : false,
     onCompleted: (data) => {
-      if (setLoading) setLoading(false);
+      setLoading(false);
       setUser(data?.me); // could be undefined!
     },
   });
   useEffect(() => {
+    let mounted = true;
     // if we skip above query, because user is already loaded
-    if (user && setLoading) setLoading(false);
+    if (user && mounted) setLoading(false);
+    return () => {
+      mounted = false;
+    };
   }, [user]);
 
-  // if (checkLogin) return <Heading as="h2">Einen kurzen Moment…</Heading>;
-  return null;
+  if (loading) {
+    return null;
+  } else {
+    return <>{children}</>;
+  }
 }

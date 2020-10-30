@@ -1,15 +1,16 @@
 import { useUser } from "../../state/user";
 import { LoggedInPage } from "../../components/Page";
 import { Text } from "rebass";
-import { Navigation, Route } from "components/Navigation";
 import { ReactElement } from "react";
 import { ProfileEdit } from "components/Users";
 import StudentTest from "./test";
+import { trackEvent } from "util/stats";
 
 export default function StudentHome(): ReactElement {
   const user = useUser();
 
   if (user?.year === null) {
+    trackEvent({ category: "Student", action: "FirstRun" });
     return (
       <LoggedInPage heading={`Hallo ${user?.name}`}>
         <Text>Willkommen auf voty.ch – schön bis Du da!</Text>
@@ -25,13 +26,4 @@ export default function StudentHome(): ReactElement {
   }
 
   return <StudentTest />;
-}
-
-export function StudentTeamNavigation(): ReactElement {
-  return (
-    <Navigation>
-      <Route href="/student" label="Dein Profil" />
-      <Route href="/student/test" label="Demokratie testen" />
-    </Navigation>
-  );
 }

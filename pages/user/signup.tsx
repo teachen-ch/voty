@@ -1,18 +1,16 @@
 import { AppPage } from "components/Page";
-import { Text, Flex, Button, Image } from "rebass";
+import { Text, Button } from "rebass";
 import { gql } from "@apollo/client";
 import { useState, ReactElement, Dispatch, SetStateAction } from "react";
 import { useRouter } from "next/router";
 import { QForm, yup, ErrorBox } from "../../components/Form";
 import { omit } from "lodash";
 import { SessionUser } from "state/user";
-import {
-  useCreateUserMutation,
-  useEmailVerificationMutation,
-} from "graphql/types";
+import { useCreateUserMutation } from "graphql/types";
 import Abstimmung from "pages/abstimmung";
+import Success from "./success";
 
-// TODO use fragment for these fields
+// TODO use fragment for ./successlds
 export const CREATE_USER = gql`
   mutation createUser($data: UserCreateInput!) {
     createUser(data: $data) {
@@ -27,15 +25,12 @@ export const CREATE_USER = gql`
 `;
 
 export default function Signup(): ReactElement {
+  // currently we redirect the signup form to the campaign page
   return <Abstimmung />;
   const [user, setUser] = useState<SessionUser | undefined>(undefined);
   const router = useRouter();
   if (user) {
-    return (
-      <AppPage heading="Dein Konto ist erstellt">
-        <Success user={user} />
-      </AppPage>
-    );
+    return <Success user={user} />;
   }
   return (
     <AppPage heading="Erstelle ein Konto" onClose={() => void router.push("/")}>
@@ -45,55 +40,6 @@ export default function Signup(): ReactElement {
       </Text>
       <CreateUserForm setUser={setUser} />
     </AppPage>
-  );
-}
-
-export function Success({ user }: { user?: SessionUser }): ReactElement {
-  const [mailSent, setMailSent] = useState(false);
-  const [error, setError] = useState("");
-  const [doRequestReset] = useEmailVerificationMutation({
-    onCompleted() {
-      setMailSent(true);
-      setError("");
-    },
-    onError() {
-      setError("Es ist ein Fehler aufgetreten.");
-    },
-  });
-
-  async function doResend() {
-    await doRequestReset({
-      variables: { email: String(user?.email), purpose: "verification" },
-    });
-  }
-  return (
-    <Flex flexDirection="column">
-      <Image
-        alt="Willkommen"
-        src="/images/voty_welcome.svg"
-        maxWidth="80%"
-        sx={{ position: "absolute", alignSelf: "center" }}
-      />
-      <Text>
-        Hallo {user?.name}
-        <br />
-        Dein neues Konto wurde erstellt und wir haben ein Email an die Adresse «
-        {user?.email}» geschickt. Bitte öffne den Link in diesem Email, um Dich
-        anzumelden.{" "}
-      </Text>
-      <Text my={4}>
-        Solltest Du kein Email von voty.ch in der Inbox Deines Email-Accounts
-        finden, dann schau doch bitte im Spam-Ordner nach.
-      </Text>
-      {!mailSent ? (
-        <Button variant="text" onClick={doResend}>
-          Bestätigungsmail nochmals senden
-        </Button>
-      ) : (
-        "Das Bestätigungsmail wurde nochmals verschickt!"
-      )}
-      <ErrorBox error={error} />
-    </Flex>
   );
 }
 

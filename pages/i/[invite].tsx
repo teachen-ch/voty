@@ -4,7 +4,8 @@ import { gql } from "@apollo/client";
 import { ErrorBox } from "../../components/Form";
 import { Heading, Box, Button, Text } from "rebass";
 import { useState } from "react";
-import { CreateUserForm, Success } from "../user/signup";
+import { CreateUserForm } from "../user/signup";
+import Success from "../user/success";
 import { useUser } from "../../state/user";
 import { omit } from "lodash";
 import { SessionUser } from "state/user";
@@ -97,11 +98,7 @@ const Invite: React.FC = () => {
   }
 
   if (newUser !== undefined) {
-    return (
-      <AppPage heading="Dein Konto ist erstellt">
-        <Success user={newUser} />
-      </AppPage>
-    );
+    return <Success user={newUser} />;
   }
 
   return (

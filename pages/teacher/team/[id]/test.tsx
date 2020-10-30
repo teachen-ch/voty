@@ -15,8 +15,10 @@ import {
 import { useRouter } from "next/router";
 import { ReactElement } from "react";
 import { find } from "lodash";
+import { usePageEvent, trackEvent } from "util/stats";
 
 export default function TeacherTest(): ReactElement {
+  usePageEvent({ category: "Teacher", action: "Ballots" });
   const router = useRouter();
   const id = String(router.query.id);
   const teamQuery = useTeamTeacherQuery({
@@ -55,6 +57,7 @@ export default function TeacherTest(): ReactElement {
   }
 
   async function addBallot(ballotId: string, teamId: string) {
+    trackEvent({ category: "Teacher", action: "AddBallot" });
     await doAddBallotRun({
       variables: { ballotId, teamId },
       refetchQueries: ["getBallotRuns"],
@@ -63,6 +66,7 @@ export default function TeacherTest(): ReactElement {
   }
 
   async function removeBallot(ballotRunId: string) {
+    trackEvent({ category: "Teacher", action: "RemoveBallot" });
     await doRemoveBallotRun({
       variables: { ballotRunId },
       refetchQueries: ["getBallotRuns"],

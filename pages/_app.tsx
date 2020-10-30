@@ -11,13 +11,14 @@ import { Header } from "components/Header";
 import { Page } from "components/Page";
 import { ReactElement, useEffect } from "react";
 import CheckLogin from "components/CheckLogin";
-// eslint-disable-next-line
-const stats = require("@socialgouv/matomo-next");
+import initStats from "util/stats";
 
 function MyApp({ Component, pageProps }: AppProps): ReactElement {
   useEffect(() => {
-    // eslint-disable-next-line
-    stats.init({ url: "https://stats.teachen.ch", siteId: 2 });
+    initStats({
+      url: "https://stats.teachen.ch",
+      siteId: process.env.NEXT_PUBLIC_STATS_ID || 2,
+    });
   }, []);
   return (
     <div className="container">

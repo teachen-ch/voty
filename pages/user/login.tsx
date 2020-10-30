@@ -7,6 +7,7 @@ import { Grid } from "theme-ui";
 import { Label, Input } from "@rebass/forms";
 import { QForm, ErrorBox } from "components/Form";
 import CheckLogin from "components/CheckLogin";
+import { usePageEvent, trackEvent } from "util/stats";
 import {
   useSetAccessToken,
   useUser,
@@ -100,6 +101,7 @@ export default function Login(): ReactElement {
 }
 
 export function LoginForm(): ReactElement {
+  usePageEvent({ category: "Login", action: "Start" });
   const [email, setEmail] = useState("");
   const [emailError, setEmailError] = useState("");
   const [requestReset, setRequestReset] = useState<string | undefined>(
@@ -118,8 +120,14 @@ export function LoginForm(): ReactElement {
     },
     onError(error) {
       if (error.message === "Error.EmailNotVerified") {
+        trackEvent({ category: "Login", action: "NotVerified" });
         return setEmailError(email);
       } else {
+        trackEvent({
+          category: "Login",
+          action: "Error",
+          name: error.message,
+        });
         return setError(error.message);
       }
     },
@@ -177,6 +185,7 @@ export function LoginForm(): ReactElement {
 }
 
 function VerificationForm({ email }: { email: string }): ReactElement {
+  usePageEvent({ category: "Login", action: "NotVerified" });
   const [mailSent, setMailSent] = useState(false);
   const [error, setError] = useState("");
 
@@ -231,6 +240,7 @@ function getStartpage(role?: string) {
 }
 
 function AfterLogin() {
+  usePageEvent({ category: "Login", action: "Success" });
   const user = useUser();
   const router = useRouter();
 
@@ -285,6 +295,7 @@ function CheckToken({ token, purpose }: { token: string; purpose: string }) {
       setUser(tempUser);
     }
     if (purpose === "verification") {
+      trackEvent({ category: "Login", action: "EmailVerified" });
       return (
         <Box>
           <Text mb={4}>
@@ -383,6 +394,7 @@ function RequestReset({ onCancel }: { email: string; onCancel: () => void }) {
 }
 
 function PasswordResetForm() {
+  usePageEvent({ category: "Login", action: "PasswordRequest" });
   const user = useUser();
   const setUser = useSetUser();
   const setAccessToken = useSetAccessToken();
