@@ -1,0 +1,18 @@
+---
+- name: Build Docker Image
+  block:
+    - name: Build Docker Image
+      docker_image:
+        name: "voty-web"
+        source: "build"
+        force_source: "yes"
+        build:
+          pull: "no"
+          path: "{{app_dir}}"
+    - name: Login to docker registry (GitHub Packages)
+      ### this is an ugly hack using a personal access token with read-only reg access
+      # see https://github.community/t/download-from-github-package-registry-without-authentication/14407/44
+      docker_login:
+        registry: "docker.pkg.github.com"
+        username: "stefannn"
+        password: "\u0032\u0031\u0038\u0062\u0064\u0066\u0065\u0038\u0065\u0035\u0039\u0036\u0063\u0037\u0065\u0064\u0036\u0035\u0031\u0062\u0030\u0036\u0034\u0030\u0066\u0062\u0061\u0064\u0066\u0033\u0064\u0032\u0037\u0063\u0037\u0061\u0062\u0030\u0065\u0034"

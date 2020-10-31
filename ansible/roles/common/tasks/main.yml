@@ -3,22 +3,6 @@
 
 - name: Install Software and Add User
   block:
-    #- name: Install the gpg key for nodejs LTS
-    #  apt_key:
-    #    url: "https://deb.nodesource.com/gpgkey/nodesource.gpg.key"
-    #    state: present
-    #- name: add nodejs repository
-    #  apt_repository:
-    #    repo: "deb https://deb.nodesource.com/node_13.x focal main"
-    #    state: "present"
-    #- name: Install the gpg key for Docker Repo
-    #  apt_key:
-    #    url: "https://download.docker.com/linux/ubuntu/gpg"
-    #    state: present
-    #- name: Add Docker Repository
-    #  apt_repository:
-    #    repo: "deb https://download.docker.com/linux/ubuntu focal stable"
-    #    state: "present"
     - name: Update and upgrade packages
       package: { upgrade: "yes", update_cache: "yes" }
     - name: Install backend modules
@@ -40,6 +24,8 @@
       user: { name: voty }
     - name: Create Backend Root Directory
       file: { path: "{{app_dir}}", owner: voty, state: directory }
+    - name: Create Nginx Directory
+      file: { path: "{{app_dir}}/nginx", owner: voty, state: directory }
     - name: Create Maintenance-Site Directory
       file: { path: "{{app_dir}}/maintenance", owner: voty, state: directory }
 
@@ -53,21 +39,36 @@
       service: { name: docker, enabled: yes, state: started }
   become: yes
   become_method: sudo
-- name: Configure Webserver and Run Services
+- name: Configure voty service
   block:
-    - name: Configure nginx (needed to set server_names_hash_bucket_size in Alpine)
-      template: { src: "{{ nginx_conf }}", dest: "/etc/nginx/nginx.conf" }
-    - name: Configure voty.ch
-      template: { src: voty.cfg.j2, dest: "{{nginx_sites}}/voty.conf" }
-      notify: restart nginx
-    - name: Enable Nginx service (need on Alpine)
-      service: { name: nginx, enabled: yes, state: started }
-    - name: Create Systemd Service Configuration
+    - name: Create voty Service Configuration
       template:
         { src: "{{service_template}}", dest: "{{service_dest}}", mode: 0755 }
       notify: reload systemd
     - name: Flush Handlers
       meta: flush_handlers
-
   become: yes
   become_method: sudo
+
+- name: Deploy config files for Web Frontend
+  block:
+    - name: Copy docker-compose file for Backend
+      template:
+        {
+          src: "../docker-compose.yml",
+          dest: "{{app_dir}}/docker-compose.yml",
+          mode: 0600,
+        }
+
+    - name: Copy nginx config
+      template:
+        {
+          src: "../nginx/default.conf",
+          dest: "{{app_dir}}/nginx/default.conf",
+          mode: 0600,
+        }
+    - name: Create .env file for Backend
+      template: { src: "{{ env_file }}", dest: "{{app_dir}}/.env", mode: 0600 }
+
+  become: yes
+  become_user: voty

@@ -1,0 +1,13 @@
+#
+# This is currently not used, as we use traefik in docker-compose
+#
+---
+- name: Configure nginx
+  block:
+    - name: Configure nginx (needed to set server_names_hash_bucket_size in Alpine)
+      template: { src: "{{ nginx_conf }}", dest: "/etc/nginx/nginx.conf" }
+    - name: Configure voty.ch nginx configuration
+      template: { src: voty.cfg.j2, dest: "{{nginx_sites}}/voty.conf" }
+      notify: restart nginx
+    - name: Enable Nginx service (need on Alpine)
+      service: { name: nginx, enabled: yes, state: started }
