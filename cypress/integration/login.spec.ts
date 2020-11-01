@@ -1,15 +1,3 @@
-describe("Test Login", () => {
-  beforeEach(() => {
-    cy.task("prismaLoader", "testdb.yml");
-    cy.login();
-  });
-
-  it("User is already logged in!", () => {
-    cy.visit("/user/login");
-    cy.url().should("include", "/teacher");
-  });
-});
-
 describe("Test Login Page", () => {
   beforeEach(() => {
     cy.task("prismaLoader", "testdb.yml");
