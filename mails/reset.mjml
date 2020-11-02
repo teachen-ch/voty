@@ -1,18 +1,16 @@
 <mjml>
   <mj-head>
-    <mj-font name="SourceSansPro" href="https://voty.ch/fonts/source-sans-pro-v14-latin-600.woff2" />
-    <mj-style>
-      body {
-        font-family: SourceSansPro, -apple-system, system-ui, sans;
-      }
-    </mj-style>
+    <mj-font name="SourceSansPro" href="https://voty.ch/fonts/source-sans-pro-v14-latin-400.woff" />
+    <mj-attributes>
+      <mj-all font-family="SourceSansPro, -apple-system, system-ui, sans"/>
+    </mj-attributes>
   </mj-head>
   <mj-body>
     <mj-section>
       <mj-column width="470px">
           <mj-image width="470px" src="https://voty.ch/images/voty_email.png"/>
           <mj-text align="center" font-size="27px" font-weight="bold">Passwort zurücksetzen</mj-text>
-          <mj-text font-size="20px" color="#000">Mit diesem Link kannst Du Dein Passwort für den Benutzer «<strong>{{email}}&#8203;</strong>» bei voty.&#8203;ch ändern</mj-text>
+          <mj-text font-size="20px" color="#000">Mit diesem Link kannst Du Dein Passwort für den Benutzer «<strong>{{&email}}</strong>» bei voty.&#8203;ch ändern</mj-text>
           <mj-button href="{{url}}" background-color="#c00" font-weight="bold" font-size="20px">Jetzt Passwort ändern</mj-button>
           <mj-text font-size="20px"> Wenn Du nicht soeben eine Passwort-Anfrage gestartet hast, dann lösche bitte dieses Mail.</mj-text>
       </mj-column>

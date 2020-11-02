@@ -229,7 +229,11 @@ function InviteLink({ team }: { team: TeamTeacherFieldsFragment }) {
 
   function qrCode(url: string) {
     const qrUrl = `/i/qr?url=${url}`;
-    window.open(qrUrl, "qr", "width=400,height=423,toolbar=no,scrollbars=no");
+    window.open(
+      qrUrl,
+      "qr",
+      "width=400,height=400,toolbar=no,scrollbars=no, location=no, status=no"
+    );
   }
 
   return (
@@ -239,7 +243,7 @@ function InviteLink({ team }: { team: TeamTeacherFieldsFragment }) {
       <Button fontSize={1} onClick={() => qrCode(url)}>
         <Box variant="centered">
           <Image src="/images/icon_qr.svg" mr={2} height="25px" />
-          QR Code
+          QR-Code
         </Box>
       </Button>
       <Text fontSize={1} sx={{ gridColumn: [0, 0, 2] }} mt="-10px">

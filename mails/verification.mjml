@@ -1,11 +1,9 @@
 <mjml>
   <mj-head>
     <mj-font name="SourceSansPro" href="https://voty.ch/fonts/source-sans-pro-v14-latin-600.woff2" />
-    <mj-style>
-      body {
-        font-family: SourceSansPro, -apple-system, system-ui, sans;
-      }
-    </mj-style>
+    <mj-attributes>
+      <mj-all font-family="SourceSansPro, -apple-system, system-ui, sans"/>
+    </mj-attributes>
   </mj-head>
   <mj-body>
     <mj-section>
