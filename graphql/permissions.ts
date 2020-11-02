@@ -149,6 +149,7 @@ export const permissions = shield({
       attachments: or(isOwn("id"), teachesTeam, isAdmin),
       threads: or(isOwn("id"), teachesTeam, isAdmin),
       reactions: or(isOwn("id"), teachesTeam, isAdmin),
+      createdAt: isAdmin,
     },
     School: {
       id: allow,

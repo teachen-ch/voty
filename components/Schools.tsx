@@ -1,6 +1,6 @@
 import { gql } from "@apollo/client";
 import { useUser, useSetUser } from "../state/user";
-import { Flex, Button, Box } from "rebass";
+import { Flex, Text, Button, Box } from "rebass";
 import { omit } from "lodash";
 import { Grid } from "theme-ui";
 import { QForm, ErrorBox } from "./Form";
@@ -46,27 +46,25 @@ export const Schools: React.FC = () => {
   const schools = schoolsQuery.data?.schools;
 
   if (schoolsQuery.error) {
-    return <h1>Error loading data: {schoolsQuery.error.message}</h1>;
+    return <Text>Error loading data: {schoolsQuery.error.message}</Text>;
   }
   if (schoolsQuery.loading) {
-    return <h1>Loading data</h1>;
+    return <Text>Loading data</Text>;
   }
   return (
     <>
       <table>
         <thead>
           <tr>
-            <th>#</th>
-            <th>Name</th>
-            <th>City</th>
-            <th>Members</th>
+            <th>Schule</th>
+            <th>Stadt</th>
+            <th>SuS</th>
           </tr>
         </thead>
 
         <tbody>
           {schools?.map((school) => (
-            <tr key={school.id}>
-              <td>{school.id}</td>
+            <tr key={school.id} id={school.id}>
               <td>{school.name}</td>
               <td>{school.city}</td>
               <td>{school.members ? school.members.length : "-"}</td>

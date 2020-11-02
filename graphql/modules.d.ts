@@ -70,6 +70,15 @@ export const updateUser: DocumentNode;
 }
     
 
+declare module '*/teachers.tsx' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const teachers: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
 declare module '*/[invite].tsx' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;

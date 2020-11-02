@@ -3249,6 +3249,7 @@ export type User = {
   __typename?: 'User';
   attachments: Array<Attachment>;
   ballots: Array<Ballot>;
+  createdAt: Scalars['DateTime'];
   email?: Maybe<Scalars['String']>;
   emailVerified?: Maybe<Scalars['DateTime']>;
   gender?: Maybe<Gender>;
@@ -4914,6 +4915,26 @@ export type UpdateUserMutation = (
   )> }
 );
 
+export type TeachersQueryVariables = Exact<{
+  where?: Maybe<UserWhereInput>;
+}>;
+
+
+export type TeachersQuery = (
+  { __typename?: 'Query' }
+  & { users: Array<(
+    { __typename?: 'User' }
+    & Pick<User, 'id' | 'name' | 'lastname' | 'shortname' | 'email' | 'emailVerified' | 'createdAt'>
+    & { school?: Maybe<(
+      { __typename?: 'School' }
+      & Pick<School, 'id' | 'name' | 'city' | 'zip'>
+    )>, teaches: Array<(
+      { __typename?: 'Team' }
+      & Pick<Team, 'name' | 'id'>
+    )> }
+  )> }
+);
+
 export type CreateInvitedUserMutationVariables = Exact<{
   invite: Scalars['String'];
   name?: Maybe<Scalars['String']>;
@@ -5961,6 +5982,55 @@ export function useUpdateUserMutation(baseOptions?: Apollo.MutationHookOptions<U
 export type UpdateUserMutationHookResult = ReturnType<typeof useUpdateUserMutation>;
 export type UpdateUserMutationResult = Apollo.MutationResult<UpdateUserMutation>;
 export type UpdateUserMutationOptions = Apollo.BaseMutationOptions<UpdateUserMutation, UpdateUserMutationVariables>;
+export const TeachersDocument = gql`
+    query teachers($where: UserWhereInput) {
+  users(where: $where) {
+    id
+    name
+    lastname
+    shortname
+    email
+    emailVerified
+    createdAt
+    school {
+      id
+      name
+      city
+      zip
+    }
+    teaches {
+      name
+      id
+    }
+  }
+}
+    `;
+
+/**
+ * __useTeachersQuery__
+ *
+ * To run a query within a React component, call `useTeachersQuery` and pass it any options that fit your needs.
+ * When your component renders, `useTeachersQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useTeachersQuery({
+ *   variables: {
+ *      where: // value for 'where'
+ *   },
+ * });
+ */
+export function useTeachersQuery(baseOptions?: Apollo.QueryHookOptions<TeachersQuery, TeachersQueryVariables>) {
+        return Apollo.useQuery<TeachersQuery, TeachersQueryVariables>(TeachersDocument, baseOptions);
+      }
+export function useTeachersLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<TeachersQuery, TeachersQueryVariables>) {
+          return Apollo.useLazyQuery<TeachersQuery, TeachersQueryVariables>(TeachersDocument, baseOptions);
+        }
+export type TeachersQueryHookResult = ReturnType<typeof useTeachersQuery>;
+export type TeachersLazyQueryHookResult = ReturnType<typeof useTeachersLazyQuery>;
+export type TeachersQueryResult = Apollo.QueryResult<TeachersQuery, TeachersQueryVariables>;
 export const CreateInvitedUserDocument = gql`
     mutation createInvitedUser($invite: String!, $name: String, $lastname: String, $email: String!, $password: String) {
   createInvitedUser(invite: $invite, name: $name, lastname: $lastname, email: $email, password: $password) {

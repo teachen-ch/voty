@@ -39,6 +39,7 @@ export async function sendMail(
       subject,
       text,
       html,
+      
     });
   } catch (error) {
     logger.error(`Cannot send email to ${to}`, error);

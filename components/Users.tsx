@@ -53,56 +53,43 @@ export function Users({
   users?: TeamTeacherFieldsFragment["members"];
 }): ReactElement {
   return (
-    <>
-      <table style={{ borderTop: "2px solid white" }}>
-        {/*
-        <thead>
+    <table style={{ borderTop: "2px solid white" }}>
+      <tbody>
+        {!users || users.length === 0 ? (
           <tr>
-            <th>Name</th>
-            <th>Email</th>
-            <th style={{ textAlign: "center", width: "1%" }}>Status</th>
+            <td colSpan={3}>Es wurden noch keine Schüler*innen hinzugefügt</td>
           </tr>
-        </thead>*/}
-
-        <tbody>
-          {!users || users.length === 0 ? (
-            <tr>
-              <td colSpan={3}>
-                Es wurden noch keine Schüler*innen hinzugefügt
+        ) : (
+          users?.map((user: myUser) => (
+            <tr key={user.id}>
+              <td style={{ maxWidth: "200px" }}>
+                <A href={`mailto:${user.email}`}>{user.shortname}</A>
+              </td>
+              <td>
+                <A
+                  sx={{ display: ["none", "none", "inline"] }}
+                  href={`mailto:${user.email}`}
+                >
+                  {user.email}
+                </A>
+              </td>
+              <td>
+                <Box variant="centered">
+                  {user.emailVerified ? (
+                    <Image src="/images/icon_user_ok.svg" alt="Bestätigt" />
+                  ) : (
+                    <Image
+                      src="/images/icon_user_nok.svg"
+                      alt="Nicht bestätigt"
+                    />
+                  )}
+                </Box>
               </td>
             </tr>
-          ) : (
-            users?.map((user: myUser) => (
-              <tr key={user.id}>
-                <td style={{ maxWidth: "200px" }}>
-                  <A href={`mailto:${user.email}`}>{user.shortname}</A>
-                </td>
-                <td>
-                  <A
-                    sx={{ display: ["none", "none", "inline"] }}
-                    href={`mailto:${user.email}`}
-                  >
-                    {user.email}
-                  </A>
-                </td>
-                <td>
-                  <Box variant="centered">
-                    {user.emailVerified ? (
-                      <Image src="/images/icon_user_ok.svg" alt="Bestätigt" />
-                    ) : (
-                      <Image
-                        src="/images/icon_user_nok.svg"
-                        alt="Nicht bestätigt"
-                      />
-                    )}
-                  </Box>
-                </td>
-              </tr>
-            ))
-          )}
-        </tbody>
-      </table>
-    </>
+          ))
+        )}
+      </tbody>
+    </table>
   );
 }
 

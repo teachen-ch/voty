@@ -2977,6 +2977,7 @@ input ThreadWhereUniqueInput {
 type User {
   attachments(after: AttachmentWhereUniqueInput, before: AttachmentWhereUniqueInput, first: Int, last: Int): [Attachment!]!
   ballots(after: BallotWhereUniqueInput, before: BallotWhereUniqueInput, first: Int, last: Int): [Ballot!]!
+  createdAt: DateTime!
   email: String
   emailVerified: DateTime
   gender: Gender
