@@ -1,3 +1,4 @@
+// @ts-nocheck
 import {
   Role,
   Ballot,
@@ -7,35 +8,27 @@ import {
   VoteWhereInput,
 } from "@prisma/client";
 import { randomBytes } from "crypto";
-import { FieldResolver } from "nexus/components/schema";
 import { setCookie, getCookie } from "../../util/cookies";
 import { NextApiRequest, NextApiResponse } from "next";
+import { Context } from "../context";
 
-export const canVote: FieldResolver<"Ballot", "canVote"> = async (
-  _root,
-  args,
-  ctx
-): Promise<boolean> => {
+export const canVote = async (_root, args, ctx: Context): Promise<boolean> => {
   const ballot = _root;
   const user = ctx.user;
   return await votingPermission({ ballot, user, db: ctx.db });
 };
 
-export const hasVoted: FieldResolver<"Ballot", "hasVoted"> = async (
+export const hasVoted = async (
   _root: Ballot,
   args,
-  ctx
+  ctx: Context
 ): Promise<boolean> => {
   const ballot = _root;
   const user = ctx.user;
   return await getHasVoted({ ballot, user, db: ctx.db });
 };
 
-export const vote: FieldResolver<"Mutation", "vote"> = async (
-  _root,
-  args,
-  ctx
-) => {
+export const vote = async (_root, args, ctx) => {
   const { ballotId, vote } = args;
   const ballot = await ctx.db.ballot.findOne({ where: { id: ballotId } });
   const user = await ctx.db.user.findOne({
@@ -79,11 +72,7 @@ export const vote: FieldResolver<"Mutation", "vote"> = async (
   return result;
 };
 
-export const voteCode: FieldResolver<"Mutation", "voteCode"> = async (
-  _root,
-  args,
-  ctx
-) => {
+export const voteCode = async (_root, args, ctx) => {
   const { ballotRunId, vote, code } = args;
   const ballotRun = await ctx.db.ballotRun.findOne({
     where: { id: ballotRunId },
@@ -148,11 +137,7 @@ export const voteCode: FieldResolver<"Mutation", "voteCode"> = async (
   return { success: true, message: "OK_VOTED" };
 };
 
-export const addBallotRun: FieldResolver<"Mutation", "addBallotRun"> = async (
-  _root,
-  args,
-  ctx
-) => {
+export const addBallotRun = async (_root, args, ctx) => {
   const ballotId = args.ballotId;
   const teamId = args.teamId;
 
@@ -179,10 +164,7 @@ export const addBallotRun: FieldResolver<"Mutation", "addBallotRun"> = async (
   return ballotRun;
 };
 
-export const removeBallotRun: FieldResolver<
-  "Mutation",
-  "removeBallotRun"
-> = async (_root, args, ctx) => {
+export const removeBallotRun = async (_root, args, ctx) => {
   const ballotRunId = args.ballotRunId;
   const ballotRun = await ctx.db.ballotRun.findOne({
     where: { id: ballotRunId },
@@ -198,10 +180,7 @@ export const removeBallotRun: FieldResolver<
   return { success: true };
 };
 
-export const startBallotRun: FieldResolver<
-  "Mutation",
-  "startBallotRun"
-> = async (_root, args, ctx) => {
+export const startBallotRun = async (_root, args, ctx) => {
   const ballotRunId = args.ballotRunId;
 
   const ballotRun = await ctx.db.ballotRun.update({
@@ -213,11 +192,7 @@ export const startBallotRun: FieldResolver<
   return ballotRun;
 };
 
-export const endBallotRun: FieldResolver<"Mutation", "endBallotRun"> = async (
-  _root,
-  args,
-  ctx
-) => {
+export const endBallotRun = async (_root, args, ctx) => {
   const ballotRunId = args.ballotRunId;
 
   const ballotRun = await ctx.db.ballotRun.update({
@@ -229,11 +204,7 @@ export const endBallotRun: FieldResolver<"Mutation", "endBallotRun"> = async (
   return ballotRun;
 };
 
-export const getBallotRuns: FieldResolver<"Query", "getBallotRuns"> = async (
-  _root,
-  args,
-  ctx
-) => {
+export const getBallotRuns = async (_root, args, ctx) => {
   const teamId = args.teamId;
 
   const team = await ctx.db.team.findOne({ where: { id: teamId } });
@@ -250,10 +221,7 @@ export const getBallotRuns: FieldResolver<"Query", "getBallotRuns"> = async (
  * - schoolId: filter. AUTH: school member
  * - canton: filter by canton. AUTH: anon
  */
-export const getBallotResults: FieldResolver<
-  "Query",
-  "getBallotResults"
-> = async (_root, args, ctx) => {
+export const getBallotResults = async (_root, args, ctx) => {
   const { ballotId, ballotRunId, canton, teamId, schoolId } = args;
   const user = ctx.user;
   let ballotRun;

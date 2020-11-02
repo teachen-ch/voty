@@ -5467,7 +5467,13 @@ export type VoteCodeMutationResult = Apollo.MutationResult<VoteCodeMutation>;
 export type VoteCodeMutationOptions = Apollo.BaseMutationOptions<VoteCodeMutation, VoteCodeMutationVariables>;
 export const GetBallotResultsDocument = gql`
     query getBallotResults($ballotId: String!, $ballotRunId: String, $teamId: String, $schoolId: String, $canton: String) {
-  getBallotResults(ballotRunId: $ballotRunId, ballotId: $ballotId, teamId: $teamId, schoolId: $schoolId, canton: $canton) {
+  getBallotResults(
+    ballotRunId: $ballotRunId
+    ballotId: $ballotId
+    teamId: $teamId
+    schoolId: $schoolId
+    canton: $canton
+  ) {
     yes
     no
     abs
@@ -5854,7 +5860,9 @@ export type TeamByCodeLazyQueryHookResult = ReturnType<typeof useTeamByCodeLazyQ
 export type TeamByCodeQueryResult = Apollo.QueryResult<TeamByCodeQuery, TeamByCodeQueryVariables>;
 export const CreateOneTeamDocument = gql`
     mutation createOneTeam($name: String!, $school: String!, $teacher: String!) {
-  createOneTeam(data: {name: $name, school: {connect: {id: $school}}, teacher: {connect: {id: $teacher}}}) {
+  createOneTeam(
+    data: {name: $name, school: {connect: {id: $school}}, teacher: {connect: {id: $teacher}}}
+  ) {
     ...TeamTeacherFields
   }
 }
@@ -5963,7 +5971,13 @@ export type UpdateUserMutationResult = Apollo.MutationResult<UpdateUserMutation>
 export type UpdateUserMutationOptions = Apollo.BaseMutationOptions<UpdateUserMutation, UpdateUserMutationVariables>;
 export const CreateInvitedUserDocument = gql`
     mutation createInvitedUser($invite: String!, $name: String, $lastname: String, $email: String!, $password: String) {
-  createInvitedUser(invite: $invite, name: $name, lastname: $lastname, email: $email, password: $password) {
+  createInvitedUser(
+    invite: $invite
+    name: $name
+    lastname: $lastname
+    email: $email
+    password: $password
+  ) {
     ...LoginFields
   }
 }

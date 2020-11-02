@@ -1,9 +1,8 @@
-import { schema } from "nexus";
-import { users } from "./resolvers";
-import { stringArg } from "nexus/components/schema";
+import { users } from "../resolvers";
+import { stringArg, objectType, extendType } from "@nexus/schema";
 import { upperFirst } from "lodash";
 
-schema.objectType({
+export const User = objectType({
   name: "User",
   definition(t) {
     t.model.id();
@@ -36,7 +35,7 @@ schema.objectType({
   },
 });
 
-schema.objectType({
+export const ResponseLogin = objectType({
   name: "ResponseLogin",
   definition(t) {
     t.string("token");
@@ -44,7 +43,7 @@ schema.objectType({
   },
 });
 
-schema.extendType({
+export const UserQuery = extendType({
   type: "Query",
   definition(t) {
     t.crud.user();
@@ -61,7 +60,7 @@ schema.extendType({
   },
 });
 
-schema.extendType({
+export const UserMutation = extendType({
   type: "Mutation",
   definition(t) {
     t.crud.createOneUser({

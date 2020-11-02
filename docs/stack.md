@@ -77,7 +77,7 @@ sudo s3cmd --configure
 
 ### How to test graphql API with curl
 
-curl -H "x-access-token: <<<token>>>" -d '{"query": "{me {name id }}"}' -H "Content-Type: application/json" localhost:3000/api/graphql
+curl -H "x-access-token: <<<token>>>" -d '{"query": "{me {name id }}"}' -H "Content-Type: application/json" localhost:3000/api
 
 ### Deployment
 

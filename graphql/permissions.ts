@@ -1,18 +1,17 @@
-import { shield, rule, allow, or } from "nexus-plugin-shield";
+import { shield, rule, allow, or } from "graphql-shield";
 import { Role } from "@prisma/client";
 import { ballots } from "./resolvers";
 import { User, Ballot } from "@prisma/client";
+import type { Context } from "./context";
 
 // rule caching: "no_cache", "contextual" (relies on context, eg. authentication,
 // or "strict": relies on parent or args
-const isUser = rule({ cache: "contextual" })(
-  (parent, args, ctx: NexusContext) => {
-    return ctx.user?.id !== undefined;
-  }
-);
+const isUser = rule({ cache: "contextual" })((parent, args, ctx: Context) => {
+  return ctx.user?.id !== undefined;
+});
 
 const isTeacher = rule({ cache: "contextual" })(
-  (parent, args, ctx: NexusContext) => {
+  (parent, args, ctx: Context) => {
     switch (ctx.user?.role) {
       case Role.Teacher:
       case Role.Principal:
@@ -24,16 +23,14 @@ const isTeacher = rule({ cache: "contextual" })(
   }
 );
 
-const isAdmin = rule({ cache: "contextual" })(
-  (parent, args, ctx: NexusContext) => {
-    return ctx.user?.role === Role.Admin;
-  }
-);
+const isAdmin = rule({ cache: "contextual" })((parent, args, ctx: Context) => {
+  return ctx.user?.role === Role.Admin;
+});
 
 // team members can view team
 /*
 const isTeamMember = rule({ cache: "strict" })(
-  async (parent, args, ctx: NexusContext) => {
+  async (parent, args, ctx: Context) => {
     const { id, teamId } = ctx.user || {};
     if (!id) return false;
     // check if student is part of team
@@ -46,7 +43,7 @@ const isTeamMember = rule({ cache: "strict" })(
 
 // Teacher may view his students
 const teachesTeam = rule({ cache: "strict" })(
-  async (parent: User, args, ctx: NexusContext) => {
+  async (parent: User, args, ctx: Context) => {
     const { id, role } = ctx.user || {};
     if (!id || role !== Role.Teacher) return false;
     if (!parent.role)
@@ -63,19 +60,20 @@ const teachesTeam = rule({ cache: "strict" })(
 
 // check for parent.id, or parent.schoolId, or parent.teacherId...
 const isOwn = (field: string) =>
-  rule(`own-${field}`, { cache: "strict" })(
-    (parent, args, ctx: NexusContext) => {
-      if (!ctx.user) return false;
-      const { id } = ctx.user;
-      if (field in parent) {
-        // eslint-disable-next-line
-        return parent[field] === id;
-      } else return false;
-    }
-  );
+  rule(`own-${field}`, { cache: "strict" })((parent, args, ctx: Context) => {
+    if (!ctx.user) return false;
+    const { id } = ctx.user;
+    if (field in parent) {
+      // eslint-disable-next-line
+      return parent[field] === id;
+    } else return false;
+  });
+
+const isOwnId = isOwn("id");
+const isOwnTeacherId = isOwn("teacherId");
 
 const updateUserCheck = rule({ cache: "strict" })(
-  (parent, args, ctx: NexusContext) => {
+  (parent, args, ctx: Context) => {
     if (ctx.user?.role === Role.Admin) return true;
     if (ctx.user && ctx.user.id === args.where?.id) return true;
     else return false;
@@ -83,7 +81,7 @@ const updateUserCheck = rule({ cache: "strict" })(
 );
 
 export const canViewBallot = rule({ cache: "strict" })(
-  async (parent: Ballot, args, ctx: NexusContext) => {
+  async (parent: Ballot, args, ctx: Context) => {
     if (ctx.user?.role === Role.Admin) return true;
     return await ballots.viewPermission({
       ballot: parent,
@@ -93,8 +91,8 @@ export const canViewBallot = rule({ cache: "strict" })(
   }
 );
 
-export const permissions = shield({
-  rules: {
+export const permissions = shield(
+  {
     Query: {
       user: or(isAdmin, teachesTeam),
       users: or(isAdmin, isTeacher),
@@ -143,12 +141,12 @@ export const permissions = shield({
       team: isUser,
       teaches: isUser,
       emailVerified: isUser,
-      lastname: or(isOwn("id"), teachesTeam, isAdmin),
-      email: or(isOwn("id"), teachesTeam, isAdmin),
-      ballots: or(isOwn("id"), teachesTeam, isAdmin),
-      attachments: or(isOwn("id"), teachesTeam, isAdmin),
-      threads: or(isOwn("id"), teachesTeam, isAdmin),
-      reactions: or(isOwn("id"), teachesTeam, isAdmin),
+      lastname: or(isOwnId, teachesTeam, isAdmin),
+      email: or(isOwnId, teachesTeam, isAdmin),
+      ballots: or(isOwnId, teachesTeam, isAdmin),
+      attachments: or(isOwnId, teachesTeam, isAdmin),
+      threads: or(isOwnId, teachesTeam, isAdmin),
+      reactions: or(isOwnId, teachesTeam, isAdmin),
     },
     School: {
       id: allow,
@@ -165,8 +163,8 @@ export const permissions = shield({
       id: allow,
       name: allow,
       school: allow,
-      invite: or(isOwn("teacherId"), isAdmin),
-      code: or(isOwn("teacherId"), isAdmin),
+      invite: or(isOwnTeacherId, isAdmin),
+      code: or(isOwnTeacherId, isAdmin),
       "*": isUser,
     },
     Ballot: allow, //canViewBallot : if we want to protect class/school Ballots
@@ -177,9 +175,9 @@ export const permissions = shield({
     Response: allow,
     Vote: isUser,
   },
-  options: {
+  {
     allowExternalErrors: true,
     debug: true,
     fallbackRule: isAdmin,
-  },
-});
+  }
+);
