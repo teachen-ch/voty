@@ -1,5 +1,5 @@
 import { AppPage, LoggedInPage, ErrorPage } from "components/Page";
-import { Text, Box, Button, Flex, Heading } from "rebass";
+import { Text, Box, Image, Button, Flex, Heading } from "rebass";
 import { useRouter } from "next/router";
 import { useUser } from "state/user";
 import { useBallotQuery, BallotQuery, useVoteMutation } from "graphql/types";
@@ -51,7 +51,7 @@ export default function BallotPage(): ReactElement {
           <img
             src="/images/voty_success.svg"
             alt="Juhee"
-            style={{ maxWidth: "400px" }}
+            style={{ maxWidth: "240px" }}
           />
         </Box>
         <Button
@@ -78,15 +78,15 @@ export default function BallotPage(): ReactElement {
           <b>Deine Stimme</b>
         </Breadcrumb>
         <Text textAlign="left" sx={{ margin: "0 auto" }}>
-          <Text mb={3}>
+          <Text mb={1}>
             Jetzt bist du dran! Hast Du Dir eine Meinung gebildet? Wie stimmst
             Du ab? Deine Wahl ist anonym, niemand kann nachverfolgen, wie Du
             abstimmst.
           </Text>
           <Box variant="centered">
-            <Box maxWidth="500px">
+            <Box maxWidth="400px">
               <img src="/images/voty_now.svg" alt="Abstimmen" width="100%" />
-              <Box px={[0, 0, 2]} mt={[0, 0, -20]}>
+              <Box px={[0, 0, 2]} mt={[-10]}>
                 <VotyNow
                   ballot={ballot}
                   onSuccess={() => {
@@ -178,27 +178,30 @@ export const VotyNow: React.FC<{
   }
 
   return (
-    <Box>
+    <Box fontSize={2}>
       <Flex justifyContent="space-between">
         <A onClick={() => vote(ballot.id, 1)}>
           <Flex flexDirection="column" alignItems="center">
-            <img src="/images/icon_yes.svg" height="100px" alt="Ja" />
-            Ja, ich stimme zu
+            <Image ml="18%" src="/images/icon_yes.svg" height="50px" alt="Ja" />
+            <Text mt={1}>Ja, ich stimme zu</Text>
           </Flex>
         </A>
         <A onClick={() => vote(ballot.id, 2)}>
           <Flex flexDirection="column" alignItems="center">
-            <img src="/images/icon_no.svg" height="100px" alt="Nein" />
-            <Text>Nein, ich lehne ab</Text>
+            <Image
+              mr={["16px", "16px", "7px"]}
+              src="/images/icon_no.svg"
+              height="50px"
+              alt="Nein"
+            />
+            <Text mt={1}>Nein, ich lehne ab</Text>
           </Flex>
         </A>
       </Flex>
       <Box variant="centered" my={4}>
-        <Button variant="text">
-          <A onClick={() => vote(ballot.id, 0)}>
-            Ich möchte mich der Stimme enthalten
-          </A>
-        </Button>
+        <A onClick={() => vote(ballot.id, 0)} variant="underline">
+          <Text fontSize={2}>Ich möchte mich der Stimme enthalten</Text>
+        </A>
       </Box>
       <ErrorBox my={2} error={error} />
     </Box>

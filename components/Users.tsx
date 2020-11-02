@@ -262,7 +262,7 @@ export const ProfileEdit: React.FC<{
             {isTeacher && (
               <ShowField label="Email" value="Kontaktiere uns für Änderungen" />
             )}
-            <Button type="submit" sx={{ gridColumn: [0, 0, 2] }}>
+            <Button type="submit" sx={{ gridColumn: [0, 0, 2] }} my={2}>
               Angaben speichern
             </Button>
             <ErrorBox error={error} my={4} />
