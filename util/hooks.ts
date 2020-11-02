@@ -1,3 +1,4 @@
+import { QueryResult } from "@apollo/client";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { isBrowser } from "util/isBrowser";
@@ -7,6 +8,17 @@ export function useQueryParam(name: string): string | undefined {
   if (query[name]) {
     return String(query[name]);
   } else return undefined;
+}
+
+const POLLING_DELAY = Number(process.env.POLLING_DELAY) || 5000;
+
+export function usePolling(query: QueryResult): void {
+  useEffect(() => {
+    query.startPolling(POLLING_DELAY);
+    return () => {
+      query.stopPolling();
+    };
+  }, []);
 }
 
 export function useNavHash(

@@ -10,6 +10,7 @@ import { BallotResults } from "components/BallotResults";
 import { BallotDetails } from "components/Ballots";
 import { usePageEvent } from "util/stats";
 import { Breadcrumb, A } from "components/Breadcrumb";
+import { usePolling } from "util/hooks";
 
 export default function TeacherBallotPage(): React.ReactElement {
   usePageEvent({ category: "Teacher", action: "BallotDetails" });
@@ -24,6 +25,7 @@ export default function TeacherBallotPage(): React.ReactElement {
     variables: { ballotId, teamId },
     skip: !(ballotId && teamId),
   });
+  usePolling(resultsQuery);
   const teamQuery = useTeamTeacherQuery({
     variables: { where: { id: teamId } },
     skip: !teamId,

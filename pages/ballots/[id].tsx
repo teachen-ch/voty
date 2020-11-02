@@ -195,8 +195,9 @@ export const VotyNow: React.FC<{
       </Flex>
       <Box variant="centered" my={4}>
         <Button variant="text">
-          Ich möchte mich{" "}
-          <A onClick={() => vote(ballot.id, 0)}>der Stimme enthalten</A>
+          <A onClick={() => vote(ballot.id, 0)}>
+            Ich möchte mich der Stimme enthalten
+          </A>
         </Button>
       </Box>
       <ErrorBox my={2} error={error} />
