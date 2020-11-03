@@ -31,7 +31,7 @@ export default function Success({
   }
   return (
     <AppPage heading="Dein Konto ist erstellt">
-      <Flex flexDirection="column" minHeight="400px">
+      <Flex flexDirection="column" minHeight="450px">
         <Image
           alt="Willkommen"
           src="/images/voty_welcome.svg"

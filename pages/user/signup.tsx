@@ -47,6 +47,7 @@ export const CreateUserForm: React.FC<{
   setUser: Dispatch<SetStateAction<SessionUser | undefined>>;
   onSubmit?: (values: Record<string, string | number>) => void;
   omitRole?: boolean;
+  omitLastname?: boolean;
   defaultRole?: string;
 }> = (props) => {
   const router = useRouter();
@@ -69,46 +70,48 @@ export const CreateUserForm: React.FC<{
   }
 
   const onSubmit = props.onSubmit || defaultSubmit;
+  let fields: Record<string, any> = {
+    name: {
+      label: "Vorname",
+      required: true,
+      validate: yup.string().min(3, "Dein Vorname ist etwas kurz"),
+    },
+    lastname: { label: "Nachname", required: true },
+    email: {
+      label: "Email",
+      required: true,
+      type: "email",
+      placeholder: "name@meineschule.ch",
+    },
+    password: {
+      label: "Passwort",
+      type: "password",
+      required: true,
+      validate: yup.string().min(6, "Dein Passwort ist etwas sehr kurz..."),
+    },
+    // watch out: password2 would also be sent to server which barks
+    //password2: yup.string().oneOf([yup.ref('password'), null], 'Passwords must match')
+    role: {
+      type: props.omitRole ? "hidden" : "select",
+      label: "Ich bin",
+      init: props.defaultRole,
+      required: true,
+      options: {
+        "Bitte auswählen": "",
+        "Schüler*in": "Student",
+        "Lehrer*in": "Teacher",
+        "Schulleiter*in": "Principal",
+      },
+    },
+    submit: { type: "submit", label: "Konto erstellen" },
+  };
+
+  if (props.omitLastname) {
+    fields = omit(fields, "lastname");
+  }
+
   return (
-    <QForm
-      mutation={doCreateUser}
-      onSubmit={onSubmit}
-      fields={{
-        name: {
-          label: "Vorname",
-          required: true,
-          validate: yup.string().min(3, "Dein Vorname ist etwas kurz"),
-        },
-        lastname: { label: "Nachname", required: true },
-        email: {
-          label: "Email",
-          required: true,
-          type: "email",
-          placeholder: "name@meineschule.ch",
-        },
-        password: {
-          label: "Passwort",
-          type: "password",
-          required: true,
-          validate: yup.string().min(6, "Dein Passwort ist etwas sehr kurz..."),
-        },
-        // watch out: password2 would also be sent to server which barks
-        //password2: yup.string().oneOf([yup.ref('password'), null], 'Passwords must match')
-        role: {
-          type: props.omitRole ? "hidden" : "select",
-          label: "Ich bin",
-          init: props.defaultRole,
-          required: true,
-          options: {
-            "Bitte auswählen": "",
-            "Schüler*in": "Student",
-            "Lehrer*in": "Teacher",
-            "Schulleiter*in": "Principal",
-          },
-        },
-        submit: { type: "submit", label: "Konto erstellen" },
-      }}
-    >
+    <QForm mutation={doCreateUser} onSubmit={onSubmit} fields={fields}>
       <ErrorBox error={error} my={4} />
       {showLogin && (
         <Button

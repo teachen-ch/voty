@@ -91,12 +91,13 @@ export const Ballot: React.FC<{
         ) : (
           <>
             <Text mt={3}>{ballot.description}</Text>
-            <Image
-              width={100}
-              my={3}
-              src="/images/easyvote.png"
-              alt="Informationen von EasyVote"
-            />
+            <Text textAlign="center" my={3}>
+              <Image
+                width={["100px", "100px", "150px"]}
+                src="/images/easyvote.png"
+                alt="Informationen von EasyVote"
+              />
+            </Text>
             <ReadMore title="Nochmals genauer informieren" hidePlus>
               <div
                 dangerouslySetInnerHTML={parseMarkdownInner(ballot.body)}
@@ -105,7 +106,7 @@ export const Ballot: React.FC<{
             </ReadMore>
             {voty ? (
               <>
-                <Text fontWeight="semi" mt={3}>
+                <Text fontWeight="semi" mt={4}>
                   Jetzt bist du dran! Hast Du Dir eine Meinung gebildet? Was
                   stimmst Du?
                 </Text>
