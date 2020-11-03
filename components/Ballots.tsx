@@ -25,6 +25,7 @@ import IconCal from "../public/images/icon_cal.svg";
 import { MouseEvent } from "react";
 import type { Nullable } from "simplytyped";
 import { parseMarkdownInner } from "util/markdown";
+import { ReadMore } from "./ReadMore";
 
 const BallotFields = gql`
   fragment BallotFields on Ballot {
@@ -386,20 +387,22 @@ export const BallotDetails: React.FC<{
   ballot: NonNullable<BallotQuery["ballot"]>;
 }> = ({ ballot, children }) => (
   <Card>
-    <Text fontWeight="bold">{ballot.title}</Text>
-    <Text mt={3}>{ballot.description}</Text>
-    <Text fontSize={2} my={4}>
-      <img src="/images/icon_cal.svg" width="20px" alt="Zeit" /> &nbsp; Zeit:{" "}
-      {formatFromTo(ballot.start, ballot.end)}
+    <Text textAlign="left">
+      <Text fontWeight="bold">{ballot.title}</Text>
+      <Text mt={3}>{ballot.description}</Text>
+      <Text fontSize={2} my={4}>
+        <img src="/images/icon_cal.svg" width="20px" alt="Zeit" /> &nbsp; Zeit:{" "}
+        {formatFromTo(ballot.start, ballot.end)}
+      </Text>
+      {children}
+      <Text textAlign="center" mt={3}>
+        <img width={150} src="/images/easyvote.png" alt="EasyVote" />
+      </Text>
+      <div
+        dangerouslySetInnerHTML={parseMarkdownInner(ballot.body)}
+        style={{ textAlign: "left" }}
+      />
     </Text>
-    <Text textAlign="center">
-      <img width={150} src="/images/easyvote.png" alt="EasyVote" />
-    </Text>
-    <div
-      dangerouslySetInnerHTML={parseMarkdownInner(ballot.body)}
-      style={{ textAlign: "left" }}
-    />
-    {children}
   </Card>
 );
 
