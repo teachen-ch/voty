@@ -83,7 +83,9 @@ export const Ballot: React.FC<{
   return (
     <div className="ballot">
       <Card>
-        <Text fontWeight="bold">{ballot.title}</Text>
+        <Text fontWeight="bold" mt={2} fontSize="24px" lineHeight="24px">
+          {ballot.title}
+        </Text>
         {success ? (
           <VotySuccess name={user?.name} />
         ) : (
@@ -93,7 +95,7 @@ export const Ballot: React.FC<{
               width={100}
               my={3}
               src="/images/easyvote.png"
-              alt="EasyVote"
+              alt="Informationen von EasyVote"
             />
             <ReadMore title="Nochmals genauer informieren" hidePlus>
               <div
@@ -102,7 +104,13 @@ export const Ballot: React.FC<{
               />
             </ReadMore>
             {voty ? (
-              <VotyNow ballot={ballot} onSuccess={() => setSuccess(true)} />
+              <>
+                <Text fontWeight="semi" mt={3}>
+                  Jetzt bist du dran! Hast Du Dir eine Meinung gebildet? Was
+                  stimmst Du?
+                </Text>
+                <VotyNow ballot={ballot} onSuccess={() => setSuccess(true)} />
+              </>
             ) : (
               <Button mt={3} onClick={() => setVoty(true)} width="100%">
                 Jetzt abstimmen
