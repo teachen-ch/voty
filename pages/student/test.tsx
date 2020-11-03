@@ -1,21 +1,23 @@
 import { LoggedInPage } from "components/Page";
-import { Text, Box } from "rebass";
-import { Ballot, Ballots } from "components/Ballots";
-import { useRouter } from "next/router";
+import { Text, Box, Card, Button, Image } from "rebass";
+import { ReadMore } from "components/ReadMore";
 import { useUser, SessionUser } from "state/user";
 import { Breadcrumb, A } from "components/Breadcrumb";
-import { ReactElement } from "react";
+import { useState } from "react";
 import {
   BallotScope,
   BallotFieldsFragment,
   useGetBallotRunsQuery,
+  useBallotsQuery,
 } from "graphql/types";
+import { parseMarkdownInner } from "util/markdown";
+import { VotyNow, VotySuccess } from "pages/ballots/[id]";
 
-export default function StudentTest(): ReactElement {
+export default function StudentTest(): React.ReactElement {
   const user = useUser();
 
   return (
-    <LoggedInPage heading="Abstimmungen">
+    <LoggedInPage heading="Aktuelle Abstimmungen">
       <Breadcrumb>
         <A href="/">Start</A>
         <b>Abstimmungen</b>
@@ -30,37 +32,85 @@ export default function StudentTest(): ReactElement {
 }
 
 const ShowBallots: React.FC<{ user: SessionUser }> = ({ user }) => {
-  const router = useRouter();
-
   const ballotRunsQuery = useGetBallotRunsQuery({
     variables: { teamId: String(user?.team?.id) },
     skip: !user?.team,
   });
   const ballotRuns = ballotRunsQuery.data?.getBallotRuns;
 
-  function detailBallot(ballot: BallotFieldsFragment) {
-    void router.push("/ballots/[id]", `/ballots/${ballot.id}`);
-  }
   return (
     <Box id="ballots">
       {ballotRuns?.length ? (
-        ballotRuns.map((run) => (
-          <Ballot
-            key={run.id}
-            ballot={run.ballot}
-            buttonText="Informieren und abstimmen"
-            onButton={detailBallot}
-            onDetail={detailBallot}
-          />
-        ))
+        ballotRuns.map((run) => <Ballot key={run.id} ballot={run.ballot} />)
       ) : (
-        <AllBallots onClick={detailBallot} />
+        <AllBallots />
       )}
     </Box>
   );
 };
-const AllBallots: React.FC<{
-  onClick: (ballot: BallotFieldsFragment) => void;
-}> = ({ onClick }) => {
-  return <Ballots where={{ scope: BallotScope.National }} onClick={onClick} />;
+
+export const AllBallots: React.FC = () => {
+  const ballotsQuery = useBallotsQuery({
+    variables: { where: { scope: BallotScope.National } },
+  });
+
+  if (ballotsQuery.error) {
+    return <Text>Error loading data: {ballotsQuery.error.message}</Text>;
+  }
+  if (ballotsQuery.loading) {
+    return <Text>Loading data</Text>;
+  }
+
+  if (!ballotsQuery.data?.ballots?.length) {
+    return <Text>Noch keine Abstimmungen erfasst</Text>;
+  }
+
+  return (
+    <>
+      {ballotsQuery.data.ballots.map((ballot) => (
+        <Ballot key={ballot.id} ballot={ballot} />
+      ))}
+    </>
+  );
+};
+
+export const Ballot: React.FC<{
+  ballot: BallotFieldsFragment;
+}> = ({ ballot }) => {
+  const [voty, setVoty] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const user = useUser();
+  return (
+    <div className="ballot">
+      <Card>
+        <Text fontWeight="bold">{ballot.title}</Text>
+        {success ? (
+          <VotySuccess name={user?.name} />
+        ) : (
+          <>
+            <Text mt={3}>{ballot.description}</Text>
+            <Image
+              width={100}
+              my={3}
+              src="/images/easyvote.png"
+              alt="EasyVote"
+            />
+            <ReadMore title="Nochmals genauer informieren" hidePlus>
+              <div
+                dangerouslySetInnerHTML={parseMarkdownInner(ballot.body)}
+                style={{ textAlign: "left" }}
+              />
+            </ReadMore>
+            {voty ? (
+              <VotyNow ballot={ballot} onSuccess={() => setSuccess(true)} />
+            ) : (
+              <Button mt={3} onClick={() => setVoty(true)} width="100%">
+                Jetzt abstimmen
+              </Button>
+            )}
+          </>
+        )}
+      </Card>
+    </div>
+  );
 };

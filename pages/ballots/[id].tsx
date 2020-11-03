@@ -1,5 +1,5 @@
 import { AppPage, LoggedInPage, ErrorPage } from "components/Page";
-import { Text, Box, Image, Button, Flex, Heading } from "rebass";
+import { Text, Box, Image, Button, Flex } from "rebass";
 import { useRouter } from "next/router";
 import { useUser } from "state/user";
 import { useBallotQuery, BallotQuery, useVoteMutation } from "graphql/types";
@@ -10,6 +10,7 @@ import Link from "next/link";
 import { BigGray } from "components/BigButton";
 import { BallotDetails } from "components/Ballots";
 import { Breadcrumb, A } from "components/Breadcrumb";
+import { Nullable } from "simplytyped";
 
 export default function BallotPage(): ReactElement {
   const [success, setSuccess] = useState(false);
@@ -40,18 +41,7 @@ export default function BallotPage(): ReactElement {
           <A href="/student/test">Abstimmungen</A>
           <b>{ballot.title}</b>
         </Breadcrumb>
-        <Text mb={4}>
-          Super, {user?.name}, Du hast nun anonym abgestimmt und Deine Stimme
-          wurde gezählt. Die Resultate der Abbstimmung könnt ihr mit Eurer
-          Lehrperson ansehen und besprechen.
-        </Text>
-        <Box textAlign="center">
-          <img
-            src="/images/voty_success.svg"
-            alt="Juhee"
-            style={{ maxWidth: "240px" }}
-          />
-        </Box>
+        <VotySuccess name={user?.name} />
         <Button
           mt={3}
           width="100%"
@@ -164,3 +154,20 @@ export const VotyNow: React.FC<{
     </Text>
   );
 };
+
+export const VotySuccess: React.FC<{ name: Nullable<string> }> = ({ name }) => (
+  <>
+    <Text mb={4}>
+      Super, {name}, Du hast nun anonym abgestimmt und Deine Stimme wurde
+      gezählt. Die Resultate der Abbstimmung könnt ihr mit Eurer Lehrperson
+      ansehen und besprechen.
+    </Text>
+    <Box textAlign="center">
+      <img
+        src="/images/voty_success.svg"
+        alt="Juhee"
+        style={{ maxWidth: "240px" }}
+      />
+    </Box>
+  </>
+);

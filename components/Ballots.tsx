@@ -25,7 +25,6 @@ import IconCal from "../public/images/icon_cal.svg";
 import { MouseEvent } from "react";
 import type { Nullable } from "simplytyped";
 import { parseMarkdownInner } from "util/markdown";
-import { ReadMore } from "./ReadMore";
 
 const BallotFields = gql`
   fragment BallotFields on Ballot {

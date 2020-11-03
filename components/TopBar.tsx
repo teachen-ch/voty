@@ -163,7 +163,7 @@ const MobileBurger: React.FC<{ user: SessionUser }> = ({ user }) => {
   const burgerIcon = {
     width: "1.2em",
     verticalAlign: "sub",
-    marginRight: "20px",
+    marginRight: "17px",
   };
   const isTeacher = user?.role === Role.Teacher;
   return (
@@ -202,7 +202,7 @@ const MobileBurger: React.FC<{ user: SessionUser }> = ({ user }) => {
                 </Box>
               </A>
             </Text>
-            <Text px={4} lineHeight="55px" fontWeight="semi">
+            <Text pl={4} lineHeight="55px" fontWeight="semi">
               <Link href="/">
                 <A>
                   <IconHome style={burgerIcon} />
@@ -245,7 +245,7 @@ const MobileBurger: React.FC<{ user: SessionUser }> = ({ user }) => {
                   <Link href="/user/profile">
                     <A>
                       <IconAccount style={burgerIcon} />
-                      Deine Daten
+                      Mein Profil
                     </A>
                   </Link>
                   <br />

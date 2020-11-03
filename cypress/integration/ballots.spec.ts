@@ -7,7 +7,6 @@ describe("Test Ballots", () => {
     cy.login("student@teachen.ch", "teachen");
     cy.visit("/ballots/");
     cy.contains("Testinitiative").click();
-    cy.contains("Zur Abstimmung").click();
     cy.contains("Ja, ich stimme zu").click();
     cy.contains("Du hast abgestimmt");
   });
@@ -16,12 +15,10 @@ describe("Test Ballots", () => {
     cy.login("student@teachen.ch", "teachen");
     cy.visit("/ballots/");
     cy.contains("Abgelaufene Initiative").click();
-    cy.contains("Zur Abstimmung").click();
     cy.contains("Abstimmung ist beendet");
     cy.go("back");
 
     cy.contains("Zukunftsinitiative").click();
-    cy.contains("Zur Abstimmung").click();
     cy.contains("Abstimmung noch nicht gestartet");
   });
 });

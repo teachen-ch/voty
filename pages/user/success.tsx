@@ -31,11 +31,12 @@ export default function Success({
   }
   return (
     <AppPage heading="Dein Konto ist erstellt">
-      <Flex flexDirection="column">
+      <Flex flexDirection="column" minHeight="400px">
         <Image
           alt="Willkommen"
           src="/images/voty_welcome.svg"
-          maxWidth="80%"
+          maxWidth={["80%", "80%", "40%"]}
+          display={["none", "none", "inline"]}
           sx={{ position: "absolute", alignSelf: "center" }}
         />
         <Heading mt={0}>Hallo {user?.name}</Heading>
