@@ -5,7 +5,7 @@ import { useState, ReactElement, Dispatch, SetStateAction } from "react";
 import { useRouter } from "next/router";
 import { QForm, yup, ErrorBox } from "../../components/Form";
 import { omit } from "lodash";
-import { SessionUser } from "state/user";
+import { SessionUser, useUser } from "state/user";
 import { useCreateUserMutation } from "graphql/types";
 import Abstimmung from "pages/abstimmung";
 import Success from "./success";
@@ -50,6 +50,7 @@ export const CreateUserForm: React.FC<{
   omitLastname?: boolean;
   defaultRole?: string;
 }> = (props) => {
+  const existingUser = useUser();
   const router = useRouter();
   const [error, setError] = useState("");
   const [showLogin, setShowLogin] = useState(false);
@@ -108,6 +109,10 @@ export const CreateUserForm: React.FC<{
 
   if (props.omitLastname) {
     fields = omit(fields, "lastname");
+  }
+
+  if (existingUser) {
+    return <Text>Du bist bereits mit einem Benutzer-Account angemeldet.</Text>;
   }
 
   return (
