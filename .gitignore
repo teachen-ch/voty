@@ -35,8 +35,12 @@ yarn-error.log*
 .env.*
 prisma/.env
 
-# vercel
-.vercel
+# Coverage directory used by tools like istanbul
+coverage
+*.lcov
+
+# nyc test coverage
+.nyc_output
 
 # voty
 /logs/
