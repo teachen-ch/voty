@@ -38,6 +38,10 @@ const ShowBallots: React.FC<{ user: SessionUser }> = ({ user }) => {
   });
   const ballotRuns = ballotRunsQuery.data?.getBallotRuns;
 
+  if (ballotRunsQuery.loading) {
+    return <Text>Laden...</Text>;
+  }
+
   return (
     <Box id="ballots">
       {ballotRuns?.length ? (

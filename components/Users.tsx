@@ -115,9 +115,7 @@ export const ProfileEdit: React.FC<{
       onFinish && onFinish();
     },
     onError(error) {
-      if (error.message === "Error.DuplicateEmail") {
-        setError(error.message);
-      }
+      setError(error.message);
     },
   });
 

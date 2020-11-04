@@ -4,7 +4,7 @@ describe("Test Admin Area", () => {
     cy.login("voty@teachen.ch", "teachen");
   });
 
-  it("shows Admin page", () => {
+  it("shows admin page", () => {
     cy.visit("/admin");
     cy.contains("Admin Bereich");
 

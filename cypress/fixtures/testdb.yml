@@ -60,6 +60,8 @@ school:
                 lastname: Student
                 email: student@teachen.ch
                 password: $2b$10$3ZxdzTwtAjW3A1QSi.zDJ.IFSyUIqnE00kRMgwhsYaJujv5xMbB4S
+                year: 2006
+                gender: Male
                 role: Student
                 emailVerified: !!timestamp "2020-01-01"
               - name: Student-2
