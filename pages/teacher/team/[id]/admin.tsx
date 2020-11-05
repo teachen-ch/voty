@@ -19,7 +19,7 @@ import {
 } from "graphql/types";
 import { Nullable } from "simplytyped";
 import { Breadcrumb, A } from "components/Breadcrumb";
-import { usePolling } from "util/hooks";
+// import { usePolling } from "util/hooks";
 
 export const INVITE_STUDENTS = gql`
   mutation inviteStudents($team: String!, $emails: [String!]!) {
@@ -43,7 +43,7 @@ export default function TeacherTeamPage(): React.ReactElement {
     variables: { where: { id } },
     skip: !id,
   });
-  usePolling(teamQuery);
+  // usePolling(teamQuery);
   const [emails, setEmails] = useState<string[]>([]);
   const [matches, setMatches] = useState<number | undefined>();
   const [results, setResults] = useState<

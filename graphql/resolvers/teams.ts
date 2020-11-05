@@ -1,9 +1,11 @@
 import { createUser, connectUserTeam } from "./users";
-import { Role } from "@prisma/client";
+import { Role, PrismaClient } from "@prisma/client";
 import { randomBytes } from "crypto";
 import { upperFirst } from "lodash";
 import { FieldResolver } from "nexus/components/schema";
 import { User } from "@prisma/client";
+import { fetchMails } from "util/imap";
+import logger from "util/logger";
 
 export const inviteStudents: FieldResolver<
   "Mutation",
@@ -11,7 +13,7 @@ export const inviteStudents: FieldResolver<
 > = async (_root, args, ctx) => {
   const { team: id, emails } = args;
   const user = ctx.user;
-  const failed: string[] = [];
+  let failed: string[] = [];
   const created: string[] = [];
   const duplicated: string[] = [];
 
@@ -50,5 +52,46 @@ export const inviteStudents: FieldResolver<
     where: { id },
     include: { members: true, school: true },
   });
+
+  // wait for 10 seconds, then fetch all error-msgs from imap since last 20 seconds
+  await sleep(10);
+  const fetchedErrors = await fetchErrors(ctx.db, 20);
+  failed = failed.concat(fetchedErrors);
+
   return { created, failed, duplicated, team };
 };
+
+async function fetchErrors(db: PrismaClient, since: number) {
+  try {
+    const failed: string[] = [];
+    // find all messages from the last 60 seconds from mailer-daemon
+    const messages = await fetchMails({
+      from: "MAILER-DAEMON@mistral2.metanet.ch",
+      since,
+    });
+    for (const msg of messages) {
+      const match = msg.body.match(/Final-Recipient: rfc822; (.*?)\r\n/gs);
+      if (!match || match.length < 1) {
+        logger.warn(`Can't find Final-Recipient in mail ${msg.header.date}`);
+        continue;
+      }
+      const email = match[0].replace(/.*?; (.*?)\r\n/, "$1");
+      const user = await db.user.findOne({ where: { email } });
+      if (!user || !user.email) {
+        logger.warn(`handleErrorMessage: Can't find user ${email}`);
+        continue;
+      }
+      await db.user.delete({ where: { email } });
+      failed.push(user.email);
+    }
+    return failed;
+  } catch (err) {
+    console.error(err);
+    logger.warn("Error fetching email", err);
+    return [];
+  }
+}
+
+function sleep(seconds: number) {
+  return new Promise((resolve) => setTimeout(resolve, 1000 * seconds));
+}
