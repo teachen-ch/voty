@@ -4,8 +4,8 @@ import { randomBytes } from "crypto";
 import { upperFirst } from "lodash";
 import { FieldResolver } from "nexus/components/schema";
 import { User } from "@prisma/client";
-import { fetchMails } from "util/imap";
-import logger from "util/logger";
+import { fetchMails } from "../../util/imap";
+import logger from "../../util/logger";
 
 export const inviteStudents: FieldResolver<
   "Mutation",
