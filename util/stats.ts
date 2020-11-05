@@ -122,8 +122,13 @@ export function trackEvent(evt: TrackEvent): void {
   push(args);
 }
 
+let trackedRole = false;
+
 export function trackVisit(user: SessionUser): void {
-  if (user) push(["setCustomDimension", 1, user.role]);
+  if (user && !trackedRole) {
+    push(["setCustomDimension", 1, user.role]);
+    trackedRole = true;
+  }
 }
 
 export default initStats;
