@@ -19,6 +19,7 @@ import {
 } from "graphql/types";
 import { Nullable } from "simplytyped";
 import { Breadcrumb, A } from "components/Breadcrumb";
+import { Spinner } from "theme-ui";
 // import { usePolling } from "util/hooks";
 
 export const INVITE_STUDENTS = gql`
@@ -160,9 +161,14 @@ export default function TeacherTeamPage(): React.ReactElement {
           width="100%"
           bg={!matches || inviteQuery.loading ? "muted" : "secondary"}
         >
-          {inviteQuery.loading
-            ? "Bitte warten..."
-            : `${matches ? matches : ""} Einladungen verschicken`}
+          {inviteQuery.loading ? (
+            <Text>
+              <Spinner color="gray" size={20} mr={3} />
+              Bitte warten...
+            </Text>
+          ) : (
+            `${matches ? matches : ""} Einladungen verschicken`
+          )}
         </Button>
 
         {duplicated ? (
