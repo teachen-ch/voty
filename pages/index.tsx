@@ -28,7 +28,8 @@ export default function Home(): React.ReactElement {
       <Container as="main" pt={[0, 0, 20, 49]} px={[3, 3, 3, 0]} color="black">
         <Image
           alignSelf="center"
-          width={["70%", "70%", "40%", "426px"]}
+          width={[240, 207, 426]}
+          height={[95, 82, 164]}
           src="/images/voty_logo.svg"
           alt="voty.ch"
         />
@@ -64,7 +65,8 @@ export default function Home(): React.ReactElement {
               <Image
                 src="images/voty_module_2.svg"
                 alt="Abstimmen"
-                width="65%"
+                width={[218, 218, 218, 300]}
+                height={[252, 252, 252, 347]}
               />
               <Heading
                 as="h3"
@@ -165,7 +167,7 @@ const Module: React.FC<{ title: string; image: string }> = (props) => {
             <div className="front">
               <img
                 src={props.image}
-                alt="Bundehaus"
+                alt="Bundeshaus"
                 width="100%"
                 ref={img}
                 onTouchStart={() => img.current?.classList.add("hover")}

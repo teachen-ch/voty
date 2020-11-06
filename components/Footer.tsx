@@ -41,7 +41,8 @@ export const Footer: React.FC<{ color: string | string[] }> = ({ color }) => (
         <img
           src="/images/pf_logo.png"
           alt="Prototypefund Logo"
-          style={{ width: "40px" }}
+          width={34}
+          height={42}
         />
         <hr style={{ borderColor: "inherit", borderTopWidth: "0px" }} />
         <Flex as="nav" color={color} justifyContent="space-between">
