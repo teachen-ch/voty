@@ -53,15 +53,16 @@ export const inviteStudents: FieldResolver<
     include: { members: true, school: true },
   });
 
-  // wait for 10 seconds, then fetch all error-msgs from imap since last 20 seconds
-  await sleep(10);
-  const fetchedErrors = await fetchErrors(ctx.db, 20);
+  // wait for a few seconds, then fetch all error-msgs from imap since last 20 seconds
+  const wait = 5 + 1 * emails.length;
+  await sleep(wait);
+  const fetchedErrors = await fetchErrors(emails, ctx.db, 2 * wait);
   failed = failed.concat(fetchedErrors);
 
   return { created, failed, duplicated, team };
 };
 
-async function fetchErrors(db: PrismaClient, since: number) {
+async function fetchErrors(emails: string[], db: PrismaClient, since: number) {
   try {
     const failed: string[] = [];
     // find all messages from the last 60 seconds from mailer-daemon
@@ -76,6 +77,10 @@ async function fetchErrors(db: PrismaClient, since: number) {
         continue;
       }
       const email = match[0].replace(/.*?; (.*?)\r\n/, "$1");
+      if (emails.indexOf(email) === -1) {
+        continue;
+      }
+
       const user = await db.user.findOne({ where: { email } });
       if (!user || !user.email) {
         logger.warn(`handleErrorMessage: Can't find user ${email}`);
