@@ -27,7 +27,8 @@ export async function sendMail(
 
   // No email configured
   if (!process.env.SMTP_PASSWORD || process.env.NODE_ENV === "test") {
-    logger.info(`Now I'd send mail to ${to}`);
+    logger.info(`Writing mail to ${to} into temp file: /tmp/voty-email`);
+    await fs.writeFile("/tmp/voty-email", text);
     return;
   }
 
@@ -39,7 +40,6 @@ export async function sendMail(
       subject,
       text,
       html,
-      
     });
   } catch (error) {
     logger.error(`Cannot send email to ${to}`, error);

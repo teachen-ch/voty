@@ -30,15 +30,14 @@ describe("Test Signup Page", () => {
   });
 
   // TODO: This test crashes the server on production, not sure why
-  /*
-  it("Creates a new (inactive) user!", () => {
+  it("Creates a new teacher account", () => {
     cy.visit("/user/signup");
     cy.findByLabelText("Vorname:").type("Test");
     cy.findByLabelText("Nachname:").type("Test");
     cy.findByLabelText("Email:").type("other@teachen.ch");
     cy.findByLabelText("Passwort:").type("Password2007");
     cy.get("button").contains("Konto erstellen").click();
-    cy.contains("Konto erstellt");
+    cy.contains("Konto ist erstellt");
 
     // test that user is not active yet (missing email verification)
     cy.visit("/user/login");
@@ -46,7 +45,16 @@ describe("Test Signup Page", () => {
     cy.findByLabelText("Passwort:").type("Password2007");
     cy.get("button").contains("Anmelden").click();
     cy.contains("Email bestätigen");
-  });*/
+    cy.contains("Nochmals Email schicken").click();
+    cy.contains("Email verschickt!");
+
+    // retrieve url from /tmp/voty-email and activate user
+    cy.task("getEmailLink").as("url");
+    cy.get("@url").then((url) => {
+      cy.visit(String(url));
+      cy.contains("Deine Email-Adresse ist nun bestätigt");
+    });
+  });
 
   it("TODO: Activates user with verification url", () => {
     cy.visit("/user/signup");

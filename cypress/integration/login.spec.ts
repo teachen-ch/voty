@@ -7,7 +7,7 @@ describe("Test Login Page", () => {
     cy.contains("Anmelden").click();
     cy.url().should("include", "/user/login");
     cy.findByLabelText("Email:").type(Cypress.env("USER"));
-    cy.findByLabelText("Passwort:").type(Cypress.env("PASS"));
+    cy.findByLabelText("Passwort:").type(Cypress.env("PASS"), { log: false });
     cy.get("button").contains("Anmelden").click();
     cy.url().should("include", "/teacher");
     cy.contains("Mein Konto").click();

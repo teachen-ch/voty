@@ -5,6 +5,7 @@ import { sendMail } from "../../util/email";
 import { randomBytes, createHash } from "crypto";
 import logger from "../../util/logger";
 import { FieldResolver } from "nexus/components/schema";
+import { promises as fs } from "fs";
 
 let secret = process.env.SESSION_SECRET || "";
 if (!secret) throw new Error("New SESSION_SECRET defined in .env");
@@ -280,6 +281,11 @@ export async function sendVerificationEmail(
 
     await sendMail(from, email, subject, purpose, conf);
     logger.info(`Sending ${purpose} email to: ${email} `);
+
+    if (process.env.NODE_ENV !== "production") {
+      await fs.writeFile("/tmp/voty-verification-url", url);
+    }
+
     return { token: "MAYBE..." };
   } catch (err) {
     logger.error(`Error sending ${purpose} email`, err);

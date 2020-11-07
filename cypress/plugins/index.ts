@@ -13,6 +13,7 @@
 // the project's config changing)
 
 import { loadFixture } from "../../util/prisma-loader";
+import { promises as fs } from "fs";
 // const { imageSnapshot } = require("cypress-image-snapshot/plugin");
 // import imageSnapshot from "cypress-image-snapshot/plugin";
 /**
@@ -34,6 +35,12 @@ module.exports = (
       const file = `${config.fixturesFolder}/${fixtureFile}`;
       await loadFixture(file);
       return null;
+    },
+    async getEmailLink() {
+      const buffer = await fs.readFile("/tmp/voty-email");
+      const text = buffer.toString();
+      const match = text.match(/(http[^\s]*)/gs);
+      if (match?.length) return match[0];
     },
   });
   return config;

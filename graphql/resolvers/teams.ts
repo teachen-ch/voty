@@ -54,10 +54,13 @@ export const inviteStudents: FieldResolver<
   });
 
   // wait for a few seconds, then fetch all error-msgs from imap since last 20 seconds
-  const wait = 5 + 1 * emails.length;
-  await sleep(wait);
-  const fetchedErrors = await fetchErrors(emails, ctx.db, 2 * wait);
-  failed = failed.concat(fetchedErrors);
+  // but skip this, if we haven't sent any emails
+  if (process.env.SMTP_PASSWORD) {
+    const wait = 5 + 1 * emails.length;
+    await sleep(wait);
+    const fetchedErrors = await fetchErrors(emails, ctx.db, 2 * wait);
+    failed = failed.concat(fetchedErrors);
+  }
 
   return { created, failed, duplicated, team };
 };
