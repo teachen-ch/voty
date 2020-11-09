@@ -108,6 +108,8 @@ export const createUser: FieldResolver<"Mutation", "createUser"> = async (
     if (err.meta?.target && err.meta.target.indexOf("email") >= 0) {
       throw new Error("Error.DuplicateEmail");
     }
+    console.error(err);
+    logger.error("Error creating user: ", err);
     throw new Error("Error.CreateUser");
   }
 };
