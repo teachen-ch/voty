@@ -1136,6 +1136,7 @@ type Mutation {
   deleteAccount: Response
   deleteOneSchool(where: SchoolWhereUniqueInput!): School
   deleteOneTeam(where: TeamWhereUniqueInput!): Team
+  deleteUser(where: UserWhereUniqueInput!): User
   emailVerification(email: String!, purpose: String!): ResponseLogin
   endBallotRun(ballotRunId: String!): BallotRun
   inviteStudents(emails: [String!]!, team: String!): InviteResponse

@@ -185,6 +185,24 @@ export const updateUser: FieldResolver<"Mutation", "updateUser"> = async (
   return result;
 };
 
+export const deleteUser: FieldResolver<"Mutation", "deleteUser"> = async (
+  _root,
+  args,
+  ctx
+) => {
+  const user = getRequestUser(ctx);
+  const id = args.where.id;
+  const deleteUser = await ctx.db.user.findOne({
+    where: { id: String(id) },
+    include: { team: true },
+  });
+  if (!deleteUser) throw new Error("Error.UserNotFound");
+  if (deleteUser.team?.teacherId !== user?.id && user?.role !== Role.Admin)
+    throw new Error("Error.NoPermission");
+  const success = await ctx.db.user.delete({ where: { id: String(id) } });
+  if (!success) throw new Error("Error.Database");
+  return success;
+};
 export const setSchool: FieldResolver<"Mutation", "setSchool"> = async (
   _root,
   args,

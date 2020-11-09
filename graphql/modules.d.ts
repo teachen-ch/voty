@@ -76,6 +76,7 @@ declare module '*/Users.tsx' {
   const defaultDocument: DocumentNode;
   export const users: DocumentNode;
 export const updateUser: DocumentNode;
+export const deleteUser: DocumentNode;
 
   export default defaultDocument;
 }

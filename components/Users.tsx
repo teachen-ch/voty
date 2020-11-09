@@ -2,6 +2,7 @@ import { gql } from "@apollo/client";
 import {
   TeamTeacherFieldsFragment,
   useUpdateUserMutation,
+  useDeleteUserMutation,
   User,
   Gender,
   Role,
@@ -42,6 +43,14 @@ mutation updateUser($data: UserUpdateInput!, $where: UserWhereUniqueInput!) {
 }
 `;
 
+export const DELETE_USER = gql`
+  mutation deleteUser($where: UserWhereUniqueInput!) {
+    deleteUser(where: $where) {
+      id
+      shortname
+    }
+  }
+`;
 type myUser = Pick<
   User,
   "email" | "emailVerified" | "id" | "name" | "shortname"
@@ -52,6 +61,23 @@ export function Users({
 }: {
   users?: TeamTeacherFieldsFragment["members"];
 }): ReactElement {
+  const [deleteUser] = useDeleteUserMutation({
+    update: (cache, result) => {
+      cache.evict({ id: `User:${result.data?.deleteUser?.id}` });
+      cache.gc();
+    },
+  });
+
+  async function doDeleteUser(id: string) {
+    if (
+      confirm(
+        "Diese Email-Adresse wurde noch nicht bestätigt. Soll das Konto gelöscht werden?"
+      )
+    ) {
+      await deleteUser({ variables: { where: { id } } });
+    }
+  }
+
   return (
     <table style={{ borderTop: "2px solid white" }}>
       <tbody>
@@ -81,6 +107,7 @@ export function Users({
                     <Image
                       src="/images/icon_user_nok.svg"
                       alt="Nicht bestätigt"
+                      onClick={() => doDeleteUser(user.id)}
                     />
                   )}
                 </Box>

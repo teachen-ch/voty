@@ -73,6 +73,10 @@ schema.extendType({
       alias: "updateUser",
       resolve: users.updateUser,
     });
+    t.crud.deleteOneUser({
+      alias: "deleteUser",
+      resolve: users.deleteUser,
+    });
     t.field("login", {
       type: "ResponseLogin",
       args: {
