@@ -11,6 +11,7 @@ import { BigGray } from "components/BigButton";
 import { BallotDetails } from "components/Ballots";
 import { Breadcrumb, A } from "components/Breadcrumb";
 import { Nullable } from "simplytyped";
+import { Discussion } from "components/Discussion";
 
 export default function BallotPage(): ReactElement {
   const [success, setSuccess] = useState(false);
@@ -72,6 +73,8 @@ export default function BallotPage(): ReactElement {
       <BallotDetails ballot={ballot}>
         <VotyNow ballot={ballot} onSuccess={() => setSuccess(true)} />
       </BallotDetails>
+
+      <Discussion refid={ballot.id} />
     </LoggedInPage>
   );
 }

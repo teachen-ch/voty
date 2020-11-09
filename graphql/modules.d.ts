@@ -29,6 +29,17 @@ export const me: DocumentNode;
 }
     
 
+declare module '*/Discussion.tsx' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const ThreadFields: DocumentNode;
+export const getTeamThreads: DocumentNode;
+export const postThread: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
 declare module '*/Schools.tsx' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;

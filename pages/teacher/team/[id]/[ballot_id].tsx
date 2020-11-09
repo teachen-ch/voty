@@ -11,6 +11,7 @@ import { BallotDetails } from "components/Ballots";
 import { usePageEvent } from "util/stats";
 import { Breadcrumb, A } from "components/Breadcrumb";
 import { usePolling } from "util/hooks";
+import { Discussion } from "components/Discussion";
 
 export default function TeacherBallotPage(): React.ReactElement {
   usePageEvent({ category: "Teacher", action: "BallotDetails" });
@@ -21,10 +22,12 @@ export default function TeacherBallotPage(): React.ReactElement {
     variables: { where: { id: ballotId } },
     skip: !ballotId,
   });
+  const ballot = ballotQuery.data?.ballot;
   const resultsQuery = useGetBallotResultsQuery({
     variables: { ballotId, teamId },
     skip: !(ballotId && teamId),
   });
+  const results = resultsQuery.data?.getBallotResults;
   usePolling(resultsQuery);
   const teamQuery = useTeamTeacherQuery({
     variables: { where: { id: teamId } },
@@ -32,12 +35,11 @@ export default function TeacherBallotPage(): React.ReactElement {
   });
   const team = teamQuery.data?.team;
 
-  if (ballotQuery.loading)
+  if (ballotQuery.loading || teamQuery.loading || !team)
     return <AppPage heading="Abstimmungsseite"></AppPage>;
   if (ballotQuery.error)
     return <ErrorPage>{ballotQuery.error.message}</ErrorPage>;
 
-  const ballot = ballotQuery.data?.ballot;
   if (!ballot) {
     return (
       <AppPage heading="Abstimmung">
@@ -46,8 +48,6 @@ export default function TeacherBallotPage(): React.ReactElement {
     );
   }
 
-  const results = resultsQuery.data?.getBallotResults;
-
   return (
     <LoggedInPage heading={`${ballot.title}`}>
       <Breadcrumb>
@@ -55,9 +55,9 @@ export default function TeacherBallotPage(): React.ReactElement {
         <A href="/teacher/">Meine Klassen</A>
         <A
           href="/teacher/team/[id]/admin"
-          as={`/teacher/team/${team?.id}/admin`}
+          as={`/teacher/team/${team.id}/admin`}
         >
-          {team?.name}
+          {team.name}
         </A>
         <b>{ballot.title}</b>
       </Breadcrumb>
@@ -66,12 +66,13 @@ export default function TeacherBallotPage(): React.ReactElement {
       ) : (
         <Box my={4}>
           <Text mb={4}>
-            Hier sind die aktuellen Resultate für die Klasse «{team?.name}»:
+            Hier sind die aktuellen Resultate für die Klasse «{team.name}»:
           </Text>
           <BallotResults results={results} />
         </Box>
       )}
       <BallotDetails ballot={ballot} />
+      <Discussion refid={ballot.id} teamId={team.id} />
     </LoggedInPage>
   );
 }

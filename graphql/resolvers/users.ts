@@ -119,11 +119,11 @@ export const acceptInvite: FieldResolver<"Mutation", "acceptInvite"> = async (
   ctx
 ): Promise<Team> => {
   const team = await ctx.db.team.findOne({ where: { invite: args.invite } });
-  if (!team) throw new Error("INVITE_NOT_FOUND");
+  if (!team) throw new Error("Error.InviteNotFound");
   const user = getRequestUser(ctx);
-  if (!user) throw new Error("NEEDS_LOGIN");
+  if (!user) throw new Error("Error.NeedsLogin");
   const success = await connectUserTeam(user, team, ctx);
-  if (!success) throw new Error("DB_ERROR");
+  if (!success) throw new Error("Error.Database");
   else return team;
 };
 
@@ -132,7 +132,7 @@ export async function connectUserTeam(
   team: Team,
   ctx: NexusContext
 ): Promise<User> {
-  if (user.teamId) throw new Error("ALREADY_IN_TEAM");
+  if (user.teamId) throw new Error("Error.AlreadyInTeam");
   return await ctx.db.user.update({
     where: { id: user.id },
     data: {
@@ -148,7 +148,7 @@ export const createInvitedUser: FieldResolver<
   "createInvitedUser"
 > = async (_root, args, ctx, info) => {
   const team = await ctx.db.team.findOne({ where: { invite: args.invite } });
-  if (!team) throw new Error("INVITE_NOT_FOUND");
+  if (!team) throw new Error("Error.InviteNotFound");
   const { name, lastname, email, password } = args;
   const newArgs = {
     data: {

@@ -60,9 +60,19 @@ schema.objectType({
     t.model.id();
     t.model.title();
     t.model.text();
+    t.model.ref();
     t.model.user();
-    t.model.parent();
-    t.model.children();
+    t.field("children", {
+      type: "Thread",
+      list: true,
+      resolve: async (_root, args, ctx, info) =>
+        await resolvers.threads.getTeamThreads(
+          _root,
+          { ref: _root.id },
+          ctx,
+          info
+        ),
+    });
     t.model.reactions();
     t.model.attachments();
     t.model.createdAt();
@@ -214,6 +224,16 @@ schema.queryType({
       },
       resolve: resolvers.ballots.getBallotResults,
     });
+
+    t.field("getTeamThreads", {
+      type: "Thread",
+      list: true,
+      args: {
+        ref: stringArg({ required: true }),
+        teamId: stringArg({ required: false }),
+      },
+      resolve: resolvers.threads.getTeamThreads,
+    });
   },
 });
 
@@ -236,6 +256,17 @@ schema.mutationType({
         vote: intArg({ required: true }),
       },
       resolve: resolvers.ballots.vote,
+    });
+
+    t.field("postThread", {
+      type: "Thread",
+      args: {
+        ref: stringArg({ required: true }),
+        teamId: stringArg({ required: true }),
+        title: stringArg({ required: true }),
+        text: stringArg({ required: true }),
+      },
+      resolve: resolvers.threads.postThread,
     });
 
     t.field("voteCode", {
