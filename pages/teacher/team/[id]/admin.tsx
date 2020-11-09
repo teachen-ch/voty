@@ -20,6 +20,7 @@ import {
 import { Nullable } from "simplytyped";
 import { Breadcrumb, A } from "components/Breadcrumb";
 import { Spinner } from "theme-ui";
+import PanelPage from "./panel";
 // import { usePolling } from "util/hooks";
 
 export const INVITE_STUDENTS = gql`
@@ -105,6 +106,10 @@ export default function TeacherTeamPage(): React.ReactElement {
   const duplicatedEmails = results?.duplicated?.join(", ");
   const failed = results?.failed?.length;
   const failedEmails = results?.failed?.join(", ");
+
+  if (team.name.toLowerCase().indexOf("discuss") >= 0) {
+    return <PanelPage />;
+  }
 
   return (
     <LoggedInPage heading="Detailansicht Klasse">
