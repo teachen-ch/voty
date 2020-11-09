@@ -265,8 +265,8 @@ export const SelectBallots: React.FC<{ team: TeamTeacherFieldsFragment }> = ({
   team,
 }) => {
   const router = useRouter();
-  const [doAddBallotRun] = useAddBallotRunMutation();
-  const [doRemoveBallotRun] = useRemoveBallotRunMutation();
+  const [doAddBallotRun, addMutation] = useAddBallotRunMutation();
+  const [doRemoveBallotRun, removeMutation] = useRemoveBallotRunMutation();
   const client = useApolloClient();
 
   const ballotRunsQuery = useGetBallotRunsQuery({
@@ -301,6 +301,8 @@ export const SelectBallots: React.FC<{ team: TeamTeacherFieldsFragment }> = ({
 
   async function toggleBallot(ballotId: string, teamId: string, e: MouseEvent) {
     e.stopPropagation();
+    if (removeMutation.loading || addMutation.loading)
+      return alert("Bitte warten…");
     const run = find(ballotRuns, { ballot: { id: ballotId } });
     if (run && typeof run == "object") {
       const results = await getResults(ballotId, run.id);
