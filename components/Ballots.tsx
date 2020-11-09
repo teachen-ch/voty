@@ -12,6 +12,7 @@ import {
   BallotResults,
   BallotQuery,
   GetBallotResultsQuery,
+  BallotRunFieldsFragment,
 } from "graphql/types";
 import { formatFromTo, formatDate } from "../util/date";
 import { useRouter } from "next/router";
@@ -309,7 +310,13 @@ export const SelectBallots: React.FC<{ team: TeamTeacherFieldsFragment }> = ({
       if (results?.total === 0) {
         await doRemoveBallotRun({
           variables: { ballotRunId: run.id },
-          refetchQueries: ["getBallotRuns"],
+
+          update: (cache) => {
+            cache.evict({
+              id: `BallotRun:${run.id}`,
+            });
+            cache.gc();
+          },
         });
       } else {
         alert(
@@ -319,7 +326,21 @@ export const SelectBallots: React.FC<{ team: TeamTeacherFieldsFragment }> = ({
     } else {
       await doAddBallotRun({
         variables: { ballotId, teamId },
-        refetchQueries: ["getBallotRuns"],
+
+        update: (cache, result) => {
+          cache.modify({
+            fields: {
+              getBallotRuns(existingRuns: BallotRunFieldsFragment[] = []) {
+                const newRun = cache.writeFragment({
+                  data: result.data?.addBallotRun,
+                  fragment: fragments.BallotRunFields,
+                  fragmentName: "BallotRunFields",
+                });
+                return [...existingRuns, newRun];
+              },
+            },
+          });
+        },
       });
     }
   }
@@ -367,12 +388,7 @@ export const SelectBallots: React.FC<{ team: TeamTeacherFieldsFragment }> = ({
                   {find(ballotRuns, { ballot: { id: ballot.id } }) ? (
                     <IconCheckOn alt="ausgewählt" width="20px" height="20px" />
                   ) : (
-                    <IconCheckOff
-                      alt="abgewählt"
-                      width="20px"
-                      height="20px"
-                      verticalAlign="bottom"
-                    />
+                    <IconCheckOff alt="abgewählt" width="20px" height="20px" />
                   )}
                 </Box>
               </td>
