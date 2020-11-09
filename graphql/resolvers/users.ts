@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken";
 import { PrismaClient, User, Team, Role } from "@prisma/client";
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 import { sendMail } from "../../util/email";
 import { randomBytes, createHash } from "crypto";
 import logger from "../../util/logger";
@@ -37,7 +37,7 @@ export const login: FieldResolver<"Mutation", "login"> = async (
     throw Error("Error.PasswordNotSet");
   }
 
-  const matches = await bcrypt.compare(args.password, user.password);
+  const matches = await bcrypt.compare(String(args.password), user.password);
   if (!matches) {
     logger.info("Login attempt - Passwords don't match", { meta: args.email });
     throw Error("Error.UserPassword"); // generic error, do not say why
@@ -76,9 +76,8 @@ export const createUser: FieldResolver<"Mutation", "createUser"> = async (
   try {
     const { email, password, name, lastname, role } = args.data;
     if (!email) throw new Error("Error.NoEmail");
-    if (!password) throw new Error("Error.NoPassword");
     const salt = await bcrypt.genSalt(10);
-    const hashed = await bcrypt.hash(password, salt);
+    const hashed = await bcrypt.hash(String(password), salt);
     if (role === Role.Admin) throw new Error("NAH");
     const user = await ctx.db.user.create({
       data: {
@@ -358,7 +357,7 @@ export const changePassword: FieldResolver<
   const user = await getUser(ctx);
   if (!user) throw new Error("Error.UserNotFound");
   const salt = await bcrypt.genSalt(10);
-  const hashed = await bcrypt.hash(args.password, salt);
+  const hashed = await bcrypt.hash(String(args.password), salt);
   const ok = await ctx.db.user.update({
     where: { id: user.id },
     data: { password: hashed },

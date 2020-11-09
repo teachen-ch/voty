@@ -1,6 +1,5 @@
 import { createUser, connectUserTeam } from "./users";
 import { Role, PrismaClient } from "@prisma/client";
-import { randomBytes } from "crypto";
 import { upperFirst } from "lodash";
 import { FieldResolver } from "nexus/components/schema";
 import { User } from "@prisma/client";
@@ -32,7 +31,7 @@ export const inviteStudents: FieldResolver<
         name: upperFirst(name),
         lastname: upperFirst(lastname),
         role: Role.Student,
-        password: randomBytes(16).toString("hex"),
+        password: "", // login is not possible with empty password, but we can send user magic link
       },
     };
     try {

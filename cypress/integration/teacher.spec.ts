@@ -11,7 +11,7 @@ describe("Test Teacher Startpage", () => {
   });
 
   // this crashes in CI/CD as well...
-  it.skip("allows teacher to create a new team and see invite", () => {
+  it("allows teacher to create a new team and see invite", () => {
     cy.login();
     cy.visit("/teacher");
     // wait for teams to load, otherwise a reload below can shake things up
