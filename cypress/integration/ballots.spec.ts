@@ -26,6 +26,7 @@ describe("Test Ballots", () => {
     cy.visit("/teacher");
     cy.contains("Class 1").click();
     cy.get("#ballots tr:first td:last").click();
+    cy.get("#ballots tr:first td:last svg[alt='ausgewählt']");
     // select and de-select last ballot
     cy.get("#ballots tr:last td:last").click();
     cy.get("#ballots tr:last td:last svg[alt='ausgewählt']");

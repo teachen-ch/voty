@@ -70,12 +70,9 @@ export default function PanelBallots(): ReactElement {
         </>
       )}
       <Banner onClick={showQR}>
-        <Box ml="50px" mr="20px">
-          <Image src="/images/icon_qr.svg" mr={2} height="13px" /> PANEL CODE{" "}
-          <br />
-          <Text fontSize={4}>
-            {code.replace(/(\d\d)(\d\d\d)(\d\d\d)/, "$1 $2 $3")}
-          </Text>
+        <Box ml="50px" mr="20px" fontSize={4}>
+          <Text fontWeight="normal">voty.ch/code</Text>
+          <Text>{code.replace(/(\d\d)(\d\d\d)(\d\d\d)/, "$1 $2 $3")}</Text>
         </Box>
       </Banner>
     </PanelPage>
