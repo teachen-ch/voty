@@ -142,12 +142,6 @@ export default function Home(): React.ReactElement {
             </Link>
           </Flex>
         </Box>
-
-        <Box sx={{ display: ["none", "none", "block"] }}>
-          <Banner href="/abstimmung">
-            Jetzt mitmachen: Jugendliche stimmen ab!
-          </Banner>
-        </Box>
         <Footer color="black" />
       </Container>
     </>
