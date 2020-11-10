@@ -288,7 +288,7 @@ export async function sendVerificationEmail(
       process.env.NODE_ENV !== "production" ? process.env.NODE_ENV : ""
     }`;
     const token = await createVerificationToken(db, email);
-    const url = `${process.env.BASE_URL}user/login?t=${token}&p=${purpose}`;
+    const url = `${process.env.BASE_URL}user/verify?t=${token}&p=${purpose}`;
     const subjects: Record<string, string> = {
       verification: "voty: Bitte Email bestätigen",
       reset: "voty: Passwort zurücksetzen?",

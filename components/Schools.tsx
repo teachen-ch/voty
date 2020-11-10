@@ -8,6 +8,7 @@ import { ShowField } from "./Users";
 import { cantonNames } from "../util/cantons";
 import { useState, ReactElement } from "react";
 import { School } from "@prisma/client";
+import { Loading } from "components/Page";
 import {
   useSchoolsWithMembersQuery,
   useSetSchoolMutation,
@@ -49,7 +50,7 @@ export const Schools: React.FC = () => {
     return <Text>Error loading data: {schoolsQuery.error.message}</Text>;
   }
   if (schoolsQuery.loading) {
-    return <Text>Loading data</Text>;
+    return <Loading />;
   }
   return (
     <>
@@ -138,7 +139,7 @@ export const SelectSchool: React.FC = () => {
     );
   }
   if (!schools) {
-    return <p>Loading...</p>;
+    return <Loading />;
   }
 
   const options = schools?.reduce(

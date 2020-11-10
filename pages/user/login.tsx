@@ -1,26 +1,19 @@
 import { useRouter } from "next/router";
 import { AppPage } from "components/Page";
-import { gql, useMutation, useApolloClient } from "@apollo/client";
-import { useState, useEffect, ReactElement } from "react";
-import { Text, Box, Button, Heading, Flex } from "rebass";
-import { Grid } from "theme-ui";
-import { Label, Input } from "@rebass/forms";
+import { gql, useMutation } from "@apollo/client";
+import { useState, ReactElement } from "react";
+import { Text, Button, Heading, Flex } from "rebass";
 import { QForm, ErrorBox } from "components/Form";
 import CheckLogin from "components/CheckLogin";
 import { usePageEvent, trackEvent } from "util/stats";
-import {
-  useSetAccessToken,
-  useUser,
-  useSetUser,
-  SessionUser,
-} from "../../state/user";
+import { useSetAccessToken, useUser, useSetUser } from "../../state/user";
 import { useQueryParam } from "util/hooks";
 import {
   Role,
   useLoginMutation,
-  useCheckVerificationMutation,
   useEmailVerificationMutation,
 } from "graphql/types";
+import VerifyPage from "./verify";
 
 export const LOGIN = gql`
   mutation login($email: String!, $password: String!) {
@@ -81,12 +74,9 @@ export default function Login(): ReactElement {
   }
 
   // purpose: verification, reset, login
+  // this needs to stay in for a while, so that old links continue to work
   if (token && purpose) {
-    return (
-      <AppPage heading="Anmelden" onClose={() => void router.push("/")}>
-        <CheckToken token={token} purpose={purpose} />
-      </AppPage>
-    );
+    return <VerifyPage />;
   } else {
     return (
       <AppPage heading="Anmelden" onClose={() => void router.push("/")}>
@@ -184,7 +174,7 @@ export function LoginForm(): ReactElement {
   );
 }
 
-function VerificationForm({ email }: { email: string }): ReactElement {
+export function VerificationForm({ email }: { email: string }): ReactElement {
   usePageEvent({ category: "Login", action: "NotVerified" });
   const [mailSent, setMailSent] = useState(false);
   const [error, setError] = useState("");
@@ -221,22 +211,17 @@ function VerificationForm({ email }: { email: string }): ReactElement {
   );
 }
 
-function getStartpage(role?: string) {
-  let page = "";
+export function getStartpage(role?: string): string {
   switch (role) {
     case Role.Teacher:
-      page = "/teacher";
-      break;
+      return "/teacher";
     case Role.Student:
-      page = "/student";
-      break;
+      return "/student";
     case Role.Admin:
-      page = "/admin";
-      break;
+      return "/admin";
     default:
-      page = "/";
+      return "/";
   }
-  return page;
 }
 
 function AfterLogin() {
@@ -257,79 +242,6 @@ function AfterLogin() {
       </AppPage>
     );
   }
-}
-
-function CheckToken({ token, purpose }: { token: string; purpose: string }) {
-  const setUser = useSetUser();
-  const setAccessToken = useSetAccessToken();
-  const [error, setError] = useState("");
-  const [tempUser, setTempUser] = useState<SessionUser | undefined | null>();
-  const router = useRouter();
-  const client = useApolloClient();
-  const [doVerification] = useCheckVerificationMutation({
-    onCompleted: (data) => {
-      if (data.checkVerification && data.checkVerification.token) {
-        setTempUser(data.checkVerification.user);
-        setAccessToken(data.checkVerification.token);
-      }
-    },
-    onError(error) {
-      setError("Dieser Email-Link ist leider nicht mehr gültig!");
-      console.error(error.message);
-    },
-  });
-
-  useEffect(() => {
-    // first logout current user, as doVerification will auto-login user based on token
-    void client.clearStore();
-    setAccessToken("");
-    setUser(undefined);
-    void doVerification({ variables: { token } });
-  }, []);
-
-  const isTeacher = tempUser?.role === Role.Teacher;
-  // token verification succeded, we have a session & user
-  if (tempUser !== undefined) {
-    // login -> go straight back
-    if (purpose === "login") {
-      setUser(tempUser);
-    }
-    if (purpose === "verification") {
-      trackEvent({ category: "Login", action: "EmailVerified" });
-      return (
-        <Box>
-          <Text mb={4}>
-            Super, Deine Email-Adresse ist nun bestätigt.{" "}
-            {isTeacher
-              ? "Dein Konto für Lehrpersonen ist nun eröffnet und Du bist bereits angemeldet."
-              : ""}
-          </Text>
-          <Button onClick={() => router.push(getStartpage(tempUser?.role))}>
-            {isTeacher
-              ? "Weiter geht's zur Auswahl Deiner Schule"
-              : "Weiter geht's"}
-          </Button>
-        </Box>
-      );
-    }
-    if (purpose === "reset") {
-      return <PasswordResetForm />;
-    }
-  }
-
-  if (error) {
-    return (
-      <>
-        <Heading as="h2">Fehler</Heading>
-        <Text mb={4}>{error}</Text>
-        <Button as="a" href="/user/login">
-          zurück
-        </Button>
-      </>
-    );
-  }
-
-  return <Text>Überprüfen</Text>;
 }
 
 function RequestReset({ onCancel }: { email: string; onCancel: () => void }) {
@@ -389,82 +301,6 @@ function RequestReset({ onCancel }: { email: string; onCancel: () => void }) {
           </Text>
         )}
       </QForm>
-    </>
-  );
-}
-
-function PasswordResetForm() {
-  usePageEvent({ category: "Login", action: "PasswordRequest" });
-  const user = useUser();
-  const setUser = useSetUser();
-  const setAccessToken = useSetAccessToken();
-  const [password, setPassword] = useState("");
-  const [password2, setPassword2] = useState("");
-  const [error, setError] = useState("");
-  const [success, setSuccess] = useState(false);
-  const router = useRouter();
-
-  const [doChangePassword] = useMutation(CHANGE_PASSWORD, {
-    onCompleted({ changePassword }) {
-      if (changePassword && changePassword.token) {
-        setUser(changePassword.user);
-        setAccessToken(changePassword.token);
-      }
-      setSuccess(true);
-    },
-    onError() {
-      setError("Es ist ein Fehler aufgetreten.");
-    },
-  });
-
-  async function checkPasswords(pw1: string, pw2: string) {
-    if (pw1 !== pw2) {
-      setError("Die beiden Passwörter stimmen nicht überein…");
-    }
-    return doChangePassword({ variables: { password } });
-  }
-  if (success) {
-    return (
-      <>
-        <Heading as="h2">Passwort geändert</Heading>
-        <Text mb={4}>Super, das hat geklappt.</Text>
-        <Button onClick={() => router.push(getStartpage(user?.role))}>
-          Weiter geht&apos;s
-        </Button>
-      </>
-    );
-  }
-  return (
-    <>
-      <Heading as="h2">Passwort ändern</Heading>
-      <Grid gap={2} columns={[0, 0, "2fr 3fr"]}>
-        <Label alignSelf="center">Neues Passwort:</Label>
-        <Input
-          autoCapitalize="none"
-          value={password}
-          name="password"
-          type="password"
-          onChange={(event: React.FormEvent<HTMLInputElement>) =>
-            setPassword(event.currentTarget.value)
-          }
-        />
-        <Label alignSelf="center">Password wiederholen:</Label>
-        <Input
-          value={password2}
-          name="password2"
-          type="password"
-          onChange={(event: React.FormEvent<HTMLInputElement>) =>
-            setPassword2(event.currentTarget.value)
-          }
-        />
-        <Button
-          onClick={() => checkPasswords(password, password2)}
-          sx={{ gridColumn: [0, 0, 2] }}
-        >
-          Passwort ändern
-        </Button>
-        <ErrorBox error={error} />
-      </Grid>
     </>
   );
 }
