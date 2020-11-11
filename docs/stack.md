@@ -70,11 +70,6 @@ Here we compile a handy list of links to the documentation of (some) of the 3rd-
 
 What follows are a few random notes which eventually should go into some docs
 
-### Database backup
-
-sudo apt install s3cmd
-sudo s3cmd --configure
-
 ### How to test graphql API with curl
 
 curl -H "x-access-token: <<<token>>>" -d '{"query": "{me {name id }}"}' -H "Content-Type: application/json" localhost:3000/api/graphql
@@ -88,4 +83,8 @@ yarn run migrate_dev
 yarn run deploy_dev
 ```
 
-The first command will migrate the database schema, the second will fetch the latest image from packages.github.com and docker-compose the app.
+The first command will migrate the database schema, the second will fetch the latest image from packages.github.com and docker-compose the app. As there is a considerate amount of waiting involved, there is a script which will commit all added changes, run pre-commit hooks, push to github, run tests, wait for ~10 minutes and then deploy to dev.voty.ch and ask whether to follow-up with a prod deployment:
+
+```
+yarn run deploy "This is the commit message"
+```
