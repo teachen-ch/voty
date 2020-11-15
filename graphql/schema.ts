@@ -10,9 +10,6 @@ use(
     features: {
       crud: true,
     },
-    /*client: {
-      options: { log: ["query", "info", "warn"] },
-    },*/
   })
 );
 
@@ -111,11 +108,6 @@ schema.objectType({
     t.model.end();
     t.model.scope();
     t.model.canton();
-    // t.model.school();
-    // t.model.creator();
-    // t.model.createdAt();
-    // t.model.updatedAt();
-
     t.boolean("canVote", {
       resolve: resolvers.ballots.canVote,
     });
