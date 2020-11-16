@@ -30,7 +30,6 @@ export const Footer: React.FC<{ color: string | string[] }> = ({ color }) => (
     </Text>
     <Flex justifyContent="center" flexDirection="column">
       <Box mt={3}>
-        {/*<Link href="https://prototypefund.opendata.ch" target="_blank"></Link>*/}
         <img
           src="/images/pf_logo.png"
           alt="Prototypefund Logo"
@@ -71,21 +70,3 @@ export const Footer: React.FC<{ color: string | string[] }> = ({ color }) => (
     </Flex>
   </Flex>
 );
-
-/*
-const AnAbmelden: React.FC = () => {
-  const user = useUser();
-  if (user) {
-    return (
-      <Link href="/user/logout">
-        <A>Abmelden</A>
-      </Link>
-    );
-  } else
-    return (
-      <Link href="/user/login">
-        <A>Anmelden</A>
-      </Link>
-    );
-};
-*/
