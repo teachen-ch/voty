@@ -77,7 +77,6 @@ export const Schools: React.FC = () => {
   );
 };
 
-// update
 export const SET_USER_SCHOOL = gql`
   mutation setSchool($school: String!) {
     setSchool(school: $school) {
@@ -106,8 +105,6 @@ export const GET_SCHOOL_LIST = gql`
   }
   ${SchoolFields}
 `;
-
-type ResultSchool = Pick<School, "id" | "name" | "city" | "zip" | "canton">;
 
 export const SelectSchool: React.FC = () => {
   const user = useUser();
@@ -219,6 +216,8 @@ export const CREATE_SCHOOL = gql`
     }
   }
 `;
+
+type ResultSchool = Pick<School, "id" | "name" | "city" | "zip" | "canton">;
 
 export function CreateSchool({
   onCompleted,
