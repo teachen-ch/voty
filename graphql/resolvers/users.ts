@@ -27,7 +27,9 @@ export const login: FieldResolver<"Mutation", "login"> = async (
   args,
   ctx
 ): Promise<ResponseLogin> => {
-  const user = await ctx.db.user.findOne({ where: { email: args.email } });
+  const user = await ctx.db.user.findOne({
+    where: { email: args.email?.toLowerCase() },
+  });
   if (!user) {
     logger.info("Login attempt - User not found", { meta: args.email });
     throw Error("Error.UserPassword"); // generic error, do not say why
@@ -74,7 +76,8 @@ export const createUser: FieldResolver<"Mutation", "createUser"> = async (
   ctx
 ) => {
   try {
-    const { email, password, name, lastname, role } = args.data;
+    const { password, name, lastname, role } = args.data;
+    const email = args.data.email?.toLowerCase();
     if (!email) throw new Error("Error.NoEmail");
     const salt = await bcrypt.genSalt(10);
     const hashed = await bcrypt.hash(String(password), salt);
@@ -155,7 +158,7 @@ export const createInvitedUser: FieldResolver<
     data: {
       name,
       lastname,
-      email,
+      email: email?.toLowerCase(),
       password,
       role: Role.Student,
     },
@@ -274,6 +277,7 @@ export async function sendVerificationEmail(
   db: PrismaClient
 ): Promise<ResponseLogin> {
   try {
+    email = email.toLowerCase();
     const from = process.env.EMAIL;
     if (!from)
       throw new Error("Please define EMAIL env variable (sender-email)");
