@@ -80,7 +80,7 @@ export default function Abstimmung(): ReactElement {
         </Flex>
         {!newUser ? (
           <>
-            <Heading as="h2">
+            <Heading as="h2" id="form">
               Interessiert? Melde Dich jetzt mit Deiner Klasse an
             </Heading>
             <CreateUserForm
@@ -147,6 +147,26 @@ export const FAQ: React.FC = () => (
       dass nur registrierte Klassen mitmachen können, dass jede Person nur
       einmal abstimmen kann und dass sämtliche Stimmabgaben anonym bleiben.
     </Text>
+    <Heading as="h3">Wie kann meine Klasse auf voty.ch abstimmen?</Heading>
+    <Text>
+      Über den Button{" "}
+      <A href="/user/signup#form" variant="underline">
+        «Jetzt Klasse anmelden»
+      </A>{" "}
+      können sich Lehrpersonen auf voty.ch kostenlos registrieren. Nach
+      Bestätigung der Email-Adresse kann eine oder mehrere Klasse erstellt
+      werden. Danach können die aktuellen Abstimmungen ausgewählt
+      («Verantwortungsvolle Unternehmen» und «Finanzierungsverbot») und
+      schliesslich die SuS via Email eingeladen werden. Wir empfehlen, die
+      Themen vorgängig mit den Materialien von{" "}
+      <A
+        href="https://www.easyvote.ch/de/school/unterrichtsmaterial"
+        rel="noreferrer"
+      >
+        easyvote.ch
+      </A>{" "}
+      zu diskutieren .
+    </Text>
     <Heading as="h3">
       Wie wird die Anonymität und der Datenschutz sichergestellt?
     </Heading>
@@ -182,7 +202,7 @@ export const FAQ: React.FC = () => (
     </Text>
     <Heading as="h3">Macht auch die Romandie und das Tessin mit?</Heading>
     <Text>
-      Wenn Du Kontakte in diese Sprachregionen haben, dann freuen wir uns sehr
+      Wenn Du Kontakte in diese Sprachregionen hast, dann freuen wir uns sehr
       über{" "}
       <Link href="/kontakt">
         <a>Email</a>

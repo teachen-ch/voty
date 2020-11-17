@@ -1,7 +1,6 @@
 import Head from "next/head";
 import { Flex, Heading, Box, Text, Button, Image } from "rebass";
 import { Container, Background } from "components/Page";
-import { Banner } from "components/Banner";
 import { Footer } from "components/Footer";
 import { ReadMore } from "components/ReadMore";
 import { FAQ } from "./abstimmung";
