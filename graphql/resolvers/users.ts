@@ -265,7 +265,8 @@ export function verifyJWT(token: string): JWTSession | undefined {
     if ("user" in result) return result as JWTSession;
     else throw new Error("No user in JWT Session");
   } catch (err) {
-    logger.info("Error verifying token: ", err.message);
+    if (err.message !== "jwt expired")
+      logger.info("Error verifying token: ", err.message);
     return undefined;
   }
 }
