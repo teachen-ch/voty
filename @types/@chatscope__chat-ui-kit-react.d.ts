@@ -3207,6 +3207,17 @@ declare module "@chatscope/chat-ui-kit-react" {
           p5: any
         ): any;
       }
+
+      namespace style {
+        function isRequired(
+          p0: any,
+          p1: any,
+          p2: any,
+          p3: any,
+          p4: any,
+          p5: any
+        ): any;
+      }
     }
   }
 
