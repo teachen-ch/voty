@@ -1,0 +1,4 @@
+server_name: v6.voty.ch
+old_server_name: v6.voty.ch
+env_file: ../.env.development
+cache_time: 1m
