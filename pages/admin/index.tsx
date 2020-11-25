@@ -2,10 +2,11 @@ import { LoggedInPage } from "../../components/Page";
 import { Text, Link as A } from "rebass";
 import Link from "next/link";
 import { ReactElement } from "react";
+import { Role } from "graphql/types";
 
 export default function Teacher(): ReactElement {
   return (
-    <LoggedInPage heading="Admin Bereich">
+    <LoggedInPage heading="Admin Bereich" role={Role.Admin}>
       <Text lineHeight="2em">
         <Text>
           <Link href="/admin/teachers">

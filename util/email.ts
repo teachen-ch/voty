@@ -12,6 +12,7 @@ const server = new SMTPTransport({
     user: process.env.SMTP_USER || "",
     pass: process.env.SMTP_PASSWORD || "",
   },
+  // TODO: This is ugly, trying to make email work on ipv6 docker
   tls: { rejectUnauthorized: false },
 });
 

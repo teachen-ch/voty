@@ -221,7 +221,7 @@ export const FAQ: React.FC = () => (
   </Box>
 );
 
-const Stats: React.FC = () => (
+export const Stats: React.FC = () => (
   <Box fontSize={2}>
     <Heading mt={0}>Aktueller Stand</Heading>
     <Grid columns={[0, 0, "160px auto"]}>
