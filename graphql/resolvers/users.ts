@@ -93,7 +93,8 @@ export const createUser: FieldResolver<"Mutation", "createUser"> = async (
     });
 
     await sendVerificationEmail(email, "verification", ctx.db);
-    logger.mail(`New user created: ${name} ${lastname} <${email}>: ${role}`);
+    if (role === Role.Teacher)
+      logger.mail(`New user created: ${name} ${lastname} <${email}>: ${role}`);
 
     // TODO: we need some cleanup here...
     // currently, we need to setRequestUser in order to return to the just created user

@@ -166,8 +166,12 @@ export function LoginForm(): ReactElement {
         >
           Passwort vergessen?
         </Button>
+        {/*
         <Button onClick={() => router.push("/user/signup")} variant="text">
           Neuer Benutzer? Konto anlegen!
+        </Button>*/}
+        <Button onClick={() => router.push("/")} variant="text">
+          Zurück
         </Button>
       </Flex>
     </QForm>
