@@ -209,13 +209,14 @@ const MobileBurger: React.FC<{ user: SessionUser }> = ({ user }) => {
                     </A>
                   </Link>
                   <br />
+                  {/*
                   <Link href="/user/signup">
                     <A>
                       <IconRegister style={burgerIcon} />
                       Registrieren
                     </A>
                   </Link>
-                  <br />
+                  <br />*/}
                 </nav>
               ) : (
                 <nav>
