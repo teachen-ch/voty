@@ -118,8 +118,6 @@ export default function Abstimmung(): ReactElement {
         </Text>
       </Box>
 
-      <Stats />
-
       <Box my={5} />
       <ReadMore title="Fragen und Antworten">
         <FAQ />
@@ -142,10 +140,11 @@ export const FAQ: React.FC = () => (
     </Text>
     <Heading as="h3">Wie funktioniert die Onlineabstimmung?</Heading>
     <Text>
-      Auf unserer Website können Lehrpersonen mit ihren Klassen die Abstimmung
-      auf Laptops, Tablets oder Smartphones durchführen. Wir stellen sicher,
-      dass nur registrierte Klassen mitmachen können, dass jede Person nur
-      einmal abstimmen kann und dass sämtliche Stimmabgaben anonym bleiben.
+      Auf unserer Website können Lehrpersonen mit ihren Klassen (Sek-I,
+      Gymnasium, Berufsschulen) die Abstimmung auf Laptops, Tablets oder
+      Smartphones durchführen. Wir stellen sicher, dass nur registrierte Klassen
+      mitmachen können, dass jede Person nur einmal abstimmen kann und dass
+      sämtliche Stimmabgaben anonym bleiben.
     </Text>
     <Heading as="h3">Wie kann meine Klasse auf voty.ch abstimmen?</Heading>
     <Text>
