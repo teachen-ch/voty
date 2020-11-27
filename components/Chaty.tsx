@@ -1,4 +1,5 @@
 import "@chatscope/chat-ui-kit-styles/dist/default/styles.min.css";
+
 import {
   MainContainer,
   ChatContainer,
@@ -6,10 +7,10 @@ import {
   Message,
   TypingIndicator,
 } from "@chatscope/chat-ui-kit-react";
-import { Box, Button, Flex, Card } from "rebass";
+import { Box, Button, Text, Flex, Card } from "rebass";
 import { useEffect, useMemo, useState } from "react";
 
-const WAIT = 30;
+const WAIT = 40;
 
 export const Chaty: React.FC<{ lines: string }> = ({ lines }) => {
   const messages = useMemo<TMessage[]>(() => parseMessages(lines), [lines]);
@@ -41,7 +42,7 @@ export const Chaty: React.FC<{ lines: string }> = ({ lines }) => {
         cancel = setTimeout(() => doChat(line + 1), wait);
       } else {
         setTyping(false);
-        setInputMessage(messages[line + 1]);
+        setTimeout(() => setInputMessage(messages[line + 1]), 1000);
       }
     } else {
       setTyping(false);
@@ -83,26 +84,44 @@ const ShowInput: React.FC<{
   message?: TMessage;
   doChat: (line: number) => void;
 }> = ({ message, doChat }) => {
-  console.log(message);
   if (!message) return null;
   if (message.type === "BUTTONS" || message.type === "MENU") {
     const options = message.message?.split("|") || [];
     return (
-      <Flex flexDirection="row">
+      <InputBox>
         {options.map((o, i) => (
-          <Button key={i} onClick={() => doChat(message.line + 1)} ml={i && 3}>
-            {o}
+          <Button
+            key={i}
+            onClick={() => doChat(message.line + 1)}
+            ml={i && 2}
+            flex={1}
+          >
+            <Text fontSize={1}>{o}</Text>
           </Button>
         ))}
-      </Flex>
+      </InputBox>
     );
   }
   return (
-    <Button width="100%" onClick={() => doChat(message.line + 1)}>
-      {message.message}
-    </Button>
+    <InputBox>
+      <Button width="100%" onClick={() => doChat(message.line + 1)}>
+        {message.message}
+      </Button>
+    </InputBox>
   );
 };
+
+const InputBox: React.FC = ({ children }) => (
+  <Flex
+    flexDirection="row"
+    width="100%"
+    bg="#eee"
+    p={2}
+    sx={{ borderTop: "1px solid lightgray" }}
+  >
+    {children}
+  </Flex>
+);
 
 type TMessage = {
   direction?: string;
@@ -151,7 +170,6 @@ function parseMessage(line: string, ix: number): TMessage {
   // does the message contain just 1-2 emojis?
   if (/^\p{Emoji}{1,2}$/mu.test(message)) {
     type = "emoji";
-    message = `<span style="font-size: 3rem">${message}</span>`;
   }
   return { direction, message, type, line: ix };
 }
