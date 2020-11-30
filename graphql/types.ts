@@ -1487,6 +1487,7 @@ export type Query = {
   me?: Maybe<User>;
   school?: Maybe<School>;
   schools: Array<School>;
+  swissvotes?: Maybe<Array<Swissvote>>;
   team?: Maybe<Team>;
   teams: Array<Team>;
   user?: Maybe<User>;
@@ -1541,6 +1542,13 @@ export type QuerySchoolsArgs = {
   last?: Maybe<Scalars['Int']>;
   orderBy?: Maybe<Array<SchoolOrderByInput>>;
   where?: Maybe<SchoolWhereInput>;
+};
+
+
+export type QuerySwissvotesArgs = {
+  keywords?: Maybe<Scalars['String']>;
+  result?: Maybe<Scalars['Int']>;
+  type?: Maybe<Scalars['Int']>;
 };
 
 
@@ -2254,6 +2262,23 @@ export type StringNullableFilter = {
   not?: Maybe<NestedStringNullableFilter>;
   notIn?: Maybe<Array<Scalars['String']>>;
   startsWith?: Maybe<Scalars['String']>;
+};
+
+export type Swissvote = {
+  __typename?: 'Swissvote';
+  annahme?: Maybe<Scalars['Int']>;
+  anr?: Maybe<Scalars['Int']>;
+  datum?: Maybe<Scalars['DateTime']>;
+  kategorien?: Maybe<Scalars['String']>;
+  poster_ja?: Maybe<Scalars['String']>;
+  poster_nein?: Maybe<Scalars['String']>;
+  rechtsform?: Maybe<Scalars['Int']>;
+  stand?: Maybe<Scalars['Int']>;
+  stichwort?: Maybe<Scalars['String']>;
+  swissvoteslink?: Maybe<Scalars['String']>;
+  titel_kurz_d?: Maybe<Scalars['String']>;
+  titel_off_d?: Maybe<Scalars['String']>;
+  volk?: Maybe<Scalars['Int']>;
 };
 
 export type Team = {

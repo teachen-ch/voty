@@ -1339,6 +1339,7 @@ type Query {
   me: User
   school(where: SchoolWhereUniqueInput!): School
   schools(after: SchoolWhereUniqueInput, before: SchoolWhereUniqueInput, first: Int, last: Int, orderBy: [SchoolOrderByInput!], where: SchoolWhereInput): [School!]!
+  swissvotes(keywords: String, result: Int, type: Int): [Swissvote!]
   team(where: TeamWhereUniqueInput!): Team
   teams(after: TeamWhereUniqueInput, before: TeamWhereUniqueInput, first: Int, last: Int, orderBy: [TeamOrderByInput!], where: TeamWhereInput): [Team!]!
   user(where: UserWhereUniqueInput!): User
@@ -2006,6 +2007,22 @@ input StringNullableFilter {
   not: NestedStringNullableFilter
   notIn: [String!]
   startsWith: String
+}
+
+type Swissvote {
+  annahme: Int
+  anr: Int
+  datum: DateTime
+  kategorien: String
+  poster_ja: String
+  poster_nein: String
+  rechtsform: Int
+  stand: Int
+  stichwort: String
+  swissvoteslink: String
+  titel_kurz_d: String
+  titel_off_d: String
+  volk: Int
 }
 
 type Team {

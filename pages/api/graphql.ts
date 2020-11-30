@@ -21,6 +21,7 @@ settings.change({ server: { corse: false } });
 // require('...')
 require("../../graphql/schema");
 require("../../graphql/user");
+require("../../graphql/swissvotes");
 
 app.assemble();
 
