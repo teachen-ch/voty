@@ -7,6 +7,7 @@ import { FAQ } from "./abstimmung";
 import { TopBar } from "components/TopBar";
 import Link from "next/link";
 import { useRef } from "react";
+import { A } from "components/Breadcrumb";
 
 export default function Home(): React.ReactElement {
   return (
@@ -37,11 +38,11 @@ export default function Home(): React.ReactElement {
             title="Demokratie verstehen"
             image="/images/voty_module_1_soon.svg"
           >
-            Die Demokratie ist das wohl wichtigste Gut der Schweiz. Aber wie
-            ge&shy;lingt es uns, die Ju&shy;gend für die Demo&shy;kratie zu
-            begeis&shy;tern? voty.ch ist ein Pro&shy;jekt für die
-            De&shy;mo&shy;kratie&shy;förderung an Schwei&shy;zer Schulen in drei
-            Modulen.
+            Wie funktioniert Demokra&shy;tie in der Schweiz und warum ist sie so
+            wertvoll? Wir entwickeln interaktive E-Learning Tools für den
+            Einsatz in der Schulklasse auf Stufe Sek-1, Gym und
+            Berufs&shy;schule. <br />
+            <A href="/projekt#module">Mehr erfahren</A>
           </Module>
           <Box>
             <Heading
@@ -56,27 +57,12 @@ export default function Home(): React.ReactElement {
               Demokratie an die Schule!
             </Heading>
 
-            <Flex
-              flexDirection="column"
-              alignItems="center"
-              justifyContent="space-between"
-            >
-              <Image
-                src="images/voty_module_2.svg"
-                alt="Abstimmen"
-                width={[218, 218, 218, 300]}
-                height={[252, 252, 252, 347]}
-              />
-              <Heading
-                as="h3"
-                py={[2, 2, 3]}
-                my={0}
-                textAlign="center"
-                fontSize={[4, 4, 4, 5]}
-              >
-                Demokratie testen
-              </Heading>
-            </Flex>
+            <Module title="Demokratie testen" image="/images/voty_module_2.svg">
+              Nur Erwachsene dürfen abstimmen, aber auch Jugendliche haben eine
+              Meinung! Lassen sie ihre Klassen an den Urnen&shy;gängen vom 9.
+              März mitmachen und ab&shy;stimmen. <br />
+              <A href="/abstimmung">Mehr erfahren</A>
+            </Module>
           </Box>
 
           <Module
@@ -86,7 +72,8 @@ export default function Home(): React.ReactElement {
             Wer entscheidet an Eurer Schule? Dürfen Schüler&shy;innen und
             Schü&shy;ler mit&shy;reden und Vor&shy;schläge einbringen? Wir
             möchten gemeinsam testen, wie wir Demo&shy;kratie in
-            Schul&shy;häuser bringen können.
+            Schul&shy;häuser bringen können.{" "}
+            <A href="/projekt#module">Mehr erfahren</A>
           </Module>
         </Flex>
 
@@ -113,11 +100,19 @@ export default function Home(): React.ReactElement {
               fontSize="18px"
               maxWidth="700px"
             >
-              Wie motivieren wir Jugendliche für unsere Demokratie? Wir möchten
-              gemeinsam mit engagierten Lehrpersonen ein Experiment starten und
-              im November mit mindestens 50 Klassen über die beiden nationalen
-              Vorlagen abstimmen. Interesse für Politik entsteht dann, wenn man
-              diskutieren und mitentscheiden kann.
+              Die Demokratie ist eines der wohl wichtigsten Güter der Schweiz.
+              Aber wie ge­lingt es uns, die Ju­gendlichen für die Demo­kratie zu
+              begeis­tern?
+              <br />
+              <br />
+              Wir glauben, dass ein demokratisches Verständnis nur durch
+              demokratische Praxis erreicht werden kann. Deshalb möchten wir mit
+              voty.ch bereits in der Schule eine Basis für das
+              Demokratieverständnis schaffen, dieses mit den Schüler*Innen
+              praktisch anwenden und so die Fähigkeiten fördern, welche für eine
+              demokratische Partizipation wichtig sind.
+              <br />
+              <A href="/projekt">Weitere Informationen zum Projekt voty.ch</A>
             </Text>
           </Flex>
 
@@ -130,13 +125,8 @@ export default function Home(): React.ReactElement {
             flexWrap={["wrap", "wrap", "nowrap", "nowrap"]}
           >
             <Link href="/newsletter">
-              <Button width="100%" mr={[0, 0, 3]} mb={3}>
-                Newsletter abonnieren
-              </Button>
-            </Link>
-            <Link href="/abstimmung">
               <Button width="100%" mb={3}>
-                Klasse anmelden?
+                Newsletter abonnieren
               </Button>
             </Link>
           </Flex>

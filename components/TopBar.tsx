@@ -68,6 +68,13 @@ export const TopBar: React.FC<{ hideLogo?: boolean }> = (props) => {
 const RegisterLogin: React.FC = () => {
   return (
     <Flex alignItems="center">
+      <Link href="/projekt">
+        <A>
+          <Flex alignItems="center">
+            <Text mr={4}>Über das Projekt voty.ch</Text>
+          </Flex>
+        </A>
+      </Link>
       <Link href="/user/login">
         <A>
           <Flex alignItems="center">

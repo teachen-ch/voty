@@ -32,7 +32,7 @@ export default function Abstimmung(): ReactElement {
           />
           Wie motivieren wir Jugendliche für unsere Demokratie? Wir möchten
           gemeinsam mit engagierten Lehrpersonen ein Experiment starten und im
-          November mit mindes&shy;tens 50 Klassen über die beiden nationalen
+          März 2021 mit mindes&shy;tens 50 Klassen über die beiden nationalen
           Vorla&shy;gen ab&shy;stimmen. Interesse für Politik entsteht dann,
           wenn disku&shy;tiert und mitentscheiden werden kann.
         </Text>
@@ -56,7 +56,7 @@ export default function Abstimmung(): ReactElement {
               <IconCheckWhite />
             </Text>
             <Text maxWidth="600px">
-              Ich nehme mir im November Zeit, um die Vorlagen mit den
+              Ich nehme mir im Februar/März Zeit, um die Vorlagen mit den
               Schüler*innen zu diskutieren (z. B. mit Material von{" "}
               <A
                 href="https://www.easyvote.ch/de/school/"
@@ -87,15 +87,7 @@ export default function Abstimmung(): ReactElement {
               setUser={setNewUser}
               omitRole
               defaultRole={Role.Teacher}
-            >
-              <Text mt={3} fontSize={3} sx={{ gridColumn: [0, 0, 2] }}>
-                Wir sind uns bewusst, dass die Zeit bis Ende November in der
-                Planung knapp ist. Aber wenn wir es gemeinsam schaffen, genügend
-                Klassen zu motivieren, dann hat das Ergebnis der Abstimmung auch
-                eine statistische Signifikanz und repräsentiert die Meinung der
-                Jugend zu relevanten Themen. Herzlichen Dank für Deine Mithilfe!
-              </Text>
-            </CreateUserForm>
+            ></CreateUserForm>
           </>
         ) : (
           <>
@@ -154,8 +146,8 @@ export const FAQ: React.FC = () => (
       </A>{" "}
       können sich Lehrpersonen auf voty.ch kostenlos registrieren. Nach
       Bestätigung der Email-Adresse kann eine oder mehrere Klasse erstellt
-      werden. Danach können die aktuellen Abstimmungen ausgewählt
-      («Verantwortungsvolle Unternehmen» und «Finanzierungsverbot») und
+      werden. Danach können die aktuellen Abstimmungen ausgewählt («E-ID Gesetz»
+      und «Verhüllungsverbot-Initiative», «Stop Palmöl-Referendum») und
       schliesslich die SuS via Email eingeladen werden. Wir empfehlen, die
       Themen vorgängig mit den Materialien von{" "}
       <A
