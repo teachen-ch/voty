@@ -9,14 +9,7 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
-  /**
-   * A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the
-   * `date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO
-   * 8601 standard for representation of dates and times using the Gregorian calendar.
-   */
   DateTime: any;
-  /** The `JSON` scalar type represents JSON objects as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf). */
-  Json: any;
 };
 
 export type Attachment = {
@@ -675,7 +668,7 @@ export type BallotScalarWhereInput = {
   NOT?: Maybe<Array<BallotScalarWhereInput>>;
   OR?: Maybe<Array<BallotScalarWhereInput>>;
   schoolId?: Maybe<StringNullableFilter>;
-  scope?: Maybe<BallotScope>;
+  scope?: Maybe<EnumBallotScopeFilter>;
   start?: Maybe<DateTimeFilter>;
   teamId?: Maybe<StringNullableFilter>;
   threadId?: Maybe<StringNullableFilter>;
@@ -698,7 +691,7 @@ export type BallotUpdateManyDataInput = {
   description?: Maybe<StringFieldUpdateOperationsInput>;
   end?: Maybe<DateTimeFieldUpdateOperationsInput>;
   id?: Maybe<StringFieldUpdateOperationsInput>;
-  scope?: Maybe<BallotScope>;
+  scope?: Maybe<EnumBallotScopeFieldUpdateOperationsInput>;
   start?: Maybe<DateTimeFieldUpdateOperationsInput>;
   title?: Maybe<StringFieldUpdateOperationsInput>;
   updatedAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
@@ -795,7 +788,7 @@ export type BallotUpdateWithoutAttachmentsDataInput = {
   id?: Maybe<StringFieldUpdateOperationsInput>;
   options?: Maybe<OptionUpdateManyWithoutBallotInput>;
   school?: Maybe<SchoolUpdateOneWithoutBallotsInput>;
-  scope?: Maybe<BallotScope>;
+  scope?: Maybe<EnumBallotScopeFieldUpdateOperationsInput>;
   start?: Maybe<DateTimeFieldUpdateOperationsInput>;
   team?: Maybe<TeamUpdateOneWithoutBallotsInput>;
   thread?: Maybe<ThreadUpdateOneWithoutBallotInput>;
@@ -816,7 +809,7 @@ export type BallotUpdateWithoutBallotRunsDataInput = {
   id?: Maybe<StringFieldUpdateOperationsInput>;
   options?: Maybe<OptionUpdateManyWithoutBallotInput>;
   school?: Maybe<SchoolUpdateOneWithoutBallotsInput>;
-  scope?: Maybe<BallotScope>;
+  scope?: Maybe<EnumBallotScopeFieldUpdateOperationsInput>;
   start?: Maybe<DateTimeFieldUpdateOperationsInput>;
   team?: Maybe<TeamUpdateOneWithoutBallotsInput>;
   thread?: Maybe<ThreadUpdateOneWithoutBallotInput>;
@@ -837,7 +830,7 @@ export type BallotUpdateWithoutCreatorDataInput = {
   id?: Maybe<StringFieldUpdateOperationsInput>;
   options?: Maybe<OptionUpdateManyWithoutBallotInput>;
   school?: Maybe<SchoolUpdateOneWithoutBallotsInput>;
-  scope?: Maybe<BallotScope>;
+  scope?: Maybe<EnumBallotScopeFieldUpdateOperationsInput>;
   start?: Maybe<DateTimeFieldUpdateOperationsInput>;
   team?: Maybe<TeamUpdateOneWithoutBallotsInput>;
   thread?: Maybe<ThreadUpdateOneWithoutBallotInput>;
@@ -858,7 +851,7 @@ export type BallotUpdateWithoutSchoolDataInput = {
   end?: Maybe<DateTimeFieldUpdateOperationsInput>;
   id?: Maybe<StringFieldUpdateOperationsInput>;
   options?: Maybe<OptionUpdateManyWithoutBallotInput>;
-  scope?: Maybe<BallotScope>;
+  scope?: Maybe<EnumBallotScopeFieldUpdateOperationsInput>;
   start?: Maybe<DateTimeFieldUpdateOperationsInput>;
   team?: Maybe<TeamUpdateOneWithoutBallotsInput>;
   thread?: Maybe<ThreadUpdateOneWithoutBallotInput>;
@@ -880,7 +873,7 @@ export type BallotUpdateWithoutTeamDataInput = {
   id?: Maybe<StringFieldUpdateOperationsInput>;
   options?: Maybe<OptionUpdateManyWithoutBallotInput>;
   school?: Maybe<SchoolUpdateOneWithoutBallotsInput>;
-  scope?: Maybe<BallotScope>;
+  scope?: Maybe<EnumBallotScopeFieldUpdateOperationsInput>;
   start?: Maybe<DateTimeFieldUpdateOperationsInput>;
   thread?: Maybe<ThreadUpdateOneWithoutBallotInput>;
   title?: Maybe<StringFieldUpdateOperationsInput>;
@@ -901,7 +894,7 @@ export type BallotUpdateWithoutThreadDataInput = {
   id?: Maybe<StringFieldUpdateOperationsInput>;
   options?: Maybe<OptionUpdateManyWithoutBallotInput>;
   school?: Maybe<SchoolUpdateOneWithoutBallotsInput>;
-  scope?: Maybe<BallotScope>;
+  scope?: Maybe<EnumBallotScopeFieldUpdateOperationsInput>;
   start?: Maybe<DateTimeFieldUpdateOperationsInput>;
   team?: Maybe<TeamUpdateOneWithoutBallotsInput>;
   title?: Maybe<StringFieldUpdateOperationsInput>;
@@ -922,7 +915,7 @@ export type BallotUpdateWithoutVotedDataInput = {
   id?: Maybe<StringFieldUpdateOperationsInput>;
   options?: Maybe<OptionUpdateManyWithoutBallotInput>;
   school?: Maybe<SchoolUpdateOneWithoutBallotsInput>;
-  scope?: Maybe<BallotScope>;
+  scope?: Maybe<EnumBallotScopeFieldUpdateOperationsInput>;
   start?: Maybe<DateTimeFieldUpdateOperationsInput>;
   team?: Maybe<TeamUpdateOneWithoutBallotsInput>;
   thread?: Maybe<ThreadUpdateOneWithoutBallotInput>;
@@ -943,7 +936,7 @@ export type BallotUpdateWithoutVotesDataInput = {
   id?: Maybe<StringFieldUpdateOperationsInput>;
   options?: Maybe<OptionUpdateManyWithoutBallotInput>;
   school?: Maybe<SchoolUpdateOneWithoutBallotsInput>;
-  scope?: Maybe<BallotScope>;
+  scope?: Maybe<EnumBallotScopeFieldUpdateOperationsInput>;
   start?: Maybe<DateTimeFieldUpdateOperationsInput>;
   team?: Maybe<TeamUpdateOneWithoutBallotsInput>;
   thread?: Maybe<ThreadUpdateOneWithoutBallotInput>;
@@ -1027,7 +1020,7 @@ export type BallotWhereInput = {
   OR?: Maybe<Array<BallotWhereInput>>;
   school?: Maybe<SchoolWhereInput>;
   schoolId?: Maybe<StringNullableFilter>;
-  scope?: Maybe<BallotScope>;
+  scope?: Maybe<EnumBallotScopeFilter>;
   start?: Maybe<DateTimeFilter>;
   team?: Maybe<TeamWhereInput>;
   teamId?: Maybe<StringNullableFilter>;
@@ -1182,6 +1175,35 @@ export type DomainWhereUniqueInput = {
   name?: Maybe<Scalars['String']>;
 };
 
+export type EnumBallotScopeFieldUpdateOperationsInput = {
+  set?: Maybe<BallotScope>;
+};
+
+export type EnumBallotScopeFilter = {
+  equals?: Maybe<BallotScope>;
+  in?: Maybe<Array<BallotScope>>;
+  not?: Maybe<NestedEnumBallotScopeFilter>;
+  notIn?: Maybe<Array<BallotScope>>;
+};
+
+export type EnumGenderNullableFilter = {
+  equals?: Maybe<Gender>;
+  in?: Maybe<Array<Gender>>;
+  not?: Maybe<NestedEnumGenderNullableFilter>;
+  notIn?: Maybe<Array<Gender>>;
+};
+
+export type EnumRoleFieldUpdateOperationsInput = {
+  set?: Maybe<Role>;
+};
+
+export type EnumRoleFilter = {
+  equals?: Maybe<Role>;
+  in?: Maybe<Array<Role>>;
+  not?: Maybe<NestedEnumRoleFilter>;
+  notIn?: Maybe<Array<Role>>;
+};
+
 export enum Gender {
   Female = 'Female',
   Male = 'Male',
@@ -1190,6 +1212,10 @@ export enum Gender {
 }
 
 export type IntFieldUpdateOperationsInput = {
+  decrement?: Maybe<Scalars['Int']>;
+  divide?: Maybe<Scalars['Int']>;
+  increment?: Maybe<Scalars['Int']>;
+  multiply?: Maybe<Scalars['Int']>;
   set?: Maybe<Scalars['Int']>;
 };
 
@@ -1217,12 +1243,11 @@ export type IntNullableFilter = {
 
 export type InviteResponse = {
   __typename?: 'InviteResponse';
-  created?: Maybe<Array<Scalars['String']>>;
-  duplicated?: Maybe<Array<Scalars['String']>>;
-  failed?: Maybe<Array<Scalars['String']>>;
+  created?: Maybe<Array<Maybe<Scalars['String']>>>;
+  duplicated?: Maybe<Array<Maybe<Scalars['String']>>>;
+  failed?: Maybe<Array<Maybe<Scalars['String']>>>;
   team?: Maybe<Team>;
 };
-
 
 export type Mutation = {
   __typename?: 'Mutation';
@@ -1251,7 +1276,7 @@ export type Mutation = {
 
 
 export type MutationAcceptInviteArgs = {
-  invite?: Maybe<Scalars['String']>;
+  invite: Scalars['String'];
 };
 
 
@@ -1317,14 +1342,14 @@ export type MutationEndBallotRunArgs = {
 
 
 export type MutationInviteStudentsArgs = {
-  emails: Array<Scalars['String']>;
+  emails: Array<Maybe<Scalars['String']>>;
   team: Scalars['String'];
 };
 
 
 export type MutationLoginArgs = {
-  email?: Maybe<Scalars['String']>;
-  password?: Maybe<Scalars['String']>;
+  email: Scalars['String'];
+  password: Scalars['String'];
 };
 
 
@@ -1393,6 +1418,27 @@ export type NestedDateTimeNullableFilter = {
   notIn?: Maybe<Array<Scalars['DateTime']>>;
 };
 
+export type NestedEnumBallotScopeFilter = {
+  equals?: Maybe<BallotScope>;
+  in?: Maybe<Array<BallotScope>>;
+  not?: Maybe<NestedEnumBallotScopeFilter>;
+  notIn?: Maybe<Array<BallotScope>>;
+};
+
+export type NestedEnumGenderNullableFilter = {
+  equals?: Maybe<Gender>;
+  in?: Maybe<Array<Gender>>;
+  not?: Maybe<NestedEnumGenderNullableFilter>;
+  notIn?: Maybe<Array<Gender>>;
+};
+
+export type NestedEnumRoleFilter = {
+  equals?: Maybe<Role>;
+  in?: Maybe<Array<Role>>;
+  not?: Maybe<NestedEnumRoleFilter>;
+  notIn?: Maybe<Array<Role>>;
+};
+
 export type NestedIntFilter = {
   equals?: Maybe<Scalars['Int']>;
   gt?: Maybe<Scalars['Int']>;
@@ -1451,7 +1497,15 @@ export type NullableDateTimeFieldUpdateOperationsInput = {
   set?: Maybe<Scalars['DateTime']>;
 };
 
+export type NullableEnumGenderFieldUpdateOperationsInput = {
+  set?: Maybe<Gender>;
+};
+
 export type NullableIntFieldUpdateOperationsInput = {
+  decrement?: Maybe<Scalars['Int']>;
+  divide?: Maybe<Scalars['Int']>;
+  increment?: Maybe<Scalars['Int']>;
+  multiply?: Maybe<Scalars['Int']>;
   set?: Maybe<Scalars['Int']>;
 };
 
@@ -1546,7 +1600,7 @@ export type Query = {
   ballot?: Maybe<Ballot>;
   ballots: Array<Ballot>;
   getBallotResults?: Maybe<BallotResults>;
-  getBallotRuns?: Maybe<Array<BallotRun>>;
+  getBallotRuns?: Maybe<Array<Maybe<BallotRun>>>;
   me?: Maybe<User>;
   school?: Maybe<School>;
   schools: Array<School>;
@@ -1629,6 +1683,11 @@ export type QueryUsersArgs = {
   orderBy?: Maybe<Array<UserOrderByInput>>;
   where?: Maybe<UserWhereInput>;
 };
+
+export enum QueryMode {
+  Default = 'default',
+  Insensitive = 'insensitive'
+}
 
 export type Reaction = {
   __typename?: 'Reaction';
@@ -2229,6 +2288,7 @@ export type StringFilter = {
   in?: Maybe<Array<Scalars['String']>>;
   lt?: Maybe<Scalars['String']>;
   lte?: Maybe<Scalars['String']>;
+  mode?: Maybe<QueryMode>;
   not?: Maybe<NestedStringFilter>;
   notIn?: Maybe<Array<Scalars['String']>>;
   startsWith?: Maybe<Scalars['String']>;
@@ -2243,6 +2303,7 @@ export type StringNullableFilter = {
   in?: Maybe<Array<Scalars['String']>>;
   lt?: Maybe<Scalars['String']>;
   lte?: Maybe<Scalars['String']>;
+  mode?: Maybe<QueryMode>;
   not?: Maybe<NestedStringNullableFilter>;
   notIn?: Maybe<Array<Scalars['String']>>;
   startsWith?: Maybe<Scalars['String']>;
@@ -3603,7 +3664,7 @@ export type UserScalarWhereInput = {
   createdAt?: Maybe<DateTimeFilter>;
   email?: Maybe<StringNullableFilter>;
   emailVerified?: Maybe<DateTimeNullableFilter>;
-  gender?: Maybe<Gender>;
+  gender?: Maybe<EnumGenderNullableFilter>;
   id?: Maybe<StringFilter>;
   image?: Maybe<StringNullableFilter>;
   lastname?: Maybe<StringNullableFilter>;
@@ -3611,7 +3672,7 @@ export type UserScalarWhereInput = {
   NOT?: Maybe<Array<UserScalarWhereInput>>;
   OR?: Maybe<Array<UserScalarWhereInput>>;
   password?: Maybe<StringNullableFilter>;
-  role?: Maybe<Role>;
+  role?: Maybe<EnumRoleFilter>;
   schoolId?: Maybe<StringNullableFilter>;
   teamId?: Maybe<StringNullableFilter>;
   updatedAt?: Maybe<DateTimeFilter>;
@@ -3626,14 +3687,14 @@ export type UserUpdateInput = {
   createdAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
   email?: Maybe<NullableStringFieldUpdateOperationsInput>;
   emailVerified?: Maybe<NullableDateTimeFieldUpdateOperationsInput>;
-  gender?: Maybe<Gender>;
+  gender?: Maybe<NullableEnumGenderFieldUpdateOperationsInput>;
   id?: Maybe<StringFieldUpdateOperationsInput>;
   image?: Maybe<NullableStringFieldUpdateOperationsInput>;
   lastname?: Maybe<NullableStringFieldUpdateOperationsInput>;
   name?: Maybe<NullableStringFieldUpdateOperationsInput>;
   password?: Maybe<NullableStringFieldUpdateOperationsInput>;
   reactions?: Maybe<ReactionUpdateManyWithoutUserInput>;
-  role?: Maybe<Role>;
+  role?: Maybe<EnumRoleFieldUpdateOperationsInput>;
   school?: Maybe<SchoolUpdateOneWithoutMembersInput>;
   teaches?: Maybe<TeamUpdateManyWithoutTeacherInput>;
   team?: Maybe<TeamUpdateOneWithoutUserInput>;
@@ -3650,13 +3711,13 @@ export type UserUpdateManyDataInput = {
   createdAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
   email?: Maybe<NullableStringFieldUpdateOperationsInput>;
   emailVerified?: Maybe<NullableDateTimeFieldUpdateOperationsInput>;
-  gender?: Maybe<Gender>;
+  gender?: Maybe<NullableEnumGenderFieldUpdateOperationsInput>;
   id?: Maybe<StringFieldUpdateOperationsInput>;
   image?: Maybe<NullableStringFieldUpdateOperationsInput>;
   lastname?: Maybe<NullableStringFieldUpdateOperationsInput>;
   name?: Maybe<NullableStringFieldUpdateOperationsInput>;
   password?: Maybe<NullableStringFieldUpdateOperationsInput>;
-  role?: Maybe<Role>;
+  role?: Maybe<EnumRoleFieldUpdateOperationsInput>;
   updatedAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
   verified?: Maybe<NullableBoolFieldUpdateOperationsInput>;
   year?: Maybe<NullableIntFieldUpdateOperationsInput>;
@@ -3741,14 +3802,14 @@ export type UserUpdateWithoutAttachmentsDataInput = {
   createdAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
   email?: Maybe<NullableStringFieldUpdateOperationsInput>;
   emailVerified?: Maybe<NullableDateTimeFieldUpdateOperationsInput>;
-  gender?: Maybe<Gender>;
+  gender?: Maybe<NullableEnumGenderFieldUpdateOperationsInput>;
   id?: Maybe<StringFieldUpdateOperationsInput>;
   image?: Maybe<NullableStringFieldUpdateOperationsInput>;
   lastname?: Maybe<NullableStringFieldUpdateOperationsInput>;
   name?: Maybe<NullableStringFieldUpdateOperationsInput>;
   password?: Maybe<NullableStringFieldUpdateOperationsInput>;
   reactions?: Maybe<ReactionUpdateManyWithoutUserInput>;
-  role?: Maybe<Role>;
+  role?: Maybe<EnumRoleFieldUpdateOperationsInput>;
   school?: Maybe<SchoolUpdateOneWithoutMembersInput>;
   teaches?: Maybe<TeamUpdateManyWithoutTeacherInput>;
   team?: Maybe<TeamUpdateOneWithoutUserInput>;
@@ -3766,14 +3827,14 @@ export type UserUpdateWithoutBallotsDataInput = {
   createdAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
   email?: Maybe<NullableStringFieldUpdateOperationsInput>;
   emailVerified?: Maybe<NullableDateTimeFieldUpdateOperationsInput>;
-  gender?: Maybe<Gender>;
+  gender?: Maybe<NullableEnumGenderFieldUpdateOperationsInput>;
   id?: Maybe<StringFieldUpdateOperationsInput>;
   image?: Maybe<NullableStringFieldUpdateOperationsInput>;
   lastname?: Maybe<NullableStringFieldUpdateOperationsInput>;
   name?: Maybe<NullableStringFieldUpdateOperationsInput>;
   password?: Maybe<NullableStringFieldUpdateOperationsInput>;
   reactions?: Maybe<ReactionUpdateManyWithoutUserInput>;
-  role?: Maybe<Role>;
+  role?: Maybe<EnumRoleFieldUpdateOperationsInput>;
   school?: Maybe<SchoolUpdateOneWithoutMembersInput>;
   teaches?: Maybe<TeamUpdateManyWithoutTeacherInput>;
   team?: Maybe<TeamUpdateOneWithoutUserInput>;
@@ -3792,13 +3853,13 @@ export type UserUpdateWithoutReactionsDataInput = {
   createdAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
   email?: Maybe<NullableStringFieldUpdateOperationsInput>;
   emailVerified?: Maybe<NullableDateTimeFieldUpdateOperationsInput>;
-  gender?: Maybe<Gender>;
+  gender?: Maybe<NullableEnumGenderFieldUpdateOperationsInput>;
   id?: Maybe<StringFieldUpdateOperationsInput>;
   image?: Maybe<NullableStringFieldUpdateOperationsInput>;
   lastname?: Maybe<NullableStringFieldUpdateOperationsInput>;
   name?: Maybe<NullableStringFieldUpdateOperationsInput>;
   password?: Maybe<NullableStringFieldUpdateOperationsInput>;
-  role?: Maybe<Role>;
+  role?: Maybe<EnumRoleFieldUpdateOperationsInput>;
   school?: Maybe<SchoolUpdateOneWithoutMembersInput>;
   teaches?: Maybe<TeamUpdateManyWithoutTeacherInput>;
   team?: Maybe<TeamUpdateOneWithoutUserInput>;
@@ -3817,14 +3878,14 @@ export type UserUpdateWithoutSchoolDataInput = {
   createdAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
   email?: Maybe<NullableStringFieldUpdateOperationsInput>;
   emailVerified?: Maybe<NullableDateTimeFieldUpdateOperationsInput>;
-  gender?: Maybe<Gender>;
+  gender?: Maybe<NullableEnumGenderFieldUpdateOperationsInput>;
   id?: Maybe<StringFieldUpdateOperationsInput>;
   image?: Maybe<NullableStringFieldUpdateOperationsInput>;
   lastname?: Maybe<NullableStringFieldUpdateOperationsInput>;
   name?: Maybe<NullableStringFieldUpdateOperationsInput>;
   password?: Maybe<NullableStringFieldUpdateOperationsInput>;
   reactions?: Maybe<ReactionUpdateManyWithoutUserInput>;
-  role?: Maybe<Role>;
+  role?: Maybe<EnumRoleFieldUpdateOperationsInput>;
   teaches?: Maybe<TeamUpdateManyWithoutTeacherInput>;
   team?: Maybe<TeamUpdateOneWithoutUserInput>;
   Team?: Maybe<TeamUpdateOneWithoutMembersInput>;
@@ -3842,14 +3903,14 @@ export type UserUpdateWithoutTeachesDataInput = {
   createdAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
   email?: Maybe<NullableStringFieldUpdateOperationsInput>;
   emailVerified?: Maybe<NullableDateTimeFieldUpdateOperationsInput>;
-  gender?: Maybe<Gender>;
+  gender?: Maybe<NullableEnumGenderFieldUpdateOperationsInput>;
   id?: Maybe<StringFieldUpdateOperationsInput>;
   image?: Maybe<NullableStringFieldUpdateOperationsInput>;
   lastname?: Maybe<NullableStringFieldUpdateOperationsInput>;
   name?: Maybe<NullableStringFieldUpdateOperationsInput>;
   password?: Maybe<NullableStringFieldUpdateOperationsInput>;
   reactions?: Maybe<ReactionUpdateManyWithoutUserInput>;
-  role?: Maybe<Role>;
+  role?: Maybe<EnumRoleFieldUpdateOperationsInput>;
   school?: Maybe<SchoolUpdateOneWithoutMembersInput>;
   team?: Maybe<TeamUpdateOneWithoutUserInput>;
   Team?: Maybe<TeamUpdateOneWithoutMembersInput>;
@@ -3867,14 +3928,14 @@ export type UserUpdateWithoutTeamDataInput = {
   createdAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
   email?: Maybe<NullableStringFieldUpdateOperationsInput>;
   emailVerified?: Maybe<NullableDateTimeFieldUpdateOperationsInput>;
-  gender?: Maybe<Gender>;
+  gender?: Maybe<NullableEnumGenderFieldUpdateOperationsInput>;
   id?: Maybe<StringFieldUpdateOperationsInput>;
   image?: Maybe<NullableStringFieldUpdateOperationsInput>;
   lastname?: Maybe<NullableStringFieldUpdateOperationsInput>;
   name?: Maybe<NullableStringFieldUpdateOperationsInput>;
   password?: Maybe<NullableStringFieldUpdateOperationsInput>;
   reactions?: Maybe<ReactionUpdateManyWithoutUserInput>;
-  role?: Maybe<Role>;
+  role?: Maybe<EnumRoleFieldUpdateOperationsInput>;
   school?: Maybe<SchoolUpdateOneWithoutMembersInput>;
   teaches?: Maybe<TeamUpdateManyWithoutTeacherInput>;
   team?: Maybe<TeamUpdateOneWithoutUserInput>;
@@ -3892,14 +3953,14 @@ export type UserUpdateWithoutThreadsDataInput = {
   createdAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
   email?: Maybe<NullableStringFieldUpdateOperationsInput>;
   emailVerified?: Maybe<NullableDateTimeFieldUpdateOperationsInput>;
-  gender?: Maybe<Gender>;
+  gender?: Maybe<NullableEnumGenderFieldUpdateOperationsInput>;
   id?: Maybe<StringFieldUpdateOperationsInput>;
   image?: Maybe<NullableStringFieldUpdateOperationsInput>;
   lastname?: Maybe<NullableStringFieldUpdateOperationsInput>;
   name?: Maybe<NullableStringFieldUpdateOperationsInput>;
   password?: Maybe<NullableStringFieldUpdateOperationsInput>;
   reactions?: Maybe<ReactionUpdateManyWithoutUserInput>;
-  role?: Maybe<Role>;
+  role?: Maybe<EnumRoleFieldUpdateOperationsInput>;
   school?: Maybe<SchoolUpdateOneWithoutMembersInput>;
   teaches?: Maybe<TeamUpdateManyWithoutTeacherInput>;
   team?: Maybe<TeamUpdateOneWithoutUserInput>;
@@ -3917,14 +3978,14 @@ export type UserUpdateWithoutVotedDataInput = {
   createdAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
   email?: Maybe<NullableStringFieldUpdateOperationsInput>;
   emailVerified?: Maybe<NullableDateTimeFieldUpdateOperationsInput>;
-  gender?: Maybe<Gender>;
+  gender?: Maybe<NullableEnumGenderFieldUpdateOperationsInput>;
   id?: Maybe<StringFieldUpdateOperationsInput>;
   image?: Maybe<NullableStringFieldUpdateOperationsInput>;
   lastname?: Maybe<NullableStringFieldUpdateOperationsInput>;
   name?: Maybe<NullableStringFieldUpdateOperationsInput>;
   password?: Maybe<NullableStringFieldUpdateOperationsInput>;
   reactions?: Maybe<ReactionUpdateManyWithoutUserInput>;
-  role?: Maybe<Role>;
+  role?: Maybe<EnumRoleFieldUpdateOperationsInput>;
   school?: Maybe<SchoolUpdateOneWithoutMembersInput>;
   teaches?: Maybe<TeamUpdateManyWithoutTeacherInput>;
   team?: Maybe<TeamUpdateOneWithoutUserInput>;
@@ -3995,7 +4056,7 @@ export type UserWhereInput = {
   createdAt?: Maybe<DateTimeFilter>;
   email?: Maybe<StringNullableFilter>;
   emailVerified?: Maybe<DateTimeNullableFilter>;
-  gender?: Maybe<Gender>;
+  gender?: Maybe<EnumGenderNullableFilter>;
   id?: Maybe<StringFilter>;
   image?: Maybe<StringNullableFilter>;
   lastname?: Maybe<StringNullableFilter>;
@@ -4004,7 +4065,7 @@ export type UserWhereInput = {
   OR?: Maybe<Array<UserWhereInput>>;
   password?: Maybe<StringNullableFilter>;
   reactions?: Maybe<ReactionListRelationFilter>;
-  role?: Maybe<Role>;
+  role?: Maybe<EnumRoleFilter>;
   school?: Maybe<SchoolWhereInput>;
   schoolId?: Maybe<StringNullableFilter>;
   teaches?: Maybe<TeamListRelationFilter>;
@@ -4569,10 +4630,10 @@ export type GetBallotRunsQueryVariables = Exact<{
 
 export type GetBallotRunsQuery = (
   { __typename?: 'Query' }
-  & { getBallotRuns?: Maybe<Array<(
+  & { getBallotRuns?: Maybe<Array<Maybe<(
     { __typename?: 'BallotRun' }
     & BallotRunFieldsFragment
-  )>> }
+  )>>> }
 );
 
 export type AddBallotRunMutationVariables = Exact<{
@@ -5218,7 +5279,7 @@ export const BallotDocument = gql`
  *   },
  * });
  */
-export function useBallotQuery(baseOptions?: Apollo.QueryHookOptions<BallotQuery, BallotQueryVariables>) {
+export function useBallotQuery(baseOptions: Apollo.QueryHookOptions<BallotQuery, BallotQueryVariables>) {
         return Apollo.useQuery<BallotQuery, BallotQueryVariables>(BallotDocument, baseOptions);
       }
 export function useBallotLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<BallotQuery, BallotQueryVariables>) {
@@ -5251,7 +5312,7 @@ export const GetBallotRunsDocument = gql`
  *   },
  * });
  */
-export function useGetBallotRunsQuery(baseOptions?: Apollo.QueryHookOptions<GetBallotRunsQuery, GetBallotRunsQueryVariables>) {
+export function useGetBallotRunsQuery(baseOptions: Apollo.QueryHookOptions<GetBallotRunsQuery, GetBallotRunsQueryVariables>) {
         return Apollo.useQuery<GetBallotRunsQuery, GetBallotRunsQueryVariables>(GetBallotRunsDocument, baseOptions);
       }
 export function useGetBallotRunsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetBallotRunsQuery, GetBallotRunsQueryVariables>) {
@@ -5502,7 +5563,7 @@ export const GetBallotResultsDocument = gql`
  *   },
  * });
  */
-export function useGetBallotResultsQuery(baseOptions?: Apollo.QueryHookOptions<GetBallotResultsQuery, GetBallotResultsQueryVariables>) {
+export function useGetBallotResultsQuery(baseOptions: Apollo.QueryHookOptions<GetBallotResultsQuery, GetBallotResultsQueryVariables>) {
         return Apollo.useQuery<GetBallotResultsQuery, GetBallotResultsQueryVariables>(GetBallotResultsDocument, baseOptions);
       }
 export function useGetBallotResultsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetBallotResultsQuery, GetBallotResultsQueryVariables>) {
@@ -5750,7 +5811,7 @@ export const TeamUserDocument = gql`
  *   },
  * });
  */
-export function useTeamUserQuery(baseOptions?: Apollo.QueryHookOptions<TeamUserQuery, TeamUserQueryVariables>) {
+export function useTeamUserQuery(baseOptions: Apollo.QueryHookOptions<TeamUserQuery, TeamUserQueryVariables>) {
         return Apollo.useQuery<TeamUserQuery, TeamUserQueryVariables>(TeamUserDocument, baseOptions);
       }
 export function useTeamUserLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<TeamUserQuery, TeamUserQueryVariables>) {
@@ -5783,7 +5844,7 @@ export const TeamTeacherDocument = gql`
  *   },
  * });
  */
-export function useTeamTeacherQuery(baseOptions?: Apollo.QueryHookOptions<TeamTeacherQuery, TeamTeacherQueryVariables>) {
+export function useTeamTeacherQuery(baseOptions: Apollo.QueryHookOptions<TeamTeacherQuery, TeamTeacherQueryVariables>) {
         return Apollo.useQuery<TeamTeacherQuery, TeamTeacherQueryVariables>(TeamTeacherDocument, baseOptions);
       }
 export function useTeamTeacherLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<TeamTeacherQuery, TeamTeacherQueryVariables>) {
@@ -5816,7 +5877,7 @@ export const TeamByInviteDocument = gql`
  *   },
  * });
  */
-export function useTeamByInviteQuery(baseOptions?: Apollo.QueryHookOptions<TeamByInviteQuery, TeamByInviteQueryVariables>) {
+export function useTeamByInviteQuery(baseOptions: Apollo.QueryHookOptions<TeamByInviteQuery, TeamByInviteQueryVariables>) {
         return Apollo.useQuery<TeamByInviteQuery, TeamByInviteQueryVariables>(TeamByInviteDocument, baseOptions);
       }
 export function useTeamByInviteLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<TeamByInviteQuery, TeamByInviteQueryVariables>) {
@@ -5849,7 +5910,7 @@ export const TeamByCodeDocument = gql`
  *   },
  * });
  */
-export function useTeamByCodeQuery(baseOptions?: Apollo.QueryHookOptions<TeamByCodeQuery, TeamByCodeQueryVariables>) {
+export function useTeamByCodeQuery(baseOptions: Apollo.QueryHookOptions<TeamByCodeQuery, TeamByCodeQueryVariables>) {
         return Apollo.useQuery<TeamByCodeQuery, TeamByCodeQueryVariables>(TeamByCodeDocument, baseOptions);
       }
 export function useTeamByCodeLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<TeamByCodeQuery, TeamByCodeQueryVariables>) {
@@ -6299,3 +6360,22 @@ export function useCreateUserMutation(baseOptions?: Apollo.MutationHookOptions<C
 export type CreateUserMutationHookResult = ReturnType<typeof useCreateUserMutation>;
 export type CreateUserMutationResult = Apollo.MutationResult<CreateUserMutation>;
 export type CreateUserMutationOptions = Apollo.BaseMutationOptions<CreateUserMutation, CreateUserMutationVariables>;
+
+      export interface IntrospectionResultData {
+        __schema: {
+          types: {
+            kind: string;
+            name: string;
+            possibleTypes: {
+              name: string;
+            }[];
+          }[];
+        };
+      }
+      const result: IntrospectionResultData = {
+  "__schema": {
+    "types": []
+  }
+};
+      export default result;
+    

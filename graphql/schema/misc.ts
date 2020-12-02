@@ -1,7 +1,14 @@
 // @ts-nocheck
-import { objectType, queryType, mutationType } from "@nexus/schema";
+import {
+  objectType,
+  queryType,
+  mutationType,
+  stringArg,
+  intArg,
+} from "@nexus/schema";
 import { randomBytes } from "crypto";
 import { random } from "lodash";
+import resolvers from "../resolvers";
 
 export const School = objectType({
   name: "School",

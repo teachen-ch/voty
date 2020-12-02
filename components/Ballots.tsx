@@ -12,6 +12,7 @@ import {
   BallotResults,
   BallotQuery,
   GetBallotResultsQuery,
+  BallotScope,
 } from "graphql/types";
 import { formatFromTo, formatDate } from "../util/date";
 import { useRouter } from "next/router";
@@ -164,16 +165,6 @@ export const GET_BALLOT_RESULTS = gql`
   }
 `;
 
-// TODO: have to redefine enum here, otherwise hiting this issue
-// https://github.com/prisma/prisma/issues/3252
-export enum BallotScope {
-  Public = "Public",
-  National = "National",
-  Cantonal = "Cantonal",
-  School = "School",
-  Team = "Team",
-}
-
 type BallotsProps = {
   where?: BallotWhereInput;
   onClick: (ballot: BallotFieldsFragment) => void;
@@ -276,7 +267,7 @@ export const SelectBallots: React.FC<{ team: TeamTeacherFieldsFragment }> = ({
   const ballotRuns = ballotRunsQuery.data?.getBallotRuns;
 
   const ballotsQuery = useBallotsQuery({
-    variables: { where: { scope: BallotScope.National } },
+    variables: { where: { scope: { equals: BallotScope.National } } },
   });
 
   const ballots = ballotsQuery.data?.ballots;

@@ -2,7 +2,6 @@ import { createLogger, transports, format, Logger } from "winston";
 import WinstonMail from "winston-mail";
 import { format as uformat } from "util";
 
-/*
 const env = process.env.NODE_ENV;
 const prod = env === "production";
 
@@ -112,6 +111,3 @@ const votyLogger = {
   debug: logLevel("debug"),
 };
 export default votyLogger;
-*/
-const logger = console;
-export default logger;

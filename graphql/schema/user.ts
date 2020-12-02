@@ -6,18 +6,14 @@ export const User = objectType({
   name: "User",
   definition(t) {
     t.model.id();
-    t.string("email", {
-      nullable: true,
-      resolve({ email }) {
-        return email;
-      },
-    });
+    t.model.email();
     t.model.name();
     t.model.lastname();
-    t.string("shortname", {
-      resolve({ name, lastname }) {
-        if (!lastname) return name;
-        return `${name} ${upperFirst(lastname).substr(0, 1)}.`;
+    t.field("shortname", {
+      type: "String",
+      resolve(_root) {
+        if (!_root.lastname) return _root.name;
+        return `${_root.name} ${upperFirst(_root.lastname).substr(0, 1)}.`;
       },
     });
     t.model.gender();
@@ -74,8 +70,8 @@ export const UserMutation = extendType({
     t.field("login", {
       type: "ResponseLogin",
       args: {
-        email: stringArg(),
-        password: stringArg(),
+        email: stringArg({ required: true }),
+        password: stringArg({ required: true }),
       },
       resolve: users.login,
     });
@@ -109,14 +105,14 @@ export const UserMutation = extendType({
         lastname: stringArg(),
         email: stringArg(),
         password: stringArg(),
-        invite: stringArg(),
+        invite: stringArg({ required: true }),
       },
       resolve: users.createInvitedUser,
     });
     t.field("acceptInvite", {
       type: "Team",
       args: {
-        invite: stringArg(),
+        invite: stringArg({ required: true }),
       },
       resolve: users.acceptInvite,
     });

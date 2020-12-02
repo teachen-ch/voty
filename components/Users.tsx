@@ -150,7 +150,7 @@ export const ProfileEdit: React.FC<{
           name: { set: values.name },
           lastname: { set: values.lastname },
           year: { set: parseInt(String(values.year)) },
-          gender: values.gender,
+          gender: { set: values.gender },
         },
       },
     });

@@ -45,9 +45,11 @@ export default function PanelBallots(): ReactElement {
   return (
     <LoggedInPage role={Role.Teacher} heading="Jetzt abstimmen">
       {ballotRuns?.length
-        ? ballotRuns.map((ballotRun) => (
-            <BallotRunListing key={ballotRun.id} ballotRun={ballotRun} />
-          ))
+        ? ballotRuns.map((ballotRun) =>
+            ballotRun ? (
+              <BallotRunListing key={ballotRun.id} ballotRun={ballotRun} />
+            ) : null
+          )
         : "Keine Abstimmungen wurden ausgewählt."}
     </LoggedInPage>
   );

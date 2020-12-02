@@ -1,4 +1,3 @@
-// @ts-nocheck
 import jwt from "jsonwebtoken";
 import { PrismaClient, User, Team, Role } from "@prisma/client";
 import bcrypt from "bcrypt";
@@ -6,9 +5,11 @@ import { sendMail } from "../../util/email";
 import { randomBytes, createHash } from "crypto";
 import logger from "../../util/logger";
 import { Context } from "../context";
+import { FieldResolver } from "@nexus/schema";
+import { NextApiRequest } from "next";
 
 let secret = process.env.SESSION_SECRET || "";
-if (!secret) throw new Error("No SESSION_SECRET defined in .env");
+if (!secret) console.error("No SESSION_SECRET defined in .env");
 const expires = process.env.SESSION_EXPIRES || "1d";
 
 if (!secret) {
@@ -22,7 +23,7 @@ type ResponseLogin = {
   user?: User;
 };
 
-export const login = async (
+export const login: FieldResolver<"Mutation", "login"> = async (
   _root,
   args,
   ctx: Context
@@ -68,7 +69,11 @@ export function getRequestUser(ctx: Context): User | undefined {
   return ctx.user;
 }
 
-export const createUser = async (_root, args, ctx: Context) => {
+export const createUser: FieldResolver<"Mutation", "createUser"> = async (
+  _root,
+  args,
+  ctx: Context
+) => {
   try {
     const { email, password, name, lastname, role } = args.data;
     if (!email) throw new Error("Error.NoEmail");
@@ -109,7 +114,7 @@ export const createUser = async (_root, args, ctx: Context) => {
   }
 };
 
-export const acceptInvite = async (
+export const acceptInvite: FieldResolver<"Mutation", "acceptInvite"> = async (
   _root,
   args,
   ctx: Context
@@ -139,7 +144,10 @@ export async function connectUserTeam(
 }
 
 // @ts-ignore: struggling with return type
-export const createInvitedUser = async (_root, args, ctx, info) => {
+export const createInvitedUser: FieldResolver<
+  "Mutation",
+  "createInvitedUser"
+> = async (_root, args, ctx, info) => {
   const team = await ctx.db.team.findOne({ where: { invite: args.invite } });
   if (!team) throw new Error("INVITE_NOT_FOUND");
   const { name, lastname, email, password } = args;
@@ -158,7 +166,11 @@ export const createInvitedUser = async (_root, args, ctx, info) => {
   return user;
 };
 
-export const updateUser = async (_root, args, ctx: Context) => {
+export const updateUser: FieldResolver<"Mutation", "updateUser"> = async (
+  _root,
+  args,
+  ctx: Context
+) => {
   // TODO: ensure this is not called with variable args by user
   const user = getRequestUser(ctx);
   const id = args.where.id;
@@ -174,7 +186,12 @@ export const updateUser = async (_root, args, ctx: Context) => {
   return result;
 };
 
-export const setSchool = async (_root, args, ctx, info) => {
+export const setSchool: FieldResolver<"Mutation", "setSchool"> = async (
+  _root,
+  args,
+  ctx,
+  info
+) => {
   const user = getRequestUser(ctx);
   const updated = await updateUser(
     _root,
@@ -188,12 +205,12 @@ export const setSchool = async (_root, args, ctx, info) => {
   return updated;
 };
 
-export function getSessionUser(req: Request): User | undefined {
+export function getSessionUser(req: NextApiRequest): User | undefined {
   // what about req.body.token || req.query.token ?
   // const token = req.headers.get("x-access-token");
   // @ts-ignore
   // eslint-disable-next-line
-  const token = req.headers["x-access-token"];
+  const token = String(req.headers["x-access-token"]);
 
   if (token && token != "null") {
     const jwt = verifyJWT(token);
@@ -290,11 +307,10 @@ async function createVerificationToken(
   return token;
 }
 
-export const checkVerification = async (
-  _root,
-  args,
-  ctx
-): Promise<ResponseLogin> => {
+export const checkVerification: FieldResolver<
+  "Mutation",
+  "checkVerification"
+> = async (_root, args, ctx): Promise<ResponseLogin> => {
   if (!args.token) throw new Error("Error.NoToken");
   const found = await verifyToken(args.token, ctx.db);
   if (!found) {
@@ -313,11 +329,10 @@ export const checkVerification = async (
   return startJWTSession(user, ctx);
 };
 
-export const changePassword = async (
-  _root,
-  args,
-  ctx
-): Promise<ResponseLogin> => {
+export const changePassword: FieldResolver<
+  "Mutation",
+  "changePassword"
+> = async (_root, args, ctx): Promise<ResponseLogin> => {
   const user = await getUser(ctx);
   if (!user) throw new Error("Error.UserNotFound");
   const salt = await bcrypt.genSalt(10);
@@ -353,7 +368,11 @@ async function deleteExpiredTokens(prisma: PrismaClient) {
   });
 }
 
-export const deleteAccount = async (_root, args, ctx: Context) => {
+export const deleteAccount: FieldResolver<"Mutation", "deleteAccount"> = async (
+  _root,
+  args,
+  ctx: Context
+) => {
   try {
     const user = await getUser(ctx);
     if (!user) throw new Error("Error.NeedsLogin");

@@ -1,7 +1,7 @@
 import { LoggedInPage } from "components/Page";
 import { Heading } from "rebass";
-import { Ballots, BallotScope } from "components/Ballots";
-import { BallotFieldsFragment } from "graphql/types";
+import { Ballots } from "components/Ballots";
+import { BallotFieldsFragment, BallotScope } from "graphql/types";
 import { useRouter } from "next/router";
 import { ReactElement } from "react";
 
@@ -15,7 +15,10 @@ export default function TeacherTest(): ReactElement {
   return (
     <LoggedInPage heading="Aktuelle Abstimmungen">
       <Heading as="h2">Nationale Abstimmungen</Heading>
-      <Ballots where={{ scope: BallotScope.National }} onClick={selectBallot} />
+      <Ballots
+        where={{ scope: { equals: BallotScope.National } }}
+        onClick={selectBallot}
+      />
     </LoggedInPage>
   );
 }

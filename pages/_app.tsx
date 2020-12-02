@@ -24,6 +24,7 @@ function MyApp({ Component, pageProps }: AppProps): ReactElement {
     <div className="container">
       <ApolloProvider client={apollo}>
         <RecoilRoot>
+          {/* @ts-ignore */}
           <ThemeProvider theme={theme}>
             <MDXProvider components={{ wrapper: MDXWrapper }}>
               <CheckLogin />

@@ -36,7 +36,7 @@ export default function TeacherTest(): ReactElement {
   const ballotRuns = ballotRunsQuery.data?.getBallotRuns;
 
   const ballotsQuery = useBallotsQuery({
-    variables: { where: { scope: BallotScope.National } },
+    variables: { where: { scope: { equals: BallotScope.National } } },
   });
 
   const ballots = ballotsQuery.data?.ballots;
@@ -79,15 +79,17 @@ export default function TeacherTest(): ReactElement {
       <Heading as="h2">Diese Abstimmungen wurden ausgewählt:</Heading>
       <div id="selectedBallots">
         {ballotRuns?.length
-          ? ballotRuns.map((run) => (
-              <Ballot
-                key={run.id}
-                ballot={run.ballot}
-                buttonText="Entfernen"
-                onButton={() => removeBallot(run.id)}
-                onDetail={detailBallot}
-              />
-            ))
+          ? ballotRuns.map((run) =>
+              run ? (
+                <Ballot
+                  key={run.id}
+                  ballot={run.ballot}
+                  buttonText="Entfernen"
+                  onButton={() => removeBallot(run.id)}
+                  onDetail={detailBallot}
+                />
+              ) : null
+            )
           : "Noch keine Abstimmungen ausgewählt."}
       </div>
       <Heading as="h2">Aktuelle Abstimmungen zur Auswahl:</Heading>

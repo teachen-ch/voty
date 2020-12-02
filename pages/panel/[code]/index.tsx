@@ -47,18 +47,20 @@ export default function PanelBallots(): ReactElement {
   return (
     <Page heading="Jetzt abstimmen">
       {ballotRuns?.length
-        ? ballotRuns.map((ballotRun) => (
-            <>
-              <Ballot key={ballotRun.id} ballot={ballotRun.ballot} />
+        ? ballotRuns.map((ballotRun) =>
+            ballotRun ? (
+              <>
+                <Ballot key={ballotRun.id} ballot={ballotRun.ballot} />
 
-              <VoteCode
-                ballotRun={ballotRun}
-                refetch={refetch}
-                code={code}
-                voted={cookie[ballotRun.id] ? true : false}
-              />
-            </>
-          ))
+                <VoteCode
+                  ballotRun={ballotRun}
+                  refetch={refetch}
+                  code={code}
+                  voted={cookie[ballotRun.id] ? true : false}
+                />
+              </>
+            ) : null
+          )
         : "Keine Abstimmungen gefunden."}
     </Page>
   );

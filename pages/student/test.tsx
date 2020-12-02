@@ -44,15 +44,17 @@ const ShowBallots: React.FC<{ user: SessionUser }> = ({ user }) => {
   return (
     <Box id="ballots">
       {ballotRuns?.length ? (
-        ballotRuns.map((run) => (
-          <Ballot
-            key={run.id}
-            ballot={run.ballot}
-            buttonText="Informieren und abstimmen"
-            onButton={detailBallot}
-            onDetail={detailBallot}
-          />
-        ))
+        ballotRuns.map((run) =>
+          run ? (
+            <Ballot
+              key={run.id}
+              ballot={run.ballot}
+              buttonText="Informieren und abstimmen"
+              onButton={detailBallot}
+              onDetail={detailBallot}
+            />
+          ) : null
+        )
       ) : (
         <AllBallots onClick={detailBallot} />
       )}
@@ -62,5 +64,10 @@ const ShowBallots: React.FC<{ user: SessionUser }> = ({ user }) => {
 const AllBallots: React.FC<{
   onClick: (ballot: BallotFieldsFragment) => void;
 }> = ({ onClick }) => {
-  return <Ballots where={{ scope: BallotScope.National }} onClick={onClick} />;
+  return (
+    <Ballots
+      where={{ scope: { equals: BallotScope.National } }}
+      onClick={onClick}
+    />
+  );
 };
