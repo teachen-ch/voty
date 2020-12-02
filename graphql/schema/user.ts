@@ -19,6 +19,7 @@ export const User = objectType({
     t.model.gender();
     t.model.year();
     t.model.emailVerified();
+    t.model.createdAt();
     t.model.image();
     t.model.role();
     t.model.school();
@@ -66,6 +67,10 @@ export const UserMutation = extendType({
     t.crud.updateOneUser({
       alias: "updateUser",
       resolve: users.updateUser,
+    });
+    t.crud.deleteOneUser({
+      alias: "deleteUser",
+      resolve: users.deleteUser,
     });
     t.field("login", {
       type: "ResponseLogin",

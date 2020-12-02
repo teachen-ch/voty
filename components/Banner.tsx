@@ -1,11 +1,12 @@
 // import { motion, useViewportScroll, useTransform } from "framer-motion";
-import { Link, Text } from "rebass";
+import { Text, Link } from "rebass";
 
 type BannerProps = {
-  href: string;
+  href?: string;
+  onClick?: () => void;
   children: React.ReactNode;
 };
-export const Banner: React.FC<BannerProps> = ({ href, children }) => {
+export const Banner: React.FC<BannerProps> = ({ href, onClick, children }) => {
   /*const { scrollYProgress } = useViewportScroll();
   const opacity = useTransform(
     scrollYProgress,
@@ -40,8 +41,13 @@ export const Banner: React.FC<BannerProps> = ({ href, children }) => {
             "0 -2px 10px 0 #333",
             "0 2px 10px 0 #333",
           ],
+          ":hover": {
+            textDecoration: "none",
+            transform: "scale(2) translate(100px, 0px)",
+          },
         }}
         href={href}
+        onClick={onClick}
       >
         <Text textAlign="center" fontWeight="bold" fontSize="17px">
           {children}

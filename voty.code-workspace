@@ -12,7 +12,8 @@
     },
     "cSpell.words": [
       "ansible",
-      "docker"
+      "docker",
+      "voty"
     ],
     "files.exclude": {
       ".git/": true,

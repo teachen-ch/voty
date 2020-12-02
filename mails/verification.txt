@@ -1,0 +1,8 @@
+Willkommen bei voty!
+
+Um Dein neues Konto zu eröffnen und Deine Email-Adresse zu bestätigen, kannst Du auf diesen Link klicken:
+
+{{&url}}
+
+
+Wenn Du Dich nicht bei voty registrieren wolltest, kannst Du dieses Mail löschen.

@@ -68,13 +68,10 @@ export const TopBar: React.FC<{ hideLogo?: boolean }> = (props) => {
 const RegisterLogin: React.FC = () => {
   return (
     <Flex alignItems="center">
-      <Link href="/user/signup">
+      <Link href="/projekt">
         <A>
           <Flex alignItems="center">
-            <IconRegister />
-            <Text ml={2} mr={4}>
-              Registrieren
-            </Text>
+            <Text mr={4}>Über das Projekt voty.ch</Text>
           </Flex>
         </A>
       </Link>
@@ -163,7 +160,7 @@ const MobileBurger: React.FC<{ user: SessionUser }> = ({ user }) => {
   const burgerIcon = {
     width: "1.2em",
     verticalAlign: "sub",
-    marginRight: "20px",
+    marginRight: "17px",
   };
   const isTeacher = user?.role === Role.Teacher;
   return (
@@ -202,7 +199,7 @@ const MobileBurger: React.FC<{ user: SessionUser }> = ({ user }) => {
                 </Box>
               </A>
             </Text>
-            <Text px={4} lineHeight="55px" fontWeight="semi">
+            <Text pl={4} lineHeight="55px" fontWeight="semi">
               <Link href="/">
                 <A>
                   <IconHome style={burgerIcon} />
@@ -219,13 +216,14 @@ const MobileBurger: React.FC<{ user: SessionUser }> = ({ user }) => {
                     </A>
                   </Link>
                   <br />
+                  {/*
                   <Link href="/user/signup">
                     <A>
                       <IconRegister style={burgerIcon} />
                       Registrieren
                     </A>
                   </Link>
-                  <br />
+                  <br />*/}
                 </nav>
               ) : (
                 <nav>
@@ -245,7 +243,7 @@ const MobileBurger: React.FC<{ user: SessionUser }> = ({ user }) => {
                   <Link href="/user/profile">
                     <A>
                       <IconAccount style={burgerIcon} />
-                      Deine Daten
+                      Mein Profil
                     </A>
                   </Link>
                   <br />

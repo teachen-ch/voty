@@ -1262,10 +1262,12 @@ export type Mutation = {
   deleteAccount?: Maybe<Response>;
   deleteOneSchool?: Maybe<School>;
   deleteOneTeam?: Maybe<Team>;
+  deleteUser?: Maybe<User>;
   emailVerification?: Maybe<ResponseLogin>;
   endBallotRun?: Maybe<BallotRun>;
   inviteStudents?: Maybe<InviteResponse>;
   login?: Maybe<ResponseLogin>;
+  postThread?: Maybe<Thread>;
   removeBallotRun?: Maybe<Response>;
   setSchool?: Maybe<User>;
   startBallotRun?: Maybe<BallotRun>;
@@ -1298,7 +1300,7 @@ export type MutationCheckVerificationArgs = {
 
 export type MutationCreateInvitedUserArgs = {
   email?: Maybe<Scalars['String']>;
-  invite?: Maybe<Scalars['String']>;
+  invite: Scalars['String'];
   lastname?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
   password?: Maybe<Scalars['String']>;
@@ -1330,6 +1332,11 @@ export type MutationDeleteOneTeamArgs = {
 };
 
 
+export type MutationDeleteUserArgs = {
+  where: UserWhereUniqueInput;
+};
+
+
 export type MutationEmailVerificationArgs = {
   email: Scalars['String'];
   purpose: Scalars['String'];
@@ -1350,6 +1357,14 @@ export type MutationInviteStudentsArgs = {
 export type MutationLoginArgs = {
   email: Scalars['String'];
   password: Scalars['String'];
+};
+
+
+export type MutationPostThreadArgs = {
+  ref: Scalars['String'];
+  teamId: Scalars['String'];
+  text: Scalars['String'];
+  title: Scalars['String'];
 };
 
 
@@ -1601,6 +1616,7 @@ export type Query = {
   ballots: Array<Ballot>;
   getBallotResults?: Maybe<BallotResults>;
   getBallotRuns?: Maybe<Array<Maybe<BallotRun>>>;
+  getTeamThreads?: Maybe<Array<Maybe<Thread>>>;
   me?: Maybe<User>;
   school?: Maybe<School>;
   schools: Array<School>;
@@ -1637,6 +1653,12 @@ export type QueryGetBallotResultsArgs = {
 
 export type QueryGetBallotRunsArgs = {
   teamId: Scalars['String'];
+};
+
+
+export type QueryGetTeamThreadsArgs = {
+  ref: Scalars['String'];
+  teamId?: Maybe<Scalars['String']>;
 };
 
 
@@ -2309,6 +2331,23 @@ export type StringNullableFilter = {
   startsWith?: Maybe<Scalars['String']>;
 };
 
+export type Swissvote = {
+  __typename?: 'Swissvote';
+  annahme?: Maybe<Scalars['Int']>;
+  anr?: Maybe<Scalars['Int']>;
+  datum?: Maybe<Scalars['String']>;
+  kategorien?: Maybe<Scalars['String']>;
+  poster_ja?: Maybe<Scalars['String']>;
+  poster_nein?: Maybe<Scalars['String']>;
+  rechtsform?: Maybe<Scalars['Int']>;
+  stand?: Maybe<Scalars['Int']>;
+  stichwort?: Maybe<Scalars['String']>;
+  swissvoteslink?: Maybe<Scalars['String']>;
+  titel_kurz_d?: Maybe<Scalars['String']>;
+  titel_off_d?: Maybe<Scalars['String']>;
+  volk?: Maybe<Scalars['Int']>;
+};
+
 export type Team = {
   __typename?: 'Team';
   ballots: Array<Ballot>;
@@ -2913,11 +2952,11 @@ export type TeamWhereUniqueInput = {
 export type Thread = {
   __typename?: 'Thread';
   attachments: Array<Attachment>;
-  children: Array<Thread>;
+  children?: Maybe<Array<Maybe<Thread>>>;
   createdAt: Scalars['DateTime'];
   id: Scalars['String'];
-  parent?: Maybe<Thread>;
   reactions: Array<Reaction>;
+  ref?: Maybe<Scalars['String']>;
   text: Scalars['String'];
   title: Scalars['String'];
   updatedAt: Scalars['DateTime'];
@@ -2928,14 +2967,6 @@ export type Thread = {
 export type ThreadAttachmentsArgs = {
   after?: Maybe<AttachmentWhereUniqueInput>;
   before?: Maybe<AttachmentWhereUniqueInput>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-};
-
-
-export type ThreadChildrenArgs = {
-  after?: Maybe<ThreadWhereUniqueInput>;
-  before?: Maybe<ThreadWhereUniqueInput>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
 };
@@ -3310,6 +3341,7 @@ export type User = {
   __typename?: 'User';
   attachments: Array<Attachment>;
   ballots: Array<Ballot>;
+  createdAt: Scalars['DateTime'];
   email?: Maybe<Scalars['String']>;
   emailVerified?: Maybe<Scalars['DateTime']>;
   gender?: Maybe<Gender>;
@@ -4766,6 +4798,45 @@ export type MeQuery = (
   )> }
 );
 
+export type ThreadFieldsFragment = (
+  { __typename?: 'Thread' }
+  & Pick<Thread, 'id' | 'title' | 'text' | 'ref' | 'createdAt' | 'updatedAt'>
+  & { user: (
+    { __typename?: 'User' }
+    & Pick<User, 'shortname'>
+  ) }
+);
+
+export type GetTeamThreadsQueryVariables = Exact<{
+  ref: Scalars['String'];
+  teamId?: Maybe<Scalars['String']>;
+}>;
+
+
+export type GetTeamThreadsQuery = (
+  { __typename?: 'Query' }
+  & { getTeamThreads?: Maybe<Array<Maybe<(
+    { __typename?: 'Thread' }
+    & ThreadFieldsFragment
+  )>>> }
+);
+
+export type PostThreadMutationVariables = Exact<{
+  ref: Scalars['String'];
+  text: Scalars['String'];
+  title: Scalars['String'];
+  teamId: Scalars['String'];
+}>;
+
+
+export type PostThreadMutation = (
+  { __typename?: 'Mutation' }
+  & { postThread?: Maybe<(
+    { __typename?: 'Thread' }
+    & ThreadFieldsFragment
+  )> }
+);
+
 export type SchoolFieldsFragment = (
   { __typename?: 'School' }
   & Pick<School, 'id' | 'name' | 'type' | 'city' | 'zip' | 'canton'>
@@ -4975,6 +5046,39 @@ export type UpdateUserMutation = (
   )> }
 );
 
+export type DeleteUserMutationVariables = Exact<{
+  where: UserWhereUniqueInput;
+}>;
+
+
+export type DeleteUserMutation = (
+  { __typename?: 'Mutation' }
+  & { deleteUser?: Maybe<(
+    { __typename?: 'User' }
+    & Pick<User, 'id' | 'shortname'>
+  )> }
+);
+
+export type TeachersQueryVariables = Exact<{
+  where?: Maybe<UserWhereInput>;
+}>;
+
+
+export type TeachersQuery = (
+  { __typename?: 'Query' }
+  & { users: Array<(
+    { __typename?: 'User' }
+    & Pick<User, 'id' | 'name' | 'lastname' | 'shortname' | 'email' | 'emailVerified' | 'createdAt'>
+    & { school?: Maybe<(
+      { __typename?: 'School' }
+      & Pick<School, 'id' | 'name' | 'city' | 'zip'>
+    )>, teaches: Array<(
+      { __typename?: 'Team' }
+      & Pick<Team, 'name' | 'id'>
+    )> }
+  )> }
+);
+
 export type CreateInvitedUserMutationVariables = Exact<{
   invite: Scalars['String'];
   name?: Maybe<Scalars['String']>;
@@ -5166,6 +5270,19 @@ export const LoginFieldsFragmentDoc = gql`
       name
       shortname
     }
+  }
+}
+    `;
+export const ThreadFieldsFragmentDoc = gql`
+    fragment ThreadFields on Thread {
+  id
+  title
+  text
+  ref
+  createdAt
+  updatedAt
+  user {
+    shortname
   }
 }
     `;
@@ -5604,6 +5721,75 @@ export function useMeLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<MeQuery
 export type MeQueryHookResult = ReturnType<typeof useMeQuery>;
 export type MeLazyQueryHookResult = ReturnType<typeof useMeLazyQuery>;
 export type MeQueryResult = Apollo.QueryResult<MeQuery, MeQueryVariables>;
+export const GetTeamThreadsDocument = gql`
+    query getTeamThreads($ref: String!, $teamId: String) {
+  getTeamThreads(ref: $ref, teamId: $teamId) {
+    ...ThreadFields
+  }
+}
+    ${ThreadFieldsFragmentDoc}`;
+
+/**
+ * __useGetTeamThreadsQuery__
+ *
+ * To run a query within a React component, call `useGetTeamThreadsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetTeamThreadsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetTeamThreadsQuery({
+ *   variables: {
+ *      ref: // value for 'ref'
+ *      teamId: // value for 'teamId'
+ *   },
+ * });
+ */
+export function useGetTeamThreadsQuery(baseOptions: Apollo.QueryHookOptions<GetTeamThreadsQuery, GetTeamThreadsQueryVariables>) {
+        return Apollo.useQuery<GetTeamThreadsQuery, GetTeamThreadsQueryVariables>(GetTeamThreadsDocument, baseOptions);
+      }
+export function useGetTeamThreadsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetTeamThreadsQuery, GetTeamThreadsQueryVariables>) {
+          return Apollo.useLazyQuery<GetTeamThreadsQuery, GetTeamThreadsQueryVariables>(GetTeamThreadsDocument, baseOptions);
+        }
+export type GetTeamThreadsQueryHookResult = ReturnType<typeof useGetTeamThreadsQuery>;
+export type GetTeamThreadsLazyQueryHookResult = ReturnType<typeof useGetTeamThreadsLazyQuery>;
+export type GetTeamThreadsQueryResult = Apollo.QueryResult<GetTeamThreadsQuery, GetTeamThreadsQueryVariables>;
+export const PostThreadDocument = gql`
+    mutation postThread($ref: String!, $text: String!, $title: String!, $teamId: String!) {
+  postThread(ref: $ref, text: $text, title: $title, teamId: $teamId) {
+    ...ThreadFields
+  }
+}
+    ${ThreadFieldsFragmentDoc}`;
+export type PostThreadMutationFn = Apollo.MutationFunction<PostThreadMutation, PostThreadMutationVariables>;
+
+/**
+ * __usePostThreadMutation__
+ *
+ * To run a mutation, you first call `usePostThreadMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `usePostThreadMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [postThreadMutation, { data, loading, error }] = usePostThreadMutation({
+ *   variables: {
+ *      ref: // value for 'ref'
+ *      text: // value for 'text'
+ *      title: // value for 'title'
+ *      teamId: // value for 'teamId'
+ *   },
+ * });
+ */
+export function usePostThreadMutation(baseOptions?: Apollo.MutationHookOptions<PostThreadMutation, PostThreadMutationVariables>) {
+        return Apollo.useMutation<PostThreadMutation, PostThreadMutationVariables>(PostThreadDocument, baseOptions);
+      }
+export type PostThreadMutationHookResult = ReturnType<typeof usePostThreadMutation>;
+export type PostThreadMutationResult = Apollo.MutationResult<PostThreadMutation>;
+export type PostThreadMutationOptions = Apollo.BaseMutationOptions<PostThreadMutation, PostThreadMutationVariables>;
 export const SchoolsWithMembersDocument = gql`
     query schoolsWithMembers {
   schools {
@@ -6030,6 +6216,88 @@ export function useUpdateUserMutation(baseOptions?: Apollo.MutationHookOptions<U
 export type UpdateUserMutationHookResult = ReturnType<typeof useUpdateUserMutation>;
 export type UpdateUserMutationResult = Apollo.MutationResult<UpdateUserMutation>;
 export type UpdateUserMutationOptions = Apollo.BaseMutationOptions<UpdateUserMutation, UpdateUserMutationVariables>;
+export const DeleteUserDocument = gql`
+    mutation deleteUser($where: UserWhereUniqueInput!) {
+  deleteUser(where: $where) {
+    id
+    shortname
+  }
+}
+    `;
+export type DeleteUserMutationFn = Apollo.MutationFunction<DeleteUserMutation, DeleteUserMutationVariables>;
+
+/**
+ * __useDeleteUserMutation__
+ *
+ * To run a mutation, you first call `useDeleteUserMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useDeleteUserMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [deleteUserMutation, { data, loading, error }] = useDeleteUserMutation({
+ *   variables: {
+ *      where: // value for 'where'
+ *   },
+ * });
+ */
+export function useDeleteUserMutation(baseOptions?: Apollo.MutationHookOptions<DeleteUserMutation, DeleteUserMutationVariables>) {
+        return Apollo.useMutation<DeleteUserMutation, DeleteUserMutationVariables>(DeleteUserDocument, baseOptions);
+      }
+export type DeleteUserMutationHookResult = ReturnType<typeof useDeleteUserMutation>;
+export type DeleteUserMutationResult = Apollo.MutationResult<DeleteUserMutation>;
+export type DeleteUserMutationOptions = Apollo.BaseMutationOptions<DeleteUserMutation, DeleteUserMutationVariables>;
+export const TeachersDocument = gql`
+    query teachers($where: UserWhereInput) {
+  users(where: $where) {
+    id
+    name
+    lastname
+    shortname
+    email
+    emailVerified
+    createdAt
+    school {
+      id
+      name
+      city
+      zip
+    }
+    teaches {
+      name
+      id
+    }
+  }
+}
+    `;
+
+/**
+ * __useTeachersQuery__
+ *
+ * To run a query within a React component, call `useTeachersQuery` and pass it any options that fit your needs.
+ * When your component renders, `useTeachersQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useTeachersQuery({
+ *   variables: {
+ *      where: // value for 'where'
+ *   },
+ * });
+ */
+export function useTeachersQuery(baseOptions?: Apollo.QueryHookOptions<TeachersQuery, TeachersQueryVariables>) {
+        return Apollo.useQuery<TeachersQuery, TeachersQueryVariables>(TeachersDocument, baseOptions);
+      }
+export function useTeachersLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<TeachersQuery, TeachersQueryVariables>) {
+          return Apollo.useLazyQuery<TeachersQuery, TeachersQueryVariables>(TeachersDocument, baseOptions);
+        }
+export type TeachersQueryHookResult = ReturnType<typeof useTeachersQuery>;
+export type TeachersLazyQueryHookResult = ReturnType<typeof useTeachersLazyQuery>;
+export type TeachersQueryResult = Apollo.QueryResult<TeachersQuery, TeachersQueryVariables>;
 export const CreateInvitedUserDocument = gql`
     mutation createInvitedUser($invite: String!, $name: String, $lastname: String, $email: String!, $password: String) {
   createInvitedUser(

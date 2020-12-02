@@ -1,0 +1,8 @@
+Anmelden auf voty!
+
+Mit diesem Link kannst Du Dich auf voty anmelden:
+
+{{&url}}
+
+
+Wenn Du Dich nicht bei voty anmelden wolltest, kannst Du dieses Mail löschen.

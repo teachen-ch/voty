@@ -1,0 +1,186 @@
+{
+  "version": "0.3.14-fixed",
+  "steps": [
+    {
+      "tag": "CreateField",
+      "model": "Team",
+      "field": "Thread",
+      "type": "Thread",
+      "arity": "List"
+    },
+    {
+      "tag": "CreateField",
+      "model": "School",
+      "field": "Thread",
+      "type": "Thread",
+      "arity": "List"
+    },
+    {
+      "tag": "DeleteField",
+      "model": "Ballot",
+      "field": "thread"
+    },
+    {
+      "tag": "DeleteField",
+      "model": "Ballot",
+      "field": "threadId"
+    },
+    {
+      "tag": "CreateField",
+      "model": "Thread",
+      "field": "team",
+      "type": "Team",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "Thread",
+          "field": "team"
+        },
+        "directive": "relation"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "Thread",
+          "field": "team"
+        },
+        "directive": "relation"
+      },
+      "argument": "fields",
+      "value": "[teamId]"
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "Thread",
+          "field": "team"
+        },
+        "directive": "relation"
+      },
+      "argument": "references",
+      "value": "[id]"
+    },
+    {
+      "tag": "CreateField",
+      "model": "Thread",
+      "field": "teamId",
+      "type": "String",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "Thread",
+          "field": "teamId"
+        },
+        "directive": "map"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "Thread",
+          "field": "teamId"
+        },
+        "directive": "map"
+      },
+      "argument": "name",
+      "value": "\"team_id\""
+    },
+    {
+      "tag": "CreateField",
+      "model": "Thread",
+      "field": "School",
+      "type": "School",
+      "arity": "Optional"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "Thread",
+          "field": "School"
+        },
+        "directive": "relation"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "Thread",
+          "field": "School"
+        },
+        "directive": "relation"
+      },
+      "argument": "fields",
+      "value": "[schoolId]"
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "Thread",
+          "field": "School"
+        },
+        "directive": "relation"
+      },
+      "argument": "references",
+      "value": "[id]"
+    },
+    {
+      "tag": "CreateField",
+      "model": "Thread",
+      "field": "schoolId",
+      "type": "String",
+      "arity": "Optional"
+    },
+    {
+      "tag": "DeleteField",
+      "model": "Thread",
+      "field": "parent"
+    },
+    {
+      "tag": "DeleteField",
+      "model": "Thread",
+      "field": "parentId"
+    },
+    {
+      "tag": "DeleteField",
+      "model": "Thread",
+      "field": "ballot"
+    },
+    {
+      "tag": "DeleteField",
+      "model": "Thread",
+      "field": "children"
+    },
+    {
+      "tag": "UpdateField",
+      "model": "Thread",
+      "field": "ref",
+      "arity": "Required"
+    }
+  ]
+}

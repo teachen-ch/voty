@@ -13,8 +13,11 @@ import {
   BallotQuery,
   GetBallotResultsQuery,
   BallotScope,
+  BallotRunFieldsFragment,
 } from "graphql/types";
+
 import { formatFromTo, formatDate } from "../util/date";
+
 import { useRouter } from "next/router";
 import { find } from "lodash";
 import Link from "next/link";
@@ -256,8 +259,8 @@ export const SelectBallots: React.FC<{ team: TeamTeacherFieldsFragment }> = ({
   team,
 }) => {
   const router = useRouter();
-  const [doAddBallotRun] = useAddBallotRunMutation();
-  const [doRemoveBallotRun] = useRemoveBallotRunMutation();
+  const [doAddBallotRun, addMutation] = useAddBallotRunMutation();
+  const [doRemoveBallotRun, removeMutation] = useRemoveBallotRunMutation();
   const client = useApolloClient();
 
   const ballotRunsQuery = useGetBallotRunsQuery({
@@ -292,13 +295,21 @@ export const SelectBallots: React.FC<{ team: TeamTeacherFieldsFragment }> = ({
 
   async function toggleBallot(ballotId: string, teamId: string, e: MouseEvent) {
     e.stopPropagation();
+    if (removeMutation.loading || addMutation.loading)
+      return alert("Bitte warten…");
     const run = find(ballotRuns, { ballot: { id: ballotId } });
     if (run && typeof run == "object") {
       const results = await getResults(ballotId, run.id);
       if (results?.total === 0) {
         await doRemoveBallotRun({
           variables: { ballotRunId: run.id },
-          refetchQueries: ["getBallotRuns"],
+
+          update: (cache) => {
+            cache.evict({
+              id: `BallotRun:${run.id}`,
+            });
+            cache.gc();
+          },
         });
       } else {
         alert(
@@ -308,7 +319,21 @@ export const SelectBallots: React.FC<{ team: TeamTeacherFieldsFragment }> = ({
     } else {
       await doAddBallotRun({
         variables: { ballotId, teamId },
-        refetchQueries: ["getBallotRuns"],
+
+        update: (cache, result) => {
+          cache.modify({
+            fields: {
+              getBallotRuns(existingRuns: BallotRunFieldsFragment[] = []) {
+                const newRun = cache.writeFragment({
+                  data: result.data?.addBallotRun,
+                  fragment: fragments.BallotRunFields,
+                  fragmentName: "BallotRunFields",
+                });
+                return [...existingRuns, newRun];
+              },
+            },
+          });
+        },
       });
     }
   }
@@ -356,12 +381,7 @@ export const SelectBallots: React.FC<{ team: TeamTeacherFieldsFragment }> = ({
                   {find(ballotRuns, { ballot: { id: ballot.id } }) ? (
                     <IconCheckOn alt="ausgewählt" width="20px" height="20px" />
                   ) : (
-                    <IconCheckOff
-                      alt="abgewählt"
-                      width="20px"
-                      height="20px"
-                      verticalAlign="bottom"
-                    />
+                    <IconCheckOff alt="abgewählt" width="20px" height="20px" />
                   )}
                 </Box>
               </td>
@@ -377,20 +397,22 @@ export const BallotDetails: React.FC<{
   ballot: NonNullable<BallotQuery["ballot"]>;
 }> = ({ ballot, children }) => (
   <Card>
-    <Text fontWeight="bold">{ballot.title}</Text>
-    <Text mt={3}>{ballot.description}</Text>
-    <Text fontSize={2} my={4}>
-      <img src="/images/icon_cal.svg" width="20px" alt="Zeit" /> &nbsp; Zeit:{" "}
-      {formatFromTo(ballot.start, ballot.end)}
+    <Text textAlign="left">
+      <Text fontWeight="bold">{ballot.title}</Text>
+      <Text mt={3}>{ballot.description}</Text>
+      <Text fontSize={2} my={4}>
+        <img src="/images/icon_cal.svg" width="20px" alt="Zeit" /> &nbsp; Zeit:{" "}
+        {formatFromTo(ballot.start, ballot.end)}
+      </Text>
+      {children}
+      <Text textAlign="center" mt={3}>
+        <img width={150} src="/images/easyvote.png" alt="EasyVote" />
+      </Text>
+      <div
+        dangerouslySetInnerHTML={parseMarkdownInner(ballot.body)}
+        style={{ textAlign: "left" }}
+      />
     </Text>
-    <Text textAlign="center">
-      <img width={150} src="/images/easyvote.png" alt="EasyVote" />
-    </Text>
-    <div
-      dangerouslySetInnerHTML={parseMarkdownInner(ballot.body)}
-      style={{ textAlign: "left" }}
-    />
-    {children}
   </Card>
 );
 

@@ -86,6 +86,7 @@ model Team {
   BallotRuns BallotRun[]
   Vote       Vote[]
   Voted      Voted[]
+  Thread     Thread[]
   @@map(name: "teams")
 }
 
@@ -104,8 +105,9 @@ model School {
   teams    Team[]
   ballots  Ballot[]
 
-  Vote  Vote[]
-  Voted Voted[]
+  Vote   Vote[]
+  Voted  Voted[]
+  Thread Thread[]
   @@map(name: "schools")
 }
 
@@ -152,8 +154,6 @@ model Ballot {
   teamId    String? @map(name: "team_id")
   creator   User?   @relation(fields: [creatorId], references: [id])
   creatorId String? @map(name: "creator_id")
-  thread    Thread? @relation(fields: [threadId], references: [id])
-  threadId  String? @map(name: "thread_id")
 
   options     Option[]
   voted       Voted[]      @relation("VotedBallot")
@@ -247,24 +247,24 @@ model Attachment {
 }
 
 model Thread {
-  id    String  @id @default(cuid())
-  title String  @default("")
-  text  String  @default("")
-  ref   String? // this can be used to reference a thread to content
+  id    String @id @default(cuid())
+  title String @default("")
+  text  String @default("")
+  ref   String // this can be used to reference a thread to content
 
-  user     User    @relation(fields: [userId], references: [id])
-  userId   String  @map(name: "user_id")
-  parent   Thread? @relation(fields: [parentId], references: [id])
-  parentId String? @map(name: "parent_id")
+  user   User   @relation(fields: [userId], references: [id])
+  userId String @map(name: "user_id")
+  team   Team   @relation(fields: [teamId], references: [id])
+  teamId String @map(name: "team_id")
 
-  ballot      Ballot?
-  children    Thread[]     @relation("ThreadToThread")
   reactions   Reaction[]
   attachments Attachment[]
 
   createdAt DateTime @default(now()) @map(name: "created_at")
   updatedAt DateTime @default(now()) @map(name: "updated_at")
   @@map(name: "threads")
+  School   School? @relation(fields: [schoolId], references: [id])
+  schoolId String?
 }
 
 model Reaction {

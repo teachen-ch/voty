@@ -12,6 +12,8 @@ const server = new SMTPTransport({
     user: process.env.SMTP_USER || "",
     pass: process.env.SMTP_PASSWORD || "",
   },
+  // TODO: This is ugly, trying to make email work on ipv6 docker
+  tls: { rejectUnauthorized: false },
 });
 
 const templatesDir = "./mails/";
@@ -27,7 +29,8 @@ export async function sendMail(
 
   // No email configured
   if (!process.env.SMTP_PASSWORD || process.env.NODE_ENV === "test") {
-    logger.info(`Now I'd send mail to ${to}`);
+    logger.info(`Writing mail to ${to} into temp file: /tmp/voty-email`);
+    await fs.writeFile("/tmp/voty-email", text);
     return;
   }
 

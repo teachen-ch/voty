@@ -6,4 +6,9 @@ const withMDX = require("@next/mdx")({
 module.exports = withMDX({
   pageExtensions: ["js", "jsx", "ts", "tsx", "md", "mdx"],
   reactStrictMode: true,
+  // Next 10 image conf: https://nextjs.org/docs/basic-features/image-optimization
+  images: {
+    deviceSizes: [400, 600, 1200, 2000],
+    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
+  },
 });

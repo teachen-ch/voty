@@ -9,10 +9,10 @@ git clone https://github.com/teachen-ch/voty.git
 cd voty
 ```
 
-Now you can lift up the docker environment consisting of the two services «app» and «postgres» (see [docker-compose.yml](../docker-compose.yml)).
+Now you can lift up the docker environment consisting of the two services «app» and «postgres» (see [docker-compose-local.yml](../docker-compose-local.yml)).
 
 ```bash
-docker-compose up
+docker-compose up -f docker-compose.local.yml
 ```
 
 On the first run you will need to initialize the database with the schema. We will run prisma migrate --experimental for this (see [Prisma CLI docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-cli/command-reference#migrations-experimental)).
@@ -33,7 +33,14 @@ If you (we?) are lucky, all the tests will pass 🎉. We are still struggling a 
 http://localhost:3000/
 ```
 
-You can now log in with the user «teacher@teachen.ch» or «student@teachen.ch». The password will be «teachen». Unfortunately it is currently not trivial to create a new user the dev environment. You can create one (http://localhost:3000/user/signup), but the activation email will not be sent if NODE_ENV=development. So you'll have to manually activate the user in the database (users.email_verified = date).
+You can create a new teacher account (http://localhost:3000/user/signup), but probably you will not have SMTP configured in your .env.local file, so no activation email will not be sent. In this case, however, a file /tmp/voty-email will be written and within it you will find the activation email with a link to activate your user account. From there on you can create a class, invite students and more. 
+
+If you are on a mac, you can automatically open the link in the email in your browser (provided you use bash or zsh):
+```bash
+open `grep http /tmp/voty-email`
+```
+
+Alternatively you can also activate the user directly in the database (users.email_verified = date).
 
 ```bash
 docker exec -it postgres psql -U voty -c "update users set email_verified=NOW() where email='name@email.com'";
@@ -41,7 +48,7 @@ docker exec -it postgres psql -U voty -c "update users set email_verified=NOW() 
 
 ## Build Process
 
-Once you start changing the software, you need to have a basic understanding of the build process and how to generate the various (typing-) artifacts with prisma, nexus and graphql-codegen.
+Once you want to modify the software, you need to have a basic understanding of the build process and how to generate the various (typing-) artifacts with prisma, nexus and graphql-codegen.
 
 When you change the [schema.prisma](../prisma/schema.prisma), then you will need to rebuild the prisma client and run database migrations (currently we are running in Prisma's [automatic migration mode](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-migrate)):
 

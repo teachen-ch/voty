@@ -26,22 +26,15 @@ export const Footer: React.FC<{ color: string | string[] }> = ({ color }) => (
       <A href="https://teachen.ch/verein-teachen" variant="underline">
         «Teachen!»
       </A>{" "}
-      mit tatkräftiger Unterstützung des{" "}
-      {/*<Link
-          href="https://prototypefund.opendata.ch"
-          target="_blank"
-          rel="noreferrer"
-        variant="underline"
-        >PrototypeFund</Link>*/}
-      PrototypeFund
+      mit tatkräftiger Unterstützung des PrototypeFund
     </Text>
     <Flex justifyContent="center" flexDirection="column">
       <Box mt={3}>
-        {/*<Link href="https://prototypefund.opendata.ch" target="_blank"></Link>*/}
         <img
           src="/images/pf_logo.png"
           alt="Prototypefund Logo"
-          style={{ width: "40px" }}
+          width={34}
+          height={42}
         />
         <hr style={{ borderColor: "inherit", borderTopWidth: "0px" }} />
         <Flex as="nav" color={color} justifyContent="space-between">
@@ -77,21 +70,3 @@ export const Footer: React.FC<{ color: string | string[] }> = ({ color }) => (
     </Flex>
   </Flex>
 );
-
-/*
-const AnAbmelden: React.FC = () => {
-  const user = useUser();
-  if (user) {
-    return (
-      <Link href="/user/logout">
-        <A>Abmelden</A>
-      </Link>
-    );
-  } else
-    return (
-      <Link href="/user/login">
-        <A>Anmelden</A>
-      </Link>
-    );
-};
-*/

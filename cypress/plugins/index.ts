@@ -12,11 +12,10 @@
 // This function is called when a project is opened or re-opened (e.g. due to
 // the project's config changing)
 
-// const { loadFixture } = require("../../util/prisma-loader");
 import { loadFixture } from "../../util/prisma-loader";
+import { promises as fs } from "fs";
 // const { imageSnapshot } = require("cypress-image-snapshot/plugin");
 // import imageSnapshot from "cypress-image-snapshot/plugin";
-
 /**
  * @type {Cypress.PluginConfig}
  */
@@ -24,6 +23,11 @@ module.exports = (
   on: Cypress.PluginEvents,
   config: Cypress.PluginConfigOptions
 ) => {
+  // test coverage using istanbul
+  // @ts-ignore
+  // eslint-disable-next-line
+  require("@cypress/code-coverage/task")(on, config);
+
   // `on` is used to hook into various events Cypress emits
   // `config` is the resolved Cypress config
   on("task", {
@@ -32,5 +36,12 @@ module.exports = (
       await loadFixture(file);
       return null;
     },
+    async getEmailLink() {
+      const buffer = await fs.readFile("/tmp/voty-email");
+      const text = buffer.toString();
+      const match = text.match(/(http[^\s]*)/gs);
+      if (match?.length) return match[0];
+    },
   });
+  return config;
 };

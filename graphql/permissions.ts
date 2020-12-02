@@ -105,6 +105,7 @@ export const permissions = shield(
       ballots: allow,
       getBallotRuns: allow,
       getBallotResults: allow,
+      getTeamThreads: isUser,
     },
     Mutation: {
       login: allow,
@@ -128,6 +129,8 @@ export const permissions = shield(
       startBallotRun: isTeacher,
       endBallotRun: isTeacher,
       deleteAccount: isUser,
+      deleteUser: or(isAdmin, isTeacher),
+      postThread: isUser,
     },
     User: {
       id: isUser,
@@ -147,6 +150,7 @@ export const permissions = shield(
       attachments: or(isOwnId, teachesTeam, isAdmin),
       threads: or(isOwnId, teachesTeam, isAdmin),
       reactions: or(isOwnId, teachesTeam, isAdmin),
+      createdAt: isAdmin,
     },
     School: {
       id: allow,
@@ -167,6 +171,7 @@ export const permissions = shield(
       code: or(isOwnTeacherId, isAdmin),
       "*": isUser,
     },
+    Thread: allow,
     Ballot: allow, //canViewBallot : if we want to protect class/school Ballots
     BallotRun: allow,
     BallotResults: allow,

@@ -2,7 +2,10 @@
   "baseUrl": "http://localhost:3000",
   "env": {
     "USER": "teacher@teachen.ch",
-    "PASS": "teachen"
+    "PASS": "teachen",
+    "codeCoverage": {
+      "url": "/api/__coverage__"
+    }
   },
   "video": true,
   "pluginsFile": "./cypress/plugins/index.ts",

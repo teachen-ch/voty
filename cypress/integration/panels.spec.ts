@@ -4,28 +4,20 @@ describe("Test Live-Voting Panels", () => {
   });
 
   // TODO: need to reimplement after redesign of selection flow
-  it.skip("opens teacher page and selects some ballots", () => {
+  it("opens teacher page and selects some ballots", () => {
     cy.login();
     cy.visit("/teacher");
-    cy.get("a:contains('Bearbeiten')").click();
-    cy.contains("Abstimmungen auswählen").click();
-    cy.debug();
-    cy.contains("Noch keine Abstimmungen ausgewählt");
-    // select 1st ballot, then add and remove it
-    cy.get("#unselectedBallots .ballot").first().contains("Auswählen").click();
-    cy.get("#selectedBallots .ballot").first().contains("Entfernen");
-    cy.get("#selectedBallots .ballot").first().contains("Entfernen").click();
-    cy.get("#selectedBallots").contains("keine Abstimmungen ausgewählt");
-
+    cy.contains("Class 1").click();
     // add testinitiative
-    cy.get("#unselectedBallots .ballot")
-      .contains("Testinitiative")
-      .parent()
-      .parent()
-      .contains("Auswählen")
-      .click();
-    cy.get("#livepanel button").first().click();
-    cy.contains("Jetzt abstimmen");
+    cy.get(
+      "#ballots tr:contains('Testinitiative') svg[alt='abgewählt']"
+    ).click();
+    cy.get("#ballots tr:contains('Testinitiative') svg[alt='ausgewählt']");
+
+    // TODO: where is this button supposed to be?
+    // cy.get("#livepanel button").first().click();
+    // cy.contains("Jetzt abstimmen");
+    cy.visit("/panel/1999999/present");
     cy.get(".ballot:first button:contains('Starten')").click();
     // logout user
     cy.visit("/user/logout");
@@ -34,8 +26,8 @@ describe("Test Live-Voting Panels", () => {
     // now vote anonymously
     cy.visit("/panel/1999999");
     cy.contains("Ja, ich stimme zu").click();
-    cy.contains("Du hast erfolgreich abgestimmt");
+    cy.contains("Du hast nun anonym abgestimmt");
     cy.reload();
-    cy.contains("Du hast erfolgreich abgestimmt");
+    cy.contains("Du hast nun anonym abgestimmt");
   });
 });

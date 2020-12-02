@@ -32,7 +32,7 @@ export default function Abstimmung(): ReactElement {
           />
           Wie motivieren wir Jugendliche für unsere Demokratie? Wir möchten
           gemeinsam mit engagierten Lehrpersonen ein Experiment starten und im
-          November mit mindes&shy;tens 50 Klassen über die beiden nationalen
+          März 2021 mit mindes&shy;tens 50 Klassen über die beiden nationalen
           Vorla&shy;gen ab&shy;stimmen. Interesse für Politik entsteht dann,
           wenn disku&shy;tiert und mitentscheiden werden kann.
         </Text>
@@ -56,7 +56,7 @@ export default function Abstimmung(): ReactElement {
               <IconCheckWhite />
             </Text>
             <Text maxWidth="600px">
-              Ich nehme mir im November Zeit, um die Vorlagen mit den
+              Ich nehme mir im Februar/März Zeit, um die Vorlagen mit den
               Schüler*innen zu diskutieren (z. B. mit Material von{" "}
               <A
                 href="https://www.easyvote.ch/de/school/"
@@ -80,22 +80,14 @@ export default function Abstimmung(): ReactElement {
         </Flex>
         {!newUser ? (
           <>
-            <Heading as="h2">
+            <Heading as="h2" id="form">
               Interessiert? Melde Dich jetzt mit Deiner Klasse an
             </Heading>
             <CreateUserForm
               setUser={setNewUser}
               omitRole
               defaultRole={Role.Teacher}
-            >
-              <Text mt={3} fontSize={3} sx={{ gridColumn: [0, 0, 2] }}>
-                Wir sind uns bewusst, dass die Zeit bis Ende November in der
-                Planung knapp ist. Aber wenn wir es gemeinsam schaffen, genügend
-                Klassen zu motivieren, dann hat das Ergebnis der Abstimmung auch
-                eine statistische Signifikanz und repräsentiert die Meinung der
-                Jugend zu relevanten Themen. Herzlichen Dank für Deine Mithilfe!
-              </Text>
-            </CreateUserForm>
+            ></CreateUserForm>
           </>
         ) : (
           <>
@@ -117,8 +109,6 @@ export default function Abstimmung(): ReactElement {
           versuche doch, sie ebenfalls für dieses Experiment zu begeistern.
         </Text>
       </Box>
-
-      <Stats />
 
       <Box my={5} />
       <ReadMore title="Fragen und Antworten">
@@ -142,10 +132,31 @@ export const FAQ: React.FC = () => (
     </Text>
     <Heading as="h3">Wie funktioniert die Onlineabstimmung?</Heading>
     <Text>
-      Auf unserer Website können Lehrpersonen mit ihren Klassen die Abstimmung
-      auf Laptops, Tablets oder Smartphones durchführen. Wir stellen sicher,
-      dass nur registrierte Klassen mitmachen können, dass jede Person nur
-      einmal abstimmen kann und dass sämtliche Stimmabgaben anonym bleiben.
+      Auf unserer Website können Lehrpersonen mit ihren Klassen (Sek-I,
+      Gymnasium, Berufsschulen) die Abstimmung auf Laptops, Tablets oder
+      Smartphones durchführen. Wir stellen sicher, dass nur registrierte Klassen
+      mitmachen können, dass jede Person nur einmal abstimmen kann und dass
+      sämtliche Stimmabgaben anonym bleiben.
+    </Text>
+    <Heading as="h3">Wie kann meine Klasse auf voty.ch abstimmen?</Heading>
+    <Text>
+      Über den Button{" "}
+      <A href="/user/signup#form" variant="underline">
+        «Jetzt Klasse anmelden»
+      </A>{" "}
+      können sich Lehrpersonen auf voty.ch kostenlos registrieren. Nach
+      Bestätigung der Email-Adresse kann eine oder mehrere Klasse erstellt
+      werden. Danach können die aktuellen Abstimmungen ausgewählt («E-ID Gesetz»
+      und «Verhüllungsverbot-Initiative», «Stop Palmöl-Referendum») und
+      schliesslich die SuS via Email eingeladen werden. Wir empfehlen, die
+      Themen vorgängig mit den Materialien von{" "}
+      <A
+        href="https://www.easyvote.ch/de/school/unterrichtsmaterial"
+        rel="noreferrer"
+      >
+        easyvote.ch
+      </A>{" "}
+      zu diskutieren .
     </Text>
     <Heading as="h3">
       Wie wird die Anonymität und der Datenschutz sichergestellt?
@@ -182,7 +193,7 @@ export const FAQ: React.FC = () => (
     </Text>
     <Heading as="h3">Macht auch die Romandie und das Tessin mit?</Heading>
     <Text>
-      Wenn Du Kontakte in diese Sprachregionen haben, dann freuen wir uns sehr
+      Wenn Du Kontakte in diese Sprachregionen hast, dann freuen wir uns sehr
       über{" "}
       <Link href="/kontakt">
         <a>Email</a>
@@ -202,7 +213,7 @@ export const FAQ: React.FC = () => (
   </Box>
 );
 
-const Stats: React.FC = () => (
+export const Stats: React.FC = () => (
   <Box fontSize={2}>
     <Heading mt={0}>Aktueller Stand</Heading>
     <Grid columns={[0, 0, "160px auto"]}>

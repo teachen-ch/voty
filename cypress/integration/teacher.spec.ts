@@ -10,6 +10,7 @@ describe("Test Teacher Startpage", () => {
     cy.contains("Class 1");
   });
 
+  // this crashes in CI/CD as well...
   it("allows teacher to create a new team and see invite", () => {
     cy.login();
     cy.visit("/teacher");
@@ -21,7 +22,18 @@ describe("Test Teacher Startpage", () => {
     cy.contains("Die neue Klasse wurde erfolgreich erstellt");
 
     // Test team detail page
-    // TODO: here we should test the email recognition and eventually invites...
+    cy.get("td:contains('Testclass')").click();
+    cy.contains("Einladungen verschicken");
+    cy.get("textarea").type(
+      "student4@teachen.ch, bla\n student4@teachen.ch student5@teachen.ch"
+    );
+    cy.contains("2 Einladungen verschicken").click();
+    cy.get("td:contains('Student4')");
+    cy.task("getEmailLink").as("url");
+    cy.get("@url").then((url) => {
+      cy.visit(String(url));
+      cy.contains("Deine Email-Adresse ist nun bestätigt.");
+    });
   });
 
   it("allows teacher to select an existing school", () => {

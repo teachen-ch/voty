@@ -1,0 +1,162 @@
+import { Info, Ref, Video, Center, Include } from "components/Learning";
+import { Button, Flex, Card } from "rebass";
+import { Chaty } from "components/Chaty";
+
+# 💬 Chaty
+
+## Motivation
+
+---
+
+In welchem Medium verbringt die heutige Jugend am meisten Zeit? Genau, in Chat Apps:
+WhatsApp, Snapchat, Facebook Messenger, etc. machen einen Grossteil der «Bildschirmzeit»
+(und ergo auch der Lebenszeit) aus. Warum also nicht das Lernerlebnis in dieses Format
+bringen?
+
+<Info>
+
+
+<Flex flexDirection="column" alignItems="flex-start">
+<Button variant="outline" bg="#04B404" my={2}>
+  Kennst Du den Unterschied zwischen Demokratie und Diktatur?
+</Button>
+
+
+<Button variant="small" bg="#2E9AFE" alignSelf="flex-end">
+  Erklär's mir
+</Button>
+
+<Button variant="outline" bg="#04B404" my={2} textAlign="left">
+  Ganz einfach. Bei der Diktatur regiert ein Herscher alleine, bei der
+  Demokratie bestimmt das Volk wo es lang geht.
+</Button>
+
+<Button variant="small" bg="#2E9AFE" alignSelf="flex-end">
+  Ok, und warum sollte mich das kümmern?
+</Button>
+
+<Button variant="outline" bg="#04B404" my={2} textAlign="left">
+  Nun, wenn ein einziger Herscher oder eine Herscherin über ein Land regiert,
+  dann kommen Deine Interessen vielleicht öfters zu kurz.
+</Button>
+
+<Button variant="small" bg="#2E9AFE" alignSelf="flex-end">
+  …
+</Button>
+</Flex>
+
+
+</Info>
+
+
+## Interaktiver Chat, kein Chatbot
+
+---
+
+Die Chats sind vorgegeben und verlaufen linear. Es ist also kein freier Dialog,
+weder mit einem Menschen noch mit einem Bot. Der Chat sollte aber durchaus interaktive
+Elemente enhalten, so dass der Dialog unterhaltsam bleibt. Das können einfache
+vorgegebene Antworten zur Auswahl sein, Multiple-Choice Fragen zum Zwischenstands-Testen
+oder Auswahl-Menus um einen anderen Lern-Chat zu öffnen. Ebenso können zur Auflockerung
+Giphys eingebaut werden oder kurze Lernvideos.
+
+## Reverse Classroom
+
+---
+
+Spannend wäre ein Format, in dem die Schüler:innen selber die Dialoge recherchieren und
+schreiben, und diese anderen Schüler:innen zum Testen und Lernen weitergeben.
+Beim Recherchieren und Formulieren der Dialoge kann in einer Einzel- oder besser
+Gruppenarbeit ein Thema vertieft werden.
+
+<Info>
+
+
+**Beipspielaufgaben für Chaty-Themen:**
+
+… Erkläre in einem Chat den Unterschied zwischen Monarchie und Demokratie
+
+… Schreibe einen Dialog, um die Konzernverantwortungsinitiative zu erklären
+
+… Wie funktioniert der Staat in Deinem Herkunftsland?
+
+</Info>
+
+
+Die Schwierigkeit besteht wohl darin, das die Inhalte einigermassen korrekt sind.
+Lehrpersonen und andere Lerndende könnten Feedback zu den Dialogen und Fragen stellen.
+
+## Chat Format
+
+---
+
+Die Chats werden im Textformat gespeichert und anfangs auch in diesem erstellt. Später
+kann gegebenfalls ein interaktiver Editor dabei unterstützen, der Entwicklungsaufwand
+dafür ist aber beträchtlich. Das Format besteht aus einer Chat-Message pro Zeile, wobei
+Zeilen, welche der Lernenden «chattet» mit einem "\*" markiert sind:
+
+<Info>
+
+
+```
+demokratie-chat.txt
+
+- Hallo, gerne erkläre ich Dir etwas zur Demokratie
+- Welches Thema möchtest Du zuerst besprechen?
+* Menu: (Demokratie oder Dikatur?) (Die Initative)
+        (Das Schweizer Parlament)
+- Yep, lass uns anschauen, was Initiativen sind!
+- Eine Volks-Initiative ist eine Abstimmung über eine
+  Änderung im Gesetz, welche von einigen Schweizer
+  Bürger:innen vorschlagen wird
+* Button: Cool! Kann ich auch eine Idee vorschlagen?
+- Ja, jeder darf eine Idee vorschlagen. Aber nur
+  wenn viele Personen eine Idee gut finden, wird
+  auch darüber abgestimmt. Wenn die Idee im ganzen
+  Land umgesetzt werden soll, müssen zuerst
+  100'000 Unterschriften von Leuten gesammelt werden
+- Giphy: https://gph.is/g/Z5BPKqo
+…
+```
+
+</Info>
+
+
+## Technische Umsetzung
+
+---
+
+Die Entwicklung von Chatbots auf **WhatsApp** wäre möglich und eigentlich natürlich ideal,
+da die User Experience am reellsten ist und keine zusätzliche App installiert werden muss.
+Jedoch ist das WhatsApp API mit einigen Restriktionen verbunden sowie einem Preis von
+0.08 Rappen pro Push-Message und jeweils 0.005 Rappen pro Antwort
+(100 Dialoge mit 50 Messages = ~CHF 30.-). Die Lehrperson kann zudem keinen WhatsApp-
+Account von Facebook voraussetzen...
+
+**SMS** wäre ebenfalls authentisch, wird aber sehr schnell prohibitiv teuer (100 Dialoge
+mit 50 Messages = CHF 300.-). Auch haben nicht alle Lernende unlimitierte SMS, weshalb
+dieser Kanal definitiv nicht sinnvoll ist.
+
+Am Günstigsten und Einfachsten in der Umsetzung ist eine **Web-App**. Zwar ist das Chat-
+Erlebnis etwas «aufgesetzt» und Push-Meldungen (bsp. eine Nachfrage nach einigen Stunden)
+sind nicht möglich. Aber ohne Installation und ohne Kosten stehen keine Hürden im Weg.
+
+## Beispiele
+
+---
+
+<Chaty
+  lines={`
+- Hallo, gerne erkläre ich Dir etwas zur Demokratie
+- Welches Thema möchtest Du zuerst besprechen?
+* MENU (Demokratie oder Dikatur?) (Die Initative) (Das Schweizer Parlament)
+- Yep, lass uns anschauen, was Initiativen sind!
+- Eine Volks-Initiative ist eine Abstimmung über eine Änderung im Gesetz, welche von einigen Schweizer Bürger:innen vorschlagen wird
+* BUTTON Cool! Kann ich auch eine Idee vorschlagen?
+- Ja, jeder darf eine Idee vorschlagen. Aber nur wenn viele Personen eine Idee gut finden, wird auch darüber abgestimmt. Wenn die Idee im ganzen Land umgesetzt werden soll, müssen zuerst 100'000 Unterschriften von Leuten gesammelt werden
+- GIPHY https://giphy.com/gifs/fifa-h7LENyTiMBCp0pCaGz
+* 😆
+- GIF https://giphy.com/gifs/monkey-dapper-E5buNvhM8Y5Y4
+- BILD https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse2.mm.bing.net%2Fth%3Fid%3DOIP.QIeNxrQzCHqDK-Ux0QtLlwHaHa%26pid%3DApi&f=1
+`}
+/>

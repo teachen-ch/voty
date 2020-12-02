@@ -1,19 +1,19 @@
-import { Page, ErrorPage, LoadingPage } from "components/Page";
-import { Text, Box, Flex, Button, Link as A } from "rebass";
-import { Ballot } from "components/Ballots";
+import { ErrorPage, LoadingPage } from "components/Page";
+import { Text, Box, Image, Flex, Card, Button, Link as A } from "rebass";
 import { useRouter } from "next/router";
-import { ReactElement, useState } from "react";
+import React, { ReactElement, useState } from "react";
 import {
   useGetBallotRunsQuery,
   useTeamByCodeQuery,
   useVoteCodeMutation,
   BallotRunFieldsFragment,
 } from "graphql/types";
-import { BigButton, BigGray } from "components/BigButton";
+import { BigGray } from "components/BigButton";
 import { ErrorBox } from "components/Form";
 import { getBrowserCookie } from "util/cookies";
 import { isBrowser } from "util/isBrowser";
 import { tr } from "util/translate";
+import { PanelPage } from "./present";
 
 export default function PanelBallots(): ReactElement {
   const router = useRouter();
@@ -45,24 +45,27 @@ export default function PanelBallots(): ReactElement {
   }
 
   return (
-    <Page heading="Jetzt abstimmen">
+    <PanelPage heading="Jetzt bist Du dran!">
       {ballotRuns?.length
-        ? ballotRuns.map((ballotRun) =>
-            ballotRun ? (
-              <>
-                <Ballot key={ballotRun.id} ballot={ballotRun.ballot} />
-
-                <VoteCode
-                  ballotRun={ballotRun}
-                  refetch={refetch}
-                  code={code}
-                  voted={cookie[ballotRun.id] ? true : false}
-                />
-              </>
-            ) : null
+        ? ballotRuns.map(
+            (ballotRun) =>
+              ballotRun && (
+                <Card key={ballotRun.id} py={3}>
+                  <Text fontWeight="bold" fontSize="24px" lineHeight="24px">
+                    {ballotRun.ballot.title}
+                  </Text>
+                  <VoteCode
+                    ballotRun={ballotRun}
+                    refetch={refetch}
+                    code={code}
+                    voted={cookie[ballotRun.id] ? true : false}
+                  />
+                </Card>
+              )
           )
         : "Keine Abstimmungen gefunden."}
-    </Page>
+      <Box mt={300} />
+    </PanelPage>
   );
 }
 
@@ -88,8 +91,7 @@ const VoteCode: React.FC<{
   const now = new Date();
   const start = ballotRun.start ? new Date(ballotRun.start) : undefined;
   const end = ballotRun.end ? new Date(ballotRun.end) : undefined;
-  if (success || voted)
-    return <BigGray>Du hast erfolgreich abgestimmt ✅</BigGray>;
+  if (success || voted) return <VotySuccess />;
 
   if (!start || start > now)
     return (
@@ -103,33 +105,59 @@ const VoteCode: React.FC<{
 
   if (end && end < now) return <BigGray>Abstimmung bereits beendet</BigGray>;
 
-  async function voteCode(ballotRunId: string, code: string, vote: number) {
+  async function vote(ballotRunId: string, code: string, vote: number) {
     await doVoteCode({ variables: { ballotRunId, code, vote } });
   }
 
   return (
-    <Box my={4}>
-      <Flex>
-        <BigButton
-          color="green"
-          onClick={() => voteCode(ballotRun.id, code, 1)}
-        >
-          Ja, ich stimme zu
-        </BigButton>
-        <BigButton
-          color="primary"
-          onClick={() => voteCode(ballotRun.id, code, 2)}
-        >
-          Nein, ich lehne ab
-        </BigButton>
-      </Flex>
-      <Text my={2} textAlign="center">
-        Ich möchte mich{" "}
-        <A onClick={() => voteCode(ballotRun.id, code, 0)}>
-          der Stimme enthalten
-        </A>
-      </Text>
-      <ErrorBox my={2} error={error} />
-    </Box>
+    <Text textAlign="left" sx={{ margin: "0 auto" }}>
+      <Box variant="centered">
+        <Box width={["100%", "100%", 400]}>
+          <img src="/images/voty_now.svg" alt="Abstimmen" width="100%" />
+          <Box px={[0, 0, 2]} mt={[-10]}>
+            <Box fontSize={2}>
+              <Flex justifyContent="space-around">
+                <A onClick={() => vote(ballotRun.id, code, 1)}>
+                  <Flex flexDirection="column" alignItems="center">
+                    <Image src="/images/icon_yes.svg" height="50px" alt="Ja" />
+                    <Text mt={1}>Ja, ich stimme zu</Text>
+                  </Flex>
+                </A>
+                <A onClick={() => vote(ballotRun.id, code, 2)}>
+                  <Flex flexDirection="column" alignItems="center">
+                    <Image src="/images/icon_no.svg" height="50px" alt="Nein" />
+                    <Text mt={1}>Nein, ich lehne ab</Text>
+                  </Flex>
+                </A>
+              </Flex>
+              <Box variant="centered" mt={3} mb={4}>
+                <A
+                  onClick={() => vote(ballotRun.id, code, 0)}
+                  variant="underline"
+                >
+                  <Text fontSize={1}>Ich möchte mich der Stimme enthalten</Text>
+                </A>
+              </Box>
+              <ErrorBox my={2} error={error} />
+            </Box>
+          </Box>
+        </Box>
+      </Box>
+    </Text>
   );
 };
+
+const VotySuccess: React.FC = () => (
+  <>
+    <Text mb={4}>
+      Super, Du hast nun anonym abgestimmt und Deine Stimme wurde gezählt.
+    </Text>
+    <Box textAlign="center">
+      <img
+        src="/images/voty_success.svg"
+        alt="Juhee"
+        style={{ maxWidth: "240px" }}
+      />
+    </Box>
+  </>
+);

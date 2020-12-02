@@ -7,6 +7,7 @@ import logger from "../../util/logger";
 import { Context } from "../context";
 import { FieldResolver } from "@nexus/schema";
 import { NextApiRequest } from "next";
+import { promises as fs } from "fs";
 
 let secret = process.env.SESSION_SECRET || "";
 if (!secret) console.error("No SESSION_SECRET defined in .env");
@@ -28,7 +29,9 @@ export const login: FieldResolver<"Mutation", "login"> = async (
   args,
   ctx: Context
 ): Promise<ResponseLogin> => {
-  const user = await ctx.db.user.findOne({ where: { email: args.email } });
+  const user = await ctx.db.user.findOne({
+    where: { email: args.email?.toLowerCase() },
+  });
   if (!user) {
     logger.info("Login attempt - User not found", { meta: args.email });
     throw Error("Error.UserPassword"); // generic error, do not say why
@@ -38,7 +41,7 @@ export const login: FieldResolver<"Mutation", "login"> = async (
     throw Error("Error.PasswordNotSet");
   }
 
-  const matches = await bcrypt.compare(args.password, user.password);
+  const matches = await bcrypt.compare(String(args.password), user.password);
   if (!matches) {
     logger.info("Login attempt - Passwords don't match", { meta: args.email });
     throw Error("Error.UserPassword"); // generic error, do not say why
@@ -75,11 +78,11 @@ export const createUser: FieldResolver<"Mutation", "createUser"> = async (
   ctx: Context
 ) => {
   try {
-    const { email, password, name, lastname, role } = args.data;
+    const { password, name, lastname, role } = args.data;
+    const email = args.data.email?.toLowerCase();
     if (!email) throw new Error("Error.NoEmail");
-    if (!password) throw new Error("Error.NoPassword");
     const salt = await bcrypt.genSalt(10);
-    const hashed = await bcrypt.hash(password, salt);
+    const hashed = await bcrypt.hash(String(password), salt);
     if (role === Role.Admin) throw new Error("NAH");
     const user = await ctx.db.user.create({
       data: {
@@ -92,7 +95,8 @@ export const createUser: FieldResolver<"Mutation", "createUser"> = async (
     });
 
     await sendVerificationEmail(email, "verification", ctx.db);
-    logger.mail(`New user created: ${name} ${lastname} <${email}>: ${role}`);
+    if (role === Role.Teacher)
+      logger.mail(`New user created: ${name} ${lastname} <${email}>: ${role}`);
 
     // TODO: we need some cleanup here...
     // currently, we need to setRequestUser in order to return to the just created user
@@ -110,6 +114,8 @@ export const createUser: FieldResolver<"Mutation", "createUser"> = async (
     if (err.meta?.target && err.meta.target.indexOf("email") >= 0) {
       throw new Error("Error.DuplicateEmail");
     }
+    console.error(err);
+    logger.error("Error creating user: ", err);
     throw new Error("Error.CreateUser");
   }
 };
@@ -120,11 +126,11 @@ export const acceptInvite: FieldResolver<"Mutation", "acceptInvite"> = async (
   ctx: Context
 ): Promise<Team> => {
   const team = await ctx.db.team.findOne({ where: { invite: args.invite } });
-  if (!team) throw new Error("INVITE_NOT_FOUND");
+  if (!team) throw new Error("Error.InviteNotFound");
   const user = getRequestUser(ctx);
-  if (!user) throw new Error("NEEDS_LOGIN");
+  if (!user) throw new Error("Error.NeedsLogin");
   const success = await connectUserTeam(user, team, ctx);
-  if (!success) throw new Error("DB_ERROR");
+  if (!success) throw new Error("Error.Database");
   else return team;
 };
 
@@ -133,7 +139,7 @@ export async function connectUserTeam(
   team: Team,
   ctx: Context
 ): Promise<User> {
-  if (user.teamId) throw new Error("ALREADY_IN_TEAM");
+  if (user.teamId) throw new Error("Error.AlreadyInTeam");
   return await ctx.db.user.update({
     where: { id: user.id },
     data: {
@@ -149,13 +155,13 @@ export const createInvitedUser: FieldResolver<
   "createInvitedUser"
 > = async (_root, args, ctx, info) => {
   const team = await ctx.db.team.findOne({ where: { invite: args.invite } });
-  if (!team) throw new Error("INVITE_NOT_FOUND");
+  if (!team) throw new Error("Error.InviteNotFound");
   const { name, lastname, email, password } = args;
   const newArgs = {
     data: {
       name,
       lastname,
-      email,
+      email: email?.toLowerCase(),
       password,
       role: Role.Student,
     },
@@ -186,6 +192,24 @@ export const updateUser: FieldResolver<"Mutation", "updateUser"> = async (
   return result;
 };
 
+export const deleteUser: FieldResolver<"Mutation", "deleteUser"> = async (
+  _root,
+  args,
+  ctx
+) => {
+  const user = getRequestUser(ctx);
+  const id = args.where.id;
+  const deleteUser = await ctx.db.user.findOne({
+    where: { id: String(id) },
+    include: { team: true },
+  });
+  if (!deleteUser) throw new Error("Error.UserNotFound");
+  if (deleteUser.team?.teacherId !== user?.id && user?.role !== Role.Admin)
+    throw new Error("Error.NoPermission");
+  const success = await ctx.db.user.delete({ where: { id: String(id) } });
+  if (!success) throw new Error("Error.Database");
+  return success;
+};
 export const setSchool: FieldResolver<"Mutation", "setSchool"> = async (
   _root,
   args,
@@ -244,7 +268,8 @@ export function verifyJWT(token: string): JWTSession | undefined {
     if ("user" in result) return result as JWTSession;
     else throw new Error("No user in JWT Session");
   } catch (err) {
-    logger.info("Error verifying token: ", err.message);
+    if (err.message !== "jwt expired")
+      logger.info("Error verifying token: ", err.message);
     return undefined;
   }
 }
@@ -256,6 +281,7 @@ export async function sendVerificationEmail(
   db: PrismaClient
 ): Promise<ResponseLogin> {
   try {
+    email = email.toLowerCase();
     const from = process.env.EMAIL;
     if (!from)
       throw new Error("Please define EMAIL env variable (sender-email)");
@@ -270,7 +296,7 @@ export async function sendVerificationEmail(
       process.env.NODE_ENV !== "production" ? process.env.NODE_ENV : ""
     }`;
     const token = await createVerificationToken(db, email);
-    const url = `${process.env.BASE_URL}user/login?t=${token}&p=${purpose}`;
+    const url = `${process.env.BASE_URL}user/verify?t=${token}&p=${purpose}`;
     const subjects: Record<string, string> = {
       verification: "voty: Bitte Email bestätigen",
       reset: "voty: Passwort zurücksetzen?",
@@ -278,10 +304,15 @@ export async function sendVerificationEmail(
     };
     const subject = subjects[purpose];
 
-    const conf = { email: email.replace(/\./g, "."), url, site };
+    const conf = { email: email.replace(/\./g, ".&#8203;"), url, site };
 
     await sendMail(from, email, subject, purpose, conf);
     logger.info(`Sending ${purpose} email to: ${email} `);
+
+    if (process.env.NODE_ENV !== "production") {
+      await fs.writeFile("/tmp/voty-verification-url", url);
+    }
+
     return { token: "MAYBE..." };
   } catch (err) {
     logger.error(`Error sending ${purpose} email`, err);
@@ -336,7 +367,7 @@ export const changePassword: FieldResolver<
   const user = await getUser(ctx);
   if (!user) throw new Error("Error.UserNotFound");
   const salt = await bcrypt.genSalt(10);
-  const hashed = await bcrypt.hash(args.password, salt);
+  const hashed = await bcrypt.hash(String(args.password), salt);
   const ok = await ctx.db.user.update({
     where: { id: user.id },
     data: { password: hashed },

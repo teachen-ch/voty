@@ -7,7 +7,7 @@ import { BallotResults as BallotResultsType } from "graphql/types";
 import type { Nullable } from "simplytyped";
 
 export const BallotResults: React.FC<{
-  results?: BallotResultsType | null;
+  results?: Nullable<BallotResultsType>;
 }> = ({ results }) => {
   if (!results) return null;
   if (!results.total) return <Text>Noch keine Stimmen</Text>;
@@ -15,6 +15,38 @@ export const BallotResults: React.FC<{
   const votes = (i: Nullable<number>) =>
     `${i === 0 ? "–" : i === 1 ? "Eine Stimme" : `${i} Stimmen`}`;
 
+  return (
+    <div className="results">
+      <Grid columns={[0, 0, "1fr 1fr"]}>
+        <Flex justifyItems="center" flex={1} justifySelf="center">
+          <Box
+            height={200}
+            width={200}
+            sx={{ backgroundColor: "white", borderRadius: 100 }}
+          >
+            <VotyPie results={results} />
+          </Box>
+        </Flex>
+        <Box textAlign="left" mb={2}>
+          <Grid columns="2fr 3fr" gap={2}>
+            <Text>Ja:</Text>
+            <Text>{votes(results.yes)}</Text>
+            <Text>Nein:</Text>
+            <Text>{votes(results.no)}</Text>
+            <Text>Enthalten:</Text>
+            <Text>{votes(results.abs)}</Text>
+            <Text>Total:</Text>
+            <Text>{results.total} Stimmen</Text>
+          </Grid>
+        </Box>
+      </Grid>
+    </div>
+  );
+};
+
+export const VotyPie: React.FC<{
+  results: BallotResultsType;
+}> = ({ results }) => {
   const data = [
     { title: "Ja", value: Number(results.yes), color: "green" },
     { title: "Nein", value: Number(results.no), color: "#d90000" },
@@ -54,42 +86,18 @@ export const BallotResults: React.FC<{
   };
 
   return (
-    <div className="results">
-      <Grid columns={[0, 0, "1fr 1fr"]}>
-        <Flex justifyItems="center" flex={1} justifySelf="center">
-          <Box
-            height={200}
-            width={200}
-            sx={{ backgroundColor: "white", borderRadius: 100 }}
-          >
-            <PieChart
-              data={data}
-              startAngle={-90}
-              paddingAngle={1}
-              lineWidth={20}
-              animate
-              label={pieLabel}
-              labelPosition={50}
-              style={{
-                fontWeight: "bold",
-                fontSize: "12px",
-              }}
-            />
-          </Box>
-        </Flex>
-        <Box textAlign="left" mb={2}>
-          <Grid columns="2fr 3fr" gap={2}>
-            <Text>Ja:</Text>
-            <Text>{votes(results.yes)}</Text>
-            <Text>Nein:</Text>
-            <Text>{votes(results.no)}</Text>
-            <Text>Enthalten:</Text>
-            <Text>{votes(results.abs)}</Text>
-            <Text>Total:</Text>
-            <Text>{results.total} Stimmen</Text>
-          </Grid>
-        </Box>
-      </Grid>
-    </div>
+    <PieChart
+      data={data}
+      startAngle={-90}
+      paddingAngle={1}
+      lineWidth={20}
+      animate
+      label={pieLabel}
+      labelPosition={50}
+      style={{
+        fontWeight: "bold",
+        fontSize: "12px",
+      }}
+    />
   );
 };

@@ -12,6 +12,7 @@
         restarted: yes
 
     - name: Enable Web Backend Service
-      service: { name: voty, enabled: yes, state: restarted }
+      service:
+        { name: voty, enabled: yes, state: restarted, runlevel: "default" }
   become: yes
   become_method: sudo

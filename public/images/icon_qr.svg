@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="140px" height="140px" viewBox="0 0 140 140" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Icon QR</title>
+    <g id="Icon-QR" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group" transform="translate(9.000000, 11.000000)" stroke="#FFFFFF" stroke-width="8">
+            <rect id="Rectangle" x="0" y="0" width="48" height="48"></rect>
+            <rect id="Rectangle" x="20" y="20" width="8" height="8"></rect>
+        </g>
+        <g id="Group-Copy" transform="translate(82.000000, 11.000000)" stroke="#FFFFFF" stroke-width="8">
+            <rect id="Rectangle" x="0" y="0" width="48" height="48"></rect>
+            <rect id="Rectangle" x="20" y="20" width="8" height="8"></rect>
+        </g>
+        <g id="Group-Copy-2" transform="translate(9.000000, 82.000000)" stroke="#FFFFFF" stroke-width="8">
+            <rect id="Rectangle" x="0" y="0" width="48" height="48"></rect>
+            <rect id="Rectangle" x="20" y="20" width="8" height="8"></rect>
+        </g>
+        <g id="Group-Copy-3" transform="translate(76.000000, 75.000000)" stroke="#FFFFFF" stroke-width="8">
+            <polyline id="Rectangle" transform="translate(18.000000, 42.000000) rotate(-270.000000) translate(-18.000000, -42.000000) " points="30 30 30 54 6 54"></polyline>
+            <g id="Group-2">
+                <line x1="24" y1="12" x2="-2.61035775e-13" y2="12" id="Rectangle-Copy-2" transform="translate(12.000000, 12.000000) rotate(-270.000000) translate(-12.000000, -12.000000) "></line>
+                <line x1="24" y1="12" x2="0" y2="12" id="Rectangle-Copy-3"></line>
+            </g>
+            <g id="Group-2-Copy" transform="translate(36.000000, 35.000000)">
+                <line x1="24" y1="12" x2="-2.61035775e-13" y2="12" id="Rectangle-Copy-2" transform="translate(12.000000, 12.000000) rotate(-270.000000) translate(-12.000000, -12.000000) "></line>
+                <line x1="24" y1="12" x2="0" y2="12" id="Rectangle-Copy-3"></line>
+            </g>
+            <polyline id="Rectangle-Copy" transform="translate(43.000000, 18.000000) rotate(-90.000000) translate(-43.000000, -18.000000) " points="55 6 55 30 31 30"></polyline>
+        </g>
+    </g>
+</svg>

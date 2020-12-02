@@ -1,6 +1,6 @@
 import { gql } from "@apollo/client";
 import { useUser } from "../state/user";
-import { Box, Link as A, Button } from "rebass";
+import { Text, Box, Link as A, Button } from "rebass";
 import { QForm, ErrorBox } from "./Form";
 import { useState, ReactElement } from "react";
 import {
@@ -9,7 +9,6 @@ import {
   TeamUserFieldsFragment,
   useCreateOneTeamMutation,
 } from "graphql/types";
-import { Page } from "./Page";
 
 const TeamAnonFields = gql`
   fragment TeamAnonFields on Team {
@@ -105,18 +104,10 @@ export const Teams: React.FC<TeamsProps> = ({ where, teamClick }) => {
   const teams = teamsQuery.data?.teams;
 
   if (teamsQuery.error) {
-    return (
-      <Page>
-        <h1>Error loading data: {teamsQuery.error.message}</h1>
-      </Page>
-    );
+    return <Text>Error loading data: {teamsQuery.error.message}</Text>;
   }
   if (teamsQuery.loading || !teams) {
-    return (
-      <Page>
-        <h1>Daten werden geladen</h1>
-      </Page>
-    );
+    return <Text>Daten werden geladen</Text>;
   }
 
   return (

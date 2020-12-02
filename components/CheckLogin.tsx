@@ -56,17 +56,12 @@ export default function CheckLogin({
     // skip query if user is already defined
     skip: user ? true : false,
     onCompleted: (data) => {
-      setLoading(false);
       setUser(data?.me); // could be undefined!
+      setLoading(false);
     },
   });
   useEffect(() => {
-    let mounted = true;
-    // if we skip above query, because user is already loaded
-    if (user && mounted) setLoading(false);
-    return () => {
-      mounted = false;
-    };
+    if (user) setLoading(false);
   }, [user]);
 
   if (loading) {

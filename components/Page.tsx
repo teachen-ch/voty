@@ -2,7 +2,7 @@ import { Flex, Box, Heading, Text, Link as A } from "rebass";
 import Head from "next/head";
 import { useUser } from "state/user";
 import { LoginForm } from "pages/user/login";
-import { ReactNode } from "react";
+import React, { ReactNode } from "react";
 import CheckLogin from "./CheckLogin";
 import Link from "next/link";
 import { FlexProps } from "rebass";
@@ -10,6 +10,7 @@ import { Role } from "graphql/types";
 import { Footer } from "components/Footer";
 import { TopBar } from "./TopBar";
 import IconClose from "../public/images/icon_close.svg";
+import { Spinner } from "theme-ui";
 
 export const Page: React.FC<{
   children?: React.ReactNode;
@@ -169,6 +170,10 @@ export const Container: React.FC<FlexProps> = (props) => {
     </>
   );
 };
+
+export const Loading: React.FC = () => (
+  <Spinner color="gray" size={20} mr={3} />
+);
 
 export const ErrorPage: React.FC = (props) => (
   <Page heading="Fehler">

@@ -1,5 +1,5 @@
 import { AppPage, LoggedInPage, ErrorPage } from "components/Page";
-import { Text, Box, Button, Flex, Heading } from "rebass";
+import { Text, Box, Image, Button, Flex } from "rebass";
 import { useRouter } from "next/router";
 import { useUser } from "state/user";
 import { useBallotQuery, BallotQuery, useVoteMutation } from "graphql/types";
@@ -10,10 +10,11 @@ import Link from "next/link";
 import { BigGray } from "components/BigButton";
 import { BallotDetails } from "components/Ballots";
 import { Breadcrumb, A } from "components/Breadcrumb";
+import { Nullable } from "simplytyped";
+import { Discussion } from "components/Discussion";
 
 export default function BallotPage(): ReactElement {
   const [success, setSuccess] = useState(false);
-  const [votyNow, setVotyNow] = useState(false);
   const router = useRouter();
   const user = useUser();
   const id = String(router.query.id);
@@ -39,23 +40,11 @@ export default function BallotPage(): ReactElement {
         <Breadcrumb>
           <A href="/">Start</A>
           <A href="/student/test">Abstimmungen</A>
-          <A onClick={() => setSuccess(false)}>{ballot.title}</A>
-          <b>Deine Stimme</b>
+          <b>{ballot.title}</b>
         </Breadcrumb>
-        <Text mb={4}>
-          Super, {user?.name}, Du hast nun anonym abgestimmt und Deine Stimme
-          wurde gezählt. Die Resultate der Abbstimmung könnt ihr mit Eurer
-          Lehrperson ansehen und besprechen.
-        </Text>
-        <Box textAlign="center">
-          <img
-            src="/images/voty_success.svg"
-            alt="Juhee"
-            style={{ maxWidth: "400px" }}
-          />
-        </Box>
+        <VotySuccess name={user?.name} />
         <Button
-          mt={4}
+          mt={3}
           width="100%"
           onClick={() => {
             window.scrollTo(0, 0);
@@ -64,40 +53,6 @@ export default function BallotPage(): ReactElement {
         >
           Zu den Abstimmungen
         </Button>
-      </LoggedInPage>
-    );
-  }
-
-  if (votyNow) {
-    return (
-      <LoggedInPage heading="Deine Stimme">
-        <Breadcrumb>
-          <A href="/">Start</A>
-          <A href="/student/test">Abstimmungen</A>
-          <A onClick={() => setVotyNow(false)}>{ballot.title}</A>
-          <b>Deine Stimme</b>
-        </Breadcrumb>
-        <Text textAlign="left" sx={{ margin: "0 auto" }}>
-          <Text mb={3}>
-            Jetzt bist du dran! Hast Du Dir eine Meinung gebildet? Wie stimmst
-            Du ab? Deine Wahl ist anonym, niemand kann nachverfolgen, wie Du
-            abstimmst.
-          </Text>
-          <Box variant="centered">
-            <Box maxWidth="500px">
-              <img src="/images/voty_now.svg" alt="Abstimmen" width="100%" />
-              <Box px={[0, 0, 2]} mt={[0, 0, -20]}>
-                <VotyNow
-                  ballot={ballot}
-                  onSuccess={() => {
-                    window.scrollTo(0, 0);
-                    setSuccess(true);
-                  }}
-                />
-              </Box>
-            </Box>
-          </Box>
-        </Text>
       </LoggedInPage>
     );
   }
@@ -111,24 +66,15 @@ export default function BallotPage(): ReactElement {
       </Breadcrumb>
 
       <Text>
-        Hier kannst Du zu den aktuellen nationalen Abstimmungsvorlagen anonym
-        Deine Stimme abgeben.
+        Jetzt bist du dran! Hast Du Dir eine Meinung gebildet? Wie stimmst Du
+        ab? Deine Wahl ist anonym, niemand kann nachverfolgen, wie Du abstimmst.
       </Text>
 
       <BallotDetails ballot={ballot}>
-        <Heading>
-          <hr />
-          Alles klar? Dann ab zur Abstimmung!
-        </Heading>
-        <Button
-          onClick={() => {
-            window.scrollTo(0, 0);
-            setVotyNow(true);
-          }}
-        >
-          Zur Abstimmung
-        </Button>
+        <VotyNow ballot={ballot} onSuccess={() => setSuccess(true)} />
       </BallotDetails>
+
+      <Discussion refid={ballot.id} />
     </LoggedInPage>
   );
 }
@@ -178,28 +124,53 @@ export const VotyNow: React.FC<{
   }
 
   return (
-    <Box>
-      <Flex justifyContent="space-between">
-        <A onClick={() => vote(ballot.id, 1)}>
-          <Flex flexDirection="column" alignItems="center">
-            <img src="/images/icon_yes.svg" height="100px" alt="Ja" />
-            Ja, ich stimme zu
-          </Flex>
-        </A>
-        <A onClick={() => vote(ballot.id, 2)}>
-          <Flex flexDirection="column" alignItems="center">
-            <img src="/images/icon_no.svg" height="100px" alt="Nein" />
-            <Text>Nein, ich lehne ab</Text>
-          </Flex>
-        </A>
-      </Flex>
-      <Box variant="centered" my={4}>
-        <Button variant="text">
-          Ich möchte mich{" "}
-          <A onClick={() => vote(ballot.id, 0)}>der Stimme enthalten</A>
-        </Button>
+    <Text textAlign="left" sx={{ margin: "0 auto" }}>
+      <Box variant="centered">
+        <Box width={["100%", "100%", 400]}>
+          <img src="/images/voty_now.svg" alt="Abstimmen" width="100%" />
+          <Box px={[0, 0, 2]} mt={[-10]}>
+            <Box fontSize={2}>
+              <Flex justifyContent="space-around">
+                <A onClick={() => vote(ballot.id, 1)}>
+                  <Flex flexDirection="column" alignItems="center">
+                    <Image src="/images/icon_yes.svg" height="50px" alt="Ja" />
+                    <Text mt={1}>Ja, ich stimme zu</Text>
+                  </Flex>
+                </A>
+                <A onClick={() => vote(ballot.id, 2)}>
+                  <Flex flexDirection="column" alignItems="center">
+                    <Image src="/images/icon_no.svg" height="50px" alt="Nein" />
+                    <Text mt={1}>Nein, ich lehne ab</Text>
+                  </Flex>
+                </A>
+              </Flex>
+              <Box variant="centered" mt={3} mb={4}>
+                <A onClick={() => vote(ballot.id, 0)} variant="underline">
+                  <Text fontSize={1}>Ich möchte mich der Stimme enthalten</Text>
+                </A>
+              </Box>
+              <ErrorBox my={2} error={error} />
+            </Box>
+          </Box>
+        </Box>
       </Box>
-      <ErrorBox my={2} error={error} />
-    </Box>
+    </Text>
   );
 };
+
+export const VotySuccess: React.FC<{ name: Nullable<string> }> = ({ name }) => (
+  <>
+    <Text mb={4}>
+      Super, {name}, Du hast nun anonym abgestimmt und Deine Stimme wurde
+      gezählt. Die Resultate der Abbstimmung könnt ihr mit Eurer Lehrperson
+      ansehen und besprechen.
+    </Text>
+    <Box textAlign="center">
+      <img
+        src="/images/voty_success.svg"
+        alt="Juhee"
+        style={{ maxWidth: "240px" }}
+      />
+    </Box>
+  </>
+);

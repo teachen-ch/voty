@@ -1,5 +1,5 @@
 import { LoggedInPage } from "components/Page";
-import { Heading, Text, Button } from "rebass";
+import { Heading, Image, Box, Text, Button } from "rebass";
 import { Users } from "components/Users";
 import { Input, Textarea } from "@rebass/forms";
 import { Grid, Label } from "theme-ui";
@@ -19,6 +19,9 @@ import {
 } from "graphql/types";
 import { Nullable } from "simplytyped";
 import { Breadcrumb, A } from "components/Breadcrumb";
+import { Spinner } from "theme-ui";
+import PanelPage from "./panel";
+// import { usePolling } from "util/hooks";
 
 export const INVITE_STUDENTS = gql`
   mutation inviteStudents($team: String!, $emails: [String!]!) {
@@ -42,6 +45,7 @@ export default function TeacherTeamPage(): React.ReactElement {
     variables: { where: { id } },
     skip: !id,
   });
+  // usePolling(teamQuery);
   const [emails, setEmails] = useState<string[]>([]);
   const [matches, setMatches] = useState<number | undefined>();
   const [results, setResults] = useState<
@@ -103,6 +107,10 @@ export default function TeacherTeamPage(): React.ReactElement {
   const failed = results?.failed?.length;
   const failedEmails = results?.failed?.join(", ");
 
+  if (team.name.toLowerCase().indexOf("discuss") >= 0) {
+    return <PanelPage />;
+  }
+
   return (
     <LoggedInPage heading="Detailansicht Klasse">
       <Breadcrumb>
@@ -158,9 +166,14 @@ export default function TeacherTeamPage(): React.ReactElement {
           width="100%"
           bg={!matches || inviteQuery.loading ? "muted" : "secondary"}
         >
-          {inviteQuery.loading
-            ? "Bitte warten..."
-            : `${matches ? matches : ""} Einladungen verschicken`}
+          {inviteQuery.loading ? (
+            <Text>
+              <Spinner color="gray" size={20} mr={3} />
+              Bitte warten...
+            </Text>
+          ) : (
+            `${matches ? matches : ""} Einladungen verschicken`
+          )}
         </Button>
 
         {duplicated ? (
@@ -193,12 +206,12 @@ export default function TeacherTeamPage(): React.ReactElement {
             height="24px"
             style={{ float: "left", marginRight: 8, verticalAlign: "center" }}
           />
-          Alternativ kannst Du Schüler*innen auch mit einem{" "}
+          Alternativ kannst Du auch mit einem{" "}
           <A
             onClick={() => setShowInviteLink(!showInviteLink)}
             variant="underline"
           >
-            Einladungslink
+            Einladungslink oder QR-Code
           </A>{" "}
           einladen
         </Text>
@@ -211,6 +224,7 @@ export default function TeacherTeamPage(): React.ReactElement {
 function InviteLink({ team }: { team: TeamTeacherFieldsFragment }) {
   usePageEvent({ category: "Teacher", action: "InviteLink" });
   const inviteRef = useRef<HTMLInputElement>(null);
+  const url = `${document?.location.origin}/i/${team.invite}`;
   const [status, setStatus] = useState("");
   if (!team.invite) {
     return null;
@@ -220,24 +234,37 @@ function InviteLink({ team }: { team: TeamTeacherFieldsFragment }) {
     if (ref && ref.current) {
       ref.current.select();
       document.execCommand("copy");
-      setStatus("Einladungslink erfolgreich in die Zwischenablage kopiert");
+      setStatus("Erfolgreich in die Zwischenablage kopiert");
     }
   }
 
+  function qrCode(url: string) {
+    const qrUrl = `/i/qr?url=${url}`;
+    window.open(
+      qrUrl,
+      "qr",
+      "width=400,height=400,toolbar=no,scrollbars=no, location=no, status=no"
+    );
+  }
+
   return (
-    <Grid my={1} gap={3} columns={[0, 0, "1fr 3fr 1fr"]}>
+    <Grid my={2} gap={3} columns={[0, 0, "1fr 3fr 2fr"]}>
       <Label sx={{ alignSelf: "center", fontSize: 1 }}>Einladungslink:</Label>
-      <Input
-        ref={inviteRef}
-        readOnly
-        fontSize={1}
-        value={`${document?.location.origin}/i/${team.invite}`}
-      />
-      <Button fontSize={1} onClick={() => copyInvite(inviteRef)}>
-        Kopieren
+      <Input ref={inviteRef} readOnly fontSize={1} value={url} />
+      <Button fontSize={1} onClick={() => qrCode(url)}>
+        <Box variant="centered">
+          <Image src="/images/icon_qr.svg" mr={2} height="25px" />
+          QR-Code
+        </Box>
       </Button>
-      <Text fontSize={1} sx={{ gridColumn: [0, 0, 2] }}>
-        {status}
+      <Text fontSize={1} sx={{ gridColumn: [0, 0, 2] }} mt="-10px">
+        {status ? (
+          status
+        ) : (
+          <a onClick={() => copyInvite(inviteRef)}>
+            In die <u>Zwischenablage</u> kopieren
+          </a>
+        )}
       </Text>
     </Grid>
   );

@@ -2,6 +2,7 @@ import { gql } from "@apollo/client";
 import {
   TeamTeacherFieldsFragment,
   useUpdateUserMutation,
+  useDeleteUserMutation,
   User,
   Gender,
   Role,
@@ -42,6 +43,14 @@ mutation updateUser($data: UserUpdateInput!, $where: UserWhereUniqueInput!) {
 }
 `;
 
+export const DELETE_USER = gql`
+  mutation deleteUser($where: UserWhereUniqueInput!) {
+    deleteUser(where: $where) {
+      id
+      shortname
+    }
+  }
+`;
 type myUser = Pick<
   User,
   "email" | "emailVerified" | "id" | "name" | "shortname"
@@ -52,57 +61,62 @@ export function Users({
 }: {
   users?: TeamTeacherFieldsFragment["members"];
 }): ReactElement {
-  return (
-    <>
-      <table style={{ borderTop: "2px solid white" }}>
-        {/*
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Email</th>
-            <th style={{ textAlign: "center", width: "1%" }}>Status</th>
-          </tr>
-        </thead>*/}
+  const [deleteUser] = useDeleteUserMutation({
+    update: (cache, result) => {
+      cache.evict({ id: `User:${result.data?.deleteUser?.id}` });
+      cache.gc();
+    },
+  });
 
-        <tbody>
-          {!users || users.length === 0 ? (
-            <tr>
-              <td colSpan={3}>
-                Es wurden noch keine Schüler*innen hinzugefügt
+  async function doDeleteUser(id: string) {
+    if (
+      confirm(
+        "Diese Email-Adresse wurde noch nicht bestätigt. Soll das Konto gelöscht werden?"
+      )
+    ) {
+      await deleteUser({ variables: { where: { id } } });
+    }
+  }
+
+  return (
+    <table style={{ borderTop: "2px solid white" }}>
+      <tbody>
+        {!users || users.length === 0 ? (
+          <tr>
+            <td colSpan={3}>Es wurden noch keine Schüler*innen hinzugefügt</td>
+          </tr>
+        ) : (
+          users?.map((user: myUser) => (
+            <tr key={user.id}>
+              <td style={{ maxWidth: "200px" }}>
+                <A href={`mailto:${user.email}`}>{user.shortname}</A>
+              </td>
+              <td>
+                <A
+                  sx={{ display: ["none", "none", "inline"] }}
+                  href={`mailto:${user.email}`}
+                >
+                  {user.email}
+                </A>
+              </td>
+              <td>
+                <Box variant="centered">
+                  {user.emailVerified ? (
+                    <Image src="/images/icon_user_ok.svg" alt="Bestätigt" />
+                  ) : (
+                    <Image
+                      src="/images/icon_user_nok.svg"
+                      alt="Nicht bestätigt"
+                      onClick={() => doDeleteUser(user.id)}
+                    />
+                  )}
+                </Box>
               </td>
             </tr>
-          ) : (
-            users?.map((user: myUser) => (
-              <tr key={user.id}>
-                <td style={{ maxWidth: "200px" }}>
-                  <A href={`mailto:${user.email}`}>{user.shortname}</A>
-                </td>
-                <td>
-                  <A
-                    sx={{ display: ["none", "none", "inline"] }}
-                    href={`mailto:${user.email}`}
-                  >
-                    {user.email}
-                  </A>
-                </td>
-                <td>
-                  <Box variant="centered">
-                    {user.emailVerified ? (
-                      <Image src="/images/icon_user_ok.svg" alt="Bestätigt" />
-                    ) : (
-                      <Image
-                        src="/images/icon_user_nok.svg"
-                        alt="Nicht bestätigt"
-                      />
-                    )}
-                  </Box>
-                </td>
-              </tr>
-            ))
-          )}
-        </tbody>
-      </table>
-    </>
+          ))
+        )}
+      </tbody>
+    </table>
   );
 }
 
@@ -128,9 +142,7 @@ export const ProfileEdit: React.FC<{
       onFinish && onFinish();
     },
     onError(error) {
-      if (error.message === "Error.DuplicateEmail") {
-        setError(error.message);
-      }
+      setError(error.message);
     },
   });
 
@@ -275,7 +287,7 @@ export const ProfileEdit: React.FC<{
             {isTeacher && (
               <ShowField label="Email" value="Kontaktiere uns für Änderungen" />
             )}
-            <Button type="submit" sx={{ gridColumn: [0, 0, 2] }}>
+            <Button type="submit" sx={{ gridColumn: [0, 0, 2] }} my={2}>
               Angaben speichern
             </Button>
             <ErrorBox error={error} my={4} />
