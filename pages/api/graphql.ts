@@ -16,6 +16,7 @@ const server = new ApolloServer({
     };
   },
 });
-const handler = server.createHandler({ path: "/api/graphql" });
 
-export default handler;
+export default server.createHandler({
+  path: "/api/graphql",
+});
