@@ -39,6 +39,7 @@
     "@prisma/client": "2.10.0",
     "@rebass/forms": "^4.0.6",
     "apollo-server-micro": "^2.19.0",
+    "graphql-request": "^3.3.0",
     "bcrypt": "^5.0.0",
     "cookie": "^0.4.1",
     "dayjs": "^1.8.35",

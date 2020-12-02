@@ -11150,12 +11150,12 @@ theme-ui@0.3.1:
   resolved "https://registry.yarnpkg.com/theme-ui/-/theme-ui-0.3.1.tgz#b00ee2c03eb3d820536af8b121c64d13b3777cf0"
   integrity sha512-My/TSALqp7Dst5Ez7nJA+94Q8zJhc26Z0qGo8kEWyoqHHJ5TU8xdhjLPBltTdQck3T32cSq5USIeSKU3JtxYUQ==
   dependencies:
-    "@theme-ui/color-modes" "^0.3.1"
-    "@theme-ui/components" "^0.3.1"
-    "@theme-ui/core" "^0.3.1"
-    "@theme-ui/css" "^0.3.1"
-    "@theme-ui/mdx" "^0.3.0"
-    "@theme-ui/theme-provider" "^0.3.1"
+    "@theme-ui/color-modes" "^0.3.4"
+    "@theme-ui/components" "^0.3.4"
+    "@theme-ui/core" "^0.3.4"
+    "@theme-ui/css" "^0.3.4"
+    "@theme-ui/mdx" "^0.3.4"
+    "@theme-ui/theme-provider" "^0.3.4"
 
 throttleit@^1.0.0:
   version "1.0.0"
