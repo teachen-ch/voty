@@ -5,27 +5,25 @@ import { useState } from "react";
 export default function Projekt(): React.ReactElement {
   return (
     <AppPage heading="voty.ch – Ein Projekt zur Förderung der Demokratie an den Schulen">
-      <Text textAlign="left">
-        <Text fontWeight="semi">
-          Die Demokratie ist eines der wohl wichtigsten Güter der Schweiz. Aber
-          wie ge­lingt es uns, die Ju­gendlichen für die Demo­kratie zu
-          begeis­tern?
-        </Text>
-        <Text mt={4}>
-          Wir glauben, dass ein demokratisches Verständnis nur durch
-          demokratische Praxis erreicht werden kann. Deshalb möchten wir mit
-          voty.ch bereits in der Schule eine Basis für das Demokratieverständnis
-          schaffen, dieses mit den Schüler*Innen praktisch anwenden und so die
-          Fähigkeiten fördern, welche für eine demokratische Partizipation
-          wichtig sind.
-        </Text>
-        <Card fontSize={2}>
-          <Heading as="h2" mt={0}>
-            Das Konzept von voty.ch kurz erklärt:
-          </Heading>
+      <Card fontSize={2}>
+        <Text textAlign="left">
+          <Text fontWeight="semi">
+            Die Demokratie ist eines der wohl wichtigsten Güter der Schweiz.
+            Aber wie ge­lingt es uns, die Ju­gendlichen für die Demo­kratie zu
+            begeis­tern?
+          </Text>
+          <Text mt={4}>
+            Wir glauben, dass ein demokratisches Verständnis nur durch
+            demokratische Praxis erreicht werden kann. Deshalb möchten wir mit
+            voty.ch bereits in der Schule eine Basis für das
+            Demokratieverständnis schaffen, dieses mit den Schüler*Innen
+            praktisch anwenden und so die Fähigkeiten fördern, welche für eine
+            demokratische Partizipation wichtig sind.
+          </Text>
+          <Heading as="h2">Das Konzept von voty.ch kurz erklärt:</Heading>
           <Text>
             voty.ch ist ein Pilotprojekt für eine Lernplattform zur
-            De­mo­kratie­förderung an Schulen in der Schweiz bestehend aus
+            De­mo­kratie­förderung an Schulen in der Schweiz bestehend aus drei
             Modulen:
           </Text>
           <Text mt={4}>
@@ -55,11 +53,16 @@ export default function Projekt(): React.ReactElement {
             </Detail>
           </Text>
           <Text mt={4}>
-            <strong>Modul «Demokratie testen»</strong>&nbsp;
+            <strong>
+              <A href="/abstimmung" variant="underline">
+                Modul «Demokratie testen»
+              </A>
+            </strong>
+            &nbsp;
             <Tag bg={"secondary"}>Live</Tag>
             <br /> Ein Abstimmungsmodul, mit dem aktuelle nationale Urnengänge
-            von den Schüler*Innen in der Klasse mit der Lehrerschaft diskutiert
-            und danach durchgeführt werden können.
+            von den Schüler*Innen in der Klasse zuerst diskutiert und danach
+            durchgeführt werden können.
             <Detail>
               <Text my={3}>
                 Um die Theorie in die Praxis zu übertragen, wollen wir
@@ -108,77 +111,84 @@ export default function Projekt(): React.ReactElement {
               </Text>
             </Detail>
           </Text>
-        </Card>
-        <Heading>Teilnahmevoraussetzungen</Heading>
-        <Text>
-          Sämtliche Angebote von voty.ch werden Schulen und Lehrpersonen
-          kostenlos angeboten und richten sich primär an die Stufen Sek-1,
-          Gymnasium und Berufsschule. Die Plattform voty.ch mit den drei Modulen
-          ist webbasierend aufgebaut und kann auf jedem Computer, Tablet oder
-          Smartphone mit Internetzugang ohne Installation einer zusätzlichen
-          Software genutzt werden.
+          <Heading>Teilnahmevoraussetzungen</Heading>
+          <Text>
+            Sämtliche Angebote von voty.ch werden Schulen und Lehrpersonen
+            kostenlos angeboten und richten sich primär an die Stufen Sek-1,
+            Gymnasium und Berufsschule. Die Plattform voty.ch mit den drei
+            Modulen ist webbasierend aufgebaut und kann auf jedem Computer,
+            Tablet oder Smartphone mit Internetzugang ohne Installation einer
+            zusätzlichen Software genutzt werden.
+          </Text>
+          <Heading>Datenschutz</Heading>
+          <Text>
+            Datenschutz und Sicherheit ist für uns zentral. Wir betreiben ein
+            Angebot für Schülerinnen und Schüler und bieten die Möglichkeit der
+            politischen Meinungsäusserung auf unserer Plattform. Deshalb setzen
+            wir alles daran, dass die bei uns gespeicherten Daten nach aktuellen
+            Standards gesichert. Weitere Informationen zum Datenschutz finden
+            Sie{" "}
+            <A href="/datenschutz" variant="underline">
+              hier
+            </A>
+            .
+          </Text>
+          <Heading>Wer steht hinter voty.ch?</Heading>
+          <Text>
+            voty.ch ist ein Projekt des Vereins «Teachen!» das im Rahmen des
+            prototypefund.opendata.ch entwickelt wird. Das Projektteam setzt
+            sich wie folgt zusammen:
+          </Text>
+          <Text fontSize={2}>
+            <ul>
+              <li>
+                <strong>Stefan Niederhauser</strong> (
+                <A
+                  href="https://linkedin.com/in/sniederhauser"
+                  variant="underline"
+                >
+                  LinkedIn
+                </A>
+                ), Projektleitung, technische Umsetzung
+              </li>
+              <li>
+                <strong>Roger Wiezel</strong> (
+                <A href="https://atelier-w.ch" variant="underline">
+                  atelier-w.ch
+                </A>
+                ), Grafische Gestaltung und User Experience
+              </li>
+              <li>
+                <strong>Urs Wildeisen</strong> (
+                <A href="https://phbern.ch" variant="underline">
+                  PH Bern
+                </A>
+                ), Pädagogische Begleitung
+              </li>
+              <li>
+                <strong>Barbara Reichen</strong> (
+                <A href="https://barbarareichen.com" variant="underline">
+                  barbarareichen.com
+                </A>
+                ), Pädagogische Begleitung
+              </li>
+            </ul>
+          </Text>
+          <Heading>Wir haben Ihr Interesse geweckt?</Heading>
+          <Text>
+            Sie sind am Projekt interessiert, haben Fragen, Anregungen oder
+            möchten als Pilotklasse am Projekt teilnehmen? Wir freuen uns auf
+            Ihre{" "}
+            <A href="/kontakt" variant="underline">
+              Kontaktaufnahme
+            </A>
+          </Text>
+          <Heading>Kontakt</Heading>
+          <Text>
+            Verein «Teachen!», Alpenweg 11, Münsingen, info@teachen.ch
+          </Text>
         </Text>
-        <Heading>Datenschutz</Heading>
-        <Text>
-          Datenschutz und Sicherheit ist für uns zentral. Wir betreiben ein
-          Angebot für Schülerinnen und Schüler und bieten die Möglichkeit der
-          politischen Meinungsäusserung auf unserer Plattform. Deshalb setzen
-          wir alles daran, dass die bei uns gespeicherten Daten nach aktuellen
-          Standards gesichert. Weitere Informationen zum Datenschutz finden sie
-          [hier].
-        </Text>
-        <Heading>Wer steht hinter voty.ch?</Heading>
-        <Text>
-          voty.ch ist ein Projekt des Vereins «Teachen!» das im Rahmen des
-          prototypefund.opendata.ch entwickelt wird. Das Projektteam setzt sich
-          wie folgt zusammen:
-        </Text>
-        <Text fontSize={2}>
-          <ul>
-            <li>
-              <strong>Stefan Niederhauser</strong> (
-              <A
-                href="https://linkedin.com/in/sniederhauser"
-                variant="underline"
-              >
-                LinkedIn
-              </A>
-              ), Projektleitung, technische Umsetzung
-            </li>
-            <li>
-              <strong>Roger Wiezel</strong> (
-              <A href="https://atelier-w.ch" variant="underline">
-                atelier-w.ch
-              </A>
-              ), Grafische Gestaltung und User Experience
-            </li>
-            <li>
-              <strong>Urs Wildeisen</strong> (
-              <A href="https://phbern.ch" variant="underline">
-                PH Bern
-              </A>
-              ), Pädagogische Begleitung
-            </li>
-            <li>
-              <strong>Barbara Reichen</strong> (
-              <A href="https://barbarareichen.com" variant="underline">
-                barbarareichen.com
-              </A>
-              ), Pädagogische Begleitung
-            </li>
-          </ul>
-        </Text>
-        <Heading>Wir haben Ihr Interesse geweckt?</Heading>
-        <Text>
-          Sie sind am Projekt interessiert, haben Fragen, Anregungen oder
-          möchten als Pilotklasse am Projekt teilnehmen? Wir freuen uns auf Ihre{" "}
-          <A href="/kontakt" variant="underline">
-            Kontaktaufnahme
-          </A>
-        </Text>
-        <Heading>Kontakt</Heading>
-        <Text>Verein «Teachen!», Alpenweg 11, Münsingen, info@teachen.ch</Text>
-      </Text>
+      </Card>
     </AppPage>
   );
 }
@@ -202,7 +212,7 @@ export const Detail: React.FC = ({ children }) => {
     <Text sx={{ display: "inline" }}>
       &nbsp;{" "}
       <A onClick={() => setOpen(!open)} variant="underline">
-        {open ? "" : "Im Detail…"}
+        {open ? "schliessen" : "Im Detail…"}
       </A>
       {open && children}
     </Text>
