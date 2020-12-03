@@ -50,9 +50,9 @@ export default function TeacherTeamPage(): React.ReactElement {
   const [matches, setMatches] = useState<number | undefined>();
   const [results, setResults] = useState<
     Nullable<{
-      created?: Nullable<string[]>;
-      failed?: Nullable<string[]>;
-      duplicated?: Nullable<string[]>;
+      created?: Nullable<Nullable<string>[]>;
+      failed?: Nullable<Nullable<string>[]>;
+      duplicated?: Nullable<Nullable<string>[]>;
     }>
   >();
   const [showInviteLink, setShowInviteLink] = useState(false);

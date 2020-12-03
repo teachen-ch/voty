@@ -1,5 +1,5 @@
 overwrite: true
-schema: "api.graphql"
+schema: "graphql/api.graphql"
 documents: ["**/*.tsx"]
 generates:
   graphql/types.ts:
@@ -8,7 +8,7 @@ generates:
       - "typescript-operations"
       - "typescript-react-apollo"
       #- "typescript-document-nodes"
-      #- "fragment-matcher"
+      - "fragment-matcher"
   graphql/modules.d.ts:
     plugins:
       - "typescript-graphql-files-modules"

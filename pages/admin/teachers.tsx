@@ -31,7 +31,7 @@ export const GET_TEACHERS = gql`
 
 export default function TeachersAdminPage(): ReactElement {
   const teachersQuery = useTeachersQuery({
-    variables: { where: { role: Role.Teacher } },
+    variables: { where: { role: { equals: Role.Teacher } } },
   });
   if (teachersQuery.loading) {
     return <LoggedInPage heading="Benutzer">Loading...</LoggedInPage>;

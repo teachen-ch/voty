@@ -61,9 +61,9 @@ export const Discussion: React.FC<{ refid: string; teamId?: string }> = ({
   return (
     <Box className="discussion">
       <Heading mt={0}>Diskussion</Heading>
-      {threads?.map((thread) => (
-        <ThreadDetail key={thread.id} thread={thread} />
-      ))}
+      {threads?.map(
+        (thread) => thread && <ThreadDetail key={thread.id} thread={thread} />
+      )}
       <PostThread refid={refid} user={user} teamId={teamId} />
     </Box>
   );

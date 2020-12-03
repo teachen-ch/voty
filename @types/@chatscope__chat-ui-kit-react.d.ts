@@ -80,6 +80,7 @@ declare module "@chatscope/chat-ui-kit-react" {
   declare const AttachmentButton: React.FC<{
     className?: string;
   }>;
+  /*
 
   declare const Avatar: React.FC<{
     active?: boolean;
@@ -3316,4 +3317,5 @@ declare module "@chatscope/chat-ui-kit-react" {
       }
     }
   }
+*/
 }

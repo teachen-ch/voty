@@ -1,6 +1,5 @@
-import { schema } from "nexus";
-import resolvers from "./resolvers";
-import { stringArg, intArg } from "nexus/components/schema";
+import resolvers from "../resolvers";
+import { extendType, objectType, stringArg, intArg } from "@nexus/schema";
 
 /*
 enum SwissvoteType {
@@ -17,11 +16,11 @@ enum SwissvoteResult {
   "NotRequired" = 3,
 }*/
 
-schema.objectType({
+export const Swissvote = objectType({
   name: "Swissvote",
   definition(t) {
     t.int("anr"); // anr
-    t.date("datum"); // datum
+    t.string("datum"); // datum
     t.string("titel_kurz_d"); // titel_kurz_d
     t.string("titel_off_d"); // titel_off_d
     t.string("stichwort"); // stichwort
@@ -36,7 +35,7 @@ schema.objectType({
   },
 });
 
-schema.extendType({
+export const SwissvotesQuery = extendType({
   type: "Query",
   definition(t) {
     t.field("swissvotes", {
@@ -48,7 +47,7 @@ schema.extendType({
         type: intArg(),
         result: intArg(),
       },
-      resolve: async (_root, args, ctx, info) =>
+      resolve: (_root, args, ctx, info) =>
         resolvers.swissvotes.getSwissvotes(_root, args, ctx, info),
     });
   },

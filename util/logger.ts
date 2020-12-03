@@ -1,5 +1,5 @@
 import { createLogger, transports, format, Logger } from "winston";
-import { Mail } from "winston-mail";
+import WinstonMail from "winston-mail";
 import { format as uformat } from "util";
 
 const env = process.env.NODE_ENV;
@@ -73,7 +73,7 @@ const jsonLogger = new transports.File({
   format: format.combine(format.timestamp(), format.logstash()),
 });
 
-const mailLogger: any = new Mail({
+const mailLogger: any = new WinstonMail.Mail({
   level: "mail",
   to: "stefan@teachen.ch",
   from: "voty@teachen.ch",

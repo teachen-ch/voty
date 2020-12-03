@@ -1,5 +1,6 @@
 import { Role, User } from "@prisma/client";
-import { FieldResolver } from "nexus/components/schema";
+import { FieldResolver } from "@nexus/schema";
+import { Context } from "../context";
 
 export const getTeamThreads: FieldResolver<"Query", "getTeamThreads"> = async (
   _root,
@@ -40,7 +41,7 @@ export const postThread: FieldResolver<"Mutation", "postThread"> = async (
   return thread;
 };
 
-async function assertTeam(teamId: string, user: User, ctx: NexusContext) {
+async function assertTeam(teamId: string, user: User, ctx: Context) {
   if (user.role === Role.Teacher) {
     const team = await ctx.db.team.findOne({ where: { id: teamId } });
     if (!team || team.teacherId !== user.id)

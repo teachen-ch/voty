@@ -8,7 +8,7 @@
     "forceConsistentCasingInFileNames": true,
     "noEmit": true,
     "esModuleInterop": true,
-    "module": "esnext",
+    "module": "commonjs",
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
@@ -17,16 +17,14 @@
     "rootDir": ".",
     "sourceMap": true,
     // nexus:
-    "typeRoots": ["node_modules/@types", "types"],
-    // nexus
+    "typeRoots": ["node_modules/@types", "./@types"],
     "plugins": [
-      { "name": "nexus/typescript-language-service" },
       { "name": "@divyenduz/ts-graphql-plugin" }
     ]
     // @testing-library
     // eek. this breaks nexus: https://github.com/graphql-nexus/nexus/issues/1036
     // "types": ["cypress", "@testing-library/cypress"]
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "types.d.ts", "."],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
   "exclude": ["**/node_modules", "**/.*/", "./cypress/"]
 }

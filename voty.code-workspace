@@ -22,6 +22,8 @@
       "data/": true,
       "yarn.lock": true
     },
-    "typescript.tsdk": "/Users/stefan/code/voty/node_modules/typescript/lib"
+    "typescript.tsdk": "/Users/stefan/code/voty/node_modules/typescript/lib",
+    "prisma.plugin.nextjs.addTypesOnSave": true,
+    "prisma.plugin.nextjs.hasPrompted": true
   }
 }

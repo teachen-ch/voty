@@ -1,15 +1,13 @@
 import {
   Role,
-  Ballot,
   BallotScope,
   User,
   PrismaClient,
   VoteWhereInput,
 } from "@prisma/client";
 import { randomBytes } from "crypto";
-import { FieldResolver } from "nexus/components/schema";
 import { setCookie, getCookie } from "../../util/cookies";
-import { NextApiRequest, NextApiResponse } from "next";
+import { FieldResolver } from "@nexus/schema";
 
 export const canVote: FieldResolver<"Ballot", "canVote"> = async (
   _root,
@@ -22,7 +20,7 @@ export const canVote: FieldResolver<"Ballot", "canVote"> = async (
 };
 
 export const hasVoted: FieldResolver<"Ballot", "hasVoted"> = async (
-  _root: Ballot,
+  _root,
   args,
   ctx
 ): Promise<boolean> => {
@@ -98,7 +96,7 @@ export const voteCode: FieldResolver<"Mutation", "voteCode"> = async (
 
   const ballot = ballotRun.ballot;
   const user = ctx.user;
-  if (user && getHasVoted({ ballot, user, db: ctx.db })) {
+  if (user && (await getHasVoted({ ballot, user, db: ctx.db }))) {
     throw new Error("Error.AlreadyVoted");
   }
 
@@ -118,7 +116,7 @@ export const voteCode: FieldResolver<"Mutation", "voteCode"> = async (
   const team = ballotRun?.team;
   if (team.code !== code) throw new Error("Error.BallotcodeWrong");
 
-  const voted = getCookie((ctx.req as unknown) as NextApiRequest, "voty", {});
+  const voted = getCookie(ctx.req, "voty", {});
   if (typeof voted !== "object") throw new Error("Error.StrangeCookie");
   if (ballotRunId in voted) {
     throw new Error("Error.AlreadyVoted");
@@ -142,7 +140,7 @@ export const voteCode: FieldResolver<"Mutation", "voteCode"> = async (
 
   voted[ballotRunId] = Date.now();
   const exp = 10 ** 11; // sometime in roughly 3.17 years...
-  setCookie((ctx.res as unknown) as NextApiResponse, "voty", voted, {
+  setCookie(ctx.res, "voty", voted, {
     maxAge: exp,
   });
   return { success: true, message: "OK_VOTED" };
@@ -297,8 +295,17 @@ export const getBallotResults: FieldResolver<
   return { yes, no, abs, total };
 };
 
+// TODO: FIXME... can't get this type correctly imported
+
 type PermissionArgs = {
-  ballot: Ballot;
+  ballot: {
+    scope: "School" | "Team" | "Cantonal" | "National" | "Public";
+    schoolId?: string | null;
+    teamId?: string | null;
+    start: Date;
+    end: Date;
+    id: string;
+  };
   user?: User;
   db: PrismaClient;
 };

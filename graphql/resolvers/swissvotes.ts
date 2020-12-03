@@ -1,4 +1,4 @@
-import { FieldResolver } from "nexus/components/schema";
+import { FieldResolver } from "@nexus/schema";
 import { Swissvote } from "graphql/types";
 
 export const getSwissvotes: FieldResolver<"Query", "swissvotes"> = async (

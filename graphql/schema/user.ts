@@ -1,26 +1,14 @@
-import { schema } from "nexus";
-import { users } from "./resolvers";
-import { stringArg } from "nexus/components/schema";
-import { upperFirst } from "lodash";
+import { users } from "../resolvers";
+import { stringArg, objectType, extendType } from "@nexus/schema";
 
-schema.objectType({
+export const User = objectType({
   name: "User",
   definition(t) {
     t.model.id();
-    t.string("email", {
-      nullable: true,
-      resolve({ email }) {
-        return email;
-      },
-    });
+    t.model.email();
     t.model.name();
     t.model.lastname();
-    t.string("shortname", {
-      resolve({ name, lastname }) {
-        if (!lastname) return name;
-        return `${name} ${upperFirst(lastname).substr(0, 1)}.`;
-      },
-    });
+    t.field("shortname", { type: "String", resolve: users.shortname });
     t.model.gender();
     t.model.year();
     t.model.emailVerified();
@@ -37,7 +25,7 @@ schema.objectType({
   },
 });
 
-schema.objectType({
+export const ResponseLogin = objectType({
   name: "ResponseLogin",
   definition(t) {
     t.string("token");
@@ -45,7 +33,7 @@ schema.objectType({
   },
 });
 
-schema.extendType({
+export const UserQuery = extendType({
   type: "Query",
   definition(t) {
     t.crud.user();
@@ -62,7 +50,7 @@ schema.extendType({
   },
 });
 
-schema.extendType({
+export const UserMutation = extendType({
   type: "Mutation",
   definition(t) {
     t.crud.createOneUser({
@@ -80,8 +68,8 @@ schema.extendType({
     t.field("login", {
       type: "ResponseLogin",
       args: {
-        email: stringArg(),
-        password: stringArg(),
+        email: stringArg({ required: true }),
+        password: stringArg({ required: true }),
       },
       resolve: users.login,
     });
@@ -115,14 +103,14 @@ schema.extendType({
         lastname: stringArg(),
         email: stringArg(),
         password: stringArg(),
-        invite: stringArg(),
+        invite: stringArg({ required: true }),
       },
       resolve: users.createInvitedUser,
     });
     t.field("acceptInvite", {
       type: "Team",
       args: {
-        invite: stringArg(),
+        invite: stringArg({ required: true }),
       },
       resolve: users.acceptInvite,
     });

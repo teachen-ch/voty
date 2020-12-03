@@ -45,7 +45,9 @@ const ShowBallots: React.FC<{ user: SessionUser }> = ({ user }) => {
   return (
     <Box id="ballots">
       {ballotRuns?.length ? (
-        ballotRuns.map((run) => <Ballot key={run.id} ballot={run.ballot} />)
+        ballotRuns.map(
+          (run) => run && <Ballot key={run.id} ballot={run.ballot} />
+        )
       ) : (
         <AllBallots />
       )}
@@ -55,7 +57,7 @@ const ShowBallots: React.FC<{ user: SessionUser }> = ({ user }) => {
 
 export const AllBallots: React.FC = () => {
   const ballotsQuery = useBallotsQuery({
-    variables: { where: { scope: BallotScope.National } },
+    variables: { where: { scope: { equals: BallotScope.National } } },
   });
 
   if (ballotsQuery.error) {

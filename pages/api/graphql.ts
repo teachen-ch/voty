@@ -1,33 +1,29 @@
-// this is the require-style from nexus docs
-/* eslint-disable */
-if (process.env.NODE_ENV === "development") require("nexus").default.reset();
+import { schema } from "../../graphql/makeschema";
+import { ApolloServer } from "apollo-server-micro";
+import resolvers from "../../graphql/resolvers";
+import { PrismaClient } from "@prisma/client";
 import { NextApiRequest, NextApiResponse } from "next";
 
-// eslint-disable-next-line
-const app = require("nexus").default;
-// eslint-disable-next-line
-const settings = require("nexus").settings;
-// eslint-disable-next-line
+export const config = {
+  api: {
+    bodyParser: false,
+  },
+};
 
-settings.change({
-  server: { path: "/api/graphql" },
-  logger: { filter: { level: "error" } },
+const prisma = new PrismaClient();
+
+const server = new ApolloServer({
+  schema,
+  context: ({ req, res }: { req: NextApiRequest; res: NextApiResponse }) => {
+    return {
+      user: resolvers.users.getSessionUser(req),
+      db: prisma,
+      req: req,
+      res: res,
+    };
+  },
 });
 
-settings.change({ server: { corse: false } });
-
-// Require your nexus modules here.
-// Do not write them inline, since the Nexus API is typed `any` because of `require` import.
-// require('...')
-require("../../graphql/schema");
-require("../../graphql/user");
-require("../../graphql/swissvotes");
-
-app.assemble();
-
-export default async (
-  req: NextApiRequest,
-  res: NextApiResponse
-): Promise<any> => {
-  return app.server.handlers.graphql(req, res);
-};
+export default server.createHandler({
+  path: "/api/graphql",
+});

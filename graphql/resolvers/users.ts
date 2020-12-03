@@ -4,11 +4,14 @@ import bcrypt from "bcrypt";
 import { sendMail } from "../../util/email";
 import { randomBytes, createHash } from "crypto";
 import logger from "../../util/logger";
-import { FieldResolver } from "nexus/components/schema";
+import { Context } from "../context";
+import { FieldResolver } from "@nexus/schema";
+import { NextApiRequest } from "next";
 import { promises as fs } from "fs";
+import { upperFirst } from "lodash";
 
 let secret = process.env.SESSION_SECRET || "";
-if (!secret) throw new Error("New SESSION_SECRET defined in .env");
+if (!secret) console.error("No SESSION_SECRET defined in .env");
 const expires = process.env.SESSION_EXPIRES || "1d";
 
 if (!secret) {
@@ -22,10 +25,15 @@ type ResponseLogin = {
   user?: User;
 };
 
+export const shortname: FieldResolver<"User", "shortname"> = (_root) => {
+  if (!_root.lastname) return String(_root.name);
+  return `${_root.name} ${upperFirst(_root.lastname).substr(0, 1)}.`;
+};
+
 export const login: FieldResolver<"Mutation", "login"> = async (
   _root,
   args,
-  ctx
+  ctx: Context
 ): Promise<ResponseLogin> => {
   const user = await ctx.db.user.findOne({
     where: { email: args.email?.toLowerCase() },
@@ -53,7 +61,7 @@ export const login: FieldResolver<"Mutation", "login"> = async (
   return startJWTSession(user, ctx);
 };
 
-function startJWTSession(user: User, ctx: NexusContext): ResponseLogin {
+function startJWTSession(user: User, ctx: Context): ResponseLogin {
   const token: string = jwt.sign({ user }, secret, {
     expiresIn: expires,
   });
@@ -62,18 +70,18 @@ function startJWTSession(user: User, ctx: NexusContext): ResponseLogin {
   return { token, user };
 }
 
-export function setRequestUser(user: User, ctx: NexusContext): void {
+export function setRequestUser(user: User, ctx: Context): void {
   ctx.user = user;
 }
 
-export function getRequestUser(ctx: NexusContext): User | undefined {
+export function getRequestUser(ctx: Context): User | undefined {
   return ctx.user;
 }
 
 export const createUser: FieldResolver<"Mutation", "createUser"> = async (
   _root,
   args,
-  ctx
+  ctx: Context
 ) => {
   try {
     const { password, name, lastname, role } = args.data;
@@ -121,7 +129,7 @@ export const createUser: FieldResolver<"Mutation", "createUser"> = async (
 export const acceptInvite: FieldResolver<"Mutation", "acceptInvite"> = async (
   _root,
   args,
-  ctx
+  ctx: Context
 ): Promise<Team> => {
   const team = await ctx.db.team.findOne({ where: { invite: args.invite } });
   if (!team) throw new Error("Error.InviteNotFound");
@@ -135,7 +143,7 @@ export const acceptInvite: FieldResolver<"Mutation", "acceptInvite"> = async (
 export async function connectUserTeam(
   user: User,
   team: Team,
-  ctx: NexusContext
+  ctx: Context
 ): Promise<User> {
   if (user.teamId) throw new Error("Error.AlreadyInTeam");
   return await ctx.db.user.update({
@@ -173,7 +181,7 @@ export const createInvitedUser: FieldResolver<
 export const updateUser: FieldResolver<"Mutation", "updateUser"> = async (
   _root,
   args,
-  ctx
+  ctx: Context
 ) => {
   // TODO: ensure this is not called with variable args by user
   const user = getRequestUser(ctx);
@@ -227,12 +235,12 @@ export const setSchool: FieldResolver<"Mutation", "setSchool"> = async (
   return updated;
 };
 
-export function getSessionUser(req: Request): User | undefined {
+export function getSessionUser(req: NextApiRequest): User | undefined {
   // what about req.body.token || req.query.token ?
   // const token = req.headers.get("x-access-token");
   // @ts-ignore
   // eslint-disable-next-line
-  const token = req.headers["x-access-token"];
+  const token = String(req.headers["x-access-token"]);
 
   if (token && token != "null") {
     const jwt = verifyJWT(token);
@@ -240,7 +248,7 @@ export function getSessionUser(req: Request): User | undefined {
   }
 }
 
-export async function getUser(ctx: NexusContext): Promise<User | null> {
+export async function getUser(ctx: Context): Promise<User | null> {
   try {
     const user = getRequestUser(ctx);
     if (user?.id) {
@@ -400,7 +408,7 @@ async function deleteExpiredTokens(prisma: PrismaClient) {
 export const deleteAccount: FieldResolver<"Mutation", "deleteAccount"> = async (
   _root,
   args,
-  ctx
+  ctx: Context
 ) => {
   try {
     const user = await getUser(ctx);

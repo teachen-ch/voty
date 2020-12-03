@@ -1,27 +1,16 @@
-import { schema, use } from "nexus";
-import { prisma } from "nexus-plugin-prisma";
-import { permissions } from "./permissions";
+// @ts-nocheck
+import {
+  objectType,
+  queryType,
+  mutationType,
+  stringArg,
+  intArg,
+} from "@nexus/schema";
 import { randomBytes } from "crypto";
-import resolvers from "./resolvers";
-import { intArg, stringArg } from "nexus/components/schema";
 import { random } from "lodash";
-use(
-  prisma({
-    features: {
-      crud: true,
-    },
-  })
-);
+import resolvers from "../resolvers";
 
-use(permissions);
-
-schema.addToContext(({ req }) => {
-  return {
-    user: resolvers.users.getSessionUser(req as any),
-  };
-});
-
-schema.objectType({
+export const School = objectType({
   name: "School",
   definition(t) {
     t.model.id();
@@ -36,7 +25,7 @@ schema.objectType({
   },
 });
 
-schema.objectType({
+export const Team = objectType({
   name: "Team",
   definition(t) {
     t.model.id();
@@ -51,7 +40,7 @@ schema.objectType({
   },
 });
 
-schema.objectType({
+export const Thread = objectType({
   name: "Thread",
   definition(t) {
     t.model.id();
@@ -77,7 +66,7 @@ schema.objectType({
   },
 });
 
-schema.objectType({
+export const Reaction = objectType({
   name: "Reaction",
   definition(t) {
     t.model.id();
@@ -87,7 +76,7 @@ schema.objectType({
   },
 });
 
-schema.objectType({
+export const Domain = objectType({
   name: "Domain",
   definition(t) {
     t.model.id();
@@ -97,7 +86,7 @@ schema.objectType({
   },
 });
 
-schema.objectType({
+export const Ballot = objectType({
   name: "Ballot",
   definition(t) {
     t.model.id();
@@ -108,6 +97,8 @@ schema.objectType({
     t.model.end();
     t.model.scope();
     t.model.canton();
+    t.model.teamId();
+    t.model.schoolId();
     t.boolean("canVote", {
       resolve: resolvers.ballots.canVote,
     });
@@ -117,7 +108,7 @@ schema.objectType({
   },
 });
 
-schema.objectType({
+export const BallotRun = objectType({
   name: "BallotRun",
   definition(t) {
     t.model.id();
@@ -128,7 +119,7 @@ schema.objectType({
   },
 });
 
-schema.objectType({
+export const Attachment = objectType({
   name: "Attachment",
   definition(t) {
     t.model.id();
@@ -140,7 +131,7 @@ schema.objectType({
   },
 });
 
-schema.objectType({
+export const Vote = objectType({
   name: "Vote",
   definition(t) {
     t.model.verify();
@@ -148,7 +139,7 @@ schema.objectType({
   },
 });
 
-schema.objectType({
+export const Response = objectType({
   name: "Response",
   definition(t) {
     t.boolean("success");
@@ -157,7 +148,7 @@ schema.objectType({
   },
 });
 
-schema.objectType({
+export const InviteResponse = objectType({
   name: "InviteResponse",
   definition(t) {
     t.string("created", { list: true });
@@ -167,7 +158,7 @@ schema.objectType({
   },
 });
 
-schema.objectType({
+export const BallotResults = objectType({
   name: "BallotResults",
   definition(t) {
     t.int("yes");
@@ -177,7 +168,7 @@ schema.objectType({
   },
 });
 
-schema.queryType({
+export const Query = queryType({
   definition(t) {
     t.crud.school();
     t.crud.schools({
@@ -229,7 +220,7 @@ schema.queryType({
   },
 });
 
-schema.mutationType({
+export const Mutation = mutationType({
   definition(t) {
     t.crud.createOneSchool();
     t.crud.deleteOneSchool();

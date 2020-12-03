@@ -47,19 +47,22 @@ export default function PanelBallots(): ReactElement {
   return (
     <PanelPage heading="Jetzt bist Du dran!">
       {ballotRuns?.length
-        ? ballotRuns.map((ballotRun) => (
-            <Card key={ballotRun.id} py={3}>
-              <Text fontWeight="bold" fontSize="24px" lineHeight="24px">
-                {ballotRun.ballot.title}
-              </Text>
-              <VoteCode
-                ballotRun={ballotRun}
-                refetch={refetch}
-                code={code}
-                voted={cookie[ballotRun.id] ? true : false}
-              />
-            </Card>
-          ))
+        ? ballotRuns.map(
+            (ballotRun) =>
+              ballotRun && (
+                <Card key={ballotRun.id} py={3}>
+                  <Text fontWeight="bold" fontSize="24px" lineHeight="24px">
+                    {ballotRun.ballot.title}
+                  </Text>
+                  <VoteCode
+                    ballotRun={ballotRun}
+                    refetch={refetch}
+                    code={code}
+                    voted={cookie[ballotRun.id] ? true : false}
+                  />
+                </Card>
+              )
+          )
         : "Keine Abstimmungen gefunden."}
       <Box mt={300} />
     </PanelPage>

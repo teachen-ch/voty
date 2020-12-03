@@ -56,9 +56,12 @@ export default function PanelBallots(): ReactElement {
   return (
     <PanelPage heading={`${team.name}`} teamId={team.id}>
       {ballotRuns?.length ? (
-        ballotRuns.map((ballotRun) => (
-          <BallotRunListing key={ballotRun.id} ballotRun={ballotRun} />
-        ))
+        ballotRuns.map(
+          (ballotRun) =>
+            ballotRun && (
+              <BallotRunListing key={ballotRun.id} ballotRun={ballotRun} />
+            )
+        )
       ) : (
         <>
           <Text mb={4}>

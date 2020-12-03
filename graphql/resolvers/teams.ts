@@ -1,15 +1,12 @@
+// @ts-nocheck
 import { createUser, connectUserTeam } from "./users";
 import { Role, PrismaClient } from "@prisma/client";
 import { upperFirst } from "lodash";
-import { FieldResolver } from "nexus/components/schema";
 import { User } from "@prisma/client";
 import { fetchMails } from "../../util/imap";
 import logger from "../../util/logger";
 
-export const inviteStudents: FieldResolver<
-  "Mutation",
-  "inviteStudents"
-> = async (_root, args, ctx) => {
+export const inviteStudents = async (_root, args, ctx) => {
   const { team: id, emails } = args;
   const user = ctx.user;
   let failed: string[] = [];
