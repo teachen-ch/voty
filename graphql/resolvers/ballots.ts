@@ -7,7 +7,10 @@ import {
 } from "@prisma/client";
 import { randomBytes } from "crypto";
 import { setCookie, getCookie } from "../../util/cookies";
-import { FieldResolver } from "@nexus/schema";
+import {
+  FieldResolver,
+  RootValue,
+} from "@nexus/schema/dist/typegenTypeHelpers";
 
 export const canVote: FieldResolver<"Ballot", "canVote"> = async (
   _root,
@@ -298,14 +301,14 @@ export const getBallotResults: FieldResolver<
 // TODO: FIXME... can't get this type correctly imported
 
 type PermissionArgs = {
-  ballot: {
+  ballot: RootValue<"Ballot"> /*{
     scope: "School" | "Team" | "Cantonal" | "National" | "Public";
     schoolId?: string | null;
     teamId?: string | null;
     start: Date;
     end: Date;
     id: string;
-  };
+  }*/;
   user?: User;
   db: PrismaClient;
 };
