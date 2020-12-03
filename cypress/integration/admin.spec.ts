@@ -20,6 +20,7 @@ describe("Test Admin Area", () => {
 
     // visit schools page
     cy.contains("Schulen").click();
+    cy.contains("Admin / Schulen");
     cy.contains("School One");
     cy.go("back");
   });
