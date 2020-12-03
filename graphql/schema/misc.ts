@@ -97,6 +97,8 @@ export const Ballot = objectType({
     t.model.end();
     t.model.scope();
     t.model.canton();
+    t.model.teamId();
+    t.model.schoolId();
     t.boolean("canVote", {
       resolve: resolvers.ballots.canVote,
     });

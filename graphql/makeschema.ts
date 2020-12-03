@@ -16,18 +16,21 @@ const baseSchema = makeSchema({
       prismaClient: (ctx) => (ctx.db = prisma),
       experimentalCRUD: true,
       shouldGenerateArtifacts: process.env.NODE_ENV === "development",
+      outputs: {
+        typegen: path.join(process.cwd(), "graphql", "nexus-plugin-prisma.ts"),
+      },
     }),
   ],
 
   typegenAutoConfig: {
-    debug: false,
+    debug: true,
     sources: [
       {
-        source: require.resolve("node_modules/.prisma/client/index.js"),
+        source: "@prisma/client",
         alias: "prisma",
       },
       {
-        source: require.resolve("graphql/context.ts"),
+        source: path.join(process.cwd(), "graphql", "context.ts"),
         alias: "ContextModule",
       },
     ],
@@ -37,8 +40,8 @@ const baseSchema = makeSchema({
   shouldGenerateArtifacts: process.env.NODE_ENV === "development",
   shouldExitAfterGenerateArtifacts: process.argv.includes("--nexus-exit"),
   outputs: {
-    schema: path.join(process.cwd(), "api.graphql"),
-    typegen: path.join(process.cwd(), "nexus.ts"),
+    schema: path.join(process.cwd(), "graphql", "api.graphql"),
+    typegen: path.join(process.cwd(), "graphql", "nexus.ts"),
   },
   prettierConfig: path.join(process.cwd(), ".prettierrc.js"),
 });

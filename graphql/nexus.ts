@@ -3,8 +3,7 @@
  * Do not make changes to this file directly
  */
 
-import * as ContextModule from "./graphql/context";
-import * as prisma from "./node_modules/.prisma/client/index.js";
+import * as ContextModule from "./context";
 
 declare global {
   interface NexusGenCustomOutputProperties<TypeName extends string> {
@@ -4385,11 +4384,11 @@ export interface NexusGenInputs {
 }
 
 export interface NexusGenEnums {
-  BallotScope: prisma.BallotScope;
-  Gender: prisma.Gender;
-  QueryMode: prisma.QueryMode;
-  Role: prisma.Role;
-  SortOrder: prisma.SortOrder;
+  BallotScope: "Cantonal" | "National" | "Public" | "School" | "Team";
+  Gender: "Female" | "Male" | "Other" | "Unkown";
+  QueryMode: "default" | "insensitive";
+  Role: "Admin" | "Principal" | "Student" | "Teacher" | "User";
+  SortOrder: "asc" | "desc";
 }
 
 export interface NexusGenScalars {
@@ -4402,8 +4401,26 @@ export interface NexusGenScalars {
 }
 
 export interface NexusGenRootTypes {
-  Attachment: prisma.Attachment;
-  Ballot: prisma.Ballot;
+  Attachment: {
+    // root type
+    createdAt: NexusGenScalars["DateTime"]; // DateTime!
+    file: string; // String!
+    id: string; // String!
+    updatedAt: NexusGenScalars["DateTime"]; // DateTime!
+  };
+  Ballot: {
+    // root type
+    body: string; // String!
+    canton?: string | null; // String
+    description: string; // String!
+    end: NexusGenScalars["DateTime"]; // DateTime!
+    id: string; // String!
+    schoolId?: string | null; // String
+    scope: NexusGenEnums["BallotScope"]; // BallotScope!
+    start: NexusGenScalars["DateTime"]; // DateTime!
+    teamId?: string | null; // String
+    title: string; // String!
+  };
   BallotResults: {
     // root type
     abs?: number | null; // Int
@@ -4411,8 +4428,18 @@ export interface NexusGenRootTypes {
     total?: number | null; // Int
     yes?: number | null; // Int
   };
-  BallotRun: prisma.BallotRun;
-  Domain: prisma.Domain;
+  BallotRun: {
+    // root type
+    end?: NexusGenScalars["DateTime"] | null; // DateTime
+    id: string; // String!
+    start?: NexusGenScalars["DateTime"] | null; // DateTime
+  };
+  Domain: {
+    // root type
+    approved: boolean; // Boolean!
+    id: string; // String!
+    name: string; // String!
+  };
   InviteResponse: {
     // root type
     created?: Array<string | null> | null; // [String]
@@ -4422,7 +4449,11 @@ export interface NexusGenRootTypes {
   };
   Mutation: {};
   Query: {};
-  Reaction: prisma.Reaction;
+  Reaction: {
+    // root type
+    emoij: string; // String!
+    id: string; // String!
+  };
   Response: {
     // root type
     error?: boolean | null; // Boolean
@@ -4434,7 +4465,16 @@ export interface NexusGenRootTypes {
     token?: string | null; // String
     user?: NexusGenRootTypes["User"] | null; // User
   };
-  School: prisma.School;
+  School: {
+    // root type
+    address: string; // String!
+    canton: string; // String!
+    city: string; // String!
+    id: string; // String!
+    name: string; // String!
+    type: string; // String!
+    zip: string; // String!
+  };
   Swissvote: {
     // root type
     annahme?: number | null; // Int
@@ -4451,10 +4491,39 @@ export interface NexusGenRootTypes {
     titel_off_d?: string | null; // String
     volk?: number | null; // Int
   };
-  Team: prisma.Team;
-  Thread: prisma.Thread;
-  User: prisma.User;
-  Vote: prisma.Vote;
+  Team: {
+    // root type
+    code?: string | null; // String
+    id: string; // String!
+    invite?: string | null; // String
+    name: string; // String!
+  };
+  Thread: {
+    // root type
+    createdAt: NexusGenScalars["DateTime"]; // DateTime!
+    id: string; // String!
+    ref: string; // String!
+    text: string; // String!
+    title: string; // String!
+    updatedAt: NexusGenScalars["DateTime"]; // DateTime!
+  };
+  User: {
+    // root type
+    createdAt: NexusGenScalars["DateTime"]; // DateTime!
+    email?: string | null; // String
+    emailVerified?: NexusGenScalars["DateTime"] | null; // DateTime
+    gender?: NexusGenEnums["Gender"] | null; // Gender
+    id: string; // String!
+    image?: string | null; // String
+    lastname?: string | null; // String
+    name?: string | null; // String
+    role: NexusGenEnums["Role"]; // Role!
+    year?: number | null; // Int
+  };
+  Vote: {
+    // root type
+    verify?: string | null; // String
+  };
 }
 
 export interface NexusGenAllTypes extends NexusGenRootTypes {
@@ -4907,8 +4976,10 @@ export interface NexusGenFieldTypes {
     end: NexusGenScalars["DateTime"]; // DateTime!
     hasVoted: boolean | null; // Boolean
     id: string; // String!
+    schoolId: string | null; // String
     scope: NexusGenEnums["BallotScope"]; // BallotScope!
     start: NexusGenScalars["DateTime"]; // DateTime!
+    teamId: string | null; // String
     title: string; // String!
   };
   BallotResults: {
@@ -5099,8 +5170,10 @@ export interface NexusGenFieldTypeNames {
     end: "DateTime";
     hasVoted: "Boolean";
     id: "String";
+    schoolId: "String";
     scope: "BallotScope";
     start: "DateTime";
+    teamId: "String";
     title: "String";
   };
   BallotResults: {

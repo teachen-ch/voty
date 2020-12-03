@@ -1,6 +1,5 @@
 import { users } from "../resolvers";
 import { stringArg, objectType, extendType } from "@nexus/schema";
-import { upperFirst } from "lodash";
 
 export const User = objectType({
   name: "User",
@@ -9,13 +8,7 @@ export const User = objectType({
     t.model.email();
     t.model.name();
     t.model.lastname();
-    t.field("shortname", {
-      type: "String",
-      resolve(_root) {
-        if (!_root.lastname) return _root.name;
-        return `${_root.name} ${upperFirst(_root.lastname).substr(0, 1)}.`;
-      },
-    });
+    t.field("shortname", { type: "String", resolve: users.shortname });
     t.model.gender();
     t.model.year();
     t.model.emailVerified();

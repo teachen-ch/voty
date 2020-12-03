@@ -215,8 +215,10 @@ type Ballot {
   end: DateTime!
   hasVoted: Boolean
   id: String!
+  schoolId: String
   scope: BallotScope!
   start: DateTime!
+  teamId: String
   title: String!
 }
 

@@ -8,6 +8,7 @@ import { Context } from "../context";
 import { FieldResolver } from "@nexus/schema";
 import { NextApiRequest } from "next";
 import { promises as fs } from "fs";
+import { upperFirst } from "lodash";
 
 let secret = process.env.SESSION_SECRET || "";
 if (!secret) console.error("No SESSION_SECRET defined in .env");
@@ -22,6 +23,11 @@ type ResponseLogin = {
   error?: string;
   token?: string;
   user?: User;
+};
+
+export const shortname: FieldResolver<"User", "shortname"> = (_root) => {
+  if (!_root.lastname) return String(_root.name);
+  return `${_root.name} ${upperFirst(_root.lastname).substr(0, 1)}.`;
 };
 
 export const login: FieldResolver<"Mutation", "login"> = async (

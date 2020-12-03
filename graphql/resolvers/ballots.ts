@@ -1,6 +1,5 @@
 import {
   Role,
-  Ballot,
   BallotScope,
   User,
   PrismaClient,
@@ -8,13 +7,12 @@ import {
 } from "@prisma/client";
 import { randomBytes } from "crypto";
 import { setCookie, getCookie } from "../../util/cookies";
-import { Context } from "../context";
 import { FieldResolver } from "@nexus/schema";
 
 export const canVote: FieldResolver<"Ballot", "canVote"> = async (
   _root,
   args,
-  ctx: Context
+  ctx
 ): Promise<boolean> => {
   const ballot = _root;
   const user = ctx.user;
@@ -22,9 +20,9 @@ export const canVote: FieldResolver<"Ballot", "canVote"> = async (
 };
 
 export const hasVoted: FieldResolver<"Ballot", "hasVoted"> = async (
-  _root: Ballot,
+  _root,
   args,
-  ctx: Context
+  ctx
 ): Promise<boolean> => {
   const ballot = _root;
   const user = ctx.user;
@@ -297,8 +295,17 @@ export const getBallotResults: FieldResolver<
   return { yes, no, abs, total };
 };
 
+// TODO: FIXME... can't get this type correctly imported
+
 type PermissionArgs = {
-  ballot: Ballot;
+  ballot: {
+    scope: "School" | "Team" | "Cantonal" | "National" | "Public";
+    schoolId?: string | null;
+    teamId?: string | null;
+    start: Date;
+    end: Date;
+    id: string;
+  };
   user?: User;
   db: PrismaClient;
 };

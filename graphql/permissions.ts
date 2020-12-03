@@ -1,7 +1,7 @@
 import { shield, rule, allow, or } from "graphql-shield";
-import { Role } from "@prisma/client";
+import { User, Role } from "@prisma/client";
 import { ballots } from "./resolvers";
-import { User, Ballot } from "@prisma/client";
+import { NexusGenFieldTypes } from "graphql/nexus";
 import type { Context } from "./context";
 
 // rule caching: "no_cache", "contextual" (relies on context, eg. authentication,
@@ -81,7 +81,7 @@ const updateUserCheck = rule({ cache: "strict" })(
 );
 
 export const canViewBallot = rule({ cache: "strict" })(
-  async (parent: Ballot, args, ctx: Context) => {
+  async (parent: NexusGenFieldTypes["Ballot"], args, ctx: Context) => {
     if (ctx.user?.role === Role.Admin) return true;
     return await ballots.viewPermission({
       ballot: parent,

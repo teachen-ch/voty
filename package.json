@@ -5,7 +5,6 @@
   "scripts": {
     "dev": "yarn run next",
     "next": "NODE_OPTIONS='--inspect' next dev",
-    "prebuild": "yarn run nexus:reflection",
     "build": "next build",
     "check": "next build && yarn test",
     "cypress:open": "dotenv cypress open",
