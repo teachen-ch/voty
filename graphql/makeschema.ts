@@ -23,7 +23,7 @@ const baseSchema = makeSchema({
   ],
 
   typegenAutoConfig: {
-    debug: true,
+    debug: false,
     sources: [
       {
         source: "@prisma/client",
