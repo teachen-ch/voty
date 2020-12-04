@@ -82,7 +82,7 @@ export const Include: React.FC<{ toggle: boolean }> = (props) => {
           h1: (props) => <Heading mt={2}>{props.children}</Heading>,
           // eslint-disable-next-line react/display-name
           wrapper: (props) => (
-            <Box my={2} p={3} bg="lightgray">
+            <Box my={2} p={3} bg="white" color="black">
               {props.children}
             </Box>
           ),
