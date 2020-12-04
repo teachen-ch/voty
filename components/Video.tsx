@@ -63,9 +63,7 @@ function extractSRFUrl(url: string) {
     id = m[1];
   } else if ((m = /srf\.ch\/play\/tv\/redirect\/detail\/([^?]*)/.exec(url))) {
     id = m[1];
-  } else if (
-    (m = /srf\.ch\/play\/embed\?urn=urn:srf:video:([^?]*)/.exec(url))
-  ) {
+  } else if ((m = /srf\.ch\/play\/.*?\?urn=urn:srf:video:([^?]*)/.exec(url))) {
     id = m[1];
   } else {
     throw new Error("No Video-ID found for SRF-Video: " + url);
