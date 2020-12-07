@@ -10,8 +10,9 @@ export { Info, Link, Video };
 type RefProps = {
   title?: string;
   href?: string;
+  source?: string;
   level?: string;
-  time?: string;
+  duration?: string;
 };
 
 export const Ref: React.FC<RefProps> = (props) => (
@@ -29,15 +30,15 @@ export const Ref: React.FC<RefProps> = (props) => (
       <strong>Schwierigkeit:</strong> {props.level}
       <br />
     </Show>
-    <Show if={props.time}>
-      <strong>Dauer:</strong> {props.time}
+    <Show if={props.duration}>
+      <strong>Dauer:</strong> {props.duration}
       <br />
     </Show>
     <hr />
     {props.children}
-    {props.href && (
+    {props.source && (
       <Box sx={{ textAlign: "right" }} fontSize={1}>
-        ↪ Quelle: <Source href={props.href} />
+        ↪ Quelle: <Source href={props.source} />
       </Box>
     )}
   </Box>

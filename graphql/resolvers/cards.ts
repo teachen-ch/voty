@@ -9,10 +9,9 @@ export const getCards: FieldResolver<"Query", "cards"> = async (
   ctx
 ) => {
   let { keywords, age, type } = args;
-  const db = ctx.db;
 
   let cards = await allCards();
-  keywords += ` ${age}`;
+  if (age) keywords = keywords ? `${keywords} ${age}` : age;
   if (keywords) {
     const words = keywords.toLowerCase().split(/[,\s;]/);
     for (const word of words) {
@@ -20,6 +19,9 @@ export const getCards: FieldResolver<"Query", "cards"> = async (
         (card) => Object.values(card).join(" ").toLowerCase().indexOf(word) >= 0
       );
     }
+  }
+  if (type) {
+    cards = cards.filter((card) => card.type === type);
   }
   return cards;
 };

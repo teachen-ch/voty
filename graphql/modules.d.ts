@@ -19,6 +19,15 @@ export const getBallotResults: DocumentNode;
 }
     
 
+declare module '*/Cards.tsx' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const cards: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
 declare module '*/CheckLogin.tsx' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;

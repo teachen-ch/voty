@@ -4813,6 +4813,20 @@ export type GetBallotResultsQuery = (
   )> }
 );
 
+export type CardsQueryVariables = Exact<{
+  keywords?: Maybe<Scalars['String']>;
+  age?: Maybe<Scalars['String']>;
+}>;
+
+
+export type CardsQuery = (
+  { __typename?: 'Query' }
+  & { cards?: Maybe<Array<Maybe<(
+    { __typename?: 'Card' }
+    & Pick<Card, 'id' | 'title' | 'description' | 'duration' | 'keywords' | 'type' | 'url' | 'source' | 'content' | 'age'>
+  )>>> }
+);
+
 export type LoginFieldsFragment = (
   { __typename?: 'User' }
   & Pick<User, 'id' | 'name' | 'lastname' | 'shortname' | 'gender' | 'year' | 'role' | 'email'>
@@ -5731,6 +5745,49 @@ export function useGetBallotResultsLazyQuery(baseOptions?: Apollo.LazyQueryHookO
 export type GetBallotResultsQueryHookResult = ReturnType<typeof useGetBallotResultsQuery>;
 export type GetBallotResultsLazyQueryHookResult = ReturnType<typeof useGetBallotResultsLazyQuery>;
 export type GetBallotResultsQueryResult = Apollo.QueryResult<GetBallotResultsQuery, GetBallotResultsQueryVariables>;
+export const CardsDocument = gql`
+    query cards($keywords: String, $age: String) {
+  cards(keywords: $keywords, age: $age) {
+    id
+    title
+    description
+    duration
+    keywords
+    type
+    url
+    source
+    content
+    age
+  }
+}
+    `;
+
+/**
+ * __useCardsQuery__
+ *
+ * To run a query within a React component, call `useCardsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useCardsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useCardsQuery({
+ *   variables: {
+ *      keywords: // value for 'keywords'
+ *      age: // value for 'age'
+ *   },
+ * });
+ */
+export function useCardsQuery(baseOptions?: Apollo.QueryHookOptions<CardsQuery, CardsQueryVariables>) {
+        return Apollo.useQuery<CardsQuery, CardsQueryVariables>(CardsDocument, baseOptions);
+      }
+export function useCardsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<CardsQuery, CardsQueryVariables>) {
+          return Apollo.useLazyQuery<CardsQuery, CardsQueryVariables>(CardsDocument, baseOptions);
+        }
+export type CardsQueryHookResult = ReturnType<typeof useCardsQuery>;
+export type CardsLazyQueryHookResult = ReturnType<typeof useCardsLazyQuery>;
+export type CardsQueryResult = Apollo.QueryResult<CardsQuery, CardsQueryVariables>;
 export const MeDocument = gql`
     query me {
   me {
