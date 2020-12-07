@@ -4434,6 +4434,19 @@ export interface NexusGenRootTypes {
     id: string; // String!
     start?: NexusGenScalars["DateTime"] | null; // DateTime
   };
+  Card: {
+    // root type
+    age?: string | null; // String
+    content?: string | null; // String
+    description?: string | null; // String
+    duration?: string | null; // String
+    id?: string | null; // String
+    keywords?: string | null; // String
+    source?: string | null; // String
+    title?: string | null; // String
+    type?: string | null; // String
+    url?: string | null; // String
+  };
   Domain: {
     // root type
     approved: boolean; // Boolean!
@@ -4997,6 +5010,19 @@ export interface NexusGenFieldTypes {
     start: NexusGenScalars["DateTime"] | null; // DateTime
     team: NexusGenRootTypes["Team"]; // Team!
   };
+  Card: {
+    // field return type
+    age: string | null; // String
+    content: string | null; // String
+    description: string | null; // String
+    duration: string | null; // String
+    id: string | null; // String
+    keywords: string | null; // String
+    source: string | null; // String
+    title: string | null; // String
+    type: string | null; // String
+    url: string | null; // String
+  };
   Domain: {
     // field return type
     approved: boolean; // Boolean!
@@ -5041,6 +5067,7 @@ export interface NexusGenFieldTypes {
     // field return type
     ballot: NexusGenRootTypes["Ballot"] | null; // Ballot
     ballots: NexusGenRootTypes["Ballot"][]; // [Ballot!]!
+    cards: Array<NexusGenRootTypes["Card"] | null> | null; // [Card]
     getBallotResults: NexusGenRootTypes["BallotResults"] | null; // BallotResults
     getBallotRuns: Array<NexusGenRootTypes["BallotRun"] | null> | null; // [BallotRun]
     getTeamThreads: Array<NexusGenRootTypes["Thread"] | null> | null; // [Thread]
@@ -5191,6 +5218,19 @@ export interface NexusGenFieldTypeNames {
     start: "DateTime";
     team: "Team";
   };
+  Card: {
+    // field return type name
+    age: "String";
+    content: "String";
+    description: "String";
+    duration: "String";
+    id: "String";
+    keywords: "String";
+    source: "String";
+    title: "String";
+    type: "String";
+    url: "String";
+  };
   Domain: {
     // field return type name
     approved: "Boolean";
@@ -5235,6 +5275,7 @@ export interface NexusGenFieldTypeNames {
     // field return type name
     ballot: "Ballot";
     ballots: "Ballot";
+    cards: "Card";
     getBallotResults: "BallotResults";
     getBallotRuns: "BallotRun";
     getTeamThreads: "Thread";
@@ -5475,6 +5516,12 @@ export interface NexusGenArgTypes {
       orderBy?: NexusGenInputs["BallotOrderByInput"][] | null; // [BallotOrderByInput!]
       where?: NexusGenInputs["BallotWhereInput"] | null; // BallotWhereInput
     };
+    cards: {
+      // args
+      age?: string | null; // String
+      keywords?: string | null; // String
+      type?: number | null; // Int
+    };
     getBallotResults: {
       // args
       ballotId: string; // String!
@@ -5634,6 +5681,7 @@ export type NexusGenObjectNames =
   | "Ballot"
   | "BallotResults"
   | "BallotRun"
+  | "Card"
   | "Domain"
   | "InviteResponse"
   | "Mutation"

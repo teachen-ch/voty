@@ -958,6 +958,19 @@ input BoolNullableFilter {
   not: NestedBoolNullableFilter
 }
 
+type Card {
+  age: String
+  content: String
+  description: String
+  duration: String
+  id: String
+  keywords: String
+  source: String
+  title: String
+  type: String
+  url: String
+}
+
 scalar DateTime
 
 input DateTimeFieldUpdateOperationsInput {
@@ -1409,6 +1422,7 @@ type Query {
     orderBy: [BallotOrderByInput!]
     where: BallotWhereInput
   ): [Ballot!]!
+  cards(age: String, keywords: String, type: Int): [Card]
   getBallotResults(
     ballotId: String!
     ballotRunId: String

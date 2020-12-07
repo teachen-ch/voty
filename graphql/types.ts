@@ -973,6 +973,20 @@ export type BoolNullableFilter = {
   not?: Maybe<NestedBoolNullableFilter>;
 };
 
+export type Card = {
+  __typename?: 'Card';
+  age?: Maybe<Scalars['String']>;
+  content?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
+  duration?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['String']>;
+  keywords?: Maybe<Scalars['String']>;
+  source?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+  url?: Maybe<Scalars['String']>;
+};
+
 
 export type DateTimeFieldUpdateOperationsInput = {
   set?: Maybe<Scalars['DateTime']>;
@@ -1537,6 +1551,7 @@ export type Query = {
   __typename?: 'Query';
   ballot?: Maybe<Ballot>;
   ballots: Array<Ballot>;
+  cards?: Maybe<Array<Maybe<Card>>>;
   getBallotResults?: Maybe<BallotResults>;
   getBallotRuns?: Maybe<Array<Maybe<BallotRun>>>;
   getTeamThreads?: Maybe<Array<Maybe<Thread>>>;
@@ -1563,6 +1578,13 @@ export type QueryBallotsArgs = {
   last?: Maybe<Scalars['Int']>;
   orderBy?: Maybe<Array<BallotOrderByInput>>;
   where?: Maybe<BallotWhereInput>;
+};
+
+
+export type QueryCardsArgs = {
+  age?: Maybe<Scalars['String']>;
+  keywords?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['Int']>;
 };
 
 

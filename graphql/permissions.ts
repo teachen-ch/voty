@@ -106,6 +106,8 @@ export const permissions = shield(
       getBallotRuns: allow,
       getBallotResults: allow,
       getTeamThreads: isUser,
+      swissvotes: allow,
+      cards: allow,
     },
     Mutation: {
       login: allow,
@@ -179,6 +181,8 @@ export const permissions = shield(
     InviteResponse: allow,
     Response: allow,
     Vote: isUser,
+    Swissvote: allow,
+    Card: allow,
   },
   {
     allowExternalErrors: true,
