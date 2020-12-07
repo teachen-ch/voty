@@ -1,0 +1,19 @@
+import { Info, Ref, Video, Center, Include } from "components/Learning";
+
+export const meta = {
+  id: "srf_foederalismus",
+  title: "SRF mySchool «Föderalismus»",
+  medium: "video",
+  age: "Sek-1, Sek-2, Berufsschule",
+  description: "SRF mySchool erklärt den Föderalismus in der Schweiz",
+  duration: "5 Minuten",
+  keywords: "",
+  source: "https://www.srf.ch/sendungen/myschool/themen/wirtschaft-politik",
+  url:
+    "https://www.srf.ch/play/tv/srf-myschool/video/foederalismus?urn=urn:srf:video:72c55ab4-bb34-4a9e-89bb-3f0e213aee28",
+};
+
+<Ref title={meta.title} source={meta.source} duration={meta.duration}>
+  <p>{meta.description}</p>
+  <Video url={meta.url} />
+</Ref>

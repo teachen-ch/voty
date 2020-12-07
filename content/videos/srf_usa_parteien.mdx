@@ -1,0 +1,23 @@
+import { Info, Ref, Video, Center, Include } from "components/Learning";
+
+export const meta = {
+  id: "srf_usa_parteien",
+  title: "SRF mySchool Das Zweiparteiensystem der USA",
+  description:
+    "Das Video von SRF erklärt auf witzige und einfache Weise, warum das Majorzsystem in den USA zwingend zu einem Zweiparteien-System führt.",
+  medium: "video",
+  age: "Sek-1, Sek-2, Berufsschule",
+  duration: "5 Minuten",
+  keywords:
+    "Wahlen, Parlamentswahl, Abstimmungen, Proporzwahl, Majorzwahl, Kumulieren, Panaschieren, Wahlzettel, Urne, Ständerat, Nationalrat, Gemeinden, Bund",
+  source: "https://www.srf.ch/sendungen/myschool/themen/wirtschaft-politik",
+  url:
+    "https://srf.ch/play/tv/redirect/detail/d4b2701b-297e-44bc-9b78-73b7b8a3b247",
+  didactic:
+    "Diskussion mit den Schülern über Vor- und Nachteile des Schweizer Proporzsystems gegenüber dem amerikanischen Majorzsystem",
+};
+
+<Ref title={meta.title} source={meta.source} duration={meta.duration}>
+  <p>{meta.description}</p>
+  <Video url={meta.url} />
+</Ref>
