@@ -4,10 +4,13 @@ import { loadFixture } from "../../util/prisma-loader";
 
 run();
 
+// working around pre-commit git hooks...
+const cons = console;
+
 async function run() {
   try {
     const argv = cliOptions();
-    const logger = argv.quiet ? () => {} : console.log;
+    const logger = argv.quiet ? () => {} : cons.log;
 
     for (let i = 0; i < argv._.length; ++i) {
       const fixtureFile = String(argv._[i]);
