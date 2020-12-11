@@ -9,6 +9,7 @@ describe("Test Live-Voting Panels", () => {
     cy.visit("/teacher");
     cy.contains("Class 1").click();
     // add testinitiative
+    cy.contains("Folgende Abstimmungen");
     cy.get(
       "#ballots tr:contains('Testinitiative') svg[alt='abgewählt']"
     ).click();
