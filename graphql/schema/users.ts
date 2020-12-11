@@ -1,5 +1,5 @@
 import { users } from "../resolvers";
-import { stringArg, objectType, extendType } from "@nexus/schema";
+import { stringArg, objectType, extendType, nonNull } from "@nexus/schema";
 
 export const User = objectType({
   name: "User",
@@ -44,7 +44,6 @@ export const UserQuery = extendType({
 
     t.field("me", {
       type: "User",
-      nullable: true,
       resolve: async (_root, args, ctx) => users.getUser(ctx),
     });
   },
@@ -68,16 +67,16 @@ export const UserMutation = extendType({
     t.field("login", {
       type: "ResponseLogin",
       args: {
-        email: stringArg({ required: true }),
-        password: stringArg({ required: true }),
+        email: nonNull(stringArg()),
+        password: nonNull(stringArg()),
       },
       resolve: users.login,
     });
     t.field("emailVerification", {
       type: "ResponseLogin",
       args: {
-        email: stringArg({ required: true }),
-        purpose: stringArg({ required: true }),
+        email: nonNull(stringArg()),
+        purpose: nonNull(stringArg()),
       },
       resolve: async (_root, args, ctx) =>
         users.sendVerificationEmail(args.email, args.purpose, ctx.db),
@@ -103,21 +102,21 @@ export const UserMutation = extendType({
         lastname: stringArg(),
         email: stringArg(),
         password: stringArg(),
-        invite: stringArg({ required: true }),
+        invite: nonNull(stringArg()),
       },
       resolve: users.createInvitedUser,
     });
     t.field("acceptInvite", {
       type: "Team",
       args: {
-        invite: stringArg({ required: true }),
+        invite: nonNull(stringArg()),
       },
       resolve: users.acceptInvite,
     });
     t.field("setSchool", {
       type: "User",
       args: {
-        school: stringArg({ required: true }),
+        school: nonNull(stringArg()),
       },
       resolve: users.setSchool,
     });

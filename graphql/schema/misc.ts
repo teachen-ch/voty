@@ -1,10 +1,11 @@
-// @ts-nocheck
 import {
   objectType,
   queryType,
   mutationType,
   stringArg,
   intArg,
+  nonNull,
+  list,
 } from "@nexus/schema";
 import { randomBytes } from "crypto";
 import { random } from "lodash";
@@ -48,9 +49,8 @@ export const Thread = objectType({
     t.model.text();
     t.model.ref();
     t.model.user();
-    t.field("children", {
+    t.list.field("children", {
       type: "Thread",
-      list: true,
       resolve: async (_root, args, ctx, info) =>
         await resolvers.threads.getTeamThreads(
           _root,
@@ -151,9 +151,9 @@ export const Response = objectType({
 export const InviteResponse = objectType({
   name: "InviteResponse",
   definition(t) {
-    t.string("created", { list: true });
-    t.string("failed", { list: true });
-    t.string("duplicated", { list: true });
+    t.list.string("created");
+    t.list.string("failed");
+    t.list.string("duplicated");
     t.field("team", { type: "Team" });
   },
 });
@@ -187,11 +187,10 @@ export const Query = queryType({
       filtering: true,
     });
 
-    t.field("getBallotRuns", {
+    t.list.field("getBallotRuns", {
       type: "BallotRun",
-      list: true,
       args: {
-        teamId: stringArg({ required: true }),
+        teamId: nonNull(stringArg()),
       },
       resolve: resolvers.ballots.getBallotRuns,
     });
@@ -199,21 +198,20 @@ export const Query = queryType({
     t.field("getBallotResults", {
       type: "BallotResults",
       args: {
-        ballotId: stringArg({ required: true }),
-        ballotRunId: stringArg({ required: false }),
-        teamId: stringArg({ required: false }),
-        schoolId: stringArg({ required: false }),
-        canton: stringArg({ required: false }),
+        ballotId: nonNull(stringArg()),
+        ballotRunId: stringArg(),
+        teamId: stringArg(),
+        schoolId: stringArg(),
+        canton: stringArg(),
       },
       resolve: resolvers.ballots.getBallotResults,
     });
 
-    t.field("getTeamThreads", {
+    t.list.field("getTeamThreads", {
       type: "Thread",
-      list: true,
       args: {
-        ref: stringArg({ required: true }),
-        teamId: stringArg({ required: false }),
+        ref: nonNull(stringArg()),
+        teamId: stringArg(),
       },
       resolve: resolvers.threads.getTeamThreads,
     });
@@ -235,8 +233,8 @@ export const Mutation = mutationType({
     t.field("vote", {
       type: "Vote",
       args: {
-        ballotId: stringArg({ required: true }),
-        vote: intArg({ required: true }),
+        ballotId: nonNull(stringArg()),
+        vote: nonNull(intArg()),
       },
       resolve: resolvers.ballots.vote,
     });
@@ -244,10 +242,10 @@ export const Mutation = mutationType({
     t.field("postThread", {
       type: "Thread",
       args: {
-        ref: stringArg({ required: true }),
-        teamId: stringArg({ required: true }),
-        title: stringArg({ required: true }),
-        text: stringArg({ required: true }),
+        ref: nonNull(stringArg()),
+        teamId: nonNull(stringArg()),
+        title: nonNull(stringArg()),
+        text: nonNull(stringArg()),
       },
       resolve: resolvers.threads.postThread,
     });
@@ -255,9 +253,9 @@ export const Mutation = mutationType({
     t.field("voteCode", {
       type: "Response",
       args: {
-        ballotRunId: stringArg({ required: true }),
-        vote: intArg({ required: true }),
-        code: stringArg({ required: true }),
+        ballotRunId: nonNull(stringArg()),
+        vote: nonNull(intArg()),
+        code: nonNull(stringArg()),
       },
       resolve: resolvers.ballots.voteCode,
     });
@@ -265,8 +263,8 @@ export const Mutation = mutationType({
     t.field("inviteStudents", {
       type: "InviteResponse",
       args: {
-        team: stringArg({ required: true }),
-        emails: stringArg({ list: true, required: true }),
+        team: nonNull(stringArg()),
+        emails: list(nonNull(stringArg())),
       },
       resolve: resolvers.teams.inviteStudents,
     });
@@ -274,8 +272,8 @@ export const Mutation = mutationType({
     t.field("addBallotRun", {
       type: "BallotRun",
       args: {
-        ballotId: stringArg({ required: true }),
-        teamId: stringArg({ required: true }),
+        ballotId: nonNull(stringArg()),
+        teamId: nonNull(stringArg()),
       },
       resolve: resolvers.ballots.addBallotRun,
     });
@@ -283,7 +281,7 @@ export const Mutation = mutationType({
     t.field("removeBallotRun", {
       type: "Response",
       args: {
-        ballotRunId: stringArg({ required: true }),
+        ballotRunId: nonNull(stringArg()),
       },
       resolve: resolvers.ballots.removeBallotRun,
     });
@@ -291,7 +289,7 @@ export const Mutation = mutationType({
     t.field("startBallotRun", {
       type: "BallotRun",
       args: {
-        ballotRunId: stringArg({ required: true }),
+        ballotRunId: nonNull(stringArg()),
       },
       resolve: resolvers.ballots.startBallotRun,
     });
@@ -299,7 +297,7 @@ export const Mutation = mutationType({
     t.field("endBallotRun", {
       type: "BallotRun",
       args: {
-        ballotRunId: stringArg({ required: true }),
+        ballotRunId: nonNull(stringArg()),
       },
       resolve: resolvers.ballots.endBallotRun,
     });

@@ -20,10 +20,8 @@ export const Card = objectType({
 export const CardsQuery = extendType({
   type: "Query",
   definition(t) {
-    t.field("cards", {
+    t.list.field("cards", {
       type: "Card",
-      list: true,
-      nullable: true,
       args: {
         keywords: stringArg(),
         age: stringArg(),

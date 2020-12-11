@@ -33,8 +33,12 @@ module.exports = (
   on("task", {
     async prismaLoader(fixtureFile) {
       const file = `${config.fixturesFolder}/${fixtureFile}`;
-      await loadFixture(file);
-      return null;
+      try {
+        await loadFixture(file);
+        return null;
+      } catch (e) {
+        console.error("Error loading fixture: ", file, e);
+      }
     },
     async getEmailLink() {
       const buffer = await fs.readFile("/tmp/voty-email");

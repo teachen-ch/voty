@@ -262,9 +262,9 @@ model Thread {
 
   createdAt DateTime @default(now()) @map(name: "created_at")
   updatedAt DateTime @default(now()) @map(name: "updated_at")
+  school    School?  @relation(fields: [schoolId], references: [id])
+  schoolId  String?
   @@map(name: "threads")
-  School   School? @relation(fields: [schoolId], references: [id])
-  schoolId String?
 }
 
 model Reaction {
@@ -279,4 +279,22 @@ model Reaction {
   createdAt DateTime @default(now()) @map(name: "created_at")
   updatedAt DateTime @default(now()) @map(name: "updated_at")
   @@map(name: "reactions")
+}
+
+model Swissvote {
+  anr            String   @id
+  datum          DateTime
+  titel_kurz_d   String
+  titel_off_d    String?
+  stichwort      String?
+  swissvoteslink String
+  rechtsform     Int
+  poster_ja      String?
+  poster_nein    String?
+  annahme        Int
+  volk           Int
+  stand          Int
+  kategorien     String?
+
+  @@map("swissvotes")
 }

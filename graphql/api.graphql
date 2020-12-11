@@ -11,17 +11,35 @@ type Attachment {
 
 input AttachmentCreateManyWithoutBallotInput {
   connect: [AttachmentWhereUniqueInput!]
+  connectOrCreate: [AttachmentCreateOrConnectWithoutballotInput!]
   create: [AttachmentCreateWithoutBallotInput!]
 }
 
 input AttachmentCreateManyWithoutThreadInput {
   connect: [AttachmentWhereUniqueInput!]
+  connectOrCreate: [AttachmentCreateOrConnectWithoutthreadInput!]
   create: [AttachmentCreateWithoutThreadInput!]
 }
 
 input AttachmentCreateManyWithoutUserInput {
   connect: [AttachmentWhereUniqueInput!]
+  connectOrCreate: [AttachmentCreateOrConnectWithoutuserInput!]
   create: [AttachmentCreateWithoutUserInput!]
+}
+
+input AttachmentCreateOrConnectWithoutballotInput {
+  create: AttachmentCreateWithoutBallotInput!
+  where: AttachmentWhereUniqueInput!
+}
+
+input AttachmentCreateOrConnectWithoutthreadInput {
+  create: AttachmentCreateWithoutThreadInput!
+  where: AttachmentWhereUniqueInput!
+}
+
+input AttachmentCreateOrConnectWithoutuserInput {
+  create: AttachmentCreateWithoutUserInput!
+  where: AttachmentWhereUniqueInput!
 }
 
 input AttachmentCreateWithoutBallotInput {
@@ -74,7 +92,7 @@ input AttachmentScalarWhereInput {
   userId: StringFilter
 }
 
-input AttachmentUpdateManyDataInput {
+input AttachmentUpdateManyMutationInput {
   createdAt: DateTimeFieldUpdateOperationsInput
   file: StringFieldUpdateOperationsInput
   id: StringFieldUpdateOperationsInput
@@ -84,46 +102,59 @@ input AttachmentUpdateManyDataInput {
 
 input AttachmentUpdateManyWithoutBallotInput {
   connect: [AttachmentWhereUniqueInput!]
+  connectOrCreate: [AttachmentCreateOrConnectWithoutballotInput!]
   create: [AttachmentCreateWithoutBallotInput!]
   delete: [AttachmentWhereUniqueInput!]
   deleteMany: [AttachmentScalarWhereInput!]
   disconnect: [AttachmentWhereUniqueInput!]
   set: [AttachmentWhereUniqueInput!]
   update: [AttachmentUpdateWithWhereUniqueWithoutBallotInput!]
-  updateMany: [AttachmentUpdateManyWithWhereNestedInput!]
+  updateMany: [AttachmentUpdateManyWithWhereWithoutBallotInput!]
   upsert: [AttachmentUpsertWithWhereUniqueWithoutBallotInput!]
 }
 
 input AttachmentUpdateManyWithoutThreadInput {
   connect: [AttachmentWhereUniqueInput!]
+  connectOrCreate: [AttachmentCreateOrConnectWithoutthreadInput!]
   create: [AttachmentCreateWithoutThreadInput!]
   delete: [AttachmentWhereUniqueInput!]
   deleteMany: [AttachmentScalarWhereInput!]
   disconnect: [AttachmentWhereUniqueInput!]
   set: [AttachmentWhereUniqueInput!]
   update: [AttachmentUpdateWithWhereUniqueWithoutThreadInput!]
-  updateMany: [AttachmentUpdateManyWithWhereNestedInput!]
+  updateMany: [AttachmentUpdateManyWithWhereWithoutThreadInput!]
   upsert: [AttachmentUpsertWithWhereUniqueWithoutThreadInput!]
 }
 
 input AttachmentUpdateManyWithoutUserInput {
   connect: [AttachmentWhereUniqueInput!]
+  connectOrCreate: [AttachmentCreateOrConnectWithoutuserInput!]
   create: [AttachmentCreateWithoutUserInput!]
   delete: [AttachmentWhereUniqueInput!]
   deleteMany: [AttachmentScalarWhereInput!]
   disconnect: [AttachmentWhereUniqueInput!]
   set: [AttachmentWhereUniqueInput!]
   update: [AttachmentUpdateWithWhereUniqueWithoutUserInput!]
-  updateMany: [AttachmentUpdateManyWithWhereNestedInput!]
+  updateMany: [AttachmentUpdateManyWithWhereWithoutUserInput!]
   upsert: [AttachmentUpsertWithWhereUniqueWithoutUserInput!]
 }
 
-input AttachmentUpdateManyWithWhereNestedInput {
-  data: AttachmentUpdateManyDataInput!
+input AttachmentUpdateManyWithWhereWithoutBallotInput {
+  data: AttachmentUpdateManyMutationInput!
   where: AttachmentScalarWhereInput!
 }
 
-input AttachmentUpdateWithoutBallotDataInput {
+input AttachmentUpdateManyWithWhereWithoutThreadInput {
+  data: AttachmentUpdateManyMutationInput!
+  where: AttachmentScalarWhereInput!
+}
+
+input AttachmentUpdateManyWithWhereWithoutUserInput {
+  data: AttachmentUpdateManyMutationInput!
+  where: AttachmentScalarWhereInput!
+}
+
+input AttachmentUpdateWithoutBallotInput {
   createdAt: DateTimeFieldUpdateOperationsInput
   file: StringFieldUpdateOperationsInput
   id: StringFieldUpdateOperationsInput
@@ -133,7 +164,7 @@ input AttachmentUpdateWithoutBallotDataInput {
   user: UserUpdateOneRequiredWithoutAttachmentsInput
 }
 
-input AttachmentUpdateWithoutThreadDataInput {
+input AttachmentUpdateWithoutThreadInput {
   ballot: BallotUpdateOneWithoutAttachmentsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   file: StringFieldUpdateOperationsInput
@@ -143,7 +174,7 @@ input AttachmentUpdateWithoutThreadDataInput {
   user: UserUpdateOneRequiredWithoutAttachmentsInput
 }
 
-input AttachmentUpdateWithoutUserDataInput {
+input AttachmentUpdateWithoutUserInput {
   ballot: BallotUpdateOneWithoutAttachmentsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   file: StringFieldUpdateOperationsInput
@@ -154,35 +185,35 @@ input AttachmentUpdateWithoutUserDataInput {
 }
 
 input AttachmentUpdateWithWhereUniqueWithoutBallotInput {
-  data: AttachmentUpdateWithoutBallotDataInput!
+  data: AttachmentUpdateWithoutBallotInput!
   where: AttachmentWhereUniqueInput!
 }
 
 input AttachmentUpdateWithWhereUniqueWithoutThreadInput {
-  data: AttachmentUpdateWithoutThreadDataInput!
+  data: AttachmentUpdateWithoutThreadInput!
   where: AttachmentWhereUniqueInput!
 }
 
 input AttachmentUpdateWithWhereUniqueWithoutUserInput {
-  data: AttachmentUpdateWithoutUserDataInput!
+  data: AttachmentUpdateWithoutUserInput!
   where: AttachmentWhereUniqueInput!
 }
 
 input AttachmentUpsertWithWhereUniqueWithoutBallotInput {
   create: AttachmentCreateWithoutBallotInput!
-  update: AttachmentUpdateWithoutBallotDataInput!
+  update: AttachmentUpdateWithoutBallotInput!
   where: AttachmentWhereUniqueInput!
 }
 
 input AttachmentUpsertWithWhereUniqueWithoutThreadInput {
   create: AttachmentCreateWithoutThreadInput!
-  update: AttachmentUpdateWithoutThreadDataInput!
+  update: AttachmentUpdateWithoutThreadInput!
   where: AttachmentWhereUniqueInput!
 }
 
 input AttachmentUpsertWithWhereUniqueWithoutUserInput {
   create: AttachmentCreateWithoutUserInput!
-  update: AttachmentUpdateWithoutUserDataInput!
+  update: AttachmentUpdateWithoutUserInput!
   where: AttachmentWhereUniqueInput!
 }
 
@@ -224,37 +255,79 @@ type Ballot {
 
 input BallotCreateManyWithoutCreatorInput {
   connect: [BallotWhereUniqueInput!]
+  connectOrCreate: [BallotCreateOrConnectWithoutcreatorInput!]
   create: [BallotCreateWithoutCreatorInput!]
 }
 
 input BallotCreateManyWithoutSchoolInput {
   connect: [BallotWhereUniqueInput!]
+  connectOrCreate: [BallotCreateOrConnectWithoutschoolInput!]
   create: [BallotCreateWithoutSchoolInput!]
 }
 
 input BallotCreateManyWithoutTeamInput {
   connect: [BallotWhereUniqueInput!]
+  connectOrCreate: [BallotCreateOrConnectWithoutteamInput!]
   create: [BallotCreateWithoutTeamInput!]
 }
 
 input BallotCreateOneWithoutAttachmentsInput {
   connect: BallotWhereUniqueInput
+  connectOrCreate: BallotCreateOrConnectWithoutattachmentsInput
   create: BallotCreateWithoutAttachmentsInput
 }
 
 input BallotCreateOneWithoutBallotRunsInput {
   connect: BallotWhereUniqueInput
+  connectOrCreate: BallotCreateOrConnectWithoutBallotRunsInput
   create: BallotCreateWithoutBallotRunsInput
 }
 
 input BallotCreateOneWithoutVotedInput {
   connect: BallotWhereUniqueInput
+  connectOrCreate: BallotCreateOrConnectWithoutvotedInput
   create: BallotCreateWithoutVotedInput
 }
 
 input BallotCreateOneWithoutVotesInput {
   connect: BallotWhereUniqueInput
+  connectOrCreate: BallotCreateOrConnectWithoutvotesInput
   create: BallotCreateWithoutVotesInput
+}
+
+input BallotCreateOrConnectWithoutattachmentsInput {
+  create: BallotCreateWithoutAttachmentsInput!
+  where: BallotWhereUniqueInput!
+}
+
+input BallotCreateOrConnectWithoutBallotRunsInput {
+  create: BallotCreateWithoutBallotRunsInput!
+  where: BallotWhereUniqueInput!
+}
+
+input BallotCreateOrConnectWithoutcreatorInput {
+  create: BallotCreateWithoutCreatorInput!
+  where: BallotWhereUniqueInput!
+}
+
+input BallotCreateOrConnectWithoutschoolInput {
+  create: BallotCreateWithoutSchoolInput!
+  where: BallotWhereUniqueInput!
+}
+
+input BallotCreateOrConnectWithoutteamInput {
+  create: BallotCreateWithoutTeamInput!
+  where: BallotWhereUniqueInput!
+}
+
+input BallotCreateOrConnectWithoutvotedInput {
+  create: BallotCreateWithoutVotedInput!
+  where: BallotWhereUniqueInput!
+}
+
+input BallotCreateOrConnectWithoutvotesInput {
+  create: BallotCreateWithoutVotesInput!
+  where: BallotWhereUniqueInput!
 }
 
 input BallotCreateWithoutAttachmentsInput {
@@ -441,17 +514,35 @@ type BallotRun {
 
 input BallotRunCreateManyWithoutBallotInput {
   connect: [BallotRunWhereUniqueInput!]
+  connectOrCreate: [BallotRunCreateOrConnectWithoutballotInput!]
   create: [BallotRunCreateWithoutBallotInput!]
 }
 
 input BallotRunCreateManyWithoutTeamInput {
   connect: [BallotRunWhereUniqueInput!]
+  connectOrCreate: [BallotRunCreateOrConnectWithoutteamInput!]
   create: [BallotRunCreateWithoutTeamInput!]
 }
 
 input BallotRunCreateOneWithoutVoteInput {
   connect: BallotRunWhereUniqueInput
+  connectOrCreate: BallotRunCreateOrConnectWithoutVoteInput
   create: BallotRunCreateWithoutVoteInput
+}
+
+input BallotRunCreateOrConnectWithoutballotInput {
+  create: BallotRunCreateWithoutBallotInput!
+  where: BallotRunWhereUniqueInput!
+}
+
+input BallotRunCreateOrConnectWithoutteamInput {
+  create: BallotRunCreateWithoutTeamInput!
+  where: BallotRunWhereUniqueInput!
+}
+
+input BallotRunCreateOrConnectWithoutVoteInput {
+  create: BallotRunCreateWithoutVoteInput!
+  where: BallotRunWhereUniqueInput!
 }
 
 input BallotRunCreateWithoutBallotInput {
@@ -495,7 +586,7 @@ input BallotRunScalarWhereInput {
   teamId: StringFilter
 }
 
-input BallotRunUpdateManyDataInput {
+input BallotRunUpdateManyMutationInput {
   end: NullableDateTimeFieldUpdateOperationsInput
   id: StringFieldUpdateOperationsInput
   start: NullableDateTimeFieldUpdateOperationsInput
@@ -503,43 +594,51 @@ input BallotRunUpdateManyDataInput {
 
 input BallotRunUpdateManyWithoutBallotInput {
   connect: [BallotRunWhereUniqueInput!]
+  connectOrCreate: [BallotRunCreateOrConnectWithoutballotInput!]
   create: [BallotRunCreateWithoutBallotInput!]
   delete: [BallotRunWhereUniqueInput!]
   deleteMany: [BallotRunScalarWhereInput!]
   disconnect: [BallotRunWhereUniqueInput!]
   set: [BallotRunWhereUniqueInput!]
   update: [BallotRunUpdateWithWhereUniqueWithoutBallotInput!]
-  updateMany: [BallotRunUpdateManyWithWhereNestedInput!]
+  updateMany: [BallotRunUpdateManyWithWhereWithoutBallotInput!]
   upsert: [BallotRunUpsertWithWhereUniqueWithoutBallotInput!]
 }
 
 input BallotRunUpdateManyWithoutTeamInput {
   connect: [BallotRunWhereUniqueInput!]
+  connectOrCreate: [BallotRunCreateOrConnectWithoutteamInput!]
   create: [BallotRunCreateWithoutTeamInput!]
   delete: [BallotRunWhereUniqueInput!]
   deleteMany: [BallotRunScalarWhereInput!]
   disconnect: [BallotRunWhereUniqueInput!]
   set: [BallotRunWhereUniqueInput!]
   update: [BallotRunUpdateWithWhereUniqueWithoutTeamInput!]
-  updateMany: [BallotRunUpdateManyWithWhereNestedInput!]
+  updateMany: [BallotRunUpdateManyWithWhereWithoutTeamInput!]
   upsert: [BallotRunUpsertWithWhereUniqueWithoutTeamInput!]
 }
 
-input BallotRunUpdateManyWithWhereNestedInput {
-  data: BallotRunUpdateManyDataInput!
+input BallotRunUpdateManyWithWhereWithoutBallotInput {
+  data: BallotRunUpdateManyMutationInput!
+  where: BallotRunScalarWhereInput!
+}
+
+input BallotRunUpdateManyWithWhereWithoutTeamInput {
+  data: BallotRunUpdateManyMutationInput!
   where: BallotRunScalarWhereInput!
 }
 
 input BallotRunUpdateOneWithoutVoteInput {
   connect: BallotRunWhereUniqueInput
+  connectOrCreate: BallotRunCreateOrConnectWithoutVoteInput
   create: BallotRunCreateWithoutVoteInput
   delete: Boolean
   disconnect: Boolean
-  update: BallotRunUpdateWithoutVoteDataInput
+  update: BallotRunUpdateWithoutVoteInput
   upsert: BallotRunUpsertWithoutVoteInput
 }
 
-input BallotRunUpdateWithoutBallotDataInput {
+input BallotRunUpdateWithoutBallotInput {
   end: NullableDateTimeFieldUpdateOperationsInput
   id: StringFieldUpdateOperationsInput
   start: NullableDateTimeFieldUpdateOperationsInput
@@ -547,7 +646,7 @@ input BallotRunUpdateWithoutBallotDataInput {
   Vote: VoteUpdateManyWithoutBallotRunInput
 }
 
-input BallotRunUpdateWithoutTeamDataInput {
+input BallotRunUpdateWithoutTeamInput {
   ballot: BallotUpdateOneRequiredWithoutBallotRunsInput
   end: NullableDateTimeFieldUpdateOperationsInput
   id: StringFieldUpdateOperationsInput
@@ -555,7 +654,7 @@ input BallotRunUpdateWithoutTeamDataInput {
   Vote: VoteUpdateManyWithoutBallotRunInput
 }
 
-input BallotRunUpdateWithoutVoteDataInput {
+input BallotRunUpdateWithoutVoteInput {
   ballot: BallotUpdateOneRequiredWithoutBallotRunsInput
   end: NullableDateTimeFieldUpdateOperationsInput
   id: StringFieldUpdateOperationsInput
@@ -564,29 +663,29 @@ input BallotRunUpdateWithoutVoteDataInput {
 }
 
 input BallotRunUpdateWithWhereUniqueWithoutBallotInput {
-  data: BallotRunUpdateWithoutBallotDataInput!
+  data: BallotRunUpdateWithoutBallotInput!
   where: BallotRunWhereUniqueInput!
 }
 
 input BallotRunUpdateWithWhereUniqueWithoutTeamInput {
-  data: BallotRunUpdateWithoutTeamDataInput!
+  data: BallotRunUpdateWithoutTeamInput!
   where: BallotRunWhereUniqueInput!
 }
 
 input BallotRunUpsertWithoutVoteInput {
   create: BallotRunCreateWithoutVoteInput!
-  update: BallotRunUpdateWithoutVoteDataInput!
+  update: BallotRunUpdateWithoutVoteInput!
 }
 
 input BallotRunUpsertWithWhereUniqueWithoutBallotInput {
   create: BallotRunCreateWithoutBallotInput!
-  update: BallotRunUpdateWithoutBallotDataInput!
+  update: BallotRunUpdateWithoutBallotInput!
   where: BallotRunWhereUniqueInput!
 }
 
 input BallotRunUpsertWithWhereUniqueWithoutTeamInput {
   create: BallotRunCreateWithoutTeamInput!
-  update: BallotRunUpdateWithoutTeamDataInput!
+  update: BallotRunUpdateWithoutTeamInput!
   where: BallotRunWhereUniqueInput!
 }
 
@@ -636,7 +735,7 @@ enum BallotScope {
   Team
 }
 
-input BallotUpdateManyDataInput {
+input BallotUpdateManyMutationInput {
   body: StringFieldUpdateOperationsInput
   canton: NullableStringFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
@@ -651,76 +750,93 @@ input BallotUpdateManyDataInput {
 
 input BallotUpdateManyWithoutCreatorInput {
   connect: [BallotWhereUniqueInput!]
+  connectOrCreate: [BallotCreateOrConnectWithoutcreatorInput!]
   create: [BallotCreateWithoutCreatorInput!]
   delete: [BallotWhereUniqueInput!]
   deleteMany: [BallotScalarWhereInput!]
   disconnect: [BallotWhereUniqueInput!]
   set: [BallotWhereUniqueInput!]
   update: [BallotUpdateWithWhereUniqueWithoutCreatorInput!]
-  updateMany: [BallotUpdateManyWithWhereNestedInput!]
+  updateMany: [BallotUpdateManyWithWhereWithoutCreatorInput!]
   upsert: [BallotUpsertWithWhereUniqueWithoutCreatorInput!]
 }
 
 input BallotUpdateManyWithoutSchoolInput {
   connect: [BallotWhereUniqueInput!]
+  connectOrCreate: [BallotCreateOrConnectWithoutschoolInput!]
   create: [BallotCreateWithoutSchoolInput!]
   delete: [BallotWhereUniqueInput!]
   deleteMany: [BallotScalarWhereInput!]
   disconnect: [BallotWhereUniqueInput!]
   set: [BallotWhereUniqueInput!]
   update: [BallotUpdateWithWhereUniqueWithoutSchoolInput!]
-  updateMany: [BallotUpdateManyWithWhereNestedInput!]
+  updateMany: [BallotUpdateManyWithWhereWithoutSchoolInput!]
   upsert: [BallotUpsertWithWhereUniqueWithoutSchoolInput!]
 }
 
 input BallotUpdateManyWithoutTeamInput {
   connect: [BallotWhereUniqueInput!]
+  connectOrCreate: [BallotCreateOrConnectWithoutteamInput!]
   create: [BallotCreateWithoutTeamInput!]
   delete: [BallotWhereUniqueInput!]
   deleteMany: [BallotScalarWhereInput!]
   disconnect: [BallotWhereUniqueInput!]
   set: [BallotWhereUniqueInput!]
   update: [BallotUpdateWithWhereUniqueWithoutTeamInput!]
-  updateMany: [BallotUpdateManyWithWhereNestedInput!]
+  updateMany: [BallotUpdateManyWithWhereWithoutTeamInput!]
   upsert: [BallotUpsertWithWhereUniqueWithoutTeamInput!]
 }
 
-input BallotUpdateManyWithWhereNestedInput {
-  data: BallotUpdateManyDataInput!
+input BallotUpdateManyWithWhereWithoutCreatorInput {
+  data: BallotUpdateManyMutationInput!
+  where: BallotScalarWhereInput!
+}
+
+input BallotUpdateManyWithWhereWithoutSchoolInput {
+  data: BallotUpdateManyMutationInput!
+  where: BallotScalarWhereInput!
+}
+
+input BallotUpdateManyWithWhereWithoutTeamInput {
+  data: BallotUpdateManyMutationInput!
   where: BallotScalarWhereInput!
 }
 
 input BallotUpdateOneRequiredWithoutBallotRunsInput {
   connect: BallotWhereUniqueInput
+  connectOrCreate: BallotCreateOrConnectWithoutBallotRunsInput
   create: BallotCreateWithoutBallotRunsInput
-  update: BallotUpdateWithoutBallotRunsDataInput
+  update: BallotUpdateWithoutBallotRunsInput
   upsert: BallotUpsertWithoutBallotRunsInput
 }
 
 input BallotUpdateOneRequiredWithoutVotedInput {
   connect: BallotWhereUniqueInput
+  connectOrCreate: BallotCreateOrConnectWithoutvotedInput
   create: BallotCreateWithoutVotedInput
-  update: BallotUpdateWithoutVotedDataInput
+  update: BallotUpdateWithoutVotedInput
   upsert: BallotUpsertWithoutVotedInput
 }
 
 input BallotUpdateOneRequiredWithoutVotesInput {
   connect: BallotWhereUniqueInput
+  connectOrCreate: BallotCreateOrConnectWithoutvotesInput
   create: BallotCreateWithoutVotesInput
-  update: BallotUpdateWithoutVotesDataInput
+  update: BallotUpdateWithoutVotesInput
   upsert: BallotUpsertWithoutVotesInput
 }
 
 input BallotUpdateOneWithoutAttachmentsInput {
   connect: BallotWhereUniqueInput
+  connectOrCreate: BallotCreateOrConnectWithoutattachmentsInput
   create: BallotCreateWithoutAttachmentsInput
   delete: Boolean
   disconnect: Boolean
-  update: BallotUpdateWithoutAttachmentsDataInput
+  update: BallotUpdateWithoutAttachmentsInput
   upsert: BallotUpsertWithoutAttachmentsInput
 }
 
-input BallotUpdateWithoutAttachmentsDataInput {
+input BallotUpdateWithoutAttachmentsInput {
   BallotRuns: BallotRunUpdateManyWithoutBallotInput
   body: StringFieldUpdateOperationsInput
   canton: NullableStringFieldUpdateOperationsInput
@@ -740,7 +856,7 @@ input BallotUpdateWithoutAttachmentsDataInput {
   votes: VoteUpdateManyWithoutBallotInput
 }
 
-input BallotUpdateWithoutBallotRunsDataInput {
+input BallotUpdateWithoutBallotRunsInput {
   attachments: AttachmentUpdateManyWithoutBallotInput
   body: StringFieldUpdateOperationsInput
   canton: NullableStringFieldUpdateOperationsInput
@@ -760,7 +876,7 @@ input BallotUpdateWithoutBallotRunsDataInput {
   votes: VoteUpdateManyWithoutBallotInput
 }
 
-input BallotUpdateWithoutCreatorDataInput {
+input BallotUpdateWithoutCreatorInput {
   attachments: AttachmentUpdateManyWithoutBallotInput
   BallotRuns: BallotRunUpdateManyWithoutBallotInput
   body: StringFieldUpdateOperationsInput
@@ -780,7 +896,7 @@ input BallotUpdateWithoutCreatorDataInput {
   votes: VoteUpdateManyWithoutBallotInput
 }
 
-input BallotUpdateWithoutSchoolDataInput {
+input BallotUpdateWithoutSchoolInput {
   attachments: AttachmentUpdateManyWithoutBallotInput
   BallotRuns: BallotRunUpdateManyWithoutBallotInput
   body: StringFieldUpdateOperationsInput
@@ -800,7 +916,7 @@ input BallotUpdateWithoutSchoolDataInput {
   votes: VoteUpdateManyWithoutBallotInput
 }
 
-input BallotUpdateWithoutTeamDataInput {
+input BallotUpdateWithoutTeamInput {
   attachments: AttachmentUpdateManyWithoutBallotInput
   BallotRuns: BallotRunUpdateManyWithoutBallotInput
   body: StringFieldUpdateOperationsInput
@@ -820,7 +936,7 @@ input BallotUpdateWithoutTeamDataInput {
   votes: VoteUpdateManyWithoutBallotInput
 }
 
-input BallotUpdateWithoutVotedDataInput {
+input BallotUpdateWithoutVotedInput {
   attachments: AttachmentUpdateManyWithoutBallotInput
   BallotRuns: BallotRunUpdateManyWithoutBallotInput
   body: StringFieldUpdateOperationsInput
@@ -840,7 +956,7 @@ input BallotUpdateWithoutVotedDataInput {
   votes: VoteUpdateManyWithoutBallotInput
 }
 
-input BallotUpdateWithoutVotesDataInput {
+input BallotUpdateWithoutVotesInput {
   attachments: AttachmentUpdateManyWithoutBallotInput
   BallotRuns: BallotRunUpdateManyWithoutBallotInput
   body: StringFieldUpdateOperationsInput
@@ -861,55 +977,55 @@ input BallotUpdateWithoutVotesDataInput {
 }
 
 input BallotUpdateWithWhereUniqueWithoutCreatorInput {
-  data: BallotUpdateWithoutCreatorDataInput!
+  data: BallotUpdateWithoutCreatorInput!
   where: BallotWhereUniqueInput!
 }
 
 input BallotUpdateWithWhereUniqueWithoutSchoolInput {
-  data: BallotUpdateWithoutSchoolDataInput!
+  data: BallotUpdateWithoutSchoolInput!
   where: BallotWhereUniqueInput!
 }
 
 input BallotUpdateWithWhereUniqueWithoutTeamInput {
-  data: BallotUpdateWithoutTeamDataInput!
+  data: BallotUpdateWithoutTeamInput!
   where: BallotWhereUniqueInput!
 }
 
 input BallotUpsertWithoutAttachmentsInput {
   create: BallotCreateWithoutAttachmentsInput!
-  update: BallotUpdateWithoutAttachmentsDataInput!
+  update: BallotUpdateWithoutAttachmentsInput!
 }
 
 input BallotUpsertWithoutBallotRunsInput {
   create: BallotCreateWithoutBallotRunsInput!
-  update: BallotUpdateWithoutBallotRunsDataInput!
+  update: BallotUpdateWithoutBallotRunsInput!
 }
 
 input BallotUpsertWithoutVotedInput {
   create: BallotCreateWithoutVotedInput!
-  update: BallotUpdateWithoutVotedDataInput!
+  update: BallotUpdateWithoutVotedInput!
 }
 
 input BallotUpsertWithoutVotesInput {
   create: BallotCreateWithoutVotesInput!
-  update: BallotUpdateWithoutVotesDataInput!
+  update: BallotUpdateWithoutVotesInput!
 }
 
 input BallotUpsertWithWhereUniqueWithoutCreatorInput {
   create: BallotCreateWithoutCreatorInput!
-  update: BallotUpdateWithoutCreatorDataInput!
+  update: BallotUpdateWithoutCreatorInput!
   where: BallotWhereUniqueInput!
 }
 
 input BallotUpsertWithWhereUniqueWithoutSchoolInput {
   create: BallotCreateWithoutSchoolInput!
-  update: BallotUpdateWithoutSchoolDataInput!
+  update: BallotUpdateWithoutSchoolInput!
   where: BallotWhereUniqueInput!
 }
 
 input BallotUpsertWithWhereUniqueWithoutTeamInput {
   create: BallotCreateWithoutTeamInput!
-  update: BallotUpdateWithoutTeamDataInput!
+  update: BallotUpdateWithoutTeamInput!
   where: BallotWhereUniqueInput!
 }
 
@@ -1013,12 +1129,24 @@ type Domain {
 
 input DomainCreateOneWithoutSchoolsInput {
   connect: DomainWhereUniqueInput
+  connectOrCreate: DomainCreateOrConnectWithoutschoolsInput
   create: DomainCreateWithoutSchoolsInput
 }
 
 input DomainCreateOneWithoutTeamInput {
   connect: DomainWhereUniqueInput
+  connectOrCreate: DomainCreateOrConnectWithoutTeamInput
   create: DomainCreateWithoutTeamInput
+}
+
+input DomainCreateOrConnectWithoutschoolsInput {
+  create: DomainCreateWithoutSchoolsInput!
+  where: DomainWhereUniqueInput!
+}
+
+input DomainCreateOrConnectWithoutTeamInput {
+  create: DomainCreateWithoutTeamInput!
+  where: DomainWhereUniqueInput!
 }
 
 input DomainCreateWithoutSchoolsInput {
@@ -1037,30 +1165,32 @@ input DomainCreateWithoutTeamInput {
 
 input DomainUpdateOneWithoutSchoolsInput {
   connect: DomainWhereUniqueInput
+  connectOrCreate: DomainCreateOrConnectWithoutschoolsInput
   create: DomainCreateWithoutSchoolsInput
   delete: Boolean
   disconnect: Boolean
-  update: DomainUpdateWithoutSchoolsDataInput
+  update: DomainUpdateWithoutSchoolsInput
   upsert: DomainUpsertWithoutSchoolsInput
 }
 
 input DomainUpdateOneWithoutTeamInput {
   connect: DomainWhereUniqueInput
+  connectOrCreate: DomainCreateOrConnectWithoutTeamInput
   create: DomainCreateWithoutTeamInput
   delete: Boolean
   disconnect: Boolean
-  update: DomainUpdateWithoutTeamDataInput
+  update: DomainUpdateWithoutTeamInput
   upsert: DomainUpsertWithoutTeamInput
 }
 
-input DomainUpdateWithoutSchoolsDataInput {
+input DomainUpdateWithoutSchoolsInput {
   approved: BoolFieldUpdateOperationsInput
   id: StringFieldUpdateOperationsInput
   name: StringFieldUpdateOperationsInput
   Team: TeamUpdateManyWithoutDomainInput
 }
 
-input DomainUpdateWithoutTeamDataInput {
+input DomainUpdateWithoutTeamInput {
   approved: BoolFieldUpdateOperationsInput
   id: StringFieldUpdateOperationsInput
   name: StringFieldUpdateOperationsInput
@@ -1069,12 +1199,12 @@ input DomainUpdateWithoutTeamDataInput {
 
 input DomainUpsertWithoutSchoolsInput {
   create: DomainCreateWithoutSchoolsInput!
-  update: DomainUpdateWithoutSchoolsDataInput!
+  update: DomainUpdateWithoutSchoolsInput!
 }
 
 input DomainUpsertWithoutTeamInput {
   create: DomainCreateWithoutTeamInput!
-  update: DomainUpdateWithoutTeamDataInput!
+  update: DomainUpdateWithoutTeamInput!
 }
 
 input DomainWhereInput {
@@ -1187,7 +1317,7 @@ type Mutation {
   deleteUser(where: UserWhereUniqueInput!): User
   emailVerification(email: String!, purpose: String!): ResponseLogin
   endBallotRun(ballotRunId: String!): BallotRun
-  inviteStudents(emails: [String]!, team: String!): InviteResponse
+  inviteStudents(emails: [String!], team: String!): InviteResponse
   login(email: String!, password: String!): ResponseLogin
   postThread(
     ref: String!
@@ -1332,7 +1462,13 @@ input NullableStringFieldUpdateOperationsInput {
 
 input OptionCreateManyWithoutBallotInput {
   connect: [OptionWhereUniqueInput!]
+  connectOrCreate: [OptionCreateOrConnectWithoutballotInput!]
   create: [OptionCreateWithoutBallotInput!]
+}
+
+input OptionCreateOrConnectWithoutballotInput {
+  create: OptionCreateWithoutBallotInput!
+  where: OptionWhereUniqueInput!
 }
 
 input OptionCreateWithoutBallotInput {
@@ -1357,7 +1493,7 @@ input OptionScalarWhereInput {
   vote: IntFilter
 }
 
-input OptionUpdateManyDataInput {
+input OptionUpdateManyMutationInput {
   id: StringFieldUpdateOperationsInput
   title: StringFieldUpdateOperationsInput
   vote: IntFieldUpdateOperationsInput
@@ -1365,35 +1501,36 @@ input OptionUpdateManyDataInput {
 
 input OptionUpdateManyWithoutBallotInput {
   connect: [OptionWhereUniqueInput!]
+  connectOrCreate: [OptionCreateOrConnectWithoutballotInput!]
   create: [OptionCreateWithoutBallotInput!]
   delete: [OptionWhereUniqueInput!]
   deleteMany: [OptionScalarWhereInput!]
   disconnect: [OptionWhereUniqueInput!]
   set: [OptionWhereUniqueInput!]
   update: [OptionUpdateWithWhereUniqueWithoutBallotInput!]
-  updateMany: [OptionUpdateManyWithWhereNestedInput!]
+  updateMany: [OptionUpdateManyWithWhereWithoutBallotInput!]
   upsert: [OptionUpsertWithWhereUniqueWithoutBallotInput!]
 }
 
-input OptionUpdateManyWithWhereNestedInput {
-  data: OptionUpdateManyDataInput!
+input OptionUpdateManyWithWhereWithoutBallotInput {
+  data: OptionUpdateManyMutationInput!
   where: OptionScalarWhereInput!
 }
 
-input OptionUpdateWithoutBallotDataInput {
+input OptionUpdateWithoutBallotInput {
   id: StringFieldUpdateOperationsInput
   title: StringFieldUpdateOperationsInput
   vote: IntFieldUpdateOperationsInput
 }
 
 input OptionUpdateWithWhereUniqueWithoutBallotInput {
-  data: OptionUpdateWithoutBallotDataInput!
+  data: OptionUpdateWithoutBallotInput!
   where: OptionWhereUniqueInput!
 }
 
 input OptionUpsertWithWhereUniqueWithoutBallotInput {
   create: OptionCreateWithoutBallotInput!
-  update: OptionUpdateWithoutBallotDataInput!
+  update: OptionUpdateWithoutBallotInput!
   where: OptionWhereUniqueInput!
 }
 
@@ -1477,12 +1614,24 @@ type Reaction {
 
 input ReactionCreateManyWithoutThreadInput {
   connect: [ReactionWhereUniqueInput!]
+  connectOrCreate: [ReactionCreateOrConnectWithoutthreadInput!]
   create: [ReactionCreateWithoutThreadInput!]
 }
 
 input ReactionCreateManyWithoutUserInput {
   connect: [ReactionWhereUniqueInput!]
+  connectOrCreate: [ReactionCreateOrConnectWithoutuserInput!]
   create: [ReactionCreateWithoutUserInput!]
+}
+
+input ReactionCreateOrConnectWithoutthreadInput {
+  create: ReactionCreateWithoutThreadInput!
+  where: ReactionWhereUniqueInput!
+}
+
+input ReactionCreateOrConnectWithoutuserInput {
+  create: ReactionCreateWithoutUserInput!
+  where: ReactionWhereUniqueInput!
 }
 
 input ReactionCreateWithoutThreadInput {
@@ -1519,7 +1668,7 @@ input ReactionScalarWhereInput {
   userId: StringFilter
 }
 
-input ReactionUpdateManyDataInput {
+input ReactionUpdateManyMutationInput {
   createdAt: DateTimeFieldUpdateOperationsInput
   emoij: StringFieldUpdateOperationsInput
   id: StringFieldUpdateOperationsInput
@@ -1528,34 +1677,41 @@ input ReactionUpdateManyDataInput {
 
 input ReactionUpdateManyWithoutThreadInput {
   connect: [ReactionWhereUniqueInput!]
+  connectOrCreate: [ReactionCreateOrConnectWithoutthreadInput!]
   create: [ReactionCreateWithoutThreadInput!]
   delete: [ReactionWhereUniqueInput!]
   deleteMany: [ReactionScalarWhereInput!]
   disconnect: [ReactionWhereUniqueInput!]
   set: [ReactionWhereUniqueInput!]
   update: [ReactionUpdateWithWhereUniqueWithoutThreadInput!]
-  updateMany: [ReactionUpdateManyWithWhereNestedInput!]
+  updateMany: [ReactionUpdateManyWithWhereWithoutThreadInput!]
   upsert: [ReactionUpsertWithWhereUniqueWithoutThreadInput!]
 }
 
 input ReactionUpdateManyWithoutUserInput {
   connect: [ReactionWhereUniqueInput!]
+  connectOrCreate: [ReactionCreateOrConnectWithoutuserInput!]
   create: [ReactionCreateWithoutUserInput!]
   delete: [ReactionWhereUniqueInput!]
   deleteMany: [ReactionScalarWhereInput!]
   disconnect: [ReactionWhereUniqueInput!]
   set: [ReactionWhereUniqueInput!]
   update: [ReactionUpdateWithWhereUniqueWithoutUserInput!]
-  updateMany: [ReactionUpdateManyWithWhereNestedInput!]
+  updateMany: [ReactionUpdateManyWithWhereWithoutUserInput!]
   upsert: [ReactionUpsertWithWhereUniqueWithoutUserInput!]
 }
 
-input ReactionUpdateManyWithWhereNestedInput {
-  data: ReactionUpdateManyDataInput!
+input ReactionUpdateManyWithWhereWithoutThreadInput {
+  data: ReactionUpdateManyMutationInput!
   where: ReactionScalarWhereInput!
 }
 
-input ReactionUpdateWithoutThreadDataInput {
+input ReactionUpdateManyWithWhereWithoutUserInput {
+  data: ReactionUpdateManyMutationInput!
+  where: ReactionScalarWhereInput!
+}
+
+input ReactionUpdateWithoutThreadInput {
   createdAt: DateTimeFieldUpdateOperationsInput
   emoij: StringFieldUpdateOperationsInput
   id: StringFieldUpdateOperationsInput
@@ -1563,7 +1719,7 @@ input ReactionUpdateWithoutThreadDataInput {
   user: UserUpdateOneRequiredWithoutReactionsInput
 }
 
-input ReactionUpdateWithoutUserDataInput {
+input ReactionUpdateWithoutUserInput {
   createdAt: DateTimeFieldUpdateOperationsInput
   emoij: StringFieldUpdateOperationsInput
   id: StringFieldUpdateOperationsInput
@@ -1572,24 +1728,24 @@ input ReactionUpdateWithoutUserDataInput {
 }
 
 input ReactionUpdateWithWhereUniqueWithoutThreadInput {
-  data: ReactionUpdateWithoutThreadDataInput!
+  data: ReactionUpdateWithoutThreadInput!
   where: ReactionWhereUniqueInput!
 }
 
 input ReactionUpdateWithWhereUniqueWithoutUserInput {
-  data: ReactionUpdateWithoutUserDataInput!
+  data: ReactionUpdateWithoutUserInput!
   where: ReactionWhereUniqueInput!
 }
 
 input ReactionUpsertWithWhereUniqueWithoutThreadInput {
   create: ReactionCreateWithoutThreadInput!
-  update: ReactionUpdateWithoutThreadDataInput!
+  update: ReactionUpdateWithoutThreadInput!
   where: ReactionWhereUniqueInput!
 }
 
 input ReactionUpsertWithWhereUniqueWithoutUserInput {
   create: ReactionCreateWithoutUserInput!
-  update: ReactionUpdateWithoutUserDataInput!
+  update: ReactionUpdateWithoutUserInput!
   where: ReactionWhereUniqueInput!
 }
 
@@ -1671,37 +1827,79 @@ input SchoolCreateInput {
 
 input SchoolCreateManyWithoutDomainInput {
   connect: [SchoolWhereUniqueInput!]
+  connectOrCreate: [SchoolCreateOrConnectWithoutdomainInput!]
   create: [SchoolCreateWithoutDomainInput!]
 }
 
 input SchoolCreateOneWithoutBallotsInput {
   connect: SchoolWhereUniqueInput
+  connectOrCreate: SchoolCreateOrConnectWithoutballotsInput
   create: SchoolCreateWithoutBallotsInput
 }
 
 input SchoolCreateOneWithoutMembersInput {
   connect: SchoolWhereUniqueInput
+  connectOrCreate: SchoolCreateOrConnectWithoutmembersInput
   create: SchoolCreateWithoutMembersInput
 }
 
 input SchoolCreateOneWithoutTeamsInput {
   connect: SchoolWhereUniqueInput
+  connectOrCreate: SchoolCreateOrConnectWithoutteamsInput
   create: SchoolCreateWithoutTeamsInput
 }
 
 input SchoolCreateOneWithoutThreadInput {
   connect: SchoolWhereUniqueInput
+  connectOrCreate: SchoolCreateOrConnectWithoutThreadInput
   create: SchoolCreateWithoutThreadInput
 }
 
 input SchoolCreateOneWithoutVotedInput {
   connect: SchoolWhereUniqueInput
+  connectOrCreate: SchoolCreateOrConnectWithoutVotedInput
   create: SchoolCreateWithoutVotedInput
 }
 
 input SchoolCreateOneWithoutVoteInput {
   connect: SchoolWhereUniqueInput
+  connectOrCreate: SchoolCreateOrConnectWithoutVoteInput
   create: SchoolCreateWithoutVoteInput
+}
+
+input SchoolCreateOrConnectWithoutballotsInput {
+  create: SchoolCreateWithoutBallotsInput!
+  where: SchoolWhereUniqueInput!
+}
+
+input SchoolCreateOrConnectWithoutdomainInput {
+  create: SchoolCreateWithoutDomainInput!
+  where: SchoolWhereUniqueInput!
+}
+
+input SchoolCreateOrConnectWithoutmembersInput {
+  create: SchoolCreateWithoutMembersInput!
+  where: SchoolWhereUniqueInput!
+}
+
+input SchoolCreateOrConnectWithoutteamsInput {
+  create: SchoolCreateWithoutTeamsInput!
+  where: SchoolWhereUniqueInput!
+}
+
+input SchoolCreateOrConnectWithoutThreadInput {
+  create: SchoolCreateWithoutThreadInput!
+  where: SchoolWhereUniqueInput!
+}
+
+input SchoolCreateOrConnectWithoutVotedInput {
+  create: SchoolCreateWithoutVotedInput!
+  where: SchoolWhereUniqueInput!
+}
+
+input SchoolCreateOrConnectWithoutVoteInput {
+  create: SchoolCreateWithoutVoteInput!
+  where: SchoolWhereUniqueInput!
 }
 
 input SchoolCreateWithoutBallotsInput {
@@ -1847,7 +2045,7 @@ input SchoolScalarWhereInput {
   zip: StringFilter
 }
 
-input SchoolUpdateManyDataInput {
+input SchoolUpdateManyMutationInput {
   address: StringFieldUpdateOperationsInput
   canton: StringFieldUpdateOperationsInput
   city: StringFieldUpdateOperationsInput
@@ -1859,74 +2057,81 @@ input SchoolUpdateManyDataInput {
 
 input SchoolUpdateManyWithoutDomainInput {
   connect: [SchoolWhereUniqueInput!]
+  connectOrCreate: [SchoolCreateOrConnectWithoutdomainInput!]
   create: [SchoolCreateWithoutDomainInput!]
   delete: [SchoolWhereUniqueInput!]
   deleteMany: [SchoolScalarWhereInput!]
   disconnect: [SchoolWhereUniqueInput!]
   set: [SchoolWhereUniqueInput!]
   update: [SchoolUpdateWithWhereUniqueWithoutDomainInput!]
-  updateMany: [SchoolUpdateManyWithWhereNestedInput!]
+  updateMany: [SchoolUpdateManyWithWhereWithoutDomainInput!]
   upsert: [SchoolUpsertWithWhereUniqueWithoutDomainInput!]
 }
 
-input SchoolUpdateManyWithWhereNestedInput {
-  data: SchoolUpdateManyDataInput!
+input SchoolUpdateManyWithWhereWithoutDomainInput {
+  data: SchoolUpdateManyMutationInput!
   where: SchoolScalarWhereInput!
 }
 
 input SchoolUpdateOneRequiredWithoutTeamsInput {
   connect: SchoolWhereUniqueInput
+  connectOrCreate: SchoolCreateOrConnectWithoutteamsInput
   create: SchoolCreateWithoutTeamsInput
-  update: SchoolUpdateWithoutTeamsDataInput
+  update: SchoolUpdateWithoutTeamsInput
   upsert: SchoolUpsertWithoutTeamsInput
 }
 
 input SchoolUpdateOneWithoutBallotsInput {
   connect: SchoolWhereUniqueInput
+  connectOrCreate: SchoolCreateOrConnectWithoutballotsInput
   create: SchoolCreateWithoutBallotsInput
   delete: Boolean
   disconnect: Boolean
-  update: SchoolUpdateWithoutBallotsDataInput
+  update: SchoolUpdateWithoutBallotsInput
   upsert: SchoolUpsertWithoutBallotsInput
 }
 
 input SchoolUpdateOneWithoutMembersInput {
   connect: SchoolWhereUniqueInput
+  connectOrCreate: SchoolCreateOrConnectWithoutmembersInput
   create: SchoolCreateWithoutMembersInput
   delete: Boolean
   disconnect: Boolean
-  update: SchoolUpdateWithoutMembersDataInput
+  update: SchoolUpdateWithoutMembersInput
   upsert: SchoolUpsertWithoutMembersInput
 }
 
 input SchoolUpdateOneWithoutThreadInput {
   connect: SchoolWhereUniqueInput
+  connectOrCreate: SchoolCreateOrConnectWithoutThreadInput
   create: SchoolCreateWithoutThreadInput
   delete: Boolean
   disconnect: Boolean
-  update: SchoolUpdateWithoutThreadDataInput
+  update: SchoolUpdateWithoutThreadInput
   upsert: SchoolUpsertWithoutThreadInput
 }
 
 input SchoolUpdateOneWithoutVotedInput {
   connect: SchoolWhereUniqueInput
+  connectOrCreate: SchoolCreateOrConnectWithoutVotedInput
   create: SchoolCreateWithoutVotedInput
   delete: Boolean
   disconnect: Boolean
-  update: SchoolUpdateWithoutVotedDataInput
+  update: SchoolUpdateWithoutVotedInput
   upsert: SchoolUpsertWithoutVotedInput
 }
 
 input SchoolUpdateOneWithoutVoteInput {
   connect: SchoolWhereUniqueInput
+  connectOrCreate: SchoolCreateOrConnectWithoutVoteInput
   create: SchoolCreateWithoutVoteInput
   delete: Boolean
   disconnect: Boolean
-  update: SchoolUpdateWithoutVoteDataInput
+  update: SchoolUpdateWithoutVoteInput
   upsert: SchoolUpsertWithoutVoteInput
 }
 
-input SchoolUpdateWithoutBallotsDataInput {
+input SchoolUpdateWithoutBallotsInput {
   address: StringFieldUpdateOperationsInput
   canton: StringFieldUpdateOperationsInput
   city: StringFieldUpdateOperationsInput
@@ -1942,7 +2147,7 @@ input SchoolUpdateWithoutBallotsDataInput {
   zip: StringFieldUpdateOperationsInput
 }
 
-input SchoolUpdateWithoutDomainDataInput {
+input SchoolUpdateWithoutDomainInput {
   address: StringFieldUpdateOperationsInput
   ballots: BallotUpdateManyWithoutSchoolInput
   canton: StringFieldUpdateOperationsInput
@@ -1958,7 +2163,7 @@ input SchoolUpdateWithoutDomainDataInput {
   zip: StringFieldUpdateOperationsInput
 }
 
-input SchoolUpdateWithoutMembersDataInput {
+input SchoolUpdateWithoutMembersInput {
   address: StringFieldUpdateOperationsInput
   ballots: BallotUpdateManyWithoutSchoolInput
   canton: StringFieldUpdateOperationsInput
@@ -1974,7 +2179,7 @@ input SchoolUpdateWithoutMembersDataInput {
   zip: StringFieldUpdateOperationsInput
 }
 
-input SchoolUpdateWithoutTeamsDataInput {
+input SchoolUpdateWithoutTeamsInput {
   address: StringFieldUpdateOperationsInput
   ballots: BallotUpdateManyWithoutSchoolInput
   canton: StringFieldUpdateOperationsInput
@@ -1990,7 +2195,7 @@ input SchoolUpdateWithoutTeamsDataInput {
   zip: StringFieldUpdateOperationsInput
 }
 
-input SchoolUpdateWithoutThreadDataInput {
+input SchoolUpdateWithoutThreadInput {
   address: StringFieldUpdateOperationsInput
   ballots: BallotUpdateManyWithoutSchoolInput
   canton: StringFieldUpdateOperationsInput
@@ -2006,23 +2211,7 @@ input SchoolUpdateWithoutThreadDataInput {
   zip: StringFieldUpdateOperationsInput
 }
 
-input SchoolUpdateWithoutVoteDataInput {
-  address: StringFieldUpdateOperationsInput
-  ballots: BallotUpdateManyWithoutSchoolInput
-  canton: StringFieldUpdateOperationsInput
-  city: StringFieldUpdateOperationsInput
-  domain: DomainUpdateOneWithoutSchoolsInput
-  id: StringFieldUpdateOperationsInput
-  members: UserUpdateManyWithoutSchoolInput
-  name: StringFieldUpdateOperationsInput
-  teams: TeamUpdateManyWithoutSchoolInput
-  Thread: ThreadUpdateManyWithoutSchoolInput
-  type: StringFieldUpdateOperationsInput
-  Voted: VotedUpdateManyWithoutSchoolInput
-  zip: StringFieldUpdateOperationsInput
-}
-
-input SchoolUpdateWithoutVotedDataInput {
+input SchoolUpdateWithoutVotedInput {
   address: StringFieldUpdateOperationsInput
   ballots: BallotUpdateManyWithoutSchoolInput
   canton: StringFieldUpdateOperationsInput
@@ -2035,47 +2224,63 @@ input SchoolUpdateWithoutVotedDataInput {
   Thread: ThreadUpdateManyWithoutSchoolInput
   type: StringFieldUpdateOperationsInput
   Vote: VoteUpdateManyWithoutSchoolInput
+  zip: StringFieldUpdateOperationsInput
+}
+
+input SchoolUpdateWithoutVoteInput {
+  address: StringFieldUpdateOperationsInput
+  ballots: BallotUpdateManyWithoutSchoolInput
+  canton: StringFieldUpdateOperationsInput
+  city: StringFieldUpdateOperationsInput
+  domain: DomainUpdateOneWithoutSchoolsInput
+  id: StringFieldUpdateOperationsInput
+  members: UserUpdateManyWithoutSchoolInput
+  name: StringFieldUpdateOperationsInput
+  teams: TeamUpdateManyWithoutSchoolInput
+  Thread: ThreadUpdateManyWithoutSchoolInput
+  type: StringFieldUpdateOperationsInput
+  Voted: VotedUpdateManyWithoutSchoolInput
   zip: StringFieldUpdateOperationsInput
 }
 
 input SchoolUpdateWithWhereUniqueWithoutDomainInput {
-  data: SchoolUpdateWithoutDomainDataInput!
+  data: SchoolUpdateWithoutDomainInput!
   where: SchoolWhereUniqueInput!
 }
 
 input SchoolUpsertWithoutBallotsInput {
   create: SchoolCreateWithoutBallotsInput!
-  update: SchoolUpdateWithoutBallotsDataInput!
+  update: SchoolUpdateWithoutBallotsInput!
 }
 
 input SchoolUpsertWithoutMembersInput {
   create: SchoolCreateWithoutMembersInput!
-  update: SchoolUpdateWithoutMembersDataInput!
+  update: SchoolUpdateWithoutMembersInput!
 }
 
 input SchoolUpsertWithoutTeamsInput {
   create: SchoolCreateWithoutTeamsInput!
-  update: SchoolUpdateWithoutTeamsDataInput!
+  update: SchoolUpdateWithoutTeamsInput!
 }
 
 input SchoolUpsertWithoutThreadInput {
   create: SchoolCreateWithoutThreadInput!
-  update: SchoolUpdateWithoutThreadDataInput!
+  update: SchoolUpdateWithoutThreadInput!
 }
 
 input SchoolUpsertWithoutVotedInput {
   create: SchoolCreateWithoutVotedInput!
-  update: SchoolUpdateWithoutVotedDataInput!
+  update: SchoolUpdateWithoutVotedInput!
 }
 
 input SchoolUpsertWithoutVoteInput {
   create: SchoolCreateWithoutVoteInput!
-  update: SchoolUpdateWithoutVoteDataInput!
+  update: SchoolUpdateWithoutVoteInput!
 }
 
 input SchoolUpsertWithWhereUniqueWithoutDomainInput {
   create: SchoolCreateWithoutDomainInput!
-  update: SchoolUpdateWithoutDomainDataInput!
+  update: SchoolUpdateWithoutDomainInput!
   where: SchoolWhereUniqueInput!
 }
 
@@ -2199,52 +2404,112 @@ input TeamCreateInput {
 
 input TeamCreateManyWithoutDomainInput {
   connect: [TeamWhereUniqueInput!]
+  connectOrCreate: [TeamCreateOrConnectWithoutdomainInput!]
   create: [TeamCreateWithoutDomainInput!]
 }
 
 input TeamCreateManyWithoutSchoolInput {
   connect: [TeamWhereUniqueInput!]
+  connectOrCreate: [TeamCreateOrConnectWithoutschoolInput!]
   create: [TeamCreateWithoutSchoolInput!]
 }
 
 input TeamCreateManyWithoutTeacherInput {
   connect: [TeamWhereUniqueInput!]
+  connectOrCreate: [TeamCreateOrConnectWithoutteacherInput!]
   create: [TeamCreateWithoutTeacherInput!]
 }
 
 input TeamCreateOneWithoutBallotRunsInput {
   connect: TeamWhereUniqueInput
+  connectOrCreate: TeamCreateOrConnectWithoutBallotRunsInput
   create: TeamCreateWithoutBallotRunsInput
 }
 
 input TeamCreateOneWithoutBallotsInput {
   connect: TeamWhereUniqueInput
+  connectOrCreate: TeamCreateOrConnectWithoutballotsInput
   create: TeamCreateWithoutBallotsInput
 }
 
 input TeamCreateOneWithoutMembersInput {
   connect: TeamWhereUniqueInput
+  connectOrCreate: TeamCreateOrConnectWithoutmembersInput
   create: TeamCreateWithoutMembersInput
 }
 
 input TeamCreateOneWithoutThreadInput {
   connect: TeamWhereUniqueInput
+  connectOrCreate: TeamCreateOrConnectWithoutThreadInput
   create: TeamCreateWithoutThreadInput
 }
 
 input TeamCreateOneWithoutUserInput {
   connect: TeamWhereUniqueInput
+  connectOrCreate: TeamCreateOrConnectWithoutUserInput
   create: TeamCreateWithoutUserInput
 }
 
 input TeamCreateOneWithoutVotedInput {
   connect: TeamWhereUniqueInput
+  connectOrCreate: TeamCreateOrConnectWithoutVotedInput
   create: TeamCreateWithoutVotedInput
 }
 
 input TeamCreateOneWithoutVoteInput {
   connect: TeamWhereUniqueInput
+  connectOrCreate: TeamCreateOrConnectWithoutVoteInput
   create: TeamCreateWithoutVoteInput
+}
+
+input TeamCreateOrConnectWithoutBallotRunsInput {
+  create: TeamCreateWithoutBallotRunsInput!
+  where: TeamWhereUniqueInput!
+}
+
+input TeamCreateOrConnectWithoutballotsInput {
+  create: TeamCreateWithoutBallotsInput!
+  where: TeamWhereUniqueInput!
+}
+
+input TeamCreateOrConnectWithoutdomainInput {
+  create: TeamCreateWithoutDomainInput!
+  where: TeamWhereUniqueInput!
+}
+
+input TeamCreateOrConnectWithoutmembersInput {
+  create: TeamCreateWithoutMembersInput!
+  where: TeamWhereUniqueInput!
+}
+
+input TeamCreateOrConnectWithoutschoolInput {
+  create: TeamCreateWithoutSchoolInput!
+  where: TeamWhereUniqueInput!
+}
+
+input TeamCreateOrConnectWithoutteacherInput {
+  create: TeamCreateWithoutTeacherInput!
+  where: TeamWhereUniqueInput!
+}
+
+input TeamCreateOrConnectWithoutThreadInput {
+  create: TeamCreateWithoutThreadInput!
+  where: TeamWhereUniqueInput!
+}
+
+input TeamCreateOrConnectWithoutUserInput {
+  create: TeamCreateWithoutUserInput!
+  where: TeamWhereUniqueInput!
+}
+
+input TeamCreateOrConnectWithoutVotedInput {
+  create: TeamCreateWithoutVotedInput!
+  where: TeamWhereUniqueInput!
+}
+
+input TeamCreateOrConnectWithoutVoteInput {
+  create: TeamCreateWithoutVoteInput!
+  where: TeamWhereUniqueInput!
 }
 
 input TeamCreateWithoutBallotRunsInput {
@@ -2448,7 +2713,7 @@ input TeamScalarWhereInput {
   year: IntNullableFilter
 }
 
-input TeamUpdateManyDataInput {
+input TeamUpdateManyMutationInput {
   code: NullableStringFieldUpdateOperationsInput
   id: StringFieldUpdateOperationsInput
   invite: NullableStringFieldUpdateOperationsInput
@@ -2458,105 +2723,125 @@ input TeamUpdateManyDataInput {
 
 input TeamUpdateManyWithoutDomainInput {
   connect: [TeamWhereUniqueInput!]
+  connectOrCreate: [TeamCreateOrConnectWithoutdomainInput!]
   create: [TeamCreateWithoutDomainInput!]
   delete: [TeamWhereUniqueInput!]
   deleteMany: [TeamScalarWhereInput!]
   disconnect: [TeamWhereUniqueInput!]
   set: [TeamWhereUniqueInput!]
   update: [TeamUpdateWithWhereUniqueWithoutDomainInput!]
-  updateMany: [TeamUpdateManyWithWhereNestedInput!]
+  updateMany: [TeamUpdateManyWithWhereWithoutDomainInput!]
   upsert: [TeamUpsertWithWhereUniqueWithoutDomainInput!]
 }
 
 input TeamUpdateManyWithoutSchoolInput {
   connect: [TeamWhereUniqueInput!]
+  connectOrCreate: [TeamCreateOrConnectWithoutschoolInput!]
   create: [TeamCreateWithoutSchoolInput!]
   delete: [TeamWhereUniqueInput!]
   deleteMany: [TeamScalarWhereInput!]
   disconnect: [TeamWhereUniqueInput!]
   set: [TeamWhereUniqueInput!]
   update: [TeamUpdateWithWhereUniqueWithoutSchoolInput!]
-  updateMany: [TeamUpdateManyWithWhereNestedInput!]
+  updateMany: [TeamUpdateManyWithWhereWithoutSchoolInput!]
   upsert: [TeamUpsertWithWhereUniqueWithoutSchoolInput!]
 }
 
 input TeamUpdateManyWithoutTeacherInput {
   connect: [TeamWhereUniqueInput!]
+  connectOrCreate: [TeamCreateOrConnectWithoutteacherInput!]
   create: [TeamCreateWithoutTeacherInput!]
   delete: [TeamWhereUniqueInput!]
   deleteMany: [TeamScalarWhereInput!]
   disconnect: [TeamWhereUniqueInput!]
   set: [TeamWhereUniqueInput!]
   update: [TeamUpdateWithWhereUniqueWithoutTeacherInput!]
-  updateMany: [TeamUpdateManyWithWhereNestedInput!]
+  updateMany: [TeamUpdateManyWithWhereWithoutTeacherInput!]
   upsert: [TeamUpsertWithWhereUniqueWithoutTeacherInput!]
 }
 
-input TeamUpdateManyWithWhereNestedInput {
-  data: TeamUpdateManyDataInput!
+input TeamUpdateManyWithWhereWithoutDomainInput {
+  data: TeamUpdateManyMutationInput!
+  where: TeamScalarWhereInput!
+}
+
+input TeamUpdateManyWithWhereWithoutSchoolInput {
+  data: TeamUpdateManyMutationInput!
+  where: TeamScalarWhereInput!
+}
+
+input TeamUpdateManyWithWhereWithoutTeacherInput {
+  data: TeamUpdateManyMutationInput!
   where: TeamScalarWhereInput!
 }
 
 input TeamUpdateOneRequiredWithoutBallotRunsInput {
   connect: TeamWhereUniqueInput
+  connectOrCreate: TeamCreateOrConnectWithoutBallotRunsInput
   create: TeamCreateWithoutBallotRunsInput
-  update: TeamUpdateWithoutBallotRunsDataInput
+  update: TeamUpdateWithoutBallotRunsInput
   upsert: TeamUpsertWithoutBallotRunsInput
 }
 
 input TeamUpdateOneRequiredWithoutThreadInput {
   connect: TeamWhereUniqueInput
+  connectOrCreate: TeamCreateOrConnectWithoutThreadInput
   create: TeamCreateWithoutThreadInput
-  update: TeamUpdateWithoutThreadDataInput
+  update: TeamUpdateWithoutThreadInput
   upsert: TeamUpsertWithoutThreadInput
 }
 
 input TeamUpdateOneWithoutBallotsInput {
   connect: TeamWhereUniqueInput
+  connectOrCreate: TeamCreateOrConnectWithoutballotsInput
   create: TeamCreateWithoutBallotsInput
   delete: Boolean
   disconnect: Boolean
-  update: TeamUpdateWithoutBallotsDataInput
+  update: TeamUpdateWithoutBallotsInput
   upsert: TeamUpsertWithoutBallotsInput
 }
 
 input TeamUpdateOneWithoutMembersInput {
   connect: TeamWhereUniqueInput
+  connectOrCreate: TeamCreateOrConnectWithoutmembersInput
   create: TeamCreateWithoutMembersInput
   delete: Boolean
   disconnect: Boolean
-  update: TeamUpdateWithoutMembersDataInput
+  update: TeamUpdateWithoutMembersInput
   upsert: TeamUpsertWithoutMembersInput
 }
 
 input TeamUpdateOneWithoutUserInput {
   connect: TeamWhereUniqueInput
+  connectOrCreate: TeamCreateOrConnectWithoutUserInput
   create: TeamCreateWithoutUserInput
   delete: Boolean
   disconnect: Boolean
-  update: TeamUpdateWithoutUserDataInput
+  update: TeamUpdateWithoutUserInput
   upsert: TeamUpsertWithoutUserInput
 }
 
 input TeamUpdateOneWithoutVotedInput {
   connect: TeamWhereUniqueInput
+  connectOrCreate: TeamCreateOrConnectWithoutVotedInput
   create: TeamCreateWithoutVotedInput
   delete: Boolean
   disconnect: Boolean
-  update: TeamUpdateWithoutVotedDataInput
+  update: TeamUpdateWithoutVotedInput
   upsert: TeamUpsertWithoutVotedInput
 }
 
 input TeamUpdateOneWithoutVoteInput {
   connect: TeamWhereUniqueInput
+  connectOrCreate: TeamCreateOrConnectWithoutVoteInput
   create: TeamCreateWithoutVoteInput
   delete: Boolean
   disconnect: Boolean
-  update: TeamUpdateWithoutVoteDataInput
+  update: TeamUpdateWithoutVoteInput
   upsert: TeamUpsertWithoutVoteInput
 }
 
-input TeamUpdateWithoutBallotRunsDataInput {
+input TeamUpdateWithoutBallotRunsInput {
   ballots: BallotUpdateManyWithoutTeamInput
   code: NullableStringFieldUpdateOperationsInput
   domain: DomainUpdateOneWithoutTeamInput
@@ -2573,7 +2858,7 @@ input TeamUpdateWithoutBallotRunsDataInput {
   year: NullableIntFieldUpdateOperationsInput
 }
 
-input TeamUpdateWithoutBallotsDataInput {
+input TeamUpdateWithoutBallotsInput {
   BallotRuns: BallotRunUpdateManyWithoutTeamInput
   code: NullableStringFieldUpdateOperationsInput
   domain: DomainUpdateOneWithoutTeamInput
@@ -2590,7 +2875,7 @@ input TeamUpdateWithoutBallotsDataInput {
   year: NullableIntFieldUpdateOperationsInput
 }
 
-input TeamUpdateWithoutDomainDataInput {
+input TeamUpdateWithoutDomainInput {
   BallotRuns: BallotRunUpdateManyWithoutTeamInput
   ballots: BallotUpdateManyWithoutTeamInput
   code: NullableStringFieldUpdateOperationsInput
@@ -2607,7 +2892,7 @@ input TeamUpdateWithoutDomainDataInput {
   year: NullableIntFieldUpdateOperationsInput
 }
 
-input TeamUpdateWithoutMembersDataInput {
+input TeamUpdateWithoutMembersInput {
   BallotRuns: BallotRunUpdateManyWithoutTeamInput
   ballots: BallotUpdateManyWithoutTeamInput
   code: NullableStringFieldUpdateOperationsInput
@@ -2624,7 +2909,7 @@ input TeamUpdateWithoutMembersDataInput {
   year: NullableIntFieldUpdateOperationsInput
 }
 
-input TeamUpdateWithoutSchoolDataInput {
+input TeamUpdateWithoutSchoolInput {
   BallotRuns: BallotRunUpdateManyWithoutTeamInput
   ballots: BallotUpdateManyWithoutTeamInput
   code: NullableStringFieldUpdateOperationsInput
@@ -2641,7 +2926,7 @@ input TeamUpdateWithoutSchoolDataInput {
   year: NullableIntFieldUpdateOperationsInput
 }
 
-input TeamUpdateWithoutTeacherDataInput {
+input TeamUpdateWithoutTeacherInput {
   BallotRuns: BallotRunUpdateManyWithoutTeamInput
   ballots: BallotUpdateManyWithoutTeamInput
   code: NullableStringFieldUpdateOperationsInput
@@ -2658,7 +2943,7 @@ input TeamUpdateWithoutTeacherDataInput {
   year: NullableIntFieldUpdateOperationsInput
 }
 
-input TeamUpdateWithoutThreadDataInput {
+input TeamUpdateWithoutThreadInput {
   BallotRuns: BallotRunUpdateManyWithoutTeamInput
   ballots: BallotUpdateManyWithoutTeamInput
   code: NullableStringFieldUpdateOperationsInput
@@ -2675,7 +2960,7 @@ input TeamUpdateWithoutThreadDataInput {
   year: NullableIntFieldUpdateOperationsInput
 }
 
-input TeamUpdateWithoutUserDataInput {
+input TeamUpdateWithoutUserInput {
   BallotRuns: BallotRunUpdateManyWithoutTeamInput
   ballots: BallotUpdateManyWithoutTeamInput
   code: NullableStringFieldUpdateOperationsInput
@@ -2692,24 +2977,7 @@ input TeamUpdateWithoutUserDataInput {
   year: NullableIntFieldUpdateOperationsInput
 }
 
-input TeamUpdateWithoutVoteDataInput {
-  BallotRuns: BallotRunUpdateManyWithoutTeamInput
-  ballots: BallotUpdateManyWithoutTeamInput
-  code: NullableStringFieldUpdateOperationsInput
-  domain: DomainUpdateOneWithoutTeamInput
-  id: StringFieldUpdateOperationsInput
-  invite: NullableStringFieldUpdateOperationsInput
-  members: UserUpdateManyWithoutTeamInput
-  name: StringFieldUpdateOperationsInput
-  school: SchoolUpdateOneRequiredWithoutTeamsInput
-  teacher: UserUpdateOneRequiredWithoutTeachesInput
-  Thread: ThreadUpdateManyWithoutTeamInput
-  User: UserUpdateManyWithoutTeamInput
-  Voted: VotedUpdateManyWithoutTeamInput
-  year: NullableIntFieldUpdateOperationsInput
-}
-
-input TeamUpdateWithoutVotedDataInput {
+input TeamUpdateWithoutVotedInput {
   BallotRuns: BallotRunUpdateManyWithoutTeamInput
   ballots: BallotUpdateManyWithoutTeamInput
   code: NullableStringFieldUpdateOperationsInput
@@ -2723,74 +2991,91 @@ input TeamUpdateWithoutVotedDataInput {
   Thread: ThreadUpdateManyWithoutTeamInput
   User: UserUpdateManyWithoutTeamInput
   Vote: VoteUpdateManyWithoutTeamInput
+  year: NullableIntFieldUpdateOperationsInput
+}
+
+input TeamUpdateWithoutVoteInput {
+  BallotRuns: BallotRunUpdateManyWithoutTeamInput
+  ballots: BallotUpdateManyWithoutTeamInput
+  code: NullableStringFieldUpdateOperationsInput
+  domain: DomainUpdateOneWithoutTeamInput
+  id: StringFieldUpdateOperationsInput
+  invite: NullableStringFieldUpdateOperationsInput
+  members: UserUpdateManyWithoutTeamInput
+  name: StringFieldUpdateOperationsInput
+  school: SchoolUpdateOneRequiredWithoutTeamsInput
+  teacher: UserUpdateOneRequiredWithoutTeachesInput
+  Thread: ThreadUpdateManyWithoutTeamInput
+  User: UserUpdateManyWithoutTeamInput
+  Voted: VotedUpdateManyWithoutTeamInput
   year: NullableIntFieldUpdateOperationsInput
 }
 
 input TeamUpdateWithWhereUniqueWithoutDomainInput {
-  data: TeamUpdateWithoutDomainDataInput!
+  data: TeamUpdateWithoutDomainInput!
   where: TeamWhereUniqueInput!
 }
 
 input TeamUpdateWithWhereUniqueWithoutSchoolInput {
-  data: TeamUpdateWithoutSchoolDataInput!
+  data: TeamUpdateWithoutSchoolInput!
   where: TeamWhereUniqueInput!
 }
 
 input TeamUpdateWithWhereUniqueWithoutTeacherInput {
-  data: TeamUpdateWithoutTeacherDataInput!
+  data: TeamUpdateWithoutTeacherInput!
   where: TeamWhereUniqueInput!
 }
 
 input TeamUpsertWithoutBallotRunsInput {
   create: TeamCreateWithoutBallotRunsInput!
-  update: TeamUpdateWithoutBallotRunsDataInput!
+  update: TeamUpdateWithoutBallotRunsInput!
 }
 
 input TeamUpsertWithoutBallotsInput {
   create: TeamCreateWithoutBallotsInput!
-  update: TeamUpdateWithoutBallotsDataInput!
+  update: TeamUpdateWithoutBallotsInput!
 }
 
 input TeamUpsertWithoutMembersInput {
   create: TeamCreateWithoutMembersInput!
-  update: TeamUpdateWithoutMembersDataInput!
+  update: TeamUpdateWithoutMembersInput!
 }
 
 input TeamUpsertWithoutThreadInput {
   create: TeamCreateWithoutThreadInput!
-  update: TeamUpdateWithoutThreadDataInput!
+  update: TeamUpdateWithoutThreadInput!
 }
 
 input TeamUpsertWithoutUserInput {
   create: TeamCreateWithoutUserInput!
-  update: TeamUpdateWithoutUserDataInput!
+  update: TeamUpdateWithoutUserInput!
 }
 
 input TeamUpsertWithoutVotedInput {
   create: TeamCreateWithoutVotedInput!
-  update: TeamUpdateWithoutVotedDataInput!
+  update: TeamUpdateWithoutVotedInput!
 }
 
 input TeamUpsertWithoutVoteInput {
   create: TeamCreateWithoutVoteInput!
-  update: TeamUpdateWithoutVoteDataInput!
+  update: TeamUpdateWithoutVoteInput!
 }
 
 input TeamUpsertWithWhereUniqueWithoutDomainInput {
   create: TeamCreateWithoutDomainInput!
-  update: TeamUpdateWithoutDomainDataInput!
+  update: TeamUpdateWithoutDomainInput!
   where: TeamWhereUniqueInput!
 }
 
 input TeamUpsertWithWhereUniqueWithoutSchoolInput {
   create: TeamCreateWithoutSchoolInput!
-  update: TeamUpdateWithoutSchoolDataInput!
+  update: TeamUpdateWithoutSchoolInput!
   where: TeamWhereUniqueInput!
 }
 
 input TeamUpsertWithWhereUniqueWithoutTeacherInput {
   create: TeamCreateWithoutTeacherInput!
-  update: TeamUpdateWithoutTeacherDataInput!
+  update: TeamUpdateWithoutTeacherInput!
   where: TeamWhereUniqueInput!
 }
 
@@ -2849,27 +3134,57 @@ type Thread {
 
 input ThreadCreateManyWithoutSchoolInput {
   connect: [ThreadWhereUniqueInput!]
+  connectOrCreate: [ThreadCreateOrConnectWithoutschoolInput!]
   create: [ThreadCreateWithoutSchoolInput!]
 }
 
 input ThreadCreateManyWithoutTeamInput {
   connect: [ThreadWhereUniqueInput!]
+  connectOrCreate: [ThreadCreateOrConnectWithoutteamInput!]
   create: [ThreadCreateWithoutTeamInput!]
 }
 
 input ThreadCreateManyWithoutUserInput {
   connect: [ThreadWhereUniqueInput!]
+  connectOrCreate: [ThreadCreateOrConnectWithoutuserInput!]
   create: [ThreadCreateWithoutUserInput!]
 }
 
 input ThreadCreateOneWithoutAttachmentsInput {
   connect: ThreadWhereUniqueInput
+  connectOrCreate: ThreadCreateOrConnectWithoutattachmentsInput
   create: ThreadCreateWithoutAttachmentsInput
 }
 
 input ThreadCreateOneWithoutReactionsInput {
   connect: ThreadWhereUniqueInput
+  connectOrCreate: ThreadCreateOrConnectWithoutreactionsInput
   create: ThreadCreateWithoutReactionsInput
+}
+
+input ThreadCreateOrConnectWithoutattachmentsInput {
+  create: ThreadCreateWithoutAttachmentsInput!
+  where: ThreadWhereUniqueInput!
+}
+
+input ThreadCreateOrConnectWithoutreactionsInput {
+  create: ThreadCreateWithoutReactionsInput!
+  where: ThreadWhereUniqueInput!
+}
+
+input ThreadCreateOrConnectWithoutschoolInput {
+  create: ThreadCreateWithoutSchoolInput!
+  where: ThreadWhereUniqueInput!
+}
+
+input ThreadCreateOrConnectWithoutteamInput {
+  create: ThreadCreateWithoutTeamInput!
+  where: ThreadWhereUniqueInput!
+}
+
+input ThreadCreateOrConnectWithoutuserInput {
+  create: ThreadCreateWithoutUserInput!
+  where: ThreadWhereUniqueInput!
 }
 
 input ThreadCreateWithoutAttachmentsInput {
@@ -2877,7 +3192,7 @@ input ThreadCreateWithoutAttachmentsInput {
   id: String
   reactions: ReactionCreateManyWithoutThreadInput
   ref: String!
-  School: SchoolCreateOneWithoutThreadInput
+  school: SchoolCreateOneWithoutThreadInput
   team: TeamCreateOneWithoutThreadInput!
   text: String
   title: String
@@ -2890,7 +3205,7 @@ input ThreadCreateWithoutReactionsInput {
   createdAt: DateTime
   id: String
   ref: String!
-  School: SchoolCreateOneWithoutThreadInput
+  school: SchoolCreateOneWithoutThreadInput
   team: TeamCreateOneWithoutThreadInput!
   text: String
   title: String
@@ -2917,7 +3232,7 @@ input ThreadCreateWithoutTeamInput {
   id: String
   reactions: ReactionCreateManyWithoutThreadInput
   ref: String!
-  School: SchoolCreateOneWithoutThreadInput
+  school: SchoolCreateOneWithoutThreadInput
   text: String
   title: String
   updatedAt: DateTime
@@ -2930,7 +3245,7 @@ input ThreadCreateWithoutUserInput {
   id: String
   reactions: ReactionCreateManyWithoutThreadInput
   ref: String!
-  School: SchoolCreateOneWithoutThreadInput
+  school: SchoolCreateOneWithoutThreadInput
   team: TeamCreateOneWithoutThreadInput!
   text: String
   title: String
@@ -2958,7 +3273,7 @@ input ThreadScalarWhereInput {
   userId: StringFilter
 }
 
-input ThreadUpdateManyDataInput {
+input ThreadUpdateManyMutationInput {
   createdAt: DateTimeFieldUpdateOperationsInput
   id: StringFieldUpdateOperationsInput
   ref: StringFieldUpdateOperationsInput
@@ -2969,69 +3284,84 @@ input ThreadUpdateManyDataInput {
 
 input ThreadUpdateManyWithoutSchoolInput {
   connect: [ThreadWhereUniqueInput!]
+  connectOrCreate: [ThreadCreateOrConnectWithoutschoolInput!]
   create: [ThreadCreateWithoutSchoolInput!]
   delete: [ThreadWhereUniqueInput!]
   deleteMany: [ThreadScalarWhereInput!]
   disconnect: [ThreadWhereUniqueInput!]
   set: [ThreadWhereUniqueInput!]
   update: [ThreadUpdateWithWhereUniqueWithoutSchoolInput!]
-  updateMany: [ThreadUpdateManyWithWhereNestedInput!]
+  updateMany: [ThreadUpdateManyWithWhereWithoutSchoolInput!]
   upsert: [ThreadUpsertWithWhereUniqueWithoutSchoolInput!]
 }
 
 input ThreadUpdateManyWithoutTeamInput {
   connect: [ThreadWhereUniqueInput!]
+  connectOrCreate: [ThreadCreateOrConnectWithoutteamInput!]
   create: [ThreadCreateWithoutTeamInput!]
   delete: [ThreadWhereUniqueInput!]
   deleteMany: [ThreadScalarWhereInput!]
   disconnect: [ThreadWhereUniqueInput!]
   set: [ThreadWhereUniqueInput!]
   update: [ThreadUpdateWithWhereUniqueWithoutTeamInput!]
-  updateMany: [ThreadUpdateManyWithWhereNestedInput!]
+  updateMany: [ThreadUpdateManyWithWhereWithoutTeamInput!]
   upsert: [ThreadUpsertWithWhereUniqueWithoutTeamInput!]
 }
 
 input ThreadUpdateManyWithoutUserInput {
   connect: [ThreadWhereUniqueInput!]
+  connectOrCreate: [ThreadCreateOrConnectWithoutuserInput!]
   create: [ThreadCreateWithoutUserInput!]
   delete: [ThreadWhereUniqueInput!]
   deleteMany: [ThreadScalarWhereInput!]
   disconnect: [ThreadWhereUniqueInput!]
   set: [ThreadWhereUniqueInput!]
   update: [ThreadUpdateWithWhereUniqueWithoutUserInput!]
-  updateMany: [ThreadUpdateManyWithWhereNestedInput!]
+  updateMany: [ThreadUpdateManyWithWhereWithoutUserInput!]
   upsert: [ThreadUpsertWithWhereUniqueWithoutUserInput!]
 }
 
-input ThreadUpdateManyWithWhereNestedInput {
-  data: ThreadUpdateManyDataInput!
+input ThreadUpdateManyWithWhereWithoutSchoolInput {
+  data: ThreadUpdateManyMutationInput!
+  where: ThreadScalarWhereInput!
+}
+
+input ThreadUpdateManyWithWhereWithoutTeamInput {
+  data: ThreadUpdateManyMutationInput!
+  where: ThreadScalarWhereInput!
+}
+
+input ThreadUpdateManyWithWhereWithoutUserInput {
+  data: ThreadUpdateManyMutationInput!
   where: ThreadScalarWhereInput!
 }
 
 input ThreadUpdateOneWithoutAttachmentsInput {
   connect: ThreadWhereUniqueInput
+  connectOrCreate: ThreadCreateOrConnectWithoutattachmentsInput
   create: ThreadCreateWithoutAttachmentsInput
   delete: Boolean
   disconnect: Boolean
-  update: ThreadUpdateWithoutAttachmentsDataInput
+  update: ThreadUpdateWithoutAttachmentsInput
   upsert: ThreadUpsertWithoutAttachmentsInput
 }
 
 input ThreadUpdateOneWithoutReactionsInput {
   connect: ThreadWhereUniqueInput
+  connectOrCreate: ThreadCreateOrConnectWithoutreactionsInput
   create: ThreadCreateWithoutReactionsInput
   delete: Boolean
   disconnect: Boolean
-  update: ThreadUpdateWithoutReactionsDataInput
+  update: ThreadUpdateWithoutReactionsInput
   upsert: ThreadUpsertWithoutReactionsInput
 }
 
-input ThreadUpdateWithoutAttachmentsDataInput {
+input ThreadUpdateWithoutAttachmentsInput {
   createdAt: DateTimeFieldUpdateOperationsInput
   id: StringFieldUpdateOperationsInput
   reactions: ReactionUpdateManyWithoutThreadInput
   ref: StringFieldUpdateOperationsInput
-  School: SchoolUpdateOneWithoutThreadInput
+  school: SchoolUpdateOneWithoutThreadInput
   team: TeamUpdateOneRequiredWithoutThreadInput
   text: StringFieldUpdateOperationsInput
   title: StringFieldUpdateOperationsInput
@@ -3039,12 +3369,12 @@ input ThreadUpdateWithoutAttachmentsDataInput {
   user: UserUpdateOneRequiredWithoutThreadsInput
 }
 
-input ThreadUpdateWithoutReactionsDataInput {
+input ThreadUpdateWithoutReactionsInput {
   attachments: AttachmentUpdateManyWithoutThreadInput
   createdAt: DateTimeFieldUpdateOperationsInput
   id: StringFieldUpdateOperationsInput
   ref: StringFieldUpdateOperationsInput
-  School: SchoolUpdateOneWithoutThreadInput
+  school: SchoolUpdateOneWithoutThreadInput
   team: TeamUpdateOneRequiredWithoutThreadInput
   text: StringFieldUpdateOperationsInput
   title: StringFieldUpdateOperationsInput
@@ -3052,7 +3382,7 @@ input ThreadUpdateWithoutReactionsDataInput {
   user: UserUpdateOneRequiredWithoutThreadsInput
 }
 
-input ThreadUpdateWithoutSchoolDataInput {
+input ThreadUpdateWithoutSchoolInput {
   attachments: AttachmentUpdateManyWithoutThreadInput
   createdAt: DateTimeFieldUpdateOperationsInput
   id: StringFieldUpdateOperationsInput
@@ -3065,26 +3395,26 @@ input ThreadUpdateWithoutSchoolDataInput {
   user: UserUpdateOneRequiredWithoutThreadsInput
 }
 
-input ThreadUpdateWithoutTeamDataInput {
+input ThreadUpdateWithoutTeamInput {
   attachments: AttachmentUpdateManyWithoutThreadInput
   createdAt: DateTimeFieldUpdateOperationsInput
   id: StringFieldUpdateOperationsInput
   reactions: ReactionUpdateManyWithoutThreadInput
   ref: StringFieldUpdateOperationsInput
-  School: SchoolUpdateOneWithoutThreadInput
+  school: SchoolUpdateOneWithoutThreadInput
   text: StringFieldUpdateOperationsInput
   title: StringFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
   user: UserUpdateOneRequiredWithoutThreadsInput
 }
 
-input ThreadUpdateWithoutUserDataInput {
+input ThreadUpdateWithoutUserInput {
   attachments: AttachmentUpdateManyWithoutThreadInput
   createdAt: DateTimeFieldUpdateOperationsInput
   id: StringFieldUpdateOperationsInput
   reactions: ReactionUpdateManyWithoutThreadInput
   ref: StringFieldUpdateOperationsInput
-  School: SchoolUpdateOneWithoutThreadInput
+  school: SchoolUpdateOneWithoutThreadInput
   team: TeamUpdateOneRequiredWithoutThreadInput
   text: StringFieldUpdateOperationsInput
   title: StringFieldUpdateOperationsInput
@@ -3092,45 +3422,45 @@ input ThreadUpdateWithoutUserDataInput {
 }
 
 input ThreadUpdateWithWhereUniqueWithoutSchoolInput {
-  data: ThreadUpdateWithoutSchoolDataInput!
+  data: ThreadUpdateWithoutSchoolInput!
   where: ThreadWhereUniqueInput!
 }
 
 input ThreadUpdateWithWhereUniqueWithoutTeamInput {
-  data: ThreadUpdateWithoutTeamDataInput!
+  data: ThreadUpdateWithoutTeamInput!
   where: ThreadWhereUniqueInput!
 }
 
 input ThreadUpdateWithWhereUniqueWithoutUserInput {
-  data: ThreadUpdateWithoutUserDataInput!
+  data: ThreadUpdateWithoutUserInput!
   where: ThreadWhereUniqueInput!
 }
 
 input ThreadUpsertWithoutAttachmentsInput {
   create: ThreadCreateWithoutAttachmentsInput!
-  update: ThreadUpdateWithoutAttachmentsDataInput!
+  update: ThreadUpdateWithoutAttachmentsInput!
 }
 
 input ThreadUpsertWithoutReactionsInput {
   create: ThreadCreateWithoutReactionsInput!
-  update: ThreadUpdateWithoutReactionsDataInput!
+  update: ThreadUpdateWithoutReactionsInput!
 }
 
 input ThreadUpsertWithWhereUniqueWithoutSchoolInput {
   create: ThreadCreateWithoutSchoolInput!
-  update: ThreadUpdateWithoutSchoolDataInput!
+  update: ThreadUpdateWithoutSchoolInput!
   where: ThreadWhereUniqueInput!
 }
 
 input ThreadUpsertWithWhereUniqueWithoutTeamInput {
   create: ThreadCreateWithoutTeamInput!
-  update: ThreadUpdateWithoutTeamDataInput!
+  update: ThreadUpdateWithoutTeamInput!
   where: ThreadWhereUniqueInput!
 }
 
 input ThreadUpsertWithWhereUniqueWithoutUserInput {
   create: ThreadCreateWithoutUserInput!
-  update: ThreadUpdateWithoutUserDataInput!
+  update: ThreadUpdateWithoutUserInput!
   where: ThreadWhereUniqueInput!
 }
 
@@ -3143,7 +3473,7 @@ input ThreadWhereInput {
   OR: [ThreadWhereInput!]
   reactions: ReactionListRelationFilter
   ref: StringFilter
-  School: SchoolWhereInput
+  school: SchoolWhereInput
   schoolId: StringNullableFilter
   team: TeamWhereInput
   teamId: StringFilter
@@ -3232,42 +3562,90 @@ input UserCreateInput {
 
 input UserCreateManyWithoutSchoolInput {
   connect: [UserWhereUniqueInput!]
+  connectOrCreate: [UserCreateOrConnectWithoutschoolInput!]
   create: [UserCreateWithoutSchoolInput!]
 }
 
 input UserCreateManyWithoutTeamInput {
   connect: [UserWhereUniqueInput!]
+  connectOrCreate: [UserCreateOrConnectWithoutTeamInput!]
   create: [UserCreateWithoutTeamInput!]
 }
 
 input UserCreateOneWithoutAttachmentsInput {
   connect: UserWhereUniqueInput
+  connectOrCreate: UserCreateOrConnectWithoutattachmentsInput
   create: UserCreateWithoutAttachmentsInput
 }
 
 input UserCreateOneWithoutBallotsInput {
   connect: UserWhereUniqueInput
+  connectOrCreate: UserCreateOrConnectWithoutballotsInput
   create: UserCreateWithoutBallotsInput
 }
 
 input UserCreateOneWithoutReactionsInput {
   connect: UserWhereUniqueInput
+  connectOrCreate: UserCreateOrConnectWithoutreactionsInput
   create: UserCreateWithoutReactionsInput
 }
 
 input UserCreateOneWithoutTeachesInput {
   connect: UserWhereUniqueInput
+  connectOrCreate: UserCreateOrConnectWithoutteachesInput
   create: UserCreateWithoutTeachesInput
 }
 
 input UserCreateOneWithoutThreadsInput {
   connect: UserWhereUniqueInput
+  connectOrCreate: UserCreateOrConnectWithoutthreadsInput
   create: UserCreateWithoutThreadsInput
 }
 
 input UserCreateOneWithoutVotedInput {
   connect: UserWhereUniqueInput
+  connectOrCreate: UserCreateOrConnectWithoutvotedInput
   create: UserCreateWithoutVotedInput
+}
+
+input UserCreateOrConnectWithoutattachmentsInput {
+  create: UserCreateWithoutAttachmentsInput!
+  where: UserWhereUniqueInput!
+}
+
+input UserCreateOrConnectWithoutballotsInput {
+  create: UserCreateWithoutBallotsInput!
+  where: UserWhereUniqueInput!
+}
+
+input UserCreateOrConnectWithoutreactionsInput {
+  create: UserCreateWithoutReactionsInput!
+  where: UserWhereUniqueInput!
+}
+
+input UserCreateOrConnectWithoutschoolInput {
+  create: UserCreateWithoutSchoolInput!
+  where: UserWhereUniqueInput!
+}
+
+input UserCreateOrConnectWithoutteachesInput {
+  create: UserCreateWithoutTeachesInput!
+  where: UserWhereUniqueInput!
+}
+
+input UserCreateOrConnectWithoutTeamInput {
+  create: UserCreateWithoutTeamInput!
+  where: UserWhereUniqueInput!
+}
+
+input UserCreateOrConnectWithoutthreadsInput {
+  create: UserCreateWithoutThreadsInput!
+  where: UserWhereUniqueInput!
+}
+
+input UserCreateOrConnectWithoutvotedInput {
+  create: UserCreateWithoutVotedInput!
+  where: UserWhereUniqueInput!
 }
 
 input UserCreateWithoutAttachmentsInput {
@@ -3543,7 +3921,7 @@ input UserUpdateInput {
   year: NullableIntFieldUpdateOperationsInput
 }
 
-input UserUpdateManyDataInput {
+input UserUpdateManyMutationInput {
   canton: NullableStringFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   email: NullableStringFieldUpdateOperationsInput
@@ -3562,78 +3940,91 @@ input UserUpdateManyDataInput {
 
 input UserUpdateManyWithoutSchoolInput {
   connect: [UserWhereUniqueInput!]
+  connectOrCreate: [UserCreateOrConnectWithoutschoolInput!]
   create: [UserCreateWithoutSchoolInput!]
   delete: [UserWhereUniqueInput!]
   deleteMany: [UserScalarWhereInput!]
   disconnect: [UserWhereUniqueInput!]
   set: [UserWhereUniqueInput!]
   update: [UserUpdateWithWhereUniqueWithoutSchoolInput!]
-  updateMany: [UserUpdateManyWithWhereNestedInput!]
+  updateMany: [UserUpdateManyWithWhereWithoutSchoolInput!]
   upsert: [UserUpsertWithWhereUniqueWithoutSchoolInput!]
 }
 
 input UserUpdateManyWithoutTeamInput {
   connect: [UserWhereUniqueInput!]
+  connectOrCreate: [UserCreateOrConnectWithoutTeamInput!]
   create: [UserCreateWithoutTeamInput!]
   delete: [UserWhereUniqueInput!]
   deleteMany: [UserScalarWhereInput!]
   disconnect: [UserWhereUniqueInput!]
   set: [UserWhereUniqueInput!]
   update: [UserUpdateWithWhereUniqueWithoutTeamInput!]
-  updateMany: [UserUpdateManyWithWhereNestedInput!]
+  updateMany: [UserUpdateManyWithWhereWithoutTeamInput!]
   upsert: [UserUpsertWithWhereUniqueWithoutTeamInput!]
 }
 
-input UserUpdateManyWithWhereNestedInput {
-  data: UserUpdateManyDataInput!
+input UserUpdateManyWithWhereWithoutSchoolInput {
+  data: UserUpdateManyMutationInput!
+  where: UserScalarWhereInput!
+}
+
+input UserUpdateManyWithWhereWithoutTeamInput {
+  data: UserUpdateManyMutationInput!
   where: UserScalarWhereInput!
 }
 
 input UserUpdateOneRequiredWithoutAttachmentsInput {
   connect: UserWhereUniqueInput
+  connectOrCreate: UserCreateOrConnectWithoutattachmentsInput
   create: UserCreateWithoutAttachmentsInput
-  update: UserUpdateWithoutAttachmentsDataInput
+  update: UserUpdateWithoutAttachmentsInput
   upsert: UserUpsertWithoutAttachmentsInput
 }
 
 input UserUpdateOneRequiredWithoutReactionsInput {
   connect: UserWhereUniqueInput
+  connectOrCreate: UserCreateOrConnectWithoutreactionsInput
   create: UserCreateWithoutReactionsInput
-  update: UserUpdateWithoutReactionsDataInput
+  update: UserUpdateWithoutReactionsInput
   upsert: UserUpsertWithoutReactionsInput
 }
 
 input UserUpdateOneRequiredWithoutTeachesInput {
   connect: UserWhereUniqueInput
+  connectOrCreate: UserCreateOrConnectWithoutteachesInput
   create: UserCreateWithoutTeachesInput
-  update: UserUpdateWithoutTeachesDataInput
+  update: UserUpdateWithoutTeachesInput
   upsert: UserUpsertWithoutTeachesInput
 }
 
 input UserUpdateOneRequiredWithoutThreadsInput {
   connect: UserWhereUniqueInput
+  connectOrCreate: UserCreateOrConnectWithoutthreadsInput
   create: UserCreateWithoutThreadsInput
-  update: UserUpdateWithoutThreadsDataInput
+  update: UserUpdateWithoutThreadsInput
   upsert: UserUpsertWithoutThreadsInput
 }
 
 input UserUpdateOneRequiredWithoutVotedInput {
   connect: UserWhereUniqueInput
+  connectOrCreate: UserCreateOrConnectWithoutvotedInput
   create: UserCreateWithoutVotedInput
-  update: UserUpdateWithoutVotedDataInput
+  update: UserUpdateWithoutVotedInput
   upsert: UserUpsertWithoutVotedInput
 }
 
 input UserUpdateOneWithoutBallotsInput {
   connect: UserWhereUniqueInput
+  connectOrCreate: UserCreateOrConnectWithoutballotsInput
   create: UserCreateWithoutBallotsInput
   delete: Boolean
   disconnect: Boolean
-  update: UserUpdateWithoutBallotsDataInput
+  update: UserUpdateWithoutBallotsInput
   upsert: UserUpsertWithoutBallotsInput
 }
 
-input UserUpdateWithoutAttachmentsDataInput {
+input UserUpdateWithoutAttachmentsInput {
   ballots: BallotUpdateManyWithoutCreatorInput
   canton: NullableStringFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
@@ -3658,7 +4049,7 @@ input UserUpdateWithoutAttachmentsDataInput {
   year: NullableIntFieldUpdateOperationsInput
 }
 
-input UserUpdateWithoutBallotsDataInput {
+input UserUpdateWithoutBallotsInput {
   attachments: AttachmentUpdateManyWithoutUserInput
   canton: NullableStringFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
@@ -3683,7 +4074,7 @@ input UserUpdateWithoutBallotsDataInput {
   year: NullableIntFieldUpdateOperationsInput
 }
 
-input UserUpdateWithoutReactionsDataInput {
+input UserUpdateWithoutReactionsInput {
   attachments: AttachmentUpdateManyWithoutUserInput
   ballots: BallotUpdateManyWithoutCreatorInput
   canton: NullableStringFieldUpdateOperationsInput
@@ -3708,7 +4099,7 @@ input UserUpdateWithoutReactionsDataInput {
   year: NullableIntFieldUpdateOperationsInput
 }
 
-input UserUpdateWithoutSchoolDataInput {
+input UserUpdateWithoutSchoolInput {
   attachments: AttachmentUpdateManyWithoutUserInput
   ballots: BallotUpdateManyWithoutCreatorInput
   canton: NullableStringFieldUpdateOperationsInput
@@ -3733,7 +4124,7 @@ input UserUpdateWithoutSchoolDataInput {
   year: NullableIntFieldUpdateOperationsInput
 }
 
-input UserUpdateWithoutTeachesDataInput {
+input UserUpdateWithoutTeachesInput {
   attachments: AttachmentUpdateManyWithoutUserInput
   ballots: BallotUpdateManyWithoutCreatorInput
   canton: NullableStringFieldUpdateOperationsInput
@@ -3758,7 +4149,7 @@ input UserUpdateWithoutTeachesDataInput {
   year: NullableIntFieldUpdateOperationsInput
 }
 
-input UserUpdateWithoutTeamDataInput {
+input UserUpdateWithoutTeamInput {
   attachments: AttachmentUpdateManyWithoutUserInput
   ballots: BallotUpdateManyWithoutCreatorInput
   canton: NullableStringFieldUpdateOperationsInput
@@ -3783,7 +4174,7 @@ input UserUpdateWithoutTeamDataInput {
   year: NullableIntFieldUpdateOperationsInput
 }
 
-input UserUpdateWithoutThreadsDataInput {
+input UserUpdateWithoutThreadsInput {
   attachments: AttachmentUpdateManyWithoutUserInput
   ballots: BallotUpdateManyWithoutCreatorInput
   canton: NullableStringFieldUpdateOperationsInput
@@ -3808,7 +4199,7 @@ input UserUpdateWithoutThreadsDataInput {
   year: NullableIntFieldUpdateOperationsInput
 }
 
-input UserUpdateWithoutVotedDataInput {
+input UserUpdateWithoutVotedInput {
   attachments: AttachmentUpdateManyWithoutUserInput
   ballots: BallotUpdateManyWithoutCreatorInput
   canton: NullableStringFieldUpdateOperationsInput
@@ -3834,54 +4225,54 @@ input UserUpdateWithoutVotedDataInput {
 }
 
 input UserUpdateWithWhereUniqueWithoutSchoolInput {
-  data: UserUpdateWithoutSchoolDataInput!
+  data: UserUpdateWithoutSchoolInput!
   where: UserWhereUniqueInput!
 }
 
 input UserUpdateWithWhereUniqueWithoutTeamInput {
-  data: UserUpdateWithoutTeamDataInput!
+  data: UserUpdateWithoutTeamInput!
   where: UserWhereUniqueInput!
 }
 
 input UserUpsertWithoutAttachmentsInput {
   create: UserCreateWithoutAttachmentsInput!
-  update: UserUpdateWithoutAttachmentsDataInput!
+  update: UserUpdateWithoutAttachmentsInput!
 }
 
 input UserUpsertWithoutBallotsInput {
   create: UserCreateWithoutBallotsInput!
-  update: UserUpdateWithoutBallotsDataInput!
+  update: UserUpdateWithoutBallotsInput!
 }
 
 input UserUpsertWithoutReactionsInput {
   create: UserCreateWithoutReactionsInput!
-  update: UserUpdateWithoutReactionsDataInput!
+  update: UserUpdateWithoutReactionsInput!
 }
 
 input UserUpsertWithoutTeachesInput {
   create: UserCreateWithoutTeachesInput!
-  update: UserUpdateWithoutTeachesDataInput!
+  update: UserUpdateWithoutTeachesInput!
 }
 
 input UserUpsertWithoutThreadsInput {
   create: UserCreateWithoutThreadsInput!
-  update: UserUpdateWithoutThreadsDataInput!
+  update: UserUpdateWithoutThreadsInput!
 }
 
 input UserUpsertWithoutVotedInput {
   create: UserCreateWithoutVotedInput!
-  update: UserUpdateWithoutVotedDataInput!
+  update: UserUpdateWithoutVotedInput!
 }
 
 input UserUpsertWithWhereUniqueWithoutSchoolInput {
   create: UserCreateWithoutSchoolInput!
-  update: UserUpdateWithoutSchoolDataInput!
+  update: UserUpdateWithoutSchoolInput!
   where: UserWhereUniqueInput!
 }
 
 input UserUpsertWithWhereUniqueWithoutTeamInput {
   create: UserCreateWithoutTeamInput!
-  update: UserUpdateWithoutTeamDataInput!
+  update: UserUpdateWithoutTeamInput!
   where: UserWhereUniqueInput!
 }
 
@@ -3928,22 +4319,46 @@ type Vote {
 
 input VoteCreateManyWithoutBallotInput {
   connect: [VoteWhereUniqueInput!]
+  connectOrCreate: [VoteCreateOrConnectWithoutballotInput!]
   create: [VoteCreateWithoutBallotInput!]
 }
 
 input VoteCreateManyWithoutBallotRunInput {
   connect: [VoteWhereUniqueInput!]
+  connectOrCreate: [VoteCreateOrConnectWithoutballotRunInput!]
   create: [VoteCreateWithoutBallotRunInput!]
 }
 
 input VoteCreateManyWithoutSchoolInput {
   connect: [VoteWhereUniqueInput!]
+  connectOrCreate: [VoteCreateOrConnectWithoutschoolInput!]
   create: [VoteCreateWithoutSchoolInput!]
 }
 
 input VoteCreateManyWithoutTeamInput {
   connect: [VoteWhereUniqueInput!]
+  connectOrCreate: [VoteCreateOrConnectWithoutteamInput!]
   create: [VoteCreateWithoutTeamInput!]
+}
+
+input VoteCreateOrConnectWithoutballotInput {
+  create: VoteCreateWithoutBallotInput!
+  where: VoteWhereUniqueInput!
+}
+
+input VoteCreateOrConnectWithoutballotRunInput {
+  create: VoteCreateWithoutBallotRunInput!
+  where: VoteWhereUniqueInput!
+}
+
+input VoteCreateOrConnectWithoutschoolInput {
+  create: VoteCreateWithoutSchoolInput!
+  where: VoteWhereUniqueInput!
+}
+
+input VoteCreateOrConnectWithoutteamInput {
+  create: VoteCreateWithoutTeamInput!
+  where: VoteWhereUniqueInput!
 }
 
 input VoteCreateWithoutBallotInput {
@@ -3996,22 +4411,46 @@ input VoteCreateWithoutTeamInput {
 
 input VotedCreateManyWithoutBallotInput {
   connect: [VotedWhereUniqueInput!]
+  connectOrCreate: [VotedCreateOrConnectWithoutballotInput!]
   create: [VotedCreateWithoutBallotInput!]
 }
 
 input VotedCreateManyWithoutSchoolInput {
   connect: [VotedWhereUniqueInput!]
+  connectOrCreate: [VotedCreateOrConnectWithoutschoolInput!]
   create: [VotedCreateWithoutSchoolInput!]
 }
 
 input VotedCreateManyWithoutTeamInput {
   connect: [VotedWhereUniqueInput!]
+  connectOrCreate: [VotedCreateOrConnectWithoutteamInput!]
   create: [VotedCreateWithoutTeamInput!]
 }
 
 input VotedCreateManyWithoutUserInput {
   connect: [VotedWhereUniqueInput!]
+  connectOrCreate: [VotedCreateOrConnectWithoutuserInput!]
   create: [VotedCreateWithoutUserInput!]
+}
+
+input VotedCreateOrConnectWithoutballotInput {
+  create: VotedCreateWithoutBallotInput!
+  where: VotedWhereUniqueInput!
+}
+
+input VotedCreateOrConnectWithoutschoolInput {
+  create: VotedCreateWithoutSchoolInput!
+  where: VotedWhereUniqueInput!
+}
+
+input VotedCreateOrConnectWithoutteamInput {
+  create: VotedCreateWithoutTeamInput!
+  where: VotedWhereUniqueInput!
+}
+
+input VotedCreateOrConnectWithoutuserInput {
+  create: VotedCreateWithoutUserInput!
+  where: VotedWhereUniqueInput!
 }
 
 input VotedCreateWithoutBallotInput {
@@ -4064,65 +4503,84 @@ input VotedScalarWhereInput {
   userId: StringFilter
 }
 
-input VotedUpdateManyDataInput {
+input VotedUpdateManyMutationInput {
   id: StringFieldUpdateOperationsInput
   signature: NullableStringFieldUpdateOperationsInput
 }
 
 input VotedUpdateManyWithoutBallotInput {
   connect: [VotedWhereUniqueInput!]
+  connectOrCreate: [VotedCreateOrConnectWithoutballotInput!]
   create: [VotedCreateWithoutBallotInput!]
   delete: [VotedWhereUniqueInput!]
   deleteMany: [VotedScalarWhereInput!]
   disconnect: [VotedWhereUniqueInput!]
   set: [VotedWhereUniqueInput!]
   update: [VotedUpdateWithWhereUniqueWithoutBallotInput!]
-  updateMany: [VotedUpdateManyWithWhereNestedInput!]
+  updateMany: [VotedUpdateManyWithWhereWithoutBallotInput!]
   upsert: [VotedUpsertWithWhereUniqueWithoutBallotInput!]
 }
 
 input VotedUpdateManyWithoutSchoolInput {
   connect: [VotedWhereUniqueInput!]
+  connectOrCreate: [VotedCreateOrConnectWithoutschoolInput!]
   create: [VotedCreateWithoutSchoolInput!]
   delete: [VotedWhereUniqueInput!]
   deleteMany: [VotedScalarWhereInput!]
   disconnect: [VotedWhereUniqueInput!]
   set: [VotedWhereUniqueInput!]
   update: [VotedUpdateWithWhereUniqueWithoutSchoolInput!]
-  updateMany: [VotedUpdateManyWithWhereNestedInput!]
+  updateMany: [VotedUpdateManyWithWhereWithoutSchoolInput!]
   upsert: [VotedUpsertWithWhereUniqueWithoutSchoolInput!]
 }
 
 input VotedUpdateManyWithoutTeamInput {
   connect: [VotedWhereUniqueInput!]
+  connectOrCreate: [VotedCreateOrConnectWithoutteamInput!]
   create: [VotedCreateWithoutTeamInput!]
   delete: [VotedWhereUniqueInput!]
   deleteMany: [VotedScalarWhereInput!]
   disconnect: [VotedWhereUniqueInput!]
   set: [VotedWhereUniqueInput!]
   update: [VotedUpdateWithWhereUniqueWithoutTeamInput!]
-  updateMany: [VotedUpdateManyWithWhereNestedInput!]
+  updateMany: [VotedUpdateManyWithWhereWithoutTeamInput!]
   upsert: [VotedUpsertWithWhereUniqueWithoutTeamInput!]
 }
 
 input VotedUpdateManyWithoutUserInput {
   connect: [VotedWhereUniqueInput!]
+  connectOrCreate: [VotedCreateOrConnectWithoutuserInput!]
   create: [VotedCreateWithoutUserInput!]
   delete: [VotedWhereUniqueInput!]
   deleteMany: [VotedScalarWhereInput!]
   disconnect: [VotedWhereUniqueInput!]
   set: [VotedWhereUniqueInput!]
   update: [VotedUpdateWithWhereUniqueWithoutUserInput!]
-  updateMany: [VotedUpdateManyWithWhereNestedInput!]
+  updateMany: [VotedUpdateManyWithWhereWithoutUserInput!]
   upsert: [VotedUpsertWithWhereUniqueWithoutUserInput!]
 }
 
-input VotedUpdateManyWithWhereNestedInput {
-  data: VotedUpdateManyDataInput!
+input VotedUpdateManyWithWhereWithoutBallotInput {
+  data: VotedUpdateManyMutationInput!
   where: VotedScalarWhereInput!
 }
 
-input VotedUpdateWithoutBallotDataInput {
+input VotedUpdateManyWithWhereWithoutSchoolInput {
+  data: VotedUpdateManyMutationInput!
+  where: VotedScalarWhereInput!
+}
+
+input VotedUpdateManyWithWhereWithoutTeamInput {
+  data: VotedUpdateManyMutationInput!
+  where: VotedScalarWhereInput!
+}
+
+input VotedUpdateManyWithWhereWithoutUserInput {
+  data: VotedUpdateManyMutationInput!
+  where: VotedScalarWhereInput!
+}
+
+input VotedUpdateWithoutBallotInput {
   id: StringFieldUpdateOperationsInput
   school: SchoolUpdateOneWithoutVotedInput
   signature: NullableStringFieldUpdateOperationsInput
@@ -4130,7 +4588,7 @@ input VotedUpdateWithoutBallotDataInput {
   user: UserUpdateOneRequiredWithoutVotedInput
 }
 
-input VotedUpdateWithoutSchoolDataInput {
+input VotedUpdateWithoutSchoolInput {
   ballot: BallotUpdateOneRequiredWithoutVotedInput
   id: StringFieldUpdateOperationsInput
   signature: NullableStringFieldUpdateOperationsInput
@@ -4138,7 +4596,7 @@ input VotedUpdateWithoutSchoolDataInput {
   user: UserUpdateOneRequiredWithoutVotedInput
 }
 
-input VotedUpdateWithoutTeamDataInput {
+input VotedUpdateWithoutTeamInput {
   ballot: BallotUpdateOneRequiredWithoutVotedInput
   id: StringFieldUpdateOperationsInput
   school: SchoolUpdateOneWithoutVotedInput
@@ -4146,7 +4604,7 @@ input VotedUpdateWithoutTeamDataInput {
   user: UserUpdateOneRequiredWithoutVotedInput
 }
 
-input VotedUpdateWithoutUserDataInput {
+input VotedUpdateWithoutUserInput {
   ballot: BallotUpdateOneRequiredWithoutVotedInput
   id: StringFieldUpdateOperationsInput
   school: SchoolUpdateOneWithoutVotedInput
@@ -4155,46 +4613,46 @@ input VotedUpdateWithoutUserDataInput {
 }
 
 input VotedUpdateWithWhereUniqueWithoutBallotInput {
-  data: VotedUpdateWithoutBallotDataInput!
+  data: VotedUpdateWithoutBallotInput!
   where: VotedWhereUniqueInput!
 }
 
 input VotedUpdateWithWhereUniqueWithoutSchoolInput {
-  data: VotedUpdateWithoutSchoolDataInput!
+  data: VotedUpdateWithoutSchoolInput!
   where: VotedWhereUniqueInput!
 }
 
 input VotedUpdateWithWhereUniqueWithoutTeamInput {
-  data: VotedUpdateWithoutTeamDataInput!
+  data: VotedUpdateWithoutTeamInput!
   where: VotedWhereUniqueInput!
 }
 
 input VotedUpdateWithWhereUniqueWithoutUserInput {
-  data: VotedUpdateWithoutUserDataInput!
+  data: VotedUpdateWithoutUserInput!
   where: VotedWhereUniqueInput!
 }
 
 input VotedUpsertWithWhereUniqueWithoutBallotInput {
   create: VotedCreateWithoutBallotInput!
-  update: VotedUpdateWithoutBallotDataInput!
+  update: VotedUpdateWithoutBallotInput!
   where: VotedWhereUniqueInput!
 }
 
 input VotedUpsertWithWhereUniqueWithoutSchoolInput {
   create: VotedCreateWithoutSchoolInput!
-  update: VotedUpdateWithoutSchoolDataInput!
+  update: VotedUpdateWithoutSchoolInput!
   where: VotedWhereUniqueInput!
 }
 
 input VotedUpsertWithWhereUniqueWithoutTeamInput {
   create: VotedCreateWithoutTeamInput!
-  update: VotedUpdateWithoutTeamDataInput!
+  update: VotedUpdateWithoutTeamInput!
   where: VotedWhereUniqueInput!
 }
 
 input VotedUpsertWithWhereUniqueWithoutUserInput {
   create: VotedCreateWithoutUserInput!
-  update: VotedUpdateWithoutUserDataInput!
+  update: VotedUpdateWithoutUserInput!
   where: VotedWhereUniqueInput!
 }
 
@@ -4240,7 +4698,7 @@ input VoteScalarWhereInput {
   year: IntNullableFilter
 }
 
-input VoteUpdateManyDataInput {
+input VoteUpdateManyMutationInput {
   canton: NullableStringFieldUpdateOperationsInput
   id: StringFieldUpdateOperationsInput
   schooltype: NullableStringFieldUpdateOperationsInput
@@ -4251,58 +4709,77 @@ input VoteUpdateManyDataInput {
 
 input VoteUpdateManyWithoutBallotInput {
   connect: [VoteWhereUniqueInput!]
+  connectOrCreate: [VoteCreateOrConnectWithoutballotInput!]
   create: [VoteCreateWithoutBallotInput!]
   delete: [VoteWhereUniqueInput!]
   deleteMany: [VoteScalarWhereInput!]
   disconnect: [VoteWhereUniqueInput!]
   set: [VoteWhereUniqueInput!]
   update: [VoteUpdateWithWhereUniqueWithoutBallotInput!]
-  updateMany: [VoteUpdateManyWithWhereNestedInput!]
+  updateMany: [VoteUpdateManyWithWhereWithoutBallotInput!]
   upsert: [VoteUpsertWithWhereUniqueWithoutBallotInput!]
 }
 
 input VoteUpdateManyWithoutBallotRunInput {
   connect: [VoteWhereUniqueInput!]
+  connectOrCreate: [VoteCreateOrConnectWithoutballotRunInput!]
   create: [VoteCreateWithoutBallotRunInput!]
   delete: [VoteWhereUniqueInput!]
   deleteMany: [VoteScalarWhereInput!]
   disconnect: [VoteWhereUniqueInput!]
   set: [VoteWhereUniqueInput!]
   update: [VoteUpdateWithWhereUniqueWithoutBallotRunInput!]
-  updateMany: [VoteUpdateManyWithWhereNestedInput!]
+  updateMany: [VoteUpdateManyWithWhereWithoutBallotRunInput!]
   upsert: [VoteUpsertWithWhereUniqueWithoutBallotRunInput!]
 }
 
 input VoteUpdateManyWithoutSchoolInput {
   connect: [VoteWhereUniqueInput!]
+  connectOrCreate: [VoteCreateOrConnectWithoutschoolInput!]
   create: [VoteCreateWithoutSchoolInput!]
   delete: [VoteWhereUniqueInput!]
   deleteMany: [VoteScalarWhereInput!]
   disconnect: [VoteWhereUniqueInput!]
   set: [VoteWhereUniqueInput!]
   update: [VoteUpdateWithWhereUniqueWithoutSchoolInput!]
-  updateMany: [VoteUpdateManyWithWhereNestedInput!]
+  updateMany: [VoteUpdateManyWithWhereWithoutSchoolInput!]
   upsert: [VoteUpsertWithWhereUniqueWithoutSchoolInput!]
 }
 
 input VoteUpdateManyWithoutTeamInput {
   connect: [VoteWhereUniqueInput!]
+  connectOrCreate: [VoteCreateOrConnectWithoutteamInput!]
   create: [VoteCreateWithoutTeamInput!]
   delete: [VoteWhereUniqueInput!]
   deleteMany: [VoteScalarWhereInput!]
   disconnect: [VoteWhereUniqueInput!]
   set: [VoteWhereUniqueInput!]
   update: [VoteUpdateWithWhereUniqueWithoutTeamInput!]
-  updateMany: [VoteUpdateManyWithWhereNestedInput!]
+  updateMany: [VoteUpdateManyWithWhereWithoutTeamInput!]
   upsert: [VoteUpsertWithWhereUniqueWithoutTeamInput!]
 }
 
-input VoteUpdateManyWithWhereNestedInput {
-  data: VoteUpdateManyDataInput!
+input VoteUpdateManyWithWhereWithoutBallotInput {
+  data: VoteUpdateManyMutationInput!
   where: VoteScalarWhereInput!
 }
 
-input VoteUpdateWithoutBallotDataInput {
+input VoteUpdateManyWithWhereWithoutBallotRunInput {
+  data: VoteUpdateManyMutationInput!
+  where: VoteScalarWhereInput!
+}
+
+input VoteUpdateManyWithWhereWithoutSchoolInput {
+  data: VoteUpdateManyMutationInput!
+  where: VoteScalarWhereInput!
+}
+
+input VoteUpdateManyWithWhereWithoutTeamInput {
+  data: VoteUpdateManyMutationInput!
+  where: VoteScalarWhereInput!
+}
+
+input VoteUpdateWithoutBallotInput {
   ballotRun: BallotRunUpdateOneWithoutVoteInput
   canton: NullableStringFieldUpdateOperationsInput
   id: StringFieldUpdateOperationsInput
@@ -4314,7 +4791,7 @@ input VoteUpdateWithoutBallotDataInput {
   year: NullableIntFieldUpdateOperationsInput
 }
 
-input VoteUpdateWithoutBallotRunDataInput {
+input VoteUpdateWithoutBallotRunInput {
   ballot: BallotUpdateOneRequiredWithoutVotesInput
   canton: NullableStringFieldUpdateOperationsInput
   id: StringFieldUpdateOperationsInput
@@ -4326,7 +4803,7 @@ input VoteUpdateWithoutBallotRunDataInput {
   year: NullableIntFieldUpdateOperationsInput
 }
 
-input VoteUpdateWithoutSchoolDataInput {
+input VoteUpdateWithoutSchoolInput {
   ballot: BallotUpdateOneRequiredWithoutVotesInput
   ballotRun: BallotRunUpdateOneWithoutVoteInput
   canton: NullableStringFieldUpdateOperationsInput
@@ -4338,7 +4815,7 @@ input VoteUpdateWithoutSchoolDataInput {
   year: NullableIntFieldUpdateOperationsInput
 }
 
-input VoteUpdateWithoutTeamDataInput {
+input VoteUpdateWithoutTeamInput {
   ballot: BallotUpdateOneRequiredWithoutVotesInput
   ballotRun: BallotRunUpdateOneWithoutVoteInput
   canton: NullableStringFieldUpdateOperationsInput
@@ -4351,46 +4828,46 @@ input VoteUpdateWithoutTeamDataInput {
 }
 
 input VoteUpdateWithWhereUniqueWithoutBallotInput {
-  data: VoteUpdateWithoutBallotDataInput!
+  data: VoteUpdateWithoutBallotInput!
   where: VoteWhereUniqueInput!
 }
 
 input VoteUpdateWithWhereUniqueWithoutBallotRunInput {
-  data: VoteUpdateWithoutBallotRunDataInput!
+  data: VoteUpdateWithoutBallotRunInput!
   where: VoteWhereUniqueInput!
 }
 
 input VoteUpdateWithWhereUniqueWithoutSchoolInput {
-  data: VoteUpdateWithoutSchoolDataInput!
+  data: VoteUpdateWithoutSchoolInput!
   where: VoteWhereUniqueInput!
 }
 
 input VoteUpdateWithWhereUniqueWithoutTeamInput {
-  data: VoteUpdateWithoutTeamDataInput!
+  data: VoteUpdateWithoutTeamInput!
   where: VoteWhereUniqueInput!
 }
 
 input VoteUpsertWithWhereUniqueWithoutBallotInput {
   create: VoteCreateWithoutBallotInput!
-  update: VoteUpdateWithoutBallotDataInput!
+  update: VoteUpdateWithoutBallotInput!
   where: VoteWhereUniqueInput!
 }
 
 input VoteUpsertWithWhereUniqueWithoutBallotRunInput {
   create: VoteCreateWithoutBallotRunInput!
-  update: VoteUpdateWithoutBallotRunDataInput!
+  update: VoteUpdateWithoutBallotRunInput!
   where: VoteWhereUniqueInput!
 }
 
 input VoteUpsertWithWhereUniqueWithoutSchoolInput {
   create: VoteCreateWithoutSchoolInput!
-  update: VoteUpdateWithoutSchoolDataInput!
+  update: VoteUpdateWithoutSchoolInput!
   where: VoteWhereUniqueInput!
 }
 
 input VoteUpsertWithWhereUniqueWithoutTeamInput {
   create: VoteCreateWithoutTeamInput!
-  update: VoteUpdateWithoutTeamDataInput!
+  update: VoteUpdateWithoutTeamInput!
   where: VoteWhereUniqueInput!
 }
 

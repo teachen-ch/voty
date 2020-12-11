@@ -13,7 +13,7 @@ export const inviteStudents = async (_root, args, ctx) => {
   const created: string[] = [];
   const duplicated: string[] = [];
 
-  let team = await ctx.db.team.findOne({ where: { id } });
+  let team = await ctx.db.team.findUnique({ where: { id } });
   if (!team) throw Error("Error.TeamNotFound");
   if (!user) throw Error("Error.NeedsLogin");
   if (team.teacherId !== user.id) throw Error("Error.NotYourTeam");
@@ -44,7 +44,7 @@ export const inviteStudents = async (_root, args, ctx) => {
     }
   }
 
-  team = await ctx.db.team.findOne({
+  team = await ctx.db.team.findUnique({
     where: { id },
     include: { members: true, school: true },
   });
@@ -80,7 +80,7 @@ async function fetchErrors(emails: string[], db: PrismaClient, since: number) {
         continue;
       }
 
-      const user = await db.user.findOne({ where: { email } });
+      const user = await db.user.findUnique({ where: { email } });
       if (!user || !user.email) {
         logger.warn(`handleErrorMessage: Can't find user ${email}`);
         continue;

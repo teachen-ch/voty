@@ -1,10 +1,4 @@
-import {
-  Role,
-  BallotScope,
-  User,
-  PrismaClient,
-  VoteWhereInput,
-} from "@prisma/client";
+import { Role, BallotScope, User, PrismaClient, Prisma } from "@prisma/client";
 import { randomBytes } from "crypto";
 import { setCookie, getCookie } from "../../util/cookies";
 import {
@@ -38,8 +32,8 @@ export const vote: FieldResolver<"Mutation", "vote"> = async (
   ctx
 ) => {
   const { ballotId, vote } = args;
-  const ballot = await ctx.db.ballot.findOne({ where: { id: ballotId } });
-  const user = await ctx.db.user.findOne({
+  const ballot = await ctx.db.ballot.findUnique({ where: { id: ballotId } });
+  const user = await ctx.db.user.findUnique({
     where: { id: ctx.user?.id },
     include: { school: true, team: true },
   });
@@ -86,7 +80,7 @@ export const voteCode: FieldResolver<"Mutation", "voteCode"> = async (
   ctx
 ) => {
   const { ballotRunId, vote, code } = args;
-  const ballotRun = await ctx.db.ballotRun.findOne({
+  const ballotRun = await ctx.db.ballotRun.findUnique({
     where: { id: ballotRunId },
     include: {
       team: {
@@ -157,8 +151,8 @@ export const addBallotRun: FieldResolver<"Mutation", "addBallotRun"> = async (
   const ballotId = args.ballotId;
   const teamId = args.teamId;
 
-  const ballot = await ctx.db.ballot.findOne({ where: { id: ballotId } });
-  const team = await ctx.db.team.findOne({ where: { id: teamId } });
+  const ballot = await ctx.db.ballot.findUnique({ where: { id: ballotId } });
+  const team = await ctx.db.team.findUnique({ where: { id: teamId } });
   if (!ballot) throw new Error("Error.BallotNotFound");
   if (!team) throw new Error("Error.TeamNotFound");
 
@@ -185,7 +179,7 @@ export const removeBallotRun: FieldResolver<
   "removeBallotRun"
 > = async (_root, args, ctx) => {
   const ballotRunId = args.ballotRunId;
-  const ballotRun = await ctx.db.ballotRun.findOne({
+  const ballotRun = await ctx.db.ballotRun.findUnique({
     where: { id: ballotRunId },
   });
   if (!ballotRun) throw new Error("Error.BallotrunNotFound");
@@ -237,7 +231,7 @@ export const getBallotRuns: FieldResolver<"Query", "getBallotRuns"> = async (
 ) => {
   const teamId = args.teamId;
 
-  const team = await ctx.db.team.findOne({ where: { id: teamId } });
+  const team = await ctx.db.team.findUnique({ where: { id: teamId } });
   if (!team) throw new Error("Error.TeamNotFound");
 
   return await ctx.db.ballotRun.findMany({ where: { teamId } });
@@ -258,10 +252,10 @@ export const getBallotResults: FieldResolver<
   const { ballotId, ballotRunId, canton, teamId, schoolId } = args;
   const user = ctx.user;
   let ballotRun;
-  const where: VoteWhereInput = {};
+  const where: Prisma.VoteWhereInput = {};
 
   if (ballotRunId) {
-    ballotRun = await ctx.db.ballotRun.findOne({
+    ballotRun = await ctx.db.ballotRun.findUnique({
       where: { id: ballotRunId },
       include: { team: { select: { teacherId: true } } },
     });
@@ -330,7 +324,7 @@ export async function viewPermission({
       // for students:
       if (ballot.teamId === user?.teamId) return true;
       // for teacher:
-      const team = await db.team.findOne({
+      const team = await db.team.findUnique({
         where: { id: ballot.teamId || undefined },
       });
       return team?.teacherId === user?.id;
@@ -365,7 +359,7 @@ export async function votingPermission({
       // for students:
       if (ballot.teamId === user?.teamId) return true;
       // for teacher:
-      const team = await db.team.findOne({
+      const team = await db.team.findUnique({
         where: { id: ballot.teamId || undefined },
       });
       return team?.teacherId === user?.id;

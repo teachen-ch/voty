@@ -27,6 +27,7 @@ interface PrismaModels {
   Attachment: Prisma.Attachment
   Thread: Prisma.Thread
   Reaction: Prisma.Reaction
+  Swissvote: Prisma.Swissvote
 }
 
 // Prisma input types metadata
@@ -77,12 +78,16 @@ interface NexusPrismaInputs {
       ordering: 'id' | 'file' | 'title' | 'userId' | 'ballotId' | 'threadId' | 'createdAt' | 'updatedAt'
     }
     threads: {
-      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'title' | 'text' | 'ref' | 'user' | 'userId' | 'team' | 'teamId' | 'reactions' | 'attachments' | 'createdAt' | 'updatedAt' | 'School' | 'schoolId'
+      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'title' | 'text' | 'ref' | 'user' | 'userId' | 'team' | 'teamId' | 'reactions' | 'attachments' | 'createdAt' | 'updatedAt' | 'school' | 'schoolId'
       ordering: 'id' | 'title' | 'text' | 'ref' | 'userId' | 'teamId' | 'createdAt' | 'updatedAt' | 'schoolId'
     }
     reactions: {
       filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'emoij' | 'user' | 'userId' | 'thread' | 'threadId' | 'createdAt' | 'updatedAt'
       ordering: 'id' | 'emoij' | 'userId' | 'threadId' | 'createdAt' | 'updatedAt'
+    }
+    swissvotes: {
+      filtering: 'AND' | 'OR' | 'NOT' | 'anr' | 'datum' | 'titel_kurz_d' | 'titel_off_d' | 'stichwort' | 'swissvoteslink' | 'rechtsform' | 'poster_ja' | 'poster_nein' | 'annahme' | 'volk' | 'stand' | 'kategorien'
+      ordering: 'anr' | 'datum' | 'titel_kurz_d' | 'titel_off_d' | 'stichwort' | 'swissvoteslink' | 'rechtsform' | 'poster_ja' | 'poster_nein' | 'annahme' | 'volk' | 'stand' | 'kategorien'
     }
   },
   User: {
@@ -99,7 +104,7 @@ interface NexusPrismaInputs {
       ordering: 'id' | 'file' | 'title' | 'userId' | 'ballotId' | 'threadId' | 'createdAt' | 'updatedAt'
     }
     threads: {
-      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'title' | 'text' | 'ref' | 'user' | 'userId' | 'team' | 'teamId' | 'reactions' | 'attachments' | 'createdAt' | 'updatedAt' | 'School' | 'schoolId'
+      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'title' | 'text' | 'ref' | 'user' | 'userId' | 'team' | 'teamId' | 'reactions' | 'attachments' | 'createdAt' | 'updatedAt' | 'school' | 'schoolId'
       ordering: 'id' | 'title' | 'text' | 'ref' | 'userId' | 'teamId' | 'createdAt' | 'updatedAt' | 'schoolId'
     }
     reactions: {
@@ -140,7 +145,7 @@ interface NexusPrismaInputs {
       ordering: 'id' | 'signature' | 'userId' | 'ballotId' | 'teamId' | 'schoolId'
     }
     Thread: {
-      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'title' | 'text' | 'ref' | 'user' | 'userId' | 'team' | 'teamId' | 'reactions' | 'attachments' | 'createdAt' | 'updatedAt' | 'School' | 'schoolId'
+      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'title' | 'text' | 'ref' | 'user' | 'userId' | 'team' | 'teamId' | 'reactions' | 'attachments' | 'createdAt' | 'updatedAt' | 'school' | 'schoolId'
       ordering: 'id' | 'title' | 'text' | 'ref' | 'userId' | 'teamId' | 'createdAt' | 'updatedAt' | 'schoolId'
     }
   }
@@ -166,7 +171,7 @@ interface NexusPrismaInputs {
       ordering: 'id' | 'signature' | 'userId' | 'ballotId' | 'teamId' | 'schoolId'
     }
     Thread: {
-      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'title' | 'text' | 'ref' | 'user' | 'userId' | 'team' | 'teamId' | 'reactions' | 'attachments' | 'createdAt' | 'updatedAt' | 'School' | 'schoolId'
+      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'title' | 'text' | 'ref' | 'user' | 'userId' | 'team' | 'teamId' | 'reactions' | 'attachments' | 'createdAt' | 'updatedAt' | 'school' | 'schoolId'
       ordering: 'id' | 'title' | 'text' | 'ref' | 'userId' | 'teamId' | 'createdAt' | 'updatedAt' | 'schoolId'
     }
   }
@@ -233,6 +238,9 @@ interface NexusPrismaInputs {
   Reaction: {
 
   }
+  Swissvote: {
+
+  }
 }
 
 // Prisma output types metadata
@@ -264,6 +272,8 @@ interface NexusPrismaOutputs {
     threads: 'Thread'
     reaction: 'Reaction'
     reactions: 'Reaction'
+    swissvote: 'Swissvote'
+    swissvotes: 'Swissvote'
   },
   Mutation: {
     createOneUser: 'User'
@@ -344,6 +354,12 @@ interface NexusPrismaOutputs {
     deleteOneReaction: 'Reaction'
     deleteManyReaction: 'BatchPayload'
     upsertOneReaction: 'Reaction'
+    createOneSwissvote: 'Swissvote'
+    updateOneSwissvote: 'Swissvote'
+    updateManySwissvote: 'BatchPayload'
+    deleteOneSwissvote: 'Swissvote'
+    deleteManySwissvote: 'BatchPayload'
+    upsertOneSwissvote: 'Swissvote'
   },
   User: {
     id: 'String'
@@ -518,7 +534,7 @@ interface NexusPrismaOutputs {
     attachments: 'Attachment'
     createdAt: 'DateTime'
     updatedAt: 'DateTime'
-    School: 'School'
+    school: 'School'
     schoolId: 'String'
   }
   Reaction: {
@@ -530,6 +546,21 @@ interface NexusPrismaOutputs {
     threadId: 'String'
     createdAt: 'DateTime'
     updatedAt: 'DateTime'
+  }
+  Swissvote: {
+    anr: 'String'
+    datum: 'DateTime'
+    titel_kurz_d: 'String'
+    titel_off_d: 'String'
+    stichwort: 'String'
+    swissvoteslink: 'String'
+    rechtsform: 'Int'
+    poster_ja: 'String'
+    poster_nein: 'String'
+    annahme: 'Int'
+    volk: 'Int'
+    stand: 'Int'
+    kategorien: 'String'
   }
 }
 
@@ -548,6 +579,7 @@ interface NexusPrismaMethods {
   Attachment: Typegen.NexusPrismaFields<'Attachment'>
   Thread: Typegen.NexusPrismaFields<'Thread'>
   Reaction: Typegen.NexusPrismaFields<'Reaction'>
+  Swissvote: Typegen.NexusPrismaFields<'Swissvote'>
   Query: Typegen.NexusPrismaFields<'Query'>
   Mutation: Typegen.NexusPrismaFields<'Mutation'>
 }

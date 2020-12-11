@@ -35,7 +35,7 @@ export const login: FieldResolver<"Mutation", "login"> = async (
   args,
   ctx: Context
 ): Promise<ResponseLogin> => {
-  const user = await ctx.db.user.findOne({
+  const user = await ctx.db.user.findUnique({
     where: { email: args.email?.toLowerCase() },
   });
   if (!user) {
@@ -131,7 +131,7 @@ export const acceptInvite: FieldResolver<"Mutation", "acceptInvite"> = async (
   args,
   ctx: Context
 ): Promise<Team> => {
-  const team = await ctx.db.team.findOne({ where: { invite: args.invite } });
+  const team = await ctx.db.team.findUnique({ where: { invite: args.invite } });
   if (!team) throw new Error("Error.InviteNotFound");
   const user = getRequestUser(ctx);
   if (!user) throw new Error("Error.NeedsLogin");
@@ -160,7 +160,7 @@ export const createInvitedUser: FieldResolver<
   "Mutation",
   "createInvitedUser"
 > = async (_root, args, ctx, info) => {
-  const team = await ctx.db.team.findOne({ where: { invite: args.invite } });
+  const team = await ctx.db.team.findUnique({ where: { invite: args.invite } });
   if (!team) throw new Error("Error.InviteNotFound");
   const { name, lastname, email, password } = args;
   const newArgs = {
@@ -205,7 +205,7 @@ export const deleteUser: FieldResolver<"Mutation", "deleteUser"> = async (
 ) => {
   const user = getRequestUser(ctx);
   const id = args.where.id;
-  const deleteUser = await ctx.db.user.findOne({
+  const deleteUser = await ctx.db.user.findUnique({
     where: { id: String(id) },
     include: { team: true },
   });
@@ -252,7 +252,7 @@ export async function getUser(ctx: Context): Promise<User | null> {
   try {
     const user = getRequestUser(ctx);
     if (user?.id) {
-      return await ctx.db.user.findOne({ where: { id: user?.id } });
+      return await ctx.db.user.findUnique({ where: { id: user?.id } });
     }
     return null;
   } catch (err) {
@@ -292,7 +292,7 @@ export async function sendVerificationEmail(
     if (!from)
       throw new Error("Please define EMAIL env variable (sender-email)");
 
-    const user = await db.user.findOne({ where: { email } });
+    const user = await db.user.findUnique({ where: { email } });
     if (!user) {
       logger.info(`Error sending ${purpose} email to: ${email}`);
       return { token: "MAYBE..." };
@@ -354,7 +354,7 @@ export const checkVerification: FieldResolver<
     throw Error("Error.TokenNotFound");
   }
   const email = found.identifier;
-  const user = await ctx.db.user.findOne({ where: { email } });
+  const user = await ctx.db.user.findUnique({ where: { email } });
   if (!user) {
     throw Error("Error.EmailNotFound");
   }
@@ -387,7 +387,7 @@ export const changePassword: FieldResolver<
 
 async function verifyToken(token: string, prisma: PrismaClient) {
   const hashed = createHash("sha256").update(`${token}${secret}`).digest("hex");
-  const found = await prisma.verificationRequest.findOne({
+  const found = await prisma.verificationRequest.findUnique({
     where: { token: hashed },
   });
   if (!found) return undefined;

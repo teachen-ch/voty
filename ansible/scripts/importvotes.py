@@ -8,13 +8,16 @@
 
 from sqlalchemy import create_engine, exc
 import pandas as pd
-import getopt
 import sys
+import os
+import getopt
 import numpy
 from datetime import date
 
+path = os.path.dirname(__file__)
+
 DOWNLOAD_URL = "https://swissvotes.ch/page/dataset/swissvotes_dataset.csv"
-CATEGORIES_CSV = "./categories.csv"
+CATEGORIES_CSV = path + "/categories.csv"
 
 try:
     # Define the getopt parameters
@@ -25,7 +28,7 @@ try:
     user = values.get("-u", "")
     password = values.get("-p", "")
     host = values.get("-h", "localhost")
-    database = values.get("-d", "swissvotes")
+    database = values.get("-d", "voty")
     table = values.get("-t", "swissvotes")
     userpass = user + (":%s" % password if password else "")
     if (userpass):
@@ -47,12 +50,20 @@ except exc.OperationalError:
     print("Could not connect to database with connection %s" % PG_URL)
     sys.exit(3)
 
+
+def intnull(val):
+    return 0 if val == '' or val == '.' else int(val)
+
+
 print("2) Downloading and parsing latest swissvotes_dataset.csv")
 # Load in the data
 votes = pd.read_csv(DOWNLOAD_URL, encoding='iso-8859-1',
-                    delimiter=';', parse_dates=['datum'])
+                    delimiter=';', parse_dates=['datum'],
+                    converters={'anr': str, 'rechtsform': intnull, 'annahme': intnull, 'volk': intnull, 'stand': intnull})
 
-votes = votes.dropna(how='all', axis=1)
+#votes.dropna(how='all', axis=1, inplace=True)
+invalid = votes[votes['anr'] == ''].index
+votes.drop(invalid, inplace=True)
 print("3) Parsed %d lines" % len(votes))
 
 
@@ -82,12 +93,17 @@ categories = dict(zip(cats.code, cats.title))
 votes.insert(2, 'kategorien', '')
 votes = votes.apply(replaceCats, axis='columns')
 
+# only select a few columns, which are relevant to your case
+votes = votes[['anr', 'datum', 'titel_kurz_d', 'titel_off_d', 'stichwort',
+               'swissvoteslink', 'rechtsform', 'poster_ja', 'poster_nein',
+               'annahme', 'volk', 'stand', 'kategorien']]
+
 # Save the data from dataframe to
 # postgres table "iris_dataset"
 votes.to_sql(
     table,
     engine,
-    if_exists='replace',
+    if_exists='append',
     index=False
 )
 print("4) (Re-)created table and wrote data to table %s/%s" %

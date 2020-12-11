@@ -38,10 +38,8 @@ export const Swissvote = objectType({
 export const SwissvotesQuery = extendType({
   type: "Query",
   definition(t) {
-    t.field("swissvotes", {
+    t.list.field("swissvotes", {
       type: "Swissvote",
-      list: true,
-      nullable: true,
       args: {
         keywords: stringArg(),
         type: intArg(),

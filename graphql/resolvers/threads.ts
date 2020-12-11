@@ -43,7 +43,7 @@ export const postThread: FieldResolver<"Mutation", "postThread"> = async (
 
 async function assertTeam(teamId: string, user: User, ctx: Context) {
   if (user.role === Role.Teacher) {
-    const team = await ctx.db.team.findOne({ where: { id: teamId } });
+    const team = await ctx.db.team.findUnique({ where: { id: teamId } });
     if (!team || team.teacherId !== user.id)
       throw new Error("Error.ThreadNoTeam");
   } else {
