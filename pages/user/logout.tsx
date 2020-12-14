@@ -1,4 +1,4 @@
-import { useSetAccessToken, useSetUser } from "../../state/user";
+import { useSetAccessToken, useSetUser, useUser } from "../../state/user";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { Button, ButtonProps } from "rebass";
@@ -6,15 +6,21 @@ import { useApolloClient } from "@apollo/client";
 import { AppPage } from "components/Page";
 
 export default function LogoutPage(): React.ReactElement {
+  const user = useUser();
   const setUser = useSetUser();
   const setAccessToken = useSetAccessToken();
   const router = useRouter();
 
   useEffect(() => {
-    setAccessToken("");
-    setUser(undefined);
-    void router.push("/");
-  }, []);
+    if (user) {
+      setAccessToken("");
+      setUser(undefined);
+      void router.push("/");
+    }
+    if (user === null) {
+      void router.push("/");
+    }
+  }, [user]);
 
   return <AppPage heading="" />;
 }
