@@ -379,9 +379,19 @@ export const SelectBallots: React.FC<{ team: TeamTeacherFieldsFragment }> = ({
               <td onClick={(evt) => toggleBallot(ballot.id, team.id, evt)}>
                 <Box variant="centered">
                   {find(ballotRuns, { ballot: { id: ballot.id } }) ? (
-                    <IconCheckOn alt="ausgewählt" width="20px" height="20px" />
+                    <IconCheckOn
+                      alt="ausgewählt"
+                      data-cy="on"
+                      width="20px"
+                      height="20px"
+                    />
                   ) : (
-                    <IconCheckOff alt="abgewählt" width="20px" height="20px" />
+                    <IconCheckOff
+                      alt="abgewählt"
+                      data-cy="off"
+                      width="20px"
+                      height="20px"
+                    />
                   )}
                 </Box>
               </td>

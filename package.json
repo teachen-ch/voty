@@ -9,7 +9,7 @@
     "check": "next build && yarn test",
     "cypress:open": "dotenv cypress open",
     "start": "next start",
-    "test": "dotenv cypress run --record false",
+    "test": "dotenv -- cypress run --record false",
     "docker-rm": "docker rm -f $(docker ps -a -q)",
     "deploy_dev": "ansible-playbook -i ansible/dev ansible/site.yml --tags app",
     "deploy_prod": "ansible-playbook -i ansible/prod ansible/site.yml --tags app",
