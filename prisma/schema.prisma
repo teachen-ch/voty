@@ -49,9 +49,10 @@ model User {
   reactions   Reaction[]
   voted       Voted[]      @relation("VotedUser")
 
-  createdAt DateTime @default(now()) @map(name: "created_at")
-  updatedAt DateTime @default(now()) @map(name: "updated_at")
-  Team      Team?    @relation("TeamMembers", fields: [teamId], references: [id])
+  createdAt DateTime   @default(now()) @map(name: "created_at")
+  updatedAt DateTime   @default(now()) @map(name: "updated_at")
+  Team      Team?      @relation("TeamMembers", fields: [teamId], references: [id])
+  Activity  Activity[]
   @@map(name: "users")
 }
 
@@ -72,6 +73,7 @@ model Team {
   invite String? @unique // inviteCode to generate accounts
   code   String? @unique // code to allow voting for ballotRuns from this team
   year   Int? // in what year (roughly) were kids born (now - schoolyear - 5y)
+  cards  String  @default("")
 
   school    School   @relation(fields: [schoolId], references: [id])
   schoolId  String   @map(name: "school_id")
@@ -87,6 +89,7 @@ model Team {
   Vote       Vote[]
   Voted      Voted[]
   Thread     Thread[]
+  Activity   Activity[]
   @@map(name: "teams")
 }
 
@@ -105,9 +108,10 @@ model School {
   teams    Team[]
   ballots  Ballot[]
 
-  Vote   Vote[]
-  Voted  Voted[]
-  Thread Thread[]
+  Vote     Vote[]
+  Voted    Voted[]
+  Thread   Thread[]
+  Activity Activity[]
   @@map(name: "schools")
 }
 
@@ -260,10 +264,11 @@ model Thread {
   reactions   Reaction[]
   attachments Attachment[]
 
-  createdAt DateTime @default(now()) @map(name: "created_at")
-  updatedAt DateTime @default(now()) @map(name: "updated_at")
-  school    School?  @relation(fields: [schoolId], references: [id])
+  createdAt DateTime   @default(now()) @map(name: "created_at")
+  updatedAt DateTime   @default(now()) @map(name: "updated_at")
+  school    School?    @relation(fields: [schoolId], references: [id])
   schoolId  String?
+  Activity  Activity[]
   @@map(name: "threads")
 }
 
@@ -279,6 +284,39 @@ model Reaction {
   createdAt DateTime @default(now()) @map(name: "created_at")
   updatedAt DateTime @default(now()) @map(name: "updated_at")
   @@map(name: "reactions")
+}
+
+enum Visibility {
+  Private // only student and teacher can see
+  Team // team can view
+  School // school can view
+  Public // everyone may see
+}
+
+enum ActivityType {
+  Discussion
+  Attachment
+  Vote
+  Test
+}
+
+model Activity {
+  id         Int          @id @default(autoincrement())
+  type       ActivityType
+  visibility Visibility
+
+  user     User    @relation(fields: [userId], references: [id])
+  userId   String  @map(name: "user_id")
+  team     Team    @relation(fields: [teamId], references: [id])
+  teamId   String  @map(name: "team_id")
+  school   School  @relation(fields: [schoolId], references: [id])
+  schoolId String  @map(name: "school_id")
+  thread   Thread? @relation(fields: [threadId], references: [id])
+  threadId String? @map(name: "thread_id")
+  cardId   String?
+
+  time DateTime @default(now()) @map(name: "created_at")
+  @@map(name: "activities")
 }
 
 model Swissvote {
