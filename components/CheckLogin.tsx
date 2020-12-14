@@ -22,6 +22,7 @@ CheckLogin.fragments = {
       team {
         id
         name
+        cards
         teacher {
           id
           name

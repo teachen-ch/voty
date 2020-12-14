@@ -17,8 +17,6 @@ export default function CardsPage(): React.ReactElement {
           Suche
         </Button>
       </Flex>
-
-      <Cards keywords={keywords} />
     </Page>
   );
 }

@@ -8,6 +8,7 @@ describe("Test Live-Voting Panels", () => {
     cy.visit("/teacher");
     cy.contains("Class 1").click();
     cy.contains("Folgende Abstimmungen");
+    // TODO: Why wait when you can flake?
     cy.wait(1000);
     // add testinitiative
     cy.get(
@@ -21,6 +22,8 @@ describe("Test Live-Voting Panels", () => {
 
     // logout user
     cy.visit("/user/logout");
+    // TODO: Why wait when you can flake?
+    cy.wait(500);
     cy.contains("Anmelden");
 
     // now vote anonymously

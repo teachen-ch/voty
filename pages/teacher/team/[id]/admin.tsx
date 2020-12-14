@@ -21,6 +21,8 @@ import { Nullable } from "simplytyped";
 import { Breadcrumb, A } from "components/Breadcrumb";
 import { Spinner } from "theme-ui";
 import PanelPage from "./panel";
+import { CardList } from "components/Cards";
+import { users } from "graphql/resolvers";
 // import { usePolling } from "util/hooks";
 
 export const INVITE_STUDENTS = gql`
@@ -119,6 +121,12 @@ export default function TeacherTeamPage(): React.ReactElement {
         <b>{team.name}</b>
       </Breadcrumb>
       <Text textAlign="left">
+        <Heading as="h3">Lerninhalte</Heading>
+        <CardList teamCards={team.cards} />
+        <Button onClick={() => router.push(`/teacher/team/${team.id}/cards`)}>
+          Lerninhalte hinzufügen
+        </Button>
+
         <Heading as="h3">
           Folgende Abstimmungen sind für die Klasse verfügbar
         </Heading>

@@ -1,10 +1,16 @@
 import { gql } from "@apollo/client";
 import * as cards from "content/";
-import { Card as CardType, useCardsQuery } from "graphql/types";
-import { Flex, Box, Text, Heading } from "rebass";
+import {
+  Card as CardType,
+  useCardsQuery,
+  useSetCardsMutation,
+} from "graphql/types";
+import { Flex, Box, Text, Heading, Button } from "rebass";
 import { Loading } from "components/Page";
 import { useRouter } from "next/router";
-import { useEffect } from "react";
+import { useState } from "react";
+import { without } from "lodash";
+import { A } from "./Breadcrumb";
 
 export const GET_CARDS = gql`
   query cards($keywords: String, $age: String) {
@@ -23,7 +29,21 @@ export const GET_CARDS = gql`
   }
 `;
 
-export const Cards: React.FC<{ keywords?: string; age?: string }> = (props) => {
+export const SET_CARDS = gql`
+  mutation setCards($teamId: String!, $cards: String!) {
+    setCards(teamId: $teamId, cards: $cards) {
+      id
+      cards
+    }
+  }
+`;
+
+export const Cards: React.FC<{
+  keywords?: string;
+  age?: string;
+  teamId: string;
+  teamCards: string;
+}> = (props) => {
   const cardsQuery = useCardsQuery({ variables: props });
   const cards = cardsQuery.data?.cards;
 
@@ -38,13 +58,41 @@ export const Cards: React.FC<{ keywords?: string; age?: string }> = (props) => {
   }
   return (
     <Flex flexWrap="wrap" mx="-8px">
-      {cards?.map((card) => card && <CardBox card={card} />)}
+      {cards?.map(
+        (card) =>
+          card && (
+            <CardBox
+              key={card.id}
+              card={card}
+              teamCards={props.teamCards}
+              teamId={props.teamId}
+            />
+          )
+      )}
     </Flex>
   );
 };
 
-export const CardBox: React.FC<{ card: CardType }> = ({ card }) => {
+export const CardBox: React.FC<{
+  card: CardType;
+  teamCards: string;
+  teamId: string;
+}> = ({ card, teamCards, teamId }) => {
   const router = useRouter();
+  const cardsList = teamCards ? teamCards.split(" ") : [];
+  const id = String(card.id);
+  const [selected, setSelected] = useState(cardsList.indexOf(id) >= 0);
+  const [doSetCards] = useSetCardsMutation();
+
+  function doSelect(evt: React.BaseSyntheticEvent) {
+    evt.stopPropagation();
+    evt.preventDefault();
+    setSelected(!selected);
+    const cards = selected
+      ? without(cardsList, id).join(" ")
+      : cardsList.concat(id).join(" ");
+    doSetCards({ variables: { cards, teamId } });
+  }
   return (
     <Box
       bg="white"
@@ -56,23 +104,75 @@ export const CardBox: React.FC<{ card: CardType }> = ({ card }) => {
       onClick={() => router.push(`/cards/${card.id}`)}
       sx={{ cursor: "pointer" }}
     >
-      <Heading as="h3" mt={0} fontSize={2}>
-        {card.title}
-      </Heading>
-      <Text fontSize={1}>
-        <Text>{card.description}</Text>
-        <Text mt={2}>
+      <Flex
+        flexDirection="column"
+        justifyContent="space-between"
+        height="100%"
+        flex={1}
+      >
+        <Heading as="h3" mt={0} fontSize={2}>
+          {card.title}
+        </Heading>
+        <Text fontSize={1}>{card.description}</Text>
+        <Text mt={2} fontSize={1}>
           <strong>Alter:</strong>
           <br /> {card.age}
         </Text>
-        <Text mt={2}>
-          <strong>Dauer:</strong>
-          <br /> {card.duration}
-        </Text>
-      </Text>
+        <Flex justifyContent="space-between" alignItems="center" mt={2}>
+          <Text fontSize={1}>
+            <strong>Dauer:</strong>
+            <br /> {card.duration}
+          </Text>
+          <Button
+            sx={{
+              borderRadius: 100,
+              width: 60,
+              height: 60,
+              boxSizing: "border-box",
+              border: "5px solid white",
+            }}
+            bg={selected ? "green" : "secondary"}
+            onClick={doSelect}
+          >
+            {selected ? "✔" : "+"}
+          </Button>
+        </Flex>
+      </Flex>
     </Box>
   );
 };
+
+export const CardList: React.FC<{ teamCards: string }> = ({ teamCards }) => {
+  if (!teamCards) {
+    return <Text>Noch keine Inhalte ausgewählt</Text>;
+  }
+  return (
+    <>
+      {teamCards.split(" ").map((id, ix) => (
+        <Flex key={id} my={3} ml={4}>
+          <Flex
+            sx={{ borderRadius: 25, display: "inline-box" }}
+            bg="white"
+            mr={2}
+            p={1}
+            width="35px"
+            height="35px"
+            justifyContent="center"
+            alignItems="center"
+          >
+            <Text fontWeight="bold" color="gray" fontSize={2}>
+              {ix + 1}
+            </Text>
+          </Flex>
+          <Text>
+            <A href={`/cards/${id}`}>{getCardTitle(id)}</A>
+          </Text>
+        </Flex>
+      ))}
+    </>
+  );
+};
+
 export const Card: React.FC<{ id: string }> = ({ id }) => {
   const Comp = getCard(id);
   return <Comp />;
@@ -86,4 +186,13 @@ export function getCard(id: string): React.FC {
 export function getCardMeta(id: string): CardType | undefined {
   // @ts-ignore TODO, not sure how to beter do the lookup here
   return id in cards ? cards[id].meta : undefined;
+}
+
+export function getCardTitle(id: string): string {
+  const meta = getCardMeta(id);
+  return meta ? String(meta["title"]) : "";
+}
+
+export function useUpdateClassCards(classId: string, cards: string[]) {
+  return;
 }

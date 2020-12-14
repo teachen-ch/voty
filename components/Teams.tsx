@@ -25,6 +25,7 @@ const TeamAnonFields = gql`
 const TeamUserFields = gql`
   fragment TeamUserFields on Team {
     ...TeamAnonFields
+    cards
     members {
       id
       name

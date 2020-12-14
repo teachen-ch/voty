@@ -1,9 +1,10 @@
 import { LoggedInPage } from "components/Page";
-import { Text, Box, Card, Button, Image } from "rebass";
+import { Text, Heading, Box, Card, Button, Image } from "rebass";
 import { ReadMore } from "components/ReadMore";
 import { useUser, SessionUser } from "state/user";
 import { Breadcrumb, A } from "components/Breadcrumb";
-import { useState } from "react";
+import React, { useState } from "react";
+import { CardList } from "components/Cards";
 import {
   BallotScope,
   BallotFieldsFragment,
@@ -16,12 +17,21 @@ import { VotyNow, VotySuccess } from "pages/ballots/[id]";
 export default function StudentTest(): React.ReactElement {
   const user = useUser();
 
+  if (!user) {
+    return <LoggedInPage heading="Aktuelle Abstimmungen" />;
+  }
+
   return (
     <LoggedInPage heading="Aktuelle Abstimmungen">
       <Breadcrumb>
         <A href="/">Start</A>
         <b>Abstimmungen</b>
       </Breadcrumb>
+      <Heading>Lerninhalte</Heading>
+
+      <CardList teamCards={String(user.team?.cards)} />
+
+      <Heading>Abstimmungen</Heading>
       <Text>
         Hier kannst Du zu den aktuellen nationalen Abstimmungsvorlagen anonym
         Deine Stimme abgeben.
