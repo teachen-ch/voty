@@ -8,6 +8,7 @@
     }
   },
   "video": true,
+  "videoCompression": 0,
   "pluginsFile": "./cypress/plugins/index.ts",
   "projectId": "19hfnd",
   "retries": {
