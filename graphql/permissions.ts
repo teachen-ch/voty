@@ -133,6 +133,7 @@ export const permissions = shield(
       deleteAccount: isUser,
       deleteUser: or(isAdmin, isTeacher),
       postThread: isUser,
+      setCards: isTeacher,
     },
     User: {
       id: isUser,

@@ -38,6 +38,7 @@ export const Team = objectType({
     t.model.teacher();
     t.model.members();
     t.model.ballots();
+    t.model.cards();
   },
 });
 

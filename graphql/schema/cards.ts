@@ -1,5 +1,11 @@
 import resolvers from "../resolvers";
-import { extendType, objectType, stringArg, intArg } from "@nexus/schema";
+import {
+  extendType,
+  objectType,
+  stringArg,
+  intArg,
+  nonNull,
+} from "@nexus/schema";
 
 export const Card = objectType({
   name: "Card",
@@ -29,6 +35,21 @@ export const CardsQuery = extendType({
       },
       resolve: (_root, args, ctx, info) =>
         resolvers.cards.getCards(_root, args, ctx, info),
+    });
+  },
+});
+
+export const CardsMutations = extendType({
+  type: "Mutation",
+  definition(t) {
+    t.field("setCards", {
+      type: "Team",
+      args: {
+        teamId: nonNull(stringArg()),
+        cards: nonNull(stringArg()),
+      },
+      resolve: (_root, args, ctx, info) =>
+        resolvers.cards.setCards(_root, args, ctx, info),
     });
   },
 });

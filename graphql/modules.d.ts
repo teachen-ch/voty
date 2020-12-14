@@ -23,6 +23,7 @@ declare module '*/Cards.tsx' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
   export const cards: DocumentNode;
+export const setCards: DocumentNode;
 
   export default defaultDocument;
 }
