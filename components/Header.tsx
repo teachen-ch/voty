@@ -4,7 +4,6 @@ import { ReactElement } from "react";
 export function Header(): ReactElement {
   return (
     <Head>
-      <html lang={"de"} />
       <link
         rel="apple-touch-icon"
         sizes="180x180"
