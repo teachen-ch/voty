@@ -5,3 +5,4 @@ export * as srf_usa_parteien from "content/videos/srf_usa_parteien.mdx";
 export * as srf_waehlen from "content/videos/srf_waehlen.mdx";
 export * as chaty_initiativen from "content/chaty/chaty_initiativen.mdx";
 export * as chaty_referendum from "content/chaty/chaty_referendum.mdx";
+export * as chaty_demokratie_intro from "content/chaty/chaty_demokratie_intro.mdx";
