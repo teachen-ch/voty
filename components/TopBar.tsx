@@ -14,12 +14,16 @@ import { Role } from "graphql/types";
 export const TopBar: React.FC<{ hideLogo?: boolean }> = (props) => {
   const user = useUser();
   const [loaded, setLoaded] = useState(false);
+  let cancel = 0;
 
   // Delay showing of the login icons until user is loaded
   useEffect(() => {
     if (user === undefined) {
-      setTimeout(() => setLoaded(true), 1000);
-    } else setLoaded(true);
+      cancel = setTimeout(() => setLoaded(true), 1000);
+    } else {
+      setLoaded(true);
+    }
+    return () => clearTimeout(cancel);
   }, [user]);
 
   return (
