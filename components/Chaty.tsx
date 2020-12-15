@@ -178,10 +178,12 @@ function specialMessage(type: string, rest: string): string {
   switch (type) {
     case "GIF":
     case "GIPHY": {
+      let media = rest;
       // from https://giphy.com/gifs/fifa-h7LENyTiMBCp0pCaGz to
       // https://media0.giphy.com/media/h7LENyTiMBCp0pCaGz/giphy.mp4
-      const id = rest.replace(/.*-([^-]+)$/, "$1");
-      const media = `https://media0.giphy.com/media/${id}/giphy.mp4`;
+      let id = rest.replace(/.*\/gifs\/([^\/]*)$/, "$1");
+      if (id.indexOf("-")) id = id.replace(/.*?\-/, "");
+      if (id) media = `https://media0.giphy.com/media/${id}/giphy.mp4`;
       return `<video src="${media}" autoplay loop width="200"/>`;
     }
     case "IMAGE":
