@@ -51,10 +51,10 @@ export const Chaty: React.FC<{ lines: string }> = ({ lines }) => {
 
   if (!started) {
     return (
-      <Card height="500px">
+      <Card>
         <Flex justifyContent="center" alignContent="center">
-          <Button mt={6} onClick={() => doChat()}>
-            Demo starten
+          <Button my={3} onClick={() => doChat()}>
+            Chat starten
           </Button>
         </Flex>
       </Card>
@@ -62,9 +62,9 @@ export const Chaty: React.FC<{ lines: string }> = ({ lines }) => {
   }
 
   return (
-    <Box height="500px">
+    <Box textAlign="left">
       <MainContainer>
-        <ChatContainer style={{ paddingTop: "1rem", minHeight: "500px" }}>
+        <ChatContainer style={{ paddingTop: "1rem" }}>
           <MessageList>
             {showMessages(show)}
             {typing ? (
