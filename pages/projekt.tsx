@@ -1,6 +1,6 @@
 import { AppPage } from "components/Page";
-import { Heading, Text, Card, Link as A } from "rebass";
-import { useState } from "react";
+import { Heading, Flex, Text, Card, Image, Link as A } from "rebass";
+import React, { useState } from "react";
 
 export default function Projekt(): React.ReactElement {
   return (
@@ -136,43 +136,61 @@ export default function Projekt(): React.ReactElement {
           <Heading>Wer steht hinter voty.ch?</Heading>
           <Text>
             voty.ch ist ein Projekt des Vereins «Teachen!» das im Rahmen des
-            prototypefund.opendata.ch entwickelt wird. Das Projektteam setzt
-            sich wie folgt zusammen:
+            prototypefund.opendata.ch entwickelt wird.
           </Text>
           <Text fontSize={2}>
-            <ul>
-              <li>
-                <strong>Stefan Niederhauser</strong> (
-                <A
-                  href="https://linkedin.com/in/sniederhauser"
-                  variant="underline"
-                >
-                  LinkedIn
-                </A>
-                ), Projektleitung, technische Umsetzung
-              </li>
-              <li>
-                <strong>Roger Wiezel</strong> (
-                <A href="https://atelier-w.ch" variant="underline">
-                  atelier-w.ch
-                </A>
-                ), Grafische Gestaltung und User Experience
-              </li>
-              <li>
-                <strong>Urs Wildeisen</strong> (
-                <A href="https://phbern.ch" variant="underline">
-                  PH Bern
-                </A>
-                ), Pädagogische Begleitung
-              </li>
-              <li>
-                <strong>Barbara Reichen</strong> (
-                <A href="https://barbarareichen.com" variant="underline">
-                  barbarareichen.com
-                </A>
-                ), Pädagogische Begleitung
-              </li>
-            </ul>
+            <Flex mx={-2} flexWrap="wrap">
+              <Person
+                name="Stefan Niederhauser"
+                href="https://linkedin.com/in/sniederhauser"
+                role="Projektleitung und techn. Umsetzung"
+                org="LinkedIn"
+                image="/people/sn.jpg"
+              >
+                Stefan hat 25 Jahre Erfahrung mit IT-Projekten aus Startups und
+                Corporates und will diese im Bereich der digitalen Bildung und
+                der Demokratie einsetzen als Fullstack-Engineer, Entrepreneur,
+                Organisator und Weltverbesserer.
+              </Person>
+              <Person
+                name="Roger Wiezel"
+                href="http://atelier-w.ch"
+                role="Grafische Gestaltung und User Experience"
+                org="atelier-w.ch"
+                image="/people/rw.jpg"
+              >
+                Roger gestaltet schon sein Leben lang und seit über zwanzig
+                Jahren auch digital. Dabei interessiert ihn vor allem die
+                Schnittstelle zwischen Mensch und Maschine. Wie denkt der
+                Mensch? Wie wird die Maschine verständlich? Und wie verwandeln
+                wir Komplexität in Schönheit?
+              </Person>
+              <Person
+                name="Urs Wildeisen"
+                href="https://phbern.ch"
+                role="Pädagogische Begleitung"
+                org="PH Bern"
+                image="/people/uw.jpg"
+              >
+                Urs ist ein Meister der Didaktik. Wobei er findet, das Kinder
+                nach dem ersten Schuljahr meist bereits genügend Bücher gelesen
+                haben. Deshalb setzt er seinen Fokus in der Arbeit mit Kindern
+                und PH-Studenten lieber auf Robotik, Programmierung, 3D-Druck
+                oder Projektarbeit.
+              </Person>
+              <Person
+                name="Barbara Reichen"
+                href="https://barbarareichen.com"
+                role="Pädagogische Begleitung"
+                org="barbarareichen.com"
+                image="/people/br.jpg"
+              >
+                Barbara ist Künstlerin, Kindergärtnerin und Mutter zweier
+                Teenager. Sie weiss, dass wir die Welt schleunigst verändern
+                müssen und nimmt das auch in die Hand. Mit Kunst. Mit Kindern.
+                Und nun mit Demokratie als Mittel zum Zweck!
+              </Person>
+            </Flex>
           </Text>
           <Heading>Wir haben Ihr Interesse geweckt?</Heading>
           <Text>
@@ -218,3 +236,48 @@ export const Detail: React.FC = ({ children }) => {
     </Text>
   );
 };
+
+export const Person: React.FC<{
+  href: string;
+  name: string;
+  role: string;
+  org: string;
+  image: string;
+}> = (props) => (
+  <Flex
+    flexDirection="column"
+    m={3}
+    justifyContent="flex-start"
+    alignItems="center"
+    width={["40%", "40%", "20.5%"]}
+  >
+    <Image
+      src={props.image}
+      mb={3}
+      sx={{
+        borderRadius: 100,
+        transition: "transform .6s ease-in-out",
+        ":hover": {
+          transform: "rotate(360deg)",
+        },
+      }}
+    />
+    <Text fontSize={1} textAlign="center">
+      <Text>
+        <strong>{props.name}</strong>
+      </Text>
+      <Text>
+        (
+        <A href={props.href} target="_blank" variant="underline">
+          {props.org}
+        </A>
+        )
+      </Text>
+      <Text>{props.role}</Text>
+      <hr />
+      <Text textAlign="left" fontSize={"13px"}>
+        {props.children}
+      </Text>
+    </Text>
+  </Flex>
+);
