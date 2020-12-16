@@ -8,7 +8,7 @@ import {
 import { Flex, Box, Text, Heading, Button } from "rebass";
 import { Loading } from "components/Page";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import React, { useState } from "react";
 import { without } from "lodash";
 import { A } from "./Breadcrumb";
 
@@ -150,20 +150,7 @@ export const CardList: React.FC<{ teamCards: string }> = ({ teamCards }) => {
     <>
       {teamCards.split(" ").map((id, ix) => (
         <Flex key={id} my={3} ml={4}>
-          <Flex
-            sx={{ borderRadius: 25, display: "inline-box" }}
-            bg="white"
-            mr={2}
-            p={1}
-            width="35px"
-            height="35px"
-            justifyContent="center"
-            alignItems="center"
-          >
-            <Text fontWeight="bold" color="gray" fontSize={2}>
-              {ix + 1}
-            </Text>
-          </Flex>
+          <CircleBullet value={ix + 1} />
           <Text>
             <A href={`/cards/${id}`}>{getCardTitle(id)}</A>
           </Text>
@@ -177,6 +164,26 @@ export const Card: React.FC<{ id: string }> = ({ id }) => {
   const Comp = getCard(id);
   return <Comp />;
 };
+
+export const CircleBullet: React.FC<{ value: string | number }> = ({
+  value,
+}) => (
+  <Text
+    fontWeight="bold"
+    color="gray"
+    fontSize={2}
+    display="inline-block"
+    sx={{ borderRadius: 25 }}
+    bg="white"
+    mr={2}
+    p={1}
+    width="35px"
+    height="35px"
+    textAlign="center"
+  >
+    {value}
+  </Text>
+);
 
 export function getCard(id: string): React.FC {
   // @ts-ignore TODO, not sure how to beter do the lookup here

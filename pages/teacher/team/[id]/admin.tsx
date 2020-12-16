@@ -21,8 +21,9 @@ import { Nullable } from "simplytyped";
 import { Breadcrumb, A } from "components/Breadcrumb";
 import { Spinner } from "theme-ui";
 import PanelPage from "./panel";
-import { CardList } from "components/Cards";
+import { CardList, CircleBullet } from "components/Cards";
 import { users } from "graphql/resolvers";
+import { Center } from "components/Learning";
 // import { usePolling } from "util/hooks";
 
 export const INVITE_STUDENTS = gql`
@@ -123,8 +124,13 @@ export default function TeacherTeamPage(): React.ReactElement {
       <Text textAlign="left">
         <Heading as="h3">Lerninhalte</Heading>
         <CardList teamCards={team.cards} />
-        <Button onClick={() => router.push(`/teacher/team/${team.id}/cards`)}>
-          Lerninhalte hinzufügen
+
+        <Button
+          onClick={() => router.push(`/teacher/team/${team.id}/cards`)}
+          variant="text"
+          ml={4}
+        >
+          <CircleBullet value="+" /> Lerninhalte hinzufügen
         </Button>
 
         <Heading as="h3">
