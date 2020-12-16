@@ -9,8 +9,10 @@ import {
 } from "@chatscope/chat-ui-kit-react";
 import { Box, Button, Text, Flex, Card } from "rebass";
 import { useEffect, useMemo, useState } from "react";
+import { Markdown } from "util/markdown";
 
 const WAIT = 40;
+const MAX_WAIT = 3000;
 
 export const Chaty: React.FC<{ lines: string }> = ({ lines }) => {
   const messages = useMemo<TMessage[]>(() => parseMessages(lines), [lines]);
@@ -34,10 +36,10 @@ export const Chaty: React.FC<{ lines: string }> = ({ lines }) => {
     setShow(messages.slice(0, line + 1));
     const msg = messages[line];
     const chars = msg.message?.length || 10;
-    const wait = WAIT * chars;
+    const wait = Math.min(WAIT * chars, MAX_WAIT);
 
     if (line + 1 < messages.length) {
-      if (messages[line + 1].direction === "incoming") {
+      if (messages[line + 1].direction !== Direction.Outgoing) {
         setTyping(true);
         cancel = setTimeout(() => doChat(line + 1), wait);
       } else {
@@ -68,7 +70,10 @@ export const Chaty: React.FC<{ lines: string }> = ({ lines }) => {
           <MessageList>
             {showMessages(show)}
             {typing ? (
-              <TypingIndicator style={{ position: "inherit" }} />
+              <TypingIndicator
+                style={{ display: "inline-block", marginBottom: "20px" }}
+                is="MessageSeparator"
+              />
             ) : null}
           </MessageList>
           <div is="MessageInput" style={{ marginTop: "auto" }}>
@@ -85,17 +90,17 @@ const ShowInput: React.FC<{
   doChat: (line: number) => void;
 }> = ({ message, doChat }) => {
   if (!message) return null;
+
+  function selectOption(o: string) {
+    message!.selected = o;
+    doChat(message!.line);
+  }
   if (message.type === "BUTTONS" || message.type === "MENU") {
     const options = message.message?.split("|") || [];
     return (
       <InputBox>
         {options.map((o, i) => (
-          <Button
-            key={i}
-            onClick={() => doChat(message.line + 1)}
-            ml={i && 2}
-            flex={1}
-          >
+          <Button key={i} onClick={() => selectOption(o)} ml={i && 2} flex={1}>
             <Text fontSize={1}>{o}</Text>
           </Button>
         ))}
@@ -104,11 +109,34 @@ const ShowInput: React.FC<{
   }
   return (
     <InputBox>
-      <Button width="100%" onClick={() => doChat(message.line + 1)}>
+      <Button
+        width="100%"
+        onClick={() => selectOption(String(message.message))}
+      >
         {message.message}
       </Button>
     </InputBox>
   );
+};
+
+const MessageOrInfo: React.FC<{ model: TMessage; is: string }> = ({ model }) =>
+  model.direction === Direction.Info ? (
+    <Info model={model} />
+  ) : (
+    <ParsedMessage model={model} />
+  );
+
+const Info: React.FC<{ model: TMessage }> = ({ model }) => (
+  <Box my={2} mx={4} p={2} bg="lightgray" sx={{ borderRadius: 8 }}>
+    <Markdown>{model.message}</Markdown>
+  </Box>
+);
+
+const ParsedMessage: React.FC<{ model: TMessage }> = ({ model }) => {
+  if (model.type === "MENU" || model.type === "BUTTON") {
+    model.message = model.selected;
+  }
+  return <Message model={model} />;
 };
 
 const InputBox: React.FC = ({ children }) => (
@@ -123,40 +151,55 @@ const InputBox: React.FC = ({ children }) => (
   </Flex>
 );
 
+enum Direction {
+  "Incoming",
+  "Outgoing",
+  "Info",
+}
+
 type TMessage = {
-  direction?: string;
+  direction?: Direction;
   message?: string;
   sender?: string;
   position?: string;
   sentTime?: string;
   type?: string;
   line: number;
+  selected?: string;
 };
 
 function showMessages(messages: TMessage[]) {
-  return messages.map((msg, i) => <Message key={i} model={msg} />);
+  return messages.map((msg, i) => (
+    <MessageOrInfo key={i} model={msg} is="Message" />
+  ));
 }
 
 function parseMessages(lines: string): TMessage[] {
   lines = lines.trim();
-  return lines.split(/\n+/).map((line, ix) => parseMessage(line, ix));
+  return lines
+    .split(/\n+(?=[\!\-\*])/)
+    .map((line, ix) => parseMessage(line, ix));
 }
 
-function parseMessage(line: string, ix: number): TMessage {
-  line = line.trim();
-  let direction = "";
+function parseMessage(lines: string, ix: number): TMessage {
+  lines = lines.trim();
+  let direction: Direction;
   let type = "text";
-  switch (line[0]) {
+  switch (lines[0]) {
     case "-":
-      direction = "incoming";
+      direction = Direction.Incoming;
       break;
     case "*":
-      direction = "outgoing";
+      direction = Direction.Outgoing;
+      break;
+    case "!":
+      direction = Direction.Info;
       break;
     default:
       throw new Error("ERR_CHATY_PARSE_DIRECTION");
   }
-  let message = line.replace(/^[-*]\s*/, "");
+  // remove message type character and whitespace at beginning of lines
+  let message = lines.replace(/^[\-\*\!]?\s+/gm, "");
 
   // check for special commands: GIPHY / IMAGE / BUTTON, etc.
   // eslint-disable-next-line @typescript-eslint/prefer-regexp-exec
@@ -170,6 +213,7 @@ function parseMessage(line: string, ix: number): TMessage {
   // does the message contain just 1-2 emojis?
   if (/^\p{Emoji}{1,2}$/mu.test(message)) {
     type = "emoji";
+    message = "<span style='font-size: 40px'>" + message + "</span>";
   }
   return { direction, message, type, line: ix };
 }
@@ -192,8 +236,12 @@ function specialMessage(type: string, rest: string): string {
       return `<img src="${rest}" width="200"/>`;
     case "BUTTONS":
     case "MENU": {
-      rest = rest.replace(/^\s*\((.*?)\)\s*$/, "$1");
-      const options = rest.split(/\)\s*\(/);
+      // either single line: MENU (bla) (bli) (blo)
+      // or multi line: MENU\n  bla\n  bli\n  blo
+      const options =
+        rest.indexOf("\n") >= 0
+          ? rest.split("\n")
+          : rest.replace(/^\s*\((.*?)\)\s*$/, "$1").split(/\)\s*\(/);
       return options.join("|");
     }
     case "BUTTON":

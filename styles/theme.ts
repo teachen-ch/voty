@@ -151,9 +151,9 @@ export default {
         borderTopWidth: "3px",
         borderStyle: "solid",
       },
-    },
-    img: {
-      maxWidth: "100%",
+      img: {
+        maxWidth: "100%",
+      },
     },
   },
   text: {
