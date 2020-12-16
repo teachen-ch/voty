@@ -38,6 +38,13 @@ export const Chaty: React.FC<{ lines: string }> = ({ lines }) => {
     const msg = messages[line];
     const chars = msg.message?.length || 10;
     const wait = Math.min(WAIT * chars, MAX_WAIT);
+    console.log("doChat", line);
+    if (messages[line].direction === Direction.Outgoing && !input) {
+      setInputMessage(messages[line]);
+      return;
+    }
+
+    setShow(messages.slice(0, line + 1));
 
     if (messages[line].direction === Direction.Outgoing && !input) {
       setInputMessage(messages[line]);
