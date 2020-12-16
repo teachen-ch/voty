@@ -10,33 +10,41 @@ import {
 import { Box, Button, Text, Flex, Card } from "rebass";
 import { useEffect, useMemo, useState } from "react";
 import { Markdown } from "util/markdown";
+import { useRouter } from "next/router";
 
-const WAIT = 40;
-const MAX_WAIT = 3000;
+const WAIT = 50;
+const MAX_WAIT = 5000;
 
 export const Chaty: React.FC<{ lines: string }> = ({ lines }) => {
   const messages = useMemo<TMessage[]>(() => parseMessages(lines), [lines]);
   const [show, setShow] = useState<TMessage[]>([]);
   const [typing, setTyping] = useState(false);
   const [started, setStarted] = useState(false);
+  const [finished, setFinished] = useState(false);
   const [inputMessage, setInputMessage] = useState<TMessage>();
-
+  const router = useRouter();
   let cancel = 0;
 
   useEffect(() => {
     return () => clearTimeout(cancel);
   }, []);
 
-  function doChat(line = 0) {
+  function doChat(line = 0, input?: string) {
     if (line < 0 || line >= messages.length) {
       return;
     }
     setInputMessage(undefined);
     setStarted(true);
-    setShow(messages.slice(0, line + 1));
     const msg = messages[line];
     const chars = msg.message?.length || 10;
     const wait = Math.min(WAIT * chars, MAX_WAIT);
+    console.log("doChat", line);
+    if (messages[line].direction === Direction.Outgoing && !input) {
+      setInputMessage(messages[line]);
+      return;
+    }
+
+    setShow(messages.slice(0, line + 1));
 
     if (line + 1 < messages.length) {
       if (messages[line + 1].direction !== Direction.Outgoing) {
@@ -48,6 +56,7 @@ export const Chaty: React.FC<{ lines: string }> = ({ lines }) => {
       }
     } else {
       setTyping(false);
+      setFinished(true);
     }
   }
 
@@ -64,7 +73,17 @@ export const Chaty: React.FC<{ lines: string }> = ({ lines }) => {
   }
 
   return (
-    <Box textAlign="left">
+    <Box
+      textAlign="left"
+      sx={{
+        position: "fixed",
+        width: 800,
+        margin: "auto",
+        bottom: 0,
+        zIndex: 100,
+        height: "100%",
+      }}
+    >
       <MainContainer>
         <ChatContainer style={{ paddingTop: "1rem" }}>
           <MessageList>
@@ -75,6 +94,11 @@ export const Chaty: React.FC<{ lines: string }> = ({ lines }) => {
                 is="MessageSeparator"
               />
             ) : null}
+            {finished && (
+              <Button mt={3} width="100%" onClick={() => router.back()}>
+                Fertig
+              </Button>
+            )}
           </MessageList>
           <div is="MessageInput" style={{ marginTop: "auto" }}>
             <ShowInput message={inputMessage} doChat={doChat} />
@@ -93,7 +117,7 @@ const ShowInput: React.FC<{
 
   function selectOption(o: string) {
     message!.selected = o;
-    doChat(message!.line);
+    doChat(message!.line, o);
   }
   if (message.type === "BUTTONS" || message.type === "MENU") {
     const options = message.message?.split("|") || [];
