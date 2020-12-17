@@ -106,3 +106,10 @@ tr td {
 .back {
   transform: rotateY(180deg);
 }
+
+.markdownImage {
+  max-height: 300px;
+  max-width: 100%;
+  border: 10px solid white;
+  border-radius: 10;
+}
