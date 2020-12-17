@@ -5,12 +5,26 @@ import { PieChart } from "react-minimal-pie-chart";
 import { LabelRenderFunction } from "react-minimal-pie-chart/types/commonTypes";
 import { BallotResults as BallotResultsType } from "graphql/types";
 import type { Nullable } from "simplytyped";
+import Info from "./Info";
 
 export const BallotResults: React.FC<{
   results?: Nullable<BallotResultsType>;
 }> = ({ results }) => {
   if (!results) return null;
   if (!results.total) return <Text>Noch keine Stimmen</Text>;
+
+  // ensure we only show results, once we don't mess with anonymization
+  let nullOptions = 0;
+  if (!results.yes) nullOptions++;
+  if (!results.no) nullOptions++;
+  if (!results.abs) nullOptions++;
+  if (results.total < 5 || nullOptions >= 2)
+    return (
+      <Info type="important">
+        Es wurden erst {results.total} Stimmen abgegeben. Resultate werde noch
+        nicht angezeigt.
+      </Info>
+    );
 
   const votes = (i: Nullable<number>) =>
     `${i === 0 ? "–" : i === 1 ? "Eine Stimme" : `${i} Stimmen`}`;
