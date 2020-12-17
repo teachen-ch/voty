@@ -11,8 +11,8 @@ export default function Kontakt(): ReactElement {
   return (
     <Page heading="Kontakt">
       <Text>
-        Möchtet Iht mit uns Kontakt aufnehmen? Wir freuen uns auf Feedback,
-        Anregungen und Fragen:
+        Möchtet Ihr mit uns Kontakt aufnehmen? Wir freuen uns auf Feedback,
+        Anregungen und Fragen zu voty.ch:
       </Text>
       <Text my={4}>
         <Button onClick={sendMail} width={["100%", "100%", "auto"]}>
