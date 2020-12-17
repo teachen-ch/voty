@@ -124,14 +124,12 @@ export default function TeacherTeamPage(): React.ReactElement {
       <Text textAlign="left">
         <Heading as="h3">Lerninhalte</Heading>
         <CardList teamCards={team.cards} />
-
-        <Button
-          onClick={() => router.push(`/teacher/team/${team.id}/cards`)}
-          variant="text"
-          ml={4}
-        >
-          <CircleBullet value="+" /> Lerninhalte hinzufügen
-        </Button>
+        <Box pl={4}>
+          <A onClick={() => router.push(`/teacher/team/${team.id}/cards`)}>
+            <CircleBullet value="+" />
+            Lerninhalte hinzufügen
+          </A>
+        </Box>
 
         <Heading as="h3">
           Folgende Abstimmungen sind für die Klasse verfügbar

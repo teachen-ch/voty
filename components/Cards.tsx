@@ -171,7 +171,7 @@ export const CircleBullet: React.FC<{ value: string | number }> = ({
   <Text
     fontWeight="bold"
     color="gray"
-    fontSize={2}
+    fontSize={[2]}
     display="inline-block"
     sx={{ borderRadius: 25 }}
     bg="white"

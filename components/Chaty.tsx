@@ -8,9 +8,10 @@ import {
   TypingIndicator,
 } from "@chatscope/chat-ui-kit-react";
 import { Box, Button, Text, Flex, Card } from "rebass";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Markdown } from "util/markdown";
 import { useRouter } from "next/router";
+import { A } from "./Breadcrumb";
 
 const WAIT = 50;
 const MAX_WAIT = 5000;
@@ -19,15 +20,21 @@ export const Chaty: React.FC<{ lines: string }> = ({ lines }) => {
   const messages = useMemo<TMessage[]>(() => parseMessages(lines), [lines]);
   const [show, setShow] = useState<TMessage[]>([]);
   const [typing, setTyping] = useState(false);
-  const [started, setStarted] = useState(false);
+  const [started, setStarted] = useState(true);
   const [finished, setFinished] = useState(false);
   const [inputMessage, setInputMessage] = useState<TMessage>();
   const router = useRouter();
   let cancel = 0;
+  const messagesEndRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     return () => clearTimeout(cancel);
   }, []);
+
+  // scroll to bottom on every new message
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [show]);
 
   function doChat(line = 0, input?: string) {
     if (line < 0 || line >= messages.length) {
@@ -38,7 +45,6 @@ export const Chaty: React.FC<{ lines: string }> = ({ lines }) => {
     const msg = messages[line];
     const chars = msg.message?.length || 10;
     const wait = Math.min(WAIT * chars, MAX_WAIT);
-    console.log("doChat", line);
     if (messages[line].direction === Direction.Outgoing && !input) {
       setInputMessage(messages[line]);
       return;
@@ -67,6 +73,8 @@ export const Chaty: React.FC<{ lines: string }> = ({ lines }) => {
     }
   }
 
+  useEffect(() => doChat(), []);
+
   if (!started) {
     return (
       <Card>
@@ -80,17 +88,28 @@ export const Chaty: React.FC<{ lines: string }> = ({ lines }) => {
   }
 
   return (
-    <Box
+    <Flex
       textAlign="left"
+      flexDirection="column"
+      width={["100%", "100%", "800px"]}
+      ml={[-3, -3, -4]}
       sx={{
         position: "fixed",
-        width: 800,
-        margin: "auto",
         bottom: 0,
+        top: [0, 0, "70px"],
         zIndex: 100,
-        height: "100%",
       }}
     >
+      <Flex
+        bg="lightgray"
+        textAlign="center"
+        p={3}
+        color="black"
+        justifyContent="space-between"
+      >
+        <Text>💬 CHATY</Text>
+        <A onClick={() => router.back()}>🆇</A>
+      </Flex>
       <MainContainer>
         <ChatContainer style={{ paddingTop: "1rem" }}>
           <MessageList>
@@ -106,13 +125,14 @@ export const Chaty: React.FC<{ lines: string }> = ({ lines }) => {
                 Fertig
               </Button>
             )}
+            <div ref={messagesEndRef} />
           </MessageList>
           <div is="MessageInput" style={{ marginTop: "auto" }}>
             <ShowInput message={inputMessage} doChat={doChat} />
           </div>
         </ChatContainer>
       </MainContainer>
-    </Box>
+    </Flex>
   );
 };
 
@@ -158,7 +178,14 @@ const MessageOrInfo: React.FC<{ model: TMessage; is: string }> = ({ model }) =>
   );
 
 const Info: React.FC<{ model: TMessage }> = ({ model }) => (
-  <Box my={2} mx={4} p={2} bg="lightgray" sx={{ borderRadius: 8 }}>
+  <Box
+    my={2}
+    mx={4}
+    p={2}
+    bg="lightgray"
+    sx={{ borderRadius: 8 }}
+    maxWidth="350px"
+  >
     <Markdown>{model.message}</Markdown>
   </Box>
 );
