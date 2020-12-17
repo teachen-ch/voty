@@ -12,6 +12,7 @@ import IconHint from "../../../../public/images/icon_hint.svg";
 import { fragments } from "components/Teams";
 import { ErrorBox } from "components/Form";
 import { trackEvent, usePageEvent } from "util/stats";
+import { HideFeature } from "components/HideFeature";
 import {
   useTeamTeacherQuery,
   TeamTeacherFieldsFragment,
@@ -122,15 +123,16 @@ export default function TeacherTeamPage(): React.ReactElement {
         <b>{team.name}</b>
       </Breadcrumb>
       <Text textAlign="left">
-        <Heading as="h3">Lerninhalte</Heading>
-        <CardList teamCards={team.cards} />
-        <Box pl={4}>
-          <A onClick={() => router.push(`/teacher/team/${team.id}/cards`)}>
-            <CircleBullet value="+" />
-            Lerninhalte hinzufügen
-          </A>
-        </Box>
-
+        <HideFeature id="cards">
+          <Heading as="h3">Lerninhalte</Heading>
+          <CardList teamCards={team.cards} />
+          <Box pl={4}>
+            <A onClick={() => router.push(`/teacher/team/${team.id}/cards`)}>
+              <CircleBullet value="+" />
+              Lerninhalte hinzufügen
+            </A>
+          </Box>
+        </HideFeature>
         <Heading as="h3">
           Folgende Abstimmungen sind für die Klasse verfügbar
         </Heading>

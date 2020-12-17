@@ -13,6 +13,7 @@ import {
 } from "graphql/types";
 import { parseMarkdownInner } from "util/markdown";
 import { VotyNow, VotySuccess } from "pages/ballots/[id]";
+import { HideFeature } from "components/HideFeature";
 
 export default function StudentTest(): React.ReactElement {
   const user = useUser();
@@ -27,9 +28,10 @@ export default function StudentTest(): React.ReactElement {
         <A href="/">Start</A>
         <b>Abstimmungen</b>
       </Breadcrumb>
-      <Heading>Lerninhalte</Heading>
-
-      <CardList teamCards={String(user.team?.cards)} />
+      <HideFeature id="cards">
+        <Heading>Lerninhalte</Heading>
+        <CardList teamCards={String(user.team?.cards)} />
+      </HideFeature>
 
       <Heading>Abstimmungen</Heading>
       <Text>
