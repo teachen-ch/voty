@@ -12,6 +12,7 @@ import { usePageEvent } from "util/stats";
 import { Breadcrumb, A } from "components/Breadcrumb";
 import { usePolling } from "util/hooks";
 import { Discussion } from "components/Discussion";
+import { HideFeature } from "components/HideFeature";
 
 export default function TeacherBallotPage(): React.ReactElement {
   usePageEvent({ category: "Teacher", action: "BallotDetails" });
@@ -72,7 +73,9 @@ export default function TeacherBallotPage(): React.ReactElement {
         </Box>
       )}
       <BallotDetails ballot={ballot} />
-      <Discussion refid={ballot.id} teamId={team.id} />
+      <HideFeature id="discussion">
+        <Discussion refid={ballot.id} teamId={team.id} />
+      </HideFeature>
     </LoggedInPage>
   );
 }
