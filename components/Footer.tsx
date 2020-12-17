@@ -26,7 +26,11 @@ export const Footer: React.FC<{ color: string | string[] }> = ({ color }) => (
       <A href="https://teachen.ch/verein-teachen" variant="underline">
         «Teachen!»
       </A>{" "}
-      mit tatkräftiger Unterstützung des PrototypeFund
+      mit tatkräftiger Unterstützung des PrototypeFund. Weitere{" "}
+      <A href="/projekt" variant="underline">
+        Informationen zum Projekt
+      </A>
+      .
     </Text>
     <Flex justifyContent="center" flexDirection="column">
       <Box mt={3}>
