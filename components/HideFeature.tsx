@@ -1,4 +1,4 @@
-const prod = process.env.NODE_ENV === "production";
+const prod = process.env.BASE_URL === "https://voty.ch/";
 
 const prodEnabled: Record<string, boolean> = {
   cards: false,
