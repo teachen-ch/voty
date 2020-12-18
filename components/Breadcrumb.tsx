@@ -26,19 +26,28 @@ export const Breadcrumb = ({
 
 type AProps = Omit<LinkProps, "as"> & {
   as?: string;
+  fontWeight?: string;
 };
 
 export const A: React.FC<AProps> = (props) => {
   const variant = props.variant || "underline";
   if (props.href) {
     return (
-      <Link href={props.href} as={props.as}>
+      <Link
+        href={props.href}
+        as={props.as}
+        sx={{ fontWeight: props.fontWeight }}
+      >
         <RebassLink variant={variant}>{props.children}</RebassLink>
       </Link>
     );
   } else {
     return (
-      <RebassLink onClick={props.onClick} variant={variant}>
+      <RebassLink
+        onClick={props.onClick}
+        variant={variant}
+        sx={{ fontWeight: props.fontWeight }}
+      >
         {props.children}
       </RebassLink>
     );
