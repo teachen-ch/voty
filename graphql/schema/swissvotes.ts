@@ -1,5 +1,11 @@
 import resolvers from "../resolvers";
-import { extendType, objectType, stringArg, intArg } from "@nexus/schema";
+import {
+  extendType,
+  objectType,
+  stringArg,
+  intArg,
+  booleanArg,
+} from "@nexus/schema";
 
 /*
 enum SwissvoteType {
@@ -19,7 +25,7 @@ enum SwissvoteResult {
 export const Swissvote = objectType({
   name: "Swissvote",
   definition(t) {
-    t.int("anr"); // anr
+    t.string("anr"); // anr
     t.string("datum"); // datum
     t.string("titel_kurz_d"); // titel_kurz_d
     t.string("titel_off_d"); // titel_off_d
@@ -44,6 +50,9 @@ export const SwissvotesQuery = extendType({
         keywords: stringArg(),
         type: intArg(),
         result: intArg(),
+        hasPosters: booleanArg(),
+        limit: intArg(),
+        offset: intArg(),
       },
       resolve: (_root, args, ctx, info) =>
         resolvers.swissvotes.getSwissvotes(_root, args, ctx, info),

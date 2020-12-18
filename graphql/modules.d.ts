@@ -64,6 +64,15 @@ export const NewSchool: DocumentNode;
 }
     
 
+declare module '*/Swissvotes.tsx' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const swissvotes: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
 declare module '*/Teams.tsx' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;

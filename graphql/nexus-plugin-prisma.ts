@@ -79,8 +79,8 @@ interface NexusPrismaInputs {
       ordering: 'id' | 'file' | 'title' | 'userId' | 'ballotId' | 'threadId' | 'createdAt' | 'updatedAt'
     }
     threads: {
-      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'title' | 'text' | 'ref' | 'user' | 'userId' | 'team' | 'teamId' | 'reactions' | 'attachments' | 'createdAt' | 'updatedAt' | 'school' | 'schoolId' | 'Activity'
-      ordering: 'id' | 'title' | 'text' | 'ref' | 'userId' | 'teamId' | 'createdAt' | 'updatedAt' | 'schoolId'
+      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'title' | 'text' | 'ref' | 'user' | 'userId' | 'team' | 'teamId' | 'school' | 'schoolId' | 'reactions' | 'attachments' | 'Activity' | 'createdAt' | 'updatedAt'
+      ordering: 'id' | 'title' | 'text' | 'ref' | 'userId' | 'teamId' | 'schoolId' | 'createdAt' | 'updatedAt'
     }
     reactions: {
       filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'emoij' | 'user' | 'userId' | 'thread' | 'threadId' | 'createdAt' | 'updatedAt'
@@ -109,8 +109,8 @@ interface NexusPrismaInputs {
       ordering: 'id' | 'file' | 'title' | 'userId' | 'ballotId' | 'threadId' | 'createdAt' | 'updatedAt'
     }
     threads: {
-      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'title' | 'text' | 'ref' | 'user' | 'userId' | 'team' | 'teamId' | 'reactions' | 'attachments' | 'createdAt' | 'updatedAt' | 'school' | 'schoolId' | 'Activity'
-      ordering: 'id' | 'title' | 'text' | 'ref' | 'userId' | 'teamId' | 'createdAt' | 'updatedAt' | 'schoolId'
+      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'title' | 'text' | 'ref' | 'user' | 'userId' | 'team' | 'teamId' | 'school' | 'schoolId' | 'reactions' | 'attachments' | 'Activity' | 'createdAt' | 'updatedAt'
+      ordering: 'id' | 'title' | 'text' | 'ref' | 'userId' | 'teamId' | 'schoolId' | 'createdAt' | 'updatedAt'
     }
     reactions: {
       filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'emoij' | 'user' | 'userId' | 'thread' | 'threadId' | 'createdAt' | 'updatedAt'
@@ -154,8 +154,8 @@ interface NexusPrismaInputs {
       ordering: 'id' | 'signature' | 'userId' | 'ballotId' | 'teamId' | 'schoolId'
     }
     Thread: {
-      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'title' | 'text' | 'ref' | 'user' | 'userId' | 'team' | 'teamId' | 'reactions' | 'attachments' | 'createdAt' | 'updatedAt' | 'school' | 'schoolId' | 'Activity'
-      ordering: 'id' | 'title' | 'text' | 'ref' | 'userId' | 'teamId' | 'createdAt' | 'updatedAt' | 'schoolId'
+      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'title' | 'text' | 'ref' | 'user' | 'userId' | 'team' | 'teamId' | 'school' | 'schoolId' | 'reactions' | 'attachments' | 'Activity' | 'createdAt' | 'updatedAt'
+      ordering: 'id' | 'title' | 'text' | 'ref' | 'userId' | 'teamId' | 'schoolId' | 'createdAt' | 'updatedAt'
     }
     Activity: {
       filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'type' | 'visibility' | 'user' | 'userId' | 'team' | 'teamId' | 'school' | 'schoolId' | 'thread' | 'threadId' | 'cardId' | 'time'
@@ -184,8 +184,8 @@ interface NexusPrismaInputs {
       ordering: 'id' | 'signature' | 'userId' | 'ballotId' | 'teamId' | 'schoolId'
     }
     Thread: {
-      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'title' | 'text' | 'ref' | 'user' | 'userId' | 'team' | 'teamId' | 'reactions' | 'attachments' | 'createdAt' | 'updatedAt' | 'school' | 'schoolId' | 'Activity'
-      ordering: 'id' | 'title' | 'text' | 'ref' | 'userId' | 'teamId' | 'createdAt' | 'updatedAt' | 'schoolId'
+      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'title' | 'text' | 'ref' | 'user' | 'userId' | 'team' | 'teamId' | 'school' | 'schoolId' | 'reactions' | 'attachments' | 'Activity' | 'createdAt' | 'updatedAt'
+      ordering: 'id' | 'title' | 'text' | 'ref' | 'userId' | 'teamId' | 'schoolId' | 'createdAt' | 'updatedAt'
     }
     Activity: {
       filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'type' | 'visibility' | 'user' | 'userId' | 'team' | 'teamId' | 'school' | 'schoolId' | 'thread' | 'threadId' | 'cardId' | 'time'
@@ -566,13 +566,13 @@ interface NexusPrismaOutputs {
     userId: 'String'
     team: 'Team'
     teamId: 'String'
-    reactions: 'Reaction'
-    attachments: 'Attachment'
-    createdAt: 'DateTime'
-    updatedAt: 'DateTime'
     school: 'School'
     schoolId: 'String'
+    reactions: 'Reaction'
+    attachments: 'Attachment'
     Activity: 'Activity'
+    createdAt: 'DateTime'
+    updatedAt: 'DateTime'
   }
   Reaction: {
     id: 'String'

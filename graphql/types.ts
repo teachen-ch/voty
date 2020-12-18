@@ -2104,7 +2104,10 @@ export type QuerySchoolsArgs = {
 
 
 export type QuerySwissvotesArgs = {
+  hasPosters?: Maybe<Scalars['Boolean']>;
   keywords?: Maybe<Scalars['String']>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
   result?: Maybe<Scalars['Int']>;
   type?: Maybe<Scalars['Int']>;
 };
@@ -2974,7 +2977,7 @@ export type StringNullableFilter = {
 export type Swissvote = {
   __typename?: 'Swissvote';
   annahme?: Maybe<Scalars['Int']>;
-  anr?: Maybe<Scalars['Int']>;
+  anr?: Maybe<Scalars['String']>;
   datum?: Maybe<Scalars['String']>;
   kategorien?: Maybe<Scalars['String']>;
   poster_ja?: Maybe<Scalars['String']>;
@@ -6144,6 +6147,24 @@ export type NewSchoolFragment = (
   & Pick<School, 'name' | 'address' | 'zip' | 'city' | 'canton'>
 );
 
+export type SwissvotesQueryVariables = Exact<{
+  keywords?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['Int']>;
+  result?: Maybe<Scalars['Int']>;
+  hasPosters?: Maybe<Scalars['Boolean']>;
+  offset?: Maybe<Scalars['Int']>;
+  limit?: Maybe<Scalars['Int']>;
+}>;
+
+
+export type SwissvotesQuery = (
+  { __typename?: 'Query' }
+  & { swissvotes?: Maybe<Array<Maybe<(
+    { __typename?: 'Swissvote' }
+    & Pick<Swissvote, 'anr' | 'datum' | 'titel_kurz_d' | 'titel_off_d' | 'stichwort' | 'swissvoteslink' | 'rechtsform' | 'poster_ja' | 'poster_nein' | 'annahme' | 'volk' | 'stand' | 'kategorien'>
+  )>>> }
+);
+
 export type TeamAnonFieldsFragment = (
   { __typename?: 'Team' }
   & Pick<Team, 'id' | 'name'>
@@ -7261,6 +7282,63 @@ export function useCreateOneSchoolMutation(baseOptions?: Apollo.MutationHookOpti
 export type CreateOneSchoolMutationHookResult = ReturnType<typeof useCreateOneSchoolMutation>;
 export type CreateOneSchoolMutationResult = Apollo.MutationResult<CreateOneSchoolMutation>;
 export type CreateOneSchoolMutationOptions = Apollo.BaseMutationOptions<CreateOneSchoolMutation, CreateOneSchoolMutationVariables>;
+export const SwissvotesDocument = gql`
+    query swissvotes($keywords: String, $type: Int, $result: Int, $hasPosters: Boolean, $offset: Int, $limit: Int) {
+  swissvotes(
+    keywords: $keywords
+    type: $type
+    result: $result
+    hasPosters: $hasPosters
+    offset: $offset
+    limit: $limit
+  ) {
+    anr
+    datum
+    titel_kurz_d
+    titel_off_d
+    stichwort
+    swissvoteslink
+    rechtsform
+    poster_ja
+    poster_nein
+    annahme
+    volk
+    stand
+    kategorien
+  }
+}
+    `;
+
+/**
+ * __useSwissvotesQuery__
+ *
+ * To run a query within a React component, call `useSwissvotesQuery` and pass it any options that fit your needs.
+ * When your component renders, `useSwissvotesQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useSwissvotesQuery({
+ *   variables: {
+ *      keywords: // value for 'keywords'
+ *      type: // value for 'type'
+ *      result: // value for 'result'
+ *      hasPosters: // value for 'hasPosters'
+ *      offset: // value for 'offset'
+ *      limit: // value for 'limit'
+ *   },
+ * });
+ */
+export function useSwissvotesQuery(baseOptions?: Apollo.QueryHookOptions<SwissvotesQuery, SwissvotesQueryVariables>) {
+        return Apollo.useQuery<SwissvotesQuery, SwissvotesQueryVariables>(SwissvotesDocument, baseOptions);
+      }
+export function useSwissvotesLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<SwissvotesQuery, SwissvotesQueryVariables>) {
+          return Apollo.useLazyQuery<SwissvotesQuery, SwissvotesQueryVariables>(SwissvotesDocument, baseOptions);
+        }
+export type SwissvotesQueryHookResult = ReturnType<typeof useSwissvotesQuery>;
+export type SwissvotesLazyQueryHookResult = ReturnType<typeof useSwissvotesLazyQuery>;
+export type SwissvotesQueryResult = Apollo.QueryResult<SwissvotesQuery, SwissvotesQueryVariables>;
 export const TeamsDocument = gql`
     query teams($where: TeamWhereInput) {
   teams(where: $where) {

@@ -5974,7 +5974,7 @@ export interface NexusGenObjects {
   Swissvote: {
     // root type
     annahme?: number | null; // Int
-    anr?: number | null; // Int
+    anr?: string | null; // String
     datum?: string | null; // String
     kategorien?: string | null; // String
     poster_ja?: string | null; // String
@@ -6176,7 +6176,7 @@ export interface NexusGenFieldTypes {
   Swissvote: {
     // field return type
     annahme: number | null; // Int
-    anr: number | null; // Int
+    anr: string | null; // String
     datum: string | null; // String
     kategorien: string | null; // String
     poster_ja: string | null; // String
@@ -6386,7 +6386,7 @@ export interface NexusGenFieldTypeNames {
   Swissvote: {
     // field return type name
     annahme: "Int";
-    anr: "Int";
+    anr: "String";
     datum: "String";
     kategorien: "String";
     poster_ja: "String";
@@ -6625,7 +6625,10 @@ export interface NexusGenArgTypes {
     };
     swissvotes: {
       // args
+      hasPosters?: boolean | null; // Boolean
       keywords?: string | null; // String
+      limit?: number | null; // Int
+      offset?: number | null; // Int
       result?: number | null; // Int
       type?: number | null; // Int
     };

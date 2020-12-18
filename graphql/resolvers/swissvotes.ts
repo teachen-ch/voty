@@ -6,7 +6,7 @@ export const getSwissvotes: FieldResolver<"Query", "swissvotes"> = async (
   args,
   ctx
 ) => {
-  const { keywords, type, result } = args;
+  const { keywords, type, result, hasPosters, limit, offset } = args;
   const db = ctx.db;
   let query = "SELECT * FROM swissvotes WHERE ";
   if (keywords) {
@@ -18,13 +18,18 @@ export const getSwissvotes: FieldResolver<"Query", "swissvotes"> = async (
       query += "FALSE) AND ";
     }
   }
-  if (type) {
+  if (type !== undefined) {
     query += `rechtsform=${type} AND `;
   }
-  if (result) {
+  if (result !== undefined) {
     query += `annahme='${result}' AND `;
   }
-  query += "TRUE";
+  if (hasPosters) {
+    query += `(LENGTH (poster_ja ) > 1 OR (LENGTH (poster_nein) > 1)) AND `;
+  }
+  query += "TRUE ";
+  query += "ORDER BY datum DESC ";
+  query += `LIMIT ${limit ?? 20} OFFSET ${offset ?? 0}`;
   const votes: Swissvote[] = await db.$queryRaw(query);
   return votes;
 };

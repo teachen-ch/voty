@@ -1914,7 +1914,14 @@ type Query {
     orderBy: [SchoolOrderByInput!]
     where: SchoolWhereInput
   ): [School!]!
-  swissvotes(keywords: String, result: Int, type: Int): [Swissvote]
+  swissvotes(
+    hasPosters: Boolean
+    keywords: String
+    limit: Int
+    offset: Int
+    result: Int
+    type: Int
+  ): [Swissvote]
   team(where: TeamWhereUniqueInput!): Team
   teams(
     after: TeamWhereUniqueInput
@@ -2759,7 +2766,7 @@ input StringNullableFilter {
 
 type Swissvote {
   annahme: Int
-  anr: Int
+  anr: String
   datum: String
   kategorien: String
   poster_ja: String

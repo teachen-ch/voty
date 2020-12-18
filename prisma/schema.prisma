@@ -256,19 +256,19 @@ model Thread {
   text  String @default("")
   ref   String // this can be used to reference a thread to content
 
-  user   User   @relation(fields: [userId], references: [id])
-  userId String @map(name: "user_id")
-  team   Team   @relation(fields: [teamId], references: [id])
-  teamId String @map(name: "team_id")
+  user     User    @relation(fields: [userId], references: [id])
+  userId   String  @map(name: "user_id")
+  team     Team    @relation(fields: [teamId], references: [id])
+  teamId   String  @map(name: "team_id")
+  school   School? @relation(fields: [schoolId], references: [id])
+  schoolId String?
 
   reactions   Reaction[]
   attachments Attachment[]
+  Activity    Activity[]
 
-  createdAt DateTime   @default(now()) @map(name: "created_at")
-  updatedAt DateTime   @default(now()) @map(name: "updated_at")
-  school    School?    @relation(fields: [schoolId], references: [id])
-  schoolId  String?
-  Activity  Activity[]
+  createdAt DateTime @default(now()) @map(name: "created_at")
+  updatedAt DateTime @default(now()) @map(name: "updated_at")
   @@map(name: "threads")
 }
 
@@ -329,9 +329,9 @@ model Swissvote {
   rechtsform     Int
   poster_ja      String?
   poster_nein    String?
-  annahme        Int
-  volk           Int
-  stand          Int
+  annahme        Int?
+  volk           Int?
+  stand          Int?
   kategorien     String?
 
   @@map("swissvotes")

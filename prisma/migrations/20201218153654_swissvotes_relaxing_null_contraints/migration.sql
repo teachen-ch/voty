@@ -1,0 +1,4 @@
+-- AlterTable
+ALTER TABLE "swissvotes" ALTER COLUMN "annahme" DROP NOT NULL,
+ALTER COLUMN "volk" DROP NOT NULL,
+ALTER COLUMN "stand" DROP NOT NULL;

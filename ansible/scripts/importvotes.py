@@ -13,11 +13,19 @@ import os
 import getopt
 import numpy
 from datetime import date
+import urllib.request
+import re
+import ssl
+import pickle
+
+# otherwise links to video-bild-ton.ch complain with certificate unkown
+ssl._create_default_https_context = ssl._create_unverified_context
 
 path = os.path.dirname(__file__)
 
 DOWNLOAD_URL = "https://swissvotes.ch/page/dataset/swissvotes_dataset.csv"
 CATEGORIES_CSV = path + "/categories.csv"
+POSTER_CACHE = "/tmp/poster_cache.tmp"
 
 try:
     # Define the getopt parameters
@@ -51,17 +59,17 @@ except exc.OperationalError:
     sys.exit(3)
 
 
-def intnull(val):
-    return 0 if val == '' or val == '.' else int(val)
+def intNone(val):
+    return None if val == '' or val == '.' else int(val)
 
 
 print("2) Downloading and parsing latest swissvotes_dataset.csv")
 # Load in the data
 votes = pd.read_csv(DOWNLOAD_URL, encoding='iso-8859-1',
                     delimiter=';', parse_dates=['datum'],
-                    converters={'anr': str, 'rechtsform': intnull, 'annahme': intnull, 'volk': intnull, 'stand': intnull})
+                    converters={'anr': str, 'rechtsform': intNone, 'annahme': intNone, 'volk': intNone, 'stand': intNone})
 
-#votes.dropna(how='all', axis=1, inplace=True)
+# votes.dropna(how='all', axis=1, inplace=True)
 invalid = votes[votes['anr'] == ''].index
 votes.drop(invalid, inplace=True)
 print("3) Parsed %d lines" % len(votes))
@@ -87,11 +95,54 @@ def replaceCats(vote):
     return vote
 
 
+def replacePosters(vote):
+    vote['poster_ja'] = parsePosters(
+        str(vote['poster_ja_mfg']) + " " + str(vote['poster_ja_sa']))
+    vote['poster_nein'] = parsePosters(
+        str(vote['poster_nein_mfg']) + " " + str(vote['poster_nein_sa']))
+    return vote
+
+
+def parsePosters(str):
+    global posters
+    urls = []
+    for url in str.split(' '):
+        if (len(url) < 4):
+            continue
+        if (url in posters):
+            urls += [posters[url]]
+            print("Cache Match for " + url)
+            continue
+        content = urllib.request.urlopen(url).read().decode()
+        if (re.search('emuseum.ch', url)):
+            match = re.search(
+                r'/internal/media/dispatcher/\d+/preview', content)
+            if (match):
+                urls += ["https://www.emuseum.ch"+match[0]]
+                posters[url] = urls[-1]
+        elif (re.search('bild-video-ton.ch', url)):
+            match = re.search(r'/ansicht/gross/\d+.jpg', content)
+            if (match):
+                urls += ["https://www.bild-video-ton.ch"+match[0]]
+                posters[url] = urls[-1]
+        print("✔ parsed %s " % url)
+    return ' '.join(urls)
+
+
 # read categories from csv and add them to votes
 cats = pd.read_csv(CATEGORIES_CSV, delimiter='\t', dtype={'code': str})
 categories = dict(zip(cats.code, cats.title))
 votes.insert(2, 'kategorien', '')
+votes.insert(3, 'poster_ja', '')
+votes.insert(4, 'poster_nein', '')
 votes = votes.apply(replaceCats, axis='columns')
+
+if os.path.exists(POSTER_CACHE):
+    posters = pickle.load(open(POSTER_CACHE, 'rb'))
+else:
+    posters = {}
+votes = votes.apply(replacePosters, axis='columns')
+pickle.dump(posters, open(POSTER_CACHE, 'wb'))
 
 # only select a few columns, which are relevant to your case
 votes = votes[['anr', 'datum', 'titel_kurz_d', 'titel_off_d', 'stichwort',
