@@ -1,7 +1,7 @@
 import { Page, Loading, ErrorPage } from "components/Page";
 import { Card, getCardMeta } from "components/Cards";
 import { useRouter } from "next/router";
-import { Heading } from "rebass";
+import { Text } from "rebass";
 
 export default function CardPage(): React.ReactElement {
   const router = useRouter();
@@ -15,7 +15,9 @@ export default function CardPage(): React.ReactElement {
   }
   return (
     <Page heading={String(meta.title)}>
-      <Card id={key} />
+      <Text textAlign="left">
+        <Card id={key} />
+      </Text>
     </Page>
   );
 }

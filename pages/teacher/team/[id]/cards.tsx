@@ -6,6 +6,7 @@ import React, { useState } from "react";
 import { useRouter } from "next/router";
 import { useTeamTeacherQuery } from "graphql/types";
 import { A, Breadcrumb } from "components/Breadcrumb";
+import { debounce } from "lodash";
 
 export default function CardsPage(): React.ReactElement {
   const router = useRouter();
@@ -48,7 +49,7 @@ export default function CardsPage(): React.ReactElement {
 
       <Flex mb={3} mt={4}>
         <Input
-          onChange={(evt) => setKeywords(evt.target.value)}
+          onChange={debounce((evt) => setKeywords(evt.target.value), 400)}
           placeholder="Suche..."
         />
         <Button ml={3} px={5} height="100%" mt="3px">
