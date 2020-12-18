@@ -35,6 +35,10 @@ export function formatFull(ts: number): string {
   return `${date}, ${formatTime(ts)}`;
 }
 
+export function formatYear(ts: number | string): string {
+  return dayjs(ts).format("YYYY");
+}
+
 export function formatTime(ts: number): string {
   return dayjs(ts).format("HH:mm");
 }
