@@ -3,7 +3,7 @@ import { Swissvote, SwissvotesQuery, useSwissvotesQuery } from "graphql/types";
 import { Input } from "@rebass/forms";
 import { Box, Link, Text, Flex, Button, Image } from "rebass";
 import { ErrorPage, Loading } from "./Page";
-import { useState, Dispatch, SetStateAction } from "react";
+import { useState, Dispatch, SetStateAction, useEffect } from "react";
 import { A } from "./Breadcrumb";
 import { formatYear } from "util/date";
 import { debounce } from "lodash";
@@ -46,8 +46,14 @@ export const Swissvotes: React.FC = () => {
   const [keywords, setKeywords] = useState("");
   const [type, setType] = useState<number | undefined>();
   const [result, setResult] = useState<number | undefined>();
-  const [offset, setOffset] = useState<number | undefined>();
-  const [limit, setLimit] = useState<number | undefined>();
+  const [offset, setOffset] = useState(0);
+  const limit = 15;
+
+  // reset the offset when changing query parameters
+  useEffect(() => {
+    setOffset(0);
+  }, [type, result, keywords]);
+
   return (
     <Box>
       <Flex mt={4}>
@@ -68,6 +74,14 @@ export const Swissvotes: React.FC = () => {
         <Filter set={setResult} v={result} val={1} label="angenommen" />
       </Text>
       <VotesList query={{ keywords, type, result, offset, limit }} />
+      <Flex justifyContent="space-between" mt={3}>
+        <Link onClick={() => setOffset(offset - limit)} fontSize={1}>
+          {offset >= limit ? "Neuere Abstimmungen anzeigen …" : ""}
+        </Link>
+        <Link onClick={() => setOffset(offset + limit)} fontSize={1}>
+          {offset < 650 ? "… Ältere Abstimmungen anzeigen" : ""}
+        </Link>
+      </Flex>
     </Box>
   );
 };
@@ -110,6 +124,9 @@ export const VotesList: React.FC<{ query: VotesQuery }> = ({ query }) => {
   if (swissvotesQuery.error)
     return <ErrorPage>{swissvotesQuery.error.message}</ErrorPage>;
 
+  if (!swissvotes || swissvotes.length === 0)
+    return <Box my={4}>Nichts gefunden…</Box>;
+
   return (
     <table style={{ borderTop: "2px solid white" }}>
       <tbody>
@@ -125,12 +142,12 @@ export const Vote: React.FC<{ vote: Swissvote }> = ({ vote }) => {
   return (
     <tr style={{ fontSize: 16 }}>
       <td>{formatYear(vote.datum!)}</td>
-      <td>{getVoteType(vote.rechtsform!)}</td>
       <td style={{ maxWidth: "500px" }}>
         <Link href={vote.swissvoteslink!} target="_blank">
           {vote.titel_kurz_d}
         </Link>
       </td>
+      <td style={{ maxWidth: "100px" }}>{getVoteType(vote.rechtsform!)}</td>
       <td>{getVoteResult(vote.annahme!)}</td>
     </tr>
   );
@@ -159,6 +176,8 @@ export function getVoteResult(r: number) {
 
 export const Posters: React.FC = () => {
   const [keywords, setKeywords] = useState("");
+  const [offset, setOffset] = useState(0);
+  const limit = 10;
   return (
     <>
       <Flex mt={4}>
@@ -170,7 +189,15 @@ export const Posters: React.FC = () => {
           Suche
         </Button>
       </Flex>
-      <PosterList query={{ keywords, limit: 10, hasPosters: true }} />
+      <PosterList query={{ keywords, limit, offset, hasPosters: true }} />
+      <Flex justifyContent="space-between" mt={2}>
+        <Link onClick={() => setOffset(offset - limit)} fontSize={1}>
+          {offset > 0 ? "Neuere Plakate anzeigen" : ""}
+        </Link>
+        <Link onClick={() => setOffset(offset + limit)} fontSize={1}>
+          {offset < 650 ? "Ältere Plakate anzeigen" : ""}
+        </Link>
+      </Flex>
     </>
   );
 };
@@ -228,7 +255,7 @@ export const Poster: React.FC<{ vote: Swissvote; image: string }> = ({
           width="calc(100%  - 16px)"
           height="calc(100% - 16px)"
           onMouseOut={() => setHover(false)}
-          onClick={() => window.open(image, "_blank")}
+          onClick={() => window.open(vote.swissvoteslink!, "_blank")}
         >
           <Text fontWeight="bold" fontSize={2} sx={{ wordWrap: "break-word" }}>
             {vote.titel_kurz_d}
