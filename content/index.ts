@@ -7,3 +7,5 @@ export * as chaty_initiativen from "content/chaty/chaty_initiativen.mdx";
 export * as chaty_referendum from "content/chaty/chaty_referendum.mdx";
 export * as chaty_demokratie_intro from "content/chaty/chaty_demokratie_intro.mdx";
 export * as chaty_demokratie_griechenland from "content/chaty/chaty_demokratie_griechenland.mdx";
+export * as swissvotes from "content/swissvotes.mdx";
+export * as posters from "content/posters.mdx";
