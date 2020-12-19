@@ -101,7 +101,7 @@ export const CardBox: React.FC<{
       color="black"
       p={3}
       mb={3}
-      onClick={() => router.push(`/cards/${card.id}`)}
+      onClick={() => router.push(`cards/${card.id}`)}
       sx={{ cursor: "pointer" }}
     >
       <Flex
@@ -142,7 +142,10 @@ export const CardBox: React.FC<{
   );
 };
 
-export const CardList: React.FC<{ teamCards: string }> = ({ teamCards }) => {
+export const CardList: React.FC<{ teamCards: string; teamId: string }> = ({
+  teamCards,
+  teamId,
+}) => {
   if (!teamCards) {
     return <Text>Noch keine Inhalte ausgewählt</Text>;
   }
@@ -152,7 +155,7 @@ export const CardList: React.FC<{ teamCards: string }> = ({ teamCards }) => {
         <Flex key={id} my={3} ml={4}>
           <CircleBullet value={ix + 1} />
           <Text>
-            <A href={`/cards/${id}`}>{getCardTitle(id)}</A>
+            <A href={`/team/${teamId}/cards/${id}`}>{getCardTitle(id)}</A>
           </Text>
         </Flex>
       ))}

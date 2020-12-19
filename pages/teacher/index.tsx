@@ -14,10 +14,7 @@ export default function Teacher(): ReactElement {
   const router = useRouter();
 
   async function teamDetail(teamId: string) {
-    await router.push(
-      "/teacher/team/[id]/admin",
-      `/teacher/team/${teamId}/admin`
-    );
+    await router.push(`/team/${teamId}/admin`);
   }
 
   if (user?.school === null) {

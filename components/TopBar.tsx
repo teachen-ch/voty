@@ -103,12 +103,8 @@ const Account: React.FC<{ user: SessionUser }> = ({ user }) => {
             flexDirection="row"
             justifyContent="flex-end"
           >
-            <Image
-              alt="Liste"
-              src={`/images/icon_${isTeacher ? "classes" : "list"}.svg`}
-              mr={2}
-            />
-            {isTeacher ? "Meine Klassen" : "Abstimmungen"}
+            <Image alt="Liste" src={`/images/icon_classes.svg`} mr={2} />
+            {isTeacher ? "Meine Klassen" : "Meine Klasse"}
           </Flex>
         </A>
       </Link>

@@ -287,10 +287,7 @@ export const SelectBallots: React.FC<{ team: TeamTeacherFieldsFragment }> = ({
   }
 
   function detailBallot(ballotId: string) {
-    void router.push(
-      "/teacher/team/[id]/[ballot_id]",
-      `/teacher/team/${team.id}/${ballotId}`
-    );
+    void router.push(`/team/${team.id}/${ballotId}`);
   }
 
   async function toggleBallot(ballotId: string, teamId: string, e: MouseEvent) {

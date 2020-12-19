@@ -77,7 +77,7 @@ export function Teachers({
             </td>
             <td>
               {user.teaches.map((team, i) => (
-                <A key={team.id} href={`/teacher/team/${team.id}/admin`}>
+                <A key={team.id} href={`/team/${team.id}/admin`}>
                   {i > 0 ? ", " : ""}
                   {team.name}
                 </A>

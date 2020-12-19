@@ -54,10 +54,7 @@ export default function TeacherBallotPage(): React.ReactElement {
       <Breadcrumb>
         <A href="/">Start</A>
         <A href="/teacher/">Meine Klassen</A>
-        <A
-          href="/teacher/team/[id]/admin"
-          as={`/teacher/team/${team.id}/admin`}
-        >
+        <A href="/team/[id]/admin" as={`/team/${team.id}/admin`}>
           {team.name}
         </A>
         <b>{ballot.title}</b>

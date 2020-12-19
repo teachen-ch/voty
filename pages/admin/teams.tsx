@@ -13,9 +13,7 @@ export default function TeamsPage(): ReactElement {
         <A href="/admin">Admin</A>
         <b>Klassen</b>
       </Breadcrumb>
-      <Teams
-        teamClick={(team) => router.push(`/teacher/team/${team.id}/admin`)}
-      />
+      <Teams teamClick={(team) => router.push(`/team/${team.id}/admin`)} />
     </LoggedInPage>
   );
 }

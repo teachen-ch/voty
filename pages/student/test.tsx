@@ -14,23 +14,25 @@ import {
 import { parseMarkdownInner } from "util/markdown";
 import { VotyNow, VotySuccess } from "pages/ballots/[id]";
 import { HideFeature } from "components/HideFeature";
+import { teams } from "graphql/resolvers";
 
 export default function StudentTest(): React.ReactElement {
   const user = useUser();
 
   if (!user) {
-    return <LoggedInPage heading="Aktuelle Abstimmungen" />;
+    return <LoggedInPage heading="Meine Klasse" />;
   }
 
   return (
-    <LoggedInPage heading="Aktuelle Abstimmungen">
+    <LoggedInPage heading="Meine Klasse">
       <Breadcrumb>
         <A href="/">Start</A>
-        <b>Abstimmungen</b>
+        <b>Meine Klasse</b>
       </Breadcrumb>
+
       <HideFeature id="cards">
         <Heading>Lerninhalte</Heading>
-        <CardList teamCards={String(user.team?.cards)} />
+        <CardList teamCards={String(user.team?.cards)} teamId={user.team!.id} />
       </HideFeature>
 
       <Heading>Abstimmungen</Heading>

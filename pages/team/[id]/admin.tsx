@@ -8,7 +8,7 @@ import { useRouter } from "next/router";
 import _ from "lodash";
 import { SelectBallots } from "components/Ballots";
 import { gql } from "@apollo/client";
-import IconHint from "../../../../public/images/icon_hint.svg";
+import IconHint from "../../../public/images/icon_hint.svg";
 import { fragments } from "components/Teams";
 import { ErrorBox } from "components/Form";
 import { trackEvent, usePageEvent } from "util/stats";
@@ -23,8 +23,6 @@ import { Breadcrumb, A } from "components/Breadcrumb";
 import { Spinner } from "theme-ui";
 import PanelPage from "./panel";
 import { CardList, CircleBullet } from "components/Cards";
-import { users } from "graphql/resolvers";
-import { Center } from "components/Learning";
 // import { usePolling } from "util/hooks";
 
 export const INVITE_STUDENTS = gql`
@@ -125,9 +123,9 @@ export default function TeacherTeamPage(): React.ReactElement {
       <Text textAlign="left">
         <HideFeature id="cards">
           <Heading as="h3">Lerninhalte</Heading>
-          <CardList teamCards={team.cards} />
+          <CardList teamCards={team.cards} teamId={team.id} />
           <Box pl={4}>
-            <A onClick={() => router.push(`/teacher/team/${team.id}/cards`)}>
+            <A onClick={() => router.push(`/team/${team.id}/select`)}>
               <CircleBullet value="+" />
               Lerninhalte hinzufügen
             </A>

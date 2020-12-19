@@ -39,13 +39,13 @@ export default function CardsPage(): React.ReactElement {
       <Breadcrumb>
         <A href="/">Start</A>
         <A href="/teacher/">Meine Klassen</A>
-        <A href={`/teacher/team/${team.id}/admin`}>{team.name}</A>
+        <A href={`/team/${team.id}/admin`}>{team.name}</A>
         <b>Lerninhalte</b>
       </Breadcrumb>
 
       <b>Folgende Lerninhalte sind ausgewählt</b>
 
-      <CardList teamCards={team.cards} />
+      <CardList teamCards={team.cards} teamId={team.id} />
 
       <Flex mb={3} mt={4}>
         <Input
