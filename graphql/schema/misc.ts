@@ -86,7 +86,6 @@ export const Domain = objectType({
     t.model.schools();
   },
 });
-
 export const Ballot = objectType({
   name: "Ballot",
   definition(t) {
@@ -125,6 +124,7 @@ export const Attachment = objectType({
   definition(t) {
     t.model.id();
     t.model.file();
+    t.model.title();
     t.model.user();
 
     t.model.createdAt();
@@ -184,6 +184,12 @@ export const Query = queryType({
 
     t.crud.ballot();
     t.crud.ballots({
+      ordering: true,
+      filtering: true,
+    });
+
+    t.crud.attachment();
+    t.crud.attachments({
       ordering: true,
       filtering: true,
     });

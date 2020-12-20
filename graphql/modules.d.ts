@@ -90,6 +90,15 @@ export const createOneTeam: DocumentNode;
 }
     
 
+declare module '*/Uploader.tsx' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const attachments: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
 declare module '*/Users.tsx' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;

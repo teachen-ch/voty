@@ -500,6 +500,20 @@ export interface NexusGenInputs {
     none?: NexusGenInputs["AttachmentWhereInput"] | null; // AttachmentWhereInput
     some?: NexusGenInputs["AttachmentWhereInput"] | null; // AttachmentWhereInput
   };
+  AttachmentOrderByInput: {
+    // input type
+    ballotId?: NexusGenEnums["SortOrder"] | null; // SortOrder
+    card?: NexusGenEnums["SortOrder"] | null; // SortOrder
+    createdAt?: NexusGenEnums["SortOrder"] | null; // SortOrder
+    file?: NexusGenEnums["SortOrder"] | null; // SortOrder
+    id?: NexusGenEnums["SortOrder"] | null; // SortOrder
+    schoolId?: NexusGenEnums["SortOrder"] | null; // SortOrder
+    teamId?: NexusGenEnums["SortOrder"] | null; // SortOrder
+    threadId?: NexusGenEnums["SortOrder"] | null; // SortOrder
+    title?: NexusGenEnums["SortOrder"] | null; // SortOrder
+    updatedAt?: NexusGenEnums["SortOrder"] | null; // SortOrder
+    userId?: NexusGenEnums["SortOrder"] | null; // SortOrder
+  };
   AttachmentScalarWhereInput: {
     // input type
     AND?: NexusGenInputs["AttachmentScalarWhereInput"][] | null; // [AttachmentScalarWhereInput!]
@@ -6282,6 +6296,7 @@ export interface NexusGenObjects {
     createdAt: NexusGenScalars["DateTime"]; // DateTime!
     file: string; // String!
     id: string; // String!
+    title: string; // String!
     updatedAt: NexusGenScalars["DateTime"]; // DateTime!
   };
   Ballot: {
@@ -6432,6 +6447,7 @@ export interface NexusGenFieldTypes {
     createdAt: NexusGenScalars["DateTime"]; // DateTime!
     file: string; // String!
     id: string; // String!
+    title: string; // String!
     updatedAt: NexusGenScalars["DateTime"]; // DateTime!
     user: NexusGenRootTypes["User"]; // User!
   };
@@ -6521,6 +6537,8 @@ export interface NexusGenFieldTypes {
   };
   Query: {
     // field return type
+    attachment: NexusGenRootTypes["Attachment"] | null; // Attachment
+    attachments: NexusGenRootTypes["Attachment"][]; // [Attachment!]!
     ballot: NexusGenRootTypes["Ballot"] | null; // Ballot
     ballots: NexusGenRootTypes["Ballot"][]; // [Ballot!]!
     cards: Array<NexusGenRootTypes["Card"] | null> | null; // [Card]
@@ -6642,6 +6660,7 @@ export interface NexusGenFieldTypeNames {
     createdAt: "DateTime";
     file: "String";
     id: "String";
+    title: "String";
     updatedAt: "DateTime";
     user: "User";
   };
@@ -6731,6 +6750,8 @@ export interface NexusGenFieldTypeNames {
   };
   Query: {
     // field return type name
+    attachment: "Attachment";
+    attachments: "Attachment";
     ballot: "Ballot";
     ballots: "Ballot";
     cards: "Card";
@@ -6917,7 +6938,7 @@ export interface NexusGenArgTypes {
     };
     inviteStudents: {
       // args
-      emails?: string[] | null; // [String!]
+      emails: string[]; // [String!]!
       team: string; // String!
     };
     login: {
@@ -6967,6 +6988,19 @@ export interface NexusGenArgTypes {
     };
   };
   Query: {
+    attachment: {
+      // args
+      where: NexusGenInputs["AttachmentWhereUniqueInput"]; // AttachmentWhereUniqueInput!
+    };
+    attachments: {
+      // args
+      after?: NexusGenInputs["AttachmentWhereUniqueInput"] | null; // AttachmentWhereUniqueInput
+      before?: NexusGenInputs["AttachmentWhereUniqueInput"] | null; // AttachmentWhereUniqueInput
+      first?: number | null; // Int
+      last?: number | null; // Int
+      orderBy?: NexusGenInputs["AttachmentOrderByInput"][] | null; // [AttachmentOrderByInput!]
+      where?: NexusGenInputs["AttachmentWhereInput"] | null; // AttachmentWhereInput
+    };
     ballot: {
       // args
       where: NexusGenInputs["BallotWhereUniqueInput"]; // BallotWhereUniqueInput!
@@ -6984,7 +7018,7 @@ export interface NexusGenArgTypes {
       // args
       age?: string | null; // String
       keywords?: string | null; // String
-      type?: number | null; // Int
+      type?: string | null; // String
     };
     getBallotResults: {
       // args

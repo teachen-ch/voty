@@ -108,6 +108,8 @@ export const permissions = shield(
       getTeamThreads: isUser,
       swissvotes: allow,
       cards: allow,
+      attachment: isUser, // TODO: we should secure this to team + teacher unless public
+      attachments: isUser, // TODO: we should secure this to team + teacher
     },
     Mutation: {
       login: allow,
@@ -175,6 +177,7 @@ export const permissions = shield(
       "*": isUser,
     },
     Thread: allow,
+    Attachment: allow,
     Ballot: allow, //canViewBallot : if we want to protect class/school Ballots
     BallotRun: allow,
     BallotResults: allow,

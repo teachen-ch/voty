@@ -303,6 +303,7 @@ type Attachment {
   createdAt: DateTime!
   file: String!
   id: String!
+  title: String!
   updatedAt: DateTime!
   user: User!
 }
@@ -431,6 +432,20 @@ input AttachmentListRelationFilter {
   every: AttachmentWhereInput
   none: AttachmentWhereInput
   some: AttachmentWhereInput
+}
+
+input AttachmentOrderByInput {
+  ballotId: SortOrder
+  card: SortOrder
+  createdAt: SortOrder
+  file: SortOrder
+  id: SortOrder
+  schoolId: SortOrder
+  teamId: SortOrder
+  threadId: SortOrder
+  title: SortOrder
+  updatedAt: SortOrder
+  userId: SortOrder
 }
 
 input AttachmentScalarWhereInput {
@@ -1796,7 +1811,7 @@ type Mutation {
   deleteUser(where: UserWhereUniqueInput!): User
   emailVerification(email: String!, purpose: String!): ResponseLogin
   endBallotRun(ballotRunId: String!): BallotRun
-  inviteStudents(emails: [String!], team: String!): InviteResponse
+  inviteStudents(emails: [String!]!, team: String!): InviteResponse
   login(email: String!, password: String!): ResponseLogin
   postThread(
     ref: String!
@@ -2044,6 +2059,15 @@ input OptionWhereUniqueInput {
 }
 
 type Query {
+  attachment(where: AttachmentWhereUniqueInput!): Attachment
+  attachments(
+    after: AttachmentWhereUniqueInput
+    before: AttachmentWhereUniqueInput
+    first: Int
+    last: Int
+    orderBy: [AttachmentOrderByInput!]
+    where: AttachmentWhereInput
+  ): [Attachment!]!
   ballot(where: BallotWhereUniqueInput!): Ballot
   ballots(
     after: BallotWhereUniqueInput
@@ -2053,7 +2077,7 @@ type Query {
     orderBy: [BallotOrderByInput!]
     where: BallotWhereInput
   ): [Ballot!]!
-  cards(age: String, keywords: String, type: Int): [Card]
+  cards(age: String, keywords: String, type: String): [Card]
   getBallotResults(
     ballotId: String!
     ballotRunId: String
