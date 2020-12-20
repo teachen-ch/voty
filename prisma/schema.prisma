@@ -91,6 +91,7 @@ model Team {
   Thread     Thread[]
   Activity   Activity[]
   @@map(name: "teams")
+  Attachment Attachment[]
 }
 
 model School {
@@ -113,6 +114,7 @@ model School {
   Thread   Thread[]
   Activity Activity[]
   @@map(name: "schools")
+  Attachment Attachment[]
 }
 
 model Domain {
@@ -238,16 +240,21 @@ model Attachment {
   file  String
   title String @default("")
 
+  card     String?
   user     User    @relation(fields: [userId], references: [id])
   userId   String  @map(name: "user_id")
-  ballot   Ballot? @relation(fields: [ballotId], references: [id])
-  ballotId String? @map(name: "ballot_id")
+  team     Team    @relation(fields: [teamId], references: [id])
+  teamId   String  @map(name: "team_id")
+  school   School? @relation(fields: [schoolId], references: [id])
+  schoolId String?
   thread   Thread? @relation(fields: [threadId], references: [id])
   threadId String? @map(name: "thread_id")
 
   createdAt DateTime @default(now()) @map(name: "created_at")
   updatedAt DateTime @default(now()) @map(name: "updated_at")
   @@map(name: "attachments")
+  Ballot   Ballot? @relation(fields: [ballotId], references: [id])
+  ballotId String?
 }
 
 model Thread {
