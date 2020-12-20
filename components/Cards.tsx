@@ -84,14 +84,14 @@ export const CardBox: React.FC<{
   const [selected, setSelected] = useState(cardsList.indexOf(id) >= 0);
   const [doSetCards] = useSetCardsMutation();
 
-  function doSelect(evt: React.BaseSyntheticEvent) {
+  async function doSelect(evt: React.BaseSyntheticEvent) {
     evt.stopPropagation();
     evt.preventDefault();
     setSelected(!selected);
     const cards = selected
       ? without(cardsList, id).join(" ")
       : cardsList.concat(id).join(" ");
-    doSetCards({ variables: { cards, teamId } });
+    await doSetCards({ variables: { cards, teamId } });
   }
   return (
     <Box
@@ -168,21 +168,25 @@ export const Card: React.FC<{ id: string }> = ({ id }) => {
   return <Comp />;
 };
 
-export const CircleBullet: React.FC<{ value: string | number }> = ({
-  value,
-}) => (
+export const CircleBullet: React.FC<{
+  value: string | number;
+  bg?: string;
+  color?: string;
+  onClick?: (evt: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
+}> = ({ value, onClick, bg, color }) => (
   <Text
     fontWeight="bold"
-    color="gray"
     fontSize={[2]}
     display="inline-block"
     sx={{ borderRadius: 25 }}
-    bg="white"
+    color={color || "gray"}
+    bg={bg || "white"}
     mr={2}
     p={1}
     width="35px"
     height="35px"
     textAlign="center"
+    onClick={onClick}
   >
     {value}
   </Text>
@@ -190,19 +194,15 @@ export const CircleBullet: React.FC<{ value: string | number }> = ({
 
 export function getCard(id: string): React.FC {
   // @ts-ignore TODO, not sure how to beter do the lookup here
-  return cards[id].default;
+  return cards[id].default as React.FC;
 }
 
 export function getCardMeta(id: string): CardType | undefined {
   // @ts-ignore TODO, not sure how to beter do the lookup here
-  return id in cards ? cards[id].meta : undefined;
+  return id in cards ? (cards[id].meta as CardType) : undefined;
 }
 
 export function getCardTitle(id: string): string {
   const meta = getCardMeta(id);
   return meta ? String(meta["title"]) : "";
-}
-
-export function useUpdateClassCards(classId: string, cards: string[]) {
-  return;
 }

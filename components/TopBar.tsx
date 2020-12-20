@@ -1,6 +1,6 @@
 import { Flex, Image, Text, Link as A, Box } from "rebass";
 import Link from "next/link";
-import IconRegister from "../public/images/icon_register.svg";
+// import IconRegister from "../public/images/icon_register.svg";
 import IconLogin from "../public/images/icon_login.svg";
 import IconLogout from "../public/images/icon_logout.svg";
 import IconAccount from "../public/images/icon_account.svg";

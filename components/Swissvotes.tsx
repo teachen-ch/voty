@@ -1,5 +1,5 @@
 import { gql } from "@apollo/client";
-import { Swissvote, SwissvotesQuery, useSwissvotesQuery } from "graphql/types";
+import { Swissvote, useSwissvotesQuery } from "graphql/types";
 import { Input } from "@rebass/forms";
 import { Box, Link, Text, Flex, Button, Image } from "rebass";
 import { ErrorPage, Loading } from "./Page";
@@ -130,9 +130,7 @@ export const VotesList: React.FC<{ query: VotesQuery }> = ({ query }) => {
   return (
     <table style={{ borderTop: "2px solid white" }}>
       <tbody>
-        {swissvotes?.map(
-          (vote) => vote && <Vote key={vote.anr!} vote={vote} />
-        )}
+        {swissvotes?.map((vote) => vote && <Vote key={vote.anr} vote={vote} />)}
       </tbody>
     </table>
   );
@@ -141,14 +139,16 @@ export const VotesList: React.FC<{ query: VotesQuery }> = ({ query }) => {
 export const Vote: React.FC<{ vote: Swissvote }> = ({ vote }) => {
   return (
     <tr style={{ fontSize: 16 }}>
-      <td>{formatYear(vote.datum!)}</td>
+      <td>{vote.datum && formatYear(vote.datum)}</td>
       <td style={{ maxWidth: "500px" }}>
-        <Link href={vote.swissvoteslink!} target="_blank">
-          {vote.titel_kurz_d}
-        </Link>
+        {vote.swissvoteslink && (
+          <Link href={vote.swissvoteslink} target="_blank">
+            {vote.titel_kurz_d}
+          </Link>
+        )}
       </td>
-      <td style={{ maxWidth: "100px" }}>{getVoteType(vote.rechtsform!)}</td>
-      <td>{getVoteResult(vote.annahme!)}</td>
+      <td style={{ maxWidth: "100px" }}>{getVoteType(vote.rechtsform)}</td>
+      <td>{vote.annahme && getVoteResult(vote.annahme)}</td>
     </tr>
   );
 };
@@ -161,8 +161,8 @@ const SwissvoteTypes: Record<number, string> = {
   5: "Stichfrage",
 };
 
-export function getVoteType(r: number) {
-  return SwissvoteTypes[r] || "";
+export function getVoteType(r?: number | null): string {
+  return r ? SwissvoteTypes[r] || "" : "";
 }
 
 const SwissvoteResults: Record<number, string> = {
@@ -170,7 +170,7 @@ const SwissvoteResults: Record<number, string> = {
   1: "JA",
 };
 
-export function getVoteResult(r: number) {
+export function getVoteResult(r: number): string {
   return SwissvoteResults[r] || "–";
 }
 
@@ -238,7 +238,7 @@ export const Poster: React.FC<{ vote: Swissvote; image: string }> = ({
   image,
 }) => {
   const [hover, setHover] = useState(false);
-  const copyright = image.replace(/.*\:\/\/(?:www\.)?(.*?)\/.*/, "$1");
+  const copyright = image.replace(/.*:\/\/(?:www\.)?(.*?)\/.*/, "$1");
   return (
     <Box
       width="calc(100% - 8px)"
@@ -255,13 +255,15 @@ export const Poster: React.FC<{ vote: Swissvote; image: string }> = ({
           width="calc(100%  - 16px)"
           height="calc(100% - 16px)"
           onMouseOut={() => setHover(false)}
-          onClick={() => window.open(vote.swissvoteslink!, "_blank")}
+          onClick={() =>
+            vote.swissvoteslink && window.open(vote.swissvoteslink, "_blank")
+          }
         >
           <Text fontWeight="bold" fontSize={2} sx={{ wordWrap: "break-word" }}>
             {vote.titel_kurz_d}
           </Text>
           <Text fontSize={1} my={2}>
-            Jahr: {formatYear(vote.datum!)}
+            Jahr: {vote.datum && formatYear(vote.datum)}
           </Text>
           <Text fontSize={1}>&copy; {copyright}</Text>
         </Box>

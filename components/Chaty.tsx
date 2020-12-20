@@ -142,16 +142,21 @@ const ShowInput: React.FC<{
 }> = ({ message, doChat }) => {
   if (!message) return null;
 
-  function selectOption(o: string) {
-    message!.selected = o;
-    doChat(message!.line, o);
+  function selectOption(message: TMessage, o: string) {
+    message.selected = o;
+    doChat(message.line, o);
   }
   if (message.type === "BUTTONS" || message.type === "MENU") {
     const options = message.message?.split("|") || [];
     return (
       <InputBox>
         {options.map((o, i) => (
-          <Button key={i} onClick={() => selectOption(o)} ml={i && 2} flex={1}>
+          <Button
+            key={i}
+            onClick={() => selectOption(message, o)}
+            ml={i && 2}
+            flex={1}
+          >
             <Text fontSize={1}>{o}</Text>
           </Button>
         ))}
@@ -162,7 +167,7 @@ const ShowInput: React.FC<{
     <InputBox>
       <Button
         width="100%"
-        onClick={() => selectOption(String(message.message))}
+        onClick={() => selectOption(message, String(message.message))}
       >
         {message.message}
       </Button>
@@ -234,9 +239,7 @@ function showMessages(messages: TMessage[]) {
 
 function parseMessages(lines: string): TMessage[] {
   lines = lines.trim();
-  return lines
-    .split(/\n+(?=[\!\-\*])/)
-    .map((line, ix) => parseMessage(line, ix));
+  return lines.split(/\n+(?=[!\-*])/).map((line, ix) => parseMessage(line, ix));
 }
 
 function parseMessage(lines: string, ix: number): TMessage {
@@ -257,7 +260,7 @@ function parseMessage(lines: string, ix: number): TMessage {
       throw new Error("ERR_CHATY_PARSE_DIRECTION");
   }
   // remove message type character and whitespace at beginning of lines
-  let message = lines.replace(/^[\-\*\!]?\s+/gm, "");
+  let message = lines.replace(/^[-*!]?\s+/gm, "");
 
   // check for special commands: GIPHY / IMAGE / BUTTON, etc.
   // eslint-disable-next-line @typescript-eslint/prefer-regexp-exec
@@ -283,8 +286,8 @@ function specialMessage(type: string, rest: string): string {
       let media = rest;
       // from https://giphy.com/gifs/fifa-h7LENyTiMBCp0pCaGz to
       // https://media0.giphy.com/media/h7LENyTiMBCp0pCaGz/giphy.mp4
-      let id = rest.replace(/.*\/gifs\/([^\/]*)$/, "$1");
-      if (id.indexOf("-")) id = id.replace(/.*?\-/, "");
+      let id = rest.replace(/.*\/gifs\/([^/]*)$/, "$1");
+      if (id.indexOf("-")) id = id.replace(/.*?-/, "");
       if (id) media = `https://media0.giphy.com/media/${id}/giphy.mp4`;
       return `<video src="${media}" autoplay loop width="200"/>`;
     }

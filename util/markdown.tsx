@@ -1,4 +1,4 @@
-export const Markdown: React.FC<{}> = ({ children }) => (
+export const Markdown: React.FC = ({ children }) => (
   <div
     dangerouslySetInnerHTML={parseMarkdownInner(String(children))}
     style={{ textAlign: "left" }}
@@ -15,7 +15,7 @@ export function parseMarkdown(str: string): string {
   str = str.replace(/\*(.*?)\*/gm, "<i>$1</i>");
   str = str.replace(/\n/g, "<br/>");
   str = str.replace(
-    /\!\[(.*?)\]\(([^\s]*?)\)/g,
+    /!\[(.*?)\]\(([^\s]*?)\)/g,
     "<img src='$2' alt='$1' class='markdownImage'/>"
   );
   str = str.replace(/(<\/h\d>)<br\/>\s*/g, "$1");

@@ -1,11 +1,5 @@
 import resolvers from "../resolvers";
-import {
-  extendType,
-  objectType,
-  stringArg,
-  intArg,
-  nonNull,
-} from "@nexus/schema";
+import { extendType, objectType, stringArg, nonNull } from "@nexus/schema";
 
 export const Card = objectType({
   name: "Card",
@@ -31,7 +25,7 @@ export const CardsQuery = extendType({
       args: {
         keywords: stringArg(),
         age: stringArg(),
-        type: intArg(),
+        type: stringArg(),
       },
       resolve: (_root, args, ctx, info) =>
         resolvers.cards.getCards(_root, args, ctx, info),

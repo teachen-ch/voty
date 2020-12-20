@@ -265,7 +265,7 @@ export const Mutation = mutationType({
       type: "InviteResponse",
       args: {
         team: nonNull(stringArg()),
-        emails: list(nonNull(stringArg())),
+        emails: nonNull(list(nonNull(stringArg()))),
       },
       resolve: resolvers.teams.inviteStudents,
     });
