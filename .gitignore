@@ -19,6 +19,9 @@
 # pg data directory from docker
 /data
 
+# uploads
+/uploads
+
 # production
 /build
 
