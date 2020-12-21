@@ -1,12 +1,13 @@
 import { LoggedInPage, Page } from "components/Page";
-import { Cards, CardList } from "components/Cards";
+import { Cards, CardListAdmin } from "components/Cards";
 import { Input } from "@rebass/forms";
-import { Flex, Button } from "rebass";
+import { Flex, Button, Text } from "rebass";
 import React, { useState } from "react";
 import { useRouter } from "next/router";
 import { useTeamTeacherQuery } from "graphql/types";
 import { A, Breadcrumb } from "components/Breadcrumb";
 import { debounce } from "lodash";
+import { Filter } from "components/Swissvotes";
 
 export default function CardsPage(): React.ReactElement {
   const router = useRouter();
@@ -17,6 +18,8 @@ export default function CardsPage(): React.ReactElement {
   });
 
   const [keywords, setKeywords] = useState("");
+  const [type, setType] = useState<string | undefined>();
+  const [age, setAge] = useState<string | undefined>();
 
   if (teamQuery.loading) {
     return (
@@ -34,6 +37,11 @@ export default function CardsPage(): React.ReactElement {
       </LoggedInPage>
     );
   }
+  function resetFilters() {
+    setAge(undefined);
+    setType(undefined);
+    setKeywords("");
+  }
   return (
     <Page heading="Lerninhalte">
       <Breadcrumb>
@@ -45,9 +53,9 @@ export default function CardsPage(): React.ReactElement {
 
       <b>Folgende Lerninhalte sind ausgewählt</b>
 
-      <CardList teamCards={team.cards} teamId={team.id} />
+      <CardListAdmin teamCards={team.cards} teamId={team.id} />
 
-      <Flex mb={3} mt={4}>
+      <Flex mt={4}>
         <Input
           onChange={debounce((evt) => setKeywords(evt.target.value), 400)}
           placeholder="Suche..."
@@ -56,8 +64,26 @@ export default function CardsPage(): React.ReactElement {
           Suche
         </Button>
       </Flex>
+      <Text mb={3} mt={1} fontSize={1}>
+        Filtern nach Stufe: &nbsp; &nbsp;
+        <Filter set={setAge} v={age} val={"Zyklus-2"} label="Zyklus-2" sep />
+        <Filter set={setAge} v={age} val={"Sek-1"} label="Sek-1" sep />
+        <Filter set={setAge} v={age} val={"Gym"} label="Gym" sep />
+        <Filter set={setAge} v={age} val={"Berufsschule"} label="BS" />
+        &nbsp; &nbsp; &nbsp; nach Inhalt: &nbsp; &nbsp;
+        <Filter set={setType} v={type} val={"tool"} label="Aufgaben" sep />
+        <Filter set={setType} v={type} val={"video"} label="Videos" sep />
+        <Filter set={setType} v={type} val={"chaty"} label="Chaty" />
+      </Text>
 
-      <Cards keywords={keywords} teamId={team.id} teamCards={team.cards} />
+      <Cards
+        keywords={keywords}
+        type={type}
+        age={age}
+        teamId={team.id}
+        teamCards={team.cards}
+        resetFilters={resetFilters}
+      />
     </Page>
   );
 }

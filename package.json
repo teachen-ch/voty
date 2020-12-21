@@ -61,6 +61,7 @@
     "qrcode.react": "^1.0.0",
     "react": "17.0.1",
     "react-dom": "17.0.1",
+    "react-draggable-list": "^4.0.3",
     "react-minimal-pie-chart": "^8.0.1",
     "react-player": "^2.6.0",
     "rebass": "^4.0.7",

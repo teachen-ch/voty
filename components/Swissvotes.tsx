@@ -88,7 +88,7 @@ export const Swissvotes: React.FC = () => {
   );
 };
 
-const Filter: React.FC<{
+export const Filter: React.FC<{
   set: Dispatch<SetStateAction<any>>;
   v: string | number | undefined;
   val: string | number | undefined;

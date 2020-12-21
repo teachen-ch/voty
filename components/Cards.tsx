@@ -8,13 +8,14 @@ import {
 import { Flex, Box, Text, Heading, Button } from "rebass";
 import { Loading } from "components/Page";
 import { useRouter } from "next/router";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { without } from "lodash";
 import { A } from "./Breadcrumb";
+import DraggableList from "react-draggable-list";
 
 export const GET_CARDS = gql`
-  query cards($keywords: String, $age: String) {
-    cards(keywords: $keywords, age: $age) {
+  query cards($keywords: String, $age: String, $type: String) {
+    cards(keywords: $keywords, age: $age, type: $type) {
       id
       title
       description
@@ -38,11 +39,19 @@ export const SET_CARDS = gql`
   }
 `;
 
+export type CardsQuery = {
+  keywords?: string;
+  age?: string;
+};
+
 export const Cards: React.FC<{
   keywords?: string;
   age?: string;
+  selected?: boolean;
+  type?: string;
   teamId: string;
   teamCards: string;
+  resetFilters: () => void;
 }> = (props) => {
   const cardsQuery = useCardsQuery({ variables: props });
   const cards = cardsQuery.data?.cards;
@@ -53,8 +62,13 @@ export const Cards: React.FC<{
   if (cardsQuery.loading) {
     return <Loading />;
   }
-  if (!cards) {
-    return <p>No cards found</p>;
+  if (!cards || cards.length === 0) {
+    return (
+      <>
+        <Text>Keine Lerninhalte gefunden…</Text>
+        <Button onClick={props.resetFilters}>Filter löschen</Button>
+      </>
+    );
   }
   return (
     <Flex flexWrap="wrap" mx="-8px">
@@ -142,26 +156,107 @@ export const CardBox: React.FC<{
   );
 };
 
-export const CardList: React.FC<{ teamCards: string; teamId: string }> = ({
-  teamCards,
-  teamId,
-}) => {
+export const CardList: React.FC<{
+  teamCards: string;
+  teamId: string;
+}> = ({ teamCards, teamId }) => {
   if (!teamCards) {
     return <Text>Noch keine Inhalte ausgewählt</Text>;
   }
   return (
     <>
-      {teamCards.split(" ").map((id, ix) => (
-        <Flex key={id} my={3} ml={4}>
-          <CircleBullet value={ix + 1} />
-          <Text>
-            <A href={`/team/${teamId}/cards/${id}`}>{getCardTitle(id)}</A>
-          </Text>
-        </Flex>
-      ))}
+      {teamCards.split(" ").map((id, ix) => {
+        return (
+          <Flex key={id} my={3} ml={4}>
+            <CircleBullet value={ix + 1} />
+            <Text>
+              <A href={`/team/${teamId}/cards/${id}`}>{getCardTitle(id)}</A>
+            </Text>
+          </Flex>
+        );
+      })}
     </>
   );
 };
+
+interface CardAdminType {
+  id: string;
+  ix: number;
+  title: string;
+  link: string;
+}
+
+interface CardAdminProps {
+  item: CardAdminType;
+  itemSelected: number;
+  dragHandleProps: Record<string, any>;
+}
+
+export const CardListAdmin: React.FC<{
+  teamCards: string;
+  teamId: string;
+}> = ({ teamCards, teamId }) => {
+  if (!teamCards) {
+    return <Text>Noch keine Inhalte ausgewählt</Text>;
+  }
+  const [cards, setCards] = useState<readonly CardAdminType[]>([]);
+  const [doSetCards] = useSetCardsMutation();
+
+  useEffect(() => generateList(teamCards), [teamCards]);
+
+  function generateList(str: string) {
+    const c = str.split(" ").map((id, ix) => {
+      return {
+        id,
+        ix: ix + 1,
+        title: getCardTitle(id),
+        link: `/team/${teamId}/cards/${id}`,
+      };
+    });
+    setCards(c);
+  }
+  async function onMoveEnd(newList: readonly CardAdminType[]) {
+    const cards = newList.map((item) => item.id).join(" ");
+    await doSetCards({ variables: { cards, teamId } });
+    generateList(cards);
+  }
+
+  return (
+    <DraggableList<CardAdminType, null, CardAdminItem>
+      list={cards}
+      itemKey="id"
+      padding={0}
+      onMoveEnd={onMoveEnd}
+      template={CardAdminItem}
+    />
+  );
+};
+
+class CardAdminItem extends React.Component<CardAdminProps> {
+  state = {
+    over: false,
+  };
+  render() {
+    const { item, dragHandleProps, itemSelected } = this.props;
+    return (
+      <Flex
+        py={2}
+        ml={4}
+        onMouseOver={() => this.setState({ over: true })}
+        onMouseOut={() => this.setState({ over: false })}
+      >
+        <Box {...dragHandleProps} sx={{ cursor: "move" }}>
+          <CircleBullet
+            value={this.state.over || itemSelected > 0.8 ? "↕" : item.ix}
+          />
+        </Box>
+        <Text>
+          <A href={item.link}>{item.title}</A>
+        </Text>
+      </Flex>
+    );
+  }
+}
 
 export const Card: React.FC<{ id: string }> = ({ id }) => {
   const Comp = getCard(id);

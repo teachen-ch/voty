@@ -6366,6 +6366,7 @@ export type GetBallotResultsQuery = (
 export type CardsQueryVariables = Exact<{
   keywords?: Maybe<Scalars['String']>;
   age?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
 }>;
 
 
@@ -7367,8 +7368,8 @@ export type GetBallotResultsQueryHookResult = ReturnType<typeof useGetBallotResu
 export type GetBallotResultsLazyQueryHookResult = ReturnType<typeof useGetBallotResultsLazyQuery>;
 export type GetBallotResultsQueryResult = Apollo.QueryResult<GetBallotResultsQuery, GetBallotResultsQueryVariables>;
 export const CardsDocument = gql`
-    query cards($keywords: String, $age: String) {
-  cards(keywords: $keywords, age: $age) {
+    query cards($keywords: String, $age: String, $type: String) {
+  cards(keywords: $keywords, age: $age, type: $type) {
     id
     title
     description
@@ -7397,6 +7398,7 @@ export const CardsDocument = gql`
  *   variables: {
  *      keywords: // value for 'keywords'
  *      age: // value for 'age'
+ *      type: // value for 'type'
  *   },
  * });
  */
