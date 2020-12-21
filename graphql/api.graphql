@@ -304,6 +304,7 @@ type Attachment {
   file: String!
   id: String!
   title: String!
+  type: String!
   updatedAt: DateTime!
   user: User!
 }
@@ -372,6 +373,7 @@ input AttachmentCreateWithoutBallotInput {
   team: TeamCreateOneWithoutAttachmentInput!
   thread: ThreadCreateOneWithoutAttachmentsInput
   title: String
+  type: String
   updatedAt: DateTime
   user: UserCreateOneWithoutAttachmentsInput!
 }
@@ -385,6 +387,7 @@ input AttachmentCreateWithoutSchoolInput {
   team: TeamCreateOneWithoutAttachmentInput!
   thread: ThreadCreateOneWithoutAttachmentsInput
   title: String
+  type: String
   updatedAt: DateTime
   user: UserCreateOneWithoutAttachmentsInput!
 }
@@ -398,6 +401,7 @@ input AttachmentCreateWithoutTeamInput {
   school: SchoolCreateOneWithoutAttachmentInput
   thread: ThreadCreateOneWithoutAttachmentsInput
   title: String
+  type: String
   updatedAt: DateTime
   user: UserCreateOneWithoutAttachmentsInput!
 }
@@ -411,6 +415,7 @@ input AttachmentCreateWithoutThreadInput {
   school: SchoolCreateOneWithoutAttachmentInput
   team: TeamCreateOneWithoutAttachmentInput!
   title: String
+  type: String
   updatedAt: DateTime
   user: UserCreateOneWithoutAttachmentsInput!
 }
@@ -425,6 +430,7 @@ input AttachmentCreateWithoutUserInput {
   team: TeamCreateOneWithoutAttachmentInput!
   thread: ThreadCreateOneWithoutAttachmentsInput
   title: String
+  type: String
   updatedAt: DateTime
 }
 
@@ -444,6 +450,7 @@ input AttachmentOrderByInput {
   teamId: SortOrder
   threadId: SortOrder
   title: SortOrder
+  type: SortOrder
   updatedAt: SortOrder
   userId: SortOrder
 }
@@ -461,6 +468,7 @@ input AttachmentScalarWhereInput {
   teamId: StringFilter
   threadId: StringNullableFilter
   title: StringFilter
+  type: StringFilter
   updatedAt: DateTimeFilter
   userId: StringFilter
 }
@@ -471,6 +479,7 @@ input AttachmentUpdateManyMutationInput {
   file: StringFieldUpdateOperationsInput
   id: StringFieldUpdateOperationsInput
   title: StringFieldUpdateOperationsInput
+  type: StringFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
 }
 
@@ -573,6 +582,7 @@ input AttachmentUpdateWithoutBallotInput {
   team: TeamUpdateOneRequiredWithoutAttachmentInput
   thread: ThreadUpdateOneWithoutAttachmentsInput
   title: StringFieldUpdateOperationsInput
+  type: StringFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
   user: UserUpdateOneRequiredWithoutAttachmentsInput
 }
@@ -586,6 +596,7 @@ input AttachmentUpdateWithoutSchoolInput {
   team: TeamUpdateOneRequiredWithoutAttachmentInput
   thread: ThreadUpdateOneWithoutAttachmentsInput
   title: StringFieldUpdateOperationsInput
+  type: StringFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
   user: UserUpdateOneRequiredWithoutAttachmentsInput
 }
@@ -599,6 +610,7 @@ input AttachmentUpdateWithoutTeamInput {
   school: SchoolUpdateOneWithoutAttachmentInput
   thread: ThreadUpdateOneWithoutAttachmentsInput
   title: StringFieldUpdateOperationsInput
+  type: StringFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
   user: UserUpdateOneRequiredWithoutAttachmentsInput
 }
@@ -612,6 +624,7 @@ input AttachmentUpdateWithoutThreadInput {
   school: SchoolUpdateOneWithoutAttachmentInput
   team: TeamUpdateOneRequiredWithoutAttachmentInput
   title: StringFieldUpdateOperationsInput
+  type: StringFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
   user: UserUpdateOneRequiredWithoutAttachmentsInput
 }
@@ -626,6 +639,7 @@ input AttachmentUpdateWithoutUserInput {
   team: TeamUpdateOneRequiredWithoutAttachmentInput
   thread: ThreadUpdateOneWithoutAttachmentsInput
   title: StringFieldUpdateOperationsInput
+  type: StringFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
 }
 
@@ -701,12 +715,14 @@ input AttachmentWhereInput {
   thread: ThreadWhereInput
   threadId: StringNullableFilter
   title: StringFilter
+  type: StringFilter
   updatedAt: DateTimeFilter
   user: UserWhereInput
   userId: StringFilter
 }
 
 input AttachmentWhereUniqueInput {
+  file: String
   id: String
 }
 

@@ -318,6 +318,7 @@ export type Attachment = {
   file: Scalars['String'];
   id: Scalars['String'];
   title: Scalars['String'];
+  type: Scalars['String'];
   updatedAt: Scalars['DateTime'];
   user: User;
 };
@@ -386,6 +387,7 @@ export type AttachmentCreateWithoutBallotInput = {
   team: TeamCreateOneWithoutAttachmentInput;
   thread?: Maybe<ThreadCreateOneWithoutAttachmentsInput>;
   title?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
   updatedAt?: Maybe<Scalars['DateTime']>;
   user: UserCreateOneWithoutAttachmentsInput;
 };
@@ -399,6 +401,7 @@ export type AttachmentCreateWithoutSchoolInput = {
   team: TeamCreateOneWithoutAttachmentInput;
   thread?: Maybe<ThreadCreateOneWithoutAttachmentsInput>;
   title?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
   updatedAt?: Maybe<Scalars['DateTime']>;
   user: UserCreateOneWithoutAttachmentsInput;
 };
@@ -412,6 +415,7 @@ export type AttachmentCreateWithoutTeamInput = {
   school?: Maybe<SchoolCreateOneWithoutAttachmentInput>;
   thread?: Maybe<ThreadCreateOneWithoutAttachmentsInput>;
   title?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
   updatedAt?: Maybe<Scalars['DateTime']>;
   user: UserCreateOneWithoutAttachmentsInput;
 };
@@ -425,6 +429,7 @@ export type AttachmentCreateWithoutThreadInput = {
   school?: Maybe<SchoolCreateOneWithoutAttachmentInput>;
   team: TeamCreateOneWithoutAttachmentInput;
   title?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
   updatedAt?: Maybe<Scalars['DateTime']>;
   user: UserCreateOneWithoutAttachmentsInput;
 };
@@ -439,6 +444,7 @@ export type AttachmentCreateWithoutUserInput = {
   team: TeamCreateOneWithoutAttachmentInput;
   thread?: Maybe<ThreadCreateOneWithoutAttachmentsInput>;
   title?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
   updatedAt?: Maybe<Scalars['DateTime']>;
 };
 
@@ -458,6 +464,7 @@ export type AttachmentOrderByInput = {
   teamId?: Maybe<SortOrder>;
   threadId?: Maybe<SortOrder>;
   title?: Maybe<SortOrder>;
+  type?: Maybe<SortOrder>;
   updatedAt?: Maybe<SortOrder>;
   userId?: Maybe<SortOrder>;
 };
@@ -475,6 +482,7 @@ export type AttachmentScalarWhereInput = {
   teamId?: Maybe<StringFilter>;
   threadId?: Maybe<StringNullableFilter>;
   title?: Maybe<StringFilter>;
+  type?: Maybe<StringFilter>;
   updatedAt?: Maybe<DateTimeFilter>;
   userId?: Maybe<StringFilter>;
 };
@@ -485,6 +493,7 @@ export type AttachmentUpdateManyMutationInput = {
   file?: Maybe<StringFieldUpdateOperationsInput>;
   id?: Maybe<StringFieldUpdateOperationsInput>;
   title?: Maybe<StringFieldUpdateOperationsInput>;
+  type?: Maybe<StringFieldUpdateOperationsInput>;
   updatedAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
 };
 
@@ -587,6 +596,7 @@ export type AttachmentUpdateWithoutBallotInput = {
   team?: Maybe<TeamUpdateOneRequiredWithoutAttachmentInput>;
   thread?: Maybe<ThreadUpdateOneWithoutAttachmentsInput>;
   title?: Maybe<StringFieldUpdateOperationsInput>;
+  type?: Maybe<StringFieldUpdateOperationsInput>;
   updatedAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
   user?: Maybe<UserUpdateOneRequiredWithoutAttachmentsInput>;
 };
@@ -600,6 +610,7 @@ export type AttachmentUpdateWithoutSchoolInput = {
   team?: Maybe<TeamUpdateOneRequiredWithoutAttachmentInput>;
   thread?: Maybe<ThreadUpdateOneWithoutAttachmentsInput>;
   title?: Maybe<StringFieldUpdateOperationsInput>;
+  type?: Maybe<StringFieldUpdateOperationsInput>;
   updatedAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
   user?: Maybe<UserUpdateOneRequiredWithoutAttachmentsInput>;
 };
@@ -613,6 +624,7 @@ export type AttachmentUpdateWithoutTeamInput = {
   school?: Maybe<SchoolUpdateOneWithoutAttachmentInput>;
   thread?: Maybe<ThreadUpdateOneWithoutAttachmentsInput>;
   title?: Maybe<StringFieldUpdateOperationsInput>;
+  type?: Maybe<StringFieldUpdateOperationsInput>;
   updatedAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
   user?: Maybe<UserUpdateOneRequiredWithoutAttachmentsInput>;
 };
@@ -626,6 +638,7 @@ export type AttachmentUpdateWithoutThreadInput = {
   school?: Maybe<SchoolUpdateOneWithoutAttachmentInput>;
   team?: Maybe<TeamUpdateOneRequiredWithoutAttachmentInput>;
   title?: Maybe<StringFieldUpdateOperationsInput>;
+  type?: Maybe<StringFieldUpdateOperationsInput>;
   updatedAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
   user?: Maybe<UserUpdateOneRequiredWithoutAttachmentsInput>;
 };
@@ -640,6 +653,7 @@ export type AttachmentUpdateWithoutUserInput = {
   team?: Maybe<TeamUpdateOneRequiredWithoutAttachmentInput>;
   thread?: Maybe<ThreadUpdateOneWithoutAttachmentsInput>;
   title?: Maybe<StringFieldUpdateOperationsInput>;
+  type?: Maybe<StringFieldUpdateOperationsInput>;
   updatedAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
 };
 
@@ -715,6 +729,7 @@ export type AttachmentWhereInput = {
   thread?: Maybe<ThreadWhereInput>;
   threadId?: Maybe<StringNullableFilter>;
   title?: Maybe<StringFilter>;
+  type?: Maybe<StringFilter>;
   updatedAt?: Maybe<DateTimeFilter>;
   user?: Maybe<UserWhereInput>;
   userId?: Maybe<StringFilter>;
@@ -6633,6 +6648,15 @@ export type CreateOneTeamMutation = (
   ) }
 );
 
+export type AttachmentFieldsFragment = (
+  { __typename?: 'Attachment' }
+  & Pick<Attachment, 'id' | 'file' | 'title' | 'type'>
+  & { user: (
+    { __typename?: 'User' }
+    & Pick<User, 'id' | 'shortname' | 'name'>
+  ) }
+);
+
 export type AttachmentsQueryVariables = Exact<{
   where?: Maybe<AttachmentWhereInput>;
 }>;
@@ -6642,11 +6666,7 @@ export type AttachmentsQuery = (
   { __typename?: 'Query' }
   & { attachments: Array<(
     { __typename?: 'Attachment' }
-    & Pick<Attachment, 'id' | 'file' | 'title'>
-    & { user: (
-      { __typename?: 'User' }
-      & Pick<User, 'shortname' | 'name'>
-    ) }
+    & AttachmentFieldsFragment
   )> }
 );
 
@@ -6978,6 +6998,19 @@ export const TeamTeacherFieldsFragmentDoc = gql`
   }
 }
     ${TeamUserFieldsFragmentDoc}`;
+export const AttachmentFieldsFragmentDoc = gql`
+    fragment AttachmentFields on Attachment {
+  id
+  file
+  title
+  type
+  user {
+    id
+    shortname
+    name
+  }
+}
+    `;
 export const BallotsDocument = gql`
     query ballots($where: BallotWhereInput) {
   ballots(where: $where) {
@@ -7919,16 +7952,10 @@ export type CreateOneTeamMutationOptions = Apollo.BaseMutationOptions<CreateOneT
 export const AttachmentsDocument = gql`
     query attachments($where: AttachmentWhereInput) {
   attachments(where: $where) {
-    id
-    file
-    title
-    user {
-      shortname
-      name
-    }
+    ...AttachmentFields
   }
 }
-    `;
+    ${AttachmentFieldsFragmentDoc}`;
 
 /**
  * __useAttachmentsQuery__

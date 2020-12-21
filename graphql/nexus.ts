@@ -439,6 +439,7 @@ export interface NexusGenInputs {
     team: NexusGenInputs["TeamCreateOneWithoutAttachmentInput"]; // TeamCreateOneWithoutAttachmentInput!
     thread?: NexusGenInputs["ThreadCreateOneWithoutAttachmentsInput"] | null; // ThreadCreateOneWithoutAttachmentsInput
     title?: string | null; // String
+    type?: string | null; // String
     updatedAt?: NexusGenScalars["DateTime"] | null; // DateTime
     user: NexusGenInputs["UserCreateOneWithoutAttachmentsInput"]; // UserCreateOneWithoutAttachmentsInput!
   };
@@ -452,6 +453,7 @@ export interface NexusGenInputs {
     team: NexusGenInputs["TeamCreateOneWithoutAttachmentInput"]; // TeamCreateOneWithoutAttachmentInput!
     thread?: NexusGenInputs["ThreadCreateOneWithoutAttachmentsInput"] | null; // ThreadCreateOneWithoutAttachmentsInput
     title?: string | null; // String
+    type?: string | null; // String
     updatedAt?: NexusGenScalars["DateTime"] | null; // DateTime
     user: NexusGenInputs["UserCreateOneWithoutAttachmentsInput"]; // UserCreateOneWithoutAttachmentsInput!
   };
@@ -465,6 +467,7 @@ export interface NexusGenInputs {
     school?: NexusGenInputs["SchoolCreateOneWithoutAttachmentInput"] | null; // SchoolCreateOneWithoutAttachmentInput
     thread?: NexusGenInputs["ThreadCreateOneWithoutAttachmentsInput"] | null; // ThreadCreateOneWithoutAttachmentsInput
     title?: string | null; // String
+    type?: string | null; // String
     updatedAt?: NexusGenScalars["DateTime"] | null; // DateTime
     user: NexusGenInputs["UserCreateOneWithoutAttachmentsInput"]; // UserCreateOneWithoutAttachmentsInput!
   };
@@ -478,6 +481,7 @@ export interface NexusGenInputs {
     school?: NexusGenInputs["SchoolCreateOneWithoutAttachmentInput"] | null; // SchoolCreateOneWithoutAttachmentInput
     team: NexusGenInputs["TeamCreateOneWithoutAttachmentInput"]; // TeamCreateOneWithoutAttachmentInput!
     title?: string | null; // String
+    type?: string | null; // String
     updatedAt?: NexusGenScalars["DateTime"] | null; // DateTime
     user: NexusGenInputs["UserCreateOneWithoutAttachmentsInput"]; // UserCreateOneWithoutAttachmentsInput!
   };
@@ -492,6 +496,7 @@ export interface NexusGenInputs {
     team: NexusGenInputs["TeamCreateOneWithoutAttachmentInput"]; // TeamCreateOneWithoutAttachmentInput!
     thread?: NexusGenInputs["ThreadCreateOneWithoutAttachmentsInput"] | null; // ThreadCreateOneWithoutAttachmentsInput
     title?: string | null; // String
+    type?: string | null; // String
     updatedAt?: NexusGenScalars["DateTime"] | null; // DateTime
   };
   AttachmentListRelationFilter: {
@@ -511,6 +516,7 @@ export interface NexusGenInputs {
     teamId?: NexusGenEnums["SortOrder"] | null; // SortOrder
     threadId?: NexusGenEnums["SortOrder"] | null; // SortOrder
     title?: NexusGenEnums["SortOrder"] | null; // SortOrder
+    type?: NexusGenEnums["SortOrder"] | null; // SortOrder
     updatedAt?: NexusGenEnums["SortOrder"] | null; // SortOrder
     userId?: NexusGenEnums["SortOrder"] | null; // SortOrder
   };
@@ -528,6 +534,7 @@ export interface NexusGenInputs {
     teamId?: NexusGenInputs["StringFilter"] | null; // StringFilter
     threadId?: NexusGenInputs["StringNullableFilter"] | null; // StringNullableFilter
     title?: NexusGenInputs["StringFilter"] | null; // StringFilter
+    type?: NexusGenInputs["StringFilter"] | null; // StringFilter
     updatedAt?: NexusGenInputs["DateTimeFilter"] | null; // DateTimeFilter
     userId?: NexusGenInputs["StringFilter"] | null; // StringFilter
   };
@@ -538,6 +545,7 @@ export interface NexusGenInputs {
     file?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
     id?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
     title?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    type?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
     updatedAt?: NexusGenInputs["DateTimeFieldUpdateOperationsInput"] | null; // DateTimeFieldUpdateOperationsInput
   };
   AttachmentUpdateManyWithWhereWithoutBallotInput: {
@@ -705,6 +713,7 @@ export interface NexusGenInputs {
     team?: NexusGenInputs["TeamUpdateOneRequiredWithoutAttachmentInput"] | null; // TeamUpdateOneRequiredWithoutAttachmentInput
     thread?: NexusGenInputs["ThreadUpdateOneWithoutAttachmentsInput"] | null; // ThreadUpdateOneWithoutAttachmentsInput
     title?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    type?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
     updatedAt?: NexusGenInputs["DateTimeFieldUpdateOperationsInput"] | null; // DateTimeFieldUpdateOperationsInput
     user?:
       | NexusGenInputs["UserUpdateOneRequiredWithoutAttachmentsInput"]
@@ -720,6 +729,7 @@ export interface NexusGenInputs {
     team?: NexusGenInputs["TeamUpdateOneRequiredWithoutAttachmentInput"] | null; // TeamUpdateOneRequiredWithoutAttachmentInput
     thread?: NexusGenInputs["ThreadUpdateOneWithoutAttachmentsInput"] | null; // ThreadUpdateOneWithoutAttachmentsInput
     title?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    type?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
     updatedAt?: NexusGenInputs["DateTimeFieldUpdateOperationsInput"] | null; // DateTimeFieldUpdateOperationsInput
     user?:
       | NexusGenInputs["UserUpdateOneRequiredWithoutAttachmentsInput"]
@@ -735,6 +745,7 @@ export interface NexusGenInputs {
     school?: NexusGenInputs["SchoolUpdateOneWithoutAttachmentInput"] | null; // SchoolUpdateOneWithoutAttachmentInput
     thread?: NexusGenInputs["ThreadUpdateOneWithoutAttachmentsInput"] | null; // ThreadUpdateOneWithoutAttachmentsInput
     title?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    type?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
     updatedAt?: NexusGenInputs["DateTimeFieldUpdateOperationsInput"] | null; // DateTimeFieldUpdateOperationsInput
     user?:
       | NexusGenInputs["UserUpdateOneRequiredWithoutAttachmentsInput"]
@@ -750,6 +761,7 @@ export interface NexusGenInputs {
     school?: NexusGenInputs["SchoolUpdateOneWithoutAttachmentInput"] | null; // SchoolUpdateOneWithoutAttachmentInput
     team?: NexusGenInputs["TeamUpdateOneRequiredWithoutAttachmentInput"] | null; // TeamUpdateOneRequiredWithoutAttachmentInput
     title?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    type?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
     updatedAt?: NexusGenInputs["DateTimeFieldUpdateOperationsInput"] | null; // DateTimeFieldUpdateOperationsInput
     user?:
       | NexusGenInputs["UserUpdateOneRequiredWithoutAttachmentsInput"]
@@ -766,6 +778,7 @@ export interface NexusGenInputs {
     team?: NexusGenInputs["TeamUpdateOneRequiredWithoutAttachmentInput"] | null; // TeamUpdateOneRequiredWithoutAttachmentInput
     thread?: NexusGenInputs["ThreadUpdateOneWithoutAttachmentsInput"] | null; // ThreadUpdateOneWithoutAttachmentsInput
     title?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    type?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
     updatedAt?: NexusGenInputs["DateTimeFieldUpdateOperationsInput"] | null; // DateTimeFieldUpdateOperationsInput
   };
   AttachmentUpsertWithWhereUniqueWithoutBallotInput: {
@@ -816,12 +829,14 @@ export interface NexusGenInputs {
     thread?: NexusGenInputs["ThreadWhereInput"] | null; // ThreadWhereInput
     threadId?: NexusGenInputs["StringNullableFilter"] | null; // StringNullableFilter
     title?: NexusGenInputs["StringFilter"] | null; // StringFilter
+    type?: NexusGenInputs["StringFilter"] | null; // StringFilter
     updatedAt?: NexusGenInputs["DateTimeFilter"] | null; // DateTimeFilter
     user?: NexusGenInputs["UserWhereInput"] | null; // UserWhereInput
     userId?: NexusGenInputs["StringFilter"] | null; // StringFilter
   };
   AttachmentWhereUniqueInput: {
     // input type
+    file?: string | null; // String
     id?: string | null; // String
   };
   BallotCreateManyWithoutCreatorInput: {
@@ -6297,6 +6312,7 @@ export interface NexusGenObjects {
     file: string; // String!
     id: string; // String!
     title: string; // String!
+    type: string; // String!
     updatedAt: NexusGenScalars["DateTime"]; // DateTime!
   };
   Ballot: {
@@ -6448,6 +6464,7 @@ export interface NexusGenFieldTypes {
     file: string; // String!
     id: string; // String!
     title: string; // String!
+    type: string; // String!
     updatedAt: NexusGenScalars["DateTime"]; // DateTime!
     user: NexusGenRootTypes["User"]; // User!
   };
@@ -6661,6 +6678,7 @@ export interface NexusGenFieldTypeNames {
     file: "String";
     id: "String";
     title: "String";
+    type: "String";
     updatedAt: "DateTime";
     user: "User";
   };

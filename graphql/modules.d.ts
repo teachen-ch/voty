@@ -93,7 +93,8 @@ export const createOneTeam: DocumentNode;
 declare module '*/Uploader.tsx' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
-  export const attachments: DocumentNode;
+  export const AttachmentFields: DocumentNode;
+export const attachments: DocumentNode;
 
   export default defaultDocument;
 }
