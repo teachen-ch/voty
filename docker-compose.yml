@@ -57,6 +57,7 @@ services:
     container_name: "app"
     env_file: ".env"
     image: docker.pkg.github.com/teachen-ch/voty/voty
+    restart: always
     depends_on:
       - postgres
     environment:
@@ -66,6 +67,7 @@ services:
       NEXT_TELEMETRY_DISABLED: 1
     volumes:
       - ./logs:/usr/src/app/logs
+      - ./uploads:/usr/src/app/uploads
     expose:
       - "3000"
     command: npm run start
