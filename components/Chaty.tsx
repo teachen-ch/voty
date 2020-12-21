@@ -7,23 +7,24 @@ import {
   Message,
   TypingIndicator,
 } from "@chatscope/chat-ui-kit-react";
-import { Box, Button, Text, Flex, Card } from "rebass";
+import { Box, Button, Text, Flex, Card, Link } from "rebass";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Markdown } from "util/markdown";
-import { useRouter } from "next/router";
-import { A } from "./Breadcrumb";
+import { CircleBullet } from "./Cards";
 
 const WAIT = 50;
 const MAX_WAIT = 5000;
 
-export const Chaty: React.FC<{ lines: string }> = ({ lines }) => {
+export const Chaty: React.FC<{ lines: string; title?: string }> = ({
+  lines,
+  title,
+}) => {
   const messages = useMemo<TMessage[]>(() => parseMessages(lines), [lines]);
   const [show, setShow] = useState<TMessage[]>([]);
   const [typing, setTyping] = useState(false);
-  const [started, setStarted] = useState(true);
+  const [started, setStarted] = useState(false);
   const [finished, setFinished] = useState(false);
   const [inputMessage, setInputMessage] = useState<TMessage>();
-  const router = useRouter();
   let cancel = 0;
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
@@ -73,16 +74,22 @@ export const Chaty: React.FC<{ lines: string }> = ({ lines }) => {
     }
   }
 
-  useEffect(() => doChat(), []);
-
   if (!started) {
     return (
       <Card>
-        <Flex justifyContent="center" alignContent="center">
-          <Button my={3} onClick={() => doChat()}>
+        <Box textAlign="center">
+          <Button mt={4} onClick={() => doChat()} width="250px">
             Chat starten
           </Button>
-        </Flex>
+          <Text m={3} fontSize={1}>
+            <Link
+              onClick={() => doChat(messages.length - 1)}
+              variant="underline"
+            >
+              Den ganzen Chat anzeigen
+            </Link>
+          </Text>
+        </Box>
       </Card>
     );
   }
@@ -107,8 +114,13 @@ export const Chaty: React.FC<{ lines: string }> = ({ lines }) => {
         color="black"
         justifyContent="space-between"
       >
-        <Text>💬 CHATY</Text>
-        <A onClick={() => router.back()}>🆇</A>
+        <Text fontWeight="bold">{title}</Text>
+        <CircleBullet
+          onClick={() => setStarted(false)}
+          value="x"
+          bg="secondary"
+          color="white"
+        />
       </Flex>
       <MainContainer>
         <ChatContainer style={{ paddingTop: "1rem" }}>
@@ -121,11 +133,11 @@ export const Chaty: React.FC<{ lines: string }> = ({ lines }) => {
               />
             ) : null}
             {finished && (
-              <Button mt={3} width="100%" onClick={() => router.back()}>
+              <Button mt={3} width="100%" onClick={() => setStarted(false)}>
                 Fertig
               </Button>
             )}
-            <div ref={messagesEndRef} />
+            <div ref={messagesEndRef} style={{ marginTop: 40 }} />
           </MessageList>
           <div is="MessageInput" style={{ marginTop: "auto" }}>
             <ShowInput message={inputMessage} doChat={doChat} />
@@ -196,7 +208,7 @@ const Info: React.FC<{ model: TMessage }> = ({ model }) => (
 );
 
 const ParsedMessage: React.FC<{ model: TMessage }> = ({ model }) => {
-  if (model.type === "MENU" || model.type === "BUTTON") {
+  if (model.selected) {
     model.message = model.selected;
   }
   return <Message model={model} />;
