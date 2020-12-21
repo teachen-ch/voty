@@ -1,5 +1,7 @@
 import { Info } from "components/Learning";
 import { Uploaded, UploadArea } from "components/Uploader";
+import { ReadMore } from "components/ReadMore";
+import { RandomPosters } from "components/Posters";
 
 export const meta = {
   id: "plakat_gestalten",
@@ -27,6 +29,11 @@ Hast Du einen kurzen und einprägsamen Satz, der deine Meinung auf den Punkt bri
   Word oder im PowerPoint gestalten und danach als PDF abspeichern und hier
   hochladen (`Speichern unter...` `Dateiformat: PDF`)</p>
 </Info>
+
+<ReadMore title="Nochmals etwas Inspiration gefällig?">
+  <RandomPosters amount={3} />
+</ReadMore>
+<br />
 
 <UploadArea prompt="Plakat hochladen" card={meta.id} />
 

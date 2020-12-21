@@ -35,6 +35,12 @@ export const Posters: React.FC = () => {
   );
 };
 
+export const RandomPosters: React.FC<{ amount?: number }> = ({ amount }) => {
+  return (
+    <PosterList query={{ hasPosters: true, sort: "random", limit: amount }} />
+  );
+};
+
 export const PosterList: React.FC<{ query: VotesQuery }> = ({ query }) => {
   const swissvotesQuery = useSwissvotesQuery({
     variables: query,

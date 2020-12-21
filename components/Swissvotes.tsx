@@ -16,6 +16,7 @@ export const SEARCH_SWISSVOTES = gql`
     $hasPosters: Boolean
     $offset: Int
     $limit: Int
+    $sort: String
   ) {
     swissvotes(
       keywords: $keywords
@@ -24,6 +25,7 @@ export const SEARCH_SWISSVOTES = gql`
       hasPosters: $hasPosters
       offset: $offset
       limit: $limit
+      sort: $sort
     ) {
       anr
       datum
