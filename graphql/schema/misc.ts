@@ -126,6 +126,7 @@ export const Attachment = objectType({
     t.model.file();
     t.model.title();
     t.model.user();
+    t.model.type();
 
     t.model.createdAt();
     t.model.updatedAt();

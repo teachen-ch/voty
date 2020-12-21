@@ -3,8 +3,10 @@ import { promises as fs } from "fs";
 import { getSessionUser } from "graphql/resolvers/users";
 import { NextApiRequest, NextApiResponse } from "next";
 import logger from "util/logger";
+import path from "path";
 
 const prisma = new PrismaClient();
+const UPLOAD_FOLDER = process.env.UPLOAD_FOLDER || "uploads/";
 
 export default async (
   req: NextApiRequest,
@@ -30,7 +32,7 @@ export default async (
       return res.send({ error: "Error.NoPermission" });
 
     await prisma.attachment.delete({ where: { id } });
-    await fs.rm(attachment.file);
+    await fs.rm(path.join(UPLOAD_FOLDER, attachment.file));
     res.send({ success: true });
   } catch (err) {
     console.error(err);
