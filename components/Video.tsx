@@ -1,14 +1,14 @@
 import ReactPlayer from "react-player";
 
 type VideoProps = {
-  width: number;
-  height: number;
+  width: number | string;
+  height: number | string;
   url: string;
 };
 
 const Video: React.FC<VideoProps> = (props) => {
   const width = props.width || 300;
-  const height = (width / 640) * 360;
+  const height = props.height || 168;
 
   // is this an SRF Video?
   if (props.url.search(/srf\.ch/) >= 0) {
@@ -38,7 +38,7 @@ const Play: React.FC = () => (
 
 const SRFVideo: React.FC<VideoProps> = (props) => {
   const width = props.width || 300;
-  const height = (width / 560) * 315;
+  const height = props.height || 168;
   // We know the following URL patterns:
   // - https://srf.ch/play/tv/redirect/detail/<<<id>>>
   // - https://srf.ch/play/embed?urn=urn:srf:video:<<<id>>>

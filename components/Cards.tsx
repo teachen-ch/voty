@@ -178,7 +178,7 @@ export const CircleBullet: React.FC<{
     fontWeight="bold"
     fontSize={[2]}
     display="inline-block"
-    sx={{ borderRadius: 25 }}
+    sx={{ borderRadius: 25, cursor: onClick ? "pointer" : "inherit" }}
     color={color || "gray"}
     bg={bg || "white"}
     mr={2}

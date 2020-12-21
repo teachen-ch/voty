@@ -9,3 +9,4 @@ export * as chaty_demokratie_intro from "content/chaty/chaty_demokratie_intro.md
 export * as chaty_demokratie_griechenland from "content/chaty/chaty_demokratie_griechenland.mdx";
 export * as swissvotes from "content/swissvotes.mdx";
 export * as plakate from "content/plakate.mdx";
+export * as plakat_gestalten from "content/plakat_gestalten.mdx";

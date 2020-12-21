@@ -154,6 +154,9 @@ export default {
       img: {
         maxWidth: "100%",
       },
+      code: {
+        fontSize: "0.7em",
+      },
     },
   },
   text: {

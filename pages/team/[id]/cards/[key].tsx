@@ -17,7 +17,12 @@ export default function CardPage(): React.ReactElement {
   });
   const team = teamQuery.data?.team;
 
-  if (!key || teamQuery.loading) return <Loading />;
+  if (!key || teamQuery.loading)
+    return (
+      <Page>
+        <Loading />
+      </Page>
+    );
 
   const meta = getCardMeta(key);
   if (!meta) return <ErrorPage>Lerninhalt nicht gefunden: {key}</ErrorPage>;

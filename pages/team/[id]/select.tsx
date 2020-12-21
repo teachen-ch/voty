@@ -1,7 +1,7 @@
 import { LoggedInPage, Page } from "components/Page";
-import { Cards, CardList, getCardTitle } from "components/Cards";
+import { Cards, CardList } from "components/Cards";
 import { Input } from "@rebass/forms";
-import { Flex, Button, Text, Box, Heading } from "rebass";
+import { Flex, Button } from "rebass";
 import React, { useState } from "react";
 import { useRouter } from "next/router";
 import { useTeamTeacherQuery } from "graphql/types";
