@@ -20,7 +20,7 @@
     "migrate_prod": "ansible-playbook -i ansible/prod ansible/migrate.yml",
     "nexus:reflection": "npx ts-node -T ./graphql/schema/index.ts --nexus-exit",
     "init:db": "yarn run migrate",
-    "migrate": "npx prisma migrate dev --preview-feature",
+    "migrate": "npx prisma migrate dev --preview-feature && npx prisma generate",
     "dump_dev": "pg_dump --clean voty | ssh root@dev.voty.ch docker exec -i postgres psql -U voty voty",
     "ci:test": "yarn ci:release && yarn migrate && sh -c 'next dev &' && dotenv -- cypress run --record",
     "ci:release": "yarn install --frozen-lockfile && npx prisma generate && yarn run build",
