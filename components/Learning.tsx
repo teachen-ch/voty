@@ -34,7 +34,6 @@ export const Ref: React.FC<RefProps> = (props) => (
       <strong>Dauer:</strong> {props.duration}
       <br />
     </Show>
-    <hr />
     {props.children}
     {props.source && (
       <Box sx={{ textAlign: "right" }} fontSize={1}>

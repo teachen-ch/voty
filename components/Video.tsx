@@ -7,8 +7,8 @@ type VideoProps = {
 };
 
 const Video: React.FC<VideoProps> = (props) => {
-  const width = props.width || 300;
-  const height = props.height || 168;
+  const width = props.width || "100%";
+  const height = props.height || undefined;
 
   // is this an SRF Video?
   if (props.url.search(/srf\.ch/) >= 0) {
@@ -37,8 +37,8 @@ const Play: React.FC = () => (
 );
 
 const SRFVideo: React.FC<VideoProps> = (props) => {
-  const width = props.width || 300;
-  const height = props.height || 168;
+  const width = props.width || "100%";
+  const height = props.height || 416;
   // We know the following URL patterns:
   // - https://srf.ch/play/tv/redirect/detail/<<<id>>>
   // - https://srf.ch/play/embed?urn=urn:srf:video:<<<id>>>
