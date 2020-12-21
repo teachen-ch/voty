@@ -2119,6 +2119,7 @@ type Query {
     limit: Int
     offset: Int
     result: Int
+    sort: String
     type: Int
   ): [Swissvote]
   team(where: TeamWhereUniqueInput!): Team

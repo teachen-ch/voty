@@ -7075,6 +7075,7 @@ export interface NexusGenArgTypes {
       limit?: number | null; // Int
       offset?: number | null; // Int
       result?: number | null; // Int
+      sort?: string | null; // String
       type?: number | null; // Int
     };
     team: {

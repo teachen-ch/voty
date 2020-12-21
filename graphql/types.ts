@@ -736,6 +736,7 @@ export type AttachmentWhereInput = {
 };
 
 export type AttachmentWhereUniqueInput = {
+  file?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['String']>;
 };
 
@@ -2315,6 +2316,7 @@ export type QuerySwissvotesArgs = {
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
   result?: Maybe<Scalars['Int']>;
+  sort?: Maybe<Scalars['String']>;
   type?: Maybe<Scalars['Int']>;
 };
 
@@ -6528,6 +6530,7 @@ export type SwissvotesQueryVariables = Exact<{
   hasPosters?: Maybe<Scalars['Boolean']>;
   offset?: Maybe<Scalars['Int']>;
   limit?: Maybe<Scalars['Int']>;
+  sort?: Maybe<Scalars['String']>;
 }>;
 
 
@@ -7692,7 +7695,7 @@ export type CreateOneSchoolMutationHookResult = ReturnType<typeof useCreateOneSc
 export type CreateOneSchoolMutationResult = Apollo.MutationResult<CreateOneSchoolMutation>;
 export type CreateOneSchoolMutationOptions = Apollo.BaseMutationOptions<CreateOneSchoolMutation, CreateOneSchoolMutationVariables>;
 export const SwissvotesDocument = gql`
-    query swissvotes($keywords: String, $type: Int, $result: Int, $hasPosters: Boolean, $offset: Int, $limit: Int) {
+    query swissvotes($keywords: String, $type: Int, $result: Int, $hasPosters: Boolean, $offset: Int, $limit: Int, $sort: String) {
   swissvotes(
     keywords: $keywords
     type: $type
@@ -7700,6 +7703,7 @@ export const SwissvotesDocument = gql`
     hasPosters: $hasPosters
     offset: $offset
     limit: $limit
+    sort: $sort
   ) {
     anr
     datum
@@ -7736,6 +7740,7 @@ export const SwissvotesDocument = gql`
  *      hasPosters: // value for 'hasPosters'
  *      offset: // value for 'offset'
  *      limit: // value for 'limit'
+ *      sort: // value for 'sort'
  *   },
  * });
  */

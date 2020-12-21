@@ -53,6 +53,7 @@ export const SwissvotesQuery = extendType({
         hasPosters: booleanArg(),
         limit: intArg(),
         offset: intArg(),
+        sort: stringArg(),
       },
       resolve: (_root, args, ctx, info) =>
         resolvers.swissvotes.getSwissvotes(_root, args, ctx, info),
