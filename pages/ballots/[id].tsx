@@ -17,8 +17,8 @@ export default function BallotPage(): ReactElement {
   const [success, setSuccess] = useState(false);
   const router = useRouter();
   const user = useUser();
-  const id = String(router.query.id);
-  const ballotQuery = useBallotQuery({ variables: { where: { id } } });
+  const teamId = String(router.query.team);
+  const ballotQuery = useBallotQuery({ variables: { where: { id: teamId } } });
 
   if (ballotQuery.loading)
     return <AppPage heading="Abstimmungsseite"></AppPage>;
@@ -74,7 +74,7 @@ export default function BallotPage(): ReactElement {
         <VotyNow ballot={ballot} onSuccess={() => setSuccess(true)} />
       </BallotDetails>
 
-      <Discussion refid={ballot.id} />
+      <Discussion id={ballot.id} />
     </LoggedInPage>
   );
 }

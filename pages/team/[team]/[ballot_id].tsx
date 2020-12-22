@@ -1,11 +1,7 @@
 import { LoggedInPage, AppPage, ErrorPage } from "components/Page";
 import { Text, Box } from "rebass";
 import { useRouter } from "next/router";
-import {
-  useBallotQuery,
-  useTeamTeacherQuery,
-  useGetBallotResultsQuery,
-} from "graphql/types";
+import { useBallotQuery, useGetBallotResultsQuery } from "graphql/types";
 import { BallotResults } from "components/BallotResults";
 import { BallotDetails } from "components/Ballots";
 import { usePageEvent } from "util/stats";
@@ -13,30 +9,26 @@ import { Breadcrumb, A } from "components/Breadcrumb";
 import { usePolling } from "util/hooks";
 import { Discussion } from "components/Discussion";
 import { HideFeature } from "components/HideFeature";
+import { useTeam } from "state/user";
 
 export default function TeacherBallotPage(): React.ReactElement {
   usePageEvent({ category: "Teacher", action: "BallotDetails" });
   const router = useRouter();
   const ballotId = String(router.query.ballot_id);
-  const teamId = String(router.query.id);
+  const team = useTeam();
   const ballotQuery = useBallotQuery({
     variables: { where: { id: ballotId } },
     skip: !ballotId,
   });
   const ballot = ballotQuery.data?.ballot;
   const resultsQuery = useGetBallotResultsQuery({
-    variables: { ballotId, teamId },
-    skip: !(ballotId && teamId),
+    variables: { ballotId, teamId: team?.id },
+    skip: !(ballotId && team?.id),
   });
   const results = resultsQuery.data?.getBallotResults;
   usePolling(resultsQuery);
-  const teamQuery = useTeamTeacherQuery({
-    variables: { where: { id: teamId } },
-    skip: !teamId,
-  });
-  const team = teamQuery.data?.team;
 
-  if (ballotQuery.loading || teamQuery.loading || !team)
+  if (ballotQuery.loading || !team)
     return <AppPage heading="Abstimmungsseite"></AppPage>;
   if (ballotQuery.error)
     return <ErrorPage>{ballotQuery.error.message}</ErrorPage>;
@@ -69,7 +61,7 @@ export default function TeacherBallotPage(): React.ReactElement {
       )}
       <BallotDetails ballot={ballot} />
       <HideFeature id="discussion">
-        <Discussion refid={ballot.id} teamId={team.id} />
+        <Discussion id={ballot.id} />
       </HideFeature>
     </LoggedInPage>
   );

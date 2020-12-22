@@ -1,7 +1,7 @@
 import { Page, Loading, ErrorPage } from "components/Page";
 import { Card, getCardMeta } from "components/Cards";
 import { useRouter } from "next/router";
-import { Box, Text } from "rebass";
+import { Text } from "rebass";
 import { useUser } from "state/user";
 import { A, Breadcrumb } from "components/Breadcrumb";
 import { Role, useTeamUserQuery } from "graphql/types";
@@ -10,8 +10,8 @@ import { Discussion } from "components/Discussion";
 export default function CardPage(): React.ReactElement {
   const router = useRouter();
   const user = useUser();
-  const key = String(router.query.key);
-  const id = String(router.query.id);
+  const key = String(router.query.card);
+  const id = String(router.query.team);
   const teamQuery = useTeamUserQuery({
     variables: { where: { id } },
     skip: !id,
@@ -56,7 +56,7 @@ export default function CardPage(): React.ReactElement {
 
         <Card id={key} />
 
-        <Discussion refid={key} teamId={id} />
+        {meta.discussion !== false && <Discussion id={key} />}
       </Text>
     </Page>
   );

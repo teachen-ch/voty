@@ -11,7 +11,7 @@ import { Filter } from "components/Swissvotes";
 
 export default function CardsPage(): React.ReactElement {
   const router = useRouter();
-  const id = String(router.query.id);
+  const id = String(router.query.team);
   const teamQuery = useTeamTeacherQuery({
     variables: { where: { id } },
     skip: !id,
