@@ -1,5 +1,5 @@
 import { gql } from "@apollo/client";
-import { SessionUser, useUser } from "state/user";
+import { useTeam } from "state/user";
 import { Box, Text, Heading, Button } from "rebass";
 import {
   ThreadFieldsFragment,
@@ -48,24 +48,31 @@ export const POST_THREAD = gql`
   ${fragments.ThreadFields}
 `;
 
-export const Discussion: React.FC<{ refid: string; teamId?: string }> = ({
-  refid,
-  teamId,
-}) => {
-  const user = useUser();
-  const threadsQuery = useGetTeamThreadsQuery({
-    variables: { ref: refid, teamId },
-  });
-  const threads = threadsQuery.data?.getTeamThreads;
-
+export const Discussion: React.FC<{
+  id: string;
+  title?: string;
+}> = ({ id, title = "Diskussion" }) => {
   return (
     <Box className="discussion">
-      <Heading>Diskussion</Heading>
+      {title && <Heading>{title}</Heading>}
+      <Threads id={id} />
+      <PostThread id={id} />
+    </Box>
+  );
+};
+
+const Threads: React.FC<{ id: string }> = ({ id }) => {
+  const team = useTeam();
+  const threadsQuery = useGetTeamThreadsQuery({
+    variables: { ref: id, teamId: team?.id },
+  });
+  const threads = threadsQuery.data?.getTeamThreads;
+  return (
+    <>
       {threads?.map(
         (thread) => thread && <ThreadDetail key={thread.id} thread={thread} />
       )}
-      <PostThread refid={refid} user={user} teamId={teamId} />
-    </Box>
+    </>
   );
 };
 
@@ -82,11 +89,10 @@ const ThreadDetail: React.FC<{ thread: ThreadFieldsFragment }> = ({
 };
 
 const PostThread: React.FC<{
-  user: SessionUser;
-  refid: string;
-  teamId?: string;
+  id: string;
 }> = (props) => {
   const [success, setSuccess] = useState(false);
+  const team = useTeam();
   const [error, setError] = useState("");
   const [doPost] = usePostThreadMutation({
     onCompleted() {
@@ -113,9 +119,10 @@ const PostThread: React.FC<{
   });
 
   async function onSubmit(values: Record<string, any>) {
+    if (!team?.id) return alert("Kein Team");
     const variables = {
-      ref: props.refid,
-      teamId: props.teamId || String(props.user?.team?.id),
+      ref: props.id,
+      teamId: team?.id,
       title: "",
       text: String(values.text),
     };
