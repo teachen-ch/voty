@@ -1,16 +1,22 @@
 import { atom, useRecoilValue, useSetRecoilState } from "recoil";
-import { LoginFieldsFragment } from "graphql/types";
+import {
+  LoginFieldsFragment,
+  TeamUserFieldsFragment,
+  useTeamUserQuery,
+} from "graphql/types";
 import { trackVisit } from "util/stats";
+import { useRouter } from "next/router";
 
 export type SessionUser = LoginFieldsFragment | undefined | null;
+export type SessionTeam = TeamUserFieldsFragment | undefined | null;
 
-export const accessTokenState = atom({
+const accessTokenState = atom({
   key: "accessTokenState",
   default: "",
 });
 
-export const userState = atom({
-  key: "userState",
+const userState = atom({
+  key: "user",
   default: undefined as SessionUser | undefined,
 });
 
@@ -30,11 +36,11 @@ export function useSetAccessToken(): (token: string) => void {
   };
 }
 
-export function useUser(): SessionUser | undefined {
+export function useUser(): SessionUser {
   return useRecoilValue(userState);
 }
 
-export function useSetUser(): (user: SessionUser | undefined) => void {
+export function useSetUser(): (user: SessionUser) => void {
   const setState = useSetRecoilState(userState);
   return (user: SessionUser | undefined) => {
     setState(user);
@@ -42,4 +48,12 @@ export function useSetUser(): (user: SessionUser | undefined) => void {
       trackVisit(user);
     }
   };
+}
+
+export function useTeam(): SessionTeam {
+  const router = useRouter();
+  const user = useUser();
+  const id = user?.team?.id || String(router.query.team);
+  const teamQuery = useTeamUserQuery({ variables: { where: { id } } });
+  return teamQuery.data?.team;
 }

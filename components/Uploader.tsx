@@ -28,7 +28,7 @@ export const UploadArea: React.FC<{
   const [error, setError] = useState("");
   const router = useRouter();
   // TODO: this relies on Uploader being called from /pages/team/[id]/...
-  const team = String(router.query.id);
+  const team = String(router.query.team);
   const fields: Record<string, string> = { team };
   if (card) fields.card = card;
   if (thread) fields.thread = thread;
