@@ -1566,6 +1566,7 @@ type Card {
   age: String
   content: String
   description: String
+  discussion: Boolean
   duration: String
   id: String
   keywords: String

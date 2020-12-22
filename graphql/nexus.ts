@@ -6346,6 +6346,7 @@ export interface NexusGenObjects {
     age?: string | null; // String
     content?: string | null; // String
     description?: string | null; // String
+    discussion?: boolean | null; // Boolean
     duration?: string | null; // String
     id?: string | null; // String
     keywords?: string | null; // String
@@ -6503,6 +6504,7 @@ export interface NexusGenFieldTypes {
     age: string | null; // String
     content: string | null; // String
     description: string | null; // String
+    discussion: boolean | null; // Boolean
     duration: string | null; // String
     id: string | null; // String
     keywords: string | null; // String
@@ -6717,6 +6719,7 @@ export interface NexusGenFieldTypeNames {
     age: "String";
     content: "String";
     description: "String";
+    discussion: "Boolean";
     duration: "String";
     id: "String";
     keywords: "String";

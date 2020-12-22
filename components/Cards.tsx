@@ -26,6 +26,7 @@ export const GET_CARDS = gql`
       source
       content
       age
+      discussion
     }
   }
 `;
