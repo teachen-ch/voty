@@ -38,7 +38,9 @@ export const A: React.FC<AProps> = (props) => {
         as={props.as}
         sx={{ fontWeight: props.fontWeight }}
       >
-        <RebassLink variant={variant}>{props.children}</RebassLink>
+        <RebassLink variant={variant} fontSize={props.fontSize}>
+          {props.children}
+        </RebassLink>
       </Link>
     );
   } else {
@@ -46,6 +48,7 @@ export const A: React.FC<AProps> = (props) => {
       <RebassLink
         onClick={props.onClick}
         variant={variant}
+        fontSize={props.fontSize}
         sx={{ fontWeight: props.fontWeight }}
       >
         {props.children}

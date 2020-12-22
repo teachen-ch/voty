@@ -192,6 +192,7 @@ interface CardAdminProps {
   item: CardAdminType;
   itemSelected: number;
   dragHandleProps: Record<string, any>;
+  commonProps: (id: string) => void;
 }
 
 export const CardListAdmin: React.FC<{
@@ -206,8 +207,16 @@ export const CardListAdmin: React.FC<{
 
   useEffect(() => generateList(teamCards), [teamCards]);
 
+  function doDelete(id: string) {
+    const oldCards = cards.map((item) => item.id);
+    const newCards = without(oldCards, id);
+    const str = newCards.join(" ");
+    void doSetCards({ variables: { cards: str, teamId } });
+    generateList(str);
+  }
+
   function generateList(str: string) {
-    const c = str.split(" ").map((id, ix) => {
+    const cards = str.split(" ").map((id, ix) => {
       return {
         id,
         ix: ix + 1,
@@ -215,8 +224,9 @@ export const CardListAdmin: React.FC<{
         link: `/team/${teamId}/cards/${id}`,
       };
     });
-    setCards(c);
+    setCards(cards);
   }
+
   function onMoveEnd(newList: readonly CardAdminType[]) {
     const cards = newList.map((item) => item.id).join(" ");
     void doSetCards({ variables: { cards, teamId } });
@@ -224,12 +234,13 @@ export const CardListAdmin: React.FC<{
   }
 
   return (
-    <DraggableList<CardAdminType, null, CardAdminItem>
+    <DraggableList<CardAdminType, (id: string) => void, CardAdminItem>
       list={cards}
       itemKey="id"
       padding={0}
       onMoveEnd={onMoveEnd}
       template={CardAdminItem}
+      commonProps={doDelete}
     />
   );
 };
@@ -238,6 +249,7 @@ class CardAdminItem extends React.Component<CardAdminProps> {
   state = {
     over: false,
   };
+
   render() {
     const { item, dragHandleProps, itemSelected } = this.props;
     return (
@@ -253,7 +265,17 @@ class CardAdminItem extends React.Component<CardAdminProps> {
           />
         </Box>
         <Text>
-          <A href={item.link}>{item.title}</A>
+          <A href={item.link}>{item.title}</A>{" "}
+          <Text
+            display="inline"
+            onClick={() => this.props.commonProps(item.id)}
+            fontSize={1}
+            color="lightgray"
+            ml={2}
+            sx={{ cursor: "pointer" }}
+          >
+            [x]
+          </Text>
         </Text>
       </Flex>
     );
