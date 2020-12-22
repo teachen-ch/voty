@@ -14,6 +14,7 @@ import {
   InputProps as RebassInputProps,
   SelectProps as RebassSelectProps,
   Radio as RebassRadio,
+  Textarea,
 } from "@rebass/forms";
 import * as yup from "yup";
 import React, { useMemo } from "react";
@@ -23,17 +24,19 @@ import { tr } from "util/translate";
 
 export { Formik, Form, yup, Grid };
 
-type InputProps = RebassInputProps & {
-  label: string;
-  setter?: (s: string) => void;
-};
-
-export const Input: React.FC<InputProps> = ({ label, setter, ...props }) => {
+export const Input: React.FC<
+  RebassInputProps & {
+    label: string;
+    area?: boolean;
+    setter?: (s: string) => void;
+  }
+> = ({ label, setter, area, ...props }) => {
   const [field, meta] = useField<string>(props as any);
+  const InputComponent = area ? Textarea : RebassInput;
   // TODO: this is a really hacky way to get values out of the form again
   // e.g. on login.tsx email field
   const onChange = setter
-    ? (evt: React.ChangeEvent<HTMLInputElement>) => {
+    ? (evt: React.ChangeEvent<any>) => {
         setter(evt.target.value);
         field.onChange(evt);
       }
@@ -48,11 +51,12 @@ export const Input: React.FC<InputProps> = ({ label, setter, ...props }) => {
       >
         {label}:
       </RebassLabel>
-      {/* @ts-ignore */}
-      <RebassInput
+      <InputComponent
         key={"i" + label}
         id={props.id || props.name}
+        /* @ts-ignore */
         onChange={onChange}
+        /* @ts-ignore */
         onBlur={field.onBlur}
         value={field.value}
         {...props}
@@ -175,6 +179,18 @@ export const QForm: React.FC<QFormProps> = ({ fields, mutation, ...props }) => {
             </option>
           ))}
         </Select>
+      );
+    }
+    if (field.type === "textarea") {
+      return (
+        <Input
+          area={true}
+          key={field.name}
+          label={field.label || field.name || ""}
+          name={field.name}
+          setter={field.setter}
+          placeholder={field.placeholder}
+        />
       );
     } else {
       return (

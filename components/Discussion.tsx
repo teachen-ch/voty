@@ -60,7 +60,7 @@ export const Discussion: React.FC<{ refid: string; teamId?: string }> = ({
 
   return (
     <Box className="discussion">
-      <Heading mt={0}>Diskussion</Heading>
+      <Heading>Diskussion</Heading>
       {threads?.map(
         (thread) => thread && <ThreadDetail key={thread.id} thread={thread} />
       )}
@@ -135,7 +135,7 @@ const PostThread: React.FC<{
     <div id="postThread">
       <QForm
         fields={{
-          text: { label: "Kommentar", required: true },
+          text: { label: "Kommentar", type: "textarea", required: true },
           submit: { type: "submit", label: "Abschicken" },
         }}
         mutation={doPost}

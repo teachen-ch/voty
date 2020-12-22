@@ -1,7 +1,7 @@
 import { LoggedInPage, Page } from "components/Page";
 import { Cards, CardListAdmin } from "components/Cards";
 import { Input } from "@rebass/forms";
-import { Flex, Button, Text } from "rebass";
+import { Flex, Button, Text, Heading } from "rebass";
 import React, { useState } from "react";
 import { useRouter } from "next/router";
 import { useTeamTeacherQuery } from "graphql/types";
@@ -33,7 +33,8 @@ export default function CardsPage(): React.ReactElement {
   if (!team) {
     return (
       <LoggedInPage heading="Detailansicht Klasse">
-        Team konnte nicht gefunden werden
+        <Text mb={3}>Klasse wurde nicht gefunden.</Text>
+        <Button onClick={() => router.push("/teacher/")}>Meine Klassen</Button>
       </LoggedInPage>
     );
   }
@@ -51,7 +52,7 @@ export default function CardsPage(): React.ReactElement {
         <b>Lerninhalte</b>
       </Breadcrumb>
 
-      <b>Folgende Lerninhalte sind ausgewählt</b>
+      <Heading>Folgende Lerninhalte sind ausgewählt</Heading>
 
       <CardListAdmin teamCards={team.cards} teamId={team.id} />
 

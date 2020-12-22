@@ -9,7 +9,7 @@ export default function TeacherTest(): ReactElement {
   const router = useRouter();
 
   function selectBallot(ballot: BallotFieldsFragment) {
-    void router.push("/ballots/[id]", `/ballots/${ballot.id}`);
+    void router.push(`/ballots/${ballot.id}`);
   }
 
   return (

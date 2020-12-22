@@ -47,13 +47,14 @@ export default function TeacherTest(): ReactElement {
   if (!team) {
     return (
       <LoggedInPage heading="Demokratie testen">
-        Team konnte nicht gefunden werden
+        <Text mb={3}>Klasse wurde nicht gefunden.</Text>
+        <Button onClick={() => router.push("/teacher/")}>Meine Klassen</Button>
       </LoggedInPage>
     );
   }
 
   function detailBallot(ballot: BallotFieldsFragment) {
-    void router.push("/ballots/[id]", `/ballots/${ballot.id}`);
+    void router.push(`/ballots/${ballot.id}`);
   }
 
   async function addBallot(ballotId: string, teamId: string) {

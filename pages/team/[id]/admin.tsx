@@ -99,7 +99,8 @@ export default function TeacherTeamPage(): React.ReactElement {
   if (!team) {
     return (
       <LoggedInPage heading="Detailansicht Klasse">
-        Team konnte nicht gefunden werden
+        <Text mb={3}>Klasse wurde nicht gefunden.</Text>
+        <Button onClick={() => router.push("/teacher/")}>Meine Klassen</Button>
       </LoggedInPage>
     );
   }

@@ -14,12 +14,11 @@ import {
 import { parseMarkdownInner } from "util/markdown";
 import { VotyNow, VotySuccess } from "pages/ballots/[id]";
 import { HideFeature } from "components/HideFeature";
-import { teams } from "graphql/resolvers";
 
 export default function StudentTest(): React.ReactElement {
   const user = useUser();
 
-  if (!user) {
+  if (!user || !user.team) {
     return <LoggedInPage heading="Meine Klasse" />;
   }
 
@@ -32,7 +31,7 @@ export default function StudentTest(): React.ReactElement {
 
       <HideFeature id="cards">
         <Heading>Lerninhalte</Heading>
-        <CardList teamCards={String(user.team?.cards)} teamId={user.team!.id} />
+        <CardList teamCards={String(user.team?.cards)} teamId={user.team.id} />
       </HideFeature>
 
       <Heading>Abstimmungen</Heading>

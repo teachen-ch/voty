@@ -267,7 +267,20 @@ export default {
   },
   label: { textAlign: "left" },
   textarea: {
+    bg: "white",
     color: "gray",
+    border: "none",
+    outline: "none",
+    fontSize: [1, 1, 2],
+    mt: [0, 0, 1],
+    mb: [3, 2, 1],
+    "::-webkit-input-placeholder": {
+      color: "#CCC",
+      opacity: 1,
+    },
+    ":focus": {
+      outline: "none",
+    },
   },
   input: {
     fontFamily: "body",

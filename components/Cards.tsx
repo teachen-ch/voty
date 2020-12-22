@@ -106,6 +106,7 @@ export const CardBox: React.FC<{
       ? without(cardsList, id).join(" ")
       : cardsList.concat(id).join(" ");
     await doSetCards({ variables: { cards, teamId } });
+    window.scrollBy(0, selected ? -53 : 53);
   }
   return (
     <Box
@@ -115,7 +116,7 @@ export const CardBox: React.FC<{
       color="black"
       p={3}
       mb={3}
-      onClick={() => router.push(`cards/${card.id}`)}
+      onClick={() => router.push(`/team/${teamId}/cards/${card.id}`)}
       sx={{ cursor: "pointer" }}
     >
       <Flex
@@ -215,9 +216,9 @@ export const CardListAdmin: React.FC<{
     });
     setCards(c);
   }
-  async function onMoveEnd(newList: readonly CardAdminType[]) {
+  function onMoveEnd(newList: readonly CardAdminType[]) {
     const cards = newList.map((item) => item.id).join(" ");
-    await doSetCards({ variables: { cards, teamId } });
+    void doSetCards({ variables: { cards, teamId } });
     generateList(cards);
   }
 

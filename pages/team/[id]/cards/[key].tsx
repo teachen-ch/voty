@@ -1,10 +1,11 @@
 import { Page, Loading, ErrorPage } from "components/Page";
 import { Card, getCardMeta } from "components/Cards";
 import { useRouter } from "next/router";
-import { Text } from "rebass";
+import { Box, Text } from "rebass";
 import { useUser } from "state/user";
 import { A, Breadcrumb } from "components/Breadcrumb";
 import { Role, useTeamUserQuery } from "graphql/types";
+import { Discussion } from "components/Discussion";
 
 export default function CardPage(): React.ReactElement {
   const router = useRouter();
@@ -54,6 +55,8 @@ export default function CardPage(): React.ReactElement {
         </Breadcrumb>
 
         <Card id={key} />
+
+        <Discussion refid={key} teamId={id} />
       </Text>
     </Page>
   );
