@@ -1,7 +1,15 @@
 import Info from "components/Info";
 import Link from "next/link";
 import Video from "components/Video";
-import { Box, Heading, Flex, Button } from "rebass";
+import {
+  Box,
+  Text,
+  Heading,
+  Flex,
+  Button,
+  Image as RImage,
+  ImageProps,
+} from "rebass";
 import { useState } from "react";
 import { MDXProvider } from "@mdx-js/react";
 
@@ -93,3 +101,15 @@ export const Include: React.FC<{ toggle: boolean }> = (props) => {
     </Wrapper>
   );
 };
+
+export const Image: React.FC<ImageProps & { desc: string }> = (props) => (
+  <Box>
+    {/* @ts-ignore */}
+    <RImage {...props} alt={props.alt || props.desc} />
+    {props.desc && (
+      <Text fontSize={1} width="100%" textAlign="right">
+        {props.desc}
+      </Text>
+    )}
+  </Box>
+);
