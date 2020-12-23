@@ -4,13 +4,13 @@ import { Box, Link, Text, Flex, Button, Image } from "rebass";
 import { ErrorPage, Loading } from "./Page";
 import { useState } from "react";
 import { formatYear } from "util/date";
-import { debounce } from "lodash";
+import { debounce, random } from "lodash";
 import { VotesQuery } from "./Swissvotes";
 
 export const Posters: React.FC = () => {
   const [keywords, setKeywords] = useState("");
   const [offset, setOffset] = useState(0);
-  const limit = 10;
+  const limit = 20;
   return (
     <>
       <Flex mt={4}>
@@ -35,7 +35,9 @@ export const Posters: React.FC = () => {
   );
 };
 
-export const RandomPosters: React.FC<{ amount?: number }> = ({ amount }) => {
+export const RandomPosters: React.FC<{ amount?: number }> = ({
+  amount = 10,
+}) => {
   return (
     <PosterList query={{ hasPosters: true, sort: "random", limit: amount }} />
   );
@@ -58,11 +60,15 @@ export const PosterList: React.FC<{ query: VotesQuery }> = ({ query }) => {
     <>
       <Box sx={{ columnCount: 3, columnGap: "8px" }} mt={3}>
         {swissvotes?.map((vote) => {
-          let posters: string[] = [];
-          if (vote && vote.poster_ja)
-            posters = posters.concat(vote.poster_ja.split(" "));
-          if (vote && vote.poster_nein)
-            posters = posters.concat(vote.poster_nein.split(" "));
+          const posters: string[] = [];
+          if (vote && vote.poster_ja) {
+            const ja = vote.poster_ja.split(" ");
+            posters.push(ja[random(0, ja.length - 1)]);
+          }
+          if (vote && vote.poster_nein) {
+            const nein = vote.poster_nein.split(" ");
+            posters.push(nein[random(0, nein.length - 1)]);
+          }
           if (vote && posters.length > 0) {
             return posters.map((p) => <Poster key={p} vote={vote} image={p} />);
           } else return null;
