@@ -25,7 +25,7 @@ export const Chaty: React.FC<{ lines: string; title?: string }> = ({
   const [started, setStarted] = useState(false);
   const [finished, setFinished] = useState(false);
   const [inputMessage, setInputMessage] = useState<TMessage>();
-  let cancel = 0;
+  const [cancel, setCancel] = useState(0);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -34,7 +34,7 @@ export const Chaty: React.FC<{ lines: string; title?: string }> = ({
 
   // scroll to bottom on every new message
   useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    if (started) messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [show]);
 
   function doChat(line = 0, input?: string) {
@@ -63,10 +63,10 @@ export const Chaty: React.FC<{ lines: string; title?: string }> = ({
     if (line + 1 < messages.length) {
       if (messages[line + 1].direction !== Direction.Outgoing) {
         setTyping(true);
-        cancel = setTimeout(() => doChat(line + 1), wait);
+        setCancel(setTimeout(() => doChat(line + 1), wait));
       } else {
         setTyping(false);
-        setTimeout(() => setInputMessage(messages[line + 1]), 1000);
+        setCancel(setTimeout(() => setInputMessage(messages[line + 1]), 1000));
       }
     } else {
       setTyping(false);
@@ -94,6 +94,15 @@ export const Chaty: React.FC<{ lines: string; title?: string }> = ({
     );
   }
 
+  function resetChat() {
+    clearTimeout(cancel);
+    setStarted(false);
+    setFinished(false);
+    setTyping(false);
+    setInputMessage(undefined);
+    setShow([]);
+  }
+
   return (
     <Flex
       textAlign="left"
@@ -116,7 +125,7 @@ export const Chaty: React.FC<{ lines: string; title?: string }> = ({
       >
         <Text fontWeight="bold">{title}</Text>
         <CircleBullet
-          onClick={() => setStarted(false)}
+          onClick={() => resetChat()}
           value="x"
           bg="secondary"
           color="white"
@@ -132,16 +141,23 @@ export const Chaty: React.FC<{ lines: string; title?: string }> = ({
                 is="MessageSeparator"
               />
             ) : null}
-            {finished && (
-              <Button mt={3} width="100%" onClick={() => setStarted(false)}>
-                Fertig
-              </Button>
+            {finished ? (
+              <div is="MessageSeparator">
+                <Button mt={3} width="100%" onClick={() => resetChat()}>
+                  Fertig
+                </Button>
+              </div>
+            ) : (
+              <div
+                ref={messagesEndRef}
+                is="MessageSeparator"
+                style={{ height: 50, marginTop: 100 }}
+              />
             )}
-            <div ref={messagesEndRef} style={{ marginTop: 40 }} />
           </MessageList>
-          <div is="MessageInput" style={{ marginTop: "auto" }}>
+          <Box is="MessageInput">
             <ShowInput message={inputMessage} doChat={doChat} />
-          </div>
+          </Box>
         </ChatContainer>
       </MainContainer>
     </Flex>
