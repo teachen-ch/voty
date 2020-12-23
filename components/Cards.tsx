@@ -117,7 +117,7 @@ export const CardBox: React.FC<{
       color="black"
       p={3}
       mb={3}
-      onClick={() => router.push(`/team/${teamId}/cards/${card.id}`)}
+      onClick={() => router.push(`/team/${teamId}/cards/${id}`)}
       sx={{ cursor: "pointer" }}
     >
       <Flex

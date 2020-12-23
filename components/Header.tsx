@@ -1,7 +1,11 @@
 import Head from "next/head";
 import { ReactElement } from "react";
+import { Router } from "next/router";
 
 export function Header(): ReactElement {
+  Router.events.on("routeChangeComplete", () => {
+    window.scrollTo(0, 0);
+  });
   return (
     <Head>
       <link
