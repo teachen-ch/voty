@@ -56,6 +56,11 @@ export const Swissvotes: React.FC = () => {
     setOffset(0);
   }, [type, result, keywords]);
 
+  function resetFilters() {
+    setType(undefined);
+    setResult(undefined);
+  }
+
   return (
     <Box>
       <Flex mt={4}>
@@ -75,7 +80,10 @@ export const Swissvotes: React.FC = () => {
         <Filter set={setResult} v={result} val={0} label="abgelehnt" sep />
         <Filter set={setResult} v={result} val={1} label="angenommen" />
       </Text>
-      <VotesList query={{ keywords, type, result, offset, limit }} />
+      <VotesList
+        query={{ keywords, type, result, offset, limit }}
+        resetFilters={resetFilters}
+      />
       <Flex justifyContent="space-between" mt={3}>
         <Link onClick={() => setOffset(offset - limit)} fontSize={1}>
           {offset >= limit ? "Neuere Abstimmungen anzeigen …" : ""}
@@ -116,7 +124,10 @@ export type VotesQuery = {
   hasPosters?: boolean;
 };
 
-export const VotesList: React.FC<{ query: VotesQuery }> = ({ query }) => {
+export const VotesList: React.FC<{
+  query: VotesQuery;
+  resetFilters: () => void;
+}> = ({ query, resetFilters }) => {
   const swissvotesQuery = useSwissvotesQuery({
     variables: query,
   });
@@ -127,7 +138,12 @@ export const VotesList: React.FC<{ query: VotesQuery }> = ({ query }) => {
     return <ErrorPage>{swissvotesQuery.error.message}</ErrorPage>;
 
   if (!swissvotes || swissvotes.length === 0)
-    return <Box my={4}>Nichts gefunden…</Box>;
+    return (
+      <Box my={4}>
+        <Text mb={2}>Nichts gefunden…</Text>
+        <Button onClick={resetFilters}>Filter löschen</Button>
+      </Box>
+    );
 
   return (
     <table style={{ borderTop: "2px solid white" }}>
