@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
 import { Box, Flex, Text } from "rebass";
-import { isEqual, cloneDeep } from "lodash";
+import { isEqual, cloneDeep, random, remove } from "lodash";
 import { isBrowser } from "util/isBrowser";
 
 type Point = {
@@ -22,6 +22,7 @@ enum State {
   "Normal",
   "Hover",
   "Highlighted",
+  "Start",
   "Solved",
   "Error",
 }
@@ -33,12 +34,29 @@ export const Wordsearch: React.FC<{ letters: string; solution: string }> = ({
   solution,
 }) => {
   const board = useMemo<Board>(() => parseBoard(letters), [letters]);
-  const empty = useMemo<Pixels>(() => emptyPixels(board), [board]);
-  const words = useMemo<Word[]>(() => parseSolution(solution, board), [
+  const solutions = useMemo<Word[]>(() => parseSolution(solution, board), [
     solution,
     board,
   ]);
+  return <Puzzle board={board} solutions={solutions} />;
+};
+export const WordsearchGen: React.FC<{
+  words: string[];
+  rows: number;
+  cols: number;
+}> = ({ words, rows = 8, cols = 10 }) => {
+  const { board, solutions } = useMemo(
+    () => generatePuzzle(rows, cols, words),
+    [words, rows, cols]
+  );
+  return <Puzzle board={board} solutions={solutions} />;
+};
 
+const Puzzle: React.FC<{ board: Board; solutions: Word[] }> = ({
+  board,
+  solutions,
+}) => {
+  const empty = useMemo<Pixels>(() => emptyPixels(board), [board]);
   const [start, setStart] = useState<Point | undefined>();
   const [hover, setHover] = useState<Point | undefined>();
   const [hoverPixels, setHoverPixels] = useState<Pixels>(empty);
@@ -118,7 +136,7 @@ export const Wordsearch: React.FC<{ letters: string; solution: string }> = ({
 
   function isMatch(p: Point): boolean {
     if (isEqual(start, p)) return false;
-    const startsWith = words.filter(
+    const startsWith = solutions.filter(
       (word) => isEqual(word.from, start) || isEqual(word.to, start)
     );
     const matches = startsWith.filter(
@@ -132,6 +150,7 @@ export const Wordsearch: React.FC<{ letters: string; solution: string }> = ({
     let state = State.Normal;
 
     if (isError(p)) state = State.Error;
+    else if (start && isEqual(start, p)) state = State.Start;
     else if (start && isSolved(p)) state = State.Solved;
     else if (isEqual(p, hover)) state = State.Hover;
     else if (isHighlighted(p)) state = State.Highlighted;
@@ -149,6 +168,7 @@ export const Wordsearch: React.FC<{ letters: string; solution: string }> = ({
             <Box
               key={x}
               onMouseOver={() => doHover({ x, y })}
+              onMouseOut={() => setHover(undefined)}
               onMouseDown={(e) => doClick(e, { x, y })}
               onMouseUp={(e) => doClick(e, { x, y })}
             >
@@ -157,7 +177,7 @@ export const Wordsearch: React.FC<{ letters: string; solution: string }> = ({
           ))}
         </Flex>
       ))}
-      <Score words={words} />
+      <Score words={solutions} />
     </Flex>
   );
 };
@@ -170,6 +190,11 @@ const Letterbox: React.FC<{ letter: string; state: State }> = ({
   let bg = "inherit";
   let color = "inherit";
   switch (state) {
+    case State.Start:
+      border = "3px solid yellow";
+      bg = "lightgray";
+      color = "black";
+      break;
     case State.Hover:
       border = "3px solid lightgray";
       bg = "lightgray";
@@ -201,7 +226,7 @@ const Letterbox: React.FC<{ letter: string; state: State }> = ({
   );
 };
 
-const Score: React.FC<{ words: Word[]; last?: Word }> = ({ words, last }) => {
+const Score: React.FC<{ words: Word[]; last?: Word }> = ({ words }) => {
   const total = words.length;
   const solved = words.filter((word) => word.solved).length;
   if (total === solved) {
@@ -253,6 +278,103 @@ function parsePoint(point: string): Point {
   const x = parseInt(strings[0]) - 1;
   const y = parseInt(strings[1]) - 1;
   return { x, y };
+}
+
+function generatePuzzle(
+  rows: number,
+  cols: number,
+  words: string[]
+): { board: Board; solutions: Word[] } {
+  words.sort((a, b) => b.length - a.length);
+  const board: Board = new Array(rows)
+    .fill(0)
+    .map(() => new Array<string>(cols).fill("-"));
+  let solutions = words.map((word) => {
+    for (let tries = 0; tries < 30; ++tries) {
+      const [x, y] = [random(0, cols - 1), random(0, rows - 1)];
+      const possible = findDirections(word, rows, cols, { x, y }, board);
+      if (possible.length === 0) continue;
+      const from = { x, y };
+      const to = possible[random(0, possible.length - 1)];
+      fillWord(word, from, to, board);
+      return { from, to, word, solved: false };
+    }
+    remove(words, word);
+    return {
+      from: { x: -1, y: -1 },
+      to: { x: -1, y: -1 },
+      word: "",
+      solved: false,
+    };
+  });
+  solutions = solutions.filter((s) => s.word !== "");
+  return { board, solutions };
+}
+
+function findDirections(
+  word: string,
+  rows: number,
+  cols: number,
+  from: Point,
+  board: Board
+) {
+  const dirs: Point[] = [];
+  const len = word.length;
+  const { x, y } = from;
+
+  if (
+    x + len <= cols &&
+    y + len <= rows &&
+    checkWord(word, from, { x: x + len - 1, y: y + len - 1 }, board)
+  )
+    dirs.push({ x: x + len - 1, y: y + len - 1 });
+  if (
+    x - len >= 0 &&
+    y + len <= rows &&
+    checkWord(word, from, { x: x - len + 1, y: y + len - 1 }, board)
+  )
+    dirs.push({ x: x - len + 1, y: y + len - 1 });
+  if (
+    x + len <= cols &&
+    y - len >= 0 &&
+    checkWord(word, from, { x: x + len - 1, y: y - len + 1 }, board)
+  )
+    dirs.push({ x: x + len - 1, y: y - len + 1 });
+  if (
+    x - len >= 0 &&
+    y - len >= 0 &&
+    checkWord(word, from, { x: x - len + 1, y: y - len + 1 }, board)
+  )
+    dirs.push({ x: x - len + 1, y: y - len + 1 });
+  if (x + len <= cols && checkWord(word, from, { x: x + len - 1, y }, board))
+    dirs.push({ x: x + len - 1, y });
+  if (y + len <= rows && checkWord(word, from, { x: x, y: y + len - 1 }, board))
+    dirs.push({ x: x, y: y + len - 1 });
+  if (x - len >= 0 && checkWord(word, from, { x: x - len + 1, y }, board))
+    dirs.push({ x: x - len + 1, y });
+  if (y - len >= 0 && checkWord(word, from, { x: x, y: y - len + 1 }, board))
+    dirs.push({ x: x, y: y - len + 1 });
+  return dirs;
+}
+
+function checkWord(word: string, from: Point, to: Point, board: Board) {
+  const len = word.length;
+  for (let i = 0; i <= len; ++i) {
+    const t = len == 0 ? 0 : i / len;
+    const p = lerpPoint(from, to, t);
+    const current = board[round(p.y)][round(p.x)];
+    if (current !== "-" && current !== word[i]) return false;
+  }
+  return true;
+}
+
+function fillWord(word: string, from: Point, to: Point, board: Board) {
+  const len = diagDistance(from, to);
+  for (let i = 0; i <= len; ++i) {
+    const t = len == 0 ? 0 : i / len;
+    const p = lerpPoint(from, to, t);
+    board[Math.round(p.y)][Math.round(p.x)] = word[i];
+  }
 }
 
 function getWord(from: Point, to: Point, board: Board): string {
