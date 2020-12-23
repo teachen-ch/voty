@@ -2300,6 +2300,7 @@ type Query {
     orderBy: [UserOrderByInput!]
     where: UserWhereInput
   ): [User!]!
+  works(card: String, schoolId: String, teamId: String): [Work]
 }
 
 enum QueryMode {
@@ -6488,6 +6489,33 @@ input VoteWhereInput {
 
 input VoteWhereUniqueInput {
   id: String
+}
+
+type Work {
+  attachments(
+    after: AttachmentWhereUniqueInput
+    before: AttachmentWhereUniqueInput
+    first: Int
+    last: Int
+  ): [Attachment!]!
+  card: String!
+  data: Json!
+  id: String!
+  reactions(
+    after: ReactionWhereUniqueInput
+    before: ReactionWhereUniqueInput
+    first: Int
+    last: Int
+  ): [Reaction!]!
+  text: String!
+  title: String!
+  updatedAt: DateTime!
+  users(
+    after: UserWhereUniqueInput
+    before: UserWhereUniqueInput
+    first: Int
+    last: Int
+  ): [User!]!
 }
 
 input WorkCreateManyWithoutSchoolInput {

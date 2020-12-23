@@ -110,6 +110,7 @@ export const permissions = shield(
       cards: allow,
       attachment: isUser, // TODO: we should secure this to team + teacher unless public
       attachments: isUser, // TODO: we should secure this to team + teacher
+      works: isUser, // TODO: we should secure this to team + teacher
     },
     Mutation: {
       login: allow,
@@ -187,6 +188,7 @@ export const permissions = shield(
     Vote: isUser,
     Swissvote: allow,
     Card: allow,
+    Work: allow,
   },
   {
     allowExternalErrors: true,

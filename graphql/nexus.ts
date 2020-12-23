@@ -7547,6 +7547,15 @@ export interface NexusGenObjects {
     // root type
     verify?: string | null; // String
   };
+  Work: {
+    // root type
+    card: string; // String!
+    data: NexusGenScalars["Json"]; // Json!
+    id: string; // String!
+    text: string; // String!
+    title: string; // String!
+    updatedAt: NexusGenScalars["DateTime"]; // DateTime!
+  };
 }
 
 export interface NexusGenInterfaces {}
@@ -7673,6 +7682,7 @@ export interface NexusGenFieldTypes {
     teams: NexusGenRootTypes["Team"][]; // [Team!]!
     user: NexusGenRootTypes["User"] | null; // User
     users: NexusGenRootTypes["User"][]; // [User!]!
+    works: Array<NexusGenRootTypes["Work"] | null> | null; // [Work]
   };
   Reaction: {
     // field return type
@@ -7771,6 +7781,18 @@ export interface NexusGenFieldTypes {
     // field return type
     ballot: NexusGenRootTypes["Ballot"]; // Ballot!
     verify: string | null; // String
+  };
+  Work: {
+    // field return type
+    attachments: NexusGenRootTypes["Attachment"][]; // [Attachment!]!
+    card: string; // String!
+    data: NexusGenScalars["Json"]; // Json!
+    id: string; // String!
+    reactions: NexusGenRootTypes["Reaction"][]; // [Reaction!]!
+    text: string; // String!
+    title: string; // String!
+    updatedAt: NexusGenScalars["DateTime"]; // DateTime!
+    users: NexusGenRootTypes["User"][]; // [User!]!
   };
 }
 
@@ -7888,6 +7910,7 @@ export interface NexusGenFieldTypeNames {
     teams: "Team";
     user: "User";
     users: "User";
+    works: "Work";
   };
   Reaction: {
     // field return type name
@@ -7986,6 +8009,18 @@ export interface NexusGenFieldTypeNames {
     // field return type name
     ballot: "Ballot";
     verify: "String";
+  };
+  Work: {
+    // field return type name
+    attachments: "Attachment";
+    card: "String";
+    data: "Json";
+    id: "String";
+    reactions: "Reaction";
+    text: "String";
+    title: "String";
+    updatedAt: "DateTime";
+    users: "User";
   };
 }
 
@@ -8208,6 +8243,12 @@ export interface NexusGenArgTypes {
       orderBy?: NexusGenInputs["UserOrderByInput"][] | null; // [UserOrderByInput!]
       where?: NexusGenInputs["UserWhereInput"] | null; // UserWhereInput
     };
+    works: {
+      // args
+      card?: string | null; // String
+      schoolId?: string | null; // String
+      teamId?: string | null; // String
+    };
   };
   School: {
     members: {
@@ -8290,6 +8331,29 @@ export interface NexusGenArgTypes {
       // args
       after?: NexusGenInputs["ThreadWhereUniqueInput"] | null; // ThreadWhereUniqueInput
       before?: NexusGenInputs["ThreadWhereUniqueInput"] | null; // ThreadWhereUniqueInput
+      first?: number | null; // Int
+      last?: number | null; // Int
+    };
+  };
+  Work: {
+    attachments: {
+      // args
+      after?: NexusGenInputs["AttachmentWhereUniqueInput"] | null; // AttachmentWhereUniqueInput
+      before?: NexusGenInputs["AttachmentWhereUniqueInput"] | null; // AttachmentWhereUniqueInput
+      first?: number | null; // Int
+      last?: number | null; // Int
+    };
+    reactions: {
+      // args
+      after?: NexusGenInputs["ReactionWhereUniqueInput"] | null; // ReactionWhereUniqueInput
+      before?: NexusGenInputs["ReactionWhereUniqueInput"] | null; // ReactionWhereUniqueInput
+      first?: number | null; // Int
+      last?: number | null; // Int
+    };
+    users: {
+      // args
+      after?: NexusGenInputs["UserWhereUniqueInput"] | null; // UserWhereUniqueInput
+      before?: NexusGenInputs["UserWhereUniqueInput"] | null; // UserWhereUniqueInput
       first?: number | null; // Int
       last?: number | null; // Int
     };
