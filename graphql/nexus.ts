@@ -49,6 +49,14 @@ export interface NexusGenInputs {
       | null; // [ActivityCreateOrConnectWithoutuserInput!]
     create?: NexusGenInputs["ActivityCreateWithoutUserInput"][] | null; // [ActivityCreateWithoutUserInput!]
   };
+  ActivityCreateManyWithoutWorkInput: {
+    // input type
+    connect?: NexusGenInputs["ActivityWhereUniqueInput"][] | null; // [ActivityWhereUniqueInput!]
+    connectOrCreate?:
+      | NexusGenInputs["ActivityCreateOrConnectWithoutworkInput"][]
+      | null; // [ActivityCreateOrConnectWithoutworkInput!]
+    create?: NexusGenInputs["ActivityCreateWithoutWorkInput"][] | null; // [ActivityCreateWithoutWorkInput!]
+  };
   ActivityCreateOrConnectWithoutschoolInput: {
     // input type
     create: NexusGenInputs["ActivityCreateWithoutSchoolInput"]; // ActivityCreateWithoutSchoolInput!
@@ -69,6 +77,11 @@ export interface NexusGenInputs {
     create: NexusGenInputs["ActivityCreateWithoutUserInput"]; // ActivityCreateWithoutUserInput!
     where: NexusGenInputs["ActivityWhereUniqueInput"]; // ActivityWhereUniqueInput!
   };
+  ActivityCreateOrConnectWithoutworkInput: {
+    // input type
+    create: NexusGenInputs["ActivityCreateWithoutWorkInput"]; // ActivityCreateWithoutWorkInput!
+    where: NexusGenInputs["ActivityWhereUniqueInput"]; // ActivityWhereUniqueInput!
+  };
   ActivityCreateWithoutSchoolInput: {
     // input type
     cardId?: string | null; // String
@@ -78,6 +91,7 @@ export interface NexusGenInputs {
     type: NexusGenEnums["ActivityType"]; // ActivityType!
     user: NexusGenInputs["UserCreateOneWithoutActivityInput"]; // UserCreateOneWithoutActivityInput!
     visibility: NexusGenEnums["Visibility"]; // Visibility!
+    work?: NexusGenInputs["WorkCreateOneWithoutActivityInput"] | null; // WorkCreateOneWithoutActivityInput
   };
   ActivityCreateWithoutTeamInput: {
     // input type
@@ -88,6 +102,7 @@ export interface NexusGenInputs {
     type: NexusGenEnums["ActivityType"]; // ActivityType!
     user: NexusGenInputs["UserCreateOneWithoutActivityInput"]; // UserCreateOneWithoutActivityInput!
     visibility: NexusGenEnums["Visibility"]; // Visibility!
+    work?: NexusGenInputs["WorkCreateOneWithoutActivityInput"] | null; // WorkCreateOneWithoutActivityInput
   };
   ActivityCreateWithoutThreadInput: {
     // input type
@@ -98,6 +113,7 @@ export interface NexusGenInputs {
     type: NexusGenEnums["ActivityType"]; // ActivityType!
     user: NexusGenInputs["UserCreateOneWithoutActivityInput"]; // UserCreateOneWithoutActivityInput!
     visibility: NexusGenEnums["Visibility"]; // Visibility!
+    work?: NexusGenInputs["WorkCreateOneWithoutActivityInput"] | null; // WorkCreateOneWithoutActivityInput
   };
   ActivityCreateWithoutUserInput: {
     // input type
@@ -107,6 +123,18 @@ export interface NexusGenInputs {
     thread?: NexusGenInputs["ThreadCreateOneWithoutActivityInput"] | null; // ThreadCreateOneWithoutActivityInput
     time?: NexusGenScalars["DateTime"] | null; // DateTime
     type: NexusGenEnums["ActivityType"]; // ActivityType!
+    visibility: NexusGenEnums["Visibility"]; // Visibility!
+    work?: NexusGenInputs["WorkCreateOneWithoutActivityInput"] | null; // WorkCreateOneWithoutActivityInput
+  };
+  ActivityCreateWithoutWorkInput: {
+    // input type
+    cardId?: string | null; // String
+    school: NexusGenInputs["SchoolCreateOneWithoutActivityInput"]; // SchoolCreateOneWithoutActivityInput!
+    team: NexusGenInputs["TeamCreateOneWithoutActivityInput"]; // TeamCreateOneWithoutActivityInput!
+    thread?: NexusGenInputs["ThreadCreateOneWithoutActivityInput"] | null; // ThreadCreateOneWithoutActivityInput
+    time?: NexusGenScalars["DateTime"] | null; // DateTime
+    type: NexusGenEnums["ActivityType"]; // ActivityType!
+    user: NexusGenInputs["UserCreateOneWithoutActivityInput"]; // UserCreateOneWithoutActivityInput!
     visibility: NexusGenEnums["Visibility"]; // Visibility!
   };
   ActivityListRelationFilter: {
@@ -129,6 +157,7 @@ export interface NexusGenInputs {
     type?: NexusGenInputs["EnumActivityTypeFilter"] | null; // EnumActivityTypeFilter
     userId?: NexusGenInputs["StringFilter"] | null; // StringFilter
     visibility?: NexusGenInputs["EnumVisibilityFilter"] | null; // EnumVisibilityFilter
+    workId?: NexusGenInputs["StringNullableFilter"] | null; // StringNullableFilter
   };
   ActivityUpdateManyMutationInput: {
     // input type
@@ -155,6 +184,11 @@ export interface NexusGenInputs {
     where: NexusGenInputs["ActivityScalarWhereInput"]; // ActivityScalarWhereInput!
   };
   ActivityUpdateManyWithWhereWithoutUserInput: {
+    // input type
+    data: NexusGenInputs["ActivityUpdateManyMutationInput"]; // ActivityUpdateManyMutationInput!
+    where: NexusGenInputs["ActivityScalarWhereInput"]; // ActivityScalarWhereInput!
+  };
+  ActivityUpdateManyWithWhereWithoutWorkInput: {
     // input type
     data: NexusGenInputs["ActivityUpdateManyMutationInput"]; // ActivityUpdateManyMutationInput!
     where: NexusGenInputs["ActivityScalarWhereInput"]; // ActivityScalarWhereInput!
@@ -243,6 +277,27 @@ export interface NexusGenInputs {
       | NexusGenInputs["ActivityUpsertWithWhereUniqueWithoutUserInput"][]
       | null; // [ActivityUpsertWithWhereUniqueWithoutUserInput!]
   };
+  ActivityUpdateManyWithoutWorkInput: {
+    // input type
+    connect?: NexusGenInputs["ActivityWhereUniqueInput"][] | null; // [ActivityWhereUniqueInput!]
+    connectOrCreate?:
+      | NexusGenInputs["ActivityCreateOrConnectWithoutworkInput"][]
+      | null; // [ActivityCreateOrConnectWithoutworkInput!]
+    create?: NexusGenInputs["ActivityCreateWithoutWorkInput"][] | null; // [ActivityCreateWithoutWorkInput!]
+    delete?: NexusGenInputs["ActivityWhereUniqueInput"][] | null; // [ActivityWhereUniqueInput!]
+    deleteMany?: NexusGenInputs["ActivityScalarWhereInput"][] | null; // [ActivityScalarWhereInput!]
+    disconnect?: NexusGenInputs["ActivityWhereUniqueInput"][] | null; // [ActivityWhereUniqueInput!]
+    set?: NexusGenInputs["ActivityWhereUniqueInput"][] | null; // [ActivityWhereUniqueInput!]
+    update?:
+      | NexusGenInputs["ActivityUpdateWithWhereUniqueWithoutWorkInput"][]
+      | null; // [ActivityUpdateWithWhereUniqueWithoutWorkInput!]
+    updateMany?:
+      | NexusGenInputs["ActivityUpdateManyWithWhereWithoutWorkInput"][]
+      | null; // [ActivityUpdateManyWithWhereWithoutWorkInput!]
+    upsert?:
+      | NexusGenInputs["ActivityUpsertWithWhereUniqueWithoutWorkInput"][]
+      | null; // [ActivityUpsertWithWhereUniqueWithoutWorkInput!]
+  };
   ActivityUpdateWithWhereUniqueWithoutSchoolInput: {
     // input type
     data: NexusGenInputs["ActivityUpdateWithoutSchoolInput"]; // ActivityUpdateWithoutSchoolInput!
@@ -263,6 +318,11 @@ export interface NexusGenInputs {
     data: NexusGenInputs["ActivityUpdateWithoutUserInput"]; // ActivityUpdateWithoutUserInput!
     where: NexusGenInputs["ActivityWhereUniqueInput"]; // ActivityWhereUniqueInput!
   };
+  ActivityUpdateWithWhereUniqueWithoutWorkInput: {
+    // input type
+    data: NexusGenInputs["ActivityUpdateWithoutWorkInput"]; // ActivityUpdateWithoutWorkInput!
+    where: NexusGenInputs["ActivityWhereUniqueInput"]; // ActivityWhereUniqueInput!
+  };
   ActivityUpdateWithoutSchoolInput: {
     // input type
     cardId?: NexusGenInputs["NullableStringFieldUpdateOperationsInput"] | null; // NullableStringFieldUpdateOperationsInput
@@ -274,6 +334,7 @@ export interface NexusGenInputs {
     visibility?:
       | NexusGenInputs["EnumVisibilityFieldUpdateOperationsInput"]
       | null; // EnumVisibilityFieldUpdateOperationsInput
+    work?: NexusGenInputs["WorkUpdateOneWithoutActivityInput"] | null; // WorkUpdateOneWithoutActivityInput
   };
   ActivityUpdateWithoutTeamInput: {
     // input type
@@ -288,6 +349,7 @@ export interface NexusGenInputs {
     visibility?:
       | NexusGenInputs["EnumVisibilityFieldUpdateOperationsInput"]
       | null; // EnumVisibilityFieldUpdateOperationsInput
+    work?: NexusGenInputs["WorkUpdateOneWithoutActivityInput"] | null; // WorkUpdateOneWithoutActivityInput
   };
   ActivityUpdateWithoutThreadInput: {
     // input type
@@ -302,6 +364,7 @@ export interface NexusGenInputs {
     visibility?:
       | NexusGenInputs["EnumVisibilityFieldUpdateOperationsInput"]
       | null; // EnumVisibilityFieldUpdateOperationsInput
+    work?: NexusGenInputs["WorkUpdateOneWithoutActivityInput"] | null; // WorkUpdateOneWithoutActivityInput
   };
   ActivityUpdateWithoutUserInput: {
     // input type
@@ -313,6 +376,22 @@ export interface NexusGenInputs {
     thread?: NexusGenInputs["ThreadUpdateOneWithoutActivityInput"] | null; // ThreadUpdateOneWithoutActivityInput
     time?: NexusGenInputs["DateTimeFieldUpdateOperationsInput"] | null; // DateTimeFieldUpdateOperationsInput
     type?: NexusGenInputs["EnumActivityTypeFieldUpdateOperationsInput"] | null; // EnumActivityTypeFieldUpdateOperationsInput
+    visibility?:
+      | NexusGenInputs["EnumVisibilityFieldUpdateOperationsInput"]
+      | null; // EnumVisibilityFieldUpdateOperationsInput
+    work?: NexusGenInputs["WorkUpdateOneWithoutActivityInput"] | null; // WorkUpdateOneWithoutActivityInput
+  };
+  ActivityUpdateWithoutWorkInput: {
+    // input type
+    cardId?: NexusGenInputs["NullableStringFieldUpdateOperationsInput"] | null; // NullableStringFieldUpdateOperationsInput
+    school?:
+      | NexusGenInputs["SchoolUpdateOneRequiredWithoutActivityInput"]
+      | null; // SchoolUpdateOneRequiredWithoutActivityInput
+    team?: NexusGenInputs["TeamUpdateOneRequiredWithoutActivityInput"] | null; // TeamUpdateOneRequiredWithoutActivityInput
+    thread?: NexusGenInputs["ThreadUpdateOneWithoutActivityInput"] | null; // ThreadUpdateOneWithoutActivityInput
+    time?: NexusGenInputs["DateTimeFieldUpdateOperationsInput"] | null; // DateTimeFieldUpdateOperationsInput
+    type?: NexusGenInputs["EnumActivityTypeFieldUpdateOperationsInput"] | null; // EnumActivityTypeFieldUpdateOperationsInput
+    user?: NexusGenInputs["UserUpdateOneRequiredWithoutActivityInput"] | null; // UserUpdateOneRequiredWithoutActivityInput
     visibility?:
       | NexusGenInputs["EnumVisibilityFieldUpdateOperationsInput"]
       | null; // EnumVisibilityFieldUpdateOperationsInput
@@ -341,6 +420,12 @@ export interface NexusGenInputs {
     update: NexusGenInputs["ActivityUpdateWithoutUserInput"]; // ActivityUpdateWithoutUserInput!
     where: NexusGenInputs["ActivityWhereUniqueInput"]; // ActivityWhereUniqueInput!
   };
+  ActivityUpsertWithWhereUniqueWithoutWorkInput: {
+    // input type
+    create: NexusGenInputs["ActivityCreateWithoutWorkInput"]; // ActivityCreateWithoutWorkInput!
+    update: NexusGenInputs["ActivityUpdateWithoutWorkInput"]; // ActivityUpdateWithoutWorkInput!
+    where: NexusGenInputs["ActivityWhereUniqueInput"]; // ActivityWhereUniqueInput!
+  };
   ActivityWhereInput: {
     // input type
     AND?: NexusGenInputs["ActivityWhereInput"][] | null; // [ActivityWhereInput!]
@@ -359,6 +444,8 @@ export interface NexusGenInputs {
     user?: NexusGenInputs["UserWhereInput"] | null; // UserWhereInput
     userId?: NexusGenInputs["StringFilter"] | null; // StringFilter
     visibility?: NexusGenInputs["EnumVisibilityFilter"] | null; // EnumVisibilityFilter
+    work?: NexusGenInputs["WorkWhereInput"] | null; // WorkWhereInput
+    workId?: NexusGenInputs["StringNullableFilter"] | null; // StringNullableFilter
   };
   ActivityWhereUniqueInput: {
     // input type
@@ -368,8 +455,8 @@ export interface NexusGenInputs {
     // input type
     connect?: NexusGenInputs["AttachmentWhereUniqueInput"][] | null; // [AttachmentWhereUniqueInput!]
     connectOrCreate?:
-      | NexusGenInputs["AttachmentCreateOrConnectWithoutBallotInput"][]
-      | null; // [AttachmentCreateOrConnectWithoutBallotInput!]
+      | NexusGenInputs["AttachmentCreateOrConnectWithoutballotInput"][]
+      | null; // [AttachmentCreateOrConnectWithoutballotInput!]
     create?: NexusGenInputs["AttachmentCreateWithoutBallotInput"][] | null; // [AttachmentCreateWithoutBallotInput!]
   };
   AttachmentCreateManyWithoutSchoolInput: {
@@ -404,7 +491,15 @@ export interface NexusGenInputs {
       | null; // [AttachmentCreateOrConnectWithoutuserInput!]
     create?: NexusGenInputs["AttachmentCreateWithoutUserInput"][] | null; // [AttachmentCreateWithoutUserInput!]
   };
-  AttachmentCreateOrConnectWithoutBallotInput: {
+  AttachmentCreateManyWithoutWorkInput: {
+    // input type
+    connect?: NexusGenInputs["AttachmentWhereUniqueInput"][] | null; // [AttachmentWhereUniqueInput!]
+    connectOrCreate?:
+      | NexusGenInputs["AttachmentCreateOrConnectWithoutworkInput"][]
+      | null; // [AttachmentCreateOrConnectWithoutworkInput!]
+    create?: NexusGenInputs["AttachmentCreateWithoutWorkInput"][] | null; // [AttachmentCreateWithoutWorkInput!]
+  };
+  AttachmentCreateOrConnectWithoutballotInput: {
     // input type
     create: NexusGenInputs["AttachmentCreateWithoutBallotInput"]; // AttachmentCreateWithoutBallotInput!
     where: NexusGenInputs["AttachmentWhereUniqueInput"]; // AttachmentWhereUniqueInput!
@@ -429,6 +524,11 @@ export interface NexusGenInputs {
     create: NexusGenInputs["AttachmentCreateWithoutUserInput"]; // AttachmentCreateWithoutUserInput!
     where: NexusGenInputs["AttachmentWhereUniqueInput"]; // AttachmentWhereUniqueInput!
   };
+  AttachmentCreateOrConnectWithoutworkInput: {
+    // input type
+    create: NexusGenInputs["AttachmentCreateWithoutWorkInput"]; // AttachmentCreateWithoutWorkInput!
+    where: NexusGenInputs["AttachmentWhereUniqueInput"]; // AttachmentWhereUniqueInput!
+  };
   AttachmentCreateWithoutBallotInput: {
     // input type
     card?: string | null; // String
@@ -442,10 +542,11 @@ export interface NexusGenInputs {
     type?: string | null; // String
     updatedAt?: NexusGenScalars["DateTime"] | null; // DateTime
     user: NexusGenInputs["UserCreateOneWithoutAttachmentsInput"]; // UserCreateOneWithoutAttachmentsInput!
+    work?: NexusGenInputs["WorkCreateOneWithoutAttachmentsInput"] | null; // WorkCreateOneWithoutAttachmentsInput
   };
   AttachmentCreateWithoutSchoolInput: {
     // input type
-    Ballot?: NexusGenInputs["BallotCreateOneWithoutAttachmentsInput"] | null; // BallotCreateOneWithoutAttachmentsInput
+    ballot?: NexusGenInputs["BallotCreateOneWithoutAttachmentsInput"] | null; // BallotCreateOneWithoutAttachmentsInput
     card?: string | null; // String
     createdAt?: NexusGenScalars["DateTime"] | null; // DateTime
     file: string; // String!
@@ -456,10 +557,11 @@ export interface NexusGenInputs {
     type?: string | null; // String
     updatedAt?: NexusGenScalars["DateTime"] | null; // DateTime
     user: NexusGenInputs["UserCreateOneWithoutAttachmentsInput"]; // UserCreateOneWithoutAttachmentsInput!
+    work?: NexusGenInputs["WorkCreateOneWithoutAttachmentsInput"] | null; // WorkCreateOneWithoutAttachmentsInput
   };
   AttachmentCreateWithoutTeamInput: {
     // input type
-    Ballot?: NexusGenInputs["BallotCreateOneWithoutAttachmentsInput"] | null; // BallotCreateOneWithoutAttachmentsInput
+    ballot?: NexusGenInputs["BallotCreateOneWithoutAttachmentsInput"] | null; // BallotCreateOneWithoutAttachmentsInput
     card?: string | null; // String
     createdAt?: NexusGenScalars["DateTime"] | null; // DateTime
     file: string; // String!
@@ -470,10 +572,11 @@ export interface NexusGenInputs {
     type?: string | null; // String
     updatedAt?: NexusGenScalars["DateTime"] | null; // DateTime
     user: NexusGenInputs["UserCreateOneWithoutAttachmentsInput"]; // UserCreateOneWithoutAttachmentsInput!
+    work?: NexusGenInputs["WorkCreateOneWithoutAttachmentsInput"] | null; // WorkCreateOneWithoutAttachmentsInput
   };
   AttachmentCreateWithoutThreadInput: {
     // input type
-    Ballot?: NexusGenInputs["BallotCreateOneWithoutAttachmentsInput"] | null; // BallotCreateOneWithoutAttachmentsInput
+    ballot?: NexusGenInputs["BallotCreateOneWithoutAttachmentsInput"] | null; // BallotCreateOneWithoutAttachmentsInput
     card?: string | null; // String
     createdAt?: NexusGenScalars["DateTime"] | null; // DateTime
     file: string; // String!
@@ -484,10 +587,11 @@ export interface NexusGenInputs {
     type?: string | null; // String
     updatedAt?: NexusGenScalars["DateTime"] | null; // DateTime
     user: NexusGenInputs["UserCreateOneWithoutAttachmentsInput"]; // UserCreateOneWithoutAttachmentsInput!
+    work?: NexusGenInputs["WorkCreateOneWithoutAttachmentsInput"] | null; // WorkCreateOneWithoutAttachmentsInput
   };
   AttachmentCreateWithoutUserInput: {
     // input type
-    Ballot?: NexusGenInputs["BallotCreateOneWithoutAttachmentsInput"] | null; // BallotCreateOneWithoutAttachmentsInput
+    ballot?: NexusGenInputs["BallotCreateOneWithoutAttachmentsInput"] | null; // BallotCreateOneWithoutAttachmentsInput
     card?: string | null; // String
     createdAt?: NexusGenScalars["DateTime"] | null; // DateTime
     file: string; // String!
@@ -498,6 +602,22 @@ export interface NexusGenInputs {
     title?: string | null; // String
     type?: string | null; // String
     updatedAt?: NexusGenScalars["DateTime"] | null; // DateTime
+    work?: NexusGenInputs["WorkCreateOneWithoutAttachmentsInput"] | null; // WorkCreateOneWithoutAttachmentsInput
+  };
+  AttachmentCreateWithoutWorkInput: {
+    // input type
+    ballot?: NexusGenInputs["BallotCreateOneWithoutAttachmentsInput"] | null; // BallotCreateOneWithoutAttachmentsInput
+    card?: string | null; // String
+    createdAt?: NexusGenScalars["DateTime"] | null; // DateTime
+    file: string; // String!
+    id?: string | null; // String
+    school?: NexusGenInputs["SchoolCreateOneWithoutAttachmentInput"] | null; // SchoolCreateOneWithoutAttachmentInput
+    team: NexusGenInputs["TeamCreateOneWithoutAttachmentInput"]; // TeamCreateOneWithoutAttachmentInput!
+    thread?: NexusGenInputs["ThreadCreateOneWithoutAttachmentsInput"] | null; // ThreadCreateOneWithoutAttachmentsInput
+    title?: string | null; // String
+    type?: string | null; // String
+    updatedAt?: NexusGenScalars["DateTime"] | null; // DateTime
+    user: NexusGenInputs["UserCreateOneWithoutAttachmentsInput"]; // UserCreateOneWithoutAttachmentsInput!
   };
   AttachmentListRelationFilter: {
     // input type
@@ -519,6 +639,7 @@ export interface NexusGenInputs {
     type?: NexusGenEnums["SortOrder"] | null; // SortOrder
     updatedAt?: NexusGenEnums["SortOrder"] | null; // SortOrder
     userId?: NexusGenEnums["SortOrder"] | null; // SortOrder
+    workId?: NexusGenEnums["SortOrder"] | null; // SortOrder
   };
   AttachmentScalarWhereInput: {
     // input type
@@ -537,6 +658,7 @@ export interface NexusGenInputs {
     type?: NexusGenInputs["StringFilter"] | null; // StringFilter
     updatedAt?: NexusGenInputs["DateTimeFilter"] | null; // DateTimeFilter
     userId?: NexusGenInputs["StringFilter"] | null; // StringFilter
+    workId?: NexusGenInputs["StringNullableFilter"] | null; // StringNullableFilter
   };
   AttachmentUpdateManyMutationInput: {
     // input type
@@ -573,12 +695,17 @@ export interface NexusGenInputs {
     data: NexusGenInputs["AttachmentUpdateManyMutationInput"]; // AttachmentUpdateManyMutationInput!
     where: NexusGenInputs["AttachmentScalarWhereInput"]; // AttachmentScalarWhereInput!
   };
+  AttachmentUpdateManyWithWhereWithoutWorkInput: {
+    // input type
+    data: NexusGenInputs["AttachmentUpdateManyMutationInput"]; // AttachmentUpdateManyMutationInput!
+    where: NexusGenInputs["AttachmentScalarWhereInput"]; // AttachmentScalarWhereInput!
+  };
   AttachmentUpdateManyWithoutBallotInput: {
     // input type
     connect?: NexusGenInputs["AttachmentWhereUniqueInput"][] | null; // [AttachmentWhereUniqueInput!]
     connectOrCreate?:
-      | NexusGenInputs["AttachmentCreateOrConnectWithoutBallotInput"][]
-      | null; // [AttachmentCreateOrConnectWithoutBallotInput!]
+      | NexusGenInputs["AttachmentCreateOrConnectWithoutballotInput"][]
+      | null; // [AttachmentCreateOrConnectWithoutballotInput!]
     create?: NexusGenInputs["AttachmentCreateWithoutBallotInput"][] | null; // [AttachmentCreateWithoutBallotInput!]
     delete?: NexusGenInputs["AttachmentWhereUniqueInput"][] | null; // [AttachmentWhereUniqueInput!]
     deleteMany?: NexusGenInputs["AttachmentScalarWhereInput"][] | null; // [AttachmentScalarWhereInput!]
@@ -678,6 +805,27 @@ export interface NexusGenInputs {
       | NexusGenInputs["AttachmentUpsertWithWhereUniqueWithoutUserInput"][]
       | null; // [AttachmentUpsertWithWhereUniqueWithoutUserInput!]
   };
+  AttachmentUpdateManyWithoutWorkInput: {
+    // input type
+    connect?: NexusGenInputs["AttachmentWhereUniqueInput"][] | null; // [AttachmentWhereUniqueInput!]
+    connectOrCreate?:
+      | NexusGenInputs["AttachmentCreateOrConnectWithoutworkInput"][]
+      | null; // [AttachmentCreateOrConnectWithoutworkInput!]
+    create?: NexusGenInputs["AttachmentCreateWithoutWorkInput"][] | null; // [AttachmentCreateWithoutWorkInput!]
+    delete?: NexusGenInputs["AttachmentWhereUniqueInput"][] | null; // [AttachmentWhereUniqueInput!]
+    deleteMany?: NexusGenInputs["AttachmentScalarWhereInput"][] | null; // [AttachmentScalarWhereInput!]
+    disconnect?: NexusGenInputs["AttachmentWhereUniqueInput"][] | null; // [AttachmentWhereUniqueInput!]
+    set?: NexusGenInputs["AttachmentWhereUniqueInput"][] | null; // [AttachmentWhereUniqueInput!]
+    update?:
+      | NexusGenInputs["AttachmentUpdateWithWhereUniqueWithoutWorkInput"][]
+      | null; // [AttachmentUpdateWithWhereUniqueWithoutWorkInput!]
+    updateMany?:
+      | NexusGenInputs["AttachmentUpdateManyWithWhereWithoutWorkInput"][]
+      | null; // [AttachmentUpdateManyWithWhereWithoutWorkInput!]
+    upsert?:
+      | NexusGenInputs["AttachmentUpsertWithWhereUniqueWithoutWorkInput"][]
+      | null; // [AttachmentUpsertWithWhereUniqueWithoutWorkInput!]
+  };
   AttachmentUpdateWithWhereUniqueWithoutBallotInput: {
     // input type
     data: NexusGenInputs["AttachmentUpdateWithoutBallotInput"]; // AttachmentUpdateWithoutBallotInput!
@@ -703,6 +851,11 @@ export interface NexusGenInputs {
     data: NexusGenInputs["AttachmentUpdateWithoutUserInput"]; // AttachmentUpdateWithoutUserInput!
     where: NexusGenInputs["AttachmentWhereUniqueInput"]; // AttachmentWhereUniqueInput!
   };
+  AttachmentUpdateWithWhereUniqueWithoutWorkInput: {
+    // input type
+    data: NexusGenInputs["AttachmentUpdateWithoutWorkInput"]; // AttachmentUpdateWithoutWorkInput!
+    where: NexusGenInputs["AttachmentWhereUniqueInput"]; // AttachmentWhereUniqueInput!
+  };
   AttachmentUpdateWithoutBallotInput: {
     // input type
     card?: NexusGenInputs["NullableStringFieldUpdateOperationsInput"] | null; // NullableStringFieldUpdateOperationsInput
@@ -718,10 +871,11 @@ export interface NexusGenInputs {
     user?:
       | NexusGenInputs["UserUpdateOneRequiredWithoutAttachmentsInput"]
       | null; // UserUpdateOneRequiredWithoutAttachmentsInput
+    work?: NexusGenInputs["WorkUpdateOneWithoutAttachmentsInput"] | null; // WorkUpdateOneWithoutAttachmentsInput
   };
   AttachmentUpdateWithoutSchoolInput: {
     // input type
-    Ballot?: NexusGenInputs["BallotUpdateOneWithoutAttachmentsInput"] | null; // BallotUpdateOneWithoutAttachmentsInput
+    ballot?: NexusGenInputs["BallotUpdateOneWithoutAttachmentsInput"] | null; // BallotUpdateOneWithoutAttachmentsInput
     card?: NexusGenInputs["NullableStringFieldUpdateOperationsInput"] | null; // NullableStringFieldUpdateOperationsInput
     createdAt?: NexusGenInputs["DateTimeFieldUpdateOperationsInput"] | null; // DateTimeFieldUpdateOperationsInput
     file?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
@@ -734,10 +888,11 @@ export interface NexusGenInputs {
     user?:
       | NexusGenInputs["UserUpdateOneRequiredWithoutAttachmentsInput"]
       | null; // UserUpdateOneRequiredWithoutAttachmentsInput
+    work?: NexusGenInputs["WorkUpdateOneWithoutAttachmentsInput"] | null; // WorkUpdateOneWithoutAttachmentsInput
   };
   AttachmentUpdateWithoutTeamInput: {
     // input type
-    Ballot?: NexusGenInputs["BallotUpdateOneWithoutAttachmentsInput"] | null; // BallotUpdateOneWithoutAttachmentsInput
+    ballot?: NexusGenInputs["BallotUpdateOneWithoutAttachmentsInput"] | null; // BallotUpdateOneWithoutAttachmentsInput
     card?: NexusGenInputs["NullableStringFieldUpdateOperationsInput"] | null; // NullableStringFieldUpdateOperationsInput
     createdAt?: NexusGenInputs["DateTimeFieldUpdateOperationsInput"] | null; // DateTimeFieldUpdateOperationsInput
     file?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
@@ -750,10 +905,11 @@ export interface NexusGenInputs {
     user?:
       | NexusGenInputs["UserUpdateOneRequiredWithoutAttachmentsInput"]
       | null; // UserUpdateOneRequiredWithoutAttachmentsInput
+    work?: NexusGenInputs["WorkUpdateOneWithoutAttachmentsInput"] | null; // WorkUpdateOneWithoutAttachmentsInput
   };
   AttachmentUpdateWithoutThreadInput: {
     // input type
-    Ballot?: NexusGenInputs["BallotUpdateOneWithoutAttachmentsInput"] | null; // BallotUpdateOneWithoutAttachmentsInput
+    ballot?: NexusGenInputs["BallotUpdateOneWithoutAttachmentsInput"] | null; // BallotUpdateOneWithoutAttachmentsInput
     card?: NexusGenInputs["NullableStringFieldUpdateOperationsInput"] | null; // NullableStringFieldUpdateOperationsInput
     createdAt?: NexusGenInputs["DateTimeFieldUpdateOperationsInput"] | null; // DateTimeFieldUpdateOperationsInput
     file?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
@@ -766,10 +922,11 @@ export interface NexusGenInputs {
     user?:
       | NexusGenInputs["UserUpdateOneRequiredWithoutAttachmentsInput"]
       | null; // UserUpdateOneRequiredWithoutAttachmentsInput
+    work?: NexusGenInputs["WorkUpdateOneWithoutAttachmentsInput"] | null; // WorkUpdateOneWithoutAttachmentsInput
   };
   AttachmentUpdateWithoutUserInput: {
     // input type
-    Ballot?: NexusGenInputs["BallotUpdateOneWithoutAttachmentsInput"] | null; // BallotUpdateOneWithoutAttachmentsInput
+    ballot?: NexusGenInputs["BallotUpdateOneWithoutAttachmentsInput"] | null; // BallotUpdateOneWithoutAttachmentsInput
     card?: NexusGenInputs["NullableStringFieldUpdateOperationsInput"] | null; // NullableStringFieldUpdateOperationsInput
     createdAt?: NexusGenInputs["DateTimeFieldUpdateOperationsInput"] | null; // DateTimeFieldUpdateOperationsInput
     file?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
@@ -780,6 +937,24 @@ export interface NexusGenInputs {
     title?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
     type?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
     updatedAt?: NexusGenInputs["DateTimeFieldUpdateOperationsInput"] | null; // DateTimeFieldUpdateOperationsInput
+    work?: NexusGenInputs["WorkUpdateOneWithoutAttachmentsInput"] | null; // WorkUpdateOneWithoutAttachmentsInput
+  };
+  AttachmentUpdateWithoutWorkInput: {
+    // input type
+    ballot?: NexusGenInputs["BallotUpdateOneWithoutAttachmentsInput"] | null; // BallotUpdateOneWithoutAttachmentsInput
+    card?: NexusGenInputs["NullableStringFieldUpdateOperationsInput"] | null; // NullableStringFieldUpdateOperationsInput
+    createdAt?: NexusGenInputs["DateTimeFieldUpdateOperationsInput"] | null; // DateTimeFieldUpdateOperationsInput
+    file?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    id?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    school?: NexusGenInputs["SchoolUpdateOneWithoutAttachmentInput"] | null; // SchoolUpdateOneWithoutAttachmentInput
+    team?: NexusGenInputs["TeamUpdateOneRequiredWithoutAttachmentInput"] | null; // TeamUpdateOneRequiredWithoutAttachmentInput
+    thread?: NexusGenInputs["ThreadUpdateOneWithoutAttachmentsInput"] | null; // ThreadUpdateOneWithoutAttachmentsInput
+    title?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    type?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    updatedAt?: NexusGenInputs["DateTimeFieldUpdateOperationsInput"] | null; // DateTimeFieldUpdateOperationsInput
+    user?:
+      | NexusGenInputs["UserUpdateOneRequiredWithoutAttachmentsInput"]
+      | null; // UserUpdateOneRequiredWithoutAttachmentsInput
   };
   AttachmentUpsertWithWhereUniqueWithoutBallotInput: {
     // input type
@@ -811,10 +986,16 @@ export interface NexusGenInputs {
     update: NexusGenInputs["AttachmentUpdateWithoutUserInput"]; // AttachmentUpdateWithoutUserInput!
     where: NexusGenInputs["AttachmentWhereUniqueInput"]; // AttachmentWhereUniqueInput!
   };
+  AttachmentUpsertWithWhereUniqueWithoutWorkInput: {
+    // input type
+    create: NexusGenInputs["AttachmentCreateWithoutWorkInput"]; // AttachmentCreateWithoutWorkInput!
+    update: NexusGenInputs["AttachmentUpdateWithoutWorkInput"]; // AttachmentUpdateWithoutWorkInput!
+    where: NexusGenInputs["AttachmentWhereUniqueInput"]; // AttachmentWhereUniqueInput!
+  };
   AttachmentWhereInput: {
     // input type
     AND?: NexusGenInputs["AttachmentWhereInput"][] | null; // [AttachmentWhereInput!]
-    Ballot?: NexusGenInputs["BallotWhereInput"] | null; // BallotWhereInput
+    ballot?: NexusGenInputs["BallotWhereInput"] | null; // BallotWhereInput
     ballotId?: NexusGenInputs["StringNullableFilter"] | null; // StringNullableFilter
     card?: NexusGenInputs["StringNullableFilter"] | null; // StringNullableFilter
     createdAt?: NexusGenInputs["DateTimeFilter"] | null; // DateTimeFilter
@@ -833,6 +1014,8 @@ export interface NexusGenInputs {
     updatedAt?: NexusGenInputs["DateTimeFilter"] | null; // DateTimeFilter
     user?: NexusGenInputs["UserWhereInput"] | null; // UserWhereInput
     userId?: NexusGenInputs["StringFilter"] | null; // StringFilter
+    work?: NexusGenInputs["WorkWhereInput"] | null; // WorkWhereInput
+    workId?: NexusGenInputs["StringNullableFilter"] | null; // StringNullableFilter
   };
   AttachmentWhereUniqueInput: {
     // input type
@@ -875,8 +1058,8 @@ export interface NexusGenInputs {
     // input type
     connect?: NexusGenInputs["BallotWhereUniqueInput"] | null; // BallotWhereUniqueInput
     connectOrCreate?:
-      | NexusGenInputs["BallotCreateOrConnectWithoutBallotRunsInput"]
-      | null; // BallotCreateOrConnectWithoutBallotRunsInput
+      | NexusGenInputs["BallotCreateOrConnectWithoutballotRunsInput"]
+      | null; // BallotCreateOrConnectWithoutballotRunsInput
     create?: NexusGenInputs["BallotCreateWithoutBallotRunsInput"] | null; // BallotCreateWithoutBallotRunsInput
   };
   BallotCreateOneWithoutVotedInput: {
@@ -895,14 +1078,14 @@ export interface NexusGenInputs {
       | null; // BallotCreateOrConnectWithoutvotesInput
     create?: NexusGenInputs["BallotCreateWithoutVotesInput"] | null; // BallotCreateWithoutVotesInput
   };
-  BallotCreateOrConnectWithoutBallotRunsInput: {
-    // input type
-    create: NexusGenInputs["BallotCreateWithoutBallotRunsInput"]; // BallotCreateWithoutBallotRunsInput!
-    where: NexusGenInputs["BallotWhereUniqueInput"]; // BallotWhereUniqueInput!
-  };
   BallotCreateOrConnectWithoutattachmentsInput: {
     // input type
     create: NexusGenInputs["BallotCreateWithoutAttachmentsInput"]; // BallotCreateWithoutAttachmentsInput!
+    where: NexusGenInputs["BallotWhereUniqueInput"]; // BallotWhereUniqueInput!
+  };
+  BallotCreateOrConnectWithoutballotRunsInput: {
+    // input type
+    create: NexusGenInputs["BallotCreateWithoutBallotRunsInput"]; // BallotCreateWithoutBallotRunsInput!
     where: NexusGenInputs["BallotWhereUniqueInput"]; // BallotWhereUniqueInput!
   };
   BallotCreateOrConnectWithoutcreatorInput: {
@@ -932,7 +1115,7 @@ export interface NexusGenInputs {
   };
   BallotCreateWithoutAttachmentsInput: {
     // input type
-    BallotRuns?: NexusGenInputs["BallotRunCreateManyWithoutBallotInput"] | null; // BallotRunCreateManyWithoutBallotInput
+    ballotRuns?: NexusGenInputs["BallotRunCreateManyWithoutBallotInput"] | null; // BallotRunCreateManyWithoutBallotInput
     body: string; // String!
     canton?: string | null; // String
     createdAt?: NexusGenScalars["DateTime"] | null; // DateTime
@@ -977,7 +1160,7 @@ export interface NexusGenInputs {
     attachments?:
       | NexusGenInputs["AttachmentCreateManyWithoutBallotInput"]
       | null; // AttachmentCreateManyWithoutBallotInput
-    BallotRuns?: NexusGenInputs["BallotRunCreateManyWithoutBallotInput"] | null; // BallotRunCreateManyWithoutBallotInput
+    ballotRuns?: NexusGenInputs["BallotRunCreateManyWithoutBallotInput"] | null; // BallotRunCreateManyWithoutBallotInput
     body: string; // String!
     canton?: string | null; // String
     createdAt?: NexusGenScalars["DateTime"] | null; // DateTime
@@ -999,7 +1182,7 @@ export interface NexusGenInputs {
     attachments?:
       | NexusGenInputs["AttachmentCreateManyWithoutBallotInput"]
       | null; // AttachmentCreateManyWithoutBallotInput
-    BallotRuns?: NexusGenInputs["BallotRunCreateManyWithoutBallotInput"] | null; // BallotRunCreateManyWithoutBallotInput
+    ballotRuns?: NexusGenInputs["BallotRunCreateManyWithoutBallotInput"] | null; // BallotRunCreateManyWithoutBallotInput
     body: string; // String!
     canton?: string | null; // String
     createdAt?: NexusGenScalars["DateTime"] | null; // DateTime
@@ -1021,7 +1204,7 @@ export interface NexusGenInputs {
     attachments?:
       | NexusGenInputs["AttachmentCreateManyWithoutBallotInput"]
       | null; // AttachmentCreateManyWithoutBallotInput
-    BallotRuns?: NexusGenInputs["BallotRunCreateManyWithoutBallotInput"] | null; // BallotRunCreateManyWithoutBallotInput
+    ballotRuns?: NexusGenInputs["BallotRunCreateManyWithoutBallotInput"] | null; // BallotRunCreateManyWithoutBallotInput
     body: string; // String!
     canton?: string | null; // String
     createdAt?: NexusGenScalars["DateTime"] | null; // DateTime
@@ -1043,7 +1226,7 @@ export interface NexusGenInputs {
     attachments?:
       | NexusGenInputs["AttachmentCreateManyWithoutBallotInput"]
       | null; // AttachmentCreateManyWithoutBallotInput
-    BallotRuns?: NexusGenInputs["BallotRunCreateManyWithoutBallotInput"] | null; // BallotRunCreateManyWithoutBallotInput
+    ballotRuns?: NexusGenInputs["BallotRunCreateManyWithoutBallotInput"] | null; // BallotRunCreateManyWithoutBallotInput
     body: string; // String!
     canton?: string | null; // String
     createdAt?: NexusGenScalars["DateTime"] | null; // DateTime
@@ -1065,7 +1248,7 @@ export interface NexusGenInputs {
     attachments?:
       | NexusGenInputs["AttachmentCreateManyWithoutBallotInput"]
       | null; // AttachmentCreateManyWithoutBallotInput
-    BallotRuns?: NexusGenInputs["BallotRunCreateManyWithoutBallotInput"] | null; // BallotRunCreateManyWithoutBallotInput
+    ballotRuns?: NexusGenInputs["BallotRunCreateManyWithoutBallotInput"] | null; // BallotRunCreateManyWithoutBallotInput
     body: string; // String!
     canton?: string | null; // String
     createdAt?: NexusGenScalars["DateTime"] | null; // DateTime
@@ -1129,14 +1312,9 @@ export interface NexusGenInputs {
     // input type
     connect?: NexusGenInputs["BallotRunWhereUniqueInput"] | null; // BallotRunWhereUniqueInput
     connectOrCreate?:
-      | NexusGenInputs["BallotRunCreateOrConnectWithoutVoteInput"]
-      | null; // BallotRunCreateOrConnectWithoutVoteInput
+      | NexusGenInputs["BallotRunCreateOrConnectWithoutvoteInput"]
+      | null; // BallotRunCreateOrConnectWithoutvoteInput
     create?: NexusGenInputs["BallotRunCreateWithoutVoteInput"] | null; // BallotRunCreateWithoutVoteInput
-  };
-  BallotRunCreateOrConnectWithoutVoteInput: {
-    // input type
-    create: NexusGenInputs["BallotRunCreateWithoutVoteInput"]; // BallotRunCreateWithoutVoteInput!
-    where: NexusGenInputs["BallotRunWhereUniqueInput"]; // BallotRunWhereUniqueInput!
   };
   BallotRunCreateOrConnectWithoutballotInput: {
     // input type
@@ -1148,13 +1326,18 @@ export interface NexusGenInputs {
     create: NexusGenInputs["BallotRunCreateWithoutTeamInput"]; // BallotRunCreateWithoutTeamInput!
     where: NexusGenInputs["BallotRunWhereUniqueInput"]; // BallotRunWhereUniqueInput!
   };
+  BallotRunCreateOrConnectWithoutvoteInput: {
+    // input type
+    create: NexusGenInputs["BallotRunCreateWithoutVoteInput"]; // BallotRunCreateWithoutVoteInput!
+    where: NexusGenInputs["BallotRunWhereUniqueInput"]; // BallotRunWhereUniqueInput!
+  };
   BallotRunCreateWithoutBallotInput: {
     // input type
     end?: NexusGenScalars["DateTime"] | null; // DateTime
     id?: string | null; // String
     start?: NexusGenScalars["DateTime"] | null; // DateTime
     team: NexusGenInputs["TeamCreateOneWithoutBallotRunsInput"]; // TeamCreateOneWithoutBallotRunsInput!
-    Vote?: NexusGenInputs["VoteCreateManyWithoutBallotRunInput"] | null; // VoteCreateManyWithoutBallotRunInput
+    vote?: NexusGenInputs["VoteCreateManyWithoutBallotRunInput"] | null; // VoteCreateManyWithoutBallotRunInput
   };
   BallotRunCreateWithoutTeamInput: {
     // input type
@@ -1162,7 +1345,7 @@ export interface NexusGenInputs {
     end?: NexusGenScalars["DateTime"] | null; // DateTime
     id?: string | null; // String
     start?: NexusGenScalars["DateTime"] | null; // DateTime
-    Vote?: NexusGenInputs["VoteCreateManyWithoutBallotRunInput"] | null; // VoteCreateManyWithoutBallotRunInput
+    vote?: NexusGenInputs["VoteCreateManyWithoutBallotRunInput"] | null; // VoteCreateManyWithoutBallotRunInput
   };
   BallotRunCreateWithoutVoteInput: {
     // input type
@@ -1251,8 +1434,8 @@ export interface NexusGenInputs {
     // input type
     connect?: NexusGenInputs["BallotRunWhereUniqueInput"] | null; // BallotRunWhereUniqueInput
     connectOrCreate?:
-      | NexusGenInputs["BallotRunCreateOrConnectWithoutVoteInput"]
-      | null; // BallotRunCreateOrConnectWithoutVoteInput
+      | NexusGenInputs["BallotRunCreateOrConnectWithoutvoteInput"]
+      | null; // BallotRunCreateOrConnectWithoutvoteInput
     create?: NexusGenInputs["BallotRunCreateWithoutVoteInput"] | null; // BallotRunCreateWithoutVoteInput
     delete?: boolean | null; // Boolean
     disconnect?: boolean | null; // Boolean
@@ -1275,7 +1458,7 @@ export interface NexusGenInputs {
     id?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
     start?: NexusGenInputs["NullableDateTimeFieldUpdateOperationsInput"] | null; // NullableDateTimeFieldUpdateOperationsInput
     team?: NexusGenInputs["TeamUpdateOneRequiredWithoutBallotRunsInput"] | null; // TeamUpdateOneRequiredWithoutBallotRunsInput
-    Vote?: NexusGenInputs["VoteUpdateManyWithoutBallotRunInput"] | null; // VoteUpdateManyWithoutBallotRunInput
+    vote?: NexusGenInputs["VoteUpdateManyWithoutBallotRunInput"] | null; // VoteUpdateManyWithoutBallotRunInput
   };
   BallotRunUpdateWithoutTeamInput: {
     // input type
@@ -1285,7 +1468,7 @@ export interface NexusGenInputs {
     end?: NexusGenInputs["NullableDateTimeFieldUpdateOperationsInput"] | null; // NullableDateTimeFieldUpdateOperationsInput
     id?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
     start?: NexusGenInputs["NullableDateTimeFieldUpdateOperationsInput"] | null; // NullableDateTimeFieldUpdateOperationsInput
-    Vote?: NexusGenInputs["VoteUpdateManyWithoutBallotRunInput"] | null; // VoteUpdateManyWithoutBallotRunInput
+    vote?: NexusGenInputs["VoteUpdateManyWithoutBallotRunInput"] | null; // VoteUpdateManyWithoutBallotRunInput
   };
   BallotRunUpdateWithoutVoteInput: {
     // input type
@@ -1326,7 +1509,7 @@ export interface NexusGenInputs {
     start?: NexusGenInputs["DateTimeNullableFilter"] | null; // DateTimeNullableFilter
     team?: NexusGenInputs["TeamWhereInput"] | null; // TeamWhereInput
     teamId?: NexusGenInputs["StringFilter"] | null; // StringFilter
-    Vote?: NexusGenInputs["VoteListRelationFilter"] | null; // VoteListRelationFilter
+    vote?: NexusGenInputs["VoteListRelationFilter"] | null; // VoteListRelationFilter
   };
   BallotRunWhereUniqueInput: {
     // input type
@@ -1449,8 +1632,8 @@ export interface NexusGenInputs {
     // input type
     connect?: NexusGenInputs["BallotWhereUniqueInput"] | null; // BallotWhereUniqueInput
     connectOrCreate?:
-      | NexusGenInputs["BallotCreateOrConnectWithoutBallotRunsInput"]
-      | null; // BallotCreateOrConnectWithoutBallotRunsInput
+      | NexusGenInputs["BallotCreateOrConnectWithoutballotRunsInput"]
+      | null; // BallotCreateOrConnectWithoutballotRunsInput
     create?: NexusGenInputs["BallotCreateWithoutBallotRunsInput"] | null; // BallotCreateWithoutBallotRunsInput
     update?: NexusGenInputs["BallotUpdateWithoutBallotRunsInput"] | null; // BallotUpdateWithoutBallotRunsInput
     upsert?: NexusGenInputs["BallotUpsertWithoutBallotRunsInput"] | null; // BallotUpsertWithoutBallotRunsInput
@@ -1504,7 +1687,7 @@ export interface NexusGenInputs {
   };
   BallotUpdateWithoutAttachmentsInput: {
     // input type
-    BallotRuns?: NexusGenInputs["BallotRunUpdateManyWithoutBallotInput"] | null; // BallotRunUpdateManyWithoutBallotInput
+    ballotRuns?: NexusGenInputs["BallotRunUpdateManyWithoutBallotInput"] | null; // BallotRunUpdateManyWithoutBallotInput
     body?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
     canton?: NexusGenInputs["NullableStringFieldUpdateOperationsInput"] | null; // NullableStringFieldUpdateOperationsInput
     createdAt?: NexusGenInputs["DateTimeFieldUpdateOperationsInput"] | null; // DateTimeFieldUpdateOperationsInput
@@ -1549,7 +1732,7 @@ export interface NexusGenInputs {
     attachments?:
       | NexusGenInputs["AttachmentUpdateManyWithoutBallotInput"]
       | null; // AttachmentUpdateManyWithoutBallotInput
-    BallotRuns?: NexusGenInputs["BallotRunUpdateManyWithoutBallotInput"] | null; // BallotRunUpdateManyWithoutBallotInput
+    ballotRuns?: NexusGenInputs["BallotRunUpdateManyWithoutBallotInput"] | null; // BallotRunUpdateManyWithoutBallotInput
     body?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
     canton?: NexusGenInputs["NullableStringFieldUpdateOperationsInput"] | null; // NullableStringFieldUpdateOperationsInput
     createdAt?: NexusGenInputs["DateTimeFieldUpdateOperationsInput"] | null; // DateTimeFieldUpdateOperationsInput
@@ -1571,7 +1754,7 @@ export interface NexusGenInputs {
     attachments?:
       | NexusGenInputs["AttachmentUpdateManyWithoutBallotInput"]
       | null; // AttachmentUpdateManyWithoutBallotInput
-    BallotRuns?: NexusGenInputs["BallotRunUpdateManyWithoutBallotInput"] | null; // BallotRunUpdateManyWithoutBallotInput
+    ballotRuns?: NexusGenInputs["BallotRunUpdateManyWithoutBallotInput"] | null; // BallotRunUpdateManyWithoutBallotInput
     body?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
     canton?: NexusGenInputs["NullableStringFieldUpdateOperationsInput"] | null; // NullableStringFieldUpdateOperationsInput
     createdAt?: NexusGenInputs["DateTimeFieldUpdateOperationsInput"] | null; // DateTimeFieldUpdateOperationsInput
@@ -1593,7 +1776,7 @@ export interface NexusGenInputs {
     attachments?:
       | NexusGenInputs["AttachmentUpdateManyWithoutBallotInput"]
       | null; // AttachmentUpdateManyWithoutBallotInput
-    BallotRuns?: NexusGenInputs["BallotRunUpdateManyWithoutBallotInput"] | null; // BallotRunUpdateManyWithoutBallotInput
+    ballotRuns?: NexusGenInputs["BallotRunUpdateManyWithoutBallotInput"] | null; // BallotRunUpdateManyWithoutBallotInput
     body?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
     canton?: NexusGenInputs["NullableStringFieldUpdateOperationsInput"] | null; // NullableStringFieldUpdateOperationsInput
     createdAt?: NexusGenInputs["DateTimeFieldUpdateOperationsInput"] | null; // DateTimeFieldUpdateOperationsInput
@@ -1615,7 +1798,7 @@ export interface NexusGenInputs {
     attachments?:
       | NexusGenInputs["AttachmentUpdateManyWithoutBallotInput"]
       | null; // AttachmentUpdateManyWithoutBallotInput
-    BallotRuns?: NexusGenInputs["BallotRunUpdateManyWithoutBallotInput"] | null; // BallotRunUpdateManyWithoutBallotInput
+    ballotRuns?: NexusGenInputs["BallotRunUpdateManyWithoutBallotInput"] | null; // BallotRunUpdateManyWithoutBallotInput
     body?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
     canton?: NexusGenInputs["NullableStringFieldUpdateOperationsInput"] | null; // NullableStringFieldUpdateOperationsInput
     createdAt?: NexusGenInputs["DateTimeFieldUpdateOperationsInput"] | null; // DateTimeFieldUpdateOperationsInput
@@ -1637,7 +1820,7 @@ export interface NexusGenInputs {
     attachments?:
       | NexusGenInputs["AttachmentUpdateManyWithoutBallotInput"]
       | null; // AttachmentUpdateManyWithoutBallotInput
-    BallotRuns?: NexusGenInputs["BallotRunUpdateManyWithoutBallotInput"] | null; // BallotRunUpdateManyWithoutBallotInput
+    ballotRuns?: NexusGenInputs["BallotRunUpdateManyWithoutBallotInput"] | null; // BallotRunUpdateManyWithoutBallotInput
     body?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
     canton?: NexusGenInputs["NullableStringFieldUpdateOperationsInput"] | null; // NullableStringFieldUpdateOperationsInput
     createdAt?: NexusGenInputs["DateTimeFieldUpdateOperationsInput"] | null; // DateTimeFieldUpdateOperationsInput
@@ -1696,7 +1879,7 @@ export interface NexusGenInputs {
     // input type
     AND?: NexusGenInputs["BallotWhereInput"][] | null; // [BallotWhereInput!]
     attachments?: NexusGenInputs["AttachmentListRelationFilter"] | null; // AttachmentListRelationFilter
-    BallotRuns?: NexusGenInputs["BallotRunListRelationFilter"] | null; // BallotRunListRelationFilter
+    ballotRuns?: NexusGenInputs["BallotRunListRelationFilter"] | null; // BallotRunListRelationFilter
     body?: NexusGenInputs["StringFilter"] | null; // StringFilter
     canton?: NexusGenInputs["StringNullableFilter"] | null; // StringNullableFilter
     createdAt?: NexusGenInputs["DateTimeFilter"] | null; // DateTimeFilter
@@ -2204,6 +2387,14 @@ export interface NexusGenInputs {
       | null; // [ReactionCreateOrConnectWithoutuserInput!]
     create?: NexusGenInputs["ReactionCreateWithoutUserInput"][] | null; // [ReactionCreateWithoutUserInput!]
   };
+  ReactionCreateManyWithoutWorkInput: {
+    // input type
+    connect?: NexusGenInputs["ReactionWhereUniqueInput"][] | null; // [ReactionWhereUniqueInput!]
+    connectOrCreate?:
+      | NexusGenInputs["ReactionCreateOrConnectWithoutworkInput"][]
+      | null; // [ReactionCreateOrConnectWithoutworkInput!]
+    create?: NexusGenInputs["ReactionCreateWithoutWorkInput"][] | null; // [ReactionCreateWithoutWorkInput!]
+  };
   ReactionCreateOrConnectWithoutthreadInput: {
     // input type
     create: NexusGenInputs["ReactionCreateWithoutThreadInput"]; // ReactionCreateWithoutThreadInput!
@@ -2214,21 +2405,43 @@ export interface NexusGenInputs {
     create: NexusGenInputs["ReactionCreateWithoutUserInput"]; // ReactionCreateWithoutUserInput!
     where: NexusGenInputs["ReactionWhereUniqueInput"]; // ReactionWhereUniqueInput!
   };
+  ReactionCreateOrConnectWithoutworkInput: {
+    // input type
+    create: NexusGenInputs["ReactionCreateWithoutWorkInput"]; // ReactionCreateWithoutWorkInput!
+    where: NexusGenInputs["ReactionWhereUniqueInput"]; // ReactionWhereUniqueInput!
+  };
   ReactionCreateWithoutThreadInput: {
     // input type
     createdAt?: NexusGenScalars["DateTime"] | null; // DateTime
-    emoij: string; // String!
+    emoij?: string | null; // String
+    feedback: string; // String!
     id?: string | null; // String
+    stars: number; // Int!
     updatedAt?: NexusGenScalars["DateTime"] | null; // DateTime
     user: NexusGenInputs["UserCreateOneWithoutReactionsInput"]; // UserCreateOneWithoutReactionsInput!
+    work?: NexusGenInputs["WorkCreateOneWithoutReactionsInput"] | null; // WorkCreateOneWithoutReactionsInput
   };
   ReactionCreateWithoutUserInput: {
     // input type
     createdAt?: NexusGenScalars["DateTime"] | null; // DateTime
-    emoij: string; // String!
+    emoij?: string | null; // String
+    feedback: string; // String!
     id?: string | null; // String
+    stars: number; // Int!
     thread?: NexusGenInputs["ThreadCreateOneWithoutReactionsInput"] | null; // ThreadCreateOneWithoutReactionsInput
     updatedAt?: NexusGenScalars["DateTime"] | null; // DateTime
+    work?: NexusGenInputs["WorkCreateOneWithoutReactionsInput"] | null; // WorkCreateOneWithoutReactionsInput
+  };
+  ReactionCreateWithoutWorkInput: {
+    // input type
+    createdAt?: NexusGenScalars["DateTime"] | null; // DateTime
+    emoij?: string | null; // String
+    feedback: string; // String!
+    id?: string | null; // String
+    stars: number; // Int!
+    thread?: NexusGenInputs["ThreadCreateOneWithoutReactionsInput"] | null; // ThreadCreateOneWithoutReactionsInput
+    updatedAt?: NexusGenScalars["DateTime"] | null; // DateTime
+    user: NexusGenInputs["UserCreateOneWithoutReactionsInput"]; // UserCreateOneWithoutReactionsInput!
   };
   ReactionListRelationFilter: {
     // input type
@@ -2241,18 +2454,23 @@ export interface NexusGenInputs {
     AND?: NexusGenInputs["ReactionScalarWhereInput"][] | null; // [ReactionScalarWhereInput!]
     createdAt?: NexusGenInputs["DateTimeFilter"] | null; // DateTimeFilter
     emoij?: NexusGenInputs["StringFilter"] | null; // StringFilter
+    feedback?: NexusGenInputs["StringFilter"] | null; // StringFilter
     id?: NexusGenInputs["StringFilter"] | null; // StringFilter
     NOT?: NexusGenInputs["ReactionScalarWhereInput"][] | null; // [ReactionScalarWhereInput!]
     OR?: NexusGenInputs["ReactionScalarWhereInput"][] | null; // [ReactionScalarWhereInput!]
+    stars?: NexusGenInputs["IntFilter"] | null; // IntFilter
     threadId?: NexusGenInputs["StringNullableFilter"] | null; // StringNullableFilter
     updatedAt?: NexusGenInputs["DateTimeFilter"] | null; // DateTimeFilter
     userId?: NexusGenInputs["StringFilter"] | null; // StringFilter
+    workId?: NexusGenInputs["StringNullableFilter"] | null; // StringNullableFilter
   };
   ReactionUpdateManyMutationInput: {
     // input type
     createdAt?: NexusGenInputs["DateTimeFieldUpdateOperationsInput"] | null; // DateTimeFieldUpdateOperationsInput
     emoij?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    feedback?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
     id?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    stars?: NexusGenInputs["IntFieldUpdateOperationsInput"] | null; // IntFieldUpdateOperationsInput
     updatedAt?: NexusGenInputs["DateTimeFieldUpdateOperationsInput"] | null; // DateTimeFieldUpdateOperationsInput
   };
   ReactionUpdateManyWithWhereWithoutThreadInput: {
@@ -2261,6 +2479,11 @@ export interface NexusGenInputs {
     where: NexusGenInputs["ReactionScalarWhereInput"]; // ReactionScalarWhereInput!
   };
   ReactionUpdateManyWithWhereWithoutUserInput: {
+    // input type
+    data: NexusGenInputs["ReactionUpdateManyMutationInput"]; // ReactionUpdateManyMutationInput!
+    where: NexusGenInputs["ReactionScalarWhereInput"]; // ReactionScalarWhereInput!
+  };
+  ReactionUpdateManyWithWhereWithoutWorkInput: {
     // input type
     data: NexusGenInputs["ReactionUpdateManyMutationInput"]; // ReactionUpdateManyMutationInput!
     where: NexusGenInputs["ReactionScalarWhereInput"]; // ReactionScalarWhereInput!
@@ -2307,6 +2530,27 @@ export interface NexusGenInputs {
       | NexusGenInputs["ReactionUpsertWithWhereUniqueWithoutUserInput"][]
       | null; // [ReactionUpsertWithWhereUniqueWithoutUserInput!]
   };
+  ReactionUpdateManyWithoutWorkInput: {
+    // input type
+    connect?: NexusGenInputs["ReactionWhereUniqueInput"][] | null; // [ReactionWhereUniqueInput!]
+    connectOrCreate?:
+      | NexusGenInputs["ReactionCreateOrConnectWithoutworkInput"][]
+      | null; // [ReactionCreateOrConnectWithoutworkInput!]
+    create?: NexusGenInputs["ReactionCreateWithoutWorkInput"][] | null; // [ReactionCreateWithoutWorkInput!]
+    delete?: NexusGenInputs["ReactionWhereUniqueInput"][] | null; // [ReactionWhereUniqueInput!]
+    deleteMany?: NexusGenInputs["ReactionScalarWhereInput"][] | null; // [ReactionScalarWhereInput!]
+    disconnect?: NexusGenInputs["ReactionWhereUniqueInput"][] | null; // [ReactionWhereUniqueInput!]
+    set?: NexusGenInputs["ReactionWhereUniqueInput"][] | null; // [ReactionWhereUniqueInput!]
+    update?:
+      | NexusGenInputs["ReactionUpdateWithWhereUniqueWithoutWorkInput"][]
+      | null; // [ReactionUpdateWithWhereUniqueWithoutWorkInput!]
+    updateMany?:
+      | NexusGenInputs["ReactionUpdateManyWithWhereWithoutWorkInput"][]
+      | null; // [ReactionUpdateManyWithWhereWithoutWorkInput!]
+    upsert?:
+      | NexusGenInputs["ReactionUpsertWithWhereUniqueWithoutWorkInput"][]
+      | null; // [ReactionUpsertWithWhereUniqueWithoutWorkInput!]
+  };
   ReactionUpdateWithWhereUniqueWithoutThreadInput: {
     // input type
     data: NexusGenInputs["ReactionUpdateWithoutThreadInput"]; // ReactionUpdateWithoutThreadInput!
@@ -2317,21 +2561,43 @@ export interface NexusGenInputs {
     data: NexusGenInputs["ReactionUpdateWithoutUserInput"]; // ReactionUpdateWithoutUserInput!
     where: NexusGenInputs["ReactionWhereUniqueInput"]; // ReactionWhereUniqueInput!
   };
+  ReactionUpdateWithWhereUniqueWithoutWorkInput: {
+    // input type
+    data: NexusGenInputs["ReactionUpdateWithoutWorkInput"]; // ReactionUpdateWithoutWorkInput!
+    where: NexusGenInputs["ReactionWhereUniqueInput"]; // ReactionWhereUniqueInput!
+  };
   ReactionUpdateWithoutThreadInput: {
     // input type
     createdAt?: NexusGenInputs["DateTimeFieldUpdateOperationsInput"] | null; // DateTimeFieldUpdateOperationsInput
     emoij?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    feedback?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
     id?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    stars?: NexusGenInputs["IntFieldUpdateOperationsInput"] | null; // IntFieldUpdateOperationsInput
     updatedAt?: NexusGenInputs["DateTimeFieldUpdateOperationsInput"] | null; // DateTimeFieldUpdateOperationsInput
     user?: NexusGenInputs["UserUpdateOneRequiredWithoutReactionsInput"] | null; // UserUpdateOneRequiredWithoutReactionsInput
+    work?: NexusGenInputs["WorkUpdateOneWithoutReactionsInput"] | null; // WorkUpdateOneWithoutReactionsInput
   };
   ReactionUpdateWithoutUserInput: {
     // input type
     createdAt?: NexusGenInputs["DateTimeFieldUpdateOperationsInput"] | null; // DateTimeFieldUpdateOperationsInput
     emoij?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    feedback?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
     id?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    stars?: NexusGenInputs["IntFieldUpdateOperationsInput"] | null; // IntFieldUpdateOperationsInput
     thread?: NexusGenInputs["ThreadUpdateOneWithoutReactionsInput"] | null; // ThreadUpdateOneWithoutReactionsInput
     updatedAt?: NexusGenInputs["DateTimeFieldUpdateOperationsInput"] | null; // DateTimeFieldUpdateOperationsInput
+    work?: NexusGenInputs["WorkUpdateOneWithoutReactionsInput"] | null; // WorkUpdateOneWithoutReactionsInput
+  };
+  ReactionUpdateWithoutWorkInput: {
+    // input type
+    createdAt?: NexusGenInputs["DateTimeFieldUpdateOperationsInput"] | null; // DateTimeFieldUpdateOperationsInput
+    emoij?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    feedback?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    id?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    stars?: NexusGenInputs["IntFieldUpdateOperationsInput"] | null; // IntFieldUpdateOperationsInput
+    thread?: NexusGenInputs["ThreadUpdateOneWithoutReactionsInput"] | null; // ThreadUpdateOneWithoutReactionsInput
+    updatedAt?: NexusGenInputs["DateTimeFieldUpdateOperationsInput"] | null; // DateTimeFieldUpdateOperationsInput
+    user?: NexusGenInputs["UserUpdateOneRequiredWithoutReactionsInput"] | null; // UserUpdateOneRequiredWithoutReactionsInput
   };
   ReactionUpsertWithWhereUniqueWithoutThreadInput: {
     // input type
@@ -2345,19 +2611,29 @@ export interface NexusGenInputs {
     update: NexusGenInputs["ReactionUpdateWithoutUserInput"]; // ReactionUpdateWithoutUserInput!
     where: NexusGenInputs["ReactionWhereUniqueInput"]; // ReactionWhereUniqueInput!
   };
+  ReactionUpsertWithWhereUniqueWithoutWorkInput: {
+    // input type
+    create: NexusGenInputs["ReactionCreateWithoutWorkInput"]; // ReactionCreateWithoutWorkInput!
+    update: NexusGenInputs["ReactionUpdateWithoutWorkInput"]; // ReactionUpdateWithoutWorkInput!
+    where: NexusGenInputs["ReactionWhereUniqueInput"]; // ReactionWhereUniqueInput!
+  };
   ReactionWhereInput: {
     // input type
     AND?: NexusGenInputs["ReactionWhereInput"][] | null; // [ReactionWhereInput!]
     createdAt?: NexusGenInputs["DateTimeFilter"] | null; // DateTimeFilter
     emoij?: NexusGenInputs["StringFilter"] | null; // StringFilter
+    feedback?: NexusGenInputs["StringFilter"] | null; // StringFilter
     id?: NexusGenInputs["StringFilter"] | null; // StringFilter
     NOT?: NexusGenInputs["ReactionWhereInput"][] | null; // [ReactionWhereInput!]
     OR?: NexusGenInputs["ReactionWhereInput"][] | null; // [ReactionWhereInput!]
+    stars?: NexusGenInputs["IntFilter"] | null; // IntFilter
     thread?: NexusGenInputs["ThreadWhereInput"] | null; // ThreadWhereInput
     threadId?: NexusGenInputs["StringNullableFilter"] | null; // StringNullableFilter
     updatedAt?: NexusGenInputs["DateTimeFilter"] | null; // DateTimeFilter
     user?: NexusGenInputs["UserWhereInput"] | null; // UserWhereInput
     userId?: NexusGenInputs["StringFilter"] | null; // StringFilter
+    work?: NexusGenInputs["WorkWhereInput"] | null; // WorkWhereInput
+    workId?: NexusGenInputs["StringNullableFilter"] | null; // StringNullableFilter
   };
   ReactionWhereUniqueInput: {
     // input type
@@ -2365,9 +2641,9 @@ export interface NexusGenInputs {
   };
   SchoolCreateInput: {
     // input type
-    Activity?: NexusGenInputs["ActivityCreateManyWithoutSchoolInput"] | null; // ActivityCreateManyWithoutSchoolInput
+    activity?: NexusGenInputs["ActivityCreateManyWithoutSchoolInput"] | null; // ActivityCreateManyWithoutSchoolInput
     address?: string | null; // String
-    Attachment?:
+    attachment?:
       | NexusGenInputs["AttachmentCreateManyWithoutSchoolInput"]
       | null; // AttachmentCreateManyWithoutSchoolInput
     ballots?: NexusGenInputs["BallotCreateManyWithoutSchoolInput"] | null; // BallotCreateManyWithoutSchoolInput
@@ -2378,10 +2654,11 @@ export interface NexusGenInputs {
     members?: NexusGenInputs["UserCreateManyWithoutSchoolInput"] | null; // UserCreateManyWithoutSchoolInput
     name: string; // String!
     teams?: NexusGenInputs["TeamCreateManyWithoutSchoolInput"] | null; // TeamCreateManyWithoutSchoolInput
-    Thread?: NexusGenInputs["ThreadCreateManyWithoutSchoolInput"] | null; // ThreadCreateManyWithoutSchoolInput
+    thread?: NexusGenInputs["ThreadCreateManyWithoutSchoolInput"] | null; // ThreadCreateManyWithoutSchoolInput
     type?: string | null; // String
     Vote?: NexusGenInputs["VoteCreateManyWithoutSchoolInput"] | null; // VoteCreateManyWithoutSchoolInput
     Voted?: NexusGenInputs["VotedCreateManyWithoutSchoolInput"] | null; // VotedCreateManyWithoutSchoolInput
+    work?: NexusGenInputs["WorkCreateManyWithoutSchoolInput"] | null; // WorkCreateManyWithoutSchoolInput
     zip?: string | null; // String
   };
   SchoolCreateManyWithoutDomainInput: {
@@ -2396,16 +2673,16 @@ export interface NexusGenInputs {
     // input type
     connect?: NexusGenInputs["SchoolWhereUniqueInput"] | null; // SchoolWhereUniqueInput
     connectOrCreate?:
-      | NexusGenInputs["SchoolCreateOrConnectWithoutActivityInput"]
-      | null; // SchoolCreateOrConnectWithoutActivityInput
+      | NexusGenInputs["SchoolCreateOrConnectWithoutactivityInput"]
+      | null; // SchoolCreateOrConnectWithoutactivityInput
     create?: NexusGenInputs["SchoolCreateWithoutActivityInput"] | null; // SchoolCreateWithoutActivityInput
   };
   SchoolCreateOneWithoutAttachmentInput: {
     // input type
     connect?: NexusGenInputs["SchoolWhereUniqueInput"] | null; // SchoolWhereUniqueInput
     connectOrCreate?:
-      | NexusGenInputs["SchoolCreateOrConnectWithoutAttachmentInput"]
-      | null; // SchoolCreateOrConnectWithoutAttachmentInput
+      | NexusGenInputs["SchoolCreateOrConnectWithoutattachmentInput"]
+      | null; // SchoolCreateOrConnectWithoutattachmentInput
     create?: NexusGenInputs["SchoolCreateWithoutAttachmentInput"] | null; // SchoolCreateWithoutAttachmentInput
   };
   SchoolCreateOneWithoutBallotsInput: {
@@ -2436,8 +2713,8 @@ export interface NexusGenInputs {
     // input type
     connect?: NexusGenInputs["SchoolWhereUniqueInput"] | null; // SchoolWhereUniqueInput
     connectOrCreate?:
-      | NexusGenInputs["SchoolCreateOrConnectWithoutThreadInput"]
-      | null; // SchoolCreateOrConnectWithoutThreadInput
+      | NexusGenInputs["SchoolCreateOrConnectWithoutthreadInput"]
+      | null; // SchoolCreateOrConnectWithoutthreadInput
     create?: NexusGenInputs["SchoolCreateWithoutThreadInput"] | null; // SchoolCreateWithoutThreadInput
   };
   SchoolCreateOneWithoutVoteInput: {
@@ -2456,20 +2733,13 @@ export interface NexusGenInputs {
       | null; // SchoolCreateOrConnectWithoutVotedInput
     create?: NexusGenInputs["SchoolCreateWithoutVotedInput"] | null; // SchoolCreateWithoutVotedInput
   };
-  SchoolCreateOrConnectWithoutActivityInput: {
+  SchoolCreateOneWithoutWorkInput: {
     // input type
-    create: NexusGenInputs["SchoolCreateWithoutActivityInput"]; // SchoolCreateWithoutActivityInput!
-    where: NexusGenInputs["SchoolWhereUniqueInput"]; // SchoolWhereUniqueInput!
-  };
-  SchoolCreateOrConnectWithoutAttachmentInput: {
-    // input type
-    create: NexusGenInputs["SchoolCreateWithoutAttachmentInput"]; // SchoolCreateWithoutAttachmentInput!
-    where: NexusGenInputs["SchoolWhereUniqueInput"]; // SchoolWhereUniqueInput!
-  };
-  SchoolCreateOrConnectWithoutThreadInput: {
-    // input type
-    create: NexusGenInputs["SchoolCreateWithoutThreadInput"]; // SchoolCreateWithoutThreadInput!
-    where: NexusGenInputs["SchoolWhereUniqueInput"]; // SchoolWhereUniqueInput!
+    connect?: NexusGenInputs["SchoolWhereUniqueInput"] | null; // SchoolWhereUniqueInput
+    connectOrCreate?:
+      | NexusGenInputs["SchoolCreateOrConnectWithoutworkInput"]
+      | null; // SchoolCreateOrConnectWithoutworkInput
+    create?: NexusGenInputs["SchoolCreateWithoutWorkInput"] | null; // SchoolCreateWithoutWorkInput
   };
   SchoolCreateOrConnectWithoutVoteInput: {
     // input type
@@ -2479,6 +2749,16 @@ export interface NexusGenInputs {
   SchoolCreateOrConnectWithoutVotedInput: {
     // input type
     create: NexusGenInputs["SchoolCreateWithoutVotedInput"]; // SchoolCreateWithoutVotedInput!
+    where: NexusGenInputs["SchoolWhereUniqueInput"]; // SchoolWhereUniqueInput!
+  };
+  SchoolCreateOrConnectWithoutactivityInput: {
+    // input type
+    create: NexusGenInputs["SchoolCreateWithoutActivityInput"]; // SchoolCreateWithoutActivityInput!
+    where: NexusGenInputs["SchoolWhereUniqueInput"]; // SchoolWhereUniqueInput!
+  };
+  SchoolCreateOrConnectWithoutattachmentInput: {
+    // input type
+    create: NexusGenInputs["SchoolCreateWithoutAttachmentInput"]; // SchoolCreateWithoutAttachmentInput!
     where: NexusGenInputs["SchoolWhereUniqueInput"]; // SchoolWhereUniqueInput!
   };
   SchoolCreateOrConnectWithoutballotsInput: {
@@ -2501,10 +2781,20 @@ export interface NexusGenInputs {
     create: NexusGenInputs["SchoolCreateWithoutTeamsInput"]; // SchoolCreateWithoutTeamsInput!
     where: NexusGenInputs["SchoolWhereUniqueInput"]; // SchoolWhereUniqueInput!
   };
+  SchoolCreateOrConnectWithoutthreadInput: {
+    // input type
+    create: NexusGenInputs["SchoolCreateWithoutThreadInput"]; // SchoolCreateWithoutThreadInput!
+    where: NexusGenInputs["SchoolWhereUniqueInput"]; // SchoolWhereUniqueInput!
+  };
+  SchoolCreateOrConnectWithoutworkInput: {
+    // input type
+    create: NexusGenInputs["SchoolCreateWithoutWorkInput"]; // SchoolCreateWithoutWorkInput!
+    where: NexusGenInputs["SchoolWhereUniqueInput"]; // SchoolWhereUniqueInput!
+  };
   SchoolCreateWithoutActivityInput: {
     // input type
     address?: string | null; // String
-    Attachment?:
+    attachment?:
       | NexusGenInputs["AttachmentCreateManyWithoutSchoolInput"]
       | null; // AttachmentCreateManyWithoutSchoolInput
     ballots?: NexusGenInputs["BallotCreateManyWithoutSchoolInput"] | null; // BallotCreateManyWithoutSchoolInput
@@ -2515,15 +2805,16 @@ export interface NexusGenInputs {
     members?: NexusGenInputs["UserCreateManyWithoutSchoolInput"] | null; // UserCreateManyWithoutSchoolInput
     name: string; // String!
     teams?: NexusGenInputs["TeamCreateManyWithoutSchoolInput"] | null; // TeamCreateManyWithoutSchoolInput
-    Thread?: NexusGenInputs["ThreadCreateManyWithoutSchoolInput"] | null; // ThreadCreateManyWithoutSchoolInput
+    thread?: NexusGenInputs["ThreadCreateManyWithoutSchoolInput"] | null; // ThreadCreateManyWithoutSchoolInput
     type?: string | null; // String
     Vote?: NexusGenInputs["VoteCreateManyWithoutSchoolInput"] | null; // VoteCreateManyWithoutSchoolInput
     Voted?: NexusGenInputs["VotedCreateManyWithoutSchoolInput"] | null; // VotedCreateManyWithoutSchoolInput
+    work?: NexusGenInputs["WorkCreateManyWithoutSchoolInput"] | null; // WorkCreateManyWithoutSchoolInput
     zip?: string | null; // String
   };
   SchoolCreateWithoutAttachmentInput: {
     // input type
-    Activity?: NexusGenInputs["ActivityCreateManyWithoutSchoolInput"] | null; // ActivityCreateManyWithoutSchoolInput
+    activity?: NexusGenInputs["ActivityCreateManyWithoutSchoolInput"] | null; // ActivityCreateManyWithoutSchoolInput
     address?: string | null; // String
     ballots?: NexusGenInputs["BallotCreateManyWithoutSchoolInput"] | null; // BallotCreateManyWithoutSchoolInput
     canton?: string | null; // String
@@ -2533,17 +2824,18 @@ export interface NexusGenInputs {
     members?: NexusGenInputs["UserCreateManyWithoutSchoolInput"] | null; // UserCreateManyWithoutSchoolInput
     name: string; // String!
     teams?: NexusGenInputs["TeamCreateManyWithoutSchoolInput"] | null; // TeamCreateManyWithoutSchoolInput
-    Thread?: NexusGenInputs["ThreadCreateManyWithoutSchoolInput"] | null; // ThreadCreateManyWithoutSchoolInput
+    thread?: NexusGenInputs["ThreadCreateManyWithoutSchoolInput"] | null; // ThreadCreateManyWithoutSchoolInput
     type?: string | null; // String
     Vote?: NexusGenInputs["VoteCreateManyWithoutSchoolInput"] | null; // VoteCreateManyWithoutSchoolInput
     Voted?: NexusGenInputs["VotedCreateManyWithoutSchoolInput"] | null; // VotedCreateManyWithoutSchoolInput
+    work?: NexusGenInputs["WorkCreateManyWithoutSchoolInput"] | null; // WorkCreateManyWithoutSchoolInput
     zip?: string | null; // String
   };
   SchoolCreateWithoutBallotsInput: {
     // input type
-    Activity?: NexusGenInputs["ActivityCreateManyWithoutSchoolInput"] | null; // ActivityCreateManyWithoutSchoolInput
+    activity?: NexusGenInputs["ActivityCreateManyWithoutSchoolInput"] | null; // ActivityCreateManyWithoutSchoolInput
     address?: string | null; // String
-    Attachment?:
+    attachment?:
       | NexusGenInputs["AttachmentCreateManyWithoutSchoolInput"]
       | null; // AttachmentCreateManyWithoutSchoolInput
     canton?: string | null; // String
@@ -2553,17 +2845,18 @@ export interface NexusGenInputs {
     members?: NexusGenInputs["UserCreateManyWithoutSchoolInput"] | null; // UserCreateManyWithoutSchoolInput
     name: string; // String!
     teams?: NexusGenInputs["TeamCreateManyWithoutSchoolInput"] | null; // TeamCreateManyWithoutSchoolInput
-    Thread?: NexusGenInputs["ThreadCreateManyWithoutSchoolInput"] | null; // ThreadCreateManyWithoutSchoolInput
+    thread?: NexusGenInputs["ThreadCreateManyWithoutSchoolInput"] | null; // ThreadCreateManyWithoutSchoolInput
     type?: string | null; // String
     Vote?: NexusGenInputs["VoteCreateManyWithoutSchoolInput"] | null; // VoteCreateManyWithoutSchoolInput
     Voted?: NexusGenInputs["VotedCreateManyWithoutSchoolInput"] | null; // VotedCreateManyWithoutSchoolInput
+    work?: NexusGenInputs["WorkCreateManyWithoutSchoolInput"] | null; // WorkCreateManyWithoutSchoolInput
     zip?: string | null; // String
   };
   SchoolCreateWithoutDomainInput: {
     // input type
-    Activity?: NexusGenInputs["ActivityCreateManyWithoutSchoolInput"] | null; // ActivityCreateManyWithoutSchoolInput
+    activity?: NexusGenInputs["ActivityCreateManyWithoutSchoolInput"] | null; // ActivityCreateManyWithoutSchoolInput
     address?: string | null; // String
-    Attachment?:
+    attachment?:
       | NexusGenInputs["AttachmentCreateManyWithoutSchoolInput"]
       | null; // AttachmentCreateManyWithoutSchoolInput
     ballots?: NexusGenInputs["BallotCreateManyWithoutSchoolInput"] | null; // BallotCreateManyWithoutSchoolInput
@@ -2573,17 +2866,18 @@ export interface NexusGenInputs {
     members?: NexusGenInputs["UserCreateManyWithoutSchoolInput"] | null; // UserCreateManyWithoutSchoolInput
     name: string; // String!
     teams?: NexusGenInputs["TeamCreateManyWithoutSchoolInput"] | null; // TeamCreateManyWithoutSchoolInput
-    Thread?: NexusGenInputs["ThreadCreateManyWithoutSchoolInput"] | null; // ThreadCreateManyWithoutSchoolInput
+    thread?: NexusGenInputs["ThreadCreateManyWithoutSchoolInput"] | null; // ThreadCreateManyWithoutSchoolInput
     type?: string | null; // String
     Vote?: NexusGenInputs["VoteCreateManyWithoutSchoolInput"] | null; // VoteCreateManyWithoutSchoolInput
     Voted?: NexusGenInputs["VotedCreateManyWithoutSchoolInput"] | null; // VotedCreateManyWithoutSchoolInput
+    work?: NexusGenInputs["WorkCreateManyWithoutSchoolInput"] | null; // WorkCreateManyWithoutSchoolInput
     zip?: string | null; // String
   };
   SchoolCreateWithoutMembersInput: {
     // input type
-    Activity?: NexusGenInputs["ActivityCreateManyWithoutSchoolInput"] | null; // ActivityCreateManyWithoutSchoolInput
+    activity?: NexusGenInputs["ActivityCreateManyWithoutSchoolInput"] | null; // ActivityCreateManyWithoutSchoolInput
     address?: string | null; // String
-    Attachment?:
+    attachment?:
       | NexusGenInputs["AttachmentCreateManyWithoutSchoolInput"]
       | null; // AttachmentCreateManyWithoutSchoolInput
     ballots?: NexusGenInputs["BallotCreateManyWithoutSchoolInput"] | null; // BallotCreateManyWithoutSchoolInput
@@ -2593,17 +2887,18 @@ export interface NexusGenInputs {
     id?: string | null; // String
     name: string; // String!
     teams?: NexusGenInputs["TeamCreateManyWithoutSchoolInput"] | null; // TeamCreateManyWithoutSchoolInput
-    Thread?: NexusGenInputs["ThreadCreateManyWithoutSchoolInput"] | null; // ThreadCreateManyWithoutSchoolInput
+    thread?: NexusGenInputs["ThreadCreateManyWithoutSchoolInput"] | null; // ThreadCreateManyWithoutSchoolInput
     type?: string | null; // String
     Vote?: NexusGenInputs["VoteCreateManyWithoutSchoolInput"] | null; // VoteCreateManyWithoutSchoolInput
     Voted?: NexusGenInputs["VotedCreateManyWithoutSchoolInput"] | null; // VotedCreateManyWithoutSchoolInput
+    work?: NexusGenInputs["WorkCreateManyWithoutSchoolInput"] | null; // WorkCreateManyWithoutSchoolInput
     zip?: string | null; // String
   };
   SchoolCreateWithoutTeamsInput: {
     // input type
-    Activity?: NexusGenInputs["ActivityCreateManyWithoutSchoolInput"] | null; // ActivityCreateManyWithoutSchoolInput
+    activity?: NexusGenInputs["ActivityCreateManyWithoutSchoolInput"] | null; // ActivityCreateManyWithoutSchoolInput
     address?: string | null; // String
-    Attachment?:
+    attachment?:
       | NexusGenInputs["AttachmentCreateManyWithoutSchoolInput"]
       | null; // AttachmentCreateManyWithoutSchoolInput
     ballots?: NexusGenInputs["BallotCreateManyWithoutSchoolInput"] | null; // BallotCreateManyWithoutSchoolInput
@@ -2613,17 +2908,18 @@ export interface NexusGenInputs {
     id?: string | null; // String
     members?: NexusGenInputs["UserCreateManyWithoutSchoolInput"] | null; // UserCreateManyWithoutSchoolInput
     name: string; // String!
-    Thread?: NexusGenInputs["ThreadCreateManyWithoutSchoolInput"] | null; // ThreadCreateManyWithoutSchoolInput
+    thread?: NexusGenInputs["ThreadCreateManyWithoutSchoolInput"] | null; // ThreadCreateManyWithoutSchoolInput
     type?: string | null; // String
     Vote?: NexusGenInputs["VoteCreateManyWithoutSchoolInput"] | null; // VoteCreateManyWithoutSchoolInput
     Voted?: NexusGenInputs["VotedCreateManyWithoutSchoolInput"] | null; // VotedCreateManyWithoutSchoolInput
+    work?: NexusGenInputs["WorkCreateManyWithoutSchoolInput"] | null; // WorkCreateManyWithoutSchoolInput
     zip?: string | null; // String
   };
   SchoolCreateWithoutThreadInput: {
     // input type
-    Activity?: NexusGenInputs["ActivityCreateManyWithoutSchoolInput"] | null; // ActivityCreateManyWithoutSchoolInput
+    activity?: NexusGenInputs["ActivityCreateManyWithoutSchoolInput"] | null; // ActivityCreateManyWithoutSchoolInput
     address?: string | null; // String
-    Attachment?:
+    attachment?:
       | NexusGenInputs["AttachmentCreateManyWithoutSchoolInput"]
       | null; // AttachmentCreateManyWithoutSchoolInput
     ballots?: NexusGenInputs["BallotCreateManyWithoutSchoolInput"] | null; // BallotCreateManyWithoutSchoolInput
@@ -2637,13 +2933,14 @@ export interface NexusGenInputs {
     type?: string | null; // String
     Vote?: NexusGenInputs["VoteCreateManyWithoutSchoolInput"] | null; // VoteCreateManyWithoutSchoolInput
     Voted?: NexusGenInputs["VotedCreateManyWithoutSchoolInput"] | null; // VotedCreateManyWithoutSchoolInput
+    work?: NexusGenInputs["WorkCreateManyWithoutSchoolInput"] | null; // WorkCreateManyWithoutSchoolInput
     zip?: string | null; // String
   };
   SchoolCreateWithoutVoteInput: {
     // input type
-    Activity?: NexusGenInputs["ActivityCreateManyWithoutSchoolInput"] | null; // ActivityCreateManyWithoutSchoolInput
+    activity?: NexusGenInputs["ActivityCreateManyWithoutSchoolInput"] | null; // ActivityCreateManyWithoutSchoolInput
     address?: string | null; // String
-    Attachment?:
+    attachment?:
       | NexusGenInputs["AttachmentCreateManyWithoutSchoolInput"]
       | null; // AttachmentCreateManyWithoutSchoolInput
     ballots?: NexusGenInputs["BallotCreateManyWithoutSchoolInput"] | null; // BallotCreateManyWithoutSchoolInput
@@ -2654,16 +2951,17 @@ export interface NexusGenInputs {
     members?: NexusGenInputs["UserCreateManyWithoutSchoolInput"] | null; // UserCreateManyWithoutSchoolInput
     name: string; // String!
     teams?: NexusGenInputs["TeamCreateManyWithoutSchoolInput"] | null; // TeamCreateManyWithoutSchoolInput
-    Thread?: NexusGenInputs["ThreadCreateManyWithoutSchoolInput"] | null; // ThreadCreateManyWithoutSchoolInput
+    thread?: NexusGenInputs["ThreadCreateManyWithoutSchoolInput"] | null; // ThreadCreateManyWithoutSchoolInput
     type?: string | null; // String
     Voted?: NexusGenInputs["VotedCreateManyWithoutSchoolInput"] | null; // VotedCreateManyWithoutSchoolInput
+    work?: NexusGenInputs["WorkCreateManyWithoutSchoolInput"] | null; // WorkCreateManyWithoutSchoolInput
     zip?: string | null; // String
   };
   SchoolCreateWithoutVotedInput: {
     // input type
-    Activity?: NexusGenInputs["ActivityCreateManyWithoutSchoolInput"] | null; // ActivityCreateManyWithoutSchoolInput
+    activity?: NexusGenInputs["ActivityCreateManyWithoutSchoolInput"] | null; // ActivityCreateManyWithoutSchoolInput
     address?: string | null; // String
-    Attachment?:
+    attachment?:
       | NexusGenInputs["AttachmentCreateManyWithoutSchoolInput"]
       | null; // AttachmentCreateManyWithoutSchoolInput
     ballots?: NexusGenInputs["BallotCreateManyWithoutSchoolInput"] | null; // BallotCreateManyWithoutSchoolInput
@@ -2674,9 +2972,31 @@ export interface NexusGenInputs {
     members?: NexusGenInputs["UserCreateManyWithoutSchoolInput"] | null; // UserCreateManyWithoutSchoolInput
     name: string; // String!
     teams?: NexusGenInputs["TeamCreateManyWithoutSchoolInput"] | null; // TeamCreateManyWithoutSchoolInput
-    Thread?: NexusGenInputs["ThreadCreateManyWithoutSchoolInput"] | null; // ThreadCreateManyWithoutSchoolInput
+    thread?: NexusGenInputs["ThreadCreateManyWithoutSchoolInput"] | null; // ThreadCreateManyWithoutSchoolInput
     type?: string | null; // String
     Vote?: NexusGenInputs["VoteCreateManyWithoutSchoolInput"] | null; // VoteCreateManyWithoutSchoolInput
+    work?: NexusGenInputs["WorkCreateManyWithoutSchoolInput"] | null; // WorkCreateManyWithoutSchoolInput
+    zip?: string | null; // String
+  };
+  SchoolCreateWithoutWorkInput: {
+    // input type
+    activity?: NexusGenInputs["ActivityCreateManyWithoutSchoolInput"] | null; // ActivityCreateManyWithoutSchoolInput
+    address?: string | null; // String
+    attachment?:
+      | NexusGenInputs["AttachmentCreateManyWithoutSchoolInput"]
+      | null; // AttachmentCreateManyWithoutSchoolInput
+    ballots?: NexusGenInputs["BallotCreateManyWithoutSchoolInput"] | null; // BallotCreateManyWithoutSchoolInput
+    canton?: string | null; // String
+    city?: string | null; // String
+    domain?: NexusGenInputs["DomainCreateOneWithoutSchoolsInput"] | null; // DomainCreateOneWithoutSchoolsInput
+    id?: string | null; // String
+    members?: NexusGenInputs["UserCreateManyWithoutSchoolInput"] | null; // UserCreateManyWithoutSchoolInput
+    name: string; // String!
+    teams?: NexusGenInputs["TeamCreateManyWithoutSchoolInput"] | null; // TeamCreateManyWithoutSchoolInput
+    thread?: NexusGenInputs["ThreadCreateManyWithoutSchoolInput"] | null; // ThreadCreateManyWithoutSchoolInput
+    type?: string | null; // String
+    Vote?: NexusGenInputs["VoteCreateManyWithoutSchoolInput"] | null; // VoteCreateManyWithoutSchoolInput
+    Voted?: NexusGenInputs["VotedCreateManyWithoutSchoolInput"] | null; // VotedCreateManyWithoutSchoolInput
     zip?: string | null; // String
   };
   SchoolListRelationFilter: {
@@ -2750,8 +3070,8 @@ export interface NexusGenInputs {
     // input type
     connect?: NexusGenInputs["SchoolWhereUniqueInput"] | null; // SchoolWhereUniqueInput
     connectOrCreate?:
-      | NexusGenInputs["SchoolCreateOrConnectWithoutActivityInput"]
-      | null; // SchoolCreateOrConnectWithoutActivityInput
+      | NexusGenInputs["SchoolCreateOrConnectWithoutactivityInput"]
+      | null; // SchoolCreateOrConnectWithoutactivityInput
     create?: NexusGenInputs["SchoolCreateWithoutActivityInput"] | null; // SchoolCreateWithoutActivityInput
     update?: NexusGenInputs["SchoolUpdateWithoutActivityInput"] | null; // SchoolUpdateWithoutActivityInput
     upsert?: NexusGenInputs["SchoolUpsertWithoutActivityInput"] | null; // SchoolUpsertWithoutActivityInput
@@ -2770,8 +3090,8 @@ export interface NexusGenInputs {
     // input type
     connect?: NexusGenInputs["SchoolWhereUniqueInput"] | null; // SchoolWhereUniqueInput
     connectOrCreate?:
-      | NexusGenInputs["SchoolCreateOrConnectWithoutAttachmentInput"]
-      | null; // SchoolCreateOrConnectWithoutAttachmentInput
+      | NexusGenInputs["SchoolCreateOrConnectWithoutattachmentInput"]
+      | null; // SchoolCreateOrConnectWithoutattachmentInput
     create?: NexusGenInputs["SchoolCreateWithoutAttachmentInput"] | null; // SchoolCreateWithoutAttachmentInput
     delete?: boolean | null; // Boolean
     disconnect?: boolean | null; // Boolean
@@ -2806,8 +3126,8 @@ export interface NexusGenInputs {
     // input type
     connect?: NexusGenInputs["SchoolWhereUniqueInput"] | null; // SchoolWhereUniqueInput
     connectOrCreate?:
-      | NexusGenInputs["SchoolCreateOrConnectWithoutThreadInput"]
-      | null; // SchoolCreateOrConnectWithoutThreadInput
+      | NexusGenInputs["SchoolCreateOrConnectWithoutthreadInput"]
+      | null; // SchoolCreateOrConnectWithoutthreadInput
     create?: NexusGenInputs["SchoolCreateWithoutThreadInput"] | null; // SchoolCreateWithoutThreadInput
     delete?: boolean | null; // Boolean
     disconnect?: boolean | null; // Boolean
@@ -2838,6 +3158,18 @@ export interface NexusGenInputs {
     update?: NexusGenInputs["SchoolUpdateWithoutVotedInput"] | null; // SchoolUpdateWithoutVotedInput
     upsert?: NexusGenInputs["SchoolUpsertWithoutVotedInput"] | null; // SchoolUpsertWithoutVotedInput
   };
+  SchoolUpdateOneWithoutWorkInput: {
+    // input type
+    connect?: NexusGenInputs["SchoolWhereUniqueInput"] | null; // SchoolWhereUniqueInput
+    connectOrCreate?:
+      | NexusGenInputs["SchoolCreateOrConnectWithoutworkInput"]
+      | null; // SchoolCreateOrConnectWithoutworkInput
+    create?: NexusGenInputs["SchoolCreateWithoutWorkInput"] | null; // SchoolCreateWithoutWorkInput
+    delete?: boolean | null; // Boolean
+    disconnect?: boolean | null; // Boolean
+    update?: NexusGenInputs["SchoolUpdateWithoutWorkInput"] | null; // SchoolUpdateWithoutWorkInput
+    upsert?: NexusGenInputs["SchoolUpsertWithoutWorkInput"] | null; // SchoolUpsertWithoutWorkInput
+  };
   SchoolUpdateWithWhereUniqueWithoutDomainInput: {
     // input type
     data: NexusGenInputs["SchoolUpdateWithoutDomainInput"]; // SchoolUpdateWithoutDomainInput!
@@ -2846,7 +3178,7 @@ export interface NexusGenInputs {
   SchoolUpdateWithoutActivityInput: {
     // input type
     address?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
-    Attachment?:
+    attachment?:
       | NexusGenInputs["AttachmentUpdateManyWithoutSchoolInput"]
       | null; // AttachmentUpdateManyWithoutSchoolInput
     ballots?: NexusGenInputs["BallotUpdateManyWithoutSchoolInput"] | null; // BallotUpdateManyWithoutSchoolInput
@@ -2857,15 +3189,16 @@ export interface NexusGenInputs {
     members?: NexusGenInputs["UserUpdateManyWithoutSchoolInput"] | null; // UserUpdateManyWithoutSchoolInput
     name?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
     teams?: NexusGenInputs["TeamUpdateManyWithoutSchoolInput"] | null; // TeamUpdateManyWithoutSchoolInput
-    Thread?: NexusGenInputs["ThreadUpdateManyWithoutSchoolInput"] | null; // ThreadUpdateManyWithoutSchoolInput
+    thread?: NexusGenInputs["ThreadUpdateManyWithoutSchoolInput"] | null; // ThreadUpdateManyWithoutSchoolInput
     type?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
     Vote?: NexusGenInputs["VoteUpdateManyWithoutSchoolInput"] | null; // VoteUpdateManyWithoutSchoolInput
     Voted?: NexusGenInputs["VotedUpdateManyWithoutSchoolInput"] | null; // VotedUpdateManyWithoutSchoolInput
+    work?: NexusGenInputs["WorkUpdateManyWithoutSchoolInput"] | null; // WorkUpdateManyWithoutSchoolInput
     zip?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
   };
   SchoolUpdateWithoutAttachmentInput: {
     // input type
-    Activity?: NexusGenInputs["ActivityUpdateManyWithoutSchoolInput"] | null; // ActivityUpdateManyWithoutSchoolInput
+    activity?: NexusGenInputs["ActivityUpdateManyWithoutSchoolInput"] | null; // ActivityUpdateManyWithoutSchoolInput
     address?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
     ballots?: NexusGenInputs["BallotUpdateManyWithoutSchoolInput"] | null; // BallotUpdateManyWithoutSchoolInput
     canton?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
@@ -2875,17 +3208,18 @@ export interface NexusGenInputs {
     members?: NexusGenInputs["UserUpdateManyWithoutSchoolInput"] | null; // UserUpdateManyWithoutSchoolInput
     name?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
     teams?: NexusGenInputs["TeamUpdateManyWithoutSchoolInput"] | null; // TeamUpdateManyWithoutSchoolInput
-    Thread?: NexusGenInputs["ThreadUpdateManyWithoutSchoolInput"] | null; // ThreadUpdateManyWithoutSchoolInput
+    thread?: NexusGenInputs["ThreadUpdateManyWithoutSchoolInput"] | null; // ThreadUpdateManyWithoutSchoolInput
     type?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
     Vote?: NexusGenInputs["VoteUpdateManyWithoutSchoolInput"] | null; // VoteUpdateManyWithoutSchoolInput
     Voted?: NexusGenInputs["VotedUpdateManyWithoutSchoolInput"] | null; // VotedUpdateManyWithoutSchoolInput
+    work?: NexusGenInputs["WorkUpdateManyWithoutSchoolInput"] | null; // WorkUpdateManyWithoutSchoolInput
     zip?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
   };
   SchoolUpdateWithoutBallotsInput: {
     // input type
-    Activity?: NexusGenInputs["ActivityUpdateManyWithoutSchoolInput"] | null; // ActivityUpdateManyWithoutSchoolInput
+    activity?: NexusGenInputs["ActivityUpdateManyWithoutSchoolInput"] | null; // ActivityUpdateManyWithoutSchoolInput
     address?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
-    Attachment?:
+    attachment?:
       | NexusGenInputs["AttachmentUpdateManyWithoutSchoolInput"]
       | null; // AttachmentUpdateManyWithoutSchoolInput
     canton?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
@@ -2895,17 +3229,18 @@ export interface NexusGenInputs {
     members?: NexusGenInputs["UserUpdateManyWithoutSchoolInput"] | null; // UserUpdateManyWithoutSchoolInput
     name?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
     teams?: NexusGenInputs["TeamUpdateManyWithoutSchoolInput"] | null; // TeamUpdateManyWithoutSchoolInput
-    Thread?: NexusGenInputs["ThreadUpdateManyWithoutSchoolInput"] | null; // ThreadUpdateManyWithoutSchoolInput
+    thread?: NexusGenInputs["ThreadUpdateManyWithoutSchoolInput"] | null; // ThreadUpdateManyWithoutSchoolInput
     type?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
     Vote?: NexusGenInputs["VoteUpdateManyWithoutSchoolInput"] | null; // VoteUpdateManyWithoutSchoolInput
     Voted?: NexusGenInputs["VotedUpdateManyWithoutSchoolInput"] | null; // VotedUpdateManyWithoutSchoolInput
+    work?: NexusGenInputs["WorkUpdateManyWithoutSchoolInput"] | null; // WorkUpdateManyWithoutSchoolInput
     zip?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
   };
   SchoolUpdateWithoutDomainInput: {
     // input type
-    Activity?: NexusGenInputs["ActivityUpdateManyWithoutSchoolInput"] | null; // ActivityUpdateManyWithoutSchoolInput
+    activity?: NexusGenInputs["ActivityUpdateManyWithoutSchoolInput"] | null; // ActivityUpdateManyWithoutSchoolInput
     address?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
-    Attachment?:
+    attachment?:
       | NexusGenInputs["AttachmentUpdateManyWithoutSchoolInput"]
       | null; // AttachmentUpdateManyWithoutSchoolInput
     ballots?: NexusGenInputs["BallotUpdateManyWithoutSchoolInput"] | null; // BallotUpdateManyWithoutSchoolInput
@@ -2915,17 +3250,18 @@ export interface NexusGenInputs {
     members?: NexusGenInputs["UserUpdateManyWithoutSchoolInput"] | null; // UserUpdateManyWithoutSchoolInput
     name?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
     teams?: NexusGenInputs["TeamUpdateManyWithoutSchoolInput"] | null; // TeamUpdateManyWithoutSchoolInput
-    Thread?: NexusGenInputs["ThreadUpdateManyWithoutSchoolInput"] | null; // ThreadUpdateManyWithoutSchoolInput
+    thread?: NexusGenInputs["ThreadUpdateManyWithoutSchoolInput"] | null; // ThreadUpdateManyWithoutSchoolInput
     type?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
     Vote?: NexusGenInputs["VoteUpdateManyWithoutSchoolInput"] | null; // VoteUpdateManyWithoutSchoolInput
     Voted?: NexusGenInputs["VotedUpdateManyWithoutSchoolInput"] | null; // VotedUpdateManyWithoutSchoolInput
+    work?: NexusGenInputs["WorkUpdateManyWithoutSchoolInput"] | null; // WorkUpdateManyWithoutSchoolInput
     zip?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
   };
   SchoolUpdateWithoutMembersInput: {
     // input type
-    Activity?: NexusGenInputs["ActivityUpdateManyWithoutSchoolInput"] | null; // ActivityUpdateManyWithoutSchoolInput
+    activity?: NexusGenInputs["ActivityUpdateManyWithoutSchoolInput"] | null; // ActivityUpdateManyWithoutSchoolInput
     address?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
-    Attachment?:
+    attachment?:
       | NexusGenInputs["AttachmentUpdateManyWithoutSchoolInput"]
       | null; // AttachmentUpdateManyWithoutSchoolInput
     ballots?: NexusGenInputs["BallotUpdateManyWithoutSchoolInput"] | null; // BallotUpdateManyWithoutSchoolInput
@@ -2935,17 +3271,18 @@ export interface NexusGenInputs {
     id?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
     name?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
     teams?: NexusGenInputs["TeamUpdateManyWithoutSchoolInput"] | null; // TeamUpdateManyWithoutSchoolInput
-    Thread?: NexusGenInputs["ThreadUpdateManyWithoutSchoolInput"] | null; // ThreadUpdateManyWithoutSchoolInput
+    thread?: NexusGenInputs["ThreadUpdateManyWithoutSchoolInput"] | null; // ThreadUpdateManyWithoutSchoolInput
     type?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
     Vote?: NexusGenInputs["VoteUpdateManyWithoutSchoolInput"] | null; // VoteUpdateManyWithoutSchoolInput
     Voted?: NexusGenInputs["VotedUpdateManyWithoutSchoolInput"] | null; // VotedUpdateManyWithoutSchoolInput
+    work?: NexusGenInputs["WorkUpdateManyWithoutSchoolInput"] | null; // WorkUpdateManyWithoutSchoolInput
     zip?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
   };
   SchoolUpdateWithoutTeamsInput: {
     // input type
-    Activity?: NexusGenInputs["ActivityUpdateManyWithoutSchoolInput"] | null; // ActivityUpdateManyWithoutSchoolInput
+    activity?: NexusGenInputs["ActivityUpdateManyWithoutSchoolInput"] | null; // ActivityUpdateManyWithoutSchoolInput
     address?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
-    Attachment?:
+    attachment?:
       | NexusGenInputs["AttachmentUpdateManyWithoutSchoolInput"]
       | null; // AttachmentUpdateManyWithoutSchoolInput
     ballots?: NexusGenInputs["BallotUpdateManyWithoutSchoolInput"] | null; // BallotUpdateManyWithoutSchoolInput
@@ -2955,17 +3292,18 @@ export interface NexusGenInputs {
     id?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
     members?: NexusGenInputs["UserUpdateManyWithoutSchoolInput"] | null; // UserUpdateManyWithoutSchoolInput
     name?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
-    Thread?: NexusGenInputs["ThreadUpdateManyWithoutSchoolInput"] | null; // ThreadUpdateManyWithoutSchoolInput
+    thread?: NexusGenInputs["ThreadUpdateManyWithoutSchoolInput"] | null; // ThreadUpdateManyWithoutSchoolInput
     type?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
     Vote?: NexusGenInputs["VoteUpdateManyWithoutSchoolInput"] | null; // VoteUpdateManyWithoutSchoolInput
     Voted?: NexusGenInputs["VotedUpdateManyWithoutSchoolInput"] | null; // VotedUpdateManyWithoutSchoolInput
+    work?: NexusGenInputs["WorkUpdateManyWithoutSchoolInput"] | null; // WorkUpdateManyWithoutSchoolInput
     zip?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
   };
   SchoolUpdateWithoutThreadInput: {
     // input type
-    Activity?: NexusGenInputs["ActivityUpdateManyWithoutSchoolInput"] | null; // ActivityUpdateManyWithoutSchoolInput
+    activity?: NexusGenInputs["ActivityUpdateManyWithoutSchoolInput"] | null; // ActivityUpdateManyWithoutSchoolInput
     address?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
-    Attachment?:
+    attachment?:
       | NexusGenInputs["AttachmentUpdateManyWithoutSchoolInput"]
       | null; // AttachmentUpdateManyWithoutSchoolInput
     ballots?: NexusGenInputs["BallotUpdateManyWithoutSchoolInput"] | null; // BallotUpdateManyWithoutSchoolInput
@@ -2979,13 +3317,14 @@ export interface NexusGenInputs {
     type?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
     Vote?: NexusGenInputs["VoteUpdateManyWithoutSchoolInput"] | null; // VoteUpdateManyWithoutSchoolInput
     Voted?: NexusGenInputs["VotedUpdateManyWithoutSchoolInput"] | null; // VotedUpdateManyWithoutSchoolInput
+    work?: NexusGenInputs["WorkUpdateManyWithoutSchoolInput"] | null; // WorkUpdateManyWithoutSchoolInput
     zip?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
   };
   SchoolUpdateWithoutVoteInput: {
     // input type
-    Activity?: NexusGenInputs["ActivityUpdateManyWithoutSchoolInput"] | null; // ActivityUpdateManyWithoutSchoolInput
+    activity?: NexusGenInputs["ActivityUpdateManyWithoutSchoolInput"] | null; // ActivityUpdateManyWithoutSchoolInput
     address?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
-    Attachment?:
+    attachment?:
       | NexusGenInputs["AttachmentUpdateManyWithoutSchoolInput"]
       | null; // AttachmentUpdateManyWithoutSchoolInput
     ballots?: NexusGenInputs["BallotUpdateManyWithoutSchoolInput"] | null; // BallotUpdateManyWithoutSchoolInput
@@ -2996,16 +3335,17 @@ export interface NexusGenInputs {
     members?: NexusGenInputs["UserUpdateManyWithoutSchoolInput"] | null; // UserUpdateManyWithoutSchoolInput
     name?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
     teams?: NexusGenInputs["TeamUpdateManyWithoutSchoolInput"] | null; // TeamUpdateManyWithoutSchoolInput
-    Thread?: NexusGenInputs["ThreadUpdateManyWithoutSchoolInput"] | null; // ThreadUpdateManyWithoutSchoolInput
+    thread?: NexusGenInputs["ThreadUpdateManyWithoutSchoolInput"] | null; // ThreadUpdateManyWithoutSchoolInput
     type?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
     Voted?: NexusGenInputs["VotedUpdateManyWithoutSchoolInput"] | null; // VotedUpdateManyWithoutSchoolInput
+    work?: NexusGenInputs["WorkUpdateManyWithoutSchoolInput"] | null; // WorkUpdateManyWithoutSchoolInput
     zip?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
   };
   SchoolUpdateWithoutVotedInput: {
     // input type
-    Activity?: NexusGenInputs["ActivityUpdateManyWithoutSchoolInput"] | null; // ActivityUpdateManyWithoutSchoolInput
+    activity?: NexusGenInputs["ActivityUpdateManyWithoutSchoolInput"] | null; // ActivityUpdateManyWithoutSchoolInput
     address?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
-    Attachment?:
+    attachment?:
       | NexusGenInputs["AttachmentUpdateManyWithoutSchoolInput"]
       | null; // AttachmentUpdateManyWithoutSchoolInput
     ballots?: NexusGenInputs["BallotUpdateManyWithoutSchoolInput"] | null; // BallotUpdateManyWithoutSchoolInput
@@ -3016,9 +3356,31 @@ export interface NexusGenInputs {
     members?: NexusGenInputs["UserUpdateManyWithoutSchoolInput"] | null; // UserUpdateManyWithoutSchoolInput
     name?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
     teams?: NexusGenInputs["TeamUpdateManyWithoutSchoolInput"] | null; // TeamUpdateManyWithoutSchoolInput
-    Thread?: NexusGenInputs["ThreadUpdateManyWithoutSchoolInput"] | null; // ThreadUpdateManyWithoutSchoolInput
+    thread?: NexusGenInputs["ThreadUpdateManyWithoutSchoolInput"] | null; // ThreadUpdateManyWithoutSchoolInput
     type?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
     Vote?: NexusGenInputs["VoteUpdateManyWithoutSchoolInput"] | null; // VoteUpdateManyWithoutSchoolInput
+    work?: NexusGenInputs["WorkUpdateManyWithoutSchoolInput"] | null; // WorkUpdateManyWithoutSchoolInput
+    zip?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+  };
+  SchoolUpdateWithoutWorkInput: {
+    // input type
+    activity?: NexusGenInputs["ActivityUpdateManyWithoutSchoolInput"] | null; // ActivityUpdateManyWithoutSchoolInput
+    address?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    attachment?:
+      | NexusGenInputs["AttachmentUpdateManyWithoutSchoolInput"]
+      | null; // AttachmentUpdateManyWithoutSchoolInput
+    ballots?: NexusGenInputs["BallotUpdateManyWithoutSchoolInput"] | null; // BallotUpdateManyWithoutSchoolInput
+    canton?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    city?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    domain?: NexusGenInputs["DomainUpdateOneWithoutSchoolsInput"] | null; // DomainUpdateOneWithoutSchoolsInput
+    id?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    members?: NexusGenInputs["UserUpdateManyWithoutSchoolInput"] | null; // UserUpdateManyWithoutSchoolInput
+    name?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    teams?: NexusGenInputs["TeamUpdateManyWithoutSchoolInput"] | null; // TeamUpdateManyWithoutSchoolInput
+    thread?: NexusGenInputs["ThreadUpdateManyWithoutSchoolInput"] | null; // ThreadUpdateManyWithoutSchoolInput
+    type?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    Vote?: NexusGenInputs["VoteUpdateManyWithoutSchoolInput"] | null; // VoteUpdateManyWithoutSchoolInput
+    Voted?: NexusGenInputs["VotedUpdateManyWithoutSchoolInput"] | null; // VotedUpdateManyWithoutSchoolInput
     zip?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
   };
   SchoolUpsertWithWhereUniqueWithoutDomainInput: {
@@ -3067,12 +3429,17 @@ export interface NexusGenInputs {
     create: NexusGenInputs["SchoolCreateWithoutVotedInput"]; // SchoolCreateWithoutVotedInput!
     update: NexusGenInputs["SchoolUpdateWithoutVotedInput"]; // SchoolUpdateWithoutVotedInput!
   };
+  SchoolUpsertWithoutWorkInput: {
+    // input type
+    create: NexusGenInputs["SchoolCreateWithoutWorkInput"]; // SchoolCreateWithoutWorkInput!
+    update: NexusGenInputs["SchoolUpdateWithoutWorkInput"]; // SchoolUpdateWithoutWorkInput!
+  };
   SchoolWhereInput: {
     // input type
-    Activity?: NexusGenInputs["ActivityListRelationFilter"] | null; // ActivityListRelationFilter
+    activity?: NexusGenInputs["ActivityListRelationFilter"] | null; // ActivityListRelationFilter
     address?: NexusGenInputs["StringFilter"] | null; // StringFilter
     AND?: NexusGenInputs["SchoolWhereInput"][] | null; // [SchoolWhereInput!]
-    Attachment?: NexusGenInputs["AttachmentListRelationFilter"] | null; // AttachmentListRelationFilter
+    attachment?: NexusGenInputs["AttachmentListRelationFilter"] | null; // AttachmentListRelationFilter
     ballots?: NexusGenInputs["BallotListRelationFilter"] | null; // BallotListRelationFilter
     canton?: NexusGenInputs["StringFilter"] | null; // StringFilter
     city?: NexusGenInputs["StringFilter"] | null; // StringFilter
@@ -3084,10 +3451,11 @@ export interface NexusGenInputs {
     NOT?: NexusGenInputs["SchoolWhereInput"][] | null; // [SchoolWhereInput!]
     OR?: NexusGenInputs["SchoolWhereInput"][] | null; // [SchoolWhereInput!]
     teams?: NexusGenInputs["TeamListRelationFilter"] | null; // TeamListRelationFilter
-    Thread?: NexusGenInputs["ThreadListRelationFilter"] | null; // ThreadListRelationFilter
+    thread?: NexusGenInputs["ThreadListRelationFilter"] | null; // ThreadListRelationFilter
     type?: NexusGenInputs["StringFilter"] | null; // StringFilter
     Vote?: NexusGenInputs["VoteListRelationFilter"] | null; // VoteListRelationFilter
     Voted?: NexusGenInputs["VotedListRelationFilter"] | null; // VotedListRelationFilter
+    work?: NexusGenInputs["WorkListRelationFilter"] | null; // WorkListRelationFilter
     zip?: NexusGenInputs["StringFilter"] | null; // StringFilter
   };
   SchoolWhereUniqueInput: {
@@ -3130,8 +3498,8 @@ export interface NexusGenInputs {
   };
   TeamCreateInput: {
     // input type
-    Activity?: NexusGenInputs["ActivityCreateManyWithoutTeamInput"] | null; // ActivityCreateManyWithoutTeamInput
-    Attachment?: NexusGenInputs["AttachmentCreateManyWithoutTeamInput"] | null; // AttachmentCreateManyWithoutTeamInput
+    activity?: NexusGenInputs["ActivityCreateManyWithoutTeamInput"] | null; // ActivityCreateManyWithoutTeamInput
+    attachment?: NexusGenInputs["AttachmentCreateManyWithoutTeamInput"] | null; // AttachmentCreateManyWithoutTeamInput
     BallotRuns?: NexusGenInputs["BallotRunCreateManyWithoutTeamInput"] | null; // BallotRunCreateManyWithoutTeamInput
     ballots?: NexusGenInputs["BallotCreateManyWithoutTeamInput"] | null; // BallotCreateManyWithoutTeamInput
     cards?: string | null; // String
@@ -3145,6 +3513,7 @@ export interface NexusGenInputs {
     User?: NexusGenInputs["UserCreateManyWithoutTeamInput"] | null; // UserCreateManyWithoutTeamInput
     Vote?: NexusGenInputs["VoteCreateManyWithoutTeamInput"] | null; // VoteCreateManyWithoutTeamInput
     Voted?: NexusGenInputs["VotedCreateManyWithoutTeamInput"] | null; // VotedCreateManyWithoutTeamInput
+    work?: NexusGenInputs["WorkCreateManyWithoutTeamInput"] | null; // WorkCreateManyWithoutTeamInput
     year?: number | null; // Int
   };
   TeamCreateManyWithoutDomainInput: {
@@ -3175,16 +3544,16 @@ export interface NexusGenInputs {
     // input type
     connect?: NexusGenInputs["TeamWhereUniqueInput"] | null; // TeamWhereUniqueInput
     connectOrCreate?:
-      | NexusGenInputs["TeamCreateOrConnectWithoutActivityInput"]
-      | null; // TeamCreateOrConnectWithoutActivityInput
+      | NexusGenInputs["TeamCreateOrConnectWithoutactivityInput"]
+      | null; // TeamCreateOrConnectWithoutactivityInput
     create?: NexusGenInputs["TeamCreateWithoutActivityInput"] | null; // TeamCreateWithoutActivityInput
   };
   TeamCreateOneWithoutAttachmentInput: {
     // input type
     connect?: NexusGenInputs["TeamWhereUniqueInput"] | null; // TeamWhereUniqueInput
     connectOrCreate?:
-      | NexusGenInputs["TeamCreateOrConnectWithoutAttachmentInput"]
-      | null; // TeamCreateOrConnectWithoutAttachmentInput
+      | NexusGenInputs["TeamCreateOrConnectWithoutattachmentInput"]
+      | null; // TeamCreateOrConnectWithoutattachmentInput
     create?: NexusGenInputs["TeamCreateWithoutAttachmentInput"] | null; // TeamCreateWithoutAttachmentInput
   };
   TeamCreateOneWithoutBallotRunsInput: {
@@ -3243,15 +3612,13 @@ export interface NexusGenInputs {
       | null; // TeamCreateOrConnectWithoutVotedInput
     create?: NexusGenInputs["TeamCreateWithoutVotedInput"] | null; // TeamCreateWithoutVotedInput
   };
-  TeamCreateOrConnectWithoutActivityInput: {
+  TeamCreateOneWithoutWorkInput: {
     // input type
-    create: NexusGenInputs["TeamCreateWithoutActivityInput"]; // TeamCreateWithoutActivityInput!
-    where: NexusGenInputs["TeamWhereUniqueInput"]; // TeamWhereUniqueInput!
-  };
-  TeamCreateOrConnectWithoutAttachmentInput: {
-    // input type
-    create: NexusGenInputs["TeamCreateWithoutAttachmentInput"]; // TeamCreateWithoutAttachmentInput!
-    where: NexusGenInputs["TeamWhereUniqueInput"]; // TeamWhereUniqueInput!
+    connect?: NexusGenInputs["TeamWhereUniqueInput"] | null; // TeamWhereUniqueInput
+    connectOrCreate?:
+      | NexusGenInputs["TeamCreateOrConnectWithoutworkInput"]
+      | null; // TeamCreateOrConnectWithoutworkInput
+    create?: NexusGenInputs["TeamCreateWithoutWorkInput"] | null; // TeamCreateWithoutWorkInput
   };
   TeamCreateOrConnectWithoutBallotRunsInput: {
     // input type
@@ -3276,6 +3643,16 @@ export interface NexusGenInputs {
   TeamCreateOrConnectWithoutVotedInput: {
     // input type
     create: NexusGenInputs["TeamCreateWithoutVotedInput"]; // TeamCreateWithoutVotedInput!
+    where: NexusGenInputs["TeamWhereUniqueInput"]; // TeamWhereUniqueInput!
+  };
+  TeamCreateOrConnectWithoutactivityInput: {
+    // input type
+    create: NexusGenInputs["TeamCreateWithoutActivityInput"]; // TeamCreateWithoutActivityInput!
+    where: NexusGenInputs["TeamWhereUniqueInput"]; // TeamWhereUniqueInput!
+  };
+  TeamCreateOrConnectWithoutattachmentInput: {
+    // input type
+    create: NexusGenInputs["TeamCreateWithoutAttachmentInput"]; // TeamCreateWithoutAttachmentInput!
     where: NexusGenInputs["TeamWhereUniqueInput"]; // TeamWhereUniqueInput!
   };
   TeamCreateOrConnectWithoutballotsInput: {
@@ -3303,9 +3680,14 @@ export interface NexusGenInputs {
     create: NexusGenInputs["TeamCreateWithoutTeacherInput"]; // TeamCreateWithoutTeacherInput!
     where: NexusGenInputs["TeamWhereUniqueInput"]; // TeamWhereUniqueInput!
   };
+  TeamCreateOrConnectWithoutworkInput: {
+    // input type
+    create: NexusGenInputs["TeamCreateWithoutWorkInput"]; // TeamCreateWithoutWorkInput!
+    where: NexusGenInputs["TeamWhereUniqueInput"]; // TeamWhereUniqueInput!
+  };
   TeamCreateWithoutActivityInput: {
     // input type
-    Attachment?: NexusGenInputs["AttachmentCreateManyWithoutTeamInput"] | null; // AttachmentCreateManyWithoutTeamInput
+    attachment?: NexusGenInputs["AttachmentCreateManyWithoutTeamInput"] | null; // AttachmentCreateManyWithoutTeamInput
     BallotRuns?: NexusGenInputs["BallotRunCreateManyWithoutTeamInput"] | null; // BallotRunCreateManyWithoutTeamInput
     ballots?: NexusGenInputs["BallotCreateManyWithoutTeamInput"] | null; // BallotCreateManyWithoutTeamInput
     cards?: string | null; // String
@@ -3321,11 +3703,12 @@ export interface NexusGenInputs {
     User?: NexusGenInputs["UserCreateManyWithoutTeamInput"] | null; // UserCreateManyWithoutTeamInput
     Vote?: NexusGenInputs["VoteCreateManyWithoutTeamInput"] | null; // VoteCreateManyWithoutTeamInput
     Voted?: NexusGenInputs["VotedCreateManyWithoutTeamInput"] | null; // VotedCreateManyWithoutTeamInput
+    work?: NexusGenInputs["WorkCreateManyWithoutTeamInput"] | null; // WorkCreateManyWithoutTeamInput
     year?: number | null; // Int
   };
   TeamCreateWithoutAttachmentInput: {
     // input type
-    Activity?: NexusGenInputs["ActivityCreateManyWithoutTeamInput"] | null; // ActivityCreateManyWithoutTeamInput
+    activity?: NexusGenInputs["ActivityCreateManyWithoutTeamInput"] | null; // ActivityCreateManyWithoutTeamInput
     BallotRuns?: NexusGenInputs["BallotRunCreateManyWithoutTeamInput"] | null; // BallotRunCreateManyWithoutTeamInput
     ballots?: NexusGenInputs["BallotCreateManyWithoutTeamInput"] | null; // BallotCreateManyWithoutTeamInput
     cards?: string | null; // String
@@ -3341,12 +3724,13 @@ export interface NexusGenInputs {
     User?: NexusGenInputs["UserCreateManyWithoutTeamInput"] | null; // UserCreateManyWithoutTeamInput
     Vote?: NexusGenInputs["VoteCreateManyWithoutTeamInput"] | null; // VoteCreateManyWithoutTeamInput
     Voted?: NexusGenInputs["VotedCreateManyWithoutTeamInput"] | null; // VotedCreateManyWithoutTeamInput
+    work?: NexusGenInputs["WorkCreateManyWithoutTeamInput"] | null; // WorkCreateManyWithoutTeamInput
     year?: number | null; // Int
   };
   TeamCreateWithoutBallotRunsInput: {
     // input type
-    Activity?: NexusGenInputs["ActivityCreateManyWithoutTeamInput"] | null; // ActivityCreateManyWithoutTeamInput
-    Attachment?: NexusGenInputs["AttachmentCreateManyWithoutTeamInput"] | null; // AttachmentCreateManyWithoutTeamInput
+    activity?: NexusGenInputs["ActivityCreateManyWithoutTeamInput"] | null; // ActivityCreateManyWithoutTeamInput
+    attachment?: NexusGenInputs["AttachmentCreateManyWithoutTeamInput"] | null; // AttachmentCreateManyWithoutTeamInput
     ballots?: NexusGenInputs["BallotCreateManyWithoutTeamInput"] | null; // BallotCreateManyWithoutTeamInput
     cards?: string | null; // String
     code?: string | null; // String
@@ -3361,12 +3745,13 @@ export interface NexusGenInputs {
     User?: NexusGenInputs["UserCreateManyWithoutTeamInput"] | null; // UserCreateManyWithoutTeamInput
     Vote?: NexusGenInputs["VoteCreateManyWithoutTeamInput"] | null; // VoteCreateManyWithoutTeamInput
     Voted?: NexusGenInputs["VotedCreateManyWithoutTeamInput"] | null; // VotedCreateManyWithoutTeamInput
+    work?: NexusGenInputs["WorkCreateManyWithoutTeamInput"] | null; // WorkCreateManyWithoutTeamInput
     year?: number | null; // Int
   };
   TeamCreateWithoutBallotsInput: {
     // input type
-    Activity?: NexusGenInputs["ActivityCreateManyWithoutTeamInput"] | null; // ActivityCreateManyWithoutTeamInput
-    Attachment?: NexusGenInputs["AttachmentCreateManyWithoutTeamInput"] | null; // AttachmentCreateManyWithoutTeamInput
+    activity?: NexusGenInputs["ActivityCreateManyWithoutTeamInput"] | null; // ActivityCreateManyWithoutTeamInput
+    attachment?: NexusGenInputs["AttachmentCreateManyWithoutTeamInput"] | null; // AttachmentCreateManyWithoutTeamInput
     BallotRuns?: NexusGenInputs["BallotRunCreateManyWithoutTeamInput"] | null; // BallotRunCreateManyWithoutTeamInput
     cards?: string | null; // String
     code?: string | null; // String
@@ -3381,12 +3766,13 @@ export interface NexusGenInputs {
     User?: NexusGenInputs["UserCreateManyWithoutTeamInput"] | null; // UserCreateManyWithoutTeamInput
     Vote?: NexusGenInputs["VoteCreateManyWithoutTeamInput"] | null; // VoteCreateManyWithoutTeamInput
     Voted?: NexusGenInputs["VotedCreateManyWithoutTeamInput"] | null; // VotedCreateManyWithoutTeamInput
+    work?: NexusGenInputs["WorkCreateManyWithoutTeamInput"] | null; // WorkCreateManyWithoutTeamInput
     year?: number | null; // Int
   };
   TeamCreateWithoutDomainInput: {
     // input type
-    Activity?: NexusGenInputs["ActivityCreateManyWithoutTeamInput"] | null; // ActivityCreateManyWithoutTeamInput
-    Attachment?: NexusGenInputs["AttachmentCreateManyWithoutTeamInput"] | null; // AttachmentCreateManyWithoutTeamInput
+    activity?: NexusGenInputs["ActivityCreateManyWithoutTeamInput"] | null; // ActivityCreateManyWithoutTeamInput
+    attachment?: NexusGenInputs["AttachmentCreateManyWithoutTeamInput"] | null; // AttachmentCreateManyWithoutTeamInput
     BallotRuns?: NexusGenInputs["BallotRunCreateManyWithoutTeamInput"] | null; // BallotRunCreateManyWithoutTeamInput
     ballots?: NexusGenInputs["BallotCreateManyWithoutTeamInput"] | null; // BallotCreateManyWithoutTeamInput
     cards?: string | null; // String
@@ -3401,12 +3787,13 @@ export interface NexusGenInputs {
     User?: NexusGenInputs["UserCreateManyWithoutTeamInput"] | null; // UserCreateManyWithoutTeamInput
     Vote?: NexusGenInputs["VoteCreateManyWithoutTeamInput"] | null; // VoteCreateManyWithoutTeamInput
     Voted?: NexusGenInputs["VotedCreateManyWithoutTeamInput"] | null; // VotedCreateManyWithoutTeamInput
+    work?: NexusGenInputs["WorkCreateManyWithoutTeamInput"] | null; // WorkCreateManyWithoutTeamInput
     year?: number | null; // Int
   };
   TeamCreateWithoutMembersInput: {
     // input type
-    Activity?: NexusGenInputs["ActivityCreateManyWithoutTeamInput"] | null; // ActivityCreateManyWithoutTeamInput
-    Attachment?: NexusGenInputs["AttachmentCreateManyWithoutTeamInput"] | null; // AttachmentCreateManyWithoutTeamInput
+    activity?: NexusGenInputs["ActivityCreateManyWithoutTeamInput"] | null; // ActivityCreateManyWithoutTeamInput
+    attachment?: NexusGenInputs["AttachmentCreateManyWithoutTeamInput"] | null; // AttachmentCreateManyWithoutTeamInput
     BallotRuns?: NexusGenInputs["BallotRunCreateManyWithoutTeamInput"] | null; // BallotRunCreateManyWithoutTeamInput
     ballots?: NexusGenInputs["BallotCreateManyWithoutTeamInput"] | null; // BallotCreateManyWithoutTeamInput
     cards?: string | null; // String
@@ -3421,12 +3808,13 @@ export interface NexusGenInputs {
     User?: NexusGenInputs["UserCreateManyWithoutTeamInput"] | null; // UserCreateManyWithoutTeamInput
     Vote?: NexusGenInputs["VoteCreateManyWithoutTeamInput"] | null; // VoteCreateManyWithoutTeamInput
     Voted?: NexusGenInputs["VotedCreateManyWithoutTeamInput"] | null; // VotedCreateManyWithoutTeamInput
+    work?: NexusGenInputs["WorkCreateManyWithoutTeamInput"] | null; // WorkCreateManyWithoutTeamInput
     year?: number | null; // Int
   };
   TeamCreateWithoutSchoolInput: {
     // input type
-    Activity?: NexusGenInputs["ActivityCreateManyWithoutTeamInput"] | null; // ActivityCreateManyWithoutTeamInput
-    Attachment?: NexusGenInputs["AttachmentCreateManyWithoutTeamInput"] | null; // AttachmentCreateManyWithoutTeamInput
+    activity?: NexusGenInputs["ActivityCreateManyWithoutTeamInput"] | null; // ActivityCreateManyWithoutTeamInput
+    attachment?: NexusGenInputs["AttachmentCreateManyWithoutTeamInput"] | null; // AttachmentCreateManyWithoutTeamInput
     BallotRuns?: NexusGenInputs["BallotRunCreateManyWithoutTeamInput"] | null; // BallotRunCreateManyWithoutTeamInput
     ballots?: NexusGenInputs["BallotCreateManyWithoutTeamInput"] | null; // BallotCreateManyWithoutTeamInput
     cards?: string | null; // String
@@ -3441,12 +3829,13 @@ export interface NexusGenInputs {
     User?: NexusGenInputs["UserCreateManyWithoutTeamInput"] | null; // UserCreateManyWithoutTeamInput
     Vote?: NexusGenInputs["VoteCreateManyWithoutTeamInput"] | null; // VoteCreateManyWithoutTeamInput
     Voted?: NexusGenInputs["VotedCreateManyWithoutTeamInput"] | null; // VotedCreateManyWithoutTeamInput
+    work?: NexusGenInputs["WorkCreateManyWithoutTeamInput"] | null; // WorkCreateManyWithoutTeamInput
     year?: number | null; // Int
   };
   TeamCreateWithoutTeacherInput: {
     // input type
-    Activity?: NexusGenInputs["ActivityCreateManyWithoutTeamInput"] | null; // ActivityCreateManyWithoutTeamInput
-    Attachment?: NexusGenInputs["AttachmentCreateManyWithoutTeamInput"] | null; // AttachmentCreateManyWithoutTeamInput
+    activity?: NexusGenInputs["ActivityCreateManyWithoutTeamInput"] | null; // ActivityCreateManyWithoutTeamInput
+    attachment?: NexusGenInputs["AttachmentCreateManyWithoutTeamInput"] | null; // AttachmentCreateManyWithoutTeamInput
     BallotRuns?: NexusGenInputs["BallotRunCreateManyWithoutTeamInput"] | null; // BallotRunCreateManyWithoutTeamInput
     ballots?: NexusGenInputs["BallotCreateManyWithoutTeamInput"] | null; // BallotCreateManyWithoutTeamInput
     cards?: string | null; // String
@@ -3461,12 +3850,13 @@ export interface NexusGenInputs {
     User?: NexusGenInputs["UserCreateManyWithoutTeamInput"] | null; // UserCreateManyWithoutTeamInput
     Vote?: NexusGenInputs["VoteCreateManyWithoutTeamInput"] | null; // VoteCreateManyWithoutTeamInput
     Voted?: NexusGenInputs["VotedCreateManyWithoutTeamInput"] | null; // VotedCreateManyWithoutTeamInput
+    work?: NexusGenInputs["WorkCreateManyWithoutTeamInput"] | null; // WorkCreateManyWithoutTeamInput
     year?: number | null; // Int
   };
   TeamCreateWithoutThreadInput: {
     // input type
-    Activity?: NexusGenInputs["ActivityCreateManyWithoutTeamInput"] | null; // ActivityCreateManyWithoutTeamInput
-    Attachment?: NexusGenInputs["AttachmentCreateManyWithoutTeamInput"] | null; // AttachmentCreateManyWithoutTeamInput
+    activity?: NexusGenInputs["ActivityCreateManyWithoutTeamInput"] | null; // ActivityCreateManyWithoutTeamInput
+    attachment?: NexusGenInputs["AttachmentCreateManyWithoutTeamInput"] | null; // AttachmentCreateManyWithoutTeamInput
     BallotRuns?: NexusGenInputs["BallotRunCreateManyWithoutTeamInput"] | null; // BallotRunCreateManyWithoutTeamInput
     ballots?: NexusGenInputs["BallotCreateManyWithoutTeamInput"] | null; // BallotCreateManyWithoutTeamInput
     cards?: string | null; // String
@@ -3481,12 +3871,13 @@ export interface NexusGenInputs {
     User?: NexusGenInputs["UserCreateManyWithoutTeamInput"] | null; // UserCreateManyWithoutTeamInput
     Vote?: NexusGenInputs["VoteCreateManyWithoutTeamInput"] | null; // VoteCreateManyWithoutTeamInput
     Voted?: NexusGenInputs["VotedCreateManyWithoutTeamInput"] | null; // VotedCreateManyWithoutTeamInput
+    work?: NexusGenInputs["WorkCreateManyWithoutTeamInput"] | null; // WorkCreateManyWithoutTeamInput
     year?: number | null; // Int
   };
   TeamCreateWithoutUserInput: {
     // input type
-    Activity?: NexusGenInputs["ActivityCreateManyWithoutTeamInput"] | null; // ActivityCreateManyWithoutTeamInput
-    Attachment?: NexusGenInputs["AttachmentCreateManyWithoutTeamInput"] | null; // AttachmentCreateManyWithoutTeamInput
+    activity?: NexusGenInputs["ActivityCreateManyWithoutTeamInput"] | null; // ActivityCreateManyWithoutTeamInput
+    attachment?: NexusGenInputs["AttachmentCreateManyWithoutTeamInput"] | null; // AttachmentCreateManyWithoutTeamInput
     BallotRuns?: NexusGenInputs["BallotRunCreateManyWithoutTeamInput"] | null; // BallotRunCreateManyWithoutTeamInput
     ballots?: NexusGenInputs["BallotCreateManyWithoutTeamInput"] | null; // BallotCreateManyWithoutTeamInput
     cards?: string | null; // String
@@ -3501,12 +3892,13 @@ export interface NexusGenInputs {
     Thread?: NexusGenInputs["ThreadCreateManyWithoutTeamInput"] | null; // ThreadCreateManyWithoutTeamInput
     Vote?: NexusGenInputs["VoteCreateManyWithoutTeamInput"] | null; // VoteCreateManyWithoutTeamInput
     Voted?: NexusGenInputs["VotedCreateManyWithoutTeamInput"] | null; // VotedCreateManyWithoutTeamInput
+    work?: NexusGenInputs["WorkCreateManyWithoutTeamInput"] | null; // WorkCreateManyWithoutTeamInput
     year?: number | null; // Int
   };
   TeamCreateWithoutVoteInput: {
     // input type
-    Activity?: NexusGenInputs["ActivityCreateManyWithoutTeamInput"] | null; // ActivityCreateManyWithoutTeamInput
-    Attachment?: NexusGenInputs["AttachmentCreateManyWithoutTeamInput"] | null; // AttachmentCreateManyWithoutTeamInput
+    activity?: NexusGenInputs["ActivityCreateManyWithoutTeamInput"] | null; // ActivityCreateManyWithoutTeamInput
+    attachment?: NexusGenInputs["AttachmentCreateManyWithoutTeamInput"] | null; // AttachmentCreateManyWithoutTeamInput
     BallotRuns?: NexusGenInputs["BallotRunCreateManyWithoutTeamInput"] | null; // BallotRunCreateManyWithoutTeamInput
     ballots?: NexusGenInputs["BallotCreateManyWithoutTeamInput"] | null; // BallotCreateManyWithoutTeamInput
     cards?: string | null; // String
@@ -3521,12 +3913,13 @@ export interface NexusGenInputs {
     Thread?: NexusGenInputs["ThreadCreateManyWithoutTeamInput"] | null; // ThreadCreateManyWithoutTeamInput
     User?: NexusGenInputs["UserCreateManyWithoutTeamInput"] | null; // UserCreateManyWithoutTeamInput
     Voted?: NexusGenInputs["VotedCreateManyWithoutTeamInput"] | null; // VotedCreateManyWithoutTeamInput
+    work?: NexusGenInputs["WorkCreateManyWithoutTeamInput"] | null; // WorkCreateManyWithoutTeamInput
     year?: number | null; // Int
   };
   TeamCreateWithoutVotedInput: {
     // input type
-    Activity?: NexusGenInputs["ActivityCreateManyWithoutTeamInput"] | null; // ActivityCreateManyWithoutTeamInput
-    Attachment?: NexusGenInputs["AttachmentCreateManyWithoutTeamInput"] | null; // AttachmentCreateManyWithoutTeamInput
+    activity?: NexusGenInputs["ActivityCreateManyWithoutTeamInput"] | null; // ActivityCreateManyWithoutTeamInput
+    attachment?: NexusGenInputs["AttachmentCreateManyWithoutTeamInput"] | null; // AttachmentCreateManyWithoutTeamInput
     BallotRuns?: NexusGenInputs["BallotRunCreateManyWithoutTeamInput"] | null; // BallotRunCreateManyWithoutTeamInput
     ballots?: NexusGenInputs["BallotCreateManyWithoutTeamInput"] | null; // BallotCreateManyWithoutTeamInput
     cards?: string | null; // String
@@ -3541,6 +3934,28 @@ export interface NexusGenInputs {
     Thread?: NexusGenInputs["ThreadCreateManyWithoutTeamInput"] | null; // ThreadCreateManyWithoutTeamInput
     User?: NexusGenInputs["UserCreateManyWithoutTeamInput"] | null; // UserCreateManyWithoutTeamInput
     Vote?: NexusGenInputs["VoteCreateManyWithoutTeamInput"] | null; // VoteCreateManyWithoutTeamInput
+    work?: NexusGenInputs["WorkCreateManyWithoutTeamInput"] | null; // WorkCreateManyWithoutTeamInput
+    year?: number | null; // Int
+  };
+  TeamCreateWithoutWorkInput: {
+    // input type
+    activity?: NexusGenInputs["ActivityCreateManyWithoutTeamInput"] | null; // ActivityCreateManyWithoutTeamInput
+    attachment?: NexusGenInputs["AttachmentCreateManyWithoutTeamInput"] | null; // AttachmentCreateManyWithoutTeamInput
+    BallotRuns?: NexusGenInputs["BallotRunCreateManyWithoutTeamInput"] | null; // BallotRunCreateManyWithoutTeamInput
+    ballots?: NexusGenInputs["BallotCreateManyWithoutTeamInput"] | null; // BallotCreateManyWithoutTeamInput
+    cards?: string | null; // String
+    code?: string | null; // String
+    domain?: NexusGenInputs["DomainCreateOneWithoutTeamInput"] | null; // DomainCreateOneWithoutTeamInput
+    id?: string | null; // String
+    invite?: string | null; // String
+    members?: NexusGenInputs["UserCreateManyWithoutTeamInput"] | null; // UserCreateManyWithoutTeamInput
+    name: string; // String!
+    school: NexusGenInputs["SchoolCreateOneWithoutTeamsInput"]; // SchoolCreateOneWithoutTeamsInput!
+    teacher: NexusGenInputs["UserCreateOneWithoutTeachesInput"]; // UserCreateOneWithoutTeachesInput!
+    Thread?: NexusGenInputs["ThreadCreateManyWithoutTeamInput"] | null; // ThreadCreateManyWithoutTeamInput
+    User?: NexusGenInputs["UserCreateManyWithoutTeamInput"] | null; // UserCreateManyWithoutTeamInput
+    Vote?: NexusGenInputs["VoteCreateManyWithoutTeamInput"] | null; // VoteCreateManyWithoutTeamInput
+    Voted?: NexusGenInputs["VotedCreateManyWithoutTeamInput"] | null; // VotedCreateManyWithoutTeamInput
     year?: number | null; // Int
   };
   TeamListRelationFilter: {
@@ -3667,8 +4082,8 @@ export interface NexusGenInputs {
     // input type
     connect?: NexusGenInputs["TeamWhereUniqueInput"] | null; // TeamWhereUniqueInput
     connectOrCreate?:
-      | NexusGenInputs["TeamCreateOrConnectWithoutActivityInput"]
-      | null; // TeamCreateOrConnectWithoutActivityInput
+      | NexusGenInputs["TeamCreateOrConnectWithoutactivityInput"]
+      | null; // TeamCreateOrConnectWithoutactivityInput
     create?: NexusGenInputs["TeamCreateWithoutActivityInput"] | null; // TeamCreateWithoutActivityInput
     update?: NexusGenInputs["TeamUpdateWithoutActivityInput"] | null; // TeamUpdateWithoutActivityInput
     upsert?: NexusGenInputs["TeamUpsertWithoutActivityInput"] | null; // TeamUpsertWithoutActivityInput
@@ -3677,8 +4092,8 @@ export interface NexusGenInputs {
     // input type
     connect?: NexusGenInputs["TeamWhereUniqueInput"] | null; // TeamWhereUniqueInput
     connectOrCreate?:
-      | NexusGenInputs["TeamCreateOrConnectWithoutAttachmentInput"]
-      | null; // TeamCreateOrConnectWithoutAttachmentInput
+      | NexusGenInputs["TeamCreateOrConnectWithoutattachmentInput"]
+      | null; // TeamCreateOrConnectWithoutattachmentInput
     create?: NexusGenInputs["TeamCreateWithoutAttachmentInput"] | null; // TeamCreateWithoutAttachmentInput
     update?: NexusGenInputs["TeamUpdateWithoutAttachmentInput"] | null; // TeamUpdateWithoutAttachmentInput
     upsert?: NexusGenInputs["TeamUpsertWithoutAttachmentInput"] | null; // TeamUpsertWithoutAttachmentInput
@@ -3702,6 +4117,16 @@ export interface NexusGenInputs {
     create?: NexusGenInputs["TeamCreateWithoutThreadInput"] | null; // TeamCreateWithoutThreadInput
     update?: NexusGenInputs["TeamUpdateWithoutThreadInput"] | null; // TeamUpdateWithoutThreadInput
     upsert?: NexusGenInputs["TeamUpsertWithoutThreadInput"] | null; // TeamUpsertWithoutThreadInput
+  };
+  TeamUpdateOneRequiredWithoutWorkInput: {
+    // input type
+    connect?: NexusGenInputs["TeamWhereUniqueInput"] | null; // TeamWhereUniqueInput
+    connectOrCreate?:
+      | NexusGenInputs["TeamCreateOrConnectWithoutworkInput"]
+      | null; // TeamCreateOrConnectWithoutworkInput
+    create?: NexusGenInputs["TeamCreateWithoutWorkInput"] | null; // TeamCreateWithoutWorkInput
+    update?: NexusGenInputs["TeamUpdateWithoutWorkInput"] | null; // TeamUpdateWithoutWorkInput
+    upsert?: NexusGenInputs["TeamUpsertWithoutWorkInput"] | null; // TeamUpsertWithoutWorkInput
   };
   TeamUpdateOneWithoutBallotsInput: {
     // input type
@@ -3780,7 +4205,7 @@ export interface NexusGenInputs {
   };
   TeamUpdateWithoutActivityInput: {
     // input type
-    Attachment?: NexusGenInputs["AttachmentUpdateManyWithoutTeamInput"] | null; // AttachmentUpdateManyWithoutTeamInput
+    attachment?: NexusGenInputs["AttachmentUpdateManyWithoutTeamInput"] | null; // AttachmentUpdateManyWithoutTeamInput
     BallotRuns?: NexusGenInputs["BallotRunUpdateManyWithoutTeamInput"] | null; // BallotRunUpdateManyWithoutTeamInput
     ballots?: NexusGenInputs["BallotUpdateManyWithoutTeamInput"] | null; // BallotUpdateManyWithoutTeamInput
     cards?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
@@ -3796,11 +4221,12 @@ export interface NexusGenInputs {
     User?: NexusGenInputs["UserUpdateManyWithoutTeamInput"] | null; // UserUpdateManyWithoutTeamInput
     Vote?: NexusGenInputs["VoteUpdateManyWithoutTeamInput"] | null; // VoteUpdateManyWithoutTeamInput
     Voted?: NexusGenInputs["VotedUpdateManyWithoutTeamInput"] | null; // VotedUpdateManyWithoutTeamInput
+    work?: NexusGenInputs["WorkUpdateManyWithoutTeamInput"] | null; // WorkUpdateManyWithoutTeamInput
     year?: NexusGenInputs["NullableIntFieldUpdateOperationsInput"] | null; // NullableIntFieldUpdateOperationsInput
   };
   TeamUpdateWithoutAttachmentInput: {
     // input type
-    Activity?: NexusGenInputs["ActivityUpdateManyWithoutTeamInput"] | null; // ActivityUpdateManyWithoutTeamInput
+    activity?: NexusGenInputs["ActivityUpdateManyWithoutTeamInput"] | null; // ActivityUpdateManyWithoutTeamInput
     BallotRuns?: NexusGenInputs["BallotRunUpdateManyWithoutTeamInput"] | null; // BallotRunUpdateManyWithoutTeamInput
     ballots?: NexusGenInputs["BallotUpdateManyWithoutTeamInput"] | null; // BallotUpdateManyWithoutTeamInput
     cards?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
@@ -3816,12 +4242,13 @@ export interface NexusGenInputs {
     User?: NexusGenInputs["UserUpdateManyWithoutTeamInput"] | null; // UserUpdateManyWithoutTeamInput
     Vote?: NexusGenInputs["VoteUpdateManyWithoutTeamInput"] | null; // VoteUpdateManyWithoutTeamInput
     Voted?: NexusGenInputs["VotedUpdateManyWithoutTeamInput"] | null; // VotedUpdateManyWithoutTeamInput
+    work?: NexusGenInputs["WorkUpdateManyWithoutTeamInput"] | null; // WorkUpdateManyWithoutTeamInput
     year?: NexusGenInputs["NullableIntFieldUpdateOperationsInput"] | null; // NullableIntFieldUpdateOperationsInput
   };
   TeamUpdateWithoutBallotRunsInput: {
     // input type
-    Activity?: NexusGenInputs["ActivityUpdateManyWithoutTeamInput"] | null; // ActivityUpdateManyWithoutTeamInput
-    Attachment?: NexusGenInputs["AttachmentUpdateManyWithoutTeamInput"] | null; // AttachmentUpdateManyWithoutTeamInput
+    activity?: NexusGenInputs["ActivityUpdateManyWithoutTeamInput"] | null; // ActivityUpdateManyWithoutTeamInput
+    attachment?: NexusGenInputs["AttachmentUpdateManyWithoutTeamInput"] | null; // AttachmentUpdateManyWithoutTeamInput
     ballots?: NexusGenInputs["BallotUpdateManyWithoutTeamInput"] | null; // BallotUpdateManyWithoutTeamInput
     cards?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
     code?: NexusGenInputs["NullableStringFieldUpdateOperationsInput"] | null; // NullableStringFieldUpdateOperationsInput
@@ -3836,12 +4263,13 @@ export interface NexusGenInputs {
     User?: NexusGenInputs["UserUpdateManyWithoutTeamInput"] | null; // UserUpdateManyWithoutTeamInput
     Vote?: NexusGenInputs["VoteUpdateManyWithoutTeamInput"] | null; // VoteUpdateManyWithoutTeamInput
     Voted?: NexusGenInputs["VotedUpdateManyWithoutTeamInput"] | null; // VotedUpdateManyWithoutTeamInput
+    work?: NexusGenInputs["WorkUpdateManyWithoutTeamInput"] | null; // WorkUpdateManyWithoutTeamInput
     year?: NexusGenInputs["NullableIntFieldUpdateOperationsInput"] | null; // NullableIntFieldUpdateOperationsInput
   };
   TeamUpdateWithoutBallotsInput: {
     // input type
-    Activity?: NexusGenInputs["ActivityUpdateManyWithoutTeamInput"] | null; // ActivityUpdateManyWithoutTeamInput
-    Attachment?: NexusGenInputs["AttachmentUpdateManyWithoutTeamInput"] | null; // AttachmentUpdateManyWithoutTeamInput
+    activity?: NexusGenInputs["ActivityUpdateManyWithoutTeamInput"] | null; // ActivityUpdateManyWithoutTeamInput
+    attachment?: NexusGenInputs["AttachmentUpdateManyWithoutTeamInput"] | null; // AttachmentUpdateManyWithoutTeamInput
     BallotRuns?: NexusGenInputs["BallotRunUpdateManyWithoutTeamInput"] | null; // BallotRunUpdateManyWithoutTeamInput
     cards?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
     code?: NexusGenInputs["NullableStringFieldUpdateOperationsInput"] | null; // NullableStringFieldUpdateOperationsInput
@@ -3856,12 +4284,13 @@ export interface NexusGenInputs {
     User?: NexusGenInputs["UserUpdateManyWithoutTeamInput"] | null; // UserUpdateManyWithoutTeamInput
     Vote?: NexusGenInputs["VoteUpdateManyWithoutTeamInput"] | null; // VoteUpdateManyWithoutTeamInput
     Voted?: NexusGenInputs["VotedUpdateManyWithoutTeamInput"] | null; // VotedUpdateManyWithoutTeamInput
+    work?: NexusGenInputs["WorkUpdateManyWithoutTeamInput"] | null; // WorkUpdateManyWithoutTeamInput
     year?: NexusGenInputs["NullableIntFieldUpdateOperationsInput"] | null; // NullableIntFieldUpdateOperationsInput
   };
   TeamUpdateWithoutDomainInput: {
     // input type
-    Activity?: NexusGenInputs["ActivityUpdateManyWithoutTeamInput"] | null; // ActivityUpdateManyWithoutTeamInput
-    Attachment?: NexusGenInputs["AttachmentUpdateManyWithoutTeamInput"] | null; // AttachmentUpdateManyWithoutTeamInput
+    activity?: NexusGenInputs["ActivityUpdateManyWithoutTeamInput"] | null; // ActivityUpdateManyWithoutTeamInput
+    attachment?: NexusGenInputs["AttachmentUpdateManyWithoutTeamInput"] | null; // AttachmentUpdateManyWithoutTeamInput
     BallotRuns?: NexusGenInputs["BallotRunUpdateManyWithoutTeamInput"] | null; // BallotRunUpdateManyWithoutTeamInput
     ballots?: NexusGenInputs["BallotUpdateManyWithoutTeamInput"] | null; // BallotUpdateManyWithoutTeamInput
     cards?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
@@ -3876,12 +4305,13 @@ export interface NexusGenInputs {
     User?: NexusGenInputs["UserUpdateManyWithoutTeamInput"] | null; // UserUpdateManyWithoutTeamInput
     Vote?: NexusGenInputs["VoteUpdateManyWithoutTeamInput"] | null; // VoteUpdateManyWithoutTeamInput
     Voted?: NexusGenInputs["VotedUpdateManyWithoutTeamInput"] | null; // VotedUpdateManyWithoutTeamInput
+    work?: NexusGenInputs["WorkUpdateManyWithoutTeamInput"] | null; // WorkUpdateManyWithoutTeamInput
     year?: NexusGenInputs["NullableIntFieldUpdateOperationsInput"] | null; // NullableIntFieldUpdateOperationsInput
   };
   TeamUpdateWithoutMembersInput: {
     // input type
-    Activity?: NexusGenInputs["ActivityUpdateManyWithoutTeamInput"] | null; // ActivityUpdateManyWithoutTeamInput
-    Attachment?: NexusGenInputs["AttachmentUpdateManyWithoutTeamInput"] | null; // AttachmentUpdateManyWithoutTeamInput
+    activity?: NexusGenInputs["ActivityUpdateManyWithoutTeamInput"] | null; // ActivityUpdateManyWithoutTeamInput
+    attachment?: NexusGenInputs["AttachmentUpdateManyWithoutTeamInput"] | null; // AttachmentUpdateManyWithoutTeamInput
     BallotRuns?: NexusGenInputs["BallotRunUpdateManyWithoutTeamInput"] | null; // BallotRunUpdateManyWithoutTeamInput
     ballots?: NexusGenInputs["BallotUpdateManyWithoutTeamInput"] | null; // BallotUpdateManyWithoutTeamInput
     cards?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
@@ -3896,12 +4326,13 @@ export interface NexusGenInputs {
     User?: NexusGenInputs["UserUpdateManyWithoutTeamInput"] | null; // UserUpdateManyWithoutTeamInput
     Vote?: NexusGenInputs["VoteUpdateManyWithoutTeamInput"] | null; // VoteUpdateManyWithoutTeamInput
     Voted?: NexusGenInputs["VotedUpdateManyWithoutTeamInput"] | null; // VotedUpdateManyWithoutTeamInput
+    work?: NexusGenInputs["WorkUpdateManyWithoutTeamInput"] | null; // WorkUpdateManyWithoutTeamInput
     year?: NexusGenInputs["NullableIntFieldUpdateOperationsInput"] | null; // NullableIntFieldUpdateOperationsInput
   };
   TeamUpdateWithoutSchoolInput: {
     // input type
-    Activity?: NexusGenInputs["ActivityUpdateManyWithoutTeamInput"] | null; // ActivityUpdateManyWithoutTeamInput
-    Attachment?: NexusGenInputs["AttachmentUpdateManyWithoutTeamInput"] | null; // AttachmentUpdateManyWithoutTeamInput
+    activity?: NexusGenInputs["ActivityUpdateManyWithoutTeamInput"] | null; // ActivityUpdateManyWithoutTeamInput
+    attachment?: NexusGenInputs["AttachmentUpdateManyWithoutTeamInput"] | null; // AttachmentUpdateManyWithoutTeamInput
     BallotRuns?: NexusGenInputs["BallotRunUpdateManyWithoutTeamInput"] | null; // BallotRunUpdateManyWithoutTeamInput
     ballots?: NexusGenInputs["BallotUpdateManyWithoutTeamInput"] | null; // BallotUpdateManyWithoutTeamInput
     cards?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
@@ -3916,12 +4347,13 @@ export interface NexusGenInputs {
     User?: NexusGenInputs["UserUpdateManyWithoutTeamInput"] | null; // UserUpdateManyWithoutTeamInput
     Vote?: NexusGenInputs["VoteUpdateManyWithoutTeamInput"] | null; // VoteUpdateManyWithoutTeamInput
     Voted?: NexusGenInputs["VotedUpdateManyWithoutTeamInput"] | null; // VotedUpdateManyWithoutTeamInput
+    work?: NexusGenInputs["WorkUpdateManyWithoutTeamInput"] | null; // WorkUpdateManyWithoutTeamInput
     year?: NexusGenInputs["NullableIntFieldUpdateOperationsInput"] | null; // NullableIntFieldUpdateOperationsInput
   };
   TeamUpdateWithoutTeacherInput: {
     // input type
-    Activity?: NexusGenInputs["ActivityUpdateManyWithoutTeamInput"] | null; // ActivityUpdateManyWithoutTeamInput
-    Attachment?: NexusGenInputs["AttachmentUpdateManyWithoutTeamInput"] | null; // AttachmentUpdateManyWithoutTeamInput
+    activity?: NexusGenInputs["ActivityUpdateManyWithoutTeamInput"] | null; // ActivityUpdateManyWithoutTeamInput
+    attachment?: NexusGenInputs["AttachmentUpdateManyWithoutTeamInput"] | null; // AttachmentUpdateManyWithoutTeamInput
     BallotRuns?: NexusGenInputs["BallotRunUpdateManyWithoutTeamInput"] | null; // BallotRunUpdateManyWithoutTeamInput
     ballots?: NexusGenInputs["BallotUpdateManyWithoutTeamInput"] | null; // BallotUpdateManyWithoutTeamInput
     cards?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
@@ -3936,12 +4368,13 @@ export interface NexusGenInputs {
     User?: NexusGenInputs["UserUpdateManyWithoutTeamInput"] | null; // UserUpdateManyWithoutTeamInput
     Vote?: NexusGenInputs["VoteUpdateManyWithoutTeamInput"] | null; // VoteUpdateManyWithoutTeamInput
     Voted?: NexusGenInputs["VotedUpdateManyWithoutTeamInput"] | null; // VotedUpdateManyWithoutTeamInput
+    work?: NexusGenInputs["WorkUpdateManyWithoutTeamInput"] | null; // WorkUpdateManyWithoutTeamInput
     year?: NexusGenInputs["NullableIntFieldUpdateOperationsInput"] | null; // NullableIntFieldUpdateOperationsInput
   };
   TeamUpdateWithoutThreadInput: {
     // input type
-    Activity?: NexusGenInputs["ActivityUpdateManyWithoutTeamInput"] | null; // ActivityUpdateManyWithoutTeamInput
-    Attachment?: NexusGenInputs["AttachmentUpdateManyWithoutTeamInput"] | null; // AttachmentUpdateManyWithoutTeamInput
+    activity?: NexusGenInputs["ActivityUpdateManyWithoutTeamInput"] | null; // ActivityUpdateManyWithoutTeamInput
+    attachment?: NexusGenInputs["AttachmentUpdateManyWithoutTeamInput"] | null; // AttachmentUpdateManyWithoutTeamInput
     BallotRuns?: NexusGenInputs["BallotRunUpdateManyWithoutTeamInput"] | null; // BallotRunUpdateManyWithoutTeamInput
     ballots?: NexusGenInputs["BallotUpdateManyWithoutTeamInput"] | null; // BallotUpdateManyWithoutTeamInput
     cards?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
@@ -3956,12 +4389,13 @@ export interface NexusGenInputs {
     User?: NexusGenInputs["UserUpdateManyWithoutTeamInput"] | null; // UserUpdateManyWithoutTeamInput
     Vote?: NexusGenInputs["VoteUpdateManyWithoutTeamInput"] | null; // VoteUpdateManyWithoutTeamInput
     Voted?: NexusGenInputs["VotedUpdateManyWithoutTeamInput"] | null; // VotedUpdateManyWithoutTeamInput
+    work?: NexusGenInputs["WorkUpdateManyWithoutTeamInput"] | null; // WorkUpdateManyWithoutTeamInput
     year?: NexusGenInputs["NullableIntFieldUpdateOperationsInput"] | null; // NullableIntFieldUpdateOperationsInput
   };
   TeamUpdateWithoutUserInput: {
     // input type
-    Activity?: NexusGenInputs["ActivityUpdateManyWithoutTeamInput"] | null; // ActivityUpdateManyWithoutTeamInput
-    Attachment?: NexusGenInputs["AttachmentUpdateManyWithoutTeamInput"] | null; // AttachmentUpdateManyWithoutTeamInput
+    activity?: NexusGenInputs["ActivityUpdateManyWithoutTeamInput"] | null; // ActivityUpdateManyWithoutTeamInput
+    attachment?: NexusGenInputs["AttachmentUpdateManyWithoutTeamInput"] | null; // AttachmentUpdateManyWithoutTeamInput
     BallotRuns?: NexusGenInputs["BallotRunUpdateManyWithoutTeamInput"] | null; // BallotRunUpdateManyWithoutTeamInput
     ballots?: NexusGenInputs["BallotUpdateManyWithoutTeamInput"] | null; // BallotUpdateManyWithoutTeamInput
     cards?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
@@ -3976,12 +4410,13 @@ export interface NexusGenInputs {
     Thread?: NexusGenInputs["ThreadUpdateManyWithoutTeamInput"] | null; // ThreadUpdateManyWithoutTeamInput
     Vote?: NexusGenInputs["VoteUpdateManyWithoutTeamInput"] | null; // VoteUpdateManyWithoutTeamInput
     Voted?: NexusGenInputs["VotedUpdateManyWithoutTeamInput"] | null; // VotedUpdateManyWithoutTeamInput
+    work?: NexusGenInputs["WorkUpdateManyWithoutTeamInput"] | null; // WorkUpdateManyWithoutTeamInput
     year?: NexusGenInputs["NullableIntFieldUpdateOperationsInput"] | null; // NullableIntFieldUpdateOperationsInput
   };
   TeamUpdateWithoutVoteInput: {
     // input type
-    Activity?: NexusGenInputs["ActivityUpdateManyWithoutTeamInput"] | null; // ActivityUpdateManyWithoutTeamInput
-    Attachment?: NexusGenInputs["AttachmentUpdateManyWithoutTeamInput"] | null; // AttachmentUpdateManyWithoutTeamInput
+    activity?: NexusGenInputs["ActivityUpdateManyWithoutTeamInput"] | null; // ActivityUpdateManyWithoutTeamInput
+    attachment?: NexusGenInputs["AttachmentUpdateManyWithoutTeamInput"] | null; // AttachmentUpdateManyWithoutTeamInput
     BallotRuns?: NexusGenInputs["BallotRunUpdateManyWithoutTeamInput"] | null; // BallotRunUpdateManyWithoutTeamInput
     ballots?: NexusGenInputs["BallotUpdateManyWithoutTeamInput"] | null; // BallotUpdateManyWithoutTeamInput
     cards?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
@@ -3996,12 +4431,13 @@ export interface NexusGenInputs {
     Thread?: NexusGenInputs["ThreadUpdateManyWithoutTeamInput"] | null; // ThreadUpdateManyWithoutTeamInput
     User?: NexusGenInputs["UserUpdateManyWithoutTeamInput"] | null; // UserUpdateManyWithoutTeamInput
     Voted?: NexusGenInputs["VotedUpdateManyWithoutTeamInput"] | null; // VotedUpdateManyWithoutTeamInput
+    work?: NexusGenInputs["WorkUpdateManyWithoutTeamInput"] | null; // WorkUpdateManyWithoutTeamInput
     year?: NexusGenInputs["NullableIntFieldUpdateOperationsInput"] | null; // NullableIntFieldUpdateOperationsInput
   };
   TeamUpdateWithoutVotedInput: {
     // input type
-    Activity?: NexusGenInputs["ActivityUpdateManyWithoutTeamInput"] | null; // ActivityUpdateManyWithoutTeamInput
-    Attachment?: NexusGenInputs["AttachmentUpdateManyWithoutTeamInput"] | null; // AttachmentUpdateManyWithoutTeamInput
+    activity?: NexusGenInputs["ActivityUpdateManyWithoutTeamInput"] | null; // ActivityUpdateManyWithoutTeamInput
+    attachment?: NexusGenInputs["AttachmentUpdateManyWithoutTeamInput"] | null; // AttachmentUpdateManyWithoutTeamInput
     BallotRuns?: NexusGenInputs["BallotRunUpdateManyWithoutTeamInput"] | null; // BallotRunUpdateManyWithoutTeamInput
     ballots?: NexusGenInputs["BallotUpdateManyWithoutTeamInput"] | null; // BallotUpdateManyWithoutTeamInput
     cards?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
@@ -4016,6 +4452,28 @@ export interface NexusGenInputs {
     Thread?: NexusGenInputs["ThreadUpdateManyWithoutTeamInput"] | null; // ThreadUpdateManyWithoutTeamInput
     User?: NexusGenInputs["UserUpdateManyWithoutTeamInput"] | null; // UserUpdateManyWithoutTeamInput
     Vote?: NexusGenInputs["VoteUpdateManyWithoutTeamInput"] | null; // VoteUpdateManyWithoutTeamInput
+    work?: NexusGenInputs["WorkUpdateManyWithoutTeamInput"] | null; // WorkUpdateManyWithoutTeamInput
+    year?: NexusGenInputs["NullableIntFieldUpdateOperationsInput"] | null; // NullableIntFieldUpdateOperationsInput
+  };
+  TeamUpdateWithoutWorkInput: {
+    // input type
+    activity?: NexusGenInputs["ActivityUpdateManyWithoutTeamInput"] | null; // ActivityUpdateManyWithoutTeamInput
+    attachment?: NexusGenInputs["AttachmentUpdateManyWithoutTeamInput"] | null; // AttachmentUpdateManyWithoutTeamInput
+    BallotRuns?: NexusGenInputs["BallotRunUpdateManyWithoutTeamInput"] | null; // BallotRunUpdateManyWithoutTeamInput
+    ballots?: NexusGenInputs["BallotUpdateManyWithoutTeamInput"] | null; // BallotUpdateManyWithoutTeamInput
+    cards?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    code?: NexusGenInputs["NullableStringFieldUpdateOperationsInput"] | null; // NullableStringFieldUpdateOperationsInput
+    domain?: NexusGenInputs["DomainUpdateOneWithoutTeamInput"] | null; // DomainUpdateOneWithoutTeamInput
+    id?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    invite?: NexusGenInputs["NullableStringFieldUpdateOperationsInput"] | null; // NullableStringFieldUpdateOperationsInput
+    members?: NexusGenInputs["UserUpdateManyWithoutTeamInput"] | null; // UserUpdateManyWithoutTeamInput
+    name?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    school?: NexusGenInputs["SchoolUpdateOneRequiredWithoutTeamsInput"] | null; // SchoolUpdateOneRequiredWithoutTeamsInput
+    teacher?: NexusGenInputs["UserUpdateOneRequiredWithoutTeachesInput"] | null; // UserUpdateOneRequiredWithoutTeachesInput
+    Thread?: NexusGenInputs["ThreadUpdateManyWithoutTeamInput"] | null; // ThreadUpdateManyWithoutTeamInput
+    User?: NexusGenInputs["UserUpdateManyWithoutTeamInput"] | null; // UserUpdateManyWithoutTeamInput
+    Vote?: NexusGenInputs["VoteUpdateManyWithoutTeamInput"] | null; // VoteUpdateManyWithoutTeamInput
+    Voted?: NexusGenInputs["VotedUpdateManyWithoutTeamInput"] | null; // VotedUpdateManyWithoutTeamInput
     year?: NexusGenInputs["NullableIntFieldUpdateOperationsInput"] | null; // NullableIntFieldUpdateOperationsInput
   };
   TeamUpsertWithWhereUniqueWithoutDomainInput: {
@@ -4081,11 +4539,16 @@ export interface NexusGenInputs {
     create: NexusGenInputs["TeamCreateWithoutVotedInput"]; // TeamCreateWithoutVotedInput!
     update: NexusGenInputs["TeamUpdateWithoutVotedInput"]; // TeamUpdateWithoutVotedInput!
   };
+  TeamUpsertWithoutWorkInput: {
+    // input type
+    create: NexusGenInputs["TeamCreateWithoutWorkInput"]; // TeamCreateWithoutWorkInput!
+    update: NexusGenInputs["TeamUpdateWithoutWorkInput"]; // TeamUpdateWithoutWorkInput!
+  };
   TeamWhereInput: {
     // input type
-    Activity?: NexusGenInputs["ActivityListRelationFilter"] | null; // ActivityListRelationFilter
+    activity?: NexusGenInputs["ActivityListRelationFilter"] | null; // ActivityListRelationFilter
     AND?: NexusGenInputs["TeamWhereInput"][] | null; // [TeamWhereInput!]
-    Attachment?: NexusGenInputs["AttachmentListRelationFilter"] | null; // AttachmentListRelationFilter
+    attachment?: NexusGenInputs["AttachmentListRelationFilter"] | null; // AttachmentListRelationFilter
     BallotRuns?: NexusGenInputs["BallotRunListRelationFilter"] | null; // BallotRunListRelationFilter
     ballots?: NexusGenInputs["BallotListRelationFilter"] | null; // BallotListRelationFilter
     cards?: NexusGenInputs["StringFilter"] | null; // StringFilter
@@ -4106,6 +4569,7 @@ export interface NexusGenInputs {
     User?: NexusGenInputs["UserListRelationFilter"] | null; // UserListRelationFilter
     Vote?: NexusGenInputs["VoteListRelationFilter"] | null; // VoteListRelationFilter
     Voted?: NexusGenInputs["VotedListRelationFilter"] | null; // VotedListRelationFilter
+    work?: NexusGenInputs["WorkListRelationFilter"] | null; // WorkListRelationFilter
     year?: NexusGenInputs["IntNullableFilter"] | null; // IntNullableFilter
   };
   TeamWhereUniqueInput: {
@@ -4142,8 +4606,8 @@ export interface NexusGenInputs {
     // input type
     connect?: NexusGenInputs["ThreadWhereUniqueInput"] | null; // ThreadWhereUniqueInput
     connectOrCreate?:
-      | NexusGenInputs["ThreadCreateOrConnectWithoutActivityInput"]
-      | null; // ThreadCreateOrConnectWithoutActivityInput
+      | NexusGenInputs["ThreadCreateOrConnectWithoutactivityInput"]
+      | null; // ThreadCreateOrConnectWithoutactivityInput
     create?: NexusGenInputs["ThreadCreateWithoutActivityInput"] | null; // ThreadCreateWithoutActivityInput
   };
   ThreadCreateOneWithoutAttachmentsInput: {
@@ -4162,7 +4626,7 @@ export interface NexusGenInputs {
       | null; // ThreadCreateOrConnectWithoutreactionsInput
     create?: NexusGenInputs["ThreadCreateWithoutReactionsInput"] | null; // ThreadCreateWithoutReactionsInput
   };
-  ThreadCreateOrConnectWithoutActivityInput: {
+  ThreadCreateOrConnectWithoutactivityInput: {
     // input type
     create: NexusGenInputs["ThreadCreateWithoutActivityInput"]; // ThreadCreateWithoutActivityInput!
     where: NexusGenInputs["ThreadWhereUniqueInput"]; // ThreadWhereUniqueInput!
@@ -4210,7 +4674,7 @@ export interface NexusGenInputs {
   };
   ThreadCreateWithoutAttachmentsInput: {
     // input type
-    Activity?: NexusGenInputs["ActivityCreateManyWithoutThreadInput"] | null; // ActivityCreateManyWithoutThreadInput
+    activity?: NexusGenInputs["ActivityCreateManyWithoutThreadInput"] | null; // ActivityCreateManyWithoutThreadInput
     createdAt?: NexusGenScalars["DateTime"] | null; // DateTime
     id?: string | null; // String
     reactions?: NexusGenInputs["ReactionCreateManyWithoutThreadInput"] | null; // ReactionCreateManyWithoutThreadInput
@@ -4224,7 +4688,7 @@ export interface NexusGenInputs {
   };
   ThreadCreateWithoutReactionsInput: {
     // input type
-    Activity?: NexusGenInputs["ActivityCreateManyWithoutThreadInput"] | null; // ActivityCreateManyWithoutThreadInput
+    activity?: NexusGenInputs["ActivityCreateManyWithoutThreadInput"] | null; // ActivityCreateManyWithoutThreadInput
     attachments?:
       | NexusGenInputs["AttachmentCreateManyWithoutThreadInput"]
       | null; // AttachmentCreateManyWithoutThreadInput
@@ -4240,7 +4704,7 @@ export interface NexusGenInputs {
   };
   ThreadCreateWithoutSchoolInput: {
     // input type
-    Activity?: NexusGenInputs["ActivityCreateManyWithoutThreadInput"] | null; // ActivityCreateManyWithoutThreadInput
+    activity?: NexusGenInputs["ActivityCreateManyWithoutThreadInput"] | null; // ActivityCreateManyWithoutThreadInput
     attachments?:
       | NexusGenInputs["AttachmentCreateManyWithoutThreadInput"]
       | null; // AttachmentCreateManyWithoutThreadInput
@@ -4256,7 +4720,7 @@ export interface NexusGenInputs {
   };
   ThreadCreateWithoutTeamInput: {
     // input type
-    Activity?: NexusGenInputs["ActivityCreateManyWithoutThreadInput"] | null; // ActivityCreateManyWithoutThreadInput
+    activity?: NexusGenInputs["ActivityCreateManyWithoutThreadInput"] | null; // ActivityCreateManyWithoutThreadInput
     attachments?:
       | NexusGenInputs["AttachmentCreateManyWithoutThreadInput"]
       | null; // AttachmentCreateManyWithoutThreadInput
@@ -4272,7 +4736,7 @@ export interface NexusGenInputs {
   };
   ThreadCreateWithoutUserInput: {
     // input type
-    Activity?: NexusGenInputs["ActivityCreateManyWithoutThreadInput"] | null; // ActivityCreateManyWithoutThreadInput
+    activity?: NexusGenInputs["ActivityCreateManyWithoutThreadInput"] | null; // ActivityCreateManyWithoutThreadInput
     attachments?:
       | NexusGenInputs["AttachmentCreateManyWithoutThreadInput"]
       | null; // AttachmentCreateManyWithoutThreadInput
@@ -4398,8 +4862,8 @@ export interface NexusGenInputs {
     // input type
     connect?: NexusGenInputs["ThreadWhereUniqueInput"] | null; // ThreadWhereUniqueInput
     connectOrCreate?:
-      | NexusGenInputs["ThreadCreateOrConnectWithoutActivityInput"]
-      | null; // ThreadCreateOrConnectWithoutActivityInput
+      | NexusGenInputs["ThreadCreateOrConnectWithoutactivityInput"]
+      | null; // ThreadCreateOrConnectWithoutactivityInput
     create?: NexusGenInputs["ThreadCreateWithoutActivityInput"] | null; // ThreadCreateWithoutActivityInput
     delete?: boolean | null; // Boolean
     disconnect?: boolean | null; // Boolean
@@ -4463,7 +4927,7 @@ export interface NexusGenInputs {
   };
   ThreadUpdateWithoutAttachmentsInput: {
     // input type
-    Activity?: NexusGenInputs["ActivityUpdateManyWithoutThreadInput"] | null; // ActivityUpdateManyWithoutThreadInput
+    activity?: NexusGenInputs["ActivityUpdateManyWithoutThreadInput"] | null; // ActivityUpdateManyWithoutThreadInput
     createdAt?: NexusGenInputs["DateTimeFieldUpdateOperationsInput"] | null; // DateTimeFieldUpdateOperationsInput
     id?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
     reactions?: NexusGenInputs["ReactionUpdateManyWithoutThreadInput"] | null; // ReactionUpdateManyWithoutThreadInput
@@ -4477,7 +4941,7 @@ export interface NexusGenInputs {
   };
   ThreadUpdateWithoutReactionsInput: {
     // input type
-    Activity?: NexusGenInputs["ActivityUpdateManyWithoutThreadInput"] | null; // ActivityUpdateManyWithoutThreadInput
+    activity?: NexusGenInputs["ActivityUpdateManyWithoutThreadInput"] | null; // ActivityUpdateManyWithoutThreadInput
     attachments?:
       | NexusGenInputs["AttachmentUpdateManyWithoutThreadInput"]
       | null; // AttachmentUpdateManyWithoutThreadInput
@@ -4493,7 +4957,7 @@ export interface NexusGenInputs {
   };
   ThreadUpdateWithoutSchoolInput: {
     // input type
-    Activity?: NexusGenInputs["ActivityUpdateManyWithoutThreadInput"] | null; // ActivityUpdateManyWithoutThreadInput
+    activity?: NexusGenInputs["ActivityUpdateManyWithoutThreadInput"] | null; // ActivityUpdateManyWithoutThreadInput
     attachments?:
       | NexusGenInputs["AttachmentUpdateManyWithoutThreadInput"]
       | null; // AttachmentUpdateManyWithoutThreadInput
@@ -4509,7 +4973,7 @@ export interface NexusGenInputs {
   };
   ThreadUpdateWithoutTeamInput: {
     // input type
-    Activity?: NexusGenInputs["ActivityUpdateManyWithoutThreadInput"] | null; // ActivityUpdateManyWithoutThreadInput
+    activity?: NexusGenInputs["ActivityUpdateManyWithoutThreadInput"] | null; // ActivityUpdateManyWithoutThreadInput
     attachments?:
       | NexusGenInputs["AttachmentUpdateManyWithoutThreadInput"]
       | null; // AttachmentUpdateManyWithoutThreadInput
@@ -4525,7 +4989,7 @@ export interface NexusGenInputs {
   };
   ThreadUpdateWithoutUserInput: {
     // input type
-    Activity?: NexusGenInputs["ActivityUpdateManyWithoutThreadInput"] | null; // ActivityUpdateManyWithoutThreadInput
+    activity?: NexusGenInputs["ActivityUpdateManyWithoutThreadInput"] | null; // ActivityUpdateManyWithoutThreadInput
     attachments?:
       | NexusGenInputs["AttachmentUpdateManyWithoutThreadInput"]
       | null; // AttachmentUpdateManyWithoutThreadInput
@@ -4574,7 +5038,7 @@ export interface NexusGenInputs {
   };
   ThreadWhereInput: {
     // input type
-    Activity?: NexusGenInputs["ActivityListRelationFilter"] | null; // ActivityListRelationFilter
+    activity?: NexusGenInputs["ActivityListRelationFilter"] | null; // ActivityListRelationFilter
     AND?: NexusGenInputs["ThreadWhereInput"][] | null; // [ThreadWhereInput!]
     attachments?: NexusGenInputs["AttachmentListRelationFilter"] | null; // AttachmentListRelationFilter
     createdAt?: NexusGenInputs["DateTimeFilter"] | null; // DateTimeFilter
@@ -4599,7 +5063,7 @@ export interface NexusGenInputs {
   };
   UserCreateInput: {
     // input type
-    Activity?: NexusGenInputs["ActivityCreateManyWithoutUserInput"] | null; // ActivityCreateManyWithoutUserInput
+    activity?: NexusGenInputs["ActivityCreateManyWithoutUserInput"] | null; // ActivityCreateManyWithoutUserInput
     attachments?: NexusGenInputs["AttachmentCreateManyWithoutUserInput"] | null; // AttachmentCreateManyWithoutUserInput
     ballots?: NexusGenInputs["BallotCreateManyWithoutCreatorInput"] | null; // BallotCreateManyWithoutCreatorInput
     canton?: string | null; // String
@@ -4616,12 +5080,13 @@ export interface NexusGenInputs {
     role?: NexusGenEnums["Role"] | null; // Role
     school?: NexusGenInputs["SchoolCreateOneWithoutMembersInput"] | null; // SchoolCreateOneWithoutMembersInput
     teaches?: NexusGenInputs["TeamCreateManyWithoutTeacherInput"] | null; // TeamCreateManyWithoutTeacherInput
-    team?: NexusGenInputs["TeamCreateOneWithoutUserInput"] | null; // TeamCreateOneWithoutUserInput
-    Team?: NexusGenInputs["TeamCreateOneWithoutMembersInput"] | null; // TeamCreateOneWithoutMembersInput
+    team?: NexusGenInputs["TeamCreateOneWithoutMembersInput"] | null; // TeamCreateOneWithoutMembersInput
+    Team?: NexusGenInputs["TeamCreateOneWithoutUserInput"] | null; // TeamCreateOneWithoutUserInput
     threads?: NexusGenInputs["ThreadCreateManyWithoutUserInput"] | null; // ThreadCreateManyWithoutUserInput
     updatedAt?: NexusGenScalars["DateTime"] | null; // DateTime
     verified?: boolean | null; // Boolean
     voted?: NexusGenInputs["VotedCreateManyWithoutUserInput"] | null; // VotedCreateManyWithoutUserInput
+    work?: NexusGenInputs["WorkCreateManyWithoutUsersInput"] | null; // WorkCreateManyWithoutUsersInput
     year?: number | null; // Int
   };
   UserCreateManyWithoutSchoolInput: {
@@ -4636,16 +5101,24 @@ export interface NexusGenInputs {
     // input type
     connect?: NexusGenInputs["UserWhereUniqueInput"][] | null; // [UserWhereUniqueInput!]
     connectOrCreate?:
-      | NexusGenInputs["UserCreateOrConnectWithoutTeamInput"][]
-      | null; // [UserCreateOrConnectWithoutTeamInput!]
+      | NexusGenInputs["UserCreateOrConnectWithoutteamInput"][]
+      | null; // [UserCreateOrConnectWithoutteamInput!]
     create?: NexusGenInputs["UserCreateWithoutTeamInput"][] | null; // [UserCreateWithoutTeamInput!]
+  };
+  UserCreateManyWithoutWorkInput: {
+    // input type
+    connect?: NexusGenInputs["UserWhereUniqueInput"][] | null; // [UserWhereUniqueInput!]
+    connectOrCreate?:
+      | NexusGenInputs["UserCreateOrConnectWithoutworkInput"][]
+      | null; // [UserCreateOrConnectWithoutworkInput!]
+    create?: NexusGenInputs["UserCreateWithoutWorkInput"][] | null; // [UserCreateWithoutWorkInput!]
   };
   UserCreateOneWithoutActivityInput: {
     // input type
     connect?: NexusGenInputs["UserWhereUniqueInput"] | null; // UserWhereUniqueInput
     connectOrCreate?:
-      | NexusGenInputs["UserCreateOrConnectWithoutActivityInput"]
-      | null; // UserCreateOrConnectWithoutActivityInput
+      | NexusGenInputs["UserCreateOrConnectWithoutactivityInput"]
+      | null; // UserCreateOrConnectWithoutactivityInput
     create?: NexusGenInputs["UserCreateWithoutActivityInput"] | null; // UserCreateWithoutActivityInput
   };
   UserCreateOneWithoutAttachmentsInput: {
@@ -4696,14 +5169,9 @@ export interface NexusGenInputs {
       | null; // UserCreateOrConnectWithoutvotedInput
     create?: NexusGenInputs["UserCreateWithoutVotedInput"] | null; // UserCreateWithoutVotedInput
   };
-  UserCreateOrConnectWithoutActivityInput: {
+  UserCreateOrConnectWithoutactivityInput: {
     // input type
     create: NexusGenInputs["UserCreateWithoutActivityInput"]; // UserCreateWithoutActivityInput!
-    where: NexusGenInputs["UserWhereUniqueInput"]; // UserWhereUniqueInput!
-  };
-  UserCreateOrConnectWithoutTeamInput: {
-    // input type
-    create: NexusGenInputs["UserCreateWithoutTeamInput"]; // UserCreateWithoutTeamInput!
     where: NexusGenInputs["UserWhereUniqueInput"]; // UserWhereUniqueInput!
   };
   UserCreateOrConnectWithoutattachmentsInput: {
@@ -4731,6 +5199,11 @@ export interface NexusGenInputs {
     create: NexusGenInputs["UserCreateWithoutTeachesInput"]; // UserCreateWithoutTeachesInput!
     where: NexusGenInputs["UserWhereUniqueInput"]; // UserWhereUniqueInput!
   };
+  UserCreateOrConnectWithoutteamInput: {
+    // input type
+    create: NexusGenInputs["UserCreateWithoutTeamInput"]; // UserCreateWithoutTeamInput!
+    where: NexusGenInputs["UserWhereUniqueInput"]; // UserWhereUniqueInput!
+  };
   UserCreateOrConnectWithoutthreadsInput: {
     // input type
     create: NexusGenInputs["UserCreateWithoutThreadsInput"]; // UserCreateWithoutThreadsInput!
@@ -4739,6 +5212,11 @@ export interface NexusGenInputs {
   UserCreateOrConnectWithoutvotedInput: {
     // input type
     create: NexusGenInputs["UserCreateWithoutVotedInput"]; // UserCreateWithoutVotedInput!
+    where: NexusGenInputs["UserWhereUniqueInput"]; // UserWhereUniqueInput!
+  };
+  UserCreateOrConnectWithoutworkInput: {
+    // input type
+    create: NexusGenInputs["UserCreateWithoutWorkInput"]; // UserCreateWithoutWorkInput!
     where: NexusGenInputs["UserWhereUniqueInput"]; // UserWhereUniqueInput!
   };
   UserCreateWithoutActivityInput: {
@@ -4759,17 +5237,18 @@ export interface NexusGenInputs {
     role?: NexusGenEnums["Role"] | null; // Role
     school?: NexusGenInputs["SchoolCreateOneWithoutMembersInput"] | null; // SchoolCreateOneWithoutMembersInput
     teaches?: NexusGenInputs["TeamCreateManyWithoutTeacherInput"] | null; // TeamCreateManyWithoutTeacherInput
-    team?: NexusGenInputs["TeamCreateOneWithoutUserInput"] | null; // TeamCreateOneWithoutUserInput
-    Team?: NexusGenInputs["TeamCreateOneWithoutMembersInput"] | null; // TeamCreateOneWithoutMembersInput
+    team?: NexusGenInputs["TeamCreateOneWithoutMembersInput"] | null; // TeamCreateOneWithoutMembersInput
+    Team?: NexusGenInputs["TeamCreateOneWithoutUserInput"] | null; // TeamCreateOneWithoutUserInput
     threads?: NexusGenInputs["ThreadCreateManyWithoutUserInput"] | null; // ThreadCreateManyWithoutUserInput
     updatedAt?: NexusGenScalars["DateTime"] | null; // DateTime
     verified?: boolean | null; // Boolean
     voted?: NexusGenInputs["VotedCreateManyWithoutUserInput"] | null; // VotedCreateManyWithoutUserInput
+    work?: NexusGenInputs["WorkCreateManyWithoutUsersInput"] | null; // WorkCreateManyWithoutUsersInput
     year?: number | null; // Int
   };
   UserCreateWithoutAttachmentsInput: {
     // input type
-    Activity?: NexusGenInputs["ActivityCreateManyWithoutUserInput"] | null; // ActivityCreateManyWithoutUserInput
+    activity?: NexusGenInputs["ActivityCreateManyWithoutUserInput"] | null; // ActivityCreateManyWithoutUserInput
     ballots?: NexusGenInputs["BallotCreateManyWithoutCreatorInput"] | null; // BallotCreateManyWithoutCreatorInput
     canton?: string | null; // String
     createdAt?: NexusGenScalars["DateTime"] | null; // DateTime
@@ -4785,17 +5264,18 @@ export interface NexusGenInputs {
     role?: NexusGenEnums["Role"] | null; // Role
     school?: NexusGenInputs["SchoolCreateOneWithoutMembersInput"] | null; // SchoolCreateOneWithoutMembersInput
     teaches?: NexusGenInputs["TeamCreateManyWithoutTeacherInput"] | null; // TeamCreateManyWithoutTeacherInput
-    team?: NexusGenInputs["TeamCreateOneWithoutUserInput"] | null; // TeamCreateOneWithoutUserInput
-    Team?: NexusGenInputs["TeamCreateOneWithoutMembersInput"] | null; // TeamCreateOneWithoutMembersInput
+    team?: NexusGenInputs["TeamCreateOneWithoutMembersInput"] | null; // TeamCreateOneWithoutMembersInput
+    Team?: NexusGenInputs["TeamCreateOneWithoutUserInput"] | null; // TeamCreateOneWithoutUserInput
     threads?: NexusGenInputs["ThreadCreateManyWithoutUserInput"] | null; // ThreadCreateManyWithoutUserInput
     updatedAt?: NexusGenScalars["DateTime"] | null; // DateTime
     verified?: boolean | null; // Boolean
     voted?: NexusGenInputs["VotedCreateManyWithoutUserInput"] | null; // VotedCreateManyWithoutUserInput
+    work?: NexusGenInputs["WorkCreateManyWithoutUsersInput"] | null; // WorkCreateManyWithoutUsersInput
     year?: number | null; // Int
   };
   UserCreateWithoutBallotsInput: {
     // input type
-    Activity?: NexusGenInputs["ActivityCreateManyWithoutUserInput"] | null; // ActivityCreateManyWithoutUserInput
+    activity?: NexusGenInputs["ActivityCreateManyWithoutUserInput"] | null; // ActivityCreateManyWithoutUserInput
     attachments?: NexusGenInputs["AttachmentCreateManyWithoutUserInput"] | null; // AttachmentCreateManyWithoutUserInput
     canton?: string | null; // String
     createdAt?: NexusGenScalars["DateTime"] | null; // DateTime
@@ -4811,17 +5291,18 @@ export interface NexusGenInputs {
     role?: NexusGenEnums["Role"] | null; // Role
     school?: NexusGenInputs["SchoolCreateOneWithoutMembersInput"] | null; // SchoolCreateOneWithoutMembersInput
     teaches?: NexusGenInputs["TeamCreateManyWithoutTeacherInput"] | null; // TeamCreateManyWithoutTeacherInput
-    team?: NexusGenInputs["TeamCreateOneWithoutUserInput"] | null; // TeamCreateOneWithoutUserInput
-    Team?: NexusGenInputs["TeamCreateOneWithoutMembersInput"] | null; // TeamCreateOneWithoutMembersInput
+    team?: NexusGenInputs["TeamCreateOneWithoutMembersInput"] | null; // TeamCreateOneWithoutMembersInput
+    Team?: NexusGenInputs["TeamCreateOneWithoutUserInput"] | null; // TeamCreateOneWithoutUserInput
     threads?: NexusGenInputs["ThreadCreateManyWithoutUserInput"] | null; // ThreadCreateManyWithoutUserInput
     updatedAt?: NexusGenScalars["DateTime"] | null; // DateTime
     verified?: boolean | null; // Boolean
     voted?: NexusGenInputs["VotedCreateManyWithoutUserInput"] | null; // VotedCreateManyWithoutUserInput
+    work?: NexusGenInputs["WorkCreateManyWithoutUsersInput"] | null; // WorkCreateManyWithoutUsersInput
     year?: number | null; // Int
   };
   UserCreateWithoutReactionsInput: {
     // input type
-    Activity?: NexusGenInputs["ActivityCreateManyWithoutUserInput"] | null; // ActivityCreateManyWithoutUserInput
+    activity?: NexusGenInputs["ActivityCreateManyWithoutUserInput"] | null; // ActivityCreateManyWithoutUserInput
     attachments?: NexusGenInputs["AttachmentCreateManyWithoutUserInput"] | null; // AttachmentCreateManyWithoutUserInput
     ballots?: NexusGenInputs["BallotCreateManyWithoutCreatorInput"] | null; // BallotCreateManyWithoutCreatorInput
     canton?: string | null; // String
@@ -4837,17 +5318,18 @@ export interface NexusGenInputs {
     role?: NexusGenEnums["Role"] | null; // Role
     school?: NexusGenInputs["SchoolCreateOneWithoutMembersInput"] | null; // SchoolCreateOneWithoutMembersInput
     teaches?: NexusGenInputs["TeamCreateManyWithoutTeacherInput"] | null; // TeamCreateManyWithoutTeacherInput
-    team?: NexusGenInputs["TeamCreateOneWithoutUserInput"] | null; // TeamCreateOneWithoutUserInput
-    Team?: NexusGenInputs["TeamCreateOneWithoutMembersInput"] | null; // TeamCreateOneWithoutMembersInput
+    team?: NexusGenInputs["TeamCreateOneWithoutMembersInput"] | null; // TeamCreateOneWithoutMembersInput
+    Team?: NexusGenInputs["TeamCreateOneWithoutUserInput"] | null; // TeamCreateOneWithoutUserInput
     threads?: NexusGenInputs["ThreadCreateManyWithoutUserInput"] | null; // ThreadCreateManyWithoutUserInput
     updatedAt?: NexusGenScalars["DateTime"] | null; // DateTime
     verified?: boolean | null; // Boolean
     voted?: NexusGenInputs["VotedCreateManyWithoutUserInput"] | null; // VotedCreateManyWithoutUserInput
+    work?: NexusGenInputs["WorkCreateManyWithoutUsersInput"] | null; // WorkCreateManyWithoutUsersInput
     year?: number | null; // Int
   };
   UserCreateWithoutSchoolInput: {
     // input type
-    Activity?: NexusGenInputs["ActivityCreateManyWithoutUserInput"] | null; // ActivityCreateManyWithoutUserInput
+    activity?: NexusGenInputs["ActivityCreateManyWithoutUserInput"] | null; // ActivityCreateManyWithoutUserInput
     attachments?: NexusGenInputs["AttachmentCreateManyWithoutUserInput"] | null; // AttachmentCreateManyWithoutUserInput
     ballots?: NexusGenInputs["BallotCreateManyWithoutCreatorInput"] | null; // BallotCreateManyWithoutCreatorInput
     canton?: string | null; // String
@@ -4863,17 +5345,18 @@ export interface NexusGenInputs {
     reactions?: NexusGenInputs["ReactionCreateManyWithoutUserInput"] | null; // ReactionCreateManyWithoutUserInput
     role?: NexusGenEnums["Role"] | null; // Role
     teaches?: NexusGenInputs["TeamCreateManyWithoutTeacherInput"] | null; // TeamCreateManyWithoutTeacherInput
-    team?: NexusGenInputs["TeamCreateOneWithoutUserInput"] | null; // TeamCreateOneWithoutUserInput
-    Team?: NexusGenInputs["TeamCreateOneWithoutMembersInput"] | null; // TeamCreateOneWithoutMembersInput
+    team?: NexusGenInputs["TeamCreateOneWithoutMembersInput"] | null; // TeamCreateOneWithoutMembersInput
+    Team?: NexusGenInputs["TeamCreateOneWithoutUserInput"] | null; // TeamCreateOneWithoutUserInput
     threads?: NexusGenInputs["ThreadCreateManyWithoutUserInput"] | null; // ThreadCreateManyWithoutUserInput
     updatedAt?: NexusGenScalars["DateTime"] | null; // DateTime
     verified?: boolean | null; // Boolean
     voted?: NexusGenInputs["VotedCreateManyWithoutUserInput"] | null; // VotedCreateManyWithoutUserInput
+    work?: NexusGenInputs["WorkCreateManyWithoutUsersInput"] | null; // WorkCreateManyWithoutUsersInput
     year?: number | null; // Int
   };
   UserCreateWithoutTeachesInput: {
     // input type
-    Activity?: NexusGenInputs["ActivityCreateManyWithoutUserInput"] | null; // ActivityCreateManyWithoutUserInput
+    activity?: NexusGenInputs["ActivityCreateManyWithoutUserInput"] | null; // ActivityCreateManyWithoutUserInput
     attachments?: NexusGenInputs["AttachmentCreateManyWithoutUserInput"] | null; // AttachmentCreateManyWithoutUserInput
     ballots?: NexusGenInputs["BallotCreateManyWithoutCreatorInput"] | null; // BallotCreateManyWithoutCreatorInput
     canton?: string | null; // String
@@ -4889,17 +5372,18 @@ export interface NexusGenInputs {
     reactions?: NexusGenInputs["ReactionCreateManyWithoutUserInput"] | null; // ReactionCreateManyWithoutUserInput
     role?: NexusGenEnums["Role"] | null; // Role
     school?: NexusGenInputs["SchoolCreateOneWithoutMembersInput"] | null; // SchoolCreateOneWithoutMembersInput
-    team?: NexusGenInputs["TeamCreateOneWithoutUserInput"] | null; // TeamCreateOneWithoutUserInput
-    Team?: NexusGenInputs["TeamCreateOneWithoutMembersInput"] | null; // TeamCreateOneWithoutMembersInput
+    team?: NexusGenInputs["TeamCreateOneWithoutMembersInput"] | null; // TeamCreateOneWithoutMembersInput
+    Team?: NexusGenInputs["TeamCreateOneWithoutUserInput"] | null; // TeamCreateOneWithoutUserInput
     threads?: NexusGenInputs["ThreadCreateManyWithoutUserInput"] | null; // ThreadCreateManyWithoutUserInput
     updatedAt?: NexusGenScalars["DateTime"] | null; // DateTime
     verified?: boolean | null; // Boolean
     voted?: NexusGenInputs["VotedCreateManyWithoutUserInput"] | null; // VotedCreateManyWithoutUserInput
+    work?: NexusGenInputs["WorkCreateManyWithoutUsersInput"] | null; // WorkCreateManyWithoutUsersInput
     year?: number | null; // Int
   };
   UserCreateWithoutTeamInput: {
     // input type
-    Activity?: NexusGenInputs["ActivityCreateManyWithoutUserInput"] | null; // ActivityCreateManyWithoutUserInput
+    activity?: NexusGenInputs["ActivityCreateManyWithoutUserInput"] | null; // ActivityCreateManyWithoutUserInput
     attachments?: NexusGenInputs["AttachmentCreateManyWithoutUserInput"] | null; // AttachmentCreateManyWithoutUserInput
     ballots?: NexusGenInputs["BallotCreateManyWithoutCreatorInput"] | null; // BallotCreateManyWithoutCreatorInput
     canton?: string | null; // String
@@ -4916,16 +5400,17 @@ export interface NexusGenInputs {
     role?: NexusGenEnums["Role"] | null; // Role
     school?: NexusGenInputs["SchoolCreateOneWithoutMembersInput"] | null; // SchoolCreateOneWithoutMembersInput
     teaches?: NexusGenInputs["TeamCreateManyWithoutTeacherInput"] | null; // TeamCreateManyWithoutTeacherInput
-    team?: NexusGenInputs["TeamCreateOneWithoutUserInput"] | null; // TeamCreateOneWithoutUserInput
+    Team?: NexusGenInputs["TeamCreateOneWithoutUserInput"] | null; // TeamCreateOneWithoutUserInput
     threads?: NexusGenInputs["ThreadCreateManyWithoutUserInput"] | null; // ThreadCreateManyWithoutUserInput
     updatedAt?: NexusGenScalars["DateTime"] | null; // DateTime
     verified?: boolean | null; // Boolean
     voted?: NexusGenInputs["VotedCreateManyWithoutUserInput"] | null; // VotedCreateManyWithoutUserInput
+    work?: NexusGenInputs["WorkCreateManyWithoutUsersInput"] | null; // WorkCreateManyWithoutUsersInput
     year?: number | null; // Int
   };
   UserCreateWithoutThreadsInput: {
     // input type
-    Activity?: NexusGenInputs["ActivityCreateManyWithoutUserInput"] | null; // ActivityCreateManyWithoutUserInput
+    activity?: NexusGenInputs["ActivityCreateManyWithoutUserInput"] | null; // ActivityCreateManyWithoutUserInput
     attachments?: NexusGenInputs["AttachmentCreateManyWithoutUserInput"] | null; // AttachmentCreateManyWithoutUserInput
     ballots?: NexusGenInputs["BallotCreateManyWithoutCreatorInput"] | null; // BallotCreateManyWithoutCreatorInput
     canton?: string | null; // String
@@ -4942,16 +5427,17 @@ export interface NexusGenInputs {
     role?: NexusGenEnums["Role"] | null; // Role
     school?: NexusGenInputs["SchoolCreateOneWithoutMembersInput"] | null; // SchoolCreateOneWithoutMembersInput
     teaches?: NexusGenInputs["TeamCreateManyWithoutTeacherInput"] | null; // TeamCreateManyWithoutTeacherInput
-    team?: NexusGenInputs["TeamCreateOneWithoutUserInput"] | null; // TeamCreateOneWithoutUserInput
-    Team?: NexusGenInputs["TeamCreateOneWithoutMembersInput"] | null; // TeamCreateOneWithoutMembersInput
+    team?: NexusGenInputs["TeamCreateOneWithoutMembersInput"] | null; // TeamCreateOneWithoutMembersInput
+    Team?: NexusGenInputs["TeamCreateOneWithoutUserInput"] | null; // TeamCreateOneWithoutUserInput
     updatedAt?: NexusGenScalars["DateTime"] | null; // DateTime
     verified?: boolean | null; // Boolean
     voted?: NexusGenInputs["VotedCreateManyWithoutUserInput"] | null; // VotedCreateManyWithoutUserInput
+    work?: NexusGenInputs["WorkCreateManyWithoutUsersInput"] | null; // WorkCreateManyWithoutUsersInput
     year?: number | null; // Int
   };
   UserCreateWithoutVotedInput: {
     // input type
-    Activity?: NexusGenInputs["ActivityCreateManyWithoutUserInput"] | null; // ActivityCreateManyWithoutUserInput
+    activity?: NexusGenInputs["ActivityCreateManyWithoutUserInput"] | null; // ActivityCreateManyWithoutUserInput
     attachments?: NexusGenInputs["AttachmentCreateManyWithoutUserInput"] | null; // AttachmentCreateManyWithoutUserInput
     ballots?: NexusGenInputs["BallotCreateManyWithoutCreatorInput"] | null; // BallotCreateManyWithoutCreatorInput
     canton?: string | null; // String
@@ -4968,11 +5454,39 @@ export interface NexusGenInputs {
     role?: NexusGenEnums["Role"] | null; // Role
     school?: NexusGenInputs["SchoolCreateOneWithoutMembersInput"] | null; // SchoolCreateOneWithoutMembersInput
     teaches?: NexusGenInputs["TeamCreateManyWithoutTeacherInput"] | null; // TeamCreateManyWithoutTeacherInput
-    team?: NexusGenInputs["TeamCreateOneWithoutUserInput"] | null; // TeamCreateOneWithoutUserInput
-    Team?: NexusGenInputs["TeamCreateOneWithoutMembersInput"] | null; // TeamCreateOneWithoutMembersInput
+    team?: NexusGenInputs["TeamCreateOneWithoutMembersInput"] | null; // TeamCreateOneWithoutMembersInput
+    Team?: NexusGenInputs["TeamCreateOneWithoutUserInput"] | null; // TeamCreateOneWithoutUserInput
     threads?: NexusGenInputs["ThreadCreateManyWithoutUserInput"] | null; // ThreadCreateManyWithoutUserInput
     updatedAt?: NexusGenScalars["DateTime"] | null; // DateTime
     verified?: boolean | null; // Boolean
+    work?: NexusGenInputs["WorkCreateManyWithoutUsersInput"] | null; // WorkCreateManyWithoutUsersInput
+    year?: number | null; // Int
+  };
+  UserCreateWithoutWorkInput: {
+    // input type
+    activity?: NexusGenInputs["ActivityCreateManyWithoutUserInput"] | null; // ActivityCreateManyWithoutUserInput
+    attachments?: NexusGenInputs["AttachmentCreateManyWithoutUserInput"] | null; // AttachmentCreateManyWithoutUserInput
+    ballots?: NexusGenInputs["BallotCreateManyWithoutCreatorInput"] | null; // BallotCreateManyWithoutCreatorInput
+    canton?: string | null; // String
+    createdAt?: NexusGenScalars["DateTime"] | null; // DateTime
+    email?: string | null; // String
+    emailVerified?: NexusGenScalars["DateTime"] | null; // DateTime
+    gender?: NexusGenEnums["Gender"] | null; // Gender
+    id?: string | null; // String
+    image?: string | null; // String
+    lastname?: string | null; // String
+    name?: string | null; // String
+    password?: string | null; // String
+    reactions?: NexusGenInputs["ReactionCreateManyWithoutUserInput"] | null; // ReactionCreateManyWithoutUserInput
+    role?: NexusGenEnums["Role"] | null; // Role
+    school?: NexusGenInputs["SchoolCreateOneWithoutMembersInput"] | null; // SchoolCreateOneWithoutMembersInput
+    teaches?: NexusGenInputs["TeamCreateManyWithoutTeacherInput"] | null; // TeamCreateManyWithoutTeacherInput
+    team?: NexusGenInputs["TeamCreateOneWithoutMembersInput"] | null; // TeamCreateOneWithoutMembersInput
+    Team?: NexusGenInputs["TeamCreateOneWithoutUserInput"] | null; // TeamCreateOneWithoutUserInput
+    threads?: NexusGenInputs["ThreadCreateManyWithoutUserInput"] | null; // ThreadCreateManyWithoutUserInput
+    updatedAt?: NexusGenScalars["DateTime"] | null; // DateTime
+    verified?: boolean | null; // Boolean
+    voted?: NexusGenInputs["VotedCreateManyWithoutUserInput"] | null; // VotedCreateManyWithoutUserInput
     year?: number | null; // Int
   };
   UserListRelationFilter: {
@@ -5024,7 +5538,7 @@ export interface NexusGenInputs {
   };
   UserUpdateInput: {
     // input type
-    Activity?: NexusGenInputs["ActivityUpdateManyWithoutUserInput"] | null; // ActivityUpdateManyWithoutUserInput
+    activity?: NexusGenInputs["ActivityUpdateManyWithoutUserInput"] | null; // ActivityUpdateManyWithoutUserInput
     attachments?: NexusGenInputs["AttachmentUpdateManyWithoutUserInput"] | null; // AttachmentUpdateManyWithoutUserInput
     ballots?: NexusGenInputs["BallotUpdateManyWithoutCreatorInput"] | null; // BallotUpdateManyWithoutCreatorInput
     canton?: NexusGenInputs["NullableStringFieldUpdateOperationsInput"] | null; // NullableStringFieldUpdateOperationsInput
@@ -5049,12 +5563,13 @@ export interface NexusGenInputs {
     role?: NexusGenInputs["EnumRoleFieldUpdateOperationsInput"] | null; // EnumRoleFieldUpdateOperationsInput
     school?: NexusGenInputs["SchoolUpdateOneWithoutMembersInput"] | null; // SchoolUpdateOneWithoutMembersInput
     teaches?: NexusGenInputs["TeamUpdateManyWithoutTeacherInput"] | null; // TeamUpdateManyWithoutTeacherInput
-    team?: NexusGenInputs["TeamUpdateOneWithoutUserInput"] | null; // TeamUpdateOneWithoutUserInput
-    Team?: NexusGenInputs["TeamUpdateOneWithoutMembersInput"] | null; // TeamUpdateOneWithoutMembersInput
+    team?: NexusGenInputs["TeamUpdateOneWithoutMembersInput"] | null; // TeamUpdateOneWithoutMembersInput
+    Team?: NexusGenInputs["TeamUpdateOneWithoutUserInput"] | null; // TeamUpdateOneWithoutUserInput
     threads?: NexusGenInputs["ThreadUpdateManyWithoutUserInput"] | null; // ThreadUpdateManyWithoutUserInput
     updatedAt?: NexusGenInputs["DateTimeFieldUpdateOperationsInput"] | null; // DateTimeFieldUpdateOperationsInput
     verified?: NexusGenInputs["NullableBoolFieldUpdateOperationsInput"] | null; // NullableBoolFieldUpdateOperationsInput
     voted?: NexusGenInputs["VotedUpdateManyWithoutUserInput"] | null; // VotedUpdateManyWithoutUserInput
+    work?: NexusGenInputs["WorkUpdateManyWithoutUsersInput"] | null; // WorkUpdateManyWithoutUsersInput
     year?: NexusGenInputs["NullableIntFieldUpdateOperationsInput"] | null; // NullableIntFieldUpdateOperationsInput
   };
   UserUpdateManyMutationInput: {
@@ -5092,6 +5607,11 @@ export interface NexusGenInputs {
     data: NexusGenInputs["UserUpdateManyMutationInput"]; // UserUpdateManyMutationInput!
     where: NexusGenInputs["UserScalarWhereInput"]; // UserScalarWhereInput!
   };
+  UserUpdateManyWithWhereWithoutWorkInput: {
+    // input type
+    data: NexusGenInputs["UserUpdateManyMutationInput"]; // UserUpdateManyMutationInput!
+    where: NexusGenInputs["UserScalarWhereInput"]; // UserScalarWhereInput!
+  };
   UserUpdateManyWithoutSchoolInput: {
     // input type
     connect?: NexusGenInputs["UserWhereUniqueInput"][] | null; // [UserWhereUniqueInput!]
@@ -5117,8 +5637,8 @@ export interface NexusGenInputs {
     // input type
     connect?: NexusGenInputs["UserWhereUniqueInput"][] | null; // [UserWhereUniqueInput!]
     connectOrCreate?:
-      | NexusGenInputs["UserCreateOrConnectWithoutTeamInput"][]
-      | null; // [UserCreateOrConnectWithoutTeamInput!]
+      | NexusGenInputs["UserCreateOrConnectWithoutteamInput"][]
+      | null; // [UserCreateOrConnectWithoutteamInput!]
     create?: NexusGenInputs["UserCreateWithoutTeamInput"][] | null; // [UserCreateWithoutTeamInput!]
     delete?: NexusGenInputs["UserWhereUniqueInput"][] | null; // [UserWhereUniqueInput!]
     deleteMany?: NexusGenInputs["UserScalarWhereInput"][] | null; // [UserScalarWhereInput!]
@@ -5134,12 +5654,33 @@ export interface NexusGenInputs {
       | NexusGenInputs["UserUpsertWithWhereUniqueWithoutTeamInput"][]
       | null; // [UserUpsertWithWhereUniqueWithoutTeamInput!]
   };
+  UserUpdateManyWithoutWorkInput: {
+    // input type
+    connect?: NexusGenInputs["UserWhereUniqueInput"][] | null; // [UserWhereUniqueInput!]
+    connectOrCreate?:
+      | NexusGenInputs["UserCreateOrConnectWithoutworkInput"][]
+      | null; // [UserCreateOrConnectWithoutworkInput!]
+    create?: NexusGenInputs["UserCreateWithoutWorkInput"][] | null; // [UserCreateWithoutWorkInput!]
+    delete?: NexusGenInputs["UserWhereUniqueInput"][] | null; // [UserWhereUniqueInput!]
+    deleteMany?: NexusGenInputs["UserScalarWhereInput"][] | null; // [UserScalarWhereInput!]
+    disconnect?: NexusGenInputs["UserWhereUniqueInput"][] | null; // [UserWhereUniqueInput!]
+    set?: NexusGenInputs["UserWhereUniqueInput"][] | null; // [UserWhereUniqueInput!]
+    update?:
+      | NexusGenInputs["UserUpdateWithWhereUniqueWithoutWorkInput"][]
+      | null; // [UserUpdateWithWhereUniqueWithoutWorkInput!]
+    updateMany?:
+      | NexusGenInputs["UserUpdateManyWithWhereWithoutWorkInput"][]
+      | null; // [UserUpdateManyWithWhereWithoutWorkInput!]
+    upsert?:
+      | NexusGenInputs["UserUpsertWithWhereUniqueWithoutWorkInput"][]
+      | null; // [UserUpsertWithWhereUniqueWithoutWorkInput!]
+  };
   UserUpdateOneRequiredWithoutActivityInput: {
     // input type
     connect?: NexusGenInputs["UserWhereUniqueInput"] | null; // UserWhereUniqueInput
     connectOrCreate?:
-      | NexusGenInputs["UserCreateOrConnectWithoutActivityInput"]
-      | null; // UserCreateOrConnectWithoutActivityInput
+      | NexusGenInputs["UserCreateOrConnectWithoutactivityInput"]
+      | null; // UserCreateOrConnectWithoutactivityInput
     create?: NexusGenInputs["UserCreateWithoutActivityInput"] | null; // UserCreateWithoutActivityInput
     update?: NexusGenInputs["UserUpdateWithoutActivityInput"] | null; // UserUpdateWithoutActivityInput
     upsert?: NexusGenInputs["UserUpsertWithoutActivityInput"] | null; // UserUpsertWithoutActivityInput
@@ -5216,6 +5757,11 @@ export interface NexusGenInputs {
     data: NexusGenInputs["UserUpdateWithoutTeamInput"]; // UserUpdateWithoutTeamInput!
     where: NexusGenInputs["UserWhereUniqueInput"]; // UserWhereUniqueInput!
   };
+  UserUpdateWithWhereUniqueWithoutWorkInput: {
+    // input type
+    data: NexusGenInputs["UserUpdateWithoutWorkInput"]; // UserUpdateWithoutWorkInput!
+    where: NexusGenInputs["UserWhereUniqueInput"]; // UserWhereUniqueInput!
+  };
   UserUpdateWithoutActivityInput: {
     // input type
     attachments?: NexusGenInputs["AttachmentUpdateManyWithoutUserInput"] | null; // AttachmentUpdateManyWithoutUserInput
@@ -5242,17 +5788,18 @@ export interface NexusGenInputs {
     role?: NexusGenInputs["EnumRoleFieldUpdateOperationsInput"] | null; // EnumRoleFieldUpdateOperationsInput
     school?: NexusGenInputs["SchoolUpdateOneWithoutMembersInput"] | null; // SchoolUpdateOneWithoutMembersInput
     teaches?: NexusGenInputs["TeamUpdateManyWithoutTeacherInput"] | null; // TeamUpdateManyWithoutTeacherInput
-    team?: NexusGenInputs["TeamUpdateOneWithoutUserInput"] | null; // TeamUpdateOneWithoutUserInput
-    Team?: NexusGenInputs["TeamUpdateOneWithoutMembersInput"] | null; // TeamUpdateOneWithoutMembersInput
+    team?: NexusGenInputs["TeamUpdateOneWithoutMembersInput"] | null; // TeamUpdateOneWithoutMembersInput
+    Team?: NexusGenInputs["TeamUpdateOneWithoutUserInput"] | null; // TeamUpdateOneWithoutUserInput
     threads?: NexusGenInputs["ThreadUpdateManyWithoutUserInput"] | null; // ThreadUpdateManyWithoutUserInput
     updatedAt?: NexusGenInputs["DateTimeFieldUpdateOperationsInput"] | null; // DateTimeFieldUpdateOperationsInput
     verified?: NexusGenInputs["NullableBoolFieldUpdateOperationsInput"] | null; // NullableBoolFieldUpdateOperationsInput
     voted?: NexusGenInputs["VotedUpdateManyWithoutUserInput"] | null; // VotedUpdateManyWithoutUserInput
+    work?: NexusGenInputs["WorkUpdateManyWithoutUsersInput"] | null; // WorkUpdateManyWithoutUsersInput
     year?: NexusGenInputs["NullableIntFieldUpdateOperationsInput"] | null; // NullableIntFieldUpdateOperationsInput
   };
   UserUpdateWithoutAttachmentsInput: {
     // input type
-    Activity?: NexusGenInputs["ActivityUpdateManyWithoutUserInput"] | null; // ActivityUpdateManyWithoutUserInput
+    activity?: NexusGenInputs["ActivityUpdateManyWithoutUserInput"] | null; // ActivityUpdateManyWithoutUserInput
     ballots?: NexusGenInputs["BallotUpdateManyWithoutCreatorInput"] | null; // BallotUpdateManyWithoutCreatorInput
     canton?: NexusGenInputs["NullableStringFieldUpdateOperationsInput"] | null; // NullableStringFieldUpdateOperationsInput
     createdAt?: NexusGenInputs["DateTimeFieldUpdateOperationsInput"] | null; // DateTimeFieldUpdateOperationsInput
@@ -5276,17 +5823,18 @@ export interface NexusGenInputs {
     role?: NexusGenInputs["EnumRoleFieldUpdateOperationsInput"] | null; // EnumRoleFieldUpdateOperationsInput
     school?: NexusGenInputs["SchoolUpdateOneWithoutMembersInput"] | null; // SchoolUpdateOneWithoutMembersInput
     teaches?: NexusGenInputs["TeamUpdateManyWithoutTeacherInput"] | null; // TeamUpdateManyWithoutTeacherInput
-    team?: NexusGenInputs["TeamUpdateOneWithoutUserInput"] | null; // TeamUpdateOneWithoutUserInput
-    Team?: NexusGenInputs["TeamUpdateOneWithoutMembersInput"] | null; // TeamUpdateOneWithoutMembersInput
+    team?: NexusGenInputs["TeamUpdateOneWithoutMembersInput"] | null; // TeamUpdateOneWithoutMembersInput
+    Team?: NexusGenInputs["TeamUpdateOneWithoutUserInput"] | null; // TeamUpdateOneWithoutUserInput
     threads?: NexusGenInputs["ThreadUpdateManyWithoutUserInput"] | null; // ThreadUpdateManyWithoutUserInput
     updatedAt?: NexusGenInputs["DateTimeFieldUpdateOperationsInput"] | null; // DateTimeFieldUpdateOperationsInput
     verified?: NexusGenInputs["NullableBoolFieldUpdateOperationsInput"] | null; // NullableBoolFieldUpdateOperationsInput
     voted?: NexusGenInputs["VotedUpdateManyWithoutUserInput"] | null; // VotedUpdateManyWithoutUserInput
+    work?: NexusGenInputs["WorkUpdateManyWithoutUsersInput"] | null; // WorkUpdateManyWithoutUsersInput
     year?: NexusGenInputs["NullableIntFieldUpdateOperationsInput"] | null; // NullableIntFieldUpdateOperationsInput
   };
   UserUpdateWithoutBallotsInput: {
     // input type
-    Activity?: NexusGenInputs["ActivityUpdateManyWithoutUserInput"] | null; // ActivityUpdateManyWithoutUserInput
+    activity?: NexusGenInputs["ActivityUpdateManyWithoutUserInput"] | null; // ActivityUpdateManyWithoutUserInput
     attachments?: NexusGenInputs["AttachmentUpdateManyWithoutUserInput"] | null; // AttachmentUpdateManyWithoutUserInput
     canton?: NexusGenInputs["NullableStringFieldUpdateOperationsInput"] | null; // NullableStringFieldUpdateOperationsInput
     createdAt?: NexusGenInputs["DateTimeFieldUpdateOperationsInput"] | null; // DateTimeFieldUpdateOperationsInput
@@ -5310,17 +5858,18 @@ export interface NexusGenInputs {
     role?: NexusGenInputs["EnumRoleFieldUpdateOperationsInput"] | null; // EnumRoleFieldUpdateOperationsInput
     school?: NexusGenInputs["SchoolUpdateOneWithoutMembersInput"] | null; // SchoolUpdateOneWithoutMembersInput
     teaches?: NexusGenInputs["TeamUpdateManyWithoutTeacherInput"] | null; // TeamUpdateManyWithoutTeacherInput
-    team?: NexusGenInputs["TeamUpdateOneWithoutUserInput"] | null; // TeamUpdateOneWithoutUserInput
-    Team?: NexusGenInputs["TeamUpdateOneWithoutMembersInput"] | null; // TeamUpdateOneWithoutMembersInput
+    team?: NexusGenInputs["TeamUpdateOneWithoutMembersInput"] | null; // TeamUpdateOneWithoutMembersInput
+    Team?: NexusGenInputs["TeamUpdateOneWithoutUserInput"] | null; // TeamUpdateOneWithoutUserInput
     threads?: NexusGenInputs["ThreadUpdateManyWithoutUserInput"] | null; // ThreadUpdateManyWithoutUserInput
     updatedAt?: NexusGenInputs["DateTimeFieldUpdateOperationsInput"] | null; // DateTimeFieldUpdateOperationsInput
     verified?: NexusGenInputs["NullableBoolFieldUpdateOperationsInput"] | null; // NullableBoolFieldUpdateOperationsInput
     voted?: NexusGenInputs["VotedUpdateManyWithoutUserInput"] | null; // VotedUpdateManyWithoutUserInput
+    work?: NexusGenInputs["WorkUpdateManyWithoutUsersInput"] | null; // WorkUpdateManyWithoutUsersInput
     year?: NexusGenInputs["NullableIntFieldUpdateOperationsInput"] | null; // NullableIntFieldUpdateOperationsInput
   };
   UserUpdateWithoutReactionsInput: {
     // input type
-    Activity?: NexusGenInputs["ActivityUpdateManyWithoutUserInput"] | null; // ActivityUpdateManyWithoutUserInput
+    activity?: NexusGenInputs["ActivityUpdateManyWithoutUserInput"] | null; // ActivityUpdateManyWithoutUserInput
     attachments?: NexusGenInputs["AttachmentUpdateManyWithoutUserInput"] | null; // AttachmentUpdateManyWithoutUserInput
     ballots?: NexusGenInputs["BallotUpdateManyWithoutCreatorInput"] | null; // BallotUpdateManyWithoutCreatorInput
     canton?: NexusGenInputs["NullableStringFieldUpdateOperationsInput"] | null; // NullableStringFieldUpdateOperationsInput
@@ -5344,17 +5893,18 @@ export interface NexusGenInputs {
     role?: NexusGenInputs["EnumRoleFieldUpdateOperationsInput"] | null; // EnumRoleFieldUpdateOperationsInput
     school?: NexusGenInputs["SchoolUpdateOneWithoutMembersInput"] | null; // SchoolUpdateOneWithoutMembersInput
     teaches?: NexusGenInputs["TeamUpdateManyWithoutTeacherInput"] | null; // TeamUpdateManyWithoutTeacherInput
-    team?: NexusGenInputs["TeamUpdateOneWithoutUserInput"] | null; // TeamUpdateOneWithoutUserInput
-    Team?: NexusGenInputs["TeamUpdateOneWithoutMembersInput"] | null; // TeamUpdateOneWithoutMembersInput
+    team?: NexusGenInputs["TeamUpdateOneWithoutMembersInput"] | null; // TeamUpdateOneWithoutMembersInput
+    Team?: NexusGenInputs["TeamUpdateOneWithoutUserInput"] | null; // TeamUpdateOneWithoutUserInput
     threads?: NexusGenInputs["ThreadUpdateManyWithoutUserInput"] | null; // ThreadUpdateManyWithoutUserInput
     updatedAt?: NexusGenInputs["DateTimeFieldUpdateOperationsInput"] | null; // DateTimeFieldUpdateOperationsInput
     verified?: NexusGenInputs["NullableBoolFieldUpdateOperationsInput"] | null; // NullableBoolFieldUpdateOperationsInput
     voted?: NexusGenInputs["VotedUpdateManyWithoutUserInput"] | null; // VotedUpdateManyWithoutUserInput
+    work?: NexusGenInputs["WorkUpdateManyWithoutUsersInput"] | null; // WorkUpdateManyWithoutUsersInput
     year?: NexusGenInputs["NullableIntFieldUpdateOperationsInput"] | null; // NullableIntFieldUpdateOperationsInput
   };
   UserUpdateWithoutSchoolInput: {
     // input type
-    Activity?: NexusGenInputs["ActivityUpdateManyWithoutUserInput"] | null; // ActivityUpdateManyWithoutUserInput
+    activity?: NexusGenInputs["ActivityUpdateManyWithoutUserInput"] | null; // ActivityUpdateManyWithoutUserInput
     attachments?: NexusGenInputs["AttachmentUpdateManyWithoutUserInput"] | null; // AttachmentUpdateManyWithoutUserInput
     ballots?: NexusGenInputs["BallotUpdateManyWithoutCreatorInput"] | null; // BallotUpdateManyWithoutCreatorInput
     canton?: NexusGenInputs["NullableStringFieldUpdateOperationsInput"] | null; // NullableStringFieldUpdateOperationsInput
@@ -5378,17 +5928,18 @@ export interface NexusGenInputs {
     reactions?: NexusGenInputs["ReactionUpdateManyWithoutUserInput"] | null; // ReactionUpdateManyWithoutUserInput
     role?: NexusGenInputs["EnumRoleFieldUpdateOperationsInput"] | null; // EnumRoleFieldUpdateOperationsInput
     teaches?: NexusGenInputs["TeamUpdateManyWithoutTeacherInput"] | null; // TeamUpdateManyWithoutTeacherInput
-    team?: NexusGenInputs["TeamUpdateOneWithoutUserInput"] | null; // TeamUpdateOneWithoutUserInput
-    Team?: NexusGenInputs["TeamUpdateOneWithoutMembersInput"] | null; // TeamUpdateOneWithoutMembersInput
+    team?: NexusGenInputs["TeamUpdateOneWithoutMembersInput"] | null; // TeamUpdateOneWithoutMembersInput
+    Team?: NexusGenInputs["TeamUpdateOneWithoutUserInput"] | null; // TeamUpdateOneWithoutUserInput
     threads?: NexusGenInputs["ThreadUpdateManyWithoutUserInput"] | null; // ThreadUpdateManyWithoutUserInput
     updatedAt?: NexusGenInputs["DateTimeFieldUpdateOperationsInput"] | null; // DateTimeFieldUpdateOperationsInput
     verified?: NexusGenInputs["NullableBoolFieldUpdateOperationsInput"] | null; // NullableBoolFieldUpdateOperationsInput
     voted?: NexusGenInputs["VotedUpdateManyWithoutUserInput"] | null; // VotedUpdateManyWithoutUserInput
+    work?: NexusGenInputs["WorkUpdateManyWithoutUsersInput"] | null; // WorkUpdateManyWithoutUsersInput
     year?: NexusGenInputs["NullableIntFieldUpdateOperationsInput"] | null; // NullableIntFieldUpdateOperationsInput
   };
   UserUpdateWithoutTeachesInput: {
     // input type
-    Activity?: NexusGenInputs["ActivityUpdateManyWithoutUserInput"] | null; // ActivityUpdateManyWithoutUserInput
+    activity?: NexusGenInputs["ActivityUpdateManyWithoutUserInput"] | null; // ActivityUpdateManyWithoutUserInput
     attachments?: NexusGenInputs["AttachmentUpdateManyWithoutUserInput"] | null; // AttachmentUpdateManyWithoutUserInput
     ballots?: NexusGenInputs["BallotUpdateManyWithoutCreatorInput"] | null; // BallotUpdateManyWithoutCreatorInput
     canton?: NexusGenInputs["NullableStringFieldUpdateOperationsInput"] | null; // NullableStringFieldUpdateOperationsInput
@@ -5412,17 +5963,18 @@ export interface NexusGenInputs {
     reactions?: NexusGenInputs["ReactionUpdateManyWithoutUserInput"] | null; // ReactionUpdateManyWithoutUserInput
     role?: NexusGenInputs["EnumRoleFieldUpdateOperationsInput"] | null; // EnumRoleFieldUpdateOperationsInput
     school?: NexusGenInputs["SchoolUpdateOneWithoutMembersInput"] | null; // SchoolUpdateOneWithoutMembersInput
-    team?: NexusGenInputs["TeamUpdateOneWithoutUserInput"] | null; // TeamUpdateOneWithoutUserInput
-    Team?: NexusGenInputs["TeamUpdateOneWithoutMembersInput"] | null; // TeamUpdateOneWithoutMembersInput
+    team?: NexusGenInputs["TeamUpdateOneWithoutMembersInput"] | null; // TeamUpdateOneWithoutMembersInput
+    Team?: NexusGenInputs["TeamUpdateOneWithoutUserInput"] | null; // TeamUpdateOneWithoutUserInput
     threads?: NexusGenInputs["ThreadUpdateManyWithoutUserInput"] | null; // ThreadUpdateManyWithoutUserInput
     updatedAt?: NexusGenInputs["DateTimeFieldUpdateOperationsInput"] | null; // DateTimeFieldUpdateOperationsInput
     verified?: NexusGenInputs["NullableBoolFieldUpdateOperationsInput"] | null; // NullableBoolFieldUpdateOperationsInput
     voted?: NexusGenInputs["VotedUpdateManyWithoutUserInput"] | null; // VotedUpdateManyWithoutUserInput
+    work?: NexusGenInputs["WorkUpdateManyWithoutUsersInput"] | null; // WorkUpdateManyWithoutUsersInput
     year?: NexusGenInputs["NullableIntFieldUpdateOperationsInput"] | null; // NullableIntFieldUpdateOperationsInput
   };
   UserUpdateWithoutTeamInput: {
     // input type
-    Activity?: NexusGenInputs["ActivityUpdateManyWithoutUserInput"] | null; // ActivityUpdateManyWithoutUserInput
+    activity?: NexusGenInputs["ActivityUpdateManyWithoutUserInput"] | null; // ActivityUpdateManyWithoutUserInput
     attachments?: NexusGenInputs["AttachmentUpdateManyWithoutUserInput"] | null; // AttachmentUpdateManyWithoutUserInput
     ballots?: NexusGenInputs["BallotUpdateManyWithoutCreatorInput"] | null; // BallotUpdateManyWithoutCreatorInput
     canton?: NexusGenInputs["NullableStringFieldUpdateOperationsInput"] | null; // NullableStringFieldUpdateOperationsInput
@@ -5447,16 +5999,17 @@ export interface NexusGenInputs {
     role?: NexusGenInputs["EnumRoleFieldUpdateOperationsInput"] | null; // EnumRoleFieldUpdateOperationsInput
     school?: NexusGenInputs["SchoolUpdateOneWithoutMembersInput"] | null; // SchoolUpdateOneWithoutMembersInput
     teaches?: NexusGenInputs["TeamUpdateManyWithoutTeacherInput"] | null; // TeamUpdateManyWithoutTeacherInput
-    team?: NexusGenInputs["TeamUpdateOneWithoutUserInput"] | null; // TeamUpdateOneWithoutUserInput
+    Team?: NexusGenInputs["TeamUpdateOneWithoutUserInput"] | null; // TeamUpdateOneWithoutUserInput
     threads?: NexusGenInputs["ThreadUpdateManyWithoutUserInput"] | null; // ThreadUpdateManyWithoutUserInput
     updatedAt?: NexusGenInputs["DateTimeFieldUpdateOperationsInput"] | null; // DateTimeFieldUpdateOperationsInput
     verified?: NexusGenInputs["NullableBoolFieldUpdateOperationsInput"] | null; // NullableBoolFieldUpdateOperationsInput
     voted?: NexusGenInputs["VotedUpdateManyWithoutUserInput"] | null; // VotedUpdateManyWithoutUserInput
+    work?: NexusGenInputs["WorkUpdateManyWithoutUsersInput"] | null; // WorkUpdateManyWithoutUsersInput
     year?: NexusGenInputs["NullableIntFieldUpdateOperationsInput"] | null; // NullableIntFieldUpdateOperationsInput
   };
   UserUpdateWithoutThreadsInput: {
     // input type
-    Activity?: NexusGenInputs["ActivityUpdateManyWithoutUserInput"] | null; // ActivityUpdateManyWithoutUserInput
+    activity?: NexusGenInputs["ActivityUpdateManyWithoutUserInput"] | null; // ActivityUpdateManyWithoutUserInput
     attachments?: NexusGenInputs["AttachmentUpdateManyWithoutUserInput"] | null; // AttachmentUpdateManyWithoutUserInput
     ballots?: NexusGenInputs["BallotUpdateManyWithoutCreatorInput"] | null; // BallotUpdateManyWithoutCreatorInput
     canton?: NexusGenInputs["NullableStringFieldUpdateOperationsInput"] | null; // NullableStringFieldUpdateOperationsInput
@@ -5481,16 +6034,17 @@ export interface NexusGenInputs {
     role?: NexusGenInputs["EnumRoleFieldUpdateOperationsInput"] | null; // EnumRoleFieldUpdateOperationsInput
     school?: NexusGenInputs["SchoolUpdateOneWithoutMembersInput"] | null; // SchoolUpdateOneWithoutMembersInput
     teaches?: NexusGenInputs["TeamUpdateManyWithoutTeacherInput"] | null; // TeamUpdateManyWithoutTeacherInput
-    team?: NexusGenInputs["TeamUpdateOneWithoutUserInput"] | null; // TeamUpdateOneWithoutUserInput
-    Team?: NexusGenInputs["TeamUpdateOneWithoutMembersInput"] | null; // TeamUpdateOneWithoutMembersInput
+    team?: NexusGenInputs["TeamUpdateOneWithoutMembersInput"] | null; // TeamUpdateOneWithoutMembersInput
+    Team?: NexusGenInputs["TeamUpdateOneWithoutUserInput"] | null; // TeamUpdateOneWithoutUserInput
     updatedAt?: NexusGenInputs["DateTimeFieldUpdateOperationsInput"] | null; // DateTimeFieldUpdateOperationsInput
     verified?: NexusGenInputs["NullableBoolFieldUpdateOperationsInput"] | null; // NullableBoolFieldUpdateOperationsInput
     voted?: NexusGenInputs["VotedUpdateManyWithoutUserInput"] | null; // VotedUpdateManyWithoutUserInput
+    work?: NexusGenInputs["WorkUpdateManyWithoutUsersInput"] | null; // WorkUpdateManyWithoutUsersInput
     year?: NexusGenInputs["NullableIntFieldUpdateOperationsInput"] | null; // NullableIntFieldUpdateOperationsInput
   };
   UserUpdateWithoutVotedInput: {
     // input type
-    Activity?: NexusGenInputs["ActivityUpdateManyWithoutUserInput"] | null; // ActivityUpdateManyWithoutUserInput
+    activity?: NexusGenInputs["ActivityUpdateManyWithoutUserInput"] | null; // ActivityUpdateManyWithoutUserInput
     attachments?: NexusGenInputs["AttachmentUpdateManyWithoutUserInput"] | null; // AttachmentUpdateManyWithoutUserInput
     ballots?: NexusGenInputs["BallotUpdateManyWithoutCreatorInput"] | null; // BallotUpdateManyWithoutCreatorInput
     canton?: NexusGenInputs["NullableStringFieldUpdateOperationsInput"] | null; // NullableStringFieldUpdateOperationsInput
@@ -5515,11 +6069,47 @@ export interface NexusGenInputs {
     role?: NexusGenInputs["EnumRoleFieldUpdateOperationsInput"] | null; // EnumRoleFieldUpdateOperationsInput
     school?: NexusGenInputs["SchoolUpdateOneWithoutMembersInput"] | null; // SchoolUpdateOneWithoutMembersInput
     teaches?: NexusGenInputs["TeamUpdateManyWithoutTeacherInput"] | null; // TeamUpdateManyWithoutTeacherInput
-    team?: NexusGenInputs["TeamUpdateOneWithoutUserInput"] | null; // TeamUpdateOneWithoutUserInput
-    Team?: NexusGenInputs["TeamUpdateOneWithoutMembersInput"] | null; // TeamUpdateOneWithoutMembersInput
+    team?: NexusGenInputs["TeamUpdateOneWithoutMembersInput"] | null; // TeamUpdateOneWithoutMembersInput
+    Team?: NexusGenInputs["TeamUpdateOneWithoutUserInput"] | null; // TeamUpdateOneWithoutUserInput
     threads?: NexusGenInputs["ThreadUpdateManyWithoutUserInput"] | null; // ThreadUpdateManyWithoutUserInput
     updatedAt?: NexusGenInputs["DateTimeFieldUpdateOperationsInput"] | null; // DateTimeFieldUpdateOperationsInput
     verified?: NexusGenInputs["NullableBoolFieldUpdateOperationsInput"] | null; // NullableBoolFieldUpdateOperationsInput
+    work?: NexusGenInputs["WorkUpdateManyWithoutUsersInput"] | null; // WorkUpdateManyWithoutUsersInput
+    year?: NexusGenInputs["NullableIntFieldUpdateOperationsInput"] | null; // NullableIntFieldUpdateOperationsInput
+  };
+  UserUpdateWithoutWorkInput: {
+    // input type
+    activity?: NexusGenInputs["ActivityUpdateManyWithoutUserInput"] | null; // ActivityUpdateManyWithoutUserInput
+    attachments?: NexusGenInputs["AttachmentUpdateManyWithoutUserInput"] | null; // AttachmentUpdateManyWithoutUserInput
+    ballots?: NexusGenInputs["BallotUpdateManyWithoutCreatorInput"] | null; // BallotUpdateManyWithoutCreatorInput
+    canton?: NexusGenInputs["NullableStringFieldUpdateOperationsInput"] | null; // NullableStringFieldUpdateOperationsInput
+    createdAt?: NexusGenInputs["DateTimeFieldUpdateOperationsInput"] | null; // DateTimeFieldUpdateOperationsInput
+    email?: NexusGenInputs["NullableStringFieldUpdateOperationsInput"] | null; // NullableStringFieldUpdateOperationsInput
+    emailVerified?:
+      | NexusGenInputs["NullableDateTimeFieldUpdateOperationsInput"]
+      | null; // NullableDateTimeFieldUpdateOperationsInput
+    gender?:
+      | NexusGenInputs["NullableEnumGenderFieldUpdateOperationsInput"]
+      | null; // NullableEnumGenderFieldUpdateOperationsInput
+    id?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    image?: NexusGenInputs["NullableStringFieldUpdateOperationsInput"] | null; // NullableStringFieldUpdateOperationsInput
+    lastname?:
+      | NexusGenInputs["NullableStringFieldUpdateOperationsInput"]
+      | null; // NullableStringFieldUpdateOperationsInput
+    name?: NexusGenInputs["NullableStringFieldUpdateOperationsInput"] | null; // NullableStringFieldUpdateOperationsInput
+    password?:
+      | NexusGenInputs["NullableStringFieldUpdateOperationsInput"]
+      | null; // NullableStringFieldUpdateOperationsInput
+    reactions?: NexusGenInputs["ReactionUpdateManyWithoutUserInput"] | null; // ReactionUpdateManyWithoutUserInput
+    role?: NexusGenInputs["EnumRoleFieldUpdateOperationsInput"] | null; // EnumRoleFieldUpdateOperationsInput
+    school?: NexusGenInputs["SchoolUpdateOneWithoutMembersInput"] | null; // SchoolUpdateOneWithoutMembersInput
+    teaches?: NexusGenInputs["TeamUpdateManyWithoutTeacherInput"] | null; // TeamUpdateManyWithoutTeacherInput
+    team?: NexusGenInputs["TeamUpdateOneWithoutMembersInput"] | null; // TeamUpdateOneWithoutMembersInput
+    Team?: NexusGenInputs["TeamUpdateOneWithoutUserInput"] | null; // TeamUpdateOneWithoutUserInput
+    threads?: NexusGenInputs["ThreadUpdateManyWithoutUserInput"] | null; // ThreadUpdateManyWithoutUserInput
+    updatedAt?: NexusGenInputs["DateTimeFieldUpdateOperationsInput"] | null; // DateTimeFieldUpdateOperationsInput
+    verified?: NexusGenInputs["NullableBoolFieldUpdateOperationsInput"] | null; // NullableBoolFieldUpdateOperationsInput
+    voted?: NexusGenInputs["VotedUpdateManyWithoutUserInput"] | null; // VotedUpdateManyWithoutUserInput
     year?: NexusGenInputs["NullableIntFieldUpdateOperationsInput"] | null; // NullableIntFieldUpdateOperationsInput
   };
   UserUpsertWithWhereUniqueWithoutSchoolInput: {
@@ -5532,6 +6122,12 @@ export interface NexusGenInputs {
     // input type
     create: NexusGenInputs["UserCreateWithoutTeamInput"]; // UserCreateWithoutTeamInput!
     update: NexusGenInputs["UserUpdateWithoutTeamInput"]; // UserUpdateWithoutTeamInput!
+    where: NexusGenInputs["UserWhereUniqueInput"]; // UserWhereUniqueInput!
+  };
+  UserUpsertWithWhereUniqueWithoutWorkInput: {
+    // input type
+    create: NexusGenInputs["UserCreateWithoutWorkInput"]; // UserCreateWithoutWorkInput!
+    update: NexusGenInputs["UserUpdateWithoutWorkInput"]; // UserUpdateWithoutWorkInput!
     where: NexusGenInputs["UserWhereUniqueInput"]; // UserWhereUniqueInput!
   };
   UserUpsertWithoutActivityInput: {
@@ -5571,7 +6167,7 @@ export interface NexusGenInputs {
   };
   UserWhereInput: {
     // input type
-    Activity?: NexusGenInputs["ActivityListRelationFilter"] | null; // ActivityListRelationFilter
+    activity?: NexusGenInputs["ActivityListRelationFilter"] | null; // ActivityListRelationFilter
     AND?: NexusGenInputs["UserWhereInput"][] | null; // [UserWhereInput!]
     attachments?: NexusGenInputs["AttachmentListRelationFilter"] | null; // AttachmentListRelationFilter
     ballots?: NexusGenInputs["BallotListRelationFilter"] | null; // BallotListRelationFilter
@@ -5599,6 +6195,7 @@ export interface NexusGenInputs {
     updatedAt?: NexusGenInputs["DateTimeFilter"] | null; // DateTimeFilter
     verified?: NexusGenInputs["BoolNullableFilter"] | null; // BoolNullableFilter
     voted?: NexusGenInputs["VotedListRelationFilter"] | null; // VotedListRelationFilter
+    work?: NexusGenInputs["WorkListRelationFilter"] | null; // WorkListRelationFilter
     year?: NexusGenInputs["IntNullableFilter"] | null; // IntNullableFilter
   };
   UserWhereUniqueInput: {
@@ -6284,6 +6881,509 @@ export interface NexusGenInputs {
     // input type
     id?: string | null; // String
   };
+  WorkCreateManyWithoutSchoolInput: {
+    // input type
+    connect?: NexusGenInputs["WorkWhereUniqueInput"][] | null; // [WorkWhereUniqueInput!]
+    connectOrCreate?:
+      | NexusGenInputs["WorkCreateOrConnectWithoutschoolInput"][]
+      | null; // [WorkCreateOrConnectWithoutschoolInput!]
+    create?: NexusGenInputs["WorkCreateWithoutSchoolInput"][] | null; // [WorkCreateWithoutSchoolInput!]
+  };
+  WorkCreateManyWithoutTeamInput: {
+    // input type
+    connect?: NexusGenInputs["WorkWhereUniqueInput"][] | null; // [WorkWhereUniqueInput!]
+    connectOrCreate?:
+      | NexusGenInputs["WorkCreateOrConnectWithoutteamInput"][]
+      | null; // [WorkCreateOrConnectWithoutteamInput!]
+    create?: NexusGenInputs["WorkCreateWithoutTeamInput"][] | null; // [WorkCreateWithoutTeamInput!]
+  };
+  WorkCreateManyWithoutUsersInput: {
+    // input type
+    connect?: NexusGenInputs["WorkWhereUniqueInput"][] | null; // [WorkWhereUniqueInput!]
+    connectOrCreate?:
+      | NexusGenInputs["WorkCreateOrConnectWithoutusersInput"][]
+      | null; // [WorkCreateOrConnectWithoutusersInput!]
+    create?: NexusGenInputs["WorkCreateWithoutUsersInput"][] | null; // [WorkCreateWithoutUsersInput!]
+  };
+  WorkCreateOneWithoutActivityInput: {
+    // input type
+    connect?: NexusGenInputs["WorkWhereUniqueInput"] | null; // WorkWhereUniqueInput
+    connectOrCreate?:
+      | NexusGenInputs["WorkCreateOrConnectWithoutactivityInput"]
+      | null; // WorkCreateOrConnectWithoutactivityInput
+    create?: NexusGenInputs["WorkCreateWithoutActivityInput"] | null; // WorkCreateWithoutActivityInput
+  };
+  WorkCreateOneWithoutAttachmentsInput: {
+    // input type
+    connect?: NexusGenInputs["WorkWhereUniqueInput"] | null; // WorkWhereUniqueInput
+    connectOrCreate?:
+      | NexusGenInputs["WorkCreateOrConnectWithoutattachmentsInput"]
+      | null; // WorkCreateOrConnectWithoutattachmentsInput
+    create?: NexusGenInputs["WorkCreateWithoutAttachmentsInput"] | null; // WorkCreateWithoutAttachmentsInput
+  };
+  WorkCreateOneWithoutReactionsInput: {
+    // input type
+    connect?: NexusGenInputs["WorkWhereUniqueInput"] | null; // WorkWhereUniqueInput
+    connectOrCreate?:
+      | NexusGenInputs["WorkCreateOrConnectWithoutreactionsInput"]
+      | null; // WorkCreateOrConnectWithoutreactionsInput
+    create?: NexusGenInputs["WorkCreateWithoutReactionsInput"] | null; // WorkCreateWithoutReactionsInput
+  };
+  WorkCreateOrConnectWithoutactivityInput: {
+    // input type
+    create: NexusGenInputs["WorkCreateWithoutActivityInput"]; // WorkCreateWithoutActivityInput!
+    where: NexusGenInputs["WorkWhereUniqueInput"]; // WorkWhereUniqueInput!
+  };
+  WorkCreateOrConnectWithoutattachmentsInput: {
+    // input type
+    create: NexusGenInputs["WorkCreateWithoutAttachmentsInput"]; // WorkCreateWithoutAttachmentsInput!
+    where: NexusGenInputs["WorkWhereUniqueInput"]; // WorkWhereUniqueInput!
+  };
+  WorkCreateOrConnectWithoutreactionsInput: {
+    // input type
+    create: NexusGenInputs["WorkCreateWithoutReactionsInput"]; // WorkCreateWithoutReactionsInput!
+    where: NexusGenInputs["WorkWhereUniqueInput"]; // WorkWhereUniqueInput!
+  };
+  WorkCreateOrConnectWithoutschoolInput: {
+    // input type
+    create: NexusGenInputs["WorkCreateWithoutSchoolInput"]; // WorkCreateWithoutSchoolInput!
+    where: NexusGenInputs["WorkWhereUniqueInput"]; // WorkWhereUniqueInput!
+  };
+  WorkCreateOrConnectWithoutteamInput: {
+    // input type
+    create: NexusGenInputs["WorkCreateWithoutTeamInput"]; // WorkCreateWithoutTeamInput!
+    where: NexusGenInputs["WorkWhereUniqueInput"]; // WorkWhereUniqueInput!
+  };
+  WorkCreateOrConnectWithoutusersInput: {
+    // input type
+    create: NexusGenInputs["WorkCreateWithoutUsersInput"]; // WorkCreateWithoutUsersInput!
+    where: NexusGenInputs["WorkWhereUniqueInput"]; // WorkWhereUniqueInput!
+  };
+  WorkCreateWithoutActivityInput: {
+    // input type
+    attachments?: NexusGenInputs["AttachmentCreateManyWithoutWorkInput"] | null; // AttachmentCreateManyWithoutWorkInput
+    card: string; // String!
+    createdAt?: NexusGenScalars["DateTime"] | null; // DateTime
+    data: NexusGenScalars["Json"]; // Json!
+    id?: string | null; // String
+    reactions?: NexusGenInputs["ReactionCreateManyWithoutWorkInput"] | null; // ReactionCreateManyWithoutWorkInput
+    school?: NexusGenInputs["SchoolCreateOneWithoutWorkInput"] | null; // SchoolCreateOneWithoutWorkInput
+    team: NexusGenInputs["TeamCreateOneWithoutWorkInput"]; // TeamCreateOneWithoutWorkInput!
+    text?: string | null; // String
+    title?: string | null; // String
+    updatedAt?: NexusGenScalars["DateTime"] | null; // DateTime
+    users?: NexusGenInputs["UserCreateManyWithoutWorkInput"] | null; // UserCreateManyWithoutWorkInput
+    visibility?: NexusGenEnums["Visibility"] | null; // Visibility
+  };
+  WorkCreateWithoutAttachmentsInput: {
+    // input type
+    activity?: NexusGenInputs["ActivityCreateManyWithoutWorkInput"] | null; // ActivityCreateManyWithoutWorkInput
+    card: string; // String!
+    createdAt?: NexusGenScalars["DateTime"] | null; // DateTime
+    data: NexusGenScalars["Json"]; // Json!
+    id?: string | null; // String
+    reactions?: NexusGenInputs["ReactionCreateManyWithoutWorkInput"] | null; // ReactionCreateManyWithoutWorkInput
+    school?: NexusGenInputs["SchoolCreateOneWithoutWorkInput"] | null; // SchoolCreateOneWithoutWorkInput
+    team: NexusGenInputs["TeamCreateOneWithoutWorkInput"]; // TeamCreateOneWithoutWorkInput!
+    text?: string | null; // String
+    title?: string | null; // String
+    updatedAt?: NexusGenScalars["DateTime"] | null; // DateTime
+    users?: NexusGenInputs["UserCreateManyWithoutWorkInput"] | null; // UserCreateManyWithoutWorkInput
+    visibility?: NexusGenEnums["Visibility"] | null; // Visibility
+  };
+  WorkCreateWithoutReactionsInput: {
+    // input type
+    activity?: NexusGenInputs["ActivityCreateManyWithoutWorkInput"] | null; // ActivityCreateManyWithoutWorkInput
+    attachments?: NexusGenInputs["AttachmentCreateManyWithoutWorkInput"] | null; // AttachmentCreateManyWithoutWorkInput
+    card: string; // String!
+    createdAt?: NexusGenScalars["DateTime"] | null; // DateTime
+    data: NexusGenScalars["Json"]; // Json!
+    id?: string | null; // String
+    school?: NexusGenInputs["SchoolCreateOneWithoutWorkInput"] | null; // SchoolCreateOneWithoutWorkInput
+    team: NexusGenInputs["TeamCreateOneWithoutWorkInput"]; // TeamCreateOneWithoutWorkInput!
+    text?: string | null; // String
+    title?: string | null; // String
+    updatedAt?: NexusGenScalars["DateTime"] | null; // DateTime
+    users?: NexusGenInputs["UserCreateManyWithoutWorkInput"] | null; // UserCreateManyWithoutWorkInput
+    visibility?: NexusGenEnums["Visibility"] | null; // Visibility
+  };
+  WorkCreateWithoutSchoolInput: {
+    // input type
+    activity?: NexusGenInputs["ActivityCreateManyWithoutWorkInput"] | null; // ActivityCreateManyWithoutWorkInput
+    attachments?: NexusGenInputs["AttachmentCreateManyWithoutWorkInput"] | null; // AttachmentCreateManyWithoutWorkInput
+    card: string; // String!
+    createdAt?: NexusGenScalars["DateTime"] | null; // DateTime
+    data: NexusGenScalars["Json"]; // Json!
+    id?: string | null; // String
+    reactions?: NexusGenInputs["ReactionCreateManyWithoutWorkInput"] | null; // ReactionCreateManyWithoutWorkInput
+    team: NexusGenInputs["TeamCreateOneWithoutWorkInput"]; // TeamCreateOneWithoutWorkInput!
+    text?: string | null; // String
+    title?: string | null; // String
+    updatedAt?: NexusGenScalars["DateTime"] | null; // DateTime
+    users?: NexusGenInputs["UserCreateManyWithoutWorkInput"] | null; // UserCreateManyWithoutWorkInput
+    visibility?: NexusGenEnums["Visibility"] | null; // Visibility
+  };
+  WorkCreateWithoutTeamInput: {
+    // input type
+    activity?: NexusGenInputs["ActivityCreateManyWithoutWorkInput"] | null; // ActivityCreateManyWithoutWorkInput
+    attachments?: NexusGenInputs["AttachmentCreateManyWithoutWorkInput"] | null; // AttachmentCreateManyWithoutWorkInput
+    card: string; // String!
+    createdAt?: NexusGenScalars["DateTime"] | null; // DateTime
+    data: NexusGenScalars["Json"]; // Json!
+    id?: string | null; // String
+    reactions?: NexusGenInputs["ReactionCreateManyWithoutWorkInput"] | null; // ReactionCreateManyWithoutWorkInput
+    school?: NexusGenInputs["SchoolCreateOneWithoutWorkInput"] | null; // SchoolCreateOneWithoutWorkInput
+    text?: string | null; // String
+    title?: string | null; // String
+    updatedAt?: NexusGenScalars["DateTime"] | null; // DateTime
+    users?: NexusGenInputs["UserCreateManyWithoutWorkInput"] | null; // UserCreateManyWithoutWorkInput
+    visibility?: NexusGenEnums["Visibility"] | null; // Visibility
+  };
+  WorkCreateWithoutUsersInput: {
+    // input type
+    activity?: NexusGenInputs["ActivityCreateManyWithoutWorkInput"] | null; // ActivityCreateManyWithoutWorkInput
+    attachments?: NexusGenInputs["AttachmentCreateManyWithoutWorkInput"] | null; // AttachmentCreateManyWithoutWorkInput
+    card: string; // String!
+    createdAt?: NexusGenScalars["DateTime"] | null; // DateTime
+    data: NexusGenScalars["Json"]; // Json!
+    id?: string | null; // String
+    reactions?: NexusGenInputs["ReactionCreateManyWithoutWorkInput"] | null; // ReactionCreateManyWithoutWorkInput
+    school?: NexusGenInputs["SchoolCreateOneWithoutWorkInput"] | null; // SchoolCreateOneWithoutWorkInput
+    team: NexusGenInputs["TeamCreateOneWithoutWorkInput"]; // TeamCreateOneWithoutWorkInput!
+    text?: string | null; // String
+    title?: string | null; // String
+    updatedAt?: NexusGenScalars["DateTime"] | null; // DateTime
+    visibility?: NexusGenEnums["Visibility"] | null; // Visibility
+  };
+  WorkListRelationFilter: {
+    // input type
+    every?: NexusGenInputs["WorkWhereInput"] | null; // WorkWhereInput
+    none?: NexusGenInputs["WorkWhereInput"] | null; // WorkWhereInput
+    some?: NexusGenInputs["WorkWhereInput"] | null; // WorkWhereInput
+  };
+  WorkScalarWhereInput: {
+    // input type
+    AND?: NexusGenInputs["WorkScalarWhereInput"][] | null; // [WorkScalarWhereInput!]
+    card?: NexusGenInputs["StringFilter"] | null; // StringFilter
+    createdAt?: NexusGenInputs["DateTimeFilter"] | null; // DateTimeFilter
+    id?: NexusGenInputs["StringFilter"] | null; // StringFilter
+    NOT?: NexusGenInputs["WorkScalarWhereInput"][] | null; // [WorkScalarWhereInput!]
+    OR?: NexusGenInputs["WorkScalarWhereInput"][] | null; // [WorkScalarWhereInput!]
+    schoolId?: NexusGenInputs["StringNullableFilter"] | null; // StringNullableFilter
+    teamId?: NexusGenInputs["StringFilter"] | null; // StringFilter
+    text?: NexusGenInputs["StringFilter"] | null; // StringFilter
+    title?: NexusGenInputs["StringFilter"] | null; // StringFilter
+    updatedAt?: NexusGenInputs["DateTimeFilter"] | null; // DateTimeFilter
+    visibility?: NexusGenInputs["EnumVisibilityFilter"] | null; // EnumVisibilityFilter
+  };
+  WorkUpdateManyMutationInput: {
+    // input type
+    card?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    createdAt?: NexusGenInputs["DateTimeFieldUpdateOperationsInput"] | null; // DateTimeFieldUpdateOperationsInput
+    data?: NexusGenScalars["Json"] | null; // Json
+    id?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    text?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    title?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    updatedAt?: NexusGenInputs["DateTimeFieldUpdateOperationsInput"] | null; // DateTimeFieldUpdateOperationsInput
+    visibility?:
+      | NexusGenInputs["EnumVisibilityFieldUpdateOperationsInput"]
+      | null; // EnumVisibilityFieldUpdateOperationsInput
+  };
+  WorkUpdateManyWithWhereWithoutSchoolInput: {
+    // input type
+    data: NexusGenInputs["WorkUpdateManyMutationInput"]; // WorkUpdateManyMutationInput!
+    where: NexusGenInputs["WorkScalarWhereInput"]; // WorkScalarWhereInput!
+  };
+  WorkUpdateManyWithWhereWithoutTeamInput: {
+    // input type
+    data: NexusGenInputs["WorkUpdateManyMutationInput"]; // WorkUpdateManyMutationInput!
+    where: NexusGenInputs["WorkScalarWhereInput"]; // WorkScalarWhereInput!
+  };
+  WorkUpdateManyWithWhereWithoutUsersInput: {
+    // input type
+    data: NexusGenInputs["WorkUpdateManyMutationInput"]; // WorkUpdateManyMutationInput!
+    where: NexusGenInputs["WorkScalarWhereInput"]; // WorkScalarWhereInput!
+  };
+  WorkUpdateManyWithoutSchoolInput: {
+    // input type
+    connect?: NexusGenInputs["WorkWhereUniqueInput"][] | null; // [WorkWhereUniqueInput!]
+    connectOrCreate?:
+      | NexusGenInputs["WorkCreateOrConnectWithoutschoolInput"][]
+      | null; // [WorkCreateOrConnectWithoutschoolInput!]
+    create?: NexusGenInputs["WorkCreateWithoutSchoolInput"][] | null; // [WorkCreateWithoutSchoolInput!]
+    delete?: NexusGenInputs["WorkWhereUniqueInput"][] | null; // [WorkWhereUniqueInput!]
+    deleteMany?: NexusGenInputs["WorkScalarWhereInput"][] | null; // [WorkScalarWhereInput!]
+    disconnect?: NexusGenInputs["WorkWhereUniqueInput"][] | null; // [WorkWhereUniqueInput!]
+    set?: NexusGenInputs["WorkWhereUniqueInput"][] | null; // [WorkWhereUniqueInput!]
+    update?:
+      | NexusGenInputs["WorkUpdateWithWhereUniqueWithoutSchoolInput"][]
+      | null; // [WorkUpdateWithWhereUniqueWithoutSchoolInput!]
+    updateMany?:
+      | NexusGenInputs["WorkUpdateManyWithWhereWithoutSchoolInput"][]
+      | null; // [WorkUpdateManyWithWhereWithoutSchoolInput!]
+    upsert?:
+      | NexusGenInputs["WorkUpsertWithWhereUniqueWithoutSchoolInput"][]
+      | null; // [WorkUpsertWithWhereUniqueWithoutSchoolInput!]
+  };
+  WorkUpdateManyWithoutTeamInput: {
+    // input type
+    connect?: NexusGenInputs["WorkWhereUniqueInput"][] | null; // [WorkWhereUniqueInput!]
+    connectOrCreate?:
+      | NexusGenInputs["WorkCreateOrConnectWithoutteamInput"][]
+      | null; // [WorkCreateOrConnectWithoutteamInput!]
+    create?: NexusGenInputs["WorkCreateWithoutTeamInput"][] | null; // [WorkCreateWithoutTeamInput!]
+    delete?: NexusGenInputs["WorkWhereUniqueInput"][] | null; // [WorkWhereUniqueInput!]
+    deleteMany?: NexusGenInputs["WorkScalarWhereInput"][] | null; // [WorkScalarWhereInput!]
+    disconnect?: NexusGenInputs["WorkWhereUniqueInput"][] | null; // [WorkWhereUniqueInput!]
+    set?: NexusGenInputs["WorkWhereUniqueInput"][] | null; // [WorkWhereUniqueInput!]
+    update?:
+      | NexusGenInputs["WorkUpdateWithWhereUniqueWithoutTeamInput"][]
+      | null; // [WorkUpdateWithWhereUniqueWithoutTeamInput!]
+    updateMany?:
+      | NexusGenInputs["WorkUpdateManyWithWhereWithoutTeamInput"][]
+      | null; // [WorkUpdateManyWithWhereWithoutTeamInput!]
+    upsert?:
+      | NexusGenInputs["WorkUpsertWithWhereUniqueWithoutTeamInput"][]
+      | null; // [WorkUpsertWithWhereUniqueWithoutTeamInput!]
+  };
+  WorkUpdateManyWithoutUsersInput: {
+    // input type
+    connect?: NexusGenInputs["WorkWhereUniqueInput"][] | null; // [WorkWhereUniqueInput!]
+    connectOrCreate?:
+      | NexusGenInputs["WorkCreateOrConnectWithoutusersInput"][]
+      | null; // [WorkCreateOrConnectWithoutusersInput!]
+    create?: NexusGenInputs["WorkCreateWithoutUsersInput"][] | null; // [WorkCreateWithoutUsersInput!]
+    delete?: NexusGenInputs["WorkWhereUniqueInput"][] | null; // [WorkWhereUniqueInput!]
+    deleteMany?: NexusGenInputs["WorkScalarWhereInput"][] | null; // [WorkScalarWhereInput!]
+    disconnect?: NexusGenInputs["WorkWhereUniqueInput"][] | null; // [WorkWhereUniqueInput!]
+    set?: NexusGenInputs["WorkWhereUniqueInput"][] | null; // [WorkWhereUniqueInput!]
+    update?:
+      | NexusGenInputs["WorkUpdateWithWhereUniqueWithoutUsersInput"][]
+      | null; // [WorkUpdateWithWhereUniqueWithoutUsersInput!]
+    updateMany?:
+      | NexusGenInputs["WorkUpdateManyWithWhereWithoutUsersInput"][]
+      | null; // [WorkUpdateManyWithWhereWithoutUsersInput!]
+    upsert?:
+      | NexusGenInputs["WorkUpsertWithWhereUniqueWithoutUsersInput"][]
+      | null; // [WorkUpsertWithWhereUniqueWithoutUsersInput!]
+  };
+  WorkUpdateOneWithoutActivityInput: {
+    // input type
+    connect?: NexusGenInputs["WorkWhereUniqueInput"] | null; // WorkWhereUniqueInput
+    connectOrCreate?:
+      | NexusGenInputs["WorkCreateOrConnectWithoutactivityInput"]
+      | null; // WorkCreateOrConnectWithoutactivityInput
+    create?: NexusGenInputs["WorkCreateWithoutActivityInput"] | null; // WorkCreateWithoutActivityInput
+    delete?: boolean | null; // Boolean
+    disconnect?: boolean | null; // Boolean
+    update?: NexusGenInputs["WorkUpdateWithoutActivityInput"] | null; // WorkUpdateWithoutActivityInput
+    upsert?: NexusGenInputs["WorkUpsertWithoutActivityInput"] | null; // WorkUpsertWithoutActivityInput
+  };
+  WorkUpdateOneWithoutAttachmentsInput: {
+    // input type
+    connect?: NexusGenInputs["WorkWhereUniqueInput"] | null; // WorkWhereUniqueInput
+    connectOrCreate?:
+      | NexusGenInputs["WorkCreateOrConnectWithoutattachmentsInput"]
+      | null; // WorkCreateOrConnectWithoutattachmentsInput
+    create?: NexusGenInputs["WorkCreateWithoutAttachmentsInput"] | null; // WorkCreateWithoutAttachmentsInput
+    delete?: boolean | null; // Boolean
+    disconnect?: boolean | null; // Boolean
+    update?: NexusGenInputs["WorkUpdateWithoutAttachmentsInput"] | null; // WorkUpdateWithoutAttachmentsInput
+    upsert?: NexusGenInputs["WorkUpsertWithoutAttachmentsInput"] | null; // WorkUpsertWithoutAttachmentsInput
+  };
+  WorkUpdateOneWithoutReactionsInput: {
+    // input type
+    connect?: NexusGenInputs["WorkWhereUniqueInput"] | null; // WorkWhereUniqueInput
+    connectOrCreate?:
+      | NexusGenInputs["WorkCreateOrConnectWithoutreactionsInput"]
+      | null; // WorkCreateOrConnectWithoutreactionsInput
+    create?: NexusGenInputs["WorkCreateWithoutReactionsInput"] | null; // WorkCreateWithoutReactionsInput
+    delete?: boolean | null; // Boolean
+    disconnect?: boolean | null; // Boolean
+    update?: NexusGenInputs["WorkUpdateWithoutReactionsInput"] | null; // WorkUpdateWithoutReactionsInput
+    upsert?: NexusGenInputs["WorkUpsertWithoutReactionsInput"] | null; // WorkUpsertWithoutReactionsInput
+  };
+  WorkUpdateWithWhereUniqueWithoutSchoolInput: {
+    // input type
+    data: NexusGenInputs["WorkUpdateWithoutSchoolInput"]; // WorkUpdateWithoutSchoolInput!
+    where: NexusGenInputs["WorkWhereUniqueInput"]; // WorkWhereUniqueInput!
+  };
+  WorkUpdateWithWhereUniqueWithoutTeamInput: {
+    // input type
+    data: NexusGenInputs["WorkUpdateWithoutTeamInput"]; // WorkUpdateWithoutTeamInput!
+    where: NexusGenInputs["WorkWhereUniqueInput"]; // WorkWhereUniqueInput!
+  };
+  WorkUpdateWithWhereUniqueWithoutUsersInput: {
+    // input type
+    data: NexusGenInputs["WorkUpdateWithoutUsersInput"]; // WorkUpdateWithoutUsersInput!
+    where: NexusGenInputs["WorkWhereUniqueInput"]; // WorkWhereUniqueInput!
+  };
+  WorkUpdateWithoutActivityInput: {
+    // input type
+    attachments?: NexusGenInputs["AttachmentUpdateManyWithoutWorkInput"] | null; // AttachmentUpdateManyWithoutWorkInput
+    card?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    createdAt?: NexusGenInputs["DateTimeFieldUpdateOperationsInput"] | null; // DateTimeFieldUpdateOperationsInput
+    data?: NexusGenScalars["Json"] | null; // Json
+    id?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    reactions?: NexusGenInputs["ReactionUpdateManyWithoutWorkInput"] | null; // ReactionUpdateManyWithoutWorkInput
+    school?: NexusGenInputs["SchoolUpdateOneWithoutWorkInput"] | null; // SchoolUpdateOneWithoutWorkInput
+    team?: NexusGenInputs["TeamUpdateOneRequiredWithoutWorkInput"] | null; // TeamUpdateOneRequiredWithoutWorkInput
+    text?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    title?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    updatedAt?: NexusGenInputs["DateTimeFieldUpdateOperationsInput"] | null; // DateTimeFieldUpdateOperationsInput
+    users?: NexusGenInputs["UserUpdateManyWithoutWorkInput"] | null; // UserUpdateManyWithoutWorkInput
+    visibility?:
+      | NexusGenInputs["EnumVisibilityFieldUpdateOperationsInput"]
+      | null; // EnumVisibilityFieldUpdateOperationsInput
+  };
+  WorkUpdateWithoutAttachmentsInput: {
+    // input type
+    activity?: NexusGenInputs["ActivityUpdateManyWithoutWorkInput"] | null; // ActivityUpdateManyWithoutWorkInput
+    card?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    createdAt?: NexusGenInputs["DateTimeFieldUpdateOperationsInput"] | null; // DateTimeFieldUpdateOperationsInput
+    data?: NexusGenScalars["Json"] | null; // Json
+    id?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    reactions?: NexusGenInputs["ReactionUpdateManyWithoutWorkInput"] | null; // ReactionUpdateManyWithoutWorkInput
+    school?: NexusGenInputs["SchoolUpdateOneWithoutWorkInput"] | null; // SchoolUpdateOneWithoutWorkInput
+    team?: NexusGenInputs["TeamUpdateOneRequiredWithoutWorkInput"] | null; // TeamUpdateOneRequiredWithoutWorkInput
+    text?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    title?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    updatedAt?: NexusGenInputs["DateTimeFieldUpdateOperationsInput"] | null; // DateTimeFieldUpdateOperationsInput
+    users?: NexusGenInputs["UserUpdateManyWithoutWorkInput"] | null; // UserUpdateManyWithoutWorkInput
+    visibility?:
+      | NexusGenInputs["EnumVisibilityFieldUpdateOperationsInput"]
+      | null; // EnumVisibilityFieldUpdateOperationsInput
+  };
+  WorkUpdateWithoutReactionsInput: {
+    // input type
+    activity?: NexusGenInputs["ActivityUpdateManyWithoutWorkInput"] | null; // ActivityUpdateManyWithoutWorkInput
+    attachments?: NexusGenInputs["AttachmentUpdateManyWithoutWorkInput"] | null; // AttachmentUpdateManyWithoutWorkInput
+    card?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    createdAt?: NexusGenInputs["DateTimeFieldUpdateOperationsInput"] | null; // DateTimeFieldUpdateOperationsInput
+    data?: NexusGenScalars["Json"] | null; // Json
+    id?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    school?: NexusGenInputs["SchoolUpdateOneWithoutWorkInput"] | null; // SchoolUpdateOneWithoutWorkInput
+    team?: NexusGenInputs["TeamUpdateOneRequiredWithoutWorkInput"] | null; // TeamUpdateOneRequiredWithoutWorkInput
+    text?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    title?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    updatedAt?: NexusGenInputs["DateTimeFieldUpdateOperationsInput"] | null; // DateTimeFieldUpdateOperationsInput
+    users?: NexusGenInputs["UserUpdateManyWithoutWorkInput"] | null; // UserUpdateManyWithoutWorkInput
+    visibility?:
+      | NexusGenInputs["EnumVisibilityFieldUpdateOperationsInput"]
+      | null; // EnumVisibilityFieldUpdateOperationsInput
+  };
+  WorkUpdateWithoutSchoolInput: {
+    // input type
+    activity?: NexusGenInputs["ActivityUpdateManyWithoutWorkInput"] | null; // ActivityUpdateManyWithoutWorkInput
+    attachments?: NexusGenInputs["AttachmentUpdateManyWithoutWorkInput"] | null; // AttachmentUpdateManyWithoutWorkInput
+    card?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    createdAt?: NexusGenInputs["DateTimeFieldUpdateOperationsInput"] | null; // DateTimeFieldUpdateOperationsInput
+    data?: NexusGenScalars["Json"] | null; // Json
+    id?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    reactions?: NexusGenInputs["ReactionUpdateManyWithoutWorkInput"] | null; // ReactionUpdateManyWithoutWorkInput
+    team?: NexusGenInputs["TeamUpdateOneRequiredWithoutWorkInput"] | null; // TeamUpdateOneRequiredWithoutWorkInput
+    text?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    title?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    updatedAt?: NexusGenInputs["DateTimeFieldUpdateOperationsInput"] | null; // DateTimeFieldUpdateOperationsInput
+    users?: NexusGenInputs["UserUpdateManyWithoutWorkInput"] | null; // UserUpdateManyWithoutWorkInput
+    visibility?:
+      | NexusGenInputs["EnumVisibilityFieldUpdateOperationsInput"]
+      | null; // EnumVisibilityFieldUpdateOperationsInput
+  };
+  WorkUpdateWithoutTeamInput: {
+    // input type
+    activity?: NexusGenInputs["ActivityUpdateManyWithoutWorkInput"] | null; // ActivityUpdateManyWithoutWorkInput
+    attachments?: NexusGenInputs["AttachmentUpdateManyWithoutWorkInput"] | null; // AttachmentUpdateManyWithoutWorkInput
+    card?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    createdAt?: NexusGenInputs["DateTimeFieldUpdateOperationsInput"] | null; // DateTimeFieldUpdateOperationsInput
+    data?: NexusGenScalars["Json"] | null; // Json
+    id?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    reactions?: NexusGenInputs["ReactionUpdateManyWithoutWorkInput"] | null; // ReactionUpdateManyWithoutWorkInput
+    school?: NexusGenInputs["SchoolUpdateOneWithoutWorkInput"] | null; // SchoolUpdateOneWithoutWorkInput
+    text?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    title?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    updatedAt?: NexusGenInputs["DateTimeFieldUpdateOperationsInput"] | null; // DateTimeFieldUpdateOperationsInput
+    users?: NexusGenInputs["UserUpdateManyWithoutWorkInput"] | null; // UserUpdateManyWithoutWorkInput
+    visibility?:
+      | NexusGenInputs["EnumVisibilityFieldUpdateOperationsInput"]
+      | null; // EnumVisibilityFieldUpdateOperationsInput
+  };
+  WorkUpdateWithoutUsersInput: {
+    // input type
+    activity?: NexusGenInputs["ActivityUpdateManyWithoutWorkInput"] | null; // ActivityUpdateManyWithoutWorkInput
+    attachments?: NexusGenInputs["AttachmentUpdateManyWithoutWorkInput"] | null; // AttachmentUpdateManyWithoutWorkInput
+    card?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    createdAt?: NexusGenInputs["DateTimeFieldUpdateOperationsInput"] | null; // DateTimeFieldUpdateOperationsInput
+    data?: NexusGenScalars["Json"] | null; // Json
+    id?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    reactions?: NexusGenInputs["ReactionUpdateManyWithoutWorkInput"] | null; // ReactionUpdateManyWithoutWorkInput
+    school?: NexusGenInputs["SchoolUpdateOneWithoutWorkInput"] | null; // SchoolUpdateOneWithoutWorkInput
+    team?: NexusGenInputs["TeamUpdateOneRequiredWithoutWorkInput"] | null; // TeamUpdateOneRequiredWithoutWorkInput
+    text?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    title?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    updatedAt?: NexusGenInputs["DateTimeFieldUpdateOperationsInput"] | null; // DateTimeFieldUpdateOperationsInput
+    visibility?:
+      | NexusGenInputs["EnumVisibilityFieldUpdateOperationsInput"]
+      | null; // EnumVisibilityFieldUpdateOperationsInput
+  };
+  WorkUpsertWithWhereUniqueWithoutSchoolInput: {
+    // input type
+    create: NexusGenInputs["WorkCreateWithoutSchoolInput"]; // WorkCreateWithoutSchoolInput!
+    update: NexusGenInputs["WorkUpdateWithoutSchoolInput"]; // WorkUpdateWithoutSchoolInput!
+    where: NexusGenInputs["WorkWhereUniqueInput"]; // WorkWhereUniqueInput!
+  };
+  WorkUpsertWithWhereUniqueWithoutTeamInput: {
+    // input type
+    create: NexusGenInputs["WorkCreateWithoutTeamInput"]; // WorkCreateWithoutTeamInput!
+    update: NexusGenInputs["WorkUpdateWithoutTeamInput"]; // WorkUpdateWithoutTeamInput!
+    where: NexusGenInputs["WorkWhereUniqueInput"]; // WorkWhereUniqueInput!
+  };
+  WorkUpsertWithWhereUniqueWithoutUsersInput: {
+    // input type
+    create: NexusGenInputs["WorkCreateWithoutUsersInput"]; // WorkCreateWithoutUsersInput!
+    update: NexusGenInputs["WorkUpdateWithoutUsersInput"]; // WorkUpdateWithoutUsersInput!
+    where: NexusGenInputs["WorkWhereUniqueInput"]; // WorkWhereUniqueInput!
+  };
+  WorkUpsertWithoutActivityInput: {
+    // input type
+    create: NexusGenInputs["WorkCreateWithoutActivityInput"]; // WorkCreateWithoutActivityInput!
+    update: NexusGenInputs["WorkUpdateWithoutActivityInput"]; // WorkUpdateWithoutActivityInput!
+  };
+  WorkUpsertWithoutAttachmentsInput: {
+    // input type
+    create: NexusGenInputs["WorkCreateWithoutAttachmentsInput"]; // WorkCreateWithoutAttachmentsInput!
+    update: NexusGenInputs["WorkUpdateWithoutAttachmentsInput"]; // WorkUpdateWithoutAttachmentsInput!
+  };
+  WorkUpsertWithoutReactionsInput: {
+    // input type
+    create: NexusGenInputs["WorkCreateWithoutReactionsInput"]; // WorkCreateWithoutReactionsInput!
+    update: NexusGenInputs["WorkUpdateWithoutReactionsInput"]; // WorkUpdateWithoutReactionsInput!
+  };
+  WorkWhereInput: {
+    // input type
+    activity?: NexusGenInputs["ActivityListRelationFilter"] | null; // ActivityListRelationFilter
+    AND?: NexusGenInputs["WorkWhereInput"][] | null; // [WorkWhereInput!]
+    attachments?: NexusGenInputs["AttachmentListRelationFilter"] | null; // AttachmentListRelationFilter
+    card?: NexusGenInputs["StringFilter"] | null; // StringFilter
+    createdAt?: NexusGenInputs["DateTimeFilter"] | null; // DateTimeFilter
+    id?: NexusGenInputs["StringFilter"] | null; // StringFilter
+    NOT?: NexusGenInputs["WorkWhereInput"][] | null; // [WorkWhereInput!]
+    OR?: NexusGenInputs["WorkWhereInput"][] | null; // [WorkWhereInput!]
+    reactions?: NexusGenInputs["ReactionListRelationFilter"] | null; // ReactionListRelationFilter
+    school?: NexusGenInputs["SchoolWhereInput"] | null; // SchoolWhereInput
+    schoolId?: NexusGenInputs["StringNullableFilter"] | null; // StringNullableFilter
+    team?: NexusGenInputs["TeamWhereInput"] | null; // TeamWhereInput
+    teamId?: NexusGenInputs["StringFilter"] | null; // StringFilter
+    text?: NexusGenInputs["StringFilter"] | null; // StringFilter
+    title?: NexusGenInputs["StringFilter"] | null; // StringFilter
+    updatedAt?: NexusGenInputs["DateTimeFilter"] | null; // DateTimeFilter
+    users?: NexusGenInputs["UserListRelationFilter"] | null; // UserListRelationFilter
+    visibility?: NexusGenInputs["EnumVisibilityFilter"] | null; // EnumVisibilityFilter
+  };
+  WorkWhereUniqueInput: {
+    // input type
+    id?: string | null; // String
+  };
 }
 
 export interface NexusGenEnums {
@@ -6303,6 +7403,7 @@ export interface NexusGenScalars {
   Boolean: boolean;
   ID: string;
   DateTime: any;
+  Json: any;
 }
 
 export interface NexusGenObjects {

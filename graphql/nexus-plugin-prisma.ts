@@ -10,7 +10,7 @@ type Pagination = {
 }
 
 // Prisma custom scalar names
-type CustomScalars = 'DateTime'
+type CustomScalars = 'DateTime' | 'Json'
 
 // Prisma model type definitions
 interface PrismaModels {
@@ -26,6 +26,7 @@ interface PrismaModels {
   Vote: Prisma.Vote
   Attachment: Prisma.Attachment
   Thread: Prisma.Thread
+  Work: Prisma.Work
   Reaction: Prisma.Reaction
   Activity: Prisma.Activity
   Swissvote: Prisma.Swissvote
@@ -35,7 +36,7 @@ interface PrismaModels {
 interface NexusPrismaInputs {
   Query: {
     users: {
-      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'name' | 'email' | 'emailVerified' | 'verified' | 'lastname' | 'image' | 'password' | 'gender' | 'year' | 'canton' | 'role' | 'school' | 'schoolId' | 'team' | 'teamId' | 'teaches' | 'ballots' | 'attachments' | 'threads' | 'reactions' | 'voted' | 'createdAt' | 'updatedAt' | 'Team' | 'Activity'
+      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'name' | 'email' | 'emailVerified' | 'verified' | 'lastname' | 'image' | 'password' | 'gender' | 'year' | 'canton' | 'role' | 'school' | 'schoolId' | 'team' | 'teamId' | 'teaches' | 'ballots' | 'attachments' | 'threads' | 'reactions' | 'voted' | 'activity' | 'work' | 'createdAt' | 'updatedAt' | 'Team'
       ordering: 'id' | 'name' | 'email' | 'emailVerified' | 'verified' | 'lastname' | 'image' | 'password' | 'gender' | 'year' | 'canton' | 'role' | 'schoolId' | 'teamId' | 'createdAt' | 'updatedAt'
     }
     verificationRequests: {
@@ -43,11 +44,11 @@ interface NexusPrismaInputs {
       ordering: 'id' | 'identifier' | 'token' | 'expires' | 'createdAt' | 'updatedAt'
     }
     teams: {
-      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'name' | 'invite' | 'code' | 'year' | 'cards' | 'school' | 'schoolId' | 'teacher' | 'teacherId' | 'members' | 'ballots' | 'domain' | 'domainId' | 'User' | 'BallotRuns' | 'Vote' | 'Voted' | 'Thread' | 'Activity' | 'Attachment'
+      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'name' | 'invite' | 'code' | 'year' | 'cards' | 'school' | 'schoolId' | 'teacher' | 'teacherId' | 'members' | 'ballots' | 'domain' | 'domainId' | 'User' | 'BallotRuns' | 'Vote' | 'Voted' | 'Thread' | 'activity' | 'attachment' | 'work'
       ordering: 'id' | 'name' | 'invite' | 'code' | 'year' | 'cards' | 'schoolId' | 'teacherId' | 'domainId'
     }
     schools: {
-      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'name' | 'city' | 'canton' | 'zip' | 'address' | 'type' | 'domain' | 'domainId' | 'members' | 'teams' | 'ballots' | 'Vote' | 'Voted' | 'Thread' | 'Activity' | 'Attachment'
+      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'name' | 'city' | 'canton' | 'zip' | 'address' | 'type' | 'domain' | 'domainId' | 'members' | 'teams' | 'ballots' | 'Vote' | 'Voted' | 'thread' | 'activity' | 'attachment' | 'work'
       ordering: 'id' | 'name' | 'city' | 'canton' | 'zip' | 'address' | 'type' | 'domainId'
     }
     domains: {
@@ -55,11 +56,11 @@ interface NexusPrismaInputs {
       ordering: 'id' | 'name' | 'approved'
     }
     ballots: {
-      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'title' | 'description' | 'body' | 'start' | 'end' | 'scope' | 'canton' | 'school' | 'schoolId' | 'team' | 'teamId' | 'creator' | 'creatorId' | 'options' | 'voted' | 'votes' | 'attachments' | 'createdAt' | 'updatedAt' | 'BallotRuns'
+      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'title' | 'description' | 'body' | 'start' | 'end' | 'scope' | 'canton' | 'school' | 'schoolId' | 'team' | 'teamId' | 'creator' | 'creatorId' | 'options' | 'voted' | 'votes' | 'attachments' | 'ballotRuns' | 'createdAt' | 'updatedAt'
       ordering: 'id' | 'title' | 'description' | 'body' | 'start' | 'end' | 'scope' | 'canton' | 'schoolId' | 'teamId' | 'creatorId' | 'createdAt' | 'updatedAt'
     }
     ballotRuns: {
-      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'start' | 'end' | 'ballot' | 'ballotId' | 'team' | 'teamId' | 'Vote'
+      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'start' | 'end' | 'vote' | 'ballot' | 'ballotId' | 'team' | 'teamId'
       ordering: 'id' | 'start' | 'end' | 'ballotId' | 'teamId'
     }
     options: {
@@ -75,20 +76,24 @@ interface NexusPrismaInputs {
       ordering: 'id' | 'vote' | 'verify' | 'year' | 'canton' | 'schooltype' | 'ballotId' | 'ballotRunId' | 'teamId' | 'schoolId'
     }
     attachments: {
-      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'file' | 'title' | 'type' | 'card' | 'user' | 'userId' | 'team' | 'teamId' | 'school' | 'schoolId' | 'thread' | 'threadId' | 'createdAt' | 'updatedAt' | 'Ballot' | 'ballotId'
-      ordering: 'id' | 'file' | 'title' | 'type' | 'card' | 'userId' | 'teamId' | 'schoolId' | 'threadId' | 'createdAt' | 'updatedAt' | 'ballotId'
+      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'file' | 'title' | 'type' | 'card' | 'user' | 'userId' | 'team' | 'teamId' | 'school' | 'schoolId' | 'thread' | 'threadId' | 'ballot' | 'ballotId' | 'work' | 'workId' | 'createdAt' | 'updatedAt'
+      ordering: 'id' | 'file' | 'title' | 'type' | 'card' | 'userId' | 'teamId' | 'schoolId' | 'threadId' | 'ballotId' | 'workId' | 'createdAt' | 'updatedAt'
     }
     threads: {
-      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'title' | 'text' | 'ref' | 'user' | 'userId' | 'team' | 'teamId' | 'school' | 'schoolId' | 'reactions' | 'attachments' | 'Activity' | 'createdAt' | 'updatedAt'
+      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'title' | 'text' | 'ref' | 'user' | 'userId' | 'team' | 'teamId' | 'school' | 'schoolId' | 'reactions' | 'attachments' | 'activity' | 'createdAt' | 'updatedAt'
       ordering: 'id' | 'title' | 'text' | 'ref' | 'userId' | 'teamId' | 'schoolId' | 'createdAt' | 'updatedAt'
     }
+    works: {
+      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'title' | 'text' | 'data' | 'card' | 'visibility' | 'team' | 'teamId' | 'school' | 'schoolId' | 'users' | 'reactions' | 'attachments' | 'activity' | 'createdAt' | 'updatedAt'
+      ordering: 'id' | 'title' | 'text' | 'data' | 'card' | 'visibility' | 'teamId' | 'schoolId' | 'createdAt' | 'updatedAt'
+    }
     reactions: {
-      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'emoij' | 'user' | 'userId' | 'thread' | 'threadId' | 'createdAt' | 'updatedAt'
-      ordering: 'id' | 'emoij' | 'userId' | 'threadId' | 'createdAt' | 'updatedAt'
+      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'emoij' | 'stars' | 'feedback' | 'user' | 'userId' | 'thread' | 'threadId' | 'work' | 'workId' | 'createdAt' | 'updatedAt'
+      ordering: 'id' | 'emoij' | 'stars' | 'feedback' | 'userId' | 'threadId' | 'workId' | 'createdAt' | 'updatedAt'
     }
     activities: {
-      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'type' | 'visibility' | 'user' | 'userId' | 'team' | 'teamId' | 'school' | 'schoolId' | 'thread' | 'threadId' | 'cardId' | 'time'
-      ordering: 'id' | 'type' | 'visibility' | 'userId' | 'teamId' | 'schoolId' | 'threadId' | 'cardId' | 'time'
+      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'type' | 'visibility' | 'user' | 'userId' | 'team' | 'teamId' | 'school' | 'schoolId' | 'thread' | 'threadId' | 'cardId' | 'work' | 'workId' | 'time'
+      ordering: 'id' | 'type' | 'visibility' | 'userId' | 'teamId' | 'schoolId' | 'threadId' | 'cardId' | 'workId' | 'time'
     }
     swissvotes: {
       filtering: 'AND' | 'OR' | 'NOT' | 'anr' | 'datum' | 'titel_kurz_d' | 'titel_off_d' | 'stichwort' | 'swissvoteslink' | 'rechtsform' | 'poster_ja' | 'poster_nein' | 'annahme' | 'volk' | 'stand' | 'kategorien'
@@ -97,32 +102,36 @@ interface NexusPrismaInputs {
   },
   User: {
     teaches: {
-      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'name' | 'invite' | 'code' | 'year' | 'cards' | 'school' | 'schoolId' | 'teacher' | 'teacherId' | 'members' | 'ballots' | 'domain' | 'domainId' | 'User' | 'BallotRuns' | 'Vote' | 'Voted' | 'Thread' | 'Activity' | 'Attachment'
+      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'name' | 'invite' | 'code' | 'year' | 'cards' | 'school' | 'schoolId' | 'teacher' | 'teacherId' | 'members' | 'ballots' | 'domain' | 'domainId' | 'User' | 'BallotRuns' | 'Vote' | 'Voted' | 'Thread' | 'activity' | 'attachment' | 'work'
       ordering: 'id' | 'name' | 'invite' | 'code' | 'year' | 'cards' | 'schoolId' | 'teacherId' | 'domainId'
     }
     ballots: {
-      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'title' | 'description' | 'body' | 'start' | 'end' | 'scope' | 'canton' | 'school' | 'schoolId' | 'team' | 'teamId' | 'creator' | 'creatorId' | 'options' | 'voted' | 'votes' | 'attachments' | 'createdAt' | 'updatedAt' | 'BallotRuns'
+      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'title' | 'description' | 'body' | 'start' | 'end' | 'scope' | 'canton' | 'school' | 'schoolId' | 'team' | 'teamId' | 'creator' | 'creatorId' | 'options' | 'voted' | 'votes' | 'attachments' | 'ballotRuns' | 'createdAt' | 'updatedAt'
       ordering: 'id' | 'title' | 'description' | 'body' | 'start' | 'end' | 'scope' | 'canton' | 'schoolId' | 'teamId' | 'creatorId' | 'createdAt' | 'updatedAt'
     }
     attachments: {
-      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'file' | 'title' | 'type' | 'card' | 'user' | 'userId' | 'team' | 'teamId' | 'school' | 'schoolId' | 'thread' | 'threadId' | 'createdAt' | 'updatedAt' | 'Ballot' | 'ballotId'
-      ordering: 'id' | 'file' | 'title' | 'type' | 'card' | 'userId' | 'teamId' | 'schoolId' | 'threadId' | 'createdAt' | 'updatedAt' | 'ballotId'
+      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'file' | 'title' | 'type' | 'card' | 'user' | 'userId' | 'team' | 'teamId' | 'school' | 'schoolId' | 'thread' | 'threadId' | 'ballot' | 'ballotId' | 'work' | 'workId' | 'createdAt' | 'updatedAt'
+      ordering: 'id' | 'file' | 'title' | 'type' | 'card' | 'userId' | 'teamId' | 'schoolId' | 'threadId' | 'ballotId' | 'workId' | 'createdAt' | 'updatedAt'
     }
     threads: {
-      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'title' | 'text' | 'ref' | 'user' | 'userId' | 'team' | 'teamId' | 'school' | 'schoolId' | 'reactions' | 'attachments' | 'Activity' | 'createdAt' | 'updatedAt'
+      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'title' | 'text' | 'ref' | 'user' | 'userId' | 'team' | 'teamId' | 'school' | 'schoolId' | 'reactions' | 'attachments' | 'activity' | 'createdAt' | 'updatedAt'
       ordering: 'id' | 'title' | 'text' | 'ref' | 'userId' | 'teamId' | 'schoolId' | 'createdAt' | 'updatedAt'
     }
     reactions: {
-      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'emoij' | 'user' | 'userId' | 'thread' | 'threadId' | 'createdAt' | 'updatedAt'
-      ordering: 'id' | 'emoij' | 'userId' | 'threadId' | 'createdAt' | 'updatedAt'
+      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'emoij' | 'stars' | 'feedback' | 'user' | 'userId' | 'thread' | 'threadId' | 'work' | 'workId' | 'createdAt' | 'updatedAt'
+      ordering: 'id' | 'emoij' | 'stars' | 'feedback' | 'userId' | 'threadId' | 'workId' | 'createdAt' | 'updatedAt'
     }
     voted: {
       filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'signature' | 'user' | 'userId' | 'ballot' | 'ballotId' | 'team' | 'teamId' | 'school' | 'schoolId'
       ordering: 'id' | 'signature' | 'userId' | 'ballotId' | 'teamId' | 'schoolId'
     }
-    Activity: {
-      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'type' | 'visibility' | 'user' | 'userId' | 'team' | 'teamId' | 'school' | 'schoolId' | 'thread' | 'threadId' | 'cardId' | 'time'
-      ordering: 'id' | 'type' | 'visibility' | 'userId' | 'teamId' | 'schoolId' | 'threadId' | 'cardId' | 'time'
+    activity: {
+      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'type' | 'visibility' | 'user' | 'userId' | 'team' | 'teamId' | 'school' | 'schoolId' | 'thread' | 'threadId' | 'cardId' | 'work' | 'workId' | 'time'
+      ordering: 'id' | 'type' | 'visibility' | 'userId' | 'teamId' | 'schoolId' | 'threadId' | 'cardId' | 'workId' | 'time'
+    }
+    work: {
+      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'title' | 'text' | 'data' | 'card' | 'visibility' | 'team' | 'teamId' | 'school' | 'schoolId' | 'users' | 'reactions' | 'attachments' | 'activity' | 'createdAt' | 'updatedAt'
+      ordering: 'id' | 'title' | 'text' | 'data' | 'card' | 'visibility' | 'teamId' | 'schoolId' | 'createdAt' | 'updatedAt'
     }
   }
   VerificationRequest: {
@@ -130,19 +139,19 @@ interface NexusPrismaInputs {
   }
   Team: {
     members: {
-      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'name' | 'email' | 'emailVerified' | 'verified' | 'lastname' | 'image' | 'password' | 'gender' | 'year' | 'canton' | 'role' | 'school' | 'schoolId' | 'team' | 'teamId' | 'teaches' | 'ballots' | 'attachments' | 'threads' | 'reactions' | 'voted' | 'createdAt' | 'updatedAt' | 'Team' | 'Activity'
+      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'name' | 'email' | 'emailVerified' | 'verified' | 'lastname' | 'image' | 'password' | 'gender' | 'year' | 'canton' | 'role' | 'school' | 'schoolId' | 'team' | 'teamId' | 'teaches' | 'ballots' | 'attachments' | 'threads' | 'reactions' | 'voted' | 'activity' | 'work' | 'createdAt' | 'updatedAt' | 'Team'
       ordering: 'id' | 'name' | 'email' | 'emailVerified' | 'verified' | 'lastname' | 'image' | 'password' | 'gender' | 'year' | 'canton' | 'role' | 'schoolId' | 'teamId' | 'createdAt' | 'updatedAt'
     }
     ballots: {
-      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'title' | 'description' | 'body' | 'start' | 'end' | 'scope' | 'canton' | 'school' | 'schoolId' | 'team' | 'teamId' | 'creator' | 'creatorId' | 'options' | 'voted' | 'votes' | 'attachments' | 'createdAt' | 'updatedAt' | 'BallotRuns'
+      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'title' | 'description' | 'body' | 'start' | 'end' | 'scope' | 'canton' | 'school' | 'schoolId' | 'team' | 'teamId' | 'creator' | 'creatorId' | 'options' | 'voted' | 'votes' | 'attachments' | 'ballotRuns' | 'createdAt' | 'updatedAt'
       ordering: 'id' | 'title' | 'description' | 'body' | 'start' | 'end' | 'scope' | 'canton' | 'schoolId' | 'teamId' | 'creatorId' | 'createdAt' | 'updatedAt'
     }
     User: {
-      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'name' | 'email' | 'emailVerified' | 'verified' | 'lastname' | 'image' | 'password' | 'gender' | 'year' | 'canton' | 'role' | 'school' | 'schoolId' | 'team' | 'teamId' | 'teaches' | 'ballots' | 'attachments' | 'threads' | 'reactions' | 'voted' | 'createdAt' | 'updatedAt' | 'Team' | 'Activity'
+      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'name' | 'email' | 'emailVerified' | 'verified' | 'lastname' | 'image' | 'password' | 'gender' | 'year' | 'canton' | 'role' | 'school' | 'schoolId' | 'team' | 'teamId' | 'teaches' | 'ballots' | 'attachments' | 'threads' | 'reactions' | 'voted' | 'activity' | 'work' | 'createdAt' | 'updatedAt' | 'Team'
       ordering: 'id' | 'name' | 'email' | 'emailVerified' | 'verified' | 'lastname' | 'image' | 'password' | 'gender' | 'year' | 'canton' | 'role' | 'schoolId' | 'teamId' | 'createdAt' | 'updatedAt'
     }
     BallotRuns: {
-      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'start' | 'end' | 'ballot' | 'ballotId' | 'team' | 'teamId' | 'Vote'
+      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'start' | 'end' | 'vote' | 'ballot' | 'ballotId' | 'team' | 'teamId'
       ordering: 'id' | 'start' | 'end' | 'ballotId' | 'teamId'
     }
     Vote: {
@@ -154,29 +163,33 @@ interface NexusPrismaInputs {
       ordering: 'id' | 'signature' | 'userId' | 'ballotId' | 'teamId' | 'schoolId'
     }
     Thread: {
-      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'title' | 'text' | 'ref' | 'user' | 'userId' | 'team' | 'teamId' | 'school' | 'schoolId' | 'reactions' | 'attachments' | 'Activity' | 'createdAt' | 'updatedAt'
+      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'title' | 'text' | 'ref' | 'user' | 'userId' | 'team' | 'teamId' | 'school' | 'schoolId' | 'reactions' | 'attachments' | 'activity' | 'createdAt' | 'updatedAt'
       ordering: 'id' | 'title' | 'text' | 'ref' | 'userId' | 'teamId' | 'schoolId' | 'createdAt' | 'updatedAt'
     }
-    Activity: {
-      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'type' | 'visibility' | 'user' | 'userId' | 'team' | 'teamId' | 'school' | 'schoolId' | 'thread' | 'threadId' | 'cardId' | 'time'
-      ordering: 'id' | 'type' | 'visibility' | 'userId' | 'teamId' | 'schoolId' | 'threadId' | 'cardId' | 'time'
+    activity: {
+      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'type' | 'visibility' | 'user' | 'userId' | 'team' | 'teamId' | 'school' | 'schoolId' | 'thread' | 'threadId' | 'cardId' | 'work' | 'workId' | 'time'
+      ordering: 'id' | 'type' | 'visibility' | 'userId' | 'teamId' | 'schoolId' | 'threadId' | 'cardId' | 'workId' | 'time'
     }
-    Attachment: {
-      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'file' | 'title' | 'type' | 'card' | 'user' | 'userId' | 'team' | 'teamId' | 'school' | 'schoolId' | 'thread' | 'threadId' | 'createdAt' | 'updatedAt' | 'Ballot' | 'ballotId'
-      ordering: 'id' | 'file' | 'title' | 'type' | 'card' | 'userId' | 'teamId' | 'schoolId' | 'threadId' | 'createdAt' | 'updatedAt' | 'ballotId'
+    attachment: {
+      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'file' | 'title' | 'type' | 'card' | 'user' | 'userId' | 'team' | 'teamId' | 'school' | 'schoolId' | 'thread' | 'threadId' | 'ballot' | 'ballotId' | 'work' | 'workId' | 'createdAt' | 'updatedAt'
+      ordering: 'id' | 'file' | 'title' | 'type' | 'card' | 'userId' | 'teamId' | 'schoolId' | 'threadId' | 'ballotId' | 'workId' | 'createdAt' | 'updatedAt'
+    }
+    work: {
+      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'title' | 'text' | 'data' | 'card' | 'visibility' | 'team' | 'teamId' | 'school' | 'schoolId' | 'users' | 'reactions' | 'attachments' | 'activity' | 'createdAt' | 'updatedAt'
+      ordering: 'id' | 'title' | 'text' | 'data' | 'card' | 'visibility' | 'teamId' | 'schoolId' | 'createdAt' | 'updatedAt'
     }
   }
   School: {
     members: {
-      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'name' | 'email' | 'emailVerified' | 'verified' | 'lastname' | 'image' | 'password' | 'gender' | 'year' | 'canton' | 'role' | 'school' | 'schoolId' | 'team' | 'teamId' | 'teaches' | 'ballots' | 'attachments' | 'threads' | 'reactions' | 'voted' | 'createdAt' | 'updatedAt' | 'Team' | 'Activity'
+      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'name' | 'email' | 'emailVerified' | 'verified' | 'lastname' | 'image' | 'password' | 'gender' | 'year' | 'canton' | 'role' | 'school' | 'schoolId' | 'team' | 'teamId' | 'teaches' | 'ballots' | 'attachments' | 'threads' | 'reactions' | 'voted' | 'activity' | 'work' | 'createdAt' | 'updatedAt' | 'Team'
       ordering: 'id' | 'name' | 'email' | 'emailVerified' | 'verified' | 'lastname' | 'image' | 'password' | 'gender' | 'year' | 'canton' | 'role' | 'schoolId' | 'teamId' | 'createdAt' | 'updatedAt'
     }
     teams: {
-      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'name' | 'invite' | 'code' | 'year' | 'cards' | 'school' | 'schoolId' | 'teacher' | 'teacherId' | 'members' | 'ballots' | 'domain' | 'domainId' | 'User' | 'BallotRuns' | 'Vote' | 'Voted' | 'Thread' | 'Activity' | 'Attachment'
+      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'name' | 'invite' | 'code' | 'year' | 'cards' | 'school' | 'schoolId' | 'teacher' | 'teacherId' | 'members' | 'ballots' | 'domain' | 'domainId' | 'User' | 'BallotRuns' | 'Vote' | 'Voted' | 'Thread' | 'activity' | 'attachment' | 'work'
       ordering: 'id' | 'name' | 'invite' | 'code' | 'year' | 'cards' | 'schoolId' | 'teacherId' | 'domainId'
     }
     ballots: {
-      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'title' | 'description' | 'body' | 'start' | 'end' | 'scope' | 'canton' | 'school' | 'schoolId' | 'team' | 'teamId' | 'creator' | 'creatorId' | 'options' | 'voted' | 'votes' | 'attachments' | 'createdAt' | 'updatedAt' | 'BallotRuns'
+      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'title' | 'description' | 'body' | 'start' | 'end' | 'scope' | 'canton' | 'school' | 'schoolId' | 'team' | 'teamId' | 'creator' | 'creatorId' | 'options' | 'voted' | 'votes' | 'attachments' | 'ballotRuns' | 'createdAt' | 'updatedAt'
       ordering: 'id' | 'title' | 'description' | 'body' | 'start' | 'end' | 'scope' | 'canton' | 'schoolId' | 'teamId' | 'creatorId' | 'createdAt' | 'updatedAt'
     }
     Vote: {
@@ -187,26 +200,30 @@ interface NexusPrismaInputs {
       filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'signature' | 'user' | 'userId' | 'ballot' | 'ballotId' | 'team' | 'teamId' | 'school' | 'schoolId'
       ordering: 'id' | 'signature' | 'userId' | 'ballotId' | 'teamId' | 'schoolId'
     }
-    Thread: {
-      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'title' | 'text' | 'ref' | 'user' | 'userId' | 'team' | 'teamId' | 'school' | 'schoolId' | 'reactions' | 'attachments' | 'Activity' | 'createdAt' | 'updatedAt'
+    thread: {
+      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'title' | 'text' | 'ref' | 'user' | 'userId' | 'team' | 'teamId' | 'school' | 'schoolId' | 'reactions' | 'attachments' | 'activity' | 'createdAt' | 'updatedAt'
       ordering: 'id' | 'title' | 'text' | 'ref' | 'userId' | 'teamId' | 'schoolId' | 'createdAt' | 'updatedAt'
     }
-    Activity: {
-      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'type' | 'visibility' | 'user' | 'userId' | 'team' | 'teamId' | 'school' | 'schoolId' | 'thread' | 'threadId' | 'cardId' | 'time'
-      ordering: 'id' | 'type' | 'visibility' | 'userId' | 'teamId' | 'schoolId' | 'threadId' | 'cardId' | 'time'
+    activity: {
+      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'type' | 'visibility' | 'user' | 'userId' | 'team' | 'teamId' | 'school' | 'schoolId' | 'thread' | 'threadId' | 'cardId' | 'work' | 'workId' | 'time'
+      ordering: 'id' | 'type' | 'visibility' | 'userId' | 'teamId' | 'schoolId' | 'threadId' | 'cardId' | 'workId' | 'time'
     }
-    Attachment: {
-      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'file' | 'title' | 'type' | 'card' | 'user' | 'userId' | 'team' | 'teamId' | 'school' | 'schoolId' | 'thread' | 'threadId' | 'createdAt' | 'updatedAt' | 'Ballot' | 'ballotId'
-      ordering: 'id' | 'file' | 'title' | 'type' | 'card' | 'userId' | 'teamId' | 'schoolId' | 'threadId' | 'createdAt' | 'updatedAt' | 'ballotId'
+    attachment: {
+      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'file' | 'title' | 'type' | 'card' | 'user' | 'userId' | 'team' | 'teamId' | 'school' | 'schoolId' | 'thread' | 'threadId' | 'ballot' | 'ballotId' | 'work' | 'workId' | 'createdAt' | 'updatedAt'
+      ordering: 'id' | 'file' | 'title' | 'type' | 'card' | 'userId' | 'teamId' | 'schoolId' | 'threadId' | 'ballotId' | 'workId' | 'createdAt' | 'updatedAt'
+    }
+    work: {
+      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'title' | 'text' | 'data' | 'card' | 'visibility' | 'team' | 'teamId' | 'school' | 'schoolId' | 'users' | 'reactions' | 'attachments' | 'activity' | 'createdAt' | 'updatedAt'
+      ordering: 'id' | 'title' | 'text' | 'data' | 'card' | 'visibility' | 'teamId' | 'schoolId' | 'createdAt' | 'updatedAt'
     }
   }
   Domain: {
     schools: {
-      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'name' | 'city' | 'canton' | 'zip' | 'address' | 'type' | 'domain' | 'domainId' | 'members' | 'teams' | 'ballots' | 'Vote' | 'Voted' | 'Thread' | 'Activity' | 'Attachment'
+      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'name' | 'city' | 'canton' | 'zip' | 'address' | 'type' | 'domain' | 'domainId' | 'members' | 'teams' | 'ballots' | 'Vote' | 'Voted' | 'thread' | 'activity' | 'attachment' | 'work'
       ordering: 'id' | 'name' | 'city' | 'canton' | 'zip' | 'address' | 'type' | 'domainId'
     }
     Team: {
-      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'name' | 'invite' | 'code' | 'year' | 'cards' | 'school' | 'schoolId' | 'teacher' | 'teacherId' | 'members' | 'ballots' | 'domain' | 'domainId' | 'User' | 'BallotRuns' | 'Vote' | 'Voted' | 'Thread' | 'Activity' | 'Attachment'
+      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'name' | 'invite' | 'code' | 'year' | 'cards' | 'school' | 'schoolId' | 'teacher' | 'teacherId' | 'members' | 'ballots' | 'domain' | 'domainId' | 'User' | 'BallotRuns' | 'Vote' | 'Voted' | 'Thread' | 'activity' | 'attachment' | 'work'
       ordering: 'id' | 'name' | 'invite' | 'code' | 'year' | 'cards' | 'schoolId' | 'teacherId' | 'domainId'
     }
   }
@@ -224,16 +241,16 @@ interface NexusPrismaInputs {
       ordering: 'id' | 'vote' | 'verify' | 'year' | 'canton' | 'schooltype' | 'ballotId' | 'ballotRunId' | 'teamId' | 'schoolId'
     }
     attachments: {
-      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'file' | 'title' | 'type' | 'card' | 'user' | 'userId' | 'team' | 'teamId' | 'school' | 'schoolId' | 'thread' | 'threadId' | 'createdAt' | 'updatedAt' | 'Ballot' | 'ballotId'
-      ordering: 'id' | 'file' | 'title' | 'type' | 'card' | 'userId' | 'teamId' | 'schoolId' | 'threadId' | 'createdAt' | 'updatedAt' | 'ballotId'
+      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'file' | 'title' | 'type' | 'card' | 'user' | 'userId' | 'team' | 'teamId' | 'school' | 'schoolId' | 'thread' | 'threadId' | 'ballot' | 'ballotId' | 'work' | 'workId' | 'createdAt' | 'updatedAt'
+      ordering: 'id' | 'file' | 'title' | 'type' | 'card' | 'userId' | 'teamId' | 'schoolId' | 'threadId' | 'ballotId' | 'workId' | 'createdAt' | 'updatedAt'
     }
-    BallotRuns: {
-      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'start' | 'end' | 'ballot' | 'ballotId' | 'team' | 'teamId' | 'Vote'
+    ballotRuns: {
+      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'start' | 'end' | 'vote' | 'ballot' | 'ballotId' | 'team' | 'teamId'
       ordering: 'id' | 'start' | 'end' | 'ballotId' | 'teamId'
     }
   }
   BallotRun: {
-    Vote: {
+    vote: {
       filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'vote' | 'verify' | 'year' | 'canton' | 'schooltype' | 'ballot' | 'ballotId' | 'ballotRun' | 'ballotRunId' | 'team' | 'teamId' | 'school' | 'schoolId'
       ordering: 'id' | 'vote' | 'verify' | 'year' | 'canton' | 'schooltype' | 'ballotId' | 'ballotRunId' | 'teamId' | 'schoolId'
     }
@@ -252,16 +269,34 @@ interface NexusPrismaInputs {
   }
   Thread: {
     reactions: {
-      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'emoij' | 'user' | 'userId' | 'thread' | 'threadId' | 'createdAt' | 'updatedAt'
-      ordering: 'id' | 'emoij' | 'userId' | 'threadId' | 'createdAt' | 'updatedAt'
+      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'emoij' | 'stars' | 'feedback' | 'user' | 'userId' | 'thread' | 'threadId' | 'work' | 'workId' | 'createdAt' | 'updatedAt'
+      ordering: 'id' | 'emoij' | 'stars' | 'feedback' | 'userId' | 'threadId' | 'workId' | 'createdAt' | 'updatedAt'
     }
     attachments: {
-      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'file' | 'title' | 'type' | 'card' | 'user' | 'userId' | 'team' | 'teamId' | 'school' | 'schoolId' | 'thread' | 'threadId' | 'createdAt' | 'updatedAt' | 'Ballot' | 'ballotId'
-      ordering: 'id' | 'file' | 'title' | 'type' | 'card' | 'userId' | 'teamId' | 'schoolId' | 'threadId' | 'createdAt' | 'updatedAt' | 'ballotId'
+      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'file' | 'title' | 'type' | 'card' | 'user' | 'userId' | 'team' | 'teamId' | 'school' | 'schoolId' | 'thread' | 'threadId' | 'ballot' | 'ballotId' | 'work' | 'workId' | 'createdAt' | 'updatedAt'
+      ordering: 'id' | 'file' | 'title' | 'type' | 'card' | 'userId' | 'teamId' | 'schoolId' | 'threadId' | 'ballotId' | 'workId' | 'createdAt' | 'updatedAt'
     }
-    Activity: {
-      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'type' | 'visibility' | 'user' | 'userId' | 'team' | 'teamId' | 'school' | 'schoolId' | 'thread' | 'threadId' | 'cardId' | 'time'
-      ordering: 'id' | 'type' | 'visibility' | 'userId' | 'teamId' | 'schoolId' | 'threadId' | 'cardId' | 'time'
+    activity: {
+      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'type' | 'visibility' | 'user' | 'userId' | 'team' | 'teamId' | 'school' | 'schoolId' | 'thread' | 'threadId' | 'cardId' | 'work' | 'workId' | 'time'
+      ordering: 'id' | 'type' | 'visibility' | 'userId' | 'teamId' | 'schoolId' | 'threadId' | 'cardId' | 'workId' | 'time'
+    }
+  }
+  Work: {
+    users: {
+      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'name' | 'email' | 'emailVerified' | 'verified' | 'lastname' | 'image' | 'password' | 'gender' | 'year' | 'canton' | 'role' | 'school' | 'schoolId' | 'team' | 'teamId' | 'teaches' | 'ballots' | 'attachments' | 'threads' | 'reactions' | 'voted' | 'activity' | 'work' | 'createdAt' | 'updatedAt' | 'Team'
+      ordering: 'id' | 'name' | 'email' | 'emailVerified' | 'verified' | 'lastname' | 'image' | 'password' | 'gender' | 'year' | 'canton' | 'role' | 'schoolId' | 'teamId' | 'createdAt' | 'updatedAt'
+    }
+    reactions: {
+      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'emoij' | 'stars' | 'feedback' | 'user' | 'userId' | 'thread' | 'threadId' | 'work' | 'workId' | 'createdAt' | 'updatedAt'
+      ordering: 'id' | 'emoij' | 'stars' | 'feedback' | 'userId' | 'threadId' | 'workId' | 'createdAt' | 'updatedAt'
+    }
+    attachments: {
+      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'file' | 'title' | 'type' | 'card' | 'user' | 'userId' | 'team' | 'teamId' | 'school' | 'schoolId' | 'thread' | 'threadId' | 'ballot' | 'ballotId' | 'work' | 'workId' | 'createdAt' | 'updatedAt'
+      ordering: 'id' | 'file' | 'title' | 'type' | 'card' | 'userId' | 'teamId' | 'schoolId' | 'threadId' | 'ballotId' | 'workId' | 'createdAt' | 'updatedAt'
+    }
+    activity: {
+      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'type' | 'visibility' | 'user' | 'userId' | 'team' | 'teamId' | 'school' | 'schoolId' | 'thread' | 'threadId' | 'cardId' | 'work' | 'workId' | 'time'
+      ordering: 'id' | 'type' | 'visibility' | 'userId' | 'teamId' | 'schoolId' | 'threadId' | 'cardId' | 'workId' | 'time'
     }
   }
   Reaction: {
@@ -302,6 +337,8 @@ interface NexusPrismaOutputs {
     attachments: 'Attachment'
     thread: 'Thread'
     threads: 'Thread'
+    work: 'Work'
+    works: 'Work'
     reaction: 'Reaction'
     reactions: 'Reaction'
     activity: 'Activity'
@@ -382,6 +419,12 @@ interface NexusPrismaOutputs {
     deleteOneThread: 'Thread'
     deleteManyThread: 'BatchPayload'
     upsertOneThread: 'Thread'
+    createOneWork: 'Work'
+    updateOneWork: 'Work'
+    updateManyWork: 'BatchPayload'
+    deleteOneWork: 'Work'
+    deleteManyWork: 'BatchPayload'
+    upsertOneWork: 'Work'
     createOneReaction: 'Reaction'
     updateOneReaction: 'Reaction'
     updateManyReaction: 'BatchPayload'
@@ -424,10 +467,11 @@ interface NexusPrismaOutputs {
     threads: 'Thread'
     reactions: 'Reaction'
     voted: 'Voted'
+    activity: 'Activity'
+    work: 'Work'
     createdAt: 'DateTime'
     updatedAt: 'DateTime'
     Team: 'Team'
-    Activity: 'Activity'
   }
   VerificationRequest: {
     id: 'String'
@@ -457,8 +501,9 @@ interface NexusPrismaOutputs {
     Vote: 'Vote'
     Voted: 'Voted'
     Thread: 'Thread'
-    Activity: 'Activity'
-    Attachment: 'Attachment'
+    activity: 'Activity'
+    attachment: 'Attachment'
+    work: 'Work'
   }
   School: {
     id: 'String'
@@ -475,9 +520,10 @@ interface NexusPrismaOutputs {
     ballots: 'Ballot'
     Vote: 'Vote'
     Voted: 'Voted'
-    Thread: 'Thread'
-    Activity: 'Activity'
-    Attachment: 'Attachment'
+    thread: 'Thread'
+    activity: 'Activity'
+    attachment: 'Attachment'
+    work: 'Work'
   }
   Domain: {
     id: 'String'
@@ -505,19 +551,19 @@ interface NexusPrismaOutputs {
     voted: 'Voted'
     votes: 'Vote'
     attachments: 'Attachment'
+    ballotRuns: 'BallotRun'
     createdAt: 'DateTime'
     updatedAt: 'DateTime'
-    BallotRuns: 'BallotRun'
   }
   BallotRun: {
     id: 'String'
     start: 'DateTime'
     end: 'DateTime'
+    vote: 'Vote'
     ballot: 'Ballot'
     ballotId: 'String'
     team: 'Team'
     teamId: 'String'
-    Vote: 'Vote'
   }
   Option: {
     id: 'String'
@@ -568,10 +614,12 @@ interface NexusPrismaOutputs {
     schoolId: 'String'
     thread: 'Thread'
     threadId: 'String'
+    ballot: 'Ballot'
+    ballotId: 'String'
+    work: 'Work'
+    workId: 'String'
     createdAt: 'DateTime'
     updatedAt: 'DateTime'
-    Ballot: 'Ballot'
-    ballotId: 'String'
   }
   Thread: {
     id: 'String'
@@ -586,17 +634,39 @@ interface NexusPrismaOutputs {
     schoolId: 'String'
     reactions: 'Reaction'
     attachments: 'Attachment'
-    Activity: 'Activity'
+    activity: 'Activity'
+    createdAt: 'DateTime'
+    updatedAt: 'DateTime'
+  }
+  Work: {
+    id: 'String'
+    title: 'String'
+    text: 'String'
+    data: 'Json'
+    card: 'String'
+    visibility: 'Visibility'
+    team: 'Team'
+    teamId: 'String'
+    school: 'School'
+    schoolId: 'String'
+    users: 'User'
+    reactions: 'Reaction'
+    attachments: 'Attachment'
+    activity: 'Activity'
     createdAt: 'DateTime'
     updatedAt: 'DateTime'
   }
   Reaction: {
     id: 'String'
     emoij: 'String'
+    stars: 'Int'
+    feedback: 'String'
     user: 'User'
     userId: 'String'
     thread: 'Thread'
     threadId: 'String'
+    work: 'Work'
+    workId: 'String'
     createdAt: 'DateTime'
     updatedAt: 'DateTime'
   }
@@ -613,6 +683,8 @@ interface NexusPrismaOutputs {
     thread: 'Thread'
     threadId: 'String'
     cardId: 'String'
+    work: 'Work'
+    workId: 'String'
     time: 'DateTime'
   }
   Swissvote: {
@@ -646,6 +718,7 @@ interface NexusPrismaMethods {
   Vote: Typegen.NexusPrismaFields<'Vote'>
   Attachment: Typegen.NexusPrismaFields<'Attachment'>
   Thread: Typegen.NexusPrismaFields<'Thread'>
+  Work: Typegen.NexusPrismaFields<'Work'>
   Reaction: Typegen.NexusPrismaFields<'Reaction'>
   Activity: Typegen.NexusPrismaFields<'Activity'>
   Swissvote: Typegen.NexusPrismaFields<'Swissvote'>

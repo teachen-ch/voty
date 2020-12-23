@@ -39,7 +39,7 @@ model User {
   role     Role    @default(Student)
   school   School? @relation(fields: [schoolId], references: [id])
   schoolId String? @map(name: "school_id")
-  team     Team?   @relation(fields: [teamId], references: [id])
+  team     Team?   @relation("TeamMembers", fields: [teamId], references: [id])
   teamId   String? @map(name: "team_id")
   teaches  Team[]  @relation("Teacher")
 
@@ -48,12 +48,13 @@ model User {
   threads     Thread[]
   reactions   Reaction[]
   voted       Voted[]      @relation("VotedUser")
+  activity    Activity[]
+  work        Work[]
 
-  createdAt DateTime   @default(now()) @map(name: "created_at")
-  updatedAt DateTime   @default(now()) @map(name: "updated_at")
-  Team      Team?      @relation("TeamMembers", fields: [teamId], references: [id])
-  Activity  Activity[]
+  createdAt DateTime @default(now()) @map(name: "created_at")
+  updatedAt DateTime @default(now()) @map(name: "updated_at")
   @@map(name: "users")
+  Team Team? @relation(fields: [teamId], references: [id])
 }
 
 model VerificationRequest {
@@ -89,8 +90,9 @@ model Team {
   Vote       Vote[]
   Voted      Voted[]
   Thread     Thread[]
-  Activity   Activity[]
-  Attachment Attachment[]
+  activity   Activity[]
+  attachment Attachment[]
+  work       Work[]
   @@map(name: "teams")
 }
 
@@ -111,9 +113,10 @@ model School {
 
   Vote       Vote[]
   Voted      Voted[]
-  Thread     Thread[]
-  Activity   Activity[]
-  Attachment Attachment[]
+  thread     Thread[]
+  activity   Activity[]
+  attachment Attachment[]
+  work       Work[]
   @@map(name: "schools")
 }
 
@@ -165,10 +168,10 @@ model Ballot {
   voted       Voted[]      @relation("VotedBallot")
   votes       Vote[]
   attachments Attachment[]
+  ballotRuns  BallotRun[]
 
-  createdAt  DateTime    @default(now()) @map(name: "created_at")
-  updatedAt  DateTime    @default(now()) @map(name: "updated_at")
-  BallotRuns BallotRun[]
+  createdAt DateTime @default(now()) @map(name: "created_at")
+  updatedAt DateTime @default(now()) @map(name: "updated_at")
   @@map(name: "ballots")
 }
 
@@ -176,13 +179,13 @@ model BallotRun {
   id    String    @id @default(cuid())
   start DateTime?
   end   DateTime?
+  vote  Vote[]
 
   ballot   Ballot @relation(fields: [ballotId], references: [id])
   ballotId String @map(name: "ballot_id")
   team     Team   @relation(fields: [teamId], references: [id])
   teamId   String @map(name: "team_id")
 
-  Vote Vote[]
   @@unique([ballotId, teamId])
   @@map(name: "ballot_runs")
 }
@@ -247,14 +250,16 @@ model Attachment {
   team     Team    @relation(fields: [teamId], references: [id])
   teamId   String  @map(name: "team_id")
   school   School? @relation(fields: [schoolId], references: [id])
-  schoolId String?
+  schoolId String? @map(name: "school_id")
   thread   Thread? @relation(fields: [threadId], references: [id])
   threadId String? @map(name: "thread_id")
+  ballot   Ballot? @relation(fields: [ballotId], references: [id])
+  ballotId String? @map(name: "ballot_id")
+  work     Work?   @relation(fields: [workId], references: [id])
+  workId   String? @map(name: "work_id")
 
   createdAt DateTime @default(now()) @map(name: "created_at")
   updatedAt DateTime @default(now()) @map(name: "updated_at")
-  Ballot    Ballot?  @relation(fields: [ballotId], references: [id])
-  ballotId  String?
   @@map(name: "attachments")
 }
 
@@ -269,25 +274,52 @@ model Thread {
   team     Team    @relation(fields: [teamId], references: [id])
   teamId   String  @map(name: "team_id")
   school   School? @relation(fields: [schoolId], references: [id])
-  schoolId String?
+  schoolId String? @map(name: "school_id")
 
   reactions   Reaction[]
   attachments Attachment[]
-  Activity    Activity[]
+  activity    Activity[]
 
   createdAt DateTime @default(now()) @map(name: "created_at")
   updatedAt DateTime @default(now()) @map(name: "updated_at")
   @@map(name: "threads")
 }
 
+model Work {
+  id         String     @id @default(cuid())
+  title      String     @default("")
+  text       String     @default("")
+  data       Json
+  card       String
+  visibility Visibility @default(Team)
+
+  team     Team    @relation(fields: [teamId], references: [id])
+  teamId   String  @map(name: "team_id")
+  school   School? @relation(fields: [schoolId], references: [id])
+  schoolId String? @map(name: "school_id")
+
+  users       User[]
+  reactions   Reaction[]
+  attachments Attachment[]
+  activity    Activity[]
+
+  createdAt DateTime @default(now()) @map(name: "created_at")
+  updatedAt DateTime @default(now()) @map(name: "updated_at")
+  @@map(name: "works")
+}
+
 model Reaction {
-  id    String @id @default(cuid())
-  emoij String
+  id       String @id @default(cuid())
+  emoij    String @default("")
+  stars    Int
+  feedback String
 
   user     User    @relation(fields: [userId], references: [id])
   userId   String  @map(name: "user_id")
   thread   Thread? @relation(fields: [threadId], references: [id])
   threadId String? @map(name: "thread_id")
+  work     Work?   @relation(fields: [workId], references: [id])
+  workId   String? @map(name: "thread_id")
 
   createdAt DateTime @default(now()) @map(name: "created_at")
   updatedAt DateTime @default(now()) @map(name: "updated_at")
@@ -321,7 +353,9 @@ model Activity {
   schoolId String  @map(name: "school_id")
   thread   Thread? @relation(fields: [threadId], references: [id])
   threadId String? @map(name: "thread_id")
-  cardId   String?
+  cardId   String? @map(name: "card_id")
+  work     Work?   @relation(fields: [workId], references: [id])
+  workId   String? @map(name: "work_id")
 
   time DateTime @default(now()) @map(name: "created_at")
   @@map(name: "activities")

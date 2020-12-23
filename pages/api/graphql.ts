@@ -10,7 +10,7 @@ export const config = {
   },
 };
 
-const prisma = new PrismaClient();
+const prisma = new PrismaClient(/* { log: ["query"] } */);
 
 const server = new ApolloServer({
   schema,
