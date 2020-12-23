@@ -6,6 +6,7 @@ import {
 } from "graphql/types";
 import { trackVisit } from "util/stats";
 import { useRouter } from "next/router";
+import { useEffect } from "react";
 
 export type SessionUser = LoginFieldsFragment | undefined | null;
 export type SessionTeam = TeamUserFieldsFragment | undefined | null;
@@ -50,10 +51,18 @@ export function useSetUser(): (user: SessionUser) => void {
   };
 }
 
-export function useTeam(): SessionTeam {
+export function useTeam(): SessionTeam | undefined | null {
   const router = useRouter();
   const user = useUser();
   const id = user?.team?.id || String(router.query.team);
-  const teamQuery = useTeamUserQuery({ variables: { where: { id } } });
+  const teamQuery = useTeamUserQuery({
+    variables: { where: { id } },
+    skip: !user,
+  });
+
+  useEffect(() => {
+    // TODO: we seem to requery this way too often.
+    void teamQuery.refetch();
+  }, [user]);
   return teamQuery.data?.team;
 }

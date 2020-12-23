@@ -1,33 +1,28 @@
-import { Page, Loading, ErrorPage } from "components/Page";
+import { Loading, ErrorPage, LoggedInPage } from "components/Page";
 import { Card, getCardMeta } from "components/Cards";
 import { useRouter } from "next/router";
 import { Text } from "rebass";
-import { useUser } from "state/user";
+import { useTeam, useUser } from "state/user";
 import { A, Breadcrumb } from "components/Breadcrumb";
-import { Role, useTeamUserQuery } from "graphql/types";
+import { Role } from "graphql/types";
 import { Discussion } from "components/Discussion";
 
 export default function CardPage(): React.ReactElement {
   const router = useRouter();
   const user = useUser();
+  const team = useTeam();
   const key = String(router.query.card);
-  const id = String(router.query.team);
-  const teamQuery = useTeamUserQuery({
-    variables: { where: { id } },
-    skip: !id,
-  });
-  const team = teamQuery.data?.team;
 
-  if (!key || teamQuery.loading)
+  if (!key || !team)
     return (
-      <Page>
+      <LoggedInPage>
         <Loading />
-      </Page>
+      </LoggedInPage>
     );
 
   const meta = getCardMeta(key);
   if (!meta) return <ErrorPage>Lerninhalt nicht gefunden: {key}</ErrorPage>;
-  if (!team) return <ErrorPage>Klasse nicht gefunden</ErrorPage>;
+  if (!team) return <LoggedInPage>Klasse nicht gefunden</LoggedInPage>;
 
   let usercrumb = <></>;
   if (user?.role === Role.Teacher) {
@@ -46,7 +41,7 @@ export default function CardPage(): React.ReactElement {
   }
 
   return (
-    <Page heading={String(meta.title)}>
+    <LoggedInPage heading={String(meta.title)}>
       <Text textAlign="left">
         <Breadcrumb>
           <A href="/">Start</A>
@@ -58,6 +53,6 @@ export default function CardPage(): React.ReactElement {
 
         {meta.discussion !== false && <Discussion id={key} />}
       </Text>
-    </Page>
+    </LoggedInPage>
   );
 }

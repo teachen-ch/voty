@@ -1,4 +1,4 @@
-import { LoggedInPage } from "components/Page";
+import { Loading, LoggedInPage } from "components/Page";
 import { Heading, Text, Button } from "rebass";
 import Link from "next/link";
 import { Ballot } from "components/Ballots";
@@ -6,7 +6,6 @@ import {
   useBallotsQuery,
   BallotScope,
   TeamTeacherFieldsFragment,
-  useTeamTeacherQuery,
   BallotFieldsFragment,
   useGetBallotRunsQuery,
   useAddBallotRunMutation,
@@ -16,16 +15,12 @@ import { useRouter } from "next/router";
 import { ReactElement } from "react";
 import { find } from "lodash";
 import { usePageEvent, trackEvent } from "util/stats";
+import { useTeam } from "state/user";
 
 export default function TeacherTest(): ReactElement {
   usePageEvent({ category: "Teacher", action: "Ballots" });
   const router = useRouter();
-  const id = String(router.query.team);
-  const teamQuery = useTeamTeacherQuery({
-    variables: { where: { id } },
-    skip: !id,
-  });
-  const team = teamQuery.data?.team;
+  const team = useTeam();
   const [doAddBallotRun] = useAddBallotRunMutation();
   const [doRemoveBallotRun] = useRemoveBallotRunMutation();
 
@@ -44,7 +39,7 @@ export default function TeacherTest(): ReactElement {
     ? ballots.filter(({ id }) => !find(ballotRuns, { ballot: { id } }))
     : [];
 
-  if (!team) {
+  if (team === null) {
     return (
       <LoggedInPage heading="Demokratie testen">
         <Text mb={3}>Klasse wurde nicht gefunden.</Text>
@@ -52,6 +47,13 @@ export default function TeacherTest(): ReactElement {
       </LoggedInPage>
     );
   }
+
+  if (!team)
+    return (
+      <LoggedInPage>
+        <Loading />
+      </LoggedInPage>
+    );
 
   function detailBallot(ballot: BallotFieldsFragment) {
     void router.push(`/ballots/${ballot.id}`);

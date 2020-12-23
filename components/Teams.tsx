@@ -9,6 +9,7 @@ import {
   TeamUserFieldsFragment,
   useCreateOneTeamMutation,
 } from "graphql/types";
+import { Loading } from "./Page";
 
 const TeamAnonFields = gql`
   fragment TeamAnonFields on Team {
@@ -108,7 +109,7 @@ export const Teams: React.FC<TeamsProps> = ({ where, teamClick }) => {
     return <Text>Error loading data: {teamsQuery.error.message}</Text>;
   }
   if (teamsQuery.loading || !teams) {
-    return <Text>Daten werden geladen</Text>;
+    return <Loading />;
   }
 
   return (

@@ -4,32 +4,18 @@ import { Input } from "@rebass/forms";
 import { Flex, Button, Text, Heading } from "rebass";
 import React, { useState } from "react";
 import { useRouter } from "next/router";
-import { useTeamTeacherQuery } from "graphql/types";
 import { A, Breadcrumb } from "components/Breadcrumb";
 import { debounce } from "lodash";
 import { Filter } from "components/Swissvotes";
+import { useTeam } from "state/user";
 
 export default function CardsPage(): React.ReactElement {
   const router = useRouter();
-  const id = String(router.query.team);
-  const teamQuery = useTeamTeacherQuery({
-    variables: { where: { id } },
-    skip: !id,
-  });
-
+  const team = useTeam();
   const [keywords, setKeywords] = useState("");
   const [type, setType] = useState<string | undefined>();
   const [age, setAge] = useState<string | undefined>();
 
-  if (teamQuery.loading) {
-    return (
-      <LoggedInPage heading="Detailansicht Klasse">
-        Klasse wird geladen…
-      </LoggedInPage>
-    );
-  }
-
-  const team = teamQuery.data?.team;
   if (!team) {
     return (
       <LoggedInPage heading="Detailansicht Klasse">
