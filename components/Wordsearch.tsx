@@ -59,6 +59,7 @@ const Puzzle: React.FC<{ board: Board; solutions: Word[] }> = ({
   const empty = useMemo<Pixels>(() => emptyPixels(board), [board]);
   const [start, setStart] = useState<Point | undefined>();
   const [hover, setHover] = useState<Point | undefined>();
+  const [last, setLast] = useState<Word | undefined>();
   const [hoverPixels, setHoverPixels] = useState<Pixels>(empty);
   const [solvedPixels, setSolvedPixels] = useState<Pixels>(cloneDeep(empty));
   const [errorPixels, setErrorPixels] = useState<Pixels>(empty);
@@ -66,7 +67,7 @@ const Puzzle: React.FC<{ board: Board; solutions: Word[] }> = ({
   function doClick(e: React.MouseEvent<HTMLDivElement>, p: Point) {
     e.stopPropagation();
     e.preventDefault();
-    if (start && isEqual(start, p)) return;
+    if (e.type === "mouseup" && start && isEqual(start, p)) return;
     return start ? endWord(p) : startWord(p);
   }
 
@@ -118,24 +119,29 @@ const Puzzle: React.FC<{ board: Board; solutions: Word[] }> = ({
 
   function endWord(p: Point) {
     if (start) {
-      if (isMatch(p)) {
+      const match = isMatch(p);
+      if (match) {
+        setLast(match);
         setSolvedPixels(fillLine(start, p, solvedPixels));
       } else {
         console.warn(`${start.x + 1},${start.y + 1}-${p.x + 1},${p.y + 1}`);
         if (isStar(start, p)) setErrorPixels(fillLine(start, p));
       }
       setHoverPixels(empty);
+      setHover(undefined);
+      setStart(undefined);
       setTimeout(clear, 500);
     }
   }
 
   function clear() {
     setStart(undefined);
+    setLast(undefined);
     setErrorPixels(empty);
   }
 
-  function isMatch(p: Point): boolean {
-    if (isEqual(start, p)) return false;
+  function isMatch(p: Point): Word | undefined {
+    if (isEqual(start, p)) return;
     const startsWith = solutions.filter(
       (word) => isEqual(word.from, start) || isEqual(word.to, start)
     );
@@ -143,22 +149,20 @@ const Puzzle: React.FC<{ board: Board; solutions: Word[] }> = ({
       (word) => isEqual(word.to, p) || isEqual(word.from, p)
     );
     matches.forEach((word) => (word.solved = true));
-    return matches.length ? true : false;
+    return matches.length ? matches[0] : undefined;
   }
 
   function getState(p: Point): State {
     let state = State.Normal;
 
     if (isError(p)) state = State.Error;
+    else if (last && isSolved(p)) state = State.Solved;
     else if (start && isEqual(start, p)) state = State.Start;
-    else if (start && isSolved(p)) state = State.Solved;
     else if (isEqual(p, hover)) state = State.Hover;
     else if (isHighlighted(p)) state = State.Highlighted;
     else if (isSolved(p)) state = State.Solved;
     return state;
   }
-
-  if (!isBrowser()) return null;
 
   return (
     <Flex flexDirection="column">
@@ -286,7 +290,7 @@ function generatePuzzle(
   words: string[]
 ): { board: Board; solutions: Word[] } {
   words.sort((a, b) => b.length - a.length);
-  const board: Board = new Array(rows)
+  let board: Board = new Array(rows)
     .fill(0)
     .map(() => new Array<string>(cols).fill("-"));
   let solutions = words.map((word) => {
@@ -308,7 +312,15 @@ function generatePuzzle(
     };
   });
   solutions = solutions.filter((s) => s.word !== "");
+
+  board = board.map((row) =>
+    row.map((letter) => (letter === "-" ? randLetter() : letter))
+  );
   return { board, solutions };
+}
+
+function randLetter(): string {
+  return String.fromCharCode(Math.floor(Math.random() * 25) + 65);
 }
 
 function findDirections(
