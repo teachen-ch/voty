@@ -3,10 +3,12 @@ import { PrismaClient } from "@prisma/client";
 import { nexusPrisma } from "nexus-plugin-prisma";
 import { permissions } from "./permissions";
 import { applyMiddleware } from "graphql-middleware";
+import { DateTimeResolver, JSONObjectResolver } from "graphql-scalars";
 import path from "path";
 import logger from "util/logger";
 
 import * as types from "./schema";
+import { GraphQLScalarType } from "graphql";
 
 const prisma = new PrismaClient();
 
@@ -46,6 +48,15 @@ const baseSchema = makeSchema({
       shouldGenerateArtifacts: process.env.NODE_ENV === "development",
       outputs: {
         typegen: path.join(process.cwd(), "graphql", "nexus-plugin-prisma.ts"),
+      },
+      scalars: {
+        DateTime: DateTimeResolver,
+        Json: new GraphQLScalarType({
+          ...JSONObjectResolver,
+          name: "Json",
+          description:
+            "The `JSON` scalar type represents JSON objects as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).",
+        }),
       },
     }),
     LoggerPlugin,

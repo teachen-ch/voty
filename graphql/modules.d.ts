@@ -111,6 +111,15 @@ export const deleteUser: DocumentNode;
 }
     
 
+declare module '*/Works.tsx' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const works: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
 declare module '*/teachers.tsx' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;

@@ -57,51 +57,51 @@ input ActivityCreateOrConnectWithoutworkInput {
 }
 
 input ActivityCreateWithoutSchoolInput {
-  cardId: String
+  card: String
   team: TeamCreateOneWithoutActivityInput!
   thread: ThreadCreateOneWithoutActivityInput
   time: DateTime
   type: ActivityType!
   user: UserCreateOneWithoutActivityInput!
   visibility: Visibility!
-  work: WorkCreateOneWithoutActivityInput
+  work: WorkCreateOneWithoutActivitiesInput
 }
 
 input ActivityCreateWithoutTeamInput {
-  cardId: String
+  card: String
   school: SchoolCreateOneWithoutActivityInput!
   thread: ThreadCreateOneWithoutActivityInput
   time: DateTime
   type: ActivityType!
   user: UserCreateOneWithoutActivityInput!
   visibility: Visibility!
-  work: WorkCreateOneWithoutActivityInput
+  work: WorkCreateOneWithoutActivitiesInput
 }
 
 input ActivityCreateWithoutThreadInput {
-  cardId: String
+  card: String
   school: SchoolCreateOneWithoutActivityInput!
   team: TeamCreateOneWithoutActivityInput!
   time: DateTime
   type: ActivityType!
   user: UserCreateOneWithoutActivityInput!
   visibility: Visibility!
-  work: WorkCreateOneWithoutActivityInput
+  work: WorkCreateOneWithoutActivitiesInput
 }
 
 input ActivityCreateWithoutUserInput {
-  cardId: String
+  card: String
   school: SchoolCreateOneWithoutActivityInput!
   team: TeamCreateOneWithoutActivityInput!
   thread: ThreadCreateOneWithoutActivityInput
   time: DateTime
   type: ActivityType!
   visibility: Visibility!
-  work: WorkCreateOneWithoutActivityInput
+  work: WorkCreateOneWithoutActivitiesInput
 }
 
 input ActivityCreateWithoutWorkInput {
-  cardId: String
+  card: String
   school: SchoolCreateOneWithoutActivityInput!
   team: TeamCreateOneWithoutActivityInput!
   thread: ThreadCreateOneWithoutActivityInput
@@ -119,7 +119,7 @@ input ActivityListRelationFilter {
 
 input ActivityScalarWhereInput {
   AND: [ActivityScalarWhereInput!]
-  cardId: StringNullableFilter
+  card: StringNullableFilter
   id: IntFilter
   NOT: [ActivityScalarWhereInput!]
   OR: [ActivityScalarWhereInput!]
@@ -141,7 +141,7 @@ enum ActivityType {
 }
 
 input ActivityUpdateManyMutationInput {
-  cardId: NullableStringFieldUpdateOperationsInput
+  card: NullableStringFieldUpdateOperationsInput
   time: DateTimeFieldUpdateOperationsInput
   type: EnumActivityTypeFieldUpdateOperationsInput
   visibility: EnumVisibilityFieldUpdateOperationsInput
@@ -238,51 +238,51 @@ input ActivityUpdateManyWithWhereWithoutWorkInput {
 }
 
 input ActivityUpdateWithoutSchoolInput {
-  cardId: NullableStringFieldUpdateOperationsInput
+  card: NullableStringFieldUpdateOperationsInput
   team: TeamUpdateOneRequiredWithoutActivityInput
   thread: ThreadUpdateOneWithoutActivityInput
   time: DateTimeFieldUpdateOperationsInput
   type: EnumActivityTypeFieldUpdateOperationsInput
   user: UserUpdateOneRequiredWithoutActivityInput
   visibility: EnumVisibilityFieldUpdateOperationsInput
-  work: WorkUpdateOneWithoutActivityInput
+  work: WorkUpdateOneWithoutActivitiesInput
 }
 
 input ActivityUpdateWithoutTeamInput {
-  cardId: NullableStringFieldUpdateOperationsInput
+  card: NullableStringFieldUpdateOperationsInput
   school: SchoolUpdateOneRequiredWithoutActivityInput
   thread: ThreadUpdateOneWithoutActivityInput
   time: DateTimeFieldUpdateOperationsInput
   type: EnumActivityTypeFieldUpdateOperationsInput
   user: UserUpdateOneRequiredWithoutActivityInput
   visibility: EnumVisibilityFieldUpdateOperationsInput
-  work: WorkUpdateOneWithoutActivityInput
+  work: WorkUpdateOneWithoutActivitiesInput
 }
 
 input ActivityUpdateWithoutThreadInput {
-  cardId: NullableStringFieldUpdateOperationsInput
+  card: NullableStringFieldUpdateOperationsInput
   school: SchoolUpdateOneRequiredWithoutActivityInput
   team: TeamUpdateOneRequiredWithoutActivityInput
   time: DateTimeFieldUpdateOperationsInput
   type: EnumActivityTypeFieldUpdateOperationsInput
   user: UserUpdateOneRequiredWithoutActivityInput
   visibility: EnumVisibilityFieldUpdateOperationsInput
-  work: WorkUpdateOneWithoutActivityInput
+  work: WorkUpdateOneWithoutActivitiesInput
 }
 
 input ActivityUpdateWithoutUserInput {
-  cardId: NullableStringFieldUpdateOperationsInput
+  card: NullableStringFieldUpdateOperationsInput
   school: SchoolUpdateOneRequiredWithoutActivityInput
   team: TeamUpdateOneRequiredWithoutActivityInput
   thread: ThreadUpdateOneWithoutActivityInput
   time: DateTimeFieldUpdateOperationsInput
   type: EnumActivityTypeFieldUpdateOperationsInput
   visibility: EnumVisibilityFieldUpdateOperationsInput
-  work: WorkUpdateOneWithoutActivityInput
+  work: WorkUpdateOneWithoutActivitiesInput
 }
 
 input ActivityUpdateWithoutWorkInput {
-  cardId: NullableStringFieldUpdateOperationsInput
+  card: NullableStringFieldUpdateOperationsInput
   school: SchoolUpdateOneRequiredWithoutActivityInput
   team: TeamUpdateOneRequiredWithoutActivityInput
   thread: ThreadUpdateOneWithoutActivityInput
@@ -349,7 +349,7 @@ input ActivityUpsertWithWhereUniqueWithoutWorkInput {
 
 input ActivityWhereInput {
   AND: [ActivityWhereInput!]
-  cardId: StringNullableFilter
+  card: StringNullableFilter
   id: IntFilter
   NOT: [ActivityWhereInput!]
   OR: [ActivityWhereInput!]
@@ -1733,6 +1733,9 @@ type Card {
   url: String
 }
 
+"""
+A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar.
+"""
 scalar DateTime
 
 input DateTimeFieldUpdateOperationsInput {
@@ -1964,7 +1967,15 @@ type InviteResponse {
   team: Team
 }
 
+"""
+The `JSON` scalar type represents JSON objects as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
+"""
 scalar Json
+
+input JsonNullableFilter {
+  equals: Json
+  not: Json
+}
 
 type Mutation {
   acceptInvite(invite: String!): Team
@@ -1995,6 +2006,7 @@ type Mutation {
     text: String!
     title: String!
   ): Thread
+  postWork(data: WorkCreateInput!): Work!
   removeBallotRun(ballotRunId: String!): Response
   setCards(cards: String!, teamId: String!): Team
   setSchool(school: String!): User
@@ -2300,7 +2312,14 @@ type Query {
     orderBy: [UserOrderByInput!]
     where: UserWhereInput
   ): [User!]!
-  works(card: String, schoolId: String, teamId: String): [Work]
+  works(
+    after: WorkWhereUniqueInput
+    before: WorkWhereUniqueInput
+    first: Int
+    last: Int
+    orderBy: [WorkOrderByInput!]
+    where: WorkWhereInput
+  ): [Work!]!
 }
 
 enum QueryMode {
@@ -2989,6 +3008,14 @@ input SchoolUpdateOneRequiredWithoutTeamsInput {
   upsert: SchoolUpsertWithoutTeamsInput
 }
 
+input SchoolUpdateOneRequiredWithoutWorkInput {
+  connect: SchoolWhereUniqueInput
+  connectOrCreate: SchoolCreateOrConnectWithoutworkInput
+  create: SchoolCreateWithoutWorkInput
+  update: SchoolUpdateWithoutWorkInput
+  upsert: SchoolUpsertWithoutWorkInput
+}
+
 input SchoolUpdateOneWithoutAttachmentInput {
   connect: SchoolWhereUniqueInput
   connectOrCreate: SchoolCreateOrConnectWithoutattachmentInput
@@ -3047,16 +3074,6 @@ input SchoolUpdateOneWithoutVoteInput {
   disconnect: Boolean
   update: SchoolUpdateWithoutVoteInput
   upsert: SchoolUpsertWithoutVoteInput
-}
-
-input SchoolUpdateOneWithoutWorkInput {
-  connect: SchoolWhereUniqueInput
-  connectOrCreate: SchoolCreateOrConnectWithoutworkInput
-  create: SchoolCreateWithoutWorkInput
-  delete: Boolean
-  disconnect: Boolean
-  update: SchoolUpdateWithoutWorkInput
-  upsert: SchoolUpsertWithoutWorkInput
 }
 
 input SchoolUpdateWithoutActivityInput {
@@ -4466,7 +4483,7 @@ input ThreadCreateManyWithoutUserInput {
 
 input ThreadCreateOneWithoutActivityInput {
   connect: ThreadWhereUniqueInput
-  connectOrCreate: ThreadCreateOrConnectWithoutactivityInput
+  connectOrCreate: ThreadCreateOrConnectWithoutActivityInput
   create: ThreadCreateWithoutActivityInput
 }
 
@@ -4482,7 +4499,7 @@ input ThreadCreateOneWithoutReactionsInput {
   create: ThreadCreateWithoutReactionsInput
 }
 
-input ThreadCreateOrConnectWithoutactivityInput {
+input ThreadCreateOrConnectWithoutActivityInput {
   create: ThreadCreateWithoutActivityInput!
   where: ThreadWhereUniqueInput!
 }
@@ -4527,7 +4544,7 @@ input ThreadCreateWithoutActivityInput {
 }
 
 input ThreadCreateWithoutAttachmentsInput {
-  activity: ActivityCreateManyWithoutThreadInput
+  Activity: ActivityCreateManyWithoutThreadInput
   createdAt: DateTime
   id: String
   reactions: ReactionCreateManyWithoutThreadInput
@@ -4541,7 +4558,7 @@ input ThreadCreateWithoutAttachmentsInput {
 }
 
 input ThreadCreateWithoutReactionsInput {
-  activity: ActivityCreateManyWithoutThreadInput
+  Activity: ActivityCreateManyWithoutThreadInput
   attachments: AttachmentCreateManyWithoutThreadInput
   createdAt: DateTime
   id: String
@@ -4555,7 +4572,7 @@ input ThreadCreateWithoutReactionsInput {
 }
 
 input ThreadCreateWithoutSchoolInput {
-  activity: ActivityCreateManyWithoutThreadInput
+  Activity: ActivityCreateManyWithoutThreadInput
   attachments: AttachmentCreateManyWithoutThreadInput
   createdAt: DateTime
   id: String
@@ -4569,7 +4586,7 @@ input ThreadCreateWithoutSchoolInput {
 }
 
 input ThreadCreateWithoutTeamInput {
-  activity: ActivityCreateManyWithoutThreadInput
+  Activity: ActivityCreateManyWithoutThreadInput
   attachments: AttachmentCreateManyWithoutThreadInput
   createdAt: DateTime
   id: String
@@ -4583,7 +4600,7 @@ input ThreadCreateWithoutTeamInput {
 }
 
 input ThreadCreateWithoutUserInput {
-  activity: ActivityCreateManyWithoutThreadInput
+  Activity: ActivityCreateManyWithoutThreadInput
   attachments: AttachmentCreateManyWithoutThreadInput
   createdAt: DateTime
   id: String
@@ -4682,7 +4699,7 @@ input ThreadUpdateManyWithWhereWithoutUserInput {
 
 input ThreadUpdateOneWithoutActivityInput {
   connect: ThreadWhereUniqueInput
-  connectOrCreate: ThreadCreateOrConnectWithoutactivityInput
+  connectOrCreate: ThreadCreateOrConnectWithoutActivityInput
   create: ThreadCreateWithoutActivityInput
   delete: Boolean
   disconnect: Boolean
@@ -4725,7 +4742,7 @@ input ThreadUpdateWithoutActivityInput {
 }
 
 input ThreadUpdateWithoutAttachmentsInput {
-  activity: ActivityUpdateManyWithoutThreadInput
+  Activity: ActivityUpdateManyWithoutThreadInput
   createdAt: DateTimeFieldUpdateOperationsInput
   id: StringFieldUpdateOperationsInput
   reactions: ReactionUpdateManyWithoutThreadInput
@@ -4739,7 +4756,7 @@ input ThreadUpdateWithoutAttachmentsInput {
 }
 
 input ThreadUpdateWithoutReactionsInput {
-  activity: ActivityUpdateManyWithoutThreadInput
+  Activity: ActivityUpdateManyWithoutThreadInput
   attachments: AttachmentUpdateManyWithoutThreadInput
   createdAt: DateTimeFieldUpdateOperationsInput
   id: StringFieldUpdateOperationsInput
@@ -4753,7 +4770,7 @@ input ThreadUpdateWithoutReactionsInput {
 }
 
 input ThreadUpdateWithoutSchoolInput {
-  activity: ActivityUpdateManyWithoutThreadInput
+  Activity: ActivityUpdateManyWithoutThreadInput
   attachments: AttachmentUpdateManyWithoutThreadInput
   createdAt: DateTimeFieldUpdateOperationsInput
   id: StringFieldUpdateOperationsInput
@@ -4767,7 +4784,7 @@ input ThreadUpdateWithoutSchoolInput {
 }
 
 input ThreadUpdateWithoutTeamInput {
-  activity: ActivityUpdateManyWithoutThreadInput
+  Activity: ActivityUpdateManyWithoutThreadInput
   attachments: AttachmentUpdateManyWithoutThreadInput
   createdAt: DateTimeFieldUpdateOperationsInput
   id: StringFieldUpdateOperationsInput
@@ -4781,7 +4798,7 @@ input ThreadUpdateWithoutTeamInput {
 }
 
 input ThreadUpdateWithoutUserInput {
-  activity: ActivityUpdateManyWithoutThreadInput
+  Activity: ActivityUpdateManyWithoutThreadInput
   attachments: AttachmentUpdateManyWithoutThreadInput
   createdAt: DateTimeFieldUpdateOperationsInput
   id: StringFieldUpdateOperationsInput
@@ -4843,7 +4860,7 @@ input ThreadUpsertWithWhereUniqueWithoutUserInput {
 }
 
 input ThreadWhereInput {
-  activity: ActivityListRelationFilter
+  Activity: ActivityListRelationFilter
   AND: [ThreadWhereInput!]
   attachments: AttachmentListRelationFilter
   createdAt: DateTimeFilter
@@ -6498,8 +6515,8 @@ type Work {
     first: Int
     last: Int
   ): [Attachment!]!
-  card: String!
-  data: Json!
+  card: String
+  data: Json
   id: String!
   reactions(
     after: ReactionWhereUniqueInput
@@ -6516,6 +6533,23 @@ type Work {
     first: Int
     last: Int
   ): [User!]!
+}
+
+input WorkCreateInput {
+  activities: ActivityCreateManyWithoutWorkInput
+  attachments: AttachmentCreateManyWithoutWorkInput
+  card: String
+  createdAt: DateTime
+  data: Json
+  id: String
+  reactions: ReactionCreateManyWithoutWorkInput
+  school: SchoolCreateOneWithoutWorkInput!
+  team: TeamCreateOneWithoutWorkInput!
+  text: String
+  title: String
+  updatedAt: DateTime
+  users: UserCreateManyWithoutWorkInput
+  visibility: Visibility
 }
 
 input WorkCreateManyWithoutSchoolInput {
@@ -6536,10 +6570,10 @@ input WorkCreateManyWithoutUsersInput {
   create: [WorkCreateWithoutUsersInput!]
 }
 
-input WorkCreateOneWithoutActivityInput {
+input WorkCreateOneWithoutActivitiesInput {
   connect: WorkWhereUniqueInput
-  connectOrCreate: WorkCreateOrConnectWithoutactivityInput
-  create: WorkCreateWithoutActivityInput
+  connectOrCreate: WorkCreateOrConnectWithoutactivitiesInput
+  create: WorkCreateWithoutActivitiesInput
 }
 
 input WorkCreateOneWithoutAttachmentsInput {
@@ -6554,8 +6588,8 @@ input WorkCreateOneWithoutReactionsInput {
   create: WorkCreateWithoutReactionsInput
 }
 
-input WorkCreateOrConnectWithoutactivityInput {
-  create: WorkCreateWithoutActivityInput!
+input WorkCreateOrConnectWithoutactivitiesInput {
+  create: WorkCreateWithoutActivitiesInput!
   where: WorkWhereUniqueInput!
 }
 
@@ -6584,14 +6618,14 @@ input WorkCreateOrConnectWithoutusersInput {
   where: WorkWhereUniqueInput!
 }
 
-input WorkCreateWithoutActivityInput {
+input WorkCreateWithoutActivitiesInput {
   attachments: AttachmentCreateManyWithoutWorkInput
-  card: String!
+  card: String
   createdAt: DateTime
-  data: Json!
+  data: Json
   id: String
   reactions: ReactionCreateManyWithoutWorkInput
-  school: SchoolCreateOneWithoutWorkInput
+  school: SchoolCreateOneWithoutWorkInput!
   team: TeamCreateOneWithoutWorkInput!
   text: String
   title: String
@@ -6601,13 +6635,13 @@ input WorkCreateWithoutActivityInput {
 }
 
 input WorkCreateWithoutAttachmentsInput {
-  activity: ActivityCreateManyWithoutWorkInput
-  card: String!
+  activities: ActivityCreateManyWithoutWorkInput
+  card: String
   createdAt: DateTime
-  data: Json!
+  data: Json
   id: String
   reactions: ReactionCreateManyWithoutWorkInput
-  school: SchoolCreateOneWithoutWorkInput
+  school: SchoolCreateOneWithoutWorkInput!
   team: TeamCreateOneWithoutWorkInput!
   text: String
   title: String
@@ -6617,13 +6651,13 @@ input WorkCreateWithoutAttachmentsInput {
 }
 
 input WorkCreateWithoutReactionsInput {
-  activity: ActivityCreateManyWithoutWorkInput
+  activities: ActivityCreateManyWithoutWorkInput
   attachments: AttachmentCreateManyWithoutWorkInput
-  card: String!
+  card: String
   createdAt: DateTime
-  data: Json!
+  data: Json
   id: String
-  school: SchoolCreateOneWithoutWorkInput
+  school: SchoolCreateOneWithoutWorkInput!
   team: TeamCreateOneWithoutWorkInput!
   text: String
   title: String
@@ -6633,11 +6667,11 @@ input WorkCreateWithoutReactionsInput {
 }
 
 input WorkCreateWithoutSchoolInput {
-  activity: ActivityCreateManyWithoutWorkInput
+  activities: ActivityCreateManyWithoutWorkInput
   attachments: AttachmentCreateManyWithoutWorkInput
-  card: String!
+  card: String
   createdAt: DateTime
-  data: Json!
+  data: Json
   id: String
   reactions: ReactionCreateManyWithoutWorkInput
   team: TeamCreateOneWithoutWorkInput!
@@ -6649,14 +6683,14 @@ input WorkCreateWithoutSchoolInput {
 }
 
 input WorkCreateWithoutTeamInput {
-  activity: ActivityCreateManyWithoutWorkInput
+  activities: ActivityCreateManyWithoutWorkInput
   attachments: AttachmentCreateManyWithoutWorkInput
-  card: String!
+  card: String
   createdAt: DateTime
-  data: Json!
+  data: Json
   id: String
   reactions: ReactionCreateManyWithoutWorkInput
-  school: SchoolCreateOneWithoutWorkInput
+  school: SchoolCreateOneWithoutWorkInput!
   text: String
   title: String
   updatedAt: DateTime
@@ -6665,14 +6699,14 @@ input WorkCreateWithoutTeamInput {
 }
 
 input WorkCreateWithoutUsersInput {
-  activity: ActivityCreateManyWithoutWorkInput
+  activities: ActivityCreateManyWithoutWorkInput
   attachments: AttachmentCreateManyWithoutWorkInput
-  card: String!
+  card: String
   createdAt: DateTime
-  data: Json!
+  data: Json
   id: String
   reactions: ReactionCreateManyWithoutWorkInput
-  school: SchoolCreateOneWithoutWorkInput
+  school: SchoolCreateOneWithoutWorkInput!
   team: TeamCreateOneWithoutWorkInput!
   text: String
   title: String
@@ -6686,14 +6720,28 @@ input WorkListRelationFilter {
   some: WorkWhereInput
 }
 
+input WorkOrderByInput {
+  card: SortOrder
+  createdAt: SortOrder
+  data: SortOrder
+  id: SortOrder
+  schoolId: SortOrder
+  teamId: SortOrder
+  text: SortOrder
+  title: SortOrder
+  updatedAt: SortOrder
+  visibility: SortOrder
+}
+
 input WorkScalarWhereInput {
   AND: [WorkScalarWhereInput!]
-  card: StringFilter
+  card: StringNullableFilter
   createdAt: DateTimeFilter
+  data: JsonNullableFilter
   id: StringFilter
   NOT: [WorkScalarWhereInput!]
   OR: [WorkScalarWhereInput!]
-  schoolId: StringNullableFilter
+  schoolId: StringFilter
   teamId: StringFilter
   text: StringFilter
   title: StringFilter
@@ -6702,7 +6750,7 @@ input WorkScalarWhereInput {
 }
 
 input WorkUpdateManyMutationInput {
-  card: StringFieldUpdateOperationsInput
+  card: NullableStringFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   data: Json
   id: StringFieldUpdateOperationsInput
@@ -6766,14 +6814,14 @@ input WorkUpdateManyWithWhereWithoutUsersInput {
   where: WorkScalarWhereInput!
 }
 
-input WorkUpdateOneWithoutActivityInput {
+input WorkUpdateOneWithoutActivitiesInput {
   connect: WorkWhereUniqueInput
-  connectOrCreate: WorkCreateOrConnectWithoutactivityInput
-  create: WorkCreateWithoutActivityInput
+  connectOrCreate: WorkCreateOrConnectWithoutactivitiesInput
+  create: WorkCreateWithoutActivitiesInput
   delete: Boolean
   disconnect: Boolean
-  update: WorkUpdateWithoutActivityInput
-  upsert: WorkUpsertWithoutActivityInput
+  update: WorkUpdateWithoutActivitiesInput
+  upsert: WorkUpsertWithoutActivitiesInput
 }
 
 input WorkUpdateOneWithoutAttachmentsInput {
@@ -6796,14 +6844,14 @@ input WorkUpdateOneWithoutReactionsInput {
   upsert: WorkUpsertWithoutReactionsInput
 }
 
-input WorkUpdateWithoutActivityInput {
+input WorkUpdateWithoutActivitiesInput {
   attachments: AttachmentUpdateManyWithoutWorkInput
-  card: StringFieldUpdateOperationsInput
+  card: NullableStringFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   data: Json
   id: StringFieldUpdateOperationsInput
   reactions: ReactionUpdateManyWithoutWorkInput
-  school: SchoolUpdateOneWithoutWorkInput
+  school: SchoolUpdateOneRequiredWithoutWorkInput
   team: TeamUpdateOneRequiredWithoutWorkInput
   text: StringFieldUpdateOperationsInput
   title: StringFieldUpdateOperationsInput
@@ -6813,13 +6861,13 @@ input WorkUpdateWithoutActivityInput {
 }
 
 input WorkUpdateWithoutAttachmentsInput {
-  activity: ActivityUpdateManyWithoutWorkInput
-  card: StringFieldUpdateOperationsInput
+  activities: ActivityUpdateManyWithoutWorkInput
+  card: NullableStringFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   data: Json
   id: StringFieldUpdateOperationsInput
   reactions: ReactionUpdateManyWithoutWorkInput
-  school: SchoolUpdateOneWithoutWorkInput
+  school: SchoolUpdateOneRequiredWithoutWorkInput
   team: TeamUpdateOneRequiredWithoutWorkInput
   text: StringFieldUpdateOperationsInput
   title: StringFieldUpdateOperationsInput
@@ -6829,13 +6877,13 @@ input WorkUpdateWithoutAttachmentsInput {
 }
 
 input WorkUpdateWithoutReactionsInput {
-  activity: ActivityUpdateManyWithoutWorkInput
+  activities: ActivityUpdateManyWithoutWorkInput
   attachments: AttachmentUpdateManyWithoutWorkInput
-  card: StringFieldUpdateOperationsInput
+  card: NullableStringFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   data: Json
   id: StringFieldUpdateOperationsInput
-  school: SchoolUpdateOneWithoutWorkInput
+  school: SchoolUpdateOneRequiredWithoutWorkInput
   team: TeamUpdateOneRequiredWithoutWorkInput
   text: StringFieldUpdateOperationsInput
   title: StringFieldUpdateOperationsInput
@@ -6845,9 +6893,9 @@ input WorkUpdateWithoutReactionsInput {
 }
 
 input WorkUpdateWithoutSchoolInput {
-  activity: ActivityUpdateManyWithoutWorkInput
+  activities: ActivityUpdateManyWithoutWorkInput
   attachments: AttachmentUpdateManyWithoutWorkInput
-  card: StringFieldUpdateOperationsInput
+  card: NullableStringFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   data: Json
   id: StringFieldUpdateOperationsInput
@@ -6861,14 +6909,14 @@ input WorkUpdateWithoutSchoolInput {
 }
 
 input WorkUpdateWithoutTeamInput {
-  activity: ActivityUpdateManyWithoutWorkInput
+  activities: ActivityUpdateManyWithoutWorkInput
   attachments: AttachmentUpdateManyWithoutWorkInput
-  card: StringFieldUpdateOperationsInput
+  card: NullableStringFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   data: Json
   id: StringFieldUpdateOperationsInput
   reactions: ReactionUpdateManyWithoutWorkInput
-  school: SchoolUpdateOneWithoutWorkInput
+  school: SchoolUpdateOneRequiredWithoutWorkInput
   text: StringFieldUpdateOperationsInput
   title: StringFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
@@ -6877,14 +6925,14 @@ input WorkUpdateWithoutTeamInput {
 }
 
 input WorkUpdateWithoutUsersInput {
-  activity: ActivityUpdateManyWithoutWorkInput
+  activities: ActivityUpdateManyWithoutWorkInput
   attachments: AttachmentUpdateManyWithoutWorkInput
-  card: StringFieldUpdateOperationsInput
+  card: NullableStringFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   data: Json
   id: StringFieldUpdateOperationsInput
   reactions: ReactionUpdateManyWithoutWorkInput
-  school: SchoolUpdateOneWithoutWorkInput
+  school: SchoolUpdateOneRequiredWithoutWorkInput
   team: TeamUpdateOneRequiredWithoutWorkInput
   text: StringFieldUpdateOperationsInput
   title: StringFieldUpdateOperationsInput
@@ -6907,9 +6955,9 @@ input WorkUpdateWithWhereUniqueWithoutUsersInput {
   where: WorkWhereUniqueInput!
 }
 
-input WorkUpsertWithoutActivityInput {
-  create: WorkCreateWithoutActivityInput!
-  update: WorkUpdateWithoutActivityInput!
+input WorkUpsertWithoutActivitiesInput {
+  create: WorkCreateWithoutActivitiesInput!
+  update: WorkUpdateWithoutActivitiesInput!
 }
 
 input WorkUpsertWithoutAttachmentsInput {
@@ -6941,17 +6989,18 @@ input WorkUpsertWithWhereUniqueWithoutUsersInput {
 }
 
 input WorkWhereInput {
-  activity: ActivityListRelationFilter
+  activities: ActivityListRelationFilter
   AND: [WorkWhereInput!]
   attachments: AttachmentListRelationFilter
-  card: StringFilter
+  card: StringNullableFilter
   createdAt: DateTimeFilter
+  data: JsonNullableFilter
   id: StringFilter
   NOT: [WorkWhereInput!]
   OR: [WorkWhereInput!]
   reactions: ReactionListRelationFilter
   school: SchoolWhereInput
-  schoolId: StringNullableFilter
+  schoolId: StringFilter
   team: TeamWhereInput
   teamId: StringFilter
   text: StringFilter

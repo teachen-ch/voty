@@ -53,8 +53,8 @@ model User {
 
   createdAt DateTime @default(now()) @map(name: "created_at")
   updatedAt DateTime @default(now()) @map(name: "updated_at")
+  Team      Team?    @relation(fields: [teamId], references: [id])
   @@map(name: "users")
-  Team Team? @relation(fields: [teamId], references: [id])
 }
 
 model VerificationRequest {
@@ -278,10 +278,10 @@ model Thread {
 
   reactions   Reaction[]
   attachments Attachment[]
-  activity    Activity[]
 
-  createdAt DateTime @default(now()) @map(name: "created_at")
-  updatedAt DateTime @default(now()) @map(name: "updated_at")
+  createdAt DateTime   @default(now()) @map(name: "created_at")
+  updatedAt DateTime   @default(now()) @map(name: "updated_at")
+  Activity  Activity[]
   @@map(name: "threads")
 }
 
@@ -289,19 +289,19 @@ model Work {
   id         String     @id @default(cuid())
   title      String     @default("")
   text       String     @default("")
-  data       Json
-  card       String
+  data       Json?
+  card       String?
   visibility Visibility @default(Team)
 
-  team     Team    @relation(fields: [teamId], references: [id])
-  teamId   String  @map(name: "team_id")
-  school   School? @relation(fields: [schoolId], references: [id])
-  schoolId String? @map(name: "school_id")
+  team     Team   @relation(fields: [teamId], references: [id])
+  teamId   String @map(name: "team_id")
+  school   School @relation(fields: [schoolId], references: [id])
+  schoolId String @map(name: "school_id")
 
   users       User[]
   reactions   Reaction[]
   attachments Attachment[]
-  activity    Activity[]
+  activities  Activity[]
 
   createdAt DateTime @default(now()) @map(name: "created_at")
   updatedAt DateTime @default(now()) @map(name: "updated_at")
@@ -344,6 +344,7 @@ model Activity {
   id         Int          @id @default(autoincrement())
   type       ActivityType
   visibility Visibility
+  card       String?      @map(name: "card")
 
   user     User    @relation(fields: [userId], references: [id])
   userId   String  @map(name: "user_id")
@@ -353,7 +354,6 @@ model Activity {
   schoolId String  @map(name: "school_id")
   thread   Thread? @relation(fields: [threadId], references: [id])
   threadId String? @map(name: "thread_id")
-  cardId   String? @map(name: "card_id")
   work     Work?   @relation(fields: [workId], references: [id])
   workId   String? @map(name: "work_id")
 

@@ -161,7 +161,7 @@ const PreviewFile: React.FC<{
   );
 };
 
-const AttachmentFields = gql`
+export const AttachmentFields = gql`
   fragment AttachmentFields on Attachment {
     id
     file

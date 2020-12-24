@@ -24,6 +24,7 @@
     },
     "typescript.tsdk": "/Users/stefan/code/voty/node_modules/typescript/lib",
     "prisma.plugin.nextjs.addTypesOnSave": true,
-    "prisma.plugin.nextjs.hasPrompted": true
+    "prisma.plugin.nextjs.hasPrompted": true,
+    "cSpell.enabled": true
   }
 }
