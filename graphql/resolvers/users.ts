@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken";
 import { PrismaClient, User, Team, Role } from "@prisma/client";
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 import { sendMail } from "../../util/email";
 import { randomBytes, createHash } from "crypto";
 import logger from "../../util/logger";
