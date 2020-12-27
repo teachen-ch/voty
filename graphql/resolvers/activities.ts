@@ -1,5 +1,6 @@
 import { FieldResolver } from "@nexus/schema";
-import { Role } from "@prisma/client";
+import { Activity, Prisma, Role } from "@prisma/client";
+import { Context } from "graphql/context";
 
 export const activities: FieldResolver<"Query", "activities"> = async (
   _root,
@@ -13,15 +14,24 @@ export const activities: FieldResolver<"Query", "activities"> = async (
   });
   return activities;
 };
-export const logActivity: FieldResolver<"Mutation", "logActivity"> = async (
+
+export const postActivity: FieldResolver<"Mutation", "logActivity"> = async (
   _root,
   args,
   ctx
 ) => {
   const data = args.data;
+  // @ts-ignore TODO: not sure what's wrong with the built-in nexus-prisma types here
+  return logActivity(ctx, data);
+};
+
+export async function logActivity(
+  ctx: Context,
+  data: Prisma.ActivityCreateInput
+): Promise<Activity> {
   const user = ctx.user;
-  const teamId = args.data.team.connect?.id;
-  const schoolId = args.data.school.connect?.id;
+  const teamId = data.team.connect?.id;
+  const schoolId = data.school.connect?.id;
 
   // ensure user is logged in and part of team or teacher in same school
   if (!user) throw new Error("Error.NoPermission");
@@ -31,8 +41,7 @@ export const logActivity: FieldResolver<"Mutation", "logActivity"> = async (
     throw new Error("Error.NoPermission");
 
   const activity = await ctx.db.activity.create({
-    // @ts-ignore TODO: not sure what's wrong with the built-in nexus-prisma types here
     data,
   });
   return activity;
-};
+}

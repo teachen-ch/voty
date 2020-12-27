@@ -32,8 +32,8 @@ export const ActivitiesMutations = extendType({
   type: "Mutation",
   definition(t) {
     t.crud.createOneActivity({
-      alias: "logActivity",
-      resolve: resolvers.activities.logActivity,
+      alias: "postActivity",
+      resolve: resolvers.activities.postActivity,
     });
   },
 });
