@@ -17,6 +17,18 @@ declare global {
 }
 
 export interface NexusGenInputs {
+  ActivityCreateInput: {
+    // input type
+    card?: string | null; // String
+    school: NexusGenInputs["SchoolCreateOneWithoutActivityInput"]; // SchoolCreateOneWithoutActivityInput!
+    team: NexusGenInputs["TeamCreateOneWithoutActivityInput"]; // TeamCreateOneWithoutActivityInput!
+    thread?: NexusGenInputs["ThreadCreateOneWithoutActivityInput"] | null; // ThreadCreateOneWithoutActivityInput
+    time?: NexusGenScalars["DateTime"] | null; // DateTime
+    type: NexusGenEnums["ActivityType"]; // ActivityType!
+    user: NexusGenInputs["UserCreateOneWithoutActivityInput"]; // UserCreateOneWithoutActivityInput!
+    visibility: NexusGenEnums["Visibility"]; // Visibility!
+    work?: NexusGenInputs["WorkCreateOneWithoutActivitiesInput"] | null; // WorkCreateOneWithoutActivitiesInput
+  };
   ActivityCreateManyWithoutSchoolInput: {
     // input type
     connect?: NexusGenInputs["ActivityWhereUniqueInput"][] | null; // [ActivityWhereUniqueInput!]
@@ -142,6 +154,19 @@ export interface NexusGenInputs {
     every?: NexusGenInputs["ActivityWhereInput"] | null; // ActivityWhereInput
     none?: NexusGenInputs["ActivityWhereInput"] | null; // ActivityWhereInput
     some?: NexusGenInputs["ActivityWhereInput"] | null; // ActivityWhereInput
+  };
+  ActivityOrderByInput: {
+    // input type
+    card?: NexusGenEnums["SortOrder"] | null; // SortOrder
+    id?: NexusGenEnums["SortOrder"] | null; // SortOrder
+    schoolId?: NexusGenEnums["SortOrder"] | null; // SortOrder
+    teamId?: NexusGenEnums["SortOrder"] | null; // SortOrder
+    threadId?: NexusGenEnums["SortOrder"] | null; // SortOrder
+    time?: NexusGenEnums["SortOrder"] | null; // SortOrder
+    type?: NexusGenEnums["SortOrder"] | null; // SortOrder
+    userId?: NexusGenEnums["SortOrder"] | null; // SortOrder
+    visibility?: NexusGenEnums["SortOrder"] | null; // SortOrder
+    workId?: NexusGenEnums["SortOrder"] | null; // SortOrder
   };
   ActivityScalarWhereInput: {
     // input type
@@ -7442,6 +7467,14 @@ export interface NexusGenScalars {
 }
 
 export interface NexusGenObjects {
+  Activity: {
+    // root type
+    card?: string | null; // String
+    id: number; // Int!
+    time: NexusGenScalars["DateTime"]; // DateTime!
+    type: NexusGenEnums["ActivityType"]; // ActivityType!
+    visibility: NexusGenEnums["Visibility"]; // Visibility!
+  };
   Attachment: {
     // root type
     createdAt: NexusGenScalars["DateTime"]; // DateTime!
@@ -7604,6 +7637,18 @@ export type NexusGenAllTypes = NexusGenRootTypes &
   NexusGenEnums;
 
 export interface NexusGenFieldTypes {
+  Activity: {
+    // field return type
+    card: string | null; // String
+    id: number; // Int!
+    school: NexusGenRootTypes["School"]; // School!
+    team: NexusGenRootTypes["Team"]; // Team!
+    time: NexusGenScalars["DateTime"]; // DateTime!
+    type: NexusGenEnums["ActivityType"]; // ActivityType!
+    user: NexusGenRootTypes["User"]; // User!
+    visibility: NexusGenEnums["Visibility"]; // Visibility!
+    work: NexusGenRootTypes["Work"] | null; // Work
+  };
   Attachment: {
     // field return type
     createdAt: NexusGenScalars["DateTime"]; // DateTime!
@@ -7689,6 +7734,7 @@ export interface NexusGenFieldTypes {
     emailVerification: NexusGenRootTypes["ResponseLogin"] | null; // ResponseLogin
     endBallotRun: NexusGenRootTypes["BallotRun"] | null; // BallotRun
     inviteStudents: NexusGenRootTypes["InviteResponse"] | null; // InviteResponse
+    logActivity: NexusGenRootTypes["Activity"]; // Activity!
     login: NexusGenRootTypes["ResponseLogin"] | null; // ResponseLogin
     postThread: NexusGenRootTypes["Thread"] | null; // Thread
     postWork: NexusGenRootTypes["Work"]; // Work!
@@ -7702,6 +7748,7 @@ export interface NexusGenFieldTypes {
   };
   Query: {
     // field return type
+    activities: NexusGenRootTypes["Activity"][]; // [Activity!]!
     attachment: NexusGenRootTypes["Attachment"] | null; // Attachment
     attachments: NexusGenRootTypes["Attachment"][]; // [Attachment!]!
     ballot: NexusGenRootTypes["Ballot"] | null; // Ballot
@@ -7833,6 +7880,18 @@ export interface NexusGenFieldTypes {
 }
 
 export interface NexusGenFieldTypeNames {
+  Activity: {
+    // field return type name
+    card: "String";
+    id: "Int";
+    school: "School";
+    team: "Team";
+    time: "DateTime";
+    type: "ActivityType";
+    user: "User";
+    visibility: "Visibility";
+    work: "Work";
+  };
   Attachment: {
     // field return type name
     createdAt: "DateTime";
@@ -7918,6 +7977,7 @@ export interface NexusGenFieldTypeNames {
     emailVerification: "ResponseLogin";
     endBallotRun: "BallotRun";
     inviteStudents: "InviteResponse";
+    logActivity: "Activity";
     login: "ResponseLogin";
     postThread: "Thread";
     postWork: "Work";
@@ -7931,6 +7991,7 @@ export interface NexusGenFieldTypeNames {
   };
   Query: {
     // field return type name
+    activities: "Activity";
     attachment: "Attachment";
     attachments: "Attachment";
     ballot: "Ballot";
@@ -8135,6 +8196,10 @@ export interface NexusGenArgTypes {
       emails: string[]; // [String!]!
       team: string; // String!
     };
+    logActivity: {
+      // args
+      data: NexusGenInputs["ActivityCreateInput"]; // ActivityCreateInput!
+    };
     login: {
       // args
       email: string; // String!
@@ -8186,6 +8251,15 @@ export interface NexusGenArgTypes {
     };
   };
   Query: {
+    activities: {
+      // args
+      after?: NexusGenInputs["ActivityWhereUniqueInput"] | null; // ActivityWhereUniqueInput
+      before?: NexusGenInputs["ActivityWhereUniqueInput"] | null; // ActivityWhereUniqueInput
+      first?: number | null; // Int
+      last?: number | null; // Int
+      orderBy?: NexusGenInputs["ActivityOrderByInput"][] | null; // [ActivityOrderByInput!]
+      where?: NexusGenInputs["ActivityWhereInput"] | null; // ActivityWhereInput
+    };
     attachment: {
       // args
       where: NexusGenInputs["AttachmentWhereUniqueInput"]; // AttachmentWhereUniqueInput!

@@ -108,9 +108,11 @@ export const permissions = shield(
       getTeamThreads: isUser,
       swissvotes: allow,
       cards: allow,
-      attachment: isUser, // TODO: we should secure this to team + teacher unless public
-      attachments: isUser, // TODO: we should secure this to team + teacher
-      works: isUser, // TODO: we should secure this to team + teacher
+      attachment: isUser, // TODO: #80 we should secure this to team + teacher unless public
+      attachments: isUser, // TODO: #80 we should secure this to team + teacher
+      works: isUser, // TODO: #80 we should secure this to team + teacher
+      activities: isUser, // TODO: #80 we should secure this to team + teacher
+      hasNewActivities: isUser, // TODO: #80 we should secure this to team + teacher
     },
     Mutation: {
       login: allow,
@@ -138,6 +140,7 @@ export const permissions = shield(
       postThread: isUser,
       setCards: isTeacher,
       postWork: isUser,
+      logActivity: isUser,
     },
     User: {
       id: isUser,
@@ -190,6 +193,7 @@ export const permissions = shield(
     Swissvote: allow,
     Card: allow,
     Work: allow,
+    Activity: allow,
   },
   {
     allowExternalErrors: true,
