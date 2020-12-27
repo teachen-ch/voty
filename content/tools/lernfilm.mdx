@@ -1,0 +1,45 @@
+import { Info } from "components/Learning";
+import { Lernfilm } from "components/Passion";
+
+export const meta = {
+  id: "lernfilm",
+  title: "Lernfilm-Festival",
+  type: "tool",
+  age: "Zyklus-2, Sek-1, Gym, Berufsschule",
+  description: "Erstelle einen Lernfilm zum Thema Demokratie?",
+  duration: "2-4 Lektionen",
+  keywords: "Demokratie, Einführung, Video, Gruppenarbeit",
+  discussion: false,
+};
+
+Das [Lernfilm-Festival](http://lernfilm-festival.ch) findet einmal pro Jahr statt und ist ein
+Wettbewerb für 3-minütige LernFilme, welche kurz und knackig ein Thema erklären. Mach mit mit
+einem Beitrag zum Thema Demokratie!
+![Lernfilm-Festival](/content/lernfilmfestival.png)
+
+- Wähl Dir ein Thema aus dem Bereich der Demokratie aus
+- Erstelle einen 3-minütigen LernFilm zu diesem Thema
+- [Reiche den Film](https://www.lernfilm-festival.ch/film-einreichen/) ein (Einsendeschluss: 4. April 2020)
+
+### Mögliche Themen für Deinen Lernfilm
+
+- Wie funktioniert die Demokratie in der Schweiz?
+- Wie funktioniert die Demokratie im Land Deiner Eltern?
+- Wer macht die Gesetzte in der Schweiz?
+- Was ist eine Volksinitiative?
+- …
+
+<Info>
+  Hier findest Du Tipps & Tricks darüber, wie Du einen eigenen LernFilm
+  erstellst: 👉{" "}
+  <a
+    href="https://www.lernfilm-festival.ch/unterrichtsmaterialien/"
+    target="_blank"
+  >
+    lernfilm-festival.ch/unterrichtsmaterialien/
+  </a>
+</Info>
+
+<UploadArea prompt="LernFilm hochladen" card={meta.id} />
+
+<Uploaded card={meta.id} />

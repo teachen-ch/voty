@@ -13,5 +13,6 @@ export * as swissvotes from "content/tools/swissvotes.mdx";
 export * as plakate from "content/tools/plakate.mdx";
 export * as plakat_gestalten from "content/tools/plakat_gestalten.mdx";
 export * as passion from "content/tools/passion.mdx";
+export * as lernfilm from "content/tools/lernfilm.mdx";
 
 export * as wortsuche from "content/games/wortsuche.mdx";
