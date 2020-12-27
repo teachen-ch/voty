@@ -17,8 +17,10 @@ export default function BallotPage(): ReactElement {
   const [success, setSuccess] = useState(false);
   const router = useRouter();
   const user = useUser();
-  const teamId = String(router.query.team);
-  const ballotQuery = useBallotQuery({ variables: { where: { id: teamId } } });
+  const ballotId = String(router.query.ballot);
+  const ballotQuery = useBallotQuery({
+    variables: { where: { id: ballotId } },
+  });
 
   if (ballotQuery.loading)
     return <AppPage heading="Abstimmungsseite"></AppPage>;

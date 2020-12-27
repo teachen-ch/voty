@@ -10,7 +10,7 @@ describe("Test Admin Area", () => {
 
     // visit users page
     cy.contains("Lehrpersonen").click();
-    cy.contains("Teacher-1");
+    cy.contains("T. Teacher");
     cy.go("back");
 
     // visit teams page
