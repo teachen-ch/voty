@@ -27,7 +27,10 @@ type ResponseLogin = {
 
 export const shortname: FieldResolver<"User", "shortname"> = (_root) => {
   if (!_root.lastname) return String(_root.name);
-  return `${_root.name} ${upperFirst(_root.lastname).substr(0, 1)}.`;
+  if (_root.role === Role.Student)
+    return `${_root.name} ${upperFirst(_root.lastname).substr(0, 1)}.`;
+  else
+    return `${upperFirst(String(_root.name)).substr(0, 1)}. ${_root.lastname}`;
 };
 
 export const login: FieldResolver<"Mutation", "login"> = async (
