@@ -33,6 +33,7 @@ const messages: Translations = {
     NoEmail: "Keine Email-Adresse angegeben",
     NoPassword: "Kein Passwort angegeben",
     NoPermission: "Berechtigung fehlt für diese Aktion",
+    NoTeamSchool: "Es wurde keine Klasse / Schulhaus angegeben",
     NoToken: "Deine Anmeldung hat nicht geklappt",
     NotFound: "Wir konnten dieses Element leider nicht finden",
     OnlyUpdateSelf: "Du darfst nur Dein eigenes Profil bearbeiten",

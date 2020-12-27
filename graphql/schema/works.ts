@@ -1,12 +1,5 @@
 import resolvers from "../resolvers";
-import {
-  extendType,
-  objectType,
-  stringArg,
-  arg,
-  list,
-  nonNull,
-} from "@nexus/schema";
+import { extendType, objectType } from "@nexus/schema";
 
 export const Work = objectType({
   name: "Work",
@@ -30,20 +23,8 @@ export const WorksQueries = extendType({
       ordering: true,
       filtering: true,
       alias: "works",
-      // resolve: resolvers.works.getWorks,
+      resolve: resolvers.works.getWorks,
     });
-    /* t.list.field("works", {
-      type: "Work",
-      args: {
-        card: stringArg(),
-        userId: stringArg(),
-        teamId: stringArg(),
-        schoolId: stringArg(),
-        visibility: arg({ type: "Visibility" }),
-      },
-      resolve: (_root, args, ctx, info) =>
-        resolvers.works.getWorks(_root, args, ctx, info),
-    }); */
   },
 });
 
@@ -52,24 +33,7 @@ export const WorksMutations = extendType({
   definition(t) {
     t.crud.createOneWork({
       alias: "postWork",
-      // resolve: resolvers.works.postWork,
-    });
-    /* t.field("postWork", {
-      type: "Work",
-      args: {
-        data: {
-          card: stringArg(),
-          title: stringArg(),
-          text: stringArg(),
-          attachments: list(
-            nonNull(arg({ type: "AttachmentCreateOrConnectWithoutworkInput" }))
-          ),
-          userIds: list(nonNull(stringArg())),
-          teamId: nonNull(stringArg()),
-          data: arg({ type: "Json" }),
-        },
-      },
       resolve: resolvers.works.postWork,
-    }); */
+    });
   },
 });

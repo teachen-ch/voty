@@ -114,7 +114,9 @@ export const deleteUser: DocumentNode;
 declare module '*/Works.tsx' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
-  export const works: DocumentNode;
+  export const WorkFields: DocumentNode;
+export const works: DocumentNode;
+export const postWork: DocumentNode;
 
   export default defaultDocument;
 }

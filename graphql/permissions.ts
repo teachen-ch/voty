@@ -137,6 +137,7 @@ export const permissions = shield(
       deleteUser: or(isAdmin, isTeacher),
       postThread: isUser,
       setCards: isTeacher,
+      postWork: isUser,
     },
     User: {
       id: isUser,

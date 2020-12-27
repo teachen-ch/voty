@@ -7794,6 +7794,18 @@ export type DeleteUserMutation = (
   )> }
 );
 
+export type WorkFieldsFragment = (
+  { __typename?: 'Work' }
+  & Pick<Work, 'id' | 'card' | 'title' | 'text' | 'data'>
+  & { users: Array<(
+    { __typename?: 'User' }
+    & Pick<User, 'id' | 'name' | 'shortname'>
+  )>, attachments: Array<(
+    { __typename?: 'Attachment' }
+    & AttachmentFieldsFragment
+  )> }
+);
+
 export type WorksQueryVariables = Exact<{
   where?: Maybe<WorkWhereInput>;
 }>;
@@ -7803,15 +7815,21 @@ export type WorksQuery = (
   { __typename?: 'Query' }
   & { works: Array<(
     { __typename?: 'Work' }
-    & Pick<Work, 'id' | 'card' | 'title' | 'text' | 'data'>
-    & { users: Array<(
-      { __typename?: 'User' }
-      & Pick<User, 'id' | 'name' | 'shortname'>
-    )>, attachments: Array<(
-      { __typename?: 'Attachment' }
-      & AttachmentFieldsFragment
-    )> }
+    & WorkFieldsFragment
   )> }
+);
+
+export type PostWorkMutationVariables = Exact<{
+  data: WorkCreateInput;
+}>;
+
+
+export type PostWorkMutation = (
+  { __typename?: 'Mutation' }
+  & { postWork: (
+    { __typename?: 'Work' }
+    & WorkFieldsFragment
+  ) }
 );
 
 export type TeachersQueryVariables = Exact<{
@@ -8107,6 +8125,23 @@ export const AttachmentFieldsFragmentDoc = gql`
   }
 }
     `;
+export const WorkFieldsFragmentDoc = gql`
+    fragment WorkFields on Work {
+  id
+  card
+  title
+  text
+  data
+  users {
+    id
+    name
+    shortname
+  }
+  attachments {
+    ...AttachmentFields
+  }
+}
+    ${AttachmentFieldsFragmentDoc}`;
 export const BallotsDocument = gql`
     query ballots($where: BallotWhereInput) {
   ballots(where: $where) {
@@ -9193,22 +9228,10 @@ export type DeleteUserMutationOptions = Apollo.BaseMutationOptions<DeleteUserMut
 export const WorksDocument = gql`
     query works($where: WorkWhereInput) {
   works(where: $where) {
-    id
-    card
-    title
-    text
-    data
-    users {
-      id
-      name
-      shortname
-    }
-    attachments {
-      ...AttachmentFields
-    }
+    ...WorkFields
   }
 }
-    ${AttachmentFieldsFragmentDoc}`;
+    ${WorkFieldsFragmentDoc}`;
 
 /**
  * __useWorksQuery__
@@ -9235,6 +9258,38 @@ export function useWorksLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<Work
 export type WorksQueryHookResult = ReturnType<typeof useWorksQuery>;
 export type WorksLazyQueryHookResult = ReturnType<typeof useWorksLazyQuery>;
 export type WorksQueryResult = Apollo.QueryResult<WorksQuery, WorksQueryVariables>;
+export const PostWorkDocument = gql`
+    mutation postWork($data: WorkCreateInput!) {
+  postWork(data: $data) {
+    ...WorkFields
+  }
+}
+    ${WorkFieldsFragmentDoc}`;
+export type PostWorkMutationFn = Apollo.MutationFunction<PostWorkMutation, PostWorkMutationVariables>;
+
+/**
+ * __usePostWorkMutation__
+ *
+ * To run a mutation, you first call `usePostWorkMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `usePostWorkMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [postWorkMutation, { data, loading, error }] = usePostWorkMutation({
+ *   variables: {
+ *      data: // value for 'data'
+ *   },
+ * });
+ */
+export function usePostWorkMutation(baseOptions?: Apollo.MutationHookOptions<PostWorkMutation, PostWorkMutationVariables>) {
+        return Apollo.useMutation<PostWorkMutation, PostWorkMutationVariables>(PostWorkDocument, baseOptions);
+      }
+export type PostWorkMutationHookResult = ReturnType<typeof usePostWorkMutation>;
+export type PostWorkMutationResult = Apollo.MutationResult<PostWorkMutation>;
+export type PostWorkMutationOptions = Apollo.BaseMutationOptions<PostWorkMutation, PostWorkMutationVariables>;
 export const TeachersDocument = gql`
     query teachers($where: UserWhereInput) {
   users(where: $where) {
