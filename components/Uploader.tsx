@@ -19,8 +19,8 @@ export const UploadArea: React.FC<{
   width: string;
   prompt: string;
   card?: string;
-  thread?: string;
-}> = ({ width, prompt, card, thread }) => {
+  discussion?: string;
+}> = ({ width, prompt, card, discussion }) => {
   const [drag, setDrag] = useState(false);
   const [uploading, setUploading] = useState(false);
   const [files, setFiles] = useState<Record<string, File>>();
@@ -31,7 +31,7 @@ export const UploadArea: React.FC<{
   const team = String(router.query.team);
   const fields: Record<string, string> = { team };
   if (card) fields.card = card;
-  if (thread) fields.thread = thread;
+  if (discussion) fields.discussion = discussion;
 
   async function onChange(evt: React.ChangeEvent<HTMLInputElement>) {
     evt.preventDefault();

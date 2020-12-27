@@ -31,7 +31,8 @@ export default async (
     const { fields, files } = await formParse(req);
     if (typeof fields.card === "object") throw new Error("cannot be array");
     if (typeof fields.team === "object") throw new Error("cannot be array");
-    if (typeof fields.thread === "object") throw new Error("cannot be array");
+    if (typeof fields.discussion === "object")
+      throw new Error("cannot be array");
 
     const attachments: Record<string, File> = {};
     for (const fieldname in files) {
@@ -43,8 +44,8 @@ export default async (
           card: fields.card,
           title: file.name,
           type: file.type,
-          thread: fields.thread
-            ? { connect: { id: fields.thread } }
+          discussion: fields.discussion
+            ? { connect: { id: fields.discussion } }
             : undefined,
           team: { connect: { id: user.teamId || fields.team } },
           user: { connect: { id: user.id } },

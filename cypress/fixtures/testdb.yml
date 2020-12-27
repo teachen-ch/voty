@@ -9,7 +9,7 @@ delete:
   - ballot
   - verificationRequest
   - reaction
-  - thread
+  - discussion
   - team
   - user
   - domain

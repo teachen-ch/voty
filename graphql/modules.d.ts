@@ -42,9 +42,9 @@ export const me: DocumentNode;
 declare module '*/Discussion.tsx' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
-  export const ThreadFields: DocumentNode;
-export const getTeamThreads: DocumentNode;
-export const postThread: DocumentNode;
+  export const DiscussionFields: DocumentNode;
+export const getTeamDiscussions: DocumentNode;
+export const postDiscussion: DocumentNode;
 
   export default defaultDocument;
 }

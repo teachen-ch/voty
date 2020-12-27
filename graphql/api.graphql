@@ -15,14 +15,20 @@ type Activity {
 
 input ActivityCreateInput {
   card: String
+  discussion: DiscussionCreateOneWithoutActivityInput
   school: SchoolCreateOneWithoutActivityInput!
   team: TeamCreateOneWithoutActivityInput!
-  thread: ThreadCreateOneWithoutActivityInput
   time: DateTime
   type: ActivityType!
   user: UserCreateOneWithoutActivityInput!
   visibility: Visibility!
   work: WorkCreateOneWithoutActivitiesInput
+}
+
+input ActivityCreateManyWithoutDiscussionInput {
+  connect: [ActivityWhereUniqueInput!]
+  connectOrCreate: [ActivityCreateOrConnectWithoutdiscussionInput!]
+  create: [ActivityCreateWithoutDiscussionInput!]
 }
 
 input ActivityCreateManyWithoutSchoolInput {
@@ -37,12 +43,6 @@ input ActivityCreateManyWithoutTeamInput {
   create: [ActivityCreateWithoutTeamInput!]
 }
 
-input ActivityCreateManyWithoutThreadInput {
-  connect: [ActivityWhereUniqueInput!]
-  connectOrCreate: [ActivityCreateOrConnectWithoutthreadInput!]
-  create: [ActivityCreateWithoutThreadInput!]
-}
-
 input ActivityCreateManyWithoutUserInput {
   connect: [ActivityWhereUniqueInput!]
   connectOrCreate: [ActivityCreateOrConnectWithoutuserInput!]
@@ -55,6 +55,11 @@ input ActivityCreateManyWithoutWorkInput {
   create: [ActivityCreateWithoutWorkInput!]
 }
 
+input ActivityCreateOrConnectWithoutdiscussionInput {
+  create: ActivityCreateWithoutDiscussionInput!
+  where: ActivityWhereUniqueInput!
+}
+
 input ActivityCreateOrConnectWithoutschoolInput {
   create: ActivityCreateWithoutSchoolInput!
   where: ActivityWhereUniqueInput!
@@ -62,11 +67,6 @@ input ActivityCreateOrConnectWithoutschoolInput {
 
 input ActivityCreateOrConnectWithoutteamInput {
   create: ActivityCreateWithoutTeamInput!
-  where: ActivityWhereUniqueInput!
-}
-
-input ActivityCreateOrConnectWithoutthreadInput {
-  create: ActivityCreateWithoutThreadInput!
   where: ActivityWhereUniqueInput!
 }
 
@@ -80,10 +80,21 @@ input ActivityCreateOrConnectWithoutworkInput {
   where: ActivityWhereUniqueInput!
 }
 
+input ActivityCreateWithoutDiscussionInput {
+  card: String
+  school: SchoolCreateOneWithoutActivityInput!
+  team: TeamCreateOneWithoutActivityInput!
+  time: DateTime
+  type: ActivityType!
+  user: UserCreateOneWithoutActivityInput!
+  visibility: Visibility!
+  work: WorkCreateOneWithoutActivitiesInput
+}
+
 input ActivityCreateWithoutSchoolInput {
   card: String
+  discussion: DiscussionCreateOneWithoutActivityInput
   team: TeamCreateOneWithoutActivityInput!
-  thread: ThreadCreateOneWithoutActivityInput
   time: DateTime
   type: ActivityType!
   user: UserCreateOneWithoutActivityInput!
@@ -93,19 +104,8 @@ input ActivityCreateWithoutSchoolInput {
 
 input ActivityCreateWithoutTeamInput {
   card: String
+  discussion: DiscussionCreateOneWithoutActivityInput
   school: SchoolCreateOneWithoutActivityInput!
-  thread: ThreadCreateOneWithoutActivityInput
-  time: DateTime
-  type: ActivityType!
-  user: UserCreateOneWithoutActivityInput!
-  visibility: Visibility!
-  work: WorkCreateOneWithoutActivitiesInput
-}
-
-input ActivityCreateWithoutThreadInput {
-  card: String
-  school: SchoolCreateOneWithoutActivityInput!
-  team: TeamCreateOneWithoutActivityInput!
   time: DateTime
   type: ActivityType!
   user: UserCreateOneWithoutActivityInput!
@@ -115,9 +115,9 @@ input ActivityCreateWithoutThreadInput {
 
 input ActivityCreateWithoutUserInput {
   card: String
+  discussion: DiscussionCreateOneWithoutActivityInput
   school: SchoolCreateOneWithoutActivityInput!
   team: TeamCreateOneWithoutActivityInput!
-  thread: ThreadCreateOneWithoutActivityInput
   time: DateTime
   type: ActivityType!
   visibility: Visibility!
@@ -126,9 +126,9 @@ input ActivityCreateWithoutUserInput {
 
 input ActivityCreateWithoutWorkInput {
   card: String
+  discussion: DiscussionCreateOneWithoutActivityInput
   school: SchoolCreateOneWithoutActivityInput!
   team: TeamCreateOneWithoutActivityInput!
-  thread: ThreadCreateOneWithoutActivityInput
   time: DateTime
   type: ActivityType!
   user: UserCreateOneWithoutActivityInput!
@@ -143,10 +143,10 @@ input ActivityListRelationFilter {
 
 input ActivityOrderByInput {
   card: SortOrder
+  discussionId: SortOrder
   id: SortOrder
   schoolId: SortOrder
   teamId: SortOrder
-  threadId: SortOrder
   time: SortOrder
   type: SortOrder
   userId: SortOrder
@@ -157,12 +157,12 @@ input ActivityOrderByInput {
 input ActivityScalarWhereInput {
   AND: [ActivityScalarWhereInput!]
   card: StringNullableFilter
+  discussionId: StringNullableFilter
   id: IntFilter
   NOT: [ActivityScalarWhereInput!]
   OR: [ActivityScalarWhereInput!]
   schoolId: StringFilter
   teamId: StringFilter
-  threadId: StringNullableFilter
   time: DateTimeFilter
   type: EnumActivityTypeFilter
   userId: StringFilter
@@ -182,6 +182,19 @@ input ActivityUpdateManyMutationInput {
   time: DateTimeFieldUpdateOperationsInput
   type: EnumActivityTypeFieldUpdateOperationsInput
   visibility: EnumVisibilityFieldUpdateOperationsInput
+}
+
+input ActivityUpdateManyWithoutDiscussionInput {
+  connect: [ActivityWhereUniqueInput!]
+  connectOrCreate: [ActivityCreateOrConnectWithoutdiscussionInput!]
+  create: [ActivityCreateWithoutDiscussionInput!]
+  delete: [ActivityWhereUniqueInput!]
+  deleteMany: [ActivityScalarWhereInput!]
+  disconnect: [ActivityWhereUniqueInput!]
+  set: [ActivityWhereUniqueInput!]
+  update: [ActivityUpdateWithWhereUniqueWithoutDiscussionInput!]
+  updateMany: [ActivityUpdateManyWithWhereWithoutDiscussionInput!]
+  upsert: [ActivityUpsertWithWhereUniqueWithoutDiscussionInput!]
 }
 
 input ActivityUpdateManyWithoutSchoolInput {
@@ -210,19 +223,6 @@ input ActivityUpdateManyWithoutTeamInput {
   upsert: [ActivityUpsertWithWhereUniqueWithoutTeamInput!]
 }
 
-input ActivityUpdateManyWithoutThreadInput {
-  connect: [ActivityWhereUniqueInput!]
-  connectOrCreate: [ActivityCreateOrConnectWithoutthreadInput!]
-  create: [ActivityCreateWithoutThreadInput!]
-  delete: [ActivityWhereUniqueInput!]
-  deleteMany: [ActivityScalarWhereInput!]
-  disconnect: [ActivityWhereUniqueInput!]
-  set: [ActivityWhereUniqueInput!]
-  update: [ActivityUpdateWithWhereUniqueWithoutThreadInput!]
-  updateMany: [ActivityUpdateManyWithWhereWithoutThreadInput!]
-  upsert: [ActivityUpsertWithWhereUniqueWithoutThreadInput!]
-}
-
 input ActivityUpdateManyWithoutUserInput {
   connect: [ActivityWhereUniqueInput!]
   connectOrCreate: [ActivityCreateOrConnectWithoutuserInput!]
@@ -249,17 +249,17 @@ input ActivityUpdateManyWithoutWorkInput {
   upsert: [ActivityUpsertWithWhereUniqueWithoutWorkInput!]
 }
 
+input ActivityUpdateManyWithWhereWithoutDiscussionInput {
+  data: ActivityUpdateManyMutationInput!
+  where: ActivityScalarWhereInput!
+}
+
 input ActivityUpdateManyWithWhereWithoutSchoolInput {
   data: ActivityUpdateManyMutationInput!
   where: ActivityScalarWhereInput!
 }
 
 input ActivityUpdateManyWithWhereWithoutTeamInput {
-  data: ActivityUpdateManyMutationInput!
-  where: ActivityScalarWhereInput!
-}
-
-input ActivityUpdateManyWithWhereWithoutThreadInput {
   data: ActivityUpdateManyMutationInput!
   where: ActivityScalarWhereInput!
 }
@@ -274,10 +274,21 @@ input ActivityUpdateManyWithWhereWithoutWorkInput {
   where: ActivityScalarWhereInput!
 }
 
+input ActivityUpdateWithoutDiscussionInput {
+  card: NullableStringFieldUpdateOperationsInput
+  school: SchoolUpdateOneRequiredWithoutActivityInput
+  team: TeamUpdateOneRequiredWithoutActivityInput
+  time: DateTimeFieldUpdateOperationsInput
+  type: EnumActivityTypeFieldUpdateOperationsInput
+  user: UserUpdateOneRequiredWithoutActivityInput
+  visibility: EnumVisibilityFieldUpdateOperationsInput
+  work: WorkUpdateOneWithoutActivitiesInput
+}
+
 input ActivityUpdateWithoutSchoolInput {
   card: NullableStringFieldUpdateOperationsInput
+  discussion: DiscussionUpdateOneWithoutActivityInput
   team: TeamUpdateOneRequiredWithoutActivityInput
-  thread: ThreadUpdateOneWithoutActivityInput
   time: DateTimeFieldUpdateOperationsInput
   type: EnumActivityTypeFieldUpdateOperationsInput
   user: UserUpdateOneRequiredWithoutActivityInput
@@ -287,19 +298,8 @@ input ActivityUpdateWithoutSchoolInput {
 
 input ActivityUpdateWithoutTeamInput {
   card: NullableStringFieldUpdateOperationsInput
+  discussion: DiscussionUpdateOneWithoutActivityInput
   school: SchoolUpdateOneRequiredWithoutActivityInput
-  thread: ThreadUpdateOneWithoutActivityInput
-  time: DateTimeFieldUpdateOperationsInput
-  type: EnumActivityTypeFieldUpdateOperationsInput
-  user: UserUpdateOneRequiredWithoutActivityInput
-  visibility: EnumVisibilityFieldUpdateOperationsInput
-  work: WorkUpdateOneWithoutActivitiesInput
-}
-
-input ActivityUpdateWithoutThreadInput {
-  card: NullableStringFieldUpdateOperationsInput
-  school: SchoolUpdateOneRequiredWithoutActivityInput
-  team: TeamUpdateOneRequiredWithoutActivityInput
   time: DateTimeFieldUpdateOperationsInput
   type: EnumActivityTypeFieldUpdateOperationsInput
   user: UserUpdateOneRequiredWithoutActivityInput
@@ -309,9 +309,9 @@ input ActivityUpdateWithoutThreadInput {
 
 input ActivityUpdateWithoutUserInput {
   card: NullableStringFieldUpdateOperationsInput
+  discussion: DiscussionUpdateOneWithoutActivityInput
   school: SchoolUpdateOneRequiredWithoutActivityInput
   team: TeamUpdateOneRequiredWithoutActivityInput
-  thread: ThreadUpdateOneWithoutActivityInput
   time: DateTimeFieldUpdateOperationsInput
   type: EnumActivityTypeFieldUpdateOperationsInput
   visibility: EnumVisibilityFieldUpdateOperationsInput
@@ -320,13 +320,18 @@ input ActivityUpdateWithoutUserInput {
 
 input ActivityUpdateWithoutWorkInput {
   card: NullableStringFieldUpdateOperationsInput
+  discussion: DiscussionUpdateOneWithoutActivityInput
   school: SchoolUpdateOneRequiredWithoutActivityInput
   team: TeamUpdateOneRequiredWithoutActivityInput
-  thread: ThreadUpdateOneWithoutActivityInput
   time: DateTimeFieldUpdateOperationsInput
   type: EnumActivityTypeFieldUpdateOperationsInput
   user: UserUpdateOneRequiredWithoutActivityInput
   visibility: EnumVisibilityFieldUpdateOperationsInput
+}
+
+input ActivityUpdateWithWhereUniqueWithoutDiscussionInput {
+  data: ActivityUpdateWithoutDiscussionInput!
+  where: ActivityWhereUniqueInput!
 }
 
 input ActivityUpdateWithWhereUniqueWithoutSchoolInput {
@@ -336,11 +341,6 @@ input ActivityUpdateWithWhereUniqueWithoutSchoolInput {
 
 input ActivityUpdateWithWhereUniqueWithoutTeamInput {
   data: ActivityUpdateWithoutTeamInput!
-  where: ActivityWhereUniqueInput!
-}
-
-input ActivityUpdateWithWhereUniqueWithoutThreadInput {
-  data: ActivityUpdateWithoutThreadInput!
   where: ActivityWhereUniqueInput!
 }
 
@@ -354,6 +354,12 @@ input ActivityUpdateWithWhereUniqueWithoutWorkInput {
   where: ActivityWhereUniqueInput!
 }
 
+input ActivityUpsertWithWhereUniqueWithoutDiscussionInput {
+  create: ActivityCreateWithoutDiscussionInput!
+  update: ActivityUpdateWithoutDiscussionInput!
+  where: ActivityWhereUniqueInput!
+}
+
 input ActivityUpsertWithWhereUniqueWithoutSchoolInput {
   create: ActivityCreateWithoutSchoolInput!
   update: ActivityUpdateWithoutSchoolInput!
@@ -363,12 +369,6 @@ input ActivityUpsertWithWhereUniqueWithoutSchoolInput {
 input ActivityUpsertWithWhereUniqueWithoutTeamInput {
   create: ActivityCreateWithoutTeamInput!
   update: ActivityUpdateWithoutTeamInput!
-  where: ActivityWhereUniqueInput!
-}
-
-input ActivityUpsertWithWhereUniqueWithoutThreadInput {
-  create: ActivityCreateWithoutThreadInput!
-  update: ActivityUpdateWithoutThreadInput!
   where: ActivityWhereUniqueInput!
 }
 
@@ -387,6 +387,8 @@ input ActivityUpsertWithWhereUniqueWithoutWorkInput {
 input ActivityWhereInput {
   AND: [ActivityWhereInput!]
   card: StringNullableFilter
+  discussion: DiscussionWhereInput
+  discussionId: StringNullableFilter
   id: IntFilter
   NOT: [ActivityWhereInput!]
   OR: [ActivityWhereInput!]
@@ -394,8 +396,6 @@ input ActivityWhereInput {
   schoolId: StringFilter
   team: TeamWhereInput
   teamId: StringFilter
-  thread: ThreadWhereInput
-  threadId: StringNullableFilter
   time: DateTimeFilter
   type: EnumActivityTypeFilter
   user: UserWhereInput
@@ -425,6 +425,12 @@ input AttachmentCreateManyWithoutBallotInput {
   create: [AttachmentCreateWithoutBallotInput!]
 }
 
+input AttachmentCreateManyWithoutDiscussionInput {
+  connect: [AttachmentWhereUniqueInput!]
+  connectOrCreate: [AttachmentCreateOrConnectWithoutdiscussionInput!]
+  create: [AttachmentCreateWithoutDiscussionInput!]
+}
+
 input AttachmentCreateManyWithoutSchoolInput {
   connect: [AttachmentWhereUniqueInput!]
   connectOrCreate: [AttachmentCreateOrConnectWithoutschoolInput!]
@@ -435,12 +441,6 @@ input AttachmentCreateManyWithoutTeamInput {
   connect: [AttachmentWhereUniqueInput!]
   connectOrCreate: [AttachmentCreateOrConnectWithoutteamInput!]
   create: [AttachmentCreateWithoutTeamInput!]
-}
-
-input AttachmentCreateManyWithoutThreadInput {
-  connect: [AttachmentWhereUniqueInput!]
-  connectOrCreate: [AttachmentCreateOrConnectWithoutthreadInput!]
-  create: [AttachmentCreateWithoutThreadInput!]
 }
 
 input AttachmentCreateManyWithoutUserInput {
@@ -460,6 +460,11 @@ input AttachmentCreateOrConnectWithoutballotInput {
   where: AttachmentWhereUniqueInput!
 }
 
+input AttachmentCreateOrConnectWithoutdiscussionInput {
+  create: AttachmentCreateWithoutDiscussionInput!
+  where: AttachmentWhereUniqueInput!
+}
+
 input AttachmentCreateOrConnectWithoutschoolInput {
   create: AttachmentCreateWithoutSchoolInput!
   where: AttachmentWhereUniqueInput!
@@ -467,11 +472,6 @@ input AttachmentCreateOrConnectWithoutschoolInput {
 
 input AttachmentCreateOrConnectWithoutteamInput {
   create: AttachmentCreateWithoutTeamInput!
-  where: AttachmentWhereUniqueInput!
-}
-
-input AttachmentCreateOrConnectWithoutthreadInput {
-  create: AttachmentCreateWithoutThreadInput!
   where: AttachmentWhereUniqueInput!
 }
 
@@ -488,11 +488,26 @@ input AttachmentCreateOrConnectWithoutworkInput {
 input AttachmentCreateWithoutBallotInput {
   card: String
   createdAt: DateTime
+  discussion: DiscussionCreateOneWithoutAttachmentsInput
   file: String!
   id: String
   school: SchoolCreateOneWithoutAttachmentInput
   team: TeamCreateOneWithoutAttachmentInput!
-  thread: ThreadCreateOneWithoutAttachmentsInput
+  title: String
+  type: String
+  updatedAt: DateTime
+  user: UserCreateOneWithoutAttachmentsInput!
+  work: WorkCreateOneWithoutAttachmentsInput
+}
+
+input AttachmentCreateWithoutDiscussionInput {
+  ballot: BallotCreateOneWithoutAttachmentsInput
+  card: String
+  createdAt: DateTime
+  file: String!
+  id: String
+  school: SchoolCreateOneWithoutAttachmentInput
+  team: TeamCreateOneWithoutAttachmentInput!
   title: String
   type: String
   updatedAt: DateTime
@@ -504,10 +519,10 @@ input AttachmentCreateWithoutSchoolInput {
   ballot: BallotCreateOneWithoutAttachmentsInput
   card: String
   createdAt: DateTime
+  discussion: DiscussionCreateOneWithoutAttachmentsInput
   file: String!
   id: String
   team: TeamCreateOneWithoutAttachmentInput!
-  thread: ThreadCreateOneWithoutAttachmentsInput
   title: String
   type: String
   updatedAt: DateTime
@@ -519,25 +534,10 @@ input AttachmentCreateWithoutTeamInput {
   ballot: BallotCreateOneWithoutAttachmentsInput
   card: String
   createdAt: DateTime
+  discussion: DiscussionCreateOneWithoutAttachmentsInput
   file: String!
   id: String
   school: SchoolCreateOneWithoutAttachmentInput
-  thread: ThreadCreateOneWithoutAttachmentsInput
-  title: String
-  type: String
-  updatedAt: DateTime
-  user: UserCreateOneWithoutAttachmentsInput!
-  work: WorkCreateOneWithoutAttachmentsInput
-}
-
-input AttachmentCreateWithoutThreadInput {
-  ballot: BallotCreateOneWithoutAttachmentsInput
-  card: String
-  createdAt: DateTime
-  file: String!
-  id: String
-  school: SchoolCreateOneWithoutAttachmentInput
-  team: TeamCreateOneWithoutAttachmentInput!
   title: String
   type: String
   updatedAt: DateTime
@@ -549,11 +549,11 @@ input AttachmentCreateWithoutUserInput {
   ballot: BallotCreateOneWithoutAttachmentsInput
   card: String
   createdAt: DateTime
+  discussion: DiscussionCreateOneWithoutAttachmentsInput
   file: String!
   id: String
   school: SchoolCreateOneWithoutAttachmentInput
   team: TeamCreateOneWithoutAttachmentInput!
-  thread: ThreadCreateOneWithoutAttachmentsInput
   title: String
   type: String
   updatedAt: DateTime
@@ -564,11 +564,11 @@ input AttachmentCreateWithoutWorkInput {
   ballot: BallotCreateOneWithoutAttachmentsInput
   card: String
   createdAt: DateTime
+  discussion: DiscussionCreateOneWithoutAttachmentsInput
   file: String!
   id: String
   school: SchoolCreateOneWithoutAttachmentInput
   team: TeamCreateOneWithoutAttachmentInput!
-  thread: ThreadCreateOneWithoutAttachmentsInput
   title: String
   type: String
   updatedAt: DateTime
@@ -585,11 +585,11 @@ input AttachmentOrderByInput {
   ballotId: SortOrder
   card: SortOrder
   createdAt: SortOrder
+  discussionId: SortOrder
   file: SortOrder
   id: SortOrder
   schoolId: SortOrder
   teamId: SortOrder
-  threadId: SortOrder
   title: SortOrder
   type: SortOrder
   updatedAt: SortOrder
@@ -602,13 +602,13 @@ input AttachmentScalarWhereInput {
   ballotId: StringNullableFilter
   card: StringNullableFilter
   createdAt: DateTimeFilter
+  discussionId: StringNullableFilter
   file: StringFilter
   id: StringFilter
   NOT: [AttachmentScalarWhereInput!]
   OR: [AttachmentScalarWhereInput!]
   schoolId: StringNullableFilter
   teamId: StringFilter
-  threadId: StringNullableFilter
   title: StringFilter
   type: StringFilter
   updatedAt: DateTimeFilter
@@ -639,6 +639,19 @@ input AttachmentUpdateManyWithoutBallotInput {
   upsert: [AttachmentUpsertWithWhereUniqueWithoutBallotInput!]
 }
 
+input AttachmentUpdateManyWithoutDiscussionInput {
+  connect: [AttachmentWhereUniqueInput!]
+  connectOrCreate: [AttachmentCreateOrConnectWithoutdiscussionInput!]
+  create: [AttachmentCreateWithoutDiscussionInput!]
+  delete: [AttachmentWhereUniqueInput!]
+  deleteMany: [AttachmentScalarWhereInput!]
+  disconnect: [AttachmentWhereUniqueInput!]
+  set: [AttachmentWhereUniqueInput!]
+  update: [AttachmentUpdateWithWhereUniqueWithoutDiscussionInput!]
+  updateMany: [AttachmentUpdateManyWithWhereWithoutDiscussionInput!]
+  upsert: [AttachmentUpsertWithWhereUniqueWithoutDiscussionInput!]
+}
+
 input AttachmentUpdateManyWithoutSchoolInput {
   connect: [AttachmentWhereUniqueInput!]
   connectOrCreate: [AttachmentCreateOrConnectWithoutschoolInput!]
@@ -663,19 +676,6 @@ input AttachmentUpdateManyWithoutTeamInput {
   update: [AttachmentUpdateWithWhereUniqueWithoutTeamInput!]
   updateMany: [AttachmentUpdateManyWithWhereWithoutTeamInput!]
   upsert: [AttachmentUpsertWithWhereUniqueWithoutTeamInput!]
-}
-
-input AttachmentUpdateManyWithoutThreadInput {
-  connect: [AttachmentWhereUniqueInput!]
-  connectOrCreate: [AttachmentCreateOrConnectWithoutthreadInput!]
-  create: [AttachmentCreateWithoutThreadInput!]
-  delete: [AttachmentWhereUniqueInput!]
-  deleteMany: [AttachmentScalarWhereInput!]
-  disconnect: [AttachmentWhereUniqueInput!]
-  set: [AttachmentWhereUniqueInput!]
-  update: [AttachmentUpdateWithWhereUniqueWithoutThreadInput!]
-  updateMany: [AttachmentUpdateManyWithWhereWithoutThreadInput!]
-  upsert: [AttachmentUpsertWithWhereUniqueWithoutThreadInput!]
 }
 
 input AttachmentUpdateManyWithoutUserInput {
@@ -709,17 +709,17 @@ input AttachmentUpdateManyWithWhereWithoutBallotInput {
   where: AttachmentScalarWhereInput!
 }
 
+input AttachmentUpdateManyWithWhereWithoutDiscussionInput {
+  data: AttachmentUpdateManyMutationInput!
+  where: AttachmentScalarWhereInput!
+}
+
 input AttachmentUpdateManyWithWhereWithoutSchoolInput {
   data: AttachmentUpdateManyMutationInput!
   where: AttachmentScalarWhereInput!
 }
 
 input AttachmentUpdateManyWithWhereWithoutTeamInput {
-  data: AttachmentUpdateManyMutationInput!
-  where: AttachmentScalarWhereInput!
-}
-
-input AttachmentUpdateManyWithWhereWithoutThreadInput {
   data: AttachmentUpdateManyMutationInput!
   where: AttachmentScalarWhereInput!
 }
@@ -737,11 +737,26 @@ input AttachmentUpdateManyWithWhereWithoutWorkInput {
 input AttachmentUpdateWithoutBallotInput {
   card: NullableStringFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
+  discussion: DiscussionUpdateOneWithoutAttachmentsInput
   file: StringFieldUpdateOperationsInput
   id: StringFieldUpdateOperationsInput
   school: SchoolUpdateOneWithoutAttachmentInput
   team: TeamUpdateOneRequiredWithoutAttachmentInput
-  thread: ThreadUpdateOneWithoutAttachmentsInput
+  title: StringFieldUpdateOperationsInput
+  type: StringFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+  user: UserUpdateOneRequiredWithoutAttachmentsInput
+  work: WorkUpdateOneWithoutAttachmentsInput
+}
+
+input AttachmentUpdateWithoutDiscussionInput {
+  ballot: BallotUpdateOneWithoutAttachmentsInput
+  card: NullableStringFieldUpdateOperationsInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  file: StringFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  school: SchoolUpdateOneWithoutAttachmentInput
+  team: TeamUpdateOneRequiredWithoutAttachmentInput
   title: StringFieldUpdateOperationsInput
   type: StringFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
@@ -753,10 +768,10 @@ input AttachmentUpdateWithoutSchoolInput {
   ballot: BallotUpdateOneWithoutAttachmentsInput
   card: NullableStringFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
+  discussion: DiscussionUpdateOneWithoutAttachmentsInput
   file: StringFieldUpdateOperationsInput
   id: StringFieldUpdateOperationsInput
   team: TeamUpdateOneRequiredWithoutAttachmentInput
-  thread: ThreadUpdateOneWithoutAttachmentsInput
   title: StringFieldUpdateOperationsInput
   type: StringFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
@@ -768,25 +783,10 @@ input AttachmentUpdateWithoutTeamInput {
   ballot: BallotUpdateOneWithoutAttachmentsInput
   card: NullableStringFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
+  discussion: DiscussionUpdateOneWithoutAttachmentsInput
   file: StringFieldUpdateOperationsInput
   id: StringFieldUpdateOperationsInput
   school: SchoolUpdateOneWithoutAttachmentInput
-  thread: ThreadUpdateOneWithoutAttachmentsInput
-  title: StringFieldUpdateOperationsInput
-  type: StringFieldUpdateOperationsInput
-  updatedAt: DateTimeFieldUpdateOperationsInput
-  user: UserUpdateOneRequiredWithoutAttachmentsInput
-  work: WorkUpdateOneWithoutAttachmentsInput
-}
-
-input AttachmentUpdateWithoutThreadInput {
-  ballot: BallotUpdateOneWithoutAttachmentsInput
-  card: NullableStringFieldUpdateOperationsInput
-  createdAt: DateTimeFieldUpdateOperationsInput
-  file: StringFieldUpdateOperationsInput
-  id: StringFieldUpdateOperationsInput
-  school: SchoolUpdateOneWithoutAttachmentInput
-  team: TeamUpdateOneRequiredWithoutAttachmentInput
   title: StringFieldUpdateOperationsInput
   type: StringFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
@@ -798,11 +798,11 @@ input AttachmentUpdateWithoutUserInput {
   ballot: BallotUpdateOneWithoutAttachmentsInput
   card: NullableStringFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
+  discussion: DiscussionUpdateOneWithoutAttachmentsInput
   file: StringFieldUpdateOperationsInput
   id: StringFieldUpdateOperationsInput
   school: SchoolUpdateOneWithoutAttachmentInput
   team: TeamUpdateOneRequiredWithoutAttachmentInput
-  thread: ThreadUpdateOneWithoutAttachmentsInput
   title: StringFieldUpdateOperationsInput
   type: StringFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
@@ -813,11 +813,11 @@ input AttachmentUpdateWithoutWorkInput {
   ballot: BallotUpdateOneWithoutAttachmentsInput
   card: NullableStringFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
+  discussion: DiscussionUpdateOneWithoutAttachmentsInput
   file: StringFieldUpdateOperationsInput
   id: StringFieldUpdateOperationsInput
   school: SchoolUpdateOneWithoutAttachmentInput
   team: TeamUpdateOneRequiredWithoutAttachmentInput
-  thread: ThreadUpdateOneWithoutAttachmentsInput
   title: StringFieldUpdateOperationsInput
   type: StringFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
@@ -829,6 +829,11 @@ input AttachmentUpdateWithWhereUniqueWithoutBallotInput {
   where: AttachmentWhereUniqueInput!
 }
 
+input AttachmentUpdateWithWhereUniqueWithoutDiscussionInput {
+  data: AttachmentUpdateWithoutDiscussionInput!
+  where: AttachmentWhereUniqueInput!
+}
+
 input AttachmentUpdateWithWhereUniqueWithoutSchoolInput {
   data: AttachmentUpdateWithoutSchoolInput!
   where: AttachmentWhereUniqueInput!
@@ -836,11 +841,6 @@ input AttachmentUpdateWithWhereUniqueWithoutSchoolInput {
 
 input AttachmentUpdateWithWhereUniqueWithoutTeamInput {
   data: AttachmentUpdateWithoutTeamInput!
-  where: AttachmentWhereUniqueInput!
-}
-
-input AttachmentUpdateWithWhereUniqueWithoutThreadInput {
-  data: AttachmentUpdateWithoutThreadInput!
   where: AttachmentWhereUniqueInput!
 }
 
@@ -860,6 +860,12 @@ input AttachmentUpsertWithWhereUniqueWithoutBallotInput {
   where: AttachmentWhereUniqueInput!
 }
 
+input AttachmentUpsertWithWhereUniqueWithoutDiscussionInput {
+  create: AttachmentCreateWithoutDiscussionInput!
+  update: AttachmentUpdateWithoutDiscussionInput!
+  where: AttachmentWhereUniqueInput!
+}
+
 input AttachmentUpsertWithWhereUniqueWithoutSchoolInput {
   create: AttachmentCreateWithoutSchoolInput!
   update: AttachmentUpdateWithoutSchoolInput!
@@ -869,12 +875,6 @@ input AttachmentUpsertWithWhereUniqueWithoutSchoolInput {
 input AttachmentUpsertWithWhereUniqueWithoutTeamInput {
   create: AttachmentCreateWithoutTeamInput!
   update: AttachmentUpdateWithoutTeamInput!
-  where: AttachmentWhereUniqueInput!
-}
-
-input AttachmentUpsertWithWhereUniqueWithoutThreadInput {
-  create: AttachmentCreateWithoutThreadInput!
-  update: AttachmentUpdateWithoutThreadInput!
   where: AttachmentWhereUniqueInput!
 }
 
@@ -896,6 +896,8 @@ input AttachmentWhereInput {
   ballotId: StringNullableFilter
   card: StringNullableFilter
   createdAt: DateTimeFilter
+  discussion: DiscussionWhereInput
+  discussionId: StringNullableFilter
   file: StringFilter
   id: StringFilter
   NOT: [AttachmentWhereInput!]
@@ -904,8 +906,6 @@ input AttachmentWhereInput {
   schoolId: StringNullableFilter
   team: TeamWhereInput
   teamId: StringFilter
-  thread: ThreadWhereInput
-  threadId: StringNullableFilter
   title: StringFilter
   type: StringFilter
   updatedAt: DateTimeFilter
@@ -1801,6 +1801,450 @@ input DateTimeNullableFilter {
   notIn: [DateTime!]
 }
 
+type Discussion {
+  attachments(
+    after: AttachmentWhereUniqueInput
+    before: AttachmentWhereUniqueInput
+    first: Int
+    last: Int
+  ): [Attachment!]!
+  children: [Discussion]
+  createdAt: DateTime!
+  id: String!
+  reactions(
+    after: ReactionWhereUniqueInput
+    before: ReactionWhereUniqueInput
+    first: Int
+    last: Int
+  ): [Reaction!]!
+  ref: String!
+  text: String!
+  title: String!
+  updatedAt: DateTime!
+  user: User!
+}
+
+input DiscussionCreateManyWithoutSchoolInput {
+  connect: [DiscussionWhereUniqueInput!]
+  connectOrCreate: [DiscussionCreateOrConnectWithoutschoolInput!]
+  create: [DiscussionCreateWithoutSchoolInput!]
+}
+
+input DiscussionCreateManyWithoutTeamInput {
+  connect: [DiscussionWhereUniqueInput!]
+  connectOrCreate: [DiscussionCreateOrConnectWithoutteamInput!]
+  create: [DiscussionCreateWithoutTeamInput!]
+}
+
+input DiscussionCreateManyWithoutUserInput {
+  connect: [DiscussionWhereUniqueInput!]
+  connectOrCreate: [DiscussionCreateOrConnectWithoutuserInput!]
+  create: [DiscussionCreateWithoutUserInput!]
+}
+
+input DiscussionCreateOneWithoutActivityInput {
+  connect: DiscussionWhereUniqueInput
+  connectOrCreate: DiscussionCreateOrConnectWithoutActivityInput
+  create: DiscussionCreateWithoutActivityInput
+}
+
+input DiscussionCreateOneWithoutAttachmentsInput {
+  connect: DiscussionWhereUniqueInput
+  connectOrCreate: DiscussionCreateOrConnectWithoutattachmentsInput
+  create: DiscussionCreateWithoutAttachmentsInput
+}
+
+input DiscussionCreateOneWithoutReactionsInput {
+  connect: DiscussionWhereUniqueInput
+  connectOrCreate: DiscussionCreateOrConnectWithoutreactionsInput
+  create: DiscussionCreateWithoutReactionsInput
+}
+
+input DiscussionCreateOrConnectWithoutActivityInput {
+  create: DiscussionCreateWithoutActivityInput!
+  where: DiscussionWhereUniqueInput!
+}
+
+input DiscussionCreateOrConnectWithoutattachmentsInput {
+  create: DiscussionCreateWithoutAttachmentsInput!
+  where: DiscussionWhereUniqueInput!
+}
+
+input DiscussionCreateOrConnectWithoutreactionsInput {
+  create: DiscussionCreateWithoutReactionsInput!
+  where: DiscussionWhereUniqueInput!
+}
+
+input DiscussionCreateOrConnectWithoutschoolInput {
+  create: DiscussionCreateWithoutSchoolInput!
+  where: DiscussionWhereUniqueInput!
+}
+
+input DiscussionCreateOrConnectWithoutteamInput {
+  create: DiscussionCreateWithoutTeamInput!
+  where: DiscussionWhereUniqueInput!
+}
+
+input DiscussionCreateOrConnectWithoutuserInput {
+  create: DiscussionCreateWithoutUserInput!
+  where: DiscussionWhereUniqueInput!
+}
+
+input DiscussionCreateWithoutActivityInput {
+  attachments: AttachmentCreateManyWithoutDiscussionInput
+  createdAt: DateTime
+  id: String
+  reactions: ReactionCreateManyWithoutDiscussionInput
+  ref: String!
+  school: SchoolCreateOneWithoutDiscussionInput
+  team: TeamCreateOneWithoutDiscussionInput!
+  text: String
+  title: String
+  updatedAt: DateTime
+  user: UserCreateOneWithoutDiscussionsInput!
+}
+
+input DiscussionCreateWithoutAttachmentsInput {
+  Activity: ActivityCreateManyWithoutDiscussionInput
+  createdAt: DateTime
+  id: String
+  reactions: ReactionCreateManyWithoutDiscussionInput
+  ref: String!
+  school: SchoolCreateOneWithoutDiscussionInput
+  team: TeamCreateOneWithoutDiscussionInput!
+  text: String
+  title: String
+  updatedAt: DateTime
+  user: UserCreateOneWithoutDiscussionsInput!
+}
+
+input DiscussionCreateWithoutReactionsInput {
+  Activity: ActivityCreateManyWithoutDiscussionInput
+  attachments: AttachmentCreateManyWithoutDiscussionInput
+  createdAt: DateTime
+  id: String
+  ref: String!
+  school: SchoolCreateOneWithoutDiscussionInput
+  team: TeamCreateOneWithoutDiscussionInput!
+  text: String
+  title: String
+  updatedAt: DateTime
+  user: UserCreateOneWithoutDiscussionsInput!
+}
+
+input DiscussionCreateWithoutSchoolInput {
+  Activity: ActivityCreateManyWithoutDiscussionInput
+  attachments: AttachmentCreateManyWithoutDiscussionInput
+  createdAt: DateTime
+  id: String
+  reactions: ReactionCreateManyWithoutDiscussionInput
+  ref: String!
+  team: TeamCreateOneWithoutDiscussionInput!
+  text: String
+  title: String
+  updatedAt: DateTime
+  user: UserCreateOneWithoutDiscussionsInput!
+}
+
+input DiscussionCreateWithoutTeamInput {
+  Activity: ActivityCreateManyWithoutDiscussionInput
+  attachments: AttachmentCreateManyWithoutDiscussionInput
+  createdAt: DateTime
+  id: String
+  reactions: ReactionCreateManyWithoutDiscussionInput
+  ref: String!
+  school: SchoolCreateOneWithoutDiscussionInput
+  text: String
+  title: String
+  updatedAt: DateTime
+  user: UserCreateOneWithoutDiscussionsInput!
+}
+
+input DiscussionCreateWithoutUserInput {
+  Activity: ActivityCreateManyWithoutDiscussionInput
+  attachments: AttachmentCreateManyWithoutDiscussionInput
+  createdAt: DateTime
+  id: String
+  reactions: ReactionCreateManyWithoutDiscussionInput
+  ref: String!
+  school: SchoolCreateOneWithoutDiscussionInput
+  team: TeamCreateOneWithoutDiscussionInput!
+  text: String
+  title: String
+  updatedAt: DateTime
+}
+
+input DiscussionListRelationFilter {
+  every: DiscussionWhereInput
+  none: DiscussionWhereInput
+  some: DiscussionWhereInput
+}
+
+input DiscussionScalarWhereInput {
+  AND: [DiscussionScalarWhereInput!]
+  createdAt: DateTimeFilter
+  id: StringFilter
+  NOT: [DiscussionScalarWhereInput!]
+  OR: [DiscussionScalarWhereInput!]
+  ref: StringFilter
+  schoolId: StringNullableFilter
+  teamId: StringFilter
+  text: StringFilter
+  title: StringFilter
+  updatedAt: DateTimeFilter
+  userId: StringFilter
+}
+
+input DiscussionUpdateManyMutationInput {
+  createdAt: DateTimeFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  ref: StringFieldUpdateOperationsInput
+  text: StringFieldUpdateOperationsInput
+  title: StringFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input DiscussionUpdateManyWithoutSchoolInput {
+  connect: [DiscussionWhereUniqueInput!]
+  connectOrCreate: [DiscussionCreateOrConnectWithoutschoolInput!]
+  create: [DiscussionCreateWithoutSchoolInput!]
+  delete: [DiscussionWhereUniqueInput!]
+  deleteMany: [DiscussionScalarWhereInput!]
+  disconnect: [DiscussionWhereUniqueInput!]
+  set: [DiscussionWhereUniqueInput!]
+  update: [DiscussionUpdateWithWhereUniqueWithoutSchoolInput!]
+  updateMany: [DiscussionUpdateManyWithWhereWithoutSchoolInput!]
+  upsert: [DiscussionUpsertWithWhereUniqueWithoutSchoolInput!]
+}
+
+input DiscussionUpdateManyWithoutTeamInput {
+  connect: [DiscussionWhereUniqueInput!]
+  connectOrCreate: [DiscussionCreateOrConnectWithoutteamInput!]
+  create: [DiscussionCreateWithoutTeamInput!]
+  delete: [DiscussionWhereUniqueInput!]
+  deleteMany: [DiscussionScalarWhereInput!]
+  disconnect: [DiscussionWhereUniqueInput!]
+  set: [DiscussionWhereUniqueInput!]
+  update: [DiscussionUpdateWithWhereUniqueWithoutTeamInput!]
+  updateMany: [DiscussionUpdateManyWithWhereWithoutTeamInput!]
+  upsert: [DiscussionUpsertWithWhereUniqueWithoutTeamInput!]
+}
+
+input DiscussionUpdateManyWithoutUserInput {
+  connect: [DiscussionWhereUniqueInput!]
+  connectOrCreate: [DiscussionCreateOrConnectWithoutuserInput!]
+  create: [DiscussionCreateWithoutUserInput!]
+  delete: [DiscussionWhereUniqueInput!]
+  deleteMany: [DiscussionScalarWhereInput!]
+  disconnect: [DiscussionWhereUniqueInput!]
+  set: [DiscussionWhereUniqueInput!]
+  update: [DiscussionUpdateWithWhereUniqueWithoutUserInput!]
+  updateMany: [DiscussionUpdateManyWithWhereWithoutUserInput!]
+  upsert: [DiscussionUpsertWithWhereUniqueWithoutUserInput!]
+}
+
+input DiscussionUpdateManyWithWhereWithoutSchoolInput {
+  data: DiscussionUpdateManyMutationInput!
+  where: DiscussionScalarWhereInput!
+}
+
+input DiscussionUpdateManyWithWhereWithoutTeamInput {
+  data: DiscussionUpdateManyMutationInput!
+  where: DiscussionScalarWhereInput!
+}
+
+input DiscussionUpdateManyWithWhereWithoutUserInput {
+  data: DiscussionUpdateManyMutationInput!
+  where: DiscussionScalarWhereInput!
+}
+
+input DiscussionUpdateOneWithoutActivityInput {
+  connect: DiscussionWhereUniqueInput
+  connectOrCreate: DiscussionCreateOrConnectWithoutActivityInput
+  create: DiscussionCreateWithoutActivityInput
+  delete: Boolean
+  disconnect: Boolean
+  update: DiscussionUpdateWithoutActivityInput
+  upsert: DiscussionUpsertWithoutActivityInput
+}
+
+input DiscussionUpdateOneWithoutAttachmentsInput {
+  connect: DiscussionWhereUniqueInput
+  connectOrCreate: DiscussionCreateOrConnectWithoutattachmentsInput
+  create: DiscussionCreateWithoutAttachmentsInput
+  delete: Boolean
+  disconnect: Boolean
+  update: DiscussionUpdateWithoutAttachmentsInput
+  upsert: DiscussionUpsertWithoutAttachmentsInput
+}
+
+input DiscussionUpdateOneWithoutReactionsInput {
+  connect: DiscussionWhereUniqueInput
+  connectOrCreate: DiscussionCreateOrConnectWithoutreactionsInput
+  create: DiscussionCreateWithoutReactionsInput
+  delete: Boolean
+  disconnect: Boolean
+  update: DiscussionUpdateWithoutReactionsInput
+  upsert: DiscussionUpsertWithoutReactionsInput
+}
+
+input DiscussionUpdateWithoutActivityInput {
+  attachments: AttachmentUpdateManyWithoutDiscussionInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  reactions: ReactionUpdateManyWithoutDiscussionInput
+  ref: StringFieldUpdateOperationsInput
+  school: SchoolUpdateOneWithoutDiscussionInput
+  team: TeamUpdateOneRequiredWithoutDiscussionInput
+  text: StringFieldUpdateOperationsInput
+  title: StringFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+  user: UserUpdateOneRequiredWithoutDiscussionsInput
+}
+
+input DiscussionUpdateWithoutAttachmentsInput {
+  Activity: ActivityUpdateManyWithoutDiscussionInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  reactions: ReactionUpdateManyWithoutDiscussionInput
+  ref: StringFieldUpdateOperationsInput
+  school: SchoolUpdateOneWithoutDiscussionInput
+  team: TeamUpdateOneRequiredWithoutDiscussionInput
+  text: StringFieldUpdateOperationsInput
+  title: StringFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+  user: UserUpdateOneRequiredWithoutDiscussionsInput
+}
+
+input DiscussionUpdateWithoutReactionsInput {
+  Activity: ActivityUpdateManyWithoutDiscussionInput
+  attachments: AttachmentUpdateManyWithoutDiscussionInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  ref: StringFieldUpdateOperationsInput
+  school: SchoolUpdateOneWithoutDiscussionInput
+  team: TeamUpdateOneRequiredWithoutDiscussionInput
+  text: StringFieldUpdateOperationsInput
+  title: StringFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+  user: UserUpdateOneRequiredWithoutDiscussionsInput
+}
+
+input DiscussionUpdateWithoutSchoolInput {
+  Activity: ActivityUpdateManyWithoutDiscussionInput
+  attachments: AttachmentUpdateManyWithoutDiscussionInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  reactions: ReactionUpdateManyWithoutDiscussionInput
+  ref: StringFieldUpdateOperationsInput
+  team: TeamUpdateOneRequiredWithoutDiscussionInput
+  text: StringFieldUpdateOperationsInput
+  title: StringFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+  user: UserUpdateOneRequiredWithoutDiscussionsInput
+}
+
+input DiscussionUpdateWithoutTeamInput {
+  Activity: ActivityUpdateManyWithoutDiscussionInput
+  attachments: AttachmentUpdateManyWithoutDiscussionInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  reactions: ReactionUpdateManyWithoutDiscussionInput
+  ref: StringFieldUpdateOperationsInput
+  school: SchoolUpdateOneWithoutDiscussionInput
+  text: StringFieldUpdateOperationsInput
+  title: StringFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+  user: UserUpdateOneRequiredWithoutDiscussionsInput
+}
+
+input DiscussionUpdateWithoutUserInput {
+  Activity: ActivityUpdateManyWithoutDiscussionInput
+  attachments: AttachmentUpdateManyWithoutDiscussionInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  reactions: ReactionUpdateManyWithoutDiscussionInput
+  ref: StringFieldUpdateOperationsInput
+  school: SchoolUpdateOneWithoutDiscussionInput
+  team: TeamUpdateOneRequiredWithoutDiscussionInput
+  text: StringFieldUpdateOperationsInput
+  title: StringFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input DiscussionUpdateWithWhereUniqueWithoutSchoolInput {
+  data: DiscussionUpdateWithoutSchoolInput!
+  where: DiscussionWhereUniqueInput!
+}
+
+input DiscussionUpdateWithWhereUniqueWithoutTeamInput {
+  data: DiscussionUpdateWithoutTeamInput!
+  where: DiscussionWhereUniqueInput!
+}
+
+input DiscussionUpdateWithWhereUniqueWithoutUserInput {
+  data: DiscussionUpdateWithoutUserInput!
+  where: DiscussionWhereUniqueInput!
+}
+
+input DiscussionUpsertWithoutActivityInput {
+  create: DiscussionCreateWithoutActivityInput!
+  update: DiscussionUpdateWithoutActivityInput!
+}
+
+input DiscussionUpsertWithoutAttachmentsInput {
+  create: DiscussionCreateWithoutAttachmentsInput!
+  update: DiscussionUpdateWithoutAttachmentsInput!
+}
+
+input DiscussionUpsertWithoutReactionsInput {
+  create: DiscussionCreateWithoutReactionsInput!
+  update: DiscussionUpdateWithoutReactionsInput!
+}
+
+input DiscussionUpsertWithWhereUniqueWithoutSchoolInput {
+  create: DiscussionCreateWithoutSchoolInput!
+  update: DiscussionUpdateWithoutSchoolInput!
+  where: DiscussionWhereUniqueInput!
+}
+
+input DiscussionUpsertWithWhereUniqueWithoutTeamInput {
+  create: DiscussionCreateWithoutTeamInput!
+  update: DiscussionUpdateWithoutTeamInput!
+  where: DiscussionWhereUniqueInput!
+}
+
+input DiscussionUpsertWithWhereUniqueWithoutUserInput {
+  create: DiscussionCreateWithoutUserInput!
+  update: DiscussionUpdateWithoutUserInput!
+  where: DiscussionWhereUniqueInput!
+}
+
+input DiscussionWhereInput {
+  Activity: ActivityListRelationFilter
+  AND: [DiscussionWhereInput!]
+  attachments: AttachmentListRelationFilter
+  createdAt: DateTimeFilter
+  id: StringFilter
+  NOT: [DiscussionWhereInput!]
+  OR: [DiscussionWhereInput!]
+  reactions: ReactionListRelationFilter
+  ref: StringFilter
+  school: SchoolWhereInput
+  schoolId: StringNullableFilter
+  team: TeamWhereInput
+  teamId: StringFilter
+  text: StringFilter
+  title: StringFilter
+  updatedAt: DateTimeFilter
+  user: UserWhereInput
+  userId: StringFilter
+}
+
+input DiscussionWhereUniqueInput {
+  id: String
+}
+
 type Domain {
   approved: Boolean!
   id: String!
@@ -2036,14 +2480,14 @@ type Mutation {
   emailVerification(email: String!, purpose: String!): ResponseLogin
   endBallotRun(ballotRunId: String!): BallotRun
   inviteStudents(emails: [String!]!, team: String!): InviteResponse
-  logActivity(data: ActivityCreateInput!): Activity!
   login(email: String!, password: String!): ResponseLogin
-  postThread(
+  postActivity(data: ActivityCreateInput!): Activity!
+  postDiscussion(
     ref: String!
     teamId: String!
     text: String!
     title: String!
-  ): Thread
+  ): Discussion
   postWork(data: WorkCreateInput!): Work!
   removeBallotRun(ballotRunId: String!): Response
   setCards(cards: String!, teamId: String!): Team
@@ -2320,7 +2764,7 @@ type Query {
     teamId: String
   ): BallotResults
   getBallotRuns(teamId: String!): [BallotRun]
-  getTeamThreads(ref: String!, teamId: String): [Thread]
+  getTeamDiscussions(ref: String!, teamId: String): [Discussion]
   me: User
   school(where: SchoolWhereUniqueInput!): School
   schools(
@@ -2374,16 +2818,16 @@ enum QueryMode {
 }
 
 type Reaction {
+  discussion: Discussion
   emoij: String!
   id: String!
-  thread: Thread
   user: User!
 }
 
-input ReactionCreateManyWithoutThreadInput {
+input ReactionCreateManyWithoutDiscussionInput {
   connect: [ReactionWhereUniqueInput!]
-  connectOrCreate: [ReactionCreateOrConnectWithoutthreadInput!]
-  create: [ReactionCreateWithoutThreadInput!]
+  connectOrCreate: [ReactionCreateOrConnectWithoutdiscussionInput!]
+  create: [ReactionCreateWithoutDiscussionInput!]
 }
 
 input ReactionCreateManyWithoutUserInput {
@@ -2398,8 +2842,8 @@ input ReactionCreateManyWithoutWorkInput {
   create: [ReactionCreateWithoutWorkInput!]
 }
 
-input ReactionCreateOrConnectWithoutthreadInput {
-  create: ReactionCreateWithoutThreadInput!
+input ReactionCreateOrConnectWithoutdiscussionInput {
+  create: ReactionCreateWithoutDiscussionInput!
   where: ReactionWhereUniqueInput!
 }
 
@@ -2413,7 +2857,7 @@ input ReactionCreateOrConnectWithoutworkInput {
   where: ReactionWhereUniqueInput!
 }
 
-input ReactionCreateWithoutThreadInput {
+input ReactionCreateWithoutDiscussionInput {
   createdAt: DateTime
   emoij: String
   feedback: String!
@@ -2426,22 +2870,22 @@ input ReactionCreateWithoutThreadInput {
 
 input ReactionCreateWithoutUserInput {
   createdAt: DateTime
+  discussion: DiscussionCreateOneWithoutReactionsInput
   emoij: String
   feedback: String!
   id: String
   stars: Int!
-  thread: ThreadCreateOneWithoutReactionsInput
   updatedAt: DateTime
   work: WorkCreateOneWithoutReactionsInput
 }
 
 input ReactionCreateWithoutWorkInput {
   createdAt: DateTime
+  discussion: DiscussionCreateOneWithoutReactionsInput
   emoij: String
   feedback: String!
   id: String
   stars: Int!
-  thread: ThreadCreateOneWithoutReactionsInput
   updatedAt: DateTime
   user: UserCreateOneWithoutReactionsInput!
 }
@@ -2455,13 +2899,13 @@ input ReactionListRelationFilter {
 input ReactionScalarWhereInput {
   AND: [ReactionScalarWhereInput!]
   createdAt: DateTimeFilter
+  discussionId: StringNullableFilter
   emoij: StringFilter
   feedback: StringFilter
   id: StringFilter
   NOT: [ReactionScalarWhereInput!]
   OR: [ReactionScalarWhereInput!]
   stars: IntFilter
-  threadId: StringNullableFilter
   updatedAt: DateTimeFilter
   userId: StringFilter
   workId: StringNullableFilter
@@ -2476,17 +2920,17 @@ input ReactionUpdateManyMutationInput {
   updatedAt: DateTimeFieldUpdateOperationsInput
 }
 
-input ReactionUpdateManyWithoutThreadInput {
+input ReactionUpdateManyWithoutDiscussionInput {
   connect: [ReactionWhereUniqueInput!]
-  connectOrCreate: [ReactionCreateOrConnectWithoutthreadInput!]
-  create: [ReactionCreateWithoutThreadInput!]
+  connectOrCreate: [ReactionCreateOrConnectWithoutdiscussionInput!]
+  create: [ReactionCreateWithoutDiscussionInput!]
   delete: [ReactionWhereUniqueInput!]
   deleteMany: [ReactionScalarWhereInput!]
   disconnect: [ReactionWhereUniqueInput!]
   set: [ReactionWhereUniqueInput!]
-  update: [ReactionUpdateWithWhereUniqueWithoutThreadInput!]
-  updateMany: [ReactionUpdateManyWithWhereWithoutThreadInput!]
-  upsert: [ReactionUpsertWithWhereUniqueWithoutThreadInput!]
+  update: [ReactionUpdateWithWhereUniqueWithoutDiscussionInput!]
+  updateMany: [ReactionUpdateManyWithWhereWithoutDiscussionInput!]
+  upsert: [ReactionUpsertWithWhereUniqueWithoutDiscussionInput!]
 }
 
 input ReactionUpdateManyWithoutUserInput {
@@ -2515,7 +2959,7 @@ input ReactionUpdateManyWithoutWorkInput {
   upsert: [ReactionUpsertWithWhereUniqueWithoutWorkInput!]
 }
 
-input ReactionUpdateManyWithWhereWithoutThreadInput {
+input ReactionUpdateManyWithWhereWithoutDiscussionInput {
   data: ReactionUpdateManyMutationInput!
   where: ReactionScalarWhereInput!
 }
@@ -2530,7 +2974,7 @@ input ReactionUpdateManyWithWhereWithoutWorkInput {
   where: ReactionScalarWhereInput!
 }
 
-input ReactionUpdateWithoutThreadInput {
+input ReactionUpdateWithoutDiscussionInput {
   createdAt: DateTimeFieldUpdateOperationsInput
   emoij: StringFieldUpdateOperationsInput
   feedback: StringFieldUpdateOperationsInput
@@ -2543,28 +2987,28 @@ input ReactionUpdateWithoutThreadInput {
 
 input ReactionUpdateWithoutUserInput {
   createdAt: DateTimeFieldUpdateOperationsInput
+  discussion: DiscussionUpdateOneWithoutReactionsInput
   emoij: StringFieldUpdateOperationsInput
   feedback: StringFieldUpdateOperationsInput
   id: StringFieldUpdateOperationsInput
   stars: IntFieldUpdateOperationsInput
-  thread: ThreadUpdateOneWithoutReactionsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
   work: WorkUpdateOneWithoutReactionsInput
 }
 
 input ReactionUpdateWithoutWorkInput {
   createdAt: DateTimeFieldUpdateOperationsInput
+  discussion: DiscussionUpdateOneWithoutReactionsInput
   emoij: StringFieldUpdateOperationsInput
   feedback: StringFieldUpdateOperationsInput
   id: StringFieldUpdateOperationsInput
   stars: IntFieldUpdateOperationsInput
-  thread: ThreadUpdateOneWithoutReactionsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
   user: UserUpdateOneRequiredWithoutReactionsInput
 }
 
-input ReactionUpdateWithWhereUniqueWithoutThreadInput {
-  data: ReactionUpdateWithoutThreadInput!
+input ReactionUpdateWithWhereUniqueWithoutDiscussionInput {
+  data: ReactionUpdateWithoutDiscussionInput!
   where: ReactionWhereUniqueInput!
 }
 
@@ -2578,9 +3022,9 @@ input ReactionUpdateWithWhereUniqueWithoutWorkInput {
   where: ReactionWhereUniqueInput!
 }
 
-input ReactionUpsertWithWhereUniqueWithoutThreadInput {
-  create: ReactionCreateWithoutThreadInput!
-  update: ReactionUpdateWithoutThreadInput!
+input ReactionUpsertWithWhereUniqueWithoutDiscussionInput {
+  create: ReactionCreateWithoutDiscussionInput!
+  update: ReactionUpdateWithoutDiscussionInput!
   where: ReactionWhereUniqueInput!
 }
 
@@ -2599,14 +3043,14 @@ input ReactionUpsertWithWhereUniqueWithoutWorkInput {
 input ReactionWhereInput {
   AND: [ReactionWhereInput!]
   createdAt: DateTimeFilter
+  discussion: DiscussionWhereInput
+  discussionId: StringNullableFilter
   emoij: StringFilter
   feedback: StringFilter
   id: StringFilter
   NOT: [ReactionWhereInput!]
   OR: [ReactionWhereInput!]
   stars: IntFilter
-  thread: ThreadWhereInput
-  threadId: StringNullableFilter
   updatedAt: DateTimeFilter
   user: UserWhereInput
   userId: StringFilter
@@ -2666,12 +3110,12 @@ input SchoolCreateInput {
   ballots: BallotCreateManyWithoutSchoolInput
   canton: String
   city: String
+  discussion: DiscussionCreateManyWithoutSchoolInput
   domain: DomainCreateOneWithoutSchoolsInput
   id: String
   members: UserCreateManyWithoutSchoolInput
   name: String!
   teams: TeamCreateManyWithoutSchoolInput
-  thread: ThreadCreateManyWithoutSchoolInput
   type: String
   Vote: VoteCreateManyWithoutSchoolInput
   Voted: VotedCreateManyWithoutSchoolInput
@@ -2703,6 +3147,12 @@ input SchoolCreateOneWithoutBallotsInput {
   create: SchoolCreateWithoutBallotsInput
 }
 
+input SchoolCreateOneWithoutDiscussionInput {
+  connect: SchoolWhereUniqueInput
+  connectOrCreate: SchoolCreateOrConnectWithoutdiscussionInput
+  create: SchoolCreateWithoutDiscussionInput
+}
+
 input SchoolCreateOneWithoutMembersInput {
   connect: SchoolWhereUniqueInput
   connectOrCreate: SchoolCreateOrConnectWithoutmembersInput
@@ -2713,12 +3163,6 @@ input SchoolCreateOneWithoutTeamsInput {
   connect: SchoolWhereUniqueInput
   connectOrCreate: SchoolCreateOrConnectWithoutteamsInput
   create: SchoolCreateWithoutTeamsInput
-}
-
-input SchoolCreateOneWithoutThreadInput {
-  connect: SchoolWhereUniqueInput
-  connectOrCreate: SchoolCreateOrConnectWithoutthreadInput
-  create: SchoolCreateWithoutThreadInput
 }
 
 input SchoolCreateOneWithoutVotedInput {
@@ -2754,6 +3198,11 @@ input SchoolCreateOrConnectWithoutballotsInput {
   where: SchoolWhereUniqueInput!
 }
 
+input SchoolCreateOrConnectWithoutdiscussionInput {
+  create: SchoolCreateWithoutDiscussionInput!
+  where: SchoolWhereUniqueInput!
+}
+
 input SchoolCreateOrConnectWithoutdomainInput {
   create: SchoolCreateWithoutDomainInput!
   where: SchoolWhereUniqueInput!
@@ -2766,11 +3215,6 @@ input SchoolCreateOrConnectWithoutmembersInput {
 
 input SchoolCreateOrConnectWithoutteamsInput {
   create: SchoolCreateWithoutTeamsInput!
-  where: SchoolWhereUniqueInput!
-}
-
-input SchoolCreateOrConnectWithoutthreadInput {
-  create: SchoolCreateWithoutThreadInput!
   where: SchoolWhereUniqueInput!
 }
 
@@ -2795,12 +3239,12 @@ input SchoolCreateWithoutActivityInput {
   ballots: BallotCreateManyWithoutSchoolInput
   canton: String
   city: String
+  discussion: DiscussionCreateManyWithoutSchoolInput
   domain: DomainCreateOneWithoutSchoolsInput
   id: String
   members: UserCreateManyWithoutSchoolInput
   name: String!
   teams: TeamCreateManyWithoutSchoolInput
-  thread: ThreadCreateManyWithoutSchoolInput
   type: String
   Vote: VoteCreateManyWithoutSchoolInput
   Voted: VotedCreateManyWithoutSchoolInput
@@ -2814,12 +3258,12 @@ input SchoolCreateWithoutAttachmentInput {
   ballots: BallotCreateManyWithoutSchoolInput
   canton: String
   city: String
+  discussion: DiscussionCreateManyWithoutSchoolInput
   domain: DomainCreateOneWithoutSchoolsInput
   id: String
   members: UserCreateManyWithoutSchoolInput
   name: String!
   teams: TeamCreateManyWithoutSchoolInput
-  thread: ThreadCreateManyWithoutSchoolInput
   type: String
   Vote: VoteCreateManyWithoutSchoolInput
   Voted: VotedCreateManyWithoutSchoolInput
@@ -2833,12 +3277,31 @@ input SchoolCreateWithoutBallotsInput {
   attachment: AttachmentCreateManyWithoutSchoolInput
   canton: String
   city: String
+  discussion: DiscussionCreateManyWithoutSchoolInput
   domain: DomainCreateOneWithoutSchoolsInput
   id: String
   members: UserCreateManyWithoutSchoolInput
   name: String!
   teams: TeamCreateManyWithoutSchoolInput
-  thread: ThreadCreateManyWithoutSchoolInput
+  type: String
+  Vote: VoteCreateManyWithoutSchoolInput
+  Voted: VotedCreateManyWithoutSchoolInput
+  work: WorkCreateManyWithoutSchoolInput
+  zip: String
+}
+
+input SchoolCreateWithoutDiscussionInput {
+  activity: ActivityCreateManyWithoutSchoolInput
+  address: String
+  attachment: AttachmentCreateManyWithoutSchoolInput
+  ballots: BallotCreateManyWithoutSchoolInput
+  canton: String
+  city: String
+  domain: DomainCreateOneWithoutSchoolsInput
+  id: String
+  members: UserCreateManyWithoutSchoolInput
+  name: String!
+  teams: TeamCreateManyWithoutSchoolInput
   type: String
   Vote: VoteCreateManyWithoutSchoolInput
   Voted: VotedCreateManyWithoutSchoolInput
@@ -2853,11 +3316,11 @@ input SchoolCreateWithoutDomainInput {
   ballots: BallotCreateManyWithoutSchoolInput
   canton: String
   city: String
+  discussion: DiscussionCreateManyWithoutSchoolInput
   id: String
   members: UserCreateManyWithoutSchoolInput
   name: String!
   teams: TeamCreateManyWithoutSchoolInput
-  thread: ThreadCreateManyWithoutSchoolInput
   type: String
   Vote: VoteCreateManyWithoutSchoolInput
   Voted: VotedCreateManyWithoutSchoolInput
@@ -2872,11 +3335,11 @@ input SchoolCreateWithoutMembersInput {
   ballots: BallotCreateManyWithoutSchoolInput
   canton: String
   city: String
+  discussion: DiscussionCreateManyWithoutSchoolInput
   domain: DomainCreateOneWithoutSchoolsInput
   id: String
   name: String!
   teams: TeamCreateManyWithoutSchoolInput
-  thread: ThreadCreateManyWithoutSchoolInput
   type: String
   Vote: VoteCreateManyWithoutSchoolInput
   Voted: VotedCreateManyWithoutSchoolInput
@@ -2891,30 +3354,11 @@ input SchoolCreateWithoutTeamsInput {
   ballots: BallotCreateManyWithoutSchoolInput
   canton: String
   city: String
+  discussion: DiscussionCreateManyWithoutSchoolInput
   domain: DomainCreateOneWithoutSchoolsInput
   id: String
   members: UserCreateManyWithoutSchoolInput
   name: String!
-  thread: ThreadCreateManyWithoutSchoolInput
-  type: String
-  Vote: VoteCreateManyWithoutSchoolInput
-  Voted: VotedCreateManyWithoutSchoolInput
-  work: WorkCreateManyWithoutSchoolInput
-  zip: String
-}
-
-input SchoolCreateWithoutThreadInput {
-  activity: ActivityCreateManyWithoutSchoolInput
-  address: String
-  attachment: AttachmentCreateManyWithoutSchoolInput
-  ballots: BallotCreateManyWithoutSchoolInput
-  canton: String
-  city: String
-  domain: DomainCreateOneWithoutSchoolsInput
-  id: String
-  members: UserCreateManyWithoutSchoolInput
-  name: String!
-  teams: TeamCreateManyWithoutSchoolInput
   type: String
   Vote: VoteCreateManyWithoutSchoolInput
   Voted: VotedCreateManyWithoutSchoolInput
@@ -2929,12 +3373,12 @@ input SchoolCreateWithoutVotedInput {
   ballots: BallotCreateManyWithoutSchoolInput
   canton: String
   city: String
+  discussion: DiscussionCreateManyWithoutSchoolInput
   domain: DomainCreateOneWithoutSchoolsInput
   id: String
   members: UserCreateManyWithoutSchoolInput
   name: String!
   teams: TeamCreateManyWithoutSchoolInput
-  thread: ThreadCreateManyWithoutSchoolInput
   type: String
   Vote: VoteCreateManyWithoutSchoolInput
   work: WorkCreateManyWithoutSchoolInput
@@ -2948,12 +3392,12 @@ input SchoolCreateWithoutVoteInput {
   ballots: BallotCreateManyWithoutSchoolInput
   canton: String
   city: String
+  discussion: DiscussionCreateManyWithoutSchoolInput
   domain: DomainCreateOneWithoutSchoolsInput
   id: String
   members: UserCreateManyWithoutSchoolInput
   name: String!
   teams: TeamCreateManyWithoutSchoolInput
-  thread: ThreadCreateManyWithoutSchoolInput
   type: String
   Voted: VotedCreateManyWithoutSchoolInput
   work: WorkCreateManyWithoutSchoolInput
@@ -2967,12 +3411,12 @@ input SchoolCreateWithoutWorkInput {
   ballots: BallotCreateManyWithoutSchoolInput
   canton: String
   city: String
+  discussion: DiscussionCreateManyWithoutSchoolInput
   domain: DomainCreateOneWithoutSchoolsInput
   id: String
   members: UserCreateManyWithoutSchoolInput
   name: String!
   teams: TeamCreateManyWithoutSchoolInput
-  thread: ThreadCreateManyWithoutSchoolInput
   type: String
   Vote: VoteCreateManyWithoutSchoolInput
   Voted: VotedCreateManyWithoutSchoolInput
@@ -3082,6 +3526,16 @@ input SchoolUpdateOneWithoutBallotsInput {
   upsert: SchoolUpsertWithoutBallotsInput
 }
 
+input SchoolUpdateOneWithoutDiscussionInput {
+  connect: SchoolWhereUniqueInput
+  connectOrCreate: SchoolCreateOrConnectWithoutdiscussionInput
+  create: SchoolCreateWithoutDiscussionInput
+  delete: Boolean
+  disconnect: Boolean
+  update: SchoolUpdateWithoutDiscussionInput
+  upsert: SchoolUpsertWithoutDiscussionInput
+}
+
 input SchoolUpdateOneWithoutMembersInput {
   connect: SchoolWhereUniqueInput
   connectOrCreate: SchoolCreateOrConnectWithoutmembersInput
@@ -3090,16 +3544,6 @@ input SchoolUpdateOneWithoutMembersInput {
   disconnect: Boolean
   update: SchoolUpdateWithoutMembersInput
   upsert: SchoolUpsertWithoutMembersInput
-}
-
-input SchoolUpdateOneWithoutThreadInput {
-  connect: SchoolWhereUniqueInput
-  connectOrCreate: SchoolCreateOrConnectWithoutthreadInput
-  create: SchoolCreateWithoutThreadInput
-  delete: Boolean
-  disconnect: Boolean
-  update: SchoolUpdateWithoutThreadInput
-  upsert: SchoolUpsertWithoutThreadInput
 }
 
 input SchoolUpdateOneWithoutVotedInput {
@@ -3128,12 +3572,12 @@ input SchoolUpdateWithoutActivityInput {
   ballots: BallotUpdateManyWithoutSchoolInput
   canton: StringFieldUpdateOperationsInput
   city: StringFieldUpdateOperationsInput
+  discussion: DiscussionUpdateManyWithoutSchoolInput
   domain: DomainUpdateOneWithoutSchoolsInput
   id: StringFieldUpdateOperationsInput
   members: UserUpdateManyWithoutSchoolInput
   name: StringFieldUpdateOperationsInput
   teams: TeamUpdateManyWithoutSchoolInput
-  thread: ThreadUpdateManyWithoutSchoolInput
   type: StringFieldUpdateOperationsInput
   Vote: VoteUpdateManyWithoutSchoolInput
   Voted: VotedUpdateManyWithoutSchoolInput
@@ -3147,12 +3591,12 @@ input SchoolUpdateWithoutAttachmentInput {
   ballots: BallotUpdateManyWithoutSchoolInput
   canton: StringFieldUpdateOperationsInput
   city: StringFieldUpdateOperationsInput
+  discussion: DiscussionUpdateManyWithoutSchoolInput
   domain: DomainUpdateOneWithoutSchoolsInput
   id: StringFieldUpdateOperationsInput
   members: UserUpdateManyWithoutSchoolInput
   name: StringFieldUpdateOperationsInput
   teams: TeamUpdateManyWithoutSchoolInput
-  thread: ThreadUpdateManyWithoutSchoolInput
   type: StringFieldUpdateOperationsInput
   Vote: VoteUpdateManyWithoutSchoolInput
   Voted: VotedUpdateManyWithoutSchoolInput
@@ -3166,12 +3610,31 @@ input SchoolUpdateWithoutBallotsInput {
   attachment: AttachmentUpdateManyWithoutSchoolInput
   canton: StringFieldUpdateOperationsInput
   city: StringFieldUpdateOperationsInput
+  discussion: DiscussionUpdateManyWithoutSchoolInput
   domain: DomainUpdateOneWithoutSchoolsInput
   id: StringFieldUpdateOperationsInput
   members: UserUpdateManyWithoutSchoolInput
   name: StringFieldUpdateOperationsInput
   teams: TeamUpdateManyWithoutSchoolInput
-  thread: ThreadUpdateManyWithoutSchoolInput
+  type: StringFieldUpdateOperationsInput
+  Vote: VoteUpdateManyWithoutSchoolInput
+  Voted: VotedUpdateManyWithoutSchoolInput
+  work: WorkUpdateManyWithoutSchoolInput
+  zip: StringFieldUpdateOperationsInput
+}
+
+input SchoolUpdateWithoutDiscussionInput {
+  activity: ActivityUpdateManyWithoutSchoolInput
+  address: StringFieldUpdateOperationsInput
+  attachment: AttachmentUpdateManyWithoutSchoolInput
+  ballots: BallotUpdateManyWithoutSchoolInput
+  canton: StringFieldUpdateOperationsInput
+  city: StringFieldUpdateOperationsInput
+  domain: DomainUpdateOneWithoutSchoolsInput
+  id: StringFieldUpdateOperationsInput
+  members: UserUpdateManyWithoutSchoolInput
+  name: StringFieldUpdateOperationsInput
+  teams: TeamUpdateManyWithoutSchoolInput
   type: StringFieldUpdateOperationsInput
   Vote: VoteUpdateManyWithoutSchoolInput
   Voted: VotedUpdateManyWithoutSchoolInput
@@ -3186,11 +3649,11 @@ input SchoolUpdateWithoutDomainInput {
   ballots: BallotUpdateManyWithoutSchoolInput
   canton: StringFieldUpdateOperationsInput
   city: StringFieldUpdateOperationsInput
+  discussion: DiscussionUpdateManyWithoutSchoolInput
   id: StringFieldUpdateOperationsInput
   members: UserUpdateManyWithoutSchoolInput
   name: StringFieldUpdateOperationsInput
   teams: TeamUpdateManyWithoutSchoolInput
-  thread: ThreadUpdateManyWithoutSchoolInput
   type: StringFieldUpdateOperationsInput
   Vote: VoteUpdateManyWithoutSchoolInput
   Voted: VotedUpdateManyWithoutSchoolInput
@@ -3205,11 +3668,11 @@ input SchoolUpdateWithoutMembersInput {
   ballots: BallotUpdateManyWithoutSchoolInput
   canton: StringFieldUpdateOperationsInput
   city: StringFieldUpdateOperationsInput
+  discussion: DiscussionUpdateManyWithoutSchoolInput
   domain: DomainUpdateOneWithoutSchoolsInput
   id: StringFieldUpdateOperationsInput
   name: StringFieldUpdateOperationsInput
   teams: TeamUpdateManyWithoutSchoolInput
-  thread: ThreadUpdateManyWithoutSchoolInput
   type: StringFieldUpdateOperationsInput
   Vote: VoteUpdateManyWithoutSchoolInput
   Voted: VotedUpdateManyWithoutSchoolInput
@@ -3224,30 +3687,11 @@ input SchoolUpdateWithoutTeamsInput {
   ballots: BallotUpdateManyWithoutSchoolInput
   canton: StringFieldUpdateOperationsInput
   city: StringFieldUpdateOperationsInput
+  discussion: DiscussionUpdateManyWithoutSchoolInput
   domain: DomainUpdateOneWithoutSchoolsInput
   id: StringFieldUpdateOperationsInput
   members: UserUpdateManyWithoutSchoolInput
   name: StringFieldUpdateOperationsInput
-  thread: ThreadUpdateManyWithoutSchoolInput
-  type: StringFieldUpdateOperationsInput
-  Vote: VoteUpdateManyWithoutSchoolInput
-  Voted: VotedUpdateManyWithoutSchoolInput
-  work: WorkUpdateManyWithoutSchoolInput
-  zip: StringFieldUpdateOperationsInput
-}
-
-input SchoolUpdateWithoutThreadInput {
-  activity: ActivityUpdateManyWithoutSchoolInput
-  address: StringFieldUpdateOperationsInput
-  attachment: AttachmentUpdateManyWithoutSchoolInput
-  ballots: BallotUpdateManyWithoutSchoolInput
-  canton: StringFieldUpdateOperationsInput
-  city: StringFieldUpdateOperationsInput
-  domain: DomainUpdateOneWithoutSchoolsInput
-  id: StringFieldUpdateOperationsInput
-  members: UserUpdateManyWithoutSchoolInput
-  name: StringFieldUpdateOperationsInput
-  teams: TeamUpdateManyWithoutSchoolInput
   type: StringFieldUpdateOperationsInput
   Vote: VoteUpdateManyWithoutSchoolInput
   Voted: VotedUpdateManyWithoutSchoolInput
@@ -3262,12 +3706,12 @@ input SchoolUpdateWithoutVotedInput {
   ballots: BallotUpdateManyWithoutSchoolInput
   canton: StringFieldUpdateOperationsInput
   city: StringFieldUpdateOperationsInput
+  discussion: DiscussionUpdateManyWithoutSchoolInput
   domain: DomainUpdateOneWithoutSchoolsInput
   id: StringFieldUpdateOperationsInput
   members: UserUpdateManyWithoutSchoolInput
   name: StringFieldUpdateOperationsInput
   teams: TeamUpdateManyWithoutSchoolInput
-  thread: ThreadUpdateManyWithoutSchoolInput
   type: StringFieldUpdateOperationsInput
   Vote: VoteUpdateManyWithoutSchoolInput
   work: WorkUpdateManyWithoutSchoolInput
@@ -3281,12 +3725,12 @@ input SchoolUpdateWithoutVoteInput {
   ballots: BallotUpdateManyWithoutSchoolInput
   canton: StringFieldUpdateOperationsInput
   city: StringFieldUpdateOperationsInput
+  discussion: DiscussionUpdateManyWithoutSchoolInput
   domain: DomainUpdateOneWithoutSchoolsInput
   id: StringFieldUpdateOperationsInput
   members: UserUpdateManyWithoutSchoolInput
   name: StringFieldUpdateOperationsInput
   teams: TeamUpdateManyWithoutSchoolInput
-  thread: ThreadUpdateManyWithoutSchoolInput
   type: StringFieldUpdateOperationsInput
   Voted: VotedUpdateManyWithoutSchoolInput
   work: WorkUpdateManyWithoutSchoolInput
@@ -3300,12 +3744,12 @@ input SchoolUpdateWithoutWorkInput {
   ballots: BallotUpdateManyWithoutSchoolInput
   canton: StringFieldUpdateOperationsInput
   city: StringFieldUpdateOperationsInput
+  discussion: DiscussionUpdateManyWithoutSchoolInput
   domain: DomainUpdateOneWithoutSchoolsInput
   id: StringFieldUpdateOperationsInput
   members: UserUpdateManyWithoutSchoolInput
   name: StringFieldUpdateOperationsInput
   teams: TeamUpdateManyWithoutSchoolInput
-  thread: ThreadUpdateManyWithoutSchoolInput
   type: StringFieldUpdateOperationsInput
   Vote: VoteUpdateManyWithoutSchoolInput
   Voted: VotedUpdateManyWithoutSchoolInput
@@ -3332,6 +3776,11 @@ input SchoolUpsertWithoutBallotsInput {
   update: SchoolUpdateWithoutBallotsInput!
 }
 
+input SchoolUpsertWithoutDiscussionInput {
+  create: SchoolCreateWithoutDiscussionInput!
+  update: SchoolUpdateWithoutDiscussionInput!
+}
+
 input SchoolUpsertWithoutMembersInput {
   create: SchoolCreateWithoutMembersInput!
   update: SchoolUpdateWithoutMembersInput!
@@ -3340,11 +3789,6 @@ input SchoolUpsertWithoutMembersInput {
 input SchoolUpsertWithoutTeamsInput {
   create: SchoolCreateWithoutTeamsInput!
   update: SchoolUpdateWithoutTeamsInput!
-}
-
-input SchoolUpsertWithoutThreadInput {
-  create: SchoolCreateWithoutThreadInput!
-  update: SchoolUpdateWithoutThreadInput!
 }
 
 input SchoolUpsertWithoutVotedInput {
@@ -3376,6 +3820,7 @@ input SchoolWhereInput {
   ballots: BallotListRelationFilter
   canton: StringFilter
   city: StringFilter
+  discussion: DiscussionListRelationFilter
   domain: DomainWhereInput
   domainId: StringNullableFilter
   id: StringFilter
@@ -3384,7 +3829,6 @@ input SchoolWhereInput {
   NOT: [SchoolWhereInput!]
   OR: [SchoolWhereInput!]
   teams: TeamListRelationFilter
-  thread: ThreadListRelationFilter
   type: StringFilter
   Vote: VoteListRelationFilter
   Voted: VotedListRelationFilter
@@ -3480,13 +3924,13 @@ input TeamCreateInput {
   BallotRuns: BallotRunCreateManyWithoutTeamInput
   ballots: BallotCreateManyWithoutTeamInput
   cards: String
+  Discussion: DiscussionCreateManyWithoutTeamInput
   domain: DomainCreateOneWithoutTeamInput
   id: String
   members: UserCreateManyWithoutTeamInput
   name: String!
   school: SchoolCreateOneWithoutTeamsInput!
   teacher: UserCreateOneWithoutTeachesInput!
-  Thread: ThreadCreateManyWithoutTeamInput
   User: UserCreateManyWithoutTeamInput
   Vote: VoteCreateManyWithoutTeamInput
   Voted: VotedCreateManyWithoutTeamInput
@@ -3536,16 +3980,16 @@ input TeamCreateOneWithoutBallotsInput {
   create: TeamCreateWithoutBallotsInput
 }
 
+input TeamCreateOneWithoutDiscussionInput {
+  connect: TeamWhereUniqueInput
+  connectOrCreate: TeamCreateOrConnectWithoutDiscussionInput
+  create: TeamCreateWithoutDiscussionInput
+}
+
 input TeamCreateOneWithoutMembersInput {
   connect: TeamWhereUniqueInput
   connectOrCreate: TeamCreateOrConnectWithoutmembersInput
   create: TeamCreateWithoutMembersInput
-}
-
-input TeamCreateOneWithoutThreadInput {
-  connect: TeamWhereUniqueInput
-  connectOrCreate: TeamCreateOrConnectWithoutThreadInput
-  create: TeamCreateWithoutThreadInput
 }
 
 input TeamCreateOneWithoutUserInput {
@@ -3592,6 +4036,11 @@ input TeamCreateOrConnectWithoutballotsInput {
   where: TeamWhereUniqueInput!
 }
 
+input TeamCreateOrConnectWithoutDiscussionInput {
+  create: TeamCreateWithoutDiscussionInput!
+  where: TeamWhereUniqueInput!
+}
+
 input TeamCreateOrConnectWithoutdomainInput {
   create: TeamCreateWithoutDomainInput!
   where: TeamWhereUniqueInput!
@@ -3609,11 +4058,6 @@ input TeamCreateOrConnectWithoutschoolInput {
 
 input TeamCreateOrConnectWithoutteacherInput {
   create: TeamCreateWithoutTeacherInput!
-  where: TeamWhereUniqueInput!
-}
-
-input TeamCreateOrConnectWithoutThreadInput {
-  create: TeamCreateWithoutThreadInput!
   where: TeamWhereUniqueInput!
 }
 
@@ -3643,6 +4087,7 @@ input TeamCreateWithoutActivityInput {
   ballots: BallotCreateManyWithoutTeamInput
   cards: String
   code: String
+  Discussion: DiscussionCreateManyWithoutTeamInput
   domain: DomainCreateOneWithoutTeamInput
   id: String
   invite: String
@@ -3650,7 +4095,6 @@ input TeamCreateWithoutActivityInput {
   name: String!
   school: SchoolCreateOneWithoutTeamsInput!
   teacher: UserCreateOneWithoutTeachesInput!
-  Thread: ThreadCreateManyWithoutTeamInput
   User: UserCreateManyWithoutTeamInput
   Vote: VoteCreateManyWithoutTeamInput
   Voted: VotedCreateManyWithoutTeamInput
@@ -3664,6 +4108,7 @@ input TeamCreateWithoutAttachmentInput {
   ballots: BallotCreateManyWithoutTeamInput
   cards: String
   code: String
+  Discussion: DiscussionCreateManyWithoutTeamInput
   domain: DomainCreateOneWithoutTeamInput
   id: String
   invite: String
@@ -3671,7 +4116,6 @@ input TeamCreateWithoutAttachmentInput {
   name: String!
   school: SchoolCreateOneWithoutTeamsInput!
   teacher: UserCreateOneWithoutTeachesInput!
-  Thread: ThreadCreateManyWithoutTeamInput
   User: UserCreateManyWithoutTeamInput
   Vote: VoteCreateManyWithoutTeamInput
   Voted: VotedCreateManyWithoutTeamInput
@@ -3685,6 +4129,7 @@ input TeamCreateWithoutBallotRunsInput {
   ballots: BallotCreateManyWithoutTeamInput
   cards: String
   code: String
+  Discussion: DiscussionCreateManyWithoutTeamInput
   domain: DomainCreateOneWithoutTeamInput
   id: String
   invite: String
@@ -3692,7 +4137,6 @@ input TeamCreateWithoutBallotRunsInput {
   name: String!
   school: SchoolCreateOneWithoutTeamsInput!
   teacher: UserCreateOneWithoutTeachesInput!
-  Thread: ThreadCreateManyWithoutTeamInput
   User: UserCreateManyWithoutTeamInput
   Vote: VoteCreateManyWithoutTeamInput
   Voted: VotedCreateManyWithoutTeamInput
@@ -3706,6 +4150,7 @@ input TeamCreateWithoutBallotsInput {
   BallotRuns: BallotRunCreateManyWithoutTeamInput
   cards: String
   code: String
+  Discussion: DiscussionCreateManyWithoutTeamInput
   domain: DomainCreateOneWithoutTeamInput
   id: String
   invite: String
@@ -3713,7 +4158,27 @@ input TeamCreateWithoutBallotsInput {
   name: String!
   school: SchoolCreateOneWithoutTeamsInput!
   teacher: UserCreateOneWithoutTeachesInput!
-  Thread: ThreadCreateManyWithoutTeamInput
+  User: UserCreateManyWithoutTeamInput
+  Vote: VoteCreateManyWithoutTeamInput
+  Voted: VotedCreateManyWithoutTeamInput
+  work: WorkCreateManyWithoutTeamInput
+  year: Int
+}
+
+input TeamCreateWithoutDiscussionInput {
+  activity: ActivityCreateManyWithoutTeamInput
+  attachment: AttachmentCreateManyWithoutTeamInput
+  BallotRuns: BallotRunCreateManyWithoutTeamInput
+  ballots: BallotCreateManyWithoutTeamInput
+  cards: String
+  code: String
+  domain: DomainCreateOneWithoutTeamInput
+  id: String
+  invite: String
+  members: UserCreateManyWithoutTeamInput
+  name: String!
+  school: SchoolCreateOneWithoutTeamsInput!
+  teacher: UserCreateOneWithoutTeachesInput!
   User: UserCreateManyWithoutTeamInput
   Vote: VoteCreateManyWithoutTeamInput
   Voted: VotedCreateManyWithoutTeamInput
@@ -3728,13 +4193,13 @@ input TeamCreateWithoutDomainInput {
   ballots: BallotCreateManyWithoutTeamInput
   cards: String
   code: String
+  Discussion: DiscussionCreateManyWithoutTeamInput
   id: String
   invite: String
   members: UserCreateManyWithoutTeamInput
   name: String!
   school: SchoolCreateOneWithoutTeamsInput!
   teacher: UserCreateOneWithoutTeachesInput!
-  Thread: ThreadCreateManyWithoutTeamInput
   User: UserCreateManyWithoutTeamInput
   Vote: VoteCreateManyWithoutTeamInput
   Voted: VotedCreateManyWithoutTeamInput
@@ -3749,13 +4214,13 @@ input TeamCreateWithoutMembersInput {
   ballots: BallotCreateManyWithoutTeamInput
   cards: String
   code: String
+  Discussion: DiscussionCreateManyWithoutTeamInput
   domain: DomainCreateOneWithoutTeamInput
   id: String
   invite: String
   name: String!
   school: SchoolCreateOneWithoutTeamsInput!
   teacher: UserCreateOneWithoutTeachesInput!
-  Thread: ThreadCreateManyWithoutTeamInput
   User: UserCreateManyWithoutTeamInput
   Vote: VoteCreateManyWithoutTeamInput
   Voted: VotedCreateManyWithoutTeamInput
@@ -3770,13 +4235,13 @@ input TeamCreateWithoutSchoolInput {
   ballots: BallotCreateManyWithoutTeamInput
   cards: String
   code: String
+  Discussion: DiscussionCreateManyWithoutTeamInput
   domain: DomainCreateOneWithoutTeamInput
   id: String
   invite: String
   members: UserCreateManyWithoutTeamInput
   name: String!
   teacher: UserCreateOneWithoutTeachesInput!
-  Thread: ThreadCreateManyWithoutTeamInput
   User: UserCreateManyWithoutTeamInput
   Vote: VoteCreateManyWithoutTeamInput
   Voted: VotedCreateManyWithoutTeamInput
@@ -3791,34 +4256,13 @@ input TeamCreateWithoutTeacherInput {
   ballots: BallotCreateManyWithoutTeamInput
   cards: String
   code: String
+  Discussion: DiscussionCreateManyWithoutTeamInput
   domain: DomainCreateOneWithoutTeamInput
   id: String
   invite: String
   members: UserCreateManyWithoutTeamInput
   name: String!
   school: SchoolCreateOneWithoutTeamsInput!
-  Thread: ThreadCreateManyWithoutTeamInput
-  User: UserCreateManyWithoutTeamInput
-  Vote: VoteCreateManyWithoutTeamInput
-  Voted: VotedCreateManyWithoutTeamInput
-  work: WorkCreateManyWithoutTeamInput
-  year: Int
-}
-
-input TeamCreateWithoutThreadInput {
-  activity: ActivityCreateManyWithoutTeamInput
-  attachment: AttachmentCreateManyWithoutTeamInput
-  BallotRuns: BallotRunCreateManyWithoutTeamInput
-  ballots: BallotCreateManyWithoutTeamInput
-  cards: String
-  code: String
-  domain: DomainCreateOneWithoutTeamInput
-  id: String
-  invite: String
-  members: UserCreateManyWithoutTeamInput
-  name: String!
-  school: SchoolCreateOneWithoutTeamsInput!
-  teacher: UserCreateOneWithoutTeachesInput!
   User: UserCreateManyWithoutTeamInput
   Vote: VoteCreateManyWithoutTeamInput
   Voted: VotedCreateManyWithoutTeamInput
@@ -3833,6 +4277,7 @@ input TeamCreateWithoutUserInput {
   ballots: BallotCreateManyWithoutTeamInput
   cards: String
   code: String
+  Discussion: DiscussionCreateManyWithoutTeamInput
   domain: DomainCreateOneWithoutTeamInput
   id: String
   invite: String
@@ -3840,7 +4285,6 @@ input TeamCreateWithoutUserInput {
   name: String!
   school: SchoolCreateOneWithoutTeamsInput!
   teacher: UserCreateOneWithoutTeachesInput!
-  Thread: ThreadCreateManyWithoutTeamInput
   Vote: VoteCreateManyWithoutTeamInput
   Voted: VotedCreateManyWithoutTeamInput
   work: WorkCreateManyWithoutTeamInput
@@ -3854,6 +4298,7 @@ input TeamCreateWithoutVotedInput {
   ballots: BallotCreateManyWithoutTeamInput
   cards: String
   code: String
+  Discussion: DiscussionCreateManyWithoutTeamInput
   domain: DomainCreateOneWithoutTeamInput
   id: String
   invite: String
@@ -3861,7 +4306,6 @@ input TeamCreateWithoutVotedInput {
   name: String!
   school: SchoolCreateOneWithoutTeamsInput!
   teacher: UserCreateOneWithoutTeachesInput!
-  Thread: ThreadCreateManyWithoutTeamInput
   User: UserCreateManyWithoutTeamInput
   Vote: VoteCreateManyWithoutTeamInput
   work: WorkCreateManyWithoutTeamInput
@@ -3875,6 +4319,7 @@ input TeamCreateWithoutVoteInput {
   ballots: BallotCreateManyWithoutTeamInput
   cards: String
   code: String
+  Discussion: DiscussionCreateManyWithoutTeamInput
   domain: DomainCreateOneWithoutTeamInput
   id: String
   invite: String
@@ -3882,7 +4327,6 @@ input TeamCreateWithoutVoteInput {
   name: String!
   school: SchoolCreateOneWithoutTeamsInput!
   teacher: UserCreateOneWithoutTeachesInput!
-  Thread: ThreadCreateManyWithoutTeamInput
   User: UserCreateManyWithoutTeamInput
   Voted: VotedCreateManyWithoutTeamInput
   work: WorkCreateManyWithoutTeamInput
@@ -3896,6 +4340,7 @@ input TeamCreateWithoutWorkInput {
   ballots: BallotCreateManyWithoutTeamInput
   cards: String
   code: String
+  Discussion: DiscussionCreateManyWithoutTeamInput
   domain: DomainCreateOneWithoutTeamInput
   id: String
   invite: String
@@ -3903,7 +4348,6 @@ input TeamCreateWithoutWorkInput {
   name: String!
   school: SchoolCreateOneWithoutTeamsInput!
   teacher: UserCreateOneWithoutTeachesInput!
-  Thread: ThreadCreateManyWithoutTeamInput
   User: UserCreateManyWithoutTeamInput
   Vote: VoteCreateManyWithoutTeamInput
   Voted: VotedCreateManyWithoutTeamInput
@@ -4030,12 +4474,12 @@ input TeamUpdateOneRequiredWithoutBallotRunsInput {
   upsert: TeamUpsertWithoutBallotRunsInput
 }
 
-input TeamUpdateOneRequiredWithoutThreadInput {
+input TeamUpdateOneRequiredWithoutDiscussionInput {
   connect: TeamWhereUniqueInput
-  connectOrCreate: TeamCreateOrConnectWithoutThreadInput
-  create: TeamCreateWithoutThreadInput
-  update: TeamUpdateWithoutThreadInput
-  upsert: TeamUpsertWithoutThreadInput
+  connectOrCreate: TeamCreateOrConnectWithoutDiscussionInput
+  create: TeamCreateWithoutDiscussionInput
+  update: TeamUpdateWithoutDiscussionInput
+  upsert: TeamUpsertWithoutDiscussionInput
 }
 
 input TeamUpdateOneRequiredWithoutWorkInput {
@@ -4102,6 +4546,7 @@ input TeamUpdateWithoutActivityInput {
   ballots: BallotUpdateManyWithoutTeamInput
   cards: StringFieldUpdateOperationsInput
   code: NullableStringFieldUpdateOperationsInput
+  Discussion: DiscussionUpdateManyWithoutTeamInput
   domain: DomainUpdateOneWithoutTeamInput
   id: StringFieldUpdateOperationsInput
   invite: NullableStringFieldUpdateOperationsInput
@@ -4109,7 +4554,6 @@ input TeamUpdateWithoutActivityInput {
   name: StringFieldUpdateOperationsInput
   school: SchoolUpdateOneRequiredWithoutTeamsInput
   teacher: UserUpdateOneRequiredWithoutTeachesInput
-  Thread: ThreadUpdateManyWithoutTeamInput
   User: UserUpdateManyWithoutTeamInput
   Vote: VoteUpdateManyWithoutTeamInput
   Voted: VotedUpdateManyWithoutTeamInput
@@ -4123,6 +4567,7 @@ input TeamUpdateWithoutAttachmentInput {
   ballots: BallotUpdateManyWithoutTeamInput
   cards: StringFieldUpdateOperationsInput
   code: NullableStringFieldUpdateOperationsInput
+  Discussion: DiscussionUpdateManyWithoutTeamInput
   domain: DomainUpdateOneWithoutTeamInput
   id: StringFieldUpdateOperationsInput
   invite: NullableStringFieldUpdateOperationsInput
@@ -4130,7 +4575,6 @@ input TeamUpdateWithoutAttachmentInput {
   name: StringFieldUpdateOperationsInput
   school: SchoolUpdateOneRequiredWithoutTeamsInput
   teacher: UserUpdateOneRequiredWithoutTeachesInput
-  Thread: ThreadUpdateManyWithoutTeamInput
   User: UserUpdateManyWithoutTeamInput
   Vote: VoteUpdateManyWithoutTeamInput
   Voted: VotedUpdateManyWithoutTeamInput
@@ -4144,6 +4588,7 @@ input TeamUpdateWithoutBallotRunsInput {
   ballots: BallotUpdateManyWithoutTeamInput
   cards: StringFieldUpdateOperationsInput
   code: NullableStringFieldUpdateOperationsInput
+  Discussion: DiscussionUpdateManyWithoutTeamInput
   domain: DomainUpdateOneWithoutTeamInput
   id: StringFieldUpdateOperationsInput
   invite: NullableStringFieldUpdateOperationsInput
@@ -4151,7 +4596,6 @@ input TeamUpdateWithoutBallotRunsInput {
   name: StringFieldUpdateOperationsInput
   school: SchoolUpdateOneRequiredWithoutTeamsInput
   teacher: UserUpdateOneRequiredWithoutTeachesInput
-  Thread: ThreadUpdateManyWithoutTeamInput
   User: UserUpdateManyWithoutTeamInput
   Vote: VoteUpdateManyWithoutTeamInput
   Voted: VotedUpdateManyWithoutTeamInput
@@ -4165,6 +4609,7 @@ input TeamUpdateWithoutBallotsInput {
   BallotRuns: BallotRunUpdateManyWithoutTeamInput
   cards: StringFieldUpdateOperationsInput
   code: NullableStringFieldUpdateOperationsInput
+  Discussion: DiscussionUpdateManyWithoutTeamInput
   domain: DomainUpdateOneWithoutTeamInput
   id: StringFieldUpdateOperationsInput
   invite: NullableStringFieldUpdateOperationsInput
@@ -4172,7 +4617,27 @@ input TeamUpdateWithoutBallotsInput {
   name: StringFieldUpdateOperationsInput
   school: SchoolUpdateOneRequiredWithoutTeamsInput
   teacher: UserUpdateOneRequiredWithoutTeachesInput
-  Thread: ThreadUpdateManyWithoutTeamInput
+  User: UserUpdateManyWithoutTeamInput
+  Vote: VoteUpdateManyWithoutTeamInput
+  Voted: VotedUpdateManyWithoutTeamInput
+  work: WorkUpdateManyWithoutTeamInput
+  year: NullableIntFieldUpdateOperationsInput
+}
+
+input TeamUpdateWithoutDiscussionInput {
+  activity: ActivityUpdateManyWithoutTeamInput
+  attachment: AttachmentUpdateManyWithoutTeamInput
+  BallotRuns: BallotRunUpdateManyWithoutTeamInput
+  ballots: BallotUpdateManyWithoutTeamInput
+  cards: StringFieldUpdateOperationsInput
+  code: NullableStringFieldUpdateOperationsInput
+  domain: DomainUpdateOneWithoutTeamInput
+  id: StringFieldUpdateOperationsInput
+  invite: NullableStringFieldUpdateOperationsInput
+  members: UserUpdateManyWithoutTeamInput
+  name: StringFieldUpdateOperationsInput
+  school: SchoolUpdateOneRequiredWithoutTeamsInput
+  teacher: UserUpdateOneRequiredWithoutTeachesInput
   User: UserUpdateManyWithoutTeamInput
   Vote: VoteUpdateManyWithoutTeamInput
   Voted: VotedUpdateManyWithoutTeamInput
@@ -4187,13 +4652,13 @@ input TeamUpdateWithoutDomainInput {
   ballots: BallotUpdateManyWithoutTeamInput
   cards: StringFieldUpdateOperationsInput
   code: NullableStringFieldUpdateOperationsInput
+  Discussion: DiscussionUpdateManyWithoutTeamInput
   id: StringFieldUpdateOperationsInput
   invite: NullableStringFieldUpdateOperationsInput
   members: UserUpdateManyWithoutTeamInput
   name: StringFieldUpdateOperationsInput
   school: SchoolUpdateOneRequiredWithoutTeamsInput
   teacher: UserUpdateOneRequiredWithoutTeachesInput
-  Thread: ThreadUpdateManyWithoutTeamInput
   User: UserUpdateManyWithoutTeamInput
   Vote: VoteUpdateManyWithoutTeamInput
   Voted: VotedUpdateManyWithoutTeamInput
@@ -4208,13 +4673,13 @@ input TeamUpdateWithoutMembersInput {
   ballots: BallotUpdateManyWithoutTeamInput
   cards: StringFieldUpdateOperationsInput
   code: NullableStringFieldUpdateOperationsInput
+  Discussion: DiscussionUpdateManyWithoutTeamInput
   domain: DomainUpdateOneWithoutTeamInput
   id: StringFieldUpdateOperationsInput
   invite: NullableStringFieldUpdateOperationsInput
   name: StringFieldUpdateOperationsInput
   school: SchoolUpdateOneRequiredWithoutTeamsInput
   teacher: UserUpdateOneRequiredWithoutTeachesInput
-  Thread: ThreadUpdateManyWithoutTeamInput
   User: UserUpdateManyWithoutTeamInput
   Vote: VoteUpdateManyWithoutTeamInput
   Voted: VotedUpdateManyWithoutTeamInput
@@ -4229,13 +4694,13 @@ input TeamUpdateWithoutSchoolInput {
   ballots: BallotUpdateManyWithoutTeamInput
   cards: StringFieldUpdateOperationsInput
   code: NullableStringFieldUpdateOperationsInput
+  Discussion: DiscussionUpdateManyWithoutTeamInput
   domain: DomainUpdateOneWithoutTeamInput
   id: StringFieldUpdateOperationsInput
   invite: NullableStringFieldUpdateOperationsInput
   members: UserUpdateManyWithoutTeamInput
   name: StringFieldUpdateOperationsInput
   teacher: UserUpdateOneRequiredWithoutTeachesInput
-  Thread: ThreadUpdateManyWithoutTeamInput
   User: UserUpdateManyWithoutTeamInput
   Vote: VoteUpdateManyWithoutTeamInput
   Voted: VotedUpdateManyWithoutTeamInput
@@ -4250,34 +4715,13 @@ input TeamUpdateWithoutTeacherInput {
   ballots: BallotUpdateManyWithoutTeamInput
   cards: StringFieldUpdateOperationsInput
   code: NullableStringFieldUpdateOperationsInput
+  Discussion: DiscussionUpdateManyWithoutTeamInput
   domain: DomainUpdateOneWithoutTeamInput
   id: StringFieldUpdateOperationsInput
   invite: NullableStringFieldUpdateOperationsInput
   members: UserUpdateManyWithoutTeamInput
   name: StringFieldUpdateOperationsInput
   school: SchoolUpdateOneRequiredWithoutTeamsInput
-  Thread: ThreadUpdateManyWithoutTeamInput
-  User: UserUpdateManyWithoutTeamInput
-  Vote: VoteUpdateManyWithoutTeamInput
-  Voted: VotedUpdateManyWithoutTeamInput
-  work: WorkUpdateManyWithoutTeamInput
-  year: NullableIntFieldUpdateOperationsInput
-}
-
-input TeamUpdateWithoutThreadInput {
-  activity: ActivityUpdateManyWithoutTeamInput
-  attachment: AttachmentUpdateManyWithoutTeamInput
-  BallotRuns: BallotRunUpdateManyWithoutTeamInput
-  ballots: BallotUpdateManyWithoutTeamInput
-  cards: StringFieldUpdateOperationsInput
-  code: NullableStringFieldUpdateOperationsInput
-  domain: DomainUpdateOneWithoutTeamInput
-  id: StringFieldUpdateOperationsInput
-  invite: NullableStringFieldUpdateOperationsInput
-  members: UserUpdateManyWithoutTeamInput
-  name: StringFieldUpdateOperationsInput
-  school: SchoolUpdateOneRequiredWithoutTeamsInput
-  teacher: UserUpdateOneRequiredWithoutTeachesInput
   User: UserUpdateManyWithoutTeamInput
   Vote: VoteUpdateManyWithoutTeamInput
   Voted: VotedUpdateManyWithoutTeamInput
@@ -4292,6 +4736,7 @@ input TeamUpdateWithoutUserInput {
   ballots: BallotUpdateManyWithoutTeamInput
   cards: StringFieldUpdateOperationsInput
   code: NullableStringFieldUpdateOperationsInput
+  Discussion: DiscussionUpdateManyWithoutTeamInput
   domain: DomainUpdateOneWithoutTeamInput
   id: StringFieldUpdateOperationsInput
   invite: NullableStringFieldUpdateOperationsInput
@@ -4299,7 +4744,6 @@ input TeamUpdateWithoutUserInput {
   name: StringFieldUpdateOperationsInput
   school: SchoolUpdateOneRequiredWithoutTeamsInput
   teacher: UserUpdateOneRequiredWithoutTeachesInput
-  Thread: ThreadUpdateManyWithoutTeamInput
   Vote: VoteUpdateManyWithoutTeamInput
   Voted: VotedUpdateManyWithoutTeamInput
   work: WorkUpdateManyWithoutTeamInput
@@ -4313,6 +4757,7 @@ input TeamUpdateWithoutVotedInput {
   ballots: BallotUpdateManyWithoutTeamInput
   cards: StringFieldUpdateOperationsInput
   code: NullableStringFieldUpdateOperationsInput
+  Discussion: DiscussionUpdateManyWithoutTeamInput
   domain: DomainUpdateOneWithoutTeamInput
   id: StringFieldUpdateOperationsInput
   invite: NullableStringFieldUpdateOperationsInput
@@ -4320,7 +4765,6 @@ input TeamUpdateWithoutVotedInput {
   name: StringFieldUpdateOperationsInput
   school: SchoolUpdateOneRequiredWithoutTeamsInput
   teacher: UserUpdateOneRequiredWithoutTeachesInput
-  Thread: ThreadUpdateManyWithoutTeamInput
   User: UserUpdateManyWithoutTeamInput
   Vote: VoteUpdateManyWithoutTeamInput
   work: WorkUpdateManyWithoutTeamInput
@@ -4334,6 +4778,7 @@ input TeamUpdateWithoutVoteInput {
   ballots: BallotUpdateManyWithoutTeamInput
   cards: StringFieldUpdateOperationsInput
   code: NullableStringFieldUpdateOperationsInput
+  Discussion: DiscussionUpdateManyWithoutTeamInput
   domain: DomainUpdateOneWithoutTeamInput
   id: StringFieldUpdateOperationsInput
   invite: NullableStringFieldUpdateOperationsInput
@@ -4341,7 +4786,6 @@ input TeamUpdateWithoutVoteInput {
   name: StringFieldUpdateOperationsInput
   school: SchoolUpdateOneRequiredWithoutTeamsInput
   teacher: UserUpdateOneRequiredWithoutTeachesInput
-  Thread: ThreadUpdateManyWithoutTeamInput
   User: UserUpdateManyWithoutTeamInput
   Voted: VotedUpdateManyWithoutTeamInput
   work: WorkUpdateManyWithoutTeamInput
@@ -4355,6 +4799,7 @@ input TeamUpdateWithoutWorkInput {
   ballots: BallotUpdateManyWithoutTeamInput
   cards: StringFieldUpdateOperationsInput
   code: NullableStringFieldUpdateOperationsInput
+  Discussion: DiscussionUpdateManyWithoutTeamInput
   domain: DomainUpdateOneWithoutTeamInput
   id: StringFieldUpdateOperationsInput
   invite: NullableStringFieldUpdateOperationsInput
@@ -4362,7 +4807,6 @@ input TeamUpdateWithoutWorkInput {
   name: StringFieldUpdateOperationsInput
   school: SchoolUpdateOneRequiredWithoutTeamsInput
   teacher: UserUpdateOneRequiredWithoutTeachesInput
-  Thread: ThreadUpdateManyWithoutTeamInput
   User: UserUpdateManyWithoutTeamInput
   Vote: VoteUpdateManyWithoutTeamInput
   Voted: VotedUpdateManyWithoutTeamInput
@@ -4404,14 +4848,14 @@ input TeamUpsertWithoutBallotsInput {
   update: TeamUpdateWithoutBallotsInput!
 }
 
+input TeamUpsertWithoutDiscussionInput {
+  create: TeamCreateWithoutDiscussionInput!
+  update: TeamUpdateWithoutDiscussionInput!
+}
+
 input TeamUpsertWithoutMembersInput {
   create: TeamCreateWithoutMembersInput!
   update: TeamUpdateWithoutMembersInput!
-}
-
-input TeamUpsertWithoutThreadInput {
-  create: TeamCreateWithoutThreadInput!
-  update: TeamUpdateWithoutThreadInput!
 }
 
 input TeamUpsertWithoutUserInput {
@@ -4460,6 +4904,7 @@ input TeamWhereInput {
   ballots: BallotListRelationFilter
   cards: StringFilter
   code: StringNullableFilter
+  Discussion: DiscussionListRelationFilter
   domain: DomainWhereInput
   domainId: StringNullableFilter
   id: StringFilter
@@ -4472,7 +4917,6 @@ input TeamWhereInput {
   schoolId: StringFilter
   teacher: UserWhereInput
   teacherId: StringFilter
-  Thread: ThreadListRelationFilter
   User: UserListRelationFilter
   Vote: VoteListRelationFilter
   Voted: VotedListRelationFilter
@@ -4484,450 +4928,6 @@ input TeamWhereUniqueInput {
   code: String
   id: String
   invite: String
-}
-
-type Thread {
-  attachments(
-    after: AttachmentWhereUniqueInput
-    before: AttachmentWhereUniqueInput
-    first: Int
-    last: Int
-  ): [Attachment!]!
-  children: [Thread]
-  createdAt: DateTime!
-  id: String!
-  reactions(
-    after: ReactionWhereUniqueInput
-    before: ReactionWhereUniqueInput
-    first: Int
-    last: Int
-  ): [Reaction!]!
-  ref: String!
-  text: String!
-  title: String!
-  updatedAt: DateTime!
-  user: User!
-}
-
-input ThreadCreateManyWithoutSchoolInput {
-  connect: [ThreadWhereUniqueInput!]
-  connectOrCreate: [ThreadCreateOrConnectWithoutschoolInput!]
-  create: [ThreadCreateWithoutSchoolInput!]
-}
-
-input ThreadCreateManyWithoutTeamInput {
-  connect: [ThreadWhereUniqueInput!]
-  connectOrCreate: [ThreadCreateOrConnectWithoutteamInput!]
-  create: [ThreadCreateWithoutTeamInput!]
-}
-
-input ThreadCreateManyWithoutUserInput {
-  connect: [ThreadWhereUniqueInput!]
-  connectOrCreate: [ThreadCreateOrConnectWithoutuserInput!]
-  create: [ThreadCreateWithoutUserInput!]
-}
-
-input ThreadCreateOneWithoutActivityInput {
-  connect: ThreadWhereUniqueInput
-  connectOrCreate: ThreadCreateOrConnectWithoutActivityInput
-  create: ThreadCreateWithoutActivityInput
-}
-
-input ThreadCreateOneWithoutAttachmentsInput {
-  connect: ThreadWhereUniqueInput
-  connectOrCreate: ThreadCreateOrConnectWithoutattachmentsInput
-  create: ThreadCreateWithoutAttachmentsInput
-}
-
-input ThreadCreateOneWithoutReactionsInput {
-  connect: ThreadWhereUniqueInput
-  connectOrCreate: ThreadCreateOrConnectWithoutreactionsInput
-  create: ThreadCreateWithoutReactionsInput
-}
-
-input ThreadCreateOrConnectWithoutActivityInput {
-  create: ThreadCreateWithoutActivityInput!
-  where: ThreadWhereUniqueInput!
-}
-
-input ThreadCreateOrConnectWithoutattachmentsInput {
-  create: ThreadCreateWithoutAttachmentsInput!
-  where: ThreadWhereUniqueInput!
-}
-
-input ThreadCreateOrConnectWithoutreactionsInput {
-  create: ThreadCreateWithoutReactionsInput!
-  where: ThreadWhereUniqueInput!
-}
-
-input ThreadCreateOrConnectWithoutschoolInput {
-  create: ThreadCreateWithoutSchoolInput!
-  where: ThreadWhereUniqueInput!
-}
-
-input ThreadCreateOrConnectWithoutteamInput {
-  create: ThreadCreateWithoutTeamInput!
-  where: ThreadWhereUniqueInput!
-}
-
-input ThreadCreateOrConnectWithoutuserInput {
-  create: ThreadCreateWithoutUserInput!
-  where: ThreadWhereUniqueInput!
-}
-
-input ThreadCreateWithoutActivityInput {
-  attachments: AttachmentCreateManyWithoutThreadInput
-  createdAt: DateTime
-  id: String
-  reactions: ReactionCreateManyWithoutThreadInput
-  ref: String!
-  school: SchoolCreateOneWithoutThreadInput
-  team: TeamCreateOneWithoutThreadInput!
-  text: String
-  title: String
-  updatedAt: DateTime
-  user: UserCreateOneWithoutThreadsInput!
-}
-
-input ThreadCreateWithoutAttachmentsInput {
-  Activity: ActivityCreateManyWithoutThreadInput
-  createdAt: DateTime
-  id: String
-  reactions: ReactionCreateManyWithoutThreadInput
-  ref: String!
-  school: SchoolCreateOneWithoutThreadInput
-  team: TeamCreateOneWithoutThreadInput!
-  text: String
-  title: String
-  updatedAt: DateTime
-  user: UserCreateOneWithoutThreadsInput!
-}
-
-input ThreadCreateWithoutReactionsInput {
-  Activity: ActivityCreateManyWithoutThreadInput
-  attachments: AttachmentCreateManyWithoutThreadInput
-  createdAt: DateTime
-  id: String
-  ref: String!
-  school: SchoolCreateOneWithoutThreadInput
-  team: TeamCreateOneWithoutThreadInput!
-  text: String
-  title: String
-  updatedAt: DateTime
-  user: UserCreateOneWithoutThreadsInput!
-}
-
-input ThreadCreateWithoutSchoolInput {
-  Activity: ActivityCreateManyWithoutThreadInput
-  attachments: AttachmentCreateManyWithoutThreadInput
-  createdAt: DateTime
-  id: String
-  reactions: ReactionCreateManyWithoutThreadInput
-  ref: String!
-  team: TeamCreateOneWithoutThreadInput!
-  text: String
-  title: String
-  updatedAt: DateTime
-  user: UserCreateOneWithoutThreadsInput!
-}
-
-input ThreadCreateWithoutTeamInput {
-  Activity: ActivityCreateManyWithoutThreadInput
-  attachments: AttachmentCreateManyWithoutThreadInput
-  createdAt: DateTime
-  id: String
-  reactions: ReactionCreateManyWithoutThreadInput
-  ref: String!
-  school: SchoolCreateOneWithoutThreadInput
-  text: String
-  title: String
-  updatedAt: DateTime
-  user: UserCreateOneWithoutThreadsInput!
-}
-
-input ThreadCreateWithoutUserInput {
-  Activity: ActivityCreateManyWithoutThreadInput
-  attachments: AttachmentCreateManyWithoutThreadInput
-  createdAt: DateTime
-  id: String
-  reactions: ReactionCreateManyWithoutThreadInput
-  ref: String!
-  school: SchoolCreateOneWithoutThreadInput
-  team: TeamCreateOneWithoutThreadInput!
-  text: String
-  title: String
-  updatedAt: DateTime
-}
-
-input ThreadListRelationFilter {
-  every: ThreadWhereInput
-  none: ThreadWhereInput
-  some: ThreadWhereInput
-}
-
-input ThreadScalarWhereInput {
-  AND: [ThreadScalarWhereInput!]
-  createdAt: DateTimeFilter
-  id: StringFilter
-  NOT: [ThreadScalarWhereInput!]
-  OR: [ThreadScalarWhereInput!]
-  ref: StringFilter
-  schoolId: StringNullableFilter
-  teamId: StringFilter
-  text: StringFilter
-  title: StringFilter
-  updatedAt: DateTimeFilter
-  userId: StringFilter
-}
-
-input ThreadUpdateManyMutationInput {
-  createdAt: DateTimeFieldUpdateOperationsInput
-  id: StringFieldUpdateOperationsInput
-  ref: StringFieldUpdateOperationsInput
-  text: StringFieldUpdateOperationsInput
-  title: StringFieldUpdateOperationsInput
-  updatedAt: DateTimeFieldUpdateOperationsInput
-}
-
-input ThreadUpdateManyWithoutSchoolInput {
-  connect: [ThreadWhereUniqueInput!]
-  connectOrCreate: [ThreadCreateOrConnectWithoutschoolInput!]
-  create: [ThreadCreateWithoutSchoolInput!]
-  delete: [ThreadWhereUniqueInput!]
-  deleteMany: [ThreadScalarWhereInput!]
-  disconnect: [ThreadWhereUniqueInput!]
-  set: [ThreadWhereUniqueInput!]
-  update: [ThreadUpdateWithWhereUniqueWithoutSchoolInput!]
-  updateMany: [ThreadUpdateManyWithWhereWithoutSchoolInput!]
-  upsert: [ThreadUpsertWithWhereUniqueWithoutSchoolInput!]
-}
-
-input ThreadUpdateManyWithoutTeamInput {
-  connect: [ThreadWhereUniqueInput!]
-  connectOrCreate: [ThreadCreateOrConnectWithoutteamInput!]
-  create: [ThreadCreateWithoutTeamInput!]
-  delete: [ThreadWhereUniqueInput!]
-  deleteMany: [ThreadScalarWhereInput!]
-  disconnect: [ThreadWhereUniqueInput!]
-  set: [ThreadWhereUniqueInput!]
-  update: [ThreadUpdateWithWhereUniqueWithoutTeamInput!]
-  updateMany: [ThreadUpdateManyWithWhereWithoutTeamInput!]
-  upsert: [ThreadUpsertWithWhereUniqueWithoutTeamInput!]
-}
-
-input ThreadUpdateManyWithoutUserInput {
-  connect: [ThreadWhereUniqueInput!]
-  connectOrCreate: [ThreadCreateOrConnectWithoutuserInput!]
-  create: [ThreadCreateWithoutUserInput!]
-  delete: [ThreadWhereUniqueInput!]
-  deleteMany: [ThreadScalarWhereInput!]
-  disconnect: [ThreadWhereUniqueInput!]
-  set: [ThreadWhereUniqueInput!]
-  update: [ThreadUpdateWithWhereUniqueWithoutUserInput!]
-  updateMany: [ThreadUpdateManyWithWhereWithoutUserInput!]
-  upsert: [ThreadUpsertWithWhereUniqueWithoutUserInput!]
-}
-
-input ThreadUpdateManyWithWhereWithoutSchoolInput {
-  data: ThreadUpdateManyMutationInput!
-  where: ThreadScalarWhereInput!
-}
-
-input ThreadUpdateManyWithWhereWithoutTeamInput {
-  data: ThreadUpdateManyMutationInput!
-  where: ThreadScalarWhereInput!
-}
-
-input ThreadUpdateManyWithWhereWithoutUserInput {
-  data: ThreadUpdateManyMutationInput!
-  where: ThreadScalarWhereInput!
-}
-
-input ThreadUpdateOneWithoutActivityInput {
-  connect: ThreadWhereUniqueInput
-  connectOrCreate: ThreadCreateOrConnectWithoutActivityInput
-  create: ThreadCreateWithoutActivityInput
-  delete: Boolean
-  disconnect: Boolean
-  update: ThreadUpdateWithoutActivityInput
-  upsert: ThreadUpsertWithoutActivityInput
-}
-
-input ThreadUpdateOneWithoutAttachmentsInput {
-  connect: ThreadWhereUniqueInput
-  connectOrCreate: ThreadCreateOrConnectWithoutattachmentsInput
-  create: ThreadCreateWithoutAttachmentsInput
-  delete: Boolean
-  disconnect: Boolean
-  update: ThreadUpdateWithoutAttachmentsInput
-  upsert: ThreadUpsertWithoutAttachmentsInput
-}
-
-input ThreadUpdateOneWithoutReactionsInput {
-  connect: ThreadWhereUniqueInput
-  connectOrCreate: ThreadCreateOrConnectWithoutreactionsInput
-  create: ThreadCreateWithoutReactionsInput
-  delete: Boolean
-  disconnect: Boolean
-  update: ThreadUpdateWithoutReactionsInput
-  upsert: ThreadUpsertWithoutReactionsInput
-}
-
-input ThreadUpdateWithoutActivityInput {
-  attachments: AttachmentUpdateManyWithoutThreadInput
-  createdAt: DateTimeFieldUpdateOperationsInput
-  id: StringFieldUpdateOperationsInput
-  reactions: ReactionUpdateManyWithoutThreadInput
-  ref: StringFieldUpdateOperationsInput
-  school: SchoolUpdateOneWithoutThreadInput
-  team: TeamUpdateOneRequiredWithoutThreadInput
-  text: StringFieldUpdateOperationsInput
-  title: StringFieldUpdateOperationsInput
-  updatedAt: DateTimeFieldUpdateOperationsInput
-  user: UserUpdateOneRequiredWithoutThreadsInput
-}
-
-input ThreadUpdateWithoutAttachmentsInput {
-  Activity: ActivityUpdateManyWithoutThreadInput
-  createdAt: DateTimeFieldUpdateOperationsInput
-  id: StringFieldUpdateOperationsInput
-  reactions: ReactionUpdateManyWithoutThreadInput
-  ref: StringFieldUpdateOperationsInput
-  school: SchoolUpdateOneWithoutThreadInput
-  team: TeamUpdateOneRequiredWithoutThreadInput
-  text: StringFieldUpdateOperationsInput
-  title: StringFieldUpdateOperationsInput
-  updatedAt: DateTimeFieldUpdateOperationsInput
-  user: UserUpdateOneRequiredWithoutThreadsInput
-}
-
-input ThreadUpdateWithoutReactionsInput {
-  Activity: ActivityUpdateManyWithoutThreadInput
-  attachments: AttachmentUpdateManyWithoutThreadInput
-  createdAt: DateTimeFieldUpdateOperationsInput
-  id: StringFieldUpdateOperationsInput
-  ref: StringFieldUpdateOperationsInput
-  school: SchoolUpdateOneWithoutThreadInput
-  team: TeamUpdateOneRequiredWithoutThreadInput
-  text: StringFieldUpdateOperationsInput
-  title: StringFieldUpdateOperationsInput
-  updatedAt: DateTimeFieldUpdateOperationsInput
-  user: UserUpdateOneRequiredWithoutThreadsInput
-}
-
-input ThreadUpdateWithoutSchoolInput {
-  Activity: ActivityUpdateManyWithoutThreadInput
-  attachments: AttachmentUpdateManyWithoutThreadInput
-  createdAt: DateTimeFieldUpdateOperationsInput
-  id: StringFieldUpdateOperationsInput
-  reactions: ReactionUpdateManyWithoutThreadInput
-  ref: StringFieldUpdateOperationsInput
-  team: TeamUpdateOneRequiredWithoutThreadInput
-  text: StringFieldUpdateOperationsInput
-  title: StringFieldUpdateOperationsInput
-  updatedAt: DateTimeFieldUpdateOperationsInput
-  user: UserUpdateOneRequiredWithoutThreadsInput
-}
-
-input ThreadUpdateWithoutTeamInput {
-  Activity: ActivityUpdateManyWithoutThreadInput
-  attachments: AttachmentUpdateManyWithoutThreadInput
-  createdAt: DateTimeFieldUpdateOperationsInput
-  id: StringFieldUpdateOperationsInput
-  reactions: ReactionUpdateManyWithoutThreadInput
-  ref: StringFieldUpdateOperationsInput
-  school: SchoolUpdateOneWithoutThreadInput
-  text: StringFieldUpdateOperationsInput
-  title: StringFieldUpdateOperationsInput
-  updatedAt: DateTimeFieldUpdateOperationsInput
-  user: UserUpdateOneRequiredWithoutThreadsInput
-}
-
-input ThreadUpdateWithoutUserInput {
-  Activity: ActivityUpdateManyWithoutThreadInput
-  attachments: AttachmentUpdateManyWithoutThreadInput
-  createdAt: DateTimeFieldUpdateOperationsInput
-  id: StringFieldUpdateOperationsInput
-  reactions: ReactionUpdateManyWithoutThreadInput
-  ref: StringFieldUpdateOperationsInput
-  school: SchoolUpdateOneWithoutThreadInput
-  team: TeamUpdateOneRequiredWithoutThreadInput
-  text: StringFieldUpdateOperationsInput
-  title: StringFieldUpdateOperationsInput
-  updatedAt: DateTimeFieldUpdateOperationsInput
-}
-
-input ThreadUpdateWithWhereUniqueWithoutSchoolInput {
-  data: ThreadUpdateWithoutSchoolInput!
-  where: ThreadWhereUniqueInput!
-}
-
-input ThreadUpdateWithWhereUniqueWithoutTeamInput {
-  data: ThreadUpdateWithoutTeamInput!
-  where: ThreadWhereUniqueInput!
-}
-
-input ThreadUpdateWithWhereUniqueWithoutUserInput {
-  data: ThreadUpdateWithoutUserInput!
-  where: ThreadWhereUniqueInput!
-}
-
-input ThreadUpsertWithoutActivityInput {
-  create: ThreadCreateWithoutActivityInput!
-  update: ThreadUpdateWithoutActivityInput!
-}
-
-input ThreadUpsertWithoutAttachmentsInput {
-  create: ThreadCreateWithoutAttachmentsInput!
-  update: ThreadUpdateWithoutAttachmentsInput!
-}
-
-input ThreadUpsertWithoutReactionsInput {
-  create: ThreadCreateWithoutReactionsInput!
-  update: ThreadUpdateWithoutReactionsInput!
-}
-
-input ThreadUpsertWithWhereUniqueWithoutSchoolInput {
-  create: ThreadCreateWithoutSchoolInput!
-  update: ThreadUpdateWithoutSchoolInput!
-  where: ThreadWhereUniqueInput!
-}
-
-input ThreadUpsertWithWhereUniqueWithoutTeamInput {
-  create: ThreadCreateWithoutTeamInput!
-  update: ThreadUpdateWithoutTeamInput!
-  where: ThreadWhereUniqueInput!
-}
-
-input ThreadUpsertWithWhereUniqueWithoutUserInput {
-  create: ThreadCreateWithoutUserInput!
-  update: ThreadUpdateWithoutUserInput!
-  where: ThreadWhereUniqueInput!
-}
-
-input ThreadWhereInput {
-  Activity: ActivityListRelationFilter
-  AND: [ThreadWhereInput!]
-  attachments: AttachmentListRelationFilter
-  createdAt: DateTimeFilter
-  id: StringFilter
-  NOT: [ThreadWhereInput!]
-  OR: [ThreadWhereInput!]
-  reactions: ReactionListRelationFilter
-  ref: StringFilter
-  school: SchoolWhereInput
-  schoolId: StringNullableFilter
-  team: TeamWhereInput
-  teamId: StringFilter
-  text: StringFilter
-  title: StringFilter
-  updatedAt: DateTimeFilter
-  user: UserWhereInput
-  userId: StringFilter
-}
-
-input ThreadWhereUniqueInput {
-  id: String
 }
 
 type User {
@@ -4944,6 +4944,12 @@ type User {
     last: Int
   ): [Ballot!]!
   createdAt: DateTime!
+  discussions(
+    after: DiscussionWhereUniqueInput
+    before: DiscussionWhereUniqueInput
+    first: Int
+    last: Int
+  ): [Discussion!]!
   email: String
   emailVerified: DateTime
   gender: Gender
@@ -4967,12 +4973,6 @@ type User {
     last: Int
   ): [Team!]!
   team: Team
-  threads(
-    after: ThreadWhereUniqueInput
-    before: ThreadWhereUniqueInput
-    first: Int
-    last: Int
-  ): [Thread!]!
   year: Int
 }
 
@@ -4982,6 +4982,7 @@ input UserCreateInput {
   ballots: BallotCreateManyWithoutCreatorInput
   canton: String
   createdAt: DateTime
+  discussions: DiscussionCreateManyWithoutUserInput
   email: String
   emailVerified: DateTime
   gender: Gender
@@ -4996,7 +4997,6 @@ input UserCreateInput {
   teaches: TeamCreateManyWithoutTeacherInput
   team: TeamCreateOneWithoutMembersInput
   Team: TeamCreateOneWithoutUserInput
-  threads: ThreadCreateManyWithoutUserInput
   updatedAt: DateTime
   verified: Boolean
   voted: VotedCreateManyWithoutUserInput
@@ -5040,6 +5040,12 @@ input UserCreateOneWithoutBallotsInput {
   create: UserCreateWithoutBallotsInput
 }
 
+input UserCreateOneWithoutDiscussionsInput {
+  connect: UserWhereUniqueInput
+  connectOrCreate: UserCreateOrConnectWithoutdiscussionsInput
+  create: UserCreateWithoutDiscussionsInput
+}
+
 input UserCreateOneWithoutReactionsInput {
   connect: UserWhereUniqueInput
   connectOrCreate: UserCreateOrConnectWithoutreactionsInput
@@ -5050,12 +5056,6 @@ input UserCreateOneWithoutTeachesInput {
   connect: UserWhereUniqueInput
   connectOrCreate: UserCreateOrConnectWithoutteachesInput
   create: UserCreateWithoutTeachesInput
-}
-
-input UserCreateOneWithoutThreadsInput {
-  connect: UserWhereUniqueInput
-  connectOrCreate: UserCreateOrConnectWithoutthreadsInput
-  create: UserCreateWithoutThreadsInput
 }
 
 input UserCreateOneWithoutVotedInput {
@@ -5079,6 +5079,11 @@ input UserCreateOrConnectWithoutballotsInput {
   where: UserWhereUniqueInput!
 }
 
+input UserCreateOrConnectWithoutdiscussionsInput {
+  create: UserCreateWithoutDiscussionsInput!
+  where: UserWhereUniqueInput!
+}
+
 input UserCreateOrConnectWithoutreactionsInput {
   create: UserCreateWithoutReactionsInput!
   where: UserWhereUniqueInput!
@@ -5099,11 +5104,6 @@ input UserCreateOrConnectWithoutteamInput {
   where: UserWhereUniqueInput!
 }
 
-input UserCreateOrConnectWithoutthreadsInput {
-  create: UserCreateWithoutThreadsInput!
-  where: UserWhereUniqueInput!
-}
-
 input UserCreateOrConnectWithoutvotedInput {
   create: UserCreateWithoutVotedInput!
   where: UserWhereUniqueInput!
@@ -5119,6 +5119,7 @@ input UserCreateWithoutActivityInput {
   ballots: BallotCreateManyWithoutCreatorInput
   canton: String
   createdAt: DateTime
+  discussions: DiscussionCreateManyWithoutUserInput
   email: String
   emailVerified: DateTime
   gender: Gender
@@ -5133,7 +5134,6 @@ input UserCreateWithoutActivityInput {
   teaches: TeamCreateManyWithoutTeacherInput
   team: TeamCreateOneWithoutMembersInput
   Team: TeamCreateOneWithoutUserInput
-  threads: ThreadCreateManyWithoutUserInput
   updatedAt: DateTime
   verified: Boolean
   voted: VotedCreateManyWithoutUserInput
@@ -5143,6 +5143,61 @@ input UserCreateWithoutActivityInput {
 
 input UserCreateWithoutAttachmentsInput {
   activity: ActivityCreateManyWithoutUserInput
+  ballots: BallotCreateManyWithoutCreatorInput
+  canton: String
+  createdAt: DateTime
+  discussions: DiscussionCreateManyWithoutUserInput
+  email: String
+  emailVerified: DateTime
+  gender: Gender
+  id: String
+  image: String
+  lastname: String
+  name: String
+  password: String
+  reactions: ReactionCreateManyWithoutUserInput
+  role: Role
+  school: SchoolCreateOneWithoutMembersInput
+  teaches: TeamCreateManyWithoutTeacherInput
+  team: TeamCreateOneWithoutMembersInput
+  Team: TeamCreateOneWithoutUserInput
+  updatedAt: DateTime
+  verified: Boolean
+  voted: VotedCreateManyWithoutUserInput
+  work: WorkCreateManyWithoutUsersInput
+  year: Int
+}
+
+input UserCreateWithoutBallotsInput {
+  activity: ActivityCreateManyWithoutUserInput
+  attachments: AttachmentCreateManyWithoutUserInput
+  canton: String
+  createdAt: DateTime
+  discussions: DiscussionCreateManyWithoutUserInput
+  email: String
+  emailVerified: DateTime
+  gender: Gender
+  id: String
+  image: String
+  lastname: String
+  name: String
+  password: String
+  reactions: ReactionCreateManyWithoutUserInput
+  role: Role
+  school: SchoolCreateOneWithoutMembersInput
+  teaches: TeamCreateManyWithoutTeacherInput
+  team: TeamCreateOneWithoutMembersInput
+  Team: TeamCreateOneWithoutUserInput
+  updatedAt: DateTime
+  verified: Boolean
+  voted: VotedCreateManyWithoutUserInput
+  work: WorkCreateManyWithoutUsersInput
+  year: Int
+}
+
+input UserCreateWithoutDiscussionsInput {
+  activity: ActivityCreateManyWithoutUserInput
+  attachments: AttachmentCreateManyWithoutUserInput
   ballots: BallotCreateManyWithoutCreatorInput
   canton: String
   createdAt: DateTime
@@ -5160,34 +5215,6 @@ input UserCreateWithoutAttachmentsInput {
   teaches: TeamCreateManyWithoutTeacherInput
   team: TeamCreateOneWithoutMembersInput
   Team: TeamCreateOneWithoutUserInput
-  threads: ThreadCreateManyWithoutUserInput
-  updatedAt: DateTime
-  verified: Boolean
-  voted: VotedCreateManyWithoutUserInput
-  work: WorkCreateManyWithoutUsersInput
-  year: Int
-}
-
-input UserCreateWithoutBallotsInput {
-  activity: ActivityCreateManyWithoutUserInput
-  attachments: AttachmentCreateManyWithoutUserInput
-  canton: String
-  createdAt: DateTime
-  email: String
-  emailVerified: DateTime
-  gender: Gender
-  id: String
-  image: String
-  lastname: String
-  name: String
-  password: String
-  reactions: ReactionCreateManyWithoutUserInput
-  role: Role
-  school: SchoolCreateOneWithoutMembersInput
-  teaches: TeamCreateManyWithoutTeacherInput
-  team: TeamCreateOneWithoutMembersInput
-  Team: TeamCreateOneWithoutUserInput
-  threads: ThreadCreateManyWithoutUserInput
   updatedAt: DateTime
   verified: Boolean
   voted: VotedCreateManyWithoutUserInput
@@ -5201,6 +5228,7 @@ input UserCreateWithoutReactionsInput {
   ballots: BallotCreateManyWithoutCreatorInput
   canton: String
   createdAt: DateTime
+  discussions: DiscussionCreateManyWithoutUserInput
   email: String
   emailVerified: DateTime
   gender: Gender
@@ -5214,7 +5242,6 @@ input UserCreateWithoutReactionsInput {
   teaches: TeamCreateManyWithoutTeacherInput
   team: TeamCreateOneWithoutMembersInput
   Team: TeamCreateOneWithoutUserInput
-  threads: ThreadCreateManyWithoutUserInput
   updatedAt: DateTime
   verified: Boolean
   voted: VotedCreateManyWithoutUserInput
@@ -5228,6 +5255,7 @@ input UserCreateWithoutSchoolInput {
   ballots: BallotCreateManyWithoutCreatorInput
   canton: String
   createdAt: DateTime
+  discussions: DiscussionCreateManyWithoutUserInput
   email: String
   emailVerified: DateTime
   gender: Gender
@@ -5241,7 +5269,6 @@ input UserCreateWithoutSchoolInput {
   teaches: TeamCreateManyWithoutTeacherInput
   team: TeamCreateOneWithoutMembersInput
   Team: TeamCreateOneWithoutUserInput
-  threads: ThreadCreateManyWithoutUserInput
   updatedAt: DateTime
   verified: Boolean
   voted: VotedCreateManyWithoutUserInput
@@ -5255,6 +5282,7 @@ input UserCreateWithoutTeachesInput {
   ballots: BallotCreateManyWithoutCreatorInput
   canton: String
   createdAt: DateTime
+  discussions: DiscussionCreateManyWithoutUserInput
   email: String
   emailVerified: DateTime
   gender: Gender
@@ -5268,7 +5296,6 @@ input UserCreateWithoutTeachesInput {
   school: SchoolCreateOneWithoutMembersInput
   team: TeamCreateOneWithoutMembersInput
   Team: TeamCreateOneWithoutUserInput
-  threads: ThreadCreateManyWithoutUserInput
   updatedAt: DateTime
   verified: Boolean
   voted: VotedCreateManyWithoutUserInput
@@ -5282,6 +5309,7 @@ input UserCreateWithoutTeamInput {
   ballots: BallotCreateManyWithoutCreatorInput
   canton: String
   createdAt: DateTime
+  discussions: DiscussionCreateManyWithoutUserInput
   email: String
   emailVerified: DateTime
   gender: Gender
@@ -5294,34 +5322,6 @@ input UserCreateWithoutTeamInput {
   role: Role
   school: SchoolCreateOneWithoutMembersInput
   teaches: TeamCreateManyWithoutTeacherInput
-  Team: TeamCreateOneWithoutUserInput
-  threads: ThreadCreateManyWithoutUserInput
-  updatedAt: DateTime
-  verified: Boolean
-  voted: VotedCreateManyWithoutUserInput
-  work: WorkCreateManyWithoutUsersInput
-  year: Int
-}
-
-input UserCreateWithoutThreadsInput {
-  activity: ActivityCreateManyWithoutUserInput
-  attachments: AttachmentCreateManyWithoutUserInput
-  ballots: BallotCreateManyWithoutCreatorInput
-  canton: String
-  createdAt: DateTime
-  email: String
-  emailVerified: DateTime
-  gender: Gender
-  id: String
-  image: String
-  lastname: String
-  name: String
-  password: String
-  reactions: ReactionCreateManyWithoutUserInput
-  role: Role
-  school: SchoolCreateOneWithoutMembersInput
-  teaches: TeamCreateManyWithoutTeacherInput
-  team: TeamCreateOneWithoutMembersInput
   Team: TeamCreateOneWithoutUserInput
   updatedAt: DateTime
   verified: Boolean
@@ -5336,6 +5336,7 @@ input UserCreateWithoutVotedInput {
   ballots: BallotCreateManyWithoutCreatorInput
   canton: String
   createdAt: DateTime
+  discussions: DiscussionCreateManyWithoutUserInput
   email: String
   emailVerified: DateTime
   gender: Gender
@@ -5350,7 +5351,6 @@ input UserCreateWithoutVotedInput {
   teaches: TeamCreateManyWithoutTeacherInput
   team: TeamCreateOneWithoutMembersInput
   Team: TeamCreateOneWithoutUserInput
-  threads: ThreadCreateManyWithoutUserInput
   updatedAt: DateTime
   verified: Boolean
   work: WorkCreateManyWithoutUsersInput
@@ -5363,6 +5363,7 @@ input UserCreateWithoutWorkInput {
   ballots: BallotCreateManyWithoutCreatorInput
   canton: String
   createdAt: DateTime
+  discussions: DiscussionCreateManyWithoutUserInput
   email: String
   emailVerified: DateTime
   gender: Gender
@@ -5377,7 +5378,6 @@ input UserCreateWithoutWorkInput {
   teaches: TeamCreateManyWithoutTeacherInput
   team: TeamCreateOneWithoutMembersInput
   Team: TeamCreateOneWithoutUserInput
-  threads: ThreadCreateManyWithoutUserInput
   updatedAt: DateTime
   verified: Boolean
   voted: VotedCreateManyWithoutUserInput
@@ -5437,6 +5437,7 @@ input UserUpdateInput {
   ballots: BallotUpdateManyWithoutCreatorInput
   canton: NullableStringFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
+  discussions: DiscussionUpdateManyWithoutUserInput
   email: NullableStringFieldUpdateOperationsInput
   emailVerified: NullableDateTimeFieldUpdateOperationsInput
   gender: NullableEnumGenderFieldUpdateOperationsInput
@@ -5451,7 +5452,6 @@ input UserUpdateInput {
   teaches: TeamUpdateManyWithoutTeacherInput
   team: TeamUpdateOneWithoutMembersInput
   Team: TeamUpdateOneWithoutUserInput
-  threads: ThreadUpdateManyWithoutUserInput
   updatedAt: DateTimeFieldUpdateOperationsInput
   verified: NullableBoolFieldUpdateOperationsInput
   voted: VotedUpdateManyWithoutUserInput
@@ -5546,6 +5546,14 @@ input UserUpdateOneRequiredWithoutAttachmentsInput {
   upsert: UserUpsertWithoutAttachmentsInput
 }
 
+input UserUpdateOneRequiredWithoutDiscussionsInput {
+  connect: UserWhereUniqueInput
+  connectOrCreate: UserCreateOrConnectWithoutdiscussionsInput
+  create: UserCreateWithoutDiscussionsInput
+  update: UserUpdateWithoutDiscussionsInput
+  upsert: UserUpsertWithoutDiscussionsInput
+}
+
 input UserUpdateOneRequiredWithoutReactionsInput {
   connect: UserWhereUniqueInput
   connectOrCreate: UserCreateOrConnectWithoutreactionsInput
@@ -5560,14 +5568,6 @@ input UserUpdateOneRequiredWithoutTeachesInput {
   create: UserCreateWithoutTeachesInput
   update: UserUpdateWithoutTeachesInput
   upsert: UserUpsertWithoutTeachesInput
-}
-
-input UserUpdateOneRequiredWithoutThreadsInput {
-  connect: UserWhereUniqueInput
-  connectOrCreate: UserCreateOrConnectWithoutthreadsInput
-  create: UserCreateWithoutThreadsInput
-  update: UserUpdateWithoutThreadsInput
-  upsert: UserUpsertWithoutThreadsInput
 }
 
 input UserUpdateOneRequiredWithoutVotedInput {
@@ -5593,6 +5593,7 @@ input UserUpdateWithoutActivityInput {
   ballots: BallotUpdateManyWithoutCreatorInput
   canton: NullableStringFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
+  discussions: DiscussionUpdateManyWithoutUserInput
   email: NullableStringFieldUpdateOperationsInput
   emailVerified: NullableDateTimeFieldUpdateOperationsInput
   gender: NullableEnumGenderFieldUpdateOperationsInput
@@ -5607,7 +5608,6 @@ input UserUpdateWithoutActivityInput {
   teaches: TeamUpdateManyWithoutTeacherInput
   team: TeamUpdateOneWithoutMembersInput
   Team: TeamUpdateOneWithoutUserInput
-  threads: ThreadUpdateManyWithoutUserInput
   updatedAt: DateTimeFieldUpdateOperationsInput
   verified: NullableBoolFieldUpdateOperationsInput
   voted: VotedUpdateManyWithoutUserInput
@@ -5617,6 +5617,61 @@ input UserUpdateWithoutActivityInput {
 
 input UserUpdateWithoutAttachmentsInput {
   activity: ActivityUpdateManyWithoutUserInput
+  ballots: BallotUpdateManyWithoutCreatorInput
+  canton: NullableStringFieldUpdateOperationsInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  discussions: DiscussionUpdateManyWithoutUserInput
+  email: NullableStringFieldUpdateOperationsInput
+  emailVerified: NullableDateTimeFieldUpdateOperationsInput
+  gender: NullableEnumGenderFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  image: NullableStringFieldUpdateOperationsInput
+  lastname: NullableStringFieldUpdateOperationsInput
+  name: NullableStringFieldUpdateOperationsInput
+  password: NullableStringFieldUpdateOperationsInput
+  reactions: ReactionUpdateManyWithoutUserInput
+  role: EnumRoleFieldUpdateOperationsInput
+  school: SchoolUpdateOneWithoutMembersInput
+  teaches: TeamUpdateManyWithoutTeacherInput
+  team: TeamUpdateOneWithoutMembersInput
+  Team: TeamUpdateOneWithoutUserInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+  verified: NullableBoolFieldUpdateOperationsInput
+  voted: VotedUpdateManyWithoutUserInput
+  work: WorkUpdateManyWithoutUsersInput
+  year: NullableIntFieldUpdateOperationsInput
+}
+
+input UserUpdateWithoutBallotsInput {
+  activity: ActivityUpdateManyWithoutUserInput
+  attachments: AttachmentUpdateManyWithoutUserInput
+  canton: NullableStringFieldUpdateOperationsInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  discussions: DiscussionUpdateManyWithoutUserInput
+  email: NullableStringFieldUpdateOperationsInput
+  emailVerified: NullableDateTimeFieldUpdateOperationsInput
+  gender: NullableEnumGenderFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  image: NullableStringFieldUpdateOperationsInput
+  lastname: NullableStringFieldUpdateOperationsInput
+  name: NullableStringFieldUpdateOperationsInput
+  password: NullableStringFieldUpdateOperationsInput
+  reactions: ReactionUpdateManyWithoutUserInput
+  role: EnumRoleFieldUpdateOperationsInput
+  school: SchoolUpdateOneWithoutMembersInput
+  teaches: TeamUpdateManyWithoutTeacherInput
+  team: TeamUpdateOneWithoutMembersInput
+  Team: TeamUpdateOneWithoutUserInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+  verified: NullableBoolFieldUpdateOperationsInput
+  voted: VotedUpdateManyWithoutUserInput
+  work: WorkUpdateManyWithoutUsersInput
+  year: NullableIntFieldUpdateOperationsInput
+}
+
+input UserUpdateWithoutDiscussionsInput {
+  activity: ActivityUpdateManyWithoutUserInput
+  attachments: AttachmentUpdateManyWithoutUserInput
   ballots: BallotUpdateManyWithoutCreatorInput
   canton: NullableStringFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
@@ -5634,34 +5689,6 @@ input UserUpdateWithoutAttachmentsInput {
   teaches: TeamUpdateManyWithoutTeacherInput
   team: TeamUpdateOneWithoutMembersInput
   Team: TeamUpdateOneWithoutUserInput
-  threads: ThreadUpdateManyWithoutUserInput
-  updatedAt: DateTimeFieldUpdateOperationsInput
-  verified: NullableBoolFieldUpdateOperationsInput
-  voted: VotedUpdateManyWithoutUserInput
-  work: WorkUpdateManyWithoutUsersInput
-  year: NullableIntFieldUpdateOperationsInput
-}
-
-input UserUpdateWithoutBallotsInput {
-  activity: ActivityUpdateManyWithoutUserInput
-  attachments: AttachmentUpdateManyWithoutUserInput
-  canton: NullableStringFieldUpdateOperationsInput
-  createdAt: DateTimeFieldUpdateOperationsInput
-  email: NullableStringFieldUpdateOperationsInput
-  emailVerified: NullableDateTimeFieldUpdateOperationsInput
-  gender: NullableEnumGenderFieldUpdateOperationsInput
-  id: StringFieldUpdateOperationsInput
-  image: NullableStringFieldUpdateOperationsInput
-  lastname: NullableStringFieldUpdateOperationsInput
-  name: NullableStringFieldUpdateOperationsInput
-  password: NullableStringFieldUpdateOperationsInput
-  reactions: ReactionUpdateManyWithoutUserInput
-  role: EnumRoleFieldUpdateOperationsInput
-  school: SchoolUpdateOneWithoutMembersInput
-  teaches: TeamUpdateManyWithoutTeacherInput
-  team: TeamUpdateOneWithoutMembersInput
-  Team: TeamUpdateOneWithoutUserInput
-  threads: ThreadUpdateManyWithoutUserInput
   updatedAt: DateTimeFieldUpdateOperationsInput
   verified: NullableBoolFieldUpdateOperationsInput
   voted: VotedUpdateManyWithoutUserInput
@@ -5675,6 +5702,7 @@ input UserUpdateWithoutReactionsInput {
   ballots: BallotUpdateManyWithoutCreatorInput
   canton: NullableStringFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
+  discussions: DiscussionUpdateManyWithoutUserInput
   email: NullableStringFieldUpdateOperationsInput
   emailVerified: NullableDateTimeFieldUpdateOperationsInput
   gender: NullableEnumGenderFieldUpdateOperationsInput
@@ -5688,7 +5716,6 @@ input UserUpdateWithoutReactionsInput {
   teaches: TeamUpdateManyWithoutTeacherInput
   team: TeamUpdateOneWithoutMembersInput
   Team: TeamUpdateOneWithoutUserInput
-  threads: ThreadUpdateManyWithoutUserInput
   updatedAt: DateTimeFieldUpdateOperationsInput
   verified: NullableBoolFieldUpdateOperationsInput
   voted: VotedUpdateManyWithoutUserInput
@@ -5702,6 +5729,7 @@ input UserUpdateWithoutSchoolInput {
   ballots: BallotUpdateManyWithoutCreatorInput
   canton: NullableStringFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
+  discussions: DiscussionUpdateManyWithoutUserInput
   email: NullableStringFieldUpdateOperationsInput
   emailVerified: NullableDateTimeFieldUpdateOperationsInput
   gender: NullableEnumGenderFieldUpdateOperationsInput
@@ -5715,7 +5743,6 @@ input UserUpdateWithoutSchoolInput {
   teaches: TeamUpdateManyWithoutTeacherInput
   team: TeamUpdateOneWithoutMembersInput
   Team: TeamUpdateOneWithoutUserInput
-  threads: ThreadUpdateManyWithoutUserInput
   updatedAt: DateTimeFieldUpdateOperationsInput
   verified: NullableBoolFieldUpdateOperationsInput
   voted: VotedUpdateManyWithoutUserInput
@@ -5729,6 +5756,7 @@ input UserUpdateWithoutTeachesInput {
   ballots: BallotUpdateManyWithoutCreatorInput
   canton: NullableStringFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
+  discussions: DiscussionUpdateManyWithoutUserInput
   email: NullableStringFieldUpdateOperationsInput
   emailVerified: NullableDateTimeFieldUpdateOperationsInput
   gender: NullableEnumGenderFieldUpdateOperationsInput
@@ -5742,7 +5770,6 @@ input UserUpdateWithoutTeachesInput {
   school: SchoolUpdateOneWithoutMembersInput
   team: TeamUpdateOneWithoutMembersInput
   Team: TeamUpdateOneWithoutUserInput
-  threads: ThreadUpdateManyWithoutUserInput
   updatedAt: DateTimeFieldUpdateOperationsInput
   verified: NullableBoolFieldUpdateOperationsInput
   voted: VotedUpdateManyWithoutUserInput
@@ -5756,6 +5783,7 @@ input UserUpdateWithoutTeamInput {
   ballots: BallotUpdateManyWithoutCreatorInput
   canton: NullableStringFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
+  discussions: DiscussionUpdateManyWithoutUserInput
   email: NullableStringFieldUpdateOperationsInput
   emailVerified: NullableDateTimeFieldUpdateOperationsInput
   gender: NullableEnumGenderFieldUpdateOperationsInput
@@ -5768,34 +5796,6 @@ input UserUpdateWithoutTeamInput {
   role: EnumRoleFieldUpdateOperationsInput
   school: SchoolUpdateOneWithoutMembersInput
   teaches: TeamUpdateManyWithoutTeacherInput
-  Team: TeamUpdateOneWithoutUserInput
-  threads: ThreadUpdateManyWithoutUserInput
-  updatedAt: DateTimeFieldUpdateOperationsInput
-  verified: NullableBoolFieldUpdateOperationsInput
-  voted: VotedUpdateManyWithoutUserInput
-  work: WorkUpdateManyWithoutUsersInput
-  year: NullableIntFieldUpdateOperationsInput
-}
-
-input UserUpdateWithoutThreadsInput {
-  activity: ActivityUpdateManyWithoutUserInput
-  attachments: AttachmentUpdateManyWithoutUserInput
-  ballots: BallotUpdateManyWithoutCreatorInput
-  canton: NullableStringFieldUpdateOperationsInput
-  createdAt: DateTimeFieldUpdateOperationsInput
-  email: NullableStringFieldUpdateOperationsInput
-  emailVerified: NullableDateTimeFieldUpdateOperationsInput
-  gender: NullableEnumGenderFieldUpdateOperationsInput
-  id: StringFieldUpdateOperationsInput
-  image: NullableStringFieldUpdateOperationsInput
-  lastname: NullableStringFieldUpdateOperationsInput
-  name: NullableStringFieldUpdateOperationsInput
-  password: NullableStringFieldUpdateOperationsInput
-  reactions: ReactionUpdateManyWithoutUserInput
-  role: EnumRoleFieldUpdateOperationsInput
-  school: SchoolUpdateOneWithoutMembersInput
-  teaches: TeamUpdateManyWithoutTeacherInput
-  team: TeamUpdateOneWithoutMembersInput
   Team: TeamUpdateOneWithoutUserInput
   updatedAt: DateTimeFieldUpdateOperationsInput
   verified: NullableBoolFieldUpdateOperationsInput
@@ -5810,6 +5810,7 @@ input UserUpdateWithoutVotedInput {
   ballots: BallotUpdateManyWithoutCreatorInput
   canton: NullableStringFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
+  discussions: DiscussionUpdateManyWithoutUserInput
   email: NullableStringFieldUpdateOperationsInput
   emailVerified: NullableDateTimeFieldUpdateOperationsInput
   gender: NullableEnumGenderFieldUpdateOperationsInput
@@ -5824,7 +5825,6 @@ input UserUpdateWithoutVotedInput {
   teaches: TeamUpdateManyWithoutTeacherInput
   team: TeamUpdateOneWithoutMembersInput
   Team: TeamUpdateOneWithoutUserInput
-  threads: ThreadUpdateManyWithoutUserInput
   updatedAt: DateTimeFieldUpdateOperationsInput
   verified: NullableBoolFieldUpdateOperationsInput
   work: WorkUpdateManyWithoutUsersInput
@@ -5837,6 +5837,7 @@ input UserUpdateWithoutWorkInput {
   ballots: BallotUpdateManyWithoutCreatorInput
   canton: NullableStringFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
+  discussions: DiscussionUpdateManyWithoutUserInput
   email: NullableStringFieldUpdateOperationsInput
   emailVerified: NullableDateTimeFieldUpdateOperationsInput
   gender: NullableEnumGenderFieldUpdateOperationsInput
@@ -5851,7 +5852,6 @@ input UserUpdateWithoutWorkInput {
   teaches: TeamUpdateManyWithoutTeacherInput
   team: TeamUpdateOneWithoutMembersInput
   Team: TeamUpdateOneWithoutUserInput
-  threads: ThreadUpdateManyWithoutUserInput
   updatedAt: DateTimeFieldUpdateOperationsInput
   verified: NullableBoolFieldUpdateOperationsInput
   voted: VotedUpdateManyWithoutUserInput
@@ -5888,6 +5888,11 @@ input UserUpsertWithoutBallotsInput {
   update: UserUpdateWithoutBallotsInput!
 }
 
+input UserUpsertWithoutDiscussionsInput {
+  create: UserCreateWithoutDiscussionsInput!
+  update: UserUpdateWithoutDiscussionsInput!
+}
+
 input UserUpsertWithoutReactionsInput {
   create: UserCreateWithoutReactionsInput!
   update: UserUpdateWithoutReactionsInput!
@@ -5896,11 +5901,6 @@ input UserUpsertWithoutReactionsInput {
 input UserUpsertWithoutTeachesInput {
   create: UserCreateWithoutTeachesInput!
   update: UserUpdateWithoutTeachesInput!
-}
-
-input UserUpsertWithoutThreadsInput {
-  create: UserCreateWithoutThreadsInput!
-  update: UserUpdateWithoutThreadsInput!
 }
 
 input UserUpsertWithoutVotedInput {
@@ -5933,6 +5933,7 @@ input UserWhereInput {
   ballots: BallotListRelationFilter
   canton: StringNullableFilter
   createdAt: DateTimeFilter
+  discussions: DiscussionListRelationFilter
   email: StringNullableFilter
   emailVerified: DateTimeNullableFilter
   gender: EnumGenderNullableFilter
@@ -5951,7 +5952,6 @@ input UserWhereInput {
   team: TeamWhereInput
   Team: TeamWhereInput
   teamId: StringNullableFilter
-  threads: ThreadListRelationFilter
   updatedAt: DateTimeFilter
   verified: BoolNullableFilter
   voted: VotedListRelationFilter

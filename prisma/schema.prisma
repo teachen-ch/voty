@@ -45,7 +45,7 @@ model User {
 
   ballots     Ballot[]
   attachments Attachment[]
-  threads     Thread[]
+  discussions     Discussion[]
   reactions   Reaction[]
   voted       Voted[]      @relation("VotedUser")
   activity    Activity[]
@@ -89,7 +89,7 @@ model Team {
   BallotRuns BallotRun[]
   Vote       Vote[]
   Voted      Voted[]
-  Thread     Thread[]
+  Discussion     Discussion[]
   activity   Activity[]
   attachment Attachment[]
   work       Work[]
@@ -113,7 +113,7 @@ model School {
 
   Vote       Vote[]
   Voted      Voted[]
-  thread     Thread[]
+  discussion     Discussion[]
   activity   Activity[]
   attachment Attachment[]
   work       Work[]
@@ -251,8 +251,8 @@ model Attachment {
   teamId   String  @map(name: "team_id")
   school   School? @relation(fields: [schoolId], references: [id])
   schoolId String? @map(name: "school_id")
-  thread   Thread? @relation(fields: [threadId], references: [id])
-  threadId String? @map(name: "thread_id")
+  discussion   Discussion? @relation(fields: [discussionId], references: [id])
+  discussionId String? @map(name: "discussion_id")
   ballot   Ballot? @relation(fields: [ballotId], references: [id])
   ballotId String? @map(name: "ballot_id")
   work     Work?   @relation(fields: [workId], references: [id])
@@ -263,11 +263,11 @@ model Attachment {
   @@map(name: "attachments")
 }
 
-model Thread {
+model Discussion {
   id    String @id @default(cuid())
   title String @default("")
   text  String @default("")
-  ref   String // this can be used to reference a thread to content
+  ref   String // this can be used to reference a discussion to content
 
   user     User    @relation(fields: [userId], references: [id])
   userId   String  @map(name: "user_id")
@@ -282,7 +282,7 @@ model Thread {
   createdAt DateTime   @default(now()) @map(name: "created_at")
   updatedAt DateTime   @default(now()) @map(name: "updated_at")
   Activity  Activity[]
-  @@map(name: "threads")
+  @@map(name: "discussions")
 }
 
 model Work {
@@ -316,8 +316,8 @@ model Reaction {
 
   user     User    @relation(fields: [userId], references: [id])
   userId   String  @map(name: "user_id")
-  thread   Thread? @relation(fields: [threadId], references: [id])
-  threadId String? @map(name: "thread_id")
+  discussion   Discussion? @relation(fields: [discussionId], references: [id])
+  discussionId String? @map(name: "discussion_id")
   work     Work?   @relation(fields: [workId], references: [id])
   workId   String? @map(name: "work_id")
 
@@ -352,8 +352,8 @@ model Activity {
   teamId   String  @map(name: "team_id")
   school   School  @relation(fields: [schoolId], references: [id])
   schoolId String  @map(name: "school_id")
-  thread   Thread? @relation(fields: [threadId], references: [id])
-  threadId String? @map(name: "thread_id")
+  discussion   Discussion? @relation(fields: [discussionId], references: [id])
+  discussionId String? @map(name: "discussion_id")
   work     Work?   @relation(fields: [workId], references: [id])
   workId   String? @map(name: "work_id")
 

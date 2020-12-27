@@ -2,15 +2,15 @@ import { gql } from "@apollo/client";
 import { useTeam } from "state/user";
 import { Box, Text, Heading, Button } from "rebass";
 import {
-  ThreadFieldsFragment,
-  usePostThreadMutation,
-  useGetTeamThreadsQuery,
+  DiscussionFieldsFragment,
+  usePostDiscussionMutation,
+  useGetTeamDiscussionsQuery,
 } from "graphql/types";
 import { ErrorBox, QForm } from "./Form";
 import React, { useState } from "react";
 
-const ThreadFields = gql`
-  fragment ThreadFields on Thread {
+const DiscussionFields = gql`
+  fragment DiscussionFields on Discussion {
     id
     title
     text
@@ -23,29 +23,29 @@ const ThreadFields = gql`
   }
 `;
 
-const fragments = { ThreadFields };
+const fragments = { DiscussionFields };
 
-export const GET_TEAM_THREADS = gql`
-  query getTeamThreads($ref: String!, $teamId: String) {
-    getTeamThreads(ref: $ref, teamId: $teamId) {
-      ...ThreadFields
+export const GET_TEAM_DISCUSSIONS = gql`
+  query getTeamDiscussions($ref: String!, $teamId: String) {
+    getTeamDiscussions(ref: $ref, teamId: $teamId) {
+      ...DiscussionFields
     }
   }
-  ${fragments.ThreadFields}
+  ${fragments.DiscussionFields}
 `;
 
-export const POST_THREAD = gql`
-  mutation postThread(
+export const POST_DISCUSSION = gql`
+  mutation postDiscussion(
     $ref: String!
     $text: String!
     $title: String!
     $teamId: String!
   ) {
-    postThread(ref: $ref, text: $text, title: $title, teamId: $teamId) {
-      ...ThreadFields
+    postDiscussion(ref: $ref, text: $text, title: $title, teamId: $teamId) {
+      ...DiscussionFields
     }
   }
-  ${fragments.ThreadFields}
+  ${fragments.DiscussionFields}
 `;
 
 export const Discussion: React.FC<{
@@ -55,46 +55,49 @@ export const Discussion: React.FC<{
   return (
     <Box className="discussion">
       {title && <Heading>{title}</Heading>}
-      <Threads id={id} />
-      <PostThread id={id} />
+      <Discussions id={id} />
+      <PostDiscussion id={id} />
     </Box>
   );
 };
 
-const Threads: React.FC<{ id: string }> = ({ id }) => {
+const Discussions: React.FC<{ id: string }> = ({ id }) => {
   const team = useTeam();
-  const threadsQuery = useGetTeamThreadsQuery({
+  const discussionsQuery = useGetTeamDiscussionsQuery({
     variables: { ref: id, teamId: team?.id },
   });
-  const threads = threadsQuery.data?.getTeamThreads;
+  const discussions = discussionsQuery.data?.getTeamDiscussions;
   return (
     <>
-      {threads?.map(
-        (thread) => thread && <ThreadDetail key={thread.id} thread={thread} />
+      {discussions?.map(
+        (discussion) =>
+          discussion && (
+            <DiscussionDetail key={discussion.id} discussion={discussion} />
+          )
       )}
     </>
   );
 };
 
-const ThreadDetail: React.FC<{ thread: ThreadFieldsFragment }> = ({
-  thread,
+const DiscussionDetail: React.FC<{ discussion: DiscussionFieldsFragment }> = ({
+  discussion,
 }) => {
   return (
-    <Box className="thread" mb={3} fontSize={2}>
+    <Box className="discussion" mb={3} fontSize={2}>
       <Text>
-        <b>{thread.user.shortname}:</b> {thread.text}
+        <b>{discussion.user.shortname}:</b> {discussion.text}
       </Text>
     </Box>
   );
 };
 
-const PostThread: React.FC<{
+const PostDiscussion: React.FC<{
   id: string;
 }> = (props) => {
   const [success, setSuccess] = useState(false);
   const team = useTeam();
   const [error, setError] = useState("");
-  const [doPost] = usePostThreadMutation({
+  const [doPost] = usePostDiscussionMutation({
     onCompleted() {
       setSuccess(true);
       setError("");
@@ -105,13 +108,15 @@ const PostThread: React.FC<{
     update: (cache, result) => {
       cache.modify({
         fields: {
-          getTeamThreads(existingThreads: typeof ThreadFields[] = []) {
-            const newThread = cache.writeFragment({
-              data: result.data?.postThread,
-              fragment: fragments.ThreadFields,
-              fragmentName: "ThreadFields",
+          getTeamDiscussions(
+            existingDiscussions: typeof DiscussionFields[] = []
+          ) {
+            const newDiscussion = cache.writeFragment({
+              data: result.data?.postDiscussion,
+              fragment: fragments.DiscussionFields,
+              fragmentName: "DiscussionFields",
             });
-            return [...existingThreads, newThread];
+            return [...existingDiscussions, newDiscussion];
           },
         },
       });
@@ -139,7 +144,7 @@ const PostThread: React.FC<{
   }
 
   return (
-    <div id="postThread">
+    <div id="postDiscussion">
       <QForm
         fields={{
           text: { label: "Kommentar", type: "textarea", required: true },

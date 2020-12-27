@@ -20,7 +20,7 @@ export const User = objectType({
     t.model.teaches();
     t.model.ballots();
     t.model.attachments();
-    t.model.threads();
+    t.model.discussions();
     t.model.reactions();
   },
 });

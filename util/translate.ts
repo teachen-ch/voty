@@ -44,7 +44,7 @@ const messages: Translations = {
     ServerError: "Ein Fehler ist aufgetreten",
     StrangeCookie: "Fehlerhafte Anfrage",
     TeamNotFound: "Diese Klasse wurde nicht gefunden",
-    ThreadNoTeam: "Du musst der Klasse angehören, um zu diskutieren",
+    DiscussionNoTeam: "Du musst der Klasse angehören, um zu diskutieren",
     TokenNotFound: "Dieser Code wurde nicht gefunden",
     UserNotFound: "Dieses Konto wurde nicht gefunden",
     UserPassword: "Email oder Passwort passen leider nicht zueinander…",

@@ -42,41 +42,6 @@ export const Team = objectType({
   },
 });
 
-export const Thread = objectType({
-  name: "Thread",
-  definition(t) {
-    t.model.id();
-    t.model.title();
-    t.model.text();
-    t.model.ref();
-    t.model.user();
-    t.list.field("children", {
-      type: "Thread",
-      resolve: async (_root, args, ctx, info) =>
-        await resolvers.threads.getTeamThreads(
-          _root,
-          { ref: _root.id },
-          ctx,
-          info
-        ),
-    });
-    t.model.reactions();
-    t.model.attachments();
-    t.model.createdAt();
-    t.model.updatedAt();
-  },
-});
-
-export const Reaction = objectType({
-  name: "Reaction",
-  definition(t) {
-    t.model.id();
-    t.model.emoij();
-    t.model.user();
-    t.model.thread();
-  },
-});
-
 export const Domain = objectType({
   name: "Domain",
   definition(t) {
@@ -214,15 +179,6 @@ export const Query = queryType({
       },
       resolve: resolvers.ballots.getBallotResults,
     });
-
-    t.list.field("getTeamThreads", {
-      type: "Thread",
-      args: {
-        ref: nonNull(stringArg()),
-        teamId: stringArg(),
-      },
-      resolve: resolvers.threads.getTeamThreads,
-    });
   },
 });
 
@@ -245,17 +201,6 @@ export const Mutation = mutationType({
         vote: nonNull(intArg()),
       },
       resolve: resolvers.ballots.vote,
-    });
-
-    t.field("postThread", {
-      type: "Thread",
-      args: {
-        ref: nonNull(stringArg()),
-        teamId: nonNull(stringArg()),
-        title: nonNull(stringArg()),
-        text: nonNull(stringArg()),
-      },
-      resolve: resolvers.threads.postThread,
     });
 
     t.field("voteCode", {

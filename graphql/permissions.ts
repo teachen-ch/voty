@@ -105,14 +105,13 @@ export const permissions = shield(
       ballots: allow,
       getBallotRuns: allow,
       getBallotResults: allow,
-      getTeamThreads: isUser,
+      getTeamDiscussions: isUser,
       swissvotes: allow,
       cards: allow,
       attachment: isUser, // TODO: #80 we should secure this to team + teacher unless public
       attachments: isUser, // TODO: #80 we should secure this to team + teacher
       works: isUser, // TODO: #80 we should secure this to team + teacher
       activities: isUser, // TODO: #80 we should secure this to team + teacher
-      hasNewActivities: isUser, // TODO: #80 we should secure this to team + teacher
     },
     Mutation: {
       login: allow,
@@ -137,10 +136,10 @@ export const permissions = shield(
       endBallotRun: isTeacher,
       deleteAccount: isUser,
       deleteUser: or(isAdmin, isTeacher),
-      postThread: isUser,
+      postDiscussion: isUser,
       setCards: isTeacher,
       postWork: isUser,
-      logActivity: isUser,
+      postActivity: isUser,
     },
     User: {
       id: isUser,
@@ -158,7 +157,7 @@ export const permissions = shield(
       email: or(isOwnId, teachesTeam, isAdmin),
       ballots: or(isOwnId, teachesTeam, isAdmin),
       attachments: or(isOwnId, teachesTeam, isAdmin),
-      threads: or(isOwnId, teachesTeam, isAdmin),
+      discussions: or(isOwnId, teachesTeam, isAdmin),
       reactions: or(isOwnId, teachesTeam, isAdmin),
       createdAt: isAdmin,
     },
@@ -181,7 +180,7 @@ export const permissions = shield(
       code: or(isOwnTeacherId, isAdmin),
       "*": isUser,
     },
-    Thread: allow,
+    Discussion: allow,
     Attachment: allow,
     Ballot: allow, //canViewBallot : if we want to protect class/school Ballots
     BallotRun: allow,

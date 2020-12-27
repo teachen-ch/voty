@@ -429,7 +429,7 @@ export const deleteAccount: FieldResolver<"Mutation", "deleteAccount"> = async (
     await ctx.db.voted.deleteMany({ where: { userId: user.id } });
     await ctx.db.attachment.deleteMany({ where: { userId: user.id } });
     await ctx.db.reaction.deleteMany({ where: { userId: user.id } });
-    await ctx.db.thread.deleteMany({ where: { userId: user.id } });
+    await ctx.db.discussion.deleteMany({ where: { userId: user.id } });
 
     const deleted = await ctx.db.user.delete({ where: { id: user.id } });
     if (!deleted) throw new Error("Error.CannotDeleteAccount");
