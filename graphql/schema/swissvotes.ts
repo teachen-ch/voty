@@ -56,7 +56,7 @@ export const SwissvotesQuery = extendType({
         sort: stringArg(),
       },
       resolve: (_root, args, ctx, info) =>
-        resolvers.swissvotes.getSwissvotes(_root, args, ctx, info),
+        resolvers.swissvotes.swissvotes(_root, args, ctx, info),
     });
   },
 });

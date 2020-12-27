@@ -1,7 +1,7 @@
 import { FieldResolver } from "@nexus/schema";
 import { Swissvote } from "graphql/types";
 
-export const getSwissvotes: FieldResolver<"Query", "swissvotes"> = async (
+export const swissvotes: FieldResolver<"Query", "swissvotes"> = async (
   _root,
   args,
   ctx

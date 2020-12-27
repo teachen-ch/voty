@@ -1,8 +1,8 @@
 import { FieldResolver } from "@nexus/schema";
 import { Card } from "graphql/types";
-import * as cards from "content/";
+import * as cardsData from "content/";
 
-export const getCards: FieldResolver<"Query", "cards"> = (_root, args) => {
+export const cards: FieldResolver<"Query", "cards"> = (_root, args) => {
   let { keywords } = args;
   const { age, type } = args;
 
@@ -23,8 +23,10 @@ export const getCards: FieldResolver<"Query", "cards"> = (_root, args) => {
 };
 
 function allCards(): Card[] {
-  // @ts-ignore TODO, not sure how to better do the lookup here
-  return Object.keys(cards).map((key: string) => cards[key].meta as Card);
+  return Object.keys(cardsData).map(
+    // @ts-ignore TODO, not sure how to better do the lookup here
+    (key: string) => cardsData[key].meta as Card
+  );
 }
 
 export const setCards: FieldResolver<"Mutation", "setCards"> = async (

@@ -23,7 +23,7 @@ export const WorksQueries = extendType({
       ordering: true,
       filtering: true,
       alias: "works",
-      resolve: resolvers.works.getWorks,
+      resolve: resolvers.works.works,
     });
   },
 });

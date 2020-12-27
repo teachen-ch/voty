@@ -29,7 +29,7 @@ export const CardsQuery = extendType({
         type: stringArg(),
       },
       resolve: (_root, args, ctx, info) =>
-        resolvers.cards.getCards(_root, args, ctx, info),
+        resolvers.cards.cards(_root, args, ctx, info),
     });
   },
 });

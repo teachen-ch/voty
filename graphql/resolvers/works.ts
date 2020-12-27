@@ -2,7 +2,7 @@ import { FieldResolver } from "@nexus/schema";
 import { Role } from "@prisma/client";
 import { find } from "lodash";
 
-export const getWorks: FieldResolver<"Query", "works"> = async (
+export const works: FieldResolver<"Query", "works"> = async (
   _root,
   args,
   ctx
