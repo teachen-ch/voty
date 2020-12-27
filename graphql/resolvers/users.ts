@@ -1,5 +1,12 @@
 import jwt from "jsonwebtoken";
-import { PrismaClient, User, Team, Role } from "@prisma/client";
+import {
+  PrismaClient,
+  User,
+  Team,
+  Role,
+  ActivityType,
+  Visibility,
+} from "@prisma/client";
 import bcrypt from "bcryptjs";
 import { sendMail } from "../../util/email";
 import { randomBytes, createHash } from "crypto";
@@ -9,6 +16,7 @@ import { FieldResolver } from "@nexus/schema";
 import { NextApiRequest } from "next";
 import { promises as fs } from "fs";
 import { upperFirst } from "lodash";
+import { logActivity } from "./activities";
 
 let secret = process.env.SESSION_SECRET || "";
 if (!secret) console.error("No SESSION_SECRET defined in .env");
@@ -140,7 +148,15 @@ export const acceptInvite: FieldResolver<"Mutation", "acceptInvite"> = async (
   if (!user) throw new Error("Error.NeedsLogin");
   const success = await connectUserTeam(user, team, ctx);
   if (!success) throw new Error("Error.Database");
-  else return team;
+
+  await logActivity(ctx, {
+    user: { connect: { id: user.id } },
+    team: { connect: { id: team.id } },
+    school: { connect: { id: String(user.schoolId) } },
+    visibility: Visibility.Team,
+    type: ActivityType.UserAccept,
+  });
+  return team;
 };
 
 export async function connectUserTeam(

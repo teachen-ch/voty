@@ -14,7 +14,8 @@ const DiscussionFields = gql`
     id
     title
     text
-    ref
+    card
+    ballotId
     createdAt
     updatedAt
     user {
@@ -26,8 +27,8 @@ const DiscussionFields = gql`
 const fragments = { DiscussionFields };
 
 export const GET_TEAM_DISCUSSIONS = gql`
-  query getTeamDiscussions($ref: String!, $teamId: String) {
-    getTeamDiscussions(ref: $ref, teamId: $teamId) {
+  query getTeamDiscussions($card: String, $ballotId: String, $teamId: String) {
+    getTeamDiscussions(card: $card, ballotId: $ballotId, teamId: $teamId) {
       ...DiscussionFields
     }
   }
@@ -36,12 +37,19 @@ export const GET_TEAM_DISCUSSIONS = gql`
 
 export const POST_DISCUSSION = gql`
   mutation postDiscussion(
-    $ref: String!
+    $card: String
+    $ballotId: String
     $text: String!
     $title: String!
     $teamId: String!
   ) {
-    postDiscussion(ref: $ref, text: $text, title: $title, teamId: $teamId) {
+    postDiscussion(
+      card: $card
+      ballotId: $ballotId
+      text: $text
+      title: $title
+      teamId: $teamId
+    ) {
       ...DiscussionFields
     }
   }
@@ -49,22 +57,26 @@ export const POST_DISCUSSION = gql`
 `;
 
 export const Discussion: React.FC<{
-  id: string;
+  card?: string;
+  ballotId?: string;
   title?: string;
-}> = ({ id, title = "Diskussion" }) => {
+}> = ({ card, ballotId, title = "Diskussion" }) => {
   return (
     <Box className="discussion">
       {title && <Heading>{title}</Heading>}
-      <Discussions id={id} />
-      <PostDiscussion id={id} />
+      <Discussions card={card} ballotId={ballotId} />
+      <PostDiscussion card={card} ballotId={ballotId} />
     </Box>
   );
 };
 
-const Discussions: React.FC<{ id: string }> = ({ id }) => {
+const Discussions: React.FC<{ card?: string; ballotId?: string }> = ({
+  card,
+  ballotId,
+}) => {
   const team = useTeam();
   const discussionsQuery = useGetTeamDiscussionsQuery({
-    variables: { ref: id, teamId: team?.id },
+    variables: { card, ballotId, teamId: team?.id },
   });
   const discussions = discussionsQuery.data?.getTeamDiscussions;
   return (
@@ -92,8 +104,9 @@ const DiscussionDetail: React.FC<{ discussion: DiscussionFieldsFragment }> = ({
 };
 
 const PostDiscussion: React.FC<{
-  id: string;
-}> = (props) => {
+  card?: string;
+  ballotId?: string;
+}> = ({ card, ballotId }) => {
   const [success, setSuccess] = useState(false);
   const team = useTeam();
   const [error, setError] = useState("");
@@ -126,7 +139,8 @@ const PostDiscussion: React.FC<{
   async function onSubmit(values: Record<string, any>) {
     if (!team?.id) return alert("Kein Team");
     const variables = {
-      ref: props.id,
+      card,
+      ballotId,
       teamId: team?.id,
       title: "",
       text: String(values.text),

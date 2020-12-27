@@ -1,6 +1,7 @@
 import { FieldResolver } from "@nexus/schema";
-import { Role } from "@prisma/client";
+import { ActivityType, Role, Visibility } from "@prisma/client";
 import { find } from "lodash";
+import { logActivity } from "./activities";
 
 export const works: FieldResolver<"Query", "works"> = async (
   _root,
@@ -41,6 +42,15 @@ export const postWork: FieldResolver<"Mutation", "postWork"> = async (
   const work = await ctx.db.work.create({
     // @ts-ignore TODO: not sure what's wrong with the built-in nexus-prisma types here
     data: args.data,
+  });
+
+  await logActivity(ctx, {
+    work: { connect: { id: work.id } },
+    user: { connect: { id: user.id } },
+    team: { connect: { id: teamId } },
+    school: { connect: { id: String(user.schoolId) } },
+    visibility: args.data.visibility || Visibility.Team,
+    type: ActivityType.Work,
   });
   return work;
 };

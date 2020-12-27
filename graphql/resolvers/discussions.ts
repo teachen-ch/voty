@@ -1,12 +1,13 @@
-import { Role, User } from "@prisma/client";
+import { Role, User, Visibility, ActivityType } from "@prisma/client";
 import { FieldResolver } from "@nexus/schema";
 import { Context } from "../context";
+import { logActivity } from "./activities";
 
 export const getTeamDiscussions: FieldResolver<
   "Query",
   "getTeamDiscussions"
 > = async (_root, args, ctx) => {
-  const { ref } = args;
+  const { card, ballotId } = args;
   let { teamId } = args;
   const user = ctx.user;
   if (!user) return [];
@@ -14,7 +15,7 @@ export const getTeamDiscussions: FieldResolver<
   await assertTeam(teamId, user, ctx);
 
   return await ctx.db.discussion.findMany({
-    where: { ref, teamId: String(teamId) },
+    where: { card: card, ballotId, teamId: String(teamId) },
   });
 };
 
@@ -22,19 +23,28 @@ export const postDiscussion: FieldResolver<
   "Mutation",
   "postDiscussion"
 > = async (_root, args, ctx) => {
-  const { ref, teamId, title, text } = args;
+  const { card, ballotId, teamId, title, text } = args;
   const user = ctx.user;
   if (!user) throw new Error("Error.NeedsLogin");
   await assertTeam(teamId, user, ctx);
 
   const discussion = await ctx.db.discussion.create({
     data: {
-      ref,
+      card,
+      ballot: ballotId ? { connect: { id: ballotId } } : undefined,
       title,
       text,
       user: { connect: { id: user.id } },
       team: { connect: { id: teamId } },
     },
+  });
+  await logActivity(ctx, {
+    discussion: { connect: { id: discussion.id } },
+    user: { connect: { id: user.id } },
+    team: { connect: { id: teamId } },
+    school: { connect: { id: String(user.schoolId) } },
+    visibility: Visibility.Team,
+    type: ActivityType.Discussion,
   });
   return discussion;
 };

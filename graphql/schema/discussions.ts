@@ -7,14 +7,15 @@ export const Discussion = objectType({
     t.model.id();
     t.model.title();
     t.model.text();
-    t.model.ref();
+    t.model.card();
+    t.model.ballotId();
     t.model.user();
     t.list.field("children", {
       type: "Discussion",
       resolve: async (_root, args, ctx, info) =>
         await resolvers.discussions.getTeamDiscussions(
           _root,
-          { ref: _root.id },
+          { card: _root.card, ballotId: _root.ballotId },
           ctx,
           info
         ),
@@ -42,7 +43,8 @@ export const DiscussionsQueries = extendType({
     t.list.field("getTeamDiscussions", {
       type: "Discussion",
       args: {
-        ref: nonNull(stringArg()),
+        card: stringArg(),
+        ballotId: stringArg(),
         teamId: stringArg(),
       },
       resolve: resolvers.discussions.getTeamDiscussions,
@@ -56,7 +58,8 @@ export const DiscussionsMutations = extendType({
     t.field("postDiscussion", {
       type: "Discussion",
       args: {
-        ref: nonNull(stringArg()),
+        card: stringArg(),
+        ballotId: stringArg(),
         teamId: nonNull(stringArg()),
         title: nonNull(stringArg()),
         text: nonNull(stringArg()),

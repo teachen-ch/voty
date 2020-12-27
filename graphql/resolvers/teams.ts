@@ -1,10 +1,11 @@
 import { createUser, connectUserTeam } from "./users";
 import { FieldResolver } from "@nexus/schema";
-import { Role, PrismaClient } from "@prisma/client";
+import { Role, PrismaClient, Visibility, ActivityType } from "@prisma/client";
 import { upperFirst } from "lodash";
 import { User } from "@prisma/client";
 import { fetchMails } from "../../util/imap";
 import logger from "../../util/logger";
+import { logActivity } from "./activities";
 
 export const inviteStudents: FieldResolver<
   "Mutation",
@@ -60,6 +61,14 @@ export const inviteStudents: FieldResolver<
     const fetchedErrors = await fetchErrors(emails, ctx.db, 2 * wait);
     failed = failed.concat(fetchedErrors);
   }
+
+  await logActivity(ctx, {
+    user: { connect: { id: user.id } },
+    team: { connect: { id: String(team?.id) } },
+    school: { connect: { id: String(user.schoolId) } },
+    visibility: Visibility.Team,
+    type: ActivityType.UserInvite,
+  });
 
   return { created, failed, duplicated, team };
 };

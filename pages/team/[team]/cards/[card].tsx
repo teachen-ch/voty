@@ -51,7 +51,7 @@ export default function CardPage(): React.ReactElement {
 
         <Card id={key} />
 
-        {meta.discussion !== false && <Discussion id={key} />}
+        {meta.discussion !== false && <Discussion card={key} />}
       </Text>
     </LoggedInPage>
   );

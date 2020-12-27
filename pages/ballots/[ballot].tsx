@@ -76,7 +76,7 @@ export default function BallotPage(): ReactElement {
         <VotyNow ballot={ballot} onSuccess={() => setSuccess(true)} />
       </BallotDetails>
 
-      <Discussion id={ballot.id} />
+      <Discussion ballotId={ballot.id} />
     </LoggedInPage>
   );
 }

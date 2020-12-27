@@ -1,10 +1,19 @@
-import { Role, BallotScope, User, PrismaClient, Prisma } from "@prisma/client";
+import {
+  Role,
+  BallotScope,
+  User,
+  PrismaClient,
+  Prisma,
+  ActivityType,
+  Visibility,
+} from "@prisma/client";
 import { randomBytes } from "crypto";
 import { setCookie, getCookie } from "../../util/cookies";
 import {
   FieldResolver,
   RootValue,
 } from "@nexus/schema/dist/typegenTypeHelpers";
+import { logActivity } from "./activities";
 
 export const canVote: FieldResolver<"Ballot", "canVote"> = async (
   _root,
@@ -45,16 +54,14 @@ export const vote: FieldResolver<"Mutation", "vote"> = async (
 
   // TODO: This should be e.g. the id of the vote hashed client side with users password
   const signature = randomBytes(32).toString("hex");
-  if (user) {
-    await ctx.db.voted.create({
-      data: {
-        user: { connect: { id: user.id } },
-        team: { connect: { id: user.team?.id } },
-        ballot: { connect: { id: ballot.id } },
-        signature,
-      },
-    });
-  }
+  await ctx.db.voted.create({
+    data: {
+      user: { connect: { id: user.id } },
+      team: { connect: { id: user.team?.id } },
+      ballot: { connect: { id: ballot.id } },
+      signature,
+    },
+  });
 
   // TODO: This should something which allows the user to check his vote was counter
   const verify = randomBytes(32).toString("hex");
@@ -70,6 +77,14 @@ export const vote: FieldResolver<"Mutation", "vote"> = async (
       team: { connect: { id: user.team?.id } },
     },
     include: { ballot: true },
+  });
+
+  await logActivity(ctx, {
+    user: { connect: { id: user.id } },
+    team: { connect: { id: String(user.team?.id) } },
+    school: { connect: { id: String(user.schoolId) } },
+    visibility: Visibility.Team,
+    type: ActivityType.Vote,
   });
   return result;
 };
