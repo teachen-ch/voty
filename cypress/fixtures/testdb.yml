@@ -5,6 +5,7 @@ delete:
   - voted
   - option
   - attachment
+  - work
   - ballot
   - verificationRequest
   - reaction
