@@ -319,7 +319,7 @@ model Reaction {
   thread   Thread? @relation(fields: [threadId], references: [id])
   threadId String? @map(name: "thread_id")
   work     Work?   @relation(fields: [workId], references: [id])
-  workId   String? @map(name: "thread_id")
+  workId   String? @map(name: "work_id")
 
   createdAt DateTime @default(now()) @map(name: "created_at")
   updatedAt DateTime @default(now()) @map(name: "updated_at")
