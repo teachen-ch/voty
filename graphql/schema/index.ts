@@ -1,5 +1,6 @@
 export * from "./misc";
 export * from "./users";
+export * from "./teams";
 export * from "./swissvotes";
 export * from "./cards";
 export * from "./works";

@@ -81,6 +81,7 @@ export const vote: FieldResolver<"Mutation", "vote"> = async (
 
   await logActivity(ctx, {
     user: { connect: { id: user.id } },
+    ballot: { connect: { id: ballot.id } },
     team: { connect: { id: String(user.team?.id) } },
     school: { connect: { id: String(user.schoolId) } },
     visibility: Visibility.Team,

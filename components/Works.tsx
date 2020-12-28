@@ -5,7 +5,6 @@ import {
   UserWhereUniqueInput,
   WorkFieldsFragment,
   User,
-  useUsersQuery,
 } from "graphql/types";
 import { AttachmentFields } from "components/Uploader";
 import { Flex, Link, Text, FlexProps } from "rebass";
@@ -94,10 +93,6 @@ export const Authors: React.FC<{
   const team = useTeam();
   const [search, setSearch] = useState("");
   const [matches, setMatches] = useState<U[]>([]);
-  const usersQuery = useUsersQuery({
-    variables: { where: { teamId: { equals: team?.id } } },
-  });
-  const teamUsers = usersQuery.data?.users;
   const [authors, setAuthors] = useState<U[]>([]);
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -109,9 +104,8 @@ export const Authors: React.FC<{
     }
   }, [user]);
 
-  if (!user || !team) return <Flex>wrong</Flex>;
-
-  if (usersQuery.loading || !teamUsers) return <Loading />;
+  if (!user || !team) return null;
+  const teamUsers = team?.members;
 
   function doSearch(evt: ChangeEvent<HTMLInputElement>) {
     const str = evt.target.value;

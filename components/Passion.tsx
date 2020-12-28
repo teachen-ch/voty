@@ -4,6 +4,7 @@ import { Label, Textarea } from "@rebass/forms";
 import { useState } from "react";
 import { useTeam, useUser } from "state/user";
 import { Authors, Works, WorkItem } from "./Works";
+import Info from "./Info";
 
 export const Passion: React.FC = () => {
   const where = { card: { equals: "passion" } };
@@ -58,7 +59,7 @@ const PassionForm: React.FC<{ onSuccess: () => void }> = ({ onSuccess }) => {
   }
 
   if (success) {
-    return <Text>Erfolgreich abgeschickt!</Text>;
+    return <Info>Erfolgreich abgeschickt!</Info>;
   }
 
   return (
