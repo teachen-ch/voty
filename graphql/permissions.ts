@@ -28,18 +28,15 @@ const isAdmin = rule({ cache: "contextual" })((parent, args, ctx: Context) => {
 });
 
 // team members can view team
-/*
-const isTeamMember = rule({ cache: "strict" })(
-  async (parent, args, ctx: Context) => {
-    const { id, teamId } = ctx.user || {};
-    if (!id) return false;
-    // check if student is part of team
-    if (teamId === parent.id) return true;
-    // check if teacher teaches this team
-    if (id === parent.teacherId) return true;
-    return false;
-  }
-);*/
+const isTeamMember = rule({ cache: "strict" })((parent, args, ctx: Context) => {
+  if (!ctx.user) return false;
+  const { id, teamId } = ctx.user;
+  // check if student is part of team
+  if (teamId === parent.id) return true;
+  // check if teacher teaches this team
+  if (id === parent.teacherId) return true;
+  return false;
+});
 
 // Teacher may view his students
 const teachesTeam = rule({ cache: "strict" })(
@@ -178,6 +175,7 @@ export const permissions = shield(
       school: allow,
       invite: or(isOwnTeacherId, isAdmin),
       code: or(isOwnTeacherId, isAdmin),
+      members: or(isTeamMember, isAdmin),
       "*": isUser,
     },
     Discussion: allow,
