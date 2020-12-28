@@ -172,7 +172,7 @@ export const Container: React.FC<FlexProps> = (props) => {
 };
 
 export const Loading: React.FC = () => (
-  <Spinner color="gray" size={20} mr={3} />
+  <Spinner color="white" size={20} mr={3} />
 );
 
 export const ErrorPage: React.FC = (props) => (
