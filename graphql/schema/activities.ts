@@ -7,6 +7,7 @@ export const Activity = objectType({
     t.model.id();
     t.model.type();
     t.model.card();
+    t.model.ballotId();
     t.model.work();
     t.model.user();
     t.model.team();
@@ -23,6 +24,7 @@ export const ActivitiesQueries = extendType({
       ordering: true,
       filtering: true,
       alias: "activities",
+      pagination: true,
       resolve: resolvers.activities.activities,
     });
   },

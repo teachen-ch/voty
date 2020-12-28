@@ -8034,6 +8034,7 @@ export interface NexusGenScalars {
 export interface NexusGenObjects {
   Activity: {
     // root type
+    ballotId?: string | null; // String
     card?: string | null; // String
     id: number; // Int!
     time: NexusGenScalars["DateTime"]; // DateTime!
@@ -8205,6 +8206,7 @@ export type NexusGenAllTypes = NexusGenRootTypes &
 export interface NexusGenFieldTypes {
   Activity: {
     // field return type
+    ballotId: string | null; // String
     card: string | null; // String
     id: number; // Int!
     school: NexusGenRootTypes["School"]; // School!
@@ -8449,6 +8451,7 @@ export interface NexusGenFieldTypes {
 export interface NexusGenFieldTypeNames {
   Activity: {
     // field return type name
+    ballotId: "String";
     card: "String";
     id: "Int";
     school: "School";

@@ -2,6 +2,7 @@
 ### Do not make changes to this file directly
 
 type Activity {
+  ballotId: String
   card: String
   id: Int!
   school: School!

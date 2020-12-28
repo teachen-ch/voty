@@ -1,4 +1,13 @@
 
+declare module '*/Activities.tsx' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const activities: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
 declare module '*/Ballots.tsx' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
@@ -165,7 +174,6 @@ declare module '*/login.tsx' {
   export const login: DocumentNode;
 export const emailVerification: DocumentNode;
 export const changePassword: DocumentNode;
-export const checkVerification: DocumentNode;
 
   export default defaultDocument;
 }
@@ -175,6 +183,15 @@ declare module '*/signup.tsx' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
   export const createUser: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
+declare module '*/verify.tsx' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const checkVerification: DocumentNode;
 
   export default defaultDocument;
 }

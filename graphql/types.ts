@@ -19,6 +19,7 @@ export type Scalars = {
 
 export type Activity = {
   __typename?: 'Activity';
+  ballotId?: Maybe<Scalars['String']>;
   card?: Maybe<Scalars['String']>;
   id: Scalars['Int'];
   school: School;
@@ -2075,7 +2076,7 @@ export type Discussion = {
   __typename?: 'Discussion';
   attachments: Array<Attachment>;
   ballotId?: Maybe<Scalars['String']>;
-  card: Scalars['String'];
+  card?: Maybe<Scalars['String']>;
   children?: Maybe<Array<Maybe<Discussion>>>;
   createdAt: Scalars['DateTime'];
   id: Scalars['String'];
@@ -2182,7 +2183,7 @@ export type DiscussionCreateOrConnectWithoutuserInput = {
 export type DiscussionCreateWithoutActivityInput = {
   attachments?: Maybe<AttachmentCreateManyWithoutDiscussionInput>;
   ballot?: Maybe<BallotCreateOneWithoutDiscussionInput>;
-  card: Scalars['String'];
+  card?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['DateTime']>;
   id?: Maybe<Scalars['String']>;
   reactions?: Maybe<ReactionCreateManyWithoutDiscussionInput>;
@@ -2197,7 +2198,7 @@ export type DiscussionCreateWithoutActivityInput = {
 export type DiscussionCreateWithoutAttachmentsInput = {
   Activity?: Maybe<ActivityCreateManyWithoutDiscussionInput>;
   ballot?: Maybe<BallotCreateOneWithoutDiscussionInput>;
-  card: Scalars['String'];
+  card?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['DateTime']>;
   id?: Maybe<Scalars['String']>;
   reactions?: Maybe<ReactionCreateManyWithoutDiscussionInput>;
@@ -2212,7 +2213,7 @@ export type DiscussionCreateWithoutAttachmentsInput = {
 export type DiscussionCreateWithoutBallotInput = {
   Activity?: Maybe<ActivityCreateManyWithoutDiscussionInput>;
   attachments?: Maybe<AttachmentCreateManyWithoutDiscussionInput>;
-  card: Scalars['String'];
+  card?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['DateTime']>;
   id?: Maybe<Scalars['String']>;
   reactions?: Maybe<ReactionCreateManyWithoutDiscussionInput>;
@@ -2228,7 +2229,7 @@ export type DiscussionCreateWithoutReactionsInput = {
   Activity?: Maybe<ActivityCreateManyWithoutDiscussionInput>;
   attachments?: Maybe<AttachmentCreateManyWithoutDiscussionInput>;
   ballot?: Maybe<BallotCreateOneWithoutDiscussionInput>;
-  card: Scalars['String'];
+  card?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['DateTime']>;
   id?: Maybe<Scalars['String']>;
   school?: Maybe<SchoolCreateOneWithoutDiscussionInput>;
@@ -2243,7 +2244,7 @@ export type DiscussionCreateWithoutSchoolInput = {
   Activity?: Maybe<ActivityCreateManyWithoutDiscussionInput>;
   attachments?: Maybe<AttachmentCreateManyWithoutDiscussionInput>;
   ballot?: Maybe<BallotCreateOneWithoutDiscussionInput>;
-  card: Scalars['String'];
+  card?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['DateTime']>;
   id?: Maybe<Scalars['String']>;
   reactions?: Maybe<ReactionCreateManyWithoutDiscussionInput>;
@@ -2258,7 +2259,7 @@ export type DiscussionCreateWithoutTeamInput = {
   Activity?: Maybe<ActivityCreateManyWithoutDiscussionInput>;
   attachments?: Maybe<AttachmentCreateManyWithoutDiscussionInput>;
   ballot?: Maybe<BallotCreateOneWithoutDiscussionInput>;
-  card: Scalars['String'];
+  card?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['DateTime']>;
   id?: Maybe<Scalars['String']>;
   reactions?: Maybe<ReactionCreateManyWithoutDiscussionInput>;
@@ -2273,7 +2274,7 @@ export type DiscussionCreateWithoutUserInput = {
   Activity?: Maybe<ActivityCreateManyWithoutDiscussionInput>;
   attachments?: Maybe<AttachmentCreateManyWithoutDiscussionInput>;
   ballot?: Maybe<BallotCreateOneWithoutDiscussionInput>;
-  card: Scalars['String'];
+  card?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['DateTime']>;
   id?: Maybe<Scalars['String']>;
   reactions?: Maybe<ReactionCreateManyWithoutDiscussionInput>;
@@ -2293,7 +2294,7 @@ export type DiscussionListRelationFilter = {
 export type DiscussionScalarWhereInput = {
   AND?: Maybe<Array<DiscussionScalarWhereInput>>;
   ballotId?: Maybe<StringNullableFilter>;
-  card?: Maybe<StringFilter>;
+  card?: Maybe<StringNullableFilter>;
   createdAt?: Maybe<DateTimeFilter>;
   id?: Maybe<StringFilter>;
   NOT?: Maybe<Array<DiscussionScalarWhereInput>>;
@@ -2307,7 +2308,7 @@ export type DiscussionScalarWhereInput = {
 };
 
 export type DiscussionUpdateManyMutationInput = {
-  card?: Maybe<StringFieldUpdateOperationsInput>;
+  card?: Maybe<NullableStringFieldUpdateOperationsInput>;
   createdAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
   id?: Maybe<StringFieldUpdateOperationsInput>;
   text?: Maybe<StringFieldUpdateOperationsInput>;
@@ -2420,7 +2421,7 @@ export type DiscussionUpdateOneWithoutReactionsInput = {
 export type DiscussionUpdateWithoutActivityInput = {
   attachments?: Maybe<AttachmentUpdateManyWithoutDiscussionInput>;
   ballot?: Maybe<BallotUpdateOneWithoutDiscussionInput>;
-  card?: Maybe<StringFieldUpdateOperationsInput>;
+  card?: Maybe<NullableStringFieldUpdateOperationsInput>;
   createdAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
   id?: Maybe<StringFieldUpdateOperationsInput>;
   reactions?: Maybe<ReactionUpdateManyWithoutDiscussionInput>;
@@ -2435,7 +2436,7 @@ export type DiscussionUpdateWithoutActivityInput = {
 export type DiscussionUpdateWithoutAttachmentsInput = {
   Activity?: Maybe<ActivityUpdateManyWithoutDiscussionInput>;
   ballot?: Maybe<BallotUpdateOneWithoutDiscussionInput>;
-  card?: Maybe<StringFieldUpdateOperationsInput>;
+  card?: Maybe<NullableStringFieldUpdateOperationsInput>;
   createdAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
   id?: Maybe<StringFieldUpdateOperationsInput>;
   reactions?: Maybe<ReactionUpdateManyWithoutDiscussionInput>;
@@ -2450,7 +2451,7 @@ export type DiscussionUpdateWithoutAttachmentsInput = {
 export type DiscussionUpdateWithoutBallotInput = {
   Activity?: Maybe<ActivityUpdateManyWithoutDiscussionInput>;
   attachments?: Maybe<AttachmentUpdateManyWithoutDiscussionInput>;
-  card?: Maybe<StringFieldUpdateOperationsInput>;
+  card?: Maybe<NullableStringFieldUpdateOperationsInput>;
   createdAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
   id?: Maybe<StringFieldUpdateOperationsInput>;
   reactions?: Maybe<ReactionUpdateManyWithoutDiscussionInput>;
@@ -2466,7 +2467,7 @@ export type DiscussionUpdateWithoutReactionsInput = {
   Activity?: Maybe<ActivityUpdateManyWithoutDiscussionInput>;
   attachments?: Maybe<AttachmentUpdateManyWithoutDiscussionInput>;
   ballot?: Maybe<BallotUpdateOneWithoutDiscussionInput>;
-  card?: Maybe<StringFieldUpdateOperationsInput>;
+  card?: Maybe<NullableStringFieldUpdateOperationsInput>;
   createdAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
   id?: Maybe<StringFieldUpdateOperationsInput>;
   school?: Maybe<SchoolUpdateOneWithoutDiscussionInput>;
@@ -2481,7 +2482,7 @@ export type DiscussionUpdateWithoutSchoolInput = {
   Activity?: Maybe<ActivityUpdateManyWithoutDiscussionInput>;
   attachments?: Maybe<AttachmentUpdateManyWithoutDiscussionInput>;
   ballot?: Maybe<BallotUpdateOneWithoutDiscussionInput>;
-  card?: Maybe<StringFieldUpdateOperationsInput>;
+  card?: Maybe<NullableStringFieldUpdateOperationsInput>;
   createdAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
   id?: Maybe<StringFieldUpdateOperationsInput>;
   reactions?: Maybe<ReactionUpdateManyWithoutDiscussionInput>;
@@ -2496,7 +2497,7 @@ export type DiscussionUpdateWithoutTeamInput = {
   Activity?: Maybe<ActivityUpdateManyWithoutDiscussionInput>;
   attachments?: Maybe<AttachmentUpdateManyWithoutDiscussionInput>;
   ballot?: Maybe<BallotUpdateOneWithoutDiscussionInput>;
-  card?: Maybe<StringFieldUpdateOperationsInput>;
+  card?: Maybe<NullableStringFieldUpdateOperationsInput>;
   createdAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
   id?: Maybe<StringFieldUpdateOperationsInput>;
   reactions?: Maybe<ReactionUpdateManyWithoutDiscussionInput>;
@@ -2511,7 +2512,7 @@ export type DiscussionUpdateWithoutUserInput = {
   Activity?: Maybe<ActivityUpdateManyWithoutDiscussionInput>;
   attachments?: Maybe<AttachmentUpdateManyWithoutDiscussionInput>;
   ballot?: Maybe<BallotUpdateOneWithoutDiscussionInput>;
-  card?: Maybe<StringFieldUpdateOperationsInput>;
+  card?: Maybe<NullableStringFieldUpdateOperationsInput>;
   createdAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
   id?: Maybe<StringFieldUpdateOperationsInput>;
   reactions?: Maybe<ReactionUpdateManyWithoutDiscussionInput>;
@@ -2587,7 +2588,7 @@ export type DiscussionWhereInput = {
   attachments?: Maybe<AttachmentListRelationFilter>;
   ballot?: Maybe<BallotWhereInput>;
   ballotId?: Maybe<StringNullableFilter>;
-  card?: Maybe<StringFilter>;
+  card?: Maybe<StringNullableFilter>;
   createdAt?: Maybe<DateTimeFilter>;
   id?: Maybe<StringFilter>;
   NOT?: Maybe<Array<DiscussionWhereInput>>;
@@ -4510,7 +4511,7 @@ export type TeamCreateInput = {
   BallotRuns?: Maybe<BallotRunCreateManyWithoutTeamInput>;
   ballots?: Maybe<BallotCreateManyWithoutTeamInput>;
   cards?: Maybe<Scalars['String']>;
-  Discussion?: Maybe<DiscussionCreateManyWithoutTeamInput>;
+  discussion?: Maybe<DiscussionCreateManyWithoutTeamInput>;
   domain?: Maybe<DomainCreateOneWithoutTeamInput>;
   id?: Maybe<Scalars['String']>;
   members?: Maybe<UserCreateManyWithoutTeamInput>;
@@ -4568,7 +4569,7 @@ export type TeamCreateOneWithoutBallotsInput = {
 
 export type TeamCreateOneWithoutDiscussionInput = {
   connect?: Maybe<TeamWhereUniqueInput>;
-  connectOrCreate?: Maybe<TeamCreateOrConnectWithoutDiscussionInput>;
+  connectOrCreate?: Maybe<TeamCreateOrConnectWithoutdiscussionInput>;
   create?: Maybe<TeamCreateWithoutDiscussionInput>;
 };
 
@@ -4622,7 +4623,7 @@ export type TeamCreateOrConnectWithoutballotsInput = {
   where: TeamWhereUniqueInput;
 };
 
-export type TeamCreateOrConnectWithoutDiscussionInput = {
+export type TeamCreateOrConnectWithoutdiscussionInput = {
   create: TeamCreateWithoutDiscussionInput;
   where: TeamWhereUniqueInput;
 };
@@ -4673,7 +4674,7 @@ export type TeamCreateWithoutActivityInput = {
   ballots?: Maybe<BallotCreateManyWithoutTeamInput>;
   cards?: Maybe<Scalars['String']>;
   code?: Maybe<Scalars['String']>;
-  Discussion?: Maybe<DiscussionCreateManyWithoutTeamInput>;
+  discussion?: Maybe<DiscussionCreateManyWithoutTeamInput>;
   domain?: Maybe<DomainCreateOneWithoutTeamInput>;
   id?: Maybe<Scalars['String']>;
   invite?: Maybe<Scalars['String']>;
@@ -4694,7 +4695,7 @@ export type TeamCreateWithoutAttachmentInput = {
   ballots?: Maybe<BallotCreateManyWithoutTeamInput>;
   cards?: Maybe<Scalars['String']>;
   code?: Maybe<Scalars['String']>;
-  Discussion?: Maybe<DiscussionCreateManyWithoutTeamInput>;
+  discussion?: Maybe<DiscussionCreateManyWithoutTeamInput>;
   domain?: Maybe<DomainCreateOneWithoutTeamInput>;
   id?: Maybe<Scalars['String']>;
   invite?: Maybe<Scalars['String']>;
@@ -4715,7 +4716,7 @@ export type TeamCreateWithoutBallotRunsInput = {
   ballots?: Maybe<BallotCreateManyWithoutTeamInput>;
   cards?: Maybe<Scalars['String']>;
   code?: Maybe<Scalars['String']>;
-  Discussion?: Maybe<DiscussionCreateManyWithoutTeamInput>;
+  discussion?: Maybe<DiscussionCreateManyWithoutTeamInput>;
   domain?: Maybe<DomainCreateOneWithoutTeamInput>;
   id?: Maybe<Scalars['String']>;
   invite?: Maybe<Scalars['String']>;
@@ -4736,7 +4737,7 @@ export type TeamCreateWithoutBallotsInput = {
   BallotRuns?: Maybe<BallotRunCreateManyWithoutTeamInput>;
   cards?: Maybe<Scalars['String']>;
   code?: Maybe<Scalars['String']>;
-  Discussion?: Maybe<DiscussionCreateManyWithoutTeamInput>;
+  discussion?: Maybe<DiscussionCreateManyWithoutTeamInput>;
   domain?: Maybe<DomainCreateOneWithoutTeamInput>;
   id?: Maybe<Scalars['String']>;
   invite?: Maybe<Scalars['String']>;
@@ -4779,7 +4780,7 @@ export type TeamCreateWithoutDomainInput = {
   ballots?: Maybe<BallotCreateManyWithoutTeamInput>;
   cards?: Maybe<Scalars['String']>;
   code?: Maybe<Scalars['String']>;
-  Discussion?: Maybe<DiscussionCreateManyWithoutTeamInput>;
+  discussion?: Maybe<DiscussionCreateManyWithoutTeamInput>;
   id?: Maybe<Scalars['String']>;
   invite?: Maybe<Scalars['String']>;
   members?: Maybe<UserCreateManyWithoutTeamInput>;
@@ -4800,7 +4801,7 @@ export type TeamCreateWithoutMembersInput = {
   ballots?: Maybe<BallotCreateManyWithoutTeamInput>;
   cards?: Maybe<Scalars['String']>;
   code?: Maybe<Scalars['String']>;
-  Discussion?: Maybe<DiscussionCreateManyWithoutTeamInput>;
+  discussion?: Maybe<DiscussionCreateManyWithoutTeamInput>;
   domain?: Maybe<DomainCreateOneWithoutTeamInput>;
   id?: Maybe<Scalars['String']>;
   invite?: Maybe<Scalars['String']>;
@@ -4821,7 +4822,7 @@ export type TeamCreateWithoutSchoolInput = {
   ballots?: Maybe<BallotCreateManyWithoutTeamInput>;
   cards?: Maybe<Scalars['String']>;
   code?: Maybe<Scalars['String']>;
-  Discussion?: Maybe<DiscussionCreateManyWithoutTeamInput>;
+  discussion?: Maybe<DiscussionCreateManyWithoutTeamInput>;
   domain?: Maybe<DomainCreateOneWithoutTeamInput>;
   id?: Maybe<Scalars['String']>;
   invite?: Maybe<Scalars['String']>;
@@ -4842,7 +4843,7 @@ export type TeamCreateWithoutTeacherInput = {
   ballots?: Maybe<BallotCreateManyWithoutTeamInput>;
   cards?: Maybe<Scalars['String']>;
   code?: Maybe<Scalars['String']>;
-  Discussion?: Maybe<DiscussionCreateManyWithoutTeamInput>;
+  discussion?: Maybe<DiscussionCreateManyWithoutTeamInput>;
   domain?: Maybe<DomainCreateOneWithoutTeamInput>;
   id?: Maybe<Scalars['String']>;
   invite?: Maybe<Scalars['String']>;
@@ -4863,7 +4864,7 @@ export type TeamCreateWithoutUserInput = {
   ballots?: Maybe<BallotCreateManyWithoutTeamInput>;
   cards?: Maybe<Scalars['String']>;
   code?: Maybe<Scalars['String']>;
-  Discussion?: Maybe<DiscussionCreateManyWithoutTeamInput>;
+  discussion?: Maybe<DiscussionCreateManyWithoutTeamInput>;
   domain?: Maybe<DomainCreateOneWithoutTeamInput>;
   id?: Maybe<Scalars['String']>;
   invite?: Maybe<Scalars['String']>;
@@ -4884,7 +4885,7 @@ export type TeamCreateWithoutVotedInput = {
   ballots?: Maybe<BallotCreateManyWithoutTeamInput>;
   cards?: Maybe<Scalars['String']>;
   code?: Maybe<Scalars['String']>;
-  Discussion?: Maybe<DiscussionCreateManyWithoutTeamInput>;
+  discussion?: Maybe<DiscussionCreateManyWithoutTeamInput>;
   domain?: Maybe<DomainCreateOneWithoutTeamInput>;
   id?: Maybe<Scalars['String']>;
   invite?: Maybe<Scalars['String']>;
@@ -4905,7 +4906,7 @@ export type TeamCreateWithoutVoteInput = {
   ballots?: Maybe<BallotCreateManyWithoutTeamInput>;
   cards?: Maybe<Scalars['String']>;
   code?: Maybe<Scalars['String']>;
-  Discussion?: Maybe<DiscussionCreateManyWithoutTeamInput>;
+  discussion?: Maybe<DiscussionCreateManyWithoutTeamInput>;
   domain?: Maybe<DomainCreateOneWithoutTeamInput>;
   id?: Maybe<Scalars['String']>;
   invite?: Maybe<Scalars['String']>;
@@ -4926,7 +4927,7 @@ export type TeamCreateWithoutWorkInput = {
   ballots?: Maybe<BallotCreateManyWithoutTeamInput>;
   cards?: Maybe<Scalars['String']>;
   code?: Maybe<Scalars['String']>;
-  Discussion?: Maybe<DiscussionCreateManyWithoutTeamInput>;
+  discussion?: Maybe<DiscussionCreateManyWithoutTeamInput>;
   domain?: Maybe<DomainCreateOneWithoutTeamInput>;
   id?: Maybe<Scalars['String']>;
   invite?: Maybe<Scalars['String']>;
@@ -5062,7 +5063,7 @@ export type TeamUpdateOneRequiredWithoutBallotRunsInput = {
 
 export type TeamUpdateOneRequiredWithoutDiscussionInput = {
   connect?: Maybe<TeamWhereUniqueInput>;
-  connectOrCreate?: Maybe<TeamCreateOrConnectWithoutDiscussionInput>;
+  connectOrCreate?: Maybe<TeamCreateOrConnectWithoutdiscussionInput>;
   create?: Maybe<TeamCreateWithoutDiscussionInput>;
   update?: Maybe<TeamUpdateWithoutDiscussionInput>;
   upsert?: Maybe<TeamUpsertWithoutDiscussionInput>;
@@ -5132,7 +5133,7 @@ export type TeamUpdateWithoutActivityInput = {
   ballots?: Maybe<BallotUpdateManyWithoutTeamInput>;
   cards?: Maybe<StringFieldUpdateOperationsInput>;
   code?: Maybe<NullableStringFieldUpdateOperationsInput>;
-  Discussion?: Maybe<DiscussionUpdateManyWithoutTeamInput>;
+  discussion?: Maybe<DiscussionUpdateManyWithoutTeamInput>;
   domain?: Maybe<DomainUpdateOneWithoutTeamInput>;
   id?: Maybe<StringFieldUpdateOperationsInput>;
   invite?: Maybe<NullableStringFieldUpdateOperationsInput>;
@@ -5153,7 +5154,7 @@ export type TeamUpdateWithoutAttachmentInput = {
   ballots?: Maybe<BallotUpdateManyWithoutTeamInput>;
   cards?: Maybe<StringFieldUpdateOperationsInput>;
   code?: Maybe<NullableStringFieldUpdateOperationsInput>;
-  Discussion?: Maybe<DiscussionUpdateManyWithoutTeamInput>;
+  discussion?: Maybe<DiscussionUpdateManyWithoutTeamInput>;
   domain?: Maybe<DomainUpdateOneWithoutTeamInput>;
   id?: Maybe<StringFieldUpdateOperationsInput>;
   invite?: Maybe<NullableStringFieldUpdateOperationsInput>;
@@ -5174,7 +5175,7 @@ export type TeamUpdateWithoutBallotRunsInput = {
   ballots?: Maybe<BallotUpdateManyWithoutTeamInput>;
   cards?: Maybe<StringFieldUpdateOperationsInput>;
   code?: Maybe<NullableStringFieldUpdateOperationsInput>;
-  Discussion?: Maybe<DiscussionUpdateManyWithoutTeamInput>;
+  discussion?: Maybe<DiscussionUpdateManyWithoutTeamInput>;
   domain?: Maybe<DomainUpdateOneWithoutTeamInput>;
   id?: Maybe<StringFieldUpdateOperationsInput>;
   invite?: Maybe<NullableStringFieldUpdateOperationsInput>;
@@ -5195,7 +5196,7 @@ export type TeamUpdateWithoutBallotsInput = {
   BallotRuns?: Maybe<BallotRunUpdateManyWithoutTeamInput>;
   cards?: Maybe<StringFieldUpdateOperationsInput>;
   code?: Maybe<NullableStringFieldUpdateOperationsInput>;
-  Discussion?: Maybe<DiscussionUpdateManyWithoutTeamInput>;
+  discussion?: Maybe<DiscussionUpdateManyWithoutTeamInput>;
   domain?: Maybe<DomainUpdateOneWithoutTeamInput>;
   id?: Maybe<StringFieldUpdateOperationsInput>;
   invite?: Maybe<NullableStringFieldUpdateOperationsInput>;
@@ -5238,7 +5239,7 @@ export type TeamUpdateWithoutDomainInput = {
   ballots?: Maybe<BallotUpdateManyWithoutTeamInput>;
   cards?: Maybe<StringFieldUpdateOperationsInput>;
   code?: Maybe<NullableStringFieldUpdateOperationsInput>;
-  Discussion?: Maybe<DiscussionUpdateManyWithoutTeamInput>;
+  discussion?: Maybe<DiscussionUpdateManyWithoutTeamInput>;
   id?: Maybe<StringFieldUpdateOperationsInput>;
   invite?: Maybe<NullableStringFieldUpdateOperationsInput>;
   members?: Maybe<UserUpdateManyWithoutTeamInput>;
@@ -5259,7 +5260,7 @@ export type TeamUpdateWithoutMembersInput = {
   ballots?: Maybe<BallotUpdateManyWithoutTeamInput>;
   cards?: Maybe<StringFieldUpdateOperationsInput>;
   code?: Maybe<NullableStringFieldUpdateOperationsInput>;
-  Discussion?: Maybe<DiscussionUpdateManyWithoutTeamInput>;
+  discussion?: Maybe<DiscussionUpdateManyWithoutTeamInput>;
   domain?: Maybe<DomainUpdateOneWithoutTeamInput>;
   id?: Maybe<StringFieldUpdateOperationsInput>;
   invite?: Maybe<NullableStringFieldUpdateOperationsInput>;
@@ -5280,7 +5281,7 @@ export type TeamUpdateWithoutSchoolInput = {
   ballots?: Maybe<BallotUpdateManyWithoutTeamInput>;
   cards?: Maybe<StringFieldUpdateOperationsInput>;
   code?: Maybe<NullableStringFieldUpdateOperationsInput>;
-  Discussion?: Maybe<DiscussionUpdateManyWithoutTeamInput>;
+  discussion?: Maybe<DiscussionUpdateManyWithoutTeamInput>;
   domain?: Maybe<DomainUpdateOneWithoutTeamInput>;
   id?: Maybe<StringFieldUpdateOperationsInput>;
   invite?: Maybe<NullableStringFieldUpdateOperationsInput>;
@@ -5301,7 +5302,7 @@ export type TeamUpdateWithoutTeacherInput = {
   ballots?: Maybe<BallotUpdateManyWithoutTeamInput>;
   cards?: Maybe<StringFieldUpdateOperationsInput>;
   code?: Maybe<NullableStringFieldUpdateOperationsInput>;
-  Discussion?: Maybe<DiscussionUpdateManyWithoutTeamInput>;
+  discussion?: Maybe<DiscussionUpdateManyWithoutTeamInput>;
   domain?: Maybe<DomainUpdateOneWithoutTeamInput>;
   id?: Maybe<StringFieldUpdateOperationsInput>;
   invite?: Maybe<NullableStringFieldUpdateOperationsInput>;
@@ -5322,7 +5323,7 @@ export type TeamUpdateWithoutUserInput = {
   ballots?: Maybe<BallotUpdateManyWithoutTeamInput>;
   cards?: Maybe<StringFieldUpdateOperationsInput>;
   code?: Maybe<NullableStringFieldUpdateOperationsInput>;
-  Discussion?: Maybe<DiscussionUpdateManyWithoutTeamInput>;
+  discussion?: Maybe<DiscussionUpdateManyWithoutTeamInput>;
   domain?: Maybe<DomainUpdateOneWithoutTeamInput>;
   id?: Maybe<StringFieldUpdateOperationsInput>;
   invite?: Maybe<NullableStringFieldUpdateOperationsInput>;
@@ -5343,7 +5344,7 @@ export type TeamUpdateWithoutVotedInput = {
   ballots?: Maybe<BallotUpdateManyWithoutTeamInput>;
   cards?: Maybe<StringFieldUpdateOperationsInput>;
   code?: Maybe<NullableStringFieldUpdateOperationsInput>;
-  Discussion?: Maybe<DiscussionUpdateManyWithoutTeamInput>;
+  discussion?: Maybe<DiscussionUpdateManyWithoutTeamInput>;
   domain?: Maybe<DomainUpdateOneWithoutTeamInput>;
   id?: Maybe<StringFieldUpdateOperationsInput>;
   invite?: Maybe<NullableStringFieldUpdateOperationsInput>;
@@ -5364,7 +5365,7 @@ export type TeamUpdateWithoutVoteInput = {
   ballots?: Maybe<BallotUpdateManyWithoutTeamInput>;
   cards?: Maybe<StringFieldUpdateOperationsInput>;
   code?: Maybe<NullableStringFieldUpdateOperationsInput>;
-  Discussion?: Maybe<DiscussionUpdateManyWithoutTeamInput>;
+  discussion?: Maybe<DiscussionUpdateManyWithoutTeamInput>;
   domain?: Maybe<DomainUpdateOneWithoutTeamInput>;
   id?: Maybe<StringFieldUpdateOperationsInput>;
   invite?: Maybe<NullableStringFieldUpdateOperationsInput>;
@@ -5385,7 +5386,7 @@ export type TeamUpdateWithoutWorkInput = {
   ballots?: Maybe<BallotUpdateManyWithoutTeamInput>;
   cards?: Maybe<StringFieldUpdateOperationsInput>;
   code?: Maybe<NullableStringFieldUpdateOperationsInput>;
-  Discussion?: Maybe<DiscussionUpdateManyWithoutTeamInput>;
+  discussion?: Maybe<DiscussionUpdateManyWithoutTeamInput>;
   domain?: Maybe<DomainUpdateOneWithoutTeamInput>;
   id?: Maybe<StringFieldUpdateOperationsInput>;
   invite?: Maybe<NullableStringFieldUpdateOperationsInput>;
@@ -5490,7 +5491,7 @@ export type TeamWhereInput = {
   ballots?: Maybe<BallotListRelationFilter>;
   cards?: Maybe<StringFilter>;
   code?: Maybe<StringNullableFilter>;
-  Discussion?: Maybe<DiscussionListRelationFilter>;
+  discussion?: Maybe<DiscussionListRelationFilter>;
   domain?: Maybe<DomainWhereInput>;
   domainId?: Maybe<StringNullableFilter>;
   id?: Maybe<StringFilter>;
@@ -7673,6 +7674,25 @@ export type WorkWhereUniqueInput = {
   id?: Maybe<Scalars['String']>;
 };
 
+export type ActivitiesQueryVariables = Exact<{
+  where?: Maybe<ActivityWhereInput>;
+  orderBy?: Maybe<Array<ActivityOrderByInput>>;
+  first?: Maybe<Scalars['Int']>;
+}>;
+
+
+export type ActivitiesQuery = (
+  { __typename?: 'Query' }
+  & { activities: Array<(
+    { __typename?: 'Activity' }
+    & Pick<Activity, 'type' | 'card' | 'ballotId' | 'time'>
+    & { user: (
+      { __typename?: 'User' }
+      & Pick<User, 'shortname'>
+    ) }
+  )> }
+);
+
 export type BallotFieldsFragment = (
   { __typename?: 'Ballot' }
   & Pick<Ballot, 'id' | 'title' | 'description' | 'body' | 'start' | 'end' | 'scope' | 'canton'>
@@ -8365,23 +8385,6 @@ export type ChangePasswordMutation = (
   )> }
 );
 
-export type CheckVerificationMutationVariables = Exact<{
-  token: Scalars['String'];
-}>;
-
-
-export type CheckVerificationMutation = (
-  { __typename?: 'Mutation' }
-  & { checkVerification?: Maybe<(
-    { __typename?: 'ResponseLogin' }
-    & Pick<ResponseLogin, 'token'>
-    & { user?: Maybe<(
-      { __typename?: 'User' }
-      & LoginFieldsFragment
-    )> }
-  )> }
-);
-
 export type CreateUserMutationVariables = Exact<{
   data: UserCreateInput;
 }>;
@@ -8393,6 +8396,19 @@ export type CreateUserMutation = (
     { __typename?: 'User' }
     & Pick<User, 'id' | 'name' | 'email' | 'shortname' | 'lastname' | 'role'>
   ) }
+);
+
+export type CheckVerificationMutationVariables = Exact<{
+  token: Scalars['String'];
+}>;
+
+
+export type CheckVerificationMutation = (
+  { __typename?: 'Mutation' }
+  & { checkVerification?: Maybe<(
+    { __typename?: 'ResponseLogin' }
+    & Pick<ResponseLogin, 'token'>
+  )> }
 );
 
 export const BallotFieldsFragmentDoc = gql`
@@ -8540,6 +8556,47 @@ export const WorkFieldsFragmentDoc = gql`
   }
 }
     ${AttachmentFieldsFragmentDoc}`;
+export const ActivitiesDocument = gql`
+    query activities($where: ActivityWhereInput, $orderBy: [ActivityOrderByInput!], $first: Int) {
+  activities(where: $where, orderBy: $orderBy, first: $first) {
+    user {
+      shortname
+    }
+    type
+    card
+    ballotId
+    time
+  }
+}
+    `;
+
+/**
+ * __useActivitiesQuery__
+ *
+ * To run a query within a React component, call `useActivitiesQuery` and pass it any options that fit your needs.
+ * When your component renders, `useActivitiesQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useActivitiesQuery({
+ *   variables: {
+ *      where: // value for 'where'
+ *      orderBy: // value for 'orderBy'
+ *      first: // value for 'first'
+ *   },
+ * });
+ */
+export function useActivitiesQuery(baseOptions?: Apollo.QueryHookOptions<ActivitiesQuery, ActivitiesQueryVariables>) {
+        return Apollo.useQuery<ActivitiesQuery, ActivitiesQueryVariables>(ActivitiesDocument, baseOptions);
+      }
+export function useActivitiesLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ActivitiesQuery, ActivitiesQueryVariables>) {
+          return Apollo.useLazyQuery<ActivitiesQuery, ActivitiesQueryVariables>(ActivitiesDocument, baseOptions);
+        }
+export type ActivitiesQueryHookResult = ReturnType<typeof useActivitiesQuery>;
+export type ActivitiesLazyQueryHookResult = ReturnType<typeof useActivitiesLazyQuery>;
+export type ActivitiesQueryResult = Apollo.QueryResult<ActivitiesQuery, ActivitiesQueryVariables>;
 export const BallotsDocument = gql`
     query ballots($where: BallotWhereInput) {
   ballots(where: $where) {
@@ -10003,41 +10060,6 @@ export function useChangePasswordMutation(baseOptions?: Apollo.MutationHookOptio
 export type ChangePasswordMutationHookResult = ReturnType<typeof useChangePasswordMutation>;
 export type ChangePasswordMutationResult = Apollo.MutationResult<ChangePasswordMutation>;
 export type ChangePasswordMutationOptions = Apollo.BaseMutationOptions<ChangePasswordMutation, ChangePasswordMutationVariables>;
-export const CheckVerificationDocument = gql`
-    mutation checkVerification($token: String!) {
-  checkVerification(token: $token) {
-    token
-    user {
-      ...LoginFields
-    }
-  }
-}
-    ${LoginFieldsFragmentDoc}`;
-export type CheckVerificationMutationFn = Apollo.MutationFunction<CheckVerificationMutation, CheckVerificationMutationVariables>;
-
-/**
- * __useCheckVerificationMutation__
- *
- * To run a mutation, you first call `useCheckVerificationMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useCheckVerificationMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [checkVerificationMutation, { data, loading, error }] = useCheckVerificationMutation({
- *   variables: {
- *      token: // value for 'token'
- *   },
- * });
- */
-export function useCheckVerificationMutation(baseOptions?: Apollo.MutationHookOptions<CheckVerificationMutation, CheckVerificationMutationVariables>) {
-        return Apollo.useMutation<CheckVerificationMutation, CheckVerificationMutationVariables>(CheckVerificationDocument, baseOptions);
-      }
-export type CheckVerificationMutationHookResult = ReturnType<typeof useCheckVerificationMutation>;
-export type CheckVerificationMutationResult = Apollo.MutationResult<CheckVerificationMutation>;
-export type CheckVerificationMutationOptions = Apollo.BaseMutationOptions<CheckVerificationMutation, CheckVerificationMutationVariables>;
 export const CreateUserDocument = gql`
     mutation createUser($data: UserCreateInput!) {
   createUser(data: $data) {
@@ -10075,6 +10097,38 @@ export function useCreateUserMutation(baseOptions?: Apollo.MutationHookOptions<C
 export type CreateUserMutationHookResult = ReturnType<typeof useCreateUserMutation>;
 export type CreateUserMutationResult = Apollo.MutationResult<CreateUserMutation>;
 export type CreateUserMutationOptions = Apollo.BaseMutationOptions<CreateUserMutation, CreateUserMutationVariables>;
+export const CheckVerificationDocument = gql`
+    mutation checkVerification($token: String!) {
+  checkVerification(token: $token) {
+    token
+  }
+}
+    `;
+export type CheckVerificationMutationFn = Apollo.MutationFunction<CheckVerificationMutation, CheckVerificationMutationVariables>;
+
+/**
+ * __useCheckVerificationMutation__
+ *
+ * To run a mutation, you first call `useCheckVerificationMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCheckVerificationMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [checkVerificationMutation, { data, loading, error }] = useCheckVerificationMutation({
+ *   variables: {
+ *      token: // value for 'token'
+ *   },
+ * });
+ */
+export function useCheckVerificationMutation(baseOptions?: Apollo.MutationHookOptions<CheckVerificationMutation, CheckVerificationMutationVariables>) {
+        return Apollo.useMutation<CheckVerificationMutation, CheckVerificationMutationVariables>(CheckVerificationDocument, baseOptions);
+      }
+export type CheckVerificationMutationHookResult = ReturnType<typeof useCheckVerificationMutation>;
+export type CheckVerificationMutationResult = Apollo.MutationResult<CheckVerificationMutation>;
+export type CheckVerificationMutationOptions = Apollo.BaseMutationOptions<CheckVerificationMutation, CheckVerificationMutationVariables>;
 
       export interface PossibleTypesResultData {
         possibleTypes: {
