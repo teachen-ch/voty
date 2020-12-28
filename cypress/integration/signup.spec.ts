@@ -29,7 +29,6 @@ describe("Test Signup Page", () => {
     cy.contains("Bitte gültige Email-Adresse angeben");
   });
 
-  // TODO: This test crashes the server on production, not sure why
   it("Creates a new teacher account", () => {
     cy.visit("/user/signup");
     cy.findByLabelText("Vorname:").type("Test");
@@ -54,11 +53,5 @@ describe("Test Signup Page", () => {
       cy.visit(String(url));
       cy.contains("Deine Email-Adresse ist nun bestätigt");
     });
-  });
-
-  it("TODO: Activates user with verification url", () => {
-    cy.visit("/user/signup");
-    // TODO: find a way to get verification token...
-    // cy.request("/api/graphql", ``````)
   });
 });
