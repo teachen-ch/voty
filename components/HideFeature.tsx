@@ -1,4 +1,4 @@
-const prod = process.env.BASE_URL === "https://voty.ch/";
+import { isProd } from "util/isBrowser";
 
 const prodEnabled: Record<string, boolean> = {
   cards: false,
@@ -12,6 +12,6 @@ export const HideFeature: React.FC<{
   id: string;
 }> = ({ children, id }) => {
   const feature = <>{children}</>;
-  if (prod) return prodEnabled[id] ? feature : null;
+  if (isProd()) return prodEnabled[id] ? feature : null;
   else return feature;
 };

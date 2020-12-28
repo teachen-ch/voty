@@ -6,6 +6,7 @@ import { LabelRenderFunction } from "react-minimal-pie-chart/types/commonTypes";
 import { BallotResults as BallotResultsType } from "graphql/types";
 import type { Nullable } from "simplytyped";
 import Info from "./Info";
+import { isProd } from "util/isBrowser";
 
 export const BallotResults: React.FC<{
   results?: Nullable<BallotResultsType>;
@@ -18,7 +19,7 @@ export const BallotResults: React.FC<{
   if (!results.yes) nullOptions++;
   if (!results.no) nullOptions++;
   if (!results.abs) nullOptions++;
-  if (results.total < 5 || nullOptions >= 2)
+  if ((results.total < 5 || nullOptions >= 2) && isProd())
     return (
       <Info type="important">
         Es wurden erst {results.total} Stimmen abgegeben. Resultate werde noch
