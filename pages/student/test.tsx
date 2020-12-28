@@ -12,7 +12,7 @@ import {
   useBallotsQuery,
 } from "graphql/types";
 import { parseMarkdownInner } from "util/markdown";
-import { VotyNow, VotySuccess } from "pages/ballots/[ballot]";
+import { VotyNow, VotySuccess } from "pages/team/[team]/ballots/[ballot]";
 import { HideFeature } from "components/HideFeature";
 
 export default function StudentTest(): React.ReactElement {

@@ -178,7 +178,7 @@ export const Loading: React.FC = () => (
 );
 
 export const Err: React.FC<{ msg?: string }> = ({ msg, children }) => (
-  <Info type="error">
+  <Info type="important">
     {msg && tr(msg)}
     {children}
   </Info>

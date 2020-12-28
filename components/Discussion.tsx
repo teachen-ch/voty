@@ -61,22 +61,24 @@ export const Discussion: React.FC<{
   ballotId?: string;
   title?: string;
 }> = ({ card, ballotId, title = "Diskussion" }) => {
+  const team = useTeam();
+  if (!team) return null;
   return (
     <Box className="discussion">
       {title && <Heading>{title}</Heading>}
-      <Discussions card={card} ballotId={ballotId} />
+      <Discussions card={card} ballotId={ballotId} teamId={team.id} />
       <PostDiscussion card={card} ballotId={ballotId} />
     </Box>
   );
 };
 
-const Discussions: React.FC<{ card?: string; ballotId?: string }> = ({
-  card,
-  ballotId,
-}) => {
-  const team = useTeam();
+const Discussions: React.FC<{
+  card?: string;
+  ballotId?: string;
+  teamId: string;
+}> = ({ card, ballotId, teamId }) => {
   const discussionsQuery = useGetTeamDiscussionsQuery({
-    variables: { card, ballotId, teamId: team?.id },
+    variables: { card, ballotId, teamId },
   });
   const discussions = discussionsQuery.data?.getTeamDiscussions;
   return (

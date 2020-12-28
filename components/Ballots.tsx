@@ -302,18 +302,17 @@ export const SelectBallots: React.FC<{ team: TeamTeacherFieldsFragment }> = ({
           "Für diese Abstimmung wurden bereits Stimmen abgegeben. Wirklich löschen?"
         );
         if (!confirmed) return;
-
-        await doRemoveBallotRun({
-          variables: { ballotRunId: run.id },
-
-          update: (cache) => {
-            cache.evict({
-              id: `BallotRun:${run.id}`,
-            });
-            cache.gc();
-          },
-        });
       }
+      await doRemoveBallotRun({
+        variables: { ballotRunId: run.id },
+
+        update: (cache) => {
+          cache.evict({
+            id: `BallotRun:${run.id}`,
+          });
+          cache.gc();
+        },
+      });
     } else {
       await doAddBallotRun({
         variables: { ballotId, teamId },

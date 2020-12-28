@@ -24,6 +24,7 @@ import { Breadcrumb, A } from "components/Breadcrumb";
 import { Spinner } from "theme-ui";
 import PanelPage from "./panel";
 import { CardList, CircleBullet } from "components/Cards";
+import { Activities } from "components/Activities";
 // import { usePolling } from "util/hooks";
 
 export const INVITE_STUDENTS = gql`
@@ -231,6 +232,7 @@ export default function TeacherTeamPage(): React.ReactElement {
         </Text>
         {showInviteLink && <InviteLink team={team} />}
       </Text>
+      <Activities teamId={team.id} />
     </LoggedInPage>
   );
 }
