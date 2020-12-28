@@ -9,6 +9,7 @@ import logger from "util/logger";
 
 import * as types from "./schema";
 import { GraphQLScalarType } from "graphql";
+import { isLocal } from "util/isBrowser";
 
 const prisma = new PrismaClient();
 
@@ -45,7 +46,7 @@ const baseSchema = makeSchema({
     nexusPrisma({
       prismaClient: (ctx) => (ctx.db = prisma),
       experimentalCRUD: true,
-      shouldGenerateArtifacts: process.env.NODE_ENV === "development",
+      shouldGenerateArtifacts: isLocal(),
       outputs: {
         typegen: path.join(process.cwd(), "graphql", "nexus-plugin-prisma.ts"),
       },
@@ -77,7 +78,7 @@ const baseSchema = makeSchema({
     contextType: "ContextModule.Context",
   },
 
-  shouldGenerateArtifacts: process.env.NODE_ENV === "development",
+  shouldGenerateArtifacts: isLocal(),
   shouldExitAfterGenerateArtifacts: process.argv.includes("--nexus-exit"),
   outputs: {
     schema: path.join(process.cwd(), "graphql", "api.graphql"),

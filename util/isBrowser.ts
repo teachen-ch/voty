@@ -9,3 +9,7 @@ export function isProd(): boolean {
 export function isDev(): boolean {
   return process.env.NEXT_PUBLIC_ENV !== "production";
 }
+
+export function isLocal(): boolean {
+  return process.env.NEXT_PUBLIC_ENV === "local";
+}
