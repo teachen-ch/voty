@@ -192,6 +192,9 @@ export default {
     bold: {
       fontWeight: "bold",
     },
+    inline: {
+      display: "inline-block",
+    },
   },
   buttons: {
     primary: {
