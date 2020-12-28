@@ -5,6 +5,7 @@ import { ReactElement } from "react";
 import Link from "next/link";
 import { ProfileEdit } from "components/Users";
 import { SelectSchool } from "../../components/Schools";
+import { Role } from "graphql/types";
 
 export default function TeacherProfilePage({
   firstRun,
@@ -14,7 +15,7 @@ export default function TeacherProfilePage({
   const user = useUser();
 
   return (
-    <LoggedInPage heading="Dein Profil">
+    <LoggedInPage heading="Dein Profil" role={Role.Teacher}>
       {firstRun && "Bitte ergänze Deine Angaben…"}
       <ProfileEdit user={user} editMode={firstRun} />
 

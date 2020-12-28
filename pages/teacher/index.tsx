@@ -6,6 +6,7 @@ import { useState, ReactElement } from "react";
 import { useRouter } from "next/router";
 import { SelectSchool } from "components/Schools";
 import { Breadcrumb, A } from "components/Breadcrumb";
+import { Role } from "graphql/types";
 
 export default function Teacher(): ReactElement {
   const user = useUser();
@@ -19,7 +20,7 @@ export default function Teacher(): ReactElement {
 
   if (user?.school === null) {
     return (
-      <LoggedInPage heading="Willkommen auf voty.ch">
+      <LoggedInPage heading="Willkommen auf voty.ch" role={Role.Teacher}>
         <Text mb={3}>Wähle zuerst Deine Schule aus oder erfasse eine Neue</Text>
         <SelectSchool />
       </LoggedInPage>
@@ -27,7 +28,7 @@ export default function Teacher(): ReactElement {
   }
 
   return (
-    <LoggedInPage heading="Meine Klassen">
+    <LoggedInPage heading="Meine Klassen" role={Role.Teacher}>
       <Breadcrumb>
         <A href="/">Start</A>
         <b>Meine Klassen</b>

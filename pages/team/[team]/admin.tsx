@@ -17,6 +17,7 @@ import {
   useTeamTeacherQuery,
   TeamTeacherFieldsFragment,
   useInviteStudentsMutation,
+  Role,
 } from "graphql/types";
 import { Nullable } from "simplytyped";
 import { Breadcrumb, A } from "components/Breadcrumb";
@@ -89,7 +90,7 @@ export default function TeacherTeamPage(): React.ReactElement {
 
   if (teamQuery.loading) {
     return (
-      <LoggedInPage heading="Detailansicht Klasse">
+      <LoggedInPage heading="Detailansicht Klasse" role={Role.Teacher}>
         Klasse wird geladen…
       </LoggedInPage>
     );
@@ -98,7 +99,7 @@ export default function TeacherTeamPage(): React.ReactElement {
   const team = teamQuery.data?.team;
   if (!team) {
     return (
-      <LoggedInPage heading="Detailansicht Klasse">
+      <LoggedInPage heading="Detailansicht Klasse" role={Role.Teacher}>
         <Text mb={3}>Klasse wurde nicht gefunden.</Text>
         <Button onClick={() => router.push("/teacher/")}>Meine Klassen</Button>
       </LoggedInPage>
@@ -115,7 +116,7 @@ export default function TeacherTeamPage(): React.ReactElement {
   }
 
   return (
-    <LoggedInPage heading="Detailansicht Klasse">
+    <LoggedInPage heading="Detailansicht Klasse" role={Role.Teacher}>
       <Breadcrumb>
         <A href="/">Start</A>
         <A href="/teacher/">Meine Klassen</A>
@@ -125,7 +126,7 @@ export default function TeacherTeamPage(): React.ReactElement {
         <HideFeature id="cards">
           <Heading as="h3">Lerninhalte</Heading>
           <CardList teamCards={team.cards} teamId={team.id} />
-          <Box pl={4}>
+          <Box pl={4} mt={3}>
             <A onClick={() => router.push(`/team/${team.id}/select`)}>
               <CircleBullet value="+" />
               Lerninhalte hinzufügen

@@ -1,4 +1,4 @@
-import { LoggedInPage, Page } from "components/Page";
+import { LoggedInPage } from "components/Page";
 import { Cards, CardListAdmin } from "components/Cards";
 import { Input } from "@rebass/forms";
 import { Flex, Button, Text, Heading } from "rebass";
@@ -8,6 +8,7 @@ import { A, Breadcrumb } from "components/Breadcrumb";
 import { debounce } from "lodash";
 import { Filter } from "components/Swissvotes";
 import { useTeam } from "state/user";
+import { Role } from "graphql/types";
 
 export default function CardsPage(): React.ReactElement {
   const router = useRouter();
@@ -18,7 +19,7 @@ export default function CardsPage(): React.ReactElement {
 
   if (!team) {
     return (
-      <LoggedInPage heading="Detailansicht Klasse">
+      <LoggedInPage heading="Detailansicht Klasse" role={Role.Teacher}>
         <Text mb={3}>Klasse wurde nicht gefunden.</Text>
         <Button onClick={() => router.push("/teacher/")}>Meine Klassen</Button>
       </LoggedInPage>
@@ -30,7 +31,7 @@ export default function CardsPage(): React.ReactElement {
     setKeywords("");
   }
   return (
-    <Page heading="Lerninhalte">
+    <LoggedInPage heading="Lerninhalte" role={Role.Teacher}>
       <Breadcrumb>
         <A href="/">Start</A>
         <A href="/teacher/">Meine Klassen</A>
@@ -71,6 +72,6 @@ export default function CardsPage(): React.ReactElement {
         teamCards={team.cards}
         resetFilters={resetFilters}
       />
-    </Page>
+    </LoggedInPage>
   );
 }

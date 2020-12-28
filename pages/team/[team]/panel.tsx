@@ -3,7 +3,7 @@ import { Heading, Box, Text, Button } from "rebass";
 import { useRouter } from "next/router";
 import { SelectBallots } from "components/Ballots";
 import { usePageEvent } from "util/stats";
-import { useTeamTeacherQuery } from "graphql/types";
+import { Role, useTeamTeacherQuery } from "graphql/types";
 import { Breadcrumb, A } from "components/Breadcrumb";
 // import { usePolling } from "util/hooks";
 
@@ -19,7 +19,7 @@ export default function PanelPage(): React.ReactElement {
 
   if (teamQuery.loading) {
     return (
-      <LoggedInPage heading="discussit.ch Panel">
+      <LoggedInPage heading="discussit.ch Panel" role={Role.Teacher}>
         Panel wird geladen…
       </LoggedInPage>
     );
@@ -27,14 +27,14 @@ export default function PanelPage(): React.ReactElement {
   const team = teamQuery.data?.team;
   if (!team) {
     return (
-      <LoggedInPage heading="discussit.ch Panel">
+      <LoggedInPage heading="discussit.ch Panel" role={Role.Teacher}>
         Panel konnte nicht gefunden werden
       </LoggedInPage>
     );
   }
 
   return (
-    <LoggedInPage heading="discussit.ch Panel">
+    <LoggedInPage heading="discussit.ch Panel" role={Role.Teacher}>
       <Breadcrumb>
         <A href="/">Start</A>
         <A href="/teacher/">Meine Klassen</A>

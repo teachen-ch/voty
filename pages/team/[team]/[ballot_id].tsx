@@ -1,7 +1,7 @@
 import { LoggedInPage, AppPage, ErrorPage } from "components/Page";
 import { Text, Box } from "rebass";
 import { useRouter } from "next/router";
-import { useBallotQuery, useGetBallotResultsQuery } from "graphql/types";
+import { Role, useBallotQuery, useGetBallotResultsQuery } from "graphql/types";
 import { BallotResults } from "components/BallotResults";
 import { BallotDetails } from "components/Ballots";
 import { usePageEvent } from "util/stats";
@@ -42,7 +42,7 @@ export default function TeacherBallotPage(): React.ReactElement {
   }
 
   return (
-    <LoggedInPage heading={`${ballot.title}`}>
+    <LoggedInPage heading={`${ballot.title}`} role={Role.Teacher}>
       <Breadcrumb>
         <A href="/">Start</A>
         <A href="/teacher/">Meine Klassen</A>

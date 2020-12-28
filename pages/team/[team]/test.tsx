@@ -10,6 +10,7 @@ import {
   useGetBallotRunsQuery,
   useAddBallotRunMutation,
   useRemoveBallotRunMutation,
+  Role,
 } from "graphql/types";
 import { useRouter } from "next/router";
 import { ReactElement } from "react";
@@ -41,7 +42,7 @@ export default function TeacherTest(): ReactElement {
 
   if (team === null) {
     return (
-      <LoggedInPage heading="Demokratie testen">
+      <LoggedInPage heading="Demokratie testen" role={Role.Teacher}>
         <Text mb={3}>Klasse wurde nicht gefunden.</Text>
         <Button onClick={() => router.push("/teacher/")}>Meine Klassen</Button>
       </LoggedInPage>
@@ -50,7 +51,7 @@ export default function TeacherTest(): ReactElement {
 
   if (!team)
     return (
-      <LoggedInPage>
+      <LoggedInPage role={Role.Teacher}>
         <Loading />
       </LoggedInPage>
     );
@@ -78,7 +79,7 @@ export default function TeacherTest(): ReactElement {
   }
 
   return (
-    <LoggedInPage heading="Demokratie testen">
+    <LoggedInPage heading="Demokratie testen" role={Role.Teacher}>
       <Heading as="h2">Diese Abstimmungen wurden ausgewählt:</Heading>
       <div id="selectedBallots">
         {ballotRuns?.length
