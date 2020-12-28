@@ -5,10 +5,7 @@ import {
   stringArg,
   intArg,
   nonNull,
-  list,
 } from "@nexus/schema";
-import { randomBytes } from "crypto";
-import { random } from "lodash";
 import resolvers from "../resolvers";
 
 export const School = objectType({
@@ -23,22 +20,6 @@ export const School = objectType({
     t.model.city();
     t.model.zip();
     t.model.canton();
-  },
-});
-
-export const Team = objectType({
-  name: "Team",
-  definition(t) {
-    t.model.id();
-    t.model.name();
-    t.model.invite();
-    t.model.code();
-    t.model.domain();
-    t.model.school();
-    t.model.teacher();
-    t.model.members();
-    t.model.ballots();
-    t.model.cards();
   },
 });
 
@@ -142,11 +123,6 @@ export const Query = queryType({
       ordering: true,
       filtering: true,
     });
-    t.crud.team();
-    t.crud.teams({
-      ordering: true,
-      filtering: true,
-    });
 
     t.crud.ballot();
     t.crud.ballots({
@@ -186,12 +162,6 @@ export const Mutation = mutationType({
   definition(t) {
     t.crud.createOneSchool();
     t.crud.deleteOneSchool();
-    t.crud.createOneTeam({
-      computedInputs: {
-        invite: () => randomBytes(6).toString("hex"),
-        code: () => String(random(10 ** 7, 10 ** 8 - 1)),
-      },
-    });
     t.crud.deleteOneTeam();
 
     t.field("vote", {
@@ -211,15 +181,6 @@ export const Mutation = mutationType({
         code: nonNull(stringArg()),
       },
       resolve: resolvers.ballots.voteCode,
-    });
-
-    t.field("inviteStudents", {
-      type: "InviteResponse",
-      args: {
-        team: nonNull(stringArg()),
-        emails: nonNull(list(nonNull(stringArg()))),
-      },
-      resolve: resolvers.teams.inviteStudents,
     });
 
     t.field("addBallotRun", {
