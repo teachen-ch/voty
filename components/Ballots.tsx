@@ -297,7 +297,12 @@ export const SelectBallots: React.FC<{ team: TeamTeacherFieldsFragment }> = ({
     const run = find(ballotRuns, { ballot: { id: ballotId } });
     if (run && typeof run == "object") {
       const results = await getResults(ballotId, run.id);
-      if (results?.total === 0) {
+      if (results?.total !== 0) {
+        const confirmed = confirm(
+          "Für diese Abstimmung wurden bereits Stimmen abgegeben. Wirklich löschen?"
+        );
+        if (!confirmed) return;
+
         await doRemoveBallotRun({
           variables: { ballotRunId: run.id },
 
@@ -308,10 +313,6 @@ export const SelectBallots: React.FC<{ team: TeamTeacherFieldsFragment }> = ({
             cache.gc();
           },
         });
-      } else {
-        alert(
-          "Diese Abstimmung kann nicht mehr entfernt werden, da bereits Stimmen abgegeben wurden."
-        );
       }
     } else {
       await doAddBallotRun({
