@@ -369,19 +369,34 @@ export const checkVerification: FieldResolver<
 > = async (_root, args, ctx): Promise<ResponseLogin> => {
   if (!args.token) throw new Error("Error.NoToken");
   const found = await verifyToken(args.token, ctx.db);
+
   if (!found) {
     throw Error("Error.TokenNotFound");
   }
   const email = found.identifier;
   const user = await ctx.db.user.findUnique({ where: { email } });
+  const wasVerified = user?.emailVerified;
+
   if (!user) {
     throw Error("Error.EmailNotFound");
   }
 
-  await ctx.db.user.update({
-    where: { email },
-    data: { emailVerified: new Date() },
-  });
+  if (!wasVerified) {
+    await ctx.db.user.update({
+      where: { email },
+      data: { emailVerified: new Date() },
+    });
+    if (user.teamId) {
+      ctx.user = user;
+      await logActivity(ctx, {
+        user: { connect: { id: user.id } },
+        team: { connect: { id: user.teamId } },
+        school: { connect: { id: String(user.schoolId) } },
+        visibility: Visibility.Team,
+        type: ActivityType.UserAccept,
+      });
+    }
+  }
   return startJWTSession(user, ctx);
 };
 

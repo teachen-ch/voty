@@ -51,18 +51,6 @@ export const CHANGE_PASSWORD = gql`
   ${CheckLogin.fragments.LoginFields}
 `;
 
-export const CHECK_VERIFICATION = gql`
-  mutation checkVerification($token: String!) {
-    checkVerification(token: $token) {
-      token
-      user {
-        ...LoginFields
-      }
-    }
-  }
-  ${CheckLogin.fragments.LoginFields}
-`;
-
 export default function Login(): ReactElement {
   const token = useQueryParam("t");
   const purpose = useQueryParam("p");
