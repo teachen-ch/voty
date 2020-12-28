@@ -110,7 +110,12 @@ const CheckToken: React.FC<{
     );
   }
 
-  return <Text>Überprüfen</Text>;
+  return (
+    <Text>
+      <Loading />
+      Überprüfen
+    </Text>
+  );
 };
 function PasswordResetForm() {
   usePageEvent({ category: "Login", action: "PasswordRequest" });
