@@ -42,6 +42,8 @@ export const postDiscussion: FieldResolver<
     discussion: { connect: { id: discussion.id } },
     user: { connect: { id: user.id } },
     team: { connect: { id: teamId } },
+    card,
+    ballot: ballotId ? { connect: { id: ballotId } } : undefined,
     school: { connect: { id: String(user.schoolId) } },
     visibility: Visibility.Team,
     type: ActivityType.Discussion,
