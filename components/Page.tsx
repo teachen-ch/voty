@@ -11,6 +11,8 @@ import { Footer } from "components/Footer";
 import { TopBar } from "./TopBar";
 import IconClose from "../public/images/icon_close.svg";
 import { Spinner } from "theme-ui";
+import Info from "./Info";
+import { tr } from "util/translate";
 
 export const Page: React.FC<{
   children?: React.ReactNode;
@@ -173,6 +175,13 @@ export const Container: React.FC<FlexProps> = (props) => {
 
 export const Loading: React.FC = () => (
   <Spinner color="white" size={20} mr={3} />
+);
+
+export const Err: React.FC<{ msg?: string }> = ({ msg, children }) => (
+  <Info type="error">
+    {msg && tr(msg)}
+    {children}
+  </Info>
 );
 
 export const ErrorPage: React.FC = (props) => (
