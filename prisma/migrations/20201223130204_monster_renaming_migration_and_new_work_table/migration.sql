@@ -18,9 +18,6 @@ ALTER TABLE "attachments" DROP CONSTRAINT "attachments_schoolId_fkey";
 -- DropForeignKey
 ALTER TABLE "reactions" DROP CONSTRAINT "reactions_thread_id_fkey";
 
--- DropForeignKey
-ALTER TABLE "threads" DROP CONSTRAINT "threads_schoolId_fkey";
-
 -- AlterTable
 ALTER TABLE "activities" DROP COLUMN "cardId",
 ADD COLUMN     "card_id" TEXT,
@@ -39,8 +36,7 @@ ADD COLUMN     "feedback" TEXT NOT NULL,
 ALTER COLUMN "emoij" SET DEFAULT E'';
 
 -- AlterTable
-ALTER TABLE "threads" DROP COLUMN "schoolId",
-ADD COLUMN     "school_id" TEXT;
+ALTER TABLE "threads" ADD COLUMN   "school_id" TEXT;
 
 -- CreateTable
 CREATE TABLE "works" (

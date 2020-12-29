@@ -7,11 +7,6 @@
   - You are about to drop the `threads` table. If the table is not empty, all the data it contains will be lost.
 
 */
--- DropForeignKey
-ALTER TABLE "threads" DROP CONSTRAINT "threads_school_id_fkey";
-
--- DropForeignKey
-ALTER TABLE "threads" DROP CONSTRAINT "threads_team_id_fkey";
 
 -- DropForeignKey
 ALTER TABLE "threads" DROP CONSTRAINT "threads_user_id_fkey";
