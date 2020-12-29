@@ -166,7 +166,7 @@ export const Vote: React.FC<{ vote: Swissvote }> = ({ vote }) => {
         )}
       </td>
       <td style={{ maxWidth: "100px" }}>{getVoteType(vote.rechtsform)}</td>
-      <td>{vote.annahme && getVoteResult(vote.annahme)}</td>
+      <td>{getVoteResult(vote.annahme)}</td>
     </tr>
   );
 };
@@ -188,6 +188,6 @@ const SwissvoteResults: Record<number, string> = {
   1: "JA",
 };
 
-export function getVoteResult(r: number): string {
-  return SwissvoteResults[r] || "–";
+export function getVoteResult(r?: number | null): string {
+  return r === null || r === undefined ? "-" : SwissvoteResults[r];
 }
