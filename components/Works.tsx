@@ -7,11 +7,13 @@ import {
   User,
 } from "graphql/types";
 import { AttachmentFields } from "components/Uploader";
-import { Flex, Link, Text, FlexProps } from "rebass";
+import { Flex, Link, Text, FlexProps, Box } from "rebass";
 import { useTeam, useUser } from "state/user";
 import { ChangeEvent, useEffect, useRef, useState } from "react";
 import { Loading } from "./Page";
 import { find, isFunction, omit, remove } from "lodash";
+import Plus from "../public/images/icon_plus.svg";
+import Minus from "../public/images/icon_minus.svg";
 
 export const WorkFields = gql`
   fragment WorkFields on Work {
@@ -58,6 +60,7 @@ export const Works: React.FC<
   const works = worksQuery.data?.works;
   const Comp = items;
   const ListComp = list || Flex;
+  const [active, setActive] = useState("");
 
   useEffect(() => {
     if (trigger) {
@@ -71,9 +74,32 @@ export const Works: React.FC<
   const flexProps = omit(props, "children", "ref");
   return (
     <ListComp {...flexProps}>
-      {works?.map((work) => (
-        <Comp key={work.id} work={work} />
-      ))}
+      {works && <Text fontWeight="bold">Arbeiten zum Thema:</Text>}
+      {works?.map((work) => {
+        return (
+          <Box key={work.id} mt={2}>
+            <Text
+              py={2}
+              px={3}
+              bg="rgba(0,0,0,0.2)"
+              sx={{ cursor: "pointer" }}
+              onClick={() => setActive(active === work.id ? "" : work.id)}
+            >
+              {active === work.id ? (
+                <Minus
+                  height="20px"
+                  style={{ marginRight: 10 }}
+                  alt="Schliessen"
+                />
+              ) : (
+                <Plus height="20px" style={{ marginRight: 10 }} alt="Öffnen" />
+              )}
+              Von: {work.users?.map((u) => u.shortname).join(", ")}
+            </Text>
+            {active === work.id && <Comp work={work} />}
+          </Box>
+        );
+      })}
     </ListComp>
   );
 };

@@ -5,6 +5,7 @@ import { useState } from "react";
 import { useTeam, useUser } from "state/user";
 import { Authors, Works, WorkItem } from "./Works";
 import Info from "./Info";
+import { Markdown } from "util/markdown";
 
 export const Passion: React.FC = () => {
   const [trigger, setTrigger] = useState(0);
@@ -13,7 +14,7 @@ export const Passion: React.FC = () => {
       <PassionForm onSuccess={() => setTrigger(1)} />
       <Works
         card="passion"
-        mt={3}
+        mt={6}
         items={PassionItem}
         flexDirection="column"
         trigger={trigger}
@@ -88,9 +89,12 @@ const PassionForm: React.FC<{ onSuccess: () => void }> = ({ onSuccess }) => {
 const PassionItem: WorkItem = ({ work }) => {
   return (
     <Box mb={4}>
-      <Text>Von: {work.users?.map((u) => u.shortname).join(", ")}</Text>
-      <Text>Meine Passion: {work.data?.passion}</Text>
-      <Text>Mein Engagement: {work.data?.engagement}</Text>
+      <Text my={3}>
+        <b>Meine Passion ❤️ </b> {work.data?.passion}
+      </Text>
+      <Text>
+        <b>Mein Engagement 🌱 </b> <Markdown>{work.data?.engagement}</Markdown>
+      </Text>
     </Box>
   );
 };
