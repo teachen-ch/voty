@@ -119,8 +119,6 @@ export const ActivitiesQuery: React.FC<{
   );
 };
 
-type ArrayElement<A> = A extends readonly (infer T)[] ? T : never;
-
 export function getActivityText(
   act: ArrayElement<AQType["activities"]>
 ): string {
