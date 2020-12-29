@@ -1,12 +1,22 @@
 import { gql } from "@apollo/client";
-import { Swissvote, useSwissvotesQuery } from "graphql/types";
-import { Input } from "@rebass/forms";
+import {
+  Swissvote,
+  SwissvotesQuery,
+  usePostWorkMutation,
+  UserWhereUniqueInput,
+  useSwissvotesQuery,
+} from "graphql/types";
+import { Checkbox, Input, Label, Select, Textarea } from "@rebass/forms";
 import { Box, Link, Text, Flex, Button } from "rebass";
-import { ErrorPage, Loading } from "./Page";
+import { Err, ErrorPage, Loading } from "./Page";
 import { useState, Dispatch, SetStateAction, useEffect } from "react";
 import { A } from "./Breadcrumb";
 import { formatYear } from "util/date";
-import { debounce } from "lodash";
+import { CircleBullet } from "components/Cards";
+import { debounce, find, remove } from "lodash";
+import { Authors, WorkItem, Works } from "./Works";
+import { useTeam, useUser } from "state/user";
+import { Markdown } from "util/markdown";
 
 export const SEARCH_SWISSVOTES = gql`
   query swissvotes(
@@ -44,12 +54,17 @@ export const SEARCH_SWISSVOTES = gql`
   }
 `;
 
-export const Swissvotes: React.FC = () => {
+type VoteType = ArrayElement<SwissvotesQuery["swissvotes"]>;
+
+export const Swissvotes: React.FC<{
+  votes?: VoteType[];
+  setVotes?: (votes: VoteType[]) => void;
+  limit?: number;
+}> = ({ votes, setVotes, limit = 15 }) => {
   const [keywords, setKeywords] = useState("");
   const [type, setType] = useState<number | undefined>();
   const [result, setResult] = useState<number | undefined>();
   const [offset, setOffset] = useState(0);
-  const limit = 15;
 
   // reset the offset when changing query parameters
   useEffect(() => {
@@ -81,6 +96,8 @@ export const Swissvotes: React.FC = () => {
         <Filter set={setResult} v={result} val={1} label="angenommen" />
       </Text>
       <VotesList
+        votes={votes}
+        setVotes={setVotes}
         query={{ keywords, type, result, offset, limit }}
         resetFilters={resetFilters}
       />
@@ -92,6 +109,144 @@ export const Swissvotes: React.FC = () => {
           {offset < 650 ? "… Ältere Abstimmungen anzeigen" : ""}
         </Link>
       </Flex>
+    </Box>
+  );
+};
+
+export const SwissvotesTopics: React.FC = () => {
+  const user = useUser();
+  const team = useTeam();
+  const [topic, setTopic] = useState("");
+  const [votes, setVotes] = useState<VoteType[]>([]);
+  const [text, setText] = useState("");
+  const [users, setUsers] = useState<UserWhereUniqueInput[]>([]);
+  const [doPostWork] = usePostWorkMutation();
+  const [success, setSuccess] = useState(false);
+  const [error, setError] = useState("");
+  const [trigger, setTrigger] = useState(0);
+
+  async function doSubmit() {
+    if (!team || !user) {
+      return;
+    }
+    const success = await doPostWork({
+      variables: {
+        data: {
+          team: { connect: { id: team.id } },
+          school: { connect: { id: user?.school?.id } },
+          users: { connect: users },
+          title: topic,
+          text: text,
+          card: "swissvotes_themen",
+          data: {
+            topic,
+            votes,
+            text,
+          },
+        },
+      },
+    });
+    if (success) {
+      setSuccess(true);
+      setTrigger(trigger + 1);
+    } else {
+      setError("Es ist ein Fehler aufgetreten");
+    }
+  }
+
+  return (
+    <Box>
+      <Text mb={3}>
+        <CircleBullet value={1} />
+        Wählt ein Thema aus, über das Ihr recherchieren möchtet:
+      </Text>
+      <Select value={topic} onChange={(e) => setTopic(e.target.value)}>
+        <option value="">Thema auswählen</option>
+        <option>Umweltpolitik</option>
+        <option>Landwirtschaft</option>
+        <option>Verkehr</option>
+        <option>Sozialpolitik</option>
+        <option>Armee</option>
+      </Select>
+      {topic && (
+        <Box mt={4}>
+          <Text mb={-20}>
+            <CircleBullet value={2} /> Sucht in der Swissvotes Datenbank, zu was
+            die Schweiz über das Thema «{topic}» abgestimmt hat und wählt drei
+            Initiativen aus, die Euch wichtig erscheinen:
+          </Text>
+          <Swissvotes votes={votes} setVotes={setVotes} limit={10} />
+        </Box>
+      )}
+      {votes.length ? (
+        <Box mt={4}>
+          <Text mb={2} fontWeight="bold">
+            Ausgewählte Abstimmungen:{" "}
+          </Text>
+          <table style={{ borderTop: "2px solid white" }}>
+            <tbody>
+              {votes?.map(
+                (vote) =>
+                  vote && (
+                    <Vote
+                      key={vote.anr}
+                      vote={vote}
+                      votes={votes}
+                      setVotes={setVotes}
+                    />
+                  )
+              )}
+            </tbody>
+          </table>
+          <Text mt={4}>
+            <CircleBullet value={3} />
+            Nun begründet, warum ihr diese Abstimmungen wichtig findet und was
+            Euch bei der Recherche aufgefallen ist. Über welche Abstimmungen
+            hättet ihr gerne selber abgestimmt?
+            <Textarea
+              value={text}
+              onChange={(e) => setText(e.target.value)}
+              rows={8}
+            />
+            <Label mt={3}>Erarbeitet durch:</Label>
+            <Authors setUsers={setUsers} />
+            {success ? (
+              "Die Arbeit wurde gespeichert!"
+            ) : (
+              <Button mt={3} onClick={doSubmit}>
+                Abschicken
+              </Button>
+            )}
+            <Err msg={error} />
+          </Text>
+        </Box>
+      ) : null}
+
+      <Works
+        mt={6}
+        items={SwissvotesItem}
+        card="swissvotes_themen"
+        flexDirection="column"
+        trigger={trigger}
+      ></Works>
+    </Box>
+  );
+};
+
+const SwissvotesItem: WorkItem = ({ work }) => {
+  return (
+    <Box mb={4}>
+      <Text my={2}>Thema: {work.data?.topic}</Text>
+      <table style={{ borderTop: "2px solid white" }}>
+        <tbody>
+          {(work.data?.votes as VoteType[]).map(
+            (vote) => vote && <Vote key={vote.anr} vote={vote} />
+          )}
+        </tbody>
+      </table>
+      <Text mt={3}>
+        <Markdown>{work.data?.text}</Markdown>
+      </Text>
     </Box>
   );
 };
@@ -127,7 +282,9 @@ export type VotesQuery = {
 export const VotesList: React.FC<{
   query: VotesQuery;
   resetFilters: () => void;
-}> = ({ query, resetFilters }) => {
+  votes?: VoteType[];
+  setVotes?: (votes: VoteType[]) => void;
+}> = ({ query, resetFilters, votes, setVotes }) => {
   const swissvotesQuery = useSwissvotesQuery({
     variables: query,
   });
@@ -148,15 +305,48 @@ export const VotesList: React.FC<{
   return (
     <table style={{ borderTop: "2px solid white" }}>
       <tbody>
-        {swissvotes?.map((vote) => vote && <Vote key={vote.anr} vote={vote} />)}
+        {swissvotes?.map(
+          (vote) =>
+            vote && (
+              <Vote
+                key={vote.anr}
+                vote={vote}
+                votes={votes}
+                setVotes={setVotes}
+              />
+            )
+        )}
       </tbody>
     </table>
   );
 };
 
-export const Vote: React.FC<{ vote: Swissvote }> = ({ vote }) => {
+export const Vote: React.FC<{
+  vote: Swissvote;
+  votes?: VoteType[];
+  setVotes?: (votes: VoteType[]) => void;
+}> = ({ vote, votes, setVotes }) => {
+  function isSelected(vote: VoteType) {
+    return find(votes, vote) ? true : false;
+  }
+  function doSelect(vote: VoteType) {
+    if (votes && setVotes) {
+      if (isSelected(vote)) {
+        remove(votes, vote);
+      } else {
+        votes.push(vote);
+      }
+      setVotes(votes.slice());
+    }
+  }
+
   return (
     <tr style={{ fontSize: 16 }}>
+      {setVotes && (
+        <td onClick={() => doSelect(vote)}>
+          <Checkbox bg="white" checked={isSelected(vote)} color="secondary" />
+        </td>
+      )}
       <td>{vote.datum && formatYear(vote.datum)}</td>
       <td style={{ maxWidth: "500px" }}>
         {vote.swissvoteslink && (

@@ -45,6 +45,7 @@ export const postWork: FieldResolver<"Mutation", "postWork"> = async (
   });
 
   await logActivity(ctx, {
+    card: args.data.card,
     work: { connect: { id: work.id } },
     user: { connect: { id: user.id } },
     team: { connect: { id: teamId } },
