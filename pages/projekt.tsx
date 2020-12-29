@@ -116,9 +116,9 @@ export default function Projekt(): React.ReactElement {
             Sämtliche Angebote von voty.ch werden Schulen und Lehrpersonen
             kostenlos angeboten und richten sich primär an die Stufen Sek-1,
             Gymnasium und Berufsschule. Die Plattform voty.ch mit den drei
-            Modulen ist webbasierend aufgebaut und kann auf jedem Computer,
-            Tablet oder Smartphone mit Internetzugang ohne Installation einer
-            zusätzlichen Software genutzt werden.
+            Modulen kann auf jedem Computer, Tablet oder Smartphone mit
+            Internetzugang ohne Installation einer zusätzlichen Software genutzt
+            werden.
           </Text>
           <Heading>Datenschutz</Heading>
           <Text>
