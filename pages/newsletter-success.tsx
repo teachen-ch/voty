@@ -1,13 +1,20 @@
 import { Page } from "components/Page";
-import { Heading } from "rebass";
+import { Flex, Heading } from "rebass";
 import { ReactElement } from "react";
 
 export default function NewsletterSuccess(): ReactElement {
   return (
-    <Page heading="Es hat geklappt!">
-      <Heading as="h2" id="newsletter">
-        ✅ Super, die Anmeldung zum voty.ch Newsletter hat geklappt!
-      </Heading>
+    <Page heading="Newsletter-Anmeldung bestätigen">
+      <Flex
+        flexDirection="column"
+        minHeight="450px"
+        sx={{ background: 'url("/images/voty_welcome.svg") center no-repeat' }}
+      >
+        <Heading as="h2" id="newsletter">
+          Danke für Dein Interesse an voty.ch!
+        </Heading>
+        Schau in Deiner Inbox nach und bestätige die Anmeldung dort.
+      </Flex>
     </Page>
   );
 }
