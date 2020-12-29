@@ -177,12 +177,13 @@ export const Loading: React.FC = () => (
   <Spinner color="white" size={20} mr={3} />
 );
 
-export const Err: React.FC<{ msg?: string }> = ({ msg, children }) => (
-  <Info type="important">
-    {msg && tr(msg)}
-    {children}
-  </Info>
-);
+export const Err: React.FC<{ msg?: string }> = ({ msg, children }) =>
+  msg || children ? (
+    <Info type="important">
+      {msg && tr(msg)}
+      {children}
+    </Info>
+  ) : null;
 
 export const ErrorPage: React.FC = (props) => (
   <Page heading="Fehler">
