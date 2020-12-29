@@ -101,6 +101,17 @@ export const ActivitiesQuery: React.FC<{
                 </td>
               </tr>
             ))}
+            {activities?.length == 0 ? (
+              <tr
+                style={{
+                  fontSize: 16,
+                  height: 32,
+                  background: "rgba(0,0,0,0)",
+                }}
+              >
+                <td>Noch keine Aktivitäten in der Klasse</td>
+              </tr>
+            ) : null}
           </tbody>
         </table>
       </Box>

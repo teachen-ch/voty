@@ -232,7 +232,9 @@ export default function TeacherTeamPage(): React.ReactElement {
         </Text>
         {showInviteLink && <InviteLink team={team} />}
       </Text>
-      <Activities teamId={team.id} />
+      <HideFeature id="activities">
+        <Activities teamId={team.id} />
+      </HideFeature>
     </LoggedInPage>
   );
 }
