@@ -14,6 +14,7 @@ import {
 import { parseMarkdownInner } from "util/markdown";
 import { VotyNow, VotySuccess } from "pages/team/[team]/ballots/[ballot]";
 import { HideFeature } from "components/HideFeature";
+import { Activities } from "components/Activities";
 
 export default function StudentTest(): React.ReactElement {
   const user = useUser();
@@ -40,6 +41,10 @@ export default function StudentTest(): React.ReactElement {
         Deine Stimme abgeben.
       </Text>
       <ShowBallots user={user} />
+
+      <HideFeature id="activities">
+        <Activities teamId={user.team.id} />
+      </HideFeature>
     </LoggedInPage>
   );
 }
