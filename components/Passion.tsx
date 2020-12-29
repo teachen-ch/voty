@@ -7,15 +7,14 @@ import { Authors, Works, WorkItem } from "./Works";
 import Info from "./Info";
 
 export const Passion: React.FC = () => {
-  const where = { card: { equals: "passion" } };
   const [trigger, setTrigger] = useState(0);
   return (
     <Box>
       <PassionForm onSuccess={() => setTrigger(1)} />
       <Works
+        card="passion"
         mt={3}
         items={PassionItem}
-        where={where}
         flexDirection="column"
         trigger={trigger}
       ></Works>

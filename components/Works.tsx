@@ -46,11 +46,14 @@ export type WorkItem = React.FC<{ work: WorkFieldsFragment }>;
 export const Works: React.FC<
   FlexProps & {
     where?: WorkWhereInput;
+    card?: string;
     items: WorkItem;
     list?: React.FC;
     trigger?: number;
   }
-> = ({ where, items, list, trigger, ...props }) => {
+> = ({ where, items, list, trigger, card, ...props }) => {
+  where = where ?? {};
+  if (card) where.card = { equals: card };
   const worksQuery = useWorksQuery({ variables: { where } });
   const works = worksQuery.data?.works;
   const Comp = items;
@@ -167,7 +170,8 @@ export const Authors: React.FC<{
       <Flex
         flexWrap="wrap"
         bg="white"
-        p={2}
+        pt={2}
+        px={2}
         onClick={() => inputRef.current?.focus()}
       >
         {authors.map((author) => (
@@ -185,6 +189,7 @@ export const Authors: React.FC<{
           onChange={doSearch}
           style={{ border: "none", outline: "none", fontSize: 24 }}
           width="100px"
+          placeholder="Suche nach Vorname…"
         />
         {matches && (
           <Flex mt={2} width="100%">
