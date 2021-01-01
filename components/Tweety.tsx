@@ -1,55 +1,95 @@
 import "@chatscope/chat-ui-kit-styles/dist/default/styles.min.css";
-import { Box, Text, Card, Button, Flex } from "rebass";
+import { Box, Text, Card, Button, Flex, Link } from "rebass";
 import { useState } from "react";
-import { Textarea } from "@rebass/forms";
+import { Input, Label, Textarea } from "@rebass/forms";
+import { UserWhereUniqueInput } from "graphql/types";
+import { Authors, usePostWork, WorkItem, Works } from "./Works";
+import { Err } from "./Page";
+import Info from "./Info";
 
-const MAX_CHARS = 160;
+const MAX_CHARS = 140;
 
 export const Tweety: React.FC<{
   maxChars?: number;
   tags?: string;
   placeholder?: string;
-}> = ({ maxChars, tags, placeholder }) => {
+}> = ({ maxChars, tags, placeholder = "Gib einen kurzen Text ein..." }) => {
   const max = maxChars || MAX_CHARS;
   const [tweet, setTweet] = useState("");
-  const [sent, setSent] = useState(false);
+  const [title, setTitle] = useState("");
   const [chars, setChars] = useState(0);
+  const [users, setUsers] = useState<Array<UserWhereUniqueInput>>();
+  const [doPostWork, state, trigger] = usePostWork({
+    card: "tweety",
+    title,
+    text: tweet,
+    users,
+  });
 
   function doChange(evt: React.ChangeEvent<HTMLTextAreaElement>) {
     const value = evt.target.value;
     setTweet(value);
     setChars(value.length);
   }
-
-  function doTweety() {
-    setSent(true);
-  }
-
-  if (sent) {
-    return <TweetyCard tweet={tweet} tags={tags} />;
-  }
-
+  const success = state.called && !state.error;
   return (
-    <Card>
-      <Textarea
-        onChange={doChange}
-        rows={5}
-        bg="#efefef"
-        sx={{ border: "#ddd", outline: "none" }}
-        placeholder={placeholder}
-      ></Textarea>
-      <Flex justifyContent="space-between" mt={2}>
-        <Text fontSize={1}>
-          {chars > 1 && `Bereits ${chars}/${max} Zeichen`}
-          {chars > max && (
-            <span style={{ color: "red" }}>
-              &nbsp; <b>+{chars - max}</b>
-            </span>
-          )}
-        </Text>
-        <Button onClick={doTweety}>Abschicken</Button>
-      </Flex>
-    </Card>
+    <Box>
+      {success ? (
+        <Info>Erfolgreich gespeichert</Info>
+      ) : (
+        <>
+          <Label>Erarbeitet durch</Label>
+          <Authors setUsers={setUsers} />
+          <Label mt={4}>Abstimmung / Thema</Label>
+          <Input
+            onChange={(e) => setTitle(e.target.value)}
+            placeholder="Gib einen Titel ein"
+          />
+          <Card>
+            <Textarea
+              onChange={doChange}
+              rows={5}
+              bg="#efefef"
+              sx={{ border: "#ddd", outline: "none" }}
+              placeholder={placeholder}
+            ></Textarea>
+            <Flex justifyContent="space-between" mt={2}>
+              <Text fontSize={1}>
+                {chars > 1 && `Bereits ${chars}/${max} Zeichen. `}
+                {chars > max && (
+                  <span style={{ color: "red" }}>
+                    &nbsp; <b>+{chars - max}</b>
+                  </span>
+                )}
+                {chars > 50 && tweet.search(/[^\w]#\w\w+/) < 0 && (
+                  <Text variant="inline">
+                    Fehlt noch ein{" "}
+                    <Link
+                      href="https://de.wikipedia.org/wiki/Hashtag"
+                      target="_blank"
+                      variant="underline"
+                    >
+                      #hashtag
+                    </Link>
+                    ?
+                  </Text>
+                )}
+              </Text>
+              <Button onClick={doPostWork}>Tweet Abschicken</Button>
+            </Flex>
+            <Err msg={state.error?.message} />
+          </Card>
+        </>
+      )}
+
+      <Works
+        card="tweety"
+        mt={6}
+        items={TweetyItem}
+        flexDirection="column"
+        trigger={trigger}
+      />
+    </Box>
   );
 };
 
@@ -64,7 +104,6 @@ const TweetyCard: React.FC<{ tweet: string; tags?: string }> = ({
       border: "1px solid lightgray",
       borderRadius: 12,
     }}
-    mt={5}
     p={3}
     textAlign="left"
   >
@@ -82,3 +121,14 @@ const TwitterIcon: React.FC = () => (
     </g>
   </svg>
 );
+
+const TweetyItem: WorkItem = ({ work }) => {
+  return (
+    <Box>
+      <Text my={3} fontSize={1}>
+        Abstimmung / Thema: {work.title}
+      </Text>
+      <TweetyCard tweet={work.text} />
+    </Box>
+  );
+};
