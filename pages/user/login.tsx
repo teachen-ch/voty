@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { AppPage } from "components/Page";
+import { AppPage, Loading } from "components/Page";
 import { gql, useMutation } from "@apollo/client";
 import { useState, ReactElement } from "react";
 import { Text, Button, Heading, Flex } from "rebass";
@@ -13,7 +13,6 @@ import {
   useLoginMutation,
   useEmailVerificationMutation,
 } from "graphql/types";
-import VerifyPage from "./verify";
 
 export const LOGIN = gql`
   mutation login($email: String!, $password: String!) {
@@ -52,35 +51,32 @@ export const CHANGE_PASSWORD = gql`
 `;
 
 export default function Login(): ReactElement {
-  const token = useQueryParam("t");
-  const purpose = useQueryParam("p");
   const user = useUser();
   const router = useRouter();
+  const email = useQueryParam("email");
 
   if (user) {
     return <AfterLogin />;
   }
+  if (!email) return <Loading />;
 
-  // purpose: verification, reset, login
-  // this needs to stay in for a while, so that old links continue to work
-  if (token && purpose) {
-    return <VerifyPage />;
-  } else {
-    return (
-      <AppPage heading="Anmelden" onClose={() => void router.push("/")}>
-        <Text mb={3}>
-          Hier kannst Du Dich mit Deiner Schul-Emailadresse anmelden, wenn Du
-          bereits ein Konto bei voty.ch hast.
-        </Text>
-        <LoginForm />
-      </AppPage>
-    );
-  }
+  return (
+    <AppPage heading="Anmelden" onClose={() => void router.push("/")}>
+      <Text mb={3}>
+        Hier kannst Du Dich mit Deiner Schul-Emailadresse anmelden, wenn Du
+        bereits ein Konto bei voty.ch hast.
+      </Text>
+      <LoginForm initialEmail={email} />
+    </AppPage>
+  );
 }
 
-export function LoginForm(): ReactElement {
+export const LoginForm: React.FC<{ initialEmail?: string }> = ({
+  initialEmail,
+}) => {
   usePageEvent({ category: "Login", action: "Start" });
-  const [email, setEmail] = useState("");
+
+  const [email, setEmail] = useState(initialEmail || "");
   const [emailError, setEmailError] = useState("");
   const [requestReset, setRequestReset] = useState<string | undefined>(
     undefined
@@ -130,6 +126,7 @@ export function LoginForm(): ReactElement {
           label: "Email",
           required: true,
           type: "email",
+          init: initialEmail,
           setter: setEmail,
           placeholder: "name@meineschule.ch",
         },
@@ -164,7 +161,7 @@ export function LoginForm(): ReactElement {
       </Flex>
     </QForm>
   );
-}
+};
 
 export function VerificationForm({ email }: { email: string }): ReactElement {
   usePageEvent({ category: "Login", action: "NotVerified" });
