@@ -5,7 +5,7 @@ import { Loading, LoggedInPage, Page } from "components/Page";
 import { Role, useChangePasswordMutation } from "graphql/types";
 import { useRouter } from "next/router";
 import { useState } from "react";
-import { Box, Text, Button, Heading } from "rebass";
+import { Text, Button, Heading } from "rebass";
 import { useSetAccessToken, useSetUser, useUser } from "state/user";
 import { Grid } from "theme-ui";
 import { useQueryParam } from "util/hooks";
@@ -46,7 +46,11 @@ export default function VerifiedPage(): React.ReactElement {
     );
   }
   if (purpose === "reset") {
-    return <PasswordResetForm />;
+    return (
+      <LoggedInPage heading="Passwort ändern">
+        <PasswordResetForm />
+      </LoggedInPage>
+    );
   } else {
     void router.push(getStartpage(user?.role));
     return <LoggedInPage />;

@@ -244,7 +244,8 @@ function RequestReset({ onCancel }: { email: string; onCancel: () => void }) {
       setMailSent(true);
       setError("");
     },
-    onError() {
+    onError(err) {
+      console.error(err);
       setError("Es ist ein Fehler aufgetreten.");
     },
   });
