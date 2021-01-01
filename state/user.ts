@@ -6,7 +6,6 @@ import {
 } from "graphql/types";
 import { trackVisit } from "util/stats";
 import { useRouter } from "next/router";
-import { useEffect } from "react";
 
 export type SessionUser = LoginFieldsFragment | undefined | null;
 export type SessionTeam = TeamUserFieldsFragment | undefined | null;
@@ -60,9 +59,5 @@ export function useTeam(): SessionTeam | undefined | null {
     skip: !user,
   });
 
-  useEffect(() => {
-    // TODO: we seem to requery this way too often.
-    void teamQuery.refetch();
-  }, [user]);
   return teamQuery.data?.team;
 }
