@@ -1,7 +1,7 @@
 import { AppPage } from "components/Page";
-import { Heading, Text, Box, Flex, Link as A } from "rebass";
+import { Heading, Text, Box, Flex, Link } from "rebass";
 import { Grid } from "theme-ui";
-import Link from "next/link";
+import { A } from "components/Breadcrumb";
 import { ReactElement, useState } from "react";
 import { CreateUserForm } from "pages/user/signup";
 import Success from "pages/user/success";
@@ -58,13 +58,13 @@ export default function Abstimmung(): ReactElement {
             <Text maxWidth="600px">
               Ich nehme mir im Februar/März Zeit, um die Vorlagen mit den
               Schüler*innen zu diskutieren (z. B. mit Material von{" "}
-              <A
+              <Link
                 href="https://www.easyvote.ch/de/school/"
                 rel="noreferrer"
                 variant="underline"
               >
                 easyvote.ch
-              </A>{" "}
+              </Link>{" "}
               )
             </Text>
           </Flex>
@@ -136,7 +136,11 @@ export const FAQ: React.FC = () => (
       Gymnasium, Berufsschulen) die Abstimmung auf Laptops, Tablets oder
       Smartphones durchführen. Wir stellen sicher, dass nur registrierte Klassen
       mitmachen können, dass jede Person nur einmal abstimmen kann und dass
-      sämtliche Stimmabgaben anonym bleiben.
+      sämtliche Stimmabgaben anonym bleiben. Sie können den ganzen Ablauf auf{" "}
+      <A href="/demo" variant="underline">
+        demo.voty.ch
+      </A>{" "}
+      testen.
     </Text>
     <Heading as="h3">Wie kann meine Klasse auf voty.ch abstimmen?</Heading>
     <Text>
@@ -150,12 +154,12 @@ export const FAQ: React.FC = () => (
       und «Verhüllungsverbot-Initiative», «Stop Palmöl-Referendum») und
       schliesslich die SuS via Email eingeladen werden. Wir empfehlen, die
       Themen vorgängig mit den Materialien von{" "}
-      <A
+      <Link
         href="https://www.easyvote.ch/de/school/unterrichtsmaterial"
         rel="noreferrer"
       >
         easyvote.ch
-      </A>{" "}
+      </Link>{" "}
       zu diskutieren .
     </Text>
     <Heading as="h3">
@@ -180,13 +184,13 @@ export const FAQ: React.FC = () => (
     <Heading as="h3">Wie stellt ihr statistische Signifikanz sicher?</Heading>
     <Text>
       Wir möchten gemeinsam mit{" "}
-      <a
+      <Link
         href="https://twitter.com/claudelongchamp"
         target="_blank"
         rel="noreferrer"
       >
         Claude Longchamps
-      </a>{" "}
+      </Link>{" "}
       sicherstellen, dass unser Vorgehen wissenschaftlich kompetent begleitet
       wird. Je diverser unsere Testklassen sind (Kantone, Altersstufen,
       Schultypen), desto solider wird die Aussagekraft der Resultate.
@@ -194,21 +198,14 @@ export const FAQ: React.FC = () => (
     <Heading as="h3">Macht auch die Romandie und das Tessin mit?</Heading>
     <Text>
       Wenn Du Kontakte in diese Sprachregionen hast, dann freuen wir uns sehr
-      über{" "}
-      <Link href="/kontakt">
-        <a>Email</a>
-      </Link>
-      !
+      über <A href="/kontakt">Email</A>!
     </Text>
     <Heading as="h3">
       Ich habe keine Frage, aber eine kritische Anmerkung!
     </Heading>
     <Text>
       Wir sind auf Dein Feedback angewiesen. Bitte nimm mit uns{" "}
-      <Link href="/kontakt">
-        <a>Kontakt</a>
-      </Link>{" "}
-      auf.
+      <A href="/kontakt">Kontakt</A> auf.
     </Text>
   </Box>
 );

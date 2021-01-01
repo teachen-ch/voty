@@ -1,8 +1,11 @@
 import { AppPage } from "components/Page";
-import { Heading, Flex, Text, Card, Image, Link as A } from "rebass";
+import { Heading, Button, Flex, Text, Card, Image, Link as A } from "rebass";
 import React, { useState } from "react";
+import { useRouter } from "next/router";
+import { Center } from "components/Learning";
 
 export default function Projekt(): React.ReactElement {
+  const router = useRouter();
   return (
     <AppPage heading="voty.ch – Ein Projekt zur Förderung der Demokratie an den Schulen">
       <Card fontSize={2}>
@@ -111,6 +114,11 @@ export default function Projekt(): React.ReactElement {
               </Text>
             </Detail>
           </Text>
+          <Center>
+            <Button mt={4} onClick={() => router.push("/demo")}>
+              Auf demo.voty.ch testen?
+            </Button>
+          </Center>
           <Heading>Teilnahmevoraussetzungen</Heading>
           <Text>
             Sämtliche Angebote von voty.ch werden Schulen und Lehrpersonen

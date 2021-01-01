@@ -1,0 +1,66 @@
+import { Info } from "components/Learning";
+import { Box, Button, Text } from "rebass";
+
+# demo.voty.ch - Demo-Version
+
+Möchten sie die Funktionalitäten von voty.ch ausprobieren bevor sie eine eigene Klasse einrichten?
+Kein Problem, melden sie sich auf unserem Demo-Server an.
+
+<Text fontSize={1}>
+  <b>Achtung:</b> sämtliche Inhalte werden jede Nacht gelöscht und der
+  Demo-Server kann gelegentlich nicht verfügbar oder instabil sein.
+</Text>
+
+<Box bg="darkgray" padding={3} lineHeight={1.5} mt={4}>
+  <Text>
+    Email:{" "}
+    <Text ml={3} variant="inline" fontFamily="monospace">
+      teacher@teachen.ch
+    </Text>
+  </Text>
+  <Text>
+    Passwort:{" "}
+    <Text ml={3} variant="inline" fontFamily="monospace">
+      teachen
+    </Text>
+  </Text>
+  <Button
+    mt={4}
+    width="100%"
+    variant="secondary"
+    onClick={() =>
+      (document.location.href =
+        "https://demo.voty.ch/user/login?email=teacher@teachen.ch")
+    }
+  >
+    Als Lehrperson anmelden
+  </Button>
+</Box>
+
+Mit folgendem Konto können Sie sich auch als Schüler\*in anmelden:
+
+<Box bg="darkgray" padding={3} lineHeight={1.5}>
+  <Text>
+    Email:{" "}
+    <Text ml={3} variant="inline" fontFamily="monospace">
+      student@teachen.ch
+    </Text>
+  </Text>
+  <Text>
+    Passwort:{" "}
+    <Text ml={3} variant="inline" fontFamily="monospace">
+      teachen
+    </Text>
+  </Text>
+  <Button
+    mt={4}
+    width="100%"
+    variant="secondary"
+    onClick={() =>
+      (document.location.href =
+        "https://demo.voty.ch/user/login?email=student@teachen.ch")
+    }
+  >
+    Als Schüler*in anmelden
+  </Button>
+</Box>
