@@ -1,10 +1,13 @@
-import { gql } from "@apollo/client";
+import { gql, MutationResult } from "@apollo/client";
 import {
   useWorksQuery,
   WorkWhereInput,
   UserWhereUniqueInput,
   WorkFieldsFragment,
   User,
+  usePostWorkMutation,
+  PostWorkMutation,
+  Scalars,
 } from "graphql/types";
 import { AttachmentFields } from "components/Uploader";
 import { Flex, Link, Text, FlexProps, Box } from "rebass";
@@ -102,6 +105,46 @@ export const Works: React.FC<
       })}
     </ListComp>
   );
+};
+
+type PostWorkHookType = (args: {
+  card: string;
+  title?: string;
+  text?: string;
+  data?: Scalars["Json"];
+  users?: UserWhereUniqueInput[];
+}) => [() => void, MutationResult<PostWorkMutation>, number];
+
+export const usePostWork: PostWorkHookType = (args) => {
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+  const { card, title, text, data, users } = args;
+  const user = useUser();
+  const team = useTeam();
+  const [trigger, setTrigger] = useState(0);
+  const [doPostWork, state] = usePostWorkMutation();
+
+  async function doPost() {
+    if (!team || !user) return;
+    const result = await doPostWork({
+      variables: {
+        data: {
+          team: { connect: { id: team.id } },
+          school: { connect: { id: user?.school?.id } },
+          users: { connect: users ? users : [{ id: user.id }] },
+          title,
+          text,
+          card,
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+          data,
+        },
+      },
+    });
+    // this can be used to refetch <Works trigger={trigger}/>
+    if (setTrigger) setTrigger(trigger + 1);
+    return result;
+  }
+
+  return [doPost, state, trigger];
 };
 
 export const POST_WORK = gql`
@@ -218,7 +261,7 @@ export const Authors: React.FC<{
           placeholder="Suche nach Vorname…"
         />
         {matches && (
-          <Flex mt={2} width="100%">
+          <Flex my={2} width="100%">
             {matches.map((author) => (
               <Pill key={author.id} bg="gray" onClick={() => addAuthor(author)}>
                 {author.shortname}
