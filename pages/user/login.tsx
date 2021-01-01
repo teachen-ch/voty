@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { AppPage, Loading } from "components/Page";
+import { AppPage } from "components/Page";
 import { gql, useMutation } from "@apollo/client";
 import { useState, ReactElement } from "react";
 import { Text, Button, Heading, Flex } from "rebass";
@@ -7,12 +7,12 @@ import { QForm, ErrorBox } from "components/Form";
 import CheckLogin from "components/CheckLogin";
 import { usePageEvent, trackEvent } from "util/stats";
 import { useSetAccessToken, useUser, useSetUser } from "../../state/user";
-import { useQueryParam } from "util/hooks";
 import {
   Role,
   useLoginMutation,
   useEmailVerificationMutation,
 } from "graphql/types";
+import { isBrowser } from "util/isBrowser";
 
 export const LOGIN = gql`
   mutation login($email: String!, $password: String!) {
@@ -53,12 +53,16 @@ export const CHANGE_PASSWORD = gql`
 export default function Login(): ReactElement {
   const user = useUser();
   const router = useRouter();
-  const email = useQueryParam("email");
+  let email = "";
+
+  // this is a quick hack until we can use https://github.com/vercel/next.js/issues/8259
+  if (isBrowser() && window.location.search.indexOf("email=")) {
+    email = window.location.search.substring(7);
+  }
 
   if (user) {
     return <AfterLogin />;
   }
-  if (!email) return <Loading />;
 
   return (
     <AppPage heading="Anmelden" onClose={() => void router.push("/")}>

@@ -84,7 +84,7 @@ export const Works: React.FC<
             <Text
               py={2}
               px={3}
-              bg="rgba(0,0,0,0.2)"
+              bg="darkgray"
               sx={{ cursor: "pointer" }}
               onClick={() => setActive(active === work.id ? "" : work.id)}
             >

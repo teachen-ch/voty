@@ -13,6 +13,7 @@ export default {
     highlight: "#dee4e7",
     muted: "#dee4e7",
     lightgray: "#dee4e7",
+    darkgray: "rgba(0,0,0,0.2)",
     silver: ["rgba(163,175,181, 0.25)"],
     silver_m: ["rgba(163,175,181, 0.75)"],
     gray: "#5a5a5a",

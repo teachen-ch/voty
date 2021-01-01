@@ -72,7 +72,7 @@ export const ActivitiesQuery: React.FC<{
       <Box
         fontSize={1}
         maxHeight={150}
-        bg="rgba(0,0,0,0.2)"
+        bg="darkgray"
         overflow="scroll"
         color="lightgray"
         p={2}
