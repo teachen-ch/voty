@@ -12,6 +12,7 @@ import { Page } from "components/Page";
 import { ReactElement, useEffect } from "react";
 import CheckLogin from "components/CheckLogin";
 import initStats from "util/stats";
+import { remove } from "lodash";
 
 function MyApp({ Component, pageProps }: AppProps): ReactElement {
   useEffect(() => {
@@ -40,20 +41,21 @@ function MyApp({ Component, pageProps }: AppProps): ReactElement {
 
 // this will wrap the MDX into a <Page> only if there is a heading (# title)
 const MDXWrapper: React.FC = ({ children }) => {
-  let hasHeadings = false;
   if (children && Array.isArray(children)) {
+    let heading = "";
     const headings = children.filter((el: React.ReactNode) => {
-      if (el && typeof el === "object" && "props" in el)
+      if (el && typeof el === "object" && "props" in el) {
+        if (!heading) heading = String(el.props.children);
         return el.props.mdxType === "h1";
-      else return false;
+      } else return false;
     });
-    hasHeadings = headings.length > 0;
+    if (headings.length > 0) {
+      const childrenCopy = children.slice();
+      remove(childrenCopy, headings[0]);
+      return <Page heading={heading}>{childrenCopy}</Page>;
+    }
   }
-  if (hasHeadings) {
-    return <Page>{children}</Page>;
-  } else {
-    return <>{children}</>;
-  }
+  return <>{children}</>;
 };
 
 export default MyApp;
