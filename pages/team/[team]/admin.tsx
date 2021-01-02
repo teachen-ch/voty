@@ -5,7 +5,7 @@ import { Input, Textarea } from "@rebass/forms";
 import { Grid, Label } from "theme-ui";
 import { useRef, useState, RefObject } from "react";
 import { useRouter } from "next/router";
-import _ from "lodash";
+import { uniq } from "lodash";
 import { SelectBallots } from "components/Ballots";
 import { gql } from "@apollo/client";
 import IconHint from "../../../public/images/icon_hint.svg";
@@ -75,7 +75,7 @@ export default function TeacherTeamPage(): React.ReactElement {
     setImportEmails(evt.target.value);
     const str = evt.target.value.toLowerCase();
     const re = /[^@\s<>,;]+@[^@\s]+\.[^@\s<>,;]+/g;
-    const emails = _.uniq(str.match(re) || []);
+    const emails = uniq(str.match(re) || []);
     setEmails(emails);
     setMatches(emails.length ? emails.length : undefined);
   }

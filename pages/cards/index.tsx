@@ -18,6 +18,9 @@ export default function CardsPublic(): React.ReactElement {
   }
   return (
     <Page heading="Lerninhalte">
+      Diese ersten Lerninhalte stehen aktuell auf voty.ch in einer frühen
+      Beta-Version zur Verfügung. Ohne Klassen-Login können aber keine Arbeiten
+      hochgeladen oder Diskussionen geführt werden.
       <Flex mt={4}>
         <Input
           onChange={debounce((evt) => setKeywords(evt.target.value), 400)}
