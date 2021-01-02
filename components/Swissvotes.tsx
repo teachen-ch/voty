@@ -2,7 +2,6 @@ import { gql } from "@apollo/client";
 import {
   Swissvote,
   SwissvotesQuery,
-  usePostWorkMutation,
   UserWhereUniqueInput,
   useSwissvotesQuery,
 } from "graphql/types";
@@ -14,8 +13,7 @@ import { A } from "./Breadcrumb";
 import { formatYear } from "util/date";
 import { CircleBullet } from "components/Cards";
 import { debounce, find, remove } from "lodash";
-import { Authors, WorkItem, Works } from "./Works";
-import { useTeam, useUser } from "state/user";
+import { Authors, usePostWork, WorkItem, Works } from "./Works";
 import { Markdown } from "util/markdown";
 
 export const SEARCH_SWISSVOTES = gql`
@@ -114,45 +112,22 @@ export const Swissvotes: React.FC<{
 };
 
 export const SwissvotesTopics: React.FC = () => {
-  const user = useUser();
-  const team = useTeam();
   const [topic, setTopic] = useState("");
   const [votes, setVotes] = useState<VoteType[]>([]);
   const [text, setText] = useState("");
   const [users, setUsers] = useState<UserWhereUniqueInput[]>([]);
-  const [doPostWork] = usePostWorkMutation();
-  const [success, setSuccess] = useState(false);
-  const [error, setError] = useState("");
-  const [trigger, setTrigger] = useState(0);
-
-  async function doSubmit() {
-    if (!team || !user) {
-      return;
-    }
-    const success = await doPostWork({
-      variables: {
-        data: {
-          team: { connect: { id: team.id } },
-          school: { connect: { id: user?.school?.id } },
-          users: { connect: users },
-          title: topic,
-          text: text,
-          card: "swissvotes_themen",
-          data: {
-            topic,
-            votes,
-            text,
-          },
-        },
-      },
-    });
-    if (success) {
-      setSuccess(true);
-      setTrigger(trigger + 1);
-    } else {
-      setError("Es ist ein Fehler aufgetreten");
-    }
-  }
+  const [doPostWork, state, trigger] = usePostWork({
+    card: "swissvotes_themen",
+    title: topic,
+    text,
+    users,
+    data: {
+      topic,
+      votes,
+      text,
+    },
+  });
+  const success = state.called && !state.error;
 
   return (
     <Box>
@@ -213,11 +188,11 @@ export const SwissvotesTopics: React.FC = () => {
             {success ? (
               "Die Arbeit wurde gespeichert!"
             ) : (
-              <Button mt={3} onClick={doSubmit}>
+              <Button mt={3} onClick={doPostWork}>
                 Abschicken
               </Button>
             )}
-            <Err msg={error} />
+            <Err msg={state.error?.message} />
           </Text>
         </Box>
       ) : null}
