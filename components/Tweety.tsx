@@ -1,9 +1,8 @@
-import "@chatscope/chat-ui-kit-styles/dist/default/styles.min.css";
-import { Box, Text, Card, Button, Flex, Link } from "rebass";
+import { Box, Text, Card, Button, Link } from "rebass";
 import { useState } from "react";
 import { Input, Label, Textarea } from "@rebass/forms";
-import { UserWhereUniqueInput } from "graphql/types";
-import { Authors, usePostWork, WorkItem, Works } from "./Works";
+import { UserWhereUniqueInput, Visibility } from "graphql/types";
+import { Authors, Visible, usePostWork, WorkItem, Works } from "./Works";
 import { Err } from "./Page";
 import Info from "./Info";
 
@@ -11,19 +10,24 @@ const MAX_CHARS = 140;
 
 export const Tweety: React.FC<{
   maxChars?: number;
-  tags?: string;
   placeholder?: string;
-}> = ({ maxChars, tags, placeholder = "Gib einen kurzen Text ein..." }) => {
-  const max = maxChars || MAX_CHARS;
+}> = ({
+  maxChars = MAX_CHARS,
+  placeholder = "Gib einen kurzen Text ein...",
+}) => {
   const [tweet, setTweet] = useState("");
   const [title, setTitle] = useState("");
   const [chars, setChars] = useState(0);
   const [users, setUsers] = useState<Array<UserWhereUniqueInput>>();
+  const [visibility, setVisibility] = useState<Visibility | undefined>(
+    Visibility.Public
+  );
   const [doPostWork, state, trigger] = usePostWork({
     card: "tweety",
     title,
     text: tweet,
     users,
+    visibility,
   });
 
   function doChange(evt: React.ChangeEvent<HTMLTextAreaElement>) {
@@ -38,8 +42,6 @@ export const Tweety: React.FC<{
         <Info>Erfolgreich gespeichert</Info>
       ) : (
         <>
-          <Label>Erarbeitet durch</Label>
-          <Authors setUsers={setUsers} />
           <Label mt={4}>Abstimmung / Thema</Label>
           <Input
             onChange={(e) => setTitle(e.target.value)}
@@ -53,32 +55,19 @@ export const Tweety: React.FC<{
               sx={{ border: "#ddd", outline: "none" }}
               placeholder={placeholder}
             ></Textarea>
-            <Flex justifyContent="space-between" mt={2}>
-              <Text fontSize={1}>
-                {chars > 1 && `Bereits ${chars}/${max} Zeichen. `}
-                {chars > max && (
-                  <span style={{ color: "red" }}>
-                    &nbsp; <b>+{chars - max}</b>
-                  </span>
-                )}
-                {chars > 50 && tweet.search(/[^\w]#\w\w+/) < 0 && (
-                  <Text variant="inline">
-                    Fehlt noch ein{" "}
-                    <Link
-                      href="https://de.wikipedia.org/wiki/Hashtag"
-                      target="_blank"
-                      variant="underline"
-                    >
-                      #hashtag
-                    </Link>
-                    ?
-                  </Text>
-                )}
-              </Text>
-              <Button onClick={doPostWork}>Tweet Abschicken</Button>
-            </Flex>
-            <Err msg={state.error?.message} />
+            <CharCounter chars={chars} max={maxChars} tweet={tweet} />
           </Card>
+          <Visible setVisibility={setVisibility} visibility={visibility} />
+          <Label>Erarbeitet durch</Label>
+          <Authors setUsers={setUsers} />
+          <Button
+            mt={3}
+            onClick={doPostWork}
+            disabled={chars < 20 || chars > maxChars}
+          >
+            Tweet Abschicken
+          </Button>
+          <Err msg={state.error?.message} />
         </>
       )}
 
@@ -90,6 +79,47 @@ export const Tweety: React.FC<{
         trigger={trigger}
       />
     </Box>
+  );
+};
+
+const CharCounter: React.FC<{ chars: number; max: number; tweet: string }> = ({
+  chars,
+  max,
+  tweet,
+}) => {
+  const over = chars > max;
+  let text = "";
+  const noHash = tweet.search(/[^\w]#\w\w+/) < 0;
+
+  if (over) {
+    text = `Bereits ${chars}/${max} (+${chars - max}) Zeichen. `;
+  } else {
+    text = chars > 0 ? `Bereits ${chars}/${max} Zeichen. ` : " ";
+  }
+
+  return (
+    <Text fontSize={1} mt={2}>
+      <Text
+        variant="inline"
+        color={over ? "primary" : "inherit"}
+        fontWeight={over ? "bold" : "normal"}
+      >
+        {text}
+      </Text>
+      {noHash && chars > 50 && chars < max && (
+        <Text variant="inline">
+          &nbsp;Fehlt noch ein{" "}
+          <Link
+            href="https://de.wikipedia.org/wiki/Hashtag"
+            target="_blank"
+            variant="underline"
+          >
+            #hashtag
+          </Link>
+          ?
+        </Text>
+      )}
+    </Text>
   );
 };
 

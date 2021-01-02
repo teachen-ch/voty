@@ -8,6 +8,7 @@ import {
   usePostWorkMutation,
   PostWorkMutation,
   Scalars,
+  Visibility,
 } from "graphql/types";
 import { AttachmentFields } from "components/Uploader";
 import { Flex, Link, Text, FlexProps, Box } from "rebass";
@@ -17,6 +18,7 @@ import { Loading } from "./Page";
 import { find, isFunction, omit, remove } from "lodash";
 import Plus from "../public/images/icon_plus.svg";
 import Minus from "../public/images/icon_minus.svg";
+import { Label, Radio } from "@rebass/forms";
 
 export const WorkFields = gql`
   fragment WorkFields on Work {
@@ -113,11 +115,12 @@ type PostWorkHookType = (args: {
   text?: string;
   data?: Scalars["Json"];
   users?: UserWhereUniqueInput[];
+  visibility?: Visibility;
 }) => [() => void, MutationResult<PostWorkMutation>, number];
 
 export const usePostWork: PostWorkHookType = (args) => {
   // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-  const { card, title, text, data, users } = args;
+  const { card, title, text, data, users, visibility } = args;
   const user = useUser();
   const team = useTeam();
   const [trigger, setTrigger] = useState(0);
@@ -134,6 +137,7 @@ export const usePostWork: PostWorkHookType = (args) => {
           title,
           text,
           card,
+          visibility,
           // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
           data,
         },
@@ -155,6 +159,47 @@ export const POST_WORK = gql`
   }
   ${WorkFields}
 `;
+
+export const Visible: React.FC<{
+  visibility?: Visibility;
+  setVisibility: (v?: Visibility) => void;
+}> = ({ visibility, setVisibility }) => {
+  return (
+    <Flex my={3} flexWrap={["wrap", "wrap", "nowrap"]}>
+      <Label>Veröffentlichen: </Label>
+      <Label alignItems="center">
+        <Radio
+          name="vis"
+          checked={visibility === Visibility.Team}
+          onChange={() => setVisibility(Visibility.Team)}
+          value={visibility}
+          sx={{ fill: "white" }}
+        />
+        In der Klasse
+      </Label>
+      <Label alignItems="center">
+        <Radio
+          name="vis"
+          checked={visibility === Visibility.School}
+          onChange={() => setVisibility(Visibility.School)}
+          value={visibility}
+          sx={{ fill: "white" }}
+        />
+        in der Schule
+      </Label>
+      <Label alignItems="center">
+        <Radio
+          name="vis"
+          checked={visibility === Visibility.Public}
+          onChange={() => setVisibility(Visibility.Public)}
+          value={visibility}
+          sx={{ fill: "white" }}
+        />
+        öffentlich
+      </Label>
+    </Flex>
+  );
+};
 
 export const Authors: React.FC<{
   work?: WorkFieldsFragment;
@@ -239,7 +284,7 @@ export const Authors: React.FC<{
       <Flex
         flexWrap="wrap"
         bg="white"
-        pt={2}
+        py={2}
         px={2}
         onClick={() => inputRef.current?.focus()}
       >
@@ -260,8 +305,8 @@ export const Authors: React.FC<{
           width="100px"
           placeholder="Suche nach Vorname…"
         />
-        {matches && (
-          <Flex my={2} width="100%">
+        {matches.length > 0 && (
+          <Flex mt={2} width="100%">
             {matches.map((author) => (
               <Pill key={author.id} bg="gray" onClick={() => addAuthor(author)}>
                 {author.shortname}
