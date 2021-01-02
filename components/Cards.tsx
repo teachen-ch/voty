@@ -50,8 +50,8 @@ export const Cards: React.FC<{
   age?: string;
   selected?: boolean;
   type?: string;
-  teamId: string;
-  teamCards: string;
+  teamId?: string;
+  teamCards?: string;
   resetFilters: () => void;
 }> = (props) => {
   const cardsQuery = useCardsQuery({ variables: props });
@@ -76,7 +76,7 @@ export const Cards: React.FC<{
       {cards?.map(
         (card) =>
           card && (
-            <CardBox
+            <CardItem
               key={card.id}
               card={card}
               teamCards={props.teamCards}
@@ -88,10 +88,10 @@ export const Cards: React.FC<{
   );
 };
 
-export const CardBox: React.FC<{
+export const CardItem: React.FC<{
   card: CardType;
-  teamCards: string;
-  teamId: string;
+  teamCards?: string;
+  teamId?: string;
 }> = ({ card, teamCards, teamId }) => {
   const router = useRouter();
   const cardsList = teamCards ? teamCards.split(" ") : [];
@@ -102,6 +102,7 @@ export const CardBox: React.FC<{
   async function doSelect(evt: React.BaseSyntheticEvent) {
     evt.stopPropagation();
     evt.preventDefault();
+    if (!teamId) return;
     setSelected(!selected);
     const cards = selected
       ? without(cardsList, id).join(" ")
@@ -109,6 +110,7 @@ export const CardBox: React.FC<{
     await doSetCards({ variables: { cards, teamId } });
     window.scrollBy(0, selected ? -53 : 53);
   }
+  const link = teamId ? `/team/${teamId}/cards/${id}` : `/cards/${id}`;
   return (
     <Box
       bg="white"
@@ -117,7 +119,7 @@ export const CardBox: React.FC<{
       color="black"
       p={3}
       mb={3}
-      onClick={() => router.push(`/team/${teamId}/cards/${id}`)}
+      onClick={() => router.push(link)}
       sx={{ cursor: "pointer" }}
     >
       <Flex
@@ -139,19 +141,21 @@ export const CardBox: React.FC<{
             <strong>Dauer:</strong>
             <br /> {card.duration}
           </Text>
-          <Button
-            sx={{
-              borderRadius: 100,
-              width: 60,
-              height: 60,
-              boxSizing: "border-box",
-              border: "5px solid white",
-            }}
-            bg={selected ? "green" : "secondary"}
-            onClick={doSelect}
-          >
-            {selected ? "✔" : "+"}
-          </Button>
+          {teamId ? (
+            <Button
+              sx={{
+                borderRadius: 100,
+                width: 60,
+                height: 60,
+                boxSizing: "border-box",
+                border: "5px solid white",
+              }}
+              bg={selected ? "green" : "secondary"}
+              onClick={doSelect}
+            >
+              {selected ? "✔" : "+"}
+            </Button>
+          ) : null}
         </Flex>
       </Flex>
     </Box>

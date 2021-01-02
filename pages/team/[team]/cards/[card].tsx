@@ -1,17 +1,16 @@
 import { Loading, ErrorPage, LoggedInPage } from "components/Page";
 import { Card, getCardMeta } from "components/Cards";
-import { useRouter } from "next/router";
 import { Text } from "rebass";
 import { useTeam, useUser } from "state/user";
 import { A, Breadcrumb } from "components/Breadcrumb";
 import { Role } from "graphql/types";
 import { Discussion } from "components/Discussion";
+import { useQueryParam } from "util/hooks";
 
 export default function CardPage(): React.ReactElement {
-  const router = useRouter();
   const user = useUser();
   const team = useTeam();
-  const key = String(router.query.card);
+  const key = useQueryParam("card");
 
   if (!key || !team)
     return (

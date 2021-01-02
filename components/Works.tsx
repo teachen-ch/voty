@@ -74,7 +74,7 @@ export const Works: React.FC<
   }, [trigger]);
 
   if (worksQuery.loading) return <Loading />;
-  if (!works) return <Text>Noch keine Beiträge</Text>;
+  if (!works) return null;
 
   const flexProps = omit(props, "children", "ref");
   return (
@@ -127,7 +127,7 @@ export const usePostWork: PostWorkHookType = (args) => {
   const [doPostWork, state] = usePostWorkMutation();
 
   async function doPost() {
-    if (!team || !user) return;
+    if (!team || !user) return alert("Du bist nicht eingeloggt!");
     const result = await doPostWork({
       variables: {
         data: {
