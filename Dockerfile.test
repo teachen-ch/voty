@@ -1,9 +1,0 @@
-FROM cypress/included:6.2.0
-WORKDIR /usr/src/app
-EXPOSE 3000
-COPY . .
-# Runs yarn install, generates Prisma client, runs nexus build and next build
-RUN yarn run ci:release
-CMD [ "yarn", "run", "ci:test"]
-
-
