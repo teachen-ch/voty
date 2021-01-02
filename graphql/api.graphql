@@ -11,7 +11,7 @@ type Activity {
   type: ActivityType!
   user: User!
   visibility: Visibility!
-  work: Work
+  workId: String
 }
 
 input ActivityCreateInput {

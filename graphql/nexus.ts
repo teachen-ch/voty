@@ -8040,6 +8040,7 @@ export interface NexusGenObjects {
     time: NexusGenScalars["DateTime"]; // DateTime!
     type: NexusGenEnums["ActivityType"]; // ActivityType!
     visibility: NexusGenEnums["Visibility"]; // Visibility!
+    workId?: string | null; // String
   };
   Attachment: {
     // root type
@@ -8215,7 +8216,7 @@ export interface NexusGenFieldTypes {
     type: NexusGenEnums["ActivityType"]; // ActivityType!
     user: NexusGenRootTypes["User"]; // User!
     visibility: NexusGenEnums["Visibility"]; // Visibility!
-    work: NexusGenRootTypes["Work"] | null; // Work
+    workId: string | null; // String
   };
   Attachment: {
     // field return type
@@ -8460,7 +8461,7 @@ export interface NexusGenFieldTypeNames {
     type: "ActivityType";
     user: "User";
     visibility: "Visibility";
-    work: "Work";
+    workId: "String";
   };
   Attachment: {
     // field return type name

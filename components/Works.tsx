@@ -61,7 +61,17 @@ export const Works: React.FC<
 > = ({ where, items, list, trigger, card, ...props }) => {
   where = where ?? {};
   if (card) where.card = { equals: card };
-  const worksQuery = useWorksQuery({ variables: { where } });
+  const worksQuery = useWorksQuery({
+    variables: { where },
+    onCompleted() {
+      const id = document.location.hash.substring(1);
+      const el = document.getElementById(id);
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth", block: "center" });
+        setActive(id);
+      }
+    },
+  });
   const works = worksQuery.data?.works;
   const Comp = items;
   const ListComp = list || Flex;
@@ -82,7 +92,7 @@ export const Works: React.FC<
       {works && <Text fontWeight="bold">Arbeiten zum Thema:</Text>}
       {works?.map((work) => {
         return (
-          <Box key={work.id} mt={2}>
+          <Box key={work.id} mt={2} id={work.id}>
             <Text
               py={2}
               px={3}

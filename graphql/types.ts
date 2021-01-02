@@ -28,7 +28,7 @@ export type Activity = {
   type: ActivityType;
   user: User;
   visibility: Visibility;
-  work?: Maybe<Work>;
+  workId?: Maybe<Scalars['String']>;
 };
 
 export type ActivityCreateInput = {
@@ -7685,7 +7685,7 @@ export type ActivitiesQuery = (
   { __typename?: 'Query' }
   & { activities: Array<(
     { __typename?: 'Activity' }
-    & Pick<Activity, 'type' | 'card' | 'ballotId' | 'time'>
+    & Pick<Activity, 'type' | 'card' | 'ballotId' | 'workId' | 'time'>
     & { user: (
       { __typename?: 'User' }
       & Pick<User, 'shortname'>
@@ -8565,6 +8565,7 @@ export const ActivitiesDocument = gql`
     type
     card
     ballotId
+    workId
     time
   }
 }

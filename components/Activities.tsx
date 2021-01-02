@@ -24,6 +24,7 @@ export const ACTIVITIES = gql`
       type
       card
       ballotId
+      workId
       time
     }
   }
@@ -148,6 +149,7 @@ export function getActivityLink(
 ): string | undefined {
   const teamLink = teamId ? `/team/${teamId}/` : "/";
   const cardLink = act.card ? `${teamLink}cards/${act.card}` : undefined;
+  const workLink = act.workId ? `${cardLink}#${act.workId}` : undefined;
   const ballotLink = `${teamLink}ballots/${act.ballotId}`;
 
   switch (act.type) {
@@ -164,7 +166,7 @@ export function getActivityLink(
     case ActivityType.Vote:
       return ballotLink;
     case ActivityType.Work:
-      return cardLink;
+      return workLink;
     default:
       return undefined;
   }
