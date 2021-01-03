@@ -1,6 +1,9 @@
 import { FieldResolver } from "@nexus/schema";
 import { Activity, Prisma, Role } from "@prisma/client";
 import { Context } from "graphql/context";
+import { truncate } from "lodash";
+
+const MAX_SUMMARY = 30;
 
 export const activities: FieldResolver<"Query", "activities"> = async (
   _root,
@@ -35,6 +38,9 @@ export async function logActivity(
   const user = ctx.user;
   const teamId = data.team.connect?.id;
   const schoolId = data.school.connect?.id;
+  data.summary = data.summary
+    ? truncate(data.summary, { length: MAX_SUMMARY, separator: " " })
+    : undefined;
 
   // ensure user is logged in and part of team or teacher in same school
   if (!user) throw new Error("Error.NoPermission");

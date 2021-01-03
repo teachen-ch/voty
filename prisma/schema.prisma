@@ -266,9 +266,9 @@ model Attachment {
 }
 
 model Discussion {
-  id    String @id @default(cuid())
-  title String @default("")
-  text  String @default("")
+  id    String  @id @default(cuid())
+  title String  @default("")
+  text  String  @default("")
   card  String?
 
   user     User    @relation(fields: [userId], references: [id])
@@ -352,6 +352,7 @@ model Activity {
   type       ActivityType
   visibility Visibility
   card       String?      @map(name: "card")
+  summary    String?
 
   user         User        @relation(fields: [userId], references: [id])
   userId       String      @map(name: "user_id")

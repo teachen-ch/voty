@@ -23,6 +23,7 @@ export const ACTIVITIES = gql`
       }
       type
       card
+      summary
       ballotId
       workId
       time
@@ -66,6 +67,7 @@ export const ActivitiesQuery: React.FC<{
   const activities = activitiesQuery.data?.activities;
   if (activitiesQuery.loading) return <Loading />;
   if (activitiesQuery.error) return <Err msg={activitiesQuery.error.message} />;
+
   return (
     <Box>
       <Heading as="h3">Aktivitäten</Heading>
@@ -80,28 +82,37 @@ export const ActivitiesQuery: React.FC<{
       >
         <table>
           <tbody>
-            {activities?.map((act) => (
-              <tr
-                key={String(act.time)}
-                style={{
-                  fontSize: 16,
-                  height: 32,
-                  background: "rgba(0,0,0,0)",
-                }}
-              >
-                <td>
-                  {isToday(act.time)
-                    ? formatTime(act.time)
-                    : formatDate(act.time)}
-                </td>
-                <td>→</td>
-                <td width="99%">
-                  <A href={getActivityLink(act, teamId)}>
-                    {act.user.shortname} {getActivityText(act)}
-                  </A>
-                </td>
-              </tr>
-            ))}
+            {activities?.map((act) => {
+              const link = getActivityLink(act, teamId);
+              const text = getActivityText(act);
+              return (
+                <tr
+                  key={String(act.time)}
+                  style={{
+                    fontSize: 16,
+                    height: 32,
+                    background: "rgba(0,0,0,0)",
+                  }}
+                >
+                  <td>
+                    {isToday(act.time)
+                      ? formatTime(act.time)
+                      : formatDate(act.time)}
+                  </td>
+                  <td>→</td>
+                  <td width="99%">
+                    {link ? (
+                      <A href={link}>
+                        {act.user.shortname} {text}
+                      </A>
+                    ) : (
+                      `${act.user.shortname} ${text}`
+                    )}
+                    {act.summary ? `: ${act.summary}` : ""}
+                  </td>
+                </tr>
+              );
+            })}
             {activities?.length == 0 ? (
               <tr
                 style={{
@@ -137,7 +148,7 @@ export function getActivityText(
     case ActivityType.Vote:
       return "hat abgestimmt";
     case ActivityType.Work:
-      return "hat Arbeit eingereicht";
+      return `hat Arbeit zu «${act.card}» eingereicht`;
     default:
       return "(unbekannte Aktion)";
   }

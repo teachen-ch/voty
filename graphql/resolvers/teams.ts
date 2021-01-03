@@ -62,13 +62,17 @@ export const inviteStudents: FieldResolver<
     failed = failed.concat(fetchedErrors);
   }
 
-  await logActivity(ctx, {
-    user: { connect: { id: user.id } },
-    team: { connect: { id: String(team?.id) } },
-    school: { connect: { id: String(user.schoolId) } },
-    visibility: Visibility.Team,
-    type: ActivityType.UserInvite,
-  });
+  if (created.length > 0) {
+    await logActivity(ctx, {
+      user: { connect: { id: user.id } },
+      team: { connect: { id: String(team?.id) } },
+      school: { connect: { id: String(user.schoolId) } },
+      summary:
+        created.length === 1 ? "eine Person" : `${created.length} Personen`,
+      visibility: Visibility.Team,
+      type: ActivityType.UserInvite,
+    });
+  }
 
   return { created, failed, duplicated, team };
 };

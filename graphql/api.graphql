@@ -6,6 +6,7 @@ type Activity {
   card: String
   id: Int!
   school: School!
+  summary: String
   team: Team!
   time: DateTime!
   type: ActivityType!
@@ -19,6 +20,7 @@ input ActivityCreateInput {
   card: String
   discussion: DiscussionCreateOneWithoutActivityInput
   school: SchoolCreateOneWithoutActivityInput!
+  summary: String
   team: TeamCreateOneWithoutActivityInput!
   time: DateTime
   type: ActivityType!
@@ -97,6 +99,7 @@ input ActivityCreateWithoutBallotInput {
   card: String
   discussion: DiscussionCreateOneWithoutActivityInput
   school: SchoolCreateOneWithoutActivityInput!
+  summary: String
   team: TeamCreateOneWithoutActivityInput!
   time: DateTime
   type: ActivityType!
@@ -109,6 +112,7 @@ input ActivityCreateWithoutDiscussionInput {
   ballot: BallotCreateOneWithoutActivityInput
   card: String
   school: SchoolCreateOneWithoutActivityInput!
+  summary: String
   team: TeamCreateOneWithoutActivityInput!
   time: DateTime
   type: ActivityType!
@@ -121,6 +125,7 @@ input ActivityCreateWithoutSchoolInput {
   ballot: BallotCreateOneWithoutActivityInput
   card: String
   discussion: DiscussionCreateOneWithoutActivityInput
+  summary: String
   team: TeamCreateOneWithoutActivityInput!
   time: DateTime
   type: ActivityType!
@@ -134,6 +139,7 @@ input ActivityCreateWithoutTeamInput {
   card: String
   discussion: DiscussionCreateOneWithoutActivityInput
   school: SchoolCreateOneWithoutActivityInput!
+  summary: String
   time: DateTime
   type: ActivityType!
   user: UserCreateOneWithoutActivityInput!
@@ -146,6 +152,7 @@ input ActivityCreateWithoutUserInput {
   card: String
   discussion: DiscussionCreateOneWithoutActivityInput
   school: SchoolCreateOneWithoutActivityInput!
+  summary: String
   team: TeamCreateOneWithoutActivityInput!
   time: DateTime
   type: ActivityType!
@@ -158,6 +165,7 @@ input ActivityCreateWithoutWorkInput {
   card: String
   discussion: DiscussionCreateOneWithoutActivityInput
   school: SchoolCreateOneWithoutActivityInput!
+  summary: String
   team: TeamCreateOneWithoutActivityInput!
   time: DateTime
   type: ActivityType!
@@ -177,6 +185,7 @@ input ActivityOrderByInput {
   discussionId: SortOrder
   id: SortOrder
   schoolId: SortOrder
+  summary: SortOrder
   teamId: SortOrder
   time: SortOrder
   type: SortOrder
@@ -194,6 +203,7 @@ input ActivityScalarWhereInput {
   NOT: [ActivityScalarWhereInput!]
   OR: [ActivityScalarWhereInput!]
   schoolId: StringFilter
+  summary: StringNullableFilter
   teamId: StringFilter
   time: DateTimeFilter
   type: EnumActivityTypeFilter
@@ -214,6 +224,7 @@ enum ActivityType {
 
 input ActivityUpdateManyMutationInput {
   card: NullableStringFieldUpdateOperationsInput
+  summary: NullableStringFieldUpdateOperationsInput
   time: DateTimeFieldUpdateOperationsInput
   type: EnumActivityTypeFieldUpdateOperationsInput
   visibility: EnumVisibilityFieldUpdateOperationsInput
@@ -331,6 +342,7 @@ input ActivityUpdateWithoutBallotInput {
   card: NullableStringFieldUpdateOperationsInput
   discussion: DiscussionUpdateOneWithoutActivityInput
   school: SchoolUpdateOneRequiredWithoutActivityInput
+  summary: NullableStringFieldUpdateOperationsInput
   team: TeamUpdateOneRequiredWithoutActivityInput
   time: DateTimeFieldUpdateOperationsInput
   type: EnumActivityTypeFieldUpdateOperationsInput
@@ -343,6 +355,7 @@ input ActivityUpdateWithoutDiscussionInput {
   ballot: BallotUpdateOneWithoutActivityInput
   card: NullableStringFieldUpdateOperationsInput
   school: SchoolUpdateOneRequiredWithoutActivityInput
+  summary: NullableStringFieldUpdateOperationsInput
   team: TeamUpdateOneRequiredWithoutActivityInput
   time: DateTimeFieldUpdateOperationsInput
   type: EnumActivityTypeFieldUpdateOperationsInput
@@ -355,6 +368,7 @@ input ActivityUpdateWithoutSchoolInput {
   ballot: BallotUpdateOneWithoutActivityInput
   card: NullableStringFieldUpdateOperationsInput
   discussion: DiscussionUpdateOneWithoutActivityInput
+  summary: NullableStringFieldUpdateOperationsInput
   team: TeamUpdateOneRequiredWithoutActivityInput
   time: DateTimeFieldUpdateOperationsInput
   type: EnumActivityTypeFieldUpdateOperationsInput
@@ -368,6 +382,7 @@ input ActivityUpdateWithoutTeamInput {
   card: NullableStringFieldUpdateOperationsInput
   discussion: DiscussionUpdateOneWithoutActivityInput
   school: SchoolUpdateOneRequiredWithoutActivityInput
+  summary: NullableStringFieldUpdateOperationsInput
   time: DateTimeFieldUpdateOperationsInput
   type: EnumActivityTypeFieldUpdateOperationsInput
   user: UserUpdateOneRequiredWithoutActivityInput
@@ -380,6 +395,7 @@ input ActivityUpdateWithoutUserInput {
   card: NullableStringFieldUpdateOperationsInput
   discussion: DiscussionUpdateOneWithoutActivityInput
   school: SchoolUpdateOneRequiredWithoutActivityInput
+  summary: NullableStringFieldUpdateOperationsInput
   team: TeamUpdateOneRequiredWithoutActivityInput
   time: DateTimeFieldUpdateOperationsInput
   type: EnumActivityTypeFieldUpdateOperationsInput
@@ -392,6 +408,7 @@ input ActivityUpdateWithoutWorkInput {
   card: NullableStringFieldUpdateOperationsInput
   discussion: DiscussionUpdateOneWithoutActivityInput
   school: SchoolUpdateOneRequiredWithoutActivityInput
+  summary: NullableStringFieldUpdateOperationsInput
   team: TeamUpdateOneRequiredWithoutActivityInput
   time: DateTimeFieldUpdateOperationsInput
   type: EnumActivityTypeFieldUpdateOperationsInput
@@ -477,6 +494,7 @@ input ActivityWhereInput {
   OR: [ActivityWhereInput!]
   school: SchoolWhereInput
   schoolId: StringFilter
+  summary: StringNullableFilter
   team: TeamWhereInput
   teamId: StringFilter
   time: DateTimeFilter

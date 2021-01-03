@@ -13,7 +13,7 @@ export const Passion: React.FC = () => {
   const [users, setUsers] = useState<UserWhereUniqueInput[]>();
   const [doPostWork, state, trigger] = usePostWork({
     card: "passion",
-    title: "Passion",
+    title: passion,
     data: { passion, engagement },
     users,
   });

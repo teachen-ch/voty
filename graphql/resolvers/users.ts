@@ -34,12 +34,20 @@ type ResponseLogin = {
 };
 
 export const shortname: FieldResolver<"User", "shortname"> = (_root) => {
+  return getShortname(_root);
+};
+
+export function getShortname(_root: {
+  lastname?: string | null;
+  name?: string | null;
+  role: Role;
+}): string {
   if (!_root.lastname) return String(_root.name);
   if (_root.role === Role.Student)
     return `${_root.name} ${upperFirst(_root.lastname).substr(0, 1)}.`;
   else
     return `${upperFirst(String(_root.name)).substr(0, 1)}. ${_root.lastname}`;
-};
+}
 
 export const login: FieldResolver<"Mutation", "login"> = async (
   _root,
@@ -153,6 +161,7 @@ export const acceptInvite: FieldResolver<"Mutation", "acceptInvite"> = async (
     user: { connect: { id: user.id } },
     team: { connect: { id: team.id } },
     school: { connect: { id: String(user.schoolId) } },
+    summary: getShortname(user),
     visibility: Visibility.Team,
     type: ActivityType.UserAccept,
   });
@@ -391,6 +400,7 @@ export const checkVerification: FieldResolver<
       await logActivity(ctx, {
         user: { connect: { id: user.id } },
         team: { connect: { id: user.teamId } },
+        summary: getShortname(user),
         school: { connect: { id: String(user.schoolId) } },
         visibility: Visibility.Team,
         type: ActivityType.UserAccept,

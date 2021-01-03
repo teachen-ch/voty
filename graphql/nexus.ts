@@ -25,6 +25,7 @@ export interface NexusGenInputs {
       | NexusGenInputs["DiscussionCreateOneWithoutActivityInput"]
       | null; // DiscussionCreateOneWithoutActivityInput
     school: NexusGenInputs["SchoolCreateOneWithoutActivityInput"]; // SchoolCreateOneWithoutActivityInput!
+    summary?: string | null; // String
     team: NexusGenInputs["TeamCreateOneWithoutActivityInput"]; // TeamCreateOneWithoutActivityInput!
     time?: NexusGenScalars["DateTime"] | null; // DateTime
     type: NexusGenEnums["ActivityType"]; // ActivityType!
@@ -117,6 +118,7 @@ export interface NexusGenInputs {
       | NexusGenInputs["DiscussionCreateOneWithoutActivityInput"]
       | null; // DiscussionCreateOneWithoutActivityInput
     school: NexusGenInputs["SchoolCreateOneWithoutActivityInput"]; // SchoolCreateOneWithoutActivityInput!
+    summary?: string | null; // String
     team: NexusGenInputs["TeamCreateOneWithoutActivityInput"]; // TeamCreateOneWithoutActivityInput!
     time?: NexusGenScalars["DateTime"] | null; // DateTime
     type: NexusGenEnums["ActivityType"]; // ActivityType!
@@ -129,6 +131,7 @@ export interface NexusGenInputs {
     ballot?: NexusGenInputs["BallotCreateOneWithoutActivityInput"] | null; // BallotCreateOneWithoutActivityInput
     card?: string | null; // String
     school: NexusGenInputs["SchoolCreateOneWithoutActivityInput"]; // SchoolCreateOneWithoutActivityInput!
+    summary?: string | null; // String
     team: NexusGenInputs["TeamCreateOneWithoutActivityInput"]; // TeamCreateOneWithoutActivityInput!
     time?: NexusGenScalars["DateTime"] | null; // DateTime
     type: NexusGenEnums["ActivityType"]; // ActivityType!
@@ -143,6 +146,7 @@ export interface NexusGenInputs {
     discussion?:
       | NexusGenInputs["DiscussionCreateOneWithoutActivityInput"]
       | null; // DiscussionCreateOneWithoutActivityInput
+    summary?: string | null; // String
     team: NexusGenInputs["TeamCreateOneWithoutActivityInput"]; // TeamCreateOneWithoutActivityInput!
     time?: NexusGenScalars["DateTime"] | null; // DateTime
     type: NexusGenEnums["ActivityType"]; // ActivityType!
@@ -158,6 +162,7 @@ export interface NexusGenInputs {
       | NexusGenInputs["DiscussionCreateOneWithoutActivityInput"]
       | null; // DiscussionCreateOneWithoutActivityInput
     school: NexusGenInputs["SchoolCreateOneWithoutActivityInput"]; // SchoolCreateOneWithoutActivityInput!
+    summary?: string | null; // String
     time?: NexusGenScalars["DateTime"] | null; // DateTime
     type: NexusGenEnums["ActivityType"]; // ActivityType!
     user: NexusGenInputs["UserCreateOneWithoutActivityInput"]; // UserCreateOneWithoutActivityInput!
@@ -172,6 +177,7 @@ export interface NexusGenInputs {
       | NexusGenInputs["DiscussionCreateOneWithoutActivityInput"]
       | null; // DiscussionCreateOneWithoutActivityInput
     school: NexusGenInputs["SchoolCreateOneWithoutActivityInput"]; // SchoolCreateOneWithoutActivityInput!
+    summary?: string | null; // String
     team: NexusGenInputs["TeamCreateOneWithoutActivityInput"]; // TeamCreateOneWithoutActivityInput!
     time?: NexusGenScalars["DateTime"] | null; // DateTime
     type: NexusGenEnums["ActivityType"]; // ActivityType!
@@ -186,6 +192,7 @@ export interface NexusGenInputs {
       | NexusGenInputs["DiscussionCreateOneWithoutActivityInput"]
       | null; // DiscussionCreateOneWithoutActivityInput
     school: NexusGenInputs["SchoolCreateOneWithoutActivityInput"]; // SchoolCreateOneWithoutActivityInput!
+    summary?: string | null; // String
     team: NexusGenInputs["TeamCreateOneWithoutActivityInput"]; // TeamCreateOneWithoutActivityInput!
     time?: NexusGenScalars["DateTime"] | null; // DateTime
     type: NexusGenEnums["ActivityType"]; // ActivityType!
@@ -205,6 +212,7 @@ export interface NexusGenInputs {
     discussionId?: NexusGenEnums["SortOrder"] | null; // SortOrder
     id?: NexusGenEnums["SortOrder"] | null; // SortOrder
     schoolId?: NexusGenEnums["SortOrder"] | null; // SortOrder
+    summary?: NexusGenEnums["SortOrder"] | null; // SortOrder
     teamId?: NexusGenEnums["SortOrder"] | null; // SortOrder
     time?: NexusGenEnums["SortOrder"] | null; // SortOrder
     type?: NexusGenEnums["SortOrder"] | null; // SortOrder
@@ -222,6 +230,7 @@ export interface NexusGenInputs {
     NOT?: NexusGenInputs["ActivityScalarWhereInput"][] | null; // [ActivityScalarWhereInput!]
     OR?: NexusGenInputs["ActivityScalarWhereInput"][] | null; // [ActivityScalarWhereInput!]
     schoolId?: NexusGenInputs["StringFilter"] | null; // StringFilter
+    summary?: NexusGenInputs["StringNullableFilter"] | null; // StringNullableFilter
     teamId?: NexusGenInputs["StringFilter"] | null; // StringFilter
     time?: NexusGenInputs["DateTimeFilter"] | null; // DateTimeFilter
     type?: NexusGenInputs["EnumActivityTypeFilter"] | null; // EnumActivityTypeFilter
@@ -232,6 +241,7 @@ export interface NexusGenInputs {
   ActivityUpdateManyMutationInput: {
     // input type
     card?: NexusGenInputs["NullableStringFieldUpdateOperationsInput"] | null; // NullableStringFieldUpdateOperationsInput
+    summary?: NexusGenInputs["NullableStringFieldUpdateOperationsInput"] | null; // NullableStringFieldUpdateOperationsInput
     time?: NexusGenInputs["DateTimeFieldUpdateOperationsInput"] | null; // DateTimeFieldUpdateOperationsInput
     type?: NexusGenInputs["EnumActivityTypeFieldUpdateOperationsInput"] | null; // EnumActivityTypeFieldUpdateOperationsInput
     visibility?:
@@ -433,6 +443,7 @@ export interface NexusGenInputs {
     school?:
       | NexusGenInputs["SchoolUpdateOneRequiredWithoutActivityInput"]
       | null; // SchoolUpdateOneRequiredWithoutActivityInput
+    summary?: NexusGenInputs["NullableStringFieldUpdateOperationsInput"] | null; // NullableStringFieldUpdateOperationsInput
     team?: NexusGenInputs["TeamUpdateOneRequiredWithoutActivityInput"] | null; // TeamUpdateOneRequiredWithoutActivityInput
     time?: NexusGenInputs["DateTimeFieldUpdateOperationsInput"] | null; // DateTimeFieldUpdateOperationsInput
     type?: NexusGenInputs["EnumActivityTypeFieldUpdateOperationsInput"] | null; // EnumActivityTypeFieldUpdateOperationsInput
@@ -449,6 +460,7 @@ export interface NexusGenInputs {
     school?:
       | NexusGenInputs["SchoolUpdateOneRequiredWithoutActivityInput"]
       | null; // SchoolUpdateOneRequiredWithoutActivityInput
+    summary?: NexusGenInputs["NullableStringFieldUpdateOperationsInput"] | null; // NullableStringFieldUpdateOperationsInput
     team?: NexusGenInputs["TeamUpdateOneRequiredWithoutActivityInput"] | null; // TeamUpdateOneRequiredWithoutActivityInput
     time?: NexusGenInputs["DateTimeFieldUpdateOperationsInput"] | null; // DateTimeFieldUpdateOperationsInput
     type?: NexusGenInputs["EnumActivityTypeFieldUpdateOperationsInput"] | null; // EnumActivityTypeFieldUpdateOperationsInput
@@ -465,6 +477,7 @@ export interface NexusGenInputs {
     discussion?:
       | NexusGenInputs["DiscussionUpdateOneWithoutActivityInput"]
       | null; // DiscussionUpdateOneWithoutActivityInput
+    summary?: NexusGenInputs["NullableStringFieldUpdateOperationsInput"] | null; // NullableStringFieldUpdateOperationsInput
     team?: NexusGenInputs["TeamUpdateOneRequiredWithoutActivityInput"] | null; // TeamUpdateOneRequiredWithoutActivityInput
     time?: NexusGenInputs["DateTimeFieldUpdateOperationsInput"] | null; // DateTimeFieldUpdateOperationsInput
     type?: NexusGenInputs["EnumActivityTypeFieldUpdateOperationsInput"] | null; // EnumActivityTypeFieldUpdateOperationsInput
@@ -484,6 +497,7 @@ export interface NexusGenInputs {
     school?:
       | NexusGenInputs["SchoolUpdateOneRequiredWithoutActivityInput"]
       | null; // SchoolUpdateOneRequiredWithoutActivityInput
+    summary?: NexusGenInputs["NullableStringFieldUpdateOperationsInput"] | null; // NullableStringFieldUpdateOperationsInput
     time?: NexusGenInputs["DateTimeFieldUpdateOperationsInput"] | null; // DateTimeFieldUpdateOperationsInput
     type?: NexusGenInputs["EnumActivityTypeFieldUpdateOperationsInput"] | null; // EnumActivityTypeFieldUpdateOperationsInput
     user?: NexusGenInputs["UserUpdateOneRequiredWithoutActivityInput"] | null; // UserUpdateOneRequiredWithoutActivityInput
@@ -502,6 +516,7 @@ export interface NexusGenInputs {
     school?:
       | NexusGenInputs["SchoolUpdateOneRequiredWithoutActivityInput"]
       | null; // SchoolUpdateOneRequiredWithoutActivityInput
+    summary?: NexusGenInputs["NullableStringFieldUpdateOperationsInput"] | null; // NullableStringFieldUpdateOperationsInput
     team?: NexusGenInputs["TeamUpdateOneRequiredWithoutActivityInput"] | null; // TeamUpdateOneRequiredWithoutActivityInput
     time?: NexusGenInputs["DateTimeFieldUpdateOperationsInput"] | null; // DateTimeFieldUpdateOperationsInput
     type?: NexusGenInputs["EnumActivityTypeFieldUpdateOperationsInput"] | null; // EnumActivityTypeFieldUpdateOperationsInput
@@ -520,6 +535,7 @@ export interface NexusGenInputs {
     school?:
       | NexusGenInputs["SchoolUpdateOneRequiredWithoutActivityInput"]
       | null; // SchoolUpdateOneRequiredWithoutActivityInput
+    summary?: NexusGenInputs["NullableStringFieldUpdateOperationsInput"] | null; // NullableStringFieldUpdateOperationsInput
     team?: NexusGenInputs["TeamUpdateOneRequiredWithoutActivityInput"] | null; // TeamUpdateOneRequiredWithoutActivityInput
     time?: NexusGenInputs["DateTimeFieldUpdateOperationsInput"] | null; // DateTimeFieldUpdateOperationsInput
     type?: NexusGenInputs["EnumActivityTypeFieldUpdateOperationsInput"] | null; // EnumActivityTypeFieldUpdateOperationsInput
@@ -577,6 +593,7 @@ export interface NexusGenInputs {
     OR?: NexusGenInputs["ActivityWhereInput"][] | null; // [ActivityWhereInput!]
     school?: NexusGenInputs["SchoolWhereInput"] | null; // SchoolWhereInput
     schoolId?: NexusGenInputs["StringFilter"] | null; // StringFilter
+    summary?: NexusGenInputs["StringNullableFilter"] | null; // StringNullableFilter
     team?: NexusGenInputs["TeamWhereInput"] | null; // TeamWhereInput
     teamId?: NexusGenInputs["StringFilter"] | null; // StringFilter
     time?: NexusGenInputs["DateTimeFilter"] | null; // DateTimeFilter
@@ -8037,6 +8054,7 @@ export interface NexusGenObjects {
     ballotId?: string | null; // String
     card?: string | null; // String
     id: number; // Int!
+    summary?: string | null; // String
     time: NexusGenScalars["DateTime"]; // DateTime!
     type: NexusGenEnums["ActivityType"]; // ActivityType!
     visibility: NexusGenEnums["Visibility"]; // Visibility!
@@ -8211,6 +8229,7 @@ export interface NexusGenFieldTypes {
     card: string | null; // String
     id: number; // Int!
     school: NexusGenRootTypes["School"]; // School!
+    summary: string | null; // String
     team: NexusGenRootTypes["Team"]; // Team!
     time: NexusGenScalars["DateTime"]; // DateTime!
     type: NexusGenEnums["ActivityType"]; // ActivityType!
@@ -8456,6 +8475,7 @@ export interface NexusGenFieldTypeNames {
     card: "String";
     id: "Int";
     school: "School";
+    summary: "String";
     team: "Team";
     time: "DateTime";
     type: "ActivityType";

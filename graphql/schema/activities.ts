@@ -9,6 +9,7 @@ export const Activity = objectType({
     t.model.card();
     t.model.ballotId();
     t.model.workId();
+    t.model.summary();
     t.model.user();
     t.model.team();
     t.model.school();

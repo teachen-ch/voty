@@ -49,6 +49,7 @@ export const postWork: FieldResolver<"Mutation", "postWork"> = async (
     work: { connect: { id: work.id } },
     user: { connect: { id: user.id } },
     team: { connect: { id: teamId } },
+    summary: work.title || work.text,
     school: { connect: { id: String(user.schoolId) } },
     visibility: args.data.visibility || Visibility.Team,
     type: ActivityType.Work,

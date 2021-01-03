@@ -23,6 +23,7 @@ export type Activity = {
   card?: Maybe<Scalars['String']>;
   id: Scalars['Int'];
   school: School;
+  summary?: Maybe<Scalars['String']>;
   team: Team;
   time: Scalars['DateTime'];
   type: ActivityType;
@@ -36,6 +37,7 @@ export type ActivityCreateInput = {
   card?: Maybe<Scalars['String']>;
   discussion?: Maybe<DiscussionCreateOneWithoutActivityInput>;
   school: SchoolCreateOneWithoutActivityInput;
+  summary?: Maybe<Scalars['String']>;
   team: TeamCreateOneWithoutActivityInput;
   time?: Maybe<Scalars['DateTime']>;
   type: ActivityType;
@@ -114,6 +116,7 @@ export type ActivityCreateWithoutBallotInput = {
   card?: Maybe<Scalars['String']>;
   discussion?: Maybe<DiscussionCreateOneWithoutActivityInput>;
   school: SchoolCreateOneWithoutActivityInput;
+  summary?: Maybe<Scalars['String']>;
   team: TeamCreateOneWithoutActivityInput;
   time?: Maybe<Scalars['DateTime']>;
   type: ActivityType;
@@ -126,6 +129,7 @@ export type ActivityCreateWithoutDiscussionInput = {
   ballot?: Maybe<BallotCreateOneWithoutActivityInput>;
   card?: Maybe<Scalars['String']>;
   school: SchoolCreateOneWithoutActivityInput;
+  summary?: Maybe<Scalars['String']>;
   team: TeamCreateOneWithoutActivityInput;
   time?: Maybe<Scalars['DateTime']>;
   type: ActivityType;
@@ -138,6 +142,7 @@ export type ActivityCreateWithoutSchoolInput = {
   ballot?: Maybe<BallotCreateOneWithoutActivityInput>;
   card?: Maybe<Scalars['String']>;
   discussion?: Maybe<DiscussionCreateOneWithoutActivityInput>;
+  summary?: Maybe<Scalars['String']>;
   team: TeamCreateOneWithoutActivityInput;
   time?: Maybe<Scalars['DateTime']>;
   type: ActivityType;
@@ -151,6 +156,7 @@ export type ActivityCreateWithoutTeamInput = {
   card?: Maybe<Scalars['String']>;
   discussion?: Maybe<DiscussionCreateOneWithoutActivityInput>;
   school: SchoolCreateOneWithoutActivityInput;
+  summary?: Maybe<Scalars['String']>;
   time?: Maybe<Scalars['DateTime']>;
   type: ActivityType;
   user: UserCreateOneWithoutActivityInput;
@@ -163,6 +169,7 @@ export type ActivityCreateWithoutUserInput = {
   card?: Maybe<Scalars['String']>;
   discussion?: Maybe<DiscussionCreateOneWithoutActivityInput>;
   school: SchoolCreateOneWithoutActivityInput;
+  summary?: Maybe<Scalars['String']>;
   team: TeamCreateOneWithoutActivityInput;
   time?: Maybe<Scalars['DateTime']>;
   type: ActivityType;
@@ -175,6 +182,7 @@ export type ActivityCreateWithoutWorkInput = {
   card?: Maybe<Scalars['String']>;
   discussion?: Maybe<DiscussionCreateOneWithoutActivityInput>;
   school: SchoolCreateOneWithoutActivityInput;
+  summary?: Maybe<Scalars['String']>;
   team: TeamCreateOneWithoutActivityInput;
   time?: Maybe<Scalars['DateTime']>;
   type: ActivityType;
@@ -194,6 +202,7 @@ export type ActivityOrderByInput = {
   discussionId?: Maybe<SortOrder>;
   id?: Maybe<SortOrder>;
   schoolId?: Maybe<SortOrder>;
+  summary?: Maybe<SortOrder>;
   teamId?: Maybe<SortOrder>;
   time?: Maybe<SortOrder>;
   type?: Maybe<SortOrder>;
@@ -211,6 +220,7 @@ export type ActivityScalarWhereInput = {
   NOT?: Maybe<Array<ActivityScalarWhereInput>>;
   OR?: Maybe<Array<ActivityScalarWhereInput>>;
   schoolId?: Maybe<StringFilter>;
+  summary?: Maybe<StringNullableFilter>;
   teamId?: Maybe<StringFilter>;
   time?: Maybe<DateTimeFilter>;
   type?: Maybe<EnumActivityTypeFilter>;
@@ -231,6 +241,7 @@ export enum ActivityType {
 
 export type ActivityUpdateManyMutationInput = {
   card?: Maybe<NullableStringFieldUpdateOperationsInput>;
+  summary?: Maybe<NullableStringFieldUpdateOperationsInput>;
   time?: Maybe<DateTimeFieldUpdateOperationsInput>;
   type?: Maybe<EnumActivityTypeFieldUpdateOperationsInput>;
   visibility?: Maybe<EnumVisibilityFieldUpdateOperationsInput>;
@@ -348,6 +359,7 @@ export type ActivityUpdateWithoutBallotInput = {
   card?: Maybe<NullableStringFieldUpdateOperationsInput>;
   discussion?: Maybe<DiscussionUpdateOneWithoutActivityInput>;
   school?: Maybe<SchoolUpdateOneRequiredWithoutActivityInput>;
+  summary?: Maybe<NullableStringFieldUpdateOperationsInput>;
   team?: Maybe<TeamUpdateOneRequiredWithoutActivityInput>;
   time?: Maybe<DateTimeFieldUpdateOperationsInput>;
   type?: Maybe<EnumActivityTypeFieldUpdateOperationsInput>;
@@ -360,6 +372,7 @@ export type ActivityUpdateWithoutDiscussionInput = {
   ballot?: Maybe<BallotUpdateOneWithoutActivityInput>;
   card?: Maybe<NullableStringFieldUpdateOperationsInput>;
   school?: Maybe<SchoolUpdateOneRequiredWithoutActivityInput>;
+  summary?: Maybe<NullableStringFieldUpdateOperationsInput>;
   team?: Maybe<TeamUpdateOneRequiredWithoutActivityInput>;
   time?: Maybe<DateTimeFieldUpdateOperationsInput>;
   type?: Maybe<EnumActivityTypeFieldUpdateOperationsInput>;
@@ -372,6 +385,7 @@ export type ActivityUpdateWithoutSchoolInput = {
   ballot?: Maybe<BallotUpdateOneWithoutActivityInput>;
   card?: Maybe<NullableStringFieldUpdateOperationsInput>;
   discussion?: Maybe<DiscussionUpdateOneWithoutActivityInput>;
+  summary?: Maybe<NullableStringFieldUpdateOperationsInput>;
   team?: Maybe<TeamUpdateOneRequiredWithoutActivityInput>;
   time?: Maybe<DateTimeFieldUpdateOperationsInput>;
   type?: Maybe<EnumActivityTypeFieldUpdateOperationsInput>;
@@ -385,6 +399,7 @@ export type ActivityUpdateWithoutTeamInput = {
   card?: Maybe<NullableStringFieldUpdateOperationsInput>;
   discussion?: Maybe<DiscussionUpdateOneWithoutActivityInput>;
   school?: Maybe<SchoolUpdateOneRequiredWithoutActivityInput>;
+  summary?: Maybe<NullableStringFieldUpdateOperationsInput>;
   time?: Maybe<DateTimeFieldUpdateOperationsInput>;
   type?: Maybe<EnumActivityTypeFieldUpdateOperationsInput>;
   user?: Maybe<UserUpdateOneRequiredWithoutActivityInput>;
@@ -397,6 +412,7 @@ export type ActivityUpdateWithoutUserInput = {
   card?: Maybe<NullableStringFieldUpdateOperationsInput>;
   discussion?: Maybe<DiscussionUpdateOneWithoutActivityInput>;
   school?: Maybe<SchoolUpdateOneRequiredWithoutActivityInput>;
+  summary?: Maybe<NullableStringFieldUpdateOperationsInput>;
   team?: Maybe<TeamUpdateOneRequiredWithoutActivityInput>;
   time?: Maybe<DateTimeFieldUpdateOperationsInput>;
   type?: Maybe<EnumActivityTypeFieldUpdateOperationsInput>;
@@ -409,6 +425,7 @@ export type ActivityUpdateWithoutWorkInput = {
   card?: Maybe<NullableStringFieldUpdateOperationsInput>;
   discussion?: Maybe<DiscussionUpdateOneWithoutActivityInput>;
   school?: Maybe<SchoolUpdateOneRequiredWithoutActivityInput>;
+  summary?: Maybe<NullableStringFieldUpdateOperationsInput>;
   team?: Maybe<TeamUpdateOneRequiredWithoutActivityInput>;
   time?: Maybe<DateTimeFieldUpdateOperationsInput>;
   type?: Maybe<EnumActivityTypeFieldUpdateOperationsInput>;
@@ -494,6 +511,7 @@ export type ActivityWhereInput = {
   OR?: Maybe<Array<ActivityWhereInput>>;
   school?: Maybe<SchoolWhereInput>;
   schoolId?: Maybe<StringFilter>;
+  summary?: Maybe<StringNullableFilter>;
   team?: Maybe<TeamWhereInput>;
   teamId?: Maybe<StringFilter>;
   time?: Maybe<DateTimeFilter>;
@@ -7685,7 +7703,7 @@ export type ActivitiesQuery = (
   { __typename?: 'Query' }
   & { activities: Array<(
     { __typename?: 'Activity' }
-    & Pick<Activity, 'type' | 'card' | 'ballotId' | 'workId' | 'time'>
+    & Pick<Activity, 'type' | 'card' | 'summary' | 'ballotId' | 'workId' | 'time'>
     & { user: (
       { __typename?: 'User' }
       & Pick<User, 'shortname'>
@@ -8565,6 +8583,7 @@ export const ActivitiesDocument = gql`
     }
     type
     card
+    summary
     ballotId
     workId
     time

@@ -42,6 +42,7 @@ export const postDiscussion: FieldResolver<
     discussion: { connect: { id: discussion.id } },
     user: { connect: { id: user.id } },
     team: { connect: { id: teamId } },
+    summary: title || text,
     card,
     ballot: ballotId ? { connect: { id: ballotId } } : undefined,
     school: { connect: { id: String(user.schoolId) } },

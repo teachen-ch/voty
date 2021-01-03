@@ -92,8 +92,8 @@ interface NexusPrismaInputs {
       ordering: 'id' | 'emoij' | 'stars' | 'feedback' | 'userId' | 'discussionId' | 'workId' | 'createdAt' | 'updatedAt'
     }
     activities: {
-      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'type' | 'visibility' | 'card' | 'user' | 'userId' | 'team' | 'teamId' | 'school' | 'schoolId' | 'discussion' | 'discussionId' | 'work' | 'workId' | 'ballot' | 'ballotId' | 'time'
-      ordering: 'id' | 'type' | 'visibility' | 'card' | 'userId' | 'teamId' | 'schoolId' | 'discussionId' | 'workId' | 'ballotId' | 'time'
+      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'type' | 'visibility' | 'card' | 'summary' | 'user' | 'userId' | 'team' | 'teamId' | 'school' | 'schoolId' | 'discussion' | 'discussionId' | 'work' | 'workId' | 'ballot' | 'ballotId' | 'time'
+      ordering: 'id' | 'type' | 'visibility' | 'card' | 'summary' | 'userId' | 'teamId' | 'schoolId' | 'discussionId' | 'workId' | 'ballotId' | 'time'
     }
     swissvotes: {
       filtering: 'AND' | 'OR' | 'NOT' | 'anr' | 'datum' | 'titel_kurz_d' | 'titel_off_d' | 'stichwort' | 'swissvoteslink' | 'rechtsform' | 'poster_ja' | 'poster_nein' | 'annahme' | 'volk' | 'stand' | 'kategorien'
@@ -126,8 +126,8 @@ interface NexusPrismaInputs {
       ordering: 'id' | 'signature' | 'userId' | 'ballotId' | 'teamId' | 'schoolId'
     }
     activity: {
-      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'type' | 'visibility' | 'card' | 'user' | 'userId' | 'team' | 'teamId' | 'school' | 'schoolId' | 'discussion' | 'discussionId' | 'work' | 'workId' | 'ballot' | 'ballotId' | 'time'
-      ordering: 'id' | 'type' | 'visibility' | 'card' | 'userId' | 'teamId' | 'schoolId' | 'discussionId' | 'workId' | 'ballotId' | 'time'
+      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'type' | 'visibility' | 'card' | 'summary' | 'user' | 'userId' | 'team' | 'teamId' | 'school' | 'schoolId' | 'discussion' | 'discussionId' | 'work' | 'workId' | 'ballot' | 'ballotId' | 'time'
+      ordering: 'id' | 'type' | 'visibility' | 'card' | 'summary' | 'userId' | 'teamId' | 'schoolId' | 'discussionId' | 'workId' | 'ballotId' | 'time'
     }
     work: {
       filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'title' | 'text' | 'data' | 'card' | 'visibility' | 'team' | 'teamId' | 'school' | 'schoolId' | 'users' | 'reactions' | 'attachments' | 'activities' | 'createdAt' | 'updatedAt'
@@ -167,8 +167,8 @@ interface NexusPrismaInputs {
       ordering: 'id' | 'title' | 'text' | 'card' | 'userId' | 'teamId' | 'schoolId' | 'ballotId' | 'createdAt' | 'updatedAt'
     }
     activity: {
-      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'type' | 'visibility' | 'card' | 'user' | 'userId' | 'team' | 'teamId' | 'school' | 'schoolId' | 'discussion' | 'discussionId' | 'work' | 'workId' | 'ballot' | 'ballotId' | 'time'
-      ordering: 'id' | 'type' | 'visibility' | 'card' | 'userId' | 'teamId' | 'schoolId' | 'discussionId' | 'workId' | 'ballotId' | 'time'
+      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'type' | 'visibility' | 'card' | 'summary' | 'user' | 'userId' | 'team' | 'teamId' | 'school' | 'schoolId' | 'discussion' | 'discussionId' | 'work' | 'workId' | 'ballot' | 'ballotId' | 'time'
+      ordering: 'id' | 'type' | 'visibility' | 'card' | 'summary' | 'userId' | 'teamId' | 'schoolId' | 'discussionId' | 'workId' | 'ballotId' | 'time'
     }
     attachment: {
       filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'file' | 'title' | 'type' | 'card' | 'user' | 'userId' | 'team' | 'teamId' | 'school' | 'schoolId' | 'discussion' | 'discussionId' | 'ballot' | 'ballotId' | 'work' | 'workId' | 'createdAt' | 'updatedAt'
@@ -205,8 +205,8 @@ interface NexusPrismaInputs {
       ordering: 'id' | 'title' | 'text' | 'card' | 'userId' | 'teamId' | 'schoolId' | 'ballotId' | 'createdAt' | 'updatedAt'
     }
     activity: {
-      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'type' | 'visibility' | 'card' | 'user' | 'userId' | 'team' | 'teamId' | 'school' | 'schoolId' | 'discussion' | 'discussionId' | 'work' | 'workId' | 'ballot' | 'ballotId' | 'time'
-      ordering: 'id' | 'type' | 'visibility' | 'card' | 'userId' | 'teamId' | 'schoolId' | 'discussionId' | 'workId' | 'ballotId' | 'time'
+      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'type' | 'visibility' | 'card' | 'summary' | 'user' | 'userId' | 'team' | 'teamId' | 'school' | 'schoolId' | 'discussion' | 'discussionId' | 'work' | 'workId' | 'ballot' | 'ballotId' | 'time'
+      ordering: 'id' | 'type' | 'visibility' | 'card' | 'summary' | 'userId' | 'teamId' | 'schoolId' | 'discussionId' | 'workId' | 'ballotId' | 'time'
     }
     attachment: {
       filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'file' | 'title' | 'type' | 'card' | 'user' | 'userId' | 'team' | 'teamId' | 'school' | 'schoolId' | 'discussion' | 'discussionId' | 'ballot' | 'ballotId' | 'work' | 'workId' | 'createdAt' | 'updatedAt'
@@ -249,8 +249,8 @@ interface NexusPrismaInputs {
       ordering: 'id' | 'start' | 'end' | 'ballotId' | 'teamId'
     }
     activity: {
-      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'type' | 'visibility' | 'card' | 'user' | 'userId' | 'team' | 'teamId' | 'school' | 'schoolId' | 'discussion' | 'discussionId' | 'work' | 'workId' | 'ballot' | 'ballotId' | 'time'
-      ordering: 'id' | 'type' | 'visibility' | 'card' | 'userId' | 'teamId' | 'schoolId' | 'discussionId' | 'workId' | 'ballotId' | 'time'
+      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'type' | 'visibility' | 'card' | 'summary' | 'user' | 'userId' | 'team' | 'teamId' | 'school' | 'schoolId' | 'discussion' | 'discussionId' | 'work' | 'workId' | 'ballot' | 'ballotId' | 'time'
+      ordering: 'id' | 'type' | 'visibility' | 'card' | 'summary' | 'userId' | 'teamId' | 'schoolId' | 'discussionId' | 'workId' | 'ballotId' | 'time'
     }
     discussion: {
       filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'title' | 'text' | 'card' | 'user' | 'userId' | 'team' | 'teamId' | 'school' | 'schoolId' | 'ballot' | 'ballotId' | 'reactions' | 'attachments' | 'createdAt' | 'updatedAt' | 'Activity'
@@ -285,8 +285,8 @@ interface NexusPrismaInputs {
       ordering: 'id' | 'file' | 'title' | 'type' | 'card' | 'userId' | 'teamId' | 'schoolId' | 'discussionId' | 'ballotId' | 'workId' | 'createdAt' | 'updatedAt'
     }
     Activity: {
-      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'type' | 'visibility' | 'card' | 'user' | 'userId' | 'team' | 'teamId' | 'school' | 'schoolId' | 'discussion' | 'discussionId' | 'work' | 'workId' | 'ballot' | 'ballotId' | 'time'
-      ordering: 'id' | 'type' | 'visibility' | 'card' | 'userId' | 'teamId' | 'schoolId' | 'discussionId' | 'workId' | 'ballotId' | 'time'
+      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'type' | 'visibility' | 'card' | 'summary' | 'user' | 'userId' | 'team' | 'teamId' | 'school' | 'schoolId' | 'discussion' | 'discussionId' | 'work' | 'workId' | 'ballot' | 'ballotId' | 'time'
+      ordering: 'id' | 'type' | 'visibility' | 'card' | 'summary' | 'userId' | 'teamId' | 'schoolId' | 'discussionId' | 'workId' | 'ballotId' | 'time'
     }
   }
   Work: {
@@ -303,8 +303,8 @@ interface NexusPrismaInputs {
       ordering: 'id' | 'file' | 'title' | 'type' | 'card' | 'userId' | 'teamId' | 'schoolId' | 'discussionId' | 'ballotId' | 'workId' | 'createdAt' | 'updatedAt'
     }
     activities: {
-      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'type' | 'visibility' | 'card' | 'user' | 'userId' | 'team' | 'teamId' | 'school' | 'schoolId' | 'discussion' | 'discussionId' | 'work' | 'workId' | 'ballot' | 'ballotId' | 'time'
-      ordering: 'id' | 'type' | 'visibility' | 'card' | 'userId' | 'teamId' | 'schoolId' | 'discussionId' | 'workId' | 'ballotId' | 'time'
+      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'type' | 'visibility' | 'card' | 'summary' | 'user' | 'userId' | 'team' | 'teamId' | 'school' | 'schoolId' | 'discussion' | 'discussionId' | 'work' | 'workId' | 'ballot' | 'ballotId' | 'time'
+      ordering: 'id' | 'type' | 'visibility' | 'card' | 'summary' | 'userId' | 'teamId' | 'schoolId' | 'discussionId' | 'workId' | 'ballotId' | 'time'
     }
   }
   Reaction: {
@@ -687,6 +687,7 @@ interface NexusPrismaOutputs {
     type: 'ActivityType'
     visibility: 'Visibility'
     card: 'String'
+    summary: 'String'
     user: 'User'
     userId: 'String'
     team: 'Team'
