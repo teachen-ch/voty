@@ -22,7 +22,7 @@ module.exports = {
     ecmaVersion: 12,
     sourceType: "module",
     tsconfigRootDir: "./",
-    project: ["./tsconfig.json", "./cypress/tsconfig.json"],
+    project: ["./tsconfig.json", "./cypress/tsconfig.json", "tsconfig.eslint.json"],
   },
   plugins: ["react", "@typescript-eslint", "cypress"],
   rules: {

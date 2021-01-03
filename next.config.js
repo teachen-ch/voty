@@ -1,4 +1,4 @@
-// eslint-disable-next-line
+// eslint-disable-next-line 
 const withMDX = require("@next/mdx")({
   extension: /\.(md|mdx)$/,
 });
