@@ -5,6 +5,9 @@ export const Markdown: React.FC = ({ children }) => (
   />
 );
 // TODO: this is a joke markdown parser after being frustrated with mdx-js
+// what out, it has one feature, which we need to preserve, once we replace this
+// image urls such as https://voty.ch/content/aristoteles.jpg will automatically
+// be converted to an image for convenience.
 export function parseMarkdown(str: string): string {
   str = str.replace(/^\s*#\s+(.*?)$/gm, "<h1>$1</h1>");
   str = str.replace(/^\s*##\s+(.*?)$/gm, "<h2>$1</h2>");
@@ -19,7 +22,12 @@ export function parseMarkdown(str: string): string {
     "<img src='$2' alt='$1' class='markdownImage'/>"
   );
   str = str.replace(/(<\/h\d>)<br\/>\s*/g, "$1");
-  str = str.replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2">$1</a>');
+  str = str.replace(/\[(.*?)\]\((.*?)\)/g, "<a href='$2'>$1</a>");
+  // direct image urls:
+  str = str.replace(
+    /(https?:\/\/.*?(?:jpe?g|png|gif))/gim,
+    "<img src='$1' class='markdownImage'/>"
+  );
   return str;
 }
 
