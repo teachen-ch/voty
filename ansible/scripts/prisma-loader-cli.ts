@@ -2,10 +2,10 @@
 import yargs from "yargs";
 import { loadFixture } from "../../util/prisma-loader";
 
-run();
-
 // working around pre-commit git hooks...
 const cons = console;
+
+void run();
 
 async function run() {
   try {
@@ -14,7 +14,7 @@ async function run() {
 
     for (let i = 0; i < argv._.length; ++i) {
       const fixtureFile = String(argv._[i]);
-      loadFixture(fixtureFile, logger);
+      await loadFixture(fixtureFile, logger);
     }
 
     process.exit();
