@@ -22,7 +22,7 @@ Now you can create a new schema file [/graphql/schema/](/graphql/schema/). There
 
 The resolvers are the business logic of our API and they live in [/graphql/resolvers/](/graphql/resolvers/). Add a resolver for the new database and also list it and export it in `/graphql/resolvers/index.ts`.
 
-Now **reload your application** in dev-mode. This should automatically generate `/graphql/nexus-plugin-prisma.ts`, `/graphql/nexus.ts` and `/graphql/api.graphql`.
+Now **restart your application** in dev-mode and the **reload a page** in your browser. This should automatically generate `/graphql/nexus-plugin-prisma.ts`, `/graphql/nexus.ts` and `/graphql/api.graphql`.
 
 ### GraphQL Frontend
 
