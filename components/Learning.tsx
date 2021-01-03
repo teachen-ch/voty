@@ -12,8 +12,9 @@ import {
 } from "rebass";
 import { useState } from "react";
 import { MDXProvider } from "@mdx-js/react";
+import { ReadMore } from "components/ReadMore";
 
-export { Info, Link, Video };
+export { Info, Link, Video, ReadMore };
 
 type RefProps = {
   title?: string;

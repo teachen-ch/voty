@@ -19,6 +19,7 @@ import { find, isFunction, omit, remove } from "lodash";
 import Plus from "../public/images/icon_plus.svg";
 import Minus from "../public/images/icon_minus.svg";
 import { Label, Radio } from "@rebass/forms";
+import { formatDate } from "util/date";
 
 export const WorkFields = gql`
   fragment WorkFields on Work {
@@ -27,6 +28,7 @@ export const WorkFields = gql`
     title
     text
     data
+    updatedAt
     users {
       id
       name
@@ -103,13 +105,17 @@ export const Works: React.FC<
               {active === work.id ? (
                 <Minus
                   height="20px"
-                  style={{ marginRight: 10 }}
+                  style={{ marginRight: 15 }}
                   alt="Schliessen"
                 />
               ) : (
-                <Plus height="20px" style={{ marginRight: 10 }} alt="Öffnen" />
+                <Plus height="20px" style={{ marginRight: 15 }} alt="Öffnen" />
               )}
-              Von: {work.users?.map((u) => u.shortname).join(", ")}
+              <b>{work.users?.map((u) => u.shortname).join(", ")}:</b> «
+              {work.title || "ohne Titel"}»
+              <Text ml={3} variant="inline" fontSize={1}>
+                ({formatDate(work.updatedAt)})
+              </Text>
             </Text>
             {active === work.id && <Comp work={work} />}
           </Box>

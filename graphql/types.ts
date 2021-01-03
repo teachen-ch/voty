@@ -8213,7 +8213,7 @@ export type DeleteUserMutation = (
 
 export type WorkFieldsFragment = (
   { __typename?: 'Work' }
-  & Pick<Work, 'id' | 'card' | 'title' | 'text' | 'data'>
+  & Pick<Work, 'id' | 'card' | 'title' | 'text' | 'data' | 'updatedAt'>
   & { users: Array<(
     { __typename?: 'User' }
     & Pick<User, 'id' | 'name' | 'shortname'>
@@ -8546,6 +8546,7 @@ export const WorkFieldsFragmentDoc = gql`
   title
   text
   data
+  updatedAt
   users {
     id
     name

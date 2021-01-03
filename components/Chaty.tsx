@@ -15,10 +15,11 @@ import { CircleBullet } from "./Cards";
 const WAIT = 50;
 const MAX_WAIT = 5000;
 
-export const Chaty: React.FC<{ lines: string; title?: string }> = ({
-  lines,
-  title,
-}) => {
+export const Chaty: React.FC<{
+  lines: string;
+  title?: string;
+  speed?: number;
+}> = ({ lines, title, speed = 1 }) => {
   const messages = useMemo<TMessage[]>(() => parseMessages(lines), [lines]);
   const [show, setShow] = useState<TMessage[]>([]);
   const [typing, setTyping] = useState(false);
@@ -45,7 +46,7 @@ export const Chaty: React.FC<{ lines: string; title?: string }> = ({
     setStarted(true);
     const msg = messages[line];
     const chars = msg.message?.length || 10;
-    const wait = Math.min(WAIT * chars, MAX_WAIT);
+    const wait = Math.min((1 / speed) * WAIT * chars, (1 / speed) * MAX_WAIT);
     if (messages[line].direction === Direction.Outgoing && !input) {
       setInputMessage(messages[line]);
       return;
@@ -66,7 +67,12 @@ export const Chaty: React.FC<{ lines: string; title?: string }> = ({
         setCancel(setTimeout(() => doChat(line + 1), wait));
       } else {
         setTyping(false);
-        setCancel(setTimeout(() => setInputMessage(messages[line + 1]), 1000));
+        setCancel(
+          setTimeout(
+            () => setInputMessage(messages[line + 1]),
+            (1 / speed) * 1000
+          )
+        );
       }
     } else {
       setTyping(false);
@@ -265,7 +271,7 @@ function showMessages(messages: TMessage[]) {
   ));
 }
 
-function parseMessages(lines: string): TMessage[] {
+export function parseMessages(lines: string): TMessage[] {
   lines = lines.trim();
   return lines.split(/\n+(?=[!\-*])/).map((line, ix) => parseMessage(line, ix));
 }
@@ -288,7 +294,7 @@ function parseMessage(lines: string, ix: number): TMessage {
       throw new Error("ERR_CHATY_PARSE_DIRECTION");
   }
   // remove message type character and whitespace at beginning of lines
-  let message = lines.replace(/^[-*!]?\s+/gm, "");
+  let message = lines.replace(/^[-*!]?\s*/gm, "");
 
   // check for special commands: GIPHY / IMAGE / BUTTON, etc.
   // eslint-disable-next-line @typescript-eslint/prefer-regexp-exec

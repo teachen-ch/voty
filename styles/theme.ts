@@ -276,6 +276,7 @@ export default {
     border: "none",
     outline: "none",
     fontSize: [1, 1, 2],
+    px: 3,
     mt: [0, 0, 1],
     mb: [3, 2, 1],
     "::-webkit-input-placeholder": {
