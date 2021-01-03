@@ -200,12 +200,17 @@ export const removeBallotRun: FieldResolver<
   });
   if (!ballotRun) throw new Error("Error.BallotrunNotFound");
 
-  const success = await ctx.db.ballotRun.delete({
-    where: { id: ballotRunId },
-    include: { ballot: true },
-  });
+  let result;
+  try {
+    result = await ctx.db.ballotRun.delete({
+      where: { id: ballotRunId },
+      include: { ballot: true },
+    });
+  } catch (err) {
+    return { error: true };
+  }
 
-  if (!success) throw new Error("Error.BallotrunCannotRemove");
+  if (!result) throw new Error("Error.BallotrunCannotRemove");
   return { success: true };
 };
 
