@@ -173,7 +173,7 @@ export const CardList: React.FC<{
     <>
       {teamCards.split(" ").map((id, ix) => {
         return (
-          <Flex key={id} my={3} ml={4}>
+          <Flex key={id} my={3} ml={4} alignItems="center">
             <CircleBullet value={ix + 1} />
             <Text>
               <A href={`/team/${teamId}/cards/${id}`}>{getCardTitle(id)}</A>
@@ -299,9 +299,13 @@ export const CircleBullet: React.FC<{
 }> = ({ value, onClick, bg, color }) => (
   <Text
     fontWeight="bold"
-    fontSize={[2]}
+    fontSize={2}
     display="inline-block"
-    sx={{ borderRadius: 25, cursor: onClick ? "pointer" : "inherit" }}
+    sx={{
+      borderRadius: 25,
+      cursor: onClick ? "pointer" : "inherit",
+      flexShrink: 0,
+    }}
     color={color || "gray"}
     bg={bg || "white"}
     mr={2}
