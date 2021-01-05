@@ -100,7 +100,7 @@ export const ActivitiesQuery: React.FC<{
                       : formatDate(act.time)}
                   </td>
                   <td>→</td>
-                  <td width="99%">
+                  <td style={{ maxWidth: "200px" }}>
                     {link ? (
                       <A href={link}>
                         {act.user.shortname} {text}
