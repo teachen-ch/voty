@@ -15,7 +15,7 @@ import { Flex, Link, Text, FlexProps, Box } from "rebass";
 import { useTeam, useUser } from "state/user";
 import { ChangeEvent, useEffect, useRef, useState } from "react";
 import { Loading } from "./Page";
-import { find, isFunction, omit, remove } from "lodash";
+import { find, isFunction, omit, remove, truncate } from "lodash";
 import Plus from "../public/images/icon_plus.svg";
 import Minus from "../public/images/icon_minus.svg";
 import { Label, Radio } from "@rebass/forms";
@@ -95,29 +95,31 @@ export const Works: React.FC<
       {works?.map((work) => {
         return (
           <Box key={work.id} mt={2} id={work.id}>
-            <Text
+            <Flex
+              bg="darkgray"
               py={2}
               px={3}
-              bg="darkgray"
-              sx={{ cursor: "pointer" }}
+              alignItems="center"
               onClick={() => setActive(active === work.id ? "" : work.id)}
             >
               {active === work.id ? (
                 <Minus
-                  height="20px"
+                  height="15px"
                   style={{ marginRight: 15 }}
                   alt="Schliessen"
                 />
               ) : (
-                <Plus height="20px" style={{ marginRight: 15 }} alt="Öffnen" />
+                <Plus height="15px" style={{ marginRight: 15 }} alt="Öffnen" />
               )}
-              <b>{work.users?.map((u) => u.shortname).join(", ")}:</b> «
-              {work.title || "ohne Titel"}»
-              <Text ml={3} variant="inline" fontSize={1}>
-                ({formatDate(work.updatedAt)})
+              <Text sx={{ cursor: "pointer" }} fontSize={[1, 1, 2, 3]}>
+                <b>{work.users?.map((u) => u.shortname).join(", ")}:</b> «
+                {truncate(work.title, { length: 35 }) || "ohne Titel"}»
+                <Text ml={3} variant="inline" fontSize={1}>
+                  ({formatDate(work.updatedAt)})
+                </Text>
               </Text>
-            </Text>
-            {active === work.id && <Comp work={work} />}
+            </Flex>
+            <Box pl={45}>{active === work.id && <Comp work={work} />}</Box>
           </Box>
         );
       })}
