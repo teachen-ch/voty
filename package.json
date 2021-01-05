@@ -31,8 +31,6 @@
   },
   "dependencies": {
     "@apollo/client": "^3.3.4",
-    "@chatscope/chat-ui-kit-react": "^1.0.3",
-    "@chatscope/chat-ui-kit-styles": "^1.0.4",
     "@mdx-js/loader": "^1.6.19",
     "@mdx-js/runtime": "^1.6.19",
     "@next/mdx": "^10.0.3",

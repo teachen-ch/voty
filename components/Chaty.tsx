@@ -1,16 +1,17 @@
 import "@chatscope/chat-ui-kit-styles/dist/default/styles.min.css";
 
 import {
-  MainContainer,
   ChatContainer,
   MessageList,
-  Message,
+  InputBox,
   TypingIndicator,
-} from "@chatscope/chat-ui-kit-react";
-import { Box, Button, Text, Flex, Card, Link } from "rebass";
+  ChatHeader,
+  MessageOrInfo,
+  Direction,
+  TMessage,
+} from "components/ChatElements";
+import { Box, Button, Text, Card, Link } from "rebass";
 import { useEffect, useMemo, useRef, useState } from "react";
-import { Markdown } from "util/markdown";
-import { CircleBullet } from "./Cards";
 
 const WAIT = 50;
 const MAX_WAIT = 5000;
@@ -110,63 +111,23 @@ export const Chaty: React.FC<{
   }
 
   return (
-    <Flex
-      textAlign="left"
-      flexDirection="column"
-      width={["100%", "100%", "800px"]}
-      ml={[-3, -3, -4]}
-      sx={{
-        position: "fixed",
-        bottom: 0,
-        top: [0, 0, "70px"],
-        zIndex: 100,
-      }}
-    >
-      <Flex
-        bg="lightgray"
-        textAlign="center"
-        p={3}
-        color="black"
-        justifyContent="space-between"
-      >
-        <Text fontWeight="bold">{title}</Text>
-        <CircleBullet
-          onClick={() => resetChat()}
-          value="x"
-          bg="secondary"
-          color="white"
-        />
-      </Flex>
-      <MainContainer>
-        <ChatContainer style={{ paddingTop: "1rem" }}>
-          <MessageList>
-            {showMessages(show)}
-            {typing ? (
-              <TypingIndicator
-                style={{ display: "inline-block", marginBottom: "20px" }}
-                is="MessageSeparator"
-              />
-            ) : null}
-            {finished ? (
-              <div is="MessageSeparator">
-                <Button mt={3} width="100%" onClick={() => resetChat()}>
-                  Fertig
-                </Button>
-              </div>
-            ) : (
-              <div
-                ref={messagesEndRef}
-                is="MessageSeparator"
-                style={{ height: 50, marginTop: 100 }}
-              />
-            )}
-          </MessageList>
-          <Box is="MessageInput">
-            <ShowInput message={inputMessage} doChat={doChat} />
-          </Box>
-        </ChatContainer>
-      </MainContainer>
-    </Flex>
+    <ChatContainer>
+      <ChatHeader title={title} onClick={resetChat} />
+      <MessageList>
+        {show.map((msg, i) => (
+          <MessageOrInfo key={i} model={msg} is="Message" />
+        ))}
+        {typing ? <TypingIndicator /> : null}
+        {finished ? (
+          <Button mt={3} width="100%" onClick={() => resetChat()}>
+            Fertig
+          </Button>
+        ) : (
+          <div ref={messagesEndRef} style={{ height: 50, marginTop: 100 }} />
+        )}
+      </MessageList>
+      <ShowInput message={inputMessage} doChat={doChat} />
+    </ChatContainer>
   );
 };
 
@@ -209,68 +170,6 @@ const ShowInput: React.FC<{
   );
 };
 
-const MessageOrInfo: React.FC<{ model: TMessage; is: string }> = ({ model }) =>
-  model.direction === Direction.Info ? (
-    <Info model={model} />
-  ) : (
-    <ParsedMessage model={model} />
-  );
-
-const Info: React.FC<{ model: TMessage }> = ({ model }) => (
-  <Box
-    my={2}
-    mx={4}
-    p={2}
-    bg="lightgray"
-    sx={{ borderRadius: 8 }}
-    maxWidth="350px"
-  >
-    <Markdown>{model.message}</Markdown>
-  </Box>
-);
-
-const ParsedMessage: React.FC<{ model: TMessage }> = ({ model }) => {
-  if (model.selected) {
-    model.message = model.selected;
-  }
-  return <Message model={model} />;
-};
-
-const InputBox: React.FC = ({ children }) => (
-  <Flex
-    flexDirection="row"
-    width="100%"
-    bg="#eee"
-    p={2}
-    sx={{ borderTop: "1px solid lightgray" }}
-  >
-    {children}
-  </Flex>
-);
-
-enum Direction {
-  "Incoming",
-  "Outgoing",
-  "Info",
-}
-
-type TMessage = {
-  direction?: Direction;
-  message?: string;
-  sender?: string;
-  position?: string;
-  sentTime?: string;
-  type?: string;
-  line: number;
-  selected?: string;
-};
-
-function showMessages(messages: TMessage[]) {
-  return messages.map((msg, i) => (
-    <MessageOrInfo key={i} model={msg} is="Message" />
-  ));
-}
-
 export function parseMessages(lines: string): TMessage[] {
   lines = lines.trim();
   return lines.split(/\n+(?=[!\-*])/).map((line, ix) => parseMessage(line, ix));
@@ -295,6 +194,7 @@ function parseMessage(lines: string, ix: number): TMessage {
   }
   // remove message type character and whitespace at beginning of lines
   let message = lines.replace(/^[-*!]?\s*/gm, "");
+  let children = undefined;
 
   // check for special commands: GIPHY / IMAGE / BUTTON, etc.
   // eslint-disable-next-line @typescript-eslint/prefer-regexp-exec
@@ -302,18 +202,23 @@ function parseMessage(lines: string, ix: number): TMessage {
   if (match && match[1]) {
     type = match[1];
     const rest = message.substr(match[0].length);
-    message = specialMessage(type, rest);
+    const result = specialMessage(type, rest);
+    if (typeof result === "string") {
+      message = result;
+    } else {
+      children = result;
+    }
   }
 
   // does the message contain just 1-2 emojis?
   if (/^\p{Emoji}{1,2}$/mu.test(message)) {
     type = "emoji";
-    message = "<span style='font-size: 40px'>" + message + "</span>";
+    children = <span style={{ fontSize: 40 }}>{message}</span>;
   }
-  return { direction, message, type, line: ix };
+  return { direction, message, type, line: ix, children };
 }
 
-function specialMessage(type: string, rest: string): string {
+function specialMessage(type: string, rest: string): React.ReactNode {
   switch (type) {
     case "GIF":
     case "GIPHY": {
@@ -323,12 +228,12 @@ function specialMessage(type: string, rest: string): string {
       let id = rest.replace(/.*\/gifs\/([^/]*)$/, "$1");
       if (id.indexOf("-")) id = id.replace(/.*?-/, "");
       if (id) media = `https://media0.giphy.com/media/${id}/giphy.mp4`;
-      return `<video src="${media}" autoplay loop width="200"/>`;
+      return <video src={media} autoPlay loop width="200" />;
     }
     case "IMAGE":
     case "IMG":
     case "BILD":
-      return `<img src="${rest}" width="200"/>`;
+      return <img src={rest} width="200" />;
     case "BUTTONS":
     case "MENU": {
       // either single line: MENU (bla) (bli) (blo)

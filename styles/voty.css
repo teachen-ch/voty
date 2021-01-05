@@ -113,3 +113,13 @@ tr td {
   border: 10px solid white;
   border-radius: 10;
 }
+
+/* Small Animation for ChatElements / TypingIndicator */
+@keyframes glowDot {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
