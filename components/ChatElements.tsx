@@ -1,6 +1,7 @@
 import { Box, Flex, Text } from "rebass";
 import { CircleBullet } from "./Cards";
 import { Markdown } from "util/markdown";
+import { GlossaryReplace } from "./Glossary";
 
 export enum Direction {
   "Incoming",
@@ -103,7 +104,9 @@ export const MessageOrInfo: React.FC<{ model: TMessage; is: string }> = ({
   model,
 }) =>
   model.direction === Direction.Info ? (
-    <Info model={model} />
+    <GlossaryReplace bg="#444" color="white">
+      <Info model={model} />
+    </GlossaryReplace>
   ) : (
     <ParsedMessage model={model} />
   );
@@ -114,7 +117,9 @@ const ParsedMessage: React.FC<{ model: TMessage }> = ({ model }) => {
   }
   return (
     <Message direction={model.direction}>
-      {model.children || model.message}
+      <GlossaryReplace bg="#444" color="white">
+        {model.children || model.message}
+      </GlossaryReplace>
     </Message>
   );
 };

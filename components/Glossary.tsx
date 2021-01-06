@@ -16,7 +16,11 @@ export const Glossary: React.FC = () => (
   </MDXProvider>
 );
 
-export const glossaryReplace = (str: string): ReactNode => {
+export const glossaryReplace = (
+  str: string,
+  bg?: string,
+  color?: string
+): ReactNode => {
   // can't use \w, as it does not catch umlauts: [\u00C0-\u017FA-Za-z]
   const searchTerm = RegExp(/\B@([\u00C0-\u017FA-Za-z]+)(?:\((.*?)\))?/);
   if (!searchTerm.exec(str)) {
@@ -28,7 +32,14 @@ export const glossaryReplace = (str: string): ReactNode => {
     // push everything before match as a string
     children.push(str.substr(0, match.index));
     // push a generated link with the match
-    children.push(<GlossaryLink term={match[1]} text={match[2] || match[1]} />);
+    children.push(
+      <GlossaryLink
+        bg={bg}
+        color={color}
+        term={match[1]}
+        text={match[2] || match[1]}
+      />
+    );
     // continue with rest of the string after match
     str = str.substr(Number(match.index) + match[0].length);
   }
@@ -36,13 +47,17 @@ export const glossaryReplace = (str: string): ReactNode => {
   return children;
 };
 
-export const GlossaryReplace: React.FC = ({ children }) => {
+export const GlossaryReplace: React.FC<{ bg?: string; color?: string }> = ({
+  bg,
+  color,
+  children,
+}) => {
   const deepReplace = (children: ReactNode): ReactNode =>
     React.Children.map(
       children,
       (child): ReactNode => {
         if (!child || typeof child === "number") return child;
-        if (typeof child === "string") return glossaryReplace(child);
+        if (typeof child === "string") return glossaryReplace(child, bg, color);
         if (typeof child === "object" && "props" in child) {
           if (child.props.children) {
             const children = deepReplace(child.props.children);
@@ -60,10 +75,12 @@ export const GlossaryReplace: React.FC = ({ children }) => {
   return <>{deepReplace(children)}</>;
 };
 
-export const GlossaryLink: React.FC<{ term: string; text?: string }> = ({
-  term,
-  text,
-}) => {
+export const GlossaryLink: React.FC<{
+  term: string;
+  text?: string;
+  bg?: string;
+  color?: string;
+}> = ({ term, text, bg = "lightgray", color = "black" }) => {
   const [show, setShow] = useState(false);
   function toggle() {
     setShow(!show);
@@ -93,8 +110,8 @@ export const GlossaryLink: React.FC<{ term: string; text?: string }> = ({
         mx={[3, 3, 4]}
         display={show ? "block" : "none"}
         sx={{ position: "absolute", zIndex: 10, left: [0, 0] }}
-        bg="lightgray"
-        color="black"
+        bg={bg}
+        color={color}
         mt={1}
         p={3}
         fontSize={1}
