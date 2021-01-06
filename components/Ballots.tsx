@@ -28,7 +28,7 @@ import IconDeadline from "../public/images/icon_deadline.svg";
 import IconCal from "../public/images/icon_cal.svg";
 import { MouseEvent } from "react";
 import type { Nullable } from "simplytyped";
-import { parseMarkdownInner } from "util/markdown";
+import { Markdown } from "util/markdown";
 
 const BallotFields = gql`
   fragment BallotFields on Ballot {
@@ -415,10 +415,7 @@ export const BallotDetails: React.FC<{
       <Text textAlign="center" mt={3}>
         <img width={150} src="/images/easyvote.png" alt="EasyVote" />
       </Text>
-      <div
-        dangerouslySetInnerHTML={parseMarkdownInner(ballot.body)}
-        style={{ textAlign: "left" }}
-      />
+      <Markdown>{ballot.body}</Markdown>
     </Text>
   </Card>
 );

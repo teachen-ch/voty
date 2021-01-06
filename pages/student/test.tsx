@@ -11,7 +11,7 @@ import {
   useGetBallotRunsQuery,
   useBallotsQuery,
 } from "graphql/types";
-import { parseMarkdownInner } from "util/markdown";
+import { Markdown } from "util/markdown";
 import { VotyNow, VotySuccess } from "pages/team/[team]/ballots/[ballot]";
 import { HideFeature } from "components/HideFeature";
 import { Activities } from "components/Activities";
@@ -123,10 +123,7 @@ export const Ballot: React.FC<{
               />
             </Text>
             <ReadMore title="Nochmals genauer informieren" hidePlus>
-              <div
-                dangerouslySetInnerHTML={parseMarkdownInner(ballot.body)}
-                style={{ textAlign: "left" }}
-              />
+              <Markdown>{ballot.body}</Markdown>
             </ReadMore>
             {voty ? (
               <>
