@@ -17,7 +17,8 @@ export const Glossary: React.FC = () => (
 );
 
 export const glossaryReplace = (str: string): ReactNode => {
-  const searchTerm = RegExp(/\B@(\w+)(?:\((.*?)\))?/);
+  // can't use \w, as it does not catch umlauts: [\u00C0-\u017FA-Za-z]
+  const searchTerm = RegExp(/\B@([\u00C0-\u017FA-Za-z]+)(?:\((.*?)\))?/);
   if (!searchTerm.exec(str)) {
     return str;
   }
