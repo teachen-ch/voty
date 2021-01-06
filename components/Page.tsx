@@ -53,6 +53,7 @@ export const AppPage: React.FC<{
             minWidth: "min(100%, 800px)",
             borderRadius: [0, 0, 5],
             backgroundColor: ["silver_m", "silver_m", "silver"],
+            position: "relative",
           }}
           maxWidth="800px"
           minHeight="450px"

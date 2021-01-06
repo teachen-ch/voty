@@ -13,6 +13,7 @@ import { ReactElement, useEffect } from "react";
 import CheckLogin from "components/CheckLogin";
 import initStats from "util/stats";
 import { remove } from "lodash";
+import { GlossaryReplace } from "components/Glossary";
 
 function MyApp({ Component, pageProps }: AppProps): ReactElement {
   useEffect(() => {
@@ -55,7 +56,7 @@ const MDXWrapper: React.FC = ({ children }) => {
       return <Page heading={heading}>{childrenCopy}</Page>;
     }
   }
-  return <>{children}</>;
+  return <GlossaryReplace>{children}</GlossaryReplace>;
 };
 
 export default MyApp;

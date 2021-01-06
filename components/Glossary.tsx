@@ -1,5 +1,5 @@
 import { MDXProvider } from "@mdx-js/react";
-import { Box, Heading, Link, Text } from "rebass";
+import { Heading, Link, Text } from "rebass";
 import Glossar from "pages/content/glossar.mdx";
 import React, { ReactElement, ReactNode, useState } from "react";
 
@@ -27,12 +27,11 @@ export const glossaryReplace = (str: string): ReactNode => {
     // push everything before match as a string
     children.push(str.substr(0, match.index));
     // push a generated link with the match
-    children.push(
-      <GlossaryLink term={match[1]}>{match[2] || match[1]}</GlossaryLink>
-    );
+    children.push(<GlossaryLink term={match[1]} text={match[2] || match[1]} />);
     // continue with rest of the string after match
     str = str.substr(Number(match.index) + match[0].length);
   }
+  children.push(str);
   return children;
 };
 
@@ -43,14 +42,18 @@ export const GlossaryReplace: React.FC = ({ children }) => {
       (child): ReactNode => {
         if (!child || typeof child === "number") return child;
         if (typeof child === "string") return glossaryReplace(child);
-        else if (
-          typeof child === "object" &&
-          "props" in child &&
-          child.props.children
-        ) {
-          const children = deepReplace(child.props.children);
-          return React.cloneElement(child, { children });
-        } else return child;
+        if (typeof child === "object" && "props" in child) {
+          if (child.props.children) {
+            const children = deepReplace(child.props.children);
+            return React.cloneElement(child, { children });
+          }
+          if (typeof child.type === "function") {
+            // TODO: this does not work yet, e.g. with MDX files
+            // do we have to evalute the function?
+            return child;
+          }
+        }
+        return child;
       }
     );
   return <>{deepReplace(children)}</>;
@@ -65,7 +68,11 @@ export const GlossaryLink: React.FC<{ term: string; text?: string }> = ({
     setShow(!show);
   }
   return (
-    <Box sx={{ position: ["initial", "initial"] }} display="inline-block">
+    <Text
+      as="span"
+      sx={{ position: ["initial", "initial"] }}
+      display="inline-block"
+    >
       <Link
         onClick={toggle}
         onMouseOver={toggle}
@@ -74,13 +81,15 @@ export const GlossaryLink: React.FC<{ term: string; text?: string }> = ({
           borderBottom: "1px dotted",
           textDecoration: "none !important",
           ":hover": {
-            borderBottom: "5px solid #333",
+            borderBottom: "5px dotted",
           },
         }}
       >
         {text || term}
       </Link>
-      <Box
+      <Text
+        as="span"
+        mx={[3, 3, 4]}
         display={show ? "block" : "none"}
         sx={{ position: "absolute", zIndex: 10, left: [0, 0] }}
         bg="lightgray"
@@ -88,13 +97,12 @@ export const GlossaryLink: React.FC<{ term: string; text?: string }> = ({
         mt={1}
         p={3}
         fontSize={1}
-        width="100%"
-        maxWidth="100vw"
+        width={["calc(100% - 32px)", "calc(100% - 32px)", "calc(100% - 64px)"]}
       >
         <b>{term}: </b>
         {getGlossary(term)}
-      </Box>
-    </Box>
+      </Text>
+    </Text>
   );
 };
 
