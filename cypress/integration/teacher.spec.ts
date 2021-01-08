@@ -63,6 +63,7 @@ describe("Test Teacher Startpage", () => {
     cy.visit("/user/delete");
     cy.get("button").contains("Konto löschen").click();
     cy.contains("erfolgreich");
+    cy.wait(100);
     // user should automatically be logged out
     cy.contains("Anmelden").click();
     cy.findByLabelText("Email:").type("teacher3@teachen.ch");

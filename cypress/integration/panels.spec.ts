@@ -7,7 +7,7 @@ describe("Test Live-Voting Panels", () => {
     cy.login();
     cy.visit("/teacher");
     cy.contains("Class 1").click();
-    cy.contains("Folgende Abstimmungen");
+    cy.contains("Abstimmungen Klasse");
     // add testinitiative
     cy.get("#ballots tr:contains('Testinitiative') [data-cy=off]").click();
     cy.get("#ballots tr:contains('Testinitiative') [data-cy=on]");
