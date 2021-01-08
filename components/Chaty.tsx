@@ -10,6 +10,9 @@ import {
 } from "components/ChatElements";
 import { Box, Button, Text, Card, Link } from "rebass";
 import { useEffect, useMemo, useRef, useState } from "react";
+import { getCardTitle } from "./Cards";
+import { useTeam } from "state/user";
+import { useRouter } from "next/router";
 
 const WAIT = 50;
 const MAX_WAIT = 5000;
@@ -30,6 +33,10 @@ export const Chaty: React.FC<{
 
   useEffect(() => {
     return () => clearTimeout(cancel);
+  }, []);
+
+  useEffect(() => {
+    if (document?.location?.hash === "#autostart") doChat();
   }, []);
 
   // scroll to bottom on every new message
@@ -133,12 +140,23 @@ const ShowInput: React.FC<{
   message?: TMessage;
   doChat: (line: number, input?: string) => void;
 }> = ({ message, doChat }) => {
+  const team = useTeam();
+  const router = useRouter();
+
   if (!message) return null;
 
   function selectOption(message: TMessage, o: string) {
     message.selected = o;
     doChat(message.line, o);
   }
+
+  function nextChaty(id: string) {
+    const url = team
+      ? `/team/${team.id}/cards/${id}#autostart`
+      : `/cards/${id}#autostart`;
+    void router.push(url);
+  }
+
   if (message.type === "BUTTONS" || message.type === "MENU") {
     const options = message.message?.split("|") || [];
     return (
@@ -153,6 +171,34 @@ const ShowInput: React.FC<{
             <Text fontSize={1}>{o}</Text>
           </Button>
         ))}
+      </InputBox>
+    );
+  }
+  if (message.type === "CHATY") {
+    return (
+      <InputBox>
+        <Text
+          pl={2}
+          flex={1}
+          verticalAlign="center"
+          color="black"
+          fontWeight="bold"
+        >
+          Weiter zu «{getCardTitle(String(message?.message))}»?
+        </Text>
+        <Button
+          mx={3}
+          width="150px"
+          onClick={() => selectOption(message, "Nein")}
+        >
+          Nein
+        </Button>
+        <Button
+          width="150px"
+          onClick={() => nextChaty(String(message?.message))}
+        >
+          Ja
+        </Button>
       </InputBox>
     );
   }
@@ -243,6 +289,8 @@ function specialMessage(type: string, rest: string): React.ReactNode {
       return options.join("|");
     }
     case "BUTTON":
+      return rest;
+    case "CHATY":
       return rest;
     default:
       console.error("Unkown special command: ", type);

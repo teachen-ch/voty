@@ -91,6 +91,7 @@ export const Message: React.FC<{ direction?: Direction }> = ({
 export const InputBox: React.FC = ({ children }) => (
   <Flex
     flexDirection="row"
+    alignItems="center"
     width="100%"
     bg="#eee"
     p={2}
@@ -126,9 +127,10 @@ const ParsedMessage: React.FC<{ model: TMessage }> = ({ model }) => {
 
 const Info: React.FC<{ model: TMessage }> = ({ model }) => (
   <Box
-    my={2}
+    mb={3}
     mx={4}
-    p={2}
+    py={0}
+    px={3}
     bg="lightgray"
     color="gray"
     fontSize={1}
