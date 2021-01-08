@@ -102,22 +102,23 @@ export default {
       th: {
         px: 2,
         py: 1,
-        borderBottom: "2px solid white",
+        borderBottom: "1px solid white",
       },
       tbody: {
         tr: {
           height: ["40px", "40px, 32px"],
           ":nth-of-type(odd)": {
-            backgroundColor: "#88969D",
+            // backgroundColor: "#88969D",
           },
           ":hover": {
-            // backgroundColor: "secondary",
-            opacity: "0.8",
+            backgroundColor: "secondary",
+            opacity: "1",
           },
         },
       },
       td: {
         px: [1, 2],
+        borderBottom: "1px solid gray",
       },
       h2: {
         variant: "text.heading",

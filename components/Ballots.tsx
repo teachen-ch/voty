@@ -1,6 +1,6 @@
 import { gql, useApolloClient } from "@apollo/client";
 
-import { Heading, Text, Link as A, Button, Card, Box } from "rebass";
+import { Heading, Text, Link as A, Button, Card } from "rebass";
 import {
   BallotWhereInput,
   useBallotsQuery,
@@ -29,6 +29,8 @@ import IconCal from "../public/images/icon_cal.svg";
 import { MouseEvent } from "react";
 import type { Nullable } from "simplytyped";
 import { Markdown } from "util/markdown";
+import { Table, TD, TR } from "./Table";
+import { Center } from "components/Learning";
 
 const BallotFields = gql`
   fragment BallotFields on Ballot {
@@ -339,63 +341,49 @@ export const SelectBallots: React.FC<{ team: TeamTeacherFieldsFragment }> = ({
 
   return (
     <>
-      <table id="ballots" style={{ borderTop: "2px solid white" }}>
-        {/* <thead>
-          <tr>
-            <th>Abstimmung</th>
-            <th>Deadline</th>
-            <th style={{ textAlign: "center" }}>Resultate</th>
-            <th style={{ width: "1%" }}>Ausgewählt</th>
-          </tr>
-        </thead>*/}
-        <tbody>
-          {ballots.map((ballot) => (
-            <tr key={ballot.id}>
-              <td style={{ maxWidth: "200px" }}>
-                <A onClick={() => detailBallot(ballot.id)}>{ballot.title}</A>
-              </td>
-              <td>
-                <Box
-                  variant="centered"
-                  sx={{ display: ["none", "none", "inline"] }}
-                >
-                  <IconDeadline
+      <Table id="ballots">
+        {ballots.map((ballot) => (
+          <TR key={ballot.id}>
+            <TD flex={1}>
+              <A onClick={() => detailBallot(ballot.id)}>{ballot.title}</A>
+            </TD>
+            <TD smHide>
+              <IconDeadline
+                height="20px"
+                alt="Deadline"
+                style={{ marginRight: 8, marginLeft: 14 }}
+              />
+              {formatDate(ballot.end)}
+            </TD>
+            <IconResults alt="Resultate" width="20px" height="20px" />
+            <TD>
+              <Center>
+                {find(ballotRuns, { ballot: { id: ballot.id } }) ? (
+                  <IconCheckOn
+                    alt="ausgewählt"
+                    data-cy="on"
+                    width="20px"
                     height="20px"
-                    alt="Deadline"
-                    style={{ marginRight: 8 }}
+                    onClick={(evt: any) =>
+                      toggleBallot(ballot.id, team.id, evt)
+                    }
                   />
-                  &nbsp;
-                  {formatDate(ballot.end)}
-                </Box>
-              </td>
-              <td>
-                <Box variant="centered">
-                  <IconResults alt="Resultate" width="20px" height="20px" />
-                </Box>
-              </td>
-              <td onClick={(evt) => toggleBallot(ballot.id, team.id, evt)}>
-                <Box variant="centered">
-                  {find(ballotRuns, { ballot: { id: ballot.id } }) ? (
-                    <IconCheckOn
-                      alt="ausgewählt"
-                      data-cy="on"
-                      width="20px"
-                      height="20px"
-                    />
-                  ) : (
-                    <IconCheckOff
-                      alt="abgewählt"
-                      data-cy="off"
-                      width="20px"
-                      height="20px"
-                    />
-                  )}
-                </Box>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+                ) : (
+                  <IconCheckOff
+                    alt="abgewählt"
+                    data-cy="off"
+                    width="20px"
+                    height="20px"
+                    onClick={(evt: any) =>
+                      toggleBallot(ballot.id, team.id, evt)
+                    }
+                  />
+                )}
+              </Center>
+            </TD>
+          </TR>
+        ))}
+      </Table>
     </>
   );
 };
