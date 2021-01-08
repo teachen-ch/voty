@@ -35,14 +35,10 @@ export default function StudentTest(): React.ReactElement {
         <CardList teamCards={String(user.team?.cards)} teamId={user.team.id} />
       </HideFeature>
 
-      <Heading>Abstimmungen</Heading>
-      <Text>
-        Hier kannst Du zu den aktuellen nationalen Abstimmungsvorlagen anonym
-        Deine Stimme abgeben.
-      </Text>
       <ShowBallots user={user} />
 
       <HideFeature id="activities">
+        <Heading as="h3">Aktivitäten in der Klasse</Heading>
         <Activities teamId={user.team.id} />
       </HideFeature>
     </LoggedInPage>
@@ -60,15 +56,24 @@ const ShowBallots: React.FC<{ user: SessionUser }> = ({ user }) => {
     return <Text>Laden...</Text>;
   }
 
+  if (ballotRuns?.length === 0) {
+    return null;
+  }
+
   return (
     <Box id="ballots">
-      {ballotRuns?.length ? (
-        ballotRuns.map(
-          (run) => run && <Ballot key={run.id} ballot={run.ballot} />
-        )
-      ) : (
-        <AllBallots />
-      )}
+      <Heading>Abstimmungen</Heading>
+      <Text>
+        Hier kannst Du zu den aktuellen nationalen Abstimmungsvorlagen anonym
+        Deine Stimme abgeben.
+      </Text>
+      {
+        ballotRuns?.length
+          ? ballotRuns.map(
+              (run) => run && <Ballot key={run.id} ballot={run.ballot} />
+            )
+          : null //<AllBallots/>
+      }
     </Box>
   );
 };

@@ -144,6 +144,11 @@ export default function TeacherTeamPage(): React.ReactElement {
         </Text>
         <SelectBallots team={team} />
 
+        <HideFeature id="activities">
+          <Heading as="h3">Aktivitäten in der Klasse</Heading>
+          <Activities teamId={team.id} />
+        </HideFeature>
+
         <Heading as="h2" mt="80px">
           Schülerinnen und Schüler
         </Heading>
@@ -232,9 +237,6 @@ export default function TeacherTeamPage(): React.ReactElement {
         </Text>
         {showInviteLink && <InviteLink team={team} />}
       </Text>
-      <HideFeature id="activities">
-        <Activities teamId={team.id} />
-      </HideFeature>
     </LoggedInPage>
   );
 }
