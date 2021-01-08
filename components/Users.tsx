@@ -8,7 +8,7 @@ import {
   Role,
 } from "graphql/types";
 import { ReactElement, useState } from "react";
-import { Box, Image, Button, Text } from "rebass";
+import { Link as A, Box, Image, Button, Text } from "rebass";
 import { Label, Input as RebassInput, Select } from "@rebass/forms";
 import { SessionUser, useSetUser } from "state/user";
 import { yup, ErrorBox } from "./Form";
@@ -16,7 +16,6 @@ import CheckLogin from "./CheckLogin";
 import { Formik, Form, Field, ErrorMessage, useField } from "formik";
 import { Grid } from "theme-ui";
 import { tr } from "util/translate";
-import { Table, TD, TR } from "./Table";
 
 export const GET_USERS = gql`
   query users($where: UserWhereInput) {
@@ -80,36 +79,44 @@ export function Users({
   }
 
   return (
-    <Table id="users">
-      {!users || users.length === 0 ? (
-        <TR>
-          <TD>Es wurden noch keine Schüler*innen hinzugefügt</TD>
-        </TR>
-      ) : (
-        users?.map((user: myUser) => (
-          <TR
-            key={user.id}
-            onClick={() => (document.location.href = `mailto:${user.email}`)}
-          >
-            <TD width="20%">{user.shortname}</TD>
-            <TD smHide flex={1}>
-              {user.email}
-            </TD>
-            <TD>
-              {user.emailVerified ? (
-                <Image src="/images/icon_user_ok.svg" alt="Bestätigt" />
-              ) : (
-                <Image
-                  src="/images/icon_user_nok.svg"
-                  alt="Nicht bestätigt"
-                  onClick={() => doDeleteUser(user.id)}
-                />
-              )}
-            </TD>
-          </TR>
-        ))
-      )}
-    </Table>
+    <table style={{ borderTop: "2px solid white" }}>
+      <tbody>
+        {!users || users.length === 0 ? (
+          <tr>
+            <td colSpan={3}>Es wurden noch keine Schüler*innen hinzugefügt</td>
+          </tr>
+        ) : (
+          users?.map((user: myUser) => (
+            <tr key={user.id}>
+              <td style={{ maxWidth: "200px" }}>
+                <A href={`mailto:${user.email}`}>{user.shortname}</A>
+              </td>
+              <td>
+                <A
+                  sx={{ display: ["none", "none", "inline"] }}
+                  href={`mailto:${user.email}`}
+                >
+                  {user.email}
+                </A>
+              </td>
+              <td>
+                <Box variant="centered">
+                  {user.emailVerified ? (
+                    <Image src="/images/icon_user_ok.svg" alt="Bestätigt" />
+                  ) : (
+                    <Image
+                      src="/images/icon_user_nok.svg"
+                      alt="Nicht bestätigt"
+                      onClick={() => doDeleteUser(user.id)}
+                    />
+                  )}
+                </Box>
+              </td>
+            </tr>
+          ))
+        )}
+      </tbody>
+    </table>
   );
 }
 

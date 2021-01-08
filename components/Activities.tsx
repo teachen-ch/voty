@@ -6,11 +6,10 @@ import {
   SortOrder,
   useActivitiesQuery,
 } from "graphql/types";
-import { Box } from "rebass";
+import { Box, Flex, Heading, Text } from "rebass";
 import { formatDate, formatTime, isToday } from "util/date";
 import { A } from "./Breadcrumb";
 import { Err, Loading } from "./Page";
-import { Table, TD, TR } from "./Table";
 
 export const ACTIVITIES = gql`
   query activities(
@@ -70,20 +69,32 @@ export const ActivitiesQuery: React.FC<{
   if (activitiesQuery.error) return <Err msg={activitiesQuery.error.message} />;
 
   return (
-    <Box fontSize={1} maxHeight={150} overflow="scroll">
-      <Table>
+    <Box textAlign="left">
+      <Heading as="h3">Aktivitäten</Heading>
+
+      <Box
+        fontSize={1}
+        maxHeight={150}
+        bg="darkgray"
+        overflow="scroll"
+        color="lightgray"
+        p={2}
+        sx={{ borderBottom: "2px solid white" }}
+      >
         {activities?.map((act) => {
           const link = getActivityLink(act, teamId);
           const text = getActivityText(act);
           return (
-            <TR key={String(act.time)}>
-              <TD width="90px">
+            <Flex key={String(act.time)} sx={{ fontSize: 16 }} mb={2}>
+              <Text width="65px" sx={{ flexShrink: 0 }}>
                 {isToday(act.time)
                   ? formatTime(act.time)
                   : formatDate(act.time)}
-              </TD>
-              <TD width="35px">→</TD>
-              <TD flex={1}>
+              </Text>
+              <Text width="30px" sx={{ flexShrink: 0 }}>
+                →
+              </Text>
+              <Text maxWidth="80%" lineHeight={1}>
                 {link ? (
                   <A href={link}>
                     {act.user.shortname} {text}
@@ -92,16 +103,22 @@ export const ActivitiesQuery: React.FC<{
                   `${act.user.shortname} ${text}`
                 )}
                 {act.summary ? `: ${act.summary}` : ""}
-              </TD>
-            </TR>
+              </Text>
+            </Flex>
           );
         })}
         {activities?.length == 0 ? (
-          <TR>
-            <TD>Noch keine Aktivitäten in der Klasse</TD>
-          </TR>
+          <tr
+            style={{
+              fontSize: 16,
+              height: 32,
+              background: "rgba(0,0,0,0)",
+            }}
+          >
+            <td>Noch keine Aktivitäten in der Klasse</td>
+          </tr>
         ) : null}
-      </Table>
+      </Box>
     </Box>
   );
 };
