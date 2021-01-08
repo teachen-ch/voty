@@ -11,7 +11,7 @@ declare module "rebass" {
     id?: string;
     fontWeight?: string;
     fontSize?: string | number | Array<string | number>;
-    // css?: InterpolationWithTheme<any>;
+    css?: InterpolationWithTheme<FlexProps>;
   }
   interface BoxProps {
     as?: React.ElementType;
@@ -20,22 +20,22 @@ declare module "rebass" {
     id?: string;
     fontWeight?: string;
     fontSize?: string | number | Array<string | number>;
-    // css?: InterpolationWithTheme<any>;
+    css?: InterpolationWithTheme<BoxProps>;
   }
   interface TextProps {
     as?: React.ElementType;
-    // css?: InterpolationWithTheme<any>;
+    css?: InterpolationWithTheme<TextProps>;
   }
   interface ButtonProps {
     as?: React.ElementType;
     textAlign?: string;
-    // css?: InterpolationWithTheme<any>;
+    css?: InterpolationWithTheme<ButtonProps>;
   }
   interface CardProps {
     as?: React.ElementType;
     className?: string;
     id?: string;
-    // css?: InterpolationWithTheme<any>;
+    css?: InterpolationWithTheme<CardProps>;
   }
 }
 
