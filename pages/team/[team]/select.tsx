@@ -45,10 +45,11 @@ export default function CardsPage(): React.ReactElement {
 
       <Flex mt={4}>
         <Input
-          onChange={debounce((evt) => setKeywords(evt.target.value), 400)}
+          onChange={debounce((evt) => setKeywords(evt.target.value), 300)}
           placeholder="Suche..."
+          flex={1}
         />
-        <Button ml={3} px={5} height="100%" mt="3px">
+        <Button ml={3} flex={0.3} mt={[0, 0, "4px"]} height="50px">
           Suche
         </Button>
       </Flex>
