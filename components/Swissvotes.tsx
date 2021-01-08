@@ -15,6 +15,7 @@ import { CircleBullet } from "components/Cards";
 import { debounce, find, remove } from "lodash";
 import { Authors, usePostWork, WorkItem, Works } from "./Works";
 import { Markdown } from "util/markdown";
+import { Table, TR, TD } from "components/Table";
 
 export const SEARCH_SWISSVOTES = gql`
   query swissvotes(
@@ -158,21 +159,19 @@ export const SwissvotesTopics: React.FC = () => {
           <Text mb={2} fontWeight="bold">
             Ausgewählte Abstimmungen:{" "}
           </Text>
-          <table style={{ borderTop: "2px solid white" }}>
-            <tbody>
-              {votes?.map(
-                (vote) =>
-                  vote && (
-                    <Vote
-                      key={vote.anr}
-                      vote={vote}
-                      votes={votes}
-                      setVotes={setVotes}
-                    />
-                  )
-              )}
-            </tbody>
-          </table>
+          <Table>
+            {votes?.map(
+              (vote) =>
+                vote && (
+                  <Vote
+                    key={vote.anr}
+                    vote={vote}
+                    votes={votes}
+                    setVotes={setVotes}
+                  />
+                )
+            )}
+          </Table>
           <Text mt={4}>
             <CircleBullet value={3} />
             Nun begründet, warum ihr diese Abstimmungen wichtig findet und was
@@ -212,13 +211,11 @@ const SwissvotesItem: WorkItem = ({ work }) => {
   return (
     <Box mb={4}>
       <Text my={2}>Thema: {work.data?.topic}</Text>
-      <table style={{ borderTop: "2px solid white" }}>
-        <tbody>
-          {(work.data?.votes as VoteType[]).map(
-            (vote) => vote && <Vote key={vote.anr} vote={vote} />
-          )}
-        </tbody>
-      </table>
+      <Table>
+        {(work.data?.votes as VoteType[]).map(
+          (vote) => vote && <Vote key={vote.anr} vote={vote} />
+        )}
+      </Table>
       <Text mt={3}>
         <Markdown>{work.data?.text}</Markdown>
       </Text>
@@ -278,21 +275,19 @@ export const VotesList: React.FC<{
     );
 
   return (
-    <table style={{ borderTop: "2px solid white" }}>
-      <tbody>
-        {swissvotes?.map(
-          (vote) =>
-            vote && (
-              <Vote
-                key={vote.anr}
-                vote={vote}
-                votes={votes}
-                setVotes={setVotes}
-              />
-            )
-        )}
-      </tbody>
-    </table>
+    <Table>
+      {swissvotes?.map(
+        (vote) =>
+          vote && (
+            <Vote
+              key={vote.anr}
+              vote={vote}
+              votes={votes}
+              setVotes={setVotes}
+            />
+          )
+      )}
+    </Table>
   );
 };
 
@@ -316,23 +311,27 @@ export const Vote: React.FC<{
   }
 
   return (
-    <tr style={{ fontSize: 16 }}>
+    <TR>
       {setVotes && (
-        <td onClick={() => doSelect(vote)}>
+        <TD fixed onClick={() => doSelect(vote)}>
           <Checkbox bg="white" checked={isSelected(vote)} color="secondary" />
-        </td>
+        </TD>
       )}
-      <td>{vote.datum && formatYear(vote.datum)}</td>
-      <td style={{ maxWidth: "500px" }}>
+      <TD fixed>{vote.datum && formatYear(vote.datum)}</TD>
+      <TD flexy>
         {vote.swissvoteslink && (
           <Link href={vote.swissvoteslink} target="_blank">
             {vote.titel_kurz_d}
           </Link>
         )}
-      </td>
-      <td style={{ maxWidth: "100px" }}>{getVoteType(vote.rechtsform)}</td>
-      <td>{getVoteResult(vote.annahme)}</td>
-    </tr>
+      </TD>
+      <TD fixed smHide>
+        {getVoteType(vote.rechtsform)}
+      </TD>
+      <TD fixed width="60px" textAlign="center">
+        {getVoteResult(vote.annahme)}
+      </TD>
+    </TR>
   );
 };
 

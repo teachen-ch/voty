@@ -1,4 +1,12 @@
-import { Flex, Image, ImageProps, Text, BoxProps, Box } from "rebass";
+import {
+  Flex,
+  FlexProps,
+  Image,
+  ImageProps,
+  BoxProps,
+  Text,
+  Box,
+} from "rebass";
 
 export const Table: React.FC<{
   id?: string;
@@ -8,26 +16,21 @@ export const Table: React.FC<{
     <Flex
       id={id}
       flexDirection="column"
+      fontSize={fontSize}
+      textAlign="left"
       sx={{ borderTop: "2px solid white", borderBottom: "2px solid white" }}
     >
-      <Text fontSize={fontSize}>{children}</Text>
+      {children}
     </Flex>
   );
 };
 
-export const TR: React.FC<{
-  onClick?: () => void;
-  onMouseOver?: () => void;
-  onMouseOut?: () => void;
-}> = ({ onClick, children, onMouseOver, onMouseOut }) => (
+export const TR: React.FC<FlexProps> = (props) => (
   <Flex
     flexDirection="row"
     justifyContent="space-between"
     alignItems="center"
     flexWrap="nowrap"
-    onClick={onClick}
-    onMouseOver={onMouseOver}
-    onMouseOut={onMouseOut}
     height="40px"
     sx={{
       borderBottom: "1px solid gray",
@@ -35,27 +38,36 @@ export const TR: React.FC<{
         bg: "secondary",
       },
     }}
+    {...props}
   >
-    {children}
+    {props.children}
   </Flex>
 );
 
-export const TD: React.FC<BoxProps & { smHide?: boolean }> = (props) => (
+export const TD: React.FC<
+  BoxProps & { smHide?: boolean; flexy?: boolean; fixed?: boolean }
+> = (props) => (
   <Box
     {...props}
     px={2}
-    display={props.smHide ? ["none", "none", "flex"] : "flex"}
+    display={props.smHide ? ["none", "none", "block"] : "block"}
     sx={{
-      flexShrink: 0,
-      alignItems: "center",
-      whiteSpace: "nowrap",
-      overflow: "hidden",
-      textOverflow: "ellipsis",
+      flexShrink: props.fixed ? 0 : 1,
+      flexGrow: props.flexy ? 1 : 0,
     }}
   >
-    {props.children}
+    <Text
+      sx={{
+        whiteSpace: "nowrap",
+        overflow: "hidden",
+        textOverflow: "ellipsis",
+      }}
+    >
+      {props.children}
+    </Text>
   </Box>
 );
 
-// @ts-ignore
-export const Icon: React.FC<ImageProps> = (props) => <Image {...props} />;
+export const TDIcon: React.FC<ImageProps> = (props) => (
+  <Image alignSelf="center" mx={2} sx={{ flexShrink: 0 }} {...props} />
+);

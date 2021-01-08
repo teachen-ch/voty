@@ -58,7 +58,7 @@ export const PosterList: React.FC<{ query: VotesQuery }> = ({ query }) => {
 
   return (
     <>
-      <Box sx={{ columnCount: 3, columnGap: "8px" }} mt={3}>
+      <Box sx={{ columnCount: [2, 2, 3], columnGap: "8px" }} mt={3}>
         {swissvotes?.map((vote) => {
           const posters: string[] = [];
           if (vote && vote.poster_ja) {

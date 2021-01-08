@@ -71,7 +71,12 @@ export const ActivitiesQuery: React.FC<{
   if (activitiesQuery.error) return <Err msg={activitiesQuery.error.message} />;
 
   return (
-    <Box fontSize={1} maxHeight={150} overflow="scroll">
+    <Box
+      fontSize={1}
+      maxHeight={150}
+      overflow="scroll"
+      sx={{ borderBottom: "2px solid white" }}
+    >
       <Table>
         {activities?.map((act) => {
           const link = getActivityLink(act, teamId);
@@ -83,7 +88,7 @@ export const ActivitiesQuery: React.FC<{
                   ? formatTime(act.time)
                   : formatDate(act.time)}
               </TD>
-              <TD flex={1}>
+              <TD flexy>
                 {link ? (
                   <A href={link}>
                     {act.user.shortname} {text}
