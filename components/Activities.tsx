@@ -64,6 +64,8 @@ export const ActivitiesQuery: React.FC<{
   }
   const activitiesQuery = useActivitiesQuery({
     variables: { where, orderBy: [{ time: SortOrder.Desc }], first },
+    fetchPolicy: "cache-and-network",
+    // pollInterval: 10000,
   });
   const activities = activitiesQuery.data?.activities;
   if (activitiesQuery.loading) return <Loading />;
