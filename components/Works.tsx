@@ -61,7 +61,12 @@ export const Works: React.FC<
     trigger?: number;
   }
 > = ({ where, items, list, trigger, card, ...props }) => {
-  where = where ?? {};
+  const team = useTeam();
+  if (!where) {
+    where = team
+      ? { teamId: { equals: team.id } }
+      : { visibility: { equals: Visibility.Public } };
+  }
   if (card) where.card = { equals: card };
   const worksQuery = useWorksQuery({
     variables: { where },
