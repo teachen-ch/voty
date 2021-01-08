@@ -6,7 +6,6 @@ import {
   SortOrder,
   useActivitiesQuery,
 } from "graphql/types";
-import { Box } from "rebass";
 import { formatDate, formatTime, isToday } from "util/date";
 import { A } from "./Breadcrumb";
 import { getCardMeta } from "./Cards";
@@ -71,43 +70,34 @@ export const ActivitiesQuery: React.FC<{
   if (activitiesQuery.error) return <Err msg={activitiesQuery.error.message} />;
 
   return (
-    <Box
-      fontSize={1}
-      maxHeight={150}
-      overflow="scroll"
-      sx={{ borderBottom: "2px solid white" }}
-    >
-      <Table>
-        {activities?.map((act) => {
-          const link = getActivityLink(act, teamId);
-          const text = getActivityText(act);
-          return (
-            <TR key={String(act.time)}>
-              <TD width="90px">
-                {isToday(act.time)
-                  ? formatTime(act.time)
-                  : formatDate(act.time)}
-              </TD>
-              <TD flexy>
-                {link ? (
-                  <A href={link}>
-                    {act.user.shortname} {text}
-                  </A>
-                ) : (
-                  `${act.user.shortname} ${text}`
-                )}
-                {act.summary ? `: ${act.summary}` : ""}
-              </TD>
-            </TR>
-          );
-        })}
-        {activities?.length == 0 ? (
-          <TR>
-            <TD>Noch keine Aktivitäten in der Klasse</TD>
+    <Table fontSize={1} maxHeight={145} overflow="scroll" overflowX="hidden">
+      {activities?.map((act) => {
+        const link = getActivityLink(act, teamId);
+        const text = getActivityText(act);
+        return (
+          <TR key={String(act.time)}>
+            <TD width="90px">
+              {isToday(act.time) ? formatTime(act.time) : formatDate(act.time)}
+            </TD>
+            <TD flexy>
+              {link ? (
+                <A href={link}>
+                  {act.user.shortname} {text}
+                </A>
+              ) : (
+                `${act.user.shortname} ${text}`
+              )}
+              {act.summary ? `: ${act.summary}` : ""}
+            </TD>
           </TR>
-        ) : null}
-      </Table>
-    </Box>
+        );
+      })}
+      {activities?.length == 0 ? (
+        <TR>
+          <TD>Noch keine Aktivitäten in der Klasse</TD>
+        </TR>
+      ) : null}
+    </Table>
   );
 };
 

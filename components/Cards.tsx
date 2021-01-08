@@ -216,9 +216,7 @@ export const CardListAdmin: React.FC<{
         const card = getCardMeta(id);
         return (
           <TR key={id} href={`/team/${teamId}/cards/${id}`}>
-            <TD flexy>
-              <A href={`/team/${teamId}/cards/${id}`}>{card?.title}</A>
-            </TD>
+            <TD flexy>{card?.title}</TD>
             <TDIcon src="/images/icon_watch.svg" mr={0} />
             <TD width="180px" smHide>
               {card?.duration}

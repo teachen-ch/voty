@@ -9,20 +9,22 @@ import {
   Box,
 } from "rebass";
 
-export const Table: React.FC<{
-  id?: string;
-  fontSize?: string | number | Array<number | string>;
-}> = ({ id, fontSize = [1, 1, 2], children }) => {
+export const Table: React.FC<BoxProps> = ({
+  id,
+  fontSize = [1, 1, 2],
+  children,
+  ...props
+}) => {
   return (
-    <Flex
+    <Box
       id={id}
-      flexDirection="column"
       fontSize={fontSize}
       textAlign="left"
       sx={{ borderTop: "2px solid white", borderBottom: "2px solid white" }}
+      {...props}
     >
       {children}
-    </Flex>
+    </Box>
   );
 };
 
