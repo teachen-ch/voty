@@ -6,10 +6,12 @@ import {
   SortOrder,
   useActivitiesQuery,
 } from "graphql/types";
-import { Box, Flex, Heading, Text } from "rebass";
+import { Box } from "rebass";
 import { formatDate, formatTime, isToday } from "util/date";
 import { A } from "./Breadcrumb";
+import { getCardMeta } from "./Cards";
 import { Err, Loading } from "./Page";
+import { Table, TD, TR } from "./Table";
 
 export const ACTIVITIES = gql`
   query activities(
@@ -69,32 +71,19 @@ export const ActivitiesQuery: React.FC<{
   if (activitiesQuery.error) return <Err msg={activitiesQuery.error.message} />;
 
   return (
-    <Box textAlign="left">
-      <Heading as="h3">Aktivitäten</Heading>
-
-      <Box
-        fontSize={1}
-        maxHeight={150}
-        bg="darkgray"
-        overflow="scroll"
-        color="lightgray"
-        p={2}
-        sx={{ borderBottom: "2px solid white" }}
-      >
+    <Box fontSize={1} maxHeight={150} overflow="scroll">
+      <Table>
         {activities?.map((act) => {
           const link = getActivityLink(act, teamId);
           const text = getActivityText(act);
           return (
-            <Flex key={String(act.time)} sx={{ fontSize: 16 }} mb={2}>
-              <Text width="65px" sx={{ flexShrink: 0 }}>
+            <TR key={String(act.time)}>
+              <TD width="90px">
                 {isToday(act.time)
                   ? formatTime(act.time)
                   : formatDate(act.time)}
-              </Text>
-              <Text width="30px" sx={{ flexShrink: 0 }}>
-                →
-              </Text>
-              <Text maxWidth="80%" lineHeight={1}>
+              </TD>
+              <TD flex={1}>
                 {link ? (
                   <A href={link}>
                     {act.user.shortname} {text}
@@ -103,22 +92,16 @@ export const ActivitiesQuery: React.FC<{
                   `${act.user.shortname} ${text}`
                 )}
                 {act.summary ? `: ${act.summary}` : ""}
-              </Text>
-            </Flex>
+              </TD>
+            </TR>
           );
         })}
         {activities?.length == 0 ? (
-          <tr
-            style={{
-              fontSize: 16,
-              height: 32,
-              background: "rgba(0,0,0,0)",
-            }}
-          >
-            <td>Noch keine Aktivitäten in der Klasse</td>
-          </tr>
+          <TR>
+            <TD>Noch keine Aktivitäten in der Klasse</TD>
+          </TR>
         ) : null}
-      </Box>
+      </Table>
     </Box>
   );
 };
@@ -139,8 +122,10 @@ export function getActivityText(
       return "hat Test durchgeführt";
     case ActivityType.Vote:
       return "hat abgestimmt";
-    case ActivityType.Work:
-      return `hat Arbeit zu «${act.card}» eingereicht`;
+    case ActivityType.Work: {
+      const meta = getCardMeta(String(act.card));
+      return `in «${meta?.title}»`;
+    }
     default:
       return "(unbekannte Aktion)";
   }

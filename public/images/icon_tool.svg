@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Icon Aufgaben Copy 3</title>
+    <defs>
+        <filter id="filter-1">
+            <feColorMatrix in="SourceGraphic" type="matrix" values="0 0 0 0 1.000000 0 0 0 0 1.000000 0 0 0 0 1.000000 0 0 0 1.000000 0"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="Lehrer-" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g id="DT-Detailansicht-Schulklasse-Module" transform="translate(-1041.000000, -761.000000)">
+            <g id="Card-Lerninhalte" transform="translate(320.000000, 383.000000)">
+                <g id="Icon-Aufgaben-Copy-3" transform="translate(32.000000, 287.000000)" filter="url(#filter-1)">
+                    <g transform="translate(689.000000, 91.000000)">
+                        <polygon id="Path" stroke="#000000" stroke-width="1.5" points="5.251 12.749 9.751 12.749 9.751 17.249 5.251 17.249"></polygon>
+                        <polygon id="Path" stroke="#000000" stroke-width="1.5" points="8.251 5.249 14.251 5.249 14.251 9.749 8.251 9.749"></polygon>
+                        <path d="M14.251,17.249 C13.4225729,17.249 12.751,16.5774271 12.751,15.749 L12.751,14.249 C12.751,13.4205729 13.4225729,12.749 14.251,12.749 L15.751,12.749 C16.5794271,12.749 17.251,13.4205729 17.251,14.249" id="Path" stroke="#000000" stroke-width="1.5"></path>
+                        <path d="M18.28,22.743 L15.751,23.249 L16.257,20.72 L20.809,16.168 C21.0772044,15.8996166 21.4410751,15.7488253 21.8205,15.7488253 C22.1999249,15.7488253 22.5637956,15.8996166 22.832,16.168 L22.832,16.168 C23.1003834,16.4362044 23.2511747,16.8000751 23.2511747,17.1795 C23.2511747,17.5589249 23.1003834,17.9227956 22.832,18.191 L18.28,22.743 Z" id="Path" stroke="#000000" stroke-width="1.5"></path>
+                        <path d="M12.751,23.2489998 L2.251,23.2489998 C1.42257288,23.2489998 0.751,22.5774271 0.751,21.7489998 L0.751,2.24899976 C0.751,1.42057288 1.42257288,0.748999759 2.251,0.748999759 L17.251,0.748999759 C17.6425438,0.748999759 18.0186547,0.901663066 18.299,1.175 L21.299,4.058 C21.5882438,4.34045955 21.7512234,4.72771627 21.751,5.132 L21.751,12.7489998" id="Path" stroke="#000000" stroke-width="1.5"></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

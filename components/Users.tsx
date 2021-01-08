@@ -79,7 +79,11 @@ export function Users({
   }
 
   return (
-    <table style={{ borderTop: "2px solid white" }}>
+    <table
+      style={{
+        borderTop: "2px solid white",
+      }}
+    >
       <tbody>
         {!users || users.length === 0 ? (
           <tr>

@@ -1,4 +1,4 @@
-import { Flex, Image, ImageProps, Text, BoxProps } from "rebass";
+import { Flex, Image, ImageProps, Text, BoxProps, Box } from "rebass";
 
 export const Table: React.FC<{
   id?: string;
@@ -15,43 +15,46 @@ export const Table: React.FC<{
   );
 };
 
-export const TR: React.FC<{ onClick?: () => void }> = ({
-  onClick,
-  children,
-}) => (
+export const TR: React.FC<{
+  onClick?: () => void;
+  onMouseOver?: () => void;
+  onMouseOut?: () => void;
+}> = ({ onClick, children, onMouseOver, onMouseOut }) => (
   <Flex
     flexDirection="row"
     justifyContent="space-between"
     alignItems="center"
     flexWrap="nowrap"
     onClick={onClick}
+    onMouseOver={onMouseOver}
+    onMouseOut={onMouseOut}
     height="40px"
-    sx={{ borderBottom: "1px solid gray" }}
+    sx={{
+      borderBottom: "1px solid gray",
+      ":hover": {
+        bg: "secondary",
+      },
+    }}
   >
     {children}
   </Flex>
 );
 
 export const TD: React.FC<BoxProps & { smHide?: boolean }> = (props) => (
-  <Flex
+  <Box
     {...props}
     px={2}
     display={props.smHide ? ["none", "none", "flex"] : "flex"}
     sx={{
       flexShrink: 0,
+      alignItems: "center",
+      whiteSpace: "nowrap",
+      overflow: "hidden",
+      textOverflow: "ellipsis",
     }}
-    alignItems="center"
   >
-    <Text
-      sx={{
-        whiteSpace: "nowrap",
-        overflow: "hidden",
-        textOverflow: "ellipsis",
-      }}
-    >
-      {props.children}
-    </Text>
-  </Flex>
+    {props.children}
+  </Box>
 );
 
 // @ts-ignore

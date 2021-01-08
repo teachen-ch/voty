@@ -23,7 +23,7 @@ import { Nullable } from "simplytyped";
 import { Breadcrumb, A } from "components/Breadcrumb";
 import { Spinner } from "theme-ui";
 import PanelPage from "./panel";
-import { CardList, CircleBullet } from "components/Cards";
+import { CardList } from "components/Cards";
 import { Activities } from "components/Activities";
 // import { usePolling } from "util/hooks";
 
@@ -125,27 +125,39 @@ export default function TeacherTeamPage(): React.ReactElement {
       </Breadcrumb>
       <Text textAlign="left">
         <HideFeature id="cards">
-          <Heading as="h3">Lerninhalte</Heading>
+          <Heading as="h3">Lerninhalte Klasse {team.name}</Heading>
+          <Text mb={3}>
+            Hier siehst du die Lerninhalte, welche bereits ausgewählt sind und
+            deinen Schüler*innen auf der Klassenseite angezeigt werden.
+          </Text>
           <CardList teamCards={team.cards} teamId={team.id} />
-          <Box pl={4} mt={3}>
-            <A onClick={() => router.push(`/team/${team.id}/select`)}>
-              <CircleBullet value="+" />
-              Lerninhalte hinzufügen
-            </A>
-          </Box>
+          <Button
+            mt={3}
+            onClick={() => router.push(`/team/${team.id}/select`)}
+            width="100%"
+          >
+            Lerninhalte hinzufügen
+          </Button>
         </HideFeature>
-        <Heading as="h3">
-          Folgende Abstimmungen sind für die Klasse verfügbar
+        <Heading as="h3" mt={6}>
+          Abstimmungen Klasse {team.name}
         </Heading>
         <Text fontSize={2} mb={3}>
           Wähle hier aus der Liste die Abstimmungen aus, welche Deinen
-          Schüler*innen gezeigt werden. Hier kannst Du später auch die
-          Abstimmungsresultate Deiner Klasse zeigen.
+          Schüler*innen auf der Klassenseite angezeigt werden sollen. Nach der
+          Abstimmung kannst Du hier auch die Abstimmungsresultate Deiner Klasse
+          zeigen.
         </Text>
         <SelectBallots team={team} />
 
         <HideFeature id="activities">
-          <Heading as="h3">Aktivitäten in der Klasse</Heading>
+          <Heading as="h3" mt={6}>
+            Aktivitäten Klasse {team.name}
+          </Heading>
+          <Text mb={3} fontSize={2}>
+            Hier siehst du alle Aktivitäten, Uploads und Diskussionen der Klasse
+            {team.name}.
+          </Text>
           <Activities teamId={team.id} />
         </HideFeature>
 
@@ -168,23 +180,27 @@ export default function TeacherTeamPage(): React.ReactElement {
             <Users users={team.members} />
           </>
         )}
+
+        <Text mt={4} fontSize={2} fontWeight="semi">
+          {team.members.length ? "Weitere" : ""} Schüler*innen einladen:
+        </Text>
         <Textarea
           mt={3}
           value={importEmails}
-          bg="white"
-          sx={{ border: "white" }}
+          bg="#B1BDC3"
+          sx={{ border: "white", "::placeholder": { color: "white" } }}
           onChange={checkEmails}
           fontSize={1}
           height="auto"
-          rows={3}
+          rows={2}
           placeholder="name1@schule.ch, name2@schule; name3.schule.ch; ..."
         />
         <Button
-          my={3}
+          my={2}
           onClick={() => inviteStudents(team)}
           disabled={!matches || inviteQuery.loading}
           width="100%"
-          bg={!matches || inviteQuery.loading ? "muted" : "secondary"}
+          bg="secondary"
         >
           {inviteQuery.loading ? (
             <Text>

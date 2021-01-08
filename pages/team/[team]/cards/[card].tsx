@@ -29,6 +29,8 @@ export default function CardPage(): React.ReactElement {
       <>
         <A href="/teacher/">Meine Klassen</A> {" / "}
         <A href={`/team/${team.id}/admin`}>{team.name}</A>
+        {" / "}
+        <A href={`/team/${team.id}/select`}>Lerninhalte</A>
       </>
     );
   } else if (user?.role === Role.Student) {
@@ -45,7 +47,7 @@ export default function CardPage(): React.ReactElement {
         <Breadcrumb>
           <A href="/">Start</A>
           {usercrumb}
-          <b>Lerninhalte</b>
+          <b>{meta.title}</b>
         </Breadcrumb>
 
         <Card id={key} />

@@ -5,13 +5,14 @@ import {
   useCardsQuery,
   useSetCardsMutation,
 } from "graphql/types";
-import { Flex, Box, Text, Heading, Button } from "rebass";
+import { Flex, Box, Image, Text, Heading, Button } from "rebass";
 import { Loading } from "components/Page";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { without } from "lodash";
 import { A } from "./Breadcrumb";
 import DraggableList from "react-draggable-list";
+import { Table, TD, TR } from "./Table";
 
 export const GET_CARDS = gql`
   query cards($keywords: String, $age: String, $type: String) {
@@ -108,7 +109,7 @@ export const CardItem: React.FC<{
       ? without(cardsList, id).join(" ")
       : cardsList.concat(id).join(" ");
     await doSetCards({ variables: { cards, teamId } });
-    window.scrollBy(0, selected ? -53 : 53);
+    window.scrollBy(0, selected ? -40 : 40);
   }
   const link = teamId ? `/team/${teamId}/cards/${id}` : `/cards/${id}`;
   return (
@@ -153,7 +154,11 @@ export const CardItem: React.FC<{
               bg={selected ? "green" : "secondary"}
               onClick={doSelect}
             >
-              {selected ? "✔" : "+"}
+              {selected ? (
+                <img src="/images/icon_check.svg" />
+              ) : (
+                <img src="/images/icon_add.svg" />
+              )}
             </Button>
           ) : null}
         </Flex>
@@ -170,18 +175,23 @@ export const CardList: React.FC<{
     return <Text>Noch keine Inhalte ausgewählt</Text>;
   }
   return (
-    <>
-      {teamCards.split(" ").map((id, ix) => {
+    <Table id="cards">
+      {teamCards.split(" ").map((id) => {
+        const card = getCardMeta(id);
         return (
-          <Flex key={id} my={3} ml={4} alignItems="center">
-            <CircleBullet value={ix + 1} />
-            <Text>
-              <A href={`/team/${teamId}/cards/${id}`}>{getCardTitle(id)}</A>
-            </Text>
-          </Flex>
+          <TR key={id}>
+            <TD flex={1}>
+              <A href={`/team/${teamId}/cards/${id}`}>{card?.title}</A>
+            </TD>
+            <TD width="200px" smHide>
+              <img src="/images/icon_watch.svg" />
+              &nbsp; {card?.duration}
+            </TD>
+            <TD>{getCardTypeIcon(card?.type)}</TD>
+          </TR>
         );
       })}
-    </>
+    </Table>
   );
 };
 
@@ -190,6 +200,8 @@ interface CardAdminType {
   ix: number;
   title: string;
   link: string;
+  type?: string | null;
+  duration?: string | null;
 }
 
 interface CardAdminProps {
@@ -221,11 +233,14 @@ export const CardListAdmin: React.FC<{
 
   function generateList(str: string) {
     const cards = str.split(" ").map((id, ix) => {
+      const card = getCardMeta(id);
       return {
         id,
         ix: ix + 1,
         title: getCardTitle(id),
         link: `/team/${teamId}/cards/${id}`,
+        type: card?.type,
+        duration: card?.duration,
       };
     });
     setCards(cards);
@@ -238,14 +253,16 @@ export const CardListAdmin: React.FC<{
   }
 
   return (
-    <DraggableList<CardAdminType, (id: string) => void, CardAdminItem>
-      list={cards}
-      itemKey="id"
-      padding={0}
-      onMoveEnd={onMoveEnd}
-      template={CardAdminItem}
-      commonProps={doDelete}
-    />
+    <Table>
+      <DraggableList<CardAdminType, (id: string) => void, CardAdminItem>
+        list={cards}
+        itemKey="id"
+        padding={0}
+        onMoveEnd={onMoveEnd}
+        template={CardAdminItem}
+        commonProps={doDelete}
+      />
+    </Table>
   );
 };
 
@@ -255,33 +272,30 @@ class CardAdminItem extends React.Component<CardAdminProps> {
   };
 
   render() {
-    const { item, dragHandleProps, itemSelected } = this.props;
+    const { item, dragHandleProps } = this.props;
     return (
-      <Flex
-        py={2}
-        ml={4}
+      <TR
         onMouseOver={() => this.setState({ over: true })}
         onMouseOut={() => this.setState({ over: false })}
       >
-        <Box {...dragHandleProps} sx={{ cursor: "move" }}>
-          <CircleBullet
-            value={this.state.over || itemSelected > 0.8 ? "↕" : item.ix}
-          />
-        </Box>
-        <Text>
-          <A href={item.link}>{item.title}</A>{" "}
-          <Text
-            display="inline"
-            onClick={() => this.props.commonProps(item.id)}
-            fontSize={1}
-            color="lightgray"
-            ml={2}
+        <TD {...dragHandleProps} sx={{ cursor: "move" }}>
+          <Image src="/images/icon_move.svg" />
+        </TD>
+        <TD flex={1}>
+          <A href={item.link}>{item.title}</A>
+        </TD>
+        <TD width="200px" smHide>
+          <img src="/images/icon_watch.svg" />
+          &nbsp; {item?.duration}
+        </TD>
+        <TD>
+          <Image
+            src="/images/icon_trash.svg"
             sx={{ cursor: "pointer" }}
-          >
-            [x]
-          </Text>
-        </Text>
-      </Flex>
+            onClick={() => this.props.commonProps(item.id)}
+          />
+        </TD>
+      </TR>
     );
   }
 }
@@ -332,4 +346,17 @@ export function getCardMeta(id: string): CardType | undefined {
 export function getCardTitle(id: string): string {
   const meta = getCardMeta(id);
   return meta ? String(meta["title"]) : "";
+}
+
+export function getCardTypeIcon(type?: string | null): React.ReactElement {
+  switch (type) {
+    case "tool":
+      return <img src="/images/icon_tool.svg" />;
+    case "video":
+      return <img src="/images/icon_video.svg" />;
+    case "chaty":
+      return <img src="/images/icon_chaty.svg" />;
+    default:
+      return <img src="/images/icon_tool.svg" />;
+  }
 }
