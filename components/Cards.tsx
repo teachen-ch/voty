@@ -12,7 +12,7 @@ import React, { useEffect, useState } from "react";
 import { without } from "lodash";
 import { A } from "./Breadcrumb";
 import DraggableList from "react-draggable-list";
-import { Table, TD, TR } from "./Table";
+import { OneRowTable, Table, TD, TDIcon, TR } from "./Table";
 
 export const GET_CARDS = gql`
   query cards($keywords: String, $age: String, $type: String) {
@@ -110,7 +110,7 @@ export const CardItem: React.FC<{
       ? without(cardsList, id).join(" ")
       : cardsList.concat(id).join(" ");
     await doSetCards({ variables: { cards, teamId } });
-    window.scrollBy(0, selected ? -40 : 40);
+    if (cards.split(" ").length > 1) window.scrollBy(0, selected ? -40 : 40);
   }
   const link = teamId ? `/team/${teamId}/cards/${id}` : `/cards/${id}`;
   return (
@@ -174,7 +174,9 @@ export const CardStudentList: React.FC<{
 }> = ({ teamCards, teamId }) => {
   const router = useRouter();
   if (!teamCards) {
-    return <Text>Deine Lehrperson hat noch keine Inhalte ausgewählt</Text>;
+    return (
+      <OneRowTable text="Deine Lehrperson hat noch keine Inhalte ausgewählt" />
+    );
   }
   return (
     <Box id="cards">
@@ -201,29 +203,27 @@ export const CardStudentList: React.FC<{
   );
 };
 
-export const CardList: React.FC<{
+export const CardListAdmin: React.FC<{
   teamCards: string;
   teamId: string;
 }> = ({ teamCards, teamId }) => {
   if (!teamCards) {
-    return <Text>Noch keine Inhalte ausgewählt</Text>;
+    return <OneRowTable text="Noch keine Inhalte ausgewählt" />;
   }
   return (
     <Table id="cards">
       {teamCards.split(" ").map((id) => {
         const card = getCardMeta(id);
         return (
-          <TR key={id}>
-            <TD flex={1}>
+          <TR key={id} href={`/team/${teamId}/cards/${id}`}>
+            <TD flexy>
               <A href={`/team/${teamId}/cards/${id}`}>{card?.title}</A>
             </TD>
-            <TD width="200px" smHide>
-              <img src="/images/icon_watch.svg" />
-              &nbsp; {card?.duration}
+            <TDIcon src="/images/icon_watch.svg" mr={0} />
+            <TD width="180px" smHide>
+              {card?.duration}
             </TD>
-            <TD>
-              <img src={getCardTypeIcon(card?.type)} />
-            </TD>
+            <TDIcon src={getCardTypeIcon(card?.type)} />
           </TR>
         );
       })}
@@ -247,12 +247,12 @@ interface CardAdminProps {
   commonProps: (id: string) => void;
 }
 
-export const CardListAdmin: React.FC<{
+export const CardListSelect: React.FC<{
   teamCards: string;
   teamId: string;
 }> = ({ teamCards, teamId }) => {
   if (!teamCards) {
-    return <Text>Noch keine Inhalte ausgewählt</Text>;
+    return <OneRowTable text="Noch keine Inhalte ausgewählt" />;
   }
   const [cards, setCards] = useState<readonly CardAdminType[]>([]);
   const [doSetCards] = useSetCardsMutation();
@@ -314,23 +314,24 @@ class CardAdminItem extends React.Component<CardAdminProps> {
         onMouseOver={() => this.setState({ over: true })}
         onMouseOut={() => this.setState({ over: false })}
       >
-        <TD {...dragHandleProps} sx={{ cursor: "move" }}>
-          <Image src="/images/icon_move.svg" />
-        </TD>
-        <TD flex={1}>
+        <TDIcon
+          {...dragHandleProps}
+          sx={{ cursor: "move" }}
+          src="/images/icon_move.svg"
+        />
+        <TD flexy>
           <A href={item.link}>{item.title}</A>
         </TD>
-        <TD width="200px" smHide>
-          <img src="/images/icon_watch.svg" />
-          &nbsp; {item?.duration}
+        <TDIcon src="/images/icon_watch.svg" mr={0} />
+
+        <TD width="180px" smHide>
+          {item?.duration}
         </TD>
-        <TD>
-          <Image
-            src="/images/icon_trash.svg"
-            sx={{ cursor: "pointer" }}
-            onClick={() => this.props.commonProps(item.id)}
-          />
-        </TD>
+        <TDIcon
+          src="/images/icon_trash.svg"
+          sx={{ cursor: "pointer" }}
+          onClick={() => this.props.commonProps(item.id)}
+        />
       </TR>
     );
   }

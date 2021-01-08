@@ -1,3 +1,4 @@
+import { useRouter } from "next/router";
 import {
   Flex,
   FlexProps,
@@ -25,35 +26,43 @@ export const Table: React.FC<{
   );
 };
 
-export const TR: React.FC<FlexProps> = (props) => (
-  <Flex
-    flexDirection="row"
-    justifyContent="space-between"
-    alignItems="center"
-    flexWrap="nowrap"
-    height="40px"
-    sx={{
-      borderBottom: "1px solid gray",
-      ":hover": {
-        bg: "secondary",
-      },
-    }}
-    {...props}
-  >
-    {props.children}
-  </Flex>
-);
+export const TR: React.FC<FlexProps & { href?: string }> = ({
+  href,
+  ...props
+}) => {
+  const router = useRouter();
+  return (
+    <Flex
+      flexDirection="row"
+      justifyContent="space-between"
+      alignItems="center"
+      flexWrap="nowrap"
+      height="40px"
+      onClick={href ? () => router.push(href) : undefined}
+      sx={{
+        borderBottom: "1px solid gray",
+        ":hover": {
+          bg: "secondary",
+        },
+        cursor: href ? "pointer" : "inherit",
+      }}
+      {...props}
+    >
+      {props.children}
+    </Flex>
+  );
+};
 
 export const TD: React.FC<
   BoxProps & { smHide?: boolean; flexy?: boolean; fixed?: boolean }
-> = (props) => (
+> = ({ flexy, smHide, fixed, children, ...props }) => (
   <Box
     {...props}
     px={2}
-    display={props.smHide ? ["none", "none", "block"] : "block"}
+    display={smHide ? ["none", "none", "block"] : "block"}
     sx={{
-      flexShrink: props.fixed ? 0 : 1,
-      flexGrow: props.flexy ? 1 : 0,
+      flexShrink: fixed ? 0 : 1,
+      flexGrow: flexy ? 1 : 0,
     }}
   >
     <Text
@@ -63,11 +72,22 @@ export const TD: React.FC<
         textOverflow: "ellipsis",
       }}
     >
-      {props.children}
+      {children}
     </Text>
   </Box>
 );
 
 export const TDIcon: React.FC<ImageProps> = (props) => (
   <Image alignSelf="center" mx={2} sx={{ flexShrink: 0 }} {...props} />
+);
+
+export const OneRowTable: React.FC<{ text?: string }> = ({
+  text,
+  children,
+}) => (
+  <Table>
+    <TR>
+      <TD>{text ? text : children}</TD>
+    </TR>
+  </Table>
 );

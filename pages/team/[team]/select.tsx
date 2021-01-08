@@ -1,5 +1,5 @@
 import { LoggedInPage } from "components/Page";
-import { Cards, CardListAdmin } from "components/Cards";
+import { Cards, CardListSelect } from "components/Cards";
 import { Input } from "@rebass/forms";
 import { Flex, Button, Text, Heading } from "rebass";
 import React, { useState } from "react";
@@ -41,7 +41,7 @@ export default function CardsPage(): React.ReactElement {
 
       <Heading>Folgende Lerninhalte sind ausgewählt</Heading>
 
-      <CardListAdmin teamCards={team.cards} teamId={team.id} />
+      <CardListSelect teamCards={team.cards} teamId={team.id} />
 
       <Flex mt={4}>
         <Input

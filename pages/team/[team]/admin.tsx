@@ -23,7 +23,7 @@ import { Nullable } from "simplytyped";
 import { Breadcrumb, A } from "components/Breadcrumb";
 import { Spinner } from "theme-ui";
 import PanelPage from "./panel";
-import { CardList } from "components/Cards";
+import { CardListAdmin } from "components/Cards";
 import { Activities } from "components/Activities";
 // import { usePolling } from "util/hooks";
 
@@ -130,7 +130,7 @@ export default function TeacherTeamPage(): React.ReactElement {
             Hier siehst du die Lerninhalte, welche bereits ausgewählt sind und
             deinen Schüler*innen auf der Klassenseite angezeigt werden.
           </Text>
-          <CardList teamCards={team.cards} teamId={team.id} />
+          <CardListAdmin teamCards={team.cards} teamId={team.id} />
           <Button
             mt={3}
             onClick={() => router.push(`/team/${team.id}/select`)}

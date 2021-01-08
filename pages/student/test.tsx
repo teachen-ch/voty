@@ -15,6 +15,7 @@ import { Markdown } from "util/markdown";
 import { VotyNow, VotySuccess } from "pages/team/[team]/ballots/[ballot]";
 import { HideFeature } from "components/HideFeature";
 import { Activities } from "components/Activities";
+import { OneRowTable } from "components/Table";
 
 export default function StudentTest(): React.ReactElement {
   const user = useUser();
@@ -44,6 +45,7 @@ export default function StudentTest(): React.ReactElement {
         <Heading as="h3">Aktivitäten in der Klasse</Heading>
         <Activities teamId={user.team.id} />
       </HideFeature>
+      <Box mb={4} />
     </LoggedInPage>
   );
 }
@@ -94,7 +96,7 @@ export const AllBallots: React.FC = () => {
   }
 
   if (!ballotsQuery.data?.ballots?.length) {
-    return <Text>Noch keine Abstimmungen erfasst</Text>;
+    return <OneRowTable text="Noch keine Abstimmungen erfasst" />;
   }
 
   return (
