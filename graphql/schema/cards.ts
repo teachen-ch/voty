@@ -11,6 +11,7 @@ export const Card = objectType({
     t.string("age");
     t.string("keywords");
     t.string("type");
+    t.string("icon");
     t.string("url");
     t.string("source");
     t.string("content");

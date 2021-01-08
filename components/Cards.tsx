@@ -23,6 +23,7 @@ export const GET_CARDS = gql`
       duration
       keywords
       type
+      icon
       url
       source
       content
@@ -167,6 +168,39 @@ export const CardItem: React.FC<{
   );
 };
 
+export const CardStudentList: React.FC<{
+  teamCards: string;
+  teamId: string;
+}> = ({ teamCards, teamId }) => {
+  const router = useRouter();
+  if (!teamCards) {
+    return <Text>Deine Lehrperson hat noch keine Inhalte ausgewählt</Text>;
+  }
+  return (
+    <Box id="cards">
+      {teamCards.split(" ").map((id) => {
+        const card = getCardMeta(id);
+        return (
+          <Flex
+            key={id}
+            onClick={() => router.push(`/team/${teamId}/cards/${id}`)}
+            alignItems="center"
+            bg="secondary"
+            sx={{ cursor: "pointer" }}
+            mb={4}
+            px={3}
+            height={84}
+            fontWeight="semi"
+          >
+            <Image src={getCardIcon(card?.icon, card?.type)} mr={3} />
+            {card?.title}
+          </Flex>
+        );
+      })}
+    </Box>
+  );
+};
+
 export const CardList: React.FC<{
   teamCards: string;
   teamId: string;
@@ -187,7 +221,9 @@ export const CardList: React.FC<{
               <img src="/images/icon_watch.svg" />
               &nbsp; {card?.duration}
             </TD>
-            <TD>{getCardTypeIcon(card?.type)}</TD>
+            <TD>
+              <img src={getCardTypeIcon(card?.type)} />
+            </TD>
           </TR>
         );
       })}
@@ -348,15 +384,22 @@ export function getCardTitle(id: string): string {
   return meta ? String(meta["title"]) : "";
 }
 
-export function getCardTypeIcon(type?: string | null): React.ReactElement {
+export function getCardIcon(
+  icon?: string | null,
+  type?: string | null
+): string {
+  return icon || `/images/card_${type || "generic"}.svg`;
+}
+
+export function getCardTypeIcon(type?: string | null): string {
   switch (type) {
     case "tool":
-      return <img src="/images/icon_tool.svg" />;
+      return "/images/icon_tool.svg";
     case "video":
-      return <img src="/images/icon_video.svg" />;
+      return "/images/icon_video.svg";
     case "chaty":
-      return <img src="/images/icon_chaty.svg" />;
+      return "/images/icon_chaty.svg";
     default:
-      return <img src="/images/icon_tool.svg" />;
+      return "/images/icon_tool.svg";
   }
 }

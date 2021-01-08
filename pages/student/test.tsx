@@ -4,7 +4,7 @@ import { ReadMore } from "components/ReadMore";
 import { useUser, SessionUser } from "state/user";
 import { Breadcrumb, A } from "components/Breadcrumb";
 import React, { useState } from "react";
-import { CardList } from "components/Cards";
+import { CardStudentList } from "components/Cards";
 import {
   BallotScope,
   BallotFieldsFragment,
@@ -32,7 +32,10 @@ export default function StudentTest(): React.ReactElement {
 
       <HideFeature id="cards">
         <Heading>Lerninhalte</Heading>
-        <CardList teamCards={String(user.team?.cards)} teamId={user.team.id} />
+        <CardStudentList
+          teamCards={String(user.team?.cards)}
+          teamId={user.team.id}
+        />
       </HideFeature>
 
       <ShowBallots user={user} />

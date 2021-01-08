@@ -8102,6 +8102,7 @@ export interface NexusGenObjects {
     description?: string | null; // String
     discussion?: boolean | null; // Boolean
     duration?: string | null; // String
+    icon?: string | null; // String
     id?: string | null; // String
     keywords?: string | null; // String
     source?: string | null; // String
@@ -8284,6 +8285,7 @@ export interface NexusGenFieldTypes {
     description: string | null; // String
     discussion: boolean | null; // Boolean
     duration: string | null; // String
+    icon: string | null; // String
     id: string | null; // String
     keywords: string | null; // String
     source: string | null; // String
@@ -8530,6 +8532,7 @@ export interface NexusGenFieldTypeNames {
     description: "String";
     discussion: "Boolean";
     duration: "String";
+    icon: "String";
     id: "String";
     keywords: "String";
     source: "String";

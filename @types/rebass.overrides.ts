@@ -9,29 +9,33 @@ declare module "rebass" {
     textAlign?: string | string[];
     className?: string;
     id?: string;
-    css?: InterpolationWithTheme<any>;
+    fontWeight?: string;
+    fontSize?: string | number | Array<string | number>;
+    // css?: InterpolationWithTheme<any>;
   }
   interface BoxProps {
     as?: React.ElementType;
     textAlign?: string | string[];
     className?: string;
     id?: string;
-    css?: InterpolationWithTheme<any>;
+    fontWeight?: string;
+    fontSize?: string | number | Array<string | number>;
+    // css?: InterpolationWithTheme<any>;
   }
   interface TextProps {
     as?: React.ElementType;
-    css?: InterpolationWithTheme<any>;
+    // css?: InterpolationWithTheme<any>;
   }
   interface ButtonProps {
     as?: React.ElementType;
     textAlign?: string;
-    css?: InterpolationWithTheme<any>;
+    // css?: InterpolationWithTheme<any>;
   }
   interface CardProps {
     as?: React.ElementType;
     className?: string;
     id?: string;
-    css?: InterpolationWithTheme<any>;
+    // css?: InterpolationWithTheme<any>;
   }
 }
 

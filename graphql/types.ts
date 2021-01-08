@@ -2055,6 +2055,7 @@ export type Card = {
   description?: Maybe<Scalars['String']>;
   discussion?: Maybe<Scalars['Boolean']>;
   duration?: Maybe<Scalars['String']>;
+  icon?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['String']>;
   keywords?: Maybe<Scalars['String']>;
   source?: Maybe<Scalars['String']>;
@@ -7879,7 +7880,7 @@ export type CardsQuery = (
   { __typename?: 'Query' }
   & { cards?: Maybe<Array<Maybe<(
     { __typename?: 'Card' }
-    & Pick<Card, 'id' | 'title' | 'description' | 'duration' | 'keywords' | 'type' | 'url' | 'source' | 'content' | 'age' | 'discussion'>
+    & Pick<Card, 'id' | 'title' | 'description' | 'duration' | 'keywords' | 'type' | 'icon' | 'url' | 'source' | 'content' | 'age' | 'discussion'>
   )>>> }
 );
 
@@ -8979,6 +8980,7 @@ export const CardsDocument = gql`
     duration
     keywords
     type
+    icon
     url
     source
     content

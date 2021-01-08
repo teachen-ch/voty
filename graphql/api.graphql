@@ -2033,6 +2033,7 @@ type Card {
   description: String
   discussion: Boolean
   duration: String
+  icon: String
   id: String
   keywords: String
   source: String
