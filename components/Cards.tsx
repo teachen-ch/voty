@@ -9,10 +9,11 @@ import { Flex, Box, Image, Text, Heading, Button } from "rebass";
 import { Loading } from "components/Page";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
-import { without } from "lodash";
+import { truncate, without } from "lodash";
 import { A } from "./Breadcrumb";
 import DraggableList from "react-draggable-list";
 import { OneRowTable, Table, TD, TDIcon, TR } from "./Table";
+import { isMobile } from "util/isBrowser";
 
 export const GET_CARDS = gql`
   query cards($keywords: String, $age: String, $type: String) {
@@ -76,10 +77,11 @@ export const Cards: React.FC<{
   return (
     <Flex flexWrap="wrap" mx="-8px">
       {cards?.map(
-        (card) =>
+        (card, ix) =>
           card && (
             <CardItem
               key={card.id}
+              ix={ix}
               card={card}
               teamCards={props.teamCards}
               teamId={props.teamId}
@@ -92,9 +94,10 @@ export const Cards: React.FC<{
 
 export const CardItem: React.FC<{
   card: CardType;
+  ix: number;
   teamCards?: string;
   teamId?: string;
-}> = ({ card, teamCards, teamId }) => {
+}> = ({ card, teamCards, teamId, ix }) => {
   const router = useRouter();
   const cardsList = teamCards ? teamCards.split(" ") : [];
   const id = String(card.id);
@@ -113,54 +116,62 @@ export const CardItem: React.FC<{
     if (cards.split(" ").length > 1) window.scrollBy(0, selected ? -40 : 40);
   }
   const link = teamId ? `/team/${teamId}/cards/${id}` : `/cards/${id}`;
+  const bgColor = isMobile() ? "#1C88FF" : ix % 2 == 1 ? "#0C66C9" : "#1C88FF";
+  const bgImage = `/images/bg_${card.icon || card.type}.svg`;
+  const selectImage = selected
+    ? "/images/icon_check.svg"
+    : "/images/icon_add.svg";
+
   return (
     <Box
-      bg="white"
       width={["calc(50% - 16px)", "calc(50% - 16px)", "calc(33.3333% - 16px)"]}
       mx="8px"
-      color="black"
+      sx={{
+        background: `url(${bgImage}) center/80% no-repeat ${bgColor}`,
+      }}
+      color="white"
       p={3}
       mb={3}
-      onClick={() => router.push(link)}
-      sx={{ cursor: "pointer" }}
     >
       <Flex
         flexDirection="column"
         justifyContent="space-between"
         height="100%"
-        flex={1}
+        fontSize={1}
       >
-        <Heading as="h3" mt={0} fontSize={2} sx={{ hyphens: "auto" }}>
+        <Heading
+          as="h3"
+          mt={0}
+          fontSize={String(card.title).length > 25 ? "17px" : "20px"}
+          sx={{ cursor: "pointer" }}
+          onClick={() => router.push(link)}
+        >
           {card.title}
         </Heading>
-        <Text fontSize={1}>{card.description}</Text>
-        <Text mt={2} fontSize={1}>
-          <strong>Alter:</strong>
-          <br /> {card.age}
+        <Text mb={2} sx={{ hyphens: "auto" }}>
+          {truncate(String(card.description), { length: 75 })}
         </Text>
-        <Flex justifyContent="space-between" alignItems="center" mt={2}>
-          <Text fontSize={1}>
-            <strong>Dauer:</strong>
-            <br /> {card.duration}
+        <Flex justifyContent="space-between" alignItems="flex-end" mt={2}>
+          <Text mr={2}>
+            <strong>Alter:</strong> {card.age}
+            <br />
+            <strong>Dauer:</strong> {card.duration}
           </Text>
           {teamId ? (
-            <Button
-              sx={{
-                borderRadius: 100,
-                width: 60,
-                height: 60,
-                boxSizing: "border-box",
-                border: "5px solid white",
-              }}
-              bg={selected ? "green" : "secondary"}
-              onClick={doSelect}
-            >
-              {selected ? (
-                <img src="/images/icon_check.svg" />
-              ) : (
-                <img src="/images/icon_add.svg" />
-              )}
-            </Button>
+            <Box textAlign="right" sx={{ flexShrink: 0 }}>
+              <Image
+                src="/images/icon_preview.svg"
+                onClick={() => router.push(link)}
+                sx={{ cursor: "pointer" }}
+                mb={2}
+                display="block"
+              />
+              <Image
+                src={selectImage}
+                sx={{ cursor: "pointer" }}
+                onClick={doSelect}
+              />
+            </Box>
           ) : null}
         </Flex>
       </Flex>
@@ -387,7 +398,7 @@ export function getCardIcon(
   icon?: string | null,
   type?: string | null
 ): string {
-  return icon || `/images/card_${type || "generic"}.svg`;
+  return `/images/card_${icon || type || "generic"}.svg`;
 }
 
 export function getCardTypeIcon(type?: string | null): string {

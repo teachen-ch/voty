@@ -1,8 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg width="32px" height="32px" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <title>Illu_boyandgirl_bubble Copy</title>
-    <g id="Illu_boyandgirl_bubble-Copy" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round">
-        <line x1="5" y1="15.7777778" x2="27" y2="16" id="Path-3" stroke="#FFFFFF" stroke-width="5"></line>
-        <line x1="16.5" y1="4.5" x2="16.5" y2="26.5" id="Path-3" stroke="#FFFFFF" stroke-width="5"></line>
-    </g>
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+  <g fill="none" fill-rule="evenodd" stroke="#FFF" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5">
+    <path d="M0.75,11.999 C0.75,18.2122034 5.78679656,23.249 12,23.249 C18.2132034,23.249 23.25,18.2122034 23.25,11.999 C23.25,5.78579656 18.2132034,0.749 12,0.749 C5.78679656,0.749 0.75,5.78579656 0.75,11.999 Z"/>
+    <line x1="5.636" x2="18.364" y1="11.999" y2="11.999"/>
+    <line x1="12" x2="12" y1="18.363" y2="5.635"/>
+  </g>
 </svg>

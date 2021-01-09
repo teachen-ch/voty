@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="178px" height="178px" viewBox="0 0 178 178" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Icon Design Wahlplakat</title>
+    <g id="Lehrer-" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" opacity="0.1" stroke-linecap="round" stroke-linejoin="round">
+        <g id="DT-Detailansicht-Schulklasse-AddInhalte" transform="translate(-637.000000, -1311.000000)" stroke="#FFFFFF" stroke-width="11.0625">
+            <g id="Card-Lerninhalte" transform="translate(353.000000, 319.000000)">
+                <g id="Weitere-Lerninhalte-Kacheln" transform="translate(0.000000, 696.000000)">
+                    <g id="Icon-Design-Wahlplakat" transform="translate(289.000000, 301.000000)">
+                        <path d="M161.94625,104.71625 L105.675,160.9875 L78.01875,166.51875 L83.55,138.8625 L139.82125,82.59125 C142.745785,79.6621067 146.715073,78.0161433 150.85425,78.0161433 C154.993427,78.0161433 158.962715,79.6621067 161.88725,82.59125 L161.94625,82.65025 C164.875393,85.5747852 166.521357,89.544073 166.521357,93.68325 C166.521357,97.822427 164.875393,101.791715 161.94625,104.71625 L161.94625,104.71625 Z" id="Path"></path>
+                        <path d="M55.89375,144.39375 L11.64375,144.39375 C5.53409995,144.39375 0.58125,139.4409 0.58125,133.33125 L0.58125,11.64375 C0.58125,5.53409995 5.53409995,0.58125 11.64375,0.58125 L122.26875,0.58125 C128.3784,0.58125 133.33125,5.53409995 133.33125,11.64375 L133.33125,61.425" id="Path"></path>
+                        <path d="M66.95625,122.26875 L33.76875,122.26875 C30.713925,122.26875 28.2375,119.792325 28.2375,116.7375 L28.2375,89.08125 C28.2375,86.026425 30.713925,83.55 33.76875,83.55 L105.675,83.55" id="Path"></path>
+                        <polygon id="Path" points="28.2375 22.70625 105.675 22.70625 105.675 61.425 28.2375 61.425"></polygon>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

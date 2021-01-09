@@ -1,21 +1,18 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <title>Icon Chaty</title>
-    <defs>
-        <filter id="filter-1">
-            <feColorMatrix in="SourceGraphic" type="matrix" values="0 0 0 0 1.000000 0 0 0 0 1.000000 0 0 0 0 1.000000 0 0 0 1.000000 0"></feColorMatrix>
-        </filter>
-    </defs>
-    <g id="Lehrer-" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
-        <g id="DT-Detailansicht-Schulklasse-Module" transform="translate(-1039.000000, -801.000000)">
-            <g id="Card-Lerninhalte" transform="translate(320.000000, 383.000000)">
-                <g id="Icon-Chaty" transform="translate(32.000000, 287.000000)" filter="url(#filter-1)">
-                    <g transform="translate(687.000000, 131.000000)">
-                        <path d="M23.25,13.5 C23.25,10.6005051 20.8994949,8.25 18,8.25 L15,8.25 C12.1005051,8.25 9.75,10.6005051 9.75,13.5 C9.75,16.3994949 12.1005051,18.75 15,18.75 L15.75,18.75 L20.25,23.25 L20.25,18.226 C22.0783314,17.3617226 23.2459626,15.5223143 23.25,13.5 L23.25,13.5 Z" id="Path" stroke="#000000" stroke-width="1.5"></path>
-                        <path d="M6.75,12.75 L3.75,15.75 L3.75,10.726 C1.53124897,9.67783864 0.33730048,7.23007427 0.877189008,4.83632852 C1.41707754,2.44258276 3.54613248,0.744292904 6,0.749985659 L9,0.749985659 C11.3218497,0.750284463 13.3679828,2.27512533 14.032,4.5" id="Path" stroke="#000000" stroke-width="1.5"></path>
-                    </g>
-                </g>
-            </g>
-        </g>
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+  <defs>
+    <filter id="icon-chaty-a">
+      <feColorMatrix in="SourceGraphic" values="0 0 0 0 1.000000 0 0 0 0 1.000000 0 0 0 0 1.000000 0 0 0 1.000000 0"/>
+    </filter>
+    <filter id="icon-chaty-b">
+      <feColorMatrix in="SourceGraphic" values="0 0 0 0 1.000000 0 0 0 0 1.000000 0 0 0 0 1.000000 0 0 0 1.000000 0"/>
+    </filter>
+  </defs>
+  <g fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+    <g filter="url(#icon-chaty-a)">
+      <path stroke="#FFF" stroke-width="1.5" d="M21.5,21.7499998 C21.5,22.5784271 20.8284271,23.2499998 20,23.2499998 L2,23.2499998 C1.17157288,23.2499998 0.5,22.5784271 0.5,21.7499998 L0.5,2.24999976 C0.5,1.42157288 1.17157288,0.749999759 2,0.749999759 L17.045,0.749999759 C17.4365438,0.749999759 17.8126547,0.902663066 18.093,1.176 L21.047,4.059 C21.3366114,4.34129213 21.5,4.72857002 21.5,5.133 L21.5,21.7499998 Z"/>
     </g>
+    <g filter="url(#icon-chaty-b)">
+      <path stroke="#FFF" stroke-width="1.25" d="M6.88888889 11.3C6.39796911 11.3 6 10.8970563 6 10.4L6 5.9C6 5.40294373 6.39796911 5 6.88888889 5L13.1111111 5C13.6020309 5 14 5.40294373 14 5.9L14 10.4C14 10.8970563 13.6020309 11.3 13.1111111 11.3L12.2222222 11.3 12.2222222 14 9.55555556 11.3 6.88888889 11.3zM4.55555556 7.2L2.77777778 9 2.77777778 6.3.888888889 6.3C.397969111 6.3 0 5.89705627 0 5.4L0 .9C0 .402943725.397969111 0 .888888889 0L7.11111111 0C7.60203089 0 8 .402943725 8 .9L8 2.7" transform="translate(4 5)"/>
+    </g>
+  </g>
 </svg>

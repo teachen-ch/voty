@@ -13,3 +13,11 @@ export function isDev(): boolean {
 export function isLocal(): boolean {
   return process.env.NEXT_PUBLIC_ENV === "local";
 }
+
+export function isMobile(): boolean {
+  return window?.innerWidth < 600;
+}
+
+export function isDesktop(): boolean {
+  return !isMobile();
+}

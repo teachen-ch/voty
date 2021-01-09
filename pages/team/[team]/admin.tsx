@@ -1,5 +1,5 @@
 import { LoggedInPage } from "components/Page";
-import { Heading, Image, Box, Text, Button } from "rebass";
+import { Heading, Image, Box, Text, Button, HeadingProps } from "rebass";
 import { Users } from "components/Users";
 import { Input, Textarea } from "@rebass/forms";
 import { Grid, Label } from "theme-ui";
@@ -125,8 +125,8 @@ export default function TeacherTeamPage(): React.ReactElement {
       </Breadcrumb>
       <Text textAlign="left">
         <HideFeature id="cards">
-          <Heading as="h3">Lerninhalte Klasse {team.name}</Heading>
-          <Text mb={3}>
+          <H2>Lerninhalte Klasse {team.name}</H2>
+          <Text mb={4}>
             Hier siehst du die Lerninhalte, welche bereits ausgewählt sind und
             deinen Schüler*innen auf der Klassenseite angezeigt werden.
           </Text>
@@ -139,10 +139,8 @@ export default function TeacherTeamPage(): React.ReactElement {
             Lerninhalte hinzufügen
           </Button>
         </HideFeature>
-        <Heading as="h3" mt={6}>
-          Abstimmungen Klasse {team.name}
-        </Heading>
-        <Text fontSize={2} mb={3}>
+        <H2 mt={6}>Abstimmungen Klasse {team.name}</H2>
+        <Text fontSize={2} mb={4}>
           Wähle hier aus der Liste die Abstimmungen aus, welche Deinen
           Schüler*innen auf der Klassenseite angezeigt werden sollen. Nach der
           Abstimmung kannst Du hier auch die Abstimmungsresultate Deiner Klasse
@@ -151,19 +149,15 @@ export default function TeacherTeamPage(): React.ReactElement {
         <SelectBallots team={team} />
 
         <HideFeature id="activities">
-          <Heading as="h3" mt={6}>
-            Aktivitäten Klasse {team.name}
-          </Heading>
-          <Text mb={3} fontSize={2}>
+          <H2 mt={6}>Aktivitäten Klasse {team.name}</H2>
+          <Text mb={4} fontSize={2}>
             Hier siehst du alle Aktivitäten, Uploads und Diskussionen der Klasse
             {team.name}.
           </Text>
           <Activities teamId={team.id} />
         </HideFeature>
 
-        <Heading as="h2" mt={6}>
-          Schülerinnen und Schüler
-        </Heading>
+        <H2 mt={6}>Schülerinnen und Schüler</H2>
         {!team.members.length ? (
           <Text fontSize={2}>
             Hier kannst Du Deine Schüler*innen auf die Klassenseite von voty.ch
@@ -173,7 +167,7 @@ export default function TeacherTeamPage(): React.ReactElement {
           </Text>
         ) : (
           <>
-            <Text fontSize={2} my={3}>
+            <Text fontSize={2} mb={4}>
               Diese Einladungen wurden bereits verschickt. Hier siehst Du auch,
               wer die Einladung bereits akzeptiert hat.
             </Text>
@@ -305,3 +299,16 @@ function InviteLink({ team }: { team: TeamTeacherFieldsFragment }) {
     </Grid>
   );
 }
+
+export const H2: React.FC<HeadingProps> = (props) => (
+  <Heading
+    as="h2"
+    color="#508DEA"
+    pb={2}
+    fontWeight="semi"
+    sx={{ borderBottom: "2px solid white" }}
+    {...props}
+  >
+    {props.children}
+  </Heading>
+);

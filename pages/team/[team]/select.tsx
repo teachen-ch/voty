@@ -1,7 +1,7 @@
 import { LoggedInPage } from "components/Page";
 import { Cards, CardListSelect } from "components/Cards";
 import { Input } from "@rebass/forms";
-import { Flex, Button, Text, Heading } from "rebass";
+import { Flex, Button, Text, Heading, HeadingProps } from "rebass";
 import React, { useState } from "react";
 import { useRouter } from "next/router";
 import { A, Breadcrumb, Here } from "components/Breadcrumb";
@@ -40,27 +40,28 @@ export default function CardsPage(): React.ReactElement {
       </Breadcrumb>
 
       <Text textAlign="left">
-        <Heading>Folgende Lerninhalte sind ausgewählt</Heading>
+        <H3>Folgende Lerninhalte sind ausgewählt</H3>
 
         <CardListSelect teamCards={team.cards} teamId={team.id} />
 
-        <Flex mt={5}>
+        <H3 mt={5}>Weitere Lerninhalte hinzufügen</H3>
+        <Flex>
           <Input
             onChange={debounce((evt) => setKeywords(evt.target.value), 300)}
             placeholder="Suche..."
             flex={1}
           />
           <Button ml={3} flex={0.3} mt={[0, 0, "4px"]} height="50px">
-            Suche
+            Suchen
           </Button>
         </Flex>
-        <Text mb={4} mt={1} fontSize={1}>
+        <Text mb={4} mt="24px" fontSize={1}>
           Filtern nach Stufe: &nbsp; &nbsp;
           <Filter set={setAge} v={age} val={"Zyklus-2"} label="Zyklus-2" sep />
           <Filter set={setAge} v={age} val={"Sek-1"} label="Sek-1" sep />
           <Filter set={setAge} v={age} val={"Gym"} label="Gym" sep />
           <Filter set={setAge} v={age} val={"Berufsschule"} label="BS" />
-          &nbsp; &nbsp; &nbsp; nach Inhalt: &nbsp; &nbsp;
+          &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; nach&nbsp;Inhalt: &nbsp; &nbsp;
           <Filter set={setType} v={type} val={"tool"} label="Aufgaben" sep />
           <Filter set={setType} v={type} val={"video"} label="Videos" sep />
           <Filter set={setType} v={type} val={"chaty"} label="Chaty" />
@@ -78,3 +79,9 @@ export default function CardsPage(): React.ReactElement {
     </LoggedInPage>
   );
 }
+
+export const H3: React.FC<HeadingProps> = (props) => (
+  <Heading as="h3" color="#508DEA" pb={2} fontWeight="semi" {...props}>
+    {props.children}
+  </Heading>
+);
