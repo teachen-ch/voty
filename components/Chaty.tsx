@@ -180,14 +180,16 @@ const ShowInput: React.FC<{
         <Text
           pl={2}
           flex={1}
-          verticalAlign="center"
           color="black"
-          fontWeight="bold"
+          fontWeight="semi"
+          minWidth="300px"
+          my={[2, 2, 0]}
         >
           Weiter zu «{getCardTitle(String(message?.message))}»?
         </Text>
         <Button
-          mx={3}
+          ml={2}
+          mr={3}
           width="150px"
           onClick={() => selectOption(message, "Nein")}
         >

@@ -1,7 +1,5 @@
 /* @import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,400&display=auto");*/
 
-@import "chaty.css";
-
 /* generated with https://google-webfonts-helper.herokuapp.com/fonts/source-sans-pro?subsets=latin */
 /* source-sans-pro-regular - latin */
 @font-face {
@@ -105,6 +103,14 @@ tr td {
 /* back, initially hidden pane */
 .back {
   transform: rotateY(180deg);
+}
+
+.markdownImage {
+  max-height: 300px;
+  max-width: 100%;
+  border: 10px solid white;
+  border-radius: 10;
+  display: block;
 }
 
 /* Small Animation for ChatElements / TypingIndicator */

@@ -1,8 +1,0 @@
-/* Overwriting some css for @chatscope/chat-ui-kit-styles/dist/default/styles.min.css
- * Yes, this is not the right place, but
- * TODO: bother with sass compilation to customize and somehow reimport (at module level?)
- */
-
-.cs-message__content {
-  word-break: normal !important;
-}

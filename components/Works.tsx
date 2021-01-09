@@ -11,7 +11,7 @@ import {
   Visibility,
 } from "graphql/types";
 import { AttachmentFields } from "components/Uploader";
-import { Flex, Link, Text, FlexProps, Box } from "rebass";
+import { Flex, Image, Text, FlexProps, Box } from "rebass";
 import { useTeam, useUser } from "state/user";
 import { ChangeEvent, useEffect, useRef, useState } from "react";
 import { Loading } from "./Page";
@@ -96,7 +96,7 @@ export const Works: React.FC<
   const flexProps = omit(props, "children", "ref");
   return (
     <ListComp {...flexProps}>
-      {works && <Text fontWeight="bold">Arbeiten zum Thema:</Text>}
+      {works.length > 0 && <Text fontWeight="bold">Arbeiten zum Thema:</Text>}
       {works?.map((work) => {
         return (
           <Box key={work.id} mt={2} id={work.id}>
@@ -352,17 +352,17 @@ export const Pill: React.FC<{
     bg={bg}
     color={color}
     alignItems="center"
-    px={3}
+    px="12px"
+    py="4px"
     mr={2}
+    my={1}
     fontSize={1}
     sx={{ borderRadius: 20, cursor: onClick ? "pointer" : "inherit" }}
     onClick={onClick}
   >
     <Text>{children}</Text>
     {deleteLink && isFunction(deleteLink) && (
-      <Link ml={2} onClick={deleteLink}>
-        ╳
-      </Link>
+      <Image src="/images/icon_x.svg" ml={1} onClick={deleteLink} />
     )}
   </Flex>
 );

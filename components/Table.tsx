@@ -79,8 +79,17 @@ export const TD: React.FC<
   </Box>
 );
 
-export const TDIcon: React.FC<ImageProps> = (props) => (
-  <Image alignSelf="center" mx={2} sx={{ flexShrink: 0 }} {...props} />
+export const TDIcon: React.FC<ImageProps & { smHide?: boolean }> = ({
+  smHide,
+  ...props
+}) => (
+  <Image
+    alignSelf="center"
+    mx={2}
+    css={{ flexShrink: 0 }}
+    display={smHide ? ["none", "none", "block"] : "block"}
+    {...props}
+  />
 );
 
 export const OneRowTable: React.FC<{ text?: string }> = ({

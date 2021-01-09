@@ -116,7 +116,7 @@ export const CardItem: React.FC<{
   return (
     <Box
       bg="white"
-      width="calc(33.3333% - 16px);"
+      width={["calc(50% - 16px)", "calc(50% - 16px)", "calc(33.3333% - 16px)"]}
       mx="8px"
       color="black"
       p={3}
@@ -130,7 +130,7 @@ export const CardItem: React.FC<{
         height="100%"
         flex={1}
       >
-        <Heading as="h3" mt={0} fontSize={2}>
+        <Heading as="h3" mt={0} fontSize={2} sx={{ hyphens: "auto" }}>
           {card.title}
         </Heading>
         <Text fontSize={1}>{card.description}</Text>
@@ -320,7 +320,7 @@ class CardAdminItem extends React.Component<CardAdminProps> {
         <TD flexy>
           <A href={item.link}>{item.title}</A>
         </TD>
-        <TDIcon src="/images/icon_watch.svg" mr={0} />
+        <TDIcon src="/images/icon_watch.svg" mr={0} smHide />
 
         <TD width="180px" smHide>
           {item?.duration}

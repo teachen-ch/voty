@@ -105,7 +105,11 @@ export const Poster: React.FC<{ vote: Swissvote; image: string }> = ({
             vote.swissvoteslink && window.open(vote.swissvoteslink, "_blank")
           }
         >
-          <Text fontWeight="bold" fontSize={2} sx={{ wordWrap: "break-word" }}>
+          <Text
+            fontWeight="semi"
+            fontSize={[1, 1, 2]}
+            sx={{ wordWrap: "break-word" }}
+          >
             {vote.titel_kurz_d}
           </Text>
           <Text fontSize={1} my={2}>

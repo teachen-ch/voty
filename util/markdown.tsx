@@ -3,7 +3,7 @@ import { Image } from "rebass";
 import gfm from "remark-gfm";
 import remarkImage from "remark-images";
 
-export const Markdown: React.FC<{ children?: string }> = ({ children }) => (
+export const MarkdownNew: React.FC<{ children?: string }> = ({ children }) => (
   <ReactMarkdown
     plugins={[gfm, remarkImage]}
     renderers={{
@@ -15,6 +15,7 @@ export const Markdown: React.FC<{ children?: string }> = ({ children }) => (
           sx={{ border: "10px solid white", borderRadius: 10 }}
           src={src}
           alt={alt}
+          mb={2}
           display="block"
         />
       ),
@@ -26,7 +27,7 @@ export const Markdown: React.FC<{ children?: string }> = ({ children }) => (
 
 // This is left for posteriority. it uses dangerouslySetInnerHTML...
 
-export const MarkdownJoke: React.FC = ({ children }) => (
+export const Markdown: React.FC = ({ children }) => (
   <div
     dangerouslySetInnerHTML={parseMarkdownInner(String(children))}
     style={{ textAlign: "left" }}

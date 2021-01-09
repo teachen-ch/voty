@@ -39,40 +39,42 @@ export default function CardsPage(): React.ReactElement {
         <b>Lerninhalte</b>
       </Breadcrumb>
 
-      <Heading>Folgende Lerninhalte sind ausgewählt</Heading>
+      <Text textAlign="left">
+        <Heading>Folgende Lerninhalte sind ausgewählt</Heading>
 
-      <CardListSelect teamCards={team.cards} teamId={team.id} />
+        <CardListSelect teamCards={team.cards} teamId={team.id} />
 
-      <Flex mt={4}>
-        <Input
-          onChange={debounce((evt) => setKeywords(evt.target.value), 300)}
-          placeholder="Suche..."
-          flex={1}
+        <Flex mt={4}>
+          <Input
+            onChange={debounce((evt) => setKeywords(evt.target.value), 300)}
+            placeholder="Suche..."
+            flex={1}
+          />
+          <Button ml={3} flex={0.3} mt={[0, 0, "4px"]} height="50px">
+            Suche
+          </Button>
+        </Flex>
+        <Text mb={3} mt={1} fontSize={1}>
+          Filtern nach Stufe: &nbsp; &nbsp;
+          <Filter set={setAge} v={age} val={"Zyklus-2"} label="Zyklus-2" sep />
+          <Filter set={setAge} v={age} val={"Sek-1"} label="Sek-1" sep />
+          <Filter set={setAge} v={age} val={"Gym"} label="Gym" sep />
+          <Filter set={setAge} v={age} val={"Berufsschule"} label="BS" />
+          &nbsp; &nbsp; &nbsp; nach Inhalt: &nbsp; &nbsp;
+          <Filter set={setType} v={type} val={"tool"} label="Aufgaben" sep />
+          <Filter set={setType} v={type} val={"video"} label="Videos" sep />
+          <Filter set={setType} v={type} val={"chaty"} label="Chaty" />
+        </Text>
+
+        <Cards
+          keywords={keywords}
+          type={type}
+          age={age}
+          teamId={team.id}
+          teamCards={team.cards}
+          resetFilters={resetFilters}
         />
-        <Button ml={3} flex={0.3} mt={[0, 0, "4px"]} height="50px">
-          Suche
-        </Button>
-      </Flex>
-      <Text mb={3} mt={1} fontSize={1}>
-        Filtern nach Stufe: &nbsp; &nbsp;
-        <Filter set={setAge} v={age} val={"Zyklus-2"} label="Zyklus-2" sep />
-        <Filter set={setAge} v={age} val={"Sek-1"} label="Sek-1" sep />
-        <Filter set={setAge} v={age} val={"Gym"} label="Gym" sep />
-        <Filter set={setAge} v={age} val={"Berufsschule"} label="BS" />
-        &nbsp; &nbsp; &nbsp; nach Inhalt: &nbsp; &nbsp;
-        <Filter set={setType} v={type} val={"tool"} label="Aufgaben" sep />
-        <Filter set={setType} v={type} val={"video"} label="Videos" sep />
-        <Filter set={setType} v={type} val={"chaty"} label="Chaty" />
       </Text>
-
-      <Cards
-        keywords={keywords}
-        type={type}
-        age={age}
-        teamId={team.id}
-        teamCards={team.cards}
-        resetFilters={resetFilters}
-      />
     </LoggedInPage>
   );
 }
