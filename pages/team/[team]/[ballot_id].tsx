@@ -5,7 +5,7 @@ import { Role, useBallotQuery, useGetBallotResultsQuery } from "graphql/types";
 import { BallotResults } from "components/BallotResults";
 import { BallotDetails } from "components/Ballots";
 import { usePageEvent } from "util/stats";
-import { Breadcrumb, A } from "components/Breadcrumb";
+import { Breadcrumb, A, Here } from "components/Breadcrumb";
 import { usePolling } from "util/hooks";
 import { Discussion } from "components/Discussion";
 import { HideFeature } from "components/HideFeature";
@@ -47,7 +47,7 @@ export default function TeacherBallotPage(): React.ReactElement {
         <A href="/">Start</A>
         <A href="/teacher/">Meine Klassen</A>
         <A href={`/team/${team.id}/admin`}>{team.name}</A>
-        <b>{ballot.title}</b>
+        <Here>{ballot.title}</Here>
       </Breadcrumb>
       {!results?.total ? (
         ""

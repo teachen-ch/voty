@@ -9,7 +9,7 @@ import Info from "components/Info";
 import Link from "next/link";
 import { BigGray } from "components/BigButton";
 import { BallotDetails } from "components/Ballots";
-import { Breadcrumb, A } from "components/Breadcrumb";
+import { Breadcrumb, A, Here } from "components/Breadcrumb";
 import { Nullable } from "simplytyped";
 import { Discussion } from "components/Discussion";
 
@@ -42,7 +42,7 @@ export default function BallotPage(): ReactElement {
         <Breadcrumb>
           <A href="/">Start</A>
           <A href="/student/test">Abstimmungen</A>
-          <b>{ballot.title}</b>
+          <Here>{ballot.title}</Here>
         </Breadcrumb>
         <VotySuccess name={user?.name} />
         <Button
@@ -64,7 +64,7 @@ export default function BallotPage(): ReactElement {
       <Breadcrumb>
         <A href="/">Start</A>
         <A href="/student/test">Abstimmungen</A>
-        <b>{ballot.title}</b>
+        <Here>{ballot.title}</Here>
       </Breadcrumb>
 
       <Text>

@@ -3,7 +3,7 @@ import { LoggedInPage } from "../../components/Page";
 import React, { ReactElement } from "react";
 import { useTeachersQuery, Role, TeachersQuery } from "graphql/types";
 import { Box, Image } from "rebass";
-import { Breadcrumb, A } from "components/Breadcrumb";
+import { Breadcrumb, A, Here } from "components/Breadcrumb";
 
 export const GET_TEACHERS = gql`
   query teachers($where: UserWhereInput) {
@@ -41,7 +41,7 @@ export default function TeachersAdminPage(): ReactElement {
     <LoggedInPage heading="Lehrpersonen">
       <Breadcrumb>
         <A href="/admin">Admin</A>
-        <b>Lehrpersonen</b>
+        <Here>Lehrpersonen</Here>
       </Breadcrumb>
       <Teachers users={teachers} />
     </LoggedInPage>

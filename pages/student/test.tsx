@@ -2,7 +2,7 @@ import { LoggedInPage } from "components/Page";
 import { Text, Heading, Box, Card, Button, Image } from "rebass";
 import { ReadMore } from "components/ReadMore";
 import { useUser, SessionUser } from "state/user";
-import { Breadcrumb, A } from "components/Breadcrumb";
+import { Breadcrumb, A, Here } from "components/Breadcrumb";
 import React, { useState } from "react";
 import { CardStudentList } from "components/Cards";
 import {
@@ -28,24 +28,26 @@ export default function StudentTest(): React.ReactElement {
     <LoggedInPage heading="Meine Klasse">
       <Breadcrumb>
         <A href="/">Start</A>
-        <b>Meine Klasse</b>
+        <Here>Meine Klasse</Here>
       </Breadcrumb>
 
-      <HideFeature id="cards">
-        <Heading>Lerninhalte</Heading>
-        <CardStudentList
-          teamCards={String(user.team?.cards)}
-          teamId={user.team.id}
-        />
-      </HideFeature>
+      <Text textAlign="left">
+        <HideFeature id="cards">
+          <Heading>Lerninhalte</Heading>
+          <CardStudentList
+            teamCards={String(user.team?.cards)}
+            teamId={user.team.id}
+          />
+        </HideFeature>
 
-      <ShowBallots user={user} />
+        <ShowBallots user={user} />
 
-      <HideFeature id="activities">
-        <Heading as="h3">Aktivitäten in der Klasse</Heading>
-        <Activities teamId={user.team.id} />
-      </HideFeature>
-      <Box mb={4} />
+        <HideFeature id="activities">
+          <Heading as="h3">Aktivitäten in der Klasse</Heading>
+          <Activities teamId={user.team.id} />
+        </HideFeature>
+        <Box mb={4} />
+      </Text>
     </LoggedInPage>
   );
 }

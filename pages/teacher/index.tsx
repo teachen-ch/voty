@@ -5,7 +5,7 @@ import { Teams, CreateTeamForm } from "components/Teams";
 import { useState, ReactElement } from "react";
 import { useRouter } from "next/router";
 import { SelectSchool } from "components/Schools";
-import { Breadcrumb, A } from "components/Breadcrumb";
+import { Breadcrumb, A, Here } from "components/Breadcrumb";
 import { Role } from "graphql/types";
 
 export default function Teacher(): ReactElement {
@@ -31,7 +31,7 @@ export default function Teacher(): ReactElement {
     <LoggedInPage heading="Meine Klassen" role={Role.Teacher}>
       <Breadcrumb>
         <A href="/">Start</A>
-        <b>Meine Klassen</b>
+        <Here>Meine Klassen</Here>
       </Breadcrumb>
       <Text fontWeight="bold">Willkommen {user && user.name}</Text>
       <Text mb={4}>Hier siehst Du eine Übersicht Deiner Klassen</Text>

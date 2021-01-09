@@ -148,9 +148,9 @@ export const SwissvotesTopics: React.FC = () => {
       {topic && (
         <Box mt={4}>
           <Text mb={-20}>
-            <CircleBullet value={2} /> Sucht in der Swissvotes Datenbank, zu was
-            die Schweiz über das Thema «{topic}» abgestimmt hat und wählt drei
-            Initiativen aus, die Euch wichtig erscheinen:
+            <CircleBullet value={2} /> Sucht hier in der Swissvotes Datenbank,
+            zu was die Schweiz über das Thema «{topic}» abgestimmt hat und wählt
+            drei Initiativen aus, die Euch wichtig erscheinen:
           </Text>
           <Swissvotes votes={votes} setVotes={setVotes} limit={10} />
         </Box>
@@ -186,7 +186,7 @@ export const SwissvotesTopics: React.FC = () => {
             <Label mt={3}>Erarbeitet durch:</Label>
             <Authors setUsers={setUsers} />
             {success ? (
-              "Die Arbeit wurde gespeichert!"
+              <Text mt={3}>Die Arbeit wurde gespeichert!</Text>
             ) : (
               <Button mt={3} onClick={doPostWork}>
                 Abschicken

@@ -20,7 +20,7 @@ import {
   Role,
 } from "graphql/types";
 import { Nullable } from "simplytyped";
-import { Breadcrumb, A } from "components/Breadcrumb";
+import { Breadcrumb, A, Here } from "components/Breadcrumb";
 import { Spinner } from "theme-ui";
 import PanelPage from "./panel";
 import { CardListAdmin } from "components/Cards";
@@ -121,7 +121,7 @@ export default function TeacherTeamPage(): React.ReactElement {
       <Breadcrumb>
         <A href="/">Start</A>
         <A href="/teacher/">Meine Klassen</A>
-        <b>{team.name}</b>
+        <Here>{team.name}</Here>
       </Breadcrumb>
       <Text textAlign="left">
         <HideFeature id="cards">
@@ -161,7 +161,7 @@ export default function TeacherTeamPage(): React.ReactElement {
           <Activities teamId={team.id} />
         </HideFeature>
 
-        <Heading as="h2" mt="80px">
+        <Heading as="h2" mt={6}>
           Schülerinnen und Schüler
         </Heading>
         {!team.members.length ? (

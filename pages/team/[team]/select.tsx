@@ -4,7 +4,7 @@ import { Input } from "@rebass/forms";
 import { Flex, Button, Text, Heading } from "rebass";
 import React, { useState } from "react";
 import { useRouter } from "next/router";
-import { A, Breadcrumb } from "components/Breadcrumb";
+import { A, Breadcrumb, Here } from "components/Breadcrumb";
 import { debounce } from "lodash";
 import { Filter } from "components/Swissvotes";
 import { useTeam } from "state/user";
@@ -36,7 +36,7 @@ export default function CardsPage(): React.ReactElement {
         <A href="/">Start</A>
         <A href="/teacher/">Meine Klassen</A>
         <A href={`/team/${team.id}/admin`}>{team.name}</A>
-        <b>Lerninhalte</b>
+        <Here>Lerninhalte</Here>
       </Breadcrumb>
 
       <Text textAlign="left">
@@ -44,7 +44,7 @@ export default function CardsPage(): React.ReactElement {
 
         <CardListSelect teamCards={team.cards} teamId={team.id} />
 
-        <Flex mt={4}>
+        <Flex mt={5}>
           <Input
             onChange={debounce((evt) => setKeywords(evt.target.value), 300)}
             placeholder="Suche..."
@@ -54,7 +54,7 @@ export default function CardsPage(): React.ReactElement {
             Suche
           </Button>
         </Flex>
-        <Text mb={3} mt={1} fontSize={1}>
+        <Text mb={4} mt={1} fontSize={1}>
           Filtern nach Stufe: &nbsp; &nbsp;
           <Filter set={setAge} v={age} val={"Zyklus-2"} label="Zyklus-2" sep />
           <Filter set={setAge} v={age} val={"Sek-1"} label="Sek-1" sep />

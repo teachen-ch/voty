@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import { SelectBallots } from "components/Ballots";
 import { usePageEvent } from "util/stats";
 import { Role, useTeamTeacherQuery } from "graphql/types";
-import { Breadcrumb, A } from "components/Breadcrumb";
+import { Breadcrumb, A, Here } from "components/Breadcrumb";
 // import { usePolling } from "util/hooks";
 
 export default function PanelPage(): React.ReactElement {
@@ -38,7 +38,7 @@ export default function PanelPage(): React.ReactElement {
       <Breadcrumb>
         <A href="/">Start</A>
         <A href="/teacher/">Meine Klassen</A>
-        <b>{team.name}</b>
+        <Here>{team.name}</Here>
       </Breadcrumb>
       <Text textAlign="left">
         <Heading as="h3">

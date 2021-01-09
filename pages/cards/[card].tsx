@@ -1,4 +1,4 @@
-import { A, Breadcrumb } from "components/Breadcrumb";
+import { A, Breadcrumb, Here } from "components/Breadcrumb";
 import { Card, getCardMeta } from "components/Cards";
 import { ErrorPage, Loading, Page } from "components/Page";
 import { useQueryParam } from "util/hooks";
@@ -22,7 +22,7 @@ export default function CardPagePublic(): React.ReactElement {
       <Breadcrumb>
         <A href="/">Start</A>
         <A href="/cards">Lerninhalte</A>
-        <b>{meta.title}</b>
+        <Here>{meta.title}</Here>
       </Breadcrumb>
       <Card id={key} />
     </Page>
