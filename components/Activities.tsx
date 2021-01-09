@@ -72,7 +72,12 @@ export const ActivitiesQuery: React.FC<{
   if (activitiesQuery.error) return <Err msg={activitiesQuery.error.message} />;
 
   return (
-    <Table fontSize={1} maxHeight={145} overflow="scroll" overflowX="hidden">
+    <Table
+      fontSize={[1, 1, 2]}
+      maxHeight={145}
+      overflow="scroll"
+      overflowX="hidden"
+    >
       {activities?.map((act) => {
         const link = getActivityLink(act, teamId);
         const text = getActivityText(act);
