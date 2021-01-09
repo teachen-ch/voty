@@ -23,6 +23,7 @@ export const ChatContainer: React.FC = ({ children }) => (
     textAlign="left"
     flexDirection="column"
     width={["100%", "100%", "800px"]}
+    maxHeight={["auto", "auto", "600px"]}
     ml={[-3, -3, -4]}
     bg="white"
     sx={{
