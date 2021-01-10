@@ -236,7 +236,10 @@ export const Filter: React.FC<{
   <>
     <A
       onClick={() => (v === val ? set(undefined) : set(val))}
-      fontWeight={val === v ? "bold" : "normal"}
+      sx={{
+        fontWeight: val === v ? "bold" : "normal",
+        textDecoration: val === v ? "underline" : "none",
+      }}
     >
       {label}
     </A>

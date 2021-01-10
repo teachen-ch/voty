@@ -10,9 +10,9 @@ import { Loading } from "components/Page";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { truncate, without } from "lodash";
-import { A } from "./Breadcrumb";
 import DraggableList from "react-draggable-list";
 import { OneRowTable, Table, TD, TDIcon, TR } from "./Table";
+import { A } from "./Breadcrumb";
 
 export const GET_CARDS = gql`
   query cards($keywords: String, $age: String, $type: String) {
@@ -326,7 +326,12 @@ class CardAdminItem extends React.Component<CardAdminProps> {
           src="/images/icon_move.svg"
         />
         <TD flexy>
-          <A href={item.link}>{item.title}</A>
+          <A
+            href={item.link}
+            sx={{ textDecoration: "none", borderBottom: "none" }}
+          >
+            {item.title}
+          </A>
         </TD>
         <TDIcon src="/images/icon_watch.svg" mr={0} smHide />
 

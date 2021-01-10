@@ -32,6 +32,9 @@ declare module "rebass" {
   interface HeadingProps {
     css?: InterpolationWithTheme<HeadingProps>;
   }
+  interface LinkProps {
+    css?: InterpolationWithTheme<LinkProps>;
+  }
   interface ButtonProps {
     as?: React.ElementType;
     textAlign?: string;

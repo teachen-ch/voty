@@ -7,7 +7,6 @@ import {
   useActivitiesQuery,
 } from "graphql/types";
 import { formatDate, formatTime, isToday } from "util/date";
-import { A } from "./Breadcrumb";
 import { getCardMeta } from "./Cards";
 import { Err, Loading } from "./Page";
 import { Table, TD, TR } from "./Table";
@@ -82,18 +81,12 @@ export const ActivitiesQuery: React.FC<{
         const link = getActivityLink(act, teamId);
         const text = getActivityText(act);
         return (
-          <TR key={String(act.time)}>
+          <TR key={String(act.time)} href={link}>
             <TD width={[75, 75, 90]} fixed>
               {isToday(act.time) ? formatTime(act.time) : formatDate(act.time)}
             </TD>
             <TD flexy>
-              {link ? (
-                <A href={link}>
-                  {act.user.shortname} {text}
-                </A>
-              ) : (
-                `${act.user.shortname} ${text}`
-              )}
+              {act.user.shortname} {text}
               {act.summary ? `: ${act.summary}` : ""}
             </TD>
           </TR>

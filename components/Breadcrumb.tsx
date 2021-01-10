@@ -25,39 +25,25 @@ export const Breadcrumb = ({
   </Box>
 );
 
-type AProps = Omit<LinkProps, "as"> & {
-  as?: string;
-  fontWeight?: string;
-};
-
-export const A: React.FC<AProps> = (props) => {
+export const A: React.FC<LinkProps> = (props) => {
   const variant = props.variant || "underline";
   if (props.href) {
     return (
-      <Link
-        href={props.href}
-        as={props.as}
-        sx={{ fontWeight: props.fontWeight }}
-      >
-        <RebassLink variant={variant} fontSize={props.fontSize}>
+      <Link href={props.href}>
+        <RebassLink variant={variant} {...props}>
           {props.children}
         </RebassLink>
       </Link>
     );
   } else {
     return (
-      <RebassLink
-        onClick={props.onClick}
-        variant={variant}
-        fontSize={props.fontSize}
-        sx={{ fontWeight: props.fontWeight }}
-      >
+      <RebassLink onClick={props.onClick} variant={variant} {...props}>
         {props.children}
       </RebassLink>
     );
   }
 };
 
-export const Here: React.FC<AProps> = ({ children }) => (
+export const Here: React.FC = ({ children }) => (
   <strong style={{ color: "white" }}>{children}</strong>
 );
