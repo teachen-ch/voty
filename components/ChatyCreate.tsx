@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Box, Button } from "rebass";
 import { Chaty, parseMessages } from "./Chaty";
 import { Err } from "components/Page";
-import { Authors, usePostWork, WorkItem, Works } from "./Works";
+import { Authors, usePostWork, WorkCard, WorkItem, Works } from "./Works";
 import { UserWhereUniqueInput } from "graphql/types";
 import Info from "./Info";
 
@@ -87,8 +87,8 @@ export const ChatyCreate: React.FC<{
 
 const ChatyItem: WorkItem = ({ work }) => {
   return (
-    <Box mb={4}>
+    <WorkCard>
       <Chaty title={work.title} lines={work.text} />
-    </Box>
+    </WorkCard>
   );
 };

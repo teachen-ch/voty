@@ -2,7 +2,7 @@ import { UserWhereUniqueInput } from "graphql/types";
 import { Box, Button, Text } from "rebass";
 import { Label, Textarea } from "@rebass/forms";
 import { useState } from "react";
-import { Authors, Works, WorkItem, usePostWork } from "./Works";
+import { Authors, Works, WorkItem, usePostWork, WorkCard } from "./Works";
 import Info from "./Info";
 import { Markdown } from "util/markdown";
 import { Err } from "./Page";
@@ -60,13 +60,13 @@ export const Passion: React.FC = () => {
 
 const PassionItem: WorkItem = ({ work }) => {
   return (
-    <Box mb={4}>
-      <Text my={3}>
-        <b>Meine Passion ❤️ </b> {work.data?.passion}
+    <WorkCard>
+      <Text mb={3}>
+        <b>Meine Passion:</b> {work.data?.passion}
       </Text>
       <Text>
-        <b>Mein Engagement 🌱 </b> <Markdown>{work.data?.engagement}</Markdown>
+        <Markdown>{`**Mein Engagement:** ${work.data?.engagement}`}</Markdown>
       </Text>
-    </Box>
+    </WorkCard>
   );
 };

@@ -13,7 +13,7 @@ import { A } from "./Breadcrumb";
 import { formatYear } from "util/date";
 import { CircleBullet } from "components/Cards";
 import { debounce, find, remove } from "lodash";
-import { Authors, usePostWork, WorkItem, Works } from "./Works";
+import { Authors, usePostWork, WorkCard, WorkItem, Works } from "./Works";
 import { Markdown } from "util/markdown";
 import { Table, TR, TD } from "components/Table";
 
@@ -210,9 +210,11 @@ export const SwissvotesTopics: React.FC = () => {
 
 const SwissvotesItem: WorkItem = ({ work }) => {
   return (
-    <Box mb={4}>
-      <Text my={2}>Thema: {work.data?.topic}</Text>
-      <Table>
+    <WorkCard>
+      <Text mb={2} fontWeight="semi">
+        Thema: {work.data?.topic}
+      </Text>
+      <Table sx={{ border: "none", borderTop: "1px solid gray" }}>
         {(work.data?.votes as VoteType[]).map(
           (vote) => vote && <Vote key={vote.anr} vote={vote} />
         )}
@@ -220,7 +222,7 @@ const SwissvotesItem: WorkItem = ({ work }) => {
       <Text mt={3}>
         <Markdown>{work.data?.text}</Markdown>
       </Text>
-    </Box>
+    </WorkCard>
   );
 };
 

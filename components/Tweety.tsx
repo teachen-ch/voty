@@ -2,7 +2,14 @@ import { Box, Text, Card, Button, Link } from "rebass";
 import { useState } from "react";
 import { Input, Label, Textarea } from "@rebass/forms";
 import { UserWhereUniqueInput, Visibility } from "graphql/types";
-import { Authors, Visible, usePostWork, WorkItem, Works } from "./Works";
+import {
+  Authors,
+  Visible,
+  usePostWork,
+  WorkItem,
+  Works,
+  WorkCard,
+} from "./Works";
 import { Err } from "./Page";
 import Info from "./Info";
 
@@ -154,11 +161,11 @@ const TwitterIcon: React.FC = () => (
 
 const TweetyItem: WorkItem = ({ work }) => {
   return (
-    <Box>
-      <Text my={3} fontSize={1}>
+    <WorkCard>
+      <Text mb={3} fontSize={1}>
         Abstimmung / Thema: {work.title}
       </Text>
       <TweetyCard tweet={work.text} />
-    </Box>
+    </WorkCard>
   );
 };

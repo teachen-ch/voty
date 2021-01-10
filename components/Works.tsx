@@ -11,7 +11,7 @@ import {
   Visibility,
 } from "graphql/types";
 import { AttachmentFields } from "components/Uploader";
-import { Flex, Image, Text, FlexProps, Box } from "rebass";
+import { Flex, Image, Text, FlexProps, Box, BoxProps } from "rebass";
 import { useTeam, useUser } from "state/user";
 import { ChangeEvent, useEffect, useRef, useState } from "react";
 import { Loading } from "./Page";
@@ -124,13 +124,27 @@ export const Works: React.FC<
                 </Text>
               </Text>
             </Flex>
-            <Box pl={45}>{active === work.id && <Comp work={work} />}</Box>
+            <Box pl={0}>{active === work.id && <Comp work={work} />}</Box>
           </Box>
         );
       })}
     </ListComp>
   );
 };
+
+export const WorkCard: React.FC<BoxProps> = ({ children, ...props }) => (
+  <Box
+    sx={{ borderRadius: 5 }}
+    bg="lightgray"
+    fontSize={[1, 1, 2]}
+    color="black"
+    p={3}
+    my={3}
+    {...props}
+  >
+    {children}
+  </Box>
+);
 
 type PostWorkHookType = (args: {
   card: string;

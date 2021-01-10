@@ -41,7 +41,7 @@ declare module "rebass" {
     as?: React.ElementType;
     className?: string;
     id?: string;
-    css?: InterpolationWithTheme<CardProps>;
+    css?: InterpolationWithTheme<BoxProps>;
   }
 }
 
