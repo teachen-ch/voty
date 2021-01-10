@@ -29,6 +29,7 @@ export const Chaty: React.FC<{
   const [finished, setFinished] = useState(false);
   const [inputMessage, setInputMessage] = useState<TMessage>();
   const [cancel, setCancel] = useState(0);
+  const [showAll, setShowAll] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -41,7 +42,8 @@ export const Chaty: React.FC<{
 
   // scroll to bottom on every new message
   useEffect(() => {
-    if (started) messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    if (started && !showAll)
+      messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [show]);
 
   function doChat(line = 0, input?: string) {
@@ -53,19 +55,14 @@ export const Chaty: React.FC<{
     const msg = messages[line];
     const chars = msg.message?.length || 10;
     const wait = Math.min((1 / speed) * WAIT * chars, (1 / speed) * MAX_WAIT);
+
+    setShow(messages.slice(0, line + 1));
+    if (showAll) return;
+
     if (messages[line].direction === Direction.Outgoing && !input) {
       setInputMessage(messages[line]);
       return;
     }
-
-    setShow(messages.slice(0, line + 1));
-
-    if (messages[line].direction === Direction.Outgoing && !input) {
-      setInputMessage(messages[line]);
-      return;
-    }
-
-    setShow(messages.slice(0, line + 1));
 
     if (line + 1 < messages.length) {
       if (messages[line + 1].direction !== Direction.Outgoing) {
@@ -95,7 +92,10 @@ export const Chaty: React.FC<{
           </Button>
           <Text m={3} fontSize={1}>
             <Link
-              onClick={() => doChat(messages.length - 1)}
+              onClick={() => {
+                setShowAll(true);
+                doChat(messages.length - 1);
+              }}
               variant="underline"
             >
               Den ganzen Chat anzeigen

@@ -170,7 +170,12 @@ const PostDiscussion: React.FC<{
 
   if (success) {
     return (
-      <Flex justifyContent="space-between" alignItems="center" mt={5}>
+      <Flex
+        justifyContent="space-between"
+        alignItems="center"
+        mt={5}
+        flexWrap="wrap"
+      >
         Diskussionsbeitrag abgeschickt!
         <Button onClick={() => setSuccess(false)}>Neuer Beitrag</Button>
       </Flex>
@@ -201,7 +206,7 @@ const PostDiscussion: React.FC<{
         <Button variant="text" onClick={() => setOpen(false)} mr={3}>
           Abbrechen
         </Button>
-        <Button onClick={onSubmit}>Beitrag abschicken</Button>
+        <Button onClick={onSubmit}>Beitrag&nbsp;abschicken</Button>
       </Flex>
 
       <Err msg={error} />
