@@ -1,13 +1,16 @@
 import { gql } from "@apollo/client";
-import { useTeam } from "state/user";
-import { Box, Text, Heading, Button } from "rebass";
+import { useTeam, useUser } from "state/user";
+import { Box, Text, Button, Flex } from "rebass";
 import {
   DiscussionFieldsFragment,
   usePostDiscussionMutation,
   useGetTeamDiscussionsQuery,
 } from "graphql/types";
-import { ErrorBox, QForm } from "./Form";
 import React, { useState } from "react";
+import { H2 } from "pages/team/[team]/admin";
+import { Textarea } from "@rebass/forms";
+import { Err } from "./Page";
+import { Pill } from "components/Works";
 
 const DiscussionFields = gql`
   fragment DiscussionFields on Discussion {
@@ -19,6 +22,7 @@ const DiscussionFields = gql`
     createdAt
     updatedAt
     user {
+      id
       shortname
     }
   }
@@ -61,47 +65,58 @@ export const Discussion: React.FC<{
   ballotId?: string;
   title?: string;
 }> = ({ card, ballotId, title = "Klassendiskussion" }) => {
+  const user = useUser();
   const team = useTeam();
+
+  const discussionsQuery = useGetTeamDiscussionsQuery({
+    variables: { card, ballotId, teamId: team?.id },
+    skip: !team,
+  });
+  const discussions = discussionsQuery.data?.getTeamDiscussions;
+
   if (!team) return null;
   return (
     <Box className="discussion" id="discussion" mt={6}>
-      {title && <Heading>{title}</Heading>}
-      <Discussions card={card} ballotId={ballotId} teamId={team.id} />
+      {title && <H2>{title}</H2>}
+
+      <Box my={3}>
+        {discussions && discussions.length > 0
+          ? discussions.map(
+              (discussion) =>
+                discussion && (
+                  <DiscussionDetail
+                    key={discussion.id}
+                    discussion={discussion}
+                    userId={String(user?.id)}
+                  />
+                )
+            )
+          : "Noch keine Diskussionsbeiträge"}
+      </Box>
       <PostDiscussion card={card} ballotId={ballotId} />
     </Box>
   );
 };
 
-const Discussions: React.FC<{
-  card?: string;
-  ballotId?: string;
-  teamId: string;
-}> = ({ card, ballotId, teamId }) => {
-  const discussionsQuery = useGetTeamDiscussionsQuery({
-    variables: { card, ballotId, teamId },
-  });
-  const discussions = discussionsQuery.data?.getTeamDiscussions;
+const DiscussionDetail: React.FC<{
+  discussion: DiscussionFieldsFragment;
+  userId: string;
+}> = ({ discussion, userId }) => {
+  const isMe = discussion.user.id === userId;
   return (
-    <>
-      {discussions?.map(
-        (discussion) =>
-          discussion && (
-            <DiscussionDetail key={discussion.id} discussion={discussion} />
-          )
-      )}
-    </>
-  );
-};
-
-const DiscussionDetail: React.FC<{ discussion: DiscussionFieldsFragment }> = ({
-  discussion,
-}) => {
-  return (
-    <Box className="discussion" mb={3} fontSize={2}>
-      <Text>
-        <b>{discussion.user.shortname}:</b> {discussion.text}
-      </Text>
-    </Box>
+    <Flex
+      className="discussion"
+      mb={3}
+      fontSize={2}
+      alignItems="flex-start"
+      flexDirection={isMe ? "row-reverse" : "inherit"}
+      textAlign={isMe ? "right" : "left"}
+    >
+      <Pill sx={{ flexShrink: 0, borderRadius: 20 }} ml={isMe ? 2 : 0}>
+        {isMe ? "Ich" : discussion.user.shortname}
+      </Pill>
+      <Text pt="6px">{discussion.text}</Text>
+    </Flex>
   );
 };
 
@@ -110,12 +125,15 @@ const PostDiscussion: React.FC<{
   ballotId?: string;
 }> = ({ card, ballotId }) => {
   const [success, setSuccess] = useState(false);
+  const [text, setText] = useState("");
+  const [open, setOpen] = useState(false);
   const team = useTeam();
   const [error, setError] = useState("");
   const [doPost] = usePostDiscussionMutation({
     onCompleted() {
       setSuccess(true);
       setError("");
+      setText("");
     },
     onError(error) {
       setError(error.message);
@@ -138,39 +156,55 @@ const PostDiscussion: React.FC<{
     },
   });
 
-  async function onSubmit(values: Record<string, any>) {
+  async function onSubmit() {
     if (!team?.id) return alert("Kein Team");
     const variables = {
       card,
       ballotId,
       teamId: team?.id,
       title: "",
-      text: String(values.text),
+      text: text,
     };
     await doPost({ variables });
   }
 
   if (success) {
     return (
-      <Text>
-        Diskussionsbeitrag abgeschickt!{" "}
+      <Flex justifyContent="space-between" alignItems="center" mt={5}>
+        Diskussionsbeitrag abgeschickt!
         <Button onClick={() => setSuccess(false)}>Neuer Beitrag</Button>
-      </Text>
+      </Flex>
+    );
+  }
+
+  if (!open) {
+    return (
+      <Button width="100%" onClick={() => setOpen(true)}>
+        Neuer Diskussionsbeitrag
+      </Button>
     );
   }
 
   return (
-    <div id="postDiscussion">
-      <QForm
-        fields={{
-          text: { label: "Kommentar", type: "textarea", required: true },
-          submit: { type: "submit", label: "Abschicken" },
-        }}
-        mutation={doPost}
-        onSubmit={onSubmit}
-      >
-        <ErrorBox error={error} />
-      </QForm>
-    </div>
+    <Box id="postDiscussion">
+      <Textarea
+        mt={3}
+        value={text}
+        bg="#B1BDC3"
+        sx={{ border: "white", "::placeholder": { color: "white" } }}
+        onChange={(evt) => setText(evt.target.value)}
+        fontSize={[1, 1, 2]}
+        rows={2}
+        placeholder="Mein Kommentar..."
+      />
+      <Flex width="100%" justifyContent="space-between" mt={2}>
+        <Button variant="text" onClick={() => setOpen(false)} mr={3}>
+          Abbrechen
+        </Button>
+        <Button onClick={onSubmit}>Beitrag abschicken</Button>
+      </Flex>
+
+      <Err msg={error} />
+    </Box>
   );
 };

@@ -7930,7 +7930,7 @@ export type DiscussionFieldsFragment = (
   & Pick<Discussion, 'id' | 'title' | 'text' | 'card' | 'ballotId' | 'createdAt' | 'updatedAt'>
   & { user: (
     { __typename?: 'User' }
-    & Pick<User, 'shortname'>
+    & Pick<User, 'id' | 'shortname'>
   ) }
 );
 
@@ -8489,6 +8489,7 @@ export const DiscussionFieldsFragmentDoc = gql`
   createdAt
   updatedAt
   user {
+    id
     shortname
   }
 }

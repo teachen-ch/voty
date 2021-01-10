@@ -356,12 +356,18 @@ export const Authors: React.FC<{
   );
 };
 
-export const Pill: React.FC<{
-  deleteLink?: boolean | (() => void);
-  bg?: string;
-  color?: string;
-  onClick?: () => void;
-}> = ({ deleteLink, bg = "secondary", color = "white", children, onClick }) => (
+export const Pill: React.FC<
+  BoxProps & {
+    deleteLink?: boolean | (() => void);
+  }
+> = ({
+  deleteLink,
+  bg = "secondary",
+  color = "white",
+  children,
+  onClick,
+  ...props
+}) => (
   <Flex
     bg={bg}
     color={color}
@@ -373,6 +379,7 @@ export const Pill: React.FC<{
     fontSize={1}
     sx={{ borderRadius: 20, cursor: onClick ? "pointer" : "inherit" }}
     onClick={onClick}
+    {...props}
   >
     <Text>{children}</Text>
     {deleteLink && isFunction(deleteLink) && (
