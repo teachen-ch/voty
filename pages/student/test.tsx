@@ -1,5 +1,5 @@
 import { LoggedInPage } from "components/Page";
-import { Text, Heading, Box, Card, Button, Image } from "rebass";
+import { Text, Heading, Box, Card, Button, Image, Flex } from "rebass";
 import { ReadMore } from "components/ReadMore";
 import { useUser, SessionUser } from "state/user";
 import { Breadcrumb, A, Here } from "components/Breadcrumb";
@@ -31,9 +31,17 @@ export default function StudentTest(): React.ReactElement {
         <Here>Meine Klasse</Here>
       </Breadcrumb>
 
+      <Flex justifyContent="center" mt={[-90, -60, -60]} mb={[-60, -50, -50]}>
+        <Image
+          src="/images/students_welcome.svg"
+          width="350px"
+          maxWidth="80%"
+        />
+      </Flex>
+
       <Text textAlign="left">
         <HideFeature id="cards">
-          <Heading>Lerninhalte</Heading>
+          <Heading mt={0}>Lerninhalte</Heading>
           <CardStudentList
             teamCards={String(user.team?.cards)}
             teamId={user.team.id}

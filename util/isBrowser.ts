@@ -3,21 +3,30 @@ export function isBrowser(): boolean {
 }
 
 export function isProd(): boolean {
-  return document?.location.host === "voty.ch";
+  if (process.env.NEXT_PUBLIC_ENV)
+    return process.env.NEXT_PUBLIC_ENV === "production";
+  return getHost() === "voty.ch";
 }
 
 export function isDev(): boolean {
-  return document?.location.host !== "voty.ch";
+  return !isProd();
 }
 
 export function isLocal(): boolean {
-  return document?.location.host.startsWith("localhost");
+  if (process.env.NEXT_PUBLIC_ENV)
+    return process.env.NEXT_PUBLIC_ENV === "local";
+  return getHost().startsWith("localhost");
 }
 
 export function isMobile(): boolean {
+  if (typeof window === "undefined") return false;
   return window?.innerWidth < 600;
 }
 
 export function isDesktop(): boolean {
   return !isMobile();
+}
+
+export function getHost(): string {
+  return typeof document !== "undefined" ? document.location.host : "";
 }

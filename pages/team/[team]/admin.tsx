@@ -308,10 +308,10 @@ function InviteLink({ team }: { team: TeamTeacherFieldsFragment }) {
 export const H2: React.FC<HeadingProps> = (props) => (
   <Heading
     as="h2"
-    color="secondary"
+    color="#1C88FF"
     pb={2}
     fontWeight="semi"
-    sx={{ borderBottom: "2px solid", borderColor: "secondary" }}
+    sx={{ borderBottom: "2px solid", borderColor: "#1C88FF" }}
     {...props}
   >
     {props.children}

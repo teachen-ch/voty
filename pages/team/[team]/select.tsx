@@ -86,7 +86,7 @@ export default function CardsPage(): React.ReactElement {
 }
 
 export const H3: React.FC<HeadingProps> = (props) => (
-  <Heading as="h3" color="#508DEA" pb={2} fontWeight="semi" {...props}>
+  <Heading as="h3" color="#1C88FF" pb={2} fontWeight="semi" {...props}>
     {props.children}
   </Heading>
 );

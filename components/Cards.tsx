@@ -196,11 +196,11 @@ export const CardStudentList: React.FC<{
             onClick={() => router.push(`/team/${teamId}/cards/${id}`)}
             alignItems="center"
             bg="secondary"
-            sx={{ cursor: "pointer" }}
             mb={3}
             px={3}
             height={76}
             fontWeight="semi"
+            sx={{ ":hover": { bg: "#1C88FF" }, cursor: "pointer" }}
           >
             <Image src={getCardIcon(card?.icon, card?.type)} mr={3} />
             {card?.title}
