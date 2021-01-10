@@ -51,7 +51,7 @@ export const AppPage: React.FC<{
           py="25px"
           sx={{
             borderRadius: [0, 0, 5],
-            backgroundColor: ["silver_m", "silver_m", "silver"],
+            backgroundColor: "silver",
             position: "relative",
           }}
           minWidth="min(100%, 800px)"

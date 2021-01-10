@@ -193,7 +193,7 @@ export const PanelPage: React.FC<{ heading: string; teamId?: string }> = (
         sx={{
           minWidth: "min(100%, 800px)",
           borderRadius: [0, 0, 5],
-          backgroundColor: ["silver_m", "silver_m", "silver"],
+          backgroundColor: "silver",
         }}
         maxWidth="800px"
         minHeight="450px"

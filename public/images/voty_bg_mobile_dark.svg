@@ -1,27 +1,37 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Generator: Adobe Illustrator 24.3.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
-<svg version="1.1" id="Ebene_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 viewBox="0 0 375 790" style="enable-background:new 0 0 375 790;" xml:space="preserve">
-<style type="text/css">
-	.st0{fill-rule:evenodd;clip-rule:evenodd;fill:#313131;}
-	.st1{opacity:0.26;fill:none;stroke:#A7AAAB;stroke-width:22;stroke-linecap:round;stroke-linejoin:round;}
-	.st2{opacity:0.2619;}
-	.st3{fill:none;stroke:#A7AAAB;stroke-width:22;stroke-linecap:round;stroke-linejoin:round;}
-</style>
-<rect y="0" class="st0" width="375" height="790"/>
-<path class="st1" d="M324.6-2.8c37.3,0,67.5,30.2,67.5,67.5s-30.2,67.5-67.5,67.5s-67.5-30.2-67.5-67.5S287.4-2.8,324.6-2.8z
-	 M266.5,30.4c32.4,33.6,82.2,43.6,125.1,25.1"/>
-<path id="Path_1_" class="st1" d="M324.6,154.7c-62.1,0-112.5,50.4-112.5,112.5h225C437.1,205,386.8,154.7,324.6,154.7z"/>
-<g id="couple-man-woman-copy-2" transform="translate(212.000000, 501.000000)" class="st2">
-	<circle id="Oval_1_" class="st3" cx="112.7" cy="67.7" r="67.5"/>
-	<path id="Path_2_" class="st3" d="M54.5,33.4C86.9,66.9,136.7,77,179.5,58.5"/>
-	<path id="Path_3_" class="st3" d="M112.7,157.7C50.5,157.7,0.2,208,0.2,270.2h225C225.1,208,174.8,157.7,112.7,157.7z"/>
-</g>
-<g id="couple-man-woman-copy" transform="translate(-335.000000, 262.000000)" class="st2">
-	<path id="Path_4_" class="st3" d="M487.1,138.4c-9-14.8-13.5-31.8-12.9-49.1V69.2c0-38.1-30.9-69.1-69.1-69.1s-69.1,30.9-69.1,69.1
-		v20.1c0.6,17.3-3.9,34.3-12.9,49.1"/>
-	<path id="Path_5_" class="st3" d="M336.1,80.7c26.5,0,51.7-11.6,69.1-31.7c17.3,20.1,42.5,31.6,69.1,31.7"/>
-	<path id="Path_6_" class="st3" d="M344.5,80.3c3.1,31.1,29.3,54.9,60.6,54.9s57.5-23.7,60.6-54.9"/>
-	<path id="Path_7_" class="st3" d="M405.1,157.7c-62.1,0-112.5,50.4-112.5,112.5h225C517.7,208,467.3,157.7,405.1,157.7z"/>
-</g>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="375px" height="790px" viewBox="0 0 375 790" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>iPhone 8</title>
+    <defs>
+        <filter id="filter-1">
+            <feColorMatrix in="SourceGraphic" type="matrix" values="0 0 0 0 0.000000 0 0 0 0 0.000000 0 0 0 0 0.000000 0 0 0 1.000000 0"></feColorMatrix>
+        </filter>
+        <filter id="filter-2">
+            <feColorMatrix in="SourceGraphic" type="matrix" values="0 0 0 0 0.000000 0 0 0 0 0.000000 0 0 0 0 0.000000 0 0 0 1.000000 0"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="iPhone-8" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <rect fill="#313131" x="0" y="0" width="375" height="790"></rect>
+        <g id="Group" opacity="0.102585565" transform="translate(-335.000000, -3.000000)" stroke-linecap="round" stroke-linejoin="round">
+            <g filter="url(#filter-1)" id="couple-man-woman">
+                <g transform="translate(547.000000, 0.000000)">
+                    <circle id="Oval" stroke="#A7AAAB" stroke-width="22.5000003" cx="112.650002" cy="67.650001" r="67.500001"></circle>
+                    <path d="M54.4875008,33.3825005 C86.8911717,66.9486047 136.686858,76.9561221 179.542503,58.5150009" id="Path" stroke="#A7AAAB" stroke-width="22.5000003"></path>
+                    <path d="M112.65,157.650002 C50.5179664,157.650002 0.150000002,208.017969 0.150000002,270.150002 L225.15,270.150002 C225.15,208.017969 174.782037,157.650002 112.65,157.650002 Z" id="Path" stroke="#A7AAAB" stroke-width="22.5000003"></path>
+                </g>
+            </g>
+            <g filter="url(#filter-2)" id="couple-man-woman-copy-2">
+                <g transform="translate(547.000000, 504.000000)">
+                    <circle id="Oval" stroke="#A7AAAB" stroke-width="22.5000003" cx="112.650002" cy="67.650001" r="67.500001"></circle>
+                    <path d="M54.4875008,33.3825005 C86.8911717,66.9486047 136.686858,76.9561221 179.542503,58.5150009" id="Path" stroke="#A7AAAB" stroke-width="22.5000003"></path>
+                    <path d="M112.65,157.650002 C50.5179664,157.650002 0.150000002,208.017969 0.150000002,270.150002 L225.15,270.150002 C225.15,208.017969 174.782037,157.650002 112.65,157.650002 Z" id="Path" stroke="#A7AAAB" stroke-width="22.5000003"></path>
+                </g>
+            </g>
+            <g id="couple-man-woman-copy" transform="translate(0.000000, 265.000000)" stroke="#000000" stroke-width="22.5000003">
+                <path d="M487.095007,138.390002 C478.107083,123.638446 473.625922,106.581879 474.202507,89.3175013 L474.202507,69.247501 C474.202507,31.1108578 443.286649,0.195000003 405.150006,0.195000003 C367.013363,0.195000003 336.097505,31.1108578 336.097505,69.247501 L336.097505,89.3175013 C336.67409,106.581879 332.192929,123.638446 323.205005,138.390002" id="Path"></path>
+                <path d="M336.097505,80.6550012 C362.615959,80.6119728 387.810277,69.0614986 405.150006,48.9975007 C422.489736,69.0614986 447.684054,80.6119728 474.202507,80.6550012" id="Path"></path>
+                <path d="M344.535005,80.2500012 C347.656244,111.391602 373.863629,135.103596 405.161256,135.103596 C436.458883,135.103596 462.666268,111.391602 465.787507,80.2500012" id="Path"></path>
+                <path d="M405.150004,157.650002 C343.017971,157.650002 292.650004,208.017969 292.650004,270.150002 L517.650004,270.150002 C517.650004,208.017969 467.282041,157.650002 405.150004,157.650002 Z" id="Path"></path>
+            </g>
+        </g>
+    </g>
 </svg>
