@@ -64,7 +64,7 @@ export const Discussion: React.FC<{
   const team = useTeam();
   if (!team) return null;
   return (
-    <Box className="discussion" mt={6}>
+    <Box className="discussion" id="discussion" mt={6}>
       {title && <Heading>{title}</Heading>}
       <Discussions card={card} ballotId={ballotId} teamId={team.id} />
       <PostDiscussion card={card} ballotId={ballotId} />

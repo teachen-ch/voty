@@ -150,7 +150,7 @@ export function getActivityLink(
     case ActivityType.Attachment:
       return undefined;
     case ActivityType.Discussion:
-      return act.card ? cardLink : ballotLink;
+      return act.card ? `${cardLink}#discussion` : `${ballotLink}#discussion`;
     case ActivityType.Test:
       return cardLink;
     case ActivityType.Vote:
