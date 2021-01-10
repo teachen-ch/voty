@@ -129,7 +129,7 @@ export default function TeacherTeamPage(): React.ReactElement {
       <Text textAlign="left">
         <HideFeature id="cards">
           <H2>Lerninhalte Klasse {team.name}</H2>
-          <Text mb={4}>
+          <Text mb={4} fontSize={2}>
             Hier siehst du die Lerninhalte, welche bereits ausgewählt sind und
             deinen Schüler*innen auf der Klassenseite angezeigt werden.
           </Text>
@@ -154,7 +154,7 @@ export default function TeacherTeamPage(): React.ReactElement {
         <HideFeature id="activities">
           <H2 mt={6}>Aktivitäten Klasse {team.name}</H2>
           <Text mb={4} fontSize={2}>
-            Hier siehst du alle Aktivitäten, Uploads und Diskussionen der Klasse
+            Hier siehst du alle Aktivitäten, Uploads und Diskussionen der Klasse{" "}
             {team.name}.
           </Text>
           <Activities teamId={team.id} />

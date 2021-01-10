@@ -5,10 +5,11 @@ import { ErrorPage, Loading } from "./Page";
 import { useState } from "react";
 import { formatYear } from "util/date";
 import { debounce, random } from "lodash";
-import { VotesQuery } from "./Swissvotes";
+import { Filter, VotesQuery } from "./Swissvotes";
 
 export const Posters: React.FC = () => {
   const [keywords, setKeywords] = useState("");
+  const [yes, setYes] = useState("");
   const [offset, setOffset] = useState(0);
   const limit = 20;
   return (
@@ -23,7 +24,14 @@ export const Posters: React.FC = () => {
           Suche
         </Button>
       </Flex>
-      <PosterList query={{ keywords, limit, offset, hasPosters: true }} />
+      <Text mb={4} mt={2} fontSize={1}>
+        Filtern nach: <Filter set={setYes} v={yes} val={"JA"} label="JA" sep />
+        <Filter set={setYes} v={yes} val={"NEIN"} label="NEIN" />
+      </Text>
+      <PosterList
+        query={{ keywords, limit, offset, hasPosters: true }}
+        yes={yes}
+      />
       <Flex justifyContent="space-between" mt={2}>
         <Link onClick={() => setOffset(offset - limit)} fontSize={1}>
           {offset > 0 ? "Neuere Plakate anzeigen" : ""}
@@ -44,7 +52,10 @@ export const RandomPosters: React.FC<{ amount?: number }> = ({
   );
 };
 
-export const PosterList: React.FC<{ query: VotesQuery }> = ({ query }) => {
+export const PosterList: React.FC<{ query: VotesQuery; yes?: string }> = ({
+  query,
+  yes,
+}) => {
   const swissvotesQuery = useSwissvotesQuery({
     variables: query,
   });
@@ -57,20 +68,25 @@ export const PosterList: React.FC<{ query: VotesQuery }> = ({ query }) => {
   if (!swissvotes || swissvotes.length === 0)
     return <Box my={4}>Nichts gefunden…</Box>;
 
+  const onlyYes = yes === "JA";
+  const onlyNo = yes === "NEIN";
+  alert(onlyYes + " - " + onlyNo);
+
   return (
     <>
       <Box sx={{ columnCount: [2, 2, 3], columnGap: "8px" }} mt={3}>
         {swissvotes?.map((vote) => {
+          if (!vote) return null;
           const posters: string[] = [];
-          if (vote && vote.poster_ja) {
+          if (vote.poster_ja && !onlyNo) {
             const ja = vote.poster_ja.split(" ");
             posters.push(ja[random(0, ja.length - 1)]);
           }
-          if (vote && vote.poster_nein) {
+          if (vote.poster_nein && !onlyYes) {
             const nein = vote.poster_nein.split(" ");
             posters.push(nein[random(0, nein.length - 1)]);
           }
-          if (vote && posters.length > 0) {
+          if (posters.length > 0) {
             return posters.map((p) => <Poster key={p} vote={vote} image={p} />);
           } else return null;
         })}
