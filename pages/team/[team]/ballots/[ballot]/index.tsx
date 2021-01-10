@@ -12,6 +12,7 @@ import { BallotDetails } from "components/Ballots";
 import { Breadcrumb, A, Here } from "components/Breadcrumb";
 import { Nullable } from "simplytyped";
 import { Discussion } from "components/Discussion";
+import { HideFeature } from "components/HideFeature";
 
 export default function BallotPage(): ReactElement {
   const [success, setSuccess] = useState(false);
@@ -76,7 +77,9 @@ export default function BallotPage(): ReactElement {
         <VotyNow ballot={ballot} onSuccess={() => setSuccess(true)} />
       </BallotDetails>
 
-      <Discussion ballotId={ballot.id} />
+      <HideFeature id="discussions">
+        <Discussion ballotId={ballot.id} />
+      </HideFeature>
     </LoggedInPage>
   );
 }

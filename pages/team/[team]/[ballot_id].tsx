@@ -60,7 +60,7 @@ export default function TeacherBallotPage(): React.ReactElement {
         </Box>
       )}
       <BallotDetails ballot={ballot} />
-      <HideFeature id="discussion">
+      <HideFeature id="discussions">
         <Discussion ballotId={ballot.id} />
       </HideFeature>
     </LoggedInPage>

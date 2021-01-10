@@ -3,7 +3,10 @@ export function isBrowser(): boolean {
 }
 
 export function isProd(): boolean {
-  return process.env.NEXT_PUBLIC_ENV === "production";
+  return (
+    process.env.NEXT_PUBLIC_ENV === "production" ||
+    process.env.BASE_URL === "https://voty.ch/"
+  );
 }
 
 export function isDev(): boolean {

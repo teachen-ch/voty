@@ -6,6 +6,7 @@ import { A, Breadcrumb, Here } from "components/Breadcrumb";
 import { Role } from "graphql/types";
 import { Discussion } from "components/Discussion";
 import { useQueryParam } from "util/hooks";
+import { HideFeature } from "components/HideFeature";
 
 export default function CardPage(): React.ReactElement {
   const user = useUser();
@@ -52,7 +53,9 @@ export default function CardPage(): React.ReactElement {
 
         <Card id={key} />
 
-        {meta.discussion !== false && <Discussion card={key} />}
+        <HideFeature id="discussions">
+          {meta.discussion !== false && <Discussion card={key} />}
+        </HideFeature>
       </Text>
     </LoggedInPage>
   );
