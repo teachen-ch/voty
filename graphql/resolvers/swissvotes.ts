@@ -10,7 +10,9 @@ export const swissvotes: FieldResolver<"Query", "swissvotes"> = async (
   const db = ctx.db;
   let query = "SELECT * FROM swissvotes WHERE ";
   if (keywords) {
-    for (const word of keywords.split(/\s*\W\s*/)) {
+    // sanitize keywords
+    const words = keywords.replace(/[$<>\\'"*%]/, "");
+    for (const word of words.split(/\s*\W\s*/)) {
       query += "(";
       for (const field of ["titel_kurz_d", "stichwort", "kategorien"]) {
         query += `${field} ILIKE '%${word}%' OR `;

@@ -70,7 +70,6 @@ export const PosterList: React.FC<{ query: VotesQuery; yes?: string }> = ({
 
   const onlyYes = yes === "JA";
   const onlyNo = yes === "NEIN";
-  alert(onlyYes + " - " + onlyNo);
 
   return (
     <>
