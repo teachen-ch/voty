@@ -3,18 +3,15 @@ export function isBrowser(): boolean {
 }
 
 export function isProd(): boolean {
-  return (
-    process.env.NEXT_PUBLIC_ENV === "production" ||
-    process.env.BASE_URL === "https://voty.ch/"
-  );
+  return document?.location.host === "voty.ch";
 }
 
 export function isDev(): boolean {
-  return process.env.NEXT_PUBLIC_ENV !== "production";
+  return document?.location.host !== "voty.ch";
 }
 
 export function isLocal(): boolean {
-  return process.env.NEXT_PUBLIC_ENV === "local";
+  return document?.location.host.startsWith("localhost");
 }
 
 export function isMobile(): boolean {
