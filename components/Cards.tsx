@@ -124,7 +124,7 @@ export const CardItem: React.FC<{
       width={["calc(50% - 16px)", "calc(50% - 16px)", "calc(33.3333% - 16px)"]}
       mx="8px"
       sx={{
-        background: `url(${bgImage}) center/80% no-repeat ${bgColor}`,
+        background: `url(${bgImage}) center/100% no-repeat ${bgColor}`,
       }}
       color="white"
       p={3}

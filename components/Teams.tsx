@@ -141,7 +141,7 @@ export const Teams: React.FC<TeamsProps> = ({ where, teamClick }) => {
                 <td align="center">
                   {team.members ? <>{team.members.length}</> : "-"}
                 </td>
-                <td width="1%">
+                <td width="40px">
                   <A onClick={() => teamClick(team)}>
                     <Box variant="centered">
                       <img src="/images/icon_sus.svg" height="24px" alt="SuS" />
