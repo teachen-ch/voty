@@ -81,6 +81,8 @@ export default function TeacherTeamPage(): React.ReactElement {
   }
 
   async function inviteStudents(team: TeamTeacherFieldsFragment) {
+    const confirmed = confirm(`${matches} Emails verschicken?`);
+    if (!confirmed) return;
     trackEvent({
       category: "Teacher",
       action: "Invited",
@@ -189,23 +191,24 @@ export default function TeacherTeamPage(): React.ReactElement {
           rows={2}
           placeholder="name1@schule.ch, name2@schule; name3.schule.ch; ..."
         />
-        <Button
-          my={2}
-          onClick={() => inviteStudents(team)}
-          disabled={!matches || inviteQuery.loading}
-          width="100%"
-          bg="secondary"
-        >
-          {inviteQuery.loading ? (
-            <Text>
-              <Spinner color="gray" size={20} mr={3} />
-              Bitte warten...
-            </Text>
-          ) : (
-            `${matches ? matches : ""} Einladungen verschicken`
-          )}
-        </Button>
-
+        {matches && (
+          <Button
+            my={2}
+            onClick={() => inviteStudents(team)}
+            disabled={!matches || inviteQuery.loading}
+            width="100%"
+            bg="secondary"
+          >
+            {inviteQuery.loading ? (
+              <Text>
+                <Spinner color="gray" size={20} mr={3} />
+                Bitte warten...
+              </Text>
+            ) : (
+              `${matches ? matches : ""} Einladungen verschicken`
+            )}
+          </Button>
+        )}
         {duplicated ? (
           <ErrorBox
             error={`Folgende Accounts existieren bereits: ${duplicatedEmails}`}
@@ -219,16 +222,6 @@ export default function TeacherTeamPage(): React.ReactElement {
           />
         ) : (
           ""
-        )}
-        {matches && (
-          <>
-            <Text fontSize={1}>
-              {matches} Email{matches == 1 ? "" : "s"} werden verschickt an:{" "}
-              {emails.map((email) => (
-                <li key={email}>{email}</li>
-              ))}
-            </Text>
-          </>
         )}
         <Text fontSize={[1, 1, 2]} sx={{ gridColumn: [0, 0, 2] }} mt={4}>
           <IconHint
