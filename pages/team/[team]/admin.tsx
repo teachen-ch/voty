@@ -52,6 +52,7 @@ export default function TeacherTeamPage(): React.ReactElement {
   // usePolling(teamQuery);
   const [emails, setEmails] = useState<string[]>([]);
   const [matches, setMatches] = useState<number | undefined>();
+  const [showInvite, setShowInvite] = useState(false);
   const [results, setResults] = useState<
     Nullable<{
       created?: Nullable<Nullable<string>[]>;
@@ -177,36 +178,63 @@ export default function TeacherTeamPage(): React.ReactElement {
           </>
         )}
 
-        <Text mt={4} fontSize={2} fontWeight="semi">
-          {team.members.length ? "Weitere" : ""} Schüler*innen einladen:
-        </Text>
-        <Textarea
-          mt={3}
-          value={importEmails}
-          bg="#B1BDC3"
-          sx={{ border: "white", "::placeholder": { color: "white" } }}
-          onChange={checkEmails}
-          fontSize={1}
-          height="auto"
-          rows={2}
-          placeholder="name1@schule.ch, name2@schule; name3.schule.ch; ..."
-        />
-        {matches && (
-          <Button
-            my={2}
-            onClick={() => inviteStudents(team)}
-            disabled={!matches || inviteQuery.loading}
-            width="100%"
-            bg="secondary"
-          >
-            {inviteQuery.loading ? (
-              <Text>
-                <Spinner color="gray" size={20} mr={3} />
-                Bitte warten...
-              </Text>
-            ) : (
-              `${matches ? matches : ""} Einladungen verschicken`
-            )}
+        {!team.members.length || showInvite ? (
+          <>
+            <Text mt={4} fontSize={2} fontWeight="semi">
+              {team.members.length ? "Weitere" : ""} Schüler*innen einladen:
+            </Text>
+            <Textarea
+              mt={3}
+              autoFocus={true}
+              value={importEmails}
+              bg="#B1BDC3"
+              sx={{ border: "white", "::placeholder": { color: "white" } }}
+              onChange={checkEmails}
+              fontSize={1}
+              height="auto"
+              rows={2}
+              placeholder="name1@schule.ch, name2@schule; name3.schule.ch; ..."
+            />
+            <Button
+              my={2}
+              onClick={() => inviteStudents(team)}
+              disabled={!matches || inviteQuery.loading}
+              width="100%"
+              bg="secondary"
+            >
+              {inviteQuery.loading ? (
+                <Text>
+                  <Spinner color="gray" size={20} mr={3} />
+                  Bitte warten...
+                </Text>
+              ) : (
+                `${matches ? matches : ""} Einladungen verschicken`
+              )}
+            </Button>
+            <Text fontSize={[1, 1, 2]} sx={{ gridColumn: [0, 0, 2] }} mt={4}>
+              <IconHint
+                alt="Hinweis"
+                height="24px"
+                style={{
+                  float: "left",
+                  marginRight: 8,
+                  verticalAlign: "center",
+                }}
+              />
+              Alternativ kannst Du auch mit einem{" "}
+              <A
+                onClick={() => setShowInviteLink(!showInviteLink)}
+                variant="underline"
+              >
+                Einladungslink oder QR-Code
+              </A>{" "}
+              einladen
+            </Text>
+            {showInviteLink && <InviteLink team={team} />}
+          </>
+        ) : (
+          <Button onClick={() => setShowInvite(true)} width="100%" mt={3}>
+            Weitere Schüler*innen einladen
           </Button>
         )}
         {duplicated ? (
@@ -223,22 +251,6 @@ export default function TeacherTeamPage(): React.ReactElement {
         ) : (
           ""
         )}
-        <Text fontSize={[1, 1, 2]} sx={{ gridColumn: [0, 0, 2] }} mt={4}>
-          <IconHint
-            alt="Hinweis"
-            height="24px"
-            style={{ float: "left", marginRight: 8, verticalAlign: "center" }}
-          />
-          Alternativ kannst Du auch mit einem{" "}
-          <A
-            onClick={() => setShowInviteLink(!showInviteLink)}
-            variant="underline"
-          >
-            Einladungslink oder QR-Code
-          </A>{" "}
-          einladen
-        </Text>
-        {showInviteLink && <InviteLink team={team} />}
       </Text>
     </LoggedInPage>
   );

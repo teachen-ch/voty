@@ -83,7 +83,7 @@ export const ActivitiesQuery: React.FC<{
         const text = getActivityText(act);
         return (
           <TR key={String(act.time)}>
-            <TD width="90px">
+            <TD width={[75, 75, 90]} fixed>
               {isToday(act.time) ? formatTime(act.time) : formatDate(act.time)}
             </TD>
             <TD flexy>
