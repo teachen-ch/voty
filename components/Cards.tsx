@@ -197,9 +197,9 @@ export const CardStudentList: React.FC<{
             alignItems="center"
             bg="secondary"
             sx={{ cursor: "pointer" }}
-            mb={4}
+            mb={3}
             px={3}
-            height={84}
+            height={76}
             fontWeight="semi"
           >
             <Image src={getCardIcon(card?.icon, card?.type)} mr={3} />
@@ -322,7 +322,7 @@ class CardAdminItem extends React.Component<CardAdminProps> {
       >
         <TDIcon
           {...dragHandleProps}
-          sx={{ cursor: "move" }}
+          sx={{ cursor: "grab" }}
           src="/images/icon_move.svg"
         />
         <TD flexy>

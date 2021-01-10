@@ -264,7 +264,7 @@ export const Authors: React.FC<{
   function doSearch(evt: ChangeEvent<HTMLInputElement>) {
     const str = evt.target.value;
     setSearch(str);
-    if (str.length < 3) {
+    if (str.length < 1) {
       setMatches([]);
       return;
     }

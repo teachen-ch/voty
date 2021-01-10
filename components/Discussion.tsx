@@ -106,7 +106,9 @@ const DiscussionDetail: React.FC<{
   return (
     <Flex
       className="discussion"
-      mb={3}
+      mb={2}
+      pb={2}
+      sx={{ borderBottom: "1px solid gray" }}
       fontSize={2}
       alignItems="flex-start"
       flexDirection={isMe ? "row-reverse" : "inherit"}
