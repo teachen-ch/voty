@@ -14,7 +14,7 @@ export default {
     muted: "#dee4e7",
     lightgray: "#dee4e7",
     darkgray: "rgba(0,0,0,0.2)",
-    silver: ["rgba(163,175,181, 0.25)"],
+    silver: ["rgba(163,175,181, 0.20)"],
     // silver_m: ["rgba(163,175,181, 0.75)"],
     gray: "#5a5a5a",
     success: "#258f17",
@@ -40,8 +40,8 @@ export default {
   fontWeights: {
     body: 400,
     semi: 600,
-    heading: 700,
-    bold: 700,
+    heading: 600,
+    bold: 600,
   },
   lineHeights: {
     body: 1.3,
@@ -83,7 +83,7 @@ export default {
       fontWeight: "semi",
     },
     bold: {
-      fontWeight: "bold",
+      fontWeight: "semi",
     },
   },
   styles: {
@@ -159,6 +159,9 @@ export default {
       code: {
         fontSize: "0.7em",
       },
+      strong: {
+        fontWeight: "semi",
+      },
     },
   },
   text: {
@@ -192,7 +195,7 @@ export default {
       fontWeight: "semi",
     },
     bold: {
-      fontWeight: "bold",
+      fontWeight: "semi",
     },
     inline: {
       display: "inline-block",
@@ -259,7 +262,7 @@ export default {
     full: {
       width: "100%",
       whiteSpace: "nowrap",
-      fontWeight: "bold",
+      fontWeight: "semi",
       borderRadius: "0px",
       cursor: "pointer",
     },
@@ -267,7 +270,7 @@ export default {
       bg: "muted",
       color: "white",
       borderRadius: "0px",
-      fontWeight: "bold",
+      fontWeight: "semi",
     },
   },
   label: { textAlign: "left" },

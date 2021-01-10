@@ -87,7 +87,7 @@ export const Swissvotes: React.FC<{
           Suche
         </Button>
       </Flex>
-      <Text mb={3} mt={1} fontSize={1}>
+      <Text mb={4} mt={2} fontSize={1}>
         Filtern nach:{" "}
         <Filter set={setType} v={type} val={3} label="Initiativen" sep />
         <Filter set={setType} v={type} val={1} label="Obl. Referenden" sep />

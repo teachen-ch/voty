@@ -345,7 +345,11 @@ class CardAdminItem extends React.Component<CardAdminProps> {
 
 export const Card: React.FC<{ id: string }> = ({ id }) => {
   const Comp = getCard(id);
-  return <Comp />;
+  return (
+    <Text fontSize={2} textAlign="left">
+      <Comp />
+    </Text>
+  );
 };
 
 export const CircleBullet: React.FC<{
