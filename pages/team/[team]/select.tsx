@@ -31,7 +31,7 @@ export default function CardsPage(): React.ReactElement {
     setKeywords("");
   }
   return (
-    <LoggedInPage heading="Lerninhalte" role={Role.Teacher}>
+    <LoggedInPage heading="Lerninhalte hinzufügen" role={Role.Teacher}>
       <Breadcrumb>
         <A href="/">Start</A>
         <A href="/teacher/">Meine Klassen</A>
