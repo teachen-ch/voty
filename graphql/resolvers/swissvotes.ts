@@ -11,7 +11,7 @@ export const swissvotes: FieldResolver<"Query", "swissvotes"> = async (
   let query = "SELECT * FROM swissvotes WHERE ";
   if (keywords) {
     // sanitize keywords
-    let words = keywords.replace(/[$<>\\'"%]/, "");
+    let words = keywords.replace(/[$<>\\'"%]/g, "");
     words = keywords.replace(/\*/, "%");
     for (const word of words.split(/[\s.,-:]+/)) {
       query += "(";
