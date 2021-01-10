@@ -13,6 +13,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { getCardTitle } from "./Cards";
 import { useTeam } from "state/user";
 import { useRouter } from "next/router";
+import { WorkCard } from "./Works";
 
 const WAIT = 50;
 const MAX_WAIT = 5000;
@@ -85,7 +86,7 @@ export const Chaty: React.FC<{
 
   if (!started) {
     return (
-      <Card>
+      <WorkCard>
         <Box textAlign="center">
           <Button mt={4} onClick={() => doChat()} width="250px">
             Chat starten
@@ -102,7 +103,7 @@ export const Chaty: React.FC<{
             </Link>
           </Text>
         </Box>
-      </Card>
+      </WorkCard>
     );
   }
 

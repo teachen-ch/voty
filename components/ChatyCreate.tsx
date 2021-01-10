@@ -86,9 +86,5 @@ export const ChatyCreate: React.FC<{
 };
 
 const ChatyItem: WorkItem = ({ work }) => {
-  return (
-    <WorkCard>
-      <Chaty title={work.title} lines={work.text} />
-    </WorkCard>
-  );
+  return <Chaty title={work.title} lines={work.text} />;
 };
