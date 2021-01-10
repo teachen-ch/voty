@@ -13,7 +13,6 @@ import { truncate, without } from "lodash";
 import { A } from "./Breadcrumb";
 import DraggableList from "react-draggable-list";
 import { OneRowTable, Table, TD, TDIcon, TR } from "./Table";
-import { isMobile } from "util/isBrowser";
 
 export const GET_CARDS = gql`
   query cards($keywords: String, $age: String, $type: String) {
@@ -77,11 +76,10 @@ export const Cards: React.FC<{
   return (
     <Flex flexWrap="wrap" mx="-8px">
       {cards?.map(
-        (card, ix) =>
+        (card) =>
           card && (
             <CardItem
               key={card.id}
-              ix={ix}
               card={card}
               teamCards={props.teamCards}
               teamId={props.teamId}
@@ -94,10 +92,9 @@ export const Cards: React.FC<{
 
 export const CardItem: React.FC<{
   card: CardType;
-  ix: number;
   teamCards?: string;
   teamId?: string;
-}> = ({ card, teamCards, teamId, ix }) => {
+}> = ({ card, teamCards, teamId }) => {
   const router = useRouter();
   const cardsList = teamCards ? teamCards.split(" ") : [];
   const id = String(card.id);
@@ -116,7 +113,7 @@ export const CardItem: React.FC<{
     if (cards.split(" ").length > 1) window.scrollBy(0, selected ? -40 : 40);
   }
   const link = teamId ? `/team/${teamId}/cards/${id}` : `/cards/${id}`;
-  const bgColor = isMobile() ? "#1C88FF" : ix % 2 == 1 ? "#0C66C9" : "#1C88FF";
+  const bgColor = selected ? "#1C88FF" : "#0C66C9";
   const bgImage = `/images/bg_${card.icon || card.type}.svg`;
   const selectImage = selected
     ? "/images/icon_check.svg"
@@ -142,7 +139,7 @@ export const CardItem: React.FC<{
         <Heading
           as="h3"
           mt={0}
-          fontSize={String(card.title).length > 25 ? "17px" : "20px"}
+          fontSize={String(card.title).length > 30 ? "20px" : "20px"}
           sx={{ cursor: "pointer" }}
           onClick={() => router.push(link)}
         >
