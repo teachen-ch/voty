@@ -39,18 +39,17 @@ export default function StudentHome(): ReactElement {
         <Here>Meine Klasse</Here>
       </Breadcrumb>
 
-      <Flex justifyContent="center" mt={[-90, -60, -60]} mb={[-60, -50, -50]}>
+      <Flex justifyContent="center" mt={-20} mb={0}>
         <Image
           src="/images/students_welcome.svg"
           width="350px"
+          height="259px"
           maxWidth="80%"
         />
       </Flex>
 
       <HideFeature id="cards">
-        <H2 mt={0} sx={{ borderBottom: "1px solid white" }}>
-          Deine Lerninhalte
-        </H2>
+        <H2 mt={0}>Deine Lerninhalte</H2>
         <Text mb={4} fontSize={2}>
           Wähle hier die Lerninhalte, die Du bearbeiten möchtest:
         </Text>

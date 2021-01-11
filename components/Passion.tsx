@@ -25,14 +25,16 @@ export const Passion: React.FC = () => {
         <Info>Erfolgreich gespeichert!</Info>
       ) : (
         <Box>
-          <Label mt={3}>Für was würdest Du auf die Strasse gehen?</Label>
+          <Label mt={3}>
+            <b>Für was würdest Du auf die Strasse gehen?</b>
+          </Label>
           <Textarea
             name="passion"
             value={passion}
             onChange={(e) => setPassion(e.target.value)}
           />
           <Label mt={3}>
-            Wie willst Du Dich sonst für dieser Sache einsetzen?
+            <b>Wie willst Du Dich sonst für dieser Sache einsetzen?</b>
           </Label>
           <Textarea
             name="engagement"

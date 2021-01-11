@@ -41,7 +41,7 @@ export default function BallotPage(): ReactElement {
     return (
       <LoggedInPage heading="Du hast abgestimmt!">
         <Breadcrumb>
-          <A href="/student/test">Abstimmungen</A>
+          <A href="/student/">Meine Klasse</A>
           <Here>{ballot.title}</Here>
         </Breadcrumb>
         <VotySuccess name={user?.name} />
@@ -50,7 +50,7 @@ export default function BallotPage(): ReactElement {
           width="100%"
           onClick={() => {
             window.scrollTo(0, 0);
-            void router.push("/student/test");
+            void router.push("/student/");
           }}
         >
           Zu den Abstimmungen
@@ -62,7 +62,7 @@ export default function BallotPage(): ReactElement {
   return (
     <LoggedInPage heading={ballot.title}>
       <Breadcrumb>
-        <A href="/student/test">Abstimmungen</A>
+        <A href="/student/">Meine Klasse</A>
         <Here>{ballot.title}</Here>
       </Breadcrumb>
 

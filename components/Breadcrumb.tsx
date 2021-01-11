@@ -39,5 +39,5 @@ export const A: React.FC<LinkProps> = (props) => {
 };
 
 export const Here: React.FC = ({ children }) => (
-  <strong style={{ color: "white" }}>{children}</strong>
+  <span style={{ color: "white" }}>{children}</span>
 );
