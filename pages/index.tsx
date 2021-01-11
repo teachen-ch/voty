@@ -168,7 +168,7 @@ const Module: React.FC<{ title: string; image: string }> = (props) => {
             </Box>
           </div>
         </div>
-        <Heading as="h3" py={2} my={0} fontSize={2} textAlign="center">
+        <Heading as="h2" py={2} my={0} fontSize={2} textAlign="center">
           {props.title}
         </Heading>
       </Flex>

@@ -119,9 +119,9 @@ const Account: React.FC<{ user: SessionUser }> = ({ user }) => {
             <IconAccount />
             <Text mx={2}>Mein Konto</Text>
             {open ? (
-              <Image src="/images/icon_up.svg" />
+              <Image src="/images/icon_up.svg" alt="Schliessen" />
             ) : (
-              <Image src="/images/icon_down.svg" />
+              <Image src="/images/icon_down.svg" alt="Öffnen" />
             )}
           </Flex>
         </A>
