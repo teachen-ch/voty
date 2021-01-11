@@ -321,6 +321,7 @@ export const Authors: React.FC<{
       <Flex
         flexWrap="wrap"
         bg="white"
+        flexGrow={1}
         py={2}
         px={2}
         onClick={() => inputRef.current?.focus()}

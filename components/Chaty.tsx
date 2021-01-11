@@ -8,7 +8,7 @@ import {
   Direction,
   TMessage,
 } from "components/ChatElements";
-import { Box, Button, Text, Card, Link } from "rebass";
+import { Box, Button, Text, Link } from "rebass";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { getCardTitle } from "./Cards";
 import { useTeam } from "state/user";
@@ -43,8 +43,7 @@ export const Chaty: React.FC<{
 
   // scroll to bottom on every new message
   useEffect(() => {
-    if (started && !showAll)
-      messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    if (started && !showAll) messagesEndRef.current?.scrollBy(0, 1000);
   }, [show]);
 
   function doChat(line = 0, input?: string) {
@@ -86,12 +85,20 @@ export const Chaty: React.FC<{
 
   if (!started) {
     return (
-      <WorkCard>
-        <Box textAlign="center">
+      <WorkCard
+        sx={{
+          background: "url('/content/chaty.svg') center top no-repeat",
+          backgroundSize: ["125%", "140%", "100%"],
+          borderRadius: 5,
+        }}
+        bg="white"
+        height={["auto", "auto", "480px"]}
+      >
+        <Box textAlign="center" pt={[130, 130, 330]}>
           <Button mt={4} onClick={() => doChat()} width="250px">
             Chat starten
           </Button>
-          <Text m={3} fontSize={1}>
+          <Text mt={3} fontSize={1}>
             <Link
               onClick={() => {
                 setShowAll(true);
@@ -119,7 +126,7 @@ export const Chaty: React.FC<{
   return (
     <ChatContainer>
       <ChatHeader title={title} onClick={resetChat} />
-      <MessageList>
+      <MessageList ref={messagesEndRef}>
         {show.map((msg, i) => (
           <MessageOrInfo key={i} model={msg} is="Message" />
         ))}
@@ -129,7 +136,7 @@ export const Chaty: React.FC<{
             Fertig
           </Button>
         ) : (
-          <div ref={messagesEndRef} style={{ height: 50, marginTop: 100 }} />
+          <div style={{ height: 50, marginTop: 100 }} />
         )}
       </MessageList>
       <ShowInput message={inputMessage} doChat={doChat} />
@@ -185,6 +192,7 @@ const ShowInput: React.FC<{
           fontWeight="semi"
           minWidth="300px"
           my={[2, 2, 0]}
+          sx={{ borderRadius: [0, 0, "0px 0px 5px 5px"] }}
         >
           Weiter zu «{getCardTitle(String(message?.message))}»?
         </Text>

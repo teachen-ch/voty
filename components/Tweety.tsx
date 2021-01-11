@@ -1,4 +1,4 @@
-import { Box, Text, Card, Button, Link } from "rebass";
+import { Box, Text, Button, Link, Flex } from "rebass";
 import { useState } from "react";
 import { Input, Label, Textarea } from "@rebass/forms";
 import { UserWhereUniqueInput, Visibility } from "graphql/types";
@@ -44,36 +44,42 @@ export const Tweety: React.FC<{
   }
   const success = state.called && !state.error;
   return (
-    <Box>
+    <Box mt={4}>
       {success ? (
         <Info>Erfolgreich gespeichert</Info>
       ) : (
         <>
-          <Label mt={4}>Abstimmung / Thema</Label>
+          <Label mt={4} fontWeight="semi">
+            Abstimmung / Thema
+          </Label>
           <Input
             onChange={(e) => setTitle(e.target.value)}
             placeholder="Gib einen Titel ein"
           />
-          <Card>
+          <Box bg="white" mt={2}>
             <Textarea
               onChange={doChange}
-              rows={5}
-              bg="#efefef"
-              sx={{ border: "#ddd", outline: "none" }}
+              rows={3}
+              pb={0}
               placeholder={placeholder}
             ></Textarea>
             <CharCounter chars={chars} max={maxChars} tweet={tweet} />
-          </Card>
+          </Box>
           <Visible setVisibility={setVisibility} visibility={visibility} />
-          <Label>Erarbeitet durch</Label>
-          <Authors setUsers={setUsers} />
-          <Button
-            mt={3}
-            onClick={doPostWork}
-            disabled={chars < 20 || chars > maxChars}
-          >
-            Tweet Abschicken
-          </Button>
+          <Label mb={2} mt={4}>
+            Erarbeitet durch:
+          </Label>
+          <Flex>
+            <Authors setUsers={setUsers} />
+            <Button
+              ml={3}
+              sx={{ flexGrow: 0 }}
+              onClick={doPostWork}
+              disabled={chars < 20 || chars > maxChars}
+            >
+              Tweet senden
+            </Button>
+          </Flex>
           <Err msg={state.error?.message} />
         </>
       )}
@@ -105,10 +111,10 @@ const CharCounter: React.FC<{ chars: number; max: number; tweet: string }> = ({
   }
 
   return (
-    <Text fontSize={1} mt={2}>
+    <Box pl={3} pb={2} mt={0} fontSize={1}>
       <Text
         variant="inline"
-        color={over ? "primary" : "inherit"}
+        color={over ? "primary" : "black"}
         fontWeight={over ? "bold" : "normal"}
       >
         {text}
@@ -126,7 +132,7 @@ const CharCounter: React.FC<{ chars: number; max: number; tweet: string }> = ({
           ?
         </Text>
       )}
-    </Text>
+    </Box>
   );
 };
 

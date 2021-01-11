@@ -2,6 +2,7 @@ import { Box, Flex, Text } from "rebass";
 import { CircleBullet } from "./Cards";
 import { Markdown } from "util/markdown";
 import { GlossaryReplace } from "./Glossary";
+import React from "react";
 
 export enum Direction {
   "Incoming",
@@ -19,22 +20,25 @@ export type TMessage = {
 };
 
 export const ChatContainer: React.FC = ({ children }) => (
-  <Flex
-    textAlign="left"
-    flexDirection="column"
-    width={["100%", "100%", "800px"]}
-    maxHeight={["auto", "auto", "600px"]}
-    ml={[-3, -3, -4]}
-    bg="white"
-    sx={{
-      position: "fixed",
-      bottom: 0,
-      top: [0, 0, "70px"],
-      zIndex: 100,
-    }}
-  >
-    {children}
-  </Flex>
+  <Box height="480px">
+    <Flex
+      textAlign="left"
+      flexDirection="column"
+      width={["100%", "100%", "736px"]}
+      height={["auto", "auto", "480px"]}
+      ml={[-3, -3, 0]}
+      bg="white"
+      sx={{
+        borderRadius: [0, 0, 5],
+        position: ["fixed", "fixed", "absolute"],
+        bottom: [0, 0, "inherit"],
+        top: [0, 0, "inherit"],
+        zIndex: [100, 100, 0, 0],
+      }}
+    >
+      {children}
+    </Flex>
+  </Box>
 );
 
 export const ChatHeader: React.FC<{ title?: string; onClick: () => void }> = ({
@@ -42,6 +46,7 @@ export const ChatHeader: React.FC<{ title?: string; onClick: () => void }> = ({
   onClick,
 }) => (
   <Flex
+    display={["inherit", "inherit", "none"]}
     bg="lightgray"
     textAlign="center"
     p={3}
@@ -59,11 +64,16 @@ export const ChatHeader: React.FC<{ title?: string; onClick: () => void }> = ({
   </Flex>
 );
 
-export const MessageList: React.FC = ({ children }) => (
-  <Flex p={3} flexDirection="column" overflow="scroll" flex="1">
-    {children}
-  </Flex>
-);
+export const MessageList = React.forwardRef<
+  HTMLDivElement,
+  { children: React.ReactNode }
+>(function ML({ children }, ref) {
+  return (
+    <Flex p={3} flexDirection="column" overflow="scroll" flex="1" ref={ref}>
+      {children}
+    </Flex>
+  );
+});
 
 export const Message: React.FC<{ direction?: Direction }> = ({
   direction,
