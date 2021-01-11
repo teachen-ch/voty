@@ -8,6 +8,7 @@ import Success from "pages/user/success";
 import { Role } from "graphql/types";
 import { SessionUser } from "state/user";
 import { ReadMore } from "components/ReadMore";
+import { HideFeature } from "components/HideFeature";
 
 export default function Abstimmung(): ReactElement {
   const [newUser, setNewUser] = useState<SessionUser | undefined>(undefined);
@@ -134,11 +135,15 @@ export const FAQ: React.FC = () => (
       Gymnasium, Berufsschulen) die Abstimmung auf Laptops, Tablets oder
       Smartphones durchführen. Wir stellen sicher, dass nur registrierte Klassen
       mitmachen können, dass jede Person nur einmal abstimmen kann und dass
-      sämtliche Stimmabgaben anonym bleiben. Sie können den ganzen Ablauf auf{" "}
-      <A href="/demo" variant="underline">
-        demo.voty.ch
-      </A>{" "}
-      testen.
+      sämtliche Stimmabgaben anonym bleiben.
+      <HideFeature id="demo">
+        {" "}
+        Sie können den ganzen Ablauf auf{" "}
+        <A href="/demo" variant="underline">
+          demo.voty.ch
+        </A>{" "}
+        testen.
+      </HideFeature>
     </Text>
     <Heading as="h3">Wie kann meine Klasse auf voty.ch abstimmen?</Heading>
     <Text>

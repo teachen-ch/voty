@@ -173,11 +173,9 @@ export const LoadingPage: React.FC = (props) => (
 export const Background: React.FC<{ bgImages: string[]; start?: boolean }> = (
   props
 ) => {
-  const gradient =
-    " " || "linear-gradient(180deg, rgb(2,11,20) 0%, rgb(31,47,65))";
-  const bgImagesUrl = props.bgImages.map(
-    (img) => `url("/images/${img}"), ${gradient}`
-  );
+  // const gradient = "linear-gradient(180deg, rgb(2,11,20) 0%, rgb(31,47,65))";
+  // `url("/images/${img}"), ${gradient}`);
+  const bgImagesUrl = props.bgImages.map((img) => `url("/images/${img}")`);
   return (
     <Box
       sx={{

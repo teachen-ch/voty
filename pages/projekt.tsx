@@ -3,6 +3,7 @@ import { Heading, Button, Flex, Text, Card, Image, Link as A } from "rebass";
 import React, { useState } from "react";
 import { useRouter } from "next/router";
 import { Center } from "components/Learning";
+import { HideFeature } from "components/HideFeature";
 
 export default function Projekt(): React.ReactElement {
   const router = useRouter();
@@ -113,11 +114,13 @@ export default function Projekt(): React.ReactElement {
             </Text>
           </Detail>
         </Text>
-        <Center>
-          <Button mt={4} onClick={() => router.push("/demo")}>
-            Auf demo.voty.ch testen?
-          </Button>
-        </Center>
+        <HideFeature id="demo">
+          <Center>
+            <Button mt={4} onClick={() => router.push("/demo")}>
+              Auf demo.voty.ch testen?
+            </Button>
+          </Center>
+        </HideFeature>
         <Heading>Teilnahmevoraussetzungen</Heading>
         <Text>
           Sämtliche Angebote von voty.ch werden Schulen und Lehrpersonen
