@@ -33,54 +33,51 @@ export default function CardsPage(): React.ReactElement {
   return (
     <LoggedInPage heading="Lerninhalte hinzufügen" role={Role.Teacher}>
       <Breadcrumb>
-        <A href="/">Start</A>
         <A href="/teacher/">Meine Klassen</A>
         <A href={`/team/${team.id}/admin`}>{team.name}</A>
         <Here>Lerninhalte</Here>
       </Breadcrumb>
 
-      <Text textAlign="left">
-        <H3>Folgende Lerninhalte sind ausgewählt</H3>
+      <H3>Folgende Lerninhalte sind ausgewählt</H3>
 
-        <CardListSelect teamCards={team.cards} teamId={team.id} />
+      <CardListSelect teamCards={team.cards} teamId={team.id} />
 
-        <H3 mt={5}>Weitere Lerninhalte hinzufügen</H3>
-        <Flex>
-          <Input
-            onChange={debounce((evt) => setKeywords(evt.target.value), 300)}
-            placeholder="Suche..."
-            flex={1}
-          />
-          <Button
-            ml={3}
-            width="calc(34% - 16px)"
-            mt={[0, 0, "4px"]}
-            height="50px"
-          >
-            Suchen
-          </Button>
-        </Flex>
-        <Text mb={4} mt="24px" fontSize={1}>
-          Filtern nach Stufe: &nbsp; &nbsp;
-          <Filter set={setAge} v={age} val={"Zyklus-2"} label="Zyklus-2" sep />
-          <Filter set={setAge} v={age} val={"Sek-1"} label="Sek-1" sep />
-          <Filter set={setAge} v={age} val={"Gym"} label="Gym" sep />
-          <Filter set={setAge} v={age} val={"Berufsschule"} label="BS" />
-          &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; nach&nbsp;Inhalt: &nbsp; &nbsp;
-          <Filter set={setType} v={type} val={"tool"} label="Aufgaben" sep />
-          <Filter set={setType} v={type} val={"video"} label="Videos" sep />
-          <Filter set={setType} v={type} val={"chaty"} label="Chaty" />
-        </Text>
-
-        <Cards
-          keywords={keywords}
-          type={type}
-          age={age}
-          teamId={team.id}
-          teamCards={team.cards}
-          resetFilters={resetFilters}
+      <H3 mt={5}>Weitere Lerninhalte hinzufügen</H3>
+      <Flex>
+        <Input
+          onChange={debounce((evt) => setKeywords(evt.target.value), 300)}
+          placeholder="Suche..."
+          flex={1}
         />
+        <Button
+          ml={3}
+          width="calc(34% - 16px)"
+          mt={[0, 0, "4px"]}
+          height="50px"
+        >
+          Suchen
+        </Button>
+      </Flex>
+      <Text mb={4} mt="24px" fontSize={1}>
+        Filtern nach Stufe: &nbsp; &nbsp;
+        <Filter set={setAge} v={age} val={"Zyklus-2"} label="Zyklus-2" sep />
+        <Filter set={setAge} v={age} val={"Sek-1"} label="Sek-1" sep />
+        <Filter set={setAge} v={age} val={"Gym"} label="Gym" sep />
+        <Filter set={setAge} v={age} val={"Berufsschule"} label="BS" />
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; nach&nbsp;Inhalt: &nbsp; &nbsp;
+        <Filter set={setType} v={type} val={"tool"} label="Aufgaben" sep />
+        <Filter set={setType} v={type} val={"video"} label="Videos" sep />
+        <Filter set={setType} v={type} val={"chaty"} label="Chaty" />
       </Text>
+
+      <Cards
+        keywords={keywords}
+        type={type}
+        age={age}
+        teamId={team.id}
+        teamCards={team.cards}
+        resetFilters={resetFilters}
+      />
     </LoggedInPage>
   );
 }

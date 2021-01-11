@@ -234,7 +234,7 @@ export default {
       border: "none",
       textDecoration: "underline",
       cursor: "pointer",
-      textAlign: ["center", "center", "left"],
+      textAlign: ["left", "left", "left"],
       width: ["100%", "100%", "auto"],
       fontWeight: "normal",
       fontSize: [2, 2, 3],

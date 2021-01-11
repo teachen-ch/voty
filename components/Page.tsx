@@ -4,7 +4,6 @@ import { useUser } from "state/user";
 import { LoginForm } from "pages/user/login";
 import React, { ReactNode } from "react";
 import CheckLogin from "./CheckLogin";
-import Link from "next/link";
 import { FlexProps } from "rebass";
 import { Role } from "graphql/types";
 import { Footer } from "components/Footer";
@@ -58,7 +57,6 @@ export const AppPage: React.FC<{
           width="100%"
           maxWidth="800px"
           minHeight="450px"
-          textAlign={["center", "center", "left"]}
         >
           {props.heading && (
             <Heading
@@ -129,34 +127,6 @@ function getRoleName(role: Role): string {
   };
   return translations[String(role)] || String(role);
 }
-
-export const LoggedInHeader: React.FC<{
-  heading?: string;
-  startpage: string;
-}> = (props) => (
-  <Flex
-    mt={40}
-    justifyContent="space-between"
-    alignItems="flex-end"
-    pb={1}
-    mb={2}
-    sx={{ borderBottom: "1px solid #979797" }}
-  >
-    <Link href={props.startpage}>
-      <A color="black" py={1} sx={{ fontWeight: "bold" }}>
-        Startseite
-      </A>
-    </Link>
-    <Heading my={0} as="h1" fontSize={[4, 5, 6, 6]} textAlign="center">
-      {props.heading}
-    </Heading>
-    <Link href="/user/logout">
-      <A color="black" py={1} sx={{ fontWeight: "bold" }}>
-        Abmelden
-      </A>
-    </Link>
-  </Flex>
-);
 
 export const Container: React.FC<FlexProps> = (props) => {
   return (

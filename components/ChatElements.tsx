@@ -1,5 +1,4 @@
-import { Box, Flex, Text } from "rebass";
-import { CircleBullet } from "./Cards";
+import { Box, Flex, Image, Text } from "rebass";
 import { Markdown } from "util/markdown";
 import { GlossaryReplace } from "./Glossary";
 import React from "react";
@@ -22,15 +21,14 @@ export type TMessage = {
 export const ChatContainer: React.FC = ({ children }) => (
   <Box height="480px">
     <Flex
-      textAlign="left"
       flexDirection="column"
-      width={["100%", "100%", "736px"]}
+      width={["100%", "100%", "calc(100% - 64px)"]}
       height={["auto", "auto", "480px"]}
       ml={[-3, -3, 0]}
       bg="white"
       sx={{
         borderRadius: [0, 0, 5],
-        position: ["fixed", "fixed", "absolute"],
+        position: ["fixed", "fixed", "absolute", "absolute"],
         bottom: [0, 0, "inherit"],
         top: [0, 0, "inherit"],
         zIndex: [100, 100, 0, 0],
@@ -47,20 +45,24 @@ export const ChatHeader: React.FC<{ title?: string; onClick: () => void }> = ({
 }) => (
   <Flex
     display={["inherit", "inherit", "none"]}
-    bg="lightgray"
-    textAlign="center"
+    bg="#494A4B"
     p={3}
-    color="black"
     alignItems="center"
     justifyContent="space-between"
     sx={{ borderBottom: "2px solid #ccc" }}
+    height="70px"
   >
-    <Text fontWeight="bold" textAlign="left">
+    {onClick && (
+      <Image
+        src="/images/icon_back.svg"
+        onClick={onClick}
+        mr={2}
+        sx={{ cursor: "pointer", flexGrow: 0 }}
+      />
+    )}
+    <Text fontWeight="bold" textAlign="left" sx={{ flexGrow: 1 }}>
       {title}
     </Text>
-    {onClick && (
-      <CircleBullet onClick={onClick} value="x" bg="secondary" color="white" />
-    )}
   </Flex>
 );
 

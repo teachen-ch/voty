@@ -122,136 +122,133 @@ export default function TeacherTeamPage(): React.ReactElement {
   return (
     <LoggedInPage heading="Detailansicht Klasse" role={Role.Teacher}>
       <Breadcrumb>
-        <A href="/">Start</A>
         <A href="/teacher/">Meine Klassen</A>
         <Here>{team.name}</Here>
       </Breadcrumb>
-      <Text textAlign="left">
-        <HideFeature id="cards">
-          <H2>Lerninhalte Klasse {team.name}</H2>
-          <Text mb={4} fontSize={2}>
-            Hier siehst du die Lerninhalte, welche bereits ausgewählt sind und
-            deinen Schüler*innen auf der Klassenseite angezeigt werden.
-          </Text>
-          <CardListAdmin teamCards={team.cards} teamId={team.id} />
-          <Button
-            mt={3}
-            onClick={() => router.push(`/team/${team.id}/select`)}
-            width="100%"
-          >
-            Lerninhalte hinzufügen
-          </Button>
-        </HideFeature>
-        <H2 mt={6}>Abstimmungen Klasse {team.name}</H2>
-        <Text fontSize={2} mb={4}>
-          Wähle hier aus der Liste die Abstimmungen aus, welche Deinen
-          Schüler*innen auf der Klassenseite angezeigt werden sollen. Nach der
-          Abstimmung kannst Du hier auch die Abstimmungsresultate Deiner Klasse
-          zeigen.
+      <HideFeature id="cards">
+        <H2>Lerninhalte Klasse {team.name}</H2>
+        <Text mb={4} fontSize={2}>
+          Hier siehst du die Lerninhalte, welche bereits ausgewählt sind und
+          deinen Schüler*innen auf der Klassenseite angezeigt werden.
         </Text>
-        <SelectBallots team={team} />
-
-        <HideFeature id="activities">
-          <H2 mt={6}>Aktivitäten Klasse {team.name}</H2>
-          <Text mb={4} fontSize={2}>
-            Hier siehst du alle Aktivitäten, Uploads und Diskussionen der Klasse{" "}
-            {team.name}.
-          </Text>
-          <Activities teamId={team.id} />
-        </HideFeature>
-
-        <H2 mt={6}>Schülerinnen und Schüler</H2>
-        {!team.members.length ? (
-          <Text fontSize={2}>
-            Hier kannst Du Deine Schüler*innen auf die Klassenseite von voty.ch
-            einladen. Kopiere einfach alle Email-Adressen auf einmal (aus Mail
-            oder Excel) in untenstehende Feld. Hast Du eine zweite
-            Email-Adresse? Dann teste den einfachen Ablauf doch kurz selbst:
-          </Text>
-        ) : (
-          <>
-            <Text fontSize={2} mb={4}>
-              Diese Einladungen wurden bereits verschickt. Hier siehst Du auch,
-              wer die Einladung bereits akzeptiert hat.
-            </Text>
-            <Users users={team.members} />
-          </>
-        )}
-
-        {!team.members.length || showInvite ? (
-          <>
-            <Text mt={4} fontSize={2} fontWeight="semi">
-              {team.members.length ? "Weitere" : ""} Schüler*innen einladen:
-            </Text>
-            <Textarea
-              mt={3}
-              autoFocus={true}
-              value={importEmails}
-              bg="#B1BDC3"
-              sx={{ border: "white", "::placeholder": { color: "white" } }}
-              onChange={checkEmails}
-              fontSize={1}
-              height="auto"
-              rows={2}
-              placeholder="name1@schule.ch, name2@schule; name3.schule.ch; ..."
-            />
-            <Button
-              my={2}
-              onClick={() => inviteStudents(team)}
-              disabled={!matches || inviteQuery.loading}
-              width="100%"
-              bg="secondary"
-            >
-              {inviteQuery.loading ? (
-                <Text>
-                  <Spinner color="gray" size={20} mr={3} />
-                  Bitte warten...
-                </Text>
-              ) : (
-                `${matches ? matches : ""} Einladungen verschicken`
-              )}
-            </Button>
-            <Text fontSize={[1, 1, 2]} sx={{ gridColumn: [0, 0, 2] }} mt={4}>
-              <IconHint
-                alt="Hinweis"
-                height="24px"
-                style={{
-                  float: "left",
-                  marginRight: 8,
-                  verticalAlign: "center",
-                }}
-              />
-              Alternativ kannst Du auch mit einem{" "}
-              <A
-                onClick={() => setShowInviteLink(!showInviteLink)}
-                variant="underline"
-              >
-                Einladungslink oder QR-Code
-              </A>{" "}
-              einladen
-            </Text>
-            {showInviteLink && <InviteLink team={team} />}
-          </>
-        ) : (
-          <Button onClick={() => setShowInvite(true)} width="100%" mt={3}>
-            Weitere Schüler*innen einladen
-          </Button>
-        )}
-        {duplicated ? (
-          <ErrorBox
-            error={`Folgende Accounts existieren bereits: ${duplicatedEmails}`}
-          />
-        ) : (
-          ""
-        )}
-        {failed ? (
-          <ErrorBox
-            error={`Bei diesen Email-Adressen gab es einen Fehler: ${failedEmails}`}
-          />
-        ) : (
-          ""
-        )}
+        <CardListAdmin teamCards={team.cards} teamId={team.id} />
+        <Button
+          mt={3}
+          onClick={() => router.push(`/team/${team.id}/select`)}
+          width="100%"
+        >
+          Lerninhalte hinzufügen
+        </Button>
+      </HideFeature>
+      <H2 mt={6}>Abstimmungen Klasse {team.name}</H2>
+      <Text fontSize={2} mb={4}>
+        Wähle hier aus der Liste die Abstimmungen aus, welche Deinen
+        Schüler*innen auf der Klassenseite angezeigt werden sollen. Nach der
+        Abstimmung kannst Du hier auch die Abstimmungsresultate Deiner Klasse
+        zeigen.
       </Text>
+      <SelectBallots team={team} />
+
+      <HideFeature id="activities">
+        <H2 mt={6}>Aktivitäten Klasse {team.name}</H2>
+        <Text mb={4} fontSize={2}>
+          Hier siehst du alle Aktivitäten, Uploads und Diskussionen der Klasse{" "}
+          {team.name}.
+        </Text>
+        <Activities teamId={team.id} />
+      </HideFeature>
+
+      <H2 mt={6}>Schülerinnen und Schüler</H2>
+      {!team.members.length ? (
+        <Text fontSize={2}>
+          Hier kannst Du Deine Schüler*innen auf die Klassenseite von voty.ch
+          einladen. Kopiere einfach alle Email-Adressen auf einmal (aus Mail
+          oder Excel) in untenstehende Feld. Hast Du eine zweite Email-Adresse?
+          Dann teste den einfachen Ablauf doch kurz selbst:
+        </Text>
+      ) : (
+        <>
+          <Text fontSize={2} mb={4}>
+            Diese Einladungen wurden bereits verschickt. Hier siehst Du auch,
+            wer die Einladung bereits akzeptiert hat.
+          </Text>
+          <Users users={team.members} />
+        </>
+      )}
+
+      {!team.members.length || showInvite ? (
+        <>
+          <Text mt={4} fontSize={2} fontWeight="semi">
+            {team.members.length ? "Weitere" : ""} Schüler*innen einladen:
+          </Text>
+          <Textarea
+            mt={3}
+            autoFocus={true}
+            value={importEmails}
+            bg="#B1BDC3"
+            sx={{ border: "white", "::placeholder": { color: "white" } }}
+            onChange={checkEmails}
+            fontSize={1}
+            height="auto"
+            rows={2}
+            placeholder="name1@schule.ch, name2@schule; name3.schule.ch; ..."
+          />
+          <Button
+            my={2}
+            onClick={() => inviteStudents(team)}
+            disabled={!matches || inviteQuery.loading}
+            width="100%"
+            bg="secondary"
+          >
+            {inviteQuery.loading ? (
+              <Text>
+                <Spinner color="gray" size={20} mr={3} />
+                Bitte warten...
+              </Text>
+            ) : (
+              `${matches ? matches : ""} Einladungen verschicken`
+            )}
+          </Button>
+          <Text fontSize={[1, 1, 2]} sx={{ gridColumn: [0, 0, 2] }} mt={4}>
+            <IconHint
+              alt="Hinweis"
+              height="24px"
+              style={{
+                float: "left",
+                marginRight: 8,
+                verticalAlign: "center",
+              }}
+            />
+            Alternativ kannst Du auch mit einem{" "}
+            <A
+              onClick={() => setShowInviteLink(!showInviteLink)}
+              variant="underline"
+            >
+              Einladungslink oder QR-Code
+            </A>{" "}
+            einladen
+          </Text>
+          {showInviteLink && <InviteLink team={team} />}
+        </>
+      ) : (
+        <Button onClick={() => setShowInvite(true)} width="100%" mt={3}>
+          Weitere Schüler*innen einladen
+        </Button>
+      )}
+      {duplicated ? (
+        <ErrorBox
+          error={`Folgende Accounts existieren bereits: ${duplicatedEmails}`}
+        />
+      ) : (
+        ""
+      )}
+      {failed ? (
+        <ErrorBox
+          error={`Bei diesen Email-Adressen gab es einen Fehler: ${failedEmails}`}
+        />
+      ) : (
+        ""
+      )}
     </LoggedInPage>
   );
 }

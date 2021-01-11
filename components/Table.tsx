@@ -19,7 +19,6 @@ export const Table: React.FC<BoxProps> = ({
     <Box
       id={id}
       fontSize={fontSize}
-      textAlign="left"
       sx={{ borderTop: "2px solid white", borderBottom: "2px solid white" }}
       {...props}
     >

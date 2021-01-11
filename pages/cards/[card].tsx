@@ -20,7 +20,6 @@ export default function CardPagePublic(): React.ReactElement {
   return (
     <Page heading={String(meta.title)}>
       <Breadcrumb>
-        <A href="/">Start</A>
         <A href="/cards">Lerninhalte</A>
         <Here>{meta.title}</Here>
       </Breadcrumb>

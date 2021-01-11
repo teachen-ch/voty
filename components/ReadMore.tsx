@@ -17,7 +17,6 @@ export const ReadMore: React.FC<{
         onClick={() => setOpen(!open)}
         bg={color}
         color="white"
-        textAlign="left"
         width="100%"
       >
         <Flex

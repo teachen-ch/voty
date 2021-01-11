@@ -41,7 +41,6 @@ export default function BallotPage(): ReactElement {
     return (
       <LoggedInPage heading="Du hast abgestimmt!">
         <Breadcrumb>
-          <A href="/">Start</A>
           <A href="/student/test">Abstimmungen</A>
           <Here>{ballot.title}</Here>
         </Breadcrumb>
@@ -63,7 +62,6 @@ export default function BallotPage(): ReactElement {
   return (
     <LoggedInPage heading={ballot.title}>
       <Breadcrumb>
-        <A href="/">Start</A>
         <A href="/student/test">Abstimmungen</A>
         <Here>{ballot.title}</Here>
       </Breadcrumb>
@@ -129,7 +127,7 @@ export const VotyNow: React.FC<{
   }
 
   return (
-    <Text textAlign="left" sx={{ margin: "0 auto" }}>
+    <Text sx={{ margin: "0 auto" }}>
       <Box variant="centered">
         <Box width={["100%", "100%", 400]}>
           <img src="/images/voty_now.svg" alt="Abstimmen" width="100%" />

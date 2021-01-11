@@ -17,85 +17,83 @@ export default function Abstimmung(): ReactElement {
   }
   return (
     <AppPage heading="Jugendliche stimmen ab – jetzt Klasse anmelden">
-      <Text textAlign="left">
-        <Text mt={4} fontSize={[2, 2, 3]}>
-          <img
-            src="/images/voty_module_2.svg"
-            alt="Bundeshaus"
-            style={{
-              float: "right",
-              marginLeft: 20,
-              marginRight: 20,
-              width: "160px",
-              maxWidth: "30%",
-            }}
-          />
-          Wie motivieren wir Jugendliche für unsere Demokratie? Wir möchten
-          gemeinsam mit engagierten Lehrpersonen ein Experiment starten und im
-          März 2021 mit mindes&shy;tens 50 Klassen über die beiden nationalen
-          Vorla&shy;gen ab&shy;stimmen. Interesse für Politik entsteht dann,
-          wenn disku&shy;tiert und mitentscheiden werden kann.
-        </Text>
-        <Flex
-          my={4}
-          alignItems="center"
-          flexDirection="column"
-          fontSize={[2, 2, 3]}
-        >
-          <Flex my={2}>
-            <Text px={3} textAlign="center">
-              <IconCheckWhite />
-            </Text>
-            <Text maxWidth="600px">
-              Ja, ich unterrichte politische Bildung in meiner Klasse und nehme
-              auch Bezug auf aktuelle Themen und Abstimmungen
-            </Text>
-          </Flex>
-          <Flex my={2}>
-            <Text px={3} textAlign="center">
-              <IconCheckWhite />
-            </Text>
-            <Text maxWidth="600px">
-              Ich nehme mir im Februar/März Zeit, um die Vorlagen mit den
-              Schüler*innen zu diskutieren (z. B. mit Material von{" "}
-              <Link
-                href="https://www.easyvote.ch/de/school/"
-                rel="noreferrer"
-                variant="underline"
-              >
-                easyvote.ch
-              </Link>{" "}
-              )
-            </Text>
-          </Flex>
-          <Flex my={2}>
-            <Text px={3} textAlign="center">
-              <IconCheckWhite />
-            </Text>
-            <Text maxWidth="600px">
-              Ich führe die Abstimmung mit meiner Klasse online durch und
-              bespreche im Nachgang das Resultat
-            </Text>
-          </Flex>
-        </Flex>
-        {!newUser ? (
-          <>
-            <Heading as="h2" id="form">
-              Interessiert? Melde Dich jetzt mit Deiner Klasse an
-            </Heading>
-            <CreateUserForm
-              setUser={setNewUser}
-              omitRole
-              defaultRole={Role.Teacher}
-            ></CreateUserForm>
-          </>
-        ) : (
-          <>
-            <Heading as="h2">Die Anmeldung hat geklappt!</Heading>
-            <Success user={newUser} />
-          </>
-        )}
+      <Text mt={4} fontSize={[2, 2, 3]}>
+        <img
+          src="/images/voty_module_2.svg"
+          alt="Bundeshaus"
+          style={{
+            float: "right",
+            marginLeft: 20,
+            marginRight: 20,
+            width: "160px",
+            maxWidth: "30%",
+          }}
+        />
+        Wie motivieren wir Jugendliche für unsere Demokratie? Wir möchten
+        gemeinsam mit engagierten Lehrpersonen ein Experiment starten und im
+        März 2021 mit mindes&shy;tens 50 Klassen über die beiden nationalen
+        Vorla&shy;gen ab&shy;stimmen. Interesse für Politik entsteht dann, wenn
+        disku&shy;tiert und mitentscheiden werden kann.
       </Text>
+      <Flex
+        my={4}
+        alignItems="center"
+        flexDirection="column"
+        fontSize={[2, 2, 3]}
+      >
+        <Flex my={2}>
+          <Text px={3} textAlign="center">
+            <IconCheckWhite />
+          </Text>
+          <Text maxWidth="600px">
+            Ja, ich unterrichte politische Bildung in meiner Klasse und nehme
+            auch Bezug auf aktuelle Themen und Abstimmungen
+          </Text>
+        </Flex>
+        <Flex my={2}>
+          <Text px={3} textAlign="center">
+            <IconCheckWhite />
+          </Text>
+          <Text maxWidth="600px">
+            Ich nehme mir im Februar/März Zeit, um die Vorlagen mit den
+            Schüler*innen zu diskutieren (z. B. mit Material von{" "}
+            <Link
+              href="https://www.easyvote.ch/de/school/"
+              rel="noreferrer"
+              variant="underline"
+            >
+              easyvote.ch
+            </Link>{" "}
+            )
+          </Text>
+        </Flex>
+        <Flex my={2}>
+          <Text px={3} textAlign="center">
+            <IconCheckWhite />
+          </Text>
+          <Text maxWidth="600px">
+            Ich führe die Abstimmung mit meiner Klasse online durch und
+            bespreche im Nachgang das Resultat
+          </Text>
+        </Flex>
+      </Flex>
+      {!newUser ? (
+        <>
+          <Heading as="h2" id="form">
+            Interessiert? Melde Dich jetzt mit Deiner Klasse an
+          </Heading>
+          <CreateUserForm
+            setUser={setNewUser}
+            omitRole
+            defaultRole={Role.Teacher}
+          ></CreateUserForm>
+        </>
+      ) : (
+        <>
+          <Heading as="h2">Die Anmeldung hat geklappt!</Heading>
+          <Success user={newUser} />
+        </>
+      )}
 
       <Box my="80px">
         <Text
@@ -120,7 +118,7 @@ export default function Abstimmung(): ReactElement {
 }
 
 export const FAQ: React.FC = () => (
-  <Box className="faq" textAlign="left" fontSize={2}>
+  <Box className="faq" fontSize={2}>
     <Heading as="h3" mt={3}>
       Wer steht hinter voty.ch?
     </Heading>

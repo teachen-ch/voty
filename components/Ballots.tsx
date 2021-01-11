@@ -433,7 +433,7 @@ export const BallotDetails: React.FC<{
   ballot: NonNullable<BallotQuery["ballot"]>;
 }> = ({ ballot, children }) => (
   <Card>
-    <Text textAlign="left">
+    <Text>
       <Text fontWeight="bold">{ballot.title}</Text>
       <Text mt={3}>{ballot.description}</Text>
       <Text fontSize={2} my={4}>

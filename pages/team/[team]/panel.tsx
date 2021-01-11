@@ -36,27 +36,23 @@ export default function PanelPage(): React.ReactElement {
   return (
     <LoggedInPage heading="discussit.ch Panel" role={Role.Teacher}>
       <Breadcrumb>
-        <A href="/">Start</A>
         <A href="/teacher/">Meine Klassen</A>
         <Here>{team.name}</Here>
       </Breadcrumb>
-      <Text textAlign="left">
-        <Heading as="h3">
-          Folgende Abstimmungen sind für das Panel verfügbar
-        </Heading>
-        <Text fontSize={2} mb={3}>
-          Wähle hier aus der Liste die Abstimmungen aus, über welche im Panel
-          diskutiert wird. Hier können später auch die Resultate angezeigt
-          werden.
-        </Text>
-        <SelectBallots team={team} />
-
-        <Box mt={4} />
-
-        <A href={`/panel/${team.code}/present`}>
-          <Button>Panel präsentieren</Button>
-        </A>
+      <Heading as="h3">
+        Folgende Abstimmungen sind für das Panel verfügbar
+      </Heading>
+      <Text fontSize={2} mb={3}>
+        Wähle hier aus der Liste die Abstimmungen aus, über welche im Panel
+        diskutiert wird. Hier können später auch die Resultate angezeigt werden.
       </Text>
+      <SelectBallots team={team} />
+
+      <Box mt={4} />
+
+      <A href={`/panel/${team.code}/present`}>
+        <Button>Panel präsentieren</Button>
+      </A>
     </LoggedInPage>
   );
 }

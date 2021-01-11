@@ -1,6 +1,5 @@
 import { Loading, ErrorPage, LoggedInPage } from "components/Page";
 import { Card, getCardMeta } from "components/Cards";
-import { Text } from "rebass";
 import { useTeam, useUser } from "state/user";
 import { A, Breadcrumb, Here } from "components/Breadcrumb";
 import { Role } from "graphql/types";
@@ -44,19 +43,16 @@ export default function CardPage(): React.ReactElement {
 
   return (
     <LoggedInPage heading={String(meta.title)}>
-      <Text textAlign="left">
-        <Breadcrumb>
-          <A href="/">Start</A>
-          {usercrumb}
-          <Here>{meta.title}</Here>
-        </Breadcrumb>
+      <Breadcrumb>
+        {usercrumb}
+        <Here>{meta.title}</Here>
+      </Breadcrumb>
 
-        <Card id={key} />
+      <Card id={key} />
 
-        <HideFeature id="discussions">
-          {meta.discussion !== false && <Discussion card={key} />}
-        </HideFeature>
-      </Text>
+      <HideFeature id="discussions">
+        {meta.discussion !== false && <Discussion card={key} />}
+      </HideFeature>
     </LoggedInPage>
   );
 }

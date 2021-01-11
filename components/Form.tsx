@@ -307,7 +307,6 @@ export const ErrorBox: React.FC<ErrorBoxProps> = ({ error, ...props }) => {
     <Box
       pl={3}
       py={2}
-      textAlign="left"
       sx={{
         gridColumn: [0, 0, 2],
         borderLeftColor: "primary",

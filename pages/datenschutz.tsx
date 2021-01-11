@@ -24,7 +24,7 @@ export default function Datenschutz(): ReactElement {
         Abstimmungen sichtbar zu machen.
       </Text>
 
-      <Text fontSize={[2, 2, 2]} textAlign="left">
+      <Text fontSize={[2, 2, 2]}>
         <Heading as="h2">
           Was für personenbezogenene Daten wir speichern (ohne Konto)
         </Heading>

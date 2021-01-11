@@ -1,25 +1,19 @@
 import { Box, LinkProps, Link as RebassLink } from "rebass";
 import Link from "next/link";
-import { Fragment } from "react";
+import React, { Fragment } from "react";
 
-export const Breadcrumb = ({
-  children,
-}: {
-  children: React.ReactElement[];
-}): React.ReactElement => (
+export const Breadcrumb: React.FC = ({ children }) => (
   <Box
     mt={[-12, -12, -16]}
     mb={3}
     fontSize={[1, 1, 2]}
-    sx={{ textAlign: "left" }}
     color="#1C88FF"
+    sx={{ overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}
   >
-    {children.map((child, i) => (
+    {React.Children.map(children, (child, i) => (
       <Fragment key={i}>
         {i > 0 ? " / " : ""}
-        <Box mr={1} sx={{ display: "inline-block" }}>
-          {child}
-        </Box>
+        {child}
       </Fragment>
     ))}
   </Box>

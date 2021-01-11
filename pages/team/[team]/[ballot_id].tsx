@@ -44,7 +44,6 @@ export default function TeacherBallotPage(): React.ReactElement {
   return (
     <LoggedInPage heading={`${ballot.title}`} role={Role.Teacher}>
       <Breadcrumb>
-        <A href="/">Start</A>
         <A href="/teacher/">Meine Klassen</A>
         <A href={`/team/${team.id}/admin`}>{team.name}</A>
         <Here>{ballot.title}</Here>

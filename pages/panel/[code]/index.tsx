@@ -110,7 +110,7 @@ const VoteCode: React.FC<{
   }
 
   return (
-    <Text textAlign="left" sx={{ margin: "0 auto" }}>
+    <Text sx={{ margin: "0 auto" }}>
       <Box variant="centered">
         <Box width={["100%", "100%", 400]}>
           <img src="/images/voty_now.svg" alt="Abstimmen" width="100%" />

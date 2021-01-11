@@ -148,7 +148,6 @@ const TweetyCard: React.FC<{ tweet: string; tags?: string }> = ({
       borderRadius: 12,
     }}
     p={3}
-    textAlign="left"
   >
     <TwitterIcon />
     &nbsp;

@@ -42,7 +42,7 @@ export const BallotResults: React.FC<{
             <VotyPie results={results} />
           </Box>
         </Flex>
-        <Box textAlign="left" mb={2}>
+        <Box mb={2}>
           <Grid columns="2fr 3fr" gap={2}>
             <Text>Ja:</Text>
             <Text>{votes(results.yes)}</Text>
