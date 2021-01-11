@@ -34,8 +34,7 @@ describe("Test Ballots", () => {
     cy.get("#ballots tr:last td:last svg[alt='abgewählt']");
     cy.login("student@teachen.ch", "teachen");
     cy.visit("/student");
-    cy.contains("Testinitiative");
-    cy.contains("Jetzt abstimmen").click();
+    cy.contains("Testinitiative").click();
     cy.contains("Ja, ich").click();
   });
 });
