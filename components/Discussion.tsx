@@ -7,10 +7,10 @@ import {
   useGetTeamDiscussionsQuery,
 } from "graphql/types";
 import React, { useState } from "react";
-import { H2 } from "pages/team/[team]/admin";
 import { Textarea } from "@rebass/forms";
 import { Err } from "./Page";
 import { Pill } from "components/Works";
+import { H2 } from "components/Page";
 
 const DiscussionFields = gql`
   fragment DiscussionFields on Discussion {

@@ -1,10 +1,8 @@
 import { LoggedInPage } from "components/Page";
-import { Text, Heading, Box, Card, Button, Image, Flex } from "rebass";
+import { Text, Heading, Box, Card, Button, Image } from "rebass";
 import { ReadMore } from "components/ReadMore";
 import { useUser, SessionUser } from "state/user";
-import { Breadcrumb, A, Here } from "components/Breadcrumb";
 import React, { useState } from "react";
-import { CardStudentList } from "components/Cards";
 import {
   BallotScope,
   BallotFieldsFragment,
@@ -13,8 +11,6 @@ import {
 } from "graphql/types";
 import { Markdown } from "util/markdown";
 import { VotyNow, VotySuccess } from "pages/team/[team]/ballots/[ballot]";
-import { HideFeature } from "components/HideFeature";
-import { Activities } from "components/Activities";
 import { OneRowTable } from "components/Table";
 
 export default function StudentTest(): React.ReactElement {
@@ -23,41 +19,7 @@ export default function StudentTest(): React.ReactElement {
   if (!user || !user.team) {
     return <LoggedInPage heading="Meine Klasse" />;
   }
-
-  return (
-    <LoggedInPage heading="Meine Klasse">
-      <Breadcrumb>
-        <A href="/">Start</A>
-        <Here>Meine Klasse</Here>
-      </Breadcrumb>
-
-      <Flex justifyContent="center" mt={[-90, -60, -60]} mb={[-60, -50, -50]}>
-        <Image
-          src="/images/students_welcome.svg"
-          width="350px"
-          maxWidth="80%"
-        />
-      </Flex>
-
-      <Text textAlign="left">
-        <HideFeature id="cards">
-          <Heading mt={0}>Lerninhalte</Heading>
-          <CardStudentList
-            teamCards={String(user.team?.cards)}
-            teamId={user.team.id}
-          />
-        </HideFeature>
-
-        <ShowBallots user={user} />
-
-        <HideFeature id="activities">
-          <Heading as="h3">Aktivitäten in der Klasse</Heading>
-          <Activities teamId={user.team.id} />
-        </HideFeature>
-        <Box mb={4} />
-      </Text>
-    </LoggedInPage>
-  );
+  return <ShowBallots user={user} />;
 }
 
 const ShowBallots: React.FC<{ user: SessionUser }> = ({ user }) => {

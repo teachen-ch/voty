@@ -176,7 +176,7 @@ export const CardItem: React.FC<{
   );
 };
 
-export const CardStudentList: React.FC<{
+export const StudentCardList: React.FC<{
   teamCards: string;
   teamId: string;
 }> = ({ teamCards, teamId }) => {

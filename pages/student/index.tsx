@@ -1,15 +1,23 @@
 import { useUser } from "../../state/user";
-import { LoggedInPage } from "../../components/Page";
-import { Text } from "rebass";
+import { H2, LoggedInPage } from "../../components/Page";
+import { Box, Flex, Image, Text } from "rebass";
 import { ReactElement } from "react";
 import { ProfileEdit } from "components/Users";
-import StudentTest from "./test";
 import { trackEvent } from "util/stats";
+import { A, Breadcrumb, Here } from "components/Breadcrumb";
+import { HideFeature } from "components/HideFeature";
+import { StudentCardList } from "components/Cards";
+import { Activities } from "components/Activities";
+import { StudentListBallots } from "components/Ballots";
 
 export default function StudentHome(): ReactElement {
   const user = useUser();
 
-  if (user?.year === null) {
+  if (!user || !user.team) {
+    return <LoggedInPage heading="Meine Klasse" />;
+  }
+
+  if (user.year === null) {
     trackEvent({ category: "Student", action: "FirstRun" });
     return (
       <LoggedInPage heading={`Hallo ${user?.name}`}>
@@ -25,5 +33,51 @@ export default function StudentHome(): ReactElement {
     );
   }
 
-  return <StudentTest />;
+  return (
+    <LoggedInPage heading={`Meine Klasse (${user.team.name})`}>
+      <Breadcrumb>
+        <A href="/">Start</A>
+        <Here>Meine Klasse</Here>
+      </Breadcrumb>
+
+      <Flex justifyContent="center" mt={[-90, -60, -60]} mb={[-60, -50, -50]}>
+        <Image
+          src="/images/students_welcome.svg"
+          width="350px"
+          maxWidth="80%"
+        />
+      </Flex>
+
+      <Text textAlign="left">
+        <HideFeature id="cards">
+          <H2 mt={0} sx={{ borderBottom: "1px solid white" }}>
+            Deine Lerninhalte
+          </H2>
+          <Text mb={4} fontSize={2}>
+            Wähle hier die Lerninhalte, die Du bearbeiten möchtest:
+          </Text>
+          <StudentCardList
+            teamCards={String(user.team?.cards)}
+            teamId={user.team.id}
+          />
+        </HideFeature>
+
+        <H2 mt={6}>Abstimmungen Klasse {user.team.name}</H2>
+        <Text fontSize={2} mb={4}>
+          Diese Abstimmungen sind für Deine Klasse verfügbar:
+        </Text>
+        <StudentListBallots teamId={user.team.id} />
+
+        <HideFeature id="activities">
+          <H2 mt={6}>Aktivitäten in der Klasse</H2>
+          <Text mb={4} fontSize={2}>
+            Hier siehst du alle Aktivitäten, Uploads und Diskussionen der Klasse{" "}
+            {user.team.name}.
+          </Text>
+          <Activities teamId={user.team.id} />
+        </HideFeature>
+        <Box mb={4} />
+      </Text>
+    </LoggedInPage>
+  );
 }

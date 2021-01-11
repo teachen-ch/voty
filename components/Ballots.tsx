@@ -1,6 +1,6 @@
 import { gql, useApolloClient } from "@apollo/client";
 
-import { Heading, Text, Link as A, Button, Card, Box } from "rebass";
+import { Text, Link as A, Button, Card, Box, Flex, Image } from "rebass";
 import {
   BallotWhereInput,
   useBallotsQuery,
@@ -29,6 +29,7 @@ import IconCal from "../public/images/icon_cal.svg";
 import { MouseEvent } from "react";
 import type { Nullable } from "simplytyped";
 import { Markdown } from "util/markdown";
+import { Err, Loading } from "./Page";
 
 const BallotFields = gql`
   fragment BallotFields on Ballot {
@@ -176,16 +177,10 @@ type BallotsProps = {
 export const Ballots: React.FC<BallotsProps> = ({ where, onClick }) => {
   const ballotsQuery = useBallotsQuery({ variables: { where } });
 
-  if (ballotsQuery.error) {
-    return <Heading>Error loading data: {ballotsQuery.error.message}</Heading>;
-  }
-  if (ballotsQuery.loading) {
-    return <Heading>Loading data</Heading>;
-  }
-
-  if (!ballotsQuery.data?.ballots?.length) {
+  if (ballotsQuery.error) return <Err msg={ballotsQuery.error.message} />;
+  if (ballotsQuery.loading) return <Loading />;
+  if (!ballotsQuery.data?.ballots?.length)
     return <Text>Noch keine Abstimmungen erfasst</Text>;
-  }
 
   return (
     <>
@@ -199,6 +194,40 @@ export const Ballots: React.FC<BallotsProps> = ({ where, onClick }) => {
         />
       ))}
     </>
+  );
+};
+
+export const StudentListBallots: React.FC<{
+  teamId: string;
+}> = ({ teamId }) => {
+  const router = useRouter();
+  const where = { ballotRuns: { some: { teamId: { equals: teamId } } } };
+  const ballotsQuery = useBallotsQuery({ variables: { where } });
+
+  if (ballotsQuery.error) return <Err msg={ballotsQuery.error.message} />;
+  if (ballotsQuery.loading) return <Loading />;
+  if (!ballotsQuery.data?.ballots?.length)
+    return <Text>Noch keine Abstimmungen erfasst</Text>;
+
+  return (
+    <Box>
+      {ballotsQuery.data.ballots.map((ballot) => (
+        <Flex
+          key={ballot.id}
+          onClick={() => router.push(`/team/${teamId}/ballots/${ballot.id}`)}
+          alignItems="center"
+          bg="secondary"
+          mb={3}
+          px={3}
+          height={76}
+          fontWeight="semi"
+          sx={{ ":hover": { bg: "#1C88FF" }, cursor: "pointer" }}
+        >
+          <Image src="/images/card_vote.svg" mr={3} />
+          {ballot.title}
+        </Flex>
+      ))}
+    </Box>
   );
 };
 

@@ -1,7 +1,7 @@
-import { LoggedInPage } from "components/Page";
+import { H3, LoggedInPage } from "components/Page";
 import { Cards, CardListSelect } from "components/Cards";
 import { Input } from "@rebass/forms";
-import { Flex, Button, Text, Heading, HeadingProps } from "rebass";
+import { Flex, Button, Text } from "rebass";
 import React, { useState } from "react";
 import { useRouter } from "next/router";
 import { A, Breadcrumb, Here } from "components/Breadcrumb";
@@ -84,9 +84,3 @@ export default function CardsPage(): React.ReactElement {
     </LoggedInPage>
   );
 }
-
-export const H3: React.FC<HeadingProps> = (props) => (
-  <Heading as="h3" color="#1C88FF" pb={2} fontWeight="semi" {...props}>
-    {props.children}
-  </Heading>
-);

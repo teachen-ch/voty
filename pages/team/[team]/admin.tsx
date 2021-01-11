@@ -1,5 +1,5 @@
-import { LoggedInPage } from "components/Page";
-import { Heading, Image, Box, Text, Button, HeadingProps } from "rebass";
+import { H2, LoggedInPage } from "components/Page";
+import { Image, Box, Text, Button } from "rebass";
 import { Users } from "components/Users";
 import { Input, Textarea } from "@rebass/forms";
 import { Grid, Label } from "theme-ui";
@@ -256,7 +256,9 @@ export default function TeacherTeamPage(): React.ReactElement {
   );
 }
 
-function InviteLink({ team }: { team: TeamTeacherFieldsFragment }) {
+const InviteLink: React.FC<{ team: TeamTeacherFieldsFragment }> = ({
+  team,
+}) => {
   usePageEvent({ category: "Teacher", action: "InviteLink" });
   const inviteRef = useRef<HTMLInputElement>(null);
   const url = `${document?.location.origin}/i/${team.invite}`;
@@ -303,17 +305,4 @@ function InviteLink({ team }: { team: TeamTeacherFieldsFragment }) {
       </Text>
     </Grid>
   );
-}
-
-export const H2: React.FC<HeadingProps> = (props) => (
-  <Heading
-    as="h2"
-    color="#1C88FF"
-    pb={2}
-    fontWeight="semi"
-    sx={{ borderBottom: "2px solid", borderColor: "#1C88FF" }}
-    {...props}
-  >
-    {props.children}
-  </Heading>
-);
+};

@@ -1,4 +1,4 @@
-import { Flex, Box, Heading, Text, Link as A } from "rebass";
+import { Flex, Box, Heading, Text, Link as A, HeadingProps } from "rebass";
 import Head from "next/head";
 import { useUser } from "state/user";
 import { LoginForm } from "pages/user/login";
@@ -222,3 +222,22 @@ export const Background: React.FC<{ bgImages: string[]; light?: boolean }> = (
     />
   );
 };
+
+export const H2: React.FC<HeadingProps> = (props) => (
+  <Heading
+    as="h2"
+    color="#1C88FF"
+    pb={2}
+    fontWeight="semi"
+    sx={{ borderBottom: "2px solid", borderColor: "#1C88FF" }}
+    {...props}
+  >
+    {props.children}
+  </Heading>
+);
+
+export const H3: React.FC<HeadingProps> = (props) => (
+  <Heading as="h3" color="#1C88FF" pb={2} fontWeight="semi" {...props}>
+    {props.children}
+  </Heading>
+);
