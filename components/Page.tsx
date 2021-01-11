@@ -38,7 +38,7 @@ export const AppPage: React.FC<{
   ];
   return (
     <>
-      <Background bgImages={bgImages} light />
+      <Background bgImages={bgImages} />
       <TopBar />
       <Container pt={[0, 0, 20, 50]} color="white">
         <Head>
@@ -170,10 +170,14 @@ export const LoadingPage: React.FC = (props) => (
   </Page>
 );
 
-export const Background: React.FC<{ bgImages: string[]; light?: boolean }> = (
+export const Background: React.FC<{ bgImages: string[]; start?: boolean }> = (
   props
 ) => {
-  const bgImagesUrl = props.bgImages.map((img) => `url("/images/${img}")`);
+  const gradient =
+    " " || "linear-gradient(180deg, rgb(2,11,20) 0%, rgb(31,47,65))";
+  const bgImagesUrl = props.bgImages.map(
+    (img) => `url("/images/${img}"), ${gradient}`
+  );
   return (
     <Box
       sx={{
@@ -187,7 +191,7 @@ export const Background: React.FC<{ bgImages: string[]; light?: boolean }> = (
         backgroundPositionY: 0,
         backgroundSize: "100%",
         backgroundPositionX: "center",
-        backgroundColor: props.light ? "white" : "#313131",
+        backgroundColor: "#313131",
       }}
     />
   );

@@ -223,7 +223,7 @@ export const StudentListBallots: React.FC<{
           fontWeight="semi"
           sx={{ ":hover": { bg: "#1C88FF" }, cursor: "pointer" }}
         >
-          <Image src="/images/card_vote.svg" mr={3} />
+          <Image src="/images/card_ballot.svg" mr={3} />
           {ballot.title}
         </Flex>
       ))}

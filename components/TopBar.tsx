@@ -96,7 +96,7 @@ const Account: React.FC<{ user: SessionUser }> = ({ user }) => {
   const isTeacher = user?.role === Role.Teacher;
   return (
     <Flex>
-      <Link href={isTeacher ? "/teacher" : "/student/test"}>
+      <Link href={isTeacher ? "/teacher" : "/student"}>
         <A>
           <Flex
             alignItems="center"

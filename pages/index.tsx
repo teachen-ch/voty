@@ -22,15 +22,14 @@ export default function Home(): React.ReactElement {
           "voty_bg_mobile_1.svg",
           "voty_bg_1.svg",
         ]}
-        light
       />
       <TopBar hideLogo={true} />
-      <Container as="main" pt={[0, 0, 20, 49]} px={[3, 3, 3, 0]} color="black">
+      <Container as="main" pt={[0, 0, 30, 40]} px={[3, 3, 3, 0]} color="white">
         <Image
           alignSelf="center"
           width={[240, 207, 426]}
           height={[95, 82, 164]}
-          src="/images/voty_logo.svg"
+          src="/images/voty_logo_white.svg"
           alt="voty.ch"
         />
         <Flex flexDirection="row" justifyContent="center">
@@ -52,14 +51,14 @@ export default function Home(): React.ReactElement {
               pb={[3, 3, 3, 4]}
               fontSize={[3, 4, "28px", "40px"]}
               textAlign="center"
-              color="primary"
+              color="secondary"
             >
               Demokratie an die Schule!
             </Heading>
 
             <Module title="Demokratie testen" image="/images/voty_module_2.svg">
               Nur Erwachsene dürfen abstimmen, aber auch Jugendliche haben eine
-              Meinung! Lassen sie ihre Klassen an den Urnen&shy;gängen vom 9.
+              Meinung! Lassen Sie ihre Klassen an den Urnen&shy;gängen vom 9.
               März mitmachen und ab&shy;stimmen. <br />
               <A href="/abstimmung">Mehr erfahren</A>
             </Module>
@@ -80,11 +79,11 @@ export default function Home(): React.ReactElement {
         <Box maxWidth="800px" width="100%" textAlign="center">
           <Link href="/abstimmung">
             <Button
-              bg="primary"
+              bg="secondary"
               fontSize={[3, 3, 5, 5]}
-              width="100%"
               p={3}
-              mt={[2, 2, 1, 4]}
+              px={[4, 4, 5]}
+              mt={[2, 2, 3, 4]}
             >
               Jetzt Klasse anmelden!
             </Button>
@@ -131,7 +130,7 @@ export default function Home(): React.ReactElement {
             </Link>
           </Flex>
         </Box>
-        <Footer color="black" />
+        <Footer color="white" />
       </Container>
     </>
   );
