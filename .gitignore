@@ -52,3 +52,4 @@ coverage
 /cypress/videos
 *.swp
 /.tmp_build
+*.pyc
