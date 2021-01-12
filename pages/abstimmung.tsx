@@ -119,7 +119,7 @@ export default function Abstimmung(): ReactElement {
 }
 
 export const FAQ: React.FC = () => (
-  <Box className="faq" fontSize={2}>
+  <Box className="faq" fontSize={2} textAlign="left">
     <Heading as="h3" mt={3}>
       Wer steht hinter voty.ch?
     </Heading>
