@@ -216,12 +216,12 @@ export const StudentListBallots: React.FC<{
           key={ballot.id}
           onClick={() => router.push(`/team/${teamId}/ballots/${ballot.id}`)}
           alignItems="center"
-          bg="secondary"
+          bg="primary"
           mb={3}
           px={3}
           height={76}
           fontWeight="semi"
-          sx={{ ":hover": { bg: "#1C88FF" }, cursor: "pointer" }}
+          sx={{ ":hover": { bg: "primary" }, cursor: "pointer" }}
         >
           <Image src="/images/card_ballot.svg" mr={3} />
           {ballot.title}
@@ -368,7 +368,7 @@ export const SelectBallots: React.FC<{ team: TeamTeacherFieldsFragment }> = ({
 
   return (
     <>
-      <table id="ballots" style={{ borderTop: "2px solid white" }}>
+      <table id="ballots" style={{ borderTop: "2px solid" }}>
         {/* <thead>
           <tr>
             <th>Abstimmung</th>
@@ -387,6 +387,7 @@ export const SelectBallots: React.FC<{ team: TeamTeacherFieldsFragment }> = ({
                 <Box
                   variant="centered"
                   sx={{ display: ["none", "none", "inline"] }}
+                  color="white"
                 >
                   <IconDeadline
                     height="20px"

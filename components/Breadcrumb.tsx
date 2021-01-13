@@ -1,4 +1,4 @@
-import { Box, LinkProps, Link as RebassLink } from "rebass";
+import { Box, Text, LinkProps, Link as RebassLink } from "rebass";
 import Link from "next/link";
 import React, { Fragment } from "react";
 
@@ -7,7 +7,7 @@ export const Breadcrumb: React.FC = ({ children }) => (
     mt={[-12, -12, -16]}
     mb={3}
     fontSize={[1, 1, 2]}
-    color="#1C88FF"
+    color="blue2"
     sx={{ overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}
   >
     {React.Children.map(children, (child, i) => (
@@ -39,5 +39,7 @@ export const A: React.FC<LinkProps> = (props) => {
 };
 
 export const Here: React.FC = ({ children }) => (
-  <span style={{ color: "white" }}>{children}</span>
+  <Text variant="inline" color="white">
+    {children}
+  </Text>
 );

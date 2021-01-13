@@ -8,8 +8,11 @@ import { TopBar } from "components/TopBar";
 import Link from "next/link";
 import { useRef } from "react";
 import { A } from "components/Breadcrumb";
+import { useColorMode } from "theme-ui";
 
 export default function Home(): React.ReactElement {
+  const [colorMode] = useColorMode();
+
   return (
     <>
       <Head>
@@ -29,7 +32,7 @@ export default function Home(): React.ReactElement {
           alignSelf="center"
           width={[240, 207, 426]}
           height={[95, 82, 164]}
-          src="/images/voty_logo_white.svg"
+          src={`/images/voty_logo${colorMode === "light" ? "" : "_white"}.svg`}
           alt="voty.ch"
         />
         <Flex flexDirection="row" justifyContent="center">
@@ -51,7 +54,7 @@ export default function Home(): React.ReactElement {
               pb={[3, 3, 3, 4]}
               fontSize={[3, 4, "28px", "40px"]}
               textAlign="center"
-              color="secondary"
+              color="primary"
             >
               Demokratie an die Schule!
             </Heading>
@@ -79,7 +82,6 @@ export default function Home(): React.ReactElement {
         <Box maxWidth="800px" width="100%" textAlign="center">
           <Link href="/abstimmung">
             <Button
-              bg="secondary"
               fontSize={[3, 3, 5, 5]}
               p={3}
               px={[4, 4, 5]}
@@ -130,7 +132,7 @@ export default function Home(): React.ReactElement {
             </Link>
           </Flex>
         </Box>
-        <Footer color="white" />
+        <Footer />
       </Container>
     </>
   );

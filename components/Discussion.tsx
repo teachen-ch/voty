@@ -108,7 +108,7 @@ const DiscussionDetail: React.FC<{
       className="discussion"
       mb={2}
       pb={2}
-      sx={{ borderBottom: "1px solid gray" }}
+      sx={{ borderBottom: "1px solid", borderColor: "trColor" }}
       fontSize={2}
       alignItems="flex-start"
       flexDirection={isMe ? "row-reverse" : "inherit"}
@@ -197,8 +197,8 @@ const PostDiscussion: React.FC<{
       <Textarea
         mt={3}
         value={text}
-        bg="#B1BDC3"
-        sx={{ border: "white", "::placeholder": { color: "white" } }}
+        bg="textarea"
+        sx={{ border: "white", "::placeholder": { color: "#fff" } }}
         onChange={(evt) => setText(evt.target.value)}
         fontSize={[1, 1, 2]}
         rows={2}

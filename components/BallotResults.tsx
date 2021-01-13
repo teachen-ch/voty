@@ -70,7 +70,7 @@ export const VotyPie: React.FC<{
     data.push({
       title: "Enthalten",
       value: Number(results.abs),
-      color: "#aaa",
+      color: "lightgray",
     });
   }
 

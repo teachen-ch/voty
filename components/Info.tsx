@@ -6,8 +6,8 @@ export default function Info(
 ): ReactElement {
   const type = props.type || "default";
   const typeColors: Record<string, string> = {
-    important: "#d90000",
-    info: "#000099",
+    important: "danger",
+    info: "primary",
     light: "lightgray",
     default: "gray",
   };

@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="140" height="140" viewBox="0 0 140 140">
-  <g fill="none" fill-rule="evenodd" stroke="#FFF" stroke-linecap="round" stroke-linejoin="round" stroke-width="9.262" opacity=".1">
+  <g fill="none" fill-rule="evenodd" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="9.262" opacity=".1">
     <path d="M42.3125,121.062275 L9.875225,121.062275 C4.7596875,121.062275 0.612725,116.915312 0.612725,111.799775 L0.612725,9.912275 C0.612725,4.7967375 4.7596875,0.649775 9.875225,0.649775 L75.5093,0.649775 C77.9650401,0.651936893 80.3194106,1.62922278 82.0548,3.366775 L99.7894,21.0952 C101.5262,22.8331134 102.501338,25.1898813 102.500226,27.646875 L102.500226,37.699775"/>
     <polygon points="37.663 28.437 56.188 28.437 56.188 56.225 37.663 56.225"/>
     <line x1="19.138" x2="19.138" y1="28.437" y2="56.225"/>

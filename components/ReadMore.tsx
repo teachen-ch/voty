@@ -10,15 +10,10 @@ export const ReadMore: React.FC<{
   hidePlus?: boolean;
 }> = (props) => {
   const [open, setOpen] = useState(false);
-  const color = props.color || "#73899D";
+  const bg = props.color || "#73899D";
   return (
     <Box className="readmore">
-      <Button
-        onClick={() => setOpen(!open)}
-        bg={color}
-        color="white"
-        width="100%"
-      >
+      <Button onClick={() => setOpen(!open)} bg={bg} color="#fff" width="100%">
         <Flex
           alignItems="center"
           justifyContent={props.hidePlus ? "center" : "left"}

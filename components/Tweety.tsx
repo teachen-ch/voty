@@ -114,7 +114,7 @@ const CharCounter: React.FC<{ chars: number; max: number; tweet: string }> = ({
     <Box pl={3} pb={2} mt={0} fontSize={1}>
       <Text
         variant="inline"
-        color={over ? "primary" : "black"}
+        color={over ? "danger" : "black"}
         fontWeight={over ? "bold" : "normal"}
       >
         {text}

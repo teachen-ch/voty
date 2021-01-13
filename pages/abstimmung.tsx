@@ -244,7 +244,7 @@ const ClassBar: React.FC<{ classes: number; total: number }> = ({
         textAlign: "center",
         lineHeight: 1.4,
       }}
-      bg="primary"
+      bg="danger"
       color="white"
     >
       {classes}

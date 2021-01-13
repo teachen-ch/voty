@@ -320,7 +320,7 @@ export const Vote: React.FC<{
     <TR>
       {setVotes && (
         <TD fixed onClick={() => doSelect(vote)}>
-          <Checkbox bg="white" checked={isSelected(vote)} color="secondary" />
+          <Checkbox bg="white" checked={isSelected(vote)} color="primary" />
         </TD>
       )}
       <TD fixed>{vote.datum && formatYear(vote.datum)}</TD>

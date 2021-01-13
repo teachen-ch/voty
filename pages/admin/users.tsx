@@ -8,7 +8,7 @@ import {
   Role,
 } from "graphql/types";
 import { gql } from "@apollo/client";
-import { OneRowTable, Table, TD, TDIcon, TR } from "components/Table";
+import { OneRowTable, Table, TD, TDImage, TR } from "components/Table";
 import { Input } from "@rebass/forms";
 import { debounce } from "lodash";
 import { Select } from "@rebass/forms";
@@ -117,7 +117,7 @@ const UserAdminList: React.FC<{
           <TR
             key={user.id}
             onClick={() => setSelected(user.id)}
-            bg={selected === user.id ? "secondary" : "inherit"}
+            bg={selected === user.id ? "primary" : "inherit"}
           >
             <TD width="300px">{user.email}</TD>
             <TD width="100px">{user.role}</TD>
@@ -126,12 +126,12 @@ const UserAdminList: React.FC<{
                 user.teaches?.map((team) => team.name).join(", ")}
               &nbsp;({user.school?.name || "???"})
             </TD>
-            <TDIcon
+            <TDImage
               src={`/images/icon_user_${user.emailVerified ? "ok" : "nok"}.svg`}
             />
           </TR>
           {selected === user.id && (
-            <TR bg="secondary" height="80px">
+            <TR bg="primary" height="80px">
               <TD fontSize={[1, 1, 1]}>
                 {user.school?.zip}{" "}
                 {user.school?.city || "Keine Schule angegeben"}
@@ -142,7 +142,7 @@ const UserAdminList: React.FC<{
                 <Button
                   onClick={() => deleteUser(user.id)}
                   bg="gray"
-                  sx={{ ":hover": { bg: "primary" } }}
+                  sx={{ ":hover": { bg: "danger" } }}
                 >
                   Löschen
                 </Button>

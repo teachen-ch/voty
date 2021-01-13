@@ -1,7 +1,7 @@
 import { Flex, Box, Text, Link as A } from "rebass";
 import Link from "next/link";
 
-export const Footer: React.FC<{ color: string | string[] }> = ({ color }) => (
+export const Footer: React.FC = () => (
   <Flex
     as="footer"
     pt={[5, 5, 6]}
@@ -12,7 +12,7 @@ export const Footer: React.FC<{ color: string | string[] }> = ({ color }) => (
     flexDirection="column"
     fontSize={1}
   >
-    <Text mx="auto" color={color}>
+    <Text mx="auto">
       voty.ch ist ein{" "}
       <A
         href="https://github.com/teachen-ch/voty"
@@ -41,7 +41,7 @@ export const Footer: React.FC<{ color: string | string[] }> = ({ color }) => (
           height={42}
         />
         <hr style={{ borderColor: "inherit", borderTopWidth: "0px" }} />
-        <Flex as="nav" color={color} justifyContent="space-between">
+        <Flex as="nav" justifyContent="space-between">
           <Link href="/impressum">
             <A>Impressum</A>
           </Link>

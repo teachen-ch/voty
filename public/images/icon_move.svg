@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-  <g fill="none" fill-rule="evenodd" stroke="#FFF" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" transform="translate(2 5)">
+  <g fill="none" fill-rule="evenodd" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" transform="translate(2 5)">
     <line x1=".25" x2="19.75" y1="13.003" y2="13.003"/>
     <line x1=".25" x2="19.75" y1="7.003" y2="7.003"/>
     <line x1=".25" x2="19.75" y1="1.003" y2="1.003"/>

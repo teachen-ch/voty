@@ -122,3 +122,8 @@ tr td {
     opacity: 0;
   }
 }
+
+/* this hides the rebass dropdown icon for the select field */
+select + svg {
+  display: none;
+}

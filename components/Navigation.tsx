@@ -21,10 +21,10 @@ export type RouteProps = {
 export const Route: React.FC<RouteProps> = (props) => {
   const router = useRouter();
   const as = props.as || props.href;
-  let variant = props.disabled ? "muted" : "secondary";
+  let variant = props.disabled ? "muted" : "primary";
 
   const path = router.pathname;
-  if (path === props.href) variant = "primary";
+  if (path === props.href) variant = "danger";
 
   function onClick() {
     if (!props.disabled && path != props.href) {

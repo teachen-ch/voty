@@ -2,8 +2,8 @@
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0" y="0" width="44" height="36" viewBox="0, 0, 44, 36">
   <g id="Hamburger-Copy">
-    <path d="M9,7 L35,7 L35,12 L9,12 z" fill="#FFFFFF" id="Rectangle-1"/>
-    <path d="M9,15.5 L35,15.5 L35,20.5 L9,20.5 z" fill="#FFFFFF" id="Rectangle-2"/>
-    <path d="M9,24 L35,24 L35,29 L9,29 z" fill="#FFFFFF" id="Rectangle-3"/>
+    <path d="M9,7 L35,7 L35,12 L9,12 z" fill="currentColor" id="Rectangle-1"/>
+    <path d="M9,15.5 L35,15.5 L35,20.5 L9,20.5 z" fill="currentColor" id="Rectangle-2"/>
+    <path d="M9,24 L35,24 L35,29 L9,29 z" fill="currentColor" id="Rectangle-3"/>
   </g>
 </svg>

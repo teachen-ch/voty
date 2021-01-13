@@ -2,7 +2,7 @@
 <svg width="60px" height="52px" viewBox="0 0 60 52" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <title>card_ballot</title>
     <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
-        <g id="card_ballot" transform="translate(2.000000, 2.000000)" stroke="#FFFFFF">
+        <g id="card_ballot" transform="translate(2.000000, 2.000000)" stroke="currentColor">
             <g id="Group">
                 <path d="M24.7914355,47.7112937 C22.6933603,44.0827143 18.8114146,41.8467368 14.6098073,41.8467368 C10.4082001,41.8467368 6.52625429,44.0827143 4.4281791,47.7112937" id="Path" stroke-width="3.06"></path>
                 <g transform="translate(5.541493, 22.268632)" id="Path">

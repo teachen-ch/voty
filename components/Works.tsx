@@ -363,7 +363,7 @@ export const Pill: React.FC<
   }
 > = ({
   deleteLink,
-  bg = "secondary",
+  bg = "primary",
   color = "white",
   children,
   onClick,

@@ -62,7 +62,7 @@ export default function Projekt(): React.ReactElement {
             </A>
           </strong>
           &nbsp;
-          <Tag bg={"secondary"}>Live</Tag>
+          <Tag bg={"primary"}>Live</Tag>
           <br /> Ein Abstimmungsmodul, mit dem aktuelle nationale Urnengänge von
           den Schüler*Innen in der Klasse zuerst diskutiert und danach
           durchgeführt werden können.
@@ -218,9 +218,9 @@ export default function Projekt(): React.ReactElement {
 const Tag: React.FC<{ bg?: string }> = ({ children, bg }) => (
   <Text
     fontSize={1}
-    bg={bg || "#bbb"}
+    bg={bg || "gray"}
     sx={{ borderRadius: 0, display: "inline" }}
-    color="white"
+    color="#fff"
     px={2}
     py={"2px"}
   >

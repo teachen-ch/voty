@@ -8,6 +8,8 @@ import {
   Text,
   Box,
 } from "rebass";
+import { useColorMode } from "theme-ui";
+import { Center } from "./Learning";
 
 export const Table: React.FC<BoxProps> = ({
   id,
@@ -19,7 +21,11 @@ export const Table: React.FC<BoxProps> = ({
     <Box
       id={id}
       fontSize={fontSize}
-      sx={{ borderTop: "2px solid white", borderBottom: "2px solid white" }}
+      sx={{
+        borderBottom: "2px solid",
+        borderTop: "2px solid",
+        borderColor: "white",
+      }}
       {...props}
     >
       {children}
@@ -41,9 +47,11 @@ export const TR: React.FC<FlexProps & { href?: string }> = ({
       height="40px"
       onClick={href ? () => router.push(href) : undefined}
       sx={{
-        borderBottom: "1px solid gray",
+        borderBottom: "1px solid",
+        borderColor: "trColor",
         ":hover": {
-          bg: "secondary",
+          bg: "primary",
+          color: "#fff",
         },
         cursor: href ? "pointer" : "inherit",
       }}
@@ -78,17 +86,41 @@ export const TD: React.FC<
   </Box>
 );
 
-export const TDIcon: React.FC<ImageProps & { smHide?: boolean }> = ({
+export const TDImage: React.FC<ImageProps & { smHide?: boolean }> = ({
   smHide,
   ...props
+}) => {
+  const [colorMode] = useColorMode();
+  const dark = colorMode === "dark";
+  return (
+    <Image
+      alignSelf="center"
+      mx={2}
+      css={{}}
+      display={smHide ? ["none", "none", "block"] : "block"}
+      sx={{ flexShrink: 0, filter: dark ? "invert(100)" : "none" }}
+      {...props}
+    />
+  );
+};
+
+export const TDIcon: React.FC<BoxProps & { smHide?: boolean }> = ({
+  smHide,
+  children,
+  ...props
 }) => (
-  <Image
-    alignSelf="center"
+  <Box
     mx={2}
-    css={{ flexShrink: 0 }}
     display={smHide ? ["none", "none", "block"] : "block"}
+    sx={{
+      flexShrink: 0,
+      flexGrow: 0,
+      cursor: props.onClick ? "pointer" : "inherit",
+    }}
     {...props}
-  />
+  >
+    <Center>{children}</Center>
+  </Box>
 );
 
 export const OneRowTable: React.FC<{ text?: string }> = ({

@@ -107,7 +107,7 @@ export const InputBox: React.FC = ({ children }) => (
     flexWrap="wrap"
     alignItems="center"
     width="100%"
-    bg="#eee"
+    bg="lightgray"
     p={2}
     sx={{ borderTop: "1px solid lightgray" }}
   >
@@ -165,7 +165,7 @@ export const TypingIndicator: React.FC = () => (
 
 const GlowDot: React.FC<{ delay: number }> = ({ delay }) => (
   <Text
-    color="secondary"
+    color="primary"
     variant="inline"
     sx={{ animation: `glowDot 0.5s linear ${delay}s infinite alternate` }}
   >

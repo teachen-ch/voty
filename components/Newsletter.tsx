@@ -54,12 +54,7 @@ export function Submit({
   value: string;
 }): ReactElement {
   return (
-    <Button
-      type="submit"
-      name={name}
-      variant="primary"
-      sx={{ gridColumn: [0, 0, 2] }}
-    >
+    <Button type="submit" name={name} sx={{ gridColumn: [0, 0, 2] }}>
       {value}
     </Button>
   );

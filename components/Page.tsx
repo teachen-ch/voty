@@ -9,7 +9,7 @@ import { Role } from "graphql/types";
 import { Footer } from "components/Footer";
 import { TopBar } from "./TopBar";
 import IconClose from "../public/images/icon_close.svg";
-import { Spinner } from "theme-ui";
+import { Spinner, useColorMode } from "theme-ui";
 import Info from "./Info";
 import { tr } from "util/translate";
 
@@ -28,13 +28,15 @@ export const Page: React.FC<{
 export const AppPage: React.FC<{
   bgImages?: string[];
   heading?: string;
-  light?: boolean;
   onClose?: () => void;
 }> = (props) => {
+  const [colorMode] = useColorMode();
+  const light = colorMode === "light";
+
   const bgImages = props.bgImages || [
     "voty_bg_mobile_dark.svg",
     "voty_bg_mobile_dark.svg",
-    props.light ? "voty_bg_1.svg" : "voty_bg_1_dark.svg",
+    light ? "voty_bg_1.svg" : "voty_bg_1_dark.svg",
   ];
   return (
     <>
@@ -50,7 +52,7 @@ export const AppPage: React.FC<{
           py="25px"
           sx={{
             borderRadius: [0, 0, 5],
-            backgroundColor: "silver",
+            backgroundColor: "panelColor",
             position: "relative",
           }}
           minWidth="min(100%, 800px)"
@@ -64,7 +66,7 @@ export const AppPage: React.FC<{
               as="h1"
               fontSize={[5, 5, "34px", "50px"]}
               fontWeight="normal"
-              sx={{ borderBottom: "2px solid white" }}
+              sx={{ borderBottom: "2px solid", borderColor: "white" }}
             >
               <Flex justifyContent="space-between">
                 {props.heading}
@@ -85,7 +87,7 @@ export const AppPage: React.FC<{
           )}
           {props.children}
         </Box>
-        <Footer color={props.light ? ["white", "white", "black"] : "white"} />
+        <Footer />
       </Container>
     </>
   );
@@ -189,27 +191,25 @@ export const Background: React.FC<{ bgImages: string[]; start?: boolean }> = (
         backgroundPositionY: 0,
         backgroundSize: "100%",
         backgroundPositionX: "center",
-        backgroundColor: "#313131",
+        backgroundColor: "bgcolor",
       }}
     />
   );
 };
 
 export const H2: React.FC<HeadingProps> = (props) => (
-  <Heading
-    as="h2"
-    color="#1C88FF"
-    pb={2}
-    fontWeight="semi"
-    sx={{ borderBottom: "2px solid", borderColor: "#1C88FF" }}
-    {...props}
-  >
+  <Heading as="h2" variant="panelheading" {...props}>
     {props.children}
   </Heading>
 );
 
 export const H3: React.FC<HeadingProps> = (props) => (
-  <Heading as="h3" color="#1C88FF" pb={2} fontWeight="semi" {...props}>
+  <Heading
+    as="h3"
+    variant="panelheading"
+    sx={{ borderBottom: "none" }}
+    {...props}
+  >
     {props.children}
   </Heading>
 );

@@ -2,7 +2,7 @@
 <svg width="31px" height="31px" viewBox="0 0 31 31" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <title>Icon Registrieren</title>
     <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
-        <g id="Nav-Stripe-N1" transform="translate(-969.000000, -18.000000)" stroke="#FFFFFF" stroke-width="1.8125">
+        <g id="Nav-Stripe-N1" transform="translate(-969.000000, -18.000000)" stroke="currentColor" stroke-width="1.8125">
             <g id="Icon-LogIn" transform="translate(970.000000, 19.000000)">
                 <path d="M15.3483772,17.2168421 L10.6269737,17.8922368 L11.3010965,13.1695614 L23.4429386,1.0277193 C24.5605643,-0.0899064067 26.3725936,-0.0899064067 27.4902193,1.0277193 C28.607845,2.145345 28.607845,3.9573743 27.4902193,5.075 L15.3483772,17.2168421 Z" id="Path"></path>
                 <path d="M23.5586842,17.3618421 L23.5586842,26.9013158 C23.5586842,27.955017 22.7044906,28.8092105 21.6507895,28.8092105 L2.57184211,28.8092105 C1.51814094,28.8092105 0.663947368,27.955017 0.663947368,26.9013158 L0.663947368,7.82236842 C0.663947368,6.76866725 1.51814094,5.91447368 2.57184211,5.91447368 L12.1113158,5.91447368" id="Path"></path>

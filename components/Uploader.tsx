@@ -90,7 +90,7 @@ export const UploadArea: React.FC<{
       onDragLeave={dragExit}
       onDrop={doDrop}
       onClick={() => fileInput.current?.click()}
-      bg={drag ? "primary" : "secondary"}
+      bg={drag ? "danger" : "primary"}
       height={80}
       width={width}
       justifyContent="center"

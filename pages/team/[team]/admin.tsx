@@ -185,8 +185,8 @@ export default function TeacherTeamPage(): React.ReactElement {
             mt={3}
             autoFocus={true}
             value={importEmails}
-            bg="#B1BDC3"
-            sx={{ border: "white", "::placeholder": { color: "white" } }}
+            bg="textarea"
+            sx={{ border: "white", "::placeholder": { color: "#fff" } }}
             onChange={checkEmails}
             fontSize={1}
             height="auto"
@@ -198,7 +198,7 @@ export default function TeacherTeamPage(): React.ReactElement {
             onClick={() => inviteStudents(team)}
             disabled={!matches || inviteQuery.loading}
             width="100%"
-            bg="secondary"
+            bg="primary"
           >
             {inviteQuery.loading ? (
               <Text>

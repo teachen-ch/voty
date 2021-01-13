@@ -193,7 +193,7 @@ export const PanelPage: React.FC<{ heading: string; teamId?: string }> = (
         sx={{
           minWidth: "min(100%, 800px)",
           borderRadius: [0, 0, 5],
-          backgroundColor: "silver",
+          backgroundColor: "panelColor",
         }}
         maxWidth="800px"
         minHeight="450px"
@@ -204,7 +204,7 @@ export const PanelPage: React.FC<{ heading: string; teamId?: string }> = (
           as="h1"
           fontSize={[5, 5, "34px", "50px"]}
           fontWeight="normal"
-          sx={{ borderBottom: "2px solid black" }}
+          sx={{ borderBottom: "2px solid", borderColor: "black" }}
         >
           <Flex justifyContent="space-between">{props.heading}</Flex>
         </Heading>

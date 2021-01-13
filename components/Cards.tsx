@@ -11,8 +11,11 @@ import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { truncate, without } from "lodash";
 import DraggableList from "react-draggable-list";
-import { OneRowTable, Table, TD, TDIcon, TR } from "./Table";
+import { OneRowTable, Table, TD, TDIcon, TDImage, TR } from "./Table";
 import { A } from "./Breadcrumb";
+import IconTrash from "../public/images/icon_trash.svg";
+import IconWatch from "../public/images/icon_watch.svg";
+import IconMove from "../public/images/icon_move.svg";
 
 export const GET_CARDS = gql`
   query cards($keywords: String, $age: String, $type: String) {
@@ -113,7 +116,7 @@ export const CardItem: React.FC<{
     if (cards.split(" ").length > 1) window.scrollBy(0, selected ? -40 : 40);
   }
   const link = teamId ? `/team/${teamId}/cards/${id}` : `/cards/${id}`;
-  const bgColor = selected ? "#1C88FF" : "#0C66C9";
+  const bgColor = selected ? "blue2" : "blue3";
   const bgImage = `/images/bg_${card.icon || card.type}.svg`;
   const selectImage = selected
     ? "/images/icon_check.svg"
@@ -124,9 +127,10 @@ export const CardItem: React.FC<{
       width={["calc(50% - 16px)", "calc(50% - 16px)", "calc(33.3333% - 16px)"]}
       mx="8px"
       sx={{
-        background: `url(${bgImage}) center no-repeat ${bgColor}`,
+        background: `url(${bgImage}) center no-repeat`,
+        backgroundColor: bgColor,
       }}
-      color="white"
+      color="#fff"
       p={3}
       mb={3}
     >
@@ -195,12 +199,12 @@ export const StudentCardList: React.FC<{
             key={id}
             onClick={() => router.push(`/team/${teamId}/cards/${id}`)}
             alignItems="center"
-            bg="secondary"
+            bg="primary"
             mb={3}
             px={3}
             height={76}
             fontWeight="semi"
-            sx={{ ":hover": { bg: "#1C88FF" }, cursor: "pointer" }}
+            sx={{ ":hover": { bg: "primary" }, cursor: "pointer" }}
           >
             <Image src={getCardIcon(card?.icon, card?.type)} mr={3} />
             {card?.title}
@@ -225,11 +229,13 @@ export const CardListAdmin: React.FC<{
         return (
           <TR key={id} href={`/team/${teamId}/cards/${id}`}>
             <TD flexy>{card?.title}</TD>
-            <TDIcon src="/images/icon_watch.svg" mr={0} />
+            <TDIcon mr={0}>
+              <IconWatch />
+            </TDIcon>
             <TD width="180px" smHide>
               {card?.duration}
             </TD>
-            <TDIcon src={getCardTypeIcon(card?.type)} />
+            <TDImage src={getCardTypeIcon(card?.type)} />
           </TR>
         );
       })}
@@ -320,11 +326,9 @@ class CardAdminItem extends React.Component<CardAdminProps> {
         onMouseOver={() => this.setState({ over: true })}
         onMouseOut={() => this.setState({ over: false })}
       >
-        <TDIcon
-          {...dragHandleProps}
-          sx={{ cursor: "grab" }}
-          src="/images/icon_move.svg"
-        />
+        <TDIcon {...dragHandleProps} sx={{ cursor: "grab" }}>
+          <IconMove />
+        </TDIcon>
         <TD flexy>
           <A
             href={item.link}
@@ -333,16 +337,16 @@ class CardAdminItem extends React.Component<CardAdminProps> {
             {item.title}
           </A>
         </TD>
-        <TDIcon src="/images/icon_watch.svg" mr={0} smHide />
+        <TDIcon smHide mr={0}>
+          <IconWatch />
+        </TDIcon>
 
         <TD width="180px" smHide>
           {item?.duration}
         </TD>
-        <TDIcon
-          src="/images/icon_trash.svg"
-          sx={{ cursor: "pointer" }}
-          onClick={() => this.props.commonProps(item.id)}
-        />
+        <TDIcon>
+          <IconTrash onClick={() => this.props.commonProps(item.id)} />
+        </TDIcon>
       </TR>
     );
   }

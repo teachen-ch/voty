@@ -104,7 +104,7 @@ export const Poster: React.FC<{ vote: Swissvote; image: string }> = ({
     <Box
       width="calc(100% - 8px)"
       mb={3}
-      bg="white"
+      bg="#fff"
       p={2}
       sx={{ position: "relative" }}
     >

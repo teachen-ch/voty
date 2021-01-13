@@ -309,7 +309,7 @@ export const ErrorBox: React.FC<ErrorBoxProps> = ({ error, ...props }) => {
       py={2}
       sx={{
         gridColumn: [0, 0, 2],
-        borderLeftColor: "primary",
+        borderLeftColor: "danger",
         borderLeftStyle: "solid",
         borderLeftWidth: 4,
       }}

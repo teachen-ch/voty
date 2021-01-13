@@ -5,15 +5,34 @@ import IconLogin from "../public/images/icon_login.svg";
 import IconLogout from "../public/images/icon_logout.svg";
 import IconAccount from "../public/images/icon_account.svg";
 import IconHome from "../public/images/icon_home.svg";
+import IconClasses from "../public/images/icon_classes.svg";
 import IconImpressum from "../public/images/icon_impressum.svg";
 import IconNewsletter from "../public/images/icon_newsletter.svg";
+import IconDown from "../public/images/icon_down.svg";
+import IconUp from "../public/images/icon_up.svg";
 import { useUser, SessionUser } from "state/user";
 import { useState, useEffect } from "react";
 import { Role } from "graphql/types";
+import { useColorMode } from "theme-ui";
 
 export const TopBar: React.FC<{ hideLogo?: boolean }> = (props) => {
   const user = useUser();
   const [loaded, setLoaded] = useState(false);
+  const [colorMode, setColorMode] = useColorMode();
+  const light = colorMode === "light";
+  const [darkMode, setDarkMode] = useState<string | null>("");
+
+  useEffect(() => {
+    if (document?.location.hash === "#darkmode") {
+      setDarkMode("true");
+      if (typeof localStorage !== "undefined")
+        localStorage.setItem("darkmode", "true");
+    } else if (typeof localStorage !== "undefined") {
+      setDarkMode(localStorage.getItem("darkmode"));
+    }
+  }),
+    [];
+
   let cancel = 0;
 
   // Delay showing of the login icons until user is loaded
@@ -28,7 +47,7 @@ export const TopBar: React.FC<{ hideLogo?: boolean }> = (props) => {
 
   return (
     <Flex
-      bg={["inherit", "inherit", "#505050"]}
+      bg={["inherit", "inherit", "topbarColor"]}
       height="70px"
       width="100%"
       justifyContent="center"
@@ -44,20 +63,29 @@ export const TopBar: React.FC<{ hideLogo?: boolean }> = (props) => {
         pt="8px"
         flex={1}
       >
-        <Box>
+        <Flex justifyContent="space-between" height="56px">
+          {darkMode && (
+            <Image
+              ml={-30}
+              mr={4}
+              src={`/images/icon_${colorMode}mode.svg`}
+              sx={{ cursor: "pointer", flexGrow: 0, flexShrink: 0 }}
+              onClick={() => setColorMode(light ? "dark" : "light")}
+            />
+          )}
           {!props.hideLogo && (
             <Link href="/">
               <A>
-                <img
-                  src="/images/voty_logo.svg"
+                <Image
+                  src={`/images/voty_logo${light ? "" : "_white"}.svg`}
                   alt="voty"
                   width="103px"
-                  style={{ filter: "brightness(100)", marginTop: 10 }}
+                  mt="10px"
                 />
               </A>
             </Link>
           )}
-        </Box>
+        </Flex>
         <Box pt="10px" sx={{ display: ["none", "none", "block", "block"] }}>
           {loaded && (user ? <Account user={user} /> : <RegisterLogin />)}
         </Box>
@@ -81,7 +109,7 @@ const RegisterLogin: React.FC = () => {
       </Link>
       <Link href="/user/login">
         <A>
-          <Flex alignItems="center">
+          <Flex alignItems="center" color="white">
             <IconLogin />
             <Text ml={3}>Anmelden</Text>
           </Flex>
@@ -99,7 +127,7 @@ const Account: React.FC<{ user: SessionUser }> = ({ user }) => {
       ? "Admin"
       : `Meine Klasse${user?.role === Role.Teacher ? "n" : ""}`;
   return (
-    <Flex>
+    <Flex color="white">
       <Link href={homeLink}>
         <A>
           <Flex
@@ -107,7 +135,7 @@ const Account: React.FC<{ user: SessionUser }> = ({ user }) => {
             flexDirection="row"
             justifyContent="flex-end"
           >
-            <Image alt="Liste" src={`/images/icon_classes.svg`} mr={2} />
+            <IconClasses style={{ marginRight: 8 }} />
             {homeText}
           </Flex>
         </A>
@@ -123,9 +151,9 @@ const Account: React.FC<{ user: SessionUser }> = ({ user }) => {
             <IconAccount />
             <Text mx={2}>Mein Konto</Text>
             {open ? (
-              <Image src="/images/icon_up.svg" alt="Schliessen" />
+              <IconUp src="/images/icon_up.svg" alt="Schliessen" />
             ) : (
-              <Image src="/images/icon_down.svg" alt="Öffnen" />
+              <IconDown alt="Öffnen" />
             )}
           </Flex>
         </A>
@@ -138,13 +166,21 @@ const Account: React.FC<{ user: SessionUser }> = ({ user }) => {
 const AccountMenu: React.FC = () => {
   return (
     <Box width="207px" mt="22px" ml="85px" sx={{ lineHeight: "16px" }}>
-      <svg width="207px" height="15px" viewBox="-136 0 207 15" version="1.1">
-        <path
-          d="M2.95999555,15 L23.9609454,1.71229409 C25.7556788,0.648405241 27.974226,0.593219151 29.8196352,1.5665599 L53.9750193,14.3070506 C54.8378628,14.7621479 55.7986582,15 56.7741645,15 L93,15 L-114,15 L-0.0995490542,15 C0.977073975,15 2.03386354,14.7103124 2.95999555,14.1613164 Z"
-          fill="#505050"
-        ></path>
-      </svg>
-      <Box bg="#505050" m={0} width="207px" p={3} sx={{ borderRadius: "card" }}>
+      <Box color="topbarColor">
+        <svg width="207px" height="15px" viewBox="-136 0 207 15" version="1.1">
+          <path
+            d="M2.95999555,15 L23.9609454,1.71229409 C25.7556788,0.648405241 27.974226,0.593219151 29.8196352,1.5665599 L53.9750193,14.3070506 C54.8378628,14.7621479 55.7986582,15 56.7741645,15 L93,15 L-114,15 L-0.0995490542,15 C0.977073975,15 2.03386354,14.7103124 2.95999555,14.1613164 Z"
+            fill="currentColor"
+          ></path>
+        </svg>
+      </Box>
+      <Box
+        bg="topbarColor"
+        m={0}
+        width="207px"
+        p={3}
+        sx={{ borderRadius: "card" }}
+      >
         <Text lineHeight="35px">
           <Link href="/user/profile">
             <A>Profil bearbeiten</A>
@@ -182,7 +218,7 @@ const MobileBurger: React.FC<{ user: SessionUser }> = ({ user }) => {
             sx={{ position: "fixed", top: 0, left: 0 }}
           ></Box>
           <Box
-            bg="primary"
+            bg="danger"
             width="80%"
             height="100%"
             fontSize={4}

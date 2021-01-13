@@ -8,11 +8,13 @@ import {
   Role,
 } from "graphql/types";
 import { ReactElement, useState } from "react";
-import { Link as A, Box, Image, Button, Text } from "rebass";
+import { Link as A, Box, Button, Text } from "rebass";
 import { Label, Input as RebassInput, Select } from "@rebass/forms";
 import { SessionUser, useSetUser } from "state/user";
 import { yup, ErrorBox } from "./Form";
 import CheckLogin from "./CheckLogin";
+import IconOK from "../public/images/icon_user_ok.svg";
+import IconNOK from "../public/images/icon_user_nok.svg";
 import { Formik, Form, Field, ErrorMessage, useField } from "formik";
 import { Grid } from "theme-ui";
 import { tr } from "util/translate";
@@ -81,7 +83,7 @@ export function Users({
   return (
     <table
       style={{
-        borderTop: "2px solid white",
+        borderTop: "2px solid",
       }}
     >
       <tbody>
@@ -106,10 +108,9 @@ export function Users({
               <td>
                 <Box variant="centered">
                   {user.emailVerified ? (
-                    <Image src="/images/icon_user_ok.svg" alt="Bestätigt" />
+                    <IconOK src="" alt="Bestätigt" />
                   ) : (
-                    <Image
-                      src="/images/icon_user_nok.svg"
+                    <IconNOK
                       alt="Nicht bestätigt"
                       onClick={() => doDeleteUser(user.id)}
                     />

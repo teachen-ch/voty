@@ -22,7 +22,7 @@ export const Banner: React.FC<BannerProps> = ({ href, onClick, children }) => {
     >*/
     <Text color="white">
       <Link
-        bg="primary"
+        bg="danger"
         px="70px"
         py={3}
         pb={[55, 55, 3]}

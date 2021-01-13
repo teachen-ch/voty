@@ -86,7 +86,7 @@ const DeleteForm: React.FC<{ user: SessionUser }> = ({ user }) => {
         <Button onClick={() => router.push("/user/profile")}>
           Ich bleibe auf voty.ch!
         </Button>
-        <Button onClick={() => doDeleteAccount()} bg="primary">
+        <Button onClick={() => doDeleteAccount()} bg="danger">
           Mein Konto löschen
         </Button>
       </Grid>
