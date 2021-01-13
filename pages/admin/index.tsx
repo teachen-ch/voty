@@ -9,6 +9,11 @@ export default function Teacher(): ReactElement {
     <LoggedInPage heading="Admin Bereich" role={Role.Admin}>
       <Text lineHeight="2em">
         <Text>
+          <Link href="/admin/users">
+            <A>😀 Benutzer</A>
+          </Link>
+        </Text>
+        <Text>
           <Link href="/admin/teachers">
             <A>🧑🏼‍🤝‍🧑🏻 Lehrpersonen</A>
           </Link>

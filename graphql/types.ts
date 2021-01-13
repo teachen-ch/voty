@@ -8288,6 +8288,31 @@ export type TeachersQuery = (
   )> }
 );
 
+export type AdminUsersQueryVariables = Exact<{
+  where?: Maybe<UserWhereInput>;
+  orderBy?: Maybe<Array<UserOrderByInput>>;
+  first?: Maybe<Scalars['Int']>;
+}>;
+
+
+export type AdminUsersQuery = (
+  { __typename?: 'Query' }
+  & { users: Array<(
+    { __typename?: 'User' }
+    & Pick<User, 'id' | 'shortname' | 'name' | 'gender' | 'year' | 'lastname' | 'createdAt' | 'email' | 'emailVerified' | 'role'>
+    & { school?: Maybe<(
+      { __typename?: 'School' }
+      & Pick<School, 'id' | 'name' | 'zip' | 'city'>
+    )>, teaches: Array<(
+      { __typename?: 'Team' }
+      & Pick<Team, 'id' | 'name'>
+    )>, team?: Maybe<(
+      { __typename?: 'Team' }
+      & Pick<Team, 'id' | 'name'>
+    )> }
+  )> }
+);
+
 export type CreateInvitedUserMutationVariables = Exact<{
   invite: Scalars['String'];
   name?: Maybe<Scalars['String']>;
@@ -9826,6 +9851,64 @@ export function useTeachersLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<T
 export type TeachersQueryHookResult = ReturnType<typeof useTeachersQuery>;
 export type TeachersLazyQueryHookResult = ReturnType<typeof useTeachersLazyQuery>;
 export type TeachersQueryResult = Apollo.QueryResult<TeachersQuery, TeachersQueryVariables>;
+export const AdminUsersDocument = gql`
+    query adminUsers($where: UserWhereInput, $orderBy: [UserOrderByInput!], $first: Int) {
+  users(where: $where, orderBy: $orderBy, first: $first) {
+    id
+    shortname
+    name
+    gender
+    year
+    lastname
+    createdAt
+    email
+    emailVerified
+    role
+    school {
+      id
+      name
+      zip
+      city
+    }
+    teaches {
+      id
+      name
+    }
+    team {
+      id
+      name
+    }
+  }
+}
+    `;
+
+/**
+ * __useAdminUsersQuery__
+ *
+ * To run a query within a React component, call `useAdminUsersQuery` and pass it any options that fit your needs.
+ * When your component renders, `useAdminUsersQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useAdminUsersQuery({
+ *   variables: {
+ *      where: // value for 'where'
+ *      orderBy: // value for 'orderBy'
+ *      first: // value for 'first'
+ *   },
+ * });
+ */
+export function useAdminUsersQuery(baseOptions?: Apollo.QueryHookOptions<AdminUsersQuery, AdminUsersQueryVariables>) {
+        return Apollo.useQuery<AdminUsersQuery, AdminUsersQueryVariables>(AdminUsersDocument, baseOptions);
+      }
+export function useAdminUsersLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AdminUsersQuery, AdminUsersQueryVariables>) {
+          return Apollo.useLazyQuery<AdminUsersQuery, AdminUsersQueryVariables>(AdminUsersDocument, baseOptions);
+        }
+export type AdminUsersQueryHookResult = ReturnType<typeof useAdminUsersQuery>;
+export type AdminUsersLazyQueryHookResult = ReturnType<typeof useAdminUsersLazyQuery>;
+export type AdminUsersQueryResult = Apollo.QueryResult<AdminUsersQuery, AdminUsersQueryVariables>;
 export const CreateInvitedUserDocument = gql`
     mutation createInvitedUser($invite: String!, $name: String, $lastname: String, $email: String!, $password: String) {
   createInvitedUser(

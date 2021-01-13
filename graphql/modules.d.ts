@@ -140,6 +140,15 @@ declare module '*/teachers.tsx' {
 }
     
 
+declare module '*/users.tsx' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const adminUsers: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
 declare module '*/[invite].tsx' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
