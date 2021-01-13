@@ -93,10 +93,14 @@ const RegisterLogin: React.FC = () => {
 
 const Account: React.FC<{ user: SessionUser }> = ({ user }) => {
   const [open, setOpen] = useState(false);
-  const isTeacher = user?.role === Role.Teacher;
+  const homeLink = `/${user?.role.toLowerCase()}`;
+  const homeText =
+    user?.role === Role.Admin
+      ? "Admin"
+      : `Meine Klasse${user?.role === Role.Teacher ? "n" : ""}`;
   return (
     <Flex>
-      <Link href={isTeacher ? "/teacher" : "/student"}>
+      <Link href={homeLink}>
         <A>
           <Flex
             alignItems="center"
@@ -104,7 +108,7 @@ const Account: React.FC<{ user: SessionUser }> = ({ user }) => {
             justifyContent="flex-end"
           >
             <Image alt="Liste" src={`/images/icon_classes.svg`} mr={2} />
-            {isTeacher ? "Meine Klassen" : "Meine Klasse"}
+            {homeText}
           </Flex>
         </A>
       </Link>
