@@ -70,12 +70,12 @@ export function Teachers({
             <td style={{ maxWidth: "200px" }}>
               <a href={`mailto:${user.email}`}>{user.shortname}</a>
             </td>
-            <td>
+            <td style={{ maxWidth: "200px" }}>
               <A href={`/admin/schools#${user.school?.id}`}>
                 {user.school?.name}
               </A>
             </td>
-            <td>
+            <td style={{ maxWidth: "200px", whiteSpace: "break-spaces" }}>
               {user.teaches.map((team, i) => (
                 <A key={team.id} href={`/team/${team.id}/admin`}>
                   {i > 0 ? ", " : ""}
