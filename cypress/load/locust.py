@@ -1,7 +1,10 @@
-from locust import HttpUser, task
+from locust import HttpUser, task, between
 import logging
 import random
 import json
+
+teacher = {"email": "teacher@teachen.ch", "password": "teachen"}
+student = {"email": "student@teachen.ch", "password": "teachen"}
 
 
 class GraphQLUser(HttpUser):
@@ -68,7 +71,7 @@ class Teacher(GraphQLUser):
     def on_start(self):
         self.client.get("/")
         self.client.get("/user/login")
-        self.login("teacher@teachen.ch", "teachen")
+        self.login(teacher["email"], teacher["password"])
         self.query("me", fields="id, school { name }")
         r = self.query("teams",
                        args='where: {teacherId: {equals: "%s" } }' % self.user,
@@ -120,6 +123,6 @@ class Student(GraphQLUser):
     def on_start(self):
         self.client.get("/")
         self.client.get("/user/login")
-        self.login("student@teachen.ch", "teachen")
+        self.login(student["email"], student["password"])
         r = self.query("me", fields="id, team { id name }")
         self.team = r['me']['team']['id']
