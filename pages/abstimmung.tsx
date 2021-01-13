@@ -9,6 +9,7 @@ import { Role } from "graphql/types";
 import { SessionUser } from "state/user";
 import { ReadMore } from "components/ReadMore";
 import { HideFeature } from "components/HideFeature";
+import IconCheckWhite from "../public/images/icon_yes.svg";
 
 export default function Abstimmung(): ReactElement {
   const [newUser, setNewUser] = useState<SessionUser | undefined>(undefined);
@@ -42,9 +43,9 @@ export default function Abstimmung(): ReactElement {
         flexDirection="column"
         fontSize={[2, 2, 3]}
       >
-        <Flex my={2}>
+        <Flex my={2} color="white">
           <Text px={3} textAlign="center">
-            <IconCheckWhite />
+            <IconCheckWhite height="25px" />
           </Text>
           <Text maxWidth="600px">
             Ja, ich unterrichte politische Bildung in meiner Klasse und nehme
@@ -53,7 +54,7 @@ export default function Abstimmung(): ReactElement {
         </Flex>
         <Flex my={2}>
           <Text px={3} textAlign="center">
-            <IconCheckWhite />
+            <IconCheckWhite height="25px" />
           </Text>
           <Text maxWidth="600px">
             Ich nehme mir im Februar/März Zeit, um die Vorlagen mit den
@@ -70,7 +71,7 @@ export default function Abstimmung(): ReactElement {
         </Flex>
         <Flex my={2}>
           <Text px={3} textAlign="center">
-            <IconCheckWhite />
+            <IconCheckWhite height="25px" />
           </Text>
           <Text maxWidth="600px">
             Ich führe die Abstimmung mit meiner Klasse online durch und
@@ -101,7 +102,11 @@ export default function Abstimmung(): ReactElement {
           fontSize={[3, 3, 4]}
           pl={4}
           fontWeight="semi"
-          sx={{ lineHeight: "1.5", borderLeft: "6px solid white" }}
+          sx={{
+            lineHeight: "1.5",
+            borderLeft: "6px solid",
+            borderColor: "white",
+          }}
         >
           Kennst Du interessierte Lehrpersonen, welche ebenfalls politische
           Bildung unterrichten (Sekundarstufe, Gymnasium, Berufsschulen). Dann
@@ -312,13 +317,4 @@ const TypeBar: React.FC<{ types: Record<string, number> }> = ({ types }) => (
     </Flex>
     <Text my={1}></Text>
   </Box>
-);
-
-export const IconCheckWhite: React.FC = () => (
-  <img
-    src="/images/icon_yes.svg"
-    height="25px"
-    alt="Checkmark"
-    style={{ filter: "brightness(100)" }}
-  />
 );

@@ -161,7 +161,7 @@ const Module: React.FC<{ title: string; image: string }> = (props) => {
               className="back"
               fontSize="17px"
               color="white"
-              bg="gray"
+              bg="topbarColor"
               p={3}
               sx={{ borderRadius: 5 }}
             >

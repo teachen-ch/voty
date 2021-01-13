@@ -218,7 +218,7 @@ export default function Projekt(): React.ReactElement {
 const Tag: React.FC<{ bg?: string }> = ({ children, bg }) => (
   <Text
     fontSize={1}
-    bg={bg || "gray"}
+    bg={bg || "rgb(187, 187, 187)"}
     sx={{ borderRadius: 0, display: "inline" }}
     color="#fff"
     px={2}
