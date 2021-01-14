@@ -22,7 +22,8 @@ export const Chaty: React.FC<{
   lines: string;
   title?: string;
   speed?: number;
-}> = ({ lines, title, speed = 1 }) => {
+  slim?: boolean;
+}> = ({ lines, title, speed = 1, slim = false }) => {
   const messages = useMemo<TMessage[]>(() => parseMessages(lines), [lines]);
   const [show, setShow] = useState<TMessage[]>([]);
   const [typing, setTyping] = useState(false);
@@ -87,14 +88,16 @@ export const Chaty: React.FC<{
     return (
       <WorkCard
         sx={{
-          background: "url('/content/chaty.svg') center top no-repeat",
+          background: slim
+            ? ""
+            : "url('/content/chaty.svg') center top no-repeat",
           backgroundSize: ["125%", "140%", "100%"],
           borderRadius: 5,
         }}
         bg="white"
-        height={["auto", "auto", "480px"]}
+        height={["auto", "auto", slim ? 160 : 480]}
       >
-        <Box textAlign="center" pt={[130, 130, 330]}>
+        <Box textAlign="center" pt={[130, 130, slim ? 0 : 330]}>
           <Button mt={4} onClick={() => doChat()} width="250px">
             Chat starten
           </Button>

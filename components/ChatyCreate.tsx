@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Box, Button } from "rebass";
 import { Chaty, parseMessages } from "./Chaty";
 import { Err } from "components/Page";
-import { Authors, usePostWork, WorkCard, WorkItem, Works } from "./Works";
+import { Authors, usePostWork, WorkItem, Works } from "./Works";
 import { UserWhereUniqueInput } from "graphql/types";
 import Info from "./Info";
 
@@ -61,7 +61,7 @@ export const ChatyCreate: React.FC<{
         <Err msg={error} />
       ) : (
         <>
-          <Chaty title={title} lines={String(lines)} speed={5} />
+          <Chaty slim title={title} lines={String(lines)} speed={5} />
 
           <Label mt={4}>Erarbeitet durch:</Label>
           <Authors setUsers={setUsers} />
@@ -86,5 +86,5 @@ export const ChatyCreate: React.FC<{
 };
 
 const ChatyItem: WorkItem = ({ work }) => {
-  return <Chaty title={work.title} lines={work.text} />;
+  return <Chaty title={work.title} lines={work.text} slim />;
 };
