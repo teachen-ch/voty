@@ -176,7 +176,7 @@ export default {
       },
       hr: {
         borderColor: "white",
-        borderTopWidth: "3px",
+        borderTopWidth: "2px",
         borderStyle: "solid",
       },
       img: {

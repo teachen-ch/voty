@@ -69,7 +69,14 @@ export const TopBar: React.FC<{ hideLogo?: boolean }> = (props) => {
               ml={-30}
               mr={4}
               src={`/images/icon_${colorMode}mode.svg`}
-              sx={{ cursor: "pointer", flexGrow: 0, flexShrink: 0 }}
+              sx={{
+                cursor: "pointer",
+                flexGrow: 0,
+                flexShrink: 0,
+                ":hover": {
+                  transform: "rotate(+180deg)",
+                },
+              }}
               onClick={() => setColorMode(light ? "dark" : "light")}
             />
           )}
