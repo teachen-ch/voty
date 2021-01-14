@@ -400,7 +400,6 @@ export const checkVerification: FieldResolver<
       await logActivity(ctx, {
         user: { connect: { id: user.id } },
         team: { connect: { id: user.teamId } },
-        summary: getShortname(user),
         school: { connect: { id: String(user.schoolId) } },
         visibility: Visibility.Team,
         type: ActivityType.UserAccept,

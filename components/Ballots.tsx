@@ -30,7 +30,7 @@ import { MouseEvent } from "react";
 import type { Nullable } from "simplytyped";
 import { Markdown } from "util/markdown";
 import { Err, Loading } from "./Page";
-import { TDImage } from "./Table";
+import { OneRowTable, TDImage } from "./Table";
 
 const BallotFields = gql`
   fragment BallotFields on Ballot {
@@ -181,7 +181,7 @@ export const Ballots: React.FC<BallotsProps> = ({ where, onClick }) => {
   if (ballotsQuery.error) return <Err msg={ballotsQuery.error.message} />;
   if (ballotsQuery.loading) return <Loading />;
   if (!ballotsQuery.data?.ballots?.length)
-    return <Text>Noch keine Abstimmungen erfasst</Text>;
+    return <OneRowTable text="Noch keine Abstimmungen erfasst" />;
 
   return (
     <>
@@ -208,7 +208,7 @@ export const StudentListBallots: React.FC<{
   if (ballotsQuery.error) return <Err msg={ballotsQuery.error.message} />;
   if (ballotsQuery.loading) return <Loading />;
   if (!ballotsQuery.data?.ballots?.length)
-    return <Text>Noch keine Abstimmungen erfasst</Text>;
+    return <OneRowTable text="Noch keine Abstimmungen erfasst" />;
 
   return (
     <Box>

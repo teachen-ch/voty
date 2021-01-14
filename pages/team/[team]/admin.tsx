@@ -139,13 +139,13 @@ export default function TeacherTeamPage(): React.ReactElement {
         >
           Lerninhalte hinzufügen
         </Button>
+        <Box mt={6} />
       </HideFeature>
-      <H2 mt={6}>Abstimmungen Klasse {team.name}</H2>
+      <H2>Abstimmungen Klasse {team.name}</H2>
       <Text fontSize={2} mb={4}>
-        Wähle hier aus der Liste die Abstimmungen aus, welche Deinen
-        Schüler*innen auf der Klassenseite angezeigt werden sollen. Nach der
-        Abstimmung kannst Du hier auch die Abstimmungsresultate Deiner Klasse
-        zeigen.
+        Wähle aus der Liste die Abstimmungen aus, welche Deinen Schüler*innen
+        auf der Klassenseite angezeigt werden sollen. Nach der Abstimmung kannst
+        Du hier auch die Abstimmungsresultate Deiner Klasse zeigen.
       </Text>
       <SelectBallots team={team} />
 
