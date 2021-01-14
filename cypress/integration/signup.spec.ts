@@ -1,7 +1,7 @@
 import { tr } from "../../util/translate";
 
 describe("Test Signup Page", () => {
-  before(() => {
+  beforeEach(() => {
     cy.task("prismaLoader", "testdb.yml");
   });
 

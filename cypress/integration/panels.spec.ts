@@ -1,5 +1,5 @@
 describe("Test Live-Voting Panels", () => {
-  before(() => {
+  beforeEach(() => {
     cy.task("prismaLoader", "testdb.yml");
   });
 
