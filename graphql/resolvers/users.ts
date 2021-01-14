@@ -395,6 +395,14 @@ export const checkVerification: FieldResolver<
       where: { email },
       data: { emailVerified: new Date() },
     });
+
+    if (user.role === Role.Teacher) {
+      const from = String(process.env.EMAIL);
+      const subject = "Willkommen bei voty.ch";
+      await sendMail(from, email, subject, "welcome_teacher", {});
+      logger.info(`Sending welcome email to teacher: ${email} `);
+    }
+
     if (user.teamId) {
       ctx.user = user;
       await logActivity(ctx, {

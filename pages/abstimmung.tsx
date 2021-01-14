@@ -96,8 +96,8 @@ export default function Abstimmung(): ReactElement {
         </Step>
       </Explainer>
 
-      <Box mt={4} />
-      <Explainer title="Anleitung Schülerinnen und Schüler">
+      <Box mt={3} />
+      <Explainer title="Anleitung Schüler*innen">
         <Step n="1">
           SuS erhält Einladungs-Email. Ein Klick auf den Link eröffnet Konto:
           <Image src="/screens/screen_t1.png" mt={2} />
