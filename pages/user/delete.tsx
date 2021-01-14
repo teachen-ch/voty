@@ -6,7 +6,7 @@ import {
   useSetAccessToken,
 } from "state/user";
 import { Heading, Text, Box, Button, Link as A } from "rebass";
-import { LoggedInPage } from "components/Page";
+import { Page } from "components/Page";
 import { useDeleteAccountMutation } from "graphql/types";
 import { useRouter } from "next/router";
 import Link from "next/link";
@@ -16,10 +16,10 @@ import { Grid } from "theme-ui";
 export default function Delete(): ReactElement {
   const user = useUser();
   return (
-    <LoggedInPage heading="Konto löschen">
+    <Page heading="Konto löschen">
       <Heading as="h2">Ich möchte mein Konto auf voty.ch löschen.</Heading>
       <DeleteForm user={user} />
-    </LoggedInPage>
+    </Page>
   );
 }
 
