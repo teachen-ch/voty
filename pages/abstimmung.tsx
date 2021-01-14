@@ -1,5 +1,5 @@
 import { AppPage } from "components/Page";
-import { Heading, Text, Box, Flex, Link } from "rebass";
+import { Heading, Text, Box, Flex, Link, Image, Card } from "rebass";
 import { Grid } from "theme-ui";
 import { A } from "components/Breadcrumb";
 import { ReactElement, useState } from "react";
@@ -10,6 +10,8 @@ import { SessionUser } from "state/user";
 import { ReadMore } from "components/ReadMore";
 import { HideFeature } from "components/HideFeature";
 import IconCheckWhite from "../public/images/icon_yes.svg";
+import { TDIcon } from "components/Table";
+import { CircleBullet } from "components/Cards";
 
 export default function Abstimmung(): ReactElement {
   const [newUser, setNewUser] = useState<SessionUser | undefined>(undefined);
@@ -27,15 +29,14 @@ export default function Abstimmung(): ReactElement {
             float: "right",
             marginLeft: 20,
             marginRight: 20,
-            width: "160px",
+            width: "130px",
             maxWidth: "30%",
           }}
         />
-        Wie motivieren wir Jugendliche für unsere Demokratie? Wir möchten
-        gemeinsam mit engagierten Lehrpersonen ein Experiment starten und im
-        März 2021 mit mindes&shy;tens 50 Klassen über die beiden nationalen
-        Vorla&shy;gen ab&shy;stimmen. Interesse für Politik entsteht dann, wenn
-        disku&shy;tiert und mitentscheiden werden kann.
+        Im Vergleich zu älteren Generationen gehen junge Menschen (18-30) in der
+        Schweiz halb so oft abstimmen. Dabei wäre gerade ihre Meinung wichtig!
+        Wir wollen Jugendliche ermutigen und befähigen, ihr Stimmrecht aktiv
+        wahrzunehmen – das will geübt sein!
       </Text>
       <Flex
         my={4}
@@ -44,19 +45,19 @@ export default function Abstimmung(): ReactElement {
         fontSize={[2, 2, 3]}
       >
         <Flex my={2} color="white">
-          <Text px={3} textAlign="center">
+          <TDIcon mt={3} mr={3}>
             <IconCheckWhite height="25px" />
-          </Text>
-          <Text maxWidth="600px">
+          </TDIcon>
+          <Text maxWidth="700px">
             Ja, ich unterrichte politische Bildung in meiner Klasse und nehme
             auch Bezug auf aktuelle Themen und Abstimmungen
           </Text>
         </Flex>
         <Flex my={2}>
-          <Text px={3} textAlign="center">
+          <TDIcon mt={3} mr={3}>
             <IconCheckWhite height="25px" />
-          </Text>
-          <Text maxWidth="600px">
+          </TDIcon>
+          <Text maxWidth="700px">
             Ich nehme mir im Februar/März Zeit, um die Vorlagen mit den
             Schüler*innen zu diskutieren (z. B. mit Material von{" "}
             <Link
@@ -70,15 +71,51 @@ export default function Abstimmung(): ReactElement {
           </Text>
         </Flex>
         <Flex my={2}>
-          <Text px={3} textAlign="center">
+          <TDIcon mt={3} mr={3}>
             <IconCheckWhite height="25px" />
-          </Text>
-          <Text maxWidth="600px">
+          </TDIcon>
+          <Text maxWidth="700px">
             Ich führe die Abstimmung mit meiner Klasse online durch und
             bespreche im Nachgang das Resultat
           </Text>
         </Flex>
       </Flex>
+
+      <Explainer title="Anleitung Klassenabstimmung">
+        <Step n={1}>
+          Erstellen Sie ein Konto auf voty.ch und eröffnen sie eine Klasse:
+          <Image src="/screens/screen_t1.png" mt={2} />
+        </Step>
+        <Step n={2}>
+          Wählen sie die Abstimmungen für ihre Klasse aus:
+          <Image src="/screens/screen_t2.png" mt={2} />
+        </Step>
+        <Step n={3}>
+          Laden sie Schüler*innen per Email oder mit Einladungslink ein:
+          <Image src="/screens/screen_t3.png" mt={2} />
+        </Step>
+      </Explainer>
+
+      <Box mt={4} />
+      <Explainer title="Anleitung Schülerinnen und Schüler">
+        <Step n="1">
+          SuS erhält Einladungs-Email. Ein Klick auf den Link eröffnet Konto:
+          <Image src="/screens/screen_t1.png" mt={2} />
+        </Step>
+        <Step n="2">
+          Auswahl der Abstimmungen:
+          <Image src="/screens/screen_s2.png" mt={2} />
+        </Step>
+        <Step n="3">
+          SuS Informieren sich auf voty.ch mit Materialien von easyvote:
+          <Image src="/screens/screen_s3.png" mt={2} />
+        </Step>
+        <Step n="4">
+          Anonyme Abstimmung wird durchgeführt:
+          <Image src="/screens/screen_s4.png" mt={2} />
+        </Step>
+      </Explainer>
+
       {!newUser ? (
         <>
           <Heading as="h2" id="form">
@@ -110,7 +147,7 @@ export default function Abstimmung(): ReactElement {
         >
           Kennst Du interessierte Lehrpersonen, welche ebenfalls politische
           Bildung unterrichten (Sekundarstufe, Gymnasium, Berufsschulen). Dann
-          versuche doch, sie ebenfalls für dieses Experiment zu begeistern.
+          versuche doch, sie ebenfalls für die Aktion zu begeistern.
         </Text>
       </Box>
 
@@ -216,6 +253,23 @@ export const FAQ: React.FC = () => (
       <A href="/kontakt">Kontakt</A> auf.
     </Text>
   </Box>
+);
+
+export const Explainer: React.FC<{ title: string }> = ({ title, children }) => (
+  <ReadMore title={title}>
+    <Card fontSize={[1, 2, 3]} mt={0}>
+      {children}
+    </Card>
+  </ReadMore>
+);
+
+export const Step: React.FC<{ n: string | number }> = ({ n, children }) => (
+  <Flex mb={4}>
+    <CircleBullet value={n} bg="gray" color="#fff" />
+    <Box ml={2} pt="3px">
+      {children}
+    </Box>
+  </Flex>
 );
 
 export const Stats: React.FC = () => (
