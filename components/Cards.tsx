@@ -205,8 +205,14 @@ export const StudentCardList: React.FC<{
             height={76}
             fontWeight="semi"
             sx={{ ":hover": { bg: "primary" }, cursor: "pointer" }}
+            color="#fff"
           >
-            <Image src={getCardIcon(card?.icon, card?.type)} mr={3} />
+            <TDImage
+              src={getCardIcon(card?.icon, card?.type)}
+              mr={3}
+              ml={0}
+              light
+            />
             {card?.title}
           </Flex>
         );

@@ -1,6 +1,6 @@
 import { gql, useApolloClient } from "@apollo/client";
 
-import { Text, Link as A, Button, Card, Box, Flex, Image } from "rebass";
+import { Text, Link as A, Button, Card, Box, Flex } from "rebass";
 import {
   BallotWhereInput,
   useBallotsQuery,
@@ -30,6 +30,7 @@ import { MouseEvent } from "react";
 import type { Nullable } from "simplytyped";
 import { Markdown } from "util/markdown";
 import { Err, Loading } from "./Page";
+import { TDImage } from "./Table";
 
 const BallotFields = gql`
   fragment BallotFields on Ballot {
@@ -223,7 +224,7 @@ export const StudentListBallots: React.FC<{
           fontWeight="semi"
           sx={{ ":hover": { bg: "primary" }, cursor: "pointer" }}
         >
-          <Image src="/images/card_ballot.svg" mr={3} />
+          <TDImage src="/images/card_ballot.svg" mr={3} ml={0} light />
           {ballot.title}
         </Flex>
       ))}

@@ -86,10 +86,9 @@ export const TD: React.FC<
   </Box>
 );
 
-export const TDImage: React.FC<ImageProps & { smHide?: boolean }> = ({
-  smHide,
-  ...props
-}) => {
+export const TDImage: React.FC<
+  ImageProps & { smHide?: boolean; light?: boolean }
+> = ({ smHide, light, ...props }) => {
   const [colorMode] = useColorMode();
   const dark = colorMode === "dark";
   return (
@@ -98,7 +97,7 @@ export const TDImage: React.FC<ImageProps & { smHide?: boolean }> = ({
       mx={2}
       css={{}}
       display={smHide ? ["none", "none", "block"] : "block"}
-      sx={{ flexShrink: 0, filter: dark ? "invert(100)" : "none" }}
+      sx={{ flexShrink: 0, filter: dark || light ? "invert(100)" : "none" }}
       {...props}
     />
   );
