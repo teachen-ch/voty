@@ -5,9 +5,6 @@ services:
     image: "cypress/included:6.2.0"
     container_name: "app"
     env_file: ".env"
-    # --ipc=host see https://github.com/cypress-io/cypress/issues/350
-    #   add this if docker starts to crash on long-running test runs
-    # ipc: host
     environment:
       - DATABASE_URL=postgres://voty:voty@postgres:5432/voty
       - CYPRESS_RECORD_KEY # pass on from GitHub-Actions or cmdline

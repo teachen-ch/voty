@@ -79,8 +79,8 @@ curl -H "x-access-token: <<<token>>>" -d '{"query": "{me {name id }}"}' -H "Cont
 Our CI/CD pipelines runs on GitHub Actions. On each commit, deploy-publish.yml will build a docker image of voty.ch, run cypress E2E tests and, if successful, push the latest image to packages.github.com. From there it can be deployed to migration as follows:
 
 ```
-yarn run migrate_dev
-yarn run deploy_dev
+yarn run migrate:dev
+yarn run deploy:dev
 ```
 
 The first command will migrate the database schema, the second will fetch the latest image from packages.github.com and docker-compose the app. As there is a considerate amount of waiting involved, there is a script which will commit all added changes, run pre-commit hooks, push to github, run tests, wait for ~10 minutes and then deploy to dev.voty.ch and ask whether to follow-up with a prod deployment:

@@ -33,9 +33,10 @@ If you (we?) are lucky, all the tests will pass 🎉. We are still struggling a 
 http://localhost:3000/
 ```
 
-You can create a new teacher account (http://localhost:3000/user/signup), but probably you will not have SMTP configured in your .env.local file, so no activation email will not be sent. In this case, however, a file /tmp/voty-email will be written and within it you will find the activation email with a link to activate your user account. From there on you can create a class, invite students and more. 
+You can create a new teacher account (http://localhost:3000/user/signup), but probably you will not have SMTP configured in your .env.local file, so no activation email will not be sent. In this case, however, a file /tmp/voty-email will be written and within it you will find the activation email with a link to activate your user account. From there on you can create a class, invite students and more.
 
 If you are on a mac, you can automatically open the link in the email in your browser (provided you use bash or zsh):
+
 ```bash
 open `grep http /tmp/voty-email`
 ```
@@ -53,7 +54,7 @@ Once you want to modify the software, you need to have a basic understanding of 
 When you change the [schema.prisma](../prisma/schema.prisma), then you will need to rebuild the prisma client and run database migrations (currently we are running in Prisma's [automatic migration mode](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-migrate)):
 
 ```bash
-yarn run migrate # runs experimental db migration and generates prisma client
+yarn run init:db # runs experimental db migration and generates prisma client
 ```
 
 When you change the [GraphQL Schema](../graphql/schema.ts), then you will need to update the typings which are used in the frontend code (we can't use "@prisma/client" because of a next.js bug:
