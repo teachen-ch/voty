@@ -19,7 +19,7 @@ export default function Info(
       my={4}
       px={4}
       fontSize={2}
-      sx={{ borderLeft: `10px solid ${color}` }}
+      sx={{ borderLeft: `10px solid`, borderColor: color }}
     >
       {props.children}
     </Card>

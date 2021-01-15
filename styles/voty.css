@@ -127,3 +127,17 @@ tr td {
 select + svg {
   display: none;
 }
+
+/* for nice mdx screenshots */
+.screenshot {
+  width: 500px;
+  max-width: 100%;
+  transition: all ease-in-out 0.3s;
+  border-radius: 8px;
+  box-shadow: -5px 5px 25px gray;
+  display: block;
+  margin: auto;
+}
+.screenshot:hover {
+  transform: scale(1.05);
+}

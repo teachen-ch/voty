@@ -32,7 +32,14 @@ export const NewsletterSlim: React.FC<{ campaign?: string }> = ({
     <Label htmlFor="email">Ihre Email:</Label>
 
     <Grid gap={2} columns={[0, 0, "3fr 1fr"]}>
-      <Input name="email" id="email" placeholder="name@meineschule.ch" />
+      <Input
+        name="email"
+        id="email"
+        placeholder="name@meineschule.ch"
+        bg="textarea"
+        mb="0px !important"
+        mt="0 !important"
+      />
       <input type="hidden" name="Funktion" value="Lehrer*in" />
       <input type="hidden" name="Kampagne" value={campaign} />
       <input type="hidden" name="list" value="tpTmOmECEZr7Zjk76307UvTA" />
