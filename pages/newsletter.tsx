@@ -1,4 +1,4 @@
-import Newsletter from "components/Newsletter";
+import { Newsletter } from "components/Newsletter";
 import { Page } from "components/Page";
 import { Text } from "rebass";
 import { ReactElement } from "react";

@@ -18,7 +18,6 @@ export default function Info(
       py={2}
       my={4}
       px={4}
-      color="black"
       fontSize={2}
       sx={{ borderLeft: `10px solid ${color}` }}
     >

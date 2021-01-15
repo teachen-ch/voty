@@ -3,29 +3,44 @@ import { Label, Input, Select } from "@rebass/forms";
 import { Grid } from "theme-ui";
 import { ReactElement } from "react";
 
-export default function Newsletter(): ReactElement {
-  return (
-    <form action="https://newsletter.teachen.ch/subscribe" method="POST">
-      <Grid gap={2} py={4} columns={[0, 0, "1fr 3fr"]}>
-        <Field id="Vorname" label="Vorname" />
-        <Field id="name" label="Nachname" />
-        <Field id="email" label="Email" placeholder="name@meineschule.ch" />
+export const Newsletter: React.FC = () => (
+  <form action="https://newsletter.teachen.ch/subscribe" method="POST">
+    <Grid gap={2} py={4} columns={[0, 0, "1fr 3fr"]}>
+      <Field id="Vorname" label="Vorname" />
+      <Field id="name" label="Nachname" />
+      <Field id="email" label="Email" placeholder="name@meineschule.ch" />
 
-        <SelectField id="Funktion" label="Ich bin">
-          <option>Bitte auswählen</option>
-          <option>Lehrer*in</option>
-          <option>Schüler*in</option>
-          <option>Schulleiter*in</option>
-          <option>Weltenbürger*in</option>
-        </SelectField>
+      <SelectField id="Funktion" label="Ich bin">
+        <option>Bitte auswählen</option>
+        <option>Lehrer*in</option>
+        <option>Schüler*in</option>
+        <option>Schulleiter*in</option>
+        <option>Weltenbürger*in</option>
+      </SelectField>
 
-        <input type="hidden" name="list" value="tpTmOmECEZr7Zjk76307UvTA" />
-        <input type="hidden" name="subform" value="yes" />
-        <Submit name="submit" value="Newsletter anmelden" />
-      </Grid>
-    </form>
-  );
-}
+      <input type="hidden" name="list" value="tpTmOmECEZr7Zjk76307UvTA" />
+      <input type="hidden" name="subform" value="yes" />
+      <Submit name="submit" value="Newsletter anmelden" />
+    </Grid>
+  </form>
+);
+
+export const NewsletterSlim: React.FC<{ campaign?: string }> = ({
+  campaign,
+}) => (
+  <form action="https://newsletter.teachen.ch/subscribe" method="POST">
+    <Label htmlFor="email">Ihre Email:</Label>
+
+    <Grid gap={2} columns={[0, 0, "3fr 1fr"]}>
+      <Input name="email" id="email" placeholder="name@meineschule.ch" />
+      <input type="hidden" name="Funktion" value="Lehrer*in" />
+      <input type="hidden" name="Kampagne" value={campaign} />
+      <input type="hidden" name="list" value="tpTmOmECEZr7Zjk76307UvTA" />
+      <input type="hidden" name="subform" value="yes" />
+      <Submit name="submit" value="Abschicken" />
+    </Grid>
+  </form>
+);
 
 export function Field({
   id,
@@ -71,7 +86,9 @@ export function SelectField({
 }): ReactElement {
   return (
     <>
-      <Label htmlFor={id}>{label}:</Label>
+      <Label htmlFor={id} mt={2}>
+        {label}:
+      </Label>
       <Select name={id} id={id} sx={{ width: "100%" }}>
         {children}
       </Select>
