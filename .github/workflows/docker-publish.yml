@@ -52,6 +52,10 @@ jobs:
       - name: Checkout latest version
         uses: actions/checkout@v2
       - name: Run Tests
+        uses: actions/cache@v2
+        with:
+          path: ${{ github.workspace }}/.next/cache
+          key: ${{ runner.os }}-nextjs-${{ hashFiles('**/yarn.lock') }}
         run: docker-compose -f docker-compose.test.yml up --build --abort-on-container-exit
         env:
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
