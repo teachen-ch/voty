@@ -10,7 +10,7 @@ import { Footer } from "components/Footer";
 import { TopBar } from "./TopBar";
 import IconClose from "../public/images/icon_close.svg";
 import { Spinner, useColorMode } from "theme-ui";
-import Info from "./Info";
+import { Info } from "./Info";
 import { tr } from "util/translate";
 
 export const Page: React.FC<{

@@ -5,7 +5,7 @@ import { PieChart } from "react-minimal-pie-chart";
 import { LabelRenderFunction } from "react-minimal-pie-chart/types/commonTypes";
 import { BallotResults as BallotResultsType } from "graphql/types";
 import type { Nullable } from "simplytyped";
-import Info from "./Info";
+import { Info } from "./Info";
 import { isProd } from "util/isBrowser";
 
 export const BallotResults: React.FC<{

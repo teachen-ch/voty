@@ -29,7 +29,9 @@ export const NewsletterSlim: React.FC<{ campaign?: string }> = ({
   campaign,
 }) => (
   <form action="https://newsletter.teachen.ch/subscribe" method="POST">
-    <Label htmlFor="email">Ihre Email:</Label>
+    <Label htmlFor="email" mb={2}>
+      Ihre Email:
+    </Label>
 
     <Grid gap={2} columns={[0, 0, "3fr 1fr"]}>
       <Input
@@ -37,6 +39,7 @@ export const NewsletterSlim: React.FC<{ campaign?: string }> = ({
         id="email"
         placeholder="name@meineschule.ch"
         bg="textarea"
+        sx={{ "::placeholder": { color: "#fff" } }}
         mb="0px !important"
         mt="0 !important"
       />

@@ -1,27 +1,26 @@
-import { Card } from "rebass";
-import { PropsWithChildren, ReactElement } from "react";
+import { Card, CardProps } from "rebass";
 
-export default function Info(
-  props: PropsWithChildren<{ type?: string }>
-): ReactElement {
-  const type = props.type || "default";
-  const typeColors: Record<string, string> = {
-    important: "danger",
-    info: "primary",
-    light: "lightgray",
-    default: "gray",
-  };
-  const color = typeColors[type];
+const typeColors: Record<string, string> = {
+  important: "danger",
+  info: "primary",
+  light: "lightgray",
+  default: "gray",
+};
 
-  return (
-    <Card
-      py={2}
-      my={4}
-      px={4}
-      fontSize={2}
-      sx={{ borderLeft: `10px solid`, borderColor: color }}
-    >
-      {props.children}
-    </Card>
-  );
-}
+export const Info: React.FC<CardProps & { type?: string }> = ({
+  type = "default",
+  children,
+  ...props
+}) => (
+  // @ts-ignore
+  <Card
+    py={2}
+    my={4}
+    px={4}
+    fontSize={2}
+    sx={{ borderLeft: `10px solid`, borderColor: typeColors[type] }}
+    {...props}
+  >
+    {children}
+  </Card>
+);

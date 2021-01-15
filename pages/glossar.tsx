@@ -1,6 +1,6 @@
 import { Glossary } from "components/Glossary";
 import { Page } from "components/Page";
-import Info from "components/Info";
+import { Info } from "components/Info";
 
 export default function GlossaryPage(): React.ReactElement {
   function sendMail() {

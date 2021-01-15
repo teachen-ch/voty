@@ -280,7 +280,7 @@ export default {
   },
   label: { textAlign: "left" },
   textarea: {
-    bg: "white",
+    bg: "textarea",
     color: "gray",
     border: "none",
     outline: "none",
@@ -288,8 +288,8 @@ export default {
     px: 3,
     mt: [0, 0, 1],
     mb: [3, 2, 1],
-    "::-webkit-input-placeholder": {
-      color: "#ccc",
+    "::placeholder": {
+      color: "#fff",
       opacity: 1,
     },
     ":focus": {

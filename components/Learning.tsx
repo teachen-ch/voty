@@ -1,4 +1,4 @@
-import Info from "components/Info";
+import { Info } from "components/Info";
 import Link from "next/link";
 import Video from "components/Video";
 import {

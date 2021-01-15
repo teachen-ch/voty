@@ -11,7 +11,7 @@ import {
   WorkCard,
 } from "./Works";
 import { Err } from "./Page";
-import Info from "./Info";
+import { Info } from "./Info";
 
 const MAX_CHARS = 140;
 

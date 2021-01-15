@@ -3,7 +3,7 @@ import { Box, Button, Text } from "rebass";
 import { Label, Textarea } from "@rebass/forms";
 import { useState } from "react";
 import { Authors, Works, WorkItem, usePostWork, WorkCard } from "./Works";
-import Info from "./Info";
+import { Info } from "./Info";
 import { Markdown } from "util/markdown";
 import { Err } from "./Page";
 

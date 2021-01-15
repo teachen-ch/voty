@@ -6,7 +6,7 @@
 # 1. commit unless tsc/eslint failures
 # 2. git push
 # 3. wait ~10 minutes (later try to use gh cli and poll latest run)
-# 4. yarn deploy_dev
+# 4. yarn deploy:dev
 #
 
 import os
@@ -76,7 +76,7 @@ if commitMessage:
 
 exec("git push")
 wait(10)
-exec("yarn run deploy_dev")
+exec("yarn run deploy:dev")
 took = round((time.time() - start)/60, 1)
 log.info("✅ Successfully deployed to dev in %.1f minutes" % took)
 yesno = input("Would you like to push to production as well? (y/N) ")

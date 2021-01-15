@@ -185,8 +185,7 @@ export default function TeacherTeamPage(): React.ReactElement {
             mt={3}
             autoFocus={true}
             value={importEmails}
-            bg="textarea"
-            sx={{ border: "white", "::placeholder": { color: "#fff" } }}
+            sx={{ border: "white" }}
             onChange={checkEmails}
             fontSize={1}
             height="auto"

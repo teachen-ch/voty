@@ -5,7 +5,7 @@ import { useUser } from "state/user";
 import { useBallotQuery, BallotQuery, useVoteMutation } from "graphql/types";
 import { useState, ReactElement } from "react";
 import { ErrorBox } from "components/Form";
-import Info from "components/Info";
+import { Info } from "components/Info";
 import Link from "next/link";
 import { BigGray } from "components/BigButton";
 import { BallotDetails } from "components/Ballots";

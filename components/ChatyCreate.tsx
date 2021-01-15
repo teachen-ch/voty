@@ -5,7 +5,7 @@ import { Chaty, parseMessages } from "./Chaty";
 import { Err } from "components/Page";
 import { Authors, usePostWork, WorkItem, Works } from "./Works";
 import { UserWhereUniqueInput } from "graphql/types";
-import Info from "./Info";
+import { Info } from "./Info";
 
 export const ChatyCreate: React.FC<{
   title?: string;
