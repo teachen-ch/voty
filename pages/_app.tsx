@@ -23,20 +23,18 @@ function MyApp({ Component, pageProps }: AppProps): ReactElement {
     });
   }, []);
   return (
-    <div className="container">
-      <ApolloProvider client={apollo}>
-        <RecoilRoot>
-          {/* @ts-ignore */}
-          <ThemeProvider theme={theme}>
-            <MDXProvider components={{ wrapper: MDXWrapper }}>
-              <CheckLogin />
-              <Header />
-              <Component {...pageProps} />
-            </MDXProvider>
-          </ThemeProvider>
-        </RecoilRoot>
-      </ApolloProvider>
-    </div>
+    <ApolloProvider client={apollo}>
+      <RecoilRoot>
+        {/* @ts-ignore */}
+        <ThemeProvider theme={theme}>
+          <MDXProvider components={{ wrapper: MDXWrapper }}>
+            <CheckLogin />
+            <Header />
+            <Component {...pageProps} />
+          </MDXProvider>
+        </ThemeProvider>
+      </RecoilRoot>
+    </ApolloProvider>
   );
 }
 

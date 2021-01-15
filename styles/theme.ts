@@ -114,6 +114,7 @@ export default {
       fontWeight: "body",
       lineHeight: "body",
       fontSize: [2, 2, 4],
+      color: "white",
       table: {
         borderSpacing: 0,
         width: "100%",
@@ -175,7 +176,7 @@ export default {
         textAlign: "left",
       },
       hr: {
-        borderColor: "white",
+        borderColor: "currentColor",
         borderTopWidth: "2px",
         borderStyle: "solid",
       },

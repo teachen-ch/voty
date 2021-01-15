@@ -27,7 +27,7 @@ export default function Home(): React.ReactElement {
         ]}
       />
       <TopBar hideLogo={true} />
-      <Container as="main" pt={[0, 0, 30, 40]} px={[3, 3, 3, 0]} color="white">
+      <Container as="main" pt={[0, 0, 30, 40]} px={[3, 3, 3, 0]}>
         <Image
           alignSelf="center"
           width={[240, 207, 426]}
@@ -160,7 +160,6 @@ const Module: React.FC<{ title: string; image: string }> = (props) => {
             <Box
               className="back"
               fontSize="17px"
-              color="white"
               bg="topbarColor"
               p={3}
               sx={{ borderRadius: 5 }}

@@ -10,6 +10,7 @@ import IconImpressum from "../public/images/icon_impressum.svg";
 import IconNewsletter from "../public/images/icon_newsletter.svg";
 import IconDown from "../public/images/icon_down.svg";
 import IconUp from "../public/images/icon_up.svg";
+import IconClose from "../public/images/voty_hamburger_cross_white.svg";
 import { useUser, SessionUser } from "state/user";
 import { useState, useEffect } from "react";
 import { Role } from "graphql/types";
@@ -211,7 +212,7 @@ const MobileBurger: React.FC<{ user: SessionUser }> = ({ user }) => {
   };
   const isTeacher = user?.role === Role.Teacher;
   return (
-    <Flex>
+    <Flex color="#fff">
       <A onClick={() => setOpen(!open)}>
         <img src="/images/voty_hamburger_red.svg" alt="Menu" />
       </A>
@@ -239,10 +240,7 @@ const MobileBurger: React.FC<{ user: SessionUser }> = ({ user }) => {
             <Text textAlign="right">
               <A onClick={() => setOpen(false)}>
                 <Box width="30" height="30" pt="18px" pr="18px">
-                  <img
-                    src="/images/voty_hamburger_cross_white.svg"
-                    alt="schliessen"
-                  />
+                  <IconClose alt="schliessen" />
                 </Box>
               </A>
             </Text>
@@ -276,14 +274,8 @@ const MobileBurger: React.FC<{ user: SessionUser }> = ({ user }) => {
                 <nav>
                   <Link href="/user/login">
                     <A>
-                      <img
-                        alt="Liste"
-                        src={`/images/icon_${
-                          isTeacher ? "classes" : "list"
-                        }.svg`}
-                        style={burgerIcon}
-                      />
-                      {isTeacher ? "Klassen" : "Abstimmungen"}
+                      <IconClasses style={burgerIcon} />
+                      {isTeacher ? "Meine Klassen" : "Meine Klasse"}
                     </A>
                   </Link>
                   <br />
