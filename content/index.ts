@@ -19,3 +19,4 @@ export * as srf_foederalismus from "content/videos/srf_foederalismus.mdx";
 export * as srf_mitbestimmen from "content/videos/srf_mitbestimmen.mdx";
 export * as srf_usa_parteien from "content/videos/srf_usa_parteien.mdx";
 export * as srf_waehlen from "content/videos/srf_waehlen.mdx";
+export * as srf_populismus from "content/videos/srf_populismus.mdx";

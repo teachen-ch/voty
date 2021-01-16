@@ -1,0 +1,25 @@
+import { Ref, Video } from "components/Learning";
+
+export const meta = {
+  id: "srf_populismus",
+  title: "SRF mySchool «Populismus»",
+  type: "video",
+  age: "Sek-1, Gym, Berufsschule",
+  description:
+    "Populistische Kommunikation schürt in der Politik Emotionen, dramatisiert und arbeitet mit Tabubrüchen.",
+  duration: "15 Minuten",
+  keywords:
+    "Wahlen, Abstimmen, Debattieren, Rechts, Links, Extrem, Fake-News, Kommunikation, Volk, Elite",
+  source: "https://www.srf.ch/sendungen/myschool/mein-erstes-mal-waehlen-2",
+  url:
+    "https://www.srf.ch/play/tv/srf-myschool/video/politik-und-gesellschaft-populismus-79?urn=urn:srf:video:e3938739-7366-4e18-94bc-55801d88b602",
+};
+
+<Ref source={meta.source}>
+  <p>{meta.description}</p>
+  <Video url={meta.url} />
+  <p>
+    Hast Du Dir das Video angesehen? Schreib in die Klassendiskussion einen
+    Satz, mit dem Du «das Volk» auf Deine Seite bringen möchtest.
+  </p>
+</Ref>
