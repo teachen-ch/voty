@@ -24,6 +24,7 @@ describe("Test Ballots", () => {
     cy.contains("Ja, ich").click();
     cy.contains("Du hast abgestimmt");
     cy.visit("/user/logout");
+    cy.contains("Demokratie an die Schule"); // wait for logout to complete
 
     // login again to check student cannot vote again
     cy.login("student@teachen.ch", "teachen");

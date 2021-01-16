@@ -64,11 +64,15 @@ export const TopBar: React.FC<{ hideLogo?: boolean }> = (props) => {
         pt="8px"
         flex={1}
       >
-        <Flex justifyContent="space-between" height="56px">
+        <Flex
+          justifyContent="space-between"
+          height="56px"
+          flexDirection={["row-reverse", "row-reverse", "inherit"]}
+        >
           {darkMode && (
             <Image
-              ml={-30}
-              mr={4}
+              mr={[0, 0, 4]}
+              ml={[5, 5, 0]}
               src={`/images/icon_${colorMode}mode.svg`}
               sx={{
                 cursor: "pointer",
