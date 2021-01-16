@@ -92,6 +92,7 @@ export const TopBar: React.FC<{ hideLogo?: boolean }> = (props) => {
                   src={`/images/voty_logo${light ? "" : "_white"}.svg`}
                   alt="voty"
                   width="103px"
+                  height="40px"
                   mt="10px"
                 />
               </A>
