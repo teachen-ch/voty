@@ -25,7 +25,8 @@ export const ChatContainer: React.FC = ({ children }) => (
       width={["100%", "100%", "calc(100% - 64px)"]}
       height={["auto", "auto", "480px"]}
       ml={[-3, -3, 0]}
-      bg="white"
+      bg="#fff"
+      color="#000"
       sx={{
         borderRadius: [0, 0, 5],
         position: ["fixed", "fixed", "absolute", "absolute"],
@@ -83,7 +84,7 @@ export const Message: React.FC<{ direction?: Direction }> = ({
 }) => {
   const out = direction === Direction.Outgoing;
   const bg = out ? "#206DBB" : "#E9E9EB";
-  const color = out ? "white" : "black";
+  const color = out ? "#fff" : "#000";
   return (
     <Box
       alignSelf={out ? "flex-end" : "flex-start"}

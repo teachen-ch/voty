@@ -16,8 +16,8 @@ import { useTeam, useUser } from "state/user";
 import { ChangeEvent, useEffect, useRef, useState } from "react";
 import { Loading } from "./Page";
 import { find, isFunction, omit, remove, truncate } from "lodash";
-import Plus from "../public/images/icon_plus.svg";
-import Minus from "../public/images/icon_minus.svg";
+import IconPlus from "../public/images/icon_plus.svg";
+import IconMinus from "../public/images/icon_minus.svg";
 import { Label, Radio } from "@rebass/forms";
 import { formatDate } from "util/date";
 
@@ -108,13 +108,17 @@ export const Works: React.FC<
               onClick={() => setActive(active === work.id ? "" : work.id)}
             >
               {active === work.id ? (
-                <Minus
+                <IconMinus
                   height="15px"
                   style={{ marginRight: 15 }}
                   alt="Schliessen"
                 />
               ) : (
-                <Plus height="15px" style={{ marginRight: 15 }} alt="Öffnen" />
+                <IconPlus
+                  height="15px"
+                  style={{ marginRight: 15 }}
+                  alt="Öffnen"
+                />
               )}
               <Text sx={{ cursor: "pointer" }} fontSize={[1, 1, 2, 3]}>
                 <b>{work.users?.map((u) => u.shortname).join(", ")}:</b> «
@@ -137,7 +141,7 @@ export const WorkCard: React.FC<BoxProps> = ({ children, ...props }) => (
     sx={{ borderRadius: 5 }}
     bg="lightgray"
     fontSize={[1, 1, 2]}
-    color="black"
+    color="#000"
     p={3}
     my={3}
     {...props}
@@ -320,7 +324,7 @@ export const Authors: React.FC<{
     <>
       <Flex
         flexWrap="wrap"
-        bg="white"
+        bg="#fff"
         flexGrow={1}
         py={2}
         px={2}
@@ -364,7 +368,7 @@ export const Pill: React.FC<
 > = ({
   deleteLink,
   bg = "primary",
-  color = "white",
+  color = "#fff",
   children,
   onClick,
   ...props

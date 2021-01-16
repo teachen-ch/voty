@@ -94,7 +94,8 @@ export const Chaty: React.FC<{
           backgroundSize: ["125%", "140%", "100%"],
           borderRadius: 5,
         }}
-        bg="white"
+        bg="#fff"
+        color="#000"
         height={["auto", "auto", slim ? 160 : 480]}
       >
         <Box textAlign="center" pt={[130, 130, slim ? 0 : 330]}>

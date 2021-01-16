@@ -56,7 +56,7 @@ export const Tweety: React.FC<{
             onChange={(e) => setTitle(e.target.value)}
             placeholder="Gib einen Titel ein"
           />
-          <Box bg="white" mt={2}>
+          <Box bg="#fff" color="#000" mt={2}>
             <Textarea
               onChange={doChange}
               rows={3}
@@ -114,7 +114,7 @@ const CharCounter: React.FC<{ chars: number; max: number; tweet: string }> = ({
     <Box pl={3} pb={2} mt={0} fontSize={1}>
       <Text
         variant="inline"
-        color={over ? "danger" : "black"}
+        color={over ? "danger" : "#000"}
         fontWeight={over ? "bold" : "normal"}
       >
         {text}
@@ -141,8 +141,8 @@ const TweetyCard: React.FC<{ tweet: string; tags?: string }> = ({
   tags,
 }) => (
   <Box
-    bg="white"
-    color="black"
+    bg="#fff"
+    color="#000"
     sx={{
       border: "1px solid lightgray",
       borderRadius: 12,
