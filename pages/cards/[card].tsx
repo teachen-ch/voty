@@ -1,7 +1,9 @@
 import { A, Breadcrumb, Here } from "components/Breadcrumb";
 import { Card, getCardMeta } from "components/Cards";
+import { HideFeature } from "components/HideFeature";
 import { ErrorPage, Loading, Page } from "components/Page";
 import { useQueryParam } from "util/hooks";
+import { Text } from "rebass";
 
 export default function CardPagePublic(): React.ReactElement {
   const key = useQueryParam("card");
@@ -24,6 +26,14 @@ export default function CardPagePublic(): React.ReactElement {
         <Here>{meta.title}</Here>
       </Breadcrumb>
       <Card id={key} />
+
+      <HideFeature id="discussions">
+        {meta.discussion !== false && (
+          <Text fontSize={1} fontStyle="italic">
+            Diskussionen können nur in Klassen geführt werden.
+          </Text>
+        )}
+      </HideFeature>
     </Page>
   );
 }
