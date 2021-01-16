@@ -1,6 +1,6 @@
 {
   "baseUrl": "http://localhost:3000",
-  "defaultCommandTimeout": 6000,
+  "defaultCommandTimeout": 10000,
   "env": {
     "USER": "teacher@teachen.ch",
     "PASS": "teachen",

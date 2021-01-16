@@ -21,6 +21,7 @@ describe("Test Ballots", () => {
     cy.login("student@teachen.ch", "teachen");
     cy.visit("/student");
     cy.contains("Testinitiative").click();
+    cy.contains("Abstimmungsseite");
     cy.contains("Ja, ich").click();
     cy.contains("Du hast abgestimmt");
     cy.visit("/user/logout");
