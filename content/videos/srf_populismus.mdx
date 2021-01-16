@@ -1,4 +1,5 @@
 import { Ref, Video } from "components/Learning";
+import { Quest, MultiChoice, Answer, Question } from "components/Quests";
 
 export const meta = {
   id: "srf_populismus",
@@ -18,8 +19,22 @@ export const meta = {
 <Ref source={meta.source}>
   <p>{meta.description}</p>
   <Video url={meta.url} />
-  <p>
-    Hast Du Dir das Video angesehen? Schreib in die Klassendiskussion einen
-    Satz, mit dem Du «das Volk» auf Deine Seite bringen möchtest.
-  </p>
 </Ref>
+
+<!-- Hast Du Dir das Video angesehen? Schreib in die Klassendiskussion einen
+    Satz, mit dem Du «das Volk» auf Deine Seite bringen möchtest.-->
+
+<Quest  allowGroups>
+
+Wie würdest Du das Volk auf Deine Seite bringen. Versuch's in einem Satz mit populistischer Kommunikation
+
+<Question id="q1" />
+
+Wer bertreibt populistische Kommunikation?
+
+  <MultiChoice id="q2" row>
+    <Answer>Die Linken</Answer>
+    <Answer>Die Rechten</Answer>
+    <Answer correct>beide Seiten</Answer>
+  </MultiChoice>
+</Quest>

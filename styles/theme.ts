@@ -13,7 +13,7 @@ export default {
     danger: "#d90000",
     accent: "#d90000",
     highlight: "#dee4e7",
-    textarea: "#B1BDC3",
+    textarea: "#fff", //"#B1BDC3",
     muted: "#dee4e7",
     lightgray: "#dee4e7",
     darkgray: "rgba(0,0,0,0.2)",

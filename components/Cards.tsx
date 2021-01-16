@@ -358,12 +358,24 @@ class CardAdminItem extends React.Component<CardAdminProps> {
   }
 }
 
+interface ICardContext {
+  card: string;
+  title: string;
+}
+
+export const CardContext = React.createContext({} as ICardContext);
+
 export const Card: React.FC<{ id: string }> = ({ id }) => {
   const Comp = getCard(id);
+  const title = getCardTitle(id);
+  // use useState for context, otherwise childs will always be rerendered
+  const [context] = useState<ICardContext>({ card: id, title });
   return (
-    <Text fontSize={2} textAlign="left">
-      <Comp />
-    </Text>
+    <CardContext.Provider value={context}>
+      <Text fontSize={2} textAlign="left">
+        <Comp />
+      </Text>
+    </CardContext.Provider>
   );
 };
 

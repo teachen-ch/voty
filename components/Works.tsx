@@ -95,7 +95,7 @@ export const Works: React.FC<
 
   const flexProps = omit(props, "children", "ref");
   return (
-    <ListComp {...flexProps}>
+    <ListComp flexDirection="column" {...flexProps}>
       {works.length > 0 && <Text fontWeight="bold">Arbeiten zum Thema:</Text>}
       {works?.map((work) => {
         return (

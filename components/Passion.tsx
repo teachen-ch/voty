@@ -49,13 +49,7 @@ export const Passion: React.FC = () => {
           <Err msg={state.error?.message} />
         </Box>
       )}
-      <Works
-        card="passion"
-        mt={6}
-        items={PassionItem}
-        flexDirection="column"
-        trigger={trigger}
-      />
+      <Works card="passion" mt={6} items={PassionItem} trigger={trigger} />
     </Box>
   );
 };

@@ -84,13 +84,7 @@ export const Tweety: React.FC<{
         </>
       )}
 
-      <Works
-        card="tweety"
-        mt={6}
-        items={TweetyItem}
-        flexDirection="column"
-        trigger={trigger}
-      />
+      <Works card="tweety" mt={6} items={TweetyItem} trigger={trigger} />
     </Box>
   );
 };
