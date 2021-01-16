@@ -42,10 +42,12 @@ async function deleteObjects(list: string[], logger?: (msg: string) => void) {
   for (let i = 0; i < list.length; ++i) {
     const type = list[i];
     // @ts-ignore  what's the type for generic PrismaDelegates?
+    // eslint-disable-next-line
     const obj: any = prisma[type];
     if (!obj) {
       throw new Error(`Type «${type}» does not exist in your prisma schema.`);
     }
+    // eslint-disable-next-line
     const result = await obj.deleteMany();
     logger && logger(`  ... deleted ${result.count} objects of type «${type}»`);
   }
@@ -55,14 +57,17 @@ async function createObjects(data: any, logger?: (msg: string) => void) {
   logger && logger("🐣 Let's create new objects:");
   for (const type in data) {
     // @ts-ignore  what's the type for generic PrismaDelegates?
+    // eslint-disable-next-line
     const obj: any = prisma[type];
     if (!obj)
       throw new Error(`Type «${type}» does not exist in your prisma schema.`);
+    // eslint-disable-next-line
     const list = data[type];
 
     let count = 0;
     for (const i in list) {
-      const spec = list[i];
+      // eslint-disable-next-line
+      const spec = list[i]; // eslint-disable-next-line
       const result = await obj.create({ data: spec });
       if (result) count++;
     }

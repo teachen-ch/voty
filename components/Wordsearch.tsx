@@ -1,7 +1,6 @@
 import { useMemo, useState } from "react";
 import { Box, Flex, Text } from "rebass";
 import { isEqual, cloneDeep, random, remove } from "lodash";
-import { isBrowser } from "util/isBrowser";
 
 type Point = {
   x: number;

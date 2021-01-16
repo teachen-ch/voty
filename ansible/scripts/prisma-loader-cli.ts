@@ -10,7 +10,8 @@ void run();
 async function run() {
   try {
     const argv = cliOptions();
-    const logger = argv.quiet ? () => {} : cons.log;
+    // eslint-disable-next-line @typescript-eslint/unbound-method
+    const logger = argv.quiet ? () => 0 : cons.log;
 
     for (let i = 0; i < argv._.length; ++i) {
       const fixtureFile = String(argv._[i]);
