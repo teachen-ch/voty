@@ -51,6 +51,7 @@ const SRFVideo: React.FC<VideoProps> = (props) => {
       height={height}
       src={embedUrl}
       allowFullScreen
+      style={{ border: "none" }}
       allow="geolocation *; autoplay; encrypted-media"
     ></iframe>
   );
