@@ -1,4 +1,4 @@
-import { Label, Radio, Textarea } from "@rebass/forms";
+import { Input, Label, Radio, Textarea } from "@rebass/forms";
 import { useContext, useMemo, useState } from "react";
 import { Button, Flex } from "rebass";
 import { CardContext } from "./Cards";
@@ -81,20 +81,32 @@ type QuestionProps = {
 };
 
 export const Question: React.FC<
-  QuestionProps & { lines?: number; placeholder?: string }
-> = ({ id, placeholder, lines = 2 }) => {
+  QuestionProps & {
+    lines?: number;
+    placeholder?: string;
+    inline?: boolean;
+    width?: string | number | Array<string | number>;
+  }
+> = ({ id, placeholder, lines = 2, inline = false, width }) => {
   const { answers, setAnswer } = useContext(QuestContext);
-  const text = String(answers[id] || "");
 
   if (!id) return <Err msg="<Question/> ohne id" />;
+  if (answers === undefined)
+    return <Err msg="<Question/> used outside of <Quest>...</Quest>" />;
+
+  const text = String(answers[id] || "");
+  lines = inline ? 1 : lines;
+
+  const InputComp = lines === 1 ? Input : Textarea;
 
   return (
-    <Textarea
+    <InputComp
       value={text}
-      onChange={(e) => setAnswer(id, e.target.value)}
+      onChange={(e: any) => setAnswer(id, e.target.value)}
       mb={4}
       rows={lines}
       placeholder={placeholder}
+      width={width}
     />
   );
 };
@@ -106,6 +118,9 @@ export const MultiChoice: React.FC<{ row?: boolean } & QuestionProps> = ({
 }) => {
   const { answers, setAnswer } = useContext(QuestContext);
   if (!id) return <Err msg="<MultiChoice/> ohne id" />;
+  if (answers === undefined)
+    return <Err msg="<Question/> used outside of <Quest>...</Quest>" />;
+
   return (
     <Flex
       mb={4}

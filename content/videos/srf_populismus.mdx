@@ -26,15 +26,37 @@ export const meta = {
 
 <Quest  allowGroups>
 
-Wie würdest Du das Volk auf Deine Seite bringen. Versuch's in einem Satz mit populistischer Kommunikation
+Wie würdest Du das Volk auf Deine Seite bringen. Wie wäre Dein populistischer Wahlspruch, mit dem Du «das Volk» für Dich gewinnst?
 
 <Question id="q1" />
 
 Wer bertreibt populistische Kommunikation?
 
-  <MultiChoice id="q2" row>
-    <Answer>Die Linken</Answer>
-    <Answer>Die Rechten</Answer>
-    <Answer correct>beide Seiten</Answer>
-  </MultiChoice>
+<MultiChoice id="q2" row>
+  <Answer>Die Linken</Answer>
+  <Answer>Die Rechten</Answer>
+  <Answer correct>beide Seiten</Answer>
+</MultiChoice>
+
+Wieviele Unterschriften werden benötigt für...
+
+<table>
+  <tr>
+    <th></th>
+    <th>Anzahl Unterschriften</th>
+  </tr>
+  <tr>
+    <td>Eine Initiative?</td>
+    <td>
+      <Question id="q3" inline />
+    </td>
+  </tr>
+  <tr>
+    <td>Ein Referendum?</td>
+    <td>
+      <Question id="q4" inline width="300" />
+    </td>
+  </tr>
+</table>
+
 </Quest>
