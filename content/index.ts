@@ -14,6 +14,7 @@ export * as chaty_create from "content/chaty/chaty_create.mdx";
 
 export * as wortsuche from "content/games/wortsuche.mdx";
 
+export * as srf_abstimmen from "content/videos/srf_abstimmen.mdx";
 export * as srf_3_gewalten from "content/videos/srf_3_gewalten.mdx";
 export * as srf_foederalismus from "content/videos/srf_foederalismus.mdx";
 export * as srf_mitbestimmen from "content/videos/srf_mitbestimmen.mdx";

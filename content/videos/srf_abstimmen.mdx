@@ -1,0 +1,103 @@
+import { Ref, Video, CircleBullet } from "components/Learning";
+import {
+  Quest,
+  MultiChoice,
+  Question,
+  Text,
+  Textfield,
+} from "components/Quests";
+
+export const meta = {
+  id: "srf_abstimmen",
+  title: "SRF mySchool: Abstimmen und Mitbestimmen",
+  type: "video",
+  age: "Sek-1, Gym, Berufsschule",
+  description:
+    "Wie funktioniert das politische System der Schweiz? SRF MySchool erklärt es und begleitet Jugendliche ins Bundeshaus.",
+  duration: "1 Lektion",
+  keywords:
+    "Wahlen, Abstimmen, Debattieren, Populismus, Populisten, Parteien, Soziale Medien, Rechts, Links, Extrem, Fake-News, Kommunikation, Volk, Elite",
+  source: "https://www.srf.ch/sendungen/myschool/mein-erstes-mal-waehlen-2",
+  url:
+    "https://www.srf.ch/play/tv/srf-myschool/video/politik-und-gesellschaft-populismus-79?urn=urn:srf:video:e3938739-7366-4e18-94bc-55801d88b602",
+};
+
+<Ref source={meta.source}>
+  <p>{meta.description}</p>
+  <Video url={meta.url} />
+</Ref>
+
+<Quest allowGroups>
+  <Question>
+    <Text>
+      Im Video wird erklärt, was die Ziele und die Voraussetzungen für die
+      Einreichung einer Initiative und einem Referendum sind. Fülle die Tabelle
+      aus:
+    </Text>
+    <table>
+      <thead>
+        <tr>
+          <th></th>
+          <th>Bei einer Volksinitiative</th>
+          <th>Fakultatives Referendum</th>
+          <th>Obligatorisches Referendum</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Was ist das Ziel?</td>
+          <td>
+            <Textfield
+              id="1.1.1"
+              lines={3}
+              fontSize={"16px !important"}
+              wrap="soft"
+            />
+          </td>
+          <td>
+            <Textfield id="1.1.2" lines={3} fontSize={"16px !important"} />
+          </td>
+          <td>
+            <Textfield id="1.1.3" lines={3} fontSize={"16px !important"} />
+          </td>
+        </tr>
+        <tr>
+          <td>Wieviele Unterschriften?</td>
+          <td>
+            <Textfield id="1.2.1" lines={1} />
+          </td>
+          <td>
+            <Textfield id="1.2.2" lines={1} />
+          </td>
+          <td>
+            <Textfield id="1.2.3" lines={1} />
+          </td>
+        </tr>
+        <tr>
+          <td>In welcher Zeit?</td>
+          <td>
+            <Textfield id="1.3.1" lines={1} />
+          </td>
+          <td>
+            <Textfield id="1.3.2" lines={1} />
+          </td>
+          <td>
+            <Textfield id="1.3.3" lines={1} />
+          </td>
+        </tr>
+        <tr>
+          <td>Verlangtes Mehr?</td>
+          <td>
+            <Textfield id="1.4.1" lines={1} />
+          </td>
+          <td>
+            <Textfield id="1.4.2" lines={1} />
+          </td>
+          <td>
+            <Textfield id="1.4.3" lines={1} />
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </Question>
+</Quest>
