@@ -242,10 +242,12 @@ export const Visible: React.FC<{
   );
 };
 
-export const Authors: React.FC<{
-  work?: WorkFieldsFragment;
-  setUsers: (u: Array<UserWhereUniqueInput>) => void;
-}> = ({ work, setUsers }) => {
+export const Authors: React.FC<
+  BoxProps & {
+    work?: WorkFieldsFragment;
+    setUsers: (u: Array<UserWhereUniqueInput>) => void;
+  }
+> = ({ work, setUsers, ...props }) => {
   type U = Pick<User, "id" | "shortname">;
   const user = useUser();
   const team = useTeam();
@@ -321,7 +323,7 @@ export const Authors: React.FC<{
   }
 
   return (
-    <>
+    <Box {...props}>
       <Flex
         flexWrap="wrap"
         bg="#fff"
@@ -357,7 +359,7 @@ export const Authors: React.FC<{
           </Flex>
         )}
       </Flex>
-    </>
+    </Box>
   );
 };
 
