@@ -11,15 +11,16 @@ import {
   Visibility,
 } from "graphql/types";
 import { AttachmentFields } from "components/Uploader";
-import { Flex, Image, Text, FlexProps, Box, BoxProps } from "rebass";
+import { Flex, Text, FlexProps, Box, BoxProps } from "rebass";
 import { useTeam, useUser } from "state/user";
 import { ChangeEvent, useEffect, useRef, useState } from "react";
 import { Loading } from "./Page";
-import { find, isFunction, omit, remove, truncate } from "lodash";
+import { find, omit, remove, truncate } from "lodash";
 import IconPlus from "../public/images/icon_plus.svg";
 import IconMinus from "../public/images/icon_minus.svg";
 import { Label, Radio } from "@rebass/forms";
 import { formatDate } from "util/date";
+import { Pill } from "./Misc";
 
 export const WorkFields = gql`
   fragment WorkFields on Work {
@@ -362,35 +363,3 @@ export const Authors: React.FC<
     </Box>
   );
 };
-
-export const Pill: React.FC<
-  BoxProps & {
-    deleteLink?: boolean | (() => void);
-  }
-> = ({
-  deleteLink,
-  bg = "primary",
-  color = "#fff",
-  children,
-  onClick,
-  ...props
-}) => (
-  <Flex
-    bg={bg}
-    color={color}
-    alignItems="center"
-    px="12px"
-    py="4px"
-    mr={2}
-    my={1}
-    fontSize={1}
-    sx={{ borderRadius: 20, cursor: onClick ? "pointer" : "inherit" }}
-    onClick={onClick}
-    {...props}
-  >
-    <Text>{children}</Text>
-    {deleteLink && isFunction(deleteLink) && (
-      <Image src="/images/icon_x.svg" ml={1} onClick={deleteLink} />
-    )}
-  </Flex>
-);

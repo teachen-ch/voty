@@ -11,7 +11,7 @@ import { ReadMore } from "components/ReadMore";
 import { HideFeature } from "components/HideFeature";
 import IconCheckWhite from "../public/images/icon_yes.svg";
 import { TDIcon } from "components/Table";
-import { CircleBullet } from "components/Cards";
+import { CircleBullet } from "components/Misc";
 
 export default function Abstimmung(): ReactElement {
   const [newUser, setNewUser] = useState<SessionUser | undefined>(undefined);

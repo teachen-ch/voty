@@ -13,7 +13,7 @@ import {
 import { useState } from "react";
 import { MDXProvider } from "@mdx-js/react";
 import { ReadMore } from "components/ReadMore";
-import { CircleBullet } from "components/Cards";
+import { CircleBullet } from "components/Misc";
 
 export { Info, Link, Video, ReadMore, CircleBullet };
 

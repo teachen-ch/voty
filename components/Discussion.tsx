@@ -9,7 +9,7 @@ import {
 import React, { useState } from "react";
 import { Textarea } from "@rebass/forms";
 import { Err } from "./Page";
-import { Pill } from "components/Works";
+import { Pill } from "components/Misc";
 import { H2 } from "components/Page";
 
 const DiscussionFields = gql`

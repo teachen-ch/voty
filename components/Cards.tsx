@@ -16,7 +16,6 @@ import { A } from "./Breadcrumb";
 import IconTrash from "../public/images/icon_trash.svg";
 import IconWatch from "../public/images/icon_watch.svg";
 import IconMove from "../public/images/icon_move.svg";
-import { TextProps } from "theme-ui";
 
 export const GET_CARDS = gql`
   query cards($keywords: String, $age: String, $type: String) {
@@ -379,36 +378,6 @@ export const Card: React.FC<{ id: string }> = ({ id }) => {
     </CardContext.Provider>
   );
 };
-
-export const CircleBullet: React.FC<
-  TextProps & {
-    value: string | number;
-    bg?: string;
-    color?: string;
-  }
-> = ({ value, bg = "#fff", color = "gray", ...props }) => (
-  // @ts-ignore
-  <Text
-    fontWeight="bold"
-    fontSize={2}
-    display="inline-block"
-    sx={{
-      borderRadius: 25,
-      cursor: props.onClick ? "pointer" : "inherit",
-      flexShrink: 0,
-    }}
-    bg={bg}
-    color={color}
-    mr={2}
-    p={1}
-    width="35px"
-    height="35px"
-    textAlign="center"
-    {...props}
-  >
-    {value}
-  </Text>
-);
 
 export function getCard(id: string): React.FC {
   // @ts-ignore TODO, not sure how to beter do the lookup here

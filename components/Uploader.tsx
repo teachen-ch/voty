@@ -10,7 +10,7 @@ import { Box, Flex, Text, Image } from "rebass";
 import { useUser } from "state/user";
 import { authHeaders } from "util/apollo";
 import { tr } from "util/translate";
-import { CircleBullet } from "./Cards";
+import { CircleBullet } from "./Misc";
 import { Center } from "./Learning";
 import { Loading } from "./Page";
 import Video from "./Video";

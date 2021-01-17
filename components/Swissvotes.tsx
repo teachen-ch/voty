@@ -11,7 +11,7 @@ import { Err, ErrorPage, Loading } from "./Page";
 import { useState, Dispatch, SetStateAction, useEffect } from "react";
 import { A } from "./Breadcrumb";
 import { formatYear } from "util/date";
-import { CircleBullet } from "components/Cards";
+import { CircleBullet } from "components/Misc";
 import { debounce, find, remove } from "lodash";
 import { Authors, usePostWork, WorkCard, WorkItem, Works } from "./Works";
 import { Markdown } from "util/markdown";
