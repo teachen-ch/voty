@@ -13,8 +13,9 @@ import {
 import { useState } from "react";
 import { MDXProvider } from "@mdx-js/react";
 import { ReadMore } from "components/ReadMore";
+import { CircleBullet } from "components/Cards";
 
-export { Info, Link, Video, ReadMore };
+export { Info, Link, Video, ReadMore, CircleBullet };
 
 type RefProps = {
   title?: string;

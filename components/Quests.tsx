@@ -1,6 +1,6 @@
-import { Input, Label, Radio, Textarea } from "@rebass/forms";
+import { Label, Radio, Textarea, TextareaProps } from "@rebass/forms";
 import { useContext, useMemo, useState } from "react";
-import { Button, Flex } from "rebass";
+import { BoxProps, Button, Text, Flex, Box } from "rebass";
 import { CardContext } from "./Cards";
 import React from "react";
 import { Authors, usePostWork, WorkCard, Works, WorkItem } from "./Works";
@@ -8,6 +8,9 @@ import { UserWhereUniqueInput } from "graphql/types";
 import { cloneDeep } from "lodash";
 import { Info } from "./Info";
 import { Err } from "./Page";
+import { CircleBullet } from "./Learning";
+
+export { Text };
 
 interface IQuestContext {
   answers: Record<string, any>;
@@ -42,11 +45,24 @@ export const Quest: React.FC<{ allowGroups?: boolean }> = ({
   }
 
   const success = state.called && !state.error;
-
+  let questionIx = 0;
   return (
     <QuestContext.Provider value={context}>
-      {children}
-      {allowGroups && <Authors setUsers={setUsers} />}
+      {React.Children.map(children, (child) =>
+        React.isValidElement(child)
+          ? React.cloneElement(child, {
+              ix: ++questionIx,
+            })
+          : child
+      )}
+      {allowGroups && (
+        <>
+          <Label mt={4} mb={2}>
+            Erarbeitet durch:{" "}
+          </Label>
+          <Authors setUsers={setUsers} />
+        </>
+      )}
 
       {success ? (
         <Info mb={6}>Antworten abgeschickt!</Info>
@@ -75,19 +91,41 @@ const QuestWork: WorkItem = ({ work }) => {
   );
 };
 
-type QuestionProps = {
+export const Question: React.FC<BoxProps & { ix?: string }> = ({
+  ix,
+  children,
+  ...props
+}) => {
+  const allChildren = React.Children.toArray(children);
+  const first = allChildren.shift();
+  return (
+    <Box mt={4} {...props}>
+      <Flex mb={2}>
+        {ix && <CircleBullet value={ix} mr={3} />}
+        <Box flex={1}>
+          <Box mt={1} mb={3}>
+            {first}
+          </Box>
+          {allChildren}
+        </Box>
+      </Flex>
+    </Box>
+  );
+};
+
+type AnswerProps = {
   id: string;
   answer?: any;
 };
 
-export const Question: React.FC<
-  QuestionProps & {
-    lines?: number;
-    placeholder?: string;
-    inline?: boolean;
-    width?: string | number | Array<string | number>;
-  }
-> = ({ id, placeholder, lines = 2, inline = false, width }) => {
+export const Textfield: React.FC<
+  AnswerProps &
+    TextareaProps & {
+      lines?: number;
+      placeholder?: string;
+      width?: string | number | Array<string | number>;
+    }
+> = ({ id, lines = 2, ...props }) => {
   const { answers, setAnswer } = useContext(QuestContext);
 
   if (!id) return <Err msg="<Question/> ohne id" />;
@@ -95,32 +133,36 @@ export const Question: React.FC<
     return <Err msg="<Question/> used outside of <Quest>...</Quest>" />;
 
   const text = String(answers[id] || "");
-  lines = inline ? 1 : lines;
-
-  const InputComp = lines === 1 ? Input : Textarea;
 
   return (
-    <InputComp
+    // @ts-ignore
+    <Textarea
       value={text}
       onChange={(e: any) => setAnswer(id, e.target.value)}
       mb={4}
       rows={lines}
-      placeholder={placeholder}
-      width={width}
+      {...props}
     />
   );
 };
 
-export const MultiChoice: React.FC<{ row?: boolean } & QuestionProps> = ({
+export const MultiChoice: React.FC<{ row?: boolean } & AnswerProps> = ({
   id,
   children,
   row,
 }) => {
   const { answers, setAnswer } = useContext(QuestContext);
+  const [answered, setAnswered] = useState<number>();
+
   if (!id) return <Err msg="<MultiChoice/> ohne id" />;
   if (answers === undefined)
     return <Err msg="<Question/> used outside of <Quest>...</Quest>" />;
 
+  function doAnswer(ix: number) {
+    if (answered) return false;
+    setAnswer(id, ix);
+    setAnswered(ix);
+  }
   return (
     <Flex
       mb={4}
@@ -131,8 +173,9 @@ export const MultiChoice: React.FC<{ row?: boolean } & QuestionProps> = ({
       {React.Children.map(children, (child, ix) =>
         React.isValidElement(child)
           ? React.cloneElement(child, {
-              setAnswer: () => setAnswer(id, ix + 1),
+              setAnswer: () => doAnswer(ix + 1),
               answer: Number(answers[id]),
+              answered,
               ix: ix + 1,
             })
           : child
@@ -141,19 +184,17 @@ export const MultiChoice: React.FC<{ row?: boolean } & QuestionProps> = ({
   );
 };
 
-export const Answer: React.FC<{
+export const Choice: React.FC<{
   correct?: boolean;
   ix?: number;
   answer?: number;
+  answered?: number;
   setAnswer?: () => void;
-}> = ({ correct, ix, answer, setAnswer, children }) => {
+}> = ({ correct, ix, answer, answered, setAnswer = () => 0, children }) => {
+  const color = answered === ix ? (correct ? "green" : "danger") : "white";
   return (
-    <Label alignItems="center" mr={2} sx={{ flexGrow: 0 }}>
-      <Radio
-        checked={answer === ix}
-        onChange={() => setAnswer && setAnswer()}
-        sx={{ fill: "white" }}
-      />
+    <Label alignItems="center" mr={2} sx={{ flexGrow: 0 }} onClick={setAnswer}>
+      <Radio checked={answer === ix} sx={{ fill: color }} />
       {children}
     </Label>
   );
