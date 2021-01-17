@@ -1,6 +1,6 @@
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient, Attachment } from "@prisma/client";
 import { IncomingForm, File, Files } from "formidable";
-import { getSessionUser } from "graphql/resolvers/users";
+import { getSessionUser, getShortname } from "graphql/resolvers/users";
 import { NextApiRequest, NextApiResponse } from "next";
 import logger from "util/logger";
 
@@ -18,7 +18,8 @@ export default async (
   res: NextApiResponse<{
     success?: boolean;
     error?: string;
-    attachments?: Record<string, File>;
+    files?: Record<string, File>;
+    attachments?: Record<string, Attachment>;
   }>
 ): Promise<void> => {
   try {
@@ -28,15 +29,16 @@ export default async (
       return res.send({ error: "Error.NoPermision" });
     }
 
-    const { fields, files } = await formParse(req);
+    const { fields, files: inFiles } = await formParse(req);
     if (typeof fields.card === "object") throw new Error("cannot be array");
     if (typeof fields.team === "object") throw new Error("cannot be array");
     if (typeof fields.discussion === "object")
       throw new Error("cannot be array");
 
-    const attachments: Record<string, File> = {};
-    for (const fieldname in files) {
-      const file = files[fieldname];
+    const attachments: Record<string, Attachment> = {};
+    const files: Record<string, File> = {};
+    for (const fieldname in inFiles) {
+      const file = inFiles[fieldname];
       const path = file.path.replace(UPLOAD_FOLDER, "");
       const attachment = await prisma.attachment.create({
         data: {
@@ -53,10 +55,18 @@ export default async (
             ? { connect: { id: user.schoolId } }
             : undefined,
         },
+        include: {
+          user: {
+            select: { id: true, lastname: true, name: true, role: true },
+          },
+        },
       });
-      attachments[attachment.id] = file;
+      // @ts-ignore we are not in graphql, where shortname is calcuated automatically
+      attachment.user.shortname = getShortname(attachment.user);
+      files[attachment.id] = file;
+      attachments[attachment.id] = attachment;
     }
-    res.send({ success: true, attachments: attachments });
+    res.send({ success: true, files, attachments });
   } catch (err) {
     console.error(err);
     logger.error(err);

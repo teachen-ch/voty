@@ -3,24 +3,98 @@ import {
   Role,
   useAttachmentsQuery,
   AttachmentFieldsFragment,
+  UserWhereUniqueInput,
 } from "graphql/types";
 import { useRouter } from "next/router";
-import { useRef, useState } from "react";
-import { Box, Flex, Text, Image } from "rebass";
+import { useContext, useRef, useState } from "react";
+import { Box, Flex, Text, Image, BoxProps, Button } from "rebass";
 import { useUser } from "state/user";
 import { authHeaders } from "util/apollo";
 import { tr } from "util/translate";
 import { CircleBullet } from "./Misc";
 import { Center } from "./Learning";
-import { Loading } from "./Page";
+import { Err, Loading } from "./Page";
 import Video from "./Video";
+import { Authors, usePostWork, WorkCard, WorkItem, Works } from "./Works";
+import { Info } from "./Info";
+import { Input, Label } from "@rebass/forms";
+import { CardContext } from "./Cards";
+
+export const UploadWork: React.FC<BoxProps & { prompt: string }> = (props) => {
+  const { card } = useContext(CardContext);
+  if (!card)
+    return <Err msg="<UploadWork/> needs to be placed in a CardContext." />;
+  const [title, setTitle] = useState("");
+  const [users, setUsers] = useState<UserWhereUniqueInput[]>();
+  const [attachments, setAttachments] = useState<
+    Record<string, AttachmentFieldsFragment>
+  >({});
+  const [doPostWork, state, trigger] = usePostWork({
+    card,
+    title,
+    data: { attachments },
+    users,
+  });
+
+  const success = state.called && !state.error;
+  return (
+    <Box {...props}>
+      {success ? (
+        <Info>Erfolgreich gespeichert!</Info>
+      ) : (
+        <>
+          <UploadArea
+            card={card}
+            prompt={props.prompt}
+            resultCallback={setAttachments}
+          />
+
+          <Label mt={3} mb={2}>
+            Titel:
+          </Label>
+          <Input
+            name="title"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+          />
+          <Label mt={3}>Erarbeitet durch:</Label>
+          <Authors setUsers={setUsers} />
+          <Button mt={3} width="100%" onClick={doPostWork} label="Abschicken">
+            Abschicken
+          </Button>
+          <Err msg={state.error?.message} />
+        </>
+      )}
+      <Works card={card} mt={6} items={UploadItem} trigger={trigger} />
+    </Box>
+  );
+};
+
+const UploadItem: WorkItem = ({ work }) => {
+  const attachments = work.data?.attachments as Record<
+    string,
+    AttachmentFieldsFragment
+  >;
+  return (
+    <WorkCard>
+      <Flex mx={-2} flexWrap="wrap" mt={2}>
+        {Object.keys(attachments).map((key) => (
+          <Attachment key={key} attachment={attachments[key]} hideUser />
+        ))}
+      </Flex>
+    </WorkCard>
+  );
+};
 
 export const UploadArea: React.FC<{
-  width: string;
   prompt: string;
+  width?: string;
   card?: string;
   discussion?: string;
-}> = ({ width, prompt, card, discussion }) => {
+  resultCallback?: (
+    attachments: Record<string, AttachmentFieldsFragment>
+  ) => void;
+}> = ({ prompt, width = "100%", card, discussion, resultCallback }) => {
   const [drag, setDrag] = useState(false);
   const [uploading, setUploading] = useState(false);
   const [files, setFiles] = useState<Record<string, File>>();
@@ -61,12 +135,10 @@ export const UploadArea: React.FC<{
       setUploading(true);
       const result = await doUploadFiles(files, fields);
       if (result.attachments) {
-        setFiles(result.attachments);
+        setFiles(result.files);
+        if (resultCallback) resultCallback(result.attachments);
         setUploading(false);
         setDrag(false);
-        // TODO: This is a shitty way, but <UploadArea> and <Uploaded/> are not really connected
-        // so not sure how one can signal the other easily
-        router.reload();
       }
       if (result.error) {
         setError(tr(result.error));
@@ -106,7 +178,7 @@ export const UploadArea: React.FC<{
       <Center>
         <Text fontWeight="bold" fontSize={4} color="white" textAlign="center">
           {uploading ? <Loading /> : null}
-          {files && files.length ? (
+          {files && Object.keys(files).length ? (
             <Preview files={files} doDelete={doDelete} />
           ) : (
             prompt
@@ -207,8 +279,9 @@ export const Uploaded: React.FC<{ card: string }> = ({ card }) => {
 
 export const Attachment: React.FC<{
   attachment: AttachmentFieldsFragment;
-  refetch: () => void;
-}> = ({ attachment, refetch }) => {
+  hideUser?: boolean;
+  refetch?: () => void;
+}> = ({ attachment, refetch, hideUser }) => {
   const user = useUser();
   function canDelete() {
     return user
@@ -220,13 +293,15 @@ export const Attachment: React.FC<{
     if (result.error) {
       alert(tr(result.error));
     } else {
-      refetch();
+      if (refetch) {
+        refetch();
+      }
     }
   }
   return (
     <Box bg="white" p={2} m={2} width="calc(33.3333% - 16px)">
       <Text fontSize={1} color="black" sx={{ position: "relative" }}>
-        {canDelete() && (
+        {canDelete() && !hideUser && (
           <Box sx={{ position: "absolute", right: -2 }} p={2}>
             <CircleBullet
               onClick={doDelete}
@@ -238,7 +313,7 @@ export const Attachment: React.FC<{
         )}
         {getAttachmentPreview(attachment)}
         <Text sx={{ overflow: "hidden", textOverflow: "ellipsis" }}>
-          «{attachment.title}» von {attachment.user.shortname}
+          «{attachment.title}»{!hideUser && `von ${attachment.user.shortname}`}
         </Text>
       </Text>
     </Box>

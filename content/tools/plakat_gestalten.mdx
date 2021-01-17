@@ -1,5 +1,5 @@
 import { Info } from "components/Learning";
-import { Uploaded, UploadArea } from "components/Uploader";
+import { UploadWork } from "components/Uploader";
 import { ReadMore } from "components/ReadMore";
 import { RandomPosters } from "components/Posters";
 
@@ -33,6 +33,4 @@ Hast Du einen kurzen und einprägsamen Satz, der deine Meinung auf den Punkt bri
   hochladen (`Speichern unter...` `Dateiformat: PDF`)</p>
 </Info>
 
-<UploadArea prompt="Plakat hochladen" card={meta.id} />
-
-<Uploaded card={meta.id} />
+<UploadWork prompt="Plakat hochladen" />
