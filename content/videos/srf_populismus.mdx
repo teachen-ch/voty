@@ -1,16 +1,22 @@
 import { Ref, Video } from "components/Learning";
-import { Quest, MultiChoice, Answer, Question } from "components/Quests";
+import {
+  Quest,
+  MultiChoice,
+  Choice,
+  Question,
+  Textfield,
+} from "components/Quests";
 
 export const meta = {
   id: "srf_populismus",
-  title: "SRF mySchool «Populismus»",
+  title: "SRF mySchool: Populismus",
   type: "video",
   age: "Sek-1, Gym, Berufsschule",
   description:
     "Populistische Kommunikation schürt in der Politik Emotionen, dramatisiert und arbeitet mit Tabubrüchen.",
   duration: "15 Minuten",
   keywords:
-    "Wahlen, Abstimmen, Debattieren, Rechts, Links, Extrem, Fake-News, Kommunikation, Volk, Elite",
+    "Wahlen, Abstimmen, Debattieren, Populismus, Populisten, Parteien, Soziale Medien, Rechts, Links, Extrem, Fake-News, Kommunikation, Volk, Elite",
   source: "https://www.srf.ch/sendungen/myschool/mein-erstes-mal-waehlen-2",
   url:
     "https://www.srf.ch/play/tv/srf-myschool/video/politik-und-gesellschaft-populismus-79?urn=urn:srf:video:e3938739-7366-4e18-94bc-55801d88b602",
@@ -26,37 +32,19 @@ export const meta = {
 
 <Quest  allowGroups>
 
-Wie würdest Du das Volk auf Deine Seite bringen. Wie wäre Dein populistischer Wahlspruch, mit dem Du «das Volk» für Dich gewinnst?
+<Question>
+  Wie würdest Du das Volk auf Deine Seite bringen. Wie wäre Dein populistischer
+  Wahlspruch, mit dem Du «das Volk» für Dich gewinnst?
+  <Textfield id="1" />
+</Question>
 
-<Question id="q1" />
+<Question>
+  Wer bertreibt populistische Kommunikation?
 
-Wer bertreibt populistische Kommunikation?
-
-<MultiChoice id="q2" row>
-  <Answer>Die Linken</Answer>
-  <Answer>Die Rechten</Answer>
-  <Answer correct>beide Seiten</Answer>
+<MultiChoice id="2" row>
+  <Choice>Die Linken</Choice>
+  <Choice>Die Rechten</Choice>
+  <Choice correct>beide Seiten</Choice>
 </MultiChoice>
-
-Wieviele Unterschriften werden benötigt für...
-
-<table>
-  <tr>
-    <th></th>
-    <th>Anzahl Unterschriften</th>
-  </tr>
-  <tr>
-    <td>Eine Initiative?</td>
-    <td>
-      <Question id="q3" inline />
-    </td>
-  </tr>
-  <tr>
-    <td>Ein Referendum?</td>
-    <td>
-      <Question id="q4" inline width="300" />
-    </td>
-  </tr>
-</table>
-
+</Question>
 </Quest>
