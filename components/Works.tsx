@@ -265,7 +265,12 @@ export const Authors: React.FC<
     }
   }, [user]);
 
-  if (!user || !team) return null;
+  if (!user || !team)
+    return (
+      <Text fontSize={1} fontStyle="italic">
+        Nicht eingeloggt
+      </Text>
+    );
   const teamUsers = team?.members;
 
   function doSearch(evt: ChangeEvent<HTMLInputElement>) {
