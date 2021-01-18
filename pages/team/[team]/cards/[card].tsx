@@ -6,6 +6,7 @@ import { Role } from "graphql/types";
 import { Discussion } from "components/Discussion";
 import { useQueryParam } from "util/hooks";
 import { HideFeature } from "components/HideFeature";
+import { FeedbackText } from "components/Feedback";
 
 export default function CardPage(): React.ReactElement {
   const user = useUser();
@@ -53,6 +54,7 @@ export default function CardPage(): React.ReactElement {
       <HideFeature id="discussions">
         {meta.discussion !== false && <Discussion card={key} />}
       </HideFeature>
+      <FeedbackText />
     </LoggedInPage>
   );
 }

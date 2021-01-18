@@ -1,0 +1,39 @@
+<mjml>
+  <mj-head>
+    <mj-font
+      name="SourceSansPro"
+      href="https://voty.ch/fonts/source-sans-pro-v14-latin-600.woff2"
+    />
+    <mj-attributes>
+      <mj-all font-family="SourceSansPro, -apple-system, system-ui, sans" />
+    </mj-attributes>
+  </mj-head>
+  <mj-body>
+    <mj-section>
+      <mj-column width="600px">
+        <mj-image width="470px" src="https://voty.ch/images/voty_email.png" />
+        <mj-text align="center" font-size="24px" font-weight="bold"
+          >voty.&#8203;ch Feedback!</mj-text
+        >
+        <mj-text font-size="20px" color="#aaa">
+          Absender: {{user.name}} {{user.lastname}} ({{user.role}})
+        </mj-text>
+        <mj-text font-size="20px" color="#aaa">
+          Anfrage: {{type}}
+        </mj-text>
+        <mj-text font-size="24px" font-weight="bold" color="#aaa">
+          {{title}}
+        </mj-text>
+        <mj-text font-size="20px" color="#000">
+          <pre style="white-space: pre-wrap; font-family: SourceSansPro, -apple-system, system-ui, sans">{{text}}</pre>
+        </mj-text>
+        <mj-button
+          href="https://voty.ch/cards/{{card}}"
+          background-color="#206DBB"
+          font-weight="bold"
+          font-size="20px"
+          >Zu diesem Inhalt</mj-button
+      </mj-column>
+    </mj-section>
+  </mj-body>
+</mjml>

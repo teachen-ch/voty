@@ -7,6 +7,10 @@ const typeColors: Record<string, string> = {
   default: "gray",
 };
 
+/**
+ *
+ * @param type: important | info | light | default
+ */
 export const Info: React.FC<CardProps & { type?: string }> = ({
   type = "default",
   children,

@@ -169,7 +169,8 @@ export const usePostWork: PostWorkHookType = (args) => {
   const [doPostWork, state] = usePostWorkMutation();
 
   async function doPost() {
-    if (!team || !user) return alert("Du bist nicht eingeloggt!");
+    if (!team || !user)
+      return alert("Lerninhalte können nur in einer Klasse bearbeitet werden.");
     const result = await doPostWork({
       variables: {
         data: {

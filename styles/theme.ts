@@ -250,6 +250,16 @@ export default {
       fontSize: [2, 3, 4],
       minHeight: "50px",
     },
+    secondary: {
+      fontFamily: "body",
+      cursor: "pointer",
+      color: "#fff",
+      bg: "gray",
+      fontWeight: "semi",
+      borderRadius: "0px",
+      fontSize: [2, 3, 4],
+      minHeight: "50px",
+    },
     text: {
       variant: "buttons.primary",
       color: "inherit",
