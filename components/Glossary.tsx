@@ -16,6 +16,10 @@ export const Glossary: React.FC = () => (
   </MDXProvider>
 );
 
+/**
+ * glossaryReplace replaces glossary terms with <GlossaryLinks/>
+ * It either matches @terms or @terms(with display text)
+ */
 export const glossaryReplace = (
   str: string,
   bg?: string,
