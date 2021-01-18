@@ -16,6 +16,7 @@ interface IQuestContext {
   answers: Record<string, any>;
   setAnswer: (id: string, answer: any) => void;
   children: React.ReactNode;
+  readOnly?: boolean;
 }
 
 export const QuestContext = React.createContext({} as IQuestContext);
@@ -84,9 +85,12 @@ const QuestWork: WorkItem = ({ work }) => {
         answers: work.data as Record<string, any>,
         setAnswer: () => 0,
         children: null,
+        readOnly: true,
       }}
     >
-      <WorkCard>{children}</WorkCard>
+      <WorkCard>
+        <Box my={-4}>{children}</Box>
+      </WorkCard>
     </QuestContext.Provider>
   );
 };
@@ -126,7 +130,7 @@ export const Textfield: React.FC<
       width?: string | number | Array<string | number>;
     }
 > = ({ id, lines = 2, ...props }) => {
-  const { answers, setAnswer } = useContext(QuestContext);
+  const { answers, setAnswer, readOnly } = useContext(QuestContext);
 
   if (!id) return <Err msg="<Question/> ohne id" />;
   if (answers === undefined)
@@ -141,6 +145,7 @@ export const Textfield: React.FC<
       onChange={(e: any) => setAnswer(id, e.target.value)}
       mb={4}
       rows={lines}
+      readOnly={readOnly}
       {...props}
     />
   );
@@ -151,7 +156,7 @@ export const MultiChoice: React.FC<{ row?: boolean } & AnswerProps> = ({
   children,
   row,
 }) => {
-  const { answers, setAnswer } = useContext(QuestContext);
+  const { answers, setAnswer, readOnly } = useContext(QuestContext);
   const [answered, setAnswered] = useState<number>();
 
   if (!id) return <Err msg="<MultiChoice/> ohne id" />;
@@ -173,7 +178,7 @@ export const MultiChoice: React.FC<{ row?: boolean } & AnswerProps> = ({
       {React.Children.map(children, (child, ix) =>
         React.isValidElement(child)
           ? React.cloneElement(child, {
-              setAnswer: () => doAnswer(ix + 1),
+              setAnswer: readOnly ? undefined : () => doAnswer(ix + 1),
               answer: Number(answers[id]),
               answered,
               ix: ix + 1,
@@ -193,9 +198,11 @@ export const Choice: React.FC<{
 }> = ({ correct, ix, answer, answered, setAnswer = () => 0, children }) => {
   const color = answered === ix ? (correct ? "green" : "danger") : "white";
   return (
-    <Label alignItems="center" mr={2} sx={{ flexGrow: 0 }} onClick={setAnswer}>
-      <Radio checked={answer === ix} sx={{ fill: color }} />
-      {children}
+    <Label alignItems="center" mr={2} onClick={setAnswer} mb={2}>
+      <Radio checked={answer === ix} sx={{ fill: color }} mr={2} />
+      <Text flex={1} sx={{ flexGrow: 1 }}>
+        {children}
+      </Text>
     </Label>
   );
 };
