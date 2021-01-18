@@ -1,11 +1,5 @@
 import { Ref, Video } from "components/Learning";
-import {
-  Quest,
-  MultiChoice,
-  Question,
-  Text,
-  Textfield,
-} from "components/Quests";
+import { Quest, MultiChoice, Question, Textfield } from "components/Quests";
 
 export const meta = {
   id: "srf_abstimmen",
@@ -17,7 +11,7 @@ export const meta = {
   duration: "1 Lektion",
   keywords:
     "Wahlen, Abstimmen, Debattieren, Populismus, Populisten, Parteien, Soziale Medien, Rechts, Links, Extrem, Fake-News, Kommunikation, Volk, Elite",
-  source: "https://www.srf.ch/sendungen/myschool/mein-erstes-mal-waehlen-2",
+  source: "https://www.srf.ch/sendungen/myschool/politik-und-gesellschaft",
   url:
     "https://www.srf.ch/play/tv/srf-myschool/video/politik-und-gesellschaft-populismus-79?urn=urn:srf:video:e3938739-7366-4e18-94bc-55801d88b602",
 };
@@ -29,11 +23,9 @@ export const meta = {
 
 <Quest allowGroups>
   <Question>
-    <Text>
-      Im Video wird erklärt, was die Ziele und die Voraussetzungen für die
-      Einreichung einer Initiative und einem Referendum sind. Fülle die Tabelle
-      aus:
-    </Text>
+    Im Video wird erklärt, was die Ziele und die Voraussetzungen für die
+    Einreichung einer Initiative und einem Referendum sind. Fülle die Tabelle
+    aus:
     <table>
       <thead>
         <tr>
@@ -102,14 +94,15 @@ export const meta = {
   </Question>
   <Question>
     <Text>
-      Kannst Du kurz erklären, was das Ständemehr ist und wer davon profitiert?
+      Kannst Du in einem Satz erklären, was das Ständemehr ist und wer davon
+      profitiert?
     </Text>
     <Textfield id="2" />
   </Question>
   <Question>
     <Text>
-      Warum gibt es im Schweizer Parlament zwei Kammern und warum sind beide
-      Gleichberechtigt?
+      Wie heissen die beiden Kammern des Schweizer Parlaments und warum sind
+      beide gleichberechtigt?
     </Text>
     <Textfield id="3" />
   </Question>

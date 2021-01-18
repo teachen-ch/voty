@@ -1,16 +1,23 @@
 import { Ref, Video } from "components/Learning";
+import {
+  Quest,
+  MultiChoice,
+  Choice,
+  Question,
+  Textfield,
+} from "components/Quests";
 
 export const meta = {
-  id: "srf_usa_parteien",
+  id: "srf_regieren",
   title: "SRF mySchool: Regieren",
   description:
-    "Was bedeutet «regieren» in verschiedenen Bereichen des Lebens? Wer regiert die Schweiz?",
+    "Was bedeutet «regieren» in verschiedenen Bereichen des Lebens? Wie wird die Schweiz regiert?",
   type: "video",
   age: "Sek-1, Gym, Berufsschule",
-  duration: "5 Minuten",
+  duration: "1 Lektion",
   keywords:
-    "Wahlen, Parlamentswahl, Abstimmungen, Proporzwahl, Majorzwahl, Kumulieren, Panaschieren, Wahlzettel, Urne, Ständerat, Nationalrat, Gemeinden, Bund",
-  source: "https://www.srf.ch/sendungen/myschool/themen/wirtschaft-politik",
+    "Wahlen, Parlamentswahl, Regieren, Proporzwahl, Majorzwahl, Kumulieren, Panaschieren, Wahlzettel, Urne, Ständerat, Nationalrat, Gemeinden, Bund",
+  source: "https://www.srf.ch/sendungen/myschool/politik-und-gesellschaft",
   url:
     "https://srf.ch/play/tv/redirect/detail/d4b2701b-297e-44bc-9b78-73b7b8a3b247",
 };
@@ -19,3 +26,45 @@ export const meta = {
   <p>{meta.description}</p>
   <Video url={meta.url} />
 </Ref>
+
+<Quest>
+  <Question>
+    Regieren heisst: führen, lenken und leiten. Nenne drei Beispiele aus der
+    Schweiz oder aus dem Ausland
+    <Textfield id="1" />
+  </Question>
+  <Question>
+    Wer wählt die Schweizer Regierung, also den Bundesrat?
+    <Textfield id="2" />
+  </Question>
+  <Question>
+    Warum ist der Schweizerische Bundesrat eine «schwache» Regierung? Was
+    könnten die Vor- und Nachteile von dieser Regierungsform sein?
+    <Textfield id="3" />
+  </Question>
+  <Question>
+    Auf welchen drei Ebenen wird in der Schweizerischen Politik regiert? Nenne
+    je ein Beispiele für Entscheidungen, welche auf jeder Ebene getroffen
+    werden.
+    <Textfield id="4" lines={4} />
+  </Question>
+  <Question>
+    Was versteht man unter «Gewaltentrennung»? Nenne die drei Gewalten und
+    erkläre sie in einem Satz.
+    <Textfield id="5.1" lines={1} />
+    <Textfield id="5.2" lines={1} />
+    <Textfield id="5.3" lines={1} />
+  </Question>
+  <Question>
+    Was bedeuted es, in der Schweiz zu regieren?
+    <MultiChoice id="6">
+      <Choice>
+        Die Gesetze bestimmen und schauen, dass diese eingehalten werden
+      </Choice>
+      <Choice correct>Den Willen der Volksmehrheit umzusetzen</Choice>
+      <Choice>
+        Ein Land oder einen Kanton nach den eigenen Interessen zu führen
+      </Choice>
+    </MultiChoice>
+  </Question>
+</Quest>
