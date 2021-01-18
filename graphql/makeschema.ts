@@ -55,7 +55,8 @@ const baseSchema = makeSchema({
   },
 
   shouldGenerateArtifacts: isLocal(),
-  shouldExitAfterGenerateArtifacts: process.argv.includes("--nexus-exit"),
+  shouldExitAfterGenerateArtifacts:
+    process.argv.includes("--nexus-exit") || Boolean(process.env.NEXUS_EXIT),
   outputs: {
     schema: path.join(process.cwd(), "graphql", "api.graphql"),
     typegen: path.join(process.cwd(), "graphql", "nexus.ts"),

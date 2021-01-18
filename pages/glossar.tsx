@@ -1,4 +1,4 @@
-import { Glossary } from "components/Glossary";
+import { Glossary, GlossaryReplace } from "components/Glossary";
 import { Page } from "components/Page";
 import { Info } from "components/Info";
 import { A } from "components/Breadcrumb";
@@ -16,7 +16,9 @@ export default function GlossaryPage(): React.ReactElement {
         Ergänzungs- und Präsizierungsvorschläge an ✉️
         <A onClick={sendMail}>glossar@voty.ch</A>
       </Info>
-      <Glossary />
+      <GlossaryReplace>
+        <Glossary />
+      </GlossaryReplace>
     </Page>
   );
 }

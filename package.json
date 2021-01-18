@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "start:test": "yarn run next &",
-    "cy": "dotenv cypress open",
+    "cy": "dotenv -- cypress open",
     "test": "dotenv -- cypress run --record false",
     "deploy": "./ansible/scripts/deploy.py",
     "deploy:dev": "ansible-playbook -i ansible/dev ansible/site.yml --tags app",
