@@ -8,7 +8,7 @@ import { SelectSchool } from "components/Schools";
 import { Breadcrumb, Here } from "components/Breadcrumb";
 import { Role } from "graphql/types";
 
-export default function Teacher(): ReactElement {
+export default function TeacherHome(): ReactElement {
   const user = useUser();
   const [showForm, setShowForm] = useState(false);
   const [success, setSuccess] = useState(false);

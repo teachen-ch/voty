@@ -4,7 +4,7 @@ import Link from "next/link";
 import { ReactElement } from "react";
 import { Role } from "graphql/types";
 
-export default function Teacher(): ReactElement {
+export default function AdminHome(): ReactElement {
   return (
     <LoggedInPage heading="Admin Bereich" role={Role.Admin}>
       <Text lineHeight="2em">
