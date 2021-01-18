@@ -1,0 +1,54 @@
+import { Ref, Video } from "components/Learning";
+import {
+  Quest,
+  MultiChoice,
+  Choice,
+  Question,
+  Textfield,
+} from "components/Quests";
+
+export const meta = {
+  id: "srf_wahlen",
+  title: "SRF mySchool: Wahlen",
+  description:
+    "Wer darf in der Schweiz wählen und wie werben Kandidaten für ihre Wahl?",
+  type: "video",
+  age: "Sek-1, Gym, Berufsschule",
+  duration: "1 Lektion",
+  keywords:
+    "Wahlen, Parlamentswahl, Nationalrat, Ständerat, Wahlrecht. Föderalismus, Majorsystem, Proporzsystem",
+  source: "https://www.srf.ch/sendungen/myschool/politik-und-gesellschaft",
+  url:
+    "https://srf.ch/play/tv/redirect/detail/d4b2701b-297e-44bc-9b78-73b7b8a3b247",
+};
+
+<Ref source={meta.source}>
+  <p>{meta.description}</p>
+  <Video url={meta.url} />
+</Ref>
+
+<Quest>
+  <Question>
+    Wer darf in der Schweiz auf Bundesebene abstimmen und wählen?
+    <MultiChoice id="1">
+      <Choice> Alle, die in der Schweiz wohnen und über 18 sind</Choice>
+      <Choice>Alle, die in der Schweiz geboren wurden</Choice>
+      <Choice correct>Alle mit Schweizerpass über 18 sind</Choice>
+    </MultiChoice>
+  </Question>
+  <Question>
+    Wie oft wird der Nationalrat und der Ständerat gewählt?
+    <MultiChoice id="2" row>
+      <Choice> Alle zwei Jahre</Choice>
+      <Choice correct>Alle vier Jahre</Choice>
+    </MultiChoice>
+  </Question>
+  <Question>
+    Erkläre wie eine Wahl nach dem «Majorzsystem» funktioniert für den Ständerat
+    <Textfield id="3" />
+  </Question>
+  <Question>
+    Und wie funktioniert eine Wahl im «Proporzsystem» für den Nationalrat?
+    <Textfield id="4" />
+  </Question>
+</Quest>
