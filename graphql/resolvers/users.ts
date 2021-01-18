@@ -340,7 +340,7 @@ export async function sendVerificationEmail(
 
     const conf = { email: email.replace(/\./g, ".&#8203;"), url, site };
 
-    await sendMail(from, email, subject, purpose, conf);
+    await sendMail({ from, to: email, subject, template: purpose, data: conf });
     logger.info(`Sending ${purpose} email to: ${email} `);
 
     if (process.env.NODE_ENV !== "production") {
@@ -399,7 +399,12 @@ export const checkVerification: FieldResolver<
     if (user.role === Role.Teacher) {
       const from = String(process.env.EMAIL);
       const subject = "Willkommen bei voty.ch";
-      await sendMail(from, email, subject, "welcome_teacher", {});
+      await sendMail({
+        from,
+        to: email,
+        subject,
+        template: "welcome_teacher",
+      });
       logger.info(`Sending welcome email to teacher: ${email} `);
     }
 

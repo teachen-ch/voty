@@ -18,13 +18,14 @@ const server = new SMTPTransport({
 
 const templatesDir = "./mails/";
 
-export async function sendMail(
-  from: string,
-  to: string,
-  subject: string,
-  template: string,
-  data: Record<string, any>
-): Promise<any> {
+export async function sendMail(args: {
+  from: string;
+  to: string;
+  subject: string;
+  template: string;
+  data?: Record<string, any>;
+}): Promise<any> {
+  const { from, to, subject, template, data = {} } = args;
   const { html, text } = await renderTemplate(template, data);
 
   // No email configured
