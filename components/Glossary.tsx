@@ -52,8 +52,8 @@ export const glossaryReplace = (
 };
 
 export const GlossaryReplace: React.FC<{ bg?: string; color?: string }> = ({
-  bg,
-  color,
+  bg = "#444",
+  color = "#fff",
   children,
 }) => {
   const deepReplace = (children: ReactNode): ReactNode =>
@@ -89,12 +89,9 @@ export const GlossaryLink: React.FC<{
   function toggle() {
     setShow(!show);
   }
+
   return (
-    <Text
-      as="span"
-      sx={{ position: ["initial", "initial"] }}
-      display="inline-block"
-    >
+    <Text as="span" display="inline-block">
       <Link
         onClick={toggle}
         onMouseOver={toggle}
@@ -103,7 +100,8 @@ export const GlossaryLink: React.FC<{
           borderBottom: "1px dotted",
           textDecoration: "none !important",
           ":hover": {
-            borderBottom: "5px dotted",
+            borderBottom: "1px solid",
+            borderBottomColor: bg,
           },
         }}
       >
@@ -148,7 +146,9 @@ export const GlossaryText: React.FC = (props) => (
 );
 
 function getGlossary(term: string) {
-  return glossary[term];
+  const missing =
+    "Dieser Eintrag wurde im Glossar noch nicht erfasst. Magst Du den Begriff in 1-2 Sätzen erklären 👉 glossar@voty.ch";
+  return glossary[term] || missing;
 }
 
 function parseGlossary() {

@@ -1,7 +1,8 @@
-import { Box, Flex, Image, Text } from "rebass";
+import { Box, Flex, Text } from "rebass";
 import { Markdown } from "util/markdown";
 import { GlossaryReplace } from "./Glossary";
 import React from "react";
+import IconBack from "../public/images/icon_back.svg";
 
 export enum Direction {
   "Incoming",
@@ -47,6 +48,7 @@ export const ChatHeader: React.FC<{ title?: string; onClick: () => void }> = ({
   <Flex
     display={["inherit", "inherit", "none"]}
     bg="#494A4B"
+    color="#fff"
     p={3}
     alignItems="center"
     justifyContent="space-between"
@@ -54,11 +56,9 @@ export const ChatHeader: React.FC<{ title?: string; onClick: () => void }> = ({
     height="70px"
   >
     {onClick && (
-      <Image
-        src="/images/icon_back.svg"
+      <IconBack
         onClick={onClick}
-        mr={2}
-        sx={{ cursor: "pointer", flexGrow: 0 }}
+        style={{ cursor: "pointer", flexGrow: 0, marginRight: "8px" }}
       />
     )}
     <Text fontWeight="bold" textAlign="left" sx={{ flexGrow: 1 }}>
@@ -72,7 +72,14 @@ export const MessageList = React.forwardRef<
   { children: React.ReactNode }
 >(function ML({ children }, ref) {
   return (
-    <Flex p={3} flexDirection="column" overflow="scroll" flex="1" ref={ref}>
+    <Flex
+      p={3}
+      flexDirection="column"
+      overflow="scroll"
+      flex="1"
+      ref={ref}
+      sx={{ position: "relative" }}
+    >
       {children}
     </Flex>
   );
@@ -120,7 +127,7 @@ export const MessageOrInfo: React.FC<{ model: TMessage; is: string }> = ({
   model,
 }) =>
   model.direction === Direction.Info ? (
-    <GlossaryReplace bg="#444" color="white">
+    <GlossaryReplace bg="#444" color="#fff">
       <Info model={model} />
     </GlossaryReplace>
   ) : (
@@ -133,7 +140,7 @@ const ParsedMessage: React.FC<{ model: TMessage }> = ({ model }) => {
   }
   return (
     <Message direction={model.direction}>
-      <GlossaryReplace bg="#444" color="white">
+      <GlossaryReplace bg="#444" color="#fff">
         {model.children || model.message}
       </GlossaryReplace>
     </Message>

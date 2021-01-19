@@ -192,7 +192,7 @@ const ShowInput: React.FC<{
         <Text
           pl={2}
           flex={1}
-          color="black"
+          color="#000"
           fontWeight="semi"
           minWidth="300px"
           my={[2, 2, 0]}
