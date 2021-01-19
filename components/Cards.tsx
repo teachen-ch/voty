@@ -16,6 +16,8 @@ import { A } from "./Breadcrumb";
 import IconTrash from "../public/images/icon_trash.svg";
 import IconWatch from "../public/images/icon_watch.svg";
 import IconMove from "../public/images/icon_move.svg";
+import IconCheck from "../public/images/icon_check.svg";
+import IconAdd from "../public/images/icon_add.svg";
 
 export const GET_CARDS = gql`
   query cards($keywords: String, $age: String, $type: String) {
@@ -118,9 +120,6 @@ export const CardItem: React.FC<{
   const link = teamId ? `/team/${teamId}/cards/${id}` : `/cards/${id}`;
   const bgColor = selected ? "blue2" : "blue3";
   const bgImage = `/images/bg_${card.icon || card.type}.svg`;
-  const selectImage = selected
-    ? "/images/icon_check.svg"
-    : "/images/icon_add.svg";
 
   return (
     <Box
@@ -167,11 +166,11 @@ export const CardItem: React.FC<{
                 mb={2}
                 display="block"
               />
-              <Image
-                src={selectImage}
-                sx={{ cursor: "pointer" }}
-                onClick={doSelect}
-              />
+              {selected ? (
+                <IconCheck style={{ cursor: "pointer" }} onClick={doSelect} />
+              ) : (
+                <IconAdd style={{ cursor: "pointer" }} onClick={doSelect} />
+              )}
             </Box>
           ) : null}
         </Flex>

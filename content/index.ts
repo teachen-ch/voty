@@ -17,6 +17,7 @@ export * as wortsuche from "content/games/wortsuche.mdx";
 export * as srf_abstimmen from "content/videos/srf_abstimmen.mdx";
 export * as srf_regieren from "content/videos/srf_regieren.mdx";
 export * as srf_wahlen from "content/videos/srf_wahlen.mdx";
+export * as srf_debattieren from "content/videos/srf_debattieren.mdx";
 
 export * as srf_drei_gewalten from "content/videos/srf_drei_gewalten.mdx";
 export * as srf_foederalismus from "content/videos/srf_foederalismus.mdx";

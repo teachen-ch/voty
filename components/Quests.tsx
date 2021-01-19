@@ -1,4 +1,11 @@
-import { Label, Radio, Textarea, TextareaProps } from "@rebass/forms";
+import {
+  Label,
+  Radio,
+  Select,
+  SelectProps,
+  Textarea,
+  TextareaProps,
+} from "@rebass/forms";
 import { useContext, useEffect, useMemo, useState } from "react";
 import { BoxProps, Button, Text, Flex, Box } from "rebass";
 import { CardContext } from "./Cards";
@@ -147,7 +154,6 @@ export const Textfield: React.FC<
     <Textarea
       value={text}
       onChange={(e: any) => setAnswer(id, e.target.value)}
-      mb={4}
       rows={lines}
       readOnly={readOnly}
       {...props}
@@ -256,12 +262,11 @@ export const Order: React.FC<AnswerProps & { items: string[] }> = ({
   function checkCorrect(answer: readonly OrderItemType[]) {
     if (answer.map((item) => item.text).join(",") === items.join(",")) {
       setCorrect(true);
-      console.log("Correct");
     }
   }
 
   return (
-    <Table mb={4} bg={correct ? "rgba(0,250,0,0.3)" : "inherit"}>
+    <Table mb={4}>
       <DraggableList<
         OrderItemType,
         { readOnly?: boolean; correct: boolean },
@@ -307,3 +312,29 @@ class OrderItem extends React.Component<OrderItemProps> {
     );
   }
 }
+
+export const Choose: React.FC<AnswerProps & SelectProps> = ({
+  id,
+  children,
+  ...props
+}) => {
+  const { answers, setAnswer, readOnly } = useContext(QuestContext);
+
+  if (!id) return <Err msg="<Choose/> ohne id" />;
+  if (answers === undefined)
+    return <Err msg="<Choose/> used outside of <Quest>...</Quest>" />;
+
+  const choice = String(answers[id] || "");
+
+  return (
+    // @ts-ignore
+    <Select
+      value={choice}
+      onChange={(e: any) => setAnswer(id, e.target.value)}
+      disabled={readOnly}
+      {...props}
+    >
+      {children}
+    </Select>
+  );
+};

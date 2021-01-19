@@ -1,0 +1,62 @@
+import { Ref, Video } from "components/Learning";
+import {
+  Quest,
+  Choose,
+  Order,
+  Item,
+  Question,
+  Textfield,
+} from "components/Quests";
+
+export const meta = {
+  id: "srf_debattieren",
+  title: "SRF mySchool: Debattieren",
+  description:
+    "Wie führt man in der Politik gute Diskussionen und warum ist das so wichtig?",
+  type: "video",
+  age: "Sek-1, Gym, Berufsschule",
+  duration: "1 Lektion",
+  keywords: "Debattieren, Diskutieren, Rethorik, Antike",
+  source: "https://www.srf.ch/sendungen/myschool/politik-und-gesellschaft",
+  url:
+    "https://srf.ch/play/tv/redirect/detail/f77dd2a7-d24e-415e-ba9f-be626cc5a817",
+};
+
+<Ref source={meta.source}>
+  <p>{meta.description}</p>
+  <Video url={meta.url} />
+</Ref>
+
+<Quest>
+  <Question>
+    Im antiken Rom gab es ein «Regelwerk» für gute Redekunst (Rethorik). Bringe
+    die Schritte in die richtige Reihenfolge:
+    <Order
+      id="1"
+      items={[
+        "Sammle zuerst gute Argumente, die für und gegen deine Meinung sprechen",
+        "Entwickle dann einen klaren Aufbau deiner Rede, eine Dramaturgie",
+        "Nutze Stilmittel, Bilder (Metaphern) und Wiederholungen",
+        "Lerne die Rede gut auswendig",
+        "Setze beim Reden Gestik, Mimik, Tempo und Betonung ein um zu Überzeugen",
+      ]}
+    />
+  </Question>
+  <Question>
+    Wähle Dir ein Thema und schreibe drei überzeugende Argumente, die dafür
+    sprechen. Nun suchse drei gute Argumente, die dagegen sprechen. Nur wenn Du
+    Dir zu beiden Seiten Gedanken machst, wirst Du in einer Debatte überzeugen.
+    <Choose id="2.1">
+      <option value="">–– Wähle ein Thema ––</option>
+      <option>Keine Tempolimite mehr auf der Autobahn 🏎</option>
+      <option>Auch Ausländer sollen abstimmen dürfen 🗳</option>
+      <option>Fleisch essen gehört verboten 🥩</option>
+    </Choose>
+    <Textfield
+      id="2.2"
+      lines={3}
+      placeholder="Das ist eine Gute Idee, weil..."
+    />
+    <Textfield id="2.3" lines={3} placeholder="Das ist schlechte Idee, weil..." />
+  </Question>
+</Quest>

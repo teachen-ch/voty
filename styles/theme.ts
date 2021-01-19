@@ -299,7 +299,7 @@ export default {
     mt: [0, 0, 1],
     mb: [3, 2, 1],
     "::placeholder": {
-      color: "#fff",
+      color: "#ccc",
       opacity: 1,
     },
     ":focus": {
