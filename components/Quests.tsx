@@ -1,14 +1,18 @@
 import { Label, Radio, Textarea, TextareaProps } from "@rebass/forms";
-import { useContext, useMemo, useState } from "react";
+import { useContext, useEffect, useMemo, useState } from "react";
 import { BoxProps, Button, Text, Flex, Box } from "rebass";
 import { CardContext } from "./Cards";
 import React from "react";
 import { Authors, usePostWork, WorkCard, Works, WorkItem } from "./Works";
 import { UserWhereUniqueInput } from "graphql/types";
-import { cloneDeep } from "lodash";
+import { cloneDeep, shuffle } from "lodash";
 import { Info } from "./Info";
 import { Err } from "./Page";
 import { CircleBullet } from "./Learning";
+import { Table, TD, TDIcon, TR } from "./Table";
+import DraggableList from "react-draggable-list";
+import IconMove from "../public/images/icon_move.svg";
+import IconCheck from "../public/images/icon_check.svg";
 
 export { Text };
 
@@ -89,7 +93,7 @@ const QuestWork: WorkItem = ({ work }) => {
       }}
     >
       <WorkCard>
-        <Box my={-4}>{children}</Box>
+        <Box mt={-4}>{children}</Box>
       </WorkCard>
     </QuestContext.Provider>
   );
@@ -206,3 +210,100 @@ export const Choice: React.FC<{
     </Label>
   );
 };
+
+interface OrderItemType {
+  text: string;
+}
+interface OrderItemProps {
+  item: OrderItemType;
+  itemSelected: number;
+  dragHandleProps: Record<string, any>;
+  commonProps: { readOnly?: boolean; correct: boolean };
+}
+
+export const Order: React.FC<AnswerProps & { items: string[] }> = ({
+  items,
+  id,
+}) => {
+  const { answers, setAnswer, readOnly } = useContext(QuestContext);
+  const [current, setCurrent] = useState<readonly OrderItemType[]>([]);
+  const [correct, setCorrect] = useState(false);
+
+  // initial shuffle of the answers
+  useEffect(() => {
+    if (answers && answers[id]) {
+      checkCorrect(answers[id]);
+      setCurrent(answers[id]);
+    } else {
+      setCurrent(
+        shuffle(items).map((text) => {
+          return { text };
+        })
+      );
+    }
+  }, [items, answers]);
+
+  if (!id) return <Err msg="<Order/> ohne id" />;
+  if (answers === undefined)
+    return <Err msg="<Order/> used outside of <Quest>...</Quest>" />;
+
+  function doAnswer(answer: readonly OrderItemType[]) {
+    setAnswer(id, answer);
+    setCurrent(answer);
+    checkCorrect(answer);
+  }
+
+  function checkCorrect(answer: readonly OrderItemType[]) {
+    if (answer.map((item) => item.text).join(",") === items.join(",")) {
+      setCorrect(true);
+      console.log("Correct");
+    }
+  }
+
+  return (
+    <Table mb={4} bg={correct ? "rgba(0,250,0,0.3)" : "inherit"}>
+      <DraggableList<
+        OrderItemType,
+        { readOnly?: boolean; correct: boolean },
+        OrderItem
+      >
+        list={current}
+        itemKey="text"
+        padding={0}
+        constrainDrag={true}
+        onMoveEnd={doAnswer}
+        template={OrderItem}
+        commonProps={{ readOnly, correct }}
+      />
+    </Table>
+  );
+};
+
+class OrderItem extends React.Component<OrderItemProps> {
+  state = {
+    over: false,
+  };
+
+  render() {
+    const { item, dragHandleProps, commonProps } = this.props;
+    const { readOnly, correct } = commonProps;
+    return (
+      <TR
+        onMouseOver={() => this.setState({ over: true })}
+        onMouseOut={() => this.setState({ over: false })}
+      >
+        {!(readOnly || correct) && (
+          <TDIcon {...dragHandleProps} sx={{ cursor: "grab" }}>
+            <IconMove />
+          </TDIcon>
+        )}
+        {correct && (
+          <TDIcon>
+            <IconCheck />
+          </TDIcon>
+        )}
+        <TD flexy>{item.text}</TD>
+      </TR>
+    );
+  }
+}
