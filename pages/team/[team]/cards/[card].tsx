@@ -54,7 +54,7 @@ export default function CardPage(): React.ReactElement {
       <HideFeature id="discussions">
         {meta.discussion !== false && <Discussion card={key} />}
       </HideFeature>
-      <FeedbackText />
+      <FeedbackText card={key} />
     </LoggedInPage>
   );
 }

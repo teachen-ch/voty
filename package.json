@@ -58,6 +58,7 @@
     "react-draggable-list": "^4.0.3",
     "react-markdown": "^5.0.3",
     "react-minimal-pie-chart": "^8.0.1",
+    "react-new-window": "^0.1.2",
     "react-player": "^2.6.0",
     "rebass": "^4.0.7",
     "recoil": "^0.1.2",

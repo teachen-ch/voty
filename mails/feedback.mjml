@@ -21,6 +21,9 @@
         <mj-text font-size="20px" color="#aaa">
           Anfrage: {{type}}
         </mj-text>
+        <mj-text font-size="20px" color="#aaa">
+          Inhalt: {{card}} {{quest}}
+        </mj-text>
         <mj-text font-size="24px" font-weight="bold" color="#aaa">
           {{title}}
         </mj-text>

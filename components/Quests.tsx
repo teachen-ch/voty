@@ -20,6 +20,7 @@ import { Table, TD, TDIcon, TR } from "./Table";
 import DraggableList from "react-draggable-list";
 import IconMove from "../public/images/icon_move.svg";
 import IconCheck from "../public/images/icon_check.svg";
+import { FeedbackText } from "./Feedback";
 
 export { Text };
 
@@ -111,17 +112,34 @@ export const Question: React.FC<BoxProps & { ix?: string }> = ({
   children,
   ...props
 }) => {
-  const allChildren = React.Children.toArray(children);
-  const first = allChildren.shift();
+  const otherChildren = React.Children.toArray(children);
+  const first = otherChildren.shift();
+  const [hint, setHint] = useState(false);
   return (
     <Box mt={4} {...props}>
       <Flex mb={2}>
         {ix && <CircleBullet value={ix} mr={3} />}
-        <Box flex={1}>
+        <Box
+          flex={1}
+          onMouseOver={() => setHint(true)}
+          onMouseOut={() => setHint(false)}
+        >
           <Box mt={1} mb={3}>
             {first}
           </Box>
-          {allChildren}
+
+          <FeedbackText
+            sx={{
+              position: "absolute",
+              visibility: hint ? "inherit" : "hidden",
+              right: "32px",
+            }}
+            text="Frage unklar?"
+            quest={`Frage ${ix}`}
+            mt={-24}
+            textAlign="right"
+          />
+          {otherChildren}
         </Box>
       </Flex>
     </Box>

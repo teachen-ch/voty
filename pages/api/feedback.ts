@@ -15,8 +15,8 @@ export default async (
   try {
     const user = getSessionUser(req) || { name: "Anon", email: feedbackEmail };
     const fields = JSON.parse(req.body) as Record<string, string>;
-    const { card, title, text, type } = fields;
-    const data = { card, title, text, type, user };
+    const { card, title, text, type, quest } = fields;
+    const data = { card, title, text, type, user, quest };
 
     await sendMail({
       to: String(user.email),

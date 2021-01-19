@@ -25,7 +25,7 @@ export default function CardPagePublic(): React.ReactElement {
         <Here>{meta.title}</Here>
       </Breadcrumb>
       <Card id={key} />
-      <FeedbackText />
+      <FeedbackText card={key} />
     </Page>
   );
 }
