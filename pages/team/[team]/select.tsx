@@ -1,7 +1,7 @@
-import { H3, LoggedInPage } from "components/Page";
+import { H2, H3, LoggedInPage, ShowFor } from "components/Page";
 import { Cards, CardListSelect } from "components/Cards";
 import { Input } from "@rebass/forms";
-import { Flex, Button, Text } from "rebass";
+import { Flex, Button, Text, Box } from "rebass";
 import React, { useState } from "react";
 import { useRouter } from "next/router";
 import { A, Breadcrumb, Here } from "components/Breadcrumb";
@@ -9,8 +9,10 @@ import { debounce } from "lodash";
 import { Filter } from "components/Swissvotes";
 import { useTeam } from "state/user";
 import { Role } from "graphql/types";
+import { ReadMore } from "components/ReadMore";
+import { LearningPath } from "components/LearningPaths";
 
-export default function CardsPage(): React.ReactElement {
+export default function SelectCardsPage(): React.ReactElement {
   const router = useRouter();
   const team = useTeam();
   const [keywords, setKeywords] = useState("");
@@ -38,10 +40,15 @@ export default function CardsPage(): React.ReactElement {
         <Here>Lerninhalte</Here>
       </Breadcrumb>
 
+      <ListPaths />
+
       <H3>Folgende Lerninhalte sind ausgewählt</H3>
-
       <CardListSelect teamCards={team.cards} teamId={team.id} />
-
+      <ShowFor role="Admin">
+        <Text mt={2} fontSize={1} textAlign="right">
+          <A onClick={() => alert(team.cards)}>Pfad anzeigen</A>
+        </Text>
+      </ShowFor>
       <H3 mt={5}>Weitere Lerninhalte hinzufügen</H3>
       <Flex>
         <Input
@@ -69,7 +76,6 @@ export default function CardsPage(): React.ReactElement {
         <Filter set={setType} v={type} val={"video"} label="Videos" sep />
         <Filter set={setType} v={type} val={"chaty"} label="Chaty" />
       </Text>
-
       <Cards
         keywords={keywords}
         type={type}
@@ -81,3 +87,27 @@ export default function CardsPage(): React.ReactElement {
     </LoggedInPage>
   );
 }
+
+export const ListPaths: React.FC = () => (
+  <Box mt={4}>
+    <Text fontSize={2} mb={3}>
+      Wähle entweder einen vorgeschlagenen Lernpfad für Deine Klasse oder stelle
+      die Inhalte frei zusammen.
+    </Text>
+    <ReadMore
+      title="Lernpfad Sek-1 (8-12 Lektionen)"
+      bg="darkgray"
+      fontSize={2}
+    >
+      <LearningPath path="srf_abstimmen passion srf_regieren srf_wahlen chaty_initiativen chaty_referendum swissvotes_themen plakate plakat_gestalten tweety" />
+    </ReadMore>
+    <Box mt={3} />
+    <ReadMore
+      title="Lernpfad Berufsschule (12-16 Lektionen)"
+      bg="darkgray"
+      fontSize={2}
+    >
+      <LearningPath path="srf_abstimmen passion srf_regieren srf_wahlen chaty_initiativen chaty_referendum swissvotes_themen plakate plakat_gestalten tweety" />
+    </ReadMore>
+  </Box>
+);

@@ -33,8 +33,9 @@ export const Table: React.FC<BoxProps> = ({
   );
 };
 
-export const TR: React.FC<FlexProps & { href?: string }> = ({
+export const TR: React.FC<FlexProps & { href?: string; noHover?: boolean }> = ({
   href,
+  noHover,
   ...props
 }) => {
   const router = useRouter();
@@ -49,10 +50,12 @@ export const TR: React.FC<FlexProps & { href?: string }> = ({
       sx={{
         borderBottom: "1px solid",
         borderColor: "trColor",
-        ":hover": {
-          bg: "primary",
-          color: "#fff",
-        },
+        ":hover": noHover
+          ? undefined
+          : {
+              bg: "primary",
+              color: "#fff",
+            },
         cursor: href ? "pointer" : "inherit",
       }}
       {...props}

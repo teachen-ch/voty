@@ -1,15 +1,10 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Generator: Adobe Illustrator 24.3.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
-<svg version="1.1" id="Ebene_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 viewBox="0 0 31 31" style="enable-background:new 0 0 31 31;" xml:space="preserve">
-<style type="text/css">
-	.st0{fill:#FFFFFF;}
-</style>
-<g>
-	<g>
-		<polygon class="st0" points="11.5,30.5 11.5,19.5 0.5,19.5 0.5,11.5 11.5,11.5 11.5,0.5 19.5,0.5 19.5,11.5 30.5,11.5 30.5,19.5 
-			19.5,19.5 19.5,30.5 		"/>
-		<path class="st0" d="M19,1v10v1h1h10v7H20h-1v1v10h-7V20v-1h-1H1v-7h10h1v-1V1H19 M20,0h-9v11H0v9h11v11h9V20h11v-9H20V0L20,0z"/>
-	</g>
-</g>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="40px" height="40px" viewBox="0 0 40 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>icon_plus</title>
+    <g id="icon_plus" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g id="icon-LogIn" transform="translate(9.000000, 9.000000)" stroke="currentColor" stroke-width="2.65151515">
+            <line x1="10.709596" y1="0.916666667" x2="10.709596" y2="21.9166667" id="Path"></line>
+            <line x1="21" y1="11.5" x2="0" y2="11.5" id="Path"></line>
+        </g>
+    </g>
 </svg>

@@ -213,3 +213,15 @@ export const H3: React.FC<HeadingProps> = (props) => (
     {props.children}
   </Heading>
 );
+
+export const ShowFor: React.FC<{ role: Role | string }> = ({
+  role,
+  children,
+}) => {
+  const user = useUser();
+  if (user?.role == role || user?.role == Role.Admin) {
+    return <>{children}</>;
+  } else {
+    return null;
+  }
+};

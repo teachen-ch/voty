@@ -1,6 +1,7 @@
 import { FieldResolver } from "@nexus/schema";
 import { Card } from "graphql/types";
 import * as cardsData from "content/";
+import { Role } from "@prisma/client";
 
 export const cards: FieldResolver<"Query", "cards"> = (_root, args) => {
   let { keywords } = args;
@@ -36,7 +37,8 @@ export const setCards: FieldResolver<"Mutation", "setCards"> = async (
 ) => {
   const { teamId, cards } = args;
   const team = await ctx.db.team.findUnique({ where: { id: teamId } });
-  if (team?.teacherId !== ctx.user?.id) throw new Error("Error.NoPermission");
+  if (team?.teacherId !== ctx.user?.id && ctx.user?.role !== Role.Admin)
+    throw new Error("Error.NoPermission");
 
   const newTeam = await ctx.db.team.update({
     data: { cards },

@@ -6,29 +6,31 @@ import Minus from "../public/images/icon_minus.svg";
 
 export const ReadMore: React.FC<{
   title: string;
-  color?: string;
+  bg?: string;
   hidePlus?: boolean;
-}> = (props) => {
+  fontSize?: number | number[];
+}> = ({ title, bg = "#73899D", hidePlus, fontSize = 4, children }) => {
   const [open, setOpen] = useState(false);
-  const bg = props.color || "#73899D";
   return (
-    <Box className="readmore">
-      <Button onClick={() => setOpen(!open)} bg={bg} color="#fff" width="100%">
+    <Box className="readmore" color="white">
+      <Button onClick={() => setOpen(!open)} bg={bg} color="white" width="100%">
         <Flex
           alignItems="center"
-          justifyContent={props.hidePlus ? "center" : "left"}
+          fontSize={fontSize}
+          ml={-2}
+          color="white"
+          justifyContent={hidePlus ? "center" : "left"}
         >
-          {props.hidePlus ? (
-            ""
-          ) : open ? (
-            <Minus height="25px" style={{ marginRight: 10 }} alt="Schliessen" />
-          ) : (
-            <Plus height="25px" style={{ marginRight: 10 }} alt="Öffnen" />
-          )}
-          {props.title}
+          {!hidePlus &&
+            (open ? (
+              <Minus style={{ marginRight: 4 }} alt="Schliessen" />
+            ) : (
+              <Plus style={{ marginRight: 4 }} alt="Öffnen" />
+            ))}
+          {title}
         </Flex>
       </Button>
-      {open && props.children}
+      {open && children}
     </Box>
   );
 };
