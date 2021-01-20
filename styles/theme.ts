@@ -189,6 +189,15 @@ export default {
       strong: {
         fontWeight: "semi",
       },
+      figcaption: {
+        textAlign: "center",
+        fontSize: 1,
+        fontStyle: "italic",
+        mt: 2,
+        mb: 3,
+        mx: "auto",
+        width: "500px",
+      },
     },
   },
   text: {
