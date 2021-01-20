@@ -2,72 +2,81 @@
 // https://github.com/rebassjs/rebass/issues/755#issuecomment-587250893
 
 import { InterpolationWithTheme } from "@emotion/core";
+import {
+  BoxProps as BoxP,
+  ButtonProps as ButtonP,
+  FlexProps as FlexP,
+  LinkProps as LinkP,
+  TextProps as TextP,
+  CardProps as CardP,
+  HeadingProps as HeadingP,
+  ImageProps as ImageP,
+} from "rebass";
+import {
+  // FormProps as FormP,
+  InputProps as InputP,
+  LabelProps as LabelP,
+  TextareaProps as TextareaP,
+} from "@rebass/forms";
 
 declare module "rebass" {
-  interface FlexProps {
+  interface BoxProps extends BoxP {
     as?: React.ElementType;
     textAlign?: string | string[];
     className?: string;
     id?: string;
     fontWeight?: string;
     fontSize?: string | number | Array<string | number>;
-    css?: InterpolationWithTheme<FlexProps>;
+    css?: InterpolationWithTheme<any>;
   }
-  interface BoxProps {
-    as?: React.ElementType;
-    textAlign?: string | string[];
-    className?: string;
-    id?: string;
-    fontWeight?: string;
-    fontSize?: string | number | Array<string | number>;
-    css?: InterpolationWithTheme<BoxProps>;
-  }
-  interface TextProps {
-    as?: React.ElementType;
-    css?: InterpolationWithTheme<TextProps>;
-  }
-  interface ImageProps {
-    css?: InterpolationWithTheme<ImageProps>;
-  }
-  interface HeadingProps {
-    css?: InterpolationWithTheme<HeadingProps>;
-  }
-  interface LinkProps {
-    css?: InterpolationWithTheme<LinkProps>;
-  }
-  interface TextProps {
-    css?: InterpolationWithTheme<TextProps>;
-  }
-  interface TextAreaProps {
-    css?: InterpolationWithTheme<TextAreaProps>;
-  }
-  interface ButtonProps {
+  interface ButtonProps extends ButtonP {
     as?: React.ElementType;
     textAlign?: string;
-    css?: InterpolationWithTheme<ButtonProps>;
+    css?: InterpolationWithTheme<any>;
   }
-  interface CardProps {
+  interface FlexProps extends FlexP {
+    as?: React.ElementType;
+    textAlign?: string | string[];
+    className?: string;
+    id?: string;
+    fontWeight?: string;
+    fontSize?: string | number | Array<string | number>;
+    css?: InterpolationWithTheme<any>;
+  }
+  interface CardProps extends CardP {
     as?: React.ElementType;
     className?: string;
     id?: string;
-    css?: InterpolationWithTheme<BoxProps>;
+    css?: InterpolationWithTheme<any>;
   }
-}
-
-declare module "react" {
-  // TODO: not sure if I need to import T here
-  // eslint-disable-next-line
-  interface DOMAttributes<T> {
+  interface LinkProps extends LinkP {
+    css?: InterpolationWithTheme<any>;
+  }
+  interface TextProps extends TextP {
+    as?: React.ElementType;
+    css?: InterpolationWithTheme<any>;
+  }
+  interface HeadingProps extends HeadingP {
+    as?: React.ElementType;
+    css?: InterpolationWithTheme<any>;
+  }
+  interface ImageProps extends ImageP {
     css?: InterpolationWithTheme<any>;
   }
 }
 
-// TODO: Not sure how to fix this linting error
-declare global {
-  // eslint-disable-next-line
-  namespace JSX {
-    interface IntrinsicAttributes {
-      css?: InterpolationWithTheme<any>;
-    }
+/* Required only if @rebass/forms is used */
+declare module "@rebass/forms" {
+  /* interface FormProps extends FormP {
+    css?: InterpolationWithTheme<any>;
+  } */
+  interface InputProps extends InputP {
+    css?: InterpolationWithTheme<any>;
+  }
+  interface LabelProps extends LabelP {
+    css?: InterpolationWithTheme<any>;
+  }
+  interface TextareaProps extends TextareaP {
+    css?: InterpolationWithTheme<any>;
   }
 }
