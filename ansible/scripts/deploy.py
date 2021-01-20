@@ -15,6 +15,8 @@ import select
 import time
 import logging
 
+deployEnv = "dev"
+
 
 def initLogger():
     # color hack
@@ -48,10 +50,12 @@ def exec(cmd):
 
 
 def wait(min):
+    global deployEnv
     log.debug("Waiting for %d minutes... " % min)
     print("\t\tabort with: c < enter > to cancel")
     print("\t\t   or with: g < enter > to start deploy")
-    print("[c|g] > ")
+    print("\t\t   or with: p < enter > concurrently deploy to prod/dev")
+    print("[c|g|p] > ")
     i, _, _ = select.select([sys.stdin], [], [], min * 60)
     if (i):
         char = sys.stdin.readline().strip().lower()
@@ -60,6 +64,9 @@ def wait(min):
             sys.exit(0)
         elif (char == "g"):
             log.error("Starting deployment now")
+        elif (char == "p"):
+            deployEnv = "parallel"
+            log.error("Starting deploy to PROD and DEV concurrently")
         else:
             log.error("'%s' is not a valid answer" % char)
             wait(min)
@@ -76,10 +83,16 @@ if commitMessage:
 
 exec("git push")
 wait(10)
-exec("yarn run deploy:dev")
+if (deployEnv == "parallel"):
+    exec("npx concurrently yarn:deploy:dev yarn:deploy:prod")
+else:
+    exec("yarn run deploy:dev")
+
 took = round((time.time() - start)/60, 1)
-log.info("✅ Successfully deployed to dev in %.1f minutes" % took)
-yesno = input("Would you like to push to production as well? (y/N) ")
-if (yesno.lower() == "y"):
-    exec("yarn run deploy_prod")
-    log.info("🎉 Successfully deployed to prod")
+log.info("✅ Successfully deployed to %s in %.1f minutes" % (deployEnv, took))
+
+if (deployEnv == "dev"):
+    yesno = input("Would you like to push to production as well? (y/N) ")
+    if (yesno.lower() == "y"):
+        exec("yarn run deploy_prod")
+        log.info("🎉 Successfully deployed to prod")
