@@ -55,7 +55,7 @@ export default function Projekt(): React.ReactElement {
             </Text>
           </Detail>
         </Text>
-        <Text mt={4}>
+        <Text mt={4} id="module3">
           <strong>
             <A href="/abstimmung" variant="underline">
               Modul «Demokratie testen»

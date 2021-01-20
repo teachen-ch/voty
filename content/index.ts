@@ -5,6 +5,8 @@ export * as plakate from "content/tools/plakate.mdx";
 export * as plakat_gestalten from "content/tools/plakat_gestalten.mdx";
 export * as lernfilm from "content/tools/lernfilm.mdx";
 export * as tweety from "content/tools/tweety.mdx";
+export * as demokratie_international from "content/tools/demokratie_international.mdx";
+export * as parteien from "content/tools/parteien.mdx";
 
 export * as chaty_demokratie_griechenland from "content/chaty/chaty_demokratie_griechenland.mdx";
 export * as chaty_demokratie_intro from "content/chaty/chaty_demokratie_intro.mdx";
@@ -18,10 +20,10 @@ export * as srf_abstimmen from "content/videos/srf_abstimmen.mdx";
 export * as srf_regieren from "content/videos/srf_regieren.mdx";
 export * as srf_wahlen from "content/videos/srf_wahlen.mdx";
 export * as srf_debattieren from "content/videos/srf_debattieren.mdx";
+export * as srf_populismus from "content/videos/srf_populismus.mdx";
 
 export * as srf_drei_gewalten from "content/videos/srf_drei_gewalten.mdx";
 export * as srf_foederalismus from "content/videos/srf_foederalismus.mdx";
 export * as srf_mitbestimmen from "content/videos/srf_mitbestimmen.mdx";
 export * as srf_usa_parteien from "content/videos/srf_usa_parteien.mdx";
 export * as srf_erstes_mal_waehlen from "content/videos/srf_erstes_mal_waehlen.mdx";
-export * as srf_populismus from "content/videos/srf_populismus.mdx";

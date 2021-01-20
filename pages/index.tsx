@@ -9,6 +9,7 @@ import Link from "next/link";
 import { useRef } from "react";
 import { A } from "components/Breadcrumb";
 import { useColorMode } from "theme-ui";
+import { useRouter } from "next/router";
 
 export default function Home(): React.ReactElement {
   const [colorMode] = useColorMode();
@@ -37,6 +38,7 @@ export default function Home(): React.ReactElement {
         />
         <Flex flexDirection="row" justifyContent="center">
           <Module
+            href="/lernen"
             title="Demokratie verstehen"
             image="/images/voty_module_1_soon.svg"
           >
@@ -44,7 +46,7 @@ export default function Home(): React.ReactElement {
             wertvoll? Wir entwickeln interaktive E-Learning Tools für den
             Einsatz in der Schulklasse auf Stufe Sek-1, Gym und
             Berufs&shy;schule. <br />
-            <A href="/projekt#module">Mehr erfahren</A>
+            <A href="/lernen">Mehr erfahren</A>
           </Module>
           <Box>
             <Heading
@@ -59,7 +61,11 @@ export default function Home(): React.ReactElement {
               Demokratie an die Schule!
             </Heading>
 
-            <Module title="Demokratie testen" image="/images/voty_module_2.svg">
+            <Module
+              title="Demokratie testen"
+              image="/images/voty_module_2.svg"
+              href="/abstimmung"
+            >
               Nur Erwachsene dürfen abstimmen, aber auch Jugendliche haben eine
               Meinung! Lassen Sie ihre Klassen an den Urnen&shy;gängen vom 9.
               März mitmachen und ab&shy;stimmen. <br />
@@ -68,6 +74,7 @@ export default function Home(): React.ReactElement {
           </Box>
 
           <Module
+            href="/projekt#module3"
             title="Demokratie erleben"
             image="/images/voty_module_3_soon.svg"
           >
@@ -75,7 +82,7 @@ export default function Home(): React.ReactElement {
             Schü&shy;ler mit&shy;reden und Vor&shy;schläge einbringen? Wir
             möchten gemeinsam testen, wie wir Demo&shy;kratie in
             Schul&shy;häuser bringen können.{" "}
-            <A href="/projekt#module">Mehr erfahren</A>
+            <A href="/projekt#module3">Mehr erfahren</A>
           </Module>
         </Flex>
 
@@ -138,11 +145,15 @@ export default function Home(): React.ReactElement {
   );
 }
 
-const Module: React.FC<{ title: string; image: string }> = (props) => {
+const Module: React.FC<{ title: string; image: string; href: string }> = (
+  props
+) => {
   const img = useRef<HTMLImageElement>(null);
+  const router = useRouter();
   return (
     <Box
       mx={4}
+      onClick={() => router.push(props.href)}
       sx={{ display: ["none", "none", "block", "block"], cursor: "pointer" }}
     >
       <Flex alignItems="center" flexDirection="column">
