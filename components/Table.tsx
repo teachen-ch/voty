@@ -98,7 +98,6 @@ export const TDImage: React.FC<
     <Image
       alignSelf="center"
       mx={2}
-      css={{}}
       display={smHide ? ["none", "none", "block"] : "block"}
       sx={{ flexShrink: 0, filter: dark || light ? "invert(100)" : "none" }}
       {...props}
