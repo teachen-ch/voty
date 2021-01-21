@@ -56,6 +56,7 @@ const messages: Translations = {
     LegalText:
       "Wenn Du uns Deinen Jahrgang und Dein Geschlecht mitteilst, können wir bessere Hochrechnungen erstellen und die Meinung der Jugend in der Schweiz repräsentieren. Du darfst aber auch «möchte ich nicht angeben» auswählen. ",
   },
+  "Not Authorised!": "Berechtigung fehlt!",
 };
 
 const matchNestedCode = new RegExp(/^\w+\.[\w.]+$/);

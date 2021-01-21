@@ -7,7 +7,6 @@ import { Table, TD, TDIcon, TDImage, TR } from "./Table";
 import { useState } from "react";
 import { A } from "./Breadcrumb";
 import IconWatch from "../public/images/icon_watch.svg";
-import IconPreview from "../public/images/icon_preview.svg";
 import { upperFirst } from "lodash";
 
 export const LearningPath: React.FC<{ path: string }> = ({ path }) => {
@@ -15,7 +14,7 @@ export const LearningPath: React.FC<{ path: string }> = ({ path }) => {
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState("");
   const [doSetCards, mutation] = useSetCardsMutation({
-    onCompleted(data) {
+    onCompleted() {
       // TODO: can we update the apollo team cache
       setSuccess(true);
     },
@@ -43,34 +42,31 @@ export const LearningPath: React.FC<{ path: string }> = ({ path }) => {
           const card = getCardMeta(id);
           if (!card) return <Err msg={`Inhalt «${id}» wurde nicht gefunden`} />;
           return (
-            <>
-              <TR
-                noHover
-                key={id}
-                onMouseOver={() => setDetails(true)}
-                height={details ? "60px" : "40px"}
-                onMouseOut={() => setDetails(true)}
-              >
-                <TD flexy>
-                  <A href={`${teamLink}/cards/${card.id}`} variant="link">
-                    {card.title}
-                  </A>
-                  {details && (
-                    <Text fontSize={1} overflow="show" wrap="wrap">
-                      {upperFirst(String(card.type))}: {card.description}
-                    </Text>
-                  )}
-                </TD>
-                <TDIcon mr={0}>
-                  <IconWatch />
-                </TDIcon>
-                <TD width="130px" fixed smHide>
-                  {card?.duration}
-                </TD>
-                <TDImage src={getCardTypeIcon(card?.type)} />
-              </TR>
-              {details && null}
-            </>
+            <TR
+              noHover
+              key={id}
+              onMouseOver={() => setDetails(true)}
+              height={details ? "60px" : "40px"}
+              onMouseOut={() => setDetails(true)}
+            >
+              <TD flexy>
+                <A href={`${teamLink}/cards/${card.id}`} variant="link">
+                  {card.title}
+                </A>
+                {details && (
+                  <Text fontSize={1} overflow="show" wrap="wrap">
+                    {upperFirst(String(card.type))}: {card.description}
+                  </Text>
+                )}
+              </TD>
+              <TDIcon mr={0}>
+                <IconWatch />
+              </TDIcon>
+              <TD width="130px" fixed smHide>
+                {card?.duration}
+              </TD>
+              <TDImage src={getCardTypeIcon(card?.type)} />
+            </TR>
           );
         })}
       </Table>

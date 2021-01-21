@@ -220,7 +220,7 @@ export const StudentCardList: React.FC<{
   );
 };
 
-export const CardListAdmin: React.FC<{
+export const TeacherCardList: React.FC<{
   teamCards: string;
   teamId: string;
 }> = ({ teamCards, teamId }) => {
@@ -261,10 +261,10 @@ interface CardAdminProps {
   item: CardAdminType;
   itemSelected: number;
   dragHandleProps: Record<string, any>;
-  commonProps: (id: string) => void;
+  commonProps: { doDelete: (id: string) => void };
 }
 
-export const CardListSelect: React.FC<{
+export const EditCardList: React.FC<{
   teamCards: string;
   teamId: string;
 }> = ({ teamCards, teamId }) => {
@@ -307,13 +307,17 @@ export const CardListSelect: React.FC<{
 
   return (
     <Table>
-      <DraggableList<CardAdminType, (id: string) => void, CardAdminItem>
+      <DraggableList<
+        CardAdminType,
+        { doDelete: (id: string) => void },
+        CardAdminItem
+      >
         list={cards}
         itemKey="id"
         padding={0}
         onMoveEnd={onMoveEnd}
         template={CardAdminItem}
-        commonProps={doDelete}
+        commonProps={{ doDelete }}
       />
     </Table>
   );
@@ -350,7 +354,7 @@ class CardAdminItem extends React.Component<CardAdminProps> {
           {item?.duration}
         </TD>
         <TDIcon>
-          <IconTrash onClick={() => this.props.commonProps(item.id)} />
+          <IconTrash onClick={() => this.props.commonProps.doDelete(item.id)} />
         </TDIcon>
       </TR>
     );
