@@ -9,6 +9,7 @@ import {
   PostWorkMutation,
   Scalars,
   Visibility,
+  TeamUserFieldsFragment,
 } from "graphql/types";
 import { AttachmentFields } from "components/Uploader";
 import { Flex, Text, FlexProps, Box, BoxProps } from "rebass";
@@ -103,25 +104,17 @@ export const Works: React.FC<
           <Box key={work.id} mt={2} id={work.id}>
             <Flex
               bg="darkgray"
-              py={2}
-              px={3}
+              p={1}
               alignItems="center"
+              sx={{ borderRadius: "5px" }}
               onClick={() => setActive(active === work.id ? "" : work.id)}
             >
               {active === work.id ? (
-                <IconMinus
-                  height="15px"
-                  style={{ marginRight: 15 }}
-                  alt="Schliessen"
-                />
+                <IconMinus style={{ marginRight: 4 }} alt="Schliessen" />
               ) : (
-                <IconPlus
-                  height="15px"
-                  style={{ marginRight: 15 }}
-                  alt="Öffnen"
-                />
+                <IconPlus style={{ marginRight: 4 }} alt="Öffnen" />
               )}
-              <Text sx={{ cursor: "pointer" }} fontSize={[1, 1, 2, 3]}>
+              <Text sx={{ cursor: "pointer" }} fontSize={[1, 1, 2]}>
                 <b>{work.users?.map((u) => u.shortname).join(", ")}:</b> «
                 {truncate(work.title, { length: 35 }) || "ohne Titel"}»
                 <Text ml={3} variant="inline" fontSize={1}>
@@ -368,4 +361,50 @@ export const Authors: React.FC<
       </Flex>
     </Box>
   );
+};
+
+enum AllowGroups {
+  Yes = "",
+  No = "no",
+}
+
+export function allowGroups(
+  team: TeamUserFieldsFragment,
+  card: string,
+  defaultValue = AllowGroups.Yes
+): AllowGroups {
+  if (team.prefs["allowGroups"] !== undefined)
+    return team.prefs["allowGroups"] as AllowGroups;
+  else if (team.prefs[`allowGroups_${card}`] !== undefined)
+    return team.prefs[`allowGroups_${card}`] as AllowGroups;
+  else return defaultValue;
+}
+
+export const AllowGroupText: Record<AllowGroups, string> = {
+  [AllowGroups.Yes]: "Gruppenarbeiten sind nicht erlaubt",
+  [AllowGroups.No]: "Gruppenarbeiten sind erlaubt",
+};
+
+enum ShowWorks {
+  Always = "",
+  After = "after",
+  Never = "never",
+}
+
+export function showWorks(
+  team: TeamUserFieldsFragment,
+  card: string,
+  defaultValue = ShowWorks.Always
+): ShowWorks {
+  if (team.prefs["showWorks"] !== undefined)
+    return team.prefs["showWorks"] as ShowWorks;
+  else if (team.prefs[`showWorks_${card}`] !== undefined)
+    return team.prefs[`showWorks_${card}`] as ShowWorks;
+  else return defaultValue;
+}
+
+export const ShowWorkText: Record<ShowWorks, string> = {
+  [ShowWorks.Always]: "Arbeiten werden sofort der Klasse angezeigt",
+  [ShowWorks.After]: "Arbeiten werden erst nach eigener Eingabe angezeigt",
+  [ShowWorks.Never]: "Arbeiten werden der Klasse nicht angezeigt",
 };

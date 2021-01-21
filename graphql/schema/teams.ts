@@ -4,6 +4,7 @@ import {
   list,
   nonNull,
   objectType,
+  arg,
   stringArg,
 } from "@nexus/schema";
 import { randomBytes } from "crypto";
@@ -16,6 +17,7 @@ export const Team = objectType({
     t.model.name();
     t.model.invite();
     t.model.code();
+    t.model.prefs();
     t.model.domain();
     t.model.school();
     t.model.teacher();
@@ -52,6 +54,14 @@ export const TeamsMutations = extendType({
         emails: nonNull(list(nonNull(stringArg()))),
       },
       resolve: resolvers.teams.inviteStudents,
+    });
+    t.field("setPrefs", {
+      type: "Team",
+      args: {
+        teamId: nonNull(stringArg()),
+        prefs: nonNull(arg({ type: "Json" })),
+      },
+      resolve: resolvers.teams.setPrefs,
     });
   },
 });

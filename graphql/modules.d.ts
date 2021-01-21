@@ -94,6 +94,7 @@ export const teamTeacher: DocumentNode;
 export const teamByInvite: DocumentNode;
 export const teamByCode: DocumentNode;
 export const createOneTeam: DocumentNode;
+export const setPrefs: DocumentNode;
 
   export default defaultDocument;
 }

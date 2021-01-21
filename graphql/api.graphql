@@ -2851,6 +2851,7 @@ type Mutation {
   postWork(data: WorkCreateInput!): Work!
   removeBallotRun(ballotRunId: String!): Response
   setCards(cards: String!, teamId: String!): Team
+  setPrefs(prefs: Json!, teamId: String!): Team
   setSchool(school: String!): User
   startBallotRun(ballotRunId: String!): BallotRun
   updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
@@ -4278,6 +4279,7 @@ type Team {
     last: Int
   ): [User!]!
   name: String!
+  prefs: Json!
   school: School!
   teacher: User!
 }
@@ -4293,6 +4295,7 @@ input TeamCreateInput {
   id: String
   members: UserCreateManyWithoutTeamInput
   name: String!
+  prefs: Json
   school: SchoolCreateOneWithoutTeamsInput!
   teacher: UserCreateOneWithoutTeachesInput!
   User: UserCreateManyWithoutTeamInput
@@ -4457,6 +4460,7 @@ input TeamCreateWithoutActivityInput {
   invite: String
   members: UserCreateManyWithoutTeamInput
   name: String!
+  prefs: Json
   school: SchoolCreateOneWithoutTeamsInput!
   teacher: UserCreateOneWithoutTeachesInput!
   User: UserCreateManyWithoutTeamInput
@@ -4478,6 +4482,7 @@ input TeamCreateWithoutAttachmentInput {
   invite: String
   members: UserCreateManyWithoutTeamInput
   name: String!
+  prefs: Json
   school: SchoolCreateOneWithoutTeamsInput!
   teacher: UserCreateOneWithoutTeachesInput!
   User: UserCreateManyWithoutTeamInput
@@ -4499,6 +4504,7 @@ input TeamCreateWithoutBallotRunsInput {
   invite: String
   members: UserCreateManyWithoutTeamInput
   name: String!
+  prefs: Json
   school: SchoolCreateOneWithoutTeamsInput!
   teacher: UserCreateOneWithoutTeachesInput!
   User: UserCreateManyWithoutTeamInput
@@ -4520,6 +4526,7 @@ input TeamCreateWithoutBallotsInput {
   invite: String
   members: UserCreateManyWithoutTeamInput
   name: String!
+  prefs: Json
   school: SchoolCreateOneWithoutTeamsInput!
   teacher: UserCreateOneWithoutTeachesInput!
   User: UserCreateManyWithoutTeamInput
@@ -4541,6 +4548,7 @@ input TeamCreateWithoutDiscussionInput {
   invite: String
   members: UserCreateManyWithoutTeamInput
   name: String!
+  prefs: Json
   school: SchoolCreateOneWithoutTeamsInput!
   teacher: UserCreateOneWithoutTeachesInput!
   User: UserCreateManyWithoutTeamInput
@@ -4562,6 +4570,7 @@ input TeamCreateWithoutDomainInput {
   invite: String
   members: UserCreateManyWithoutTeamInput
   name: String!
+  prefs: Json
   school: SchoolCreateOneWithoutTeamsInput!
   teacher: UserCreateOneWithoutTeachesInput!
   User: UserCreateManyWithoutTeamInput
@@ -4583,6 +4592,7 @@ input TeamCreateWithoutMembersInput {
   id: String
   invite: String
   name: String!
+  prefs: Json
   school: SchoolCreateOneWithoutTeamsInput!
   teacher: UserCreateOneWithoutTeachesInput!
   User: UserCreateManyWithoutTeamInput
@@ -4605,6 +4615,7 @@ input TeamCreateWithoutSchoolInput {
   invite: String
   members: UserCreateManyWithoutTeamInput
   name: String!
+  prefs: Json
   teacher: UserCreateOneWithoutTeachesInput!
   User: UserCreateManyWithoutTeamInput
   Vote: VoteCreateManyWithoutTeamInput
@@ -4626,6 +4637,7 @@ input TeamCreateWithoutTeacherInput {
   invite: String
   members: UserCreateManyWithoutTeamInput
   name: String!
+  prefs: Json
   school: SchoolCreateOneWithoutTeamsInput!
   User: UserCreateManyWithoutTeamInput
   Vote: VoteCreateManyWithoutTeamInput
@@ -4647,6 +4659,7 @@ input TeamCreateWithoutUserInput {
   invite: String
   members: UserCreateManyWithoutTeamInput
   name: String!
+  prefs: Json
   school: SchoolCreateOneWithoutTeamsInput!
   teacher: UserCreateOneWithoutTeachesInput!
   Vote: VoteCreateManyWithoutTeamInput
@@ -4668,6 +4681,7 @@ input TeamCreateWithoutVotedInput {
   invite: String
   members: UserCreateManyWithoutTeamInput
   name: String!
+  prefs: Json
   school: SchoolCreateOneWithoutTeamsInput!
   teacher: UserCreateOneWithoutTeachesInput!
   User: UserCreateManyWithoutTeamInput
@@ -4689,6 +4703,7 @@ input TeamCreateWithoutVoteInput {
   invite: String
   members: UserCreateManyWithoutTeamInput
   name: String!
+  prefs: Json
   school: SchoolCreateOneWithoutTeamsInput!
   teacher: UserCreateOneWithoutTeachesInput!
   User: UserCreateManyWithoutTeamInput
@@ -4710,6 +4725,7 @@ input TeamCreateWithoutWorkInput {
   invite: String
   members: UserCreateManyWithoutTeamInput
   name: String!
+  prefs: Json
   school: SchoolCreateOneWithoutTeamsInput!
   teacher: UserCreateOneWithoutTeachesInput!
   User: UserCreateManyWithoutTeamInput
@@ -4731,6 +4747,7 @@ input TeamOrderByInput {
   id: SortOrder
   invite: SortOrder
   name: SortOrder
+  prefs: SortOrder
   schoolId: SortOrder
   teacherId: SortOrder
   year: SortOrder
@@ -4757,6 +4774,7 @@ input TeamUpdateManyMutationInput {
   id: StringFieldUpdateOperationsInput
   invite: NullableStringFieldUpdateOperationsInput
   name: StringFieldUpdateOperationsInput
+  prefs: Json
   year: NullableIntFieldUpdateOperationsInput
 }
 
@@ -4916,6 +4934,7 @@ input TeamUpdateWithoutActivityInput {
   invite: NullableStringFieldUpdateOperationsInput
   members: UserUpdateManyWithoutTeamInput
   name: StringFieldUpdateOperationsInput
+  prefs: Json
   school: SchoolUpdateOneRequiredWithoutTeamsInput
   teacher: UserUpdateOneRequiredWithoutTeachesInput
   User: UserUpdateManyWithoutTeamInput
@@ -4937,6 +4956,7 @@ input TeamUpdateWithoutAttachmentInput {
   invite: NullableStringFieldUpdateOperationsInput
   members: UserUpdateManyWithoutTeamInput
   name: StringFieldUpdateOperationsInput
+  prefs: Json
   school: SchoolUpdateOneRequiredWithoutTeamsInput
   teacher: UserUpdateOneRequiredWithoutTeachesInput
   User: UserUpdateManyWithoutTeamInput
@@ -4958,6 +4978,7 @@ input TeamUpdateWithoutBallotRunsInput {
   invite: NullableStringFieldUpdateOperationsInput
   members: UserUpdateManyWithoutTeamInput
   name: StringFieldUpdateOperationsInput
+  prefs: Json
   school: SchoolUpdateOneRequiredWithoutTeamsInput
   teacher: UserUpdateOneRequiredWithoutTeachesInput
   User: UserUpdateManyWithoutTeamInput
@@ -4979,6 +5000,7 @@ input TeamUpdateWithoutBallotsInput {
   invite: NullableStringFieldUpdateOperationsInput
   members: UserUpdateManyWithoutTeamInput
   name: StringFieldUpdateOperationsInput
+  prefs: Json
   school: SchoolUpdateOneRequiredWithoutTeamsInput
   teacher: UserUpdateOneRequiredWithoutTeachesInput
   User: UserUpdateManyWithoutTeamInput
@@ -5000,6 +5022,7 @@ input TeamUpdateWithoutDiscussionInput {
   invite: NullableStringFieldUpdateOperationsInput
   members: UserUpdateManyWithoutTeamInput
   name: StringFieldUpdateOperationsInput
+  prefs: Json
   school: SchoolUpdateOneRequiredWithoutTeamsInput
   teacher: UserUpdateOneRequiredWithoutTeachesInput
   User: UserUpdateManyWithoutTeamInput
@@ -5021,6 +5044,7 @@ input TeamUpdateWithoutDomainInput {
   invite: NullableStringFieldUpdateOperationsInput
   members: UserUpdateManyWithoutTeamInput
   name: StringFieldUpdateOperationsInput
+  prefs: Json
   school: SchoolUpdateOneRequiredWithoutTeamsInput
   teacher: UserUpdateOneRequiredWithoutTeachesInput
   User: UserUpdateManyWithoutTeamInput
@@ -5042,6 +5066,7 @@ input TeamUpdateWithoutMembersInput {
   id: StringFieldUpdateOperationsInput
   invite: NullableStringFieldUpdateOperationsInput
   name: StringFieldUpdateOperationsInput
+  prefs: Json
   school: SchoolUpdateOneRequiredWithoutTeamsInput
   teacher: UserUpdateOneRequiredWithoutTeachesInput
   User: UserUpdateManyWithoutTeamInput
@@ -5064,6 +5089,7 @@ input TeamUpdateWithoutSchoolInput {
   invite: NullableStringFieldUpdateOperationsInput
   members: UserUpdateManyWithoutTeamInput
   name: StringFieldUpdateOperationsInput
+  prefs: Json
   teacher: UserUpdateOneRequiredWithoutTeachesInput
   User: UserUpdateManyWithoutTeamInput
   Vote: VoteUpdateManyWithoutTeamInput
@@ -5085,6 +5111,7 @@ input TeamUpdateWithoutTeacherInput {
   invite: NullableStringFieldUpdateOperationsInput
   members: UserUpdateManyWithoutTeamInput
   name: StringFieldUpdateOperationsInput
+  prefs: Json
   school: SchoolUpdateOneRequiredWithoutTeamsInput
   User: UserUpdateManyWithoutTeamInput
   Vote: VoteUpdateManyWithoutTeamInput
@@ -5106,6 +5133,7 @@ input TeamUpdateWithoutUserInput {
   invite: NullableStringFieldUpdateOperationsInput
   members: UserUpdateManyWithoutTeamInput
   name: StringFieldUpdateOperationsInput
+  prefs: Json
   school: SchoolUpdateOneRequiredWithoutTeamsInput
   teacher: UserUpdateOneRequiredWithoutTeachesInput
   Vote: VoteUpdateManyWithoutTeamInput
@@ -5127,6 +5155,7 @@ input TeamUpdateWithoutVotedInput {
   invite: NullableStringFieldUpdateOperationsInput
   members: UserUpdateManyWithoutTeamInput
   name: StringFieldUpdateOperationsInput
+  prefs: Json
   school: SchoolUpdateOneRequiredWithoutTeamsInput
   teacher: UserUpdateOneRequiredWithoutTeachesInput
   User: UserUpdateManyWithoutTeamInput
@@ -5148,6 +5177,7 @@ input TeamUpdateWithoutVoteInput {
   invite: NullableStringFieldUpdateOperationsInput
   members: UserUpdateManyWithoutTeamInput
   name: StringFieldUpdateOperationsInput
+  prefs: Json
   school: SchoolUpdateOneRequiredWithoutTeamsInput
   teacher: UserUpdateOneRequiredWithoutTeachesInput
   User: UserUpdateManyWithoutTeamInput
@@ -5169,6 +5199,7 @@ input TeamUpdateWithoutWorkInput {
   invite: NullableStringFieldUpdateOperationsInput
   members: UserUpdateManyWithoutTeamInput
   name: StringFieldUpdateOperationsInput
+  prefs: Json
   school: SchoolUpdateOneRequiredWithoutTeamsInput
   teacher: UserUpdateOneRequiredWithoutTeachesInput
   User: UserUpdateManyWithoutTeamInput

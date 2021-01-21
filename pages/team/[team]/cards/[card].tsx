@@ -1,4 +1,4 @@
-import { Loading, ErrorPage, LoggedInPage } from "components/Page";
+import { Loading, ErrorPage, LoggedInPage, ShowFor } from "components/Page";
 import { Card, getCardMeta } from "components/Cards";
 import { useTeam, useUser } from "state/user";
 import { A, Breadcrumb, Here } from "components/Breadcrumb";
@@ -7,6 +7,13 @@ import { Discussion } from "components/Discussion";
 import { useQueryParam } from "util/hooks";
 import { HideFeature } from "components/HideFeature";
 import { FeedbackText } from "components/Feedback";
+import { Text } from "rebass";
+import {
+  allowGroups,
+  AllowGroupText,
+  showWorks,
+  ShowWorkText,
+} from "components/Works";
 
 export default function CardPage(): React.ReactElement {
   const user = useUser();
@@ -50,6 +57,13 @@ export default function CardPage(): React.ReactElement {
       </Breadcrumb>
 
       <Card id={key} />
+      <ShowFor role="Teacher">
+        <Text fontSize={1} fontStyle="italic" mt={4} textAlign="center">
+          {ShowWorkText[showWorks(team, key)]}
+          {". "}
+          {AllowGroupText[allowGroups(team, key)]}
+        </Text>
+      </ShowFor>
 
       <HideFeature id="discussions">
         {meta.discussion !== false && <Discussion card={key} />}

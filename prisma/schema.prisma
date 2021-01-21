@@ -75,6 +75,7 @@ model Team {
   code   String? @unique // code to allow voting for ballotRuns from this team
   year   Int? // in what year (roughly) were kids born (now - schoolyear - 5y)
   cards  String  @default("")
+  prefs  Json    @default("{}")
 
   school    School   @relation(fields: [schoolId], references: [id])
   schoolId  String   @map(name: "school_id")

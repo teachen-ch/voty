@@ -115,3 +115,17 @@ async function fetchErrors(emails: string[], db: PrismaClient, since: number) {
 function sleep(seconds: number) {
   return new Promise((resolve) => setTimeout(resolve, 1000 * seconds));
 }
+
+export const setPrefs: FieldResolver<"Mutation", "setPrefs"> = async (
+  _root,
+  args,
+  ctx
+) => {
+  const { teamId } = args;
+  const team = await ctx.db.team.update({
+    where: { id: teamId },
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+    data: { prefs: args.prefs },
+  });
+  return team;
+};

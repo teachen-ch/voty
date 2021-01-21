@@ -2866,6 +2866,7 @@ export type Mutation = {
   postWork: Work;
   removeBallotRun?: Maybe<Response>;
   setCards?: Maybe<Team>;
+  setPrefs?: Maybe<Team>;
   setSchool?: Maybe<User>;
   startBallotRun?: Maybe<BallotRun>;
   updateUser?: Maybe<User>;
@@ -2983,6 +2984,12 @@ export type MutationRemoveBallotRunArgs = {
 
 export type MutationSetCardsArgs = {
   cards: Scalars['String'];
+  teamId: Scalars['String'];
+};
+
+
+export type MutationSetPrefsArgs = {
+  prefs: Scalars['Json'];
   teamId: Scalars['String'];
 };
 
@@ -4505,6 +4512,7 @@ export type Team = {
   invite?: Maybe<Scalars['String']>;
   members: Array<User>;
   name: Scalars['String'];
+  prefs: Scalars['Json'];
   school: School;
   teacher: User;
 };
@@ -4536,6 +4544,7 @@ export type TeamCreateInput = {
   id?: Maybe<Scalars['String']>;
   members?: Maybe<UserCreateManyWithoutTeamInput>;
   name: Scalars['String'];
+  prefs?: Maybe<Scalars['Json']>;
   school: SchoolCreateOneWithoutTeamsInput;
   teacher: UserCreateOneWithoutTeachesInput;
   User?: Maybe<UserCreateManyWithoutTeamInput>;
@@ -4700,6 +4709,7 @@ export type TeamCreateWithoutActivityInput = {
   invite?: Maybe<Scalars['String']>;
   members?: Maybe<UserCreateManyWithoutTeamInput>;
   name: Scalars['String'];
+  prefs?: Maybe<Scalars['Json']>;
   school: SchoolCreateOneWithoutTeamsInput;
   teacher: UserCreateOneWithoutTeachesInput;
   User?: Maybe<UserCreateManyWithoutTeamInput>;
@@ -4721,6 +4731,7 @@ export type TeamCreateWithoutAttachmentInput = {
   invite?: Maybe<Scalars['String']>;
   members?: Maybe<UserCreateManyWithoutTeamInput>;
   name: Scalars['String'];
+  prefs?: Maybe<Scalars['Json']>;
   school: SchoolCreateOneWithoutTeamsInput;
   teacher: UserCreateOneWithoutTeachesInput;
   User?: Maybe<UserCreateManyWithoutTeamInput>;
@@ -4742,6 +4753,7 @@ export type TeamCreateWithoutBallotRunsInput = {
   invite?: Maybe<Scalars['String']>;
   members?: Maybe<UserCreateManyWithoutTeamInput>;
   name: Scalars['String'];
+  prefs?: Maybe<Scalars['Json']>;
   school: SchoolCreateOneWithoutTeamsInput;
   teacher: UserCreateOneWithoutTeachesInput;
   User?: Maybe<UserCreateManyWithoutTeamInput>;
@@ -4763,6 +4775,7 @@ export type TeamCreateWithoutBallotsInput = {
   invite?: Maybe<Scalars['String']>;
   members?: Maybe<UserCreateManyWithoutTeamInput>;
   name: Scalars['String'];
+  prefs?: Maybe<Scalars['Json']>;
   school: SchoolCreateOneWithoutTeamsInput;
   teacher: UserCreateOneWithoutTeachesInput;
   User?: Maybe<UserCreateManyWithoutTeamInput>;
@@ -4784,6 +4797,7 @@ export type TeamCreateWithoutDiscussionInput = {
   invite?: Maybe<Scalars['String']>;
   members?: Maybe<UserCreateManyWithoutTeamInput>;
   name: Scalars['String'];
+  prefs?: Maybe<Scalars['Json']>;
   school: SchoolCreateOneWithoutTeamsInput;
   teacher: UserCreateOneWithoutTeachesInput;
   User?: Maybe<UserCreateManyWithoutTeamInput>;
@@ -4805,6 +4819,7 @@ export type TeamCreateWithoutDomainInput = {
   invite?: Maybe<Scalars['String']>;
   members?: Maybe<UserCreateManyWithoutTeamInput>;
   name: Scalars['String'];
+  prefs?: Maybe<Scalars['Json']>;
   school: SchoolCreateOneWithoutTeamsInput;
   teacher: UserCreateOneWithoutTeachesInput;
   User?: Maybe<UserCreateManyWithoutTeamInput>;
@@ -4826,6 +4841,7 @@ export type TeamCreateWithoutMembersInput = {
   id?: Maybe<Scalars['String']>;
   invite?: Maybe<Scalars['String']>;
   name: Scalars['String'];
+  prefs?: Maybe<Scalars['Json']>;
   school: SchoolCreateOneWithoutTeamsInput;
   teacher: UserCreateOneWithoutTeachesInput;
   User?: Maybe<UserCreateManyWithoutTeamInput>;
@@ -4848,6 +4864,7 @@ export type TeamCreateWithoutSchoolInput = {
   invite?: Maybe<Scalars['String']>;
   members?: Maybe<UserCreateManyWithoutTeamInput>;
   name: Scalars['String'];
+  prefs?: Maybe<Scalars['Json']>;
   teacher: UserCreateOneWithoutTeachesInput;
   User?: Maybe<UserCreateManyWithoutTeamInput>;
   Vote?: Maybe<VoteCreateManyWithoutTeamInput>;
@@ -4869,6 +4886,7 @@ export type TeamCreateWithoutTeacherInput = {
   invite?: Maybe<Scalars['String']>;
   members?: Maybe<UserCreateManyWithoutTeamInput>;
   name: Scalars['String'];
+  prefs?: Maybe<Scalars['Json']>;
   school: SchoolCreateOneWithoutTeamsInput;
   User?: Maybe<UserCreateManyWithoutTeamInput>;
   Vote?: Maybe<VoteCreateManyWithoutTeamInput>;
@@ -4890,6 +4908,7 @@ export type TeamCreateWithoutUserInput = {
   invite?: Maybe<Scalars['String']>;
   members?: Maybe<UserCreateManyWithoutTeamInput>;
   name: Scalars['String'];
+  prefs?: Maybe<Scalars['Json']>;
   school: SchoolCreateOneWithoutTeamsInput;
   teacher: UserCreateOneWithoutTeachesInput;
   Vote?: Maybe<VoteCreateManyWithoutTeamInput>;
@@ -4911,6 +4930,7 @@ export type TeamCreateWithoutVotedInput = {
   invite?: Maybe<Scalars['String']>;
   members?: Maybe<UserCreateManyWithoutTeamInput>;
   name: Scalars['String'];
+  prefs?: Maybe<Scalars['Json']>;
   school: SchoolCreateOneWithoutTeamsInput;
   teacher: UserCreateOneWithoutTeachesInput;
   User?: Maybe<UserCreateManyWithoutTeamInput>;
@@ -4932,6 +4952,7 @@ export type TeamCreateWithoutVoteInput = {
   invite?: Maybe<Scalars['String']>;
   members?: Maybe<UserCreateManyWithoutTeamInput>;
   name: Scalars['String'];
+  prefs?: Maybe<Scalars['Json']>;
   school: SchoolCreateOneWithoutTeamsInput;
   teacher: UserCreateOneWithoutTeachesInput;
   User?: Maybe<UserCreateManyWithoutTeamInput>;
@@ -4953,6 +4974,7 @@ export type TeamCreateWithoutWorkInput = {
   invite?: Maybe<Scalars['String']>;
   members?: Maybe<UserCreateManyWithoutTeamInput>;
   name: Scalars['String'];
+  prefs?: Maybe<Scalars['Json']>;
   school: SchoolCreateOneWithoutTeamsInput;
   teacher: UserCreateOneWithoutTeachesInput;
   User?: Maybe<UserCreateManyWithoutTeamInput>;
@@ -4974,6 +4996,7 @@ export type TeamOrderByInput = {
   id?: Maybe<SortOrder>;
   invite?: Maybe<SortOrder>;
   name?: Maybe<SortOrder>;
+  prefs?: Maybe<SortOrder>;
   schoolId?: Maybe<SortOrder>;
   teacherId?: Maybe<SortOrder>;
   year?: Maybe<SortOrder>;
@@ -5000,6 +5023,7 @@ export type TeamUpdateManyMutationInput = {
   id?: Maybe<StringFieldUpdateOperationsInput>;
   invite?: Maybe<NullableStringFieldUpdateOperationsInput>;
   name?: Maybe<StringFieldUpdateOperationsInput>;
+  prefs?: Maybe<Scalars['Json']>;
   year?: Maybe<NullableIntFieldUpdateOperationsInput>;
 };
 
@@ -5159,6 +5183,7 @@ export type TeamUpdateWithoutActivityInput = {
   invite?: Maybe<NullableStringFieldUpdateOperationsInput>;
   members?: Maybe<UserUpdateManyWithoutTeamInput>;
   name?: Maybe<StringFieldUpdateOperationsInput>;
+  prefs?: Maybe<Scalars['Json']>;
   school?: Maybe<SchoolUpdateOneRequiredWithoutTeamsInput>;
   teacher?: Maybe<UserUpdateOneRequiredWithoutTeachesInput>;
   User?: Maybe<UserUpdateManyWithoutTeamInput>;
@@ -5180,6 +5205,7 @@ export type TeamUpdateWithoutAttachmentInput = {
   invite?: Maybe<NullableStringFieldUpdateOperationsInput>;
   members?: Maybe<UserUpdateManyWithoutTeamInput>;
   name?: Maybe<StringFieldUpdateOperationsInput>;
+  prefs?: Maybe<Scalars['Json']>;
   school?: Maybe<SchoolUpdateOneRequiredWithoutTeamsInput>;
   teacher?: Maybe<UserUpdateOneRequiredWithoutTeachesInput>;
   User?: Maybe<UserUpdateManyWithoutTeamInput>;
@@ -5201,6 +5227,7 @@ export type TeamUpdateWithoutBallotRunsInput = {
   invite?: Maybe<NullableStringFieldUpdateOperationsInput>;
   members?: Maybe<UserUpdateManyWithoutTeamInput>;
   name?: Maybe<StringFieldUpdateOperationsInput>;
+  prefs?: Maybe<Scalars['Json']>;
   school?: Maybe<SchoolUpdateOneRequiredWithoutTeamsInput>;
   teacher?: Maybe<UserUpdateOneRequiredWithoutTeachesInput>;
   User?: Maybe<UserUpdateManyWithoutTeamInput>;
@@ -5222,6 +5249,7 @@ export type TeamUpdateWithoutBallotsInput = {
   invite?: Maybe<NullableStringFieldUpdateOperationsInput>;
   members?: Maybe<UserUpdateManyWithoutTeamInput>;
   name?: Maybe<StringFieldUpdateOperationsInput>;
+  prefs?: Maybe<Scalars['Json']>;
   school?: Maybe<SchoolUpdateOneRequiredWithoutTeamsInput>;
   teacher?: Maybe<UserUpdateOneRequiredWithoutTeachesInput>;
   User?: Maybe<UserUpdateManyWithoutTeamInput>;
@@ -5243,6 +5271,7 @@ export type TeamUpdateWithoutDiscussionInput = {
   invite?: Maybe<NullableStringFieldUpdateOperationsInput>;
   members?: Maybe<UserUpdateManyWithoutTeamInput>;
   name?: Maybe<StringFieldUpdateOperationsInput>;
+  prefs?: Maybe<Scalars['Json']>;
   school?: Maybe<SchoolUpdateOneRequiredWithoutTeamsInput>;
   teacher?: Maybe<UserUpdateOneRequiredWithoutTeachesInput>;
   User?: Maybe<UserUpdateManyWithoutTeamInput>;
@@ -5264,6 +5293,7 @@ export type TeamUpdateWithoutDomainInput = {
   invite?: Maybe<NullableStringFieldUpdateOperationsInput>;
   members?: Maybe<UserUpdateManyWithoutTeamInput>;
   name?: Maybe<StringFieldUpdateOperationsInput>;
+  prefs?: Maybe<Scalars['Json']>;
   school?: Maybe<SchoolUpdateOneRequiredWithoutTeamsInput>;
   teacher?: Maybe<UserUpdateOneRequiredWithoutTeachesInput>;
   User?: Maybe<UserUpdateManyWithoutTeamInput>;
@@ -5285,6 +5315,7 @@ export type TeamUpdateWithoutMembersInput = {
   id?: Maybe<StringFieldUpdateOperationsInput>;
   invite?: Maybe<NullableStringFieldUpdateOperationsInput>;
   name?: Maybe<StringFieldUpdateOperationsInput>;
+  prefs?: Maybe<Scalars['Json']>;
   school?: Maybe<SchoolUpdateOneRequiredWithoutTeamsInput>;
   teacher?: Maybe<UserUpdateOneRequiredWithoutTeachesInput>;
   User?: Maybe<UserUpdateManyWithoutTeamInput>;
@@ -5307,6 +5338,7 @@ export type TeamUpdateWithoutSchoolInput = {
   invite?: Maybe<NullableStringFieldUpdateOperationsInput>;
   members?: Maybe<UserUpdateManyWithoutTeamInput>;
   name?: Maybe<StringFieldUpdateOperationsInput>;
+  prefs?: Maybe<Scalars['Json']>;
   teacher?: Maybe<UserUpdateOneRequiredWithoutTeachesInput>;
   User?: Maybe<UserUpdateManyWithoutTeamInput>;
   Vote?: Maybe<VoteUpdateManyWithoutTeamInput>;
@@ -5328,6 +5360,7 @@ export type TeamUpdateWithoutTeacherInput = {
   invite?: Maybe<NullableStringFieldUpdateOperationsInput>;
   members?: Maybe<UserUpdateManyWithoutTeamInput>;
   name?: Maybe<StringFieldUpdateOperationsInput>;
+  prefs?: Maybe<Scalars['Json']>;
   school?: Maybe<SchoolUpdateOneRequiredWithoutTeamsInput>;
   User?: Maybe<UserUpdateManyWithoutTeamInput>;
   Vote?: Maybe<VoteUpdateManyWithoutTeamInput>;
@@ -5349,6 +5382,7 @@ export type TeamUpdateWithoutUserInput = {
   invite?: Maybe<NullableStringFieldUpdateOperationsInput>;
   members?: Maybe<UserUpdateManyWithoutTeamInput>;
   name?: Maybe<StringFieldUpdateOperationsInput>;
+  prefs?: Maybe<Scalars['Json']>;
   school?: Maybe<SchoolUpdateOneRequiredWithoutTeamsInput>;
   teacher?: Maybe<UserUpdateOneRequiredWithoutTeachesInput>;
   Vote?: Maybe<VoteUpdateManyWithoutTeamInput>;
@@ -5370,6 +5404,7 @@ export type TeamUpdateWithoutVotedInput = {
   invite?: Maybe<NullableStringFieldUpdateOperationsInput>;
   members?: Maybe<UserUpdateManyWithoutTeamInput>;
   name?: Maybe<StringFieldUpdateOperationsInput>;
+  prefs?: Maybe<Scalars['Json']>;
   school?: Maybe<SchoolUpdateOneRequiredWithoutTeamsInput>;
   teacher?: Maybe<UserUpdateOneRequiredWithoutTeachesInput>;
   User?: Maybe<UserUpdateManyWithoutTeamInput>;
@@ -5391,6 +5426,7 @@ export type TeamUpdateWithoutVoteInput = {
   invite?: Maybe<NullableStringFieldUpdateOperationsInput>;
   members?: Maybe<UserUpdateManyWithoutTeamInput>;
   name?: Maybe<StringFieldUpdateOperationsInput>;
+  prefs?: Maybe<Scalars['Json']>;
   school?: Maybe<SchoolUpdateOneRequiredWithoutTeamsInput>;
   teacher?: Maybe<UserUpdateOneRequiredWithoutTeachesInput>;
   User?: Maybe<UserUpdateManyWithoutTeamInput>;
@@ -5412,6 +5448,7 @@ export type TeamUpdateWithoutWorkInput = {
   invite?: Maybe<NullableStringFieldUpdateOperationsInput>;
   members?: Maybe<UserUpdateManyWithoutTeamInput>;
   name?: Maybe<StringFieldUpdateOperationsInput>;
+  prefs?: Maybe<Scalars['Json']>;
   school?: Maybe<SchoolUpdateOneRequiredWithoutTeamsInput>;
   teacher?: Maybe<UserUpdateOneRequiredWithoutTeachesInput>;
   User?: Maybe<UserUpdateManyWithoutTeamInput>;
@@ -8063,7 +8100,7 @@ export type TeamAnonFieldsFragment = (
 
 export type TeamUserFieldsFragment = (
   { __typename?: 'Team' }
-  & Pick<Team, 'cards'>
+  & Pick<Team, 'cards' | 'prefs'>
   & { members: Array<(
     { __typename?: 'User' }
     & Pick<User, 'id' | 'name' | 'shortname'>
@@ -8159,6 +8196,20 @@ export type CreateOneTeamMutation = (
     { __typename?: 'Team' }
     & TeamTeacherFieldsFragment
   ) }
+);
+
+export type SetPrefsMutationVariables = Exact<{
+  teamId: Scalars['String'];
+  prefs: Scalars['Json'];
+}>;
+
+
+export type SetPrefsMutation = (
+  { __typename?: 'Mutation' }
+  & { setPrefs?: Maybe<(
+    { __typename?: 'Team' }
+    & TeamTeacherFieldsFragment
+  )> }
 );
 
 export type AttachmentFieldsFragment = (
@@ -8554,6 +8605,7 @@ export const TeamUserFieldsFragmentDoc = gql`
     fragment TeamUserFields on Team {
   ...TeamAnonFields
   cards
+  prefs
   members {
     id
     name
@@ -9597,6 +9649,39 @@ export function useCreateOneTeamMutation(baseOptions?: Apollo.MutationHookOption
 export type CreateOneTeamMutationHookResult = ReturnType<typeof useCreateOneTeamMutation>;
 export type CreateOneTeamMutationResult = Apollo.MutationResult<CreateOneTeamMutation>;
 export type CreateOneTeamMutationOptions = Apollo.BaseMutationOptions<CreateOneTeamMutation, CreateOneTeamMutationVariables>;
+export const SetPrefsDocument = gql`
+    mutation setPrefs($teamId: String!, $prefs: Json!) {
+  setPrefs(teamId: $teamId, prefs: $prefs) {
+    ...TeamTeacherFields
+  }
+}
+    ${TeamTeacherFieldsFragmentDoc}`;
+export type SetPrefsMutationFn = Apollo.MutationFunction<SetPrefsMutation, SetPrefsMutationVariables>;
+
+/**
+ * __useSetPrefsMutation__
+ *
+ * To run a mutation, you first call `useSetPrefsMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useSetPrefsMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [setPrefsMutation, { data, loading, error }] = useSetPrefsMutation({
+ *   variables: {
+ *      teamId: // value for 'teamId'
+ *      prefs: // value for 'prefs'
+ *   },
+ * });
+ */
+export function useSetPrefsMutation(baseOptions?: Apollo.MutationHookOptions<SetPrefsMutation, SetPrefsMutationVariables>) {
+        return Apollo.useMutation<SetPrefsMutation, SetPrefsMutationVariables>(SetPrefsDocument, baseOptions);
+      }
+export type SetPrefsMutationHookResult = ReturnType<typeof useSetPrefsMutation>;
+export type SetPrefsMutationResult = Apollo.MutationResult<SetPrefsMutation>;
+export type SetPrefsMutationOptions = Apollo.BaseMutationOptions<SetPrefsMutation, SetPrefsMutationVariables>;
 export const AttachmentsDocument = gql`
     query attachments($where: AttachmentWhereInput) {
   attachments(where: $where) {

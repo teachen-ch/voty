@@ -1,5 +1,5 @@
-import { H2, H3, LoggedInPage, ShowFor } from "components/Page";
-import { Cards, CardListSelect } from "components/Cards";
+import { H3, LoggedInPage, ShowFor } from "components/Page";
+import { Cards, EditCardList } from "components/Cards";
 import { Input } from "@rebass/forms";
 import { Flex, Button, Text, Box } from "rebass";
 import React, { useState } from "react";
@@ -11,6 +11,7 @@ import { useTeam } from "state/user";
 import { Role } from "graphql/types";
 import { ReadMore } from "components/ReadMore";
 import { LearningPath } from "components/LearningPaths";
+import { EditTeamPrefs } from "components/Teams";
 
 export default function SelectCardsPage(): React.ReactElement {
   const router = useRouter();
@@ -43,7 +44,8 @@ export default function SelectCardsPage(): React.ReactElement {
       <ListPaths />
 
       <H3>Folgende Lerninhalte sind ausgewählt</H3>
-      <CardListSelect teamCards={team.cards} teamId={team.id} />
+      <EditCardList teamCards={team.cards} teamId={team.id} />
+      <EditTeamPrefs team={team} />
       <ShowFor role="Admin">
         <Text mt={2} fontSize={1} textAlign="right">
           <A onClick={() => alert(team.cards)}>Pfad anzeigen</A>
