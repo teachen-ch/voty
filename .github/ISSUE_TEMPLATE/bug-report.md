@@ -1,16 +1,16 @@
 ---
 name: Bug Report
-about: Create a report to help us improve voty.ch
-title: "[BUG]"
+about: Changes or additions to our learning content
+title: ""
 labels: bug
 assignees: stefnnn
-
 ---
 
 As a teacher/student/visitor I tried to:
 
 **To Reproduce**
 Steps to reproduce the behavior:
+
 1. Go to '...'
 2. Click on '....'
 3. Scroll down to '....'

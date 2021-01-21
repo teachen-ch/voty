@@ -1,7 +1,7 @@
 ---
-name: Feature Story
+name: Content Story
 about: Suggest an idea for this project
 title: ""
-labels: enhancement
+labels: content
 assignees: stefnnn
 ---
