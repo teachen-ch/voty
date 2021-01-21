@@ -3,6 +3,8 @@ import { Card } from "graphql/types";
 import * as cardsData from "content/";
 import { Role } from "@prisma/client";
 
+const env = process.env.NEXT_PUBLIC_ENV;
+
 export const cards: FieldResolver<"Query", "cards"> = (_root, args) => {
   let { keywords } = args;
   const { age, type } = args;
@@ -20,6 +22,10 @@ export const cards: FieldResolver<"Query", "cards"> = (_root, args) => {
   if (type) {
     cards = cards.filter((card) => card.type === type);
   }
+  // filter out cards which have show = "local" or "development"
+  if (env === "production")
+    cards = cards.filter((c) => c.show !== "local" && c.show !== "development");
+  if (env === "development") cards = cards.filter((c) => c.show !== "local");
   return cards;
 };
 

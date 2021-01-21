@@ -16,6 +16,7 @@ export const Card = objectType({
     t.string("source");
     t.string("content");
     t.boolean("discussion");
+    t.string("show");
   },
 });
 

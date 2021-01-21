@@ -94,5 +94,5 @@ log.info("✅ Successfully deployed to %s in %.1f minutes" % (deployEnv, took))
 if (deployEnv == "dev"):
     yesno = input("Would you like to push to production as well? (y/N) ")
     if (yesno.lower() == "y"):
-        exec("yarn run deploy_prod")
+        exec("yarn run deploy:prod")
         log.info("🎉 Successfully deployed to prod")

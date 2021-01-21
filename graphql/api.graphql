@@ -2036,6 +2036,7 @@ type Card {
   icon: String
   id: String
   keywords: String
+  show: String
   source: String
   title: String
   type: String

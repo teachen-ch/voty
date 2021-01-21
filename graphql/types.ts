@@ -2058,6 +2058,7 @@ export type Card = {
   icon?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['String']>;
   keywords?: Maybe<Scalars['String']>;
+  show?: Maybe<Scalars['String']>;
   source?: Maybe<Scalars['String']>;
   title?: Maybe<Scalars['String']>;
   type?: Maybe<Scalars['String']>;

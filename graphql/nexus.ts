@@ -8105,6 +8105,7 @@ export interface NexusGenObjects {
     icon?: string | null; // String
     id?: string | null; // String
     keywords?: string | null; // String
+    show?: string | null; // String
     source?: string | null; // String
     title?: string | null; // String
     type?: string | null; // String
@@ -8288,6 +8289,7 @@ export interface NexusGenFieldTypes {
     icon: string | null; // String
     id: string | null; // String
     keywords: string | null; // String
+    show: string | null; // String
     source: string | null; // String
     title: string | null; // String
     type: string | null; // String
@@ -8535,6 +8537,7 @@ export interface NexusGenFieldTypeNames {
     icon: "String";
     id: "String";
     keywords: "String";
+    show: "String";
     source: "String";
     title: "String";
     type: "String";
