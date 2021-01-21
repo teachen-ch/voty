@@ -323,14 +323,15 @@ export const Authors: React.FC<
   }
 
   return (
-    <Box {...props}>
+    <Box {...props} flex={1}>
       <Flex
         flexWrap="wrap"
         bg="#fff"
         flexGrow={1}
-        py={2}
+        py={"2px"}
         px={2}
         onClick={() => inputRef.current?.focus()}
+        sx={{ borderRadius: "5px" }}
       >
         {authors.map((author) => (
           <Pill
@@ -345,7 +346,11 @@ export const Authors: React.FC<
           onKeyDown={onKey}
           value={search}
           onChange={doSearch}
-          style={{ border: "none", outline: "none", fontSize: 24 }}
+          style={{
+            border: "none",
+            outline: "none",
+            fontSize: 22,
+          }}
           width="100px"
           placeholder="Suche nach Vorname…"
         />

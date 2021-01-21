@@ -12,8 +12,15 @@ export const ReadMore: React.FC<{
 }> = ({ title, bg = "#73899D", hidePlus, fontSize = 4, children }) => {
   const [open, setOpen] = useState(false);
   return (
-    <Box className="readmore" color="white">
-      <Button onClick={() => setOpen(!open)} bg={bg} color="white" width="100%">
+    <Box color="white">
+      <Button
+        onClick={() => setOpen(!open)}
+        bg={bg}
+        color="white"
+        width="100%"
+        py={0}
+        my={0}
+      >
         <Flex
           alignItems="center"
           fontSize={fontSize}

@@ -9,7 +9,7 @@ import { uniq } from "lodash";
 import { SelectBallots } from "components/Ballots";
 import { gql } from "@apollo/client";
 import IconHint from "../../../public/images/icon_hint.svg";
-import { fragments } from "components/Teams";
+import { EditTeamPrefs, fragments } from "components/Teams";
 import { ErrorBox } from "components/Form";
 import { trackEvent, usePageEvent } from "util/stats";
 import { HideFeature } from "components/HideFeature";
@@ -23,7 +23,7 @@ import { Nullable } from "simplytyped";
 import { Breadcrumb, A, Here } from "components/Breadcrumb";
 import { Spinner } from "theme-ui";
 import PanelPage from "./panel";
-import { CardListAdmin } from "components/Cards";
+import { TeacherCardList } from "components/Cards";
 import { Activities } from "components/Activities";
 // import { usePolling } from "util/hooks";
 
@@ -131,7 +131,7 @@ export default function TeacherTeamPage(): React.ReactElement {
           Hier siehst du die Lerninhalte, welche bereits ausgewählt sind und
           deinen Schüler*innen auf der Klassenseite angezeigt werden.
         </Text>
-        <CardListAdmin teamCards={team.cards} teamId={team.id} />
+        <TeacherCardList teamCards={team.cards} teamId={team.id} />
         <Button
           mt={3}
           onClick={() => router.push(`/team/${team.id}/select`)}
@@ -139,6 +139,7 @@ export default function TeacherTeamPage(): React.ReactElement {
         >
           Lerninhalte hinzufügen
         </Button>
+        {team.cards && <EditTeamPrefs team={team} />}
         <Box mt={6} />
       </HideFeature>
       <H2>Abstimmungen Klasse {team.name}</H2>
