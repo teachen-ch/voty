@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg width="40px" height="40px" viewBox="0 0 40 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg width="21px" height="21px" viewBox="0 0 21 21" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <title>icon_plus</title>
-    <g id="icon_plus" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
-        <g id="icon-LogIn" transform="translate(9.000000, 9.000000)" stroke="currentColor" stroke-width="2.65151515">
-            <line x1="10.709596" y1="0.916666667" x2="10.709596" y2="21.9166667" id="Path"></line>
-            <line x1="21" y1="11.5" x2="0" y2="11.5" id="Path"></line>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round">
+        <g id="icon_plus" transform="translate(2.000000, 2.000000)" stroke="#000000" stroke-width="3">
+            <line x1="8.5" y1="0" x2="8.5" y2="17" id="Path"></line>
+            <line x1="17" y1="8.5" x2="-3.53883589e-16" y2="8.5" id="Path"></line>
         </g>
     </g>
 </svg>

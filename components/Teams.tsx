@@ -296,7 +296,7 @@ export const EditTeamPrefs: React.FC<{ team: TeamTeacherFieldsFragment }> = ({
             onChange={(e) => setPref("showWorks", e.target.value)}
           >
             <option value="">Immer</option>
-            <option value="after">Nach Abgabe</option>
+            <option value="after">Nach eigener Abgabe</option>
             <option value="never">Nie</option>
           </Select>
           <Label mt={3}>Gruppenarbeiten erlauben:</Label>

@@ -58,12 +58,7 @@ export default function SelectCardsPage(): React.ReactElement {
           placeholder="Suche..."
           flex={1}
         />
-        <Button
-          ml={3}
-          width="calc(34% - 16px)"
-          mt={[0, 0, "4px"]}
-          height="50px"
-        >
+        <Button ml={3} width="calc(34% - 16px)" mt={[0, 0, "4px"]}>
           Suchen
         </Button>
       </Flex>
