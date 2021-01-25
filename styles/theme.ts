@@ -196,7 +196,7 @@ export default {
         mt: 2,
         mb: 3,
         mx: "auto",
-        width: "500px",
+        maxWidth: "500px",
       },
     },
   },
