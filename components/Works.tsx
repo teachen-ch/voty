@@ -10,18 +10,20 @@ import {
   Scalars,
   Visibility,
   TeamUserFieldsFragment,
+  Role,
 } from "graphql/types";
 import { AttachmentFields } from "components/Uploader";
-import { Flex, Text, FlexProps, Box, BoxProps } from "rebass";
+import { Flex, Text, FlexProps, Box, BoxProps, Button } from "rebass";
 import { useTeam, useUser } from "state/user";
-import { ChangeEvent, useEffect, useRef, useState } from "react";
-import { Loading } from "./Page";
+import { ChangeEvent, useContext, useEffect, useRef, useState } from "react";
+import { Err, Loading } from "./Page";
 import { find, omit, remove, truncate } from "lodash";
 import IconPlus from "../public/images/icon_plus.svg";
 import IconMinus from "../public/images/icon_minus.svg";
 import { Label, Radio } from "@rebass/forms";
 import { formatDate } from "util/date";
 import { Pill } from "./Misc";
+import { CardContext } from "./Cards";
 
 export const WorkFields = gql`
   fragment WorkFields on Work {
@@ -54,6 +56,7 @@ export const WORKS = gql`
 
 export type WorkItem = React.FC<{ work: WorkFieldsFragment }>;
 
+// TODO: Rethink, whether we want to keep the where param
 export const Works: React.FC<
   FlexProps & {
     where?: WorkWhereInput;
@@ -64,6 +67,7 @@ export const Works: React.FC<
   }
 > = ({ where, items, list, trigger, card, ...props }) => {
   const team = useTeam();
+  const user = useUser();
   if (!where) {
     where = team
       ? { teamId: { equals: team.id } }
@@ -73,6 +77,7 @@ export const Works: React.FC<
   const worksQuery = useWorksQuery({
     variables: { where },
     onCompleted() {
+      // scroll to, and open work if page is called with hash #id
       const id = document.location.hash.substring(1);
       const el = document.getElementById(id);
       if (el) {
@@ -95,6 +100,30 @@ export const Works: React.FC<
   if (worksQuery.loading) return <Loading />;
   if (!works) return null;
 
+  // check permissions and teacher preferences for showWorks
+  if (team && card) {
+    if (!user) return null;
+    // Not part of class or teacher?
+    if (team.id !== user.team?.id && team.teacher?.id !== user.id) return null;
+    const isTeacher = user.role === Role.Teacher;
+
+    // pref "Never": never show works to class
+    const show = showWorks(team, card);
+    if (show === ShowWorks.Never && !isTeacher) return null;
+
+    // pref "After": show only after submitted own work
+    let submitted = false;
+    works.forEach((work) => {
+      const authorIds = work.users.map((user) => user.id);
+      if (authorIds.indexOf(user?.id) >= 0) {
+        submitted = true;
+      }
+    });
+    if (show === ShowWorks.After && !submitted && !isTeacher) {
+      return null;
+    }
+  }
+
   const flexProps = omit(props, "children", "ref");
   return (
     <ListComp flexDirection="column" {...flexProps}>
@@ -105,14 +134,16 @@ export const Works: React.FC<
             <Flex
               bg="darkgray"
               p={1}
+              height="40px"
+              pl={"12px"}
               alignItems="center"
               sx={{ borderRadius: "5px" }}
               onClick={() => setActive(active === work.id ? "" : work.id)}
             >
               {active === work.id ? (
-                <IconMinus style={{ marginRight: 4 }} alt="Schliessen" />
+                <IconMinus style={{ marginRight: "10px" }} alt="Schliessen" />
               ) : (
-                <IconPlus style={{ marginRight: 4 }} alt="Öffnen" />
+                <IconPlus style={{ marginRight: "10px" }} alt="Öffnen" />
               )}
               <Text sx={{ cursor: "pointer" }} fontSize={[1, 1, 2]}>
                 <b>{work.users?.map((u) => u.shortname).join(", ")}:</b> «
@@ -151,14 +182,14 @@ type PostWorkHookType = (args: {
   data?: Scalars["Json"];
   users?: UserWhereUniqueInput[];
   visibility?: Visibility;
-}) => [() => void, MutationResult<PostWorkMutation>, number];
+  setTrigger?: (n: number) => void;
+}) => [() => void, MutationResult<PostWorkMutation>];
 
 export const usePostWork: PostWorkHookType = (args) => {
   // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-  const { card, title, text, data, users, visibility } = args;
+  const { card, title, text, data, users, visibility, setTrigger } = args;
   const user = useUser();
   const team = useTeam();
-  const [trigger, setTrigger] = useState(0);
   const [doPostWork, state] = usePostWorkMutation();
 
   async function doPost() {
@@ -180,11 +211,11 @@ export const usePostWork: PostWorkHookType = (args) => {
       },
     });
     // this can be used to refetch <Works trigger={trigger}/>
-    if (setTrigger) setTrigger(trigger + 1);
+    if (setTrigger) setTrigger(1);
     return result;
   }
 
-  return [doPost, state, trigger];
+  return [doPost, state];
 };
 
 export const POST_WORK = gql`
@@ -195,6 +226,50 @@ export const POST_WORK = gql`
   }
   ${WorkFields}
 `;
+
+export const WorkSubmit: React.FC<{
+  title?: string;
+  text?: string;
+  data: any;
+  visibility?: Visibility;
+  setTrigger?: (n: number) => void;
+}> = ({ title, data, text, visibility: visibilityDefault, setTrigger }) => {
+  const { card, title: cardTitle } = useContext(CardContext);
+  const team = useTeam();
+  if (!title) title = cardTitle;
+  const [users, setUsers] = useState<Array<UserWhereUniqueInput>>();
+  const [visibility, setVisibility] = useState<Visibility | undefined>(
+    visibilityDefault
+  );
+  const [doPostWork, state] = usePostWork({
+    card: "tweety",
+    title,
+    text,
+    users,
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+    data,
+    visibility,
+    setTrigger,
+  });
+
+  return (
+    <Box>
+      {visibility && (
+        <Visible setVisibility={setVisibility} visibility={visibility} />
+      )}
+      {team && allowGroups(team, card) === AllowGroups.Yes && (
+        <>
+          <Label mt={3}>Erarbeitet durch:</Label>
+          <Authors setUsers={setUsers} />
+        </>
+      )}
+      <Button mt={3} width="100%" onClick={doPostWork} label="Abschicken">
+        Abschicken
+      </Button>
+      <Err msg={state.error?.message} />
+    </Box>
+  );
+};
 
 export const Visible: React.FC<{
   visibility?: Visibility;
@@ -368,7 +443,7 @@ export const Authors: React.FC<
   );
 };
 
-enum AllowGroups {
+export enum AllowGroups {
   Yes = "",
   No = "no",
 }
@@ -386,11 +461,11 @@ export function allowGroups(
 }
 
 export const AllowGroupText: Record<AllowGroups, string> = {
-  [AllowGroups.Yes]: "Gruppenarbeiten sind nicht erlaubt",
-  [AllowGroups.No]: "Gruppenarbeiten sind erlaubt",
+  [AllowGroups.Yes]: "Gruppenarbeiten sind möglich",
+  [AllowGroups.No]: "Gruppenarbeiten sind nicht möglich",
 };
 
-enum ShowWorks {
+export enum ShowWorks {
   Always = "",
   After = "after",
   Never = "never",

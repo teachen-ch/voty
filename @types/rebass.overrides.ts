@@ -26,6 +26,7 @@ declare module "rebass" {
     className?: string;
     id?: string;
     fontWeight?: string;
+    fontStyle?: string;
     fontSize?: string | number | Array<string | number>;
     css?: InterpolationWithTheme<any>;
   }
@@ -47,6 +48,9 @@ declare module "rebass" {
     as?: React.ElementType;
     className?: string;
     id?: string;
+    fontWeight?: string;
+    fontStyle?: string;
+    fontSize?: string | number | Array<string | number>;
     css?: InterpolationWithTheme<any>;
   }
   interface LinkProps extends LinkP {

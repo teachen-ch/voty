@@ -8,9 +8,18 @@ import {
 } from "@rebass/forms";
 import { useContext, useEffect, useMemo, useState } from "react";
 import { BoxProps, Button, Text, Flex, Box } from "rebass";
+import { useTeam } from "state/user";
 import { CardContext } from "./Cards";
 import React from "react";
-import { Authors, usePostWork, WorkCard, Works, WorkItem } from "./Works";
+import {
+  Authors,
+  usePostWork,
+  WorkCard,
+  Works,
+  WorkItem,
+  allowGroups,
+  AllowGroups,
+} from "./Works";
 import { UserWhereUniqueInput } from "graphql/types";
 import { cloneDeep, shuffle } from "lodash";
 import { Info } from "./Info";
@@ -33,22 +42,22 @@ interface IQuestContext {
 
 export const QuestContext = React.createContext({} as IQuestContext);
 
-export const Quest: React.FC<{ allowGroups?: boolean }> = ({
-  children,
-  allowGroups,
-}) => {
+export const Quest: React.FC<{ groups?: string }> = ({ children, groups }) => {
+  const team = useTeam();
   const { card, title } = useContext(CardContext);
   const [users, setUsers] = useState<Array<UserWhereUniqueInput>>();
   const [answers, setAnswers] = useState<Record<string, any>>({});
+  const [trigger, setTrigger] = useState(0);
   const context = useMemo<IQuestContext>(() => {
     return { answers, setAnswer, children } as IQuestContext;
   }, [answers]);
 
-  const [doPostWork, state, trigger] = usePostWork({
+  const [doPostWork, state] = usePostWork({
     card,
     title,
     data: answers,
     users,
+    setTrigger,
   });
 
   function setAnswer(id: string, value: any) {
@@ -68,14 +77,15 @@ export const Quest: React.FC<{ allowGroups?: boolean }> = ({
             })
           : child
       )}
-      {allowGroups && (
-        <>
-          <Label mt={4} mb={2}>
-            Erarbeitet durch:{" "}
-          </Label>
-          <Authors setUsers={setUsers} />
-        </>
-      )}
+      {team &&
+        allowGroups(team, card, groups as AllowGroups) === AllowGroups.Yes && (
+          <>
+            <Label mt={4} mb={2}>
+              Erarbeitet durch:{" "}
+            </Label>
+            <Authors setUsers={setUsers} />
+          </>
+        )}
 
       {success ? (
         <Info mb={6}>Antworten abgeschickt!</Info>

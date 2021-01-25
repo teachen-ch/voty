@@ -1,4 +1,4 @@
-import { Loading, ErrorPage, LoggedInPage, ShowFor } from "components/Page";
+import { Loading, ErrorPage, LoggedInPage } from "components/Page";
 import { Card, getCardMeta } from "components/Cards";
 import { useTeam, useUser } from "state/user";
 import { A, Breadcrumb, Here } from "components/Breadcrumb";
@@ -57,13 +57,11 @@ export default function CardPage(): React.ReactElement {
       </Breadcrumb>
 
       <Card id={key} />
-      <ShowFor role="Teacher">
-        <Text fontSize={1} fontStyle="italic" mt={4} textAlign="center">
-          {ShowWorkText[showWorks(team, key)]}
-          {". "}
-          {AllowGroupText[allowGroups(team, key)]}
-        </Text>
-      </ShowFor>
+      <Text fontSize={1} fontStyle="italic" mt={4} textAlign="center">
+        {ShowWorkText[showWorks(team, key)]}
+        {". "}
+        {AllowGroupText[allowGroups(team, key)]}
+      </Text>
 
       <HideFeature id="discussions">
         {meta.discussion !== false && <Discussion card={key} />}

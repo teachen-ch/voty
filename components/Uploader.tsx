@@ -26,14 +26,16 @@ export const UploadWork: React.FC<BoxProps & { prompt: string }> = (props) => {
     return <Err msg="<UploadWork/> needs to be placed in a CardContext." />;
   const [title, setTitle] = useState("");
   const [users, setUsers] = useState<UserWhereUniqueInput[]>();
+  const [trigger, setTrigger] = useState(0);
   const [attachments, setAttachments] = useState<
     Record<string, AttachmentFieldsFragment>
   >({});
-  const [doPostWork, state, trigger] = usePostWork({
+  const [doPostWork, state] = usePostWork({
     card,
     title,
     data: { attachments },
     users,
+    setTrigger,
   });
 
   const success = state.called && !state.error;
@@ -59,7 +61,13 @@ export const UploadWork: React.FC<BoxProps & { prompt: string }> = (props) => {
           />
           <Label mt={3}>Erarbeitet durch:</Label>
           <Authors setUsers={setUsers} />
-          <Button mt={3} width="100%" onClick={doPostWork} label="Abschicken">
+          <Button
+            mt={3}
+            width="100%"
+            onClick={doPostWork}
+            label="Abschicken"
+            disabled={!Object.keys(attachments).length}
+          >
             Abschicken
           </Button>
           <Err msg={state.error?.message} />

@@ -26,15 +26,17 @@ export const Tweety: React.FC<{
   const [title, setTitle] = useState("");
   const [chars, setChars] = useState(0);
   const [users, setUsers] = useState<Array<UserWhereUniqueInput>>();
+  const [trigger, setTrigger] = useState(0);
   const [visibility, setVisibility] = useState<Visibility | undefined>(
     Visibility.Public
   );
-  const [doPostWork, state, trigger] = usePostWork({
+  const [doPostWork, state] = usePostWork({
     card: "tweety",
     title,
     text: tweet,
     users,
     visibility,
+    setTrigger,
   });
 
   function doChange(evt: React.ChangeEvent<HTMLTextAreaElement>) {

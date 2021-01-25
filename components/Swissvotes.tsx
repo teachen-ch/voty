@@ -118,7 +118,8 @@ export const SwissvotesTopics: React.FC = () => {
   const [votes, setVotes] = useState<VoteType[]>([]);
   const [text, setText] = useState("");
   const [users, setUsers] = useState<UserWhereUniqueInput[]>([]);
-  const [doPostWork, state, trigger] = usePostWork({
+  const [trigger, setTrigger] = useState(0);
+  const [doPostWork, state] = usePostWork({
     card: "swissvotes_themen",
     title: topic,
     text,
@@ -128,6 +129,7 @@ export const SwissvotesTopics: React.FC = () => {
       votes,
       text,
     },
+    setTrigger,
   });
   const success = state.called && !state.error;
 

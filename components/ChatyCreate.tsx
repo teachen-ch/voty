@@ -16,11 +16,13 @@ export const ChatyCreate: React.FC<{
   const [lines, setLines] = useState(initialLines?.trim());
   const [error, setError] = useState("");
   const [users, setUsers] = useState<UserWhereUniqueInput[]>();
-  const [doPostWork, state, trigger] = usePostWork({
+  const [trigger, setTrigger] = useState(0);
+  const [doPostWork, state] = usePostWork({
     card: "chaty_create",
     title,
     text: lines,
     users,
+    setTrigger,
   });
 
   function changeLines(lines: string) {
