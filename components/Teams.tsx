@@ -39,6 +39,10 @@ const TeamUserFields = gql`
       name
       shortname
     }
+    teacher {
+      id
+      shortname
+    }
   }
   ${TeamAnonFields}
 `;
@@ -299,7 +303,7 @@ export const EditTeamPrefs: React.FC<{ team: TeamTeacherFieldsFragment }> = ({
             <option value="after">Nach eigener Abgabe</option>
             <option value="never">Nie</option>
           </Select>
-          <Label mt={3}>Gruppenarbeiten erlauben:</Label>
+          <Label mt={3}>Gruppenarbeiten ermöglichen:</Label>
           <Select
             value={prefs["allowGroups"] as string}
             onChange={(e) => setPref("allowGroups", e.target.value)}

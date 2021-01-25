@@ -8104,7 +8104,10 @@ export type TeamUserFieldsFragment = (
   & { members: Array<(
     { __typename?: 'User' }
     & Pick<User, 'id' | 'name' | 'shortname'>
-  )> }
+  )>, teacher: (
+    { __typename?: 'User' }
+    & Pick<User, 'id' | 'shortname'>
+  ) }
   & TeamAnonFieldsFragment
 );
 
@@ -8609,6 +8612,10 @@ export const TeamUserFieldsFragmentDoc = gql`
   members {
     id
     name
+    shortname
+  }
+  teacher {
+    id
     shortname
   }
 }
