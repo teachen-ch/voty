@@ -83,7 +83,7 @@ export const Swissvotes: React.FC<{
           placeholder="Suche..."
           flex={1}
         />
-        <Button ml={3} flex={0.3} mt={[0, 0, "4px"]} height="50px">
+        <Button ml={3} flex={0.3} mt={[0, 0, "4px"]}>
           Suche
         </Button>
       </Flex>

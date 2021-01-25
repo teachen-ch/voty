@@ -215,7 +215,7 @@ export default function Projekt(): React.ReactElement {
   );
 }
 
-const Tag: React.FC<{ bg?: string }> = ({ children, bg }) => (
+export const Tag: React.FC<{ bg?: string }> = ({ children, bg }) => (
   <Text
     fontSize={1}
     bg={bg || "rgb(187, 187, 187)"}

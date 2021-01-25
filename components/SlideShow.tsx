@@ -24,7 +24,7 @@ export const SlideShow: React.FC<
   return (
     <Box {...props} textAlign="center">
       <img src={images[active]} className={className} />
-      {captions && <figcaption>{captions[0]}</figcaption>}
+      {captions && <figcaption>{captions[active]}</figcaption>}
       {images.length > 1 &&
         images.map((image, ix) => (
           <Dot
