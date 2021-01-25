@@ -16,7 +16,7 @@
           >voty.&#8203;ch Feedback!</mj-text
         >
         <mj-text font-size="20px" color="#aaa">
-          Absender: {{user.name}} {{user.lastname}} ({{user.role}})
+          Absender: {{user.email}} - {{user.name}} {{user.lastname}} ({{user.role}})
         </mj-text>
         <mj-text font-size="20px" color="#aaa">
           Anfrage: {{type}}

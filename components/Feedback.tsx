@@ -46,11 +46,12 @@ export const FeedbackForm: React.FC<{
   const [title, setTitle] = useState("");
   const [text, setText] = useState("");
   const [type, setType] = useState("");
+  const [email, setEmail] = useState<string | undefined>();
 
   async function doSend() {
     const res = await fetch("/api/feedback", {
       method: "POST",
-      body: JSON.stringify({ title, type, text, card, quest }),
+      body: JSON.stringify({ title, type, text, card, quest, email }),
       headers: authHeaders(),
     });
     const result = (await res.json()) as Record<string, any>;
@@ -68,9 +69,10 @@ export const FeedbackForm: React.FC<{
           Feedback für voty.ch
         </Text>
         <Text color="gray" fontSize={1} mb={3}>
-          Von: {user?.email}
+          {user && `Von: ${user.email}`}
           <br />
-          Thema: {getCardTitle(String(card))} {quest ? ` / ${quest}` : ""}
+          Thema: {getCardTitle(String(card)) || card}{" "}
+          {quest ? ` / ${quest}` : ""}
         </Text>
         {success ? (
           <>
@@ -91,6 +93,12 @@ export const FeedbackForm: React.FC<{
               <option>Hier ist ein Schreibfehler! 🤓</option>
               <option>Verbesserungsvorschlag ☝️</option>
             </Select>
+            {!user && (
+              <Input
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Deine Email"
+              />
+            )}
             <Input
               onChange={(e) => setTitle(e.target.value)}
               placeholder="Betreff..."

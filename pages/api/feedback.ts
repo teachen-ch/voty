@@ -13,9 +13,12 @@ export default async (
   }>
 ): Promise<void> => {
   try {
-    const user = getSessionUser(req) || { name: "Anon", email: feedbackEmail };
     const fields = JSON.parse(req.body) as Record<string, string>;
-    const { card, title, text, type, quest } = fields;
+    const { card, title, text, type, quest, email } = fields;
+    const user = getSessionUser(req) || {
+      name: "Anon",
+      email: email || feedbackEmail,
+    };
     const data = { card, title, text, type, user, quest };
 
     await sendMail({
