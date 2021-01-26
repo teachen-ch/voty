@@ -1,5 +1,6 @@
 import { Info } from "components/Learning";
 import { NewsletterSlim } from "components/Newsletter";
+import { SlideShow } from "components/SlideShow";
 
 # Wie sehen gute Lehrmittel für Distance Learning aus?
 
@@ -7,6 +8,23 @@ import { NewsletterSlim } from "components/Newsletter";
 Buchseiten wurde fotografiert, E-Learning Angebote für den Selbstunterricht wurden verteilt,
 kreative Aufgaben wurden erfunden. Aber wie sehen Lehrmittel aus, die den Lernprozess einer
 «Distributed Class» optimal unterstützen?**
+
+<SlideShow
+  mb={4}
+  images={[
+    "/screens/voty_screen_cards.jpg",
+    "/screens/voty_screen_lerninhalte.jpg",
+    "/screens/voty_screen_chaty.jpg",
+    "/screens/voty_screen_plakate.jpg",
+  ]}
+  captions={[
+    "Die Online-Werkzeugkiste mit einigen ausgewählten Modulen",
+    "Lehrpläne können frei gewählt oder vorgeschlagen werden",
+    "Der Chatbot «Chaty» erklärt Grundbegriffe der Demokratie",
+    "Integrierte Suche mit Tausenden historischen Wahlplakaten",
+  ]}
+  className="screenshot"
+/>
 
 Der Trend zu mehr «Home Office» und zu «Distributed Teams» wird die Arbeitswelt nachhaltig
 auch nach der Pandemie prägen. Ebenso wird die Schule von Morgen Elemente des Distance
@@ -24,7 +42,7 @@ Schüler\*innen gerade stehen. Und natürlich freuen wir uns auf die Zeit, wo im
 wieder ohne Maske beherzt debattieren werden kann - denn auch das ist ein wichtiges Werkzeug
 der Demokratie, das gelernt sein will.
 
-<img src="/screens/screen_activities.png" class="screenshot" />
+<img src="/screens/screen_activities.png" className="screenshot" />
 
 <Info type="info" py={3}>
   Möchten sie unsere Lerninhalte mit ihrer Klasse im Distance Learning oder im

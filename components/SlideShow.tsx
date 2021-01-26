@@ -1,15 +1,16 @@
 import { useState } from "react";
 import { Box, BoxProps } from "rebass";
 
-// const TIMEOUT = 2000;
-
 export const SlideShow: React.FC<
   BoxProps & { images: string[]; captions?: string[]; className?: string }
 > = ({ images, captions, className, ...props }) => {
-  const [active, setActive] = useState(
+  const [active, setActive] = useState<number>(
     0
   ); /* 
-  const [cancel, setCancel] = useState(0);
+  const [cancel, setCancel] = useState<number>(0);
+
+  const TIMEOUT = 2000;
+
   useEffect(() => {
     setCancel(setTimeout(nextImage, TIMEOUT));
     return () => {
@@ -18,7 +19,7 @@ export const SlideShow: React.FC<
   }, []);
 
   function nextImage() {
-    setActive(active === images.length - 1 ? 0 : active + 1);
+    setActive((active + 1) % images.length);
     setCancel(setTimeout(nextImage, TIMEOUT));
   } */
   return (
