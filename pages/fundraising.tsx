@@ -46,7 +46,7 @@ export default function Fundraising(): React.ReactElement {
           begeis­tern? Und wie können wir helfen, Themen wie dieses in der
           Schule der Zukunft zu verankern? Auf dieser Seite möchten wir unsere{" "}
           <a href="#idee">Idee</a>, den aktuellen{" "}
-          <a href="#demokratie">Entwicklungsstand </a>, unsere{" "}
+          <a href="#demokratie">Entwicklungsstand</a>, unsere{" "}
           <a href="ziele">Zielsetzung</a> sowie den{" "}
           <a href="#finanzierung">Finanzierungsbedarf</a> für voty.ch darlegen.
           Damit möchten wir Fragen von Stiftungen und potentiellen Geldgebern
@@ -272,11 +272,11 @@ export default function Fundraising(): React.ReactElement {
           </Text>
           <Text>
             Und schliesslich möchten wir nach der Skalierung von voty.ch unseren
-            Open-Source Technologiestack, sowie unsere Erfahrung in der
-            Entwicklung und in der Verbreitung von digitalen Lehrmitteln anderen
-            Partnern zur Verfügung stellen. In den nächsten 3 Jahren möchten wir
-            prototypisch mit Partnerorganisationen aus dem Bereich der
-            nachhaltigen Entwicklung{" "}
+            Open-Source Techstack, sowie unsere Erfahrung in der Entwicklung und
+            in der Verbreitung von digitalen Lehrmitteln anderen Partnern zur
+            Verfügung stellen. In den nächsten 3 Jahren möchten wir prototypisch
+            mit Partnerorganisationen aus dem Bereich der nachhaltigen
+            Entwicklung{" "}
             <Tag bg="primary">drei&nbsp;weitere&nbsp;Lernprojekte</Tag>{" "}
             durchführen, um dadurch gemeinsam eine ähnliche Wirkung in anderen
             Themenbereichen zu erzielen. Durch diesen Ansatz erhoffen wir uns
@@ -342,32 +342,32 @@ export default function Fundraising(): React.ReactElement {
         </Section>
         <Section title="Finanzierungsbedarf" id="finanzen">
           <Text mb={4}>
-            <strong>Teamgrösse</strong> – Wir schätzen, dass wir für die
-            Fertigstellung und die Skalierung von voty.ch ein Team von etwa{" "}
-            <b>300% Stellenprozent</b> benötigen, aufgeteilt auf 6-8 Personen.
-            Das bisherige Kernteam bleibt bestehen, im Bereich Educational
-            Content würden wir uns gerne verstärken (60% durch 1-2 Personen),
-            ebenso möchten wir das Team durch zwei Juniors im Bereich
-            Software-Entwicklung und Design/UX bereichern, auch um Nahe bei der
-            Zielgruppe zu sein. Gleichzeitig möchten wir die Chance nutzen, zwei
-            jungen Menschen wertvolle Startup-Erfahrung zu bieten
+            <strong>Teamgrösse</strong> – Für die Fertigstellung und Skalierung
+            von voty.ch benötigten wir schätzungsweise{" "}
+            <b>300% Stellenprozente</b>, aufgeteilt auf 6-8 Personen über 2-3
+            Jahre. Das bisherige Kernteam bleibt bestehen, im Bereich
+            Educational Content würden wir uns gerne verstärken (60% durch 1-2
+            Personen), ebenso möchten wir das Team durch zwei Juniors im Bereich
+            Software-Entwicklung und Design/UX bereichern, um Nahe bei der
+            Zielgruppe zu sein und jungen Menschen wertvolle Startup-Erfahrung
+            zu bieten.
           </Text>
           <Text mb={4}>
             <strong>Finanzierungsbedarf</strong> – Für den Aufbau und die
-            Skalierung rechnen mit Kosten von ca. <b>CHF 300k / Jahr</b> und wir
-            möchten bis im Sommer 2021 ein Budget für ein langfristiges
+            Skalierung rechnen mit Kosten von etwa <b>CHF 300k / Jahr</b> und
+            wir möchten bis im Sommer 2021 ein Budget für ein langfristiges
             Commitment des Teams für die nächsten 2-3 Jahre sichern. Insgesamt
             rechnen wird mit einem Finanzierungsbedarf von
             <b> CHF 600k – 900k</b>.
           </Text>
           <Text mb={4}>
             <strong>Langfristige Finanzierung</strong> - Für die
-            Weiterentwicklung und den Betrieb rechnen wir mit einem jährlichen
-            Budget von ca. <b>CHF 150k / Jahr</b>, welches wir über 2-3 Projekte
-            mit neuen Bildungsinhalten aus dem BNE-Bereich (Nachhaltige
-            Entwicklung) finanzieren möchten. Partner liefern dazu Inhalte und
-            betreiben Fundraising und wir stellen die Plattform und die
-            Erfahrung in der Skalierung von Lernprojekten zur Verfügung.
+            Weiterentwicklung und den Betrieb rechnen wir mit einem Budget von
+            <b>CHF 150k / Jahr</b>, welches wir über 2-3 Projekte mit neuen
+            Bildungsinhalten aus dem BNE-Bereich (Nachhaltige Entwicklung)
+            finanzieren möchten. Partner liefern dazu Inhalte und betreiben
+            Fundraising und wir setzen die Projekt auf unserer Platform um mit
+            der Erfahrung in der Skalierung von Lernprojekten.
           </Text>
         </Section>
         <H2 mt={5}>Kontakt für Stiftungen und potentielle Geldgeber</H2>
