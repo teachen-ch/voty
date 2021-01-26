@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/teachen-ch/voty/compare/v1.1.1...v1.2.0) (2021-01-26)
+
+
+### Features
+
+* upgrade cypress to 6.3.0 ([9e38365](https://github.com/teachen-ch/voty/commit/9e383658d792a33fc79bd71672a3aa729e809ef3))
+
 ## [1.1.1](https://github.com/teachen-ch/voty/compare/v1.1.0...v1.1.1) (2021-01-26)
 
 
