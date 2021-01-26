@@ -1,4 +1,4 @@
-import { Loading, ErrorPage, LoggedInPage } from "components/Page";
+import { Loading, ErrorPage, LoggedInPage, ShowFor } from "components/Page";
 import { Card, getCardMeta } from "components/Cards";
 import { useTeam, useUser } from "state/user";
 import { A, Breadcrumb, Here } from "components/Breadcrumb";
@@ -9,11 +9,12 @@ import { HideFeature } from "components/HideFeature";
 import { FeedbackText } from "components/Feedback";
 import { Text } from "rebass";
 import {
+  EditTeamPrefs,
   allowGroups,
   AllowGroupText,
   showWorks,
   ShowWorkText,
-} from "components/Works";
+} from "components/Prefs";
 
 export default function CardPage(): React.ReactElement {
   const user = useUser();
@@ -57,10 +58,20 @@ export default function CardPage(): React.ReactElement {
       </Breadcrumb>
 
       <Card id={key} />
-      <Text fontSize={1} fontStyle="italic" mt={4} textAlign="center">
+      <Text
+        fontSize={1}
+        fontStyle="italic"
+        mt={4}
+        textAlign="center"
+        width="100%"
+      >
         {ShowWorkText[showWorks(team, key)]}
         {". "}
         {AllowGroupText[allowGroups(team, key)]}
+        {". "}
+        <ShowFor role="Teacher">
+          <EditTeamPrefs team={team} card={key} />
+        </ShowFor>
       </Text>
 
       <HideFeature id="discussions">

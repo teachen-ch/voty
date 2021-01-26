@@ -11,7 +11,7 @@ import { useTeam } from "state/user";
 import { Role } from "graphql/types";
 import { ReadMore } from "components/ReadMore";
 import { LearningPath } from "components/LearningPaths";
-import { EditTeamPrefs } from "components/Teams";
+import { EditTeamPrefs } from "components/Prefs";
 
 export default function SelectCardsPage(): React.ReactElement {
   const router = useRouter();
@@ -45,7 +45,9 @@ export default function SelectCardsPage(): React.ReactElement {
 
       <H3>Folgende Lerninhalte sind ausgewählt</H3>
       <EditCardList teamCards={team.cards} teamId={team.id} />
-      <EditTeamPrefs team={team} />
+      <Text my={2} textAlign="right" fontSize={1}>
+        <EditTeamPrefs team={team} />
+      </Text>
       <ShowFor role="Admin">
         <Text mt={2} fontSize={1} textAlign="right">
           <A onClick={() => alert(team.cards)}>Pfad anzeigen</A>

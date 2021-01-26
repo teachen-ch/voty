@@ -9,7 +9,8 @@ import { uniq } from "lodash";
 import { SelectBallots } from "components/Ballots";
 import { gql } from "@apollo/client";
 import IconHint from "../../../public/images/icon_hint.svg";
-import { EditTeamPrefs, fragments } from "components/Teams";
+import { fragments } from "components/Teams";
+import { EditTeamPrefs } from "components/Prefs";
 import { ErrorBox } from "components/Form";
 import { trackEvent, usePageEvent } from "util/stats";
 import { HideFeature } from "components/HideFeature";
@@ -139,7 +140,11 @@ export default function TeacherTeamPage(): React.ReactElement {
         >
           Lerninhalte hinzufügen
         </Button>
-        {team.cards && <EditTeamPrefs team={team} />}
+        {team.cards && (
+          <Text my={2} textAlign="right" fontSize={1}>
+            <EditTeamPrefs team={team} />
+          </Text>
+        )}
         <Box mt={6} />
       </HideFeature>
       <H2>Abstimmungen Klasse {team.name}</H2>

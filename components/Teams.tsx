@@ -2,20 +2,15 @@ import { gql } from "@apollo/client";
 import { useUser } from "../state/user";
 import { Text, Box, Link as A, Button } from "rebass";
 import { QForm, ErrorBox } from "./Form";
-import { useState, ReactElement, useEffect } from "react";
+import { useState, ReactElement } from "react";
 import IconSuS from "../public/images/icon_sus.svg";
 import {
   TeamWhereInput,
   useTeamsQuery,
   TeamUserFieldsFragment,
   useCreateOneTeamMutation,
-  useSetPrefsMutation,
-  TeamTeacherFieldsFragment,
 } from "graphql/types";
-import { Err, Loading } from "./Page";
-import { cloneDeep } from "lodash";
-import { Label, Select } from "@rebass/forms";
-import { Grid } from "theme-ui";
+import { Loading } from "./Page";
 
 const TeamAnonFields = gql`
   fragment TeamAnonFields on Team {
@@ -247,81 +242,3 @@ export function CreateTeamForm({
     </QForm>
   );
 }
-
-export const SET_PREFS = gql`
-  mutation setPrefs($teamId: String!, $prefs: Json!) {
-    setPrefs(teamId: $teamId, prefs: $prefs) {
-      ...TeamTeacherFields
-    }
-  }
-  ${fragments.TeamTeacherFields}
-`;
-
-export const EditTeamPrefs: React.FC<{ team: TeamTeacherFieldsFragment }> = ({
-  team,
-}) => {
-  const [show, setShow] = useState(false);
-  const [success, setSuccess] = useState(false);
-  const [error, setError] = useState("");
-  const [prefs, setPrefs] = useState<Record<string, any>>(team.prefs);
-  let cancel = 0;
-  const [doSetPrefs, mutation] = useSetPrefsMutation({
-    variables: { teamId: team.id, prefs },
-    onCompleted() {
-      setSuccess(true);
-      cancel = setTimeout(() => setShow(false), 1000);
-    },
-    onError(err) {
-      setError(err.message);
-    },
-  });
-  useEffect(() => {
-    return () => clearTimeout(cancel);
-  });
-
-  function setPref(name: string, value: string) {
-    const newPrefs = cloneDeep(prefs);
-    newPrefs[name] = value;
-    setPrefs(newPrefs);
-  }
-
-  return (
-    <>
-      <Text my={2} textAlign="right" fontSize={1}>
-        <A onClick={() => setShow(!show)}>Klassen-Einstellungen bearbeiten</A>
-      </Text>
-      {show && (
-        <Box mt={3}>
-          <Label>
-            Bereits eingegebene Arbeiten der ganzen Klasse anzeigen:
-          </Label>
-          <Select
-            value={prefs["showWorks"] as string}
-            onChange={(e) => setPref("showWorks", e.target.value)}
-          >
-            <option value="">Immer</option>
-            <option value="after">Nach eigener Abgabe</option>
-            <option value="never">Nie</option>
-          </Select>
-          <Label mt={3}>Gruppenarbeiten ermöglichen:</Label>
-          <Select
-            value={prefs["allowGroups"] as string}
-            onChange={(e) => setPref("allowGroups", e.target.value)}
-          >
-            <option value="">Ja</option>
-            <option value="no">Nein</option>
-          </Select>
-          <Grid columns={"1fr 1fr"} mt={3}>
-            <Button variant="secondary" onClick={() => setShow(false)}>
-              Abbrechen
-            </Button>
-            <Button onClick={() => doSetPrefs()} disabled={mutation.loading}>
-              {success ? "Erfolgreich gespeichert" : "Speichern"}
-            </Button>
-          </Grid>
-          <Err msg={error} />
-        </Box>
-      )}
-    </>
-  );
-};

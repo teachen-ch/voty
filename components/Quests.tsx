@@ -11,15 +11,7 @@ import { BoxProps, Button, Text, Flex, Box } from "rebass";
 import { useTeam } from "state/user";
 import { CardContext } from "./Cards";
 import React from "react";
-import {
-  Authors,
-  usePostWork,
-  WorkCard,
-  Works,
-  WorkItem,
-  allowGroups,
-  AllowGroups,
-} from "./Works";
+import { Authors, usePostWork, WorkCard, Works, WorkItem } from "./Works";
 import { UserWhereUniqueInput } from "graphql/types";
 import { cloneDeep, shuffle } from "lodash";
 import { Info } from "./Info";
@@ -30,6 +22,7 @@ import DraggableList from "react-draggable-list";
 import IconMove from "../public/images/icon_move.svg";
 import IconCheck from "../public/images/icon_check.svg";
 import { FeedbackText } from "./Feedback";
+import { AllowGroups, allowGroups } from "./Prefs";
 
 export { Text };
 

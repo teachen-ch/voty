@@ -9,7 +9,6 @@ import {
   PostWorkMutation,
   Scalars,
   Visibility,
-  TeamUserFieldsFragment,
   Role,
 } from "graphql/types";
 import { AttachmentFields } from "components/Uploader";
@@ -24,6 +23,7 @@ import { Label, Radio } from "@rebass/forms";
 import { formatDate } from "util/date";
 import { Pill } from "./Misc";
 import { CardContext } from "./Cards";
+import { AllowGroups, allowGroups, showWorks, ShowWorks } from "./Prefs";
 
 export const WorkFields = gql`
   fragment WorkFields on Work {
@@ -441,50 +441,4 @@ export const Authors: React.FC<
       </Flex>
     </Box>
   );
-};
-
-export enum AllowGroups {
-  Yes = "",
-  No = "no",
-}
-
-export function allowGroups(
-  team: TeamUserFieldsFragment,
-  card: string,
-  defaultValue = AllowGroups.Yes
-): AllowGroups {
-  if (team.prefs["allowGroups"] !== undefined)
-    return team.prefs["allowGroups"] as AllowGroups;
-  else if (team.prefs[`allowGroups_${card}`] !== undefined)
-    return team.prefs[`allowGroups_${card}`] as AllowGroups;
-  else return defaultValue;
-}
-
-export const AllowGroupText: Record<AllowGroups, string> = {
-  [AllowGroups.Yes]: "Gruppenarbeiten sind möglich",
-  [AllowGroups.No]: "Gruppenarbeiten sind nicht möglich",
-};
-
-export enum ShowWorks {
-  Always = "",
-  After = "after",
-  Never = "never",
-}
-
-export function showWorks(
-  team: TeamUserFieldsFragment,
-  card: string,
-  defaultValue = ShowWorks.Always
-): ShowWorks {
-  if (team.prefs["showWorks"] !== undefined)
-    return team.prefs["showWorks"] as ShowWorks;
-  else if (team.prefs[`showWorks_${card}`] !== undefined)
-    return team.prefs[`showWorks_${card}`] as ShowWorks;
-  else return defaultValue;
-}
-
-export const ShowWorkText: Record<ShowWorks, string> = {
-  [ShowWorks.Always]: "Arbeiten werden sofort der Klasse angezeigt",
-  [ShowWorks.After]: "Arbeiten werden erst nach eigener Eingabe angezeigt",
-  [ShowWorks.Never]: "Arbeiten werden der Klasse nicht angezeigt",
 };
