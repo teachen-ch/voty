@@ -21,6 +21,11 @@ jobs:
       - name: Checkout latest version
         uses: actions/checkout@v2
 
+      - name: Release
+        run: npx semantic-release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Build image
         run: docker build . --file Dockerfile --tag $IMAGE_NAME
 

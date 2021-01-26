@@ -1,6 +1,6 @@
 {
   "name": "voty",
-  "version": "0.2.0",
+  "version": "1.1.1-development",
   "private": true,
   "scripts": {
     "dev": "yarn run next",
@@ -22,7 +22,8 @@
     "ci:release": "yarn install --frozen-lockfile && npx prisma generate && yarn run build",
     "graphql": "graphql-codegen --config codegen.yml",
     "nexus:reflection": "npx ts-node -T ./graphql/schema/index.ts --nexus-exit",
-    "lint": "npx eslint ./"
+    "lint": "npx eslint ./",
+    "semantic-release": "semantic-release"
   },
   "dependencies": {
     "@apollo/client": "^3.3.4",
@@ -82,6 +83,11 @@
     "@graphql-codegen/typescript-react-apollo": "^2.0.6",
     "@istanbuljs/nyc-config-typescript": "^1.0.1",
     "@prisma/cli": "^2.13.0",
+    "@semantic-release/changelog": "^5.0.1",
+    "@semantic-release/commit-analyzer": "^8.0.1",
+    "@semantic-release/git": "^9.0.0",
+    "@semantic-release/github": "^7.2.0",
+    "@semantic-release/release-notes-generator": "^9.0.1",
     "@testing-library/cypress": "^7.0.0",
     "@types/bcrypt": "^3.0.0",
     "@types/bcryptjs": "^2.4.2",
@@ -118,9 +124,14 @@
     "js-yaml": "^3.14.1",
     "nyc": "^15.1.0",
     "prettier": "^2.1.2",
+    "semantic-release": "^17.3.7",
     "simplytyped": "^3.3.0",
     "ts-node": "^9.1.1",
     "typescript": "^4.0.5",
     "yargs": "^16.2.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/teachen-ch/voty.git"
   }
 }
