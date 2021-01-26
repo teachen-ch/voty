@@ -85,7 +85,7 @@ export default function SelectCardsPage(): React.ReactElement {
   );
 }
 
-export const ListPaths: React.FC = () => (
+export const ListPaths: React.FC<{ anon?: boolean }> = ({ anon }) => (
   <Box mt={4}>
     <Text fontSize={2} mb={3}>
       Wähle entweder einen vorgeschlagenen Lernpfad für Deine Klasse oder stelle
@@ -96,7 +96,10 @@ export const ListPaths: React.FC = () => (
       bg="darkgray"
       fontSize={2}
     >
-      <LearningPath path="srf_abstimmen passion srf_regieren srf_wahlen chaty_initiativen chaty_referendum swissvotes_themen plakate plakat_gestalten tweety" />
+      <LearningPath
+        anon={anon}
+        path="srf_abstimmen passion srf_regieren srf_wahlen chaty_initiativen chaty_referendum swissvotes_themen plakate plakat_gestalten tweety"
+      />
     </ReadMore>
     <Box mt={3} />
     <ReadMore
@@ -104,7 +107,10 @@ export const ListPaths: React.FC = () => (
       bg="darkgray"
       fontSize={2}
     >
-      <LearningPath path="srf_abstimmen passion srf_regieren srf_wahlen chaty_initiativen chaty_referendum swissvotes_themen plakate plakat_gestalten tweety" />
+      <LearningPath
+        anon={anon}
+        path="srf_abstimmen passion srf_regieren srf_wahlen chaty_initiativen chaty_referendum swissvotes_themen plakate plakat_gestalten tweety"
+      />
     </ReadMore>
   </Box>
 );

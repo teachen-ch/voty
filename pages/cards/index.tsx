@@ -5,6 +5,7 @@ import { debounce } from "lodash";
 import { Button, Text, Flex } from "rebass";
 import { Filter } from "components/Swissvotes";
 import { useState } from "react";
+import { ListPaths } from "pages/team/[team]/select";
 
 export default function CardsPublic(): React.ReactElement {
   const [keywords, setKeywords] = useState("");
@@ -21,6 +22,7 @@ export default function CardsPublic(): React.ReactElement {
       Diese ersten Lerninhalte stehen aktuell auf voty.ch in einer frühen
       Beta-Version zur Verfügung. Ohne Klassen-Login können aber keine Arbeiten
       hochgeladen oder Diskussionen geführt werden.
+      <ListPaths anon={true} />
       <Flex mt={4}>
         <Input
           onChange={debounce((evt) => setKeywords(evt.target.value), 300)}

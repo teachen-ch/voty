@@ -9,7 +9,10 @@ import { A } from "./Breadcrumb";
 import IconWatch from "../public/images/icon_watch.svg";
 import { upperFirst } from "lodash";
 
-export const LearningPath: React.FC<{ path: string }> = ({ path }) => {
+export const LearningPath: React.FC<{ path: string; anon?: boolean }> = ({
+  path,
+  anon,
+}) => {
   const team = useTeam();
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState("");
@@ -70,13 +73,20 @@ export const LearningPath: React.FC<{ path: string }> = ({ path }) => {
           );
         })}
       </Table>
-      <Button mt={3} width="100%" onClick={addPath} disabled={mutation.loading}>
-        {mutation.loading
-          ? "Bitte warten..."
-          : success
-          ? "Lernpfad erfolgreich hinzugefügt"
-          : "Lernpfad der Klasse hinzufügen"}
-      </Button>
+      {!anon && (
+        <Button
+          mt={3}
+          width="100%"
+          onClick={addPath}
+          disabled={mutation.loading}
+        >
+          {mutation.loading
+            ? "Bitte warten..."
+            : success
+            ? "Lernpfad erfolgreich hinzugefügt"
+            : "Lernpfad der Klasse hinzufügen"}
+        </Button>
+      )}
       <Err msg={error} />
     </Box>
   );

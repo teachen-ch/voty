@@ -1,3 +1,9 @@
+export * as srf_abstimmen from "content/videos/srf_abstimmen.mdx";
+export * as srf_regieren from "content/videos/srf_regieren.mdx";
+export * as srf_wahlen from "content/videos/srf_wahlen.mdx";
+export * as srf_debattieren from "content/videos/srf_debattieren.mdx";
+export * as srf_populismus from "content/videos/srf_populismus.mdx";
+
 export * as passion from "content/tools/passion.mdx";
 export * as swissvotes from "content/tools/swissvotes.mdx";
 export * as swissvotes_themen from "content/tools/swissvotes_themen.mdx";
@@ -14,16 +20,10 @@ export * as chaty_referendum from "content/chaty/chaty_referendum.mdx";
 export * as chaty_create from "content/chaty/chaty_create.mdx";
 export * as chaty_initiativen from "content/chaty/chaty_initiativen.mdx";
 
-export * as wortsuche from "content/games/wortsuche.mdx";
-
-export * as srf_abstimmen from "content/videos/srf_abstimmen.mdx";
-export * as srf_regieren from "content/videos/srf_regieren.mdx";
-export * as srf_wahlen from "content/videos/srf_wahlen.mdx";
-export * as srf_debattieren from "content/videos/srf_debattieren.mdx";
-export * as srf_populismus from "content/videos/srf_populismus.mdx";
-
 export * as srf_drei_gewalten from "content/videos/srf_drei_gewalten.mdx";
 export * as srf_foederalismus from "content/videos/srf_foederalismus.mdx";
 export * as srf_mitbestimmen from "content/videos/srf_mitbestimmen.mdx";
 export * as srf_usa_parteien from "content/videos/srf_usa_parteien.mdx";
 export * as srf_erstes_mal_waehlen from "content/videos/srf_erstes_mal_waehlen.mdx";
+
+export * as wortsuche from "content/games/wortsuche.mdx";

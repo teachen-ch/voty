@@ -12,7 +12,16 @@ import { Grid } from "theme-ui";
 
 export default function Fundraising(): React.ReactElement {
   const [password, setPassword] = useState("");
-  const CORRECT = "y13435x621gfgfa88888888888888888";
+  const CORRECT = "6973e3e8";
+
+  function strHash(b: string) {
+    let c, a;
+    for (a = 0, c = b.length; c--; )
+      (a += b.charCodeAt(c)), (a += a << 10), (a ^= a >> 6);
+    a += a << 3;
+    a ^= a >> 11;
+    return (((a + (a << 15)) & 4294967295) >>> 0).toString(16);
+  }
 
   if (!password || strHash(password) !== CORRECT) {
     return (
@@ -363,10 +372,9 @@ export default function Fundraising(): React.ReactElement {
         </Section>
         <H2 mt={5}>Kontakt für Stiftungen und potentielle Geldgeber</H2>
         <Text mb={4}>
-          Stefan Niederhauser (Präsident Verein «Teachen!»). <br />
-          Alpenweg 11, 3110 Münsingen.
+          Stefan Niederhauser, Verein «Teachen!», Alpenweg 11, 3110 Münsingen.
           <br />
-          <br />
+          Email:{" "}
           <a href="mailto:fundraising@teachen.ch">fundraising@teachen.ch</a>
         </Text>
       </Card>
@@ -411,29 +419,3 @@ const Section: React.FC<{ title: string; id: string }> = ({
     </Box>
   );
 };
-
-function strHash(str: string) {
-  if (str.length % 32 > 0) str += Array(33 - (str.length % 32)).join("z");
-  let hash = "";
-  const bytes = [];
-  let [i, j, k] = [0, 0, 0];
-
-  const dict = "abcdefghijklmnopqrstuvwxy123456789".split("");
-  for (i = 0; i < str.length; i++) {
-    const ch = str.charCodeAt(i);
-    bytes[j++] = ch < 127 ? ch & 0xff : 127;
-  }
-  const chunk_len = Math.ceil(bytes.length / 32);
-  for (i = 0; i < bytes.length; i++) {
-    j += bytes[i];
-    k++;
-    if (k == chunk_len || i == bytes.length - 1) {
-      const a = Math.floor(j / k);
-      if (a < 32) hash += "0";
-      else if (a > 126) hash += "z";
-      else hash += dict[Math.floor((a - 32) / 2.76)];
-      j = k = 0;
-    }
-  }
-  return hash;
-}
