@@ -25,7 +25,7 @@ start() {
 
 stop() {
   cd {{ app_dir }}
-  docker-compose up -d
+  docker-compose down
 }
 
 restart() {
