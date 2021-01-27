@@ -1,3 +1,11 @@
+## [1.2.1](https://github.com/teachen-ch/voty/compare/v1.2.0...v1.2.1) (2021-01-27)
+
+
+### Bug Fixes
+
+* minor design fixes on ReadMore and Startpage ([f7268ed](https://github.com/teachen-ch/voty/commit/f7268ed127d8afe8e5335f715afd6b9e2923b061))
+* text and persisent pw on FM ([6d0613d](https://github.com/teachen-ch/voty/commit/6d0613d281d286dba81cf0ad1ee129e093b3f39b))
+
 # [1.2.0](https://github.com/teachen-ch/voty/compare/v1.1.1...v1.2.0) (2021-01-26)
 
 
