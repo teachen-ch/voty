@@ -11,7 +11,11 @@ import { Label, Input } from "@rebass/forms";
 import { Grid } from "theme-ui";
 
 export default function Fundraising(): React.ReactElement {
-  const [password, setPassword] = useState("");
+  const [password, setPassword] = useState(
+    typeof localStorage !== "undefined"
+      ? localStorage.getItem("fundraising")
+      : ""
+  );
   const CORRECT = "6973e3e8";
 
   function strHash(b: string) {
@@ -37,16 +41,18 @@ export default function Fundraising(): React.ReactElement {
       </AppPage>
     );
   }
+  if (typeof localStorage !== "undefined")
+    localStorage.setItem("fundraising", password);
+
   return (
     <AppPage heading="voty.ch – Demokratie an die Schule">
       <Card fontSize={2}>
         <Text fontWeight="semi" mt={5} mb={3} px={5}>
           Die Demokratie ist wohl eines der wichtigsten Güter der Schweiz. Aber
-          wie ge­lingt es uns, Ju­gendliche für unsere Demo­kratie zu
-          begeis­tern? Und wie können wir helfen, Themen wie dieses in der
-          Schule der Zukunft zu verankern? Auf dieser Seite möchten wir unsere{" "}
-          <a href="#idee">Idee</a>, den aktuellen{" "}
-          <a href="#demokratie">Entwicklungsstand</a>, unsere{" "}
+          wie ge­lingt es uns, Ju­gendliche dafür zu begeis­tern? Und wie können
+          wir helfen, Themen wie dieses in der Schule der Zukunft zu verankern?
+          Auf dieser Seite möchten wir unsere <a href="#idee">Idee</a>, den
+          aktuellen <a href="#demokratie">Entwicklungsstand</a>, unsere{" "}
           <a href="ziele">Zielsetzung</a> sowie den{" "}
           <a href="#finanzierung">Finanzierungsbedarf</a> für voty.ch darlegen.
           Damit möchten wir Fragen von Stiftungen und potentiellen Geldgebern
@@ -89,7 +95,7 @@ export default function Fundraising(): React.ReactElement {
             Startups sind bereits daran, für die Standardinhalte (Mathematik,
             Sprachen, etc.) entsprechende Plattformen und Inhalte zu entwickeln,
             aber insbesondere bei den Themen der nachhaltigen Entwicklung
-            (Schwerpunkt «BNE») gibt es einen grosses Potential in der
+            (Schwerpunkt «BNE») gibt es ein grosses Potential in der
             Digitalisierung. Denn auch wenn diese Inhalte im Lehrplan 21 mehr
             Platz finden, im Unterricht fristen sie oft noch ein
             stiefmütterliches Dasein.
@@ -109,13 +115,16 @@ export default function Fundraising(): React.ReactElement {
             beizusteuern und Änderungen vorzuschlagen («github.com for
             educational content»). Wir möchten den wichtigen Themen der
             nachhaltigen Entwicklung den Platz erkämpfen, der ihnen gebührt. Und
-            schlussendlich möchten wir lernen, wie wir direkt oder über Partner
-            viele Schulen erreichen können, um diese Learnings weiterzugeben und
-            um künftige Bildungsprojekte rascher skalieren zu können.
+            wir möchten lernen, wie wir direkt oder über Partner viele Schulen
+            erreichen. Diese Learnings möchten wir weiterzugeben, um künftige
+            Bildungsprojekte rascher skalieren zu können.
           </Text>
         </Section>
 
-        <Section title="Warum Demokratie?" id="demokratie">
+        <Section
+          title="Warum Demokratie – Aktueller Entwicklungsstand"
+          id="demokratie"
+        >
           <Text mb={4}>
             Der PrototypeFund hat uns ermöglicht, diese Vision für das Thema
             Demokratie zu testen. Dieses Thema liegt uns selber sehr am Herzen,
@@ -139,7 +148,7 @@ export default function Fundraising(): React.ReactElement {
             Danach haben wir unseren Online-Werkzeugkasten für den politischen
             Unterricht ausgebaut. Mit interaktiven Modulen für Einzel- oder
             Gruppenarbeiten, Videos mit Quizzes, dem Chatbot «Chaty» oder der
-            integrierten Datenbank sämtlicher Abstimmungen und Tausender von
+            integrierten Datenbank sämtlicher CH-Abstimmungen und Tausenden von
             Wahlplakaten legen wir den Grundstein für ein neues Lernerlebnis mit
             der Klasse: online oder im Klassenzimmer.
           </Text>
@@ -257,12 +266,12 @@ export default function Fundraising(): React.ReactElement {
           </ReadMore>
         </Section>
 
-        <Section title="Zielsetzung" id="ziele">
+        <Section title="Zielsetzung und Wirkung" id="ziele">
           <Text mb={4}>
             Die Wirkung unseres Projekt entfaltet sich auf zwei Arten. Zum
             ersten möchten wir mit voty.ch einen Standard setzen für ein toll
-            gemachtes hybrides Lehrmittel für die politische Bildung setzen und
-            damit in den nächsten 3 Jahren mindestens{" "}
+            gemachtes hybrides Lehrmittel für politische Bildung und damit in
+            den nächsten 3 Jahren mindestens{" "}
             <Tag bg="primary">500&nbsp;Schulklassen</Tag> erreichen. Wir sind
             überzeugt, dass die politische Partizipation der nächsten Generation
             nachhaltig gesteigert werden kann, wenn das Thema in der Schulzeit
@@ -272,8 +281,8 @@ export default function Fundraising(): React.ReactElement {
           </Text>
           <Text>
             Und schliesslich möchten wir nach der Skalierung von voty.ch unseren
-            Open-Source Techstack, sowie unsere Erfahrung in der Entwicklung und
-            in der Verbreitung von digitalen Lehrmitteln anderen Partnern zur
+            Open-Source Techstack, sowie unsere Erfahrung in der Erarbeitung und
+            der Verbreitung von digitalen Lehrmitteln anderen Partnern zur
             Verfügung stellen. In den nächsten 3 Jahren möchten wir prototypisch
             mit Partnerorganisationen aus dem Bereich der nachhaltigen
             Entwicklung{" "}
@@ -354,16 +363,16 @@ export default function Fundraising(): React.ReactElement {
           </Text>
           <Text mb={4}>
             <strong>Finanzierungsbedarf</strong> – Für den Aufbau und die
-            Skalierung rechnen mit Kosten von etwa <b>CHF 300k / Jahr</b> und
-            wir möchten bis im Sommer 2021 ein Budget für ein langfristiges
+            Skalierung rechnen mit Kosten von etwa <b>CHF 300k / Jahr</b>. Wir
+            möchten bis im Sommer 2021 das Budget für ein langfristiges
             Commitment des Teams für die nächsten 2-3 Jahre sichern. Insgesamt
             rechnen wird mit einem Finanzierungsbedarf von
             <b> CHF 600k – 900k</b>.
           </Text>
           <Text mb={4}>
             <strong>Langfristige Finanzierung</strong> - Für die
-            Weiterentwicklung und den Betrieb rechnen wir mit einem Budget von
-            <b>CHF 150k / Jahr</b>, welches wir über 2-3 Projekte mit neuen
+            Weiterentwicklung und den Betrieb rechnen wir mit Kosten von
+            <b>CHF 150k / Jahr</b>, welche wir über 2-3 Projekte mit neuen
             Bildungsinhalten aus dem BNE-Bereich (Nachhaltige Entwicklung)
             finanzieren möchten. Partner liefern dazu Inhalte und betreiben
             Fundraising und wir setzen die Projekt auf unserer Platform um mit
