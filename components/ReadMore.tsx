@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Box, Flex, Button } from "rebass";
+import { Box, Text, Flex, Button } from "rebass";
 
 import Plus from "../public/images/icon_plus.svg";
 import Minus from "../public/images/icon_minus.svg";
@@ -18,7 +18,7 @@ export const ReadMore: React.FC<{
         bg={bg}
         color="white"
         width="100%"
-        py={0}
+        py={"7px"}
         my={0}
       >
         <Flex
@@ -30,11 +30,21 @@ export const ReadMore: React.FC<{
         >
           {!hidePlus &&
             (open ? (
-              <Minus style={{ marginRight: 4 }} alt="Schliessen" />
+              <Minus alt="Schliessen" style={{ flexShrink: 0 }} />
             ) : (
-              <Plus style={{ marginRight: 4 }} alt="Öffnen" />
+              <Plus alt="Öffnen" style={{ flexShrink: 0 }} />
             ))}
-          {title}
+          <Text
+            textAlign="left"
+            variant="inline"
+            mx={2}
+            sx={{
+              textOverflow: "ellipsis",
+              whiteSpace: "nowrap",
+            }}
+          >
+            {title}
+          </Text>
         </Flex>
       </Button>
       {open && children}

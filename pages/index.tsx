@@ -93,6 +93,7 @@ export default function Home(): React.ReactElement {
               p={3}
               px={[4, 4, 5]}
               mt={[2, 2, 3, 4]}
+              height={80}
             >
               Jetzt Klasse anmelden!
             </Button>
