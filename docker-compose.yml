@@ -83,3 +83,4 @@ services:
       POSTGRES_USER: voty
       POSTGRES_PASSWORD: voty
       POSTGRES_DB: voty
+    # command: postgres -c archive_mode=on -c archive_timeout=600

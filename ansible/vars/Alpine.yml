@@ -6,3 +6,4 @@ service_dest: /etc/init.d/voty
 service_template: voty.service-alpine.j2
 reload_systemd: pwd
 cron_daily: /etc/periodic/daily
+cron_15min: /etc/periodic/15min

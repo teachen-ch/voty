@@ -6,5 +6,8 @@
     - name: Copy db backup script into cron.daily
       template:
         { src: db-backup, dest: "{{ cron_daily }}/db-backup", mode: "0700" }
+    - name: Copy db backup script into cron.daily
+      template:
+        { src: db-backup, dest: "{{ cron_15min }}/db-latest", mode: "0700" }
   become: yes
   become_method: sudo

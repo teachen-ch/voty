@@ -196,7 +196,7 @@ export const FAQ: React.FC = () => (
       können sich Lehrpersonen auf voty.ch kostenlos registrieren. Nach
       Bestätigung der Email-Adresse kann eine oder mehrere Klasse erstellt
       werden. Danach können die aktuellen Abstimmungen ausgewählt («E-ID Gesetz»
-      und «Verhüllungsverbot-Initiative», «Stop Palmöl-Referendum») und
+      und «Verhüllungsverbot-Initiative», «Abkommen mit Indonesien») und
       schliesslich die SuS via Email eingeladen werden. Wir empfehlen, die
       Themen vorgängig mit den Materialien von{" "}
       <Link

@@ -1,0 +1,4 @@
+server_name: backup.voty.ch
+old_server_name: voty.ch
+env_file: ../.env.production
+cache_time: 15m
