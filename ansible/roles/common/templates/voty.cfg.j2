@@ -1,3 +1,16 @@
+#
+#
+#
+#
+#
+#
+#
+# This is currently not used, as we use traefik in docker-compose
+#
+#
+#
+#
+#
 # Define the caching policy. Set {{ cache_time }} in /ansible/prod/group_vars
 proxy_cache_path /tmp/nginx levels=1:2 keys_zone=voty_zone:1m max_size=100m inactive=120m use_temp_path=off; 
 proxy_cache_valid 200 {{ cache_time }};

@@ -7,23 +7,6 @@
   #  - name: "install python3"
   #    raw: "sudo apk add python3"
   become: yes
-  #
-  # We are now generating certificates with traefik
-  # ----
-  # vars:
-  #   certbot_auto_renew_user: root
-  #   certbot_auto_renew_minute: "0"
-  #   certbot_auto_renew_hour: "5"
-  #   certbot_admin_email: voty@teachen.ch
-  #   certbot_create_if_missing: true
-  #   certbot_package: certbot
-  #   certbot_certs:
-  #     - domains:
-  #         - "{{ server_name }}"
-  #         - "www.{{server_name}}"
-  #         - "{{old_server_name}}"
-  #         - "www.{{old_server_name}}"
-
   tasks:
     - name: Include variables depending on OS distribution
       include_vars: "{{ item }}"

@@ -11,7 +11,7 @@
           #- nodejs
           #- git
           #- python2
-          - nginx
+          #- nginx
           - python3
           - "{{ python3_pip }}"
           - docker

@@ -1,4 +1,4 @@
 server_name: voty.ch
-old_server_name: votyapp.ch
+certificates: Host(`voty.ch`) ||  Host(`www.voty.ch`) ||  Host(`votyapp.ch`) ||  Host(`www.votyapp.ch`) 
 env_file: ../.env.production
 cache_time: 15m

@@ -1,4 +1,4 @@
 server_name: dev.voty.ch
-old_server_name: dev.votyapp.ch
+certificates: Host(`dev.voty.ch`) || Host(`www.dev.voty.ch`)
 env_file: ../.env.development
 cache_time: 1m
