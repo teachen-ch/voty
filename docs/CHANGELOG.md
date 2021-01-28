@@ -1,3 +1,10 @@
+## [1.5.1](https://github.com/teachen-ch/voty/compare/v1.5.0...v1.5.1) (2021-01-28)
+
+
+### Bug Fixes
+
+* /new ([5417a12](https://github.com/teachen-ch/voty/commit/5417a123c61bd860923057ede21028e3a45a0250))
+
 # [1.5.0](https://github.com/teachen-ch/voty/compare/v1.4.0...v1.5.0) (2021-01-28)
 
 
