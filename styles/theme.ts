@@ -154,7 +154,8 @@ export default {
       },
       h3: {
         variant: "text.heading",
-        fontSize: [2, 2, 3],
+        fontSize: [2, 2, 4],
+        fontWeight: "semi",
       },
       h4: {
         variant: "text.heading",
