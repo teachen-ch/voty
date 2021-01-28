@@ -55,7 +55,7 @@ export const TopBar: React.FC<{ hideLogo?: boolean }> = (props) => {
       color="white"
       fontSize={3}
       px={[3, 3, 5, 0]}
-      sx={{ position: ["absolute", "absolute", "fixed"], top: 0, zIndex: 10 }}
+      sx={{ position: ["absolute", "absolute"], top: 0, zIndex: 10 }}
     >
       <Flex
         alignItems="flex-start"

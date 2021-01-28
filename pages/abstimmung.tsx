@@ -81,6 +81,26 @@ export default function Abstimmung(): ReactElement {
         </Flex>
       </Flex>
 
+      {!newUser ? (
+        <>
+          <Heading as="h2" id="form">
+            Interessiert? Melde Dich jetzt mit Deiner Klasse an
+          </Heading>
+          <CreateUserForm
+            setUser={setNewUser}
+            omitRole
+            defaultRole={Role.Teacher}
+          ></CreateUserForm>
+        </>
+      ) : (
+        <>
+          <Heading as="h2">Die Anmeldung hat geklappt!</Heading>
+          <Success user={newUser} />
+        </>
+      )}
+
+      <Box my={5} />
+
       <Explainer title="Anleitung Klassenabstimmung">
         <Step n={1}>
           Erstellen Sie ein Konto auf voty.ch und eröffnen sie eine Klasse:
@@ -115,43 +135,8 @@ export default function Abstimmung(): ReactElement {
           <Image src="/screens/screen_s4.png" mt={2} />
         </Step>
       </Explainer>
+      <Box mt={3} />
 
-      {!newUser ? (
-        <>
-          <Heading as="h2" id="form">
-            Interessiert? Melde Dich jetzt mit Deiner Klasse an
-          </Heading>
-          <CreateUserForm
-            setUser={setNewUser}
-            omitRole
-            defaultRole={Role.Teacher}
-          ></CreateUserForm>
-        </>
-      ) : (
-        <>
-          <Heading as="h2">Die Anmeldung hat geklappt!</Heading>
-          <Success user={newUser} />
-        </>
-      )}
-
-      <Box my="80px">
-        <Text
-          fontSize={[3, 3, 4]}
-          pl={4}
-          fontWeight="semi"
-          sx={{
-            lineHeight: "1.5",
-            borderLeft: "6px solid",
-            borderColor: "white",
-          }}
-        >
-          Kennst Du interessierte Lehrpersonen, welche ebenfalls politische
-          Bildung unterrichten (Sekundarstufe, Gymnasium, Berufsschulen). Dann
-          versuche doch, sie ebenfalls für die Aktion zu begeistern.
-        </Text>
-      </Box>
-
-      <Box my={5} />
       <ReadMore title="Fragen und Antworten">
         <FAQ />
       </ReadMore>

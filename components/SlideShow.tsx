@@ -24,7 +24,12 @@ export const SlideShow: React.FC<
   } */
   return (
     <Box {...props} textAlign="center">
-      <img src={images[active]} className={className} />
+      <img
+        src={images[active]}
+        className={className}
+        style={{ cursor: "pointer" }}
+        onClick={() => setActive((active + 1) % images.length)}
+      />
       {captions && <figcaption>{captions[active]}</figcaption>}
       {images.length > 1 &&
         images.map((image, ix) => (

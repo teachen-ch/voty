@@ -248,6 +248,15 @@ export default {
     inline: {
       display: "inline-block",
     },
+    link: {
+      display: "inline-block",
+      color: "inherit",
+      textDecoration: "none",
+      cursor: "pointer",
+      ":hover": {
+        textDecoration: "underline",
+      },
+    },
   },
   buttons: {
     primary: {

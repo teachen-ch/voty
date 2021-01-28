@@ -54,6 +54,7 @@ declare module "rebass" {
     css?: InterpolationWithTheme<any>;
   }
   interface LinkProps extends LinkP {
+    fontWeight?: string;
     css?: InterpolationWithTheme<any>;
   }
   interface TextProps extends TextP {

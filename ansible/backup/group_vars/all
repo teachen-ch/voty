@@ -1,4 +1,4 @@
 server_name: demo.voty.ch
-certificates: Host(`backup.voty.ch`) || Host(`demo.voty.ch`)
+certificates: Host(`demo.voty.ch`) || Host(`backup.voty.ch`)
 env_file: ../.env.production
 cache_time: 15m
