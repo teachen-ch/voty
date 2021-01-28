@@ -1,3 +1,17 @@
+# [1.4.0](https://github.com/teachen-ch/voty/compare/v1.3.0...v1.4.0) (2021-01-28)
+
+
+### Bug Fixes
+
+* minor styling changes on changelog ([b578989](https://github.com/teachen-ch/voty/commit/b578989029800005bc866141c56680c47c18a393))
+
+
+### Features
+
+* add daily backup for uploads ([c4fd530](https://github.com/teachen-ch/voty/commit/c4fd530d2eaf2d81633931fd963fa9d92df76f5f))
+* deploy additionally to backup server ([65c294f](https://github.com/teachen-ch/voty/commit/65c294f0284546118c8c3d355b114acd1bd636d5))
+* rewrote /lernen campaign page ([9ebb773](https://github.com/teachen-ch/voty/commit/9ebb773035ed25315df8bba08bee49a9d1eeed3b))
+
 # [1.3.0](https://github.com/teachen-ch/voty/compare/v1.2.1...v1.3.0) (2021-01-28)
 
 
