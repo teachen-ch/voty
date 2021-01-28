@@ -73,6 +73,9 @@ def wait(min):
 
 
 log = initLogger()
+
+log.info("Fetching latest updates from git")
+exec("git pull")
 commitMessage = " ".join(sys.argv[1:]) or input(
     "Commit message (empty to skip commit): ")
 
