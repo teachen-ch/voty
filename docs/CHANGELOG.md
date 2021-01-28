@@ -1,3 +1,18 @@
+# [1.3.0](https://github.com/teachen-ch/voty/compare/v1.2.1...v1.3.0) (2021-01-28)
+
+
+### Bug Fixes
+
+* correcting a few video URLs ([2df2848](https://github.com/teachen-ch/voty/commit/2df28486d953824c949aa1ad4212eb5d5ac8b0b4))
+* updating deploy script ([8aa71ff](https://github.com/teachen-ch/voty/commit/8aa71ff77f841fdb9d98b96f5999c251492f87d0))
+
+
+### Features
+
+* add quarter-hourly db backups ([cfef071](https://github.com/teachen-ch/voty/commit/cfef071e3e4b63b9c890eb40d599e55966943508))
+* deploy cards, activities and discussion to prod ([e908756](https://github.com/teachen-ch/voty/commit/e908756bca2fdfd7f3ce0c2992d8785dd1f8f7dd))
+* show voty.ch/changelog online ([69f40ff](https://github.com/teachen-ch/voty/commit/69f40ffa7262f972e25cf62fb117ff1c283cbc38))
+
 ## [1.2.1](https://github.com/teachen-ch/voty/compare/v1.2.0...v1.2.1) (2021-01-27)
 
 
