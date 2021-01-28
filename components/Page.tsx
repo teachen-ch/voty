@@ -33,11 +33,13 @@ export const AppPage: React.FC<{
   const [colorMode] = useColorMode();
   const light = colorMode === "light";
 
-  const bgImages = props.bgImages || [
+  const bgImages =
+    props.bgImages ||
+    []; /* 
     "voty_bg_mobile_dark.svg",
     "voty_bg_mobile_dark.svg",
     light ? "voty_bg_1.svg" : "voty_bg_1_dark.svg",
-  ];
+  ]; */
   return (
     <>
       <Background bgImages={bgImages} />

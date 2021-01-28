@@ -1,9 +1,8 @@
 import Head from "next/head";
 import { Flex, Heading, Box, Text, Button, Image } from "rebass";
-import { Container, H1 } from "components/Page";
+import { Background, Container, H1 } from "components/Page";
 import { Footer } from "components/Footer";
 import { TopBar } from "components/TopBar";
-import { A } from "components/Breadcrumb";
 import { Grid, useColorMode } from "theme-ui";
 import { useRouter } from "next/router";
 import { isMobile } from "util/isBrowser";
@@ -20,6 +19,7 @@ export default function Home(): React.ReactElement {
         <title>voty.ch – Demokratie an die Schule</title>
       </Head>
 
+      <Background bgImages={[]} />
       <TopBar hideLogo={true} />
       <Container as="main" pt={[0, 0, 30, 40]} px={[3, 3, 3, 0]}>
         <Image
@@ -32,17 +32,20 @@ export default function Home(): React.ReactElement {
 
         <H1
           as="h1"
-          my={0}
+          mt={0}
+          mb={[0, 0, -2, -3]}
           pt={3}
-          fontSize={[3, 4, "28px", "40px"]}
+          fontSize={[3, 4, "32px", "40px"]}
           textAlign="center"
         >
           Demokratie an die Schule!
         </H1>
 
-        <NextImage src="/images/start_intro.png" width={2144} height={1175} />
+        <Box maxWidth="85%">
+          <NextImage src="/images/start_intro.png" width={2144} height={1175} />
+        </Box>
 
-        <Box maxWidth="800px" width="100%" textAlign="center">
+        <Box maxWidth="960px" width="100%" textAlign="center">
           <Button
             onClick={() => router.push("/abstimmung")}
             mt={[2, 2, 3, 4]}
@@ -54,16 +57,11 @@ export default function Home(): React.ReactElement {
             Jetzt Klasse anmelden{isMobile() ? "" : " und abstimmen"}!
           </Button>
 
-          <Heading as="h2" fontSize={["30px", "30px", 5]} mt={[4, 4, 5]}>
+          <Heading as="h2" fontSize={["30px", "30px", "40px"]} mt={[4, 4, 5]}>
             Jugendliche stimmen ab – ein Experiment
           </Heading>
-          <Flex mb={5} justifyContent="space-around">
-            <Text
-              fontWeight="semi"
-              lineHeight="1.5em"
-              fontSize="18px"
-              maxWidth="700px"
-            >
+          <Flex mb={[4, 4, 5]} justifyContent="space-around">
+            <Text lineHeight="1.5em" fontSize={[2, 2, 3]}>
               Die Demokratie ist eines der wohl wichtigsten Güter der Schweiz.
               Aber wie ge­lingt es uns, die Ju­gendlichen für die Demo­kratie zu
               begeis­tern?
@@ -73,17 +71,13 @@ export default function Home(): React.ReactElement {
               demokratische Praxis erreicht werden kann. Deshalb möchten wir mit
               voty.ch bereits in der Schule eine Basis für das
               Demokratieverständnis schaffen, dieses mit den Schüler*Innen
-              praktisch anwenden und so die Fähigkeiten fördern, welche für eine
+              anwenden und so die Fähigkeiten fördern, welche für eine
               demokratische Partizipation wichtig sind.
-              <br />
-              <A href="/projekt">Weitere Informationen zum Projekt voty.ch</A>
             </Text>
           </Flex>
 
-          <Grid my={3} columns={["", "", "auto auto auto"]} gap={2}>
-            <Button onClick={() => router.push("/abstimmung")}>
-              voty.ch testen
-            </Button>
+          <Grid columns={["", "", "auto auto auto"]} gap={2}>
+            <Button onClick={() => router.push("/demo")}>voty.ch testen</Button>
             <Button onClick={() => router.push("/projekt")} flex={1}>
               Weitere Infos zum Projekt
             </Button>
@@ -95,13 +89,13 @@ export default function Home(): React.ReactElement {
 
         <Flex
           mb={200}
-          width={["100%", "100%", "60%", "100%"]}
+          width={["100%", "100%", "80%", "100%"]}
           maxWidth="1160px"
           flexDirection="column"
           alignItems="center"
           justifyContent="center"
         >
-          <H1>Module 1 – Demokratie verstehen</H1>
+          <H1 mt={[5, 5, 6]}>Module 1 – Demokratie verstehen</H1>
           <Teaser>
             <TeaserImage
               src="/images/start_teaser_1.png"
@@ -175,6 +169,24 @@ export default function Home(): React.ReactElement {
               top={-60}
             />
           </Teaser>
+
+          <H1>Und weiteres aus dem voty.ch Blog</H1>
+          <Teaser>
+            <TeaserImage
+              src="/images/start_teaser_5.png"
+              width={1070}
+              height={1007}
+              top={-60}
+            />
+            <TeaserText title="Wie sehen gute Distance Learning Lehrmittel aus?">
+              Im Vergleich zu älteren Generationen gehen junge Menschen (18-30)
+              in der Schweiz halb so oft abstimmen. Dabei wäre gerade ihre
+              Meinung wichtig! Wir wollen Jugendliche ermutigen und befähigen,
+              ihr Stimmrecht aktiv wahrzunehmen – das will geübt sein! Lassen
+              sie jetzt ihre Klasse über aktuelle Themen abstimmen.{" "}
+              <LearnMore href="/distance-learning" />
+            </TeaserText>
+          </Teaser>
         </Flex>
         <Footer />
       </Container>
@@ -216,7 +228,7 @@ const TeaserImage: React.FC<{
   height: number;
   top?: number;
 }> = ({ src, width, height, top }) => (
-  <Box width={["100%", "100%", "100%", "50%"]}>
+  <Box width={["90%", "90%", "70%", "50%"]} mx="auto">
     <Box
       sx={{ position: "relative", marginTop: [0, 0, 0, top] }}
       mx={[0, 0, 2]}
