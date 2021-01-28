@@ -1,10 +1,10 @@
 import { isProd } from "util/isBrowser";
 
 const prodEnabled: Record<string, boolean> = {
-  cards: false,
-  activities: false,
-  discussions: false,
-  demo: false,
+  cards: true,
+  activities: true,
+  discussions: true,
+  demo: true,
 };
 
 /**
