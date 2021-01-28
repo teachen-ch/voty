@@ -47,7 +47,7 @@ export const NewsletterSlim: React.FC<{ campaign?: string }> = ({
       <input type="hidden" name="Kampagne" value={campaign} />
       <input type="hidden" name="list" value="tpTmOmECEZr7Zjk76307UvTA" />
       <input type="hidden" name="subform" value="yes" />
-      <Submit name="submit" value="Abschicken" />
+      <Submit name="submit" value="Anmelden" />
     </Grid>
   </form>
 );

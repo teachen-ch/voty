@@ -31,7 +31,7 @@ export const SlideShow: React.FC<
           <Dot
             mt={-3}
             key={image}
-            color={ix === active ? "primary" : "lightgray"}
+            color={ix === active ? "primary" : "white"}
             onClick={() => {
               // clearTimeout(cancel);
               setActive(ix);
