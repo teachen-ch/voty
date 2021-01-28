@@ -1,3 +1,10 @@
+# [1.5.0](https://github.com/teachen-ch/voty/compare/v1.4.0...v1.5.0) (2021-01-28)
+
+
+### Features
+
+* 🤫 /new ([2ad3494](https://github.com/teachen-ch/voty/commit/2ad3494442d941fef440c488013791ed39cc63e4))
+
 # [1.4.0](https://github.com/teachen-ch/voty/compare/v1.3.0...v1.4.0) (2021-01-28)
 
 
