@@ -8,11 +8,11 @@ import sys
 import time
 import re
 
-DAYS = 30  # remove older backups
+DAYS = 14  # remove older backups
 CONTAINER = "postgres"
 BACKUPROOT = "/voty/backup"
 ENV_FILE = "/voty/.env"
-HOSTNAME = os.environ.get("HOSTNAME", "unkown")
+HOSTNAME = os.uname()[1]
 
 
 def readEnv(envFile):

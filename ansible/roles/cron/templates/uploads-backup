@@ -1,0 +1,61 @@
+#!/usr/bin/env python3
+# nightly dumps of /voty/uploads folder to SFTP server
+
+from datetime import datetime
+from ftplib import FTP_TLS
+import os
+import sys
+import time
+import re
+
+DAYS = 7  # remove older backups
+ROOT = "/voty/"
+BACKUPS = "backup/"
+UPLOADS = "uploads/"
+ENV_FILE = ROOT + ".env"
+HOSTNAME = os.uname()[1]
+
+
+def readEnv(envFile):
+    lines = open(envFile).readlines()
+    # remove newlines
+    stripped = map(lambda s: s.replace("\n", ""), lines)
+    # filter empty lines and comments
+    filtered = filter(lambda s: len(s) > 0 and not s.startswith("#"), stripped)
+    pairs = map(lambda s: re.split(r'\s*=\s*', s), filtered)
+    return dict(pairs)
+
+
+env = readEnv(ENV_FILE)
+if (not 'BACKUP_SERVER' in env):
+    print("Skipping backup, as BACKUP_SERVER is not defined")
+    sys.exit(0)
+
+BACKUP_SERVER = env['BACKUP_SERVER']
+BACKUP_USER = env['BACKUP_USER']
+BACKUP_PASS = env['BACKUP_PASS']
+
+# generate backup filename
+dateStr = datetime.now().strftime("%Y-%m-%d-%Hh%Mm")
+fileName = "uploads-%s-%s.tgz" % (HOSTNAME, dateStr)
+
+cmd = "cd %s && tar -czf %s%s %s" % (ROOT, BACKUPS, fileName, UPLOADS)
+
+code = os.system(cmd)
+if (code != 0):
+    print("Error: could not run create backup")
+    sys.exit(code)
+
+
+cmd = "cp %s %suploads-prod-latest.tgz" % (ROOT+BACKUPS+fileName, ROOT+BACKUPS)
+os.system(cmd)
+
+# Upload latest file via FTPES
+ftps = FTP_TLS(BACKUP_SERVER)
+ftps.login(BACKUP_USER, BACKUP_PASS)
+ftps.prot_p()
+file = open(os.path.join(ROOT + BACKUPS, fileName), 'rb')
+ftps.storbinary('STOR '+fileName, file, blocksize=8192)
+file = open(os.path.join(ROOT + BACKUPS, "uploads-prod-latest.tgz"), 'rb')
+ftps.storbinary('STOR uploads-prod-latest.tgz', file, blocksize=8192)
+file.close()
