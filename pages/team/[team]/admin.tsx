@@ -1,5 +1,5 @@
 import { H2, LoggedInPage } from "components/Page";
-import { Image, Box, Text, Button } from "rebass";
+import { Box, Text, Button } from "rebass";
 import { Users } from "components/Users";
 import { Input, Textarea } from "@rebass/forms";
 import { Grid, Label } from "theme-ui";
@@ -26,6 +26,7 @@ import { Spinner } from "theme-ui";
 import PanelPage from "./panel";
 import { TeacherCardList } from "components/Cards";
 import { Activities } from "components/Activities";
+import IconQR from "../../../public/images/icon_qr.svg";
 // import { usePolling } from "util/hooks";
 
 export const INVITE_STUDENTS = gql`
@@ -287,12 +288,12 @@ const InviteLink: React.FC<{ team: TeamTeacherFieldsFragment }> = ({
   }
 
   return (
-    <Grid my={2} gap={3} columns={[0, 0, "1fr 3fr 2fr"]}>
+    <Grid my={2} gap={3} columns={[0, 0, "2fr 3fr 2fr"]}>
       <Label sx={{ alignSelf: "center", fontSize: 1 }}>Einladungslink:</Label>
       <Input ref={inviteRef} readOnly fontSize={1} value={url} />
       <Button fontSize={1} onClick={() => qrCode(url)}>
         <Box variant="centered">
-          <Image src="/images/icon_qr.svg" mr={2} height="25px" />
+          <IconQR height="25px" width="25px" style={{ marginRight: "8px" }} />
           QR-Code
         </Box>
       </Button>
