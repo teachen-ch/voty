@@ -1,3 +1,12 @@
+# [1.6.0](https://github.com/teachen-ch/voty/compare/v1.5.1...v1.6.0) (2021-01-29)
+
+
+### Features
+
+* DarkMode and Swissvotes improvements ([1817b46](https://github.com/teachen-ch/voty/commit/1817b4674564840ca8f8261337d06f7629aee820))
+* move FAQ to dedicate page and component ([c6a20ef](https://github.com/teachen-ch/voty/commit/c6a20efb0a732278a6984c68699dd2555f70ed15))
+* rearranged content on /new ([842d3d5](https://github.com/teachen-ch/voty/commit/842d3d5ba8b4c5866fe1bee820283c9a9245c23e))
+
 ## [1.5.1](https://github.com/teachen-ch/voty/compare/v1.5.0...v1.5.1) (2021-01-28)
 
 
