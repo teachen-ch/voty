@@ -49,6 +49,16 @@ export function getShortname(_root: {
     return `${upperFirst(String(_root.name)).substr(0, 1)}. ${_root.lastname}`;
 }
 
+export const exists: FieldResolver<"Query", "exists"> = async (
+  _root,
+  args,
+  ctx: Context
+) => {
+  const { email } = args;
+  const user = await ctx.db.user.findUnique({ where: { email } });
+  return { success: user ? true : false };
+};
+
 export const login: FieldResolver<"Mutation", "login"> = async (
   _root,
   args,

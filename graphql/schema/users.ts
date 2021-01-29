@@ -41,7 +41,13 @@ export const UserQuery = extendType({
       ordering: true,
       filtering: true,
     });
-
+    t.field("exists", {
+      type: "Response",
+      args: {
+        email: nonNull(stringArg()),
+      },
+      resolve: users.exists,
+    });
     t.field("me", {
       type: "User",
       resolve: async (_root, args, ctx) => users.getUser(ctx),

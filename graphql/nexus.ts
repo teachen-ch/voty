@@ -8391,6 +8391,7 @@ export interface NexusGenFieldTypes {
     ballot: NexusGenRootTypes["Ballot"] | null; // Ballot
     ballots: NexusGenRootTypes["Ballot"][]; // [Ballot!]!
     cards: Array<NexusGenRootTypes["Card"] | null> | null; // [Card]
+    exists: NexusGenRootTypes["Response"] | null; // Response
     getBallotResults: NexusGenRootTypes["BallotResults"] | null; // BallotResults
     getBallotRuns: Array<NexusGenRootTypes["BallotRun"] | null> | null; // [BallotRun]
     getTeamDiscussions: Array<NexusGenRootTypes["Discussion"] | null> | null; // [Discussion]
@@ -8641,6 +8642,7 @@ export interface NexusGenFieldTypeNames {
     ballot: "Ballot";
     ballots: "Ballot";
     cards: "Card";
+    exists: "Response";
     getBallotResults: "BallotResults";
     getBallotRuns: "BallotRun";
     getTeamDiscussions: "Discussion";
@@ -8945,6 +8947,10 @@ export interface NexusGenArgTypes {
       age?: string | null; // String
       keywords?: string | null; // String
       type?: string | null; // String
+    };
+    exists: {
+      // args
+      email: string; // String!
     };
     getBallotResults: {
       // args

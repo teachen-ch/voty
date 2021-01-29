@@ -91,6 +91,7 @@ export const canViewBallot = rule({ cache: "strict" })(
 export const permissions = shield(
   {
     Query: {
+      exists: allow,
       user: or(isAdmin, teachesTeam),
       users: or(isAdmin, isTeacher),
       me: allow,
