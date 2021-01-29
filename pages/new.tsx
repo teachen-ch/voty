@@ -44,7 +44,12 @@ export default function Home(): React.ReactElement {
         </H1>
 
         <Box maxWidth="85%">
-          <NextImage src="/images/start_intro.png" width={2144} height={1175} />
+          <NextImage
+            src="/images/start_intro.png"
+            width={2144}
+            height={1175}
+            alt="voty.ch – Online Demokratie Lernmittel"
+          />
         </Box>
 
         <Box maxWidth="800px" width="100%" textAlign="center">
@@ -234,7 +239,13 @@ const TeaserImage: React.FC<{
       mx={[0, 0, 2]}
       mb={4}
     >
-      <NextImage src={src} width={width} height={height} layout="responsive" />
+      <NextImage
+        src={src}
+        width={width}
+        height={height}
+        layout="responsive"
+        alt="Teaser-Bild"
+      />
     </Box>
   </Box>
 );
