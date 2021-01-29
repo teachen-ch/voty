@@ -98,7 +98,11 @@ const Invite: React.FC = () => {
   }
 
   if (newUser !== undefined) {
-    return <Success user={newUser} />;
+    return (
+      <AppPage heading="Dein Konto ist erstellt">
+        <Success user={newUser} />
+      </AppPage>
+    );
   }
 
   return (

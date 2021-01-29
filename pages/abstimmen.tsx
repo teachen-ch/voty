@@ -1,23 +1,15 @@
 import { AppPage } from "components/Page";
 import { Heading, Text, Box, Flex, Link, Image, Card } from "rebass";
 import { Grid } from "theme-ui";
-import { ReactElement, useState } from "react";
-import { CreateUserForm } from "pages/user/signup";
-import Success from "pages/user/success";
-import { Role } from "graphql/types";
-import { SessionUser } from "state/user";
+import { ReactElement } from "react";
 import { ReadMore } from "components/ReadMore";
 import IconCheckWhite from "../public/images/icon_yes.svg";
 import { TDIcon } from "components/Table";
 import { CircleBullet } from "components/Misc";
 import { FAQ } from "../components/FAQ";
+import { InlineSignup } from "./user/signup";
 
 export default function Abstimmung(): ReactElement {
-  const [newUser, setNewUser] = useState<SessionUser | undefined>(undefined);
-  if (newUser) {
-    window.scrollTo(0, 0);
-    return <Success user={newUser} />;
-  }
   return (
     <AppPage heading="Jugendliche stimmen ab – jetzt Klasse anmelden">
       <Text mt={4} fontSize={[2, 2, 3]}>
@@ -81,24 +73,6 @@ export default function Abstimmung(): ReactElement {
         </Flex>
       </Flex>
 
-      {!newUser ? (
-        <>
-          <Heading as="h2" id="form">
-            Interessiert? Melde Dich jetzt mit Deiner Klasse an
-          </Heading>
-          <CreateUserForm
-            setUser={setNewUser}
-            omitRole
-            defaultRole={Role.Teacher}
-          ></CreateUserForm>
-        </>
-      ) : (
-        <>
-          <Heading as="h2">Die Anmeldung hat geklappt!</Heading>
-          <Success user={newUser} />
-        </>
-      )}
-
       <Box my={5} />
 
       <Explainer title="Anleitung Klassenabstimmung">
@@ -136,6 +110,8 @@ export default function Abstimmung(): ReactElement {
         </Step>
       </Explainer>
       <Box mt={3} />
+
+      <InlineSignup />
 
       <ReadMore title="Fragen und Antworten">
         <FAQ />

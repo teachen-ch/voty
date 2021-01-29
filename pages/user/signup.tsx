@@ -1,5 +1,5 @@
 import { AppPage } from "components/Page";
-import { Text, Button } from "rebass";
+import { Text, Button, Heading, Card } from "rebass";
 import { gql } from "@apollo/client";
 import { useState, ReactElement, Dispatch, SetStateAction } from "react";
 import { useRouter } from "next/router";
@@ -27,7 +27,11 @@ export default function Signup(): ReactElement {
   const [user, setUser] = useState<SessionUser | undefined>(undefined);
   const router = useRouter();
   if (user) {
-    return <Success user={user} />;
+    return (
+      <AppPage heading="Dein Konto ist erstellt">
+        <Success user={user} />
+      </AppPage>
+    );
   }
   return (
     <AppPage
@@ -43,6 +47,30 @@ export default function Signup(): ReactElement {
     </AppPage>
   );
 }
+
+export const InlineSignup: React.FC = () => {
+  const [newUser, setNewUser] = useState<SessionUser | undefined>(undefined);
+
+  if (newUser) {
+    return (
+      <Card>
+        <Success user={newUser} />
+      </Card>
+    );
+  } else
+    return (
+      <>
+        <Heading as="h2" id="form">
+          Interessiert? Melde Dich jetzt mit Deiner Klasse an
+        </Heading>
+        <CreateUserForm
+          setUser={setNewUser}
+          omitRole
+          defaultRole={Role.Teacher}
+        ></CreateUserForm>
+      </>
+    );
+};
 
 export const CreateUserForm: React.FC<{
   setUser: Dispatch<SetStateAction<SessionUser | undefined>>;

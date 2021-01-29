@@ -2,6 +2,7 @@ import { Info, Image, Center, Link } from "components/Learning";
 import { NewsletterSlim } from "components/Newsletter";
 import { SlideShow } from "components/SlideShow";
 import { A } from "components/Breadcrumb";
+import { InlineSignup } from "./user/signup";
 
 # Online Werkzeugkiste für Demokratie-Unterricht
 
@@ -27,11 +28,14 @@ für Einzel- oder Gruppenarbeiten (Bsp: <A href="/cards/passion"  target="conten
   className="screenshot"
 />
 
+Du unterrichtest politische Bildung und möchtest voty.ch im Unterricht
+einsetzen? Noch sind nicht alle Inhalte fertiggestellt aber wir freuen uns
+über Feedback aus dem Praxiseinsatz!
+
+<InlineSignup />
+
 <Info type="info" py={3}>
-  Du unterrichtest politische Bildung und möchtest voty.ch im Unterricht
-  einsetzen? Noch sind nicht alle Inhalte fertiggestellt aber wir freuen uns
-  über Feedback aus dem Praxiseinsatz! Melde Dich hier mit deiner Schul-Email
-  an:
+  Melde Dich hier mit deiner Schul-Email an:
   <br />
   <br />
   <NewsletterSlim campaign="Lernen" />
