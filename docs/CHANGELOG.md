@@ -1,3 +1,18 @@
+# [1.10.0](https://github.com/teachen-ch/voty/compare/v1.9.1...v1.10.0) (2021-01-29)
+
+
+### Bug Fixes
+
+* login integration test ([bf5685c](https://github.com/teachen-ch/voty/commit/bf5685cb8dfd097fe56fad096a7b0e12c1a5fe81))
+* logo on darkmode ([e9850d3](https://github.com/teachen-ch/voty/commit/e9850d3921f966b291d7f873d6ab905f46ce841e))
+* qr-code icon in darkmode ([b21ebed](https://github.com/teachen-ch/voty/commit/b21ebed80e78cac086eebde806ca54ab96e0c149))
+
+
+### Features
+
+* integrate signup on landing pages ([463c3df](https://github.com/teachen-ch/voty/commit/463c3df1d54f36788dc444c285aca5eafb4676e8))
+* text changes on /new ([66e57dc](https://github.com/teachen-ch/voty/commit/66e57dce0b28d75d02dbafe089d9e97a22b44341))
+
 ## [1.9.1](https://github.com/teachen-ch/voty/compare/v1.9.0...v1.9.1) (2021-01-29)
 
 
