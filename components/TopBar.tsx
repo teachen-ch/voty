@@ -1,6 +1,6 @@
 import { Flex, Image, Text, Link as A, Box } from "rebass";
 import Link from "next/link";
-// import IconRegister from "../public/images/icon_register.svg";
+import IconRegister from "../public/images/icon_register.svg";
 import IconLogin from "../public/images/icon_login.svg";
 import IconLogout from "../public/images/icon_logout.svg";
 import IconAccount from "../public/images/icon_account.svg";
@@ -10,7 +10,7 @@ import IconImpressum from "../public/images/icon_impressum.svg";
 import IconNewsletter from "../public/images/icon_newsletter.svg";
 import IconDown from "../public/images/icon_down.svg";
 import IconUp from "../public/images/icon_up.svg";
-import IconClose from "../public/images/voty_hamburger_cross_white.svg";
+import IconClose from "../public/images/icon_cross.svg";
 import { useUser, SessionUser } from "state/user";
 import { useState, useEffect } from "react";
 import { Role } from "graphql/types";
@@ -113,10 +113,13 @@ export const TopBar: React.FC<{ hideLogo?: boolean }> = (props) => {
 const RegisterLogin: React.FC = () => {
   return (
     <Flex alignItems="center">
-      <Link href="/projekt">
+      <Link href="/user/signup">
         <A>
           <Flex alignItems="center">
-            <Text mr={4}>Über das Projekt voty.ch</Text>
+            <IconRegister />
+            <Text ml={3} mr={4}>
+              Klasse anmelden
+            </Text>
           </Flex>
         </A>
       </Link>
@@ -124,7 +127,7 @@ const RegisterLogin: React.FC = () => {
         <A>
           <Flex alignItems="center" color="white">
             <IconLogin />
-            <Text ml={3}>Anmelden</Text>
+            <Text ml={3}>Login</Text>
           </Flex>
         </A>
       </Link>
@@ -219,7 +222,7 @@ const MobileBurger: React.FC<{ user: SessionUser }> = ({ user }) => {
   return (
     <Flex color="#fff">
       <A onClick={() => setOpen(!open)}>
-        <img src="/images/voty_hamburger_red.svg" alt="Menu" />
+        <img src="/images/icon_burger.svg" alt="Menu" />
       </A>
       {open && (
         <>
@@ -231,7 +234,7 @@ const MobileBurger: React.FC<{ user: SessionUser }> = ({ user }) => {
             sx={{ position: "fixed", top: 0, left: 0 }}
           ></Box>
           <Box
-            bg="danger"
+            bg="primary"
             width="80%"
             height="100%"
             fontSize={4}
@@ -259,21 +262,20 @@ const MobileBurger: React.FC<{ user: SessionUser }> = ({ user }) => {
               <hr />
               {!user ? (
                 <nav>
-                  <Link href="/user/login">
-                    <A>
-                      <IconLogin style={burgerIcon} />
-                      Anmelden
-                    </A>
-                  </Link>
-                  <br />
-                  {/*
                   <Link href="/user/signup">
                     <A>
                       <IconRegister style={burgerIcon} />
-                      Registrieren
+                      Klasse anmelden
                     </A>
                   </Link>
-                  <br />*/}
+                  <br />
+                  <Link href="/user/login">
+                    <A>
+                      <IconLogin style={burgerIcon} />
+                      Login
+                    </A>
+                  </Link>
+                  <br />
                 </nav>
               ) : (
                 <nav>

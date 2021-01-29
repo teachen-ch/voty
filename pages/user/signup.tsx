@@ -6,8 +6,7 @@ import { useRouter } from "next/router";
 import { QForm, yup, ErrorBox } from "../../components/Form";
 import { omit } from "lodash";
 import { SessionUser, useUser } from "state/user";
-import { useCreateUserMutation } from "graphql/types";
-import Abstimmung from "pages/abstimmung";
+import { Role, useCreateUserMutation } from "graphql/types";
 import Success from "./success";
 
 // TODO use fragment for ./successlds
@@ -25,20 +24,22 @@ export const CREATE_USER = gql`
 `;
 
 export default function Signup(): ReactElement {
-  // currently we redirect the signup form to the campaign page
-  return <Abstimmung />;
   const [user, setUser] = useState<SessionUser | undefined>(undefined);
   const router = useRouter();
   if (user) {
     return <Success user={user} />;
   }
   return (
-    <AppPage heading="Erstelle ein Konto" onClose={() => void router.push("/")}>
+    <AppPage
+      heading="Neue Klasse anmelden"
+      onClose={() => void router.push("/")}
+    >
       <Text mb={4}>
-        Hier kannst Du Dir ein eigenes Konto erstellen. Bitte nutze die
-        Email-Adresse Deiner Schule.
+        Du bist eine Lehrperson und möchtest mit Deinen Klassen auf voty.ch
+        abstimmen oder das Online-Lehrmittel benutzen? Eröffne hier ein
+        kostenloses Konto:
       </Text>
-      <CreateUserForm setUser={setUser} />
+      <CreateUserForm setUser={setUser} defaultRole={Role.Teacher} omitRole />
     </AppPage>
   );
 }
