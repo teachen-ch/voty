@@ -14,12 +14,13 @@ describe("Test Login Page", () => {
     cy.contains("Mein Konto").click();
     cy.contains("Abmelden").click();
     cy.contains("Login").click();
-    cy.contains("Hier kannst Du Dich");
+    cy.contains("Du hast bereits ein Konto");
   });
 
   it("shows an error with wrong password", () => {
     cy.visit("/user/login");
     cy.findByLabelText("Email:").type(Cypress.env("USER"));
+    cy.get("button").contains("Anmelden").click();
     cy.findByLabelText("Passwort:").type("wrongpass");
     cy.get("button").contains("Anmelden").click();
     cy.contains("Email oder Passwort");

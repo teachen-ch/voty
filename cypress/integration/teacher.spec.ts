@@ -52,15 +52,13 @@ describe("Test Teacher Startpage", () => {
   it("lets a teacher delete her account", () => {
     cy.login("teacher3@teachen.ch", "teachen");
     cy.visit("/user/delete");
-    cy.pause();
     cy.contains("Meine Klasse");
     cy.get("button").contains("Konto löschen").click();
     cy.contains("erfolgreich");
     // user should automatically be logged out
     cy.contains("Login").click();
     cy.findByLabelText("Email:").type("teacher3@teachen.ch");
-    cy.findByLabelText("Passwort:").type("teachen");
     cy.get("button").contains("Anmelden").click();
-    cy.contains("Fehler: Email oder Passwort");
+    cy.contains("Fehler: Diese Email ist nicht registriert");
   });
 });

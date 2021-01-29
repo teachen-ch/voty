@@ -41,6 +41,7 @@ describe("Test Signup Page", () => {
     // test that user is not active yet (missing email verification)
     cy.visit("/user/login");
     cy.findByLabelText("Email:").type("other@teachen.ch");
+    cy.get("button").contains("Anmelden").click();
     cy.findByLabelText("Passwort:").type("Password2007");
     cy.get("button").contains("Anmelden").click();
     cy.contains("Email bestätigen");
