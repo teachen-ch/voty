@@ -59,16 +59,21 @@ export const Swissvotes: React.FC<{
   votes?: VoteType[];
   setVotes?: (votes: VoteType[]) => void;
   limit?: number;
-}> = ({ votes, setVotes, limit = 15 }) => {
-  const [keywords, setKeywords] = useState("");
+  keyword?: string;
+}> = ({ votes, setVotes, limit = 15, keyword = "" }) => {
+  const [keywords, setKeywords] = useState(keyword);
   const [type, setType] = useState<number | undefined>();
   const [result, setResult] = useState<number | undefined>();
   const [offset, setOffset] = useState(0);
 
-  // reset the offset when changing query parameters
+  // reset the pagination offset when changing query parameters
   useEffect(() => {
     setOffset(0);
   }, [type, result, keywords]);
+
+  useEffect(() => {
+    setKeywords(keyword);
+  }, [keyword]);
 
   function resetFilters() {
     setType(undefined);
@@ -79,6 +84,7 @@ export const Swissvotes: React.FC<{
     <Box>
       <Flex mt={4}>
         <Input
+          value={keywords}
           onChange={debounce((evt) => setKeywords(evt.target.value), 300)}
           placeholder="Suche..."
           flex={1}
@@ -154,7 +160,12 @@ export const SwissvotesTopics: React.FC = () => {
             zu was die Schweiz über das Thema «{topic}» abgestimmt hat und wählt
             drei Initiativen aus, die Euch wichtig erscheinen:
           </Text>
-          <Swissvotes votes={votes} setVotes={setVotes} limit={10} />
+          <Swissvotes
+            keyword={topic}
+            votes={votes}
+            setVotes={setVotes}
+            limit={10}
+          />
         </Box>
       )}
       {votes.length ? (
@@ -322,7 +333,7 @@ export const Vote: React.FC<{
     <TR>
       {setVotes && (
         <TD fixed onClick={() => doSelect(vote)}>
-          <Checkbox bg="white" checked={isSelected(vote)} color="primary" />
+          <Checkbox bg="#fff" checked={isSelected(vote)} color="primary" />
         </TD>
       )}
       <TD fixed>{vote.datum && formatYear(vote.datum)}</TD>

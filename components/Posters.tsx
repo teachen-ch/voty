@@ -112,6 +112,7 @@ export const Poster: React.FC<{ vote: Swissvote; image: string }> = ({
         <Box
           sx={{ position: "absolute", hyphens: "auto", cursor: "pointer" }}
           bg="rgba(1,1,1,0.5)"
+          color="#fff"
           p={2}
           width="calc(100%  - 16px)"
           height="calc(100% - 16px)"
