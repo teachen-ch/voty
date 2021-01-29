@@ -1,3 +1,10 @@
+## [1.8.1](https://github.com/teachen-ch/voty/compare/v1.8.0...v1.8.1) (2021-01-29)
+
+
+### Bug Fixes
+
+* logo color in darkmode ([7285216](https://github.com/teachen-ch/voty/commit/72852161ece25d50a5d9b11a50a48bc2b5adbff1))
+
 # [1.8.0](https://github.com/teachen-ch/voty/compare/v1.7.0...v1.8.0) (2021-01-29)
 
 
