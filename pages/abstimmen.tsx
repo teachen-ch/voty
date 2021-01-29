@@ -35,7 +35,8 @@ export default function Abstimmung(): ReactElement {
         Im Vergleich zu älteren Generationen gehen junge Menschen (18-30) in der
         Schweiz halb so oft abstimmen. Dabei wäre gerade ihre Meinung wichtig!
         Wir wollen Jugendliche ermutigen und befähigen, ihr Stimmrecht aktiv
-        wahrzunehmen – das will geübt sein!
+        wahrzunehmen – das will geübt sein und damit fangen wir am besten
+        bereits in der Schulzeit an
       </Text>
       <Flex
         my={4}
@@ -57,8 +58,8 @@ export default function Abstimmung(): ReactElement {
             <IconCheckWhite height="25px" />
           </TDIcon>
           <Text maxWidth="700px">
-            Ich nehme mir im Februar/März Zeit, um die Vorlagen mit den
-            Schüler*innen zu diskutieren (z. B. mit Material von{" "}
+            Ich nehme mir Zeit zwischen dem 5. Feb – 7. März, um die Vorlagen
+            mit den Schüler*innen zu diskutieren (z. B. mit Material von{" "}
             <Link
               href="https://www.easyvote.ch/de/school/"
               rel="noreferrer"
@@ -102,15 +103,15 @@ export default function Abstimmung(): ReactElement {
 
       <Explainer title="Anleitung Klassenabstimmung">
         <Step n={1}>
-          Erstellen Sie ein Konto auf voty.ch und eröffnen sie eine Klasse:
+          Erstelle ein Konto auf voty.ch und eröffne eine Klasse:
           <Image src="/screens/screen_t1.png" mt={2} />
         </Step>
         <Step n={2}>
-          Wählen sie die Abstimmungen für ihre Klasse aus:
+          Wähle die Abstimmungen für Deine Klasse aus:
           <Image src="/screens/screen_t2.png" mt={2} />
         </Step>
         <Step n={3}>
-          Laden sie Schüler*innen per Email oder mit Einladungslink ein:
+          Lade Schüler*innen per Email oder mit Einladungslink ein:
           <Image src="/screens/screen_t3.png" mt={2} />
         </Step>
       </Explainer>

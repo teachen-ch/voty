@@ -11,4 +11,12 @@ module.exports = withMDX({
     deviceSizes: [400, 600, 1200, 2000],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
   },
+  redirects() {
+    return [
+      {
+        source: '/abstimmung',
+        destination: '/abstimmen',
+        permanent: true,
+      },
+    ]}
 });
