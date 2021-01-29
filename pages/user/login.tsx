@@ -1,9 +1,10 @@
 import { useRouter } from "next/router";
 import { AppPage } from "components/Page";
 import { gql, useMutation } from "@apollo/client";
-import { useState, ReactElement } from "react";
+import { Info } from "components/Info";
+import React, { useState, ReactElement } from "react";
 import { Text, Button, Heading, Flex } from "rebass";
-import { QForm, ErrorBox } from "components/Form";
+import { QForm, ErrorBox, Grid } from "components/Form";
 import CheckLogin from "components/CheckLogin";
 import { usePageEvent, trackEvent } from "util/stats";
 import { useSetAccessToken, useUser, useSetUser } from "../../state/user";
@@ -11,8 +12,11 @@ import {
   Role,
   useLoginMutation,
   useEmailVerificationMutation,
+  useMagicMutation,
 } from "graphql/types";
 import { isBrowser } from "util/isBrowser";
+import { Input, Label } from "@rebass/forms";
+import { A } from "components/Breadcrumb";
 
 export const LOGIN = gql`
   mutation login($email: String!, $password: String!) {
@@ -50,6 +54,16 @@ export const CHANGE_PASSWORD = gql`
   ${CheckLogin.fragments.LoginFields}
 `;
 
+export const MAGIC = gql`
+  mutation magic($email: String!) {
+    magic(email: $email) {
+      success
+      error
+      message
+    }
+  }
+`;
+
 export default function Login(): ReactElement {
   const user = useUser();
   const router = useRouter();
@@ -67,8 +81,8 @@ export default function Login(): ReactElement {
   return (
     <AppPage heading="Anmelden" onClose={() => void router.push("/")}>
       <Text mb={3}>
-        Hier kannst Du Dich mit Deiner Schul-Emailadresse anmelden, wenn Du
-        bereits ein Konto bei voty.ch hast.
+        Du hast bereits ein Konto bei voty.ch? Dann kannst Du Dich hier mit
+        Deiner Schul-Emailadresse anmelden:
       </Text>
       <LoginForm initialEmail={email} />
     </AppPage>
@@ -79,9 +93,60 @@ export const LoginForm: React.FC<{ initialEmail?: string }> = ({
   initialEmail,
 }) => {
   usePageEvent({ category: "Login", action: "Start" });
+  const router = useRouter();
 
   const [email, setEmail] = useState(initialEmail || "");
+  const [exists, setExists] = useState<boolean | null | undefined>();
+  const [magic, setMagic] = useState<boolean | null | undefined>();
+  const [doMagic] = useMagicMutation({
+    onCompleted(data) {
+      setExists(data.magic?.success);
+      setMagic(data.magic?.message ? true : false);
+    },
+  });
+
+  async function checkExists() {
+    await doMagic({ variables: { email } });
+  }
+
+  if (exists && magic)
+    return (
+      <>
+        <Info type="info">
+          Yay! Wir haben dir ein Email an «{email}» geschickt mit einem
+          Login-Link. Schau in Deiner Inbox nach!
+        </Info>
+        <A onClick={router.reload} fontSize={1}>
+          Zurück
+        </A>
+      </>
+    );
+  if (exists && !magic) return <LoginPasswordForm email={email} />;
+
+  return (
+    <Grid gap={2} columns={[0, 0, "1fr 3fr 1fr"]} mt={"46px"}>
+      <Label htmlFor="email" sx={{ alignSelf: "center" }}>
+        Email:{" "}
+      </Label>
+      <Input
+        id="email"
+        autoFocus
+        onChange={(e) => setEmail(e.target.value)}
+        onKeyUp={(e) => e.key === "Enter" && checkExists()}
+        placeholder="name@meineschule.ch"
+      />
+      <Button onClick={checkExists} my={1}>
+        Anmelden
+      </Button>
+    </Grid>
+  );
+};
+
+const LoginPasswordForm: React.FC<{ email: string }> = ({ email }) => {
+  usePageEvent({ category: "Login", action: "Start" });
+
   const [emailError, setEmailError] = useState("");
+  const [password, setPassword] = useState("");
   const [requestReset, setRequestReset] = useState<string | undefined>(
     undefined
   );
@@ -110,6 +175,7 @@ export const LoginForm: React.FC<{ initialEmail?: string }> = ({
       }
     },
   });
+
   if (typeof requestReset === "string") {
     return (
       <RequestReset
@@ -122,26 +188,32 @@ export const LoginForm: React.FC<{ initialEmail?: string }> = ({
   if (emailError) {
     return <VerificationForm email={emailError} />;
   }
+
+  function checkLogin() {
+    void doLogin({ variables: { email, password } });
+  }
+
   return (
-    <QForm
-      mutation={doLogin}
-      fields={{
-        email: {
-          label: "Email",
-          required: true,
-          type: "email",
-          init: initialEmail,
-          setter: setEmail,
-          placeholder: "name@meineschule.ch",
-        },
-        password: {
-          label: "Passwort",
-          type: "password",
-          required: true,
-        },
-        submit: { type: "submit", label: "Anmelden" },
-      }}
-    >
+    <Grid gap={2} columns={[0, 0, "1fr 3fr 1fr"]}>
+      <Text></Text>
+      <Text fontSize={1}>
+        <A onClick={router.reload}>{email}</A>
+      </Text>
+      <Text></Text>
+      <Label htmlFor="email" sx={{ alignSelf: "center" }}>
+        Passwort:{" "}
+      </Label>
+      <input type="hidden" name="email" value={email} />
+      <Input
+        id="email"
+        type="password"
+        autoFocus
+        onKeyUp={(e) => e.key === "Enter" && checkLogin()}
+        onChange={(e) => setPassword(e.target.value)}
+      />
+      <Button onClick={checkLogin} my={1}>
+        Anmelden
+      </Button>
       <ErrorBox error={error} />
       <Flex
         my={2}
@@ -149,21 +221,14 @@ export const LoginForm: React.FC<{ initialEmail?: string }> = ({
         justifyContent="space-between"
         flexWrap="wrap"
       >
-        <Button
-          onClick={() => setRequestReset(email ? email : "")}
-          variant="text"
-        >
+        <Button onClick={() => setRequestReset(email)} variant="text">
           Passwort vergessen?
         </Button>
-        {/*
-        <Button onClick={() => router.push("/user/signup")} variant="text">
-          Neuer Benutzer? Konto anlegen!
-        </Button>*/}
         <Button onClick={() => router.push("/")} variant="text">
           Zurück
         </Button>
       </Flex>
-    </QForm>
+    </Grid>
   );
 };
 
@@ -237,7 +302,10 @@ function AfterLogin() {
   }
 }
 
-function RequestReset({ onCancel }: { email: string; onCancel: () => void }) {
+const RequestReset: React.FC<{ onCancel: () => void; email: string }> = ({
+  onCancel,
+  email,
+}) => {
   const [mailSent, setMailSent] = useState(false);
   const [error, setError] = useState("");
   const [doRequestReset] = useEmailVerificationMutation({
@@ -269,6 +337,7 @@ function RequestReset({ onCancel }: { email: string; onCancel: () => void }) {
         fields={{
           email: {
             label: "Email",
+            init: email,
             required: true,
             type: "email",
             placeholder: "name@meineschule.ch",
@@ -297,4 +366,4 @@ function RequestReset({ onCancel }: { email: string; onCancel: () => void }) {
       </QForm>
     </>
   );
-}
+};

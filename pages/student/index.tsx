@@ -11,6 +11,8 @@ import { Activities } from "components/Activities";
 import { StudentListBallots } from "components/Ballots";
 import IconWelcome from "../../public/images/students_welcome.svg";
 
+const ASK_DEMOGRAPHICS = true;
+
 export default function StudentHome(): ReactElement {
   const user = useUser();
 
@@ -18,7 +20,7 @@ export default function StudentHome(): ReactElement {
     return <LoggedInPage heading="Meine Klasse" />;
   }
 
-  if (user.year === null) {
+  if (ASK_DEMOGRAPHICS && user.year === null) {
     trackEvent({ category: "Student", action: "FirstRun" });
     return (
       <LoggedInPage heading={`Hallo ${user?.name}`}>

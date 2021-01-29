@@ -119,6 +119,8 @@ const Invite: React.FC = () => {
         setUser={setUser}
         onSubmit={onSubmit}
         omitRole
+        omitPassword
+        omitFirstname
         omitLastname
         defaultRole="Student"
       >

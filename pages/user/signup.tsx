@@ -77,6 +77,8 @@ export const CreateUserForm: React.FC<{
   onSubmit?: (values: Record<string, string | number>) => void;
   omitRole?: boolean;
   omitLastname?: boolean;
+  omitFirstname?: boolean;
+  omitPassword?: boolean;
   defaultRole?: string;
 }> = (props) => {
   const existingUser = useUser();
@@ -138,6 +140,12 @@ export const CreateUserForm: React.FC<{
 
   if (props.omitLastname) {
     fields = omit(fields, "lastname");
+  }
+  if (props.omitFirstname) {
+    fields = omit(fields, "name");
+  }
+  if (props.omitPassword) {
+    fields = omit(fields, "password");
   }
 
   if (existingUser) {
