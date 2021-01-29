@@ -76,26 +76,30 @@ export default function Home(): React.ReactElement {
             </Text>
           </Flex>
 
-          <Grid columns={["", "", "auto auto auto"]} gap={2}>
-            <Button onClick={() => router.push("/demo")}>voty.ch testen</Button>
-            <Button onClick={() => router.push("/projekt")} flex={1}>
+          <Flex justifyContent="space-between">
+            <Button
+              onClick={() => router.push("/projekt")}
+              width={["100%", "100%", "calc(50% - 8px)"]}
+            >
               Weitere Infos zum Projekt
             </Button>
-            <Button onClick={() => router.push("/newsletter")}>
+            <Button
+              onClick={() => router.push("/newsletter")}
+              width={["100%", "100%", "calc(50% - 8px)"]}
+            >
               Newsletter abonnieren
             </Button>
-          </Grid>
+          </Flex>
         </Box>
 
         <Flex
-          mb={200}
           width={["100%", "100%", "80%", "100%"]}
           maxWidth="1160px"
           flexDirection="column"
           alignItems="center"
           justifyContent="center"
         >
-          <H1 mt={[5, 5, 6]}>Module 1 – Demokratie verstehen</H1>
+          <H1 mt={[5, 5, 6]}>Modul 1 – Demokratie verstehen</H1>
           <Teaser>
             <TeaserImage
               src="/images/start_teaser_1.png"
@@ -103,6 +107,16 @@ export default function Home(): React.ReactElement {
               height={538}
               top={-150}
             />
+            <TeaserText title="Wie sehen gute Lehrmittel für Distance Learning aus?">
+              Als im Frühling 2020 die Schulen geschlossen wurden war
+              Improvisation das Gebot der Stunde. Buchseiten wurde fotografiert,
+              E-Learning Angebote für den Selbstunterricht wurden verteilt,
+              kreative Aufgaben wurden erfunden. Aber wie sehen Lehrmittel aus,
+              die den Lernprozess einer «Distributed Class» optimal
+              unterstützen? <LearnMore href="/distance-learning" />
+            </TeaserText>
+          </Teaser>
+          <Teaser reverse>
             <TeaserText title="Eine Online-Werkzeugkiste für politische Bildung">
               voty.ch stellt ein wachsendes Angebot an digitalen Lerninhalten
               für die politischen Bildung zur Verfügung. Neben einer
@@ -110,18 +124,6 @@ export default function Home(): React.ReactElement {
               Grundbegriffe der Demo&shy;kratie erklärt, stehen vor allem
               interaktive Tools (Einzel- oder Gruppen&shy;arbeiten) im
               Vordergrund. <LearnMore href="/lernen" />
-            </TeaserText>
-          </Teaser>
-
-          <H1>Module 2 – Demokratie testen</H1>
-          <Teaser reverse>
-            <TeaserText title="Auch die Jugend hat eine Meinung!">
-              Im Vergleich zu älteren Generationen gehen junge Menschen (18-30)
-              in der Schweiz halb so oft abstimmen. Dabei wäre gerade ihre
-              Meinung wichtig! Wir wollen Jugendliche ermutigen und befähigen,
-              ihr Stimmrecht aktiv wahrzunehmen – das will geübt sein! Lassen
-              sie jetzt ihre Klasse über aktuelle Themen abstimmen.{" "}
-              <LearnMore href="/abstimmung" />
             </TeaserText>
             <TeaserImage
               src="/images/start_teaser_2.png"
@@ -131,8 +133,7 @@ export default function Home(): React.ReactElement {
             />
           </Teaser>
 
-          <H1>Module 3 – Demokratie leben</H1>
-
+          <H1>Modul 2 – Demokratie testen</H1>
           <Teaser>
             <TeaserImage
               src="/images/start_teaser_3.png"
@@ -140,52 +141,47 @@ export default function Home(): React.ReactElement {
               height={1126}
               top={-165}
             />
-            <TeaserText title="Partizipative Prozesse an der Schule">
-              Wie können wir demokratische Entscheidungsprozesse in die Schule
-              bringen? Schulleitung, Lehrerschaft und Schüler*Innen führen
-              gemeinsam einen offenen und kreativen Dialog über schulinterne
-              Ideen und Vorschläge. Schüler*innen können in einem mit der
-              Schulleitung vereinbarten Rahmen auf voty.ch eigene Ideen
-              entwickeln, diese gemeinsam off- und online diskutieren,
-              verbessern, final ausarbeiten und dafür Mehrheiten finden.{" "}
+            <TeaserText title="Auch die Jugend hat eine Meinung">
+              Im Vergleich zu älteren Generationen gehen junge Menschen (18-30)
+              in der Schweiz halb so oft abstimmen. Dabei wäre gerade ihre
+              Meinung wichtig! Wir wollen Jugendliche ermutigen und befähigen,
+              ihr Stimmrecht aktiv wahrzunehmen – das will geübt sein! Lassen
+              sie jetzt ihre Klasse über aktuelle Themen abstimmen.{" "}
               <LearnMore href="/abstimmung" />
             </TeaserText>
           </Teaser>
-
-          <H1>Neues aus dem voty.ch Blog</H1>
           <Teaser reverse>
-            <TeaserText title="Wie sehen gute Distance Learning Lehrmittel aus?">
-              Im Vergleich zu älteren Generationen gehen junge Menschen (18-30)
-              in der Schweiz halb so oft abstimmen. Dabei wäre gerade ihre
-              Meinung wichtig! Wir wollen Jugendliche ermutigen und befähigen,
-              ihr Stimmrecht aktiv wahrzunehmen – das will geübt sein! Lassen
-              sie jetzt ihre Klasse über aktuelle Themen abstimmen.{" "}
-              <LearnMore href="/distance-learning" />
+            <TeaserText title="Jetzt Klasse anmelden!">
+              Ab Montag, 8. Februar führen wir in Zusammenarbeit mit easyvote.ch
+              wieder Online-Abstimmungen durch zu den drei nationalen Vorlagen
+              (E-ID Gesetz, Verhüllungsverbot, Handelsabkommen Indonesien).
+              Melden Sie jetzt ihre Klasse für die Abstimmung an.{" "}
+              <LearnMore href="/abstimmung" />
             </TeaserText>
             <TeaserImage
               src="/images/start_teaser_4.png"
-              width={1070}
-              height={1007}
-              top={-60}
+              width={1200}
+              height={979}
+              top={-100}
             />
           </Teaser>
 
-          <H1>Und weiteres aus dem voty.ch Blog</H1>
+          <H1>Modul 3 – Demokratie leben</H1>
+
           <Teaser>
+            <TeaserText title="Wer entscheidet an Eurer Schule?">
+              Wer fällt die Entscheidungen an Eurem Schulhaus? Dürfen
+              Schülerinnen und Schüler mitreden und Vorschläge einbringen? Wir
+              möchten gemeinsam testen, wie wir partizipative Prozesse und die
+              Demokratie in Schulhäuser bringen können.{" "}
+              <LearnMore href="/projekt#modul3" />
+            </TeaserText>
             <TeaserImage
               src="/images/start_teaser_5.png"
-              width={1070}
-              height={1007}
+              width={513}
+              height={472}
               top={-60}
             />
-            <TeaserText title="Wie sehen gute Distance Learning Lehrmittel aus?">
-              Im Vergleich zu älteren Generationen gehen junge Menschen (18-30)
-              in der Schweiz halb so oft abstimmen. Dabei wäre gerade ihre
-              Meinung wichtig! Wir wollen Jugendliche ermutigen und befähigen,
-              ihr Stimmrecht aktiv wahrzunehmen – das will geübt sein! Lassen
-              sie jetzt ihre Klasse über aktuelle Themen abstimmen.{" "}
-              <LearnMore href="/distance-learning" />
-            </TeaserText>
           </Teaser>
         </Flex>
         <Footer />
@@ -196,7 +192,7 @@ export default function Home(): React.ReactElement {
 
 const Teaser: React.FC<{ reverse?: boolean }> = ({ reverse, children }) => (
   <Flex
-    mt={[4, 4, 4, 5]}
+    mt={[4, 4, 4, 6]}
     mx="auto"
     flexWrap={["wrap", "wrap", "wrap", "nowrap"]}
     flexDirection={

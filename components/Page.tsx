@@ -9,7 +9,7 @@ import { Role } from "graphql/types";
 import { Footer } from "components/Footer";
 import { TopBar } from "./TopBar";
 import IconClose from "../public/images/icon_close.svg";
-import { Spinner, useColorMode } from "theme-ui";
+import { Spinner } from "theme-ui";
 import { Info } from "./Info";
 import { tr } from "util/translate";
 
@@ -30,16 +30,7 @@ export const AppPage: React.FC<{
   heading?: string;
   onClose?: () => void;
 }> = (props) => {
-  const [colorMode] = useColorMode();
-  const light = colorMode === "light";
-
-  const bgImages =
-    props.bgImages ||
-    []; /* 
-    "voty_bg_mobile_dark.svg",
-    "voty_bg_mobile_dark.svg",
-    light ? "voty_bg_1.svg" : "voty_bg_1_dark.svg",
-  ]; */
+  const bgImages = props.bgImages || [];
   return (
     <>
       <Background bgImages={bgImages} />

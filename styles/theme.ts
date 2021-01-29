@@ -4,7 +4,7 @@ export default {
   breakpoints: ["400px", "600px", "1200px", "2000px"],
   fontSizes: [12, 16, 20, 22, 26, 34, 50, 50, 50],
   useColorSchemeMediaQuery: false,
-  initialColorModeName: "dark",
+  initialColorModeName: "light",
   colors: {
     background: "white",
     primary: "#206DBB",
@@ -268,7 +268,7 @@ export default {
       borderRadius: "5px",
       fontSize: [2, 3, 3],
       lineHeight: 1,
-      height: "40px",
+      minHeight: "40px",
     },
     secondary: {
       variant: "buttons.primary",
