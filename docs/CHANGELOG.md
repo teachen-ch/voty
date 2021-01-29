@@ -1,3 +1,10 @@
+## [1.9.1](https://github.com/teachen-ch/voty/compare/v1.9.0...v1.9.1) (2021-01-29)
+
+
+### Reverts
+
+* Revert "feat: migrate to yarn berry 2 #116" ([ceae61d](https://github.com/teachen-ch/voty/commit/ceae61d5af80288db3a3d83156f81cceae4d1b8e)), closes [#116](https://github.com/teachen-ch/voty/issues/116)
+
 # [1.9.0](https://github.com/teachen-ch/voty/compare/v1.8.1...v1.9.0) (2021-01-29)
 
 
