@@ -59,6 +59,15 @@ export const postDiscussion: DocumentNode;
 }
     
 
+declare module '*/Prefs.tsx' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const setPrefs: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
 declare module '*/Schools.tsx' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
@@ -94,7 +103,6 @@ export const teamTeacher: DocumentNode;
 export const teamByInvite: DocumentNode;
 export const teamByCode: DocumentNode;
 export const createOneTeam: DocumentNode;
-export const setPrefs: DocumentNode;
 
   export default defaultDocument;
 }
@@ -184,6 +192,7 @@ declare module '*/login.tsx' {
   export const login: DocumentNode;
 export const emailVerification: DocumentNode;
 export const changePassword: DocumentNode;
+export const magic: DocumentNode;
 
   export default defaultDocument;
 }

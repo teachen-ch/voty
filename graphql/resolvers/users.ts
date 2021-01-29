@@ -49,14 +49,21 @@ export function getShortname(_root: {
     return `${upperFirst(String(_root.name)).substr(0, 1)}. ${_root.lastname}`;
 }
 
-export const exists: FieldResolver<"Query", "exists"> = async (
+export const magic: FieldResolver<"Mutation", "magic"> = async (
   _root,
   args,
   ctx: Context
 ) => {
   const { email } = args;
   const user = await ctx.db.user.findUnique({ where: { email } });
-  return { success: user ? true : false };
+  if (user && !user.password && user.email) {
+    await sendVerificationEmail(user.email, "login", ctx.db);
+    return { success: true, message: "magic" };
+  } else
+    return {
+      success: user ? true : false,
+      message: "",
+    };
 };
 
 export const login: FieldResolver<"Mutation", "login"> = async (
@@ -117,7 +124,9 @@ export const createUser: FieldResolver<"Mutation", "createUser"> = async (
     const email = args.data.email?.toLowerCase();
     if (!email) throw new Error("Error.NoEmail");
     const salt = await bcrypt.genSalt(10);
-    const hashed = await bcrypt.hash(String(password), salt);
+    const hashed = password
+      ? await bcrypt.hash(String(password), salt)
+      : undefined;
     if (role === Role.Admin) throw new Error("NAH");
     const user = await ctx.db.user.create({
       data: {

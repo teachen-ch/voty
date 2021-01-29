@@ -2861,6 +2861,7 @@ export type Mutation = {
   endBallotRun?: Maybe<BallotRun>;
   inviteStudents?: Maybe<InviteResponse>;
   login?: Maybe<ResponseLogin>;
+  magic?: Maybe<Response>;
   postActivity: Activity;
   postDiscussion?: Maybe<Discussion>;
   postWork: Work;
@@ -2955,6 +2956,11 @@ export type MutationInviteStudentsArgs = {
 export type MutationLoginArgs = {
   email: Scalars['String'];
   password: Scalars['String'];
+};
+
+
+export type MutationMagicArgs = {
+  email: Scalars['String'];
 };
 
 
@@ -8004,6 +8010,20 @@ export type PostDiscussionMutation = (
   )> }
 );
 
+export type SetPrefsMutationVariables = Exact<{
+  teamId: Scalars['String'];
+  prefs: Scalars['Json'];
+}>;
+
+
+export type SetPrefsMutation = (
+  { __typename?: 'Mutation' }
+  & { setPrefs?: Maybe<(
+    { __typename?: 'Team' }
+    & TeamTeacherFieldsFragment
+  )> }
+);
+
 export type SchoolFieldsFragment = (
   { __typename?: 'School' }
   & Pick<School, 'id' | 'name' | 'type' | 'city' | 'zip' | 'canton'>
@@ -8199,20 +8219,6 @@ export type CreateOneTeamMutation = (
     { __typename?: 'Team' }
     & TeamTeacherFieldsFragment
   ) }
-);
-
-export type SetPrefsMutationVariables = Exact<{
-  teamId: Scalars['String'];
-  prefs: Scalars['Json'];
-}>;
-
-
-export type SetPrefsMutation = (
-  { __typename?: 'Mutation' }
-  & { setPrefs?: Maybe<(
-    { __typename?: 'Team' }
-    & TeamTeacherFieldsFragment
-  )> }
 );
 
 export type AttachmentFieldsFragment = (
@@ -8481,6 +8487,19 @@ export type ChangePasswordMutation = (
       { __typename?: 'User' }
       & LoginFieldsFragment
     )> }
+  )> }
+);
+
+export type MagicMutationVariables = Exact<{
+  email: Scalars['String'];
+}>;
+
+
+export type MagicMutation = (
+  { __typename?: 'Mutation' }
+  & { magic?: Maybe<(
+    { __typename?: 'Response' }
+    & Pick<Response, 'success' | 'error' | 'message'>
   )> }
 );
 
@@ -9246,6 +9265,39 @@ export function usePostDiscussionMutation(baseOptions?: Apollo.MutationHookOptio
 export type PostDiscussionMutationHookResult = ReturnType<typeof usePostDiscussionMutation>;
 export type PostDiscussionMutationResult = Apollo.MutationResult<PostDiscussionMutation>;
 export type PostDiscussionMutationOptions = Apollo.BaseMutationOptions<PostDiscussionMutation, PostDiscussionMutationVariables>;
+export const SetPrefsDocument = gql`
+    mutation setPrefs($teamId: String!, $prefs: Json!) {
+  setPrefs(teamId: $teamId, prefs: $prefs) {
+    ...TeamTeacherFields
+  }
+}
+    ${TeamTeacherFieldsFragmentDoc}`;
+export type SetPrefsMutationFn = Apollo.MutationFunction<SetPrefsMutation, SetPrefsMutationVariables>;
+
+/**
+ * __useSetPrefsMutation__
+ *
+ * To run a mutation, you first call `useSetPrefsMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useSetPrefsMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [setPrefsMutation, { data, loading, error }] = useSetPrefsMutation({
+ *   variables: {
+ *      teamId: // value for 'teamId'
+ *      prefs: // value for 'prefs'
+ *   },
+ * });
+ */
+export function useSetPrefsMutation(baseOptions?: Apollo.MutationHookOptions<SetPrefsMutation, SetPrefsMutationVariables>) {
+        return Apollo.useMutation<SetPrefsMutation, SetPrefsMutationVariables>(SetPrefsDocument, baseOptions);
+      }
+export type SetPrefsMutationHookResult = ReturnType<typeof useSetPrefsMutation>;
+export type SetPrefsMutationResult = Apollo.MutationResult<SetPrefsMutation>;
+export type SetPrefsMutationOptions = Apollo.BaseMutationOptions<SetPrefsMutation, SetPrefsMutationVariables>;
 export const SchoolsWithMembersDocument = gql`
     query schoolsWithMembers {
   schools {
@@ -9656,39 +9708,6 @@ export function useCreateOneTeamMutation(baseOptions?: Apollo.MutationHookOption
 export type CreateOneTeamMutationHookResult = ReturnType<typeof useCreateOneTeamMutation>;
 export type CreateOneTeamMutationResult = Apollo.MutationResult<CreateOneTeamMutation>;
 export type CreateOneTeamMutationOptions = Apollo.BaseMutationOptions<CreateOneTeamMutation, CreateOneTeamMutationVariables>;
-export const SetPrefsDocument = gql`
-    mutation setPrefs($teamId: String!, $prefs: Json!) {
-  setPrefs(teamId: $teamId, prefs: $prefs) {
-    ...TeamTeacherFields
-  }
-}
-    ${TeamTeacherFieldsFragmentDoc}`;
-export type SetPrefsMutationFn = Apollo.MutationFunction<SetPrefsMutation, SetPrefsMutationVariables>;
-
-/**
- * __useSetPrefsMutation__
- *
- * To run a mutation, you first call `useSetPrefsMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useSetPrefsMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [setPrefsMutation, { data, loading, error }] = useSetPrefsMutation({
- *   variables: {
- *      teamId: // value for 'teamId'
- *      prefs: // value for 'prefs'
- *   },
- * });
- */
-export function useSetPrefsMutation(baseOptions?: Apollo.MutationHookOptions<SetPrefsMutation, SetPrefsMutationVariables>) {
-        return Apollo.useMutation<SetPrefsMutation, SetPrefsMutationVariables>(SetPrefsDocument, baseOptions);
-      }
-export type SetPrefsMutationHookResult = ReturnType<typeof useSetPrefsMutation>;
-export type SetPrefsMutationResult = Apollo.MutationResult<SetPrefsMutation>;
-export type SetPrefsMutationOptions = Apollo.BaseMutationOptions<SetPrefsMutation, SetPrefsMutationVariables>;
 export const AttachmentsDocument = gql`
     query attachments($where: AttachmentWhereInput) {
   attachments(where: $where) {
@@ -10260,6 +10279,40 @@ export function useChangePasswordMutation(baseOptions?: Apollo.MutationHookOptio
 export type ChangePasswordMutationHookResult = ReturnType<typeof useChangePasswordMutation>;
 export type ChangePasswordMutationResult = Apollo.MutationResult<ChangePasswordMutation>;
 export type ChangePasswordMutationOptions = Apollo.BaseMutationOptions<ChangePasswordMutation, ChangePasswordMutationVariables>;
+export const MagicDocument = gql`
+    mutation magic($email: String!) {
+  magic(email: $email) {
+    success
+    error
+    message
+  }
+}
+    `;
+export type MagicMutationFn = Apollo.MutationFunction<MagicMutation, MagicMutationVariables>;
+
+/**
+ * __useMagicMutation__
+ *
+ * To run a mutation, you first call `useMagicMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useMagicMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [magicMutation, { data, loading, error }] = useMagicMutation({
+ *   variables: {
+ *      email: // value for 'email'
+ *   },
+ * });
+ */
+export function useMagicMutation(baseOptions?: Apollo.MutationHookOptions<MagicMutation, MagicMutationVariables>) {
+        return Apollo.useMutation<MagicMutation, MagicMutationVariables>(MagicDocument, baseOptions);
+      }
+export type MagicMutationHookResult = ReturnType<typeof useMagicMutation>;
+export type MagicMutationResult = Apollo.MutationResult<MagicMutation>;
+export type MagicMutationOptions = Apollo.BaseMutationOptions<MagicMutation, MagicMutationVariables>;
 export const CreateUserDocument = gql`
     mutation createUser($data: UserCreateInput!) {
   createUser(data: $data) {

@@ -8371,6 +8371,7 @@ export interface NexusGenFieldTypes {
     endBallotRun: NexusGenRootTypes["BallotRun"] | null; // BallotRun
     inviteStudents: NexusGenRootTypes["InviteResponse"] | null; // InviteResponse
     login: NexusGenRootTypes["ResponseLogin"] | null; // ResponseLogin
+    magic: NexusGenRootTypes["Response"] | null; // Response
     postActivity: NexusGenRootTypes["Activity"]; // Activity!
     postDiscussion: NexusGenRootTypes["Discussion"] | null; // Discussion
     postWork: NexusGenRootTypes["Work"]; // Work!
@@ -8391,7 +8392,6 @@ export interface NexusGenFieldTypes {
     ballot: NexusGenRootTypes["Ballot"] | null; // Ballot
     ballots: NexusGenRootTypes["Ballot"][]; // [Ballot!]!
     cards: Array<NexusGenRootTypes["Card"] | null> | null; // [Card]
-    exists: NexusGenRootTypes["Response"] | null; // Response
     getBallotResults: NexusGenRootTypes["BallotResults"] | null; // BallotResults
     getBallotRuns: Array<NexusGenRootTypes["BallotRun"] | null> | null; // [BallotRun]
     getTeamDiscussions: Array<NexusGenRootTypes["Discussion"] | null> | null; // [Discussion]
@@ -8622,6 +8622,7 @@ export interface NexusGenFieldTypeNames {
     endBallotRun: "BallotRun";
     inviteStudents: "InviteResponse";
     login: "ResponseLogin";
+    magic: "Response";
     postActivity: "Activity";
     postDiscussion: "Discussion";
     postWork: "Work";
@@ -8642,7 +8643,6 @@ export interface NexusGenFieldTypeNames {
     ballot: "Ballot";
     ballots: "Ballot";
     cards: "Card";
-    exists: "Response";
     getBallotResults: "BallotResults";
     getBallotRuns: "BallotRun";
     getTeamDiscussions: "Discussion";
@@ -8851,6 +8851,10 @@ export interface NexusGenArgTypes {
       email: string; // String!
       password: string; // String!
     };
+    magic: {
+      // args
+      email: string; // String!
+    };
     postActivity: {
       // args
       data: NexusGenInputs["ActivityCreateInput"]; // ActivityCreateInput!
@@ -8947,10 +8951,6 @@ export interface NexusGenArgTypes {
       age?: string | null; // String
       keywords?: string | null; // String
       type?: string | null; // String
-    };
-    exists: {
-      // args
-      email: string; // String!
     };
     getBallotResults: {
       // args

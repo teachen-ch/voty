@@ -91,7 +91,6 @@ export const canViewBallot = rule({ cache: "strict" })(
 export const permissions = shield(
   {
     Query: {
-      exists: allow,
       user: or(isAdmin, teachesTeam),
       users: or(isAdmin, isTeacher),
       me: allow,
@@ -113,6 +112,7 @@ export const permissions = shield(
     },
     Mutation: {
       login: allow,
+      magic: allow,
       createUser: allow, // default crud.createOneUser
       createInvitedUser: allow, // create user with invite-code
       emailVerification: allow, // send out email (verification, pw, login)
