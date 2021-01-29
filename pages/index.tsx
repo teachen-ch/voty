@@ -3,7 +3,7 @@ import { Flex, Heading, Box, Text, Button, Image } from "rebass";
 import { Container, Background } from "components/Page";
 import { Footer } from "components/Footer";
 import { ReadMore } from "components/ReadMore";
-import { FAQ } from "./abstimmung";
+import { FAQ } from "../components/FAQ";
 import { TopBar } from "components/TopBar";
 import Link from "next/link";
 import { useRef } from "react";

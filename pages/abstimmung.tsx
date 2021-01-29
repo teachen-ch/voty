@@ -1,17 +1,16 @@
 import { AppPage } from "components/Page";
 import { Heading, Text, Box, Flex, Link, Image, Card } from "rebass";
 import { Grid } from "theme-ui";
-import { A } from "components/Breadcrumb";
 import { ReactElement, useState } from "react";
 import { CreateUserForm } from "pages/user/signup";
 import Success from "pages/user/success";
 import { Role } from "graphql/types";
 import { SessionUser } from "state/user";
 import { ReadMore } from "components/ReadMore";
-import { HideFeature } from "components/HideFeature";
 import IconCheckWhite from "../public/images/icon_yes.svg";
 import { TDIcon } from "components/Table";
 import { CircleBullet } from "components/Misc";
+import { FAQ } from "../components/FAQ";
 
 export default function Abstimmung(): ReactElement {
   const [newUser, setNewUser] = useState<SessionUser | undefined>(undefined);
@@ -144,101 +143,6 @@ export default function Abstimmung(): ReactElement {
     </AppPage>
   );
 }
-
-export const FAQ: React.FC = () => (
-  <Box className="faq" fontSize={2} textAlign="left">
-    <Heading as="h3" mt={3}>
-      Wer steht hinter voty.ch?
-    </Heading>
-    <Text>
-      voty.ch ist ein Projekt des Vereins «Teachen!», welcher während des
-      Corona-Lockdowns von engagierten Eltern, Lehrpersonen und
-      Informatiker*innen gegründet wurde. Das Projekt wird unterstützt durch den
-      prototypefund.opendata.ch.
-    </Text>
-    <Heading as="h3">Wie funktioniert die Onlineabstimmung?</Heading>
-    <Text>
-      Auf unserer Website können Lehrpersonen mit ihren Klassen (Sek-I,
-      Gymnasium, Berufsschulen) die Abstimmung auf Laptops, Tablets oder
-      Smartphones durchführen. Wir stellen sicher, dass nur registrierte Klassen
-      mitmachen können, dass jede Person nur einmal abstimmen kann und dass
-      sämtliche Stimmabgaben anonym bleiben.
-      <HideFeature id="demo">
-        {" "}
-        Sie können den ganzen Ablauf auf{" "}
-        <A href="/demo" variant="underline">
-          demo.voty.ch
-        </A>{" "}
-        testen.
-      </HideFeature>
-    </Text>
-    <Heading as="h3">Wie kann meine Klasse auf voty.ch abstimmen?</Heading>
-    <Text>
-      Über den Button{" "}
-      <A href="/user/signup#form" variant="underline">
-        «Jetzt Klasse anmelden»
-      </A>{" "}
-      können sich Lehrpersonen auf voty.ch kostenlos registrieren. Nach
-      Bestätigung der Email-Adresse kann eine oder mehrere Klasse erstellt
-      werden. Danach können die aktuellen Abstimmungen ausgewählt («E-ID Gesetz»
-      und «Verhüllungsverbot-Initiative», «Abkommen mit Indonesien») und
-      schliesslich die SuS via Email eingeladen werden. Wir empfehlen, die
-      Themen vorgängig mit den Materialien von{" "}
-      <Link
-        href="https://www.easyvote.ch/de/school/unterrichtsmaterial"
-        rel="noreferrer"
-      >
-        easyvote.ch
-      </Link>{" "}
-      zu diskutieren .
-    </Text>
-    <Heading as="h3">
-      Wie wird die Anonymität und der Datenschutz sichergestellt?
-    </Heading>
-    <Text>
-      Die abgegebenen Stimmen werden nicht mit Personen verknüpft. Es wird
-      einzig registriert, welche Benutzer*innen bereits ihre Stimme abgegeben
-      haben. Die Altersgruppe sowie der Kanton werden zu jeder Stimme
-      gespeichert, eine «De-Anonymisierung» auf Ebene Person oder Klasse ist
-      nicht möglich.
-    </Text>
-    <Heading as="h3">
-      Wer sieht am Schluss die Resultate der Abstimmungen?
-    </Heading>
-    <Text>
-      Eine Auswertung der Resultate wird nur auf Ebene Kanton und Altersstufe
-      möglich sein. Wenn wir es gemeinsam schaffen, genügend Stimmen für ein
-      statistisch signifikantes Ergebnis zu sammeln, möchten wir die Resultate
-      in aggregierter Form der Öffentlichkeit vorstellen.
-    </Text>
-    <Heading as="h3">Wie stellt ihr statistische Signifikanz sicher?</Heading>
-    <Text>
-      Wir möchten gemeinsam mit{" "}
-      <Link
-        href="https://twitter.com/claudelongchamp"
-        target="_blank"
-        rel="noreferrer"
-      >
-        Claude Longchamps
-      </Link>{" "}
-      sicherstellen, dass unser Vorgehen wissenschaftlich kompetent begleitet
-      wird. Je diverser unsere Testklassen sind (Kantone, Altersstufen,
-      Schultypen), desto solider wird die Aussagekraft der Resultate.
-    </Text>
-    <Heading as="h3">Macht auch die Romandie und das Tessin mit?</Heading>
-    <Text>
-      Wenn Du Kontakte in diese Sprachregionen hast, dann freuen wir uns sehr
-      über <A href="/kontakt">Email</A>!
-    </Text>
-    <Heading as="h3">
-      Ich habe keine Frage, aber eine kritische Anmerkung!
-    </Heading>
-    <Text>
-      Wir sind auf Dein Feedback angewiesen. Bitte nimm mit uns{" "}
-      <A href="/kontakt">Kontakt</A> auf.
-    </Text>
-  </Box>
-);
 
 export const Explainer: React.FC<{ title: string }> = ({ title, children }) => (
   <ReadMore title={title}>
