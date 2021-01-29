@@ -1,3 +1,19 @@
+# [1.7.0](https://github.com/teachen-ch/voty/compare/v1.6.0...v1.7.0) (2021-01-29)
+
+
+### Bug Fixes
+
+* burger 🍔 cleanup ([a928188](https://github.com/teachen-ch/voty/commit/a9281883c8e2a694d6343a7e37b625c4609e2d37))
+
+
+### Features
+
+* consistent naming of campaign pages ([f2881da](https://github.com/teachen-ch/voty/commit/f2881da8c792b1fe253c13f100196b9e9fdf1f32))
+* deafult lightmode instead of dark ([c7df5b7](https://github.com/teachen-ch/voty/commit/c7df5b75d661525a81eb21d6358c3542d4f76083))
+* introduce signup-up link again [#82](https://github.com/teachen-ch/voty/issues/82) ([20ae18a](https://github.com/teachen-ch/voty/commit/20ae18a07efa5092d68fc2666f9e9a14c04f5326))
+* misc text changes ([d004183](https://github.com/teachen-ch/voty/commit/d004183226990e726cb5b4292d1478da8fec6d43))
+* new /leben campaign page ([4b4b909](https://github.com/teachen-ch/voty/commit/4b4b909edfbfc7a92d84ca7eb2b8f832a3cb15b7))
+
 # [1.6.0](https://github.com/teachen-ch/voty/compare/v1.5.1...v1.6.0) (2021-01-29)
 
 
