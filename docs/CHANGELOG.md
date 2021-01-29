@@ -1,3 +1,10 @@
+## [1.11.1](https://github.com/teachen-ch/voty/compare/v1.11.0...v1.11.1) (2021-01-29)
+
+
+### Bug Fixes
+
+* proactive fix of e2e test ([b6592b0](https://github.com/teachen-ch/voty/commit/b6592b057acba2dc261c8739dde7147702579a76))
+
 # [1.11.0](https://github.com/teachen-ch/voty/compare/v1.10.0...v1.11.0) (2021-01-29)
 
 
