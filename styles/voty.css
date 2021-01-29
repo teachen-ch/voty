@@ -136,6 +136,7 @@ select + svg {
   box-shadow: 0px 0px 25px gray;
   display: block;
   margin: auto;
+  margin-top: 50px;
 }
 .screenshot:hover {
   transform: scale(1.05) translateY(-10px);
