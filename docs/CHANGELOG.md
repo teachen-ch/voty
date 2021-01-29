@@ -1,3 +1,15 @@
+# [1.8.0](https://github.com/teachen-ch/voty/compare/v1.7.0...v1.8.0) (2021-01-29)
+
+
+### Bug Fixes
+
+* integration test with new login link ([83b4e1b](https://github.com/teachen-ch/voty/commit/83b4e1b8e2ed83f55770f6b7eae3dd08e8313694))
+
+
+### Features
+
+* add screenshot to /leben ([091c0b4](https://github.com/teachen-ch/voty/commit/091c0b48d0059a254b819d671bd290e14ed98159))
+
 # [1.7.0](https://github.com/teachen-ch/voty/compare/v1.6.0...v1.7.0) (2021-01-29)
 
 
