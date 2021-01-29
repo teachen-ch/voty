@@ -1,3 +1,17 @@
+# [1.9.0](https://github.com/teachen-ch/voty/compare/v1.8.1...v1.9.0) (2021-01-29)
+
+
+### Features
+
+* migrate to yarn berry 2 [#116](https://github.com/teachen-ch/voty/issues/116) ([96f8c2f](https://github.com/teachen-ch/voty/commit/96f8c2f09ffd9febe69cf3e2821b4d77ea9ad76d))
+
+## [1.8.1](https://github.com/teachen-ch/voty/compare/v1.8.0...v1.8.1) (2021-01-29)
+
+
+### Bug Fixes
+
+* logo color in darkmode ([7285216](https://github.com/teachen-ch/voty/commit/72852161ece25d50a5d9b11a50a48bc2b5adbff1))
+
 # [1.8.0](https://github.com/teachen-ch/voty/compare/v1.7.0...v1.8.0) (2021-01-29)
 
 
