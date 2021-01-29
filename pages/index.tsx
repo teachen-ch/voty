@@ -33,9 +33,7 @@ export default function Home(): React.ReactElement {
           alignSelf="center"
           width={[240, 207, 426]}
           height={[95, 82, 164]}
-          src={`/images/voty_logo${
-            colorMode === "light" ? "_black" : "_white"
-          }.svg`}
+          src={`/images/voty_logo${colorMode === "light" ? "" : "_white"}.svg`}
           alt="voty.ch"
         />
         <Flex flexDirection="row" justifyContent="center">

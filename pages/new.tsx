@@ -21,7 +21,7 @@ export default function Home(): React.ReactElement {
       <Background bgImages={[]} />
       <TopBar hideLogo={true} />
       <Container as="main" pt={[0, 0, 30, 40]} px={[3, 3, 3, 0]}>
-        <Box width={[240, 207, 426]} height={[95, 82, 164]} color="white">
+        <Box width={[240, 207, 426]} height={[95, 82, 164]}>
           <Logo alt="voty.ch" width="100%" height="100%" />
         </Box>
 
