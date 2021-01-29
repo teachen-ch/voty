@@ -60,7 +60,7 @@ export const TopBar: React.FC<{ hideLogo?: boolean }> = (props) => {
       {darkMode && (
         <Image
           mx={"auto"}
-          ml={[20, 20, 0]}
+          ml={props.hideLogo ? 0 : [20, 20, 0]}
           mt={24}
           src={`/images/icon_${colorMode}mode.svg`}
           sx={{
