@@ -138,6 +138,9 @@ export const LoginForm: React.FC<{ initialEmail?: string }> = ({
       <Button onClick={checkExists} my={1}>
         Anmelden
       </Button>
+      {exists === false && (
+        <ErrorBox error="Diese Email ist nicht registriert" />
+      )}
     </Grid>
   );
 };
