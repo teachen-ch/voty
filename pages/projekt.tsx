@@ -86,7 +86,7 @@ export default function Projekt(): React.ReactElement {
         </Text>
 
         <Text mt={4} id="modul3">
-          <strong>Modul «Demokratie erleben»</strong>&nbsp;
+          <strong>Modul «Demokratie leben»</strong>&nbsp;
           <Tag>in&nbsp;Konzeption</Tag>
           <br />
           Eine Online-Plattform auf der Schüler*Innen eigene Ideen rund um ihre
@@ -135,7 +135,7 @@ export default function Projekt(): React.ReactElement {
           Angebot für Schülerinnen und Schüler und bieten die Möglichkeit der
           politischen Meinungsäusserung auf unserer Plattform. Deshalb setzen
           wir alles daran, dass die bei uns gespeicherten Daten nach aktuellen
-          Standards gesichert. Weitere Informationen zum Datenschutz finden Sie{" "}
+          Standards gesichert. Weitere Informationen zum Datenschutz findest Du{" "}
           <A href="/datenschutz" variant="underline">
             hier
           </A>
@@ -202,8 +202,8 @@ export default function Projekt(): React.ReactElement {
         </Text>
         <Heading>Wir haben Ihr Interesse geweckt?</Heading>
         <Text>
-          Sie sind am Projekt interessiert, haben Fragen, Anregungen oder
-          möchten als Pilotklasse am Projekt teilnehmen? Wir freuen uns auf Ihre{" "}
+          Du bist am Projekt interessiert, hast Fragen, Anregungen oder Ihr
+          möchtet als Pilotklasse am Projekt teilnehmen? Wir freuen uns auf eine{" "}
           <A href="/kontakt" variant="underline">
             Kontaktaufnahme
           </A>

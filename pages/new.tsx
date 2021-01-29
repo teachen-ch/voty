@@ -1,16 +1,15 @@
 import Head from "next/head";
-import { Flex, Heading, Box, Text, Button, Image } from "rebass";
+import { Flex, Heading, Box, Text, Button } from "rebass";
 import { Background, Container, H1 } from "components/Page";
 import { Footer } from "components/Footer";
 import { TopBar } from "components/TopBar";
-import { Grid, useColorMode } from "theme-ui";
 import { useRouter } from "next/router";
 import { isMobile } from "util/isBrowser";
 import NextImage from "next/image";
 import Link from "next/link";
+import Logo from "../public/images/voty_logo.svg";
 
 export default function Home(): React.ReactElement {
-  const [colorMode] = useColorMode();
   const router = useRouter();
 
   return (
@@ -22,18 +21,14 @@ export default function Home(): React.ReactElement {
       <Background bgImages={[]} />
       <TopBar hideLogo={true} />
       <Container as="main" pt={[0, 0, 30, 40]} px={[3, 3, 3, 0]}>
-        <Image
-          alignSelf="center"
-          width={[240, 207, 426]}
-          height={[95, 82, 164]}
-          src={`/images/voty_logo${colorMode === "light" ? "" : "_white"}.svg`}
-          alt="voty.ch"
-        />
+        <Box width={[240, 207, 426]} height={[95, 82, 164]}>
+          <Logo alt="voty.ch" width="100%" height="100%" />
+        </Box>
 
         <H1
           as="h1"
           mt={0}
-          mb={[0, 0, -2, -3]}
+          mb={[3, 3, -2, -3]}
           pt={3}
           fontSize={[3, 4, "32px", "40px"]}
           textAlign="center"
@@ -142,21 +137,20 @@ export default function Home(): React.ReactElement {
               top={-165}
             />
             <TeaserText title="Auch die Jugend hat eine Meinung">
-              Im Vergleich zu älteren Generationen gehen junge Menschen (18-30)
-              in der Schweiz halb so oft abstimmen. Dabei wäre gerade ihre
-              Meinung wichtig! Wir wollen Jugendliche ermutigen und befähigen,
-              ihr Stimmrecht aktiv wahrzunehmen – das will geübt sein! Lassen
-              sie jetzt ihre Klasse über aktuelle Themen abstimmen.{" "}
-              <LearnMore href="/abstimmung" />
+              Im Vergleich zu älteren Generationen stimmen junge Menschen halb
+              so oft ab. Dabei wäre gerade ihre Meinung wichtig! Wir wollen
+              Jugendliche ermutigen und befähigen, ihr Stimmrecht aktiv
+              wahrzunehmen – das will geübt sein und damit fangen wir am besten
+              bereits in der Schule an! <LearnMore href="/abstimmung" />
             </TeaserText>
           </Teaser>
           <Teaser reverse>
             <TeaserText title="Jetzt Klasse anmelden!">
-              Ab Montag, 8. Februar führen wir in Zusammenarbeit mit easyvote.ch
-              wieder Online-Abstimmungen durch zu den drei nationalen Vorlagen
-              (E-ID Gesetz, Verhüllungsverbot, Handelsabkommen Indonesien).
-              Melden Sie jetzt ihre Klasse für die Abstimmung an.{" "}
-              <LearnMore href="/abstimmung" />
+              Ab Montag, 8. Februar 2021 führen wir in Zusammenarbeit mit
+              easyvote.ch wieder anonyme Online-Abstimmungen durch zu den drei
+              aktuellen nationalen Vorlagen vom 7. März 2021 (E-ID Gesetz,
+              Verhüllungsverbot, Handelsabkommen Indonesien). Melde jetzt Deine
+              Klasse für die Abstimmung an. <LearnMore href="/abstimmung" />
             </TeaserText>
             <TeaserImage
               src="/images/start_teaser_4.png"
@@ -174,7 +168,7 @@ export default function Home(): React.ReactElement {
               Schülerinnen und Schüler mitreden und Vorschläge einbringen? Wir
               möchten gemeinsam testen, wie wir partizipative Prozesse und die
               Demokratie in Schulhäuser bringen können.{" "}
-              <LearnMore href="/projekt#modul3" />
+              <LearnMore href="/leben" />
             </TeaserText>
             <TeaserImage
               src="/images/start_teaser_5.png"

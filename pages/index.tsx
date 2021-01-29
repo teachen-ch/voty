@@ -67,8 +67,8 @@ export default function Home(): React.ReactElement {
               href="/abstimmung"
             >
               Nur Erwachsene dürfen abstimmen, aber auch Jugendliche haben eine
-              Meinung! Lassen Sie ihre Klassen an den Urnen&shy;gängen vom 9.
-              März mitmachen und ab&shy;stimmen. <br />
+              Meinung! Lass Deine Klassen an den Urnen&shy;gängen vom 9. März
+              mitmachen und ab&shy;stimmen. <br />
               <A href="/abstimmung">Mehr erfahren</A>
             </Module>
           </Box>

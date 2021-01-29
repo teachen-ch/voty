@@ -1,6 +1,5 @@
 import { Heading, Text, Box, Link } from "rebass";
 import { A } from "components/Breadcrumb";
-import { HideFeature } from "components/HideFeature";
 
 export const FAQ: React.FC = () => (
   <Box className="faq" fontSize={2} textAlign="left">
@@ -19,15 +18,11 @@ export const FAQ: React.FC = () => (
       Gymnasium, Berufsschulen) die Abstimmung auf Laptops, Tablets oder
       Smartphones durchführen. Wir stellen sicher, dass nur registrierte Klassen
       mitmachen können, dass jede Person nur einmal abstimmen kann und dass
-      sämtliche Stimmabgaben anonym bleiben.
-      <HideFeature id="demo">
-        {" "}
-        Sie können den ganzen Ablauf auf{" "}
-        <A href="/demo" variant="underline">
-          demo.voty.ch
-        </A>{" "}
-        testen.
-      </HideFeature>
+      sämtliche Stimmabgaben anonym bleiben. Der ganze Ablauf kann auf{" "}
+      <A href="/demo" variant="underline">
+        demo.voty.ch
+      </A>{" "}
+      getestet werden.
     </Text>
     <Heading as="h3">Wie kann meine Klasse auf voty.ch abstimmen?</Heading>
     <Text>
