@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { Flex, Heading, Box, Text, Button } from "rebass";
+import { Flex, Heading, Box, Text, Button, Image } from "rebass";
 import { Background, Container, H1 } from "components/Page";
 import { Footer } from "components/Footer";
 import { TopBar } from "components/TopBar";
@@ -7,10 +7,11 @@ import { useRouter } from "next/router";
 import { isMobile } from "util/isBrowser";
 import NextImage from "next/image";
 import Link from "next/link";
-import Logo from "../public/images/voty_logo.svg";
+import { useColorMode } from "theme-ui";
 
 export default function Home(): React.ReactElement {
   const router = useRouter();
+  const [colorMode] = useColorMode();
 
   return (
     <>
@@ -21,9 +22,15 @@ export default function Home(): React.ReactElement {
       <Background bgImages={[]} />
       <TopBar hideLogo={true} />
       <Container as="main" pt={[0, 0, 30, 40]} px={[3, 3, 3, 0]}>
-        <Box width={[240, 207, 426]} height={[95, 82, 164]}>
-          <Logo alt="voty.ch" width="100%" height="100%" />
-        </Box>
+        <Image
+          alignSelf="center"
+          width={[240, 207, 426]}
+          height={[95, 82, 164]}
+          src={`/images/voty_logo${
+            colorMode === "light" ? "_black" : "_white"
+          }.svg`}
+          alt="voty.ch"
+        />
 
         <H1
           as="h1"
@@ -40,7 +47,7 @@ export default function Home(): React.ReactElement {
           <NextImage src="/images/start_intro.png" width={2144} height={1175} />
         </Box>
 
-        <Box maxWidth="960px" width="100%" textAlign="center">
+        <Box maxWidth="800px" width="100%" textAlign="center">
           <Button
             onClick={() => router.push("/abstimmung")}
             mt={[2, 2, 3, 4]}
@@ -49,7 +56,7 @@ export default function Home(): React.ReactElement {
             width="600px"
             maxWidth="80%"
           >
-            Jetzt Klasse anmelden{isMobile() ? "" : " und abstimmen"}!
+            Jetzt Klasse anmelden!
           </Button>
 
           <Heading as="h2" fontSize={["30px", "30px", "40px"]} mt={[4, 4, 5]}>
@@ -60,25 +67,19 @@ export default function Home(): React.ReactElement {
               Die Demokratie ist eines der wohl wichtigsten Güter der Schweiz.
               Aber wie ge­lingt es uns, die Ju­gendlichen für die Demo­kratie zu
               begeis­tern?
-              <br />
-              <br />
-              Wir glauben, dass ein demokratisches Verständnis nur durch
-              demokratische Praxis erreicht werden kann. Deshalb möchten wir mit
-              voty.ch bereits in der Schule eine Basis für das
-              Demokratieverständnis schaffen, dieses mit den Schüler*Innen
-              anwenden und so die Fähigkeiten fördern, welche für eine
-              demokratische Partizipation wichtig sind.
             </Text>
           </Flex>
 
-          <Flex justifyContent="space-between">
+          <Flex justifyContent="space-between" flexWrap="wrap">
             <Button
+              mb={2}
               onClick={() => router.push("/projekt")}
               width={["100%", "100%", "calc(50% - 8px)"]}
             >
               Weitere Infos zum Projekt
             </Button>
             <Button
+              mb={2}
               onClick={() => router.push("/newsletter")}
               width={["100%", "100%", "calc(50% - 8px)"]}
             >
@@ -102,13 +103,13 @@ export default function Home(): React.ReactElement {
               height={538}
               top={-150}
             />
-            <TeaserText title="Wie sehen gute Lehrmittel für Distance Learning aus?">
-              Als im Frühling 2020 die Schulen geschlossen wurden war
-              Improvisation das Gebot der Stunde. Buchseiten wurde fotografiert,
-              E-Learning Angebote für den Selbstunterricht wurden verteilt,
-              kreative Aufgaben wurden erfunden. Aber wie sehen Lehrmittel aus,
-              die den Lernprozess einer «Distributed Class» optimal
-              unterstützen? <LearnMore href="/distance-learning" />
+            <TeaserText title="Ein Grundverständnis für Demokratie schaffen">
+              Wir glauben, dass ein demokratisches Verständnis nur durch
+              demokratische Praxis erreicht werden kann. Deshalb möchten wir mit
+              voty.ch bereits in der Schule eine Basis für das
+              Demokratieverständnis schaffen, dieses mit den Schüler*Innen
+              anwenden und so die Fähigkeiten fördern, welche für eine
+              demokratische Partizipation wichtig sind.
             </TeaserText>
           </Teaser>
           <Teaser reverse>
@@ -127,6 +128,15 @@ export default function Home(): React.ReactElement {
               top={-100}
             />
           </Teaser>
+
+          {/* ## Wie sehen gute Lehrmittel für Distance Learning aus?
+              Als im Frühling 2020 die
+              Schulen geschlossen wurden war Improvisation das Gebot der Stunde.
+              Buchseiten wurde fotografiert, E-Learning Angebote für den
+              Selbstunterricht wurden verteilt, kreative Aufgaben wurden
+              erfunden. Aber wie sehen Lehrmittel aus, die den Lernprozess einer
+              «Distributed Class» optimal unterstützen?{" "}
+          <LearnMore href="/distance-learning" />*/}
 
           <H1>Modul 2 – Demokratie testen</H1>
           <Teaser>
