@@ -57,6 +57,27 @@ export const TopBar: React.FC<{ hideLogo?: boolean }> = (props) => {
       px={[3, 3, 5, 0]}
       sx={{ position: ["absolute", "absolute"], top: 0, zIndex: 10 }}
     >
+      {darkMode && (
+        <Image
+          mx={"auto"}
+          ml={[20, 20, 0]}
+          mt={24}
+          src={`/images/icon_${colorMode}mode.svg`}
+          sx={{
+            position: "absolute",
+            cursor: "pointer",
+            flexGrow: 0,
+            opacity: 0.07,
+            flexShrink: 0,
+            transition: "0.4s ease-out",
+            ":hover": {
+              transform: "rotate(+180deg)",
+              opacity: 1,
+            },
+          }}
+          onClick={() => setColorMode(light ? "dark" : "light")}
+        />
+      )}
       <Flex
         alignItems="flex-start"
         justifyContent="space-between"
@@ -64,41 +85,21 @@ export const TopBar: React.FC<{ hideLogo?: boolean }> = (props) => {
         pt="8px"
         flex={1}
       >
-        <Flex
-          justifyContent="space-between"
-          height="56px"
-          flexDirection={["row-reverse", "row-reverse", "inherit"]}
-        >
-          {darkMode && (
-            <Image
-              mr={[0, 0, 4]}
-              ml={[5, 5, 0]}
-              src={`/images/icon_${colorMode}mode.svg`}
-              sx={{
-                cursor: "pointer",
-                flexGrow: 0,
-                flexShrink: 0,
-                ":hover": {
-                  transform: "rotate(+180deg)",
-                },
-              }}
-              onClick={() => setColorMode(light ? "dark" : "light")}
-            />
-          )}
-          {!props.hideLogo && (
-            <Link href="/">
-              <A>
-                <Image
-                  src={`/images/voty_logo${light ? "_black" : "_white"}.svg`}
-                  alt="voty"
-                  width="103px"
-                  height="40px"
-                  mt="10px"
-                />
-              </A>
-            </Link>
-          )}
-        </Flex>
+        {props.hideLogo ? (
+          <Box />
+        ) : (
+          <Link href="/">
+            <A>
+              <Image
+                src={`/images/voty_logo${light ? "_black" : "_white"}.svg`}
+                alt="voty"
+                width="103px"
+                height="40px"
+                mt="10px"
+              />
+            </A>
+          </Link>
+        )}
         <Box pt="10px" sx={{ display: ["none", "none", "block", "block"] }}>
           {loaded && (user ? <Account user={user} /> : <RegisterLogin />)}
         </Box>
