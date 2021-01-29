@@ -24,7 +24,7 @@ export const ReadMore: React.FC<{
         <Flex
           alignItems="center"
           fontSize={fontSize}
-          ml={-2}
+          ml={-1}
           color="white"
           justifyContent={hidePlus ? "center" : "left"}
         >
