@@ -21,23 +21,23 @@ export default {
     success: "#258f17",
     green: "#258f17",
 
-    // dark mode
-    bgcolor: "#313131",
-    topbarColor: "#505050",
-    panelColor: ["rgba(163,175,181, 0.20)"],
-    white: "#fff",
-    black: "#030303",
-    text: "#030303",
+    // light mode
+    bgcolor: "white",
+    topbarColor: "#dee4e7",
+    panelColor: "rgba(193,205,211, 0.50)",
+    white: "#030303",
+    black: "white",
+    text: "white",
     trColor: "gray",
 
     modes: {
-      light: {
-        bgcolor: "white",
-        topbarColor: "#dee4e7",
-        panelColor: "rgba(193,205,211, 0.50)",
-        white: "#030303",
-        black: "white",
-        text: "white",
+      dark: {
+        bgcolor: "#313131",
+        topbarColor: "#505050",
+        panelColor: ["rgba(163,175,181, 0.20)"],
+        white: "#fff",
+        black: "#030303",
+        text: "#030303",
         trColor: "gray",
       },
     },
@@ -66,7 +66,7 @@ export default {
     bold: 600,
   },
   lineHeights: {
-    body: 1.3,
+    body: 1.45,
     heading: 1.15,
   },
   shadows: {
@@ -113,7 +113,7 @@ export default {
       fontFamily: "body",
       fontWeight: "body",
       lineHeight: "body",
-      fontSize: [2, 2, 4],
+      fontSize: [2, 2, 3],
       color: "white",
       table: {
         borderSpacing: 0,
