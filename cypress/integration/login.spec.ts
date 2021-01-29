@@ -4,7 +4,7 @@ describe("Test Login Page", () => {
   });
   it("logs in with a valid user (role: teacher)!", () => {
     cy.visit("/");
-    cy.contains("Anmelden").click();
+    cy.contains("Login").click();
     cy.url().should("include", "/user/login");
     cy.findByLabelText("Email:").type(Cypress.env("USER"));
     cy.findByLabelText("Passwort:").type(Cypress.env("PASS"), { log: false });

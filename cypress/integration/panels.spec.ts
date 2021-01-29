@@ -18,7 +18,7 @@ describe("Test Live-Voting Panels", () => {
 
     // logout user
     cy.visit("/user/logout");
-    cy.contains("Anmelden");
+    cy.contains("Login");
 
     // now vote anonymously
     cy.visit("/panel/1999999");

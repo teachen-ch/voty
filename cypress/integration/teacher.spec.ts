@@ -57,7 +57,7 @@ describe("Test Teacher Startpage", () => {
     cy.get("button").contains("Konto löschen").click();
     cy.contains("erfolgreich");
     // user should automatically be logged out
-    cy.contains("Anmelden").click();
+    cy.contains("Login").click();
     cy.findByLabelText("Email:").type("teacher3@teachen.ch");
     cy.findByLabelText("Passwort:").type("teachen");
     cy.get("button").contains("Anmelden").click();
