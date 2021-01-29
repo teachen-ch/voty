@@ -1,3 +1,16 @@
+# [1.11.0](https://github.com/teachen-ch/voty/compare/v1.10.0...v1.11.0) (2021-01-29)
+
+
+### Bug Fixes
+
+* change sig of `exists` query to`magic` mutation ([1fb36cd](https://github.com/teachen-ch/voty/commit/1fb36cdb8381293d88adf302d94a63448a631320))
+
+
+### Features
+
+* (finally) implement magic link login [#114](https://github.com/teachen-ch/voty/issues/114) ([e5c004f](https://github.com/teachen-ch/voty/commit/e5c004fa86a3febb4daf25183639648429e4f094))
+* add new backend `/exists` for [#114](https://github.com/teachen-ch/voty/issues/114) ([1125abb](https://github.com/teachen-ch/voty/commit/1125abbface7df1c4e5789e252d4f7a188f1e809))
+
 # [1.10.0](https://github.com/teachen-ch/voty/compare/v1.9.1...v1.10.0) (2021-01-29)
 
 
