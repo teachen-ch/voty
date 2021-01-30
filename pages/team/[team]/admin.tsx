@@ -84,7 +84,7 @@ export default function TeacherTeamPage(): React.ReactElement {
   }
 
   async function inviteStudents(team: TeamTeacherFieldsFragment) {
-    const confirmed = confirm(`${matches} Emails verschicken?`);
+    const confirmed = confirm(`Jetzt ${matches} Email(s) verschicken?`);
     if (!confirmed) return;
     trackEvent({
       category: "Teacher",
