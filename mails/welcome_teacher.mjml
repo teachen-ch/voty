@@ -1,29 +1,44 @@
 <mjml>
   <mj-head>
-    <mj-font name="SourceSansPro" href="https://voty.ch/fonts/source-sans-pro-v14-latin-600.woff2" />
+    <mj-font
+      name="SourceSansPro"
+      href="https://voty.ch/fonts/source-sans-pro-v14-latin-600.woff2"
+    />
     <mj-attributes>
-      <mj-all font-family="SourceSansPro, -apple-system, system-ui, sans"/>
+      <mj-all font-family="SourceSansPro, -apple-system, system-ui, sans" />
     </mj-attributes>
   </mj-head>
   <mj-body>
     <mj-section>
       <mj-column width="600px">
-          <mj-image width="470px" src="https://voty.ch/images/voty_email.png"/>
-          <mj-text align="center" font-size="24px" font-weight="bold">Willkommen auf voty.&#8203;ch</mj-text>
-          <mj-text font-size="20px" color="#000">Deine Anmeldung ist bestätigt. Gerne schicken wir Dir einige Tipps, um auf voty loszulegen. Wenn Du in diesem Email die Bilder lädst, kannst Du eine Schritt-für-Schritt Anleitung sehen.</mj-text>
-          <mj-button href="https://voty.ch/user/login" background-color="#206DBB" font-weight="bold" font-size="20px">voty.ch starten</mj-button>
-          <mj-text font-size="20px">
+        <mj-image width="470px" src="https://voty.ch/images/voty_email.png" />
+        <mj-text align="center" font-size="24px" font-weight="bold"
+          >Willkommen auf voty.&#8203;ch</mj-text
+        >
+        <mj-text font-size="20px" color="#000"
+          >Deine Anmeldung ist bestätigt. Gerne schicken wir Dir einige Tipps,
+          um auf voty loszulegen. Wenn Du in diesem Email die Bilder lädst,
+          kannst Du eine Schritt-für-Schritt Anleitung sehen.</mj-text
+        >
+        <mj-button
+          href="https://voty.ch/user/login"
+          background-color="#206DBB"
+          font-weight="bold"
+          font-size="20px"
+          >voty.ch starten</mj-button
+        >
+        <mj-text font-size="20px">
           1) Melde dich auf voty.ch an und eröffne eine Klasse:
-          </mj-text>
-            <mj-image src="https://dev.voty.ch/screens/screen_t1.png" />
-         <mj-text font-size="20px">
+        </mj-text>
+        <mj-image src="https://dev.voty.ch/screens/screen_t1.png" />
+        <mj-text font-size="20px">
           2) Wähle die Abstimmungen für deine Klasse aus:
-          </mj-text>
-            <mj-image src="https://dev.voty.ch/screens/screen_t2.png" />
-         <mj-text font-size="20px">
+        </mj-text>
+        <mj-image src="https://dev.voty.ch/screens/screen_t2.png" />
+        <mj-text font-size="20px">
           3) Lade Schüler*innen per Email oder mit Einladungslink ein:
-          </mj-text>
-            <mj-image src="https://dev.voty.ch/screens/screen_t3.png" />
+        </mj-text>
+        <mj-image src="https://dev.voty.ch/screens/screen_t3.png" />
       </mj-column>
     </mj-section>
   </mj-body>

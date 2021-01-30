@@ -1,18 +1,35 @@
 <mjml>
   <mj-head>
-    <mj-font name="SourceSansPro" href="https://voty.ch/fonts/source-sans-pro-v14-latin-600.woff2" />
+    <mj-font
+      name="SourceSansPro"
+      href="https://voty.ch/fonts/source-sans-pro-v14-latin-600.woff2"
+    />
     <mj-attributes>
-      <mj-all font-family="SourceSansPro, -apple-system, system-ui, sans"/>
+      <mj-all font-family="SourceSansPro, -apple-system, system-ui, sans" />
     </mj-attributes>
   </mj-head>
   <mj-body>
     <mj-section>
       <mj-column width="470px">
-          <mj-image width="470px" src="https://voty.ch/images/voty_email.png"/>
-          <mj-text align="center" font-size="27px" font-weight="bold">Willkommen bei voty.&#8203;ch</mj-text>
-          <mj-text font-size="20px" color="#000">Um Dein neues Konto zu eröffnen und Deine Email-Adresse zu bestätigen, kannst Du auf diesen Link klicken:</mj-text>
-          <mj-button href="{{url}}" background-color="#c00" font-weight="bold" font-size="20px">Jetzt bestätigen</mj-button>
-          <mj-text font-size="20px"> Wenn Du Dich nicht bei voty.&#8203;ch registrieren wolltest, kannst Du dieses Mail löschen.</mj-text>
+        <mj-image width="470px" src="https://voty.ch/images/voty_email.png" />
+        <mj-text align="center" font-size="27px" font-weight="bold"
+          >Willkommen bei voty.&#8203;ch</mj-text
+        >
+        <mj-text font-size="20px" color="#000"
+          >Um Dein neues Konto zu eröffnen und Deine Email-Adresse zu
+          bestätigen, kannst Du auf diesen Link klicken:</mj-text
+        >
+        <mj-button
+          href="{{url}}"
+          background-color="#206DBB"
+          font-weight="bold"
+          font-size="20px"
+          >Jetzt bestätigen</mj-button
+        >
+        <mj-text font-size="20px">
+          Wenn Du Dich nicht bei voty.&#8203;ch registrieren wolltest, kannst Du
+          dieses Mail löschen.</mj-text
+        >
       </mj-column>
     </mj-section>
   </mj-body>
