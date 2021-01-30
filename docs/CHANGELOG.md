@@ -1,3 +1,21 @@
+# [1.12.0](https://github.com/teachen-ch/voty/compare/v1.11.1...v1.12.0) (2021-01-29)
+
+
+### Bug Fixes
+
+* integration tests with new login form ([641f572](https://github.com/teachen-ch/voty/commit/641f5723bb4213048280a4b29d60fc3528f78e85))
+* positioning of darkmode on mobile startpage ([85f5342](https://github.com/teachen-ch/voty/commit/85f5342039d166383a97c9bcca57e56e0cf0cea9))
+* remove duplicate info box on `/lernen` ([5da9020](https://github.com/teachen-ch/voty/commit/5da9020e680ad52aaf6264e24e81c9c55c61122f))
+* show error on non-existant user ([7b3fad2](https://github.com/teachen-ch/voty/commit/7b3fad2a61d53debbb54bfa7c9b9a730c8a89d58))
+* slightly more space for ReadMore icon ([4503cf5](https://github.com/teachen-ch/voty/commit/4503cf5e32bd3f4f6f08fb681e1af4c901627f42))
+* some more space above screenshots ([88a4a57](https://github.com/teachen-ch/voty/commit/88a4a57d47657f1ac5afc455e8e220eec94df98a))
+* typo in chaty intro ([de3f130](https://github.com/teachen-ch/voty/commit/de3f130ef704401c794ad3ca044981348205ce40))
+
+
+### Features
+
+* new #darkmode positioning ([71e67de](https://github.com/teachen-ch/voty/commit/71e67dee827524d1f912d04144b701670c6bca27))
+
 ## [1.11.1](https://github.com/teachen-ch/voty/compare/v1.11.0...v1.11.1) (2021-01-29)
 
 
