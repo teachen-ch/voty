@@ -1,3 +1,11 @@
+# [1.13.0](https://github.com/teachen-ch/voty/compare/v1.12.1...v1.13.0) (2021-02-01)
+
+
+### Features
+
+* new version of /new ([68d9845](https://github.com/teachen-ch/voty/commit/68d98455778f66ff77457f4c69485b0f4b4027eb))
+* team pages (close [#117](https://github.com/teachen-ch/voty/issues/117)), allow anon (close [#113](https://github.com/teachen-ch/voty/issues/113)) ([8ba65e0](https://github.com/teachen-ch/voty/commit/8ba65e05009190f2f07f60485508d281c3c89425))
+
 ## [1.12.1](https://github.com/teachen-ch/voty/compare/v1.12.0...v1.12.1) (2021-01-30)
 
 
