@@ -1,3 +1,12 @@
+## [1.12.1](https://github.com/teachen-ch/voty/compare/v1.12.0...v1.12.1) (2021-01-30)
+
+
+### Bug Fixes
+
+* add alt tags to /new ([2c7d0b0](https://github.com/teachen-ch/voty/commit/2c7d0b07a4e518729a54daa5203a83f8d5d8d0d5))
+* changing colors in email templates ([66d2c06](https://github.com/teachen-ch/voty/commit/66d2c0652d419376291c77e69a6690f9c6dc01c3))
+* minor text change ([e118f9d](https://github.com/teachen-ch/voty/commit/e118f9d6fb0420b429d51369b70aafd5cbcbc021))
+
 # [1.12.0](https://github.com/teachen-ch/voty/compare/v1.11.1...v1.12.0) (2021-01-29)
 
 
