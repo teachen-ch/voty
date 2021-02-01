@@ -58,7 +58,7 @@ class Teacher(GraphQLUser):
     @task
     def teampage(self):
         for team in self.teams:
-            self.client.get("/team/%s/admin" % team)
+            self.client.get("/team/%s" % team)
             self.query("getBallotRuns", args='teamId: "%s"' % team,
                        fields="id")
             self.query("activities", fields="id user { name } type time")

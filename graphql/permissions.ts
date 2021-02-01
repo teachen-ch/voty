@@ -175,6 +175,8 @@ export const permissions = shield(
       id: allow,
       name: allow,
       school: allow,
+      cards: allow,
+      prefs: allow,
       invite: or(isOwnTeacherId, isAdmin),
       code: or(isOwnTeacherId, isAdmin),
       members: or(isTeamMember, isAdmin),

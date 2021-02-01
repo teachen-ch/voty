@@ -16,6 +16,7 @@ const TeamAnonFields = gql`
   fragment TeamAnonFields on Team {
     id
     name
+    cards
     school {
       id
       name
@@ -64,6 +65,15 @@ export const GET_TEAMS = gql`
     }
   }
   ${fragments.TeamTeacherFields}
+`;
+
+export const GET_TEAM_ANON = gql`
+  query teamAnon($where: TeamWhereUniqueInput!) {
+    team(where: $where) {
+      ...TeamAnonFields
+    }
+  }
+  ${fragments.TeamAnonFields}
 `;
 
 export const GET_TEAM_USER = gql`

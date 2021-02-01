@@ -37,7 +37,7 @@ export default function CardPage(): React.ReactElement {
     usercrumb = (
       <>
         <A href="/teacher/">Meine Klassen</A> {" / "}
-        <A href={`/team/${team.id}/admin`}>{team.name}</A>
+        <A href={`/team/${team.id}`}>{team.name}</A>
         {" / "}
         <A href={`/team/${team.id}/select`}>Lerninhalte</A>
       </>

@@ -8111,7 +8111,7 @@ export type SwissvotesQuery = (
 
 export type TeamAnonFieldsFragment = (
   { __typename?: 'Team' }
-  & Pick<Team, 'id' | 'name'>
+  & Pick<Team, 'id' | 'name' | 'cards'>
   & { school: (
     { __typename?: 'School' }
     & Pick<School, 'id' | 'name' | 'city'>
@@ -8151,6 +8151,19 @@ export type TeamsQuery = (
   & { teams: Array<(
     { __typename?: 'Team' }
     & TeamTeacherFieldsFragment
+  )> }
+);
+
+export type TeamAnonQueryVariables = Exact<{
+  where: TeamWhereUniqueInput;
+}>;
+
+
+export type TeamAnonQuery = (
+  { __typename?: 'Query' }
+  & { team?: Maybe<(
+    { __typename?: 'Team' }
+    & TeamAnonFieldsFragment
   )> }
 );
 
@@ -8616,6 +8629,7 @@ export const TeamAnonFieldsFragmentDoc = gql`
     fragment TeamAnonFields on Team {
   id
   name
+  cards
   school {
     id
     name
@@ -9540,6 +9554,39 @@ export function useTeamsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<Team
 export type TeamsQueryHookResult = ReturnType<typeof useTeamsQuery>;
 export type TeamsLazyQueryHookResult = ReturnType<typeof useTeamsLazyQuery>;
 export type TeamsQueryResult = Apollo.QueryResult<TeamsQuery, TeamsQueryVariables>;
+export const TeamAnonDocument = gql`
+    query teamAnon($where: TeamWhereUniqueInput!) {
+  team(where: $where) {
+    ...TeamAnonFields
+  }
+}
+    ${TeamAnonFieldsFragmentDoc}`;
+
+/**
+ * __useTeamAnonQuery__
+ *
+ * To run a query within a React component, call `useTeamAnonQuery` and pass it any options that fit your needs.
+ * When your component renders, `useTeamAnonQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useTeamAnonQuery({
+ *   variables: {
+ *      where: // value for 'where'
+ *   },
+ * });
+ */
+export function useTeamAnonQuery(baseOptions: Apollo.QueryHookOptions<TeamAnonQuery, TeamAnonQueryVariables>) {
+        return Apollo.useQuery<TeamAnonQuery, TeamAnonQueryVariables>(TeamAnonDocument, baseOptions);
+      }
+export function useTeamAnonLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<TeamAnonQuery, TeamAnonQueryVariables>) {
+          return Apollo.useLazyQuery<TeamAnonQuery, TeamAnonQueryVariables>(TeamAnonDocument, baseOptions);
+        }
+export type TeamAnonQueryHookResult = ReturnType<typeof useTeamAnonQuery>;
+export type TeamAnonLazyQueryHookResult = ReturnType<typeof useTeamAnonLazyQuery>;
+export type TeamAnonQueryResult = Apollo.QueryResult<TeamAnonQuery, TeamAnonQueryVariables>;
 export const TeamUserDocument = gql`
     query teamUser($where: TeamWhereUniqueInput!) {
   team(where: $where) {

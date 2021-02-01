@@ -67,7 +67,7 @@ export default function PanelBallots(): ReactElement {
           <Text mb={4}>
             Es wurden noch keine Abstimmungen wurden ausgewählt
           </Text>
-          <A href={`/team/${team.id}/admin`}>
+          <A href={`/team/${team.id}`}>
             <Button>Abstimmungen auswählen</Button>
           </A>
         </>
@@ -165,7 +165,7 @@ const Results: React.FC<{ ballotId: string; ballotRunId: string }> = ({
 export const PanelPage: React.FC<{ heading: string; teamId?: string }> = (
   props
 ) => {
-  const votyLink = props.teamId ? `/team/${props.teamId}/admin` : "/";
+  const votyLink = props.teamId ? `/team/${props.teamId}` : "/";
   return (
     <Container mt={4}>
       <Flex

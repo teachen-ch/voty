@@ -75,6 +75,10 @@ export default function Abstimmung(): ReactElement {
 
       <Box my={5} />
 
+      <InlineSignup />
+
+      <Box mt={5} />
+
       <Explainer title="Anleitung Klassenabstimmung">
         <Step n={1}>
           Erstelle ein Konto auf voty.ch und eröffne eine Klasse:
@@ -110,8 +114,6 @@ export default function Abstimmung(): ReactElement {
         </Step>
       </Explainer>
       <Box mt={3} />
-
-      <InlineSignup />
 
       <ReadMore title="Fragen und Antworten">
         <FAQ />

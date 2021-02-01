@@ -45,7 +45,7 @@ export default function TeacherBallotPage(): React.ReactElement {
     <LoggedInPage heading={`${ballot.title}`} role={Role.Teacher}>
       <Breadcrumb>
         <A href="/teacher/">Meine Klassen</A>
-        <A href={`/team/${team.id}/admin`}>{team.name}</A>
+        <A href={`/team/${team.id}`}>{team.name}</A>
         <Here>{ballot.title}</Here>
       </Breadcrumb>
       {!results?.total ? (

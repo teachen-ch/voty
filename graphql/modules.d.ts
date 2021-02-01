@@ -98,6 +98,7 @@ declare module '*/Teams.tsx' {
 export const TeamUserFields: DocumentNode;
 export const TeamTeacherFields: DocumentNode;
 export const teams: DocumentNode;
+export const teamAnon: DocumentNode;
 export const teamUser: DocumentNode;
 export const teamTeacher: DocumentNode;
 export const teamByInvite: DocumentNode;

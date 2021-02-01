@@ -37,7 +37,7 @@ export default function SelectCardsPage(): React.ReactElement {
     <LoggedInPage heading="Lerninhalte hinzufügen" role={Role.Teacher}>
       <Breadcrumb>
         <A href="/teacher/">Meine Klassen</A>
-        <A href={`/team/${team.id}/admin`}>{team.name}</A>
+        <A href={`/team/${team.id}`}>{team.name}</A>
         <Here>Lerninhalte</Here>
       </Breadcrumb>
 
