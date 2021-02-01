@@ -27,8 +27,8 @@ export default function Home(): React.ReactElement {
           "voty_bg_1.svg",
         ]}
       />
-      <TopBar hideLogo={true} />
-      <Container as="main" pt={[0, 0, 30, 40]} px={[3, 3, 3, 0]}>
+      <TopBar />
+      <Container as="main" pt={[30, 30, 30, 40]} px={[3, 3, 3, 0]}>
         <Image
           alignSelf="center"
           width={[240, 207, 426]}

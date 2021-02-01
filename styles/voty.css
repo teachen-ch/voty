@@ -34,6 +34,17 @@
     url("/fonts/source-sans-pro-v14-latin-700.woff") format("woff");
 }
 
+/* source-sans-pro-700 - latin */
+@font-face {
+  font-family: "Source Sans Pro";
+  font-style: normal;
+  font-weight: 900;
+  font-display: fallback;
+  src: local("Source Sans Pro Black"), local("SourceSansPro-Black"),
+    url("/fonts/source-sans-pro-v14-latin-900.woff2") format("woff2"),
+    url("/fonts/source-sans-pro-v14-latin-900.woff") format("woff");
+}
+
 /*** Not sure how to set this in theme.ts ***/
 tr td,
 tr td * {

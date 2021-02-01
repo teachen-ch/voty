@@ -1,7 +1,7 @@
 // Rebass Theme-UI theme for voty
 export default {
   // [ iphone SE / iPhone 6+ / iPad High / Desktop+iPad / Big Screen]
-  breakpoints: ["400px", "600px", "1200px", "2000px"],
+  breakpoints: ["400px", "600px", "1200px", "1400px"],
   fontSizes: [12, 16, 20, 22, 26, 34, 50, 50, 50],
   useColorSchemeMediaQuery: false,
   initialColorModeName: "light",
@@ -23,7 +23,7 @@ export default {
 
     // light mode
     bgcolor: "white",
-    topbarColor: "#dee4e7",
+    topbarColor: "#505050",
     panelColor: "rgba(193,205,211, 0.50)",
     white: "#030303",
     black: "white",
@@ -64,6 +64,7 @@ export default {
     semi: 600,
     heading: 600,
     bold: 600,
+    black: 900,
   },
   lineHeights: {
     body: 1.45,

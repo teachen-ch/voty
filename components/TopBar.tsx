@@ -16,7 +16,7 @@ import { useState, useEffect } from "react";
 import { Role } from "graphql/types";
 import { useColorMode } from "theme-ui";
 
-export const TopBar: React.FC<{ hideLogo?: boolean }> = (props) => {
+export const TopBar: React.FC = () => {
   const user = useUser();
   const [loaded, setLoaded] = useState(false);
   const [colorMode, setColorMode] = useColorMode();
@@ -48,11 +48,11 @@ export const TopBar: React.FC<{ hideLogo?: boolean }> = (props) => {
 
   return (
     <Flex
-      bg={["inherit", "inherit", "topbarColor"]}
+      bg={["topbarColor", "topbarColor", "topbarColor"]}
       height="70px"
       width="100%"
       justifyContent="center"
-      color="white"
+      color="#fff"
       fontSize={3}
       px={[3, 3, 5, 0]}
       sx={{ position: ["absolute", "absolute"], top: 0, zIndex: 10 }}
@@ -60,9 +60,9 @@ export const TopBar: React.FC<{ hideLogo?: boolean }> = (props) => {
       {darkMode && (
         <Image
           mx={"auto"}
-          ml={props.hideLogo ? 0 : [20, 20, 0]}
+          ml={[20, 20, 0]}
           mt={24}
-          src={`/images/icon_${colorMode}mode.svg`}
+          src={`/images/icon_darkmode.svg`}
           sx={{
             position: "absolute",
             cursor: "pointer",
@@ -85,21 +85,17 @@ export const TopBar: React.FC<{ hideLogo?: boolean }> = (props) => {
         pt="8px"
         flex={1}
       >
-        {props.hideLogo ? (
-          <Box />
-        ) : (
-          <Link href="/">
-            <A>
-              <Image
-                src={`/images/voty_logo${light ? "_black" : "_white"}.svg`}
-                alt="voty"
-                width="103px"
-                height="40px"
-                mt="10px"
-              />
-            </A>
-          </Link>
-        )}
+        <Link href="/">
+          <A>
+            <Image
+              src={`/images/voty_logo_white.svg`}
+              alt="voty"
+              width="103px"
+              height="40px"
+              mt="10px"
+            />
+          </A>
+        </Link>
         <Box pt="10px" sx={{ display: ["none", "none", "block", "block"] }}>
           {loaded && (user ? <Account user={user} /> : <RegisterLogin />)}
         </Box>
@@ -126,7 +122,7 @@ const RegisterLogin: React.FC = () => {
       </Link>
       <Link href="/user/login">
         <A>
-          <Flex alignItems="center" color="white">
+          <Flex alignItems="center">
             <IconLogin />
             <Text ml={3}>Login</Text>
           </Flex>
@@ -144,7 +140,7 @@ const Account: React.FC<{ user: SessionUser }> = ({ user }) => {
       ? "Admin"
       : `Meine Klasse${user?.role === Role.Teacher ? "n" : ""}`;
   return (
-    <Flex color="white">
+    <Flex>
       <Link href={homeLink}>
         <A>
           <Flex

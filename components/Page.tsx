@@ -193,7 +193,7 @@ export const Background: React.FC<{ bgImages: string[]; start?: boolean }> = (
 export const H1: React.FC<HeadingProps> = (props) => (
   <Heading
     as="h1"
-    fontWeight="700"
+    fontWeight="black"
     fontSize={[4, 4, 5, 6]}
     color="primary"
     mt={6}

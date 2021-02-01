@@ -1,10 +1,9 @@
 import Head from "next/head";
-import { Flex, Heading, Box, Text, Button, Image } from "rebass";
+import { Flex, Heading, Box, Text, Button } from "rebass";
 import { Background, Container, H1 } from "components/Page";
 import { Footer } from "components/Footer";
 import { TopBar } from "components/TopBar";
 import { useRouter } from "next/router";
-import { isMobile } from "util/isBrowser";
 import NextImage from "next/image";
 import Link from "next/link";
 import { useColorMode } from "theme-ui";
@@ -16,34 +15,23 @@ export default function Home(): React.ReactElement {
   return (
     <>
       <Head>
-        <title>voty.ch – Demokratie an die Schule</title>
+        <title>voty.ch – Demokratie an die Schule!</title>
       </Head>
 
       <Background bgImages={[]} />
-      <TopBar hideLogo={true} />
-      <Container as="main" pt={[0, 0, 30, 40]} px={[3, 3, 3, 0]}>
-        <Image
-          alignSelf="center"
-          width={[240, 207, 426]}
-          height={[95, 82, 164]}
-          src={`/images/voty_logo${
-            colorMode === "light" ? "_black" : "_white"
-          }.svg`}
-          alt="voty.ch"
-        />
-
-        <H1
-          as="h1"
-          mt={0}
-          mb={[3, 3, -2, -3]}
-          pt={3}
-          fontSize={[3, 4, "32px", "40px"]}
-          textAlign="center"
-        >
-          Demokratie an die Schule!
+      <TopBar />
+      <Container as="main" px={[3, 3, 3, 0]} pt={[10, 10, 33]}>
+        <H1 mt={0} fontSize={["10vw", "10vw", 50, 59, 76]} textAlign="center">
+          <Text fontSize={["15vw", "15vw", 80, 100, 126]} fontWeight="black">
+            Demokratie
+          </Text>{" "}
+          an die Schule!
         </H1>
 
-        <Box maxWidth="85%">
+        <Box
+          mt={[0, 0, -50, -50, -50]}
+          maxWidth={["100%", "100%", "100%", "85%", "100%"]}
+        >
           <NextImage
             src="/images/start_intro.png"
             width={2144}
@@ -54,7 +42,7 @@ export default function Home(): React.ReactElement {
 
         <Box maxWidth="800px" width="100%" textAlign="center">
           <Button
-            onClick={() => router.push("/abstimmung")}
+            onClick={() => router.push("/user/signup")}
             mt={[2, 2, 3, 4]}
             px={4}
             sx={{ borderRadius: "25px" }}
@@ -64,7 +52,12 @@ export default function Home(): React.ReactElement {
             Jetzt Klasse anmelden!
           </Button>
 
-          <Heading as="h2" fontSize={["30px", "30px", "40px"]} mt={[4, 4, 5]}>
+          <Heading
+            as="h2"
+            fontSize={["30px", "30px", "40px"]}
+            mt={[4, 4, 5]}
+            color="primary"
+          >
             Jugendliche stimmen ab – ein Experiment
           </Heading>
           <Flex mb={[4, 4, 5]} justifyContent="space-around">
@@ -103,9 +96,9 @@ export default function Home(): React.ReactElement {
           <H1 mt={[5, 5, 6]}>Modul 1 – Demokratie verstehen</H1>
           <Teaser>
             <TeaserImage
-              src="/images/start_teaser_1.png"
-              width={570}
-              height={538}
+              src="/images/start_teaser_m1a.svg"
+              width={571}
+              height={539}
               top={-150}
             />
             <TeaserText title="Ein Grundverständnis für Demokratie schaffen">
@@ -127,10 +120,10 @@ export default function Home(): React.ReactElement {
               Vordergrund. <LearnMore href="/lernen" />
             </TeaserText>
             <TeaserImage
-              src="/images/start_teaser_2.png"
-              width={1070}
-              height={1007}
-              top={-100}
+              src="/images/start_teaser_m1b.svg"
+              width={629}
+              height={535}
+              top={-120}
             />
           </Teaser>
 
@@ -146,10 +139,10 @@ export default function Home(): React.ReactElement {
           <H1>Modul 2 – Demokratie testen</H1>
           <Teaser>
             <TeaserImage
-              src="/images/start_teaser_3.png"
-              width={1126}
-              height={1126}
-              top={-165}
+              src="/images/start_teaser_m2a.svg"
+              width={609}
+              height={536}
+              top={-150}
             />
             <TeaserText title="Auch die Jugend hat eine Meinung">
               Im Vergleich zu älteren Generationen stimmen junge Menschen halb
@@ -168,10 +161,10 @@ export default function Home(): React.ReactElement {
               Klasse für die Abstimmung an. <LearnMore href="/abstimmung" />
             </TeaserText>
             <TeaserImage
-              src="/images/start_teaser_4.png"
-              width={1200}
-              height={979}
-              top={-100}
+              src="/images/start_teaser_m2b.svg"
+              width={597}
+              height={529}
+              top={-120}
             />
           </Teaser>
 
@@ -181,14 +174,14 @@ export default function Home(): React.ReactElement {
             <TeaserText title="Wer entscheidet an Eurer Schule?">
               Wer fällt die Entscheidungen an Eurem Schulhaus? Dürfen
               Schülerinnen und Schüler mitreden und Vorschläge einbringen? Wir
-              möchten gemeinsam testen, wie wir partizipative Prozesse und die
+              möchten gemeinsam testen, wie wir partizipative Prozesse und mehr
               Demokratie in Schulhäuser bringen können.{" "}
               <LearnMore href="/leben" />
             </TeaserText>
             <TeaserImage
-              src="/images/start_teaser_5.png"
-              width={513}
-              height={472}
+              src="/images/start_teaser_m3.svg"
+              width={636}
+              height={589}
               top={-60}
             />
           </Teaser>
