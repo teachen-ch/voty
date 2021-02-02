@@ -95,7 +95,9 @@ export default function Home(): React.ReactElement {
           alignItems="center"
           justifyContent="center"
         >
-          <H1 mt={[5, 5, 6]}>Modul 1 – Demokratie verstehen</H1>
+          <H1 mt={[5, 5, 6]} width="100%" textAlign="center">
+            Modul 1 – Demokratie verstehen
+          </H1>
           <Teaser>
             <TeaserImage
               src="/images/start_teaser_m1a.svg"
@@ -138,7 +140,9 @@ export default function Home(): React.ReactElement {
               «Distributed Class» optimal unterstützen?{" "}
           <LearnMore href="/distance-learning" />*/}
 
-          <H1>Modul 2 – Demokratie testen</H1>
+          <H1 mt={[5, 5, 6]} width="100%" textAlign="center">
+            Modul 2 – Demokratie testen
+          </H1>
           <Teaser>
             <TeaserImage
               src="/images/start_teaser_m2a.svg"
@@ -170,9 +174,17 @@ export default function Home(): React.ReactElement {
             />
           </Teaser>
 
-          <H1>Modul 3 – Demokratie leben</H1>
+          <H1 mt={[5, 5, 6]} width="100%" textAlign="center">
+            Modul 3 – Demokratie leben
+          </H1>
 
-          <Teaser>
+          <Teaser reverse>
+            <TeaserImage
+              src="/images/start_teaser_m3.svg"
+              width={636}
+              height={589}
+              top={-60}
+            />
             <TeaserText title="Wer entscheidet an Eurer Schule?">
               Wer fällt die Entscheidungen an Eurem Schulhaus? Dürfen
               Schülerinnen und Schüler mitreden und Vorschläge einbringen? Wir
@@ -180,12 +192,6 @@ export default function Home(): React.ReactElement {
               Demokratie in Schulhäuser bringen können.{" "}
               <LearnMore href="/leben" />
             </TeaserText>
-            <TeaserImage
-              src="/images/start_teaser_m3.svg"
-              width={636}
-              height={589}
-              top={-60}
-            />
           </Teaser>
         </Flex>
         <Footer />
