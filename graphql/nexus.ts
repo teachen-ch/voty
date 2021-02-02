@@ -8854,6 +8854,7 @@ export interface NexusGenArgTypes {
     magic: {
       // args
       email: string; // String!
+      redirect?: string | null; // String
     };
     postActivity: {
       // args

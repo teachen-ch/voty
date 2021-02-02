@@ -8,7 +8,7 @@ import {
 } from "@rebass/forms";
 import { useContext, useEffect, useMemo, useState } from "react";
 import { BoxProps, Button, Text, Flex, Box } from "rebass";
-import { useTeam } from "state/user";
+import { useTeam, useUser } from "state/user";
 import { CardContext } from "./Cards";
 import React from "react";
 import { Authors, usePostWork, WorkCard, Works, WorkItem } from "./Works";
@@ -36,6 +36,7 @@ interface IQuestContext {
 export const QuestContext = React.createContext({} as IQuestContext);
 
 export const Quest: React.FC<{ groups?: string }> = ({ children, groups }) => {
+  const user = useUser();
   const team = useTeam();
   const { card, title } = useContext(CardContext);
   const [users, setUsers] = useState<Array<UserWhereUniqueInput>>();
@@ -83,7 +84,12 @@ export const Quest: React.FC<{ groups?: string }> = ({ children, groups }) => {
       {success ? (
         <Info mb={6}>Antworten abgeschickt!</Info>
       ) : (
-        <Button mt={3} mb={6} onClick={doPostWork}>
+        <Button
+          mt={3}
+          mb={6}
+          onClick={doPostWork}
+          disabled={Boolean(!user || !team)}
+        >
           Abschicken
         </Button>
       )}

@@ -9,6 +9,7 @@ import { Text, Button, Heading } from "rebass";
 import { useSetAccessToken, useSetUser, useUser } from "state/user";
 import { Grid } from "theme-ui";
 import { useQueryParam } from "util/hooks";
+import { getQueryParam } from "util/isBrowser";
 import { trackEvent, usePageEvent } from "util/stats";
 import { getStartpage } from "./login";
 
@@ -16,6 +17,7 @@ export default function VerifiedPage(): React.ReactElement {
   const purpose = useQueryParam("p");
   const user = useUser();
   const router = useRouter();
+  const redirect = getQueryParam("redirect");
 
   if (!user)
     return (
@@ -52,7 +54,11 @@ export default function VerifiedPage(): React.ReactElement {
       </LoggedInPage>
     );
   } else {
-    void router.push(getStartpage(user?.role));
+    if (redirect) {
+      void router.push(String(redirect));
+    } else {
+      void router.push(getStartpage(user?.role));
+    }
     return <LoggedInPage />;
   }
 }

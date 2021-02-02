@@ -1,10 +1,6 @@
 import { gql } from "@apollo/client";
 import { Label, Select } from "@rebass/forms";
-import {
-  TeamTeacherFieldsFragment,
-  TeamUserFieldsFragment,
-  useSetPrefsMutation,
-} from "graphql/types";
+import { TeamAnonFieldsFragment, useSetPrefsMutation } from "graphql/types";
 import { cloneDeep } from "lodash";
 import { useState } from "react";
 import { Box, Button } from "rebass";
@@ -24,7 +20,7 @@ export const SET_PREFS = gql`
 `;
 
 export const EditTeamPrefs: React.FC<{
-  team: TeamTeacherFieldsFragment;
+  team: TeamAnonFieldsFragment;
   card?: string;
 }> = ({ team, card }) => {
   const [show, setShow] = useState(false);
@@ -106,7 +102,7 @@ export enum AllowGroups {
 }
 
 export function allowGroups(
-  team: TeamUserFieldsFragment,
+  team: TeamAnonFieldsFragment,
   card: string,
   defaultValue = AllowGroups.Yes
 ): AllowGroups {
@@ -129,7 +125,7 @@ export enum ShowWorks {
 }
 
 export function showWorks(
-  team: TeamUserFieldsFragment,
+  team: TeamAnonFieldsFragment,
   card: string,
   defaultValue = ShowWorks.Always
 ): ShowWorks {

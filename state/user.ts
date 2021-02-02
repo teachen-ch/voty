@@ -1,7 +1,9 @@
 import { atom, useRecoilValue, useSetRecoilState } from "recoil";
 import {
   LoginFieldsFragment,
+  TeamAnonFieldsFragment,
   TeamUserFieldsFragment,
+  useTeamAnonQuery,
   useTeamUserQuery,
 } from "graphql/types";
 import { trackVisit } from "util/stats";
@@ -9,6 +11,7 @@ import { useRouter } from "next/router";
 
 export type SessionUser = LoginFieldsFragment | undefined | null;
 export type SessionTeam = TeamUserFieldsFragment | undefined | null;
+export type AnonTeam = TeamAnonFieldsFragment | undefined | null;
 
 const accessTokenState = atom({
   key: "accessTokenState",
@@ -57,6 +60,17 @@ export function useTeam(): SessionTeam | undefined | null {
   const teamQuery = useTeamUserQuery({
     variables: { where: { id } },
     skip: !user,
+  });
+
+  return teamQuery.data?.team;
+}
+
+export function useTeamAnon(): AnonTeam | undefined | null {
+  const router = useRouter();
+  const user = useUser();
+  const id = user?.team?.id || String(router.query.team);
+  const teamQuery = useTeamAnonQuery({
+    variables: { where: { id } },
   });
 
   return teamQuery.data?.team;

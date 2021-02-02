@@ -2961,6 +2961,7 @@ export type MutationLoginArgs = {
 
 export type MutationMagicArgs = {
   email: Scalars['String'];
+  redirect?: Maybe<Scalars['String']>;
 };
 
 
@@ -8111,7 +8112,7 @@ export type SwissvotesQuery = (
 
 export type TeamAnonFieldsFragment = (
   { __typename?: 'Team' }
-  & Pick<Team, 'id' | 'name' | 'cards'>
+  & Pick<Team, 'id' | 'name' | 'cards' | 'prefs'>
   & { school: (
     { __typename?: 'School' }
     & Pick<School, 'id' | 'name' | 'city'>
@@ -8505,6 +8506,7 @@ export type ChangePasswordMutation = (
 
 export type MagicMutationVariables = Exact<{
   email: Scalars['String'];
+  redirect?: Maybe<Scalars['String']>;
 }>;
 
 
@@ -8630,6 +8632,7 @@ export const TeamAnonFieldsFragmentDoc = gql`
   id
   name
   cards
+  prefs
   school {
     id
     name
@@ -10327,8 +10330,8 @@ export type ChangePasswordMutationHookResult = ReturnType<typeof useChangePasswo
 export type ChangePasswordMutationResult = Apollo.MutationResult<ChangePasswordMutation>;
 export type ChangePasswordMutationOptions = Apollo.BaseMutationOptions<ChangePasswordMutation, ChangePasswordMutationVariables>;
 export const MagicDocument = gql`
-    mutation magic($email: String!) {
-  magic(email: $email) {
+    mutation magic($email: String!, $redirect: String) {
+  magic(email: $email, redirect: $redirect) {
     success
     error
     message
@@ -10351,6 +10354,7 @@ export type MagicMutationFn = Apollo.MutationFunction<MagicMutation, MagicMutati
  * const [magicMutation, { data, loading, error }] = useMagicMutation({
  *   variables: {
  *      email: // value for 'email'
+ *      redirect: // value for 'redirect'
  *   },
  * });
  */

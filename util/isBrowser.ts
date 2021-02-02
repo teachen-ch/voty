@@ -30,3 +30,20 @@ export function isDesktop(): boolean {
 export function getHost(): string {
   return typeof document !== "undefined" ? document.location.host : "";
 }
+
+/*
+ * Next.js provides router.query, but it is not populated immediately
+ * If we are sure we are on the client side, we can use this quick hack
+ * to have an immediate result of a query-string variable
+ */
+export function getQueryParam(name: string): string | undefined {
+  if (!isBrowser()) return undefined;
+  const query = window.location.search.substring(1);
+  const vars = query.split("&");
+  for (let i = 0; i < vars.length; i++) {
+    const pair = vars[i].split("=");
+    if (decodeURIComponent(pair[0]) == name) {
+      return decodeURIComponent(pair[1]);
+    }
+  }
+}

@@ -54,10 +54,10 @@ export const magic: FieldResolver<"Mutation", "magic"> = async (
   args,
   ctx: Context
 ) => {
-  const { email } = args;
+  const { email, redirect } = args;
   const user = await ctx.db.user.findUnique({ where: { email } });
   if (user && !user.password && user.email) {
-    await sendVerificationEmail(user.email, "login", ctx.db);
+    await sendVerificationEmail(user.email, "login", ctx.db, redirect);
     return { success: true, message: "magic" };
   } else
     return {
@@ -331,7 +331,8 @@ export function verifyJWT(token: string): JWTSession | undefined {
 export async function sendVerificationEmail(
   email: string,
   purpose: string,
-  db: PrismaClient
+  db: PrismaClient,
+  redirect?: string | null
 ): Promise<ResponseLogin> {
   try {
     email = email.toLowerCase();
@@ -349,7 +350,11 @@ export async function sendVerificationEmail(
       process.env.NODE_ENV !== "production" ? process.env.NODE_ENV : ""
     }`;
     const token = await createVerificationToken(db, email);
-    const url = `${process.env.BASE_URL}user/verify?t=${token}&p=${purpose}`;
+    let url = `${process.env.BASE_URL}user/verify?t=${token}&p=${purpose}`;
+    if (redirect) {
+      url += "&redirect=" + encodeURI(redirect);
+    }
+
     const subjects: Record<string, string> = {
       verification: "voty: Bitte Email bestätigen",
       reset: "voty: Passwort zurücksetzen?",

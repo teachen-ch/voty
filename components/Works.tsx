@@ -235,6 +235,7 @@ export const WorkSubmit: React.FC<{
   setTrigger?: (n: number) => void;
 }> = ({ title, data, text, visibility: visibilityDefault, setTrigger }) => {
   const { card, title: cardTitle } = useContext(CardContext);
+  const user = useUser();
   const team = useTeam();
   if (!title) title = cardTitle;
   const [users, setUsers] = useState<Array<UserWhereUniqueInput>>();
@@ -263,7 +264,13 @@ export const WorkSubmit: React.FC<{
           <Authors setUsers={setUsers} />
         </>
       )}
-      <Button mt={3} width="100%" onClick={doPostWork} label="Abschicken">
+      <Button
+        mt={3}
+        width="100%"
+        onClick={doPostWork}
+        label="Abschicken"
+        disabled={Boolean(!user || !team)}
+      >
         Abschicken
       </Button>
       <Err msg={state.error?.message} />

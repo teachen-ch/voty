@@ -75,6 +75,7 @@ export const UserMutation = extendType({
       type: "Response",
       args: {
         email: nonNull(stringArg()),
+        redirect: stringArg(),
       },
       resolve: users.magic,
     });

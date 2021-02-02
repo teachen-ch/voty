@@ -2840,7 +2840,7 @@ type Mutation {
   endBallotRun(ballotRunId: String!): BallotRun
   inviteStudents(emails: [String!]!, team: String!): InviteResponse
   login(email: String!, password: String!): ResponseLogin
-  magic(email: String!): Response
+  magic(email: String!, redirect: String): Response
   postActivity(data: ActivityCreateInput!): Activity!
   postDiscussion(
     ballotId: String

@@ -22,8 +22,8 @@ export default function StudentTeamPage(): React.ReactElement {
         <Here>Meine Klasse</Here>
       </Breadcrumb>
 
-      <Flex justifyContent="center" mt={-20} mb={0}>
-        <IconWelcome width="350px" height="259px" maxWidth="80%" />
+      <Flex justifyContent="center" mt={-20} mb={0} maxWidth="80%">
+        <IconWelcome width="350px" height="259px" />
       </Flex>
 
       <HideFeature id="cards">

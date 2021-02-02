@@ -23,11 +23,12 @@ export default function VerifyPage(): React.ReactElement {
   const [error, setError] = useState("");
   const router = useRouter();
   const client = useApolloClient();
+  const redirect = useQueryParam("redirect");
   const [doVerification] = useCheckVerificationMutation({
     onCompleted: (data) => {
       if (data.checkVerification && data.checkVerification.token) {
         setAccessToken(data.checkVerification.token);
-        void router.push(`/user/verified?p=${purpose}`);
+        void router.push(`/user/verified?p=${purpose}&redirect=${redirect}`);
       }
     },
     onError(error) {

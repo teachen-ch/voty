@@ -17,6 +17,7 @@ const TeamAnonFields = gql`
     id
     name
     cards
+    prefs
     school {
       id
       name

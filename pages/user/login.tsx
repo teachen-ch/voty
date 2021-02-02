@@ -55,8 +55,8 @@ export const CHANGE_PASSWORD = gql`
 `;
 
 export const MAGIC = gql`
-  mutation magic($email: String!) {
-    magic(email: $email) {
+  mutation magic($email: String!, $redirect: String) {
+    magic(email: $email, redirect: $redirect) {
       success
       error
       message
@@ -94,6 +94,8 @@ export const LoginForm: React.FC<{ initialEmail?: string }> = ({
 }) => {
   usePageEvent({ category: "Login", action: "Start" });
   const router = useRouter();
+  const loc = typeof document !== "undefined" ? document.location.href : "";
+  const redirect = loc && loc.indexOf("login") < 0 ? loc : undefined;
 
   const [email, setEmail] = useState(initialEmail || "");
   const [exists, setExists] = useState<boolean | null | undefined>();
@@ -106,7 +108,7 @@ export const LoginForm: React.FC<{ initialEmail?: string }> = ({
   });
 
   async function checkExists() {
-    await doMagic({ variables: { email } });
+    await doMagic({ variables: { email, redirect } });
   }
 
   if (exists && magic)
@@ -124,13 +126,12 @@ export const LoginForm: React.FC<{ initialEmail?: string }> = ({
   if (exists && !magic) return <LoginPasswordForm email={email} />;
 
   return (
-    <Grid gap={2} columns={[0, 0, "1fr 3fr 1fr"]} mt={"46px"}>
+    <Grid gap={2} columns={[0, 0, "1fr 3fr 1fr"]} mt={3}>
       <Label htmlFor="email" sx={{ alignSelf: "center" }}>
         Email:{" "}
       </Label>
       <Input
         id="email"
-        autoFocus
         onChange={(e) => setEmail(e.target.value)}
         onKeyUp={(e) => e.key === "Enter" && checkExists()}
         placeholder="name@meineschule.ch"
@@ -197,14 +198,14 @@ const LoginPasswordForm: React.FC<{ email: string }> = ({ email }) => {
   }
 
   return (
-    <Grid gap={2} columns={[0, 0, "1fr 3fr 1fr"]}>
-      <Text></Text>
-      <Text fontSize={1}>
-        <A onClick={router.reload}>{email}</A>
-      </Text>
-      <Text></Text>
+    <Grid gap={2} columns={[0, 0, "1fr 3fr 1fr"]} mt={3}>
       <Label htmlFor="email" sx={{ alignSelf: "center" }}>
-        Passwort:{" "}
+        Email:
+      </Label>
+      <A onClick={router.reload}>{email}</A>
+      <Text />
+      <Label htmlFor="email" sx={{ alignSelf: "center" }}>
+        Passwort:
       </Label>
       <input type="hidden" name="email" value={email} />
       <Input

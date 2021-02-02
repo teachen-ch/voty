@@ -1,25 +1,18 @@
 import { AppPage, H2 } from "components/Page";
 import { Box, Flex, Text } from "rebass";
 import { Breadcrumb, Here } from "components/Breadcrumb";
-import { HideFeature } from "components/HideFeature";
 import { StudentCardList } from "components/Cards";
 import { StudentListBallots } from "components/Ballots";
 import IconWelcome from "../../../public/images/students_welcome.svg";
-import { useUser } from "state/user";
-import { Role, useTeamAnonQuery } from "graphql/types";
+import { useTeamAnon, useUser } from "state/user";
+import { Role } from "graphql/types";
 import StudentTeamPage from "./student";
 import TeacherTeamPage from "./admin";
-import { useRouter } from "next/router";
+import { LoginForm } from "pages/user/login";
 
 export default function TeamHome(): React.ReactElement {
   const user = useUser();
-  const router = useRouter();
-  const id = String(router.query.team);
-  const teamQuery = useTeamAnonQuery({
-    variables: { where: { id } },
-    skip: !id,
-  });
-  const team = teamQuery?.data?.team;
+  const team = useTeamAnon();
 
   if (user?.role === Role.Student) return <StudentTeamPage />;
 
@@ -38,18 +31,16 @@ export default function TeamHome(): React.ReactElement {
         <Here>Klasse «{team.name}»</Here>
       </Breadcrumb>
 
-      <Flex justifyContent="center" mt={-20} mb={0}>
-        <IconWelcome width="350px" height="259px" maxWidth="80%" />
+      <Flex justifyContent="center" mt={-20} mb={0} maxWidth="80%">
+        <IconWelcome width="350px" height="259px" />
       </Flex>
 
-      <HideFeature id="cards">
-        <H2 mt={0}>Lerninhalte Klasse {team.name}</H2>
-        <Text mb={4} fontSize={2}>
-          Diese Lerninhalte werden in der Klasse bearbeitet:
-        </Text>
-        <StudentCardList teamCards={String(team.cards)} teamId={team.id} />
-        <Box mt={6} />
-      </HideFeature>
+      <H2 mt={0}>Lerninhalte Klasse {team.name}</H2>
+      <Text mb={4} fontSize={2}>
+        Diese Lerninhalte werden in der Klasse bearbeitet:
+      </Text>
+      <StudentCardList teamCards={String(team.cards)} teamId={team.id} />
+      <Box mt={6} />
 
       <H2>Abstimmungen Klasse {team.name}</H2>
       <Text fontSize={2} mb={4}>
@@ -57,11 +48,20 @@ export default function TeamHome(): React.ReactElement {
       </Text>
       <StudentListBallots teamId={team.id} />
 
-      <H2 mt={6}>Aktivitäten in der Klasse</H2>
-      <Text mb={4} fontSize={2}>
-        Klassenaktivitäten werden nur Mitgliedern der Klasse angezeigt.
-      </Text>
+      <TeamAnonLogin />
+
       <Box mb={4} />
     </AppPage>
   );
 }
+
+export const TeamAnonLogin: React.FC = () => (
+  <Box>
+    <H2 mt={6}>Anmelden</H2>
+    <Text mb={3} fontSize={2}>
+      Um Diskussionen und Aktivitäten der Klasse anzuzeigen musst Du Dich
+      anmelden:
+    </Text>
+    <LoginForm />
+  </Box>
+);
