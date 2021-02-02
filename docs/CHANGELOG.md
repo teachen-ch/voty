@@ -1,3 +1,10 @@
+# [1.15.0](https://github.com/teachen-ch/voty/compare/v1.14.0...v1.15.0) (2021-02-02)
+
+
+### Features
+
+* stimmrechtsalter_16 release 🎉 ([f08f32a](https://github.com/teachen-ch/voty/commit/f08f32a4c8a2d72d19c7deabc6eb0fefc142a173))
+
 # [1.14.0](https://github.com/teachen-ch/voty/compare/v1.13.2...v1.14.0) (2021-02-02)
 
 
