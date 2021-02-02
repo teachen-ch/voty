@@ -1,3 +1,16 @@
+# [1.16.0](https://github.com/teachen-ch/voty/compare/v1.15.1...v1.16.0) (2021-02-02)
+
+
+### Bug Fixes
+
+* mobile header distance ([af1b27b](https://github.com/teachen-ch/voty/commit/af1b27b869529af5b49668354cd3a0a709b6294c))
+
+
+### Features
+
+* initial backend for [#119](https://github.com/teachen-ch/voty/issues/119) ([1aa4da8](https://github.com/teachen-ch/voty/commit/1aa4da8d0e20a3ff434effe20ee781c43c56410e))
+* updated module 3 campaign page ([2d3c240](https://github.com/teachen-ch/voty/commit/2d3c240ea9b407a9749d819265b91589877e5f7f))
+
 ## [1.15.1](https://github.com/teachen-ch/voty/compare/v1.15.0...v1.15.1) (2021-02-02)
 
 
