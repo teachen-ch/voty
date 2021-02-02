@@ -29,7 +29,10 @@ export default function Fundraising(): React.ReactElement {
 
   if (!password || strHash(password) !== CORRECT) {
     return (
-      <AppPage heading="voty.ch – Demokratie an die Schule">
+      <AppPage
+        heading="voty.ch – Demokratie an die Schule"
+        image="/images/header_m1.svg"
+      >
         <Text my={4}>Für diesen Bereich wird ein Passwort benötigt.</Text>
         <Label htmlFor="password">Passwort:</Label>
         <Grid columns="3fr 1fr">
@@ -45,7 +48,10 @@ export default function Fundraising(): React.ReactElement {
     localStorage.setItem("fundraising", password);
 
   return (
-    <AppPage heading="voty.ch – Demokratie an die Schule">
+    <AppPage
+      heading="voty.ch – Demokratie an die Schule"
+      image="/images/header_m1.svg"
+    >
       <Card fontSize={2}>
         <Text fontWeight="semi" mt={5} mb={3} px={5}>
           Die Demokratie ist wohl eines der wichtigsten Güter der Schweiz. Aber
