@@ -4,7 +4,7 @@ import { useUser } from "state/user";
 import { LoginForm } from "pages/user/login";
 import React, { ReactNode } from "react";
 import CheckLogin from "./CheckLogin";
-import { FlexProps } from "rebass";
+import { FlexProps, Image } from "rebass";
 import { Role } from "graphql/types";
 import { Footer } from "components/Footer";
 import { TopBar } from "./TopBar";
@@ -26,6 +26,7 @@ export const Page: React.FC<{
 };
 
 export const AppPage: React.FC<{
+  image?: string;
   bgImages?: string[];
   heading?: string;
   onClose?: () => void;
@@ -35,7 +36,7 @@ export const AppPage: React.FC<{
     <>
       <Background bgImages={bgImages} />
       <TopBar />
-      <Container pt={[0, 0, 20, 50]} color="white">
+      <Container pt={[0, 0, 20, 130]} color="white">
         <Head>
           <title>voty.ch – {props.heading}</title>
         </Head>
@@ -53,13 +54,13 @@ export const AppPage: React.FC<{
           maxWidth="800px"
           minHeight="450px"
         >
+          {props.image && <Image src={props.image} width="100%" mt={-150} />}
           {props.heading && (
-            <Heading
+            <H1
               mt={0}
-              as="h1"
+              mb={3}
               fontSize={[5, 5, "34px", "50px"]}
-              fontWeight="normal"
-              sx={{ borderBottom: "2px solid", borderColor: "white" }}
+              fontWeight="black"
             >
               <Flex justifyContent="space-between">
                 {props.heading}
@@ -76,7 +77,7 @@ export const AppPage: React.FC<{
                   </A>
                 )}
               </Flex>
-            </Heading>
+            </H1>
           )}
           {props.children}
         </Box>
@@ -90,18 +91,23 @@ export const LoggedInPage: React.FC<{
   role?: Role;
   children?: ReactNode;
   heading?: string;
+  image?: string;
   bgImages?: string[];
-}> = ({ role, children, heading, bgImages }) => {
+}> = ({ role, children, heading, bgImages, image }) => {
   const user = useUser();
   const allowed = role
     ? user?.role === role || user?.role === Role.Admin
     : true;
 
   if (user && allowed) {
-    return <AppPage heading={heading}>{children}</AppPage>;
+    return (
+      <AppPage heading={heading} image={image}>
+        {children}
+      </AppPage>
+    );
   } else {
     return (
-      <AppPage heading={heading} bgImages={bgImages}>
+      <AppPage heading={heading} bgImages={bgImages} image={image}>
         <CheckLogin>
           <Text my={4}>
             Diese Seite benötigt eine Anmeldung

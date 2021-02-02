@@ -20,23 +20,27 @@ export default function Home(): React.ReactElement {
 
       <Background bgImages={[]} />
       <TopBar />
-      <Container as="main" px={[3, 3, 3, 0]} pt={[10, 10, 33]}>
-        <H1 mt={0} fontSize={["10vw", "10vw", 50, 59, 76]} textAlign="center">
-          <Text fontSize={["15vw", "15vw", 80, 100, 126]} fontWeight="black">
+      <Container as="main" px={[3, 3, 3, 0]} pt={[10, 15, 40]}>
+        <H1 mt={0} fontSize={["10vw", "10vw", 50, 76, 76]} textAlign="center">
+          <Text
+            lineHeight={1}
+            fontSize={["15vw", "15vw", 80, 126, 126]}
+            fontWeight="black"
+          >
             Demokratie
           </Text>{" "}
           an die Schule!
         </H1>
 
         <Box
-          mt={[0, 0, -50, -50, -50]}
+          mt={[0, 0, -20, -20, -50]}
           maxWidth={["100%", "100%", "100%", "85%", "100%"]}
         >
           <NextImage
-            src="/images/start_intro.png"
-            width={2144}
-            height={1175}
-            alt="voty.ch – Online Demokratie Lernmittel"
+            src="/images/start_intro.svg"
+            width={934}
+            height={513}
+            alt="voty.ch – Online Demokratie Lehrnmittel"
           />
         </Box>
 
