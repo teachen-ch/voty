@@ -1,3 +1,10 @@
+## [1.13.2](https://github.com/teachen-ch/voty/compare/v1.13.1...v1.13.2) (2021-02-02)
+
+
+### Bug Fixes
+
+* futher /new tweaking ([7bb5f70](https://github.com/teachen-ch/voty/commit/7bb5f70fe31e8aa0c0d5ae0484df6929474304c1))
+
 ## [1.13.1](https://github.com/teachen-ch/voty/compare/v1.13.0...v1.13.1) (2021-02-02)
 
 
