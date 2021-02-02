@@ -1,3 +1,10 @@
+# [1.14.0](https://github.com/teachen-ch/voty/compare/v1.13.2...v1.14.0) (2021-02-02)
+
+
+### Features
+
+* add redirect to magic link login ([5addbff](https://github.com/teachen-ch/voty/commit/5addbffb40bab025084589350ecccc4fcb8b262f))
+
 ## [1.13.2](https://github.com/teachen-ch/voty/compare/v1.13.1...v1.13.2) (2021-02-02)
 
 
