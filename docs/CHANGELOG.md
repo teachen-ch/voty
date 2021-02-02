@@ -1,3 +1,10 @@
+## [1.15.1](https://github.com/teachen-ch/voty/compare/v1.15.0...v1.15.1) (2021-02-02)
+
+
+### Bug Fixes
+
+* let's include the new startpage... ([38340fb](https://github.com/teachen-ch/voty/commit/38340fb5283e66daef2c9b0bc821134eab014492))
+
 # [1.15.0](https://github.com/teachen-ch/voty/compare/v1.14.0...v1.15.0) (2021-02-02)
 
 
