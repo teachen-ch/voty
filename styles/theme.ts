@@ -14,7 +14,7 @@ export default {
     accent: "#d90000",
     highlight: "#dee4e7",
     textarea: "#fff", //"#B1BDC3",
-    muted: "#dee4e7",
+    muted: "#fff",
     lightgray: "#dee4e7",
     darkgray: "rgba(0,0,0,0.2)",
     gray: "#5a5a5a",
@@ -24,7 +24,7 @@ export default {
     // light mode
     bgcolor: "white",
     topbarColor: "#505050",
-    panelColor: "rgba(193,205,211, 0.50)",
+    panelColor: "#E1E6EA",
     white: "#030303",
     black: "white",
     text: "white",

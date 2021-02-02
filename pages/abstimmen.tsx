@@ -11,19 +11,11 @@ import { InlineSignup } from "./user/signup";
 
 export default function Abstimmung(): ReactElement {
   return (
-    <AppPage heading="Jugendliche stimmen ab – jetzt Klasse anmelden">
+    <AppPage
+      heading="Jugendliche stimmen ab – jetzt Klasse anmelden"
+      image="/images/header_m2.svg"
+    >
       <Text mt={4} fontSize={[2, 2, 3]}>
-        <img
-          src="/images/voty_module_2.svg"
-          alt="Bundeshaus"
-          style={{
-            float: "right",
-            marginLeft: 20,
-            marginRight: 20,
-            width: "130px",
-            maxWidth: "30%",
-          }}
-        />
         Im Vergleich zu älteren Generationen gehen junge Menschen (18-30) in der
         Schweiz halb so oft abstimmen. Dabei wäre gerade ihre Meinung wichtig!
         Wir wollen Jugendliche ermutigen und befähigen, ihr Stimmrecht aktiv

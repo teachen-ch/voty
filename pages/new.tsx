@@ -6,11 +6,9 @@ import { TopBar } from "components/TopBar";
 import { useRouter } from "next/router";
 import NextImage from "next/image";
 import Link from "next/link";
-import { useColorMode } from "theme-ui";
 
 export default function Home(): React.ReactElement {
   const router = useRouter();
-  const [colorMode] = useColorMode();
 
   return (
     <>
