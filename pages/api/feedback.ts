@@ -22,8 +22,8 @@ export default async (
     const data = { card, title, text, type, user, quest };
 
     await sendMail({
-      to: String(user.email),
-      from: feedbackEmail,
+      from: String(user.email),
+      to: feedbackEmail,
       subject: `voty Feedback: ${title}`,
       template: "feedback",
       data,
