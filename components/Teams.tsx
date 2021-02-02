@@ -18,6 +18,7 @@ const TeamAnonFields = gql`
     name
     cards
     prefs
+    notes
     school {
       id
       name
@@ -29,8 +30,6 @@ const TeamAnonFields = gql`
 const TeamUserFields = gql`
   fragment TeamUserFields on Team {
     ...TeamAnonFields
-    cards
-    prefs
     members {
       id
       name

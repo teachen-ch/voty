@@ -139,6 +139,7 @@ export const permissions = shield(
       postWork: isUser,
       postActivity: isUser,
       setPrefs: or(isTeacher, isAdmin),
+      setNotes: or(isTeacher, isAdmin),
     },
     User: {
       id: isUser,
@@ -177,6 +178,7 @@ export const permissions = shield(
       school: allow,
       cards: allow,
       prefs: allow,
+      notes: allow,
       invite: or(isOwnTeacherId, isAdmin),
       code: or(isOwnTeacherId, isAdmin),
       members: or(isTeamMember, isAdmin),

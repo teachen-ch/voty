@@ -28,6 +28,7 @@ declare module "rebass" {
     fontWeight?: string;
     fontStyle?: string;
     fontSize?: string | number | Array<string | number>;
+    lineHeight?: string | number | Array<string | number>;
     css?: InterpolationWithTheme<any>;
   }
   interface ButtonProps extends ButtonP {
@@ -42,6 +43,7 @@ declare module "rebass" {
     id?: string;
     fontWeight?: string;
     fontSize?: string | number | Array<string | number>;
+    lineHeight?: string | number | Array<string | number>;
     css?: InterpolationWithTheme<any>;
   }
   interface CardProps extends CardP {

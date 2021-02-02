@@ -59,6 +59,15 @@ export const postDiscussion: DocumentNode;
 }
     
 
+declare module '*/Notes.tsx' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const setNotes: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
 declare module '*/Prefs.tsx' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;

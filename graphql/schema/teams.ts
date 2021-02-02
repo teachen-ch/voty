@@ -18,6 +18,7 @@ export const Team = objectType({
     t.model.invite();
     t.model.code();
     t.model.prefs();
+    t.model.notes();
     t.model.domain();
     t.model.school();
     t.model.teacher();
@@ -62,6 +63,14 @@ export const TeamsMutations = extendType({
         prefs: nonNull(arg({ type: "Json" })),
       },
       resolve: resolvers.teams.setPrefs,
+    });
+    t.field("setNotes", {
+      type: "Team",
+      args: {
+        teamId: nonNull(stringArg()),
+        notes: nonNull(arg({ type: "Json" })),
+      },
+      resolve: resolvers.teams.setNotes,
     });
   },
 });
