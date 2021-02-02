@@ -9,16 +9,15 @@ export const ReadMore: React.FC<{
   bg?: string;
   hidePlus?: boolean;
   fontSize?: number | number[];
-}> = ({ title, bg = "#73899D", hidePlus, fontSize = 4, children }) => {
+}> = ({ title, bg = "darkgray", hidePlus, fontSize = 4, children }) => {
   const [open, setOpen] = useState(false);
   return (
     <Box color="white">
       <Button
         onClick={() => setOpen(!open)}
         bg={bg}
-        color="white"
-        width="100%"
         py={"7px"}
+        width="100%"
         my={0}
       >
         <Flex

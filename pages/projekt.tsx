@@ -8,7 +8,10 @@ import { HideFeature } from "components/HideFeature";
 export default function Projekt(): React.ReactElement {
   const router = useRouter();
   return (
-    <AppPage heading="voty.ch – Ein Projekt zur Förderung der Demokratie an den Schulen">
+    <AppPage
+      heading="voty.ch – Ein Projekt zur Förderung der Demokratie an den Schulen"
+      image="/images/header_m1.svg"
+    >
       <Card fontSize={2}>
         <Text fontWeight="semi">
           Die Demokratie ist eines der wohl wichtigsten Güter der Schweiz. Aber
@@ -30,8 +33,11 @@ export default function Projekt(): React.ReactElement {
           Modulen:
         </Text>
         <Text mt={4}>
-          <strong>Modul «Demokratie verstehen»</strong>&nbsp;
-          <Tag>in&nbsp;Entwicklung</Tag>
+          <A href="/lernen" fontWeight="bold" variant="underline">
+            Modul «Demokratie verstehen»
+          </A>
+          &nbsp;
+          <Tag bg="primary">Live</Tag>
           <br />
           Ein E-Learning-Modul, das den Lehrer*Innen Lernmaterialien und
           interaktive Elemente zur Verfügung stellt, welche die Schweizerische
@@ -53,16 +59,17 @@ export default function Projekt(): React.ReactElement {
               Begriffe in einem konkreten Kontext kennen und erleben den Prozess
               hautnah.
             </Text>
+            <Button mt={3} onClick={() => router.push("/anmelden")}>
+              Jetzt anmelden
+            </Button>
           </Detail>
         </Text>
         <Text mt={4}>
-          <strong>
-            <A href="/abstimmung" variant="underline">
-              Modul «Demokratie testen»
-            </A>
-          </strong>
+          <A href="/abstimmung" variant="underline" fontWeight="bold">
+            Modul «Demokratie testen»
+          </A>
           &nbsp;
-          <Tag bg={"primary"}>Live</Tag>
+          <Tag bg="primary">Live</Tag>
           <br /> Ein Abstimmungsmodul, mit dem aktuelle nationale Urnengänge von
           den Schüler*Innen in der Klasse zuerst diskutiert und danach
           durchgeführt werden können.
@@ -86,7 +93,10 @@ export default function Projekt(): React.ReactElement {
         </Text>
 
         <Text mt={4} id="modul3">
-          <strong>Modul «Demokratie leben»</strong>&nbsp;
+          <A href="/leben" variant="underline" fontWeight="bold">
+            Modul «Demokratie leben»
+          </A>
+          &nbsp;
           <Tag>in&nbsp;Konzeption</Tag>
           <br />
           Eine Online-Plattform auf der Schüler*Innen eigene Ideen rund um ihre

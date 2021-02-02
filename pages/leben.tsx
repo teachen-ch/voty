@@ -16,8 +16,6 @@ export default function LebenPage(): React.ReactElement {
         Kollaboration und kritisches Denken und soll die Lust und Freude an
         demokratischer Partizipation wecken.
       </Text>
-      <img src="/screens/voty_screen_leben.jpg" className="screenshot" />
-      <figcaption>In Konzeption: Modul 3 – «Demokratie leben»</figcaption>
       <H2>Konzept</H2>
       <Text>
         Wir möchten auf voty.ch den demokratischen Entscheidungsprozess in die

@@ -1,5 +1,5 @@
-import { Flex, Image, Text, Link as A, Box } from "rebass";
-import Link from "next/link";
+import { Flex, Image, Text, Box } from "rebass";
+import { A } from "components/Breadcrumb";
 import IconRegister from "../public/images/icon_register.svg";
 import IconLogin from "../public/images/icon_login.svg";
 import IconLogout from "../public/images/icon_logout.svg";
@@ -85,17 +85,15 @@ export const TopBar: React.FC = () => {
         pt="8px"
         flex={1}
       >
-        <Link href="/">
-          <A>
-            <Image
-              src={`/images/voty_logo_white.svg`}
-              alt="voty"
-              width="103px"
-              height="40px"
-              mt="10px"
-            />
-          </A>
-        </Link>
+        <A href="/">
+          <Image
+            src={`/images/voty_logo_white.svg`}
+            alt="voty.ch Logo"
+            width="103px"
+            height="40px"
+            mt="10px"
+          />
+        </A>
         <Box pt="10px" sx={{ display: ["none", "none", "block", "block"] }}>
           {loaded && (user ? <Account user={user} /> : <RegisterLogin />)}
         </Box>
@@ -110,24 +108,20 @@ export const TopBar: React.FC = () => {
 const RegisterLogin: React.FC = () => {
   return (
     <Flex alignItems="center">
-      <Link href="/user/signup">
-        <A>
-          <Flex alignItems="center">
-            <IconRegister />
-            <Text ml={3} mr={4}>
-              Klasse anmelden
-            </Text>
-          </Flex>
-        </A>
-      </Link>
-      <Link href="/user/login">
-        <A>
-          <Flex alignItems="center">
-            <IconLogin />
-            <Text ml={3}>Login</Text>
-          </Flex>
-        </A>
-      </Link>
+      <A href="/user/signup">
+        <Flex alignItems="center">
+          <IconRegister />
+          <Text ml={3} mr={4}>
+            Klasse anmelden
+          </Text>
+        </Flex>
+      </A>
+      <A href="/user/login">
+        <Flex alignItems="center">
+          <IconLogin />
+          <Text ml={3}>Login</Text>
+        </Flex>
+      </A>
     </Flex>
   );
 };
@@ -141,18 +135,12 @@ const Account: React.FC<{ user: SessionUser }> = ({ user }) => {
       : `Meine Klasse${user?.role === Role.Teacher ? "n" : ""}`;
   return (
     <Flex>
-      <Link href={homeLink}>
-        <A>
-          <Flex
-            alignItems="center"
-            flexDirection="row"
-            justifyContent="flex-end"
-          >
-            <IconClasses style={{ marginRight: 8 }} />
-            {homeText}
-          </Flex>
-        </A>
-      </Link>
+      <A href={homeLink}>
+        <Flex alignItems="center" flexDirection="row" justifyContent="flex-end">
+          <IconClasses style={{ marginRight: 8 }} />
+          {homeText}
+        </Flex>
+      </A>
       <Flex flexDirection="column" width="262px">
         <A onClick={() => setOpen(!open)}>
           <Flex
@@ -195,13 +183,9 @@ const AccountMenu: React.FC = () => {
         sx={{ borderRadius: "card" }}
       >
         <Text lineHeight="35px">
-          <Link href="/user/profile">
-            <A>Profil bearbeiten</A>
-          </Link>
+          <A href="/user/profile">Profil bearbeiten</A>
           <br />
-          <Link href="/user/logout">
-            <A>Abmelden</A>
-          </Link>
+          <A href="/user/logout">Abmelden</A>
         </Text>
       </Box>
     </Box>
@@ -219,7 +203,7 @@ const MobileBurger: React.FC<{ user: SessionUser }> = ({ user }) => {
   return (
     <Flex color="#fff">
       <A onClick={() => setOpen(!open)}>
-        <img src="/images/icon_burger.svg" alt="Menu" />
+        <img src="/images/icon_burger.svg" alt="Menu" width="44" height="36" />
       </A>
       {open && (
         <>
@@ -250,69 +234,53 @@ const MobileBurger: React.FC<{ user: SessionUser }> = ({ user }) => {
               </A>
             </Text>
             <Text pl={4} lineHeight="55px" fontWeight="semi">
-              <Link href="/">
-                <A>
-                  <IconHome style={burgerIcon} />
-                  Startseite
-                </A>
-              </Link>
+              <A href="/">
+                <IconHome style={burgerIcon} />
+                Startseite
+              </A>
               <hr />
               {!user ? (
                 <nav>
-                  <Link href="/user/signup">
-                    <A>
-                      <IconRegister style={burgerIcon} />
-                      Klasse anmelden
-                    </A>
-                  </Link>
+                  <A href="/user/signup">
+                    <IconRegister style={burgerIcon} />
+                    Klasse anmelden
+                  </A>
                   <br />
-                  <Link href="/user/login">
-                    <A>
-                      <IconLogin style={burgerIcon} />
-                      Login
-                    </A>
-                  </Link>
+                  <A href="/user/login">
+                    <IconLogin style={burgerIcon} />
+                    Login
+                  </A>
                   <br />
                 </nav>
               ) : (
                 <nav>
-                  <Link href="/user/login">
-                    <A>
-                      <IconClasses style={burgerIcon} />
-                      {isTeacher ? "Meine Klassen" : "Meine Klasse"}
-                    </A>
-                  </Link>
+                  <A href="/user/login">
+                    <IconClasses style={burgerIcon} />
+                    {isTeacher ? "Meine Klassen" : "Meine Klasse"}
+                  </A>
                   <br />
-                  <Link href="/user/profile">
-                    <A>
-                      <IconAccount style={burgerIcon} />
-                      Mein Profil
-                    </A>
-                  </Link>
+                  <A href="/user/profile">
+                    <IconAccount style={burgerIcon} />
+                    Mein Profil
+                  </A>
                   <br />
-                  <Link href="/user/logout">
-                    <A>
-                      <IconLogout style={burgerIcon} />
-                      Abmelden
-                    </A>
-                  </Link>
+                  <A href="/user/logout">
+                    <IconLogout style={burgerIcon} />
+                    Abmelden
+                  </A>
                   <br />
                 </nav>
               )}
               <hr />
-              <Link href="/newsletter">
-                <A>
-                  <IconNewsletter style={burgerIcon} />
-                  Newsletter
-                </A>
-              </Link>
+              <A href="/newsletter">
+                <IconNewsletter style={burgerIcon} />
+                Newsletter
+              </A>
               <br />
-              <Link href="/impressum">
-                <A>
-                  <IconImpressum style={burgerIcon} />
-                  Impressum
-                </A>
-              </Link>
+              <A href="/impressum">
+                <IconImpressum style={burgerIcon} />
+                Impressum
+              </A>
             </Text>
           </Box>
         </>

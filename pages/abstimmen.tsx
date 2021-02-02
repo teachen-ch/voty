@@ -117,9 +117,7 @@ export default function Abstimmung(): ReactElement {
 
 export const Explainer: React.FC<{ title: string }> = ({ title, children }) => (
   <ReadMore title={title}>
-    <Card fontSize={[1, 2, 3]} mt={0}>
-      {children}
-    </Card>
+    <Card fontSize={[1, 2, 3]}>{children}</Card>
   </ReadMore>
 );
 
