@@ -1,3 +1,11 @@
+## [1.16.1](https://github.com/teachen-ch/voty/compare/v1.16.0...v1.16.1) (2021-02-02)
+
+
+### Bug Fixes
+
+* 🤦‍♂️ confused from/to for feedback emails ([87e65f2](https://github.com/teachen-ch/voty/commit/87e65f20108d563499e5ea650c520e859bdeb41d))
+* titles on start screen, order of last teaser ([b6a0487](https://github.com/teachen-ch/voty/commit/b6a0487eb0f42ba0977aaad645a1edd0b276b515))
+
 # [1.16.0](https://github.com/teachen-ch/voty/compare/v1.15.1...v1.16.0) (2021-02-02)
 
 
