@@ -20,11 +20,11 @@ export default function Home(): React.ReactElement {
 
       <Background bgImages={[]} />
       <TopBar />
-      <Container as="main" px={[3, 3, 3, 0]} pt={[10, 15, 40]}>
-        <H1 mt={0} fontSize={["10vw", "10vw", 50, 76, 76]} textAlign="center">
+      <Container as="main" px={[3, 3, 3, 0]} pt={[30, 35, 30, 30, 40]}>
+        <H1 mt={0} fontSize={["10vw", "10vw", 50, 60, 76]} textAlign="center">
           <Text
             lineHeight={1}
-            fontSize={["15vw", "15vw", 80, 126, 126]}
+            fontSize={["15vw", "15vw", 90, 100, 126]}
             fontWeight="black"
           >
             Demokratie
@@ -33,8 +33,8 @@ export default function Home(): React.ReactElement {
         </H1>
 
         <Box
-          mt={[0, 0, -20, -20, -50]}
-          maxWidth={["100%", "100%", "100%", "85%", "100%"]}
+          mt={[0, 0, -20, -30, -50]}
+          maxWidth={["100%", "100%", "80%", "80%", "100%"]}
         >
           <NextImage
             src="/images/start_intro.svg"

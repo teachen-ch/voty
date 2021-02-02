@@ -36,7 +36,7 @@ export const AppPage: React.FC<{
     <>
       <Background bgImages={bgImages} />
       <TopBar />
-      <Container pt={[0, 0, 20, 130]} color="white">
+      <Container pt={[0, 0, 20, props.image ? 130 : 50]} color="white">
         <Head>
           <title>voty.ch – {props.heading}</title>
         </Head>
@@ -61,6 +61,7 @@ export const AppPage: React.FC<{
               mb={3}
               fontSize={[5, 5, "34px", "50px"]}
               fontWeight="black"
+              sx={{ textDecoration: "underline" }}
             >
               <Flex justifyContent="space-between">
                 {props.heading}
@@ -201,7 +202,7 @@ export const H1: React.FC<HeadingProps> = (props) => (
     as="h1"
     fontWeight="black"
     fontSize={[4, 4, 5, 6]}
-    color="primary"
+    color="blue2"
     mt={6}
     mb={0}
     {...props}
