@@ -8193,6 +8193,19 @@ export interface NexusGenObjects {
     team?: NexusGenRootTypes["Team"] | null; // Team
   };
   Mutation: {};
+  ProgressCard: {
+    // root type
+    done?: Array<NexusGenRootTypes["User"] | null> | null; // [User]
+    due?: Array<NexusGenRootTypes["User"] | null> | null; // [User]
+    id?: string | null; // String
+  };
+  ProgressStudent: {
+    // root type
+    done?: Array<string | null> | null; // [String]
+    due?: Array<string | null> | null; // [String]
+    email?: string | null; // String
+    id?: string | null; // String
+  };
   Query: {};
   Reaction: {
     // root type
@@ -8209,6 +8222,11 @@ export interface NexusGenObjects {
     // root type
     token?: string | null; // String
     user?: NexusGenRootTypes["User"] | null; // User
+  };
+  ResponseProgress: {
+    // root type
+    cards?: Array<NexusGenRootTypes["ProgressCard"] | null> | null; // [ProgressCard]
+    students?: Array<NexusGenRootTypes["ProgressStudent"] | null> | null; // [ProgressStudent]
   };
   School: {
     // root type
@@ -8415,6 +8433,19 @@ export interface NexusGenFieldTypes {
     vote: NexusGenRootTypes["Vote"] | null; // Vote
     voteCode: NexusGenRootTypes["Response"] | null; // Response
   };
+  ProgressCard: {
+    // field return type
+    done: Array<NexusGenRootTypes["User"] | null> | null; // [User]
+    due: Array<NexusGenRootTypes["User"] | null> | null; // [User]
+    id: string | null; // String
+  };
+  ProgressStudent: {
+    // field return type
+    done: Array<string | null> | null; // [String]
+    due: Array<string | null> | null; // [String]
+    email: string | null; // String
+    id: string | null; // String
+  };
   Query: {
     // field return type
     activities: NexusGenRootTypes["Activity"][]; // [Activity!]!
@@ -8427,6 +8458,7 @@ export interface NexusGenFieldTypes {
     getBallotRuns: Array<NexusGenRootTypes["BallotRun"] | null> | null; // [BallotRun]
     getTeamDiscussions: Array<NexusGenRootTypes["Discussion"] | null> | null; // [Discussion]
     me: NexusGenRootTypes["User"] | null; // User
+    progress: NexusGenRootTypes["ResponseProgress"] | null; // ResponseProgress
     school: NexusGenRootTypes["School"] | null; // School
     schools: NexusGenRootTypes["School"][]; // [School!]!
     swissvotes: Array<NexusGenRootTypes["Swissvote"] | null> | null; // [Swissvote]
@@ -8453,6 +8485,11 @@ export interface NexusGenFieldTypes {
     // field return type
     token: string | null; // String
     user: NexusGenRootTypes["User"] | null; // User
+  };
+  ResponseProgress: {
+    // field return type
+    cards: Array<NexusGenRootTypes["ProgressCard"] | null> | null; // [ProgressCard]
+    students: Array<NexusGenRootTypes["ProgressStudent"] | null> | null; // [ProgressStudent]
   };
   School: {
     // field return type
@@ -8668,6 +8705,19 @@ export interface NexusGenFieldTypeNames {
     vote: "Vote";
     voteCode: "Response";
   };
+  ProgressCard: {
+    // field return type name
+    done: "User";
+    due: "User";
+    id: "String";
+  };
+  ProgressStudent: {
+    // field return type name
+    done: "String";
+    due: "String";
+    email: "String";
+    id: "String";
+  };
   Query: {
     // field return type name
     activities: "Activity";
@@ -8680,6 +8730,7 @@ export interface NexusGenFieldTypeNames {
     getBallotRuns: "BallotRun";
     getTeamDiscussions: "Discussion";
     me: "User";
+    progress: "ResponseProgress";
     school: "School";
     schools: "School";
     swissvotes: "Swissvote";
@@ -8706,6 +8757,11 @@ export interface NexusGenFieldTypeNames {
     // field return type name
     token: "String";
     user: "User";
+  };
+  ResponseProgress: {
+    // field return type name
+    cards: "ProgressCard";
+    students: "ProgressStudent";
   };
   School: {
     // field return type name
@@ -9009,6 +9065,10 @@ export interface NexusGenArgTypes {
       ballotId?: string | null; // String
       card?: string | null; // String
       teamId?: string | null; // String
+    };
+    progress: {
+      // args
+      teamId: string; // String!
     };
     school: {
       // args

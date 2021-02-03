@@ -77,6 +77,15 @@ declare module '*/Prefs.tsx' {
 }
     
 
+declare module '*/Progress.tsx' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const progress: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
 declare module '*/Schools.tsx' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;

@@ -3091,6 +3091,19 @@ input OptionWhereUniqueInput {
   id: String
 }
 
+type ProgressCard {
+  done: [User]
+  due: [User]
+  id: String
+}
+
+type ProgressStudent {
+  done: [String]
+  due: [String]
+  email: String
+  id: String
+}
+
 type Query {
   activities(
     after: ActivityWhereUniqueInput
@@ -3133,6 +3146,7 @@ type Query {
     teamId: String
   ): [Discussion]
   me: User
+  progress(teamId: String!): ResponseProgress
   school(where: SchoolWhereUniqueInput!): School
   schools(
     after: SchoolWhereUniqueInput
@@ -3438,6 +3452,11 @@ type Response {
 type ResponseLogin {
   token: String
   user: User
+}
+
+type ResponseProgress {
+  cards: [ProgressCard]
+  students: [ProgressStudent]
 }
 
 enum Role {

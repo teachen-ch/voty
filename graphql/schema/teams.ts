@@ -28,6 +28,33 @@ export const Team = objectType({
   },
 });
 
+export const ProgressCard = objectType({
+  name: "ProgressCard",
+  definition(t) {
+    t.string("id");
+    t.list.field("done", { type: "User" });
+    t.list.field("due", { type: "User" });
+  },
+});
+
+export const ProgressStudent = objectType({
+  name: "ProgressStudent",
+  definition(t) {
+    t.string("id");
+    t.string("email");
+    t.list.string("done");
+    t.list.string("due");
+  },
+});
+
+export const ResponseProgress = objectType({
+  name: "ResponseProgress",
+  definition(t) {
+    t.list.field("cards", { type: "ProgressCard" });
+    t.list.field("students", { type: "ProgressStudent" });
+  },
+});
+
 export const TeamsQueries = extendType({
   type: "Query",
   definition(t) {
@@ -35,6 +62,13 @@ export const TeamsQueries = extendType({
     t.crud.teams({
       ordering: true,
       filtering: true,
+    });
+    t.field("progress", {
+      type: "ResponseProgress",
+      args: {
+        teamId: nonNull(stringArg()),
+      },
+      resolve: resolvers.teams.progress,
     });
   },
 });

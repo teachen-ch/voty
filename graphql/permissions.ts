@@ -109,6 +109,7 @@ export const permissions = shield(
       attachments: isUser, // TODO: #80 we should secure this to team + teacher
       works: isUser, // TODO: #80 we should secure this to team + teacher
       activities: isUser, // TODO: #80 we should secure this to team + teacher
+      progress: or(isAdmin, isTeacher),
     },
     Mutation: {
       login: allow,
@@ -197,6 +198,9 @@ export const permissions = shield(
     Card: allow,
     Work: allow,
     Activity: allow,
+    ResponseProgress: allow,
+    ProgressCard: allow,
+    ProgressStudent: allow,
   },
   {
     allowExternalErrors: true,

@@ -3266,6 +3266,21 @@ export type OptionWhereUniqueInput = {
   id?: Maybe<Scalars['String']>;
 };
 
+export type ProgressCard = {
+  __typename?: 'ProgressCard';
+  done?: Maybe<Array<Maybe<User>>>;
+  due?: Maybe<Array<Maybe<User>>>;
+  id?: Maybe<Scalars['String']>;
+};
+
+export type ProgressStudent = {
+  __typename?: 'ProgressStudent';
+  done?: Maybe<Array<Maybe<Scalars['String']>>>;
+  due?: Maybe<Array<Maybe<Scalars['String']>>>;
+  email?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['String']>;
+};
+
 export type Query = {
   __typename?: 'Query';
   activities: Array<Activity>;
@@ -3278,6 +3293,7 @@ export type Query = {
   getBallotRuns?: Maybe<Array<Maybe<BallotRun>>>;
   getTeamDiscussions?: Maybe<Array<Maybe<Discussion>>>;
   me?: Maybe<User>;
+  progress?: Maybe<ResponseProgress>;
   school?: Maybe<School>;
   schools: Array<School>;
   swissvotes?: Maybe<Array<Maybe<Swissvote>>>;
@@ -3354,6 +3370,11 @@ export type QueryGetTeamDiscussionsArgs = {
   ballotId?: Maybe<Scalars['String']>;
   card?: Maybe<Scalars['String']>;
   teamId?: Maybe<Scalars['String']>;
+};
+
+
+export type QueryProgressArgs = {
+  teamId: Scalars['String'];
 };
 
 
@@ -3684,6 +3705,12 @@ export type ResponseLogin = {
   __typename?: 'ResponseLogin';
   token?: Maybe<Scalars['String']>;
   user?: Maybe<User>;
+};
+
+export type ResponseProgress = {
+  __typename?: 'ResponseProgress';
+  cards?: Maybe<Array<Maybe<ProgressCard>>>;
+  students?: Maybe<Array<Maybe<ProgressStudent>>>;
 };
 
 export enum Role {
@@ -8076,6 +8103,32 @@ export type SetPrefsMutation = (
   )> }
 );
 
+export type ProgressQueryVariables = Exact<{
+  teamId: Scalars['String'];
+}>;
+
+
+export type ProgressQuery = (
+  { __typename?: 'Query' }
+  & { progress?: Maybe<(
+    { __typename?: 'ResponseProgress' }
+    & { cards?: Maybe<Array<Maybe<(
+      { __typename?: 'ProgressCard' }
+      & Pick<ProgressCard, 'id'>
+      & { done?: Maybe<Array<Maybe<(
+        { __typename?: 'User' }
+        & Pick<User, 'id' | 'email'>
+      )>>>, due?: Maybe<Array<Maybe<(
+        { __typename?: 'User' }
+        & Pick<User, 'id' | 'email'>
+      )>>> }
+    )>>>, students?: Maybe<Array<Maybe<(
+      { __typename?: 'ProgressStudent' }
+      & Pick<ProgressStudent, 'id' | 'email' | 'done' | 'due'>
+    )>>> }
+  )> }
+);
+
 export type SchoolFieldsFragment = (
   { __typename?: 'School' }
   & Pick<School, 'id' | 'name' | 'type' | 'city' | 'zip' | 'canton'>
@@ -9397,6 +9450,55 @@ export function useSetPrefsMutation(baseOptions?: Apollo.MutationHookOptions<Set
 export type SetPrefsMutationHookResult = ReturnType<typeof useSetPrefsMutation>;
 export type SetPrefsMutationResult = Apollo.MutationResult<SetPrefsMutation>;
 export type SetPrefsMutationOptions = Apollo.BaseMutationOptions<SetPrefsMutation, SetPrefsMutationVariables>;
+export const ProgressDocument = gql`
+    query progress($teamId: String!) {
+  progress(teamId: $teamId) {
+    cards {
+      id
+      done {
+        id
+        email
+      }
+      due {
+        id
+        email
+      }
+    }
+    students {
+      id
+      email
+      done
+      due
+    }
+  }
+}
+    `;
+
+/**
+ * __useProgressQuery__
+ *
+ * To run a query within a React component, call `useProgressQuery` and pass it any options that fit your needs.
+ * When your component renders, `useProgressQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useProgressQuery({
+ *   variables: {
+ *      teamId: // value for 'teamId'
+ *   },
+ * });
+ */
+export function useProgressQuery(baseOptions: Apollo.QueryHookOptions<ProgressQuery, ProgressQueryVariables>) {
+        return Apollo.useQuery<ProgressQuery, ProgressQueryVariables>(ProgressDocument, baseOptions);
+      }
+export function useProgressLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ProgressQuery, ProgressQueryVariables>) {
+          return Apollo.useLazyQuery<ProgressQuery, ProgressQueryVariables>(ProgressDocument, baseOptions);
+        }
+export type ProgressQueryHookResult = ReturnType<typeof useProgressQuery>;
+export type ProgressLazyQueryHookResult = ReturnType<typeof useProgressLazyQuery>;
+export type ProgressQueryResult = Apollo.QueryResult<ProgressQuery, ProgressQueryVariables>;
 export const SchoolsWithMembersDocument = gql`
     query schoolsWithMembers {
   schools {

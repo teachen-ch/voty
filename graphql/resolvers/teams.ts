@@ -1,11 +1,12 @@
 import { createUser, connectUserTeam } from "./users";
 import { FieldResolver } from "@nexus/schema";
 import { Role, PrismaClient, Visibility, ActivityType } from "@prisma/client";
-import { upperFirst } from "lodash";
-import { User } from "@prisma/client";
+import { upperFirst, find } from "lodash";
+import { User as PrismaUser } from "@prisma/client";
 import { fetchMails } from "../../util/imap";
 import logger from "../../util/logger";
 import { logActivity } from "./activities";
+import type { User, ProgressCard, ProgressStudent } from "graphql/types";
 
 export const inviteStudents: FieldResolver<
   "Mutation",
@@ -37,7 +38,7 @@ export const inviteStudents: FieldResolver<
     };
     try {
       const invited = await createUser(_root, args, ctx, undefined as any);
-      await connectUserTeam(invited as User, team, ctx);
+      await connectUserTeam(invited as PrismaUser, team, ctx);
       created.push(email);
     } catch (err) {
       if (err.message === "Error.DuplicateEmail") {
@@ -138,6 +139,67 @@ export const setNotes: FieldResolver<"Mutation", "setNotes"> = async (
     data: { notes: args.notes },
   });
   return team;
+};
+
+export const progress: FieldResolver<"Query", "progress"> = async (
+  _root,
+  args,
+  ctx
+) => {
+  const { teamId } = args;
+  const user = ctx.user;
+  const team = await ctx.db.team.findFirst({
+    where: { id: teamId },
+    include: { members: true },
+  });
+
+  if (!user || user.id !== team?.teacherId)
+    throw new Error("Error.NoPermission");
+
+  const works = await ctx.db.work.findMany({
+    where: { team: { id: teamId } },
+    include: { users: true },
+  });
+  const teamCards = team.cards.split(" ");
+  const cards: ProgressCard[] = [];
+  const students: ProgressStudent[] = [];
+
+  team.members.forEach((user) =>
+    students.push({ id: user.id, email: user.email, done: [], due: [] })
+  );
+
+  teamCards.forEach((card) =>
+    cards.push({
+      id: card,
+      done: [] as User[],
+      due: [] as User[],
+    })
+  );
+
+  works.forEach((work) => {
+    const item = find(cards, { id: work.card });
+    work.users.forEach((user) => {
+      item?.done?.push((user as any) as User);
+      const student = find(students, { id: user.id });
+      student?.done?.push(work.card);
+    });
+  });
+  // quite hacky type juggling...
+  // we compute card.due from all students which don't have the card.id in their student.done
+  cards.forEach((card) => {
+    card.due = students
+      .filter((student) => student.done?.indexOf(String(card.id)) === -1)
+      .map((user) => {
+        return { id: user.id, email: user.email, role: Role.Student };
+      }) as User[];
+  });
+  // likewise we compute student.due
+  students.forEach((student) => {
+    student.due = teamCards.filter(
+      (card) => student.done?.indexOf(card) === -1
+    );
+  });
+  return { cards, students };
 };
 
 function sleep(seconds: number) {
