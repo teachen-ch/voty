@@ -15,6 +15,7 @@ import {
   ShowWorkText,
 } from "components/Prefs";
 import { TeamAnonLogin } from "..";
+import { ShowNote } from "components/Notes";
 
 export default function CardPage(): React.ReactElement {
   const user = useUser();
@@ -63,6 +64,7 @@ export default function CardPage(): React.ReactElement {
         <Here>{meta.title}</Here>
       </Breadcrumb>
 
+      <ShowNote card={key} team={team} teacher={user?.role === Role.Teacher} />
       <Card id={key} />
       <Text
         fontSize={1}
