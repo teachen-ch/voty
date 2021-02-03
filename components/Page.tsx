@@ -74,7 +74,16 @@ export const AppPage: React.FC<{
                       display: ["none", "none", "block"],
                     }}
                   >
-                    <IconClose alt="schliessen" width="20px" height="20px" />
+                    <Box
+                      color="white"
+                      sx={{
+                        opacity: 0.2,
+                        transition: "0.4s ease-out",
+                        ":hover": { opacity: 1.0, transform: "rotate(-90deg)" },
+                      }}
+                    >
+                      <IconClose alt="schliessen" width="40px" height="40px" />
+                    </Box>
                   </A>
                 )}
               </Flex>

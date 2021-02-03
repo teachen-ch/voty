@@ -10,7 +10,7 @@ import IconImpressum from "../public/images/icon_impressum.svg";
 import IconNewsletter from "../public/images/icon_newsletter.svg";
 import IconDown from "../public/images/icon_down.svg";
 import IconUp from "../public/images/icon_up.svg";
-import IconClose from "../public/images/icon_cross.svg";
+import IconCross from "../public/images/icon_cross.svg";
 import IconBurger from "../public/images/icon_burger.svg";
 import { useUser, SessionUser } from "state/user";
 import { useState, useEffect } from "react";
@@ -235,7 +235,7 @@ const MobileBurger: React.FC<{ user: SessionUser; color: string }> = ({
             <Text textAlign="right">
               <A onClick={() => setOpen(false)}>
                 <Box width="30" height="30" pt="18px" pr="18px">
-                  <IconClose alt="schliessen" />
+                  <IconCross alt="schliessen" />
                 </Box>
               </A>
             </Text>
