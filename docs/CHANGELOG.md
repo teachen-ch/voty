@@ -1,3 +1,15 @@
+# [1.17.0](https://github.com/teachen-ch/voty/compare/v1.16.1...v1.17.0) (2021-02-03)
+
+
+### Bug Fixes
+
+* minor cosmetics and polish 💅 ([591785f](https://github.com/teachen-ch/voty/commit/591785f18eb239b76c0c505ad544de1d4adffbde))
+
+
+### Features
+
+* new version of blog post on /distance-learning ([8ff454c](https://github.com/teachen-ch/voty/commit/8ff454cd3304b9385f073414cc28e87975c4beb6))
+
 ## [1.16.1](https://github.com/teachen-ch/voty/compare/v1.16.0...v1.16.1) (2021-02-02)
 
 
