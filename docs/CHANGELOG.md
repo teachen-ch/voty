@@ -1,3 +1,11 @@
+# [1.18.0](https://github.com/teachen-ch/voty/compare/v1.17.0...v1.18.0) (2021-02-03)
+
+
+### Features
+
+* new animated close button ([8983b6f](https://github.com/teachen-ch/voty/commit/8983b6f840e4a8695550ec1a34285ed77d1f840a))
+* transparent TopBar tbd ([8b9aa86](https://github.com/teachen-ch/voty/commit/8b9aa863ccf394465a4e6386c297e86f0de6bc11))
+
 # [1.17.0](https://github.com/teachen-ch/voty/compare/v1.16.1...v1.17.0) (2021-02-03)
 
 
