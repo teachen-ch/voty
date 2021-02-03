@@ -95,6 +95,13 @@ export const TopBar: React.FC<{ home?: boolean }> = ({ home }) => {
             width="103px"
             height="40px"
             mt="10px"
+            sx={{
+              transition: "0.3s ",
+              ":hover": {
+                transform: "scale(1.05)",
+                opacity: 1,
+              },
+            }}
           />
         </A>
         <Box pt="10px" sx={{ display: ["none", "none", "block", "block"] }}>
@@ -138,14 +145,14 @@ const Account: React.FC<{ user: SessionUser }> = ({ user }) => {
       : `Meine Klasse${user?.role === Role.Teacher ? "n" : ""}`;
   return (
     <Flex>
-      <A href={homeLink}>
+      <A href={homeLink} variant="link">
         <Flex alignItems="center" flexDirection="row" justifyContent="flex-end">
           <IconClasses style={{ marginRight: 8 }} />
           {homeText}
         </Flex>
       </A>
       <Flex flexDirection="column" width="262px">
-        <A onClick={() => setOpen(!open)}>
+        <A onClick={() => setOpen(!open)} variant="link">
           <Flex
             alignItems="center"
             flexDirection="row"
@@ -186,9 +193,13 @@ const AccountMenu: React.FC = () => {
         sx={{ borderRadius: "card" }}
       >
         <Text lineHeight="35px">
-          <A href="/user/profile">Profil bearbeiten</A>
+          <A href="/user/profile" variant="link">
+            Profil bearbeiten
+          </A>
           <br />
-          <A href="/user/logout">Abmelden</A>
+          <A href="/user/logout" variant="link">
+            Abmelden
+          </A>
         </Text>
       </Box>
     </Box>
@@ -208,7 +219,7 @@ const MobileBurger: React.FC<{ user: SessionUser; color: string }> = ({
   const isTeacher = user?.role === Role.Teacher;
   return (
     <Flex color="#fff" pt={1}>
-      <A onClick={() => setOpen(!open)} color={color}>
+      <A onClick={() => setOpen(!open)} color={color} variant="link">
         <IconBurger alt="Menu" width="33" height="27" />
       </A>
       {open && (
@@ -233,26 +244,26 @@ const MobileBurger: React.FC<{ user: SessionUser; color: string }> = ({
             }}
           >
             <Text textAlign="right">
-              <A onClick={() => setOpen(false)}>
+              <A onClick={() => setOpen(false)} variant="link">
                 <Box width="30" height="30" pt="18px" pr="18px">
                   <IconCross alt="schliessen" />
                 </Box>
               </A>
             </Text>
             <Text pl={4} lineHeight="55px" fontWeight="semi">
-              <A href="/">
+              <A href="/" variant="link">
                 <IconHome style={burgerIcon} />
                 Startseite
               </A>
               <hr />
               {!user ? (
                 <nav>
-                  <A href="/user/signup">
+                  <A href="/user/signup" variant="link">
                     <IconRegister style={burgerIcon} />
                     Klasse anmelden
                   </A>
                   <br />
-                  <A href="/user/login">
+                  <A href="/user/login" variant="link">
                     <IconLogin style={burgerIcon} />
                     Login
                   </A>
@@ -260,17 +271,17 @@ const MobileBurger: React.FC<{ user: SessionUser; color: string }> = ({
                 </nav>
               ) : (
                 <nav>
-                  <A href="/user/login">
+                  <A href="/user/login" variant="link">
                     <IconClasses style={burgerIcon} />
                     {isTeacher ? "Meine Klassen" : "Meine Klasse"}
                   </A>
                   <br />
-                  <A href="/user/profile">
+                  <A href="/user/profile" variant="link">
                     <IconAccount style={burgerIcon} />
                     Mein Profil
                   </A>
                   <br />
-                  <A href="/user/logout">
+                  <A href="/user/logout" variant="link">
                     <IconLogout style={burgerIcon} />
                     Abmelden
                   </A>
@@ -278,12 +289,12 @@ const MobileBurger: React.FC<{ user: SessionUser; color: string }> = ({
                 </nav>
               )}
               <hr />
-              <A href="/newsletter">
+              <A href="/newsletter" variant="link">
                 <IconNewsletter style={burgerIcon} />
                 Newsletter
               </A>
               <br />
-              <A href="/impressum">
+              <A href="/impressum" variant="link">
                 <IconImpressum style={burgerIcon} />
                 Impressum
               </A>
