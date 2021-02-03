@@ -1,3 +1,19 @@
+# [1.19.0](https://github.com/teachen-ch/voty/compare/v1.18.1...v1.19.0) (2021-02-03)
+
+
+### Bug Fixes
+
+* remove underlines in all TopBar links ([fd043a7](https://github.com/teachen-ch/voty/commit/fd043a7b9c64e3428b42905b000dee61107d1874))
+* TopBar color of login panel ([731f5cc](https://github.com/teachen-ch/voty/commit/731f5cc15b6669470f189a5c1508567f6761003e))
+
+
+### Features
+
+* add student header ([58f3779](https://github.com/teachen-ch/voty/commit/58f377926db75a17fd3b9ac6bf7ed6b4be816e86))
+* backend for student progress [#118](https://github.com/teachen-ch/voty/issues/118) ([ee85114](https://github.com/teachen-ch/voty/commit/ee85114ddae751476323dfa00a8e9eadbc077121))
+* frontend for student progress close [#118](https://github.com/teachen-ch/voty/issues/118) ([4780ce7](https://github.com/teachen-ch/voty/commit/4780ce73189ecf137595fab70a90894349c44ec2))
+* implement frontend for class notes [#119](https://github.com/teachen-ch/voty/issues/119) ([9042c45](https://github.com/teachen-ch/voty/commit/9042c45edf0f6e018fef0db9ba929ed57fe28b33))
+
 ## [1.18.1](https://github.com/teachen-ch/voty/compare/v1.18.0...v1.18.1) (2021-02-03)
 
 
