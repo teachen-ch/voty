@@ -1,3 +1,10 @@
+## [1.18.1](https://github.com/teachen-ch/voty/compare/v1.18.0...v1.18.1) (2021-02-03)
+
+
+### Bug Fixes
+
+* ensure no duplicate cards are added in setCards ([61b77ec](https://github.com/teachen-ch/voty/commit/61b77ecc5c349ec897dc7a9512e6cc94efe552f1))
+
 # [1.18.0](https://github.com/teachen-ch/voty/compare/v1.17.0...v1.18.0) (2021-02-03)
 
 
