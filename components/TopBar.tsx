@@ -187,6 +187,7 @@ const AccountMenu: React.FC = () => {
       </Box>
       <Box
         bg="topbarColor"
+        color="#fff"
         m={0}
         width="207px"
         p={3}
