@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="12px" height="11px" viewBox="0 0 12 11" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>icon_progress</title>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="square">
+        <g id="icon_progress" transform="translate(1.000000, 1.000000)" stroke="#000000" stroke-width="1.5">
+            <line x1="0.103448276" y1="0.5" x2="5.89655172" y2="0.5" id="Line-Copy"></line>
+            <line x1="0.103448276" y1="4.5" x2="5.89655172" y2="4.5" id="Line-Copy-2"></line>
+            <line x1="0.103448276" y1="8.5" x2="5.89655172" y2="8.5" id="Line-Copy-3"></line>
+            <line x1="9.01724138" y1="0.5" x2="9.98275862" y2="0.5" id="Line-Copy"></line>
+            <line x1="9.01724138" y1="4.5" x2="9.98275862" y2="4.5" id="Line-Copy-2"></line>
+            <line x1="9.01724138" y1="8.5" x2="9.98275862" y2="8.5" id="Line-Copy-3"></line>
+        </g>
+    </g>
+</svg>

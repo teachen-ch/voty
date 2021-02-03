@@ -1,5 +1,5 @@
 import { H2, LoggedInPage } from "components/Page";
-import { Box, Text, Button } from "rebass";
+import { Box, Flex, Text, Button } from "rebass";
 import { Users } from "components/Users";
 import { Input, Textarea } from "@rebass/forms";
 import { Grid, Label } from "theme-ui";
@@ -9,6 +9,7 @@ import { uniq } from "lodash";
 import { SelectBallots } from "components/Ballots";
 import { gql } from "@apollo/client";
 import IconHint from "../../../public/images/icon_hint.svg";
+import IconProgress from "../../../public/images/icon_progress.svg";
 import { fragments } from "components/Teams";
 import { EditTeamPrefs } from "components/Prefs";
 import { ErrorBox } from "components/Form";
@@ -142,9 +143,18 @@ export default function TeacherTeamPage(): React.ReactElement {
           Lerninhalte hinzufügen
         </Button>
         {team.cards && (
-          <Text my={2} textAlign="right" fontSize={1}>
+          <Flex
+            my={2}
+            textAlign="right"
+            fontSize={1}
+            justifyContent="space-between"
+          >
+            <A href={`/team/${team.id}/progress`}>
+              <IconProgress style={{ marginRight: 8 }} />
+              Fortschritt der Klasse
+            </A>
             <EditTeamPrefs team={team} />
-          </Text>
+          </Flex>
         )}
         <Box mt={6} />
       </HideFeature>
