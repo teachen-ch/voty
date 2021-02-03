@@ -11,17 +11,20 @@ import IconNewsletter from "../public/images/icon_newsletter.svg";
 import IconDown from "../public/images/icon_down.svg";
 import IconUp from "../public/images/icon_up.svg";
 import IconClose from "../public/images/icon_cross.svg";
+import IconBurger from "../public/images/icon_burger.svg";
 import { useUser, SessionUser } from "state/user";
 import { useState, useEffect } from "react";
 import { Role } from "graphql/types";
 import { useColorMode } from "theme-ui";
 
-export const TopBar: React.FC = () => {
+export const TopBar: React.FC<{ home?: boolean }> = ({ home }) => {
   const user = useUser();
   const [loaded, setLoaded] = useState(false);
   const [colorMode, setColorMode] = useColorMode();
   const light = colorMode === "light";
   const [darkMode, setDarkMode] = useState<string | null>("");
+  const burgerColor = home ? "white" : "#fff";
+  const votyLogo = `/images/voty_logo_${home && light ? "black" : "white"}.svg`;
 
   useEffect(() => {
     if (document?.location.hash === "#darkmode") {
@@ -48,11 +51,11 @@ export const TopBar: React.FC = () => {
 
   return (
     <Flex
-      bg={["topbarColor", "topbarColor", "topbarColor"]}
+      bg={home ? "transparent" : "topbarColor"}
       height="70px"
       width="100%"
       justifyContent="center"
-      color="#fff"
+      color={home && light ? "white" : "#fff"}
       fontSize={3}
       px={[3, 3, 5, 0]}
       sx={{ position: ["absolute", "absolute"], top: 0, zIndex: 10 }}
@@ -62,7 +65,7 @@ export const TopBar: React.FC = () => {
           mx={"auto"}
           ml={[20, 20, 0]}
           mt={24}
-          src={`/images/icon_darkmode.svg`}
+          src={`/images/icon_${home && light ? "light" : "dark"}mode.svg`}
           sx={{
             position: "absolute",
             cursor: "pointer",
@@ -87,7 +90,7 @@ export const TopBar: React.FC = () => {
       >
         <A href="/">
           <Image
-            src={`/images/voty_logo_white.svg`}
+            src={votyLogo}
             alt="voty.ch Logo"
             width="103px"
             height="40px"
@@ -98,7 +101,7 @@ export const TopBar: React.FC = () => {
           {loaded && (user ? <Account user={user} /> : <RegisterLogin />)}
         </Box>
         <Box pt="10px" sx={{ display: ["block", "block", "none", "none"] }}>
-          <MobileBurger user={user} />
+          <MobileBurger user={user} color={burgerColor} />
         </Box>
       </Flex>
     </Flex>
@@ -192,7 +195,10 @@ const AccountMenu: React.FC = () => {
   );
 };
 
-const MobileBurger: React.FC<{ user: SessionUser }> = ({ user }) => {
+const MobileBurger: React.FC<{ user: SessionUser; color: string }> = ({
+  user,
+  color,
+}) => {
   const [open, setOpen] = useState(false);
   const burgerIcon = {
     width: "1.2em",
@@ -201,9 +207,9 @@ const MobileBurger: React.FC<{ user: SessionUser }> = ({ user }) => {
   };
   const isTeacher = user?.role === Role.Teacher;
   return (
-    <Flex color="#fff">
-      <A onClick={() => setOpen(!open)}>
-        <img src="/images/icon_burger.svg" alt="Menu" width="44" height="36" />
+    <Flex color="#fff" pt={1}>
+      <A onClick={() => setOpen(!open)} color={color}>
+        <IconBurger alt="Menu" width="33" height="27" />
       </A>
       {open && (
         <>

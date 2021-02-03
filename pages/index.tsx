@@ -17,7 +17,7 @@ export default function Home(): React.ReactElement {
       </Head>
 
       <Background bgImages={[]} />
-      <TopBar />
+      <TopBar home />
       <Container as="main" px={[3, 3, 3, 0]} pt={[30, 35, 30, 30, 40]}>
         <H1 mt={0} fontSize={["10vw", "10vw", 50, 60, 76]} textAlign="center">
           <Text
@@ -189,8 +189,9 @@ export default function Home(): React.ReactElement {
               Wer fällt die Entscheidungen an Eurem Schulhaus? Dürfen
               Schülerinnen und Schüler mitreden und Vorschläge einbringen? Wir
               möchten gemeinsam testen, wie wir partizipative Prozesse und mehr
-              Demokratie in Schulhäuser bringen können.{" "}
+              Demokratie in Schulhäuser bringen können.
               <LearnMore href="/leben" />
+              <Box mb={4} />
             </TeaserText>
           </Teaser>
         </Flex>

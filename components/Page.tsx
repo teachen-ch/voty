@@ -35,7 +35,7 @@ export const AppPage: React.FC<{
   return (
     <>
       <Background bgImages={bgImages} />
-      <TopBar />
+      <TopBar home />
       <Container pt={props.image ? 130 : [0, 0, 50]} color="white">
         <Head>
           <title>voty.ch – {props.heading}</title>
