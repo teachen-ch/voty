@@ -2,6 +2,7 @@ import { FieldResolver } from "@nexus/schema";
 import { Card } from "graphql/types";
 import * as cardsData from "content/";
 import { Role } from "@prisma/client";
+import { uniq } from "lodash";
 
 const env = process.env.NEXT_PUBLIC_ENV;
 
@@ -41,11 +42,14 @@ export const setCards: FieldResolver<"Mutation", "setCards"> = async (
   args,
   ctx
 ) => {
-  const { teamId, cards } = args;
+  const { teamId } = args;
+  let { cards } = args;
   const team = await ctx.db.team.findUnique({ where: { id: teamId } });
   if (team?.teacherId !== ctx.user?.id && ctx.user?.role !== Role.Admin)
     throw new Error("Error.NoPermission");
 
+  // remove duplicates
+  cards = uniq(cards.split(" ")).join(" ");
   const newTeam = await ctx.db.team.update({
     data: { cards },
     where: { id: teamId },
