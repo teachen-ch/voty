@@ -211,7 +211,7 @@ export const StudentListBallots: React.FC<{
     return <OneRowTable text="Noch keine Abstimmungen erfasst" />;
 
   return (
-    <Box>
+    <Box color="#fff">
       {ballotsQuery.data.ballots.map((ballot) => (
         <Flex
           key={ballot.id}

@@ -131,7 +131,7 @@ export const VotyNow: React.FC<{
       <Box variant="centered">
         <Box width={["100%", "100%", 400]}>
           <img src="/images/voty_now.svg" alt="Abstimmen" width="100%" />
-          <Box px={[0, 0, 2]} mt={[-10]}>
+          <Box px={[0, 0, 2]} mt={10}>
             <Box fontSize={2}>
               <Flex justifyContent="space-around">
                 <A onClick={() => vote(ballot.id, 1)}>
@@ -165,7 +165,7 @@ export const VotySuccess: React.FC<{ name: Nullable<string> }> = ({ name }) => (
   <>
     <Text mb={4}>
       Super, {name}, Du hast nun anonym abgestimmt und Deine Stimme wurde
-      gezählt. Die Resultate der Abbstimmung könnt ihr mit Eurer Lehrperson
+      gezählt. Die Resultate der Abstimmung könnt ihr mit Eurer Lehrperson
       ansehen und besprechen.
     </Text>
     <Box textAlign="center">

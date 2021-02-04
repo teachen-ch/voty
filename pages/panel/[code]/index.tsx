@@ -156,7 +156,7 @@ const VotySuccess: React.FC = () => (
       <img
         src="/images/voty_success.svg"
         alt="Juhee"
-        style={{ maxWidth: "240px" }}
+        style={{ width: "440px", maxWidth: "80%" }}
       />
     </Box>
   </>
