@@ -81,8 +81,8 @@ export default function Fundraising(): React.ReactElement {
         <Section title="Idee und Wirkung" id="idee">
           <Text mb={4}>
             Die Themen der nachhaltigen Entwicklung sind zwar im Lehrplan 21
-            verankert, fristen im Unterricht aber oft noch ein stiefmütterliches
-            Dasein. Viele Lehrpersonen fühlen sich in den Inhalten nicht sicher
+            verankert, erhalten im Untericht aber oft nicht einen adäquaten
+            Platz. Viele Lehrpersonen fühlen sich in den Inhalten nicht sicher
             genug und eine Aufarbeitung mit den aktuellen Lehrmitteln benötigt
             eine signifikante Zeitinvestition. Gleichzeitig hat der erste
             Lockdown im 2020 gezeigt, dass das Potential der Digitalisierung im
@@ -97,7 +97,7 @@ export default function Fundraising(): React.ReactElement {
             Vorbereitungsaufwand im Unterricht einsatzbereit sind (auch im
             Distance Learning), werden eine rasche Akzeptanz bei Lehrpersonen
             finden. Den traditionellen Lehrmittelverlagen fehlt dazu aber die
-            digitale Kompetenzen. Als Team mit einer Kombination aus viel
+            technologische Kompetenz. Als Team mit einer Kombination aus viel
             digitaler Erfahrung und Passion für Bildung möchten wir deshalb
             helfen, die Schule der Zukunft mitzugestalten. Dafür braucht es
             überzeugende Konzepte und Inhalte, State-of-the-Art Technologie und
@@ -144,10 +144,10 @@ export default function Fundraising(): React.ReactElement {
             gegangen. 11 Klassen haben intensiv über die
             «Konzernverantwortungsinitiative» diskutiert und danach auf voty.ch
             abgestimmt. Denn auch Jugendliche haben eine Meinung und möchten
-            gehört werden. In Zusammenarbeit mit Claude Longchamps möchten wir
-            deshalb aus den Klassenabstimmungen ein repräsentatives
-            Stimmungsbild dieser Generation zu aktuellen politischen Themen
-            aufzeigen.
+            gehört werden. In Zusammenarbeit mit dem Politikwissenschaftler
+            Claude Longchamps möchten wir deshalb aus den Klassenabstimmungen
+            ein repräsentatives Stimmungsbild dieser Generation zu aktuellen
+            politischen Themen aufzeigen.
           </Text>
           <img src="/screens/voty_screen_vote.jpg" className="screenshot" />
           <figcaption>Screenshot voty.ch Abstimmungsmodul</figcaption>
