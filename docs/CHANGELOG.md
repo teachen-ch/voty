@@ -1,3 +1,16 @@
+# [1.21.0](https://github.com/teachen-ch/voty/compare/v1.20.0...v1.21.0) (2021-02-04)
+
+
+### Bug Fixes
+
+* minor text change ([aa06d93](https://github.com/teachen-ch/voty/commit/aa06d93ad83df04c95289e7ce763965da5e3255d))
+
+
+### Features
+
+* close [#105](https://github.com/teachen-ch/voty/issues/105) allow authors to delete their works ([1defd54](https://github.com/teachen-ch/voty/commit/1defd54c19cb990d12ec9cb00eda122305fd28ef))
+* new vote and success screens ([3551302](https://github.com/teachen-ch/voty/commit/3551302bd5e69af7d7c6686253d40310cc49d9b9))
+
 # [1.20.0](https://github.com/teachen-ch/voty/compare/v1.19.0...v1.20.0) (2021-02-04)
 
 
