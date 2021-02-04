@@ -1,3 +1,15 @@
+# [1.22.0](https://github.com/teachen-ch/voty/compare/v1.21.0...v1.22.0) (2021-02-04)
+
+
+### Bug Fixes
+
+* only show current ballots ([f7cf42a](https://github.com/teachen-ch/voty/commit/f7cf42a255ed40dcfe7513913c7b7166808623c1))
+
+
+### Features
+
+* new email template graphics ([4f158e9](https://github.com/teachen-ch/voty/commit/4f158e9428a7496b597b940cc710161a989fbb78))
+
 # [1.21.0](https://github.com/teachen-ch/voty/compare/v1.20.0...v1.21.0) (2021-02-04)
 
 
