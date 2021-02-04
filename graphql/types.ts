@@ -2857,6 +2857,7 @@ export type Mutation = {
   deleteOneSchool?: Maybe<School>;
   deleteOneTeam?: Maybe<Team>;
   deleteUser?: Maybe<User>;
+  deleteWork?: Maybe<Work>;
   emailVerification?: Maybe<ResponseLogin>;
   endBallotRun?: Maybe<BallotRun>;
   inviteStudents?: Maybe<InviteResponse>;
@@ -2934,6 +2935,11 @@ export type MutationDeleteOneTeamArgs = {
 
 export type MutationDeleteUserArgs = {
   where: UserWhereUniqueInput;
+};
+
+
+export type MutationDeleteWorkArgs = {
+  where: WorkWhereUniqueInput;
 };
 
 
@@ -8433,6 +8439,19 @@ export type WorksQuery = (
   )> }
 );
 
+export type DeleteWorkMutationVariables = Exact<{
+  where: WorkWhereUniqueInput;
+}>;
+
+
+export type DeleteWorkMutation = (
+  { __typename?: 'Mutation' }
+  & { deleteWork?: Maybe<(
+    { __typename?: 'Work' }
+    & Pick<Work, 'id'>
+  )> }
+);
+
 export type PostWorkMutationVariables = Exact<{
   data: WorkCreateInput;
 }>;
@@ -10116,6 +10135,38 @@ export function useWorksLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<Work
 export type WorksQueryHookResult = ReturnType<typeof useWorksQuery>;
 export type WorksLazyQueryHookResult = ReturnType<typeof useWorksLazyQuery>;
 export type WorksQueryResult = Apollo.QueryResult<WorksQuery, WorksQueryVariables>;
+export const DeleteWorkDocument = gql`
+    mutation deleteWork($where: WorkWhereUniqueInput!) {
+  deleteWork(where: $where) {
+    id
+  }
+}
+    `;
+export type DeleteWorkMutationFn = Apollo.MutationFunction<DeleteWorkMutation, DeleteWorkMutationVariables>;
+
+/**
+ * __useDeleteWorkMutation__
+ *
+ * To run a mutation, you first call `useDeleteWorkMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useDeleteWorkMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [deleteWorkMutation, { data, loading, error }] = useDeleteWorkMutation({
+ *   variables: {
+ *      where: // value for 'where'
+ *   },
+ * });
+ */
+export function useDeleteWorkMutation(baseOptions?: Apollo.MutationHookOptions<DeleteWorkMutation, DeleteWorkMutationVariables>) {
+        return Apollo.useMutation<DeleteWorkMutation, DeleteWorkMutationVariables>(DeleteWorkDocument, baseOptions);
+      }
+export type DeleteWorkMutationHookResult = ReturnType<typeof useDeleteWorkMutation>;
+export type DeleteWorkMutationResult = Apollo.MutationResult<DeleteWorkMutation>;
+export type DeleteWorkMutationOptions = Apollo.BaseMutationOptions<DeleteWorkMutation, DeleteWorkMutationVariables>;
 export const PostWorkDocument = gql`
     mutation postWork($data: WorkCreateInput!) {
   postWork(data: $data) {

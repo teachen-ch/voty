@@ -8415,6 +8415,7 @@ export interface NexusGenFieldTypes {
     deleteOneSchool: NexusGenRootTypes["School"] | null; // School
     deleteOneTeam: NexusGenRootTypes["Team"] | null; // Team
     deleteUser: NexusGenRootTypes["User"] | null; // User
+    deleteWork: NexusGenRootTypes["Work"] | null; // Work
     emailVerification: NexusGenRootTypes["ResponseLogin"] | null; // ResponseLogin
     endBallotRun: NexusGenRootTypes["BallotRun"] | null; // BallotRun
     inviteStudents: NexusGenRootTypes["InviteResponse"] | null; // InviteResponse
@@ -8687,6 +8688,7 @@ export interface NexusGenFieldTypeNames {
     deleteOneSchool: "School";
     deleteOneTeam: "Team";
     deleteUser: "User";
+    deleteWork: "Work";
     emailVerification: "ResponseLogin";
     endBallotRun: "BallotRun";
     inviteStudents: "InviteResponse";
@@ -8921,6 +8923,10 @@ export interface NexusGenArgTypes {
     deleteUser: {
       // args
       where: NexusGenInputs["UserWhereUniqueInput"]; // UserWhereUniqueInput!
+    };
+    deleteWork: {
+      // args
+      where: NexusGenInputs["WorkWhereUniqueInput"]; // WorkWhereUniqueInput!
     };
     emailVerification: {
       // args

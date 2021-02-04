@@ -56,3 +56,28 @@ export const postWork: FieldResolver<"Mutation", "postWork"> = async (
   });
   return work;
 };
+
+export const deleteWork: FieldResolver<"Mutation", "deleteWork"> = async (
+  _root,
+  args,
+  ctx
+) => {
+  const id = String(args.where?.id);
+  const user = ctx.user;
+
+  const work = await ctx.db.work.findFirst({
+    where: { id },
+    include: { users: true, team: true },
+  });
+
+  if (!work) throw new Error("Error.NotFound");
+  if (!user) throw new Error("Error.NoPermission");
+
+  if (user.role === Role.Student && !find(work.users, { id: user.id }))
+    throw new Error("Error.NoPermission");
+  if (user.role === Role.Teacher && user.id !== work.team.teacherId)
+    throw new Error("Error.NoPermission");
+
+  const deleted = await ctx.db.work.delete({ where: { id } });
+  return deleted;
+};

@@ -35,5 +35,9 @@ export const WorksMutations = extendType({
       alias: "postWork",
       resolve: resolvers.works.postWork,
     });
+    t.crud.deleteOneWork({
+      alias: "deleteWork",
+      resolve: resolvers.works.deleteWork,
+    });
   },
 });

@@ -153,6 +153,7 @@ declare module '*/Works.tsx' {
   const defaultDocument: DocumentNode;
   export const WorkFields: DocumentNode;
 export const works: DocumentNode;
+export const deleteWork: DocumentNode;
 export const postWork: DocumentNode;
 
   export default defaultDocument;

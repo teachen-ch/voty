@@ -10,6 +10,7 @@ import {
   Scalars,
   Visibility,
   Role,
+  useDeleteWorkMutation,
 } from "graphql/types";
 import { AttachmentFields } from "components/Uploader";
 import { Flex, Text, FlexProps, Box, BoxProps, Button } from "rebass";
@@ -19,6 +20,7 @@ import { Err, Loading } from "./Page";
 import { find, omit, remove, truncate } from "lodash";
 import IconPlus from "../public/images/icon_plus.svg";
 import IconMinus from "../public/images/icon_minus.svg";
+import IconTrash from "../public/images/icon_trash.svg";
 import { Label, Radio } from "@rebass/forms";
 import { formatDate } from "util/date";
 import { Pill } from "./Misc";
@@ -54,6 +56,14 @@ export const WORKS = gql`
   ${WorkFields}
 `;
 
+export const DELETE_WORK = gql`
+  mutation deleteWork($where: WorkWhereUniqueInput!) {
+    deleteWork(where: $where) {
+      id
+    }
+  }
+`;
+
 export type WorkItem = React.FC<{ work: WorkFieldsFragment }>;
 
 // TODO: Rethink, whether we want to keep the where param
@@ -68,6 +78,8 @@ export const Works: React.FC<
 > = ({ where, items, list, trigger, card, ...props }) => {
   const team = useTeam();
   const user = useUser();
+  const [doDeleteWork] = useDeleteWorkMutation();
+
   if (!where) {
     where = team
       ? { teamId: { equals: team.id } }
@@ -124,20 +136,30 @@ export const Works: React.FC<
     }
   }
 
+  async function doDelete(id: string) {
+    if (confirm("Diese Arbeit wirklich löschen?")) {
+      await doDeleteWork({ variables: { where: { id } } });
+      await worksQuery.refetch();
+    }
+  }
+
   const flexProps = omit(props, "children", "ref");
   return (
     <ListComp flexDirection="column" {...flexProps}>
       {works.length > 0 && <Text fontWeight="bold">Arbeiten zum Thema:</Text>}
       {works?.map((work) => {
+        const canDelete =
+          user?.role === Role.Teacher || find(work.users, { id: user?.id });
         return (
           <Box key={work.id} mt={2} id={work.id}>
             <Flex
               bg="darkgray"
               p={1}
               height="40px"
-              pl={"12px"}
+              px={"12px"}
               alignItems="center"
               sx={{ borderRadius: "5px" }}
+              justifyContent="space-between"
               onClick={() => setActive(active === work.id ? "" : work.id)}
             >
               {active === work.id ? (
@@ -145,13 +167,22 @@ export const Works: React.FC<
               ) : (
                 <IconPlus style={{ marginRight: "10px" }} alt="Öffnen" />
               )}
-              <Text sx={{ cursor: "pointer" }} fontSize={[1, 1, 2]}>
+              <Text sx={{ cursor: "pointer" }} fontSize={[1, 1, 2]} flex={1}>
                 <b>{work.users?.map((u) => u.shortname).join(", ")}:</b> «
                 {truncate(work.title, { length: 35 }) || "ohne Titel"}»
                 <Text ml={3} variant="inline" fontSize={1}>
                   ({formatDate(work.updatedAt)})
                 </Text>
               </Text>
+              {canDelete && (
+                <IconTrash
+                  onClick={(e: MouseEvent) => {
+                    e.stopPropagation();
+                    void doDelete(work.id);
+                  }}
+                  style={{ cursor: "pointer" }}
+                />
+              )}
             </Flex>
             <Box pl={0}>{active === work.id && <Comp work={work} />}</Box>
           </Box>

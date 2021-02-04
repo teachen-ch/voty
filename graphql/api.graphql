@@ -2836,6 +2836,7 @@ type Mutation {
   deleteOneSchool(where: SchoolWhereUniqueInput!): School
   deleteOneTeam(where: TeamWhereUniqueInput!): Team
   deleteUser(where: UserWhereUniqueInput!): User
+  deleteWork(where: WorkWhereUniqueInput!): Work
   emailVerification(email: String!, purpose: String!): ResponseLogin
   endBallotRun(ballotRunId: String!): BallotRun
   inviteStudents(emails: [String!]!, team: String!): InviteResponse
