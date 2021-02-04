@@ -84,7 +84,7 @@ export const GlossaryLink: React.FC<{
   text?: string;
   bg?: string;
   color?: string;
-}> = ({ term, text, bg = "lightgray", color = "black" }) => {
+}> = ({ term, text, bg = "lightgray", color = "black", children }) => {
   const [show, setShow] = useState(false);
   function toggle() {
     setShow(!show);
@@ -120,7 +120,7 @@ export const GlossaryLink: React.FC<{
         width={["calc(100% - 32px)", "calc(100% - 32px)", "calc(100% - 64px)"]}
       >
         <b>{term}: </b>
-        {getGlossary(term)}
+        {children || getGlossary(term)}
       </Text>
     </Text>
   );
