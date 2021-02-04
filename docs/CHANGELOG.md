@@ -1,3 +1,10 @@
+# [1.20.0](https://github.com/teachen-ch/voty/compare/v1.19.0...v1.20.0) (2021-02-04)
+
+
+### Features
+
+* rewrote FM document ([975ada0](https://github.com/teachen-ch/voty/commit/975ada08f3b853c93294268b785a296b42c9cb08))
+
 # [1.19.0](https://github.com/teachen-ch/voty/compare/v1.18.1...v1.19.0) (2021-02-03)
 
 
