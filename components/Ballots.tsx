@@ -365,21 +365,19 @@ export const SelectBallots: React.FC<{ team: TeamTeacherFieldsFragment }> = ({
     }
   }
 
-  if (!ballots || ballotRunsQuery.loading) return <Text>Laden...</Text>;
+  if (!ballots || ballotRunsQuery.loading) return <Loading />;
+
+  // only show ballots with end-date less than 45 days ago
+  const old = 45 * 24 * 60 * 60 * 1000;
+  const currentBallots = ballots.filter(
+    (ballot) => new Date(ballot.end).getTime() > Date.now() - old
+  );
 
   return (
     <>
       <table id="ballots" style={{ borderTop: "2px solid" }}>
-        {/* <thead>
-          <tr>
-            <th>Abstimmung</th>
-            <th>Deadline</th>
-            <th style={{ textAlign: "center" }}>Resultate</th>
-            <th style={{ width: "1%" }}>Ausgewählt</th>
-          </tr>
-        </thead>*/}
         <tbody>
-          {ballots.map((ballot) => (
+          {currentBallots.map((ballot) => (
             <tr key={ballot.id}>
               <td style={{ maxWidth: "200px" }}>
                 <A onClick={() => detailBallot(ballot.id)}>{ballot.title}</A>
