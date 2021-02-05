@@ -91,7 +91,7 @@ export const Chaty: React.FC<{
           background: slim
             ? ""
             : "url('/content/chaty.svg') center top no-repeat",
-          backgroundSize: ["125%", "140%", "100%"],
+          backgroundSize: ["100%", "100%", "100%"],
           borderRadius: 5,
         }}
         bg="#fff"
