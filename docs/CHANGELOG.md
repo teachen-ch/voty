@@ -1,3 +1,15 @@
+# [1.23.0](https://github.com/teachen-ch/voty/compare/v1.22.0...v1.23.0) (2021-02-05)
+
+
+### Bug Fixes
+
+* minor chaty fixes ([82f5d58](https://github.com/teachen-ch/voty/commit/82f5d58a52aa8e104f88611b274cc3fe104a27a4))
+
+
+### Features
+
+* new design for chaty ([e6577af](https://github.com/teachen-ch/voty/commit/e6577af9f18206f5d7575158f7d03dfaab143dc9))
+
 # [1.22.0](https://github.com/teachen-ch/voty/compare/v1.21.0...v1.22.0) (2021-02-04)
 
 
