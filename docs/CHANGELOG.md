@@ -1,3 +1,10 @@
+# [1.24.0](https://github.com/teachen-ch/voty/compare/v1.23.0...v1.24.0) (2021-02-06)
+
+
+### Features
+
+* new Newsletter design ([1621bac](https://github.com/teachen-ch/voty/commit/1621bac6f343070a1ac5a8b924dbe23483714e63))
+
 # [1.23.0](https://github.com/teachen-ch/voty/compare/v1.22.0...v1.23.0) (2021-02-05)
 
 
