@@ -1,6 +1,6 @@
 <mjml>
   <mj-head>
-    <mj-style inline="inline"> .mbot { margin-bottom: -80px; } </mj-style>
+    <mj-style inline="inline"> .mbot { margin-bottom: -120px; } </mj-style>
     <mj-font
       name="SourceSansPro"
       href="https://voty.ch/fonts/source-sans-pro-v14-latin-600.woff2"
@@ -9,21 +9,21 @@
       <mj-all
         font-family="SourceSansPro, -apple-system, system-ui, sans"
       ></mj-all>
+      <mj-text font-size="18px" line-height="26px" />
+      <mj-class
+        name="title"
+        color="#206DBB"
+        font-weight="bold"
+        align="left"
+        padding-top="40px"
+        text-decoration="underline"
+        font-size="27px"
+      />
       <mj-button
         background-color="#206DBB"
         font-weight="bold"
         font-size="20px"
         border-radius="5px"
-      />
-      <mj-text font-size="20px" />
-      <mj-class
-        name="title"
-        color="#206DBB"
-        font-weight="bold"
-        align="center"
-        padding-top="40px"
-        text-decoration="underline"
-        font-size="27px"
       />
     </mj-attributes>
   </mj-head>
@@ -31,14 +31,14 @@
     <mj-section>
       <mj-column width="100%" css-class="mbot">
         <mj-image
-          width="600px"
+          width="400px"
           src="https://voty.ch/images/voty_newsletter_header.png"
         ></mj-image>
       </mj-column>
     </mj-section>
     <mj-section background-color="#E1E6EA" border-radius="8px">
       <mj-column width="100%" padding-top="40px">
-        <mj-text mj-class="title">Jetzt wird wieder abgestimmt!</mj-text>
+        <mj-text mj-class="title">Es wird wieder abgestimmt!</mj-text>
         <mj-text>
           Ab dem 8. Februar können Schulklassen wieder auf voty.&#8203;ch über
           die drei nationalen Vorlagen (E-ID Gesetz, Handelsabkommen Indonesien
@@ -51,7 +51,7 @@
         >
 
         <mj-text mj-class="title"
-          >Online-Lehrmittel für politische Biildung
+          >Online-Lehrmittel für politische Bildung
         </mj-text>
         <mj-text>
           Wir haben die ersten interaktiven Lerninhalte aufgeschaltet und freuen
@@ -65,8 +65,8 @@
         <mj-text>
           Vor fünf Monaten ist unsere Reise mit dem PrototypeFund gestartet und
           nun findet am 2. März um 17:30 schon die finale Präsentation der fünf
-          spannenden Projekte statt. Wir freuen uns auf die «Demo
-          Time!»</mj-text
+          spannenden Projekte statt. Wir freuen uns auf die «Demo Time!». Melden
+          sie sich jetzt für das Online-Event an.</mj-text
         >
         <mj-button href="http://prototypefund.opendata.ch/events/"
           >Anmeldung Demo-Day</mj-button
