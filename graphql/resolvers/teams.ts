@@ -113,6 +113,21 @@ async function fetchErrors(emails: string[], db: PrismaClient, since: number) {
   }
 }
 
+export const deleteOneTeam: FieldResolver<"Mutation", "deleteOneTeam"> = async (
+  _root,
+  args,
+  ctx
+) => {
+  const { where } = args;
+  const id = String(where.id);
+  const user = ctx.user;
+  const team = await ctx.db.team.findFirst({ where: { id } });
+  if (!user || (user.role !== Role.Admin && team?.teacherId !== user.id))
+    throw new Error("Error.NoPermission");
+  const success = ctx.db.team.delete({ where: { id } });
+  return success;
+};
+
 export const setPrefs: FieldResolver<"Mutation", "setPrefs"> = async (
   _root,
   args,

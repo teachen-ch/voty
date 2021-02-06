@@ -1,6 +1,6 @@
 import { gql } from "@apollo/client";
 import { useUser } from "../state/user";
-import { Text, Box, Link as A, Button } from "rebass";
+import { Text, Box, Link as A, Button, BoxProps } from "rebass";
 import { QForm, ErrorBox } from "./Form";
 import { useState, ReactElement } from "react";
 import IconSuS from "../public/images/icon_sus.svg";
@@ -9,8 +9,10 @@ import {
   useTeamsQuery,
   TeamUserFieldsFragment,
   useCreateOneTeamMutation,
+  useDeleteOneTeamMutation,
 } from "graphql/types";
 import { Loading } from "./Page";
+import { useRouter } from "next/router";
 
 const TeamAnonFields = gql`
   fragment TeamAnonFields on Team {
@@ -110,6 +112,14 @@ export const GET_CODE_TEAM = gql`
     }
   }
   ${fragments.TeamAnonFields}
+`;
+
+export const DELETE_TEAM = gql`
+  mutation deleteOneTeam($where: TeamWhereUniqueInput!) {
+    deleteOneTeam(where: $where) {
+      id
+    }
+  }
 `;
 
 type TeamsProps = {
@@ -252,3 +262,25 @@ export function CreateTeamForm({
     </QForm>
   );
 }
+
+export const DeleteTeamLink: React.FC<BoxProps & { teamId: string }> = ({
+  teamId,
+  ...props
+}) => {
+  const [doDelete] = useDeleteOneTeamMutation();
+  const router = useRouter();
+
+  async function doDel() {
+    if (confirm("Klasse unwiederruflich löschen?")) {
+      await doDelete({ variables: { where: { id: teamId } } });
+      router.back();
+    }
+  }
+  return (
+    <Box {...props}>
+      <Text>
+        <A onClick={doDel}>Diese Klasse löschen</A>
+      </Text>
+    </Box>
+  );
+};

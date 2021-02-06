@@ -82,6 +82,9 @@ export const TeamsMutations = extendType({
         code: () => String(random(10 ** 7, 10 ** 8 - 1)),
       },
     });
+    t.crud.deleteOneTeam({
+      resolve: resolvers.teams.deleteOneTeam,
+    });
     t.field("inviteStudents", {
       type: "InviteResponse",
       args: {

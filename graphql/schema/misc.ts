@@ -162,7 +162,6 @@ export const Mutation = mutationType({
   definition(t) {
     t.crud.createOneSchool();
     t.crud.deleteOneSchool();
-    t.crud.deleteOneTeam();
 
     t.field("vote", {
       type: "Vote",

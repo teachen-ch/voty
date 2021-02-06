@@ -1,4 +1,4 @@
-import { H2, LoggedInPage } from "components/Page";
+import { H2, LoggedInPage, ShowFor } from "components/Page";
 import { Box, Flex, Text, Button } from "rebass";
 import { Users } from "components/Users";
 import { Input, Textarea } from "@rebass/forms";
@@ -10,7 +10,7 @@ import { SelectBallots } from "components/Ballots";
 import { gql } from "@apollo/client";
 import IconHint from "../../../public/images/icon_hint.svg";
 import IconProgress from "../../../public/images/icon_progress.svg";
-import { fragments } from "components/Teams";
+import { DeleteTeamLink, fragments } from "components/Teams";
 import { EditTeamPrefs } from "components/Prefs";
 import { ErrorBox } from "components/Form";
 import { trackEvent, usePageEvent } from "util/stats";
@@ -225,6 +225,20 @@ export default function TeacherTeamPage(): React.ReactElement {
               `${matches ? matches : ""} Einladungen verschicken`
             )}
           </Button>
+          {duplicated ? (
+            <ErrorBox
+              error={`Folgende Accounts existieren bereits: ${duplicatedEmails}`}
+            />
+          ) : (
+            ""
+          )}
+          {failed ? (
+            <ErrorBox
+              error={`Bei diesen Email-Adressen gab es einen Fehler: ${failedEmails}`}
+            />
+          ) : (
+            ""
+          )}
           <Text fontSize={[1, 1, 2]} sx={{ gridColumn: [0, 0, 2] }} mt={4}>
             <IconHint
               alt="Hinweis"
@@ -251,20 +265,10 @@ export default function TeacherTeamPage(): React.ReactElement {
           Weitere Schüler*innen einladen
         </Button>
       )}
-      {duplicated ? (
-        <ErrorBox
-          error={`Folgende Accounts existieren bereits: ${duplicatedEmails}`}
-        />
-      ) : (
-        ""
-      )}
-      {failed ? (
-        <ErrorBox
-          error={`Bei diesen Email-Adressen gab es einen Fehler: ${failedEmails}`}
-        />
-      ) : (
-        ""
-      )}
+
+      <ShowFor role="admin">
+        <DeleteTeamLink teamId={team.id} textAlign="right" fontSize={1} />
+      </ShowFor>
     </LoggedInPage>
   );
 }

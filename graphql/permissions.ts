@@ -39,12 +39,12 @@ const isTeamMember = rule({ cache: "strict" })((parent, args, ctx: Context) => {
 });
 
 // Teacher may view his students
-const teachesTeam = rule({ cache: "strict" })(
+const teachesStudent = rule({ cache: "strict" })(
   async (parent: User, args, ctx: Context) => {
     const { id, role } = ctx.user || {};
     if (!id || role !== Role.Teacher) return false;
     if (!parent.role)
-      throw new Error("teachesTeam can only be applied to Users");
+      throw new Error("teachesStudent can only be applied to Users");
     const student = parent.id;
     const teacher = id;
     if (student === teacher) return true;
@@ -67,7 +67,7 @@ const isOwn = (field: string) =>
   });
 
 const isOwnId = isOwn("id");
-const isOwnTeacherId = isOwn("teacherId");
+const isTeamTeacher = isOwn("teacherId");
 
 const updateUserCheck = rule({ cache: "strict" })(
   (parent, args, ctx: Context) => {
@@ -91,7 +91,7 @@ export const canViewBallot = rule({ cache: "strict" })(
 export const permissions = shield(
   {
     Query: {
-      user: or(isAdmin, teachesTeam),
+      user: or(isAdmin, teachesStudent),
       users: or(isAdmin, isTeacher),
       me: allow,
       school: allow,
@@ -121,7 +121,7 @@ export const permissions = shield(
       changePassword: isUser, // actual password change
       acceptInvite: isUser, // accept team invite if already logged in
       createOneTeam: or(isTeacher, isAdmin),
-      deleteOneTeam: or(teachesTeam, isAdmin),
+      deleteOneTeam: or(isTeacher, isAdmin),
       createOneSchool: isTeacher,
       deleteOneSchool: isAdmin,
       updateUser: or(updateUserCheck, isAdmin), // this is dangerous! role, verification, team, etc.
@@ -155,12 +155,12 @@ export const permissions = shield(
       team: isUser,
       teaches: isUser,
       emailVerified: isUser,
-      lastname: or(isOwnId, teachesTeam, isAdmin),
-      email: or(isOwnId, teachesTeam, isAdmin),
-      ballots: or(isOwnId, teachesTeam, isAdmin),
-      attachments: or(isOwnId, teachesTeam, isAdmin),
-      discussions: or(isOwnId, teachesTeam, isAdmin),
-      reactions: or(isOwnId, teachesTeam, isAdmin),
+      lastname: or(isOwnId, teachesStudent, isAdmin),
+      email: or(isOwnId, teachesStudent, isAdmin),
+      ballots: or(isOwnId, teachesStudent, isAdmin),
+      attachments: or(isOwnId, teachesStudent, isAdmin),
+      discussions: or(isOwnId, teachesStudent, isAdmin),
+      reactions: or(isOwnId, teachesStudent, isAdmin),
       createdAt: isAdmin,
     },
     School: {
@@ -181,8 +181,8 @@ export const permissions = shield(
       cards: allow,
       prefs: allow,
       notes: allow,
-      invite: or(isOwnTeacherId, isAdmin),
-      code: or(isOwnTeacherId, isAdmin),
+      invite: or(isTeamTeacher, isAdmin),
+      code: or(isTeamTeacher, isAdmin),
       members: or(isTeamMember, isAdmin),
       "*": isUser,
     },

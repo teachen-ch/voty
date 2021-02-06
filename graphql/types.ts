@@ -8329,6 +8329,19 @@ export type TeamByCodeQuery = (
   )> }
 );
 
+export type DeleteOneTeamMutationVariables = Exact<{
+  where: TeamWhereUniqueInput;
+}>;
+
+
+export type DeleteOneTeamMutation = (
+  { __typename?: 'Mutation' }
+  & { deleteOneTeam?: Maybe<(
+    { __typename?: 'Team' }
+    & Pick<Team, 'id'>
+  )> }
+);
+
 export type CreateOneTeamMutationVariables = Exact<{
   name: Scalars['String'];
   school: Scalars['String'];
@@ -9925,6 +9938,38 @@ export function useTeamByCodeLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions
 export type TeamByCodeQueryHookResult = ReturnType<typeof useTeamByCodeQuery>;
 export type TeamByCodeLazyQueryHookResult = ReturnType<typeof useTeamByCodeLazyQuery>;
 export type TeamByCodeQueryResult = Apollo.QueryResult<TeamByCodeQuery, TeamByCodeQueryVariables>;
+export const DeleteOneTeamDocument = gql`
+    mutation deleteOneTeam($where: TeamWhereUniqueInput!) {
+  deleteOneTeam(where: $where) {
+    id
+  }
+}
+    `;
+export type DeleteOneTeamMutationFn = Apollo.MutationFunction<DeleteOneTeamMutation, DeleteOneTeamMutationVariables>;
+
+/**
+ * __useDeleteOneTeamMutation__
+ *
+ * To run a mutation, you first call `useDeleteOneTeamMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useDeleteOneTeamMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [deleteOneTeamMutation, { data, loading, error }] = useDeleteOneTeamMutation({
+ *   variables: {
+ *      where: // value for 'where'
+ *   },
+ * });
+ */
+export function useDeleteOneTeamMutation(baseOptions?: Apollo.MutationHookOptions<DeleteOneTeamMutation, DeleteOneTeamMutationVariables>) {
+        return Apollo.useMutation<DeleteOneTeamMutation, DeleteOneTeamMutationVariables>(DeleteOneTeamDocument, baseOptions);
+      }
+export type DeleteOneTeamMutationHookResult = ReturnType<typeof useDeleteOneTeamMutation>;
+export type DeleteOneTeamMutationResult = Apollo.MutationResult<DeleteOneTeamMutation>;
+export type DeleteOneTeamMutationOptions = Apollo.BaseMutationOptions<DeleteOneTeamMutation, DeleteOneTeamMutationVariables>;
 export const CreateOneTeamDocument = gql`
     mutation createOneTeam($name: String!, $school: String!, $teacher: String!) {
   createOneTeam(

@@ -121,6 +121,7 @@ export const teamUser: DocumentNode;
 export const teamTeacher: DocumentNode;
 export const teamByInvite: DocumentNode;
 export const teamByCode: DocumentNode;
+export const deleteOneTeam: DocumentNode;
 export const createOneTeam: DocumentNode;
 
   export default defaultDocument;
