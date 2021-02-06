@@ -30,7 +30,7 @@ export const ShowNote: React.FC<{
   if (!team.notes[card]) {
     if (teacher) {
       return (
-        <Text textAlign="right" fontSize={1} my="-10px">
+        <Text textAlign="right" fontSize={1}>
           <A onClick={() => setEdit(true)}>Klassennotiz hinzufügen</A>
         </Text>
       );
