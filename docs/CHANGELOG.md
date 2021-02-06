@@ -1,3 +1,15 @@
+# [1.25.0](https://github.com/teachen-ch/voty/compare/v1.24.0...v1.25.0) (2021-02-06)
+
+
+### Bug Fixes
+
+* minor newsletter update ([2d90a50](https://github.com/teachen-ch/voty/commit/2d90a507c244b1fc55f737aa2199cb7668e528fd))
+
+
+### Features
+
+* close [#88](https://github.com/teachen-ch/voty/issues/88) admin can delete teams ([f432220](https://github.com/teachen-ch/voty/commit/f432220fa8c38538329226ce65f76a615818f47c))
+
 # [1.24.0](https://github.com/teachen-ch/voty/compare/v1.23.0...v1.24.0) (2021-02-06)
 
 
