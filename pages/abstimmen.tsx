@@ -90,7 +90,7 @@ export default function Abstimmung(): ReactElement {
       <Explainer title="Anleitung Schüler*innen">
         <Step n="1">
           SuS erhält Einladungs-Email. Ein Klick auf den Link eröffnet Konto:
-          <Image src="/screens/screen_t1.png" mt={2} />
+          <Image src="/screens/screen_s1.png" mt={2} />
         </Step>
         <Step n="2">
           Auswahl der Abstimmungen:
@@ -102,7 +102,7 @@ export default function Abstimmung(): ReactElement {
         </Step>
         <Step n="4">
           Anonyme Abstimmung wird durchgeführt:
-          <Image src="/screens/screen_s4.png" mt={2} />
+          <Image src="/screens/screen_s4.jpg" mt={2} />
         </Step>
       </Explainer>
       <Box mt={3} />
