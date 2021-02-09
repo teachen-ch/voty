@@ -2,6 +2,7 @@ import { FieldResolver } from "@nexus/schema";
 import { Activity, Prisma, Role } from "@prisma/client";
 import { Context } from "graphql/context";
 import { truncate } from "lodash";
+import { getTeacherTeams } from "./teams";
 
 const MAX_SUMMARY = 30;
 
@@ -11,14 +12,23 @@ export const activities: FieldResolver<"Query", "activities"> = async (
   ctx
 ) => {
   const { where, orderBy, first } = args;
-  const act = await ctx.db.activity.findMany({
+  const user = ctx.user;
+  if (!user) throw new Error("Error.NoPermission");
+  const teams = await getTeacherTeams(user, ctx.db);
+
+  let activities = await ctx.db.activity.findMany({
     // @ts-ignore TODO: not sure what's wrong with the built-in nexus-prisma types here
     where,
     // @ts-ignore
     orderBy,
     take: first || 10,
   });
-  return act;
+
+  // only return activities from own team
+  activities = activities.filter(
+    (act) => act.teamId === user.teamId || teams.indexOf(act.teamId) >= 0
+  );
+  return activities;
 };
 
 export const postActivity: FieldResolver<"Mutation", "logActivity"> = async (

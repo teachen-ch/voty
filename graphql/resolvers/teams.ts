@@ -220,3 +220,11 @@ export const progress: FieldResolver<"Query", "progress"> = async (
 function sleep(seconds: number) {
   return new Promise((resolve) => setTimeout(resolve, 1000 * seconds));
 }
+
+export async function getTeacherTeams(
+  user: PrismaUser,
+  db: PrismaClient
+): Promise<string[]> {
+  const teams = await db.team.findMany({ where: { teacherId: user.id } });
+  return teams.map((team) => team.id);
+}
