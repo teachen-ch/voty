@@ -1,3 +1,10 @@
+## [1.25.2](https://github.com/teachen-ch/voty/compare/v1.25.1...v1.25.2) (2021-02-09)
+
+
+### Bug Fixes
+
+* display of progress and prefs on team site ([d0b01b3](https://github.com/teachen-ch/voty/commit/d0b01b362734be51c2178210bd6751e65525abd0))
+
 ## [1.25.1](https://github.com/teachen-ch/voty/compare/v1.25.0...v1.25.1) (2021-02-09)
 
 
