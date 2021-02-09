@@ -1,3 +1,10 @@
+## [1.25.1](https://github.com/teachen-ch/voty/compare/v1.25.0...v1.25.1) (2021-02-09)
+
+
+### Bug Fixes
+
+* replace screens for explainers in module 2 ([b2c03b3](https://github.com/teachen-ch/voty/commit/b2c03b38a2b23ec06d7b0f9712ac472a998135c6))
+
 # [1.25.0](https://github.com/teachen-ch/voty/compare/v1.24.0...v1.25.0) (2021-02-06)
 
 
