@@ -107,8 +107,8 @@ export const permissions = shield(
       cards: allow,
       attachment: isUser, // TODO: #80 we should secure this to team + teacher unless public
       attachments: isUser, // TODO: #80 we should secure this to team + teacher
-      works: isUser, // TODO: #80 we should secure this to team + teacher
-      activities: isUser, // will filter activities according to users team(s)
+      works: isUser, // is filtered according to work.visibility and user's school / team
+      activities: isUser, // is filtered according to user's team(s)
       progress: or(isAdmin, isTeacher),
     },
     Mutation: {

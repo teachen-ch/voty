@@ -2,6 +2,7 @@ import { FieldResolver } from "@nexus/schema";
 import { ActivityType, Role, Visibility } from "@prisma/client";
 import { find } from "lodash";
 import { logActivity } from "./activities";
+import { getTeacherTeams } from "./teams";
 
 export const works: FieldResolver<"Query", "works"> = async (
   _root,
@@ -9,9 +10,20 @@ export const works: FieldResolver<"Query", "works"> = async (
   ctx
 ) => {
   if (!args.where) return [];
-  const works = await ctx.db.work.findMany({
+  const user = ctx.user;
+  const teams = user ? await getTeacherTeams(user, ctx.db) : [];
+  let works = await ctx.db.work.findMany({
     // @ts-ignore TODO: not sure what's wrong with the built-in nexus-prisma types here
     where: args.where,
+  });
+
+  // only return public works or works from users's school / class
+  works = works.filter((work) => {
+    if (work.visibility === Visibility.Public) return true;
+    if (work.visibility === Visibility.School)
+      return work.schoolId === user?.schoolId;
+    if (work.visibility === Visibility.Team)
+      return work.teamId === user?.teamId || teams.indexOf(work.teamId) >= 0;
   });
   return works;
 };
