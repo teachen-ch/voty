@@ -184,7 +184,7 @@ export const UploadArea: React.FC<{
         style={{ display: "none" }}
       />
       <Center>
-        <Text fontWeight="bold" fontSize={4} color="white" textAlign="center">
+        <Text fontWeight="bold" fontSize={4} color="#fff" textAlign="center">
           {uploading ? <Loading /> : null}
           {files && Object.keys(files).length ? (
             <Preview files={files} doDelete={doDelete} />
@@ -218,12 +218,13 @@ const PreviewFile: React.FC<{
 }> = ({ id, file, doDelete }) => {
   return (
     <Flex
-      bg="white"
-      color="black"
+      bg="#fff"
+      color="#000"
       height="50px"
       alignItems="center"
       px={3}
       mx={3}
+      sx={{ borderRadius: "8px" }}
     >
       <Text fontSize={1}>
         {file.name}{" "}
@@ -307,8 +308,8 @@ export const Attachment: React.FC<{
     }
   }
   return (
-    <Box bg="white" p={2} m={2} width="calc(33.3333% - 16px)">
-      <Text fontSize={1} color="black" sx={{ position: "relative" }}>
+    <Box bg="#fff" p={2} m={2} width="calc(33.3333% - 16px)">
+      <Text fontSize={1} color="#000" sx={{ position: "relative" }}>
         {canDelete() && !hideUser && (
           <Box sx={{ position: "absolute", right: -2 }} p={2}>
             <CircleBullet
