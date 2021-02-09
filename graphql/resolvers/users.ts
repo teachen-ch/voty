@@ -15,7 +15,7 @@ import { Context } from "../context";
 import { FieldResolver } from "@nexus/schema";
 import { NextApiRequest } from "next";
 import { promises as fs } from "fs";
-import { upperFirst } from "lodash";
+import { pick, upperFirst } from "lodash";
 import { logActivity } from "./activities";
 
 let secret = process.env.SESSION_SECRET || "";
@@ -230,17 +230,21 @@ export const updateUser: FieldResolver<"Mutation", "updateUser"> = async (
   args,
   ctx: Context
 ) => {
-  // TODO: ensure this is not called with variable args by user
   const user = getRequestUser(ctx);
   const id = args.where.id;
-  if (id !== user?.id && user?.role !== Role.Admin)
+  let data = args.data;
+  if (!user || (id !== user.id && user.role !== Role.Admin))
     throw new Error("Error.OnlyUpdateSelf");
-  if (args.data.role && user?.role !== Role.Admin) delete args.data.role;
+
+  // only allow these fields to be edited by normal users:
+  if (user.role !== Role.Admin) {
+    data = pick(data, ["name", "lastname", "gender", "year", "school"]);
+  }
   const result = await ctx.db.user.update({
     where: { id: id || undefined },
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore    TODO: this barks on a mismatch in the Gender Enum defined by Nexus and Prisma??!
-    data: args.data,
+    data,
   });
   return result;
 };

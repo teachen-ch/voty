@@ -124,7 +124,7 @@ export const permissions = shield(
       deleteOneTeam: or(isTeacher, isAdmin),
       createOneSchool: isTeacher,
       deleteOneSchool: isAdmin,
-      updateUser: or(updateUserCheck, isAdmin), // this is dangerous! role, verification, team, etc.
+      updateUser: or(updateUserCheck, isAdmin),
       setSchool: isUser,
       vote: isUser,
       voteCode: allow,
