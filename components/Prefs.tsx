@@ -9,6 +9,7 @@ import { A } from "./Breadcrumb";
 import { Err } from "./Page";
 import { fragments } from "./Teams";
 import IconPrefs from "../public/images/icon_prefs.svg";
+import { isMobile } from "util/isBrowser";
 
 export const SET_PREFS = gql`
   mutation setPrefs($teamId: String!, $prefs: Json!) {
@@ -51,9 +52,11 @@ export const EditTeamPrefs: React.FC<{
   }
 
   return (
-    <>
+    <Box>
       <A onClick={() => setShow(!show)}>
-        {card ? "Anpassen" : "Klassen-Einstellungen bearbeiten"}
+        {card
+          ? "Anpassen"
+          : `Klassen-Einstellungen${isMobile() ? "" : " bearbeiten"}`}
         <IconPrefs
           width="16"
           height="16"
@@ -92,7 +95,7 @@ export const EditTeamPrefs: React.FC<{
           <Err msg={error} />
         </Box>
       )}
-    </>
+    </Box>
   );
 };
 

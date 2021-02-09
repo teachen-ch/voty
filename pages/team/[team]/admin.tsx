@@ -1,5 +1,5 @@
 import { H2, LoggedInPage, ShowFor } from "components/Page";
-import { Box, Flex, Text, Button } from "rebass";
+import { Box, Text, Button } from "rebass";
 import { Users } from "components/Users";
 import { Input, Textarea } from "@rebass/forms";
 import { Grid, Label } from "theme-ui";
@@ -143,18 +143,17 @@ export default function TeacherTeamPage(): React.ReactElement {
           Lerninhalte hinzufügen
         </Button>
         {team.cards && (
-          <Flex
-            my={2}
-            textAlign="right"
-            fontSize={1}
-            justifyContent="space-between"
-          >
-            <A href={`/team/${team.id}/progress`}>
-              <IconProgress style={{ marginRight: 8 }} />
-              Fortschritt der Klasse
-            </A>
-            <EditTeamPrefs team={team} />
-          </Flex>
+          <>
+            <Box sx={{ position: "absolute" }}>
+              <A href={`/team/${team.id}/progress`} fontSize={1}>
+                <IconProgress style={{ marginRight: 8 }} />
+                Fortschritt der Klasse
+              </A>
+            </Box>
+            <Box fontSize={1} textAlign="right" mt={"5px"}>
+              <EditTeamPrefs team={team} />
+            </Box>
+          </>
         )}
         <Box mt={6} />
       </HideFeature>
