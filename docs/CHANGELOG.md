@@ -1,3 +1,18 @@
+# [1.26.0](https://github.com/teachen-ch/voty/compare/v1.25.2...v1.26.0) (2021-02-09)
+
+
+### Bug Fixes
+
+* minor darkmode color fix on `<Uploader/>` ([bb2d419](https://github.com/teachen-ch/voty/commit/bb2d419a1af6712766b48063827a5376da4ed0b1))
+
+
+### Features
+
+* refactor attachments api and implement [#80](https://github.com/teachen-ch/voty/issues/80) ([330daec](https://github.com/teachen-ch/voty/commit/330daecba552ee828345e6664f555a8285a4042e))
+* restrict activity log to user's class ([4df9765](https://github.com/teachen-ch/voty/commit/4df9765f9a0e162b5e6393315cf6641df4e934d0))
+* restrict profile attributes a user can update ([0a9c848](https://github.com/teachen-ch/voty/commit/0a9c84841b118022fda2247c85f80d8452290ffd))
+* restrict works visibility to school / class ([2240e88](https://github.com/teachen-ch/voty/commit/2240e887476f593bd23342fca87c6544207c490f))
+
 ## [1.25.2](https://github.com/teachen-ch/voty/compare/v1.25.1...v1.25.2) (2021-02-09)
 
 
