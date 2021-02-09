@@ -100,8 +100,17 @@ export default function Fundraising(): React.ReactElement {
             technologische Kompetenz. Als Team mit einer Kombination aus viel
             digitaler Erfahrung und Passion für Bildung möchten wir deshalb
             helfen, die Schule der Zukunft mitzugestalten. Dafür braucht es
-            überzeugende Konzepte und Inhalte, State-of-the-Art Technologie und
-            neue Ideen dazu, wie der Unterricht künftig sowohl synchron im
+            überzeugende Konzepte und Inhalte,{" "}
+            <GlossaryLink term="State-of-the-Art Technologie" bg="gray">
+              voty.ch ist eine responsive Web-Applikation und wird als Open
+              Source entwickelt. Mit React im Frontend und Next.js, GraphQL und
+              Postgres im Backend ist das User Interface sehr performant und
+              dynamisch (SSR – Single Page Application). Der ganze Test- und
+              Release-Prozess (CI/CD) ist automatisiert, so dass Änderungen
+              rasch eingepflegt werden können. Mittels Docker-Containern können
+              neue Instanzen der Applikation schnell installiert werden.
+            </GlossaryLink>{" "}
+            und neue Ideen dazu, wie der Unterricht künftig sowohl synchron im
             Klassenzimmer als auch asynchron im Distance-Learning oder in
             Mischformen davon ablaufen wird.
           </Text>
@@ -129,7 +138,7 @@ export default function Fundraising(): React.ReactElement {
           id="demokratie"
         >
           <Text mb={4}>
-            Der PrototypeFund hat uns ermöglicht, diese Vision für die Thema
+            Der PrototypeFund hat uns ermöglicht, diese Vision für das Thema
             Demokratie zu testen. Dieses Thema liegt uns selber sehr am Herzen,
             und wir sehen einen Handlungsbedarf: die Stimmbeteiligung der jungen
             Bevölkerungsschichten ist knapp halb so hoch wie die der älteren
@@ -379,23 +388,23 @@ export default function Fundraising(): React.ReactElement {
             <strong>Finanzierungsbedarf</strong> – Für den Aufbau und die
             Skalierung rechnen mit Kosten von etwa{" "}
             <b>
-              <GlossaryLink term="CHF 300k / Jahr" bg="gray">
+              <GlossaryLink term="CHF 300k pro Jahr" bg="gray">
                 (90% Personalkosten, 5% IT, 5% Diverses)
               </GlossaryLink>
-            </b>
-            . Wir möchten bis im Sommer 2021 das Budget für ein langfristiges
-            Commitment des Teams für die nächsten 2-3 Jahre sichern. Insgesamt
-            rechnen wird mit einem Finanzierungsbedarf von
-            <b> CHF 600k – 900k</b>.
+            </b>{" "}
+            über die nächsten <b>2-3 Jahre = CHF 600k – 900k</b>. Bis im Sommer
+            2021 möchten wir das Budget für ein langfristiges Commitment des
+            Teams sichern.
           </Text>
           <Text mb={4}>
             <strong>Langfristige Finanzierung</strong> - Für die
-            Weiterentwicklung und den Betrieb rechnen wir mit Kosten von
-            <b> CHF 150k / Jahr</b>, welche wir über 2-3 Projekte mit neuen
-            Bildungsinhalten aus dem BNE-Bereich finanzieren möchten.
-            Partnerorganisationen liefern dazu Inhalte und betreiben Fundraising
-            und wir setzen die Projekt auf unserer Platform um mit der Erfahrung
-            in der Skalierung von Lernprojekten.
+            Weiterentwicklung und den Betrieb rechnen wir mit Kosten von CHF{" "}
+            <b>150k / Jahr</b>, welche wir über 3-4 Projekte mit neuen
+            Bildungsinhalten aus dem BNE-Bereich finanzieren möchten. Dazu sehen
+            wir eine Kollaboration mit NGO-Partnerorganisationen und
+            Lehrmittelverlägen vor sowohl mit stiftungsfinanzierten als auch
+            kommerziellen Projekten, welche wir dank unserer Plattform und
+            Erfahrung in der Skalierung effizient umsetzen können..
           </Text>
         </Section>
         <H2 mt={5}>Kontakt für Stiftungen und potentielle Geldgeber</H2>
