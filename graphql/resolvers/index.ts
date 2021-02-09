@@ -5,6 +5,7 @@ import * as swissvotes from "./swissvotes";
 import * as cards from "./cards";
 import * as works from "./works";
 import * as activities from "./activities";
+import * as attachments from "./attachments";
 import * as discussions from "./discussions";
 
 export {
@@ -15,6 +16,7 @@ export {
   cards,
   works,
   activities,
+  attachments,
   discussions,
 };
 export default {
@@ -25,5 +27,6 @@ export default {
   cards,
   works,
   activities,
+  attachments,
   discussions,
 };

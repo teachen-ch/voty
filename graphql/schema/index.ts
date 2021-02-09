@@ -5,4 +5,5 @@ export * from "./swissvotes";
 export * from "./cards";
 export * from "./works";
 export * from "./activities";
+export * from "./attachments";
 export * from "./discussions";

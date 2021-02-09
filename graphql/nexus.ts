@@ -8450,7 +8450,6 @@ export interface NexusGenFieldTypes {
   Query: {
     // field return type
     activities: NexusGenRootTypes["Activity"][]; // [Activity!]!
-    attachment: NexusGenRootTypes["Attachment"] | null; // Attachment
     attachments: NexusGenRootTypes["Attachment"][]; // [Attachment!]!
     ballot: NexusGenRootTypes["Ballot"] | null; // Ballot
     ballots: NexusGenRootTypes["Ballot"][]; // [Ballot!]!
@@ -8723,7 +8722,6 @@ export interface NexusGenFieldTypeNames {
   Query: {
     // field return type name
     activities: "Activity";
-    attachment: "Attachment";
     attachments: "Attachment";
     ballot: "Ballot";
     ballots: "Ballot";
@@ -9021,10 +9019,6 @@ export interface NexusGenArgTypes {
       last?: number | null; // Int
       orderBy?: NexusGenInputs["ActivityOrderByInput"][] | null; // [ActivityOrderByInput!]
       where?: NexusGenInputs["ActivityWhereInput"] | null; // ActivityWhereInput
-    };
-    attachment: {
-      // args
-      where: NexusGenInputs["AttachmentWhereUniqueInput"]; // AttachmentWhereUniqueInput!
     };
     attachments: {
       // args

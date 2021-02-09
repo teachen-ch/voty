@@ -65,20 +65,6 @@ export const BallotRun = objectType({
   },
 });
 
-export const Attachment = objectType({
-  name: "Attachment",
-  definition(t) {
-    t.model.id();
-    t.model.file();
-    t.model.title();
-    t.model.user();
-    t.model.type();
-
-    t.model.createdAt();
-    t.model.updatedAt();
-  },
-});
-
 export const Vote = objectType({
   name: "Vote",
   definition(t) {
@@ -126,12 +112,6 @@ export const Query = queryType({
 
     t.crud.ballot();
     t.crud.ballots({
-      ordering: true,
-      filtering: true,
-    });
-
-    t.crud.attachment();
-    t.crud.attachments({
       ordering: true,
       filtering: true,
     });

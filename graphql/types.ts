@@ -3290,7 +3290,6 @@ export type ProgressStudent = {
 export type Query = {
   __typename?: 'Query';
   activities: Array<Activity>;
-  attachment?: Maybe<Attachment>;
   attachments: Array<Attachment>;
   ballot?: Maybe<Ballot>;
   ballots: Array<Ballot>;
@@ -3318,11 +3317,6 @@ export type QueryActivitiesArgs = {
   last?: Maybe<Scalars['Int']>;
   orderBy?: Maybe<Array<ActivityOrderByInput>>;
   where?: Maybe<ActivityWhereInput>;
-};
-
-
-export type QueryAttachmentArgs = {
-  where: AttachmentWhereUniqueInput;
 };
 
 

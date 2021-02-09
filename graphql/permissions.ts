@@ -105,8 +105,7 @@ export const permissions = shield(
       getTeamDiscussions: isUser,
       swissvotes: allow,
       cards: allow,
-      attachment: isUser, // TODO: #80 we should secure this to team + teacher unless public
-      attachments: isUser, // TODO: #80 we should secure this to team + teacher
+      attachments: isUser, // is filtered according to user's team(s)
       works: isUser, // is filtered according to work.visibility and user's school / team
       activities: isUser, // is filtered according to user's team(s)
       progress: or(isAdmin, isTeacher),

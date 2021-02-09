@@ -3114,7 +3114,6 @@ type Query {
     orderBy: [ActivityOrderByInput!]
     where: ActivityWhereInput
   ): [Activity!]!
-  attachment(where: AttachmentWhereUniqueInput!): Attachment
   attachments(
     after: AttachmentWhereUniqueInput
     before: AttachmentWhereUniqueInput
