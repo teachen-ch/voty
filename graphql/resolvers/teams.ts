@@ -57,7 +57,7 @@ export const inviteStudents: FieldResolver<
   // wait for a few seconds, then fetch all error-msgs from imap since last 20 seconds
   // but skip this, if we haven't sent any emails
   if (process.env.SMTP_PASSWORD) {
-    const wait = 5 + 1 * emails.length;
+    const wait = 4 + 0.5 * emails.length;
     await sleep(wait);
     const fetchedErrors = await fetchErrors(emails, ctx.db, 2 * wait);
     failed = failed.concat(fetchedErrors);
@@ -74,7 +74,15 @@ export const inviteStudents: FieldResolver<
       type: ActivityType.UserInvite,
     });
   }
+  logger.mail(`New users invited for ${team?.id}:\n
+    ## Created:
+    ${created.join(", ")}
 
+    ## Failed:
+    ${failed.join(", ")}
+
+    ## Duplicated:
+    ${duplicated.join(", ")}`);
   return { created, failed, duplicated, team };
 };
 
