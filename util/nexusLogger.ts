@@ -10,7 +10,14 @@ export const LoggerPlugin = plugin({
     if (!LOG_GRAPHQL) return;
     return async (root, args, ctx, info, next) => {
       const name = info.operation.name?.value;
-      const user = ctx.user ? `${ctx.user.role} ${ctx.user.id}` : "anon";
+      const team = (ctx.user?.teamId ||
+        args.teamId ||
+        args.where?.teamId ||
+        args.where?.teamId.equals ||
+        args.where?.team?.id) as string;
+      const user = ctx.user
+        ? `${ctx.user.role} id: ${ctx.user.id} team: ${team}`
+        : "anon";
       if (LOG_INPUT && info.variableValues)
         logger.info(JSON.stringify(info.variableValues));
       const startTimeMs = new Date().valueOf();
