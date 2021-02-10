@@ -1,3 +1,10 @@
+## [1.27.1](https://github.com/teachen-ch/voty/compare/v1.27.0...v1.27.1) (2021-02-10)
+
+
+### Bug Fixes
+
+* emergency fix... ([4c65b6a](https://github.com/teachen-ch/voty/commit/4c65b6afd141f80225f5a55821fb2fac71eb35d8))
+
 # [1.27.0](https://github.com/teachen-ch/voty/compare/v1.26.0...v1.27.0) (2021-02-10)
 
 
