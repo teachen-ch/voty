@@ -49,8 +49,6 @@ const fileLogger = new transports.File({
   filename: "./logs/voty.log",
   level: "info",
   handleExceptions: true,
-  maxsize: 1024 * 1024 * (prod ? 10 : 1),
-  maxFiles: prod ? 3 : 1,
   format: format.combine(
     format.errors({ stack: true }),
     format.colorize({ level: true, all: false, colors }),
