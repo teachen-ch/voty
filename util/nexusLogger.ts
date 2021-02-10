@@ -13,7 +13,7 @@ export const LoggerPlugin = plugin({
       const team = (ctx.user?.teamId ||
         args.teamId ||
         args.where?.teamId ||
-        args.where?.teamId.equals ||
+        args.where?.teamId?.equals ||
         args.where?.team?.id) as string;
       const user = ctx.user
         ? `${ctx.user.role} id: ${ctx.user.id} team: ${team}`
