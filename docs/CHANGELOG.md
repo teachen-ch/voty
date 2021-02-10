@@ -1,3 +1,16 @@
+# [1.27.0](https://github.com/teachen-ch/voty/compare/v1.26.0...v1.27.0) (2021-02-10)
+
+
+### Bug Fixes
+
+* do not spread log files [#120](https://github.com/teachen-ch/voty/issues/120) ([bf92145](https://github.com/teachen-ch/voty/commit/bf921459efb57ac2f0a8335c7fab1c5614a519de))
+
+
+### Features
+
+* add team to logging info [#120](https://github.com/teachen-ch/voty/issues/120) ([080f6fb](https://github.com/teachen-ch/voty/commit/080f6fbde3214cbe54cf4c4246af3671564dce8d))
+* better logging for invites ([64de35d](https://github.com/teachen-ch/voty/commit/64de35d2657faa16773f40967ac0423c3be0998e))
+
 # [1.26.0](https://github.com/teachen-ch/voty/compare/v1.25.2...v1.26.0) (2021-02-09)
 
 
