@@ -1,3 +1,15 @@
+# [1.28.0](https://github.com/teachen-ch/voty/compare/v1.27.1...v1.28.0) (2021-02-12)
+
+
+### Bug Fixes
+
+* minor fix on logging teams ([62b8a4f](https://github.com/teachen-ch/voty/commit/62b8a4fd75e866692057a9de7d017790eaad5847))
+
+
+### Features
+
+* add endorsement on startpage ([3e62955](https://github.com/teachen-ch/voty/commit/3e62955e16b1d4425d76fbf44230f3fe396514d0))
+
 ## [1.27.1](https://github.com/teachen-ch/voty/compare/v1.27.0...v1.27.1) (2021-02-10)
 
 
