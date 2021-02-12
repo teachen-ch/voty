@@ -29,7 +29,6 @@ export default function Home(): React.ReactElement {
           </Text>{" "}
           an die Schule!
         </H1>
-
         <Box
           mt={[0, 0, -20, -30, -50]}
           maxWidth={["100%", "100%", "80%", "80%", "100%"]}
@@ -41,7 +40,6 @@ export default function Home(): React.ReactElement {
             alt="voty.ch – Online Demokratie Lehrnmittel"
           />
         </Box>
-
         <Box maxWidth="800px" width="100%" textAlign="center">
           <Button
             onClick={() => router.push("/user/signup")}
@@ -87,7 +85,6 @@ export default function Home(): React.ReactElement {
             </Button>
           </Flex>
         </Box>
-
         <Flex
           width={["100%", "100%", "80%", "100%"]}
           maxWidth="1160px"
@@ -195,6 +192,22 @@ export default function Home(): React.ReactElement {
             </TeaserText>
           </Teaser>
         </Flex>
+        <Box mt={6} />
+        <blockquote className="twitter-tweet" data-lang="de" data-dnt="true">
+          <p lang="de" dir="ltr">
+            Tolle Möglichkeit, nutzen!{" "}
+            <a href="https://t.co/n3HKtFXp4g">https://t.co/n3HKtFXp4g</a>
+          </p>
+          &mdash; Claude Longchamp (@claudelongchamp){" "}
+          <a href="https://twitter.com/claudelongchamp/status/1360190735212032001?ref_src=twsrc%5Etfw">
+            12. Februar 2021
+          </a>
+        </blockquote>
+        <script
+          async
+          src="https://platform.twitter.com/widgets.js"
+          charSet="utf-8"
+        ></script>
         <Footer />
       </Container>
     </>
