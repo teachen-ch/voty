@@ -1,7 +1,7 @@
 import { AppPage, H2 } from "components/Page";
 import { Info } from "components/Learning";
 import { ReadMore } from "components/ReadMore";
-import { Flex, Text, Card, Link as A, Box, Button } from "rebass";
+import { Flex, Text, Card, Link as A, Box, Button, Image } from "rebass";
 import { Detail, Person, Tag } from "./projekt";
 import { isMobile } from "util/isBrowser";
 import { useState } from "react";
@@ -98,9 +98,9 @@ export default function Fundraising(): React.ReactElement {
             Distance Learning), werden eine rasche Akzeptanz bei Lehrpersonen
             finden. Den traditionellen Lehrmittelverlagen fehlt dazu aber die
             technologische Kompetenz. Als Team mit einer Kombination aus viel
-            digitaler Erfahrung und Passion für Bildung möchten wir deshalb
-            helfen, die Schule der Zukunft mitzugestalten. Dafür braucht es
-            überzeugende Konzepte und Inhalte,{" "}
+            Tech-Erfahrung und Passion für Bildung möchten wir deshalb helfen,
+            die Schule der Zukunft mitzugestalten. Dafür braucht es überzeugende
+            Konzepte und Inhalte,{" "}
             <GlossaryLink term="State-of-the-Art Technologie" bg="gray">
               voty.ch ist eine responsive Web-Applikation und wird als Open
               Source entwickelt. Mit React im Frontend und Next.js, GraphQL und
@@ -138,13 +138,21 @@ export default function Fundraising(): React.ReactElement {
           id="demokratie"
         >
           <Text mb={4}>
-            Der PrototypeFund hat uns ermöglicht, diese Vision für das Thema
-            Demokratie zu testen. Dieses Thema liegt uns selber sehr am Herzen,
-            und wir sehen einen Handlungsbedarf: die Stimmbeteiligung der jungen
+            Der PrototypeFund hat uns (
+            <a
+              href="http://teachen.ch/verein-teachen"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Verein «Teachen!»
+            </a>
+            ) ermöglicht, diese Vision für das Thema Demokratie zu testen.
+            Dieses Thema liegt uns selber sehr am Herzen, und wir sehen einen
+            Handlungsbedarf: die Stimmbeteiligung der jungen
             Bevölkerungsschichten ist knapp halb so hoch wie die der älteren
             Generationen. Und insbesondere in niedrigeren Bildungsschichten wäre
             die Schule noch die einzige Chance, ein Grundverständnis – und eine
-            Passion – für unser Demokratie zu legen.
+            Passion – für unser Demokratie zu schaffen.
           </Text>
           <Text mb={4}>
             Innerhalb von wenigen Wochen haben wir deshalb eine Plattform
@@ -169,7 +177,8 @@ export default function Fundraising(): React.ReactElement {
             der Klasse: online oder im Klassenzimmer. In vielen Gesprächen mit
             Lehrpersonen zeigt sich insbesondere für die Stufe Sek-1 und die
             Berufsschulen ein grosses Potential. Gerade dort erreichen wir eher
-            Jugendliche, welche zuhause oft weniger politische Bildung genossen.
+            Jugendliche, welche zuhause oft weniger politische Bildung
+            geniessen.
           </Text>
           <SlideShow
             mb={4}
@@ -293,7 +302,7 @@ export default function Fundraising(): React.ReactElement {
             <Tag bg="primary">500&nbsp;Schulklassen</Tag> erreichen. Wir sind
             überzeugt, dass die politische Partizipation der nächsten Generation
             nachhaltig gesteigert werden kann, wenn das Thema in der Schulzeit
-            intensiver bearbeitet wird. Dabei unterstützt unsere «ready-made»
+            intensiver bearbeitet wird. Dabei unterstützen unsere «ready-made»
             Inhalte insbesondere Lehrpersonen, die heute Respekt vor dem
             «heiklen» Thema Politik haben.
           </Text>
@@ -381,8 +390,8 @@ export default function Fundraising(): React.ReactElement {
             bleibt bestehen, im Bereich Educational Content würden wir uns gerne
             verstärken (60% durch 1-2 Personen), ebenso möchten wir das Team
             durch zwei Juniors im Bereich Software-Entwicklung und Design/UX
-            bereichern, um Nahe bei der Zielgruppe zu sein und jungen Menschen
-            wertvolle Startup-Erfahrung zu bieten.
+            bereichern, um nahe bei der Zielgruppe zu sein und jungen Menschen
+            Startup-Erfahrung zu bieten.
           </Text>
           <Text mb={4}>
             <strong>Finanzierungsbedarf</strong> – Für den Aufbau und die
@@ -406,6 +415,12 @@ export default function Fundraising(): React.ReactElement {
             kommerziellen Projekten, welche wir dank unserer Plattform und
             Erfahrung in der Skalierung effizient umsetzen können..
           </Text>
+
+          <ReadMore title="Budget und Grobplanung">
+            <Image src="/images/fm_p0.jpg" alt="Phase 0" mt={5} />
+            <Image src="/images/fm_p1.jpg" alt="Phase 1" mt={4} />
+            <Image src="/images/fm_p2.jpg" alt="Phase 2" mt={5} />
+          </ReadMore>
         </Section>
         <H2 mt={5}>Kontakt für Stiftungen und potentielle Geldgeber</H2>
         <Text mb={4}>
