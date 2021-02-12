@@ -12,8 +12,8 @@ export const LoggerPlugin = plugin({
       const name = info.operation.name?.value;
       const team = (ctx.user?.teamId ||
         args.teamId ||
-        args.where?.teamId ||
         args.where?.teamId?.equals ||
+        args.where?.teamId ||
         args.where?.team?.id) as string;
       const user = ctx.user
         ? `${ctx.user.role} id: ${ctx.user.id} team: ${team}`
