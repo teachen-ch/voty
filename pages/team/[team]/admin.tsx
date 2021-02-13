@@ -192,6 +192,21 @@ export default function TeacherTeamPage(): React.ReactElement {
         </>
       )}
 
+      {duplicated ? (
+        <ErrorBox
+          error={`Folgende Accounts existieren bereits: ${duplicatedEmails}`}
+        />
+      ) : (
+        ""
+      )}
+      {failed ? (
+        <ErrorBox
+          error={`Bei diesen Email-Adressen gab es einen Fehler: ${failedEmails}`}
+        />
+      ) : (
+        ""
+      )}
+
       {!team.members.length || showInvite ? (
         <>
           <Text mt={4} fontSize={2} fontWeight="semi">
@@ -224,20 +239,6 @@ export default function TeacherTeamPage(): React.ReactElement {
               `${matches ? matches : ""} Einladungen verschicken`
             )}
           </Button>
-          {duplicated ? (
-            <ErrorBox
-              error={`Folgende Accounts existieren bereits: ${duplicatedEmails}`}
-            />
-          ) : (
-            ""
-          )}
-          {failed ? (
-            <ErrorBox
-              error={`Bei diesen Email-Adressen gab es einen Fehler: ${failedEmails}`}
-            />
-          ) : (
-            ""
-          )}
           <Text fontSize={[1, 1, 2]} sx={{ gridColumn: [0, 0, 2] }} mt={4}>
             <IconHint
               alt="Hinweis"
