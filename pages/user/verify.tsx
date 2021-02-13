@@ -28,7 +28,11 @@ export default function VerifyPage(): React.ReactElement {
     onCompleted: (data) => {
       if (data.checkVerification && data.checkVerification.token) {
         setAccessToken(data.checkVerification.token);
-        void router.push(`/user/verified?p=${purpose}&redirect=${redirect}`);
+        void router.push(
+          `/user/verified?p=${purpose}${
+            redirect ? `&redirect=${redirect}` : ""
+          }`
+        );
       }
     },
     onError(error) {
