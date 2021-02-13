@@ -17,7 +17,7 @@ export default function VerifiedPage(): React.ReactElement {
   const purpose = useQueryParam("p");
   const user = useUser();
   const router = useRouter();
-  const redirect = getQueryParam("redirect");
+  const redirect = getQueryParam("redirect", { sanitize: true });
 
   if (!user)
     return (

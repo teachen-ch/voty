@@ -36,14 +36,28 @@ export function getHost(): string {
  * If we are sure we are on the client side, we can use this quick hack
  * to have an immediate result of a query-string variable
  */
-export function getQueryParam(name: string): string | undefined {
+export function getQueryParam(
+  name: string,
+  opts?: { sanitize?: true }
+): string | undefined {
   if (!isBrowser()) return undefined;
   const query = window.location.search.substring(1);
   const vars = query.split("&");
   for (let i = 0; i < vars.length; i++) {
     const pair = vars[i].split("=");
     if (decodeURIComponent(pair[0]) == name) {
-      return decodeURIComponent(pair[1]);
+      const value = decodeURIComponent(pair[1]);
+      return opts?.sanitize ? sanitizeParam(value) : value;
     }
   }
+}
+
+/**
+ * This crude function will replace all characters except letters and digits
+ * It's a very simplistic XSS attack prevention for &redirect=javascript:%20+etc.
+ *
+ * @param value a string to sanitize
+ */
+function sanitizeParam(value: string): string {
+  return value.replace(/[^/\w\d+-_]/g, "");
 }
