@@ -21,15 +21,17 @@ export async function fetchMails({
   from,
   since,
 }: {
-  from: string;
+  from?: string;
   since: number;
 }): Promise<Message[]> {
   const connection = await imaps.connect(config);
   await connection.openBox("INBOX");
-  const searchCriteria = [
-    ["SINCE", Date.now() - 1000 * since],
-    ["FROM", from],
-  ];
+  const searchCriteria = from
+    ? [
+        ["SINCE", Date.now() - 1000 * since],
+        ["FROM", from],
+      ]
+    : [["SINCE", Date.now() - 1000 * since]];
   const fetchOptions = {
     bodies: ["HEADER", "TEXT"],
   };
