@@ -1,3 +1,11 @@
+## [1.28.1](https://github.com/teachen-ch/voty/compare/v1.28.0...v1.28.1) (2021-02-13)
+
+
+### Bug Fixes
+
+* add crude XSS attack prevention on redirect ([800dd56](https://github.com/teachen-ch/voty/commit/800dd5660cb1e8a7b069c2cb6b9f6635e133af19))
+* add redirection bug on student user login ([82fcc83](https://github.com/teachen-ch/voty/commit/82fcc830e9aa75b39f142054599522a26d54d294))
+
 # [1.28.0](https://github.com/teachen-ch/voty/compare/v1.27.1...v1.28.0) (2021-02-12)
 
 
