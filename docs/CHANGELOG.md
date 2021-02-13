@@ -1,3 +1,10 @@
+## [1.28.3](https://github.com/teachen-ch/voty/compare/v1.28.2...v1.28.3) (2021-02-13)
+
+
+### Bug Fixes
+
+* flagging errors on email import is broken ([04a319a](https://github.com/teachen-ch/voty/commit/04a319a927cd46709ec4c93c375903d413b4e2bb))
+
 ## [1.28.2](https://github.com/teachen-ch/voty/compare/v1.28.1...v1.28.2) (2021-02-13)
 
 
