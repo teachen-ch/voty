@@ -1,3 +1,10 @@
+## [1.28.2](https://github.com/teachen-ch/voty/compare/v1.28.1...v1.28.2) (2021-02-13)
+
+
+### Bug Fixes
+
+* error message on failed invite was hidden ([a94f096](https://github.com/teachen-ch/voty/commit/a94f0963321d96578afd61f17fdf45a855e4b958))
+
 ## [1.28.1](https://github.com/teachen-ch/voty/compare/v1.28.0...v1.28.1) (2021-02-13)
 
 
