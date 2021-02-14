@@ -1,3 +1,10 @@
+## [1.28.4](https://github.com/teachen-ch/voty/compare/v1.28.3...v1.28.4) (2021-02-14)
+
+
+### Bug Fixes
+
+* change from email in logger module ([c611af4](https://github.com/teachen-ch/voty/commit/c611af45e43fac1f298cc539476825503b8e2b33))
+
 ## [1.28.3](https://github.com/teachen-ch/voty/compare/v1.28.2...v1.28.3) (2021-02-13)
 
 
