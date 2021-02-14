@@ -74,7 +74,7 @@ const jsonLogger = new transports.File({
 const mailLogger: any = new WinstonMail.Mail({
   level: "mail",
   to: "stefan@teachen.ch",
-  from: "voty@teachen.ch",
+  from: process.env.EMAIL,
   subject: "voty.ch Admin Mail",
   host: mailConfig.host,
   username: mailConfig.auth.user,
