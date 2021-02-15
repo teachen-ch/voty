@@ -1,0 +1,20 @@
+import { Text, Link as A } from "rebass";
+import Link from "next/link";
+
+# Seite nicht gefunden
+
+Oh je, das ist wohl etwas schief gelaufen.
+
+<Text
+  fontSize="200px"
+  my={"-30px"}
+  textAlign="center"
+  sx={{
+    transition: "0.4s ease-out",
+    ":hover": { transform: "rotate(-360deg)" },
+  }}
+>
+  🤷‍♂️
+</Text>
+
+Du könntest von hier aus zurück <a href="javascript:history.go(-1)">zur letzen Seite</a> oder auf unsere <Link href="/"><A variant="underline">Startseite</A></Link>.
