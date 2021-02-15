@@ -214,7 +214,6 @@ export default function TeacherTeamPage(): React.ReactElement {
           </Text>
           <Textarea
             mt={3}
-            autoFocus={true}
             value={importEmails}
             sx={{ border: "white" }}
             onChange={checkEmails}
