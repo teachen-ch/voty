@@ -199,25 +199,25 @@ export default function Home(): React.ReactElement {
           p={0}
           width={["280px", "280px", "414px"]}
         >
-          <Flex bg="#C5CFD6" height="40px" pt={15}>
+          <Flex bg="#C5CFD6" height="50px" pt={15}>
             <Box
               bg="#98AAB2"
-              width="15px"
-              height="15px"
+              width="20px"
+              height="20px"
               sx={{ borderRadius: "10px" }}
               ml={15}
             />
             <Box
               bg="#98AAB2"
-              width="15px"
-              height="15px"
+              width="20px"
+              height="20px"
               sx={{ borderRadius: "10px" }}
               ml={15}
             />
             <Box
               bg="#98AAB2"
-              width="15px"
-              height="15px"
+              width="20px"
+              height="20px"
               sx={{ borderRadius: "10px" }}
               ml={15}
             />
