@@ -12,10 +12,10 @@ import { useState, Dispatch, SetStateAction, useEffect } from "react";
 import { A } from "./Breadcrumb";
 import { formatYear } from "util/date";
 import { CircleBullet } from "components/Misc";
-import { debounce, find, remove } from "lodash";
 import { Authors, usePostWork, WorkCard, WorkItem, Works } from "./Works";
 import { Markdown } from "util/markdown";
 import { Table, TR, TD } from "components/Table";
+import { find, remove } from "lodash";
 
 export const SEARCH_SWISSVOTES = gql`
   query swissvotes(
@@ -85,7 +85,8 @@ export const Swissvotes: React.FC<{
       <Flex mt={4}>
         <Input
           value={keywords}
-          onChange={debounce((evt) => setKeywords(evt.target.value), 300)}
+          // TODO: debouncing does not work here
+          onChange={(evt) => setKeywords(evt.target.value)}
           placeholder="Suche..."
           flex={1}
         />
