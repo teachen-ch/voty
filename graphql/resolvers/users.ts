@@ -55,7 +55,9 @@ export const magic: FieldResolver<"Mutation", "magic"> = async (
   ctx: Context
 ) => {
   const { email, redirect } = args;
-  const user = await ctx.db.user.findUnique({ where: { email } });
+  const user = await ctx.db.user.findUnique({
+    where: { email: email.toLowerCase() },
+  });
   if (user && !user.password && user.email) {
     await sendVerificationEmail(user.email, "login", ctx.db, redirect);
     return { success: true, message: "magic" };
