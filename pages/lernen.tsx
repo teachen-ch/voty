@@ -11,12 +11,13 @@ export default function LernenPage(): React.ReactElement {
       image="/images/header_m1.svg"
     >
       <Text>
-        voty.ch stellt ein stetig wachsendes Angebot an digitalen Lerninhalten
-        für die politische Bildung zur Verfügung. Parallel zu unserem{" "}
+        voty.ch stellt ein stetig wachsendes Angebot an kostenlosen digitalen
+        Lerninhalten für die politische Bildung zur Verfügung. Parallel zu
+        unserem{" "}
         <A href="/abstimmung" target="content">
           Abstimmungsmodul
-        </A>
-        , einer Auswahl an{" "}
+        </A>{" "}
+        für Schulklassen , einer Auswahl an{" "}
         <A href="/cards/" target="content">
           Videos von «SRF mySchool»
         </A>{" "}
@@ -24,8 +25,8 @@ export default function LernenPage(): React.ReactElement {
         <A href="/cards/chaty_demokratie_griechenland" target="content">
           Bot «Chaty»
         </A>
-        , der Grundbegriffe der Demokratie erklärt, entwickeln wir vor allem
-        interaktive, digitale Lerninhalte für Einzel- oder Gruppenarbeiten (Bsp:{" "}
+        , der Grundbegriffe der Demokratie erklärt, entwickeln wir interaktive,
+        digitale Lerninhalte für Einzel- oder Gruppenarbeiten (Bsp:{" "}
         <A href="/cards/passion" target="content">
           Passion für Demokratie
         </A>
