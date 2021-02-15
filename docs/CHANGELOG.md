@@ -1,3 +1,10 @@
+## [1.28.6](https://github.com/teachen-ch/voty/compare/v1.28.5...v1.28.6) (2021-02-15)
+
+
+### Bug Fixes
+
+* minor text changes for /lernen landing page ([ea53ca3](https://github.com/teachen-ch/voty/commit/ea53ca3d09f293136104ae5a82891e4b9c5efa62))
+
 ## [1.28.5](https://github.com/teachen-ch/voty/compare/v1.28.4...v1.28.5) (2021-02-15)
 
 
