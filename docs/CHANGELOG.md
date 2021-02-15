@@ -1,3 +1,20 @@
+# [1.29.0](https://github.com/teachen-ch/voty/compare/v1.28.6...v1.29.0) (2021-02-15)
+
+
+### Bug Fixes
+
+* minor tweaks for endorsement on startpage ([4196493](https://github.com/teachen-ch/voty/commit/4196493ef30989e0a10160a37d88d03d60b6fcfe))
+* updated caniuse ([8b77f84](https://github.com/teachen-ch/voty/commit/8b77f843864515032f18e382841f52195cf0a241))
+
+
+### Features
+
+* combined impressum + kontakt page ([a93d663](https://github.com/teachen-ch/voty/commit/a93d663e3d3da1a6e3042420691ddc30efa8f1b9))
+* implement custom 404 page [#122](https://github.com/teachen-ch/voty/issues/122) ([8dc931d](https://github.com/teachen-ch/voty/commit/8dc931d65281c9d636b77ad3f8e92996386910ba))
+* new design for endorsement ([8fafd5e](https://github.com/teachen-ch/voty/commit/8fafd5e0ca8532b84be4fca97e07a5daa335e34e))
+* new footer design [#121](https://github.com/teachen-ch/voty/issues/121) ([13a8616](https://github.com/teachen-ch/voty/commit/13a8616d0bfdfe56402ddee9537037a7811e04fa))
+* new page for SuS registration ([4bc2315](https://github.com/teachen-ch/voty/commit/4bc231547717ff3a27ca71716abb30501f4b15f8))
+
 ## [1.28.6](https://github.com/teachen-ch/voty/compare/v1.28.5...v1.28.6) (2021-02-15)
 
 
