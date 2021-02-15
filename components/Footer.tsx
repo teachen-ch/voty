@@ -1,76 +1,91 @@
-import { Flex, Box, Text, Link as A } from "rebass";
-import Link from "next/link";
+import { Flex, Box, LinkProps } from "rebass";
+import { H4 } from "components/Page";
+import { A } from "./Breadcrumb";
 
 export const Footer: React.FC = () => (
-  <Flex
-    as="footer"
-    pt={[5, 5, 6]}
-    pb={3}
-    px={2}
-    textAlign="center"
-    width={["100%", "100%", 400]}
-    flexDirection="column"
-    fontSize={1}
-  >
-    <Text mx="auto">
-      voty.ch ist ein{" "}
-      <A
-        href="https://github.com/teachen-ch/voty"
-        target="_blank"
-        rel="noreferrer"
-        variant="underline"
+  <Box>
+    <Box
+      as="footer"
+      pb={6}
+      px={3}
+      mt={300}
+      width="calc(100vw)"
+      fontSize={1}
+      sx={{
+        position: "absolute",
+        left: 0,
+        borderTop: "2px solid",
+        borderColor: "primary",
+        background: "linear-gradient(#fff, #E6E7E9)",
+      }}
+    >
+      <Flex
+        maxWidth="800px"
+        mx="auto"
+        justifyContent="space-between"
+        flexWrap="wrap"
+        flexDirection={["column", "column", "row", "row"]}
       >
-        Open-Source
-      </A>{" "}
-      Projekt des Vereins{" "}
-      <A href="https://teachen.ch/verein-teachen" variant="underline">
-        «Teachen!»
-      </A>{" "}
-      mit tatkräftiger Unterstützung des PrototypeFund. Weitere{" "}
-      <A href="/projekt" variant="underline">
-        Informationen zum Projekt
-      </A>
-      .
-    </Text>
-    <Flex justifyContent="center" flexDirection="column">
-      <Box mt={3}>
-        <img
-          src="/images/pf_logo.png"
-          alt="Prototypefund Logo"
-          width={34}
-          height={42}
-        />
-        <hr style={{ borderColor: "inherit", borderTopWidth: "0px" }} />
-        <Flex as="nav" justifyContent="space-between">
-          <Link href="/impressum">
-            <A>Impressum</A>
-          </Link>
-          {" | "}
-          <Link href="/datenschutz">
-            <A>Datenschutz</A>
-          </Link>
-          {" | "}
-          <Link href="/kontakt">
-            <A>Kontakt</A>
-          </Link>
-          {" | "}
-          <A
+        <Box>
+          <H4 mb={3}>Unterstützung</H4>
+          <img
+            src="/images/pf_logo.png"
+            alt="Prototypefund Logo"
+            width={34}
+            height={42}
+          />
+          <br />
+          <br />
+          <img
+            src="/images/logo_mercator.png"
+            alt="Prototypefund Logo"
+            width={100}
+            height={52}
+          />
+        </Box>
+        <Box as="nav">
+          <H4>Informationen</H4>
+          <FLink href="/projekt">Infos zum Projekt</FLink>
+          <FLink href="/faq">Häufige Fragen (FAQ)</FLink>
+          <FLink href="https://teachen.ch/verein-teachen" target="_blank">
+            Verein «Teachen!»
+          </FLink>
+          <FLink href="/newsletter">Anmeldung Newsletter</FLink>
+        </Box>
+        <Box as="nav">
+          <H4>Anmeldung</H4>
+          <FLink href="/sus">Als Schüler*in registrieren</FLink>
+          <FLink href="/user/signup">Neue Schulklasse anmelden</FLink>
+          <FLink href="/lernen">Online-Lehrmittel</FLink>
+          <FLink href="/abstimmen">Klassenabstimmung</FLink>
+        </Box>
+
+        <Box as="nav">
+          <H4>Allgemein</H4>
+          <FLink href="/kontakt">Kontakt</FLink>
+          <FLink href="/datenschutz">Datenschutz</FLink>
+          <FLink
             href="https://twitter.com/voty_ch"
             target="_blank"
             rel="noreferrer"
           >
             Twitter
-          </A>
-          {" | "}
-          <A
+          </FLink>
+          <FLink
             href="https://github.com/teachen-ch/voty"
             target="_blank"
             rel="noreferrer"
           >
             GitHub
-          </A>
-        </Flex>
-      </Box>
-    </Flex>
-  </Flex>
+          </FLink>
+        </Box>
+      </Flex>
+    </Box>
+  </Box>
+);
+
+const FLink: React.FC<LinkProps> = (props) => (
+  <A display="block" variant="footerLink" {...props}>
+    {props.children}
+  </A>
 );

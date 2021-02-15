@@ -237,6 +237,18 @@ export const H3: React.FC<HeadingProps> = (props) => (
   </Heading>
 );
 
+export const H4: React.FC<HeadingProps> = (props) => (
+  <Heading
+    as="h4"
+    fontSize={[3, 3, 3]}
+    variant="panelheading"
+    sx={{ borderBottom: "none" }}
+    {...props}
+  >
+    {props.children}
+  </Heading>
+);
+
 export const ShowFor: React.FC<{ role: Role | string }> = ({
   role,
   children,

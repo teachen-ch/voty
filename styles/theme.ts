@@ -109,6 +109,14 @@ export default {
     bold: {
       fontWeight: "semi",
     },
+    footerLink: {
+      display: "block",
+      my: "12px",
+      color: "#999 !important",
+      ":hover": {
+        color: "#000 !important",
+      },
+    },
   },
   styles: {
     root: {
