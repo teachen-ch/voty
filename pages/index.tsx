@@ -192,22 +192,58 @@ export default function Home(): React.ReactElement {
             </TeaserText>
           </Teaser>
         </Flex>
-        <Box mt={6} />
-        <blockquote className="twitter-tweet" data-lang="de" data-dnt="true">
-          <p lang="de" dir="ltr">
-            Tolle Möglichkeit, nutzen!{" "}
-            <a href="https://t.co/n3HKtFXp4g">https://t.co/n3HKtFXp4g</a>
-          </p>
-          &mdash; Claude Longchamp (@claudelongchamp){" "}
-          <a href="https://twitter.com/claudelongchamp/status/1360190735212032001?ref_src=twsrc%5Etfw">
-            12. Februar 2021
-          </a>
-        </blockquote>
-        <script
-          async
-          src="https://platform.twitter.com/widgets.js"
-          charSet="utf-8"
-        ></script>
+        <Box
+          mt={6}
+          sx={{ border: "6px solid #C5CFD6", borderRadius: "20px" }}
+          bg="#C5CFD6"
+          p={0}
+          width={["280px", "280px", "414px"]}
+        >
+          <Flex bg="#C5CFD6" height="40px" pt={15}>
+            <Box
+              bg="#98AAB2"
+              width="15px"
+              height="15px"
+              sx={{ borderRadius: "10px" }}
+              ml={15}
+            />
+            <Box
+              bg="#98AAB2"
+              width="15px"
+              height="15px"
+              sx={{ borderRadius: "10px" }}
+              ml={15}
+            />
+            <Box
+              bg="#98AAB2"
+              width="15px"
+              height="15px"
+              sx={{ borderRadius: "10px" }}
+              ml={15}
+            />
+          </Flex>
+          <Box my="-10px">
+            <blockquote
+              className="twitter-tweet"
+              data-lang="de"
+              data-dnt="true"
+            >
+              <p lang="de" dir="ltr">
+                Tolle Möglichkeit, nutzen!{" "}
+                <a href="https://t.co/n3HKtFXp4g">https://t.co/n3HKtFXp4g</a>
+              </p>
+              &mdash; Claude Longchamp (@claudelongchamp){" "}
+              <a href="https://twitter.com/claudelongchamp/status/1360190735212032001?ref_src=twsrc%5Etfw">
+                12. Februar 2021
+              </a>
+            </blockquote>
+            <script
+              async
+              src="https://platform.twitter.com/widgets.js"
+              charSet="utf-8"
+            ></script>
+          </Box>
+        </Box>
         <Footer />
       </Container>
     </>
