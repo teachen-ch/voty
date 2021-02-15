@@ -15,11 +15,12 @@ import select
 import time
 import logging
 
-# run deploy p to deploy to prod and dev in parallel
+# run deploy -p to deploy to prod and dev in parallel
 deployEnv = "dev"
-if sys.argv[1:] == "p":
+if sys.argv[1] == "-p":
     deployEnv = "parallel"
-    sys.argv.pop(0)
+    print("\nDeploying to production in parallel...\n")
+    sys.argv.pop(1)
 
 
 def initLogger():
