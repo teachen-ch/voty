@@ -1,3 +1,13 @@
+## [1.29.1](https://github.com/teachen-ch/voty/compare/v1.29.0...v1.29.1) (2021-02-15)
+
+
+### Bug Fixes
+
+* debounce bug prevented vote search ([37259e7](https://github.com/teachen-ch/voty/commit/37259e7b65a6596236d03dc4bbf18614d91c1147))
+* magic link search should ignore email case ([5890299](https://github.com/teachen-ch/voty/commit/5890299b8c6264a3ddf1bd8db66345b827539407))
+* more contrast in footer ([5dad080](https://github.com/teachen-ch/voty/commit/5dad080bbddc31d1639c49ba723c3dca4f5dbfb3))
+* various typos. thanks andrea! ([44ee081](https://github.com/teachen-ch/voty/commit/44ee08145d6e2ade4f194df18094b1b802e5fe26))
+
 # [1.29.0](https://github.com/teachen-ch/voty/compare/v1.28.6...v1.29.0) (2021-02-15)
 
 
