@@ -112,7 +112,7 @@ export default {
     footerLink: {
       display: "block",
       my: "12px",
-      color: "#999 !important",
+      color: "#666 !important",
       ":hover": {
         color: "#000 !important",
       },

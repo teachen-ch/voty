@@ -6,7 +6,6 @@ export const Footer: React.FC = () => (
   <Box>
     <Box
       as="footer"
-      pb={6}
       px={3}
       mt={300}
       width="calc(100vw)"
@@ -43,7 +42,7 @@ export const Footer: React.FC = () => (
             height={52}
           />
         </Box>
-        <Box as="nav">
+        <NavBox>
           <H4>Informationen</H4>
           <FLink href="/projekt">Infos zum Projekt</FLink>
           <FLink href="/faq">Häufige Fragen (FAQ)</FLink>
@@ -51,16 +50,16 @@ export const Footer: React.FC = () => (
             Verein «Teachen!»
           </FLink>
           <FLink href="/newsletter">Anmeldung Newsletter</FLink>
-        </Box>
-        <Box as="nav">
+        </NavBox>
+        <NavBox>
           <H4>Anmeldung</H4>
           <FLink href="/sus">Als Schüler*in registrieren</FLink>
           <FLink href="/user/signup">Neue Schulklasse anmelden</FLink>
           <FLink href="/lernen">Online-Lehrmittel</FLink>
           <FLink href="/abstimmen">Klassenabstimmung</FLink>
-        </Box>
+        </NavBox>
 
-        <Box as="nav">
+        <NavBox>
           <H4>Allgemein</H4>
           <FLink href="/kontakt">Kontakt</FLink>
           <FLink href="/datenschutz">Datenschutz</FLink>
@@ -78,7 +77,7 @@ export const Footer: React.FC = () => (
           >
             GitHub
           </FLink>
-        </Box>
+        </NavBox>
       </Flex>
     </Box>
   </Box>
@@ -88,4 +87,15 @@ const FLink: React.FC<LinkProps> = (props) => (
   <A display="block" variant="footerLink" {...props}>
     {props.children}
   </A>
+);
+
+const NavBox: React.FC = (props) => (
+  <Box
+    as="nav"
+    //sx={{ borderLeft: ["", "", "1px solid lightgray"] }}
+    //pl={3}
+    pb={4}
+  >
+    {props.children}
+  </Box>
 );
