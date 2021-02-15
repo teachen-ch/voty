@@ -9,7 +9,18 @@ export default function Kontakt(): ReactElement {
     document.location.href = email.split("").reverse().join("");
   }
   return (
-    <Page heading="Kontakt">
+    <Page heading="Kontakt &amp; Impressum">
+      <Text>
+        voty.ch ist ein Projekt des Vereins{" "}
+        <a href="https://teachen.ch/verein-teachen/">«Teachen!»</a>
+      </Text>
+      <pre>
+        Verein «Teachen!»
+        <br />
+        Alpenweg 11
+        <br />
+        3110 Münsingen
+      </pre>
       <Text>
         Möchtet Ihr mit uns Kontakt aufnehmen? Wir freuen uns auf Feedback,
         Anregungen und Fragen zu voty.ch:
