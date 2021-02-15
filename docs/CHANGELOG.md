@@ -1,3 +1,10 @@
+## [1.28.5](https://github.com/teachen-ch/voty/compare/v1.28.4...v1.28.5) (2021-02-15)
+
+
+### Bug Fixes
+
+* remove autoFocus on invite ([168fe9a](https://github.com/teachen-ch/voty/commit/168fe9ad354e1cdb2df52dfdd67b80c429753bad))
+
 ## [1.28.4](https://github.com/teachen-ch/voty/compare/v1.28.3...v1.28.4) (2021-02-14)
 
 
