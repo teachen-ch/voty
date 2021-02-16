@@ -1,3 +1,10 @@
+## [1.29.2](https://github.com/teachen-ch/voty/compare/v1.29.1...v1.29.2) (2021-02-16)
+
+
+### Bug Fixes
+
+* overflow on page on mobile ([5edcbd6](https://github.com/teachen-ch/voty/commit/5edcbd697b4f621a196ddb186b1b5dc079c6e1a1))
+
 ## [1.29.1](https://github.com/teachen-ch/voty/compare/v1.29.0...v1.29.1) (2021-02-15)
 
 
