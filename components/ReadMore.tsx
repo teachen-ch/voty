@@ -38,6 +38,7 @@ export const ReadMore: React.FC<{
             variant="inline"
             mx={2}
             sx={{
+              overflow: "hidden",
               textOverflow: "ellipsis",
               whiteSpace: "nowrap",
             }}
