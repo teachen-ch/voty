@@ -20,13 +20,12 @@
           voty.&#8203;ch einloggen</mj-text
         >
         <mj-button
-          href="{{url}}"
+          href="{{&url}}"
           background-color="#206DBB"
           font-weight="bold"
           font-size="20px"
           >Jetzt anmelden</mj-button
         >
-        <mj-text font-size="14px"><a href="{{url}}">{{url}}</a></mj-text>
         <mj-text font-size="20px">
           Wenn Du Dich nicht gerade bei voty.&#8203;ch anmelden wolltest, kannst
           Du dieses Mail löschen.</mj-text
