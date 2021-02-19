@@ -26,6 +26,7 @@
           font-size="20px"
           >Jetzt bestätigen</mj-button
         >
+        <mj-text font-size="14px"><a href="{{url}}">{{url}}</a></mj-text>
         <mj-text font-size="20px">
           Wenn Du Dich nicht bei voty.&#8203;ch registrieren wolltest, kannst Du
           dieses Mail löschen.</mj-text

@@ -26,6 +26,7 @@
           font-size="20px"
           >Jetzt Passwort ändern</mj-button
         >
+        <mj-text font-size="14px"><a href="{{url}}">{{url}}</a></mj-text>
         <mj-text font-size="20px">
           Wenn Du nicht soeben eine Passwort-Anfrage gestartet hast, dann lösche
           bitte dieses Mail.</mj-text
