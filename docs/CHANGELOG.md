@@ -1,3 +1,17 @@
+# [1.30.0](https://github.com/teachen-ch/voty/compare/v1.29.2...v1.30.0) (2021-02-19)
+
+
+### Bug Fixes
+
+* add plain text link to email templates ([c2f5d65](https://github.com/teachen-ch/voty/commit/c2f5d65d232af84ad863968f1f98123737b41102))
+* add plain text link to email templates ([2bd4db4](https://github.com/teachen-ch/voty/commit/2bd4db413f4458c05a933ded0be9afd92daf2ade))
+* deploy script parameter fix ([24bc680](https://github.com/teachen-ch/voty/commit/24bc680c947adb59bfc162b6cbab2d06862bfcce))
+
+
+### Features
+
+* add schweiz debattiert logo ([522d5f7](https://github.com/teachen-ch/voty/commit/522d5f74dddea47672d95e07602c5497044a22c7))
+
 ## [1.29.2](https://github.com/teachen-ch/voty/compare/v1.29.1...v1.29.2) (2021-02-16)
 
 
