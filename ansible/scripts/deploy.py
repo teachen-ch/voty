@@ -17,7 +17,7 @@ import logging
 
 # run deploy -p to deploy to prod and dev in parallel
 deployEnv = "dev"
-if sys.argv[1] == "-p":
+if len(sys.argv) >= 2 and sys.argv[1] == "-p":
     deployEnv = "parallel"
     print("\nDeploying to production in parallel...\n")
     sys.argv.pop(1)
