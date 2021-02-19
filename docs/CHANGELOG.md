@@ -1,3 +1,10 @@
+## [1.30.1](https://github.com/teachen-ch/voty/compare/v1.30.0...v1.30.1) (2021-02-19)
+
+
+### Bug Fixes
+
+* trying to get yahoo.de webmail working ([449587f](https://github.com/teachen-ch/voty/commit/449587f24634415eab451632c34a1396f3ca0b0f))
+
 # [1.30.0](https://github.com/teachen-ch/voty/compare/v1.29.2...v1.30.0) (2021-02-19)
 
 
