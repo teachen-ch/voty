@@ -1,3 +1,10 @@
+## [1.30.2](https://github.com/teachen-ch/voty/compare/v1.30.1...v1.30.2) (2021-02-19)
+
+
+### Bug Fixes
+
+* final yahoo.de fix for other templates ([1a61326](https://github.com/teachen-ch/voty/commit/1a61326bf07e3f0d664244ef9ce5a110cf24e391))
+
 ## [1.30.1](https://github.com/teachen-ch/voty/compare/v1.30.0...v1.30.1) (2021-02-19)
 
 
