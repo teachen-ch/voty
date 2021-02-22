@@ -1,3 +1,13 @@
+# [1.31.0](https://github.com/teachen-ch/voty/compare/v1.30.2...v1.31.0) (2021-02-22)
+
+
+### Features
+
+* added items to mobile menu ([1f84333](https://github.com/teachen-ch/voty/commit/1f84333739c846e05e8899456a48238ae1b22e8e))
+* create new dedicated /team-voty page ([4a58d53](https://github.com/teachen-ch/voty/commit/4a58d53e738dd7ff53d1dcc74b0dc67e681bea66))
+* integrating feedback from education21.ch ([dd5dae7](https://github.com/teachen-ch/voty/commit/dd5dae7bc86ed46f8b3dae2a31baa1e052decb43))
+* refactor TopBar and Navigation ([e7f5c68](https://github.com/teachen-ch/voty/commit/e7f5c68368d27aa528a3f1d88c95f77a678085e5))
+
 ## [1.30.2](https://github.com/teachen-ch/voty/compare/v1.30.1...v1.30.2) (2021-02-19)
 
 
