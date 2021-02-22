@@ -12,6 +12,8 @@ import IconRegister from "../public/images/icon_register.svg";
 import IconLogin from "../public/images/icon_login.svg";
 import IconAccount from "../public/images/icon_account.svg";
 import IconClasses from "../public/images/icon_classes.svg";
+import IconTeam from "../public/images/icon_team.svg";
+import IconFaq from "../public/images/icon_faq.svg";
 
 import { Role } from "graphql/types";
 
@@ -44,12 +46,13 @@ export const NavMobile: React.FC<{ user: SessionUser; color: string }> = ({
             bg="primary"
             width="80%"
             height="100%"
-            fontSize={4}
+            fontSize={[3, 4]}
             sx={{
               position: "fixed",
               top: 0,
               right: 0,
               zIndex: 99,
+              overflow: "scroll",
             }}
           >
             <Text textAlign="right">
@@ -97,6 +100,16 @@ export const NavMobile: React.FC<{ user: SessionUser; color: string }> = ({
                   <br />
                 </nav>
               )}
+              <hr />
+              <A href="/faq" variant="link">
+                <IconFaq style={burgerIcon} />
+                Häufige Fragen
+              </A>
+              <br />
+              <A href="/team-voty" variant="link">
+                <IconTeam style={burgerIcon} />
+                Team
+              </A>
               <hr />
               <A href="/newsletter" variant="link">
                 <IconNewsletter style={burgerIcon} />
