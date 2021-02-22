@@ -1,8 +1,8 @@
 import { AppPage, H2 } from "components/Page";
 import { Info } from "components/Learning";
 import { ReadMore } from "components/ReadMore";
-import { Flex, Text, Card, Link as A, Box, Button, Image } from "rebass";
-import { Detail, Person, Tag } from "./projekt";
+import { Text, Card, Link as A, Box, Button, Image } from "rebass";
+import { Detail, Tag } from "./projekt";
 import { isMobile } from "util/isBrowser";
 import { useState } from "react";
 import { FeedbackText } from "components/Feedback";
@@ -10,6 +10,7 @@ import { SlideShow } from "components/SlideShow";
 import { Label, Input } from "@rebass/forms";
 import { Grid } from "theme-ui";
 import { GlossaryLink } from "components/Glossary";
+import { Team } from "components/Team";
 
 export default function Fundraising(): React.ReactElement {
   const [password, setPassword] = useState(
@@ -321,60 +322,7 @@ export default function Fundraising(): React.ReactElement {
         </Section>
 
         <Section title="Das Team hinter voty.ch" id="team">
-          <Text fontSize={2}>
-            <Flex mx={-2} flexWrap="wrap">
-              <Person
-                name="Stefan Niederhauser"
-                href="https://linkedin.com/in/sniederhauser"
-                role="Projektleitung und techn. Umsetzung"
-                org="LinkedIn"
-                image="/people/sn.jpg"
-              >
-                Stefan hat 25 Jahre Erfahrung mit IT-Projekten aus Startups und
-                Corporates und will diese im Bereich der digitalen Bildung und
-                der Demokratie einsetzen als Fullstack-Engineer, Entrepreneur,
-                Organisator und Weltverbesserer.
-              </Person>
-              <Person
-                name="Roger Wiezel"
-                href="http://atelier-w.ch"
-                role="Grafische Gestaltung und User Experience"
-                org="atelier-w.ch"
-                image="/people/rw.jpg"
-              >
-                Roger gestaltet schon sein Leben lang und seit über zwanzig
-                Jahren auch digital. Dabei interessiert ihn vor allem die
-                Schnittstelle zwischen Mensch und Maschine. Wie denkt der
-                Mensch? Wie wird die Maschine verständlich? Und wie verwandeln
-                wir Komplexität in Schönheit?
-              </Person>
-              <Person
-                name="Urs Wildeisen"
-                href="https://phbern.ch"
-                role="Pädagogische Begleitung"
-                org="PH Bern"
-                image="/people/uw.jpg"
-              >
-                Urs ist ein Meister der Didaktik. Wobei er findet, das Kinder
-                nach dem ersten Schuljahr meist bereits genügend Bücher gelesen
-                haben. Deshalb setzt er seinen Fokus in der Arbeit mit Kindern
-                und PH-Studenten lieber auf Robotik, Programmierung, 3D-Druck
-                oder Projektarbeit.
-              </Person>
-              <Person
-                name="Barbara Reichen"
-                href="https://barbarareichen.com"
-                role="Pädagogische Begleitung"
-                org="barbarareichen.com"
-                image="/people/br.jpg"
-              >
-                Barbara ist Künstlerin, Kindergärtnerin und Mutter zweier
-                Teenager. Sie weiss, dass wir die Welt schleunigst verändern
-                müssen und nimmt das auch in die Hand. Mit Kunst. Mit Kindern.
-                Und nun mit Demokratie als Mittel zum Zweck!
-              </Person>
-            </Flex>
-          </Text>
+          <Team />
         </Section>
         <Section title="Finanzierungsbedarf" id="finanzen">
           <Text mb={4}>
