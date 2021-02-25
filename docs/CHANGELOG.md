@@ -1,3 +1,15 @@
+# [1.32.0](https://github.com/teachen-ch/voty/compare/v1.31.0...v1.32.0) (2021-02-25)
+
+
+### Bug Fixes
+
+* migrations for schema change ([1649ba8](https://github.com/teachen-ch/voty/commit/1649ba8a19d51d0bb809d1df484297d0804becb3))
+
+
+### Features
+
+* add dates to team for statistical purposes ([982bba8](https://github.com/teachen-ch/voty/commit/982bba8b02ea6cc3cc49cf5cf625965e9dc36fff))
+
 # [1.31.0](https://github.com/teachen-ch/voty/compare/v1.30.2...v1.31.0) (2021-02-22)
 
 
