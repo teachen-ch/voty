@@ -95,6 +95,9 @@ model Team {
   activity   Activity[]
   attachment Attachment[]
   work       Work[]
+  
+  createdAt DateTime @default(now()) @map(name: "created_at")
+  updatedAt DateTime @default(now()) @map(name: "updated_at")
   @@map(name: "teams")
 }
 
