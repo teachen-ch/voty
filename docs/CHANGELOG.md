@@ -1,3 +1,10 @@
+# [1.33.0](https://github.com/teachen-ch/voty/compare/v1.32.0...v1.33.0) (2021-03-02)
+
+
+### Features
+
+* disabling demographics ([746e6d1](https://github.com/teachen-ch/voty/commit/746e6d1ee45121b69012531a44c55702b3fb0df9))
+
 # [1.32.0](https://github.com/teachen-ch/voty/compare/v1.31.0...v1.32.0) (2021-02-25)
 
 
