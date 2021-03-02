@@ -37,7 +37,7 @@ export const BallotResults: React.FC<{
           <Box
             height={200}
             width={200}
-            sx={{ backgroundColor: "white", borderRadius: 100 }}
+            sx={{ backgroundColor: "#fff", borderRadius: 100 }}
           >
             <VotyPie results={results} />
           </Box>

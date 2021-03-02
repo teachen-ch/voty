@@ -1,6 +1,5 @@
 import { H2, LoggedInPage } from "components/Page";
 import { Box, Text } from "rebass";
-import { Breadcrumb, Here } from "components/Breadcrumb";
 import { StudentCardList } from "components/Cards";
 import { Activities } from "components/Activities";
 import { StudentListBallots } from "components/Ballots";
@@ -19,10 +18,6 @@ export default function StudentTeamPage(): React.ReactElement {
       heading={`Meine Klasse (${user.team.name})`}
       image="/images/header_student.svg"
     >
-      <Breadcrumb>
-        <Here>Meine Klasse</Here>
-      </Breadcrumb>
-
       <H2 mt={5}>Deine Lerninhalte</H2>
       <Text mb={4} fontSize={2}>
         Wähle hier die Lerninhalte, die Du bearbeiten möchtest:
