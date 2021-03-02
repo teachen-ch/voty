@@ -5,7 +5,7 @@ import { trackEvent } from "util/stats";
 import { useRouter } from "next/router";
 import { Text } from "rebass";
 
-const ASK_DEMOGRAPHICS = true;
+const ASK_DEMOGRAPHICS = false;
 
 export default function StudentHome(): React.ReactElement {
   const user = useUser();
