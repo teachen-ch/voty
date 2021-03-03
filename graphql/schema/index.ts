@@ -7,3 +7,4 @@ export * from "./works";
 export * from "./activities";
 export * from "./attachments";
 export * from "./discussions";
+export * from "./stats";

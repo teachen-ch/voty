@@ -3301,6 +3301,7 @@ export type Query = {
   progress?: Maybe<ResponseProgress>;
   school?: Maybe<School>;
   schools: Array<School>;
+  stats?: Maybe<Stats>;
   swissvotes?: Maybe<Array<Maybe<Swissvote>>>;
   team?: Maybe<Team>;
   teams: Array<Team>;
@@ -3390,6 +3391,12 @@ export type QuerySchoolsArgs = {
   last?: Maybe<Scalars['Int']>;
   orderBy?: Maybe<Array<SchoolOrderByInput>>;
   where?: Maybe<SchoolWhereInput>;
+};
+
+
+export type QueryStatsArgs = {
+  from?: Maybe<Scalars['Int']>;
+  to?: Maybe<Scalars['Int']>;
 };
 
 
@@ -4492,6 +4499,11 @@ export enum SortOrder {
   Desc = 'desc'
 }
 
+export type Stats = {
+  __typename?: 'Stats';
+  stats?: Maybe<Scalars['Json']>;
+};
+
 export type StringFieldUpdateOperationsInput = {
   set?: Maybe<Scalars['String']>;
 };
@@ -4581,6 +4593,7 @@ export type TeamCreateInput = {
   BallotRuns?: Maybe<BallotRunCreateManyWithoutTeamInput>;
   ballots?: Maybe<BallotCreateManyWithoutTeamInput>;
   cards?: Maybe<Scalars['String']>;
+  createdAt?: Maybe<Scalars['DateTime']>;
   discussion?: Maybe<DiscussionCreateManyWithoutTeamInput>;
   domain?: Maybe<DomainCreateOneWithoutTeamInput>;
   id?: Maybe<Scalars['String']>;
@@ -4590,6 +4603,7 @@ export type TeamCreateInput = {
   prefs?: Maybe<Scalars['Json']>;
   school: SchoolCreateOneWithoutTeamsInput;
   teacher: UserCreateOneWithoutTeachesInput;
+  updatedAt?: Maybe<Scalars['DateTime']>;
   User?: Maybe<UserCreateManyWithoutTeamInput>;
   Vote?: Maybe<VoteCreateManyWithoutTeamInput>;
   Voted?: Maybe<VotedCreateManyWithoutTeamInput>;
@@ -4746,6 +4760,7 @@ export type TeamCreateWithoutActivityInput = {
   ballots?: Maybe<BallotCreateManyWithoutTeamInput>;
   cards?: Maybe<Scalars['String']>;
   code?: Maybe<Scalars['String']>;
+  createdAt?: Maybe<Scalars['DateTime']>;
   discussion?: Maybe<DiscussionCreateManyWithoutTeamInput>;
   domain?: Maybe<DomainCreateOneWithoutTeamInput>;
   id?: Maybe<Scalars['String']>;
@@ -4756,6 +4771,7 @@ export type TeamCreateWithoutActivityInput = {
   prefs?: Maybe<Scalars['Json']>;
   school: SchoolCreateOneWithoutTeamsInput;
   teacher: UserCreateOneWithoutTeachesInput;
+  updatedAt?: Maybe<Scalars['DateTime']>;
   User?: Maybe<UserCreateManyWithoutTeamInput>;
   Vote?: Maybe<VoteCreateManyWithoutTeamInput>;
   Voted?: Maybe<VotedCreateManyWithoutTeamInput>;
@@ -4769,6 +4785,7 @@ export type TeamCreateWithoutAttachmentInput = {
   ballots?: Maybe<BallotCreateManyWithoutTeamInput>;
   cards?: Maybe<Scalars['String']>;
   code?: Maybe<Scalars['String']>;
+  createdAt?: Maybe<Scalars['DateTime']>;
   discussion?: Maybe<DiscussionCreateManyWithoutTeamInput>;
   domain?: Maybe<DomainCreateOneWithoutTeamInput>;
   id?: Maybe<Scalars['String']>;
@@ -4779,6 +4796,7 @@ export type TeamCreateWithoutAttachmentInput = {
   prefs?: Maybe<Scalars['Json']>;
   school: SchoolCreateOneWithoutTeamsInput;
   teacher: UserCreateOneWithoutTeachesInput;
+  updatedAt?: Maybe<Scalars['DateTime']>;
   User?: Maybe<UserCreateManyWithoutTeamInput>;
   Vote?: Maybe<VoteCreateManyWithoutTeamInput>;
   Voted?: Maybe<VotedCreateManyWithoutTeamInput>;
@@ -4792,6 +4810,7 @@ export type TeamCreateWithoutBallotRunsInput = {
   ballots?: Maybe<BallotCreateManyWithoutTeamInput>;
   cards?: Maybe<Scalars['String']>;
   code?: Maybe<Scalars['String']>;
+  createdAt?: Maybe<Scalars['DateTime']>;
   discussion?: Maybe<DiscussionCreateManyWithoutTeamInput>;
   domain?: Maybe<DomainCreateOneWithoutTeamInput>;
   id?: Maybe<Scalars['String']>;
@@ -4802,6 +4821,7 @@ export type TeamCreateWithoutBallotRunsInput = {
   prefs?: Maybe<Scalars['Json']>;
   school: SchoolCreateOneWithoutTeamsInput;
   teacher: UserCreateOneWithoutTeachesInput;
+  updatedAt?: Maybe<Scalars['DateTime']>;
   User?: Maybe<UserCreateManyWithoutTeamInput>;
   Vote?: Maybe<VoteCreateManyWithoutTeamInput>;
   Voted?: Maybe<VotedCreateManyWithoutTeamInput>;
@@ -4815,6 +4835,7 @@ export type TeamCreateWithoutBallotsInput = {
   BallotRuns?: Maybe<BallotRunCreateManyWithoutTeamInput>;
   cards?: Maybe<Scalars['String']>;
   code?: Maybe<Scalars['String']>;
+  createdAt?: Maybe<Scalars['DateTime']>;
   discussion?: Maybe<DiscussionCreateManyWithoutTeamInput>;
   domain?: Maybe<DomainCreateOneWithoutTeamInput>;
   id?: Maybe<Scalars['String']>;
@@ -4825,6 +4846,7 @@ export type TeamCreateWithoutBallotsInput = {
   prefs?: Maybe<Scalars['Json']>;
   school: SchoolCreateOneWithoutTeamsInput;
   teacher: UserCreateOneWithoutTeachesInput;
+  updatedAt?: Maybe<Scalars['DateTime']>;
   User?: Maybe<UserCreateManyWithoutTeamInput>;
   Vote?: Maybe<VoteCreateManyWithoutTeamInput>;
   Voted?: Maybe<VotedCreateManyWithoutTeamInput>;
@@ -4839,6 +4861,7 @@ export type TeamCreateWithoutDiscussionInput = {
   ballots?: Maybe<BallotCreateManyWithoutTeamInput>;
   cards?: Maybe<Scalars['String']>;
   code?: Maybe<Scalars['String']>;
+  createdAt?: Maybe<Scalars['DateTime']>;
   domain?: Maybe<DomainCreateOneWithoutTeamInput>;
   id?: Maybe<Scalars['String']>;
   invite?: Maybe<Scalars['String']>;
@@ -4848,6 +4871,7 @@ export type TeamCreateWithoutDiscussionInput = {
   prefs?: Maybe<Scalars['Json']>;
   school: SchoolCreateOneWithoutTeamsInput;
   teacher: UserCreateOneWithoutTeachesInput;
+  updatedAt?: Maybe<Scalars['DateTime']>;
   User?: Maybe<UserCreateManyWithoutTeamInput>;
   Vote?: Maybe<VoteCreateManyWithoutTeamInput>;
   Voted?: Maybe<VotedCreateManyWithoutTeamInput>;
@@ -4862,6 +4886,7 @@ export type TeamCreateWithoutDomainInput = {
   ballots?: Maybe<BallotCreateManyWithoutTeamInput>;
   cards?: Maybe<Scalars['String']>;
   code?: Maybe<Scalars['String']>;
+  createdAt?: Maybe<Scalars['DateTime']>;
   discussion?: Maybe<DiscussionCreateManyWithoutTeamInput>;
   id?: Maybe<Scalars['String']>;
   invite?: Maybe<Scalars['String']>;
@@ -4871,6 +4896,7 @@ export type TeamCreateWithoutDomainInput = {
   prefs?: Maybe<Scalars['Json']>;
   school: SchoolCreateOneWithoutTeamsInput;
   teacher: UserCreateOneWithoutTeachesInput;
+  updatedAt?: Maybe<Scalars['DateTime']>;
   User?: Maybe<UserCreateManyWithoutTeamInput>;
   Vote?: Maybe<VoteCreateManyWithoutTeamInput>;
   Voted?: Maybe<VotedCreateManyWithoutTeamInput>;
@@ -4885,6 +4911,7 @@ export type TeamCreateWithoutMembersInput = {
   ballots?: Maybe<BallotCreateManyWithoutTeamInput>;
   cards?: Maybe<Scalars['String']>;
   code?: Maybe<Scalars['String']>;
+  createdAt?: Maybe<Scalars['DateTime']>;
   discussion?: Maybe<DiscussionCreateManyWithoutTeamInput>;
   domain?: Maybe<DomainCreateOneWithoutTeamInput>;
   id?: Maybe<Scalars['String']>;
@@ -4894,6 +4921,7 @@ export type TeamCreateWithoutMembersInput = {
   prefs?: Maybe<Scalars['Json']>;
   school: SchoolCreateOneWithoutTeamsInput;
   teacher: UserCreateOneWithoutTeachesInput;
+  updatedAt?: Maybe<Scalars['DateTime']>;
   User?: Maybe<UserCreateManyWithoutTeamInput>;
   Vote?: Maybe<VoteCreateManyWithoutTeamInput>;
   Voted?: Maybe<VotedCreateManyWithoutTeamInput>;
@@ -4908,6 +4936,7 @@ export type TeamCreateWithoutSchoolInput = {
   ballots?: Maybe<BallotCreateManyWithoutTeamInput>;
   cards?: Maybe<Scalars['String']>;
   code?: Maybe<Scalars['String']>;
+  createdAt?: Maybe<Scalars['DateTime']>;
   discussion?: Maybe<DiscussionCreateManyWithoutTeamInput>;
   domain?: Maybe<DomainCreateOneWithoutTeamInput>;
   id?: Maybe<Scalars['String']>;
@@ -4917,6 +4946,7 @@ export type TeamCreateWithoutSchoolInput = {
   notes?: Maybe<Scalars['Json']>;
   prefs?: Maybe<Scalars['Json']>;
   teacher: UserCreateOneWithoutTeachesInput;
+  updatedAt?: Maybe<Scalars['DateTime']>;
   User?: Maybe<UserCreateManyWithoutTeamInput>;
   Vote?: Maybe<VoteCreateManyWithoutTeamInput>;
   Voted?: Maybe<VotedCreateManyWithoutTeamInput>;
@@ -4931,6 +4961,7 @@ export type TeamCreateWithoutTeacherInput = {
   ballots?: Maybe<BallotCreateManyWithoutTeamInput>;
   cards?: Maybe<Scalars['String']>;
   code?: Maybe<Scalars['String']>;
+  createdAt?: Maybe<Scalars['DateTime']>;
   discussion?: Maybe<DiscussionCreateManyWithoutTeamInput>;
   domain?: Maybe<DomainCreateOneWithoutTeamInput>;
   id?: Maybe<Scalars['String']>;
@@ -4940,6 +4971,7 @@ export type TeamCreateWithoutTeacherInput = {
   notes?: Maybe<Scalars['Json']>;
   prefs?: Maybe<Scalars['Json']>;
   school: SchoolCreateOneWithoutTeamsInput;
+  updatedAt?: Maybe<Scalars['DateTime']>;
   User?: Maybe<UserCreateManyWithoutTeamInput>;
   Vote?: Maybe<VoteCreateManyWithoutTeamInput>;
   Voted?: Maybe<VotedCreateManyWithoutTeamInput>;
@@ -4954,6 +4986,7 @@ export type TeamCreateWithoutUserInput = {
   ballots?: Maybe<BallotCreateManyWithoutTeamInput>;
   cards?: Maybe<Scalars['String']>;
   code?: Maybe<Scalars['String']>;
+  createdAt?: Maybe<Scalars['DateTime']>;
   discussion?: Maybe<DiscussionCreateManyWithoutTeamInput>;
   domain?: Maybe<DomainCreateOneWithoutTeamInput>;
   id?: Maybe<Scalars['String']>;
@@ -4964,6 +4997,7 @@ export type TeamCreateWithoutUserInput = {
   prefs?: Maybe<Scalars['Json']>;
   school: SchoolCreateOneWithoutTeamsInput;
   teacher: UserCreateOneWithoutTeachesInput;
+  updatedAt?: Maybe<Scalars['DateTime']>;
   Vote?: Maybe<VoteCreateManyWithoutTeamInput>;
   Voted?: Maybe<VotedCreateManyWithoutTeamInput>;
   work?: Maybe<WorkCreateManyWithoutTeamInput>;
@@ -4977,6 +5011,7 @@ export type TeamCreateWithoutVotedInput = {
   ballots?: Maybe<BallotCreateManyWithoutTeamInput>;
   cards?: Maybe<Scalars['String']>;
   code?: Maybe<Scalars['String']>;
+  createdAt?: Maybe<Scalars['DateTime']>;
   discussion?: Maybe<DiscussionCreateManyWithoutTeamInput>;
   domain?: Maybe<DomainCreateOneWithoutTeamInput>;
   id?: Maybe<Scalars['String']>;
@@ -4987,6 +5022,7 @@ export type TeamCreateWithoutVotedInput = {
   prefs?: Maybe<Scalars['Json']>;
   school: SchoolCreateOneWithoutTeamsInput;
   teacher: UserCreateOneWithoutTeachesInput;
+  updatedAt?: Maybe<Scalars['DateTime']>;
   User?: Maybe<UserCreateManyWithoutTeamInput>;
   Vote?: Maybe<VoteCreateManyWithoutTeamInput>;
   work?: Maybe<WorkCreateManyWithoutTeamInput>;
@@ -5000,6 +5036,7 @@ export type TeamCreateWithoutVoteInput = {
   ballots?: Maybe<BallotCreateManyWithoutTeamInput>;
   cards?: Maybe<Scalars['String']>;
   code?: Maybe<Scalars['String']>;
+  createdAt?: Maybe<Scalars['DateTime']>;
   discussion?: Maybe<DiscussionCreateManyWithoutTeamInput>;
   domain?: Maybe<DomainCreateOneWithoutTeamInput>;
   id?: Maybe<Scalars['String']>;
@@ -5010,6 +5047,7 @@ export type TeamCreateWithoutVoteInput = {
   prefs?: Maybe<Scalars['Json']>;
   school: SchoolCreateOneWithoutTeamsInput;
   teacher: UserCreateOneWithoutTeachesInput;
+  updatedAt?: Maybe<Scalars['DateTime']>;
   User?: Maybe<UserCreateManyWithoutTeamInput>;
   Voted?: Maybe<VotedCreateManyWithoutTeamInput>;
   work?: Maybe<WorkCreateManyWithoutTeamInput>;
@@ -5023,6 +5061,7 @@ export type TeamCreateWithoutWorkInput = {
   ballots?: Maybe<BallotCreateManyWithoutTeamInput>;
   cards?: Maybe<Scalars['String']>;
   code?: Maybe<Scalars['String']>;
+  createdAt?: Maybe<Scalars['DateTime']>;
   discussion?: Maybe<DiscussionCreateManyWithoutTeamInput>;
   domain?: Maybe<DomainCreateOneWithoutTeamInput>;
   id?: Maybe<Scalars['String']>;
@@ -5033,6 +5072,7 @@ export type TeamCreateWithoutWorkInput = {
   prefs?: Maybe<Scalars['Json']>;
   school: SchoolCreateOneWithoutTeamsInput;
   teacher: UserCreateOneWithoutTeachesInput;
+  updatedAt?: Maybe<Scalars['DateTime']>;
   User?: Maybe<UserCreateManyWithoutTeamInput>;
   Vote?: Maybe<VoteCreateManyWithoutTeamInput>;
   Voted?: Maybe<VotedCreateManyWithoutTeamInput>;
@@ -5048,6 +5088,7 @@ export type TeamListRelationFilter = {
 export type TeamOrderByInput = {
   cards?: Maybe<SortOrder>;
   code?: Maybe<SortOrder>;
+  createdAt?: Maybe<SortOrder>;
   domainId?: Maybe<SortOrder>;
   id?: Maybe<SortOrder>;
   invite?: Maybe<SortOrder>;
@@ -5056,6 +5097,7 @@ export type TeamOrderByInput = {
   prefs?: Maybe<SortOrder>;
   schoolId?: Maybe<SortOrder>;
   teacherId?: Maybe<SortOrder>;
+  updatedAt?: Maybe<SortOrder>;
   year?: Maybe<SortOrder>;
 };
 
@@ -5063,6 +5105,7 @@ export type TeamScalarWhereInput = {
   AND?: Maybe<Array<TeamScalarWhereInput>>;
   cards?: Maybe<StringFilter>;
   code?: Maybe<StringNullableFilter>;
+  createdAt?: Maybe<DateTimeFilter>;
   domainId?: Maybe<StringNullableFilter>;
   id?: Maybe<StringFilter>;
   invite?: Maybe<StringNullableFilter>;
@@ -5071,17 +5114,20 @@ export type TeamScalarWhereInput = {
   OR?: Maybe<Array<TeamScalarWhereInput>>;
   schoolId?: Maybe<StringFilter>;
   teacherId?: Maybe<StringFilter>;
+  updatedAt?: Maybe<DateTimeFilter>;
   year?: Maybe<IntNullableFilter>;
 };
 
 export type TeamUpdateManyMutationInput = {
   cards?: Maybe<StringFieldUpdateOperationsInput>;
   code?: Maybe<NullableStringFieldUpdateOperationsInput>;
+  createdAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
   id?: Maybe<StringFieldUpdateOperationsInput>;
   invite?: Maybe<NullableStringFieldUpdateOperationsInput>;
   name?: Maybe<StringFieldUpdateOperationsInput>;
   notes?: Maybe<Scalars['Json']>;
   prefs?: Maybe<Scalars['Json']>;
+  updatedAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
   year?: Maybe<NullableIntFieldUpdateOperationsInput>;
 };
 
@@ -5235,6 +5281,7 @@ export type TeamUpdateWithoutActivityInput = {
   ballots?: Maybe<BallotUpdateManyWithoutTeamInput>;
   cards?: Maybe<StringFieldUpdateOperationsInput>;
   code?: Maybe<NullableStringFieldUpdateOperationsInput>;
+  createdAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
   discussion?: Maybe<DiscussionUpdateManyWithoutTeamInput>;
   domain?: Maybe<DomainUpdateOneWithoutTeamInput>;
   id?: Maybe<StringFieldUpdateOperationsInput>;
@@ -5245,6 +5292,7 @@ export type TeamUpdateWithoutActivityInput = {
   prefs?: Maybe<Scalars['Json']>;
   school?: Maybe<SchoolUpdateOneRequiredWithoutTeamsInput>;
   teacher?: Maybe<UserUpdateOneRequiredWithoutTeachesInput>;
+  updatedAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
   User?: Maybe<UserUpdateManyWithoutTeamInput>;
   Vote?: Maybe<VoteUpdateManyWithoutTeamInput>;
   Voted?: Maybe<VotedUpdateManyWithoutTeamInput>;
@@ -5258,6 +5306,7 @@ export type TeamUpdateWithoutAttachmentInput = {
   ballots?: Maybe<BallotUpdateManyWithoutTeamInput>;
   cards?: Maybe<StringFieldUpdateOperationsInput>;
   code?: Maybe<NullableStringFieldUpdateOperationsInput>;
+  createdAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
   discussion?: Maybe<DiscussionUpdateManyWithoutTeamInput>;
   domain?: Maybe<DomainUpdateOneWithoutTeamInput>;
   id?: Maybe<StringFieldUpdateOperationsInput>;
@@ -5268,6 +5317,7 @@ export type TeamUpdateWithoutAttachmentInput = {
   prefs?: Maybe<Scalars['Json']>;
   school?: Maybe<SchoolUpdateOneRequiredWithoutTeamsInput>;
   teacher?: Maybe<UserUpdateOneRequiredWithoutTeachesInput>;
+  updatedAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
   User?: Maybe<UserUpdateManyWithoutTeamInput>;
   Vote?: Maybe<VoteUpdateManyWithoutTeamInput>;
   Voted?: Maybe<VotedUpdateManyWithoutTeamInput>;
@@ -5281,6 +5331,7 @@ export type TeamUpdateWithoutBallotRunsInput = {
   ballots?: Maybe<BallotUpdateManyWithoutTeamInput>;
   cards?: Maybe<StringFieldUpdateOperationsInput>;
   code?: Maybe<NullableStringFieldUpdateOperationsInput>;
+  createdAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
   discussion?: Maybe<DiscussionUpdateManyWithoutTeamInput>;
   domain?: Maybe<DomainUpdateOneWithoutTeamInput>;
   id?: Maybe<StringFieldUpdateOperationsInput>;
@@ -5291,6 +5342,7 @@ export type TeamUpdateWithoutBallotRunsInput = {
   prefs?: Maybe<Scalars['Json']>;
   school?: Maybe<SchoolUpdateOneRequiredWithoutTeamsInput>;
   teacher?: Maybe<UserUpdateOneRequiredWithoutTeachesInput>;
+  updatedAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
   User?: Maybe<UserUpdateManyWithoutTeamInput>;
   Vote?: Maybe<VoteUpdateManyWithoutTeamInput>;
   Voted?: Maybe<VotedUpdateManyWithoutTeamInput>;
@@ -5304,6 +5356,7 @@ export type TeamUpdateWithoutBallotsInput = {
   BallotRuns?: Maybe<BallotRunUpdateManyWithoutTeamInput>;
   cards?: Maybe<StringFieldUpdateOperationsInput>;
   code?: Maybe<NullableStringFieldUpdateOperationsInput>;
+  createdAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
   discussion?: Maybe<DiscussionUpdateManyWithoutTeamInput>;
   domain?: Maybe<DomainUpdateOneWithoutTeamInput>;
   id?: Maybe<StringFieldUpdateOperationsInput>;
@@ -5314,6 +5367,7 @@ export type TeamUpdateWithoutBallotsInput = {
   prefs?: Maybe<Scalars['Json']>;
   school?: Maybe<SchoolUpdateOneRequiredWithoutTeamsInput>;
   teacher?: Maybe<UserUpdateOneRequiredWithoutTeachesInput>;
+  updatedAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
   User?: Maybe<UserUpdateManyWithoutTeamInput>;
   Vote?: Maybe<VoteUpdateManyWithoutTeamInput>;
   Voted?: Maybe<VotedUpdateManyWithoutTeamInput>;
@@ -5328,6 +5382,7 @@ export type TeamUpdateWithoutDiscussionInput = {
   ballots?: Maybe<BallotUpdateManyWithoutTeamInput>;
   cards?: Maybe<StringFieldUpdateOperationsInput>;
   code?: Maybe<NullableStringFieldUpdateOperationsInput>;
+  createdAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
   domain?: Maybe<DomainUpdateOneWithoutTeamInput>;
   id?: Maybe<StringFieldUpdateOperationsInput>;
   invite?: Maybe<NullableStringFieldUpdateOperationsInput>;
@@ -5337,6 +5392,7 @@ export type TeamUpdateWithoutDiscussionInput = {
   prefs?: Maybe<Scalars['Json']>;
   school?: Maybe<SchoolUpdateOneRequiredWithoutTeamsInput>;
   teacher?: Maybe<UserUpdateOneRequiredWithoutTeachesInput>;
+  updatedAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
   User?: Maybe<UserUpdateManyWithoutTeamInput>;
   Vote?: Maybe<VoteUpdateManyWithoutTeamInput>;
   Voted?: Maybe<VotedUpdateManyWithoutTeamInput>;
@@ -5351,6 +5407,7 @@ export type TeamUpdateWithoutDomainInput = {
   ballots?: Maybe<BallotUpdateManyWithoutTeamInput>;
   cards?: Maybe<StringFieldUpdateOperationsInput>;
   code?: Maybe<NullableStringFieldUpdateOperationsInput>;
+  createdAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
   discussion?: Maybe<DiscussionUpdateManyWithoutTeamInput>;
   id?: Maybe<StringFieldUpdateOperationsInput>;
   invite?: Maybe<NullableStringFieldUpdateOperationsInput>;
@@ -5360,6 +5417,7 @@ export type TeamUpdateWithoutDomainInput = {
   prefs?: Maybe<Scalars['Json']>;
   school?: Maybe<SchoolUpdateOneRequiredWithoutTeamsInput>;
   teacher?: Maybe<UserUpdateOneRequiredWithoutTeachesInput>;
+  updatedAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
   User?: Maybe<UserUpdateManyWithoutTeamInput>;
   Vote?: Maybe<VoteUpdateManyWithoutTeamInput>;
   Voted?: Maybe<VotedUpdateManyWithoutTeamInput>;
@@ -5374,6 +5432,7 @@ export type TeamUpdateWithoutMembersInput = {
   ballots?: Maybe<BallotUpdateManyWithoutTeamInput>;
   cards?: Maybe<StringFieldUpdateOperationsInput>;
   code?: Maybe<NullableStringFieldUpdateOperationsInput>;
+  createdAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
   discussion?: Maybe<DiscussionUpdateManyWithoutTeamInput>;
   domain?: Maybe<DomainUpdateOneWithoutTeamInput>;
   id?: Maybe<StringFieldUpdateOperationsInput>;
@@ -5383,6 +5442,7 @@ export type TeamUpdateWithoutMembersInput = {
   prefs?: Maybe<Scalars['Json']>;
   school?: Maybe<SchoolUpdateOneRequiredWithoutTeamsInput>;
   teacher?: Maybe<UserUpdateOneRequiredWithoutTeachesInput>;
+  updatedAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
   User?: Maybe<UserUpdateManyWithoutTeamInput>;
   Vote?: Maybe<VoteUpdateManyWithoutTeamInput>;
   Voted?: Maybe<VotedUpdateManyWithoutTeamInput>;
@@ -5397,6 +5457,7 @@ export type TeamUpdateWithoutSchoolInput = {
   ballots?: Maybe<BallotUpdateManyWithoutTeamInput>;
   cards?: Maybe<StringFieldUpdateOperationsInput>;
   code?: Maybe<NullableStringFieldUpdateOperationsInput>;
+  createdAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
   discussion?: Maybe<DiscussionUpdateManyWithoutTeamInput>;
   domain?: Maybe<DomainUpdateOneWithoutTeamInput>;
   id?: Maybe<StringFieldUpdateOperationsInput>;
@@ -5406,6 +5467,7 @@ export type TeamUpdateWithoutSchoolInput = {
   notes?: Maybe<Scalars['Json']>;
   prefs?: Maybe<Scalars['Json']>;
   teacher?: Maybe<UserUpdateOneRequiredWithoutTeachesInput>;
+  updatedAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
   User?: Maybe<UserUpdateManyWithoutTeamInput>;
   Vote?: Maybe<VoteUpdateManyWithoutTeamInput>;
   Voted?: Maybe<VotedUpdateManyWithoutTeamInput>;
@@ -5420,6 +5482,7 @@ export type TeamUpdateWithoutTeacherInput = {
   ballots?: Maybe<BallotUpdateManyWithoutTeamInput>;
   cards?: Maybe<StringFieldUpdateOperationsInput>;
   code?: Maybe<NullableStringFieldUpdateOperationsInput>;
+  createdAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
   discussion?: Maybe<DiscussionUpdateManyWithoutTeamInput>;
   domain?: Maybe<DomainUpdateOneWithoutTeamInput>;
   id?: Maybe<StringFieldUpdateOperationsInput>;
@@ -5429,6 +5492,7 @@ export type TeamUpdateWithoutTeacherInput = {
   notes?: Maybe<Scalars['Json']>;
   prefs?: Maybe<Scalars['Json']>;
   school?: Maybe<SchoolUpdateOneRequiredWithoutTeamsInput>;
+  updatedAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
   User?: Maybe<UserUpdateManyWithoutTeamInput>;
   Vote?: Maybe<VoteUpdateManyWithoutTeamInput>;
   Voted?: Maybe<VotedUpdateManyWithoutTeamInput>;
@@ -5443,6 +5507,7 @@ export type TeamUpdateWithoutUserInput = {
   ballots?: Maybe<BallotUpdateManyWithoutTeamInput>;
   cards?: Maybe<StringFieldUpdateOperationsInput>;
   code?: Maybe<NullableStringFieldUpdateOperationsInput>;
+  createdAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
   discussion?: Maybe<DiscussionUpdateManyWithoutTeamInput>;
   domain?: Maybe<DomainUpdateOneWithoutTeamInput>;
   id?: Maybe<StringFieldUpdateOperationsInput>;
@@ -5453,6 +5518,7 @@ export type TeamUpdateWithoutUserInput = {
   prefs?: Maybe<Scalars['Json']>;
   school?: Maybe<SchoolUpdateOneRequiredWithoutTeamsInput>;
   teacher?: Maybe<UserUpdateOneRequiredWithoutTeachesInput>;
+  updatedAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
   Vote?: Maybe<VoteUpdateManyWithoutTeamInput>;
   Voted?: Maybe<VotedUpdateManyWithoutTeamInput>;
   work?: Maybe<WorkUpdateManyWithoutTeamInput>;
@@ -5466,6 +5532,7 @@ export type TeamUpdateWithoutVotedInput = {
   ballots?: Maybe<BallotUpdateManyWithoutTeamInput>;
   cards?: Maybe<StringFieldUpdateOperationsInput>;
   code?: Maybe<NullableStringFieldUpdateOperationsInput>;
+  createdAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
   discussion?: Maybe<DiscussionUpdateManyWithoutTeamInput>;
   domain?: Maybe<DomainUpdateOneWithoutTeamInput>;
   id?: Maybe<StringFieldUpdateOperationsInput>;
@@ -5476,6 +5543,7 @@ export type TeamUpdateWithoutVotedInput = {
   prefs?: Maybe<Scalars['Json']>;
   school?: Maybe<SchoolUpdateOneRequiredWithoutTeamsInput>;
   teacher?: Maybe<UserUpdateOneRequiredWithoutTeachesInput>;
+  updatedAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
   User?: Maybe<UserUpdateManyWithoutTeamInput>;
   Vote?: Maybe<VoteUpdateManyWithoutTeamInput>;
   work?: Maybe<WorkUpdateManyWithoutTeamInput>;
@@ -5489,6 +5557,7 @@ export type TeamUpdateWithoutVoteInput = {
   ballots?: Maybe<BallotUpdateManyWithoutTeamInput>;
   cards?: Maybe<StringFieldUpdateOperationsInput>;
   code?: Maybe<NullableStringFieldUpdateOperationsInput>;
+  createdAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
   discussion?: Maybe<DiscussionUpdateManyWithoutTeamInput>;
   domain?: Maybe<DomainUpdateOneWithoutTeamInput>;
   id?: Maybe<StringFieldUpdateOperationsInput>;
@@ -5499,6 +5568,7 @@ export type TeamUpdateWithoutVoteInput = {
   prefs?: Maybe<Scalars['Json']>;
   school?: Maybe<SchoolUpdateOneRequiredWithoutTeamsInput>;
   teacher?: Maybe<UserUpdateOneRequiredWithoutTeachesInput>;
+  updatedAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
   User?: Maybe<UserUpdateManyWithoutTeamInput>;
   Voted?: Maybe<VotedUpdateManyWithoutTeamInput>;
   work?: Maybe<WorkUpdateManyWithoutTeamInput>;
@@ -5512,6 +5582,7 @@ export type TeamUpdateWithoutWorkInput = {
   ballots?: Maybe<BallotUpdateManyWithoutTeamInput>;
   cards?: Maybe<StringFieldUpdateOperationsInput>;
   code?: Maybe<NullableStringFieldUpdateOperationsInput>;
+  createdAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
   discussion?: Maybe<DiscussionUpdateManyWithoutTeamInput>;
   domain?: Maybe<DomainUpdateOneWithoutTeamInput>;
   id?: Maybe<StringFieldUpdateOperationsInput>;
@@ -5522,6 +5593,7 @@ export type TeamUpdateWithoutWorkInput = {
   prefs?: Maybe<Scalars['Json']>;
   school?: Maybe<SchoolUpdateOneRequiredWithoutTeamsInput>;
   teacher?: Maybe<UserUpdateOneRequiredWithoutTeachesInput>;
+  updatedAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
   User?: Maybe<UserUpdateManyWithoutTeamInput>;
   Vote?: Maybe<VoteUpdateManyWithoutTeamInput>;
   Voted?: Maybe<VotedUpdateManyWithoutTeamInput>;
@@ -5619,6 +5691,7 @@ export type TeamWhereInput = {
   ballots?: Maybe<BallotListRelationFilter>;
   cards?: Maybe<StringFilter>;
   code?: Maybe<StringNullableFilter>;
+  createdAt?: Maybe<DateTimeFilter>;
   discussion?: Maybe<DiscussionListRelationFilter>;
   domain?: Maybe<DomainWhereInput>;
   domainId?: Maybe<StringNullableFilter>;
@@ -5632,6 +5705,7 @@ export type TeamWhereInput = {
   schoolId?: Maybe<StringFilter>;
   teacher?: Maybe<UserWhereInput>;
   teacherId?: Maybe<StringFilter>;
+  updatedAt?: Maybe<DateTimeFilter>;
   User?: Maybe<UserListRelationFilter>;
   Vote?: Maybe<VoteListRelationFilter>;
   Voted?: Maybe<VotedListRelationFilter>;
@@ -8472,6 +8546,20 @@ export type PostWorkMutation = (
   ) }
 );
 
+export type StatsQueryVariables = Exact<{
+  from?: Maybe<Scalars['Int']>;
+  to?: Maybe<Scalars['Int']>;
+}>;
+
+
+export type StatsQuery = (
+  { __typename?: 'Query' }
+  & { stats?: Maybe<(
+    { __typename?: 'Stats' }
+    & Pick<Stats, 'stats'>
+  )> }
+);
+
 export type TeachersQueryVariables = Exact<{
   where?: Maybe<UserWhereInput>;
 }>;
@@ -10238,6 +10326,40 @@ export function usePostWorkMutation(baseOptions?: Apollo.MutationHookOptions<Pos
 export type PostWorkMutationHookResult = ReturnType<typeof usePostWorkMutation>;
 export type PostWorkMutationResult = Apollo.MutationResult<PostWorkMutation>;
 export type PostWorkMutationOptions = Apollo.BaseMutationOptions<PostWorkMutation, PostWorkMutationVariables>;
+export const StatsDocument = gql`
+    query stats($from: Int, $to: Int) {
+  stats(from: $from, to: $to) {
+    stats
+  }
+}
+    `;
+
+/**
+ * __useStatsQuery__
+ *
+ * To run a query within a React component, call `useStatsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useStatsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useStatsQuery({
+ *   variables: {
+ *      from: // value for 'from'
+ *      to: // value for 'to'
+ *   },
+ * });
+ */
+export function useStatsQuery(baseOptions?: Apollo.QueryHookOptions<StatsQuery, StatsQueryVariables>) {
+        return Apollo.useQuery<StatsQuery, StatsQueryVariables>(StatsDocument, baseOptions);
+      }
+export function useStatsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<StatsQuery, StatsQueryVariables>) {
+          return Apollo.useLazyQuery<StatsQuery, StatsQueryVariables>(StatsDocument, baseOptions);
+        }
+export type StatsQueryHookResult = ReturnType<typeof useStatsQuery>;
+export type StatsLazyQueryHookResult = ReturnType<typeof useStatsLazyQuery>;
+export type StatsQueryResult = Apollo.QueryResult<StatsQuery, StatsQueryVariables>;
 export const TeachersDocument = gql`
     query teachers($where: UserWhereInput) {
   users(where: $where) {

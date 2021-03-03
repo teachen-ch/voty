@@ -3156,6 +3156,7 @@ type Query {
     orderBy: [SchoolOrderByInput!]
     where: SchoolWhereInput
   ): [School!]!
+  stats(from: Int, to: Int): Stats
   swissvotes(
     hasPosters: Boolean
     keywords: String
@@ -4231,6 +4232,10 @@ enum SortOrder {
   desc
 }
 
+type Stats {
+  stats: Json
+}
+
 input StringFieldUpdateOperationsInput {
   set: String
 }
@@ -4312,6 +4317,7 @@ input TeamCreateInput {
   BallotRuns: BallotRunCreateManyWithoutTeamInput
   ballots: BallotCreateManyWithoutTeamInput
   cards: String
+  createdAt: DateTime
   discussion: DiscussionCreateManyWithoutTeamInput
   domain: DomainCreateOneWithoutTeamInput
   id: String
@@ -4321,6 +4327,7 @@ input TeamCreateInput {
   prefs: Json
   school: SchoolCreateOneWithoutTeamsInput!
   teacher: UserCreateOneWithoutTeachesInput!
+  updatedAt: DateTime
   User: UserCreateManyWithoutTeamInput
   Vote: VoteCreateManyWithoutTeamInput
   Voted: VotedCreateManyWithoutTeamInput
@@ -4477,6 +4484,7 @@ input TeamCreateWithoutActivityInput {
   ballots: BallotCreateManyWithoutTeamInput
   cards: String
   code: String
+  createdAt: DateTime
   discussion: DiscussionCreateManyWithoutTeamInput
   domain: DomainCreateOneWithoutTeamInput
   id: String
@@ -4487,6 +4495,7 @@ input TeamCreateWithoutActivityInput {
   prefs: Json
   school: SchoolCreateOneWithoutTeamsInput!
   teacher: UserCreateOneWithoutTeachesInput!
+  updatedAt: DateTime
   User: UserCreateManyWithoutTeamInput
   Vote: VoteCreateManyWithoutTeamInput
   Voted: VotedCreateManyWithoutTeamInput
@@ -4500,6 +4509,7 @@ input TeamCreateWithoutAttachmentInput {
   ballots: BallotCreateManyWithoutTeamInput
   cards: String
   code: String
+  createdAt: DateTime
   discussion: DiscussionCreateManyWithoutTeamInput
   domain: DomainCreateOneWithoutTeamInput
   id: String
@@ -4510,6 +4520,7 @@ input TeamCreateWithoutAttachmentInput {
   prefs: Json
   school: SchoolCreateOneWithoutTeamsInput!
   teacher: UserCreateOneWithoutTeachesInput!
+  updatedAt: DateTime
   User: UserCreateManyWithoutTeamInput
   Vote: VoteCreateManyWithoutTeamInput
   Voted: VotedCreateManyWithoutTeamInput
@@ -4523,6 +4534,7 @@ input TeamCreateWithoutBallotRunsInput {
   ballots: BallotCreateManyWithoutTeamInput
   cards: String
   code: String
+  createdAt: DateTime
   discussion: DiscussionCreateManyWithoutTeamInput
   domain: DomainCreateOneWithoutTeamInput
   id: String
@@ -4533,6 +4545,7 @@ input TeamCreateWithoutBallotRunsInput {
   prefs: Json
   school: SchoolCreateOneWithoutTeamsInput!
   teacher: UserCreateOneWithoutTeachesInput!
+  updatedAt: DateTime
   User: UserCreateManyWithoutTeamInput
   Vote: VoteCreateManyWithoutTeamInput
   Voted: VotedCreateManyWithoutTeamInput
@@ -4546,6 +4559,7 @@ input TeamCreateWithoutBallotsInput {
   BallotRuns: BallotRunCreateManyWithoutTeamInput
   cards: String
   code: String
+  createdAt: DateTime
   discussion: DiscussionCreateManyWithoutTeamInput
   domain: DomainCreateOneWithoutTeamInput
   id: String
@@ -4556,6 +4570,7 @@ input TeamCreateWithoutBallotsInput {
   prefs: Json
   school: SchoolCreateOneWithoutTeamsInput!
   teacher: UserCreateOneWithoutTeachesInput!
+  updatedAt: DateTime
   User: UserCreateManyWithoutTeamInput
   Vote: VoteCreateManyWithoutTeamInput
   Voted: VotedCreateManyWithoutTeamInput
@@ -4570,6 +4585,7 @@ input TeamCreateWithoutDiscussionInput {
   ballots: BallotCreateManyWithoutTeamInput
   cards: String
   code: String
+  createdAt: DateTime
   domain: DomainCreateOneWithoutTeamInput
   id: String
   invite: String
@@ -4579,6 +4595,7 @@ input TeamCreateWithoutDiscussionInput {
   prefs: Json
   school: SchoolCreateOneWithoutTeamsInput!
   teacher: UserCreateOneWithoutTeachesInput!
+  updatedAt: DateTime
   User: UserCreateManyWithoutTeamInput
   Vote: VoteCreateManyWithoutTeamInput
   Voted: VotedCreateManyWithoutTeamInput
@@ -4593,6 +4610,7 @@ input TeamCreateWithoutDomainInput {
   ballots: BallotCreateManyWithoutTeamInput
   cards: String
   code: String
+  createdAt: DateTime
   discussion: DiscussionCreateManyWithoutTeamInput
   id: String
   invite: String
@@ -4602,6 +4620,7 @@ input TeamCreateWithoutDomainInput {
   prefs: Json
   school: SchoolCreateOneWithoutTeamsInput!
   teacher: UserCreateOneWithoutTeachesInput!
+  updatedAt: DateTime
   User: UserCreateManyWithoutTeamInput
   Vote: VoteCreateManyWithoutTeamInput
   Voted: VotedCreateManyWithoutTeamInput
@@ -4616,6 +4635,7 @@ input TeamCreateWithoutMembersInput {
   ballots: BallotCreateManyWithoutTeamInput
   cards: String
   code: String
+  createdAt: DateTime
   discussion: DiscussionCreateManyWithoutTeamInput
   domain: DomainCreateOneWithoutTeamInput
   id: String
@@ -4625,6 +4645,7 @@ input TeamCreateWithoutMembersInput {
   prefs: Json
   school: SchoolCreateOneWithoutTeamsInput!
   teacher: UserCreateOneWithoutTeachesInput!
+  updatedAt: DateTime
   User: UserCreateManyWithoutTeamInput
   Vote: VoteCreateManyWithoutTeamInput
   Voted: VotedCreateManyWithoutTeamInput
@@ -4639,6 +4660,7 @@ input TeamCreateWithoutSchoolInput {
   ballots: BallotCreateManyWithoutTeamInput
   cards: String
   code: String
+  createdAt: DateTime
   discussion: DiscussionCreateManyWithoutTeamInput
   domain: DomainCreateOneWithoutTeamInput
   id: String
@@ -4648,6 +4670,7 @@ input TeamCreateWithoutSchoolInput {
   notes: Json
   prefs: Json
   teacher: UserCreateOneWithoutTeachesInput!
+  updatedAt: DateTime
   User: UserCreateManyWithoutTeamInput
   Vote: VoteCreateManyWithoutTeamInput
   Voted: VotedCreateManyWithoutTeamInput
@@ -4662,6 +4685,7 @@ input TeamCreateWithoutTeacherInput {
   ballots: BallotCreateManyWithoutTeamInput
   cards: String
   code: String
+  createdAt: DateTime
   discussion: DiscussionCreateManyWithoutTeamInput
   domain: DomainCreateOneWithoutTeamInput
   id: String
@@ -4671,6 +4695,7 @@ input TeamCreateWithoutTeacherInput {
   notes: Json
   prefs: Json
   school: SchoolCreateOneWithoutTeamsInput!
+  updatedAt: DateTime
   User: UserCreateManyWithoutTeamInput
   Vote: VoteCreateManyWithoutTeamInput
   Voted: VotedCreateManyWithoutTeamInput
@@ -4685,6 +4710,7 @@ input TeamCreateWithoutUserInput {
   ballots: BallotCreateManyWithoutTeamInput
   cards: String
   code: String
+  createdAt: DateTime
   discussion: DiscussionCreateManyWithoutTeamInput
   domain: DomainCreateOneWithoutTeamInput
   id: String
@@ -4695,6 +4721,7 @@ input TeamCreateWithoutUserInput {
   prefs: Json
   school: SchoolCreateOneWithoutTeamsInput!
   teacher: UserCreateOneWithoutTeachesInput!
+  updatedAt: DateTime
   Vote: VoteCreateManyWithoutTeamInput
   Voted: VotedCreateManyWithoutTeamInput
   work: WorkCreateManyWithoutTeamInput
@@ -4708,6 +4735,7 @@ input TeamCreateWithoutVotedInput {
   ballots: BallotCreateManyWithoutTeamInput
   cards: String
   code: String
+  createdAt: DateTime
   discussion: DiscussionCreateManyWithoutTeamInput
   domain: DomainCreateOneWithoutTeamInput
   id: String
@@ -4718,6 +4746,7 @@ input TeamCreateWithoutVotedInput {
   prefs: Json
   school: SchoolCreateOneWithoutTeamsInput!
   teacher: UserCreateOneWithoutTeachesInput!
+  updatedAt: DateTime
   User: UserCreateManyWithoutTeamInput
   Vote: VoteCreateManyWithoutTeamInput
   work: WorkCreateManyWithoutTeamInput
@@ -4731,6 +4760,7 @@ input TeamCreateWithoutVoteInput {
   ballots: BallotCreateManyWithoutTeamInput
   cards: String
   code: String
+  createdAt: DateTime
   discussion: DiscussionCreateManyWithoutTeamInput
   domain: DomainCreateOneWithoutTeamInput
   id: String
@@ -4741,6 +4771,7 @@ input TeamCreateWithoutVoteInput {
   prefs: Json
   school: SchoolCreateOneWithoutTeamsInput!
   teacher: UserCreateOneWithoutTeachesInput!
+  updatedAt: DateTime
   User: UserCreateManyWithoutTeamInput
   Voted: VotedCreateManyWithoutTeamInput
   work: WorkCreateManyWithoutTeamInput
@@ -4754,6 +4785,7 @@ input TeamCreateWithoutWorkInput {
   ballots: BallotCreateManyWithoutTeamInput
   cards: String
   code: String
+  createdAt: DateTime
   discussion: DiscussionCreateManyWithoutTeamInput
   domain: DomainCreateOneWithoutTeamInput
   id: String
@@ -4764,6 +4796,7 @@ input TeamCreateWithoutWorkInput {
   prefs: Json
   school: SchoolCreateOneWithoutTeamsInput!
   teacher: UserCreateOneWithoutTeachesInput!
+  updatedAt: DateTime
   User: UserCreateManyWithoutTeamInput
   Vote: VoteCreateManyWithoutTeamInput
   Voted: VotedCreateManyWithoutTeamInput
@@ -4779,6 +4812,7 @@ input TeamListRelationFilter {
 input TeamOrderByInput {
   cards: SortOrder
   code: SortOrder
+  createdAt: SortOrder
   domainId: SortOrder
   id: SortOrder
   invite: SortOrder
@@ -4787,6 +4821,7 @@ input TeamOrderByInput {
   prefs: SortOrder
   schoolId: SortOrder
   teacherId: SortOrder
+  updatedAt: SortOrder
   year: SortOrder
 }
 
@@ -4794,6 +4829,7 @@ input TeamScalarWhereInput {
   AND: [TeamScalarWhereInput!]
   cards: StringFilter
   code: StringNullableFilter
+  createdAt: DateTimeFilter
   domainId: StringNullableFilter
   id: StringFilter
   invite: StringNullableFilter
@@ -4802,17 +4838,20 @@ input TeamScalarWhereInput {
   OR: [TeamScalarWhereInput!]
   schoolId: StringFilter
   teacherId: StringFilter
+  updatedAt: DateTimeFilter
   year: IntNullableFilter
 }
 
 input TeamUpdateManyMutationInput {
   cards: StringFieldUpdateOperationsInput
   code: NullableStringFieldUpdateOperationsInput
+  createdAt: DateTimeFieldUpdateOperationsInput
   id: StringFieldUpdateOperationsInput
   invite: NullableStringFieldUpdateOperationsInput
   name: StringFieldUpdateOperationsInput
   notes: Json
   prefs: Json
+  updatedAt: DateTimeFieldUpdateOperationsInput
   year: NullableIntFieldUpdateOperationsInput
 }
 
@@ -4966,6 +5005,7 @@ input TeamUpdateWithoutActivityInput {
   ballots: BallotUpdateManyWithoutTeamInput
   cards: StringFieldUpdateOperationsInput
   code: NullableStringFieldUpdateOperationsInput
+  createdAt: DateTimeFieldUpdateOperationsInput
   discussion: DiscussionUpdateManyWithoutTeamInput
   domain: DomainUpdateOneWithoutTeamInput
   id: StringFieldUpdateOperationsInput
@@ -4976,6 +5016,7 @@ input TeamUpdateWithoutActivityInput {
   prefs: Json
   school: SchoolUpdateOneRequiredWithoutTeamsInput
   teacher: UserUpdateOneRequiredWithoutTeachesInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
   User: UserUpdateManyWithoutTeamInput
   Vote: VoteUpdateManyWithoutTeamInput
   Voted: VotedUpdateManyWithoutTeamInput
@@ -4989,6 +5030,7 @@ input TeamUpdateWithoutAttachmentInput {
   ballots: BallotUpdateManyWithoutTeamInput
   cards: StringFieldUpdateOperationsInput
   code: NullableStringFieldUpdateOperationsInput
+  createdAt: DateTimeFieldUpdateOperationsInput
   discussion: DiscussionUpdateManyWithoutTeamInput
   domain: DomainUpdateOneWithoutTeamInput
   id: StringFieldUpdateOperationsInput
@@ -4999,6 +5041,7 @@ input TeamUpdateWithoutAttachmentInput {
   prefs: Json
   school: SchoolUpdateOneRequiredWithoutTeamsInput
   teacher: UserUpdateOneRequiredWithoutTeachesInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
   User: UserUpdateManyWithoutTeamInput
   Vote: VoteUpdateManyWithoutTeamInput
   Voted: VotedUpdateManyWithoutTeamInput
@@ -5012,6 +5055,7 @@ input TeamUpdateWithoutBallotRunsInput {
   ballots: BallotUpdateManyWithoutTeamInput
   cards: StringFieldUpdateOperationsInput
   code: NullableStringFieldUpdateOperationsInput
+  createdAt: DateTimeFieldUpdateOperationsInput
   discussion: DiscussionUpdateManyWithoutTeamInput
   domain: DomainUpdateOneWithoutTeamInput
   id: StringFieldUpdateOperationsInput
@@ -5022,6 +5066,7 @@ input TeamUpdateWithoutBallotRunsInput {
   prefs: Json
   school: SchoolUpdateOneRequiredWithoutTeamsInput
   teacher: UserUpdateOneRequiredWithoutTeachesInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
   User: UserUpdateManyWithoutTeamInput
   Vote: VoteUpdateManyWithoutTeamInput
   Voted: VotedUpdateManyWithoutTeamInput
@@ -5035,6 +5080,7 @@ input TeamUpdateWithoutBallotsInput {
   BallotRuns: BallotRunUpdateManyWithoutTeamInput
   cards: StringFieldUpdateOperationsInput
   code: NullableStringFieldUpdateOperationsInput
+  createdAt: DateTimeFieldUpdateOperationsInput
   discussion: DiscussionUpdateManyWithoutTeamInput
   domain: DomainUpdateOneWithoutTeamInput
   id: StringFieldUpdateOperationsInput
@@ -5045,6 +5091,7 @@ input TeamUpdateWithoutBallotsInput {
   prefs: Json
   school: SchoolUpdateOneRequiredWithoutTeamsInput
   teacher: UserUpdateOneRequiredWithoutTeachesInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
   User: UserUpdateManyWithoutTeamInput
   Vote: VoteUpdateManyWithoutTeamInput
   Voted: VotedUpdateManyWithoutTeamInput
@@ -5059,6 +5106,7 @@ input TeamUpdateWithoutDiscussionInput {
   ballots: BallotUpdateManyWithoutTeamInput
   cards: StringFieldUpdateOperationsInput
   code: NullableStringFieldUpdateOperationsInput
+  createdAt: DateTimeFieldUpdateOperationsInput
   domain: DomainUpdateOneWithoutTeamInput
   id: StringFieldUpdateOperationsInput
   invite: NullableStringFieldUpdateOperationsInput
@@ -5068,6 +5116,7 @@ input TeamUpdateWithoutDiscussionInput {
   prefs: Json
   school: SchoolUpdateOneRequiredWithoutTeamsInput
   teacher: UserUpdateOneRequiredWithoutTeachesInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
   User: UserUpdateManyWithoutTeamInput
   Vote: VoteUpdateManyWithoutTeamInput
   Voted: VotedUpdateManyWithoutTeamInput
@@ -5082,6 +5131,7 @@ input TeamUpdateWithoutDomainInput {
   ballots: BallotUpdateManyWithoutTeamInput
   cards: StringFieldUpdateOperationsInput
   code: NullableStringFieldUpdateOperationsInput
+  createdAt: DateTimeFieldUpdateOperationsInput
   discussion: DiscussionUpdateManyWithoutTeamInput
   id: StringFieldUpdateOperationsInput
   invite: NullableStringFieldUpdateOperationsInput
@@ -5091,6 +5141,7 @@ input TeamUpdateWithoutDomainInput {
   prefs: Json
   school: SchoolUpdateOneRequiredWithoutTeamsInput
   teacher: UserUpdateOneRequiredWithoutTeachesInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
   User: UserUpdateManyWithoutTeamInput
   Vote: VoteUpdateManyWithoutTeamInput
   Voted: VotedUpdateManyWithoutTeamInput
@@ -5105,6 +5156,7 @@ input TeamUpdateWithoutMembersInput {
   ballots: BallotUpdateManyWithoutTeamInput
   cards: StringFieldUpdateOperationsInput
   code: NullableStringFieldUpdateOperationsInput
+  createdAt: DateTimeFieldUpdateOperationsInput
   discussion: DiscussionUpdateManyWithoutTeamInput
   domain: DomainUpdateOneWithoutTeamInput
   id: StringFieldUpdateOperationsInput
@@ -5114,6 +5166,7 @@ input TeamUpdateWithoutMembersInput {
   prefs: Json
   school: SchoolUpdateOneRequiredWithoutTeamsInput
   teacher: UserUpdateOneRequiredWithoutTeachesInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
   User: UserUpdateManyWithoutTeamInput
   Vote: VoteUpdateManyWithoutTeamInput
   Voted: VotedUpdateManyWithoutTeamInput
@@ -5128,6 +5181,7 @@ input TeamUpdateWithoutSchoolInput {
   ballots: BallotUpdateManyWithoutTeamInput
   cards: StringFieldUpdateOperationsInput
   code: NullableStringFieldUpdateOperationsInput
+  createdAt: DateTimeFieldUpdateOperationsInput
   discussion: DiscussionUpdateManyWithoutTeamInput
   domain: DomainUpdateOneWithoutTeamInput
   id: StringFieldUpdateOperationsInput
@@ -5137,6 +5191,7 @@ input TeamUpdateWithoutSchoolInput {
   notes: Json
   prefs: Json
   teacher: UserUpdateOneRequiredWithoutTeachesInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
   User: UserUpdateManyWithoutTeamInput
   Vote: VoteUpdateManyWithoutTeamInput
   Voted: VotedUpdateManyWithoutTeamInput
@@ -5151,6 +5206,7 @@ input TeamUpdateWithoutTeacherInput {
   ballots: BallotUpdateManyWithoutTeamInput
   cards: StringFieldUpdateOperationsInput
   code: NullableStringFieldUpdateOperationsInput
+  createdAt: DateTimeFieldUpdateOperationsInput
   discussion: DiscussionUpdateManyWithoutTeamInput
   domain: DomainUpdateOneWithoutTeamInput
   id: StringFieldUpdateOperationsInput
@@ -5160,6 +5216,7 @@ input TeamUpdateWithoutTeacherInput {
   notes: Json
   prefs: Json
   school: SchoolUpdateOneRequiredWithoutTeamsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
   User: UserUpdateManyWithoutTeamInput
   Vote: VoteUpdateManyWithoutTeamInput
   Voted: VotedUpdateManyWithoutTeamInput
@@ -5174,6 +5231,7 @@ input TeamUpdateWithoutUserInput {
   ballots: BallotUpdateManyWithoutTeamInput
   cards: StringFieldUpdateOperationsInput
   code: NullableStringFieldUpdateOperationsInput
+  createdAt: DateTimeFieldUpdateOperationsInput
   discussion: DiscussionUpdateManyWithoutTeamInput
   domain: DomainUpdateOneWithoutTeamInput
   id: StringFieldUpdateOperationsInput
@@ -5184,6 +5242,7 @@ input TeamUpdateWithoutUserInput {
   prefs: Json
   school: SchoolUpdateOneRequiredWithoutTeamsInput
   teacher: UserUpdateOneRequiredWithoutTeachesInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
   Vote: VoteUpdateManyWithoutTeamInput
   Voted: VotedUpdateManyWithoutTeamInput
   work: WorkUpdateManyWithoutTeamInput
@@ -5197,6 +5256,7 @@ input TeamUpdateWithoutVotedInput {
   ballots: BallotUpdateManyWithoutTeamInput
   cards: StringFieldUpdateOperationsInput
   code: NullableStringFieldUpdateOperationsInput
+  createdAt: DateTimeFieldUpdateOperationsInput
   discussion: DiscussionUpdateManyWithoutTeamInput
   domain: DomainUpdateOneWithoutTeamInput
   id: StringFieldUpdateOperationsInput
@@ -5207,6 +5267,7 @@ input TeamUpdateWithoutVotedInput {
   prefs: Json
   school: SchoolUpdateOneRequiredWithoutTeamsInput
   teacher: UserUpdateOneRequiredWithoutTeachesInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
   User: UserUpdateManyWithoutTeamInput
   Vote: VoteUpdateManyWithoutTeamInput
   work: WorkUpdateManyWithoutTeamInput
@@ -5220,6 +5281,7 @@ input TeamUpdateWithoutVoteInput {
   ballots: BallotUpdateManyWithoutTeamInput
   cards: StringFieldUpdateOperationsInput
   code: NullableStringFieldUpdateOperationsInput
+  createdAt: DateTimeFieldUpdateOperationsInput
   discussion: DiscussionUpdateManyWithoutTeamInput
   domain: DomainUpdateOneWithoutTeamInput
   id: StringFieldUpdateOperationsInput
@@ -5230,6 +5292,7 @@ input TeamUpdateWithoutVoteInput {
   prefs: Json
   school: SchoolUpdateOneRequiredWithoutTeamsInput
   teacher: UserUpdateOneRequiredWithoutTeachesInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
   User: UserUpdateManyWithoutTeamInput
   Voted: VotedUpdateManyWithoutTeamInput
   work: WorkUpdateManyWithoutTeamInput
@@ -5243,6 +5306,7 @@ input TeamUpdateWithoutWorkInput {
   ballots: BallotUpdateManyWithoutTeamInput
   cards: StringFieldUpdateOperationsInput
   code: NullableStringFieldUpdateOperationsInput
+  createdAt: DateTimeFieldUpdateOperationsInput
   discussion: DiscussionUpdateManyWithoutTeamInput
   domain: DomainUpdateOneWithoutTeamInput
   id: StringFieldUpdateOperationsInput
@@ -5253,6 +5317,7 @@ input TeamUpdateWithoutWorkInput {
   prefs: Json
   school: SchoolUpdateOneRequiredWithoutTeamsInput
   teacher: UserUpdateOneRequiredWithoutTeachesInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
   User: UserUpdateManyWithoutTeamInput
   Vote: VoteUpdateManyWithoutTeamInput
   Voted: VotedUpdateManyWithoutTeamInput
@@ -5350,6 +5415,7 @@ input TeamWhereInput {
   ballots: BallotListRelationFilter
   cards: StringFilter
   code: StringNullableFilter
+  createdAt: DateTimeFilter
   discussion: DiscussionListRelationFilter
   domain: DomainWhereInput
   domainId: StringNullableFilter
@@ -5363,6 +5429,7 @@ input TeamWhereInput {
   schoolId: StringFilter
   teacher: UserWhereInput
   teacherId: StringFilter
+  updatedAt: DateTimeFilter
   User: UserListRelationFilter
   Vote: VoteListRelationFilter
   Voted: VotedListRelationFilter

@@ -161,6 +161,15 @@ export const postWork: DocumentNode;
 }
     
 
+declare module '*/stats.tsx' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const stats: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
 declare module '*/teachers.tsx' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
