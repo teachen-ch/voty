@@ -28,6 +28,11 @@ export default function AdminHome(): ReactElement {
             <A>🏫 Schulen</A>
           </Link>
         </Text>
+        <Text>
+          <Link href="/admin/stats">
+            <A>📈 Statistiken</A>
+          </Link>
+        </Text>
       </Text>
     </LoggedInPage>
   );
