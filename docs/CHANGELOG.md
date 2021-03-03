@@ -1,3 +1,10 @@
+# [1.34.0](https://github.com/teachen-ch/voty/compare/v1.33.0...v1.34.0) (2021-03-02)
+
+
+### Features
+
+* minor changes before demoday ([e4636a9](https://github.com/teachen-ch/voty/commit/e4636a93789d28f46d75ced667dd078f67f8db5d))
+
 # [1.33.0](https://github.com/teachen-ch/voty/compare/v1.32.0...v1.33.0) (2021-03-02)
 
 
