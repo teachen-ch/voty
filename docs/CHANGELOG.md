@@ -1,3 +1,10 @@
+# [1.35.0](https://github.com/teachen-ch/voty/compare/v1.34.0...v1.35.0) (2021-03-03)
+
+
+### Features
+
+* implement basic stats backend ([d605358](https://github.com/teachen-ch/voty/commit/d605358d2fb3949d7bf0cd001f4b7928b930c304))
+
 # [1.34.0](https://github.com/teachen-ch/voty/compare/v1.33.0...v1.34.0) (2021-03-02)
 
 
