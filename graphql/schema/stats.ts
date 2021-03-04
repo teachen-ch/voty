@@ -1,5 +1,5 @@
 import resolvers from "../resolvers";
-import { extendType, intArg, objectType } from "@nexus/schema";
+import { extendType, floatArg, objectType } from "@nexus/schema";
 
 export const Stats = objectType({
   name: "Stats",
@@ -14,8 +14,8 @@ export const StatsQueries = extendType({
     t.field("stats", {
       type: "Stats",
       args: {
-        from: intArg(),
-        to: intArg(),
+        from: floatArg(),
+        to: floatArg(),
       },
       resolve: resolvers.stats.stats,
     });

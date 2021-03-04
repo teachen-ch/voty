@@ -3156,7 +3156,7 @@ type Query {
     orderBy: [SchoolOrderByInput!]
     where: SchoolWhereInput
   ): [School!]!
-  stats(from: Int, to: Int): Stats
+  stats(from: Float, to: Float): Stats
   swissvotes(
     hasPosters: Boolean
     keywords: String

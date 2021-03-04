@@ -9161,8 +9161,8 @@ export interface NexusGenArgTypes {
     };
     stats: {
       // args
-      from?: number | null; // Int
-      to?: number | null; // Int
+      from?: number | null; // Float
+      to?: number | null; // Float
     };
     swissvotes: {
       // args

@@ -3395,8 +3395,8 @@ export type QuerySchoolsArgs = {
 
 
 export type QueryStatsArgs = {
-  from?: Maybe<Scalars['Int']>;
-  to?: Maybe<Scalars['Int']>;
+  from?: Maybe<Scalars['Float']>;
+  to?: Maybe<Scalars['Float']>;
 };
 
 
@@ -8547,8 +8547,8 @@ export type PostWorkMutation = (
 );
 
 export type StatsQueryVariables = Exact<{
-  from?: Maybe<Scalars['Int']>;
-  to?: Maybe<Scalars['Int']>;
+  from?: Maybe<Scalars['Float']>;
+  to?: Maybe<Scalars['Float']>;
 }>;
 
 
@@ -10327,7 +10327,7 @@ export type PostWorkMutationHookResult = ReturnType<typeof usePostWorkMutation>;
 export type PostWorkMutationResult = Apollo.MutationResult<PostWorkMutation>;
 export type PostWorkMutationOptions = Apollo.BaseMutationOptions<PostWorkMutation, PostWorkMutationVariables>;
 export const StatsDocument = gql`
-    query stats($from: Int, $to: Int) {
+    query stats($from: Float, $to: Float) {
   stats(from: $from, to: $to) {
     stats
   }
