@@ -1,3 +1,12 @@
+# [1.37.0](https://github.com/teachen-ch/voty/compare/v1.36.0...v1.37.0) (2021-03-04)
+
+
+### Features
+
+* implement [#125](https://github.com/teachen-ch/voty/issues/125) ballot comparison ([b3cbe80](https://github.com/teachen-ch/voty/commit/b3cbe80b2e172765ed389763e376008ba114c526))
+* Implement more statistics ([0c67568](https://github.com/teachen-ch/voty/commit/0c67568a64a3b49413ebb7232afcc571b34bf77c))
+* new Feedback Form for students ([ec8f3bd](https://github.com/teachen-ch/voty/commit/ec8f3bd8c9767015d2e51291ac4f74b4c1ee01b5))
+
 # [1.36.0](https://github.com/teachen-ch/voty/compare/v1.35.0...v1.36.0) (2021-03-03)
 
 
