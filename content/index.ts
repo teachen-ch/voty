@@ -13,6 +13,7 @@ export * as lernfilm from "content/tools/lernfilm.mdx";
 export * as tweety from "content/tools/tweety.mdx";
 export * as demokratie_international from "content/tools/demokratie_international.mdx";
 export * as parteien from "content/tools/parteien.mdx";
+export * as feedback from "content/tools/feedback.mdx";
 
 export * as chaty_demokratie_griechenland from "content/chaty/chaty_demokratie_griechenland.mdx";
 export * as chaty_demokratie_intro from "content/chaty/chaty_demokratie_intro.mdx";
