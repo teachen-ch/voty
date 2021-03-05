@@ -1,3 +1,10 @@
+# [1.38.0](https://github.com/teachen-ch/voty/compare/v1.37.0...v1.38.0) (2021-03-05)
+
+
+### Features
+
+* add admin view on ballot results ([777b4eb](https://github.com/teachen-ch/voty/commit/777b4eba2eb9615ba8ec6b83b17721ccfac5a244))
+
 # [1.37.0](https://github.com/teachen-ch/voty/compare/v1.36.0...v1.37.0) (2021-03-04)
 
 
