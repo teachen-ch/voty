@@ -29,6 +29,11 @@ export default function AdminHome(): ReactElement {
           </Link>
         </Text>
         <Text>
+          <Link href="/admin/ballots">
+            <A>🗳 Abstimmungen</A>
+          </Link>
+        </Text>
+        <Text>
           <Link href="/admin/stats">
             <A>📈 Statistiken</A>
           </Link>
