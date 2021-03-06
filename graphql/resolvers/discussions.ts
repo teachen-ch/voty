@@ -53,6 +53,7 @@ export const postDiscussion: FieldResolver<
 };
 
 async function assertTeam(teamId: string, user: User, ctx: Context) {
+  if (user.role === Role.Admin) return;
   if (user.role === Role.Teacher) {
     const team = await ctx.db.team.findUnique({ where: { id: teamId } });
     if (!team || team.teacherId !== user.id)

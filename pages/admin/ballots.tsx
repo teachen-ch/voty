@@ -45,27 +45,3 @@ const Results: React.FC<{ ballotId: string }> = ({ ballotId }) => {
   const results = resultsQuery.data?.getBallotResults;
   return <BallotResults results={results} />;
 };
-
-const Filter: React.FC<{
-  set: () => void;
-  sf: (val: string) => void;
-  f: string;
-  l: string;
-  sep?: boolean;
-}> = ({ set, sf, l, f, sep }) => (
-  <>
-    <A
-      onClick={() => {
-        set();
-        sf(l);
-      }}
-      sx={{
-        fontWeight: f === l ? "bold" : "normal",
-        textDecoration: f === l ? "underline" : "none",
-      }}
-    >
-      {l}
-    </A>
-    {sep && "  |  "}
-  </>
-);

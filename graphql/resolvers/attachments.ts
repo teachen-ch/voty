@@ -1,4 +1,5 @@
 import { FieldResolver } from "@nexus/schema";
+import { Role } from "@prisma/client";
 import { getTeacherTeams } from "./teams";
 
 export const attachments: FieldResolver<"Query", "attachments"> = async (
@@ -21,7 +22,10 @@ export const attachments: FieldResolver<"Query", "attachments"> = async (
 
   // only return activities from own team
   attachments = attachments.filter(
-    (act) => act.teamId === user.teamId || teams.indexOf(act.teamId) >= 0
+    (act) =>
+      act.teamId === user.teamId ||
+      teams.indexOf(act.teamId) >= 0 ||
+      user.role === Role.Admin
   );
   return attachments;
 };

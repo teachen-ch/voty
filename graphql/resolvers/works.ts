@@ -19,6 +19,7 @@ export const works: FieldResolver<"Query", "works"> = async (
 
   // only return public works or works from users's school / class
   works = works.filter((work) => {
+    if (user?.role === Role.Admin) return true;
     if (work.visibility === Visibility.Public) return true;
     if (work.visibility === Visibility.School)
       return work.schoolId === user?.schoolId;

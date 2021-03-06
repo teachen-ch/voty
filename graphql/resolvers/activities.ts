@@ -26,7 +26,10 @@ export const activities: FieldResolver<"Query", "activities"> = async (
 
   // only return activities from own team
   activities = activities.filter(
-    (act) => act.teamId === user.teamId || teams.indexOf(act.teamId) >= 0
+    (act) =>
+      act.teamId === user.teamId ||
+      teams.indexOf(act.teamId) >= 0 ||
+      user.role === Role.Admin
   );
   return activities;
 };
