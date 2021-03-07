@@ -1,3 +1,11 @@
+# [1.39.0](https://github.com/teachen-ch/voty/compare/v1.38.0...v1.39.0) (2021-03-07)
+
+
+### Features
+
+* add reload functionality to student progress sheet ([5d1bc8d](https://github.com/teachen-ch/voty/commit/5d1bc8d6198d84c1f82895b7964a59dc3b9b89e5))
+* allow admin role access to team artifacts ([f8531a1](https://github.com/teachen-ch/voty/commit/f8531a14ae4580a6bfad8cf81e1e978815e96eae))
+
 # [1.38.0](https://github.com/teachen-ch/voty/compare/v1.37.0...v1.38.0) (2021-03-05)
 
 
