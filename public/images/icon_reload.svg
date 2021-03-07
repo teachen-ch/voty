@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="14px" height="14px" viewBox="0 0 14 14" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Group</title>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round">
+        <g id="Group" transform="translate(1.431021, 1.252143)" stroke="#000000">
+            <path d="M0.910809781,8.85412196 C1.93341476,10.4432223 3.71772453,11.4957136 5.74785682,11.4957136 C7.98061475,11.4957136 9.91603068,10.2226412 10.8678227,8.36277808 C11.0905242,7.92760512 11.259375,7.46030703 11.365584,6.96967494 M11.0059091,3.42249798 C10.1130139,1.40647696 8.09468551,0 5.74785682,0 C2.57340315,0 0,2.57340315 0,5.74785682" id="Shape" stroke-linejoin="bevel"></path>
+            <polyline id="Path" stroke-linejoin="round" transform="translate(10.389278, 2.311831) rotate(13.000000) translate(-10.389278, -2.311831) " points="10.7998394 1.08014717 11.6209618 3.54351438 9.15759456 2.92767258"></polyline>
+            <polyline id="Path-Copy" stroke-linejoin="round" transform="translate(1.994907, 10.145071) rotate(-176.000000) translate(-1.994907, -10.145071) " points="2.40546788 8.91338741 3.22659028 11.3767546 0.763223075 10.7609128"></polyline>
+        </g>
+    </g>
+</svg>

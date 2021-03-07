@@ -1,7 +1,7 @@
 import { createUser, connectUserTeam } from "./users";
 import { FieldResolver } from "@nexus/schema";
 import { Role, PrismaClient, Visibility, ActivityType } from "@prisma/client";
-import { upperFirst, find } from "lodash";
+import { upperFirst, find, uniq, findIndex } from "lodash";
 import { User as PrismaUser } from "@prisma/client";
 import { fetchMails } from "../../util/imap";
 import logger from "../../util/logger";
@@ -176,9 +176,12 @@ export const progress: FieldResolver<"Query", "progress"> = async (
     include: { members: true },
   });
 
-  if (!user || user.id !== team?.teacherId)
+  if (!user || !team) throw new Error("Error.NoPermission");
+
+  if (user.id !== team?.teacherId || user.role === Role.Admin)
     throw new Error("Error.NoPermission");
 
+  // load all works for this team
   const works = await ctx.db.work.findMany({
     where: { team: { id: teamId } },
     include: { users: true },
@@ -187,10 +190,12 @@ export const progress: FieldResolver<"Query", "progress"> = async (
   const cards: ProgressCard[] = [];
   const students: ProgressStudent[] = [];
 
+  // initialize students
   team.members.forEach((user) =>
     students.push({ id: user.id, email: user.email, done: [], due: [] })
   );
 
+  // initialize cards
   teamCards.forEach((card) =>
     cards.push({
       id: card,
@@ -215,6 +220,11 @@ export const progress: FieldResolver<"Query", "progress"> = async (
       .map((user) => {
         return { id: user.id, email: user.email, role: Role.Student };
       }) as User[];
+    // filter out duplicate students
+    card.done = card.done?.filter(
+      (s, i) =>
+        findIndex(card.done, (t) => t?.id === s?.id) === i && s?.id !== user.id
+    );
   });
   // likewise we compute student.due
   students.forEach((student) => {
