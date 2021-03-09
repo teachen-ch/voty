@@ -5,7 +5,8 @@ import { trackEvent } from "util/stats";
 import { useRouter } from "next/router";
 import { Text } from "rebass";
 
-const ASK_DEMOGRAPHICS = false;
+const SKIP_DEMOGRAPHICS =
+  process.env.SKIP_DEMOGRAPHICS?.toUpperCase() === "TRUE";
 
 export default function StudentHome(): React.ReactElement {
   const user = useUser();
@@ -17,7 +18,7 @@ export default function StudentHome(): React.ReactElement {
   }
 
   // ask for demographics on first login
-  if (ASK_DEMOGRAPHICS && user.year === null) {
+  if (user.year === null && !SKIP_DEMOGRAPHICS) {
     trackEvent({ category: "Student", action: "FirstRun" });
     return (
       <LoggedInPage heading={`Hallo ${user?.name}`}>
