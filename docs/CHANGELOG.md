@@ -1,3 +1,11 @@
+## [1.39.1](https://github.com/teachen-ch/voty/compare/v1.39.0...v1.39.1) (2021-03-09)
+
+
+### Bug Fixes
+
+* add prismjs to resolve security issue ([4731249](https://github.com/teachen-ch/voty/commit/473124903f848f70fb1db21b03838179654c63c7))
+* search swiss ballots with multi wildcards ([9f80f13](https://github.com/teachen-ch/voty/commit/9f80f133389a960dde0b5c0a8f599f2a35e7dcee))
+
 # [1.39.0](https://github.com/teachen-ch/voty/compare/v1.38.0...v1.39.0) (2021-03-07)
 
 
