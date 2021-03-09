@@ -12,7 +12,7 @@ export const swissvotes: FieldResolver<"Query", "swissvotes"> = async (
   if (keywords) {
     // sanitize keywords
     let words = keywords.replace(/[$<>\\'"%]/g, "");
-    words = keywords.replace(/\*/, "%");
+    words = keywords.replace(/\*/g, "%");
     for (const word of words.split(/[\s.,-:]+/)) {
       query += "(";
       for (const field of ["titel_kurz_d", "stichwort", "kategorien"]) {
