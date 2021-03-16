@@ -1,3 +1,10 @@
+# [1.41.0](https://github.com/teachen-ch/voty/compare/v1.40.0...v1.41.0) (2021-03-16)
+
+
+### Features
+
+* added uptime monitoring ([ecff7f6](https://github.com/teachen-ch/voty/commit/ecff7f683b756af49bf1e8133b21c4ace649b306))
+
 # [1.40.0](https://github.com/teachen-ch/voty/compare/v1.39.1...v1.40.0) (2021-03-09)
 
 
