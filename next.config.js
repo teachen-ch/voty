@@ -19,7 +19,8 @@ module.exports = withMDX({
         permanent: true,
       },
       { source: '/uptime',
-        destination: 'https://updown.io/p9am'
+        destination: 'https://updown.io/p9am',
+        permanent: true,
       }
     ]}
 });
