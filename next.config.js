@@ -18,5 +18,8 @@ module.exports = withMDX({
         destination: '/abstimmen',
         permanent: true,
       },
+      { source: '/uptime',
+        destination: 'https://updown.io/p9am'
+      }
     ]}
 });
