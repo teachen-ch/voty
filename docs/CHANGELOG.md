@@ -1,3 +1,10 @@
+# [1.40.0](https://github.com/teachen-ch/voty/compare/v1.39.1...v1.40.0) (2021-03-09)
+
+
+### Features
+
+* configure demographics in .env file ([ddef44a](https://github.com/teachen-ch/voty/commit/ddef44ac9a6e474a7584c7f529fef022304d4a51))
+
 ## [1.39.1](https://github.com/teachen-ch/voty/compare/v1.39.0...v1.39.1) (2021-03-09)
 
 
