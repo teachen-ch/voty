@@ -1,3 +1,15 @@
+# [1.42.0](https://github.com/teachen-ch/voty/compare/v1.41.0...v1.42.0) (2021-03-16)
+
+
+### Bug Fixes
+
+* updated redirect config ([3cc7782](https://github.com/teachen-ch/voty/commit/3cc7782fa45e1679c23916840565501a3e838c40))
+
+
+### Features
+
+* updated browser list ([ddcff16](https://github.com/teachen-ch/voty/commit/ddcff169a810682d74c7c8d56c3d051c864256f2))
+
 # [1.41.0](https://github.com/teachen-ch/voty/compare/v1.40.0...v1.41.0) (2021-03-16)
 
 
