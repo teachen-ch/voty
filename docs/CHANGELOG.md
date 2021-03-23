@@ -1,3 +1,10 @@
+## [1.42.1](https://github.com/teachen-ch/voty/compare/v1.42.0...v1.42.1) (2021-03-23)
+
+
+### Bug Fixes
+
+* fix dependabot alerts ([db1b2af](https://github.com/teachen-ch/voty/commit/db1b2afc9ecb224d057879c15d3cf3a34eead5d3))
+
 # [1.42.0](https://github.com/teachen-ch/voty/compare/v1.41.0...v1.42.0) (2021-03-16)
 
 
