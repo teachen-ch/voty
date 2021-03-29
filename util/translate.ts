@@ -26,6 +26,7 @@ const messages: Translations = {
     EmailNotFound: "Email-Adresse wurde nicht gefunden",
     EmailNotVerified: "Deine Email-Adresse ist noch nicht bestätigt",
     InviteNotFound: "Die Einladung wurde nicht gefunden",
+    InviteTeacherRole: "Du bist aktuell als Lehrperson angemeldet",
     MissingParameter: "Eine Eingabe fehlt",
     NeedsLogin: "Eine Anmeldung wird benötigt für diese Funktion",
     NotYourTeam: "Du bist nicht in dieser Klasse angemeldet",

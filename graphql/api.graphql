@@ -4309,6 +4309,7 @@ type Team {
   prefs: Json!
   school: School!
   teacher: User!
+  teacherId: String!
 }
 
 input TeamCreateInput {

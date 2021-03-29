@@ -22,6 +22,7 @@ export const Team = objectType({
     t.model.domain();
     t.model.school();
     t.model.teacher();
+    t.model.teacherId();
     t.model.members();
     t.model.ballots();
     t.model.cards();

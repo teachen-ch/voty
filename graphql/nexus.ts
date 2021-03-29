@@ -8329,6 +8329,7 @@ export interface NexusGenObjects {
     name: string; // String!
     notes: NexusGenScalars["Json"]; // Json!
     prefs: NexusGenScalars["Json"]; // Json!
+    teacherId: string; // String!
   };
   User: {
     // root type
@@ -8604,6 +8605,7 @@ export interface NexusGenFieldTypes {
     prefs: NexusGenScalars["Json"]; // Json!
     school: NexusGenRootTypes["School"]; // School!
     teacher: NexusGenRootTypes["User"]; // User!
+    teacherId: string; // String!
   };
   User: {
     // field return type
@@ -8881,6 +8883,7 @@ export interface NexusGenFieldTypeNames {
     prefs: "Json";
     school: "School";
     teacher: "User";
+    teacherId: "String";
   };
   User: {
     // field return type name

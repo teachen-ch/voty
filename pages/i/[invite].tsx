@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { AppPage } from "../../components/Page";
+import { AppPage, Err } from "../../components/Page";
 import { gql } from "@apollo/client";
 import { ErrorBox } from "../../components/Form";
 import { Heading, Box, Button, Text } from "rebass";
@@ -14,6 +14,7 @@ import {
   useCreateInvitedUserMutation,
   useAcceptInviteMutation,
   TeamAnonFieldsFragment,
+  Role,
 } from "graphql/types";
 import CheckLogin from "components/CheckLogin";
 
@@ -39,8 +40,8 @@ export const CREATE_INVITED_USER = gql`
 `;
 
 export const ACCEPT_INVITE = gql`
-  mutation acceptInvite($invite: String!) {
-    acceptInvite(invite: $invite) {
+  mutation acceptInvite($invite: String!, $force: Boolean) {
+    acceptInvite(invite: $invite, force: $force) {
       id
       name
       school {
@@ -94,7 +95,11 @@ const Invite: React.FC = () => {
   }
 
   if (existingUser) {
-    return <AcceptInvite user={existingUser} invite={invite} team={team} />;
+    return (
+      <AppPage heading="Klassen-Einladung">
+        <AcceptInvite user={existingUser} invite={invite} team={team} />
+      </AppPage>
+    );
   }
 
   if (newUser !== undefined) {
@@ -134,15 +139,16 @@ export default Invite;
 
 type AcceptInviteProps = {
   invite: string;
-  user: SessionUser; // TODO: NEXUSTYPE find out how to import Nexus Types here
-  team: TeamAnonFieldsFragment; // TODO: NEXUSTYPE find out how to import Nexus Types here
+  user: SessionUser;
+  team: TeamAnonFieldsFragment;
 };
-const AcceptInvite: React.FC<AcceptInviteProps> = ({ invite, team }) => {
+const AcceptInvite: React.FC<AcceptInviteProps> = ({ invite, team, user }) => {
   const [error, setError] = useState("");
+  const [force, setForce] = useState(false);
   const [success, setSuccess] = useState(false);
   const router = useRouter();
   const [doAcceptInvite] = useAcceptInviteMutation({
-    variables: { invite },
+    variables: { invite, force },
     onCompleted() {
       setSuccess(true);
       setError("");
@@ -157,14 +163,54 @@ const AcceptInvite: React.FC<AcceptInviteProps> = ({ invite, team }) => {
   });
   if (success) {
     return (
-      <AppPage heading="Klassen-Einladung">
-        <Text my={4}>Du bist angemeldet in der Klasse «{team.name}»</Text>
+      <>
+        <Text my={4}>Du bist nun angemeldet in der Klasse «{team.name}»</Text>
         <Button onClick={() => router.push("/")}>Weiter geht&apos;s</Button>
-      </AppPage>
+      </>
+    );
+  }
+  if (!user) {
+    return <Err msg="Du musst Dich zuerst anmelden" />;
+  }
+  if (team.teacherId === user.id) {
+    return (
+      <>
+        <Heading as="h2">
+          Einladung für die Klasse «{team.name}» in der Schule «
+          {team.school?.name}»
+        </Heading>
+        <Text mb={3} fontSize={[2, 2, 3]}>
+          Erstelle einen neuen Schüler*innen Account für voty.ch. Bitte nutze
+          die Email-Adresse Deiner Schule.
+        </Text>
+        <CreateUserForm
+          setUser={() => alert("Du bist bereits angemeldet")}
+          onSubmit={() => alert("Du bist bereits angemeldet")}
+          omitRole
+          omitPassword
+          omitFirstname
+          omitLastname
+          defaultRole="Student"
+        />
+      </>
+    );
+  }
+  if (user.role === Role.Teacher && !force) {
+    return (
+      <>
+        <Text>
+          Achtung: Du bist auf der Einladungsseite der Klasse «{team.name}» aber
+          Du bist als Lehrperson angemeldet.
+        </Text>
+        <Err msg="Du wirst voty.ch nicht mehr als Lehrperson verwenden können!" />
+        <Button onClick={() => setForce(true)}>
+          Als Schüler*in weiterfahren?
+        </Button>
+      </>
     );
   }
   return (
-    <AppPage heading="Klassen-Einladung">
+    <>
       <Text>
         Einladung für Klasse «{team.name}» in der Schule «{team.school?.name}»
       </Text>
@@ -172,6 +218,6 @@ const AcceptInvite: React.FC<AcceptInviteProps> = ({ invite, team }) => {
         Einladung annehmen
       </Button>
       <ErrorBox error={error} />
-    </AppPage>
+    </>
   );
 };

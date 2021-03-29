@@ -4570,6 +4570,7 @@ export type Team = {
   prefs: Scalars['Json'];
   school: School;
   teacher: User;
+  teacherId: Scalars['String'];
 };
 
 
@@ -8291,7 +8292,7 @@ export type SwissvotesQuery = (
 
 export type TeamAnonFieldsFragment = (
   { __typename?: 'Team' }
-  & Pick<Team, 'id' | 'name' | 'cards' | 'prefs' | 'notes'>
+  & Pick<Team, 'id' | 'name' | 'cards' | 'prefs' | 'notes' | 'teacherId'>
   & { school: (
     { __typename?: 'School' }
     & Pick<School, 'id' | 'name' | 'city'>
@@ -8625,6 +8626,7 @@ export type CreateInvitedUserMutation = (
 
 export type AcceptInviteMutationVariables = Exact<{
   invite: Scalars['String'];
+  force?: Maybe<Scalars['Boolean']>;
 }>;
 
 
@@ -8852,6 +8854,7 @@ export const TeamAnonFieldsFragmentDoc = gql`
   cards
   prefs
   notes
+  teacherId
   school {
     id
     name
@@ -10511,8 +10514,8 @@ export type CreateInvitedUserMutationHookResult = ReturnType<typeof useCreateInv
 export type CreateInvitedUserMutationResult = Apollo.MutationResult<CreateInvitedUserMutation>;
 export type CreateInvitedUserMutationOptions = Apollo.BaseMutationOptions<CreateInvitedUserMutation, CreateInvitedUserMutationVariables>;
 export const AcceptInviteDocument = gql`
-    mutation acceptInvite($invite: String!) {
-  acceptInvite(invite: $invite) {
+    mutation acceptInvite($invite: String!, $force: Boolean) {
+  acceptInvite(invite: $invite, force: $force) {
     id
     name
     school {
@@ -10539,6 +10542,7 @@ export type AcceptInviteMutationFn = Apollo.MutationFunction<AcceptInviteMutatio
  * const [acceptInviteMutation, { data, loading, error }] = useAcceptInviteMutation({
  *   variables: {
  *      invite: // value for 'invite'
+ *      force: // value for 'force'
  *   },
  * });
  */

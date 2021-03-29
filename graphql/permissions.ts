@@ -181,6 +181,7 @@ export const permissions = shield(
       cards: allow,
       prefs: allow,
       notes: allow,
+      teacherId: allow, // needed to check if invite is by own teacher
       invite: or(isTeamTeacher, isAdmin),
       code: or(isTeamTeacher, isAdmin),
       members: or(isTeamMember, isAdmin),
