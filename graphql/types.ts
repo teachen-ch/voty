@@ -2879,6 +2879,7 @@ export type Mutation = {
 
 
 export type MutationAcceptInviteArgs = {
+  force?: Maybe<Scalars['Boolean']>;
   invite: Scalars['String'];
 };
 

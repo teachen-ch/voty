@@ -175,6 +175,14 @@ export const acceptInvite: FieldResolver<"Mutation", "acceptInvite"> = async (
   if (!team) throw new Error("Error.InviteNotFound");
   const user = getRequestUser(ctx);
   if (!user) throw new Error("Error.NeedsLogin");
+  if (user.role !== Role.Student) {
+    if (!args.force) throw new Error("Error.InviteTeacherRole");
+    // update Role to Student, only if «force» argument is present
+    await ctx.db.user.update({
+      where: { id: user.id },
+      data: { role: Role.Student },
+    });
+  }
   const success = await connectUserTeam(user, team, ctx);
   if (!success) throw new Error("Error.Database");
 

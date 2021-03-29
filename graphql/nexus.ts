@@ -8951,6 +8951,7 @@ export interface NexusGenArgTypes {
   Mutation: {
     acceptInvite: {
       // args
+      force?: boolean | null; // Boolean
       invite: string; // String!
     };
     addBallotRun: {

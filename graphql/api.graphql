@@ -2818,7 +2818,7 @@ input JsonNullableFilter {
 }
 
 type Mutation {
-  acceptInvite(invite: String!): Team
+  acceptInvite(force: Boolean, invite: String!): Team
   addBallotRun(ballotId: String!, teamId: String!): BallotRun
   changePassword(password: String): ResponseLogin
   checkVerification(token: String): ResponseLogin

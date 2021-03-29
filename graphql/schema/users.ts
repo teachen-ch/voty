@@ -1,5 +1,11 @@
 import { users } from "../resolvers";
-import { stringArg, objectType, extendType, nonNull } from "@nexus/schema";
+import {
+  stringArg,
+  objectType,
+  extendType,
+  nonNull,
+  booleanArg,
+} from "@nexus/schema";
 
 export const User = objectType({
   name: "User",
@@ -117,6 +123,7 @@ export const UserMutation = extendType({
       type: "Team",
       args: {
         invite: nonNull(stringArg()),
+        force: booleanArg(),
       },
       resolve: users.acceptInvite,
     });
