@@ -1,7 +1,7 @@
-import { createUser, connectUserTeam } from "./users";
+import { createUser, connectUserTeam, extractName } from "./users";
 import { FieldResolver } from "@nexus/schema";
 import { Role, PrismaClient, Visibility, ActivityType } from "@prisma/client";
-import { upperFirst, find, uniq, findIndex } from "lodash";
+import { find, findIndex } from "lodash";
 import { User as PrismaUser } from "@prisma/client";
 import { fetchMails } from "../../util/imap";
 import logger from "../../util/logger";
@@ -25,13 +25,13 @@ export const inviteStudents: FieldResolver<
 
   for (let i = 0; i < emails.length; ++i) {
     const email = emails[i];
-    const [name, lastname] = email.substring(0, email.indexOf("@")).split(".");
+    const [name, lastname] = extractName(email);
 
     const args = {
       data: {
         email,
-        name: upperFirst(name),
-        lastname: upperFirst(lastname),
+        name,
+        lastname: lastname,
         role: Role.Student,
         password: "", // login is not possible with empty password, but we can send user magic link
       },
