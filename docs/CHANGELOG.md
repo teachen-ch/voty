@@ -1,3 +1,11 @@
+# [1.43.0](https://github.com/teachen-ch/voty/compare/v1.42.1...v1.43.0) (2021-03-29)
+
+
+### Features
+
+* frontend to close [#124](https://github.com/teachen-ch/voty/issues/124) ([d76f71d](https://github.com/teachen-ch/voty/commit/d76f71db0a14e7c2db08d943135fd96b90457cd6))
+* updated backend for [#124](https://github.com/teachen-ch/voty/issues/124) ([8844b2c](https://github.com/teachen-ch/voty/commit/8844b2cf284e888471f6ca94540d1acc4e635f0e))
+
 ## [1.42.1](https://github.com/teachen-ch/voty/compare/v1.42.0...v1.42.1) (2021-03-23)
 
 
