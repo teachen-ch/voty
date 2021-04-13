@@ -1,3 +1,15 @@
+# [1.44.0](https://github.com/teachen-ch/voty/compare/v1.43.1...v1.44.0) (2021-04-13)
+
+
+### Bug Fixes
+
+* fixes for Prisma upgrade ([c5660f6](https://github.com/teachen-ch/voty/commit/c5660f6b13546f75cfee15116573387c1df747d5))
+
+
+### Features
+
+* upgrade PrismaJS to 2.21 with security fixes ([2e1fbe4](https://github.com/teachen-ch/voty/commit/2e1fbe4eadb89814fad0be3e5550a3815db5cc0a))
+
 ## [1.43.1](https://github.com/teachen-ch/voty/compare/v1.43.0...v1.43.1) (2021-04-13)
 
 
