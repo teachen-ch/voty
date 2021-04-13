@@ -122,9 +122,13 @@ export const createUser: FieldResolver<"Mutation", "createUser"> = async (
   ctx: Context
 ) => {
   try {
-    const { password, name, lastname, role } = args.data;
+    const { password, role } = args.data;
+    let { name, lastname } = args.data;
     const email = args.data.email?.toLowerCase();
     if (!email) throw new Error("Error.NoEmail");
+    if (!name && !lastname) {
+      [name, lastname] = extractName(email);
+    }
     const salt = await bcrypt.genSalt(10);
     const hashed = password
       ? await bcrypt.hash(String(password), salt)
@@ -530,3 +534,8 @@ export const deleteAccount: FieldResolver<"Mutation", "deleteAccount"> = async (
     throw new Error("Error.CannotDeleteAccount");
   }
 };
+
+export function extractName(email: string): [string, string] {
+  const [name, lastname] = email.substring(0, email.indexOf("@")).split(".");
+  return [upperFirst(name), upperFirst(lastname)];
+}
