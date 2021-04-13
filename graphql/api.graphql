@@ -4,172 +4,292 @@
 type Activity {
   ballotId: String
   card: String
-  id: Int!
-  school: School!
+  id: Int
+  school: School
   summary: String
-  team: Team!
-  time: DateTime!
-  type: ActivityType!
-  user: User!
-  visibility: Visibility!
+  team: Team
+  time: DateTime
+  type: ActivityType
+  user: User
+  visibility: Visibility
   workId: String
 }
 
 input ActivityCreateInput {
-  ballot: BallotCreateOneWithoutActivityInput
+  ballot: BallotCreateNestedOneWithoutActivityInput
   card: String
-  discussion: DiscussionCreateOneWithoutActivityInput
-  school: SchoolCreateOneWithoutActivityInput!
+  discussion: DiscussionCreateNestedOneWithoutActivityInput
+  school: SchoolCreateNestedOneWithoutActivityInput!
   summary: String
-  team: TeamCreateOneWithoutActivityInput!
+  team: TeamCreateNestedOneWithoutActivityInput!
   time: DateTime
   type: ActivityType!
-  user: UserCreateOneWithoutActivityInput!
+  user: UserCreateNestedOneWithoutActivityInput!
   visibility: Visibility!
-  work: WorkCreateOneWithoutActivitiesInput
+  work: WorkCreateNestedOneWithoutActivitiesInput
 }
 
-input ActivityCreateManyWithoutBallotInput {
+input ActivityCreateManyBallotInput {
+  card: String
+  discussionId: String
+  id: Int
+  schoolId: String!
+  summary: String
+  teamId: String!
+  time: DateTime
+  type: ActivityType!
+  userId: String!
+  visibility: Visibility!
+  workId: String
+}
+
+input ActivityCreateManyBallotInputEnvelope {
+  data: [ActivityCreateManyBallotInput!]
+  skipDuplicates: Boolean
+}
+
+input ActivityCreateManyDiscussionInput {
+  ballotId: String
+  card: String
+  id: Int
+  schoolId: String!
+  summary: String
+  teamId: String!
+  time: DateTime
+  type: ActivityType!
+  userId: String!
+  visibility: Visibility!
+  workId: String
+}
+
+input ActivityCreateManyDiscussionInputEnvelope {
+  data: [ActivityCreateManyDiscussionInput!]
+  skipDuplicates: Boolean
+}
+
+input ActivityCreateManySchoolInput {
+  ballotId: String
+  card: String
+  discussionId: String
+  id: Int
+  summary: String
+  teamId: String!
+  time: DateTime
+  type: ActivityType!
+  userId: String!
+  visibility: Visibility!
+  workId: String
+}
+
+input ActivityCreateManySchoolInputEnvelope {
+  data: [ActivityCreateManySchoolInput!]
+  skipDuplicates: Boolean
+}
+
+input ActivityCreateManyTeamInput {
+  ballotId: String
+  card: String
+  discussionId: String
+  id: Int
+  schoolId: String!
+  summary: String
+  time: DateTime
+  type: ActivityType!
+  userId: String!
+  visibility: Visibility!
+  workId: String
+}
+
+input ActivityCreateManyTeamInputEnvelope {
+  data: [ActivityCreateManyTeamInput!]
+  skipDuplicates: Boolean
+}
+
+input ActivityCreateManyUserInput {
+  ballotId: String
+  card: String
+  discussionId: String
+  id: Int
+  schoolId: String!
+  summary: String
+  teamId: String!
+  time: DateTime
+  type: ActivityType!
+  visibility: Visibility!
+  workId: String
+}
+
+input ActivityCreateManyUserInputEnvelope {
+  data: [ActivityCreateManyUserInput!]
+  skipDuplicates: Boolean
+}
+
+input ActivityCreateManyWorkInput {
+  ballotId: String
+  card: String
+  discussionId: String
+  id: Int
+  schoolId: String!
+  summary: String
+  teamId: String!
+  time: DateTime
+  type: ActivityType!
+  userId: String!
+  visibility: Visibility!
+}
+
+input ActivityCreateManyWorkInputEnvelope {
+  data: [ActivityCreateManyWorkInput!]
+  skipDuplicates: Boolean
+}
+
+input ActivityCreateNestedManyWithoutBallotInput {
   connect: [ActivityWhereUniqueInput!]
-  connectOrCreate: [ActivityCreateOrConnectWithoutballotInput!]
+  connectOrCreate: [ActivityCreateOrConnectWithoutBallotInput!]
   create: [ActivityCreateWithoutBallotInput!]
+  createMany: ActivityCreateManyBallotInputEnvelope
 }
 
-input ActivityCreateManyWithoutDiscussionInput {
+input ActivityCreateNestedManyWithoutDiscussionInput {
   connect: [ActivityWhereUniqueInput!]
-  connectOrCreate: [ActivityCreateOrConnectWithoutdiscussionInput!]
+  connectOrCreate: [ActivityCreateOrConnectWithoutDiscussionInput!]
   create: [ActivityCreateWithoutDiscussionInput!]
+  createMany: ActivityCreateManyDiscussionInputEnvelope
 }
 
-input ActivityCreateManyWithoutSchoolInput {
+input ActivityCreateNestedManyWithoutSchoolInput {
   connect: [ActivityWhereUniqueInput!]
-  connectOrCreate: [ActivityCreateOrConnectWithoutschoolInput!]
+  connectOrCreate: [ActivityCreateOrConnectWithoutSchoolInput!]
   create: [ActivityCreateWithoutSchoolInput!]
+  createMany: ActivityCreateManySchoolInputEnvelope
 }
 
-input ActivityCreateManyWithoutTeamInput {
+input ActivityCreateNestedManyWithoutTeamInput {
   connect: [ActivityWhereUniqueInput!]
-  connectOrCreate: [ActivityCreateOrConnectWithoutteamInput!]
+  connectOrCreate: [ActivityCreateOrConnectWithoutTeamInput!]
   create: [ActivityCreateWithoutTeamInput!]
+  createMany: ActivityCreateManyTeamInputEnvelope
 }
 
-input ActivityCreateManyWithoutUserInput {
+input ActivityCreateNestedManyWithoutUserInput {
   connect: [ActivityWhereUniqueInput!]
-  connectOrCreate: [ActivityCreateOrConnectWithoutuserInput!]
+  connectOrCreate: [ActivityCreateOrConnectWithoutUserInput!]
   create: [ActivityCreateWithoutUserInput!]
+  createMany: ActivityCreateManyUserInputEnvelope
 }
 
-input ActivityCreateManyWithoutWorkInput {
+input ActivityCreateNestedManyWithoutWorkInput {
   connect: [ActivityWhereUniqueInput!]
-  connectOrCreate: [ActivityCreateOrConnectWithoutworkInput!]
+  connectOrCreate: [ActivityCreateOrConnectWithoutWorkInput!]
   create: [ActivityCreateWithoutWorkInput!]
+  createMany: ActivityCreateManyWorkInputEnvelope
 }
 
-input ActivityCreateOrConnectWithoutballotInput {
+input ActivityCreateOrConnectWithoutBallotInput {
   create: ActivityCreateWithoutBallotInput!
   where: ActivityWhereUniqueInput!
 }
 
-input ActivityCreateOrConnectWithoutdiscussionInput {
+input ActivityCreateOrConnectWithoutDiscussionInput {
   create: ActivityCreateWithoutDiscussionInput!
   where: ActivityWhereUniqueInput!
 }
 
-input ActivityCreateOrConnectWithoutschoolInput {
+input ActivityCreateOrConnectWithoutSchoolInput {
   create: ActivityCreateWithoutSchoolInput!
   where: ActivityWhereUniqueInput!
 }
 
-input ActivityCreateOrConnectWithoutteamInput {
+input ActivityCreateOrConnectWithoutTeamInput {
   create: ActivityCreateWithoutTeamInput!
   where: ActivityWhereUniqueInput!
 }
 
-input ActivityCreateOrConnectWithoutuserInput {
+input ActivityCreateOrConnectWithoutUserInput {
   create: ActivityCreateWithoutUserInput!
   where: ActivityWhereUniqueInput!
 }
 
-input ActivityCreateOrConnectWithoutworkInput {
+input ActivityCreateOrConnectWithoutWorkInput {
   create: ActivityCreateWithoutWorkInput!
   where: ActivityWhereUniqueInput!
 }
 
 input ActivityCreateWithoutBallotInput {
   card: String
-  discussion: DiscussionCreateOneWithoutActivityInput
-  school: SchoolCreateOneWithoutActivityInput!
+  discussion: DiscussionCreateNestedOneWithoutActivityInput
+  school: SchoolCreateNestedOneWithoutActivityInput!
   summary: String
-  team: TeamCreateOneWithoutActivityInput!
+  team: TeamCreateNestedOneWithoutActivityInput!
   time: DateTime
   type: ActivityType!
-  user: UserCreateOneWithoutActivityInput!
+  user: UserCreateNestedOneWithoutActivityInput!
   visibility: Visibility!
-  work: WorkCreateOneWithoutActivitiesInput
+  work: WorkCreateNestedOneWithoutActivitiesInput
 }
 
 input ActivityCreateWithoutDiscussionInput {
-  ballot: BallotCreateOneWithoutActivityInput
+  ballot: BallotCreateNestedOneWithoutActivityInput
   card: String
-  school: SchoolCreateOneWithoutActivityInput!
+  school: SchoolCreateNestedOneWithoutActivityInput!
   summary: String
-  team: TeamCreateOneWithoutActivityInput!
+  team: TeamCreateNestedOneWithoutActivityInput!
   time: DateTime
   type: ActivityType!
-  user: UserCreateOneWithoutActivityInput!
+  user: UserCreateNestedOneWithoutActivityInput!
   visibility: Visibility!
-  work: WorkCreateOneWithoutActivitiesInput
+  work: WorkCreateNestedOneWithoutActivitiesInput
 }
 
 input ActivityCreateWithoutSchoolInput {
-  ballot: BallotCreateOneWithoutActivityInput
+  ballot: BallotCreateNestedOneWithoutActivityInput
   card: String
-  discussion: DiscussionCreateOneWithoutActivityInput
+  discussion: DiscussionCreateNestedOneWithoutActivityInput
   summary: String
-  team: TeamCreateOneWithoutActivityInput!
+  team: TeamCreateNestedOneWithoutActivityInput!
   time: DateTime
   type: ActivityType!
-  user: UserCreateOneWithoutActivityInput!
+  user: UserCreateNestedOneWithoutActivityInput!
   visibility: Visibility!
-  work: WorkCreateOneWithoutActivitiesInput
+  work: WorkCreateNestedOneWithoutActivitiesInput
 }
 
 input ActivityCreateWithoutTeamInput {
-  ballot: BallotCreateOneWithoutActivityInput
+  ballot: BallotCreateNestedOneWithoutActivityInput
   card: String
-  discussion: DiscussionCreateOneWithoutActivityInput
-  school: SchoolCreateOneWithoutActivityInput!
+  discussion: DiscussionCreateNestedOneWithoutActivityInput
+  school: SchoolCreateNestedOneWithoutActivityInput!
   summary: String
   time: DateTime
   type: ActivityType!
-  user: UserCreateOneWithoutActivityInput!
+  user: UserCreateNestedOneWithoutActivityInput!
   visibility: Visibility!
-  work: WorkCreateOneWithoutActivitiesInput
+  work: WorkCreateNestedOneWithoutActivitiesInput
 }
 
 input ActivityCreateWithoutUserInput {
-  ballot: BallotCreateOneWithoutActivityInput
+  ballot: BallotCreateNestedOneWithoutActivityInput
   card: String
-  discussion: DiscussionCreateOneWithoutActivityInput
-  school: SchoolCreateOneWithoutActivityInput!
+  discussion: DiscussionCreateNestedOneWithoutActivityInput
+  school: SchoolCreateNestedOneWithoutActivityInput!
   summary: String
-  team: TeamCreateOneWithoutActivityInput!
+  team: TeamCreateNestedOneWithoutActivityInput!
   time: DateTime
   type: ActivityType!
   visibility: Visibility!
-  work: WorkCreateOneWithoutActivitiesInput
+  work: WorkCreateNestedOneWithoutActivitiesInput
 }
 
 input ActivityCreateWithoutWorkInput {
-  ballot: BallotCreateOneWithoutActivityInput
+  ballot: BallotCreateNestedOneWithoutActivityInput
   card: String
-  discussion: DiscussionCreateOneWithoutActivityInput
-  school: SchoolCreateOneWithoutActivityInput!
+  discussion: DiscussionCreateNestedOneWithoutActivityInput
+  school: SchoolCreateNestedOneWithoutActivityInput!
   summary: String
-  team: TeamCreateOneWithoutActivityInput!
+  team: TeamCreateNestedOneWithoutActivityInput!
   time: DateTime
   type: ActivityType!
-  user: UserCreateOneWithoutActivityInput!
+  user: UserCreateNestedOneWithoutActivityInput!
   visibility: Visibility!
 }
 
@@ -232,8 +352,9 @@ input ActivityUpdateManyMutationInput {
 
 input ActivityUpdateManyWithoutBallotInput {
   connect: [ActivityWhereUniqueInput!]
-  connectOrCreate: [ActivityCreateOrConnectWithoutballotInput!]
+  connectOrCreate: [ActivityCreateOrConnectWithoutBallotInput!]
   create: [ActivityCreateWithoutBallotInput!]
+  createMany: ActivityCreateManyBallotInputEnvelope
   delete: [ActivityWhereUniqueInput!]
   deleteMany: [ActivityScalarWhereInput!]
   disconnect: [ActivityWhereUniqueInput!]
@@ -245,8 +366,9 @@ input ActivityUpdateManyWithoutBallotInput {
 
 input ActivityUpdateManyWithoutDiscussionInput {
   connect: [ActivityWhereUniqueInput!]
-  connectOrCreate: [ActivityCreateOrConnectWithoutdiscussionInput!]
+  connectOrCreate: [ActivityCreateOrConnectWithoutDiscussionInput!]
   create: [ActivityCreateWithoutDiscussionInput!]
+  createMany: ActivityCreateManyDiscussionInputEnvelope
   delete: [ActivityWhereUniqueInput!]
   deleteMany: [ActivityScalarWhereInput!]
   disconnect: [ActivityWhereUniqueInput!]
@@ -258,8 +380,9 @@ input ActivityUpdateManyWithoutDiscussionInput {
 
 input ActivityUpdateManyWithoutSchoolInput {
   connect: [ActivityWhereUniqueInput!]
-  connectOrCreate: [ActivityCreateOrConnectWithoutschoolInput!]
+  connectOrCreate: [ActivityCreateOrConnectWithoutSchoolInput!]
   create: [ActivityCreateWithoutSchoolInput!]
+  createMany: ActivityCreateManySchoolInputEnvelope
   delete: [ActivityWhereUniqueInput!]
   deleteMany: [ActivityScalarWhereInput!]
   disconnect: [ActivityWhereUniqueInput!]
@@ -271,8 +394,9 @@ input ActivityUpdateManyWithoutSchoolInput {
 
 input ActivityUpdateManyWithoutTeamInput {
   connect: [ActivityWhereUniqueInput!]
-  connectOrCreate: [ActivityCreateOrConnectWithoutteamInput!]
+  connectOrCreate: [ActivityCreateOrConnectWithoutTeamInput!]
   create: [ActivityCreateWithoutTeamInput!]
+  createMany: ActivityCreateManyTeamInputEnvelope
   delete: [ActivityWhereUniqueInput!]
   deleteMany: [ActivityScalarWhereInput!]
   disconnect: [ActivityWhereUniqueInput!]
@@ -284,8 +408,9 @@ input ActivityUpdateManyWithoutTeamInput {
 
 input ActivityUpdateManyWithoutUserInput {
   connect: [ActivityWhereUniqueInput!]
-  connectOrCreate: [ActivityCreateOrConnectWithoutuserInput!]
+  connectOrCreate: [ActivityCreateOrConnectWithoutUserInput!]
   create: [ActivityCreateWithoutUserInput!]
+  createMany: ActivityCreateManyUserInputEnvelope
   delete: [ActivityWhereUniqueInput!]
   deleteMany: [ActivityScalarWhereInput!]
   disconnect: [ActivityWhereUniqueInput!]
@@ -297,8 +422,9 @@ input ActivityUpdateManyWithoutUserInput {
 
 input ActivityUpdateManyWithoutWorkInput {
   connect: [ActivityWhereUniqueInput!]
-  connectOrCreate: [ActivityCreateOrConnectWithoutworkInput!]
+  connectOrCreate: [ActivityCreateOrConnectWithoutWorkInput!]
   create: [ActivityCreateWithoutWorkInput!]
+  createMany: ActivityCreateManyWorkInputEnvelope
   delete: [ActivityWhereUniqueInput!]
   deleteMany: [ActivityScalarWhereInput!]
   disconnect: [ActivityWhereUniqueInput!]
@@ -511,77 +637,203 @@ input ActivityWhereUniqueInput {
 }
 
 type Attachment {
-  createdAt: DateTime!
+  createdAt: DateTime
+  file: String
+  id: String
+  title: String
+  type: String
+  updatedAt: DateTime
+  user: User
+}
+
+input AttachmentCreateManyBallotInput {
+  card: String
+  createdAt: DateTime
+  discussionId: String
   file: String!
-  id: String!
-  title: String!
-  type: String!
-  updatedAt: DateTime!
-  user: User!
+  id: String
+  schoolId: String
+  teamId: String!
+  title: String
+  type: String
+  updatedAt: DateTime
+  userId: String!
+  workId: String
 }
 
-input AttachmentCreateManyWithoutBallotInput {
+input AttachmentCreateManyBallotInputEnvelope {
+  data: [AttachmentCreateManyBallotInput!]
+  skipDuplicates: Boolean
+}
+
+input AttachmentCreateManyDiscussionInput {
+  ballotId: String
+  card: String
+  createdAt: DateTime
+  file: String!
+  id: String
+  schoolId: String
+  teamId: String!
+  title: String
+  type: String
+  updatedAt: DateTime
+  userId: String!
+  workId: String
+}
+
+input AttachmentCreateManyDiscussionInputEnvelope {
+  data: [AttachmentCreateManyDiscussionInput!]
+  skipDuplicates: Boolean
+}
+
+input AttachmentCreateManySchoolInput {
+  ballotId: String
+  card: String
+  createdAt: DateTime
+  discussionId: String
+  file: String!
+  id: String
+  teamId: String!
+  title: String
+  type: String
+  updatedAt: DateTime
+  userId: String!
+  workId: String
+}
+
+input AttachmentCreateManySchoolInputEnvelope {
+  data: [AttachmentCreateManySchoolInput!]
+  skipDuplicates: Boolean
+}
+
+input AttachmentCreateManyTeamInput {
+  ballotId: String
+  card: String
+  createdAt: DateTime
+  discussionId: String
+  file: String!
+  id: String
+  schoolId: String
+  title: String
+  type: String
+  updatedAt: DateTime
+  userId: String!
+  workId: String
+}
+
+input AttachmentCreateManyTeamInputEnvelope {
+  data: [AttachmentCreateManyTeamInput!]
+  skipDuplicates: Boolean
+}
+
+input AttachmentCreateManyUserInput {
+  ballotId: String
+  card: String
+  createdAt: DateTime
+  discussionId: String
+  file: String!
+  id: String
+  schoolId: String
+  teamId: String!
+  title: String
+  type: String
+  updatedAt: DateTime
+  workId: String
+}
+
+input AttachmentCreateManyUserInputEnvelope {
+  data: [AttachmentCreateManyUserInput!]
+  skipDuplicates: Boolean
+}
+
+input AttachmentCreateManyWorkInput {
+  ballotId: String
+  card: String
+  createdAt: DateTime
+  discussionId: String
+  file: String!
+  id: String
+  schoolId: String
+  teamId: String!
+  title: String
+  type: String
+  updatedAt: DateTime
+  userId: String!
+}
+
+input AttachmentCreateManyWorkInputEnvelope {
+  data: [AttachmentCreateManyWorkInput!]
+  skipDuplicates: Boolean
+}
+
+input AttachmentCreateNestedManyWithoutBallotInput {
   connect: [AttachmentWhereUniqueInput!]
-  connectOrCreate: [AttachmentCreateOrConnectWithoutballotInput!]
+  connectOrCreate: [AttachmentCreateOrConnectWithoutBallotInput!]
   create: [AttachmentCreateWithoutBallotInput!]
+  createMany: AttachmentCreateManyBallotInputEnvelope
 }
 
-input AttachmentCreateManyWithoutDiscussionInput {
+input AttachmentCreateNestedManyWithoutDiscussionInput {
   connect: [AttachmentWhereUniqueInput!]
-  connectOrCreate: [AttachmentCreateOrConnectWithoutdiscussionInput!]
+  connectOrCreate: [AttachmentCreateOrConnectWithoutDiscussionInput!]
   create: [AttachmentCreateWithoutDiscussionInput!]
+  createMany: AttachmentCreateManyDiscussionInputEnvelope
 }
 
-input AttachmentCreateManyWithoutSchoolInput {
+input AttachmentCreateNestedManyWithoutSchoolInput {
   connect: [AttachmentWhereUniqueInput!]
-  connectOrCreate: [AttachmentCreateOrConnectWithoutschoolInput!]
+  connectOrCreate: [AttachmentCreateOrConnectWithoutSchoolInput!]
   create: [AttachmentCreateWithoutSchoolInput!]
+  createMany: AttachmentCreateManySchoolInputEnvelope
 }
 
-input AttachmentCreateManyWithoutTeamInput {
+input AttachmentCreateNestedManyWithoutTeamInput {
   connect: [AttachmentWhereUniqueInput!]
-  connectOrCreate: [AttachmentCreateOrConnectWithoutteamInput!]
+  connectOrCreate: [AttachmentCreateOrConnectWithoutTeamInput!]
   create: [AttachmentCreateWithoutTeamInput!]
+  createMany: AttachmentCreateManyTeamInputEnvelope
 }
 
-input AttachmentCreateManyWithoutUserInput {
+input AttachmentCreateNestedManyWithoutUserInput {
   connect: [AttachmentWhereUniqueInput!]
-  connectOrCreate: [AttachmentCreateOrConnectWithoutuserInput!]
+  connectOrCreate: [AttachmentCreateOrConnectWithoutUserInput!]
   create: [AttachmentCreateWithoutUserInput!]
+  createMany: AttachmentCreateManyUserInputEnvelope
 }
 
-input AttachmentCreateManyWithoutWorkInput {
+input AttachmentCreateNestedManyWithoutWorkInput {
   connect: [AttachmentWhereUniqueInput!]
-  connectOrCreate: [AttachmentCreateOrConnectWithoutworkInput!]
+  connectOrCreate: [AttachmentCreateOrConnectWithoutWorkInput!]
   create: [AttachmentCreateWithoutWorkInput!]
+  createMany: AttachmentCreateManyWorkInputEnvelope
 }
 
-input AttachmentCreateOrConnectWithoutballotInput {
+input AttachmentCreateOrConnectWithoutBallotInput {
   create: AttachmentCreateWithoutBallotInput!
   where: AttachmentWhereUniqueInput!
 }
 
-input AttachmentCreateOrConnectWithoutdiscussionInput {
+input AttachmentCreateOrConnectWithoutDiscussionInput {
   create: AttachmentCreateWithoutDiscussionInput!
   where: AttachmentWhereUniqueInput!
 }
 
-input AttachmentCreateOrConnectWithoutschoolInput {
+input AttachmentCreateOrConnectWithoutSchoolInput {
   create: AttachmentCreateWithoutSchoolInput!
   where: AttachmentWhereUniqueInput!
 }
 
-input AttachmentCreateOrConnectWithoutteamInput {
+input AttachmentCreateOrConnectWithoutTeamInput {
   create: AttachmentCreateWithoutTeamInput!
   where: AttachmentWhereUniqueInput!
 }
 
-input AttachmentCreateOrConnectWithoutuserInput {
+input AttachmentCreateOrConnectWithoutUserInput {
   create: AttachmentCreateWithoutUserInput!
   where: AttachmentWhereUniqueInput!
 }
 
-input AttachmentCreateOrConnectWithoutworkInput {
+input AttachmentCreateOrConnectWithoutWorkInput {
   create: AttachmentCreateWithoutWorkInput!
   where: AttachmentWhereUniqueInput!
 }
@@ -589,91 +841,91 @@ input AttachmentCreateOrConnectWithoutworkInput {
 input AttachmentCreateWithoutBallotInput {
   card: String
   createdAt: DateTime
-  discussion: DiscussionCreateOneWithoutAttachmentsInput
+  discussion: DiscussionCreateNestedOneWithoutAttachmentsInput
   file: String!
   id: String
-  school: SchoolCreateOneWithoutAttachmentInput
-  team: TeamCreateOneWithoutAttachmentInput!
+  school: SchoolCreateNestedOneWithoutAttachmentInput
+  team: TeamCreateNestedOneWithoutAttachmentInput!
   title: String
   type: String
   updatedAt: DateTime
-  user: UserCreateOneWithoutAttachmentsInput!
-  work: WorkCreateOneWithoutAttachmentsInput
+  user: UserCreateNestedOneWithoutAttachmentsInput!
+  work: WorkCreateNestedOneWithoutAttachmentsInput
 }
 
 input AttachmentCreateWithoutDiscussionInput {
-  ballot: BallotCreateOneWithoutAttachmentsInput
+  ballot: BallotCreateNestedOneWithoutAttachmentsInput
   card: String
   createdAt: DateTime
   file: String!
   id: String
-  school: SchoolCreateOneWithoutAttachmentInput
-  team: TeamCreateOneWithoutAttachmentInput!
+  school: SchoolCreateNestedOneWithoutAttachmentInput
+  team: TeamCreateNestedOneWithoutAttachmentInput!
   title: String
   type: String
   updatedAt: DateTime
-  user: UserCreateOneWithoutAttachmentsInput!
-  work: WorkCreateOneWithoutAttachmentsInput
+  user: UserCreateNestedOneWithoutAttachmentsInput!
+  work: WorkCreateNestedOneWithoutAttachmentsInput
 }
 
 input AttachmentCreateWithoutSchoolInput {
-  ballot: BallotCreateOneWithoutAttachmentsInput
+  ballot: BallotCreateNestedOneWithoutAttachmentsInput
   card: String
   createdAt: DateTime
-  discussion: DiscussionCreateOneWithoutAttachmentsInput
+  discussion: DiscussionCreateNestedOneWithoutAttachmentsInput
   file: String!
   id: String
-  team: TeamCreateOneWithoutAttachmentInput!
+  team: TeamCreateNestedOneWithoutAttachmentInput!
   title: String
   type: String
   updatedAt: DateTime
-  user: UserCreateOneWithoutAttachmentsInput!
-  work: WorkCreateOneWithoutAttachmentsInput
+  user: UserCreateNestedOneWithoutAttachmentsInput!
+  work: WorkCreateNestedOneWithoutAttachmentsInput
 }
 
 input AttachmentCreateWithoutTeamInput {
-  ballot: BallotCreateOneWithoutAttachmentsInput
+  ballot: BallotCreateNestedOneWithoutAttachmentsInput
   card: String
   createdAt: DateTime
-  discussion: DiscussionCreateOneWithoutAttachmentsInput
+  discussion: DiscussionCreateNestedOneWithoutAttachmentsInput
   file: String!
   id: String
-  school: SchoolCreateOneWithoutAttachmentInput
+  school: SchoolCreateNestedOneWithoutAttachmentInput
   title: String
   type: String
   updatedAt: DateTime
-  user: UserCreateOneWithoutAttachmentsInput!
-  work: WorkCreateOneWithoutAttachmentsInput
+  user: UserCreateNestedOneWithoutAttachmentsInput!
+  work: WorkCreateNestedOneWithoutAttachmentsInput
 }
 
 input AttachmentCreateWithoutUserInput {
-  ballot: BallotCreateOneWithoutAttachmentsInput
+  ballot: BallotCreateNestedOneWithoutAttachmentsInput
   card: String
   createdAt: DateTime
-  discussion: DiscussionCreateOneWithoutAttachmentsInput
+  discussion: DiscussionCreateNestedOneWithoutAttachmentsInput
   file: String!
   id: String
-  school: SchoolCreateOneWithoutAttachmentInput
-  team: TeamCreateOneWithoutAttachmentInput!
+  school: SchoolCreateNestedOneWithoutAttachmentInput
+  team: TeamCreateNestedOneWithoutAttachmentInput!
   title: String
   type: String
   updatedAt: DateTime
-  work: WorkCreateOneWithoutAttachmentsInput
+  work: WorkCreateNestedOneWithoutAttachmentsInput
 }
 
 input AttachmentCreateWithoutWorkInput {
-  ballot: BallotCreateOneWithoutAttachmentsInput
+  ballot: BallotCreateNestedOneWithoutAttachmentsInput
   card: String
   createdAt: DateTime
-  discussion: DiscussionCreateOneWithoutAttachmentsInput
+  discussion: DiscussionCreateNestedOneWithoutAttachmentsInput
   file: String!
   id: String
-  school: SchoolCreateOneWithoutAttachmentInput
-  team: TeamCreateOneWithoutAttachmentInput!
+  school: SchoolCreateNestedOneWithoutAttachmentInput
+  team: TeamCreateNestedOneWithoutAttachmentInput!
   title: String
   type: String
   updatedAt: DateTime
-  user: UserCreateOneWithoutAttachmentsInput!
+  user: UserCreateNestedOneWithoutAttachmentsInput!
 }
 
 input AttachmentListRelationFilter {
@@ -729,8 +981,9 @@ input AttachmentUpdateManyMutationInput {
 
 input AttachmentUpdateManyWithoutBallotInput {
   connect: [AttachmentWhereUniqueInput!]
-  connectOrCreate: [AttachmentCreateOrConnectWithoutballotInput!]
+  connectOrCreate: [AttachmentCreateOrConnectWithoutBallotInput!]
   create: [AttachmentCreateWithoutBallotInput!]
+  createMany: AttachmentCreateManyBallotInputEnvelope
   delete: [AttachmentWhereUniqueInput!]
   deleteMany: [AttachmentScalarWhereInput!]
   disconnect: [AttachmentWhereUniqueInput!]
@@ -742,8 +995,9 @@ input AttachmentUpdateManyWithoutBallotInput {
 
 input AttachmentUpdateManyWithoutDiscussionInput {
   connect: [AttachmentWhereUniqueInput!]
-  connectOrCreate: [AttachmentCreateOrConnectWithoutdiscussionInput!]
+  connectOrCreate: [AttachmentCreateOrConnectWithoutDiscussionInput!]
   create: [AttachmentCreateWithoutDiscussionInput!]
+  createMany: AttachmentCreateManyDiscussionInputEnvelope
   delete: [AttachmentWhereUniqueInput!]
   deleteMany: [AttachmentScalarWhereInput!]
   disconnect: [AttachmentWhereUniqueInput!]
@@ -755,8 +1009,9 @@ input AttachmentUpdateManyWithoutDiscussionInput {
 
 input AttachmentUpdateManyWithoutSchoolInput {
   connect: [AttachmentWhereUniqueInput!]
-  connectOrCreate: [AttachmentCreateOrConnectWithoutschoolInput!]
+  connectOrCreate: [AttachmentCreateOrConnectWithoutSchoolInput!]
   create: [AttachmentCreateWithoutSchoolInput!]
+  createMany: AttachmentCreateManySchoolInputEnvelope
   delete: [AttachmentWhereUniqueInput!]
   deleteMany: [AttachmentScalarWhereInput!]
   disconnect: [AttachmentWhereUniqueInput!]
@@ -768,8 +1023,9 @@ input AttachmentUpdateManyWithoutSchoolInput {
 
 input AttachmentUpdateManyWithoutTeamInput {
   connect: [AttachmentWhereUniqueInput!]
-  connectOrCreate: [AttachmentCreateOrConnectWithoutteamInput!]
+  connectOrCreate: [AttachmentCreateOrConnectWithoutTeamInput!]
   create: [AttachmentCreateWithoutTeamInput!]
+  createMany: AttachmentCreateManyTeamInputEnvelope
   delete: [AttachmentWhereUniqueInput!]
   deleteMany: [AttachmentScalarWhereInput!]
   disconnect: [AttachmentWhereUniqueInput!]
@@ -781,8 +1037,9 @@ input AttachmentUpdateManyWithoutTeamInput {
 
 input AttachmentUpdateManyWithoutUserInput {
   connect: [AttachmentWhereUniqueInput!]
-  connectOrCreate: [AttachmentCreateOrConnectWithoutuserInput!]
+  connectOrCreate: [AttachmentCreateOrConnectWithoutUserInput!]
   create: [AttachmentCreateWithoutUserInput!]
+  createMany: AttachmentCreateManyUserInputEnvelope
   delete: [AttachmentWhereUniqueInput!]
   deleteMany: [AttachmentScalarWhereInput!]
   disconnect: [AttachmentWhereUniqueInput!]
@@ -794,8 +1051,9 @@ input AttachmentUpdateManyWithoutUserInput {
 
 input AttachmentUpdateManyWithoutWorkInput {
   connect: [AttachmentWhereUniqueInput!]
-  connectOrCreate: [AttachmentCreateOrConnectWithoutworkInput!]
+  connectOrCreate: [AttachmentCreateOrConnectWithoutWorkInput!]
   create: [AttachmentCreateWithoutWorkInput!]
+  createMany: AttachmentCreateManyWorkInputEnvelope
   delete: [AttachmentWhereUniqueInput!]
   deleteMany: [AttachmentScalarWhereInput!]
   disconnect: [AttachmentWhereUniqueInput!]
@@ -1022,320 +1280,378 @@ input AttachmentWhereUniqueInput {
 }
 
 type Ballot {
-  body: String!
+  body: String
   canton: String
   canVote: Boolean
+  description: String
+  end: DateTime
+  hasVoted: Boolean
+  id: String
+  schoolId: String
+  scope: BallotScope
+  start: DateTime
+  teamId: String
+  title: String
+}
+
+input BallotCreateManyCreatorInput {
+  body: String!
+  canton: String
+  createdAt: DateTime
   description: String!
   end: DateTime!
-  hasVoted: Boolean
-  id: String!
+  id: String
   schoolId: String
-  scope: BallotScope!
+  scope: BallotScope
   start: DateTime!
   teamId: String
   title: String!
+  updatedAt: DateTime
 }
 
-input BallotCreateManyWithoutCreatorInput {
+input BallotCreateManyCreatorInputEnvelope {
+  data: [BallotCreateManyCreatorInput!]
+  skipDuplicates: Boolean
+}
+
+input BallotCreateManySchoolInput {
+  body: String!
+  canton: String
+  createdAt: DateTime
+  creatorId: String
+  description: String!
+  end: DateTime!
+  id: String
+  scope: BallotScope
+  start: DateTime!
+  teamId: String
+  title: String!
+  updatedAt: DateTime
+}
+
+input BallotCreateManySchoolInputEnvelope {
+  data: [BallotCreateManySchoolInput!]
+  skipDuplicates: Boolean
+}
+
+input BallotCreateManyTeamInput {
+  body: String!
+  canton: String
+  createdAt: DateTime
+  creatorId: String
+  description: String!
+  end: DateTime!
+  id: String
+  schoolId: String
+  scope: BallotScope
+  start: DateTime!
+  title: String!
+  updatedAt: DateTime
+}
+
+input BallotCreateManyTeamInputEnvelope {
+  data: [BallotCreateManyTeamInput!]
+  skipDuplicates: Boolean
+}
+
+input BallotCreateNestedManyWithoutCreatorInput {
   connect: [BallotWhereUniqueInput!]
-  connectOrCreate: [BallotCreateOrConnectWithoutcreatorInput!]
+  connectOrCreate: [BallotCreateOrConnectWithoutCreatorInput!]
   create: [BallotCreateWithoutCreatorInput!]
+  createMany: BallotCreateManyCreatorInputEnvelope
 }
 
-input BallotCreateManyWithoutSchoolInput {
+input BallotCreateNestedManyWithoutSchoolInput {
   connect: [BallotWhereUniqueInput!]
-  connectOrCreate: [BallotCreateOrConnectWithoutschoolInput!]
+  connectOrCreate: [BallotCreateOrConnectWithoutSchoolInput!]
   create: [BallotCreateWithoutSchoolInput!]
+  createMany: BallotCreateManySchoolInputEnvelope
 }
 
-input BallotCreateManyWithoutTeamInput {
+input BallotCreateNestedManyWithoutTeamInput {
   connect: [BallotWhereUniqueInput!]
-  connectOrCreate: [BallotCreateOrConnectWithoutteamInput!]
+  connectOrCreate: [BallotCreateOrConnectWithoutTeamInput!]
   create: [BallotCreateWithoutTeamInput!]
+  createMany: BallotCreateManyTeamInputEnvelope
 }
 
-input BallotCreateOneWithoutActivityInput {
+input BallotCreateNestedOneWithoutActivityInput {
   connect: BallotWhereUniqueInput
-  connectOrCreate: BallotCreateOrConnectWithoutactivityInput
+  connectOrCreate: BallotCreateOrConnectWithoutActivityInput
   create: BallotCreateWithoutActivityInput
 }
 
-input BallotCreateOneWithoutAttachmentsInput {
+input BallotCreateNestedOneWithoutAttachmentsInput {
   connect: BallotWhereUniqueInput
-  connectOrCreate: BallotCreateOrConnectWithoutattachmentsInput
+  connectOrCreate: BallotCreateOrConnectWithoutAttachmentsInput
   create: BallotCreateWithoutAttachmentsInput
 }
 
-input BallotCreateOneWithoutBallotRunsInput {
+input BallotCreateNestedOneWithoutBallotRunsInput {
   connect: BallotWhereUniqueInput
-  connectOrCreate: BallotCreateOrConnectWithoutballotRunsInput
+  connectOrCreate: BallotCreateOrConnectWithoutBallotRunsInput
   create: BallotCreateWithoutBallotRunsInput
 }
 
-input BallotCreateOneWithoutDiscussionInput {
+input BallotCreateNestedOneWithoutDiscussionInput {
   connect: BallotWhereUniqueInput
-  connectOrCreate: BallotCreateOrConnectWithoutdiscussionInput
+  connectOrCreate: BallotCreateOrConnectWithoutDiscussionInput
   create: BallotCreateWithoutDiscussionInput
 }
 
-input BallotCreateOneWithoutVotedInput {
+input BallotCreateNestedOneWithoutVotedInput {
   connect: BallotWhereUniqueInput
-  connectOrCreate: BallotCreateOrConnectWithoutvotedInput
+  connectOrCreate: BallotCreateOrConnectWithoutVotedInput
   create: BallotCreateWithoutVotedInput
 }
 
-input BallotCreateOneWithoutVotesInput {
+input BallotCreateNestedOneWithoutVotesInput {
   connect: BallotWhereUniqueInput
-  connectOrCreate: BallotCreateOrConnectWithoutvotesInput
+  connectOrCreate: BallotCreateOrConnectWithoutVotesInput
   create: BallotCreateWithoutVotesInput
 }
 
-input BallotCreateOrConnectWithoutactivityInput {
+input BallotCreateOrConnectWithoutActivityInput {
   create: BallotCreateWithoutActivityInput!
   where: BallotWhereUniqueInput!
 }
 
-input BallotCreateOrConnectWithoutattachmentsInput {
+input BallotCreateOrConnectWithoutAttachmentsInput {
   create: BallotCreateWithoutAttachmentsInput!
   where: BallotWhereUniqueInput!
 }
 
-input BallotCreateOrConnectWithoutballotRunsInput {
+input BallotCreateOrConnectWithoutBallotRunsInput {
   create: BallotCreateWithoutBallotRunsInput!
   where: BallotWhereUniqueInput!
 }
 
-input BallotCreateOrConnectWithoutcreatorInput {
+input BallotCreateOrConnectWithoutCreatorInput {
   create: BallotCreateWithoutCreatorInput!
   where: BallotWhereUniqueInput!
 }
 
-input BallotCreateOrConnectWithoutdiscussionInput {
+input BallotCreateOrConnectWithoutDiscussionInput {
   create: BallotCreateWithoutDiscussionInput!
   where: BallotWhereUniqueInput!
 }
 
-input BallotCreateOrConnectWithoutschoolInput {
+input BallotCreateOrConnectWithoutSchoolInput {
   create: BallotCreateWithoutSchoolInput!
   where: BallotWhereUniqueInput!
 }
 
-input BallotCreateOrConnectWithoutteamInput {
+input BallotCreateOrConnectWithoutTeamInput {
   create: BallotCreateWithoutTeamInput!
   where: BallotWhereUniqueInput!
 }
 
-input BallotCreateOrConnectWithoutvotedInput {
+input BallotCreateOrConnectWithoutVotedInput {
   create: BallotCreateWithoutVotedInput!
   where: BallotWhereUniqueInput!
 }
 
-input BallotCreateOrConnectWithoutvotesInput {
+input BallotCreateOrConnectWithoutVotesInput {
   create: BallotCreateWithoutVotesInput!
   where: BallotWhereUniqueInput!
 }
 
 input BallotCreateWithoutActivityInput {
-  attachments: AttachmentCreateManyWithoutBallotInput
-  ballotRuns: BallotRunCreateManyWithoutBallotInput
+  attachments: AttachmentCreateNestedManyWithoutBallotInput
+  ballotRuns: BallotRunCreateNestedManyWithoutBallotInput
   body: String!
   canton: String
   createdAt: DateTime
-  creator: UserCreateOneWithoutBallotsInput
+  creator: UserCreateNestedOneWithoutBallotsInput
   description: String!
-  discussion: DiscussionCreateManyWithoutBallotInput
+  discussion: DiscussionCreateNestedManyWithoutBallotInput
   end: DateTime!
   id: String
-  options: OptionCreateManyWithoutBallotInput
-  school: SchoolCreateOneWithoutBallotsInput
+  options: OptionCreateNestedManyWithoutBallotInput
+  school: SchoolCreateNestedOneWithoutBallotsInput
   scope: BallotScope
   start: DateTime!
-  team: TeamCreateOneWithoutBallotsInput
+  team: TeamCreateNestedOneWithoutBallotsInput
   title: String!
   updatedAt: DateTime
-  voted: VotedCreateManyWithoutBallotInput
-  votes: VoteCreateManyWithoutBallotInput
+  voted: VotedCreateNestedManyWithoutBallotInput
+  votes: VoteCreateNestedManyWithoutBallotInput
 }
 
 input BallotCreateWithoutAttachmentsInput {
-  activity: ActivityCreateManyWithoutBallotInput
-  ballotRuns: BallotRunCreateManyWithoutBallotInput
+  activity: ActivityCreateNestedManyWithoutBallotInput
+  ballotRuns: BallotRunCreateNestedManyWithoutBallotInput
   body: String!
   canton: String
   createdAt: DateTime
-  creator: UserCreateOneWithoutBallotsInput
+  creator: UserCreateNestedOneWithoutBallotsInput
   description: String!
-  discussion: DiscussionCreateManyWithoutBallotInput
+  discussion: DiscussionCreateNestedManyWithoutBallotInput
   end: DateTime!
   id: String
-  options: OptionCreateManyWithoutBallotInput
-  school: SchoolCreateOneWithoutBallotsInput
+  options: OptionCreateNestedManyWithoutBallotInput
+  school: SchoolCreateNestedOneWithoutBallotsInput
   scope: BallotScope
   start: DateTime!
-  team: TeamCreateOneWithoutBallotsInput
+  team: TeamCreateNestedOneWithoutBallotsInput
   title: String!
   updatedAt: DateTime
-  voted: VotedCreateManyWithoutBallotInput
-  votes: VoteCreateManyWithoutBallotInput
+  voted: VotedCreateNestedManyWithoutBallotInput
+  votes: VoteCreateNestedManyWithoutBallotInput
 }
 
 input BallotCreateWithoutBallotRunsInput {
-  activity: ActivityCreateManyWithoutBallotInput
-  attachments: AttachmentCreateManyWithoutBallotInput
+  activity: ActivityCreateNestedManyWithoutBallotInput
+  attachments: AttachmentCreateNestedManyWithoutBallotInput
   body: String!
   canton: String
   createdAt: DateTime
-  creator: UserCreateOneWithoutBallotsInput
+  creator: UserCreateNestedOneWithoutBallotsInput
   description: String!
-  discussion: DiscussionCreateManyWithoutBallotInput
+  discussion: DiscussionCreateNestedManyWithoutBallotInput
   end: DateTime!
   id: String
-  options: OptionCreateManyWithoutBallotInput
-  school: SchoolCreateOneWithoutBallotsInput
+  options: OptionCreateNestedManyWithoutBallotInput
+  school: SchoolCreateNestedOneWithoutBallotsInput
   scope: BallotScope
   start: DateTime!
-  team: TeamCreateOneWithoutBallotsInput
+  team: TeamCreateNestedOneWithoutBallotsInput
   title: String!
   updatedAt: DateTime
-  voted: VotedCreateManyWithoutBallotInput
-  votes: VoteCreateManyWithoutBallotInput
+  voted: VotedCreateNestedManyWithoutBallotInput
+  votes: VoteCreateNestedManyWithoutBallotInput
 }
 
 input BallotCreateWithoutCreatorInput {
-  activity: ActivityCreateManyWithoutBallotInput
-  attachments: AttachmentCreateManyWithoutBallotInput
-  ballotRuns: BallotRunCreateManyWithoutBallotInput
+  activity: ActivityCreateNestedManyWithoutBallotInput
+  attachments: AttachmentCreateNestedManyWithoutBallotInput
+  ballotRuns: BallotRunCreateNestedManyWithoutBallotInput
   body: String!
   canton: String
   createdAt: DateTime
   description: String!
-  discussion: DiscussionCreateManyWithoutBallotInput
+  discussion: DiscussionCreateNestedManyWithoutBallotInput
   end: DateTime!
   id: String
-  options: OptionCreateManyWithoutBallotInput
-  school: SchoolCreateOneWithoutBallotsInput
+  options: OptionCreateNestedManyWithoutBallotInput
+  school: SchoolCreateNestedOneWithoutBallotsInput
   scope: BallotScope
   start: DateTime!
-  team: TeamCreateOneWithoutBallotsInput
+  team: TeamCreateNestedOneWithoutBallotsInput
   title: String!
   updatedAt: DateTime
-  voted: VotedCreateManyWithoutBallotInput
-  votes: VoteCreateManyWithoutBallotInput
+  voted: VotedCreateNestedManyWithoutBallotInput
+  votes: VoteCreateNestedManyWithoutBallotInput
 }
 
 input BallotCreateWithoutDiscussionInput {
-  activity: ActivityCreateManyWithoutBallotInput
-  attachments: AttachmentCreateManyWithoutBallotInput
-  ballotRuns: BallotRunCreateManyWithoutBallotInput
+  activity: ActivityCreateNestedManyWithoutBallotInput
+  attachments: AttachmentCreateNestedManyWithoutBallotInput
+  ballotRuns: BallotRunCreateNestedManyWithoutBallotInput
   body: String!
   canton: String
   createdAt: DateTime
-  creator: UserCreateOneWithoutBallotsInput
+  creator: UserCreateNestedOneWithoutBallotsInput
   description: String!
   end: DateTime!
   id: String
-  options: OptionCreateManyWithoutBallotInput
-  school: SchoolCreateOneWithoutBallotsInput
+  options: OptionCreateNestedManyWithoutBallotInput
+  school: SchoolCreateNestedOneWithoutBallotsInput
   scope: BallotScope
   start: DateTime!
-  team: TeamCreateOneWithoutBallotsInput
+  team: TeamCreateNestedOneWithoutBallotsInput
   title: String!
   updatedAt: DateTime
-  voted: VotedCreateManyWithoutBallotInput
-  votes: VoteCreateManyWithoutBallotInput
+  voted: VotedCreateNestedManyWithoutBallotInput
+  votes: VoteCreateNestedManyWithoutBallotInput
 }
 
 input BallotCreateWithoutSchoolInput {
-  activity: ActivityCreateManyWithoutBallotInput
-  attachments: AttachmentCreateManyWithoutBallotInput
-  ballotRuns: BallotRunCreateManyWithoutBallotInput
+  activity: ActivityCreateNestedManyWithoutBallotInput
+  attachments: AttachmentCreateNestedManyWithoutBallotInput
+  ballotRuns: BallotRunCreateNestedManyWithoutBallotInput
   body: String!
   canton: String
   createdAt: DateTime
-  creator: UserCreateOneWithoutBallotsInput
+  creator: UserCreateNestedOneWithoutBallotsInput
   description: String!
-  discussion: DiscussionCreateManyWithoutBallotInput
+  discussion: DiscussionCreateNestedManyWithoutBallotInput
   end: DateTime!
   id: String
-  options: OptionCreateManyWithoutBallotInput
+  options: OptionCreateNestedManyWithoutBallotInput
   scope: BallotScope
   start: DateTime!
-  team: TeamCreateOneWithoutBallotsInput
+  team: TeamCreateNestedOneWithoutBallotsInput
   title: String!
   updatedAt: DateTime
-  voted: VotedCreateManyWithoutBallotInput
-  votes: VoteCreateManyWithoutBallotInput
+  voted: VotedCreateNestedManyWithoutBallotInput
+  votes: VoteCreateNestedManyWithoutBallotInput
 }
 
 input BallotCreateWithoutTeamInput {
-  activity: ActivityCreateManyWithoutBallotInput
-  attachments: AttachmentCreateManyWithoutBallotInput
-  ballotRuns: BallotRunCreateManyWithoutBallotInput
+  activity: ActivityCreateNestedManyWithoutBallotInput
+  attachments: AttachmentCreateNestedManyWithoutBallotInput
+  ballotRuns: BallotRunCreateNestedManyWithoutBallotInput
   body: String!
   canton: String
   createdAt: DateTime
-  creator: UserCreateOneWithoutBallotsInput
+  creator: UserCreateNestedOneWithoutBallotsInput
   description: String!
-  discussion: DiscussionCreateManyWithoutBallotInput
+  discussion: DiscussionCreateNestedManyWithoutBallotInput
   end: DateTime!
   id: String
-  options: OptionCreateManyWithoutBallotInput
-  school: SchoolCreateOneWithoutBallotsInput
+  options: OptionCreateNestedManyWithoutBallotInput
+  school: SchoolCreateNestedOneWithoutBallotsInput
   scope: BallotScope
   start: DateTime!
   title: String!
   updatedAt: DateTime
-  voted: VotedCreateManyWithoutBallotInput
-  votes: VoteCreateManyWithoutBallotInput
+  voted: VotedCreateNestedManyWithoutBallotInput
+  votes: VoteCreateNestedManyWithoutBallotInput
 }
 
 input BallotCreateWithoutVotedInput {
-  activity: ActivityCreateManyWithoutBallotInput
-  attachments: AttachmentCreateManyWithoutBallotInput
-  ballotRuns: BallotRunCreateManyWithoutBallotInput
+  activity: ActivityCreateNestedManyWithoutBallotInput
+  attachments: AttachmentCreateNestedManyWithoutBallotInput
+  ballotRuns: BallotRunCreateNestedManyWithoutBallotInput
   body: String!
   canton: String
   createdAt: DateTime
-  creator: UserCreateOneWithoutBallotsInput
+  creator: UserCreateNestedOneWithoutBallotsInput
   description: String!
-  discussion: DiscussionCreateManyWithoutBallotInput
+  discussion: DiscussionCreateNestedManyWithoutBallotInput
   end: DateTime!
   id: String
-  options: OptionCreateManyWithoutBallotInput
-  school: SchoolCreateOneWithoutBallotsInput
+  options: OptionCreateNestedManyWithoutBallotInput
+  school: SchoolCreateNestedOneWithoutBallotsInput
   scope: BallotScope
   start: DateTime!
-  team: TeamCreateOneWithoutBallotsInput
+  team: TeamCreateNestedOneWithoutBallotsInput
   title: String!
   updatedAt: DateTime
-  votes: VoteCreateManyWithoutBallotInput
+  votes: VoteCreateNestedManyWithoutBallotInput
 }
 
 input BallotCreateWithoutVotesInput {
-  activity: ActivityCreateManyWithoutBallotInput
-  attachments: AttachmentCreateManyWithoutBallotInput
-  ballotRuns: BallotRunCreateManyWithoutBallotInput
+  activity: ActivityCreateNestedManyWithoutBallotInput
+  attachments: AttachmentCreateNestedManyWithoutBallotInput
+  ballotRuns: BallotRunCreateNestedManyWithoutBallotInput
   body: String!
   canton: String
   createdAt: DateTime
-  creator: UserCreateOneWithoutBallotsInput
+  creator: UserCreateNestedOneWithoutBallotsInput
   description: String!
-  discussion: DiscussionCreateManyWithoutBallotInput
+  discussion: DiscussionCreateNestedManyWithoutBallotInput
   end: DateTime!
   id: String
-  options: OptionCreateManyWithoutBallotInput
-  school: SchoolCreateOneWithoutBallotsInput
+  options: OptionCreateNestedManyWithoutBallotInput
+  school: SchoolCreateNestedOneWithoutBallotsInput
   scope: BallotScope
   start: DateTime!
-  team: TeamCreateOneWithoutBallotsInput
+  team: TeamCreateNestedOneWithoutBallotsInput
   title: String!
   updatedAt: DateTime
-  voted: VotedCreateManyWithoutBallotInput
-}
-
-input BallotIdTeamIdCompoundUniqueInput {
-  ballotId: String!
-  teamId: String!
+  voted: VotedCreateNestedManyWithoutBallotInput
 }
 
 input BallotListRelationFilter {
@@ -1368,42 +1684,73 @@ type BallotResults {
 }
 
 type BallotRun {
-  ballot: Ballot!
+  ballot: Ballot
   end: DateTime
-  id: String!
+  id: String
   start: DateTime
-  team: Team!
+  team: Team
 }
 
-input BallotRunCreateManyWithoutBallotInput {
+input BallotRunBallotIdTeamIdCompoundUniqueInput {
+  ballotId: String!
+  teamId: String!
+}
+
+input BallotRunCreateManyBallotInput {
+  end: DateTime
+  id: String
+  start: DateTime
+  teamId: String!
+}
+
+input BallotRunCreateManyBallotInputEnvelope {
+  data: [BallotRunCreateManyBallotInput!]
+  skipDuplicates: Boolean
+}
+
+input BallotRunCreateManyTeamInput {
+  ballotId: String!
+  end: DateTime
+  id: String
+  start: DateTime
+}
+
+input BallotRunCreateManyTeamInputEnvelope {
+  data: [BallotRunCreateManyTeamInput!]
+  skipDuplicates: Boolean
+}
+
+input BallotRunCreateNestedManyWithoutBallotInput {
   connect: [BallotRunWhereUniqueInput!]
-  connectOrCreate: [BallotRunCreateOrConnectWithoutballotInput!]
+  connectOrCreate: [BallotRunCreateOrConnectWithoutBallotInput!]
   create: [BallotRunCreateWithoutBallotInput!]
+  createMany: BallotRunCreateManyBallotInputEnvelope
 }
 
-input BallotRunCreateManyWithoutTeamInput {
+input BallotRunCreateNestedManyWithoutTeamInput {
   connect: [BallotRunWhereUniqueInput!]
-  connectOrCreate: [BallotRunCreateOrConnectWithoutteamInput!]
+  connectOrCreate: [BallotRunCreateOrConnectWithoutTeamInput!]
   create: [BallotRunCreateWithoutTeamInput!]
+  createMany: BallotRunCreateManyTeamInputEnvelope
 }
 
-input BallotRunCreateOneWithoutVoteInput {
+input BallotRunCreateNestedOneWithoutVoteInput {
   connect: BallotRunWhereUniqueInput
-  connectOrCreate: BallotRunCreateOrConnectWithoutvoteInput
+  connectOrCreate: BallotRunCreateOrConnectWithoutVoteInput
   create: BallotRunCreateWithoutVoteInput
 }
 
-input BallotRunCreateOrConnectWithoutballotInput {
+input BallotRunCreateOrConnectWithoutBallotInput {
   create: BallotRunCreateWithoutBallotInput!
   where: BallotRunWhereUniqueInput!
 }
 
-input BallotRunCreateOrConnectWithoutteamInput {
+input BallotRunCreateOrConnectWithoutTeamInput {
   create: BallotRunCreateWithoutTeamInput!
   where: BallotRunWhereUniqueInput!
 }
 
-input BallotRunCreateOrConnectWithoutvoteInput {
+input BallotRunCreateOrConnectWithoutVoteInput {
   create: BallotRunCreateWithoutVoteInput!
   where: BallotRunWhereUniqueInput!
 }
@@ -1412,24 +1759,24 @@ input BallotRunCreateWithoutBallotInput {
   end: DateTime
   id: String
   start: DateTime
-  team: TeamCreateOneWithoutBallotRunsInput!
-  vote: VoteCreateManyWithoutBallotRunInput
+  team: TeamCreateNestedOneWithoutBallotRunsInput!
+  vote: VoteCreateNestedManyWithoutBallotRunInput
 }
 
 input BallotRunCreateWithoutTeamInput {
-  ballot: BallotCreateOneWithoutBallotRunsInput!
+  ballot: BallotCreateNestedOneWithoutBallotRunsInput!
   end: DateTime
   id: String
   start: DateTime
-  vote: VoteCreateManyWithoutBallotRunInput
+  vote: VoteCreateNestedManyWithoutBallotRunInput
 }
 
 input BallotRunCreateWithoutVoteInput {
-  ballot: BallotCreateOneWithoutBallotRunsInput!
+  ballot: BallotCreateNestedOneWithoutBallotRunsInput!
   end: DateTime
   id: String
   start: DateTime
-  team: TeamCreateOneWithoutBallotRunsInput!
+  team: TeamCreateNestedOneWithoutBallotRunsInput!
 }
 
 input BallotRunListRelationFilter {
@@ -1457,8 +1804,9 @@ input BallotRunUpdateManyMutationInput {
 
 input BallotRunUpdateManyWithoutBallotInput {
   connect: [BallotRunWhereUniqueInput!]
-  connectOrCreate: [BallotRunCreateOrConnectWithoutballotInput!]
+  connectOrCreate: [BallotRunCreateOrConnectWithoutBallotInput!]
   create: [BallotRunCreateWithoutBallotInput!]
+  createMany: BallotRunCreateManyBallotInputEnvelope
   delete: [BallotRunWhereUniqueInput!]
   deleteMany: [BallotRunScalarWhereInput!]
   disconnect: [BallotRunWhereUniqueInput!]
@@ -1470,8 +1818,9 @@ input BallotRunUpdateManyWithoutBallotInput {
 
 input BallotRunUpdateManyWithoutTeamInput {
   connect: [BallotRunWhereUniqueInput!]
-  connectOrCreate: [BallotRunCreateOrConnectWithoutteamInput!]
+  connectOrCreate: [BallotRunCreateOrConnectWithoutTeamInput!]
   create: [BallotRunCreateWithoutTeamInput!]
+  createMany: BallotRunCreateManyTeamInputEnvelope
   delete: [BallotRunWhereUniqueInput!]
   deleteMany: [BallotRunScalarWhereInput!]
   disconnect: [BallotRunWhereUniqueInput!]
@@ -1493,7 +1842,7 @@ input BallotRunUpdateManyWithWhereWithoutTeamInput {
 
 input BallotRunUpdateOneWithoutVoteInput {
   connect: BallotRunWhereUniqueInput
-  connectOrCreate: BallotRunCreateOrConnectWithoutvoteInput
+  connectOrCreate: BallotRunCreateOrConnectWithoutVoteInput
   create: BallotRunCreateWithoutVoteInput
   delete: Boolean
   disconnect: Boolean
@@ -1567,7 +1916,7 @@ input BallotRunWhereInput {
 }
 
 input BallotRunWhereUniqueInput {
-  ballotId_teamId: BallotIdTeamIdCompoundUniqueInput
+  ballotId_teamId: BallotRunBallotIdTeamIdCompoundUniqueInput
   id: String
 }
 
@@ -1613,8 +1962,9 @@ input BallotUpdateManyMutationInput {
 
 input BallotUpdateManyWithoutCreatorInput {
   connect: [BallotWhereUniqueInput!]
-  connectOrCreate: [BallotCreateOrConnectWithoutcreatorInput!]
+  connectOrCreate: [BallotCreateOrConnectWithoutCreatorInput!]
   create: [BallotCreateWithoutCreatorInput!]
+  createMany: BallotCreateManyCreatorInputEnvelope
   delete: [BallotWhereUniqueInput!]
   deleteMany: [BallotScalarWhereInput!]
   disconnect: [BallotWhereUniqueInput!]
@@ -1626,8 +1976,9 @@ input BallotUpdateManyWithoutCreatorInput {
 
 input BallotUpdateManyWithoutSchoolInput {
   connect: [BallotWhereUniqueInput!]
-  connectOrCreate: [BallotCreateOrConnectWithoutschoolInput!]
+  connectOrCreate: [BallotCreateOrConnectWithoutSchoolInput!]
   create: [BallotCreateWithoutSchoolInput!]
+  createMany: BallotCreateManySchoolInputEnvelope
   delete: [BallotWhereUniqueInput!]
   deleteMany: [BallotScalarWhereInput!]
   disconnect: [BallotWhereUniqueInput!]
@@ -1639,8 +1990,9 @@ input BallotUpdateManyWithoutSchoolInput {
 
 input BallotUpdateManyWithoutTeamInput {
   connect: [BallotWhereUniqueInput!]
-  connectOrCreate: [BallotCreateOrConnectWithoutteamInput!]
+  connectOrCreate: [BallotCreateOrConnectWithoutTeamInput!]
   create: [BallotCreateWithoutTeamInput!]
+  createMany: BallotCreateManyTeamInputEnvelope
   delete: [BallotWhereUniqueInput!]
   deleteMany: [BallotScalarWhereInput!]
   disconnect: [BallotWhereUniqueInput!]
@@ -1667,7 +2019,7 @@ input BallotUpdateManyWithWhereWithoutTeamInput {
 
 input BallotUpdateOneRequiredWithoutBallotRunsInput {
   connect: BallotWhereUniqueInput
-  connectOrCreate: BallotCreateOrConnectWithoutballotRunsInput
+  connectOrCreate: BallotCreateOrConnectWithoutBallotRunsInput
   create: BallotCreateWithoutBallotRunsInput
   update: BallotUpdateWithoutBallotRunsInput
   upsert: BallotUpsertWithoutBallotRunsInput
@@ -1675,7 +2027,7 @@ input BallotUpdateOneRequiredWithoutBallotRunsInput {
 
 input BallotUpdateOneRequiredWithoutVotedInput {
   connect: BallotWhereUniqueInput
-  connectOrCreate: BallotCreateOrConnectWithoutvotedInput
+  connectOrCreate: BallotCreateOrConnectWithoutVotedInput
   create: BallotCreateWithoutVotedInput
   update: BallotUpdateWithoutVotedInput
   upsert: BallotUpsertWithoutVotedInput
@@ -1683,7 +2035,7 @@ input BallotUpdateOneRequiredWithoutVotedInput {
 
 input BallotUpdateOneRequiredWithoutVotesInput {
   connect: BallotWhereUniqueInput
-  connectOrCreate: BallotCreateOrConnectWithoutvotesInput
+  connectOrCreate: BallotCreateOrConnectWithoutVotesInput
   create: BallotCreateWithoutVotesInput
   update: BallotUpdateWithoutVotesInput
   upsert: BallotUpsertWithoutVotesInput
@@ -1691,7 +2043,7 @@ input BallotUpdateOneRequiredWithoutVotesInput {
 
 input BallotUpdateOneWithoutActivityInput {
   connect: BallotWhereUniqueInput
-  connectOrCreate: BallotCreateOrConnectWithoutactivityInput
+  connectOrCreate: BallotCreateOrConnectWithoutActivityInput
   create: BallotCreateWithoutActivityInput
   delete: Boolean
   disconnect: Boolean
@@ -1701,7 +2053,7 @@ input BallotUpdateOneWithoutActivityInput {
 
 input BallotUpdateOneWithoutAttachmentsInput {
   connect: BallotWhereUniqueInput
-  connectOrCreate: BallotCreateOrConnectWithoutattachmentsInput
+  connectOrCreate: BallotCreateOrConnectWithoutAttachmentsInput
   create: BallotCreateWithoutAttachmentsInput
   delete: Boolean
   disconnect: Boolean
@@ -1711,7 +2063,7 @@ input BallotUpdateOneWithoutAttachmentsInput {
 
 input BallotUpdateOneWithoutDiscussionInput {
   connect: BallotWhereUniqueInput
-  connectOrCreate: BallotCreateOrConnectWithoutdiscussionInput
+  connectOrCreate: BallotCreateOrConnectWithoutDiscussionInput
   create: BallotCreateWithoutDiscussionInput
   delete: Boolean
   disconnect: Boolean
@@ -2084,59 +2436,131 @@ type Discussion {
   ballotId: String
   card: String
   children: [Discussion]
-  createdAt: DateTime!
-  id: String!
+  createdAt: DateTime
+  id: String
   reactions(
     after: ReactionWhereUniqueInput
     before: ReactionWhereUniqueInput
     first: Int
     last: Int
   ): [Reaction!]!
-  text: String!
-  title: String!
-  updatedAt: DateTime!
-  user: User!
+  text: String
+  title: String
+  updatedAt: DateTime
+  user: User
 }
 
-input DiscussionCreateManyWithoutBallotInput {
+input DiscussionCreateManyBallotInput {
+  card: String
+  createdAt: DateTime
+  id: String
+  schoolId: String
+  teamId: String!
+  text: String
+  title: String
+  updatedAt: DateTime
+  userId: String!
+}
+
+input DiscussionCreateManyBallotInputEnvelope {
+  data: [DiscussionCreateManyBallotInput!]
+  skipDuplicates: Boolean
+}
+
+input DiscussionCreateManySchoolInput {
+  ballotId: String
+  card: String
+  createdAt: DateTime
+  id: String
+  teamId: String!
+  text: String
+  title: String
+  updatedAt: DateTime
+  userId: String!
+}
+
+input DiscussionCreateManySchoolInputEnvelope {
+  data: [DiscussionCreateManySchoolInput!]
+  skipDuplicates: Boolean
+}
+
+input DiscussionCreateManyTeamInput {
+  ballotId: String
+  card: String
+  createdAt: DateTime
+  id: String
+  schoolId: String
+  text: String
+  title: String
+  updatedAt: DateTime
+  userId: String!
+}
+
+input DiscussionCreateManyTeamInputEnvelope {
+  data: [DiscussionCreateManyTeamInput!]
+  skipDuplicates: Boolean
+}
+
+input DiscussionCreateManyUserInput {
+  ballotId: String
+  card: String
+  createdAt: DateTime
+  id: String
+  schoolId: String
+  teamId: String!
+  text: String
+  title: String
+  updatedAt: DateTime
+}
+
+input DiscussionCreateManyUserInputEnvelope {
+  data: [DiscussionCreateManyUserInput!]
+  skipDuplicates: Boolean
+}
+
+input DiscussionCreateNestedManyWithoutBallotInput {
   connect: [DiscussionWhereUniqueInput!]
-  connectOrCreate: [DiscussionCreateOrConnectWithoutballotInput!]
+  connectOrCreate: [DiscussionCreateOrConnectWithoutBallotInput!]
   create: [DiscussionCreateWithoutBallotInput!]
+  createMany: DiscussionCreateManyBallotInputEnvelope
 }
 
-input DiscussionCreateManyWithoutSchoolInput {
+input DiscussionCreateNestedManyWithoutSchoolInput {
   connect: [DiscussionWhereUniqueInput!]
-  connectOrCreate: [DiscussionCreateOrConnectWithoutschoolInput!]
+  connectOrCreate: [DiscussionCreateOrConnectWithoutSchoolInput!]
   create: [DiscussionCreateWithoutSchoolInput!]
+  createMany: DiscussionCreateManySchoolInputEnvelope
 }
 
-input DiscussionCreateManyWithoutTeamInput {
+input DiscussionCreateNestedManyWithoutTeamInput {
   connect: [DiscussionWhereUniqueInput!]
-  connectOrCreate: [DiscussionCreateOrConnectWithoutteamInput!]
+  connectOrCreate: [DiscussionCreateOrConnectWithoutTeamInput!]
   create: [DiscussionCreateWithoutTeamInput!]
+  createMany: DiscussionCreateManyTeamInputEnvelope
 }
 
-input DiscussionCreateManyWithoutUserInput {
+input DiscussionCreateNestedManyWithoutUserInput {
   connect: [DiscussionWhereUniqueInput!]
-  connectOrCreate: [DiscussionCreateOrConnectWithoutuserInput!]
+  connectOrCreate: [DiscussionCreateOrConnectWithoutUserInput!]
   create: [DiscussionCreateWithoutUserInput!]
+  createMany: DiscussionCreateManyUserInputEnvelope
 }
 
-input DiscussionCreateOneWithoutActivityInput {
+input DiscussionCreateNestedOneWithoutActivityInput {
   connect: DiscussionWhereUniqueInput
   connectOrCreate: DiscussionCreateOrConnectWithoutActivityInput
   create: DiscussionCreateWithoutActivityInput
 }
 
-input DiscussionCreateOneWithoutAttachmentsInput {
+input DiscussionCreateNestedOneWithoutAttachmentsInput {
   connect: DiscussionWhereUniqueInput
-  connectOrCreate: DiscussionCreateOrConnectWithoutattachmentsInput
+  connectOrCreate: DiscussionCreateOrConnectWithoutAttachmentsInput
   create: DiscussionCreateWithoutAttachmentsInput
 }
 
-input DiscussionCreateOneWithoutReactionsInput {
+input DiscussionCreateNestedOneWithoutReactionsInput {
   connect: DiscussionWhereUniqueInput
-  connectOrCreate: DiscussionCreateOrConnectWithoutreactionsInput
+  connectOrCreate: DiscussionCreateOrConnectWithoutReactionsInput
   create: DiscussionCreateWithoutReactionsInput
 }
 
@@ -2145,136 +2569,136 @@ input DiscussionCreateOrConnectWithoutActivityInput {
   where: DiscussionWhereUniqueInput!
 }
 
-input DiscussionCreateOrConnectWithoutattachmentsInput {
+input DiscussionCreateOrConnectWithoutAttachmentsInput {
   create: DiscussionCreateWithoutAttachmentsInput!
   where: DiscussionWhereUniqueInput!
 }
 
-input DiscussionCreateOrConnectWithoutballotInput {
+input DiscussionCreateOrConnectWithoutBallotInput {
   create: DiscussionCreateWithoutBallotInput!
   where: DiscussionWhereUniqueInput!
 }
 
-input DiscussionCreateOrConnectWithoutreactionsInput {
+input DiscussionCreateOrConnectWithoutReactionsInput {
   create: DiscussionCreateWithoutReactionsInput!
   where: DiscussionWhereUniqueInput!
 }
 
-input DiscussionCreateOrConnectWithoutschoolInput {
+input DiscussionCreateOrConnectWithoutSchoolInput {
   create: DiscussionCreateWithoutSchoolInput!
   where: DiscussionWhereUniqueInput!
 }
 
-input DiscussionCreateOrConnectWithoutteamInput {
+input DiscussionCreateOrConnectWithoutTeamInput {
   create: DiscussionCreateWithoutTeamInput!
   where: DiscussionWhereUniqueInput!
 }
 
-input DiscussionCreateOrConnectWithoutuserInput {
+input DiscussionCreateOrConnectWithoutUserInput {
   create: DiscussionCreateWithoutUserInput!
   where: DiscussionWhereUniqueInput!
 }
 
 input DiscussionCreateWithoutActivityInput {
-  attachments: AttachmentCreateManyWithoutDiscussionInput
-  ballot: BallotCreateOneWithoutDiscussionInput
+  attachments: AttachmentCreateNestedManyWithoutDiscussionInput
+  ballot: BallotCreateNestedOneWithoutDiscussionInput
   card: String
   createdAt: DateTime
   id: String
-  reactions: ReactionCreateManyWithoutDiscussionInput
-  school: SchoolCreateOneWithoutDiscussionInput
-  team: TeamCreateOneWithoutDiscussionInput!
+  reactions: ReactionCreateNestedManyWithoutDiscussionInput
+  school: SchoolCreateNestedOneWithoutDiscussionInput
+  team: TeamCreateNestedOneWithoutDiscussionInput!
   text: String
   title: String
   updatedAt: DateTime
-  user: UserCreateOneWithoutDiscussionsInput!
+  user: UserCreateNestedOneWithoutDiscussionsInput!
 }
 
 input DiscussionCreateWithoutAttachmentsInput {
-  Activity: ActivityCreateManyWithoutDiscussionInput
-  ballot: BallotCreateOneWithoutDiscussionInput
+  Activity: ActivityCreateNestedManyWithoutDiscussionInput
+  ballot: BallotCreateNestedOneWithoutDiscussionInput
   card: String
   createdAt: DateTime
   id: String
-  reactions: ReactionCreateManyWithoutDiscussionInput
-  school: SchoolCreateOneWithoutDiscussionInput
-  team: TeamCreateOneWithoutDiscussionInput!
+  reactions: ReactionCreateNestedManyWithoutDiscussionInput
+  school: SchoolCreateNestedOneWithoutDiscussionInput
+  team: TeamCreateNestedOneWithoutDiscussionInput!
   text: String
   title: String
   updatedAt: DateTime
-  user: UserCreateOneWithoutDiscussionsInput!
+  user: UserCreateNestedOneWithoutDiscussionsInput!
 }
 
 input DiscussionCreateWithoutBallotInput {
-  Activity: ActivityCreateManyWithoutDiscussionInput
-  attachments: AttachmentCreateManyWithoutDiscussionInput
+  Activity: ActivityCreateNestedManyWithoutDiscussionInput
+  attachments: AttachmentCreateNestedManyWithoutDiscussionInput
   card: String
   createdAt: DateTime
   id: String
-  reactions: ReactionCreateManyWithoutDiscussionInput
-  school: SchoolCreateOneWithoutDiscussionInput
-  team: TeamCreateOneWithoutDiscussionInput!
+  reactions: ReactionCreateNestedManyWithoutDiscussionInput
+  school: SchoolCreateNestedOneWithoutDiscussionInput
+  team: TeamCreateNestedOneWithoutDiscussionInput!
   text: String
   title: String
   updatedAt: DateTime
-  user: UserCreateOneWithoutDiscussionsInput!
+  user: UserCreateNestedOneWithoutDiscussionsInput!
 }
 
 input DiscussionCreateWithoutReactionsInput {
-  Activity: ActivityCreateManyWithoutDiscussionInput
-  attachments: AttachmentCreateManyWithoutDiscussionInput
-  ballot: BallotCreateOneWithoutDiscussionInput
+  Activity: ActivityCreateNestedManyWithoutDiscussionInput
+  attachments: AttachmentCreateNestedManyWithoutDiscussionInput
+  ballot: BallotCreateNestedOneWithoutDiscussionInput
   card: String
   createdAt: DateTime
   id: String
-  school: SchoolCreateOneWithoutDiscussionInput
-  team: TeamCreateOneWithoutDiscussionInput!
+  school: SchoolCreateNestedOneWithoutDiscussionInput
+  team: TeamCreateNestedOneWithoutDiscussionInput!
   text: String
   title: String
   updatedAt: DateTime
-  user: UserCreateOneWithoutDiscussionsInput!
+  user: UserCreateNestedOneWithoutDiscussionsInput!
 }
 
 input DiscussionCreateWithoutSchoolInput {
-  Activity: ActivityCreateManyWithoutDiscussionInput
-  attachments: AttachmentCreateManyWithoutDiscussionInput
-  ballot: BallotCreateOneWithoutDiscussionInput
+  Activity: ActivityCreateNestedManyWithoutDiscussionInput
+  attachments: AttachmentCreateNestedManyWithoutDiscussionInput
+  ballot: BallotCreateNestedOneWithoutDiscussionInput
   card: String
   createdAt: DateTime
   id: String
-  reactions: ReactionCreateManyWithoutDiscussionInput
-  team: TeamCreateOneWithoutDiscussionInput!
+  reactions: ReactionCreateNestedManyWithoutDiscussionInput
+  team: TeamCreateNestedOneWithoutDiscussionInput!
   text: String
   title: String
   updatedAt: DateTime
-  user: UserCreateOneWithoutDiscussionsInput!
+  user: UserCreateNestedOneWithoutDiscussionsInput!
 }
 
 input DiscussionCreateWithoutTeamInput {
-  Activity: ActivityCreateManyWithoutDiscussionInput
-  attachments: AttachmentCreateManyWithoutDiscussionInput
-  ballot: BallotCreateOneWithoutDiscussionInput
+  Activity: ActivityCreateNestedManyWithoutDiscussionInput
+  attachments: AttachmentCreateNestedManyWithoutDiscussionInput
+  ballot: BallotCreateNestedOneWithoutDiscussionInput
   card: String
   createdAt: DateTime
   id: String
-  reactions: ReactionCreateManyWithoutDiscussionInput
-  school: SchoolCreateOneWithoutDiscussionInput
+  reactions: ReactionCreateNestedManyWithoutDiscussionInput
+  school: SchoolCreateNestedOneWithoutDiscussionInput
   text: String
   title: String
   updatedAt: DateTime
-  user: UserCreateOneWithoutDiscussionsInput!
+  user: UserCreateNestedOneWithoutDiscussionsInput!
 }
 
 input DiscussionCreateWithoutUserInput {
-  Activity: ActivityCreateManyWithoutDiscussionInput
-  attachments: AttachmentCreateManyWithoutDiscussionInput
-  ballot: BallotCreateOneWithoutDiscussionInput
+  Activity: ActivityCreateNestedManyWithoutDiscussionInput
+  attachments: AttachmentCreateNestedManyWithoutDiscussionInput
+  ballot: BallotCreateNestedOneWithoutDiscussionInput
   card: String
   createdAt: DateTime
   id: String
-  reactions: ReactionCreateManyWithoutDiscussionInput
-  school: SchoolCreateOneWithoutDiscussionInput
-  team: TeamCreateOneWithoutDiscussionInput!
+  reactions: ReactionCreateNestedManyWithoutDiscussionInput
+  school: SchoolCreateNestedOneWithoutDiscussionInput
+  team: TeamCreateNestedOneWithoutDiscussionInput!
   text: String
   title: String
   updatedAt: DateTime
@@ -2313,8 +2737,9 @@ input DiscussionUpdateManyMutationInput {
 
 input DiscussionUpdateManyWithoutBallotInput {
   connect: [DiscussionWhereUniqueInput!]
-  connectOrCreate: [DiscussionCreateOrConnectWithoutballotInput!]
+  connectOrCreate: [DiscussionCreateOrConnectWithoutBallotInput!]
   create: [DiscussionCreateWithoutBallotInput!]
+  createMany: DiscussionCreateManyBallotInputEnvelope
   delete: [DiscussionWhereUniqueInput!]
   deleteMany: [DiscussionScalarWhereInput!]
   disconnect: [DiscussionWhereUniqueInput!]
@@ -2326,8 +2751,9 @@ input DiscussionUpdateManyWithoutBallotInput {
 
 input DiscussionUpdateManyWithoutSchoolInput {
   connect: [DiscussionWhereUniqueInput!]
-  connectOrCreate: [DiscussionCreateOrConnectWithoutschoolInput!]
+  connectOrCreate: [DiscussionCreateOrConnectWithoutSchoolInput!]
   create: [DiscussionCreateWithoutSchoolInput!]
+  createMany: DiscussionCreateManySchoolInputEnvelope
   delete: [DiscussionWhereUniqueInput!]
   deleteMany: [DiscussionScalarWhereInput!]
   disconnect: [DiscussionWhereUniqueInput!]
@@ -2339,8 +2765,9 @@ input DiscussionUpdateManyWithoutSchoolInput {
 
 input DiscussionUpdateManyWithoutTeamInput {
   connect: [DiscussionWhereUniqueInput!]
-  connectOrCreate: [DiscussionCreateOrConnectWithoutteamInput!]
+  connectOrCreate: [DiscussionCreateOrConnectWithoutTeamInput!]
   create: [DiscussionCreateWithoutTeamInput!]
+  createMany: DiscussionCreateManyTeamInputEnvelope
   delete: [DiscussionWhereUniqueInput!]
   deleteMany: [DiscussionScalarWhereInput!]
   disconnect: [DiscussionWhereUniqueInput!]
@@ -2352,8 +2779,9 @@ input DiscussionUpdateManyWithoutTeamInput {
 
 input DiscussionUpdateManyWithoutUserInput {
   connect: [DiscussionWhereUniqueInput!]
-  connectOrCreate: [DiscussionCreateOrConnectWithoutuserInput!]
+  connectOrCreate: [DiscussionCreateOrConnectWithoutUserInput!]
   create: [DiscussionCreateWithoutUserInput!]
+  createMany: DiscussionCreateManyUserInputEnvelope
   delete: [DiscussionWhereUniqueInput!]
   deleteMany: [DiscussionScalarWhereInput!]
   disconnect: [DiscussionWhereUniqueInput!]
@@ -2395,7 +2823,7 @@ input DiscussionUpdateOneWithoutActivityInput {
 
 input DiscussionUpdateOneWithoutAttachmentsInput {
   connect: DiscussionWhereUniqueInput
-  connectOrCreate: DiscussionCreateOrConnectWithoutattachmentsInput
+  connectOrCreate: DiscussionCreateOrConnectWithoutAttachmentsInput
   create: DiscussionCreateWithoutAttachmentsInput
   delete: Boolean
   disconnect: Boolean
@@ -2405,7 +2833,7 @@ input DiscussionUpdateOneWithoutAttachmentsInput {
 
 input DiscussionUpdateOneWithoutReactionsInput {
   connect: DiscussionWhereUniqueInput
-  connectOrCreate: DiscussionCreateOrConnectWithoutreactionsInput
+  connectOrCreate: DiscussionCreateOrConnectWithoutReactionsInput
   create: DiscussionCreateWithoutReactionsInput
   delete: Boolean
   disconnect: Boolean
@@ -2605,9 +3033,9 @@ input DiscussionWhereUniqueInput {
 }
 
 type Domain {
-  approved: Boolean!
-  id: String!
-  name: String!
+  approved: Boolean
+  id: String
+  name: String
   schools(
     after: SchoolWhereUniqueInput
     before: SchoolWhereUniqueInput
@@ -2616,19 +3044,19 @@ type Domain {
   ): [School!]!
 }
 
-input DomainCreateOneWithoutSchoolsInput {
+input DomainCreateNestedOneWithoutSchoolsInput {
   connect: DomainWhereUniqueInput
-  connectOrCreate: DomainCreateOrConnectWithoutschoolsInput
+  connectOrCreate: DomainCreateOrConnectWithoutSchoolsInput
   create: DomainCreateWithoutSchoolsInput
 }
 
-input DomainCreateOneWithoutTeamInput {
+input DomainCreateNestedOneWithoutTeamInput {
   connect: DomainWhereUniqueInput
   connectOrCreate: DomainCreateOrConnectWithoutTeamInput
   create: DomainCreateWithoutTeamInput
 }
 
-input DomainCreateOrConnectWithoutschoolsInput {
+input DomainCreateOrConnectWithoutSchoolsInput {
   create: DomainCreateWithoutSchoolsInput!
   where: DomainWhereUniqueInput!
 }
@@ -2642,19 +3070,19 @@ input DomainCreateWithoutSchoolsInput {
   approved: Boolean
   id: String
   name: String!
-  Team: TeamCreateManyWithoutDomainInput
+  Team: TeamCreateNestedManyWithoutDomainInput
 }
 
 input DomainCreateWithoutTeamInput {
   approved: Boolean
   id: String
   name: String!
-  schools: SchoolCreateManyWithoutDomainInput
+  schools: SchoolCreateNestedManyWithoutDomainInput
 }
 
 input DomainUpdateOneWithoutSchoolsInput {
   connect: DomainWhereUniqueInput
-  connectOrCreate: DomainCreateOrConnectWithoutschoolsInput
+  connectOrCreate: DomainCreateOrConnectWithoutSchoolsInput
   create: DomainCreateWithoutSchoolsInput
   delete: Boolean
   disconnect: Boolean
@@ -2829,9 +3257,9 @@ type Mutation {
     name: String
     password: String
   ): User
-  createOneSchool(data: SchoolCreateInput!): School!
-  createOneTeam(data: TeamCreateInput!): Team!
-  createUser(data: UserCreateInput!): User!
+  createOneSchool(data: SchoolCreateInput!): School
+  createOneTeam(data: TeamCreateInput!): Team
+  createUser(data: UserCreateInput!): User
   deleteAccount: Response
   deleteOneSchool(where: SchoolWhereUniqueInput!): School
   deleteOneTeam(where: TeamWhereUniqueInput!): Team
@@ -2842,7 +3270,7 @@ type Mutation {
   inviteStudents(emails: [String!]!, team: String!): InviteResponse
   login(email: String!, password: String!): ResponseLogin
   magic(email: String!, redirect: String): Response
-  postActivity(data: ActivityCreateInput!): Activity!
+  postActivity(data: ActivityCreateInput!): Activity
   postDiscussion(
     ballotId: String
     card: String
@@ -2850,7 +3278,7 @@ type Mutation {
     text: String!
     title: String!
   ): Discussion
-  postWork(data: WorkCreateInput!): Work!
+  postWork(data: WorkCreateInput!): Work
   removeBallotRun(ballotRunId: String!): Response
   setCards(cards: String!, teamId: String!): Team
   setNotes(notes: Json!, teamId: String!): Team
@@ -3003,13 +3431,25 @@ input NullableStringFieldUpdateOperationsInput {
   set: String
 }
 
-input OptionCreateManyWithoutBallotInput {
-  connect: [OptionWhereUniqueInput!]
-  connectOrCreate: [OptionCreateOrConnectWithoutballotInput!]
-  create: [OptionCreateWithoutBallotInput!]
+input OptionCreateManyBallotInput {
+  id: String
+  title: String!
+  vote: Int!
 }
 
-input OptionCreateOrConnectWithoutballotInput {
+input OptionCreateManyBallotInputEnvelope {
+  data: [OptionCreateManyBallotInput!]
+  skipDuplicates: Boolean
+}
+
+input OptionCreateNestedManyWithoutBallotInput {
+  connect: [OptionWhereUniqueInput!]
+  connectOrCreate: [OptionCreateOrConnectWithoutBallotInput!]
+  create: [OptionCreateWithoutBallotInput!]
+  createMany: OptionCreateManyBallotInputEnvelope
+}
+
+input OptionCreateOrConnectWithoutBallotInput {
   create: OptionCreateWithoutBallotInput!
   where: OptionWhereUniqueInput!
 }
@@ -3044,8 +3484,9 @@ input OptionUpdateManyMutationInput {
 
 input OptionUpdateManyWithoutBallotInput {
   connect: [OptionWhereUniqueInput!]
-  connectOrCreate: [OptionCreateOrConnectWithoutballotInput!]
+  connectOrCreate: [OptionCreateOrConnectWithoutBallotInput!]
   create: [OptionCreateWithoutBallotInput!]
+  createMany: OptionCreateManyBallotInputEnvelope
   delete: [OptionWhereUniqueInput!]
   deleteMany: [OptionScalarWhereInput!]
   disconnect: [OptionWhereUniqueInput!]
@@ -3201,40 +3642,91 @@ enum QueryMode {
 
 type Reaction {
   discussion: Discussion
-  emoij: String!
-  id: String!
-  user: User!
+  emoij: String
+  id: String
+  user: User
 }
 
-input ReactionCreateManyWithoutDiscussionInput {
+input ReactionCreateManyDiscussionInput {
+  createdAt: DateTime
+  emoij: String
+  feedback: String!
+  id: String
+  stars: Int!
+  updatedAt: DateTime
+  userId: String!
+  workId: String
+}
+
+input ReactionCreateManyDiscussionInputEnvelope {
+  data: [ReactionCreateManyDiscussionInput!]
+  skipDuplicates: Boolean
+}
+
+input ReactionCreateManyUserInput {
+  createdAt: DateTime
+  discussionId: String
+  emoij: String
+  feedback: String!
+  id: String
+  stars: Int!
+  updatedAt: DateTime
+  workId: String
+}
+
+input ReactionCreateManyUserInputEnvelope {
+  data: [ReactionCreateManyUserInput!]
+  skipDuplicates: Boolean
+}
+
+input ReactionCreateManyWorkInput {
+  createdAt: DateTime
+  discussionId: String
+  emoij: String
+  feedback: String!
+  id: String
+  stars: Int!
+  updatedAt: DateTime
+  userId: String!
+}
+
+input ReactionCreateManyWorkInputEnvelope {
+  data: [ReactionCreateManyWorkInput!]
+  skipDuplicates: Boolean
+}
+
+input ReactionCreateNestedManyWithoutDiscussionInput {
   connect: [ReactionWhereUniqueInput!]
-  connectOrCreate: [ReactionCreateOrConnectWithoutdiscussionInput!]
+  connectOrCreate: [ReactionCreateOrConnectWithoutDiscussionInput!]
   create: [ReactionCreateWithoutDiscussionInput!]
+  createMany: ReactionCreateManyDiscussionInputEnvelope
 }
 
-input ReactionCreateManyWithoutUserInput {
+input ReactionCreateNestedManyWithoutUserInput {
   connect: [ReactionWhereUniqueInput!]
-  connectOrCreate: [ReactionCreateOrConnectWithoutuserInput!]
+  connectOrCreate: [ReactionCreateOrConnectWithoutUserInput!]
   create: [ReactionCreateWithoutUserInput!]
+  createMany: ReactionCreateManyUserInputEnvelope
 }
 
-input ReactionCreateManyWithoutWorkInput {
+input ReactionCreateNestedManyWithoutWorkInput {
   connect: [ReactionWhereUniqueInput!]
-  connectOrCreate: [ReactionCreateOrConnectWithoutworkInput!]
+  connectOrCreate: [ReactionCreateOrConnectWithoutWorkInput!]
   create: [ReactionCreateWithoutWorkInput!]
+  createMany: ReactionCreateManyWorkInputEnvelope
 }
 
-input ReactionCreateOrConnectWithoutdiscussionInput {
+input ReactionCreateOrConnectWithoutDiscussionInput {
   create: ReactionCreateWithoutDiscussionInput!
   where: ReactionWhereUniqueInput!
 }
 
-input ReactionCreateOrConnectWithoutuserInput {
+input ReactionCreateOrConnectWithoutUserInput {
   create: ReactionCreateWithoutUserInput!
   where: ReactionWhereUniqueInput!
 }
 
-input ReactionCreateOrConnectWithoutworkInput {
+input ReactionCreateOrConnectWithoutWorkInput {
   create: ReactionCreateWithoutWorkInput!
   where: ReactionWhereUniqueInput!
 }
@@ -3246,30 +3738,30 @@ input ReactionCreateWithoutDiscussionInput {
   id: String
   stars: Int!
   updatedAt: DateTime
-  user: UserCreateOneWithoutReactionsInput!
-  work: WorkCreateOneWithoutReactionsInput
+  user: UserCreateNestedOneWithoutReactionsInput!
+  work: WorkCreateNestedOneWithoutReactionsInput
 }
 
 input ReactionCreateWithoutUserInput {
   createdAt: DateTime
-  discussion: DiscussionCreateOneWithoutReactionsInput
+  discussion: DiscussionCreateNestedOneWithoutReactionsInput
   emoij: String
   feedback: String!
   id: String
   stars: Int!
   updatedAt: DateTime
-  work: WorkCreateOneWithoutReactionsInput
+  work: WorkCreateNestedOneWithoutReactionsInput
 }
 
 input ReactionCreateWithoutWorkInput {
   createdAt: DateTime
-  discussion: DiscussionCreateOneWithoutReactionsInput
+  discussion: DiscussionCreateNestedOneWithoutReactionsInput
   emoij: String
   feedback: String!
   id: String
   stars: Int!
   updatedAt: DateTime
-  user: UserCreateOneWithoutReactionsInput!
+  user: UserCreateNestedOneWithoutReactionsInput!
 }
 
 input ReactionListRelationFilter {
@@ -3304,8 +3796,9 @@ input ReactionUpdateManyMutationInput {
 
 input ReactionUpdateManyWithoutDiscussionInput {
   connect: [ReactionWhereUniqueInput!]
-  connectOrCreate: [ReactionCreateOrConnectWithoutdiscussionInput!]
+  connectOrCreate: [ReactionCreateOrConnectWithoutDiscussionInput!]
   create: [ReactionCreateWithoutDiscussionInput!]
+  createMany: ReactionCreateManyDiscussionInputEnvelope
   delete: [ReactionWhereUniqueInput!]
   deleteMany: [ReactionScalarWhereInput!]
   disconnect: [ReactionWhereUniqueInput!]
@@ -3317,8 +3810,9 @@ input ReactionUpdateManyWithoutDiscussionInput {
 
 input ReactionUpdateManyWithoutUserInput {
   connect: [ReactionWhereUniqueInput!]
-  connectOrCreate: [ReactionCreateOrConnectWithoutuserInput!]
+  connectOrCreate: [ReactionCreateOrConnectWithoutUserInput!]
   create: [ReactionCreateWithoutUserInput!]
+  createMany: ReactionCreateManyUserInputEnvelope
   delete: [ReactionWhereUniqueInput!]
   deleteMany: [ReactionScalarWhereInput!]
   disconnect: [ReactionWhereUniqueInput!]
@@ -3330,8 +3824,9 @@ input ReactionUpdateManyWithoutUserInput {
 
 input ReactionUpdateManyWithoutWorkInput {
   connect: [ReactionWhereUniqueInput!]
-  connectOrCreate: [ReactionCreateOrConnectWithoutworkInput!]
+  connectOrCreate: [ReactionCreateOrConnectWithoutWorkInput!]
   create: [ReactionCreateWithoutWorkInput!]
+  createMany: ReactionCreateManyWorkInputEnvelope
   delete: [ReactionWhereUniqueInput!]
   deleteMany: [ReactionScalarWhereInput!]
   disconnect: [ReactionWhereUniqueInput!]
@@ -3469,138 +3964,154 @@ enum Role {
 }
 
 type School {
-  address: String!
-  canton: String!
-  city: String!
-  id: String!
+  address: String
+  canton: String
+  city: String
+  id: String
   members(
     after: UserWhereUniqueInput
     before: UserWhereUniqueInput
     first: Int
     last: Int
   ): [User!]!
-  name: String!
+  name: String
   teams(
     after: TeamWhereUniqueInput
     before: TeamWhereUniqueInput
     first: Int
     last: Int
   ): [Team!]!
-  type: String!
-  zip: String!
-}
-
-input SchoolCreateInput {
-  activity: ActivityCreateManyWithoutSchoolInput
-  address: String
-  attachment: AttachmentCreateManyWithoutSchoolInput
-  ballots: BallotCreateManyWithoutSchoolInput
-  canton: String
-  city: String
-  discussion: DiscussionCreateManyWithoutSchoolInput
-  domain: DomainCreateOneWithoutSchoolsInput
-  id: String
-  members: UserCreateManyWithoutSchoolInput
-  name: String!
-  teams: TeamCreateManyWithoutSchoolInput
   type: String
-  Vote: VoteCreateManyWithoutSchoolInput
-  Voted: VotedCreateManyWithoutSchoolInput
-  work: WorkCreateManyWithoutSchoolInput
   zip: String
 }
 
-input SchoolCreateManyWithoutDomainInput {
-  connect: [SchoolWhereUniqueInput!]
-  connectOrCreate: [SchoolCreateOrConnectWithoutdomainInput!]
-  create: [SchoolCreateWithoutDomainInput!]
+input SchoolCreateInput {
+  activity: ActivityCreateNestedManyWithoutSchoolInput
+  address: String
+  attachment: AttachmentCreateNestedManyWithoutSchoolInput
+  ballots: BallotCreateNestedManyWithoutSchoolInput
+  canton: String
+  city: String
+  discussion: DiscussionCreateNestedManyWithoutSchoolInput
+  domain: DomainCreateNestedOneWithoutSchoolsInput
+  id: String
+  members: UserCreateNestedManyWithoutSchoolInput
+  name: String!
+  teams: TeamCreateNestedManyWithoutSchoolInput
+  type: String
+  Vote: VoteCreateNestedManyWithoutSchoolInput
+  Voted: VotedCreateNestedManyWithoutSchoolInput
+  work: WorkCreateNestedManyWithoutSchoolInput
+  zip: String
 }
 
-input SchoolCreateOneWithoutActivityInput {
+input SchoolCreateManyDomainInput {
+  address: String
+  canton: String
+  city: String
+  id: String
+  name: String!
+  type: String
+  zip: String
+}
+
+input SchoolCreateManyDomainInputEnvelope {
+  data: [SchoolCreateManyDomainInput!]
+  skipDuplicates: Boolean
+}
+
+input SchoolCreateNestedManyWithoutDomainInput {
+  connect: [SchoolWhereUniqueInput!]
+  connectOrCreate: [SchoolCreateOrConnectWithoutDomainInput!]
+  create: [SchoolCreateWithoutDomainInput!]
+  createMany: SchoolCreateManyDomainInputEnvelope
+}
+
+input SchoolCreateNestedOneWithoutActivityInput {
   connect: SchoolWhereUniqueInput
-  connectOrCreate: SchoolCreateOrConnectWithoutactivityInput
+  connectOrCreate: SchoolCreateOrConnectWithoutActivityInput
   create: SchoolCreateWithoutActivityInput
 }
 
-input SchoolCreateOneWithoutAttachmentInput {
+input SchoolCreateNestedOneWithoutAttachmentInput {
   connect: SchoolWhereUniqueInput
-  connectOrCreate: SchoolCreateOrConnectWithoutattachmentInput
+  connectOrCreate: SchoolCreateOrConnectWithoutAttachmentInput
   create: SchoolCreateWithoutAttachmentInput
 }
 
-input SchoolCreateOneWithoutBallotsInput {
+input SchoolCreateNestedOneWithoutBallotsInput {
   connect: SchoolWhereUniqueInput
-  connectOrCreate: SchoolCreateOrConnectWithoutballotsInput
+  connectOrCreate: SchoolCreateOrConnectWithoutBallotsInput
   create: SchoolCreateWithoutBallotsInput
 }
 
-input SchoolCreateOneWithoutDiscussionInput {
+input SchoolCreateNestedOneWithoutDiscussionInput {
   connect: SchoolWhereUniqueInput
-  connectOrCreate: SchoolCreateOrConnectWithoutdiscussionInput
+  connectOrCreate: SchoolCreateOrConnectWithoutDiscussionInput
   create: SchoolCreateWithoutDiscussionInput
 }
 
-input SchoolCreateOneWithoutMembersInput {
+input SchoolCreateNestedOneWithoutMembersInput {
   connect: SchoolWhereUniqueInput
-  connectOrCreate: SchoolCreateOrConnectWithoutmembersInput
+  connectOrCreate: SchoolCreateOrConnectWithoutMembersInput
   create: SchoolCreateWithoutMembersInput
 }
 
-input SchoolCreateOneWithoutTeamsInput {
+input SchoolCreateNestedOneWithoutTeamsInput {
   connect: SchoolWhereUniqueInput
-  connectOrCreate: SchoolCreateOrConnectWithoutteamsInput
+  connectOrCreate: SchoolCreateOrConnectWithoutTeamsInput
   create: SchoolCreateWithoutTeamsInput
 }
 
-input SchoolCreateOneWithoutVotedInput {
+input SchoolCreateNestedOneWithoutVotedInput {
   connect: SchoolWhereUniqueInput
   connectOrCreate: SchoolCreateOrConnectWithoutVotedInput
   create: SchoolCreateWithoutVotedInput
 }
 
-input SchoolCreateOneWithoutVoteInput {
+input SchoolCreateNestedOneWithoutVoteInput {
   connect: SchoolWhereUniqueInput
   connectOrCreate: SchoolCreateOrConnectWithoutVoteInput
   create: SchoolCreateWithoutVoteInput
 }
 
-input SchoolCreateOneWithoutWorkInput {
+input SchoolCreateNestedOneWithoutWorkInput {
   connect: SchoolWhereUniqueInput
-  connectOrCreate: SchoolCreateOrConnectWithoutworkInput
+  connectOrCreate: SchoolCreateOrConnectWithoutWorkInput
   create: SchoolCreateWithoutWorkInput
 }
 
-input SchoolCreateOrConnectWithoutactivityInput {
+input SchoolCreateOrConnectWithoutActivityInput {
   create: SchoolCreateWithoutActivityInput!
   where: SchoolWhereUniqueInput!
 }
 
-input SchoolCreateOrConnectWithoutattachmentInput {
+input SchoolCreateOrConnectWithoutAttachmentInput {
   create: SchoolCreateWithoutAttachmentInput!
   where: SchoolWhereUniqueInput!
 }
 
-input SchoolCreateOrConnectWithoutballotsInput {
+input SchoolCreateOrConnectWithoutBallotsInput {
   create: SchoolCreateWithoutBallotsInput!
   where: SchoolWhereUniqueInput!
 }
 
-input SchoolCreateOrConnectWithoutdiscussionInput {
+input SchoolCreateOrConnectWithoutDiscussionInput {
   create: SchoolCreateWithoutDiscussionInput!
   where: SchoolWhereUniqueInput!
 }
 
-input SchoolCreateOrConnectWithoutdomainInput {
+input SchoolCreateOrConnectWithoutDomainInput {
   create: SchoolCreateWithoutDomainInput!
   where: SchoolWhereUniqueInput!
 }
 
-input SchoolCreateOrConnectWithoutmembersInput {
+input SchoolCreateOrConnectWithoutMembersInput {
   create: SchoolCreateWithoutMembersInput!
   where: SchoolWhereUniqueInput!
 }
 
-input SchoolCreateOrConnectWithoutteamsInput {
+input SchoolCreateOrConnectWithoutTeamsInput {
   create: SchoolCreateWithoutTeamsInput!
   where: SchoolWhereUniqueInput!
 }
@@ -3615,198 +4126,198 @@ input SchoolCreateOrConnectWithoutVoteInput {
   where: SchoolWhereUniqueInput!
 }
 
-input SchoolCreateOrConnectWithoutworkInput {
+input SchoolCreateOrConnectWithoutWorkInput {
   create: SchoolCreateWithoutWorkInput!
   where: SchoolWhereUniqueInput!
 }
 
 input SchoolCreateWithoutActivityInput {
   address: String
-  attachment: AttachmentCreateManyWithoutSchoolInput
-  ballots: BallotCreateManyWithoutSchoolInput
+  attachment: AttachmentCreateNestedManyWithoutSchoolInput
+  ballots: BallotCreateNestedManyWithoutSchoolInput
   canton: String
   city: String
-  discussion: DiscussionCreateManyWithoutSchoolInput
-  domain: DomainCreateOneWithoutSchoolsInput
+  discussion: DiscussionCreateNestedManyWithoutSchoolInput
+  domain: DomainCreateNestedOneWithoutSchoolsInput
   id: String
-  members: UserCreateManyWithoutSchoolInput
+  members: UserCreateNestedManyWithoutSchoolInput
   name: String!
-  teams: TeamCreateManyWithoutSchoolInput
+  teams: TeamCreateNestedManyWithoutSchoolInput
   type: String
-  Vote: VoteCreateManyWithoutSchoolInput
-  Voted: VotedCreateManyWithoutSchoolInput
-  work: WorkCreateManyWithoutSchoolInput
+  Vote: VoteCreateNestedManyWithoutSchoolInput
+  Voted: VotedCreateNestedManyWithoutSchoolInput
+  work: WorkCreateNestedManyWithoutSchoolInput
   zip: String
 }
 
 input SchoolCreateWithoutAttachmentInput {
-  activity: ActivityCreateManyWithoutSchoolInput
+  activity: ActivityCreateNestedManyWithoutSchoolInput
   address: String
-  ballots: BallotCreateManyWithoutSchoolInput
+  ballots: BallotCreateNestedManyWithoutSchoolInput
   canton: String
   city: String
-  discussion: DiscussionCreateManyWithoutSchoolInput
-  domain: DomainCreateOneWithoutSchoolsInput
+  discussion: DiscussionCreateNestedManyWithoutSchoolInput
+  domain: DomainCreateNestedOneWithoutSchoolsInput
   id: String
-  members: UserCreateManyWithoutSchoolInput
+  members: UserCreateNestedManyWithoutSchoolInput
   name: String!
-  teams: TeamCreateManyWithoutSchoolInput
+  teams: TeamCreateNestedManyWithoutSchoolInput
   type: String
-  Vote: VoteCreateManyWithoutSchoolInput
-  Voted: VotedCreateManyWithoutSchoolInput
-  work: WorkCreateManyWithoutSchoolInput
+  Vote: VoteCreateNestedManyWithoutSchoolInput
+  Voted: VotedCreateNestedManyWithoutSchoolInput
+  work: WorkCreateNestedManyWithoutSchoolInput
   zip: String
 }
 
 input SchoolCreateWithoutBallotsInput {
-  activity: ActivityCreateManyWithoutSchoolInput
+  activity: ActivityCreateNestedManyWithoutSchoolInput
   address: String
-  attachment: AttachmentCreateManyWithoutSchoolInput
+  attachment: AttachmentCreateNestedManyWithoutSchoolInput
   canton: String
   city: String
-  discussion: DiscussionCreateManyWithoutSchoolInput
-  domain: DomainCreateOneWithoutSchoolsInput
+  discussion: DiscussionCreateNestedManyWithoutSchoolInput
+  domain: DomainCreateNestedOneWithoutSchoolsInput
   id: String
-  members: UserCreateManyWithoutSchoolInput
+  members: UserCreateNestedManyWithoutSchoolInput
   name: String!
-  teams: TeamCreateManyWithoutSchoolInput
+  teams: TeamCreateNestedManyWithoutSchoolInput
   type: String
-  Vote: VoteCreateManyWithoutSchoolInput
-  Voted: VotedCreateManyWithoutSchoolInput
-  work: WorkCreateManyWithoutSchoolInput
+  Vote: VoteCreateNestedManyWithoutSchoolInput
+  Voted: VotedCreateNestedManyWithoutSchoolInput
+  work: WorkCreateNestedManyWithoutSchoolInput
   zip: String
 }
 
 input SchoolCreateWithoutDiscussionInput {
-  activity: ActivityCreateManyWithoutSchoolInput
+  activity: ActivityCreateNestedManyWithoutSchoolInput
   address: String
-  attachment: AttachmentCreateManyWithoutSchoolInput
-  ballots: BallotCreateManyWithoutSchoolInput
+  attachment: AttachmentCreateNestedManyWithoutSchoolInput
+  ballots: BallotCreateNestedManyWithoutSchoolInput
   canton: String
   city: String
-  domain: DomainCreateOneWithoutSchoolsInput
+  domain: DomainCreateNestedOneWithoutSchoolsInput
   id: String
-  members: UserCreateManyWithoutSchoolInput
+  members: UserCreateNestedManyWithoutSchoolInput
   name: String!
-  teams: TeamCreateManyWithoutSchoolInput
+  teams: TeamCreateNestedManyWithoutSchoolInput
   type: String
-  Vote: VoteCreateManyWithoutSchoolInput
-  Voted: VotedCreateManyWithoutSchoolInput
-  work: WorkCreateManyWithoutSchoolInput
+  Vote: VoteCreateNestedManyWithoutSchoolInput
+  Voted: VotedCreateNestedManyWithoutSchoolInput
+  work: WorkCreateNestedManyWithoutSchoolInput
   zip: String
 }
 
 input SchoolCreateWithoutDomainInput {
-  activity: ActivityCreateManyWithoutSchoolInput
+  activity: ActivityCreateNestedManyWithoutSchoolInput
   address: String
-  attachment: AttachmentCreateManyWithoutSchoolInput
-  ballots: BallotCreateManyWithoutSchoolInput
+  attachment: AttachmentCreateNestedManyWithoutSchoolInput
+  ballots: BallotCreateNestedManyWithoutSchoolInput
   canton: String
   city: String
-  discussion: DiscussionCreateManyWithoutSchoolInput
+  discussion: DiscussionCreateNestedManyWithoutSchoolInput
   id: String
-  members: UserCreateManyWithoutSchoolInput
+  members: UserCreateNestedManyWithoutSchoolInput
   name: String!
-  teams: TeamCreateManyWithoutSchoolInput
+  teams: TeamCreateNestedManyWithoutSchoolInput
   type: String
-  Vote: VoteCreateManyWithoutSchoolInput
-  Voted: VotedCreateManyWithoutSchoolInput
-  work: WorkCreateManyWithoutSchoolInput
+  Vote: VoteCreateNestedManyWithoutSchoolInput
+  Voted: VotedCreateNestedManyWithoutSchoolInput
+  work: WorkCreateNestedManyWithoutSchoolInput
   zip: String
 }
 
 input SchoolCreateWithoutMembersInput {
-  activity: ActivityCreateManyWithoutSchoolInput
+  activity: ActivityCreateNestedManyWithoutSchoolInput
   address: String
-  attachment: AttachmentCreateManyWithoutSchoolInput
-  ballots: BallotCreateManyWithoutSchoolInput
+  attachment: AttachmentCreateNestedManyWithoutSchoolInput
+  ballots: BallotCreateNestedManyWithoutSchoolInput
   canton: String
   city: String
-  discussion: DiscussionCreateManyWithoutSchoolInput
-  domain: DomainCreateOneWithoutSchoolsInput
+  discussion: DiscussionCreateNestedManyWithoutSchoolInput
+  domain: DomainCreateNestedOneWithoutSchoolsInput
   id: String
   name: String!
-  teams: TeamCreateManyWithoutSchoolInput
+  teams: TeamCreateNestedManyWithoutSchoolInput
   type: String
-  Vote: VoteCreateManyWithoutSchoolInput
-  Voted: VotedCreateManyWithoutSchoolInput
-  work: WorkCreateManyWithoutSchoolInput
+  Vote: VoteCreateNestedManyWithoutSchoolInput
+  Voted: VotedCreateNestedManyWithoutSchoolInput
+  work: WorkCreateNestedManyWithoutSchoolInput
   zip: String
 }
 
 input SchoolCreateWithoutTeamsInput {
-  activity: ActivityCreateManyWithoutSchoolInput
+  activity: ActivityCreateNestedManyWithoutSchoolInput
   address: String
-  attachment: AttachmentCreateManyWithoutSchoolInput
-  ballots: BallotCreateManyWithoutSchoolInput
+  attachment: AttachmentCreateNestedManyWithoutSchoolInput
+  ballots: BallotCreateNestedManyWithoutSchoolInput
   canton: String
   city: String
-  discussion: DiscussionCreateManyWithoutSchoolInput
-  domain: DomainCreateOneWithoutSchoolsInput
+  discussion: DiscussionCreateNestedManyWithoutSchoolInput
+  domain: DomainCreateNestedOneWithoutSchoolsInput
   id: String
-  members: UserCreateManyWithoutSchoolInput
+  members: UserCreateNestedManyWithoutSchoolInput
   name: String!
   type: String
-  Vote: VoteCreateManyWithoutSchoolInput
-  Voted: VotedCreateManyWithoutSchoolInput
-  work: WorkCreateManyWithoutSchoolInput
+  Vote: VoteCreateNestedManyWithoutSchoolInput
+  Voted: VotedCreateNestedManyWithoutSchoolInput
+  work: WorkCreateNestedManyWithoutSchoolInput
   zip: String
 }
 
 input SchoolCreateWithoutVotedInput {
-  activity: ActivityCreateManyWithoutSchoolInput
+  activity: ActivityCreateNestedManyWithoutSchoolInput
   address: String
-  attachment: AttachmentCreateManyWithoutSchoolInput
-  ballots: BallotCreateManyWithoutSchoolInput
+  attachment: AttachmentCreateNestedManyWithoutSchoolInput
+  ballots: BallotCreateNestedManyWithoutSchoolInput
   canton: String
   city: String
-  discussion: DiscussionCreateManyWithoutSchoolInput
-  domain: DomainCreateOneWithoutSchoolsInput
+  discussion: DiscussionCreateNestedManyWithoutSchoolInput
+  domain: DomainCreateNestedOneWithoutSchoolsInput
   id: String
-  members: UserCreateManyWithoutSchoolInput
+  members: UserCreateNestedManyWithoutSchoolInput
   name: String!
-  teams: TeamCreateManyWithoutSchoolInput
+  teams: TeamCreateNestedManyWithoutSchoolInput
   type: String
-  Vote: VoteCreateManyWithoutSchoolInput
-  work: WorkCreateManyWithoutSchoolInput
+  Vote: VoteCreateNestedManyWithoutSchoolInput
+  work: WorkCreateNestedManyWithoutSchoolInput
   zip: String
 }
 
 input SchoolCreateWithoutVoteInput {
-  activity: ActivityCreateManyWithoutSchoolInput
+  activity: ActivityCreateNestedManyWithoutSchoolInput
   address: String
-  attachment: AttachmentCreateManyWithoutSchoolInput
-  ballots: BallotCreateManyWithoutSchoolInput
+  attachment: AttachmentCreateNestedManyWithoutSchoolInput
+  ballots: BallotCreateNestedManyWithoutSchoolInput
   canton: String
   city: String
-  discussion: DiscussionCreateManyWithoutSchoolInput
-  domain: DomainCreateOneWithoutSchoolsInput
+  discussion: DiscussionCreateNestedManyWithoutSchoolInput
+  domain: DomainCreateNestedOneWithoutSchoolsInput
   id: String
-  members: UserCreateManyWithoutSchoolInput
+  members: UserCreateNestedManyWithoutSchoolInput
   name: String!
-  teams: TeamCreateManyWithoutSchoolInput
+  teams: TeamCreateNestedManyWithoutSchoolInput
   type: String
-  Voted: VotedCreateManyWithoutSchoolInput
-  work: WorkCreateManyWithoutSchoolInput
+  Voted: VotedCreateNestedManyWithoutSchoolInput
+  work: WorkCreateNestedManyWithoutSchoolInput
   zip: String
 }
 
 input SchoolCreateWithoutWorkInput {
-  activity: ActivityCreateManyWithoutSchoolInput
+  activity: ActivityCreateNestedManyWithoutSchoolInput
   address: String
-  attachment: AttachmentCreateManyWithoutSchoolInput
-  ballots: BallotCreateManyWithoutSchoolInput
+  attachment: AttachmentCreateNestedManyWithoutSchoolInput
+  ballots: BallotCreateNestedManyWithoutSchoolInput
   canton: String
   city: String
-  discussion: DiscussionCreateManyWithoutSchoolInput
-  domain: DomainCreateOneWithoutSchoolsInput
+  discussion: DiscussionCreateNestedManyWithoutSchoolInput
+  domain: DomainCreateNestedOneWithoutSchoolsInput
   id: String
-  members: UserCreateManyWithoutSchoolInput
+  members: UserCreateNestedManyWithoutSchoolInput
   name: String!
-  teams: TeamCreateManyWithoutSchoolInput
+  teams: TeamCreateNestedManyWithoutSchoolInput
   type: String
-  Vote: VoteCreateManyWithoutSchoolInput
-  Voted: VotedCreateManyWithoutSchoolInput
+  Vote: VoteCreateNestedManyWithoutSchoolInput
+  Voted: VotedCreateNestedManyWithoutSchoolInput
   zip: String
 }
 
@@ -3853,8 +4364,9 @@ input SchoolUpdateManyMutationInput {
 
 input SchoolUpdateManyWithoutDomainInput {
   connect: [SchoolWhereUniqueInput!]
-  connectOrCreate: [SchoolCreateOrConnectWithoutdomainInput!]
+  connectOrCreate: [SchoolCreateOrConnectWithoutDomainInput!]
   create: [SchoolCreateWithoutDomainInput!]
+  createMany: SchoolCreateManyDomainInputEnvelope
   delete: [SchoolWhereUniqueInput!]
   deleteMany: [SchoolScalarWhereInput!]
   disconnect: [SchoolWhereUniqueInput!]
@@ -3871,7 +4383,7 @@ input SchoolUpdateManyWithWhereWithoutDomainInput {
 
 input SchoolUpdateOneRequiredWithoutActivityInput {
   connect: SchoolWhereUniqueInput
-  connectOrCreate: SchoolCreateOrConnectWithoutactivityInput
+  connectOrCreate: SchoolCreateOrConnectWithoutActivityInput
   create: SchoolCreateWithoutActivityInput
   update: SchoolUpdateWithoutActivityInput
   upsert: SchoolUpsertWithoutActivityInput
@@ -3879,7 +4391,7 @@ input SchoolUpdateOneRequiredWithoutActivityInput {
 
 input SchoolUpdateOneRequiredWithoutTeamsInput {
   connect: SchoolWhereUniqueInput
-  connectOrCreate: SchoolCreateOrConnectWithoutteamsInput
+  connectOrCreate: SchoolCreateOrConnectWithoutTeamsInput
   create: SchoolCreateWithoutTeamsInput
   update: SchoolUpdateWithoutTeamsInput
   upsert: SchoolUpsertWithoutTeamsInput
@@ -3887,7 +4399,7 @@ input SchoolUpdateOneRequiredWithoutTeamsInput {
 
 input SchoolUpdateOneRequiredWithoutWorkInput {
   connect: SchoolWhereUniqueInput
-  connectOrCreate: SchoolCreateOrConnectWithoutworkInput
+  connectOrCreate: SchoolCreateOrConnectWithoutWorkInput
   create: SchoolCreateWithoutWorkInput
   update: SchoolUpdateWithoutWorkInput
   upsert: SchoolUpsertWithoutWorkInput
@@ -3895,7 +4407,7 @@ input SchoolUpdateOneRequiredWithoutWorkInput {
 
 input SchoolUpdateOneWithoutAttachmentInput {
   connect: SchoolWhereUniqueInput
-  connectOrCreate: SchoolCreateOrConnectWithoutattachmentInput
+  connectOrCreate: SchoolCreateOrConnectWithoutAttachmentInput
   create: SchoolCreateWithoutAttachmentInput
   delete: Boolean
   disconnect: Boolean
@@ -3905,7 +4417,7 @@ input SchoolUpdateOneWithoutAttachmentInput {
 
 input SchoolUpdateOneWithoutBallotsInput {
   connect: SchoolWhereUniqueInput
-  connectOrCreate: SchoolCreateOrConnectWithoutballotsInput
+  connectOrCreate: SchoolCreateOrConnectWithoutBallotsInput
   create: SchoolCreateWithoutBallotsInput
   delete: Boolean
   disconnect: Boolean
@@ -3915,7 +4427,7 @@ input SchoolUpdateOneWithoutBallotsInput {
 
 input SchoolUpdateOneWithoutDiscussionInput {
   connect: SchoolWhereUniqueInput
-  connectOrCreate: SchoolCreateOrConnectWithoutdiscussionInput
+  connectOrCreate: SchoolCreateOrConnectWithoutDiscussionInput
   create: SchoolCreateWithoutDiscussionInput
   delete: Boolean
   disconnect: Boolean
@@ -3925,7 +4437,7 @@ input SchoolUpdateOneWithoutDiscussionInput {
 
 input SchoolUpdateOneWithoutMembersInput {
   connect: SchoolWhereUniqueInput
-  connectOrCreate: SchoolCreateOrConnectWithoutmembersInput
+  connectOrCreate: SchoolCreateOrConnectWithoutMembersInput
   create: SchoolCreateWithoutMembersInput
   delete: Boolean
   disconnect: Boolean
@@ -4293,10 +4805,10 @@ type Team {
     first: Int
     last: Int
   ): [Ballot!]!
-  cards: String!
+  cards: String
   code: String
   domain: Domain
-  id: String!
+  id: String
   invite: String
   members(
     after: UserWhereUniqueInput
@@ -4304,122 +4816,185 @@ type Team {
     first: Int
     last: Int
   ): [User!]!
-  name: String!
-  notes: Json!
-  prefs: Json!
-  school: School!
-  teacher: User!
-  teacherId: String!
+  name: String
+  notes: Json
+  prefs: Json
+  school: School
+  teacher: User
+  teacherId: String
 }
 
 input TeamCreateInput {
-  activity: ActivityCreateManyWithoutTeamInput
-  attachment: AttachmentCreateManyWithoutTeamInput
-  BallotRuns: BallotRunCreateManyWithoutTeamInput
-  ballots: BallotCreateManyWithoutTeamInput
+  activity: ActivityCreateNestedManyWithoutTeamInput
+  attachment: AttachmentCreateNestedManyWithoutTeamInput
+  BallotRuns: BallotRunCreateNestedManyWithoutTeamInput
+  ballots: BallotCreateNestedManyWithoutTeamInput
   cards: String
   createdAt: DateTime
-  discussion: DiscussionCreateManyWithoutTeamInput
-  domain: DomainCreateOneWithoutTeamInput
+  discussion: DiscussionCreateNestedManyWithoutTeamInput
+  domain: DomainCreateNestedOneWithoutTeamInput
   id: String
-  members: UserCreateManyWithoutTeamInput
+  members: UserCreateNestedManyWithoutTeamInput
   name: String!
   notes: Json
   prefs: Json
-  school: SchoolCreateOneWithoutTeamsInput!
-  teacher: UserCreateOneWithoutTeachesInput!
+  school: SchoolCreateNestedOneWithoutTeamsInput!
+  teacher: UserCreateNestedOneWithoutTeachesInput!
   updatedAt: DateTime
-  User: UserCreateManyWithoutTeamInput
-  Vote: VoteCreateManyWithoutTeamInput
-  Voted: VotedCreateManyWithoutTeamInput
-  work: WorkCreateManyWithoutTeamInput
+  User: UserCreateNestedManyWithoutTeamInput
+  Vote: VoteCreateNestedManyWithoutTeamInput
+  Voted: VotedCreateNestedManyWithoutTeamInput
+  work: WorkCreateNestedManyWithoutTeamInput
   year: Int
 }
 
-input TeamCreateManyWithoutDomainInput {
+input TeamCreateManyDomainInput {
+  cards: String
+  code: String
+  createdAt: DateTime
+  id: String
+  invite: String
+  name: String!
+  notes: Json
+  prefs: Json
+  schoolId: String!
+  teacherId: String!
+  updatedAt: DateTime
+  year: Int
+}
+
+input TeamCreateManyDomainInputEnvelope {
+  data: [TeamCreateManyDomainInput!]
+  skipDuplicates: Boolean
+}
+
+input TeamCreateManySchoolInput {
+  cards: String
+  code: String
+  createdAt: DateTime
+  domainId: String
+  id: String
+  invite: String
+  name: String!
+  notes: Json
+  prefs: Json
+  teacherId: String!
+  updatedAt: DateTime
+  year: Int
+}
+
+input TeamCreateManySchoolInputEnvelope {
+  data: [TeamCreateManySchoolInput!]
+  skipDuplicates: Boolean
+}
+
+input TeamCreateManyTeacherInput {
+  cards: String
+  code: String
+  createdAt: DateTime
+  domainId: String
+  id: String
+  invite: String
+  name: String!
+  notes: Json
+  prefs: Json
+  schoolId: String!
+  updatedAt: DateTime
+  year: Int
+}
+
+input TeamCreateManyTeacherInputEnvelope {
+  data: [TeamCreateManyTeacherInput!]
+  skipDuplicates: Boolean
+}
+
+input TeamCreateNestedManyWithoutDomainInput {
   connect: [TeamWhereUniqueInput!]
-  connectOrCreate: [TeamCreateOrConnectWithoutdomainInput!]
+  connectOrCreate: [TeamCreateOrConnectWithoutDomainInput!]
   create: [TeamCreateWithoutDomainInput!]
+  createMany: TeamCreateManyDomainInputEnvelope
 }
 
-input TeamCreateManyWithoutSchoolInput {
+input TeamCreateNestedManyWithoutSchoolInput {
   connect: [TeamWhereUniqueInput!]
-  connectOrCreate: [TeamCreateOrConnectWithoutschoolInput!]
+  connectOrCreate: [TeamCreateOrConnectWithoutSchoolInput!]
   create: [TeamCreateWithoutSchoolInput!]
+  createMany: TeamCreateManySchoolInputEnvelope
 }
 
-input TeamCreateManyWithoutTeacherInput {
+input TeamCreateNestedManyWithoutTeacherInput {
   connect: [TeamWhereUniqueInput!]
-  connectOrCreate: [TeamCreateOrConnectWithoutteacherInput!]
+  connectOrCreate: [TeamCreateOrConnectWithoutTeacherInput!]
   create: [TeamCreateWithoutTeacherInput!]
+  createMany: TeamCreateManyTeacherInputEnvelope
 }
 
-input TeamCreateOneWithoutActivityInput {
+input TeamCreateNestedOneWithoutActivityInput {
   connect: TeamWhereUniqueInput
-  connectOrCreate: TeamCreateOrConnectWithoutactivityInput
+  connectOrCreate: TeamCreateOrConnectWithoutActivityInput
   create: TeamCreateWithoutActivityInput
 }
 
-input TeamCreateOneWithoutAttachmentInput {
+input TeamCreateNestedOneWithoutAttachmentInput {
   connect: TeamWhereUniqueInput
-  connectOrCreate: TeamCreateOrConnectWithoutattachmentInput
+  connectOrCreate: TeamCreateOrConnectWithoutAttachmentInput
   create: TeamCreateWithoutAttachmentInput
 }
 
-input TeamCreateOneWithoutBallotRunsInput {
+input TeamCreateNestedOneWithoutBallotRunsInput {
   connect: TeamWhereUniqueInput
   connectOrCreate: TeamCreateOrConnectWithoutBallotRunsInput
   create: TeamCreateWithoutBallotRunsInput
 }
 
-input TeamCreateOneWithoutBallotsInput {
+input TeamCreateNestedOneWithoutBallotsInput {
   connect: TeamWhereUniqueInput
-  connectOrCreate: TeamCreateOrConnectWithoutballotsInput
+  connectOrCreate: TeamCreateOrConnectWithoutBallotsInput
   create: TeamCreateWithoutBallotsInput
 }
 
-input TeamCreateOneWithoutDiscussionInput {
+input TeamCreateNestedOneWithoutDiscussionInput {
   connect: TeamWhereUniqueInput
-  connectOrCreate: TeamCreateOrConnectWithoutdiscussionInput
+  connectOrCreate: TeamCreateOrConnectWithoutDiscussionInput
   create: TeamCreateWithoutDiscussionInput
 }
 
-input TeamCreateOneWithoutMembersInput {
+input TeamCreateNestedOneWithoutMembersInput {
   connect: TeamWhereUniqueInput
-  connectOrCreate: TeamCreateOrConnectWithoutmembersInput
+  connectOrCreate: TeamCreateOrConnectWithoutMembersInput
   create: TeamCreateWithoutMembersInput
 }
 
-input TeamCreateOneWithoutUserInput {
+input TeamCreateNestedOneWithoutUserInput {
   connect: TeamWhereUniqueInput
   connectOrCreate: TeamCreateOrConnectWithoutUserInput
   create: TeamCreateWithoutUserInput
 }
 
-input TeamCreateOneWithoutVotedInput {
+input TeamCreateNestedOneWithoutVotedInput {
   connect: TeamWhereUniqueInput
   connectOrCreate: TeamCreateOrConnectWithoutVotedInput
   create: TeamCreateWithoutVotedInput
 }
 
-input TeamCreateOneWithoutVoteInput {
+input TeamCreateNestedOneWithoutVoteInput {
   connect: TeamWhereUniqueInput
   connectOrCreate: TeamCreateOrConnectWithoutVoteInput
   create: TeamCreateWithoutVoteInput
 }
 
-input TeamCreateOneWithoutWorkInput {
+input TeamCreateNestedOneWithoutWorkInput {
   connect: TeamWhereUniqueInput
-  connectOrCreate: TeamCreateOrConnectWithoutworkInput
+  connectOrCreate: TeamCreateOrConnectWithoutWorkInput
   create: TeamCreateWithoutWorkInput
 }
 
-input TeamCreateOrConnectWithoutactivityInput {
+input TeamCreateOrConnectWithoutActivityInput {
   create: TeamCreateWithoutActivityInput!
   where: TeamWhereUniqueInput!
 }
 
-input TeamCreateOrConnectWithoutattachmentInput {
+input TeamCreateOrConnectWithoutAttachmentInput {
   create: TeamCreateWithoutAttachmentInput!
   where: TeamWhereUniqueInput!
 }
@@ -4429,32 +5004,32 @@ input TeamCreateOrConnectWithoutBallotRunsInput {
   where: TeamWhereUniqueInput!
 }
 
-input TeamCreateOrConnectWithoutballotsInput {
+input TeamCreateOrConnectWithoutBallotsInput {
   create: TeamCreateWithoutBallotsInput!
   where: TeamWhereUniqueInput!
 }
 
-input TeamCreateOrConnectWithoutdiscussionInput {
+input TeamCreateOrConnectWithoutDiscussionInput {
   create: TeamCreateWithoutDiscussionInput!
   where: TeamWhereUniqueInput!
 }
 
-input TeamCreateOrConnectWithoutdomainInput {
+input TeamCreateOrConnectWithoutDomainInput {
   create: TeamCreateWithoutDomainInput!
   where: TeamWhereUniqueInput!
 }
 
-input TeamCreateOrConnectWithoutmembersInput {
+input TeamCreateOrConnectWithoutMembersInput {
   create: TeamCreateWithoutMembersInput!
   where: TeamWhereUniqueInput!
 }
 
-input TeamCreateOrConnectWithoutschoolInput {
+input TeamCreateOrConnectWithoutSchoolInput {
   create: TeamCreateWithoutSchoolInput!
   where: TeamWhereUniqueInput!
 }
 
-input TeamCreateOrConnectWithoutteacherInput {
+input TeamCreateOrConnectWithoutTeacherInput {
   create: TeamCreateWithoutTeacherInput!
   where: TeamWhereUniqueInput!
 }
@@ -4474,333 +5049,333 @@ input TeamCreateOrConnectWithoutVoteInput {
   where: TeamWhereUniqueInput!
 }
 
-input TeamCreateOrConnectWithoutworkInput {
+input TeamCreateOrConnectWithoutWorkInput {
   create: TeamCreateWithoutWorkInput!
   where: TeamWhereUniqueInput!
 }
 
 input TeamCreateWithoutActivityInput {
-  attachment: AttachmentCreateManyWithoutTeamInput
-  BallotRuns: BallotRunCreateManyWithoutTeamInput
-  ballots: BallotCreateManyWithoutTeamInput
+  attachment: AttachmentCreateNestedManyWithoutTeamInput
+  BallotRuns: BallotRunCreateNestedManyWithoutTeamInput
+  ballots: BallotCreateNestedManyWithoutTeamInput
   cards: String
   code: String
   createdAt: DateTime
-  discussion: DiscussionCreateManyWithoutTeamInput
-  domain: DomainCreateOneWithoutTeamInput
+  discussion: DiscussionCreateNestedManyWithoutTeamInput
+  domain: DomainCreateNestedOneWithoutTeamInput
   id: String
   invite: String
-  members: UserCreateManyWithoutTeamInput
+  members: UserCreateNestedManyWithoutTeamInput
   name: String!
   notes: Json
   prefs: Json
-  school: SchoolCreateOneWithoutTeamsInput!
-  teacher: UserCreateOneWithoutTeachesInput!
+  school: SchoolCreateNestedOneWithoutTeamsInput!
+  teacher: UserCreateNestedOneWithoutTeachesInput!
   updatedAt: DateTime
-  User: UserCreateManyWithoutTeamInput
-  Vote: VoteCreateManyWithoutTeamInput
-  Voted: VotedCreateManyWithoutTeamInput
-  work: WorkCreateManyWithoutTeamInput
+  User: UserCreateNestedManyWithoutTeamInput
+  Vote: VoteCreateNestedManyWithoutTeamInput
+  Voted: VotedCreateNestedManyWithoutTeamInput
+  work: WorkCreateNestedManyWithoutTeamInput
   year: Int
 }
 
 input TeamCreateWithoutAttachmentInput {
-  activity: ActivityCreateManyWithoutTeamInput
-  BallotRuns: BallotRunCreateManyWithoutTeamInput
-  ballots: BallotCreateManyWithoutTeamInput
+  activity: ActivityCreateNestedManyWithoutTeamInput
+  BallotRuns: BallotRunCreateNestedManyWithoutTeamInput
+  ballots: BallotCreateNestedManyWithoutTeamInput
   cards: String
   code: String
   createdAt: DateTime
-  discussion: DiscussionCreateManyWithoutTeamInput
-  domain: DomainCreateOneWithoutTeamInput
+  discussion: DiscussionCreateNestedManyWithoutTeamInput
+  domain: DomainCreateNestedOneWithoutTeamInput
   id: String
   invite: String
-  members: UserCreateManyWithoutTeamInput
+  members: UserCreateNestedManyWithoutTeamInput
   name: String!
   notes: Json
   prefs: Json
-  school: SchoolCreateOneWithoutTeamsInput!
-  teacher: UserCreateOneWithoutTeachesInput!
+  school: SchoolCreateNestedOneWithoutTeamsInput!
+  teacher: UserCreateNestedOneWithoutTeachesInput!
   updatedAt: DateTime
-  User: UserCreateManyWithoutTeamInput
-  Vote: VoteCreateManyWithoutTeamInput
-  Voted: VotedCreateManyWithoutTeamInput
-  work: WorkCreateManyWithoutTeamInput
+  User: UserCreateNestedManyWithoutTeamInput
+  Vote: VoteCreateNestedManyWithoutTeamInput
+  Voted: VotedCreateNestedManyWithoutTeamInput
+  work: WorkCreateNestedManyWithoutTeamInput
   year: Int
 }
 
 input TeamCreateWithoutBallotRunsInput {
-  activity: ActivityCreateManyWithoutTeamInput
-  attachment: AttachmentCreateManyWithoutTeamInput
-  ballots: BallotCreateManyWithoutTeamInput
+  activity: ActivityCreateNestedManyWithoutTeamInput
+  attachment: AttachmentCreateNestedManyWithoutTeamInput
+  ballots: BallotCreateNestedManyWithoutTeamInput
   cards: String
   code: String
   createdAt: DateTime
-  discussion: DiscussionCreateManyWithoutTeamInput
-  domain: DomainCreateOneWithoutTeamInput
+  discussion: DiscussionCreateNestedManyWithoutTeamInput
+  domain: DomainCreateNestedOneWithoutTeamInput
   id: String
   invite: String
-  members: UserCreateManyWithoutTeamInput
+  members: UserCreateNestedManyWithoutTeamInput
   name: String!
   notes: Json
   prefs: Json
-  school: SchoolCreateOneWithoutTeamsInput!
-  teacher: UserCreateOneWithoutTeachesInput!
+  school: SchoolCreateNestedOneWithoutTeamsInput!
+  teacher: UserCreateNestedOneWithoutTeachesInput!
   updatedAt: DateTime
-  User: UserCreateManyWithoutTeamInput
-  Vote: VoteCreateManyWithoutTeamInput
-  Voted: VotedCreateManyWithoutTeamInput
-  work: WorkCreateManyWithoutTeamInput
+  User: UserCreateNestedManyWithoutTeamInput
+  Vote: VoteCreateNestedManyWithoutTeamInput
+  Voted: VotedCreateNestedManyWithoutTeamInput
+  work: WorkCreateNestedManyWithoutTeamInput
   year: Int
 }
 
 input TeamCreateWithoutBallotsInput {
-  activity: ActivityCreateManyWithoutTeamInput
-  attachment: AttachmentCreateManyWithoutTeamInput
-  BallotRuns: BallotRunCreateManyWithoutTeamInput
+  activity: ActivityCreateNestedManyWithoutTeamInput
+  attachment: AttachmentCreateNestedManyWithoutTeamInput
+  BallotRuns: BallotRunCreateNestedManyWithoutTeamInput
   cards: String
   code: String
   createdAt: DateTime
-  discussion: DiscussionCreateManyWithoutTeamInput
-  domain: DomainCreateOneWithoutTeamInput
+  discussion: DiscussionCreateNestedManyWithoutTeamInput
+  domain: DomainCreateNestedOneWithoutTeamInput
   id: String
   invite: String
-  members: UserCreateManyWithoutTeamInput
+  members: UserCreateNestedManyWithoutTeamInput
   name: String!
   notes: Json
   prefs: Json
-  school: SchoolCreateOneWithoutTeamsInput!
-  teacher: UserCreateOneWithoutTeachesInput!
+  school: SchoolCreateNestedOneWithoutTeamsInput!
+  teacher: UserCreateNestedOneWithoutTeachesInput!
   updatedAt: DateTime
-  User: UserCreateManyWithoutTeamInput
-  Vote: VoteCreateManyWithoutTeamInput
-  Voted: VotedCreateManyWithoutTeamInput
-  work: WorkCreateManyWithoutTeamInput
+  User: UserCreateNestedManyWithoutTeamInput
+  Vote: VoteCreateNestedManyWithoutTeamInput
+  Voted: VotedCreateNestedManyWithoutTeamInput
+  work: WorkCreateNestedManyWithoutTeamInput
   year: Int
 }
 
 input TeamCreateWithoutDiscussionInput {
-  activity: ActivityCreateManyWithoutTeamInput
-  attachment: AttachmentCreateManyWithoutTeamInput
-  BallotRuns: BallotRunCreateManyWithoutTeamInput
-  ballots: BallotCreateManyWithoutTeamInput
+  activity: ActivityCreateNestedManyWithoutTeamInput
+  attachment: AttachmentCreateNestedManyWithoutTeamInput
+  BallotRuns: BallotRunCreateNestedManyWithoutTeamInput
+  ballots: BallotCreateNestedManyWithoutTeamInput
   cards: String
   code: String
   createdAt: DateTime
-  domain: DomainCreateOneWithoutTeamInput
+  domain: DomainCreateNestedOneWithoutTeamInput
   id: String
   invite: String
-  members: UserCreateManyWithoutTeamInput
+  members: UserCreateNestedManyWithoutTeamInput
   name: String!
   notes: Json
   prefs: Json
-  school: SchoolCreateOneWithoutTeamsInput!
-  teacher: UserCreateOneWithoutTeachesInput!
+  school: SchoolCreateNestedOneWithoutTeamsInput!
+  teacher: UserCreateNestedOneWithoutTeachesInput!
   updatedAt: DateTime
-  User: UserCreateManyWithoutTeamInput
-  Vote: VoteCreateManyWithoutTeamInput
-  Voted: VotedCreateManyWithoutTeamInput
-  work: WorkCreateManyWithoutTeamInput
+  User: UserCreateNestedManyWithoutTeamInput
+  Vote: VoteCreateNestedManyWithoutTeamInput
+  Voted: VotedCreateNestedManyWithoutTeamInput
+  work: WorkCreateNestedManyWithoutTeamInput
   year: Int
 }
 
 input TeamCreateWithoutDomainInput {
-  activity: ActivityCreateManyWithoutTeamInput
-  attachment: AttachmentCreateManyWithoutTeamInput
-  BallotRuns: BallotRunCreateManyWithoutTeamInput
-  ballots: BallotCreateManyWithoutTeamInput
+  activity: ActivityCreateNestedManyWithoutTeamInput
+  attachment: AttachmentCreateNestedManyWithoutTeamInput
+  BallotRuns: BallotRunCreateNestedManyWithoutTeamInput
+  ballots: BallotCreateNestedManyWithoutTeamInput
   cards: String
   code: String
   createdAt: DateTime
-  discussion: DiscussionCreateManyWithoutTeamInput
+  discussion: DiscussionCreateNestedManyWithoutTeamInput
   id: String
   invite: String
-  members: UserCreateManyWithoutTeamInput
+  members: UserCreateNestedManyWithoutTeamInput
   name: String!
   notes: Json
   prefs: Json
-  school: SchoolCreateOneWithoutTeamsInput!
-  teacher: UserCreateOneWithoutTeachesInput!
+  school: SchoolCreateNestedOneWithoutTeamsInput!
+  teacher: UserCreateNestedOneWithoutTeachesInput!
   updatedAt: DateTime
-  User: UserCreateManyWithoutTeamInput
-  Vote: VoteCreateManyWithoutTeamInput
-  Voted: VotedCreateManyWithoutTeamInput
-  work: WorkCreateManyWithoutTeamInput
+  User: UserCreateNestedManyWithoutTeamInput
+  Vote: VoteCreateNestedManyWithoutTeamInput
+  Voted: VotedCreateNestedManyWithoutTeamInput
+  work: WorkCreateNestedManyWithoutTeamInput
   year: Int
 }
 
 input TeamCreateWithoutMembersInput {
-  activity: ActivityCreateManyWithoutTeamInput
-  attachment: AttachmentCreateManyWithoutTeamInput
-  BallotRuns: BallotRunCreateManyWithoutTeamInput
-  ballots: BallotCreateManyWithoutTeamInput
+  activity: ActivityCreateNestedManyWithoutTeamInput
+  attachment: AttachmentCreateNestedManyWithoutTeamInput
+  BallotRuns: BallotRunCreateNestedManyWithoutTeamInput
+  ballots: BallotCreateNestedManyWithoutTeamInput
   cards: String
   code: String
   createdAt: DateTime
-  discussion: DiscussionCreateManyWithoutTeamInput
-  domain: DomainCreateOneWithoutTeamInput
+  discussion: DiscussionCreateNestedManyWithoutTeamInput
+  domain: DomainCreateNestedOneWithoutTeamInput
   id: String
   invite: String
   name: String!
   notes: Json
   prefs: Json
-  school: SchoolCreateOneWithoutTeamsInput!
-  teacher: UserCreateOneWithoutTeachesInput!
+  school: SchoolCreateNestedOneWithoutTeamsInput!
+  teacher: UserCreateNestedOneWithoutTeachesInput!
   updatedAt: DateTime
-  User: UserCreateManyWithoutTeamInput
-  Vote: VoteCreateManyWithoutTeamInput
-  Voted: VotedCreateManyWithoutTeamInput
-  work: WorkCreateManyWithoutTeamInput
+  User: UserCreateNestedManyWithoutTeamInput
+  Vote: VoteCreateNestedManyWithoutTeamInput
+  Voted: VotedCreateNestedManyWithoutTeamInput
+  work: WorkCreateNestedManyWithoutTeamInput
   year: Int
 }
 
 input TeamCreateWithoutSchoolInput {
-  activity: ActivityCreateManyWithoutTeamInput
-  attachment: AttachmentCreateManyWithoutTeamInput
-  BallotRuns: BallotRunCreateManyWithoutTeamInput
-  ballots: BallotCreateManyWithoutTeamInput
+  activity: ActivityCreateNestedManyWithoutTeamInput
+  attachment: AttachmentCreateNestedManyWithoutTeamInput
+  BallotRuns: BallotRunCreateNestedManyWithoutTeamInput
+  ballots: BallotCreateNestedManyWithoutTeamInput
   cards: String
   code: String
   createdAt: DateTime
-  discussion: DiscussionCreateManyWithoutTeamInput
-  domain: DomainCreateOneWithoutTeamInput
+  discussion: DiscussionCreateNestedManyWithoutTeamInput
+  domain: DomainCreateNestedOneWithoutTeamInput
   id: String
   invite: String
-  members: UserCreateManyWithoutTeamInput
+  members: UserCreateNestedManyWithoutTeamInput
   name: String!
   notes: Json
   prefs: Json
-  teacher: UserCreateOneWithoutTeachesInput!
+  teacher: UserCreateNestedOneWithoutTeachesInput!
   updatedAt: DateTime
-  User: UserCreateManyWithoutTeamInput
-  Vote: VoteCreateManyWithoutTeamInput
-  Voted: VotedCreateManyWithoutTeamInput
-  work: WorkCreateManyWithoutTeamInput
+  User: UserCreateNestedManyWithoutTeamInput
+  Vote: VoteCreateNestedManyWithoutTeamInput
+  Voted: VotedCreateNestedManyWithoutTeamInput
+  work: WorkCreateNestedManyWithoutTeamInput
   year: Int
 }
 
 input TeamCreateWithoutTeacherInput {
-  activity: ActivityCreateManyWithoutTeamInput
-  attachment: AttachmentCreateManyWithoutTeamInput
-  BallotRuns: BallotRunCreateManyWithoutTeamInput
-  ballots: BallotCreateManyWithoutTeamInput
+  activity: ActivityCreateNestedManyWithoutTeamInput
+  attachment: AttachmentCreateNestedManyWithoutTeamInput
+  BallotRuns: BallotRunCreateNestedManyWithoutTeamInput
+  ballots: BallotCreateNestedManyWithoutTeamInput
   cards: String
   code: String
   createdAt: DateTime
-  discussion: DiscussionCreateManyWithoutTeamInput
-  domain: DomainCreateOneWithoutTeamInput
+  discussion: DiscussionCreateNestedManyWithoutTeamInput
+  domain: DomainCreateNestedOneWithoutTeamInput
   id: String
   invite: String
-  members: UserCreateManyWithoutTeamInput
+  members: UserCreateNestedManyWithoutTeamInput
   name: String!
   notes: Json
   prefs: Json
-  school: SchoolCreateOneWithoutTeamsInput!
+  school: SchoolCreateNestedOneWithoutTeamsInput!
   updatedAt: DateTime
-  User: UserCreateManyWithoutTeamInput
-  Vote: VoteCreateManyWithoutTeamInput
-  Voted: VotedCreateManyWithoutTeamInput
-  work: WorkCreateManyWithoutTeamInput
+  User: UserCreateNestedManyWithoutTeamInput
+  Vote: VoteCreateNestedManyWithoutTeamInput
+  Voted: VotedCreateNestedManyWithoutTeamInput
+  work: WorkCreateNestedManyWithoutTeamInput
   year: Int
 }
 
 input TeamCreateWithoutUserInput {
-  activity: ActivityCreateManyWithoutTeamInput
-  attachment: AttachmentCreateManyWithoutTeamInput
-  BallotRuns: BallotRunCreateManyWithoutTeamInput
-  ballots: BallotCreateManyWithoutTeamInput
+  activity: ActivityCreateNestedManyWithoutTeamInput
+  attachment: AttachmentCreateNestedManyWithoutTeamInput
+  BallotRuns: BallotRunCreateNestedManyWithoutTeamInput
+  ballots: BallotCreateNestedManyWithoutTeamInput
   cards: String
   code: String
   createdAt: DateTime
-  discussion: DiscussionCreateManyWithoutTeamInput
-  domain: DomainCreateOneWithoutTeamInput
+  discussion: DiscussionCreateNestedManyWithoutTeamInput
+  domain: DomainCreateNestedOneWithoutTeamInput
   id: String
   invite: String
-  members: UserCreateManyWithoutTeamInput
+  members: UserCreateNestedManyWithoutTeamInput
   name: String!
   notes: Json
   prefs: Json
-  school: SchoolCreateOneWithoutTeamsInput!
-  teacher: UserCreateOneWithoutTeachesInput!
+  school: SchoolCreateNestedOneWithoutTeamsInput!
+  teacher: UserCreateNestedOneWithoutTeachesInput!
   updatedAt: DateTime
-  Vote: VoteCreateManyWithoutTeamInput
-  Voted: VotedCreateManyWithoutTeamInput
-  work: WorkCreateManyWithoutTeamInput
+  Vote: VoteCreateNestedManyWithoutTeamInput
+  Voted: VotedCreateNestedManyWithoutTeamInput
+  work: WorkCreateNestedManyWithoutTeamInput
   year: Int
 }
 
 input TeamCreateWithoutVotedInput {
-  activity: ActivityCreateManyWithoutTeamInput
-  attachment: AttachmentCreateManyWithoutTeamInput
-  BallotRuns: BallotRunCreateManyWithoutTeamInput
-  ballots: BallotCreateManyWithoutTeamInput
+  activity: ActivityCreateNestedManyWithoutTeamInput
+  attachment: AttachmentCreateNestedManyWithoutTeamInput
+  BallotRuns: BallotRunCreateNestedManyWithoutTeamInput
+  ballots: BallotCreateNestedManyWithoutTeamInput
   cards: String
   code: String
   createdAt: DateTime
-  discussion: DiscussionCreateManyWithoutTeamInput
-  domain: DomainCreateOneWithoutTeamInput
+  discussion: DiscussionCreateNestedManyWithoutTeamInput
+  domain: DomainCreateNestedOneWithoutTeamInput
   id: String
   invite: String
-  members: UserCreateManyWithoutTeamInput
+  members: UserCreateNestedManyWithoutTeamInput
   name: String!
   notes: Json
   prefs: Json
-  school: SchoolCreateOneWithoutTeamsInput!
-  teacher: UserCreateOneWithoutTeachesInput!
+  school: SchoolCreateNestedOneWithoutTeamsInput!
+  teacher: UserCreateNestedOneWithoutTeachesInput!
   updatedAt: DateTime
-  User: UserCreateManyWithoutTeamInput
-  Vote: VoteCreateManyWithoutTeamInput
-  work: WorkCreateManyWithoutTeamInput
+  User: UserCreateNestedManyWithoutTeamInput
+  Vote: VoteCreateNestedManyWithoutTeamInput
+  work: WorkCreateNestedManyWithoutTeamInput
   year: Int
 }
 
 input TeamCreateWithoutVoteInput {
-  activity: ActivityCreateManyWithoutTeamInput
-  attachment: AttachmentCreateManyWithoutTeamInput
-  BallotRuns: BallotRunCreateManyWithoutTeamInput
-  ballots: BallotCreateManyWithoutTeamInput
+  activity: ActivityCreateNestedManyWithoutTeamInput
+  attachment: AttachmentCreateNestedManyWithoutTeamInput
+  BallotRuns: BallotRunCreateNestedManyWithoutTeamInput
+  ballots: BallotCreateNestedManyWithoutTeamInput
   cards: String
   code: String
   createdAt: DateTime
-  discussion: DiscussionCreateManyWithoutTeamInput
-  domain: DomainCreateOneWithoutTeamInput
+  discussion: DiscussionCreateNestedManyWithoutTeamInput
+  domain: DomainCreateNestedOneWithoutTeamInput
   id: String
   invite: String
-  members: UserCreateManyWithoutTeamInput
+  members: UserCreateNestedManyWithoutTeamInput
   name: String!
   notes: Json
   prefs: Json
-  school: SchoolCreateOneWithoutTeamsInput!
-  teacher: UserCreateOneWithoutTeachesInput!
+  school: SchoolCreateNestedOneWithoutTeamsInput!
+  teacher: UserCreateNestedOneWithoutTeachesInput!
   updatedAt: DateTime
-  User: UserCreateManyWithoutTeamInput
-  Voted: VotedCreateManyWithoutTeamInput
-  work: WorkCreateManyWithoutTeamInput
+  User: UserCreateNestedManyWithoutTeamInput
+  Voted: VotedCreateNestedManyWithoutTeamInput
+  work: WorkCreateNestedManyWithoutTeamInput
   year: Int
 }
 
 input TeamCreateWithoutWorkInput {
-  activity: ActivityCreateManyWithoutTeamInput
-  attachment: AttachmentCreateManyWithoutTeamInput
-  BallotRuns: BallotRunCreateManyWithoutTeamInput
-  ballots: BallotCreateManyWithoutTeamInput
+  activity: ActivityCreateNestedManyWithoutTeamInput
+  attachment: AttachmentCreateNestedManyWithoutTeamInput
+  BallotRuns: BallotRunCreateNestedManyWithoutTeamInput
+  ballots: BallotCreateNestedManyWithoutTeamInput
   cards: String
   code: String
   createdAt: DateTime
-  discussion: DiscussionCreateManyWithoutTeamInput
-  domain: DomainCreateOneWithoutTeamInput
+  discussion: DiscussionCreateNestedManyWithoutTeamInput
+  domain: DomainCreateNestedOneWithoutTeamInput
   id: String
   invite: String
-  members: UserCreateManyWithoutTeamInput
+  members: UserCreateNestedManyWithoutTeamInput
   name: String!
   notes: Json
   prefs: Json
-  school: SchoolCreateOneWithoutTeamsInput!
-  teacher: UserCreateOneWithoutTeachesInput!
+  school: SchoolCreateNestedOneWithoutTeamsInput!
+  teacher: UserCreateNestedOneWithoutTeachesInput!
   updatedAt: DateTime
-  User: UserCreateManyWithoutTeamInput
-  Vote: VoteCreateManyWithoutTeamInput
-  Voted: VotedCreateManyWithoutTeamInput
+  User: UserCreateNestedManyWithoutTeamInput
+  Vote: VoteCreateNestedManyWithoutTeamInput
+  Voted: VotedCreateNestedManyWithoutTeamInput
   year: Int
 }
 
@@ -4858,8 +5433,9 @@ input TeamUpdateManyMutationInput {
 
 input TeamUpdateManyWithoutDomainInput {
   connect: [TeamWhereUniqueInput!]
-  connectOrCreate: [TeamCreateOrConnectWithoutdomainInput!]
+  connectOrCreate: [TeamCreateOrConnectWithoutDomainInput!]
   create: [TeamCreateWithoutDomainInput!]
+  createMany: TeamCreateManyDomainInputEnvelope
   delete: [TeamWhereUniqueInput!]
   deleteMany: [TeamScalarWhereInput!]
   disconnect: [TeamWhereUniqueInput!]
@@ -4871,8 +5447,9 @@ input TeamUpdateManyWithoutDomainInput {
 
 input TeamUpdateManyWithoutSchoolInput {
   connect: [TeamWhereUniqueInput!]
-  connectOrCreate: [TeamCreateOrConnectWithoutschoolInput!]
+  connectOrCreate: [TeamCreateOrConnectWithoutSchoolInput!]
   create: [TeamCreateWithoutSchoolInput!]
+  createMany: TeamCreateManySchoolInputEnvelope
   delete: [TeamWhereUniqueInput!]
   deleteMany: [TeamScalarWhereInput!]
   disconnect: [TeamWhereUniqueInput!]
@@ -4884,8 +5461,9 @@ input TeamUpdateManyWithoutSchoolInput {
 
 input TeamUpdateManyWithoutTeacherInput {
   connect: [TeamWhereUniqueInput!]
-  connectOrCreate: [TeamCreateOrConnectWithoutteacherInput!]
+  connectOrCreate: [TeamCreateOrConnectWithoutTeacherInput!]
   create: [TeamCreateWithoutTeacherInput!]
+  createMany: TeamCreateManyTeacherInputEnvelope
   delete: [TeamWhereUniqueInput!]
   deleteMany: [TeamScalarWhereInput!]
   disconnect: [TeamWhereUniqueInput!]
@@ -4912,7 +5490,7 @@ input TeamUpdateManyWithWhereWithoutTeacherInput {
 
 input TeamUpdateOneRequiredWithoutActivityInput {
   connect: TeamWhereUniqueInput
-  connectOrCreate: TeamCreateOrConnectWithoutactivityInput
+  connectOrCreate: TeamCreateOrConnectWithoutActivityInput
   create: TeamCreateWithoutActivityInput
   update: TeamUpdateWithoutActivityInput
   upsert: TeamUpsertWithoutActivityInput
@@ -4920,7 +5498,7 @@ input TeamUpdateOneRequiredWithoutActivityInput {
 
 input TeamUpdateOneRequiredWithoutAttachmentInput {
   connect: TeamWhereUniqueInput
-  connectOrCreate: TeamCreateOrConnectWithoutattachmentInput
+  connectOrCreate: TeamCreateOrConnectWithoutAttachmentInput
   create: TeamCreateWithoutAttachmentInput
   update: TeamUpdateWithoutAttachmentInput
   upsert: TeamUpsertWithoutAttachmentInput
@@ -4936,7 +5514,7 @@ input TeamUpdateOneRequiredWithoutBallotRunsInput {
 
 input TeamUpdateOneRequiredWithoutDiscussionInput {
   connect: TeamWhereUniqueInput
-  connectOrCreate: TeamCreateOrConnectWithoutdiscussionInput
+  connectOrCreate: TeamCreateOrConnectWithoutDiscussionInput
   create: TeamCreateWithoutDiscussionInput
   update: TeamUpdateWithoutDiscussionInput
   upsert: TeamUpsertWithoutDiscussionInput
@@ -4944,7 +5522,7 @@ input TeamUpdateOneRequiredWithoutDiscussionInput {
 
 input TeamUpdateOneRequiredWithoutWorkInput {
   connect: TeamWhereUniqueInput
-  connectOrCreate: TeamCreateOrConnectWithoutworkInput
+  connectOrCreate: TeamCreateOrConnectWithoutWorkInput
   create: TeamCreateWithoutWorkInput
   update: TeamUpdateWithoutWorkInput
   upsert: TeamUpsertWithoutWorkInput
@@ -4952,7 +5530,7 @@ input TeamUpdateOneRequiredWithoutWorkInput {
 
 input TeamUpdateOneWithoutBallotsInput {
   connect: TeamWhereUniqueInput
-  connectOrCreate: TeamCreateOrConnectWithoutballotsInput
+  connectOrCreate: TeamCreateOrConnectWithoutBallotsInput
   create: TeamCreateWithoutBallotsInput
   delete: Boolean
   disconnect: Boolean
@@ -4962,7 +5540,7 @@ input TeamUpdateOneWithoutBallotsInput {
 
 input TeamUpdateOneWithoutMembersInput {
   connect: TeamWhereUniqueInput
-  connectOrCreate: TeamCreateOrConnectWithoutmembersInput
+  connectOrCreate: TeamCreateOrConnectWithoutMembersInput
   create: TeamCreateWithoutMembersInput
   delete: Boolean
   disconnect: Boolean
@@ -5457,7 +6035,7 @@ type User {
     first: Int
     last: Int
   ): [Ballot!]!
-  createdAt: DateTime!
+  createdAt: DateTime
   discussions(
     after: DiscussionWhereUniqueInput
     before: DiscussionWhereUniqueInput
@@ -5467,7 +6045,7 @@ type User {
   email: String
   emailVerified: DateTime
   gender: Gender
-  id: String!
+  id: String
   image: String
   lastname: String
   name: String
@@ -5477,7 +6055,7 @@ type User {
     first: Int
     last: Int
   ): [Reaction!]!
-  role: Role!
+  role: Role
   school: School
   shortname: String
   teaches(
@@ -5491,12 +6069,12 @@ type User {
 }
 
 input UserCreateInput {
-  activity: ActivityCreateManyWithoutUserInput
-  attachments: AttachmentCreateManyWithoutUserInput
-  ballots: BallotCreateManyWithoutCreatorInput
+  activity: ActivityCreateNestedManyWithoutUserInput
+  attachments: AttachmentCreateNestedManyWithoutUserInput
+  ballots: BallotCreateNestedManyWithoutCreatorInput
   canton: String
   createdAt: DateTime
-  discussions: DiscussionCreateManyWithoutUserInput
+  discussions: DiscussionCreateNestedManyWithoutUserInput
   email: String
   emailVerified: DateTime
   gender: Gender
@@ -5505,135 +6083,183 @@ input UserCreateInput {
   lastname: String
   name: String
   password: String
-  reactions: ReactionCreateManyWithoutUserInput
+  reactions: ReactionCreateNestedManyWithoutUserInput
   role: Role
-  school: SchoolCreateOneWithoutMembersInput
-  teaches: TeamCreateManyWithoutTeacherInput
-  team: TeamCreateOneWithoutMembersInput
-  Team: TeamCreateOneWithoutUserInput
+  school: SchoolCreateNestedOneWithoutMembersInput
+  teaches: TeamCreateNestedManyWithoutTeacherInput
+  team: TeamCreateNestedOneWithoutMembersInput
+  Team: TeamCreateNestedOneWithoutUserInput
   updatedAt: DateTime
   verified: Boolean
-  voted: VotedCreateManyWithoutUserInput
-  work: WorkCreateManyWithoutUsersInput
+  voted: VotedCreateNestedManyWithoutUserInput
+  work: WorkCreateNestedManyWithoutUsersInput
   year: Int
 }
 
-input UserCreateManyWithoutSchoolInput {
+input UserCreateManySchoolInput {
+  canton: String
+  createdAt: DateTime
+  email: String
+  emailVerified: DateTime
+  gender: Gender
+  id: String
+  image: String
+  lastname: String
+  name: String
+  password: String
+  role: Role
+  teamId: String
+  updatedAt: DateTime
+  verified: Boolean
+  year: Int
+}
+
+input UserCreateManySchoolInputEnvelope {
+  data: [UserCreateManySchoolInput!]
+  skipDuplicates: Boolean
+}
+
+input UserCreateManyTeamInput {
+  canton: String
+  createdAt: DateTime
+  email: String
+  emailVerified: DateTime
+  gender: Gender
+  id: String
+  image: String
+  lastname: String
+  name: String
+  password: String
+  role: Role
+  schoolId: String
+  updatedAt: DateTime
+  verified: Boolean
+  year: Int
+}
+
+input UserCreateManyTeamInputEnvelope {
+  data: [UserCreateManyTeamInput!]
+  skipDuplicates: Boolean
+}
+
+input UserCreateNestedManyWithoutSchoolInput {
   connect: [UserWhereUniqueInput!]
-  connectOrCreate: [UserCreateOrConnectWithoutschoolInput!]
+  connectOrCreate: [UserCreateOrConnectWithoutSchoolInput!]
   create: [UserCreateWithoutSchoolInput!]
+  createMany: UserCreateManySchoolInputEnvelope
 }
 
-input UserCreateManyWithoutTeamInput {
+input UserCreateNestedManyWithoutTeamInput {
   connect: [UserWhereUniqueInput!]
-  connectOrCreate: [UserCreateOrConnectWithoutteamInput!]
+  connectOrCreate: [UserCreateOrConnectWithoutTeamInput!]
   create: [UserCreateWithoutTeamInput!]
+  createMany: UserCreateManyTeamInputEnvelope
 }
 
-input UserCreateManyWithoutWorkInput {
+input UserCreateNestedManyWithoutWorkInput {
   connect: [UserWhereUniqueInput!]
-  connectOrCreate: [UserCreateOrConnectWithoutworkInput!]
+  connectOrCreate: [UserCreateOrConnectWithoutWorkInput!]
   create: [UserCreateWithoutWorkInput!]
 }
 
-input UserCreateOneWithoutActivityInput {
+input UserCreateNestedOneWithoutActivityInput {
   connect: UserWhereUniqueInput
-  connectOrCreate: UserCreateOrConnectWithoutactivityInput
+  connectOrCreate: UserCreateOrConnectWithoutActivityInput
   create: UserCreateWithoutActivityInput
 }
 
-input UserCreateOneWithoutAttachmentsInput {
+input UserCreateNestedOneWithoutAttachmentsInput {
   connect: UserWhereUniqueInput
-  connectOrCreate: UserCreateOrConnectWithoutattachmentsInput
+  connectOrCreate: UserCreateOrConnectWithoutAttachmentsInput
   create: UserCreateWithoutAttachmentsInput
 }
 
-input UserCreateOneWithoutBallotsInput {
+input UserCreateNestedOneWithoutBallotsInput {
   connect: UserWhereUniqueInput
-  connectOrCreate: UserCreateOrConnectWithoutballotsInput
+  connectOrCreate: UserCreateOrConnectWithoutBallotsInput
   create: UserCreateWithoutBallotsInput
 }
 
-input UserCreateOneWithoutDiscussionsInput {
+input UserCreateNestedOneWithoutDiscussionsInput {
   connect: UserWhereUniqueInput
-  connectOrCreate: UserCreateOrConnectWithoutdiscussionsInput
+  connectOrCreate: UserCreateOrConnectWithoutDiscussionsInput
   create: UserCreateWithoutDiscussionsInput
 }
 
-input UserCreateOneWithoutReactionsInput {
+input UserCreateNestedOneWithoutReactionsInput {
   connect: UserWhereUniqueInput
-  connectOrCreate: UserCreateOrConnectWithoutreactionsInput
+  connectOrCreate: UserCreateOrConnectWithoutReactionsInput
   create: UserCreateWithoutReactionsInput
 }
 
-input UserCreateOneWithoutTeachesInput {
+input UserCreateNestedOneWithoutTeachesInput {
   connect: UserWhereUniqueInput
-  connectOrCreate: UserCreateOrConnectWithoutteachesInput
+  connectOrCreate: UserCreateOrConnectWithoutTeachesInput
   create: UserCreateWithoutTeachesInput
 }
 
-input UserCreateOneWithoutVotedInput {
+input UserCreateNestedOneWithoutVotedInput {
   connect: UserWhereUniqueInput
-  connectOrCreate: UserCreateOrConnectWithoutvotedInput
+  connectOrCreate: UserCreateOrConnectWithoutVotedInput
   create: UserCreateWithoutVotedInput
 }
 
-input UserCreateOrConnectWithoutactivityInput {
+input UserCreateOrConnectWithoutActivityInput {
   create: UserCreateWithoutActivityInput!
   where: UserWhereUniqueInput!
 }
 
-input UserCreateOrConnectWithoutattachmentsInput {
+input UserCreateOrConnectWithoutAttachmentsInput {
   create: UserCreateWithoutAttachmentsInput!
   where: UserWhereUniqueInput!
 }
 
-input UserCreateOrConnectWithoutballotsInput {
+input UserCreateOrConnectWithoutBallotsInput {
   create: UserCreateWithoutBallotsInput!
   where: UserWhereUniqueInput!
 }
 
-input UserCreateOrConnectWithoutdiscussionsInput {
+input UserCreateOrConnectWithoutDiscussionsInput {
   create: UserCreateWithoutDiscussionsInput!
   where: UserWhereUniqueInput!
 }
 
-input UserCreateOrConnectWithoutreactionsInput {
+input UserCreateOrConnectWithoutReactionsInput {
   create: UserCreateWithoutReactionsInput!
   where: UserWhereUniqueInput!
 }
 
-input UserCreateOrConnectWithoutschoolInput {
+input UserCreateOrConnectWithoutSchoolInput {
   create: UserCreateWithoutSchoolInput!
   where: UserWhereUniqueInput!
 }
 
-input UserCreateOrConnectWithoutteachesInput {
+input UserCreateOrConnectWithoutTeachesInput {
   create: UserCreateWithoutTeachesInput!
   where: UserWhereUniqueInput!
 }
 
-input UserCreateOrConnectWithoutteamInput {
+input UserCreateOrConnectWithoutTeamInput {
   create: UserCreateWithoutTeamInput!
   where: UserWhereUniqueInput!
 }
 
-input UserCreateOrConnectWithoutvotedInput {
+input UserCreateOrConnectWithoutVotedInput {
   create: UserCreateWithoutVotedInput!
   where: UserWhereUniqueInput!
 }
 
-input UserCreateOrConnectWithoutworkInput {
+input UserCreateOrConnectWithoutWorkInput {
   create: UserCreateWithoutWorkInput!
   where: UserWhereUniqueInput!
 }
 
 input UserCreateWithoutActivityInput {
-  attachments: AttachmentCreateManyWithoutUserInput
-  ballots: BallotCreateManyWithoutCreatorInput
+  attachments: AttachmentCreateNestedManyWithoutUserInput
+  ballots: BallotCreateNestedManyWithoutCreatorInput
   canton: String
   createdAt: DateTime
-  discussions: DiscussionCreateManyWithoutUserInput
+  discussions: DiscussionCreateNestedManyWithoutUserInput
   email: String
   emailVerified: DateTime
   gender: Gender
@@ -5642,25 +6268,25 @@ input UserCreateWithoutActivityInput {
   lastname: String
   name: String
   password: String
-  reactions: ReactionCreateManyWithoutUserInput
+  reactions: ReactionCreateNestedManyWithoutUserInput
   role: Role
-  school: SchoolCreateOneWithoutMembersInput
-  teaches: TeamCreateManyWithoutTeacherInput
-  team: TeamCreateOneWithoutMembersInput
-  Team: TeamCreateOneWithoutUserInput
+  school: SchoolCreateNestedOneWithoutMembersInput
+  teaches: TeamCreateNestedManyWithoutTeacherInput
+  team: TeamCreateNestedOneWithoutMembersInput
+  Team: TeamCreateNestedOneWithoutUserInput
   updatedAt: DateTime
   verified: Boolean
-  voted: VotedCreateManyWithoutUserInput
-  work: WorkCreateManyWithoutUsersInput
+  voted: VotedCreateNestedManyWithoutUserInput
+  work: WorkCreateNestedManyWithoutUsersInput
   year: Int
 }
 
 input UserCreateWithoutAttachmentsInput {
-  activity: ActivityCreateManyWithoutUserInput
-  ballots: BallotCreateManyWithoutCreatorInput
+  activity: ActivityCreateNestedManyWithoutUserInput
+  ballots: BallotCreateNestedManyWithoutCreatorInput
   canton: String
   createdAt: DateTime
-  discussions: DiscussionCreateManyWithoutUserInput
+  discussions: DiscussionCreateNestedManyWithoutUserInput
   email: String
   emailVerified: DateTime
   gender: Gender
@@ -5669,25 +6295,25 @@ input UserCreateWithoutAttachmentsInput {
   lastname: String
   name: String
   password: String
-  reactions: ReactionCreateManyWithoutUserInput
+  reactions: ReactionCreateNestedManyWithoutUserInput
   role: Role
-  school: SchoolCreateOneWithoutMembersInput
-  teaches: TeamCreateManyWithoutTeacherInput
-  team: TeamCreateOneWithoutMembersInput
-  Team: TeamCreateOneWithoutUserInput
+  school: SchoolCreateNestedOneWithoutMembersInput
+  teaches: TeamCreateNestedManyWithoutTeacherInput
+  team: TeamCreateNestedOneWithoutMembersInput
+  Team: TeamCreateNestedOneWithoutUserInput
   updatedAt: DateTime
   verified: Boolean
-  voted: VotedCreateManyWithoutUserInput
-  work: WorkCreateManyWithoutUsersInput
+  voted: VotedCreateNestedManyWithoutUserInput
+  work: WorkCreateNestedManyWithoutUsersInput
   year: Int
 }
 
 input UserCreateWithoutBallotsInput {
-  activity: ActivityCreateManyWithoutUserInput
-  attachments: AttachmentCreateManyWithoutUserInput
+  activity: ActivityCreateNestedManyWithoutUserInput
+  attachments: AttachmentCreateNestedManyWithoutUserInput
   canton: String
   createdAt: DateTime
-  discussions: DiscussionCreateManyWithoutUserInput
+  discussions: DiscussionCreateNestedManyWithoutUserInput
   email: String
   emailVerified: DateTime
   gender: Gender
@@ -5696,23 +6322,23 @@ input UserCreateWithoutBallotsInput {
   lastname: String
   name: String
   password: String
-  reactions: ReactionCreateManyWithoutUserInput
+  reactions: ReactionCreateNestedManyWithoutUserInput
   role: Role
-  school: SchoolCreateOneWithoutMembersInput
-  teaches: TeamCreateManyWithoutTeacherInput
-  team: TeamCreateOneWithoutMembersInput
-  Team: TeamCreateOneWithoutUserInput
+  school: SchoolCreateNestedOneWithoutMembersInput
+  teaches: TeamCreateNestedManyWithoutTeacherInput
+  team: TeamCreateNestedOneWithoutMembersInput
+  Team: TeamCreateNestedOneWithoutUserInput
   updatedAt: DateTime
   verified: Boolean
-  voted: VotedCreateManyWithoutUserInput
-  work: WorkCreateManyWithoutUsersInput
+  voted: VotedCreateNestedManyWithoutUserInput
+  work: WorkCreateNestedManyWithoutUsersInput
   year: Int
 }
 
 input UserCreateWithoutDiscussionsInput {
-  activity: ActivityCreateManyWithoutUserInput
-  attachments: AttachmentCreateManyWithoutUserInput
-  ballots: BallotCreateManyWithoutCreatorInput
+  activity: ActivityCreateNestedManyWithoutUserInput
+  attachments: AttachmentCreateNestedManyWithoutUserInput
+  ballots: BallotCreateNestedManyWithoutCreatorInput
   canton: String
   createdAt: DateTime
   email: String
@@ -5723,26 +6349,26 @@ input UserCreateWithoutDiscussionsInput {
   lastname: String
   name: String
   password: String
-  reactions: ReactionCreateManyWithoutUserInput
+  reactions: ReactionCreateNestedManyWithoutUserInput
   role: Role
-  school: SchoolCreateOneWithoutMembersInput
-  teaches: TeamCreateManyWithoutTeacherInput
-  team: TeamCreateOneWithoutMembersInput
-  Team: TeamCreateOneWithoutUserInput
+  school: SchoolCreateNestedOneWithoutMembersInput
+  teaches: TeamCreateNestedManyWithoutTeacherInput
+  team: TeamCreateNestedOneWithoutMembersInput
+  Team: TeamCreateNestedOneWithoutUserInput
   updatedAt: DateTime
   verified: Boolean
-  voted: VotedCreateManyWithoutUserInput
-  work: WorkCreateManyWithoutUsersInput
+  voted: VotedCreateNestedManyWithoutUserInput
+  work: WorkCreateNestedManyWithoutUsersInput
   year: Int
 }
 
 input UserCreateWithoutReactionsInput {
-  activity: ActivityCreateManyWithoutUserInput
-  attachments: AttachmentCreateManyWithoutUserInput
-  ballots: BallotCreateManyWithoutCreatorInput
+  activity: ActivityCreateNestedManyWithoutUserInput
+  attachments: AttachmentCreateNestedManyWithoutUserInput
+  ballots: BallotCreateNestedManyWithoutCreatorInput
   canton: String
   createdAt: DateTime
-  discussions: DiscussionCreateManyWithoutUserInput
+  discussions: DiscussionCreateNestedManyWithoutUserInput
   email: String
   emailVerified: DateTime
   gender: Gender
@@ -5752,24 +6378,24 @@ input UserCreateWithoutReactionsInput {
   name: String
   password: String
   role: Role
-  school: SchoolCreateOneWithoutMembersInput
-  teaches: TeamCreateManyWithoutTeacherInput
-  team: TeamCreateOneWithoutMembersInput
-  Team: TeamCreateOneWithoutUserInput
+  school: SchoolCreateNestedOneWithoutMembersInput
+  teaches: TeamCreateNestedManyWithoutTeacherInput
+  team: TeamCreateNestedOneWithoutMembersInput
+  Team: TeamCreateNestedOneWithoutUserInput
   updatedAt: DateTime
   verified: Boolean
-  voted: VotedCreateManyWithoutUserInput
-  work: WorkCreateManyWithoutUsersInput
+  voted: VotedCreateNestedManyWithoutUserInput
+  work: WorkCreateNestedManyWithoutUsersInput
   year: Int
 }
 
 input UserCreateWithoutSchoolInput {
-  activity: ActivityCreateManyWithoutUserInput
-  attachments: AttachmentCreateManyWithoutUserInput
-  ballots: BallotCreateManyWithoutCreatorInput
+  activity: ActivityCreateNestedManyWithoutUserInput
+  attachments: AttachmentCreateNestedManyWithoutUserInput
+  ballots: BallotCreateNestedManyWithoutCreatorInput
   canton: String
   createdAt: DateTime
-  discussions: DiscussionCreateManyWithoutUserInput
+  discussions: DiscussionCreateNestedManyWithoutUserInput
   email: String
   emailVerified: DateTime
   gender: Gender
@@ -5778,25 +6404,25 @@ input UserCreateWithoutSchoolInput {
   lastname: String
   name: String
   password: String
-  reactions: ReactionCreateManyWithoutUserInput
+  reactions: ReactionCreateNestedManyWithoutUserInput
   role: Role
-  teaches: TeamCreateManyWithoutTeacherInput
-  team: TeamCreateOneWithoutMembersInput
-  Team: TeamCreateOneWithoutUserInput
+  teaches: TeamCreateNestedManyWithoutTeacherInput
+  team: TeamCreateNestedOneWithoutMembersInput
+  Team: TeamCreateNestedOneWithoutUserInput
   updatedAt: DateTime
   verified: Boolean
-  voted: VotedCreateManyWithoutUserInput
-  work: WorkCreateManyWithoutUsersInput
+  voted: VotedCreateNestedManyWithoutUserInput
+  work: WorkCreateNestedManyWithoutUsersInput
   year: Int
 }
 
 input UserCreateWithoutTeachesInput {
-  activity: ActivityCreateManyWithoutUserInput
-  attachments: AttachmentCreateManyWithoutUserInput
-  ballots: BallotCreateManyWithoutCreatorInput
+  activity: ActivityCreateNestedManyWithoutUserInput
+  attachments: AttachmentCreateNestedManyWithoutUserInput
+  ballots: BallotCreateNestedManyWithoutCreatorInput
   canton: String
   createdAt: DateTime
-  discussions: DiscussionCreateManyWithoutUserInput
+  discussions: DiscussionCreateNestedManyWithoutUserInput
   email: String
   emailVerified: DateTime
   gender: Gender
@@ -5805,25 +6431,25 @@ input UserCreateWithoutTeachesInput {
   lastname: String
   name: String
   password: String
-  reactions: ReactionCreateManyWithoutUserInput
+  reactions: ReactionCreateNestedManyWithoutUserInput
   role: Role
-  school: SchoolCreateOneWithoutMembersInput
-  team: TeamCreateOneWithoutMembersInput
-  Team: TeamCreateOneWithoutUserInput
+  school: SchoolCreateNestedOneWithoutMembersInput
+  team: TeamCreateNestedOneWithoutMembersInput
+  Team: TeamCreateNestedOneWithoutUserInput
   updatedAt: DateTime
   verified: Boolean
-  voted: VotedCreateManyWithoutUserInput
-  work: WorkCreateManyWithoutUsersInput
+  voted: VotedCreateNestedManyWithoutUserInput
+  work: WorkCreateNestedManyWithoutUsersInput
   year: Int
 }
 
 input UserCreateWithoutTeamInput {
-  activity: ActivityCreateManyWithoutUserInput
-  attachments: AttachmentCreateManyWithoutUserInput
-  ballots: BallotCreateManyWithoutCreatorInput
+  activity: ActivityCreateNestedManyWithoutUserInput
+  attachments: AttachmentCreateNestedManyWithoutUserInput
+  ballots: BallotCreateNestedManyWithoutCreatorInput
   canton: String
   createdAt: DateTime
-  discussions: DiscussionCreateManyWithoutUserInput
+  discussions: DiscussionCreateNestedManyWithoutUserInput
   email: String
   emailVerified: DateTime
   gender: Gender
@@ -5832,25 +6458,25 @@ input UserCreateWithoutTeamInput {
   lastname: String
   name: String
   password: String
-  reactions: ReactionCreateManyWithoutUserInput
+  reactions: ReactionCreateNestedManyWithoutUserInput
   role: Role
-  school: SchoolCreateOneWithoutMembersInput
-  teaches: TeamCreateManyWithoutTeacherInput
-  Team: TeamCreateOneWithoutUserInput
+  school: SchoolCreateNestedOneWithoutMembersInput
+  teaches: TeamCreateNestedManyWithoutTeacherInput
+  Team: TeamCreateNestedOneWithoutUserInput
   updatedAt: DateTime
   verified: Boolean
-  voted: VotedCreateManyWithoutUserInput
-  work: WorkCreateManyWithoutUsersInput
+  voted: VotedCreateNestedManyWithoutUserInput
+  work: WorkCreateNestedManyWithoutUsersInput
   year: Int
 }
 
 input UserCreateWithoutVotedInput {
-  activity: ActivityCreateManyWithoutUserInput
-  attachments: AttachmentCreateManyWithoutUserInput
-  ballots: BallotCreateManyWithoutCreatorInput
+  activity: ActivityCreateNestedManyWithoutUserInput
+  attachments: AttachmentCreateNestedManyWithoutUserInput
+  ballots: BallotCreateNestedManyWithoutCreatorInput
   canton: String
   createdAt: DateTime
-  discussions: DiscussionCreateManyWithoutUserInput
+  discussions: DiscussionCreateNestedManyWithoutUserInput
   email: String
   emailVerified: DateTime
   gender: Gender
@@ -5859,25 +6485,25 @@ input UserCreateWithoutVotedInput {
   lastname: String
   name: String
   password: String
-  reactions: ReactionCreateManyWithoutUserInput
+  reactions: ReactionCreateNestedManyWithoutUserInput
   role: Role
-  school: SchoolCreateOneWithoutMembersInput
-  teaches: TeamCreateManyWithoutTeacherInput
-  team: TeamCreateOneWithoutMembersInput
-  Team: TeamCreateOneWithoutUserInput
+  school: SchoolCreateNestedOneWithoutMembersInput
+  teaches: TeamCreateNestedManyWithoutTeacherInput
+  team: TeamCreateNestedOneWithoutMembersInput
+  Team: TeamCreateNestedOneWithoutUserInput
   updatedAt: DateTime
   verified: Boolean
-  work: WorkCreateManyWithoutUsersInput
+  work: WorkCreateNestedManyWithoutUsersInput
   year: Int
 }
 
 input UserCreateWithoutWorkInput {
-  activity: ActivityCreateManyWithoutUserInput
-  attachments: AttachmentCreateManyWithoutUserInput
-  ballots: BallotCreateManyWithoutCreatorInput
+  activity: ActivityCreateNestedManyWithoutUserInput
+  attachments: AttachmentCreateNestedManyWithoutUserInput
+  ballots: BallotCreateNestedManyWithoutCreatorInput
   canton: String
   createdAt: DateTime
-  discussions: DiscussionCreateManyWithoutUserInput
+  discussions: DiscussionCreateNestedManyWithoutUserInput
   email: String
   emailVerified: DateTime
   gender: Gender
@@ -5886,15 +6512,15 @@ input UserCreateWithoutWorkInput {
   lastname: String
   name: String
   password: String
-  reactions: ReactionCreateManyWithoutUserInput
+  reactions: ReactionCreateNestedManyWithoutUserInput
   role: Role
-  school: SchoolCreateOneWithoutMembersInput
-  teaches: TeamCreateManyWithoutTeacherInput
-  team: TeamCreateOneWithoutMembersInput
-  Team: TeamCreateOneWithoutUserInput
+  school: SchoolCreateNestedOneWithoutMembersInput
+  teaches: TeamCreateNestedManyWithoutTeacherInput
+  team: TeamCreateNestedOneWithoutMembersInput
+  Team: TeamCreateNestedOneWithoutUserInput
   updatedAt: DateTime
   verified: Boolean
-  voted: VotedCreateManyWithoutUserInput
+  voted: VotedCreateNestedManyWithoutUserInput
   year: Int
 }
 
@@ -5992,8 +6618,9 @@ input UserUpdateManyMutationInput {
 
 input UserUpdateManyWithoutSchoolInput {
   connect: [UserWhereUniqueInput!]
-  connectOrCreate: [UserCreateOrConnectWithoutschoolInput!]
+  connectOrCreate: [UserCreateOrConnectWithoutSchoolInput!]
   create: [UserCreateWithoutSchoolInput!]
+  createMany: UserCreateManySchoolInputEnvelope
   delete: [UserWhereUniqueInput!]
   deleteMany: [UserScalarWhereInput!]
   disconnect: [UserWhereUniqueInput!]
@@ -6005,8 +6632,9 @@ input UserUpdateManyWithoutSchoolInput {
 
 input UserUpdateManyWithoutTeamInput {
   connect: [UserWhereUniqueInput!]
-  connectOrCreate: [UserCreateOrConnectWithoutteamInput!]
+  connectOrCreate: [UserCreateOrConnectWithoutTeamInput!]
   create: [UserCreateWithoutTeamInput!]
+  createMany: UserCreateManyTeamInputEnvelope
   delete: [UserWhereUniqueInput!]
   deleteMany: [UserScalarWhereInput!]
   disconnect: [UserWhereUniqueInput!]
@@ -6018,7 +6646,7 @@ input UserUpdateManyWithoutTeamInput {
 
 input UserUpdateManyWithoutWorkInput {
   connect: [UserWhereUniqueInput!]
-  connectOrCreate: [UserCreateOrConnectWithoutworkInput!]
+  connectOrCreate: [UserCreateOrConnectWithoutWorkInput!]
   create: [UserCreateWithoutWorkInput!]
   delete: [UserWhereUniqueInput!]
   deleteMany: [UserScalarWhereInput!]
@@ -6046,7 +6674,7 @@ input UserUpdateManyWithWhereWithoutWorkInput {
 
 input UserUpdateOneRequiredWithoutActivityInput {
   connect: UserWhereUniqueInput
-  connectOrCreate: UserCreateOrConnectWithoutactivityInput
+  connectOrCreate: UserCreateOrConnectWithoutActivityInput
   create: UserCreateWithoutActivityInput
   update: UserUpdateWithoutActivityInput
   upsert: UserUpsertWithoutActivityInput
@@ -6054,7 +6682,7 @@ input UserUpdateOneRequiredWithoutActivityInput {
 
 input UserUpdateOneRequiredWithoutAttachmentsInput {
   connect: UserWhereUniqueInput
-  connectOrCreate: UserCreateOrConnectWithoutattachmentsInput
+  connectOrCreate: UserCreateOrConnectWithoutAttachmentsInput
   create: UserCreateWithoutAttachmentsInput
   update: UserUpdateWithoutAttachmentsInput
   upsert: UserUpsertWithoutAttachmentsInput
@@ -6062,7 +6690,7 @@ input UserUpdateOneRequiredWithoutAttachmentsInput {
 
 input UserUpdateOneRequiredWithoutDiscussionsInput {
   connect: UserWhereUniqueInput
-  connectOrCreate: UserCreateOrConnectWithoutdiscussionsInput
+  connectOrCreate: UserCreateOrConnectWithoutDiscussionsInput
   create: UserCreateWithoutDiscussionsInput
   update: UserUpdateWithoutDiscussionsInput
   upsert: UserUpsertWithoutDiscussionsInput
@@ -6070,7 +6698,7 @@ input UserUpdateOneRequiredWithoutDiscussionsInput {
 
 input UserUpdateOneRequiredWithoutReactionsInput {
   connect: UserWhereUniqueInput
-  connectOrCreate: UserCreateOrConnectWithoutreactionsInput
+  connectOrCreate: UserCreateOrConnectWithoutReactionsInput
   create: UserCreateWithoutReactionsInput
   update: UserUpdateWithoutReactionsInput
   upsert: UserUpsertWithoutReactionsInput
@@ -6078,7 +6706,7 @@ input UserUpdateOneRequiredWithoutReactionsInput {
 
 input UserUpdateOneRequiredWithoutTeachesInput {
   connect: UserWhereUniqueInput
-  connectOrCreate: UserCreateOrConnectWithoutteachesInput
+  connectOrCreate: UserCreateOrConnectWithoutTeachesInput
   create: UserCreateWithoutTeachesInput
   update: UserUpdateWithoutTeachesInput
   upsert: UserUpsertWithoutTeachesInput
@@ -6086,7 +6714,7 @@ input UserUpdateOneRequiredWithoutTeachesInput {
 
 input UserUpdateOneRequiredWithoutVotedInput {
   connect: UserWhereUniqueInput
-  connectOrCreate: UserCreateOrConnectWithoutvotedInput
+  connectOrCreate: UserCreateOrConnectWithoutVotedInput
   create: UserCreateWithoutVotedInput
   update: UserUpdateWithoutVotedInput
   upsert: UserUpsertWithoutVotedInput
@@ -6094,7 +6722,7 @@ input UserUpdateOneRequiredWithoutVotedInput {
 
 input UserUpdateOneWithoutBallotsInput {
   connect: UserWhereUniqueInput
-  connectOrCreate: UserCreateOrConnectWithoutballotsInput
+  connectOrCreate: UserCreateOrConnectWithoutBallotsInput
   create: UserCreateWithoutBallotsInput
   delete: Boolean
   disconnect: Boolean
@@ -6486,176 +7114,304 @@ enum Visibility {
 }
 
 type Vote {
-  ballot: Ballot!
+  ballot: Ballot
   verify: String
 }
 
-input VoteCreateManyWithoutBallotInput {
+input VoteCreateManyBallotInput {
+  ballotRunId: String
+  canton: String
+  id: String
+  schoolId: String
+  schooltype: String
+  teamId: String
+  verify: String
+  vote: Int!
+  year: Int
+}
+
+input VoteCreateManyBallotInputEnvelope {
+  data: [VoteCreateManyBallotInput!]
+  skipDuplicates: Boolean
+}
+
+input VoteCreateManyBallotRunInput {
+  ballotId: String!
+  canton: String
+  id: String
+  schoolId: String
+  schooltype: String
+  teamId: String
+  verify: String
+  vote: Int!
+  year: Int
+}
+
+input VoteCreateManyBallotRunInputEnvelope {
+  data: [VoteCreateManyBallotRunInput!]
+  skipDuplicates: Boolean
+}
+
+input VoteCreateManySchoolInput {
+  ballotId: String!
+  ballotRunId: String
+  canton: String
+  id: String
+  schooltype: String
+  teamId: String
+  verify: String
+  vote: Int!
+  year: Int
+}
+
+input VoteCreateManySchoolInputEnvelope {
+  data: [VoteCreateManySchoolInput!]
+  skipDuplicates: Boolean
+}
+
+input VoteCreateManyTeamInput {
+  ballotId: String!
+  ballotRunId: String
+  canton: String
+  id: String
+  schoolId: String
+  schooltype: String
+  verify: String
+  vote: Int!
+  year: Int
+}
+
+input VoteCreateManyTeamInputEnvelope {
+  data: [VoteCreateManyTeamInput!]
+  skipDuplicates: Boolean
+}
+
+input VoteCreateNestedManyWithoutBallotInput {
   connect: [VoteWhereUniqueInput!]
-  connectOrCreate: [VoteCreateOrConnectWithoutballotInput!]
+  connectOrCreate: [VoteCreateOrConnectWithoutBallotInput!]
   create: [VoteCreateWithoutBallotInput!]
+  createMany: VoteCreateManyBallotInputEnvelope
 }
 
-input VoteCreateManyWithoutBallotRunInput {
+input VoteCreateNestedManyWithoutBallotRunInput {
   connect: [VoteWhereUniqueInput!]
-  connectOrCreate: [VoteCreateOrConnectWithoutballotRunInput!]
+  connectOrCreate: [VoteCreateOrConnectWithoutBallotRunInput!]
   create: [VoteCreateWithoutBallotRunInput!]
+  createMany: VoteCreateManyBallotRunInputEnvelope
 }
 
-input VoteCreateManyWithoutSchoolInput {
+input VoteCreateNestedManyWithoutSchoolInput {
   connect: [VoteWhereUniqueInput!]
-  connectOrCreate: [VoteCreateOrConnectWithoutschoolInput!]
+  connectOrCreate: [VoteCreateOrConnectWithoutSchoolInput!]
   create: [VoteCreateWithoutSchoolInput!]
+  createMany: VoteCreateManySchoolInputEnvelope
 }
 
-input VoteCreateManyWithoutTeamInput {
+input VoteCreateNestedManyWithoutTeamInput {
   connect: [VoteWhereUniqueInput!]
-  connectOrCreate: [VoteCreateOrConnectWithoutteamInput!]
+  connectOrCreate: [VoteCreateOrConnectWithoutTeamInput!]
   create: [VoteCreateWithoutTeamInput!]
+  createMany: VoteCreateManyTeamInputEnvelope
 }
 
-input VoteCreateOrConnectWithoutballotInput {
+input VoteCreateOrConnectWithoutBallotInput {
   create: VoteCreateWithoutBallotInput!
   where: VoteWhereUniqueInput!
 }
 
-input VoteCreateOrConnectWithoutballotRunInput {
+input VoteCreateOrConnectWithoutBallotRunInput {
   create: VoteCreateWithoutBallotRunInput!
   where: VoteWhereUniqueInput!
 }
 
-input VoteCreateOrConnectWithoutschoolInput {
+input VoteCreateOrConnectWithoutSchoolInput {
   create: VoteCreateWithoutSchoolInput!
   where: VoteWhereUniqueInput!
 }
 
-input VoteCreateOrConnectWithoutteamInput {
+input VoteCreateOrConnectWithoutTeamInput {
   create: VoteCreateWithoutTeamInput!
   where: VoteWhereUniqueInput!
 }
 
 input VoteCreateWithoutBallotInput {
-  ballotRun: BallotRunCreateOneWithoutVoteInput
+  ballotRun: BallotRunCreateNestedOneWithoutVoteInput
   canton: String
   id: String
-  school: SchoolCreateOneWithoutVoteInput
+  school: SchoolCreateNestedOneWithoutVoteInput
   schooltype: String
-  team: TeamCreateOneWithoutVoteInput
+  team: TeamCreateNestedOneWithoutVoteInput
   verify: String
   vote: Int!
   year: Int
 }
 
 input VoteCreateWithoutBallotRunInput {
-  ballot: BallotCreateOneWithoutVotesInput!
+  ballot: BallotCreateNestedOneWithoutVotesInput!
   canton: String
   id: String
-  school: SchoolCreateOneWithoutVoteInput
+  school: SchoolCreateNestedOneWithoutVoteInput
   schooltype: String
-  team: TeamCreateOneWithoutVoteInput
+  team: TeamCreateNestedOneWithoutVoteInput
   verify: String
   vote: Int!
   year: Int
 }
 
 input VoteCreateWithoutSchoolInput {
-  ballot: BallotCreateOneWithoutVotesInput!
-  ballotRun: BallotRunCreateOneWithoutVoteInput
+  ballot: BallotCreateNestedOneWithoutVotesInput!
+  ballotRun: BallotRunCreateNestedOneWithoutVoteInput
   canton: String
   id: String
   schooltype: String
-  team: TeamCreateOneWithoutVoteInput
+  team: TeamCreateNestedOneWithoutVoteInput
   verify: String
   vote: Int!
   year: Int
 }
 
 input VoteCreateWithoutTeamInput {
-  ballot: BallotCreateOneWithoutVotesInput!
-  ballotRun: BallotRunCreateOneWithoutVoteInput
+  ballot: BallotCreateNestedOneWithoutVotesInput!
+  ballotRun: BallotRunCreateNestedOneWithoutVoteInput
   canton: String
   id: String
-  school: SchoolCreateOneWithoutVoteInput
+  school: SchoolCreateNestedOneWithoutVoteInput
   schooltype: String
   verify: String
   vote: Int!
   year: Int
 }
 
-input VotedCreateManyWithoutBallotInput {
+input VotedCreateManyBallotInput {
+  id: String
+  schoolId: String
+  signature: String
+  teamId: String
+  userId: String!
+}
+
+input VotedCreateManyBallotInputEnvelope {
+  data: [VotedCreateManyBallotInput!]
+  skipDuplicates: Boolean
+}
+
+input VotedCreateManySchoolInput {
+  ballotId: String!
+  id: String
+  signature: String
+  teamId: String
+  userId: String!
+}
+
+input VotedCreateManySchoolInputEnvelope {
+  data: [VotedCreateManySchoolInput!]
+  skipDuplicates: Boolean
+}
+
+input VotedCreateManyTeamInput {
+  ballotId: String!
+  id: String
+  schoolId: String
+  signature: String
+  userId: String!
+}
+
+input VotedCreateManyTeamInputEnvelope {
+  data: [VotedCreateManyTeamInput!]
+  skipDuplicates: Boolean
+}
+
+input VotedCreateManyUserInput {
+  ballotId: String!
+  id: String
+  schoolId: String
+  signature: String
+  teamId: String
+}
+
+input VotedCreateManyUserInputEnvelope {
+  data: [VotedCreateManyUserInput!]
+  skipDuplicates: Boolean
+}
+
+input VotedCreateNestedManyWithoutBallotInput {
   connect: [VotedWhereUniqueInput!]
-  connectOrCreate: [VotedCreateOrConnectWithoutballotInput!]
+  connectOrCreate: [VotedCreateOrConnectWithoutBallotInput!]
   create: [VotedCreateWithoutBallotInput!]
+  createMany: VotedCreateManyBallotInputEnvelope
 }
 
-input VotedCreateManyWithoutSchoolInput {
+input VotedCreateNestedManyWithoutSchoolInput {
   connect: [VotedWhereUniqueInput!]
-  connectOrCreate: [VotedCreateOrConnectWithoutschoolInput!]
+  connectOrCreate: [VotedCreateOrConnectWithoutSchoolInput!]
   create: [VotedCreateWithoutSchoolInput!]
+  createMany: VotedCreateManySchoolInputEnvelope
 }
 
-input VotedCreateManyWithoutTeamInput {
+input VotedCreateNestedManyWithoutTeamInput {
   connect: [VotedWhereUniqueInput!]
-  connectOrCreate: [VotedCreateOrConnectWithoutteamInput!]
+  connectOrCreate: [VotedCreateOrConnectWithoutTeamInput!]
   create: [VotedCreateWithoutTeamInput!]
+  createMany: VotedCreateManyTeamInputEnvelope
 }
 
-input VotedCreateManyWithoutUserInput {
+input VotedCreateNestedManyWithoutUserInput {
   connect: [VotedWhereUniqueInput!]
-  connectOrCreate: [VotedCreateOrConnectWithoutuserInput!]
+  connectOrCreate: [VotedCreateOrConnectWithoutUserInput!]
   create: [VotedCreateWithoutUserInput!]
+  createMany: VotedCreateManyUserInputEnvelope
 }
 
-input VotedCreateOrConnectWithoutballotInput {
+input VotedCreateOrConnectWithoutBallotInput {
   create: VotedCreateWithoutBallotInput!
   where: VotedWhereUniqueInput!
 }
 
-input VotedCreateOrConnectWithoutschoolInput {
+input VotedCreateOrConnectWithoutSchoolInput {
   create: VotedCreateWithoutSchoolInput!
   where: VotedWhereUniqueInput!
 }
 
-input VotedCreateOrConnectWithoutteamInput {
+input VotedCreateOrConnectWithoutTeamInput {
   create: VotedCreateWithoutTeamInput!
   where: VotedWhereUniqueInput!
 }
 
-input VotedCreateOrConnectWithoutuserInput {
+input VotedCreateOrConnectWithoutUserInput {
   create: VotedCreateWithoutUserInput!
   where: VotedWhereUniqueInput!
 }
 
 input VotedCreateWithoutBallotInput {
   id: String
-  school: SchoolCreateOneWithoutVotedInput
+  school: SchoolCreateNestedOneWithoutVotedInput
   signature: String
-  team: TeamCreateOneWithoutVotedInput
-  user: UserCreateOneWithoutVotedInput!
+  team: TeamCreateNestedOneWithoutVotedInput
+  user: UserCreateNestedOneWithoutVotedInput!
 }
 
 input VotedCreateWithoutSchoolInput {
-  ballot: BallotCreateOneWithoutVotedInput!
+  ballot: BallotCreateNestedOneWithoutVotedInput!
   id: String
   signature: String
-  team: TeamCreateOneWithoutVotedInput
-  user: UserCreateOneWithoutVotedInput!
+  team: TeamCreateNestedOneWithoutVotedInput
+  user: UserCreateNestedOneWithoutVotedInput!
 }
 
 input VotedCreateWithoutTeamInput {
-  ballot: BallotCreateOneWithoutVotedInput!
+  ballot: BallotCreateNestedOneWithoutVotedInput!
   id: String
-  school: SchoolCreateOneWithoutVotedInput
+  school: SchoolCreateNestedOneWithoutVotedInput
   signature: String
-  user: UserCreateOneWithoutVotedInput!
+  user: UserCreateNestedOneWithoutVotedInput!
 }
 
 input VotedCreateWithoutUserInput {
-  ballot: BallotCreateOneWithoutVotedInput!
+  ballot: BallotCreateNestedOneWithoutVotedInput!
   id: String
-  school: SchoolCreateOneWithoutVotedInput
+  school: SchoolCreateNestedOneWithoutVotedInput
   signature: String
-  team: TeamCreateOneWithoutVotedInput
+  team: TeamCreateNestedOneWithoutVotedInput
 }
 
 input VotedListRelationFilter {
@@ -6683,8 +7439,9 @@ input VotedUpdateManyMutationInput {
 
 input VotedUpdateManyWithoutBallotInput {
   connect: [VotedWhereUniqueInput!]
-  connectOrCreate: [VotedCreateOrConnectWithoutballotInput!]
+  connectOrCreate: [VotedCreateOrConnectWithoutBallotInput!]
   create: [VotedCreateWithoutBallotInput!]
+  createMany: VotedCreateManyBallotInputEnvelope
   delete: [VotedWhereUniqueInput!]
   deleteMany: [VotedScalarWhereInput!]
   disconnect: [VotedWhereUniqueInput!]
@@ -6696,8 +7453,9 @@ input VotedUpdateManyWithoutBallotInput {
 
 input VotedUpdateManyWithoutSchoolInput {
   connect: [VotedWhereUniqueInput!]
-  connectOrCreate: [VotedCreateOrConnectWithoutschoolInput!]
+  connectOrCreate: [VotedCreateOrConnectWithoutSchoolInput!]
   create: [VotedCreateWithoutSchoolInput!]
+  createMany: VotedCreateManySchoolInputEnvelope
   delete: [VotedWhereUniqueInput!]
   deleteMany: [VotedScalarWhereInput!]
   disconnect: [VotedWhereUniqueInput!]
@@ -6709,8 +7467,9 @@ input VotedUpdateManyWithoutSchoolInput {
 
 input VotedUpdateManyWithoutTeamInput {
   connect: [VotedWhereUniqueInput!]
-  connectOrCreate: [VotedCreateOrConnectWithoutteamInput!]
+  connectOrCreate: [VotedCreateOrConnectWithoutTeamInput!]
   create: [VotedCreateWithoutTeamInput!]
+  createMany: VotedCreateManyTeamInputEnvelope
   delete: [VotedWhereUniqueInput!]
   deleteMany: [VotedScalarWhereInput!]
   disconnect: [VotedWhereUniqueInput!]
@@ -6722,8 +7481,9 @@ input VotedUpdateManyWithoutTeamInput {
 
 input VotedUpdateManyWithoutUserInput {
   connect: [VotedWhereUniqueInput!]
-  connectOrCreate: [VotedCreateOrConnectWithoutuserInput!]
+  connectOrCreate: [VotedCreateOrConnectWithoutUserInput!]
   create: [VotedCreateWithoutUserInput!]
+  createMany: VotedCreateManyUserInputEnvelope
   delete: [VotedWhereUniqueInput!]
   deleteMany: [VotedScalarWhereInput!]
   disconnect: [VotedWhereUniqueInput!]
@@ -6882,8 +7642,9 @@ input VoteUpdateManyMutationInput {
 
 input VoteUpdateManyWithoutBallotInput {
   connect: [VoteWhereUniqueInput!]
-  connectOrCreate: [VoteCreateOrConnectWithoutballotInput!]
+  connectOrCreate: [VoteCreateOrConnectWithoutBallotInput!]
   create: [VoteCreateWithoutBallotInput!]
+  createMany: VoteCreateManyBallotInputEnvelope
   delete: [VoteWhereUniqueInput!]
   deleteMany: [VoteScalarWhereInput!]
   disconnect: [VoteWhereUniqueInput!]
@@ -6895,8 +7656,9 @@ input VoteUpdateManyWithoutBallotInput {
 
 input VoteUpdateManyWithoutBallotRunInput {
   connect: [VoteWhereUniqueInput!]
-  connectOrCreate: [VoteCreateOrConnectWithoutballotRunInput!]
+  connectOrCreate: [VoteCreateOrConnectWithoutBallotRunInput!]
   create: [VoteCreateWithoutBallotRunInput!]
+  createMany: VoteCreateManyBallotRunInputEnvelope
   delete: [VoteWhereUniqueInput!]
   deleteMany: [VoteScalarWhereInput!]
   disconnect: [VoteWhereUniqueInput!]
@@ -6908,8 +7670,9 @@ input VoteUpdateManyWithoutBallotRunInput {
 
 input VoteUpdateManyWithoutSchoolInput {
   connect: [VoteWhereUniqueInput!]
-  connectOrCreate: [VoteCreateOrConnectWithoutschoolInput!]
+  connectOrCreate: [VoteCreateOrConnectWithoutSchoolInput!]
   create: [VoteCreateWithoutSchoolInput!]
+  createMany: VoteCreateManySchoolInputEnvelope
   delete: [VoteWhereUniqueInput!]
   deleteMany: [VoteScalarWhereInput!]
   disconnect: [VoteWhereUniqueInput!]
@@ -6921,8 +7684,9 @@ input VoteUpdateManyWithoutSchoolInput {
 
 input VoteUpdateManyWithoutTeamInput {
   connect: [VoteWhereUniqueInput!]
-  connectOrCreate: [VoteCreateOrConnectWithoutteamInput!]
+  connectOrCreate: [VoteCreateOrConnectWithoutTeamInput!]
   create: [VoteCreateWithoutTeamInput!]
+  createMany: VoteCreateManyTeamInputEnvelope
   delete: [VoteWhereUniqueInput!]
   deleteMany: [VoteScalarWhereInput!]
   disconnect: [VoteWhereUniqueInput!]
@@ -7077,16 +7841,16 @@ type Work {
   ): [Attachment!]!
   card: String
   data: Json
-  id: String!
+  id: String
   reactions(
     after: ReactionWhereUniqueInput
     before: ReactionWhereUniqueInput
     first: Int
     last: Int
   ): [Reaction!]!
-  text: String!
-  title: String!
-  updatedAt: DateTime!
+  text: String
+  title: String
+  updatedAt: DateTime
   users(
     after: UserWhereUniqueInput
     before: UserWhereUniqueInput
@@ -7096,178 +7860,214 @@ type Work {
 }
 
 input WorkCreateInput {
-  activities: ActivityCreateManyWithoutWorkInput
-  attachments: AttachmentCreateManyWithoutWorkInput
+  activities: ActivityCreateNestedManyWithoutWorkInput
+  attachments: AttachmentCreateNestedManyWithoutWorkInput
   card: String
   createdAt: DateTime
   data: Json
   id: String
-  reactions: ReactionCreateManyWithoutWorkInput
-  school: SchoolCreateOneWithoutWorkInput!
-  team: TeamCreateOneWithoutWorkInput!
+  reactions: ReactionCreateNestedManyWithoutWorkInput
+  school: SchoolCreateNestedOneWithoutWorkInput!
+  team: TeamCreateNestedOneWithoutWorkInput!
   text: String
   title: String
   updatedAt: DateTime
-  users: UserCreateManyWithoutWorkInput
+  users: UserCreateNestedManyWithoutWorkInput
   visibility: Visibility
 }
 
-input WorkCreateManyWithoutSchoolInput {
+input WorkCreateManySchoolInput {
+  card: String
+  createdAt: DateTime
+  data: Json
+  id: String
+  teamId: String!
+  text: String
+  title: String
+  updatedAt: DateTime
+  visibility: Visibility
+}
+
+input WorkCreateManySchoolInputEnvelope {
+  data: [WorkCreateManySchoolInput!]
+  skipDuplicates: Boolean
+}
+
+input WorkCreateManyTeamInput {
+  card: String
+  createdAt: DateTime
+  data: Json
+  id: String
+  schoolId: String!
+  text: String
+  title: String
+  updatedAt: DateTime
+  visibility: Visibility
+}
+
+input WorkCreateManyTeamInputEnvelope {
+  data: [WorkCreateManyTeamInput!]
+  skipDuplicates: Boolean
+}
+
+input WorkCreateNestedManyWithoutSchoolInput {
   connect: [WorkWhereUniqueInput!]
-  connectOrCreate: [WorkCreateOrConnectWithoutschoolInput!]
+  connectOrCreate: [WorkCreateOrConnectWithoutSchoolInput!]
   create: [WorkCreateWithoutSchoolInput!]
+  createMany: WorkCreateManySchoolInputEnvelope
 }
 
-input WorkCreateManyWithoutTeamInput {
+input WorkCreateNestedManyWithoutTeamInput {
   connect: [WorkWhereUniqueInput!]
-  connectOrCreate: [WorkCreateOrConnectWithoutteamInput!]
+  connectOrCreate: [WorkCreateOrConnectWithoutTeamInput!]
   create: [WorkCreateWithoutTeamInput!]
+  createMany: WorkCreateManyTeamInputEnvelope
 }
 
-input WorkCreateManyWithoutUsersInput {
+input WorkCreateNestedManyWithoutUsersInput {
   connect: [WorkWhereUniqueInput!]
-  connectOrCreate: [WorkCreateOrConnectWithoutusersInput!]
+  connectOrCreate: [WorkCreateOrConnectWithoutUsersInput!]
   create: [WorkCreateWithoutUsersInput!]
 }
 
-input WorkCreateOneWithoutActivitiesInput {
+input WorkCreateNestedOneWithoutActivitiesInput {
   connect: WorkWhereUniqueInput
-  connectOrCreate: WorkCreateOrConnectWithoutactivitiesInput
+  connectOrCreate: WorkCreateOrConnectWithoutActivitiesInput
   create: WorkCreateWithoutActivitiesInput
 }
 
-input WorkCreateOneWithoutAttachmentsInput {
+input WorkCreateNestedOneWithoutAttachmentsInput {
   connect: WorkWhereUniqueInput
-  connectOrCreate: WorkCreateOrConnectWithoutattachmentsInput
+  connectOrCreate: WorkCreateOrConnectWithoutAttachmentsInput
   create: WorkCreateWithoutAttachmentsInput
 }
 
-input WorkCreateOneWithoutReactionsInput {
+input WorkCreateNestedOneWithoutReactionsInput {
   connect: WorkWhereUniqueInput
-  connectOrCreate: WorkCreateOrConnectWithoutreactionsInput
+  connectOrCreate: WorkCreateOrConnectWithoutReactionsInput
   create: WorkCreateWithoutReactionsInput
 }
 
-input WorkCreateOrConnectWithoutactivitiesInput {
+input WorkCreateOrConnectWithoutActivitiesInput {
   create: WorkCreateWithoutActivitiesInput!
   where: WorkWhereUniqueInput!
 }
 
-input WorkCreateOrConnectWithoutattachmentsInput {
+input WorkCreateOrConnectWithoutAttachmentsInput {
   create: WorkCreateWithoutAttachmentsInput!
   where: WorkWhereUniqueInput!
 }
 
-input WorkCreateOrConnectWithoutreactionsInput {
+input WorkCreateOrConnectWithoutReactionsInput {
   create: WorkCreateWithoutReactionsInput!
   where: WorkWhereUniqueInput!
 }
 
-input WorkCreateOrConnectWithoutschoolInput {
+input WorkCreateOrConnectWithoutSchoolInput {
   create: WorkCreateWithoutSchoolInput!
   where: WorkWhereUniqueInput!
 }
 
-input WorkCreateOrConnectWithoutteamInput {
+input WorkCreateOrConnectWithoutTeamInput {
   create: WorkCreateWithoutTeamInput!
   where: WorkWhereUniqueInput!
 }
 
-input WorkCreateOrConnectWithoutusersInput {
+input WorkCreateOrConnectWithoutUsersInput {
   create: WorkCreateWithoutUsersInput!
   where: WorkWhereUniqueInput!
 }
 
 input WorkCreateWithoutActivitiesInput {
-  attachments: AttachmentCreateManyWithoutWorkInput
+  attachments: AttachmentCreateNestedManyWithoutWorkInput
   card: String
   createdAt: DateTime
   data: Json
   id: String
-  reactions: ReactionCreateManyWithoutWorkInput
-  school: SchoolCreateOneWithoutWorkInput!
-  team: TeamCreateOneWithoutWorkInput!
+  reactions: ReactionCreateNestedManyWithoutWorkInput
+  school: SchoolCreateNestedOneWithoutWorkInput!
+  team: TeamCreateNestedOneWithoutWorkInput!
   text: String
   title: String
   updatedAt: DateTime
-  users: UserCreateManyWithoutWorkInput
+  users: UserCreateNestedManyWithoutWorkInput
   visibility: Visibility
 }
 
 input WorkCreateWithoutAttachmentsInput {
-  activities: ActivityCreateManyWithoutWorkInput
+  activities: ActivityCreateNestedManyWithoutWorkInput
   card: String
   createdAt: DateTime
   data: Json
   id: String
-  reactions: ReactionCreateManyWithoutWorkInput
-  school: SchoolCreateOneWithoutWorkInput!
-  team: TeamCreateOneWithoutWorkInput!
+  reactions: ReactionCreateNestedManyWithoutWorkInput
+  school: SchoolCreateNestedOneWithoutWorkInput!
+  team: TeamCreateNestedOneWithoutWorkInput!
   text: String
   title: String
   updatedAt: DateTime
-  users: UserCreateManyWithoutWorkInput
+  users: UserCreateNestedManyWithoutWorkInput
   visibility: Visibility
 }
 
 input WorkCreateWithoutReactionsInput {
-  activities: ActivityCreateManyWithoutWorkInput
-  attachments: AttachmentCreateManyWithoutWorkInput
+  activities: ActivityCreateNestedManyWithoutWorkInput
+  attachments: AttachmentCreateNestedManyWithoutWorkInput
   card: String
   createdAt: DateTime
   data: Json
   id: String
-  school: SchoolCreateOneWithoutWorkInput!
-  team: TeamCreateOneWithoutWorkInput!
+  school: SchoolCreateNestedOneWithoutWorkInput!
+  team: TeamCreateNestedOneWithoutWorkInput!
   text: String
   title: String
   updatedAt: DateTime
-  users: UserCreateManyWithoutWorkInput
+  users: UserCreateNestedManyWithoutWorkInput
   visibility: Visibility
 }
 
 input WorkCreateWithoutSchoolInput {
-  activities: ActivityCreateManyWithoutWorkInput
-  attachments: AttachmentCreateManyWithoutWorkInput
+  activities: ActivityCreateNestedManyWithoutWorkInput
+  attachments: AttachmentCreateNestedManyWithoutWorkInput
   card: String
   createdAt: DateTime
   data: Json
   id: String
-  reactions: ReactionCreateManyWithoutWorkInput
-  team: TeamCreateOneWithoutWorkInput!
+  reactions: ReactionCreateNestedManyWithoutWorkInput
+  team: TeamCreateNestedOneWithoutWorkInput!
   text: String
   title: String
   updatedAt: DateTime
-  users: UserCreateManyWithoutWorkInput
+  users: UserCreateNestedManyWithoutWorkInput
   visibility: Visibility
 }
 
 input WorkCreateWithoutTeamInput {
-  activities: ActivityCreateManyWithoutWorkInput
-  attachments: AttachmentCreateManyWithoutWorkInput
+  activities: ActivityCreateNestedManyWithoutWorkInput
+  attachments: AttachmentCreateNestedManyWithoutWorkInput
   card: String
   createdAt: DateTime
   data: Json
   id: String
-  reactions: ReactionCreateManyWithoutWorkInput
-  school: SchoolCreateOneWithoutWorkInput!
+  reactions: ReactionCreateNestedManyWithoutWorkInput
+  school: SchoolCreateNestedOneWithoutWorkInput!
   text: String
   title: String
   updatedAt: DateTime
-  users: UserCreateManyWithoutWorkInput
+  users: UserCreateNestedManyWithoutWorkInput
   visibility: Visibility
 }
 
 input WorkCreateWithoutUsersInput {
-  activities: ActivityCreateManyWithoutWorkInput
-  attachments: AttachmentCreateManyWithoutWorkInput
+  activities: ActivityCreateNestedManyWithoutWorkInput
+  attachments: AttachmentCreateNestedManyWithoutWorkInput
   card: String
   createdAt: DateTime
   data: Json
   id: String
-  reactions: ReactionCreateManyWithoutWorkInput
-  school: SchoolCreateOneWithoutWorkInput!
-  team: TeamCreateOneWithoutWorkInput!
+  reactions: ReactionCreateNestedManyWithoutWorkInput
+  school: SchoolCreateNestedOneWithoutWorkInput!
+  team: TeamCreateNestedOneWithoutWorkInput!
   text: String
   title: String
   updatedAt: DateTime
@@ -7322,8 +8122,9 @@ input WorkUpdateManyMutationInput {
 
 input WorkUpdateManyWithoutSchoolInput {
   connect: [WorkWhereUniqueInput!]
-  connectOrCreate: [WorkCreateOrConnectWithoutschoolInput!]
+  connectOrCreate: [WorkCreateOrConnectWithoutSchoolInput!]
   create: [WorkCreateWithoutSchoolInput!]
+  createMany: WorkCreateManySchoolInputEnvelope
   delete: [WorkWhereUniqueInput!]
   deleteMany: [WorkScalarWhereInput!]
   disconnect: [WorkWhereUniqueInput!]
@@ -7335,8 +8136,9 @@ input WorkUpdateManyWithoutSchoolInput {
 
 input WorkUpdateManyWithoutTeamInput {
   connect: [WorkWhereUniqueInput!]
-  connectOrCreate: [WorkCreateOrConnectWithoutteamInput!]
+  connectOrCreate: [WorkCreateOrConnectWithoutTeamInput!]
   create: [WorkCreateWithoutTeamInput!]
+  createMany: WorkCreateManyTeamInputEnvelope
   delete: [WorkWhereUniqueInput!]
   deleteMany: [WorkScalarWhereInput!]
   disconnect: [WorkWhereUniqueInput!]
@@ -7348,7 +8150,7 @@ input WorkUpdateManyWithoutTeamInput {
 
 input WorkUpdateManyWithoutUsersInput {
   connect: [WorkWhereUniqueInput!]
-  connectOrCreate: [WorkCreateOrConnectWithoutusersInput!]
+  connectOrCreate: [WorkCreateOrConnectWithoutUsersInput!]
   create: [WorkCreateWithoutUsersInput!]
   delete: [WorkWhereUniqueInput!]
   deleteMany: [WorkScalarWhereInput!]
@@ -7376,7 +8178,7 @@ input WorkUpdateManyWithWhereWithoutUsersInput {
 
 input WorkUpdateOneWithoutActivitiesInput {
   connect: WorkWhereUniqueInput
-  connectOrCreate: WorkCreateOrConnectWithoutactivitiesInput
+  connectOrCreate: WorkCreateOrConnectWithoutActivitiesInput
   create: WorkCreateWithoutActivitiesInput
   delete: Boolean
   disconnect: Boolean
@@ -7386,7 +8188,7 @@ input WorkUpdateOneWithoutActivitiesInput {
 
 input WorkUpdateOneWithoutAttachmentsInput {
   connect: WorkWhereUniqueInput
-  connectOrCreate: WorkCreateOrConnectWithoutattachmentsInput
+  connectOrCreate: WorkCreateOrConnectWithoutAttachmentsInput
   create: WorkCreateWithoutAttachmentsInput
   delete: Boolean
   disconnect: Boolean
@@ -7396,7 +8198,7 @@ input WorkUpdateOneWithoutAttachmentsInput {
 
 input WorkUpdateOneWithoutReactionsInput {
   connect: WorkWhereUniqueInput
-  connectOrCreate: WorkCreateOrConnectWithoutreactionsInput
+  connectOrCreate: WorkCreateOrConnectWithoutReactionsInput
   create: WorkCreateWithoutReactionsInput
   delete: Boolean
   disconnect: Boolean
