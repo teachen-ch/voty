@@ -1,3 +1,11 @@
+## [1.43.1](https://github.com/teachen-ch/voty/compare/v1.43.0...v1.43.1) (2021-04-13)
+
+
+### Bug Fixes
+
+* [#127](https://github.com/teachen-ch/voty/issues/127) null names for invited students ([d6b1718](https://github.com/teachen-ch/voty/commit/d6b1718a51e71243671cd32d39575c26cc641033))
+* bug with null-names close [#127](https://github.com/teachen-ch/voty/issues/127) ([8d42804](https://github.com/teachen-ch/voty/commit/8d4280484e381871bc3226e3d21cf234a75938f7))
+
 # [1.43.0](https://github.com/teachen-ch/voty/compare/v1.42.1...v1.43.0) (2021-03-29)
 
 
