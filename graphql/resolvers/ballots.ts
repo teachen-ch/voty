@@ -398,7 +398,7 @@ export async function getHasVoted({
 }: PermissionArgs): Promise<boolean> {
   const voted = await db.voted.findMany({
     where: {
-      ballot: { id: { equals: ballot.id } },
+      ballot: { id: { equals: String(ballot.id) } },
       user: { id: { equals: user?.id } },
     },
   });

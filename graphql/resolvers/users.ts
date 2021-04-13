@@ -40,7 +40,7 @@ export const shortname: FieldResolver<"User", "shortname"> = (_root) => {
 export function getShortname(_root: {
   lastname?: string | null;
   name?: string | null;
-  role: Role;
+  role?: Role | null;
 }): string {
   if (!_root.lastname) return String(_root.name);
   if (_root.role === Role.Student)
