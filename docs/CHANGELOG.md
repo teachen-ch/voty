@@ -1,3 +1,10 @@
+# [1.45.0](https://github.com/teachen-ch/voty/compare/v1.44.0...v1.45.0) (2021-04-14)
+
+
+### Features
+
+* update cypress e2e testing framework to 7.1 ([0b65ef1](https://github.com/teachen-ch/voty/commit/0b65ef1288711525fbbd1bf7c5f017d6ec9bfd15))
+
 # [1.44.0](https://github.com/teachen-ch/voty/compare/v1.43.1...v1.44.0) (2021-04-13)
 
 
