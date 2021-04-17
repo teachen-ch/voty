@@ -26,7 +26,9 @@ module.exports = (
   // test coverage using istanbul
   // @ts-ignore
   // eslint-disable-next-line
-  require("@cypress/code-coverage/task")(on, config);
+  // TODO: Disabled code coverage after upgrade to 7.1 as it didn't run on CI/CD anymore
+  // TODO: Also see support/index.ts
+  // require("@cypress/code-coverage/task")(on, config);
 
   // `on` is used to hook into various events Cypress emits
   // `config` is the resolved Cypress config
