@@ -1,3 +1,16 @@
+# [1.47.0](https://github.com/teachen-ch/voty/compare/v1.46.0...v1.47.0) (2021-04-17)
+
+
+### Bug Fixes
+
+* potential security issue with redirect ([cfacd47](https://github.com/teachen-ch/voty/commit/cfacd473b1add1fdd689ea05268a864e7dbc43a5))
+* removed a javascript: link to please react ([b9fb744](https://github.com/teachen-ch/voty/commit/b9fb744cbce66f16eb6891955675aaeaee5bc860))
+
+
+### Features
+
+* upgrade to Next 10.1 ([0b09f77](https://github.com/teachen-ch/voty/commit/0b09f77b960c5a9183d84986cf169a12cc25ee89))
+
 # [1.46.0](https://github.com/teachen-ch/voty/compare/v1.45.0...v1.46.0) (2021-04-17)
 
 
