@@ -9,7 +9,7 @@ import { Text, Button, Heading } from "rebass";
 import { useSetAccessToken, useSetUser, useUser } from "state/user";
 import { Grid } from "theme-ui";
 import { useQueryParam } from "util/hooks";
-import { getQueryParam } from "util/isBrowser";
+import { getQueryParam, getHost } from "util/isBrowser";
 import { trackEvent, usePageEvent } from "util/stats";
 import { getStartpage } from "./login";
 
@@ -17,7 +17,9 @@ export default function VerifiedPage(): React.ReactElement {
   const purpose = useQueryParam("p");
   const user = useUser();
   const router = useRouter();
-  const redirect = getQueryParam("redirect", { sanitize: true });
+  const redirect = ensureSameDomain(
+    getQueryParam("redirect", { sanitize: true })
+  );
 
   if (!user)
     return (
@@ -137,4 +139,12 @@ function PasswordResetForm() {
       </Grid>
     </>
   );
+}
+
+function ensureSameDomain(url?: string): string | undefined {
+  const host = getHost();
+  if (!host || !url) return undefined;
+  if (url.startsWith("https://" + host + "/")) return url;
+  if (url.startsWith("http://" + host + "/")) return url;
+  return undefined;
 }
