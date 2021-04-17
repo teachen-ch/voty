@@ -75,7 +75,7 @@
     "yup": "0.29.3"
   },
   "devDependencies": {
-    "@cypress/code-coverage": "^3.8.5",
+    "@cypress/code-coverage": "^3.9.4",
     "@divyenduz/ts-graphql-plugin": "^0.1.0",
     "@graphql-codegen/cli": "1.19.4",
     "@graphql-codegen/fragment-matcher": "2.0.1",
