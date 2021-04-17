@@ -1,3 +1,15 @@
+# [1.46.0](https://github.com/teachen-ch/voty/compare/v1.45.0...v1.46.0) (2021-04-17)
+
+
+### Bug Fixes
+
+* trying to fix e2e tests after cypress upgrade ([05355ef](https://github.com/teachen-ch/voty/commit/05355efa049cd3a486f8d2517ed94478eeb7dcb3))
+
+
+### Features
+
+* implement and close [#129](https://github.com/teachen-ch/voty/issues/129) ([bdc4264](https://github.com/teachen-ch/voty/commit/bdc426486df4da73dcb45485da985e01e289123d))
+
 # [1.45.0](https://github.com/teachen-ch/voty/compare/v1.44.0...v1.45.0) (2021-04-14)
 
 
