@@ -1,3 +1,10 @@
+## [1.47.1](https://github.com/teachen-ch/voty/compare/v1.47.0...v1.47.1) (2021-04-22)
+
+
+### Bug Fixes
+
+* disable code coverage ([8e702c1](https://github.com/teachen-ch/voty/commit/8e702c1051ed6b2cd68b2731cfc0ea8291cc2101))
+
 # [1.47.0](https://github.com/teachen-ch/voty/compare/v1.46.0...v1.47.0) (2021-04-17)
 
 
