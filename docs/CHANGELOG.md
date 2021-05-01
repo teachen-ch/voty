@@ -1,3 +1,10 @@
+# [1.48.0](https://github.com/teachen-ch/voty/compare/v1.47.1...v1.48.0) (2021-05-01)
+
+
+### Features
+
+* error handling for feedback form ([7e95def](https://github.com/teachen-ch/voty/commit/7e95def06ebd0fb915388d1b3c9a77aba397b674))
+
 ## [1.47.1](https://github.com/teachen-ch/voty/compare/v1.47.0...v1.47.1) (2021-04-22)
 
 
