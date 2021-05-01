@@ -24,7 +24,7 @@ export default async (
     await sendMail({
       from: String(user.email),
       to: feedbackEmail,
-      subject: `voty Feedback: ${title}`,
+      subject: `voty.ch Feedback: ${title}`,
       template: "feedback",
       data,
     });
@@ -33,6 +33,6 @@ export default async (
   } catch (err) {
     console.error(err);
     logger.error(err);
-    res.send({ error: "Error.ServerError" });
+    res.send({ error: "Error.SendEmailError" });
   }
 };

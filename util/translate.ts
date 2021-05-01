@@ -41,7 +41,8 @@ const messages: Translations = {
     PasswordChange: "Das Passwort konnte nicht geändert werden",
     PasswordNotSet: "Es wurde kein Passwort gesetzt",
     SendEmailVerification:
-      "Das Bestätigungs-Email konnte nicht verschickt werden",
+      "Das Bestätigungs-Email konnte nicht versendet werden",
+    SendEmailError: "Das Email konnte nicht versendet werden",
     ServerError: "Ein Fehler ist aufgetreten",
     StrangeCookie: "Fehlerhafte Anfrage",
     TeamNotFound: "Diese Klasse wurde nicht gefunden",
