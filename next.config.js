@@ -1,7 +1,5 @@
-// eslint-disable-next-line 
-const withMDX = require("@next/mdx")({
-  extension: /\.(md|mdx)$/,
-});
+// eslint-disable-next-line
+const withMDX = require("@next/mdx")(/* { extension: /\.(md|mdx)$/,} */);
 // eslint-disable-next-line
 module.exports = withMDX({
   pageExtensions: ["js", "jsx", "ts", "tsx", "md", "mdx"],
@@ -11,16 +9,21 @@ module.exports = withMDX({
     deviceSizes: [400, 600, 1200, 2000],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
   },
+  future: {
+    webpack5: true,
+  },
   redirects() {
     return [
       {
-        source: '/abstimmung',
-        destination: '/abstimmen',
+        source: "/abstimmung",
+        destination: "/abstimmen",
         permanent: true,
       },
-      { source: '/uptime',
-        destination: 'https://updown.io/p9am',
+      {
+        source: "/uptime",
+        destination: "https://updown.io/p9am",
         permanent: true,
-      }
-    ]}
+      },
+    ];
+  },
 });
