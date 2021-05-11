@@ -1,3 +1,11 @@
+# [1.49.0](https://github.com/teachen-ch/voty/compare/v1.48.1...v1.49.0) (2021-05-11)
+
+
+### Features
+
+* upgrade cypress e2e test framework ([8de2cc7](https://github.com/teachen-ch/voty/commit/8de2cc74c7a0d1a0fc7aafb29a8dc1f469f54579))
+* upgrade prisma to latest version ([a5ff557](https://github.com/teachen-ch/voty/commit/a5ff55749974a4fa7f06bce3fe54671ef0444f54))
+
 ## [1.48.1](https://github.com/teachen-ch/voty/compare/v1.48.0...v1.48.1) (2021-05-11)
 
 
