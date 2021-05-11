@@ -1,3 +1,10 @@
+## [1.48.1](https://github.com/teachen-ch/voty/compare/v1.48.0...v1.48.1) (2021-05-11)
+
+
+### Bug Fixes
+
+* security fix on nodemailer ([de426d6](https://github.com/teachen-ch/voty/commit/de426d65994cce1263e006f3d6044e7a8e37318f))
+
 # [1.48.0](https://github.com/teachen-ch/voty/compare/v1.47.1...v1.48.0) (2021-05-01)
 
 
