@@ -1,3 +1,15 @@
+# [1.51.0](https://github.com/teachen-ch/voty/compare/v1.50.0...v1.51.0) (2021-05-11)
+
+
+### Bug Fixes
+
+* minor fixes ([705d093](https://github.com/teachen-ch/voty/commit/705d09315f1a9afbfb9ace126127cff5e6562aff))
+
+
+### Features
+
+* upgrade to Next.JS 10.2 «fast & furious»🚀 ([5e7bc8d](https://github.com/teachen-ch/voty/commit/5e7bc8d58ea0eff5fa5b175cb8148788e400dca7))
+
 # [1.50.0](https://github.com/teachen-ch/voty/compare/v1.49.0...v1.50.0) (2021-05-11)
 
 
