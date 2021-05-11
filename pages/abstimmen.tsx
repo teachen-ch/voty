@@ -42,8 +42,8 @@ export default function Abstimmung(): ReactElement {
             <IconCheckWhite height="25px" />
           </TDIcon>
           <Text maxWidth="700px">
-            Ich nehme mir Zeit zwischen dem 5. Feb – 7. März, um die Vorlagen
-            mit den Schüler*innen zu diskutieren (z. B. mit Material von{" "}
+            Ich nehme mir Zeit, um die Vorlagen mit den Schüler*innen zu
+            diskutieren (z. B. mit Material von{" "}
             <Link
               href="https://www.easyvote.ch/de/school/"
               rel="noreferrer"
