@@ -1,3 +1,10 @@
+## [1.51.1](https://github.com/teachen-ch/voty/compare/v1.51.0...v1.51.1) (2021-05-11)
+
+
+### Bug Fixes
+
+* downgrade cypress to 7.1 due to build issues ([e7d913a](https://github.com/teachen-ch/voty/commit/e7d913a75d2b84361c116a7afb0345c9889ba9ac))
+
 # [1.51.0](https://github.com/teachen-ch/voty/compare/v1.50.0...v1.51.0) (2021-05-11)
 
 
