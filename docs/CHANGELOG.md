@@ -1,3 +1,10 @@
+# [1.50.0](https://github.com/teachen-ch/voty/compare/v1.49.0...v1.50.0) (2021-05-11)
+
+
+### Features
+
+* update for next class votings ([05829ac](https://github.com/teachen-ch/voty/commit/05829acca92d5989cf8e74421368f832fd3b230e))
+
 # [1.49.0](https://github.com/teachen-ch/voty/compare/v1.48.1...v1.49.0) (2021-05-11)
 
 
