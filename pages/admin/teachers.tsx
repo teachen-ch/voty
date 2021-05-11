@@ -7,7 +7,7 @@ import { Breadcrumb, A, Here } from "components/Breadcrumb";
 
 export const GET_TEACHERS = gql`
   query teachers($where: UserWhereInput) {
-    users(where: $where) {
+    users(where: $where, orderBy: { createdAt: desc }) {
       id
       name
       lastname

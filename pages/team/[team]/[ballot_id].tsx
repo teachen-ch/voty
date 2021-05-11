@@ -1,5 +1,5 @@
-import { LoggedInPage, AppPage, ErrorPage, H2, H3 } from "components/Page";
-import { Text, Box, Flex } from "rebass";
+import { LoggedInPage, AppPage, ErrorPage } from "components/Page";
+import { Text, Box } from "rebass";
 import { useRouter } from "next/router";
 import { Role, useBallotQuery, useGetBallotResultsQuery } from "graphql/types";
 import { BallotResults, VotyPie } from "components/BallotResults";
@@ -11,7 +11,6 @@ import { Discussion } from "components/Discussion";
 import { HideFeature } from "components/HideFeature";
 import { useTeam } from "state/user";
 import { useState } from "react";
-import { Grid } from "theme-ui";
 
 export default function TeacherBallotPage(): React.ReactElement {
   usePageEvent({ category: "Teacher", action: "BallotDetails" });

@@ -34,7 +34,7 @@ export default function DistanceLearningBlog(): React.ReactElement {
         className="screenshot"
       />
       <Text>
-        Der Trend zu mehr «Home Office» und zu «Distributed Teams» wird die
+        Der Trend zu mehr «Home Office» und zu «Distributed Teams» wird die
         Arbeitswelt nachhaltig auch nach der Pandemie prägen. Ebenso wird die
         Schule von Morgen Elemente des Distance Learnings fest integrieren.
         Denn, darin sind sich viele Lehrpersonen wie Schüler*innen einig: eine
