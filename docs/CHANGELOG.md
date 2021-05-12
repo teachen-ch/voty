@@ -1,3 +1,10 @@
+## [1.51.2](https://github.com/teachen-ch/voty/compare/v1.51.1...v1.51.2) (2021-05-12)
+
+
+### Bug Fixes
+
+* minor correction on homepage ([f28c8b4](https://github.com/teachen-ch/voty/commit/f28c8b4f55f40b8321683dd8ec2f9b38023ccf3b))
+
 ## [1.51.1](https://github.com/teachen-ch/voty/compare/v1.51.0...v1.51.1) (2021-05-11)
 
 
