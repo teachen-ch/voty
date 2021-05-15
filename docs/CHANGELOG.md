@@ -1,3 +1,10 @@
+## [1.51.3](https://github.com/teachen-ch/voty/compare/v1.51.2...v1.51.3) (2021-05-15)
+
+
+### Bug Fixes
+
+* try to downgrade to cypress 7.0.0 to fix e2e ([b3f2a12](https://github.com/teachen-ch/voty/commit/b3f2a12d09881bf4149fad1c4fa927e0ba8a27a9))
+
 ## [1.51.2](https://github.com/teachen-ch/voty/compare/v1.51.1...v1.51.2) (2021-05-12)
 
 
