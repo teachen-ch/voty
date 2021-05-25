@@ -1,0 +1,85 @@
+<mjml>
+  <mj-head>
+    <mj-style inline="inline"> .mbot { margin-bottom: -120px; } </mj-style>
+    <mj-font
+      name="SourceSansPro"
+      href="https://voty.ch/fonts/source-sans-pro-v14-latin-600.woff2"
+    ></mj-font>
+    <mj-attributes>
+      <mj-all
+        font-family="SourceSansPro, -apple-system, system-ui, sans"
+      ></mj-all>
+      <mj-text font-size="18px" line-height="26px" />
+      <mj-class
+        name="title"
+        color="#206DBB"
+        font-weight="bold"
+        align="left"
+        padding-top="40px"
+        text-decoration="underline"
+        font-size="27px"
+      />
+      <mj-button
+        background-color="#206DBB"
+        font-weight="bold"
+        font-size="20px"
+        border-radius="5px"
+      />
+    </mj-attributes>
+  </mj-head>
+  <mj-body>
+    <mj-section>
+      <mj-column width="100%" css-class="mbot">
+        <mj-image
+          width="400px"
+          src="https://voty.ch/images/voty_newsletter_header.png"
+        ></mj-image>
+      </mj-column>
+    </mj-section>
+    <mj-section background-color="#E1E6EA" border-radius="8px">
+      <mj-column width="100%" padding-top="40px">
+        <mj-text mj-class="title">Spannende Abstimmungen stehen an</mj-text>
+        <mj-text>
+          Am Wochenende des 13. Juni stehen wieder fünf spannende und relevante 
+          Abstimmungen an, die auch für Jugendliche greifbar sind. Deshalb führen 
+          wir auch in diesem Quartal wieder Klassenabstim&shy;mungen durch mit den 
+          Materialien von easyvote.ch. Melden sie jetzt ihre Klasse 
+          auf Stufe Sek-1 oder Sek-2/Berufsschule an.
+        </mj-text>
+        <mj-button href="https://voty.ch/abstimmen"
+          >Jetzt Klasse anmelden</mj-button
+        >
+
+        <mj-text mj-class="title"
+          >Online-Lenrmittel für politische Bildung
+        </mj-text>
+        <mj-text>
+          Die Lerninhalte für die politische Bildung haben wir ebenfalls überarbeit. 
+          Unsere Online-Werkzeugkiste für den Demokratie-Unterricht mit Videos, Quizzes, 
+          Aufgaben und mehr finden sie auf voty.ch/lernen. Hier freuen wir uns 
+          über immer über Feedback und Verbesserungsvorschläge aus der Unterrichts-Praxis.
+        </mj-text>
+        <mj-button href="https://voty.ch/cards">Unterrichtsmaterialien ansehen</mj-button>
+        <mj-text mj-class="title">Tag der Demokratie!</mj-text>
+        <mj-text>
+          campusdemokratie.ch organisiert dieses Jahr zum ersten Mal den «Tag der Demokratie» 
+          am 15. September und voty.ch ist selbstverständlich mit von der Partie. 
+          Durchforsten sie das wachsende Angebot an Aktivitäten für die 
+          politische Bildung und Partizipation.
+          </mj-text
+        >
+        <mj-button href="https://campusdemokratie.ch/tagderdemokratie/"
+          >zum «Tag der Demokratie»</mj-button
+        >
+      </mj-column>
+    </mj-section>
+    <mj-section>
+      <mj-column padding-top="50px">
+        <mj-text mj-class="footer"
+          >&copy; Verein «Teachen!», Alpenweg 11, 3110 Münsingen.
+          <unsubscribe>Abmelden</unsubscribe> 😢</mj-text
+        >
+      </mj-column>
+    </mj-section>
+  </mj-body>
+</mjml>
