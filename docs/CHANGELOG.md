@@ -1,3 +1,10 @@
+# [1.52.0](https://github.com/teachen-ch/voty/compare/v1.51.3...v1.52.0) (2021-05-25)
+
+
+### Features
+
+* new Newsletter ([239b5fa](https://github.com/teachen-ch/voty/commit/239b5fa3f4a0f815bcded3801c691531ea500300))
+
 ## [1.51.3](https://github.com/teachen-ch/voty/compare/v1.51.2...v1.51.3) (2021-05-15)
 
 
