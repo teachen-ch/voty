@@ -1,3 +1,11 @@
+## [1.52.1](https://github.com/teachen-ch/voty/compare/v1.52.0...v1.52.1) (2021-06-07)
+
+
+### Bug Fixes
+
+* fixing security vulnerability in ws module ([7004e6a](https://github.com/teachen-ch/voty/commit/7004e6a3daf3ad76238a97929d4dcc9d9fac20a8))
+* Newsletter typos ([1757b21](https://github.com/teachen-ch/voty/commit/1757b21b848d80860223f8c2a5931485392e43af))
+
 # [1.52.0](https://github.com/teachen-ch/voty/compare/v1.51.3...v1.52.0) (2021-05-25)
 
 
