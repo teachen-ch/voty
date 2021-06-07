@@ -137,7 +137,9 @@
   },
   "resolutions": {
     "ssri": "^8.0.1",
-    "is-svg": "4.2.2"
+    "is-svg": "4.2.2",
+    "ws": "6.2.2"
+
   },
   "repository": {
     "type": "git",
