@@ -40,11 +40,11 @@
       <mj-column width="100%" padding-top="40px">
         <mj-text mj-class="title">Spannende Abstimmungen stehen an</mj-text>
         <mj-text>
-          Am Wochenende des 13. Juni stehen wieder fünf spannende und relevante 
-          Abstimmungen an, die auch für Jugendliche greifbar sind. Deshalb führen 
-          wir auch in diesem Quartal wieder Klassenabstim&shy;mungen durch mit den 
-          Materialien von easyvote.ch. Melden sie jetzt ihre Klasse 
-          auf Stufe Sek-1 oder Sek-2/Berufsschule an.
+          Am Wochenende des 13. Juni stehen erneut fünf spannende und relevante
+          Abstimmungen an, die auch für Jugendliche greifbar sind. Deshalb
+          führen wir auch in diesem Quartal wieder mit den Unterlagen von
+          easyvote.ch Klassenabstim&shy;mungen durch. Melden Sie jetzt Ihre
+          Klasse auf Stufe Sek-1 oder Sek-2/Berufsschule an.
         </mj-text>
         <mj-button href="https://voty.ch/abstimmen"
           >Jetzt Klasse anmelden</mj-button
@@ -54,20 +54,22 @@
           >Online-Lenrmittel für politische Bildung
         </mj-text>
         <mj-text>
-          Die Lerninhalte für die politische Bildung haben wir ebenfalls überarbeit. 
-          Unsere Online-Werkzeugkiste für den Demokratie-Unterricht mit Videos, Quizzes, 
-          Aufgaben und mehr finden sie auf voty.ch/lernen. Hier freuen wir uns 
-          über immer über Feedback und Verbesserungsvorschläge aus der Unterrichts-Praxis.
+          Die Lerninhalte für die politische Bildung haben wir ebenfalls
+          überarbeit. Unsere Online-Werkzeugkiste für den Demokratie-Unterricht
+          mit Videos, Quizzes, Aufgaben und mehr finden Sie auf voty.ch/lernen.
+          Hier freuen wir uns immer über Feedback und Verbesserungsvorschläge
+          aus der Unterrichts-Praxis.
         </mj-text>
-        <mj-button href="https://voty.ch/cards">Unterrichtsmaterialien ansehen</mj-button>
+        <mj-button href="https://voty.ch/cards"
+          >Unterrichtsmaterialien ansehen</mj-button
+        >
         <mj-text mj-class="title">Tag der Demokratie!</mj-text>
         <mj-text>
-          campusdemokratie.ch organisiert dieses Jahr zum ersten Mal den «Tag der Demokratie» 
-          am 15. September und voty.ch ist selbstverständlich mit von der Partie. 
-          Durchforsten sie das wachsende Angebot an Aktivitäten für die 
-          politische Bildung und Partizipation.
-          </mj-text
-        >
+          campusdemokratie.ch organisiert dieses Jahr am 15. September zum
+          ersten Mal den «Tag der Demokratie» und voty.ch ist selbstverständlich
+          mit von der Partie. Durchforsten Sie das wachsende Angebot an
+          Aktivitäten für die politische Bildung und Partizipation.
+        </mj-text>
         <mj-button href="https://campusdemokratie.ch/tagderdemokratie/"
           >zum «Tag der Demokratie»</mj-button
         >
