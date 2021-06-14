@@ -18,9 +18,7 @@
     "files.exclude": {
       ".git/": true,
       ".next/": true,
-      ".nexus/": true,
-      "data/": true,
-      "yarn.lock": true
+      "data/": true
     },
     "typescript.tsdk": "/Users/stefan/code/voty/node_modules/typescript/lib",
     "prisma.plugin.nextjs.addTypesOnSave": true,
