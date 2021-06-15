@@ -1,3 +1,10 @@
+# [1.53.0](https://github.com/teachen-ch/voty/compare/v1.52.2...v1.53.0) (2021-06-15)
+
+
+### Features
+
+* better data privacy information ([337f8b3](https://github.com/teachen-ch/voty/commit/337f8b38491ef4a1968c92a7174d7653231e1fcc))
+
 ## [1.52.2](https://github.com/teachen-ch/voty/compare/v1.52.1...v1.52.2) (2021-06-15)
 
 
