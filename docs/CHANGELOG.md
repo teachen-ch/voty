@@ -1,3 +1,10 @@
+## [1.52.2](https://github.com/teachen-ch/voty/compare/v1.52.1...v1.52.2) (2021-06-15)
+
+
+### Bug Fixes
+
+* trying to get tests working again in CI/CD ([685aaa3](https://github.com/teachen-ch/voty/commit/685aaa32d619df6de45d5a105460945093c746c0))
+
 ## [1.52.1](https://github.com/teachen-ch/voty/compare/v1.52.0...v1.52.1) (2021-06-07)
 
 
