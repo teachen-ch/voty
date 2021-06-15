@@ -229,6 +229,7 @@ export const H2: React.FC<HeadingProps> = (props) => (
 export const H3: React.FC<HeadingProps> = (props) => (
   <Heading
     as="h3"
+    fontSize={[3, 3, 3]}
     variant="panelheading"
     sx={{ borderBottom: "none" }}
     {...props}

@@ -1,5 +1,5 @@
 import { Flex, Box, LinkProps } from "rebass";
-import { H4 } from "components/Page";
+import { H3 } from "components/Page";
 import { A } from "./Breadcrumb";
 
 export const Footer: React.FC = () => (
@@ -26,7 +26,7 @@ export const Footer: React.FC = () => (
         flexDirection={["column", "column", "row", "row"]}
       >
         <Box>
-          <H4 mb={3}>Unterstützung</H4>
+          <H3 mb={3}>Unterstützung</H3>
           <img
             src="/images/pf_logo.png"
             alt="Prototypefund Logo"
@@ -43,16 +43,20 @@ export const Footer: React.FC = () => (
           />
         </Box>
         <NavBox>
-          <H4>Informationen</H4>
+          <H3>Informationen</H3>
           <FLink href="/projekt">Infos zum Projekt</FLink>
           <FLink href="/faq">Häufige Fragen (FAQ)</FLink>
-          <FLink href="https://teachen.ch/verein-teachen" target="_blank">
+          <FLink
+            href="https://teachen.ch/verein-teachen"
+            target="_blank"
+            rel="noopener"
+          >
             Verein «Teachen!»
           </FLink>
           <FLink href="/newsletter">Anmeldung Newsletter</FLink>
         </NavBox>
         <NavBox>
-          <H4>Anmeldung</H4>
+          <H3>Anmeldung</H3>
           <FLink href="/sus">Als Schüler*in registrieren</FLink>
           <FLink href="/user/signup">Neue Schulklasse anmelden</FLink>
           <FLink href="/lernen">Online-Lehrmittel</FLink>
@@ -60,7 +64,7 @@ export const Footer: React.FC = () => (
         </NavBox>
 
         <NavBox>
-          <H4>Allgemein</H4>
+          <H3>Allgemein</H3>
           <FLink href="/kontakt">Kontakt</FLink>
           <FLink href="/datenschutz">Datenschutz</FLink>
           <FLink
