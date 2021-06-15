@@ -16,7 +16,8 @@ export default function CardPagePublic(): React.ReactElement {
   }
 
   const meta = getCardMeta(key);
-  if (!meta) return <ErrorPage>Lerninhalt nicht gefunden: {key}</ErrorPage>;
+  if (!meta)
+    return <ErrorPage>Dieser Lerninhalt wurde nicht gefunden: {key}</ErrorPage>;
 
   return (
     <Page heading={String(meta.title)}>

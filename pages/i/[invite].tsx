@@ -85,7 +85,8 @@ const Invite: React.FC = () => {
     return (
       <AppPage heading="Fehler">
         <Box minHeight="400px">
-          Diese Einladung ist nicht gültig. Bitte sprich mit Deiner Lehrperson.
+          Diese Einladung ist nicht (mehr) gültig. Bitte sprich mit Deiner
+          Lehrperson.
           {teamQuery.error?.message && (
             <ErrorBox error={teamQuery.error.message} />
           )}

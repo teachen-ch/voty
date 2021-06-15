@@ -9,7 +9,7 @@ export default function QRPage(): React.ReactElement {
   return (
     <>
       <Head>
-        <title>Einladung</title>
+        <title>QR-Code Einladung</title>
       </Head>
       <Box p={3} variant="centered">
         <QRCode
