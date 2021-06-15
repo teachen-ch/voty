@@ -1,3 +1,10 @@
+## [1.53.1](https://github.com/teachen-ch/voty/compare/v1.53.0...v1.53.1) (2021-06-15)
+
+
+### Bug Fixes
+
+* accessibility fix on heading order ([2d5f631](https://github.com/teachen-ch/voty/commit/2d5f6313d1e1886fadbc3b2092f21e8b98637c26))
+
 # [1.53.0](https://github.com/teachen-ch/voty/compare/v1.52.2...v1.53.0) (2021-06-15)
 
 
