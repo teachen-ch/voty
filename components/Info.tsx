@@ -5,6 +5,7 @@ const typeColors: Record<string, string> = {
   info: "primary",
   light: "lightgray",
   default: "gray",
+  success: "green",
 };
 
 /**

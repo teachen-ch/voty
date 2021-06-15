@@ -3,6 +3,7 @@ import { Page } from "components/Page";
 import { Heading, Text } from "rebass";
 import { ReactElement } from "react";
 import { A } from "components/Breadcrumb";
+import { Info } from "components/Info";
 
 export default function Datenschutz(): ReactElement {
   return (
@@ -23,6 +24,13 @@ export default function Datenschutz(): ReactElement {
         und die gesammelte Meinung der Schülerinnen und Schüler zu nationalen
         Abstimmungen sichtbar zu machen.
       </Text>
+
+      <Info type="success">
+        Unsere Server werden in einem Rechenzentrum in Glarus 🇨🇭 zu 100% mit
+        erneuerbarern Energie betrieben. Wir verwenden keine Services von
+        Drittparteien wie Google oder Amazon für Webanylse, die Speicherung von
+        Daten, oder ähnliche Dienstleistungen.
+      </Info>
 
       <Text fontSize={[2, 2, 2]}>
         <Heading as="h2">
@@ -79,17 +87,12 @@ export default function Datenschutz(): ReactElement {
           Eingebettete Inhalte von anderen Websites (z.B. Videos)
         </Heading>
         <Text>
-          Beiträge auf dieser Website können eingebettete Inhalte beinhalten
-          (z.B. Videos, Bilder, Beiträge etc.). Eingebettete Inhalte von anderen
-          Websites verhalten sich exakt so, als ob Du als Besucher die andere
-          Website besucht hättest.
-        </Text>
-        <Text>
-          Diese Websites (z.B. srf.ch) können Daten über Dich sammeln, Cookies
-          benutzen, zusätzliche Tracking-Dienste von Dritten einbetten und Deine
-          Interaktion mit diesem eingebetteten Inhalt aufzeichnen, inklusive
-          Deiner Interaktionen mit den eingebetteten Inhalten, falls Duauf
-          dieser anderen Website angemeldet bist.
+          Lerninhalte auf dieser Website können eingebettete Inhalte beinhalten
+          (z.B. Videos). Diese eingebetteten Inhalte von anderen Websites
+          verhalten sich exakt so, als ob Du als Besucher die andere Website
+          besuchen würdest. Und so können diese Websites auch Nutzungsdaten
+          aufzeichnen, Cookies speichern oder zusätzliche Tracking-Dienste von
+          Dritten einbetten.
         </Text>
         <Heading as="h2" id="analytics">
           Analytics
@@ -97,10 +100,10 @@ export default function Datenschutz(): ReactElement {
         <Text>
           Für die Analyse und Verbesserung von voty.ch werden Web-Analytics
           aufgezeichnet. Diese Analyse-Daten werden jedoch nur auf unseren
-          Server gespeichert und nicht an Cloud-Provider wie Google o.ä.
+          eigenen Server gespeichert und nicht an Cloud-Provider wie Google o.ä.
           geschickt.
         </Text>
-        <Heading as="h2">Wie lange wir Deine Daten speichern</Heading>
+        <Heading as="h2">Wie lange werden Deine Daten gespeichert</Heading>
         <Text>
           Für Benutzer, die sich auf voty.ch registrieren, speichern wir
           zusätzlich die persönlichen Informationen, die sie in ihren
