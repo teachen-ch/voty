@@ -152,3 +152,17 @@ select + svg {
 .screenshot:hover {
   transform: scale(1.05) translateY(-10px);
 }
+
+.burgerIcon {
+  width: "1.2em";
+  verticalalign: "sub";
+  marginright: "17px";
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.white {
+  color: #ffffff !important;
+}
