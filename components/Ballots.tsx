@@ -21,6 +21,7 @@ import { formatFromTo, formatDate } from "../util/date";
 import { useRouter } from "next/router";
 import { find } from "lodash";
 import Link from "next/link";
+import Image from "next/image";
 import IconResults from "../public/images/icon_results.svg";
 import IconCheckOn from "../public/images/icon_check_on.svg";
 import IconCheckOff from "../public/images/icon_check_off.svg";
@@ -254,8 +255,8 @@ export const Ballot: React.FC<{
         </A>
         <Text mt={3}>{ballot.description}</Text>
         <Text fontSize={2} my={4}>
-          <IconCal alt="Deadline" width="20px" height="20px" /> &nbsp; Zeit:{" "}
-          {formatFromTo(ballot.start, ballot.end)}
+          <Image src={IconCal} alt="Deadline" width="20px" height="20px" />{" "}
+          &nbsp; Zeit: {formatFromTo(ballot.start, ballot.end)}
         </Text>
         {children}
         {buttonText && (
@@ -388,35 +389,40 @@ export const SelectBallots: React.FC<{ team: TeamTeacherFieldsFragment }> = ({
                   sx={{ display: ["none", "none", "inline"] }}
                   color="white"
                 >
-                  <IconDeadline
-                    height="20px"
-                    alt="Deadline"
-                    style={{ marginRight: 8 }}
-                  />
+                  <Image src={IconDeadline} height="20px" alt="Deadline" />
                   &nbsp;
                   {formatDate(ballot.end)}
                 </Box>
               </td>
               <td>
                 <Box variant="centered">
-                  <IconResults alt="Resultate" width="20px" height="20px" />
+                  <Image
+                    src={IconResults}
+                    alt="Resultate"
+                    width="20px"
+                    height="20px"
+                  />
                 </Box>
               </td>
               <td onClick={(evt) => toggleBallot(ballot.id, team.id, evt)}>
                 <Box variant="centered">
                   {find(ballotRuns, { ballot: { id: ballot.id } }) ? (
-                    <IconCheckOn
+                    <Image
+                      src={IconCheckOn}
                       alt="ausgewählt"
                       data-cy="on"
                       width="20px"
                       height="20px"
+                      className="pointer"
                     />
                   ) : (
-                    <IconCheckOff
+                    <Image
+                      src={IconCheckOff}
                       alt="abgewählt"
                       data-cy="off"
                       width="20px"
                       height="20px"
+                      className="pointer"
                     />
                   )}
                 </Box>

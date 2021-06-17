@@ -1,5 +1,6 @@
 import { AppPage } from "components/Page";
-import { Heading, Text, Box, Flex, Link, Image, Card } from "rebass";
+import { Heading, Text, Box, Flex, Link, Image as RImage, Card } from "rebass";
+import Image from "next/image";
 import { Grid } from "theme-ui";
 import { ReactElement } from "react";
 import { ReadMore } from "components/ReadMore";
@@ -30,7 +31,7 @@ export default function Abstimmung(): ReactElement {
       >
         <Flex my={2} color="white">
           <TDIcon mt={3} mr={3}>
-            <IconCheckWhite height="25px" />
+            <Image src={IconCheckWhite} height="25px" />
           </TDIcon>
           <Text maxWidth="700px">
             Ja, ich unterrichte politische Bildung in meiner Klasse und nehme
@@ -39,7 +40,7 @@ export default function Abstimmung(): ReactElement {
         </Flex>
         <Flex my={2}>
           <TDIcon mt={3} mr={3}>
-            <IconCheckWhite height="25px" />
+            <Image src={IconCheckWhite} height="25px" />
           </TDIcon>
           <Text maxWidth="700px">
             Ich nehme mir Zeit, um die Vorlagen mit den Schüler*innen zu
@@ -56,7 +57,7 @@ export default function Abstimmung(): ReactElement {
         </Flex>
         <Flex my={2}>
           <TDIcon mt={3} mr={3}>
-            <IconCheckWhite height="25px" />
+            <Image src={IconCheckWhite} height="25px" />
           </TDIcon>
           <Text maxWidth="700px">
             Ich führe die Abstimmung mit meiner Klasse online durch und
@@ -74,15 +75,15 @@ export default function Abstimmung(): ReactElement {
       <Explainer title="Anleitung Klassenabstimmung">
         <Step n={1}>
           Erstelle ein Konto auf voty.ch und eröffne eine Klasse:
-          <Image src="/screens/screen_t1.png" mt={2} />
+          <RImage src="/screens/screen_t1.png" mt={2} />
         </Step>
         <Step n={2}>
           Wähle die Abstimmungen für Deine Klasse aus:
-          <Image src="/screens/screen_t2.png" mt={2} />
+          <RImage src="/screens/screen_t2.png" mt={2} />
         </Step>
         <Step n={3}>
           Lade Schüler*innen per Email oder mit Einladungslink ein:
-          <Image src="/screens/screen_t3.png" mt={2} />
+          <RImage src="/screens/screen_t3.png" mt={2} />
         </Step>
       </Explainer>
 
@@ -90,19 +91,19 @@ export default function Abstimmung(): ReactElement {
       <Explainer title="Anleitung Schüler*innen">
         <Step n="1">
           SuS erhält Einladungs-Email. Ein Klick auf den Link eröffnet Konto:
-          <Image src="/screens/screen_s1.png" mt={2} />
+          <RImage src="/screens/screen_s1.png" mt={2} />
         </Step>
         <Step n="2">
           Auswahl der Abstimmungen:
-          <Image src="/screens/screen_s2.png" mt={2} />
+          <RImage src="/screens/screen_s2.png" mt={2} />
         </Step>
         <Step n="3">
           SuS Informieren sich auf voty.ch mit Materialien von easyvote:
-          <Image src="/screens/screen_s3.png" mt={2} />
+          <RImage src="/screens/screen_s3.png" mt={2} />
         </Step>
         <Step n="4">
           Anonyme Abstimmung wird durchgeführt:
-          <Image src="/screens/screen_s4.jpg" mt={2} />
+          <RImage src="/screens/screen_s4.jpg" mt={2} />
         </Step>
       </Explainer>
       <Box mt={3} />
