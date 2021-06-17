@@ -4,7 +4,7 @@ import { useUser } from "state/user";
 import { LoginForm } from "pages/user/login";
 import React, { ReactNode } from "react";
 import CheckLogin from "./CheckLogin";
-import { FlexProps, Image } from "rebass";
+import { FlexProps, Image as RImage } from "rebass";
 import { Role } from "graphql/types";
 import { Footer } from "components/Footer";
 import { TopBar } from "./TopBar";
@@ -12,6 +12,7 @@ import IconClose from "../public/images/icon_close.svg";
 import { Spinner } from "theme-ui";
 import { Info } from "./Info";
 import { tr } from "util/translate";
+import Image from "next/image";
 
 export const Page: React.FC<{
   children?: React.ReactNode;
@@ -54,7 +55,7 @@ export const AppPage: React.FC<{
           maxWidth="800px"
           minHeight="450px"
         >
-          {props.image && <Image src={props.image} width="100%" mt={-150} />}
+          {props.image && <RImage src={props.image} width="100%" mt={-150} />}
           {props.heading && (
             <H1
               mt={0}
@@ -82,7 +83,12 @@ export const AppPage: React.FC<{
                         ":hover": { opacity: 1.0, transform: "rotate(-90deg)" },
                       }}
                     >
-                      <IconClose alt="schliessen" width="40px" height="40px" />
+                      <Image
+                        src={IconClose}
+                        alt="schliessen"
+                        width="40px"
+                        height="40px"
+                      />
                     </Box>
                   </A>
                 )}

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Box, Flex, Text } from "rebass";
 import { SessionUser } from "state/user";
 import { A } from "./Breadcrumb";
+import Image from "next/image";
 import IconLogout from "../public/images/icon_logout.svg";
 import IconHome from "../public/images/icon_home.svg";
 import IconImpressum from "../public/images/icon_impressum.svg";
@@ -22,16 +23,11 @@ export const NavMobile: React.FC<{ user: SessionUser; color: string }> = ({
   color,
 }) => {
   const [open, setOpen] = useState(false);
-  const burgerIcon = {
-    width: "1.2em",
-    verticalAlign: "sub",
-    marginRight: "17px",
-  };
   const isTeacher = user?.role === Role.Teacher;
   return (
     <Flex color="#fff" pt={1}>
       <A onClick={() => setOpen(!open)} color={color} variant="link">
-        <IconBurger alt="Menu" width="33" height="27" />
+        <Image src={IconBurger} alt="Menu" width="33" height="27" />
       </A>
       {open && (
         <>
@@ -58,25 +54,25 @@ export const NavMobile: React.FC<{ user: SessionUser; color: string }> = ({
             <Text textAlign="right">
               <A onClick={() => setOpen(false)} variant="link">
                 <Box width="30" height="30" pt="18px" pr="18px">
-                  <IconCross alt="schliessen" />
+                  <Image src={IconCross} alt="schliessen" />
                 </Box>
               </A>
             </Text>
             <Text pl={4} lineHeight="55px" fontWeight="semi">
               <A href="/" variant="link">
-                <IconHome style={burgerIcon} />
+                <Image src={IconHome} className="burgerIcon" />
                 Startseite
               </A>
               <hr />
               {!user ? (
                 <nav>
                   <A href="/user/signup" variant="link">
-                    <IconRegister style={burgerIcon} />
+                    <Image src={IconRegister} className="burgerIcon" />
                     Klasse anmelden
                   </A>
                   <br />
                   <A href="/user/login" variant="link">
-                    <IconLogin style={burgerIcon} />
+                    <Image src={IconLogin} className="burgerIcon" />
                     Login
                   </A>
                   <br />
@@ -84,17 +80,17 @@ export const NavMobile: React.FC<{ user: SessionUser; color: string }> = ({
               ) : (
                 <nav>
                   <A href="/user/login" variant="link">
-                    <IconClasses style={burgerIcon} />
+                    <Image src={IconClasses} className="burgerIcon" />
                     {isTeacher ? "Meine Klassen" : "Meine Klasse"}
                   </A>
                   <br />
                   <A href="/user/profile" variant="link">
-                    <IconAccount style={burgerIcon} />
+                    <Image src={IconAccount} className="burgerIcon" />
                     Mein Profil
                   </A>
                   <br />
                   <A href="/user/logout" variant="link">
-                    <IconLogout style={burgerIcon} />
+                    <Image src={IconLogout} className="burgerIcon" />
                     Abmelden
                   </A>
                   <br />
@@ -102,22 +98,22 @@ export const NavMobile: React.FC<{ user: SessionUser; color: string }> = ({
               )}
               <hr />
               <A href="/faq" variant="link">
-                <IconFaq style={burgerIcon} />
+                <Image src={IconFaq} className="burgerIcon" />
                 Häufige Fragen
               </A>
               <br />
               <A href="/team-voty" variant="link">
-                <IconTeam style={burgerIcon} />
+                <Image src={IconTeam} className="burgerIcon" />
                 Team
               </A>
               <hr />
               <A href="/newsletter" variant="link">
-                <IconNewsletter style={burgerIcon} />
+                <Image src={IconNewsletter} className="burgerIcon" />
                 Newsletter
               </A>
               <br />
               <A href="/impressum" variant="link">
-                <IconImpressum style={burgerIcon} />
+                <Image src={IconImpressum} className="burgerIcon" />
                 Impressum
               </A>
             </Text>

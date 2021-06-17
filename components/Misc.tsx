@@ -1,7 +1,7 @@
-import { Text, Flex, BoxProps } from "rebass";
+import { Text, Flex, BoxProps, Box, TextProps } from "rebass";
 import React from "react";
-import { TextProps } from "theme-ui";
 import { isFunction } from "lodash";
+import Image from "next/image";
 import IconX from "../public/images/icon_x.svg";
 
 export const CircleBullet: React.FC<
@@ -61,7 +61,9 @@ export const Pill: React.FC<
   >
     <Text>{children}</Text>
     {deleteLink && isFunction(deleteLink) && (
-      <IconX onClick={deleteLink} style={{ marginLeft: 4 }} />
+      <Box display="inline-block" ml={2} mb={-2} color="#fff">
+        <Image src={IconX} onClick={deleteLink} className="pointer white" />
+      </Box>
     )}
   </Flex>
 );

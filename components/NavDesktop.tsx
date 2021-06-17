@@ -1,5 +1,6 @@
 import { Flex, Text, Box } from "rebass";
 import { A } from "components/Breadcrumb";
+import Image from "next/image";
 import IconRegister from "../public/images/icon_register.svg";
 import IconLogin from "../public/images/icon_login.svg";
 import IconAccount from "../public/images/icon_account.svg";
@@ -22,7 +23,7 @@ const RegisterLogin: React.FC = () => {
     <Flex alignItems="center">
       <A href="/user/signup">
         <Flex alignItems="center">
-          <IconRegister />
+          <Image src={IconRegister} />
           <Text ml={3} mr={4}>
             Klasse anmelden
           </Text>
@@ -30,7 +31,7 @@ const RegisterLogin: React.FC = () => {
       </A>
       <A href="/user/login">
         <Flex alignItems="center">
-          <IconLogin />
+          <Image src={IconLogin} />
           <Text ml={3}>Login</Text>
         </Flex>
       </A>
@@ -48,7 +49,9 @@ const Account: React.FC<{ user: SessionUser }> = ({ user }) => {
     <Flex>
       <A href={homeLink} variant="link">
         <Flex alignItems="center" flexDirection="row" justifyContent="flex-end">
-          <IconClasses style={{ marginRight: 8 }} />
+          <Box display="inline-block" mr={2}>
+            <Image src={IconClasses} />
+          </Box>
           {homeText}
         </Flex>
       </A>
@@ -60,12 +63,12 @@ const Account: React.FC<{ user: SessionUser }> = ({ user }) => {
             justifyContent="flex-end"
             mr={0}
           >
-            <IconAccount />
+            <Image src={IconAccount} />
             <Text mx={2}>Mein Konto</Text>
             {open ? (
-              <IconUp src="/images/icon_up.svg" alt="Schliessen" />
+              <Image src={IconUp} alt="Schliessen" />
             ) : (
-              <IconDown alt="Öffnen" />
+              <Image src={IconDown} alt="Öffnen" />
             )}
           </Flex>
         </A>
