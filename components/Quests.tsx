@@ -6,6 +6,7 @@ import {
   Textarea,
   TextareaProps,
 } from "@rebass/forms";
+import Image from "next/image";
 import { useContext, useEffect, useMemo, useState } from "react";
 import { BoxProps, Button, Text, Flex, Box } from "rebass";
 import { useTeam, useUser } from "state/user";
@@ -326,12 +327,12 @@ class OrderItem extends React.Component<OrderItemProps> {
       >
         {!(readOnly || correct) && (
           <TDIcon {...dragHandleProps} sx={{ cursor: "grab" }}>
-            <IconMove />
+            <Image src={IconMove} />
           </TDIcon>
         )}
         {correct && (
           <TDIcon>
-            <IconCheck />
+            <Image src={IconCheck} />
           </TDIcon>
         )}
         <TD flexy>{item.text}</TD>

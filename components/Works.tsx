@@ -18,6 +18,7 @@ import { useTeam, useUser } from "state/user";
 import { ChangeEvent, useContext, useEffect, useRef, useState } from "react";
 import { Err, Loading } from "./Page";
 import { find, omit, remove, truncate } from "lodash";
+import Image from "next/image";
 import IconPlus from "../public/images/icon_plus.svg";
 import IconMinus from "../public/images/icon_minus.svg";
 import IconTrash from "../public/images/icon_trash.svg";
@@ -163,9 +164,13 @@ export const Works: React.FC<
               onClick={() => setActive(active === work.id ? "" : work.id)}
             >
               {active === work.id ? (
-                <IconMinus style={{ marginRight: "10px" }} alt="Schliessen" />
+                <Box display="inline" mr={2} mt={2}>
+                  <Image src={IconMinus} alt="Schliessen" />
+                </Box>
               ) : (
-                <IconPlus style={{ marginRight: "10px" }} alt="Öffnen" />
+                <Box display="inline" mr={2} mt={2}>
+                  <Image src={IconPlus} alt="Öffnen" />
+                </Box>
               )}
               <Text sx={{ cursor: "pointer" }} fontSize={[1, 1, 2]} flex={1}>
                 <b>{work.users?.map((u) => u.shortname).join(", ")}:</b> «
@@ -175,12 +180,13 @@ export const Works: React.FC<
                 </Text>
               </Text>
               {canDelete && (
-                <IconTrash
-                  onClick={(e: MouseEvent) => {
-                    e.stopPropagation();
+                <Image
+                  src={IconTrash}
+                  onClick={({ stopPropagation }) => {
+                    stopPropagation();
                     void doDelete(work.id);
                   }}
-                  style={{ cursor: "pointer" }}
+                  className="pointer"
                 />
               )}
             </Flex>

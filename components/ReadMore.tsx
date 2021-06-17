@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { Box, Text, Flex, Button } from "rebass";
 
-import Plus from "../public/images/icon_plus.svg";
-import Minus from "../public/images/icon_minus.svg";
+import Image from "next/image";
+import IconPlus from "../public/images/icon_plus.svg";
+import IconMinus from "../public/images/icon_minus.svg";
 
 export const ReadMore: React.FC<{
   title: string;
@@ -29,9 +30,9 @@ export const ReadMore: React.FC<{
         >
           {!hidePlus &&
             (open ? (
-              <Minus alt="Schliessen" style={{ flexShrink: 0 }} />
+              <Image src={IconMinus} alt="Schliessen" />
             ) : (
-              <Plus alt="Öffnen" style={{ flexShrink: 0 }} />
+              <Image src={IconPlus} alt="Öffnen" />
             ))}
           <Text
             textAlign="left"

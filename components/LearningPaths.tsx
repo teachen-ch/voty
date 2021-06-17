@@ -6,6 +6,7 @@ import { Err } from "./Page";
 import { Table, TD, TDIcon, TDImage, TR } from "./Table";
 import { useState } from "react";
 import { A } from "./Breadcrumb";
+import Image from "next/image";
 import IconWatch from "../public/images/icon_watch.svg";
 import { upperFirst } from "lodash";
 
@@ -63,7 +64,7 @@ export const LearningPath: React.FC<{ path: string; anon?: boolean }> = ({
                 )}
               </TD>
               <TDIcon mr={0}>
-                <IconWatch />
+                <Image src={IconWatch} />
               </TDIcon>
               <TD width="130px" fixed smHide>
                 {card?.duration}
