@@ -1,3 +1,19 @@
+# [1.54.0](https://github.com/teachen-ch/voty/compare/v1.53.1...v1.54.0) (2021-06-18)
+
+
+### Bug Fixes
+
+* final fixes ([96f002e](https://github.com/teachen-ch/voty/commit/96f002e4d8eaf566f1b99a2f7fcab74b9e305145))
+* further image fixes after Next migration ([2b6de02](https://github.com/teachen-ch/voty/commit/2b6de0221c6da74f96160646bda77f14ab5830f6))
+* misc updates to fix icon issues ([c18ec29](https://github.com/teachen-ch/voty/commit/c18ec2962a287319d6c3824698ff2cf4eb92e2e6))
+
+
+### Features
+
+* initial package updates ([9b3fd2d](https://github.com/teachen-ch/voty/commit/9b3fd2dbfd01eb35ace8e52d11b34d1182d60250))
+* some global style helpers (eek) ([03f5c9f](https://github.com/teachen-ch/voty/commit/03f5c9ffde92da35ee43884339d8dd71aa6198d1))
+* updated a few icons ([6037637](https://github.com/teachen-ch/voty/commit/603763791a70f440133a91a815c3c084951c30a4))
+
 ## [1.53.1](https://github.com/teachen-ch/voty/compare/v1.53.0...v1.53.1) (2021-06-15)
 
 
