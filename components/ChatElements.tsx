@@ -2,7 +2,8 @@ import { Box, Flex, Text } from "rebass";
 import { Markdown } from "util/markdown";
 import { GlossaryReplace } from "./Glossary";
 import React from "react";
-import IconBack from "../public/images/icon_back.svg";
+import Image from "next/image";
+import IconBack from "../public/images/icon_back_white.svg";
 
 export enum Direction {
   "Incoming",
@@ -56,10 +57,9 @@ export const ChatHeader: React.FC<{ title?: string; onClick: () => void }> = ({
     height="70px"
   >
     {onClick && (
-      <IconBack
-        onClick={onClick}
-        style={{ cursor: "pointer", flexGrow: 0, marginRight: "8px" }}
-      />
+      <Box display="inline-block" mr={2}>
+        <Image src={IconBack} onClick={onClick} className="pointer" />
+      </Box>
     )}
     <Text fontWeight="bold" textAlign="left" sx={{ flexGrow: 1 }}>
       {title}

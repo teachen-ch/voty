@@ -5,7 +5,7 @@ import {
   useCardsQuery,
   useSetCardsMutation,
 } from "graphql/types";
-import { Flex, Box, Image, Text, Heading, Button } from "rebass";
+import { Flex, Box, Image as RImage, Text, Heading, Button } from "rebass";
 import { Loading } from "components/Page";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
@@ -13,6 +13,7 @@ import { truncate, without } from "lodash";
 import DraggableList from "react-draggable-list";
 import { OneRowTable, Table, TD, TDIcon, TDImage, TR } from "./Table";
 import { A } from "./Breadcrumb";
+import Image from "next/image";
 import IconTrash from "../public/images/icon_trash.svg";
 import IconWatch from "../public/images/icon_watch.svg";
 import IconMove from "../public/images/icon_move.svg";
@@ -158,18 +159,17 @@ export const CardItem: React.FC<{
             <strong>Dauer:</strong> {card.duration}
           </Text>
           {teamId ? (
-            <Box textAlign="right" sx={{ flexShrink: 0 }}>
-              <Image
+            <Box textAlign="right" sx={{ flexShrink: 0, cursor: "pointer" }}>
+              <RImage
                 src="/images/icon_preview.svg"
                 onClick={() => router.push(link)}
-                sx={{ cursor: "pointer" }}
                 mb={2}
                 display="block"
               />
               {selected ? (
-                <IconCheck style={{ cursor: "pointer" }} onClick={doSelect} />
+                <Image src={IconCheck} onClick={doSelect} />
               ) : (
-                <IconAdd style={{ cursor: "pointer" }} onClick={doSelect} />
+                <Image src={IconAdd} onClick={doSelect} />
               )}
             </Box>
           ) : null}
@@ -235,7 +235,7 @@ export const TeacherCardList: React.FC<{
           <TR key={id} href={`/team/${teamId}/cards/${id}`}>
             <TD flexy>{card?.title}</TD>
             <TDIcon mr={0}>
-              <IconWatch />
+              <Image src={IconWatch} />
             </TDIcon>
             <TD width="180px" smHide>
               {card?.duration}
@@ -336,7 +336,7 @@ class CardAdminItem extends React.Component<CardAdminProps> {
         onMouseOut={() => this.setState({ over: false })}
       >
         <TDIcon {...dragHandleProps} sx={{ cursor: "grab" }}>
-          <IconMove />
+          <Image src={IconMove} />
         </TDIcon>
         <TD flexy>
           <A
@@ -347,14 +347,17 @@ class CardAdminItem extends React.Component<CardAdminProps> {
           </A>
         </TD>
         <TDIcon smHide mr={0}>
-          <IconWatch />
+          <Image src={IconWatch} />
         </TDIcon>
 
         <TD width="180px" smHide>
           {item?.duration}
         </TD>
         <TDIcon>
-          <IconTrash onClick={() => this.props.commonProps.doDelete(item.id)} />
+          <Image
+            src={IconTrash}
+            onClick={() => this.props.commonProps.doDelete(item.id)}
+          />
         </TDIcon>
       </TR>
     );

@@ -12,6 +12,7 @@ import { Err, H3, Loading } from "./Page";
 import { Table, TD, TR } from "./Table";
 import { Flex, Box } from "rebass";
 import { Pill } from "./Misc";
+import Image from "next/image";
 import IconReload from "../public/images/icon_reload.svg";
 
 export const PROGRESS = gql`
@@ -207,7 +208,9 @@ const Reload: React.FC<{ query: QueryResult }> = ({ query }) => {
       color={reloading ? "gray" : ""}
     >
       Aktualisieren
-      <IconReload />
+      <Box display="inline-block" ml={2}>
+        <Image src={IconReload} />
+      </Box>
     </A>
   );
 };
