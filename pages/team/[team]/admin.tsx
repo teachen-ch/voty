@@ -8,6 +8,7 @@ import { useRouter } from "next/router";
 import { uniq } from "lodash";
 import { SelectBallots } from "components/Ballots";
 import { gql } from "@apollo/client";
+import Image from "next/image";
 import IconHint from "../../../public/images/icon_hint.svg";
 import IconProgress from "../../../public/images/icon_progress.svg";
 import { DeleteTeamLink, fragments } from "components/Teams";
@@ -27,7 +28,7 @@ import { Spinner } from "theme-ui";
 import PanelPage from "./panel";
 import { TeacherCardList } from "components/Cards";
 import { Activities } from "components/Activities";
-import IconQR from "../../../public/images/icon_qr.svg";
+import IconQR from "../../../public/images/icon_qr_white.svg";
 // import { usePolling } from "util/hooks";
 
 export const INVITE_STUDENTS = gql`
@@ -146,7 +147,9 @@ export default function TeacherTeamPage(): React.ReactElement {
           <>
             <Box sx={{ position: "absolute" }}>
               <A href={`/team/${team.id}/progress`} fontSize={1}>
-                <IconProgress style={{ marginRight: 8 }} />
+                <Box display="inline-block" mr={2}>
+                  <Image src={IconProgress} />
+                </Box>
                 Fortschritt der Klasse
               </A>
             </Box>
@@ -239,15 +242,9 @@ export default function TeacherTeamPage(): React.ReactElement {
             )}
           </Button>
           <Text fontSize={[1, 1, 2]} sx={{ gridColumn: [0, 0, 2] }} mt={4}>
-            <IconHint
-              alt="Hinweis"
-              height="24px"
-              style={{
-                float: "left",
-                marginRight: 8,
-                verticalAlign: "center",
-              }}
-            />
+            <Box display="inline-block" mr={2}>
+              <Image src={IconHint} alt="Hinweis" height="24px" />
+            </Box>
             Alternativ kannst Du auch mit einem{" "}
             <A
               onClick={() => setShowInviteLink(!showInviteLink)}
@@ -306,7 +303,9 @@ const InviteLink: React.FC<{ team: TeamTeacherFieldsFragment }> = ({
       <Input ref={inviteRef} readOnly fontSize={1} value={url} />
       <Button fontSize={1} onClick={() => qrCode(url)}>
         <Box variant="centered">
-          <IconQR height="25px" width="25px" style={{ marginRight: "8px" }} />
+          <Box display="inline-block" mr={2}>
+            <Image src={IconQR} height="25px" width="25px" />
+          </Box>
           QR-Code
         </Box>
       </Button>

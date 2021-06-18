@@ -13,6 +13,7 @@ import { Label, Input as RebassInput, Select } from "@rebass/forms";
 import { SessionUser, useSetUser } from "state/user";
 import { yup, ErrorBox } from "./Form";
 import CheckLogin from "./CheckLogin";
+import Image from "next/image";
 import IconOK from "../public/images/icon_user_ok.svg";
 import IconNOK from "../public/images/icon_user_nok.svg";
 import { Formik, Form, Field, ErrorMessage, useField } from "formik";
@@ -108,9 +109,10 @@ export function Users({
               <td>
                 <Box variant="centered">
                   {user.emailVerified ? (
-                    <IconOK src="" alt="Bestätigt" />
+                    <Image src={IconOK} alt="Bestätigt" />
                   ) : (
-                    <IconNOK
+                    <Image
+                      src={IconNOK}
                       alt="Nicht bestätigt"
                       onClick={() => doDeleteUser(user.id)}
                     />

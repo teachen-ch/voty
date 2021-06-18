@@ -13,6 +13,7 @@ import {
 } from "graphql/types";
 import { Loading } from "./Page";
 import { useRouter } from "next/router";
+import Image from "next/image";
 
 const TeamAnonFields = gql`
   fragment TeamAnonFields on Team {
@@ -171,7 +172,7 @@ export const Teams: React.FC<TeamsProps> = ({ where, teamClick }) => {
                 <td width="40px">
                   <A onClick={() => teamClick(team)}>
                     <Box variant="centered">
-                      <IconSuS height="24px" alt="SuS" />
+                      <Image src={IconSuS} height="24px" alt="SuS" />
                     </Box>
                   </A>
                 </td>

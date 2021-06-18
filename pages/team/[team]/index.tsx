@@ -3,6 +3,7 @@ import { Box, Flex, Text } from "rebass";
 import { Breadcrumb, Here } from "components/Breadcrumb";
 import { StudentCardList } from "components/Cards";
 import { StudentListBallots } from "components/Ballots";
+import Image from "next/image";
 import IconWelcome from "../../../public/images/students_welcome.svg";
 import { useTeamAnon, useUser } from "state/user";
 import { Role } from "graphql/types";
@@ -32,7 +33,7 @@ export default function TeamHome(): React.ReactElement {
       </Breadcrumb>
 
       <Flex justifyContent="center" mt={-20} mb={0} maxWidth="80%">
-        <IconWelcome width="350px" height="259px" />
+        <Image src={IconWelcome} width="350px" height="259px" />
       </Flex>
 
       <H2 mt={0}>Lerninhalte Klasse {team.name}</H2>
