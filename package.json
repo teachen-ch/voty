@@ -57,7 +57,7 @@
     "nexus-plugin-prisma": "0.26.0-next.1",
     "nexus-plugin-shield": "^0.2.0",
     "nodemailer": "6.6.0",
-    "prismjs": "^1.23.0",
+    "prismjs": "^1.24.0",
     "qrcode.react": "^1.0.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
