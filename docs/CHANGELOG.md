@@ -1,3 +1,16 @@
+# [1.55.0](https://github.com/teachen-ch/voty/compare/v1.54.0...v1.55.0) (2021-07-01)
+
+
+### Bug Fixes
+
+* typos and minor edits ([85bac81](https://github.com/teachen-ch/voty/commit/85bac814ea34f95d3b030dddbc0a309024757b86))
+
+
+### Features
+
+* chaty editor changes ([2f1aab8](https://github.com/teachen-ch/voty/commit/2f1aab8aee3a5b358492d0e78c5e24477ba99c02))
+* draft of «Demokratie international» ([270ea50](https://github.com/teachen-ch/voty/commit/270ea50f386dc581985b8765fd63fb1fc6642ffa))
+
 # [1.54.0](https://github.com/teachen-ch/voty/compare/v1.53.1...v1.54.0) (2021-06-18)
 
 
