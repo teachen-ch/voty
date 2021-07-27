@@ -1,3 +1,10 @@
+# [1.56.0](https://github.com/teachen-ch/voty/compare/v1.55.0...v1.56.0) (2021-07-27)
+
+
+### Features
+
+* signup page for anstoss Demokratie ([d9c11c8](https://github.com/teachen-ch/voty/commit/d9c11c8c9305d16826628424e883504204844eec))
+
 # [1.55.0](https://github.com/teachen-ch/voty/compare/v1.54.0...v1.55.0) (2021-07-01)
 
 
