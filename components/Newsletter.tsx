@@ -3,7 +3,10 @@ import { Label, Input, Select } from "@rebass/forms";
 import { Grid } from "theme-ui";
 import { ReactElement } from "react";
 
-export const Newsletter: React.FC = () => (
+export const Newsletter: React.FC<{ campaign?: string; submit?: string }> = ({
+  campaign,
+  submit,
+}) => (
   <form action="https://newsletter.teachen.ch/subscribe" method="POST">
     <Grid gap={2} py={4} columns={[0, 0, "1fr 3fr"]}>
       <Field id="Vorname" label="Vorname" />
@@ -19,8 +22,9 @@ export const Newsletter: React.FC = () => (
       </SelectField>
 
       <input type="hidden" name="list" value="tpTmOmECEZr7Zjk76307UvTA" />
+      <input type="hidden" name="Kampagne" value={campaign || "Newsletter"} />
       <input type="hidden" name="subform" value="yes" />
-      <Submit name="submit" value="Newsletter anmelden" />
+      <Submit name="submit" value={submit || "Newsletter anmelden"} />
     </Grid>
   </form>
 );

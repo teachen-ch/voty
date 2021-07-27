@@ -3,6 +3,7 @@ import { useContext, useState } from "react";
 import { Box, Button, Text, Card, Flex, BoxProps } from "rebass";
 import { authHeaders } from "util/apollo";
 import { A } from "./Breadcrumb";
+import { Grid } from "theme-ui";
 import { CardContext, getCardTitle } from "./Cards";
 import { Info } from "./Info";
 import { Center } from "./Learning";
@@ -139,5 +140,49 @@ export const FeedbackForm: React.FC<{
         </Text>
       </Card>
     </NewWindow>
+  );
+};
+
+export const FeedbackPlain: React.FC<{ title?: string }> = ({ title }) => {
+  const [success, setSuccess] = useState(false);
+  const [error, setError] = useState("");
+  const user = useUser();
+  const [email, setEmail] = useState<string | undefined>();
+
+  async function doSend() {
+    const res = await fetch("/api/feedback", {
+      method: "POST",
+      body: JSON.stringify({ title, email }),
+      headers: authHeaders(),
+    });
+    const result = (await res.json()) as Record<string, any>;
+    if (result.success) {
+      setSuccess(true);
+    }
+    if (result.error) {
+      setError(result.error);
+    }
+  }
+  if (success)
+    return <Info type="info">Erfolgreich abgeschickt. Herzlichen Dank!</Info>;
+  return (
+    <>
+      <Text fontWeight="semi">{title} &nbsp;</Text>
+      <Text color="gray" fontSize={1}>
+        {user && `Angemeldet als: ${user.email}`}
+      </Text>
+      <Grid columns={[0, 0, "1fr 1fr"]}>
+        {!user && (
+          <Input
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="Deine Email"
+          />
+        )}
+        <Button width="calc(50%)" onClick={doSend}>
+          Anmelden
+        </Button>
+      </Grid>
+      <Err msg={error} />
+    </>
   );
 };
