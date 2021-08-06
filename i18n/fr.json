@@ -1,0 +1,19 @@
+{
+  "ZDA": {
+    "Header": "Ecoles à Berne – votation populaire!",
+    "CreateButton": "verifiez email"
+  },
+  "Signup": {
+    "labelRole": "Je suis",
+    "labelEmail": "Email",
+    "placeholderEmail": "nom@monecole.ch",
+    "CreateButton": "Create Account"
+  },
+  "Roles": {
+    "Choose": "Choissisez",
+    "Teacher": "Professeur",
+    "Student": "Élève",
+    "User": "Citoyen du monde",
+    "Principal": "Directeur"
+  }
+}
