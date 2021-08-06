@@ -1,5 +1,3 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
-
 # dependencies
 /node_modules
 /.pnp
@@ -44,6 +42,9 @@ coverage
 
 # nyc test coverage
 .nyc_output
+
+# incremental typescript
+tsconfig.tsbuildinfo
 
 # voty
 /logs/

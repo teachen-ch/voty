@@ -169,13 +169,9 @@ export const QForm: React.FC<QFormProps> = ({ fields, mutation, ...props }) => {
       const opts = field.options;
       return (
         <Select label={field.label || ""} name={field.name} key={field.name}>
-          {Object.keys(opts).map((label) => (
-            <option
-              key={label}
-              value={String(opts[label])}
-              selected={opts[label] === field.init}
-            >
-              {label}
+          {Object.keys(opts).map((val) => (
+            <option key={val} value={val} selected={val === field.init}>
+              {String(opts[val])}
             </option>
           ))}
         </Select>
@@ -246,8 +242,8 @@ export const RadioGroup: React.FC<RadioGroupProps> = ({
       <Grid columns="1fr 1fr">
         {Object.keys(opts).map((name) => (
           <RebassLabel sx={{ alignSelf: "center" }} key={name}>
-            <Radio id={label} name={props.name} value={opts[name]} />
-            {name}
+            <Radio id={label} name={props.name} value={name} />
+            {opts[name]}
           </RebassLabel>
         ))}
       </Grid>

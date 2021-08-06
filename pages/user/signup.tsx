@@ -8,6 +8,7 @@ import { omit } from "lodash";
 import { SessionUser, useUser } from "state/user";
 import { Role, useCreateUserMutation } from "graphql/types";
 import Success from "./success";
+import { useTr } from "util/hooks";
 
 // TODO use fragment for ./successlds
 export const CREATE_USER = gql`
@@ -79,9 +80,12 @@ export const CreateUserForm: React.FC<{
   omitLastname?: boolean;
   omitFirstname?: boolean;
   omitPassword?: boolean;
+  omitLogin?: boolean;
   defaultRole?: string;
+  submitButtonLabel?: string;
 }> = (props) => {
   const existingUser = useUser();
+  const tr = useTr();
   const router = useRouter();
   const [error, setError] = useState("");
   const [showLogin, setShowLogin] = useState(false);
@@ -113,7 +117,7 @@ export const CreateUserForm: React.FC<{
       label: "Email",
       required: true,
       type: "email",
-      placeholder: "name@meineschule.ch",
+      placeholder: tr("Signup.placeholderEmail"),
     },
     password: {
       label: "Passwort",
@@ -125,17 +129,21 @@ export const CreateUserForm: React.FC<{
     //password2: yup.string().oneOf([yup.ref('password'), null], 'Passwords must match')
     role: {
       type: props.omitRole ? "hidden" : "select",
-      label: "Ich bin",
+      label: tr("Signup.labelRole"),
       init: props.defaultRole,
       required: true,
       options: {
-        "Bitte auswählen": "",
-        "Schüler*in": "Student",
-        "Lehrer*in": "Teacher",
-        "Schulleiter*in": "Principal",
+        "": tr("Roles.Choose"),
+        Student: tr("Roles.Student"),
+        Teacher: tr("Roles.Teacher"),
+        Principal: tr("Roles.Principal"),
+        User: tr("Roles.User"),
       },
     },
-    submit: { type: "submit", label: "Konto erstellen" },
+    submit: {
+      type: "submit",
+      label: props.submitButtonLabel || tr("Signup.CreateButton"),
+    },
   };
 
   if (props.omitLastname) {
@@ -164,15 +172,17 @@ export const CreateUserForm: React.FC<{
           Möchstest Du Dich anmelden?
         </Button>
       )}
-      <Button
-        onClick={() => router.push("/user/login")}
-        variant="text"
-        my={2}
-        textAlign="right"
-        sx={{ gridColumn: [0, 0, 2] }}
-      >
-        Ich habe bereits ein Konto
-      </Button>
+      {!props.omitLogin && (
+        <Button
+          onClick={() => router.push("/user/login")}
+          variant="text"
+          my={2}
+          textAlign="right"
+          sx={{ gridColumn: [0, 0, 2] }}
+        >
+          Ich habe bereits ein Konto
+        </Button>
+      )}
       {props.children}
     </QForm>
   );
