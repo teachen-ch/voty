@@ -30,6 +30,8 @@ model User {
   verified      Boolean?  @default(false)
   lastname      String?
   image         String?
+  campaign      String?
+  locale        String    @default("de")
 
   password String?
   gender   Gender?
@@ -95,7 +97,7 @@ model Team {
   activity   Activity[]
   attachment Attachment[]
   work       Work[]
-  
+
   createdAt DateTime @default(now()) @map(name: "created_at")
   updatedAt DateTime @default(now()) @map(name: "updated_at")
   @@map(name: "teams")
@@ -139,7 +141,7 @@ model Domain {
 enum BallotScope {
   Public // Open ballot
   National // Official national ballots
-  Cantonal // Official canontal ballots
+  Cantonal // Official cantonal ballots
   School // School ballots
   Team // class ballots
 }

@@ -51,7 +51,7 @@ const usersQuery = useUsersQuery({ variables: { where: { id: "…" } } });
 const users = usersQuery.data?.users;
 ```
 
-And of you go. Unless you forgot a step somewhere above. VSCode tends to need a reload quite often after generating the new types.
+And off you go. Unless you forgot a step somewhere above. VSCode tends to need a reload quite often after generating the new types.
 
 ### Permissions
 
