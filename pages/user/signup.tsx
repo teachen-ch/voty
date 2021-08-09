@@ -83,6 +83,7 @@ export const CreateUserForm: React.FC<{
   omitLogin?: boolean;
   defaultRole?: string;
   submitButtonLabel?: string;
+  campaign?: string;
 }> = (props) => {
   const existingUser = useUser();
   const tr = useTr();
@@ -139,6 +140,14 @@ export const CreateUserForm: React.FC<{
         Principal: tr("Roles.Principal"),
         User: tr("Roles.User"),
       },
+    },
+    campaign: {
+      type: "hidden",
+      init: props.campaign,
+    },
+    locale: {
+      type: "hidden",
+      init: router.locale,
     },
     submit: {
       type: "submit",

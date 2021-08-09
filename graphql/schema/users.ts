@@ -10,7 +10,7 @@ import {
 export const User = objectType({
   name: "User",
   definition(t) {
-    t.model.id();
+    t.nonNull.model.id();
     t.model.email();
     t.model.name();
     t.model.lastname();
@@ -20,7 +20,9 @@ export const User = objectType({
     t.model.emailVerified();
     t.model.createdAt();
     t.model.image();
-    t.model.role();
+    t.nonNull.model.role();
+    t.model.locale();
+    t.model.campaign();
     t.model.school();
     t.model.team();
     t.model.teaches();

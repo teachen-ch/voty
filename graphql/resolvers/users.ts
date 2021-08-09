@@ -122,7 +122,7 @@ export const createUser: FieldResolver<"Mutation", "createUser"> = async (
   ctx: Context
 ) => {
   try {
-    const { password, role } = args.data;
+    const { password, role, campaign, locale } = args.data;
     let { name, lastname } = args.data;
     const email = args.data.email?.toLowerCase();
     if (!email) throw new Error("Error.NoEmail");
@@ -141,10 +141,14 @@ export const createUser: FieldResolver<"Mutation", "createUser"> = async (
         email,
         password: hashed,
         role: role || undefined,
+        campaign: campaign || undefined,
+        locale: locale || undefined,
       },
     });
 
-    await sendVerificationEmail(email, "verification", ctx.db);
+    const purpose = campaign || "verification";
+
+    await sendVerificationEmail(email, purpose, ctx.db);
     if (role === Role.Teacher)
       logger.mail(`New user created: ${name} ${lastname} <${email}>: ${role}`);
 
@@ -345,7 +349,7 @@ export function verifyJWT(token: string): JWTSession | undefined {
   }
 }
 
-// purpose: ["verification", "reset", "login"]
+// purpose: ["verification", "reset", "login", "zda"]
 export async function sendVerificationEmail(
   email: string,
   purpose: string,
@@ -382,7 +386,14 @@ export async function sendVerificationEmail(
 
     const conf = { email: email.replace(/\./g, ".&#8203;"), url, site };
 
-    await sendMail({ from, to: email, subject, template: purpose, data: conf });
+    await sendMail({
+      from,
+      to: email,
+      subject,
+      template: purpose,
+      locale: user.locale,
+      data: conf,
+    });
     logger.info(`Sending ${purpose} email to: ${email} `);
 
     if (process.env.NODE_ENV !== "production") {
@@ -446,6 +457,7 @@ export const checkVerification: FieldResolver<
         to: email,
         subject,
         template: "welcome_teacher",
+        locale: user.locale,
       });
       logger.info(`Sending welcome email to teacher: ${email} `);
     }

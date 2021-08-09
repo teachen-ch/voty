@@ -1,0 +1,35 @@
+<mjml>
+  <mj-head>
+    <mj-font
+      name="SourceSansPro"
+      href="https://voty.ch/fonts/source-sans-pro-v14-latin-600.woff2"
+    />
+    <mj-attributes>
+      <mj-all font-family="SourceSansPro, -apple-system, system-ui, sans" />
+    </mj-attributes>
+  </mj-head>
+  <mj-body>
+    <mj-section>
+      <mj-column width="470px">
+        <mj-text align="center" font-size="27px" font-weight="bold"
+          >Confirme ton email pour voter</mj-text
+        >
+        <mj-text font-size="20px" color="#000"
+          >Um abzustimmen musst Du zuerst Deine Email-Adresse bestätigen. Klicke
+          hier auf diesen Link:</mj-text
+        >
+        <mj-button
+          href="{{&url}}"
+          background-color="#206DBB"
+          font-weight="bold"
+          font-size="20px"
+          >Jetzt bestätigen</mj-button
+        >
+        <mj-text font-size="20px">
+          Wenn Du Dich nicht abstimmen wolltest, kannst Du dieses Mail
+          löschen.</mj-text
+        >
+      </mj-column>
+    </mj-section>
+  </mj-body>
+</mjml>

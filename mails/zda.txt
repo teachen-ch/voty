@@ -1,0 +1,7 @@
+Email bestätigen für die Abstimmungen
+
+Um abzustimmen musst Du zuerst Deine Email-Adresse bestätigen. Klicke hier auf diesen Link:
+
+{{&url}}
+
+Wenn Du Dich nicht abstimmmen möchtest, kannst Du dieses Mail löschen.

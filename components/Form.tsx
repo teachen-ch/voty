@@ -141,9 +141,9 @@ export const QForm: React.FC<QFormProps> = ({ fields, mutation, ...props }) => {
   }
 
   function generateField(field: QFormField) {
-    if (field.type === "hidden") {
-      return null;
-    }
+    //if (field.type === "hidden") {
+    //  return null;
+    //}
     if (field.type === "submit") {
       return <Submit key={`${field.name}-submit`} label={field.label || ""} />;
     }
@@ -161,7 +161,12 @@ export const QForm: React.FC<QFormProps> = ({ fields, mutation, ...props }) => {
     }
     if (field.type === "hidden") {
       return (
-        <input type="hidden" name={field.name} value={String(field.init)} />
+        <input
+          key={field.name}
+          type="hidden"
+          name={field.name}
+          value={String(field.init)}
+        />
       );
     }
     if (field.type === "select") {

@@ -23,10 +23,11 @@ export async function sendMail(args: {
   to: string;
   subject: string;
   template: string;
+  locale: string;
   data?: Record<string, any>;
 }): Promise<any> {
-  const { from, to, subject, template, data = {} } = args;
-  const { html, text } = await renderTemplate(template, data);
+  const { from, to, subject, template, locale, data = {} } = args;
+  const { html, text } = await renderTemplate(template, locale, data);
 
   // No email configured
   if (!process.env.SMTP_PASSWORD || process.env.NODE_ENV === "test") {
@@ -50,19 +51,33 @@ export async function sendMail(args: {
   }
 }
 
-async function renderTemplate(template: string, data: Record<string, string>) {
+async function renderTemplate(
+  template: string,
+  locale: string,
+  data: Record<string, string>
+) {
   let mjml: string;
   let text: string;
+  const mjmlTemplateLocale = templatesDir + template + "." + locale + ".mjml";
   const mjmlTemplate = templatesDir + template + ".mjml";
+  const textTemplateLocale = templatesDir + template + "." + locale + ".txt";
   const textTemplate = templatesDir + template + ".txt";
-  try {
+
+  if (await exists(mjmlTemplateLocale)) {
+    mjml = await fs.readFile(mjmlTemplateLocale, "utf8");
+  } else if (await exists(mjmlTemplate)) {
     mjml = await fs.readFile(mjmlTemplate, "utf8");
-  } catch (err) {
-    throw new Error("Could not find template " + mjmlTemplate);
+  } else {
+    throw new Error(
+      `Cannot find mjml template ${mjmlTemplateLocale} or ${mjmlTemplate}`
+    );
   }
-  try {
+
+  if (await exists(textTemplateLocale)) {
+    text = await fs.readFile(textTemplateLocale, "utf8");
+  } else if (await exists(textTemplate)) {
     text = await fs.readFile(textTemplate, "utf8");
-  } catch (err) {
+  } else {
     text = mjml.replace(/<\/?[^>]+(>|$)/g, "");
   }
 
@@ -73,4 +88,13 @@ async function renderTemplate(template: string, data: Record<string, string>) {
   text = Mustache.render(text, data);
 
   return { html, text };
+}
+
+async function exists(path: string): Promise<boolean> {
+  try {
+    await fs.access(path);
+    return true;
+  } catch (err) {
+    return false;
+  }
 }
