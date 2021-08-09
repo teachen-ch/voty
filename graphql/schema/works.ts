@@ -4,9 +4,9 @@ import { extendType, objectType } from "@nexus/schema";
 export const Work = objectType({
   name: "Work",
   definition(t) {
-    t.model.id();
-    t.model.text();
-    t.model.title();
+    t.nonNull.model.id();
+    t.nonNull.model.text();
+    t.nonNull.model.title();
     t.model.data();
     t.model.users();
     t.model.attachments();

@@ -4,12 +4,12 @@ import { extendType, objectType, nonNull, stringArg } from "@nexus/schema";
 export const Discussion = objectType({
   name: "Discussion",
   definition(t) {
-    t.model.id();
-    t.model.title();
-    t.model.text();
+    t.nonNull.model.id();
+    t.nonNull.model.title();
+    t.nonNull.model.text();
     t.model.card();
     t.model.ballotId();
-    t.model.user();
+    t.nonNull.model.user();
     t.list.field("children", {
       type: "Discussion",
       resolve: async (_root, args, ctx, info) =>

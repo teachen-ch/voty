@@ -86,7 +86,7 @@ export const ActivitiesQuery: React.FC<{
               {isToday(act.time) ? formatTime(act.time) : formatDate(act.time)}
             </TD>
             <TD flexy>
-              {act.user.shortname} {text}
+              {act.user?.shortname} {text}
               {act.summary ? `: ${act.summary}` : ""}
             </TD>
           </TR>

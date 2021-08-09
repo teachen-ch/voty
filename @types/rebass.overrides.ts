@@ -1,3 +1,4 @@
+// @ts-nocheck
 // See here
 // https://github.com/rebassjs/rebass/issues/755#issuecomment-587250893
 

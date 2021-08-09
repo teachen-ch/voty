@@ -223,15 +223,12 @@ export function CreateSchool({
   onCompleted,
   onCancel,
 }: {
-  onCompleted?: ({
-    createOneSchool,
-  }: {
-    createOneSchool: ResultSchool;
-  }) => void;
-  onCancel?: () => void;
+  onCompleted: ({ createOneSchool }: { createOneSchool: ResultSchool }) => void;
+  onCancel: () => void;
 }): ReactElement {
   const [error, setError] = useState("");
   const [createSchool] = useCreateOneSchoolMutation({
+    // @ts-ignore
     onCompleted: onCompleted,
     onError: (error) => {
       setError(error.message);
