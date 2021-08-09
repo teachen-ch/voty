@@ -286,9 +286,10 @@ export const getBallotStatus = (ballot: BallotFieldsFragment): string => {
   else return BallotStatus.Started;
 };
 
-export const SelectBallots: React.FC<{ team: TeamTeacherFieldsFragment }> = ({
-  team,
-}) => {
+export const SelectBallots: React.FC<{
+  team: TeamTeacherFieldsFragment;
+  scope: BallotScope;
+}> = ({ team, scope }) => {
   const router = useRouter();
   const [doAddBallotRun, addMutation] = useAddBallotRunMutation();
   const [doRemoveBallotRun, removeMutation] = useRemoveBallotRunMutation();
@@ -301,7 +302,7 @@ export const SelectBallots: React.FC<{ team: TeamTeacherFieldsFragment }> = ({
   const ballotRuns = ballotRunsQuery.data?.getBallotRuns;
 
   const ballotsQuery = useBallotsQuery({
-    variables: { where: { scope: { equals: BallotScope.National } } },
+    variables: { where: { scope: { equals: scope } } },
   });
 
   const ballots = ballotsQuery.data?.ballots;
@@ -447,9 +448,11 @@ export const BallotDetails: React.FC<{
         {formatFromTo(ballot.start, ballot.end)}
       </Text>
       {children}
-      <Text textAlign="center" mt={3}>
-        <img width={150} src="/images/easyvote.png" alt="EasyVote" />
-      </Text>
+      {ballot.scope === BallotScope.National && (
+        <Text textAlign="center" mt={3}>
+          <img width={150} src="/images/easyvote.png" alt="EasyVote" />
+        </Text>
+      )}
       <Markdown>{ballot.body}</Markdown>
     </Text>
   </Card>
