@@ -38,13 +38,13 @@ export default function Success({
     >
       <Heading mt={0}>Hallo {user?.name}</Heading>
       <Text>
-        Dein neues Konto wurde erstellt und wir haben ein Email an die Adresse «
+        Dein Konto wurde erstellt und wir haben ein Email an die Adresse «
         {user?.email}» geschickt. Bitte öffne den Link in diesem Email, um Dich
-        anzumelden.{" "}
+        anzumelden.
       </Text>
       <Text my={4}>
-        <strong>Keine Email erhalten?</strong> Bitte schau überprüfe Deine Email
-        Adresse auf Tippfehler ({user?.email}) und schau im im Spam-Ordner nach.
+        <strong>Keine Email erhalten?</strong> Bitte überprüfe Deine Email
+        Adresse auf Tippfehler ({user?.email}) und schau im Spam-Ordner nach.
       </Text>
       <Button variant="text" onClick={router.reload}>
         Ich habe mich vertippt...

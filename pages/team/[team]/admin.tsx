@@ -29,6 +29,7 @@ import PanelPage from "./panel";
 import { TeacherCardList } from "components/Cards";
 import { Activities } from "components/Activities";
 import IconQR from "../../../public/images/icon_qr_white.svg";
+import { BallotScope } from "graphql/types";
 // import { usePolling } from "util/hooks";
 
 export const INVITE_STUDENTS = gql`
@@ -166,7 +167,12 @@ export default function TeacherTeamPage(): React.ReactElement {
         auf der Klassenseite angezeigt werden sollen. Nach der Abstimmung kannst
         Du hier auch die Abstimmungsresultate Deiner Klasse zeigen.
       </Text>
-      <SelectBallots team={team} />
+      <b>Eidgenössische Abstimmungen vom 26. September</b>
+      <SelectBallots team={team} scope={BallotScope.National} />
+      <br />
+
+      <b>Initiativen «SpielPolitik!» von Schulen nach Bern</b>
+      <SelectBallots team={team} scope={BallotScope.Public} />
 
       <HideFeature id="activities">
         <H2 mt={6}>Aktivitäten Klasse {team.name}</H2>

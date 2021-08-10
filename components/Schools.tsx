@@ -5,7 +5,7 @@ import { omit } from "lodash";
 import { Grid } from "theme-ui";
 import { QForm, ErrorBox } from "./Form";
 import { ShowField } from "./Users";
-import { cantonNames } from "../util/cantons";
+import { cantonCodes } from "../util/cantons";
 import { useState, ReactElement } from "react";
 import { School } from "@prisma/client";
 import { Loading } from "components/Page";
@@ -142,10 +142,10 @@ export const SelectSchool: React.FC = () => {
   const options = schools?.reduce(
     (o, i) => {
       const label = `${i.zip} ${i.city} - ${i.name}`;
-      o[label] = i.id;
+      o[i.id] = label;
       return o;
     },
-    { "-- Bitte wählen --": null } as Record<string, any>
+    { null: "Bitte wählen" } as Record<string, any>
   );
   return (
     <>
@@ -223,15 +223,12 @@ export function CreateSchool({
   onCompleted,
   onCancel,
 }: {
-  onCompleted?: ({
-    createOneSchool,
-  }: {
-    createOneSchool: ResultSchool;
-  }) => void;
-  onCancel?: () => void;
+  onCompleted: ({ createOneSchool }: { createOneSchool: ResultSchool }) => void;
+  onCancel: () => void;
 }): ReactElement {
   const [error, setError] = useState("");
   const [createSchool] = useCreateOneSchoolMutation({
+    // @ts-ignore
     onCompleted: onCompleted,
     onError: (error) => {
       setError(error.message);
@@ -271,7 +268,7 @@ export function CreateSchool({
             label: "Schultyp",
             required: true,
             options: {
-              "Bitte wählen": "",
+              "": "Bitte wählen",
               "Sekundarstufe I": "Sekundarstufe I",
               Gymnasium: "Gymnasium",
               Gewerbeschule: "Gewerbeschule",
@@ -293,7 +290,7 @@ export function CreateSchool({
             label: "Kanton",
             required: true,
             init: "Aargau",
-            options: cantonNames,
+            options: cantonCodes,
           },
           submit: {
             type: "submit",

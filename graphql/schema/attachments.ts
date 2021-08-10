@@ -4,11 +4,11 @@ import { extendType, objectType } from "@nexus/schema";
 export const Attachment = objectType({
   name: "Attachment",
   definition(t) {
-    t.model.id();
+    t.nonNull.model.id();
     t.model.file();
-    t.model.title();
-    t.model.user();
-    t.model.type();
+    t.nonNull.model.title();
+    t.nonNull.model.user();
+    t.nonNull.model.type();
 
     t.model.createdAt();
     t.model.updatedAt();

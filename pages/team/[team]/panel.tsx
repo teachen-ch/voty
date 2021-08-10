@@ -5,6 +5,7 @@ import { SelectBallots } from "components/Ballots";
 import { usePageEvent } from "util/stats";
 import { Role, useTeamTeacherQuery } from "graphql/types";
 import { Breadcrumb, A, Here } from "components/Breadcrumb";
+import { BallotScope } from "graphql/types";
 // import { usePolling } from "util/hooks";
 
 export default function PanelPage(): React.ReactElement {
@@ -46,7 +47,7 @@ export default function PanelPage(): React.ReactElement {
         Wähle hier aus der Liste die Abstimmungen aus, über welche im Panel
         diskutiert wird. Hier können später auch die Resultate angezeigt werden.
       </Text>
-      <SelectBallots team={team} />
+      <SelectBallots team={team} scope={BallotScope.National} />
 
       <Box mt={4} />
 

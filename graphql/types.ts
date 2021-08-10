@@ -21,172 +21,292 @@ export type Activity = {
   __typename?: 'Activity';
   ballotId?: Maybe<Scalars['String']>;
   card?: Maybe<Scalars['String']>;
-  id: Scalars['Int'];
-  school: School;
+  id?: Maybe<Scalars['Int']>;
+  school?: Maybe<School>;
   summary?: Maybe<Scalars['String']>;
-  team: Team;
-  time: Scalars['DateTime'];
-  type: ActivityType;
-  user: User;
-  visibility: Visibility;
+  team?: Maybe<Team>;
+  time?: Maybe<Scalars['DateTime']>;
+  type?: Maybe<ActivityType>;
+  user?: Maybe<User>;
+  visibility?: Maybe<Visibility>;
   workId?: Maybe<Scalars['String']>;
 };
 
 export type ActivityCreateInput = {
-  ballot?: Maybe<BallotCreateOneWithoutActivityInput>;
+  ballot?: Maybe<BallotCreateNestedOneWithoutActivityInput>;
   card?: Maybe<Scalars['String']>;
-  discussion?: Maybe<DiscussionCreateOneWithoutActivityInput>;
-  school: SchoolCreateOneWithoutActivityInput;
+  discussion?: Maybe<DiscussionCreateNestedOneWithoutActivityInput>;
+  school: SchoolCreateNestedOneWithoutActivityInput;
   summary?: Maybe<Scalars['String']>;
-  team: TeamCreateOneWithoutActivityInput;
+  team: TeamCreateNestedOneWithoutActivityInput;
   time?: Maybe<Scalars['DateTime']>;
   type: ActivityType;
-  user: UserCreateOneWithoutActivityInput;
+  user: UserCreateNestedOneWithoutActivityInput;
   visibility: Visibility;
-  work?: Maybe<WorkCreateOneWithoutActivitiesInput>;
+  work?: Maybe<WorkCreateNestedOneWithoutActivitiesInput>;
 };
 
-export type ActivityCreateManyWithoutBallotInput = {
+export type ActivityCreateManyBallotInput = {
+  card?: Maybe<Scalars['String']>;
+  discussionId?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['Int']>;
+  schoolId: Scalars['String'];
+  summary?: Maybe<Scalars['String']>;
+  teamId: Scalars['String'];
+  time?: Maybe<Scalars['DateTime']>;
+  type: ActivityType;
+  userId: Scalars['String'];
+  visibility: Visibility;
+  workId?: Maybe<Scalars['String']>;
+};
+
+export type ActivityCreateManyBallotInputEnvelope = {
+  data?: Maybe<Array<ActivityCreateManyBallotInput>>;
+  skipDuplicates?: Maybe<Scalars['Boolean']>;
+};
+
+export type ActivityCreateManyDiscussionInput = {
+  ballotId?: Maybe<Scalars['String']>;
+  card?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['Int']>;
+  schoolId: Scalars['String'];
+  summary?: Maybe<Scalars['String']>;
+  teamId: Scalars['String'];
+  time?: Maybe<Scalars['DateTime']>;
+  type: ActivityType;
+  userId: Scalars['String'];
+  visibility: Visibility;
+  workId?: Maybe<Scalars['String']>;
+};
+
+export type ActivityCreateManyDiscussionInputEnvelope = {
+  data?: Maybe<Array<ActivityCreateManyDiscussionInput>>;
+  skipDuplicates?: Maybe<Scalars['Boolean']>;
+};
+
+export type ActivityCreateManySchoolInput = {
+  ballotId?: Maybe<Scalars['String']>;
+  card?: Maybe<Scalars['String']>;
+  discussionId?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['Int']>;
+  summary?: Maybe<Scalars['String']>;
+  teamId: Scalars['String'];
+  time?: Maybe<Scalars['DateTime']>;
+  type: ActivityType;
+  userId: Scalars['String'];
+  visibility: Visibility;
+  workId?: Maybe<Scalars['String']>;
+};
+
+export type ActivityCreateManySchoolInputEnvelope = {
+  data?: Maybe<Array<ActivityCreateManySchoolInput>>;
+  skipDuplicates?: Maybe<Scalars['Boolean']>;
+};
+
+export type ActivityCreateManyTeamInput = {
+  ballotId?: Maybe<Scalars['String']>;
+  card?: Maybe<Scalars['String']>;
+  discussionId?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['Int']>;
+  schoolId: Scalars['String'];
+  summary?: Maybe<Scalars['String']>;
+  time?: Maybe<Scalars['DateTime']>;
+  type: ActivityType;
+  userId: Scalars['String'];
+  visibility: Visibility;
+  workId?: Maybe<Scalars['String']>;
+};
+
+export type ActivityCreateManyTeamInputEnvelope = {
+  data?: Maybe<Array<ActivityCreateManyTeamInput>>;
+  skipDuplicates?: Maybe<Scalars['Boolean']>;
+};
+
+export type ActivityCreateManyUserInput = {
+  ballotId?: Maybe<Scalars['String']>;
+  card?: Maybe<Scalars['String']>;
+  discussionId?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['Int']>;
+  schoolId: Scalars['String'];
+  summary?: Maybe<Scalars['String']>;
+  teamId: Scalars['String'];
+  time?: Maybe<Scalars['DateTime']>;
+  type: ActivityType;
+  visibility: Visibility;
+  workId?: Maybe<Scalars['String']>;
+};
+
+export type ActivityCreateManyUserInputEnvelope = {
+  data?: Maybe<Array<ActivityCreateManyUserInput>>;
+  skipDuplicates?: Maybe<Scalars['Boolean']>;
+};
+
+export type ActivityCreateManyWorkInput = {
+  ballotId?: Maybe<Scalars['String']>;
+  card?: Maybe<Scalars['String']>;
+  discussionId?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['Int']>;
+  schoolId: Scalars['String'];
+  summary?: Maybe<Scalars['String']>;
+  teamId: Scalars['String'];
+  time?: Maybe<Scalars['DateTime']>;
+  type: ActivityType;
+  userId: Scalars['String'];
+  visibility: Visibility;
+};
+
+export type ActivityCreateManyWorkInputEnvelope = {
+  data?: Maybe<Array<ActivityCreateManyWorkInput>>;
+  skipDuplicates?: Maybe<Scalars['Boolean']>;
+};
+
+export type ActivityCreateNestedManyWithoutBallotInput = {
   connect?: Maybe<Array<ActivityWhereUniqueInput>>;
-  connectOrCreate?: Maybe<Array<ActivityCreateOrConnectWithoutballotInput>>;
+  connectOrCreate?: Maybe<Array<ActivityCreateOrConnectWithoutBallotInput>>;
   create?: Maybe<Array<ActivityCreateWithoutBallotInput>>;
+  createMany?: Maybe<ActivityCreateManyBallotInputEnvelope>;
 };
 
-export type ActivityCreateManyWithoutDiscussionInput = {
+export type ActivityCreateNestedManyWithoutDiscussionInput = {
   connect?: Maybe<Array<ActivityWhereUniqueInput>>;
-  connectOrCreate?: Maybe<Array<ActivityCreateOrConnectWithoutdiscussionInput>>;
+  connectOrCreate?: Maybe<Array<ActivityCreateOrConnectWithoutDiscussionInput>>;
   create?: Maybe<Array<ActivityCreateWithoutDiscussionInput>>;
+  createMany?: Maybe<ActivityCreateManyDiscussionInputEnvelope>;
 };
 
-export type ActivityCreateManyWithoutSchoolInput = {
+export type ActivityCreateNestedManyWithoutSchoolInput = {
   connect?: Maybe<Array<ActivityWhereUniqueInput>>;
-  connectOrCreate?: Maybe<Array<ActivityCreateOrConnectWithoutschoolInput>>;
+  connectOrCreate?: Maybe<Array<ActivityCreateOrConnectWithoutSchoolInput>>;
   create?: Maybe<Array<ActivityCreateWithoutSchoolInput>>;
+  createMany?: Maybe<ActivityCreateManySchoolInputEnvelope>;
 };
 
-export type ActivityCreateManyWithoutTeamInput = {
+export type ActivityCreateNestedManyWithoutTeamInput = {
   connect?: Maybe<Array<ActivityWhereUniqueInput>>;
-  connectOrCreate?: Maybe<Array<ActivityCreateOrConnectWithoutteamInput>>;
+  connectOrCreate?: Maybe<Array<ActivityCreateOrConnectWithoutTeamInput>>;
   create?: Maybe<Array<ActivityCreateWithoutTeamInput>>;
+  createMany?: Maybe<ActivityCreateManyTeamInputEnvelope>;
 };
 
-export type ActivityCreateManyWithoutUserInput = {
+export type ActivityCreateNestedManyWithoutUserInput = {
   connect?: Maybe<Array<ActivityWhereUniqueInput>>;
-  connectOrCreate?: Maybe<Array<ActivityCreateOrConnectWithoutuserInput>>;
+  connectOrCreate?: Maybe<Array<ActivityCreateOrConnectWithoutUserInput>>;
   create?: Maybe<Array<ActivityCreateWithoutUserInput>>;
+  createMany?: Maybe<ActivityCreateManyUserInputEnvelope>;
 };
 
-export type ActivityCreateManyWithoutWorkInput = {
+export type ActivityCreateNestedManyWithoutWorkInput = {
   connect?: Maybe<Array<ActivityWhereUniqueInput>>;
-  connectOrCreate?: Maybe<Array<ActivityCreateOrConnectWithoutworkInput>>;
+  connectOrCreate?: Maybe<Array<ActivityCreateOrConnectWithoutWorkInput>>;
   create?: Maybe<Array<ActivityCreateWithoutWorkInput>>;
+  createMany?: Maybe<ActivityCreateManyWorkInputEnvelope>;
 };
 
-export type ActivityCreateOrConnectWithoutballotInput = {
+export type ActivityCreateOrConnectWithoutBallotInput = {
   create: ActivityCreateWithoutBallotInput;
   where: ActivityWhereUniqueInput;
 };
 
-export type ActivityCreateOrConnectWithoutdiscussionInput = {
+export type ActivityCreateOrConnectWithoutDiscussionInput = {
   create: ActivityCreateWithoutDiscussionInput;
   where: ActivityWhereUniqueInput;
 };
 
-export type ActivityCreateOrConnectWithoutschoolInput = {
+export type ActivityCreateOrConnectWithoutSchoolInput = {
   create: ActivityCreateWithoutSchoolInput;
   where: ActivityWhereUniqueInput;
 };
 
-export type ActivityCreateOrConnectWithoutteamInput = {
+export type ActivityCreateOrConnectWithoutTeamInput = {
   create: ActivityCreateWithoutTeamInput;
   where: ActivityWhereUniqueInput;
 };
 
-export type ActivityCreateOrConnectWithoutuserInput = {
+export type ActivityCreateOrConnectWithoutUserInput = {
   create: ActivityCreateWithoutUserInput;
   where: ActivityWhereUniqueInput;
 };
 
-export type ActivityCreateOrConnectWithoutworkInput = {
+export type ActivityCreateOrConnectWithoutWorkInput = {
   create: ActivityCreateWithoutWorkInput;
   where: ActivityWhereUniqueInput;
 };
 
 export type ActivityCreateWithoutBallotInput = {
   card?: Maybe<Scalars['String']>;
-  discussion?: Maybe<DiscussionCreateOneWithoutActivityInput>;
-  school: SchoolCreateOneWithoutActivityInput;
+  discussion?: Maybe<DiscussionCreateNestedOneWithoutActivityInput>;
+  school: SchoolCreateNestedOneWithoutActivityInput;
   summary?: Maybe<Scalars['String']>;
-  team: TeamCreateOneWithoutActivityInput;
+  team: TeamCreateNestedOneWithoutActivityInput;
   time?: Maybe<Scalars['DateTime']>;
   type: ActivityType;
-  user: UserCreateOneWithoutActivityInput;
+  user: UserCreateNestedOneWithoutActivityInput;
   visibility: Visibility;
-  work?: Maybe<WorkCreateOneWithoutActivitiesInput>;
+  work?: Maybe<WorkCreateNestedOneWithoutActivitiesInput>;
 };
 
 export type ActivityCreateWithoutDiscussionInput = {
-  ballot?: Maybe<BallotCreateOneWithoutActivityInput>;
+  ballot?: Maybe<BallotCreateNestedOneWithoutActivityInput>;
   card?: Maybe<Scalars['String']>;
-  school: SchoolCreateOneWithoutActivityInput;
+  school: SchoolCreateNestedOneWithoutActivityInput;
   summary?: Maybe<Scalars['String']>;
-  team: TeamCreateOneWithoutActivityInput;
+  team: TeamCreateNestedOneWithoutActivityInput;
   time?: Maybe<Scalars['DateTime']>;
   type: ActivityType;
-  user: UserCreateOneWithoutActivityInput;
+  user: UserCreateNestedOneWithoutActivityInput;
   visibility: Visibility;
-  work?: Maybe<WorkCreateOneWithoutActivitiesInput>;
+  work?: Maybe<WorkCreateNestedOneWithoutActivitiesInput>;
 };
 
 export type ActivityCreateWithoutSchoolInput = {
-  ballot?: Maybe<BallotCreateOneWithoutActivityInput>;
+  ballot?: Maybe<BallotCreateNestedOneWithoutActivityInput>;
   card?: Maybe<Scalars['String']>;
-  discussion?: Maybe<DiscussionCreateOneWithoutActivityInput>;
+  discussion?: Maybe<DiscussionCreateNestedOneWithoutActivityInput>;
   summary?: Maybe<Scalars['String']>;
-  team: TeamCreateOneWithoutActivityInput;
+  team: TeamCreateNestedOneWithoutActivityInput;
   time?: Maybe<Scalars['DateTime']>;
   type: ActivityType;
-  user: UserCreateOneWithoutActivityInput;
+  user: UserCreateNestedOneWithoutActivityInput;
   visibility: Visibility;
-  work?: Maybe<WorkCreateOneWithoutActivitiesInput>;
+  work?: Maybe<WorkCreateNestedOneWithoutActivitiesInput>;
 };
 
 export type ActivityCreateWithoutTeamInput = {
-  ballot?: Maybe<BallotCreateOneWithoutActivityInput>;
+  ballot?: Maybe<BallotCreateNestedOneWithoutActivityInput>;
   card?: Maybe<Scalars['String']>;
-  discussion?: Maybe<DiscussionCreateOneWithoutActivityInput>;
-  school: SchoolCreateOneWithoutActivityInput;
+  discussion?: Maybe<DiscussionCreateNestedOneWithoutActivityInput>;
+  school: SchoolCreateNestedOneWithoutActivityInput;
   summary?: Maybe<Scalars['String']>;
   time?: Maybe<Scalars['DateTime']>;
   type: ActivityType;
-  user: UserCreateOneWithoutActivityInput;
+  user: UserCreateNestedOneWithoutActivityInput;
   visibility: Visibility;
-  work?: Maybe<WorkCreateOneWithoutActivitiesInput>;
+  work?: Maybe<WorkCreateNestedOneWithoutActivitiesInput>;
 };
 
 export type ActivityCreateWithoutUserInput = {
-  ballot?: Maybe<BallotCreateOneWithoutActivityInput>;
+  ballot?: Maybe<BallotCreateNestedOneWithoutActivityInput>;
   card?: Maybe<Scalars['String']>;
-  discussion?: Maybe<DiscussionCreateOneWithoutActivityInput>;
-  school: SchoolCreateOneWithoutActivityInput;
+  discussion?: Maybe<DiscussionCreateNestedOneWithoutActivityInput>;
+  school: SchoolCreateNestedOneWithoutActivityInput;
   summary?: Maybe<Scalars['String']>;
-  team: TeamCreateOneWithoutActivityInput;
+  team: TeamCreateNestedOneWithoutActivityInput;
   time?: Maybe<Scalars['DateTime']>;
   type: ActivityType;
   visibility: Visibility;
-  work?: Maybe<WorkCreateOneWithoutActivitiesInput>;
+  work?: Maybe<WorkCreateNestedOneWithoutActivitiesInput>;
 };
 
 export type ActivityCreateWithoutWorkInput = {
-  ballot?: Maybe<BallotCreateOneWithoutActivityInput>;
+  ballot?: Maybe<BallotCreateNestedOneWithoutActivityInput>;
   card?: Maybe<Scalars['String']>;
-  discussion?: Maybe<DiscussionCreateOneWithoutActivityInput>;
-  school: SchoolCreateOneWithoutActivityInput;
+  discussion?: Maybe<DiscussionCreateNestedOneWithoutActivityInput>;
+  school: SchoolCreateNestedOneWithoutActivityInput;
   summary?: Maybe<Scalars['String']>;
-  team: TeamCreateOneWithoutActivityInput;
+  team: TeamCreateNestedOneWithoutActivityInput;
   time?: Maybe<Scalars['DateTime']>;
   type: ActivityType;
-  user: UserCreateOneWithoutActivityInput;
+  user: UserCreateNestedOneWithoutActivityInput;
   visibility: Visibility;
 };
 
@@ -249,8 +369,9 @@ export type ActivityUpdateManyMutationInput = {
 
 export type ActivityUpdateManyWithoutBallotInput = {
   connect?: Maybe<Array<ActivityWhereUniqueInput>>;
-  connectOrCreate?: Maybe<Array<ActivityCreateOrConnectWithoutballotInput>>;
+  connectOrCreate?: Maybe<Array<ActivityCreateOrConnectWithoutBallotInput>>;
   create?: Maybe<Array<ActivityCreateWithoutBallotInput>>;
+  createMany?: Maybe<ActivityCreateManyBallotInputEnvelope>;
   delete?: Maybe<Array<ActivityWhereUniqueInput>>;
   deleteMany?: Maybe<Array<ActivityScalarWhereInput>>;
   disconnect?: Maybe<Array<ActivityWhereUniqueInput>>;
@@ -262,8 +383,9 @@ export type ActivityUpdateManyWithoutBallotInput = {
 
 export type ActivityUpdateManyWithoutDiscussionInput = {
   connect?: Maybe<Array<ActivityWhereUniqueInput>>;
-  connectOrCreate?: Maybe<Array<ActivityCreateOrConnectWithoutdiscussionInput>>;
+  connectOrCreate?: Maybe<Array<ActivityCreateOrConnectWithoutDiscussionInput>>;
   create?: Maybe<Array<ActivityCreateWithoutDiscussionInput>>;
+  createMany?: Maybe<ActivityCreateManyDiscussionInputEnvelope>;
   delete?: Maybe<Array<ActivityWhereUniqueInput>>;
   deleteMany?: Maybe<Array<ActivityScalarWhereInput>>;
   disconnect?: Maybe<Array<ActivityWhereUniqueInput>>;
@@ -275,8 +397,9 @@ export type ActivityUpdateManyWithoutDiscussionInput = {
 
 export type ActivityUpdateManyWithoutSchoolInput = {
   connect?: Maybe<Array<ActivityWhereUniqueInput>>;
-  connectOrCreate?: Maybe<Array<ActivityCreateOrConnectWithoutschoolInput>>;
+  connectOrCreate?: Maybe<Array<ActivityCreateOrConnectWithoutSchoolInput>>;
   create?: Maybe<Array<ActivityCreateWithoutSchoolInput>>;
+  createMany?: Maybe<ActivityCreateManySchoolInputEnvelope>;
   delete?: Maybe<Array<ActivityWhereUniqueInput>>;
   deleteMany?: Maybe<Array<ActivityScalarWhereInput>>;
   disconnect?: Maybe<Array<ActivityWhereUniqueInput>>;
@@ -288,8 +411,9 @@ export type ActivityUpdateManyWithoutSchoolInput = {
 
 export type ActivityUpdateManyWithoutTeamInput = {
   connect?: Maybe<Array<ActivityWhereUniqueInput>>;
-  connectOrCreate?: Maybe<Array<ActivityCreateOrConnectWithoutteamInput>>;
+  connectOrCreate?: Maybe<Array<ActivityCreateOrConnectWithoutTeamInput>>;
   create?: Maybe<Array<ActivityCreateWithoutTeamInput>>;
+  createMany?: Maybe<ActivityCreateManyTeamInputEnvelope>;
   delete?: Maybe<Array<ActivityWhereUniqueInput>>;
   deleteMany?: Maybe<Array<ActivityScalarWhereInput>>;
   disconnect?: Maybe<Array<ActivityWhereUniqueInput>>;
@@ -301,8 +425,9 @@ export type ActivityUpdateManyWithoutTeamInput = {
 
 export type ActivityUpdateManyWithoutUserInput = {
   connect?: Maybe<Array<ActivityWhereUniqueInput>>;
-  connectOrCreate?: Maybe<Array<ActivityCreateOrConnectWithoutuserInput>>;
+  connectOrCreate?: Maybe<Array<ActivityCreateOrConnectWithoutUserInput>>;
   create?: Maybe<Array<ActivityCreateWithoutUserInput>>;
+  createMany?: Maybe<ActivityCreateManyUserInputEnvelope>;
   delete?: Maybe<Array<ActivityWhereUniqueInput>>;
   deleteMany?: Maybe<Array<ActivityScalarWhereInput>>;
   disconnect?: Maybe<Array<ActivityWhereUniqueInput>>;
@@ -314,8 +439,9 @@ export type ActivityUpdateManyWithoutUserInput = {
 
 export type ActivityUpdateManyWithoutWorkInput = {
   connect?: Maybe<Array<ActivityWhereUniqueInput>>;
-  connectOrCreate?: Maybe<Array<ActivityCreateOrConnectWithoutworkInput>>;
+  connectOrCreate?: Maybe<Array<ActivityCreateOrConnectWithoutWorkInput>>;
   create?: Maybe<Array<ActivityCreateWithoutWorkInput>>;
+  createMany?: Maybe<ActivityCreateManyWorkInputEnvelope>;
   delete?: Maybe<Array<ActivityWhereUniqueInput>>;
   deleteMany?: Maybe<Array<ActivityScalarWhereInput>>;
   disconnect?: Maybe<Array<ActivityWhereUniqueInput>>;
@@ -529,77 +655,203 @@ export type ActivityWhereUniqueInput = {
 
 export type Attachment = {
   __typename?: 'Attachment';
-  createdAt: Scalars['DateTime'];
-  file: Scalars['String'];
+  createdAt?: Maybe<Scalars['DateTime']>;
+  file?: Maybe<Scalars['String']>;
   id: Scalars['String'];
   title: Scalars['String'];
   type: Scalars['String'];
-  updatedAt: Scalars['DateTime'];
+  updatedAt?: Maybe<Scalars['DateTime']>;
   user: User;
 };
 
-export type AttachmentCreateManyWithoutBallotInput = {
+export type AttachmentCreateManyBallotInput = {
+  card?: Maybe<Scalars['String']>;
+  createdAt?: Maybe<Scalars['DateTime']>;
+  discussionId?: Maybe<Scalars['String']>;
+  file: Scalars['String'];
+  id?: Maybe<Scalars['String']>;
+  schoolId?: Maybe<Scalars['String']>;
+  teamId: Scalars['String'];
+  title?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+  updatedAt?: Maybe<Scalars['DateTime']>;
+  userId: Scalars['String'];
+  workId?: Maybe<Scalars['String']>;
+};
+
+export type AttachmentCreateManyBallotInputEnvelope = {
+  data?: Maybe<Array<AttachmentCreateManyBallotInput>>;
+  skipDuplicates?: Maybe<Scalars['Boolean']>;
+};
+
+export type AttachmentCreateManyDiscussionInput = {
+  ballotId?: Maybe<Scalars['String']>;
+  card?: Maybe<Scalars['String']>;
+  createdAt?: Maybe<Scalars['DateTime']>;
+  file: Scalars['String'];
+  id?: Maybe<Scalars['String']>;
+  schoolId?: Maybe<Scalars['String']>;
+  teamId: Scalars['String'];
+  title?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+  updatedAt?: Maybe<Scalars['DateTime']>;
+  userId: Scalars['String'];
+  workId?: Maybe<Scalars['String']>;
+};
+
+export type AttachmentCreateManyDiscussionInputEnvelope = {
+  data?: Maybe<Array<AttachmentCreateManyDiscussionInput>>;
+  skipDuplicates?: Maybe<Scalars['Boolean']>;
+};
+
+export type AttachmentCreateManySchoolInput = {
+  ballotId?: Maybe<Scalars['String']>;
+  card?: Maybe<Scalars['String']>;
+  createdAt?: Maybe<Scalars['DateTime']>;
+  discussionId?: Maybe<Scalars['String']>;
+  file: Scalars['String'];
+  id?: Maybe<Scalars['String']>;
+  teamId: Scalars['String'];
+  title?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+  updatedAt?: Maybe<Scalars['DateTime']>;
+  userId: Scalars['String'];
+  workId?: Maybe<Scalars['String']>;
+};
+
+export type AttachmentCreateManySchoolInputEnvelope = {
+  data?: Maybe<Array<AttachmentCreateManySchoolInput>>;
+  skipDuplicates?: Maybe<Scalars['Boolean']>;
+};
+
+export type AttachmentCreateManyTeamInput = {
+  ballotId?: Maybe<Scalars['String']>;
+  card?: Maybe<Scalars['String']>;
+  createdAt?: Maybe<Scalars['DateTime']>;
+  discussionId?: Maybe<Scalars['String']>;
+  file: Scalars['String'];
+  id?: Maybe<Scalars['String']>;
+  schoolId?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+  updatedAt?: Maybe<Scalars['DateTime']>;
+  userId: Scalars['String'];
+  workId?: Maybe<Scalars['String']>;
+};
+
+export type AttachmentCreateManyTeamInputEnvelope = {
+  data?: Maybe<Array<AttachmentCreateManyTeamInput>>;
+  skipDuplicates?: Maybe<Scalars['Boolean']>;
+};
+
+export type AttachmentCreateManyUserInput = {
+  ballotId?: Maybe<Scalars['String']>;
+  card?: Maybe<Scalars['String']>;
+  createdAt?: Maybe<Scalars['DateTime']>;
+  discussionId?: Maybe<Scalars['String']>;
+  file: Scalars['String'];
+  id?: Maybe<Scalars['String']>;
+  schoolId?: Maybe<Scalars['String']>;
+  teamId: Scalars['String'];
+  title?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+  updatedAt?: Maybe<Scalars['DateTime']>;
+  workId?: Maybe<Scalars['String']>;
+};
+
+export type AttachmentCreateManyUserInputEnvelope = {
+  data?: Maybe<Array<AttachmentCreateManyUserInput>>;
+  skipDuplicates?: Maybe<Scalars['Boolean']>;
+};
+
+export type AttachmentCreateManyWorkInput = {
+  ballotId?: Maybe<Scalars['String']>;
+  card?: Maybe<Scalars['String']>;
+  createdAt?: Maybe<Scalars['DateTime']>;
+  discussionId?: Maybe<Scalars['String']>;
+  file: Scalars['String'];
+  id?: Maybe<Scalars['String']>;
+  schoolId?: Maybe<Scalars['String']>;
+  teamId: Scalars['String'];
+  title?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+  updatedAt?: Maybe<Scalars['DateTime']>;
+  userId: Scalars['String'];
+};
+
+export type AttachmentCreateManyWorkInputEnvelope = {
+  data?: Maybe<Array<AttachmentCreateManyWorkInput>>;
+  skipDuplicates?: Maybe<Scalars['Boolean']>;
+};
+
+export type AttachmentCreateNestedManyWithoutBallotInput = {
   connect?: Maybe<Array<AttachmentWhereUniqueInput>>;
-  connectOrCreate?: Maybe<Array<AttachmentCreateOrConnectWithoutballotInput>>;
+  connectOrCreate?: Maybe<Array<AttachmentCreateOrConnectWithoutBallotInput>>;
   create?: Maybe<Array<AttachmentCreateWithoutBallotInput>>;
+  createMany?: Maybe<AttachmentCreateManyBallotInputEnvelope>;
 };
 
-export type AttachmentCreateManyWithoutDiscussionInput = {
+export type AttachmentCreateNestedManyWithoutDiscussionInput = {
   connect?: Maybe<Array<AttachmentWhereUniqueInput>>;
-  connectOrCreate?: Maybe<Array<AttachmentCreateOrConnectWithoutdiscussionInput>>;
+  connectOrCreate?: Maybe<Array<AttachmentCreateOrConnectWithoutDiscussionInput>>;
   create?: Maybe<Array<AttachmentCreateWithoutDiscussionInput>>;
+  createMany?: Maybe<AttachmentCreateManyDiscussionInputEnvelope>;
 };
 
-export type AttachmentCreateManyWithoutSchoolInput = {
+export type AttachmentCreateNestedManyWithoutSchoolInput = {
   connect?: Maybe<Array<AttachmentWhereUniqueInput>>;
-  connectOrCreate?: Maybe<Array<AttachmentCreateOrConnectWithoutschoolInput>>;
+  connectOrCreate?: Maybe<Array<AttachmentCreateOrConnectWithoutSchoolInput>>;
   create?: Maybe<Array<AttachmentCreateWithoutSchoolInput>>;
+  createMany?: Maybe<AttachmentCreateManySchoolInputEnvelope>;
 };
 
-export type AttachmentCreateManyWithoutTeamInput = {
+export type AttachmentCreateNestedManyWithoutTeamInput = {
   connect?: Maybe<Array<AttachmentWhereUniqueInput>>;
-  connectOrCreate?: Maybe<Array<AttachmentCreateOrConnectWithoutteamInput>>;
+  connectOrCreate?: Maybe<Array<AttachmentCreateOrConnectWithoutTeamInput>>;
   create?: Maybe<Array<AttachmentCreateWithoutTeamInput>>;
+  createMany?: Maybe<AttachmentCreateManyTeamInputEnvelope>;
 };
 
-export type AttachmentCreateManyWithoutUserInput = {
+export type AttachmentCreateNestedManyWithoutUserInput = {
   connect?: Maybe<Array<AttachmentWhereUniqueInput>>;
-  connectOrCreate?: Maybe<Array<AttachmentCreateOrConnectWithoutuserInput>>;
+  connectOrCreate?: Maybe<Array<AttachmentCreateOrConnectWithoutUserInput>>;
   create?: Maybe<Array<AttachmentCreateWithoutUserInput>>;
+  createMany?: Maybe<AttachmentCreateManyUserInputEnvelope>;
 };
 
-export type AttachmentCreateManyWithoutWorkInput = {
+export type AttachmentCreateNestedManyWithoutWorkInput = {
   connect?: Maybe<Array<AttachmentWhereUniqueInput>>;
-  connectOrCreate?: Maybe<Array<AttachmentCreateOrConnectWithoutworkInput>>;
+  connectOrCreate?: Maybe<Array<AttachmentCreateOrConnectWithoutWorkInput>>;
   create?: Maybe<Array<AttachmentCreateWithoutWorkInput>>;
+  createMany?: Maybe<AttachmentCreateManyWorkInputEnvelope>;
 };
 
-export type AttachmentCreateOrConnectWithoutballotInput = {
+export type AttachmentCreateOrConnectWithoutBallotInput = {
   create: AttachmentCreateWithoutBallotInput;
   where: AttachmentWhereUniqueInput;
 };
 
-export type AttachmentCreateOrConnectWithoutdiscussionInput = {
+export type AttachmentCreateOrConnectWithoutDiscussionInput = {
   create: AttachmentCreateWithoutDiscussionInput;
   where: AttachmentWhereUniqueInput;
 };
 
-export type AttachmentCreateOrConnectWithoutschoolInput = {
+export type AttachmentCreateOrConnectWithoutSchoolInput = {
   create: AttachmentCreateWithoutSchoolInput;
   where: AttachmentWhereUniqueInput;
 };
 
-export type AttachmentCreateOrConnectWithoutteamInput = {
+export type AttachmentCreateOrConnectWithoutTeamInput = {
   create: AttachmentCreateWithoutTeamInput;
   where: AttachmentWhereUniqueInput;
 };
 
-export type AttachmentCreateOrConnectWithoutuserInput = {
+export type AttachmentCreateOrConnectWithoutUserInput = {
   create: AttachmentCreateWithoutUserInput;
   where: AttachmentWhereUniqueInput;
 };
 
-export type AttachmentCreateOrConnectWithoutworkInput = {
+export type AttachmentCreateOrConnectWithoutWorkInput = {
   create: AttachmentCreateWithoutWorkInput;
   where: AttachmentWhereUniqueInput;
 };
@@ -607,91 +859,91 @@ export type AttachmentCreateOrConnectWithoutworkInput = {
 export type AttachmentCreateWithoutBallotInput = {
   card?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['DateTime']>;
-  discussion?: Maybe<DiscussionCreateOneWithoutAttachmentsInput>;
+  discussion?: Maybe<DiscussionCreateNestedOneWithoutAttachmentsInput>;
   file: Scalars['String'];
   id?: Maybe<Scalars['String']>;
-  school?: Maybe<SchoolCreateOneWithoutAttachmentInput>;
-  team: TeamCreateOneWithoutAttachmentInput;
+  school?: Maybe<SchoolCreateNestedOneWithoutAttachmentInput>;
+  team: TeamCreateNestedOneWithoutAttachmentInput;
   title?: Maybe<Scalars['String']>;
   type?: Maybe<Scalars['String']>;
   updatedAt?: Maybe<Scalars['DateTime']>;
-  user: UserCreateOneWithoutAttachmentsInput;
-  work?: Maybe<WorkCreateOneWithoutAttachmentsInput>;
+  user: UserCreateNestedOneWithoutAttachmentsInput;
+  work?: Maybe<WorkCreateNestedOneWithoutAttachmentsInput>;
 };
 
 export type AttachmentCreateWithoutDiscussionInput = {
-  ballot?: Maybe<BallotCreateOneWithoutAttachmentsInput>;
+  ballot?: Maybe<BallotCreateNestedOneWithoutAttachmentsInput>;
   card?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['DateTime']>;
   file: Scalars['String'];
   id?: Maybe<Scalars['String']>;
-  school?: Maybe<SchoolCreateOneWithoutAttachmentInput>;
-  team: TeamCreateOneWithoutAttachmentInput;
+  school?: Maybe<SchoolCreateNestedOneWithoutAttachmentInput>;
+  team: TeamCreateNestedOneWithoutAttachmentInput;
   title?: Maybe<Scalars['String']>;
   type?: Maybe<Scalars['String']>;
   updatedAt?: Maybe<Scalars['DateTime']>;
-  user: UserCreateOneWithoutAttachmentsInput;
-  work?: Maybe<WorkCreateOneWithoutAttachmentsInput>;
+  user: UserCreateNestedOneWithoutAttachmentsInput;
+  work?: Maybe<WorkCreateNestedOneWithoutAttachmentsInput>;
 };
 
 export type AttachmentCreateWithoutSchoolInput = {
-  ballot?: Maybe<BallotCreateOneWithoutAttachmentsInput>;
+  ballot?: Maybe<BallotCreateNestedOneWithoutAttachmentsInput>;
   card?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['DateTime']>;
-  discussion?: Maybe<DiscussionCreateOneWithoutAttachmentsInput>;
+  discussion?: Maybe<DiscussionCreateNestedOneWithoutAttachmentsInput>;
   file: Scalars['String'];
   id?: Maybe<Scalars['String']>;
-  team: TeamCreateOneWithoutAttachmentInput;
+  team: TeamCreateNestedOneWithoutAttachmentInput;
   title?: Maybe<Scalars['String']>;
   type?: Maybe<Scalars['String']>;
   updatedAt?: Maybe<Scalars['DateTime']>;
-  user: UserCreateOneWithoutAttachmentsInput;
-  work?: Maybe<WorkCreateOneWithoutAttachmentsInput>;
+  user: UserCreateNestedOneWithoutAttachmentsInput;
+  work?: Maybe<WorkCreateNestedOneWithoutAttachmentsInput>;
 };
 
 export type AttachmentCreateWithoutTeamInput = {
-  ballot?: Maybe<BallotCreateOneWithoutAttachmentsInput>;
+  ballot?: Maybe<BallotCreateNestedOneWithoutAttachmentsInput>;
   card?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['DateTime']>;
-  discussion?: Maybe<DiscussionCreateOneWithoutAttachmentsInput>;
+  discussion?: Maybe<DiscussionCreateNestedOneWithoutAttachmentsInput>;
   file: Scalars['String'];
   id?: Maybe<Scalars['String']>;
-  school?: Maybe<SchoolCreateOneWithoutAttachmentInput>;
+  school?: Maybe<SchoolCreateNestedOneWithoutAttachmentInput>;
   title?: Maybe<Scalars['String']>;
   type?: Maybe<Scalars['String']>;
   updatedAt?: Maybe<Scalars['DateTime']>;
-  user: UserCreateOneWithoutAttachmentsInput;
-  work?: Maybe<WorkCreateOneWithoutAttachmentsInput>;
+  user: UserCreateNestedOneWithoutAttachmentsInput;
+  work?: Maybe<WorkCreateNestedOneWithoutAttachmentsInput>;
 };
 
 export type AttachmentCreateWithoutUserInput = {
-  ballot?: Maybe<BallotCreateOneWithoutAttachmentsInput>;
+  ballot?: Maybe<BallotCreateNestedOneWithoutAttachmentsInput>;
   card?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['DateTime']>;
-  discussion?: Maybe<DiscussionCreateOneWithoutAttachmentsInput>;
+  discussion?: Maybe<DiscussionCreateNestedOneWithoutAttachmentsInput>;
   file: Scalars['String'];
   id?: Maybe<Scalars['String']>;
-  school?: Maybe<SchoolCreateOneWithoutAttachmentInput>;
-  team: TeamCreateOneWithoutAttachmentInput;
+  school?: Maybe<SchoolCreateNestedOneWithoutAttachmentInput>;
+  team: TeamCreateNestedOneWithoutAttachmentInput;
   title?: Maybe<Scalars['String']>;
   type?: Maybe<Scalars['String']>;
   updatedAt?: Maybe<Scalars['DateTime']>;
-  work?: Maybe<WorkCreateOneWithoutAttachmentsInput>;
+  work?: Maybe<WorkCreateNestedOneWithoutAttachmentsInput>;
 };
 
 export type AttachmentCreateWithoutWorkInput = {
-  ballot?: Maybe<BallotCreateOneWithoutAttachmentsInput>;
+  ballot?: Maybe<BallotCreateNestedOneWithoutAttachmentsInput>;
   card?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['DateTime']>;
-  discussion?: Maybe<DiscussionCreateOneWithoutAttachmentsInput>;
+  discussion?: Maybe<DiscussionCreateNestedOneWithoutAttachmentsInput>;
   file: Scalars['String'];
   id?: Maybe<Scalars['String']>;
-  school?: Maybe<SchoolCreateOneWithoutAttachmentInput>;
-  team: TeamCreateOneWithoutAttachmentInput;
+  school?: Maybe<SchoolCreateNestedOneWithoutAttachmentInput>;
+  team: TeamCreateNestedOneWithoutAttachmentInput;
   title?: Maybe<Scalars['String']>;
   type?: Maybe<Scalars['String']>;
   updatedAt?: Maybe<Scalars['DateTime']>;
-  user: UserCreateOneWithoutAttachmentsInput;
+  user: UserCreateNestedOneWithoutAttachmentsInput;
 };
 
 export type AttachmentListRelationFilter = {
@@ -747,8 +999,9 @@ export type AttachmentUpdateManyMutationInput = {
 
 export type AttachmentUpdateManyWithoutBallotInput = {
   connect?: Maybe<Array<AttachmentWhereUniqueInput>>;
-  connectOrCreate?: Maybe<Array<AttachmentCreateOrConnectWithoutballotInput>>;
+  connectOrCreate?: Maybe<Array<AttachmentCreateOrConnectWithoutBallotInput>>;
   create?: Maybe<Array<AttachmentCreateWithoutBallotInput>>;
+  createMany?: Maybe<AttachmentCreateManyBallotInputEnvelope>;
   delete?: Maybe<Array<AttachmentWhereUniqueInput>>;
   deleteMany?: Maybe<Array<AttachmentScalarWhereInput>>;
   disconnect?: Maybe<Array<AttachmentWhereUniqueInput>>;
@@ -760,8 +1013,9 @@ export type AttachmentUpdateManyWithoutBallotInput = {
 
 export type AttachmentUpdateManyWithoutDiscussionInput = {
   connect?: Maybe<Array<AttachmentWhereUniqueInput>>;
-  connectOrCreate?: Maybe<Array<AttachmentCreateOrConnectWithoutdiscussionInput>>;
+  connectOrCreate?: Maybe<Array<AttachmentCreateOrConnectWithoutDiscussionInput>>;
   create?: Maybe<Array<AttachmentCreateWithoutDiscussionInput>>;
+  createMany?: Maybe<AttachmentCreateManyDiscussionInputEnvelope>;
   delete?: Maybe<Array<AttachmentWhereUniqueInput>>;
   deleteMany?: Maybe<Array<AttachmentScalarWhereInput>>;
   disconnect?: Maybe<Array<AttachmentWhereUniqueInput>>;
@@ -773,8 +1027,9 @@ export type AttachmentUpdateManyWithoutDiscussionInput = {
 
 export type AttachmentUpdateManyWithoutSchoolInput = {
   connect?: Maybe<Array<AttachmentWhereUniqueInput>>;
-  connectOrCreate?: Maybe<Array<AttachmentCreateOrConnectWithoutschoolInput>>;
+  connectOrCreate?: Maybe<Array<AttachmentCreateOrConnectWithoutSchoolInput>>;
   create?: Maybe<Array<AttachmentCreateWithoutSchoolInput>>;
+  createMany?: Maybe<AttachmentCreateManySchoolInputEnvelope>;
   delete?: Maybe<Array<AttachmentWhereUniqueInput>>;
   deleteMany?: Maybe<Array<AttachmentScalarWhereInput>>;
   disconnect?: Maybe<Array<AttachmentWhereUniqueInput>>;
@@ -786,8 +1041,9 @@ export type AttachmentUpdateManyWithoutSchoolInput = {
 
 export type AttachmentUpdateManyWithoutTeamInput = {
   connect?: Maybe<Array<AttachmentWhereUniqueInput>>;
-  connectOrCreate?: Maybe<Array<AttachmentCreateOrConnectWithoutteamInput>>;
+  connectOrCreate?: Maybe<Array<AttachmentCreateOrConnectWithoutTeamInput>>;
   create?: Maybe<Array<AttachmentCreateWithoutTeamInput>>;
+  createMany?: Maybe<AttachmentCreateManyTeamInputEnvelope>;
   delete?: Maybe<Array<AttachmentWhereUniqueInput>>;
   deleteMany?: Maybe<Array<AttachmentScalarWhereInput>>;
   disconnect?: Maybe<Array<AttachmentWhereUniqueInput>>;
@@ -799,8 +1055,9 @@ export type AttachmentUpdateManyWithoutTeamInput = {
 
 export type AttachmentUpdateManyWithoutUserInput = {
   connect?: Maybe<Array<AttachmentWhereUniqueInput>>;
-  connectOrCreate?: Maybe<Array<AttachmentCreateOrConnectWithoutuserInput>>;
+  connectOrCreate?: Maybe<Array<AttachmentCreateOrConnectWithoutUserInput>>;
   create?: Maybe<Array<AttachmentCreateWithoutUserInput>>;
+  createMany?: Maybe<AttachmentCreateManyUserInputEnvelope>;
   delete?: Maybe<Array<AttachmentWhereUniqueInput>>;
   deleteMany?: Maybe<Array<AttachmentScalarWhereInput>>;
   disconnect?: Maybe<Array<AttachmentWhereUniqueInput>>;
@@ -812,8 +1069,9 @@ export type AttachmentUpdateManyWithoutUserInput = {
 
 export type AttachmentUpdateManyWithoutWorkInput = {
   connect?: Maybe<Array<AttachmentWhereUniqueInput>>;
-  connectOrCreate?: Maybe<Array<AttachmentCreateOrConnectWithoutworkInput>>;
+  connectOrCreate?: Maybe<Array<AttachmentCreateOrConnectWithoutWorkInput>>;
   create?: Maybe<Array<AttachmentCreateWithoutWorkInput>>;
+  createMany?: Maybe<AttachmentCreateManyWorkInputEnvelope>;
   delete?: Maybe<Array<AttachmentWhereUniqueInput>>;
   deleteMany?: Maybe<Array<AttachmentScalarWhereInput>>;
   disconnect?: Maybe<Array<AttachmentWhereUniqueInput>>;
@@ -1041,320 +1299,378 @@ export type AttachmentWhereUniqueInput = {
 
 export type Ballot = {
   __typename?: 'Ballot';
-  body: Scalars['String'];
+  body?: Maybe<Scalars['String']>;
   canton?: Maybe<Scalars['String']>;
   canVote?: Maybe<Scalars['Boolean']>;
-  description: Scalars['String'];
-  end: Scalars['DateTime'];
+  description?: Maybe<Scalars['String']>;
+  end?: Maybe<Scalars['DateTime']>;
   hasVoted?: Maybe<Scalars['Boolean']>;
   id: Scalars['String'];
   schoolId?: Maybe<Scalars['String']>;
-  scope: BallotScope;
-  start: Scalars['DateTime'];
+  scope?: Maybe<BallotScope>;
+  start?: Maybe<Scalars['DateTime']>;
   teamId?: Maybe<Scalars['String']>;
   title: Scalars['String'];
 };
 
-export type BallotCreateManyWithoutCreatorInput = {
+export type BallotCreateManyCreatorInput = {
+  body: Scalars['String'];
+  canton?: Maybe<Scalars['String']>;
+  createdAt?: Maybe<Scalars['DateTime']>;
+  description: Scalars['String'];
+  end: Scalars['DateTime'];
+  id?: Maybe<Scalars['String']>;
+  schoolId?: Maybe<Scalars['String']>;
+  scope?: Maybe<BallotScope>;
+  start: Scalars['DateTime'];
+  teamId?: Maybe<Scalars['String']>;
+  title: Scalars['String'];
+  updatedAt?: Maybe<Scalars['DateTime']>;
+};
+
+export type BallotCreateManyCreatorInputEnvelope = {
+  data?: Maybe<Array<BallotCreateManyCreatorInput>>;
+  skipDuplicates?: Maybe<Scalars['Boolean']>;
+};
+
+export type BallotCreateManySchoolInput = {
+  body: Scalars['String'];
+  canton?: Maybe<Scalars['String']>;
+  createdAt?: Maybe<Scalars['DateTime']>;
+  creatorId?: Maybe<Scalars['String']>;
+  description: Scalars['String'];
+  end: Scalars['DateTime'];
+  id?: Maybe<Scalars['String']>;
+  scope?: Maybe<BallotScope>;
+  start: Scalars['DateTime'];
+  teamId?: Maybe<Scalars['String']>;
+  title: Scalars['String'];
+  updatedAt?: Maybe<Scalars['DateTime']>;
+};
+
+export type BallotCreateManySchoolInputEnvelope = {
+  data?: Maybe<Array<BallotCreateManySchoolInput>>;
+  skipDuplicates?: Maybe<Scalars['Boolean']>;
+};
+
+export type BallotCreateManyTeamInput = {
+  body: Scalars['String'];
+  canton?: Maybe<Scalars['String']>;
+  createdAt?: Maybe<Scalars['DateTime']>;
+  creatorId?: Maybe<Scalars['String']>;
+  description: Scalars['String'];
+  end: Scalars['DateTime'];
+  id?: Maybe<Scalars['String']>;
+  schoolId?: Maybe<Scalars['String']>;
+  scope?: Maybe<BallotScope>;
+  start: Scalars['DateTime'];
+  title: Scalars['String'];
+  updatedAt?: Maybe<Scalars['DateTime']>;
+};
+
+export type BallotCreateManyTeamInputEnvelope = {
+  data?: Maybe<Array<BallotCreateManyTeamInput>>;
+  skipDuplicates?: Maybe<Scalars['Boolean']>;
+};
+
+export type BallotCreateNestedManyWithoutCreatorInput = {
   connect?: Maybe<Array<BallotWhereUniqueInput>>;
-  connectOrCreate?: Maybe<Array<BallotCreateOrConnectWithoutcreatorInput>>;
+  connectOrCreate?: Maybe<Array<BallotCreateOrConnectWithoutCreatorInput>>;
   create?: Maybe<Array<BallotCreateWithoutCreatorInput>>;
+  createMany?: Maybe<BallotCreateManyCreatorInputEnvelope>;
 };
 
-export type BallotCreateManyWithoutSchoolInput = {
+export type BallotCreateNestedManyWithoutSchoolInput = {
   connect?: Maybe<Array<BallotWhereUniqueInput>>;
-  connectOrCreate?: Maybe<Array<BallotCreateOrConnectWithoutschoolInput>>;
+  connectOrCreate?: Maybe<Array<BallotCreateOrConnectWithoutSchoolInput>>;
   create?: Maybe<Array<BallotCreateWithoutSchoolInput>>;
+  createMany?: Maybe<BallotCreateManySchoolInputEnvelope>;
 };
 
-export type BallotCreateManyWithoutTeamInput = {
+export type BallotCreateNestedManyWithoutTeamInput = {
   connect?: Maybe<Array<BallotWhereUniqueInput>>;
-  connectOrCreate?: Maybe<Array<BallotCreateOrConnectWithoutteamInput>>;
+  connectOrCreate?: Maybe<Array<BallotCreateOrConnectWithoutTeamInput>>;
   create?: Maybe<Array<BallotCreateWithoutTeamInput>>;
+  createMany?: Maybe<BallotCreateManyTeamInputEnvelope>;
 };
 
-export type BallotCreateOneWithoutActivityInput = {
+export type BallotCreateNestedOneWithoutActivityInput = {
   connect?: Maybe<BallotWhereUniqueInput>;
-  connectOrCreate?: Maybe<BallotCreateOrConnectWithoutactivityInput>;
+  connectOrCreate?: Maybe<BallotCreateOrConnectWithoutActivityInput>;
   create?: Maybe<BallotCreateWithoutActivityInput>;
 };
 
-export type BallotCreateOneWithoutAttachmentsInput = {
+export type BallotCreateNestedOneWithoutAttachmentsInput = {
   connect?: Maybe<BallotWhereUniqueInput>;
-  connectOrCreate?: Maybe<BallotCreateOrConnectWithoutattachmentsInput>;
+  connectOrCreate?: Maybe<BallotCreateOrConnectWithoutAttachmentsInput>;
   create?: Maybe<BallotCreateWithoutAttachmentsInput>;
 };
 
-export type BallotCreateOneWithoutBallotRunsInput = {
+export type BallotCreateNestedOneWithoutBallotRunsInput = {
   connect?: Maybe<BallotWhereUniqueInput>;
-  connectOrCreate?: Maybe<BallotCreateOrConnectWithoutballotRunsInput>;
+  connectOrCreate?: Maybe<BallotCreateOrConnectWithoutBallotRunsInput>;
   create?: Maybe<BallotCreateWithoutBallotRunsInput>;
 };
 
-export type BallotCreateOneWithoutDiscussionInput = {
+export type BallotCreateNestedOneWithoutDiscussionInput = {
   connect?: Maybe<BallotWhereUniqueInput>;
-  connectOrCreate?: Maybe<BallotCreateOrConnectWithoutdiscussionInput>;
+  connectOrCreate?: Maybe<BallotCreateOrConnectWithoutDiscussionInput>;
   create?: Maybe<BallotCreateWithoutDiscussionInput>;
 };
 
-export type BallotCreateOneWithoutVotedInput = {
+export type BallotCreateNestedOneWithoutVotedInput = {
   connect?: Maybe<BallotWhereUniqueInput>;
-  connectOrCreate?: Maybe<BallotCreateOrConnectWithoutvotedInput>;
+  connectOrCreate?: Maybe<BallotCreateOrConnectWithoutVotedInput>;
   create?: Maybe<BallotCreateWithoutVotedInput>;
 };
 
-export type BallotCreateOneWithoutVotesInput = {
+export type BallotCreateNestedOneWithoutVotesInput = {
   connect?: Maybe<BallotWhereUniqueInput>;
-  connectOrCreate?: Maybe<BallotCreateOrConnectWithoutvotesInput>;
+  connectOrCreate?: Maybe<BallotCreateOrConnectWithoutVotesInput>;
   create?: Maybe<BallotCreateWithoutVotesInput>;
 };
 
-export type BallotCreateOrConnectWithoutactivityInput = {
+export type BallotCreateOrConnectWithoutActivityInput = {
   create: BallotCreateWithoutActivityInput;
   where: BallotWhereUniqueInput;
 };
 
-export type BallotCreateOrConnectWithoutattachmentsInput = {
+export type BallotCreateOrConnectWithoutAttachmentsInput = {
   create: BallotCreateWithoutAttachmentsInput;
   where: BallotWhereUniqueInput;
 };
 
-export type BallotCreateOrConnectWithoutballotRunsInput = {
+export type BallotCreateOrConnectWithoutBallotRunsInput = {
   create: BallotCreateWithoutBallotRunsInput;
   where: BallotWhereUniqueInput;
 };
 
-export type BallotCreateOrConnectWithoutcreatorInput = {
+export type BallotCreateOrConnectWithoutCreatorInput = {
   create: BallotCreateWithoutCreatorInput;
   where: BallotWhereUniqueInput;
 };
 
-export type BallotCreateOrConnectWithoutdiscussionInput = {
+export type BallotCreateOrConnectWithoutDiscussionInput = {
   create: BallotCreateWithoutDiscussionInput;
   where: BallotWhereUniqueInput;
 };
 
-export type BallotCreateOrConnectWithoutschoolInput = {
+export type BallotCreateOrConnectWithoutSchoolInput = {
   create: BallotCreateWithoutSchoolInput;
   where: BallotWhereUniqueInput;
 };
 
-export type BallotCreateOrConnectWithoutteamInput = {
+export type BallotCreateOrConnectWithoutTeamInput = {
   create: BallotCreateWithoutTeamInput;
   where: BallotWhereUniqueInput;
 };
 
-export type BallotCreateOrConnectWithoutvotedInput = {
+export type BallotCreateOrConnectWithoutVotedInput = {
   create: BallotCreateWithoutVotedInput;
   where: BallotWhereUniqueInput;
 };
 
-export type BallotCreateOrConnectWithoutvotesInput = {
+export type BallotCreateOrConnectWithoutVotesInput = {
   create: BallotCreateWithoutVotesInput;
   where: BallotWhereUniqueInput;
 };
 
 export type BallotCreateWithoutActivityInput = {
-  attachments?: Maybe<AttachmentCreateManyWithoutBallotInput>;
-  ballotRuns?: Maybe<BallotRunCreateManyWithoutBallotInput>;
+  attachments?: Maybe<AttachmentCreateNestedManyWithoutBallotInput>;
+  ballotRuns?: Maybe<BallotRunCreateNestedManyWithoutBallotInput>;
   body: Scalars['String'];
   canton?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['DateTime']>;
-  creator?: Maybe<UserCreateOneWithoutBallotsInput>;
+  creator?: Maybe<UserCreateNestedOneWithoutBallotsInput>;
   description: Scalars['String'];
-  discussion?: Maybe<DiscussionCreateManyWithoutBallotInput>;
+  discussion?: Maybe<DiscussionCreateNestedManyWithoutBallotInput>;
   end: Scalars['DateTime'];
   id?: Maybe<Scalars['String']>;
-  options?: Maybe<OptionCreateManyWithoutBallotInput>;
-  school?: Maybe<SchoolCreateOneWithoutBallotsInput>;
+  options?: Maybe<OptionCreateNestedManyWithoutBallotInput>;
+  school?: Maybe<SchoolCreateNestedOneWithoutBallotsInput>;
   scope?: Maybe<BallotScope>;
   start: Scalars['DateTime'];
-  team?: Maybe<TeamCreateOneWithoutBallotsInput>;
+  team?: Maybe<TeamCreateNestedOneWithoutBallotsInput>;
   title: Scalars['String'];
   updatedAt?: Maybe<Scalars['DateTime']>;
-  voted?: Maybe<VotedCreateManyWithoutBallotInput>;
-  votes?: Maybe<VoteCreateManyWithoutBallotInput>;
+  voted?: Maybe<VotedCreateNestedManyWithoutBallotInput>;
+  votes?: Maybe<VoteCreateNestedManyWithoutBallotInput>;
 };
 
 export type BallotCreateWithoutAttachmentsInput = {
-  activity?: Maybe<ActivityCreateManyWithoutBallotInput>;
-  ballotRuns?: Maybe<BallotRunCreateManyWithoutBallotInput>;
+  activity?: Maybe<ActivityCreateNestedManyWithoutBallotInput>;
+  ballotRuns?: Maybe<BallotRunCreateNestedManyWithoutBallotInput>;
   body: Scalars['String'];
   canton?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['DateTime']>;
-  creator?: Maybe<UserCreateOneWithoutBallotsInput>;
+  creator?: Maybe<UserCreateNestedOneWithoutBallotsInput>;
   description: Scalars['String'];
-  discussion?: Maybe<DiscussionCreateManyWithoutBallotInput>;
+  discussion?: Maybe<DiscussionCreateNestedManyWithoutBallotInput>;
   end: Scalars['DateTime'];
   id?: Maybe<Scalars['String']>;
-  options?: Maybe<OptionCreateManyWithoutBallotInput>;
-  school?: Maybe<SchoolCreateOneWithoutBallotsInput>;
+  options?: Maybe<OptionCreateNestedManyWithoutBallotInput>;
+  school?: Maybe<SchoolCreateNestedOneWithoutBallotsInput>;
   scope?: Maybe<BallotScope>;
   start: Scalars['DateTime'];
-  team?: Maybe<TeamCreateOneWithoutBallotsInput>;
+  team?: Maybe<TeamCreateNestedOneWithoutBallotsInput>;
   title: Scalars['String'];
   updatedAt?: Maybe<Scalars['DateTime']>;
-  voted?: Maybe<VotedCreateManyWithoutBallotInput>;
-  votes?: Maybe<VoteCreateManyWithoutBallotInput>;
+  voted?: Maybe<VotedCreateNestedManyWithoutBallotInput>;
+  votes?: Maybe<VoteCreateNestedManyWithoutBallotInput>;
 };
 
 export type BallotCreateWithoutBallotRunsInput = {
-  activity?: Maybe<ActivityCreateManyWithoutBallotInput>;
-  attachments?: Maybe<AttachmentCreateManyWithoutBallotInput>;
+  activity?: Maybe<ActivityCreateNestedManyWithoutBallotInput>;
+  attachments?: Maybe<AttachmentCreateNestedManyWithoutBallotInput>;
   body: Scalars['String'];
   canton?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['DateTime']>;
-  creator?: Maybe<UserCreateOneWithoutBallotsInput>;
+  creator?: Maybe<UserCreateNestedOneWithoutBallotsInput>;
   description: Scalars['String'];
-  discussion?: Maybe<DiscussionCreateManyWithoutBallotInput>;
+  discussion?: Maybe<DiscussionCreateNestedManyWithoutBallotInput>;
   end: Scalars['DateTime'];
   id?: Maybe<Scalars['String']>;
-  options?: Maybe<OptionCreateManyWithoutBallotInput>;
-  school?: Maybe<SchoolCreateOneWithoutBallotsInput>;
+  options?: Maybe<OptionCreateNestedManyWithoutBallotInput>;
+  school?: Maybe<SchoolCreateNestedOneWithoutBallotsInput>;
   scope?: Maybe<BallotScope>;
   start: Scalars['DateTime'];
-  team?: Maybe<TeamCreateOneWithoutBallotsInput>;
+  team?: Maybe<TeamCreateNestedOneWithoutBallotsInput>;
   title: Scalars['String'];
   updatedAt?: Maybe<Scalars['DateTime']>;
-  voted?: Maybe<VotedCreateManyWithoutBallotInput>;
-  votes?: Maybe<VoteCreateManyWithoutBallotInput>;
+  voted?: Maybe<VotedCreateNestedManyWithoutBallotInput>;
+  votes?: Maybe<VoteCreateNestedManyWithoutBallotInput>;
 };
 
 export type BallotCreateWithoutCreatorInput = {
-  activity?: Maybe<ActivityCreateManyWithoutBallotInput>;
-  attachments?: Maybe<AttachmentCreateManyWithoutBallotInput>;
-  ballotRuns?: Maybe<BallotRunCreateManyWithoutBallotInput>;
+  activity?: Maybe<ActivityCreateNestedManyWithoutBallotInput>;
+  attachments?: Maybe<AttachmentCreateNestedManyWithoutBallotInput>;
+  ballotRuns?: Maybe<BallotRunCreateNestedManyWithoutBallotInput>;
   body: Scalars['String'];
   canton?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['DateTime']>;
   description: Scalars['String'];
-  discussion?: Maybe<DiscussionCreateManyWithoutBallotInput>;
+  discussion?: Maybe<DiscussionCreateNestedManyWithoutBallotInput>;
   end: Scalars['DateTime'];
   id?: Maybe<Scalars['String']>;
-  options?: Maybe<OptionCreateManyWithoutBallotInput>;
-  school?: Maybe<SchoolCreateOneWithoutBallotsInput>;
+  options?: Maybe<OptionCreateNestedManyWithoutBallotInput>;
+  school?: Maybe<SchoolCreateNestedOneWithoutBallotsInput>;
   scope?: Maybe<BallotScope>;
   start: Scalars['DateTime'];
-  team?: Maybe<TeamCreateOneWithoutBallotsInput>;
+  team?: Maybe<TeamCreateNestedOneWithoutBallotsInput>;
   title: Scalars['String'];
   updatedAt?: Maybe<Scalars['DateTime']>;
-  voted?: Maybe<VotedCreateManyWithoutBallotInput>;
-  votes?: Maybe<VoteCreateManyWithoutBallotInput>;
+  voted?: Maybe<VotedCreateNestedManyWithoutBallotInput>;
+  votes?: Maybe<VoteCreateNestedManyWithoutBallotInput>;
 };
 
 export type BallotCreateWithoutDiscussionInput = {
-  activity?: Maybe<ActivityCreateManyWithoutBallotInput>;
-  attachments?: Maybe<AttachmentCreateManyWithoutBallotInput>;
-  ballotRuns?: Maybe<BallotRunCreateManyWithoutBallotInput>;
+  activity?: Maybe<ActivityCreateNestedManyWithoutBallotInput>;
+  attachments?: Maybe<AttachmentCreateNestedManyWithoutBallotInput>;
+  ballotRuns?: Maybe<BallotRunCreateNestedManyWithoutBallotInput>;
   body: Scalars['String'];
   canton?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['DateTime']>;
-  creator?: Maybe<UserCreateOneWithoutBallotsInput>;
+  creator?: Maybe<UserCreateNestedOneWithoutBallotsInput>;
   description: Scalars['String'];
   end: Scalars['DateTime'];
   id?: Maybe<Scalars['String']>;
-  options?: Maybe<OptionCreateManyWithoutBallotInput>;
-  school?: Maybe<SchoolCreateOneWithoutBallotsInput>;
+  options?: Maybe<OptionCreateNestedManyWithoutBallotInput>;
+  school?: Maybe<SchoolCreateNestedOneWithoutBallotsInput>;
   scope?: Maybe<BallotScope>;
   start: Scalars['DateTime'];
-  team?: Maybe<TeamCreateOneWithoutBallotsInput>;
+  team?: Maybe<TeamCreateNestedOneWithoutBallotsInput>;
   title: Scalars['String'];
   updatedAt?: Maybe<Scalars['DateTime']>;
-  voted?: Maybe<VotedCreateManyWithoutBallotInput>;
-  votes?: Maybe<VoteCreateManyWithoutBallotInput>;
+  voted?: Maybe<VotedCreateNestedManyWithoutBallotInput>;
+  votes?: Maybe<VoteCreateNestedManyWithoutBallotInput>;
 };
 
 export type BallotCreateWithoutSchoolInput = {
-  activity?: Maybe<ActivityCreateManyWithoutBallotInput>;
-  attachments?: Maybe<AttachmentCreateManyWithoutBallotInput>;
-  ballotRuns?: Maybe<BallotRunCreateManyWithoutBallotInput>;
+  activity?: Maybe<ActivityCreateNestedManyWithoutBallotInput>;
+  attachments?: Maybe<AttachmentCreateNestedManyWithoutBallotInput>;
+  ballotRuns?: Maybe<BallotRunCreateNestedManyWithoutBallotInput>;
   body: Scalars['String'];
   canton?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['DateTime']>;
-  creator?: Maybe<UserCreateOneWithoutBallotsInput>;
+  creator?: Maybe<UserCreateNestedOneWithoutBallotsInput>;
   description: Scalars['String'];
-  discussion?: Maybe<DiscussionCreateManyWithoutBallotInput>;
+  discussion?: Maybe<DiscussionCreateNestedManyWithoutBallotInput>;
   end: Scalars['DateTime'];
   id?: Maybe<Scalars['String']>;
-  options?: Maybe<OptionCreateManyWithoutBallotInput>;
+  options?: Maybe<OptionCreateNestedManyWithoutBallotInput>;
   scope?: Maybe<BallotScope>;
   start: Scalars['DateTime'];
-  team?: Maybe<TeamCreateOneWithoutBallotsInput>;
+  team?: Maybe<TeamCreateNestedOneWithoutBallotsInput>;
   title: Scalars['String'];
   updatedAt?: Maybe<Scalars['DateTime']>;
-  voted?: Maybe<VotedCreateManyWithoutBallotInput>;
-  votes?: Maybe<VoteCreateManyWithoutBallotInput>;
+  voted?: Maybe<VotedCreateNestedManyWithoutBallotInput>;
+  votes?: Maybe<VoteCreateNestedManyWithoutBallotInput>;
 };
 
 export type BallotCreateWithoutTeamInput = {
-  activity?: Maybe<ActivityCreateManyWithoutBallotInput>;
-  attachments?: Maybe<AttachmentCreateManyWithoutBallotInput>;
-  ballotRuns?: Maybe<BallotRunCreateManyWithoutBallotInput>;
+  activity?: Maybe<ActivityCreateNestedManyWithoutBallotInput>;
+  attachments?: Maybe<AttachmentCreateNestedManyWithoutBallotInput>;
+  ballotRuns?: Maybe<BallotRunCreateNestedManyWithoutBallotInput>;
   body: Scalars['String'];
   canton?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['DateTime']>;
-  creator?: Maybe<UserCreateOneWithoutBallotsInput>;
+  creator?: Maybe<UserCreateNestedOneWithoutBallotsInput>;
   description: Scalars['String'];
-  discussion?: Maybe<DiscussionCreateManyWithoutBallotInput>;
+  discussion?: Maybe<DiscussionCreateNestedManyWithoutBallotInput>;
   end: Scalars['DateTime'];
   id?: Maybe<Scalars['String']>;
-  options?: Maybe<OptionCreateManyWithoutBallotInput>;
-  school?: Maybe<SchoolCreateOneWithoutBallotsInput>;
+  options?: Maybe<OptionCreateNestedManyWithoutBallotInput>;
+  school?: Maybe<SchoolCreateNestedOneWithoutBallotsInput>;
   scope?: Maybe<BallotScope>;
   start: Scalars['DateTime'];
   title: Scalars['String'];
   updatedAt?: Maybe<Scalars['DateTime']>;
-  voted?: Maybe<VotedCreateManyWithoutBallotInput>;
-  votes?: Maybe<VoteCreateManyWithoutBallotInput>;
+  voted?: Maybe<VotedCreateNestedManyWithoutBallotInput>;
+  votes?: Maybe<VoteCreateNestedManyWithoutBallotInput>;
 };
 
 export type BallotCreateWithoutVotedInput = {
-  activity?: Maybe<ActivityCreateManyWithoutBallotInput>;
-  attachments?: Maybe<AttachmentCreateManyWithoutBallotInput>;
-  ballotRuns?: Maybe<BallotRunCreateManyWithoutBallotInput>;
+  activity?: Maybe<ActivityCreateNestedManyWithoutBallotInput>;
+  attachments?: Maybe<AttachmentCreateNestedManyWithoutBallotInput>;
+  ballotRuns?: Maybe<BallotRunCreateNestedManyWithoutBallotInput>;
   body: Scalars['String'];
   canton?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['DateTime']>;
-  creator?: Maybe<UserCreateOneWithoutBallotsInput>;
+  creator?: Maybe<UserCreateNestedOneWithoutBallotsInput>;
   description: Scalars['String'];
-  discussion?: Maybe<DiscussionCreateManyWithoutBallotInput>;
+  discussion?: Maybe<DiscussionCreateNestedManyWithoutBallotInput>;
   end: Scalars['DateTime'];
   id?: Maybe<Scalars['String']>;
-  options?: Maybe<OptionCreateManyWithoutBallotInput>;
-  school?: Maybe<SchoolCreateOneWithoutBallotsInput>;
+  options?: Maybe<OptionCreateNestedManyWithoutBallotInput>;
+  school?: Maybe<SchoolCreateNestedOneWithoutBallotsInput>;
   scope?: Maybe<BallotScope>;
   start: Scalars['DateTime'];
-  team?: Maybe<TeamCreateOneWithoutBallotsInput>;
+  team?: Maybe<TeamCreateNestedOneWithoutBallotsInput>;
   title: Scalars['String'];
   updatedAt?: Maybe<Scalars['DateTime']>;
-  votes?: Maybe<VoteCreateManyWithoutBallotInput>;
+  votes?: Maybe<VoteCreateNestedManyWithoutBallotInput>;
 };
 
 export type BallotCreateWithoutVotesInput = {
-  activity?: Maybe<ActivityCreateManyWithoutBallotInput>;
-  attachments?: Maybe<AttachmentCreateManyWithoutBallotInput>;
-  ballotRuns?: Maybe<BallotRunCreateManyWithoutBallotInput>;
+  activity?: Maybe<ActivityCreateNestedManyWithoutBallotInput>;
+  attachments?: Maybe<AttachmentCreateNestedManyWithoutBallotInput>;
+  ballotRuns?: Maybe<BallotRunCreateNestedManyWithoutBallotInput>;
   body: Scalars['String'];
   canton?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['DateTime']>;
-  creator?: Maybe<UserCreateOneWithoutBallotsInput>;
+  creator?: Maybe<UserCreateNestedOneWithoutBallotsInput>;
   description: Scalars['String'];
-  discussion?: Maybe<DiscussionCreateManyWithoutBallotInput>;
+  discussion?: Maybe<DiscussionCreateNestedManyWithoutBallotInput>;
   end: Scalars['DateTime'];
   id?: Maybe<Scalars['String']>;
-  options?: Maybe<OptionCreateManyWithoutBallotInput>;
-  school?: Maybe<SchoolCreateOneWithoutBallotsInput>;
+  options?: Maybe<OptionCreateNestedManyWithoutBallotInput>;
+  school?: Maybe<SchoolCreateNestedOneWithoutBallotsInput>;
   scope?: Maybe<BallotScope>;
   start: Scalars['DateTime'];
-  team?: Maybe<TeamCreateOneWithoutBallotsInput>;
+  team?: Maybe<TeamCreateNestedOneWithoutBallotsInput>;
   title: Scalars['String'];
   updatedAt?: Maybe<Scalars['DateTime']>;
-  voted?: Maybe<VotedCreateManyWithoutBallotInput>;
-};
-
-export type BallotIdTeamIdCompoundUniqueInput = {
-  ballotId: Scalars['String'];
-  teamId: Scalars['String'];
+  voted?: Maybe<VotedCreateNestedManyWithoutBallotInput>;
 };
 
 export type BallotListRelationFilter = {
@@ -1393,38 +1709,69 @@ export type BallotRun = {
   end?: Maybe<Scalars['DateTime']>;
   id: Scalars['String'];
   start?: Maybe<Scalars['DateTime']>;
-  team: Team;
+  team?: Maybe<Team>;
 };
 
-export type BallotRunCreateManyWithoutBallotInput = {
+export type BallotRunBallotIdTeamIdCompoundUniqueInput = {
+  ballotId: Scalars['String'];
+  teamId: Scalars['String'];
+};
+
+export type BallotRunCreateManyBallotInput = {
+  end?: Maybe<Scalars['DateTime']>;
+  id?: Maybe<Scalars['String']>;
+  start?: Maybe<Scalars['DateTime']>;
+  teamId: Scalars['String'];
+};
+
+export type BallotRunCreateManyBallotInputEnvelope = {
+  data?: Maybe<Array<BallotRunCreateManyBallotInput>>;
+  skipDuplicates?: Maybe<Scalars['Boolean']>;
+};
+
+export type BallotRunCreateManyTeamInput = {
+  ballotId: Scalars['String'];
+  end?: Maybe<Scalars['DateTime']>;
+  id?: Maybe<Scalars['String']>;
+  start?: Maybe<Scalars['DateTime']>;
+};
+
+export type BallotRunCreateManyTeamInputEnvelope = {
+  data?: Maybe<Array<BallotRunCreateManyTeamInput>>;
+  skipDuplicates?: Maybe<Scalars['Boolean']>;
+};
+
+export type BallotRunCreateNestedManyWithoutBallotInput = {
   connect?: Maybe<Array<BallotRunWhereUniqueInput>>;
-  connectOrCreate?: Maybe<Array<BallotRunCreateOrConnectWithoutballotInput>>;
+  connectOrCreate?: Maybe<Array<BallotRunCreateOrConnectWithoutBallotInput>>;
   create?: Maybe<Array<BallotRunCreateWithoutBallotInput>>;
+  createMany?: Maybe<BallotRunCreateManyBallotInputEnvelope>;
 };
 
-export type BallotRunCreateManyWithoutTeamInput = {
+export type BallotRunCreateNestedManyWithoutTeamInput = {
   connect?: Maybe<Array<BallotRunWhereUniqueInput>>;
-  connectOrCreate?: Maybe<Array<BallotRunCreateOrConnectWithoutteamInput>>;
+  connectOrCreate?: Maybe<Array<BallotRunCreateOrConnectWithoutTeamInput>>;
   create?: Maybe<Array<BallotRunCreateWithoutTeamInput>>;
+  createMany?: Maybe<BallotRunCreateManyTeamInputEnvelope>;
 };
 
-export type BallotRunCreateOneWithoutVoteInput = {
+export type BallotRunCreateNestedOneWithoutVoteInput = {
   connect?: Maybe<BallotRunWhereUniqueInput>;
-  connectOrCreate?: Maybe<BallotRunCreateOrConnectWithoutvoteInput>;
+  connectOrCreate?: Maybe<BallotRunCreateOrConnectWithoutVoteInput>;
   create?: Maybe<BallotRunCreateWithoutVoteInput>;
 };
 
-export type BallotRunCreateOrConnectWithoutballotInput = {
+export type BallotRunCreateOrConnectWithoutBallotInput = {
   create: BallotRunCreateWithoutBallotInput;
   where: BallotRunWhereUniqueInput;
 };
 
-export type BallotRunCreateOrConnectWithoutteamInput = {
+export type BallotRunCreateOrConnectWithoutTeamInput = {
   create: BallotRunCreateWithoutTeamInput;
   where: BallotRunWhereUniqueInput;
 };
 
-export type BallotRunCreateOrConnectWithoutvoteInput = {
+export type BallotRunCreateOrConnectWithoutVoteInput = {
   create: BallotRunCreateWithoutVoteInput;
   where: BallotRunWhereUniqueInput;
 };
@@ -1433,24 +1780,24 @@ export type BallotRunCreateWithoutBallotInput = {
   end?: Maybe<Scalars['DateTime']>;
   id?: Maybe<Scalars['String']>;
   start?: Maybe<Scalars['DateTime']>;
-  team: TeamCreateOneWithoutBallotRunsInput;
-  vote?: Maybe<VoteCreateManyWithoutBallotRunInput>;
+  team: TeamCreateNestedOneWithoutBallotRunsInput;
+  vote?: Maybe<VoteCreateNestedManyWithoutBallotRunInput>;
 };
 
 export type BallotRunCreateWithoutTeamInput = {
-  ballot: BallotCreateOneWithoutBallotRunsInput;
+  ballot: BallotCreateNestedOneWithoutBallotRunsInput;
   end?: Maybe<Scalars['DateTime']>;
   id?: Maybe<Scalars['String']>;
   start?: Maybe<Scalars['DateTime']>;
-  vote?: Maybe<VoteCreateManyWithoutBallotRunInput>;
+  vote?: Maybe<VoteCreateNestedManyWithoutBallotRunInput>;
 };
 
 export type BallotRunCreateWithoutVoteInput = {
-  ballot: BallotCreateOneWithoutBallotRunsInput;
+  ballot: BallotCreateNestedOneWithoutBallotRunsInput;
   end?: Maybe<Scalars['DateTime']>;
   id?: Maybe<Scalars['String']>;
   start?: Maybe<Scalars['DateTime']>;
-  team: TeamCreateOneWithoutBallotRunsInput;
+  team: TeamCreateNestedOneWithoutBallotRunsInput;
 };
 
 export type BallotRunListRelationFilter = {
@@ -1478,8 +1825,9 @@ export type BallotRunUpdateManyMutationInput = {
 
 export type BallotRunUpdateManyWithoutBallotInput = {
   connect?: Maybe<Array<BallotRunWhereUniqueInput>>;
-  connectOrCreate?: Maybe<Array<BallotRunCreateOrConnectWithoutballotInput>>;
+  connectOrCreate?: Maybe<Array<BallotRunCreateOrConnectWithoutBallotInput>>;
   create?: Maybe<Array<BallotRunCreateWithoutBallotInput>>;
+  createMany?: Maybe<BallotRunCreateManyBallotInputEnvelope>;
   delete?: Maybe<Array<BallotRunWhereUniqueInput>>;
   deleteMany?: Maybe<Array<BallotRunScalarWhereInput>>;
   disconnect?: Maybe<Array<BallotRunWhereUniqueInput>>;
@@ -1491,8 +1839,9 @@ export type BallotRunUpdateManyWithoutBallotInput = {
 
 export type BallotRunUpdateManyWithoutTeamInput = {
   connect?: Maybe<Array<BallotRunWhereUniqueInput>>;
-  connectOrCreate?: Maybe<Array<BallotRunCreateOrConnectWithoutteamInput>>;
+  connectOrCreate?: Maybe<Array<BallotRunCreateOrConnectWithoutTeamInput>>;
   create?: Maybe<Array<BallotRunCreateWithoutTeamInput>>;
+  createMany?: Maybe<BallotRunCreateManyTeamInputEnvelope>;
   delete?: Maybe<Array<BallotRunWhereUniqueInput>>;
   deleteMany?: Maybe<Array<BallotRunScalarWhereInput>>;
   disconnect?: Maybe<Array<BallotRunWhereUniqueInput>>;
@@ -1514,7 +1863,7 @@ export type BallotRunUpdateManyWithWhereWithoutTeamInput = {
 
 export type BallotRunUpdateOneWithoutVoteInput = {
   connect?: Maybe<BallotRunWhereUniqueInput>;
-  connectOrCreate?: Maybe<BallotRunCreateOrConnectWithoutvoteInput>;
+  connectOrCreate?: Maybe<BallotRunCreateOrConnectWithoutVoteInput>;
   create?: Maybe<BallotRunCreateWithoutVoteInput>;
   delete?: Maybe<Scalars['Boolean']>;
   disconnect?: Maybe<Scalars['Boolean']>;
@@ -1588,7 +1937,7 @@ export type BallotRunWhereInput = {
 };
 
 export type BallotRunWhereUniqueInput = {
-  ballotId_teamId?: Maybe<BallotIdTeamIdCompoundUniqueInput>;
+  ballotId_teamId?: Maybe<BallotRunBallotIdTeamIdCompoundUniqueInput>;
   id?: Maybe<Scalars['String']>;
 };
 
@@ -1634,8 +1983,9 @@ export type BallotUpdateManyMutationInput = {
 
 export type BallotUpdateManyWithoutCreatorInput = {
   connect?: Maybe<Array<BallotWhereUniqueInput>>;
-  connectOrCreate?: Maybe<Array<BallotCreateOrConnectWithoutcreatorInput>>;
+  connectOrCreate?: Maybe<Array<BallotCreateOrConnectWithoutCreatorInput>>;
   create?: Maybe<Array<BallotCreateWithoutCreatorInput>>;
+  createMany?: Maybe<BallotCreateManyCreatorInputEnvelope>;
   delete?: Maybe<Array<BallotWhereUniqueInput>>;
   deleteMany?: Maybe<Array<BallotScalarWhereInput>>;
   disconnect?: Maybe<Array<BallotWhereUniqueInput>>;
@@ -1647,8 +1997,9 @@ export type BallotUpdateManyWithoutCreatorInput = {
 
 export type BallotUpdateManyWithoutSchoolInput = {
   connect?: Maybe<Array<BallotWhereUniqueInput>>;
-  connectOrCreate?: Maybe<Array<BallotCreateOrConnectWithoutschoolInput>>;
+  connectOrCreate?: Maybe<Array<BallotCreateOrConnectWithoutSchoolInput>>;
   create?: Maybe<Array<BallotCreateWithoutSchoolInput>>;
+  createMany?: Maybe<BallotCreateManySchoolInputEnvelope>;
   delete?: Maybe<Array<BallotWhereUniqueInput>>;
   deleteMany?: Maybe<Array<BallotScalarWhereInput>>;
   disconnect?: Maybe<Array<BallotWhereUniqueInput>>;
@@ -1660,8 +2011,9 @@ export type BallotUpdateManyWithoutSchoolInput = {
 
 export type BallotUpdateManyWithoutTeamInput = {
   connect?: Maybe<Array<BallotWhereUniqueInput>>;
-  connectOrCreate?: Maybe<Array<BallotCreateOrConnectWithoutteamInput>>;
+  connectOrCreate?: Maybe<Array<BallotCreateOrConnectWithoutTeamInput>>;
   create?: Maybe<Array<BallotCreateWithoutTeamInput>>;
+  createMany?: Maybe<BallotCreateManyTeamInputEnvelope>;
   delete?: Maybe<Array<BallotWhereUniqueInput>>;
   deleteMany?: Maybe<Array<BallotScalarWhereInput>>;
   disconnect?: Maybe<Array<BallotWhereUniqueInput>>;
@@ -1688,7 +2040,7 @@ export type BallotUpdateManyWithWhereWithoutTeamInput = {
 
 export type BallotUpdateOneRequiredWithoutBallotRunsInput = {
   connect?: Maybe<BallotWhereUniqueInput>;
-  connectOrCreate?: Maybe<BallotCreateOrConnectWithoutballotRunsInput>;
+  connectOrCreate?: Maybe<BallotCreateOrConnectWithoutBallotRunsInput>;
   create?: Maybe<BallotCreateWithoutBallotRunsInput>;
   update?: Maybe<BallotUpdateWithoutBallotRunsInput>;
   upsert?: Maybe<BallotUpsertWithoutBallotRunsInput>;
@@ -1696,7 +2048,7 @@ export type BallotUpdateOneRequiredWithoutBallotRunsInput = {
 
 export type BallotUpdateOneRequiredWithoutVotedInput = {
   connect?: Maybe<BallotWhereUniqueInput>;
-  connectOrCreate?: Maybe<BallotCreateOrConnectWithoutvotedInput>;
+  connectOrCreate?: Maybe<BallotCreateOrConnectWithoutVotedInput>;
   create?: Maybe<BallotCreateWithoutVotedInput>;
   update?: Maybe<BallotUpdateWithoutVotedInput>;
   upsert?: Maybe<BallotUpsertWithoutVotedInput>;
@@ -1704,7 +2056,7 @@ export type BallotUpdateOneRequiredWithoutVotedInput = {
 
 export type BallotUpdateOneRequiredWithoutVotesInput = {
   connect?: Maybe<BallotWhereUniqueInput>;
-  connectOrCreate?: Maybe<BallotCreateOrConnectWithoutvotesInput>;
+  connectOrCreate?: Maybe<BallotCreateOrConnectWithoutVotesInput>;
   create?: Maybe<BallotCreateWithoutVotesInput>;
   update?: Maybe<BallotUpdateWithoutVotesInput>;
   upsert?: Maybe<BallotUpsertWithoutVotesInput>;
@@ -1712,7 +2064,7 @@ export type BallotUpdateOneRequiredWithoutVotesInput = {
 
 export type BallotUpdateOneWithoutActivityInput = {
   connect?: Maybe<BallotWhereUniqueInput>;
-  connectOrCreate?: Maybe<BallotCreateOrConnectWithoutactivityInput>;
+  connectOrCreate?: Maybe<BallotCreateOrConnectWithoutActivityInput>;
   create?: Maybe<BallotCreateWithoutActivityInput>;
   delete?: Maybe<Scalars['Boolean']>;
   disconnect?: Maybe<Scalars['Boolean']>;
@@ -1722,7 +2074,7 @@ export type BallotUpdateOneWithoutActivityInput = {
 
 export type BallotUpdateOneWithoutAttachmentsInput = {
   connect?: Maybe<BallotWhereUniqueInput>;
-  connectOrCreate?: Maybe<BallotCreateOrConnectWithoutattachmentsInput>;
+  connectOrCreate?: Maybe<BallotCreateOrConnectWithoutAttachmentsInput>;
   create?: Maybe<BallotCreateWithoutAttachmentsInput>;
   delete?: Maybe<Scalars['Boolean']>;
   disconnect?: Maybe<Scalars['Boolean']>;
@@ -1732,7 +2084,7 @@ export type BallotUpdateOneWithoutAttachmentsInput = {
 
 export type BallotUpdateOneWithoutDiscussionInput = {
   connect?: Maybe<BallotWhereUniqueInput>;
-  connectOrCreate?: Maybe<BallotCreateOrConnectWithoutdiscussionInput>;
+  connectOrCreate?: Maybe<BallotCreateOrConnectWithoutDiscussionInput>;
   create?: Maybe<BallotCreateWithoutDiscussionInput>;
   delete?: Maybe<Scalars['Boolean']>;
   disconnect?: Maybe<Scalars['Boolean']>;
@@ -2098,12 +2450,12 @@ export type Discussion = {
   ballotId?: Maybe<Scalars['String']>;
   card?: Maybe<Scalars['String']>;
   children?: Maybe<Array<Maybe<Discussion>>>;
-  createdAt: Scalars['DateTime'];
+  createdAt?: Maybe<Scalars['DateTime']>;
   id: Scalars['String'];
   reactions: Array<Reaction>;
   text: Scalars['String'];
   title: Scalars['String'];
-  updatedAt: Scalars['DateTime'];
+  updatedAt?: Maybe<Scalars['DateTime']>;
   user: User;
 };
 
@@ -2123,45 +2475,117 @@ export type DiscussionReactionsArgs = {
   last?: Maybe<Scalars['Int']>;
 };
 
-export type DiscussionCreateManyWithoutBallotInput = {
+export type DiscussionCreateManyBallotInput = {
+  card?: Maybe<Scalars['String']>;
+  createdAt?: Maybe<Scalars['DateTime']>;
+  id?: Maybe<Scalars['String']>;
+  schoolId?: Maybe<Scalars['String']>;
+  teamId: Scalars['String'];
+  text?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
+  updatedAt?: Maybe<Scalars['DateTime']>;
+  userId: Scalars['String'];
+};
+
+export type DiscussionCreateManyBallotInputEnvelope = {
+  data?: Maybe<Array<DiscussionCreateManyBallotInput>>;
+  skipDuplicates?: Maybe<Scalars['Boolean']>;
+};
+
+export type DiscussionCreateManySchoolInput = {
+  ballotId?: Maybe<Scalars['String']>;
+  card?: Maybe<Scalars['String']>;
+  createdAt?: Maybe<Scalars['DateTime']>;
+  id?: Maybe<Scalars['String']>;
+  teamId: Scalars['String'];
+  text?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
+  updatedAt?: Maybe<Scalars['DateTime']>;
+  userId: Scalars['String'];
+};
+
+export type DiscussionCreateManySchoolInputEnvelope = {
+  data?: Maybe<Array<DiscussionCreateManySchoolInput>>;
+  skipDuplicates?: Maybe<Scalars['Boolean']>;
+};
+
+export type DiscussionCreateManyTeamInput = {
+  ballotId?: Maybe<Scalars['String']>;
+  card?: Maybe<Scalars['String']>;
+  createdAt?: Maybe<Scalars['DateTime']>;
+  id?: Maybe<Scalars['String']>;
+  schoolId?: Maybe<Scalars['String']>;
+  text?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
+  updatedAt?: Maybe<Scalars['DateTime']>;
+  userId: Scalars['String'];
+};
+
+export type DiscussionCreateManyTeamInputEnvelope = {
+  data?: Maybe<Array<DiscussionCreateManyTeamInput>>;
+  skipDuplicates?: Maybe<Scalars['Boolean']>;
+};
+
+export type DiscussionCreateManyUserInput = {
+  ballotId?: Maybe<Scalars['String']>;
+  card?: Maybe<Scalars['String']>;
+  createdAt?: Maybe<Scalars['DateTime']>;
+  id?: Maybe<Scalars['String']>;
+  schoolId?: Maybe<Scalars['String']>;
+  teamId: Scalars['String'];
+  text?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
+  updatedAt?: Maybe<Scalars['DateTime']>;
+};
+
+export type DiscussionCreateManyUserInputEnvelope = {
+  data?: Maybe<Array<DiscussionCreateManyUserInput>>;
+  skipDuplicates?: Maybe<Scalars['Boolean']>;
+};
+
+export type DiscussionCreateNestedManyWithoutBallotInput = {
   connect?: Maybe<Array<DiscussionWhereUniqueInput>>;
-  connectOrCreate?: Maybe<Array<DiscussionCreateOrConnectWithoutballotInput>>;
+  connectOrCreate?: Maybe<Array<DiscussionCreateOrConnectWithoutBallotInput>>;
   create?: Maybe<Array<DiscussionCreateWithoutBallotInput>>;
+  createMany?: Maybe<DiscussionCreateManyBallotInputEnvelope>;
 };
 
-export type DiscussionCreateManyWithoutSchoolInput = {
+export type DiscussionCreateNestedManyWithoutSchoolInput = {
   connect?: Maybe<Array<DiscussionWhereUniqueInput>>;
-  connectOrCreate?: Maybe<Array<DiscussionCreateOrConnectWithoutschoolInput>>;
+  connectOrCreate?: Maybe<Array<DiscussionCreateOrConnectWithoutSchoolInput>>;
   create?: Maybe<Array<DiscussionCreateWithoutSchoolInput>>;
+  createMany?: Maybe<DiscussionCreateManySchoolInputEnvelope>;
 };
 
-export type DiscussionCreateManyWithoutTeamInput = {
+export type DiscussionCreateNestedManyWithoutTeamInput = {
   connect?: Maybe<Array<DiscussionWhereUniqueInput>>;
-  connectOrCreate?: Maybe<Array<DiscussionCreateOrConnectWithoutteamInput>>;
+  connectOrCreate?: Maybe<Array<DiscussionCreateOrConnectWithoutTeamInput>>;
   create?: Maybe<Array<DiscussionCreateWithoutTeamInput>>;
+  createMany?: Maybe<DiscussionCreateManyTeamInputEnvelope>;
 };
 
-export type DiscussionCreateManyWithoutUserInput = {
+export type DiscussionCreateNestedManyWithoutUserInput = {
   connect?: Maybe<Array<DiscussionWhereUniqueInput>>;
-  connectOrCreate?: Maybe<Array<DiscussionCreateOrConnectWithoutuserInput>>;
+  connectOrCreate?: Maybe<Array<DiscussionCreateOrConnectWithoutUserInput>>;
   create?: Maybe<Array<DiscussionCreateWithoutUserInput>>;
+  createMany?: Maybe<DiscussionCreateManyUserInputEnvelope>;
 };
 
-export type DiscussionCreateOneWithoutActivityInput = {
+export type DiscussionCreateNestedOneWithoutActivityInput = {
   connect?: Maybe<DiscussionWhereUniqueInput>;
   connectOrCreate?: Maybe<DiscussionCreateOrConnectWithoutActivityInput>;
   create?: Maybe<DiscussionCreateWithoutActivityInput>;
 };
 
-export type DiscussionCreateOneWithoutAttachmentsInput = {
+export type DiscussionCreateNestedOneWithoutAttachmentsInput = {
   connect?: Maybe<DiscussionWhereUniqueInput>;
-  connectOrCreate?: Maybe<DiscussionCreateOrConnectWithoutattachmentsInput>;
+  connectOrCreate?: Maybe<DiscussionCreateOrConnectWithoutAttachmentsInput>;
   create?: Maybe<DiscussionCreateWithoutAttachmentsInput>;
 };
 
-export type DiscussionCreateOneWithoutReactionsInput = {
+export type DiscussionCreateNestedOneWithoutReactionsInput = {
   connect?: Maybe<DiscussionWhereUniqueInput>;
-  connectOrCreate?: Maybe<DiscussionCreateOrConnectWithoutreactionsInput>;
+  connectOrCreate?: Maybe<DiscussionCreateOrConnectWithoutReactionsInput>;
   create?: Maybe<DiscussionCreateWithoutReactionsInput>;
 };
 
@@ -2170,136 +2594,136 @@ export type DiscussionCreateOrConnectWithoutActivityInput = {
   where: DiscussionWhereUniqueInput;
 };
 
-export type DiscussionCreateOrConnectWithoutattachmentsInput = {
+export type DiscussionCreateOrConnectWithoutAttachmentsInput = {
   create: DiscussionCreateWithoutAttachmentsInput;
   where: DiscussionWhereUniqueInput;
 };
 
-export type DiscussionCreateOrConnectWithoutballotInput = {
+export type DiscussionCreateOrConnectWithoutBallotInput = {
   create: DiscussionCreateWithoutBallotInput;
   where: DiscussionWhereUniqueInput;
 };
 
-export type DiscussionCreateOrConnectWithoutreactionsInput = {
+export type DiscussionCreateOrConnectWithoutReactionsInput = {
   create: DiscussionCreateWithoutReactionsInput;
   where: DiscussionWhereUniqueInput;
 };
 
-export type DiscussionCreateOrConnectWithoutschoolInput = {
+export type DiscussionCreateOrConnectWithoutSchoolInput = {
   create: DiscussionCreateWithoutSchoolInput;
   where: DiscussionWhereUniqueInput;
 };
 
-export type DiscussionCreateOrConnectWithoutteamInput = {
+export type DiscussionCreateOrConnectWithoutTeamInput = {
   create: DiscussionCreateWithoutTeamInput;
   where: DiscussionWhereUniqueInput;
 };
 
-export type DiscussionCreateOrConnectWithoutuserInput = {
+export type DiscussionCreateOrConnectWithoutUserInput = {
   create: DiscussionCreateWithoutUserInput;
   where: DiscussionWhereUniqueInput;
 };
 
 export type DiscussionCreateWithoutActivityInput = {
-  attachments?: Maybe<AttachmentCreateManyWithoutDiscussionInput>;
-  ballot?: Maybe<BallotCreateOneWithoutDiscussionInput>;
+  attachments?: Maybe<AttachmentCreateNestedManyWithoutDiscussionInput>;
+  ballot?: Maybe<BallotCreateNestedOneWithoutDiscussionInput>;
   card?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['DateTime']>;
   id?: Maybe<Scalars['String']>;
-  reactions?: Maybe<ReactionCreateManyWithoutDiscussionInput>;
-  school?: Maybe<SchoolCreateOneWithoutDiscussionInput>;
-  team: TeamCreateOneWithoutDiscussionInput;
+  reactions?: Maybe<ReactionCreateNestedManyWithoutDiscussionInput>;
+  school?: Maybe<SchoolCreateNestedOneWithoutDiscussionInput>;
+  team: TeamCreateNestedOneWithoutDiscussionInput;
   text?: Maybe<Scalars['String']>;
   title?: Maybe<Scalars['String']>;
   updatedAt?: Maybe<Scalars['DateTime']>;
-  user: UserCreateOneWithoutDiscussionsInput;
+  user: UserCreateNestedOneWithoutDiscussionsInput;
 };
 
 export type DiscussionCreateWithoutAttachmentsInput = {
-  Activity?: Maybe<ActivityCreateManyWithoutDiscussionInput>;
-  ballot?: Maybe<BallotCreateOneWithoutDiscussionInput>;
+  Activity?: Maybe<ActivityCreateNestedManyWithoutDiscussionInput>;
+  ballot?: Maybe<BallotCreateNestedOneWithoutDiscussionInput>;
   card?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['DateTime']>;
   id?: Maybe<Scalars['String']>;
-  reactions?: Maybe<ReactionCreateManyWithoutDiscussionInput>;
-  school?: Maybe<SchoolCreateOneWithoutDiscussionInput>;
-  team: TeamCreateOneWithoutDiscussionInput;
+  reactions?: Maybe<ReactionCreateNestedManyWithoutDiscussionInput>;
+  school?: Maybe<SchoolCreateNestedOneWithoutDiscussionInput>;
+  team: TeamCreateNestedOneWithoutDiscussionInput;
   text?: Maybe<Scalars['String']>;
   title?: Maybe<Scalars['String']>;
   updatedAt?: Maybe<Scalars['DateTime']>;
-  user: UserCreateOneWithoutDiscussionsInput;
+  user: UserCreateNestedOneWithoutDiscussionsInput;
 };
 
 export type DiscussionCreateWithoutBallotInput = {
-  Activity?: Maybe<ActivityCreateManyWithoutDiscussionInput>;
-  attachments?: Maybe<AttachmentCreateManyWithoutDiscussionInput>;
+  Activity?: Maybe<ActivityCreateNestedManyWithoutDiscussionInput>;
+  attachments?: Maybe<AttachmentCreateNestedManyWithoutDiscussionInput>;
   card?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['DateTime']>;
   id?: Maybe<Scalars['String']>;
-  reactions?: Maybe<ReactionCreateManyWithoutDiscussionInput>;
-  school?: Maybe<SchoolCreateOneWithoutDiscussionInput>;
-  team: TeamCreateOneWithoutDiscussionInput;
+  reactions?: Maybe<ReactionCreateNestedManyWithoutDiscussionInput>;
+  school?: Maybe<SchoolCreateNestedOneWithoutDiscussionInput>;
+  team: TeamCreateNestedOneWithoutDiscussionInput;
   text?: Maybe<Scalars['String']>;
   title?: Maybe<Scalars['String']>;
   updatedAt?: Maybe<Scalars['DateTime']>;
-  user: UserCreateOneWithoutDiscussionsInput;
+  user: UserCreateNestedOneWithoutDiscussionsInput;
 };
 
 export type DiscussionCreateWithoutReactionsInput = {
-  Activity?: Maybe<ActivityCreateManyWithoutDiscussionInput>;
-  attachments?: Maybe<AttachmentCreateManyWithoutDiscussionInput>;
-  ballot?: Maybe<BallotCreateOneWithoutDiscussionInput>;
+  Activity?: Maybe<ActivityCreateNestedManyWithoutDiscussionInput>;
+  attachments?: Maybe<AttachmentCreateNestedManyWithoutDiscussionInput>;
+  ballot?: Maybe<BallotCreateNestedOneWithoutDiscussionInput>;
   card?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['DateTime']>;
   id?: Maybe<Scalars['String']>;
-  school?: Maybe<SchoolCreateOneWithoutDiscussionInput>;
-  team: TeamCreateOneWithoutDiscussionInput;
+  school?: Maybe<SchoolCreateNestedOneWithoutDiscussionInput>;
+  team: TeamCreateNestedOneWithoutDiscussionInput;
   text?: Maybe<Scalars['String']>;
   title?: Maybe<Scalars['String']>;
   updatedAt?: Maybe<Scalars['DateTime']>;
-  user: UserCreateOneWithoutDiscussionsInput;
+  user: UserCreateNestedOneWithoutDiscussionsInput;
 };
 
 export type DiscussionCreateWithoutSchoolInput = {
-  Activity?: Maybe<ActivityCreateManyWithoutDiscussionInput>;
-  attachments?: Maybe<AttachmentCreateManyWithoutDiscussionInput>;
-  ballot?: Maybe<BallotCreateOneWithoutDiscussionInput>;
+  Activity?: Maybe<ActivityCreateNestedManyWithoutDiscussionInput>;
+  attachments?: Maybe<AttachmentCreateNestedManyWithoutDiscussionInput>;
+  ballot?: Maybe<BallotCreateNestedOneWithoutDiscussionInput>;
   card?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['DateTime']>;
   id?: Maybe<Scalars['String']>;
-  reactions?: Maybe<ReactionCreateManyWithoutDiscussionInput>;
-  team: TeamCreateOneWithoutDiscussionInput;
+  reactions?: Maybe<ReactionCreateNestedManyWithoutDiscussionInput>;
+  team: TeamCreateNestedOneWithoutDiscussionInput;
   text?: Maybe<Scalars['String']>;
   title?: Maybe<Scalars['String']>;
   updatedAt?: Maybe<Scalars['DateTime']>;
-  user: UserCreateOneWithoutDiscussionsInput;
+  user: UserCreateNestedOneWithoutDiscussionsInput;
 };
 
 export type DiscussionCreateWithoutTeamInput = {
-  Activity?: Maybe<ActivityCreateManyWithoutDiscussionInput>;
-  attachments?: Maybe<AttachmentCreateManyWithoutDiscussionInput>;
-  ballot?: Maybe<BallotCreateOneWithoutDiscussionInput>;
+  Activity?: Maybe<ActivityCreateNestedManyWithoutDiscussionInput>;
+  attachments?: Maybe<AttachmentCreateNestedManyWithoutDiscussionInput>;
+  ballot?: Maybe<BallotCreateNestedOneWithoutDiscussionInput>;
   card?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['DateTime']>;
   id?: Maybe<Scalars['String']>;
-  reactions?: Maybe<ReactionCreateManyWithoutDiscussionInput>;
-  school?: Maybe<SchoolCreateOneWithoutDiscussionInput>;
+  reactions?: Maybe<ReactionCreateNestedManyWithoutDiscussionInput>;
+  school?: Maybe<SchoolCreateNestedOneWithoutDiscussionInput>;
   text?: Maybe<Scalars['String']>;
   title?: Maybe<Scalars['String']>;
   updatedAt?: Maybe<Scalars['DateTime']>;
-  user: UserCreateOneWithoutDiscussionsInput;
+  user: UserCreateNestedOneWithoutDiscussionsInput;
 };
 
 export type DiscussionCreateWithoutUserInput = {
-  Activity?: Maybe<ActivityCreateManyWithoutDiscussionInput>;
-  attachments?: Maybe<AttachmentCreateManyWithoutDiscussionInput>;
-  ballot?: Maybe<BallotCreateOneWithoutDiscussionInput>;
+  Activity?: Maybe<ActivityCreateNestedManyWithoutDiscussionInput>;
+  attachments?: Maybe<AttachmentCreateNestedManyWithoutDiscussionInput>;
+  ballot?: Maybe<BallotCreateNestedOneWithoutDiscussionInput>;
   card?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['DateTime']>;
   id?: Maybe<Scalars['String']>;
-  reactions?: Maybe<ReactionCreateManyWithoutDiscussionInput>;
-  school?: Maybe<SchoolCreateOneWithoutDiscussionInput>;
-  team: TeamCreateOneWithoutDiscussionInput;
+  reactions?: Maybe<ReactionCreateNestedManyWithoutDiscussionInput>;
+  school?: Maybe<SchoolCreateNestedOneWithoutDiscussionInput>;
+  team: TeamCreateNestedOneWithoutDiscussionInput;
   text?: Maybe<Scalars['String']>;
   title?: Maybe<Scalars['String']>;
   updatedAt?: Maybe<Scalars['DateTime']>;
@@ -2338,8 +2762,9 @@ export type DiscussionUpdateManyMutationInput = {
 
 export type DiscussionUpdateManyWithoutBallotInput = {
   connect?: Maybe<Array<DiscussionWhereUniqueInput>>;
-  connectOrCreate?: Maybe<Array<DiscussionCreateOrConnectWithoutballotInput>>;
+  connectOrCreate?: Maybe<Array<DiscussionCreateOrConnectWithoutBallotInput>>;
   create?: Maybe<Array<DiscussionCreateWithoutBallotInput>>;
+  createMany?: Maybe<DiscussionCreateManyBallotInputEnvelope>;
   delete?: Maybe<Array<DiscussionWhereUniqueInput>>;
   deleteMany?: Maybe<Array<DiscussionScalarWhereInput>>;
   disconnect?: Maybe<Array<DiscussionWhereUniqueInput>>;
@@ -2351,8 +2776,9 @@ export type DiscussionUpdateManyWithoutBallotInput = {
 
 export type DiscussionUpdateManyWithoutSchoolInput = {
   connect?: Maybe<Array<DiscussionWhereUniqueInput>>;
-  connectOrCreate?: Maybe<Array<DiscussionCreateOrConnectWithoutschoolInput>>;
+  connectOrCreate?: Maybe<Array<DiscussionCreateOrConnectWithoutSchoolInput>>;
   create?: Maybe<Array<DiscussionCreateWithoutSchoolInput>>;
+  createMany?: Maybe<DiscussionCreateManySchoolInputEnvelope>;
   delete?: Maybe<Array<DiscussionWhereUniqueInput>>;
   deleteMany?: Maybe<Array<DiscussionScalarWhereInput>>;
   disconnect?: Maybe<Array<DiscussionWhereUniqueInput>>;
@@ -2364,8 +2790,9 @@ export type DiscussionUpdateManyWithoutSchoolInput = {
 
 export type DiscussionUpdateManyWithoutTeamInput = {
   connect?: Maybe<Array<DiscussionWhereUniqueInput>>;
-  connectOrCreate?: Maybe<Array<DiscussionCreateOrConnectWithoutteamInput>>;
+  connectOrCreate?: Maybe<Array<DiscussionCreateOrConnectWithoutTeamInput>>;
   create?: Maybe<Array<DiscussionCreateWithoutTeamInput>>;
+  createMany?: Maybe<DiscussionCreateManyTeamInputEnvelope>;
   delete?: Maybe<Array<DiscussionWhereUniqueInput>>;
   deleteMany?: Maybe<Array<DiscussionScalarWhereInput>>;
   disconnect?: Maybe<Array<DiscussionWhereUniqueInput>>;
@@ -2377,8 +2804,9 @@ export type DiscussionUpdateManyWithoutTeamInput = {
 
 export type DiscussionUpdateManyWithoutUserInput = {
   connect?: Maybe<Array<DiscussionWhereUniqueInput>>;
-  connectOrCreate?: Maybe<Array<DiscussionCreateOrConnectWithoutuserInput>>;
+  connectOrCreate?: Maybe<Array<DiscussionCreateOrConnectWithoutUserInput>>;
   create?: Maybe<Array<DiscussionCreateWithoutUserInput>>;
+  createMany?: Maybe<DiscussionCreateManyUserInputEnvelope>;
   delete?: Maybe<Array<DiscussionWhereUniqueInput>>;
   deleteMany?: Maybe<Array<DiscussionScalarWhereInput>>;
   disconnect?: Maybe<Array<DiscussionWhereUniqueInput>>;
@@ -2420,7 +2848,7 @@ export type DiscussionUpdateOneWithoutActivityInput = {
 
 export type DiscussionUpdateOneWithoutAttachmentsInput = {
   connect?: Maybe<DiscussionWhereUniqueInput>;
-  connectOrCreate?: Maybe<DiscussionCreateOrConnectWithoutattachmentsInput>;
+  connectOrCreate?: Maybe<DiscussionCreateOrConnectWithoutAttachmentsInput>;
   create?: Maybe<DiscussionCreateWithoutAttachmentsInput>;
   delete?: Maybe<Scalars['Boolean']>;
   disconnect?: Maybe<Scalars['Boolean']>;
@@ -2430,7 +2858,7 @@ export type DiscussionUpdateOneWithoutAttachmentsInput = {
 
 export type DiscussionUpdateOneWithoutReactionsInput = {
   connect?: Maybe<DiscussionWhereUniqueInput>;
-  connectOrCreate?: Maybe<DiscussionCreateOrConnectWithoutreactionsInput>;
+  connectOrCreate?: Maybe<DiscussionCreateOrConnectWithoutReactionsInput>;
   create?: Maybe<DiscussionCreateWithoutReactionsInput>;
   delete?: Maybe<Scalars['Boolean']>;
   disconnect?: Maybe<Scalars['Boolean']>;
@@ -2631,9 +3059,9 @@ export type DiscussionWhereUniqueInput = {
 
 export type Domain = {
   __typename?: 'Domain';
-  approved: Scalars['Boolean'];
+  approved?: Maybe<Scalars['Boolean']>;
   id: Scalars['String'];
-  name: Scalars['String'];
+  name?: Maybe<Scalars['String']>;
   schools: Array<School>;
 };
 
@@ -2645,19 +3073,19 @@ export type DomainSchoolsArgs = {
   last?: Maybe<Scalars['Int']>;
 };
 
-export type DomainCreateOneWithoutSchoolsInput = {
+export type DomainCreateNestedOneWithoutSchoolsInput = {
   connect?: Maybe<DomainWhereUniqueInput>;
-  connectOrCreate?: Maybe<DomainCreateOrConnectWithoutschoolsInput>;
+  connectOrCreate?: Maybe<DomainCreateOrConnectWithoutSchoolsInput>;
   create?: Maybe<DomainCreateWithoutSchoolsInput>;
 };
 
-export type DomainCreateOneWithoutTeamInput = {
+export type DomainCreateNestedOneWithoutTeamInput = {
   connect?: Maybe<DomainWhereUniqueInput>;
   connectOrCreate?: Maybe<DomainCreateOrConnectWithoutTeamInput>;
   create?: Maybe<DomainCreateWithoutTeamInput>;
 };
 
-export type DomainCreateOrConnectWithoutschoolsInput = {
+export type DomainCreateOrConnectWithoutSchoolsInput = {
   create: DomainCreateWithoutSchoolsInput;
   where: DomainWhereUniqueInput;
 };
@@ -2671,19 +3099,19 @@ export type DomainCreateWithoutSchoolsInput = {
   approved?: Maybe<Scalars['Boolean']>;
   id?: Maybe<Scalars['String']>;
   name: Scalars['String'];
-  Team?: Maybe<TeamCreateManyWithoutDomainInput>;
+  Team?: Maybe<TeamCreateNestedManyWithoutDomainInput>;
 };
 
 export type DomainCreateWithoutTeamInput = {
   approved?: Maybe<Scalars['Boolean']>;
   id?: Maybe<Scalars['String']>;
   name: Scalars['String'];
-  schools?: Maybe<SchoolCreateManyWithoutDomainInput>;
+  schools?: Maybe<SchoolCreateNestedManyWithoutDomainInput>;
 };
 
 export type DomainUpdateOneWithoutSchoolsInput = {
   connect?: Maybe<DomainWhereUniqueInput>;
-  connectOrCreate?: Maybe<DomainCreateOrConnectWithoutschoolsInput>;
+  connectOrCreate?: Maybe<DomainCreateOrConnectWithoutSchoolsInput>;
   create?: Maybe<DomainCreateWithoutSchoolsInput>;
   delete?: Maybe<Scalars['Boolean']>;
   disconnect?: Maybe<Scalars['Boolean']>;
@@ -2850,9 +3278,9 @@ export type Mutation = {
   changePassword?: Maybe<ResponseLogin>;
   checkVerification?: Maybe<ResponseLogin>;
   createInvitedUser?: Maybe<User>;
-  createOneSchool: School;
-  createOneTeam: Team;
-  createUser: User;
+  createOneSchool?: Maybe<School>;
+  createOneTeam?: Maybe<Team>;
+  createUser?: Maybe<User>;
   deleteAccount?: Maybe<Response>;
   deleteOneSchool?: Maybe<School>;
   deleteOneTeam?: Maybe<Team>;
@@ -2863,9 +3291,9 @@ export type Mutation = {
   inviteStudents?: Maybe<InviteResponse>;
   login?: Maybe<ResponseLogin>;
   magic?: Maybe<Response>;
-  postActivity: Activity;
+  postActivity?: Maybe<Activity>;
   postDiscussion?: Maybe<Discussion>;
-  postWork: Work;
+  postWork?: Maybe<Work>;
   removeBallotRun?: Maybe<Response>;
   setCards?: Maybe<Team>;
   setNotes?: Maybe<Team>;
@@ -2901,7 +3329,7 @@ export type MutationCheckVerificationArgs = {
 
 
 export type MutationCreateInvitedUserArgs = {
-  email?: Maybe<Scalars['String']>;
+  email: Scalars['String'];
   invite: Scalars['String'];
   lastname?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
@@ -3184,13 +3612,25 @@ export type NullableStringFieldUpdateOperationsInput = {
   set?: Maybe<Scalars['String']>;
 };
 
-export type OptionCreateManyWithoutBallotInput = {
-  connect?: Maybe<Array<OptionWhereUniqueInput>>;
-  connectOrCreate?: Maybe<Array<OptionCreateOrConnectWithoutballotInput>>;
-  create?: Maybe<Array<OptionCreateWithoutBallotInput>>;
+export type OptionCreateManyBallotInput = {
+  id?: Maybe<Scalars['String']>;
+  title: Scalars['String'];
+  vote: Scalars['Int'];
 };
 
-export type OptionCreateOrConnectWithoutballotInput = {
+export type OptionCreateManyBallotInputEnvelope = {
+  data?: Maybe<Array<OptionCreateManyBallotInput>>;
+  skipDuplicates?: Maybe<Scalars['Boolean']>;
+};
+
+export type OptionCreateNestedManyWithoutBallotInput = {
+  connect?: Maybe<Array<OptionWhereUniqueInput>>;
+  connectOrCreate?: Maybe<Array<OptionCreateOrConnectWithoutBallotInput>>;
+  create?: Maybe<Array<OptionCreateWithoutBallotInput>>;
+  createMany?: Maybe<OptionCreateManyBallotInputEnvelope>;
+};
+
+export type OptionCreateOrConnectWithoutBallotInput = {
   create: OptionCreateWithoutBallotInput;
   where: OptionWhereUniqueInput;
 };
@@ -3225,8 +3665,9 @@ export type OptionUpdateManyMutationInput = {
 
 export type OptionUpdateManyWithoutBallotInput = {
   connect?: Maybe<Array<OptionWhereUniqueInput>>;
-  connectOrCreate?: Maybe<Array<OptionCreateOrConnectWithoutballotInput>>;
+  connectOrCreate?: Maybe<Array<OptionCreateOrConnectWithoutBallotInput>>;
   create?: Maybe<Array<OptionCreateWithoutBallotInput>>;
+  createMany?: Maybe<OptionCreateManyBallotInputEnvelope>;
   delete?: Maybe<Array<OptionWhereUniqueInput>>;
   deleteMany?: Maybe<Array<OptionScalarWhereInput>>;
   disconnect?: Maybe<Array<OptionWhereUniqueInput>>;
@@ -3459,40 +3900,91 @@ export enum QueryMode {
 export type Reaction = {
   __typename?: 'Reaction';
   discussion?: Maybe<Discussion>;
-  emoij: Scalars['String'];
-  id: Scalars['String'];
-  user: User;
+  emoij?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['String']>;
+  user?: Maybe<User>;
 };
 
-export type ReactionCreateManyWithoutDiscussionInput = {
+export type ReactionCreateManyDiscussionInput = {
+  createdAt?: Maybe<Scalars['DateTime']>;
+  emoij?: Maybe<Scalars['String']>;
+  feedback: Scalars['String'];
+  id?: Maybe<Scalars['String']>;
+  stars: Scalars['Int'];
+  updatedAt?: Maybe<Scalars['DateTime']>;
+  userId: Scalars['String'];
+  workId?: Maybe<Scalars['String']>;
+};
+
+export type ReactionCreateManyDiscussionInputEnvelope = {
+  data?: Maybe<Array<ReactionCreateManyDiscussionInput>>;
+  skipDuplicates?: Maybe<Scalars['Boolean']>;
+};
+
+export type ReactionCreateManyUserInput = {
+  createdAt?: Maybe<Scalars['DateTime']>;
+  discussionId?: Maybe<Scalars['String']>;
+  emoij?: Maybe<Scalars['String']>;
+  feedback: Scalars['String'];
+  id?: Maybe<Scalars['String']>;
+  stars: Scalars['Int'];
+  updatedAt?: Maybe<Scalars['DateTime']>;
+  workId?: Maybe<Scalars['String']>;
+};
+
+export type ReactionCreateManyUserInputEnvelope = {
+  data?: Maybe<Array<ReactionCreateManyUserInput>>;
+  skipDuplicates?: Maybe<Scalars['Boolean']>;
+};
+
+export type ReactionCreateManyWorkInput = {
+  createdAt?: Maybe<Scalars['DateTime']>;
+  discussionId?: Maybe<Scalars['String']>;
+  emoij?: Maybe<Scalars['String']>;
+  feedback: Scalars['String'];
+  id?: Maybe<Scalars['String']>;
+  stars: Scalars['Int'];
+  updatedAt?: Maybe<Scalars['DateTime']>;
+  userId: Scalars['String'];
+};
+
+export type ReactionCreateManyWorkInputEnvelope = {
+  data?: Maybe<Array<ReactionCreateManyWorkInput>>;
+  skipDuplicates?: Maybe<Scalars['Boolean']>;
+};
+
+export type ReactionCreateNestedManyWithoutDiscussionInput = {
   connect?: Maybe<Array<ReactionWhereUniqueInput>>;
-  connectOrCreate?: Maybe<Array<ReactionCreateOrConnectWithoutdiscussionInput>>;
+  connectOrCreate?: Maybe<Array<ReactionCreateOrConnectWithoutDiscussionInput>>;
   create?: Maybe<Array<ReactionCreateWithoutDiscussionInput>>;
+  createMany?: Maybe<ReactionCreateManyDiscussionInputEnvelope>;
 };
 
-export type ReactionCreateManyWithoutUserInput = {
+export type ReactionCreateNestedManyWithoutUserInput = {
   connect?: Maybe<Array<ReactionWhereUniqueInput>>;
-  connectOrCreate?: Maybe<Array<ReactionCreateOrConnectWithoutuserInput>>;
+  connectOrCreate?: Maybe<Array<ReactionCreateOrConnectWithoutUserInput>>;
   create?: Maybe<Array<ReactionCreateWithoutUserInput>>;
+  createMany?: Maybe<ReactionCreateManyUserInputEnvelope>;
 };
 
-export type ReactionCreateManyWithoutWorkInput = {
+export type ReactionCreateNestedManyWithoutWorkInput = {
   connect?: Maybe<Array<ReactionWhereUniqueInput>>;
-  connectOrCreate?: Maybe<Array<ReactionCreateOrConnectWithoutworkInput>>;
+  connectOrCreate?: Maybe<Array<ReactionCreateOrConnectWithoutWorkInput>>;
   create?: Maybe<Array<ReactionCreateWithoutWorkInput>>;
+  createMany?: Maybe<ReactionCreateManyWorkInputEnvelope>;
 };
 
-export type ReactionCreateOrConnectWithoutdiscussionInput = {
+export type ReactionCreateOrConnectWithoutDiscussionInput = {
   create: ReactionCreateWithoutDiscussionInput;
   where: ReactionWhereUniqueInput;
 };
 
-export type ReactionCreateOrConnectWithoutuserInput = {
+export type ReactionCreateOrConnectWithoutUserInput = {
   create: ReactionCreateWithoutUserInput;
   where: ReactionWhereUniqueInput;
 };
 
-export type ReactionCreateOrConnectWithoutworkInput = {
+export type ReactionCreateOrConnectWithoutWorkInput = {
   create: ReactionCreateWithoutWorkInput;
   where: ReactionWhereUniqueInput;
 };
@@ -3504,30 +3996,30 @@ export type ReactionCreateWithoutDiscussionInput = {
   id?: Maybe<Scalars['String']>;
   stars: Scalars['Int'];
   updatedAt?: Maybe<Scalars['DateTime']>;
-  user: UserCreateOneWithoutReactionsInput;
-  work?: Maybe<WorkCreateOneWithoutReactionsInput>;
+  user: UserCreateNestedOneWithoutReactionsInput;
+  work?: Maybe<WorkCreateNestedOneWithoutReactionsInput>;
 };
 
 export type ReactionCreateWithoutUserInput = {
   createdAt?: Maybe<Scalars['DateTime']>;
-  discussion?: Maybe<DiscussionCreateOneWithoutReactionsInput>;
+  discussion?: Maybe<DiscussionCreateNestedOneWithoutReactionsInput>;
   emoij?: Maybe<Scalars['String']>;
   feedback: Scalars['String'];
   id?: Maybe<Scalars['String']>;
   stars: Scalars['Int'];
   updatedAt?: Maybe<Scalars['DateTime']>;
-  work?: Maybe<WorkCreateOneWithoutReactionsInput>;
+  work?: Maybe<WorkCreateNestedOneWithoutReactionsInput>;
 };
 
 export type ReactionCreateWithoutWorkInput = {
   createdAt?: Maybe<Scalars['DateTime']>;
-  discussion?: Maybe<DiscussionCreateOneWithoutReactionsInput>;
+  discussion?: Maybe<DiscussionCreateNestedOneWithoutReactionsInput>;
   emoij?: Maybe<Scalars['String']>;
   feedback: Scalars['String'];
   id?: Maybe<Scalars['String']>;
   stars: Scalars['Int'];
   updatedAt?: Maybe<Scalars['DateTime']>;
-  user: UserCreateOneWithoutReactionsInput;
+  user: UserCreateNestedOneWithoutReactionsInput;
 };
 
 export type ReactionListRelationFilter = {
@@ -3562,8 +4054,9 @@ export type ReactionUpdateManyMutationInput = {
 
 export type ReactionUpdateManyWithoutDiscussionInput = {
   connect?: Maybe<Array<ReactionWhereUniqueInput>>;
-  connectOrCreate?: Maybe<Array<ReactionCreateOrConnectWithoutdiscussionInput>>;
+  connectOrCreate?: Maybe<Array<ReactionCreateOrConnectWithoutDiscussionInput>>;
   create?: Maybe<Array<ReactionCreateWithoutDiscussionInput>>;
+  createMany?: Maybe<ReactionCreateManyDiscussionInputEnvelope>;
   delete?: Maybe<Array<ReactionWhereUniqueInput>>;
   deleteMany?: Maybe<Array<ReactionScalarWhereInput>>;
   disconnect?: Maybe<Array<ReactionWhereUniqueInput>>;
@@ -3575,8 +4068,9 @@ export type ReactionUpdateManyWithoutDiscussionInput = {
 
 export type ReactionUpdateManyWithoutUserInput = {
   connect?: Maybe<Array<ReactionWhereUniqueInput>>;
-  connectOrCreate?: Maybe<Array<ReactionCreateOrConnectWithoutuserInput>>;
+  connectOrCreate?: Maybe<Array<ReactionCreateOrConnectWithoutUserInput>>;
   create?: Maybe<Array<ReactionCreateWithoutUserInput>>;
+  createMany?: Maybe<ReactionCreateManyUserInputEnvelope>;
   delete?: Maybe<Array<ReactionWhereUniqueInput>>;
   deleteMany?: Maybe<Array<ReactionScalarWhereInput>>;
   disconnect?: Maybe<Array<ReactionWhereUniqueInput>>;
@@ -3588,8 +4082,9 @@ export type ReactionUpdateManyWithoutUserInput = {
 
 export type ReactionUpdateManyWithoutWorkInput = {
   connect?: Maybe<Array<ReactionWhereUniqueInput>>;
-  connectOrCreate?: Maybe<Array<ReactionCreateOrConnectWithoutworkInput>>;
+  connectOrCreate?: Maybe<Array<ReactionCreateOrConnectWithoutWorkInput>>;
   create?: Maybe<Array<ReactionCreateWithoutWorkInput>>;
+  createMany?: Maybe<ReactionCreateManyWorkInputEnvelope>;
   delete?: Maybe<Array<ReactionWhereUniqueInput>>;
   deleteMany?: Maybe<Array<ReactionScalarWhereInput>>;
   disconnect?: Maybe<Array<ReactionWhereUniqueInput>>;
@@ -3731,15 +4226,15 @@ export enum Role {
 
 export type School = {
   __typename?: 'School';
-  address: Scalars['String'];
-  canton: Scalars['String'];
-  city: Scalars['String'];
+  address?: Maybe<Scalars['String']>;
+  canton?: Maybe<Scalars['String']>;
+  city?: Maybe<Scalars['String']>;
   id: Scalars['String'];
   members: Array<User>;
-  name: Scalars['String'];
+  name?: Maybe<Scalars['String']>;
   teams: Array<Team>;
-  type: Scalars['String'];
-  zip: Scalars['String'];
+  type?: Maybe<Scalars['String']>;
+  zip?: Maybe<Scalars['String']>;
 };
 
 
@@ -3759,116 +4254,132 @@ export type SchoolTeamsArgs = {
 };
 
 export type SchoolCreateInput = {
-  activity?: Maybe<ActivityCreateManyWithoutSchoolInput>;
+  activity?: Maybe<ActivityCreateNestedManyWithoutSchoolInput>;
   address?: Maybe<Scalars['String']>;
-  attachment?: Maybe<AttachmentCreateManyWithoutSchoolInput>;
-  ballots?: Maybe<BallotCreateManyWithoutSchoolInput>;
+  attachment?: Maybe<AttachmentCreateNestedManyWithoutSchoolInput>;
+  ballots?: Maybe<BallotCreateNestedManyWithoutSchoolInput>;
   canton?: Maybe<Scalars['String']>;
   city?: Maybe<Scalars['String']>;
-  discussion?: Maybe<DiscussionCreateManyWithoutSchoolInput>;
-  domain?: Maybe<DomainCreateOneWithoutSchoolsInput>;
+  discussion?: Maybe<DiscussionCreateNestedManyWithoutSchoolInput>;
+  domain?: Maybe<DomainCreateNestedOneWithoutSchoolsInput>;
   id?: Maybe<Scalars['String']>;
-  members?: Maybe<UserCreateManyWithoutSchoolInput>;
+  members?: Maybe<UserCreateNestedManyWithoutSchoolInput>;
   name: Scalars['String'];
-  teams?: Maybe<TeamCreateManyWithoutSchoolInput>;
+  teams?: Maybe<TeamCreateNestedManyWithoutSchoolInput>;
   type?: Maybe<Scalars['String']>;
-  Vote?: Maybe<VoteCreateManyWithoutSchoolInput>;
-  Voted?: Maybe<VotedCreateManyWithoutSchoolInput>;
-  work?: Maybe<WorkCreateManyWithoutSchoolInput>;
+  Vote?: Maybe<VoteCreateNestedManyWithoutSchoolInput>;
+  Voted?: Maybe<VotedCreateNestedManyWithoutSchoolInput>;
+  work?: Maybe<WorkCreateNestedManyWithoutSchoolInput>;
   zip?: Maybe<Scalars['String']>;
 };
 
-export type SchoolCreateManyWithoutDomainInput = {
-  connect?: Maybe<Array<SchoolWhereUniqueInput>>;
-  connectOrCreate?: Maybe<Array<SchoolCreateOrConnectWithoutdomainInput>>;
-  create?: Maybe<Array<SchoolCreateWithoutDomainInput>>;
+export type SchoolCreateManyDomainInput = {
+  address?: Maybe<Scalars['String']>;
+  canton?: Maybe<Scalars['String']>;
+  city?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['String']>;
+  name: Scalars['String'];
+  type?: Maybe<Scalars['String']>;
+  zip?: Maybe<Scalars['String']>;
 };
 
-export type SchoolCreateOneWithoutActivityInput = {
+export type SchoolCreateManyDomainInputEnvelope = {
+  data?: Maybe<Array<SchoolCreateManyDomainInput>>;
+  skipDuplicates?: Maybe<Scalars['Boolean']>;
+};
+
+export type SchoolCreateNestedManyWithoutDomainInput = {
+  connect?: Maybe<Array<SchoolWhereUniqueInput>>;
+  connectOrCreate?: Maybe<Array<SchoolCreateOrConnectWithoutDomainInput>>;
+  create?: Maybe<Array<SchoolCreateWithoutDomainInput>>;
+  createMany?: Maybe<SchoolCreateManyDomainInputEnvelope>;
+};
+
+export type SchoolCreateNestedOneWithoutActivityInput = {
   connect?: Maybe<SchoolWhereUniqueInput>;
-  connectOrCreate?: Maybe<SchoolCreateOrConnectWithoutactivityInput>;
+  connectOrCreate?: Maybe<SchoolCreateOrConnectWithoutActivityInput>;
   create?: Maybe<SchoolCreateWithoutActivityInput>;
 };
 
-export type SchoolCreateOneWithoutAttachmentInput = {
+export type SchoolCreateNestedOneWithoutAttachmentInput = {
   connect?: Maybe<SchoolWhereUniqueInput>;
-  connectOrCreate?: Maybe<SchoolCreateOrConnectWithoutattachmentInput>;
+  connectOrCreate?: Maybe<SchoolCreateOrConnectWithoutAttachmentInput>;
   create?: Maybe<SchoolCreateWithoutAttachmentInput>;
 };
 
-export type SchoolCreateOneWithoutBallotsInput = {
+export type SchoolCreateNestedOneWithoutBallotsInput = {
   connect?: Maybe<SchoolWhereUniqueInput>;
-  connectOrCreate?: Maybe<SchoolCreateOrConnectWithoutballotsInput>;
+  connectOrCreate?: Maybe<SchoolCreateOrConnectWithoutBallotsInput>;
   create?: Maybe<SchoolCreateWithoutBallotsInput>;
 };
 
-export type SchoolCreateOneWithoutDiscussionInput = {
+export type SchoolCreateNestedOneWithoutDiscussionInput = {
   connect?: Maybe<SchoolWhereUniqueInput>;
-  connectOrCreate?: Maybe<SchoolCreateOrConnectWithoutdiscussionInput>;
+  connectOrCreate?: Maybe<SchoolCreateOrConnectWithoutDiscussionInput>;
   create?: Maybe<SchoolCreateWithoutDiscussionInput>;
 };
 
-export type SchoolCreateOneWithoutMembersInput = {
+export type SchoolCreateNestedOneWithoutMembersInput = {
   connect?: Maybe<SchoolWhereUniqueInput>;
-  connectOrCreate?: Maybe<SchoolCreateOrConnectWithoutmembersInput>;
+  connectOrCreate?: Maybe<SchoolCreateOrConnectWithoutMembersInput>;
   create?: Maybe<SchoolCreateWithoutMembersInput>;
 };
 
-export type SchoolCreateOneWithoutTeamsInput = {
+export type SchoolCreateNestedOneWithoutTeamsInput = {
   connect?: Maybe<SchoolWhereUniqueInput>;
-  connectOrCreate?: Maybe<SchoolCreateOrConnectWithoutteamsInput>;
+  connectOrCreate?: Maybe<SchoolCreateOrConnectWithoutTeamsInput>;
   create?: Maybe<SchoolCreateWithoutTeamsInput>;
 };
 
-export type SchoolCreateOneWithoutVotedInput = {
+export type SchoolCreateNestedOneWithoutVotedInput = {
   connect?: Maybe<SchoolWhereUniqueInput>;
   connectOrCreate?: Maybe<SchoolCreateOrConnectWithoutVotedInput>;
   create?: Maybe<SchoolCreateWithoutVotedInput>;
 };
 
-export type SchoolCreateOneWithoutVoteInput = {
+export type SchoolCreateNestedOneWithoutVoteInput = {
   connect?: Maybe<SchoolWhereUniqueInput>;
   connectOrCreate?: Maybe<SchoolCreateOrConnectWithoutVoteInput>;
   create?: Maybe<SchoolCreateWithoutVoteInput>;
 };
 
-export type SchoolCreateOneWithoutWorkInput = {
+export type SchoolCreateNestedOneWithoutWorkInput = {
   connect?: Maybe<SchoolWhereUniqueInput>;
-  connectOrCreate?: Maybe<SchoolCreateOrConnectWithoutworkInput>;
+  connectOrCreate?: Maybe<SchoolCreateOrConnectWithoutWorkInput>;
   create?: Maybe<SchoolCreateWithoutWorkInput>;
 };
 
-export type SchoolCreateOrConnectWithoutactivityInput = {
+export type SchoolCreateOrConnectWithoutActivityInput = {
   create: SchoolCreateWithoutActivityInput;
   where: SchoolWhereUniqueInput;
 };
 
-export type SchoolCreateOrConnectWithoutattachmentInput = {
+export type SchoolCreateOrConnectWithoutAttachmentInput = {
   create: SchoolCreateWithoutAttachmentInput;
   where: SchoolWhereUniqueInput;
 };
 
-export type SchoolCreateOrConnectWithoutballotsInput = {
+export type SchoolCreateOrConnectWithoutBallotsInput = {
   create: SchoolCreateWithoutBallotsInput;
   where: SchoolWhereUniqueInput;
 };
 
-export type SchoolCreateOrConnectWithoutdiscussionInput = {
+export type SchoolCreateOrConnectWithoutDiscussionInput = {
   create: SchoolCreateWithoutDiscussionInput;
   where: SchoolWhereUniqueInput;
 };
 
-export type SchoolCreateOrConnectWithoutdomainInput = {
+export type SchoolCreateOrConnectWithoutDomainInput = {
   create: SchoolCreateWithoutDomainInput;
   where: SchoolWhereUniqueInput;
 };
 
-export type SchoolCreateOrConnectWithoutmembersInput = {
+export type SchoolCreateOrConnectWithoutMembersInput = {
   create: SchoolCreateWithoutMembersInput;
   where: SchoolWhereUniqueInput;
 };
 
-export type SchoolCreateOrConnectWithoutteamsInput = {
+export type SchoolCreateOrConnectWithoutTeamsInput = {
   create: SchoolCreateWithoutTeamsInput;
   where: SchoolWhereUniqueInput;
 };
@@ -3883,198 +4394,198 @@ export type SchoolCreateOrConnectWithoutVoteInput = {
   where: SchoolWhereUniqueInput;
 };
 
-export type SchoolCreateOrConnectWithoutworkInput = {
+export type SchoolCreateOrConnectWithoutWorkInput = {
   create: SchoolCreateWithoutWorkInput;
   where: SchoolWhereUniqueInput;
 };
 
 export type SchoolCreateWithoutActivityInput = {
   address?: Maybe<Scalars['String']>;
-  attachment?: Maybe<AttachmentCreateManyWithoutSchoolInput>;
-  ballots?: Maybe<BallotCreateManyWithoutSchoolInput>;
+  attachment?: Maybe<AttachmentCreateNestedManyWithoutSchoolInput>;
+  ballots?: Maybe<BallotCreateNestedManyWithoutSchoolInput>;
   canton?: Maybe<Scalars['String']>;
   city?: Maybe<Scalars['String']>;
-  discussion?: Maybe<DiscussionCreateManyWithoutSchoolInput>;
-  domain?: Maybe<DomainCreateOneWithoutSchoolsInput>;
+  discussion?: Maybe<DiscussionCreateNestedManyWithoutSchoolInput>;
+  domain?: Maybe<DomainCreateNestedOneWithoutSchoolsInput>;
   id?: Maybe<Scalars['String']>;
-  members?: Maybe<UserCreateManyWithoutSchoolInput>;
+  members?: Maybe<UserCreateNestedManyWithoutSchoolInput>;
   name: Scalars['String'];
-  teams?: Maybe<TeamCreateManyWithoutSchoolInput>;
+  teams?: Maybe<TeamCreateNestedManyWithoutSchoolInput>;
   type?: Maybe<Scalars['String']>;
-  Vote?: Maybe<VoteCreateManyWithoutSchoolInput>;
-  Voted?: Maybe<VotedCreateManyWithoutSchoolInput>;
-  work?: Maybe<WorkCreateManyWithoutSchoolInput>;
+  Vote?: Maybe<VoteCreateNestedManyWithoutSchoolInput>;
+  Voted?: Maybe<VotedCreateNestedManyWithoutSchoolInput>;
+  work?: Maybe<WorkCreateNestedManyWithoutSchoolInput>;
   zip?: Maybe<Scalars['String']>;
 };
 
 export type SchoolCreateWithoutAttachmentInput = {
-  activity?: Maybe<ActivityCreateManyWithoutSchoolInput>;
+  activity?: Maybe<ActivityCreateNestedManyWithoutSchoolInput>;
   address?: Maybe<Scalars['String']>;
-  ballots?: Maybe<BallotCreateManyWithoutSchoolInput>;
+  ballots?: Maybe<BallotCreateNestedManyWithoutSchoolInput>;
   canton?: Maybe<Scalars['String']>;
   city?: Maybe<Scalars['String']>;
-  discussion?: Maybe<DiscussionCreateManyWithoutSchoolInput>;
-  domain?: Maybe<DomainCreateOneWithoutSchoolsInput>;
+  discussion?: Maybe<DiscussionCreateNestedManyWithoutSchoolInput>;
+  domain?: Maybe<DomainCreateNestedOneWithoutSchoolsInput>;
   id?: Maybe<Scalars['String']>;
-  members?: Maybe<UserCreateManyWithoutSchoolInput>;
+  members?: Maybe<UserCreateNestedManyWithoutSchoolInput>;
   name: Scalars['String'];
-  teams?: Maybe<TeamCreateManyWithoutSchoolInput>;
+  teams?: Maybe<TeamCreateNestedManyWithoutSchoolInput>;
   type?: Maybe<Scalars['String']>;
-  Vote?: Maybe<VoteCreateManyWithoutSchoolInput>;
-  Voted?: Maybe<VotedCreateManyWithoutSchoolInput>;
-  work?: Maybe<WorkCreateManyWithoutSchoolInput>;
+  Vote?: Maybe<VoteCreateNestedManyWithoutSchoolInput>;
+  Voted?: Maybe<VotedCreateNestedManyWithoutSchoolInput>;
+  work?: Maybe<WorkCreateNestedManyWithoutSchoolInput>;
   zip?: Maybe<Scalars['String']>;
 };
 
 export type SchoolCreateWithoutBallotsInput = {
-  activity?: Maybe<ActivityCreateManyWithoutSchoolInput>;
+  activity?: Maybe<ActivityCreateNestedManyWithoutSchoolInput>;
   address?: Maybe<Scalars['String']>;
-  attachment?: Maybe<AttachmentCreateManyWithoutSchoolInput>;
+  attachment?: Maybe<AttachmentCreateNestedManyWithoutSchoolInput>;
   canton?: Maybe<Scalars['String']>;
   city?: Maybe<Scalars['String']>;
-  discussion?: Maybe<DiscussionCreateManyWithoutSchoolInput>;
-  domain?: Maybe<DomainCreateOneWithoutSchoolsInput>;
+  discussion?: Maybe<DiscussionCreateNestedManyWithoutSchoolInput>;
+  domain?: Maybe<DomainCreateNestedOneWithoutSchoolsInput>;
   id?: Maybe<Scalars['String']>;
-  members?: Maybe<UserCreateManyWithoutSchoolInput>;
+  members?: Maybe<UserCreateNestedManyWithoutSchoolInput>;
   name: Scalars['String'];
-  teams?: Maybe<TeamCreateManyWithoutSchoolInput>;
+  teams?: Maybe<TeamCreateNestedManyWithoutSchoolInput>;
   type?: Maybe<Scalars['String']>;
-  Vote?: Maybe<VoteCreateManyWithoutSchoolInput>;
-  Voted?: Maybe<VotedCreateManyWithoutSchoolInput>;
-  work?: Maybe<WorkCreateManyWithoutSchoolInput>;
+  Vote?: Maybe<VoteCreateNestedManyWithoutSchoolInput>;
+  Voted?: Maybe<VotedCreateNestedManyWithoutSchoolInput>;
+  work?: Maybe<WorkCreateNestedManyWithoutSchoolInput>;
   zip?: Maybe<Scalars['String']>;
 };
 
 export type SchoolCreateWithoutDiscussionInput = {
-  activity?: Maybe<ActivityCreateManyWithoutSchoolInput>;
+  activity?: Maybe<ActivityCreateNestedManyWithoutSchoolInput>;
   address?: Maybe<Scalars['String']>;
-  attachment?: Maybe<AttachmentCreateManyWithoutSchoolInput>;
-  ballots?: Maybe<BallotCreateManyWithoutSchoolInput>;
+  attachment?: Maybe<AttachmentCreateNestedManyWithoutSchoolInput>;
+  ballots?: Maybe<BallotCreateNestedManyWithoutSchoolInput>;
   canton?: Maybe<Scalars['String']>;
   city?: Maybe<Scalars['String']>;
-  domain?: Maybe<DomainCreateOneWithoutSchoolsInput>;
+  domain?: Maybe<DomainCreateNestedOneWithoutSchoolsInput>;
   id?: Maybe<Scalars['String']>;
-  members?: Maybe<UserCreateManyWithoutSchoolInput>;
+  members?: Maybe<UserCreateNestedManyWithoutSchoolInput>;
   name: Scalars['String'];
-  teams?: Maybe<TeamCreateManyWithoutSchoolInput>;
+  teams?: Maybe<TeamCreateNestedManyWithoutSchoolInput>;
   type?: Maybe<Scalars['String']>;
-  Vote?: Maybe<VoteCreateManyWithoutSchoolInput>;
-  Voted?: Maybe<VotedCreateManyWithoutSchoolInput>;
-  work?: Maybe<WorkCreateManyWithoutSchoolInput>;
+  Vote?: Maybe<VoteCreateNestedManyWithoutSchoolInput>;
+  Voted?: Maybe<VotedCreateNestedManyWithoutSchoolInput>;
+  work?: Maybe<WorkCreateNestedManyWithoutSchoolInput>;
   zip?: Maybe<Scalars['String']>;
 };
 
 export type SchoolCreateWithoutDomainInput = {
-  activity?: Maybe<ActivityCreateManyWithoutSchoolInput>;
+  activity?: Maybe<ActivityCreateNestedManyWithoutSchoolInput>;
   address?: Maybe<Scalars['String']>;
-  attachment?: Maybe<AttachmentCreateManyWithoutSchoolInput>;
-  ballots?: Maybe<BallotCreateManyWithoutSchoolInput>;
+  attachment?: Maybe<AttachmentCreateNestedManyWithoutSchoolInput>;
+  ballots?: Maybe<BallotCreateNestedManyWithoutSchoolInput>;
   canton?: Maybe<Scalars['String']>;
   city?: Maybe<Scalars['String']>;
-  discussion?: Maybe<DiscussionCreateManyWithoutSchoolInput>;
+  discussion?: Maybe<DiscussionCreateNestedManyWithoutSchoolInput>;
   id?: Maybe<Scalars['String']>;
-  members?: Maybe<UserCreateManyWithoutSchoolInput>;
+  members?: Maybe<UserCreateNestedManyWithoutSchoolInput>;
   name: Scalars['String'];
-  teams?: Maybe<TeamCreateManyWithoutSchoolInput>;
+  teams?: Maybe<TeamCreateNestedManyWithoutSchoolInput>;
   type?: Maybe<Scalars['String']>;
-  Vote?: Maybe<VoteCreateManyWithoutSchoolInput>;
-  Voted?: Maybe<VotedCreateManyWithoutSchoolInput>;
-  work?: Maybe<WorkCreateManyWithoutSchoolInput>;
+  Vote?: Maybe<VoteCreateNestedManyWithoutSchoolInput>;
+  Voted?: Maybe<VotedCreateNestedManyWithoutSchoolInput>;
+  work?: Maybe<WorkCreateNestedManyWithoutSchoolInput>;
   zip?: Maybe<Scalars['String']>;
 };
 
 export type SchoolCreateWithoutMembersInput = {
-  activity?: Maybe<ActivityCreateManyWithoutSchoolInput>;
+  activity?: Maybe<ActivityCreateNestedManyWithoutSchoolInput>;
   address?: Maybe<Scalars['String']>;
-  attachment?: Maybe<AttachmentCreateManyWithoutSchoolInput>;
-  ballots?: Maybe<BallotCreateManyWithoutSchoolInput>;
+  attachment?: Maybe<AttachmentCreateNestedManyWithoutSchoolInput>;
+  ballots?: Maybe<BallotCreateNestedManyWithoutSchoolInput>;
   canton?: Maybe<Scalars['String']>;
   city?: Maybe<Scalars['String']>;
-  discussion?: Maybe<DiscussionCreateManyWithoutSchoolInput>;
-  domain?: Maybe<DomainCreateOneWithoutSchoolsInput>;
+  discussion?: Maybe<DiscussionCreateNestedManyWithoutSchoolInput>;
+  domain?: Maybe<DomainCreateNestedOneWithoutSchoolsInput>;
   id?: Maybe<Scalars['String']>;
   name: Scalars['String'];
-  teams?: Maybe<TeamCreateManyWithoutSchoolInput>;
+  teams?: Maybe<TeamCreateNestedManyWithoutSchoolInput>;
   type?: Maybe<Scalars['String']>;
-  Vote?: Maybe<VoteCreateManyWithoutSchoolInput>;
-  Voted?: Maybe<VotedCreateManyWithoutSchoolInput>;
-  work?: Maybe<WorkCreateManyWithoutSchoolInput>;
+  Vote?: Maybe<VoteCreateNestedManyWithoutSchoolInput>;
+  Voted?: Maybe<VotedCreateNestedManyWithoutSchoolInput>;
+  work?: Maybe<WorkCreateNestedManyWithoutSchoolInput>;
   zip?: Maybe<Scalars['String']>;
 };
 
 export type SchoolCreateWithoutTeamsInput = {
-  activity?: Maybe<ActivityCreateManyWithoutSchoolInput>;
+  activity?: Maybe<ActivityCreateNestedManyWithoutSchoolInput>;
   address?: Maybe<Scalars['String']>;
-  attachment?: Maybe<AttachmentCreateManyWithoutSchoolInput>;
-  ballots?: Maybe<BallotCreateManyWithoutSchoolInput>;
+  attachment?: Maybe<AttachmentCreateNestedManyWithoutSchoolInput>;
+  ballots?: Maybe<BallotCreateNestedManyWithoutSchoolInput>;
   canton?: Maybe<Scalars['String']>;
   city?: Maybe<Scalars['String']>;
-  discussion?: Maybe<DiscussionCreateManyWithoutSchoolInput>;
-  domain?: Maybe<DomainCreateOneWithoutSchoolsInput>;
+  discussion?: Maybe<DiscussionCreateNestedManyWithoutSchoolInput>;
+  domain?: Maybe<DomainCreateNestedOneWithoutSchoolsInput>;
   id?: Maybe<Scalars['String']>;
-  members?: Maybe<UserCreateManyWithoutSchoolInput>;
+  members?: Maybe<UserCreateNestedManyWithoutSchoolInput>;
   name: Scalars['String'];
   type?: Maybe<Scalars['String']>;
-  Vote?: Maybe<VoteCreateManyWithoutSchoolInput>;
-  Voted?: Maybe<VotedCreateManyWithoutSchoolInput>;
-  work?: Maybe<WorkCreateManyWithoutSchoolInput>;
+  Vote?: Maybe<VoteCreateNestedManyWithoutSchoolInput>;
+  Voted?: Maybe<VotedCreateNestedManyWithoutSchoolInput>;
+  work?: Maybe<WorkCreateNestedManyWithoutSchoolInput>;
   zip?: Maybe<Scalars['String']>;
 };
 
 export type SchoolCreateWithoutVotedInput = {
-  activity?: Maybe<ActivityCreateManyWithoutSchoolInput>;
+  activity?: Maybe<ActivityCreateNestedManyWithoutSchoolInput>;
   address?: Maybe<Scalars['String']>;
-  attachment?: Maybe<AttachmentCreateManyWithoutSchoolInput>;
-  ballots?: Maybe<BallotCreateManyWithoutSchoolInput>;
+  attachment?: Maybe<AttachmentCreateNestedManyWithoutSchoolInput>;
+  ballots?: Maybe<BallotCreateNestedManyWithoutSchoolInput>;
   canton?: Maybe<Scalars['String']>;
   city?: Maybe<Scalars['String']>;
-  discussion?: Maybe<DiscussionCreateManyWithoutSchoolInput>;
-  domain?: Maybe<DomainCreateOneWithoutSchoolsInput>;
+  discussion?: Maybe<DiscussionCreateNestedManyWithoutSchoolInput>;
+  domain?: Maybe<DomainCreateNestedOneWithoutSchoolsInput>;
   id?: Maybe<Scalars['String']>;
-  members?: Maybe<UserCreateManyWithoutSchoolInput>;
+  members?: Maybe<UserCreateNestedManyWithoutSchoolInput>;
   name: Scalars['String'];
-  teams?: Maybe<TeamCreateManyWithoutSchoolInput>;
+  teams?: Maybe<TeamCreateNestedManyWithoutSchoolInput>;
   type?: Maybe<Scalars['String']>;
-  Vote?: Maybe<VoteCreateManyWithoutSchoolInput>;
-  work?: Maybe<WorkCreateManyWithoutSchoolInput>;
+  Vote?: Maybe<VoteCreateNestedManyWithoutSchoolInput>;
+  work?: Maybe<WorkCreateNestedManyWithoutSchoolInput>;
   zip?: Maybe<Scalars['String']>;
 };
 
 export type SchoolCreateWithoutVoteInput = {
-  activity?: Maybe<ActivityCreateManyWithoutSchoolInput>;
+  activity?: Maybe<ActivityCreateNestedManyWithoutSchoolInput>;
   address?: Maybe<Scalars['String']>;
-  attachment?: Maybe<AttachmentCreateManyWithoutSchoolInput>;
-  ballots?: Maybe<BallotCreateManyWithoutSchoolInput>;
+  attachment?: Maybe<AttachmentCreateNestedManyWithoutSchoolInput>;
+  ballots?: Maybe<BallotCreateNestedManyWithoutSchoolInput>;
   canton?: Maybe<Scalars['String']>;
   city?: Maybe<Scalars['String']>;
-  discussion?: Maybe<DiscussionCreateManyWithoutSchoolInput>;
-  domain?: Maybe<DomainCreateOneWithoutSchoolsInput>;
+  discussion?: Maybe<DiscussionCreateNestedManyWithoutSchoolInput>;
+  domain?: Maybe<DomainCreateNestedOneWithoutSchoolsInput>;
   id?: Maybe<Scalars['String']>;
-  members?: Maybe<UserCreateManyWithoutSchoolInput>;
+  members?: Maybe<UserCreateNestedManyWithoutSchoolInput>;
   name: Scalars['String'];
-  teams?: Maybe<TeamCreateManyWithoutSchoolInput>;
+  teams?: Maybe<TeamCreateNestedManyWithoutSchoolInput>;
   type?: Maybe<Scalars['String']>;
-  Voted?: Maybe<VotedCreateManyWithoutSchoolInput>;
-  work?: Maybe<WorkCreateManyWithoutSchoolInput>;
+  Voted?: Maybe<VotedCreateNestedManyWithoutSchoolInput>;
+  work?: Maybe<WorkCreateNestedManyWithoutSchoolInput>;
   zip?: Maybe<Scalars['String']>;
 };
 
 export type SchoolCreateWithoutWorkInput = {
-  activity?: Maybe<ActivityCreateManyWithoutSchoolInput>;
+  activity?: Maybe<ActivityCreateNestedManyWithoutSchoolInput>;
   address?: Maybe<Scalars['String']>;
-  attachment?: Maybe<AttachmentCreateManyWithoutSchoolInput>;
-  ballots?: Maybe<BallotCreateManyWithoutSchoolInput>;
+  attachment?: Maybe<AttachmentCreateNestedManyWithoutSchoolInput>;
+  ballots?: Maybe<BallotCreateNestedManyWithoutSchoolInput>;
   canton?: Maybe<Scalars['String']>;
   city?: Maybe<Scalars['String']>;
-  discussion?: Maybe<DiscussionCreateManyWithoutSchoolInput>;
-  domain?: Maybe<DomainCreateOneWithoutSchoolsInput>;
+  discussion?: Maybe<DiscussionCreateNestedManyWithoutSchoolInput>;
+  domain?: Maybe<DomainCreateNestedOneWithoutSchoolsInput>;
   id?: Maybe<Scalars['String']>;
-  members?: Maybe<UserCreateManyWithoutSchoolInput>;
+  members?: Maybe<UserCreateNestedManyWithoutSchoolInput>;
   name: Scalars['String'];
-  teams?: Maybe<TeamCreateManyWithoutSchoolInput>;
+  teams?: Maybe<TeamCreateNestedManyWithoutSchoolInput>;
   type?: Maybe<Scalars['String']>;
-  Vote?: Maybe<VoteCreateManyWithoutSchoolInput>;
-  Voted?: Maybe<VotedCreateManyWithoutSchoolInput>;
+  Vote?: Maybe<VoteCreateNestedManyWithoutSchoolInput>;
+  Voted?: Maybe<VotedCreateNestedManyWithoutSchoolInput>;
   zip?: Maybe<Scalars['String']>;
 };
 
@@ -4121,8 +4632,9 @@ export type SchoolUpdateManyMutationInput = {
 
 export type SchoolUpdateManyWithoutDomainInput = {
   connect?: Maybe<Array<SchoolWhereUniqueInput>>;
-  connectOrCreate?: Maybe<Array<SchoolCreateOrConnectWithoutdomainInput>>;
+  connectOrCreate?: Maybe<Array<SchoolCreateOrConnectWithoutDomainInput>>;
   create?: Maybe<Array<SchoolCreateWithoutDomainInput>>;
+  createMany?: Maybe<SchoolCreateManyDomainInputEnvelope>;
   delete?: Maybe<Array<SchoolWhereUniqueInput>>;
   deleteMany?: Maybe<Array<SchoolScalarWhereInput>>;
   disconnect?: Maybe<Array<SchoolWhereUniqueInput>>;
@@ -4139,7 +4651,7 @@ export type SchoolUpdateManyWithWhereWithoutDomainInput = {
 
 export type SchoolUpdateOneRequiredWithoutActivityInput = {
   connect?: Maybe<SchoolWhereUniqueInput>;
-  connectOrCreate?: Maybe<SchoolCreateOrConnectWithoutactivityInput>;
+  connectOrCreate?: Maybe<SchoolCreateOrConnectWithoutActivityInput>;
   create?: Maybe<SchoolCreateWithoutActivityInput>;
   update?: Maybe<SchoolUpdateWithoutActivityInput>;
   upsert?: Maybe<SchoolUpsertWithoutActivityInput>;
@@ -4147,7 +4659,7 @@ export type SchoolUpdateOneRequiredWithoutActivityInput = {
 
 export type SchoolUpdateOneRequiredWithoutTeamsInput = {
   connect?: Maybe<SchoolWhereUniqueInput>;
-  connectOrCreate?: Maybe<SchoolCreateOrConnectWithoutteamsInput>;
+  connectOrCreate?: Maybe<SchoolCreateOrConnectWithoutTeamsInput>;
   create?: Maybe<SchoolCreateWithoutTeamsInput>;
   update?: Maybe<SchoolUpdateWithoutTeamsInput>;
   upsert?: Maybe<SchoolUpsertWithoutTeamsInput>;
@@ -4155,7 +4667,7 @@ export type SchoolUpdateOneRequiredWithoutTeamsInput = {
 
 export type SchoolUpdateOneRequiredWithoutWorkInput = {
   connect?: Maybe<SchoolWhereUniqueInput>;
-  connectOrCreate?: Maybe<SchoolCreateOrConnectWithoutworkInput>;
+  connectOrCreate?: Maybe<SchoolCreateOrConnectWithoutWorkInput>;
   create?: Maybe<SchoolCreateWithoutWorkInput>;
   update?: Maybe<SchoolUpdateWithoutWorkInput>;
   upsert?: Maybe<SchoolUpsertWithoutWorkInput>;
@@ -4163,7 +4675,7 @@ export type SchoolUpdateOneRequiredWithoutWorkInput = {
 
 export type SchoolUpdateOneWithoutAttachmentInput = {
   connect?: Maybe<SchoolWhereUniqueInput>;
-  connectOrCreate?: Maybe<SchoolCreateOrConnectWithoutattachmentInput>;
+  connectOrCreate?: Maybe<SchoolCreateOrConnectWithoutAttachmentInput>;
   create?: Maybe<SchoolCreateWithoutAttachmentInput>;
   delete?: Maybe<Scalars['Boolean']>;
   disconnect?: Maybe<Scalars['Boolean']>;
@@ -4173,7 +4685,7 @@ export type SchoolUpdateOneWithoutAttachmentInput = {
 
 export type SchoolUpdateOneWithoutBallotsInput = {
   connect?: Maybe<SchoolWhereUniqueInput>;
-  connectOrCreate?: Maybe<SchoolCreateOrConnectWithoutballotsInput>;
+  connectOrCreate?: Maybe<SchoolCreateOrConnectWithoutBallotsInput>;
   create?: Maybe<SchoolCreateWithoutBallotsInput>;
   delete?: Maybe<Scalars['Boolean']>;
   disconnect?: Maybe<Scalars['Boolean']>;
@@ -4183,7 +4695,7 @@ export type SchoolUpdateOneWithoutBallotsInput = {
 
 export type SchoolUpdateOneWithoutDiscussionInput = {
   connect?: Maybe<SchoolWhereUniqueInput>;
-  connectOrCreate?: Maybe<SchoolCreateOrConnectWithoutdiscussionInput>;
+  connectOrCreate?: Maybe<SchoolCreateOrConnectWithoutDiscussionInput>;
   create?: Maybe<SchoolCreateWithoutDiscussionInput>;
   delete?: Maybe<Scalars['Boolean']>;
   disconnect?: Maybe<Scalars['Boolean']>;
@@ -4193,7 +4705,7 @@ export type SchoolUpdateOneWithoutDiscussionInput = {
 
 export type SchoolUpdateOneWithoutMembersInput = {
   connect?: Maybe<SchoolWhereUniqueInput>;
-  connectOrCreate?: Maybe<SchoolCreateOrConnectWithoutmembersInput>;
+  connectOrCreate?: Maybe<SchoolCreateOrConnectWithoutMembersInput>;
   create?: Maybe<SchoolCreateWithoutMembersInput>;
   delete?: Maybe<Scalars['Boolean']>;
   disconnect?: Maybe<Scalars['Boolean']>;
@@ -4566,11 +5078,11 @@ export type Team = {
   invite?: Maybe<Scalars['String']>;
   members: Array<User>;
   name: Scalars['String'];
-  notes: Scalars['Json'];
-  prefs: Scalars['Json'];
-  school: School;
-  teacher: User;
-  teacherId: Scalars['String'];
+  notes?: Maybe<Scalars['Json']>;
+  prefs?: Maybe<Scalars['Json']>;
+  school?: Maybe<School>;
+  teacher?: Maybe<User>;
+  teacherId?: Maybe<Scalars['String']>;
 };
 
 
@@ -4590,113 +5102,176 @@ export type TeamMembersArgs = {
 };
 
 export type TeamCreateInput = {
-  activity?: Maybe<ActivityCreateManyWithoutTeamInput>;
-  attachment?: Maybe<AttachmentCreateManyWithoutTeamInput>;
-  BallotRuns?: Maybe<BallotRunCreateManyWithoutTeamInput>;
-  ballots?: Maybe<BallotCreateManyWithoutTeamInput>;
+  activity?: Maybe<ActivityCreateNestedManyWithoutTeamInput>;
+  attachment?: Maybe<AttachmentCreateNestedManyWithoutTeamInput>;
+  BallotRuns?: Maybe<BallotRunCreateNestedManyWithoutTeamInput>;
+  ballots?: Maybe<BallotCreateNestedManyWithoutTeamInput>;
   cards?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['DateTime']>;
-  discussion?: Maybe<DiscussionCreateManyWithoutTeamInput>;
-  domain?: Maybe<DomainCreateOneWithoutTeamInput>;
+  discussion?: Maybe<DiscussionCreateNestedManyWithoutTeamInput>;
+  domain?: Maybe<DomainCreateNestedOneWithoutTeamInput>;
   id?: Maybe<Scalars['String']>;
-  members?: Maybe<UserCreateManyWithoutTeamInput>;
+  members?: Maybe<UserCreateNestedManyWithoutTeamInput>;
   name: Scalars['String'];
   notes?: Maybe<Scalars['Json']>;
   prefs?: Maybe<Scalars['Json']>;
-  school: SchoolCreateOneWithoutTeamsInput;
-  teacher: UserCreateOneWithoutTeachesInput;
+  school: SchoolCreateNestedOneWithoutTeamsInput;
+  teacher: UserCreateNestedOneWithoutTeachesInput;
   updatedAt?: Maybe<Scalars['DateTime']>;
-  User?: Maybe<UserCreateManyWithoutTeamInput>;
-  Vote?: Maybe<VoteCreateManyWithoutTeamInput>;
-  Voted?: Maybe<VotedCreateManyWithoutTeamInput>;
-  work?: Maybe<WorkCreateManyWithoutTeamInput>;
+  User?: Maybe<UserCreateNestedManyWithoutTeamInput>;
+  Vote?: Maybe<VoteCreateNestedManyWithoutTeamInput>;
+  Voted?: Maybe<VotedCreateNestedManyWithoutTeamInput>;
+  work?: Maybe<WorkCreateNestedManyWithoutTeamInput>;
   year?: Maybe<Scalars['Int']>;
 };
 
-export type TeamCreateManyWithoutDomainInput = {
+export type TeamCreateManyDomainInput = {
+  cards?: Maybe<Scalars['String']>;
+  code?: Maybe<Scalars['String']>;
+  createdAt?: Maybe<Scalars['DateTime']>;
+  id?: Maybe<Scalars['String']>;
+  invite?: Maybe<Scalars['String']>;
+  name: Scalars['String'];
+  notes?: Maybe<Scalars['Json']>;
+  prefs?: Maybe<Scalars['Json']>;
+  schoolId: Scalars['String'];
+  teacherId: Scalars['String'];
+  updatedAt?: Maybe<Scalars['DateTime']>;
+  year?: Maybe<Scalars['Int']>;
+};
+
+export type TeamCreateManyDomainInputEnvelope = {
+  data?: Maybe<Array<TeamCreateManyDomainInput>>;
+  skipDuplicates?: Maybe<Scalars['Boolean']>;
+};
+
+export type TeamCreateManySchoolInput = {
+  cards?: Maybe<Scalars['String']>;
+  code?: Maybe<Scalars['String']>;
+  createdAt?: Maybe<Scalars['DateTime']>;
+  domainId?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['String']>;
+  invite?: Maybe<Scalars['String']>;
+  name: Scalars['String'];
+  notes?: Maybe<Scalars['Json']>;
+  prefs?: Maybe<Scalars['Json']>;
+  teacherId: Scalars['String'];
+  updatedAt?: Maybe<Scalars['DateTime']>;
+  year?: Maybe<Scalars['Int']>;
+};
+
+export type TeamCreateManySchoolInputEnvelope = {
+  data?: Maybe<Array<TeamCreateManySchoolInput>>;
+  skipDuplicates?: Maybe<Scalars['Boolean']>;
+};
+
+export type TeamCreateManyTeacherInput = {
+  cards?: Maybe<Scalars['String']>;
+  code?: Maybe<Scalars['String']>;
+  createdAt?: Maybe<Scalars['DateTime']>;
+  domainId?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['String']>;
+  invite?: Maybe<Scalars['String']>;
+  name: Scalars['String'];
+  notes?: Maybe<Scalars['Json']>;
+  prefs?: Maybe<Scalars['Json']>;
+  schoolId: Scalars['String'];
+  updatedAt?: Maybe<Scalars['DateTime']>;
+  year?: Maybe<Scalars['Int']>;
+};
+
+export type TeamCreateManyTeacherInputEnvelope = {
+  data?: Maybe<Array<TeamCreateManyTeacherInput>>;
+  skipDuplicates?: Maybe<Scalars['Boolean']>;
+};
+
+export type TeamCreateNestedManyWithoutDomainInput = {
   connect?: Maybe<Array<TeamWhereUniqueInput>>;
-  connectOrCreate?: Maybe<Array<TeamCreateOrConnectWithoutdomainInput>>;
+  connectOrCreate?: Maybe<Array<TeamCreateOrConnectWithoutDomainInput>>;
   create?: Maybe<Array<TeamCreateWithoutDomainInput>>;
+  createMany?: Maybe<TeamCreateManyDomainInputEnvelope>;
 };
 
-export type TeamCreateManyWithoutSchoolInput = {
+export type TeamCreateNestedManyWithoutSchoolInput = {
   connect?: Maybe<Array<TeamWhereUniqueInput>>;
-  connectOrCreate?: Maybe<Array<TeamCreateOrConnectWithoutschoolInput>>;
+  connectOrCreate?: Maybe<Array<TeamCreateOrConnectWithoutSchoolInput>>;
   create?: Maybe<Array<TeamCreateWithoutSchoolInput>>;
+  createMany?: Maybe<TeamCreateManySchoolInputEnvelope>;
 };
 
-export type TeamCreateManyWithoutTeacherInput = {
+export type TeamCreateNestedManyWithoutTeacherInput = {
   connect?: Maybe<Array<TeamWhereUniqueInput>>;
-  connectOrCreate?: Maybe<Array<TeamCreateOrConnectWithoutteacherInput>>;
+  connectOrCreate?: Maybe<Array<TeamCreateOrConnectWithoutTeacherInput>>;
   create?: Maybe<Array<TeamCreateWithoutTeacherInput>>;
+  createMany?: Maybe<TeamCreateManyTeacherInputEnvelope>;
 };
 
-export type TeamCreateOneWithoutActivityInput = {
+export type TeamCreateNestedOneWithoutActivityInput = {
   connect?: Maybe<TeamWhereUniqueInput>;
-  connectOrCreate?: Maybe<TeamCreateOrConnectWithoutactivityInput>;
+  connectOrCreate?: Maybe<TeamCreateOrConnectWithoutActivityInput>;
   create?: Maybe<TeamCreateWithoutActivityInput>;
 };
 
-export type TeamCreateOneWithoutAttachmentInput = {
+export type TeamCreateNestedOneWithoutAttachmentInput = {
   connect?: Maybe<TeamWhereUniqueInput>;
-  connectOrCreate?: Maybe<TeamCreateOrConnectWithoutattachmentInput>;
+  connectOrCreate?: Maybe<TeamCreateOrConnectWithoutAttachmentInput>;
   create?: Maybe<TeamCreateWithoutAttachmentInput>;
 };
 
-export type TeamCreateOneWithoutBallotRunsInput = {
+export type TeamCreateNestedOneWithoutBallotRunsInput = {
   connect?: Maybe<TeamWhereUniqueInput>;
   connectOrCreate?: Maybe<TeamCreateOrConnectWithoutBallotRunsInput>;
   create?: Maybe<TeamCreateWithoutBallotRunsInput>;
 };
 
-export type TeamCreateOneWithoutBallotsInput = {
+export type TeamCreateNestedOneWithoutBallotsInput = {
   connect?: Maybe<TeamWhereUniqueInput>;
-  connectOrCreate?: Maybe<TeamCreateOrConnectWithoutballotsInput>;
+  connectOrCreate?: Maybe<TeamCreateOrConnectWithoutBallotsInput>;
   create?: Maybe<TeamCreateWithoutBallotsInput>;
 };
 
-export type TeamCreateOneWithoutDiscussionInput = {
+export type TeamCreateNestedOneWithoutDiscussionInput = {
   connect?: Maybe<TeamWhereUniqueInput>;
-  connectOrCreate?: Maybe<TeamCreateOrConnectWithoutdiscussionInput>;
+  connectOrCreate?: Maybe<TeamCreateOrConnectWithoutDiscussionInput>;
   create?: Maybe<TeamCreateWithoutDiscussionInput>;
 };
 
-export type TeamCreateOneWithoutMembersInput = {
+export type TeamCreateNestedOneWithoutMembersInput = {
   connect?: Maybe<TeamWhereUniqueInput>;
-  connectOrCreate?: Maybe<TeamCreateOrConnectWithoutmembersInput>;
+  connectOrCreate?: Maybe<TeamCreateOrConnectWithoutMembersInput>;
   create?: Maybe<TeamCreateWithoutMembersInput>;
 };
 
-export type TeamCreateOneWithoutUserInput = {
+export type TeamCreateNestedOneWithoutUserInput = {
   connect?: Maybe<TeamWhereUniqueInput>;
   connectOrCreate?: Maybe<TeamCreateOrConnectWithoutUserInput>;
   create?: Maybe<TeamCreateWithoutUserInput>;
 };
 
-export type TeamCreateOneWithoutVotedInput = {
+export type TeamCreateNestedOneWithoutVotedInput = {
   connect?: Maybe<TeamWhereUniqueInput>;
   connectOrCreate?: Maybe<TeamCreateOrConnectWithoutVotedInput>;
   create?: Maybe<TeamCreateWithoutVotedInput>;
 };
 
-export type TeamCreateOneWithoutVoteInput = {
+export type TeamCreateNestedOneWithoutVoteInput = {
   connect?: Maybe<TeamWhereUniqueInput>;
   connectOrCreate?: Maybe<TeamCreateOrConnectWithoutVoteInput>;
   create?: Maybe<TeamCreateWithoutVoteInput>;
 };
 
-export type TeamCreateOneWithoutWorkInput = {
+export type TeamCreateNestedOneWithoutWorkInput = {
   connect?: Maybe<TeamWhereUniqueInput>;
-  connectOrCreate?: Maybe<TeamCreateOrConnectWithoutworkInput>;
+  connectOrCreate?: Maybe<TeamCreateOrConnectWithoutWorkInput>;
   create?: Maybe<TeamCreateWithoutWorkInput>;
 };
 
-export type TeamCreateOrConnectWithoutactivityInput = {
+export type TeamCreateOrConnectWithoutActivityInput = {
   create: TeamCreateWithoutActivityInput;
   where: TeamWhereUniqueInput;
 };
 
-export type TeamCreateOrConnectWithoutattachmentInput = {
+export type TeamCreateOrConnectWithoutAttachmentInput = {
   create: TeamCreateWithoutAttachmentInput;
   where: TeamWhereUniqueInput;
 };
@@ -4706,32 +5281,32 @@ export type TeamCreateOrConnectWithoutBallotRunsInput = {
   where: TeamWhereUniqueInput;
 };
 
-export type TeamCreateOrConnectWithoutballotsInput = {
+export type TeamCreateOrConnectWithoutBallotsInput = {
   create: TeamCreateWithoutBallotsInput;
   where: TeamWhereUniqueInput;
 };
 
-export type TeamCreateOrConnectWithoutdiscussionInput = {
+export type TeamCreateOrConnectWithoutDiscussionInput = {
   create: TeamCreateWithoutDiscussionInput;
   where: TeamWhereUniqueInput;
 };
 
-export type TeamCreateOrConnectWithoutdomainInput = {
+export type TeamCreateOrConnectWithoutDomainInput = {
   create: TeamCreateWithoutDomainInput;
   where: TeamWhereUniqueInput;
 };
 
-export type TeamCreateOrConnectWithoutmembersInput = {
+export type TeamCreateOrConnectWithoutMembersInput = {
   create: TeamCreateWithoutMembersInput;
   where: TeamWhereUniqueInput;
 };
 
-export type TeamCreateOrConnectWithoutschoolInput = {
+export type TeamCreateOrConnectWithoutSchoolInput = {
   create: TeamCreateWithoutSchoolInput;
   where: TeamWhereUniqueInput;
 };
 
-export type TeamCreateOrConnectWithoutteacherInput = {
+export type TeamCreateOrConnectWithoutTeacherInput = {
   create: TeamCreateWithoutTeacherInput;
   where: TeamWhereUniqueInput;
 };
@@ -4751,333 +5326,333 @@ export type TeamCreateOrConnectWithoutVoteInput = {
   where: TeamWhereUniqueInput;
 };
 
-export type TeamCreateOrConnectWithoutworkInput = {
+export type TeamCreateOrConnectWithoutWorkInput = {
   create: TeamCreateWithoutWorkInput;
   where: TeamWhereUniqueInput;
 };
 
 export type TeamCreateWithoutActivityInput = {
-  attachment?: Maybe<AttachmentCreateManyWithoutTeamInput>;
-  BallotRuns?: Maybe<BallotRunCreateManyWithoutTeamInput>;
-  ballots?: Maybe<BallotCreateManyWithoutTeamInput>;
+  attachment?: Maybe<AttachmentCreateNestedManyWithoutTeamInput>;
+  BallotRuns?: Maybe<BallotRunCreateNestedManyWithoutTeamInput>;
+  ballots?: Maybe<BallotCreateNestedManyWithoutTeamInput>;
   cards?: Maybe<Scalars['String']>;
   code?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['DateTime']>;
-  discussion?: Maybe<DiscussionCreateManyWithoutTeamInput>;
-  domain?: Maybe<DomainCreateOneWithoutTeamInput>;
+  discussion?: Maybe<DiscussionCreateNestedManyWithoutTeamInput>;
+  domain?: Maybe<DomainCreateNestedOneWithoutTeamInput>;
   id?: Maybe<Scalars['String']>;
   invite?: Maybe<Scalars['String']>;
-  members?: Maybe<UserCreateManyWithoutTeamInput>;
+  members?: Maybe<UserCreateNestedManyWithoutTeamInput>;
   name: Scalars['String'];
   notes?: Maybe<Scalars['Json']>;
   prefs?: Maybe<Scalars['Json']>;
-  school: SchoolCreateOneWithoutTeamsInput;
-  teacher: UserCreateOneWithoutTeachesInput;
+  school: SchoolCreateNestedOneWithoutTeamsInput;
+  teacher: UserCreateNestedOneWithoutTeachesInput;
   updatedAt?: Maybe<Scalars['DateTime']>;
-  User?: Maybe<UserCreateManyWithoutTeamInput>;
-  Vote?: Maybe<VoteCreateManyWithoutTeamInput>;
-  Voted?: Maybe<VotedCreateManyWithoutTeamInput>;
-  work?: Maybe<WorkCreateManyWithoutTeamInput>;
+  User?: Maybe<UserCreateNestedManyWithoutTeamInput>;
+  Vote?: Maybe<VoteCreateNestedManyWithoutTeamInput>;
+  Voted?: Maybe<VotedCreateNestedManyWithoutTeamInput>;
+  work?: Maybe<WorkCreateNestedManyWithoutTeamInput>;
   year?: Maybe<Scalars['Int']>;
 };
 
 export type TeamCreateWithoutAttachmentInput = {
-  activity?: Maybe<ActivityCreateManyWithoutTeamInput>;
-  BallotRuns?: Maybe<BallotRunCreateManyWithoutTeamInput>;
-  ballots?: Maybe<BallotCreateManyWithoutTeamInput>;
+  activity?: Maybe<ActivityCreateNestedManyWithoutTeamInput>;
+  BallotRuns?: Maybe<BallotRunCreateNestedManyWithoutTeamInput>;
+  ballots?: Maybe<BallotCreateNestedManyWithoutTeamInput>;
   cards?: Maybe<Scalars['String']>;
   code?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['DateTime']>;
-  discussion?: Maybe<DiscussionCreateManyWithoutTeamInput>;
-  domain?: Maybe<DomainCreateOneWithoutTeamInput>;
+  discussion?: Maybe<DiscussionCreateNestedManyWithoutTeamInput>;
+  domain?: Maybe<DomainCreateNestedOneWithoutTeamInput>;
   id?: Maybe<Scalars['String']>;
   invite?: Maybe<Scalars['String']>;
-  members?: Maybe<UserCreateManyWithoutTeamInput>;
+  members?: Maybe<UserCreateNestedManyWithoutTeamInput>;
   name: Scalars['String'];
   notes?: Maybe<Scalars['Json']>;
   prefs?: Maybe<Scalars['Json']>;
-  school: SchoolCreateOneWithoutTeamsInput;
-  teacher: UserCreateOneWithoutTeachesInput;
+  school: SchoolCreateNestedOneWithoutTeamsInput;
+  teacher: UserCreateNestedOneWithoutTeachesInput;
   updatedAt?: Maybe<Scalars['DateTime']>;
-  User?: Maybe<UserCreateManyWithoutTeamInput>;
-  Vote?: Maybe<VoteCreateManyWithoutTeamInput>;
-  Voted?: Maybe<VotedCreateManyWithoutTeamInput>;
-  work?: Maybe<WorkCreateManyWithoutTeamInput>;
+  User?: Maybe<UserCreateNestedManyWithoutTeamInput>;
+  Vote?: Maybe<VoteCreateNestedManyWithoutTeamInput>;
+  Voted?: Maybe<VotedCreateNestedManyWithoutTeamInput>;
+  work?: Maybe<WorkCreateNestedManyWithoutTeamInput>;
   year?: Maybe<Scalars['Int']>;
 };
 
 export type TeamCreateWithoutBallotRunsInput = {
-  activity?: Maybe<ActivityCreateManyWithoutTeamInput>;
-  attachment?: Maybe<AttachmentCreateManyWithoutTeamInput>;
-  ballots?: Maybe<BallotCreateManyWithoutTeamInput>;
+  activity?: Maybe<ActivityCreateNestedManyWithoutTeamInput>;
+  attachment?: Maybe<AttachmentCreateNestedManyWithoutTeamInput>;
+  ballots?: Maybe<BallotCreateNestedManyWithoutTeamInput>;
   cards?: Maybe<Scalars['String']>;
   code?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['DateTime']>;
-  discussion?: Maybe<DiscussionCreateManyWithoutTeamInput>;
-  domain?: Maybe<DomainCreateOneWithoutTeamInput>;
+  discussion?: Maybe<DiscussionCreateNestedManyWithoutTeamInput>;
+  domain?: Maybe<DomainCreateNestedOneWithoutTeamInput>;
   id?: Maybe<Scalars['String']>;
   invite?: Maybe<Scalars['String']>;
-  members?: Maybe<UserCreateManyWithoutTeamInput>;
+  members?: Maybe<UserCreateNestedManyWithoutTeamInput>;
   name: Scalars['String'];
   notes?: Maybe<Scalars['Json']>;
   prefs?: Maybe<Scalars['Json']>;
-  school: SchoolCreateOneWithoutTeamsInput;
-  teacher: UserCreateOneWithoutTeachesInput;
+  school: SchoolCreateNestedOneWithoutTeamsInput;
+  teacher: UserCreateNestedOneWithoutTeachesInput;
   updatedAt?: Maybe<Scalars['DateTime']>;
-  User?: Maybe<UserCreateManyWithoutTeamInput>;
-  Vote?: Maybe<VoteCreateManyWithoutTeamInput>;
-  Voted?: Maybe<VotedCreateManyWithoutTeamInput>;
-  work?: Maybe<WorkCreateManyWithoutTeamInput>;
+  User?: Maybe<UserCreateNestedManyWithoutTeamInput>;
+  Vote?: Maybe<VoteCreateNestedManyWithoutTeamInput>;
+  Voted?: Maybe<VotedCreateNestedManyWithoutTeamInput>;
+  work?: Maybe<WorkCreateNestedManyWithoutTeamInput>;
   year?: Maybe<Scalars['Int']>;
 };
 
 export type TeamCreateWithoutBallotsInput = {
-  activity?: Maybe<ActivityCreateManyWithoutTeamInput>;
-  attachment?: Maybe<AttachmentCreateManyWithoutTeamInput>;
-  BallotRuns?: Maybe<BallotRunCreateManyWithoutTeamInput>;
+  activity?: Maybe<ActivityCreateNestedManyWithoutTeamInput>;
+  attachment?: Maybe<AttachmentCreateNestedManyWithoutTeamInput>;
+  BallotRuns?: Maybe<BallotRunCreateNestedManyWithoutTeamInput>;
   cards?: Maybe<Scalars['String']>;
   code?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['DateTime']>;
-  discussion?: Maybe<DiscussionCreateManyWithoutTeamInput>;
-  domain?: Maybe<DomainCreateOneWithoutTeamInput>;
+  discussion?: Maybe<DiscussionCreateNestedManyWithoutTeamInput>;
+  domain?: Maybe<DomainCreateNestedOneWithoutTeamInput>;
   id?: Maybe<Scalars['String']>;
   invite?: Maybe<Scalars['String']>;
-  members?: Maybe<UserCreateManyWithoutTeamInput>;
+  members?: Maybe<UserCreateNestedManyWithoutTeamInput>;
   name: Scalars['String'];
   notes?: Maybe<Scalars['Json']>;
   prefs?: Maybe<Scalars['Json']>;
-  school: SchoolCreateOneWithoutTeamsInput;
-  teacher: UserCreateOneWithoutTeachesInput;
+  school: SchoolCreateNestedOneWithoutTeamsInput;
+  teacher: UserCreateNestedOneWithoutTeachesInput;
   updatedAt?: Maybe<Scalars['DateTime']>;
-  User?: Maybe<UserCreateManyWithoutTeamInput>;
-  Vote?: Maybe<VoteCreateManyWithoutTeamInput>;
-  Voted?: Maybe<VotedCreateManyWithoutTeamInput>;
-  work?: Maybe<WorkCreateManyWithoutTeamInput>;
+  User?: Maybe<UserCreateNestedManyWithoutTeamInput>;
+  Vote?: Maybe<VoteCreateNestedManyWithoutTeamInput>;
+  Voted?: Maybe<VotedCreateNestedManyWithoutTeamInput>;
+  work?: Maybe<WorkCreateNestedManyWithoutTeamInput>;
   year?: Maybe<Scalars['Int']>;
 };
 
 export type TeamCreateWithoutDiscussionInput = {
-  activity?: Maybe<ActivityCreateManyWithoutTeamInput>;
-  attachment?: Maybe<AttachmentCreateManyWithoutTeamInput>;
-  BallotRuns?: Maybe<BallotRunCreateManyWithoutTeamInput>;
-  ballots?: Maybe<BallotCreateManyWithoutTeamInput>;
+  activity?: Maybe<ActivityCreateNestedManyWithoutTeamInput>;
+  attachment?: Maybe<AttachmentCreateNestedManyWithoutTeamInput>;
+  BallotRuns?: Maybe<BallotRunCreateNestedManyWithoutTeamInput>;
+  ballots?: Maybe<BallotCreateNestedManyWithoutTeamInput>;
   cards?: Maybe<Scalars['String']>;
   code?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['DateTime']>;
-  domain?: Maybe<DomainCreateOneWithoutTeamInput>;
+  domain?: Maybe<DomainCreateNestedOneWithoutTeamInput>;
   id?: Maybe<Scalars['String']>;
   invite?: Maybe<Scalars['String']>;
-  members?: Maybe<UserCreateManyWithoutTeamInput>;
+  members?: Maybe<UserCreateNestedManyWithoutTeamInput>;
   name: Scalars['String'];
   notes?: Maybe<Scalars['Json']>;
   prefs?: Maybe<Scalars['Json']>;
-  school: SchoolCreateOneWithoutTeamsInput;
-  teacher: UserCreateOneWithoutTeachesInput;
+  school: SchoolCreateNestedOneWithoutTeamsInput;
+  teacher: UserCreateNestedOneWithoutTeachesInput;
   updatedAt?: Maybe<Scalars['DateTime']>;
-  User?: Maybe<UserCreateManyWithoutTeamInput>;
-  Vote?: Maybe<VoteCreateManyWithoutTeamInput>;
-  Voted?: Maybe<VotedCreateManyWithoutTeamInput>;
-  work?: Maybe<WorkCreateManyWithoutTeamInput>;
+  User?: Maybe<UserCreateNestedManyWithoutTeamInput>;
+  Vote?: Maybe<VoteCreateNestedManyWithoutTeamInput>;
+  Voted?: Maybe<VotedCreateNestedManyWithoutTeamInput>;
+  work?: Maybe<WorkCreateNestedManyWithoutTeamInput>;
   year?: Maybe<Scalars['Int']>;
 };
 
 export type TeamCreateWithoutDomainInput = {
-  activity?: Maybe<ActivityCreateManyWithoutTeamInput>;
-  attachment?: Maybe<AttachmentCreateManyWithoutTeamInput>;
-  BallotRuns?: Maybe<BallotRunCreateManyWithoutTeamInput>;
-  ballots?: Maybe<BallotCreateManyWithoutTeamInput>;
+  activity?: Maybe<ActivityCreateNestedManyWithoutTeamInput>;
+  attachment?: Maybe<AttachmentCreateNestedManyWithoutTeamInput>;
+  BallotRuns?: Maybe<BallotRunCreateNestedManyWithoutTeamInput>;
+  ballots?: Maybe<BallotCreateNestedManyWithoutTeamInput>;
   cards?: Maybe<Scalars['String']>;
   code?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['DateTime']>;
-  discussion?: Maybe<DiscussionCreateManyWithoutTeamInput>;
+  discussion?: Maybe<DiscussionCreateNestedManyWithoutTeamInput>;
   id?: Maybe<Scalars['String']>;
   invite?: Maybe<Scalars['String']>;
-  members?: Maybe<UserCreateManyWithoutTeamInput>;
+  members?: Maybe<UserCreateNestedManyWithoutTeamInput>;
   name: Scalars['String'];
   notes?: Maybe<Scalars['Json']>;
   prefs?: Maybe<Scalars['Json']>;
-  school: SchoolCreateOneWithoutTeamsInput;
-  teacher: UserCreateOneWithoutTeachesInput;
+  school: SchoolCreateNestedOneWithoutTeamsInput;
+  teacher: UserCreateNestedOneWithoutTeachesInput;
   updatedAt?: Maybe<Scalars['DateTime']>;
-  User?: Maybe<UserCreateManyWithoutTeamInput>;
-  Vote?: Maybe<VoteCreateManyWithoutTeamInput>;
-  Voted?: Maybe<VotedCreateManyWithoutTeamInput>;
-  work?: Maybe<WorkCreateManyWithoutTeamInput>;
+  User?: Maybe<UserCreateNestedManyWithoutTeamInput>;
+  Vote?: Maybe<VoteCreateNestedManyWithoutTeamInput>;
+  Voted?: Maybe<VotedCreateNestedManyWithoutTeamInput>;
+  work?: Maybe<WorkCreateNestedManyWithoutTeamInput>;
   year?: Maybe<Scalars['Int']>;
 };
 
 export type TeamCreateWithoutMembersInput = {
-  activity?: Maybe<ActivityCreateManyWithoutTeamInput>;
-  attachment?: Maybe<AttachmentCreateManyWithoutTeamInput>;
-  BallotRuns?: Maybe<BallotRunCreateManyWithoutTeamInput>;
-  ballots?: Maybe<BallotCreateManyWithoutTeamInput>;
+  activity?: Maybe<ActivityCreateNestedManyWithoutTeamInput>;
+  attachment?: Maybe<AttachmentCreateNestedManyWithoutTeamInput>;
+  BallotRuns?: Maybe<BallotRunCreateNestedManyWithoutTeamInput>;
+  ballots?: Maybe<BallotCreateNestedManyWithoutTeamInput>;
   cards?: Maybe<Scalars['String']>;
   code?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['DateTime']>;
-  discussion?: Maybe<DiscussionCreateManyWithoutTeamInput>;
-  domain?: Maybe<DomainCreateOneWithoutTeamInput>;
+  discussion?: Maybe<DiscussionCreateNestedManyWithoutTeamInput>;
+  domain?: Maybe<DomainCreateNestedOneWithoutTeamInput>;
   id?: Maybe<Scalars['String']>;
   invite?: Maybe<Scalars['String']>;
   name: Scalars['String'];
   notes?: Maybe<Scalars['Json']>;
   prefs?: Maybe<Scalars['Json']>;
-  school: SchoolCreateOneWithoutTeamsInput;
-  teacher: UserCreateOneWithoutTeachesInput;
+  school: SchoolCreateNestedOneWithoutTeamsInput;
+  teacher: UserCreateNestedOneWithoutTeachesInput;
   updatedAt?: Maybe<Scalars['DateTime']>;
-  User?: Maybe<UserCreateManyWithoutTeamInput>;
-  Vote?: Maybe<VoteCreateManyWithoutTeamInput>;
-  Voted?: Maybe<VotedCreateManyWithoutTeamInput>;
-  work?: Maybe<WorkCreateManyWithoutTeamInput>;
+  User?: Maybe<UserCreateNestedManyWithoutTeamInput>;
+  Vote?: Maybe<VoteCreateNestedManyWithoutTeamInput>;
+  Voted?: Maybe<VotedCreateNestedManyWithoutTeamInput>;
+  work?: Maybe<WorkCreateNestedManyWithoutTeamInput>;
   year?: Maybe<Scalars['Int']>;
 };
 
 export type TeamCreateWithoutSchoolInput = {
-  activity?: Maybe<ActivityCreateManyWithoutTeamInput>;
-  attachment?: Maybe<AttachmentCreateManyWithoutTeamInput>;
-  BallotRuns?: Maybe<BallotRunCreateManyWithoutTeamInput>;
-  ballots?: Maybe<BallotCreateManyWithoutTeamInput>;
+  activity?: Maybe<ActivityCreateNestedManyWithoutTeamInput>;
+  attachment?: Maybe<AttachmentCreateNestedManyWithoutTeamInput>;
+  BallotRuns?: Maybe<BallotRunCreateNestedManyWithoutTeamInput>;
+  ballots?: Maybe<BallotCreateNestedManyWithoutTeamInput>;
   cards?: Maybe<Scalars['String']>;
   code?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['DateTime']>;
-  discussion?: Maybe<DiscussionCreateManyWithoutTeamInput>;
-  domain?: Maybe<DomainCreateOneWithoutTeamInput>;
+  discussion?: Maybe<DiscussionCreateNestedManyWithoutTeamInput>;
+  domain?: Maybe<DomainCreateNestedOneWithoutTeamInput>;
   id?: Maybe<Scalars['String']>;
   invite?: Maybe<Scalars['String']>;
-  members?: Maybe<UserCreateManyWithoutTeamInput>;
+  members?: Maybe<UserCreateNestedManyWithoutTeamInput>;
   name: Scalars['String'];
   notes?: Maybe<Scalars['Json']>;
   prefs?: Maybe<Scalars['Json']>;
-  teacher: UserCreateOneWithoutTeachesInput;
+  teacher: UserCreateNestedOneWithoutTeachesInput;
   updatedAt?: Maybe<Scalars['DateTime']>;
-  User?: Maybe<UserCreateManyWithoutTeamInput>;
-  Vote?: Maybe<VoteCreateManyWithoutTeamInput>;
-  Voted?: Maybe<VotedCreateManyWithoutTeamInput>;
-  work?: Maybe<WorkCreateManyWithoutTeamInput>;
+  User?: Maybe<UserCreateNestedManyWithoutTeamInput>;
+  Vote?: Maybe<VoteCreateNestedManyWithoutTeamInput>;
+  Voted?: Maybe<VotedCreateNestedManyWithoutTeamInput>;
+  work?: Maybe<WorkCreateNestedManyWithoutTeamInput>;
   year?: Maybe<Scalars['Int']>;
 };
 
 export type TeamCreateWithoutTeacherInput = {
-  activity?: Maybe<ActivityCreateManyWithoutTeamInput>;
-  attachment?: Maybe<AttachmentCreateManyWithoutTeamInput>;
-  BallotRuns?: Maybe<BallotRunCreateManyWithoutTeamInput>;
-  ballots?: Maybe<BallotCreateManyWithoutTeamInput>;
+  activity?: Maybe<ActivityCreateNestedManyWithoutTeamInput>;
+  attachment?: Maybe<AttachmentCreateNestedManyWithoutTeamInput>;
+  BallotRuns?: Maybe<BallotRunCreateNestedManyWithoutTeamInput>;
+  ballots?: Maybe<BallotCreateNestedManyWithoutTeamInput>;
   cards?: Maybe<Scalars['String']>;
   code?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['DateTime']>;
-  discussion?: Maybe<DiscussionCreateManyWithoutTeamInput>;
-  domain?: Maybe<DomainCreateOneWithoutTeamInput>;
+  discussion?: Maybe<DiscussionCreateNestedManyWithoutTeamInput>;
+  domain?: Maybe<DomainCreateNestedOneWithoutTeamInput>;
   id?: Maybe<Scalars['String']>;
   invite?: Maybe<Scalars['String']>;
-  members?: Maybe<UserCreateManyWithoutTeamInput>;
+  members?: Maybe<UserCreateNestedManyWithoutTeamInput>;
   name: Scalars['String'];
   notes?: Maybe<Scalars['Json']>;
   prefs?: Maybe<Scalars['Json']>;
-  school: SchoolCreateOneWithoutTeamsInput;
+  school: SchoolCreateNestedOneWithoutTeamsInput;
   updatedAt?: Maybe<Scalars['DateTime']>;
-  User?: Maybe<UserCreateManyWithoutTeamInput>;
-  Vote?: Maybe<VoteCreateManyWithoutTeamInput>;
-  Voted?: Maybe<VotedCreateManyWithoutTeamInput>;
-  work?: Maybe<WorkCreateManyWithoutTeamInput>;
+  User?: Maybe<UserCreateNestedManyWithoutTeamInput>;
+  Vote?: Maybe<VoteCreateNestedManyWithoutTeamInput>;
+  Voted?: Maybe<VotedCreateNestedManyWithoutTeamInput>;
+  work?: Maybe<WorkCreateNestedManyWithoutTeamInput>;
   year?: Maybe<Scalars['Int']>;
 };
 
 export type TeamCreateWithoutUserInput = {
-  activity?: Maybe<ActivityCreateManyWithoutTeamInput>;
-  attachment?: Maybe<AttachmentCreateManyWithoutTeamInput>;
-  BallotRuns?: Maybe<BallotRunCreateManyWithoutTeamInput>;
-  ballots?: Maybe<BallotCreateManyWithoutTeamInput>;
+  activity?: Maybe<ActivityCreateNestedManyWithoutTeamInput>;
+  attachment?: Maybe<AttachmentCreateNestedManyWithoutTeamInput>;
+  BallotRuns?: Maybe<BallotRunCreateNestedManyWithoutTeamInput>;
+  ballots?: Maybe<BallotCreateNestedManyWithoutTeamInput>;
   cards?: Maybe<Scalars['String']>;
   code?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['DateTime']>;
-  discussion?: Maybe<DiscussionCreateManyWithoutTeamInput>;
-  domain?: Maybe<DomainCreateOneWithoutTeamInput>;
+  discussion?: Maybe<DiscussionCreateNestedManyWithoutTeamInput>;
+  domain?: Maybe<DomainCreateNestedOneWithoutTeamInput>;
   id?: Maybe<Scalars['String']>;
   invite?: Maybe<Scalars['String']>;
-  members?: Maybe<UserCreateManyWithoutTeamInput>;
+  members?: Maybe<UserCreateNestedManyWithoutTeamInput>;
   name: Scalars['String'];
   notes?: Maybe<Scalars['Json']>;
   prefs?: Maybe<Scalars['Json']>;
-  school: SchoolCreateOneWithoutTeamsInput;
-  teacher: UserCreateOneWithoutTeachesInput;
+  school: SchoolCreateNestedOneWithoutTeamsInput;
+  teacher: UserCreateNestedOneWithoutTeachesInput;
   updatedAt?: Maybe<Scalars['DateTime']>;
-  Vote?: Maybe<VoteCreateManyWithoutTeamInput>;
-  Voted?: Maybe<VotedCreateManyWithoutTeamInput>;
-  work?: Maybe<WorkCreateManyWithoutTeamInput>;
+  Vote?: Maybe<VoteCreateNestedManyWithoutTeamInput>;
+  Voted?: Maybe<VotedCreateNestedManyWithoutTeamInput>;
+  work?: Maybe<WorkCreateNestedManyWithoutTeamInput>;
   year?: Maybe<Scalars['Int']>;
 };
 
 export type TeamCreateWithoutVotedInput = {
-  activity?: Maybe<ActivityCreateManyWithoutTeamInput>;
-  attachment?: Maybe<AttachmentCreateManyWithoutTeamInput>;
-  BallotRuns?: Maybe<BallotRunCreateManyWithoutTeamInput>;
-  ballots?: Maybe<BallotCreateManyWithoutTeamInput>;
+  activity?: Maybe<ActivityCreateNestedManyWithoutTeamInput>;
+  attachment?: Maybe<AttachmentCreateNestedManyWithoutTeamInput>;
+  BallotRuns?: Maybe<BallotRunCreateNestedManyWithoutTeamInput>;
+  ballots?: Maybe<BallotCreateNestedManyWithoutTeamInput>;
   cards?: Maybe<Scalars['String']>;
   code?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['DateTime']>;
-  discussion?: Maybe<DiscussionCreateManyWithoutTeamInput>;
-  domain?: Maybe<DomainCreateOneWithoutTeamInput>;
+  discussion?: Maybe<DiscussionCreateNestedManyWithoutTeamInput>;
+  domain?: Maybe<DomainCreateNestedOneWithoutTeamInput>;
   id?: Maybe<Scalars['String']>;
   invite?: Maybe<Scalars['String']>;
-  members?: Maybe<UserCreateManyWithoutTeamInput>;
+  members?: Maybe<UserCreateNestedManyWithoutTeamInput>;
   name: Scalars['String'];
   notes?: Maybe<Scalars['Json']>;
   prefs?: Maybe<Scalars['Json']>;
-  school: SchoolCreateOneWithoutTeamsInput;
-  teacher: UserCreateOneWithoutTeachesInput;
+  school: SchoolCreateNestedOneWithoutTeamsInput;
+  teacher: UserCreateNestedOneWithoutTeachesInput;
   updatedAt?: Maybe<Scalars['DateTime']>;
-  User?: Maybe<UserCreateManyWithoutTeamInput>;
-  Vote?: Maybe<VoteCreateManyWithoutTeamInput>;
-  work?: Maybe<WorkCreateManyWithoutTeamInput>;
+  User?: Maybe<UserCreateNestedManyWithoutTeamInput>;
+  Vote?: Maybe<VoteCreateNestedManyWithoutTeamInput>;
+  work?: Maybe<WorkCreateNestedManyWithoutTeamInput>;
   year?: Maybe<Scalars['Int']>;
 };
 
 export type TeamCreateWithoutVoteInput = {
-  activity?: Maybe<ActivityCreateManyWithoutTeamInput>;
-  attachment?: Maybe<AttachmentCreateManyWithoutTeamInput>;
-  BallotRuns?: Maybe<BallotRunCreateManyWithoutTeamInput>;
-  ballots?: Maybe<BallotCreateManyWithoutTeamInput>;
+  activity?: Maybe<ActivityCreateNestedManyWithoutTeamInput>;
+  attachment?: Maybe<AttachmentCreateNestedManyWithoutTeamInput>;
+  BallotRuns?: Maybe<BallotRunCreateNestedManyWithoutTeamInput>;
+  ballots?: Maybe<BallotCreateNestedManyWithoutTeamInput>;
   cards?: Maybe<Scalars['String']>;
   code?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['DateTime']>;
-  discussion?: Maybe<DiscussionCreateManyWithoutTeamInput>;
-  domain?: Maybe<DomainCreateOneWithoutTeamInput>;
+  discussion?: Maybe<DiscussionCreateNestedManyWithoutTeamInput>;
+  domain?: Maybe<DomainCreateNestedOneWithoutTeamInput>;
   id?: Maybe<Scalars['String']>;
   invite?: Maybe<Scalars['String']>;
-  members?: Maybe<UserCreateManyWithoutTeamInput>;
+  members?: Maybe<UserCreateNestedManyWithoutTeamInput>;
   name: Scalars['String'];
   notes?: Maybe<Scalars['Json']>;
   prefs?: Maybe<Scalars['Json']>;
-  school: SchoolCreateOneWithoutTeamsInput;
-  teacher: UserCreateOneWithoutTeachesInput;
+  school: SchoolCreateNestedOneWithoutTeamsInput;
+  teacher: UserCreateNestedOneWithoutTeachesInput;
   updatedAt?: Maybe<Scalars['DateTime']>;
-  User?: Maybe<UserCreateManyWithoutTeamInput>;
-  Voted?: Maybe<VotedCreateManyWithoutTeamInput>;
-  work?: Maybe<WorkCreateManyWithoutTeamInput>;
+  User?: Maybe<UserCreateNestedManyWithoutTeamInput>;
+  Voted?: Maybe<VotedCreateNestedManyWithoutTeamInput>;
+  work?: Maybe<WorkCreateNestedManyWithoutTeamInput>;
   year?: Maybe<Scalars['Int']>;
 };
 
 export type TeamCreateWithoutWorkInput = {
-  activity?: Maybe<ActivityCreateManyWithoutTeamInput>;
-  attachment?: Maybe<AttachmentCreateManyWithoutTeamInput>;
-  BallotRuns?: Maybe<BallotRunCreateManyWithoutTeamInput>;
-  ballots?: Maybe<BallotCreateManyWithoutTeamInput>;
+  activity?: Maybe<ActivityCreateNestedManyWithoutTeamInput>;
+  attachment?: Maybe<AttachmentCreateNestedManyWithoutTeamInput>;
+  BallotRuns?: Maybe<BallotRunCreateNestedManyWithoutTeamInput>;
+  ballots?: Maybe<BallotCreateNestedManyWithoutTeamInput>;
   cards?: Maybe<Scalars['String']>;
   code?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['DateTime']>;
-  discussion?: Maybe<DiscussionCreateManyWithoutTeamInput>;
-  domain?: Maybe<DomainCreateOneWithoutTeamInput>;
+  discussion?: Maybe<DiscussionCreateNestedManyWithoutTeamInput>;
+  domain?: Maybe<DomainCreateNestedOneWithoutTeamInput>;
   id?: Maybe<Scalars['String']>;
   invite?: Maybe<Scalars['String']>;
-  members?: Maybe<UserCreateManyWithoutTeamInput>;
+  members?: Maybe<UserCreateNestedManyWithoutTeamInput>;
   name: Scalars['String'];
   notes?: Maybe<Scalars['Json']>;
   prefs?: Maybe<Scalars['Json']>;
-  school: SchoolCreateOneWithoutTeamsInput;
-  teacher: UserCreateOneWithoutTeachesInput;
+  school: SchoolCreateNestedOneWithoutTeamsInput;
+  teacher: UserCreateNestedOneWithoutTeachesInput;
   updatedAt?: Maybe<Scalars['DateTime']>;
-  User?: Maybe<UserCreateManyWithoutTeamInput>;
-  Vote?: Maybe<VoteCreateManyWithoutTeamInput>;
-  Voted?: Maybe<VotedCreateManyWithoutTeamInput>;
+  User?: Maybe<UserCreateNestedManyWithoutTeamInput>;
+  Vote?: Maybe<VoteCreateNestedManyWithoutTeamInput>;
+  Voted?: Maybe<VotedCreateNestedManyWithoutTeamInput>;
   year?: Maybe<Scalars['Int']>;
 };
 
@@ -5135,8 +5710,9 @@ export type TeamUpdateManyMutationInput = {
 
 export type TeamUpdateManyWithoutDomainInput = {
   connect?: Maybe<Array<TeamWhereUniqueInput>>;
-  connectOrCreate?: Maybe<Array<TeamCreateOrConnectWithoutdomainInput>>;
+  connectOrCreate?: Maybe<Array<TeamCreateOrConnectWithoutDomainInput>>;
   create?: Maybe<Array<TeamCreateWithoutDomainInput>>;
+  createMany?: Maybe<TeamCreateManyDomainInputEnvelope>;
   delete?: Maybe<Array<TeamWhereUniqueInput>>;
   deleteMany?: Maybe<Array<TeamScalarWhereInput>>;
   disconnect?: Maybe<Array<TeamWhereUniqueInput>>;
@@ -5148,8 +5724,9 @@ export type TeamUpdateManyWithoutDomainInput = {
 
 export type TeamUpdateManyWithoutSchoolInput = {
   connect?: Maybe<Array<TeamWhereUniqueInput>>;
-  connectOrCreate?: Maybe<Array<TeamCreateOrConnectWithoutschoolInput>>;
+  connectOrCreate?: Maybe<Array<TeamCreateOrConnectWithoutSchoolInput>>;
   create?: Maybe<Array<TeamCreateWithoutSchoolInput>>;
+  createMany?: Maybe<TeamCreateManySchoolInputEnvelope>;
   delete?: Maybe<Array<TeamWhereUniqueInput>>;
   deleteMany?: Maybe<Array<TeamScalarWhereInput>>;
   disconnect?: Maybe<Array<TeamWhereUniqueInput>>;
@@ -5161,8 +5738,9 @@ export type TeamUpdateManyWithoutSchoolInput = {
 
 export type TeamUpdateManyWithoutTeacherInput = {
   connect?: Maybe<Array<TeamWhereUniqueInput>>;
-  connectOrCreate?: Maybe<Array<TeamCreateOrConnectWithoutteacherInput>>;
+  connectOrCreate?: Maybe<Array<TeamCreateOrConnectWithoutTeacherInput>>;
   create?: Maybe<Array<TeamCreateWithoutTeacherInput>>;
+  createMany?: Maybe<TeamCreateManyTeacherInputEnvelope>;
   delete?: Maybe<Array<TeamWhereUniqueInput>>;
   deleteMany?: Maybe<Array<TeamScalarWhereInput>>;
   disconnect?: Maybe<Array<TeamWhereUniqueInput>>;
@@ -5189,7 +5767,7 @@ export type TeamUpdateManyWithWhereWithoutTeacherInput = {
 
 export type TeamUpdateOneRequiredWithoutActivityInput = {
   connect?: Maybe<TeamWhereUniqueInput>;
-  connectOrCreate?: Maybe<TeamCreateOrConnectWithoutactivityInput>;
+  connectOrCreate?: Maybe<TeamCreateOrConnectWithoutActivityInput>;
   create?: Maybe<TeamCreateWithoutActivityInput>;
   update?: Maybe<TeamUpdateWithoutActivityInput>;
   upsert?: Maybe<TeamUpsertWithoutActivityInput>;
@@ -5197,7 +5775,7 @@ export type TeamUpdateOneRequiredWithoutActivityInput = {
 
 export type TeamUpdateOneRequiredWithoutAttachmentInput = {
   connect?: Maybe<TeamWhereUniqueInput>;
-  connectOrCreate?: Maybe<TeamCreateOrConnectWithoutattachmentInput>;
+  connectOrCreate?: Maybe<TeamCreateOrConnectWithoutAttachmentInput>;
   create?: Maybe<TeamCreateWithoutAttachmentInput>;
   update?: Maybe<TeamUpdateWithoutAttachmentInput>;
   upsert?: Maybe<TeamUpsertWithoutAttachmentInput>;
@@ -5213,7 +5791,7 @@ export type TeamUpdateOneRequiredWithoutBallotRunsInput = {
 
 export type TeamUpdateOneRequiredWithoutDiscussionInput = {
   connect?: Maybe<TeamWhereUniqueInput>;
-  connectOrCreate?: Maybe<TeamCreateOrConnectWithoutdiscussionInput>;
+  connectOrCreate?: Maybe<TeamCreateOrConnectWithoutDiscussionInput>;
   create?: Maybe<TeamCreateWithoutDiscussionInput>;
   update?: Maybe<TeamUpdateWithoutDiscussionInput>;
   upsert?: Maybe<TeamUpsertWithoutDiscussionInput>;
@@ -5221,7 +5799,7 @@ export type TeamUpdateOneRequiredWithoutDiscussionInput = {
 
 export type TeamUpdateOneRequiredWithoutWorkInput = {
   connect?: Maybe<TeamWhereUniqueInput>;
-  connectOrCreate?: Maybe<TeamCreateOrConnectWithoutworkInput>;
+  connectOrCreate?: Maybe<TeamCreateOrConnectWithoutWorkInput>;
   create?: Maybe<TeamCreateWithoutWorkInput>;
   update?: Maybe<TeamUpdateWithoutWorkInput>;
   upsert?: Maybe<TeamUpsertWithoutWorkInput>;
@@ -5229,7 +5807,7 @@ export type TeamUpdateOneRequiredWithoutWorkInput = {
 
 export type TeamUpdateOneWithoutBallotsInput = {
   connect?: Maybe<TeamWhereUniqueInput>;
-  connectOrCreate?: Maybe<TeamCreateOrConnectWithoutballotsInput>;
+  connectOrCreate?: Maybe<TeamCreateOrConnectWithoutBallotsInput>;
   create?: Maybe<TeamCreateWithoutBallotsInput>;
   delete?: Maybe<Scalars['Boolean']>;
   disconnect?: Maybe<Scalars['Boolean']>;
@@ -5239,7 +5817,7 @@ export type TeamUpdateOneWithoutBallotsInput = {
 
 export type TeamUpdateOneWithoutMembersInput = {
   connect?: Maybe<TeamWhereUniqueInput>;
-  connectOrCreate?: Maybe<TeamCreateOrConnectWithoutmembersInput>;
+  connectOrCreate?: Maybe<TeamCreateOrConnectWithoutMembersInput>;
   create?: Maybe<TeamCreateWithoutMembersInput>;
   delete?: Maybe<Scalars['Boolean']>;
   disconnect?: Maybe<Scalars['Boolean']>;
@@ -5725,7 +6303,8 @@ export type User = {
   __typename?: 'User';
   attachments: Array<Attachment>;
   ballots: Array<Ballot>;
-  createdAt: Scalars['DateTime'];
+  campaign?: Maybe<Scalars['String']>;
+  createdAt?: Maybe<Scalars['DateTime']>;
   discussions: Array<Discussion>;
   email?: Maybe<Scalars['String']>;
   emailVerified?: Maybe<Scalars['DateTime']>;
@@ -5733,6 +6312,7 @@ export type User = {
   id: Scalars['String'];
   image?: Maybe<Scalars['String']>;
   lastname?: Maybe<Scalars['String']>;
+  locale?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
   reactions: Array<Reaction>;
   role: Role;
@@ -5784,228 +6364,270 @@ export type UserTeachesArgs = {
 };
 
 export type UserCreateInput = {
-  activity?: Maybe<ActivityCreateManyWithoutUserInput>;
-  attachments?: Maybe<AttachmentCreateManyWithoutUserInput>;
-  ballots?: Maybe<BallotCreateManyWithoutCreatorInput>;
+  campaign?: Maybe<Scalars['String']>;
+  email: Scalars['String'];
+  lastname?: Maybe<Scalars['String']>;
+  locale?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  password?: Maybe<Scalars['String']>;
+  redirect?: Maybe<Scalars['String']>;
+  role?: Maybe<Role>;
+};
+
+export type UserCreateManySchoolInput = {
+  campaign?: Maybe<Scalars['String']>;
   canton?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['DateTime']>;
-  discussions?: Maybe<DiscussionCreateManyWithoutUserInput>;
   email?: Maybe<Scalars['String']>;
   emailVerified?: Maybe<Scalars['DateTime']>;
   gender?: Maybe<Gender>;
   id?: Maybe<Scalars['String']>;
   image?: Maybe<Scalars['String']>;
   lastname?: Maybe<Scalars['String']>;
+  locale?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
   password?: Maybe<Scalars['String']>;
-  reactions?: Maybe<ReactionCreateManyWithoutUserInput>;
   role?: Maybe<Role>;
-  school?: Maybe<SchoolCreateOneWithoutMembersInput>;
-  teaches?: Maybe<TeamCreateManyWithoutTeacherInput>;
-  team?: Maybe<TeamCreateOneWithoutMembersInput>;
-  Team?: Maybe<TeamCreateOneWithoutUserInput>;
+  teamId?: Maybe<Scalars['String']>;
   updatedAt?: Maybe<Scalars['DateTime']>;
   verified?: Maybe<Scalars['Boolean']>;
-  voted?: Maybe<VotedCreateManyWithoutUserInput>;
-  work?: Maybe<WorkCreateManyWithoutUsersInput>;
   year?: Maybe<Scalars['Int']>;
 };
 
-export type UserCreateManyWithoutSchoolInput = {
+export type UserCreateManySchoolInputEnvelope = {
+  data?: Maybe<Array<UserCreateManySchoolInput>>;
+  skipDuplicates?: Maybe<Scalars['Boolean']>;
+};
+
+export type UserCreateManyTeamInput = {
+  campaign?: Maybe<Scalars['String']>;
+  canton?: Maybe<Scalars['String']>;
+  createdAt?: Maybe<Scalars['DateTime']>;
+  email?: Maybe<Scalars['String']>;
+  emailVerified?: Maybe<Scalars['DateTime']>;
+  gender?: Maybe<Gender>;
+  id?: Maybe<Scalars['String']>;
+  image?: Maybe<Scalars['String']>;
+  lastname?: Maybe<Scalars['String']>;
+  locale?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  password?: Maybe<Scalars['String']>;
+  role?: Maybe<Role>;
+  schoolId?: Maybe<Scalars['String']>;
+  updatedAt?: Maybe<Scalars['DateTime']>;
+  verified?: Maybe<Scalars['Boolean']>;
+  year?: Maybe<Scalars['Int']>;
+};
+
+export type UserCreateManyTeamInputEnvelope = {
+  data?: Maybe<Array<UserCreateManyTeamInput>>;
+  skipDuplicates?: Maybe<Scalars['Boolean']>;
+};
+
+export type UserCreateNestedManyWithoutSchoolInput = {
   connect?: Maybe<Array<UserWhereUniqueInput>>;
-  connectOrCreate?: Maybe<Array<UserCreateOrConnectWithoutschoolInput>>;
+  connectOrCreate?: Maybe<Array<UserCreateOrConnectWithoutSchoolInput>>;
   create?: Maybe<Array<UserCreateWithoutSchoolInput>>;
+  createMany?: Maybe<UserCreateManySchoolInputEnvelope>;
 };
 
-export type UserCreateManyWithoutTeamInput = {
+export type UserCreateNestedManyWithoutTeamInput = {
   connect?: Maybe<Array<UserWhereUniqueInput>>;
-  connectOrCreate?: Maybe<Array<UserCreateOrConnectWithoutteamInput>>;
+  connectOrCreate?: Maybe<Array<UserCreateOrConnectWithoutTeamInput>>;
   create?: Maybe<Array<UserCreateWithoutTeamInput>>;
+  createMany?: Maybe<UserCreateManyTeamInputEnvelope>;
 };
 
-export type UserCreateManyWithoutWorkInput = {
+export type UserCreateNestedManyWithoutWorkInput = {
   connect?: Maybe<Array<UserWhereUniqueInput>>;
-  connectOrCreate?: Maybe<Array<UserCreateOrConnectWithoutworkInput>>;
+  connectOrCreate?: Maybe<Array<UserCreateOrConnectWithoutWorkInput>>;
   create?: Maybe<Array<UserCreateWithoutWorkInput>>;
 };
 
-export type UserCreateOneWithoutActivityInput = {
+export type UserCreateNestedOneWithoutActivityInput = {
   connect?: Maybe<UserWhereUniqueInput>;
-  connectOrCreate?: Maybe<UserCreateOrConnectWithoutactivityInput>;
+  connectOrCreate?: Maybe<UserCreateOrConnectWithoutActivityInput>;
   create?: Maybe<UserCreateWithoutActivityInput>;
 };
 
-export type UserCreateOneWithoutAttachmentsInput = {
+export type UserCreateNestedOneWithoutAttachmentsInput = {
   connect?: Maybe<UserWhereUniqueInput>;
-  connectOrCreate?: Maybe<UserCreateOrConnectWithoutattachmentsInput>;
+  connectOrCreate?: Maybe<UserCreateOrConnectWithoutAttachmentsInput>;
   create?: Maybe<UserCreateWithoutAttachmentsInput>;
 };
 
-export type UserCreateOneWithoutBallotsInput = {
+export type UserCreateNestedOneWithoutBallotsInput = {
   connect?: Maybe<UserWhereUniqueInput>;
-  connectOrCreate?: Maybe<UserCreateOrConnectWithoutballotsInput>;
+  connectOrCreate?: Maybe<UserCreateOrConnectWithoutBallotsInput>;
   create?: Maybe<UserCreateWithoutBallotsInput>;
 };
 
-export type UserCreateOneWithoutDiscussionsInput = {
+export type UserCreateNestedOneWithoutDiscussionsInput = {
   connect?: Maybe<UserWhereUniqueInput>;
-  connectOrCreate?: Maybe<UserCreateOrConnectWithoutdiscussionsInput>;
+  connectOrCreate?: Maybe<UserCreateOrConnectWithoutDiscussionsInput>;
   create?: Maybe<UserCreateWithoutDiscussionsInput>;
 };
 
-export type UserCreateOneWithoutReactionsInput = {
+export type UserCreateNestedOneWithoutReactionsInput = {
   connect?: Maybe<UserWhereUniqueInput>;
-  connectOrCreate?: Maybe<UserCreateOrConnectWithoutreactionsInput>;
+  connectOrCreate?: Maybe<UserCreateOrConnectWithoutReactionsInput>;
   create?: Maybe<UserCreateWithoutReactionsInput>;
 };
 
-export type UserCreateOneWithoutTeachesInput = {
+export type UserCreateNestedOneWithoutTeachesInput = {
   connect?: Maybe<UserWhereUniqueInput>;
-  connectOrCreate?: Maybe<UserCreateOrConnectWithoutteachesInput>;
+  connectOrCreate?: Maybe<UserCreateOrConnectWithoutTeachesInput>;
   create?: Maybe<UserCreateWithoutTeachesInput>;
 };
 
-export type UserCreateOneWithoutVotedInput = {
+export type UserCreateNestedOneWithoutVotedInput = {
   connect?: Maybe<UserWhereUniqueInput>;
-  connectOrCreate?: Maybe<UserCreateOrConnectWithoutvotedInput>;
+  connectOrCreate?: Maybe<UserCreateOrConnectWithoutVotedInput>;
   create?: Maybe<UserCreateWithoutVotedInput>;
 };
 
-export type UserCreateOrConnectWithoutactivityInput = {
+export type UserCreateOrConnectWithoutActivityInput = {
   create: UserCreateWithoutActivityInput;
   where: UserWhereUniqueInput;
 };
 
-export type UserCreateOrConnectWithoutattachmentsInput = {
+export type UserCreateOrConnectWithoutAttachmentsInput = {
   create: UserCreateWithoutAttachmentsInput;
   where: UserWhereUniqueInput;
 };
 
-export type UserCreateOrConnectWithoutballotsInput = {
+export type UserCreateOrConnectWithoutBallotsInput = {
   create: UserCreateWithoutBallotsInput;
   where: UserWhereUniqueInput;
 };
 
-export type UserCreateOrConnectWithoutdiscussionsInput = {
+export type UserCreateOrConnectWithoutDiscussionsInput = {
   create: UserCreateWithoutDiscussionsInput;
   where: UserWhereUniqueInput;
 };
 
-export type UserCreateOrConnectWithoutreactionsInput = {
+export type UserCreateOrConnectWithoutReactionsInput = {
   create: UserCreateWithoutReactionsInput;
   where: UserWhereUniqueInput;
 };
 
-export type UserCreateOrConnectWithoutschoolInput = {
+export type UserCreateOrConnectWithoutSchoolInput = {
   create: UserCreateWithoutSchoolInput;
   where: UserWhereUniqueInput;
 };
 
-export type UserCreateOrConnectWithoutteachesInput = {
+export type UserCreateOrConnectWithoutTeachesInput = {
   create: UserCreateWithoutTeachesInput;
   where: UserWhereUniqueInput;
 };
 
-export type UserCreateOrConnectWithoutteamInput = {
+export type UserCreateOrConnectWithoutTeamInput = {
   create: UserCreateWithoutTeamInput;
   where: UserWhereUniqueInput;
 };
 
-export type UserCreateOrConnectWithoutvotedInput = {
+export type UserCreateOrConnectWithoutVotedInput = {
   create: UserCreateWithoutVotedInput;
   where: UserWhereUniqueInput;
 };
 
-export type UserCreateOrConnectWithoutworkInput = {
+export type UserCreateOrConnectWithoutWorkInput = {
   create: UserCreateWithoutWorkInput;
   where: UserWhereUniqueInput;
 };
 
 export type UserCreateWithoutActivityInput = {
-  attachments?: Maybe<AttachmentCreateManyWithoutUserInput>;
-  ballots?: Maybe<BallotCreateManyWithoutCreatorInput>;
+  attachments?: Maybe<AttachmentCreateNestedManyWithoutUserInput>;
+  ballots?: Maybe<BallotCreateNestedManyWithoutCreatorInput>;
+  campaign?: Maybe<Scalars['String']>;
   canton?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['DateTime']>;
-  discussions?: Maybe<DiscussionCreateManyWithoutUserInput>;
+  discussions?: Maybe<DiscussionCreateNestedManyWithoutUserInput>;
   email?: Maybe<Scalars['String']>;
   emailVerified?: Maybe<Scalars['DateTime']>;
   gender?: Maybe<Gender>;
   id?: Maybe<Scalars['String']>;
   image?: Maybe<Scalars['String']>;
   lastname?: Maybe<Scalars['String']>;
+  locale?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
   password?: Maybe<Scalars['String']>;
-  reactions?: Maybe<ReactionCreateManyWithoutUserInput>;
+  reactions?: Maybe<ReactionCreateNestedManyWithoutUserInput>;
   role?: Maybe<Role>;
-  school?: Maybe<SchoolCreateOneWithoutMembersInput>;
-  teaches?: Maybe<TeamCreateManyWithoutTeacherInput>;
-  team?: Maybe<TeamCreateOneWithoutMembersInput>;
-  Team?: Maybe<TeamCreateOneWithoutUserInput>;
+  school?: Maybe<SchoolCreateNestedOneWithoutMembersInput>;
+  teaches?: Maybe<TeamCreateNestedManyWithoutTeacherInput>;
+  team?: Maybe<TeamCreateNestedOneWithoutMembersInput>;
+  Team?: Maybe<TeamCreateNestedOneWithoutUserInput>;
   updatedAt?: Maybe<Scalars['DateTime']>;
   verified?: Maybe<Scalars['Boolean']>;
-  voted?: Maybe<VotedCreateManyWithoutUserInput>;
-  work?: Maybe<WorkCreateManyWithoutUsersInput>;
+  voted?: Maybe<VotedCreateNestedManyWithoutUserInput>;
+  work?: Maybe<WorkCreateNestedManyWithoutUsersInput>;
   year?: Maybe<Scalars['Int']>;
 };
 
 export type UserCreateWithoutAttachmentsInput = {
-  activity?: Maybe<ActivityCreateManyWithoutUserInput>;
-  ballots?: Maybe<BallotCreateManyWithoutCreatorInput>;
+  activity?: Maybe<ActivityCreateNestedManyWithoutUserInput>;
+  ballots?: Maybe<BallotCreateNestedManyWithoutCreatorInput>;
+  campaign?: Maybe<Scalars['String']>;
   canton?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['DateTime']>;
-  discussions?: Maybe<DiscussionCreateManyWithoutUserInput>;
+  discussions?: Maybe<DiscussionCreateNestedManyWithoutUserInput>;
   email?: Maybe<Scalars['String']>;
   emailVerified?: Maybe<Scalars['DateTime']>;
   gender?: Maybe<Gender>;
   id?: Maybe<Scalars['String']>;
   image?: Maybe<Scalars['String']>;
   lastname?: Maybe<Scalars['String']>;
+  locale?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
   password?: Maybe<Scalars['String']>;
-  reactions?: Maybe<ReactionCreateManyWithoutUserInput>;
+  reactions?: Maybe<ReactionCreateNestedManyWithoutUserInput>;
   role?: Maybe<Role>;
-  school?: Maybe<SchoolCreateOneWithoutMembersInput>;
-  teaches?: Maybe<TeamCreateManyWithoutTeacherInput>;
-  team?: Maybe<TeamCreateOneWithoutMembersInput>;
-  Team?: Maybe<TeamCreateOneWithoutUserInput>;
+  school?: Maybe<SchoolCreateNestedOneWithoutMembersInput>;
+  teaches?: Maybe<TeamCreateNestedManyWithoutTeacherInput>;
+  team?: Maybe<TeamCreateNestedOneWithoutMembersInput>;
+  Team?: Maybe<TeamCreateNestedOneWithoutUserInput>;
   updatedAt?: Maybe<Scalars['DateTime']>;
   verified?: Maybe<Scalars['Boolean']>;
-  voted?: Maybe<VotedCreateManyWithoutUserInput>;
-  work?: Maybe<WorkCreateManyWithoutUsersInput>;
+  voted?: Maybe<VotedCreateNestedManyWithoutUserInput>;
+  work?: Maybe<WorkCreateNestedManyWithoutUsersInput>;
   year?: Maybe<Scalars['Int']>;
 };
 
 export type UserCreateWithoutBallotsInput = {
-  activity?: Maybe<ActivityCreateManyWithoutUserInput>;
-  attachments?: Maybe<AttachmentCreateManyWithoutUserInput>;
+  activity?: Maybe<ActivityCreateNestedManyWithoutUserInput>;
+  attachments?: Maybe<AttachmentCreateNestedManyWithoutUserInput>;
+  campaign?: Maybe<Scalars['String']>;
   canton?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['DateTime']>;
-  discussions?: Maybe<DiscussionCreateManyWithoutUserInput>;
+  discussions?: Maybe<DiscussionCreateNestedManyWithoutUserInput>;
   email?: Maybe<Scalars['String']>;
   emailVerified?: Maybe<Scalars['DateTime']>;
   gender?: Maybe<Gender>;
   id?: Maybe<Scalars['String']>;
   image?: Maybe<Scalars['String']>;
   lastname?: Maybe<Scalars['String']>;
+  locale?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
   password?: Maybe<Scalars['String']>;
-  reactions?: Maybe<ReactionCreateManyWithoutUserInput>;
+  reactions?: Maybe<ReactionCreateNestedManyWithoutUserInput>;
   role?: Maybe<Role>;
-  school?: Maybe<SchoolCreateOneWithoutMembersInput>;
-  teaches?: Maybe<TeamCreateManyWithoutTeacherInput>;
-  team?: Maybe<TeamCreateOneWithoutMembersInput>;
-  Team?: Maybe<TeamCreateOneWithoutUserInput>;
+  school?: Maybe<SchoolCreateNestedOneWithoutMembersInput>;
+  teaches?: Maybe<TeamCreateNestedManyWithoutTeacherInput>;
+  team?: Maybe<TeamCreateNestedOneWithoutMembersInput>;
+  Team?: Maybe<TeamCreateNestedOneWithoutUserInput>;
   updatedAt?: Maybe<Scalars['DateTime']>;
   verified?: Maybe<Scalars['Boolean']>;
-  voted?: Maybe<VotedCreateManyWithoutUserInput>;
-  work?: Maybe<WorkCreateManyWithoutUsersInput>;
+  voted?: Maybe<VotedCreateNestedManyWithoutUserInput>;
+  work?: Maybe<WorkCreateNestedManyWithoutUsersInput>;
   year?: Maybe<Scalars['Int']>;
 };
 
 export type UserCreateWithoutDiscussionsInput = {
-  activity?: Maybe<ActivityCreateManyWithoutUserInput>;
-  attachments?: Maybe<AttachmentCreateManyWithoutUserInput>;
-  ballots?: Maybe<BallotCreateManyWithoutCreatorInput>;
+  activity?: Maybe<ActivityCreateNestedManyWithoutUserInput>;
+  attachments?: Maybe<AttachmentCreateNestedManyWithoutUserInput>;
+  ballots?: Maybe<BallotCreateNestedManyWithoutCreatorInput>;
+  campaign?: Maybe<Scalars['String']>;
   canton?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['DateTime']>;
   email?: Maybe<Scalars['String']>;
@@ -6014,180 +6636,193 @@ export type UserCreateWithoutDiscussionsInput = {
   id?: Maybe<Scalars['String']>;
   image?: Maybe<Scalars['String']>;
   lastname?: Maybe<Scalars['String']>;
+  locale?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
   password?: Maybe<Scalars['String']>;
-  reactions?: Maybe<ReactionCreateManyWithoutUserInput>;
+  reactions?: Maybe<ReactionCreateNestedManyWithoutUserInput>;
   role?: Maybe<Role>;
-  school?: Maybe<SchoolCreateOneWithoutMembersInput>;
-  teaches?: Maybe<TeamCreateManyWithoutTeacherInput>;
-  team?: Maybe<TeamCreateOneWithoutMembersInput>;
-  Team?: Maybe<TeamCreateOneWithoutUserInput>;
+  school?: Maybe<SchoolCreateNestedOneWithoutMembersInput>;
+  teaches?: Maybe<TeamCreateNestedManyWithoutTeacherInput>;
+  team?: Maybe<TeamCreateNestedOneWithoutMembersInput>;
+  Team?: Maybe<TeamCreateNestedOneWithoutUserInput>;
   updatedAt?: Maybe<Scalars['DateTime']>;
   verified?: Maybe<Scalars['Boolean']>;
-  voted?: Maybe<VotedCreateManyWithoutUserInput>;
-  work?: Maybe<WorkCreateManyWithoutUsersInput>;
+  voted?: Maybe<VotedCreateNestedManyWithoutUserInput>;
+  work?: Maybe<WorkCreateNestedManyWithoutUsersInput>;
   year?: Maybe<Scalars['Int']>;
 };
 
 export type UserCreateWithoutReactionsInput = {
-  activity?: Maybe<ActivityCreateManyWithoutUserInput>;
-  attachments?: Maybe<AttachmentCreateManyWithoutUserInput>;
-  ballots?: Maybe<BallotCreateManyWithoutCreatorInput>;
+  activity?: Maybe<ActivityCreateNestedManyWithoutUserInput>;
+  attachments?: Maybe<AttachmentCreateNestedManyWithoutUserInput>;
+  ballots?: Maybe<BallotCreateNestedManyWithoutCreatorInput>;
+  campaign?: Maybe<Scalars['String']>;
   canton?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['DateTime']>;
-  discussions?: Maybe<DiscussionCreateManyWithoutUserInput>;
+  discussions?: Maybe<DiscussionCreateNestedManyWithoutUserInput>;
   email?: Maybe<Scalars['String']>;
   emailVerified?: Maybe<Scalars['DateTime']>;
   gender?: Maybe<Gender>;
   id?: Maybe<Scalars['String']>;
   image?: Maybe<Scalars['String']>;
   lastname?: Maybe<Scalars['String']>;
+  locale?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
   password?: Maybe<Scalars['String']>;
   role?: Maybe<Role>;
-  school?: Maybe<SchoolCreateOneWithoutMembersInput>;
-  teaches?: Maybe<TeamCreateManyWithoutTeacherInput>;
-  team?: Maybe<TeamCreateOneWithoutMembersInput>;
-  Team?: Maybe<TeamCreateOneWithoutUserInput>;
+  school?: Maybe<SchoolCreateNestedOneWithoutMembersInput>;
+  teaches?: Maybe<TeamCreateNestedManyWithoutTeacherInput>;
+  team?: Maybe<TeamCreateNestedOneWithoutMembersInput>;
+  Team?: Maybe<TeamCreateNestedOneWithoutUserInput>;
   updatedAt?: Maybe<Scalars['DateTime']>;
   verified?: Maybe<Scalars['Boolean']>;
-  voted?: Maybe<VotedCreateManyWithoutUserInput>;
-  work?: Maybe<WorkCreateManyWithoutUsersInput>;
+  voted?: Maybe<VotedCreateNestedManyWithoutUserInput>;
+  work?: Maybe<WorkCreateNestedManyWithoutUsersInput>;
   year?: Maybe<Scalars['Int']>;
 };
 
 export type UserCreateWithoutSchoolInput = {
-  activity?: Maybe<ActivityCreateManyWithoutUserInput>;
-  attachments?: Maybe<AttachmentCreateManyWithoutUserInput>;
-  ballots?: Maybe<BallotCreateManyWithoutCreatorInput>;
+  activity?: Maybe<ActivityCreateNestedManyWithoutUserInput>;
+  attachments?: Maybe<AttachmentCreateNestedManyWithoutUserInput>;
+  ballots?: Maybe<BallotCreateNestedManyWithoutCreatorInput>;
+  campaign?: Maybe<Scalars['String']>;
   canton?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['DateTime']>;
-  discussions?: Maybe<DiscussionCreateManyWithoutUserInput>;
+  discussions?: Maybe<DiscussionCreateNestedManyWithoutUserInput>;
   email?: Maybe<Scalars['String']>;
   emailVerified?: Maybe<Scalars['DateTime']>;
   gender?: Maybe<Gender>;
   id?: Maybe<Scalars['String']>;
   image?: Maybe<Scalars['String']>;
   lastname?: Maybe<Scalars['String']>;
+  locale?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
   password?: Maybe<Scalars['String']>;
-  reactions?: Maybe<ReactionCreateManyWithoutUserInput>;
+  reactions?: Maybe<ReactionCreateNestedManyWithoutUserInput>;
   role?: Maybe<Role>;
-  teaches?: Maybe<TeamCreateManyWithoutTeacherInput>;
-  team?: Maybe<TeamCreateOneWithoutMembersInput>;
-  Team?: Maybe<TeamCreateOneWithoutUserInput>;
+  teaches?: Maybe<TeamCreateNestedManyWithoutTeacherInput>;
+  team?: Maybe<TeamCreateNestedOneWithoutMembersInput>;
+  Team?: Maybe<TeamCreateNestedOneWithoutUserInput>;
   updatedAt?: Maybe<Scalars['DateTime']>;
   verified?: Maybe<Scalars['Boolean']>;
-  voted?: Maybe<VotedCreateManyWithoutUserInput>;
-  work?: Maybe<WorkCreateManyWithoutUsersInput>;
+  voted?: Maybe<VotedCreateNestedManyWithoutUserInput>;
+  work?: Maybe<WorkCreateNestedManyWithoutUsersInput>;
   year?: Maybe<Scalars['Int']>;
 };
 
 export type UserCreateWithoutTeachesInput = {
-  activity?: Maybe<ActivityCreateManyWithoutUserInput>;
-  attachments?: Maybe<AttachmentCreateManyWithoutUserInput>;
-  ballots?: Maybe<BallotCreateManyWithoutCreatorInput>;
+  activity?: Maybe<ActivityCreateNestedManyWithoutUserInput>;
+  attachments?: Maybe<AttachmentCreateNestedManyWithoutUserInput>;
+  ballots?: Maybe<BallotCreateNestedManyWithoutCreatorInput>;
+  campaign?: Maybe<Scalars['String']>;
   canton?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['DateTime']>;
-  discussions?: Maybe<DiscussionCreateManyWithoutUserInput>;
+  discussions?: Maybe<DiscussionCreateNestedManyWithoutUserInput>;
   email?: Maybe<Scalars['String']>;
   emailVerified?: Maybe<Scalars['DateTime']>;
   gender?: Maybe<Gender>;
   id?: Maybe<Scalars['String']>;
   image?: Maybe<Scalars['String']>;
   lastname?: Maybe<Scalars['String']>;
+  locale?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
   password?: Maybe<Scalars['String']>;
-  reactions?: Maybe<ReactionCreateManyWithoutUserInput>;
+  reactions?: Maybe<ReactionCreateNestedManyWithoutUserInput>;
   role?: Maybe<Role>;
-  school?: Maybe<SchoolCreateOneWithoutMembersInput>;
-  team?: Maybe<TeamCreateOneWithoutMembersInput>;
-  Team?: Maybe<TeamCreateOneWithoutUserInput>;
+  school?: Maybe<SchoolCreateNestedOneWithoutMembersInput>;
+  team?: Maybe<TeamCreateNestedOneWithoutMembersInput>;
+  Team?: Maybe<TeamCreateNestedOneWithoutUserInput>;
   updatedAt?: Maybe<Scalars['DateTime']>;
   verified?: Maybe<Scalars['Boolean']>;
-  voted?: Maybe<VotedCreateManyWithoutUserInput>;
-  work?: Maybe<WorkCreateManyWithoutUsersInput>;
+  voted?: Maybe<VotedCreateNestedManyWithoutUserInput>;
+  work?: Maybe<WorkCreateNestedManyWithoutUsersInput>;
   year?: Maybe<Scalars['Int']>;
 };
 
 export type UserCreateWithoutTeamInput = {
-  activity?: Maybe<ActivityCreateManyWithoutUserInput>;
-  attachments?: Maybe<AttachmentCreateManyWithoutUserInput>;
-  ballots?: Maybe<BallotCreateManyWithoutCreatorInput>;
+  activity?: Maybe<ActivityCreateNestedManyWithoutUserInput>;
+  attachments?: Maybe<AttachmentCreateNestedManyWithoutUserInput>;
+  ballots?: Maybe<BallotCreateNestedManyWithoutCreatorInput>;
+  campaign?: Maybe<Scalars['String']>;
   canton?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['DateTime']>;
-  discussions?: Maybe<DiscussionCreateManyWithoutUserInput>;
+  discussions?: Maybe<DiscussionCreateNestedManyWithoutUserInput>;
   email?: Maybe<Scalars['String']>;
   emailVerified?: Maybe<Scalars['DateTime']>;
   gender?: Maybe<Gender>;
   id?: Maybe<Scalars['String']>;
   image?: Maybe<Scalars['String']>;
   lastname?: Maybe<Scalars['String']>;
+  locale?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
   password?: Maybe<Scalars['String']>;
-  reactions?: Maybe<ReactionCreateManyWithoutUserInput>;
+  reactions?: Maybe<ReactionCreateNestedManyWithoutUserInput>;
   role?: Maybe<Role>;
-  school?: Maybe<SchoolCreateOneWithoutMembersInput>;
-  teaches?: Maybe<TeamCreateManyWithoutTeacherInput>;
-  Team?: Maybe<TeamCreateOneWithoutUserInput>;
+  school?: Maybe<SchoolCreateNestedOneWithoutMembersInput>;
+  teaches?: Maybe<TeamCreateNestedManyWithoutTeacherInput>;
+  Team?: Maybe<TeamCreateNestedOneWithoutUserInput>;
   updatedAt?: Maybe<Scalars['DateTime']>;
   verified?: Maybe<Scalars['Boolean']>;
-  voted?: Maybe<VotedCreateManyWithoutUserInput>;
-  work?: Maybe<WorkCreateManyWithoutUsersInput>;
+  voted?: Maybe<VotedCreateNestedManyWithoutUserInput>;
+  work?: Maybe<WorkCreateNestedManyWithoutUsersInput>;
   year?: Maybe<Scalars['Int']>;
 };
 
 export type UserCreateWithoutVotedInput = {
-  activity?: Maybe<ActivityCreateManyWithoutUserInput>;
-  attachments?: Maybe<AttachmentCreateManyWithoutUserInput>;
-  ballots?: Maybe<BallotCreateManyWithoutCreatorInput>;
+  activity?: Maybe<ActivityCreateNestedManyWithoutUserInput>;
+  attachments?: Maybe<AttachmentCreateNestedManyWithoutUserInput>;
+  ballots?: Maybe<BallotCreateNestedManyWithoutCreatorInput>;
+  campaign?: Maybe<Scalars['String']>;
   canton?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['DateTime']>;
-  discussions?: Maybe<DiscussionCreateManyWithoutUserInput>;
+  discussions?: Maybe<DiscussionCreateNestedManyWithoutUserInput>;
   email?: Maybe<Scalars['String']>;
   emailVerified?: Maybe<Scalars['DateTime']>;
   gender?: Maybe<Gender>;
   id?: Maybe<Scalars['String']>;
   image?: Maybe<Scalars['String']>;
   lastname?: Maybe<Scalars['String']>;
+  locale?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
   password?: Maybe<Scalars['String']>;
-  reactions?: Maybe<ReactionCreateManyWithoutUserInput>;
+  reactions?: Maybe<ReactionCreateNestedManyWithoutUserInput>;
   role?: Maybe<Role>;
-  school?: Maybe<SchoolCreateOneWithoutMembersInput>;
-  teaches?: Maybe<TeamCreateManyWithoutTeacherInput>;
-  team?: Maybe<TeamCreateOneWithoutMembersInput>;
-  Team?: Maybe<TeamCreateOneWithoutUserInput>;
+  school?: Maybe<SchoolCreateNestedOneWithoutMembersInput>;
+  teaches?: Maybe<TeamCreateNestedManyWithoutTeacherInput>;
+  team?: Maybe<TeamCreateNestedOneWithoutMembersInput>;
+  Team?: Maybe<TeamCreateNestedOneWithoutUserInput>;
   updatedAt?: Maybe<Scalars['DateTime']>;
   verified?: Maybe<Scalars['Boolean']>;
-  work?: Maybe<WorkCreateManyWithoutUsersInput>;
+  work?: Maybe<WorkCreateNestedManyWithoutUsersInput>;
   year?: Maybe<Scalars['Int']>;
 };
 
 export type UserCreateWithoutWorkInput = {
-  activity?: Maybe<ActivityCreateManyWithoutUserInput>;
-  attachments?: Maybe<AttachmentCreateManyWithoutUserInput>;
-  ballots?: Maybe<BallotCreateManyWithoutCreatorInput>;
+  activity?: Maybe<ActivityCreateNestedManyWithoutUserInput>;
+  attachments?: Maybe<AttachmentCreateNestedManyWithoutUserInput>;
+  ballots?: Maybe<BallotCreateNestedManyWithoutCreatorInput>;
+  campaign?: Maybe<Scalars['String']>;
   canton?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['DateTime']>;
-  discussions?: Maybe<DiscussionCreateManyWithoutUserInput>;
+  discussions?: Maybe<DiscussionCreateNestedManyWithoutUserInput>;
   email?: Maybe<Scalars['String']>;
   emailVerified?: Maybe<Scalars['DateTime']>;
   gender?: Maybe<Gender>;
   id?: Maybe<Scalars['String']>;
   image?: Maybe<Scalars['String']>;
   lastname?: Maybe<Scalars['String']>;
+  locale?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
   password?: Maybe<Scalars['String']>;
-  reactions?: Maybe<ReactionCreateManyWithoutUserInput>;
+  reactions?: Maybe<ReactionCreateNestedManyWithoutUserInput>;
   role?: Maybe<Role>;
-  school?: Maybe<SchoolCreateOneWithoutMembersInput>;
-  teaches?: Maybe<TeamCreateManyWithoutTeacherInput>;
-  team?: Maybe<TeamCreateOneWithoutMembersInput>;
-  Team?: Maybe<TeamCreateOneWithoutUserInput>;
+  school?: Maybe<SchoolCreateNestedOneWithoutMembersInput>;
+  teaches?: Maybe<TeamCreateNestedManyWithoutTeacherInput>;
+  team?: Maybe<TeamCreateNestedOneWithoutMembersInput>;
+  Team?: Maybe<TeamCreateNestedOneWithoutUserInput>;
   updatedAt?: Maybe<Scalars['DateTime']>;
   verified?: Maybe<Scalars['Boolean']>;
-  voted?: Maybe<VotedCreateManyWithoutUserInput>;
+  voted?: Maybe<VotedCreateNestedManyWithoutUserInput>;
   year?: Maybe<Scalars['Int']>;
 };
 
@@ -6198,6 +6833,7 @@ export type UserListRelationFilter = {
 };
 
 export type UserOrderByInput = {
+  campaign?: Maybe<SortOrder>;
   canton?: Maybe<SortOrder>;
   createdAt?: Maybe<SortOrder>;
   email?: Maybe<SortOrder>;
@@ -6206,6 +6842,7 @@ export type UserOrderByInput = {
   id?: Maybe<SortOrder>;
   image?: Maybe<SortOrder>;
   lastname?: Maybe<SortOrder>;
+  locale?: Maybe<SortOrder>;
   name?: Maybe<SortOrder>;
   password?: Maybe<SortOrder>;
   role?: Maybe<SortOrder>;
@@ -6218,6 +6855,7 @@ export type UserOrderByInput = {
 
 export type UserScalarWhereInput = {
   AND?: Maybe<Array<UserScalarWhereInput>>;
+  campaign?: Maybe<StringNullableFilter>;
   canton?: Maybe<StringNullableFilter>;
   createdAt?: Maybe<DateTimeFilter>;
   email?: Maybe<StringNullableFilter>;
@@ -6226,6 +6864,7 @@ export type UserScalarWhereInput = {
   id?: Maybe<StringFilter>;
   image?: Maybe<StringNullableFilter>;
   lastname?: Maybe<StringNullableFilter>;
+  locale?: Maybe<StringFilter>;
   name?: Maybe<StringNullableFilter>;
   NOT?: Maybe<Array<UserScalarWhereInput>>;
   OR?: Maybe<Array<UserScalarWhereInput>>;
@@ -6242,6 +6881,7 @@ export type UserUpdateInput = {
   activity?: Maybe<ActivityUpdateManyWithoutUserInput>;
   attachments?: Maybe<AttachmentUpdateManyWithoutUserInput>;
   ballots?: Maybe<BallotUpdateManyWithoutCreatorInput>;
+  campaign?: Maybe<NullableStringFieldUpdateOperationsInput>;
   canton?: Maybe<NullableStringFieldUpdateOperationsInput>;
   createdAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
   discussions?: Maybe<DiscussionUpdateManyWithoutUserInput>;
@@ -6251,6 +6891,7 @@ export type UserUpdateInput = {
   id?: Maybe<StringFieldUpdateOperationsInput>;
   image?: Maybe<NullableStringFieldUpdateOperationsInput>;
   lastname?: Maybe<NullableStringFieldUpdateOperationsInput>;
+  locale?: Maybe<StringFieldUpdateOperationsInput>;
   name?: Maybe<NullableStringFieldUpdateOperationsInput>;
   password?: Maybe<NullableStringFieldUpdateOperationsInput>;
   reactions?: Maybe<ReactionUpdateManyWithoutUserInput>;
@@ -6267,6 +6908,7 @@ export type UserUpdateInput = {
 };
 
 export type UserUpdateManyMutationInput = {
+  campaign?: Maybe<NullableStringFieldUpdateOperationsInput>;
   canton?: Maybe<NullableStringFieldUpdateOperationsInput>;
   createdAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
   email?: Maybe<NullableStringFieldUpdateOperationsInput>;
@@ -6275,6 +6917,7 @@ export type UserUpdateManyMutationInput = {
   id?: Maybe<StringFieldUpdateOperationsInput>;
   image?: Maybe<NullableStringFieldUpdateOperationsInput>;
   lastname?: Maybe<NullableStringFieldUpdateOperationsInput>;
+  locale?: Maybe<StringFieldUpdateOperationsInput>;
   name?: Maybe<NullableStringFieldUpdateOperationsInput>;
   password?: Maybe<NullableStringFieldUpdateOperationsInput>;
   role?: Maybe<EnumRoleFieldUpdateOperationsInput>;
@@ -6285,8 +6928,9 @@ export type UserUpdateManyMutationInput = {
 
 export type UserUpdateManyWithoutSchoolInput = {
   connect?: Maybe<Array<UserWhereUniqueInput>>;
-  connectOrCreate?: Maybe<Array<UserCreateOrConnectWithoutschoolInput>>;
+  connectOrCreate?: Maybe<Array<UserCreateOrConnectWithoutSchoolInput>>;
   create?: Maybe<Array<UserCreateWithoutSchoolInput>>;
+  createMany?: Maybe<UserCreateManySchoolInputEnvelope>;
   delete?: Maybe<Array<UserWhereUniqueInput>>;
   deleteMany?: Maybe<Array<UserScalarWhereInput>>;
   disconnect?: Maybe<Array<UserWhereUniqueInput>>;
@@ -6298,8 +6942,9 @@ export type UserUpdateManyWithoutSchoolInput = {
 
 export type UserUpdateManyWithoutTeamInput = {
   connect?: Maybe<Array<UserWhereUniqueInput>>;
-  connectOrCreate?: Maybe<Array<UserCreateOrConnectWithoutteamInput>>;
+  connectOrCreate?: Maybe<Array<UserCreateOrConnectWithoutTeamInput>>;
   create?: Maybe<Array<UserCreateWithoutTeamInput>>;
+  createMany?: Maybe<UserCreateManyTeamInputEnvelope>;
   delete?: Maybe<Array<UserWhereUniqueInput>>;
   deleteMany?: Maybe<Array<UserScalarWhereInput>>;
   disconnect?: Maybe<Array<UserWhereUniqueInput>>;
@@ -6311,7 +6956,7 @@ export type UserUpdateManyWithoutTeamInput = {
 
 export type UserUpdateManyWithoutWorkInput = {
   connect?: Maybe<Array<UserWhereUniqueInput>>;
-  connectOrCreate?: Maybe<Array<UserCreateOrConnectWithoutworkInput>>;
+  connectOrCreate?: Maybe<Array<UserCreateOrConnectWithoutWorkInput>>;
   create?: Maybe<Array<UserCreateWithoutWorkInput>>;
   delete?: Maybe<Array<UserWhereUniqueInput>>;
   deleteMany?: Maybe<Array<UserScalarWhereInput>>;
@@ -6339,7 +6984,7 @@ export type UserUpdateManyWithWhereWithoutWorkInput = {
 
 export type UserUpdateOneRequiredWithoutActivityInput = {
   connect?: Maybe<UserWhereUniqueInput>;
-  connectOrCreate?: Maybe<UserCreateOrConnectWithoutactivityInput>;
+  connectOrCreate?: Maybe<UserCreateOrConnectWithoutActivityInput>;
   create?: Maybe<UserCreateWithoutActivityInput>;
   update?: Maybe<UserUpdateWithoutActivityInput>;
   upsert?: Maybe<UserUpsertWithoutActivityInput>;
@@ -6347,7 +6992,7 @@ export type UserUpdateOneRequiredWithoutActivityInput = {
 
 export type UserUpdateOneRequiredWithoutAttachmentsInput = {
   connect?: Maybe<UserWhereUniqueInput>;
-  connectOrCreate?: Maybe<UserCreateOrConnectWithoutattachmentsInput>;
+  connectOrCreate?: Maybe<UserCreateOrConnectWithoutAttachmentsInput>;
   create?: Maybe<UserCreateWithoutAttachmentsInput>;
   update?: Maybe<UserUpdateWithoutAttachmentsInput>;
   upsert?: Maybe<UserUpsertWithoutAttachmentsInput>;
@@ -6355,7 +7000,7 @@ export type UserUpdateOneRequiredWithoutAttachmentsInput = {
 
 export type UserUpdateOneRequiredWithoutDiscussionsInput = {
   connect?: Maybe<UserWhereUniqueInput>;
-  connectOrCreate?: Maybe<UserCreateOrConnectWithoutdiscussionsInput>;
+  connectOrCreate?: Maybe<UserCreateOrConnectWithoutDiscussionsInput>;
   create?: Maybe<UserCreateWithoutDiscussionsInput>;
   update?: Maybe<UserUpdateWithoutDiscussionsInput>;
   upsert?: Maybe<UserUpsertWithoutDiscussionsInput>;
@@ -6363,7 +7008,7 @@ export type UserUpdateOneRequiredWithoutDiscussionsInput = {
 
 export type UserUpdateOneRequiredWithoutReactionsInput = {
   connect?: Maybe<UserWhereUniqueInput>;
-  connectOrCreate?: Maybe<UserCreateOrConnectWithoutreactionsInput>;
+  connectOrCreate?: Maybe<UserCreateOrConnectWithoutReactionsInput>;
   create?: Maybe<UserCreateWithoutReactionsInput>;
   update?: Maybe<UserUpdateWithoutReactionsInput>;
   upsert?: Maybe<UserUpsertWithoutReactionsInput>;
@@ -6371,7 +7016,7 @@ export type UserUpdateOneRequiredWithoutReactionsInput = {
 
 export type UserUpdateOneRequiredWithoutTeachesInput = {
   connect?: Maybe<UserWhereUniqueInput>;
-  connectOrCreate?: Maybe<UserCreateOrConnectWithoutteachesInput>;
+  connectOrCreate?: Maybe<UserCreateOrConnectWithoutTeachesInput>;
   create?: Maybe<UserCreateWithoutTeachesInput>;
   update?: Maybe<UserUpdateWithoutTeachesInput>;
   upsert?: Maybe<UserUpsertWithoutTeachesInput>;
@@ -6379,7 +7024,7 @@ export type UserUpdateOneRequiredWithoutTeachesInput = {
 
 export type UserUpdateOneRequiredWithoutVotedInput = {
   connect?: Maybe<UserWhereUniqueInput>;
-  connectOrCreate?: Maybe<UserCreateOrConnectWithoutvotedInput>;
+  connectOrCreate?: Maybe<UserCreateOrConnectWithoutVotedInput>;
   create?: Maybe<UserCreateWithoutVotedInput>;
   update?: Maybe<UserUpdateWithoutVotedInput>;
   upsert?: Maybe<UserUpsertWithoutVotedInput>;
@@ -6387,7 +7032,7 @@ export type UserUpdateOneRequiredWithoutVotedInput = {
 
 export type UserUpdateOneWithoutBallotsInput = {
   connect?: Maybe<UserWhereUniqueInput>;
-  connectOrCreate?: Maybe<UserCreateOrConnectWithoutballotsInput>;
+  connectOrCreate?: Maybe<UserCreateOrConnectWithoutBallotsInput>;
   create?: Maybe<UserCreateWithoutBallotsInput>;
   delete?: Maybe<Scalars['Boolean']>;
   disconnect?: Maybe<Scalars['Boolean']>;
@@ -6398,6 +7043,7 @@ export type UserUpdateOneWithoutBallotsInput = {
 export type UserUpdateWithoutActivityInput = {
   attachments?: Maybe<AttachmentUpdateManyWithoutUserInput>;
   ballots?: Maybe<BallotUpdateManyWithoutCreatorInput>;
+  campaign?: Maybe<NullableStringFieldUpdateOperationsInput>;
   canton?: Maybe<NullableStringFieldUpdateOperationsInput>;
   createdAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
   discussions?: Maybe<DiscussionUpdateManyWithoutUserInput>;
@@ -6407,6 +7053,7 @@ export type UserUpdateWithoutActivityInput = {
   id?: Maybe<StringFieldUpdateOperationsInput>;
   image?: Maybe<NullableStringFieldUpdateOperationsInput>;
   lastname?: Maybe<NullableStringFieldUpdateOperationsInput>;
+  locale?: Maybe<StringFieldUpdateOperationsInput>;
   name?: Maybe<NullableStringFieldUpdateOperationsInput>;
   password?: Maybe<NullableStringFieldUpdateOperationsInput>;
   reactions?: Maybe<ReactionUpdateManyWithoutUserInput>;
@@ -6425,6 +7072,7 @@ export type UserUpdateWithoutActivityInput = {
 export type UserUpdateWithoutAttachmentsInput = {
   activity?: Maybe<ActivityUpdateManyWithoutUserInput>;
   ballots?: Maybe<BallotUpdateManyWithoutCreatorInput>;
+  campaign?: Maybe<NullableStringFieldUpdateOperationsInput>;
   canton?: Maybe<NullableStringFieldUpdateOperationsInput>;
   createdAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
   discussions?: Maybe<DiscussionUpdateManyWithoutUserInput>;
@@ -6434,6 +7082,7 @@ export type UserUpdateWithoutAttachmentsInput = {
   id?: Maybe<StringFieldUpdateOperationsInput>;
   image?: Maybe<NullableStringFieldUpdateOperationsInput>;
   lastname?: Maybe<NullableStringFieldUpdateOperationsInput>;
+  locale?: Maybe<StringFieldUpdateOperationsInput>;
   name?: Maybe<NullableStringFieldUpdateOperationsInput>;
   password?: Maybe<NullableStringFieldUpdateOperationsInput>;
   reactions?: Maybe<ReactionUpdateManyWithoutUserInput>;
@@ -6452,6 +7101,7 @@ export type UserUpdateWithoutAttachmentsInput = {
 export type UserUpdateWithoutBallotsInput = {
   activity?: Maybe<ActivityUpdateManyWithoutUserInput>;
   attachments?: Maybe<AttachmentUpdateManyWithoutUserInput>;
+  campaign?: Maybe<NullableStringFieldUpdateOperationsInput>;
   canton?: Maybe<NullableStringFieldUpdateOperationsInput>;
   createdAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
   discussions?: Maybe<DiscussionUpdateManyWithoutUserInput>;
@@ -6461,6 +7111,7 @@ export type UserUpdateWithoutBallotsInput = {
   id?: Maybe<StringFieldUpdateOperationsInput>;
   image?: Maybe<NullableStringFieldUpdateOperationsInput>;
   lastname?: Maybe<NullableStringFieldUpdateOperationsInput>;
+  locale?: Maybe<StringFieldUpdateOperationsInput>;
   name?: Maybe<NullableStringFieldUpdateOperationsInput>;
   password?: Maybe<NullableStringFieldUpdateOperationsInput>;
   reactions?: Maybe<ReactionUpdateManyWithoutUserInput>;
@@ -6480,6 +7131,7 @@ export type UserUpdateWithoutDiscussionsInput = {
   activity?: Maybe<ActivityUpdateManyWithoutUserInput>;
   attachments?: Maybe<AttachmentUpdateManyWithoutUserInput>;
   ballots?: Maybe<BallotUpdateManyWithoutCreatorInput>;
+  campaign?: Maybe<NullableStringFieldUpdateOperationsInput>;
   canton?: Maybe<NullableStringFieldUpdateOperationsInput>;
   createdAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
   email?: Maybe<NullableStringFieldUpdateOperationsInput>;
@@ -6488,6 +7140,7 @@ export type UserUpdateWithoutDiscussionsInput = {
   id?: Maybe<StringFieldUpdateOperationsInput>;
   image?: Maybe<NullableStringFieldUpdateOperationsInput>;
   lastname?: Maybe<NullableStringFieldUpdateOperationsInput>;
+  locale?: Maybe<StringFieldUpdateOperationsInput>;
   name?: Maybe<NullableStringFieldUpdateOperationsInput>;
   password?: Maybe<NullableStringFieldUpdateOperationsInput>;
   reactions?: Maybe<ReactionUpdateManyWithoutUserInput>;
@@ -6507,6 +7160,7 @@ export type UserUpdateWithoutReactionsInput = {
   activity?: Maybe<ActivityUpdateManyWithoutUserInput>;
   attachments?: Maybe<AttachmentUpdateManyWithoutUserInput>;
   ballots?: Maybe<BallotUpdateManyWithoutCreatorInput>;
+  campaign?: Maybe<NullableStringFieldUpdateOperationsInput>;
   canton?: Maybe<NullableStringFieldUpdateOperationsInput>;
   createdAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
   discussions?: Maybe<DiscussionUpdateManyWithoutUserInput>;
@@ -6516,6 +7170,7 @@ export type UserUpdateWithoutReactionsInput = {
   id?: Maybe<StringFieldUpdateOperationsInput>;
   image?: Maybe<NullableStringFieldUpdateOperationsInput>;
   lastname?: Maybe<NullableStringFieldUpdateOperationsInput>;
+  locale?: Maybe<StringFieldUpdateOperationsInput>;
   name?: Maybe<NullableStringFieldUpdateOperationsInput>;
   password?: Maybe<NullableStringFieldUpdateOperationsInput>;
   role?: Maybe<EnumRoleFieldUpdateOperationsInput>;
@@ -6534,6 +7189,7 @@ export type UserUpdateWithoutSchoolInput = {
   activity?: Maybe<ActivityUpdateManyWithoutUserInput>;
   attachments?: Maybe<AttachmentUpdateManyWithoutUserInput>;
   ballots?: Maybe<BallotUpdateManyWithoutCreatorInput>;
+  campaign?: Maybe<NullableStringFieldUpdateOperationsInput>;
   canton?: Maybe<NullableStringFieldUpdateOperationsInput>;
   createdAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
   discussions?: Maybe<DiscussionUpdateManyWithoutUserInput>;
@@ -6543,6 +7199,7 @@ export type UserUpdateWithoutSchoolInput = {
   id?: Maybe<StringFieldUpdateOperationsInput>;
   image?: Maybe<NullableStringFieldUpdateOperationsInput>;
   lastname?: Maybe<NullableStringFieldUpdateOperationsInput>;
+  locale?: Maybe<StringFieldUpdateOperationsInput>;
   name?: Maybe<NullableStringFieldUpdateOperationsInput>;
   password?: Maybe<NullableStringFieldUpdateOperationsInput>;
   reactions?: Maybe<ReactionUpdateManyWithoutUserInput>;
@@ -6561,6 +7218,7 @@ export type UserUpdateWithoutTeachesInput = {
   activity?: Maybe<ActivityUpdateManyWithoutUserInput>;
   attachments?: Maybe<AttachmentUpdateManyWithoutUserInput>;
   ballots?: Maybe<BallotUpdateManyWithoutCreatorInput>;
+  campaign?: Maybe<NullableStringFieldUpdateOperationsInput>;
   canton?: Maybe<NullableStringFieldUpdateOperationsInput>;
   createdAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
   discussions?: Maybe<DiscussionUpdateManyWithoutUserInput>;
@@ -6570,6 +7228,7 @@ export type UserUpdateWithoutTeachesInput = {
   id?: Maybe<StringFieldUpdateOperationsInput>;
   image?: Maybe<NullableStringFieldUpdateOperationsInput>;
   lastname?: Maybe<NullableStringFieldUpdateOperationsInput>;
+  locale?: Maybe<StringFieldUpdateOperationsInput>;
   name?: Maybe<NullableStringFieldUpdateOperationsInput>;
   password?: Maybe<NullableStringFieldUpdateOperationsInput>;
   reactions?: Maybe<ReactionUpdateManyWithoutUserInput>;
@@ -6588,6 +7247,7 @@ export type UserUpdateWithoutTeamInput = {
   activity?: Maybe<ActivityUpdateManyWithoutUserInput>;
   attachments?: Maybe<AttachmentUpdateManyWithoutUserInput>;
   ballots?: Maybe<BallotUpdateManyWithoutCreatorInput>;
+  campaign?: Maybe<NullableStringFieldUpdateOperationsInput>;
   canton?: Maybe<NullableStringFieldUpdateOperationsInput>;
   createdAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
   discussions?: Maybe<DiscussionUpdateManyWithoutUserInput>;
@@ -6597,6 +7257,7 @@ export type UserUpdateWithoutTeamInput = {
   id?: Maybe<StringFieldUpdateOperationsInput>;
   image?: Maybe<NullableStringFieldUpdateOperationsInput>;
   lastname?: Maybe<NullableStringFieldUpdateOperationsInput>;
+  locale?: Maybe<StringFieldUpdateOperationsInput>;
   name?: Maybe<NullableStringFieldUpdateOperationsInput>;
   password?: Maybe<NullableStringFieldUpdateOperationsInput>;
   reactions?: Maybe<ReactionUpdateManyWithoutUserInput>;
@@ -6615,6 +7276,7 @@ export type UserUpdateWithoutVotedInput = {
   activity?: Maybe<ActivityUpdateManyWithoutUserInput>;
   attachments?: Maybe<AttachmentUpdateManyWithoutUserInput>;
   ballots?: Maybe<BallotUpdateManyWithoutCreatorInput>;
+  campaign?: Maybe<NullableStringFieldUpdateOperationsInput>;
   canton?: Maybe<NullableStringFieldUpdateOperationsInput>;
   createdAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
   discussions?: Maybe<DiscussionUpdateManyWithoutUserInput>;
@@ -6624,6 +7286,7 @@ export type UserUpdateWithoutVotedInput = {
   id?: Maybe<StringFieldUpdateOperationsInput>;
   image?: Maybe<NullableStringFieldUpdateOperationsInput>;
   lastname?: Maybe<NullableStringFieldUpdateOperationsInput>;
+  locale?: Maybe<StringFieldUpdateOperationsInput>;
   name?: Maybe<NullableStringFieldUpdateOperationsInput>;
   password?: Maybe<NullableStringFieldUpdateOperationsInput>;
   reactions?: Maybe<ReactionUpdateManyWithoutUserInput>;
@@ -6642,6 +7305,7 @@ export type UserUpdateWithoutWorkInput = {
   activity?: Maybe<ActivityUpdateManyWithoutUserInput>;
   attachments?: Maybe<AttachmentUpdateManyWithoutUserInput>;
   ballots?: Maybe<BallotUpdateManyWithoutCreatorInput>;
+  campaign?: Maybe<NullableStringFieldUpdateOperationsInput>;
   canton?: Maybe<NullableStringFieldUpdateOperationsInput>;
   createdAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
   discussions?: Maybe<DiscussionUpdateManyWithoutUserInput>;
@@ -6651,6 +7315,7 @@ export type UserUpdateWithoutWorkInput = {
   id?: Maybe<StringFieldUpdateOperationsInput>;
   image?: Maybe<NullableStringFieldUpdateOperationsInput>;
   lastname?: Maybe<NullableStringFieldUpdateOperationsInput>;
+  locale?: Maybe<StringFieldUpdateOperationsInput>;
   name?: Maybe<NullableStringFieldUpdateOperationsInput>;
   password?: Maybe<NullableStringFieldUpdateOperationsInput>;
   reactions?: Maybe<ReactionUpdateManyWithoutUserInput>;
@@ -6738,6 +7403,7 @@ export type UserWhereInput = {
   AND?: Maybe<Array<UserWhereInput>>;
   attachments?: Maybe<AttachmentListRelationFilter>;
   ballots?: Maybe<BallotListRelationFilter>;
+  campaign?: Maybe<StringNullableFilter>;
   canton?: Maybe<StringNullableFilter>;
   createdAt?: Maybe<DateTimeFilter>;
   discussions?: Maybe<DiscussionListRelationFilter>;
@@ -6747,6 +7413,7 @@ export type UserWhereInput = {
   id?: Maybe<StringFilter>;
   image?: Maybe<StringNullableFilter>;
   lastname?: Maybe<StringNullableFilter>;
+  locale?: Maybe<StringFilter>;
   name?: Maybe<StringNullableFilter>;
   NOT?: Maybe<Array<UserWhereInput>>;
   OR?: Maybe<Array<UserWhereInput>>;
@@ -6780,176 +7447,304 @@ export enum Visibility {
 
 export type Vote = {
   __typename?: 'Vote';
-  ballot: Ballot;
+  ballot?: Maybe<Ballot>;
   verify?: Maybe<Scalars['String']>;
 };
 
-export type VoteCreateManyWithoutBallotInput = {
+export type VoteCreateManyBallotInput = {
+  ballotRunId?: Maybe<Scalars['String']>;
+  canton?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['String']>;
+  schoolId?: Maybe<Scalars['String']>;
+  schooltype?: Maybe<Scalars['String']>;
+  teamId?: Maybe<Scalars['String']>;
+  verify?: Maybe<Scalars['String']>;
+  vote: Scalars['Int'];
+  year?: Maybe<Scalars['Int']>;
+};
+
+export type VoteCreateManyBallotInputEnvelope = {
+  data?: Maybe<Array<VoteCreateManyBallotInput>>;
+  skipDuplicates?: Maybe<Scalars['Boolean']>;
+};
+
+export type VoteCreateManyBallotRunInput = {
+  ballotId: Scalars['String'];
+  canton?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['String']>;
+  schoolId?: Maybe<Scalars['String']>;
+  schooltype?: Maybe<Scalars['String']>;
+  teamId?: Maybe<Scalars['String']>;
+  verify?: Maybe<Scalars['String']>;
+  vote: Scalars['Int'];
+  year?: Maybe<Scalars['Int']>;
+};
+
+export type VoteCreateManyBallotRunInputEnvelope = {
+  data?: Maybe<Array<VoteCreateManyBallotRunInput>>;
+  skipDuplicates?: Maybe<Scalars['Boolean']>;
+};
+
+export type VoteCreateManySchoolInput = {
+  ballotId: Scalars['String'];
+  ballotRunId?: Maybe<Scalars['String']>;
+  canton?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['String']>;
+  schooltype?: Maybe<Scalars['String']>;
+  teamId?: Maybe<Scalars['String']>;
+  verify?: Maybe<Scalars['String']>;
+  vote: Scalars['Int'];
+  year?: Maybe<Scalars['Int']>;
+};
+
+export type VoteCreateManySchoolInputEnvelope = {
+  data?: Maybe<Array<VoteCreateManySchoolInput>>;
+  skipDuplicates?: Maybe<Scalars['Boolean']>;
+};
+
+export type VoteCreateManyTeamInput = {
+  ballotId: Scalars['String'];
+  ballotRunId?: Maybe<Scalars['String']>;
+  canton?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['String']>;
+  schoolId?: Maybe<Scalars['String']>;
+  schooltype?: Maybe<Scalars['String']>;
+  verify?: Maybe<Scalars['String']>;
+  vote: Scalars['Int'];
+  year?: Maybe<Scalars['Int']>;
+};
+
+export type VoteCreateManyTeamInputEnvelope = {
+  data?: Maybe<Array<VoteCreateManyTeamInput>>;
+  skipDuplicates?: Maybe<Scalars['Boolean']>;
+};
+
+export type VoteCreateNestedManyWithoutBallotInput = {
   connect?: Maybe<Array<VoteWhereUniqueInput>>;
-  connectOrCreate?: Maybe<Array<VoteCreateOrConnectWithoutballotInput>>;
+  connectOrCreate?: Maybe<Array<VoteCreateOrConnectWithoutBallotInput>>;
   create?: Maybe<Array<VoteCreateWithoutBallotInput>>;
+  createMany?: Maybe<VoteCreateManyBallotInputEnvelope>;
 };
 
-export type VoteCreateManyWithoutBallotRunInput = {
+export type VoteCreateNestedManyWithoutBallotRunInput = {
   connect?: Maybe<Array<VoteWhereUniqueInput>>;
-  connectOrCreate?: Maybe<Array<VoteCreateOrConnectWithoutballotRunInput>>;
+  connectOrCreate?: Maybe<Array<VoteCreateOrConnectWithoutBallotRunInput>>;
   create?: Maybe<Array<VoteCreateWithoutBallotRunInput>>;
+  createMany?: Maybe<VoteCreateManyBallotRunInputEnvelope>;
 };
 
-export type VoteCreateManyWithoutSchoolInput = {
+export type VoteCreateNestedManyWithoutSchoolInput = {
   connect?: Maybe<Array<VoteWhereUniqueInput>>;
-  connectOrCreate?: Maybe<Array<VoteCreateOrConnectWithoutschoolInput>>;
+  connectOrCreate?: Maybe<Array<VoteCreateOrConnectWithoutSchoolInput>>;
   create?: Maybe<Array<VoteCreateWithoutSchoolInput>>;
+  createMany?: Maybe<VoteCreateManySchoolInputEnvelope>;
 };
 
-export type VoteCreateManyWithoutTeamInput = {
+export type VoteCreateNestedManyWithoutTeamInput = {
   connect?: Maybe<Array<VoteWhereUniqueInput>>;
-  connectOrCreate?: Maybe<Array<VoteCreateOrConnectWithoutteamInput>>;
+  connectOrCreate?: Maybe<Array<VoteCreateOrConnectWithoutTeamInput>>;
   create?: Maybe<Array<VoteCreateWithoutTeamInput>>;
+  createMany?: Maybe<VoteCreateManyTeamInputEnvelope>;
 };
 
-export type VoteCreateOrConnectWithoutballotInput = {
+export type VoteCreateOrConnectWithoutBallotInput = {
   create: VoteCreateWithoutBallotInput;
   where: VoteWhereUniqueInput;
 };
 
-export type VoteCreateOrConnectWithoutballotRunInput = {
+export type VoteCreateOrConnectWithoutBallotRunInput = {
   create: VoteCreateWithoutBallotRunInput;
   where: VoteWhereUniqueInput;
 };
 
-export type VoteCreateOrConnectWithoutschoolInput = {
+export type VoteCreateOrConnectWithoutSchoolInput = {
   create: VoteCreateWithoutSchoolInput;
   where: VoteWhereUniqueInput;
 };
 
-export type VoteCreateOrConnectWithoutteamInput = {
+export type VoteCreateOrConnectWithoutTeamInput = {
   create: VoteCreateWithoutTeamInput;
   where: VoteWhereUniqueInput;
 };
 
 export type VoteCreateWithoutBallotInput = {
-  ballotRun?: Maybe<BallotRunCreateOneWithoutVoteInput>;
+  ballotRun?: Maybe<BallotRunCreateNestedOneWithoutVoteInput>;
   canton?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['String']>;
-  school?: Maybe<SchoolCreateOneWithoutVoteInput>;
+  school?: Maybe<SchoolCreateNestedOneWithoutVoteInput>;
   schooltype?: Maybe<Scalars['String']>;
-  team?: Maybe<TeamCreateOneWithoutVoteInput>;
+  team?: Maybe<TeamCreateNestedOneWithoutVoteInput>;
   verify?: Maybe<Scalars['String']>;
   vote: Scalars['Int'];
   year?: Maybe<Scalars['Int']>;
 };
 
 export type VoteCreateWithoutBallotRunInput = {
-  ballot: BallotCreateOneWithoutVotesInput;
+  ballot: BallotCreateNestedOneWithoutVotesInput;
   canton?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['String']>;
-  school?: Maybe<SchoolCreateOneWithoutVoteInput>;
+  school?: Maybe<SchoolCreateNestedOneWithoutVoteInput>;
   schooltype?: Maybe<Scalars['String']>;
-  team?: Maybe<TeamCreateOneWithoutVoteInput>;
+  team?: Maybe<TeamCreateNestedOneWithoutVoteInput>;
   verify?: Maybe<Scalars['String']>;
   vote: Scalars['Int'];
   year?: Maybe<Scalars['Int']>;
 };
 
 export type VoteCreateWithoutSchoolInput = {
-  ballot: BallotCreateOneWithoutVotesInput;
-  ballotRun?: Maybe<BallotRunCreateOneWithoutVoteInput>;
+  ballot: BallotCreateNestedOneWithoutVotesInput;
+  ballotRun?: Maybe<BallotRunCreateNestedOneWithoutVoteInput>;
   canton?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['String']>;
   schooltype?: Maybe<Scalars['String']>;
-  team?: Maybe<TeamCreateOneWithoutVoteInput>;
+  team?: Maybe<TeamCreateNestedOneWithoutVoteInput>;
   verify?: Maybe<Scalars['String']>;
   vote: Scalars['Int'];
   year?: Maybe<Scalars['Int']>;
 };
 
 export type VoteCreateWithoutTeamInput = {
-  ballot: BallotCreateOneWithoutVotesInput;
-  ballotRun?: Maybe<BallotRunCreateOneWithoutVoteInput>;
+  ballot: BallotCreateNestedOneWithoutVotesInput;
+  ballotRun?: Maybe<BallotRunCreateNestedOneWithoutVoteInput>;
   canton?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['String']>;
-  school?: Maybe<SchoolCreateOneWithoutVoteInput>;
+  school?: Maybe<SchoolCreateNestedOneWithoutVoteInput>;
   schooltype?: Maybe<Scalars['String']>;
   verify?: Maybe<Scalars['String']>;
   vote: Scalars['Int'];
   year?: Maybe<Scalars['Int']>;
 };
 
-export type VotedCreateManyWithoutBallotInput = {
+export type VotedCreateManyBallotInput = {
+  id?: Maybe<Scalars['String']>;
+  schoolId?: Maybe<Scalars['String']>;
+  signature?: Maybe<Scalars['String']>;
+  teamId?: Maybe<Scalars['String']>;
+  userId: Scalars['String'];
+};
+
+export type VotedCreateManyBallotInputEnvelope = {
+  data?: Maybe<Array<VotedCreateManyBallotInput>>;
+  skipDuplicates?: Maybe<Scalars['Boolean']>;
+};
+
+export type VotedCreateManySchoolInput = {
+  ballotId: Scalars['String'];
+  id?: Maybe<Scalars['String']>;
+  signature?: Maybe<Scalars['String']>;
+  teamId?: Maybe<Scalars['String']>;
+  userId: Scalars['String'];
+};
+
+export type VotedCreateManySchoolInputEnvelope = {
+  data?: Maybe<Array<VotedCreateManySchoolInput>>;
+  skipDuplicates?: Maybe<Scalars['Boolean']>;
+};
+
+export type VotedCreateManyTeamInput = {
+  ballotId: Scalars['String'];
+  id?: Maybe<Scalars['String']>;
+  schoolId?: Maybe<Scalars['String']>;
+  signature?: Maybe<Scalars['String']>;
+  userId: Scalars['String'];
+};
+
+export type VotedCreateManyTeamInputEnvelope = {
+  data?: Maybe<Array<VotedCreateManyTeamInput>>;
+  skipDuplicates?: Maybe<Scalars['Boolean']>;
+};
+
+export type VotedCreateManyUserInput = {
+  ballotId: Scalars['String'];
+  id?: Maybe<Scalars['String']>;
+  schoolId?: Maybe<Scalars['String']>;
+  signature?: Maybe<Scalars['String']>;
+  teamId?: Maybe<Scalars['String']>;
+};
+
+export type VotedCreateManyUserInputEnvelope = {
+  data?: Maybe<Array<VotedCreateManyUserInput>>;
+  skipDuplicates?: Maybe<Scalars['Boolean']>;
+};
+
+export type VotedCreateNestedManyWithoutBallotInput = {
   connect?: Maybe<Array<VotedWhereUniqueInput>>;
-  connectOrCreate?: Maybe<Array<VotedCreateOrConnectWithoutballotInput>>;
+  connectOrCreate?: Maybe<Array<VotedCreateOrConnectWithoutBallotInput>>;
   create?: Maybe<Array<VotedCreateWithoutBallotInput>>;
+  createMany?: Maybe<VotedCreateManyBallotInputEnvelope>;
 };
 
-export type VotedCreateManyWithoutSchoolInput = {
+export type VotedCreateNestedManyWithoutSchoolInput = {
   connect?: Maybe<Array<VotedWhereUniqueInput>>;
-  connectOrCreate?: Maybe<Array<VotedCreateOrConnectWithoutschoolInput>>;
+  connectOrCreate?: Maybe<Array<VotedCreateOrConnectWithoutSchoolInput>>;
   create?: Maybe<Array<VotedCreateWithoutSchoolInput>>;
+  createMany?: Maybe<VotedCreateManySchoolInputEnvelope>;
 };
 
-export type VotedCreateManyWithoutTeamInput = {
+export type VotedCreateNestedManyWithoutTeamInput = {
   connect?: Maybe<Array<VotedWhereUniqueInput>>;
-  connectOrCreate?: Maybe<Array<VotedCreateOrConnectWithoutteamInput>>;
+  connectOrCreate?: Maybe<Array<VotedCreateOrConnectWithoutTeamInput>>;
   create?: Maybe<Array<VotedCreateWithoutTeamInput>>;
+  createMany?: Maybe<VotedCreateManyTeamInputEnvelope>;
 };
 
-export type VotedCreateManyWithoutUserInput = {
+export type VotedCreateNestedManyWithoutUserInput = {
   connect?: Maybe<Array<VotedWhereUniqueInput>>;
-  connectOrCreate?: Maybe<Array<VotedCreateOrConnectWithoutuserInput>>;
+  connectOrCreate?: Maybe<Array<VotedCreateOrConnectWithoutUserInput>>;
   create?: Maybe<Array<VotedCreateWithoutUserInput>>;
+  createMany?: Maybe<VotedCreateManyUserInputEnvelope>;
 };
 
-export type VotedCreateOrConnectWithoutballotInput = {
+export type VotedCreateOrConnectWithoutBallotInput = {
   create: VotedCreateWithoutBallotInput;
   where: VotedWhereUniqueInput;
 };
 
-export type VotedCreateOrConnectWithoutschoolInput = {
+export type VotedCreateOrConnectWithoutSchoolInput = {
   create: VotedCreateWithoutSchoolInput;
   where: VotedWhereUniqueInput;
 };
 
-export type VotedCreateOrConnectWithoutteamInput = {
+export type VotedCreateOrConnectWithoutTeamInput = {
   create: VotedCreateWithoutTeamInput;
   where: VotedWhereUniqueInput;
 };
 
-export type VotedCreateOrConnectWithoutuserInput = {
+export type VotedCreateOrConnectWithoutUserInput = {
   create: VotedCreateWithoutUserInput;
   where: VotedWhereUniqueInput;
 };
 
 export type VotedCreateWithoutBallotInput = {
   id?: Maybe<Scalars['String']>;
-  school?: Maybe<SchoolCreateOneWithoutVotedInput>;
+  school?: Maybe<SchoolCreateNestedOneWithoutVotedInput>;
   signature?: Maybe<Scalars['String']>;
-  team?: Maybe<TeamCreateOneWithoutVotedInput>;
-  user: UserCreateOneWithoutVotedInput;
+  team?: Maybe<TeamCreateNestedOneWithoutVotedInput>;
+  user: UserCreateNestedOneWithoutVotedInput;
 };
 
 export type VotedCreateWithoutSchoolInput = {
-  ballot: BallotCreateOneWithoutVotedInput;
+  ballot: BallotCreateNestedOneWithoutVotedInput;
   id?: Maybe<Scalars['String']>;
   signature?: Maybe<Scalars['String']>;
-  team?: Maybe<TeamCreateOneWithoutVotedInput>;
-  user: UserCreateOneWithoutVotedInput;
+  team?: Maybe<TeamCreateNestedOneWithoutVotedInput>;
+  user: UserCreateNestedOneWithoutVotedInput;
 };
 
 export type VotedCreateWithoutTeamInput = {
-  ballot: BallotCreateOneWithoutVotedInput;
+  ballot: BallotCreateNestedOneWithoutVotedInput;
   id?: Maybe<Scalars['String']>;
-  school?: Maybe<SchoolCreateOneWithoutVotedInput>;
+  school?: Maybe<SchoolCreateNestedOneWithoutVotedInput>;
   signature?: Maybe<Scalars['String']>;
-  user: UserCreateOneWithoutVotedInput;
+  user: UserCreateNestedOneWithoutVotedInput;
 };
 
 export type VotedCreateWithoutUserInput = {
-  ballot: BallotCreateOneWithoutVotedInput;
+  ballot: BallotCreateNestedOneWithoutVotedInput;
   id?: Maybe<Scalars['String']>;
-  school?: Maybe<SchoolCreateOneWithoutVotedInput>;
+  school?: Maybe<SchoolCreateNestedOneWithoutVotedInput>;
   signature?: Maybe<Scalars['String']>;
-  team?: Maybe<TeamCreateOneWithoutVotedInput>;
+  team?: Maybe<TeamCreateNestedOneWithoutVotedInput>;
 };
 
 export type VotedListRelationFilter = {
@@ -6977,8 +7772,9 @@ export type VotedUpdateManyMutationInput = {
 
 export type VotedUpdateManyWithoutBallotInput = {
   connect?: Maybe<Array<VotedWhereUniqueInput>>;
-  connectOrCreate?: Maybe<Array<VotedCreateOrConnectWithoutballotInput>>;
+  connectOrCreate?: Maybe<Array<VotedCreateOrConnectWithoutBallotInput>>;
   create?: Maybe<Array<VotedCreateWithoutBallotInput>>;
+  createMany?: Maybe<VotedCreateManyBallotInputEnvelope>;
   delete?: Maybe<Array<VotedWhereUniqueInput>>;
   deleteMany?: Maybe<Array<VotedScalarWhereInput>>;
   disconnect?: Maybe<Array<VotedWhereUniqueInput>>;
@@ -6990,8 +7786,9 @@ export type VotedUpdateManyWithoutBallotInput = {
 
 export type VotedUpdateManyWithoutSchoolInput = {
   connect?: Maybe<Array<VotedWhereUniqueInput>>;
-  connectOrCreate?: Maybe<Array<VotedCreateOrConnectWithoutschoolInput>>;
+  connectOrCreate?: Maybe<Array<VotedCreateOrConnectWithoutSchoolInput>>;
   create?: Maybe<Array<VotedCreateWithoutSchoolInput>>;
+  createMany?: Maybe<VotedCreateManySchoolInputEnvelope>;
   delete?: Maybe<Array<VotedWhereUniqueInput>>;
   deleteMany?: Maybe<Array<VotedScalarWhereInput>>;
   disconnect?: Maybe<Array<VotedWhereUniqueInput>>;
@@ -7003,8 +7800,9 @@ export type VotedUpdateManyWithoutSchoolInput = {
 
 export type VotedUpdateManyWithoutTeamInput = {
   connect?: Maybe<Array<VotedWhereUniqueInput>>;
-  connectOrCreate?: Maybe<Array<VotedCreateOrConnectWithoutteamInput>>;
+  connectOrCreate?: Maybe<Array<VotedCreateOrConnectWithoutTeamInput>>;
   create?: Maybe<Array<VotedCreateWithoutTeamInput>>;
+  createMany?: Maybe<VotedCreateManyTeamInputEnvelope>;
   delete?: Maybe<Array<VotedWhereUniqueInput>>;
   deleteMany?: Maybe<Array<VotedScalarWhereInput>>;
   disconnect?: Maybe<Array<VotedWhereUniqueInput>>;
@@ -7016,8 +7814,9 @@ export type VotedUpdateManyWithoutTeamInput = {
 
 export type VotedUpdateManyWithoutUserInput = {
   connect?: Maybe<Array<VotedWhereUniqueInput>>;
-  connectOrCreate?: Maybe<Array<VotedCreateOrConnectWithoutuserInput>>;
+  connectOrCreate?: Maybe<Array<VotedCreateOrConnectWithoutUserInput>>;
   create?: Maybe<Array<VotedCreateWithoutUserInput>>;
+  createMany?: Maybe<VotedCreateManyUserInputEnvelope>;
   delete?: Maybe<Array<VotedWhereUniqueInput>>;
   deleteMany?: Maybe<Array<VotedScalarWhereInput>>;
   disconnect?: Maybe<Array<VotedWhereUniqueInput>>;
@@ -7176,8 +7975,9 @@ export type VoteUpdateManyMutationInput = {
 
 export type VoteUpdateManyWithoutBallotInput = {
   connect?: Maybe<Array<VoteWhereUniqueInput>>;
-  connectOrCreate?: Maybe<Array<VoteCreateOrConnectWithoutballotInput>>;
+  connectOrCreate?: Maybe<Array<VoteCreateOrConnectWithoutBallotInput>>;
   create?: Maybe<Array<VoteCreateWithoutBallotInput>>;
+  createMany?: Maybe<VoteCreateManyBallotInputEnvelope>;
   delete?: Maybe<Array<VoteWhereUniqueInput>>;
   deleteMany?: Maybe<Array<VoteScalarWhereInput>>;
   disconnect?: Maybe<Array<VoteWhereUniqueInput>>;
@@ -7189,8 +7989,9 @@ export type VoteUpdateManyWithoutBallotInput = {
 
 export type VoteUpdateManyWithoutBallotRunInput = {
   connect?: Maybe<Array<VoteWhereUniqueInput>>;
-  connectOrCreate?: Maybe<Array<VoteCreateOrConnectWithoutballotRunInput>>;
+  connectOrCreate?: Maybe<Array<VoteCreateOrConnectWithoutBallotRunInput>>;
   create?: Maybe<Array<VoteCreateWithoutBallotRunInput>>;
+  createMany?: Maybe<VoteCreateManyBallotRunInputEnvelope>;
   delete?: Maybe<Array<VoteWhereUniqueInput>>;
   deleteMany?: Maybe<Array<VoteScalarWhereInput>>;
   disconnect?: Maybe<Array<VoteWhereUniqueInput>>;
@@ -7202,8 +8003,9 @@ export type VoteUpdateManyWithoutBallotRunInput = {
 
 export type VoteUpdateManyWithoutSchoolInput = {
   connect?: Maybe<Array<VoteWhereUniqueInput>>;
-  connectOrCreate?: Maybe<Array<VoteCreateOrConnectWithoutschoolInput>>;
+  connectOrCreate?: Maybe<Array<VoteCreateOrConnectWithoutSchoolInput>>;
   create?: Maybe<Array<VoteCreateWithoutSchoolInput>>;
+  createMany?: Maybe<VoteCreateManySchoolInputEnvelope>;
   delete?: Maybe<Array<VoteWhereUniqueInput>>;
   deleteMany?: Maybe<Array<VoteScalarWhereInput>>;
   disconnect?: Maybe<Array<VoteWhereUniqueInput>>;
@@ -7215,8 +8017,9 @@ export type VoteUpdateManyWithoutSchoolInput = {
 
 export type VoteUpdateManyWithoutTeamInput = {
   connect?: Maybe<Array<VoteWhereUniqueInput>>;
-  connectOrCreate?: Maybe<Array<VoteCreateOrConnectWithoutteamInput>>;
+  connectOrCreate?: Maybe<Array<VoteCreateOrConnectWithoutTeamInput>>;
   create?: Maybe<Array<VoteCreateWithoutTeamInput>>;
+  createMany?: Maybe<VoteCreateManyTeamInputEnvelope>;
   delete?: Maybe<Array<VoteWhereUniqueInput>>;
   deleteMany?: Maybe<Array<VoteScalarWhereInput>>;
   disconnect?: Maybe<Array<VoteWhereUniqueInput>>;
@@ -7371,7 +8174,7 @@ export type Work = {
   reactions: Array<Reaction>;
   text: Scalars['String'];
   title: Scalars['String'];
-  updatedAt: Scalars['DateTime'];
+  updatedAt?: Maybe<Scalars['DateTime']>;
   users: Array<User>;
 };
 
@@ -7400,178 +8203,214 @@ export type WorkUsersArgs = {
 };
 
 export type WorkCreateInput = {
-  activities?: Maybe<ActivityCreateManyWithoutWorkInput>;
-  attachments?: Maybe<AttachmentCreateManyWithoutWorkInput>;
+  activities?: Maybe<ActivityCreateNestedManyWithoutWorkInput>;
+  attachments?: Maybe<AttachmentCreateNestedManyWithoutWorkInput>;
   card?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['DateTime']>;
   data?: Maybe<Scalars['Json']>;
   id?: Maybe<Scalars['String']>;
-  reactions?: Maybe<ReactionCreateManyWithoutWorkInput>;
-  school: SchoolCreateOneWithoutWorkInput;
-  team: TeamCreateOneWithoutWorkInput;
+  reactions?: Maybe<ReactionCreateNestedManyWithoutWorkInput>;
+  school: SchoolCreateNestedOneWithoutWorkInput;
+  team: TeamCreateNestedOneWithoutWorkInput;
   text?: Maybe<Scalars['String']>;
   title?: Maybe<Scalars['String']>;
   updatedAt?: Maybe<Scalars['DateTime']>;
-  users?: Maybe<UserCreateManyWithoutWorkInput>;
+  users?: Maybe<UserCreateNestedManyWithoutWorkInput>;
   visibility?: Maybe<Visibility>;
 };
 
-export type WorkCreateManyWithoutSchoolInput = {
+export type WorkCreateManySchoolInput = {
+  card?: Maybe<Scalars['String']>;
+  createdAt?: Maybe<Scalars['DateTime']>;
+  data?: Maybe<Scalars['Json']>;
+  id?: Maybe<Scalars['String']>;
+  teamId: Scalars['String'];
+  text?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
+  updatedAt?: Maybe<Scalars['DateTime']>;
+  visibility?: Maybe<Visibility>;
+};
+
+export type WorkCreateManySchoolInputEnvelope = {
+  data?: Maybe<Array<WorkCreateManySchoolInput>>;
+  skipDuplicates?: Maybe<Scalars['Boolean']>;
+};
+
+export type WorkCreateManyTeamInput = {
+  card?: Maybe<Scalars['String']>;
+  createdAt?: Maybe<Scalars['DateTime']>;
+  data?: Maybe<Scalars['Json']>;
+  id?: Maybe<Scalars['String']>;
+  schoolId: Scalars['String'];
+  text?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
+  updatedAt?: Maybe<Scalars['DateTime']>;
+  visibility?: Maybe<Visibility>;
+};
+
+export type WorkCreateManyTeamInputEnvelope = {
+  data?: Maybe<Array<WorkCreateManyTeamInput>>;
+  skipDuplicates?: Maybe<Scalars['Boolean']>;
+};
+
+export type WorkCreateNestedManyWithoutSchoolInput = {
   connect?: Maybe<Array<WorkWhereUniqueInput>>;
-  connectOrCreate?: Maybe<Array<WorkCreateOrConnectWithoutschoolInput>>;
+  connectOrCreate?: Maybe<Array<WorkCreateOrConnectWithoutSchoolInput>>;
   create?: Maybe<Array<WorkCreateWithoutSchoolInput>>;
+  createMany?: Maybe<WorkCreateManySchoolInputEnvelope>;
 };
 
-export type WorkCreateManyWithoutTeamInput = {
+export type WorkCreateNestedManyWithoutTeamInput = {
   connect?: Maybe<Array<WorkWhereUniqueInput>>;
-  connectOrCreate?: Maybe<Array<WorkCreateOrConnectWithoutteamInput>>;
+  connectOrCreate?: Maybe<Array<WorkCreateOrConnectWithoutTeamInput>>;
   create?: Maybe<Array<WorkCreateWithoutTeamInput>>;
+  createMany?: Maybe<WorkCreateManyTeamInputEnvelope>;
 };
 
-export type WorkCreateManyWithoutUsersInput = {
+export type WorkCreateNestedManyWithoutUsersInput = {
   connect?: Maybe<Array<WorkWhereUniqueInput>>;
-  connectOrCreate?: Maybe<Array<WorkCreateOrConnectWithoutusersInput>>;
+  connectOrCreate?: Maybe<Array<WorkCreateOrConnectWithoutUsersInput>>;
   create?: Maybe<Array<WorkCreateWithoutUsersInput>>;
 };
 
-export type WorkCreateOneWithoutActivitiesInput = {
+export type WorkCreateNestedOneWithoutActivitiesInput = {
   connect?: Maybe<WorkWhereUniqueInput>;
-  connectOrCreate?: Maybe<WorkCreateOrConnectWithoutactivitiesInput>;
+  connectOrCreate?: Maybe<WorkCreateOrConnectWithoutActivitiesInput>;
   create?: Maybe<WorkCreateWithoutActivitiesInput>;
 };
 
-export type WorkCreateOneWithoutAttachmentsInput = {
+export type WorkCreateNestedOneWithoutAttachmentsInput = {
   connect?: Maybe<WorkWhereUniqueInput>;
-  connectOrCreate?: Maybe<WorkCreateOrConnectWithoutattachmentsInput>;
+  connectOrCreate?: Maybe<WorkCreateOrConnectWithoutAttachmentsInput>;
   create?: Maybe<WorkCreateWithoutAttachmentsInput>;
 };
 
-export type WorkCreateOneWithoutReactionsInput = {
+export type WorkCreateNestedOneWithoutReactionsInput = {
   connect?: Maybe<WorkWhereUniqueInput>;
-  connectOrCreate?: Maybe<WorkCreateOrConnectWithoutreactionsInput>;
+  connectOrCreate?: Maybe<WorkCreateOrConnectWithoutReactionsInput>;
   create?: Maybe<WorkCreateWithoutReactionsInput>;
 };
 
-export type WorkCreateOrConnectWithoutactivitiesInput = {
+export type WorkCreateOrConnectWithoutActivitiesInput = {
   create: WorkCreateWithoutActivitiesInput;
   where: WorkWhereUniqueInput;
 };
 
-export type WorkCreateOrConnectWithoutattachmentsInput = {
+export type WorkCreateOrConnectWithoutAttachmentsInput = {
   create: WorkCreateWithoutAttachmentsInput;
   where: WorkWhereUniqueInput;
 };
 
-export type WorkCreateOrConnectWithoutreactionsInput = {
+export type WorkCreateOrConnectWithoutReactionsInput = {
   create: WorkCreateWithoutReactionsInput;
   where: WorkWhereUniqueInput;
 };
 
-export type WorkCreateOrConnectWithoutschoolInput = {
+export type WorkCreateOrConnectWithoutSchoolInput = {
   create: WorkCreateWithoutSchoolInput;
   where: WorkWhereUniqueInput;
 };
 
-export type WorkCreateOrConnectWithoutteamInput = {
+export type WorkCreateOrConnectWithoutTeamInput = {
   create: WorkCreateWithoutTeamInput;
   where: WorkWhereUniqueInput;
 };
 
-export type WorkCreateOrConnectWithoutusersInput = {
+export type WorkCreateOrConnectWithoutUsersInput = {
   create: WorkCreateWithoutUsersInput;
   where: WorkWhereUniqueInput;
 };
 
 export type WorkCreateWithoutActivitiesInput = {
-  attachments?: Maybe<AttachmentCreateManyWithoutWorkInput>;
+  attachments?: Maybe<AttachmentCreateNestedManyWithoutWorkInput>;
   card?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['DateTime']>;
   data?: Maybe<Scalars['Json']>;
   id?: Maybe<Scalars['String']>;
-  reactions?: Maybe<ReactionCreateManyWithoutWorkInput>;
-  school: SchoolCreateOneWithoutWorkInput;
-  team: TeamCreateOneWithoutWorkInput;
+  reactions?: Maybe<ReactionCreateNestedManyWithoutWorkInput>;
+  school: SchoolCreateNestedOneWithoutWorkInput;
+  team: TeamCreateNestedOneWithoutWorkInput;
   text?: Maybe<Scalars['String']>;
   title?: Maybe<Scalars['String']>;
   updatedAt?: Maybe<Scalars['DateTime']>;
-  users?: Maybe<UserCreateManyWithoutWorkInput>;
+  users?: Maybe<UserCreateNestedManyWithoutWorkInput>;
   visibility?: Maybe<Visibility>;
 };
 
 export type WorkCreateWithoutAttachmentsInput = {
-  activities?: Maybe<ActivityCreateManyWithoutWorkInput>;
+  activities?: Maybe<ActivityCreateNestedManyWithoutWorkInput>;
   card?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['DateTime']>;
   data?: Maybe<Scalars['Json']>;
   id?: Maybe<Scalars['String']>;
-  reactions?: Maybe<ReactionCreateManyWithoutWorkInput>;
-  school: SchoolCreateOneWithoutWorkInput;
-  team: TeamCreateOneWithoutWorkInput;
+  reactions?: Maybe<ReactionCreateNestedManyWithoutWorkInput>;
+  school: SchoolCreateNestedOneWithoutWorkInput;
+  team: TeamCreateNestedOneWithoutWorkInput;
   text?: Maybe<Scalars['String']>;
   title?: Maybe<Scalars['String']>;
   updatedAt?: Maybe<Scalars['DateTime']>;
-  users?: Maybe<UserCreateManyWithoutWorkInput>;
+  users?: Maybe<UserCreateNestedManyWithoutWorkInput>;
   visibility?: Maybe<Visibility>;
 };
 
 export type WorkCreateWithoutReactionsInput = {
-  activities?: Maybe<ActivityCreateManyWithoutWorkInput>;
-  attachments?: Maybe<AttachmentCreateManyWithoutWorkInput>;
+  activities?: Maybe<ActivityCreateNestedManyWithoutWorkInput>;
+  attachments?: Maybe<AttachmentCreateNestedManyWithoutWorkInput>;
   card?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['DateTime']>;
   data?: Maybe<Scalars['Json']>;
   id?: Maybe<Scalars['String']>;
-  school: SchoolCreateOneWithoutWorkInput;
-  team: TeamCreateOneWithoutWorkInput;
+  school: SchoolCreateNestedOneWithoutWorkInput;
+  team: TeamCreateNestedOneWithoutWorkInput;
   text?: Maybe<Scalars['String']>;
   title?: Maybe<Scalars['String']>;
   updatedAt?: Maybe<Scalars['DateTime']>;
-  users?: Maybe<UserCreateManyWithoutWorkInput>;
+  users?: Maybe<UserCreateNestedManyWithoutWorkInput>;
   visibility?: Maybe<Visibility>;
 };
 
 export type WorkCreateWithoutSchoolInput = {
-  activities?: Maybe<ActivityCreateManyWithoutWorkInput>;
-  attachments?: Maybe<AttachmentCreateManyWithoutWorkInput>;
+  activities?: Maybe<ActivityCreateNestedManyWithoutWorkInput>;
+  attachments?: Maybe<AttachmentCreateNestedManyWithoutWorkInput>;
   card?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['DateTime']>;
   data?: Maybe<Scalars['Json']>;
   id?: Maybe<Scalars['String']>;
-  reactions?: Maybe<ReactionCreateManyWithoutWorkInput>;
-  team: TeamCreateOneWithoutWorkInput;
+  reactions?: Maybe<ReactionCreateNestedManyWithoutWorkInput>;
+  team: TeamCreateNestedOneWithoutWorkInput;
   text?: Maybe<Scalars['String']>;
   title?: Maybe<Scalars['String']>;
   updatedAt?: Maybe<Scalars['DateTime']>;
-  users?: Maybe<UserCreateManyWithoutWorkInput>;
+  users?: Maybe<UserCreateNestedManyWithoutWorkInput>;
   visibility?: Maybe<Visibility>;
 };
 
 export type WorkCreateWithoutTeamInput = {
-  activities?: Maybe<ActivityCreateManyWithoutWorkInput>;
-  attachments?: Maybe<AttachmentCreateManyWithoutWorkInput>;
+  activities?: Maybe<ActivityCreateNestedManyWithoutWorkInput>;
+  attachments?: Maybe<AttachmentCreateNestedManyWithoutWorkInput>;
   card?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['DateTime']>;
   data?: Maybe<Scalars['Json']>;
   id?: Maybe<Scalars['String']>;
-  reactions?: Maybe<ReactionCreateManyWithoutWorkInput>;
-  school: SchoolCreateOneWithoutWorkInput;
+  reactions?: Maybe<ReactionCreateNestedManyWithoutWorkInput>;
+  school: SchoolCreateNestedOneWithoutWorkInput;
   text?: Maybe<Scalars['String']>;
   title?: Maybe<Scalars['String']>;
   updatedAt?: Maybe<Scalars['DateTime']>;
-  users?: Maybe<UserCreateManyWithoutWorkInput>;
+  users?: Maybe<UserCreateNestedManyWithoutWorkInput>;
   visibility?: Maybe<Visibility>;
 };
 
 export type WorkCreateWithoutUsersInput = {
-  activities?: Maybe<ActivityCreateManyWithoutWorkInput>;
-  attachments?: Maybe<AttachmentCreateManyWithoutWorkInput>;
+  activities?: Maybe<ActivityCreateNestedManyWithoutWorkInput>;
+  attachments?: Maybe<AttachmentCreateNestedManyWithoutWorkInput>;
   card?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['DateTime']>;
   data?: Maybe<Scalars['Json']>;
   id?: Maybe<Scalars['String']>;
-  reactions?: Maybe<ReactionCreateManyWithoutWorkInput>;
-  school: SchoolCreateOneWithoutWorkInput;
-  team: TeamCreateOneWithoutWorkInput;
+  reactions?: Maybe<ReactionCreateNestedManyWithoutWorkInput>;
+  school: SchoolCreateNestedOneWithoutWorkInput;
+  team: TeamCreateNestedOneWithoutWorkInput;
   text?: Maybe<Scalars['String']>;
   title?: Maybe<Scalars['String']>;
   updatedAt?: Maybe<Scalars['DateTime']>;
@@ -7626,8 +8465,9 @@ export type WorkUpdateManyMutationInput = {
 
 export type WorkUpdateManyWithoutSchoolInput = {
   connect?: Maybe<Array<WorkWhereUniqueInput>>;
-  connectOrCreate?: Maybe<Array<WorkCreateOrConnectWithoutschoolInput>>;
+  connectOrCreate?: Maybe<Array<WorkCreateOrConnectWithoutSchoolInput>>;
   create?: Maybe<Array<WorkCreateWithoutSchoolInput>>;
+  createMany?: Maybe<WorkCreateManySchoolInputEnvelope>;
   delete?: Maybe<Array<WorkWhereUniqueInput>>;
   deleteMany?: Maybe<Array<WorkScalarWhereInput>>;
   disconnect?: Maybe<Array<WorkWhereUniqueInput>>;
@@ -7639,8 +8479,9 @@ export type WorkUpdateManyWithoutSchoolInput = {
 
 export type WorkUpdateManyWithoutTeamInput = {
   connect?: Maybe<Array<WorkWhereUniqueInput>>;
-  connectOrCreate?: Maybe<Array<WorkCreateOrConnectWithoutteamInput>>;
+  connectOrCreate?: Maybe<Array<WorkCreateOrConnectWithoutTeamInput>>;
   create?: Maybe<Array<WorkCreateWithoutTeamInput>>;
+  createMany?: Maybe<WorkCreateManyTeamInputEnvelope>;
   delete?: Maybe<Array<WorkWhereUniqueInput>>;
   deleteMany?: Maybe<Array<WorkScalarWhereInput>>;
   disconnect?: Maybe<Array<WorkWhereUniqueInput>>;
@@ -7652,7 +8493,7 @@ export type WorkUpdateManyWithoutTeamInput = {
 
 export type WorkUpdateManyWithoutUsersInput = {
   connect?: Maybe<Array<WorkWhereUniqueInput>>;
-  connectOrCreate?: Maybe<Array<WorkCreateOrConnectWithoutusersInput>>;
+  connectOrCreate?: Maybe<Array<WorkCreateOrConnectWithoutUsersInput>>;
   create?: Maybe<Array<WorkCreateWithoutUsersInput>>;
   delete?: Maybe<Array<WorkWhereUniqueInput>>;
   deleteMany?: Maybe<Array<WorkScalarWhereInput>>;
@@ -7680,7 +8521,7 @@ export type WorkUpdateManyWithWhereWithoutUsersInput = {
 
 export type WorkUpdateOneWithoutActivitiesInput = {
   connect?: Maybe<WorkWhereUniqueInput>;
-  connectOrCreate?: Maybe<WorkCreateOrConnectWithoutactivitiesInput>;
+  connectOrCreate?: Maybe<WorkCreateOrConnectWithoutActivitiesInput>;
   create?: Maybe<WorkCreateWithoutActivitiesInput>;
   delete?: Maybe<Scalars['Boolean']>;
   disconnect?: Maybe<Scalars['Boolean']>;
@@ -7690,7 +8531,7 @@ export type WorkUpdateOneWithoutActivitiesInput = {
 
 export type WorkUpdateOneWithoutAttachmentsInput = {
   connect?: Maybe<WorkWhereUniqueInput>;
-  connectOrCreate?: Maybe<WorkCreateOrConnectWithoutattachmentsInput>;
+  connectOrCreate?: Maybe<WorkCreateOrConnectWithoutAttachmentsInput>;
   create?: Maybe<WorkCreateWithoutAttachmentsInput>;
   delete?: Maybe<Scalars['Boolean']>;
   disconnect?: Maybe<Scalars['Boolean']>;
@@ -7700,7 +8541,7 @@ export type WorkUpdateOneWithoutAttachmentsInput = {
 
 export type WorkUpdateOneWithoutReactionsInput = {
   connect?: Maybe<WorkWhereUniqueInput>;
-  connectOrCreate?: Maybe<WorkCreateOrConnectWithoutreactionsInput>;
+  connectOrCreate?: Maybe<WorkCreateOrConnectWithoutReactionsInput>;
   create?: Maybe<WorkCreateWithoutReactionsInput>;
   delete?: Maybe<Scalars['Boolean']>;
   disconnect?: Maybe<Scalars['Boolean']>;
@@ -7890,16 +8731,22 @@ export type ActivitiesQuery = (
   & { activities: Array<(
     { __typename?: 'Activity' }
     & Pick<Activity, 'type' | 'card' | 'summary' | 'ballotId' | 'workId' | 'time'>
-    & { user: (
+    & { user?: Maybe<(
       { __typename?: 'User' }
       & Pick<User, 'shortname'>
-    ) }
+    )> }
   )> }
 );
 
 export type BallotFieldsFragment = (
   { __typename?: 'Ballot' }
   & Pick<Ballot, 'id' | 'title' | 'description' | 'body' | 'start' | 'end' | 'scope' | 'canton'>
+);
+
+export type UserBallotFieldsFragment = (
+  { __typename?: 'Ballot' }
+  & Pick<Ballot, 'canVote' | 'hasVoted'>
+  & BallotFieldsFragment
 );
 
 export type BallotRunFieldsFragment = (
@@ -7920,6 +8767,20 @@ export type BallotsQuery = (
   { __typename?: 'Query' }
   & { ballots: Array<(
     { __typename?: 'Ballot' }
+    & BallotFieldsFragment
+  )> }
+);
+
+export type UserBallotsQueryVariables = Exact<{
+  where?: Maybe<BallotWhereInput>;
+}>;
+
+
+export type UserBallotsQuery = (
+  { __typename?: 'Query' }
+  & { ballots: Array<(
+    { __typename?: 'Ballot' }
+    & Pick<Ballot, 'canVote' | 'hasVoted'>
     & BallotFieldsFragment
   )> }
 );
@@ -8015,10 +8876,10 @@ export type VoteMutation = (
   & { vote?: Maybe<(
     { __typename?: 'Vote' }
     & Pick<Vote, 'verify'>
-    & { ballot: (
+    & { ballot?: Maybe<(
       { __typename?: 'Ballot' }
       & Pick<Ballot, 'id' | 'canVote' | 'hasVoted'>
-    ) }
+    )> }
   )> }
 );
 
@@ -8092,10 +8953,10 @@ export type LoginFieldsFragment = (
   )>, team?: Maybe<(
     { __typename?: 'Team' }
     & Pick<Team, 'id' | 'name' | 'cards'>
-    & { teacher: (
+    & { teacher?: Maybe<(
       { __typename?: 'User' }
       & Pick<User, 'id' | 'name' | 'shortname'>
-    ) }
+    )> }
   )> }
 );
 
@@ -8260,10 +9121,10 @@ export type CreateOneSchoolMutationVariables = Exact<{
 
 export type CreateOneSchoolMutation = (
   { __typename?: 'Mutation' }
-  & { createOneSchool: (
+  & { createOneSchool?: Maybe<(
     { __typename?: 'School' }
     & Pick<School, 'id' | 'name' | 'address' | 'zip' | 'city' | 'canton'>
-  ) }
+  )> }
 );
 
 export type NewSchoolFragment = (
@@ -8293,10 +9154,10 @@ export type SwissvotesQuery = (
 export type TeamAnonFieldsFragment = (
   { __typename?: 'Team' }
   & Pick<Team, 'id' | 'name' | 'cards' | 'prefs' | 'notes' | 'teacherId'>
-  & { school: (
+  & { school?: Maybe<(
     { __typename?: 'School' }
     & Pick<School, 'id' | 'name' | 'city'>
-  ) }
+  )> }
 );
 
 export type TeamUserFieldsFragment = (
@@ -8304,10 +9165,10 @@ export type TeamUserFieldsFragment = (
   & { members: Array<(
     { __typename?: 'User' }
     & Pick<User, 'id' | 'name' | 'shortname'>
-  )>, teacher: (
+  )>, teacher?: Maybe<(
     { __typename?: 'User' }
     & Pick<User, 'id' | 'shortname'>
-  ) }
+  )> }
   & TeamAnonFieldsFragment
 );
 
@@ -8421,10 +9282,10 @@ export type CreateOneTeamMutationVariables = Exact<{
 
 export type CreateOneTeamMutation = (
   { __typename?: 'Mutation' }
-  & { createOneTeam: (
+  & { createOneTeam?: Maybe<(
     { __typename?: 'Team' }
     & TeamTeacherFieldsFragment
-  ) }
+  )> }
 );
 
 export type AttachmentFieldsFragment = (
@@ -8462,10 +9323,10 @@ export type UsersQuery = (
     & { team?: Maybe<(
       { __typename?: 'Team' }
       & Pick<Team, 'id' | 'name'>
-      & { school: (
+      & { school?: Maybe<(
         { __typename?: 'School' }
         & Pick<School, 'id' | 'name'>
-      ) }
+      )> }
     )> }
   )> }
 );
@@ -8542,10 +9403,10 @@ export type PostWorkMutationVariables = Exact<{
 
 export type PostWorkMutation = (
   { __typename?: 'Mutation' }
-  & { postWork: (
+  & { postWork?: Maybe<(
     { __typename?: 'Work' }
     & WorkFieldsFragment
-  ) }
+  )> }
 );
 
 export type StatsQueryVariables = Exact<{
@@ -8635,10 +9496,10 @@ export type AcceptInviteMutation = (
   & { acceptInvite?: Maybe<(
     { __typename?: 'Team' }
     & Pick<Team, 'id' | 'name'>
-    & { school: (
+    & { school?: Maybe<(
       { __typename?: 'School' }
       & Pick<School, 'id' | 'name' | 'city'>
-    ) }
+    )> }
   )> }
 );
 
@@ -8745,10 +9606,10 @@ export type CreateUserMutationVariables = Exact<{
 
 export type CreateUserMutation = (
   { __typename?: 'Mutation' }
-  & { createUser: (
+  & { createUser?: Maybe<(
     { __typename?: 'User' }
     & Pick<User, 'id' | 'name' | 'email' | 'shortname' | 'lastname' | 'role'>
-  ) }
+  )> }
 );
 
 export type CheckVerificationMutationVariables = Exact<{
@@ -8776,6 +9637,13 @@ export const BallotFieldsFragmentDoc = gql`
   canton
 }
     `;
+export const UserBallotFieldsFragmentDoc = gql`
+    fragment UserBallotFields on Ballot {
+  ...BallotFields
+  canVote
+  hasVoted
+}
+    ${BallotFieldsFragmentDoc}`;
 export const BallotRunFieldsFragmentDoc = gql`
     fragment BallotRunFields on BallotRun {
   id
@@ -8994,6 +9862,41 @@ export function useBallotsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<Ba
 export type BallotsQueryHookResult = ReturnType<typeof useBallotsQuery>;
 export type BallotsLazyQueryHookResult = ReturnType<typeof useBallotsLazyQuery>;
 export type BallotsQueryResult = Apollo.QueryResult<BallotsQuery, BallotsQueryVariables>;
+export const UserBallotsDocument = gql`
+    query userBallots($where: BallotWhereInput) {
+  ballots(where: $where) {
+    ...BallotFields
+    canVote
+    hasVoted
+  }
+}
+    ${BallotFieldsFragmentDoc}`;
+
+/**
+ * __useUserBallotsQuery__
+ *
+ * To run a query within a React component, call `useUserBallotsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useUserBallotsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useUserBallotsQuery({
+ *   variables: {
+ *      where: // value for 'where'
+ *   },
+ * });
+ */
+export function useUserBallotsQuery(baseOptions?: Apollo.QueryHookOptions<UserBallotsQuery, UserBallotsQueryVariables>) {
+        return Apollo.useQuery<UserBallotsQuery, UserBallotsQueryVariables>(UserBallotsDocument, baseOptions);
+      }
+export function useUserBallotsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<UserBallotsQuery, UserBallotsQueryVariables>) {
+          return Apollo.useLazyQuery<UserBallotsQuery, UserBallotsQueryVariables>(UserBallotsDocument, baseOptions);
+        }
+export type UserBallotsQueryHookResult = ReturnType<typeof useUserBallotsQuery>;
+export type UserBallotsLazyQueryHookResult = ReturnType<typeof useUserBallotsLazyQuery>;
+export type UserBallotsQueryResult = Apollo.QueryResult<UserBallotsQuery, UserBallotsQueryVariables>;
 export const BallotDocument = gql`
     query ballot($where: BallotWhereUniqueInput!) {
   ballot(where: $where) {
@@ -10366,7 +11269,7 @@ export type StatsLazyQueryHookResult = ReturnType<typeof useStatsLazyQuery>;
 export type StatsQueryResult = Apollo.QueryResult<StatsQuery, StatsQueryVariables>;
 export const TeachersDocument = gql`
     query teachers($where: UserWhereInput) {
-  users(where: $where) {
+  users(where: $where, orderBy: {createdAt: desc}) {
     id
     name
     lastname

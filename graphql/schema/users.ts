@@ -2,15 +2,17 @@ import { users } from "../resolvers";
 import {
   stringArg,
   objectType,
+  inputObjectType,
   extendType,
   nonNull,
   booleanArg,
+  arg,
 } from "@nexus/schema";
 
 export const User = objectType({
   name: "User",
   definition(t) {
-    t.model.id();
+    t.nonNull.model.id();
     t.model.email();
     t.model.name();
     t.model.lastname();
@@ -20,7 +22,9 @@ export const User = objectType({
     t.model.emailVerified();
     t.model.createdAt();
     t.model.image();
-    t.model.role();
+    t.nonNull.model.role();
+    t.model.locale();
+    t.model.campaign();
     t.model.school();
     t.model.team();
     t.model.teaches();
@@ -36,6 +40,20 @@ export const ResponseLogin = objectType({
   definition(t) {
     t.string("token");
     t.field("user", { type: "User" });
+  },
+});
+
+export const UserCreateInput = inputObjectType({
+  name: "UserCreateInput",
+  definition(t) {
+    t.string("name"),
+      t.string("lastname"),
+      t.nonNull.string("email"),
+      t.string("password"),
+      t.field("role", { type: "Role" }),
+      t.string("locale"),
+      t.string("campaign"),
+      t.string("redirect");
   },
 });
 
@@ -57,8 +75,11 @@ export const UserQuery = extendType({
 export const UserMutation = extendType({
   type: "Mutation",
   definition(t) {
-    t.crud.createOneUser({
-      alias: "createUser",
+    t.field("createUser", {
+      type: "User",
+      args: {
+        data: nonNull(arg({ type: "UserCreateInput" })),
+      },
       resolve: users.createUser,
     });
     t.crud.updateOneUser({
@@ -113,7 +134,7 @@ export const UserMutation = extendType({
       args: {
         name: stringArg(),
         lastname: stringArg(),
-        email: stringArg(),
+        email: nonNull(stringArg()),
         password: stringArg(),
         invite: nonNull(stringArg()),
       },

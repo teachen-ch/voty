@@ -1,5 +1,7 @@
 {
   "compilerOptions": {
+    "composite": true,
+    "incremental": true,
     "target": "ES2018",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
@@ -18,13 +20,11 @@
     "sourceMap": true,
     // nexus:
     "typeRoots": ["node_modules/@types", "./@types"],
-    "plugins": [
-      { "name": "@divyenduz/ts-graphql-plugin" }
-    ]
+    "plugins": [{ "name": "@divyenduz/ts-graphql-plugin" }]
     // @testing-library
     // eek. this breaks nexus: https://github.com/graphql-nexus/nexus/issues/1036
     // "types": ["cypress", "@testing-library/cypress"]
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "./i18n/*.json"],
   "exclude": ["**/node_modules", "**/.*/", "./cypress/"]
 }

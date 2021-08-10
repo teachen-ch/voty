@@ -14,6 +14,7 @@ import {
   GetBallotResultsQuery,
   BallotScope,
   BallotRunFieldsFragment,
+  UserBallotFieldsFragment,
 } from "graphql/types";
 
 import { formatFromTo, formatDate } from "../util/date";
@@ -45,6 +46,15 @@ const BallotFields = gql`
     canton
   }
 `;
+
+const UserBallotFields = gql`
+  fragment UserBallotFields on Ballot {
+    ...BallotFields
+    canVote
+    hasVoted
+  }
+  ${BallotFields}
+`;
 const BallotRunFields = gql`
   fragment BallotRunFields on BallotRun {
     id
@@ -59,6 +69,7 @@ const BallotRunFields = gql`
 
 export const fragments = {
   BallotFields,
+  UserBallotFields,
   BallotRunFields,
 };
 
@@ -66,6 +77,17 @@ export const GET_BALLOTS = gql`
   query ballots($where: BallotWhereInput) {
     ballots(where: $where) {
       ...BallotFields
+    }
+  }
+  ${fragments.BallotFields}
+`;
+
+export const GET_USER_BALLOTS = gql`
+  query userBallots($where: BallotWhereInput) {
+    ballots(where: $where) {
+      ...BallotFields
+      canVote
+      hasVoted
     }
   }
   ${fragments.BallotFields}
@@ -277,6 +299,8 @@ export enum BallotStatus {
   Not_Started = "Nicht gestartet",
   Started = "Gestartet",
   Ended = "Beendet",
+  Voted = "Erfolgreich abgestimmt",
+  Permission = "Nicht berechtigt",
 }
 
 export const getBallotStatus = (ballot: BallotFieldsFragment): string => {
@@ -286,9 +310,21 @@ export const getBallotStatus = (ballot: BallotFieldsFragment): string => {
   else return BallotStatus.Started;
 };
 
-export const SelectBallots: React.FC<{ team: TeamTeacherFieldsFragment }> = ({
-  team,
-}) => {
+export const getUserBallotStatus = (
+  ballot: UserBallotFieldsFragment
+): string => {
+  const now = new Date();
+  if (new Date(ballot.start) > now) return BallotStatus.Not_Started;
+  if (ballot.hasVoted) return BallotStatus.Voted;
+  if (new Date(ballot.end) < now) return BallotStatus.Ended;
+  if (!ballot.canVote) return BallotStatus.Permission;
+  else return BallotStatus.Started;
+};
+
+export const SelectBallots: React.FC<{
+  team: TeamTeacherFieldsFragment;
+  scope: BallotScope;
+}> = ({ team, scope }) => {
   const router = useRouter();
   const [doAddBallotRun, addMutation] = useAddBallotRunMutation();
   const [doRemoveBallotRun, removeMutation] = useRemoveBallotRunMutation();
@@ -301,7 +337,7 @@ export const SelectBallots: React.FC<{ team: TeamTeacherFieldsFragment }> = ({
   const ballotRuns = ballotRunsQuery.data?.getBallotRuns;
 
   const ballotsQuery = useBallotsQuery({
-    variables: { where: { scope: { equals: BallotScope.National } } },
+    variables: { where: { scope: { equals: scope } } },
   });
 
   const ballots = ballotsQuery.data?.ballots;
@@ -447,9 +483,11 @@ export const BallotDetails: React.FC<{
         {formatFromTo(ballot.start, ballot.end)}
       </Text>
       {children}
-      <Text textAlign="center" mt={3}>
-        <img width={150} src="/images/easyvote.png" alt="EasyVote" />
-      </Text>
+      {ballot.scope === BallotScope.National && (
+        <Text textAlign="center" mt={3}>
+          <img width={150} src="/images/easyvote.png" alt="EasyVote" />
+        </Text>
+      )}
       <Markdown>{ballot.body}</Markdown>
     </Text>
   </Card>

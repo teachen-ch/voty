@@ -1,13 +1,20 @@
 import { AppPage } from "components/Page";
 import { Text, Button, Heading, Card } from "rebass";
 import { gql } from "@apollo/client";
-import { useState, ReactElement, Dispatch, SetStateAction } from "react";
+import {
+  useState,
+  ReactElement,
+  Dispatch,
+  SetStateAction,
+  useEffect,
+} from "react";
 import { useRouter } from "next/router";
 import { QForm, yup, ErrorBox } from "../../components/Form";
 import { omit } from "lodash";
 import { SessionUser, useUser } from "state/user";
 import { Role, useCreateUserMutation } from "graphql/types";
 import Success from "./success";
+import { useTr } from "util/hooks";
 
 // TODO use fragment for ./successlds
 export const CREATE_USER = gql`
@@ -26,6 +33,7 @@ export const CREATE_USER = gql`
 export default function Signup(): ReactElement {
   const [user, setUser] = useState<SessionUser | undefined>(undefined);
   const router = useRouter();
+
   if (user) {
     return (
       <AppPage heading="Dein Konto ist erstellt">
@@ -79,9 +87,14 @@ export const CreateUserForm: React.FC<{
   omitLastname?: boolean;
   omitFirstname?: boolean;
   omitPassword?: boolean;
+  omitLogin?: boolean;
   defaultRole?: string;
+  submitButtonLabel?: string;
+  campaign?: string;
+  redirect?: string;
 }> = (props) => {
   const existingUser = useUser();
+  const tr = useTr();
   const router = useRouter();
   const [error, setError] = useState("");
   const [showLogin, setShowLogin] = useState(false);
@@ -96,8 +109,13 @@ export const CreateUserForm: React.FC<{
       }
     },
   });
+  const [locale, setLocale] = useState(router.locale);
+  useEffect(() => {
+    setLocale(router.locale);
+  }, [router.locale]);
 
   function defaultSubmit(values: Record<string, any>) {
+    // @ts-ignore this would need QForm to be typed...
     return doCreateUser({ variables: { data: omit(values, "submit") } });
   }
 
@@ -113,7 +131,7 @@ export const CreateUserForm: React.FC<{
       label: "Email",
       required: true,
       type: "email",
-      placeholder: "name@meineschule.ch",
+      placeholder: tr("Signup.placeholderEmail"),
     },
     password: {
       label: "Passwort",
@@ -125,17 +143,33 @@ export const CreateUserForm: React.FC<{
     //password2: yup.string().oneOf([yup.ref('password'), null], 'Passwords must match')
     role: {
       type: props.omitRole ? "hidden" : "select",
-      label: "Ich bin",
+      label: tr("Signup.labelRole"),
       init: props.defaultRole,
       required: true,
       options: {
-        "Bitte auswählen": "",
-        "Schüler*in": "Student",
-        "Lehrer*in": "Teacher",
-        "Schulleiter*in": "Principal",
+        "": tr("Roles.Choose"),
+        Student: tr("Roles.Student"),
+        Teacher: tr("Roles.Teacher"),
+        Principal: tr("Roles.Principal"),
+        User: tr("Roles.User"),
       },
     },
-    submit: { type: "submit", label: "Konto erstellen" },
+    campaign: {
+      type: "hidden",
+      init: props.campaign,
+    },
+    redirect: {
+      type: "hidden",
+      init: props.redirect,
+    },
+    locale: {
+      type: "hidden",
+      init: locale,
+    },
+    submit: {
+      type: "submit",
+      label: props.submitButtonLabel || tr("Signup.CreateButton"),
+    },
   };
 
   if (props.omitLastname) {
@@ -164,15 +198,17 @@ export const CreateUserForm: React.FC<{
           Möchstest Du Dich anmelden?
         </Button>
       )}
-      <Button
-        onClick={() => router.push("/user/login")}
-        variant="text"
-        my={2}
-        textAlign="right"
-        sx={{ gridColumn: [0, 0, 2] }}
-      >
-        Ich habe bereits ein Konto
-      </Button>
+      {!props.omitLogin && (
+        <Button
+          onClick={() => router.push("/user/login")}
+          variant="text"
+          my={2}
+          textAlign="right"
+          sx={{ gridColumn: [0, 0, 2] }}
+        >
+          Ich habe bereits ein Konto
+        </Button>
+      )}
       {props.children}
     </QForm>
   );

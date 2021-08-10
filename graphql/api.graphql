@@ -639,11 +639,11 @@ input ActivityWhereUniqueInput {
 type Attachment {
   createdAt: DateTime
   file: String
-  id: String
-  title: String
-  type: String
+  id: String!
+  title: String!
+  type: String!
   updatedAt: DateTime
-  user: User
+  user: User!
 }
 
 input AttachmentCreateManyBallotInput {
@@ -1286,12 +1286,12 @@ type Ballot {
   description: String
   end: DateTime
   hasVoted: Boolean
-  id: String
+  id: String!
   schoolId: String
   scope: BallotScope
   start: DateTime
   teamId: String
-  title: String
+  title: String!
 }
 
 input BallotCreateManyCreatorInput {
@@ -1684,9 +1684,9 @@ type BallotResults {
 }
 
 type BallotRun {
-  ballot: Ballot
+  ballot: Ballot!
   end: DateTime
-  id: String
+  id: String!
   start: DateTime
   team: Team
 }
@@ -2437,17 +2437,17 @@ type Discussion {
   card: String
   children: [Discussion]
   createdAt: DateTime
-  id: String
+  id: String!
   reactions(
     after: ReactionWhereUniqueInput
     before: ReactionWhereUniqueInput
     first: Int
     last: Int
   ): [Reaction!]!
-  text: String
-  title: String
+  text: String!
+  title: String!
   updatedAt: DateTime
-  user: User
+  user: User!
 }
 
 input DiscussionCreateManyBallotInput {
@@ -3034,7 +3034,7 @@ input DiscussionWhereUniqueInput {
 
 type Domain {
   approved: Boolean
-  id: String
+  id: String!
   name: String
   schools(
     after: SchoolWhereUniqueInput
@@ -3251,7 +3251,7 @@ type Mutation {
   changePassword(password: String): ResponseLogin
   checkVerification(token: String): ResponseLogin
   createInvitedUser(
-    email: String
+    email: String!
     invite: String!
     lastname: String
     name: String
@@ -3967,7 +3967,7 @@ type School {
   address: String
   canton: String
   city: String
-  id: String
+  id: String!
   members(
     after: UserWhereUniqueInput
     before: UserWhereUniqueInput
@@ -4805,10 +4805,10 @@ type Team {
     first: Int
     last: Int
   ): [Ballot!]!
-  cards: String
+  cards: String!
   code: String
   domain: Domain
-  id: String
+  id: String!
   invite: String
   members(
     after: UserWhereUniqueInput
@@ -4816,7 +4816,7 @@ type Team {
     first: Int
     last: Int
   ): [User!]!
-  name: String
+  name: String!
   notes: Json
   prefs: Json
   school: School
@@ -6035,6 +6035,7 @@ type User {
     first: Int
     last: Int
   ): [Ballot!]!
+  campaign: String
   createdAt: DateTime
   discussions(
     after: DiscussionWhereUniqueInput
@@ -6045,9 +6046,10 @@ type User {
   email: String
   emailVerified: DateTime
   gender: Gender
-  id: String
+  id: String!
   image: String
   lastname: String
+  locale: String
   name: String
   reactions(
     after: ReactionWhereUniqueInput
@@ -6055,7 +6057,7 @@ type User {
     first: Int
     last: Int
   ): [Reaction!]!
-  role: Role
+  role: Role!
   school: School
   shortname: String
   teaches(
@@ -6069,34 +6071,18 @@ type User {
 }
 
 input UserCreateInput {
-  activity: ActivityCreateNestedManyWithoutUserInput
-  attachments: AttachmentCreateNestedManyWithoutUserInput
-  ballots: BallotCreateNestedManyWithoutCreatorInput
-  canton: String
-  createdAt: DateTime
-  discussions: DiscussionCreateNestedManyWithoutUserInput
-  email: String
-  emailVerified: DateTime
-  gender: Gender
-  id: String
-  image: String
+  campaign: String
+  email: String!
   lastname: String
+  locale: String
   name: String
   password: String
-  reactions: ReactionCreateNestedManyWithoutUserInput
+  redirect: String
   role: Role
-  school: SchoolCreateNestedOneWithoutMembersInput
-  teaches: TeamCreateNestedManyWithoutTeacherInput
-  team: TeamCreateNestedOneWithoutMembersInput
-  Team: TeamCreateNestedOneWithoutUserInput
-  updatedAt: DateTime
-  verified: Boolean
-  voted: VotedCreateNestedManyWithoutUserInput
-  work: WorkCreateNestedManyWithoutUsersInput
-  year: Int
 }
 
 input UserCreateManySchoolInput {
+  campaign: String
   canton: String
   createdAt: DateTime
   email: String
@@ -6105,6 +6091,7 @@ input UserCreateManySchoolInput {
   id: String
   image: String
   lastname: String
+  locale: String
   name: String
   password: String
   role: Role
@@ -6120,6 +6107,7 @@ input UserCreateManySchoolInputEnvelope {
 }
 
 input UserCreateManyTeamInput {
+  campaign: String
   canton: String
   createdAt: DateTime
   email: String
@@ -6128,6 +6116,7 @@ input UserCreateManyTeamInput {
   id: String
   image: String
   lastname: String
+  locale: String
   name: String
   password: String
   role: Role
@@ -6257,6 +6246,7 @@ input UserCreateOrConnectWithoutWorkInput {
 input UserCreateWithoutActivityInput {
   attachments: AttachmentCreateNestedManyWithoutUserInput
   ballots: BallotCreateNestedManyWithoutCreatorInput
+  campaign: String
   canton: String
   createdAt: DateTime
   discussions: DiscussionCreateNestedManyWithoutUserInput
@@ -6266,6 +6256,7 @@ input UserCreateWithoutActivityInput {
   id: String
   image: String
   lastname: String
+  locale: String
   name: String
   password: String
   reactions: ReactionCreateNestedManyWithoutUserInput
@@ -6284,6 +6275,7 @@ input UserCreateWithoutActivityInput {
 input UserCreateWithoutAttachmentsInput {
   activity: ActivityCreateNestedManyWithoutUserInput
   ballots: BallotCreateNestedManyWithoutCreatorInput
+  campaign: String
   canton: String
   createdAt: DateTime
   discussions: DiscussionCreateNestedManyWithoutUserInput
@@ -6293,6 +6285,7 @@ input UserCreateWithoutAttachmentsInput {
   id: String
   image: String
   lastname: String
+  locale: String
   name: String
   password: String
   reactions: ReactionCreateNestedManyWithoutUserInput
@@ -6311,6 +6304,7 @@ input UserCreateWithoutAttachmentsInput {
 input UserCreateWithoutBallotsInput {
   activity: ActivityCreateNestedManyWithoutUserInput
   attachments: AttachmentCreateNestedManyWithoutUserInput
+  campaign: String
   canton: String
   createdAt: DateTime
   discussions: DiscussionCreateNestedManyWithoutUserInput
@@ -6320,6 +6314,7 @@ input UserCreateWithoutBallotsInput {
   id: String
   image: String
   lastname: String
+  locale: String
   name: String
   password: String
   reactions: ReactionCreateNestedManyWithoutUserInput
@@ -6339,6 +6334,7 @@ input UserCreateWithoutDiscussionsInput {
   activity: ActivityCreateNestedManyWithoutUserInput
   attachments: AttachmentCreateNestedManyWithoutUserInput
   ballots: BallotCreateNestedManyWithoutCreatorInput
+  campaign: String
   canton: String
   createdAt: DateTime
   email: String
@@ -6347,6 +6343,7 @@ input UserCreateWithoutDiscussionsInput {
   id: String
   image: String
   lastname: String
+  locale: String
   name: String
   password: String
   reactions: ReactionCreateNestedManyWithoutUserInput
@@ -6366,6 +6363,7 @@ input UserCreateWithoutReactionsInput {
   activity: ActivityCreateNestedManyWithoutUserInput
   attachments: AttachmentCreateNestedManyWithoutUserInput
   ballots: BallotCreateNestedManyWithoutCreatorInput
+  campaign: String
   canton: String
   createdAt: DateTime
   discussions: DiscussionCreateNestedManyWithoutUserInput
@@ -6375,6 +6373,7 @@ input UserCreateWithoutReactionsInput {
   id: String
   image: String
   lastname: String
+  locale: String
   name: String
   password: String
   role: Role
@@ -6393,6 +6392,7 @@ input UserCreateWithoutSchoolInput {
   activity: ActivityCreateNestedManyWithoutUserInput
   attachments: AttachmentCreateNestedManyWithoutUserInput
   ballots: BallotCreateNestedManyWithoutCreatorInput
+  campaign: String
   canton: String
   createdAt: DateTime
   discussions: DiscussionCreateNestedManyWithoutUserInput
@@ -6402,6 +6402,7 @@ input UserCreateWithoutSchoolInput {
   id: String
   image: String
   lastname: String
+  locale: String
   name: String
   password: String
   reactions: ReactionCreateNestedManyWithoutUserInput
@@ -6420,6 +6421,7 @@ input UserCreateWithoutTeachesInput {
   activity: ActivityCreateNestedManyWithoutUserInput
   attachments: AttachmentCreateNestedManyWithoutUserInput
   ballots: BallotCreateNestedManyWithoutCreatorInput
+  campaign: String
   canton: String
   createdAt: DateTime
   discussions: DiscussionCreateNestedManyWithoutUserInput
@@ -6429,6 +6431,7 @@ input UserCreateWithoutTeachesInput {
   id: String
   image: String
   lastname: String
+  locale: String
   name: String
   password: String
   reactions: ReactionCreateNestedManyWithoutUserInput
@@ -6447,6 +6450,7 @@ input UserCreateWithoutTeamInput {
   activity: ActivityCreateNestedManyWithoutUserInput
   attachments: AttachmentCreateNestedManyWithoutUserInput
   ballots: BallotCreateNestedManyWithoutCreatorInput
+  campaign: String
   canton: String
   createdAt: DateTime
   discussions: DiscussionCreateNestedManyWithoutUserInput
@@ -6456,6 +6460,7 @@ input UserCreateWithoutTeamInput {
   id: String
   image: String
   lastname: String
+  locale: String
   name: String
   password: String
   reactions: ReactionCreateNestedManyWithoutUserInput
@@ -6474,6 +6479,7 @@ input UserCreateWithoutVotedInput {
   activity: ActivityCreateNestedManyWithoutUserInput
   attachments: AttachmentCreateNestedManyWithoutUserInput
   ballots: BallotCreateNestedManyWithoutCreatorInput
+  campaign: String
   canton: String
   createdAt: DateTime
   discussions: DiscussionCreateNestedManyWithoutUserInput
@@ -6483,6 +6489,7 @@ input UserCreateWithoutVotedInput {
   id: String
   image: String
   lastname: String
+  locale: String
   name: String
   password: String
   reactions: ReactionCreateNestedManyWithoutUserInput
@@ -6501,6 +6508,7 @@ input UserCreateWithoutWorkInput {
   activity: ActivityCreateNestedManyWithoutUserInput
   attachments: AttachmentCreateNestedManyWithoutUserInput
   ballots: BallotCreateNestedManyWithoutCreatorInput
+  campaign: String
   canton: String
   createdAt: DateTime
   discussions: DiscussionCreateNestedManyWithoutUserInput
@@ -6510,6 +6518,7 @@ input UserCreateWithoutWorkInput {
   id: String
   image: String
   lastname: String
+  locale: String
   name: String
   password: String
   reactions: ReactionCreateNestedManyWithoutUserInput
@@ -6531,6 +6540,7 @@ input UserListRelationFilter {
 }
 
 input UserOrderByInput {
+  campaign: SortOrder
   canton: SortOrder
   createdAt: SortOrder
   email: SortOrder
@@ -6539,6 +6549,7 @@ input UserOrderByInput {
   id: SortOrder
   image: SortOrder
   lastname: SortOrder
+  locale: SortOrder
   name: SortOrder
   password: SortOrder
   role: SortOrder
@@ -6551,6 +6562,7 @@ input UserOrderByInput {
 
 input UserScalarWhereInput {
   AND: [UserScalarWhereInput!]
+  campaign: StringNullableFilter
   canton: StringNullableFilter
   createdAt: DateTimeFilter
   email: StringNullableFilter
@@ -6559,6 +6571,7 @@ input UserScalarWhereInput {
   id: StringFilter
   image: StringNullableFilter
   lastname: StringNullableFilter
+  locale: StringFilter
   name: StringNullableFilter
   NOT: [UserScalarWhereInput!]
   OR: [UserScalarWhereInput!]
@@ -6575,6 +6588,7 @@ input UserUpdateInput {
   activity: ActivityUpdateManyWithoutUserInput
   attachments: AttachmentUpdateManyWithoutUserInput
   ballots: BallotUpdateManyWithoutCreatorInput
+  campaign: NullableStringFieldUpdateOperationsInput
   canton: NullableStringFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   discussions: DiscussionUpdateManyWithoutUserInput
@@ -6584,6 +6598,7 @@ input UserUpdateInput {
   id: StringFieldUpdateOperationsInput
   image: NullableStringFieldUpdateOperationsInput
   lastname: NullableStringFieldUpdateOperationsInput
+  locale: StringFieldUpdateOperationsInput
   name: NullableStringFieldUpdateOperationsInput
   password: NullableStringFieldUpdateOperationsInput
   reactions: ReactionUpdateManyWithoutUserInput
@@ -6600,6 +6615,7 @@ input UserUpdateInput {
 }
 
 input UserUpdateManyMutationInput {
+  campaign: NullableStringFieldUpdateOperationsInput
   canton: NullableStringFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   email: NullableStringFieldUpdateOperationsInput
@@ -6608,6 +6624,7 @@ input UserUpdateManyMutationInput {
   id: StringFieldUpdateOperationsInput
   image: NullableStringFieldUpdateOperationsInput
   lastname: NullableStringFieldUpdateOperationsInput
+  locale: StringFieldUpdateOperationsInput
   name: NullableStringFieldUpdateOperationsInput
   password: NullableStringFieldUpdateOperationsInput
   role: EnumRoleFieldUpdateOperationsInput
@@ -6733,6 +6750,7 @@ input UserUpdateOneWithoutBallotsInput {
 input UserUpdateWithoutActivityInput {
   attachments: AttachmentUpdateManyWithoutUserInput
   ballots: BallotUpdateManyWithoutCreatorInput
+  campaign: NullableStringFieldUpdateOperationsInput
   canton: NullableStringFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   discussions: DiscussionUpdateManyWithoutUserInput
@@ -6742,6 +6760,7 @@ input UserUpdateWithoutActivityInput {
   id: StringFieldUpdateOperationsInput
   image: NullableStringFieldUpdateOperationsInput
   lastname: NullableStringFieldUpdateOperationsInput
+  locale: StringFieldUpdateOperationsInput
   name: NullableStringFieldUpdateOperationsInput
   password: NullableStringFieldUpdateOperationsInput
   reactions: ReactionUpdateManyWithoutUserInput
@@ -6760,6 +6779,7 @@ input UserUpdateWithoutActivityInput {
 input UserUpdateWithoutAttachmentsInput {
   activity: ActivityUpdateManyWithoutUserInput
   ballots: BallotUpdateManyWithoutCreatorInput
+  campaign: NullableStringFieldUpdateOperationsInput
   canton: NullableStringFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   discussions: DiscussionUpdateManyWithoutUserInput
@@ -6769,6 +6789,7 @@ input UserUpdateWithoutAttachmentsInput {
   id: StringFieldUpdateOperationsInput
   image: NullableStringFieldUpdateOperationsInput
   lastname: NullableStringFieldUpdateOperationsInput
+  locale: StringFieldUpdateOperationsInput
   name: NullableStringFieldUpdateOperationsInput
   password: NullableStringFieldUpdateOperationsInput
   reactions: ReactionUpdateManyWithoutUserInput
@@ -6787,6 +6808,7 @@ input UserUpdateWithoutAttachmentsInput {
 input UserUpdateWithoutBallotsInput {
   activity: ActivityUpdateManyWithoutUserInput
   attachments: AttachmentUpdateManyWithoutUserInput
+  campaign: NullableStringFieldUpdateOperationsInput
   canton: NullableStringFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   discussions: DiscussionUpdateManyWithoutUserInput
@@ -6796,6 +6818,7 @@ input UserUpdateWithoutBallotsInput {
   id: StringFieldUpdateOperationsInput
   image: NullableStringFieldUpdateOperationsInput
   lastname: NullableStringFieldUpdateOperationsInput
+  locale: StringFieldUpdateOperationsInput
   name: NullableStringFieldUpdateOperationsInput
   password: NullableStringFieldUpdateOperationsInput
   reactions: ReactionUpdateManyWithoutUserInput
@@ -6815,6 +6838,7 @@ input UserUpdateWithoutDiscussionsInput {
   activity: ActivityUpdateManyWithoutUserInput
   attachments: AttachmentUpdateManyWithoutUserInput
   ballots: BallotUpdateManyWithoutCreatorInput
+  campaign: NullableStringFieldUpdateOperationsInput
   canton: NullableStringFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   email: NullableStringFieldUpdateOperationsInput
@@ -6823,6 +6847,7 @@ input UserUpdateWithoutDiscussionsInput {
   id: StringFieldUpdateOperationsInput
   image: NullableStringFieldUpdateOperationsInput
   lastname: NullableStringFieldUpdateOperationsInput
+  locale: StringFieldUpdateOperationsInput
   name: NullableStringFieldUpdateOperationsInput
   password: NullableStringFieldUpdateOperationsInput
   reactions: ReactionUpdateManyWithoutUserInput
@@ -6842,6 +6867,7 @@ input UserUpdateWithoutReactionsInput {
   activity: ActivityUpdateManyWithoutUserInput
   attachments: AttachmentUpdateManyWithoutUserInput
   ballots: BallotUpdateManyWithoutCreatorInput
+  campaign: NullableStringFieldUpdateOperationsInput
   canton: NullableStringFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   discussions: DiscussionUpdateManyWithoutUserInput
@@ -6851,6 +6877,7 @@ input UserUpdateWithoutReactionsInput {
   id: StringFieldUpdateOperationsInput
   image: NullableStringFieldUpdateOperationsInput
   lastname: NullableStringFieldUpdateOperationsInput
+  locale: StringFieldUpdateOperationsInput
   name: NullableStringFieldUpdateOperationsInput
   password: NullableStringFieldUpdateOperationsInput
   role: EnumRoleFieldUpdateOperationsInput
@@ -6869,6 +6896,7 @@ input UserUpdateWithoutSchoolInput {
   activity: ActivityUpdateManyWithoutUserInput
   attachments: AttachmentUpdateManyWithoutUserInput
   ballots: BallotUpdateManyWithoutCreatorInput
+  campaign: NullableStringFieldUpdateOperationsInput
   canton: NullableStringFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   discussions: DiscussionUpdateManyWithoutUserInput
@@ -6878,6 +6906,7 @@ input UserUpdateWithoutSchoolInput {
   id: StringFieldUpdateOperationsInput
   image: NullableStringFieldUpdateOperationsInput
   lastname: NullableStringFieldUpdateOperationsInput
+  locale: StringFieldUpdateOperationsInput
   name: NullableStringFieldUpdateOperationsInput
   password: NullableStringFieldUpdateOperationsInput
   reactions: ReactionUpdateManyWithoutUserInput
@@ -6896,6 +6925,7 @@ input UserUpdateWithoutTeachesInput {
   activity: ActivityUpdateManyWithoutUserInput
   attachments: AttachmentUpdateManyWithoutUserInput
   ballots: BallotUpdateManyWithoutCreatorInput
+  campaign: NullableStringFieldUpdateOperationsInput
   canton: NullableStringFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   discussions: DiscussionUpdateManyWithoutUserInput
@@ -6905,6 +6935,7 @@ input UserUpdateWithoutTeachesInput {
   id: StringFieldUpdateOperationsInput
   image: NullableStringFieldUpdateOperationsInput
   lastname: NullableStringFieldUpdateOperationsInput
+  locale: StringFieldUpdateOperationsInput
   name: NullableStringFieldUpdateOperationsInput
   password: NullableStringFieldUpdateOperationsInput
   reactions: ReactionUpdateManyWithoutUserInput
@@ -6923,6 +6954,7 @@ input UserUpdateWithoutTeamInput {
   activity: ActivityUpdateManyWithoutUserInput
   attachments: AttachmentUpdateManyWithoutUserInput
   ballots: BallotUpdateManyWithoutCreatorInput
+  campaign: NullableStringFieldUpdateOperationsInput
   canton: NullableStringFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   discussions: DiscussionUpdateManyWithoutUserInput
@@ -6932,6 +6964,7 @@ input UserUpdateWithoutTeamInput {
   id: StringFieldUpdateOperationsInput
   image: NullableStringFieldUpdateOperationsInput
   lastname: NullableStringFieldUpdateOperationsInput
+  locale: StringFieldUpdateOperationsInput
   name: NullableStringFieldUpdateOperationsInput
   password: NullableStringFieldUpdateOperationsInput
   reactions: ReactionUpdateManyWithoutUserInput
@@ -6950,6 +6983,7 @@ input UserUpdateWithoutVotedInput {
   activity: ActivityUpdateManyWithoutUserInput
   attachments: AttachmentUpdateManyWithoutUserInput
   ballots: BallotUpdateManyWithoutCreatorInput
+  campaign: NullableStringFieldUpdateOperationsInput
   canton: NullableStringFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   discussions: DiscussionUpdateManyWithoutUserInput
@@ -6959,6 +6993,7 @@ input UserUpdateWithoutVotedInput {
   id: StringFieldUpdateOperationsInput
   image: NullableStringFieldUpdateOperationsInput
   lastname: NullableStringFieldUpdateOperationsInput
+  locale: StringFieldUpdateOperationsInput
   name: NullableStringFieldUpdateOperationsInput
   password: NullableStringFieldUpdateOperationsInput
   reactions: ReactionUpdateManyWithoutUserInput
@@ -6977,6 +7012,7 @@ input UserUpdateWithoutWorkInput {
   activity: ActivityUpdateManyWithoutUserInput
   attachments: AttachmentUpdateManyWithoutUserInput
   ballots: BallotUpdateManyWithoutCreatorInput
+  campaign: NullableStringFieldUpdateOperationsInput
   canton: NullableStringFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   discussions: DiscussionUpdateManyWithoutUserInput
@@ -6986,6 +7022,7 @@ input UserUpdateWithoutWorkInput {
   id: StringFieldUpdateOperationsInput
   image: NullableStringFieldUpdateOperationsInput
   lastname: NullableStringFieldUpdateOperationsInput
+  locale: StringFieldUpdateOperationsInput
   name: NullableStringFieldUpdateOperationsInput
   password: NullableStringFieldUpdateOperationsInput
   reactions: ReactionUpdateManyWithoutUserInput
@@ -7073,6 +7110,7 @@ input UserWhereInput {
   AND: [UserWhereInput!]
   attachments: AttachmentListRelationFilter
   ballots: BallotListRelationFilter
+  campaign: StringNullableFilter
   canton: StringNullableFilter
   createdAt: DateTimeFilter
   discussions: DiscussionListRelationFilter
@@ -7082,6 +7120,7 @@ input UserWhereInput {
   id: StringFilter
   image: StringNullableFilter
   lastname: StringNullableFilter
+  locale: StringFilter
   name: StringNullableFilter
   NOT: [UserWhereInput!]
   OR: [UserWhereInput!]
@@ -7841,15 +7880,15 @@ type Work {
   ): [Attachment!]!
   card: String
   data: Json
-  id: String
+  id: String!
   reactions(
     after: ReactionWhereUniqueInput
     before: ReactionWhereUniqueInput
     first: Int
     last: Int
   ): [Reaction!]!
-  text: String
-  title: String
+  text: String!
+  title: String!
   updatedAt: DateTime
   users(
     after: UserWhereUniqueInput

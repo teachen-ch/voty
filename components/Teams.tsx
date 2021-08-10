@@ -211,7 +211,7 @@ export function CreateTeamForm({
   const [error, setError] = useState("");
   const [doCreateTeam] = useCreateOneTeamMutation({
     onCompleted: ({ createOneTeam }) => {
-      onCompleted(createOneTeam.id);
+      onCompleted(String(createOneTeam?.id));
     },
     onError: (error) => {
       setError(error.message);

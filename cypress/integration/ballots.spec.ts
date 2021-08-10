@@ -11,11 +11,11 @@ describe("Test Ballots", () => {
 
     // select first, then select and de-select last ballot
     cy.get("#ballots tr:first td:last").click();
-    cy.get("#ballots tr:first td:last svg[alt='ausgewählt']");
+    cy.get("#ballots tr:first td:last img[alt='ausgewählt']");
     cy.get("#ballots tr:last td:last").click();
-    cy.get("#ballots tr:last td:last svg[alt='ausgewählt']");
+    cy.get("#ballots tr:last td:last img[alt='ausgewählt']");
     cy.get("#ballots tr:last td:last").click();
-    cy.get("#ballots tr:last td:last svg[alt='abgewählt']");
+    cy.get("#ballots tr:last td:last img[alt='abgewählt']");
 
     // login as student and vote
     cy.login("student@teachen.ch", "teachen");

@@ -18,6 +18,7 @@ export default async (
     const user = getSessionUser(req) || {
       name: "Anon",
       email: email || feedbackEmail,
+      locale: "de",
     };
     const data = { card, title, text, type, user, quest };
 
@@ -26,6 +27,7 @@ export default async (
       to: feedbackEmail,
       subject: `voty.ch Feedback: ${title}`,
       template: "feedback",
+      locale: user.locale,
       data,
     });
 

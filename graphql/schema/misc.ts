@@ -11,7 +11,7 @@ import resolvers from "../resolvers";
 export const School = objectType({
   name: "School",
   definition(t) {
-    t.model.id();
+    t.nonNull.model.id();
     t.model.name();
     t.model.type();
     t.model.teams();
@@ -26,7 +26,7 @@ export const School = objectType({
 export const Domain = objectType({
   name: "Domain",
   definition(t) {
-    t.model.id();
+    t.nonNull.model.id();
     t.model.name();
     t.model.approved();
     t.model.schools();
@@ -35,8 +35,8 @@ export const Domain = objectType({
 export const Ballot = objectType({
   name: "Ballot",
   definition(t) {
-    t.model.id();
-    t.model.title();
+    t.nonNull.model.id();
+    t.nonNull.model.title();
     t.model.description();
     t.model.body();
     t.model.start();
@@ -57,8 +57,8 @@ export const Ballot = objectType({
 export const BallotRun = objectType({
   name: "BallotRun",
   definition(t) {
-    t.model.id();
-    t.model.ballot();
+    t.nonNull.model.id();
+    t.nonNull.model.ballot();
     t.model.team();
     t.model.start();
     t.model.end();

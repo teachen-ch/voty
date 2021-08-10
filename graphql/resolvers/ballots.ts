@@ -57,7 +57,7 @@ export const vote: FieldResolver<"Mutation", "vote"> = async (
   await ctx.db.voted.create({
     data: {
       user: { connect: { id: user.id } },
-      team: { connect: { id: user.team?.id } },
+      team: user.team ? { connect: { id: user.team.id } } : undefined,
       ballot: { connect: { id: ballot.id } },
       signature,
     },
@@ -65,6 +65,7 @@ export const vote: FieldResolver<"Mutation", "vote"> = async (
 
   // TODO: This should something which allows the user to check his vote was counter
   const verify = randomBytes(32).toString("hex");
+  const schoolId = user.school?.id || user.team?.schoolId;
   const result = await ctx.db.vote.create({
     data: {
       ballot: { connect: { id: ballot.id } },
@@ -73,21 +74,23 @@ export const vote: FieldResolver<"Mutation", "vote"> = async (
       year: user.year || user.team?.year,
       canton: user.canton || user.school?.canton,
       schooltype: user.school?.type,
-      school: { connect: { id: user.school?.id || user.team?.schoolId } },
-      team: { connect: { id: user.team?.id } },
+      school: schoolId ? { connect: { id: schoolId } } : undefined,
+      team: user.team ? { connect: { id: user.team.id } } : undefined,
     },
     include: { ballot: true },
   });
 
-  await logActivity(ctx, {
-    user: { connect: { id: user.id } },
-    ballot: { connect: { id: ballot.id } },
-    summary: ballot.title,
-    team: { connect: { id: String(user.team?.id) } },
-    school: { connect: { id: String(user.schoolId) } },
-    visibility: Visibility.Team,
-    type: ActivityType.Vote,
-  });
+  if (user.team) {
+    await logActivity(ctx, {
+      user: { connect: { id: user.id } },
+      ballot: { connect: { id: ballot.id } },
+      summary: ballot.title,
+      team: { connect: { id: String(user.team?.id) } },
+      school: { connect: { id: String(user.schoolId) } },
+      visibility: Visibility.Team,
+      type: ActivityType.Vote,
+    });
+  }
   return result;
 };
 
@@ -372,6 +375,7 @@ export async function votingPermission({
 
   switch (ballot.scope) {
     case BallotScope.Public:
+      return true;
     case BallotScope.National:
     case BallotScope.Cantonal:
       return isStudent ? true : false;

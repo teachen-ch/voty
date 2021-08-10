@@ -19,11 +19,11 @@ export const Breadcrumb: React.FC = ({ children }) => (
   </Box>
 );
 
-export const A: React.FC<LinkProps> = (props) => {
+export const A: React.FC<LinkProps & { locale?: string | false }> = (props) => {
   const variant = props.variant || "underline";
   if (props.href) {
     return (
-      <Link href={props.href}>
+      <Link href={props.href} locale={props.locale}>
         <RebassLink variant={variant} {...props}>
           {props.children}
         </RebassLink>

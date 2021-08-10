@@ -57,3 +57,15 @@ export function getBrowserCookie(
   const cookies = parse(document.cookie);
   if (cookies[name]) return parseObject(cookies[name]);
 }
+
+export function setBrowserCookie(
+  name: string,
+  value: string,
+  exp?: number
+): void {
+  if (!isBrowser()) return;
+  const expires = exp ? new Date(Date.now() + exp) : undefined;
+  document.cookie = `${name}=${value}; path=/; ${
+    expires ? `expires=${expires.toUTCString()}` : ""
+  }`;
+}

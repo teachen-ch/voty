@@ -12,8 +12,10 @@ declare module '*/Ballots.tsx' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
   export const BallotFields: DocumentNode;
+export const UserBallotFields: DocumentNode;
 export const BallotRunFields: DocumentNode;
 export const ballots: DocumentNode;
+export const userBallots: DocumentNode;
 export const ballot: DocumentNode;
 export const getBallotRuns: DocumentNode;
 export const addBallotRun: DocumentNode;

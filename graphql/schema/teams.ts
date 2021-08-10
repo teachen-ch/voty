@@ -13,8 +13,8 @@ import { random } from "lodash";
 export const Team = objectType({
   name: "Team",
   definition(t) {
-    t.model.id();
-    t.model.name();
+    t.nonNull.model.id();
+    t.nonNull.model.name();
     t.model.invite();
     t.model.code();
     t.model.prefs();
@@ -25,7 +25,7 @@ export const Team = objectType({
     t.model.teacherId();
     t.model.members();
     t.model.ballots();
-    t.model.cards();
+    t.nonNull.model.cards();
   },
 });
 
