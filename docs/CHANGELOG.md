@@ -1,3 +1,10 @@
+## [1.57.2](https://github.com/teachen-ch/voty/compare/v1.57.1...v1.57.2) (2021-08-10)
+
+
+### Bug Fixes
+
+* allow user to login if on vote page ([dfd2b5d](https://github.com/teachen-ch/voty/commit/dfd2b5dedfcaf8f5d497e440e0256023db77db74))
+
 ## [1.57.1](https://github.com/teachen-ch/voty/compare/v1.57.0...v1.57.1) (2021-08-10)
 
 
