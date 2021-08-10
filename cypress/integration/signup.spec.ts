@@ -11,8 +11,6 @@ describe("Test Signup Page", () => {
     cy.findByLabelText("Nachname:").type("Testerich");
     cy.findByLabelText("Email:").type("teacher@teachen.ch");
     cy.findByLabelText("Passwort:").type("Password2007");
-    // we currently redirect registration to the campaign page
-    //cy.findByLabelText("Ich bin:").select("Lehrer*in");
     cy.get("button").contains("Konto erstellen").click();
     cy.contains(tr("Error.DuplicateEmail"));
   });
@@ -23,8 +21,6 @@ describe("Test Signup Page", () => {
     cy.findByLabelText("Nachname:").type("Testerich");
     cy.findByLabelText("Email:").type("noemail@bla");
     cy.findByLabelText("Passwort:").type("Password2007");
-    // we currently redirect registration to the campaign page
-    // cy.findByLabelText("Ich bin:").select("Lehrer*in");
     cy.get("button").contains("Konto erstellen").click();
     cy.contains("Bitte gültige Email-Adresse angeben");
   });
