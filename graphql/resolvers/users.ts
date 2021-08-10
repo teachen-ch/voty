@@ -146,7 +146,13 @@ export const createUser: FieldResolver<"Mutation", "createUser"> = async (
       },
     });
 
-    await sendVerificationEmail(email, "verification", ctx.db, redirect);
+    await sendVerificationEmail(
+      email,
+      "verification",
+      ctx.db,
+      redirect,
+      campaign
+    );
     if (role === Role.Teacher)
       logger.mail(`New user created: ${name} ${lastname} <${email}>: ${role}`);
 
@@ -353,7 +359,8 @@ export async function sendVerificationEmail(
   email: string,
   purpose: string,
   db: PrismaClient,
-  redirect?: string | null
+  redirect?: string | null,
+  template?: string | null
 ): Promise<ResponseLogin> {
   try {
     email = email.toLowerCase();
@@ -380,20 +387,23 @@ export async function sendVerificationEmail(
       verification: "voty: Bitte Email bestätigen",
       reset: "voty: Passwort zurücksetzen?",
       login: "voty: Jetzt anmelden?",
+      spielpolitik: "SpielPolitik! Bitte Email bestätigen",
     };
-    const subject = subjects[purpose];
+    const subject = template ? subjects[template] : subjects[purpose];
 
     const conf = { email: email.replace(/\./g, ".&#8203;"), url, site };
+
+    template = template || purpose;
 
     await sendMail({
       from,
       to: email,
       subject,
-      template: purpose,
+      template,
       locale: user.locale,
       data: conf,
     });
-    logger.info(`Sending ${purpose} email to: ${email} `);
+    logger.info(`Sending ${template} email to: ${email} `);
 
     if (process.env.NODE_ENV !== "production") {
       await fs.writeFile("/tmp/voty-verification-url", url);
