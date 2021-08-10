@@ -1,3 +1,23 @@
+# [1.57.0](https://github.com/teachen-ch/voty/compare/v1.56.0...v1.57.0) (2021-08-10)
+
+
+### Features
+
+* add fields to user type (campaign, locale) ([820cf3d](https://github.com/teachen-ch/voty/commit/820cf3d004231ea57ffa0645ee2581866bfc8079))
+* add language config to next for routing ([9a0ea57](https://github.com/teachen-ch/voty/commit/9a0ea57260e31b64c9755a55fc082a8a72edf830))
+* demo version for zda ([d1b12cf](https://github.com/teachen-ch/voty/commit/d1b12cf8bf72d0f09c2ac1126815e2998e85f8f2))
+* draft zda pages ([7a8d05a](https://github.com/teachen-ch/voty/commit/7a8d05a69f4ddf16c3c2e298054ff660ffb22506))
+* enable selection of national and public ballots ([4506742](https://github.com/teachen-ch/voty/commit/4506742d220ca18d97bec88027acfae3a060fa8f))
+* enhance translation function ([6aaf166](https://github.com/teachen-ch/voty/commit/6aaf166e33c0ff3deedb9426d798ba66ee8383b6))
+* fix tests ([c504b72](https://github.com/teachen-ch/voty/commit/c504b7273d8d254e0d444975c17634705479d307))
+* i18n user registration and email sending ([bf7dae2](https://github.com/teachen-ch/voty/commit/bf7dae2ae5057c098230c266c1090557cbd2d4da))
+* incremental typescript checks ([9d689d3](https://github.com/teachen-ch/voty/commit/9d689d3e40c790319dd63364c10c5a3368cf840e))
+* make breadcrumb locale-aware ([b799302](https://github.com/teachen-ch/voty/commit/b79930280cd7e29a50458aa186424bc518ec8a23))
+* make signup multilingual (almost) ([b059b3f](https://github.com/teachen-ch/voty/commit/b059b3f48479ed389d1af8817aa0e1aa9717ebff))
+* misc i18n tools ([6850972](https://github.com/teachen-ch/voty/commit/6850972cf2e1a5e31d4944a924aef4db08bcce01))
+* various typescript (quick) fixes ([8f6c090](https://github.com/teachen-ch/voty/commit/8f6c09082a0a2473231eb3b61013e0e5fd754f9c))
+* zda content iteration ([075b926](https://github.com/teachen-ch/voty/commit/075b9267efdf401468fafa22ead50e23bebbb5b3))
+
 # [1.56.0](https://github.com/teachen-ch/voty/compare/v1.55.0...v1.56.0) (2021-07-27)
 
 
