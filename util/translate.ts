@@ -42,3 +42,12 @@ function getDict(locale?: string): Translations {
   if (locale === "it") return messages_it as Translations;
   else return messages_de as Translations;
 }
+
+export function trLink(
+  link: string,
+  locale?: string,
+  defaultLocale?: string
+): string {
+  const prefix = locale && locale !== defaultLocale ? "/" + locale : "";
+  return prefix + link;
+}
