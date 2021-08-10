@@ -1,3 +1,10 @@
+## [1.57.1](https://github.com/teachen-ch/voty/compare/v1.57.0...v1.57.1) (2021-08-10)
+
+
+### Bug Fixes
+
+* send specific campaign emails for verification ([ccd44ba](https://github.com/teachen-ch/voty/commit/ccd44bad58f42d782b2f777057d18a08bfd9f4d5))
+
 # [1.57.0](https://github.com/teachen-ch/voty/compare/v1.56.0...v1.57.0) (2021-08-10)
 
 
