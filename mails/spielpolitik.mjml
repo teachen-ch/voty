@@ -26,7 +26,7 @@
           >Jetzt bestätigen</mj-button
         >
         <mj-text font-size="20px">
-          Wenn Du Dich nicht abstimmen wolltest, kannst Du dieses Mail
+          Wenn Du nicht abstimmen möchtest, kannst Du dieses Mail
           löschen.</mj-text
         >
       </mj-column>

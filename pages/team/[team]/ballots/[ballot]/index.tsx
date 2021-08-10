@@ -86,7 +86,8 @@ export const VotyNow: React.FC<{
   ballot: BallotQuery["ballot"];
   onSuccess: () => void;
   slim?: boolean;
-}> = ({ ballot, onSuccess, slim }) => {
+  loginLink?: string;
+}> = ({ ballot, onSuccess, slim, loginLink = "/user/login" }) => {
   if (!ballot) return null;
   const [error, setError] = useState("");
   const user = useUser();
@@ -103,7 +104,7 @@ export const VotyNow: React.FC<{
     return (
       <Info type="default">
         Um über diese Abstimmung abzustimmen, musst Du Dich zu erst{" "}
-        <Link href="/user/login">anmelden</Link>.
+        <Link href={loginLink}>anmelden</Link>.
       </Info>
     );
   }

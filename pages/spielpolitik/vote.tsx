@@ -113,7 +113,12 @@ const ZDABallots: React.FC<{ scope: BallotScope }> = ({ scope }) => {
                     <Markdown>{ballot.body}</Markdown>
                   </Box>
                 </Detail>
-                <VotyNow slim ballot={ballot} onSuccess={successVoted} />
+                <VotyNow
+                  slim
+                  ballot={ballot}
+                  onSuccess={successVoted}
+                  loginLink="/spielpolitik"
+                />
               </Text>
             </Card>
           )}

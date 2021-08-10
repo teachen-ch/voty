@@ -4,4 +4,4 @@ Um abzustimmen musst Du zuerst Deine Email-Adresse bestätigen. Klicke hier auf 
 
 {{&url}}
 
-Wenn Du Dich nicht abstimmmen möchtest, kannst Du dieses Mail löschen.
+Wenn Du nicht abstimmmen möchtest, kannst Du dieses Mail löschen.
