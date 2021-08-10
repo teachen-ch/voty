@@ -2,9 +2,11 @@ import { users } from "../resolvers";
 import {
   stringArg,
   objectType,
+  inputObjectType,
   extendType,
   nonNull,
   booleanArg,
+  arg,
 } from "@nexus/schema";
 
 export const User = objectType({
@@ -41,6 +43,20 @@ export const ResponseLogin = objectType({
   },
 });
 
+export const UserCreateInput = inputObjectType({
+  name: "UserCreateInput",
+  definition(t) {
+    t.string("name"),
+      t.string("lastname"),
+      t.nonNull.string("email"),
+      t.string("password"),
+      t.field("role", { type: "Role" }),
+      t.string("locale"),
+      t.string("campaign"),
+      t.string("redirect");
+  },
+});
+
 export const UserQuery = extendType({
   type: "Query",
   definition(t) {
@@ -59,8 +75,11 @@ export const UserQuery = extendType({
 export const UserMutation = extendType({
   type: "Mutation",
   definition(t) {
-    t.crud.createOneUser({
-      alias: "createUser",
+    t.field("createUser", {
+      type: "User",
+      args: {
+        data: nonNull(arg({ type: "UserCreateInput" })),
+      },
       resolve: users.createUser,
     });
     t.crud.updateOneUser({
@@ -115,7 +134,7 @@ export const UserMutation = extendType({
       args: {
         name: stringArg(),
         lastname: stringArg(),
-        email: stringArg(),
+        email: nonNull(stringArg()),
         password: stringArg(),
         invite: nonNull(stringArg()),
       },

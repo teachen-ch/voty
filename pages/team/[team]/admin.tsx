@@ -171,7 +171,7 @@ export default function TeacherTeamPage(): React.ReactElement {
       <SelectBallots team={team} scope={BallotScope.National} />
       <br />
 
-      <b>Initiativen von «Schulen nach Bern»</b>
+      <b>Initiativen «SpielPolitik!» von Schulen nach Bern</b>
       <SelectBallots team={team} scope={BallotScope.Public} />
 
       <HideFeature id="activities">

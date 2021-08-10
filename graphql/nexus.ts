@@ -6596,43 +6596,14 @@ export interface NexusGenInputs {
   };
   UserCreateInput: {
     // input type
-    activity?:
-      | NexusGenInputs["ActivityCreateNestedManyWithoutUserInput"]
-      | null; // ActivityCreateNestedManyWithoutUserInput
-    attachments?:
-      | NexusGenInputs["AttachmentCreateNestedManyWithoutUserInput"]
-      | null; // AttachmentCreateNestedManyWithoutUserInput
-    ballots?:
-      | NexusGenInputs["BallotCreateNestedManyWithoutCreatorInput"]
-      | null; // BallotCreateNestedManyWithoutCreatorInput
     campaign?: string | null; // String
-    canton?: string | null; // String
-    createdAt?: NexusGenScalars["DateTime"] | null; // DateTime
-    discussions?:
-      | NexusGenInputs["DiscussionCreateNestedManyWithoutUserInput"]
-      | null; // DiscussionCreateNestedManyWithoutUserInput
-    email?: string | null; // String
-    emailVerified?: NexusGenScalars["DateTime"] | null; // DateTime
-    gender?: NexusGenEnums["Gender"] | null; // Gender
-    id?: string | null; // String
-    image?: string | null; // String
+    email: string; // String!
     lastname?: string | null; // String
     locale?: string | null; // String
     name?: string | null; // String
     password?: string | null; // String
-    reactions?:
-      | NexusGenInputs["ReactionCreateNestedManyWithoutUserInput"]
-      | null; // ReactionCreateNestedManyWithoutUserInput
+    redirect?: string | null; // String
     role?: NexusGenEnums["Role"] | null; // Role
-    school?: NexusGenInputs["SchoolCreateNestedOneWithoutMembersInput"] | null; // SchoolCreateNestedOneWithoutMembersInput
-    teaches?: NexusGenInputs["TeamCreateNestedManyWithoutTeacherInput"] | null; // TeamCreateNestedManyWithoutTeacherInput
-    team?: NexusGenInputs["TeamCreateNestedOneWithoutMembersInput"] | null; // TeamCreateNestedOneWithoutMembersInput
-    Team?: NexusGenInputs["TeamCreateNestedOneWithoutUserInput"] | null; // TeamCreateNestedOneWithoutUserInput
-    updatedAt?: NexusGenScalars["DateTime"] | null; // DateTime
-    verified?: boolean | null; // Boolean
-    voted?: NexusGenInputs["VotedCreateNestedManyWithoutUserInput"] | null; // VotedCreateNestedManyWithoutUserInput
-    work?: NexusGenInputs["WorkCreateNestedManyWithoutUsersInput"] | null; // WorkCreateNestedManyWithoutUsersInput
-    year?: number | null; // Int
   };
   UserCreateManySchoolInput: {
     // input type
@@ -10234,7 +10205,7 @@ export interface NexusGenArgTypes {
     };
     createInvitedUser: {
       // args
-      email?: string | null; // String
+      email: string; // String!
       invite: string; // String!
       lastname?: string | null; // String
       name?: string | null; // String

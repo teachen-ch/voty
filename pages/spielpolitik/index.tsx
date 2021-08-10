@@ -13,8 +13,6 @@ import Success from "../user/success";
 import { trLink } from "util/translate";
 import { useRouter } from "next/router";
 import { setBrowserCookie } from "../../util/cookies";
-import { ReadMore } from "components/ReadMore";
-import { Detail } from "pages/projekt";
 
 export default function ZDAAbstimmung(): React.ReactElement {
   const user = useUser();

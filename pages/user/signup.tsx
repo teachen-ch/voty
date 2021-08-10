@@ -1,7 +1,13 @@
 import { AppPage } from "components/Page";
 import { Text, Button, Heading, Card } from "rebass";
 import { gql } from "@apollo/client";
-import { useState, ReactElement, Dispatch, SetStateAction } from "react";
+import {
+  useState,
+  ReactElement,
+  Dispatch,
+  SetStateAction,
+  useEffect,
+} from "react";
 import { useRouter } from "next/router";
 import { QForm, yup, ErrorBox } from "../../components/Form";
 import { omit } from "lodash";
@@ -27,6 +33,7 @@ export const CREATE_USER = gql`
 export default function Signup(): ReactElement {
   const [user, setUser] = useState<SessionUser | undefined>(undefined);
   const router = useRouter();
+
   if (user) {
     return (
       <AppPage heading="Dein Konto ist erstellt">
@@ -84,6 +91,7 @@ export const CreateUserForm: React.FC<{
   defaultRole?: string;
   submitButtonLabel?: string;
   campaign?: string;
+  redirect?: string;
 }> = (props) => {
   const existingUser = useUser();
   const tr = useTr();
@@ -101,8 +109,13 @@ export const CreateUserForm: React.FC<{
       }
     },
   });
+  const [locale, setLocale] = useState(router.locale);
+  useEffect(() => {
+    setLocale(router.locale);
+  }, [router.locale]);
 
   function defaultSubmit(values: Record<string, any>) {
+    // @ts-ignore this would need QForm to be typed...
     return doCreateUser({ variables: { data: omit(values, "submit") } });
   }
 
@@ -145,9 +158,13 @@ export const CreateUserForm: React.FC<{
       type: "hidden",
       init: props.campaign,
     },
+    redirect: {
+      type: "hidden",
+      init: props.redirect,
+    },
     locale: {
       type: "hidden",
-      init: router.locale,
+      init: locale,
     },
     submit: {
       type: "submit",

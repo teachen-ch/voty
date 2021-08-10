@@ -122,9 +122,13 @@ export const Explainer: React.FC<{ title: string }> = ({ title, children }) => (
   </ReadMore>
 );
 
-export const Step: React.FC<{ n: string | number }> = ({ n, children }) => (
-  <Flex mb={4}>
-    <CircleBullet value={n} bg="gray" color="#fff" />
+export const Step: React.FC<{
+  n: string | number;
+  mb?: number;
+  bg?: string;
+}> = ({ n, mb = 4, children, bg = "gray" }) => (
+  <Flex mb={mb}>
+    <CircleBullet value={n} bg={bg} color="#fff" />
     <Box ml={2} pt="3px">
       {children}
     </Box>

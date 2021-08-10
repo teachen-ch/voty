@@ -41,20 +41,35 @@ const RegisterLogin: React.FC = () => {
 const Account: React.FC<{ user: SessionUser }> = ({ user }) => {
   const [open, setOpen] = useState(false);
   const homeLink = `/${user?.role.toLowerCase()}`;
-  const homeText =
-    user?.role === Role.Admin
-      ? "Admin"
-      : `Meine Klasse${user?.role === Role.Teacher ? "n" : ""}`;
+  let homeText = "";
+  switch (user?.role) {
+    case Role.Admin:
+      homeText = "Admin";
+      break;
+    case Role.Teacher:
+      homeText = "Meine Klassen";
+      break;
+    case Role.Student:
+      if (user?.team) homeText = "Meine Klasse";
+      // here we could also add a link to the campaign start page
+      break;
+  }
   return (
     <Flex>
-      <A href={homeLink} variant="link">
-        <Flex alignItems="center" flexDirection="row" justifyContent="flex-end">
-          <Box display="inline-block" mr={2}>
-            <Image src={IconClasses} />
-          </Box>
-          {homeText}
-        </Flex>
-      </A>
+      {homeText && (
+        <A href={homeLink} variant="link">
+          <Flex
+            alignItems="center"
+            flexDirection="row"
+            justifyContent="flex-end"
+          >
+            <Box display="inline-block" mr={2}>
+              <Image src={IconClasses} />
+            </Box>
+            {homeText}
+          </Flex>
+        </A>
+      )}
       <Flex flexDirection="column" width="262px">
         <A onClick={() => setOpen(!open)} variant="link">
           <Flex

@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { Button, ButtonProps } from "rebass";
 import { useApolloClient } from "@apollo/client";
 import { AppPage } from "components/Page";
+import { getQueryParam, ensureSameDomain } from "util/isBrowser";
 
 export default function LogoutPage(): React.ReactElement {
   const user = useUser();
@@ -11,15 +12,13 @@ export default function LogoutPage(): React.ReactElement {
   const setAccessToken = useSetAccessToken();
   const router = useRouter();
 
+  const redirect = ensureSameDomain(
+    getQueryParam("redirect", { sanitize: true })
+  );
   useEffect(() => {
-    if (user) {
-      setAccessToken("");
-      setUser(undefined);
-      void router.push("/");
-    }
-    if (user === null) {
-      void router.push("/");
-    }
+    setAccessToken("");
+    setUser(undefined);
+    void router.push(redirect || "/");
   }, [user]);
 
   return <AppPage heading="" />;

@@ -192,7 +192,7 @@ export const Detail: React.FC = ({ children }) => {
     <Text sx={{ display: "inline" }}>
       &nbsp;{" "}
       <A onClick={() => setOpen(!open)} variant="underline">
-        {open ? "schliessen" : "Im Detail…"}
+        {open ? "… Details ausblenden" : "Im Detail…"}
       </A>
       {open && children}
     </Text>

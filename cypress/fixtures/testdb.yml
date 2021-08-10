@@ -199,3 +199,59 @@ ballot:
     end: !!timestamp "2099-12-31"
     scope: National
     body: Zukünftige Testabstimmung
+
+  - title: Sieben Wochen Ferien für Auszubildende
+    description: Lernende in einem Lernbetrieb sollen mindestens sieben Wochen Ferien pro Jahr erhalten.
+    start: !!timestamp "2021-08-01"
+    end: !!timestamp "2021-09-15"
+    scope: Public
+    body: |
+      #### Eine Klassen-Initiative aus Corsier-sur-Vevey (VD) bei «SpielPolitik!»
+
+      ### Ausgangslage
+      Zwei Drittel der Jugendlichen in der Schweiz entscheiden sich für eine berufliche Grundbildung und eignen sich dadurch eine solide berufliche Grundlage an. Rund 240 Berufe stehen zur Wahl. Die berufliche Grundbildung ist Basis für lebenslanges Lernen und öffnet eine Vielzahl von Berufsperspektiven. Das Berufsbildungssystem basiert auf der Dualität zwischen Theorie und Praxis. Es zeichnet sich aus durch die Kombination der verschiedenen Lernorte (Betrieb, überbetriebliche Kurse, Berufsfachschule).
+
+      Gemäss Obligationenrecht (Art. 345a Abs. 3 OR) hat der Lehrbetrieb den Lernenden in der beruflichen Grundbildung bis zum vollendeten 20. Altersjahr für jedes Bildungsjahr fünf Wochen Ferien zu gewähren. Diese Regelung gilt generell für alle Arbeitnehmerinnen und Arbeitnehmer, und somit auch für Lernende. Lernende, die älter als 20 Jahre alt sind, haben einen Minimalanspruch von vier Wochen Ferien pro Jahr.
+
+      Wer heute eine Berufslehre macht, muss hohen Anforderungen genügen. Für Jugendliche bedeuten der Besuch der Berufsschule einerseits und die praktische Arbeit an einem Arbeitsplatz andererseits eine grosse Herausforderung. Die Integration in der Berufswelt ist für die jungen Leute anstrengend. Die Forderung der Initiantinnen und Initianten nach ausreichend Ferien ist daher verständlich. Gleichzeitig ist festzustellen, dass die Anforderungen an die jungen Berufsleute stetig steigen. Den Auszubildenden ist kaum gedient, wenn durch verkürzte Schul- und Arbeitszeit die Ausbildungsdauer verlängert oder der zu lernende Stoff in kürzerer Zeit vermittelt werden muss.
+
+      ### Weitere Informationen
+      Weitere Informationen findest Du im Abstimmungsbüchlein von «SpielPolitik!» [hier](http://schulen-nach-bern.ch)
+
+  - title: Familienglück für alle
+    description: Es soll neu auch homosexuellen Paaren möglich sein, Kinder zu adoptieren.
+    start: !!timestamp "2021-08-01"
+    end: !!timestamp "2021-09-15"
+    scope: Public
+    body: |
+      #### Eine Klassen-Initiative aus Thierachern (BE) bei «SpielPolitik!»
+
+      ### Ausgangslage
+      Voraussetzung für die gemeinschaftliche Adoption eines Kindes in der Schweiz ist heute der Bestand einer Ehe (Art. 264a ZGB). Seit 2018 dürfen Personen in eingetragener Partnerschaft oder faktischer Lebensgemeinschaft Stiefkinder des Partners oder der Partnerin adoptieren. Dagegen sind laut Artikel 28 des Partnerschaftsgesetzes gleichgeschlechtliche Personen, die in eingetragener Partnerschaft leben, zur gemeinschaftlichen Adoption fremder Kinder nicht zugelassen.
+
+      Damit bleibt eine stossende Situation: Homosexuelle dürfen ein Kind adoptieren, solange sie alleinstehend sind, sie verlieren dieses Recht aber, sobald sie eine eingetragene Partnerschaft eingehen. Diese Einschränkung war bei der Revision des Adoptionsrechts im Jahr 2014 eine Vorgabe des Parlaments, wonach die gemeinschaftliche Adoption auch in Zukunft ausschliesslich Ehepaaren vorbehalten bleiben soll.
+
+      Für die Frage, ob ein Kind adoptiert werden kann, sollte einzig die Gewährleistung des Kindeswohls ausschlaggebend sein. Die Frage der sexuellen Orientierung der Eltern hat nach sozialwissenschaftlichen Erkenntnissen keine negativen Auswirkungen auf die Entwicklung des Kindes. Eine bestehende stabile Beziehung ist für die Entwicklung des Kindes in psychischer und ökonomischer Sicht nur vorteilhaft.
+
+      ### Weitere Informationen
+      Weitere Informationen findest Du im Abstimmungsbüchlein von «SpielPolitik!» [hier](http://schulen-nach-bern.ch)
+
+  - title: Wahl des Geschlechts
+    description: Jede Person soll das Recht haben, ihre Geschlechtszugehörigkeit selber zu definieren.
+    start: !!timestamp "2021-08-01"
+    end: !!timestamp "2021-09-15"
+    scope: Public
+    body: |
+      #### Eine Klassen-Initiative aus der Stadt Zürich (ZH) bei «SpielPolitik!»
+
+      ### Ausgangslage
+      Jeder Mensch wird mit einem biologischen Geschlecht geboren – sei es eindeutig männlich, weiblich oder als Variation. Die Geschlechtsidentität wird nicht zuletzt von einem weiteren Faktor, dem sozialen Geschlecht, beeinflusst. Damit ist die Erziehung als Mädchen oder Junge entsprechend der kulturell typischen Rollenerwartungen gemeint. Die Übereinstimmung mit dem subjektiv gefühlten Geschlecht als Mann oder Frau ist dadurch nicht zwangsläufig gegeben. Menschen mit Transidentität sind nicht einverstanden mit dem bei der Geburt zugewiesenen Geschlecht. Sie erleben sich als ein anderes Geschlecht. Transmenschen können sich binär (als Transfrau oder Transmann) oder als non-binäre Person (ein Überbegriff für verschiedene Geschlechtsidentitäten ausserhalb der Binarität Frau/Mann) verstehen.
+
+      Die Initiative greift diese Thematik auf. Es geht darum, ob sich eine Person mit dem Geschlecht, das ihr bei der Geburt zugewiesen wird, identifizieren kann oder nicht. Wenn nicht, kann dies zur Verunsicherung des Gefühls der Geschlechtszugehörigkeit führen und die Selbstfindung erschweren.
+
+      Das subjektive Gefühl der Geschlechtszugehörigkeit spielt eine wichtige Rolle für das Eingebundensein in unserer Gesellschaft. Es ist deshalb wichtig, dass jede Person die Möglichkeit hat, die ihr bei Geburt vorgenommene Zuweisung zu einem Geschlecht, ohne vorgängige medizinische Eingriffe oder andere Vorbedingungen zu ändern. Die gesellschaftliche Öffnung in den letzten Jahren rund um Geschlechterfragen und rund um die sexuelle Orientierung verlangt nach einer Anpassung der Rechtsordnung; insofern ist den Initiantinnen und Initianten zuzustimmen.
+
+      Das Parlament hat sich dieser Frage angenommen und vor kurzem eine Revision des Zivilgesetzbuches beschlossen (BBl 2020 9931). Mit dieser Revision soll der Eintrag von Geschlecht und Vornamen neu mittels einfacher Erklärung gegenüber der Zivilstandsbeamtin oder dem Zivilstandsbeamten geändert werden können. Der Revisionsvorschlag basiert auf dem Selbstbestimmungsrecht des Einzelnen, das Teil der persönlichen Freiheit bildet (Art. 10 BV). Die Vorlage stellt aber die binäre Geschlechterordnung (männlich/weiblich) nicht in Frage. Eine dritte Geschlechtskategorie («unbestimmt» oder non-binär) wird nicht eingeführt.
+
+      ### Weitere Informationen
+      Weitere Informationen findest Du im Abstimmungsbüchlein von «SpielPolitik!» [hier](http://schulen-nach-bern.ch)

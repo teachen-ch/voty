@@ -243,7 +243,7 @@ export default {
     fielderror: {
       fontSize: 1,
       fontWeight: "semi",
-      color: "white",
+      color: "#fff",
       bg: "gray",
       marginTop: "-8px",
       p: 1,

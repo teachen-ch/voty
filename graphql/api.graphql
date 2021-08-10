@@ -3251,7 +3251,7 @@ type Mutation {
   changePassword(password: String): ResponseLogin
   checkVerification(token: String): ResponseLogin
   createInvitedUser(
-    email: String
+    email: String!
     invite: String!
     lastname: String
     name: String
@@ -6071,33 +6071,14 @@ type User {
 }
 
 input UserCreateInput {
-  activity: ActivityCreateNestedManyWithoutUserInput
-  attachments: AttachmentCreateNestedManyWithoutUserInput
-  ballots: BallotCreateNestedManyWithoutCreatorInput
   campaign: String
-  canton: String
-  createdAt: DateTime
-  discussions: DiscussionCreateNestedManyWithoutUserInput
-  email: String
-  emailVerified: DateTime
-  gender: Gender
-  id: String
-  image: String
+  email: String!
   lastname: String
   locale: String
   name: String
   password: String
-  reactions: ReactionCreateNestedManyWithoutUserInput
+  redirect: String
   role: Role
-  school: SchoolCreateNestedOneWithoutMembersInput
-  teaches: TeamCreateNestedManyWithoutTeacherInput
-  team: TeamCreateNestedOneWithoutMembersInput
-  Team: TeamCreateNestedOneWithoutUserInput
-  updatedAt: DateTime
-  verified: Boolean
-  voted: VotedCreateNestedManyWithoutUserInput
-  work: WorkCreateNestedManyWithoutUsersInput
-  year: Int
 }
 
 input UserCreateManySchoolInput {

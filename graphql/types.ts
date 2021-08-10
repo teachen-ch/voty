@@ -3329,7 +3329,7 @@ export type MutationCheckVerificationArgs = {
 
 
 export type MutationCreateInvitedUserArgs = {
-  email?: Maybe<Scalars['String']>;
+  email: Scalars['String'];
   invite: Scalars['String'];
   lastname?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
@@ -6364,33 +6364,14 @@ export type UserTeachesArgs = {
 };
 
 export type UserCreateInput = {
-  activity?: Maybe<ActivityCreateNestedManyWithoutUserInput>;
-  attachments?: Maybe<AttachmentCreateNestedManyWithoutUserInput>;
-  ballots?: Maybe<BallotCreateNestedManyWithoutCreatorInput>;
   campaign?: Maybe<Scalars['String']>;
-  canton?: Maybe<Scalars['String']>;
-  createdAt?: Maybe<Scalars['DateTime']>;
-  discussions?: Maybe<DiscussionCreateNestedManyWithoutUserInput>;
-  email?: Maybe<Scalars['String']>;
-  emailVerified?: Maybe<Scalars['DateTime']>;
-  gender?: Maybe<Gender>;
-  id?: Maybe<Scalars['String']>;
-  image?: Maybe<Scalars['String']>;
+  email: Scalars['String'];
   lastname?: Maybe<Scalars['String']>;
   locale?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
   password?: Maybe<Scalars['String']>;
-  reactions?: Maybe<ReactionCreateNestedManyWithoutUserInput>;
+  redirect?: Maybe<Scalars['String']>;
   role?: Maybe<Role>;
-  school?: Maybe<SchoolCreateNestedOneWithoutMembersInput>;
-  teaches?: Maybe<TeamCreateNestedManyWithoutTeacherInput>;
-  team?: Maybe<TeamCreateNestedOneWithoutMembersInput>;
-  Team?: Maybe<TeamCreateNestedOneWithoutUserInput>;
-  updatedAt?: Maybe<Scalars['DateTime']>;
-  verified?: Maybe<Scalars['Boolean']>;
-  voted?: Maybe<VotedCreateNestedManyWithoutUserInput>;
-  work?: Maybe<WorkCreateNestedManyWithoutUsersInput>;
-  year?: Maybe<Scalars['Int']>;
 };
 
 export type UserCreateManySchoolInput = {
@@ -8762,6 +8743,12 @@ export type BallotFieldsFragment = (
   & Pick<Ballot, 'id' | 'title' | 'description' | 'body' | 'start' | 'end' | 'scope' | 'canton'>
 );
 
+export type UserBallotFieldsFragment = (
+  { __typename?: 'Ballot' }
+  & Pick<Ballot, 'canVote' | 'hasVoted'>
+  & BallotFieldsFragment
+);
+
 export type BallotRunFieldsFragment = (
   { __typename?: 'BallotRun' }
   & Pick<BallotRun, 'id' | 'start' | 'end'>
@@ -8780,6 +8767,20 @@ export type BallotsQuery = (
   { __typename?: 'Query' }
   & { ballots: Array<(
     { __typename?: 'Ballot' }
+    & BallotFieldsFragment
+  )> }
+);
+
+export type UserBallotsQueryVariables = Exact<{
+  where?: Maybe<BallotWhereInput>;
+}>;
+
+
+export type UserBallotsQuery = (
+  { __typename?: 'Query' }
+  & { ballots: Array<(
+    { __typename?: 'Ballot' }
+    & Pick<Ballot, 'canVote' | 'hasVoted'>
     & BallotFieldsFragment
   )> }
 );
@@ -9636,6 +9637,13 @@ export const BallotFieldsFragmentDoc = gql`
   canton
 }
     `;
+export const UserBallotFieldsFragmentDoc = gql`
+    fragment UserBallotFields on Ballot {
+  ...BallotFields
+  canVote
+  hasVoted
+}
+    ${BallotFieldsFragmentDoc}`;
 export const BallotRunFieldsFragmentDoc = gql`
     fragment BallotRunFields on BallotRun {
   id
@@ -9854,6 +9862,41 @@ export function useBallotsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<Ba
 export type BallotsQueryHookResult = ReturnType<typeof useBallotsQuery>;
 export type BallotsLazyQueryHookResult = ReturnType<typeof useBallotsLazyQuery>;
 export type BallotsQueryResult = Apollo.QueryResult<BallotsQuery, BallotsQueryVariables>;
+export const UserBallotsDocument = gql`
+    query userBallots($where: BallotWhereInput) {
+  ballots(where: $where) {
+    ...BallotFields
+    canVote
+    hasVoted
+  }
+}
+    ${BallotFieldsFragmentDoc}`;
+
+/**
+ * __useUserBallotsQuery__
+ *
+ * To run a query within a React component, call `useUserBallotsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useUserBallotsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useUserBallotsQuery({
+ *   variables: {
+ *      where: // value for 'where'
+ *   },
+ * });
+ */
+export function useUserBallotsQuery(baseOptions?: Apollo.QueryHookOptions<UserBallotsQuery, UserBallotsQueryVariables>) {
+        return Apollo.useQuery<UserBallotsQuery, UserBallotsQueryVariables>(UserBallotsDocument, baseOptions);
+      }
+export function useUserBallotsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<UserBallotsQuery, UserBallotsQueryVariables>) {
+          return Apollo.useLazyQuery<UserBallotsQuery, UserBallotsQueryVariables>(UserBallotsDocument, baseOptions);
+        }
+export type UserBallotsQueryHookResult = ReturnType<typeof useUserBallotsQuery>;
+export type UserBallotsLazyQueryHookResult = ReturnType<typeof useUserBallotsLazyQuery>;
+export type UserBallotsQueryResult = Apollo.QueryResult<UserBallotsQuery, UserBallotsQueryVariables>;
 export const BallotDocument = gql`
     query ballot($where: BallotWhereUniqueInput!) {
   ballot(where: $where) {

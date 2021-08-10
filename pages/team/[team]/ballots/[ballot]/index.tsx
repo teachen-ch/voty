@@ -85,7 +85,8 @@ export default function BallotPage(): ReactElement {
 export const VotyNow: React.FC<{
   ballot: BallotQuery["ballot"];
   onSuccess: () => void;
-}> = ({ ballot, onSuccess }) => {
+  slim?: boolean;
+}> = ({ ballot, onSuccess, slim }) => {
   if (!ballot) return null;
   const [error, setError] = useState("");
   const user = useUser();
@@ -117,7 +118,6 @@ export const VotyNow: React.FC<{
   if (new Date(ballot.end) < now) {
     return <BigGray>Abstimmung ist beendet</BigGray>;
   }
-
   if (ballot.canVote === false) {
     return <BigGray>Du bist nicht für die Abstimmung berechtigt</BigGray>;
   }
@@ -130,7 +130,9 @@ export const VotyNow: React.FC<{
     <Text sx={{ margin: "0 auto" }}>
       <Box variant="centered">
         <Box width={["100%", "100%", 400]}>
-          <img src="/images/voty_now.svg" alt="Abstimmen" width="100%" />
+          {!slim && (
+            <img src={`/images/voty_now.svg`} alt="Abstimmen" width="100%" />
+          )}
           <Box px={[0, 0, 2]} mt={10}>
             <Box fontSize={2}>
               <Flex justifyContent="space-around">

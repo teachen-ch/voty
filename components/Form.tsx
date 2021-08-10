@@ -141,9 +141,6 @@ export const QForm: React.FC<QFormProps> = ({ fields, mutation, ...props }) => {
   }
 
   function generateField(field: QFormField) {
-    //if (field.type === "hidden") {
-    //  return null;
-    //}
     if (field.type === "submit") {
       return <Submit key={`${field.name}-submit`} label={field.label || ""} />;
     }
@@ -173,9 +170,14 @@ export const QForm: React.FC<QFormProps> = ({ fields, mutation, ...props }) => {
       if (!field.options) throw new Error("You need to specify options");
       const opts = field.options;
       return (
-        <Select label={field.label || ""} name={field.name} key={field.name}>
+        <Select
+          label={field.label || ""}
+          name={field.name}
+          key={field.name}
+          defaultValue={String(field.init)}
+        >
           {Object.keys(opts).map((val) => (
-            <option key={val} value={val} selected={val === field.init}>
+            <option key={val} value={val}>
               {String(opts[val])}
             </option>
           ))}
@@ -275,8 +277,12 @@ type SelectProps = RebassSelectProps & {
   setter?: (s: string) => void;
 };
 
-export const Select: React.FC<SelectProps> = ({ label, ...props }) => {
-  const [field, meta] = useField(props as any);
+export const Select: React.FC<SelectProps> = ({
+  label,
+  defaultValue,
+  ...props
+}) => {
+  const [field, meta] = useField<string | number>(props as any);
   return (
     <>
       <RebassLabel
@@ -286,8 +292,14 @@ export const Select: React.FC<SelectProps> = ({ label, ...props }) => {
       >
         {label}:
       </RebassLabel>
+
       {/* @ts-ignore */}
-      <RebassSelect id={props.id || props.name} {...field} {...props} />
+      <RebassSelect
+        id={props.id || props.name}
+        {...field}
+        value={field.value || defaultValue}
+        {...props}
+      />
       {meta.touched && meta.error ? (
         <>
           <span />

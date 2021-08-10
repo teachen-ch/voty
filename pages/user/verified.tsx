@@ -9,7 +9,7 @@ import { Text, Button, Heading } from "rebass";
 import { useSetAccessToken, useSetUser, useUser } from "state/user";
 import { Grid } from "theme-ui";
 import { useQueryParam } from "util/hooks";
-import { getQueryParam, getHost } from "util/isBrowser";
+import { getQueryParam, ensureSameDomain } from "util/isBrowser";
 import { trackEvent, usePageEvent } from "util/stats";
 import { getStartpage } from "./login";
 
@@ -33,21 +33,25 @@ export default function VerifiedPage(): React.ReactElement {
   // token verification succeded, we have a session & user
   if (purpose === "verification") {
     trackEvent({ category: "Login", action: "EmailVerified" });
-    return (
-      <LoggedInPage heading="Anmelden">
-        <Text mb={4}>
-          Super, Deine Email-Adresse ist nun bestätigt.{" "}
-          {isTeacher
-            ? "Dein Konto für Lehrpersonen ist nun eröffnet und Du bist bereits angemeldet."
-            : ""}
-        </Text>
-        <Button onClick={() => router.push(getStartpage(user?.role))}>
-          {isTeacher
-            ? "Weiter geht's zur Auswahl Deiner Schule"
-            : "Weiter geht's"}
-        </Button>
-      </LoggedInPage>
-    );
+    if (redirect) {
+      void router.push(String(redirect));
+    } else {
+      return (
+        <LoggedInPage heading="Anmelden">
+          <Text mb={4}>
+            Super, Deine Email-Adresse ist nun bestätigt.{" "}
+            {isTeacher
+              ? "Dein Konto für Lehrpersonen ist nun eröffnet und Du bist bereits angemeldet."
+              : ""}
+          </Text>
+          <Button onClick={() => router.push(getStartpage(user?.role))}>
+            {isTeacher
+              ? "Weiter geht's zur Auswahl Deiner Schule"
+              : "Weiter geht's"}
+          </Button>
+        </LoggedInPage>
+      );
+    }
   }
   if (purpose === "reset") {
     return (
@@ -139,12 +143,4 @@ function PasswordResetForm() {
       </Grid>
     </>
   );
-}
-
-function ensureSameDomain(url?: string): string | undefined {
-  const host = getHost();
-  if (!host || !url) return undefined;
-  if (url.startsWith("https://" + host + "/")) return url;
-  if (url.startsWith("http://" + host + "/")) return url;
-  return undefined;
 }

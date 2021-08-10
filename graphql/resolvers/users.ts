@@ -122,7 +122,7 @@ export const createUser: FieldResolver<"Mutation", "createUser"> = async (
   ctx: Context
 ) => {
   try {
-    const { password, role, campaign, locale } = args.data;
+    const { password, role, campaign, locale, redirect } = args.data;
     let { name, lastname } = args.data;
     const email = args.data.email?.toLowerCase();
     if (!email) throw new Error("Error.NoEmail");
@@ -146,9 +146,7 @@ export const createUser: FieldResolver<"Mutation", "createUser"> = async (
       },
     });
 
-    const purpose = campaign || "verification";
-
-    await sendVerificationEmail(email, purpose, ctx.db);
+    await sendVerificationEmail(email, "verification", ctx.db, redirect);
     if (role === Role.Teacher)
       logger.mail(`New user created: ${name} ${lastname} <${email}>: ${role}`);
 
@@ -162,6 +160,7 @@ export const createUser: FieldResolver<"Mutation", "createUser"> = async (
     if (!loggedIn) {
       setRequestUser(user, ctx);
     }
+    //setCookie(ctx.res, "NEXT_LOCALE", locale || "de");
     return user;
   } catch (err) {
     // eslint-disable-next-line
@@ -349,7 +348,7 @@ export function verifyJWT(token: string): JWTSession | undefined {
   }
 }
 
-// purpose: ["verification", "reset", "login", "zda"]
+// purpose: ["verification", "reset", "login", "spielpolitik"]
 export async function sendVerificationEmail(
   email: string,
   purpose: string,

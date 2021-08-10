@@ -14,6 +14,7 @@ import {
   GetBallotResultsQuery,
   BallotScope,
   BallotRunFieldsFragment,
+  UserBallotFieldsFragment,
 } from "graphql/types";
 
 import { formatFromTo, formatDate } from "../util/date";
@@ -45,6 +46,15 @@ const BallotFields = gql`
     canton
   }
 `;
+
+const UserBallotFields = gql`
+  fragment UserBallotFields on Ballot {
+    ...BallotFields
+    canVote
+    hasVoted
+  }
+  ${BallotFields}
+`;
 const BallotRunFields = gql`
   fragment BallotRunFields on BallotRun {
     id
@@ -59,6 +69,7 @@ const BallotRunFields = gql`
 
 export const fragments = {
   BallotFields,
+  UserBallotFields,
   BallotRunFields,
 };
 
@@ -66,6 +77,17 @@ export const GET_BALLOTS = gql`
   query ballots($where: BallotWhereInput) {
     ballots(where: $where) {
       ...BallotFields
+    }
+  }
+  ${fragments.BallotFields}
+`;
+
+export const GET_USER_BALLOTS = gql`
+  query userBallots($where: BallotWhereInput) {
+    ballots(where: $where) {
+      ...BallotFields
+      canVote
+      hasVoted
     }
   }
   ${fragments.BallotFields}
@@ -277,12 +299,25 @@ export enum BallotStatus {
   Not_Started = "Nicht gestartet",
   Started = "Gestartet",
   Ended = "Beendet",
+  Voted = "Erfolgreich abgestimmt",
+  Permission = "Nicht berechtigt",
 }
 
 export const getBallotStatus = (ballot: BallotFieldsFragment): string => {
   const now = new Date();
   if (new Date(ballot.start) > now) return BallotStatus.Not_Started;
   if (new Date(ballot.end) < now) return BallotStatus.Ended;
+  else return BallotStatus.Started;
+};
+
+export const getUserBallotStatus = (
+  ballot: UserBallotFieldsFragment
+): string => {
+  const now = new Date();
+  if (new Date(ballot.start) > now) return BallotStatus.Not_Started;
+  if (ballot.hasVoted) return BallotStatus.Voted;
+  if (new Date(ballot.end) < now) return BallotStatus.Ended;
+  if (!ballot.canVote) return BallotStatus.Permission;
   else return BallotStatus.Started;
 };
 

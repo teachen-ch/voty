@@ -61,3 +61,13 @@ export function getQueryParam(
 function sanitizeParam(value: string): string {
   return value.replace(/[^/\w\d+-_]/g, "");
 }
+
+export function ensureSameDomain(url?: string): string | undefined {
+  // urls without protocol + host are ok
+  if (url?.startsWith("/")) return url;
+  const host = getHost();
+  if (!host || !url) return undefined;
+  if (url.startsWith("https://" + host + "/")) return url;
+  if (url.startsWith("http://" + host + "/")) return url;
+  return undefined;
+}
