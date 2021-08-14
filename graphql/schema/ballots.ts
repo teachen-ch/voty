@@ -1,37 +1,6 @@
-import {
-  objectType,
-  queryType,
-  mutationType,
-  stringArg,
-  intArg,
-  nonNull,
-} from "@nexus/schema";
 import resolvers from "../resolvers";
+import { extendType, nonNull, objectType, stringArg } from "@nexus/schema";
 
-export const School = objectType({
-  name: "School",
-  definition(t) {
-    t.nonNull.model.id();
-    t.model.name();
-    t.model.type();
-    t.model.teams();
-    t.model.members();
-    t.model.address();
-    t.model.city();
-    t.model.zip();
-    t.model.canton();
-  },
-});
-
-export const Domain = objectType({
-  name: "Domain",
-  definition(t) {
-    t.nonNull.model.id();
-    t.model.name();
-    t.model.approved();
-    t.model.schools();
-  },
-});
 export const Ballot = objectType({
   name: "Ballot",
   definition(t) {
@@ -65,33 +34,6 @@ export const BallotRun = objectType({
   },
 });
 
-export const Vote = objectType({
-  name: "Vote",
-  definition(t) {
-    t.model.verify();
-    t.model.ballot();
-  },
-});
-
-export const Response = objectType({
-  name: "Response",
-  definition(t) {
-    t.boolean("success");
-    t.boolean("error");
-    t.string("message");
-  },
-});
-
-export const InviteResponse = objectType({
-  name: "InviteResponse",
-  definition(t) {
-    t.list.string("created");
-    t.list.string("failed");
-    t.list.string("duplicated");
-    t.field("team", { type: "Team" });
-  },
-});
-
 export const BallotResults = objectType({
   name: "BallotResults",
   definition(t) {
@@ -102,14 +44,9 @@ export const BallotResults = objectType({
   },
 });
 
-export const Query = queryType({
+export const BallotsQueries = extendType({
+  type: "Query",
   definition(t) {
-    t.crud.school();
-    t.crud.schools({
-      ordering: true,
-      filtering: true,
-    });
-
     t.crud.ballot();
     t.crud.ballots({
       ordering: true,
@@ -138,30 +75,9 @@ export const Query = queryType({
   },
 });
 
-export const Mutation = mutationType({
+export const BallotsMutations = extendType({
+  type: "Mutation",
   definition(t) {
-    t.crud.createOneSchool();
-    t.crud.deleteOneSchool();
-
-    t.field("vote", {
-      type: "Vote",
-      args: {
-        ballotId: nonNull(stringArg()),
-        vote: nonNull(intArg()),
-      },
-      resolve: resolvers.ballots.vote,
-    });
-
-    t.field("voteCode", {
-      type: "Response",
-      args: {
-        ballotRunId: nonNull(stringArg()),
-        vote: nonNull(intArg()),
-        code: nonNull(stringArg()),
-      },
-      resolve: resolvers.ballots.voteCode,
-    });
-
     t.field("addBallotRun", {
       type: "BallotRun",
       args: {

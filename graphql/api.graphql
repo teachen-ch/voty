@@ -1295,17 +1295,27 @@ type Ballot {
 }
 
 input BallotCreateManyCreatorInput {
-  body: String!
+  body: String
+  body_de: String
+  body_fr: String
+  body_it: String
   canton: String
   createdAt: DateTime
-  description: String!
+  description: String
+  description_de: String
+  description_fr: String
+  description_it: String
   end: DateTime!
   id: String
+  original_locale: String
   schoolId: String
   scope: BallotScope
   start: DateTime!
   teamId: String
-  title: String!
+  title: String
+  title_de: String
+  title_fr: String
+  title_it: String
   updatedAt: DateTime
 }
 
@@ -1315,17 +1325,27 @@ input BallotCreateManyCreatorInputEnvelope {
 }
 
 input BallotCreateManySchoolInput {
-  body: String!
+  body: String
+  body_de: String
+  body_fr: String
+  body_it: String
   canton: String
   createdAt: DateTime
   creatorId: String
-  description: String!
+  description: String
+  description_de: String
+  description_fr: String
+  description_it: String
   end: DateTime!
   id: String
+  original_locale: String
   scope: BallotScope
   start: DateTime!
   teamId: String
-  title: String!
+  title: String
+  title_de: String
+  title_fr: String
+  title_it: String
   updatedAt: DateTime
 }
 
@@ -1335,17 +1355,27 @@ input BallotCreateManySchoolInputEnvelope {
 }
 
 input BallotCreateManyTeamInput {
-  body: String!
+  body: String
+  body_de: String
+  body_fr: String
+  body_it: String
   canton: String
   createdAt: DateTime
   creatorId: String
-  description: String!
+  description: String
+  description_de: String
+  description_fr: String
+  description_it: String
   end: DateTime!
   id: String
+  original_locale: String
   schoolId: String
   scope: BallotScope
   start: DateTime!
-  title: String!
+  title: String
+  title_de: String
+  title_fr: String
+  title_it: String
   updatedAt: DateTime
 }
 
@@ -1459,20 +1489,30 @@ input BallotCreateOrConnectWithoutVotesInput {
 input BallotCreateWithoutActivityInput {
   attachments: AttachmentCreateNestedManyWithoutBallotInput
   ballotRuns: BallotRunCreateNestedManyWithoutBallotInput
-  body: String!
+  body: String
+  body_de: String
+  body_fr: String
+  body_it: String
   canton: String
   createdAt: DateTime
   creator: UserCreateNestedOneWithoutBallotsInput
-  description: String!
+  description: String
+  description_de: String
+  description_fr: String
+  description_it: String
   discussion: DiscussionCreateNestedManyWithoutBallotInput
   end: DateTime!
   id: String
   options: OptionCreateNestedManyWithoutBallotInput
+  original_locale: String
   school: SchoolCreateNestedOneWithoutBallotsInput
   scope: BallotScope
   start: DateTime!
   team: TeamCreateNestedOneWithoutBallotsInput
-  title: String!
+  title: String
+  title_de: String
+  title_fr: String
+  title_it: String
   updatedAt: DateTime
   voted: VotedCreateNestedManyWithoutBallotInput
   votes: VoteCreateNestedManyWithoutBallotInput
@@ -1481,20 +1521,30 @@ input BallotCreateWithoutActivityInput {
 input BallotCreateWithoutAttachmentsInput {
   activity: ActivityCreateNestedManyWithoutBallotInput
   ballotRuns: BallotRunCreateNestedManyWithoutBallotInput
-  body: String!
+  body: String
+  body_de: String
+  body_fr: String
+  body_it: String
   canton: String
   createdAt: DateTime
   creator: UserCreateNestedOneWithoutBallotsInput
-  description: String!
+  description: String
+  description_de: String
+  description_fr: String
+  description_it: String
   discussion: DiscussionCreateNestedManyWithoutBallotInput
   end: DateTime!
   id: String
   options: OptionCreateNestedManyWithoutBallotInput
+  original_locale: String
   school: SchoolCreateNestedOneWithoutBallotsInput
   scope: BallotScope
   start: DateTime!
   team: TeamCreateNestedOneWithoutBallotsInput
-  title: String!
+  title: String
+  title_de: String
+  title_fr: String
+  title_it: String
   updatedAt: DateTime
   voted: VotedCreateNestedManyWithoutBallotInput
   votes: VoteCreateNestedManyWithoutBallotInput
@@ -1503,20 +1553,30 @@ input BallotCreateWithoutAttachmentsInput {
 input BallotCreateWithoutBallotRunsInput {
   activity: ActivityCreateNestedManyWithoutBallotInput
   attachments: AttachmentCreateNestedManyWithoutBallotInput
-  body: String!
+  body: String
+  body_de: String
+  body_fr: String
+  body_it: String
   canton: String
   createdAt: DateTime
   creator: UserCreateNestedOneWithoutBallotsInput
-  description: String!
+  description: String
+  description_de: String
+  description_fr: String
+  description_it: String
   discussion: DiscussionCreateNestedManyWithoutBallotInput
   end: DateTime!
   id: String
   options: OptionCreateNestedManyWithoutBallotInput
+  original_locale: String
   school: SchoolCreateNestedOneWithoutBallotsInput
   scope: BallotScope
   start: DateTime!
   team: TeamCreateNestedOneWithoutBallotsInput
-  title: String!
+  title: String
+  title_de: String
+  title_fr: String
+  title_it: String
   updatedAt: DateTime
   voted: VotedCreateNestedManyWithoutBallotInput
   votes: VoteCreateNestedManyWithoutBallotInput
@@ -1526,19 +1586,29 @@ input BallotCreateWithoutCreatorInput {
   activity: ActivityCreateNestedManyWithoutBallotInput
   attachments: AttachmentCreateNestedManyWithoutBallotInput
   ballotRuns: BallotRunCreateNestedManyWithoutBallotInput
-  body: String!
+  body: String
+  body_de: String
+  body_fr: String
+  body_it: String
   canton: String
   createdAt: DateTime
-  description: String!
+  description: String
+  description_de: String
+  description_fr: String
+  description_it: String
   discussion: DiscussionCreateNestedManyWithoutBallotInput
   end: DateTime!
   id: String
   options: OptionCreateNestedManyWithoutBallotInput
+  original_locale: String
   school: SchoolCreateNestedOneWithoutBallotsInput
   scope: BallotScope
   start: DateTime!
   team: TeamCreateNestedOneWithoutBallotsInput
-  title: String!
+  title: String
+  title_de: String
+  title_fr: String
+  title_it: String
   updatedAt: DateTime
   voted: VotedCreateNestedManyWithoutBallotInput
   votes: VoteCreateNestedManyWithoutBallotInput
@@ -1548,19 +1618,29 @@ input BallotCreateWithoutDiscussionInput {
   activity: ActivityCreateNestedManyWithoutBallotInput
   attachments: AttachmentCreateNestedManyWithoutBallotInput
   ballotRuns: BallotRunCreateNestedManyWithoutBallotInput
-  body: String!
+  body: String
+  body_de: String
+  body_fr: String
+  body_it: String
   canton: String
   createdAt: DateTime
   creator: UserCreateNestedOneWithoutBallotsInput
-  description: String!
+  description: String
+  description_de: String
+  description_fr: String
+  description_it: String
   end: DateTime!
   id: String
   options: OptionCreateNestedManyWithoutBallotInput
+  original_locale: String
   school: SchoolCreateNestedOneWithoutBallotsInput
   scope: BallotScope
   start: DateTime!
   team: TeamCreateNestedOneWithoutBallotsInput
-  title: String!
+  title: String
+  title_de: String
+  title_fr: String
+  title_it: String
   updatedAt: DateTime
   voted: VotedCreateNestedManyWithoutBallotInput
   votes: VoteCreateNestedManyWithoutBallotInput
@@ -1570,19 +1650,29 @@ input BallotCreateWithoutSchoolInput {
   activity: ActivityCreateNestedManyWithoutBallotInput
   attachments: AttachmentCreateNestedManyWithoutBallotInput
   ballotRuns: BallotRunCreateNestedManyWithoutBallotInput
-  body: String!
+  body: String
+  body_de: String
+  body_fr: String
+  body_it: String
   canton: String
   createdAt: DateTime
   creator: UserCreateNestedOneWithoutBallotsInput
-  description: String!
+  description: String
+  description_de: String
+  description_fr: String
+  description_it: String
   discussion: DiscussionCreateNestedManyWithoutBallotInput
   end: DateTime!
   id: String
   options: OptionCreateNestedManyWithoutBallotInput
+  original_locale: String
   scope: BallotScope
   start: DateTime!
   team: TeamCreateNestedOneWithoutBallotsInput
-  title: String!
+  title: String
+  title_de: String
+  title_fr: String
+  title_it: String
   updatedAt: DateTime
   voted: VotedCreateNestedManyWithoutBallotInput
   votes: VoteCreateNestedManyWithoutBallotInput
@@ -1592,19 +1682,29 @@ input BallotCreateWithoutTeamInput {
   activity: ActivityCreateNestedManyWithoutBallotInput
   attachments: AttachmentCreateNestedManyWithoutBallotInput
   ballotRuns: BallotRunCreateNestedManyWithoutBallotInput
-  body: String!
+  body: String
+  body_de: String
+  body_fr: String
+  body_it: String
   canton: String
   createdAt: DateTime
   creator: UserCreateNestedOneWithoutBallotsInput
-  description: String!
+  description: String
+  description_de: String
+  description_fr: String
+  description_it: String
   discussion: DiscussionCreateNestedManyWithoutBallotInput
   end: DateTime!
   id: String
   options: OptionCreateNestedManyWithoutBallotInput
+  original_locale: String
   school: SchoolCreateNestedOneWithoutBallotsInput
   scope: BallotScope
   start: DateTime!
-  title: String!
+  title: String
+  title_de: String
+  title_fr: String
+  title_it: String
   updatedAt: DateTime
   voted: VotedCreateNestedManyWithoutBallotInput
   votes: VoteCreateNestedManyWithoutBallotInput
@@ -1614,20 +1714,30 @@ input BallotCreateWithoutVotedInput {
   activity: ActivityCreateNestedManyWithoutBallotInput
   attachments: AttachmentCreateNestedManyWithoutBallotInput
   ballotRuns: BallotRunCreateNestedManyWithoutBallotInput
-  body: String!
+  body: String
+  body_de: String
+  body_fr: String
+  body_it: String
   canton: String
   createdAt: DateTime
   creator: UserCreateNestedOneWithoutBallotsInput
-  description: String!
+  description: String
+  description_de: String
+  description_fr: String
+  description_it: String
   discussion: DiscussionCreateNestedManyWithoutBallotInput
   end: DateTime!
   id: String
   options: OptionCreateNestedManyWithoutBallotInput
+  original_locale: String
   school: SchoolCreateNestedOneWithoutBallotsInput
   scope: BallotScope
   start: DateTime!
   team: TeamCreateNestedOneWithoutBallotsInput
-  title: String!
+  title: String
+  title_de: String
+  title_fr: String
+  title_it: String
   updatedAt: DateTime
   votes: VoteCreateNestedManyWithoutBallotInput
 }
@@ -1636,20 +1746,30 @@ input BallotCreateWithoutVotesInput {
   activity: ActivityCreateNestedManyWithoutBallotInput
   attachments: AttachmentCreateNestedManyWithoutBallotInput
   ballotRuns: BallotRunCreateNestedManyWithoutBallotInput
-  body: String!
+  body: String
+  body_de: String
+  body_fr: String
+  body_it: String
   canton: String
   createdAt: DateTime
   creator: UserCreateNestedOneWithoutBallotsInput
-  description: String!
+  description: String
+  description_de: String
+  description_fr: String
+  description_it: String
   discussion: DiscussionCreateNestedManyWithoutBallotInput
   end: DateTime!
   id: String
   options: OptionCreateNestedManyWithoutBallotInput
+  original_locale: String
   school: SchoolCreateNestedOneWithoutBallotsInput
   scope: BallotScope
   start: DateTime!
   team: TeamCreateNestedOneWithoutBallotsInput
-  title: String!
+  title: String
+  title_de: String
+  title_fr: String
+  title_it: String
   updatedAt: DateTime
   voted: VotedCreateNestedManyWithoutBallotInput
 }
@@ -1662,17 +1782,27 @@ input BallotListRelationFilter {
 
 input BallotOrderByInput {
   body: SortOrder
+  body_de: SortOrder
+  body_fr: SortOrder
+  body_it: SortOrder
   canton: SortOrder
   createdAt: SortOrder
   creatorId: SortOrder
   description: SortOrder
+  description_de: SortOrder
+  description_fr: SortOrder
+  description_it: SortOrder
   end: SortOrder
   id: SortOrder
+  original_locale: SortOrder
   schoolId: SortOrder
   scope: SortOrder
   start: SortOrder
   teamId: SortOrder
   title: SortOrder
+  title_de: SortOrder
+  title_fr: SortOrder
+  title_it: SortOrder
   updatedAt: SortOrder
 }
 
@@ -1923,19 +2053,29 @@ input BallotRunWhereUniqueInput {
 input BallotScalarWhereInput {
   AND: [BallotScalarWhereInput!]
   body: StringFilter
+  body_de: StringFilter
+  body_fr: StringFilter
+  body_it: StringFilter
   canton: StringNullableFilter
   createdAt: DateTimeFilter
   creatorId: StringNullableFilter
   description: StringFilter
+  description_de: StringFilter
+  description_fr: StringFilter
+  description_it: StringFilter
   end: DateTimeFilter
   id: StringFilter
   NOT: [BallotScalarWhereInput!]
   OR: [BallotScalarWhereInput!]
+  original_locale: StringFilter
   schoolId: StringNullableFilter
   scope: EnumBallotScopeFilter
   start: DateTimeFilter
   teamId: StringNullableFilter
   title: StringFilter
+  title_de: StringFilter
+  title_fr: StringFilter
+  title_it: StringFilter
   updatedAt: DateTimeFilter
 }
 
@@ -1949,14 +2089,24 @@ enum BallotScope {
 
 input BallotUpdateManyMutationInput {
   body: StringFieldUpdateOperationsInput
+  body_de: StringFieldUpdateOperationsInput
+  body_fr: StringFieldUpdateOperationsInput
+  body_it: StringFieldUpdateOperationsInput
   canton: NullableStringFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   description: StringFieldUpdateOperationsInput
+  description_de: StringFieldUpdateOperationsInput
+  description_fr: StringFieldUpdateOperationsInput
+  description_it: StringFieldUpdateOperationsInput
   end: DateTimeFieldUpdateOperationsInput
   id: StringFieldUpdateOperationsInput
+  original_locale: StringFieldUpdateOperationsInput
   scope: EnumBallotScopeFieldUpdateOperationsInput
   start: DateTimeFieldUpdateOperationsInput
   title: StringFieldUpdateOperationsInput
+  title_de: StringFieldUpdateOperationsInput
+  title_fr: StringFieldUpdateOperationsInput
+  title_it: StringFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
 }
 
@@ -2075,19 +2225,29 @@ input BallotUpdateWithoutActivityInput {
   attachments: AttachmentUpdateManyWithoutBallotInput
   ballotRuns: BallotRunUpdateManyWithoutBallotInput
   body: StringFieldUpdateOperationsInput
+  body_de: StringFieldUpdateOperationsInput
+  body_fr: StringFieldUpdateOperationsInput
+  body_it: StringFieldUpdateOperationsInput
   canton: NullableStringFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   creator: UserUpdateOneWithoutBallotsInput
   description: StringFieldUpdateOperationsInput
+  description_de: StringFieldUpdateOperationsInput
+  description_fr: StringFieldUpdateOperationsInput
+  description_it: StringFieldUpdateOperationsInput
   discussion: DiscussionUpdateManyWithoutBallotInput
   end: DateTimeFieldUpdateOperationsInput
   id: StringFieldUpdateOperationsInput
   options: OptionUpdateManyWithoutBallotInput
+  original_locale: StringFieldUpdateOperationsInput
   school: SchoolUpdateOneWithoutBallotsInput
   scope: EnumBallotScopeFieldUpdateOperationsInput
   start: DateTimeFieldUpdateOperationsInput
   team: TeamUpdateOneWithoutBallotsInput
   title: StringFieldUpdateOperationsInput
+  title_de: StringFieldUpdateOperationsInput
+  title_fr: StringFieldUpdateOperationsInput
+  title_it: StringFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
   voted: VotedUpdateManyWithoutBallotInput
   votes: VoteUpdateManyWithoutBallotInput
@@ -2097,19 +2257,29 @@ input BallotUpdateWithoutAttachmentsInput {
   activity: ActivityUpdateManyWithoutBallotInput
   ballotRuns: BallotRunUpdateManyWithoutBallotInput
   body: StringFieldUpdateOperationsInput
+  body_de: StringFieldUpdateOperationsInput
+  body_fr: StringFieldUpdateOperationsInput
+  body_it: StringFieldUpdateOperationsInput
   canton: NullableStringFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   creator: UserUpdateOneWithoutBallotsInput
   description: StringFieldUpdateOperationsInput
+  description_de: StringFieldUpdateOperationsInput
+  description_fr: StringFieldUpdateOperationsInput
+  description_it: StringFieldUpdateOperationsInput
   discussion: DiscussionUpdateManyWithoutBallotInput
   end: DateTimeFieldUpdateOperationsInput
   id: StringFieldUpdateOperationsInput
   options: OptionUpdateManyWithoutBallotInput
+  original_locale: StringFieldUpdateOperationsInput
   school: SchoolUpdateOneWithoutBallotsInput
   scope: EnumBallotScopeFieldUpdateOperationsInput
   start: DateTimeFieldUpdateOperationsInput
   team: TeamUpdateOneWithoutBallotsInput
   title: StringFieldUpdateOperationsInput
+  title_de: StringFieldUpdateOperationsInput
+  title_fr: StringFieldUpdateOperationsInput
+  title_it: StringFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
   voted: VotedUpdateManyWithoutBallotInput
   votes: VoteUpdateManyWithoutBallotInput
@@ -2119,19 +2289,29 @@ input BallotUpdateWithoutBallotRunsInput {
   activity: ActivityUpdateManyWithoutBallotInput
   attachments: AttachmentUpdateManyWithoutBallotInput
   body: StringFieldUpdateOperationsInput
+  body_de: StringFieldUpdateOperationsInput
+  body_fr: StringFieldUpdateOperationsInput
+  body_it: StringFieldUpdateOperationsInput
   canton: NullableStringFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   creator: UserUpdateOneWithoutBallotsInput
   description: StringFieldUpdateOperationsInput
+  description_de: StringFieldUpdateOperationsInput
+  description_fr: StringFieldUpdateOperationsInput
+  description_it: StringFieldUpdateOperationsInput
   discussion: DiscussionUpdateManyWithoutBallotInput
   end: DateTimeFieldUpdateOperationsInput
   id: StringFieldUpdateOperationsInput
   options: OptionUpdateManyWithoutBallotInput
+  original_locale: StringFieldUpdateOperationsInput
   school: SchoolUpdateOneWithoutBallotsInput
   scope: EnumBallotScopeFieldUpdateOperationsInput
   start: DateTimeFieldUpdateOperationsInput
   team: TeamUpdateOneWithoutBallotsInput
   title: StringFieldUpdateOperationsInput
+  title_de: StringFieldUpdateOperationsInput
+  title_fr: StringFieldUpdateOperationsInput
+  title_it: StringFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
   voted: VotedUpdateManyWithoutBallotInput
   votes: VoteUpdateManyWithoutBallotInput
@@ -2142,18 +2322,28 @@ input BallotUpdateWithoutCreatorInput {
   attachments: AttachmentUpdateManyWithoutBallotInput
   ballotRuns: BallotRunUpdateManyWithoutBallotInput
   body: StringFieldUpdateOperationsInput
+  body_de: StringFieldUpdateOperationsInput
+  body_fr: StringFieldUpdateOperationsInput
+  body_it: StringFieldUpdateOperationsInput
   canton: NullableStringFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   description: StringFieldUpdateOperationsInput
+  description_de: StringFieldUpdateOperationsInput
+  description_fr: StringFieldUpdateOperationsInput
+  description_it: StringFieldUpdateOperationsInput
   discussion: DiscussionUpdateManyWithoutBallotInput
   end: DateTimeFieldUpdateOperationsInput
   id: StringFieldUpdateOperationsInput
   options: OptionUpdateManyWithoutBallotInput
+  original_locale: StringFieldUpdateOperationsInput
   school: SchoolUpdateOneWithoutBallotsInput
   scope: EnumBallotScopeFieldUpdateOperationsInput
   start: DateTimeFieldUpdateOperationsInput
   team: TeamUpdateOneWithoutBallotsInput
   title: StringFieldUpdateOperationsInput
+  title_de: StringFieldUpdateOperationsInput
+  title_fr: StringFieldUpdateOperationsInput
+  title_it: StringFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
   voted: VotedUpdateManyWithoutBallotInput
   votes: VoteUpdateManyWithoutBallotInput
@@ -2164,18 +2354,28 @@ input BallotUpdateWithoutDiscussionInput {
   attachments: AttachmentUpdateManyWithoutBallotInput
   ballotRuns: BallotRunUpdateManyWithoutBallotInput
   body: StringFieldUpdateOperationsInput
+  body_de: StringFieldUpdateOperationsInput
+  body_fr: StringFieldUpdateOperationsInput
+  body_it: StringFieldUpdateOperationsInput
   canton: NullableStringFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   creator: UserUpdateOneWithoutBallotsInput
   description: StringFieldUpdateOperationsInput
+  description_de: StringFieldUpdateOperationsInput
+  description_fr: StringFieldUpdateOperationsInput
+  description_it: StringFieldUpdateOperationsInput
   end: DateTimeFieldUpdateOperationsInput
   id: StringFieldUpdateOperationsInput
   options: OptionUpdateManyWithoutBallotInput
+  original_locale: StringFieldUpdateOperationsInput
   school: SchoolUpdateOneWithoutBallotsInput
   scope: EnumBallotScopeFieldUpdateOperationsInput
   start: DateTimeFieldUpdateOperationsInput
   team: TeamUpdateOneWithoutBallotsInput
   title: StringFieldUpdateOperationsInput
+  title_de: StringFieldUpdateOperationsInput
+  title_fr: StringFieldUpdateOperationsInput
+  title_it: StringFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
   voted: VotedUpdateManyWithoutBallotInput
   votes: VoteUpdateManyWithoutBallotInput
@@ -2186,18 +2386,28 @@ input BallotUpdateWithoutSchoolInput {
   attachments: AttachmentUpdateManyWithoutBallotInput
   ballotRuns: BallotRunUpdateManyWithoutBallotInput
   body: StringFieldUpdateOperationsInput
+  body_de: StringFieldUpdateOperationsInput
+  body_fr: StringFieldUpdateOperationsInput
+  body_it: StringFieldUpdateOperationsInput
   canton: NullableStringFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   creator: UserUpdateOneWithoutBallotsInput
   description: StringFieldUpdateOperationsInput
+  description_de: StringFieldUpdateOperationsInput
+  description_fr: StringFieldUpdateOperationsInput
+  description_it: StringFieldUpdateOperationsInput
   discussion: DiscussionUpdateManyWithoutBallotInput
   end: DateTimeFieldUpdateOperationsInput
   id: StringFieldUpdateOperationsInput
   options: OptionUpdateManyWithoutBallotInput
+  original_locale: StringFieldUpdateOperationsInput
   scope: EnumBallotScopeFieldUpdateOperationsInput
   start: DateTimeFieldUpdateOperationsInput
   team: TeamUpdateOneWithoutBallotsInput
   title: StringFieldUpdateOperationsInput
+  title_de: StringFieldUpdateOperationsInput
+  title_fr: StringFieldUpdateOperationsInput
+  title_it: StringFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
   voted: VotedUpdateManyWithoutBallotInput
   votes: VoteUpdateManyWithoutBallotInput
@@ -2208,18 +2418,28 @@ input BallotUpdateWithoutTeamInput {
   attachments: AttachmentUpdateManyWithoutBallotInput
   ballotRuns: BallotRunUpdateManyWithoutBallotInput
   body: StringFieldUpdateOperationsInput
+  body_de: StringFieldUpdateOperationsInput
+  body_fr: StringFieldUpdateOperationsInput
+  body_it: StringFieldUpdateOperationsInput
   canton: NullableStringFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   creator: UserUpdateOneWithoutBallotsInput
   description: StringFieldUpdateOperationsInput
+  description_de: StringFieldUpdateOperationsInput
+  description_fr: StringFieldUpdateOperationsInput
+  description_it: StringFieldUpdateOperationsInput
   discussion: DiscussionUpdateManyWithoutBallotInput
   end: DateTimeFieldUpdateOperationsInput
   id: StringFieldUpdateOperationsInput
   options: OptionUpdateManyWithoutBallotInput
+  original_locale: StringFieldUpdateOperationsInput
   school: SchoolUpdateOneWithoutBallotsInput
   scope: EnumBallotScopeFieldUpdateOperationsInput
   start: DateTimeFieldUpdateOperationsInput
   title: StringFieldUpdateOperationsInput
+  title_de: StringFieldUpdateOperationsInput
+  title_fr: StringFieldUpdateOperationsInput
+  title_it: StringFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
   voted: VotedUpdateManyWithoutBallotInput
   votes: VoteUpdateManyWithoutBallotInput
@@ -2230,19 +2450,29 @@ input BallotUpdateWithoutVotedInput {
   attachments: AttachmentUpdateManyWithoutBallotInput
   ballotRuns: BallotRunUpdateManyWithoutBallotInput
   body: StringFieldUpdateOperationsInput
+  body_de: StringFieldUpdateOperationsInput
+  body_fr: StringFieldUpdateOperationsInput
+  body_it: StringFieldUpdateOperationsInput
   canton: NullableStringFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   creator: UserUpdateOneWithoutBallotsInput
   description: StringFieldUpdateOperationsInput
+  description_de: StringFieldUpdateOperationsInput
+  description_fr: StringFieldUpdateOperationsInput
+  description_it: StringFieldUpdateOperationsInput
   discussion: DiscussionUpdateManyWithoutBallotInput
   end: DateTimeFieldUpdateOperationsInput
   id: StringFieldUpdateOperationsInput
   options: OptionUpdateManyWithoutBallotInput
+  original_locale: StringFieldUpdateOperationsInput
   school: SchoolUpdateOneWithoutBallotsInput
   scope: EnumBallotScopeFieldUpdateOperationsInput
   start: DateTimeFieldUpdateOperationsInput
   team: TeamUpdateOneWithoutBallotsInput
   title: StringFieldUpdateOperationsInput
+  title_de: StringFieldUpdateOperationsInput
+  title_fr: StringFieldUpdateOperationsInput
+  title_it: StringFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
   votes: VoteUpdateManyWithoutBallotInput
 }
@@ -2252,19 +2482,29 @@ input BallotUpdateWithoutVotesInput {
   attachments: AttachmentUpdateManyWithoutBallotInput
   ballotRuns: BallotRunUpdateManyWithoutBallotInput
   body: StringFieldUpdateOperationsInput
+  body_de: StringFieldUpdateOperationsInput
+  body_fr: StringFieldUpdateOperationsInput
+  body_it: StringFieldUpdateOperationsInput
   canton: NullableStringFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   creator: UserUpdateOneWithoutBallotsInput
   description: StringFieldUpdateOperationsInput
+  description_de: StringFieldUpdateOperationsInput
+  description_fr: StringFieldUpdateOperationsInput
+  description_it: StringFieldUpdateOperationsInput
   discussion: DiscussionUpdateManyWithoutBallotInput
   end: DateTimeFieldUpdateOperationsInput
   id: StringFieldUpdateOperationsInput
   options: OptionUpdateManyWithoutBallotInput
+  original_locale: StringFieldUpdateOperationsInput
   school: SchoolUpdateOneWithoutBallotsInput
   scope: EnumBallotScopeFieldUpdateOperationsInput
   start: DateTimeFieldUpdateOperationsInput
   team: TeamUpdateOneWithoutBallotsInput
   title: StringFieldUpdateOperationsInput
+  title_de: StringFieldUpdateOperationsInput
+  title_fr: StringFieldUpdateOperationsInput
+  title_it: StringFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
   voted: VotedUpdateManyWithoutBallotInput
 }
@@ -2338,17 +2578,24 @@ input BallotWhereInput {
   attachments: AttachmentListRelationFilter
   ballotRuns: BallotRunListRelationFilter
   body: StringFilter
+  body_de: StringFilter
+  body_fr: StringFilter
+  body_it: StringFilter
   canton: StringNullableFilter
   createdAt: DateTimeFilter
   creator: UserWhereInput
   creatorId: StringNullableFilter
   description: StringFilter
+  description_de: StringFilter
+  description_fr: StringFilter
+  description_it: StringFilter
   discussion: DiscussionListRelationFilter
   end: DateTimeFilter
   id: StringFilter
   NOT: [BallotWhereInput!]
   options: OptionListRelationFilter
   OR: [BallotWhereInput!]
+  original_locale: StringFilter
   school: SchoolWhereInput
   schoolId: StringNullableFilter
   scope: EnumBallotScopeFilter
@@ -2356,6 +2603,9 @@ input BallotWhereInput {
   team: TeamWhereInput
   teamId: StringNullableFilter
   title: StringFilter
+  title_de: StringFilter
+  title_fr: StringFilter
+  title_it: StringFilter
   updatedAt: DateTimeFilter
   voted: VotedListRelationFilter
   votes: VoteListRelationFilter
@@ -3030,18 +3280,6 @@ input DiscussionWhereInput {
 
 input DiscussionWhereUniqueInput {
   id: String
-}
-
-type Domain {
-  approved: Boolean
-  id: String!
-  name: String
-  schools(
-    after: SchoolWhereUniqueInput
-    before: SchoolWhereUniqueInput
-    first: Int
-    last: Int
-  ): [School!]!
 }
 
 input DomainCreateNestedOneWithoutSchoolsInput {
@@ -4807,7 +5045,6 @@ type Team {
   ): [Ballot!]!
   cards: String!
   code: String
-  domain: Domain
   id: String!
   invite: String
   members(

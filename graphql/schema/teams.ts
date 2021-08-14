@@ -19,13 +19,22 @@ export const Team = objectType({
     t.model.code();
     t.model.prefs();
     t.model.notes();
-    t.model.domain();
     t.model.school();
     t.model.teacher();
     t.model.teacherId();
     t.model.members();
     t.model.ballots();
     t.nonNull.model.cards();
+  },
+});
+
+export const InviteResponse = objectType({
+  name: "InviteResponse",
+  definition(t) {
+    t.list.string("created");
+    t.list.string("failed");
+    t.list.string("duplicated");
+    t.field("team", { type: "Team" });
   },
 });
 

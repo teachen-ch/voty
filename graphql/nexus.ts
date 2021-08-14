@@ -1495,17 +1495,27 @@ export interface NexusGenInputs {
   };
   BallotCreateManyCreatorInput: {
     // input type
-    body: string; // String!
+    body?: string | null; // String
+    body_de?: string | null; // String
+    body_fr?: string | null; // String
+    body_it?: string | null; // String
     canton?: string | null; // String
     createdAt?: NexusGenScalars["DateTime"] | null; // DateTime
-    description: string; // String!
+    description?: string | null; // String
+    description_de?: string | null; // String
+    description_fr?: string | null; // String
+    description_it?: string | null; // String
     end: NexusGenScalars["DateTime"]; // DateTime!
     id?: string | null; // String
+    original_locale?: string | null; // String
     schoolId?: string | null; // String
     scope?: NexusGenEnums["BallotScope"] | null; // BallotScope
     start: NexusGenScalars["DateTime"]; // DateTime!
     teamId?: string | null; // String
-    title: string; // String!
+    title?: string | null; // String
+    title_de?: string | null; // String
+    title_fr?: string | null; // String
+    title_it?: string | null; // String
     updatedAt?: NexusGenScalars["DateTime"] | null; // DateTime
   };
   BallotCreateManyCreatorInputEnvelope: {
@@ -1515,17 +1525,27 @@ export interface NexusGenInputs {
   };
   BallotCreateManySchoolInput: {
     // input type
-    body: string; // String!
+    body?: string | null; // String
+    body_de?: string | null; // String
+    body_fr?: string | null; // String
+    body_it?: string | null; // String
     canton?: string | null; // String
     createdAt?: NexusGenScalars["DateTime"] | null; // DateTime
     creatorId?: string | null; // String
-    description: string; // String!
+    description?: string | null; // String
+    description_de?: string | null; // String
+    description_fr?: string | null; // String
+    description_it?: string | null; // String
     end: NexusGenScalars["DateTime"]; // DateTime!
     id?: string | null; // String
+    original_locale?: string | null; // String
     scope?: NexusGenEnums["BallotScope"] | null; // BallotScope
     start: NexusGenScalars["DateTime"]; // DateTime!
     teamId?: string | null; // String
-    title: string; // String!
+    title?: string | null; // String
+    title_de?: string | null; // String
+    title_fr?: string | null; // String
+    title_it?: string | null; // String
     updatedAt?: NexusGenScalars["DateTime"] | null; // DateTime
   };
   BallotCreateManySchoolInputEnvelope: {
@@ -1535,17 +1555,27 @@ export interface NexusGenInputs {
   };
   BallotCreateManyTeamInput: {
     // input type
-    body: string; // String!
+    body?: string | null; // String
+    body_de?: string | null; // String
+    body_fr?: string | null; // String
+    body_it?: string | null; // String
     canton?: string | null; // String
     createdAt?: NexusGenScalars["DateTime"] | null; // DateTime
     creatorId?: string | null; // String
-    description: string; // String!
+    description?: string | null; // String
+    description_de?: string | null; // String
+    description_fr?: string | null; // String
+    description_it?: string | null; // String
     end: NexusGenScalars["DateTime"]; // DateTime!
     id?: string | null; // String
+    original_locale?: string | null; // String
     schoolId?: string | null; // String
     scope?: NexusGenEnums["BallotScope"] | null; // BallotScope
     start: NexusGenScalars["DateTime"]; // DateTime!
-    title: string; // String!
+    title?: string | null; // String
+    title_de?: string | null; // String
+    title_fr?: string | null; // String
+    title_it?: string | null; // String
     updatedAt?: NexusGenScalars["DateTime"] | null; // DateTime
   };
   BallotCreateManyTeamInputEnvelope: {
@@ -1681,22 +1711,32 @@ export interface NexusGenInputs {
     ballotRuns?:
       | NexusGenInputs["BallotRunCreateNestedManyWithoutBallotInput"]
       | null; // BallotRunCreateNestedManyWithoutBallotInput
-    body: string; // String!
+    body?: string | null; // String
+    body_de?: string | null; // String
+    body_fr?: string | null; // String
+    body_it?: string | null; // String
     canton?: string | null; // String
     createdAt?: NexusGenScalars["DateTime"] | null; // DateTime
     creator?: NexusGenInputs["UserCreateNestedOneWithoutBallotsInput"] | null; // UserCreateNestedOneWithoutBallotsInput
-    description: string; // String!
+    description?: string | null; // String
+    description_de?: string | null; // String
+    description_fr?: string | null; // String
+    description_it?: string | null; // String
     discussion?:
       | NexusGenInputs["DiscussionCreateNestedManyWithoutBallotInput"]
       | null; // DiscussionCreateNestedManyWithoutBallotInput
     end: NexusGenScalars["DateTime"]; // DateTime!
     id?: string | null; // String
     options?: NexusGenInputs["OptionCreateNestedManyWithoutBallotInput"] | null; // OptionCreateNestedManyWithoutBallotInput
+    original_locale?: string | null; // String
     school?: NexusGenInputs["SchoolCreateNestedOneWithoutBallotsInput"] | null; // SchoolCreateNestedOneWithoutBallotsInput
     scope?: NexusGenEnums["BallotScope"] | null; // BallotScope
     start: NexusGenScalars["DateTime"]; // DateTime!
     team?: NexusGenInputs["TeamCreateNestedOneWithoutBallotsInput"] | null; // TeamCreateNestedOneWithoutBallotsInput
-    title: string; // String!
+    title?: string | null; // String
+    title_de?: string | null; // String
+    title_fr?: string | null; // String
+    title_it?: string | null; // String
     updatedAt?: NexusGenScalars["DateTime"] | null; // DateTime
     voted?: NexusGenInputs["VotedCreateNestedManyWithoutBallotInput"] | null; // VotedCreateNestedManyWithoutBallotInput
     votes?: NexusGenInputs["VoteCreateNestedManyWithoutBallotInput"] | null; // VoteCreateNestedManyWithoutBallotInput
@@ -1709,22 +1749,32 @@ export interface NexusGenInputs {
     ballotRuns?:
       | NexusGenInputs["BallotRunCreateNestedManyWithoutBallotInput"]
       | null; // BallotRunCreateNestedManyWithoutBallotInput
-    body: string; // String!
+    body?: string | null; // String
+    body_de?: string | null; // String
+    body_fr?: string | null; // String
+    body_it?: string | null; // String
     canton?: string | null; // String
     createdAt?: NexusGenScalars["DateTime"] | null; // DateTime
     creator?: NexusGenInputs["UserCreateNestedOneWithoutBallotsInput"] | null; // UserCreateNestedOneWithoutBallotsInput
-    description: string; // String!
+    description?: string | null; // String
+    description_de?: string | null; // String
+    description_fr?: string | null; // String
+    description_it?: string | null; // String
     discussion?:
       | NexusGenInputs["DiscussionCreateNestedManyWithoutBallotInput"]
       | null; // DiscussionCreateNestedManyWithoutBallotInput
     end: NexusGenScalars["DateTime"]; // DateTime!
     id?: string | null; // String
     options?: NexusGenInputs["OptionCreateNestedManyWithoutBallotInput"] | null; // OptionCreateNestedManyWithoutBallotInput
+    original_locale?: string | null; // String
     school?: NexusGenInputs["SchoolCreateNestedOneWithoutBallotsInput"] | null; // SchoolCreateNestedOneWithoutBallotsInput
     scope?: NexusGenEnums["BallotScope"] | null; // BallotScope
     start: NexusGenScalars["DateTime"]; // DateTime!
     team?: NexusGenInputs["TeamCreateNestedOneWithoutBallotsInput"] | null; // TeamCreateNestedOneWithoutBallotsInput
-    title: string; // String!
+    title?: string | null; // String
+    title_de?: string | null; // String
+    title_fr?: string | null; // String
+    title_it?: string | null; // String
     updatedAt?: NexusGenScalars["DateTime"] | null; // DateTime
     voted?: NexusGenInputs["VotedCreateNestedManyWithoutBallotInput"] | null; // VotedCreateNestedManyWithoutBallotInput
     votes?: NexusGenInputs["VoteCreateNestedManyWithoutBallotInput"] | null; // VoteCreateNestedManyWithoutBallotInput
@@ -1737,22 +1787,32 @@ export interface NexusGenInputs {
     attachments?:
       | NexusGenInputs["AttachmentCreateNestedManyWithoutBallotInput"]
       | null; // AttachmentCreateNestedManyWithoutBallotInput
-    body: string; // String!
+    body?: string | null; // String
+    body_de?: string | null; // String
+    body_fr?: string | null; // String
+    body_it?: string | null; // String
     canton?: string | null; // String
     createdAt?: NexusGenScalars["DateTime"] | null; // DateTime
     creator?: NexusGenInputs["UserCreateNestedOneWithoutBallotsInput"] | null; // UserCreateNestedOneWithoutBallotsInput
-    description: string; // String!
+    description?: string | null; // String
+    description_de?: string | null; // String
+    description_fr?: string | null; // String
+    description_it?: string | null; // String
     discussion?:
       | NexusGenInputs["DiscussionCreateNestedManyWithoutBallotInput"]
       | null; // DiscussionCreateNestedManyWithoutBallotInput
     end: NexusGenScalars["DateTime"]; // DateTime!
     id?: string | null; // String
     options?: NexusGenInputs["OptionCreateNestedManyWithoutBallotInput"] | null; // OptionCreateNestedManyWithoutBallotInput
+    original_locale?: string | null; // String
     school?: NexusGenInputs["SchoolCreateNestedOneWithoutBallotsInput"] | null; // SchoolCreateNestedOneWithoutBallotsInput
     scope?: NexusGenEnums["BallotScope"] | null; // BallotScope
     start: NexusGenScalars["DateTime"]; // DateTime!
     team?: NexusGenInputs["TeamCreateNestedOneWithoutBallotsInput"] | null; // TeamCreateNestedOneWithoutBallotsInput
-    title: string; // String!
+    title?: string | null; // String
+    title_de?: string | null; // String
+    title_fr?: string | null; // String
+    title_it?: string | null; // String
     updatedAt?: NexusGenScalars["DateTime"] | null; // DateTime
     voted?: NexusGenInputs["VotedCreateNestedManyWithoutBallotInput"] | null; // VotedCreateNestedManyWithoutBallotInput
     votes?: NexusGenInputs["VoteCreateNestedManyWithoutBallotInput"] | null; // VoteCreateNestedManyWithoutBallotInput
@@ -1768,21 +1828,31 @@ export interface NexusGenInputs {
     ballotRuns?:
       | NexusGenInputs["BallotRunCreateNestedManyWithoutBallotInput"]
       | null; // BallotRunCreateNestedManyWithoutBallotInput
-    body: string; // String!
+    body?: string | null; // String
+    body_de?: string | null; // String
+    body_fr?: string | null; // String
+    body_it?: string | null; // String
     canton?: string | null; // String
     createdAt?: NexusGenScalars["DateTime"] | null; // DateTime
-    description: string; // String!
+    description?: string | null; // String
+    description_de?: string | null; // String
+    description_fr?: string | null; // String
+    description_it?: string | null; // String
     discussion?:
       | NexusGenInputs["DiscussionCreateNestedManyWithoutBallotInput"]
       | null; // DiscussionCreateNestedManyWithoutBallotInput
     end: NexusGenScalars["DateTime"]; // DateTime!
     id?: string | null; // String
     options?: NexusGenInputs["OptionCreateNestedManyWithoutBallotInput"] | null; // OptionCreateNestedManyWithoutBallotInput
+    original_locale?: string | null; // String
     school?: NexusGenInputs["SchoolCreateNestedOneWithoutBallotsInput"] | null; // SchoolCreateNestedOneWithoutBallotsInput
     scope?: NexusGenEnums["BallotScope"] | null; // BallotScope
     start: NexusGenScalars["DateTime"]; // DateTime!
     team?: NexusGenInputs["TeamCreateNestedOneWithoutBallotsInput"] | null; // TeamCreateNestedOneWithoutBallotsInput
-    title: string; // String!
+    title?: string | null; // String
+    title_de?: string | null; // String
+    title_fr?: string | null; // String
+    title_it?: string | null; // String
     updatedAt?: NexusGenScalars["DateTime"] | null; // DateTime
     voted?: NexusGenInputs["VotedCreateNestedManyWithoutBallotInput"] | null; // VotedCreateNestedManyWithoutBallotInput
     votes?: NexusGenInputs["VoteCreateNestedManyWithoutBallotInput"] | null; // VoteCreateNestedManyWithoutBallotInput
@@ -1798,19 +1868,29 @@ export interface NexusGenInputs {
     ballotRuns?:
       | NexusGenInputs["BallotRunCreateNestedManyWithoutBallotInput"]
       | null; // BallotRunCreateNestedManyWithoutBallotInput
-    body: string; // String!
+    body?: string | null; // String
+    body_de?: string | null; // String
+    body_fr?: string | null; // String
+    body_it?: string | null; // String
     canton?: string | null; // String
     createdAt?: NexusGenScalars["DateTime"] | null; // DateTime
     creator?: NexusGenInputs["UserCreateNestedOneWithoutBallotsInput"] | null; // UserCreateNestedOneWithoutBallotsInput
-    description: string; // String!
+    description?: string | null; // String
+    description_de?: string | null; // String
+    description_fr?: string | null; // String
+    description_it?: string | null; // String
     end: NexusGenScalars["DateTime"]; // DateTime!
     id?: string | null; // String
     options?: NexusGenInputs["OptionCreateNestedManyWithoutBallotInput"] | null; // OptionCreateNestedManyWithoutBallotInput
+    original_locale?: string | null; // String
     school?: NexusGenInputs["SchoolCreateNestedOneWithoutBallotsInput"] | null; // SchoolCreateNestedOneWithoutBallotsInput
     scope?: NexusGenEnums["BallotScope"] | null; // BallotScope
     start: NexusGenScalars["DateTime"]; // DateTime!
     team?: NexusGenInputs["TeamCreateNestedOneWithoutBallotsInput"] | null; // TeamCreateNestedOneWithoutBallotsInput
-    title: string; // String!
+    title?: string | null; // String
+    title_de?: string | null; // String
+    title_fr?: string | null; // String
+    title_it?: string | null; // String
     updatedAt?: NexusGenScalars["DateTime"] | null; // DateTime
     voted?: NexusGenInputs["VotedCreateNestedManyWithoutBallotInput"] | null; // VotedCreateNestedManyWithoutBallotInput
     votes?: NexusGenInputs["VoteCreateNestedManyWithoutBallotInput"] | null; // VoteCreateNestedManyWithoutBallotInput
@@ -1826,21 +1906,31 @@ export interface NexusGenInputs {
     ballotRuns?:
       | NexusGenInputs["BallotRunCreateNestedManyWithoutBallotInput"]
       | null; // BallotRunCreateNestedManyWithoutBallotInput
-    body: string; // String!
+    body?: string | null; // String
+    body_de?: string | null; // String
+    body_fr?: string | null; // String
+    body_it?: string | null; // String
     canton?: string | null; // String
     createdAt?: NexusGenScalars["DateTime"] | null; // DateTime
     creator?: NexusGenInputs["UserCreateNestedOneWithoutBallotsInput"] | null; // UserCreateNestedOneWithoutBallotsInput
-    description: string; // String!
+    description?: string | null; // String
+    description_de?: string | null; // String
+    description_fr?: string | null; // String
+    description_it?: string | null; // String
     discussion?:
       | NexusGenInputs["DiscussionCreateNestedManyWithoutBallotInput"]
       | null; // DiscussionCreateNestedManyWithoutBallotInput
     end: NexusGenScalars["DateTime"]; // DateTime!
     id?: string | null; // String
     options?: NexusGenInputs["OptionCreateNestedManyWithoutBallotInput"] | null; // OptionCreateNestedManyWithoutBallotInput
+    original_locale?: string | null; // String
     scope?: NexusGenEnums["BallotScope"] | null; // BallotScope
     start: NexusGenScalars["DateTime"]; // DateTime!
     team?: NexusGenInputs["TeamCreateNestedOneWithoutBallotsInput"] | null; // TeamCreateNestedOneWithoutBallotsInput
-    title: string; // String!
+    title?: string | null; // String
+    title_de?: string | null; // String
+    title_fr?: string | null; // String
+    title_it?: string | null; // String
     updatedAt?: NexusGenScalars["DateTime"] | null; // DateTime
     voted?: NexusGenInputs["VotedCreateNestedManyWithoutBallotInput"] | null; // VotedCreateNestedManyWithoutBallotInput
     votes?: NexusGenInputs["VoteCreateNestedManyWithoutBallotInput"] | null; // VoteCreateNestedManyWithoutBallotInput
@@ -1856,21 +1946,31 @@ export interface NexusGenInputs {
     ballotRuns?:
       | NexusGenInputs["BallotRunCreateNestedManyWithoutBallotInput"]
       | null; // BallotRunCreateNestedManyWithoutBallotInput
-    body: string; // String!
+    body?: string | null; // String
+    body_de?: string | null; // String
+    body_fr?: string | null; // String
+    body_it?: string | null; // String
     canton?: string | null; // String
     createdAt?: NexusGenScalars["DateTime"] | null; // DateTime
     creator?: NexusGenInputs["UserCreateNestedOneWithoutBallotsInput"] | null; // UserCreateNestedOneWithoutBallotsInput
-    description: string; // String!
+    description?: string | null; // String
+    description_de?: string | null; // String
+    description_fr?: string | null; // String
+    description_it?: string | null; // String
     discussion?:
       | NexusGenInputs["DiscussionCreateNestedManyWithoutBallotInput"]
       | null; // DiscussionCreateNestedManyWithoutBallotInput
     end: NexusGenScalars["DateTime"]; // DateTime!
     id?: string | null; // String
     options?: NexusGenInputs["OptionCreateNestedManyWithoutBallotInput"] | null; // OptionCreateNestedManyWithoutBallotInput
+    original_locale?: string | null; // String
     school?: NexusGenInputs["SchoolCreateNestedOneWithoutBallotsInput"] | null; // SchoolCreateNestedOneWithoutBallotsInput
     scope?: NexusGenEnums["BallotScope"] | null; // BallotScope
     start: NexusGenScalars["DateTime"]; // DateTime!
-    title: string; // String!
+    title?: string | null; // String
+    title_de?: string | null; // String
+    title_fr?: string | null; // String
+    title_it?: string | null; // String
     updatedAt?: NexusGenScalars["DateTime"] | null; // DateTime
     voted?: NexusGenInputs["VotedCreateNestedManyWithoutBallotInput"] | null; // VotedCreateNestedManyWithoutBallotInput
     votes?: NexusGenInputs["VoteCreateNestedManyWithoutBallotInput"] | null; // VoteCreateNestedManyWithoutBallotInput
@@ -1886,22 +1986,32 @@ export interface NexusGenInputs {
     ballotRuns?:
       | NexusGenInputs["BallotRunCreateNestedManyWithoutBallotInput"]
       | null; // BallotRunCreateNestedManyWithoutBallotInput
-    body: string; // String!
+    body?: string | null; // String
+    body_de?: string | null; // String
+    body_fr?: string | null; // String
+    body_it?: string | null; // String
     canton?: string | null; // String
     createdAt?: NexusGenScalars["DateTime"] | null; // DateTime
     creator?: NexusGenInputs["UserCreateNestedOneWithoutBallotsInput"] | null; // UserCreateNestedOneWithoutBallotsInput
-    description: string; // String!
+    description?: string | null; // String
+    description_de?: string | null; // String
+    description_fr?: string | null; // String
+    description_it?: string | null; // String
     discussion?:
       | NexusGenInputs["DiscussionCreateNestedManyWithoutBallotInput"]
       | null; // DiscussionCreateNestedManyWithoutBallotInput
     end: NexusGenScalars["DateTime"]; // DateTime!
     id?: string | null; // String
     options?: NexusGenInputs["OptionCreateNestedManyWithoutBallotInput"] | null; // OptionCreateNestedManyWithoutBallotInput
+    original_locale?: string | null; // String
     school?: NexusGenInputs["SchoolCreateNestedOneWithoutBallotsInput"] | null; // SchoolCreateNestedOneWithoutBallotsInput
     scope?: NexusGenEnums["BallotScope"] | null; // BallotScope
     start: NexusGenScalars["DateTime"]; // DateTime!
     team?: NexusGenInputs["TeamCreateNestedOneWithoutBallotsInput"] | null; // TeamCreateNestedOneWithoutBallotsInput
-    title: string; // String!
+    title?: string | null; // String
+    title_de?: string | null; // String
+    title_fr?: string | null; // String
+    title_it?: string | null; // String
     updatedAt?: NexusGenScalars["DateTime"] | null; // DateTime
     votes?: NexusGenInputs["VoteCreateNestedManyWithoutBallotInput"] | null; // VoteCreateNestedManyWithoutBallotInput
   };
@@ -1916,22 +2026,32 @@ export interface NexusGenInputs {
     ballotRuns?:
       | NexusGenInputs["BallotRunCreateNestedManyWithoutBallotInput"]
       | null; // BallotRunCreateNestedManyWithoutBallotInput
-    body: string; // String!
+    body?: string | null; // String
+    body_de?: string | null; // String
+    body_fr?: string | null; // String
+    body_it?: string | null; // String
     canton?: string | null; // String
     createdAt?: NexusGenScalars["DateTime"] | null; // DateTime
     creator?: NexusGenInputs["UserCreateNestedOneWithoutBallotsInput"] | null; // UserCreateNestedOneWithoutBallotsInput
-    description: string; // String!
+    description?: string | null; // String
+    description_de?: string | null; // String
+    description_fr?: string | null; // String
+    description_it?: string | null; // String
     discussion?:
       | NexusGenInputs["DiscussionCreateNestedManyWithoutBallotInput"]
       | null; // DiscussionCreateNestedManyWithoutBallotInput
     end: NexusGenScalars["DateTime"]; // DateTime!
     id?: string | null; // String
     options?: NexusGenInputs["OptionCreateNestedManyWithoutBallotInput"] | null; // OptionCreateNestedManyWithoutBallotInput
+    original_locale?: string | null; // String
     school?: NexusGenInputs["SchoolCreateNestedOneWithoutBallotsInput"] | null; // SchoolCreateNestedOneWithoutBallotsInput
     scope?: NexusGenEnums["BallotScope"] | null; // BallotScope
     start: NexusGenScalars["DateTime"]; // DateTime!
     team?: NexusGenInputs["TeamCreateNestedOneWithoutBallotsInput"] | null; // TeamCreateNestedOneWithoutBallotsInput
-    title: string; // String!
+    title?: string | null; // String
+    title_de?: string | null; // String
+    title_fr?: string | null; // String
+    title_it?: string | null; // String
     updatedAt?: NexusGenScalars["DateTime"] | null; // DateTime
     voted?: NexusGenInputs["VotedCreateNestedManyWithoutBallotInput"] | null; // VotedCreateNestedManyWithoutBallotInput
   };
@@ -1944,17 +2064,27 @@ export interface NexusGenInputs {
   BallotOrderByInput: {
     // input type
     body?: NexusGenEnums["SortOrder"] | null; // SortOrder
+    body_de?: NexusGenEnums["SortOrder"] | null; // SortOrder
+    body_fr?: NexusGenEnums["SortOrder"] | null; // SortOrder
+    body_it?: NexusGenEnums["SortOrder"] | null; // SortOrder
     canton?: NexusGenEnums["SortOrder"] | null; // SortOrder
     createdAt?: NexusGenEnums["SortOrder"] | null; // SortOrder
     creatorId?: NexusGenEnums["SortOrder"] | null; // SortOrder
     description?: NexusGenEnums["SortOrder"] | null; // SortOrder
+    description_de?: NexusGenEnums["SortOrder"] | null; // SortOrder
+    description_fr?: NexusGenEnums["SortOrder"] | null; // SortOrder
+    description_it?: NexusGenEnums["SortOrder"] | null; // SortOrder
     end?: NexusGenEnums["SortOrder"] | null; // SortOrder
     id?: NexusGenEnums["SortOrder"] | null; // SortOrder
+    original_locale?: NexusGenEnums["SortOrder"] | null; // SortOrder
     schoolId?: NexusGenEnums["SortOrder"] | null; // SortOrder
     scope?: NexusGenEnums["SortOrder"] | null; // SortOrder
     start?: NexusGenEnums["SortOrder"] | null; // SortOrder
     teamId?: NexusGenEnums["SortOrder"] | null; // SortOrder
     title?: NexusGenEnums["SortOrder"] | null; // SortOrder
+    title_de?: NexusGenEnums["SortOrder"] | null; // SortOrder
+    title_fr?: NexusGenEnums["SortOrder"] | null; // SortOrder
+    title_it?: NexusGenEnums["SortOrder"] | null; // SortOrder
     updatedAt?: NexusGenEnums["SortOrder"] | null; // SortOrder
   };
   BallotRunBallotIdTeamIdCompoundUniqueInput: {
@@ -2224,32 +2354,52 @@ export interface NexusGenInputs {
     // input type
     AND?: NexusGenInputs["BallotScalarWhereInput"][] | null; // [BallotScalarWhereInput!]
     body?: NexusGenInputs["StringFilter"] | null; // StringFilter
+    body_de?: NexusGenInputs["StringFilter"] | null; // StringFilter
+    body_fr?: NexusGenInputs["StringFilter"] | null; // StringFilter
+    body_it?: NexusGenInputs["StringFilter"] | null; // StringFilter
     canton?: NexusGenInputs["StringNullableFilter"] | null; // StringNullableFilter
     createdAt?: NexusGenInputs["DateTimeFilter"] | null; // DateTimeFilter
     creatorId?: NexusGenInputs["StringNullableFilter"] | null; // StringNullableFilter
     description?: NexusGenInputs["StringFilter"] | null; // StringFilter
+    description_de?: NexusGenInputs["StringFilter"] | null; // StringFilter
+    description_fr?: NexusGenInputs["StringFilter"] | null; // StringFilter
+    description_it?: NexusGenInputs["StringFilter"] | null; // StringFilter
     end?: NexusGenInputs["DateTimeFilter"] | null; // DateTimeFilter
     id?: NexusGenInputs["StringFilter"] | null; // StringFilter
     NOT?: NexusGenInputs["BallotScalarWhereInput"][] | null; // [BallotScalarWhereInput!]
     OR?: NexusGenInputs["BallotScalarWhereInput"][] | null; // [BallotScalarWhereInput!]
+    original_locale?: NexusGenInputs["StringFilter"] | null; // StringFilter
     schoolId?: NexusGenInputs["StringNullableFilter"] | null; // StringNullableFilter
     scope?: NexusGenInputs["EnumBallotScopeFilter"] | null; // EnumBallotScopeFilter
     start?: NexusGenInputs["DateTimeFilter"] | null; // DateTimeFilter
     teamId?: NexusGenInputs["StringNullableFilter"] | null; // StringNullableFilter
     title?: NexusGenInputs["StringFilter"] | null; // StringFilter
+    title_de?: NexusGenInputs["StringFilter"] | null; // StringFilter
+    title_fr?: NexusGenInputs["StringFilter"] | null; // StringFilter
+    title_it?: NexusGenInputs["StringFilter"] | null; // StringFilter
     updatedAt?: NexusGenInputs["DateTimeFilter"] | null; // DateTimeFilter
   };
   BallotUpdateManyMutationInput: {
     // input type
     body?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    body_de?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    body_fr?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    body_it?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
     canton?: NexusGenInputs["NullableStringFieldUpdateOperationsInput"] | null; // NullableStringFieldUpdateOperationsInput
     createdAt?: NexusGenInputs["DateTimeFieldUpdateOperationsInput"] | null; // DateTimeFieldUpdateOperationsInput
     description?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    description_de?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    description_fr?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    description_it?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
     end?: NexusGenInputs["DateTimeFieldUpdateOperationsInput"] | null; // DateTimeFieldUpdateOperationsInput
     id?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    original_locale?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
     scope?: NexusGenInputs["EnumBallotScopeFieldUpdateOperationsInput"] | null; // EnumBallotScopeFieldUpdateOperationsInput
     start?: NexusGenInputs["DateTimeFieldUpdateOperationsInput"] | null; // DateTimeFieldUpdateOperationsInput
     title?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    title_de?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    title_fr?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    title_it?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
     updatedAt?: NexusGenInputs["DateTimeFieldUpdateOperationsInput"] | null; // DateTimeFieldUpdateOperationsInput
   };
   BallotUpdateManyWithWhereWithoutCreatorInput: {
@@ -2421,21 +2571,31 @@ export interface NexusGenInputs {
       | null; // AttachmentUpdateManyWithoutBallotInput
     ballotRuns?: NexusGenInputs["BallotRunUpdateManyWithoutBallotInput"] | null; // BallotRunUpdateManyWithoutBallotInput
     body?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    body_de?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    body_fr?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    body_it?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
     canton?: NexusGenInputs["NullableStringFieldUpdateOperationsInput"] | null; // NullableStringFieldUpdateOperationsInput
     createdAt?: NexusGenInputs["DateTimeFieldUpdateOperationsInput"] | null; // DateTimeFieldUpdateOperationsInput
     creator?: NexusGenInputs["UserUpdateOneWithoutBallotsInput"] | null; // UserUpdateOneWithoutBallotsInput
     description?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    description_de?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    description_fr?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    description_it?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
     discussion?:
       | NexusGenInputs["DiscussionUpdateManyWithoutBallotInput"]
       | null; // DiscussionUpdateManyWithoutBallotInput
     end?: NexusGenInputs["DateTimeFieldUpdateOperationsInput"] | null; // DateTimeFieldUpdateOperationsInput
     id?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
     options?: NexusGenInputs["OptionUpdateManyWithoutBallotInput"] | null; // OptionUpdateManyWithoutBallotInput
+    original_locale?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
     school?: NexusGenInputs["SchoolUpdateOneWithoutBallotsInput"] | null; // SchoolUpdateOneWithoutBallotsInput
     scope?: NexusGenInputs["EnumBallotScopeFieldUpdateOperationsInput"] | null; // EnumBallotScopeFieldUpdateOperationsInput
     start?: NexusGenInputs["DateTimeFieldUpdateOperationsInput"] | null; // DateTimeFieldUpdateOperationsInput
     team?: NexusGenInputs["TeamUpdateOneWithoutBallotsInput"] | null; // TeamUpdateOneWithoutBallotsInput
     title?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    title_de?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    title_fr?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    title_it?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
     updatedAt?: NexusGenInputs["DateTimeFieldUpdateOperationsInput"] | null; // DateTimeFieldUpdateOperationsInput
     voted?: NexusGenInputs["VotedUpdateManyWithoutBallotInput"] | null; // VotedUpdateManyWithoutBallotInput
     votes?: NexusGenInputs["VoteUpdateManyWithoutBallotInput"] | null; // VoteUpdateManyWithoutBallotInput
@@ -2445,21 +2605,31 @@ export interface NexusGenInputs {
     activity?: NexusGenInputs["ActivityUpdateManyWithoutBallotInput"] | null; // ActivityUpdateManyWithoutBallotInput
     ballotRuns?: NexusGenInputs["BallotRunUpdateManyWithoutBallotInput"] | null; // BallotRunUpdateManyWithoutBallotInput
     body?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    body_de?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    body_fr?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    body_it?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
     canton?: NexusGenInputs["NullableStringFieldUpdateOperationsInput"] | null; // NullableStringFieldUpdateOperationsInput
     createdAt?: NexusGenInputs["DateTimeFieldUpdateOperationsInput"] | null; // DateTimeFieldUpdateOperationsInput
     creator?: NexusGenInputs["UserUpdateOneWithoutBallotsInput"] | null; // UserUpdateOneWithoutBallotsInput
     description?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    description_de?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    description_fr?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    description_it?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
     discussion?:
       | NexusGenInputs["DiscussionUpdateManyWithoutBallotInput"]
       | null; // DiscussionUpdateManyWithoutBallotInput
     end?: NexusGenInputs["DateTimeFieldUpdateOperationsInput"] | null; // DateTimeFieldUpdateOperationsInput
     id?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
     options?: NexusGenInputs["OptionUpdateManyWithoutBallotInput"] | null; // OptionUpdateManyWithoutBallotInput
+    original_locale?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
     school?: NexusGenInputs["SchoolUpdateOneWithoutBallotsInput"] | null; // SchoolUpdateOneWithoutBallotsInput
     scope?: NexusGenInputs["EnumBallotScopeFieldUpdateOperationsInput"] | null; // EnumBallotScopeFieldUpdateOperationsInput
     start?: NexusGenInputs["DateTimeFieldUpdateOperationsInput"] | null; // DateTimeFieldUpdateOperationsInput
     team?: NexusGenInputs["TeamUpdateOneWithoutBallotsInput"] | null; // TeamUpdateOneWithoutBallotsInput
     title?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    title_de?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    title_fr?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    title_it?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
     updatedAt?: NexusGenInputs["DateTimeFieldUpdateOperationsInput"] | null; // DateTimeFieldUpdateOperationsInput
     voted?: NexusGenInputs["VotedUpdateManyWithoutBallotInput"] | null; // VotedUpdateManyWithoutBallotInput
     votes?: NexusGenInputs["VoteUpdateManyWithoutBallotInput"] | null; // VoteUpdateManyWithoutBallotInput
@@ -2471,21 +2641,31 @@ export interface NexusGenInputs {
       | NexusGenInputs["AttachmentUpdateManyWithoutBallotInput"]
       | null; // AttachmentUpdateManyWithoutBallotInput
     body?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    body_de?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    body_fr?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    body_it?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
     canton?: NexusGenInputs["NullableStringFieldUpdateOperationsInput"] | null; // NullableStringFieldUpdateOperationsInput
     createdAt?: NexusGenInputs["DateTimeFieldUpdateOperationsInput"] | null; // DateTimeFieldUpdateOperationsInput
     creator?: NexusGenInputs["UserUpdateOneWithoutBallotsInput"] | null; // UserUpdateOneWithoutBallotsInput
     description?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    description_de?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    description_fr?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    description_it?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
     discussion?:
       | NexusGenInputs["DiscussionUpdateManyWithoutBallotInput"]
       | null; // DiscussionUpdateManyWithoutBallotInput
     end?: NexusGenInputs["DateTimeFieldUpdateOperationsInput"] | null; // DateTimeFieldUpdateOperationsInput
     id?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
     options?: NexusGenInputs["OptionUpdateManyWithoutBallotInput"] | null; // OptionUpdateManyWithoutBallotInput
+    original_locale?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
     school?: NexusGenInputs["SchoolUpdateOneWithoutBallotsInput"] | null; // SchoolUpdateOneWithoutBallotsInput
     scope?: NexusGenInputs["EnumBallotScopeFieldUpdateOperationsInput"] | null; // EnumBallotScopeFieldUpdateOperationsInput
     start?: NexusGenInputs["DateTimeFieldUpdateOperationsInput"] | null; // DateTimeFieldUpdateOperationsInput
     team?: NexusGenInputs["TeamUpdateOneWithoutBallotsInput"] | null; // TeamUpdateOneWithoutBallotsInput
     title?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    title_de?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    title_fr?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    title_it?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
     updatedAt?: NexusGenInputs["DateTimeFieldUpdateOperationsInput"] | null; // DateTimeFieldUpdateOperationsInput
     voted?: NexusGenInputs["VotedUpdateManyWithoutBallotInput"] | null; // VotedUpdateManyWithoutBallotInput
     votes?: NexusGenInputs["VoteUpdateManyWithoutBallotInput"] | null; // VoteUpdateManyWithoutBallotInput
@@ -2498,20 +2678,30 @@ export interface NexusGenInputs {
       | null; // AttachmentUpdateManyWithoutBallotInput
     ballotRuns?: NexusGenInputs["BallotRunUpdateManyWithoutBallotInput"] | null; // BallotRunUpdateManyWithoutBallotInput
     body?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    body_de?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    body_fr?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    body_it?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
     canton?: NexusGenInputs["NullableStringFieldUpdateOperationsInput"] | null; // NullableStringFieldUpdateOperationsInput
     createdAt?: NexusGenInputs["DateTimeFieldUpdateOperationsInput"] | null; // DateTimeFieldUpdateOperationsInput
     description?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    description_de?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    description_fr?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    description_it?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
     discussion?:
       | NexusGenInputs["DiscussionUpdateManyWithoutBallotInput"]
       | null; // DiscussionUpdateManyWithoutBallotInput
     end?: NexusGenInputs["DateTimeFieldUpdateOperationsInput"] | null; // DateTimeFieldUpdateOperationsInput
     id?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
     options?: NexusGenInputs["OptionUpdateManyWithoutBallotInput"] | null; // OptionUpdateManyWithoutBallotInput
+    original_locale?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
     school?: NexusGenInputs["SchoolUpdateOneWithoutBallotsInput"] | null; // SchoolUpdateOneWithoutBallotsInput
     scope?: NexusGenInputs["EnumBallotScopeFieldUpdateOperationsInput"] | null; // EnumBallotScopeFieldUpdateOperationsInput
     start?: NexusGenInputs["DateTimeFieldUpdateOperationsInput"] | null; // DateTimeFieldUpdateOperationsInput
     team?: NexusGenInputs["TeamUpdateOneWithoutBallotsInput"] | null; // TeamUpdateOneWithoutBallotsInput
     title?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    title_de?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    title_fr?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    title_it?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
     updatedAt?: NexusGenInputs["DateTimeFieldUpdateOperationsInput"] | null; // DateTimeFieldUpdateOperationsInput
     voted?: NexusGenInputs["VotedUpdateManyWithoutBallotInput"] | null; // VotedUpdateManyWithoutBallotInput
     votes?: NexusGenInputs["VoteUpdateManyWithoutBallotInput"] | null; // VoteUpdateManyWithoutBallotInput
@@ -2524,18 +2714,28 @@ export interface NexusGenInputs {
       | null; // AttachmentUpdateManyWithoutBallotInput
     ballotRuns?: NexusGenInputs["BallotRunUpdateManyWithoutBallotInput"] | null; // BallotRunUpdateManyWithoutBallotInput
     body?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    body_de?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    body_fr?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    body_it?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
     canton?: NexusGenInputs["NullableStringFieldUpdateOperationsInput"] | null; // NullableStringFieldUpdateOperationsInput
     createdAt?: NexusGenInputs["DateTimeFieldUpdateOperationsInput"] | null; // DateTimeFieldUpdateOperationsInput
     creator?: NexusGenInputs["UserUpdateOneWithoutBallotsInput"] | null; // UserUpdateOneWithoutBallotsInput
     description?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    description_de?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    description_fr?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    description_it?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
     end?: NexusGenInputs["DateTimeFieldUpdateOperationsInput"] | null; // DateTimeFieldUpdateOperationsInput
     id?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
     options?: NexusGenInputs["OptionUpdateManyWithoutBallotInput"] | null; // OptionUpdateManyWithoutBallotInput
+    original_locale?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
     school?: NexusGenInputs["SchoolUpdateOneWithoutBallotsInput"] | null; // SchoolUpdateOneWithoutBallotsInput
     scope?: NexusGenInputs["EnumBallotScopeFieldUpdateOperationsInput"] | null; // EnumBallotScopeFieldUpdateOperationsInput
     start?: NexusGenInputs["DateTimeFieldUpdateOperationsInput"] | null; // DateTimeFieldUpdateOperationsInput
     team?: NexusGenInputs["TeamUpdateOneWithoutBallotsInput"] | null; // TeamUpdateOneWithoutBallotsInput
     title?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    title_de?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    title_fr?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    title_it?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
     updatedAt?: NexusGenInputs["DateTimeFieldUpdateOperationsInput"] | null; // DateTimeFieldUpdateOperationsInput
     voted?: NexusGenInputs["VotedUpdateManyWithoutBallotInput"] | null; // VotedUpdateManyWithoutBallotInput
     votes?: NexusGenInputs["VoteUpdateManyWithoutBallotInput"] | null; // VoteUpdateManyWithoutBallotInput
@@ -2548,20 +2748,30 @@ export interface NexusGenInputs {
       | null; // AttachmentUpdateManyWithoutBallotInput
     ballotRuns?: NexusGenInputs["BallotRunUpdateManyWithoutBallotInput"] | null; // BallotRunUpdateManyWithoutBallotInput
     body?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    body_de?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    body_fr?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    body_it?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
     canton?: NexusGenInputs["NullableStringFieldUpdateOperationsInput"] | null; // NullableStringFieldUpdateOperationsInput
     createdAt?: NexusGenInputs["DateTimeFieldUpdateOperationsInput"] | null; // DateTimeFieldUpdateOperationsInput
     creator?: NexusGenInputs["UserUpdateOneWithoutBallotsInput"] | null; // UserUpdateOneWithoutBallotsInput
     description?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    description_de?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    description_fr?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    description_it?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
     discussion?:
       | NexusGenInputs["DiscussionUpdateManyWithoutBallotInput"]
       | null; // DiscussionUpdateManyWithoutBallotInput
     end?: NexusGenInputs["DateTimeFieldUpdateOperationsInput"] | null; // DateTimeFieldUpdateOperationsInput
     id?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
     options?: NexusGenInputs["OptionUpdateManyWithoutBallotInput"] | null; // OptionUpdateManyWithoutBallotInput
+    original_locale?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
     scope?: NexusGenInputs["EnumBallotScopeFieldUpdateOperationsInput"] | null; // EnumBallotScopeFieldUpdateOperationsInput
     start?: NexusGenInputs["DateTimeFieldUpdateOperationsInput"] | null; // DateTimeFieldUpdateOperationsInput
     team?: NexusGenInputs["TeamUpdateOneWithoutBallotsInput"] | null; // TeamUpdateOneWithoutBallotsInput
     title?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    title_de?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    title_fr?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    title_it?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
     updatedAt?: NexusGenInputs["DateTimeFieldUpdateOperationsInput"] | null; // DateTimeFieldUpdateOperationsInput
     voted?: NexusGenInputs["VotedUpdateManyWithoutBallotInput"] | null; // VotedUpdateManyWithoutBallotInput
     votes?: NexusGenInputs["VoteUpdateManyWithoutBallotInput"] | null; // VoteUpdateManyWithoutBallotInput
@@ -2574,20 +2784,30 @@ export interface NexusGenInputs {
       | null; // AttachmentUpdateManyWithoutBallotInput
     ballotRuns?: NexusGenInputs["BallotRunUpdateManyWithoutBallotInput"] | null; // BallotRunUpdateManyWithoutBallotInput
     body?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    body_de?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    body_fr?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    body_it?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
     canton?: NexusGenInputs["NullableStringFieldUpdateOperationsInput"] | null; // NullableStringFieldUpdateOperationsInput
     createdAt?: NexusGenInputs["DateTimeFieldUpdateOperationsInput"] | null; // DateTimeFieldUpdateOperationsInput
     creator?: NexusGenInputs["UserUpdateOneWithoutBallotsInput"] | null; // UserUpdateOneWithoutBallotsInput
     description?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    description_de?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    description_fr?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    description_it?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
     discussion?:
       | NexusGenInputs["DiscussionUpdateManyWithoutBallotInput"]
       | null; // DiscussionUpdateManyWithoutBallotInput
     end?: NexusGenInputs["DateTimeFieldUpdateOperationsInput"] | null; // DateTimeFieldUpdateOperationsInput
     id?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
     options?: NexusGenInputs["OptionUpdateManyWithoutBallotInput"] | null; // OptionUpdateManyWithoutBallotInput
+    original_locale?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
     school?: NexusGenInputs["SchoolUpdateOneWithoutBallotsInput"] | null; // SchoolUpdateOneWithoutBallotsInput
     scope?: NexusGenInputs["EnumBallotScopeFieldUpdateOperationsInput"] | null; // EnumBallotScopeFieldUpdateOperationsInput
     start?: NexusGenInputs["DateTimeFieldUpdateOperationsInput"] | null; // DateTimeFieldUpdateOperationsInput
     title?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    title_de?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    title_fr?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    title_it?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
     updatedAt?: NexusGenInputs["DateTimeFieldUpdateOperationsInput"] | null; // DateTimeFieldUpdateOperationsInput
     voted?: NexusGenInputs["VotedUpdateManyWithoutBallotInput"] | null; // VotedUpdateManyWithoutBallotInput
     votes?: NexusGenInputs["VoteUpdateManyWithoutBallotInput"] | null; // VoteUpdateManyWithoutBallotInput
@@ -2600,21 +2820,31 @@ export interface NexusGenInputs {
       | null; // AttachmentUpdateManyWithoutBallotInput
     ballotRuns?: NexusGenInputs["BallotRunUpdateManyWithoutBallotInput"] | null; // BallotRunUpdateManyWithoutBallotInput
     body?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    body_de?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    body_fr?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    body_it?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
     canton?: NexusGenInputs["NullableStringFieldUpdateOperationsInput"] | null; // NullableStringFieldUpdateOperationsInput
     createdAt?: NexusGenInputs["DateTimeFieldUpdateOperationsInput"] | null; // DateTimeFieldUpdateOperationsInput
     creator?: NexusGenInputs["UserUpdateOneWithoutBallotsInput"] | null; // UserUpdateOneWithoutBallotsInput
     description?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    description_de?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    description_fr?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    description_it?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
     discussion?:
       | NexusGenInputs["DiscussionUpdateManyWithoutBallotInput"]
       | null; // DiscussionUpdateManyWithoutBallotInput
     end?: NexusGenInputs["DateTimeFieldUpdateOperationsInput"] | null; // DateTimeFieldUpdateOperationsInput
     id?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
     options?: NexusGenInputs["OptionUpdateManyWithoutBallotInput"] | null; // OptionUpdateManyWithoutBallotInput
+    original_locale?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
     school?: NexusGenInputs["SchoolUpdateOneWithoutBallotsInput"] | null; // SchoolUpdateOneWithoutBallotsInput
     scope?: NexusGenInputs["EnumBallotScopeFieldUpdateOperationsInput"] | null; // EnumBallotScopeFieldUpdateOperationsInput
     start?: NexusGenInputs["DateTimeFieldUpdateOperationsInput"] | null; // DateTimeFieldUpdateOperationsInput
     team?: NexusGenInputs["TeamUpdateOneWithoutBallotsInput"] | null; // TeamUpdateOneWithoutBallotsInput
     title?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    title_de?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    title_fr?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    title_it?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
     updatedAt?: NexusGenInputs["DateTimeFieldUpdateOperationsInput"] | null; // DateTimeFieldUpdateOperationsInput
     votes?: NexusGenInputs["VoteUpdateManyWithoutBallotInput"] | null; // VoteUpdateManyWithoutBallotInput
   };
@@ -2626,21 +2856,31 @@ export interface NexusGenInputs {
       | null; // AttachmentUpdateManyWithoutBallotInput
     ballotRuns?: NexusGenInputs["BallotRunUpdateManyWithoutBallotInput"] | null; // BallotRunUpdateManyWithoutBallotInput
     body?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    body_de?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    body_fr?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    body_it?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
     canton?: NexusGenInputs["NullableStringFieldUpdateOperationsInput"] | null; // NullableStringFieldUpdateOperationsInput
     createdAt?: NexusGenInputs["DateTimeFieldUpdateOperationsInput"] | null; // DateTimeFieldUpdateOperationsInput
     creator?: NexusGenInputs["UserUpdateOneWithoutBallotsInput"] | null; // UserUpdateOneWithoutBallotsInput
     description?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    description_de?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    description_fr?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    description_it?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
     discussion?:
       | NexusGenInputs["DiscussionUpdateManyWithoutBallotInput"]
       | null; // DiscussionUpdateManyWithoutBallotInput
     end?: NexusGenInputs["DateTimeFieldUpdateOperationsInput"] | null; // DateTimeFieldUpdateOperationsInput
     id?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
     options?: NexusGenInputs["OptionUpdateManyWithoutBallotInput"] | null; // OptionUpdateManyWithoutBallotInput
+    original_locale?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
     school?: NexusGenInputs["SchoolUpdateOneWithoutBallotsInput"] | null; // SchoolUpdateOneWithoutBallotsInput
     scope?: NexusGenInputs["EnumBallotScopeFieldUpdateOperationsInput"] | null; // EnumBallotScopeFieldUpdateOperationsInput
     start?: NexusGenInputs["DateTimeFieldUpdateOperationsInput"] | null; // DateTimeFieldUpdateOperationsInput
     team?: NexusGenInputs["TeamUpdateOneWithoutBallotsInput"] | null; // TeamUpdateOneWithoutBallotsInput
     title?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    title_de?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    title_fr?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    title_it?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
     updatedAt?: NexusGenInputs["DateTimeFieldUpdateOperationsInput"] | null; // DateTimeFieldUpdateOperationsInput
     voted?: NexusGenInputs["VotedUpdateManyWithoutBallotInput"] | null; // VotedUpdateManyWithoutBallotInput
   };
@@ -2699,17 +2939,24 @@ export interface NexusGenInputs {
     attachments?: NexusGenInputs["AttachmentListRelationFilter"] | null; // AttachmentListRelationFilter
     ballotRuns?: NexusGenInputs["BallotRunListRelationFilter"] | null; // BallotRunListRelationFilter
     body?: NexusGenInputs["StringFilter"] | null; // StringFilter
+    body_de?: NexusGenInputs["StringFilter"] | null; // StringFilter
+    body_fr?: NexusGenInputs["StringFilter"] | null; // StringFilter
+    body_it?: NexusGenInputs["StringFilter"] | null; // StringFilter
     canton?: NexusGenInputs["StringNullableFilter"] | null; // StringNullableFilter
     createdAt?: NexusGenInputs["DateTimeFilter"] | null; // DateTimeFilter
     creator?: NexusGenInputs["UserWhereInput"] | null; // UserWhereInput
     creatorId?: NexusGenInputs["StringNullableFilter"] | null; // StringNullableFilter
     description?: NexusGenInputs["StringFilter"] | null; // StringFilter
+    description_de?: NexusGenInputs["StringFilter"] | null; // StringFilter
+    description_fr?: NexusGenInputs["StringFilter"] | null; // StringFilter
+    description_it?: NexusGenInputs["StringFilter"] | null; // StringFilter
     discussion?: NexusGenInputs["DiscussionListRelationFilter"] | null; // DiscussionListRelationFilter
     end?: NexusGenInputs["DateTimeFilter"] | null; // DateTimeFilter
     id?: NexusGenInputs["StringFilter"] | null; // StringFilter
     NOT?: NexusGenInputs["BallotWhereInput"][] | null; // [BallotWhereInput!]
     options?: NexusGenInputs["OptionListRelationFilter"] | null; // OptionListRelationFilter
     OR?: NexusGenInputs["BallotWhereInput"][] | null; // [BallotWhereInput!]
+    original_locale?: NexusGenInputs["StringFilter"] | null; // StringFilter
     school?: NexusGenInputs["SchoolWhereInput"] | null; // SchoolWhereInput
     schoolId?: NexusGenInputs["StringNullableFilter"] | null; // StringNullableFilter
     scope?: NexusGenInputs["EnumBallotScopeFilter"] | null; // EnumBallotScopeFilter
@@ -2717,6 +2964,9 @@ export interface NexusGenInputs {
     team?: NexusGenInputs["TeamWhereInput"] | null; // TeamWhereInput
     teamId?: NexusGenInputs["StringNullableFilter"] | null; // StringNullableFilter
     title?: NexusGenInputs["StringFilter"] | null; // StringFilter
+    title_de?: NexusGenInputs["StringFilter"] | null; // StringFilter
+    title_fr?: NexusGenInputs["StringFilter"] | null; // StringFilter
+    title_it?: NexusGenInputs["StringFilter"] | null; // StringFilter
     updatedAt?: NexusGenInputs["DateTimeFilter"] | null; // DateTimeFilter
     voted?: NexusGenInputs["VotedListRelationFilter"] | null; // VotedListRelationFilter
     votes?: NexusGenInputs["VoteListRelationFilter"] | null; // VoteListRelationFilter
@@ -9468,12 +9718,6 @@ export interface NexusGenObjects {
     title: string; // String!
     updatedAt?: NexusGenScalars["DateTime"] | null; // DateTime
   };
-  Domain: {
-    // root type
-    approved?: boolean | null; // Boolean
-    id: string; // String!
-    name?: string | null; // String
-  };
   InviteResponse: {
     // root type
     created?: Array<string | null> | null; // [String]
@@ -9683,13 +9927,6 @@ export interface NexusGenFieldTypes {
     updatedAt: NexusGenScalars["DateTime"] | null; // DateTime
     user: NexusGenRootTypes["User"]; // User!
   };
-  Domain: {
-    // field return type
-    approved: boolean | null; // Boolean
-    id: string; // String!
-    name: string | null; // String
-    schools: NexusGenRootTypes["School"][]; // [School!]!
-  };
   InviteResponse: {
     // field return type
     created: Array<string | null> | null; // [String]
@@ -9825,7 +10062,6 @@ export interface NexusGenFieldTypes {
     ballots: NexusGenRootTypes["Ballot"][]; // [Ballot!]!
     cards: string; // String!
     code: string | null; // String
-    domain: NexusGenRootTypes["Domain"] | null; // Domain
     id: string; // String!
     invite: string | null; // String
     members: NexusGenRootTypes["User"][]; // [User!]!
@@ -9963,13 +10199,6 @@ export interface NexusGenFieldTypeNames {
     updatedAt: "DateTime";
     user: "User";
   };
-  Domain: {
-    // field return type name
-    approved: "Boolean";
-    id: "String";
-    name: "String";
-    schools: "School";
-  };
   InviteResponse: {
     // field return type name
     created: "String";
@@ -10105,7 +10334,6 @@ export interface NexusGenFieldTypeNames {
     ballots: "Ballot";
     cards: "String";
     code: "String";
-    domain: "Domain";
     id: "String";
     invite: "String";
     members: "User";
@@ -10171,15 +10399,6 @@ export interface NexusGenArgTypes {
       // args
       after?: NexusGenInputs["ReactionWhereUniqueInput"] | null; // ReactionWhereUniqueInput
       before?: NexusGenInputs["ReactionWhereUniqueInput"] | null; // ReactionWhereUniqueInput
-      first?: number | null; // Int
-      last?: number | null; // Int
-    };
-  };
-  Domain: {
-    schools: {
-      // args
-      after?: NexusGenInputs["SchoolWhereUniqueInput"] | null; // SchoolWhereUniqueInput
-      before?: NexusGenInputs["SchoolWhereUniqueInput"] | null; // SchoolWhereUniqueInput
       first?: number | null; // Int
       last?: number | null; // Int
     };
