@@ -3819,7 +3819,7 @@ type Query {
     schoolId: String
     teamId: String
   ): BallotResults
-  getBallotRuns(teamId: String!): [BallotRun]
+  getBallotRuns(locale: String, teamId: String!): [BallotRun]
   getTeamDiscussions(
     ballotId: String
     card: String

@@ -4040,6 +4040,7 @@ export type QueryGetBallotResultsArgs = {
 
 
 export type QueryGetBallotRunsArgs = {
+  locale?: Maybe<Scalars['String']>;
   teamId: Scalars['String'];
 };
 

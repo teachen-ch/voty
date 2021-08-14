@@ -10593,6 +10593,7 @@ export interface NexusGenArgTypes {
     };
     getBallotRuns: {
       // args
+      locale?: string | null; // String
       teamId: string; // String!
     };
     getTeamDiscussions: {

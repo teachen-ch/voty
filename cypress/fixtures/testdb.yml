@@ -202,6 +202,8 @@ ballot:
     bodyit: Voto di test completato
 
   - titlede: Zukunftsinitiative
+    titlefr: Initiative futur
+    titleit: Initiativa futura
     descriptionde: Diese Testabstimmung ist bereits beendet
     descriptionfr: C'est test de vote est déj déjà terminé
     descriptionit: Questo voto di test è già finito
@@ -212,7 +214,7 @@ ballot:
     bodyfr: Futur vote de test
     bodyit: Futuro voto di test
 
-  - titlede: Sieben Wochen Ferien für Auszubildende
+- titlede: Sieben Wochen Ferien für Auszubildende
     titlefr: Sept semaines de vacances pour les apprentis et apprenties
     titleit: Sette settimane di vacanze per gli apprendisti
     descriptionde: Lernende in einem Lernbetrieb sollen mindestens sieben Wochen Ferien pro Jahr erhalten.
