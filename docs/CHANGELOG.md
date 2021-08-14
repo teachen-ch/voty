@@ -1,3 +1,10 @@
+## [1.58.1](https://github.com/teachen-ch/voty/compare/v1.58.0...v1.58.1) (2021-08-14)
+
+
+### Bug Fixes
+
+* fix fixture... ([8557df3](https://github.com/teachen-ch/voty/commit/8557df3e13fbe7463a4b3095089899113b38899c))
+
 # [1.58.0](https://github.com/teachen-ch/voty/compare/v1.57.2...v1.58.0) (2021-08-14)
 
 
