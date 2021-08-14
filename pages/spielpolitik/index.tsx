@@ -28,8 +28,8 @@ export default function ZDAAbstimmung(): React.ReactElement {
 
   return (
     <ZDAFullPage heading={tr("ZDA.Header")}>
+      <Logos />
       <DE>
-        <Logos />
         Hier können Schüler*innen und Erwachsene über die Initiativen von
         «SpielPolitik!» abstimmen und Jugendliche können für die eidgenössischen
         Abstimmungen vom 26. September ihre Stimme abgeben.
@@ -47,6 +47,16 @@ export default function ZDAAbstimmung(): React.ReactElement {
           </Step>
         </Box>
       </DE>
+      <FR>
+        [Übersetzung Intro…]
+        <br />
+        <br />
+      </FR>
+      <IT>
+        [Übersetzung Intro…]
+        <br />
+        <br />
+      </IT>
 
       {newUser ? (
         <Card>
@@ -93,39 +103,50 @@ export default function ZDAAbstimmung(): React.ReactElement {
           «99% Initiative», «Ehe für Alle»
         </Text>
       </DE>
-      <FR>Salut les mecs. Diese Inhalte müssen noch übersetzt werden…</FR>
-      <IT>Salutti a tutti. Diese Inhalte müssen noch übersetzt werden…</IT>
+      <FR>
+        <br />
+        <br />
+        Salut les mecs. Diese Inhalte müssen noch übersetzt werden…
+      </FR>
+      <IT>
+        <br />
+        <br />
+        Salutti a tutti. Diese Inhalte müssen noch übersetzt werden…
+      </IT>
 
       <ZDAFAQ />
     </ZDAFullPage>
   );
 }
 
-export const Logos: React.FC = () => (
-  <Flex justifyContent="space-around" alignItems="center" my={4}>
-    <Image
-      src="/images/logo_schulen_nach_bern2.png"
-      maxWidth="25%"
-      width={100}
-      height={45}
-      alt="Schulen nach Bern Logo"
-    />
-    <Image
-      src="/images/voty_logo.svg"
-      maxWidth="25%"
-      width={100}
-      height={39}
-      alt="voty.ch Logo"
-    />
-    <Image
-      src="/images/logo_zda.svg"
-      maxWidth="25%"
-      width={100}
-      height={60}
-      alt="Zentrum für Deomkratie ZDA Logo"
-    />
-  </Flex>
-);
+export const Logos: React.FC = () => {
+  const router = useRouter();
+  return (
+    <Flex justifyContent="space-around" alignItems="center" my={4}>
+      <Image
+        src={`/images/logo_spielpolitik_${router.locale}.png`}
+        maxWidth="25%"
+        width={100}
+        height={83}
+        alt="Schulen nach Bern Logo"
+      />
+      <Image
+        src="/images/voty_logo.svg"
+        maxWidth="25%"
+        width={100}
+        height={39}
+        alt="voty.ch Logo"
+      />
+      <Image
+        src="/images/logo_zda.svg"
+        maxWidth="25%"
+        width={100}
+        height={60}
+        alt="Zentrum für Deomkratie ZDA Logo"
+      />
+    </Flex>
+  );
+};
 
 export const ZDAFullPage: React.FC<{
   heading: string;

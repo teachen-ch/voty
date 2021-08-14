@@ -6,15 +6,15 @@
   "Signup": {
     "labelRole": "Io sono",
     "labelEmail": "Email",
-    "placeholderEmail": "nom@monecole.ch",
+    "placeholderEmail": "nome@miascoula.ch",
     "CreateButton": "Creare un account"
   },
   "Roles": {
-    "Choose": "Si prega di selezionare",
-    "Teacher": "Professore",
-    "Student": "Studente",
-    "User": "Cittadino del mondo",
-    "Principal": "Direttore"
+    "Choose": "si prega di selezionare",
+    "Teacher": "professore",
+    "Student": "studente",
+    "User": "cittadino del mondo",
+    "Principal": "direttore"
   },
   "Error": {
     "BallotNotStarted": "Diese Abstimmung ist noch nicht gestartet",
