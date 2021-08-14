@@ -7,16 +7,15 @@ import { getUserBallotStatus } from "components/Ballots";
 import { Markdown } from "util/markdown";
 import { VotyNow } from "pages/team/[team]/ballots/[ballot]";
 import { Detail } from "pages/projekt";
+import { tr } from "util/translate";
 
 export default function ZDAVote(): React.ReactElement {
   return (
-    <ZDAFullPage heading="Jetzt zu allen Vorlagen abstimmen">
+    <ZDAFullPage heading={tr("ZDA.Header")}>
       Jetzt bist Du dran! Diskutiere die Vorlagen, bilde Dir eine eigene Meinung
       und stimme ab!
       <Flex justifyContent="space-between" alignItems="flex-end">
-        <Heading fontSize={[2, 2, 3]}>
-          Initiativen «SpielPolitik!» / Schulen nach Bern
-        </Heading>
+        <Heading fontSize={[2, 2, 3]}>Initiativen «SpielPolitik!»</Heading>
         <Image
           src="/images/logo_schulen_nach_bern2.png"
           width={100}

@@ -79,7 +79,7 @@ export default function ZDAAbstimmung(): React.ReactElement {
       )}
       <DE mt={4} fontSize={[1, 1, 2]}>
         <Text>
-          <b>Initiativen «SpielPolitik!» / Schulen nach Bern</b>
+          <b>Initiativen «SpielPolitik!»</b>
           <br />
           «Sieben Wochen Ferien für Auszubildende», «Familienglück für alle»,
           «Wahl des Geschlechts».{" "}
@@ -237,7 +237,7 @@ export const ZDAFAQ: React.FC = () => (
     <Heading as="h2" mt={3}>
       Fragen und Antworten
     </Heading>
-    <Title>Was ist «SpielPolitik!» von Schulen nach Bern»?</Title>
+    <Title>Was ist «SpielPolitik!»?</Title>
     <Text>
       «SpielPolitik!» ist ein Projekt des Vereins{" "}
       <A href="https://schulen-nach-bern.ch" rel="noreferrer">
@@ -259,7 +259,7 @@ export const ZDAFAQ: React.FC = () => (
       Mit der Angabe Deiner Email-Adresse stellen wir sicher, dass jede Person
       nur <A onClick={() => alert("pro Email-Adresse...")}>eine Stimme</A>{" "}
       abgeben kann. Deine Email-Adresse wird nur zur Durchführung dieser
-      Abstimmung verwendet und nie an Dritte weitergeben.
+      Abstimmung verwendet und nie an Dritte weitergegeben.
     </Text>
     <Title>
       Kann ich diese Abstimmungen auch mit meiner Klasse durchführen?
@@ -277,8 +277,8 @@ export const ZDAFAQ: React.FC = () => (
     </Title>
     <Text>
       Super! Auf{" "}
-      <A href="https://schulen-nach-bern.ch" rel="noreferrer">
-        schulen-nach-bern.ch
+      <A href="https://schulen-nach-bern.ch/anmeldung" rel="noreferrer">
+        schulen-nach-bern.ch/anmeldung
       </A>{" "}
       findest Du die nächsten Durchführungsdaten von «SpielPolitik!» und alle
       Angaben zur Anmeldung.

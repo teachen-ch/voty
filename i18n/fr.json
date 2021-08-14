@@ -1,6 +1,6 @@
 {
   "ZDA": {
-    "Header": "Ecoles à Berne – votation populaire!",
+    "Header": "Votation pour la journée de la démocratie 2021!",
     "CreateButton": "verifiez email"
   },
   "Signup": {
@@ -10,10 +10,10 @@
     "CreateButton": "Create Account"
   },
   "Roles": {
-    "Choose": "Choissisez",
-    "Teacher": "Professeur",
+    "Choose": "Veuillez sélectionner",
+    "Teacher": "Professeur*e",
     "Student": "Élève",
-    "User": "Citoyen du monde",
-    "Principal": "Directeur"
+    "User": "Citoyen*ne du monde",
+    "Principal": "Directeur*trice"
   }
 }

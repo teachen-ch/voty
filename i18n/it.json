@@ -1,4 +1,21 @@
 {
+  "ZDA": {
+    "Header": "Voto per la giornata della democrazia 2021!",
+    "CreateButton": "verificare l'email"
+  },
+  "Signup": {
+    "labelRole": "Io sono",
+    "labelEmail": "Email",
+    "placeholderEmail": "nom@monecole.ch",
+    "CreateButton": "Creare un account"
+  },
+  "Roles": {
+    "Choose": "Si prega di selezionare",
+    "Teacher": "Professore",
+    "Student": "Studente",
+    "User": "Cittadino del mondo",
+    "Principal": "Direttore"
+  },
   "Error": {
     "BallotNotStarted": "Diese Abstimmung ist noch nicht gestartet",
     "BallotEnded": "Diese Abstimmung ist bereits beendet",
@@ -42,13 +59,6 @@
     "UserPassword": "Email oder Passwort passen leider nicht zueinander…",
     "VotingNeedsLogin": "Die Abstimmung benötigt eine Anmeldung",
     "VotingNotAllowed": "Abstimmen nicht erlaubt"
-  },
-  "Roles": {
-    "Choose": "Si prega di scegliere",
-    "Teacher": "insegnante",
-    "Student": "allievo",
-    "Principal": "principale",
-    "User": "cittadino"
   },
   "Teacher": { "LegalText": "" },
   "Student": {
