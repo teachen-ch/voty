@@ -179,33 +179,49 @@ school:
     canton: ZH
 
 ballot:
-  - title: Testinitiative
-    description: Diese Testabstimmung dauert seit ewig
+  - title_de: Testinitiative
+    title_fr: Initiative de test
+    title_it: Initiativa di test
+    description_de: Diese Testabstimmung dauert ist immer offen
+    description_fr: Ce test de vote dure est toujours ouvert
+    description_it: Questo voto di test è sempre aperto
     start: !!timestamp "2000-01-01"
     end: !!timestamp "2099-12-31"
     scope: National
-    body: Testabstimmung ohne Inhalt
+    body_de: Testabstimmung ohne Inhalt
+    body_fr: Test de vote sans contenu
+    body_it: Voto di test senza contenuto
 
-  - title: Abgelaufene Initiative
-    description: Diese Testabstimmung ist bereits beendet
+  - title_de: Abgelaufene Initiative
+    description_de: Diese Testabstimmung ist bereits beendet
     start: !!timestamp "2000-01-01"
     end: !!timestamp "2000-12-31"
     scope: National
-    body: Beendete Testabstimmung
+    body_de: Beendete Testabstimmung
+    body_fr: Vote de test achevé
+    body_it: Voto di test completato
 
-  - title: Zukunftsinitiative
-    description: Diese Testabstimmung ist bereits beendet
+  - title_de: Zukunftsinitiative
+    description_de: Diese Testabstimmung ist bereits beendet
+    description_fr: C'est test de vote est déj déjà terminé
+    description_it: Questo voto di test è già finito
     start: !!timestamp "2099-01-01"
     end: !!timestamp "2099-12-31"
     scope: National
-    body: Zukünftige Testabstimmung
+    body_de: Zukünftige Testabstimmung
+    body_fr: Futur vote de test
+    body_it: Futuro voto di test
 
-  - title: Sieben Wochen Ferien für Auszubildende
-    description: Lernende in einem Lernbetrieb sollen mindestens sieben Wochen Ferien pro Jahr erhalten.
+  - title_de: Sieben Wochen Ferien für Auszubildende
+    title_fr: Sept semaines de vacances pour les apprentis et apprenties
+    title_it: Sette settimane di vacanze per gli apprendisti
+    description_de: Lernende in einem Lernbetrieb sollen mindestens sieben Wochen Ferien pro Jahr erhalten.
+    description_fr: Les apprentice doivent bénéficier d'au moins de sept semaines de vacances par an.
+    description_it: Gli apprendisti dovrebbero ricevere almeno sette settimane di vacanze all'anno.
     start: !!timestamp "2021-08-01"
     end: !!timestamp "2021-09-15"
     scope: Public
-    body: |
+    body_de: |
       #### Eine Klassen-Initiative aus Corsier-sur-Vevey (VD) bei «SpielPolitik!»
 
       ### Ausgangslage
@@ -216,14 +232,44 @@ ballot:
       Wer heute eine Berufslehre macht, muss hohen Anforderungen genügen. Für Jugendliche bedeuten der Besuch der Berufsschule einerseits und die praktische Arbeit an einem Arbeitsplatz andererseits eine grosse Herausforderung. Die Integration in der Berufswelt ist für die jungen Leute anstrengend. Die Forderung der Initiantinnen und Initianten nach ausreichend Ferien ist daher verständlich. Gleichzeitig ist festzustellen, dass die Anforderungen an die jungen Berufsleute stetig steigen. Den Auszubildenden ist kaum gedient, wenn durch verkürzte Schul- und Arbeitszeit die Ausbildungsdauer verlängert oder der zu lernende Stoff in kürzerer Zeit vermittelt werden muss.
 
       ### Weitere Informationen
-      Weitere Informationen findest Du im Abstimmungsbüchlein von «SpielPolitik!» [hier](http://schulen-nach-bern.ch)
+      Weitere Informationen findest Du im Abstimmungsbüchlein von «SpielPolitik!» [hier](/files/spielpolitik_de.pdf)
 
-  - title: Familienglück für alle
-    description: Es soll neu auch homosexuellen Paaren möglich sein, Kinder zu adoptieren.
+    body_fr: |
+      #### Une initiative de classe de Corsier-sur-Vevey (VD) de «Joue la politique !»
+
+      ### Situation initiale
+      En Suisse, deux tiers des jeunes optent pour une formation professionnelle de base et acquièrent ainsi une base professionnelle solide. Il existe environ 240 professions parmi lesquelles on peut choisir. La formation professionnelle de base est la base de l'apprentissage tout au long de la vie et ouvre un large éventail de perspectives de carrière. Le système de formation professionnelle est basé sur la dualité entre la théorie et la pratique. Il se caractérise par la combinaison de différents lieux d'apprentissage (entreprise, cours interentreprises, école professionnelle).
+
+      Selon le code des obligations (art. 345a al. 3 CO), l'entreprise formatrice doit accorder aux apprentis en formation professionnelle de base jusqu'à l'âge de 20 ans cinq semaines de vacances pour chaque année de formation. Ce règlement s'applique généralement à tous les salariés, et donc aussi aux apprentis. Les apprentis âgés de plus de 20 ans ont droit à un minimum de quatre semaines de vacances par an.
+
+      Toute personne qui termine aujourd'hui un apprentissage professionnel doit répondre à des normes élevées. Pour les jeunes, la fréquentation d'une école professionnelle, d'une part, et le travail pratique sur un lieu de travail d'autre part, représentent un défi majeur. L'intégration dans le monde du travail est difficile pour les jeunes. La demande des initiateurs pour des vacances suffisantes est donc compréhensible. En même temps, il faut noter que les exigences envers les jeunes ayant une formation professionnelle sont en constante augmentation. Les stagiaires ne sont guère servis, si la durée de la formation est prolongée ou si la matière à apprendre doit être enseignée dans un laps de temps plus court en raison d'un horaire scolaire et de travail plus court.
+
+      ### Plus d'informations
+      Vous trouverez de plus amples informations dans le livret de vote de «Joue la politique !» [ici](/files/spielpolitik_fr.pdf)
+
+    body_it: |
+      #### Una iniziativa di classe da Corsier-sur-Vevey (VD) da «Giocca alla politica!»
+
+      ### Situazione iniziale
+      In Svizzera, due terzi dei giovani optano per una formazione professionale di base e acquisiscono così una solida base professionale. Ci sono circa 240 occupazioni tra cui scegliere. La formazione professionale di base è la base per l'apprendimento permanente e apre una vasta gamma di opportunità di carriera. Il sistema di formazione professionale si basa sulla dualità di teoria e pratica. È caratterizzato dalla combinazione di diversi luoghi di apprendimento (azienda, corsi interaziendali, scuola professionale).
+
+      Secondo il Codice delle obbligazioni (art. 345a cpv. 3 CO), l'azienda formatrice deve concedere agli apprendisti in formazione professionale di base fino a 20 anni cinque settimane di vacanze per ogni anno di formazione. Questo regolamento si applica in generale a tutti i dipendenti e quindi anche agli apprendisti. Gli apprendisti di età superiore ai 20 anni hanno diritto a un minimo di quattro settimane di vacanza all'anno.
+
+      Chiunque completi un apprendistato professionale oggi deve soddisfare standard elevati. Per i giovani, frequentare una scuola professionale da un lato, e il lavoro pratico in un posto di lavoro dall'altro, è una grande sfida. L'integrazione nel mondo del lavoro è difficile per i giovani. La richiesta dei promotori di vacanze sufficienti è quindi comprensibile. Allo stesso tempo, va notato che le richieste ai giovani con formazione professionale sono in costante aumento. Gli apprendisti sono difficilmente serviti se la durata della formazione è prolungata o se il materiale da imparare deve essere insegnato in un periodo di tempo più breve a causa di un orario scolastico e lavorativo più breve.
+
+      ### Ulteriori informazioni
+      Potete trovare più informazioni nel libretto delle votazioni di «Giocca alla politica!" [qui](/files/spielpolitik_it.pdf)
+
+  - title_de: Familienglück für alle
+    title_fr: Le bonheur familial pour tous
+    title_it: Felicità familiare per tutti
+    description_de: Es soll neu auch homosexuellen Paaren möglich sein, Kinder zu adoptieren.
+    description_fr: Il devrait également être possible pour les couples homosexuels d'adopter des enfants.
+    description_it: Dovrebbe anche essere possibile per le coppie omosessuali adottare bambini.
     start: !!timestamp "2021-08-01"
     end: !!timestamp "2021-09-15"
     scope: Public
-    body: |
+    body_de: |
       #### Eine Klassen-Initiative aus Thierachern (BE) bei «SpielPolitik!»
 
       ### Ausgangslage
@@ -234,14 +280,44 @@ ballot:
       Für die Frage, ob ein Kind adoptiert werden kann, sollte einzig die Gewährleistung des Kindeswohls ausschlaggebend sein. Die Frage der sexuellen Orientierung der Eltern hat nach sozialwissenschaftlichen Erkenntnissen keine negativen Auswirkungen auf die Entwicklung des Kindes. Eine bestehende stabile Beziehung ist für die Entwicklung des Kindes in psychischer und ökonomischer Sicht nur vorteilhaft.
 
       ### Weitere Informationen
-      Weitere Informationen findest Du im Abstimmungsbüchlein von «SpielPolitik!» [hier](http://schulen-nach-bern.ch)
+      Weitere Informationen findest Du im Abstimmungsbüchlein von «SpielPolitik!» [hier](/files/spielpolitik_de.pdf)
 
-  - title: Wahl des Geschlechts
-    description: Jede Person soll das Recht haben, ihre Geschlechtszugehörigkeit selber zu definieren.
+    body_fr: |
+      #### Une initiative de classe de Thierachern (BE) de «Joue la politique !»
+
+      ### Situation initiale
+      Aujourd'hui, la condition préalable à l'adoption conjointe d'un enfant en Suisse est l'existence d'un mariage (art. 264a CC). Depuis 2018, les personnes en partenariat enregistré ou en concubinage de fait peuvent adopter les beaux-enfants de leur partenaire. En revanche, selon l'article 28 de la loi sur le partenariat, les personnes de même sexe vivant en partenariat enregistré ne sont pas autorisées à adopter conjointement les enfants d'autrui.
+
+      Il en résulte une situation inadmissible : les personnes homosexuelles peuvent adopter un enfant tant qu'iels sont célibataires, mais iels perdent ce droit dès qu'iels concluent un partenariat enregistré. Cette restriction était une exigence du Parlement lors de la révision de la loi sur l'adoption en 2014, selon laquelle l'adoption conjointe devait rester réservée exclusivement aux couples mariés à l'avenir.
+
+      Le seul facteur décisif pour la question de savoir si un enfant peut être adopté doit être la garantie de l'intérêt supérieur de l'enfant. Selon les résultats des sciences sociales, la question de l'orientation sexuelle des parents n'a pas d'impact négatif sur le développement de l'enfant. Une relation stable existante n'est que bénéfique pour le développement de l'enfant d'un point de vue psychologique et économique.
+
+      ### Plus d'informations
+      Vous trouverez de plus amples informations dans le livret de vote de «Joue la politique !» [ici](/files/spielpolitik_fr.pdf)
+
+    body_it: |
+      #### Una iniziativa di classe da Thierachern (BE) da «Giocca alla politica!»
+
+      ### Situazione iniziale
+      Oggi, la condizione per l'adozione congiunta di un bambino in Svizzera è l'esistenza di un matrimonio (art. 264a CC). Dal 2018, le persone in un'unione registrata o in una convivenza di fatto possono adottare i figliastri del loro partner. Tuttavia, secondo l'articolo 28 della legge sul partenariato, le persone dello stesso sesso in un'unione registrata non possono adottare congiuntamente i figli di altre persone.
+
+      Il risultato è una situazione inaccettabile: gli omosessuali possono adottare un bambino finché sono single, ma perdono questo diritto non appena entrano in un'unione registrata. Questa restrizione era una richiesta del Parlamento quando la legge sulle adozioni è stata rivista nel 2014, secondo la quale l'adozione congiunta dovrebbe rimanere esclusivamente per le coppie sposate in futuro.
+
+      L'unico fattore decisivo per la questione se un bambino può essere adottato deve essere la garanzia dell'interesse superiore del/la bambino/a. Secondo i risultati delle scienze sociali, la questione dell'orientamento sessuale dei genitori non ha un impatto negativo sullo sviluppo del/la bambino/a. Una relazione stabile esistente è solo vantaggiosa per lo sviluppo del/la bambino/a da un punto di vista psicologico ed economico.
+
+      ### Ulteriori informazioni
+      Potete trovare più informazioni nel libretto delle votazioni di «Giocca alla politica!" [qui](/files/spielpolitik_it.pdf)
+
+  - title_de: Wahl des Geschlechts
+    title_fr: Choix du genre
+    title_it: Scelta del genere
+    description_de: Jede Person soll das Recht haben, ihre Geschlechtszugehörigkeit selber zu definieren.
+    description_fr: Chaque personne devrait avoir le droit de définir sa propre identité de genre.
+    description_it: Tutte le persone dovrebbero avere il diritto di definire la propria identità di genere.
     start: !!timestamp "2021-08-01"
     end: !!timestamp "2021-09-15"
     scope: Public
-    body: |
+    body_de: |
       #### Eine Klassen-Initiative aus der Stadt Zürich (ZH) bei «SpielPolitik!»
 
       ### Ausgangslage
@@ -254,4 +330,34 @@ ballot:
       Das Parlament hat sich dieser Frage angenommen und vor kurzem eine Revision des Zivilgesetzbuches beschlossen (BBl 2020 9931). Mit dieser Revision soll der Eintrag von Geschlecht und Vornamen neu mittels einfacher Erklärung gegenüber der Zivilstandsbeamtin oder dem Zivilstandsbeamten geändert werden können. Der Revisionsvorschlag basiert auf dem Selbstbestimmungsrecht des Einzelnen, das Teil der persönlichen Freiheit bildet (Art. 10 BV). Die Vorlage stellt aber die binäre Geschlechterordnung (männlich/weiblich) nicht in Frage. Eine dritte Geschlechtskategorie («unbestimmt» oder non-binär) wird nicht eingeführt.
 
       ### Weitere Informationen
-      Weitere Informationen findest Du im Abstimmungsbüchlein von «SpielPolitik!» [hier](http://schulen-nach-bern.ch)
+      Weitere Informationen findest Du im Abstimmungsbüchlein von «SpielPolitik!» [hier](/files/spielpolitik_de.pdf)
+
+    body_fr: |
+      #### Une initiative de classe de la ville de Zurich (ZH) de «Joue la politique !»
+
+      ### Situation initiale
+      Chaque personne naît avec un sexe biologique, qu'il s'agisse d'un homme, d'une femme ou d'une variante. L'identité de genre est influencée notamment par un autre facteur, le genre social. Il s'agit de l'éducation en tant que fille ou garçon selon les attentes de rôles typiques de la culture. Par conséquent, la conformité avec le genre subjectivement ressenti comme homme ou femme n'est pas nécessairement donnée. Les personnes ayant une identité trans ne sont pas d'accord avec le sexe qui leur a été attribué à la naissance. Iels se vivent comme un genre différent. Les personnes trans peuvent se considérer comme binaires (femme trans ou homme trans) ou non binaires (terme générique pour désigner les différentes identités de genre en dehors du binaire femme/homme).
+
+      L'initiative reprend cette question. Il s'agit de savoir si une personne peut ou non s'identifier au sexe qui lui a été attribué à la naissance. Si ce n'est pas le cas, cela peut entraîner une incertitude quant au sentiment d'appartenance à un genre et rendre la découverte de soi plus difficile.
+
+      Le sentiment subjectif du genre joue un rôle important dans le sentiment d'inclusion dans notre société. Il est donc important que chaque personne ait la possibilité de changer son affectation de genre à la naissance, sans intervention médicale préalable ni autre condition préalable. L'ouverture de la société au cours des dernières années en ce qui concerne les questions de genre et d'orientation sexuelle exige une adaptation du système juridique ; à cet égard, il convient de soutenir les initiatrices et initiateurs.
+
+      Le Parlement s'est penché sur cette question et a récemment adopté une révision du Code civil (FF 2020 9623). Avec cette révision, il devrait désormais être possible de modifier l'inscription du sexe et du prénom par une simple déclaration à l'officier d'état civil. La révision proposée se fonde sur le droit de l'individu à l'autodétermination, qui fait partie de la liberté individuelle (art. 10 Cst.). Cependant, la proposition ne remet pas en cause l'ordre binaire des genres (masculin/féminin). Une troisième catégorie de genre ("indéterminé" ou non-binaire) n'est pas introduite. Ici, le Conseil fédéral ne veut pas anticiper l'évolution de la société. Le 10 avril 2021, le délai référendaire concernant la modification du Code civil a expiré sans avoir été utilisé. Le Conseil fédéral mettra prochainement en vigueur les dispositions révisées.
+
+      ### Plus d'informations
+      Vous trouverez de plus amples informations dans le livret de vote de «Joue la politique !» [ici](/files/spielpolitik_fr.pdf)
+
+    body_it: |
+      #### Una iniziativa di classe de la città di Zurigo (VD) da «Giocca alla politica!»
+
+      ### Situazione iniziale
+      Ogni persona nasce con un sesso biologico, che sia maschio, femmina o una variante. L'identità di genere è influenzata da un altro fattore, cioè il genere sociale. Si tratta dell'educazione come ragazza o ragazzo secondo le aspettative di ruolo tipiche della cultura. Pertanto, la conformità con il genere soggettivamente sentito come maschio o femmina non è necessariamente data. Le persone con un'identità trans non sono d'accordo con il genere che è stato loro assegnato alla nascita. Sperimentano se stessi come un genere diverso. Le persone trans possono vedersi come binarie (donna trans o uomo trans) o non binarie (un termine generico per diverse identità di genere al di fuori del binomio femmina/maschio).
+
+      L'iniziativa riprende questa domanda. Si tratta di sapere se una persona può identificarsi o meno con il sesso che le è stato assegnato alla nascita. Se questo non è il caso, può portare all'incertezza sul proprio senso del genere e rendere più difficile la scoperta di sé.
+
+      Il senso soggettivo del genere gioca un ruolo importante nel senso di inclusione nella nostra società. È quindi importante che ogni persona abbia la possibilità di cambiare la propria assegnazione di genere alla nascita, senza intervento medico preventivo o altre precondizioni. L'apertura della società negli ultimi anni per quanto riguarda le questioni di genere e di orientamento sessuale richiede un adattamento del sistema giuridico; in questo senso, gli iniziatori dovrebbero essere sostenuti.
+
+      Il Parlamento ha preso in considerazione la questione e ha recentemente adottato una revisione del Codice civile (FF 2020 8711). Con questa revisione, dovrebbe ora essere possibile cambiare la registrazione del sesso e del nome con una semplice dichiarazione all'ufficiale di stato civile. La revisione proposta si basa sul diritto all'autodeterminazione dell'individuo, che fa parte della libertà personale (art. 10 Cost.). Tuttavia, la proposta non sfida l'ordine binario di genere (maschio/femmina). Una terza categoria di genere ("indeterminato" o non-binario) non viene introdotta. Qui, il Consiglio federale non vuole anticipare l'evoluzione della società. Il 10 aprile 2021, il termine referendario per la modifica del codice civile è scaduto senza essere utilizzato. Il Consiglio federale metterà presto in vigore le disposizioni rivedute.
+
+      ### Ulteriori informazioni
+      Potete trovare più informazioni nel libretto delle votazioni di «Giocca alla politica!" [qui](/files/spielpolitik_it.pdf)
