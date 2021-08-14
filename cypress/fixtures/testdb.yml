@@ -179,49 +179,49 @@ school:
     canton: ZH
 
 ballot:
-  - title_de: Testinitiative
-    title_fr: Initiative de test
-    title_it: Initiativa di test
-    description_de: Diese Testabstimmung dauert ist immer offen
-    description_fr: Ce test de vote dure est toujours ouvert
-    description_it: Questo voto di test è sempre aperto
+  - titlede: Testinitiative
+    titlefr: Initiative de test
+    titleit: Initiativa di test
+    descriptionde: Diese Testabstimmung dauert ist immer offen
+    descriptionfr: Ce test de vote dure est toujours ouvert
+    descriptionit: Questo voto di test è sempre aperto
     start: !!timestamp "2000-01-01"
     end: !!timestamp "2099-12-31"
     scope: National
-    body_de: Testabstimmung ohne Inhalt
-    body_fr: Test de vote sans contenu
-    body_it: Voto di test senza contenuto
+    bodyde: Testabstimmung ohne Inhalt
+    bodyfr: Test de vote sans contenu
+    bodyit: Voto di test senza contenuto
 
-  - title_de: Abgelaufene Initiative
-    description_de: Diese Testabstimmung ist bereits beendet
+  - titlede: Abgelaufene Initiative
+    descriptionde: Diese Testabstimmung ist bereits beendet
     start: !!timestamp "2000-01-01"
     end: !!timestamp "2000-12-31"
     scope: National
-    body_de: Beendete Testabstimmung
-    body_fr: Vote de test achevé
-    body_it: Voto di test completato
+    bodyde: Beendete Testabstimmung
+    bodyfr: Vote de test achevé
+    bodyit: Voto di test completato
 
-  - title_de: Zukunftsinitiative
-    description_de: Diese Testabstimmung ist bereits beendet
-    description_fr: C'est test de vote est déj déjà terminé
-    description_it: Questo voto di test è già finito
+  - titlede: Zukunftsinitiative
+    descriptionde: Diese Testabstimmung ist bereits beendet
+    descriptionfr: C'est test de vote est déj déjà terminé
+    descriptionit: Questo voto di test è già finito
     start: !!timestamp "2099-01-01"
     end: !!timestamp "2099-12-31"
     scope: National
-    body_de: Zukünftige Testabstimmung
-    body_fr: Futur vote de test
-    body_it: Futuro voto di test
+    bodyde: Zukünftige Testabstimmung
+    bodyfr: Futur vote de test
+    bodyit: Futuro voto di test
 
-  - title_de: Sieben Wochen Ferien für Auszubildende
-    title_fr: Sept semaines de vacances pour les apprentis et apprenties
-    title_it: Sette settimane di vacanze per gli apprendisti
-    description_de: Lernende in einem Lernbetrieb sollen mindestens sieben Wochen Ferien pro Jahr erhalten.
-    description_fr: Les apprentice doivent bénéficier d'au moins de sept semaines de vacances par an.
-    description_it: Gli apprendisti dovrebbero ricevere almeno sette settimane di vacanze all'anno.
+  - titlede: Sieben Wochen Ferien für Auszubildende
+    titlefr: Sept semaines de vacances pour les apprentis et apprenties
+    titleit: Sette settimane di vacanze per gli apprendisti
+    descriptionde: Lernende in einem Lernbetrieb sollen mindestens sieben Wochen Ferien pro Jahr erhalten.
+    descriptionfr: Les apprentice doivent bénéficier d'au moins de sept semaines de vacances par an.
+    descriptionit: Gli apprendisti dovrebbero ricevere almeno sette settimane di vacanze all'anno.
     start: !!timestamp "2021-08-01"
     end: !!timestamp "2021-09-15"
     scope: Public
-    body_de: |
+    bodyde: |
       #### Eine Klassen-Initiative aus Corsier-sur-Vevey (VD) bei «SpielPolitik!»
 
       ### Ausgangslage
@@ -234,7 +234,7 @@ ballot:
       ### Weitere Informationen
       Weitere Informationen findest Du im Abstimmungsbüchlein von «SpielPolitik!» [hier](/files/spielpolitik_de.pdf)
 
-    body_fr: |
+    bodyfr: |
       #### Une initiative de classe de Corsier-sur-Vevey (VD) de «Joue la politique !»
 
       ### Situation initiale
@@ -247,7 +247,7 @@ ballot:
       ### Plus d'informations
       Vous trouverez de plus amples informations dans le livret de vote de «Joue la politique !» [ici](/files/spielpolitik_fr.pdf)
 
-    body_it: |
+    bodyit: |
       #### Una iniziativa di classe da Corsier-sur-Vevey (VD) da «Giocca alla politica!»
 
       ### Situazione iniziale
@@ -260,16 +260,16 @@ ballot:
       ### Ulteriori informazioni
       Potete trovare più informazioni nel libretto delle votazioni di «Giocca alla politica!" [qui](/files/spielpolitik_it.pdf)
 
-  - title_de: Familienglück für alle
-    title_fr: Le bonheur familial pour tous
-    title_it: Felicità familiare per tutti
-    description_de: Es soll neu auch homosexuellen Paaren möglich sein, Kinder zu adoptieren.
-    description_fr: Il devrait également être possible pour les couples homosexuels d'adopter des enfants.
-    description_it: Dovrebbe anche essere possibile per le coppie omosessuali adottare bambini.
+  - titlede: Familienglück für alle
+    titlefr: Le bonheur familial pour tous
+    titleit: Felicità familiare per tutti
+    descriptionde: Es soll neu auch homosexuellen Paaren möglich sein, Kinder zu adoptieren.
+    descriptionfr: Il devrait également être possible pour les couples homosexuels d'adopter des enfants.
+    descriptionit: Dovrebbe anche essere possibile per le coppie omosessuali adottare bambini.
     start: !!timestamp "2021-08-01"
     end: !!timestamp "2021-09-15"
     scope: Public
-    body_de: |
+    bodyde: |
       #### Eine Klassen-Initiative aus Thierachern (BE) bei «SpielPolitik!»
 
       ### Ausgangslage
@@ -282,7 +282,7 @@ ballot:
       ### Weitere Informationen
       Weitere Informationen findest Du im Abstimmungsbüchlein von «SpielPolitik!» [hier](/files/spielpolitik_de.pdf)
 
-    body_fr: |
+    bodyfr: |
       #### Une initiative de classe de Thierachern (BE) de «Joue la politique !»
 
       ### Situation initiale
@@ -295,7 +295,7 @@ ballot:
       ### Plus d'informations
       Vous trouverez de plus amples informations dans le livret de vote de «Joue la politique !» [ici](/files/spielpolitik_fr.pdf)
 
-    body_it: |
+    bodyit: |
       #### Una iniziativa di classe da Thierachern (BE) da «Giocca alla politica!»
 
       ### Situazione iniziale
@@ -308,16 +308,16 @@ ballot:
       ### Ulteriori informazioni
       Potete trovare più informazioni nel libretto delle votazioni di «Giocca alla politica!" [qui](/files/spielpolitik_it.pdf)
 
-  - title_de: Wahl des Geschlechts
-    title_fr: Choix du genre
-    title_it: Scelta del genere
-    description_de: Jede Person soll das Recht haben, ihre Geschlechtszugehörigkeit selber zu definieren.
-    description_fr: Chaque personne devrait avoir le droit de définir sa propre identité de genre.
-    description_it: Tutte le persone dovrebbero avere il diritto di definire la propria identità di genere.
+  - titlede: Wahl des Geschlechts
+    titlefr: Choix du genre
+    titleit: Scelta del genere
+    descriptionde: Jede Person soll das Recht haben, ihre Geschlechtszugehörigkeit selber zu definieren.
+    descriptionfr: Chaque personne devrait avoir le droit de définir sa propre identité de genre.
+    descriptionit: Tutte le persone dovrebbero avere il diritto di definire la propria identità di genere.
     start: !!timestamp "2021-08-01"
     end: !!timestamp "2021-09-15"
     scope: Public
-    body_de: |
+    bodyde: |
       #### Eine Klassen-Initiative aus der Stadt Zürich (ZH) bei «SpielPolitik!»
 
       ### Ausgangslage
@@ -332,7 +332,7 @@ ballot:
       ### Weitere Informationen
       Weitere Informationen findest Du im Abstimmungsbüchlein von «SpielPolitik!» [hier](/files/spielpolitik_de.pdf)
 
-    body_fr: |
+    bodyfr: |
       #### Une initiative de classe de la ville de Zurich (ZH) de «Joue la politique !»
 
       ### Situation initiale
@@ -347,7 +347,7 @@ ballot:
       ### Plus d'informations
       Vous trouverez de plus amples informations dans le livret de vote de «Joue la politique !» [ici](/files/spielpolitik_fr.pdf)
 
-    body_it: |
+    bodyit: |
       #### Una iniziativa di classe de la città di Zurigo (VD) da «Giocca alla politica!»
 
       ### Situazione iniziale

@@ -155,24 +155,24 @@ enum VotingStatus {
 }
 
 model Ballot {
-  id              String      @id @default(cuid())
-  title           String      @default("")
-  title_de        String      @default("")
-  title_fr        String      @default("")
-  title_it        String      @default("")
-  description     String      @default("")
-  description_de  String      @default("")
-  description_fr  String      @default("")
-  description_it  String      @default("")
-  body            String      @default("")
-  body_de         String      @default("")
-  body_fr         String      @default("")
-  body_it         String      @default("")
-  original_locale String      @default("de")
-  start           DateTime
-  end             DateTime
-  scope           BallotScope @default(Public)
-  canton          String?
+  id             String      @id @default(cuid())
+  title          String      @default("")
+  titlede        String      @default("")
+  titlefr        String      @default("")
+  titleit        String      @default("")
+  description    String      @default("")
+  descriptionde  String      @default("")
+  descriptionfr  String      @default("")
+  descriptionit  String      @default("")
+  body           String      @default("")
+  bodyde         String      @default("")
+  bodyfr         String      @default("")
+  bodyit         String      @default("")
+  originalLocale String      @default("de") @map(name: "original_locale")
+  start          DateTime
+  end            DateTime
+  scope          BallotScope @default(Public)
+  canton         String?
 
   school    School? @relation(fields: [schoolId], references: [id])
   schoolId  String? @map(name: "school_id")
