@@ -5,23 +5,28 @@ import { MDXProvider } from "@mdx-js/react";
 import theme from "styles/theme";
 import { ThemeProvider } from "theme-ui";
 import { AppProps } from "next/app";
-import apollo from "util/apollo";
+import apolloGen from "util/apollo";
 import { RecoilRoot } from "recoil";
 import { Header } from "components/Header";
 import { Page } from "components/Page";
-import { ReactElement, useEffect } from "react";
+import { ReactElement, useEffect, useMemo } from "react";
 import CheckLogin from "components/CheckLogin";
 import initStats from "util/stats";
 import { remove } from "lodash";
 import { GlossaryReplace } from "components/Glossary";
+import { useRouter } from "next/router";
 
 function MyApp({ Component, pageProps }: AppProps): ReactElement {
+  const router = useRouter();
   useEffect(() => {
     initStats({
       url: "https://stats.teachen.ch",
       siteId: process.env.NEXT_PUBLIC_STATS_ID || 2,
     });
   }, []);
+  const apollo = useMemo(() => apolloGen({ locale: router.locale }), [
+    router.locale,
+  ]);
   return (
     <ApolloProvider client={apollo}>
       <RecoilRoot>
