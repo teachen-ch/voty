@@ -1,3 +1,16 @@
+# [1.58.0](https://github.com/teachen-ch/voty/compare/v1.57.2...v1.58.0) (2021-08-14)
+
+
+### Features
+
+* add locale to req.headers["accept-language"] ([99b4211](https://github.com/teachen-ch/voty/commit/99b42116d88b65e52ed76ea6be842e7a0e7979e5))
+* add originalLocale to ballots ([56bdf26](https://github.com/teachen-ch/voty/commit/56bdf267c57243e1eff7e5d3d368f334a6d8d798))
+* db migrations for multilingual ballots ([a35e69c](https://github.com/teachen-ch/voty/commit/a35e69c9c14704340be20e5fef71b667eb99b8f1))
+* final final migrations for multi-locale ballots ([efc2520](https://github.com/teachen-ch/voty/commit/efc2520ef4139417cf14d08c83f2cff597b511fe))
+* more texts and fake logos ([fee8b9d](https://github.com/teachen-ch/voty/commit/fee8b9d7cf67c5099e2c7229bd972480e34b12dc))
+* refactoring of graphql schema definitions ([4db0978](https://github.com/teachen-ch/voty/commit/4db0978b39f342a7c4ce5b045e54bd736219744c))
+* text update for zda ([c771d57](https://github.com/teachen-ch/voty/commit/c771d5736522c7d8e0c86483b0cdc1998e7d1986))
+
 ## [1.57.2](https://github.com/teachen-ch/voty/compare/v1.57.1...v1.57.2) (2021-08-10)
 
 
