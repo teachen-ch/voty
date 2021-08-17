@@ -1,5 +1,5 @@
 import React, { ReactElement, useEffect } from "react";
-import { ErrorPage, LoadingPage, Container } from "components/Page";
+import { ErrorPage, LoadingPage, Container, Loading } from "components/Page";
 import { Heading, Box, Flex, Text, Button, Image } from "rebass";
 import { Ballot, getBallotStatus, BallotStatus } from "components/Ballots";
 import { useRouter } from "next/router";
@@ -12,6 +12,7 @@ import {
   useStartBallotRunMutation,
   useEndBallotRunMutation,
   useGetBallotResultsQuery,
+  useBallotQuery,
 } from "graphql/types";
 import { useUser } from "state/user";
 import { Banner } from "components/Banner";
@@ -86,11 +87,17 @@ const BallotRunListing: React.FC<{ ballotRun: BallotRunFieldsFragment }> = ({
   ballotRun,
 }) => {
   const ballotRunId = ballotRun.id;
-  const ballot = ballotRun.ballot;
+  const ballotId = ballotRun.ballotId;
+  const ballotQuery = useBallotQuery({
+    variables: { where: { id: ballotId } },
+  });
+  const ballot = ballotQuery.data?.ballot;
   const [doStartRun] = useStartBallotRunMutation({
     variables: { ballotRunId },
   });
   const [doEndRun] = useEndBallotRunMutation({ variables: { ballotRunId } });
+
+  if (!ballot) return <Loading />;
 
   let buttonText = "Abstimmung ist noch nicht gestartet";
   let buttonColor = "gray";
@@ -117,7 +124,7 @@ const BallotRunListing: React.FC<{ ballotRun: BallotRunFieldsFragment }> = ({
   return (
     <Box key={ballotRun.id} mb={5}>
       <Ballot
-        ballot={ballotRun.ballot}
+        ballot={ballot}
         buttonText={buttonText}
         buttonColor={buttonColor}
         onButton={buttonAction}
@@ -136,7 +143,7 @@ const BallotRunDetail: React.FC<{ ballotRun: BallotRunFieldsFragment }> = ({
       <Heading as="h2" mt={0} mb={4}>
         {ballotRun.end ? "Endresultat:" : "Live-Resultat:"}
       </Heading>
-      <Results ballotId={ballotRun.ballot.id} ballotRunId={ballotRun.id} />
+      <Results ballotId={ballotRun.ballotId} ballotRunId={ballotRun.id} />
     </Box>
   );
 };

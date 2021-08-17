@@ -28,7 +28,7 @@ export const BallotRun = objectType({
   name: "BallotRun",
   definition(t) {
     t.nonNull.model.id();
-    t.nonNull.model.ballot();
+    t.nonNull.model.ballotId();
     t.model.team();
     t.model.start();
     t.model.end();
@@ -51,19 +51,19 @@ export const BallotsQueries = extendType({
     t.crud.ballot({
       async resolve(root, args, ctx, info, originalResolve) {
         const locale = ctx.req.headers["accept-language"];
-        const res = await originalResolve(root, args, ctx, info);
-        replaceLocale(res, locale);
-        return res;
+        const ballot = await originalResolve(root, args, ctx, info);
+        resolvers.ballots.replaceLocale(ballot, locale);
+        return ballot;
       },
     });
     t.crud.ballots({
       async resolve(root, args, ctx, info, originalResolve) {
         const locale = ctx.req.headers["accept-language"];
-        const res = await originalResolve(root, args, ctx, info);
-        res.forEach((b) => {
-          replaceLocale(b, locale);
+        const ballots = await originalResolve(root, args, ctx, info);
+        ballots.forEach((ballot) => {
+          resolvers.ballots.replaceLocale(ballot, locale);
         });
-        return res;
+        return ballots;
       },
       ordering: true,
       filtering: true,
@@ -91,21 +91,6 @@ export const BallotsQueries = extendType({
     });
   },
 });
-
-function replaceLocale(b: any, locale = "de") {
-  // @ts-ignore
-  // eslint-disable-next-line
-  const orig = b.originalLocale || "de";
-  // @ts-ignore
-  // eslint-disable-next-line
-  b.title = b["title" + locale] || b["title" + orig];
-  // @ts-ignore
-  // eslint-disable-next-line
-  b.description = b["description" + locale] || b["description" + orig];
-  // @ts-ignore
-  // eslint-disable-next-line
-  b.body = b["body" + locale] || b["body" + orig];
-}
 
 export const BallotsMutations = extendType({
   type: "Mutation",

@@ -9689,6 +9689,7 @@ export interface NexusGenObjects {
   };
   BallotRun: {
     // root type
+    ballotId: string; // String!
     end?: NexusGenScalars["DateTime"] | null; // DateTime
     id: string; // String!
     start?: NexusGenScalars["DateTime"] | null; // DateTime
@@ -9893,7 +9894,7 @@ export interface NexusGenFieldTypes {
   };
   BallotRun: {
     // field return type
-    ballot: NexusGenRootTypes["Ballot"]; // Ballot!
+    ballotId: string; // String!
     end: NexusGenScalars["DateTime"] | null; // DateTime
     id: string; // String!
     start: NexusGenScalars["DateTime"] | null; // DateTime
@@ -10166,7 +10167,7 @@ export interface NexusGenFieldTypeNames {
   };
   BallotRun: {
     // field return type name
-    ballot: "Ballot";
+    ballotId: "String";
     end: "DateTime";
     id: "String";
     start: "DateTime";

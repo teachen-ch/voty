@@ -7,6 +7,7 @@ import {
   useTeamByCodeQuery,
   useVoteCodeMutation,
   BallotRunFieldsFragment,
+  useBallotQuery,
 } from "graphql/types";
 import { BigGray } from "components/BigButton";
 import { ErrorBox } from "components/Form";
@@ -47,12 +48,18 @@ export default function PanelBallots(): ReactElement {
   return (
     <PanelPage heading="Jetzt bist Du dran!">
       {ballotRuns?.length
-        ? ballotRuns.map(
-            (ballotRun) =>
-              ballotRun && (
+        ? ballotRuns.map((ballotRun) => {
+            const ballotQuery = useBallotQuery({
+              variables: { where: { id: ballotRun?.id } },
+            });
+            const ballot = ballotQuery.data?.ballot;
+
+            return (
+              ballotRun &&
+              ballot && (
                 <Card key={ballotRun.id} py={3}>
                   <Text fontWeight="bold" fontSize="24px" lineHeight="24px">
-                    {ballotRun.ballot.title}
+                    {ballot.title}
                   </Text>
                   <VoteCode
                     ballotRun={ballotRun}
@@ -62,7 +69,8 @@ export default function PanelBallots(): ReactElement {
                   />
                 </Card>
               )
-          )
+            );
+          })
         : "Keine Abstimmungen gefunden."}
       <Box mt={300} />
     </PanelPage>

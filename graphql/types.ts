@@ -1836,7 +1836,7 @@ export type BallotResults = {
 
 export type BallotRun = {
   __typename?: 'BallotRun';
-  ballot: Ballot;
+  ballotId: Scalars['String'];
   end?: Maybe<Scalars['DateTime']>;
   id: Scalars['String'];
   start?: Maybe<Scalars['DateTime']>;
@@ -8986,11 +8986,7 @@ export type UserBallotFieldsFragment = (
 
 export type BallotRunFieldsFragment = (
   { __typename?: 'BallotRun' }
-  & Pick<BallotRun, 'id' | 'start' | 'end'>
-  & { ballot: (
-    { __typename?: 'Ballot' }
-    & BallotFieldsFragment
-  ) }
+  & Pick<BallotRun, 'id' | 'start' | 'end' | 'ballotId'>
 );
 
 export type BallotsQueryVariables = Exact<{
@@ -9884,11 +9880,9 @@ export const BallotRunFieldsFragmentDoc = gql`
   id
   start
   end
-  ballot {
-    ...BallotFields
-  }
+  ballotId
 }
-    ${BallotFieldsFragmentDoc}`;
+    `;
 export const LoginFieldsFragmentDoc = gql`
     fragment LoginFields on User {
   id

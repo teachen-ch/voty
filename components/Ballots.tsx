@@ -60,9 +60,7 @@ const BallotRunFields = gql`
     id
     start
     end
-    ballot {
-      ...BallotFields
-    }
+    ballotId
   }
   ${BallotFields}
 `;
@@ -238,7 +236,9 @@ export const StudentListBallots: React.FC<{
       {ballotsQuery.data.ballots.map((ballot) => (
         <Flex
           key={ballot.id}
-          onClick={() => router.push(`/team/${teamId}/ballots/${ballot.id}`)}
+          onClick={() =>
+            void router.push(`/team/${teamId}/ballots/${ballot.id}`)
+          }
           alignItems="center"
           bg="primary"
           mb={3}
@@ -361,7 +361,7 @@ export const SelectBallots: React.FC<{
     e.stopPropagation();
     if (removeMutation.loading || addMutation.loading)
       return alert("Bitte warten…");
-    const run = find(ballotRuns, { ballot: { id: ballotId } });
+    const run = find(ballotRuns, { ballotId: ballotId });
     if (run && typeof run == "object") {
       const results = await getResults(ballotId, run.id);
       if (results?.total !== 0) {
@@ -442,7 +442,7 @@ export const SelectBallots: React.FC<{
               </td>
               <td onClick={(evt) => toggleBallot(ballot.id, team.id, evt)}>
                 <Box variant="centered">
-                  {find(ballotRuns, { ballot: { id: ballot.id } }) ? (
+                  {find(ballotRuns, { ballotId: ballot.id }) ? (
                     <Image
                       src={IconCheckOn}
                       alt="ausgewählt"

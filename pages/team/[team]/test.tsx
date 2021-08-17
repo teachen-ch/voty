@@ -11,6 +11,7 @@ import {
   useAddBallotRunMutation,
   useRemoveBallotRunMutation,
   Role,
+  useBallotQuery,
 } from "graphql/types";
 import { useRouter } from "next/router";
 import { ReactElement } from "react";
@@ -83,17 +84,21 @@ export default function TeacherTest(): ReactElement {
       <Heading as="h2">Diese Abstimmungen wurden ausgewählt:</Heading>
       <div id="selectedBallots">
         {ballotRuns?.length
-          ? ballotRuns.map((run) =>
-              run ? (
+          ? ballotRuns.map((run) => {
+              const ballotQuery = useBallotQuery({
+                variables: { where: { id: run?.ballotId } },
+              });
+              const ballot = ballotQuery.data?.ballot;
+              return run && ballot ? (
                 <Ballot
                   key={run.id}
-                  ballot={run.ballot}
+                  ballot={ballot}
                   buttonText="Entfernen"
                   onButton={() => removeBallot(run.id)}
                   onDetail={detailBallot}
                 />
-              ) : null
-            )
+              ) : null;
+            })
           : "Noch keine Abstimmungen ausgewählt."}
       </div>
       <Heading as="h2">Aktuelle Abstimmungen zur Auswahl:</Heading>

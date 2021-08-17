@@ -1815,7 +1815,7 @@ type BallotResults {
 }
 
 type BallotRun {
-  ballot: Ballot!
+  ballotId: String!
   end: DateTime
   id: String!
   start: DateTime
