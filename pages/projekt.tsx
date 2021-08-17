@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import { Center } from "components/Learning";
 import { HideFeature } from "components/HideFeature";
 import { Team } from "components/Team";
+import { tr } from "util/translate";
 
 export default function Projekt(): React.ReactElement {
   const router = useRouter();
@@ -192,7 +193,7 @@ export const Detail: React.FC = ({ children }) => {
     <Text sx={{ display: "inline" }}>
       &nbsp;{" "}
       <A onClick={() => setOpen(!open)} variant="underline">
-        {open ? "… Details ausblenden" : "Im Detail…"}
+        {open ? tr("Misc.DetailClosed") : tr("Misc.DetailOpen")}
       </A>
       {open && children}
     </Text>

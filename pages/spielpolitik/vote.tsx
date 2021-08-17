@@ -12,10 +12,9 @@ import { tr } from "util/translate";
 export default function ZDAVote(): React.ReactElement {
   return (
     <ZDAFullPage heading={tr("ZDA.Header")}>
-      Jetzt bist Du dran! Diskutiere die Vorlagen, bilde Dir eine eigene Meinung
-      und stimme ab!
+      {tr("ZDA.Vote.Intro")}
       <Flex justifyContent="space-between" alignItems="flex-end">
-        <Heading fontSize={[2, 2, 3]}>Initiativen «SpielPolitik!»</Heading>
+        <Heading fontSize={[2, 2, 3]}>{tr("ZDA.Vote.Header2")}</Heading>
         <Image
           src="/images/logo_schulen_nach_bern2.png"
           width={100}
@@ -27,7 +26,7 @@ export default function ZDAVote(): React.ReactElement {
       <ZDABallots scope={BallotScope.Public} />
       <Flex justifyContent="space-between" alignItems="flex-end">
         <Heading mt={5} fontSize={[2, 2, 3]}>
-          Eidgenössische Abstimmungen vom 26. September
+          {tr("ZDA.Vote.Header2")}
         </Heading>
         <Image
           src="/images/easyvote.png"
@@ -38,9 +37,7 @@ export default function ZDAVote(): React.ReactElement {
         />
       </Flex>
       <ZDABallots scope={BallotScope.National} />
-      <Text variant="fielderror">
-        Die neuen Abstimmungen werden am Montag, 30. August 2021 aufgeschaltet
-      </Text>
+      <Text variant="fielderror">{tr("ZDA.Vote.Easywait")}</Text>
       <ZDAFAQ />
       <Box mt={5}></Box>
       <Logos />

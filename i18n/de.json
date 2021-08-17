@@ -1,7 +1,13 @@
 {
   "ZDA": {
     "Header": "Abstimmung zum Tag der Demokratie 2021",
-    "CreateButton": "Bestätigungs-Email schicken"
+    "CreateButton": "Bestätigungs-Email schicken",
+    "Vote": {
+      "Intro": "Jetzt bist Du dran! Diskutiere die Vorlagen, bilde Dir eine eigene Meinung und stimme ab!",
+      "Header1": "Initiativen «SpielPolitik!»",
+      "Header2": "Eidgenössische Abstimmungen vom 26. September",
+      "Easywait": "Die neuen Abstimmungen werden am Montag, 30. August 2021 aufgeschaltet"
+    }
   },
   "Signup": {
     "labelRole": "Ich bin",
@@ -64,5 +70,20 @@
   "Student": {
     "LegalText": "Wenn Du uns Deinen Jahrgang und Dein Geschlecht mitteilst, können wir bessere Hochrechnungen erstellen und die Meinung der Jugend in der Schweiz repräsentieren. Du darfst aber auch «möchte ich nicht angeben» auswählen. "
   },
-  "Not Authorised!": "Berechtigung fehlt!"
+  "Not Authorised!": "Berechtigung fehlt!",
+  "Misc": {
+    "DetailClosed": "Im Detail…",
+    "DetailOpen": "… Details ausblenden"
+  },
+  "VotyNow": {
+    "Yes": "Ja, ich stimme zu",
+    "No": "Nein, ich lehne ab",
+    "Abstain": "Ich möchte mich der Stimme enthalten",
+    "Login": "Um über diese Abstimmung abzustimmen, musst Du Dich zuerst",
+    "LoginLink": "anmelden",
+    "Success": "Du hast erfolgreich abgestimmt",
+    "NotStarted": "Abstimmung noch nicht gestartet",
+    "Closed": "Abstimmung ist beendet",
+    "Permission": "Du bist nicht für die Abstimmung berechtigt"
+  }
 }

@@ -1,7 +1,13 @@
 {
   "ZDA": {
-    "Header": "Voto per la giornata della democrazia 2021!",
-    "CreateButton": "verificare l'email"
+    "Header": "Voto per la Giornata della Democrazia 2021",
+    "CreateButton": "verificare l'email",
+    "Vote": {
+      "Intro": "Ora è il tuo turno! Discutete i documenti di voto, fatevi un'idea e votate!",
+      "Header1": "Iniziative «Gioca alla politica!»",
+      "Header2": "Voti popolari del 26 settembre",
+      "Easywait": "I nuovi voti saranno pubblicati lunedì 30 agosto 2021."
+    }
   },
   "Signup": {
     "labelRole": "Io sono",
@@ -64,5 +70,20 @@
   "Student": {
     "LegalText": "Wenn Du uns Deinen Jahrgang und Dein Geschlecht mitteilst, können wir bessere Hochrechnungen erstellen und die Meinung der Jugend in der Schweiz repräsentieren. Du darfst aber auch «möchte ich nicht angeben» auswählen. "
   },
-  "Not Authorised!": "Berechtigung fehlt!"
+  "Not Authorised!": "Berechtigung fehlt!",
+  "Misc": {
+    "DetailClosed": "In dettaglio...",
+    "DetailOpen": "… Nascondi dettagli"
+  },
+  "VotyNow": {
+    "Yes": "Sì, sono d'accordo",
+    "No": "No, rifiuto",
+    "Abstain": "Desidero astenermi dal voto",
+    "Login": "Per votare in questo sondaggio, devi prima ",
+    "LoginLink": "registrarti",
+    "Success": "Hai votato con successo",
+    "NotStarted": "Questo voto non è ancora iniziato",
+    "Closed": "Questo voto è chiuso",
+    "Permission": "Non sei idoneo a votare"
+  }
 }

@@ -16,10 +16,7 @@ export default function TeamHome(): React.ReactElement {
   const team = useTeamAnon();
 
   if (user?.role === Role.Student) return <StudentTeamPage />;
-
-  if (user?.role === Role.Teacher) {
-    return <TeacherTeamPage />;
-  }
+  if (user?.role === Role.Teacher) return <TeacherTeamPage />;
 
   if (!team) {
     return <AppPage heading="" />;

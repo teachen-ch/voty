@@ -13,6 +13,7 @@ import { Breadcrumb, A, Here } from "components/Breadcrumb";
 import { Nullable } from "simplytyped";
 import { Discussion } from "components/Discussion";
 import { HideFeature } from "components/HideFeature";
+import { tr } from "util/translate";
 
 export default function BallotPage(): ReactElement {
   const [success, setSuccess] = useState(false);
@@ -103,24 +104,24 @@ export const VotyNow: React.FC<{
   if (!user) {
     return (
       <Info type="default">
-        Um über diese Abstimmung abzustimmen, musst Du Dich zu erst{" "}
-        <Link href={loginLink}>anmelden</Link>.
+        {tr("VotyNow.Login")}{" "}
+        <Link href={loginLink}>{tr("VotyNow.LoginLink")}</Link>.
       </Info>
     );
   }
 
   const now = new Date();
   if (ballot.hasVoted === true) {
-    return <BigGray>Du hast erfolgreich abgestimmt</BigGray>;
+    return <BigGray>{tr("VotyNow.Success")}</BigGray>;
   }
   if (new Date(ballot.start) > now) {
-    return <BigGray>Abstimmung noch nicht gestartet</BigGray>;
+    return <BigGray>{tr("VotyNow.NotStarted")}</BigGray>;
   }
   if (new Date(ballot.end) < now) {
-    return <BigGray>Abstimmung ist beendet</BigGray>;
+    return <BigGray>{tr("VotyNow.Closed")}</BigGray>;
   }
   if (ballot.canVote === false) {
-    return <BigGray>Du bist nicht für die Abstimmung berechtigt</BigGray>;
+    return <BigGray>{tr("VotyNow.Permission")}</BigGray>;
   }
 
   async function vote(ballotId: string, vote: number) {
@@ -140,19 +141,19 @@ export const VotyNow: React.FC<{
                 <A onClick={() => vote(ballot.id, 1)}>
                   <Flex flexDirection="column" alignItems="center">
                     <Image src="/images/icon_yes.svg" height="50px" alt="Ja" />
-                    <Text mt={1}>Ja, ich stimme zu</Text>
+                    <Text mt={1}>{tr("VotyNow.Yes")}</Text>
                   </Flex>
                 </A>
                 <A onClick={() => vote(ballot.id, 2)}>
                   <Flex flexDirection="column" alignItems="center">
                     <Image src="/images/icon_no.svg" height="50px" alt="Nein" />
-                    <Text mt={1}>Nein, ich lehne ab</Text>
+                    <Text mt={1}>{tr("VotyNow.No")}</Text>
                   </Flex>
                 </A>
               </Flex>
               <Box variant="centered" mt={3} mb={4}>
                 <A onClick={() => vote(ballot.id, 0)} variant="underline">
-                  <Text fontSize={1}>Ich möchte mich der Stimme enthalten</Text>
+                  <Text fontSize={1}>{tr("VotyNow.Abstain")}</Text>
                 </A>
               </Box>
               <ErrorBox my={2} error={error} />
