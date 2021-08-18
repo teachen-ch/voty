@@ -48,34 +48,50 @@ export default function PanelBallots(): ReactElement {
   return (
     <PanelPage heading="Jetzt bist Du dran!">
       {ballotRuns?.length
-        ? ballotRuns.map((ballotRun) => {
-            const ballotQuery = useBallotQuery({
-              variables: { where: { id: ballotRun?.id } },
-            });
-            const ballot = ballotQuery.data?.ballot;
-
-            return (
-              ballotRun &&
-              ballot && (
-                <Card key={ballotRun.id} py={3}>
-                  <Text fontWeight="bold" fontSize="24px" lineHeight="24px">
-                    {ballot.title}
-                  </Text>
-                  <VoteCode
-                    ballotRun={ballotRun}
-                    refetch={refetch}
-                    code={code}
-                    voted={cookie[ballotRun.id] ? true : false}
-                  />
-                </Card>
+        ? ballotRuns.map(
+            (ballotRun) =>
+              ballotRun && (
+                <BallotRunDetail
+                  key={ballotRun.id}
+                  ballotRun={ballotRun}
+                  code={code}
+                  refetch={refetch}
+                  cookie={cookie}
+                />
               )
-            );
-          })
+          )
         : "Keine Abstimmungen gefunden."}
       <Box mt={300} />
     </PanelPage>
   );
 }
+
+const BallotRunDetail: React.FC<{
+  ballotRun: BallotRunFieldsFragment;
+  refetch: () => void;
+  cookie: Record<string, any>;
+  code: string;
+}> = ({ ballotRun, refetch, code, cookie }) => {
+  const ballotQuery = useBallotQuery({
+    variables: { where: { id: ballotRun.ballotId } },
+  });
+  const ballot = ballotQuery.data?.ballot;
+  if (!ballotRun || !ballot) return null;
+
+  return (
+    <Card key={ballotRun.id} py={3}>
+      <Text fontWeight="bold" fontSize="24px" lineHeight="24px">
+        {ballot.title}
+      </Text>
+      <VoteCode
+        ballotRun={ballotRun}
+        refetch={refetch}
+        code={code}
+        voted={cookie[ballotRun.id] ? true : false}
+      />
+    </Card>
+  );
+};
 
 const VoteCode: React.FC<{
   ballotRun: BallotRunFieldsFragment;
@@ -103,12 +119,12 @@ const VoteCode: React.FC<{
 
   if (!start || start > now)
     return (
-      <BigGray>
-        Abstimmung noch nicht gestartet{" "}
+      <Flex>
+        <BigGray>Abstimmung noch nicht gestartet </BigGray>
         <Button onClick={() => refetch()} fontSize={2}>
           Seite Aktualisieren
         </Button>
-      </BigGray>
+      </Flex>
     );
 
   if (end && end < now) return <BigGray>Abstimmung bereits beendet</BigGray>;

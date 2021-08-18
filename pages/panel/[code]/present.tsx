@@ -19,7 +19,7 @@ import { Banner } from "components/Banner";
 
 const POLLING_DELAY = Number(process.env.POLLING_DELAY) || 5000;
 
-export default function PanelBallots(): ReactElement {
+export default function PanelBallotsPresent(): ReactElement {
   const router = useRouter();
   const user = useUser();
   const code = String(router.query.code);

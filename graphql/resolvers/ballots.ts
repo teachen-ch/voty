@@ -188,14 +188,8 @@ export const addBallotRun: FieldResolver<"Mutation", "addBallotRun"> = async (
     where: {
       ballotId_teamId: { ballotId, teamId },
     },
-    include: { ballot: true },
   });
   if (!ballotRun) throw new Error("Error.CannotCreateBallotrun");
-
-  // translate ballot text to locale
-  const locale = ctx.req.headers["accept-language"];
-  replaceLocale(ballotRun.ballot, locale);
-  console.log(ballotRun.ballot.title);
   return ballotRun;
 };
 
@@ -270,13 +264,7 @@ export const getBallotRuns: FieldResolver<"Query", "getBallotRuns"> = async (
 
   const runs = await ctx.db.ballotRun.findMany({
     where: { teamId },
-    include: { ballot: true },
   });
-  const locale = ctx.req.headers["accept-language"];
-  runs.forEach((run) => {
-    replaceLocale(run.ballot, locale);
-  });
-  console.log(runs);
   return runs;
 };
 
@@ -429,6 +417,10 @@ export async function getHasVoted({
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export function replaceLocale(b: any, locale = "de"): void {
+  if (!b) {
+    console.warn("Empty ballot: ", b);
+    return;
+  }
   // @ts-ignore
   // eslint-disable-next-line
   const orig = b.originalLocale || "de";
