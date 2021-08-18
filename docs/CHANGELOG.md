@@ -1,3 +1,10 @@
+# [1.60.0](https://github.com/teachen-ch/voty/compare/v1.59.0...v1.60.0) (2021-08-18)
+
+
+### Features
+
+* minor zda translations, fixes, email subjects ([41c9709](https://github.com/teachen-ch/voty/commit/41c9709f9843a8b5e0344fcfd2babe4b5db9abdd))
+
 # [1.59.0](https://github.com/teachen-ch/voty/compare/v1.58.1...v1.59.0) (2021-08-18)
 
 
