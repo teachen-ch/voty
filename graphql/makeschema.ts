@@ -1,5 +1,5 @@
 import { makeSchema } from "@nexus/schema";
-import { PrismaClient } from "@prisma/client";
+import prismaSingleton from "util/prisma";
 import { nexusPrisma } from "nexus-plugin-prisma";
 import { permissions } from "./permissions";
 import { applyMiddleware } from "graphql-middleware";
@@ -11,8 +11,6 @@ import { GraphQLScalarType } from "graphql";
 import { isLocal } from "util/isBrowser";
 import { LoggerPlugin } from "util/nexusLogger";
 
-const prisma = new PrismaClient();
-
 export const LOG_INPUT = process.env.LOG_INPUT || false;
 export const LOG_GRAPHQL = process.env.LOG_GRAPHQL || true;
 
@@ -20,7 +18,7 @@ const baseSchema = makeSchema({
   types,
   plugins: [
     nexusPrisma({
-      prismaClient: (ctx) => (ctx.db = prisma),
+      prismaClient: (ctx) => (ctx.db = prismaSingleton),
       experimentalCRUD: true,
       shouldGenerateArtifacts: isLocal(),
       outputs: {

@@ -7,5 +7,6 @@ interface Window {
 declare namespace NodeJS {
   interface Global {
     _paq: (string | string[] | number | number[])[][];
+    prisma: PrismaClient;
   }
 }
