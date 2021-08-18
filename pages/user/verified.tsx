@@ -11,11 +11,13 @@ import { Grid } from "theme-ui";
 import { useQueryParam } from "util/hooks";
 import { getQueryParam, ensureSameDomain } from "util/isBrowser";
 import { trackEvent, usePageEvent } from "util/stats";
+import { useTr } from "util/translate";
 import { getStartpage } from "./login";
 
 export default function VerifiedPage(): React.ReactElement {
   const purpose = useQueryParam("p");
   const user = useUser();
+  const tr = useTr();
   const router = useRouter();
   const redirect = ensureSameDomain(
     getQueryParam("redirect", { sanitize: true })
@@ -23,7 +25,7 @@ export default function VerifiedPage(): React.ReactElement {
 
   if (!user)
     return (
-      <Page heading="Anmelden">
+      <Page heading={tr("Verification.Title")}>
         <CheckLogin />
         <Loading />
       </Page>
@@ -37,7 +39,7 @@ export default function VerifiedPage(): React.ReactElement {
       void router.push(String(redirect));
     } else {
       return (
-        <LoggedInPage heading="Anmelden">
+        <LoggedInPage heading={tr("Verification.Title")}>
           <Text mb={4}>
             Super, Deine Email-Adresse ist nun bestätigt.{" "}
             {isTeacher

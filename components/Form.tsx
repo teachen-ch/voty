@@ -339,10 +339,11 @@ export const ErrorBox: React.FC<ErrorBoxProps> = ({ error, ...props }) => {
 
 export const Submit: React.FC<{ label: string }> = ({ label }) => {
   const context = useFormikContext();
+  const tr = useTr();
   const submitting = context.isSubmitting;
   return (
     <Button type="submit" disabled={submitting} sx={{ gridColumn: [0, 0, 2] }}>
-      {submitting ? "Bitte warten..." : label}
+      {submitting ? tr("Misc.Wait") : label}
     </Button>
   );
 };

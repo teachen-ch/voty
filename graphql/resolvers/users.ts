@@ -379,7 +379,9 @@ export async function sendVerificationEmail(
       process.env.NODE_ENV !== "production" ? process.env.NODE_ENV : ""
     }`;
     const token = await createVerificationToken(db, email);
-    let url = `${process.env.BASE_URL}user/verify?t=${token}&p=${purpose}`;
+    const localePath = user.locale != "de" ? user.locale + "/" : "";
+    const base = `${process.env.BASE_URL}${localePath}`;
+    let url = `${base}user/verify?t=${token}&p=${purpose}`;
     if (redirect) {
       url += "&redirect=" + encodeURI(redirect);
     }

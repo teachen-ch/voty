@@ -1,13 +1,7 @@
 import { AppPage } from "components/Page";
 import { Text, Button, Heading, Card } from "rebass";
 import { gql } from "@apollo/client";
-import {
-  useState,
-  ReactElement,
-  Dispatch,
-  SetStateAction,
-  useEffect,
-} from "react";
+import { useState, ReactElement, Dispatch, SetStateAction } from "react";
 import { useRouter } from "next/router";
 import { QForm, yup, ErrorBox } from "../../components/Form";
 import { omit } from "lodash";
@@ -109,14 +103,12 @@ export const CreateUserForm: React.FC<{
       }
     },
   });
-  const [locale, setLocale] = useState(router.locale);
-  useEffect(() => {
-    setLocale(router.locale);
-  }, [router.locale]);
 
   function defaultSubmit(values: Record<string, any>) {
+    const data = omit(values, "submit");
+    data.locale = router.locale;
     // @ts-ignore this would need QForm to be typed...
-    return doCreateUser({ variables: { data: omit(values, "submit") } });
+    return doCreateUser({ variables: { data } });
   }
 
   const onSubmit = props.onSubmit || defaultSubmit;
@@ -164,7 +156,7 @@ export const CreateUserForm: React.FC<{
     },
     locale: {
       type: "hidden",
-      init: locale,
+      init: router.locale,
     },
     submit: {
       type: "submit",

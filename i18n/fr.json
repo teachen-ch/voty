@@ -51,7 +51,8 @@
     "DetailClosed": "En détail…",
     "DetailOpen": "… Cacher les détails",
     "ErrorTitle": "Erreur",
-    "Back": "Retour"
+    "Back": "Retour",
+    "Wait": "…"
   },
   "Verification": {
     "Title": "Inscrire",
