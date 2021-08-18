@@ -17,6 +17,7 @@ import { NextApiRequest } from "next";
 import { promises as fs } from "fs";
 import { pick, upperFirst } from "lodash";
 import { logActivity } from "./activities";
+import { translate } from "util/translate";
 
 let secret = process.env.SESSION_SECRET || "";
 if (!secret) console.error("No SESSION_SECRET defined in .env");
@@ -384,13 +385,12 @@ export async function sendVerificationEmail(
     }
 
     const subjects: Record<string, string> = {
-      verification: "voty: Bitte Email bestätigen",
-      reset: "voty: Passwort zurücksetzen?",
-      login: "voty: Jetzt anmelden?",
-      spielpolitik: "SpielPolitik! Bitte Email bestätigen",
+      verification: translate("Emails.Subject.Verify", user.locale),
+      reset: translate("Emails.Subject.Reset", user.locale),
+      login: translate("Emails.Subject.Login", user.locale),
+      spielpolitik: translate("Emails.Subject.Spielpolitik", user.locale),
     };
     const subject = template ? subjects[template] : subjects[purpose];
-
     const conf = { email: email.replace(/\./g, ".&#8203;"), url, site };
 
     template = template || purpose;

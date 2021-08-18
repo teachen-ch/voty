@@ -57,7 +57,16 @@
     "Back": "Indietro"
   },
   "Verification": {
-    "Title": "Registratione"
+    "Title": "Registratione",
+    "Check": "verificazione…"
+  },
+  "Emails": {
+    "Subject": {
+      "Verify": "voty: confirmer",
+      "Reset": "voty: password?",
+      "Login": "voty: login?",
+      "Spielpolitik": "Giocca alla politica - confermare"
+    }
   },
   "VotyNow": {
     "Yes": "Sì, sono d'accordo",

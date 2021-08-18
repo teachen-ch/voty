@@ -64,8 +64,8 @@ export default function Success({
       <FR>
         <Heading mt={0}>Bonjour {user?.name}</Heading>
         <Text>
-          Ton compte a été créé et nous avons envoyé un e-mail à « {user?.email}
-          ». Ouvre le lien dans l&apos;e-mail pour t&apos;inscrire.
+          Ton compte a été créé et nous avons envoyé un e-mail à {user?.email}.
+          Ouvre le lien dans l&apos;e-mail pour t&apos;inscrire.
         </Text>
         <Text my={4}>
           <strong>Aucun e-mail reçu ?</strong> Vérifie que ton adresse e-mail ne

@@ -14,8 +14,16 @@
       "Header1": "Initiatives «Joue la politique !»",
       "Header2": "Votations populaires du 26 septembre",
       "Easywait": "Les nouvelles votations seront postées le lundi 30 août 2021.",
-      "VoteNow": "Vote maintenant!",
+      "VoteNow": "Vote !",
       "Cancel": "Annuler"
+    }
+  },
+  "Emails": {
+    "Subject": {
+      "Verify": "voty: confirmer",
+      "Reset": "voty: mot de passe?",
+      "Login": "voty: login?",
+      "Spielpolitik": "Joue la politique – confirmer"
     }
   },
   "Signup": {
@@ -46,7 +54,8 @@
     "Back": "Retour"
   },
   "Verification": {
-    "Title": "Inscrire"
+    "Title": "Inscrire",
+    "Check": "vérification…"
   },
   "VotyNow": {
     "Yes": "Oui, j’accepte",

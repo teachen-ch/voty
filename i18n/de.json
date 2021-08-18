@@ -26,7 +26,16 @@
     "LoggedIn": "Du bist bereits mit einem Benutzer-Account angemeldet."
   },
   "Verification": {
-    "Title": "Anmelden"
+    "Title": "Anmelden",
+    "Check": "Überprüfen"
+  },
+  "Emails": {
+    "Subject": {
+      "Verify": "voty: Bitte Email bestätigen",
+      "Reset": "voty: Passwort zurücksetzen?",
+      "Login": "voty: Jetzt anmelden?",
+      "Spielpolitik": "SpielPolitik! Bitte Email bestätigen"
+    }
   },
   "Roles": {
     "Choose": "Bitte wählen",

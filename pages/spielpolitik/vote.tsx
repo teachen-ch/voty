@@ -15,7 +15,7 @@ export default function ZDAVote(): React.ReactElement {
     <ZDAFullPage heading={tr("ZDA.Header")}>
       {tr("ZDA.Vote.Intro")}
       <Flex justifyContent="space-between" alignItems="flex-end">
-        <Heading fontSize={[2, 2, 3]}>{tr("ZDA.Vote.Header2")}</Heading>
+        <Heading fontSize={[2, 2, 3]}>{tr("ZDA.Vote.Header1")}</Heading>
         <Image
           src="/images/logo_schulen_nach_bern2.png"
           width={100}

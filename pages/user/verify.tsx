@@ -55,14 +55,17 @@ export default function VerifyPage(): React.ReactElement {
 
   if (!token || !purpose) {
     return (
-      <AppPage heading={tr("Anmelden")}>
+      <AppPage heading={tr("Verification.Title")}>
         <Loading />
       </AppPage>
     );
   }
   if (error) {
     return (
-      <AppPage heading={tr("Anmelden")} onClose={() => void router.push("/")}>
+      <AppPage
+        heading={tr("Verification.Title")}
+        onClose={() => void router.push("/")}
+      >
         <Heading as="h2">{tr("Misc.ErrorTitle")}</Heading>
         <Text mb={4}>{error}</Text>
         <Button as="a" href="/user/login">
@@ -73,9 +76,12 @@ export default function VerifyPage(): React.ReactElement {
   }
 
   return (
-    <AppPage heading="Anmelden" onClose={() => void router.push("/")}>
+    <AppPage
+      heading={tr("Verification.Title")}
+      onClose={() => void router.push("/")}
+    >
       <Loading />
-      Überprüfen
+      {tr("Verification.Check")}
     </AppPage>
   );
 }
