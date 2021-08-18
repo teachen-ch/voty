@@ -1,3 +1,20 @@
+# [1.59.0](https://github.com/teachen-ch/voty/compare/v1.58.1...v1.59.0) (2021-08-18)
+
+
+### Bug Fixes
+
+* panel based voting ([368a74a](https://github.com/teachen-ch/voty/commit/368a74aff39af1bd09ed960ad6fa3950a7838684))
+
+
+### Features
+
+* misc translations ([10f73da](https://github.com/teachen-ch/voty/commit/10f73dacc215f1a413b08b954ec6d269c3ddc30a))
+* misc zda translations ([61ac62d](https://github.com/teachen-ch/voty/commit/61ac62dc2fbab8257926801c837b6b0258c01035))
+* prisma singleton to prevent hot reloading ([866e5ac](https://github.com/teachen-ch/voty/commit/866e5ac7ba4736f3c036fdbbaaf57edfdec29de8))
+* refactor ballotRun invocation ([17f8133](https://github.com/teachen-ch/voty/commit/17f8133d1ffd53d714563df251c2730ac9343154))
+* refactor translation engine and more translations ([fa6d140](https://github.com/teachen-ch/voty/commit/fa6d1404a08653c397ff2cad8f4b3274650a0921))
+* translated emails ([421cb67](https://github.com/teachen-ch/voty/commit/421cb674523089ece542808011d1d76aad5577ca))
+
 ## [1.58.1](https://github.com/teachen-ch/voty/compare/v1.58.0...v1.58.1) (2021-08-14)
 
 
