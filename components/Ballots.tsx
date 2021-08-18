@@ -296,11 +296,11 @@ export const Ballot: React.FC<{
 };
 
 export enum BallotStatus {
-  Not_Started = "Nicht gestartet",
-  Started = "Gestartet",
-  Ended = "Beendet",
-  Voted = "Erfolgreich abgestimmt",
-  Permission = "Nicht berechtigt",
+  Not_Started = "Ballot.Not_Started",
+  Started = "Ballot.Started",
+  Ended = "Ballot.Ended",
+  Voted = "Ballot.Voted",
+  Permission = "Ballot.Permission",
 }
 
 export const getBallotStatus = (ballot: BallotFieldsFragment): string => {

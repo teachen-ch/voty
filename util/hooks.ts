@@ -2,7 +2,6 @@ import { QueryResult } from "@apollo/client";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { isBrowser } from "util/isBrowser";
-import { tr } from "./translate";
 
 export function useQueryParam(name: string): string | undefined {
   const query = useRouter().query;
@@ -54,10 +53,4 @@ export function useNavHash(
     }
   }
   return [navHash, setNavHash];
-}
-
-export function useTr(): (code: string) => string {
-  const router = useRouter();
-  const locale = router.locale;
-  return (code: string) => tr(code, locale);
 }

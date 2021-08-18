@@ -1,6 +1,7 @@
 import { Box, Text, LinkProps, Link as RebassLink } from "rebass";
 import Link from "next/link";
 import React, { Fragment } from "react";
+import { useRouter } from "next/router";
 
 export const Breadcrumb: React.FC = ({ children }) => (
   <Box
@@ -20,10 +21,12 @@ export const Breadcrumb: React.FC = ({ children }) => (
 );
 
 export const A: React.FC<LinkProps & { locale?: string | false }> = (props) => {
+  const router = useRouter();
+  const locale = props.locale !== undefined ? props.locale : router.locale;
   const variant = props.variant || "underline";
   if (props.href) {
     return (
-      <Link href={props.href} locale={props.locale}>
+      <Link href={props.href} locale={locale}>
         <RebassLink variant={variant} {...props}>
           {props.children}
         </RebassLink>

@@ -10,7 +10,7 @@ import { useContext, useRef, useState } from "react";
 import { Box, Flex, Text, Image, BoxProps, Button } from "rebass";
 import { useUser } from "state/user";
 import { authHeaders } from "util/apollo";
-import { tr } from "util/translate";
+import { useTr } from "util/translate";
 import { CircleBullet } from "./Misc";
 import { Center } from "./Learning";
 import { Err, Loading } from "./Page";
@@ -109,6 +109,7 @@ export const UploadArea: React.FC<{
   const fileInput = useRef<HTMLInputElement>(null);
   const [error, setError] = useState("");
   const router = useRouter();
+  const tr = useTr();
   // TODO: this relies on Uploader being called from /pages/team/[id]/...
   const team = String(router.query.team);
   const fields: Record<string, string> = { team };
@@ -292,6 +293,7 @@ export const Attachment: React.FC<{
   refetch?: () => void;
 }> = ({ attachment, refetch, hideUser }) => {
   const user = useUser();
+  const tr = useTr();
   function canDelete() {
     return user
       ? attachment.user.id === user.id || user.role === Role.Teacher

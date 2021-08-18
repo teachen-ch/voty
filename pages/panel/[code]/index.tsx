@@ -13,7 +13,7 @@ import { BigGray } from "components/BigButton";
 import { ErrorBox } from "components/Form";
 import { getBrowserCookie } from "util/cookies";
 import { isBrowser } from "util/isBrowser";
-import { tr } from "util/translate";
+import { useTr } from "util/translate";
 import { PanelPage } from "./present";
 
 export default function PanelBallots(): ReactElement {
@@ -100,6 +100,7 @@ const VoteCode: React.FC<{
   refetch: () => void;
 }> = ({ ballotRun, code, voted, refetch }) => {
   const [error, setError] = useState("");
+  const tr = useTr();
   const [success, setSuccess] = useState(false);
   if (!isBrowser()) return null;
 

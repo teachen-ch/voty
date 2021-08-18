@@ -2,6 +2,7 @@
 // this is an ad-hoc translation solution until we invest into a proper
 // translation management system
 
+import { useRouter } from "next/router";
 import messages_de from "../i18n/de.json";
 import messages_fr from "../i18n/fr.json";
 import messages_it from "../i18n/it.json";
@@ -12,7 +13,17 @@ interface Translations {
 
 const matchNestedCode = new RegExp(/^\w+\.[\w.]+$/);
 
-export function tr(code: string, locale?: string, dict?: Translations): string {
+export function useTr(): (code: string) => string {
+  const router = useRouter();
+  const locale = router.locale;
+  return (code: string) => translate(code, locale);
+}
+
+export function translate(
+  code: string,
+  locale?: string,
+  dict?: Translations
+): string {
   // start with root Translations object
   if (!dict) dict = getDict(locale);
   // check for a nested key like Error.Login.ForgotPassword
@@ -22,7 +33,7 @@ export function tr(code: string, locale?: string, dict?: Translations): string {
       const [first, ...rest] = elems;
       const result = dict[first];
       if (typeof result !== "string") {
-        return tr(rest.join("."), locale, result);
+        return translate(rest.join("."), locale, result);
       }
     }
   }

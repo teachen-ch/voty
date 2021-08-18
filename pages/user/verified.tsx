@@ -89,13 +89,13 @@ function PasswordResetForm() {
       setSuccess(true);
     },
     onError() {
-      setError("Es ist ein Fehler aufgetreten.");
+      setError("Error.GenericError");
     },
   });
 
   async function checkPasswords(pw1: string, pw2: string) {
     if (pw1 !== pw2) {
-      return setError("Die beiden Passwörter stimmen nicht überein…");
+      return setError("Error.PasswordMatch");
     }
     return doChangePassword({ variables: { password } });
   }

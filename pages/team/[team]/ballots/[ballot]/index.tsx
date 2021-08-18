@@ -13,7 +13,7 @@ import { Breadcrumb, A, Here } from "components/Breadcrumb";
 import { Nullable } from "simplytyped";
 import { Discussion } from "components/Discussion";
 import { HideFeature } from "components/HideFeature";
-import { tr } from "util/translate";
+import { useTr } from "util/translate";
 
 export default function BallotPage(): ReactElement {
   const [success, setSuccess] = useState(false);
@@ -91,6 +91,7 @@ export const VotyNow: React.FC<{
 }> = ({ ballot, onSuccess, slim, loginLink = "/user/login" }) => {
   if (!ballot) return null;
   const [error, setError] = useState("");
+  const tr = useTr();
   const user = useUser();
   const [doVote] = useVoteMutation({
     onCompleted() {

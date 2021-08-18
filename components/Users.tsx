@@ -18,7 +18,7 @@ import IconOK from "../public/images/icon_user_ok.svg";
 import IconNOK from "../public/images/icon_user_nok.svg";
 import { Formik, Form, Field, ErrorMessage, useField } from "formik";
 import { Grid } from "theme-ui";
-import { tr } from "util/translate";
+import { useTr } from "util/translate";
 
 export const GET_USERS = gql`
   query users($where: UserWhereInput) {
@@ -142,6 +142,7 @@ export const ProfileEdit: React.FC<{
   const [error, setError] = useState("");
   const [edit, setEdit] = useState(editMode);
   const setUser = useSetUser();
+  const tr = useTr();
   const [doUpdateUser] = useUpdateUserMutation({
     onCompleted(data) {
       setUser(data.updateUser);

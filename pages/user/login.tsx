@@ -319,7 +319,7 @@ const RequestReset: React.FC<{ onCancel: () => void; email: string }> = ({
     },
     onError(err) {
       console.error(err);
-      setError("Es ist ein Fehler aufgetreten.");
+      setError("Error.GenericError");
     },
   });
 

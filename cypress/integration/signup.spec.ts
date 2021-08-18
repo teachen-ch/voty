@@ -1,4 +1,4 @@
-import { tr } from "../../util/translate";
+import { translate } from "../../util/translate";
 
 describe("Test Signup Page", () => {
   beforeEach(() => {
@@ -12,7 +12,7 @@ describe("Test Signup Page", () => {
     cy.findByLabelText("Email:").type("teacher@teachen.ch");
     cy.findByLabelText("Passwort:").type("Password2007");
     cy.get("button").contains("Konto erstellen").click();
-    cy.contains(tr("Error.DuplicateEmail"));
+    cy.contains(translate("Error.DuplicateEmail"));
   });
 
   it("Does not submit without correct email", () => {

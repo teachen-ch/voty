@@ -6,6 +6,7 @@ import { AppPage, Loading } from "components/Page";
 import { useQueryParam } from "util/hooks";
 import { useSetAccessToken, useSetUser } from "../../state/user";
 import { useCheckVerificationMutation } from "graphql/types";
+import { useTr } from "util/translate";
 
 export const CHECK_VERIFICATION = gql`
   mutation checkVerification($token: String!) {
@@ -22,6 +23,7 @@ export default function VerifyPage(): React.ReactElement {
   const setAccessToken = useSetAccessToken();
   const [error, setError] = useState("");
   const router = useRouter();
+  const tr = useTr();
   const client = useApolloClient();
   const redirect = useQueryParam("redirect");
   const [doVerification] = useCheckVerificationMutation({
@@ -36,7 +38,7 @@ export default function VerifyPage(): React.ReactElement {
       }
     },
     onError(error) {
-      setError("Dieser Email-Link ist leider nicht mehr gültig!");
+      setError("Error.InvalidVerificationLink");
       console.error(error.message);
     },
   });
@@ -53,18 +55,18 @@ export default function VerifyPage(): React.ReactElement {
 
   if (!token || !purpose) {
     return (
-      <AppPage heading="Anmelden">
+      <AppPage heading={tr("Anmelden")}>
         <Loading />
       </AppPage>
     );
   }
   if (error) {
     return (
-      <AppPage heading="Anmelden" onClose={() => void router.push("/")}>
-        <Heading as="h2">Fehler</Heading>
+      <AppPage heading={tr("Anmelden")} onClose={() => void router.push("/")}>
+        <Heading as="h2">{tr("Misc.ErrorTitle")}</Heading>
         <Text mb={4}>{error}</Text>
         <Button as="a" href="/user/login">
-          zurück
+          {tr("Misc.Back")}
         </Button>
       </AppPage>
     );

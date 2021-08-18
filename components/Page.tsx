@@ -11,7 +11,7 @@ import { TopBar } from "./TopBar";
 import IconClose from "../public/images/icon_close.svg";
 import { Spinner } from "theme-ui";
 import { Info } from "./Info";
-import { tr } from "util/translate";
+import { useTr } from "util/translate";
 import Image from "next/image";
 
 export const Page: React.FC<{
@@ -166,13 +166,15 @@ export const Loading: React.FC = () => (
   <Spinner color="white" size={20} mr={3} />
 );
 
-export const Err: React.FC<{ msg?: string }> = ({ msg, children }) =>
-  msg || children ? (
+export const Err: React.FC<{ msg?: string }> = ({ msg, children }) => {
+  const tr = useTr();
+  return msg || children ? (
     <Info type="important">
       {msg && tr(msg)}
       {children}
     </Info>
   ) : null;
+};
 
 export const ErrorPage: React.FC = (props) => (
   <Page heading="Fehler">

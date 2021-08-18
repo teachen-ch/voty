@@ -5,6 +5,7 @@ import { SessionUser } from "state/user";
 import { useEmailVerificationMutation } from "graphql/types";
 import { usePageEvent } from "util/stats";
 import { useRouter } from "next/router";
+import { DE, FR, IT } from "components/Translated";
 
 export default function Success({
   user,
@@ -21,7 +22,7 @@ export default function Success({
       setError("");
     },
     onError() {
-      setError("Es ist ein Fehler aufgetreten.");
+      setError("Error.GenericError");
     },
   });
 
@@ -36,26 +37,78 @@ export default function Success({
       minHeight="450px"
       sx={{ background: 'url("/images/voty_welcome.svg") center no-repeat' }}
     >
-      <Heading mt={0}>Hallo {user?.name}</Heading>
-      <Text>
-        Dein Konto wurde erstellt und wir haben ein Email an die Adresse «
-        {user?.email}» geschickt. Bitte öffne den Link in diesem Email, um Dich
-        anzumelden.
-      </Text>
-      <Text my={4}>
-        <strong>Keine Email erhalten?</strong> Bitte überprüfe Deine Email
-        Adresse auf Tippfehler ({user?.email}) und schau im Spam-Ordner nach.
-      </Text>
-      <Button variant="text" onClick={router.reload}>
-        Ich habe mich vertippt...
-      </Button>
-      {!mailSent ? (
-        <Button variant="text" onClick={doResend}>
-          Bestätigungsmail nochmals senden
+      <DE>
+        <Heading mt={0}>Hallo {user?.name}</Heading>
+        <Text>
+          Dein Konto wurde erstellt und wir haben ein Email an die Adresse «
+          {user?.email}» geschickt. Bitte öffne den Link in diesem Email, um
+          Dich anzumelden.
+        </Text>
+        <Text my={4}>
+          <strong>Keine Email erhalten?</strong> Bitte überprüfe Deine Email
+          Adresse auf Tippfehler ({user?.email}) und schau im Spam-Ordner nach.
+        </Text>
+        <Button variant="text" onClick={router.reload}>
+          Ich habe mich vertippt...
         </Button>
-      ) : (
-        "Das Bestätigungsmail wurde nochmals verschickt!"
-      )}
+        <br />
+        {!mailSent ? (
+          <Button variant="text" onClick={doResend}>
+            Bestätigungsmail nochmals senden
+          </Button>
+        ) : (
+          "Das Bestätigungsmail wurde nochmals verschickt!"
+        )}
+      </DE>
+
+      <FR>
+        <Heading mt={0}>Bonjour {user?.name}</Heading>
+        <Text>
+          Ton compte a été créé et nous avons envoyé un e-mail à « {user?.email}
+          ». Ouvre le lien dans l&apos;e-mail pour t&apos;inscrire.
+        </Text>
+        <Text my={4}>
+          <strong>Aucun e-mail reçu ?</strong> Vérifie que ton adresse e-mail ne
+          contient pas de fautes de frappe ({user?.email}) et vérifie ton
+          dossier spam.
+        </Text>
+        <Button variant="text" onClick={router.reload}>
+          J&apos;ai fait une erreur de frappe...
+        </Button>
+        <br />
+        {!mailSent ? (
+          <Button variant="text" onClick={doResend}>
+            Renvoyer l&apos;e-mail de confirmation
+          </Button>
+        ) : (
+          "L&apos;e-mail de confirmation a été envoyé à nouveau!"
+        )}
+      </FR>
+
+      <IT>
+        <Heading mt={0}>Ciao {user?.name}</Heading>
+        <Text>
+          Tuo account è stato creato e abbiamo inviato una mail a «{user?.email}
+          » Per favore apri il link in questa e-mail per registrarti.
+        </Text>
+        <Text my={4}>
+          <strong>Non hai ricevuto un&apos;email?</strong> Controlla che il tuo
+          indirizzo e-mail non contenga errori di battitura ({user?.email}) e
+          controlla la cartella dello spam.
+        </Text>
+        <Button variant="text" onClick={router.reload}>
+          Ho fatto un errore di battitura...
+        </Button>
+        <br />
+        {!mailSent ? (
+          <Button variant="text" onClick={doResend}>
+            Invia nuovamente l&apos;e-mail di conferma.
+          </Button>
+        ) : (
+          "L&apos;email di conferma è stata inviata di nuovo"
+        )}
+      </IT>
+
       <ErrorBox error={error} />
     </Flex>
   );

@@ -20,7 +20,7 @@ import * as yup from "yup";
 import React, { useMemo } from "react";
 import { omit } from "lodash";
 import { MutationFunction } from "@apollo/client";
-import { tr } from "util/translate";
+import { useTr } from "util/translate";
 
 export { Formik, Form, yup, Grid };
 
@@ -315,6 +315,7 @@ type ErrorBoxProps = BoxProps & {
 };
 
 export const ErrorBox: React.FC<ErrorBoxProps> = ({ error, ...props }) => {
+  const tr = useTr();
   if (!error) return null;
   return (
     <Box
@@ -329,7 +330,7 @@ export const ErrorBox: React.FC<ErrorBoxProps> = ({ error, ...props }) => {
       {...props}
     >
       <Text>
-        <b>Fehler: </b>
+        <b>{tr("Error.Title")}: </b>
         {tr(error)}
       </Text>
     </Box>

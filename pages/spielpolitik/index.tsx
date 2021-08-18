@@ -1,6 +1,5 @@
 import { Step } from "pages/abstimmen";
 import { Heading, Text } from "rebass";
-import { useTr } from "util/hooks";
 import { Box, Card, Image, Flex } from "rebass";
 import { A } from "components/Breadcrumb";
 import { CreateUserForm } from "pages/user/signup";
@@ -10,9 +9,8 @@ import { Role } from "graphql/types";
 import Head from "next/head";
 import { DE, FR, IT } from "components/Translated";
 import Success from "../user/success";
-import { trLink } from "util/translate";
+import { trLink, useTr } from "util/translate";
 import { useRouter } from "next/router";
-import { setBrowserCookie } from "../../util/cookies";
 
 export default function ZDAAbstimmung(): React.ReactElement {
   const user = useUser();
@@ -29,34 +27,20 @@ export default function ZDAAbstimmung(): React.ReactElement {
   return (
     <ZDAFullPage heading={tr("ZDA.Header")}>
       <Logos />
-      <DE>
-        Hier können Schüler*innen und Erwachsene über die Initiativen von
-        «SpielPolitik!» abstimmen und Jugendliche können für die eidgenössischen
-        Abstimmungen vom 26. September ihre Stimme abgeben.
-        <Box mb={5} mt={4}>
-          <Step n={hasUser ? "✔" : 1} mb={2} bg={hasUser ? "green" : "gray"}>
-            <Text fontStyle={hasUser ? "italic" : "normal"}>
-              Registriere Dich mit Deiner Email-Adresse
-            </Text>
-          </Step>
-          <Step n="2" mb={2}>
-            Klicke den Bestätigungslink im Email
-          </Step>
-          <Step n="3" mb={2}>
-            Stimme über alle Vorlagen ab
-          </Step>
-        </Box>
-      </DE>
-      <FR>
-        [Übersetzung Intro…]
-        <br />
-        <br />
-      </FR>
-      <IT>
-        [Übersetzung Intro…]
-        <br />
-        <br />
-      </IT>
+      {tr("ZDA.Start.Intro")}
+      <Box mb={5} mt={4}>
+        <Step n={hasUser ? "✔" : 1} mb={2} bg={hasUser ? "green" : "gray"}>
+          <Text fontStyle={hasUser ? "italic" : "normal"}>
+            {tr("ZDA.Start.Step1")}
+          </Text>
+        </Step>
+        <Step n="2" mb={2}>
+          {tr("ZDA.Start.Step2")}
+        </Step>
+        <Step n="3" mb={2}>
+          {tr("ZDA.Start.Step3")}
+        </Step>
+      </Box>
 
       {newUser ? (
         <Card>
@@ -75,9 +59,8 @@ export default function ZDAAbstimmung(): React.ReactElement {
           redirect={voteLink}
         />
       )}
-      {user && (
-        <A href="/spielpolitik/vote">Hier geht&apos;s zu den Abstimmungen</A>
-      )}
+      {user && <A href={voteLink}>{tr("ZDA.Start.GoVote")}</A>}
+      {user && <A href="/spielpolitik/vote">{tr("ZDA.Start.GoVote")}</A>}
       {user && (
         <A
           href="/user/logout?redirect=/spielpolitik/"
@@ -87,31 +70,47 @@ export default function ZDAAbstimmung(): React.ReactElement {
           Logout
         </A>
       )}
+      <br />
+      <br />
       <DE mt={4} fontSize={[1, 1, 2]}>
-        <Text>
-          <b>Initiativen «SpielPolitik!»</b>
-          <br />
-          «Sieben Wochen Ferien für Auszubildende», «Familienglück für alle»,
-          «Wahl des Geschlechts».{" "}
-          <A href="/files/spielpolitik_de.pdf" target="_blank">
-            Abstimmungsbüchlein herunterladen
-          </A>
-        </Text>
-        <Text mt={3}>
-          <b>Eidgenössische Volksabstimmungen vom 26. September</b>
-          <br />
-          «99% Initiative», «Ehe für Alle»
-        </Text>
+        <b>Initiativen «SpielPolitik!»</b>
+        <br />
+        «Sieben Wochen Ferien für Auszubildende», «Familienglück für alle»,
+        «Wahl des Geschlechts».{" "}
+        <A href="/files/spielpolitik_de.pdf" target="_blank">
+          Abstimmungsbüchlein herunterladen
+        </A>
+        <br />
+        <br />
+        <b>Eidgenössische Volksabstimmungen vom 26. September</b>
+        <br />
+        «99% Initiative», «Ehe für Alle»
       </DE>
       <FR>
+        <b>Initiatives « Joue la politique ! »</b>
+        <br />« Sept semaines de vacances pour les apprentis et apprenties », «
+        Le bonheur familial pour tous », « Choix du genre »{" "}
+        <A href="/files/spielpolitik_fr.pdf" target="_blank">
+          Télécharger le livret de vote
+        </A>
         <br />
         <br />
-        Salut les mecs. Diese Inhalte müssen noch übersetzt werden…
+        <b>Votations populaires du 26 septembre </b>
+        <br />« Initiative 99% », « Mariage pour tous ».
       </FR>
       <IT>
+        <b>Iniziative «Gioca alla politica!»</b>
+        <br />
+        «Sette settimane di vacanza per gli apprendisti», «Felicità familiare
+        per tutti», «Scelta del genere».{" "}
+        <A href="/files/spielpolitik_it.pdf" target="_blank">
+          Scarica il libretto di voto
+        </A>
         <br />
         <br />
-        Salutti a tutti. Diese Inhalte müssen noch übersetzt werden…
+        <b>Voti popolari del 26 settembre</b>
+        <br />
+        «Iniziativa 99%», «Matrimonio per tutti»
       </IT>
 
       <ZDAFAQ />
@@ -184,8 +183,8 @@ export const ZDAPage: React.FC<{
       px={3}
       pt={2}
     >
-      <A href="https://schulen-nach-bern.ch">zu schulen-nach-bern.ch</A>
-      <A href="/">zu voty.ch</A>
+      <A href="https://schulen-nach-bern.ch">schulen-nach-bern.ch</A>
+      <A href="/">voty.ch</A>
     </Flex>
     <Flex
       alignItems="center"
@@ -217,33 +216,17 @@ export const ZDAPage: React.FC<{
   </Flex>
 );
 function LanguageLinks() {
-  function setLocaleCookie(locale: string) {
-    setBrowserCookie("NEXT_LOCALE", locale);
-  }
-
   return (
     <Text fontSize={1} mb={4}>
-      <A
-        href="/spielpolitik"
-        locale={false}
-        onClick={() => setLocaleCookie("de")}
-      >
+      <A href="/spielpolitik" locale={false}>
         deutsch
       </A>
       <span>&nbsp;&nbsp;</span>
-      <A
-        href="/spielpolitik"
-        locale={"fr"}
-        onClick={() => setLocaleCookie("fr")}
-      >
+      <A href="/spielpolitik" locale="fr">
         français
       </A>
       <span>&nbsp;&nbsp;</span>
-      <A
-        href="/spielpolitik"
-        locale={"it"}
-        onClick={() => setLocaleCookie("it")}
-      >
+      <A href="/spielpolitik" locale="it">
         italiano
       </A>
     </Text>
@@ -255,55 +238,152 @@ export const ZDAFAQ: React.FC = () => (
     <Flex justifyContent="center">
       <Image src="/images/header_m2.svg" maxWidth={500} alignSelf="center" />
     </Flex>
-    <Heading as="h2" mt={3}>
-      Fragen und Antworten
-    </Heading>
-    <Title>Was ist «SpielPolitik!»?</Title>
-    <Text>
-      «SpielPolitik!» ist ein Projekt des Vereins{" "}
-      <A href="https://schulen-nach-bern.ch" rel="noreferrer">
-        schulen-nach-bern.ch
-      </A>{" "}
-      , welches vom Zentrum für Demokratie Aarau (ZDA) durchgeführt wird. Fünf
-      Mal pro Jahr können Schulklassen aus der ganzen Schweiz nach Bern reisen
-      und hautnah erleben, wie die Politik in Bundesbern abläuft.
-    </Text>
-    <Title>Wer steht hinter voty.ch?</Title>
-    <Text>
-      voty.ch ist ein Projekt des gemeinnützigen Vereins «Teachen!», unterstützt
-      durch den prototypefund.opendata.ch und die Stiftung Mercator. voty.ch
-      bietet kostenlos Online-Materialien für die politische Bildung und führt
-      Klassenabstimmungen während allen eidgenössischen Abstimmungen durch.
-    </Text>
-    <Title>Warum muss ich mich mit meiner Email-Adresse registrieren?</Title>
-    <Text>
-      Mit der Angabe Deiner Email-Adresse stellen wir sicher, dass jede Person
-      nur <A onClick={() => alert("pro Email-Adresse...")}>eine Stimme</A>{" "}
-      abgeben kann. Deine Email-Adresse wird nur zur Durchführung dieser
-      Abstimmung verwendet und nie an Dritte weitergegeben.
-    </Text>
-    <Title>
-      Kann ich diese Abstimmungen auch mit meiner Klasse durchführen?
-    </Title>
-    <Text>
-      Klar doch! Auf voty.ch können sich Lehrpersonen{" "}
-      <A href="/abstimmen">hier</A> registrieren (aktuell erst auf Deutsch) und
-      Schulklassen eröffnen. Danach können alle Schüler*innen in den Klassenraum
-      eingeladen werden, die Abstimmungen können durchgeführt werden und es ein
-      Lernplan mit interaktiven Online-Materialien zur politischen Bildung kann
-      zusammengestellt werden.
-    </Text>
-    <Title>
-      Ich möchte auch mit meiner Schulklasse nach Bern ins Bundeshaus!
-    </Title>
-    <Text>
-      Super! Auf{" "}
-      <A href="https://schulen-nach-bern.ch/anmeldung" rel="noreferrer">
-        schulen-nach-bern.ch/anmeldung
-      </A>{" "}
-      findest Du die nächsten Durchführungsdaten von «SpielPolitik!» und alle
-      Angaben zur Anmeldung.
-    </Text>
+    <DE>
+      <Heading as="h2" mt={3}>
+        Fragen und Antworten
+      </Heading>
+      <Title>Was ist «SpielPolitik!»?</Title>
+      <Text>
+        «SpielPolitik!» ist ein Projekt des Vereins{" "}
+        <A href="https://schulen-nach-bern.ch" rel="noreferrer">
+          schulen-nach-bern.ch
+        </A>{" "}
+        , welches vom Zentrum für Demokratie Aarau (ZDA) durchgeführt wird. Fünf
+        Mal pro Jahr können Schulklassen aus der ganzen Schweiz nach Bern reisen
+        und hautnah erleben, wie die Politik in Bundesbern abläuft.
+      </Text>
+      <Title>Wer steht hinter voty.ch?</Title>
+      <Text>
+        voty.ch ist ein Projekt des gemeinnützigen Vereins «Teachen!»,
+        unterstützt durch den prototypefund.opendata.ch und die Stiftung
+        Mercator. voty.ch bietet kostenlos Online-Materialien für die politische
+        Bildung und führt Klassenabstimmungen während allen eidgenössischen
+        Abstimmungen durch.
+      </Text>
+      <Title>Warum muss ich mich mit meiner Email-Adresse registrieren?</Title>
+      <Text>
+        Mit der Angabe Deiner Email-Adresse stellen wir sicher, dass jede Person
+        nur <A onClick={() => alert("pro Email-Adresse...")}>eine Stimme</A>{" "}
+        abgeben kann. Deine Email-Adresse wird nur zur Durchführung dieser
+        Abstimmung verwendet und nie an Dritte weitergegeben.
+      </Text>
+      <Title>
+        Kann ich diese Abstimmungen auch mit meiner Klasse durchführen?
+      </Title>
+      <Text>
+        Klar doch! Auf voty.ch können sich Lehrpersonen{" "}
+        <A href="/abstimmen">hier</A> registrieren (aktuell erst auf Deutsch)
+        und Schulklassen eröffnen. Danach können alle Schüler*innen in den
+        Klassenraum eingeladen werden, die Abstimmungen können durchgeführt
+        werden und es ein Lernplan mit interaktiven Online-Materialien zur
+        politischen Bildung kann zusammengestellt werden.
+      </Text>
+      <Title>
+        Ich möchte auch mit meiner Schulklasse nach Bern ins Bundeshaus!
+      </Title>
+      <Text>
+        Super! Auf{" "}
+        <A href="https://schulen-nach-bern.ch/anmeldung" rel="noreferrer">
+          schulen-nach-bern.ch/anmeldung
+        </A>{" "}
+        findest Du die nächsten Durchführungsdaten von «SpielPolitik!» und alle
+        Angaben zur Anmeldung.
+      </Text>
+    </DE>
+
+    <FR>
+      <Heading as="h2" mt={3}>
+        Questions et réponses
+      </Heading>
+      <Title>Qu&apos;est-ce que « Joue la politique !»?</Title>
+      <Text>
+        « Joue la politique !» est un projet de l&apos;association{" "}
+        <A href="https://schulen-nach-bern.ch/fr/" rel="noreferrer">
+          schulen-nach-bern.ch
+        </A>{" "}
+        , qui est gérée par le Centre pour la démocratie d&apos;Aarau (ZDA).
+        Cinq fois par an, des classes scolaires de toute la Suisse peuvent se
+        rendre à Berne et découvrir de visu comment se déroule la politique dans
+        la Berne fédérale.
+      </Text>
+      <Title>Qui est derrière voty.ch ?</Title>
+      <Text>
+        voty.ch est un projet de l&apos;association à but non lucratif « Teachen
+        ! », soutenu par prototypefund.opendata.ch et la Fondation Mercator.
+        voty.ch propose du matériel en ligne gratuit pour l&apos;éducation
+        politique et organise des votes en classe lors de toutes les votations
+        fédérales.
+      </Text>
+      <Title>
+        Pourquoi dois-je m&apos;inscrire avec mon adresse électronique ?
+      </Title>
+      <Text>
+        En fournissant ton adresse électronique, nous veillons à ce que chaque
+        personne ne puisse exprimer qu&apos;un{" "}
+        <A onClick={() => alert("par adresse électronique...")}></A>seul vote.
+        Ton adresse électronique ne sera utilisée que pour effectuer ce vote et
+        ne sera jamais transmise à des tiers.
+      </Text>
+      <Title>
+        J&apos;aimerais aussi emmener ma classe d&apos;école au Parlement
+        fédéral à Berne !
+      </Title>
+      <Text>
+        Super ! Sur{" "}
+        <A href="https://schulen-nach-bern.ch/fr/inscription" rel="noreferrer">
+          schulen-nach-bern.ch/fr/inscription
+        </A>{" "}
+        tu trouveras les prochaines dates de « Joue la politique ! » et toutes
+        les informations nécessaires pour t’inscrire.
+      </Text>
+    </FR>
+
+    <IT>
+      <Heading as="h2" mt={3}>
+        Domande e risposte
+      </Heading>
+      <Title>Che cos&apos;è «Gioca alla politica»?</Title>
+      <Text>
+        «Gioca alla politica!» è un progetto dell&apos;associazione{" "}
+        <A href="https://schulen-nach-bern.ch/it" rel="noreferrer">
+          schulen-nach-bern.ch
+        </A>{" "}
+        , gestita dal Centro per la democrazia di Aarau (ZDA). Cinque volte
+        all&apos;anno, le classi scolastiche di tutta la Svizzera possono
+        recarsi a Berna e sperimentare in prima persona come viene condotta la
+        politica nella capitale federale.
+      </Text>
+      <Title>Chi c&apos;è dietro voty.ch?</Title>
+      <Text>
+        voty.ch è un progetto dell&apos;organizzazione non-profit «Teachen!»
+        sostenuto da prototypefund.opendata.ch e dalla Fondazione Mercator.
+        voty.ch offre materiale online gratuito per l&apos;educazione politica e
+        organizza il voto in classe in tutte le elezioni federali.
+      </Text>
+      <Title>Perché devo registrarmi con il mio indirizzo e-mail?</Title>
+      <Text>
+        Fornendo il tuo indirizzo e-mail, ci assicuriamo che ogni persona possa
+        esprimere{" "}
+        <A onClick={() => alert("per indirizzo e-mail...")}>un solo voto</A>. Il
+        tuo indirizzo e-mail sarà utilizzato solo per questo voto e non sarà mai
+        trasmesso a terzi.
+      </Text>
+      <Title>
+        Mi piacerebbe anche portare la mia classe al Parlamento federale a
+        Berna!
+      </Title>
+      <Text>
+        Grande! Su{" "}
+        <A
+          href="https://schulen-nach-bern.ch/it/registrazione"
+          rel="noreferrer"
+        >
+          schulen-nach-bern.ch/it/registrazione
+        </A>{" "}
+        puoi trovare le prossime date di «Gioca alla politica!» e tutte le
+        informazioni necessarie per iscriverti.
+      </Text>
+    </IT>
   </Box>
 );
 

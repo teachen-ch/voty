@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import { Center } from "components/Learning";
 import { HideFeature } from "components/HideFeature";
 import { Team } from "components/Team";
-import { tr } from "util/translate";
+import { useTr } from "util/translate";
 
 export default function Projekt(): React.ReactElement {
   const router = useRouter();
@@ -189,6 +189,7 @@ export const Tag: React.FC<{ bg?: string }> = ({ children, bg }) => (
 
 export const Detail: React.FC = ({ children }) => {
   const [open, setOpen] = useState(false);
+  const tr = useTr();
   return (
     <Text sx={{ display: "inline" }}>
       &nbsp;{" "}

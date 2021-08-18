@@ -16,6 +16,7 @@ import {
 } from "graphql/types";
 import { useUser } from "state/user";
 import { Banner } from "components/Banner";
+import { useTr } from "util/translate";
 
 const POLLING_DELAY = Number(process.env.POLLING_DELAY) || 5000;
 
@@ -86,6 +87,7 @@ export default function PanelBallotsPresent(): ReactElement {
 const BallotRunListing: React.FC<{ ballotRun: BallotRunFieldsFragment }> = ({
   ballotRun,
 }) => {
+  const tr = useTr();
   const ballotRunId = ballotRun.id;
   const ballotId = ballotRun.ballotId;
   const ballotQuery = useBallotQuery({
@@ -99,22 +101,22 @@ const BallotRunListing: React.FC<{ ballotRun: BallotRunFieldsFragment }> = ({
 
   if (!ballot) return <Loading />;
 
-  let buttonText = "Abstimmung ist noch nicht gestartet";
+  let buttonText = tr("Abstimmung ist noch nicht gestartet");
   let buttonColor = "gray";
   let buttonAction;
   const status = getBallotStatus(ballot);
   if (status === BallotStatus.Started) {
     if (ballotRun.start) {
-      buttonText = ballotRun.end ? "Beendet" : "Beenden";
+      buttonText = ballotRun.end ? tr("Beendet") : tr("Beenden");
       buttonColor = ballotRun.end ? "gray" : "#d90000";
     } else {
-      buttonText = "Starten";
+      buttonText = tr("Starten");
       buttonColor = "green";
     }
     buttonAction = startStopBallot;
   }
   if (status === BallotStatus.Ended) {
-    buttonText = "Abstimmung bereits beendet";
+    buttonText = tr("Abstimmung bereits beendet");
   }
 
   async function startStopBallot() {

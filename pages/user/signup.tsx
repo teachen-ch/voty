@@ -14,7 +14,7 @@ import { omit } from "lodash";
 import { SessionUser, useUser } from "state/user";
 import { Role, useCreateUserMutation } from "graphql/types";
 import Success from "./success";
-import { useTr } from "util/hooks";
+import { useTr } from "util/translate";
 
 // TODO use fragment for ./successlds
 export const CREATE_USER = gql`
@@ -183,7 +183,7 @@ export const CreateUserForm: React.FC<{
   }
 
   if (existingUser) {
-    return <Text>Du bist bereits mit einem Benutzer-Account angemeldet.</Text>;
+    return <Text>{tr("Signup.LoggedIn")}</Text>;
   }
 
   return (

@@ -7,9 +7,10 @@ import { getUserBallotStatus } from "components/Ballots";
 import { Markdown } from "util/markdown";
 import { VotyNow } from "pages/team/[team]/ballots/[ballot]";
 import { Detail } from "pages/projekt";
-import { tr } from "util/translate";
+import { useTr } from "util/translate";
 
 export default function ZDAVote(): React.ReactElement {
+  const tr = useTr();
   return (
     <ZDAFullPage heading={tr("ZDA.Header")}>
       {tr("ZDA.Vote.Intro")}
@@ -47,6 +48,7 @@ export default function ZDAVote(): React.ReactElement {
 
 const ZDABallots: React.FC<{ scope: BallotScope }> = ({ scope }) => {
   const [detail, setDetail] = useState("");
+  const tr = useTr();
 
   const ballotsQuery = useUserBallotsQuery({
     variables: { where: { scope: { equals: scope } } },
@@ -92,10 +94,12 @@ const ZDABallots: React.FC<{ scope: BallotScope }> = ({ scope }) => {
                 onClick={() => detailBallot(ballot.id)}
                 variant={detail === ballot.id ? "secondary" : "primary"}
               >
-                {detail === ballot.id ? "Abbrechen" : "Jetzt abstimmen"}
+                {detail === ballot.id
+                  ? tr("ZDA.Vote.Cancel")
+                  : tr("ZDA.Vote.VoteNow")}
               </Button>
             ) : (
-              <Text fontSize={1}>{getUserBallotStatus(ballot)}</Text>
+              <Text fontSize={1}>{tr(getUserBallotStatus(ballot))}</Text>
             )}
           </Flex>
 
