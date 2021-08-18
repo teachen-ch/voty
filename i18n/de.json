@@ -2,18 +2,31 @@
   "ZDA": {
     "Header": "Abstimmung zum Tag der Demokratie 2021",
     "CreateButton": "Bestätigungs-Email schicken",
+    "Start": {
+      "Intro": "Hier können Schüler*innen und Erwachsene über die Initiativen von «SpielPolitik!» abstimmen und Jugendliche können für die eidgenössischen Abstimmungen vom 26. September ihre Stimme abgeben.",
+      "Step1": "Registriere Dich mit Deiner Email-Adresse",
+      "Step2": "Klicke den Bestätigungslink im Email",
+      "Step3": "Stimme über alle Vorlagen ab",
+      "GoVote": "Hier geht&apos;s zu den Abstimmungen"
+    },
     "Vote": {
       "Intro": "Jetzt bist Du dran! Diskutiere die Vorlagen, bilde Dir eine eigene Meinung und stimme ab!",
       "Header1": "Initiativen «SpielPolitik!»",
       "Header2": "Eidgenössische Abstimmungen vom 26. September",
-      "Easywait": "Die neuen Abstimmungen werden am Montag, 30. August 2021 aufgeschaltet"
+      "Easywait": "Die neuen Abstimmungen werden am Montag, 30. August 2021 aufgeschaltet",
+      "VoteNow": "Jetzt abstimmen!",
+      "Cancel": "Abbrechen"
     }
   },
   "Signup": {
     "labelRole": "Ich bin",
     "labelEmail": "Email",
     "placeholderEmail": "name@meineschule.ch",
-    "CreateButton": "Konto erstellen"
+    "CreateButton": "Konto erstellen",
+    "LoggedIn": "Du bist bereits mit einem Benutzer-Account angemeldet."
+  },
+  "Verification": {
+    "Title": "Anmelden"
   },
   "Roles": {
     "Choose": "Bitte wählen",
@@ -21,6 +34,13 @@
     "Student": "Schüler*in",
     "User": "Weltenbürger*in",
     "Principal": "Schulleiter*in"
+  },
+  "Ballot": {
+    "Not_Started": "Nicht gestartet",
+    "Started": "Gestartet",
+    "Ended": "Beendet",
+    "Voted": "Erfolgreich abgestimmt",
+    "Permission": "Nicht berechtigt"
   },
   "Error": {
     "BallotNotStarted": "Diese Abstimmung ist noch nicht gestartet",
@@ -39,6 +59,8 @@
     "DuplicateEmail": "Für diese Email-Adresse gibt es bereits ein Konto",
     "EmailNotFound": "Email-Adresse wurde nicht gefunden",
     "EmailNotVerified": "Deine Email-Adresse ist noch nicht bestätigt",
+    "GenericError": "Es ist ein Fehler aufgetreten",
+    "InvalidVerificationLink": "Dieser Email-Link ist leider nicht mehr gültig!",
     "InviteNotFound": "Die Einladung wurde nicht gefunden",
     "InviteTeacherRole": "Du bist aktuell als Lehrperson angemeldet",
     "MissingParameter": "Eine Eingabe fehlt",
@@ -53,12 +75,14 @@
     "NotFound": "Wir konnten dieses Element leider nicht finden",
     "OnlyUpdateSelf": "Du darfst nur Dein eigenes Profil bearbeiten",
     "PasswordChange": "Das Passwort konnte nicht geändert werden",
+    "PasswordMatch": "Die beiden Passwörter stimmen nicht überein…",
     "PasswordNotSet": "Es wurde kein Passwort gesetzt",
     "SendEmailVerification": "Das Bestätigungs-Email konnte nicht versendet werden",
     "SendEmailError": "Das Email konnte nicht versendet werden",
     "ServerError": "Ein Fehler ist aufgetreten",
     "StrangeCookie": "Fehlerhafte Anfrage",
     "TeamNotFound": "Diese Klasse wurde nicht gefunden",
+    "Title": "Fehler",
     "DiscussionNoTeam": "Du musst der Klasse angehören, um zu diskutieren",
     "TokenNotFound": "Dieser Code wurde nicht gefunden",
     "UserNotFound": "Dieses Konto wurde nicht gefunden",
@@ -73,7 +97,9 @@
   "Not Authorised!": "Berechtigung fehlt!",
   "Misc": {
     "DetailClosed": "Im Detail…",
-    "DetailOpen": "… Details ausblenden"
+    "DetailOpen": "… Details ausblenden",
+    "ErrorTitle": "Fehler",
+    "Back": "Zurück"
   },
   "VotyNow": {
     "Yes": "Ja, ich stimme zu",

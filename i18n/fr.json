@@ -2,29 +2,51 @@
   "ZDA": {
     "Header": "Votation pour la Journée de la démocratie 2021",
     "CreateButton": "verifiez email",
+    "Start": {
+      "Intro": "Ici, élèves et adultes peuvent voter sur les initiatives de « Joue la politique ! » et les jeunes peuvent voter pour les votations fédérales du 26 septembre.",
+      "Step1": "Enregistre-toi avec ton adresse e-mail",
+      "Step2": "Clique sur le lien de confirmation dans l'e-mail",
+      "Step3": "Vote sur toutes les propositions",
+      "GoVote": "Clique ici pour les votes"
+    },
     "Vote": {
       "Intro": "Maintenant, c'est ton tour ! Discute des documents de vote, fais-toi ta propre opinion et vote !",
       "Header1": "Initiatives «Joue la politique !»",
       "Header2": "Votations populaires du 26 septembre",
-      "Easywait": "Les nouvelles votations seront postées le lundi 30 août 2021."
+      "Easywait": "Les nouvelles votations seront postées le lundi 30 août 2021.",
+      "VoteNow": "Vote maintenant!",
+      "Cancel": "Annuler"
     }
   },
   "Signup": {
     "labelRole": "Je suis",
     "labelEmail": "Email",
     "placeholderEmail": "nom@monecole.ch",
-    "CreateButton": "Create Account"
+    "CreateButton": "Create Account",
+    "LoggedIn": "Tu es déjà connecté avec un compte."
   },
   "Roles": {
     "Choose": "Veuillez sélectionner",
     "Teacher": "Professeur*e",
     "Student": "Élève",
     "User": "Citoyen*ne du monde",
-    "Principal": "Directeur*trice"
+    "Principal": "Directeur/trice d'établissement"
+  },
+  "Ballot": {
+    "Not_Started": "Pas encore commencé",
+    "Started": "Lancé",
+    "Ended": "Terminé",
+    "Voted": "Voté avec succès",
+    "Permission": "Non autorisé"
   },
   "Misc": {
     "DetailClosed": "En détail…",
-    "DetailOpen": "… Cacher les détails"
+    "DetailOpen": "… Cacher les détails",
+    "ErrorTitle": "Erreur",
+    "Back": "Retour"
+  },
+  "Verification": {
+    "Title": "Inscrire"
   },
   "VotyNow": {
     "Yes": "Oui, j’accepte",
@@ -36,5 +58,11 @@
     "NotStarted": "Le vote n'a pas encore commencé",
     "Closed": "Ce vote est clos",
     "Permission": "Tu n'a pas le droit de voter"
+  },
+  "Error": {
+    "CreateUser": "Le compte ne peut pas être créé",
+    "GenericError": "Une erreur s'est produite",
+    "InvalidVerificationLink": "Ce lien e-mail n&apos;est malheureusement plus valide ! ",
+    "Title": "Erreur"
   }
 }

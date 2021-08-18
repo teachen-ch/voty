@@ -2,69 +2,48 @@
   "ZDA": {
     "Header": "Voto per la Giornata della Democrazia 2021",
     "CreateButton": "verificare l'email",
+    "Start": {
+      "Intro": "Qui, studenti e adulti possono votare le iniziative di «Gioca alla politica!» e i giovani possono votare alle elezioni federali del 26 settembre.",
+      "Step1": "Registrati con il tuo indirizzo e-mail",
+      "Step2": "Clicca sul link di conferma nell'e-mail",
+      "Step3": "Vota tutte le proposte",
+      "GoVote": "Clicca qui per i voti"
+    },
     "Vote": {
       "Intro": "Ora è il tuo turno! Discutete i documenti di voto, fatevi un'idea e votate!",
       "Header1": "Iniziative «Gioca alla politica!»",
       "Header2": "Voti popolari del 26 settembre",
-      "Easywait": "I nuovi voti saranno pubblicati lunedì 30 agosto 2021."
+      "Easywait": "I nuovi voti saranno pubblicati lunedì 30 agosto 2021.",
+      "VoteNow": "Vota ora!",
+      "Cancel": "Cancella"
     }
   },
   "Signup": {
     "labelRole": "Io sono",
     "labelEmail": "Email",
     "placeholderEmail": "nome@miascoula.ch",
-    "CreateButton": "Creare un account"
+    "CreateButton": "Creare un account",
+    "LoggedIn": "Sei già loggato con un account"
   },
   "Roles": {
     "Choose": "si prega di selezionare",
-    "Teacher": "professore",
-    "Student": "studente",
-    "User": "cittadino del mondo",
-    "Principal": "direttore"
+    "Teacher": "Professore",
+    "Student": "Alunno*a",
+    "Principal": "Direttore/trice della scuola",
+    "User": "Cittadino*a del mondo"
+  },
+  "Ballot": {
+    "Not_Started": "Non iniziato",
+    "Started": "Lanciato",
+    "Ended": "Finito",
+    "Voted": "Votato con successo",
+    "Permission": "Non autorizzato"
   },
   "Error": {
-    "BallotNotStarted": "Diese Abstimmung ist noch nicht gestartet",
-    "BallotEnded": "Diese Abstimmung ist bereits beendet",
-    "BallotcodeWrong": "Ungültiger Abstimmungscode",
-    "AlreadyInTeam": "Du bist bereits in dieser Klasse",
-    "AlreadyVoted": "Du hast bereits über diese Vorlage abgestimmt",
-    "VotecodeFailed": "Datenbank-Fehler",
-    "BallotrunCannotRemove": "Abstimmung kann nicht abgewählt werden",
-    "BallotrunNotFound": "Abstimmung nicht gefunden",
-    "BallotNotFound": "Abstimmung nicht gefunden",
-    "CannotCreateBallotrun": "Abstimmung kann nicht ausgewählt werden",
-    "CannotDeleteAccount": "Konto kann nicht gelöscht werden. Bitte kontaktiere uns",
-    "CreateUser": "Konto kann nicht erstellt werden",
-    "Database": "Ein Fehler in der Datenbank ist aufgetreten",
-    "DuplicateEmail": "Für diese Email-Adresse gibt es bereits ein Konto",
-    "EmailNotFound": "Email-Adresse wurde nicht gefunden",
-    "EmailNotVerified": "Deine Email-Adresse ist noch nicht bestätigt",
-    "InviteNotFound": "Die Einladung wurde nicht gefunden",
-    "InviteTeacherRole": "Du bist aktuell als Lehrperson angemeldet",
-    "MissingParameter": "Eine Eingabe fehlt",
-    "NeedsLogin": "Eine Anmeldung wird benötigt für diese Funktion",
-    "NotYourTeam": "Du bist nicht in dieser Klasse angemeldet",
-    "NoBallotSpecified": "Keine Abstimmung ausgewählt",
-    "NoEmail": "Keine Email-Adresse angegeben",
-    "NoPassword": "Kein Passwort angegeben",
-    "NoPermission": "Berechtigung fehlt für diese Aktion",
-    "NoTeamSchool": "Es wurde keine Klasse / Schulhaus angegeben",
-    "NoToken": "Deine Anmeldung hat nicht geklappt",
-    "NotFound": "Wir konnten dieses Element leider nicht finden",
-    "OnlyUpdateSelf": "Du darfst nur Dein eigenes Profil bearbeiten",
-    "PasswordChange": "Das Passwort konnte nicht geändert werden",
-    "PasswordNotSet": "Es wurde kein Passwort gesetzt",
-    "SendEmailVerification": "Das Bestätigungs-Email konnte nicht versendet werden",
-    "SendEmailError": "Das Email konnte nicht versendet werden",
-    "ServerError": "Ein Fehler ist aufgetreten",
-    "StrangeCookie": "Fehlerhafte Anfrage",
-    "TeamNotFound": "Diese Klasse wurde nicht gefunden",
-    "DiscussionNoTeam": "Du musst der Klasse angehören, um zu diskutieren",
-    "TokenNotFound": "Dieser Code wurde nicht gefunden",
-    "UserNotFound": "Dieses Konto wurde nicht gefunden",
-    "UserPassword": "Email oder Passwort passen leider nicht zueinander…",
-    "VotingNeedsLogin": "Die Abstimmung benötigt eine Anmeldung",
-    "VotingNotAllowed": "Abstimmen nicht erlaubt"
+    "CreateUser": "L'account non può essere creato",
+    "GenericError": "Si è verificato un errore",
+    "InvalidVerificationLink": "Questo link e-mail purtroppo non è più valido!",
+    "Title": "Errore"
   },
   "Teacher": { "LegalText": "" },
   "Student": {
@@ -73,7 +52,12 @@
   "Not Authorised!": "Berechtigung fehlt!",
   "Misc": {
     "DetailClosed": "In dettaglio...",
-    "DetailOpen": "… Nascondi dettagli"
+    "DetailOpen": "… Nascondi dettagli",
+    "ErrorTitle": "Error",
+    "Back": "Indietro"
+  },
+  "Verification": {
+    "Title": "Registratione"
   },
   "VotyNow": {
     "Yes": "Sì, sono d'accordo",
