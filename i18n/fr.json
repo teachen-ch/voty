@@ -71,7 +71,7 @@
   "Error": {
     "CreateUser": "Le compte ne peut pas être créé",
     "GenericError": "Une erreur s'est produite",
-    "InvalidVerificationLink": "Ce lien e-mail n&apos;est malheureusement plus valide ! ",
+    "InvalidVerificationLink": "Ce lien e-mail n'est malheureusement plus valide ! ",
     "Title": "Erreur"
   }
 }

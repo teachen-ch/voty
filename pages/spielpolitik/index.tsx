@@ -60,7 +60,6 @@ export default function ZDAAbstimmung(): React.ReactElement {
         />
       )}
       {user && <A href={voteLink}>{tr("ZDA.Start.GoVote")}</A>}
-      {user && <A href="/spielpolitik/vote">{tr("ZDA.Start.GoVote")}</A>}
       {user && (
         <A
           href="/user/logout?redirect=/spielpolitik/"
@@ -215,18 +214,21 @@ export const ZDAPage: React.FC<{
     </Flex>
   </Flex>
 );
+
 function LanguageLinks() {
+  const router = useRouter();
+  const path = router.pathname;
   return (
     <Text fontSize={1} mb={4}>
-      <A href="/spielpolitik" locale={false}>
+      <A href={path} locale={false}>
         deutsch
       </A>
       <span>&nbsp;&nbsp;</span>
-      <A href="/spielpolitik" locale="fr">
+      <A href={path} locale="fr">
         français
       </A>
       <span>&nbsp;&nbsp;</span>
-      <A href="/spielpolitik" locale="it">
+      <A href={path} locale="it">
         italiano
       </A>
     </Text>
