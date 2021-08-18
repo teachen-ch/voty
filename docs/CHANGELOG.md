@@ -1,3 +1,11 @@
+## [1.60.1](https://github.com/teachen-ch/voty/compare/v1.60.0...v1.60.1) (2021-08-18)
+
+
+### Bug Fixes
+
+* further zda fixes including signup locale bug ([9436829](https://github.com/teachen-ch/voty/commit/943682974227201b34000d8f4e5d418a4c0742d7))
+* typos + more flexible language links ([0a34057](https://github.com/teachen-ch/voty/commit/0a3405714264aeb75ce9e1971059e929df47cf80))
+
 # [1.60.0](https://github.com/teachen-ch/voty/compare/v1.59.0...v1.60.0) (2021-08-18)
 
 
