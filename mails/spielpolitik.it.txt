@@ -1,0 +1,8 @@
+Conferma dell'indirizzo e-mail per votare
+
+
+Per votare, devi prima confermare il tuo indirizzo e-mail. Clicca qui su questo link:
+
+{{&url}}
+
+Se non vuoi votare, puoi cancellare questa email.

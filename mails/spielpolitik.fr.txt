@@ -1,7 +1,8 @@
-Confirme ton email pour voter
+Confirmation de l’adresse mail pour les votations
 
-Um abzustimmen musst Du zuerst Deine Email-Adresse bestätigen. Klicke hier auf diesen Link:
+
+Pour voter, tu dois d'abord confirmer ton adresse e-mail. Clique ici sur ce lien :
 
 {{&url}}
 
-Wenn Du Dich nicht abstimmmen möchtest, kannst Du dieses Mail löschen.
+Si tu ne souhaites pas voter, tu peux supprimer ce mail. 

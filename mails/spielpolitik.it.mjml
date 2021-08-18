@@ -12,20 +12,20 @@
     <mj-section>
       <mj-column width="470px">
         <mj-text align="center" font-size="27px" font-weight="bold"
-          >Confirmation de l’adresse mail pour les votations</mj-text
+          >Conferma dell'indirizzo e-mail per votare</mj-text
         >
         <mj-text font-size="20px" color="#000"
-          >Pour voter, tu dois d'abord confirmer ton adresse e-mail. Clique ici sur ce lien :</mj-text
+          >Per votare, devi prima confermare il tuo indirizzo e-mail. Clicca qui su questo link:</mj-text
         >
         <mj-button
           href="{{&url}}"
           background-color="#206DBB"
           font-weight="bold"
           font-size="20px"
-          >Confirmer maintenant</mj-button
+          >Conferma ora</mj-button
         >
         <mj-text font-size="20px">
-          Si tu ne souhaites pas voter, tu peux supprimer ce mail.</mj-text
+          Se non vuoi votare, puoi cancellare questa email.</mj-text
         >
       </mj-column>
     </mj-section>
