@@ -194,7 +194,7 @@ export const Detail: React.FC = ({ children }) => {
     <Text sx={{ display: "inline" }}>
       &nbsp;{" "}
       <A onClick={() => setOpen(!open)} variant="underline">
-        {open ? tr("Misc.DetailClosed") : tr("Misc.DetailOpen")}
+        {open ? tr("Misc.DetailOpen") : tr("Misc.DetailClosed")}
       </A>
       {open && children}
     </Text>
