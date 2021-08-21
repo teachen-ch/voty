@@ -1,3 +1,15 @@
+# [1.61.0](https://github.com/teachen-ch/voty/compare/v1.60.1...v1.61.0) (2021-08-21)
+
+
+### Bug Fixes
+
+* translation error ([ac6f9dc](https://github.com/teachen-ch/voty/commit/ac6f9dc8428f9a0a364349578d7bc01b1b2b896a))
+
+
+### Features
+
+* add documentation about database migrations ([7ff15dc](https://github.com/teachen-ch/voty/commit/7ff15dc817b0c8dd83e0041a8557ae05e77849d1))
+
 ## [1.60.1](https://github.com/teachen-ch/voty/compare/v1.60.0...v1.60.1) (2021-08-18)
 
 
