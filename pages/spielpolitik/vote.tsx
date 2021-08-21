@@ -24,7 +24,7 @@ export default function ZDAVote(): React.ReactElement {
           alt="Schulen nach Bern Logo"
         />
       </Flex>
-      <ZDABallots scope={BallotScope.Public} />
+      <ZDABallots scope={BallotScope.Public} maxAge={45} />
       <Flex justifyContent="space-between" alignItems="flex-end">
         <Heading mt={5} fontSize={[2, 2, 3]}>
           {tr("ZDA.Vote.Header2")}
@@ -37,7 +37,7 @@ export default function ZDAVote(): React.ReactElement {
           alt="EasyVote Logo"
         />
       </Flex>
-      <ZDABallots scope={BallotScope.National} />
+      <ZDABallots scope={BallotScope.National} maxAge={45} />
       <Text variant="fielderror">{tr("ZDA.Vote.Easywait")}</Text>
       <ZDAFAQ />
       <Box mt={5}></Box>
@@ -46,14 +46,28 @@ export default function ZDAVote(): React.ReactElement {
   );
 }
 
-const ZDABallots: React.FC<{ scope: BallotScope }> = ({ scope }) => {
+const ZDABallots: React.FC<{ scope: BallotScope; maxAge: number }> = ({
+  scope,
+  maxAge,
+}) => {
   const [detail, setDetail] = useState("");
   const tr = useTr();
 
   const ballotsQuery = useUserBallotsQuery({
-    variables: { where: { scope: { equals: scope } } },
+    variables: {
+      where: {
+        scope: { equals: scope },
+      },
+    },
   });
-  const ballots = ballotsQuery.data?.ballots;
+
+  // only show ballots with end-date less than maxAge days ago
+  const old = maxAge * 24 * 60 * 60 * 1000;
+  const ballots = maxAge
+    ? ballotsQuery.data?.ballots.filter(
+        (ballot) => new Date(ballot.end).getTime() > Date.now() - old
+      )
+    : ballotsQuery.data?.ballots;
 
   if (!ballots || ballotsQuery.loading) return <Loading />;
 
