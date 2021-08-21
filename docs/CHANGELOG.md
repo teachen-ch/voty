@@ -1,3 +1,10 @@
+# [1.62.0](https://github.com/teachen-ch/voty/compare/v1.61.0...v1.62.0) (2021-08-21)
+
+
+### Features
+
+* hide older ballots on zda page ([9e2a8f9](https://github.com/teachen-ch/voty/commit/9e2a8f90fcdeea245ebe9eeced50b8742e5a5032))
+
 # [1.61.0](https://github.com/teachen-ch/voty/compare/v1.60.1...v1.61.0) (2021-08-21)
 
 
