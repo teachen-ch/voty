@@ -1,3 +1,10 @@
+# [1.63.0](https://github.com/teachen-ch/voty/compare/v1.62.0...v1.63.0) (2021-08-22)
+
+
+### Features
+
+* major refactoring to get next-eslint quiet ([5cf12a7](https://github.com/teachen-ch/voty/commit/5cf12a7bd572c4cda712bc2a5856bd66277075f0))
+
 # [1.62.0](https://github.com/teachen-ch/voty/compare/v1.61.0...v1.62.0) (2021-08-21)
 
 
