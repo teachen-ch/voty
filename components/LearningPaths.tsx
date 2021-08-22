@@ -41,38 +41,9 @@ export const LearningPath: React.FC<{ path: string; anon?: boolean }> = ({
   return (
     <Box py={3} px={3} mb={5} bg="darkgray">
       <Table>
-        {cards.map((id) => {
-          const [details, setDetails] = useState(true);
-          const card = getCardMeta(id);
-          if (!card) return <Err msg={`Inhalt «${id}» wurde nicht gefunden`} />;
-          return (
-            <TR
-              noHover
-              key={id}
-              onMouseOver={() => setDetails(true)}
-              height={details ? "60px" : "40px"}
-              onMouseOut={() => setDetails(true)}
-            >
-              <TD flexy>
-                <A href={`${teamLink}/cards/${card.id}`} variant="link">
-                  {card.title}
-                </A>
-                {details && (
-                  <Text fontSize={1} overflow="show" wrap="wrap">
-                    {upperFirst(String(card.type))}: {card.description}
-                  </Text>
-                )}
-              </TD>
-              <TDIcon mr={0}>
-                <Image src={IconWatch} />
-              </TDIcon>
-              <TD width="130px" fixed smHide>
-                {card?.duration}
-              </TD>
-              <TDImage src={getCardTypeIcon(card?.type)} />
-            </TR>
-          );
-        })}
+        {cards.map((id) => (
+          <CardDetail key={id} id={id} teamLink={teamLink} />
+        ))}
       </Table>
       {!anon && (
         <Button
@@ -90,5 +61,41 @@ export const LearningPath: React.FC<{ path: string; anon?: boolean }> = ({
       )}
       <Err msg={error} />
     </Box>
+  );
+};
+
+const CardDetail: React.FC<{ id: string; teamLink: string }> = ({
+  id,
+  teamLink,
+}) => {
+  const [details, setDetails] = useState(true);
+  const card = getCardMeta(id);
+  if (!card) return <Err msg={`Inhalt «${id}» wurde nicht gefunden`} />;
+  return (
+    <TR
+      noHover
+      key={id}
+      onMouseOver={() => setDetails(true)}
+      height={details ? "60px" : "40px"}
+      onMouseOut={() => setDetails(true)}
+    >
+      <TD flexy>
+        <A href={`${teamLink}/cards/${card.id}`} variant="link">
+          {card.title}
+        </A>
+        {details && (
+          <Text fontSize={1} overflow="show" wrap="wrap">
+            {upperFirst(String(card.type))}: {card.description}
+          </Text>
+        )}
+      </TD>
+      <TDIcon mr={0}>
+        <Image src={IconWatch} alt="" />
+      </TDIcon>
+      <TD width="130px" fixed smHide>
+        {card?.duration}
+      </TD>
+      <TDImage src={getCardTypeIcon(card?.type)} />
+    </TR>
   );
 };

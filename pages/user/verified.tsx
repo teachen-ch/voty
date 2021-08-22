@@ -9,7 +9,7 @@ import { Text, Button, Heading } from "rebass";
 import { useSetAccessToken, useSetUser, useUser } from "state/user";
 import { Grid } from "theme-ui";
 import { useQueryParam } from "util/hooks";
-import { getQueryParam, ensureSameDomain } from "util/isBrowser";
+import { getQueryParam, ensureSameDomain, isBrowser } from "util/isBrowser";
 import { trackEvent, usePageEvent } from "util/stats";
 import { useTr } from "util/translate";
 import { getStartpage } from "./login";
@@ -23,13 +23,14 @@ export default function VerifiedPage(): React.ReactElement {
     getQueryParam("redirect", { sanitize: true })
   );
 
-  if (!user)
+  if (!user) {
     return (
       <Page heading={tr("Verification.Title")}>
         <CheckLogin />
         <Loading />
       </Page>
     );
+  }
 
   const isTeacher = user?.role === Role.Teacher;
   // token verification succeded, we have a session & user
@@ -65,7 +66,9 @@ export default function VerifiedPage(): React.ReactElement {
     if (redirect) {
       void router.push(String(redirect));
     } else {
-      void router.push(getStartpage(user?.role));
+      if (isBrowser() && user) {
+        void router.push(getStartpage(user?.role));
+      }
     }
     return <LoggedInPage />;
   }

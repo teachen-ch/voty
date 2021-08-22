@@ -89,7 +89,6 @@ export const VotyNow: React.FC<{
   slim?: boolean;
   loginLink?: string;
 }> = ({ ballot, onSuccess, slim, loginLink = "/user/login" }) => {
-  if (!ballot) return null;
   const [error, setError] = useState("");
   const tr = useTr();
   const user = useUser();
@@ -101,6 +100,7 @@ export const VotyNow: React.FC<{
       setError(err.message);
     },
   });
+  if (!ballot) return null;
 
   if (!user) {
     return (

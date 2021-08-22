@@ -266,7 +266,6 @@ export const updateUser: FieldResolver<"Mutation", "updateUser"> = async (
   }
   const result = await ctx.db.user.update({
     where: { id: id || undefined },
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore    TODO: this barks on a mismatch in the Gender Enum defined by Nexus and Prisma??!
     data,
   });

@@ -9,32 +9,32 @@ export default function AdminHome(): ReactElement {
     <LoggedInPage heading="Admin Bereich" role={Role.Admin}>
       <Text lineHeight="2em">
         <Text>
-          <Link href="/admin/users">
+          <Link href="/admin/users" passHref>
             <A>😀 Benutzer</A>
           </Link>
         </Text>
         <Text>
-          <Link href="/admin/teachers">
+          <Link href="/admin/teachers" passHref>
             <A>🧑🏼‍🤝‍🧑🏻 Lehrpersonen</A>
           </Link>
         </Text>
         <Text>
-          <Link href="/admin/teams">
+          <Link href="/admin/teams" passHref>
             <A>🖖 Klassen</A>
           </Link>
         </Text>
         <Text>
-          <Link href="/admin/schools">
+          <Link href="/admin/schools" passHref>
             <A>🏫 Schulen</A>
           </Link>
         </Text>
         <Text>
-          <Link href="/admin/ballots">
+          <Link href="/admin/ballots" passHref>
             <A>🗳 Abstimmungen</A>
           </Link>
         </Text>
         <Text>
-          <Link href="/admin/stats">
+          <Link href="/admin/stats" passHref>
             <A>📈 Statistiken</A>
           </Link>
         </Text>

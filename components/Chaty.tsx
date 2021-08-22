@@ -9,7 +9,7 @@ import {
   TMessage,
 } from "components/ChatElements";
 import { Box, Button, Text, Link } from "rebass";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { getCardTitle } from "./Cards";
 import { useTeam } from "state/user";
 import { useRouter } from "next/router";
@@ -36,53 +36,56 @@ export const Chaty: React.FC<{
 
   useEffect(() => {
     return () => clearTimeout(cancel);
-  }, []);
-
-  useEffect(() => {
-    if (document?.location?.hash === "#autostart") doChat();
-  }, []);
+  }, [cancel]);
 
   // scroll to bottom on every new message
   useEffect(() => {
     if (started && !showAll) messagesEndRef.current?.scrollBy(0, 1000);
-  }, [show]);
+  }, [show, showAll, started]);
 
-  function doChat(line = 0, input?: string) {
-    if (line < 0 || line >= messages.length) {
-      return;
-    }
-    setInputMessage(undefined);
-    setStarted(true);
-    const msg = messages[line];
-    const chars = msg.message?.length || 10;
-    const wait = Math.min((1 / speed) * WAIT * chars, (1 / speed) * MAX_WAIT);
+  const doChat = useCallback(
+    (line = 0, input?: string) => {
+      if (line < 0 || line >= messages.length) {
+        return;
+      }
+      setInputMessage(undefined);
+      setStarted(true);
+      const msg = messages[line];
+      const chars = msg.message?.length || 10;
+      const wait = Math.min((1 / speed) * WAIT * chars, (1 / speed) * MAX_WAIT);
 
-    setShow(messages.slice(0, line + 1));
-    if (showAll) return;
+      setShow(messages.slice(0, line + 1));
+      if (showAll) return;
 
-    if (messages[line].direction === Direction.Outgoing && !input) {
-      setInputMessage(messages[line]);
-      return;
-    }
+      if (messages[line].direction === Direction.Outgoing && !input) {
+        setInputMessage(messages[line]);
+        return;
+      }
 
-    if (line + 1 < messages.length) {
-      if (messages[line + 1].direction !== Direction.Outgoing) {
-        setTyping(true);
-        setCancel(setTimeout(() => doChat(line + 1), wait));
+      if (line + 1 < messages.length) {
+        if (messages[line + 1].direction !== Direction.Outgoing) {
+          setTyping(true);
+          setCancel(setTimeout(() => doChat(line + 1), wait));
+        } else {
+          setTyping(false);
+          setCancel(
+            setTimeout(
+              () => setInputMessage(messages[line + 1]),
+              (1 / speed) * 1000
+            )
+          );
+        }
       } else {
         setTyping(false);
-        setCancel(
-          setTimeout(
-            () => setInputMessage(messages[line + 1]),
-            (1 / speed) * 1000
-          )
-        );
+        setFinished(true);
       }
-    } else {
-      setTyping(false);
-      setFinished(true);
-    }
-  }
+    },
+    [messages, showAll, speed]
+  );
+
+  useEffect(() => {
+    if (document?.location?.hash === "#autostart") doChat();
+  }, [doChat]);
 
   if (!started) {
     return (
@@ -256,7 +259,6 @@ function parseMessage(lines: string, ix: number): TMessage {
   let children = undefined;
 
   // check for special commands: GIPHY / IMAGE / BUTTON, etc.
-  // eslint-disable-next-line @typescript-eslint/prefer-regexp-exec
   const match = message.match(/^([A-Z]{3,}):?\s+/);
   if (match && match[1]) {
     type = match[1];
@@ -292,7 +294,7 @@ function specialMessage(type: string, rest: string): React.ReactNode {
     case "IMAGE":
     case "IMG":
     case "BILD":
-      return <img src={rest} width="200" />;
+      return <img src={rest} width="200" alt="Bild" />;
     case "BUTTONS":
     case "MENU": {
       // either single line: MENU (bla) (bli) (blo)

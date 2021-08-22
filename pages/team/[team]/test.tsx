@@ -12,6 +12,7 @@ import {
   useRemoveBallotRunMutation,
   Role,
   useBallotQuery,
+  BallotRunFieldsFragment,
 } from "graphql/types";
 import { useRouter } from "next/router";
 import { ReactElement } from "react";
@@ -24,7 +25,6 @@ export default function TeacherTest(): ReactElement {
   const router = useRouter();
   const team = useTeam();
   const [doAddBallotRun] = useAddBallotRunMutation();
-  const [doRemoveBallotRun] = useRemoveBallotRunMutation();
 
   const ballotRunsQuery = useGetBallotRunsQuery({
     variables: { teamId: String(team?.id) },
@@ -57,23 +57,10 @@ export default function TeacherTest(): ReactElement {
       </LoggedInPage>
     );
 
-  function detailBallot(ballot: BallotFieldsFragment) {
-    void router.push(`/ballots/${ballot.id}`);
-  }
-
   async function addBallot(ballotId: string, teamId: string) {
     trackEvent({ category: "Teacher", action: "AddBallot" });
     await doAddBallotRun({
       variables: { ballotId, teamId },
-      refetchQueries: ["getBallotRuns"],
-    });
-    window.scrollTo(0, 0);
-  }
-
-  async function removeBallot(ballotRunId: string) {
-    trackEvent({ category: "Teacher", action: "RemoveBallot" });
-    await doRemoveBallotRun({
-      variables: { ballotRunId },
       refetchQueries: ["getBallotRuns"],
     });
     window.scrollTo(0, 0);
@@ -84,21 +71,9 @@ export default function TeacherTest(): ReactElement {
       <Heading as="h2">Diese Abstimmungen wurden ausgewählt:</Heading>
       <div id="selectedBallots">
         {ballotRuns?.length
-          ? ballotRuns.map((run) => {
-              const ballotQuery = useBallotQuery({
-                variables: { where: { id: run?.ballotId } },
-              });
-              const ballot = ballotQuery.data?.ballot;
-              return run && ballot ? (
-                <Ballot
-                  key={run.id}
-                  ballot={ballot}
-                  buttonText="Entfernen"
-                  onButton={() => removeBallot(run.id)}
-                  onDetail={detailBallot}
-                />
-              ) : null;
-            })
+          ? ballotRuns.map(
+              (run) => run && <BallotRunDetail run={run} key={run.id} />
+            )
           : "Noch keine Abstimmungen ausgewählt."}
       </div>
       <Heading as="h2">Aktuelle Abstimmungen zur Auswahl:</Heading>
@@ -109,7 +84,7 @@ export default function TeacherTest(): ReactElement {
             ballot={ballot}
             buttonText="Auswählen"
             onButton={() => addBallot(ballot.id, team.id)}
-            onDetail={detailBallot}
+            onDetail={() => void router.push(`/ballots/${ballot.id}`)}
           />
         ))}
       </div>
@@ -119,6 +94,34 @@ export default function TeacherTest(): ReactElement {
   );
 }
 
+const BallotRunDetail: React.FC<{ run: BallotRunFieldsFragment }> = ({
+  run,
+}) => {
+  const [doRemoveBallotRun] = useRemoveBallotRunMutation();
+  const router = useRouter();
+  async function removeBallot(ballotRunId: string) {
+    trackEvent({ category: "Teacher", action: "RemoveBallot" });
+    await doRemoveBallotRun({
+      variables: { ballotRunId },
+      refetchQueries: ["getBallotRuns"],
+    });
+    window.scrollTo(0, 0);
+  }
+  const ballotQuery = useBallotQuery({
+    variables: { where: { id: run?.ballotId } },
+  });
+  const ballot = ballotQuery.data?.ballot;
+  return run && ballot ? (
+    <Ballot
+      key={run.id}
+      ballot={ballot}
+      buttonText="Entfernen"
+      onButton={() => removeBallot(run.id)}
+      onDetail={() => void router.push(`/ballots/${ballot.id}`)}
+    />
+  ) : null;
+};
+
 const PanelCode: React.FC<{
   team: TeamTeacherFieldsFragment;
   hasRuns: boolean;
@@ -127,7 +130,11 @@ const PanelCode: React.FC<{
   return (
     <Text id="livepanel">
       Seite für Live-Abstimmungen:{" "}
-      <Link href="/panel/[code]/present" as={`/panel/${team.code}/present`}>
+      <Link
+        href="/panel/[code]/present"
+        as={`/panel/${team.code}/present`}
+        passHref
+      >
         <Button>Code: {team.code}</Button>
       </Link>
     </Text>

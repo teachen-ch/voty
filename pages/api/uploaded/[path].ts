@@ -7,13 +7,13 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 const UPLOAD_FOLDER = process.env.UPLOAD_FOLDER || "uploads/";
 
-export default async (
+export default async function uploadedApi(
   req: NextApiRequest,
   res: NextApiResponse<{
     success?: boolean;
     error?: string;
   }>
-): Promise<void> => {
+): Promise<void> {
   try {
     const file = req.url?.replace("/api/uploaded/", "");
     if (!file) return res.send({ error: "Error.MissingParameter" });
@@ -35,4 +35,4 @@ export default async (
     logger.error(err);
     res.send({ error: "Error.ServerError" });
   }
-};
+}

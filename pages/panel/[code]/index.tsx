@@ -102,7 +102,6 @@ const VoteCode: React.FC<{
   const [error, setError] = useState("");
   const tr = useTr();
   const [success, setSuccess] = useState(false);
-  if (!isBrowser()) return null;
 
   const [doVoteCode] = useVoteCodeMutation({
     onCompleted() {
@@ -112,6 +111,7 @@ const VoteCode: React.FC<{
       setError(tr(err.message));
     },
   });
+  if (!isBrowser()) return null;
 
   const now = new Date();
   const start = ballotRun.start ? new Date(ballotRun.start) : undefined;

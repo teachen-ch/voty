@@ -13,7 +13,7 @@ export const config = {
 const UPLOAD_FOLDER = process.env.UPLOAD_FOLDER || "uploads/";
 const prisma = new PrismaClient();
 
-export default async (
+export default async function uploadApi(
   req: NextApiRequest,
   res: NextApiResponse<{
     success?: boolean;
@@ -21,7 +21,7 @@ export default async (
     files?: Record<string, File>;
     attachments?: Record<string, Attachment>;
   }>
-): Promise<void> => {
+): Promise<void> {
   try {
     const user = getSessionUser(req);
 
@@ -73,7 +73,7 @@ export default async (
     res.send({ error: "Error.ServerError" });
     res.end();
   }
-};
+}
 
 function formParse(
   req: NextApiRequest,

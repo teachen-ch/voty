@@ -15,7 +15,14 @@ import {
 import { AttachmentFields } from "components/Uploader";
 import { Flex, Text, FlexProps, Box, BoxProps, Button } from "rebass";
 import { useTeam, useUser } from "state/user";
-import { ChangeEvent, useContext, useEffect, useRef, useState } from "react";
+import {
+  ChangeEvent,
+  useCallback,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { Err, Loading } from "./Page";
 import { find, omit, remove, truncate } from "lodash";
 import Image from "next/image";
@@ -108,7 +115,7 @@ export const Works: React.FC<
     if (trigger) {
       void worksQuery.refetch();
     }
-  }, [trigger]);
+  }, [trigger, worksQuery]);
 
   if (worksQuery.loading) return <Loading />;
   if (!works) return null;
@@ -182,8 +189,8 @@ export const Works: React.FC<
               {canDelete && (
                 <Image
                   src={IconTrash}
-                  onClick={({ stopPropagation }) => {
-                    stopPropagation();
+                  onClick={(evt) => {
+                    evt.stopPropagation();
                     void doDelete(work.id);
                   }}
                   className="pointer"
@@ -223,7 +230,6 @@ type PostWorkHookType = (args: {
 }) => [() => void, MutationResult<PostWorkMutation>];
 
 export const usePostWork: PostWorkHookType = (args) => {
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
   const { card, title, text, data, users, visibility, setTrigger } = args;
   const user = useUser();
   const team = useTeam();
@@ -242,7 +248,6 @@ export const usePostWork: PostWorkHookType = (args) => {
           text,
           card,
           visibility,
-          // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
           data,
         },
       },
@@ -284,7 +289,6 @@ export const WorkSubmit: React.FC<{
     title,
     text,
     users,
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     data,
     visibility,
     setTrigger,
@@ -370,13 +374,25 @@ export const Authors: React.FC<
   const [authors, setAuthors] = useState<U[]>([]);
   const inputRef = useRef<HTMLInputElement>(null);
 
+  const updateUsers = useCallback(
+    (users: U[]) => {
+      setAuthors(users);
+      setUsers(
+        users.map((user) => {
+          return { id: user.id };
+        })
+      );
+    },
+    [setUsers]
+  );
+
   useEffect(() => {
     if (work && work.users) {
       updateUsers(work.users);
     } else if (user) {
       updateUsers([user]);
     }
-  }, [user]);
+  }, [updateUsers, user, work]);
 
   if (!user || !team)
     return (
@@ -411,15 +427,6 @@ export const Authors: React.FC<
         authors.pop();
         updateUsers(authors.slice());
       }
-  }
-
-  function updateUsers(users: U[]) {
-    setAuthors(users);
-    setUsers(
-      users.map((user) => {
-        return { id: user.id };
-      })
-    );
   }
 
   function addAuthor(author: U): boolean {

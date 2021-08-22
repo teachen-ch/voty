@@ -22,8 +22,6 @@ import { CardContext } from "./Cards";
 
 export const UploadWork: React.FC<BoxProps & { prompt: string }> = (props) => {
   const { card } = useContext(CardContext);
-  if (!card)
-    return <Err msg="<UploadWork/> needs to be placed in a CardContext." />;
   const [title, setTitle] = useState("");
   const [users, setUsers] = useState<UserWhereUniqueInput[]>();
   const [trigger, setTrigger] = useState(0);
@@ -37,6 +35,9 @@ export const UploadWork: React.FC<BoxProps & { prompt: string }> = (props) => {
     users,
     setTrigger,
   });
+
+  if (!card)
+    return <Err msg="<UploadWork/> needs to be placed in a CardContext." />;
 
   const success = state.called && !state.error;
   return (

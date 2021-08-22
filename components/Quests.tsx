@@ -7,7 +7,7 @@ import {
   TextareaProps,
 } from "@rebass/forms";
 import Image from "next/image";
-import { useContext, useEffect, useMemo, useState } from "react";
+import { useCallback, useContext, useEffect, useMemo, useState } from "react";
 import { BoxProps, Button, Text, Flex, Box } from "rebass";
 import { useTeam, useUser } from "state/user";
 import { CardContext } from "./Cards";
@@ -43,9 +43,6 @@ export const Quest: React.FC<{ groups?: string }> = ({ children, groups }) => {
   const [users, setUsers] = useState<Array<UserWhereUniqueInput>>();
   const [answers, setAnswers] = useState<Record<string, any>>({});
   const [trigger, setTrigger] = useState(0);
-  const context = useMemo<IQuestContext>(() => {
-    return { answers, setAnswer, children } as IQuestContext;
-  }, [answers]);
 
   const [doPostWork, state] = usePostWork({
     card,
@@ -55,11 +52,18 @@ export const Quest: React.FC<{ groups?: string }> = ({ children, groups }) => {
     setTrigger,
   });
 
-  function setAnswer(id: string, value: any) {
-    // eslint-disable-next-line
-    answers[id] = value;
-    setAnswers(cloneDeep(answers));
-  }
+  const setAnswer = useCallback(
+    (id: string, value: any) => {
+      // eslint-disable-next-line
+      answers[id] = value;
+      setAnswers(cloneDeep(answers));
+    },
+    [answers]
+  );
+
+  const context = useMemo<IQuestContext>(() => {
+    return { answers, setAnswer, children } as IQuestContext;
+  }, [answers, children, setAnswer]);
 
   const success = state.called && !state.error;
   let questionIx = 0;
@@ -262,6 +266,14 @@ export const Order: React.FC<AnswerProps & { items: string[] }> = ({
   const { answers, setAnswer, readOnly } = useContext(QuestContext);
   const [current, setCurrent] = useState<readonly OrderItemType[]>([]);
   const [correct, setCorrect] = useState(false);
+  const checkCorrect = useCallback(
+    (answer: readonly OrderItemType[]) => {
+      if (answer.map((item) => item.text).join(",") === items.join(",")) {
+        setCorrect(true);
+      }
+    },
+    [items]
+  );
 
   // initial shuffle of the answers
   useEffect(() => {
@@ -275,7 +287,7 @@ export const Order: React.FC<AnswerProps & { items: string[] }> = ({
         })
       );
     }
-  }, [items, answers]);
+  }, [items, answers, id, checkCorrect]);
 
   if (!id) return <Err msg="<Order/> ohne id" />;
   if (answers === undefined)
@@ -285,12 +297,6 @@ export const Order: React.FC<AnswerProps & { items: string[] }> = ({
     setAnswer(id, answer);
     setCurrent(answer);
     checkCorrect(answer);
-  }
-
-  function checkCorrect(answer: readonly OrderItemType[]) {
-    if (answer.map((item) => item.text).join(",") === items.join(",")) {
-      setCorrect(true);
-    }
   }
 
   return (

@@ -268,14 +268,15 @@ export const EditCardList: React.FC<{
   teamCards: string;
   teamId: string;
 }> = ({ teamCards, teamId }) => {
-  if (!teamCards) {
-    return <OneRowTable text="Noch keine Inhalte ausgewählt" />;
-  }
   const [cards, setCards] = useState<readonly CardAdminType[]>([]);
   const [doSetCards] = useSetCardsMutation();
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => generateList(teamCards), [teamCards]);
 
+  if (!teamCards) {
+    return <OneRowTable text="Noch keine Inhalte ausgewählt" />;
+  }
   function doDelete(id: string) {
     const oldCards = cards.map((item) => item.id);
     const newCards = without(oldCards, id);

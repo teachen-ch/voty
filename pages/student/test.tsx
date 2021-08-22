@@ -9,6 +9,7 @@ import {
   useGetBallotRunsQuery,
   useBallotsQuery,
   useBallotQuery,
+  BallotRunFieldsFragment,
 } from "graphql/types";
 import { Markdown } from "util/markdown";
 import { VotyNow, VotySuccess } from "pages/team/[team]/ballots/[ballot]";
@@ -47,17 +48,24 @@ const ShowBallots: React.FC<{ user: SessionUser }> = ({ user }) => {
       </Text>
       {
         ballotRuns?.length
-          ? ballotRuns.map((run) => {
-              const ballotQuery = useBallotQuery({
-                variables: { where: { id: run?.id } },
-              });
-              const ballot = ballotQuery.data?.ballot;
-              return run && ballot && <Ballot key={run.id} ballot={ballot} />;
-            })
+          ? ballotRuns.map(
+              (run) => run && <BallotRunDetail run={run} key={run.id} />
+            )
           : null //<AllBallots/>
       }
     </Box>
   );
+};
+
+const BallotRunDetail: React.FC<{ run: BallotRunFieldsFragment }> = ({
+  run,
+}) => {
+  const ballotQuery = useBallotQuery({
+    variables: { where: { id: run?.id } },
+  });
+  const ballot = ballotQuery.data?.ballot;
+  if (!ballot) return null;
+  return ballot && <Ballot key={run.id} ballot={ballot} />;
 };
 
 export const AllBallots: React.FC = () => {

@@ -66,7 +66,7 @@ const DeleteForm: React.FC<{ user: SessionUser }> = ({ user }) => {
       <Box>
         <Text>
           Leider hat die Löschung nicht geklappt! Bitte nimm mit uns{" "}
-          <Link href="/kontakt">
+          <Link href="/kontakt" passHref>
             <A>Kontakt</A>
           </Link>{" "}
           auf.

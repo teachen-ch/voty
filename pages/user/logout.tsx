@@ -19,7 +19,7 @@ export default function LogoutPage(): React.ReactElement {
     setAccessToken("");
     setUser(undefined);
     void router.push(redirect || "/");
-  }, [user]);
+  }, [user, setAccessToken, setUser, router, redirect]);
 
   return <AppPage heading="" />;
 }

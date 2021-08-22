@@ -302,7 +302,7 @@ const TeaserImage: React.FC<{
 );
 
 const LearnMore: React.FC<{ href: string }> = ({ href }) => (
-  <Link href={href}>
+  <Link href={href} passHref>
     <Text fontWeight="semi" color="primary" variant="link">
       Mehr erfahren »»
     </Text>

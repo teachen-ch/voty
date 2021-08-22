@@ -8,13 +8,13 @@ import path from "path";
 const prisma = new PrismaClient();
 const UPLOAD_FOLDER = process.env.UPLOAD_FOLDER || "uploads/";
 
-export default async (
+export default async function deleteApi(
   req: NextApiRequest,
   res: NextApiResponse<{
     success?: boolean;
     error?: string;
   }>
-): Promise<void> => {
+): Promise<void> {
   try {
     const user = getSessionUser(req);
     const fields = JSON.parse(req.body) as Record<string, string>;
@@ -39,4 +39,4 @@ export default async (
     logger.error(err);
     res.send({ error: "Error.ServerError" });
   }
-};
+}

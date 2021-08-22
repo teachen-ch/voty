@@ -501,7 +501,11 @@ export const PanelCode: React.FC<{
   return (
     <Text id="livepanel">
       Seite für Live-Abstimmungen:{" "}
-      <Link href="/panel/[code]/present" as={`/panel/${team.code}/present`}>
+      <Link
+        href="/panel/[code]/present"
+        as={`/panel/${team.code}/present`}
+        passHref
+      >
         <Button>Code: {team.code}</Button>
       </Link>
     </Text>

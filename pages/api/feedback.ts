@@ -5,13 +5,13 @@ import { sendMail } from "util/email";
 
 const feedbackEmail = "feedback@voty.ch";
 
-export default async (
+export default async function feedbackApi(
   req: NextApiRequest,
   res: NextApiResponse<{
     success?: boolean;
     error?: string;
   }>
-): Promise<void> => {
+): Promise<void> {
   try {
     const fields = JSON.parse(req.body) as Record<string, string>;
     const { card, title, text, type, quest, email } = fields;
@@ -37,4 +37,4 @@ export default async (
     logger.error(err);
     res.send({ error: "Error.SendEmailError" });
   }
-};
+}

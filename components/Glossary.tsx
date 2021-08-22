@@ -156,7 +156,6 @@ function parseGlossary() {
   let term = "";
   const elements = Glossar({}).props.children as ReactElement[];
   elements.map((el: ReactElement) => {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     const { mdxType: type, children: text } = el.props;
     if (type === "h2") {
       term = text as string;

@@ -1,7 +1,7 @@
 import { Flex, Image, Box } from "rebass";
 import { A } from "components/Breadcrumb";
 import { useUser } from "state/user";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useColorMode } from "theme-ui";
 import { NavMobile } from "./NavMobile";
 import { NavDesktop } from "./NavDesktop";
@@ -23,19 +23,18 @@ export const TopBar: React.FC<{ home?: boolean }> = ({ home }) => {
     } else if (typeof localStorage !== "undefined") {
       setDarkMode(localStorage.getItem("darkmode"));
     }
-  }),
-    [];
+  }, []);
 
-  let cancel = 0;
+  let cancel = useRef(0);
 
   // Delay showing of the login icons until user is loaded
   useEffect(() => {
     if (user === undefined) {
-      cancel = setTimeout(() => setLoaded(true), 500);
+      cancel.current = setTimeout(() => setLoaded(true), 500);
     } else {
       setLoaded(true);
     }
-    return () => clearTimeout(cancel);
+    return () => clearTimeout(cancel.current);
   }, [user]);
 
   return (

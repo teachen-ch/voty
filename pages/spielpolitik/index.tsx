@@ -208,7 +208,6 @@ export const ZDAPage: React.FC<{
         maxWidth="800px"
         minHeight="450px"
       >
-        {props.image && <Image src={props.image} width="100%" mt={-150} />}
         {props.children}
       </Box>
     </Flex>
@@ -238,7 +237,12 @@ function LanguageLinks() {
 export const ZDAFAQ: React.FC = () => (
   <Box className="faq" fontSize={1} textAlign="left" mt={5}>
     <Flex justifyContent="center">
-      <Image src="/images/header_m2.svg" maxWidth={500} alignSelf="center" />
+      <Image
+        src="/images/header_m2.svg"
+        alt="Abstimmen"
+        maxWidth={500}
+        alignSelf="center"
+      />
     </Flex>
     <DE>
       <Heading as="h2" mt={3}>

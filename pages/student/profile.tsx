@@ -18,7 +18,7 @@ export default function StudentProfilePage({
       {!firstRun && (
         <Box mt={5} ml={[0, 0, "26%"]}>
           Ich möchte mein Konto auf voty.ch{" "}
-          <Link href="/user/delete">
+          <Link href="/user/delete" passHref>
             <A variant="underline">löschen</A>
           </Link>
         </Box>

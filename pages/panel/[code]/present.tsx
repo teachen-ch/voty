@@ -167,7 +167,7 @@ const Results: React.FC<{ ballotId: string; ballotRunId: string }> = ({
     return () => {
       resultsQuery.stopPolling();
     };
-  }, []);
+  }, [resultsQuery]);
   return <BallotResults results={results} />;
 };
 

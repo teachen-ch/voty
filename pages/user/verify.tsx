@@ -51,6 +51,8 @@ export default function VerifyPage(): React.ReactElement {
       setUser(undefined);
       void doVerification({ variables: { token } });
     }
+    // adding additional deps kills the redirect
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [token]);
 
   if (!token || !purpose) {
