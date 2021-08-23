@@ -1,3 +1,13 @@
+# [1.64.0](https://github.com/teachen-ch/voty/compare/v1.63.0...v1.64.0) (2021-08-23)
+
+
+### Features
+
+* add demographics to zda ballots ([6de0db6](https://github.com/teachen-ch/voty/commit/6de0db6e6df23065fc1f32fcd70ea39d3eaec9be))
+* add locale to anonymized votes ([42c0497](https://github.com/teachen-ch/voty/commit/42c0497eb37f155f2202926b16c2d6c5145d38db))
+* add translations to profile editing ([3d4054f](https://github.com/teachen-ch/voty/commit/3d4054fd7c811987d8794322c2beb40ea3f685b3))
+* translate data privacy page ([4e961b7](https://github.com/teachen-ch/voty/commit/4e961b793259a1668b584e2a0f4c243cb2428ea0))
+
 # [1.63.0](https://github.com/teachen-ch/voty/compare/v1.62.0...v1.63.0) (2021-08-22)
 
 
