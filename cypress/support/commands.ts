@@ -26,10 +26,8 @@
 
 import "@testing-library/cypress/add-commands";
 
-// Must be declared global to be detected by typescript (allows import/export)
-// eslint-disable @typescript/interface-name
+// Must be declared globally to be detected by typescript (allows import/export)
 declare global {
-  // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace Cypress {
     interface Chainable<Subject> {
       /**
@@ -51,15 +49,8 @@ Cypress.Commands.add(
     cy.request("POST", "/api/graphql", {
       query: `mutation {login (email: "${email}", password: "${password}") { token }}`,
     }).then((resp) => {
-      if (
-        !resp ||
-        !resp.body ||
-        !resp.body.data ||
-        !resp.body.data.login ||
-        !resp.body.data.login.token
-      ) {
+      if (!resp?.body?.data?.login?.token) {
         console.error("Login Failed: ", failed);
-        // eslint-disable-next-line
         return cy.login(email, password, failed + 1);
       }
       window.localStorage.setItem("@token", resp.body.data.login.token);
