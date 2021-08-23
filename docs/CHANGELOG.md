@@ -1,3 +1,10 @@
+## [1.64.2](https://github.com/teachen-ch/voty/compare/v1.64.1...v1.64.2) (2021-08-23)
+
+
+### Bug Fixes
+
+* further test fixes ([2393af0](https://github.com/teachen-ch/voty/commit/2393af02ea25ba4a2eb222f7ef8d4f41d46f464d))
+
 ## [1.64.1](https://github.com/teachen-ch/voty/compare/v1.64.0...v1.64.1) (2021-08-23)
 
 
