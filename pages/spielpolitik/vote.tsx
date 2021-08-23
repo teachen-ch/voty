@@ -1,5 +1,5 @@
 import { Loading } from "components/Page";
-import { BallotScope, useUserBallotsQuery } from "graphql/types";
+import { BallotScope, Role, useUserBallotsQuery } from "graphql/types";
 import { Box, Button, Card, Flex, Heading, Image, Text } from "rebass";
 import { Logos, ZDAFullPage, ZDAFAQ } from "./index";
 import { useState } from "react";
@@ -8,11 +8,30 @@ import { Markdown } from "util/markdown";
 import { VotyNow } from "pages/team/[team]/ballots/[ballot]";
 import { Detail } from "pages/projekt";
 import { useTr } from "util/translate";
+import { useUser } from "state/user";
+import { ProfileEdit } from "components/Users";
+
+const SKIP_DEMOGRAPHICS =
+  process.env.SKIP_DEMOGRAPHICS?.toUpperCase() === "TRUE";
 
 export default function ZDAVote(): React.ReactElement {
   const tr = useTr();
+  const user = useUser();
+
+  // ask for demographics on first login
+  if (user?.year === null && user?.role === Role.Student) {
+    return (
+      <ZDAVoteTemplate>
+        {tr("ZDA.Vote.Intro")}
+        <Text my={2} mt={4}>
+          {tr("Profile.Intro")}
+        </Text>
+        <ProfileEdit user={user} editMode={true} skipName />
+      </ZDAVoteTemplate>
+    );
+  }
   return (
-    <ZDAFullPage heading={tr("ZDA.Header")}>
+    <ZDAVoteTemplate>
       {tr("ZDA.Vote.Intro")}
       <Flex justifyContent="space-between" alignItems="flex-end">
         <Heading fontSize={[2, 2, 3]}>{tr("ZDA.Vote.Header1")}</Heading>
@@ -39,12 +58,21 @@ export default function ZDAVote(): React.ReactElement {
       </Flex>
       <ZDABallots scope={BallotScope.National} maxAge={45} />
       <Text variant="fielderror">{tr("ZDA.Vote.Easywait")}</Text>
+    </ZDAVoteTemplate>
+  );
+}
+
+const ZDAVoteTemplate: React.FC = ({ children }) => {
+  const tr = useTr();
+  return (
+    <ZDAFullPage heading={tr("ZDA.Header")}>
+      {children}
       <ZDAFAQ />
       <Box mt={5}></Box>
       <Logos />
     </ZDAFullPage>
   );
-}
+};
 
 const ZDABallots: React.FC<{ scope: BallotScope; maxAge: number }> = ({
   scope,
