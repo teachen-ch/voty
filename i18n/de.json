@@ -31,6 +31,7 @@
     "Female": "weiblich",
     "Male": "männlich",
     "Other": "anderes",
+    "Required": "Pflichtfeld",
     "RequiredError": "Pflichtfeld. Du kannst aber auch «möchte ich nicht angeben» wählen»",
     "DataLink": "Datenschutz bei voty.ch",
     "Legal": {

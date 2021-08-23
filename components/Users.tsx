@@ -203,29 +203,32 @@ export const ProfileEdit: React.FC<{
     return (
       <Grid gap={2} columns={[0, 0, "1fr 3fr"]}>
         {!skipName && (
-          <ShowField label={tr("User.Profile.Firstname")} value={user?.name} />
+          <ShowField label={tr("Profile.Firstname")} value={user?.name} />
         )}
         {!skipName && isTeacher && (
-          <ShowField
-            label={tr("User.Profile.Lastname")}
-            value={user?.lastname}
-          />
+          <ShowField label={tr("Profile.Lastname")} value={user?.lastname} />
         )}
         {isStudent && (
-          <ShowField label={tr("User.Profile.Year")} value={user?.year} />
+          <ShowField label={tr("Profile.Year")} value={user?.year} />
         )}
         {isStudent && (
           <ShowField
-            label={tr("User.Profile.Gender")}
+            label={tr("Profile.Gender")}
             value={getGenderText(user?.gender)}
           />
         )}
-        <ShowField label={tr("User.Profile.Email")} value={user?.email} />
+        <ShowField label={tr("Profile.Email")} value={user?.email} />
         <Button onClick={() => setEdit(true)} sx={{ gridColumn: [0, 0, 2] }}>
-          {"User.Profile.Edit"}
+          {tr("Profile.Edit")}
         </Button>
         <Text fontSize={1} textAlign="left" sx={{ gridColumn: [0, 0, 2] }}>
-          {tr(`Profile.${user?.role}.LegalText`)}
+          {tr(`Profile.Legal.${user?.role}`)}
+
+          <Link href="/datenschutz/" passHref>
+            <A target="_blank" variant="underline">
+              {tr("Profile.DataLink")}
+            </A>
+          </Link>
         </Text>
       </Grid>
     );

@@ -31,6 +31,7 @@
     "Female": "femmina",
     "Male": "maschio",
     "Other": "altro",
+    "Required": "Campo obbligatorio",
     "RequiredError": "Campo obbligatorio. Ma si può anche selezionare «non specificare»",
     "DataLink": "Protezione dei dati a voty.ch",
     "Legal": {

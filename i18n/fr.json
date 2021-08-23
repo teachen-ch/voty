@@ -31,6 +31,7 @@
     "Female": "femme",
     "Male": "homme",
     "Other": "autre",
+    "Required": "Champ obligatoire",
     "RequiredError": "Champ obligatoire. Toutefois, tu peux aussi sélectionner «ne pas préciser»",
     "DataLink": "Protection des données sur voty.ch",
     "Legal": {
