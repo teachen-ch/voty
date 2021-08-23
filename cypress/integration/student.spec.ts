@@ -16,6 +16,7 @@ describe("Test Teacher Startpage", () => {
   it("lets student edit profile", () => {
     cy.login("student@teachen.ch", "teachen");
     cy.visit("/student");
+    cy.contains("Deine Lerninhalte");
     cy.contains("Mein Konto").click();
     cy.contains("Profil bearbeiten").click();
     // wait for profile screen to load

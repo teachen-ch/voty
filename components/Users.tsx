@@ -188,12 +188,12 @@ export const ProfileEdit: React.FC<{
   let validationSchema: yup.ObjectSchema;
   if (isTeacher) {
     validationSchema = yup.object().shape({
-      name: skipName ? yup.string().required("Pflichtfeld") : yup.string(),
+      name: skipName ? yup.string() : yup.string().required(tr("Pflichtfeld")),
       lastname: yup.string().nullable(),
     });
   } else {
     validationSchema = yup.object().shape({
-      name: skipName ? yup.string().required("Pflichtfeld") : yup.string(),
+      name: skipName ? yup.string() : yup.string().required(tr("Pflichtfeld")),
       year: yup.string().nullable().required(tr("Profile.RequiredError")),
       gender: yup.string().nullable().required(tr("Profile.RequiredError")),
     });
