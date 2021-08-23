@@ -1,3 +1,10 @@
+# [1.65.0](https://github.com/teachen-ch/voty/compare/v1.64.2...v1.65.0) (2021-08-23)
+
+
+### Features
+
+* upgrade to cypress 8.3.0 ([ba951b8](https://github.com/teachen-ch/voty/commit/ba951b867fc82a17fa567402a4148cf12d998afa))
+
 ## [1.64.2](https://github.com/teachen-ch/voty/compare/v1.64.1...v1.64.2) (2021-08-23)
 
 
