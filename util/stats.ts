@@ -88,7 +88,6 @@ export function initStats({
       push(["setCustomUrl", pathname]);
       push(["setDocumentTitle", document.title]);
       push(["deleteCustomVariables", "page"]);
-      push(["setGenerationTimeMs", 0]);
       push(["trackPageView"]);
       previousPath = pathname;
     }, 0);

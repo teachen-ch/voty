@@ -46,6 +46,8 @@ Cypress.Commands.add(
     email = email || String(Cypress.env("USER"));
     password = password || String(Cypress.env("PASS"));
     if (failed > 5) return;
+    // not sure we can use the new cypress api here, as reset-db will invalidate tokens
+    // cy.session([email, password], () => {
     cy.request("POST", "/api/graphql", {
       query: `mutation {login (email: "${email}", password: "${password}") { token }}`,
     }).then((resp) => {
@@ -54,6 +56,8 @@ Cypress.Commands.add(
         return cy.login(email, password, failed + 1);
       }
       window.localStorage.setItem("@token", resp.body.data.login.token);
+      // console.warn("Set localstorage token to: ", resp.body.data.login.token);
     });
+    //});
   }
 );
