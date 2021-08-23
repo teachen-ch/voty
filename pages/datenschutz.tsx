@@ -28,7 +28,7 @@ export default function Datenschutz(): ReactElement {
       <Info type="success">
         Unsere Server werden in einem Rechenzentrum in Glarus 🇨🇭 zu 100% mit
         erneuerbarern Energie betrieben. Wir verwenden keine Services von
-        Drittparteien wie Google oder Amazon für Webanylse, die Speicherung von
+        Drittparteien wie Google oder Amazon für Webanalyse, die Speicherung von
         Daten, oder ähnliche Dienstleistungen.
       </Info>
 

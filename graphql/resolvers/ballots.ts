@@ -72,6 +72,7 @@ export const vote: FieldResolver<"Mutation", "vote"> = async (
       vote,
       verify,
       year: user.year || user.team?.year,
+      locale: user.locale,
       canton: user.canton || user.school?.canton,
       schooltype: user.school?.type,
       school: schoolId ? { connect: { id: schoolId } } : undefined,
@@ -415,7 +416,6 @@ export async function getHasVoted({
   return voted.length > 0 ? true : false;
 }
 
-// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export function replaceLocale(b: any, locale = "de"): void {
   if (!b) {
     console.warn("Empty ballot: ", b);

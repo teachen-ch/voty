@@ -8192,6 +8192,7 @@ export interface NexusGenInputs {
     ballotRunId?: string | null; // String
     canton?: string | null; // String
     id?: string | null; // String
+    locale?: string | null; // String
     schoolId?: string | null; // String
     schooltype?: string | null; // String
     teamId?: string | null; // String
@@ -8209,6 +8210,7 @@ export interface NexusGenInputs {
     ballotId: string; // String!
     canton?: string | null; // String
     id?: string | null; // String
+    locale?: string | null; // String
     schoolId?: string | null; // String
     schooltype?: string | null; // String
     teamId?: string | null; // String
@@ -8227,6 +8229,7 @@ export interface NexusGenInputs {
     ballotRunId?: string | null; // String
     canton?: string | null; // String
     id?: string | null; // String
+    locale?: string | null; // String
     schooltype?: string | null; // String
     teamId?: string | null; // String
     verify?: string | null; // String
@@ -8244,6 +8247,7 @@ export interface NexusGenInputs {
     ballotRunId?: string | null; // String
     canton?: string | null; // String
     id?: string | null; // String
+    locale?: string | null; // String
     schoolId?: string | null; // String
     schooltype?: string | null; // String
     verify?: string | null; // String
@@ -8318,6 +8322,7 @@ export interface NexusGenInputs {
       | null; // BallotRunCreateNestedOneWithoutVoteInput
     canton?: string | null; // String
     id?: string | null; // String
+    locale?: string | null; // String
     school?: NexusGenInputs["SchoolCreateNestedOneWithoutVoteInput"] | null; // SchoolCreateNestedOneWithoutVoteInput
     schooltype?: string | null; // String
     team?: NexusGenInputs["TeamCreateNestedOneWithoutVoteInput"] | null; // TeamCreateNestedOneWithoutVoteInput
@@ -8330,6 +8335,7 @@ export interface NexusGenInputs {
     ballot: NexusGenInputs["BallotCreateNestedOneWithoutVotesInput"]; // BallotCreateNestedOneWithoutVotesInput!
     canton?: string | null; // String
     id?: string | null; // String
+    locale?: string | null; // String
     school?: NexusGenInputs["SchoolCreateNestedOneWithoutVoteInput"] | null; // SchoolCreateNestedOneWithoutVoteInput
     schooltype?: string | null; // String
     team?: NexusGenInputs["TeamCreateNestedOneWithoutVoteInput"] | null; // TeamCreateNestedOneWithoutVoteInput
@@ -8345,6 +8351,7 @@ export interface NexusGenInputs {
       | null; // BallotRunCreateNestedOneWithoutVoteInput
     canton?: string | null; // String
     id?: string | null; // String
+    locale?: string | null; // String
     schooltype?: string | null; // String
     team?: NexusGenInputs["TeamCreateNestedOneWithoutVoteInput"] | null; // TeamCreateNestedOneWithoutVoteInput
     verify?: string | null; // String
@@ -8359,6 +8366,7 @@ export interface NexusGenInputs {
       | null; // BallotRunCreateNestedOneWithoutVoteInput
     canton?: string | null; // String
     id?: string | null; // String
+    locale?: string | null; // String
     school?: NexusGenInputs["SchoolCreateNestedOneWithoutVoteInput"] | null; // SchoolCreateNestedOneWithoutVoteInput
     schooltype?: string | null; // String
     verify?: string | null; // String
@@ -8378,6 +8386,7 @@ export interface NexusGenInputs {
     ballotRunId?: NexusGenInputs["StringNullableFilter"] | null; // StringNullableFilter
     canton?: NexusGenInputs["StringNullableFilter"] | null; // StringNullableFilter
     id?: NexusGenInputs["StringFilter"] | null; // StringFilter
+    locale?: NexusGenInputs["StringFilter"] | null; // StringFilter
     NOT?: NexusGenInputs["VoteScalarWhereInput"][] | null; // [VoteScalarWhereInput!]
     OR?: NexusGenInputs["VoteScalarWhereInput"][] | null; // [VoteScalarWhereInput!]
     schoolId?: NexusGenInputs["StringNullableFilter"] | null; // StringNullableFilter
@@ -8391,6 +8400,7 @@ export interface NexusGenInputs {
     // input type
     canton?: NexusGenInputs["NullableStringFieldUpdateOperationsInput"] | null; // NullableStringFieldUpdateOperationsInput
     id?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    locale?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
     schooltype?:
       | NexusGenInputs["NullableStringFieldUpdateOperationsInput"]
       | null; // NullableStringFieldUpdateOperationsInput
@@ -8531,6 +8541,7 @@ export interface NexusGenInputs {
     ballotRun?: NexusGenInputs["BallotRunUpdateOneWithoutVoteInput"] | null; // BallotRunUpdateOneWithoutVoteInput
     canton?: NexusGenInputs["NullableStringFieldUpdateOperationsInput"] | null; // NullableStringFieldUpdateOperationsInput
     id?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    locale?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
     school?: NexusGenInputs["SchoolUpdateOneWithoutVoteInput"] | null; // SchoolUpdateOneWithoutVoteInput
     schooltype?:
       | NexusGenInputs["NullableStringFieldUpdateOperationsInput"]
@@ -8545,6 +8556,7 @@ export interface NexusGenInputs {
     ballot?: NexusGenInputs["BallotUpdateOneRequiredWithoutVotesInput"] | null; // BallotUpdateOneRequiredWithoutVotesInput
     canton?: NexusGenInputs["NullableStringFieldUpdateOperationsInput"] | null; // NullableStringFieldUpdateOperationsInput
     id?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    locale?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
     school?: NexusGenInputs["SchoolUpdateOneWithoutVoteInput"] | null; // SchoolUpdateOneWithoutVoteInput
     schooltype?:
       | NexusGenInputs["NullableStringFieldUpdateOperationsInput"]
@@ -8560,6 +8572,7 @@ export interface NexusGenInputs {
     ballotRun?: NexusGenInputs["BallotRunUpdateOneWithoutVoteInput"] | null; // BallotRunUpdateOneWithoutVoteInput
     canton?: NexusGenInputs["NullableStringFieldUpdateOperationsInput"] | null; // NullableStringFieldUpdateOperationsInput
     id?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    locale?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
     schooltype?:
       | NexusGenInputs["NullableStringFieldUpdateOperationsInput"]
       | null; // NullableStringFieldUpdateOperationsInput
@@ -8574,6 +8587,7 @@ export interface NexusGenInputs {
     ballotRun?: NexusGenInputs["BallotRunUpdateOneWithoutVoteInput"] | null; // BallotRunUpdateOneWithoutVoteInput
     canton?: NexusGenInputs["NullableStringFieldUpdateOperationsInput"] | null; // NullableStringFieldUpdateOperationsInput
     id?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
+    locale?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
     school?: NexusGenInputs["SchoolUpdateOneWithoutVoteInput"] | null; // SchoolUpdateOneWithoutVoteInput
     schooltype?:
       | NexusGenInputs["NullableStringFieldUpdateOperationsInput"]
@@ -8615,6 +8629,7 @@ export interface NexusGenInputs {
     ballotRunId?: NexusGenInputs["StringNullableFilter"] | null; // StringNullableFilter
     canton?: NexusGenInputs["StringNullableFilter"] | null; // StringNullableFilter
     id?: NexusGenInputs["StringFilter"] | null; // StringFilter
+    locale?: NexusGenInputs["StringFilter"] | null; // StringFilter
     NOT?: NexusGenInputs["VoteWhereInput"][] | null; // [VoteWhereInput!]
     OR?: NexusGenInputs["VoteWhereInput"][] | null; // [VoteWhereInput!]
     school?: NexusGenInputs["SchoolWhereInput"] | null; // SchoolWhereInput

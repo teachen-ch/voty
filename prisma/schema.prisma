@@ -244,6 +244,7 @@ model Vote {
   year       Int?
   canton     String?
   schooltype String?
+  locale     String  @default("de")
 
   ballot      Ballot     @relation(fields: [ballotId], references: [id])
   ballotId    String     @map(name: "ballot_id")

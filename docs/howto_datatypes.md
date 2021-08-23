@@ -9,7 +9,8 @@ The frontend consumes almost all data (except for a file uploads) through a Grap
 Edit [/prisma/schema.prisma](/prisma/schema.prisma) to your will. Don't forget to add @mmap on all new tables and relations, so that the psql database is easy to use (it does not like camelCase without single quotes...). When done, you can apply the changes to the development database:
 
 ```
-yarn run migrate
+yarn run init:db
+yarn run reset:db
 ```
 
 This will generate the [/prisma/migrations/](/prisma/migrations/) files and also run `npx prisma generate` to update the typescript definitions for the Prisma client.

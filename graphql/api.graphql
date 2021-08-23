@@ -7399,6 +7399,7 @@ input VoteCreateManyBallotInput {
   ballotRunId: String
   canton: String
   id: String
+  locale: String
   schoolId: String
   schooltype: String
   teamId: String
@@ -7416,6 +7417,7 @@ input VoteCreateManyBallotRunInput {
   ballotId: String!
   canton: String
   id: String
+  locale: String
   schoolId: String
   schooltype: String
   teamId: String
@@ -7434,6 +7436,7 @@ input VoteCreateManySchoolInput {
   ballotRunId: String
   canton: String
   id: String
+  locale: String
   schooltype: String
   teamId: String
   verify: String
@@ -7451,6 +7454,7 @@ input VoteCreateManyTeamInput {
   ballotRunId: String
   canton: String
   id: String
+  locale: String
   schoolId: String
   schooltype: String
   verify: String
@@ -7515,6 +7519,7 @@ input VoteCreateWithoutBallotInput {
   ballotRun: BallotRunCreateNestedOneWithoutVoteInput
   canton: String
   id: String
+  locale: String
   school: SchoolCreateNestedOneWithoutVoteInput
   schooltype: String
   team: TeamCreateNestedOneWithoutVoteInput
@@ -7527,6 +7532,7 @@ input VoteCreateWithoutBallotRunInput {
   ballot: BallotCreateNestedOneWithoutVotesInput!
   canton: String
   id: String
+  locale: String
   school: SchoolCreateNestedOneWithoutVoteInput
   schooltype: String
   team: TeamCreateNestedOneWithoutVoteInput
@@ -7540,6 +7546,7 @@ input VoteCreateWithoutSchoolInput {
   ballotRun: BallotRunCreateNestedOneWithoutVoteInput
   canton: String
   id: String
+  locale: String
   schooltype: String
   team: TeamCreateNestedOneWithoutVoteInput
   verify: String
@@ -7552,6 +7559,7 @@ input VoteCreateWithoutTeamInput {
   ballotRun: BallotRunCreateNestedOneWithoutVoteInput
   canton: String
   id: String
+  locale: String
   school: SchoolCreateNestedOneWithoutVoteInput
   schooltype: String
   verify: String
@@ -7898,6 +7906,7 @@ input VoteScalarWhereInput {
   ballotRunId: StringNullableFilter
   canton: StringNullableFilter
   id: StringFilter
+  locale: StringFilter
   NOT: [VoteScalarWhereInput!]
   OR: [VoteScalarWhereInput!]
   schoolId: StringNullableFilter
@@ -7911,6 +7920,7 @@ input VoteScalarWhereInput {
 input VoteUpdateManyMutationInput {
   canton: NullableStringFieldUpdateOperationsInput
   id: StringFieldUpdateOperationsInput
+  locale: StringFieldUpdateOperationsInput
   schooltype: NullableStringFieldUpdateOperationsInput
   verify: NullableStringFieldUpdateOperationsInput
   vote: IntFieldUpdateOperationsInput
@@ -7997,6 +8007,7 @@ input VoteUpdateWithoutBallotInput {
   ballotRun: BallotRunUpdateOneWithoutVoteInput
   canton: NullableStringFieldUpdateOperationsInput
   id: StringFieldUpdateOperationsInput
+  locale: StringFieldUpdateOperationsInput
   school: SchoolUpdateOneWithoutVoteInput
   schooltype: NullableStringFieldUpdateOperationsInput
   team: TeamUpdateOneWithoutVoteInput
@@ -8009,6 +8020,7 @@ input VoteUpdateWithoutBallotRunInput {
   ballot: BallotUpdateOneRequiredWithoutVotesInput
   canton: NullableStringFieldUpdateOperationsInput
   id: StringFieldUpdateOperationsInput
+  locale: StringFieldUpdateOperationsInput
   school: SchoolUpdateOneWithoutVoteInput
   schooltype: NullableStringFieldUpdateOperationsInput
   team: TeamUpdateOneWithoutVoteInput
@@ -8022,6 +8034,7 @@ input VoteUpdateWithoutSchoolInput {
   ballotRun: BallotRunUpdateOneWithoutVoteInput
   canton: NullableStringFieldUpdateOperationsInput
   id: StringFieldUpdateOperationsInput
+  locale: StringFieldUpdateOperationsInput
   schooltype: NullableStringFieldUpdateOperationsInput
   team: TeamUpdateOneWithoutVoteInput
   verify: NullableStringFieldUpdateOperationsInput
@@ -8034,6 +8047,7 @@ input VoteUpdateWithoutTeamInput {
   ballotRun: BallotRunUpdateOneWithoutVoteInput
   canton: NullableStringFieldUpdateOperationsInput
   id: StringFieldUpdateOperationsInput
+  locale: StringFieldUpdateOperationsInput
   school: SchoolUpdateOneWithoutVoteInput
   schooltype: NullableStringFieldUpdateOperationsInput
   verify: NullableStringFieldUpdateOperationsInput
@@ -8093,6 +8107,7 @@ input VoteWhereInput {
   ballotRunId: StringNullableFilter
   canton: StringNullableFilter
   id: StringFilter
+  locale: StringFilter
   NOT: [VoteWhereInput!]
   OR: [VoteWhereInput!]
   school: SchoolWhereInput
