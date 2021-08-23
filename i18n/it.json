@@ -18,6 +18,26 @@
       "Cancel": "Cancella"
     }
   },
+  "Profile": {
+    "Intro": "Puoi aggiungere i tuoi dettagli qui:",
+    "Firstname": "Nome",
+    "Lastname": "Nome del carico",
+    "Gender": "Sesso",
+    "Year": "Anno di nascita",
+    "Edit": "Modifica profilo",
+    "Choose": "selezionare",
+    "Skip": "non specificare",
+    "Save": "Salvare",
+    "Female": "femmina",
+    "Male": "maschio",
+    "Other": "altro",
+    "RequiredError": "Campo obbligatorio. Ma si può anche selezionare «non specificare»",
+    "DataLink": "Protezione dei dati a voty.ch",
+    "Legal": {
+      "Student": "Se ci dici il tuo anno di nascita e il tuo sesso, possiamo fare proiezioni migliori e rappresentare l'opinione dei giovani in Svizzera. Tuttavia, puoi anche selezionare «non specificare».",
+      "Teacher": ""
+    }
+  },
   "Signup": {
     "labelRole": "Io sono",
     "labelEmail": "Email",
@@ -44,10 +64,6 @@
     "GenericError": "Si è verificato un errore",
     "InvalidVerificationLink": "Questo link e-mail purtroppo non è più valido!",
     "Title": "Errore"
-  },
-  "Teacher": { "LegalText": "" },
-  "Student": {
-    "LegalText": "Wenn Du uns Deinen Jahrgang und Dein Geschlecht mitteilst, können wir bessere Hochrechnungen erstellen und die Meinung der Jugend in der Schweiz repräsentieren. Du darfst aber auch «möchte ich nicht angeben» auswählen. "
   },
   "Not Authorised!": "Berechtigung fehlt!",
   "Misc": {

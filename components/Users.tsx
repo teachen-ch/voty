@@ -137,8 +137,9 @@ interface IProfileForm {
 export const ProfileEdit: React.FC<{
   user: SessionUser;
   editMode?: boolean;
+  skipName?: boolean;
   onFinish?: () => void;
-}> = ({ user, editMode, onFinish }) => {
+}> = ({ user, editMode, onFinish, skipName }) => {
   const [error, setError] = useState("");
   const [edit, setEdit] = useState(editMode);
   const setUser = useSetUser();
@@ -159,8 +160,8 @@ export const ProfileEdit: React.FC<{
   const isStudent = !isTeacher;
 
   // for the year born dropdown: from around 6 - 20 years old
-  const startYear = new Date().getFullYear() - 20;
-  const numYears = 14;
+  const startYear = new Date().getFullYear() - (isStudent ? 20 : 100);
+  const numYears = isStudent ? 12 : 90;
 
   async function onSubmit(values: IProfileForm) {
     await doUpdateUser({
@@ -186,42 +187,44 @@ export const ProfileEdit: React.FC<{
   let validationSchema: yup.ObjectSchema;
   if (isTeacher) {
     validationSchema = yup.object().shape({
-      name: yup.string().required("Pflichtfeld"),
+      name: skipName ? yup.string().required("Pflichtfeld") : yup.string(),
       lastname: yup.string().nullable(),
     });
   } else {
     validationSchema = yup.object().shape({
-      name: yup.string().required("Pflichtfeld"),
-      year: yup
-        .string()
-        .nullable()
-        .required(
-          "Pflichtfeld. Du kannst aber auch «möchte ich nicht angeben» wählen»"
-        ),
-      gender: yup
-        .string()
-        .nullable()
-        .required(
-          "Pflichtfeld. Du kannst aber auch «möchte ich nicht angeben» wählen»"
-        ),
+      name: skipName ? yup.string().required("Pflichtfeld") : yup.string(),
+      year: yup.string().nullable().required(tr("Profile.RequiredError")),
+      gender: yup.string().nullable().required(tr("Profile.RequiredError")),
     });
   }
 
   if (!edit) {
     return (
       <Grid gap={2} columns={[0, 0, "1fr 3fr"]}>
-        <ShowField label="Vorname" value={user?.name} />
-        {isTeacher && <ShowField label="Nachname" value={user?.lastname} />}
-        {isStudent && <ShowField label="Jahrgang" value={user?.year} />}
-        {isStudent && (
-          <ShowField label="Geschlecht" value={getGenderText(user?.gender)} />
+        {!skipName && (
+          <ShowField label={tr("User.Profile.Firstname")} value={user?.name} />
         )}
-        <ShowField label="Email" value={user?.email} />
+        {!skipName && isTeacher && (
+          <ShowField
+            label={tr("User.Profile.Lastname")}
+            value={user?.lastname}
+          />
+        )}
+        {isStudent && (
+          <ShowField label={tr("User.Profile.Year")} value={user?.year} />
+        )}
+        {isStudent && (
+          <ShowField
+            label={tr("User.Profile.Gender")}
+            value={getGenderText(user?.gender)}
+          />
+        )}
+        <ShowField label={tr("User.Profile.Email")} value={user?.email} />
         <Button onClick={() => setEdit(true)} sx={{ gridColumn: [0, 0, 2] }}>
-          Profil bearbeiten
+          {"User.Profile.Edit"}
         </Button>
         <Text fontSize={1} textAlign="left" sx={{ gridColumn: [0, 0, 2] }}>
-          {tr(`${user?.role}.LegalText`)}
+          {tr(`Profile.${user?.role}.LegalText`)}
         </Text>
       </Grid>
     );
@@ -234,8 +237,10 @@ export const ProfileEdit: React.FC<{
       >
         <Form>
           <Grid gap={2} columns={[0, 0, "1fr 3fr"]}>
-            <Input label="Vorname" name="name" placeholder="Vorname"></Input>
-            {isTeacher && (
+            {!skipName && (
+              <Input label="Vorname" name="name" placeholder="Vorname"></Input>
+            )}
+            {!skipName && isTeacher && (
               <Input
                 label="Nachname"
                 name="lastname"
@@ -246,46 +251,34 @@ export const ProfileEdit: React.FC<{
               <>
                 <Label htmlFor="year" pt="6px">
                   {" "}
-                  Jahrgang:
+                  {tr("Profile.Year")}:
                 </Label>
                 <Field as={Select} id="year" name="year" value={user?.year}>
-                  <option value={undefined}>Bitte auswählen</option>
+                  <option value={undefined}>{tr("Profile.Choose")}</option>
                   {[...Array(numYears).keys()].map((i) => (
-                    <option key={i}>{i + startYear}</option>
+                    <option key={i}>{startYear + (numYears - i)}</option>
                   ))}
-                  <option value={0}>möchte ich nicht angeben</option>
+                  <option value={0}>{tr("Profile.Skip")}</option>
                 </Field>
                 <FieldError name="year" />
-                <label htmlFor="gender">Geschlecht:</label>
+                <label htmlFor="gender">{tr("Profile.Gender")}:</label>
                 <Box id="gender" textAlign="left">
                   <Grid columns="1fr 2fr" gap={0}>
                     <label>
                       <Field type="radio" name="gender" value={Gender.Female} />{" "}
-                      weiblich
+                      {tr("Profile.Female")}
                     </label>
                     <label>
                       <Field type="radio" name="gender" value={Gender.Male} />{" "}
-                      männlich
+                      {tr("Profile.Male")}
                     </label>
                     <label>
                       <Field type="radio" name="gender" value={Gender.Other} />{" "}
-                      anderes
+                      {tr("Profile.Other")}
                     </label>
                     <label>
                       <Field type="radio" name="gender" value={Gender.Unkown} />{" "}
-                      <Text
-                        sx={{
-                          display: [
-                            "none",
-                            "none",
-                            "inline-block",
-                            "inline-block",
-                          ],
-                        }}
-                      >
-                        möchte ich
-                      </Text>{" "}
-                      nicht angeben
+                      {tr("Profile.Skip")}
                     </label>
                   </Grid>
                 </Box>
@@ -296,12 +289,15 @@ export const ProfileEdit: React.FC<{
               <ShowField label="Email" value="Kontaktiere uns für Änderungen" />
             )}
             <Button type="submit" sx={{ gridColumn: [0, 0, 2] }} my={2}>
-              Angaben speichern
+              {tr("Profile.Save")}
             </Button>
             <ErrorBox error={error} my={4} />
 
             <Text fontSize={1} textAlign="left" sx={{ gridColumn: [0, 0, 2] }}>
-              {tr(`${user?.role}.LegalText`)}
+              {tr(`Profile.Legal.${user?.role}`)}
+              <A href="/datenschutz/" target="_blank" variant="underline">
+                {tr("Profile.DataLink")}
+              </A>
             </Text>
           </Grid>
         </Form>

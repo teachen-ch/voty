@@ -18,6 +18,26 @@
       "Cancel": "Annuler"
     }
   },
+  "Profile": {
+    "Intro": "Tu peux ajouter tes coordonnées ici:",
+    "Firstname": "Prénom",
+    "Lastname": "Nom de famille",
+    "Gender": "Sexe",
+    "Year": "Ans de naissance",
+    "Edit": "Modifier tes donnés",
+    "Choose": "Sélectionner",
+    "Skip": "ne pas préciser",
+    "Save": "Sauvegarder",
+    "Female": "femme",
+    "Male": "homme",
+    "Other": "autre",
+    "RequiredError": "Champ obligatoire. Toutefois, tu peux aussi sélectionner «ne pas préciser»",
+    "DataLink": "Protection des données sur voty.ch",
+    "Legal": {
+      "Student": "Si tu nous indiques ton année de naissance et ton sexe, nous pourrons faire de meilleures projections et représenter l'opinion des jeunes en Suisse. Toutefois, tu peux également sélectionner «ne pas préciser». ",
+      "Teacher": ""
+    }
+  },
   "Emails": {
     "Subject": {
       "Verify": "voty: confirmer",
