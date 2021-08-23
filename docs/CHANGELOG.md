@@ -1,3 +1,10 @@
+## [1.64.1](https://github.com/teachen-ch/voty/compare/v1.64.0...v1.64.1) (2021-08-23)
+
+
+### Bug Fixes
+
+* Profile edit screen ([d81aa6c](https://github.com/teachen-ch/voty/commit/d81aa6cd617346d894c341ff4d9f735d31ff65bd))
+
 # [1.64.0](https://github.com/teachen-ch/voty/compare/v1.63.0...v1.64.0) (2021-08-23)
 
 
