@@ -19,6 +19,7 @@ import IconNOK from "../public/images/icon_user_nok.svg";
 import { Formik, Form, Field, ErrorMessage, useField } from "formik";
 import { Grid } from "theme-ui";
 import { useTr } from "util/translate";
+import Link from "next/link";
 
 export const GET_USERS = gql`
   query users($where: UserWhereInput) {
@@ -295,9 +296,11 @@ export const ProfileEdit: React.FC<{
 
             <Text fontSize={1} textAlign="left" sx={{ gridColumn: [0, 0, 2] }}>
               {tr(`Profile.Legal.${user?.role}`)}
-              <A href="/datenschutz/" target="_blank" variant="underline">
-                {tr("Profile.DataLink")}
-              </A>
+              <Link href="/datenschutz/" passHref>
+                <A target="_blank" variant="underline">
+                  {tr("Profile.DataLink")}
+                </A>
+              </Link>
             </Text>
           </Grid>
         </Form>

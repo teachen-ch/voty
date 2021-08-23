@@ -38,6 +38,12 @@
       "Teacher": ""
     }
   },
+  "Privacy": {
+    "Title": "Protection des données",
+    "IntroTitle": "Introduction",
+    "Intro": "La protection et la sécurité des données sont essentielles pour nous. Nous fournissons un service aux étudiants et leur offrons la possibilité de l'expression d'opinions politiques sur notre plateforme. Nous faisons donc tout ce qui est en notre pouvoir pour garantir que les données que nous stockons sont sécurisées conformément aux normes en vigueur. Et nous ne vendons jamais des données personnelles à des autre organisations. Notre objectif est d'apporter la démocratie à l'école et de rendre visible l'opinion recueillie par les élèves sur les votes nationaux.",
+    "Note": "Nos serveurs sont stockés dans un centre de données à Glaris 🇨🇭 et fonctionnent avec une énergie 100% renouvelable. Nous n'utilisons pas de services tiers tels que Google ou Amazon pour l'analyse de sites web, le stockage de données ou des services similaires."
+  },
   "Emails": {
     "Subject": {
       "Verify": "voty: confirmer",

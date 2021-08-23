@@ -38,6 +38,12 @@
       "Teacher": ""
     }
   },
+  "Privacy": {
+    "Title": "Datenschutz",
+    "IntroTitle": "Einleitung",
+    "Intro": "Datenschutz und Sicherheit ist für uns zentral. Wir betreiben ein Angebot für Schülerinnen und Schüler und bieten die Möglichkeit der politischen Meinungsäusserung auf unserer Plattform. Deshalb setzen wir alles daran, dass die bei uns gespeicherten Daten nach aktuellen Standards gesichert sind und wir werden keine persönliche Daten an Drittparteien weitergeben oder jemals versuchen, diese Daten zu verkaufen. Unser Ziel ist es, die Demokratie an die Schule zu bringen und die gesammelte Meinung der Schülerinnen und Schüler zu nationalen Abstimmungen sichtbar zu machen.",
+    "Note": "Unsere Server werden in einem Rechenzentrum in Glarus 🇨🇭 zu 100% mit erneuerbarern Energie betrieben. Wir verwenden keine Services von Drittparteien wie Google oder Amazon für Webanalyse, die Speicherung von Daten, oder ähnliche Dienstleistungen."
+  },
   "Signup": {
     "labelRole": "Ich bin",
     "labelEmail": "Email",

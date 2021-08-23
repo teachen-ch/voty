@@ -4,33 +4,36 @@ import { Heading, Text } from "rebass";
 import { ReactElement } from "react";
 import { A } from "components/Breadcrumb";
 import { Info } from "components/Info";
+import { FR, IT } from "components/Translated";
+import { useTr } from "util/translate";
 
 export default function Datenschutz(): ReactElement {
+  const tr = useTr();
   return (
-    <Page heading="Datenschutz">
+    <Page heading={tr("Privacy.Title")}>
       <Head>
-        <title>voty.ch - Datenschutz</title>
+        <title>voty.ch - {tr("Privacy.Title")}</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Heading as="h2">Einleitung</Heading>
+      <Heading as="h2">{tr("Privacy.IntroTitle")}</Heading>
       <Text fontWeight="semi" fontSize={[2, 2, 3]}>
-        Datenschutz und Sicherheit ist für uns zentral. Wir betreiben ein
-        Angebot für Schülerinnen und Schüler und bieten die Möglichkeit der
-        politischen Meinungsäusserung auf unserer Plattform. Deshalb setzen wir
-        alles daran, dass die bei uns gespeicherten Daten nach aktuellen
-        Standards gesichert sind und wir werden keine persönliche Daten an
-        Drittparteien weitergeben oder jemals versuchen, diese Daten zu
-        verkaufen. Unser Ziel ist es, die Demokratie an die Schule zu bringen
-        und die gesammelte Meinung der Schülerinnen und Schüler zu nationalen
-        Abstimmungen sichtbar zu machen.
+        {tr("Privacy.Intro")}
       </Text>
 
-      <Info type="success">
-        Unsere Server werden in einem Rechenzentrum in Glarus 🇨🇭 zu 100% mit
-        erneuerbarern Energie betrieben. Wir verwenden keine Services von
-        Drittparteien wie Google oder Amazon für Webanalyse, die Speicherung von
-        Daten, oder ähnliche Dienstleistungen.
-      </Info>
+      <Info type="success">{tr("Privacy.Note")}</Info>
+
+      <FR>
+        <Info type="important" my={6}>
+          Malheureusement, ces textes n&apos;ont pas encore été traduits en
+          français. Peux-tu nous aider ?
+        </Info>
+      </FR>
+      <IT>
+        <Info type="important" my={6}>
+          Purtroppo questi testi non sono ancora stati tradotti in italiano.
+          Potrebbe aiutarci?
+        </Info>
+      </IT>
 
       <Text fontSize={[2, 2, 2]}>
         <Heading as="h2">

@@ -38,6 +38,12 @@
       "Teacher": ""
     }
   },
+  "Privacy": {
+    "Title": "Protezione dei dati",
+    "IntroTitle": "Introduzione",
+    "Intro": "La protezione e la sicurezza dei dati sono importanti per noi. Forniamo un servizio agli studenti e offriamo loro la possibilità di esprimere opinioni politiche sulla nostra piattaforma. Pertanto, facciamo tutto ciò che è in nostro potere per garantire che i dati che conserviamo siano sicuri secondo gli standard attuali. E non vendiamo mai i dati personali ad altre organizzazioni. Il nostro obiettivo è portare la democrazia nella scuola e rendere visibili le opinioni degli studenti sulle votazioni nazionali.",
+    "Note": "I nostri server si trovano in un centro dati a Glarona 🇨🇭 e funzionano al 100% con energia rinnovabile. Non utilizziamo servizi di terze parti come Google o Amazon per l'analisi del sito web, l'archiviazione dei dati o servizi simili."
+  },
   "Signup": {
     "labelRole": "Io sono",
     "labelEmail": "Email",
