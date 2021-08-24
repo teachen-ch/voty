@@ -83,6 +83,7 @@ export const Person: React.FC<{
           transform: "rotate(360deg)",
         },
       }}
+      alt="Portrait"
     />
     <Text fontSize={1} textAlign="center">
       <Text>

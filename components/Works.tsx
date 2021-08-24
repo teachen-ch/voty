@@ -194,6 +194,7 @@ export const Works: React.FC<
                     void doDelete(work.id);
                   }}
                   className="pointer"
+                  alt="Löschen"
                 />
               )}
             </Flex>

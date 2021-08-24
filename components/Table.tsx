@@ -100,6 +100,7 @@ export const TDImage: React.FC<
       mx={2}
       display={smHide ? ["none", "none", "block"] : "block"}
       sx={{ flexShrink: 0, filter: dark || light ? "invert(100)" : "none" }}
+      alt=""
       {...props}
     />
   );

@@ -167,9 +167,9 @@ export const CardItem: React.FC<{
                 display="block"
               />
               {selected ? (
-                <Image src={IconCheck} onClick={doSelect} />
+                <Image src={IconCheck} onClick={doSelect} alt="Abwählen" />
               ) : (
-                <Image src={IconAdd} onClick={doSelect} />
+                <Image src={IconAdd} onClick={doSelect} alt="Auswählen" />
               )}
             </Box>
           ) : null}
@@ -235,7 +235,7 @@ export const TeacherCardList: React.FC<{
           <TR key={id} href={`/team/${teamId}/cards/${id}`}>
             <TD flexy>{card?.title}</TD>
             <TDIcon mr={0}>
-              <Image src={IconWatch} />
+              <Image src={IconWatch} alt="" />
             </TDIcon>
             <TD width="180px" smHide>
               {card?.duration}
@@ -337,7 +337,7 @@ class CardAdminItem extends React.Component<CardAdminProps> {
         onMouseOut={() => this.setState({ over: false })}
       >
         <TDIcon {...dragHandleProps} sx={{ cursor: "grab" }}>
-          <Image src={IconMove} />
+          <Image src={IconMove} alt="" />
         </TDIcon>
         <TD flexy>
           <A
@@ -348,7 +348,7 @@ class CardAdminItem extends React.Component<CardAdminProps> {
           </A>
         </TD>
         <TDIcon smHide mr={0}>
-          <Image src={IconWatch} />
+          <Image src={IconWatch} alt="" />
         </TDIcon>
 
         <TD width="180px" smHide>
@@ -358,6 +358,7 @@ class CardAdminItem extends React.Component<CardAdminProps> {
           <Image
             src={IconTrash}
             onClick={() => this.props.commonProps.doDelete(item.id)}
+            alt="Löschen"
           />
         </TDIcon>
       </TR>

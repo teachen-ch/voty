@@ -59,7 +59,7 @@ export const EditTeamPrefs: React.FC<{
           ? "Anpassen"
           : `Klassen-Einstellungen${isMobile() ? "" : " bearbeiten"}`}
         <Box ml={2} display="inline-block">
-          <Image src={IconPrefs} width="16" height="16" />
+          <Image src={IconPrefs} width="16" height="16" alt="" />
         </Box>
       </A>
       {show && (

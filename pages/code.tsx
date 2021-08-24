@@ -26,7 +26,7 @@ export default function Panels(): React.ReactElement {
         onSubmit={onSubmit}
       ></QForm>
       <Box variant="centered">
-        <Image my={5} src="/images/voty_module_2.svg" maxWidth="50%" />
+        <Image my={5} src="/images/voty_module_2.svg" maxWidth="50%" alt="" />
       </Box>
     </PanelPage>
   );

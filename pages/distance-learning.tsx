@@ -53,7 +53,11 @@ export default function DistanceLearningBlog(): React.ReactElement {
         beherzt debattieren werden kann - denn auch das ist ein wichtiges
         Werkzeug der Demokratie, das gelernt sein will.
       </Text>
-      <img src="/screens/screen_activities.png" className="screenshot" />
+      <img
+        src="/screens/screen_activities.png"
+        className="screenshot"
+        alt="Aktivitäten"
+      />
       <Info type="info" py={3}>
         Möchten sie unsere Lerninhalte mit ihrer Klasse im Distance Learning
         oder im Klassenzimmer testen? Tragen sie sich ein auf unser Liste ein

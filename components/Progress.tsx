@@ -209,7 +209,7 @@ const Reload: React.FC<{ query: QueryResult }> = ({ query }) => {
     >
       Aktualisieren
       <Box display="inline-block" ml={2}>
-        <Image src={IconReload} />
+        <Image src={IconReload} alt="" />
       </Box>
     </A>
   );

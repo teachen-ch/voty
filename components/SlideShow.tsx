@@ -29,6 +29,7 @@ export const SlideShow: React.FC<
         className={className}
         style={{ cursor: "pointer" }}
         onClick={() => setActive((active + 1) % images.length)}
+        alt=""
       />
       {captions && <figcaption>{captions[active]}</figcaption>}
       {images.length > 1 &&

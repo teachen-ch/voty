@@ -31,7 +31,7 @@ export default function Abstimmung(): ReactElement {
       >
         <Flex my={2} color="white">
           <TDIcon mt={3} mr={3}>
-            <Image src={IconCheckWhite} height="25px" />
+            <Image src={IconCheckWhite} height="25px" alt="" />
           </TDIcon>
           <Text maxWidth="700px">
             Ja, ich unterrichte politische Bildung in meiner Klasse und nehme
@@ -40,7 +40,7 @@ export default function Abstimmung(): ReactElement {
         </Flex>
         <Flex my={2}>
           <TDIcon mt={3} mr={3}>
-            <Image src={IconCheckWhite} height="25px" />
+            <Image src={IconCheckWhite} height="25px" alt="" />
           </TDIcon>
           <Text maxWidth="700px">
             Ich nehme mir Zeit, um die Vorlagen mit den Schüler*innen zu
@@ -57,7 +57,7 @@ export default function Abstimmung(): ReactElement {
         </Flex>
         <Flex my={2}>
           <TDIcon mt={3} mr={3}>
-            <Image src={IconCheckWhite} height="25px" />
+            <Image src={IconCheckWhite} height="25px" alt="" />
           </TDIcon>
           <Text maxWidth="700px">
             Ich führe die Abstimmung mit meiner Klasse online durch und

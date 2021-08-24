@@ -62,7 +62,12 @@ export const Pill: React.FC<
     <Text>{children}</Text>
     {deleteLink && isFunction(deleteLink) && (
       <Box display="inline-block" ml={2} mb={-2} color="#fff">
-        <Image src={IconX} onClick={deleteLink} className="pointer white" />
+        <Image
+          src={IconX}
+          onClick={deleteLink}
+          className="pointer white"
+          alt="Löschen"
+        />
       </Box>
     )}
   </Flex>

@@ -149,7 +149,7 @@ export default function TeacherTeamPage(): React.ReactElement {
             <Box sx={{ position: "absolute" }}>
               <A href={`/team/${team.id}/progress`} fontSize={1}>
                 <Box display="inline-block" mr={2}>
-                  <Image src={IconProgress} />
+                  <Image src={IconProgress} alt="" />
                 </Box>
                 Fortschritt der Klasse
               </A>
@@ -310,7 +310,7 @@ const InviteLink: React.FC<{ team: TeamTeacherFieldsFragment }> = ({
       <Button fontSize={1} onClick={() => qrCode(url)}>
         <Box variant="centered">
           <Box display="inline-block" mr={2}>
-            <Image src={IconQR} height="25px" width="25px" />
+            <Image src={IconQR} height="25px" width="25px" alt="QR-Code" />
           </Box>
           QR-Code
         </Box>

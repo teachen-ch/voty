@@ -134,7 +134,7 @@ export const Poster: React.FC<{ vote: Swissvote; image: string }> = ({
           <Text fontSize={1}>&copy; {copyright}</Text>
         </Box>
       )}
-      <Image src={image} onMouseOver={() => setHover(true)} />
+      <Image src={image} onMouseOver={() => setHover(true)} alt="Plakat" />
     </Box>
   );
 };

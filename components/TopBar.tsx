@@ -67,6 +67,7 @@ export const TopBar: React.FC<{ home?: boolean }> = ({ home }) => {
             },
           }}
           onClick={() => setColorMode(light ? "dark" : "light")}
+          alt={light ? "Darkmode" : "Lightmode"}
         />
       )}
       <Flex

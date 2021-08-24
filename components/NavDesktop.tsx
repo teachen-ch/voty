@@ -23,7 +23,7 @@ const RegisterLogin: React.FC = () => {
     <Flex alignItems="center">
       <A href="/user/signup">
         <Flex alignItems="center">
-          <Image src={IconRegister} />
+          <Image src={IconRegister} alt="" />
           <Text ml={3} mr={4}>
             Klasse anmelden
           </Text>
@@ -31,7 +31,7 @@ const RegisterLogin: React.FC = () => {
       </A>
       <A href="/user/login">
         <Flex alignItems="center">
-          <Image src={IconLogin} />
+          <Image src={IconLogin} alt="" />
           <Text ml={3}>Login</Text>
         </Flex>
       </A>
@@ -64,7 +64,7 @@ const Account: React.FC<{ user: SessionUser }> = ({ user }) => {
             justifyContent="flex-end"
           >
             <Box display="inline-block" mr={2}>
-              <Image src={IconClasses} />
+              <Image src={IconClasses} alt="" />
             </Box>
             {homeText}
           </Flex>
@@ -78,7 +78,7 @@ const Account: React.FC<{ user: SessionUser }> = ({ user }) => {
             justifyContent="flex-end"
             mr={0}
           >
-            <Image src={IconAccount} />
+            <Image src={IconAccount} alt="" />
             <Text mx={2}>Mein Konto</Text>
             {open ? (
               <Image src={IconUp} alt="Schliessen" />

@@ -333,12 +333,12 @@ class OrderItem extends React.Component<OrderItemProps> {
       >
         {!(readOnly || correct) && (
           <TDIcon {...dragHandleProps} sx={{ cursor: "grab" }}>
-            <Image src={IconMove} />
+            <Image src={IconMove} alt="" />
           </TDIcon>
         )}
         {correct && (
           <TDIcon>
-            <Image src={IconCheck} />
+            <Image src={IconCheck} alt="" />
           </TDIcon>
         )}
         <TD flexy>{item.text}</TD>

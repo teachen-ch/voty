@@ -58,7 +58,12 @@ export const ChatHeader: React.FC<{ title?: string; onClick: () => void }> = ({
   >
     {onClick && (
       <Box display="inline-block" mr={2}>
-        <Image src={IconBack} onClick={onClick} className="pointer" />
+        <Image
+          src={IconBack}
+          onClick={onClick}
+          className="pointer"
+          alt="Zurück"
+        />
       </Box>
     )}
     <Text fontWeight="bold" textAlign="left" sx={{ flexGrow: 1 }}>

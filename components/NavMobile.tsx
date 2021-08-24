@@ -60,19 +60,19 @@ export const NavMobile: React.FC<{ user: SessionUser; color: string }> = ({
             </Text>
             <Text pl={4} lineHeight="55px" fontWeight="semi">
               <A href="/" variant="link">
-                <Image src={IconHome} className="burgerIcon" />
+                <Image src={IconHome} className="burgerIcon" alt="" />
                 Startseite
               </A>
               <hr />
               {!user ? (
                 <nav>
                   <A href="/user/signup" variant="link">
-                    <Image src={IconRegister} className="burgerIcon" />
+                    <Image src={IconRegister} className="burgerIcon" alt="" />
                     Klasse anmelden
                   </A>
                   <br />
                   <A href="/user/login" variant="link">
-                    <Image src={IconLogin} className="burgerIcon" />
+                    <Image src={IconLogin} className="burgerIcon" alt="" />
                     Login
                   </A>
                   <br />
@@ -80,17 +80,17 @@ export const NavMobile: React.FC<{ user: SessionUser; color: string }> = ({
               ) : (
                 <nav>
                   <A href="/user/login" variant="link">
-                    <Image src={IconClasses} className="burgerIcon" />
+                    <Image src={IconClasses} className="burgerIcon" alt="" />
                     {isTeacher ? "Meine Klassen" : "Meine Klasse"}
                   </A>
                   <br />
                   <A href="/user/profile" variant="link">
-                    <Image src={IconAccount} className="burgerIcon" />
+                    <Image src={IconAccount} className="burgerIcon" alt="" />
                     Mein Profil
                   </A>
                   <br />
                   <A href="/user/logout" variant="link">
-                    <Image src={IconLogout} className="burgerIcon" />
+                    <Image src={IconLogout} className="burgerIcon" alt="" />
                     Abmelden
                   </A>
                   <br />
@@ -98,22 +98,22 @@ export const NavMobile: React.FC<{ user: SessionUser; color: string }> = ({
               )}
               <hr />
               <A href="/faq" variant="link">
-                <Image src={IconFaq} className="burgerIcon" />
+                <Image src={IconFaq} className="burgerIcon" alt="" />
                 Häufige Fragen
               </A>
               <br />
               <A href="/team-voty" variant="link">
-                <Image src={IconTeam} className="burgerIcon" />
+                <Image src={IconTeam} className="burgerIcon" alt="" />
                 Team
               </A>
               <hr />
               <A href="/newsletter" variant="link">
-                <Image src={IconNewsletter} className="burgerIcon" />
+                <Image src={IconNewsletter} className="burgerIcon" alt="" />
                 Newsletter
               </A>
               <br />
               <A href="/impressum" variant="link">
-                <Image src={IconImpressum} className="burgerIcon" />
+                <Image src={IconImpressum} className="burgerIcon" alt="" />
                 Impressum
               </A>
             </Text>

@@ -167,7 +167,11 @@ export default function Fundraising(): React.ReactElement {
             ein repräsentatives Stimmungsbild dieser Generation zu aktuellen
             politischen Themen aufzeigen.
           </Text>
-          <img src="/screens/voty_screen_vote.jpg" className="screenshot" />
+          <img
+            src="/screens/voty_screen_vote.jpg"
+            className="screenshot"
+            alt="Abstimmen"
+          />
           <figcaption>Screenshot voty.ch Abstimmungsmodul</figcaption>
           <Text my={4}>
             Danach haben wir unseren Online-Werkzeugkasten für den politischen
