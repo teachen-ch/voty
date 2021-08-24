@@ -1,3 +1,17 @@
+# [1.66.0](https://github.com/teachen-ch/voty/compare/v1.65.0...v1.66.0) (2021-08-24)
+
+
+### Bug Fixes
+
+* do not use cypress' new session feature ([2a42cf5](https://github.com/teachen-ch/voty/commit/2a42cf5df6ce53afe047249d77fbd6817ba25b5b))
+* mobile icons color and padding ([4e12739](https://github.com/teachen-ch/voty/commit/4e1273981e58dd5fb772b2933e90d4e7ed4a413c))
+
+
+### Features
+
+* accessibility improvements and stricter linting ([a49ac1a](https://github.com/teachen-ch/voty/commit/a49ac1a014ee663814c96d478f4855e6da80be1d))
+* add redirects for zda ([7f82c27](https://github.com/teachen-ch/voty/commit/7f82c274214d34fba2fbb60a5f086f8950c0584d))
+
 # [1.65.0](https://github.com/teachen-ch/voty/compare/v1.64.2...v1.65.0) (2021-08-23)
 
 
