@@ -27,6 +27,16 @@ module.exports = withMDX({
         destination: "https://updown.io/p9am",
         permanent: true,
       },
+      {
+        source: "/jouelapolitique",
+        destination: "/fr/spielpolitik",
+        permanent: true,
+      },
+      {
+        source: "/giocaallapolitica",
+        destination: "/it/spielpolitik",
+        permanent: true,
+      },
     ];
   },
 });
