@@ -60,19 +60,19 @@ export const NavMobile: React.FC<{ user: SessionUser; color: string }> = ({
             </Text>
             <Text pl={4} lineHeight="55px" fontWeight="semi">
               <A href="/" variant="link">
-                <Image src={IconHome} className="burgerIcon" alt="" />
+                <MIcon src={IconHome} />
                 Startseite
               </A>
               <hr />
               {!user ? (
                 <nav>
                   <A href="/user/signup" variant="link">
-                    <Image src={IconRegister} className="burgerIcon" alt="" />
+                    <MIcon src={IconRegister} />
                     Klasse anmelden
                   </A>
                   <br />
                   <A href="/user/login" variant="link">
-                    <Image src={IconLogin} className="burgerIcon" alt="" />
+                    <MIcon src={IconLogin} />
                     Login
                   </A>
                   <br />
@@ -80,17 +80,17 @@ export const NavMobile: React.FC<{ user: SessionUser; color: string }> = ({
               ) : (
                 <nav>
                   <A href="/user/login" variant="link">
-                    <Image src={IconClasses} className="burgerIcon" alt="" />
+                    <MIcon src={IconClasses} />
                     {isTeacher ? "Meine Klassen" : "Meine Klasse"}
                   </A>
                   <br />
                   <A href="/user/profile" variant="link">
-                    <Image src={IconAccount} className="burgerIcon" alt="" />
+                    <MIcon src={IconAccount} />
                     Mein Profil
                   </A>
                   <br />
                   <A href="/user/logout" variant="link">
-                    <Image src={IconLogout} className="burgerIcon" alt="" />
+                    <MIcon src={IconLogout} />
                     Abmelden
                   </A>
                   <br />
@@ -98,22 +98,22 @@ export const NavMobile: React.FC<{ user: SessionUser; color: string }> = ({
               )}
               <hr />
               <A href="/faq" variant="link">
-                <Image src={IconFaq} className="burgerIcon" alt="" />
+                <MIcon src={IconFaq} />
                 Häufige Fragen
               </A>
               <br />
               <A href="/team-voty" variant="link">
-                <Image src={IconTeam} className="burgerIcon" alt="" />
+                <MIcon src={IconTeam} />
                 Team
               </A>
               <hr />
               <A href="/newsletter" variant="link">
-                <Image src={IconNewsletter} className="burgerIcon" alt="" />
+                <MIcon src={IconNewsletter} />
                 Newsletter
               </A>
               <br />
               <A href="/impressum" variant="link">
-                <Image src={IconImpressum} className="burgerIcon" alt="" />
+                <MIcon src={IconImpressum} />
                 Impressum
               </A>
             </Text>
@@ -123,3 +123,9 @@ export const NavMobile: React.FC<{ user: SessionUser; color: string }> = ({
     </Flex>
   );
 };
+
+const MIcon: React.FC<{ src: string }> = ({ src }) => (
+  <Box mr={3} display="inline-block" verticalAlign="sub">
+    <Image src={src} alt="" />
+  </Box>
+);
