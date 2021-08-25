@@ -101,7 +101,16 @@ export const login: FieldResolver<"Mutation", "login"> = async (
 };
 
 function startJWTSession(user: User, ctx: Context): ResponseLogin {
-  const token: string = jwt.sign({ user }, secret, {
+  const jwtUser: JWTUser = pick(user, [
+    "id",
+    "email",
+    "role",
+    "schoolId",
+    "teamId",
+    "locale",
+  ]);
+
+  const token: string = jwt.sign({ user: jwtUser }, secret, {
     expiresIn: expires,
   });
 
@@ -309,7 +318,16 @@ export const setSchool: FieldResolver<"Mutation", "setSchool"> = async (
   return updated;
 };
 
-export function getSessionUser(req: NextApiRequest): User | undefined {
+type JWTUser = {
+  id: string;
+  role: Role;
+  locale: string;
+  email: string | null;
+  schoolId?: string | null;
+  teamId?: string | null;
+};
+
+export function getSessionUser(req: NextApiRequest): JWTUser | undefined {
   // what about req.body.token || req.query.token ?
   // const token = req.headers.get("x-access-token");
   // @ts-ignore
@@ -336,7 +354,7 @@ export async function getUser(ctx: Context): Promise<User | null> {
 }
 
 type JWTSession = {
-  user: User;
+  user: JWTUser;
 };
 
 export function verifyJWT(token: string): JWTSession | undefined {
