@@ -314,9 +314,9 @@ export function getSessionUser(req: NextApiRequest): User | undefined {
   // const token = req.headers.get("x-access-token");
   // @ts-ignore
   // eslint-disable-next-line
-  const token = String(req.headers["x-access-token"]);
+  const token = req.headers["x-access-token"];
 
-  if (token && token != "null") {
+  if (typeof token === "string" && token != "null") {
     const jwt = verifyJWT(token);
     return jwt?.user;
   }
@@ -341,7 +341,7 @@ type JWTSession = {
 
 export function verifyJWT(token: string): JWTSession | undefined {
   try {
-    const result = jwt.verify(token, secret);
+    const result = jwt.verify(token, secret, { algorithms: ["HS256"] });
     if (typeof result !== "object") {
       throw new Error("JWT Token was string instead of object");
     }
@@ -349,7 +349,7 @@ export function verifyJWT(token: string): JWTSession | undefined {
     else throw new Error("No user in JWT Session");
   } catch (err) {
     if (err.message !== "jwt expired")
-      logger.info("Error verifying token: ", err.message);
+      logger.info(`Error verifying token: '${token}'`, err.message);
     return undefined;
   }
 }
