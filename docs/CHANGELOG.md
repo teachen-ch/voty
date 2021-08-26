@@ -1,3 +1,10 @@
+# [1.69.0](https://github.com/teachen-ch/voty/compare/v1.68.0...v1.69.0) (2021-08-26)
+
+
+### Features
+
+* translation adjustments zda ([3774a51](https://github.com/teachen-ch/voty/commit/3774a5195071ed28ad0d2a70a2fad4def0ad13aa))
+
 # [1.68.0](https://github.com/teachen-ch/voty/compare/v1.67.0...v1.68.0) (2021-08-26)
 
 
