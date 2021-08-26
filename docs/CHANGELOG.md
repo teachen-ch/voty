@@ -1,3 +1,16 @@
+# [1.67.0](https://github.com/teachen-ch/voty/compare/v1.66.0...v1.67.0) (2021-08-26)
+
+
+### Bug Fixes
+
+* black desktop navigation icons ([cba92ec](https://github.com/teachen-ch/voty/commit/cba92ec987bc5a9603dc56553d47ffeb7c95c410))
+* harden JWT implementation ([0f2fdf4](https://github.com/teachen-ch/voty/commit/0f2fdf457c6161698d69085a5236c8986f547f47))
+
+
+### Features
+
+* make jwt leaner ([2627092](https://github.com/teachen-ch/voty/commit/26270925a1b008b6e21f3d7628ec1d93dc1c7a9f))
+
 # [1.66.0](https://github.com/teachen-ch/voty/compare/v1.65.0...v1.66.0) (2021-08-24)
 
 
