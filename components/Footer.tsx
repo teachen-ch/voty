@@ -26,7 +26,9 @@ export const Footer: React.FC = () => (
         flexDirection={["column", "column", "row", "row"]}
       >
         <Box>
-          <H3 mb={3}>Unterstützung</H3>
+          <H3 mb={3} as="h2">
+            Unterstützung
+          </H3>
           <img
             src="/images/pf_logo.png"
             alt="Prototypefund Logo"
@@ -43,7 +45,7 @@ export const Footer: React.FC = () => (
           />
         </Box>
         <NavBox>
-          <H3>Informationen</H3>
+          <H3 as="h2">Informationen</H3>
           <FLink href="/projekt">Infos zum Projekt</FLink>
           <FLink href="/faq">Häufige Fragen (FAQ)</FLink>
           <FLink
@@ -56,7 +58,7 @@ export const Footer: React.FC = () => (
           <FLink href="/newsletter">Anmeldung Newsletter</FLink>
         </NavBox>
         <NavBox>
-          <H3>Anmeldung</H3>
+          <H3 as="h2">Anmeldung</H3>
           <FLink href="/sus">Als Schüler*in registrieren</FLink>
           <FLink href="/user/signup">Neue Schulklasse anmelden</FLink>
           <FLink href="/lernen">Online-Lehrmittel</FLink>
@@ -64,7 +66,7 @@ export const Footer: React.FC = () => (
         </NavBox>
 
         <NavBox>
-          <H3>Allgemein</H3>
+          <H3 as="h2">Allgemein</H3>
           <FLink href="/kontakt">Kontakt</FLink>
           <FLink href="/datenschutz">Datenschutz</FLink>
           <FLink
