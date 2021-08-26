@@ -1,3 +1,10 @@
+# [1.68.0](https://github.com/teachen-ch/voty/compare/v1.67.0...v1.68.0) (2021-08-26)
+
+
+### Features
+
+* tweet endorsement on startpage as png ([ff2f88f](https://github.com/teachen-ch/voty/commit/ff2f88fbafedc8d4c7f1b947988d768617525421))
+
 # [1.67.0](https://github.com/teachen-ch/voty/compare/v1.66.0...v1.67.0) (2021-08-26)
 
 
