@@ -6,6 +6,8 @@ import { TopBar } from "components/TopBar";
 import { useRouter } from "next/router";
 import NextImage from "next/image";
 import Link from "next/link";
+import TweetClaude from "../public/images/tweet_claude_longchamp.png";
+import { A } from "components/Breadcrumb";
 
 export default function Home(): React.ReactElement {
   const router = useRouter();
@@ -222,27 +224,14 @@ export default function Home(): React.ReactElement {
               ml={15}
             />
           </Flex>
-          <Box my="-10px">
-            <blockquote
-              className="twitter-tweet"
-              data-lang="de"
-              data-dnt="true"
+          <Flex justifyContent="center" mb={-2}>
+            <A
+              href="https://twitter.com/claudelongchamp/status/1360190735212032001?ref_src=twsrc%5Etfw%7Ctwcamp%5Etweetembed%7Ctwterm%5E1360190735212032001%7Ctwgr%5E%7Ctwcon%5Es1_&ref_url=https%3A%2F%2Fdev.voty.ch%2F"
+              target="_blank"
             >
-              <p lang="de" dir="ltr">
-                Tolle Möglichkeit, nutzen!{" "}
-                <a href="https://t.co/n3HKtFXp4g">https://t.co/n3HKtFXp4g</a>
-              </p>
-              &mdash; Claude Longchamp (@claudelongchamp){" "}
-              <a href="https://twitter.com/claudelongchamp/status/1360190735212032001?ref_src=twsrc%5Etfw">
-                12. Februar 2021
-              </a>
-            </blockquote>
-            <script
-              async
-              src="https://platform.twitter.com/widgets.js"
-              charSet="utf-8"
-            ></script>
-          </Box>
+              <NextImage src={TweetClaude} />
+            </A>
+          </Flex>
         </Box>
         <Footer />
       </Container>
