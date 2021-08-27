@@ -1,8 +1,8 @@
 import { Flex, Text, Box } from "rebass";
 import { A } from "components/Breadcrumb";
 import Image from "next/image";
-import IconRegister from "../public/images/icon_register.svg";
-import IconLogin from "../public/images/icon_login.svg";
+import IconRegister from "../public/images/icon_register_b.svg";
+import IconLogin from "../public/images/icon_login_b.svg";
 import IconAccount from "../public/images/icon_account_b.svg";
 import IconClasses from "../public/images/icon_classes_b.svg";
 import IconDown from "../public/images/icon_down.svg";
