@@ -21,6 +21,7 @@
     "migrate:backup": "ansible-playbook -i ansible/backup ansible/migrate.yml",
     "init:db": "npx prisma migrate dev --preview-feature",
     "reset:db": "ts-node ansible/scripts/prisma-loader-cli.ts cypress/fixtures/testdb.yml",
+    "load:db": "ts-node ansible/scripts/prisma-loader-cli.ts",
     "ci:test": "yarn ci:release && yarn init:db && yarn start:test && dotenv -- cypress run --record",
     "ci:release": "yarn install --frozen-lockfile && npx prisma generate && yarn run build",
     "graphql": "graphql-codegen --config codegen.yml",
