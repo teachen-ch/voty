@@ -8,6 +8,17 @@ declare module '*/Activities.tsx' {
 }
     
 
+declare module '*/BallotAdmin.tsx' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const createOneBallot: DocumentNode;
+export const updateOneBallot: DocumentNode;
+export const deleteOneBallot: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
 declare module '*/Ballots.tsx' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;

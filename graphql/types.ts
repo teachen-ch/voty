@@ -1314,6 +1314,39 @@ export type Ballot = {
   title: Scalars['String'];
 };
 
+export type BallotCreateInput = {
+  activity?: Maybe<ActivityCreateNestedManyWithoutBallotInput>;
+  attachments?: Maybe<AttachmentCreateNestedManyWithoutBallotInput>;
+  ballotRuns?: Maybe<BallotRunCreateNestedManyWithoutBallotInput>;
+  body?: Maybe<Scalars['String']>;
+  bodyde?: Maybe<Scalars['String']>;
+  bodyfr?: Maybe<Scalars['String']>;
+  bodyit?: Maybe<Scalars['String']>;
+  canton?: Maybe<Scalars['String']>;
+  createdAt?: Maybe<Scalars['DateTime']>;
+  creator?: Maybe<UserCreateNestedOneWithoutBallotsInput>;
+  description?: Maybe<Scalars['String']>;
+  descriptionde?: Maybe<Scalars['String']>;
+  descriptionfr?: Maybe<Scalars['String']>;
+  descriptionit?: Maybe<Scalars['String']>;
+  discussion?: Maybe<DiscussionCreateNestedManyWithoutBallotInput>;
+  end: Scalars['DateTime'];
+  id?: Maybe<Scalars['String']>;
+  options?: Maybe<OptionCreateNestedManyWithoutBallotInput>;
+  originalLocale?: Maybe<Scalars['String']>;
+  school?: Maybe<SchoolCreateNestedOneWithoutBallotsInput>;
+  scope?: Maybe<BallotScope>;
+  start: Scalars['DateTime'];
+  team?: Maybe<TeamCreateNestedOneWithoutBallotsInput>;
+  title?: Maybe<Scalars['String']>;
+  titlede?: Maybe<Scalars['String']>;
+  titlefr?: Maybe<Scalars['String']>;
+  titleit?: Maybe<Scalars['String']>;
+  updatedAt?: Maybe<Scalars['DateTime']>;
+  voted?: Maybe<VotedCreateNestedManyWithoutBallotInput>;
+  votes?: Maybe<VoteCreateNestedManyWithoutBallotInput>;
+};
+
 export type BallotCreateManyCreatorInput = {
   body?: Maybe<Scalars['String']>;
   bodyde?: Maybe<Scalars['String']>;
@@ -2108,6 +2141,39 @@ export enum BallotScope {
   School = 'School',
   Team = 'Team'
 }
+
+export type BallotUpdateInput = {
+  activity?: Maybe<ActivityUpdateManyWithoutBallotInput>;
+  attachments?: Maybe<AttachmentUpdateManyWithoutBallotInput>;
+  ballotRuns?: Maybe<BallotRunUpdateManyWithoutBallotInput>;
+  body?: Maybe<StringFieldUpdateOperationsInput>;
+  bodyde?: Maybe<StringFieldUpdateOperationsInput>;
+  bodyfr?: Maybe<StringFieldUpdateOperationsInput>;
+  bodyit?: Maybe<StringFieldUpdateOperationsInput>;
+  canton?: Maybe<NullableStringFieldUpdateOperationsInput>;
+  createdAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
+  creator?: Maybe<UserUpdateOneWithoutBallotsInput>;
+  description?: Maybe<StringFieldUpdateOperationsInput>;
+  descriptionde?: Maybe<StringFieldUpdateOperationsInput>;
+  descriptionfr?: Maybe<StringFieldUpdateOperationsInput>;
+  descriptionit?: Maybe<StringFieldUpdateOperationsInput>;
+  discussion?: Maybe<DiscussionUpdateManyWithoutBallotInput>;
+  end?: Maybe<DateTimeFieldUpdateOperationsInput>;
+  id?: Maybe<StringFieldUpdateOperationsInput>;
+  options?: Maybe<OptionUpdateManyWithoutBallotInput>;
+  originalLocale?: Maybe<StringFieldUpdateOperationsInput>;
+  school?: Maybe<SchoolUpdateOneWithoutBallotsInput>;
+  scope?: Maybe<EnumBallotScopeFieldUpdateOperationsInput>;
+  start?: Maybe<DateTimeFieldUpdateOperationsInput>;
+  team?: Maybe<TeamUpdateOneWithoutBallotsInput>;
+  title?: Maybe<StringFieldUpdateOperationsInput>;
+  titlede?: Maybe<StringFieldUpdateOperationsInput>;
+  titlefr?: Maybe<StringFieldUpdateOperationsInput>;
+  titleit?: Maybe<StringFieldUpdateOperationsInput>;
+  updatedAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
+  voted?: Maybe<VotedUpdateManyWithoutBallotInput>;
+  votes?: Maybe<VoteUpdateManyWithoutBallotInput>;
+};
 
 export type BallotUpdateManyMutationInput = {
   body?: Maybe<StringFieldUpdateOperationsInput>;
@@ -3513,10 +3579,12 @@ export type Mutation = {
   changePassword?: Maybe<ResponseLogin>;
   checkVerification?: Maybe<ResponseLogin>;
   createInvitedUser?: Maybe<User>;
+  createOneBallot?: Maybe<Ballot>;
   createOneSchool?: Maybe<School>;
   createOneTeam?: Maybe<Team>;
   createUser?: Maybe<User>;
   deleteAccount?: Maybe<Response>;
+  deleteOneBallot?: Maybe<Ballot>;
   deleteOneSchool?: Maybe<School>;
   deleteOneTeam?: Maybe<Team>;
   deleteUser?: Maybe<User>;
@@ -3535,6 +3603,7 @@ export type Mutation = {
   setPrefs?: Maybe<Team>;
   setSchool?: Maybe<User>;
   startBallotRun?: Maybe<BallotRun>;
+  updateOneBallot?: Maybe<Ballot>;
   updateUser?: Maybe<User>;
   vote?: Maybe<Vote>;
   voteCode?: Maybe<Response>;
@@ -3572,6 +3641,11 @@ export type MutationCreateInvitedUserArgs = {
 };
 
 
+export type MutationCreateOneBallotArgs = {
+  data: BallotCreateInput;
+};
+
+
 export type MutationCreateOneSchoolArgs = {
   data: SchoolCreateInput;
 };
@@ -3584,6 +3658,11 @@ export type MutationCreateOneTeamArgs = {
 
 export type MutationCreateUserArgs = {
   data: UserCreateInput;
+};
+
+
+export type MutationDeleteOneBallotArgs = {
+  where: BallotWhereUniqueInput;
 };
 
 
@@ -3685,6 +3764,12 @@ export type MutationSetSchoolArgs = {
 
 export type MutationStartBallotRunArgs = {
   ballotRunId: Scalars['String'];
+};
+
+
+export type MutationUpdateOneBallotArgs = {
+  data: BallotUpdateInput;
+  where: BallotWhereUniqueInput;
 };
 
 
@@ -7690,6 +7775,7 @@ export type VoteCreateManyBallotInput = {
   ballotRunId?: Maybe<Scalars['String']>;
   canton?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['String']>;
+  locale?: Maybe<Scalars['String']>;
   schoolId?: Maybe<Scalars['String']>;
   schooltype?: Maybe<Scalars['String']>;
   teamId?: Maybe<Scalars['String']>;
@@ -7707,6 +7793,7 @@ export type VoteCreateManyBallotRunInput = {
   ballotId: Scalars['String'];
   canton?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['String']>;
+  locale?: Maybe<Scalars['String']>;
   schoolId?: Maybe<Scalars['String']>;
   schooltype?: Maybe<Scalars['String']>;
   teamId?: Maybe<Scalars['String']>;
@@ -7725,6 +7812,7 @@ export type VoteCreateManySchoolInput = {
   ballotRunId?: Maybe<Scalars['String']>;
   canton?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['String']>;
+  locale?: Maybe<Scalars['String']>;
   schooltype?: Maybe<Scalars['String']>;
   teamId?: Maybe<Scalars['String']>;
   verify?: Maybe<Scalars['String']>;
@@ -7742,6 +7830,7 @@ export type VoteCreateManyTeamInput = {
   ballotRunId?: Maybe<Scalars['String']>;
   canton?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['String']>;
+  locale?: Maybe<Scalars['String']>;
   schoolId?: Maybe<Scalars['String']>;
   schooltype?: Maybe<Scalars['String']>;
   verify?: Maybe<Scalars['String']>;
@@ -7806,6 +7895,7 @@ export type VoteCreateWithoutBallotInput = {
   ballotRun?: Maybe<BallotRunCreateNestedOneWithoutVoteInput>;
   canton?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['String']>;
+  locale?: Maybe<Scalars['String']>;
   school?: Maybe<SchoolCreateNestedOneWithoutVoteInput>;
   schooltype?: Maybe<Scalars['String']>;
   team?: Maybe<TeamCreateNestedOneWithoutVoteInput>;
@@ -7818,6 +7908,7 @@ export type VoteCreateWithoutBallotRunInput = {
   ballot: BallotCreateNestedOneWithoutVotesInput;
   canton?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['String']>;
+  locale?: Maybe<Scalars['String']>;
   school?: Maybe<SchoolCreateNestedOneWithoutVoteInput>;
   schooltype?: Maybe<Scalars['String']>;
   team?: Maybe<TeamCreateNestedOneWithoutVoteInput>;
@@ -7831,6 +7922,7 @@ export type VoteCreateWithoutSchoolInput = {
   ballotRun?: Maybe<BallotRunCreateNestedOneWithoutVoteInput>;
   canton?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['String']>;
+  locale?: Maybe<Scalars['String']>;
   schooltype?: Maybe<Scalars['String']>;
   team?: Maybe<TeamCreateNestedOneWithoutVoteInput>;
   verify?: Maybe<Scalars['String']>;
@@ -7843,6 +7935,7 @@ export type VoteCreateWithoutTeamInput = {
   ballotRun?: Maybe<BallotRunCreateNestedOneWithoutVoteInput>;
   canton?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['String']>;
+  locale?: Maybe<Scalars['String']>;
   school?: Maybe<SchoolCreateNestedOneWithoutVoteInput>;
   schooltype?: Maybe<Scalars['String']>;
   verify?: Maybe<Scalars['String']>;
@@ -8189,6 +8282,7 @@ export type VoteScalarWhereInput = {
   ballotRunId?: Maybe<StringNullableFilter>;
   canton?: Maybe<StringNullableFilter>;
   id?: Maybe<StringFilter>;
+  locale?: Maybe<StringFilter>;
   NOT?: Maybe<Array<VoteScalarWhereInput>>;
   OR?: Maybe<Array<VoteScalarWhereInput>>;
   schoolId?: Maybe<StringNullableFilter>;
@@ -8202,6 +8296,7 @@ export type VoteScalarWhereInput = {
 export type VoteUpdateManyMutationInput = {
   canton?: Maybe<NullableStringFieldUpdateOperationsInput>;
   id?: Maybe<StringFieldUpdateOperationsInput>;
+  locale?: Maybe<StringFieldUpdateOperationsInput>;
   schooltype?: Maybe<NullableStringFieldUpdateOperationsInput>;
   verify?: Maybe<NullableStringFieldUpdateOperationsInput>;
   vote?: Maybe<IntFieldUpdateOperationsInput>;
@@ -8288,6 +8383,7 @@ export type VoteUpdateWithoutBallotInput = {
   ballotRun?: Maybe<BallotRunUpdateOneWithoutVoteInput>;
   canton?: Maybe<NullableStringFieldUpdateOperationsInput>;
   id?: Maybe<StringFieldUpdateOperationsInput>;
+  locale?: Maybe<StringFieldUpdateOperationsInput>;
   school?: Maybe<SchoolUpdateOneWithoutVoteInput>;
   schooltype?: Maybe<NullableStringFieldUpdateOperationsInput>;
   team?: Maybe<TeamUpdateOneWithoutVoteInput>;
@@ -8300,6 +8396,7 @@ export type VoteUpdateWithoutBallotRunInput = {
   ballot?: Maybe<BallotUpdateOneRequiredWithoutVotesInput>;
   canton?: Maybe<NullableStringFieldUpdateOperationsInput>;
   id?: Maybe<StringFieldUpdateOperationsInput>;
+  locale?: Maybe<StringFieldUpdateOperationsInput>;
   school?: Maybe<SchoolUpdateOneWithoutVoteInput>;
   schooltype?: Maybe<NullableStringFieldUpdateOperationsInput>;
   team?: Maybe<TeamUpdateOneWithoutVoteInput>;
@@ -8313,6 +8410,7 @@ export type VoteUpdateWithoutSchoolInput = {
   ballotRun?: Maybe<BallotRunUpdateOneWithoutVoteInput>;
   canton?: Maybe<NullableStringFieldUpdateOperationsInput>;
   id?: Maybe<StringFieldUpdateOperationsInput>;
+  locale?: Maybe<StringFieldUpdateOperationsInput>;
   schooltype?: Maybe<NullableStringFieldUpdateOperationsInput>;
   team?: Maybe<TeamUpdateOneWithoutVoteInput>;
   verify?: Maybe<NullableStringFieldUpdateOperationsInput>;
@@ -8325,6 +8423,7 @@ export type VoteUpdateWithoutTeamInput = {
   ballotRun?: Maybe<BallotRunUpdateOneWithoutVoteInput>;
   canton?: Maybe<NullableStringFieldUpdateOperationsInput>;
   id?: Maybe<StringFieldUpdateOperationsInput>;
+  locale?: Maybe<StringFieldUpdateOperationsInput>;
   school?: Maybe<SchoolUpdateOneWithoutVoteInput>;
   schooltype?: Maybe<NullableStringFieldUpdateOperationsInput>;
   verify?: Maybe<NullableStringFieldUpdateOperationsInput>;
@@ -8384,6 +8483,7 @@ export type VoteWhereInput = {
   ballotRunId?: Maybe<StringNullableFilter>;
   canton?: Maybe<StringNullableFilter>;
   id?: Maybe<StringFilter>;
+  locale?: Maybe<StringFilter>;
   NOT?: Maybe<Array<VoteWhereInput>>;
   OR?: Maybe<Array<VoteWhereInput>>;
   school?: Maybe<SchoolWhereInput>;
@@ -8970,6 +9070,46 @@ export type ActivitiesQuery = (
       { __typename?: 'User' }
       & Pick<User, 'shortname'>
     )> }
+  )> }
+);
+
+export type CreateOneBallotMutationVariables = Exact<{
+  data: BallotCreateInput;
+}>;
+
+
+export type CreateOneBallotMutation = (
+  { __typename?: 'Mutation' }
+  & { createOneBallot?: Maybe<(
+    { __typename?: 'Ballot' }
+    & BallotFieldsFragment
+  )> }
+);
+
+export type UpdateOneBallotMutationVariables = Exact<{
+  data: BallotUpdateInput;
+  where: BallotWhereUniqueInput;
+}>;
+
+
+export type UpdateOneBallotMutation = (
+  { __typename?: 'Mutation' }
+  & { updateOneBallot?: Maybe<(
+    { __typename?: 'Ballot' }
+    & BallotFieldsFragment
+  )> }
+);
+
+export type DeleteOneBallotMutationVariables = Exact<{
+  where: BallotWhereUniqueInput;
+}>;
+
+
+export type DeleteOneBallotMutation = (
+  { __typename?: 'Mutation' }
+  & { deleteOneBallot?: Maybe<(
+    { __typename?: 'Ballot' }
+    & Pick<Ballot, 'id'>
   )> }
 );
 
@@ -10058,6 +10198,103 @@ export function useActivitiesLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions
 export type ActivitiesQueryHookResult = ReturnType<typeof useActivitiesQuery>;
 export type ActivitiesLazyQueryHookResult = ReturnType<typeof useActivitiesLazyQuery>;
 export type ActivitiesQueryResult = Apollo.QueryResult<ActivitiesQuery, ActivitiesQueryVariables>;
+export const CreateOneBallotDocument = gql`
+    mutation createOneBallot($data: BallotCreateInput!) {
+  createOneBallot(data: $data) {
+    ...BallotFields
+  }
+}
+    ${BallotFieldsFragmentDoc}`;
+export type CreateOneBallotMutationFn = Apollo.MutationFunction<CreateOneBallotMutation, CreateOneBallotMutationVariables>;
+
+/**
+ * __useCreateOneBallotMutation__
+ *
+ * To run a mutation, you first call `useCreateOneBallotMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateOneBallotMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createOneBallotMutation, { data, loading, error }] = useCreateOneBallotMutation({
+ *   variables: {
+ *      data: // value for 'data'
+ *   },
+ * });
+ */
+export function useCreateOneBallotMutation(baseOptions?: Apollo.MutationHookOptions<CreateOneBallotMutation, CreateOneBallotMutationVariables>) {
+        return Apollo.useMutation<CreateOneBallotMutation, CreateOneBallotMutationVariables>(CreateOneBallotDocument, baseOptions);
+      }
+export type CreateOneBallotMutationHookResult = ReturnType<typeof useCreateOneBallotMutation>;
+export type CreateOneBallotMutationResult = Apollo.MutationResult<CreateOneBallotMutation>;
+export type CreateOneBallotMutationOptions = Apollo.BaseMutationOptions<CreateOneBallotMutation, CreateOneBallotMutationVariables>;
+export const UpdateOneBallotDocument = gql`
+    mutation updateOneBallot($data: BallotUpdateInput!, $where: BallotWhereUniqueInput!) {
+  updateOneBallot(data: $data, where: $where) {
+    ...BallotFields
+  }
+}
+    ${BallotFieldsFragmentDoc}`;
+export type UpdateOneBallotMutationFn = Apollo.MutationFunction<UpdateOneBallotMutation, UpdateOneBallotMutationVariables>;
+
+/**
+ * __useUpdateOneBallotMutation__
+ *
+ * To run a mutation, you first call `useUpdateOneBallotMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateOneBallotMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateOneBallotMutation, { data, loading, error }] = useUpdateOneBallotMutation({
+ *   variables: {
+ *      data: // value for 'data'
+ *      where: // value for 'where'
+ *   },
+ * });
+ */
+export function useUpdateOneBallotMutation(baseOptions?: Apollo.MutationHookOptions<UpdateOneBallotMutation, UpdateOneBallotMutationVariables>) {
+        return Apollo.useMutation<UpdateOneBallotMutation, UpdateOneBallotMutationVariables>(UpdateOneBallotDocument, baseOptions);
+      }
+export type UpdateOneBallotMutationHookResult = ReturnType<typeof useUpdateOneBallotMutation>;
+export type UpdateOneBallotMutationResult = Apollo.MutationResult<UpdateOneBallotMutation>;
+export type UpdateOneBallotMutationOptions = Apollo.BaseMutationOptions<UpdateOneBallotMutation, UpdateOneBallotMutationVariables>;
+export const DeleteOneBallotDocument = gql`
+    mutation deleteOneBallot($where: BallotWhereUniqueInput!) {
+  deleteOneBallot(where: $where) {
+    id
+  }
+}
+    `;
+export type DeleteOneBallotMutationFn = Apollo.MutationFunction<DeleteOneBallotMutation, DeleteOneBallotMutationVariables>;
+
+/**
+ * __useDeleteOneBallotMutation__
+ *
+ * To run a mutation, you first call `useDeleteOneBallotMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useDeleteOneBallotMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [deleteOneBallotMutation, { data, loading, error }] = useDeleteOneBallotMutation({
+ *   variables: {
+ *      where: // value for 'where'
+ *   },
+ * });
+ */
+export function useDeleteOneBallotMutation(baseOptions?: Apollo.MutationHookOptions<DeleteOneBallotMutation, DeleteOneBallotMutationVariables>) {
+        return Apollo.useMutation<DeleteOneBallotMutation, DeleteOneBallotMutationVariables>(DeleteOneBallotDocument, baseOptions);
+      }
+export type DeleteOneBallotMutationHookResult = ReturnType<typeof useDeleteOneBallotMutation>;
+export type DeleteOneBallotMutationResult = Apollo.MutationResult<DeleteOneBallotMutation>;
+export type DeleteOneBallotMutationOptions = Apollo.BaseMutationOptions<DeleteOneBallotMutation, DeleteOneBallotMutationVariables>;
 export const BallotsDocument = gql`
     query ballots($where: BallotWhereInput) {
   ballots(where: $where) {

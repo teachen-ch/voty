@@ -68,7 +68,6 @@ export const BallotsQueries = extendType({
       ordering: true,
       filtering: true,
     });
-
     t.list.field("getBallotRuns", {
       type: "BallotRun",
       args: {
@@ -95,6 +94,9 @@ export const BallotsQueries = extendType({
 export const BallotsMutations = extendType({
   type: "Mutation",
   definition(t) {
+    t.crud.createOneBallot();
+    t.crud.updateOneBallot();
+    t.crud.deleteOneBallot();
     t.field("addBallotRun", {
       type: "BallotRun",
       args: {

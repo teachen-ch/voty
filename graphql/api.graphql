@@ -1295,6 +1295,39 @@ type Ballot {
   title: String!
 }
 
+input BallotCreateInput {
+  activity: ActivityCreateNestedManyWithoutBallotInput
+  attachments: AttachmentCreateNestedManyWithoutBallotInput
+  ballotRuns: BallotRunCreateNestedManyWithoutBallotInput
+  body: String
+  bodyde: String
+  bodyfr: String
+  bodyit: String
+  canton: String
+  createdAt: DateTime
+  creator: UserCreateNestedOneWithoutBallotsInput
+  description: String
+  descriptionde: String
+  descriptionfr: String
+  descriptionit: String
+  discussion: DiscussionCreateNestedManyWithoutBallotInput
+  end: DateTime!
+  id: String
+  options: OptionCreateNestedManyWithoutBallotInput
+  originalLocale: String
+  school: SchoolCreateNestedOneWithoutBallotsInput
+  scope: BallotScope
+  start: DateTime!
+  team: TeamCreateNestedOneWithoutBallotsInput
+  title: String
+  titlede: String
+  titlefr: String
+  titleit: String
+  updatedAt: DateTime
+  voted: VotedCreateNestedManyWithoutBallotInput
+  votes: VoteCreateNestedManyWithoutBallotInput
+}
+
 input BallotCreateManyCreatorInput {
   body: String
   bodyde: String
@@ -2086,6 +2119,39 @@ enum BallotScope {
   Public
   School
   Team
+}
+
+input BallotUpdateInput {
+  activity: ActivityUpdateManyWithoutBallotInput
+  attachments: AttachmentUpdateManyWithoutBallotInput
+  ballotRuns: BallotRunUpdateManyWithoutBallotInput
+  body: StringFieldUpdateOperationsInput
+  bodyde: StringFieldUpdateOperationsInput
+  bodyfr: StringFieldUpdateOperationsInput
+  bodyit: StringFieldUpdateOperationsInput
+  canton: NullableStringFieldUpdateOperationsInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  creator: UserUpdateOneWithoutBallotsInput
+  description: StringFieldUpdateOperationsInput
+  descriptionde: StringFieldUpdateOperationsInput
+  descriptionfr: StringFieldUpdateOperationsInput
+  descriptionit: StringFieldUpdateOperationsInput
+  discussion: DiscussionUpdateManyWithoutBallotInput
+  end: DateTimeFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  options: OptionUpdateManyWithoutBallotInput
+  originalLocale: StringFieldUpdateOperationsInput
+  school: SchoolUpdateOneWithoutBallotsInput
+  scope: EnumBallotScopeFieldUpdateOperationsInput
+  start: DateTimeFieldUpdateOperationsInput
+  team: TeamUpdateOneWithoutBallotsInput
+  title: StringFieldUpdateOperationsInput
+  titlede: StringFieldUpdateOperationsInput
+  titlefr: StringFieldUpdateOperationsInput
+  titleit: StringFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+  voted: VotedUpdateManyWithoutBallotInput
+  votes: VoteUpdateManyWithoutBallotInput
 }
 
 input BallotUpdateManyMutationInput {
@@ -3496,10 +3562,12 @@ type Mutation {
     name: String
     password: String
   ): User
+  createOneBallot(data: BallotCreateInput!): Ballot
   createOneSchool(data: SchoolCreateInput!): School
   createOneTeam(data: TeamCreateInput!): Team
   createUser(data: UserCreateInput!): User
   deleteAccount: Response
+  deleteOneBallot(where: BallotWhereUniqueInput!): Ballot
   deleteOneSchool(where: SchoolWhereUniqueInput!): School
   deleteOneTeam(where: TeamWhereUniqueInput!): Team
   deleteUser(where: UserWhereUniqueInput!): User
@@ -3524,6 +3592,10 @@ type Mutation {
   setPrefs(prefs: Json!, teamId: String!): Team
   setSchool(school: String!): User
   startBallotRun(ballotRunId: String!): BallotRun
+  updateOneBallot(
+    data: BallotUpdateInput!
+    where: BallotWhereUniqueInput!
+  ): Ballot
   updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
   vote(ballotId: String!, vote: Int!): Vote
   voteCode(ballotRunId: String!, code: String!, vote: Int!): Response

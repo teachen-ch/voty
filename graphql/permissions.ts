@@ -142,6 +142,9 @@ export const permissions = shield(
       postActivity: isUser,
       setPrefs: or(isTeacher, isAdmin),
       setNotes: or(isTeacher, isAdmin),
+      createOneBallot: isAdmin,
+      deleteOneBallot: isAdmin,
+      updateOneBallot: isAdmin,
     },
     User: {
       id: isUser,
