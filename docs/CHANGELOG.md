@@ -1,3 +1,10 @@
+## [1.69.1](https://github.com/teachen-ch/voty/compare/v1.69.0...v1.69.1) (2021-08-26)
+
+
+### Bug Fixes
+
+* lighthouse fixes ([8afb6cd](https://github.com/teachen-ch/voty/commit/8afb6cd587785eadcc9bee23ff238b0ab17dc5a5))
+
 # [1.69.0](https://github.com/teachen-ch/voty/compare/v1.68.0...v1.69.0) (2021-08-26)
 
 
