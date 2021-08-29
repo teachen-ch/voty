@@ -57,7 +57,6 @@ export default function ZDAVote(): React.ReactElement {
         />
       </Flex>
       <ZDABallots scope={BallotScope.National} maxAge={45} />
-      <Text variant="fielderror">{tr("ZDA.Vote.Easywait")}</Text>
     </ZDAVoteTemplate>
   );
 }
