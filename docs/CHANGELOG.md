@@ -1,3 +1,10 @@
+# [1.71.0](https://github.com/teachen-ch/voty/compare/v1.70.0...v1.71.0) (2021-08-29)
+
+
+### Features
+
+* remove waiting text for zda ([b3a40e2](https://github.com/teachen-ch/voty/commit/b3a40e259c755a90d2fea9b6c2adb3b9d9431464))
+
 # [1.70.0](https://github.com/teachen-ch/voty/compare/v1.69.1...v1.70.0) (2021-08-29)
 
 
