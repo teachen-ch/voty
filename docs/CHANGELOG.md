@@ -1,3 +1,16 @@
+# [1.70.0](https://github.com/teachen-ch/voty/compare/v1.69.1...v1.70.0) (2021-08-29)
+
+
+### Bug Fixes
+
+* anon icons on Desktop to be black again ([594ad69](https://github.com/teachen-ch/voty/commit/594ad6968648a31097651223229c59f1d7052424))
+
+
+### Features
+
+* add script to load new ballots ([44ca2ba](https://github.com/teachen-ch/voty/commit/44ca2ba309eebb8b0e6d8bdab0547a4c24648d2d))
+* unfinished ballot administration ([cc7d719](https://github.com/teachen-ch/voty/commit/cc7d719b02214e7a078462c43b51f6e2115c845e))
+
 ## [1.69.1](https://github.com/teachen-ch/voty/compare/v1.69.0...v1.69.1) (2021-08-26)
 
 
