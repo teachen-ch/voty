@@ -1,0 +1,52 @@
+<mjml>
+  <mj-head>
+    <mj-style inline="inline"> .mbot { margin-bottom: -120px; } </mj-style>
+    <mj-font name="SourceSansPro" href="https://voty.ch/fonts/source-sans-pro-v14-latin-600.woff2"></mj-font>
+    <mj-attributes>
+      <mj-all font-family="SourceSansPro, -apple-system, system-ui, sans"></mj-all>
+      <mj-text font-size="18px" line-height="26px" />
+      <mj-class name="title" color="#206DBB" font-weight="bold" align="left" padding-top="40px" text-decoration="underline" font-size="27px" />
+      <mj-button background-color="#206DBB" font-weight="bold" font-size="20px" border-radius="5px" />
+    </mj-attributes>
+  </mj-head>
+  <mj-body>
+    <mj-section>
+      <mj-column width="100%" css-class="mbot">
+        <mj-image width="400px" src="https://voty.ch/images/voty_newsletter_header.png"></mj-image>
+      </mj-column>
+    </mj-section>
+    <mj-section background-color="#E1E6EA" border-radius="8px">
+      <mj-column width="100%" padding-top="40px">
+        <mj-text mj-class="title">Abstimmungen zum Tag der Demokratie</mj-text>
+        <mj-text>
+          Am 15. September 2021 ist der internationale Tag der Demokratie und dieses Jahr finden zum ersten Mal auch in der Schweiz verschiedene Aktionen statt. voty.ch führt gemeinsam mit dem Zentrum für Demokratie Aarau Abstimmungen durch. Dabei kann die ganze Bevölkerung über die Klasseninitiativen von «SpielPolitik!» (Schulen nach Bern) abstimmen und Jugendliche können ihre Meinung zu den nationalen Abstimmungen vom 26. September kundtun. Generationenübergreifende Partizipation!
+        </mj-text>
+        <mj-button href="https://voty.ch/spielpolitik">Jetzt mitmachen</mj-button>
+
+        <mj-text mj-class="title">Politische Bildung in D-A-CH</mj-text>
+        <mj-text>
+          Im Rahmen von anstossdemokratie.net möchten wir gemeinsam mit aula.de herausfinden, wie wir die politische Bildung in Deutschland, der Schweiz und in Österreich gegenseitig bereichern können. Wir sind auf der Suche nach interessierten Lehrpersonen und Schüler*innen für eine Online-Fokusgruppe am 7. September. Ihre Meinung interessiert uns!
+        </mj-text>
+        <mj-button href="https://voty.ch/anstoss/">Zur Fokusgruppe</mj-button>
+
+
+        <mj-text mj-class="title">Online-Lehrmittel für politische Bildung
+        </mj-text>
+        <mj-text>
+          Laufend überarbeiten wir unsere Lerninhalte für die politische Bildung. Die Online-Werkzeugkiste für den Demokratie-Unterricht mit Videos, Quizzes, Aufgaben und mehr finden Sie auf voty.ch/lernen.
+          Wir freuen uns immer über Feedback und Verbesserungsvorschläge
+          aus der Unterrichts-Praxis.
+        </mj-text>
+        <mj-button href="https://voty.ch/cards">Unterrichtsmaterialien ansehen</mj-button>
+
+      </mj-column>
+    </mj-section>
+    <mj-section>
+      <mj-column padding-top="50px">
+        <mj-text mj-class="footer">&copy; Verein «Teachen!», Alpenweg 11, 3110 Münsingen.
+          <unsubscribe>Abmelden</unsubscribe> 😢
+        </mj-text>
+      </mj-column>
+    </mj-section>
+  </mj-body>
+</mjml>
