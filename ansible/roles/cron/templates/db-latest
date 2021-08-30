@@ -46,11 +46,16 @@ DB_PASS = db[1]
 DB_HOST = db[2]
 DB_NAME = db[3]
 
-# generate backup filename: voty-prod-latest.sql.gz
-fileName = "%s-%s-latest.sql.gz" % (DB_NAME, HOSTNAME)
+# generate backup filename: voty-prod-latest-data.dump
+# can be restored with:
+#   docker exec postgres dropdb -U voty voty —force
+#   docker exec postgres createdb -O voty voty
+#   docker exec app yarn run init:db
+#   cat /tmp/data.dump | docker exec -i postgres pg_restore -U voty --disable-triggers -d voty
+fileName = "%s-%s-latest-data.dump" % (DB_NAME, HOSTNAME)
 
 # Run db dump over docker
-dbCmd = "pg_dump -U %s %s  --clean" % (DB_USER, DB_NAME)
+dbCmd = "pg_dump -U %s %s -Fc --data-only" % (DB_USER, DB_NAME)
 cmd = "docker exec %s %s | gzip -9 > %s/%s" % (
     CONTAINER, dbCmd, BACKUPROOT, fileName)
 
