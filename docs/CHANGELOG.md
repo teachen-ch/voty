@@ -1,3 +1,17 @@
+# [1.72.0](https://github.com/teachen-ch/voty/compare/v1.71.0...v1.72.0) (2021-08-30)
+
+
+### Bug Fixes
+
+* minor fixes to ansible scripts ([5dbe124](https://github.com/teachen-ch/voty/commit/5dbe1249a9d5a629444781f234e044722d8b4e6e))
+
+
+### Features
+
+* new backup & restore tactics incl docs ([a25230b](https://github.com/teachen-ch/voty/commit/a25230bfa6ec036866add1aa92c5540c77c37c49))
+* new docker.io package for ubuntu ([ab541f1](https://github.com/teachen-ch/voty/commit/ab541f1e5ed29c1fca5e4c9c9d66e9cf6c71e46f))
+* newsletter for Q3 ([ed10dd4](https://github.com/teachen-ch/voty/commit/ed10dd4cc72c2cf58143baad1c78a43af6e05382))
+
 # [1.71.0](https://github.com/teachen-ch/voty/compare/v1.70.0...v1.71.0) (2021-08-29)
 
 
