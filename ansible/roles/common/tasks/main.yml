@@ -8,13 +8,9 @@
     - name: Install backend modules
       package:
         name:
-          #- nodejs
-          #- git
-          #- python2
-          #- nginx
           - python3
           - "{{ python3_pip }}"
-          - docker
+          - "{{ docker_pkg }}"
     - name: Install Docker Modules for Python
       pip:
         name:

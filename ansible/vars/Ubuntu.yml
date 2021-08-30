@@ -1,5 +1,6 @@
 test: Ubuntu
 python3_pip: python3-pip
+docker_pkg: docker.io
 nginx_sites: /etc/nginx/sites-enabled
 nginx_conf: nginx-ubuntu.conf
 service_dest: /etc/systemd/system/voty.service

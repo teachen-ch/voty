@@ -1,5 +1,6 @@
 test: Alpine
 python3_pip: py3-pip
+docker_pkg: docker
 nginx_conf: nginx-alpine.conf
 nginx_sites: /etc/nginx/conf.d
 service_dest: /etc/init.d/voty
