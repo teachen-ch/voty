@@ -79,7 +79,7 @@ def getCat(dxex):
     global categories
     if dxex == '.':
         return ''
-    if type(dxex) == numpy.float and dxex > 0:
+    if type(dxex) == float and dxex > 0:
         dxex = str(int(dxex))
     return categories.get(str(dxex), '')
 
@@ -107,13 +107,22 @@ def parsePosters(str):
     global posters
     urls = []
     for url in str.split(' '):
+        content = ""
         if (len(url) < 4):
             continue
         if (url in posters):
             urls += [posters[url]]
             print("Cache Match for " + url)
             continue
-        content = urllib.request.urlopen(url).read().decode()
+        try:
+            content = urllib.request.urlopen(url).read().decode()
+        except urllib.error.URLError:
+            print("Malformed URL: " + url)
+            continue
+        except urllib.error.HTTPError:
+            print("Could not load URL: " + url)
+            continue
+
         if (re.search('emuseum.ch', url)):
             match = re.search(
                 r'/internal/media/dispatcher/\d+/preview', content)
