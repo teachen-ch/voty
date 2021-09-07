@@ -1,4 +1,4 @@
 server_name: backup.voty.ch
 certificates: Host(`backup.voty.ch`)
-env_file: ../.env.production
+env_file: ../.env.backup
 cache_time: 15m

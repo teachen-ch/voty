@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# nightly DB backups dumped to SFTP server
+# load latest dump from ftp
 
 from datetime import datetime
 from ftplib import FTP_TLS
@@ -8,9 +8,9 @@ import sys
 import time
 import re
 
-DAYS = 30  # remove older backups
 CONTAINER = "postgres"
-BACKUPROOT = "/voty/backup"
+FILE = "voty-prod-latest-data.dump"
+DESTINATION = "/tmp/"+FILE
 ENV_FILE = "/voty/.env"
 HOSTNAME = os.uname()[1]
 
@@ -26,13 +26,23 @@ def readEnv(envFile):
 
 
 env = readEnv(ENV_FILE)
-if (not 'BACKUP_SERVER' in env):
-    print("Skipping backup, as BACKUP_SERVER is not defined")
+if (not 'RESTORE_SERVER' in env):
+    print("Skipping backup, as RESTORE_SERVER is not defined")
     sys.exit(0)
 
-BACKUP_SERVER = env['BACKUP_SERVER']
-BACKUP_USER = env['BACKUP_USER']
-BACKUP_PASS = env['BACKUP_PASS']
+RESTORE_SERVER = env['RESTORE_SERVER']
+RESTORE_USER = env['RESTORE_USER']
+RESTORE_PASS = env['RESTORE_PASS']
+
+
+# Download latest backup via FTPES
+handle = open(DESTINATION, 'wb')
+ftps = FTP_TLS(RESTORE_SERVER)
+ftps.login(RESTORE_USER, RESTORE_PASS)
+
+ftps.prot_p()
+ftps.retrbinary('RETR %s' % FILE, handle.write)
+
 DATABASE_URL = env['DATABASE_URL']
 
 match = re.match(r'.*//(.*?)\:(.*?)@(.*?)\/(.*)', DATABASE_URL)
@@ -46,16 +56,9 @@ DB_PASS = db[1]
 DB_HOST = db[2]
 DB_NAME = db[3]
 
-# generate backup filename: voty-prod-latest-data.dump
-# can be restored with:
-#   docker exec postgres dropdb -U voty voty —force
-#   docker exec postgres createdb -O voty voty
-#   docker exec app yarn run init:db
-#   cat /tmp/data.dump | docker exec -i postgres pg_restore -U voty --disable-triggers -d voty
-fileName = "%s-%s-latest-data.dump" % (DB_NAME, HOSTNAME)
 
 # Run db dump over docker
-dbCmd = "pg_dump -U %s %s -Fc" % (DB_USER, DB_NAME)
+""" dbCmd = "pg_dump -U %s %s -Fc" % (DB_USER, DB_NAME)
 cmd = "docker exec %s %s > %s/%s" % (
     CONTAINER, dbCmd, BACKUPROOT, fileName)
 
@@ -63,11 +66,4 @@ code = os.system(cmd)
 if (code != 0):
     print("Error: could not run pg_dump via docker")
     sys.exit(code)
-
-# Upload latest file via FTPES
-ftps = FTP_TLS(BACKUP_SERVER)
-ftps.login(BACKUP_USER, BACKUP_PASS)
-ftps.prot_p()
-file = open(os.path.join(BACKUPROOT, fileName), 'rb')
-ftps.storbinary('STOR '+fileName, file, blocksize=8192)
-file.close()
+ """
