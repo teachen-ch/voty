@@ -1,6 +1,7 @@
 import { default as Router } from "next/router";
 import { useEffect } from "react";
 import { SessionUser } from "state/user";
+import posthog from "posthog-js";
 
 const isExcludedUrl = (url: string, patterns: RegExp[]): boolean => {
   let excluded = false;
@@ -27,6 +28,13 @@ export function initStats({
   phpTrackerFile = "matomo.php",
   excludeUrlsPatterns = [],
 }: InitSettings): void {
+  const href = window?.location?.href;
+  if (href && !href.includes("127.0.0.1") && !href.includes("dev.voty.ch")) {
+    posthog.init("phc_qHg6fE4uFk6C2XSRZXe8wAX0xguk0XG5YTR53yBxTDP", {
+      api_host: "https://app.posthog.com",
+    });
+  }
+
   window._paq = window._paq || [];
   if (!url) {
     console.warn("Matomo disabled, please provide matomo url");
@@ -119,11 +127,19 @@ export function trackEvent(evt: TrackEvent): void {
   if (evt.name) args.push(evt.name);
   if (evt.value) args.push(evt.value);
   push(args);
+
+  posthog.capture(`${evt.category}-${evt.action}`);
 }
 
 let trackedRole = false;
 
 export function trackVisit(user: SessionUser): void {
+  posthog.identify(user?.id, {
+    role: user?.role,
+    team: user?.team,
+    school: user?.school?.name,
+  });
+
   if (user && !trackedRole) {
     push(["setCustomDimension", 1, user.role]);
     trackedRole = true;

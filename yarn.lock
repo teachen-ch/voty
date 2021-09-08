@@ -2114,6 +2114,11 @@
     lodash "^4.17.4"
     read-pkg-up "^7.0.0"
 
+"@sentry/types@^6.11.0":
+  version "6.12.0"
+  resolved "https://registry.yarnpkg.com/@sentry/types/-/types-6.12.0.tgz#b7395688a79403c6df8d8bb8d81deb8222519853"
+  integrity sha512-urtgLzE4EDMAYQHYdkgC0Ei9QvLajodK1ntg71bGn0Pm84QUpaqpPDfHRU+i6jLeteyC7kWwa5O5W1m/jrjGXA==
+
 "@sindresorhus/is@^0.14.0":
   version "0.14.0"
   resolved "https://registry.yarnpkg.com/@sindresorhus/is/-/is-0.14.0.tgz#9fb3a3cf3132328151f353de4632e01e52102bea"
@@ -6766,6 +6771,11 @@ fecha@^4.2.0:
   version "4.2.0"
   resolved "https://registry.yarnpkg.com/fecha/-/fecha-4.2.0.tgz#3ffb6395453e3f3efff850404f0a59b6747f5f41"
   integrity sha512-aN3pcx/DSmtyoovUudctc8+6Hl4T+hI9GBBHLjA76jdZl7+b1sgh5g4k+u/GL3dTy1/pnYzKp69FpJ0OicE3Wg==
+
+fflate@^0.4.1:
+  version "0.4.8"
+  resolved "https://registry.yarnpkg.com/fflate/-/fflate-0.4.8.tgz#f90b82aefbd8ac174213abb338bd7ef848f0f5ae"
+  integrity sha512-FJqqoDBR00Mdj9ppamLa/Y7vxm+PRmNWA67N846RvsoYVMKB4q3y/de5PA7gUmRMYK/8CMz2GDZQmCRN1wBcWA==
 
 figgy-pudding@^3.4.1, figgy-pudding@^3.5.1:
   version "3.5.2"
@@ -12117,6 +12127,15 @@ postcss@8.2.15:
     nanoid "^3.1.23"
     source-map "^0.6.1"
 
+posthog-js@^1.13.7:
+  version "1.13.7"
+  resolved "https://registry.yarnpkg.com/posthog-js/-/posthog-js-1.13.7.tgz#bfb429cda7b5fe497f1bc849ab8ee962ec620311"
+  integrity sha512-t96F3KeqtTaTiaCFtKQFE+pWxvAeWcGyvgH985TMIOZhmeBNDYQHw5oKu4j3gAoLkICzxxbemtpGNY/w6Auu/A==
+  dependencies:
+    "@sentry/types" "^6.11.0"
+    fflate "^0.4.1"
+    rrweb-snapshot "^1.1.7"
+
 prelude-ls@^1.2.1:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/prelude-ls/-/prelude-ls-1.2.1.tgz#debc6489d7a6e6b0e7611888cec880337d316396"
@@ -13211,6 +13230,11 @@ ripemd160@^2.0.0, ripemd160@^2.0.1:
   dependencies:
     hash-base "^3.0.0"
     inherits "^2.0.1"
+
+rrweb-snapshot@^1.1.7:
+  version "1.1.8"
+  resolved "https://registry.yarnpkg.com/rrweb-snapshot/-/rrweb-snapshot-1.1.8.tgz#57c3a8003a6ebbe4a2e2f5be29e30a47a8b1eb03"
+  integrity sha512-wi8T9IVobEwlns7U2m8cbPfoihsNAMpTI+UBe4KUjclU2N+vtowD2U1Rq8PleiFTDvcseHvkQDmEIZoZLXFzwg==
 
 run-async@^2.4.0:
   version "2.4.1"
