@@ -103,8 +103,11 @@ export default function Datenschutz(): ReactElement {
         <Text>
           Für die Analyse und Verbesserung von voty.ch werden Web-Analytics
           aufgezeichnet. Diese Analyse-Daten werden jedoch nur auf unseren
-          eigenen Server gespeichert und nicht an Cloud-Provider wie Google o.ä.
-          geschickt.
+          eigenen Server gespeichert und nicht an Google o.ä. geschickt.
+          <strong>Hinweism, 8. September 2021: </strong>aktuell pilotieren wir
+          ein zusätzliches Analyse-Tool, um die Benutzerführung zu verbessern.
+          Anonymisierte Nutzerdaten werden deshalb momentan auf posthog.com
+          transferiert und werden dort verschlüsselt gespeichert.
         </Text>
         <Heading as="h2">Wie lange werden Deine Daten gespeichert</Heading>
         <Text>

@@ -29,7 +29,12 @@ export function initStats({
   excludeUrlsPatterns = [],
 }: InitSettings): void {
   const href = window?.location?.href;
-  if (href && !href.includes("127.0.0.1") && !href.includes("dev.voty.ch")) {
+  if (
+    href &&
+    !href.includes("127.0.0.1") &&
+    !href.includes("localhost") &&
+    !href.includes("dev.voty.ch")
+  ) {
     posthog.init("phc_qHg6fE4uFk6C2XSRZXe8wAX0xguk0XG5YTR53yBxTDP", {
       api_host: "https://app.posthog.com",
     });
@@ -119,6 +124,7 @@ type TrackEvent = {
 export function usePageEvent(evt: TrackEvent): void {
   useEffect(() => {
     trackEvent(evt);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 }
 
@@ -134,13 +140,15 @@ export function trackEvent(evt: TrackEvent): void {
 let trackedRole = false;
 
 export function trackVisit(user: SessionUser): void {
-  posthog.identify(user?.id, {
-    role: user?.role,
-    team: user?.team,
-    school: user?.school?.name,
+  if (!user) return;
+  posthog.identify(user.id, {
+    name: `${user.role}-${user.id.slice(-6)}`,
+    role: user.role,
+    team: user.team,
+    school: user.school?.name,
   });
 
-  if (user && !trackedRole) {
+  if (!trackedRole) {
     push(["setCustomDimension", 1, user.role]);
     trackedRole = true;
   }
