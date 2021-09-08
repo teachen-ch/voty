@@ -1,0 +1,32 @@
+[
+  {
+    "id": "deploy-hook",
+    "execute-command": "/voty/deploy-hook.sh",
+    "command-working-directory": "/voty",
+    "response-message": "Fresh as a baby!",
+    "trigger-rule": {
+      "and": [
+        {
+          "match": {
+            "type": "payload-hash-sha1",
+            "secret": "{{ WEBHOOK_SECRET",
+            "parameter": {
+              "source": "header",
+              "name": "X-Hub-Signature"
+            }
+          }
+        },
+        {
+          "match": {
+            "type": "value",
+            "value": "refs/heads/main",
+            "parameter": {
+              "source": "payload",
+              "name": "ref"
+            }
+          }
+        }
+      ]
+    }
+  }
+]

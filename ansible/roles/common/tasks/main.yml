@@ -9,6 +9,7 @@
       package:
         name:
           - python3
+          - webhook
           - "{{ python3_pip }}"
           - "{{ docker_pkg }}"
     - name: Install Docker Modules for Python
