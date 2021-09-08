@@ -1,3 +1,16 @@
+# [1.73.0](https://github.com/teachen-ch/voty/compare/v1.72.0...v1.73.0) (2021-09-08)
+
+
+### Bug Fixes
+
+* let import votes handle malformed urls ([78d9060](https://github.com/teachen-ch/voty/commit/78d9060da0a1a5ed03c6fa37f384b07235a4df23))
+
+
+### Features
+
+* add posthog ([5a105f6](https://github.com/teachen-ch/voty/commit/5a105f69aa6650fb3e7d39f04b9a35e54e7eb3ce))
+* new regular backup mode (-Fc) ([80918b2](https://github.com/teachen-ch/voty/commit/80918b28c544710e3fffbcd9be82a51cab887f29))
+
 # [1.72.0](https://github.com/teachen-ch/voty/compare/v1.71.0...v1.72.0) (2021-08-30)
 
 
