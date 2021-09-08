@@ -1,3 +1,10 @@
+# [1.74.0](https://github.com/teachen-ch/voty/compare/v1.73.1...v1.74.0) (2021-09-08)
+
+
+### Features
+
+* automate deployments to dev ([0026d38](https://github.com/teachen-ch/voty/commit/0026d38aa5009634bb99cd2873f6cbfab9aca990))
+
 ## [1.73.1](https://github.com/teachen-ch/voty/compare/v1.73.0...v1.73.1) (2021-09-08)
 
 
