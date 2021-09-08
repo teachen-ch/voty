@@ -1,3 +1,10 @@
+## [1.73.1](https://github.com/teachen-ch/voty/compare/v1.73.0...v1.73.1) (2021-09-08)
+
+
+### Bug Fixes
+
+* minor ts fix ([1a96853](https://github.com/teachen-ch/voty/commit/1a9685389325676c04677032c7d5d0af735fc51d))
+
 # [1.73.0](https://github.com/teachen-ch/voty/compare/v1.72.0...v1.73.0) (2021-09-08)
 
 
