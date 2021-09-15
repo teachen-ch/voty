@@ -1,3 +1,18 @@
+# [1.75.0](https://github.com/teachen-ch/voty/compare/v1.74.0...v1.75.0) (2021-09-15)
+
+
+### Bug Fixes
+
+* inactive deploy hook ([52d55c7](https://github.com/teachen-ch/voty/commit/52d55c7c86230d2e9631b1aba7c6f31f5813e325))
+* minor text correction ([cc1346e](https://github.com/teachen-ch/voty/commit/cc1346e1562bfe57a1c2d57330c779aacb12b883))
+
+
+### Features
+
+* new order for admin teams list ([bb8f8db](https://github.com/teachen-ch/voty/commit/bb8f8db957c839ce15ef9a4850c35d55ab4d493f))
+* remove ux tool ([6a34da7](https://github.com/teachen-ch/voty/commit/6a34da75ddb72e0b9d7f3f943c2386e5ea608f40))
+* results for ZDA ([5d4e290](https://github.com/teachen-ch/voty/commit/5d4e290604b7b97157625bf6746fe3a1767d0481))
+
 # [1.74.0](https://github.com/teachen-ch/voty/compare/v1.73.1...v1.74.0) (2021-09-08)
 
 
