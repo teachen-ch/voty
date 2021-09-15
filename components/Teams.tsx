@@ -10,6 +10,7 @@ import {
   TeamUserFieldsFragment,
   useCreateOneTeamMutation,
   useDeleteOneTeamMutation,
+  TeamOrderByInput,
 } from "graphql/types";
 import { Loading } from "./Page";
 import { useRouter } from "next/router";
@@ -63,8 +64,8 @@ const TeamTeacherFields = gql`
 export const fragments = { TeamUserFields, TeamTeacherFields, TeamAnonFields };
 
 export const GET_TEAMS = gql`
-  query teams($where: TeamWhereInput) {
-    teams(where: $where) {
+  query teams($where: TeamWhereInput, $orderBy: [TeamOrderByInput!]) {
+    teams(where: $where, orderBy: $orderBy) {
       ...TeamTeacherFields
     }
   }
@@ -126,11 +127,12 @@ export const DELETE_TEAM = gql`
 
 type TeamsProps = {
   where?: TeamWhereInput;
+  orderBy?: TeamOrderByInput[];
   teamClick: (team: TeamUserFieldsFragment) => void;
 };
 
-export const Teams: React.FC<TeamsProps> = ({ where, teamClick }) => {
-  const teamsQuery = useTeamsQuery({ variables: { where } });
+export const Teams: React.FC<TeamsProps> = ({ where, orderBy, teamClick }) => {
+  const teamsQuery = useTeamsQuery({ variables: { where, orderBy } });
   const teams = teamsQuery.data?.teams;
 
   if (teamsQuery.error) {

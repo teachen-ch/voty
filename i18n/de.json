@@ -3,7 +3,7 @@
     "Header": "Abstimmung zum Tag der Demokratie 2021",
     "CreateButton": "Bestätigungs-Email schicken",
     "Start": {
-      "Intro": "Hier können Schüler*innen und Erwachsene über die Initiativen von «SpielPolitik!» abstimmen und Jugendliche können für die eidgenössischen Abstimmungen vom 26. September ihre Stimme abgeben.",
+      "Intro": "Hier konnten Schüler*innen und Erwachsene über die Initiativen von «SpielPolitik!» abstimmen und Jugendliche konnten für die eidgenössischen Abstimmungen vom 26. September ihre Stimme abgeben.",
       "Step1": "Registriere Dich mit Deiner Email-Adresse",
       "Step2": "Klicke den Bestätigungslink im Email",
       "Step3": "Stimme über die Vorlagen ab",
@@ -16,6 +16,9 @@
       "Easywait": "Die neuen Abstimmungen werden am Montag, 30. August 2021 aufgeschaltet",
       "VoteNow": "Jetzt abstimmen!",
       "Cancel": "Abbrechen"
+    },
+    "Results": {
+      "Header": "Abstimmungsresultate"
     }
   },
   "Profile": {
@@ -76,7 +79,10 @@
     "Started": "Gestartet",
     "Ended": "Beendet",
     "Voted": "Erfolgreich abgestimmt",
-    "Permission": "Nicht berechtigt"
+    "Permission": "Nicht berechtigt",
+    "Yes": "Ja",
+    "No": "Nein",
+    "Abstain": "Enthalten"
   },
   "Error": {
     "BallotNotStarted": "Diese Abstimmung ist noch nicht gestartet",

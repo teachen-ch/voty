@@ -11,6 +11,7 @@ import { DE, FR, IT } from "components/Translated";
 import Success from "../user/success";
 import { trLink, useTr } from "util/translate";
 import { useRouter } from "next/router";
+import { ZDAResultPies } from "./resultate";
 
 export default function ZDAAbstimmung(): React.ReactElement {
   const user = useUser();
@@ -28,37 +29,9 @@ export default function ZDAAbstimmung(): React.ReactElement {
     <ZDAFullPage heading={tr("ZDA.Header")}>
       <Logos />
       {tr("ZDA.Start.Intro")}
-      <Box mb={5} mt={4}>
-        <Step n={hasUser ? "✔" : 1} mb={2} bg={hasUser ? "green" : "gray"}>
-          <Text fontStyle={hasUser ? "italic" : "normal"}>
-            {tr("ZDA.Start.Step1")}
-          </Text>
-        </Step>
-        <Step n="2" mb={2}>
-          {tr("ZDA.Start.Step2")}
-        </Step>
-        <Step n="3" mb={2}>
-          {tr("ZDA.Start.Step3")}
-        </Step>
-      </Box>
 
-      {newUser ? (
-        <Card>
-          <Success user={newUser} />
-        </Card>
-      ) : (
-        <CreateUserForm
-          setUser={setNewUser}
-          defaultRole={Role.Student}
-          omitFirstname
-          omitLastname
-          omitPassword
-          omitLogin
-          submitButtonLabel={tr("ZDA.CreateButton")}
-          campaign="spielpolitik"
-          redirect={voteLink}
-        />
-      )}
+      <br />
+      <br />
       {user && <A href={voteLink}>{tr("ZDA.Start.GoVote")}</A>}
       {user && (
         <A
@@ -74,42 +47,38 @@ export default function ZDAAbstimmung(): React.ReactElement {
       <DE mt={4} fontSize={[1, 1, 2]}>
         <b>Initiativen «SpielPolitik!»</b>
         <br />
-        «Sieben Wochen Ferien für Auszubildende», «Familienglück für alle»,
-        «Wahl des Geschlechts».{" "}
         <A href="/files/spielpolitik_de.pdf" target="_blank">
           Abstimmungsbüchlein herunterladen
         </A>
+        <ZDAResultPies />
         <br />
         <br />
-        <b>Eidgenössische Volksabstimmungen vom 26. September</b>
         <br />
-        «99% Initiative», «Ehe für Alle»
+        <br />
       </DE>
       <FR>
         <b>Initiatives « Joue la politique ! »</b>
-        <br />« Sept semaines de vacances pour les apprentis et apprenties », «
-        Le bonheur familial pour tous », « Choix du genre »{" "}
+        <br />
         <A href="/files/spielpolitik_fr.pdf" target="_blank">
           Télécharger le livret de vote
         </A>
+        <ZDAResultPies />
         <br />
         <br />
-        <b>Votations populaires du 26 septembre </b>
-        <br />« Initiative 99% », « Mariage pour tous ».
+        <br />
+        <br />
       </FR>
       <IT>
         <b>Iniziative «Gioca alla politica!»</b>
         <br />
-        «Sette settimane di vacanza per gli apprendisti», «Felicità familiare
-        per tutti», «Scelta del genere».{" "}
         <A href="/files/spielpolitik_it.pdf" target="_blank">
           Scarica il libretto di voto
         </A>
+        <ZDAResultPies />
         <br />
         <br />
-        <b>Voti popolari del 26 settembre</b>
         <br />
-        «Iniziativa 99%», «Matrimonio per tutti»
+        <br />
       </IT>
 
       <ZDAFAQ />

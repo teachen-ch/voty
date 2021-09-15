@@ -10,6 +10,7 @@ import { Detail } from "pages/projekt";
 import { useTr } from "util/translate";
 import { useUser } from "state/user";
 import { ProfileEdit } from "components/Users";
+import { ZDAResultPies } from "./resultate";
 
 const SKIP_DEMOGRAPHICS =
   process.env.SKIP_DEMOGRAPHICS?.toUpperCase() === "TRUE";
@@ -43,7 +44,9 @@ export default function ZDAVote(): React.ReactElement {
           alt="Schulen nach Bern Logo"
         />
       </Flex>
-      <ZDABallots scope={BallotScope.Public} maxAge={45} />
+      <Box height={2} bg="#000" />
+      <ZDAResultPies />
+
       <Flex justifyContent="space-between" alignItems="flex-end">
         <Heading mt={5} fontSize={[2, 2, 3]}>
           {tr("ZDA.Vote.Header2")}

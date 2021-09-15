@@ -3,7 +3,7 @@
     "Header": "Voto per la Giornata della Democrazia 2021",
     "CreateButton": "verificare l'email",
     "Start": {
-      "Intro": "Qui, studenti e adulti possono votare le iniziative di «Gioca alla politica!» e i giovani possono votare alle elezioni federali del 26 settembre.",
+      "Intro": "Qui, studenti e adulti potrebbero votare le iniziative di «Gioca alla politica!» e i giovani potrebbero votare alle elezioni federali del 26 settembre.",
       "Step1": "Registrati con il tuo indirizzo e-mail",
       "Step2": "Clicca sul link di conferma nell'e-mail",
       "Step3": "Vota tutte le proposte",
@@ -16,6 +16,9 @@
       "Easywait": "I nuovi voti saranno pubblicati lunedì 30 agosto 2021.",
       "VoteNow": "Vota ora!",
       "Cancel": "Cancella"
+    },
+    "Results": {
+      "Header": "Risultati delle votazioni"
     }
   },
   "Profile": {
@@ -64,7 +67,10 @@
     "Started": "Lanciato",
     "Ended": "Finito",
     "Voted": "Votato con successo",
-    "Permission": "Non autorizzato"
+    "Permission": "Non autorizzato",
+    "Yes": "Si",
+    "No": "No",
+    "Abstain": "Abstenuto"
   },
   "Error": {
     "CreateUser": "L'account non può essere creato",

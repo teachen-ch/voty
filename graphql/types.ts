@@ -9555,6 +9555,7 @@ export type TeamTeacherFieldsFragment = (
 
 export type TeamsQueryVariables = Exact<{
   where?: Maybe<TeamWhereInput>;
+  orderBy?: Maybe<Array<TeamOrderByInput>>;
 }>;
 
 
@@ -11196,8 +11197,8 @@ export type SwissvotesQueryHookResult = ReturnType<typeof useSwissvotesQuery>;
 export type SwissvotesLazyQueryHookResult = ReturnType<typeof useSwissvotesLazyQuery>;
 export type SwissvotesQueryResult = Apollo.QueryResult<SwissvotesQuery, SwissvotesQueryVariables>;
 export const TeamsDocument = gql`
-    query teams($where: TeamWhereInput) {
-  teams(where: $where) {
+    query teams($where: TeamWhereInput, $orderBy: [TeamOrderByInput!]) {
+  teams(where: $where, orderBy: $orderBy) {
     ...TeamTeacherFields
   }
 }
@@ -11216,6 +11217,7 @@ export const TeamsDocument = gql`
  * const { data, loading, error } = useTeamsQuery({
  *   variables: {
  *      where: // value for 'where'
+ *      orderBy: // value for 'orderBy'
  *   },
  * });
  */

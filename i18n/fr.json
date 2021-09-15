@@ -3,7 +3,7 @@
     "Header": "Votation pour la Journée de la démocratie 2021",
     "CreateButton": "verifiez email",
     "Start": {
-      "Intro": "Ici, élèves et adultes peuvent voter sur les initiatives de « Joue la politique ! » et les jeunes peuvent voter pour les votations fédérales du 26 septembre.",
+      "Intro": "Ici, élèves et adultes ont pu voter sur les initiatives de « Joue la politique ! » et les jeunes ont put voter pour les votations fédérales du 26 septembre.",
       "Step1": "Enregistre-toi avec ton adresse e-mail",
       "Step2": "Clique sur le lien de confirmation dans l'e-mail",
       "Step3": "Vote sur toutes les propositions",
@@ -16,6 +16,9 @@
       "Easywait": "Les nouvelles votations seront postées le lundi 30 août 2021.",
       "VoteNow": "Vote !",
       "Cancel": "Annuler"
+    },
+    "Results": {
+      "Header": "Résultats des votes"
     }
   },
   "Profile": {
@@ -71,7 +74,10 @@
     "Started": "Lancé",
     "Ended": "Terminé",
     "Voted": "Voté avec succès",
-    "Permission": "Non autorisé"
+    "Permission": "Non autorisé",
+    "Yes": "oui",
+    "No": "non",
+    "Abstain": "abstenu"
   },
   "Misc": {
     "DetailClosed": "En détail…",

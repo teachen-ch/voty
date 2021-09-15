@@ -7,6 +7,7 @@ import { BallotResults as BallotResultsType } from "graphql/types";
 import type { Nullable } from "simplytyped";
 import { Info } from "./Info";
 import { isProd } from "util/isBrowser";
+import { useTr } from "util/translate";
 
 export const BallotResults: React.FC<{
   results?: Nullable<BallotResultsType>;
@@ -62,15 +63,16 @@ export const BallotResults: React.FC<{
 export const VotyPie: React.FC<{
   results: BallotResultsType;
 }> = ({ results }) => {
+  const tr = useTr();
   const data = [
-    { title: "Ja", value: Number(results.yes), color: "green" },
-    { title: "Nein", value: Number(results.no), color: "#d90000" },
+    { title: tr("Ballot.Yes"), value: Number(results.yes), color: "green" },
+    { title: tr("Ballot.No"), value: Number(results.no), color: "#d90000" },
   ];
   if (results.abs) {
     data.push({
-      title: "Enthalten",
+      title: tr("Ballot.Abstain"),
       value: Number(results.abs),
-      color: "lightgray",
+      color: "#aaa",
     });
   }
 
@@ -79,8 +81,9 @@ export const VotyPie: React.FC<{
     const x = 50;
     const y = results.abs ? 50 : 55;
     const dx = 0;
-    const dy = title === "Ja" ? -8 : title === "Nein" ? 8 : 20;
-    const fontSize = title === "Enthalten" ? "8px" : "12px";
+    const dy =
+      title === tr("Ballot.Yes") ? -8 : title === tr("Ballot.No") ? 8 : 20;
+    const fontSize = title === tr("Ballot.Abstain") ? "8px" : "12px";
     return (
       <text
         key={title}
