@@ -1,7 +1,7 @@
 import { default as Router } from "next/router";
 import { useEffect } from "react";
 import { SessionUser } from "state/user";
-import posthog from "posthog-js";
+// import posthog from "posthog-js";
 
 const isExcludedUrl = (url: string, patterns: RegExp[]): boolean => {
   let excluded = false;
@@ -35,9 +35,9 @@ export function initStats({
     !href.includes("localhost") &&
     !href.includes("dev.voty.ch")
   ) {
-    posthog.init("phc_qHg6fE4uFk6C2XSRZXe8wAX0xguk0XG5YTR53yBxTDP", {
+    /* posthog.init("phc_qHg6fE4uFk6C2XSRZXe8wAX0xguk0XG5YTR53yBxTDP", {
       api_host: "https://app.posthog.com",
-    });
+    }); */
   }
 
   window._paq = window._paq || [];
@@ -134,19 +134,19 @@ export function trackEvent(evt: TrackEvent): void {
   if (evt.value) args.push(evt.value);
   push(args);
 
-  posthog.capture(`${evt.category}-${evt.action}`);
+  // posthog.capture(`${evt.category}-${evt.action}`);
 }
 
 let trackedRole = false;
 
 export function trackVisit(user: SessionUser): void {
   if (!user) return;
-  posthog.identify(user.id, {
+  /* posthog.identify(user.id, {
     name: `${user.role}-${user.id.slice(-6)}`,
     role: user.role,
     team: user.team,
     school: user.school?.name,
-  });
+  }); */
 
   if (!trackedRole) {
     push(["setCustomDimension", 1, user.role]);
