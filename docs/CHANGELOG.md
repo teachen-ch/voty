@@ -1,3 +1,10 @@
+## [1.76.1](https://github.com/teachen-ch/voty/compare/v1.76.0...v1.76.1) (2021-09-21)
+
+
+### Bug Fixes
+
+* security fix on prismjs ([bca3a4e](https://github.com/teachen-ch/voty/commit/bca3a4edfb83ea41a92808b3cfd805d86dc0140b))
+
 # [1.76.0](https://github.com/teachen-ch/voty/compare/v1.75.1...v1.76.0) (2021-09-21)
 
 
