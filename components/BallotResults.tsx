@@ -15,12 +15,13 @@ export const BallotResults: React.FC<{
   if (!results) return null;
   if (!results.total) return <Text>Noch keine Stimmen</Text>;
 
+  // we used to not show results if there was only one answer...
+  // let nullOptions = 0;
+  // if (!results.yes) nullOptions++;
+  // if (!results.no) nullOptions++;
+  // if (!results.abs) nullOptions++;
   // ensure we only show results, once we don't mess with anonymization
-  let nullOptions = 0;
-  if (!results.yes) nullOptions++;
-  if (!results.no) nullOptions++;
-  if (!results.abs) nullOptions++;
-  if ((results.total < 5 || nullOptions >= 2) && isProd())
+  if (results.total < 5 && isProd())
     return (
       <Info type="important">
         Es wurden erst {results.total} Stimmen abgegeben. Resultate werde noch
