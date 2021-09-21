@@ -1,3 +1,10 @@
+# [1.76.0](https://github.com/teachen-ch/voty/compare/v1.75.1...v1.76.0) (2021-09-21)
+
+
+### Features
+
+* remove public ballots in teacher admin ([f6d9efd](https://github.com/teachen-ch/voty/commit/f6d9efdb6bd4ccca112dceff0ca8b2d7d981d26f))
+
 ## [1.75.1](https://github.com/teachen-ch/voty/compare/v1.75.0...v1.75.1) (2021-09-17)
 
 
