@@ -1,3 +1,10 @@
+## [1.76.2](https://github.com/teachen-ch/voty/compare/v1.76.1...v1.76.2) (2021-09-21)
+
+
+### Bug Fixes
+
+* reactivate zda ballots ([d82e402](https://github.com/teachen-ch/voty/commit/d82e4025876eceaea1c364aa15956191717923d7))
+
 ## [1.76.1](https://github.com/teachen-ch/voty/compare/v1.76.0...v1.76.1) (2021-09-21)
 
 
