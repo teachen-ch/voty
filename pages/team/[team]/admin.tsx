@@ -170,10 +170,17 @@ export default function TeacherTeamPage(): React.ReactElement {
       <b>Eidgenössische Abstimmungen vom 26. September</b>
       <SelectBallots team={team} scope={BallotScope.National} />
       <br />
-
       <b>Initiativen «SpielPolitik!» von Schulen nach Bern</b>
+      <br />
+      <small>
+        (Die Abstimmungen sind bereits geschlossen. Weitere Informationen finden
+        sie{" "}
+        <A href="/spielpolitik/" target="_blank">
+          hier
+        </A>
+        )
+      </small>
       <SelectBallots team={team} scope={BallotScope.Public} />
-
       <HideFeature id="activities">
         <H2 mt={6}>Aktivitäten Klasse {team.name}</H2>
         <Text mb={4} fontSize={2}>
@@ -182,7 +189,6 @@ export default function TeacherTeamPage(): React.ReactElement {
         </Text>
         <Activities teamId={team.id} />
       </HideFeature>
-
       <H2 mt={6}>Schülerinnen und Schüler</H2>
       {!team.members.length ? (
         <Text fontSize={2}>
@@ -200,7 +206,6 @@ export default function TeacherTeamPage(): React.ReactElement {
           <Users users={team.members} />
         </>
       )}
-
       {duplicated ? (
         <ErrorBox
           error={`Folgende Accounts existieren bereits: ${duplicatedEmails}`}
@@ -215,7 +220,6 @@ export default function TeacherTeamPage(): React.ReactElement {
       ) : (
         ""
       )}
-
       {!team.members.length || showInvite ? (
         <>
           <Text mt={4} fontSize={2} fontWeight="semi">
@@ -267,7 +271,6 @@ export default function TeacherTeamPage(): React.ReactElement {
           Weitere Schüler*innen einladen
         </Button>
       )}
-
       <ShowFor role="admin">
         <DeleteTeamLink teamId={team.id} textAlign="right" fontSize={1} />
       </ShowFor>
