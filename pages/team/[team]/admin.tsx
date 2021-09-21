@@ -169,6 +169,10 @@ export default function TeacherTeamPage(): React.ReactElement {
       </Text>
       <b>Eidgenössische Abstimmungen vom 26. September</b>
       <SelectBallots team={team} scope={BallotScope.National} />
+      <br />
+
+      <b>Initiativen «SpielPolitik!» von Schulen nach Bern</b>
+      <SelectBallots team={team} scope={BallotScope.Public} />
 
       <HideFeature id="activities">
         <H2 mt={6}>Aktivitäten Klasse {team.name}</H2>
