@@ -1,3 +1,10 @@
+## [1.75.1](https://github.com/teachen-ch/voty/compare/v1.75.0...v1.75.1) (2021-09-17)
+
+
+### Bug Fixes
+
+* security fix ([42ba2af](https://github.com/teachen-ch/voty/commit/42ba2af0352a7767ae6db6067ac02d7b6b4a85b4))
+
 # [1.75.0](https://github.com/teachen-ch/voty/compare/v1.74.0...v1.75.0) (2021-09-15)
 
 
