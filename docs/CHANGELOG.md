@@ -1,3 +1,10 @@
+# [1.78.0](https://github.com/teachen-ch/voty/compare/v1.77.0...v1.78.0) (2021-09-22)
+
+
+### Features
+
+* add email export ([35f03d3](https://github.com/teachen-ch/voty/commit/35f03d3db5c42bcc6962ff114ae18a64d748833f))
+
 # [1.77.0](https://github.com/teachen-ch/voty/compare/v1.76.2...v1.77.0) (2021-09-22)
 
 
