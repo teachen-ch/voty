@@ -1,9 +1,10 @@
 import { gql } from "@apollo/client";
 import { LoggedInPage } from "../../components/Page";
-import React, { ReactElement } from "react";
+import React, { ReactElement, useState } from "react";
 import { useTeachersQuery, Role, TeachersQuery } from "graphql/types";
 import { Box, Image } from "rebass";
 import { Breadcrumb, A, Here } from "components/Breadcrumb";
+import { ReadMore } from "components/ReadMore";
 
 export const GET_TEACHERS = gql`
   query teachers($where: UserWhereInput) {
@@ -43,6 +44,7 @@ export default function TeachersAdminPage(): ReactElement {
         <A href="/admin">Admin</A>
         <Here>Lehrpersonen</Here>
       </Breadcrumb>
+      <Export users={teachers} />
       <Teachers users={teachers} />
     </LoggedInPage>
   );
@@ -99,5 +101,22 @@ export function Teachers({
         ))}
       </tbody>
     </table>
+  );
+}
+
+export function Export({
+  users,
+}: {
+  users?: TeachersQuery["users"];
+}): ReactElement | null {
+  if (!users) return null;
+  return (
+    <ReadMore title="Emails exportieren" fontSize={1} bg="transparent">
+      <Box fontSize={1} p={2} bg="#fff">
+        <pre>
+          {users.map((user) => (user.emailVerified ? user.email + "\n" : ""))}
+        </pre>
+      </Box>
+    </ReadMore>
   );
 }
