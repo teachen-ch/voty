@@ -1,3 +1,16 @@
+# [1.77.0](https://github.com/teachen-ch/voty/compare/v1.76.2...v1.77.0) (2021-09-22)
+
+
+### Bug Fixes
+
+* add minor explanations on zda initiatives ([cbfff73](https://github.com/teachen-ch/voty/commit/cbfff7358dd0d7a8b7ffd27fcb0d89da0ce25476))
+* remove nullOptions to hide ballot results ([8a776d3](https://github.com/teachen-ch/voty/commit/8a776d3af7f0a6f157fb99808c211c66af623d7e))
+
+
+### Features
+
+* add ms identity association ([80726e5](https://github.com/teachen-ch/voty/commit/80726e5e1f780147f06372f359c3d637923e82ab))
+
 ## [1.76.2](https://github.com/teachen-ch/voty/compare/v1.76.1...v1.76.2) (2021-09-21)
 
 
