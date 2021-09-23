@@ -437,6 +437,7 @@ export const SelectBallots: React.FC<{
                     alt="Resultate"
                     width="20px"
                     height="20px"
+                    onClick={() => detailBallot(ballot.id)}
                   />
                 </Box>
               </td>
