@@ -1,3 +1,17 @@
+# [1.79.0](https://github.com/teachen-ch/voty/compare/v1.78.0...v1.79.0) (2021-10-26)
+
+
+### Bug Fixes
+
+* general text on voting on intro page ([b5ec799](https://github.com/teachen-ch/voty/commit/b5ec799d81843e35b829e8fc67a492bc8d0b4251))
+
+
+### Features
+
+* make ballot results clickable ([6ac1e78](https://github.com/teachen-ch/voty/commit/6ac1e7889a92c26eb6b582c7f67d65a87f014671))
+* remove zda ballots from team admin ([0e7610b](https://github.com/teachen-ch/voty/commit/0e7610ba34c748257a0dce3b5225fbfea86d8529))
+* upgrade cypress ([42ee848](https://github.com/teachen-ch/voty/commit/42ee8488121e93a37c4ebad27ef7611390e41853))
+
 # [1.78.0](https://github.com/teachen-ch/voty/compare/v1.77.0...v1.78.0) (2021-09-22)
 
 
