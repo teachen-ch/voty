@@ -2,6 +2,7 @@
 const withMDX = require("@next/mdx")(/* { extension: /\.(md|mdx)$/,} */);
 // eslint-disable-next-line
 module.exports = withMDX({
+  swcMinify: true,
   pageExtensions: ["js", "jsx", "ts", "tsx", "md", "mdx"],
   reactStrictMode: true,
   // i18n
