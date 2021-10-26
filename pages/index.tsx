@@ -228,9 +228,11 @@ export default function Home(): React.ReactElement {
               href="https://twitter.com/claudelongchamp/status/1360190735212032001?ref_src=twsrc%5Etfw%7Ctwcamp%5Etweetembed%7Ctwterm%5E1360190735212032001%7Ctwgr%5E%7Ctwcon%5Es1_&ref_url=https%3A%2F%2Fdev.voty.ch%2F"
               target="_blank"
               rel="noopener noreferrer"
-              alt="Tweet Claude Longchamp – Tolle Möglichkeit, nutzen!"
             >
-              <NextImage src={TweetClaude} />
+              <NextImage
+                src={TweetClaude}
+                alt="Tweet Claude Longchamp – Tolle Möglichkeit, nutzen!"
+              />
             </A>
           </Flex>
         </Box>
