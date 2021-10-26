@@ -159,11 +159,10 @@ export default function Home(): React.ReactElement {
           </Teaser>
           <Teaser reverse>
             <TeaserText title="Jetzt Klasse anmelden!">
-              Ab Montag, 30. August 2021 führen wir in Zusammenarbeit mit
-              easyvote.ch wieder anonyme Online-Abstimmungen durch zu den
-              aktuellen nationalen Vorlagen vom 26. September 2021. Melde jetzt
-              Deine Klasse für die Abstimmung an.{" "}
-              <LearnMore href="/abstimmung" />
+              Aktuell führen wir in Zusammenarbeit mit easyvote.ch wieder
+              anonyme Online-Abstimmungen durch zu den aktuellen nationalen
+              Vorlagen vom 28. November 2021. Melde jetzt Deine Klasse für die
+              Abstimmung an. <LearnMore href="/abstimmung" />
             </TeaserText>
             <TeaserImage
               src="/images/start_teaser_m2b.svg"
