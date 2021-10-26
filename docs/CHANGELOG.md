@@ -1,3 +1,10 @@
+# [1.80.0](https://github.com/teachen-ch/voty/compare/v1.79.0...v1.80.0) (2021-10-26)
+
+
+### Features
+
+* upgrade to NextJS 12 ([1b029a3](https://github.com/teachen-ch/voty/commit/1b029a32177b9f16c9e09d4edc66bab55e0c81e2))
+
 # [1.79.0](https://github.com/teachen-ch/voty/compare/v1.78.0...v1.79.0) (2021-10-26)
 
 
