@@ -167,20 +167,9 @@ export default function TeacherTeamPage(): React.ReactElement {
         auf der Klassenseite angezeigt werden sollen. Nach der Abstimmung kannst
         Du hier auch die Abstimmungsresultate Deiner Klasse zeigen.
       </Text>
-      <b>Eidgenössische Abstimmungen vom 26. September</b>
+      <b>AKtuelle Eidgenössische Abstimmungen</b>
       <SelectBallots team={team} scope={BallotScope.National} />
-      <br />
-      <b>Initiativen «SpielPolitik!» von Schulen nach Bern</b>
-      <br />
-      <small>
-        (Die Abstimmungen sind bereits geschlossen. Weitere Informationen finden
-        sie{" "}
-        <A href="/spielpolitik/" target="_blank">
-          hier
-        </A>
-        )
-      </small>
-      <SelectBallots team={team} scope={BallotScope.Public} />
+
       <HideFeature id="activities">
         <H2 mt={6}>Aktivitäten Klasse {team.name}</H2>
         <Text mb={4} fontSize={2}>
