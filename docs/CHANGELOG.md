@@ -1,3 +1,11 @@
+## [1.80.1](https://github.com/teachen-ch/voty/compare/v1.80.0...v1.80.1) (2021-10-26)
+
+
+### Bug Fixes
+
+* disable Rust-based minification (fails in CI/CD) ([fd4595a](https://github.com/teachen-ch/voty/commit/fd4595a7e334504577869539b31fcc7cee8ecd36))
+* usability fix on homepage ([6a361aa](https://github.com/teachen-ch/voty/commit/6a361aae1de4cf6d444176784e47585de3cd83dc))
+
 # [1.80.0](https://github.com/teachen-ch/voty/compare/v1.79.0...v1.80.0) (2021-10-26)
 
 
