@@ -1,3 +1,10 @@
+## [1.80.4](https://github.com/teachen-ch/voty/compare/v1.80.3...v1.80.4) (2021-10-27)
+
+
+### Bug Fixes
+
+* remove unusded cypress-image-snapshot ([15d5c53](https://github.com/teachen-ch/voty/commit/15d5c53d108dbb979f88a98e54d2872a91e0ffe1))
+
 ## [1.80.3](https://github.com/teachen-ch/voty/compare/v1.80.2...v1.80.3) (2021-10-27)
 
 
