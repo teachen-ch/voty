@@ -1,3 +1,10 @@
+## [1.80.6](https://github.com/teachen-ch/voty/compare/v1.80.5...v1.80.6) (2021-10-27)
+
+
+### Bug Fixes
+
+* trying new cypress docker image ([9c89947](https://github.com/teachen-ch/voty/commit/9c89947b9590e314d4e09003a3092779fb5758c3))
+
 ## [1.80.5](https://github.com/teachen-ch/voty/compare/v1.80.4...v1.80.5) (2021-10-27)
 
 
