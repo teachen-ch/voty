@@ -2,7 +2,7 @@
 version: "3.8"
 services:
   sut:
-    image: "cypress/included:6.2.0"
+    image: "cypress/included:8.7.0"
     container_name: "app"
     env_file: ".env"
     environment:
