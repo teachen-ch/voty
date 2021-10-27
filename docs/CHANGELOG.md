@@ -1,3 +1,10 @@
+## [1.80.5](https://github.com/teachen-ch/voty/compare/v1.80.4...v1.80.5) (2021-10-27)
+
+
+### Bug Fixes
+
+* fix package version number ([248d9c6](https://github.com/teachen-ch/voty/commit/248d9c6b9d29dd5aea1fec66aa55974b1ec16df5))
+
 ## [1.80.4](https://github.com/teachen-ch/voty/compare/v1.80.3...v1.80.4) (2021-10-27)
 
 
