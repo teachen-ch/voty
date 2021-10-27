@@ -1,3 +1,10 @@
+## [1.80.3](https://github.com/teachen-ch/voty/compare/v1.80.2...v1.80.3) (2021-10-27)
+
+
+### Bug Fixes
+
+* bump cypress image on docker-compose.test.yml ([4a36ff5](https://github.com/teachen-ch/voty/commit/4a36ff53b8098673cce2087e0dbed4483da6ab8b))
+
 ## [1.80.2](https://github.com/teachen-ch/voty/compare/v1.80.1...v1.80.2) (2021-10-27)
 
 
