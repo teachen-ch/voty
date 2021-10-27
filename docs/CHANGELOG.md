@@ -1,3 +1,10 @@
+## [1.80.2](https://github.com/teachen-ch/voty/compare/v1.80.1...v1.80.2) (2021-10-27)
+
+
+### Bug Fixes
+
+* upgrade NextJS with Alpine fix ([96131a7](https://github.com/teachen-ch/voty/commit/96131a7c77145d3d1823e44905365deb48e52595))
+
 ## [1.80.1](https://github.com/teachen-ch/voty/compare/v1.80.0...v1.80.1) (2021-10-26)
 
 
