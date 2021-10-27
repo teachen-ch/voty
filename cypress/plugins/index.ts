@@ -14,8 +14,6 @@
 
 import { loadFixture } from "../../util/prisma-loader";
 import { promises as fs } from "fs";
-// const { imageSnapshot } = require("cypress-image-snapshot/plugin");
-// import imageSnapshot from "cypress-image-snapshot/plugin";
 /**
  * @type {Cypress.PluginConfig}
  */
