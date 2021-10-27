@@ -1,6 +1,6 @@
 {
   "name": "voty",
-  "version": "1.3",
+  "version": "1.3.0-development",
   "private": true,
   "scripts": {
     "dev": "yarn run next",
