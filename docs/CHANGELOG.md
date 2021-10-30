@@ -1,3 +1,12 @@
+# [1.81.0](https://github.com/teachen-ch/voty/compare/v1.80.6...v1.81.0) (2021-10-30)
+
+
+### Features
+
+* content changes for module 3 ([ebb05f5](https://github.com/teachen-ch/voty/commit/ebb05f582163d23ba33326af42d8c6e21ec4dd1d))
+* new newsletter 2021-Q4 ([00c9017](https://github.com/teachen-ch/voty/commit/00c9017ff0bb6bf058f55ea3881dd5994ff88c41))
+* new signup page for anstoss ([c4ac77d](https://github.com/teachen-ch/voty/commit/c4ac77d39a452f9c5d9a8f20f206149260de3518))
+
 ## [1.80.6](https://github.com/teachen-ch/voty/compare/v1.80.5...v1.80.6) (2021-10-27)
 
 
