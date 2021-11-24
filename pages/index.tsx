@@ -60,7 +60,7 @@ export default function Home(): React.ReactElement {
             mt={[4, 4, 5]}
             color="primary"
           >
-            Jugendliche stimmen ab – ein Experiment
+            Jugendliche stimmen ab
           </Heading>
           <Flex mb={[4, 4, 5]} justifyContent="space-around">
             <Text lineHeight="1.5em" fontSize={[2, 2, 3]}>
