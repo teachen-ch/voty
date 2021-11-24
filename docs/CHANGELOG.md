@@ -1,3 +1,11 @@
+## [1.81.2](https://github.com/teachen-ch/voty/compare/v1.81.1...v1.81.2) (2021-11-24)
+
+
+### Bug Fixes
+
+* security patch ([b519850](https://github.com/teachen-ch/voty/commit/b5198503c562e6f84b3cf35a2236515ab4a6a56e))
+* upgrade dependencies ([00b2c87](https://github.com/teachen-ch/voty/commit/00b2c87feef7dcfddcf031f100f81dcbaef269e9))
+
 ## [1.81.1](https://github.com/teachen-ch/voty/compare/v1.81.0...v1.81.1) (2021-11-24)
 
 
