@@ -16,16 +16,19 @@ export default async function feedbackApi(
     const fields = JSON.parse(req.body) as Record<string, string>;
     const { card, title, text, type, quest, email } = fields;
     const user = getSessionUser(req) || {
-      name: "Anon",
+      name: email,
       email: email || feedbackEmail,
       locale: "de",
     };
     const data = { card, title, text, type, user, quest };
 
+    logger.info(`Sending Email: ${user.email} «${title}»`);
+
     await sendMail({
-      from: String(user.email),
+      from: feedbackEmail,
+      replyTo: String(user.email),
       to: feedbackEmail,
-      subject: `voty.ch Feedback: ${title}`,
+      subject: `voty.ch Feedback: ${title} - from ${String(user.email)}`,
       template: "feedback",
       locale: user.locale,
       data,
@@ -34,7 +37,7 @@ export default async function feedbackApi(
     res.send({ success: true });
   } catch (err) {
     console.error(err);
-    logger.error(err);
+    logger.error(String(err));
     res.send({ error: "Error.SendEmailError" });
   }
 }

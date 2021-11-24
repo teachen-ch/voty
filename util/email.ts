@@ -24,9 +24,10 @@ export async function sendMail(args: {
   subject: string;
   template: string;
   locale: string;
+  replyTo?: string;
   data?: Record<string, any>;
 }): Promise<any> {
-  const { from, to, subject, template, locale, data = {} } = args;
+  const { from, to, subject, template, locale, data = {}, replyTo } = args;
   const { html, text } = await renderTemplate(template, locale, data);
 
   // No email configured
@@ -44,6 +45,7 @@ export async function sendMail(args: {
       subject,
       text,
       html,
+      replyTo,
     });
   } catch (error) {
     logger.error(`Cannot send email to ${to}`, String(error));
