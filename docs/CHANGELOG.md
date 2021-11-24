@@ -1,3 +1,15 @@
+# [1.82.0](https://github.com/teachen-ch/voty/compare/v1.81.2...v1.82.0) (2021-11-24)
+
+
+### Bug Fixes
+
+* semantic release config to new main branch ([df151ec](https://github.com/teachen-ch/voty/commit/df151ec8cb28cc077285e12350d53bda3a8f9261))
+
+
+### Features
+
+* rename master to main (finally) ([a9f5753](https://github.com/teachen-ch/voty/commit/a9f5753622224c6480dd2b0245d58958daa368c8))
+
 ## [1.81.2](https://github.com/teachen-ch/voty/compare/v1.81.1...v1.81.2) (2021-11-24)
 
 
