@@ -159,5 +159,24 @@
         }
       ]
     ]
+  },
+  "resolutions": {
+    "ssri": "^8.0.1",
+    "is-svg": "^4.2.2",
+    "ws": "^7.4.6",
+    "set-value": "^4.0.1",
+    "json-schema": "^0.4.0",
+    "ansi-regex": "^5.0.1",
+    "nth-check": "^2.0.1",
+    "url-parse": "^1.5.2",
+    "css-what": "^5.0.1",
+    "glob-parent": "^5.1.2",
+    "hosted-git-info": "^3.0.8",
+    "trim": "^0.0.3",
+    "marked": "^2.0.0",
+    "@graphql-tools/git-loader": "^6.2.6",
+    "node-fetch": "^2.6.1",
+    "yargs-parser": "^13.1.2",
+    "lodash": "^4.17.21"
   }
 }
