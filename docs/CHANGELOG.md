@@ -1,3 +1,10 @@
+## [1.81.1](https://github.com/teachen-ch/voty/compare/v1.81.0...v1.81.1) (2021-11-24)
+
+
+### Bug Fixes
+
+* fix feedback email sending ([feb30f4](https://github.com/teachen-ch/voty/commit/feb30f4ffb051c4379e785260084c6296d048920))
+
 # [1.81.0](https://github.com/teachen-ch/voty/compare/v1.80.6...v1.81.0) (2021-10-30)
 
 
