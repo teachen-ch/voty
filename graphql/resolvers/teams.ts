@@ -40,7 +40,7 @@ export const inviteStudents: FieldResolver<
       const invited = await createUser(_root, args, ctx, undefined as any);
       await connectUserTeam(invited as PrismaUser, team, ctx);
       created.push(email);
-    } catch (err) {
+    } catch (err: any) {
       if (err.message === "Error.DuplicateEmail") {
         duplicated.push(email);
       } else {
@@ -114,7 +114,7 @@ async function fetchErrors(emails: string[], db: PrismaClient, since: number) {
       failed.push(user.email);
     }
     return failed;
-  } catch (err) {
+  } catch (err: any) {
     console.error(err);
     logger.warn("Error fetching email", err);
     return [];
@@ -144,7 +144,6 @@ export const setPrefs: FieldResolver<"Mutation", "setPrefs"> = async (
   const { teamId } = args;
   const team = await ctx.db.team.update({
     where: { id: teamId },
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     data: { prefs: args.prefs },
   });
   return team;
@@ -158,7 +157,6 @@ export const setNotes: FieldResolver<"Mutation", "setNotes"> = async (
   const { teamId } = args;
   const team = await ctx.db.team.update({
     where: { id: teamId },
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     data: { notes: args.notes },
   });
   return team;
