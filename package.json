@@ -177,6 +177,7 @@
     "@graphql-tools/git-loader": "^6.2.6",
     "node-fetch": "^2.6.1",
     "yargs-parser": "^13.1.2",
-    "lodash": "^4.17.21"
+    "lodash": "^4.17.21",
+    "mem": "^4.0.0"
   }
 }
