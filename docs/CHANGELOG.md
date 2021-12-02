@@ -1,3 +1,11 @@
+## [1.82.2](https://github.com/teachen-ch/voty/compare/v1.82.1...v1.82.2) (2021-11-25)
+
+
+### Bug Fixes
+
+* minor ts fiddling ([d6a87be](https://github.com/teachen-ch/voty/commit/d6a87be6c21459df12cff0795bf46eebd8506e3d))
+* upgrade mem version ([23b4627](https://github.com/teachen-ch/voty/commit/23b46275866baa9d1d0128942013d95f0a48b019))
+
 ## [1.82.1](https://github.com/teachen-ch/voty/compare/v1.82.0...v1.82.1) (2021-11-24)
 
 
