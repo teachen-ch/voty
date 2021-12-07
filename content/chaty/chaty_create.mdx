@@ -1,6 +1,6 @@
 import { Chaty } from "components/Chaty";
 import { ChatyCreate } from "components/ChatyCreate";
-import { ReadMore, Info } from "components/Learning";
+import { ReadMore, Info, WarningGuest } from "components/Learning";
 
 export const meta = {
   id: "chaty_create",
@@ -17,6 +17,8 @@ export const meta = {
 Mit Chaty haben wir ein neues Lernformat entwickelt, welches Euch in Form eines Chats Themen der Demokratie
 näher bringt. Aber wie erklärt man diese komplexe Themen, so dass Jugendliche sie verstehen und sich angesprochen fühlen?
 Das wisst ihr doch selber am Besten! Deshalb habt Ihr jetzt die Aufgabe, einen Chatbot zu entwickeln. Hier ist mal ein Beispiel-Chat:
+
+<WarningGuest text="Achtung, Du bist aktuell nicht bei voty.ch angemeldet, Du kannst deinen Chatbot nicht speichern." />
 
 <Chaty
   title="Ein Chaty-Beispiel: Was ist eine Initiative"

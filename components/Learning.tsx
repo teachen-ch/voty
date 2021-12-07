@@ -9,11 +9,13 @@ import {
   Button,
   Image as RImage,
   ImageProps,
+  FlexProps,
 } from "rebass";
 import { useState } from "react";
 import { MDXProvider } from "@mdx-js/react";
 import { ReadMore } from "components/ReadMore";
 import { CircleBullet } from "components/Misc";
+import { useUser } from "state/user";
 
 export { Info, Link, Video, ReadMore, CircleBullet };
 
@@ -66,8 +68,10 @@ export const Show: React.FC<{ if: boolean | string | number | undefined }> = (
   else return null;
 };
 
-export const Center: React.FC = (props) => (
-  <Flex justifyContent="center">{props.children}</Flex>
+export const Center: React.FC<FlexProps> = (props) => (
+  <Flex justifyContent="center" {...props}>
+    {props.children}
+  </Flex>
 );
 
 export const Toggle: React.FC = (props) => {
@@ -115,3 +119,14 @@ export const Image: React.FC<ImageProps & { desc: string }> = (props) => (
     )}
   </Box>
 );
+
+export const WarningGuest: React.FC<{ text: string }> = ({ text }) => {
+  const user = useUser();
+  if (!user) {
+    return (
+      <Info type="important">
+        <Text>{text}</Text>
+      </Info>
+    );
+  } else return null;
+};
