@@ -1,3 +1,10 @@
+# [1.83.0](https://github.com/teachen-ch/voty/compare/v1.82.2...v1.83.0) (2021-12-07)
+
+
+### Features
+
+* describe learning format for anstossdemokratie.net ([1f5818f](https://github.com/teachen-ch/voty/commit/1f5818f33a21ef01bcc0f1eb1c24b904182dbbda))
+
 ## [1.82.2](https://github.com/teachen-ch/voty/compare/v1.82.1...v1.82.2) (2021-11-25)
 
 
