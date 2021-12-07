@@ -46,7 +46,7 @@ export default function CardsPublic(): React.ReactElement {
         <small>
           Auf der Google-Bildersuche kannst Du dazu unter{" "}
           <em>Suchfilter &gt; Nutzungsrechte &gt; Creative-Commons-Lizenzen</em>{" "}
-          auswählen. Hier geht's zur{" "}
+          auswählen. Hier geht&apos;s zur{" "}
           <A href="https://www.google.ch/search?q=griechenland&tbm=isch&tbs=il:cl&hl=de&sa=X&biw=1203&bih=649">
             Google-Bildersuche
           </A>
