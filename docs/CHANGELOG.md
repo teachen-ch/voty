@@ -1,3 +1,10 @@
+## [1.83.1](https://github.com/teachen-ch/voty/compare/v1.83.0...v1.83.1) (2021-12-07)
+
+
+### Bug Fixes
+
+* linting error ([7aecd9e](https://github.com/teachen-ch/voty/commit/7aecd9ec6911965137d7aa0a0f284063fd46f5a9))
+
 # [1.83.0](https://github.com/teachen-ch/voty/compare/v1.82.2...v1.83.0) (2021-12-07)
 
 
