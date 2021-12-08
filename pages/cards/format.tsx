@@ -71,9 +71,9 @@ export default function CardsPublic(): React.ReactElement {
         Wenn Du selber einen eigenen Chatbot entwickeln möchtest, dann klicke
         hier:
       </p>
-      <Button mt={-1} mb={4} href="/cards/chaty_create">
-        Eigenen Chatbot erstellen
-      </Button>
+      <A mt={-1} mb={4} href="/cards/chaty_create">
+        <Button>Eigenen Chatbot erstellen</Button>
+      </A>
       <H2>Quizzes, Fragen, Tests</H2>
       Am besten fügt ihr zu Eurer Online-Lerneinheit auch noch einige
       Kontrollfragen hinzu. Dazu gibt es verschiedene Fragemodule:
