@@ -1,3 +1,10 @@
+## [1.83.2](https://github.com/teachen-ch/voty/compare/v1.83.1...v1.83.2) (2021-12-08)
+
+
+### Bug Fixes
+
+* broken button ([ea2195a](https://github.com/teachen-ch/voty/commit/ea2195a2e74cdb2c187e51d2b901128eafbdd1a2))
+
 ## [1.83.1](https://github.com/teachen-ch/voty/compare/v1.83.0...v1.83.1) (2021-12-07)
 
 
