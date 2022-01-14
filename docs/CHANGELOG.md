@@ -1,3 +1,10 @@
+## [1.83.3](https://github.com/teachen-ch/voty/compare/v1.83.2...v1.83.3) (2022-01-14)
+
+
+### Bug Fixes
+
+* admin should see works as well ([0856ed4](https://github.com/teachen-ch/voty/commit/0856ed4385c371f6e8b932fc323f84d6bef565a7))
+
 ## [1.83.2](https://github.com/teachen-ch/voty/compare/v1.83.1...v1.83.2) (2021-12-08)
 
 
