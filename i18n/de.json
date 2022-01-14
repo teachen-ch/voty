@@ -98,6 +98,7 @@
     "CannotDeleteAccount": "Konto kann nicht gelöscht werden. Bitte kontaktiere uns",
     "CreateUser": "Konto kann nicht erstellt werden",
     "Database": "Ein Fehler in der Datenbank ist aufgetreten",
+    "DiscussionEmpty": "Bitte Text eingeben",
     "DuplicateEmail": "Für diese Email-Adresse gibt es bereits ein Konto",
     "EmailNotFound": "Email-Adresse wurde nicht gefunden",
     "EmailNotVerified": "Deine Email-Adresse ist noch nicht bestätigt",

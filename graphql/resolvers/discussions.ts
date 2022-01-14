@@ -27,6 +27,7 @@ export const postDiscussion: FieldResolver<
   const user = ctx.user;
   if (!user) throw new Error("Error.NeedsLogin");
   await assertTeam(teamId, user, ctx);
+  if (!title && !text) throw new Error("Error.DiscussionEmpty");
 
   const discussion = await ctx.db.discussion.create({
     data: {
