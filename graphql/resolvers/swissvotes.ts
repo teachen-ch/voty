@@ -35,6 +35,6 @@ export const swissvotes: FieldResolver<"Query", "swissvotes"> = async (
   else if (sort === "oldest") query += "ORDER BY datum ASC ";
   else query += "ORDER BY datum DESC ";
   query += `LIMIT ${limit ?? 20} OFFSET ${offset ?? 0}`;
-  const votes: Swissvote[] = await db.$queryRaw(query);
+  const votes: Swissvote[] = await db.$queryRaw`${query}`;
   return votes;
 };
