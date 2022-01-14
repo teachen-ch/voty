@@ -160,6 +160,7 @@ const PostDiscussion: React.FC<{
 
   async function onSubmit() {
     if (!team?.id) return alert("Kein Team");
+    if (!text) return;
     const variables = {
       card,
       ballotId,
