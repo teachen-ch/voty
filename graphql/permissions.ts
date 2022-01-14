@@ -106,7 +106,7 @@ export const permissions = shield(
       swissvotes: allow,
       cards: allow,
       attachments: isUser, // is filtered according to user's team(s)
-      works: isUser, // is filtered according to work.visibility and user's school / team
+      works: isUser, // is already filtered according to work.visibility and user's school / team
       activities: isUser, // is filtered according to user's team(s)
       progress: or(isAdmin, isTeacher),
       stats: isAdmin,

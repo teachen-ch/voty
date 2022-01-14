@@ -123,8 +123,14 @@ export const Works: React.FC<
   // check permissions and teacher preferences for showWorks
   if (team && card) {
     if (!user) return null;
-    // Not part of class or teacher?
-    if (team.id !== user.team?.id && team.teacher?.id !== user.id) return null;
+    // Not part of class or teacher or admin?
+    // this is already checked in the backend. not sure why we check again
+    if (
+      team.id !== user.team?.id &&
+      team.teacher?.id !== user.id &&
+      user.role !== Role.Admin
+    )
+      return null;
     const isTeacher = user.role === Role.Teacher;
 
     // pref "Never": never show works to class
