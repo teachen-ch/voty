@@ -1,3 +1,10 @@
+## [1.83.4](https://github.com/teachen-ch/voty/compare/v1.83.3...v1.83.4) (2022-01-14)
+
+
+### Bug Fixes
+
+* Prevent empty discussion submit in frontend ([6fbc6c9](https://github.com/teachen-ch/voty/commit/6fbc6c9c276e8b699b15077f7b9a47310f2fcaec))
+
 ## [1.83.3](https://github.com/teachen-ch/voty/compare/v1.83.2...v1.83.3) (2022-01-14)
 
 
