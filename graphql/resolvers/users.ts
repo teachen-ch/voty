@@ -178,7 +178,7 @@ export const createUser: FieldResolver<"Mutation", "createUser"> = async (
     }
     //setCookie(ctx.res, "NEXT_LOCALE", locale || "de");
     return user;
-  } catch (err) {
+  } catch (err: any) {
     // eslint-disable-next-line
     if (err.meta?.target && err.meta.target.indexOf("email") >= 0) {
       throw new Error("Error.DuplicateEmail");
@@ -347,7 +347,7 @@ export async function getUser(ctx: Context): Promise<User | null> {
       return await ctx.db.user.findUnique({ where: { id: user?.id } });
     }
     return null;
-  } catch (err) {
+  } catch (err: any) {
     logger.info("error calling /me", err);
     return null;
   }
@@ -365,7 +365,7 @@ export function verifyJWT(token: string): JWTSession | undefined {
     }
     if ("user" in result) return result as JWTSession;
     else throw new Error("No user in JWT Session");
-  } catch (err) {
+  } catch (err: any) {
     if (err.message !== "jwt expired")
       logger.info(`Error verifying token: '${token}'`, err.message);
     return undefined;
@@ -429,7 +429,7 @@ export async function sendVerificationEmail(
     }
 
     return { token: "MAYBE..." };
-  } catch (err) {
+  } catch (err: any) {
     logger.error(`Error sending ${purpose} email`, err);
     throw Error("Error.SendEmailVerification");
   }
@@ -569,7 +569,7 @@ export const deleteAccount: FieldResolver<"Mutation", "deleteAccount"> = async (
     const deleted = await ctx.db.user.delete({ where: { id: user.id } });
     if (!deleted) throw new Error("Error.CannotDeleteAccount");
     return { success: true };
-  } catch (err) {
+  } catch (err: any) {
     logger.warn("Error deleting user: ", err);
     throw new Error("Error.CannotDeleteAccount");
   }

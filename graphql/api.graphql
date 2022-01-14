@@ -5151,7 +5151,6 @@ input TeamCreateInput {
   school: SchoolCreateNestedOneWithoutTeamsInput!
   teacher: UserCreateNestedOneWithoutTeachesInput!
   updatedAt: DateTime
-  User: UserCreateNestedManyWithoutTeamInput
   Vote: VoteCreateNestedManyWithoutTeamInput
   Voted: VotedCreateNestedManyWithoutTeamInput
   work: WorkCreateNestedManyWithoutTeamInput
@@ -5275,12 +5274,6 @@ input TeamCreateNestedOneWithoutMembersInput {
   create: TeamCreateWithoutMembersInput
 }
 
-input TeamCreateNestedOneWithoutUserInput {
-  connect: TeamWhereUniqueInput
-  connectOrCreate: TeamCreateOrConnectWithoutUserInput
-  create: TeamCreateWithoutUserInput
-}
-
 input TeamCreateNestedOneWithoutVotedInput {
   connect: TeamWhereUniqueInput
   connectOrCreate: TeamCreateOrConnectWithoutVotedInput
@@ -5344,11 +5337,6 @@ input TeamCreateOrConnectWithoutTeacherInput {
   where: TeamWhereUniqueInput!
 }
 
-input TeamCreateOrConnectWithoutUserInput {
-  create: TeamCreateWithoutUserInput!
-  where: TeamWhereUniqueInput!
-}
-
 input TeamCreateOrConnectWithoutVotedInput {
   create: TeamCreateWithoutVotedInput!
   where: TeamWhereUniqueInput!
@@ -5382,7 +5370,6 @@ input TeamCreateWithoutActivityInput {
   school: SchoolCreateNestedOneWithoutTeamsInput!
   teacher: UserCreateNestedOneWithoutTeachesInput!
   updatedAt: DateTime
-  User: UserCreateNestedManyWithoutTeamInput
   Vote: VoteCreateNestedManyWithoutTeamInput
   Voted: VotedCreateNestedManyWithoutTeamInput
   work: WorkCreateNestedManyWithoutTeamInput
@@ -5407,7 +5394,6 @@ input TeamCreateWithoutAttachmentInput {
   school: SchoolCreateNestedOneWithoutTeamsInput!
   teacher: UserCreateNestedOneWithoutTeachesInput!
   updatedAt: DateTime
-  User: UserCreateNestedManyWithoutTeamInput
   Vote: VoteCreateNestedManyWithoutTeamInput
   Voted: VotedCreateNestedManyWithoutTeamInput
   work: WorkCreateNestedManyWithoutTeamInput
@@ -5432,7 +5418,6 @@ input TeamCreateWithoutBallotRunsInput {
   school: SchoolCreateNestedOneWithoutTeamsInput!
   teacher: UserCreateNestedOneWithoutTeachesInput!
   updatedAt: DateTime
-  User: UserCreateNestedManyWithoutTeamInput
   Vote: VoteCreateNestedManyWithoutTeamInput
   Voted: VotedCreateNestedManyWithoutTeamInput
   work: WorkCreateNestedManyWithoutTeamInput
@@ -5457,7 +5442,6 @@ input TeamCreateWithoutBallotsInput {
   school: SchoolCreateNestedOneWithoutTeamsInput!
   teacher: UserCreateNestedOneWithoutTeachesInput!
   updatedAt: DateTime
-  User: UserCreateNestedManyWithoutTeamInput
   Vote: VoteCreateNestedManyWithoutTeamInput
   Voted: VotedCreateNestedManyWithoutTeamInput
   work: WorkCreateNestedManyWithoutTeamInput
@@ -5482,7 +5466,6 @@ input TeamCreateWithoutDiscussionInput {
   school: SchoolCreateNestedOneWithoutTeamsInput!
   teacher: UserCreateNestedOneWithoutTeachesInput!
   updatedAt: DateTime
-  User: UserCreateNestedManyWithoutTeamInput
   Vote: VoteCreateNestedManyWithoutTeamInput
   Voted: VotedCreateNestedManyWithoutTeamInput
   work: WorkCreateNestedManyWithoutTeamInput
@@ -5507,7 +5490,6 @@ input TeamCreateWithoutDomainInput {
   school: SchoolCreateNestedOneWithoutTeamsInput!
   teacher: UserCreateNestedOneWithoutTeachesInput!
   updatedAt: DateTime
-  User: UserCreateNestedManyWithoutTeamInput
   Vote: VoteCreateNestedManyWithoutTeamInput
   Voted: VotedCreateNestedManyWithoutTeamInput
   work: WorkCreateNestedManyWithoutTeamInput
@@ -5532,7 +5514,6 @@ input TeamCreateWithoutMembersInput {
   school: SchoolCreateNestedOneWithoutTeamsInput!
   teacher: UserCreateNestedOneWithoutTeachesInput!
   updatedAt: DateTime
-  User: UserCreateNestedManyWithoutTeamInput
   Vote: VoteCreateNestedManyWithoutTeamInput
   Voted: VotedCreateNestedManyWithoutTeamInput
   work: WorkCreateNestedManyWithoutTeamInput
@@ -5557,7 +5538,6 @@ input TeamCreateWithoutSchoolInput {
   prefs: Json
   teacher: UserCreateNestedOneWithoutTeachesInput!
   updatedAt: DateTime
-  User: UserCreateNestedManyWithoutTeamInput
   Vote: VoteCreateNestedManyWithoutTeamInput
   Voted: VotedCreateNestedManyWithoutTeamInput
   work: WorkCreateNestedManyWithoutTeamInput
@@ -5581,32 +5561,6 @@ input TeamCreateWithoutTeacherInput {
   notes: Json
   prefs: Json
   school: SchoolCreateNestedOneWithoutTeamsInput!
-  updatedAt: DateTime
-  User: UserCreateNestedManyWithoutTeamInput
-  Vote: VoteCreateNestedManyWithoutTeamInput
-  Voted: VotedCreateNestedManyWithoutTeamInput
-  work: WorkCreateNestedManyWithoutTeamInput
-  year: Int
-}
-
-input TeamCreateWithoutUserInput {
-  activity: ActivityCreateNestedManyWithoutTeamInput
-  attachment: AttachmentCreateNestedManyWithoutTeamInput
-  BallotRuns: BallotRunCreateNestedManyWithoutTeamInput
-  ballots: BallotCreateNestedManyWithoutTeamInput
-  cards: String
-  code: String
-  createdAt: DateTime
-  discussion: DiscussionCreateNestedManyWithoutTeamInput
-  domain: DomainCreateNestedOneWithoutTeamInput
-  id: String
-  invite: String
-  members: UserCreateNestedManyWithoutTeamInput
-  name: String!
-  notes: Json
-  prefs: Json
-  school: SchoolCreateNestedOneWithoutTeamsInput!
-  teacher: UserCreateNestedOneWithoutTeachesInput!
   updatedAt: DateTime
   Vote: VoteCreateNestedManyWithoutTeamInput
   Voted: VotedCreateNestedManyWithoutTeamInput
@@ -5633,7 +5587,6 @@ input TeamCreateWithoutVotedInput {
   school: SchoolCreateNestedOneWithoutTeamsInput!
   teacher: UserCreateNestedOneWithoutTeachesInput!
   updatedAt: DateTime
-  User: UserCreateNestedManyWithoutTeamInput
   Vote: VoteCreateNestedManyWithoutTeamInput
   work: WorkCreateNestedManyWithoutTeamInput
   year: Int
@@ -5658,7 +5611,6 @@ input TeamCreateWithoutVoteInput {
   school: SchoolCreateNestedOneWithoutTeamsInput!
   teacher: UserCreateNestedOneWithoutTeachesInput!
   updatedAt: DateTime
-  User: UserCreateNestedManyWithoutTeamInput
   Voted: VotedCreateNestedManyWithoutTeamInput
   work: WorkCreateNestedManyWithoutTeamInput
   year: Int
@@ -5683,7 +5635,6 @@ input TeamCreateWithoutWorkInput {
   school: SchoolCreateNestedOneWithoutTeamsInput!
   teacher: UserCreateNestedOneWithoutTeachesInput!
   updatedAt: DateTime
-  User: UserCreateNestedManyWithoutTeamInput
   Vote: VoteCreateNestedManyWithoutTeamInput
   Voted: VotedCreateNestedManyWithoutTeamInput
   year: Int
@@ -5858,16 +5809,6 @@ input TeamUpdateOneWithoutMembersInput {
   upsert: TeamUpsertWithoutMembersInput
 }
 
-input TeamUpdateOneWithoutUserInput {
-  connect: TeamWhereUniqueInput
-  connectOrCreate: TeamCreateOrConnectWithoutUserInput
-  create: TeamCreateWithoutUserInput
-  delete: Boolean
-  disconnect: Boolean
-  update: TeamUpdateWithoutUserInput
-  upsert: TeamUpsertWithoutUserInput
-}
-
 input TeamUpdateOneWithoutVotedInput {
   connect: TeamWhereUniqueInput
   connectOrCreate: TeamCreateOrConnectWithoutVotedInput
@@ -5906,7 +5847,6 @@ input TeamUpdateWithoutActivityInput {
   school: SchoolUpdateOneRequiredWithoutTeamsInput
   teacher: UserUpdateOneRequiredWithoutTeachesInput
   updatedAt: DateTimeFieldUpdateOperationsInput
-  User: UserUpdateManyWithoutTeamInput
   Vote: VoteUpdateManyWithoutTeamInput
   Voted: VotedUpdateManyWithoutTeamInput
   work: WorkUpdateManyWithoutTeamInput
@@ -5931,7 +5871,6 @@ input TeamUpdateWithoutAttachmentInput {
   school: SchoolUpdateOneRequiredWithoutTeamsInput
   teacher: UserUpdateOneRequiredWithoutTeachesInput
   updatedAt: DateTimeFieldUpdateOperationsInput
-  User: UserUpdateManyWithoutTeamInput
   Vote: VoteUpdateManyWithoutTeamInput
   Voted: VotedUpdateManyWithoutTeamInput
   work: WorkUpdateManyWithoutTeamInput
@@ -5956,7 +5895,6 @@ input TeamUpdateWithoutBallotRunsInput {
   school: SchoolUpdateOneRequiredWithoutTeamsInput
   teacher: UserUpdateOneRequiredWithoutTeachesInput
   updatedAt: DateTimeFieldUpdateOperationsInput
-  User: UserUpdateManyWithoutTeamInput
   Vote: VoteUpdateManyWithoutTeamInput
   Voted: VotedUpdateManyWithoutTeamInput
   work: WorkUpdateManyWithoutTeamInput
@@ -5981,7 +5919,6 @@ input TeamUpdateWithoutBallotsInput {
   school: SchoolUpdateOneRequiredWithoutTeamsInput
   teacher: UserUpdateOneRequiredWithoutTeachesInput
   updatedAt: DateTimeFieldUpdateOperationsInput
-  User: UserUpdateManyWithoutTeamInput
   Vote: VoteUpdateManyWithoutTeamInput
   Voted: VotedUpdateManyWithoutTeamInput
   work: WorkUpdateManyWithoutTeamInput
@@ -6006,7 +5943,6 @@ input TeamUpdateWithoutDiscussionInput {
   school: SchoolUpdateOneRequiredWithoutTeamsInput
   teacher: UserUpdateOneRequiredWithoutTeachesInput
   updatedAt: DateTimeFieldUpdateOperationsInput
-  User: UserUpdateManyWithoutTeamInput
   Vote: VoteUpdateManyWithoutTeamInput
   Voted: VotedUpdateManyWithoutTeamInput
   work: WorkUpdateManyWithoutTeamInput
@@ -6031,7 +5967,6 @@ input TeamUpdateWithoutDomainInput {
   school: SchoolUpdateOneRequiredWithoutTeamsInput
   teacher: UserUpdateOneRequiredWithoutTeachesInput
   updatedAt: DateTimeFieldUpdateOperationsInput
-  User: UserUpdateManyWithoutTeamInput
   Vote: VoteUpdateManyWithoutTeamInput
   Voted: VotedUpdateManyWithoutTeamInput
   work: WorkUpdateManyWithoutTeamInput
@@ -6056,7 +5991,6 @@ input TeamUpdateWithoutMembersInput {
   school: SchoolUpdateOneRequiredWithoutTeamsInput
   teacher: UserUpdateOneRequiredWithoutTeachesInput
   updatedAt: DateTimeFieldUpdateOperationsInput
-  User: UserUpdateManyWithoutTeamInput
   Vote: VoteUpdateManyWithoutTeamInput
   Voted: VotedUpdateManyWithoutTeamInput
   work: WorkUpdateManyWithoutTeamInput
@@ -6081,7 +6015,6 @@ input TeamUpdateWithoutSchoolInput {
   prefs: Json
   teacher: UserUpdateOneRequiredWithoutTeachesInput
   updatedAt: DateTimeFieldUpdateOperationsInput
-  User: UserUpdateManyWithoutTeamInput
   Vote: VoteUpdateManyWithoutTeamInput
   Voted: VotedUpdateManyWithoutTeamInput
   work: WorkUpdateManyWithoutTeamInput
@@ -6105,32 +6038,6 @@ input TeamUpdateWithoutTeacherInput {
   notes: Json
   prefs: Json
   school: SchoolUpdateOneRequiredWithoutTeamsInput
-  updatedAt: DateTimeFieldUpdateOperationsInput
-  User: UserUpdateManyWithoutTeamInput
-  Vote: VoteUpdateManyWithoutTeamInput
-  Voted: VotedUpdateManyWithoutTeamInput
-  work: WorkUpdateManyWithoutTeamInput
-  year: NullableIntFieldUpdateOperationsInput
-}
-
-input TeamUpdateWithoutUserInput {
-  activity: ActivityUpdateManyWithoutTeamInput
-  attachment: AttachmentUpdateManyWithoutTeamInput
-  BallotRuns: BallotRunUpdateManyWithoutTeamInput
-  ballots: BallotUpdateManyWithoutTeamInput
-  cards: StringFieldUpdateOperationsInput
-  code: NullableStringFieldUpdateOperationsInput
-  createdAt: DateTimeFieldUpdateOperationsInput
-  discussion: DiscussionUpdateManyWithoutTeamInput
-  domain: DomainUpdateOneWithoutTeamInput
-  id: StringFieldUpdateOperationsInput
-  invite: NullableStringFieldUpdateOperationsInput
-  members: UserUpdateManyWithoutTeamInput
-  name: StringFieldUpdateOperationsInput
-  notes: Json
-  prefs: Json
-  school: SchoolUpdateOneRequiredWithoutTeamsInput
-  teacher: UserUpdateOneRequiredWithoutTeachesInput
   updatedAt: DateTimeFieldUpdateOperationsInput
   Vote: VoteUpdateManyWithoutTeamInput
   Voted: VotedUpdateManyWithoutTeamInput
@@ -6157,7 +6064,6 @@ input TeamUpdateWithoutVotedInput {
   school: SchoolUpdateOneRequiredWithoutTeamsInput
   teacher: UserUpdateOneRequiredWithoutTeachesInput
   updatedAt: DateTimeFieldUpdateOperationsInput
-  User: UserUpdateManyWithoutTeamInput
   Vote: VoteUpdateManyWithoutTeamInput
   work: WorkUpdateManyWithoutTeamInput
   year: NullableIntFieldUpdateOperationsInput
@@ -6182,7 +6088,6 @@ input TeamUpdateWithoutVoteInput {
   school: SchoolUpdateOneRequiredWithoutTeamsInput
   teacher: UserUpdateOneRequiredWithoutTeachesInput
   updatedAt: DateTimeFieldUpdateOperationsInput
-  User: UserUpdateManyWithoutTeamInput
   Voted: VotedUpdateManyWithoutTeamInput
   work: WorkUpdateManyWithoutTeamInput
   year: NullableIntFieldUpdateOperationsInput
@@ -6207,7 +6112,6 @@ input TeamUpdateWithoutWorkInput {
   school: SchoolUpdateOneRequiredWithoutTeamsInput
   teacher: UserUpdateOneRequiredWithoutTeachesInput
   updatedAt: DateTimeFieldUpdateOperationsInput
-  User: UserUpdateManyWithoutTeamInput
   Vote: VoteUpdateManyWithoutTeamInput
   Voted: VotedUpdateManyWithoutTeamInput
   year: NullableIntFieldUpdateOperationsInput
@@ -6256,11 +6160,6 @@ input TeamUpsertWithoutDiscussionInput {
 input TeamUpsertWithoutMembersInput {
   create: TeamCreateWithoutMembersInput!
   update: TeamUpdateWithoutMembersInput!
-}
-
-input TeamUpsertWithoutUserInput {
-  create: TeamCreateWithoutUserInput!
-  update: TeamUpdateWithoutUserInput!
 }
 
 input TeamUpsertWithoutVotedInput {
@@ -6319,7 +6218,6 @@ input TeamWhereInput {
   teacher: UserWhereInput
   teacherId: StringFilter
   updatedAt: DateTimeFilter
-  User: UserListRelationFilter
   Vote: VoteListRelationFilter
   Voted: VotedListRelationFilter
   work: WorkListRelationFilter
@@ -6574,7 +6472,6 @@ input UserCreateWithoutActivityInput {
   school: SchoolCreateNestedOneWithoutMembersInput
   teaches: TeamCreateNestedManyWithoutTeacherInput
   team: TeamCreateNestedOneWithoutMembersInput
-  Team: TeamCreateNestedOneWithoutUserInput
   updatedAt: DateTime
   verified: Boolean
   voted: VotedCreateNestedManyWithoutUserInput
@@ -6603,7 +6500,6 @@ input UserCreateWithoutAttachmentsInput {
   school: SchoolCreateNestedOneWithoutMembersInput
   teaches: TeamCreateNestedManyWithoutTeacherInput
   team: TeamCreateNestedOneWithoutMembersInput
-  Team: TeamCreateNestedOneWithoutUserInput
   updatedAt: DateTime
   verified: Boolean
   voted: VotedCreateNestedManyWithoutUserInput
@@ -6632,7 +6528,6 @@ input UserCreateWithoutBallotsInput {
   school: SchoolCreateNestedOneWithoutMembersInput
   teaches: TeamCreateNestedManyWithoutTeacherInput
   team: TeamCreateNestedOneWithoutMembersInput
-  Team: TeamCreateNestedOneWithoutUserInput
   updatedAt: DateTime
   verified: Boolean
   voted: VotedCreateNestedManyWithoutUserInput
@@ -6661,7 +6556,6 @@ input UserCreateWithoutDiscussionsInput {
   school: SchoolCreateNestedOneWithoutMembersInput
   teaches: TeamCreateNestedManyWithoutTeacherInput
   team: TeamCreateNestedOneWithoutMembersInput
-  Team: TeamCreateNestedOneWithoutUserInput
   updatedAt: DateTime
   verified: Boolean
   voted: VotedCreateNestedManyWithoutUserInput
@@ -6690,7 +6584,6 @@ input UserCreateWithoutReactionsInput {
   school: SchoolCreateNestedOneWithoutMembersInput
   teaches: TeamCreateNestedManyWithoutTeacherInput
   team: TeamCreateNestedOneWithoutMembersInput
-  Team: TeamCreateNestedOneWithoutUserInput
   updatedAt: DateTime
   verified: Boolean
   voted: VotedCreateNestedManyWithoutUserInput
@@ -6719,7 +6612,6 @@ input UserCreateWithoutSchoolInput {
   role: Role
   teaches: TeamCreateNestedManyWithoutTeacherInput
   team: TeamCreateNestedOneWithoutMembersInput
-  Team: TeamCreateNestedOneWithoutUserInput
   updatedAt: DateTime
   verified: Boolean
   voted: VotedCreateNestedManyWithoutUserInput
@@ -6748,7 +6640,6 @@ input UserCreateWithoutTeachesInput {
   role: Role
   school: SchoolCreateNestedOneWithoutMembersInput
   team: TeamCreateNestedOneWithoutMembersInput
-  Team: TeamCreateNestedOneWithoutUserInput
   updatedAt: DateTime
   verified: Boolean
   voted: VotedCreateNestedManyWithoutUserInput
@@ -6777,7 +6668,6 @@ input UserCreateWithoutTeamInput {
   role: Role
   school: SchoolCreateNestedOneWithoutMembersInput
   teaches: TeamCreateNestedManyWithoutTeacherInput
-  Team: TeamCreateNestedOneWithoutUserInput
   updatedAt: DateTime
   verified: Boolean
   voted: VotedCreateNestedManyWithoutUserInput
@@ -6807,7 +6697,6 @@ input UserCreateWithoutVotedInput {
   school: SchoolCreateNestedOneWithoutMembersInput
   teaches: TeamCreateNestedManyWithoutTeacherInput
   team: TeamCreateNestedOneWithoutMembersInput
-  Team: TeamCreateNestedOneWithoutUserInput
   updatedAt: DateTime
   verified: Boolean
   work: WorkCreateNestedManyWithoutUsersInput
@@ -6836,7 +6725,6 @@ input UserCreateWithoutWorkInput {
   school: SchoolCreateNestedOneWithoutMembersInput
   teaches: TeamCreateNestedManyWithoutTeacherInput
   team: TeamCreateNestedOneWithoutMembersInput
-  Team: TeamCreateNestedOneWithoutUserInput
   updatedAt: DateTime
   verified: Boolean
   voted: VotedCreateNestedManyWithoutUserInput
@@ -6916,7 +6804,6 @@ input UserUpdateInput {
   school: SchoolUpdateOneWithoutMembersInput
   teaches: TeamUpdateManyWithoutTeacherInput
   team: TeamUpdateOneWithoutMembersInput
-  Team: TeamUpdateOneWithoutUserInput
   updatedAt: DateTimeFieldUpdateOperationsInput
   verified: NullableBoolFieldUpdateOperationsInput
   voted: VotedUpdateManyWithoutUserInput
@@ -7078,7 +6965,6 @@ input UserUpdateWithoutActivityInput {
   school: SchoolUpdateOneWithoutMembersInput
   teaches: TeamUpdateManyWithoutTeacherInput
   team: TeamUpdateOneWithoutMembersInput
-  Team: TeamUpdateOneWithoutUserInput
   updatedAt: DateTimeFieldUpdateOperationsInput
   verified: NullableBoolFieldUpdateOperationsInput
   voted: VotedUpdateManyWithoutUserInput
@@ -7107,7 +6993,6 @@ input UserUpdateWithoutAttachmentsInput {
   school: SchoolUpdateOneWithoutMembersInput
   teaches: TeamUpdateManyWithoutTeacherInput
   team: TeamUpdateOneWithoutMembersInput
-  Team: TeamUpdateOneWithoutUserInput
   updatedAt: DateTimeFieldUpdateOperationsInput
   verified: NullableBoolFieldUpdateOperationsInput
   voted: VotedUpdateManyWithoutUserInput
@@ -7136,7 +7021,6 @@ input UserUpdateWithoutBallotsInput {
   school: SchoolUpdateOneWithoutMembersInput
   teaches: TeamUpdateManyWithoutTeacherInput
   team: TeamUpdateOneWithoutMembersInput
-  Team: TeamUpdateOneWithoutUserInput
   updatedAt: DateTimeFieldUpdateOperationsInput
   verified: NullableBoolFieldUpdateOperationsInput
   voted: VotedUpdateManyWithoutUserInput
@@ -7165,7 +7049,6 @@ input UserUpdateWithoutDiscussionsInput {
   school: SchoolUpdateOneWithoutMembersInput
   teaches: TeamUpdateManyWithoutTeacherInput
   team: TeamUpdateOneWithoutMembersInput
-  Team: TeamUpdateOneWithoutUserInput
   updatedAt: DateTimeFieldUpdateOperationsInput
   verified: NullableBoolFieldUpdateOperationsInput
   voted: VotedUpdateManyWithoutUserInput
@@ -7194,7 +7077,6 @@ input UserUpdateWithoutReactionsInput {
   school: SchoolUpdateOneWithoutMembersInput
   teaches: TeamUpdateManyWithoutTeacherInput
   team: TeamUpdateOneWithoutMembersInput
-  Team: TeamUpdateOneWithoutUserInput
   updatedAt: DateTimeFieldUpdateOperationsInput
   verified: NullableBoolFieldUpdateOperationsInput
   voted: VotedUpdateManyWithoutUserInput
@@ -7223,7 +7105,6 @@ input UserUpdateWithoutSchoolInput {
   role: EnumRoleFieldUpdateOperationsInput
   teaches: TeamUpdateManyWithoutTeacherInput
   team: TeamUpdateOneWithoutMembersInput
-  Team: TeamUpdateOneWithoutUserInput
   updatedAt: DateTimeFieldUpdateOperationsInput
   verified: NullableBoolFieldUpdateOperationsInput
   voted: VotedUpdateManyWithoutUserInput
@@ -7252,7 +7133,6 @@ input UserUpdateWithoutTeachesInput {
   role: EnumRoleFieldUpdateOperationsInput
   school: SchoolUpdateOneWithoutMembersInput
   team: TeamUpdateOneWithoutMembersInput
-  Team: TeamUpdateOneWithoutUserInput
   updatedAt: DateTimeFieldUpdateOperationsInput
   verified: NullableBoolFieldUpdateOperationsInput
   voted: VotedUpdateManyWithoutUserInput
@@ -7281,7 +7161,6 @@ input UserUpdateWithoutTeamInput {
   role: EnumRoleFieldUpdateOperationsInput
   school: SchoolUpdateOneWithoutMembersInput
   teaches: TeamUpdateManyWithoutTeacherInput
-  Team: TeamUpdateOneWithoutUserInput
   updatedAt: DateTimeFieldUpdateOperationsInput
   verified: NullableBoolFieldUpdateOperationsInput
   voted: VotedUpdateManyWithoutUserInput
@@ -7311,7 +7190,6 @@ input UserUpdateWithoutVotedInput {
   school: SchoolUpdateOneWithoutMembersInput
   teaches: TeamUpdateManyWithoutTeacherInput
   team: TeamUpdateOneWithoutMembersInput
-  Team: TeamUpdateOneWithoutUserInput
   updatedAt: DateTimeFieldUpdateOperationsInput
   verified: NullableBoolFieldUpdateOperationsInput
   work: WorkUpdateManyWithoutUsersInput
@@ -7340,7 +7218,6 @@ input UserUpdateWithoutWorkInput {
   school: SchoolUpdateOneWithoutMembersInput
   teaches: TeamUpdateManyWithoutTeacherInput
   team: TeamUpdateOneWithoutMembersInput
-  Team: TeamUpdateOneWithoutUserInput
   updatedAt: DateTimeFieldUpdateOperationsInput
   verified: NullableBoolFieldUpdateOperationsInput
   voted: VotedUpdateManyWithoutUserInput
@@ -7441,7 +7318,6 @@ input UserWhereInput {
   schoolId: StringNullableFilter
   teaches: TeamListRelationFilter
   team: TeamWhereInput
-  Team: TeamWhereInput
   teamId: StringNullableFilter
   updatedAt: DateTimeFilter
   verified: BoolNullableFilter

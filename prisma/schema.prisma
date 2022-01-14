@@ -55,7 +55,6 @@ model User {
 
   createdAt DateTime @default(now()) @map(name: "created_at")
   updatedAt DateTime @default(now()) @map(name: "updated_at")
-  Team      Team?    @relation(fields: [teamId], references: [id])
   @@map(name: "users")
 }
 
@@ -89,7 +88,6 @@ model Team {
   domain    Domain?  @relation(fields: [domainId], references: [id])
   domainId  String?  @map(name: "domain_id")
 
-  User       User[]
   BallotRuns BallotRun[]
   Vote       Vote[]
   Voted      Voted[]

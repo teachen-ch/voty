@@ -5576,7 +5576,6 @@ export interface NexusGenInputs {
     school: NexusGenInputs["SchoolCreateNestedOneWithoutTeamsInput"]; // SchoolCreateNestedOneWithoutTeamsInput!
     teacher: NexusGenInputs["UserCreateNestedOneWithoutTeachesInput"]; // UserCreateNestedOneWithoutTeachesInput!
     updatedAt?: NexusGenScalars["DateTime"] | null; // DateTime
-    User?: NexusGenInputs["UserCreateNestedManyWithoutTeamInput"] | null; // UserCreateNestedManyWithoutTeamInput
     Vote?: NexusGenInputs["VoteCreateNestedManyWithoutTeamInput"] | null; // VoteCreateNestedManyWithoutTeamInput
     Voted?: NexusGenInputs["VotedCreateNestedManyWithoutTeamInput"] | null; // VotedCreateNestedManyWithoutTeamInput
     work?: NexusGenInputs["WorkCreateNestedManyWithoutTeamInput"] | null; // WorkCreateNestedManyWithoutTeamInput
@@ -5717,14 +5716,6 @@ export interface NexusGenInputs {
       | null; // TeamCreateOrConnectWithoutMembersInput
     create?: NexusGenInputs["TeamCreateWithoutMembersInput"] | null; // TeamCreateWithoutMembersInput
   };
-  TeamCreateNestedOneWithoutUserInput: {
-    // input type
-    connect?: NexusGenInputs["TeamWhereUniqueInput"] | null; // TeamWhereUniqueInput
-    connectOrCreate?:
-      | NexusGenInputs["TeamCreateOrConnectWithoutUserInput"]
-      | null; // TeamCreateOrConnectWithoutUserInput
-    create?: NexusGenInputs["TeamCreateWithoutUserInput"] | null; // TeamCreateWithoutUserInput
-  };
   TeamCreateNestedOneWithoutVoteInput: {
     // input type
     connect?: NexusGenInputs["TeamWhereUniqueInput"] | null; // TeamWhereUniqueInput
@@ -5794,11 +5785,6 @@ export interface NexusGenInputs {
     create: NexusGenInputs["TeamCreateWithoutTeacherInput"]; // TeamCreateWithoutTeacherInput!
     where: NexusGenInputs["TeamWhereUniqueInput"]; // TeamWhereUniqueInput!
   };
-  TeamCreateOrConnectWithoutUserInput: {
-    // input type
-    create: NexusGenInputs["TeamCreateWithoutUserInput"]; // TeamCreateWithoutUserInput!
-    where: NexusGenInputs["TeamWhereUniqueInput"]; // TeamWhereUniqueInput!
-  };
   TeamCreateOrConnectWithoutVoteInput: {
     // input type
     create: NexusGenInputs["TeamCreateWithoutVoteInput"]; // TeamCreateWithoutVoteInput!
@@ -5839,7 +5825,6 @@ export interface NexusGenInputs {
     school: NexusGenInputs["SchoolCreateNestedOneWithoutTeamsInput"]; // SchoolCreateNestedOneWithoutTeamsInput!
     teacher: NexusGenInputs["UserCreateNestedOneWithoutTeachesInput"]; // UserCreateNestedOneWithoutTeachesInput!
     updatedAt?: NexusGenScalars["DateTime"] | null; // DateTime
-    User?: NexusGenInputs["UserCreateNestedManyWithoutTeamInput"] | null; // UserCreateNestedManyWithoutTeamInput
     Vote?: NexusGenInputs["VoteCreateNestedManyWithoutTeamInput"] | null; // VoteCreateNestedManyWithoutTeamInput
     Voted?: NexusGenInputs["VotedCreateNestedManyWithoutTeamInput"] | null; // VotedCreateNestedManyWithoutTeamInput
     work?: NexusGenInputs["WorkCreateNestedManyWithoutTeamInput"] | null; // WorkCreateNestedManyWithoutTeamInput
@@ -5870,7 +5855,6 @@ export interface NexusGenInputs {
     school: NexusGenInputs["SchoolCreateNestedOneWithoutTeamsInput"]; // SchoolCreateNestedOneWithoutTeamsInput!
     teacher: NexusGenInputs["UserCreateNestedOneWithoutTeachesInput"]; // UserCreateNestedOneWithoutTeachesInput!
     updatedAt?: NexusGenScalars["DateTime"] | null; // DateTime
-    User?: NexusGenInputs["UserCreateNestedManyWithoutTeamInput"] | null; // UserCreateNestedManyWithoutTeamInput
     Vote?: NexusGenInputs["VoteCreateNestedManyWithoutTeamInput"] | null; // VoteCreateNestedManyWithoutTeamInput
     Voted?: NexusGenInputs["VotedCreateNestedManyWithoutTeamInput"] | null; // VotedCreateNestedManyWithoutTeamInput
     work?: NexusGenInputs["WorkCreateNestedManyWithoutTeamInput"] | null; // WorkCreateNestedManyWithoutTeamInput
@@ -5901,7 +5885,6 @@ export interface NexusGenInputs {
     school: NexusGenInputs["SchoolCreateNestedOneWithoutTeamsInput"]; // SchoolCreateNestedOneWithoutTeamsInput!
     teacher: NexusGenInputs["UserCreateNestedOneWithoutTeachesInput"]; // UserCreateNestedOneWithoutTeachesInput!
     updatedAt?: NexusGenScalars["DateTime"] | null; // DateTime
-    User?: NexusGenInputs["UserCreateNestedManyWithoutTeamInput"] | null; // UserCreateNestedManyWithoutTeamInput
     Vote?: NexusGenInputs["VoteCreateNestedManyWithoutTeamInput"] | null; // VoteCreateNestedManyWithoutTeamInput
     Voted?: NexusGenInputs["VotedCreateNestedManyWithoutTeamInput"] | null; // VotedCreateNestedManyWithoutTeamInput
     work?: NexusGenInputs["WorkCreateNestedManyWithoutTeamInput"] | null; // WorkCreateNestedManyWithoutTeamInput
@@ -5934,7 +5917,6 @@ export interface NexusGenInputs {
     school: NexusGenInputs["SchoolCreateNestedOneWithoutTeamsInput"]; // SchoolCreateNestedOneWithoutTeamsInput!
     teacher: NexusGenInputs["UserCreateNestedOneWithoutTeachesInput"]; // UserCreateNestedOneWithoutTeachesInput!
     updatedAt?: NexusGenScalars["DateTime"] | null; // DateTime
-    User?: NexusGenInputs["UserCreateNestedManyWithoutTeamInput"] | null; // UserCreateNestedManyWithoutTeamInput
     Vote?: NexusGenInputs["VoteCreateNestedManyWithoutTeamInput"] | null; // VoteCreateNestedManyWithoutTeamInput
     Voted?: NexusGenInputs["VotedCreateNestedManyWithoutTeamInput"] | null; // VotedCreateNestedManyWithoutTeamInput
     work?: NexusGenInputs["WorkCreateNestedManyWithoutTeamInput"] | null; // WorkCreateNestedManyWithoutTeamInput
@@ -5965,7 +5947,6 @@ export interface NexusGenInputs {
     school: NexusGenInputs["SchoolCreateNestedOneWithoutTeamsInput"]; // SchoolCreateNestedOneWithoutTeamsInput!
     teacher: NexusGenInputs["UserCreateNestedOneWithoutTeachesInput"]; // UserCreateNestedOneWithoutTeachesInput!
     updatedAt?: NexusGenScalars["DateTime"] | null; // DateTime
-    User?: NexusGenInputs["UserCreateNestedManyWithoutTeamInput"] | null; // UserCreateNestedManyWithoutTeamInput
     Vote?: NexusGenInputs["VoteCreateNestedManyWithoutTeamInput"] | null; // VoteCreateNestedManyWithoutTeamInput
     Voted?: NexusGenInputs["VotedCreateNestedManyWithoutTeamInput"] | null; // VotedCreateNestedManyWithoutTeamInput
     work?: NexusGenInputs["WorkCreateNestedManyWithoutTeamInput"] | null; // WorkCreateNestedManyWithoutTeamInput
@@ -5998,7 +5979,6 @@ export interface NexusGenInputs {
     school: NexusGenInputs["SchoolCreateNestedOneWithoutTeamsInput"]; // SchoolCreateNestedOneWithoutTeamsInput!
     teacher: NexusGenInputs["UserCreateNestedOneWithoutTeachesInput"]; // UserCreateNestedOneWithoutTeachesInput!
     updatedAt?: NexusGenScalars["DateTime"] | null; // DateTime
-    User?: NexusGenInputs["UserCreateNestedManyWithoutTeamInput"] | null; // UserCreateNestedManyWithoutTeamInput
     Vote?: NexusGenInputs["VoteCreateNestedManyWithoutTeamInput"] | null; // VoteCreateNestedManyWithoutTeamInput
     Voted?: NexusGenInputs["VotedCreateNestedManyWithoutTeamInput"] | null; // VotedCreateNestedManyWithoutTeamInput
     work?: NexusGenInputs["WorkCreateNestedManyWithoutTeamInput"] | null; // WorkCreateNestedManyWithoutTeamInput
@@ -6031,7 +6011,6 @@ export interface NexusGenInputs {
     school: NexusGenInputs["SchoolCreateNestedOneWithoutTeamsInput"]; // SchoolCreateNestedOneWithoutTeamsInput!
     teacher: NexusGenInputs["UserCreateNestedOneWithoutTeachesInput"]; // UserCreateNestedOneWithoutTeachesInput!
     updatedAt?: NexusGenScalars["DateTime"] | null; // DateTime
-    User?: NexusGenInputs["UserCreateNestedManyWithoutTeamInput"] | null; // UserCreateNestedManyWithoutTeamInput
     Vote?: NexusGenInputs["VoteCreateNestedManyWithoutTeamInput"] | null; // VoteCreateNestedManyWithoutTeamInput
     Voted?: NexusGenInputs["VotedCreateNestedManyWithoutTeamInput"] | null; // VotedCreateNestedManyWithoutTeamInput
     work?: NexusGenInputs["WorkCreateNestedManyWithoutTeamInput"] | null; // WorkCreateNestedManyWithoutTeamInput
@@ -6064,7 +6043,6 @@ export interface NexusGenInputs {
     prefs?: NexusGenScalars["Json"] | null; // Json
     teacher: NexusGenInputs["UserCreateNestedOneWithoutTeachesInput"]; // UserCreateNestedOneWithoutTeachesInput!
     updatedAt?: NexusGenScalars["DateTime"] | null; // DateTime
-    User?: NexusGenInputs["UserCreateNestedManyWithoutTeamInput"] | null; // UserCreateNestedManyWithoutTeamInput
     Vote?: NexusGenInputs["VoteCreateNestedManyWithoutTeamInput"] | null; // VoteCreateNestedManyWithoutTeamInput
     Voted?: NexusGenInputs["VotedCreateNestedManyWithoutTeamInput"] | null; // VotedCreateNestedManyWithoutTeamInput
     work?: NexusGenInputs["WorkCreateNestedManyWithoutTeamInput"] | null; // WorkCreateNestedManyWithoutTeamInput
@@ -6096,40 +6074,6 @@ export interface NexusGenInputs {
     notes?: NexusGenScalars["Json"] | null; // Json
     prefs?: NexusGenScalars["Json"] | null; // Json
     school: NexusGenInputs["SchoolCreateNestedOneWithoutTeamsInput"]; // SchoolCreateNestedOneWithoutTeamsInput!
-    updatedAt?: NexusGenScalars["DateTime"] | null; // DateTime
-    User?: NexusGenInputs["UserCreateNestedManyWithoutTeamInput"] | null; // UserCreateNestedManyWithoutTeamInput
-    Vote?: NexusGenInputs["VoteCreateNestedManyWithoutTeamInput"] | null; // VoteCreateNestedManyWithoutTeamInput
-    Voted?: NexusGenInputs["VotedCreateNestedManyWithoutTeamInput"] | null; // VotedCreateNestedManyWithoutTeamInput
-    work?: NexusGenInputs["WorkCreateNestedManyWithoutTeamInput"] | null; // WorkCreateNestedManyWithoutTeamInput
-    year?: number | null; // Int
-  };
-  TeamCreateWithoutUserInput: {
-    // input type
-    activity?:
-      | NexusGenInputs["ActivityCreateNestedManyWithoutTeamInput"]
-      | null; // ActivityCreateNestedManyWithoutTeamInput
-    attachment?:
-      | NexusGenInputs["AttachmentCreateNestedManyWithoutTeamInput"]
-      | null; // AttachmentCreateNestedManyWithoutTeamInput
-    BallotRuns?:
-      | NexusGenInputs["BallotRunCreateNestedManyWithoutTeamInput"]
-      | null; // BallotRunCreateNestedManyWithoutTeamInput
-    ballots?: NexusGenInputs["BallotCreateNestedManyWithoutTeamInput"] | null; // BallotCreateNestedManyWithoutTeamInput
-    cards?: string | null; // String
-    code?: string | null; // String
-    createdAt?: NexusGenScalars["DateTime"] | null; // DateTime
-    discussion?:
-      | NexusGenInputs["DiscussionCreateNestedManyWithoutTeamInput"]
-      | null; // DiscussionCreateNestedManyWithoutTeamInput
-    domain?: NexusGenInputs["DomainCreateNestedOneWithoutTeamInput"] | null; // DomainCreateNestedOneWithoutTeamInput
-    id?: string | null; // String
-    invite?: string | null; // String
-    members?: NexusGenInputs["UserCreateNestedManyWithoutTeamInput"] | null; // UserCreateNestedManyWithoutTeamInput
-    name: string; // String!
-    notes?: NexusGenScalars["Json"] | null; // Json
-    prefs?: NexusGenScalars["Json"] | null; // Json
-    school: NexusGenInputs["SchoolCreateNestedOneWithoutTeamsInput"]; // SchoolCreateNestedOneWithoutTeamsInput!
-    teacher: NexusGenInputs["UserCreateNestedOneWithoutTeachesInput"]; // UserCreateNestedOneWithoutTeachesInput!
     updatedAt?: NexusGenScalars["DateTime"] | null; // DateTime
     Vote?: NexusGenInputs["VoteCreateNestedManyWithoutTeamInput"] | null; // VoteCreateNestedManyWithoutTeamInput
     Voted?: NexusGenInputs["VotedCreateNestedManyWithoutTeamInput"] | null; // VotedCreateNestedManyWithoutTeamInput
@@ -6164,7 +6108,6 @@ export interface NexusGenInputs {
     school: NexusGenInputs["SchoolCreateNestedOneWithoutTeamsInput"]; // SchoolCreateNestedOneWithoutTeamsInput!
     teacher: NexusGenInputs["UserCreateNestedOneWithoutTeachesInput"]; // UserCreateNestedOneWithoutTeachesInput!
     updatedAt?: NexusGenScalars["DateTime"] | null; // DateTime
-    User?: NexusGenInputs["UserCreateNestedManyWithoutTeamInput"] | null; // UserCreateNestedManyWithoutTeamInput
     Voted?: NexusGenInputs["VotedCreateNestedManyWithoutTeamInput"] | null; // VotedCreateNestedManyWithoutTeamInput
     work?: NexusGenInputs["WorkCreateNestedManyWithoutTeamInput"] | null; // WorkCreateNestedManyWithoutTeamInput
     year?: number | null; // Int
@@ -6197,7 +6140,6 @@ export interface NexusGenInputs {
     school: NexusGenInputs["SchoolCreateNestedOneWithoutTeamsInput"]; // SchoolCreateNestedOneWithoutTeamsInput!
     teacher: NexusGenInputs["UserCreateNestedOneWithoutTeachesInput"]; // UserCreateNestedOneWithoutTeachesInput!
     updatedAt?: NexusGenScalars["DateTime"] | null; // DateTime
-    User?: NexusGenInputs["UserCreateNestedManyWithoutTeamInput"] | null; // UserCreateNestedManyWithoutTeamInput
     Vote?: NexusGenInputs["VoteCreateNestedManyWithoutTeamInput"] | null; // VoteCreateNestedManyWithoutTeamInput
     work?: NexusGenInputs["WorkCreateNestedManyWithoutTeamInput"] | null; // WorkCreateNestedManyWithoutTeamInput
     year?: number | null; // Int
@@ -6230,7 +6172,6 @@ export interface NexusGenInputs {
     school: NexusGenInputs["SchoolCreateNestedOneWithoutTeamsInput"]; // SchoolCreateNestedOneWithoutTeamsInput!
     teacher: NexusGenInputs["UserCreateNestedOneWithoutTeachesInput"]; // UserCreateNestedOneWithoutTeachesInput!
     updatedAt?: NexusGenScalars["DateTime"] | null; // DateTime
-    User?: NexusGenInputs["UserCreateNestedManyWithoutTeamInput"] | null; // UserCreateNestedManyWithoutTeamInput
     Vote?: NexusGenInputs["VoteCreateNestedManyWithoutTeamInput"] | null; // VoteCreateNestedManyWithoutTeamInput
     Voted?: NexusGenInputs["VotedCreateNestedManyWithoutTeamInput"] | null; // VotedCreateNestedManyWithoutTeamInput
     year?: number | null; // Int
@@ -6442,18 +6383,6 @@ export interface NexusGenInputs {
     update?: NexusGenInputs["TeamUpdateWithoutMembersInput"] | null; // TeamUpdateWithoutMembersInput
     upsert?: NexusGenInputs["TeamUpsertWithoutMembersInput"] | null; // TeamUpsertWithoutMembersInput
   };
-  TeamUpdateOneWithoutUserInput: {
-    // input type
-    connect?: NexusGenInputs["TeamWhereUniqueInput"] | null; // TeamWhereUniqueInput
-    connectOrCreate?:
-      | NexusGenInputs["TeamCreateOrConnectWithoutUserInput"]
-      | null; // TeamCreateOrConnectWithoutUserInput
-    create?: NexusGenInputs["TeamCreateWithoutUserInput"] | null; // TeamCreateWithoutUserInput
-    delete?: boolean | null; // Boolean
-    disconnect?: boolean | null; // Boolean
-    update?: NexusGenInputs["TeamUpdateWithoutUserInput"] | null; // TeamUpdateWithoutUserInput
-    upsert?: NexusGenInputs["TeamUpsertWithoutUserInput"] | null; // TeamUpsertWithoutUserInput
-  };
   TeamUpdateOneWithoutVoteInput: {
     // input type
     connect?: NexusGenInputs["TeamWhereUniqueInput"] | null; // TeamWhereUniqueInput
@@ -6512,7 +6441,6 @@ export interface NexusGenInputs {
     school?: NexusGenInputs["SchoolUpdateOneRequiredWithoutTeamsInput"] | null; // SchoolUpdateOneRequiredWithoutTeamsInput
     teacher?: NexusGenInputs["UserUpdateOneRequiredWithoutTeachesInput"] | null; // UserUpdateOneRequiredWithoutTeachesInput
     updatedAt?: NexusGenInputs["DateTimeFieldUpdateOperationsInput"] | null; // DateTimeFieldUpdateOperationsInput
-    User?: NexusGenInputs["UserUpdateManyWithoutTeamInput"] | null; // UserUpdateManyWithoutTeamInput
     Vote?: NexusGenInputs["VoteUpdateManyWithoutTeamInput"] | null; // VoteUpdateManyWithoutTeamInput
     Voted?: NexusGenInputs["VotedUpdateManyWithoutTeamInput"] | null; // VotedUpdateManyWithoutTeamInput
     work?: NexusGenInputs["WorkUpdateManyWithoutTeamInput"] | null; // WorkUpdateManyWithoutTeamInput
@@ -6537,7 +6465,6 @@ export interface NexusGenInputs {
     school?: NexusGenInputs["SchoolUpdateOneRequiredWithoutTeamsInput"] | null; // SchoolUpdateOneRequiredWithoutTeamsInput
     teacher?: NexusGenInputs["UserUpdateOneRequiredWithoutTeachesInput"] | null; // UserUpdateOneRequiredWithoutTeachesInput
     updatedAt?: NexusGenInputs["DateTimeFieldUpdateOperationsInput"] | null; // DateTimeFieldUpdateOperationsInput
-    User?: NexusGenInputs["UserUpdateManyWithoutTeamInput"] | null; // UserUpdateManyWithoutTeamInput
     Vote?: NexusGenInputs["VoteUpdateManyWithoutTeamInput"] | null; // VoteUpdateManyWithoutTeamInput
     Voted?: NexusGenInputs["VotedUpdateManyWithoutTeamInput"] | null; // VotedUpdateManyWithoutTeamInput
     work?: NexusGenInputs["WorkUpdateManyWithoutTeamInput"] | null; // WorkUpdateManyWithoutTeamInput
@@ -6562,7 +6489,6 @@ export interface NexusGenInputs {
     school?: NexusGenInputs["SchoolUpdateOneRequiredWithoutTeamsInput"] | null; // SchoolUpdateOneRequiredWithoutTeamsInput
     teacher?: NexusGenInputs["UserUpdateOneRequiredWithoutTeachesInput"] | null; // UserUpdateOneRequiredWithoutTeachesInput
     updatedAt?: NexusGenInputs["DateTimeFieldUpdateOperationsInput"] | null; // DateTimeFieldUpdateOperationsInput
-    User?: NexusGenInputs["UserUpdateManyWithoutTeamInput"] | null; // UserUpdateManyWithoutTeamInput
     Vote?: NexusGenInputs["VoteUpdateManyWithoutTeamInput"] | null; // VoteUpdateManyWithoutTeamInput
     Voted?: NexusGenInputs["VotedUpdateManyWithoutTeamInput"] | null; // VotedUpdateManyWithoutTeamInput
     work?: NexusGenInputs["WorkUpdateManyWithoutTeamInput"] | null; // WorkUpdateManyWithoutTeamInput
@@ -6587,7 +6513,6 @@ export interface NexusGenInputs {
     school?: NexusGenInputs["SchoolUpdateOneRequiredWithoutTeamsInput"] | null; // SchoolUpdateOneRequiredWithoutTeamsInput
     teacher?: NexusGenInputs["UserUpdateOneRequiredWithoutTeachesInput"] | null; // UserUpdateOneRequiredWithoutTeachesInput
     updatedAt?: NexusGenInputs["DateTimeFieldUpdateOperationsInput"] | null; // DateTimeFieldUpdateOperationsInput
-    User?: NexusGenInputs["UserUpdateManyWithoutTeamInput"] | null; // UserUpdateManyWithoutTeamInput
     Vote?: NexusGenInputs["VoteUpdateManyWithoutTeamInput"] | null; // VoteUpdateManyWithoutTeamInput
     Voted?: NexusGenInputs["VotedUpdateManyWithoutTeamInput"] | null; // VotedUpdateManyWithoutTeamInput
     work?: NexusGenInputs["WorkUpdateManyWithoutTeamInput"] | null; // WorkUpdateManyWithoutTeamInput
@@ -6612,7 +6537,6 @@ export interface NexusGenInputs {
     school?: NexusGenInputs["SchoolUpdateOneRequiredWithoutTeamsInput"] | null; // SchoolUpdateOneRequiredWithoutTeamsInput
     teacher?: NexusGenInputs["UserUpdateOneRequiredWithoutTeachesInput"] | null; // UserUpdateOneRequiredWithoutTeachesInput
     updatedAt?: NexusGenInputs["DateTimeFieldUpdateOperationsInput"] | null; // DateTimeFieldUpdateOperationsInput
-    User?: NexusGenInputs["UserUpdateManyWithoutTeamInput"] | null; // UserUpdateManyWithoutTeamInput
     Vote?: NexusGenInputs["VoteUpdateManyWithoutTeamInput"] | null; // VoteUpdateManyWithoutTeamInput
     Voted?: NexusGenInputs["VotedUpdateManyWithoutTeamInput"] | null; // VotedUpdateManyWithoutTeamInput
     work?: NexusGenInputs["WorkUpdateManyWithoutTeamInput"] | null; // WorkUpdateManyWithoutTeamInput
@@ -6637,7 +6561,6 @@ export interface NexusGenInputs {
     school?: NexusGenInputs["SchoolUpdateOneRequiredWithoutTeamsInput"] | null; // SchoolUpdateOneRequiredWithoutTeamsInput
     teacher?: NexusGenInputs["UserUpdateOneRequiredWithoutTeachesInput"] | null; // UserUpdateOneRequiredWithoutTeachesInput
     updatedAt?: NexusGenInputs["DateTimeFieldUpdateOperationsInput"] | null; // DateTimeFieldUpdateOperationsInput
-    User?: NexusGenInputs["UserUpdateManyWithoutTeamInput"] | null; // UserUpdateManyWithoutTeamInput
     Vote?: NexusGenInputs["VoteUpdateManyWithoutTeamInput"] | null; // VoteUpdateManyWithoutTeamInput
     Voted?: NexusGenInputs["VotedUpdateManyWithoutTeamInput"] | null; // VotedUpdateManyWithoutTeamInput
     work?: NexusGenInputs["WorkUpdateManyWithoutTeamInput"] | null; // WorkUpdateManyWithoutTeamInput
@@ -6662,7 +6585,6 @@ export interface NexusGenInputs {
     school?: NexusGenInputs["SchoolUpdateOneRequiredWithoutTeamsInput"] | null; // SchoolUpdateOneRequiredWithoutTeamsInput
     teacher?: NexusGenInputs["UserUpdateOneRequiredWithoutTeachesInput"] | null; // UserUpdateOneRequiredWithoutTeachesInput
     updatedAt?: NexusGenInputs["DateTimeFieldUpdateOperationsInput"] | null; // DateTimeFieldUpdateOperationsInput
-    User?: NexusGenInputs["UserUpdateManyWithoutTeamInput"] | null; // UserUpdateManyWithoutTeamInput
     Vote?: NexusGenInputs["VoteUpdateManyWithoutTeamInput"] | null; // VoteUpdateManyWithoutTeamInput
     Voted?: NexusGenInputs["VotedUpdateManyWithoutTeamInput"] | null; // VotedUpdateManyWithoutTeamInput
     work?: NexusGenInputs["WorkUpdateManyWithoutTeamInput"] | null; // WorkUpdateManyWithoutTeamInput
@@ -6687,7 +6609,6 @@ export interface NexusGenInputs {
     prefs?: NexusGenScalars["Json"] | null; // Json
     teacher?: NexusGenInputs["UserUpdateOneRequiredWithoutTeachesInput"] | null; // UserUpdateOneRequiredWithoutTeachesInput
     updatedAt?: NexusGenInputs["DateTimeFieldUpdateOperationsInput"] | null; // DateTimeFieldUpdateOperationsInput
-    User?: NexusGenInputs["UserUpdateManyWithoutTeamInput"] | null; // UserUpdateManyWithoutTeamInput
     Vote?: NexusGenInputs["VoteUpdateManyWithoutTeamInput"] | null; // VoteUpdateManyWithoutTeamInput
     Voted?: NexusGenInputs["VotedUpdateManyWithoutTeamInput"] | null; // VotedUpdateManyWithoutTeamInput
     work?: NexusGenInputs["WorkUpdateManyWithoutTeamInput"] | null; // WorkUpdateManyWithoutTeamInput
@@ -6711,32 +6632,6 @@ export interface NexusGenInputs {
     notes?: NexusGenScalars["Json"] | null; // Json
     prefs?: NexusGenScalars["Json"] | null; // Json
     school?: NexusGenInputs["SchoolUpdateOneRequiredWithoutTeamsInput"] | null; // SchoolUpdateOneRequiredWithoutTeamsInput
-    updatedAt?: NexusGenInputs["DateTimeFieldUpdateOperationsInput"] | null; // DateTimeFieldUpdateOperationsInput
-    User?: NexusGenInputs["UserUpdateManyWithoutTeamInput"] | null; // UserUpdateManyWithoutTeamInput
-    Vote?: NexusGenInputs["VoteUpdateManyWithoutTeamInput"] | null; // VoteUpdateManyWithoutTeamInput
-    Voted?: NexusGenInputs["VotedUpdateManyWithoutTeamInput"] | null; // VotedUpdateManyWithoutTeamInput
-    work?: NexusGenInputs["WorkUpdateManyWithoutTeamInput"] | null; // WorkUpdateManyWithoutTeamInput
-    year?: NexusGenInputs["NullableIntFieldUpdateOperationsInput"] | null; // NullableIntFieldUpdateOperationsInput
-  };
-  TeamUpdateWithoutUserInput: {
-    // input type
-    activity?: NexusGenInputs["ActivityUpdateManyWithoutTeamInput"] | null; // ActivityUpdateManyWithoutTeamInput
-    attachment?: NexusGenInputs["AttachmentUpdateManyWithoutTeamInput"] | null; // AttachmentUpdateManyWithoutTeamInput
-    BallotRuns?: NexusGenInputs["BallotRunUpdateManyWithoutTeamInput"] | null; // BallotRunUpdateManyWithoutTeamInput
-    ballots?: NexusGenInputs["BallotUpdateManyWithoutTeamInput"] | null; // BallotUpdateManyWithoutTeamInput
-    cards?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
-    code?: NexusGenInputs["NullableStringFieldUpdateOperationsInput"] | null; // NullableStringFieldUpdateOperationsInput
-    createdAt?: NexusGenInputs["DateTimeFieldUpdateOperationsInput"] | null; // DateTimeFieldUpdateOperationsInput
-    discussion?: NexusGenInputs["DiscussionUpdateManyWithoutTeamInput"] | null; // DiscussionUpdateManyWithoutTeamInput
-    domain?: NexusGenInputs["DomainUpdateOneWithoutTeamInput"] | null; // DomainUpdateOneWithoutTeamInput
-    id?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
-    invite?: NexusGenInputs["NullableStringFieldUpdateOperationsInput"] | null; // NullableStringFieldUpdateOperationsInput
-    members?: NexusGenInputs["UserUpdateManyWithoutTeamInput"] | null; // UserUpdateManyWithoutTeamInput
-    name?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
-    notes?: NexusGenScalars["Json"] | null; // Json
-    prefs?: NexusGenScalars["Json"] | null; // Json
-    school?: NexusGenInputs["SchoolUpdateOneRequiredWithoutTeamsInput"] | null; // SchoolUpdateOneRequiredWithoutTeamsInput
-    teacher?: NexusGenInputs["UserUpdateOneRequiredWithoutTeachesInput"] | null; // UserUpdateOneRequiredWithoutTeachesInput
     updatedAt?: NexusGenInputs["DateTimeFieldUpdateOperationsInput"] | null; // DateTimeFieldUpdateOperationsInput
     Vote?: NexusGenInputs["VoteUpdateManyWithoutTeamInput"] | null; // VoteUpdateManyWithoutTeamInput
     Voted?: NexusGenInputs["VotedUpdateManyWithoutTeamInput"] | null; // VotedUpdateManyWithoutTeamInput
@@ -6763,7 +6658,6 @@ export interface NexusGenInputs {
     school?: NexusGenInputs["SchoolUpdateOneRequiredWithoutTeamsInput"] | null; // SchoolUpdateOneRequiredWithoutTeamsInput
     teacher?: NexusGenInputs["UserUpdateOneRequiredWithoutTeachesInput"] | null; // UserUpdateOneRequiredWithoutTeachesInput
     updatedAt?: NexusGenInputs["DateTimeFieldUpdateOperationsInput"] | null; // DateTimeFieldUpdateOperationsInput
-    User?: NexusGenInputs["UserUpdateManyWithoutTeamInput"] | null; // UserUpdateManyWithoutTeamInput
     Voted?: NexusGenInputs["VotedUpdateManyWithoutTeamInput"] | null; // VotedUpdateManyWithoutTeamInput
     work?: NexusGenInputs["WorkUpdateManyWithoutTeamInput"] | null; // WorkUpdateManyWithoutTeamInput
     year?: NexusGenInputs["NullableIntFieldUpdateOperationsInput"] | null; // NullableIntFieldUpdateOperationsInput
@@ -6788,7 +6682,6 @@ export interface NexusGenInputs {
     school?: NexusGenInputs["SchoolUpdateOneRequiredWithoutTeamsInput"] | null; // SchoolUpdateOneRequiredWithoutTeamsInput
     teacher?: NexusGenInputs["UserUpdateOneRequiredWithoutTeachesInput"] | null; // UserUpdateOneRequiredWithoutTeachesInput
     updatedAt?: NexusGenInputs["DateTimeFieldUpdateOperationsInput"] | null; // DateTimeFieldUpdateOperationsInput
-    User?: NexusGenInputs["UserUpdateManyWithoutTeamInput"] | null; // UserUpdateManyWithoutTeamInput
     Vote?: NexusGenInputs["VoteUpdateManyWithoutTeamInput"] | null; // VoteUpdateManyWithoutTeamInput
     work?: NexusGenInputs["WorkUpdateManyWithoutTeamInput"] | null; // WorkUpdateManyWithoutTeamInput
     year?: NexusGenInputs["NullableIntFieldUpdateOperationsInput"] | null; // NullableIntFieldUpdateOperationsInput
@@ -6813,7 +6706,6 @@ export interface NexusGenInputs {
     school?: NexusGenInputs["SchoolUpdateOneRequiredWithoutTeamsInput"] | null; // SchoolUpdateOneRequiredWithoutTeamsInput
     teacher?: NexusGenInputs["UserUpdateOneRequiredWithoutTeachesInput"] | null; // UserUpdateOneRequiredWithoutTeachesInput
     updatedAt?: NexusGenInputs["DateTimeFieldUpdateOperationsInput"] | null; // DateTimeFieldUpdateOperationsInput
-    User?: NexusGenInputs["UserUpdateManyWithoutTeamInput"] | null; // UserUpdateManyWithoutTeamInput
     Vote?: NexusGenInputs["VoteUpdateManyWithoutTeamInput"] | null; // VoteUpdateManyWithoutTeamInput
     Voted?: NexusGenInputs["VotedUpdateManyWithoutTeamInput"] | null; // VotedUpdateManyWithoutTeamInput
     year?: NexusGenInputs["NullableIntFieldUpdateOperationsInput"] | null; // NullableIntFieldUpdateOperationsInput
@@ -6866,11 +6758,6 @@ export interface NexusGenInputs {
     create: NexusGenInputs["TeamCreateWithoutMembersInput"]; // TeamCreateWithoutMembersInput!
     update: NexusGenInputs["TeamUpdateWithoutMembersInput"]; // TeamUpdateWithoutMembersInput!
   };
-  TeamUpsertWithoutUserInput: {
-    // input type
-    create: NexusGenInputs["TeamCreateWithoutUserInput"]; // TeamCreateWithoutUserInput!
-    update: NexusGenInputs["TeamUpdateWithoutUserInput"]; // TeamUpdateWithoutUserInput!
-  };
   TeamUpsertWithoutVoteInput: {
     // input type
     create: NexusGenInputs["TeamCreateWithoutVoteInput"]; // TeamCreateWithoutVoteInput!
@@ -6910,7 +6797,6 @@ export interface NexusGenInputs {
     teacher?: NexusGenInputs["UserWhereInput"] | null; // UserWhereInput
     teacherId?: NexusGenInputs["StringFilter"] | null; // StringFilter
     updatedAt?: NexusGenInputs["DateTimeFilter"] | null; // DateTimeFilter
-    User?: NexusGenInputs["UserListRelationFilter"] | null; // UserListRelationFilter
     Vote?: NexusGenInputs["VoteListRelationFilter"] | null; // VoteListRelationFilter
     Voted?: NexusGenInputs["VotedListRelationFilter"] | null; // VotedListRelationFilter
     work?: NexusGenInputs["WorkListRelationFilter"] | null; // WorkListRelationFilter
@@ -7145,7 +7031,6 @@ export interface NexusGenInputs {
     school?: NexusGenInputs["SchoolCreateNestedOneWithoutMembersInput"] | null; // SchoolCreateNestedOneWithoutMembersInput
     teaches?: NexusGenInputs["TeamCreateNestedManyWithoutTeacherInput"] | null; // TeamCreateNestedManyWithoutTeacherInput
     team?: NexusGenInputs["TeamCreateNestedOneWithoutMembersInput"] | null; // TeamCreateNestedOneWithoutMembersInput
-    Team?: NexusGenInputs["TeamCreateNestedOneWithoutUserInput"] | null; // TeamCreateNestedOneWithoutUserInput
     updatedAt?: NexusGenScalars["DateTime"] | null; // DateTime
     verified?: boolean | null; // Boolean
     voted?: NexusGenInputs["VotedCreateNestedManyWithoutUserInput"] | null; // VotedCreateNestedManyWithoutUserInput
@@ -7182,7 +7067,6 @@ export interface NexusGenInputs {
     school?: NexusGenInputs["SchoolCreateNestedOneWithoutMembersInput"] | null; // SchoolCreateNestedOneWithoutMembersInput
     teaches?: NexusGenInputs["TeamCreateNestedManyWithoutTeacherInput"] | null; // TeamCreateNestedManyWithoutTeacherInput
     team?: NexusGenInputs["TeamCreateNestedOneWithoutMembersInput"] | null; // TeamCreateNestedOneWithoutMembersInput
-    Team?: NexusGenInputs["TeamCreateNestedOneWithoutUserInput"] | null; // TeamCreateNestedOneWithoutUserInput
     updatedAt?: NexusGenScalars["DateTime"] | null; // DateTime
     verified?: boolean | null; // Boolean
     voted?: NexusGenInputs["VotedCreateNestedManyWithoutUserInput"] | null; // VotedCreateNestedManyWithoutUserInput
@@ -7219,7 +7103,6 @@ export interface NexusGenInputs {
     school?: NexusGenInputs["SchoolCreateNestedOneWithoutMembersInput"] | null; // SchoolCreateNestedOneWithoutMembersInput
     teaches?: NexusGenInputs["TeamCreateNestedManyWithoutTeacherInput"] | null; // TeamCreateNestedManyWithoutTeacherInput
     team?: NexusGenInputs["TeamCreateNestedOneWithoutMembersInput"] | null; // TeamCreateNestedOneWithoutMembersInput
-    Team?: NexusGenInputs["TeamCreateNestedOneWithoutUserInput"] | null; // TeamCreateNestedOneWithoutUserInput
     updatedAt?: NexusGenScalars["DateTime"] | null; // DateTime
     verified?: boolean | null; // Boolean
     voted?: NexusGenInputs["VotedCreateNestedManyWithoutUserInput"] | null; // VotedCreateNestedManyWithoutUserInput
@@ -7256,7 +7139,6 @@ export interface NexusGenInputs {
     school?: NexusGenInputs["SchoolCreateNestedOneWithoutMembersInput"] | null; // SchoolCreateNestedOneWithoutMembersInput
     teaches?: NexusGenInputs["TeamCreateNestedManyWithoutTeacherInput"] | null; // TeamCreateNestedManyWithoutTeacherInput
     team?: NexusGenInputs["TeamCreateNestedOneWithoutMembersInput"] | null; // TeamCreateNestedOneWithoutMembersInput
-    Team?: NexusGenInputs["TeamCreateNestedOneWithoutUserInput"] | null; // TeamCreateNestedOneWithoutUserInput
     updatedAt?: NexusGenScalars["DateTime"] | null; // DateTime
     verified?: boolean | null; // Boolean
     voted?: NexusGenInputs["VotedCreateNestedManyWithoutUserInput"] | null; // VotedCreateNestedManyWithoutUserInput
@@ -7293,7 +7175,6 @@ export interface NexusGenInputs {
     school?: NexusGenInputs["SchoolCreateNestedOneWithoutMembersInput"] | null; // SchoolCreateNestedOneWithoutMembersInput
     teaches?: NexusGenInputs["TeamCreateNestedManyWithoutTeacherInput"] | null; // TeamCreateNestedManyWithoutTeacherInput
     team?: NexusGenInputs["TeamCreateNestedOneWithoutMembersInput"] | null; // TeamCreateNestedOneWithoutMembersInput
-    Team?: NexusGenInputs["TeamCreateNestedOneWithoutUserInput"] | null; // TeamCreateNestedOneWithoutUserInput
     updatedAt?: NexusGenScalars["DateTime"] | null; // DateTime
     verified?: boolean | null; // Boolean
     voted?: NexusGenInputs["VotedCreateNestedManyWithoutUserInput"] | null; // VotedCreateNestedManyWithoutUserInput
@@ -7332,7 +7213,6 @@ export interface NexusGenInputs {
     role?: NexusGenEnums["Role"] | null; // Role
     teaches?: NexusGenInputs["TeamCreateNestedManyWithoutTeacherInput"] | null; // TeamCreateNestedManyWithoutTeacherInput
     team?: NexusGenInputs["TeamCreateNestedOneWithoutMembersInput"] | null; // TeamCreateNestedOneWithoutMembersInput
-    Team?: NexusGenInputs["TeamCreateNestedOneWithoutUserInput"] | null; // TeamCreateNestedOneWithoutUserInput
     updatedAt?: NexusGenScalars["DateTime"] | null; // DateTime
     verified?: boolean | null; // Boolean
     voted?: NexusGenInputs["VotedCreateNestedManyWithoutUserInput"] | null; // VotedCreateNestedManyWithoutUserInput
@@ -7371,7 +7251,6 @@ export interface NexusGenInputs {
     role?: NexusGenEnums["Role"] | null; // Role
     school?: NexusGenInputs["SchoolCreateNestedOneWithoutMembersInput"] | null; // SchoolCreateNestedOneWithoutMembersInput
     team?: NexusGenInputs["TeamCreateNestedOneWithoutMembersInput"] | null; // TeamCreateNestedOneWithoutMembersInput
-    Team?: NexusGenInputs["TeamCreateNestedOneWithoutUserInput"] | null; // TeamCreateNestedOneWithoutUserInput
     updatedAt?: NexusGenScalars["DateTime"] | null; // DateTime
     verified?: boolean | null; // Boolean
     voted?: NexusGenInputs["VotedCreateNestedManyWithoutUserInput"] | null; // VotedCreateNestedManyWithoutUserInput
@@ -7410,7 +7289,6 @@ export interface NexusGenInputs {
     role?: NexusGenEnums["Role"] | null; // Role
     school?: NexusGenInputs["SchoolCreateNestedOneWithoutMembersInput"] | null; // SchoolCreateNestedOneWithoutMembersInput
     teaches?: NexusGenInputs["TeamCreateNestedManyWithoutTeacherInput"] | null; // TeamCreateNestedManyWithoutTeacherInput
-    Team?: NexusGenInputs["TeamCreateNestedOneWithoutUserInput"] | null; // TeamCreateNestedOneWithoutUserInput
     updatedAt?: NexusGenScalars["DateTime"] | null; // DateTime
     verified?: boolean | null; // Boolean
     voted?: NexusGenInputs["VotedCreateNestedManyWithoutUserInput"] | null; // VotedCreateNestedManyWithoutUserInput
@@ -7450,7 +7328,6 @@ export interface NexusGenInputs {
     school?: NexusGenInputs["SchoolCreateNestedOneWithoutMembersInput"] | null; // SchoolCreateNestedOneWithoutMembersInput
     teaches?: NexusGenInputs["TeamCreateNestedManyWithoutTeacherInput"] | null; // TeamCreateNestedManyWithoutTeacherInput
     team?: NexusGenInputs["TeamCreateNestedOneWithoutMembersInput"] | null; // TeamCreateNestedOneWithoutMembersInput
-    Team?: NexusGenInputs["TeamCreateNestedOneWithoutUserInput"] | null; // TeamCreateNestedOneWithoutUserInput
     updatedAt?: NexusGenScalars["DateTime"] | null; // DateTime
     verified?: boolean | null; // Boolean
     work?: NexusGenInputs["WorkCreateNestedManyWithoutUsersInput"] | null; // WorkCreateNestedManyWithoutUsersInput
@@ -7489,7 +7366,6 @@ export interface NexusGenInputs {
     school?: NexusGenInputs["SchoolCreateNestedOneWithoutMembersInput"] | null; // SchoolCreateNestedOneWithoutMembersInput
     teaches?: NexusGenInputs["TeamCreateNestedManyWithoutTeacherInput"] | null; // TeamCreateNestedManyWithoutTeacherInput
     team?: NexusGenInputs["TeamCreateNestedOneWithoutMembersInput"] | null; // TeamCreateNestedOneWithoutMembersInput
-    Team?: NexusGenInputs["TeamCreateNestedOneWithoutUserInput"] | null; // TeamCreateNestedOneWithoutUserInput
     updatedAt?: NexusGenScalars["DateTime"] | null; // DateTime
     verified?: boolean | null; // Boolean
     voted?: NexusGenInputs["VotedCreateNestedManyWithoutUserInput"] | null; // VotedCreateNestedManyWithoutUserInput
@@ -7579,7 +7455,6 @@ export interface NexusGenInputs {
     school?: NexusGenInputs["SchoolUpdateOneWithoutMembersInput"] | null; // SchoolUpdateOneWithoutMembersInput
     teaches?: NexusGenInputs["TeamUpdateManyWithoutTeacherInput"] | null; // TeamUpdateManyWithoutTeacherInput
     team?: NexusGenInputs["TeamUpdateOneWithoutMembersInput"] | null; // TeamUpdateOneWithoutMembersInput
-    Team?: NexusGenInputs["TeamUpdateOneWithoutUserInput"] | null; // TeamUpdateOneWithoutUserInput
     updatedAt?: NexusGenInputs["DateTimeFieldUpdateOperationsInput"] | null; // DateTimeFieldUpdateOperationsInput
     verified?: NexusGenInputs["NullableBoolFieldUpdateOperationsInput"] | null; // NullableBoolFieldUpdateOperationsInput
     voted?: NexusGenInputs["VotedUpdateManyWithoutUserInput"] | null; // VotedUpdateManyWithoutUserInput
@@ -7814,7 +7689,6 @@ export interface NexusGenInputs {
     school?: NexusGenInputs["SchoolUpdateOneWithoutMembersInput"] | null; // SchoolUpdateOneWithoutMembersInput
     teaches?: NexusGenInputs["TeamUpdateManyWithoutTeacherInput"] | null; // TeamUpdateManyWithoutTeacherInput
     team?: NexusGenInputs["TeamUpdateOneWithoutMembersInput"] | null; // TeamUpdateOneWithoutMembersInput
-    Team?: NexusGenInputs["TeamUpdateOneWithoutUserInput"] | null; // TeamUpdateOneWithoutUserInput
     updatedAt?: NexusGenInputs["DateTimeFieldUpdateOperationsInput"] | null; // DateTimeFieldUpdateOperationsInput
     verified?: NexusGenInputs["NullableBoolFieldUpdateOperationsInput"] | null; // NullableBoolFieldUpdateOperationsInput
     voted?: NexusGenInputs["VotedUpdateManyWithoutUserInput"] | null; // VotedUpdateManyWithoutUserInput
@@ -7853,7 +7727,6 @@ export interface NexusGenInputs {
     school?: NexusGenInputs["SchoolUpdateOneWithoutMembersInput"] | null; // SchoolUpdateOneWithoutMembersInput
     teaches?: NexusGenInputs["TeamUpdateManyWithoutTeacherInput"] | null; // TeamUpdateManyWithoutTeacherInput
     team?: NexusGenInputs["TeamUpdateOneWithoutMembersInput"] | null; // TeamUpdateOneWithoutMembersInput
-    Team?: NexusGenInputs["TeamUpdateOneWithoutUserInput"] | null; // TeamUpdateOneWithoutUserInput
     updatedAt?: NexusGenInputs["DateTimeFieldUpdateOperationsInput"] | null; // DateTimeFieldUpdateOperationsInput
     verified?: NexusGenInputs["NullableBoolFieldUpdateOperationsInput"] | null; // NullableBoolFieldUpdateOperationsInput
     voted?: NexusGenInputs["VotedUpdateManyWithoutUserInput"] | null; // VotedUpdateManyWithoutUserInput
@@ -7892,7 +7765,6 @@ export interface NexusGenInputs {
     school?: NexusGenInputs["SchoolUpdateOneWithoutMembersInput"] | null; // SchoolUpdateOneWithoutMembersInput
     teaches?: NexusGenInputs["TeamUpdateManyWithoutTeacherInput"] | null; // TeamUpdateManyWithoutTeacherInput
     team?: NexusGenInputs["TeamUpdateOneWithoutMembersInput"] | null; // TeamUpdateOneWithoutMembersInput
-    Team?: NexusGenInputs["TeamUpdateOneWithoutUserInput"] | null; // TeamUpdateOneWithoutUserInput
     updatedAt?: NexusGenInputs["DateTimeFieldUpdateOperationsInput"] | null; // DateTimeFieldUpdateOperationsInput
     verified?: NexusGenInputs["NullableBoolFieldUpdateOperationsInput"] | null; // NullableBoolFieldUpdateOperationsInput
     voted?: NexusGenInputs["VotedUpdateManyWithoutUserInput"] | null; // VotedUpdateManyWithoutUserInput
@@ -7931,7 +7803,6 @@ export interface NexusGenInputs {
     school?: NexusGenInputs["SchoolUpdateOneWithoutMembersInput"] | null; // SchoolUpdateOneWithoutMembersInput
     teaches?: NexusGenInputs["TeamUpdateManyWithoutTeacherInput"] | null; // TeamUpdateManyWithoutTeacherInput
     team?: NexusGenInputs["TeamUpdateOneWithoutMembersInput"] | null; // TeamUpdateOneWithoutMembersInput
-    Team?: NexusGenInputs["TeamUpdateOneWithoutUserInput"] | null; // TeamUpdateOneWithoutUserInput
     updatedAt?: NexusGenInputs["DateTimeFieldUpdateOperationsInput"] | null; // DateTimeFieldUpdateOperationsInput
     verified?: NexusGenInputs["NullableBoolFieldUpdateOperationsInput"] | null; // NullableBoolFieldUpdateOperationsInput
     voted?: NexusGenInputs["VotedUpdateManyWithoutUserInput"] | null; // VotedUpdateManyWithoutUserInput
@@ -7970,7 +7841,6 @@ export interface NexusGenInputs {
     school?: NexusGenInputs["SchoolUpdateOneWithoutMembersInput"] | null; // SchoolUpdateOneWithoutMembersInput
     teaches?: NexusGenInputs["TeamUpdateManyWithoutTeacherInput"] | null; // TeamUpdateManyWithoutTeacherInput
     team?: NexusGenInputs["TeamUpdateOneWithoutMembersInput"] | null; // TeamUpdateOneWithoutMembersInput
-    Team?: NexusGenInputs["TeamUpdateOneWithoutUserInput"] | null; // TeamUpdateOneWithoutUserInput
     updatedAt?: NexusGenInputs["DateTimeFieldUpdateOperationsInput"] | null; // DateTimeFieldUpdateOperationsInput
     verified?: NexusGenInputs["NullableBoolFieldUpdateOperationsInput"] | null; // NullableBoolFieldUpdateOperationsInput
     voted?: NexusGenInputs["VotedUpdateManyWithoutUserInput"] | null; // VotedUpdateManyWithoutUserInput
@@ -8009,7 +7879,6 @@ export interface NexusGenInputs {
     role?: NexusGenInputs["EnumRoleFieldUpdateOperationsInput"] | null; // EnumRoleFieldUpdateOperationsInput
     teaches?: NexusGenInputs["TeamUpdateManyWithoutTeacherInput"] | null; // TeamUpdateManyWithoutTeacherInput
     team?: NexusGenInputs["TeamUpdateOneWithoutMembersInput"] | null; // TeamUpdateOneWithoutMembersInput
-    Team?: NexusGenInputs["TeamUpdateOneWithoutUserInput"] | null; // TeamUpdateOneWithoutUserInput
     updatedAt?: NexusGenInputs["DateTimeFieldUpdateOperationsInput"] | null; // DateTimeFieldUpdateOperationsInput
     verified?: NexusGenInputs["NullableBoolFieldUpdateOperationsInput"] | null; // NullableBoolFieldUpdateOperationsInput
     voted?: NexusGenInputs["VotedUpdateManyWithoutUserInput"] | null; // VotedUpdateManyWithoutUserInput
@@ -8048,7 +7917,6 @@ export interface NexusGenInputs {
     role?: NexusGenInputs["EnumRoleFieldUpdateOperationsInput"] | null; // EnumRoleFieldUpdateOperationsInput
     school?: NexusGenInputs["SchoolUpdateOneWithoutMembersInput"] | null; // SchoolUpdateOneWithoutMembersInput
     team?: NexusGenInputs["TeamUpdateOneWithoutMembersInput"] | null; // TeamUpdateOneWithoutMembersInput
-    Team?: NexusGenInputs["TeamUpdateOneWithoutUserInput"] | null; // TeamUpdateOneWithoutUserInput
     updatedAt?: NexusGenInputs["DateTimeFieldUpdateOperationsInput"] | null; // DateTimeFieldUpdateOperationsInput
     verified?: NexusGenInputs["NullableBoolFieldUpdateOperationsInput"] | null; // NullableBoolFieldUpdateOperationsInput
     voted?: NexusGenInputs["VotedUpdateManyWithoutUserInput"] | null; // VotedUpdateManyWithoutUserInput
@@ -8087,7 +7955,6 @@ export interface NexusGenInputs {
     role?: NexusGenInputs["EnumRoleFieldUpdateOperationsInput"] | null; // EnumRoleFieldUpdateOperationsInput
     school?: NexusGenInputs["SchoolUpdateOneWithoutMembersInput"] | null; // SchoolUpdateOneWithoutMembersInput
     teaches?: NexusGenInputs["TeamUpdateManyWithoutTeacherInput"] | null; // TeamUpdateManyWithoutTeacherInput
-    Team?: NexusGenInputs["TeamUpdateOneWithoutUserInput"] | null; // TeamUpdateOneWithoutUserInput
     updatedAt?: NexusGenInputs["DateTimeFieldUpdateOperationsInput"] | null; // DateTimeFieldUpdateOperationsInput
     verified?: NexusGenInputs["NullableBoolFieldUpdateOperationsInput"] | null; // NullableBoolFieldUpdateOperationsInput
     voted?: NexusGenInputs["VotedUpdateManyWithoutUserInput"] | null; // VotedUpdateManyWithoutUserInput
@@ -8127,7 +7994,6 @@ export interface NexusGenInputs {
     school?: NexusGenInputs["SchoolUpdateOneWithoutMembersInput"] | null; // SchoolUpdateOneWithoutMembersInput
     teaches?: NexusGenInputs["TeamUpdateManyWithoutTeacherInput"] | null; // TeamUpdateManyWithoutTeacherInput
     team?: NexusGenInputs["TeamUpdateOneWithoutMembersInput"] | null; // TeamUpdateOneWithoutMembersInput
-    Team?: NexusGenInputs["TeamUpdateOneWithoutUserInput"] | null; // TeamUpdateOneWithoutUserInput
     updatedAt?: NexusGenInputs["DateTimeFieldUpdateOperationsInput"] | null; // DateTimeFieldUpdateOperationsInput
     verified?: NexusGenInputs["NullableBoolFieldUpdateOperationsInput"] | null; // NullableBoolFieldUpdateOperationsInput
     work?: NexusGenInputs["WorkUpdateManyWithoutUsersInput"] | null; // WorkUpdateManyWithoutUsersInput
@@ -8166,7 +8032,6 @@ export interface NexusGenInputs {
     school?: NexusGenInputs["SchoolUpdateOneWithoutMembersInput"] | null; // SchoolUpdateOneWithoutMembersInput
     teaches?: NexusGenInputs["TeamUpdateManyWithoutTeacherInput"] | null; // TeamUpdateManyWithoutTeacherInput
     team?: NexusGenInputs["TeamUpdateOneWithoutMembersInput"] | null; // TeamUpdateOneWithoutMembersInput
-    Team?: NexusGenInputs["TeamUpdateOneWithoutUserInput"] | null; // TeamUpdateOneWithoutUserInput
     updatedAt?: NexusGenInputs["DateTimeFieldUpdateOperationsInput"] | null; // DateTimeFieldUpdateOperationsInput
     verified?: NexusGenInputs["NullableBoolFieldUpdateOperationsInput"] | null; // NullableBoolFieldUpdateOperationsInput
     voted?: NexusGenInputs["VotedUpdateManyWithoutUserInput"] | null; // VotedUpdateManyWithoutUserInput
@@ -8252,7 +8117,6 @@ export interface NexusGenInputs {
     schoolId?: NexusGenInputs["StringNullableFilter"] | null; // StringNullableFilter
     teaches?: NexusGenInputs["TeamListRelationFilter"] | null; // TeamListRelationFilter
     team?: NexusGenInputs["TeamWhereInput"] | null; // TeamWhereInput
-    Team?: NexusGenInputs["TeamWhereInput"] | null; // TeamWhereInput
     teamId?: NexusGenInputs["StringNullableFilter"] | null; // StringNullableFilter
     updatedAt?: NexusGenInputs["DateTimeFilter"] | null; // DateTimeFilter
     verified?: NexusGenInputs["BoolNullableFilter"] | null; // BoolNullableFilter
