@@ -3,8 +3,6 @@
 /.pnp
 .pnp.js
 
-mac
-
 # testing
 /coverage
 /test
