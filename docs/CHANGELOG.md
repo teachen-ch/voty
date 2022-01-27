@@ -1,3 +1,10 @@
+# [1.84.0](https://github.com/teachen-ch/voty/compare/v1.83.4...v1.84.0) (2022-01-27)
+
+
+### Features
+
+* Quarterly newsletter ([0ab0d51](https://github.com/teachen-ch/voty/commit/0ab0d51efc92b7d08e697ecddad19a3a47781661))
+
 ## [1.83.4](https://github.com/teachen-ch/voty/compare/v1.83.3...v1.83.4) (2022-01-14)
 
 
