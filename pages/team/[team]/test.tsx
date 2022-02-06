@@ -16,7 +16,7 @@ import {
 } from "graphql/types";
 import { useRouter } from "next/router";
 import { ReactElement } from "react";
-import { find } from "lodash";
+import find from "lodash/find";
 import { usePageEvent, trackEvent } from "util/stats";
 import { useTeam } from "state/user";
 

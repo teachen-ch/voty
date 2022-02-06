@@ -1,7 +1,7 @@
 import { gql } from "@apollo/client";
 import { useUser, useSetUser } from "../state/user";
 import { Flex, Text, Button, Box } from "rebass";
-import { omit } from "lodash";
+import omit from "lodash/omit";
 import { Grid } from "theme-ui";
 import { QForm, ErrorBox } from "./Form";
 import { ShowField } from "./Users";

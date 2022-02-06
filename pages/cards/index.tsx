@@ -1,7 +1,7 @@
 import { Input } from "@rebass/forms";
 import { Cards } from "components/Cards";
 import { Page } from "components/Page";
-import { debounce } from "lodash";
+import debounce from "lodash/debounce";
 import { Button, Text, Flex } from "rebass";
 import { Filter } from "components/Swissvotes";
 import { useState } from "react";

@@ -15,7 +15,8 @@ import { Context } from "../context";
 import { FieldResolver } from "@nexus/schema";
 import { NextApiRequest } from "next";
 import { promises as fs } from "fs";
-import { pick, upperFirst } from "lodash";
+import pick from "lodash/pick";
+import upperFirst from "lodash/upperFirst";
 import { logActivity } from "./activities";
 import { translate } from "util/translate";
 

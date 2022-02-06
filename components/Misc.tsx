@@ -1,6 +1,6 @@
 import { Text, Flex, BoxProps, Box, TextProps } from "rebass";
 import React from "react";
-import { isFunction } from "lodash";
+import isFunction from "lodash/isFunction";
 import Image from "next/image";
 import IconX from "../public/images/icon_x.svg";
 

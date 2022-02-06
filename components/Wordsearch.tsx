@@ -1,6 +1,9 @@
 import { useMemo, useState } from "react";
 import { Box, Flex, Text } from "rebass";
-import { isEqual, cloneDeep, random, remove } from "lodash";
+import isEqual from "lodash/isEqual";
+import cloneDeep from "lodash/cloneDeep";
+import random from "lodash/random";
+import remove from "lodash/remove";
 
 type Point = {
   x: number;

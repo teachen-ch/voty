@@ -4,7 +4,8 @@ import { Box, Link, Text, Flex, Button, Image } from "rebass";
 import { ErrorPage, Loading } from "./Page";
 import { useState } from "react";
 import { formatYear } from "util/date";
-import { debounce, random } from "lodash";
+import debounce from "lodash/debounce";
+import random from "lodash/random";
 import { Filter, VotesQuery } from "./Swissvotes";
 
 export const Posters: React.FC = () => {

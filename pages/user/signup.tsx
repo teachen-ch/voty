@@ -4,7 +4,7 @@ import { gql } from "@apollo/client";
 import { useState, ReactElement, Dispatch, SetStateAction } from "react";
 import { useRouter } from "next/router";
 import { QForm, yup, ErrorBox } from "../../components/Form";
-import { omit } from "lodash";
+import omit from "lodash/omit";
 import { SessionUser, useUser } from "state/user";
 import { Role, useCreateUserMutation } from "graphql/types";
 import Success from "./success";

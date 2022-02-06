@@ -6,7 +6,7 @@ import { fragments } from "./Teams";
 import { Flex, Text } from "rebass";
 import { useState } from "react";
 import { Textarea } from "@rebass/forms";
-import { clone } from "lodash";
+import clone from "lodash/clone";
 
 export const SET_NOTES = gql`
   mutation setNotes($teamId: String!, $notes: Json!) {

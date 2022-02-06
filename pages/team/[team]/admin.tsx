@@ -5,7 +5,7 @@ import { Input, Textarea } from "@rebass/forms";
 import { Grid, Label } from "theme-ui";
 import { useRef, useState, RefObject } from "react";
 import { useRouter } from "next/router";
-import { uniq } from "lodash";
+import uniq from "lodash/uniq";
 import { SelectBallots } from "components/Ballots";
 import { gql } from "@apollo/client";
 import Image from "next/image";

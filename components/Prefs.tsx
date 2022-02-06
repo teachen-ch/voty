@@ -1,7 +1,7 @@
 import { gql } from "@apollo/client";
 import { Label, Select } from "@rebass/forms";
 import { TeamAnonFieldsFragment, useSetPrefsMutation } from "graphql/types";
-import { cloneDeep } from "lodash";
+import cloneDeep from "lodash/cloneDeep";
 import { useState } from "react";
 import { Box, Button } from "rebass";
 import { Grid } from "theme-ui";

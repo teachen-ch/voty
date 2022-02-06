@@ -1,7 +1,7 @@
 import { FieldResolver } from "@nexus/schema";
 import { Activity, Prisma, Role } from "@prisma/client";
 import { Context } from "graphql/context";
-import { truncate } from "lodash";
+import truncate from "lodash/truncate";
 import { getTeacherTeams } from "./teams";
 
 const MAX_SUMMARY = 30;

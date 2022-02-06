@@ -1,5 +1,5 @@
 import imaps from "imap-simple";
-import { find } from "lodash";
+import find from "lodash/find";
 
 const config = {
   imap: {

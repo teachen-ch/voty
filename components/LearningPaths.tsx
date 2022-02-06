@@ -8,7 +8,7 @@ import { useState } from "react";
 import { A } from "./Breadcrumb";
 import Image from "next/image";
 import IconWatch from "../public/images/icon_watch.svg";
-import { upperFirst } from "lodash";
+import upperFirst from "lodash/upperFirst";
 
 export const LearningPath: React.FC<{ path: string; anon?: boolean }> = ({
   path,

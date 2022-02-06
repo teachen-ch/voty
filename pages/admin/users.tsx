@@ -10,7 +10,7 @@ import {
 import { gql } from "@apollo/client";
 import { OneRowTable, Table, TD, TDImage, TR } from "components/Table";
 import { Input } from "@rebass/forms";
-import { debounce } from "lodash";
+import debounce from "lodash/debounce";
 import { Select } from "@rebass/forms";
 import { Button } from "rebass";
 

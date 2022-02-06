@@ -5,7 +5,7 @@ import { Flex, Button, Text, Box } from "rebass";
 import React, { useState } from "react";
 import { useRouter } from "next/router";
 import { A, Breadcrumb, Here } from "components/Breadcrumb";
-import { debounce } from "lodash";
+import debounce from "lodash/debounce";
 import { Filter } from "components/Swissvotes";
 import { useTeam } from "state/user";
 import { Role } from "graphql/types";

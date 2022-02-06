@@ -2,7 +2,7 @@ import { Input, InputProps } from "@rebass/forms";
 import { Box, Text } from "rebass";
 import type { Zip } from "util/places";
 import { useState } from "react";
-import { debounce } from "lodash";
+import debounce from "lodash/debounce";
 
 export const ZipField: React.FC<InputProps> = (props) => {
   const [results, setResults] = useState<Zip[]>([]);

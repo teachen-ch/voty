@@ -21,7 +21,7 @@ import {
 import { formatFromTo, formatDate } from "../util/date";
 
 import { useRouter } from "next/router";
-import { find } from "lodash";
+import find from "lodash/find";
 import Link from "next/link";
 import Image from "next/image";
 import IconResults from "../public/images/icon_results.svg";

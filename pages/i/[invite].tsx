@@ -7,7 +7,7 @@ import { useState } from "react";
 import { CreateUserForm } from "../user/signup";
 import Success from "../user/success";
 import { useUser } from "../../state/user";
-import { omit } from "lodash";
+import omit from "lodash/omit";
 import { SessionUser } from "state/user";
 import {
   useTeamByInviteQuery,

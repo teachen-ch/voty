@@ -15,7 +15,8 @@ import { CircleBullet } from "components/Misc";
 import { Authors, usePostWork, WorkCard, WorkItem, Works } from "./Works";
 import { Markdown } from "util/markdown";
 import { Table, TR, TD } from "components/Table";
-import { find, remove } from "lodash";
+import find from "lodash/find";
+import remove from "lodash/remove";
 
 export const SEARCH_SWISSVOTES = gql`
   query swissvotes(

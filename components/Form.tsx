@@ -18,7 +18,7 @@ import {
 } from "@rebass/forms";
 import * as yup from "yup";
 import React, { useMemo } from "react";
-import { omit } from "lodash";
+import omit from "lodash/omit";
 import { MutationFunction } from "@apollo/client";
 import { useTr } from "util/translate";
 

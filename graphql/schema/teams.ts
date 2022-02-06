@@ -8,7 +8,7 @@ import {
   stringArg,
 } from "@nexus/schema";
 import { randomBytes } from "crypto";
-import { random } from "lodash";
+import random from "lodash/random";
 
 export const Team = objectType({
   name: "Team",

@@ -12,7 +12,7 @@ import { Page } from "components/Page";
 import { ReactElement, useEffect, useMemo } from "react";
 import CheckLogin from "components/CheckLogin";
 import initStats from "util/stats";
-import { remove } from "lodash";
+import remove from "lodash/remove";
 import { GlossaryReplace } from "components/Glossary";
 import { useRouter } from "next/router";
 

@@ -2,7 +2,7 @@ import { FieldResolver } from "@nexus/schema";
 import { Card } from "graphql/types";
 import * as cardsData from "content/";
 import { Role } from "@prisma/client";
-import { uniq } from "lodash";
+import uniq from "lodash/uniq";
 
 const env = process.env.NEXT_PUBLIC_ENV;
 
