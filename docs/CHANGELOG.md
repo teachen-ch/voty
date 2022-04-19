@@ -1,3 +1,15 @@
+# [1.85.0](https://github.com/teachen-ch/voty/compare/v1.84.0...v1.85.0) (2022-02-06)
+
+
+### Bug Fixes
+
+* upgrade dependenciees ([1702ff7](https://github.com/teachen-ch/voty/commit/1702ff7bc2b1a90ba0293c3754dd842798df3db9))
+
+
+### Features
+
+* Reduce lodash bloat ([aec0e11](https://github.com/teachen-ch/voty/commit/aec0e11d9e6ca553cb13e96b6ce6c4af24078848))
+
 # [1.84.0](https://github.com/teachen-ch/voty/compare/v1.83.4...v1.84.0) (2022-01-27)
 
 
