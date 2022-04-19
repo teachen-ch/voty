@@ -179,37 +179,44 @@ school:
     canton: ZH
 
 ballot:
-  - titlede: Testinitiative
-    titlefr: Initiative de test
-    titleit: Initiativa di test
-    descriptionde: Diese Testabstimmung dauert ist immer offen
-    descriptionfr: Ce test de vote dure est toujours ouvert
-    descriptionit: Questo voto di test è sempre aperto
-    start: !!timestamp "2000-01-01"
-    end: !!timestamp "2099-12-31"
+  - titlede: Filmgesetz
+    descriptionde: Streamingdienste sollen neu vier Prozent ihres Umsatzes in der Schweiz an die Schweizer Filmindustrie abgeben. Zudem soll das Angebot der Streamingdienste zu 30 Prozent aus Filmen oder Serien bestehen, die in Europa produziert wurden.
+    start: !!timestamp "2022-04-18"
+    end: !!timestamp "2022-05-15"
     scope: National
-    bodyde: Testabstimmung ohne Inhalt
-    bodyfr: Test de vote sans contenu
-    bodyit: Voto di test senza contenuto
+    bodyde: |
+      ### Ausgangslage
+      Die Filmindustrie in der Schweiz wird von Bund und Regionen sowie der Schweizerischen Radio- und Fernsehgesellschaft (SRG) und anderen Schweizer Fernsehsendern gefördert. Im nationalen Filmgesetz ist geregelt, dass inländische Fernsehsender vier Prozent ihres Umsatzes an die Schweizer Filmindustrie zahlen müssen. Streamingdienste müssen bis jetzt keine Abgaben an die Schweizer Filmindustrie zahlen.
 
-  - titlede: Abgelaufene Initiative
-    descriptionde: Diese Testabstimmung ist bereits beendet
-    start: !!timestamp "2000-01-01"
-    end: !!timestamp "2000-12-31"
-    scope: National
-    bodyde: Beendete Testabstimmung
-    bodyfr: Vote de test achevé
-    bodyit: Voto di test completato
+      Der Bundesrat und das Parlament wollen auch für Streamingdienste Abgaben einführen sowie ein Minimum an europäischen Produktionen in ihrem Angebot festlegen. Deshalb haben sie beschlossen, das Filmgesetz zu ändern. Dagegen wurde das Referendum ergriffen. Deshalb stimmen wir nun darüber ab.
 
-  - titlede: Zukunftsinitiative
-    titlefr: Initiative futur
-    titleit: Initiativa futura
-    descriptionde: Diese Testabstimmung ist bereits beendet
-    descriptionfr: C'est test de vote est déj déjà terminé
-    descriptionit: Questo voto di test è già finito
-    start: !!timestamp "2099-01-01"
-    end: !!timestamp "2099-12-31"
+      ### Weitere Informationen
+      Weitere Informationen zu dieser und allen anderen nationalen Abstimmungen findest Du auf [easyvote.ch](https://easyvote.ch/film)
+
+  - titlede: Transplantationsgesetz
+    descriptionde: Das Transplantationsgesetz soll geändert werden. Wenn eine Person ihre Organe nicht spenden will, soll sie sich neu in ein Register eintragen müssen.
+    start: !!timestamp "2022-04-18"
+    end: !!timestamp "2022-05-15"
     scope: National
-    bodyde: Zukünftige Testabstimmung
-    bodyfr: Futur vote de test
-    bodyit: Futuro voto di test
+    bodyde: |
+      ### Ausgangslage
+      Wenn eine Person in der Schweiz während ihres Lebens einer Organspende zugestimmt hat, können ihre Organe nach dem Tod gespendet werden. Das ist die Zustimmungslösung. Oft ist aber der Wille der verstorbenen Person unbekannt und Angehörige müssen über die Organspende der verstorbenen Person entscheiden.
+
+      Der Bundesrat und das Parlament haben einen indirekten Gegenvorschlag zu einer Volksinitiative erarbeitet, die die Anzahl an Organspenden in der Schweiz erhöhen will. Gegen den indirekten Gegenvorschlag wurde das Referendum ergriffen. Deshalb stimmen wir nun darüber ab.
+
+      ### Weitere Informationen
+      Weitere Informationen zu dieser und allen anderen nationalen Abstimmungen findest Du auf [easyvote.ch](https://easyvote.ch/transplantationsgesetz)
+
+  - titlede: Europäische Grenzwache
+    descriptionde: Die Schweiz soll der Europäischen Agentur für die Grenz- und Küstenwache (Frontex) mehr Geld und mehr Personal zur Verfügung stellen.
+    start: !!timestamp "2022-04-18"
+    end: !!timestamp "2022-05-15"
+    scope: National
+    bodyde: |
+      ### Ausgangslage
+      Die Schweiz gehört seit 2008 zum Schengen-Raum. In diesem Raum können Personen frei reisen, weil in der Regel keine Grenzkontrollen durchgeführt werden. Die Grenzen gegen aussen kontrollieren alle Länder des Schengen-Raums zusammen mit Frontex. Die Länder des Schengen-Raums stellen Frontex dafür jährlich Geld und Personal zur Verfügung. 2021 hat die Schweiz 24 Millionen Franken an Frontex gezahlt und sechs Vollzeitstellen beigesteuert.
+
+      Die Europäische Union (EU) hat den Ausbau von Frontex beschlossen und will mehr Geld und Personal zur Verfügung stellen. Die Schweiz muss den Ausbau als Mitglied des Schengen-Raums mittragen. Der Bundesrat und das Parlament haben beschlossen, den Ausbau zu unterstützen. Dagegen wurde das Referendum ergriffen. Deshalb stimmen wir nun darüber ab.
+
+      ### Weitere Informationen
+      Weitere Informationen zu dieser und allen anderen nationalen Abstimmungen findest Du auf [easyvote.ch](https://easyvote.ch/grenzwache)
