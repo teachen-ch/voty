@@ -80,12 +80,12 @@ export const TopBar: React.FC<{ home?: boolean }> = ({ home }) => {
         pt="8px"
         flex={1}
       >
-        <A href="/">
+        <A href={aula ? "http://aula.de" : "/"}>
           <Image
             src={logo}
             alt=""
-            width={aula ? 70 : 103}
-            height={aula ? 70 : 40}
+            width={aula ? 50 : 103}
+            height={aula ? 50 : 40}
             mt="10px"
             sx={{
               transition: "0.3s ",
