@@ -5,6 +5,7 @@ import { useState, useEffect, useRef } from "react";
 import { useColorMode } from "theme-ui";
 import { NavMobile } from "./NavMobile";
 import { NavDesktop } from "./NavDesktop";
+import { useTheme } from "util/hooks";
 
 export const TopBar: React.FC<{ home?: boolean }> = ({ home }) => {
   const user = useUser();
@@ -13,7 +14,9 @@ export const TopBar: React.FC<{ home?: boolean }> = ({ home }) => {
   const light = colorMode === "light";
   const [darkMode, setDarkMode] = useState<string | null>("");
   const burgerColor = home ? "white" : "#fff";
-  const votyLogo = `/images/voty_logo_${home && light ? "black" : "white"}.svg`;
+  const aula = useTheme("aula");
+  let logo = `/images/voty_logo_${home && light ? "black" : "white"}.svg`;
+  if (aula) logo = "/images/logo_aula.png";
 
   useEffect(() => {
     if (document?.location.hash === "#darkmode") {
@@ -79,10 +82,10 @@ export const TopBar: React.FC<{ home?: boolean }> = ({ home }) => {
       >
         <A href="/">
           <Image
-            src={votyLogo}
-            alt="voty.ch Logo"
-            width="103px"
-            height="40px"
+            src={logo}
+            alt=""
+            width={aula ? 70 : 103}
+            height={aula ? 70 : 40}
             mt="10px"
             sx={{
               transition: "0.3s ",

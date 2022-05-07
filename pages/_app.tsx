@@ -1,9 +1,8 @@
 import "../styles/voty.css";
+import "../styles/aula.css";
 
 import { ApolloProvider } from "@apollo/client";
 import { MDXProvider } from "@mdx-js/react";
-import theme from "styles/theme";
-import { ThemeProvider } from "theme-ui";
 import { AppProps } from "next/app";
 import apolloGen from "util/apollo";
 import { RecoilRoot } from "recoil";
@@ -15,6 +14,7 @@ import initStats from "util/stats";
 import remove from "lodash/remove";
 import { GlossaryReplace } from "components/Glossary";
 import { useRouter } from "next/router";
+import { Theme } from "components/Theme";
 
 function MyApp({ Component, pageProps }: AppProps): ReactElement {
   const router = useRouter();
@@ -30,14 +30,13 @@ function MyApp({ Component, pageProps }: AppProps): ReactElement {
   return (
     <ApolloProvider client={apollo}>
       <RecoilRoot>
-        {/* @ts-ignore */}
-        <ThemeProvider theme={theme}>
+        <Theme>
           <MDXProvider components={{ wrapper: MDXWrapper }}>
             <CheckLogin />
             <Header />
             <Component {...pageProps} />
           </MDXProvider>
-        </ThemeProvider>
+        </Theme>
       </RecoilRoot>
     </ApolloProvider>
   );
