@@ -54,3 +54,12 @@ export function useNavHash(
   }
   return [navHash, setNavHash];
 }
+
+export const useTheme = (whichTheme?: string) => {
+  const [theme, setTheme] = useState("voty");
+  useEffect(() => {
+    if (window.origin.indexOf("aula") >= 0) setTheme("aula");
+  }, []);
+  if (whichTheme) return theme === whichTheme;
+  else return theme;
+};
