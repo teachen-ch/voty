@@ -9,6 +9,7 @@ theme.fontSizes = [10, 14, 18, 20, 24, 30, 40, 40, 40];
 theme.colors.primary = "#1A237E"; //"rgb(0, 200, 83)";
 theme.colors.blue2 = "#1A237E";
 theme.colors.panelColor = "#f0f0f0";
+theme.colors.success = "rgb(0, 200, 83)";
 theme.fonts = {
   body: "Montserrat, Arial, sans-serif;",
   heading: "Montserrat, Arial, sans-serif;",

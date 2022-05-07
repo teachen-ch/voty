@@ -20,6 +20,7 @@ import IconWatch from "../public/images/icon_watch.svg";
 import IconMove from "../public/images/icon_move.svg";
 import IconCheck from "../public/images/icon_check.svg";
 import IconAdd from "../public/images/icon_add.svg";
+import { useTheme } from "util/hooks";
 
 export const GET_CARDS = gql`
   query cards($keywords: String, $age: String, $type: String) {
@@ -107,6 +108,7 @@ export const CardItem: React.FC<{
   const id = String(card.id);
   const [selected, setSelected] = useState(cardsList.indexOf(id) >= 0);
   const [doSetCards] = useSetCardsMutation();
+  const aula = useTheme("aula");
 
   async function doSelect(evt: React.BaseSyntheticEvent) {
     evt.stopPropagation();
@@ -120,7 +122,7 @@ export const CardItem: React.FC<{
     if (cards.split(" ").length > 1) window.scrollBy(0, selected ? -40 : 40);
   }
   const link = teamId ? `/team/${teamId}/cards/${id}` : `/cards/${id}`;
-  const bgColor = selected ? "blue2" : "blue3";
+  const bgColor = selected ? "blue2" : aula ? "success" : "blue3";
   const bgImage = `/images/bg_${card.icon || card.type}.svg`;
 
   return (
