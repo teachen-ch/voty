@@ -10,7 +10,7 @@ export default function LebenPage(): React.ReactElement {
       image="/images/aula_header_m3.svg"
     >
       <Text>
-        Wie sehen die Entscheidungsfindungsprozesse an ihrer Schule aus? Dürfen
+        Wie sehen die Entscheidungsfindungsprozesse an Ihrer Schule aus? Dürfen
         Schülerinnen und Schüler Ideen einbringen? Das Erleben eines
         demokratischen Prozesses fördert die Kompetenzen Kommunikation,
         Kollaboration und kritisches Denken und soll die Lust und Freude an
@@ -28,12 +28,12 @@ export default function LebenPage(): React.ReactElement {
         Mehrheiten finden. Nach der Prüfung durch die Schulleitung (Machbarkeit
         und Vertragskonformität) gelangt der ausgearbeitete Vorschlag zur
         Abstimmung und wird bei einer Annahme realisiert. Dabei werden die
-        Schüler\*Innen didaktisch begleitet, um den Prozess gemeinsam zu
+        Schüler*Innen didaktisch begleitet, um den Prozess gemeinsam zu
         reflektieren.
       </Text>
       <Info type="info" py={3}>
-        Wollen sie an ihrer Schule partizipative Prozessen einzuführen? Dann
-        melden sie sich gerne bei uns!
+        Wollen Sie an ihrer Schule partizipative Prozessen einzuführen? Dann
+        melden Sie sich gerne bei uns!
         <br />
         <br />
         <NewsletterSlim campaign="modul3-leben" />
