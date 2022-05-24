@@ -8,9 +8,12 @@ import NextImage from "next/image";
 import Link from "next/link";
 import TweetClaude from "../public/images/tweet_claude_longchamp.png";
 import { A } from "components/Breadcrumb";
+import { useTheme } from "util/hooks";
 
 export default function Home(): React.ReactElement {
   const router = useRouter();
+  const aula = useTheme("aula");
+  const aulaPrefix = aula ? "aula_" : "";
 
   return (
     <>
@@ -123,7 +126,7 @@ export default function Home(): React.ReactElement {
               Vordergrund. <LearnMore href="/lernen" />
             </TeaserText>
             <TeaserImage
-              src="/images/start_teaser_m1b.svg"
+              src={`/images/${aulaPrefix}start_teaser_m1b.svg`}
               width={629}
               height={535}
               top={-120}
@@ -144,7 +147,7 @@ export default function Home(): React.ReactElement {
           </H1>
           <Teaser>
             <TeaserImage
-              src="/images/start_teaser_m2a.svg"
+              src={`/images/${aulaPrefix}start_teaser_m2a.svg`}
               width={609}
               height={536}
               top={-150}
@@ -159,9 +162,9 @@ export default function Home(): React.ReactElement {
           </Teaser>
           <Teaser reverse>
             <TeaserText title="Jetzt Klasse anmelden!">
-              Aktuell führen wir in Zusammenarbeit mit easyvote.ch wieder
-              anonyme Online-Abstimmungen durch zu den aktuellen nationalen
-              Vorlagen vom 28. November 2021. Melde jetzt Deine Klasse für die
+              Zu den vierteljährlichen eidgenössischen Abstimmungen führen wir
+              in Zusammenarbeit mit easyvote.ch anonyme
+              Online-Klassenabstimmungen durch. Melde jetzt Deine Klasse für die
               Abstimmung an. <LearnMore href="/abstimmung" />
             </TeaserText>
             <TeaserImage
@@ -178,7 +181,7 @@ export default function Home(): React.ReactElement {
 
           <Teaser reverse>
             <TeaserImage
-              src="/images/start_teaser_m3.svg"
+              src={`/images/${aulaPrefix}start_teaser_m3.svg`}
               width={636}
               height={589}
               top={-60}
