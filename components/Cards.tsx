@@ -122,7 +122,7 @@ export const CardItem: React.FC<{
     if (cards.split(" ").length > 1) window.scrollBy(0, selected ? -40 : 40);
   }
   const link = teamId ? `/team/${teamId}/cards/${id}` : `/cards/${id}`;
-  const bgColor = selected ? "blue2" : aula ? "success" : "blue3";
+  const bgColor = selected ? "blue2" : aula ? "#69F0AE" : "blue3";
   const bgImage = `/images/bg_${card.icon || card.type}.svg`;
 
   return (
@@ -142,11 +142,13 @@ export const CardItem: React.FC<{
         justifyContent="space-between"
         height="100%"
         fontSize={1}
+        color={aula ? "blue2" : "black"}
       >
         <Heading
           as="h3"
           mt={0}
           fontSize={String(card.title).length > 30 ? "20px" : "20px"}
+          fontWeight={aula ? "bold" : "normal"}
           sx={{ cursor: "pointer" }}
           onClick={() => router.push(link)}
         >

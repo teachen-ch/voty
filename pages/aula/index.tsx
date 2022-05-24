@@ -1,10 +1,8 @@
-import { Input } from "@rebass/forms";
 import { Cards } from "components/Cards";
-import { Page } from "components/Page";
-import debounce from "lodash/debounce";
-import { Button, Text, Flex } from "rebass";
-import { Filter } from "components/Swissvotes";
+import { AppPage, H2 } from "components/Page";
+import { Text } from "rebass";
 import { useState } from "react";
+import { A } from "components/Breadcrumb";
 
 export default function CardsPublic(): React.ReactElement {
   const [keywords, setKeywords] = useState("Aula");
@@ -17,29 +15,31 @@ export default function CardsPublic(): React.ReactElement {
     setKeywords("");
   }
   return (
-    <Page heading="Demokratie lernen">
-      In Zusammenarbeit mit <a href="https://voty.ch/">voty.ch</a> stellen wir
-      hier verschiedene Lerninhalte zur Verfügung. Um diese für interaktive
-      Klassenarbeiten zu nutzen, müssen sie für sich und ihre Klasse einen
-      Account erstellen.
-      <Flex mt={4}>
-        <Input
-          onChange={debounce((evt) => setKeywords(evt.target.value), 300)}
-          placeholder="Suche..."
-          flex={1}
-        />
-        <Button ml={3} flex={0.3} mt={[0, 0, "4px"]}>
-          Suche
-        </Button>
-      </Flex>
-      <Text mb={3} mt={1} fontSize={1}>
-        Filtern nach Stufe: &nbsp; &nbsp;
-        <Filter set={setAge} v={age} val={"Zyklus-2"} label="Unterstufe" sep />
-        <Filter set={setAge} v={age} val={"Sek-1"} label="Oberstufe" sep />
-        <Filter set={setAge} v={age} val={"Gym"} label="Gymnasium" />
-        &nbsp; &nbsp; &nbsp; nach Inhalt: &nbsp; &nbsp;
-        <Filter set={setType} v={type} val={"tool"} label="Aufgaben" sep />
-        <Filter set={setType} v={type} val={"chaty"} label="Chaty" />
+    <AppPage
+      heading="Demokratie lernen – an der Schule"
+      image="/images/aula_header_m1.svg"
+    >
+      Wie funktioniert denn jetzt eigentlich Demokratie, wer hat sich das
+      ausgedacht und warum? Funktioniert Demokratie überall gleich? Mit aula
+      wendet ihr können sich an eurer Schule Kinder und Jugendliche schon aktiv
+      beteiligen. Ganz praktisch habt ihr also schon Erfahrung mit Demokratie
+      gesammelt. Jetzt habt ihr die Möglichkeit, mehr zu den Hintergründen zu
+      lernen und dabei selbst aktiv zu werden. Los geht’s!
+      <H2>Konzept</H2>
+      <Text>
+        Gemeinsam mit voty.ch aus der Schweiz laden wir euch ein, mehr rund um
+        das große Thema Demokratie zu lernen – und zwar komplett digital. Hier
+        findet ihr spannende Videos zum Thema, erstellt einen Chatbot, gestaltet
+        selbst Wahlplakate, testet euer Wissen in Quizzes und vieles mehr. Wir
+        haben hier auch einen Vorschlag für die Begleitung von
+        Beteiligungsprozessen an der Schule hinterlegt. Dadurch, dass ihr
+        bereits aula nutzt, könnt ihr vieles davon auf der aula-Plattform
+        erledigen.
+      </Text>
+      <Text my={4}>
+        <strong>Übrigens</strong>: Die interaktiven Teile von voty.ch könnt ihr
+        als Klasse nutzen, wenn Eure Lehrperson{" "}
+        <A href="/user/signup">Eure Klasse hier anmeldet</A>. an.
       </Text>
       <Cards
         keywords={keywords}
@@ -47,6 +47,6 @@ export default function CardsPublic(): React.ReactElement {
         age={age}
         resetFilters={resetFilters}
       />
-    </Page>
+    </AppPage>
   );
 }
