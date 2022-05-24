@@ -4,6 +4,8 @@ export * as srf_wahlen from "content/videos/srf_wahlen.mdx";
 export * as srf_debattieren from "content/videos/srf_debattieren.mdx";
 export * as srf_populismus from "content/videos/srf_populismus.mdx";
 
+export * as aula_stunde from "content/tools/aula_stunde.mdx";
+export * as liquide_demokratie from "content/tools/liquide_demokratie.mdx";
 export * as passion from "content/tools/passion.mdx";
 export * as swissvotes from "content/tools/swissvotes.mdx";
 export * as swissvotes_themen from "content/tools/swissvotes_themen.mdx";

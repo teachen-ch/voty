@@ -5,7 +5,7 @@ import { useState } from "react";
 import { A } from "components/Breadcrumb";
 
 export default function CardsPublic(): React.ReactElement {
-  const [keywords, setKeywords] = useState("Aula");
+  const [keywords, setKeywords] = useState("aula");
   const [type, setType] = useState<string | undefined>();
   const [age, setAge] = useState<string | undefined>();
 
