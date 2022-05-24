@@ -80,7 +80,7 @@ export const TopBar: React.FC<{ home?: boolean }> = ({ home }) => {
         pt="8px"
         flex={1}
       >
-        <A href={aula ? "http://aula.de" : "/"}>
+        <A href={aula ? "/aula" : "/"}>
           <Image
             src={logo}
             alt=""
