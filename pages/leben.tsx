@@ -7,7 +7,7 @@ export default function LebenPage(): React.ReactElement {
   return (
     <AppPage
       heading="Demokratie leben – an der Schule"
-      image="/images/header_m3.svg"
+      image="/images/aula_header_m3.svg"
     >
       <Text>
         Wie sehen die Entscheidungsfindungsprozesse an ihrer Schule aus? Dürfen
@@ -19,7 +19,7 @@ export default function LebenPage(): React.ReactElement {
       <H2>Konzept</H2>
       <Text>
         Gemeinsam mit aula.de aus Deutschland möchten wir den demokratischen
-        Entscheidungsprozess in schweizer Schulen bringen. Schulleitung,
+        Entscheidungsprozess in Schweizer Schulen bringen. Schulleitung,
         Lehrerschaft und Schüler*Innen führen gemeinsam einen offenen und
         kreativen Dialog über schulinterne Ideen und Vorschläge. Schüler*innen
         können in einem mit der Schulleitung vereinbarten Rahmen («Vertrag») auf
