@@ -23,7 +23,7 @@ describe("Test Teacher Startpage", () => {
     cy.task("getEmailLink").as("url");
     cy.get("@url").then((url) => {
       cy.visit(String(url));
-      cy.contains("Deine Email-Adresse ist nun bestätigt.");
+      cy.contains("deine Email-Adresse ist nun bestätigt.");
     });
   });
 
