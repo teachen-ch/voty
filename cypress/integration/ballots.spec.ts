@@ -23,7 +23,7 @@ describe("Test Ballots", () => {
     cy.contains("Testinitiative").click();
     cy.contains("Abstimmungsseite");
     cy.contains("Ja, ich").click();
-    cy.contains("du hast abgestimmt");
+    cy.contains("Du hast abgestimmt");
     cy.visit("/user/logout");
     cy.contains("Demokratie an die Schule"); // wait for logout to complete
 

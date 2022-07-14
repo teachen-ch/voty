@@ -23,8 +23,8 @@ describe("Test Live-Voting Panels", () => {
     // now vote anonymously
     cy.visit("/panel/1999999");
     cy.contains("Ja, ich stimme zu").click();
-    cy.contains("Du hast nun anonym abgestimmt");
+    cy.contains("du hast nun anonym abgestimmt");
     cy.reload();
-    cy.contains("Du hast nun anonym abgestimmt");
+    cy.contains("du hast nun anonym abgestimmt");
   });
 });
