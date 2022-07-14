@@ -163,9 +163,9 @@ export default function TeacherTeamPage(): React.ReactElement {
       </HideFeature>
       <H2>Abstimmungen Klasse {team.name}</H2>
       <Text fontSize={2} mb={4}>
-        Wähle aus der Liste die Abstimmungen aus, welche Deinen Schüler*innen
+        Wähle aus der Liste die Abstimmungen aus, welche deinen Schüler*innen
         auf der Klassenseite angezeigt werden sollen. Nach der Abstimmung kannst
-        Du hier auch die Abstimmungsresultate Deiner Klasse zeigen.
+        du hier auch die Abstimmungsresultate deiner Klasse zeigen.
       </Text>
       <b>AKtuelle Eidgenössische Abstimmungen</b>
       <SelectBallots team={team} scope={BallotScope.National} />
@@ -181,15 +181,15 @@ export default function TeacherTeamPage(): React.ReactElement {
       <H2 mt={6}>Schülerinnen und Schüler</H2>
       {!team.members.length ? (
         <Text fontSize={2}>
-          Hier kannst Du Deine Schüler*innen auf die Klassenseite von voty.ch
+          Hier kannst du deine Schüler*innen auf die Klassenseite von voty.ch
           einladen. Kopiere einfach alle Email-Adressen auf einmal (aus Mail
-          oder Excel) in untenstehende Feld. Hast Du eine zweite Email-Adresse?
+          oder Excel) in untenstehende Feld. Hast du eine zweite Email-Adresse?
           Dann teste den einfachen Ablauf doch kurz selbst:
         </Text>
       ) : (
         <>
           <Text fontSize={2} mb={4}>
-            Diese Einladungen wurden bereits verschickt. Hier siehst Du auch,
+            Diese Einladungen wurden bereits verschickt. Hier siehst du auch,
             wer die Einladung bereits akzeptiert hat.
           </Text>
           <Users users={team.members} />
@@ -244,7 +244,7 @@ export default function TeacherTeamPage(): React.ReactElement {
             <Box display="inline-block" mr={2}>
               <Image src={IconHint} alt="Hinweis" height="24px" />
             </Box>
-            Alternativ kannst Du auch mit einem{" "}
+            Alternativ kannst du auch mit einem{" "}
             <A
               onClick={() => setShowInviteLink(!showInviteLink)}
               variant="underline"

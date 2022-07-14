@@ -57,7 +57,7 @@ export default function TeacherBallotPage(): React.ReactElement {
       </Breadcrumb>
       {!results?.total ? (
         <Box bg="#fff" padding={4} color="gray" fontStyle="italic">
-          Hier werden später die Resultate Deiner Klasse angezeigt
+          Hier werden später die Resultate deiner Klasse angezeigt
         </Box>
       ) : (
         <Box my={4}>

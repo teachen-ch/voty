@@ -42,14 +42,14 @@ export default function VerifiedPage(): React.ReactElement {
       return (
         <LoggedInPage heading={tr("Verification.Title")}>
           <Text mb={4}>
-            Super, Deine Email-Adresse ist nun bestätigt.{" "}
+            Super, deine Email-Adresse ist nun bestätigt.{" "}
             {isTeacher
-              ? "Dein Konto für Lehrpersonen ist nun eröffnet und Du bist bereits angemeldet."
+              ? "Dein Konto für Lehrpersonen ist nun eröffnet und du bist bereits angemeldet."
               : ""}
           </Text>
           <Button onClick={() => router.push(getStartpage(user?.role))}>
             {isTeacher
-              ? "Weiter geht's zur Auswahl Deiner Schule"
+              ? "Weiter geht's zur Auswahl deiner Schule"
               : "Weiter geht's"}
           </Button>
         </LoggedInPage>

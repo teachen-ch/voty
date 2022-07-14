@@ -81,8 +81,8 @@ export default function Login(): ReactElement {
   return (
     <AppPage heading="Anmelden" onClose={() => void router.push("/")}>
       <Text mb={3}>
-        Du hast bereits ein Konto bei voty.ch? Dann kannst Du Dich hier mit
-        Deiner Schul-Emailadresse anmelden:
+        Du hast bereits ein Konto bei voty.ch? Dann kannst Du dich hier mit
+        deiner Schul-Emailadresse anmelden:
       </Text>
       <LoginForm initialEmail={email} />
     </AppPage>
@@ -116,7 +116,7 @@ export const LoginForm: React.FC<{ initialEmail?: string }> = ({
       <>
         <Info type="info">
           Yay! Wir haben dir ein Email an «{email}» geschickt mit einem
-          Login-Link. Schau in Deiner Inbox nach!
+          Login-Link. Schau in deiner Inbox nach!
         </Info>
         <A onClick={router.reload} fontSize={1}>
           Zurück

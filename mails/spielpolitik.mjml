@@ -15,7 +15,7 @@
           >Email bestätigen für die Abstimmungen</mj-text
         >
         <mj-text font-size="20px" color="#000"
-          >Um abzustimmen musst Du zuerst Deine Email-Adresse bestätigen. Klicke
+          >Um abzustimmen musst du zuerst deine Email-Adresse bestätigen. Klicke
           hier auf diesen Link:</mj-text
         >
         <mj-button
@@ -26,7 +26,7 @@
           >Jetzt bestätigen</mj-button
         >
         <mj-text font-size="20px">
-          Wenn Du nicht abstimmen möchtest, kannst Du dieses Mail
+          Wenn du nicht abstimmen möchtest, kannst du dieses Mail
           löschen.</mj-text
         >
       </mj-column>

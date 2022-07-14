@@ -69,7 +69,7 @@ export default function Fundraising(): React.ReactElement {
         </Text>
         <Info pl={3} fontStyle="italic" fontSize={1}>
           Für Feedback und Anregungen zu dieser Seite sind wir sehr dankbar. Bei
-          jedem Abschnitt hast Du die Möglichkeit, uns eine{" "}
+          jedem Abschnitt hast du die Möglichkeit, uns eine{" "}
           <FeedbackText
             display="inline-block"
             card="Fundraising"

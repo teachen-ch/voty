@@ -42,10 +42,10 @@ export default function Success({
         <Text>
           Dein Konto wurde erstellt und wir haben ein Email an die Adresse «
           {user?.email}» geschickt. Bitte öffne den Link in diesem Email, um
-          Dich anzumelden.
+          dich anzumelden.
         </Text>
         <Text my={4}>
-          <strong>Keine Email erhalten?</strong> Bitte überprüfe Deine Email
+          <strong>Keine Email erhalten?</strong> Bitte überprüfe deine Email
           Adresse auf Tippfehler ({user?.email}) und schau im Spam-Ordner nach.
         </Text>
         <Button variant="text" onClick={router.reload}>

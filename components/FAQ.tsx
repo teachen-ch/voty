@@ -79,14 +79,14 @@ export const FAQ: React.FC = () => (
     </Text>
     <Heading as="h3">Macht auch die Romandie und das Tessin mit?</Heading>
     <Text>
-      Wenn Du Kontakte in diese Sprachregionen hast, dann freuen wir uns sehr
+      Wenn du Kontakte in diese Sprachregionen hast, dann freuen wir uns sehr
       über <A href="/kontakt">Email</A>!
     </Text>
     <Heading as="h3">
       Ich habe keine Frage, aber eine kritische Anmerkung!
     </Heading>
     <Text>
-      Wir sind auf Dein Feedback angewiesen. Bitte nimm mit uns{" "}
+      Wir sind auf dein Feedback angewiesen. Bitte nimm mit uns{" "}
       <A href="/kontakt">Kontakt</A> auf.
     </Text>
   </Box>

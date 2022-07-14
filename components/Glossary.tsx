@@ -147,7 +147,7 @@ export const GlossaryText: React.FC = (props) => (
 
 function getGlossary(term: string) {
   const missing =
-    "Dieser Eintrag wurde im Glossar noch nicht erfasst. Magst Du den Begriff in 1-2 Sätzen erklären 👉 glossar@voty.ch";
+    "Dieser Eintrag wurde im Glossar noch nicht erfasst. Magst du den Begriff in 1-2 Sätzen erklären 👉 glossar@voty.ch";
   return glossary[term] || missing;
 }
 

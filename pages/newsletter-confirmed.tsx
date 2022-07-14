@@ -13,7 +13,7 @@ export default function NewsletterConfirmed(): ReactElement {
         <Heading as="h2" id="newsletter">
           ✅ Super, deine Newsletter-Anmeldung ist jetzt bestätigt!
         </Heading>
-        Du kannst Dich jederzeit wieder von Newsletter abmelden, wenn Du auf den
+        Du kannst dich jederzeit wieder von Newsletter abmelden, wenn Du auf den
         entsprechenden Link im Newsletter klickst.
       </Flex>
     </Page>

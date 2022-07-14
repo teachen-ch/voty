@@ -11,9 +11,9 @@ export default function NewsletterSuccess(): ReactElement {
         sx={{ background: 'url("/images/voty_welcome.svg") center no-repeat' }}
       >
         <Heading as="h2" id="newsletter">
-          Danke für Dein Interesse an voty.ch!
+          Danke für dein Interesse an voty.ch!
         </Heading>
-        Schau in Deiner Inbox nach und bestätige die Anmeldung dort.
+        Schau in deiner Inbox nach und bestätige die Anmeldung dort.
       </Flex>
     </Page>
   );

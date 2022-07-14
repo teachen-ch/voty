@@ -17,8 +17,8 @@
         >
         <mj-text font-size="20px" color="#000"
           >Deine Anmeldung ist bestätigt. Gerne schicken wir Dir einige Tipps,
-          um auf voty loszulegen. Wenn Du in diesem Email die Bilder lädst,
-          kannst Du eine Schritt-für-Schritt Anleitung sehen.</mj-text
+          um auf voty loszulegen. Wenn du in diesem Email die Bilder lädst,
+          kannst du eine Schritt-für-Schritt Anleitung sehen.</mj-text
         >
         <mj-button
           href="https://voty.ch/user/login"

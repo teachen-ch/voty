@@ -21,7 +21,7 @@ export default function TeacherHome(): ReactElement {
   if (user?.school === null) {
     return (
       <LoggedInPage heading="Willkommen auf voty.ch" role={Role.Teacher}>
-        <Text mb={3}>Wähle zuerst Deine Schule aus oder erfasse eine Neue</Text>
+        <Text mb={3}>Wähle zuerst deine Schule aus oder erfasse eine Neue</Text>
         <SelectSchool />
       </LoggedInPage>
     );
@@ -33,7 +33,7 @@ export default function TeacherHome(): ReactElement {
         <Here>Meine Klassen</Here>
       </Breadcrumb>
       <Text fontWeight="bold">Willkommen {user && user.name}</Text>
-      <Text mb={4}>Hier siehst Du eine Übersicht Deiner Klassen</Text>
+      <Text mb={4}>Hier siehst du eine Übersicht deiner Klassen</Text>
       <Teams
         where={{ teacher: { id: { equals: user?.id } } }}
         teamClick={(team) => teamDetail(team.id)}

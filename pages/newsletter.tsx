@@ -7,7 +7,7 @@ export default function Kontakt(): ReactElement {
   return (
     <Page heading="Newsletter">
       <Text mb={2}>
-        Möchtest Du regelmässig über voty.ch informiert werden? Wir verschicken
+        Möchtest du regelmässig über voty.ch informiert werden? Wir verschicken
         etwa 2-3 Emails pro Semester.
       </Text>
       <Newsletter />

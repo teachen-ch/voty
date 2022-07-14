@@ -78,7 +78,7 @@ export default function Abstimmung(): ReactElement {
           <RImage src="/screens/screen_t1.png" mt={2} />
         </Step>
         <Step n={2}>
-          Wähle die Abstimmungen für Deine Klasse aus:
+          Wähle die Abstimmungen für deine Klasse aus:
           <RImage src="/screens/screen_t2.png" mt={2} />
         </Step>
         <Step n={3}>

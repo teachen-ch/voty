@@ -22,12 +22,12 @@ export default function StudentHome(): React.ReactElement {
     trackEvent({ category: "Student", action: "FirstRun" });
     return (
       <LoggedInPage heading={`Hallo ${user?.name}`}>
-        <Text>Willkommen auf voty.ch – schön bis Du da!</Text>
+        <Text>Willkommen auf voty.ch – schön bis du da!</Text>
         <Text my={2}>
           Deine Klasse: {user?.team?.name}, {user?.school?.name}
         </Text>
         <Text my={2} mt={4}>
-          Bitte ergänze hier noch Deine Angaben:
+          Bitte ergänze hier noch deine Angaben:
         </Text>
         <ProfileEdit user={user} editMode={true} />
       </LoggedInPage>

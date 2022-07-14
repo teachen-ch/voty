@@ -20,7 +20,7 @@ export default function StudentTeamPage(): React.ReactElement {
     >
       <H2 mt={5}>Deine Lerninhalte</H2>
       <Text mb={4} fontSize={2}>
-        Wähle hier die Lerninhalte, die Du bearbeiten möchtest:
+        Wähle hier die Lerninhalte, die du bearbeiten möchtest:
       </Text>
       <StudentCardList
         teamCards={String(user.team?.cards)}
@@ -30,7 +30,7 @@ export default function StudentTeamPage(): React.ReactElement {
 
       <H2>Abstimmungen Klasse {user.team.name}</H2>
       <Text fontSize={2} mb={4}>
-        Diese Abstimmungen sind für Deine Klasse verfügbar:
+        Diese Abstimmungen sind für deine Klasse verfügbar:
       </Text>
       <StudentListBallots teamId={user.team.id} />
 

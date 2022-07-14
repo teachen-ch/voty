@@ -43,8 +43,8 @@ const ShowBallots: React.FC<{ user: SessionUser }> = ({ user }) => {
     <Box id="ballots">
       <Heading>Abstimmungen</Heading>
       <Text>
-        Hier kannst Du zu den aktuellen nationalen Abstimmungsvorlagen anonym
-        Deine Stimme abgeben.
+        Hier kannst du zu den aktuellen nationalen Abstimmungsvorlagen anonym
+        deine Stimme abgeben.
       </Text>
       {
         ballotRuns?.length
@@ -123,7 +123,7 @@ export const Ballot: React.FC<{
             {voty ? (
               <>
                 <Text fontWeight="semi" mt={4}>
-                  Jetzt bist du dran! Hast Du Dir eine Meinung gebildet? Was
+                  Jetzt bist du dran! Hast du Dir eine Meinung gebildet? Was
                   stimmst Du?
                 </Text>
                 <VotyNow ballot={ballot} onSuccess={() => setSuccess(true)} />

@@ -237,7 +237,7 @@ export const ZDAFAQ: React.FC = () => (
       </Text>
       <Title>Warum muss ich mich mit meiner Email-Adresse registrieren?</Title>
       <Text>
-        Mit der Angabe Deiner Email-Adresse stellen wir sicher, dass jede Person
+        Mit der Angabe deiner Email-Adresse stellen wir sicher, dass jede Person
         nur <A onClick={() => alert("pro Email-Adresse...")}>eine Stimme</A>{" "}
         abgeben kann. Deine Email-Adresse wird nur zur Durchführung dieser
         Abstimmung verwendet und nie an Dritte weitergegeben.
@@ -261,7 +261,7 @@ export const ZDAFAQ: React.FC = () => (
         <A href="https://schulen-nach-bern.ch/anmeldung" rel="noreferrer">
           schulen-nach-bern.ch/anmeldung
         </A>{" "}
-        findest Du die nächsten Durchführungsdaten von «SpielPolitik!» und alle
+        findest du die nächsten Durchführungsdaten von «SpielPolitik!» und alle
         Angaben zur Anmeldung.
       </Text>
     </DE>

@@ -164,7 +164,7 @@ export default function Home(): React.ReactElement {
             <TeaserText title="Jetzt Klasse anmelden!">
               Zu den vierteljährlichen eidgenössischen Abstimmungen führen wir
               in Zusammenarbeit mit easyvote.ch anonyme
-              Online-Klassenabstimmungen durch. Melde jetzt Deine Klasse für die
+              Online-Klassenabstimmungen durch. Melde jetzt deine Klasse für die
               Abstimmung an. <LearnMore href="/abstimmung" />
             </TeaserText>
             <TeaserImage

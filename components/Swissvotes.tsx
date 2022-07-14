@@ -160,7 +160,7 @@ export const SwissvotesTopics: React.FC = () => {
           <Text mb={-20}>
             <CircleBullet value={2} /> Sucht hier in der Swissvotes Datenbank,
             zu was die Schweiz über das Thema «{topic}» abgestimmt hat und wählt
-            drei Initiativen aus, die Euch wichtig erscheinen:
+            drei Initiativen aus, die euch wichtig erscheinen:
           </Text>
           <Swissvotes
             keyword={topic}
@@ -191,7 +191,7 @@ export const SwissvotesTopics: React.FC = () => {
           <Text mt={4}>
             <CircleBullet value={3} />
             Nun begründet, warum ihr diese Abstimmungen wichtig findet und was
-            Euch bei der Recherche aufgefallen ist. Über welche Abstimmungen
+            euch bei der Recherche aufgefallen ist. Über welche Abstimmungen
             hättet ihr gerne selber abgestimmt?
             <Textarea
               value={text}

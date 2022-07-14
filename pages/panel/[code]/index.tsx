@@ -46,7 +46,7 @@ export default function PanelBallots(): ReactElement {
   }
 
   return (
-    <PanelPage heading="Jetzt bist Du dran!">
+    <PanelPage heading="Jetzt bist du dran!">
       {ballotRuns?.length
         ? ballotRuns.map(
             (ballotRun) =>
@@ -175,7 +175,7 @@ const VoteCode: React.FC<{
 const VotySuccess: React.FC = () => (
   <>
     <Text mb={4}>
-      Super, Du hast nun anonym abgestimmt und Deine Stimme wurde gezählt.
+      Super, du hast nun anonym abgestimmt und deine Stimme wurde gezählt.
     </Text>
     <Box textAlign="center">
       <img

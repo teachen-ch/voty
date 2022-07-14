@@ -57,7 +57,7 @@ export const TeamAnonLogin: React.FC = () => (
   <Box>
     <H2 mt={6}>Anmelden</H2>
     <Text mb={3} fontSize={2}>
-      Um Diskussionen und Aktivitäten der Klasse anzuzeigen musst Du Dich
+      Um Diskussionen und Aktivitäten der Klasse anzuzeigen musst du dich
       anmelden:
     </Text>
     <LoginForm />

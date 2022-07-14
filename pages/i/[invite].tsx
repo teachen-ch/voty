@@ -119,7 +119,7 @@ const Invite: React.FC = () => {
       </Heading>
       <Text mb={3} fontSize={[2, 2, 3]}>
         Erstelle einen neuen Schüler*innen Account für voty.ch. Bitte nutze die
-        Email-Adresse Deiner Schule.
+        Email-Adresse deiner Schule.
       </Text>
       <CreateUserForm
         setUser={setUser}
@@ -156,7 +156,7 @@ const AcceptInvite: React.FC<AcceptInviteProps> = ({ invite, team, user }) => {
     },
     onError(error) {
       if (error.message === "ALREADY_IN_TEAM") {
-        setError("Du bist bereits in einer Klasse angemeldet.");
+        setError("du bist bereits in einer Klasse angemeldet.");
       } else {
         setError(error.message);
       }
@@ -165,13 +165,13 @@ const AcceptInvite: React.FC<AcceptInviteProps> = ({ invite, team, user }) => {
   if (success) {
     return (
       <>
-        <Text my={4}>Du bist nun angemeldet in der Klasse «{team.name}»</Text>
+        <Text my={4}>du bist nun angemeldet in der Klasse «{team.name}»</Text>
         <Button onClick={() => router.push("/")}>Weiter geht&apos;s</Button>
       </>
     );
   }
   if (!user) {
-    return <Err msg="Du musst Dich zuerst anmelden" />;
+    return <Err msg="du musst dich zuerst anmelden" />;
   }
   if (team.teacherId === user.id) {
     return (
@@ -182,11 +182,11 @@ const AcceptInvite: React.FC<AcceptInviteProps> = ({ invite, team, user }) => {
         </Heading>
         <Text mb={3} fontSize={[2, 2, 3]}>
           Erstelle einen neuen Schüler*innen Account für voty.ch. Bitte nutze
-          die Email-Adresse Deiner Schule.
+          die Email-Adresse deiner Schule.
         </Text>
         <CreateUserForm
-          setUser={() => alert("Du bist bereits angemeldet")}
-          onSubmit={() => alert("Du bist bereits angemeldet")}
+          setUser={() => alert("du bist bereits angemeldet")}
+          onSubmit={() => alert("du bist bereits angemeldet")}
           omitRole
           omitPassword
           omitFirstname
@@ -200,10 +200,10 @@ const AcceptInvite: React.FC<AcceptInviteProps> = ({ invite, team, user }) => {
     return (
       <>
         <Text>
-          Achtung: Du bist auf der Einladungsseite der Klasse «{team.name}» aber
-          Du bist als Lehrperson angemeldet.
+          Achtung: du bist auf der Einladungsseite der Klasse «{team.name}» aber
+          du bist als Lehrperson angemeldet.
         </Text>
-        <Err msg="Du wirst voty.ch nicht mehr als Lehrperson verwenden können!" />
+        <Err msg="du wirst voty.ch nicht mehr als Lehrperson verwenden können!" />
         <Button onClick={() => setForce(true)}>
           Als Schüler*in weiterfahren?
         </Button>

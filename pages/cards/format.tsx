@@ -26,25 +26,25 @@ export default function CardsPublic(): React.ReactElement {
   return (
     <Page heading="Format Lerninhalte">
       <p>
-        Hier findest Du Beispiele von Lerninhalten, die Du für Deine eigenen
+        Hier findest du Beispiele von Lerninhalten, die du für deine eigenen
         Themen verwenden kannst. Du kannst Text, Bilder, Videos und Quizzes
-        kombinieren oder Du kannst einen eigenen Chatbot zur Demokratie
+        kombinieren oder du kannst einen eigenen Chatbot zur Demokratie
         erstellen.
       </p>
       <H2>Texte, Bilder, Videos</H2>
       <p>
-        Auf voty.ch kannst Du Texte mit Bildern und Videos darstellen. Versuche
-        Deine Texte kurz und einfach zu halten, Jugendliche mögen keine langen
+        Auf voty.ch kannst du Texte mit Bildern und Videos darstellen. Versuche
+        deine Texte kurz und einfach zu halten, Jugendliche mögen keine langen
         Texte 🙃.
       </p>
       <p>
-        Wenn Du gute Bilder zum Thema findest, dann musst Du darauf achten, dass
-        diese lizenzfrei sind, sonst kriegst Du noch eine Copyright-Klage an den
+        Wenn du gute Bilder zum Thema findest, dann musst du darauf achten, dass
+        diese lizenzfrei sind, sonst kriegst du noch eine Copyright-Klage an den
         Hals 😬.{" "}
       </p>
       <p>
         <small>
-          Auf der Google-Bildersuche kannst Du dazu unter{" "}
+          Auf der Google-Bildersuche kannst du dazu unter{" "}
           <em>Suchfilter &gt; Nutzungsrechte &gt; Creative-Commons-Lizenzen</em>{" "}
           auswählen. Hier geht&apos;s zur{" "}
           <A href="https://www.google.ch/search?q=griechenland&tbm=isch&tbs=il:cl&hl=de&sa=X&biw=1203&bih=649">
@@ -62,13 +62,13 @@ export default function CardsPublic(): React.ReactElement {
       <H2>Chatbot</H2>
       <p>
         Auf voty.ch haben wir einen Chatbot für Demokratie-Inhalte entwickelt.
-        Hier findest Du ein Beispiel: 👉{" "}
+        Hier findest du ein Beispiel: 👉{" "}
         <A href="/cards/chaty_demokratie_griechenland" target="_blank">
           Chaty: wer hat die Demokratie erfunden?
         </A>
       </p>
       <p>
-        Wenn Du selber einen eigenen Chatbot entwickeln möchtest, dann klicke
+        Wenn du selber einen eigenen Chatbot entwickeln möchtest, dann klicke
         hier:
       </p>
       <A mt={-1} mb={4} href="/cards/chaty_create">
@@ -90,7 +90,7 @@ export default function CardsPublic(): React.ReactElement {
         </Question>
 
         <Question>
-          <Pill display="inline">MULTICHOICE</Pill> Schliesslich kannst Du auch
+          <Pill display="inline">MULTICHOICE</Pill> Schliesslich kannst du auch
           Multiple-Choice Fragen stellen.
           <br />
           <br />
@@ -102,7 +102,7 @@ export default function CardsPublic(): React.ReactElement {
         </Question>
         <Question>
           <Pill display="inline">REIHENFOLGE</Pill>Bei dieser Frage hier zum
-          Beispiel, musst Du die Antworten in eine richtige Reihenfolge bringen:
+          Beispiel, musst du die Antworten in eine richtige Reihenfolge bringen:
           <Order
             id="3"
             items={[

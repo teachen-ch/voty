@@ -4,13 +4,13 @@
     "CreateButton": "Bestätigungs-Email schicken",
     "Start": {
       "Intro": "Hier konnten Schüler*innen und Erwachsene über die Initiativen von «SpielPolitik!» abstimmen und Jugendliche konnten für die eidgenössischen Abstimmungen vom 26. September ihre Stimme abgeben.",
-      "Step1": "Registriere Dich mit Deiner Email-Adresse",
+      "Step1": "Registriere dich mit deiner Email-Adresse",
       "Step2": "Klicke den Bestätigungslink im Email",
       "Step3": "Stimme über die Vorlagen ab",
       "GoVote": "Hier geht's zu den Abstimmungen"
     },
     "Vote": {
-      "Intro": "Jetzt bist Du dran! Diskutiere die Vorlagen, bilde Dir eine eigene Meinung und stimme ab!",
+      "Intro": "Jetzt bist du dran! Diskutiere die Vorlagen, bilde Dir eine eigene Meinung und stimme ab!",
       "Header1": "Initiativen «SpielPolitik!»",
       "Header2": "Eidgenössische Abstimmungen vom 26. September",
       "Easywait": "Die neuen Abstimmungen werden am Montag, 30. August 2021 aufgeschaltet",
@@ -22,7 +22,7 @@
     }
   },
   "Profile": {
-    "Intro": "Bitte ergänze hier noch Deine Angaben:",
+    "Intro": "Bitte ergänze hier noch deine Angaben:",
     "Firstname": "Vorname",
     "Lastname": "Nachname",
     "Gender": "Geschlecht",
@@ -38,7 +38,7 @@
     "RequiredError": "Pflichtfeld. Du kannst aber auch «möchte ich nicht angeben» wählen»",
     "DataLink": "Datenschutz bei voty.ch",
     "Legal": {
-      "Student": "Wenn Du uns Deinen Jahrgang und Dein Geschlecht mitteilst, können wir bessere Hochrechnungen erstellen und die Meinung der Jugend in der Schweiz besser repräsentieren. Du darfst aber auch «möchte ich nicht angeben» auswählen. ",
+      "Student": "Wenn du uns deinen Jahrgang und dein Geschlecht mitteilst, können wir bessere Hochrechnungen erstellen und die Meinung der Jugend in der Schweiz besser repräsentieren. Du darfst aber auch «möchte ich nicht angeben» auswählen. ",
       "Teacher": ""
     }
   },
@@ -116,7 +116,7 @@
     "NoTeamSchool": "Es wurde keine Klasse / Schulhaus angegeben",
     "NoToken": "Deine Anmeldung hat nicht geklappt",
     "NotFound": "Wir konnten dieses Element leider nicht finden",
-    "OnlyUpdateSelf": "Du darfst nur Dein eigenes Profil bearbeiten",
+    "OnlyUpdateSelf": "Du darfst nur dein eigenes Profil bearbeiten",
     "PasswordChange": "Das Passwort konnte nicht geändert werden",
     "PasswordMatch": "Die beiden Passwörter stimmen nicht überein…",
     "PasswordNotSet": "Es wurde kein Passwort gesetzt",
@@ -145,7 +145,7 @@
     "Yes": "Ja, ich stimme zu",
     "No": "Nein, ich lehne ab",
     "Abstain": "Ich möchte mich der Stimme enthalten",
-    "Login": "Um über diese Abstimmung abzustimmen, musst Du Dich zuerst",
+    "Login": "Um über diese Abstimmung abzustimmen, musst Du dich zuerst",
     "LoginLink": "anmelden",
     "Success": "Du hast erfolgreich abgestimmt",
     "NotStarted": "Abstimmung noch nicht gestartet",

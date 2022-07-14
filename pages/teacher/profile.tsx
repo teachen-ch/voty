@@ -16,7 +16,7 @@ export default function TeacherProfilePage({
 
   return (
     <LoggedInPage heading="Dein Profil" role={Role.Teacher}>
-      {firstRun && "Bitte ergänze Deine Angaben…"}
+      {firstRun && "Bitte ergänze deine Angaben…"}
       <ProfileEdit user={user} editMode={firstRun} />
 
       <Box mt={4}>
@@ -31,7 +31,7 @@ export default function TeacherProfilePage({
           </Link>
           .
           <Text fontSize={2}>
-            Achtung, dabei werden auch Deine Klassen gelöscht. Konten der
+            Achtung, dabei werden auch deine Klassen gelöscht. Konten der
             Schüler*innen werden nicht automatisch gelöscht.
           </Text>
         </Box>

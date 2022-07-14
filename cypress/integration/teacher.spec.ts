@@ -30,7 +30,7 @@ describe("Test Teacher Startpage", () => {
   it("allows teacher to select an existing school", () => {
     cy.login("teacher4@teachen.ch", "teachen");
     cy.visit("/teacher");
-    cy.contains("Wähle zuerst Deine Schule");
+    cy.contains("Wähle zuerst deine Schule");
     cy.findByLabelText("Schule:").select("1000 City One - School One");
     cy.contains("Bestätigen").click();
     cy.contains("Mein Konto").click();

@@ -41,7 +41,7 @@ export default function Signup(): ReactElement {
       onClose={() => void router.push("/")}
     >
       <Text mb={4}>
-        Du bist eine Lehrperson und möchtest mit Deinen Klassen auf voty.ch
+        Du bist eine Lehrperson und möchtest mit deinen Klassen auf voty.ch
         abstimmen oder das Online-Lehrmittel benutzen? Eröffne hier ein
         kostenloses Konto:
       </Text>
@@ -63,7 +63,7 @@ export const InlineSignup: React.FC = () => {
     return (
       <>
         <Heading as="h2" id="form">
-          Interessiert? Melde Dich jetzt mit Deiner Klasse an
+          Interessiert? Melde dich jetzt mit deiner Klasse an
         </Heading>
         <CreateUserForm
           setUser={setNewUser}
@@ -187,7 +187,7 @@ export const CreateUserForm: React.FC<{
           variant="text"
           sx={{ gridColumn: [0, 0, 2] }}
         >
-          Möchstest Du Dich anmelden?
+          Möchstest du dich anmelden?
         </Button>
       )}
       {!props.omitLogin && (

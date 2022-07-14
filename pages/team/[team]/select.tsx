@@ -90,7 +90,7 @@ export default function SelectCardsPage(): React.ReactElement {
 export const ListPaths: React.FC<{ anon?: boolean }> = ({ anon }) => (
   <Box mt={4}>
     <Text fontSize={2} mb={3}>
-      Wähle entweder einen vorgeschlagenen Lernpfad für Deine Klasse oder stelle
+      Wähle entweder einen vorgeschlagenen Lernpfad für deine Klasse oder stelle
       die Inhalte frei zusammen.
     </Text>
     <ReadMore

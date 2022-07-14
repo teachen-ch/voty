@@ -14,7 +14,7 @@ import { useUser } from "state/user";
 export const FeedbackText: React.FC<
   BoxProps & { text?: string; quest?: string; card?: string }
 > = ({
-  text = "Hast Du Fragen oder Verbesserungsvorschläge zu diesem Inhalt?",
+  text = "Hast du Fragen oder Verbesserungsvorschläge zu diesem Inhalt?",
   card,
   quest,
   ...props

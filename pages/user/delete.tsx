@@ -78,8 +78,8 @@ const DeleteForm: React.FC<{ user: SessionUser }> = ({ user }) => {
   return (
     <>
       <Text>
-        Schade! Wir würden uns freuen, wenn Du auch bei zukünftigen Abstimmungen
-        auf voty.ch mitmachst! Möchtest Du wirklich Dein Konto mit der Email «
+        Schade! Wir würden uns freuen, wenn du auch bei zukünftigen Abstimmungen
+        auf voty.ch mitmachst! Möchtest du wirklich dein Konto mit der Email «
         {user?.email}» endgültig löschen?
       </Text>
       <Grid my={4} columns={[0, 0, "1fr 1fr"]}>

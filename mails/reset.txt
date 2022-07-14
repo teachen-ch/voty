@@ -1,8 +1,8 @@
 Passwort zurücksetzen!
 
-Mit diesem Link kannst Du Dein Passwort für dein Konto bei voty ändern:
+Mit diesem Link kannst du dein Passwort für dein Konto bei voty ändern:
 
 {{&url}}
 
 
-Wenn Du nicht soeben eine Passwort-Anfrage gestartet hast, dann lösche bitte dieses Mail.
+Wenn du nicht soeben eine Passwort-Anfrage gestartet hast, dann lösche bitte dieses Mail.

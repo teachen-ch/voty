@@ -16,8 +16,8 @@
           >Willkommen bei voty.&#8203;ch</mj-text
         >
         <mj-text font-size="20px" color="#000"
-          >Um Dein neues Konto zu eröffnen und Deine Email-Adresse zu
-          bestätigen, kannst Du auf diesen Link klicken:</mj-text
+          >Um dein neues Konto zu eröffnen und deine Email-Adresse zu
+          bestätigen, kannst du auf diesen Link klicken:</mj-text
         >
         <mj-button
           href="{{&url}}"
@@ -27,7 +27,7 @@
           >Jetzt bestätigen</mj-button
         >
         <mj-text font-size="20px">
-          Wenn Du Dich nicht bei voty.&#8203;ch registrieren wolltest, kannst Du
+          Wenn du dich nicht bei voty.&#8203;ch registrieren wolltest, kannst Du
           dieses Mail löschen.</mj-text
         >
       </mj-column>

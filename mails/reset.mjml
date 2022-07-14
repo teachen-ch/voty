@@ -16,7 +16,7 @@
           >Passwort zurücksetzen</mj-text
         >
         <mj-text font-size="20px" color="#000"
-          >Mit diesem Link kannst Du Dein Passwort für den Benutzer
+          >Mit diesem Link kannst du dein Passwort für den Benutzer
           «<strong>{{&email}}</strong>» bei voty.&#8203;ch ändern</mj-text
         >
         <mj-button
@@ -27,7 +27,7 @@
           >Jetzt Passwort ändern</mj-button
         >
         <mj-text font-size="20px">
-          Wenn Du nicht soeben eine Passwort-Anfrage gestartet hast, dann lösche
+          Wenn du nicht soeben eine Passwort-Anfrage gestartet hast, dann lösche
           bitte dieses Mail.</mj-text
         >
       </mj-column>

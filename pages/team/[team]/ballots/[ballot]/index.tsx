@@ -68,8 +68,8 @@ export default function BallotPage(): ReactElement {
       </Breadcrumb>
 
       <Text>
-        Jetzt bist du dran! Hast Du Dir eine Meinung gebildet? Wie stimmst Du
-        ab? Deine Wahl ist anonym, niemand kann nachverfolgen, wie Du abstimmst.
+        Jetzt bist du dran! Hast du Dir eine Meinung gebildet? Wie stimmst Du
+        ab? Deine Wahl ist anonym, niemand kann nachverfolgen, wie du abstimmst.
       </Text>
 
       <BallotDetails ballot={ballot}>
@@ -169,7 +169,7 @@ export const VotyNow: React.FC<{
 export const VotySuccess: React.FC<{ name: Nullable<string> }> = ({ name }) => (
   <>
     <Text mb={4}>
-      Super, {name}, Du hast nun anonym abgestimmt und Deine Stimme wurde
+      Super, {name}, du hast nun anonym abgestimmt und deine Stimme wurde
       gezählt. Die Resultate der Abstimmung könnt ihr mit Eurer Lehrperson
       ansehen und besprechen.
     </Text>
