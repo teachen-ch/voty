@@ -10,7 +10,7 @@ export default function LebenPage(): React.ReactElement {
       image="/images/aula_header_m3.svg"
     >
       <Text>
-        Wie sehen die Entscheidungsfindungsprozesse an Ihrer Schule aus? Dürfen
+        Wie sehen die Entscheidungsfindungsprozesse an ihrer Schule aus? Dürfen
         Schülerinnen und Schüler Ideen einbringen? Das Erleben eines
         demokratischen Prozesses fördert die Kompetenzen Kommunikation,
         Kollaboration und kritisches Denken und soll die Lust und Freude an

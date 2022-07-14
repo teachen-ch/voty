@@ -186,8 +186,8 @@ export default function Home(): React.ReactElement {
               height={589}
               top={-60}
             />
-            <TeaserText title="Wer entscheidet an Eurer Schule?">
-              Wer fällt die Entscheidungen an Eurem Schulhaus? Dürfen
+            <TeaserText title="Wer entscheidet an euerr Schule?">
+              Wer fällt die Entscheidungen an eurem Schulhaus? Dürfen
               Schülerinnen und Schüler mitreden und Vorschläge einbringen? Wir
               möchten gemeinsam testen, wie wir partizipative Prozesse und mehr
               Demokratie in Schulhäuser bringen können.

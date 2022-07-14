@@ -38,8 +38,8 @@ export default function CardsPublic(): React.ReactElement {
       </Text>
       <Text my={4}>
         <strong>Übrigens</strong>: Die interaktiven Teile von voty.ch könnt ihr
-        als Klasse nutzen, wenn Eure Lehrperson{" "}
-        <A href="/user/signup">Eure Klasse hier anmeldet</A>. an.
+        als Klasse nutzen, wenn eure Lehrperson{" "}
+        <A href="/user/signup">eure Klasse hier anmeldet</A>. an.
       </Text>
       <Cards
         keywords={keywords}

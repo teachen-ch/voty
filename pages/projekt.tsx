@@ -159,9 +159,9 @@ export default function Projekt(): React.ReactElement {
           prototypefund.opendata.ch entwickelt wird.
         </Text>
         <Team />
-        <Heading>Wir haben Ihr Interesse geweckt?</Heading>
+        <Heading>Wir haben ihr Interesse geweckt?</Heading>
         <Text>
-          Du bist am Projekt interessiert, hast Fragen, Anregungen oder Ihr
+          Du bist am Projekt interessiert, hast Fragen, Anregungen oder ihr
           möchtet als Pilotklasse am Projekt teilnehmen? Wir freuen uns auf eine{" "}
           <A href="/kontakt" variant="underline">
             Kontaktaufnahme

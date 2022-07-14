@@ -75,7 +75,7 @@ export default function CardsPublic(): React.ReactElement {
         <Button>Eigenen Chatbot erstellen</Button>
       </A>
       <H2>Quizzes, Fragen, Tests</H2>
-      Am besten fügt ihr zu Eurer Online-Lerneinheit auch noch einige
+      Am besten fügt ihr zu eurer Online-Lerneinheit auch noch einige
       Kontrollfragen hinzu. Dazu gibt es verschiedene Fragemodule:
       <Quest>
         <Question>

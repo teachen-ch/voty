@@ -22,7 +22,7 @@ export default function Kontakt(): ReactElement {
         3110 Münsingen
       </pre>
       <Text>
-        Möchtet Ihr mit uns Kontakt aufnehmen? Wir freuen uns auf Feedback,
+        Möchtet ihr mit uns Kontakt aufnehmen? Wir freuen uns auf Feedback,
         Anregungen und Fragen zu voty.ch:
       </Text>
       <Text my={4}>
@@ -32,7 +32,7 @@ export default function Kontakt(): ReactElement {
       </Text>
 
       <Text mt={5}>
-        Möchtet Ihr regelmässig über voty.ch informiert werden (ca. 2-3 mal pro
+        Möchtet ihr regelmässig über voty.ch informiert werden (ca. 2-3 mal pro
         Semester):
       </Text>
       <Text my={4}>

@@ -145,7 +145,7 @@ export const SwissvotesTopics: React.FC = () => {
     <Box>
       <Text mb={3}>
         <CircleBullet value={1} />
-        Wählt ein Thema aus, über das Ihr recherchieren möchtet:
+        Wählt ein Thema aus, über das ihr recherchieren möchtet:
       </Text>
       <Select value={topic} onChange={(e) => setTopic(e.target.value)}>
         <option value="">Thema auswählen</option>

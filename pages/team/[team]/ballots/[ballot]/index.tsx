@@ -170,7 +170,7 @@ export const VotySuccess: React.FC<{ name: Nullable<string> }> = ({ name }) => (
   <>
     <Text mb={4}>
       Super, {name}, du hast nun anonym abgestimmt und deine Stimme wurde
-      gezählt. Die Resultate der Abstimmung könnt ihr mit Eurer Lehrperson
+      gezählt. Die Resultate der Abstimmung könnt ihr mit eurer Lehrperson
       ansehen und besprechen.
     </Text>
     <Box textAlign="center">
