@@ -262,7 +262,7 @@ function parseMessage(lines: string, ix: number): TMessage {
   const match = message.match(/^([A-Z]{3,}):?\s+/);
   if (match && match[1]) {
     type = match[1];
-    const rest = message.substr(match[0].length);
+    const rest = message.substring(match[0].length);
     const result = specialMessage(type, rest);
     if (typeof result === "string") {
       message = result;
@@ -297,13 +297,7 @@ function specialMessage(type: string, rest: string): React.ReactNode {
       return <img src={rest} width="200" alt="Bild" />;
     case "BUTTONS":
     case "MENU": {
-      // either single line: MENU (bla) (bli) (blo)
-      // or multi line: MENU\n  bla\n  bli\n  blo
-      const options =
-        rest.indexOf("\n") >= 0
-          ? rest.split("\n")
-          : rest.replace(/^\s*\((.*?)\)\s*$/, "$1").split(/\)\s*\(/);
-      return options.join("|");
+      return parseOptions(rest);
     }
     case "BUTTON":
       return rest;
@@ -313,4 +307,17 @@ function specialMessage(type: string, rest: string): React.ReactNode {
       console.error("Unkown special command: ", type);
       return rest;
   }
+}
+
+// Parse a list of options to a command such as MENU, which can be either on a single line:
+//   MENU(bla)(bli)(blo)
+// or multi line:
+//   MENU\n  bla\n  bli\n  blo
+// Returns a "|" pipe-separated string of options
+function parseOptions(rest: string) {
+  const options =
+    rest.indexOf("\n") >= 0
+      ? rest.split("\n")
+      : rest.replace(/^\s*\((.*?)\)\s*$/, "$1").split(/\)\s*\(/);
+  return options.join("|");
 }
