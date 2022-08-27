@@ -1,9 +1,12 @@
-import { Box, Flex, Text } from "rebass";
+import { Box, Button, Flex, Text } from "rebass";
 import { Markdown } from "util/markdown";
 import { GlossaryReplace } from "./Glossary";
-import React from "react";
+import React, { useMemo } from "react";
 import Image from "next/image";
 import IconBack from "../public/images/icon_back_white.svg";
+import { Grid } from "theme-ui";
+import { getCardTitle } from "./Cards";
+import { findIndex, shuffle } from "lodash";
 
 export enum Direction {
   "Incoming",
@@ -166,6 +169,56 @@ const Info: React.FC<{ model: TMessage }> = ({ model }) => (
   >
     <Markdown>{model.message}</Markdown>
   </Box>
+);
+
+export const ChatyMenu: React.FC<{
+  options: string[];
+  message: TMessage;
+  selectOption: (message: TMessage, o: string) => void;
+}> = ({ options, message, selectOption }) => (
+  <InputBox>
+    {options.map((o, i) => (
+      <Button
+        key={i}
+        onClick={() => selectOption(message, o)}
+        ml={i && 2}
+        flex={1}
+      >
+        <Text fontSize={1}>{o}</Text>
+      </Button>
+    ))}
+  </InputBox>
+);
+
+export const ChatyNext: React.FC<{
+  nextChaty: (topic: string) => void;
+  message: TMessage;
+  selectOption: (message: TMessage, o: string) => void;
+}> = ({ nextChaty, message, selectOption }) => (
+  <InputBox>
+    <Text
+      pl={2}
+      flex={1}
+      color="#000"
+      fontWeight="semi"
+      minWidth="300px"
+      my={[2, 2, 0]}
+      sx={{ borderRadius: [0, 0, "0px 0px 5px 5px"] }}
+    >
+      Weiter zu «{getCardTitle(String(message?.message))}»?
+    </Text>
+    <Button
+      ml={2}
+      mr={3}
+      width="150px"
+      onClick={() => selectOption(message, "Nein")}
+    >
+      Nein
+    </Button>
+    <Button width="150px" onClick={() => nextChaty(String(message?.message))}>
+      Ja
+    </Button>
+  </InputBox>
 );
 
 export const TypingIndicator: React.FC = () => (
