@@ -14,6 +14,7 @@ import { getCardTitle } from "./Cards";
 import { useTeam } from "state/user";
 import { useRouter } from "next/router";
 import { WorkCard } from "./Works";
+import { options } from "yargs";
 
 const WAIT = 50;
 const MAX_WAIT = 5000;
@@ -175,49 +176,21 @@ const ShowInput: React.FC<{
   if (message.type === "BUTTONS" || message.type === "MENU") {
     const options = message.message?.split("|") || [];
     return (
-      <InputBox>
-        {options.map((o, i) => (
-          <Button
-            key={i}
-            onClick={() => selectOption(message, o)}
-            ml={i && 2}
-            flex={1}
-          >
-            <Text fontSize={1}>{o}</Text>
-          </Button>
-        ))}
-      </InputBox>
+      <ChatyMenu
+        options={options}
+        message={message}
+        selectOption={selectOption}
+      />
     );
   }
+  if (message.type ==)
   if (message.type === "CHATY") {
     return (
-      <InputBox>
-        <Text
-          pl={2}
-          flex={1}
-          color="#000"
-          fontWeight="semi"
-          minWidth="300px"
-          my={[2, 2, 0]}
-          sx={{ borderRadius: [0, 0, "0px 0px 5px 5px"] }}
-        >
-          Weiter zu «{getCardTitle(String(message?.message))}»?
-        </Text>
-        <Button
-          ml={2}
-          mr={3}
-          width="150px"
-          onClick={() => selectOption(message, "Nein")}
-        >
-          Nein
-        </Button>
-        <Button
-          width="150px"
-          onClick={() => nextChaty(String(message?.message))}
-        >
-          Ja
-        </Button>
-      </InputBox>
+      <ChatyNext
+        message={message}
+        selectOption={selectOption}
+        nextChaty={nextChaty}
+      />
     );
   }
   return (
@@ -296,6 +269,7 @@ function specialMessage(type: string, rest: string): React.ReactNode {
     case "BILD":
       return <img src={rest} width="200" alt="Bild" />;
     case "BUTTONS":
+    case "QUIZZ":
     case "MENU": {
       return parseOptions(rest);
     }
@@ -321,3 +295,53 @@ function parseOptions(rest: string) {
       : rest.replace(/^\s*\((.*?)\)\s*$/, "$1").split(/\)\s*\(/);
   return options.join("|");
 }
+
+const ChatyMenu: React.FC<{
+  options: string[];
+  message: TMessage;
+  selectOption: (message: TMessage, o: string) => void;
+}> = ({ options, message, selectOption }) => (
+  <InputBox>
+    {options.map((o, i) => (
+      <Button
+        key={i}
+        onClick={() => selectOption(message, o)}
+        ml={i && 2}
+        flex={1}
+      >
+        <Text fontSize={1}>{o}</Text>
+      </Button>
+    ))}
+  </InputBox>
+);
+
+const ChatyNext: React.FC<{
+  nextChaty: (topic: string) => void;
+  message: TMessage;
+  selectOption: (message: TMessage, o: string) => void;
+}> = ({ nextChaty, message, selectOption }) => (
+  <InputBox>
+    <Text
+      pl={2}
+      flex={1}
+      color="#000"
+      fontWeight="semi"
+      minWidth="300px"
+      my={[2, 2, 0]}
+      sx={{ borderRadius: [0, 0, "0px 0px 5px 5px"] }}
+    >
+      Weiter zu «{getCardTitle(String(message?.message))}»?
+    </Text>
+    <Button
+      ml={2}
+      mr={3}
+      width="150px"
+      onClick={() => selectOption(message, "Nein")}
+    >
+      Nein
+    </Button>
+    <Button width="150px" onClick={() => nextChaty(String(message?.message))}>
+      Ja
+    </Button>
+  </InputBox>
+);
