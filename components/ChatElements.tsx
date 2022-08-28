@@ -1,27 +1,11 @@
 import { Box, Button, Flex, Text } from "rebass";
 import { Markdown } from "util/markdown";
 import { GlossaryReplace } from "./Glossary";
-import React, { useMemo } from "react";
+import React from "react";
 import Image from "next/image";
 import IconBack from "../public/images/icon_back_white.svg";
-import { Grid } from "theme-ui";
 import { getCardTitle } from "./Cards";
-import { findIndex, shuffle } from "lodash";
-
-export enum Direction {
-  "Incoming",
-  "Outgoing",
-  "Info",
-}
-
-export type TMessage = {
-  direction?: Direction;
-  message?: string;
-  type?: string;
-  line: number;
-  selected?: string;
-  children?: React.ReactNode;
-};
+import { Direction, TMessage } from "util/chaty";
 
 export const ChatContainer: React.FC = ({ children }) => (
   <Box height="480px">

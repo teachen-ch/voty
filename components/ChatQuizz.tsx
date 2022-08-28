@@ -1,7 +1,7 @@
 import { findIndex, shuffle } from "lodash";
 import { Button, Text } from "rebass";
 import { Grid } from "theme-ui";
-import { TMessage } from "./ChatElements";
+import { TMessage } from "util/chaty";
 
 interface Quizz {
   answers: Record<string, number>;
