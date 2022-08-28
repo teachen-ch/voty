@@ -1,0 +1,37 @@
+import { Chaty } from "components/Chaty";
+
+export const meta = {
+  show: "local",
+  id: "chaty_demokratie_schweiz",
+  title: "Chaty: kennst Du die Schweizer Demokratie?",
+  type: "chaty",
+  age: "Zyklus-2,Sek-1,Sek-2",
+  description:
+    "Prüfe Dein Wissen zum politischen System der Schweiz. Was zeichnet unsere Demokratie aus?",
+  duration: "15 Minuten",
+  keywords: "Demokratie, Schweiz, Quizz, Einführung",
+};
+
+<Chaty
+  title={meta.title}
+  lines={`
+- QUESTION Was denkst du, wie und wie häufig wird der Schweizer Präsident gewählt
+* ANSWER
+  Alle vier Jahre, vom Volk aus einer Auswahl jeder Partei gewählt
+  Jedes Jahr vom Parlament bestehend aus allen Vertretern aller Parteien gewählt
+  Jedes Jahr automatisch zwischen den 7 Bundesräten, den Vertretern von 5 Parteien rotiert
+- CHECK Total richtig oder falsch. Woher soll ich das wissen?
+- QUESTION Was denkst du, hat die Schweiz ein offizielles Staatsoberhaupt
+* ANSWER
+  Nein, der aktuelle Bundespräsident ist nur repräsentativ und leitet Ratssitzungen
+  Ja, der aktuelle Bundespräsident
+  Der Schweizer Bundeskanzler gilt als Staatsoberhaupt
+! [Bundespräsident und Vizepräsident (Wikipedia)](https://de.wikipedia.org/wiki/Bundesrat_%28Schweiz%29#Bundespr%C3%A4sident_und_Vizepr%C3%A4sident)
+- QUESTION Was denkst du, wie sieht es in der Schweiz mit der Hauptstadt aus?
+* ANSWER
+  Zürich ist Hauptstadt
+  Bern ist Hauptstadt
+  Die Schweiz hat offiziell keine Hauptstadt
+! [Hauptstadtfrage_der_Schweiz (Wikipedia)](https://de.wikipedia.org/wiki/Hauptstadtfrage_der_Schweiz)
+`}
+/>

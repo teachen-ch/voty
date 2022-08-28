@@ -22,6 +22,7 @@ export * as chaty_demokratie_intro from "content/chaty/chaty_demokratie_intro.md
 export * as chaty_referendum from "content/chaty/chaty_referendum.mdx";
 export * as chaty_create from "content/chaty/chaty_create.mdx";
 export * as chaty_initiativen from "content/chaty/chaty_initiativen.mdx";
+export * as chaty_demokratie_schweiz from "content/chaty/chaty_demokratie_schweiz.mdx";
 
 export * as srf_drei_gewalten from "content/videos/srf_drei_gewalten.mdx";
 export * as srf_foederalismus from "content/videos/srf_foederalismus.mdx";
