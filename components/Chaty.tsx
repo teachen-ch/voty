@@ -9,12 +9,25 @@ import {
   ChatyNext,
 } from "components/ChatElements";
 import { Box, Button, Text, Link } from "rebass";
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import {
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import { useTeam } from "state/user";
 import { useRouter } from "next/router";
 import { WorkCard } from "./Works";
-import { ChatyQuestion } from "./ChatQuizz";
-import { Direction, parseMessages, TMessage } from "util/chaty";
+import { ChatyQuestion } from "./ChatyQuizz";
+import {
+  ChatyContext,
+  Direction,
+  IChatyContext,
+  parseMessages,
+  TMessage,
+} from "util/chaty";
 
 const WAIT = 50;
 const MAX_WAIT = 5000;
@@ -33,17 +46,8 @@ export const Chaty: React.FC<{
   const [inputMessage, setInputMessage] = useState<TMessage>();
   const [cancel, setCancel] = useState(0);
   const [showAll, setShowAll] = useState(false);
+  const [line, setLine] = useState(0);
   const messagesEndRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    return () => clearTimeout(cancel);
-  }, [cancel]);
-
-  // scroll to bottom on every new message
-  useEffect(() => {
-    if (started && !showAll) messagesEndRef.current?.scrollBy(0, 1000);
-  }, [show, showAll, started]);
-
   const doChat = useCallback(
     (line = 0, input?: string) => {
       if (line < 0 || line >= messages.length) {
@@ -51,6 +55,7 @@ export const Chaty: React.FC<{
       }
       setInputMessage(undefined);
       setStarted(true);
+      setLine(line);
       const msg = messages[line];
       const chars = msg.message?.length || 10;
       const wait = Math.min((1 / speed) * WAIT * chars, (1 / speed) * MAX_WAIT);
@@ -83,6 +88,20 @@ export const Chaty: React.FC<{
     },
     [messages, showAll, speed]
   );
+
+  function selectOption(message: TMessage, o: string) {
+    message.selected = o;
+    doChat(message.line, o);
+  }
+
+  useEffect(() => {
+    return () => clearTimeout(cancel);
+  }, [cancel]);
+
+  // scroll to bottom on every new message
+  useEffect(() => {
+    if (started && !showAll) messagesEndRef.current?.scrollBy(0, 1000);
+  }, [show, showAll, started]);
 
   useEffect(() => {
     if (document?.location?.hash === "#autostart") doChat();
@@ -131,40 +150,43 @@ export const Chaty: React.FC<{
     setShow([]);
   }
 
+  const context: IChatyContext = {
+    messages,
+    line,
+    doChat,
+    selectOption,
+    inputMessage,
+  };
+
   return (
-    <ChatContainer>
-      <ChatHeader title={title} onClick={resetChat} />
-      <MessageList ref={messagesEndRef}>
-        {show.map((msg, i) => (
-          <MessageOrInfo key={i} model={msg} is="Message" />
-        ))}
-        {typing ? <TypingIndicator /> : null}
-        {finished ? (
-          <Button mt={3} width="100%" onClick={() => resetChat()}>
-            Fertig
-          </Button>
-        ) : (
-          <div style={{ height: 50, marginTop: 100 }} />
-        )}
-      </MessageList>
-      <ShowInput message={inputMessage} doChat={doChat} />
-    </ChatContainer>
+    <ChatyContext.Provider value={context}>
+      <ChatContainer>
+        <ChatHeader title={title} onClick={resetChat} />
+        <MessageList ref={messagesEndRef}>
+          {show.map((msg, i) => (
+            <MessageOrInfo key={i} model={msg} is="Message" />
+          ))}
+          {typing ? <TypingIndicator /> : null}
+          {finished ? (
+            <Button mt={3} width="100%" onClick={() => resetChat()}>
+              Fertig
+            </Button>
+          ) : (
+            <div style={{ height: 50, marginTop: 100 }} />
+          )}
+        </MessageList>
+        <ShowInput />
+      </ChatContainer>
+    </ChatyContext.Provider>
   );
 };
 
-const ShowInput: React.FC<{
-  message?: TMessage;
-  doChat: (line: number, input?: string) => void;
-}> = ({ message, doChat }) => {
+const ShowInput: React.FC = () => {
+  const { inputMessage, selectOption } = useContext(ChatyContext);
   const team = useTeam();
   const router = useRouter();
 
-  if (!message) return null;
-
-  function selectOption(message: TMessage, o: string) {
-    message.selected = o;
-    doChat(message.line, o);
-  }
+  if (!inputMessage) return null;
 
   function nextChaty(id: string) {
     const url = team
@@ -173,42 +195,24 @@ const ShowInput: React.FC<{
     void router.push(url);
   }
 
-  if (message.type === "BUTTONS" || message.type === "MENU") {
-    const options = message.message?.split("|") || [];
-    return (
-      <ChatyMenu
-        options={options}
-        message={message}
-        selectOption={selectOption}
-      />
-    );
+  if (inputMessage.type === "BUTTONS" || inputMessage.type === "MENU") {
+    const options = inputMessage.message?.split("|") || [];
+    return <ChatyMenu options={options} />;
   }
-  if (message.type === "QUESTION") {
-    const options = message.message?.split("|") || [];
-    return (
-      <ChatyQuestion
-        options={options}
-        message={message}
-        selectOption={selectOption}
-      />
-    );
+  if (inputMessage.type === "QUESTION") {
+    const options = inputMessage.message?.split("|") || [];
+    return <ChatyQuestion options={options} />;
   }
-  if (message.type === "CHATY") {
-    return (
-      <ChatyNext
-        message={message}
-        selectOption={selectOption}
-        nextChaty={nextChaty}
-      />
-    );
+  if (inputMessage.type === "CHATY") {
+    return <ChatyNext nextChaty={nextChaty} />;
   }
   return (
     <InputBox>
       <Button
         width="100%"
-        onClick={() => selectOption(message, String(message.message))}
+        onClick={() => selectOption(inputMessage, String(inputMessage.message))}
       >
-        {message.message}
+        {inputMessage.message}
       </Button>
     </InputBox>
   );

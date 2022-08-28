@@ -1,24 +1,25 @@
 import { findIndex, shuffle } from "lodash";
+import { useContext } from "react";
 import { Button, Text } from "rebass";
 import { Grid } from "theme-ui";
-import { TMessage } from "util/chaty";
+import { ChatyContext, TMessage } from "util/chaty";
 
-interface Quizz {
+export interface Quizz {
+  token?: string;
   answers: Record<string, number>;
   correct: undefined | boolean;
 }
 
 export const ChatyQuestion: React.FC<{
   options: string[];
-  message: TMessage;
-  selectOption: (message: TMessage, o: string) => void;
-}> = ({ options, message, selectOption }) => {
+}> = ({ options }) => {
+  const { inputMessage, selectOption } = useContext(ChatyContext);
   const shuffled = shuffle(options);
 
   function answer(answer: string) {
     const answerIndex = findIndex(options, (o) => o === answer);
     recordQuizzAnswer(answer, answerIndex);
-    selectOption(message, answer);
+    selectOption(inputMessage!, answer);
   }
   return (
     <Grid

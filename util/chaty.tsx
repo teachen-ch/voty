@@ -1,3 +1,6 @@
+import { Quizz } from "components/ChatyQuizz";
+import React, { createContext, ReactNode, useState } from "react";
+
 export enum Direction {
   "Incoming",
   "Outgoing",
@@ -12,6 +15,36 @@ export type TMessage = {
   selected?: string;
   children?: React.ReactNode;
 };
+
+export type IChatyContext = {
+  messages: TMessage[];
+  line: number;
+  quizz?: Quizz;
+  inputMessage?: TMessage;
+  // setMessages: (messages: TMessage[]) => void;
+  doChat: (line: number, input?: string) => void;
+  selectOption: (message: TMessage, option: string) => void;
+};
+
+export const ChatyContext = createContext<IChatyContext>({
+  messages: [],
+  line: 0,
+  doChat: (line: number, input?: string) => {},
+  selectOption: (message: TMessage, option: string) => {},
+});
+
+/* export const ChatyContextProvider: React.FC<{ children: ReactNode }> = ({
+  children,
+}) => {
+  const [messages, setMessages] = useState<TMessage[]>([])
+  const 
+  const context: ChatyContext = {
+    messages, setMessages
+    line: 0
+    setMess
+  }
+  return;
+}; */
 
 export function parseMessages(lines: string): TMessage[] {
   lines = lines.trim();
