@@ -104,7 +104,13 @@ export const Chaty: React.FC<{
 
   // scroll to bottom on every new message
   useEffect(() => {
-    if (started && !showAll) messagesEndRef.current?.scrollBy(0, 1000);
+    if (started && !showAll) {
+      const c = setTimeout(
+        () => messagesEndRef.current?.scrollBy(0, 1000),
+        300
+      );
+      return () => clearTimeout(c);
+    }
   }, [show, showAll, started]);
 
   useEffect(() => {
@@ -181,7 +187,7 @@ export const Chaty: React.FC<{
               Fertig
             </Button>
           ) : (
-            <div style={{ height: 50, marginTop: 100 }} />
+            <div style={{ height: 50, marginTop: 0 }} />
           )}
         </MessageList>
         <ShowInput />
