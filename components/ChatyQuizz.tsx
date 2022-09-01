@@ -58,7 +58,7 @@ export const ChatyQuizzCheck: React.FC<{
 }> = ({ message }) => {
   const { quizz } = useContext(ChatyContext);
   const question = message.message;
-  const answer = lastAnswer();
+  const answer = useMemo(() => lastAnswer(), []);
   const correct = answer === 0;
   const reply = useMemo(
     () => (correct ? sample(replyCorrect) : sample(replyWrong)),
