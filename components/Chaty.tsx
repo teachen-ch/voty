@@ -30,7 +30,7 @@ import {
 } from "util/chaty";
 
 const WAIT = 50;
-const MAX_WAIT = 5000;
+const MAX_WAIT = 3000;
 
 export const Chaty: React.FC<{
   lines: string;
@@ -39,7 +39,8 @@ export const Chaty: React.FC<{
   slim?: boolean;
   quickShow?: boolean;
 }> = ({ lines, title, speed = 1, slim = false, quickShow = true }) => {
-  const messages = useMemo<TMessage[]>(() => parseMessages(lines), [lines]);
+  const [reset, setReset] = useState(0);
+  const messages = useMemo(() => parseMessages(lines), [lines, reset]);
   const [show, setShow] = useState<TMessage[]>([]);
   const [typing, setTyping] = useState(false);
   const [started, setStarted] = useState(false);
@@ -153,6 +154,7 @@ export const Chaty: React.FC<{
     setTyping(false);
     setInputMessage(undefined);
     setShow([]);
+    setReset(reset + 1);
   }
 
   const context: IChatyContext = {
