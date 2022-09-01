@@ -1,5 +1,5 @@
-import { findIndex, shuffle } from "lodash";
-import { useContext } from "react";
+import { findIndex, pick, random, sample, shuffle } from "lodash";
+import { useContext, useMemo } from "react";
 import { Button, Text } from "rebass";
 import { Grid } from "theme-ui";
 import { ChatyContext, TMessage } from "util/chaty";
@@ -7,18 +7,32 @@ import { ChatyContext, TMessage } from "util/chaty";
 export interface Quizz {
   token?: string;
   answers: Record<string, number>;
-  correct: undefined | boolean;
+  lastAnswer?: number;
 }
+
+const replyCorrect = [
+  "Genau!",
+  "Das stimmt!",
+  "Richtig!",
+  "Das ist richtig.",
+  "Ja, das stimmt.",
+  "Korrekt!",
+  "Super :-)",
+  "Ganz genau",
+];
+const replyWrong = ["Nicht ganz.", "Nein", "Falsch"];
 
 export const ChatyQuestion: React.FC<{
   options: string[];
 }> = ({ options }) => {
-  const { inputMessage, selectOption } = useContext(ChatyContext);
+  const { inputMessage, selectOption, quizz, setQuizz } = useContext(
+    ChatyContext
+  );
   const shuffled = shuffle(options);
 
   function answer(answer: string) {
     const answerIndex = findIndex(options, (o) => o === answer);
-    recordQuizzAnswer(answer, answerIndex);
+    recordLastAnswer(answerIndex);
     selectOption(inputMessage!, answer);
   }
   return (
@@ -39,15 +53,34 @@ export const ChatyQuestion: React.FC<{
   );
 };
 
-function recordQuizzAnswer(question: string, ix: number) {
+export const ChatyQuizzCheck: React.FC<{
+  message: TMessage;
+}> = ({ message }) => {
+  const { quizz } = useContext(ChatyContext);
+  const question = message.message;
+  const answer = lastAnswer();
+  const correct = answer === 0;
+  const reply = useMemo(
+    () => (correct ? sample(replyCorrect) : sample(replyWrong)),
+    [correct]
+  );
+  return <div>{reply}</div>;
+};
+
+function recordLastAnswer(answer: number) {
   const quizz = loadQuizz();
-  quizz.answers[question] = ix;
-  quizz.correct = ix === 0;
+  quizz.lastAnswer = answer;
   saveQuizz(quizz);
 }
 
-function wasCorrect() {
-  loadQuizz().correct;
+function recordQuizzAnswer(question: string, answer: number) {
+  const quizz = loadQuizz();
+  quizz.answers[question] = answer;
+  saveQuizz(quizz);
+}
+
+function lastAnswer() {
+  return loadQuizz().lastAnswer;
 }
 
 function ratioCorrect() {

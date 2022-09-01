@@ -123,17 +123,23 @@ export const MessageOrInfo: React.FC<{ model: TMessage; is: string }> = ({
       <Info model={model} />
     </GlossaryReplace>
   ) : (
-    <ParsedMessage model={model} />
+    <ParsedMessage message={model} />
   );
 
-const ParsedMessage: React.FC<{ model: TMessage }> = ({ model }) => {
-  if (model.selected) {
-    model.message = model.selected;
+const ParsedMessage: React.FC<{ message: TMessage }> = ({ message }) => {
+  if (message.selected) {
+    message.message = message.selected;
   }
+  const Component = typeof message.children === "function" && message.children;
+
   return (
-    <Message direction={model.direction}>
+    <Message direction={message.direction}>
       <GlossaryReplace bg="#444" color="#fff">
-        {model.children || model.message}
+        {Component ? (
+          <Component message={message} />
+        ) : (
+          message.children || message.message
+        )}
       </GlossaryReplace>
     </Message>
   );

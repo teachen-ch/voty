@@ -1,4 +1,4 @@
-import { Quizz } from "components/ChatyQuizz";
+import { ChatyQuizzCheck, Quizz } from "components/ChatyQuizz";
 import React, { createContext, ReactNode, useState } from "react";
 
 export enum Direction {
@@ -14,6 +14,7 @@ export type TMessage = {
   line: number;
   selected?: string;
   children?: React.ReactNode;
+  component?: React.Component;
 };
 
 export type IChatyContext = {
@@ -21,9 +22,9 @@ export type IChatyContext = {
   line: number;
   quizz?: Quizz;
   inputMessage?: TMessage;
-  // setMessages: (messages: TMessage[]) => void;
   doChat: (line: number, input?: string) => void;
   selectOption: (message: TMessage, option: string) => void;
+  setQuizz: (quizz: Quizz) => void;
 };
 
 export const ChatyContext = createContext<IChatyContext>({
@@ -31,20 +32,8 @@ export const ChatyContext = createContext<IChatyContext>({
   line: 0,
   doChat: (line: number, input?: string) => {},
   selectOption: (message: TMessage, option: string) => {},
+  setQuizz: (quizz: Quizz) => {},
 });
-
-/* export const ChatyContextProvider: React.FC<{ children: ReactNode }> = ({
-  children,
-}) => {
-  const [messages, setMessages] = useState<TMessage[]>([])
-  const 
-  const context: ChatyContext = {
-    messages, setMessages
-    line: 0
-    setMess
-  }
-  return;
-}; */
 
 export function parseMessages(lines: string): TMessage[] {
   lines = lines.trim();
@@ -110,12 +99,14 @@ export function specialMessage(type: string, rest: string): React.ReactNode {
     case "BILD":
       return <img src={rest} width="200" alt="Bild" />;
     case "BUTTONS":
-    case "QUESTION":
+    case "ANSWER":
     case "MENU": {
       return parseOptions(rest);
     }
-    case "ANSWER":
+    case "QUESTION":
       return rest;
+    case "CHECK":
+      return ChatyQuizzCheck;
     case "BUTTON":
       return rest;
     case "CHATY":

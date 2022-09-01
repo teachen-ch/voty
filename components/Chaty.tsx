@@ -20,7 +20,7 @@ import {
 import { useTeam } from "state/user";
 import { useRouter } from "next/router";
 import { WorkCard } from "./Works";
-import { ChatyQuestion } from "./ChatyQuizz";
+import { ChatyQuestion, Quizz } from "./ChatyQuizz";
 import {
   ChatyContext,
   Direction,
@@ -37,7 +37,8 @@ export const Chaty: React.FC<{
   title?: string;
   speed?: number;
   slim?: boolean;
-}> = ({ lines, title, speed = 1, slim = false }) => {
+  quickShow?: boolean;
+}> = ({ lines, title, speed = 1, slim = false, quickShow = true }) => {
   const messages = useMemo<TMessage[]>(() => parseMessages(lines), [lines]);
   const [show, setShow] = useState<TMessage[]>([]);
   const [typing, setTyping] = useState(false);
@@ -47,6 +48,7 @@ export const Chaty: React.FC<{
   const [cancel, setCancel] = useState(0);
   const [showAll, setShowAll] = useState(false);
   const [line, setLine] = useState(0);
+  const [quizz, setQuizz] = useState<Quizz | undefined>();
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const doChat = useCallback(
     (line = 0, input?: string) => {
@@ -57,7 +59,8 @@ export const Chaty: React.FC<{
       setStarted(true);
       setLine(line);
       const msg = messages[line];
-      const chars = msg.message?.length || 10;
+      const chars =
+        msg.direction == Direction.Incoming ? msg.message?.length || 10 : 10;
       const wait = Math.min((1 / speed) * WAIT * chars, (1 / speed) * MAX_WAIT);
 
       setShow(messages.slice(0, line + 1));
@@ -125,17 +128,19 @@ export const Chaty: React.FC<{
           <Button mt={4} onClick={() => doChat()} width="250px">
             Chat starten
           </Button>
-          <Text mt={3} fontSize={1}>
-            <Link
-              onClick={() => {
-                setShowAll(true);
-                doChat(messages.length - 1);
-              }}
-              variant="underline"
-            >
-              Den ganzen Chat anzeigen
-            </Link>
-          </Text>
+          {quickShow && (
+            <Text mt={3} fontSize={1}>
+              <Link
+                onClick={() => {
+                  setShowAll(true);
+                  doChat(messages.length - 1);
+                }}
+                variant="underline"
+              >
+                Den ganzen Chat anzeigen
+              </Link>
+            </Text>
+          )}
         </Box>
       </WorkCard>
     );
@@ -156,6 +161,8 @@ export const Chaty: React.FC<{
     doChat,
     selectOption,
     inputMessage,
+    quizz,
+    setQuizz,
   };
 
   return (
@@ -199,7 +206,7 @@ const ShowInput: React.FC = () => {
     const options = inputMessage.message?.split("|") || [];
     return <ChatyMenu options={options} />;
   }
-  if (inputMessage.type === "QUESTION") {
+  if (inputMessage.type === "ANSWER") {
     const options = inputMessage.message?.split("|") || [];
     return <ChatyQuestion options={options} />;
   }
