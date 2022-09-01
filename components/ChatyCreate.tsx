@@ -1,11 +1,12 @@
 import { Input, Label, Textarea } from "@rebass/forms";
 import { useState } from "react";
 import { Box, Button } from "rebass";
-import { Chaty, parseMessages } from "./Chaty";
+import { Chaty } from "./Chaty";
 import { Err } from "components/Page";
 import { Authors, usePostWork, WorkItem, Works } from "./Works";
 import { UserWhereUniqueInput } from "graphql/types";
 import { Info } from "./Info";
+import { parseMessages } from "util/chaty";
 
 export const ChatyCreate: React.FC<{
   title?: string;
