@@ -1,3 +1,9 @@
+/*
+ * This is a quick and ___very___ dirty implementation of a Quizz module into Chaty
+ * Chaty itself was already very hacky, adding a stateful Quizz to it does not make it
+ * any more readable. Sorry for that. We are looking for funding, so that we don't only
+ * work during night shifts on this stuff. Thanks!
+ */
 import {
   ChatContainer,
   MessageList,
