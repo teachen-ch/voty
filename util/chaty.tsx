@@ -1,4 +1,8 @@
-import { ChatyQuizzCheck, Quizz } from "components/ChatyQuizz";
+import {
+  ChatyQuizzCheck,
+  ChatyQuizzEvaluate,
+  Quizz,
+} from "components/ChatyQuizz";
 import React, { createContext, ReactNode, useState } from "react";
 
 export enum Direction {
@@ -107,6 +111,8 @@ export function specialMessage(type: string, rest: string): React.ReactNode {
       return rest;
     case "CHECK":
       return ChatyQuizzCheck;
+    case "EVALUATE":
+      return ChatyQuizzEvaluate;
     case "BUTTON":
       return rest;
     case "CHATY":

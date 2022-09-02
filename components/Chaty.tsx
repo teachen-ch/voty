@@ -20,7 +20,7 @@ import {
 import { useTeam } from "state/user";
 import { useRouter } from "next/router";
 import { WorkCard } from "./Works";
-import { ChatyQuestion, Quizz } from "./ChatyQuizz";
+import { ChatyAnswers, loadQuizz, Quizz } from "./ChatyQuizz";
 import {
   ChatyContext,
   Direction,
@@ -49,7 +49,8 @@ export const Chaty: React.FC<{
   const [cancel, setCancel] = useState(0);
   const [showAll, setShowAll] = useState(false);
   const [line, setLine] = useState(0);
-  const [quizz, setQuizz] = useState<Quizz | undefined>();
+  const storedQuizz = useMemo(() => loadQuizz(), []);
+  const [quizz, setQuizz] = useState<Quizz>(storedQuizz);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const doChat = useCallback(
     (line = 0, input?: string) => {
@@ -216,7 +217,7 @@ const ShowInput: React.FC = () => {
   }
   if (inputMessage.type === "ANSWER") {
     const options = inputMessage.message?.split("|") || [];
-    return <ChatyQuestion options={options} />;
+    return <ChatyAnswers options={options} />;
   }
   if (inputMessage.type === "CHATY") {
     return <ChatyNext nextChaty={nextChaty} />;

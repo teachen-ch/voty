@@ -1,13 +1,28 @@
-import { findIndex, pick, random, sample, shuffle } from "lodash";
-import { useContext, useMemo } from "react";
+import {
+  clone,
+  cloneDeep,
+  findIndex,
+  pick,
+  random,
+  sample,
+  shuffle,
+} from "lodash";
+import { useContext, useMemo, useState } from "react";
 import { Button, Text } from "rebass";
 import { Grid } from "theme-ui";
-import { ChatyContext, TMessage } from "util/chaty";
+import { ChatyContext, parseOptions, TMessage } from "util/chaty";
 
 export interface Quizz {
   token?: string;
-  answers: Record<string, number>;
-  lastAnswer?: number;
+  questions: Record<string, IQuestion>;
+  lastQuestion: string;
+}
+
+export interface IQuestion {
+  question: string;
+  answers: string[];
+  picked: number;
+  correct: boolean;
 }
 
 const replyCorrect = [
@@ -20,20 +35,36 @@ const replyCorrect = [
   "Super :-)",
   "Ganz genau",
 ];
-const replyWrong = ["Nicht ganz.", "Nein", "Falsch"];
+const replyWrong = ["Nicht ganz.", "Nein... ", "Falsch: ", "Richtig wäre: "];
 
-export const ChatyQuestion: React.FC<{
+export const ChatyAnswers: React.FC<{
   options: string[];
-}> = ({ options }) => {
-  const { inputMessage, selectOption, quizz, setQuizz } = useContext(
-    ChatyContext
-  );
-  const shuffled = shuffle(options);
+}> = ({ options: answers }) => {
+  const {
+    line,
+    messages,
+    inputMessage,
+    selectOption,
+    quizz,
+    setQuizz,
+  } = useContext(ChatyContext);
+  const shuffled = shuffle(answers);
+  const question = messages[line].message!;
+  const [answered, setAnswered] = useState<number>(-10);
+
+  const findAnswer = (answer: string) =>
+    findIndex(answers, (a) => a === answer);
 
   function answer(answer: string) {
-    const answerIndex = findIndex(options, (o) => o === answer);
-    recordLastAnswer(answerIndex);
-    selectOption(inputMessage!, answer);
+    if (!quizz) return console.error("Quizz undefined. Aborting");
+    const picked = findAnswer(answer);
+    const correct = picked === 0;
+    quizz.questions[question] = { question, picked, correct, answers };
+    quizz.lastQuestion = question;
+    const emoji = correct ? "✔" : "❌";
+    setQuizz(cloneDeep(quizz));
+    setAnswered(picked);
+    selectOption(inputMessage!, `${answer!}(${emoji})`);
   }
   return (
     <Grid
@@ -53,50 +84,62 @@ export const ChatyQuestion: React.FC<{
   );
 };
 
-export const ChatyQuizzCheck: React.FC<{
-  message: TMessage;
-}> = ({ message }) => {
+export const ChatyQuizzCheck: React.FC<{ message: TMessage }> = ({
+  message,
+}) => {
   const { quizz } = useContext(ChatyContext);
-  const question = message.message;
-  const answer = useMemo(() => lastAnswer(), []);
-  const correct = answer === 0;
-  const reply = useMemo(
-    () => (correct ? sample(replyCorrect) : sample(replyWrong)),
-    [correct]
-  );
+  const question = useMemo(() => quizz!.lastQuestion, []);
+  const q = quizz!.questions[question];
+  const replies = useMemo(() => message.message!.split("\n"), [
+    message.message,
+  ]);
+  const reply = useMemo(() => (q.correct ? replies[1] : replies[2]), [
+    q.correct,
+  ]);
+  return <div>{reply}</div>;
+};
+export const ChatyQuizzEvaluate: React.FC<{ message: TMessage }> = ({
+  message,
+}) => {
+  const replyTemplate = message.message!.replace("EVALUATE ", "");
+  const reply = useEvaluateQuizz(replyTemplate);
   return <div>{reply}</div>;
 };
 
-function recordLastAnswer(answer: number) {
-  const quizz = loadQuizz();
-  quizz.lastAnswer = answer;
-  saveQuizz(quizz);
+export function createEmptyQuizz() {
+  return { token: uuid(), questions: {} };
 }
 
-function recordQuizzAnswer(question: string, answer: number) {
-  const quizz = loadQuizz();
-  quizz.answers[question] = answer;
-  saveQuizz(quizz);
+function useEvaluateQuizz(replyTemplate: string) {
+  const { quizz } = useContext(ChatyContext);
+  const questions = quizz!.questions;
+  const result: Record<string, number> = { total: 0, correct: 0, percent: 0 };
+  result.total = Object.keys(questions).length;
+  result.correct = Object.values(questions).filter((q) => q.correct).length;
+  result.percent = Math.round((100 * result.correct) / result.total);
+  let reply = replyTemplate;
+  Object.keys(result).forEach(
+    (key) => (reply = reply.replace(`{${key}}`, String(result[key])))
+  );
+  return reply;
 }
 
-function lastAnswer() {
-  return loadQuizz().lastAnswer;
-}
-
-function ratioCorrect() {
-  const answers = loadQuizz().answers;
-  const total = Object.keys(answers).length;
-  const correct = Object.values(answers).filter((ix) => ix === 0).length;
-  return Math.round((100 * correct) / total);
-}
-
-function loadQuizz() {
-  const emptyQuizz = { answers: {}, correct: undefined };
+export function loadQuizz() {
   const str = localStorage.getItem("quizz");
-  const quizz = str ? JSON.parse(str) : emptyQuizz;
+  const quizz = str ? JSON.parse(str) : createEmptyQuizz();
   return quizz as Quizz;
 }
 
 function saveQuizz(quizz: Quizz) {
   localStorage.setItem("quizz", JSON.stringify(quizz));
+}
+
+function uuid() {
+  // @ts-ignore
+  return ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, (c) =>
+    (
+      c ^
+      (crypto.getRandomValues(new Uint8Array(1))[0] & (15 >> (c / 4)))
+    ).toString(16)
+  );
 }
