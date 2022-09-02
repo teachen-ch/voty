@@ -17,6 +17,7 @@ import { useContext, useMemo, useState } from "react";
 import { Button, Text } from "rebass";
 import { Grid } from "theme-ui";
 import { ChatyContext, parseOptions, TMessage } from "util/chaty";
+import { isBrowser } from "util/isBrowser";
 
 export interface Quizz {
   token?: string;
@@ -94,13 +95,14 @@ export const ChatyQuizzCheck: React.FC<{ message: TMessage }> = ({
   message,
 }) => {
   const { quizz } = useContext(ChatyContext);
-  const question = useMemo(() => quizz!.lastQuestion, []);
+  const question = useMemo(() => quizz!.lastQuestion, [quizz]);
   const q = quizz!.questions[question];
   const replies = useMemo(() => message.message!.split("\n"), [
     message.message,
   ]);
   const reply = useMemo(() => (q.correct ? replies[1] : replies[2]), [
     q.correct,
+    replies,
   ]);
   return <div>{reply}</div>;
 };
@@ -131,7 +133,7 @@ function useEvaluateQuizz(replyTemplate: string) {
 }
 
 export function loadQuizz() {
-  const str = localStorage.getItem("quizz");
+  const str = isBrowser() ? localStorage.getItem("quizz") : "";
   const quizz = str ? JSON.parse(str) : createEmptyQuizz();
   return quizz as Quizz;
 }
@@ -141,6 +143,8 @@ function saveQuizz(quizz: Quizz) {
 }
 
 function uuid() {
+  if (typeof crypto === "undefined")
+    return Math.round(Math.random() * 10 ** 18);
   // @ts-ignore
   return ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, (c) =>
     (

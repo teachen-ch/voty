@@ -46,7 +46,7 @@ export const Chaty: React.FC<{
   quickShow?: boolean;
 }> = ({ lines, title, speed = 1, slim = false, quickShow = true }) => {
   const [reset, setReset] = useState(0);
-  const messages = useMemo(() => parseMessages(lines), [lines, reset]);
+  const messages = useMemo(() => parseMessages(lines), [lines]);
   const [show, setShow] = useState<TMessage[]>([]);
   const [typing, setTyping] = useState(false);
   const [started, setStarted] = useState(false);

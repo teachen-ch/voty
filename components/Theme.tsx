@@ -14,6 +14,6 @@ export const Theme: React.FC<{ chilren?: React.ReactNode }> = ({
 
   useEffect(() => {
     if (themeName === "aula" && router.pathname == "/") router.replace("/aula");
-  }, [themeName, router.pathname]);
+  }, [themeName, router]);
   return <ThemeProvider theme={theme}>{children}</ThemeProvider>;
 };
