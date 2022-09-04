@@ -25,7 +25,8 @@ export const MarkdownNew: React.FC<{ children?: string }> = ({ children }) => (
   </ReactMarkdown>
 );
 
-// This is left for posteriority. it uses dangerouslySetInnerHTML...
+// We should replace this with MarkdownNew, as it uses dangerouslySetInnerHTML...
+// But it is still used by chaty and a few other places
 
 export const Markdown: React.FC = ({ children }) => (
   <div
@@ -34,7 +35,7 @@ export const Markdown: React.FC = ({ children }) => (
   />
 );
 // TODO: this is a joke markdown parser after being frustrated with mdx-js
-// what out, it has one feature, which we need to preserve, once we replace this
+// whatch out, it has one feature, which we need to preserve, once we replace this
 // image urls such as https://voty.ch/content/aristoteles.jpg will automatically
 // be converted to an image for convenience.
 function parseMarkdown(str: string): string {
@@ -51,7 +52,10 @@ function parseMarkdown(str: string): string {
     "<img src='$2' alt='$1' class='markdownImage'/>"
   );
   str = str.replace(/(<\/h\d>)<br\/>\s*/g, "$1");
-  str = str.replace(/\[(.*?)\]\((.*?)\)/g, "<a href='$2'>$1</a>");
+  str = str.replace(
+    /\[(.*?)\]\((.*?)\)/g,
+    "<a href='$2' target='_blank'>$1</a>"
+  );
   // direct image urls:
   str = str.replace(
     /(https?:\/\/.*?(?:jpe?g|png|gif))/gim,
