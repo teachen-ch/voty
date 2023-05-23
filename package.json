@@ -35,8 +35,8 @@
   },
   "dependencies": {
     "@apollo/client": "^3.3.4",
-    "@mdx-js/loader": "^1.6.19",
-    "@mdx-js/runtime": "^1.6.19",
+    "@mdx-js/loader": "^1.6.22",
+    "@mdx-js/runtime": "^1.6.22",
     "@next/mdx": "^12.0.0",
     "@nexus/schema": "^0.19.2",
     "@prisma/client": "2.22.1",
