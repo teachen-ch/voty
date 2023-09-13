@@ -6,10 +6,11 @@ import logger from "util/logger";
 
 export const config = {
   api: {
-    bodyParser: false,
+    bodyParser: {
+      sizeLimit: "30mb",
+    },
   },
 };
-
 const UPLOAD_FOLDER = process.env.UPLOAD_FOLDER || "uploads/";
 const prisma = new PrismaClient();
 
@@ -69,7 +70,7 @@ export default async function uploadApi(
     res.send({ success: true, files, attachments });
   } catch (err) {
     console.error(err);
-    logger.error(err);
+    logger.error(String(err));
     res.send({ error: "Error.ServerError" });
     res.end();
   }
