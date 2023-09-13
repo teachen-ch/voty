@@ -45,7 +45,7 @@
     "bcryptjs": "^2.4.3",
     "cookie": "^0.4.1",
     "dayjs": "^1.9.7",
-    "formidable": "^1.2.2",
+    "formidable": "^3.2.5",
     "formik": "^2.1.5",
     "graphql": "^15.4.0",
     "graphql-middleware": "^4.0.2",
