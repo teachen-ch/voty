@@ -6,11 +6,11 @@ import logger from "util/logger";
 
 export const config = {
   api: {
-    bodyParser: {
-      sizeLimit: "30mb",
-    },
+    bodyParser: false,
   },
 };
+
+const MAX_UPLOAD_MB = 30;
 const UPLOAD_FOLDER = process.env.UPLOAD_FOLDER || "uploads/";
 const prisma = new PrismaClient();
 
@@ -84,6 +84,7 @@ function formParse(
     const form = new IncomingForm(opts);
     form.uploadDir = UPLOAD_FOLDER;
     form.keepExtensions = true;
+    form.maxFileSize = MAX_UPLOAD_MB * 1024 * 1024;
     // TODO: check whether we want to do mime-type checking. currently broken
     /* form.onPart = (part: Part) => {
       if (!part.mime || allowedTypes.indexOf(part.mime) === -1) {
