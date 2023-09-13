@@ -1,3 +1,10 @@
+# [1.86.0](https://github.com/teachen-ch/voty/compare/v1.85.0...v1.86.0) (2023-09-13)
+
+
+### Features
+
+* Increase max upload size to 30M ([890c286](https://github.com/teachen-ch/voty/commit/890c2861fc981c34616c68de2ba60b8b81892bd9))
+
 # [1.85.0](https://github.com/teachen-ch/voty/compare/v1.84.0...v1.85.0) (2022-02-06)
 
 
