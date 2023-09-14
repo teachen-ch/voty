@@ -47,7 +47,7 @@ services:
       - traefik.http.routers.nginx.entrypoints=websecure
       - traefik.http.routers.nginx.tls=true
       - traefik.http.routers.nginx.tls.certresolver=votyresolver
-      - traefik.http.middlewares.www-redirect.redirectregex.regex=^https?://(?:www\.)?(.*)voty(?:app)?.ch/(.*)
+      - traefik.http.middlewares.www-redirect.redirectregex.regex=^https?://(?:www\.)?(.*)voty.ch/(.*)
       - traefik.http.middlewares.www-redirect.redirectregex.replacement=https://$${1}voty.ch/$${2}
       - traefik.http.middlewares.www-redirect.redirectregex.permanent=true
       - traefik.http.routers.nginx.middlewares=www-redirect@docker

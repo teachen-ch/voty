@@ -380,6 +380,11 @@ export async function doUploadFiles(
     body: data,
     headers: authHeaders(),
   });
+  if (result.status == 413) {
+    alert(
+      "Diese Datei ist leider grösser als 30 Megabytes, das ist mir zu gross, sorry!"
+    );
+  }
   return (await result.json()) as Promise<Record<string, any>>;
 }
 
