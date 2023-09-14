@@ -44,7 +44,7 @@ describe("Test Signup Page", () => {
     cy.contains("Nochmals Email schicken").click();
     cy.contains("Email verschickt!");
 
-    // retrieve url from /tmp/voty-email and activate user
+    // retrieve url from /tmp/voty-verification-url and activate user
     cy.task("getEmailLink").as("url");
     cy.get("@url").then((url) => {
       cy.visit(String(url));

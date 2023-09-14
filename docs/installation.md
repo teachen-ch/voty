@@ -33,12 +33,12 @@ If you (we?) are lucky, all the tests will pass 🎉. We are still struggling a 
 http://localhost:3000/
 ```
 
-You can create a new teacher account (http://localhost:3000/user/signup), but probably you will not have SMTP configured in your .env.local file, so no activation email will not be sent. In this case, however, a file /tmp/voty-email will be written and within it you will find the activation email with a link to activate your user account. From there on you can create a class, invite students and more.
+You can create a new teacher account (http://localhost:3000/user/signup), but probably you will not have SMTP configured in your .env.local file, so no activation email will not be sent. In this case, however, a file /tmp/voty-verification-url will be written and within it you will find the activation email with a link to activate your user account. From there on you can create a class, invite students and more.
 
 If you are on a mac, you can automatically open the link in the email in your browser (provided you use bash or zsh):
 
 ```bash
-open `grep http /tmp/voty-email`
+open `grep http /tmp/voty-verification-url`
 ```
 
 Alternatively you can also activate the user directly in the database (users.email_verified = date).

@@ -32,8 +32,10 @@ export async function sendMail(args: {
 
   // No email configured
   if (!process.env.SMTP_PASSWORD || process.env.NODE_ENV === "test") {
-    logger.info(`Writing mail to ${to} into temp file: /tmp/voty-email`);
-    await fs.writeFile("/tmp/voty-email", text);
+    logger.info(
+      `Writing mail to ${to} into temp file: /tmp/voty-verification-url`
+    );
+    await fs.writeFile("/tmp/voty-verification-url", text);
     return;
   }
 

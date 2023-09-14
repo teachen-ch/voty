@@ -41,7 +41,7 @@ module.exports = (
       }
     },
     async getEmailLink() {
-      const buffer = await fs.readFile("/tmp/voty-email");
+      const buffer = await fs.readFile("/tmp/voty-verification-url");
       const text = buffer.toString();
       const match = text.match(/(http[^\s]*)/gs);
       if (match?.length) return match[0];

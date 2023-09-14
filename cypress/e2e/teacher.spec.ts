@@ -19,7 +19,7 @@ describe("Test Teacher Startpage", () => {
       "student4@teachen.ch, bla\n student4@teachen.ch student5@teachen.ch"
     );
     cy.contains("2 Einladungen verschicken").click();
-    cy.get("td:contains('Student4')");
+    cy.get("td:contains('Student4')", { timeout: 30000 });
     cy.task("getEmailLink").as("url");
     cy.get("@url").then((url) => {
       cy.visit(String(url));
