@@ -18,7 +18,7 @@ services:
       - postgres
     volumes:
       - .:/usr/src/app
-      - /usr/src/app/node_modules # exclude from moounting because of permission problems in ci:release
+      - /usr/src/app/node_modules/prisma/.client # exclude from moounting because of permission problems in ci:release
     expose:
       - "3000"
     working_dir: "/usr/src/app"
