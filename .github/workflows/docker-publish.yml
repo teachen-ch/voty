@@ -21,6 +21,11 @@ jobs:
       - name: Checkout latest version
         uses: actions/checkout@v2
 
+      - name: Use specific Node Version 16.16
+        uses: actions/setup-node@v2
+        with:
+          node-version: 16.16
+
       # This is only needed for semantic-release 🤔
       - name: Install Node Modules
         run: yarn install
