@@ -1,3 +1,10 @@
+## [1.86.1](https://github.com/teachen-ch/voty/compare/v1.86.0...v1.86.1) (2023-09-15)
+
+
+### Bug Fixes
+
+* Misc security fixes ([38198fe](https://github.com/teachen-ch/voty/commit/38198fed678eda63c534bc22b7ad50515297f70a))
+
 # [1.86.0](https://github.com/teachen-ch/voty/compare/v1.85.0...v1.86.0) (2023-09-13)
 
 
