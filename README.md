@@ -26,7 +26,7 @@ Who decides at your school? Are students invited to propose initiatives and disc
 
 ## About voty.ch
 
-voty.ch is developed as an open source project by «Teachen!» (https://teachen.ch/) in cooperation with https://adaptive-publishing.com/. Teachen is a not-for-profit association founded during the COVID-19 lockdown by a group of motivated parents, teachers and techies. The voty.ch project is suppored by the Swiss PrototypeFund. 
+voty.ch was developed as an open source project by «Teachen!» (https://teachen.ch/), a not-for-profit association founded during the COVID-19 lockdown by a group of motivated parents, teachers and techies. The voty.ch project was suppored by the Swiss PrototypeFund.
 
 ## Problems using Prisma?
 

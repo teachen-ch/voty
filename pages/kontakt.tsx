@@ -11,11 +11,11 @@ export default function Kontakt(): ReactElement {
   return (
     <Page heading="Kontakt &amp; Impressum">
       <Text>
-        voty.ch ist ein Projekt des Vereins{" "}
-        <a href="https://teachen.ch/verein-teachen/">«Teachen!»</a>
+        voty.ch war ein Projekt des Vereins «Teachen!» und wird aktuell betreut
+        durch
       </Text>
       <pre>
-        Verein «Teachen!»
+        S. Niederhauser
         <br />
         Alpenweg 11
         <br />

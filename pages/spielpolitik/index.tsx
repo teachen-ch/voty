@@ -229,7 +229,7 @@ export const ZDAFAQ: React.FC = () => (
       </Text>
       <Title>Wer steht hinter voty.ch?</Title>
       <Text>
-        voty.ch ist ein Projekt des gemeinnützigen Vereins «Teachen!»,
+        voty.ch war ein Projekt des gemeinnützigen Vereins «Teachen!»,
         unterstützt durch den prototypefund.opendata.ch und die Stiftung
         Mercator. voty.ch bietet kostenlos Online-Materialien für die politische
         Bildung und führt Klassenabstimmungen während allen eidgenössischen

@@ -48,7 +48,7 @@
     <mj-section>
       <mj-column padding-top="50px">
         <mj-text mj-class="footer"
-          >&copy; Verein «Teachen!», Alpenweg 11, 3110 Münsingen.
+          >&copy; S. Niederhauser, Alpenweg 11, 3110 Münsingen.
           <unsubscribe>Abmelden</unsubscribe> 😢</mj-text
         >
       </mj-column>

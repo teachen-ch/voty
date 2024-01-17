@@ -9,8 +9,8 @@ export default function TeamPage(): React.ReactElement {
     <AppPage heading="&Uuml;ber das Team voty.ch">
       <Text>
         <Text>
-          voty.ch ist ein Projekt des Vereins «Teachen!», das im Rahmen des
-          prototypefund.opendata.ch entwickelt wird.
+          voty.ch war ein Projekt des Vereins «Teachen!», das im Rahmen des
+          prototypefund.opendata.ch entwickelt wurde.
         </Text>
       </Text>
       <Team />

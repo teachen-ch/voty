@@ -59,13 +59,6 @@ export const Footer: React.FC = () => {
             <H3 as="h2">Informationen</H3>
             <FLink href="/projekt">Infos zum Projekt</FLink>
             <FLink href="/faq">Häufige Fragen (FAQ)</FLink>
-            <FLink
-              href="https://teachen.ch/verein-teachen"
-              target="_blank"
-              rel="noopener"
-            >
-              Verein «Teachen!»
-            </FLink>
             <FLink href="/newsletter">Anmeldung Newsletter</FLink>
           </NavBox>
           <NavBox>

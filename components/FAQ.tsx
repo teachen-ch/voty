@@ -7,14 +7,13 @@ export const FAQ: React.FC = () => (
       Wer steht hinter voty.ch?
     </Heading>
     <Text>
-      voty.ch ist ein Projekt des Vereins «Teachen!», welcher während des
-      Corona-Lockdowns von engagierten Eltern, Lehrpersonen und
-      Informatiker*innen gegründet wurde. Das Projekt wird unterstützt durch den
-      prototypefund.opendata.ch.
+      voty.ch war ein Projekt des Vereins «Teachen!», welches durch den
+      prototypefund.opendata.ch unterstützt wurde. Aktuell wird die Plattform
+      durch S. Niederhauser unentgeltlich betreut.
     </Text>
     <Heading as="h3">Wie funktioniert die Onlineabstimmung?</Heading>
     <Text>
-      Auf unserer Website können Lehrpersonen mit ihren Klassen (Sek-I,
+      Auf dieser Website können Lehrpersonen mit ihren Klassen (Sek-I,
       Gymnasium, Berufsschulen) die Abstimmung auf Laptops, Tablets oder
       Smartphones durchführen. Wir stellen sicher, dass nur registrierte Klassen
       mitmachen können, dass jede Person nur einmal abstimmen kann und dass

@@ -139,21 +139,14 @@ export default function Fundraising(): React.ReactElement {
           id="demokratie"
         >
           <Text mb={4}>
-            Der PrototypeFund hat uns (
-            <a
-              href="http://teachen.ch/verein-teachen"
-              target="_blank"
-              rel="noreferrer"
-            >
-              Verein «Teachen!»
-            </a>
-            ) ermöglicht, diese Vision für das Thema Demokratie zu testen.
-            Dieses Thema liegt uns selber sehr am Herzen, und wir sehen einen
-            Handlungsbedarf: die Stimmbeteiligung der jungen
-            Bevölkerungsschichten ist knapp halb so hoch wie die der älteren
-            Generationen. Und insbesondere in niedrigeren Bildungsschichten wäre
-            die Schule noch die einzige Chance, ein Grundverständnis – und eine
-            Passion – für unser Demokratie zu schaffen.
+            Der PrototypeFund hat die Anschubfinanzierung dieses Projekt
+            geleistet und wir sind ein motiviertes Team, welchem das Thema der
+            Demokratie sehr am Herzen lieft. Wir sehen einen Handlungsbedarf:
+            die Stimmbeteiligung der jungen Bevölkerungsschichten ist knapp halb
+            so hoch wie die der älteren Generationen. Und insbesondere in
+            niedrigeren Bildungsschichten wäre die Schule noch die einzige
+            Chance, ein Grundverständnis – und eine Passion – für unser
+            Demokratie zu schaffen.
           </Text>
           <Text mb={4}>
             Innerhalb von wenigen Wochen haben wir deshalb eine Plattform
@@ -324,63 +317,6 @@ export default function Fundraising(): React.ReactElement {
             auch, ein nachhaltiges Finanzierungsmodell aufzubauen.
           </Text>
         </Section>
-
-        <Section title="Das Team hinter voty.ch" id="team">
-          <Team />
-        </Section>
-        <Section title="Finanzierungsbedarf" id="finanzen">
-          <Text mb={4}>
-            <strong>Teamgrösse</strong> – Für die Fertigstellung und Skalierung
-            von voty.ch benötigten wir schätzungsweise{" "}
-            <b>
-              <GlossaryLink term="300% Stellenprozente" bg="gray">
-                (120% Inhalte + Betreuung Lehrpersonen, 100% Technologie, 50%
-                Gestaltung + UX, 30% Projektleitung + Kommunikation)
-              </GlossaryLink>
-            </b>
-            , aufgeteilt auf 6-8 Personen über 2-3 Jahre. Das bisherige Kernteam
-            bleibt bestehen, im Bereich Educational Content würden wir uns gerne
-            verstärken (60% durch 1-2 Personen), ebenso möchten wir das Team
-            durch zwei Juniors im Bereich Software-Entwicklung und Design/UX
-            bereichern, um nahe bei der Zielgruppe zu sein und jungen Menschen
-            Startup-Erfahrung zu bieten.
-          </Text>
-          <Text mb={4}>
-            <strong>Finanzierungsbedarf</strong> – Für den Aufbau und die
-            Skalierung rechnen mit Kosten von etwa{" "}
-            <b>
-              <GlossaryLink term="CHF 300k pro Jahr" bg="gray">
-                (90% Personalkosten, 5% IT, 5% Diverses)
-              </GlossaryLink>
-            </b>{" "}
-            über die nächsten <b>2-3 Jahre = CHF 600k – 900k</b>. Bis im Sommer
-            2021 möchten wir das Budget für ein langfristiges Commitment des
-            Teams sichern.
-          </Text>
-          <Text mb={4}>
-            <strong>Langfristige Finanzierung</strong> - Für die
-            Weiterentwicklung und den Betrieb rechnen wir mit Kosten von CHF{" "}
-            <b>150k / Jahr</b>, welche wir über 3-4 Projekte mit neuen
-            Bildungsinhalten aus dem BNE-Bereich finanzieren möchten. Dazu sehen
-            wir eine Kollaboration mit NGO-Partnerorganisationen und
-            Lehrmittelverlägen vor sowohl mit stiftungsfinanzierten als auch
-            kommerziellen Projekten, welche wir dank unserer Plattform und
-            Erfahrung in der Skalierung effizient umsetzen können..
-          </Text>
-
-          <ReadMore title="Budget und Grobplanung">
-            <Image src="/images/fm_p0.jpg" alt="Phase 0" mt={5} />
-            <Image src="/images/fm_p1.jpg" alt="Phase 1" mt={4} />
-            <Image src="/images/fm_p2.jpg" alt="Phase 2" mt={5} />
-          </ReadMore>
-        </Section>
-        <H2 mt={5}>Kontakt für Stiftungen und potentielle Geldgeber</H2>
-        <Text mb={4}>
-          Stefan Niederhauser, Verein «Teachen!», Alpenweg 11, 3110 Münsingen.
-          <br />
-          Email:{" "}
-          <a href="mailto:fundraising@teachen.ch">fundraising@teachen.ch</a>
-        </Text>
       </Card>
     </AppPage>
   );
