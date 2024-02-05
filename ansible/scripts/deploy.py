@@ -92,7 +92,7 @@ if commitMessage:
 exec("git push")
 wait(10)
 if (deployEnv == "parallel"):
-    exec("npx concurrently yarn:deploy:dev yarn:deploy:prod yarn:deploy:backup")
+    exec("npx concurrently yarn:deploy:dev yarn:deploy:prod")
 else:
     exec("yarn run deploy:dev")
 
