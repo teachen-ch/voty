@@ -1,0 +1,47 @@
+<mjml>
+  <mj-head>
+    <mj-style inline="inline"> .mbot { margin-bottom: -120px; } </mj-style>
+    <mj-font name="SourceSansPro" href="https://voty.ch/fonts/source-sans-pro-v14-latin-600.woff2"></mj-font>
+    <mj-attributes>
+      <mj-all font-family="SourceSansPro, -apple-system, system-ui, sans"></mj-all>
+      <mj-text font-size="18px" line-height="26px" />
+      <mj-class name="title" color="#206DBB" font-weight="bold" align="left" padding-top="40px" text-decoration="underline" font-size="27px" />
+      <mj-button background-color="#206DBB" font-weight="bold" font-size="20px" border-radius="5px" />
+    </mj-attributes>
+  </mj-head>
+  <mj-body>
+    <mj-section>
+      <mj-column width="100%" css-class="mbot">
+        <mj-image width="400px" src="https://voty.ch/images/voty_newsletter_header.png"></mj-image>
+      </mj-column>
+    </mj-section>
+    <mj-section background-color="#E1E6EA" border-radius="8px">
+      <mj-column width="100%" padding-top="40px">
+        
+                
+        <mj-text mj-class="title">Volksabstimmungen vom 9. Juni</mj-text>
+        <mj-text>
+          Es sind wieder relevante Themen, über welche am 9. Juni abgestimmt wird. Es um die Energieversorgung, die Kosten der Krankenversicherung und Freiheitsrechte in der Verfassung. Themen, die zu spannenden Diskussionen in der Klasse führen können. Mit den Klassenabstimmungen von voty.ch können die Schülerinnen und Schüler ihre Meinung zu diesen Vorlagen diskutieren und kundtun.
+        </mj-text>
+        <mj-button href="https://voty.ch/abstimmen">Zu den Klassenabstimmungen</mj-button>
+        
+        <mj-text mj-class="title">«... eine neue Schule der Demokratie»</mj-text>
+        <mj-text>
+          Im kürzlich erschienenen Artikel in der Republik spricht Marina Weisband über die Entwicklung der Demokratie, über politische Kultur und über die Rolle der Schule in der Bewahrung unserer Staatsform. Prädikat: lesenswert!
+        </mj-text>
+        <mj-button href="https://www.republik.ch/2024/04/24/die-demokratie-muss-sich-verbessern-oder-sie-wird-sterben">Zum Repbulik-Artikel</mj-button>
+        
+         <mj-text padding-top="40px">
+          voty.ch will die Demokratie an die Schule bringen, stellt interaktive Lehrmaterialien zur Partizipation zur Verfügung und organsiert seit 2020 Klassenabstimmungen zu allen eidgenössischen Urnengängen. Sämtliche unserer Angebote sind für Schulen kostenlos.
+        </mj-text>
+      </mj-column>
+    </mj-section>
+    <mj-section>
+      <mj-column padding-top="50px">
+        <mj-text mj-class="footer">&copy; voty.ch, Alpenweg 11, 3110 Münsingen.&nbsp;
+          <unsubscribe>Abmelden</unsubscribe> 😢
+        </mj-text>
+      </mj-column>
+    </mj-section>
+  </mj-body>
+</mjml>
