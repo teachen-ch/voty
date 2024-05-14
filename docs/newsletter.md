@@ -3,7 +3,7 @@
 ## Add newly registered teachers to newsletter
 
 ```psql
- \copy (select name || ' ' || lastname, email, '', 'Lehrer/-in','','voty.ch' from users where role='Teacher') TO '/tmp/teachers.csv' CSV
+ \copy (select name || ' ' || lastname, email, '', 'Lehrer/-in','','voty.ch' from users where role='Teacher' and created_at>'2023-10-01') TO '/tmp/teachers.csv' CSV
 ```
 
 ```sh
