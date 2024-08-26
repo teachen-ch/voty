@@ -1,3 +1,10 @@
+# [1.87.0](https://github.com/teachen-ch/voty/compare/v1.86.1...v1.87.0) (2024-08-26)
+
+
+### Features
+
+* add new ballots and newsletter ([afd5cca](https://github.com/teachen-ch/voty/commit/afd5ccab064242fc683a70e315e7642e8d822407))
+
 ## [1.86.1](https://github.com/teachen-ch/voty/compare/v1.86.0...v1.86.1) (2023-09-15)
 
 
