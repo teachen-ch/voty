@@ -4,7 +4,7 @@ const prodEnabled: Record<string, boolean> = {
   cards: true,
   activities: true,
   discussions: true,
-  demo: true,
+  demo: false,
 };
 
 /**
