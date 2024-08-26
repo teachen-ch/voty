@@ -1,3 +1,10 @@
+# [1.88.0](https://github.com/teachen-ch/voty/compare/v1.87.0...v1.88.0) (2024-08-26)
+
+
+### Features
+
+* disable demo on prod ([045bfeb](https://github.com/teachen-ch/voty/commit/045bfeb82f317ec62c4e7e211144428367f4d282))
+
 # [1.87.0](https://github.com/teachen-ch/voty/compare/v1.86.1...v1.87.0) (2024-08-26)
 
 
