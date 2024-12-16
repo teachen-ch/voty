@@ -30,7 +30,7 @@ export default function Projekt(): React.ReactElement {
         </Text>
         <Heading as="h2">Das Konzept von voty.ch kurz erklärt:</Heading>
         <Text>
-          voty.ch ist ein Pilotprojekt für eine Lernplattform zur
+          voty.ch ist ein Projekt für eine Lernplattform zur
           De­mo­kratie­förderung an Schulen in der Schweiz bestehend aus drei
           Modulen:
         </Text>
