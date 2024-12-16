@@ -7,7 +7,7 @@
   "private": true,
   "scripts": {
     "start": "next start",
-    "dev": "echo 'Please run ./dev.sh'",
+    "dev": "next dev",
     "build": "next build",
     "start:test": "next &",
     "cy": "dotenv -- cypress open",
