@@ -1,3 +1,15 @@
+# [1.89.0](https://github.com/teachen-ch/voty/compare/v1.88.0...v1.89.0) (2024-12-16)
+
+
+### Bug Fixes
+
+* use direnv to select correct node version ([f97a234](https://github.com/teachen-ch/voty/commit/f97a2348de2c780aa17f280a862a4ce7fbe12723))
+
+
+### Features
+
+* update content ([903b9ce](https://github.com/teachen-ch/voty/commit/903b9ce0cb49f1b3f8d1a4a7aa09293b439fb716))
+
 # [1.88.0](https://github.com/teachen-ch/voty/compare/v1.87.0...v1.88.0) (2024-08-26)
 
 
