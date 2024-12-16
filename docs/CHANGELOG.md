@@ -1,3 +1,10 @@
+# [1.90.0](https://github.com/teachen-ch/voty/compare/v1.89.0...v1.90.0) (2024-12-16)
+
+
+### Features
+
+* content changes ([87408ff](https://github.com/teachen-ch/voty/commit/87408ffb368bdee502a8195c9ac53d1450316eef))
+
 # [1.89.0](https://github.com/teachen-ch/voty/compare/v1.88.0...v1.89.0) (2024-12-16)
 
 
