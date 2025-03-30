@@ -10,7 +10,6 @@ void run();
 async function run() {
   try {
     const argv = cliOptions();
-    // eslint-disable-next-line @typescript-eslint/unbound-method
     const logger = argv.quiet ? () => 0 : cons.log;
 
     for (let i = 0; i < argv._.length; ++i) {
@@ -20,7 +19,11 @@ async function run() {
 
     process.exit();
   } catch (err) {
-    console.error("There was an error loading your data", err.message);
+    if (err instanceof Error) {
+      console.error("There was an error loading your data", err.message);
+    } else {
+      console.error("There was an error loading your data", err);
+    }
     process.exit(1);
   }
 }

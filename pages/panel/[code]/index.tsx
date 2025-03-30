@@ -82,7 +82,7 @@ const BallotRunDetail: React.FC<
 
   return (
     <Card key={ballotRun.id} py={3}>
-      <Text fontWeight="bold" fontSize="24px" lineheight="24">
+      <Text fontWeight="bold" fontSize="24px" lineHeight="24px">
         {ballot.title}
       </Text>
       <VoteCode

@@ -112,7 +112,7 @@ const AccountMenu: React.FC<React.PropsWithChildren<unknown>> = () => {
         p={3}
         sx={{ borderRadius: "card" }}
       >
-        <Text lineheight="35">
+        <Text lineHeight="35px">
           <A href="/user/profile" variant="link">
             Profil bearbeiten
           </A>

@@ -57,7 +57,7 @@ export const NavMobile: React.FC<
                 </Box>
               </A>
             </Text>
-            <Text pl={4} lineheight="55" fontWeight="semi">
+            <Text pl={4} lineHeight="55px" fontWeight="semi">
               <A href="/" variant="link">
                 <MIcon src={IconHome} />
                 Startseite

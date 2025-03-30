@@ -89,9 +89,9 @@ export default function Login(): ReactElement {
   );
 }
 
-export const LoginForm: React.FC<React.PropsWithChildren<{ initialEmail?: string }>> = ({
-  initialEmail,
-}) => {
+export const LoginForm: React.FC<
+  React.PropsWithChildren<{ initialEmail?: string }>
+> = ({ initialEmail }) => {
   usePageEvent({ category: "Login", action: "Start" });
   const router = useRouter();
   const loc = typeof document !== "undefined" ? document.location.href : "";
@@ -146,7 +146,9 @@ export const LoginForm: React.FC<React.PropsWithChildren<{ initialEmail?: string
   );
 };
 
-const LoginPasswordForm: React.FC<React.PropsWithChildren<{ email: string }>> = ({ email }) => {
+const LoginPasswordForm: React.FC<
+  React.PropsWithChildren<{ email: string }>
+> = ({ email }) => {
   usePageEvent({ category: "Login", action: "Start" });
 
   const [emailError, setEmailError] = useState("");
@@ -306,10 +308,9 @@ function AfterLogin() {
   }
 }
 
-const RequestReset: React.FC<React.PropsWithChildren<{ onCancel: () => void; email: string }>> = ({
-  onCancel,
-  email,
-}) => {
+const RequestReset: React.FC<
+  React.PropsWithChildren<{ onCancel: () => void; email: string }>
+> = ({ onCancel, email }) => {
   const [mailSent, setMailSent] = useState(false);
   const [error, setError] = useState("");
   const [doRequestReset] = useEmailVerificationMutation({
@@ -330,7 +331,7 @@ const RequestReset: React.FC<React.PropsWithChildren<{ onCancel: () => void; ema
       </Text>
       <QForm
         mutation={doRequestReset}
-        onSubmit={async (values) => {
+        onSubmit={async (values: { email: string }) => {
           if (mailSent) onCancel();
           else {
             await doRequestReset({

@@ -106,7 +106,7 @@ export const Ballot: React.FC<
   return (
     <div className="ballot">
       <Card>
-        <Text fontWeight="bold" mt={2} fontSize="24px" lineheight="24">
+        <Text fontWeight="bold" mt={2} fontSize="24px" lineHeight="24px">
           {ballot.title}
         </Text>
         {success ? (

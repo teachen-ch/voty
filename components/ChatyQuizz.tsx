@@ -44,9 +44,11 @@ const replyCorrect = [
 ];
 const replyWrong = ["Nicht ganz.", "Nein... ", "Falsch: ", "Richtig wäre: "];
 
-export const ChatyAnswers: React.FC<React.PropsWithChildren<{
-  options: string[];
-}>> = ({ options: answers }) => {
+export const ChatyAnswers: React.FC<
+  React.PropsWithChildren<{
+    options: string[];
+  }>
+> = ({ options: answers }) => {
   const {
     line,
     messages,
@@ -91,8 +93,11 @@ export const ChatyAnswers: React.FC<React.PropsWithChildren<{
   );
 };
 
-export const ChatyQuizzCheck: React.FC<React.PropsWithChildren<{ message: TMessage }>> = ({
+export const ChatyQuizzCheck = ({
   message,
+}: {
+  children?: React.ReactNode | undefined;
+  message: TMessage;
 }) => {
   const { quizz } = useContext(ChatyContext);
   const question = useMemo(() => quizz!.lastQuestion, [quizz]);
@@ -106,9 +111,10 @@ export const ChatyQuizzCheck: React.FC<React.PropsWithChildren<{ message: TMessa
   ]);
   return <div>{reply}</div>;
 };
-export const ChatyQuizzEvaluate: React.FC<React.PropsWithChildren<{ message: TMessage }>> = ({
-  message,
-}) => {
+
+export const ChatyQuizzEvaluate: React.FC<
+  React.PropsWithChildren<{ message: TMessage }>
+> = ({ message }) => {
   const replyTemplate = message.message!.replace("EVALUATE ", "");
   const reply = useEvaluateQuizz(replyTemplate);
   return <div>{reply}</div>;
