@@ -60,11 +60,11 @@ export const POST_DISCUSSION = gql`
   ${fragments.DiscussionFields}
 `;
 
-export const Discussion: React.FC<{
+export const Discussion: React.FC<React.PropsWithChildren<{
   card?: string;
   ballotId?: string;
   title?: string;
-}> = ({ card, ballotId, title = "Klassendiskussion" }) => {
+}>> = ({ card, ballotId, title = "Klassendiskussion" }) => {
   const user = useUser();
   const team = useTeam();
 
@@ -98,10 +98,10 @@ export const Discussion: React.FC<{
   );
 };
 
-const DiscussionDetail: React.FC<{
+const DiscussionDetail: React.FC<React.PropsWithChildren<{
   discussion: DiscussionFieldsFragment;
   userId: string;
-}> = ({ discussion, userId }) => {
+}>> = ({ discussion, userId }) => {
   const isMe = discussion.user.id === userId;
   return (
     <Flex
@@ -122,10 +122,10 @@ const DiscussionDetail: React.FC<{
   );
 };
 
-const PostDiscussion: React.FC<{
+const PostDiscussion: React.FC<React.PropsWithChildren<{
   card?: string;
   ballotId?: string;
-}> = ({ card, ballotId }) => {
+}>> = ({ card, ballotId }) => {
   const [success, setSuccess] = useState(false);
   const [text, setText] = useState("");
   const [open, setOpen] = useState(false);

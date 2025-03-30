@@ -135,12 +135,12 @@ interface IProfileForm {
   year?: number | null;
 }
 
-export const ProfileEdit: React.FC<{
+export const ProfileEdit: React.FC<React.PropsWithChildren<{
   user: SessionUser;
   editMode?: boolean;
   skipName?: boolean;
   onFinish?: () => void;
-}> = ({ user, editMode, onFinish, skipName }) => {
+}>> = ({ user, editMode, onFinish, skipName }) => {
   const [error, setError] = useState("");
   const [edit, setEdit] = useState(editMode);
   const setUser = useSetUser();
@@ -319,7 +319,7 @@ type InputProps = {
   focus?: boolean;
 };
 
-export const Input: React.FC<InputProps> = ({
+export const Input: React.FC<React.PropsWithChildren<InputProps>> = ({
   label,
   name,
   placeholder,
@@ -349,7 +349,7 @@ export const Input: React.FC<InputProps> = ({
   );
 };
 
-export const FieldError: React.FC<{ name: string }> = ({ name }) => (
+export const FieldError: React.FC<React.PropsWithChildren<{ name: string }>> = ({ name }) => (
   <ErrorMessage name={name}>
     {(msg) => (
       <Text variant="fielderror" sx={{ gridColumn: [0, 0, 2] }}>
@@ -359,10 +359,10 @@ export const FieldError: React.FC<{ name: string }> = ({ name }) => (
   </ErrorMessage>
 );
 
-export const ShowField: React.FC<{
+export const ShowField: React.FC<React.PropsWithChildren<{
   label: string;
   value?: string | null | number;
-}> = ({ label, value }) => {
+}>> = ({ label, value }) => {
   return (
     <>
       <Text my={[0, 0, 1]} textAlign="left" pt={[0, 0, 2]}>

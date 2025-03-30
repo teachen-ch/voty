@@ -245,7 +245,7 @@ export default function Home(): React.ReactElement {
   );
 }
 
-const Teaser: React.FC<{ reverse?: boolean }> = ({ reverse, children }) => (
+const Teaser: React.FC<React.PropsWithChildren<{ reverse?: boolean }>> = ({ reverse, children }) => (
   <Flex
     mt={[4, 4, 4, 6]}
     mx="auto"
@@ -262,7 +262,7 @@ const Teaser: React.FC<{ reverse?: boolean }> = ({ reverse, children }) => (
   </Flex>
 );
 
-const TeaserText: React.FC<{ title: string }> = ({ title, children }) => (
+const TeaserText: React.FC<React.PropsWithChildren<{ title: string }>> = ({ title, children }) => (
   <Box width={["100%", "100%", "100%", "40%"]} px={[0, 0, 3]}>
     <Text fontSize={[2, 2, 3, 3]} lineHeight="1.45em">
       <Text color="primary" fontWeight="semi" fontSize={[2, 2, 4, 4]}>
@@ -273,12 +273,12 @@ const TeaserText: React.FC<{ title: string }> = ({ title, children }) => (
   </Box>
 );
 
-const TeaserImage: React.FC<{
+const TeaserImage: React.FC<React.PropsWithChildren<{
   src: string;
   width: number;
   height: number;
   top?: number;
-}> = ({ src, width, height, top }) => (
+}>> = ({ src, width, height, top }) => (
   <Box width={["90%", "90%", "70%", "50%"]} mx="auto">
     <Box
       sx={{ position: "relative", marginTop: [0, 0, 0, top] }}
@@ -296,7 +296,7 @@ const TeaserImage: React.FC<{
   </Box>
 );
 
-const LearnMore: React.FC<{ href: string }> = ({ href }) => (
+const LearnMore: React.FC<React.PropsWithChildren<{ href: string }>> = ({ href }) => (
   <Link href={href} passHref legacyBehavior>
     <Text fontWeight="semi" color="primary" variant="link">
       Mehr erfahren »»

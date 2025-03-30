@@ -53,7 +53,7 @@ export default function TeamHome(): React.ReactElement {
   );
 }
 
-export const TeamAnonLogin: React.FC = () => (
+export const TeamAnonLogin: React.FC<React.PropsWithChildren<unknown>> = () => (
   <Box>
     <H2 mt={6}>Anmelden</H2>
     <Text mb={3} fontSize={2}>

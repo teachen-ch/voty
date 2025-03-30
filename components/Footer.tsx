@@ -2,7 +2,7 @@ import { Flex, Box, LinkProps } from "rebass";
 import { H3 } from "components/Page";
 import { A } from "./Breadcrumb";
 
-export const Footer: React.FC = () => {
+export const Footer: React.FC<React.PropsWithChildren<unknown>> = () => {
   return (
     <Box>
       <Box
@@ -94,13 +94,13 @@ export const Footer: React.FC = () => {
   );
 };
 
-const FLink: React.FC<LinkProps> = (props) => (
+const FLink: React.FC<React.PropsWithChildren<LinkProps>> = (props) => (
   <A display="block" variant="footerLink" {...props}>
     {props.children}
   </A>
 );
 
-const NavBox: React.FC = (props) => (
+const NavBox: React.FC<React.PropsWithChildren<unknown>> = (props) => (
   <Box
     as="nav"
     //sx={{ borderLeft: ["", "", "1px solid lightgray"] }}

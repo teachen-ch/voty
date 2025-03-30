@@ -39,9 +39,9 @@ export const PROGRESS = gql`
   }
 `;
 
-export const ShowProgress: React.FC<{
+export const ShowProgress: React.FC<React.PropsWithChildren<{
   team: TeamAnonFieldsFragment;
-}> = ({ team }) => {
+}>> = ({ team }) => {
   const queryProgress = useProgressQuery({
     variables: { teamId: team.id },
     notifyOnNetworkStatusChange: true,
@@ -102,7 +102,7 @@ export const ShowProgress: React.FC<{
   );
 };
 
-const CardProgress: React.FC<{ card: ProgressCard; total?: number }> = ({
+const CardProgress: React.FC<React.PropsWithChildren<{ card: ProgressCard; total?: number }>> = ({
   card,
   total,
 }) => {
@@ -149,7 +149,7 @@ const CardProgress: React.FC<{ card: ProgressCard; total?: number }> = ({
   );
 };
 
-const Email: React.FC<{ student: { email?: string | null } }> = ({
+const Email: React.FC<React.PropsWithChildren<{ student: { email?: string | null } }>> = ({
   student,
 }) => (
   <A href={`mailto:${student.email}?subject=voty.ch Aufgaben`} variant="link">
@@ -157,10 +157,10 @@ const Email: React.FC<{ student: { email?: string | null } }> = ({
   </A>
 );
 
-const StudentProgress: React.FC<{
+const StudentProgress: React.FC<React.PropsWithChildren<{
   student: ProgressStudent;
   total?: number;
-}> = ({ student, total }) => {
+}>> = ({ student, total }) => {
   const [show, setShow] = useState(false);
   return (
     <Fragment>
@@ -197,7 +197,7 @@ const StudentProgress: React.FC<{
     </Fragment>
   );
 };
-const Reload: React.FC<{ query: QueryResult }> = ({ query }) => {
+const Reload: React.FC<React.PropsWithChildren<{ query: QueryResult }>> = ({ query }) => {
   const reloading = query.networkStatus === NetworkStatus.refetch;
   return (
     <A

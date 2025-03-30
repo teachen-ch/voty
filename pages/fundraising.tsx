@@ -322,7 +322,7 @@ export default function Fundraising(): React.ReactElement {
   );
 }
 
-const Section: React.FC<{ title: string; id: string }> = ({
+const Section: React.FC<React.PropsWithChildren<{ title: string; id: string }>> = ({
   title,
   id,
   children,

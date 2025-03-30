@@ -2,7 +2,7 @@ import { Heading, Text, Box, Link } from "rebass";
 import { A } from "components/Breadcrumb";
 import { HideFeature } from "./HideFeature";
 
-export const FAQ: React.FC = () => (
+export const FAQ: React.FC<React.PropsWithChildren<unknown>> = () => (
   <Box className="faq" fontSize={2} textAlign="left">
     <Heading as="h3" mt={3}>
       Wer steht hinter voty.ch?

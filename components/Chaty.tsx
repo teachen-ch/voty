@@ -38,13 +38,13 @@ import {
 const WAIT = 50;
 const MAX_WAIT = 3000;
 
-export const Chaty: React.FC<{
+export const Chaty: React.FC<React.PropsWithChildren<{
   lines: string;
   title?: string;
   speed?: number;
   slim?: boolean;
   quickShow?: boolean;
-}> = ({ lines, title, speed = 1, slim = false, quickShow = true }) => {
+}>> = ({ lines, title, speed = 1, slim = false, quickShow = true }) => {
   const [reset, setReset] = useState(0);
   const messages = useMemo(() => parseMessages(lines), [lines]);
   const [show, setShow] = useState<TMessage[]>([]);
@@ -203,7 +203,7 @@ export const Chaty: React.FC<{
   );
 };
 
-const ShowInput: React.FC = () => {
+const ShowInput: React.FC<React.PropsWithChildren<unknown>> = () => {
   const { inputMessage, selectOption } = useContext(ChatyContext);
   const team = useTeam();
   const router = useRouter();

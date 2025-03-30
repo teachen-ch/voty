@@ -50,7 +50,7 @@ export default function Signup(): ReactElement {
   );
 }
 
-export const InlineSignup: React.FC = () => {
+export const InlineSignup: React.FC<React.PropsWithChildren<unknown>> = () => {
   const [newUser, setNewUser] = useState<SessionUser | undefined>(undefined);
 
   if (newUser) {
@@ -74,7 +74,7 @@ export const InlineSignup: React.FC = () => {
     );
 };
 
-export const CreateUserForm: React.FC<{
+export const CreateUserForm: React.FC<React.PropsWithChildren<{
   setUser: Dispatch<SetStateAction<SessionUser | undefined>>;
   onSubmit?: (values: Record<string, string | number>) => void;
   omitRole?: boolean;
@@ -86,7 +86,7 @@ export const CreateUserForm: React.FC<{
   submitButtonLabel?: string;
   campaign?: string;
   redirect?: string;
-}> = (props) => {
+}>> = (props) => {
   const existingUser = useUser();
   const tr = useTr();
   const router = useRouter();

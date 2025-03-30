@@ -5,12 +5,12 @@ import Image from "next/legacy/image";
 import IconPlus from "../public/images/icon_plus.svg";
 import IconMinus from "../public/images/icon_minus.svg";
 
-export const ReadMore: React.FC<{
+export const ReadMore: React.FC<React.PropsWithChildren<{
   title: string;
   bg?: string;
   hidePlus?: boolean;
   fontSize?: number | number[];
-}> = ({ title, bg = "darkgray", hidePlus, fontSize = 4, children }) => {
+}>> = ({ title, bg = "darkgray", hidePlus, fontSize = 4, children }) => {
   const [open, setOpen] = useState(false);
   return (
     <Box color="white">

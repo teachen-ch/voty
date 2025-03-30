@@ -12,7 +12,7 @@ const typeColors: Record<string, string> = {
  *
  * @param type: important | info | light | default
  */
-export const Info: React.FC<CardProps & { type?: string }> = ({
+export const Info: React.FC<React.PropsWithChildren<CardProps & { type?: string }>> = ({
   type = "default",
   children,
   ...props

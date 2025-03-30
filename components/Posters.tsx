@@ -8,7 +8,7 @@ import debounce from "lodash/debounce";
 import random from "lodash/random";
 import { Filter, VotesQuery } from "./Swissvotes";
 
-export const Posters: React.FC = () => {
+export const Posters: React.FC<React.PropsWithChildren<unknown>> = () => {
   const [keywords, setKeywords] = useState("");
   const [yes, setYes] = useState("");
   const [offset, setOffset] = useState(0);
@@ -45,7 +45,7 @@ export const Posters: React.FC = () => {
   );
 };
 
-export const RandomPosters: React.FC<{ amount?: number }> = ({
+export const RandomPosters: React.FC<React.PropsWithChildren<{ amount?: number }>> = ({
   amount = 10,
 }) => {
   return (
@@ -53,7 +53,7 @@ export const RandomPosters: React.FC<{ amount?: number }> = ({
   );
 };
 
-export const PosterList: React.FC<{ query: VotesQuery; yes?: string }> = ({
+export const PosterList: React.FC<React.PropsWithChildren<{ query: VotesQuery; yes?: string }>> = ({
   query,
   yes,
 }) => {
@@ -95,7 +95,7 @@ export const PosterList: React.FC<{ query: VotesQuery; yes?: string }> = ({
   );
 };
 
-export const Poster: React.FC<{ vote: Swissvote; image: string }> = ({
+export const Poster: React.FC<React.PropsWithChildren<{ vote: Swissvote; image: string }>> = ({
   vote,
   image,
 }) => {

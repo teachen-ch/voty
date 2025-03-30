@@ -9,9 +9,9 @@ import { Info } from "./Info";
 import { isProd } from "util/isBrowser";
 import { useTr } from "util/translate";
 
-export const BallotResults: React.FC<{
+export const BallotResults: React.FC<React.PropsWithChildren<{
   results?: Nullable<BallotResultsType>;
-}> = ({ results }) => {
+}>> = ({ results }) => {
   if (!results) return null;
   if (!results.total) return <Text>Noch keine Stimmen</Text>;
 
@@ -61,9 +61,9 @@ export const BallotResults: React.FC<{
   );
 };
 
-export const VotyPie: React.FC<{
+export const VotyPie: React.FC<React.PropsWithChildren<{
   results: BallotResultsType;
-}> = ({ results }) => {
+}>> = ({ results }) => {
   const tr = useTr();
   const data = [
     { title: tr("Ballot.Yes"), value: Number(results.yes), color: "green" },

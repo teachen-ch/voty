@@ -10,7 +10,7 @@ import Image from "next/legacy/image";
 import IconWatch from "../public/images/icon_watch.svg";
 import upperFirst from "lodash/upperFirst";
 
-export const LearningPath: React.FC<{ path: string; anon?: boolean }> = ({
+export const LearningPath: React.FC<React.PropsWithChildren<{ path: string; anon?: boolean }>> = ({
   path,
   anon,
 }) => {
@@ -64,7 +64,7 @@ export const LearningPath: React.FC<{ path: string; anon?: boolean }> = ({
   );
 };
 
-const CardDetail: React.FC<{ id: string; teamLink: string }> = ({
+const CardDetail: React.FC<React.PropsWithChildren<{ id: string; teamLink: string }>> = ({
   id,
   teamLink,
 }) => {

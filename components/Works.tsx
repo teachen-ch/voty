@@ -75,18 +75,16 @@ export const DELETE_WORK = gql`
   }
 `;
 
-export type WorkItem = React.FC<{ work: WorkFieldsFragment }>;
+export type WorkItem = React.FC<React.PropsWithChildren<{ work: WorkFieldsFragment }>>;
 
 // TODO: Rethink, whether we want to keep the where param
-export const Works: React.FC<
-  FlexProps & {
-    where?: WorkWhereInput;
-    card?: string;
-    items: WorkItem;
-    list?: React.FC;
-    trigger?: number;
-  }
-> = ({ where, items, list, trigger, card, ...props }) => {
+export const Works: React.FC<React.PropsWithChildren<FlexProps & {
+  where?: WorkWhereInput;
+  card?: string;
+  items: WorkItem;
+  list?: React.FC<React.PropsWithChildren<unknown>>;
+  trigger?: number;
+}>> = ({ where, items, list, trigger, card, ...props }) => {
   const team = useTeam();
   const user = useUser();
   const [doDeleteWork] = useDeleteWorkMutation();
@@ -215,7 +213,7 @@ export const Works: React.FC<
   );
 };
 
-export const WorkCard: React.FC<BoxProps> = ({ children, ...props }) => (
+export const WorkCard: React.FC<React.PropsWithChildren<BoxProps>> = ({ children, ...props }) => (
   <Box
     sx={{ borderRadius: 5 }}
     bg="lightgray"
@@ -279,13 +277,13 @@ export const POST_WORK = gql`
   ${WorkFields}
 `;
 
-export const WorkSubmit: React.FC<{
+export const WorkSubmit: React.FC<React.PropsWithChildren<{
   title?: string;
   text?: string;
   data: any;
   visibility?: Visibility;
   setTrigger?: (n: number) => void;
-}> = ({ title, data, text, visibility: visibilityDefault, setTrigger }) => {
+}>> = ({ title, data, text, visibility: visibilityDefault, setTrigger }) => {
   const { card, title: cardTitle } = useContext(CardContext);
   const user = useUser();
   const team = useTeam();
@@ -329,10 +327,10 @@ export const WorkSubmit: React.FC<{
   );
 };
 
-export const Visible: React.FC<{
+export const Visible: React.FC<React.PropsWithChildren<{
   visibility?: Visibility;
   setVisibility: (v?: Visibility) => void;
-}> = ({ visibility, setVisibility }) => {
+}>> = ({ visibility, setVisibility }) => {
   return (
     <Flex my={3} flexWrap={["wrap", "wrap", "nowrap"]}>
       <Label>Veröffentlichen: </Label>
@@ -370,12 +368,10 @@ export const Visible: React.FC<{
   );
 };
 
-export const Authors: React.FC<
-  BoxProps & {
-    work?: WorkFieldsFragment;
-    setUsers: (u: Array<UserWhereUniqueInput>) => void;
-  }
-> = ({ work, setUsers, ...props }) => {
+export const Authors: React.FC<React.PropsWithChildren<BoxProps & {
+  work?: WorkFieldsFragment;
+  setUsers: (u: Array<UserWhereUniqueInput>) => void;
+}>> = ({ work, setUsers, ...props }) => {
   type U = Pick<User, "id" | "shortname">;
   const user = useUser();
   const team = useTeam();

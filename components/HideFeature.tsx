@@ -11,9 +11,9 @@ const prodEnabled: Record<string, boolean> = {
  *
  * @param env if env="prod" then feature will be hidden on prod, unless it's enabled
  */
-export const HideFeature: React.FC<{
+export const HideFeature: React.FC<React.PropsWithChildren<{
   id: string;
-}> = ({ children, id }) => {
+}>> = ({ children, id }) => {
   const feature = <>{children}</>;
   if (isProd()) return prodEnabled[id] ? feature : null;
   else return feature;

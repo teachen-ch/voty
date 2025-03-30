@@ -116,17 +116,17 @@ export default function Abstimmung(): ReactElement {
   );
 }
 
-export const Explainer: React.FC<{ title: string }> = ({ title, children }) => (
+export const Explainer: React.FC<React.PropsWithChildren<{ title: string }>> = ({ title, children }) => (
   <ReadMore title={title}>
     <Card fontSize={[1, 2, 3]}>{children}</Card>
   </ReadMore>
 );
 
-export const Step: React.FC<{
+export const Step: React.FC<React.PropsWithChildren<{
   n: string | number;
   mb?: number;
   bg?: string;
-}> = ({ n, mb = 4, children, bg = "gray" }) => (
+}>> = ({ n, mb = 4, children, bg = "gray" }) => (
   <Flex mb={mb}>
     <CircleBullet value={n} bg={bg} color="#fff" />
     <Box ml={2} pt="3px">
@@ -135,7 +135,7 @@ export const Step: React.FC<{
   </Flex>
 );
 
-export const Stats: React.FC = () => (
+export const Stats: React.FC<React.PropsWithChildren<unknown>> = () => (
   <Box fontSize={2}>
     <Heading mt={0}>Aktueller Stand</Heading>
     <Grid columns={[0, 0, "160px auto"]}>
@@ -153,7 +153,7 @@ export const Stats: React.FC = () => (
   </Box>
 );
 
-const ClassBar: React.FC<{ classes: number; total: number }> = ({
+const ClassBar: React.FC<React.PropsWithChildren<{ classes: number; total: number }>> = ({
   classes,
   total,
 }) => (
@@ -186,10 +186,10 @@ const ClassBar: React.FC<{ classes: number; total: number }> = ({
   </Flex>
 );
 
-const CantonsBar: React.FC<{
+const CantonsBar: React.FC<React.PropsWithChildren<{
   cantons: string;
   diversity: number;
-}> = ({ cantons, diversity }) => (
+}>> = ({ cantons, diversity }) => (
   <Box
     height="30px"
     color="gray"
@@ -204,7 +204,7 @@ const CantonsBar: React.FC<{
   </Box>
 );
 
-const TypeBar: React.FC<{ types: Record<string, number> }> = ({ types }) => (
+const TypeBar: React.FC<React.PropsWithChildren<{ types: Record<string, number> }>> = ({ types }) => (
   <Box
     height="30px"
     pl={3}

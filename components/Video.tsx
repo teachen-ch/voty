@@ -6,7 +6,7 @@ type VideoProps = {
   url: string;
 };
 
-const Video: React.FC<VideoProps> = (props) => {
+const Video: React.FC<React.PropsWithChildren<VideoProps>> = (props) => {
   const width = props.width || "100%";
   const height = props.height || undefined;
 
@@ -28,7 +28,7 @@ const Video: React.FC<VideoProps> = (props) => {
 };
 export default Video;
 
-const Play: React.FC = () => (
+const Play: React.FC<React.PropsWithChildren<unknown>> = () => (
   <img
     alt="Play"
     src="https://img.icons8.com/ios-glyphs/1600/circled-play.png"
@@ -36,7 +36,7 @@ const Play: React.FC = () => (
   />
 );
 
-const SRFVideo: React.FC<VideoProps> = (props) => {
+const SRFVideo: React.FC<React.PropsWithChildren<VideoProps>> = (props) => {
   const width = props.width || "100%";
   const height = props.height || 416;
   // We know the following URL patterns:

@@ -43,7 +43,7 @@ function MyApp({ Component, pageProps }: AppProps): ReactElement {
 }
 
 // this will wrap the MDX into a <Page> only if there is a heading (# title)
-const MDXWrapper: React.FC = ({ children }) => {
+const MDXWrapper: React.FC<React.PropsWithChildren<unknown>> = ({ children }) => {
   if (children && Array.isArray(children)) {
     let heading = "";
     const headings = children.filter((el: React.ReactNode) => {

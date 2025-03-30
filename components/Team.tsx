@@ -1,7 +1,7 @@
 import { Text, Flex, Image } from "rebass";
 import { A } from "./Breadcrumb";
 
-export const Team: React.FC = () => {
+export const Team: React.FC<React.PropsWithChildren<unknown>> = () => {
   return (
     <Text fontSize={2}>
       <Flex mx={-3} flexWrap="wrap">
@@ -59,13 +59,13 @@ export const Team: React.FC = () => {
   );
 };
 
-export const Person: React.FC<{
+export const Person: React.FC<React.PropsWithChildren<{
   href: string;
   name: string;
   role: string;
   org: string;
   image: string;
-}> = (props) => (
+}>> = (props) => (
   <Flex
     flexDirection="column"
     m={3}

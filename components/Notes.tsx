@@ -17,11 +17,11 @@ export const SET_NOTES = gql`
   ${fragments.TeamTeacherFields}
 `;
 
-export const ShowNote: React.FC<{
+export const ShowNote: React.FC<React.PropsWithChildren<{
   team: TeamAnonFieldsFragment;
   card: string;
   teacher?: boolean;
-}> = ({ team, card, teacher }) => {
+}>> = ({ team, card, teacher }) => {
   const [edit, setEdit] = useState(false);
 
   if (edit) {
@@ -53,11 +53,11 @@ export const ShowNote: React.FC<{
   );
 };
 
-export const EditNote: React.FC<{
+export const EditNote: React.FC<React.PropsWithChildren<{
   team: TeamAnonFieldsFragment;
   card: string;
   close: () => void;
-}> = ({ team, card, close }) => {
+}>> = ({ team, card, close }) => {
   const [note, setNote] = useState(team.notes[card] as string);
   const [doSetNotes] = useSetNotesMutation();
 

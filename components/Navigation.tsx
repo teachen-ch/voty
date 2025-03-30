@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 
 type NavigationProps = { admin?: boolean };
 
-export const Navigation: React.FC<NavigationProps> = ({ children }) => {
+export const Navigation: React.FC<React.PropsWithChildren<NavigationProps>> = ({ children }) => {
   return (
     <Flex flexDirection="row" flexWrap="wrap" m={-1}>
       {children}
@@ -18,7 +18,7 @@ export type RouteProps = {
   disabled?: boolean;
 };
 
-export const Route: React.FC<RouteProps> = (props) => {
+export const Route: React.FC<React.PropsWithChildren<RouteProps>> = (props) => {
   const router = useRouter();
   const as = props.as || props.href;
   let variant = props.disabled ? "muted" : "primary";

@@ -84,7 +84,7 @@ export default function PanelBallotsPresent(): ReactElement {
   );
 }
 
-const BallotRunListing: React.FC<{ ballotRun: BallotRunFieldsFragment }> = ({
+const BallotRunListing: React.FC<React.PropsWithChildren<{ ballotRun: BallotRunFieldsFragment }>> = ({
   ballotRun,
 }) => {
   const tr = useTr();
@@ -137,7 +137,7 @@ const BallotRunListing: React.FC<{ ballotRun: BallotRunFieldsFragment }> = ({
   );
 };
 
-const BallotRunDetail: React.FC<{ ballotRun: BallotRunFieldsFragment }> = ({
+const BallotRunDetail: React.FC<React.PropsWithChildren<{ ballotRun: BallotRunFieldsFragment }>> = ({
   ballotRun,
 }) => {
   return (
@@ -150,7 +150,7 @@ const BallotRunDetail: React.FC<{ ballotRun: BallotRunFieldsFragment }> = ({
   );
 };
 
-const Results: React.FC<{ ballotId: string; ballotRunId: string }> = ({
+const Results: React.FC<React.PropsWithChildren<{ ballotId: string; ballotRunId: string }>> = ({
   ballotId,
   ballotRunId,
 }) => {
@@ -171,7 +171,7 @@ const Results: React.FC<{ ballotId: string; ballotRunId: string }> = ({
   return <BallotResults results={results} />;
 };
 
-export const PanelPage: React.FC<{ heading: string; teamId?: string }> = (
+export const PanelPage: React.FC<React.PropsWithChildren<{ heading: string; teamId?: string }>> = (
   props
 ) => {
   const votyLink = props.teamId ? `/team/${props.teamId}` : "/";

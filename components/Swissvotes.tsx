@@ -56,12 +56,12 @@ export const SEARCH_SWISSVOTES = gql`
 
 type VoteType = ArrayElement<SwissvotesQuery["swissvotes"]>;
 
-export const Swissvotes: React.FC<{
+export const Swissvotes: React.FC<React.PropsWithChildren<{
   votes?: VoteType[];
   setVotes?: (votes: VoteType[]) => void;
   limit?: number;
   keyword?: string;
-}> = ({ votes, setVotes, limit = 15, keyword = "" }) => {
+}>> = ({ votes, setVotes, limit = 15, keyword = "" }) => {
   const [keywords, setKeywords] = useState(keyword);
   const [type, setType] = useState<number | undefined>();
   const [result, setResult] = useState<number | undefined>();
@@ -121,7 +121,7 @@ export const Swissvotes: React.FC<{
   );
 };
 
-export const SwissvotesTopics: React.FC = () => {
+export const SwissvotesTopics: React.FC<React.PropsWithChildren<unknown>> = () => {
   const [topic, setTopic] = useState("");
   const [votes, setVotes] = useState<VoteType[]>([]);
   const [text, setText] = useState("");
@@ -241,13 +241,13 @@ const SwissvotesItem: WorkItem = ({ work }) => {
   );
 };
 
-export const Filter: React.FC<{
+export const Filter: React.FC<React.PropsWithChildren<{
   set: Dispatch<SetStateAction<any>>;
   v: string | number | undefined;
   val: string | number | undefined;
   label: string;
   sep?: boolean;
-}> = ({ set, v, val, label, sep }) => (
+}>> = ({ set, v, val, label, sep }) => (
   <>
     <A
       onClick={() => (v === val ? set(undefined) : set(val))}
@@ -272,12 +272,12 @@ export type VotesQuery = {
   hasPosters?: boolean;
 };
 
-export const VotesList: React.FC<{
+export const VotesList: React.FC<React.PropsWithChildren<{
   query: VotesQuery;
   resetFilters: () => void;
   votes?: VoteType[];
   setVotes?: (votes: VoteType[]) => void;
-}> = ({ query, resetFilters, votes, setVotes }) => {
+}>> = ({ query, resetFilters, votes, setVotes }) => {
   const swissvotesQuery = useSwissvotesQuery({
     variables: query,
   });
@@ -312,11 +312,11 @@ export const VotesList: React.FC<{
   );
 };
 
-export const Vote: React.FC<{
+export const Vote: React.FC<React.PropsWithChildren<{
   vote: Swissvote;
   votes?: VoteType[];
   setVotes?: (votes: VoteType[]) => void;
-}> = ({ vote, votes, setVotes }) => {
+}>> = ({ vote, votes, setVotes }) => {
   function isSelected(vote: VoteType) {
     return find(votes, vote) ? true : false;
   }

@@ -3,7 +3,7 @@ import Link from "next/link";
 import React, { Fragment } from "react";
 import { useRouter } from "next/router";
 
-export const Breadcrumb: React.FC = ({ children }) => (
+export const Breadcrumb: React.FC<React.PropsWithChildren<unknown>> = ({ children }) => (
   <Box
     mt={[-12, -12, -16]}
     mb={3}
@@ -20,7 +20,7 @@ export const Breadcrumb: React.FC = ({ children }) => (
   </Box>
 );
 
-export const A: React.FC<LinkProps & { locale?: string | false }> = (props) => {
+export const A: React.FC<React.PropsWithChildren<LinkProps & { locale?: string | false }>> = (props) => {
   const router = useRouter();
   const locale = props.locale !== undefined ? props.locale : router.locale;
   const variant = props.variant || "underline";
@@ -41,7 +41,7 @@ export const A: React.FC<LinkProps & { locale?: string | false }> = (props) => {
   }
 };
 
-export const Here: React.FC = ({ children }) => (
+export const Here: React.FC<React.PropsWithChildren<unknown>> = ({ children }) => (
   <Text variant="inline" color="white">
     {children}
   </Text>

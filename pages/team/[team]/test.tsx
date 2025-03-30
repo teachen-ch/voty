@@ -94,7 +94,7 @@ export default function TeacherTest(): ReactElement {
   );
 }
 
-const BallotRunDetail: React.FC<{ run: BallotRunFieldsFragment }> = ({
+const BallotRunDetail: React.FC<React.PropsWithChildren<{ run: BallotRunFieldsFragment }>> = ({
   run,
 }) => {
   const [doRemoveBallotRun] = useRemoveBallotRunMutation();
@@ -122,10 +122,10 @@ const BallotRunDetail: React.FC<{ run: BallotRunFieldsFragment }> = ({
   ) : null;
 };
 
-const PanelCode: React.FC<{
+const PanelCode: React.FC<React.PropsWithChildren<{
   team: TeamTeacherFieldsFragment;
   hasRuns: boolean;
-}> = ({ team, hasRuns }) => {
+}>> = ({ team, hasRuns }) => {
   if (!team?.code || !hasRuns) return null;
   return (
     <Text id="livepanel">Seite für Live-Abstimmungen:{" "}

@@ -53,7 +53,7 @@ export const ACCEPT_INVITE = gql`
   }
 `;
 
-const Invite: React.FC = () => {
+const Invite: React.FC<React.PropsWithChildren<unknown>> = () => {
   const existingUser = useUser();
   const [newUser, setUser] = useState<SessionUser | undefined>(undefined);
   const [error, setError] = useState("");
@@ -143,7 +143,7 @@ type AcceptInviteProps = {
   user: SessionUser;
   team: TeamAnonFieldsFragment;
 };
-const AcceptInvite: React.FC<AcceptInviteProps> = ({ invite, team, user }) => {
+const AcceptInvite: React.FC<React.PropsWithChildren<AcceptInviteProps>> = ({ invite, team, user }) => {
   const [error, setError] = useState("");
   const [force, setForce] = useState(false);
   const [success, setSuccess] = useState(false);

@@ -11,14 +11,14 @@ import { SessionUser } from "state/user";
 import { useState } from "react";
 import { Role } from "graphql/types";
 
-export const NavDesktop: React.FC<{ user: SessionUser; loaded: boolean }> = ({
+export const NavDesktop: React.FC<React.PropsWithChildren<{ user: SessionUser; loaded: boolean }>> = ({
   user,
   loaded,
 }) => {
   if (loaded) return user ? <Account user={user} /> : <RegisterLogin />;
   else return null;
 };
-const RegisterLogin: React.FC = () => {
+const RegisterLogin: React.FC<React.PropsWithChildren<unknown>> = () => {
   return (
     <Flex alignItems="center">
       <A href="/user/signup">
@@ -38,7 +38,7 @@ const RegisterLogin: React.FC = () => {
     </Flex>
   );
 };
-const Account: React.FC<{ user: SessionUser }> = ({ user }) => {
+const Account: React.FC<React.PropsWithChildren<{ user: SessionUser }>> = ({ user }) => {
   const [open, setOpen] = useState(false);
   const homeLink = `/${user?.role.toLowerCase()}`;
   let homeText = "";
@@ -92,7 +92,7 @@ const Account: React.FC<{ user: SessionUser }> = ({ user }) => {
     </Flex>
   );
 };
-const AccountMenu: React.FC = () => {
+const AccountMenu: React.FC<React.PropsWithChildren<unknown>> = () => {
   return (
     <Box width="207px" mt="22px" ml="85px" sx={{ lineHeight: "16px" }}>
       <Box color="topbarColor">

@@ -4,7 +4,7 @@ import type { Zip } from "util/places";
 import { useState } from "react";
 import debounce from "lodash/debounce";
 
-export const ZipField: React.FC<InputProps> = (props) => {
+export const ZipField: React.FC<React.PropsWithChildren<InputProps>> = (props) => {
   const [results, setResults] = useState<Zip[]>([]);
 
   async function doSearch(search: string) {

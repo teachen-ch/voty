@@ -86,7 +86,7 @@ export default function ZDAAbstimmung(): React.ReactElement {
   );
 }
 
-export const Logos: React.FC = () => {
+export const Logos: React.FC<React.PropsWithChildren<unknown>> = () => {
   const router = useRouter();
   return (
     <Flex justifyContent="space-around" alignItems="center" my={4}>
@@ -115,10 +115,10 @@ export const Logos: React.FC = () => {
   );
 };
 
-export const ZDAFullPage: React.FC<{
+export const ZDAFullPage: React.FC<React.PropsWithChildren<{
   heading: string;
   image?: string;
-}> = ({ heading, image, children }) => (
+}>> = ({ heading, image, children }) => (
   <ZDAPage heading={heading} image={image}>
     <LanguageLinks />
     <Heading mt={-3} fontSize={[4, 4, 5]}>
@@ -128,10 +128,10 @@ export const ZDAFullPage: React.FC<{
   </ZDAPage>
 );
 
-export const ZDAPage: React.FC<{
+export const ZDAPage: React.FC<React.PropsWithChildren<{
   heading?: string;
   image?: string;
-}> = (props) => (
+}>> = (props) => (
   <Flex
     bg="#3D4564"
     mt={0}
@@ -203,7 +203,7 @@ function LanguageLinks() {
   );
 }
 
-export const ZDAFAQ: React.FC = () => (
+export const ZDAFAQ: React.FC<React.PropsWithChildren<unknown>> = () => (
   <Box className="faq" fontSize={1} textAlign="left" mt={5}>
     <Flex justifyContent="center">
       <Image
@@ -362,7 +362,7 @@ export const ZDAFAQ: React.FC = () => (
   </Box>
 );
 
-const Title: React.FC = (props) => (
+const Title: React.FC<React.PropsWithChildren<unknown>> = (props) => (
   <Heading as="h3" mt={3} fontSize={2}>
     {props.children}
   </Heading>

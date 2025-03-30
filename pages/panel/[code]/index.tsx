@@ -66,12 +66,12 @@ export default function PanelBallots(): ReactElement {
   );
 }
 
-const BallotRunDetail: React.FC<{
+const BallotRunDetail: React.FC<React.PropsWithChildren<{
   ballotRun: BallotRunFieldsFragment;
   refetch: () => void;
   cookie: Record<string, any>;
   code: string;
-}> = ({ ballotRun, refetch, code, cookie }) => {
+}>> = ({ ballotRun, refetch, code, cookie }) => {
   const ballotQuery = useBallotQuery({
     variables: { where: { id: ballotRun.ballotId } },
   });
@@ -93,12 +93,12 @@ const BallotRunDetail: React.FC<{
   );
 };
 
-const VoteCode: React.FC<{
+const VoteCode: React.FC<React.PropsWithChildren<{
   ballotRun: BallotRunFieldsFragment;
   code: string;
   voted: boolean;
   refetch: () => void;
-}> = ({ ballotRun, code, voted, refetch }) => {
+}>> = ({ ballotRun, code, voted, refetch }) => {
   const [error, setError] = useState("");
   const tr = useTr();
   const [success, setSuccess] = useState(false);
@@ -172,7 +172,7 @@ const VoteCode: React.FC<{
   );
 };
 
-const VotySuccess: React.FC = () => (
+const VotySuccess: React.FC<React.PropsWithChildren<unknown>> = () => (
   <>
     <Text mb={4}>
       Super, du hast nun anonym abgestimmt und deine Stimme wurde gezählt.

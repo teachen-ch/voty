@@ -81,11 +81,11 @@ export default function UsersPage(): ReactElement {
   );
 }
 
-const UserAdminList: React.FC<{
+const UserAdminList: React.FC<React.PropsWithChildren<{
   orderBy: UserOrderByInput;
   filter: string;
   role?: Role;
-}> = ({ orderBy, filter, role }) => {
+}>> = ({ orderBy, filter, role }) => {
   const [selected, setSelected] = useState("");
   const usersQuery = useAdminUsersQuery({
     variables: {

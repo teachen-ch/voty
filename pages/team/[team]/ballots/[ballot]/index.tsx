@@ -83,12 +83,12 @@ export default function BallotPage(): ReactElement {
   );
 }
 
-export const VotyNow: React.FC<{
+export const VotyNow: React.FC<React.PropsWithChildren<{
   ballot: BallotQuery["ballot"];
   onSuccess: () => void;
   slim?: boolean;
   loginLink?: string;
-}> = ({ ballot, onSuccess, slim, loginLink = "/user/login" }) => {
+}>> = ({ ballot, onSuccess, slim, loginLink = "/user/login" }) => {
   const [error, setError] = useState("");
   const tr = useTr();
   const user = useUser();
@@ -166,7 +166,7 @@ export const VotyNow: React.FC<{
   );
 };
 
-export const VotySuccess: React.FC<{ name: Nullable<string> }> = ({ name }) => (
+export const VotySuccess: React.FC<React.PropsWithChildren<{ name: Nullable<string> }>> = ({ name }) => (
   <>
     <Text mb={4}>
       Super, {name}, du hast nun anonym abgestimmt und deine Stimme wurde

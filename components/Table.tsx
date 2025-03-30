@@ -11,7 +11,7 @@ import {
 import { useColorMode } from "theme-ui";
 import { Center } from "./Learning";
 
-export const Table: React.FC<BoxProps> = ({
+export const Table: React.FC<React.PropsWithChildren<BoxProps>> = ({
   id,
   fontSize = [1, 1, 2],
   children,
@@ -33,7 +33,7 @@ export const Table: React.FC<BoxProps> = ({
   );
 };
 
-export const TR: React.FC<FlexProps & { href?: string; noHover?: boolean }> = ({
+export const TR: React.FC<React.PropsWithChildren<FlexProps & { href?: string; noHover?: boolean }>> = ({
   href,
   noHover,
   ...props
@@ -65,9 +65,7 @@ export const TR: React.FC<FlexProps & { href?: string; noHover?: boolean }> = ({
   );
 };
 
-export const TD: React.FC<
-  BoxProps & { smHide?: boolean; flexy?: boolean; fixed?: boolean }
-> = ({ flexy, smHide, fixed, children, ...props }) => (
+export const TD: React.FC<React.PropsWithChildren<BoxProps & { smHide?: boolean; flexy?: boolean; fixed?: boolean }>> = ({ flexy, smHide, fixed, children, ...props }) => (
   <Box
     {...props}
     px={2}
@@ -89,9 +87,7 @@ export const TD: React.FC<
   </Box>
 );
 
-export const TDImage: React.FC<
-  ImageProps & { smHide?: boolean; light?: boolean }
-> = ({ smHide, light, ...props }) => {
+export const TDImage: React.FC<React.PropsWithChildren<ImageProps & { smHide?: boolean; light?: boolean }>> = ({ smHide, light, ...props }) => {
   const [colorMode] = useColorMode();
   const dark = colorMode === "dark";
   return (
@@ -106,7 +102,7 @@ export const TDImage: React.FC<
   );
 };
 
-export const TDIcon: React.FC<BoxProps & { smHide?: boolean }> = ({
+export const TDIcon: React.FC<React.PropsWithChildren<BoxProps & { smHide?: boolean }>> = ({
   smHide,
   children,
   ...props
@@ -125,7 +121,7 @@ export const TDIcon: React.FC<BoxProps & { smHide?: boolean }> = ({
   </Box>
 );
 
-export const OneRowTable: React.FC<{ text?: string }> = ({
+export const OneRowTable: React.FC<React.PropsWithChildren<{ text?: string }>> = ({
   text,
   children,
 }) => (

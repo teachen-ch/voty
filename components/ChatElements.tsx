@@ -7,7 +7,7 @@ import IconBack from "../public/images/icon_back_white.svg";
 import { getCardTitle } from "./Cards";
 import { ChatyContext, Direction, TMessage } from "util/chaty";
 
-export const ChatContainer: React.FC = ({ children }) => (
+export const ChatContainer: React.FC<React.PropsWithChildren<unknown>> = ({ children }) => (
   <Box height="480px">
     <Flex
       flexDirection="column"
@@ -29,7 +29,7 @@ export const ChatContainer: React.FC = ({ children }) => (
   </Box>
 );
 
-export const ChatHeader: React.FC<{ title?: string; onClick: () => void }> = ({
+export const ChatHeader: React.FC<React.PropsWithChildren<{ title?: string; onClick: () => void }>> = ({
   title,
   onClick,
 }) => (
@@ -77,7 +77,7 @@ export const MessageList = React.forwardRef<
   );
 });
 
-export const Message: React.FC<{ direction?: Direction }> = ({
+export const Message: React.FC<React.PropsWithChildren<{ direction?: Direction }>> = ({
   direction,
   children,
 }) => {
@@ -101,7 +101,7 @@ export const Message: React.FC<{ direction?: Direction }> = ({
   );
 };
 
-export const InputBox: React.FC = ({ children }) => (
+export const InputBox: React.FC<React.PropsWithChildren<unknown>> = ({ children }) => (
   <Flex
     flexDirection="row"
     flexWrap="wrap"
@@ -115,7 +115,7 @@ export const InputBox: React.FC = ({ children }) => (
   </Flex>
 );
 
-export const MessageOrInfo: React.FC<{ model: TMessage; is: string }> = ({
+export const MessageOrInfo: React.FC<React.PropsWithChildren<{ model: TMessage; is: string }>> = ({
   model,
 }) =>
   model.direction === Direction.Info ? (
@@ -126,7 +126,7 @@ export const MessageOrInfo: React.FC<{ model: TMessage; is: string }> = ({
     <ParsedMessage message={model} />
   );
 
-const ParsedMessage: React.FC<{ message: TMessage }> = ({ message }) => {
+const ParsedMessage: React.FC<React.PropsWithChildren<{ message: TMessage }>> = ({ message }) => {
   if (message.selected) {
     message.message = message.selected;
   }
@@ -145,7 +145,7 @@ const ParsedMessage: React.FC<{ message: TMessage }> = ({ message }) => {
   );
 };
 
-const Info: React.FC<{ model: TMessage }> = ({ model }) => (
+const Info: React.FC<React.PropsWithChildren<{ model: TMessage }>> = ({ model }) => (
   <Box
     mb={3}
     mx={4}
@@ -161,9 +161,9 @@ const Info: React.FC<{ model: TMessage }> = ({ model }) => (
   </Box>
 );
 
-export const ChatyMenu: React.FC<{
+export const ChatyMenu: React.FC<React.PropsWithChildren<{
   options: string[];
-}> = ({ options }) => {
+}>> = ({ options }) => {
   const { inputMessage, selectOption } = useContext(ChatyContext);
   return (
     <InputBox>
@@ -181,9 +181,9 @@ export const ChatyMenu: React.FC<{
   );
 };
 
-export const ChatyNext: React.FC<{
+export const ChatyNext: React.FC<React.PropsWithChildren<{
   nextChaty: (topic: string) => void;
-}> = ({ nextChaty }) => {
+}>> = ({ nextChaty }) => {
   const { inputMessage, selectOption } = useContext(ChatyContext);
   return (
     <InputBox>
@@ -216,7 +216,7 @@ export const ChatyNext: React.FC<{
   );
 };
 
-export const TypingIndicator: React.FC = () => (
+export const TypingIndicator: React.FC<React.PropsWithChildren<unknown>> = () => (
   <Box mt={-25} ml={1} fontSize={4}>
     <GlowDot delay={0} />
     <GlowDot delay={0.2} />
@@ -224,7 +224,7 @@ export const TypingIndicator: React.FC = () => (
   </Box>
 );
 
-const GlowDot: React.FC<{ delay: number }> = ({ delay }) => (
+const GlowDot: React.FC<React.PropsWithChildren<{ delay: number }>> = ({ delay }) => (
   <Text
     color="primary"
     variant="inline"

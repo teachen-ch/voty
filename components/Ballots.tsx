@@ -196,7 +196,7 @@ type BallotsProps = {
   onClick: (ballot: BallotFieldsFragment) => void;
 };
 
-export const Ballots: React.FC<BallotsProps> = ({ where, onClick }) => {
+export const Ballots: React.FC<React.PropsWithChildren<BallotsProps>> = ({ where, onClick }) => {
   const ballotsQuery = useBallotsQuery({ variables: { where } });
 
   if (ballotsQuery.error) return <Err msg={ballotsQuery.error.message} />;
@@ -219,9 +219,9 @@ export const Ballots: React.FC<BallotsProps> = ({ where, onClick }) => {
   );
 };
 
-export const StudentListBallots: React.FC<{
+export const StudentListBallots: React.FC<React.PropsWithChildren<{
   teamId: string;
-}> = ({ teamId }) => {
+}>> = ({ teamId }) => {
   const router = useRouter();
   const where = { ballotRuns: { some: { teamId: { equals: teamId } } } };
   const ballotsQuery = useBallotsQuery({ variables: { where } });
@@ -255,13 +255,13 @@ export const StudentListBallots: React.FC<{
   );
 };
 
-export const Ballot: React.FC<{
+export const Ballot: React.FC<React.PropsWithChildren<{
   ballot: BallotFieldsFragment;
   buttonText?: string;
   buttonColor?: string;
   onButton?: (ballot: BallotFieldsFragment) => void;
   onDetail?: (ballot: BallotFieldsFragment) => void;
-}> = ({
+}>> = ({
   ballot,
   children,
   buttonText,
@@ -321,10 +321,10 @@ export const getUserBallotStatus = (
   else return BallotStatus.Started;
 };
 
-export const SelectBallots: React.FC<{
+export const SelectBallots: React.FC<React.PropsWithChildren<{
   team: TeamTeacherFieldsFragment;
   scope: BallotScope;
-}> = ({ team, scope }) => {
+}>> = ({ team, scope }) => {
   const router = useRouter();
   const [doAddBallotRun, addMutation] = useAddBallotRunMutation();
   const [doRemoveBallotRun, removeMutation] = useRemoveBallotRunMutation();
@@ -472,9 +472,9 @@ export const SelectBallots: React.FC<{
   );
 };
 
-export const BallotDetails: React.FC<{
+export const BallotDetails: React.FC<React.PropsWithChildren<{
   ballot: NonNullable<BallotQuery["ballot"]>;
-}> = ({ ballot, children }) => (
+}>> = ({ ballot, children }) => (
   <Card>
     <Text>
       <Text fontWeight="bold">{ballot.title}</Text>
@@ -494,10 +494,10 @@ export const BallotDetails: React.FC<{
   </Card>
 );
 
-export const PanelCode: React.FC<{
+export const PanelCode: React.FC<React.PropsWithChildren<{
   team: TeamTeacherFieldsFragment;
   hasRuns: boolean;
-}> = ({ team, hasRuns }) => {
+}>> = ({ team, hasRuns }) => {
   if (!team?.code || !hasRuns) return null;
   return (
     <Text id="livepanel">Seite für Live-Abstimmungen:{" "}

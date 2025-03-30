@@ -53,7 +53,7 @@ export default function StatsPage(): ReactElement {
   );
 }
 
-const Stats: React.FC<{ from: number; to: number }> = ({ from, to }) => {
+const Stats: React.FC<React.PropsWithChildren<{ from: number; to: number }>> = ({ from, to }) => {
   const queryStats = useStatsQuery({ variables: { from, to } });
   const stats = queryStats.data?.stats?.stats as
     | Record<string, number>
@@ -89,13 +89,13 @@ const Stats: React.FC<{ from: number; to: number }> = ({ from, to }) => {
   );
 };
 
-const Filter: React.FC<{
+const Filter: React.FC<React.PropsWithChildren<{
   set: () => void;
   sf: (val: string) => void;
   f: string;
   l: string;
   sep?: boolean;
-}> = ({ set, sf, l, f, sep }) => (
+}>> = ({ set, sf, l, f, sep }) => (
   <>
     <A
       onClick={() => {

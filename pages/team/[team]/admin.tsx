@@ -267,7 +267,7 @@ export default function TeacherTeamPage(): React.ReactElement {
   );
 }
 
-const InviteLink: React.FC<{ team: TeamTeacherFieldsFragment }> = ({
+const InviteLink: React.FC<React.PropsWithChildren<{ team: TeamTeacherFieldsFragment }>> = ({
   team,
 }) => {
   usePageEvent({ category: "Teacher", action: "InviteLink" });

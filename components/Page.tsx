@@ -14,11 +14,11 @@ import { Info } from "./Info";
 import { useTr } from "util/translate";
 import Image from "next/legacy/image";
 
-export const Page: React.FC<{
+export const Page: React.FC<React.PropsWithChildren<{
   children?: React.ReactNode;
   heading?: string;
   bgImages?: string[];
-}> = ({ heading, bgImages, children }) => {
+}>> = ({ heading, bgImages, children }) => {
   return (
     <AppPage heading={heading} bgImages={bgImages}>
       {children}
@@ -26,12 +26,12 @@ export const Page: React.FC<{
   );
 };
 
-export const AppPage: React.FC<{
+export const AppPage: React.FC<React.PropsWithChildren<{
   image?: string;
   bgImages?: string[];
   heading?: string;
   onClose?: () => void;
-}> = (props) => {
+}>> = (props) => {
   const bgImages = props.bgImages || [];
   return (
     <>
@@ -103,13 +103,13 @@ export const AppPage: React.FC<{
   );
 };
 
-export const LoggedInPage: React.FC<{
+export const LoggedInPage: React.FC<React.PropsWithChildren<{
   role?: Role;
   children?: ReactNode;
   heading?: string;
   image?: string;
   bgImages?: string[];
-}> = ({ role, children, heading, bgImages, image }) => {
+}>> = ({ role, children, heading, bgImages, image }) => {
   const user = useUser();
   const allowed = role
     ? user?.role === role || user?.role === Role.Admin
@@ -145,7 +145,7 @@ function getRoleName(role: Role): string {
   return translations[String(role)] || String(role);
 }
 
-export const Container: React.FC<FlexProps> = (props) => {
+export const Container: React.FC<React.PropsWithChildren<FlexProps>> = (props) => {
   return (
     <>
       <Flex mt={70} px={[0, 0, 3, 4]} justifyContent="center" {...props}>
@@ -162,11 +162,11 @@ export const Container: React.FC<FlexProps> = (props) => {
   );
 };
 
-export const Loading: React.FC = () => (
+export const Loading: React.FC<React.PropsWithChildren<unknown>> = () => (
   <Spinner color="white" size={20} mr={3} />
 );
 
-export const Err: React.FC<{ msg?: string }> = ({ msg, children }) => {
+export const Err: React.FC<React.PropsWithChildren<{ msg?: string }>> = ({ msg, children }) => {
   const tr = useTr();
   return msg || children ? (
     <Info type="important">
@@ -176,20 +176,20 @@ export const Err: React.FC<{ msg?: string }> = ({ msg, children }) => {
   ) : null;
 };
 
-export const ErrorPage: React.FC = (props) => (
+export const ErrorPage: React.FC<React.PropsWithChildren<unknown>> = (props) => (
   <Page heading="Fehler">
     <Heading as="h2">Oh je, es ist ein Fehler aufgetreten</Heading>
     <Text>{props.children}</Text>
   </Page>
 );
 
-export const LoadingPage: React.FC = (props) => (
+export const LoadingPage: React.FC<React.PropsWithChildren<unknown>> = (props) => (
   <Page heading="Seite wird geladen...">
     <Text>{props.children}</Text>
   </Page>
 );
 
-export const Background: React.FC<{ bgImages: string[]; start?: boolean }> = (
+export const Background: React.FC<React.PropsWithChildren<{ bgImages: string[]; start?: boolean }>> = (
   props
 ) => {
   // const gradient = "linear-gradient(180deg, rgb(2,11,20) 0%, rgb(31,47,65))";
@@ -214,7 +214,7 @@ export const Background: React.FC<{ bgImages: string[]; start?: boolean }> = (
   );
 };
 
-export const H1: React.FC<HeadingProps> = (props) => (
+export const H1: React.FC<React.PropsWithChildren<HeadingProps>> = (props) => (
   <Heading
     as="h1"
     fontWeight="black"
@@ -228,13 +228,13 @@ export const H1: React.FC<HeadingProps> = (props) => (
   </Heading>
 );
 
-export const H2: React.FC<HeadingProps> = (props) => (
+export const H2: React.FC<React.PropsWithChildren<HeadingProps>> = (props) => (
   <Heading as="h2" variant="panelheading" {...props}>
     {props.children}
   </Heading>
 );
 
-export const H3: React.FC<HeadingProps> = (props) => (
+export const H3: React.FC<React.PropsWithChildren<HeadingProps>> = (props) => (
   <Heading
     as="h3"
     fontSize={[3, 3, 3]}
@@ -246,7 +246,7 @@ export const H3: React.FC<HeadingProps> = (props) => (
   </Heading>
 );
 
-export const H4: React.FC<HeadingProps> = (props) => (
+export const H4: React.FC<React.PropsWithChildren<HeadingProps>> = (props) => (
   <Heading
     as="h4"
     fontSize={[3, 3, 3]}
@@ -258,7 +258,7 @@ export const H4: React.FC<HeadingProps> = (props) => (
   </Heading>
 );
 
-export const ShowFor: React.FC<{ role: Role | string }> = ({
+export const ShowFor: React.FC<React.PropsWithChildren<{ role: Role | string }>> = ({
   role,
   children,
 }) => {

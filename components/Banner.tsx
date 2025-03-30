@@ -6,7 +6,7 @@ type BannerProps = {
   onClick?: () => void;
   children: React.ReactNode;
 };
-export const Banner: React.FC<BannerProps> = ({ href, onClick, children }) => {
+export const Banner: React.FC<React.PropsWithChildren<BannerProps>> = ({ href, onClick, children }) => {
   /*const { scrollYProgress } = useViewportScroll();
   const opacity = useTransform(
     scrollYProgress,

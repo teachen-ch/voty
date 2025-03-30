@@ -21,10 +21,10 @@ export const SET_PREFS = gql`
   ${fragments.TeamTeacherFields}
 `;
 
-export const EditTeamPrefs: React.FC<{
+export const EditTeamPrefs: React.FC<React.PropsWithChildren<{
   team: TeamAnonFieldsFragment;
   card?: string;
-}> = ({ team, card }) => {
+}>> = ({ team, card }) => {
   const [show, setShow] = useState(false);
   const [error, setError] = useState("");
   const [prefs, setPrefs] = useState<Record<string, any>>(team.prefs);

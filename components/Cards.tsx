@@ -55,7 +55,7 @@ export type CardsQuery = {
   age?: string;
 };
 
-export const Cards: React.FC<{
+export const Cards: React.FC<React.PropsWithChildren<{
   keywords?: string;
   age?: string;
   selected?: boolean;
@@ -63,7 +63,7 @@ export const Cards: React.FC<{
   teamId?: string;
   teamCards?: string;
   resetFilters: () => void;
-}> = (props) => {
+}>> = (props) => {
   const cardsQuery = useCardsQuery({ variables: props });
   const cards = cardsQuery.data?.cards;
 
@@ -98,11 +98,11 @@ export const Cards: React.FC<{
   );
 };
 
-export const CardItem: React.FC<{
+export const CardItem: React.FC<React.PropsWithChildren<{
   card: CardType;
   teamCards?: string;
   teamId?: string;
-}> = ({ card, teamCards, teamId }) => {
+}>> = ({ card, teamCards, teamId }) => {
   const router = useRouter();
   const cardsList = teamCards ? teamCards.split(" ") : [];
   const id = String(card.id);
@@ -184,10 +184,10 @@ export const CardItem: React.FC<{
   );
 };
 
-export const StudentCardList: React.FC<{
+export const StudentCardList: React.FC<React.PropsWithChildren<{
   teamCards: string;
   teamId: string;
-}> = ({ teamCards, teamId }) => {
+}>> = ({ teamCards, teamId }) => {
   const router = useRouter();
   if (!teamCards) {
     return (
@@ -225,10 +225,10 @@ export const StudentCardList: React.FC<{
   );
 };
 
-export const TeacherCardList: React.FC<{
+export const TeacherCardList: React.FC<React.PropsWithChildren<{
   teamCards: string;
   teamId: string;
-}> = ({ teamCards, teamId }) => {
+}>> = ({ teamCards, teamId }) => {
   if (!teamCards) {
     return <OneRowTable text="Noch keine Inhalte ausgewählt" />;
   }
@@ -269,10 +269,10 @@ interface CardAdminProps {
   commonProps: { doDelete: (id: string) => void };
 }
 
-export const EditCardList: React.FC<{
+export const EditCardList: React.FC<React.PropsWithChildren<{
   teamCards: string;
   teamId: string;
-}> = ({ teamCards, teamId }) => {
+}>> = ({ teamCards, teamId }) => {
   const [cards, setCards] = useState<readonly CardAdminType[]>([]);
   const [doSetCards] = useSetCardsMutation();
 
@@ -378,7 +378,7 @@ interface ICardContext {
 
 export const CardContext = React.createContext({} as ICardContext);
 
-export const Card: React.FC<{ id: string }> = ({ id }) => {
+export const Card: React.FC<React.PropsWithChildren<{ id: string }>> = ({ id }) => {
   const Comp = getCard(id);
   const title = getCardTitle(id);
   // use useState for context, otherwise childs will always be rerendered
@@ -392,9 +392,9 @@ export const Card: React.FC<{ id: string }> = ({ id }) => {
   );
 };
 
-export function getCard(id: string): React.FC {
+export function getCard(id: string): React.FC<React.PropsWithChildren<unknown>> {
   // @ts-ignore TODO, not sure how to beter do the lookup here
-  return cards[id].default as React.FC;
+  return cards[id].default as React.FC<React.PropsWithChildren<unknown>>;
 }
 
 export function getCardMeta(id: string): CardType | undefined {

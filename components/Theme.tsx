@@ -5,7 +5,7 @@ import { ThemeProvider } from "theme-ui";
 import { useRouter } from "next/router";
 import { useTheme } from "util/hooks";
 
-export const Theme: React.FC<{ chilren?: React.ReactNode }> = ({
+export const Theme: React.FC<React.PropsWithChildren<{ chilren?: React.ReactNode }>> = ({
   children,
 }) => {
   const themeName = useTheme();

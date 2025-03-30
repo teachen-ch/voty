@@ -3,7 +3,7 @@ import { Image } from "rebass";
 import gfm from "remark-gfm";
 import remarkImage from "remark-images";
 
-export const MarkdownNew: React.FC<{ children?: string }> = ({ children }) => (
+export const MarkdownNew: React.FC<React.PropsWithChildren<{ children?: string }>> = ({ children }) => (
   <ReactMarkdown
     plugins={[gfm, remarkImage]}
     renderers={{
@@ -28,7 +28,7 @@ export const MarkdownNew: React.FC<{ children?: string }> = ({ children }) => (
 // We should replace this with MarkdownNew, as it uses dangerouslySetInnerHTML...
 // But it is still used by chaty and a few other places
 
-export const Markdown: React.FC = ({ children }) => (
+export const Markdown: React.FC<React.PropsWithChildren<unknown>> = ({ children }) => (
   <div
     dangerouslySetInnerHTML={parseMarkdownInner(String(children))}
     style={{ textAlign: "left" }}
