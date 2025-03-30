@@ -322,11 +322,9 @@ export default function Fundraising(): React.ReactElement {
   );
 }
 
-const Section: React.FC<React.PropsWithChildren<{ title: string; id: string }>> = ({
-  title,
-  id,
-  children,
-}) => {
+const Section: React.FC<
+  React.PropsWithChildren<{ title: string; id: string }>
+> = ({ title, id, children }) => {
   const [show, setShow] = useState(false);
   return (
     <Box

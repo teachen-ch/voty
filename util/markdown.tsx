@@ -12,7 +12,7 @@ export const MarkdownNew: React.FC<
       // eslint-disable-next-line react/display-name
       image: ({ src, alt }: { src: string; alt: string }) => (
         <Image
-          maxHeight="300"
+          maxHeight="300px"
           maxWidth="100%"
           sx={{ border: "10px solid white", borderRadius: 10 }}
           src={src}

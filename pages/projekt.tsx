@@ -175,7 +175,10 @@ export default function Projekt(): React.ReactElement {
   );
 }
 
-export const Tag: React.FC<React.PropsWithChildren<{ bg?: string }>> = ({ children, bg }) => (
+export const Tag: React.FC<React.PropsWithChildren<{ bg?: string }>> = ({
+  children,
+  bg,
+}) => (
   <Text
     fontSize={1}
     bg={bg || "rgb(187, 187, 187)"}
@@ -188,7 +191,9 @@ export const Tag: React.FC<React.PropsWithChildren<{ bg?: string }>> = ({ childr
   </Text>
 );
 
-export const Detail: React.FC<React.PropsWithChildren<unknown>> = ({ children }) => {
+export const Detail: React.FC<React.PropsWithChildren<unknown>> = ({
+  children,
+}) => {
   const [open, setOpen] = useState(false);
   const tr = useTr();
   return (

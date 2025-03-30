@@ -34,7 +34,7 @@ export default function Success({
   return (
     <Flex
       flexDirection="column"
-      minHeight="450"
+      minHeight="450px"
       sx={{ background: 'url("/images/voty_welcome.svg") center no-repeat' }}
     >
       <DE>

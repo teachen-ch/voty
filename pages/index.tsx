@@ -45,7 +45,7 @@ export default function Home(): React.ReactElement {
             alt="voty.ch – Online Demokratie Lehrnmittel"
           />
         </Box>
-        <Box maxWidth="800" width="100%" textAlign="center">
+        <Box maxWidth="800px" width="100%" textAlign="center">
           <Button
             onClick={() => router.push("/user/signup")}
             mt={[2, 2, 3, 4]}
@@ -92,7 +92,7 @@ export default function Home(): React.ReactElement {
         </Box>
         <Flex
           width={["100%", "100%", "80%", "100%"]}
-          maxWidth="1160"
+          maxWidth="1160px"
           flexDirection="column"
           alignItems="center"
           justifyContent="center"

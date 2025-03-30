@@ -78,7 +78,7 @@ export const TopBar: React.FC<React.PropsWithChildren<{ home?: boolean }>> = ({
       <Flex
         alignItems="flex-start"
         justifyContent="space-between"
-        maxWidth="1160"
+        maxWidth="1160px"
         pt="8px"
         flex={1}
       >
