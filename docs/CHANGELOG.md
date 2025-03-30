@@ -1,3 +1,10 @@
+## [1.90.2](https://github.com/teachen-ch/voty/compare/v1.90.1...v1.90.2) (2025-03-30)
+
+
+### Bug Fixes
+
+* user permissions ([4ab10ae](https://github.com/teachen-ch/voty/commit/4ab10aea74d4b1a2a58e8f2ecb8692674a310468))
+
 ## [1.90.1](https://github.com/teachen-ch/voty/compare/v1.90.0...v1.90.1) (2025-03-30)
 
 
