@@ -56,8 +56,8 @@ export const AppPage: React.FC<
           }}
           minWidth="min(100%, 800px)"
           width="100%"
-          maxwidth="800"
-          minheight="450"
+          maxWidth="800"
+          minHeight="450"
         >
           {props.image && <RImage src={props.image} width="100%" mt={-150} />}
           {props.heading && (

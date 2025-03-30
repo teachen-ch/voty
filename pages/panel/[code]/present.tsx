@@ -203,8 +203,8 @@ export const PanelPage: React.FC<
           borderRadius: [0, 0, 5],
           backgroundColor: "panelColor",
         }}
-        maxwidth="800"
-        minheight="450"
+        maxWidth="800"
+        minHeight="450"
         textAlign={["center", "center", "left"]}
       >
         <Heading

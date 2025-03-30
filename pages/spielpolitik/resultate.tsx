@@ -57,7 +57,7 @@ const Pie: React.FC<
       flexDirection="column"
       justifyContent="flex-end"
       alignContent="flex-end"
-      maxwidth="240"
+      maxWidth="240"
       mb={[4, 4, 0]}
     >
       <H3 mt={0} color="#000" textAlign="center">

@@ -178,8 +178,8 @@ export const ZDAPage: React.FC<
         }}
         minWidth="min(100%, 800px)"
         width="100%"
-        maxwidth="800"
-        minheight="450"
+        maxWidth="800"
+        minHeight="450"
       >
         {props.children}
       </Box>

@@ -84,7 +84,7 @@ const Invite: React.FC<React.PropsWithChildren<unknown>> = () => {
   if (teamQuery.error || !team) {
     return (
       <AppPage heading="Fehler">
-        <Box minheight="400">
+        <Box minHeight="400">
           Diese Einladung ist nicht (mehr) gültig. Bitte sprich mit Deiner
           Lehrperson.
           {teamQuery.error?.message && (

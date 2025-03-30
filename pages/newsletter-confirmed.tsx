@@ -7,7 +7,7 @@ export default function NewsletterConfirmed(): ReactElement {
     <Page heading="Newsletter-Anmeldung">
       <Flex
         flexDirection="column"
-        minheight="450"
+        minHeight="450"
         sx={{ background: 'url("/images/voty_welcome.svg") center no-repeat' }}
       >
         <Heading as="h2" id="newsletter">

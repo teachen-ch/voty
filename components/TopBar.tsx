@@ -35,7 +35,7 @@ export const TopBar: React.FC<React.PropsWithChildren<{ home?: boolean }>> = ({
   // Delay showing of the login icons until user is loaded
   useEffect(() => {
     if (user === undefined) {
-      cancel.current = setTimeout(() => setLoaded(true), 500);
+      cancel.current = window.setTimeout(() => setLoaded(true), 500);
     } else {
       setLoaded(true);
     }
@@ -78,7 +78,7 @@ export const TopBar: React.FC<React.PropsWithChildren<{ home?: boolean }>> = ({
       <Flex
         alignItems="flex-start"
         justifyContent="space-between"
-        maxwidth="1160"
+        maxWidth="1160"
         pt="8px"
         flex={1}
       >

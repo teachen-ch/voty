@@ -20,7 +20,7 @@ export const Footer: React.FC<React.PropsWithChildren<unknown>> = () => {
         }}
       >
         <Flex
-          maxwidth="800"
+          maxWidth="800"
           mx="auto"
           justifyContent="space-between"
           flexWrap="wrap"
