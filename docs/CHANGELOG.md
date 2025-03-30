@@ -1,3 +1,10 @@
+## [1.90.1](https://github.com/teachen-ch/voty/compare/v1.90.0...v1.90.1) (2025-03-30)
+
+
+### Bug Fixes
+
+* try excluding node_modules in compose.test ([277d03d](https://github.com/teachen-ch/voty/commit/277d03d64898e808ef55f5d9d7e88eb9f2a26889))
+
 # [1.90.0](https://github.com/teachen-ch/voty/compare/v1.89.0...v1.90.0) (2024-12-16)
 
 
