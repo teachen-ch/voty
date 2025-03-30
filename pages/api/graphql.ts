@@ -22,6 +22,10 @@ const server = new ApolloServer({
       res: res,
     };
   },
+  engine: {
+    reportSchema: false,
+    apiKey: undefined,
+  },
 });
 
 export default server.createHandler({

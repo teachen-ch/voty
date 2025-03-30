@@ -5,7 +5,9 @@ import { ThemeProvider } from "theme-ui";
 import { useRouter } from "next/router";
 import { useTheme } from "util/hooks";
 
-export const Theme: React.FC<{ chilren?: ElementType }> = ({ children }) => {
+export const Theme: React.FC<{ chilren?: React.ReactNode }> = ({
+  children,
+}) => {
   const themeName = useTheme();
   const theme = themeName === "aula" ? aulaTheme : votyTheme;
   const router = useRouter();
