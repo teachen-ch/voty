@@ -73,7 +73,7 @@ jobs:
           path: ${{ github.workspace }}/.next/cache
           key: ${{ runner.os }}-nextjs-${{ hashFiles('**/yarn.lock') }}
       - name: Run Tests
-        run: docker-compose -f docker-compose.test.yml up --build --abort-on-container-exit
+        run: docker compose -f docker-compose.test.yml up --build --abort-on-container-exit
         env:
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
