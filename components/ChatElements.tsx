@@ -161,7 +161,7 @@ const Info: React.FC<React.PropsWithChildren<{ model: TMessage }>> = ({
     color="gray"
     fontSize={1}
     sx={{ borderRadius: 8 }}
-    maxWidth="350"
+    maxWidth="350px"
   >
     <Markdown>{model.message}</Markdown>
   </Box>
@@ -202,7 +202,7 @@ export const ChatyNext: React.FC<
         flex={1}
         color="#000"
         fontWeight="semi"
-        minWidth="300"
+        minWidth="300px"
         my={[2, 2, 0]}
         sx={{ borderRadius: [0, 0, "0px 0px 5px 5px"] }}
       >

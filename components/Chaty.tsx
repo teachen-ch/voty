@@ -84,11 +84,11 @@ export const Chaty: React.FC<
       if (line + 1 < messages.length) {
         if (messages[line + 1].direction !== Direction.Outgoing) {
           setTyping(true);
-          setCancel(setTimeout(() => doChat(line + 1), wait));
+          setCancel(window.setTimeout(() => doChat(line + 1), wait));
         } else {
           setTyping(false);
           setCancel(
-            setTimeout(
+            window.setTimeout(
               () => setInputMessage(messages[line + 1]),
               (1 / speed) * 1000
             )
