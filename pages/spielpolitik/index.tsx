@@ -229,11 +229,11 @@ export const ZDAFAQ: React.FC = () => (
       </Text>
       <Title>Wer steht hinter voty.ch?</Title>
       <Text>
-        voty.ch war ein Projekt des gemeinnützigen Vereins «Teachen!»,
-        unterstützt durch den prototypefund.opendata.ch und die Stiftung
-        Mercator. voty.ch bietet kostenlos Online-Materialien für die politische
-        Bildung und führt Klassenabstimmungen während allen eidgenössischen
-        Abstimmungen durch.
+        voty.ch ist ein Projekt des gemeinnützigen Vereins «voty.ch», initial
+        unterstützt durch den prototypefund.opendata.ch und mercator-schweiz.ch.
+        voty.ch bietet kostenlos Online-Materialien für die politische Bildung
+        und führt Klassenabstimmungen während allen eidgenössischen Abstimmungen
+        durch.
       </Text>
       <Title>Warum muss ich mich mit meiner Email-Adresse registrieren?</Title>
       <Text>
@@ -283,11 +283,11 @@ export const ZDAFAQ: React.FC = () => (
       </Text>
       <Title>Qui est derrière voty.ch ?</Title>
       <Text>
-        voty.ch est un projet de l&apos;association à but non lucratif « Teachen
-        ! », soutenu par prototypefund.opendata.ch et la Fondation Mercator.
-        voty.ch propose du matériel en ligne gratuit pour l&apos;éducation
-        politique et organise des votes en classe lors de toutes les votations
-        fédérales.
+        voty.ch est un projet de l&apos;association à but non lucratif
+        «voty.ch», soutenu initialement par prototypefund.opendata.ch et la
+        Fondation Mercator. voty.ch propose du matériel en ligne gratuit pour
+        l&apos;éducation politique et organise des votes en classe lors de
+        toutes les votations fédérales.
       </Text>
       <Title>
         Pourquoi dois-je m&apos;inscrire avec mon adresse électronique ?
@@ -330,10 +330,10 @@ export const ZDAFAQ: React.FC = () => (
       </Text>
       <Title>Chi c&apos;è dietro voty.ch?</Title>
       <Text>
-        voty.ch è un progetto dell&apos;organizzazione non-profit «Teachen!»
-        sostenuto da prototypefund.opendata.ch e dalla Fondazione Mercator.
-        voty.ch offre materiale online gratuito per l&apos;educazione politica e
-        organizza il voto in classe in tutte le elezioni federali.
+        voty.ch è un progetto dell&apos;organizzazione non-profit «voty.ch»
+        sostenuto initialemente da prototypefund.opendata.ch e dalla Fondazione
+        Mercator. voty.ch offre materiale online gratuito per l&apos;educazione
+        politica e organizza il voto in classe in tutte le elezioni federali.
       </Text>
       <Title>Perché devo registrarmi con il mio indirizzo e-mail?</Title>
       <Text>

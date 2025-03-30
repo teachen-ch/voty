@@ -8,9 +8,9 @@ export const FAQ: React.FC = () => (
       Wer steht hinter voty.ch?
     </Heading>
     <Text>
-      voty.ch war ein Projekt des Vereins «Teachen!», welches durch den
-      prototypefund.opendata.ch unterstützt wurde. Aktuell wird die Plattform
-      durch S. Niederhauser unentgeltlich betreut.
+      voty.ch ist ein Projekt des Non-Profit Vereins «voty.ch», welches initial
+      durch den prototypefund.opendata.ch und die Stiftung mercator-schweiz.ch
+      unterstützt wurde.
     </Text>
     <Heading as="h3">Wie funktioniert die Onlineabstimmung?</Heading>
     <Text>

@@ -155,8 +155,9 @@ export default function Projekt(): React.ReactElement {
         </Text>
         <Heading>Wer steht hinter voty.ch?</Heading>
         <Text>
-          voty.ch war ein Projekt des Vereins «Teachen!», das im Rahmen des
-          prototypefund.opendata.ch entwickelt wurde.
+          voty.ch ist ein Projekt des Vereins «voty.ch», das initial im Rahmen
+          des prototypefund.opendata.ch entwickelt und durch mercator-schweiz.ch
+          finanziert wurde.
         </Text>
         <Team />
         <Heading>Wir haben ihr Interesse geweckt?</Heading>
@@ -168,7 +169,7 @@ export default function Projekt(): React.ReactElement {
           </A>
         </Text>
         <Heading>Kontakt</Heading>
-        <Text>S. Niederhauser, Alpenweg 11, Münsingen, info@teachen.ch</Text>
+        <Text>voty.ch, Effingerstrasse 10, 3011 Bern, hello@voty.ch</Text>
       </Card>
     </AppPage>
   );

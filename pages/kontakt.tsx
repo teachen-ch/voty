@@ -10,16 +10,16 @@ export default function Kontakt(): ReactElement {
   }
   return (
     <Page heading="Kontakt &amp; Impressum">
-      <Text>
-        voty.ch war ein Projekt des Vereins «Teachen!» und wird aktuell betreut
-        durch
-      </Text>
+      <Text>voty.ch ist ein Projekt des Non-Profit Vereins «voty.ch».</Text>
       <pre>
-        S. Niederhauser
+        Verein voty.ch
         <br />
-        Alpenweg 11
+        Effingerstrasse 10
         <br />
-        3110 Münsingen
+        3011 Bern
+        <br />
+        <br />
+        Geschäftsleiter: Stefan Niederhauser
       </pre>
       <Text>
         Möchtet ihr mit uns Kontakt aufnehmen? Wir freuen uns auf Feedback,
