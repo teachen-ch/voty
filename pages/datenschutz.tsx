@@ -12,7 +12,7 @@ export default function Datenschutz(): ReactElement {
   return (
     <Page heading={tr("Privacy.Title")}>
       <Head>
-        <title>voty.ch - {tr("Privacy.Title")}</title>
+        <title>{`voty.ch - ${tr("Privacy.Title")}`}</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Heading as="h2">{tr("Privacy.IntroTitle")}</Heading>

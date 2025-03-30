@@ -39,7 +39,7 @@ export const AppPage: React.FC<{
       <TopBar home />
       <Container pt={props.image ? 130 : [0, 0, 50]} color="white">
         <Head>
-          <title>voty.ch – {props.heading}</title>
+          <title>{`voty.ch - ${props.heading}`}</title>
         </Head>
         <Box
           as="main"
@@ -86,8 +86,8 @@ export const AppPage: React.FC<{
                       <Image
                         src={IconClose}
                         alt="schliessen"
-                        width="40px"
-                        height="40px"
+                        width="40"
+                        height="40"
                       />
                     </Box>
                   </A>
