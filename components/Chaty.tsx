@@ -38,13 +38,15 @@ import {
 const WAIT = 50;
 const MAX_WAIT = 3000;
 
-export const Chaty: React.FC<React.PropsWithChildren<{
-  lines: string;
-  title?: string;
-  speed?: number;
-  slim?: boolean;
-  quickShow?: boolean;
-}>> = ({ lines, title, speed = 1, slim = false, quickShow = true }) => {
+export const Chaty: React.FC<
+  React.PropsWithChildren<{
+    lines: string;
+    title?: string;
+    speed?: number;
+    slim?: boolean;
+    quickShow?: boolean;
+  }>
+> = ({ lines, title, speed = 1, slim = false, quickShow = true }) => {
   const [reset, setReset] = useState(0);
   const messages = useMemo(() => parseMessages(lines), [lines]);
   const [show, setShow] = useState<TMessage[]>([]);
@@ -139,7 +141,7 @@ export const Chaty: React.FC<React.PropsWithChildren<{
         height={["auto", "auto", slim ? 160 : 480]}
       >
         <Box textAlign="center" pt={[130, 130, slim ? 0 : 330]}>
-          <Button mt={4} onClick={() => doChat()} width="250px">
+          <Button mt={4} onClick={() => doChat()} width="250">
             Chat starten
           </Button>
           {quickShow && (

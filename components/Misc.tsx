@@ -4,13 +4,17 @@ import isFunction from "lodash/isFunction";
 import Image from "next/legacy/image";
 import IconX from "../public/images/icon_x.svg";
 
-export const CircleBullet: React.FC<React.PropsWithChildren<TextProps & {
-  value: string | number;
-  bg?: string;
-  color?: string;
-}>> = ({ value, bg = "#fff", color = "gray", ...props }) => (
+export const CircleBullet: React.FC<
+  React.PropsWithChildren<
+    TextProps & {
+      value: string | number;
+      bg?: string;
+      color?: string;
+    }
+  >
+> = ({ value, bg = "#fff", color = "gray", ...props }) => (
   // @ts-ignore
-  (<Text
+  <Text
     fontWeight="bold"
     fontSize={2}
     display="inline-block"
@@ -23,18 +27,22 @@ export const CircleBullet: React.FC<React.PropsWithChildren<TextProps & {
     color={color}
     mr={2}
     p={1}
-    width="35px"
-    height="35px"
+    width="35"
+    height="35"
     textAlign="center"
     {...props}
   >
     {value}
-  </Text>)
+  </Text>
 );
 
-export const Pill: React.FC<React.PropsWithChildren<BoxProps & {
-  deleteLink?: boolean | (() => void);
-}>> = ({
+export const Pill: React.FC<
+  React.PropsWithChildren<
+    BoxProps & {
+      deleteLink?: boolean | (() => void);
+    }
+  >
+> = ({
   deleteLink,
   bg = "primary",
   color = "#fff",

@@ -56,8 +56,8 @@ export default function CardsPublic(): React.ReactElement {
       <Image
         src="/content/voty_yeah.jpg"
         alt="voty.ch Yeah!"
-        width="736px"
-        height="342px"
+        width="736"
+        height="342"
       />
       <H2>Chatbot</H2>
       <p>

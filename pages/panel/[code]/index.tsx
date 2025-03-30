@@ -66,12 +66,14 @@ export default function PanelBallots(): ReactElement {
   );
 }
 
-const BallotRunDetail: React.FC<React.PropsWithChildren<{
-  ballotRun: BallotRunFieldsFragment;
-  refetch: () => void;
-  cookie: Record<string, any>;
-  code: string;
-}>> = ({ ballotRun, refetch, code, cookie }) => {
+const BallotRunDetail: React.FC<
+  React.PropsWithChildren<{
+    ballotRun: BallotRunFieldsFragment;
+    refetch: () => void;
+    cookie: Record<string, any>;
+    code: string;
+  }>
+> = ({ ballotRun, refetch, code, cookie }) => {
   const ballotQuery = useBallotQuery({
     variables: { where: { id: ballotRun.ballotId } },
   });
@@ -80,7 +82,7 @@ const BallotRunDetail: React.FC<React.PropsWithChildren<{
 
   return (
     <Card key={ballotRun.id} py={3}>
-      <Text fontWeight="bold" fontSize="24px" lineHeight="24px">
+      <Text fontWeight="bold" fontSize="24px" lineheight="24">
         {ballot.title}
       </Text>
       <VoteCode
@@ -93,12 +95,14 @@ const BallotRunDetail: React.FC<React.PropsWithChildren<{
   );
 };
 
-const VoteCode: React.FC<React.PropsWithChildren<{
-  ballotRun: BallotRunFieldsFragment;
-  code: string;
-  voted: boolean;
-  refetch: () => void;
-}>> = ({ ballotRun, code, voted, refetch }) => {
+const VoteCode: React.FC<
+  React.PropsWithChildren<{
+    ballotRun: BallotRunFieldsFragment;
+    code: string;
+    voted: boolean;
+    refetch: () => void;
+  }>
+> = ({ ballotRun, code, voted, refetch }) => {
   const [error, setError] = useState("");
   const tr = useTr();
   const [success, setSuccess] = useState(false);
@@ -144,13 +148,13 @@ const VoteCode: React.FC<React.PropsWithChildren<{
               <Flex justifyContent="space-around">
                 <A onClick={() => vote(ballotRun.id, code, 1)}>
                   <Flex flexDirection="column" alignItems="center">
-                    <Image src="/images/icon_yes.svg" height="50px" alt="Ja" />
+                    <Image src="/images/icon_yes.svg" height="50" alt="Ja" />
                     <Text mt={1}>Ja, ich stimme zu</Text>
                   </Flex>
                 </A>
                 <A onClick={() => vote(ballotRun.id, code, 2)}>
                   <Flex flexDirection="column" alignItems="center">
-                    <Image src="/images/icon_no.svg" height="50px" alt="Nein" />
+                    <Image src="/images/icon_no.svg" height="50" alt="Nein" />
                     <Text mt={1}>Nein, ich lehne ab</Text>
                   </Flex>
                 </A>

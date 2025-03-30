@@ -33,11 +33,9 @@ export const Table: React.FC<React.PropsWithChildren<BoxProps>> = ({
   );
 };
 
-export const TR: React.FC<React.PropsWithChildren<FlexProps & { href?: string; noHover?: boolean }>> = ({
-  href,
-  noHover,
-  ...props
-}) => {
+export const TR: React.FC<
+  React.PropsWithChildren<FlexProps & { href?: string; noHover?: boolean }>
+> = ({ href, noHover, ...props }) => {
   const router = useRouter();
   return (
     <Flex
@@ -45,7 +43,7 @@ export const TR: React.FC<React.PropsWithChildren<FlexProps & { href?: string; n
       justifyContent="space-between"
       alignItems="center"
       flexWrap="nowrap"
-      height="40px"
+      height="40"
       onClick={href ? () => router.push(href) : undefined}
       sx={{
         borderBottom: "1px solid",
@@ -65,7 +63,11 @@ export const TR: React.FC<React.PropsWithChildren<FlexProps & { href?: string; n
   );
 };
 
-export const TD: React.FC<React.PropsWithChildren<BoxProps & { smHide?: boolean; flexy?: boolean; fixed?: boolean }>> = ({ flexy, smHide, fixed, children, ...props }) => (
+export const TD: React.FC<
+  React.PropsWithChildren<
+    BoxProps & { smHide?: boolean; flexy?: boolean; fixed?: boolean }
+  >
+> = ({ flexy, smHide, fixed, children, ...props }) => (
   <Box
     {...props}
     px={2}
@@ -87,7 +89,9 @@ export const TD: React.FC<React.PropsWithChildren<BoxProps & { smHide?: boolean;
   </Box>
 );
 
-export const TDImage: React.FC<React.PropsWithChildren<ImageProps & { smHide?: boolean; light?: boolean }>> = ({ smHide, light, ...props }) => {
+export const TDImage: React.FC<
+  React.PropsWithChildren<ImageProps & { smHide?: boolean; light?: boolean }>
+> = ({ smHide, light, ...props }) => {
   const [colorMode] = useColorMode();
   const dark = colorMode === "dark";
   return (
@@ -102,11 +106,9 @@ export const TDImage: React.FC<React.PropsWithChildren<ImageProps & { smHide?: b
   );
 };
 
-export const TDIcon: React.FC<React.PropsWithChildren<BoxProps & { smHide?: boolean }>> = ({
-  smHide,
-  children,
-  ...props
-}) => (
+export const TDIcon: React.FC<
+  React.PropsWithChildren<BoxProps & { smHide?: boolean }>
+> = ({ smHide, children, ...props }) => (
   <Box
     mx={2}
     display={smHide ? ["none", "none", "block"] : "block"}
@@ -121,10 +123,9 @@ export const TDIcon: React.FC<React.PropsWithChildren<BoxProps & { smHide?: bool
   </Box>
 );
 
-export const OneRowTable: React.FC<React.PropsWithChildren<{ text?: string }>> = ({
-  text,
-  children,
-}) => (
+export const OneRowTable: React.FC<
+  React.PropsWithChildren<{ text?: string }>
+> = ({ text, children }) => (
   <Table>
     <TR>
       <TD>{text ? text : children}</TD>

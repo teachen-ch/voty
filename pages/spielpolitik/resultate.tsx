@@ -46,10 +46,9 @@ export const ZDAResultPies: React.FC<React.PropsWithChildren<unknown>> = () => {
   );
 };
 
-const Pie: React.FC<React.PropsWithChildren<{ ballotId: string; title: string }>> = ({
-  ballotId,
-  title,
-}) => {
+const Pie: React.FC<
+  React.PropsWithChildren<{ ballotId: string; title: string }>
+> = ({ ballotId, title }) => {
   const resultsQuery = useGetBallotResultsQuery({ variables: { ballotId } });
   const results = resultsQuery.data?.getBallotResults;
 
@@ -58,7 +57,7 @@ const Pie: React.FC<React.PropsWithChildren<{ ballotId: string; title: string }>
       flexDirection="column"
       justifyContent="flex-end"
       alignContent="flex-end"
-      maxWidth="240px"
+      maxwidth="240"
       mb={[4, 4, 0]}
     >
       <H3 mt={0} color="#000" textAlign="center">

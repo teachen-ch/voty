@@ -115,10 +115,12 @@ export const Logos: React.FC<React.PropsWithChildren<unknown>> = () => {
   );
 };
 
-export const ZDAFullPage: React.FC<React.PropsWithChildren<{
-  heading: string;
-  image?: string;
-}>> = ({ heading, image, children }) => (
+export const ZDAFullPage: React.FC<
+  React.PropsWithChildren<{
+    heading: string;
+    image?: string;
+  }>
+> = ({ heading, image, children }) => (
   <ZDAPage heading={heading} image={image}>
     <LanguageLinks />
     <Heading mt={-3} fontSize={[4, 4, 5]}>
@@ -128,10 +130,12 @@ export const ZDAFullPage: React.FC<React.PropsWithChildren<{
   </ZDAPage>
 );
 
-export const ZDAPage: React.FC<React.PropsWithChildren<{
-  heading?: string;
-  image?: string;
-}>> = (props) => (
+export const ZDAPage: React.FC<
+  React.PropsWithChildren<{
+    heading?: string;
+    image?: string;
+  }>
+> = (props) => (
   <Flex
     bg="#3D4564"
     mt={0}
@@ -174,8 +178,8 @@ export const ZDAPage: React.FC<React.PropsWithChildren<{
         }}
         minWidth="min(100%, 800px)"
         width="100%"
-        maxWidth="800px"
-        minHeight="450px"
+        maxwidth="800"
+        minheight="450"
       >
         {props.children}
       </Box>

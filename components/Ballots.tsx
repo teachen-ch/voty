@@ -196,7 +196,10 @@ type BallotsProps = {
   onClick: (ballot: BallotFieldsFragment) => void;
 };
 
-export const Ballots: React.FC<React.PropsWithChildren<BallotsProps>> = ({ where, onClick }) => {
+export const Ballots: React.FC<React.PropsWithChildren<BallotsProps>> = ({
+  where,
+  onClick,
+}) => {
   const ballotsQuery = useBallotsQuery({ variables: { where } });
 
   if (ballotsQuery.error) return <Err msg={ballotsQuery.error.message} />;
@@ -219,9 +222,11 @@ export const Ballots: React.FC<React.PropsWithChildren<BallotsProps>> = ({ where
   );
 };
 
-export const StudentListBallots: React.FC<React.PropsWithChildren<{
-  teamId: string;
-}>> = ({ teamId }) => {
+export const StudentListBallots: React.FC<
+  React.PropsWithChildren<{
+    teamId: string;
+  }>
+> = ({ teamId }) => {
   const router = useRouter();
   const where = { ballotRuns: { some: { teamId: { equals: teamId } } } };
   const ballotsQuery = useBallotsQuery({ variables: { where } });
@@ -239,7 +244,7 @@ export const StudentListBallots: React.FC<React.PropsWithChildren<{
           onClick={() =>
             void router.push(`/team/${teamId}/ballots/${ballot.id}`)
           }
-          alignItems="center"
+          alignItems={"center"}
           bg="primary"
           mb={3}
           px={3}
@@ -255,13 +260,15 @@ export const StudentListBallots: React.FC<React.PropsWithChildren<{
   );
 };
 
-export const Ballot: React.FC<React.PropsWithChildren<{
-  ballot: BallotFieldsFragment;
-  buttonText?: string;
-  buttonColor?: string;
-  onButton?: (ballot: BallotFieldsFragment) => void;
-  onDetail?: (ballot: BallotFieldsFragment) => void;
-}>> = ({
+export const Ballot: React.FC<
+  React.PropsWithChildren<{
+    ballot: BallotFieldsFragment;
+    buttonText?: string;
+    buttonColor?: string;
+    onButton?: (ballot: BallotFieldsFragment) => void;
+    onDetail?: (ballot: BallotFieldsFragment) => void;
+  }>
+> = ({
   ballot,
   children,
   buttonText,
@@ -277,8 +284,8 @@ export const Ballot: React.FC<React.PropsWithChildren<{
         </A>
         <Text mt={3}>{ballot.description}</Text>
         <Text fontSize={2} my={4}>
-          <Image src={IconCal} alt="Deadline" width="20px" height="20px" />{" "}
-          &nbsp; Zeit: {formatFromTo(ballot.start, ballot.end)}
+          <Image src={IconCal} alt="Deadline" width="20" height="20" /> &nbsp;
+          Zeit: {formatFromTo(ballot.start, ballot.end)}
         </Text>
         {children}
         {buttonText && (
@@ -321,10 +328,12 @@ export const getUserBallotStatus = (
   else return BallotStatus.Started;
 };
 
-export const SelectBallots: React.FC<React.PropsWithChildren<{
-  team: TeamTeacherFieldsFragment;
-  scope: BallotScope;
-}>> = ({ team, scope }) => {
+export const SelectBallots: React.FC<
+  React.PropsWithChildren<{
+    team: TeamTeacherFieldsFragment;
+    scope: BallotScope;
+  }>
+> = ({ team, scope }) => {
   const router = useRouter();
   const [doAddBallotRun, addMutation] = useAddBallotRunMutation();
   const [doRemoveBallotRun, removeMutation] = useRemoveBallotRunMutation();
@@ -425,7 +434,7 @@ export const SelectBallots: React.FC<React.PropsWithChildren<{
                   sx={{ display: ["none", "none", "inline"] }}
                   color="white"
                 >
-                  <Image src={IconDeadline} height="20px" alt="Deadline" />
+                  <Image src={IconDeadline} height="20" alt="Deadline" />
                   &nbsp;
                   {formatDate(ballot.end)}
                 </Box>
@@ -435,8 +444,8 @@ export const SelectBallots: React.FC<React.PropsWithChildren<{
                   <Image
                     src={IconResults}
                     alt="Resultate"
-                    width="20px"
-                    height="20px"
+                    width="20"
+                    height="20"
                     onClick={() => detailBallot(ballot.id)}
                   />
                 </Box>
@@ -448,8 +457,8 @@ export const SelectBallots: React.FC<React.PropsWithChildren<{
                       src={IconCheckOn}
                       alt="ausgewählt"
                       data-cy="on"
-                      width="20px"
-                      height="20px"
+                      width="20"
+                      height="20"
                       className="pointer"
                     />
                   ) : (
@@ -457,8 +466,8 @@ export const SelectBallots: React.FC<React.PropsWithChildren<{
                       src={IconCheckOff}
                       alt="abgewählt"
                       data-cy="off"
-                      width="20px"
-                      height="20px"
+                      width="20"
+                      height="20"
                       className="pointer"
                     />
                   )}
@@ -472,15 +481,17 @@ export const SelectBallots: React.FC<React.PropsWithChildren<{
   );
 };
 
-export const BallotDetails: React.FC<React.PropsWithChildren<{
-  ballot: NonNullable<BallotQuery["ballot"]>;
-}>> = ({ ballot, children }) => (
+export const BallotDetails: React.FC<
+  React.PropsWithChildren<{
+    ballot: NonNullable<BallotQuery["ballot"]>;
+  }>
+> = ({ ballot, children }) => (
   <Card>
     <Text>
       <Text fontWeight="bold">{ballot.title}</Text>
       <Text mt={3}>{ballot.description}</Text>
       <Text fontSize={2} my={4}>
-        <img src="/images/icon_cal.svg" width="20px" alt="Zeit" /> &nbsp; Zeit:{" "}
+        <img src="/images/icon_cal.svg" width="20" alt="Zeit" /> &nbsp; Zeit:{" "}
         {formatFromTo(ballot.start, ballot.end)}
       </Text>
       {children}
@@ -494,18 +505,22 @@ export const BallotDetails: React.FC<React.PropsWithChildren<{
   </Card>
 );
 
-export const PanelCode: React.FC<React.PropsWithChildren<{
-  team: TeamTeacherFieldsFragment;
-  hasRuns: boolean;
-}>> = ({ team, hasRuns }) => {
+export const PanelCode: React.FC<
+  React.PropsWithChildren<{
+    team: TeamTeacherFieldsFragment;
+    hasRuns: boolean;
+  }>
+> = ({ team, hasRuns }) => {
   if (!team?.code || !hasRuns) return null;
   return (
-    <Text id="livepanel">Seite für Live-Abstimmungen:{" "}
+    <Text id="livepanel">
+      Seite für Live-Abstimmungen:{" "}
       <Link
         href="/panel/[code]/present"
         as={`/panel/${team.code}/present`}
         passHref
-        legacyBehavior>
+        legacyBehavior
+      >
         <Button>Code: {team.code}</Button>
       </Link>
     </Text>

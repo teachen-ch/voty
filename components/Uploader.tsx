@@ -20,7 +20,9 @@ import { Info } from "./Info";
 import { Input, Label } from "@rebass/forms";
 import { CardContext } from "./Cards";
 
-export const UploadWork: React.FC<React.PropsWithChildren<BoxProps & { prompt: string }>> = (props) => {
+export const UploadWork: React.FC<
+  React.PropsWithChildren<BoxProps & { prompt: string }>
+> = (props) => {
   const { card } = useContext(CardContext);
   const [title, setTitle] = useState("");
   const [users, setUsers] = useState<UserWhereUniqueInput[]>();
@@ -95,15 +97,17 @@ const UploadItem: WorkItem = ({ work }) => {
   );
 };
 
-export const UploadArea: React.FC<React.PropsWithChildren<{
-  prompt: string;
-  width?: string;
-  card?: string;
-  discussion?: string;
-  resultCallback?: (
-    attachments: Record<string, AttachmentFieldsFragment>
-  ) => void;
-}>> = ({ prompt, width = "100%", card, discussion, resultCallback }) => {
+export const UploadArea: React.FC<
+  React.PropsWithChildren<{
+    prompt: string;
+    width?: string;
+    card?: string;
+    discussion?: string;
+    resultCallback?: (
+      attachments: Record<string, AttachmentFieldsFragment>
+    ) => void;
+  }>
+> = ({ prompt, width = "100%", card, discussion, resultCallback }) => {
   const [drag, setDrag] = useState(false);
   const [uploading, setUploading] = useState(false);
   const [files, setFiles] = useState<Record<string, File>>();
@@ -200,10 +204,12 @@ export const UploadArea: React.FC<React.PropsWithChildren<{
   );
 };
 
-const Preview: React.FC<React.PropsWithChildren<{
-  files: Record<string, File>;
-  doDelete: (id: string) => void;
-}>> = ({ files, doDelete }) => {
+const Preview: React.FC<
+  React.PropsWithChildren<{
+    files: Record<string, File>;
+    doDelete: (id: string) => void;
+  }>
+> = ({ files, doDelete }) => {
   return (
     <Flex>
       {Object.keys(files).map((id) => (
@@ -213,16 +219,18 @@ const Preview: React.FC<React.PropsWithChildren<{
   );
 };
 
-const PreviewFile: React.FC<React.PropsWithChildren<{
-  id: string;
-  file: File;
-  doDelete: (id: string) => void;
-}>> = ({ id, file, doDelete }) => {
+const PreviewFile: React.FC<
+  React.PropsWithChildren<{
+    id: string;
+    file: File;
+    doDelete: (id: string) => void;
+  }>
+> = ({ id, file, doDelete }) => {
   return (
     <Flex
       bg="#fff"
       color="#000"
-      height="50px"
+      height="50"
       alignItems="center"
       px={3}
       mx={3}
@@ -267,7 +275,9 @@ export const GET_ATTACHMENTS = gql`
   ${AttachmentFields}
 `;
 
-export const Uploaded: React.FC<React.PropsWithChildren<{ card: string }>> = ({ card }) => {
+export const Uploaded: React.FC<React.PropsWithChildren<{ card: string }>> = ({
+  card,
+}) => {
   const attachmentsQuery = useAttachmentsQuery({
     variables: { where: { card: { equals: card } } },
   });
@@ -288,11 +298,13 @@ export const Uploaded: React.FC<React.PropsWithChildren<{ card: string }>> = ({ 
   );
 };
 
-export const Attachment: React.FC<React.PropsWithChildren<{
-  attachment: AttachmentFieldsFragment;
-  hideUser?: boolean;
-  refetch?: () => void;
-}>> = ({ attachment, refetch, hideUser }) => {
+export const Attachment: React.FC<
+  React.PropsWithChildren<{
+    attachment: AttachmentFieldsFragment;
+    hideUser?: boolean;
+    refetch?: () => void;
+  }>
+> = ({ attachment, refetch, hideUser }) => {
   const user = useUser();
   const tr = useTr();
   function canDelete() {

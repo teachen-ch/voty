@@ -45,13 +45,13 @@ export default function Home(): React.ReactElement {
             alt="voty.ch – Online Demokratie Lehrnmittel"
           />
         </Box>
-        <Box maxWidth="800px" width="100%" textAlign="center">
+        <Box maxwidth="800" width="100%" textAlign="center">
           <Button
             onClick={() => router.push("/user/signup")}
             mt={[2, 2, 3, 4]}
             px={4}
             sx={{ borderRadius: "25px" }}
-            width="600px"
+            width="600"
             maxWidth="80%"
           >
             Jetzt Klasse anmelden!
@@ -92,7 +92,7 @@ export default function Home(): React.ReactElement {
         </Box>
         <Flex
           width={["100%", "100%", "80%", "100%"]}
-          maxWidth="1160px"
+          maxwidth="1160"
           flexDirection="column"
           alignItems="center"
           justifyContent="center"
@@ -203,25 +203,25 @@ export default function Home(): React.ReactElement {
           p={0}
           width={["280px", "280px", "414px"]}
         >
-          <Flex bg="#C5CFD6" height="50px" pt={15}>
+          <Flex bg="#C5CFD6" height="50" pt={15}>
             <Box
               bg="#98AAB2"
-              width="20px"
-              height="20px"
+              width="20"
+              height="20"
               sx={{ borderRadius: "10px" }}
               ml={15}
             />
             <Box
               bg="#98AAB2"
-              width="20px"
-              height="20px"
+              width="20"
+              height="20"
               sx={{ borderRadius: "10px" }}
               ml={15}
             />
             <Box
               bg="#98AAB2"
-              width="20px"
-              height="20px"
+              width="20"
+              height="20"
               sx={{ borderRadius: "10px" }}
               ml={15}
             />
@@ -245,7 +245,10 @@ export default function Home(): React.ReactElement {
   );
 }
 
-const Teaser: React.FC<React.PropsWithChildren<{ reverse?: boolean }>> = ({ reverse, children }) => (
+const Teaser: React.FC<React.PropsWithChildren<{ reverse?: boolean }>> = ({
+  reverse,
+  children,
+}) => (
   <Flex
     mt={[4, 4, 4, 6]}
     mx="auto"
@@ -262,7 +265,10 @@ const Teaser: React.FC<React.PropsWithChildren<{ reverse?: boolean }>> = ({ reve
   </Flex>
 );
 
-const TeaserText: React.FC<React.PropsWithChildren<{ title: string }>> = ({ title, children }) => (
+const TeaserText: React.FC<React.PropsWithChildren<{ title: string }>> = ({
+  title,
+  children,
+}) => (
   <Box width={["100%", "100%", "100%", "40%"]} px={[0, 0, 3]}>
     <Text fontSize={[2, 2, 3, 3]} lineHeight="1.45em">
       <Text color="primary" fontWeight="semi" fontSize={[2, 2, 4, 4]}>
@@ -273,12 +279,14 @@ const TeaserText: React.FC<React.PropsWithChildren<{ title: string }>> = ({ titl
   </Box>
 );
 
-const TeaserImage: React.FC<React.PropsWithChildren<{
-  src: string;
-  width: number;
-  height: number;
-  top?: number;
-}>> = ({ src, width, height, top }) => (
+const TeaserImage: React.FC<
+  React.PropsWithChildren<{
+    src: string;
+    width: number;
+    height: number;
+    top?: number;
+  }>
+> = ({ src, width, height, top }) => (
   <Box width={["90%", "90%", "70%", "50%"]} mx="auto">
     <Box
       sx={{ position: "relative", marginTop: [0, 0, 0, top] }}
@@ -296,7 +304,9 @@ const TeaserImage: React.FC<React.PropsWithChildren<{
   </Box>
 );
 
-const LearnMore: React.FC<React.PropsWithChildren<{ href: string }>> = ({ href }) => (
+const LearnMore: React.FC<React.PropsWithChildren<{ href: string }>> = ({
+  href,
+}) => (
   <Link href={href} passHref legacyBehavior>
     <Text fontWeight="semi" color="primary" variant="link">
       Mehr erfahren »»

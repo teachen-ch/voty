@@ -31,18 +31,18 @@ export default function Abstimmung(): ReactElement {
       >
         <Flex my={2} color="white">
           <TDIcon mt={3} mr={3}>
-            <Image src={IconCheckWhite} height="25px" alt="" />
+            <Image src={IconCheckWhite} height="25" alt="" />
           </TDIcon>
-          <Text maxWidth="700px">
+          <Text maxwidth="700">
             Ja, ich unterrichte politische Bildung in meiner Klasse und nehme
             auch Bezug auf aktuelle Themen und Abstimmungen
           </Text>
         </Flex>
         <Flex my={2}>
           <TDIcon mt={3} mr={3}>
-            <Image src={IconCheckWhite} height="25px" alt="" />
+            <Image src={IconCheckWhite} height="25" alt="" />
           </TDIcon>
-          <Text maxWidth="700px">
+          <Text maxwidth="700">
             Ich nehme mir Zeit, um die Vorlagen mit den Schüler*innen zu
             diskutieren (z. B. mit Material von{" "}
             <Link
@@ -57,9 +57,9 @@ export default function Abstimmung(): ReactElement {
         </Flex>
         <Flex my={2}>
           <TDIcon mt={3} mr={3}>
-            <Image src={IconCheckWhite} height="25px" alt="" />
+            <Image src={IconCheckWhite} height="25" alt="" />
           </TDIcon>
-          <Text maxWidth="700px">
+          <Text maxwidth="700">
             Ich führe die Abstimmung mit meiner Klasse online durch und
             bespreche im Nachgang das Resultat
           </Text>
@@ -116,17 +116,21 @@ export default function Abstimmung(): ReactElement {
   );
 }
 
-export const Explainer: React.FC<React.PropsWithChildren<{ title: string }>> = ({ title, children }) => (
+export const Explainer: React.FC<
+  React.PropsWithChildren<{ title: string }>
+> = ({ title, children }) => (
   <ReadMore title={title}>
     <Card fontSize={[1, 2, 3]}>{children}</Card>
   </ReadMore>
 );
 
-export const Step: React.FC<React.PropsWithChildren<{
-  n: string | number;
-  mb?: number;
-  bg?: string;
-}>> = ({ n, mb = 4, children, bg = "gray" }) => (
+export const Step: React.FC<
+  React.PropsWithChildren<{
+    n: string | number;
+    mb?: number;
+    bg?: string;
+  }>
+> = ({ n, mb = 4, children, bg = "gray" }) => (
   <Flex mb={mb}>
     <CircleBullet value={n} bg={bg} color="#fff" />
     <Box ml={2} pt="3px">
@@ -153,11 +157,10 @@ export const Stats: React.FC<React.PropsWithChildren<unknown>> = () => (
   </Box>
 );
 
-const ClassBar: React.FC<React.PropsWithChildren<{ classes: number; total: number }>> = ({
-  classes,
-  total,
-}) => (
-  <Flex height="30px" width="100%">
+const ClassBar: React.FC<
+  React.PropsWithChildren<{ classes: number; total: number }>
+> = ({ classes, total }) => (
+  <Flex height="30" width="100%">
     <Box
       width={classes / total}
       sx={{
@@ -186,12 +189,14 @@ const ClassBar: React.FC<React.PropsWithChildren<{ classes: number; total: numbe
   </Flex>
 );
 
-const CantonsBar: React.FC<React.PropsWithChildren<{
-  cantons: string;
-  diversity: number;
-}>> = ({ cantons, diversity }) => (
+const CantonsBar: React.FC<
+  React.PropsWithChildren<{
+    cantons: string;
+    diversity: number;
+  }>
+> = ({ cantons, diversity }) => (
   <Box
-    height="30px"
+    height="30"
     color="gray"
     pl={3}
     sx={{
@@ -204,9 +209,11 @@ const CantonsBar: React.FC<React.PropsWithChildren<{
   </Box>
 );
 
-const TypeBar: React.FC<React.PropsWithChildren<{ types: Record<string, number> }>> = ({ types }) => (
+const TypeBar: React.FC<
+  React.PropsWithChildren<{ types: Record<string, number> }>
+> = ({ types }) => (
   <Box
-    height="30px"
+    height="30"
     pl={3}
     bg="white"
     fontSize={1}

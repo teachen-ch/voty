@@ -24,7 +24,9 @@ export default function StudentTest(): React.ReactElement {
   return <ShowBallots user={user} />;
 }
 
-const ShowBallots: React.FC<React.PropsWithChildren<{ user: SessionUser }>> = ({ user }) => {
+const ShowBallots: React.FC<React.PropsWithChildren<{ user: SessionUser }>> = ({
+  user,
+}) => {
   const ballotRunsQuery = useGetBallotRunsQuery({
     variables: { teamId: String(user?.team?.id) },
     skip: !user?.team,
@@ -57,9 +59,9 @@ const ShowBallots: React.FC<React.PropsWithChildren<{ user: SessionUser }>> = ({
   );
 };
 
-const BallotRunDetail: React.FC<React.PropsWithChildren<{ run: BallotRunFieldsFragment }>> = ({
-  run,
-}) => {
+const BallotRunDetail: React.FC<
+  React.PropsWithChildren<{ run: BallotRunFieldsFragment }>
+> = ({ run }) => {
   const ballotQuery = useBallotQuery({
     variables: { where: { id: run?.id } },
   });
@@ -93,16 +95,18 @@ export const AllBallots: React.FC<React.PropsWithChildren<unknown>> = () => {
   );
 };
 
-export const Ballot: React.FC<React.PropsWithChildren<{
-  ballot: BallotFieldsFragment;
-}>> = ({ ballot }) => {
+export const Ballot: React.FC<
+  React.PropsWithChildren<{
+    ballot: BallotFieldsFragment;
+  }>
+> = ({ ballot }) => {
   const [voty, setVoty] = useState(false);
   const [success, setSuccess] = useState(false);
   const user = useUser();
   return (
     <div className="ballot">
       <Card>
-        <Text fontWeight="bold" mt={2} fontSize="24px" lineHeight="24px">
+        <Text fontWeight="bold" mt={2} fontSize="24px" lineheight="24">
           {ballot.title}
         </Text>
         {success ? (

@@ -14,11 +14,13 @@ import { Info } from "./Info";
 import { useTr } from "util/translate";
 import Image from "next/legacy/image";
 
-export const Page: React.FC<React.PropsWithChildren<{
-  children?: React.ReactNode;
-  heading?: string;
-  bgImages?: string[];
-}>> = ({ heading, bgImages, children }) => {
+export const Page: React.FC<
+  React.PropsWithChildren<{
+    children?: React.ReactNode;
+    heading?: string;
+    bgImages?: string[];
+  }>
+> = ({ heading, bgImages, children }) => {
   return (
     <AppPage heading={heading} bgImages={bgImages}>
       {children}
@@ -26,12 +28,14 @@ export const Page: React.FC<React.PropsWithChildren<{
   );
 };
 
-export const AppPage: React.FC<React.PropsWithChildren<{
-  image?: string;
-  bgImages?: string[];
-  heading?: string;
-  onClose?: () => void;
-}>> = (props) => {
+export const AppPage: React.FC<
+  React.PropsWithChildren<{
+    image?: string;
+    bgImages?: string[];
+    heading?: string;
+    onClose?: () => void;
+  }>
+> = (props) => {
   const bgImages = props.bgImages || [];
   return (
     <>
@@ -52,8 +56,8 @@ export const AppPage: React.FC<React.PropsWithChildren<{
           }}
           minWidth="min(100%, 800px)"
           width="100%"
-          maxWidth="800px"
-          minHeight="450px"
+          maxwidth="800"
+          minheight="450"
         >
           {props.image && <RImage src={props.image} width="100%" mt={-150} />}
           {props.heading && (
@@ -103,13 +107,15 @@ export const AppPage: React.FC<React.PropsWithChildren<{
   );
 };
 
-export const LoggedInPage: React.FC<React.PropsWithChildren<{
-  role?: Role;
-  children?: ReactNode;
-  heading?: string;
-  image?: string;
-  bgImages?: string[];
-}>> = ({ role, children, heading, bgImages, image }) => {
+export const LoggedInPage: React.FC<
+  React.PropsWithChildren<{
+    role?: Role;
+    children?: ReactNode;
+    heading?: string;
+    image?: string;
+    bgImages?: string[];
+  }>
+> = ({ role, children, heading, bgImages, image }) => {
   const user = useUser();
   const allowed = role
     ? user?.role === role || user?.role === Role.Admin
@@ -145,7 +151,9 @@ function getRoleName(role: Role): string {
   return translations[String(role)] || String(role);
 }
 
-export const Container: React.FC<React.PropsWithChildren<FlexProps>> = (props) => {
+export const Container: React.FC<React.PropsWithChildren<FlexProps>> = (
+  props
+) => {
   return (
     <>
       <Flex mt={70} px={[0, 0, 3, 4]} justifyContent="center" {...props}>
@@ -166,7 +174,10 @@ export const Loading: React.FC<React.PropsWithChildren<unknown>> = () => (
   <Spinner color="white" size={20} mr={3} />
 );
 
-export const Err: React.FC<React.PropsWithChildren<{ msg?: string }>> = ({ msg, children }) => {
+export const Err: React.FC<React.PropsWithChildren<{ msg?: string }>> = ({
+  msg,
+  children,
+}) => {
   const tr = useTr();
   return msg || children ? (
     <Info type="important">
@@ -176,22 +187,26 @@ export const Err: React.FC<React.PropsWithChildren<{ msg?: string }>> = ({ msg, 
   ) : null;
 };
 
-export const ErrorPage: React.FC<React.PropsWithChildren<unknown>> = (props) => (
+export const ErrorPage: React.FC<React.PropsWithChildren<unknown>> = (
+  props
+) => (
   <Page heading="Fehler">
     <Heading as="h2">Oh je, es ist ein Fehler aufgetreten</Heading>
     <Text>{props.children}</Text>
   </Page>
 );
 
-export const LoadingPage: React.FC<React.PropsWithChildren<unknown>> = (props) => (
+export const LoadingPage: React.FC<React.PropsWithChildren<unknown>> = (
+  props
+) => (
   <Page heading="Seite wird geladen...">
     <Text>{props.children}</Text>
   </Page>
 );
 
-export const Background: React.FC<React.PropsWithChildren<{ bgImages: string[]; start?: boolean }>> = (
-  props
-) => {
+export const Background: React.FC<
+  React.PropsWithChildren<{ bgImages: string[]; start?: boolean }>
+> = (props) => {
   // const gradient = "linear-gradient(180deg, rgb(2,11,20) 0%, rgb(31,47,65))";
   // `url("/images/${img}"), ${gradient}`);
   const bgImagesUrl = props.bgImages.map((img) => `url("/images/${img}")`);
@@ -258,10 +273,9 @@ export const H4: React.FC<React.PropsWithChildren<HeadingProps>> = (props) => (
   </Heading>
 );
 
-export const ShowFor: React.FC<React.PropsWithChildren<{ role: Role | string }>> = ({
-  role,
-  children,
-}) => {
+export const ShowFor: React.FC<
+  React.PropsWithChildren<{ role: Role | string }>
+> = ({ role, children }) => {
   const user = useUser();
   if (user?.role == role || user?.role == Role.Admin) {
     return <>{children}</>;

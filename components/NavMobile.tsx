@@ -18,10 +18,9 @@ import IconFaq from "../public/images/icon_faq.svg";
 
 import { Role } from "graphql/types";
 
-export const NavMobile: React.FC<React.PropsWithChildren<{ user: SessionUser; color: string }>> = ({
-  user,
-  color,
-}) => {
+export const NavMobile: React.FC<
+  React.PropsWithChildren<{ user: SessionUser; color: string }>
+> = ({ user, color }) => {
   const [open, setOpen] = useState(false);
   const isTeacher = user?.role === Role.Teacher;
   return (
@@ -58,7 +57,7 @@ export const NavMobile: React.FC<React.PropsWithChildren<{ user: SessionUser; co
                 </Box>
               </A>
             </Text>
-            <Text pl={4} lineHeight="55px" fontWeight="semi">
+            <Text pl={4} lineheight="55" fontWeight="semi">
               <A href="/" variant="link">
                 <MIcon src={IconHome} />
                 Startseite

@@ -10,10 +10,9 @@ import Image from "next/legacy/image";
 import IconWatch from "../public/images/icon_watch.svg";
 import upperFirst from "lodash/upperFirst";
 
-export const LearningPath: React.FC<React.PropsWithChildren<{ path: string; anon?: boolean }>> = ({
-  path,
-  anon,
-}) => {
+export const LearningPath: React.FC<
+  React.PropsWithChildren<{ path: string; anon?: boolean }>
+> = ({ path, anon }) => {
   const team = useTeam();
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState("");
@@ -64,10 +63,9 @@ export const LearningPath: React.FC<React.PropsWithChildren<{ path: string; anon
   );
 };
 
-const CardDetail: React.FC<React.PropsWithChildren<{ id: string; teamLink: string }>> = ({
-  id,
-  teamLink,
-}) => {
+const CardDetail: React.FC<
+  React.PropsWithChildren<{ id: string; teamLink: string }>
+> = ({ id, teamLink }) => {
   const [details, setDetails] = useState(true);
   const card = getCardMeta(id);
   if (!card) return <Err msg={`Inhalt «${id}» wurde nicht gefunden`} />;
@@ -92,7 +90,7 @@ const CardDetail: React.FC<React.PropsWithChildren<{ id: string; teamLink: strin
       <TDIcon mr={0}>
         <Image src={IconWatch} alt="" />
       </TDIcon>
-      <TD width="130px" fixed smHide>
+      <TD width="130" fixed smHide>
         {card?.duration}
       </TD>
       <TDImage src={getCardTypeIcon(card?.type)} />

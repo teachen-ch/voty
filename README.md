@@ -2,7 +2,7 @@
 
 [![voty](https://img.shields.io/endpoint?url=https://dashboard.cypress.io/badge/simple/19hfnd/master&style=flat)](https://dashboard.cypress.io/projects/19hfnd/runs)
 
-<center><a href="https://voty.ch"><img src="https://voty.ch/images/voty_newsletter_header.png" width="500px"/></a></center>
+<center><a href="https://voty.ch"><img src="https://voty.ch/images/voty_newsletter_header.png" width="500"/></a></center>
 
 ### 👉 https://voty.ch/
 

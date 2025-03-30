@@ -7,8 +7,10 @@ import IconBack from "../public/images/icon_back_white.svg";
 import { getCardTitle } from "./Cards";
 import { ChatyContext, Direction, TMessage } from "util/chaty";
 
-export const ChatContainer: React.FC<React.PropsWithChildren<unknown>> = ({ children }) => (
-  <Box height="480px">
+export const ChatContainer: React.FC<React.PropsWithChildren<unknown>> = ({
+  children,
+}) => (
+  <Box height="480">
     <Flex
       flexDirection="column"
       width={["100%", "100%", "calc(100% - 64px)"]}
@@ -29,10 +31,9 @@ export const ChatContainer: React.FC<React.PropsWithChildren<unknown>> = ({ chil
   </Box>
 );
 
-export const ChatHeader: React.FC<React.PropsWithChildren<{ title?: string; onClick: () => void }>> = ({
-  title,
-  onClick,
-}) => (
+export const ChatHeader: React.FC<
+  React.PropsWithChildren<{ title?: string; onClick: () => void }>
+> = ({ title, onClick }) => (
   <Flex
     display={["inherit", "inherit", "none"]}
     bg="#494A4B"
@@ -41,7 +42,7 @@ export const ChatHeader: React.FC<React.PropsWithChildren<{ title?: string; onCl
     alignItems="center"
     justifyContent="space-between"
     sx={{ borderBottom: "2px solid #ccc" }}
-    height="70px"
+    height="70"
   >
     {onClick && (
       <Box display="inline-block" mr={2}>
@@ -77,10 +78,9 @@ export const MessageList = React.forwardRef<
   );
 });
 
-export const Message: React.FC<React.PropsWithChildren<{ direction?: Direction }>> = ({
-  direction,
-  children,
-}) => {
+export const Message: React.FC<
+  React.PropsWithChildren<{ direction?: Direction }>
+> = ({ direction, children }) => {
   const out = direction === Direction.Outgoing;
   const bg = out ? "#206DBB" : "#E9E9EB";
   const color = out ? "#fff" : "#000";
@@ -101,7 +101,9 @@ export const Message: React.FC<React.PropsWithChildren<{ direction?: Direction }
   );
 };
 
-export const InputBox: React.FC<React.PropsWithChildren<unknown>> = ({ children }) => (
+export const InputBox: React.FC<React.PropsWithChildren<unknown>> = ({
+  children,
+}) => (
   <Flex
     flexDirection="row"
     flexWrap="wrap"
@@ -115,9 +117,9 @@ export const InputBox: React.FC<React.PropsWithChildren<unknown>> = ({ children 
   </Flex>
 );
 
-export const MessageOrInfo: React.FC<React.PropsWithChildren<{ model: TMessage; is: string }>> = ({
-  model,
-}) =>
+export const MessageOrInfo: React.FC<
+  React.PropsWithChildren<{ model: TMessage; is: string }>
+> = ({ model }) =>
   model.direction === Direction.Info ? (
     <GlossaryReplace bg="#444" color="#fff">
       <Info model={model} />
@@ -126,7 +128,9 @@ export const MessageOrInfo: React.FC<React.PropsWithChildren<{ model: TMessage; 
     <ParsedMessage message={model} />
   );
 
-const ParsedMessage: React.FC<React.PropsWithChildren<{ message: TMessage }>> = ({ message }) => {
+const ParsedMessage: React.FC<
+  React.PropsWithChildren<{ message: TMessage }>
+> = ({ message }) => {
   if (message.selected) {
     message.message = message.selected;
   }
@@ -145,7 +149,9 @@ const ParsedMessage: React.FC<React.PropsWithChildren<{ message: TMessage }>> = 
   );
 };
 
-const Info: React.FC<React.PropsWithChildren<{ model: TMessage }>> = ({ model }) => (
+const Info: React.FC<React.PropsWithChildren<{ model: TMessage }>> = ({
+  model,
+}) => (
   <Box
     mb={3}
     mx={4}
@@ -155,15 +161,17 @@ const Info: React.FC<React.PropsWithChildren<{ model: TMessage }>> = ({ model })
     color="gray"
     fontSize={1}
     sx={{ borderRadius: 8 }}
-    maxWidth="350px"
+    maxwidth="350"
   >
     <Markdown>{model.message}</Markdown>
   </Box>
 );
 
-export const ChatyMenu: React.FC<React.PropsWithChildren<{
-  options: string[];
-}>> = ({ options }) => {
+export const ChatyMenu: React.FC<
+  React.PropsWithChildren<{
+    options: string[];
+  }>
+> = ({ options }) => {
   const { inputMessage, selectOption } = useContext(ChatyContext);
   return (
     <InputBox>
@@ -181,9 +189,11 @@ export const ChatyMenu: React.FC<React.PropsWithChildren<{
   );
 };
 
-export const ChatyNext: React.FC<React.PropsWithChildren<{
-  nextChaty: (topic: string) => void;
-}>> = ({ nextChaty }) => {
+export const ChatyNext: React.FC<
+  React.PropsWithChildren<{
+    nextChaty: (topic: string) => void;
+  }>
+> = ({ nextChaty }) => {
   const { inputMessage, selectOption } = useContext(ChatyContext);
   return (
     <InputBox>
@@ -192,7 +202,7 @@ export const ChatyNext: React.FC<React.PropsWithChildren<{
         flex={1}
         color="#000"
         fontWeight="semi"
-        minWidth="300px"
+        minwidth="300"
         my={[2, 2, 0]}
         sx={{ borderRadius: [0, 0, "0px 0px 5px 5px"] }}
       >
@@ -201,13 +211,13 @@ export const ChatyNext: React.FC<React.PropsWithChildren<{
       <Button
         ml={2}
         mr={3}
-        width="150px"
+        width="150"
         onClick={() => selectOption(inputMessage!, "Nein")}
       >
         Nein
       </Button>
       <Button
-        width="150px"
+        width="150"
         onClick={() => nextChaty(String(inputMessage?.message))}
       >
         Ja
@@ -216,7 +226,9 @@ export const ChatyNext: React.FC<React.PropsWithChildren<{
   );
 };
 
-export const TypingIndicator: React.FC<React.PropsWithChildren<unknown>> = () => (
+export const TypingIndicator: React.FC<
+  React.PropsWithChildren<unknown>
+> = () => (
   <Box mt={-25} ml={1} fontSize={4}>
     <GlowDot delay={0} />
     <GlowDot delay={0.2} />
@@ -224,7 +236,9 @@ export const TypingIndicator: React.FC<React.PropsWithChildren<unknown>> = () =>
   </Box>
 );
 
-const GlowDot: React.FC<React.PropsWithChildren<{ delay: number }>> = ({ delay }) => (
+const GlowDot: React.FC<React.PropsWithChildren<{ delay: number }>> = ({
+  delay,
+}) => (
   <Text
     color="primary"
     variant="inline"

@@ -55,15 +55,17 @@ export type CardsQuery = {
   age?: string;
 };
 
-export const Cards: React.FC<React.PropsWithChildren<{
-  keywords?: string;
-  age?: string;
-  selected?: boolean;
-  type?: string;
-  teamId?: string;
-  teamCards?: string;
-  resetFilters: () => void;
-}>> = (props) => {
+export const Cards: React.FC<
+  React.PropsWithChildren<{
+    keywords?: string;
+    age?: string;
+    selected?: boolean;
+    type?: string;
+    teamId?: string;
+    teamCards?: string;
+    resetFilters: () => void;
+  }>
+> = (props) => {
   const cardsQuery = useCardsQuery({ variables: props });
   const cards = cardsQuery.data?.cards;
 
@@ -98,11 +100,13 @@ export const Cards: React.FC<React.PropsWithChildren<{
   );
 };
 
-export const CardItem: React.FC<React.PropsWithChildren<{
-  card: CardType;
-  teamCards?: string;
-  teamId?: string;
-}>> = ({ card, teamCards, teamId }) => {
+export const CardItem: React.FC<
+  React.PropsWithChildren<{
+    card: CardType;
+    teamCards?: string;
+    teamId?: string;
+  }>
+> = ({ card, teamCards, teamId }) => {
   const router = useRouter();
   const cardsList = teamCards ? teamCards.split(" ") : [];
   const id = String(card.id);
@@ -184,10 +188,12 @@ export const CardItem: React.FC<React.PropsWithChildren<{
   );
 };
 
-export const StudentCardList: React.FC<React.PropsWithChildren<{
-  teamCards: string;
-  teamId: string;
-}>> = ({ teamCards, teamId }) => {
+export const StudentCardList: React.FC<
+  React.PropsWithChildren<{
+    teamCards: string;
+    teamId: string;
+  }>
+> = ({ teamCards, teamId }) => {
   const router = useRouter();
   if (!teamCards) {
     return (
@@ -225,10 +231,12 @@ export const StudentCardList: React.FC<React.PropsWithChildren<{
   );
 };
 
-export const TeacherCardList: React.FC<React.PropsWithChildren<{
-  teamCards: string;
-  teamId: string;
-}>> = ({ teamCards, teamId }) => {
+export const TeacherCardList: React.FC<
+  React.PropsWithChildren<{
+    teamCards: string;
+    teamId: string;
+  }>
+> = ({ teamCards, teamId }) => {
   if (!teamCards) {
     return <OneRowTable text="Noch keine Inhalte ausgewählt" />;
   }
@@ -242,7 +250,7 @@ export const TeacherCardList: React.FC<React.PropsWithChildren<{
             <TDIcon mr={0}>
               <Image src={IconWatch} alt="" />
             </TDIcon>
-            <TD width="180px" smHide>
+            <TD width="180" smHide>
               {card?.duration}
             </TD>
             <TDImage src={getCardTypeIcon(card?.type)} />
@@ -269,10 +277,12 @@ interface CardAdminProps {
   commonProps: { doDelete: (id: string) => void };
 }
 
-export const EditCardList: React.FC<React.PropsWithChildren<{
-  teamCards: string;
-  teamId: string;
-}>> = ({ teamCards, teamId }) => {
+export const EditCardList: React.FC<
+  React.PropsWithChildren<{
+    teamCards: string;
+    teamId: string;
+  }>
+> = ({ teamCards, teamId }) => {
   const [cards, setCards] = useState<readonly CardAdminType[]>([]);
   const [doSetCards] = useSetCardsMutation();
 
@@ -356,7 +366,7 @@ class CardAdminItem extends React.Component<CardAdminProps> {
           <Image src={IconWatch} alt="" />
         </TDIcon>
 
-        <TD width="180px" smHide>
+        <TD width="180" smHide>
           {item?.duration}
         </TD>
         <TDIcon>
@@ -378,7 +388,9 @@ interface ICardContext {
 
 export const CardContext = React.createContext({} as ICardContext);
 
-export const Card: React.FC<React.PropsWithChildren<{ id: string }>> = ({ id }) => {
+export const Card: React.FC<React.PropsWithChildren<{ id: string }>> = ({
+  id,
+}) => {
   const Comp = getCard(id);
   const title = getCardTitle(id);
   // use useState for context, otherwise childs will always be rerendered
@@ -392,7 +404,9 @@ export const Card: React.FC<React.PropsWithChildren<{ id: string }>> = ({ id }) 
   );
 };
 
-export function getCard(id: string): React.FC<React.PropsWithChildren<unknown>> {
+export function getCard(
+  id: string
+): React.FC<React.PropsWithChildren<unknown>> {
   // @ts-ignore TODO, not sure how to beter do the lookup here
   return cards[id].default as React.FC<React.PropsWithChildren<unknown>>;
 }

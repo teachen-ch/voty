@@ -84,9 +84,9 @@ export default function PanelBallotsPresent(): ReactElement {
   );
 }
 
-const BallotRunListing: React.FC<React.PropsWithChildren<{ ballotRun: BallotRunFieldsFragment }>> = ({
-  ballotRun,
-}) => {
+const BallotRunListing: React.FC<
+  React.PropsWithChildren<{ ballotRun: BallotRunFieldsFragment }>
+> = ({ ballotRun }) => {
   const tr = useTr();
   const ballotRunId = ballotRun.id;
   const ballotId = ballotRun.ballotId;
@@ -137,9 +137,9 @@ const BallotRunListing: React.FC<React.PropsWithChildren<{ ballotRun: BallotRunF
   );
 };
 
-const BallotRunDetail: React.FC<React.PropsWithChildren<{ ballotRun: BallotRunFieldsFragment }>> = ({
-  ballotRun,
-}) => {
+const BallotRunDetail: React.FC<
+  React.PropsWithChildren<{ ballotRun: BallotRunFieldsFragment }>
+> = ({ ballotRun }) => {
   return (
     <Box id="results" mb={3}>
       <Heading as="h2" mt={0} mb={4}>
@@ -150,10 +150,9 @@ const BallotRunDetail: React.FC<React.PropsWithChildren<{ ballotRun: BallotRunFi
   );
 };
 
-const Results: React.FC<React.PropsWithChildren<{ ballotId: string; ballotRunId: string }>> = ({
-  ballotId,
-  ballotRunId,
-}) => {
+const Results: React.FC<
+  React.PropsWithChildren<{ ballotId: string; ballotRunId: string }>
+> = ({ ballotId, ballotRunId }) => {
   const resultsQuery = useGetBallotResultsQuery({
     variables: { ballotId, ballotRunId },
     // had some issues with pollInterval when using next dev
@@ -171,9 +170,9 @@ const Results: React.FC<React.PropsWithChildren<{ ballotId: string; ballotRunId:
   return <BallotResults results={results} />;
 };
 
-export const PanelPage: React.FC<React.PropsWithChildren<{ heading: string; teamId?: string }>> = (
-  props
-) => {
+export const PanelPage: React.FC<
+  React.PropsWithChildren<{ heading: string; teamId?: string }>
+> = (props) => {
   const votyLink = props.teamId ? `/team/${props.teamId}` : "/";
   return (
     <Container mt={4}>
@@ -185,13 +184,13 @@ export const PanelPage: React.FC<React.PropsWithChildren<{ heading: string; team
         mb={3}
       >
         <A href={votyLink}>
-          <Image src="/images/voty_logo.svg" alt="voty" width="103px" />
+          <Image src="/images/voty_logo.svg" alt="voty" width="103" />
         </A>
         <A href="http://discussit.ch" rel="noreferrer">
           <Image
             src="/images/logo_discussit.png"
             alt="discussit.ch"
-            height="60px"
+            height="60"
           />
         </A>
       </Flex>
@@ -204,8 +203,8 @@ export const PanelPage: React.FC<React.PropsWithChildren<{ heading: string; team
           borderRadius: [0, 0, 5],
           backgroundColor: "panelColor",
         }}
-        maxWidth="800px"
-        minHeight="450px"
+        maxwidth="800"
+        minheight="450"
         textAlign={["center", "center", "left"]}
       >
         <Heading

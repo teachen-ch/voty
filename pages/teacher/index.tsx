@@ -38,7 +38,7 @@ export default function TeacherHome(): ReactElement {
         where={{ teacher: { id: { equals: user?.id } } }}
         teamClick={(team) => teamDetail(team.id)}
       />
-      <Box mt={4} minHeight="175px">
+      <Box mt={4} minheight="175">
         {success && (
           <Text mb={4}>
             Die neue Klasse wurde erfolgreich erstellt. Du kannst diese nun in

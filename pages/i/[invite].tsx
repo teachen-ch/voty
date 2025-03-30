@@ -84,7 +84,7 @@ const Invite: React.FC<React.PropsWithChildren<unknown>> = () => {
   if (teamQuery.error || !team) {
     return (
       <AppPage heading="Fehler">
-        <Box minHeight="400px">
+        <Box minheight="400">
           Diese Einladung ist nicht (mehr) gültig. Bitte sprich mit Deiner
           Lehrperson.
           {teamQuery.error?.message && (
@@ -143,7 +143,11 @@ type AcceptInviteProps = {
   user: SessionUser;
   team: TeamAnonFieldsFragment;
 };
-const AcceptInvite: React.FC<React.PropsWithChildren<AcceptInviteProps>> = ({ invite, team, user }) => {
+const AcceptInvite: React.FC<React.PropsWithChildren<AcceptInviteProps>> = ({
+  invite,
+  team,
+  user,
+}) => {
   const [error, setError] = useState("");
   const [force, setForce] = useState(false);
   const [success, setSuccess] = useState(false);
