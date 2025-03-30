@@ -8,7 +8,7 @@ import { useRouter } from "next/router";
 import uniq from "lodash/uniq";
 import { SelectBallots } from "components/Ballots";
 import { gql } from "@apollo/client";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import IconHint from "../../../public/images/icon_hint.svg";
 import IconProgress from "../../../public/images/icon_progress.svg";
 import { DeleteTeamLink, fragments } from "components/Teams";

@@ -12,7 +12,7 @@ import IconClose from "../public/images/icon_close.svg";
 import { Spinner } from "theme-ui";
 import { Info } from "./Info";
 import { useTr } from "util/translate";
-import Image from "next/image";
+import Image from "next/legacy/image";
 
 export const Page: React.FC<{
   children?: React.ReactNode;

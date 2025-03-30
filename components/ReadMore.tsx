@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Box, Text, Flex, Button } from "rebass";
 
-import Image from "next/image";
+import Image from "next/legacy/image";
 import IconPlus from "../public/images/icon_plus.svg";
 import IconMinus from "../public/images/icon_minus.svg";
 

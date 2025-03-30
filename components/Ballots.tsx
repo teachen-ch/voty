@@ -22,7 +22,7 @@ import { formatFromTo, formatDate } from "../util/date";
 import { useRouter } from "next/router";
 import find from "lodash/find";
 import Link from "next/link";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import IconResults from "../public/images/icon_results.svg";
 import IconCheckOn from "../public/images/icon_check_on.svg";
 import IconCheckOff from "../public/images/icon_check_off.svg";

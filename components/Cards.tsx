@@ -14,7 +14,7 @@ import without from "lodash/without";
 import DraggableList from "react-draggable-list";
 import { OneRowTable, Table, TD, TDIcon, TDImage, TR } from "./Table";
 import { A } from "./Breadcrumb";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import IconTrash from "../public/images/icon_trash.svg";
 import IconWatch from "../public/images/icon_watch.svg";
 import IconMove from "../public/images/icon_move.svg";

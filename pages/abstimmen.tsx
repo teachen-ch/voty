@@ -1,6 +1,6 @@
 import { AppPage } from "components/Page";
 import { Heading, Text, Box, Flex, Link, Image as RImage, Card } from "rebass";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import { Grid } from "theme-ui";
 import { ReactElement } from "react";
 import { ReadMore } from "components/ReadMore";

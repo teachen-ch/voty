@@ -4,7 +4,7 @@ import { Background, Container, H1 } from "components/Page";
 import { Footer } from "components/Footer";
 import { TopBar } from "components/TopBar";
 import { useRouter } from "next/router";
-import NextImage from "next/image";
+import NextImage from "next/legacy/image";
 import Link from "next/link";
 import TweetClaude from "../public/images/tweet_claude_longchamp.png";
 import { A } from "components/Breadcrumb";

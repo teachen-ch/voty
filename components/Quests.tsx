@@ -6,7 +6,7 @@ import {
   Textarea,
   TextareaProps,
 } from "@rebass/forms";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import { useCallback, useContext, useEffect, useMemo, useState } from "react";
 import { BoxProps, Button, Text, Flex, Box } from "rebass";
 import { useTeam, useUser } from "state/user";

@@ -1,7 +1,7 @@
 import { Text, Flex, BoxProps, Box, TextProps } from "rebass";
 import React from "react";
 import isFunction from "lodash/isFunction";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import IconX from "../public/images/icon_x.svg";
 
 export const CircleBullet: React.FC<
@@ -12,7 +12,7 @@ export const CircleBullet: React.FC<
   }
 > = ({ value, bg = "#fff", color = "gray", ...props }) => (
   // @ts-ignore
-  <Text
+  (<Text
     fontWeight="bold"
     fontSize={2}
     display="inline-block"
@@ -31,7 +31,7 @@ export const CircleBullet: React.FC<
     {...props}
   >
     {value}
-  </Text>
+  </Text>)
 );
 
 export const Pill: React.FC<

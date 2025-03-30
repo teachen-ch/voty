@@ -2,7 +2,7 @@ import { Box, Button, Flex, Text } from "rebass";
 import { Markdown } from "util/markdown";
 import { GlossaryReplace } from "./Glossary";
 import React, { useContext } from "react";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import IconBack from "../public/images/icon_back_white.svg";
 import { getCardTitle } from "./Cards";
 import { ChatyContext, Direction, TMessage } from "util/chaty";

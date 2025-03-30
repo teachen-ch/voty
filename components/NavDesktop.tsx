@@ -1,6 +1,6 @@
 import { Flex, Text, Box } from "rebass";
 import { A } from "components/Breadcrumb";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import IconRegister from "../public/images/icon_register_b.svg";
 import IconLogin from "../public/images/icon_login_b.svg";
 import IconAccount from "../public/images/icon_account_b.svg";

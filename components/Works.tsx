@@ -28,7 +28,7 @@ import find from "lodash/find";
 import omit from "lodash/omit";
 import remove from "lodash/remove";
 import truncate from "lodash/truncate";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import IconPlus from "../public/images/icon_plus.svg";
 import IconMinus from "../public/images/icon_minus.svg";
 import IconTrash from "../public/images/icon_trash.svg";

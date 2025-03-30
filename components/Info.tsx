@@ -18,7 +18,7 @@ export const Info: React.FC<CardProps & { type?: string }> = ({
   ...props
 }) => (
   // @ts-ignore
-  <Card
+  (<Card
     py={2}
     my={4}
     px={4}
@@ -27,5 +27,5 @@ export const Info: React.FC<CardProps & { type?: string }> = ({
     {...props}
   >
     {children}
-  </Card>
+  </Card>)
 );

@@ -10,7 +10,7 @@ import { Err } from "./Page";
 import { fragments } from "./Teams";
 import IconPrefs from "../public/images/icon_prefs.svg";
 import { isMobile } from "util/isBrowser";
-import Image from "next/image";
+import Image from "next/legacy/image";
 
 export const SET_PREFS = gql`
   mutation setPrefs($teamId: String!, $prefs: Json!) {

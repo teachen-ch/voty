@@ -1,7 +1,7 @@
 import { H2, Page } from "components/Page";
 import { Button, Text, Flex } from "rebass";
 import { useState } from "react";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import { A } from "components/Breadcrumb";
 import {
   Choice,

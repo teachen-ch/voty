@@ -14,7 +14,7 @@ import {
 } from "graphql/types";
 import { Loading } from "./Page";
 import { useRouter } from "next/router";
-import Image from "next/image";
+import Image from "next/legacy/image";
 
 const TeamAnonFields = gql`
   fragment TeamAnonFields on Team {

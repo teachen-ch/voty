@@ -3,7 +3,7 @@ import { Box, Flex, Text } from "rebass";
 import { Breadcrumb, Here } from "components/Breadcrumb";
 import { StudentCardList } from "components/Cards";
 import { StudentListBallots } from "components/Ballots";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import IconWelcome from "../../../public/images/students_welcome.svg";
 import { useTeamAnon, useUser } from "state/user";
 import { Role } from "graphql/types";

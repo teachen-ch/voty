@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Box, Flex, Text } from "rebass";
 import { SessionUser } from "state/user";
 import { A } from "./Breadcrumb";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import IconLogout from "../public/images/icon_logout.svg";
 import IconHome from "../public/images/icon_home.svg";
 import IconImpressum from "../public/images/icon_impressum.svg";
