@@ -21,7 +21,7 @@ export {
   discussions,
   stats,
 };
-export default {
+const resolvers = {
   users,
   ballots,
   teams,
@@ -33,3 +33,4 @@ export default {
   discussions,
   stats,
 };
+export default resolvers;

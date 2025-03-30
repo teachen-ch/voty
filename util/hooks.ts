@@ -18,7 +18,7 @@ export function usePolling(query: QueryResult): void {
     return () => {
       query.stopPolling();
     };
-  }, []);
+  }, [query]);
 }
 
 export function useNavHash(
@@ -45,7 +45,7 @@ export function useNavHash(
     return () => {
       router.events.off("hashChangeStart", hashChangeStart);
     };
-  }, []);
+  }, [router.events]);
   async function setNavHash(newHash: string) {
     if (navHash !== newHash) {
       const path = window.location.pathname + newHash;

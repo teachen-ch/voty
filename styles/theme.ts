@@ -1,5 +1,5 @@
 // Rebass Theme-UI theme for voty
-export default {
+const theme = {
   // [ iphone SE / iPhone 6+ / iPad High / Desktop+iPad / Big Screen]
   breakpoints: ["400px", "600px", "1200px", "2000px"],
   fontSizes: [12, 16, 20, 22, 26, 34, 50, 50, 50],
@@ -367,3 +367,5 @@ export default {
     },
   },
 };
+
+export default theme;
