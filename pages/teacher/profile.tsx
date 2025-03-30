@@ -18,15 +18,13 @@ export default function TeacherProfilePage({
     <LoggedInPage heading="Dein Profil" role={Role.Teacher}>
       {firstRun && "Bitte ergänze deine Angaben…"}
       <ProfileEdit user={user} editMode={firstRun} />
-
       <Box mt={4}>
         <SelectSchool />
       </Box>
-
       {!firstRun && (
         <Box mt={5} ml={[0, 0, "26%"]}>
           Ich möchte mein Konto auf voty.ch{" "}
-          <Link href="/user/delete" passHref>
+          <Link href="/user/delete" passHref legacyBehavior>
             <A variant="underline">löschen</A>
           </Link>
           .

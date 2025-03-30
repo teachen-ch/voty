@@ -106,8 +106,8 @@ export const VotyNow: React.FC<{
     return (
       <Info type="default">
         {tr("VotyNow.Login")}{" "}
-        <Link href={loginLink}>{tr("VotyNow.LoginLink")}</Link>.
-      </Info>
+        <Link href={loginLink} legacyBehavior>{tr("VotyNow.LoginLink")}</Link>.
+              </Info>
     );
   }
 

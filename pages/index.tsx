@@ -297,7 +297,7 @@ const TeaserImage: React.FC<{
 );
 
 const LearnMore: React.FC<{ href: string }> = ({ href }) => (
-  <Link href={href} passHref>
+  <Link href={href} passHref legacyBehavior>
     <Text fontWeight="semi" color="primary" variant="link">
       Mehr erfahren »»
     </Text>

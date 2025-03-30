@@ -224,7 +224,7 @@ export const ProfileEdit: React.FC<{
         <Text fontSize={1} textAlign="left" sx={{ gridColumn: [0, 0, 2] }}>
           {tr(`Profile.Legal.${user?.role}`)}
 
-          <Link href="/datenschutz/" passHref>
+          <Link href="/datenschutz/" passHref legacyBehavior>
             <A target="_blank" variant="underline">
               {tr("Profile.DataLink")}
             </A>
@@ -299,7 +299,7 @@ export const ProfileEdit: React.FC<{
 
             <Text fontSize={1} textAlign="left" sx={{ gridColumn: [0, 0, 2] }}>
               {tr(`Profile.Legal.${user?.role}`)}
-              <Link href="/datenschutz/" passHref>
+              <Link href="/datenschutz/" passHref legacyBehavior>
                 <A target="_blank" variant="underline">
                   {tr("Profile.DataLink")}
                 </A>

@@ -30,13 +30,12 @@ export default function Kontakt(): ReactElement {
           Email schreiben
         </Button>
       </Text>
-
       <Text mt={5}>
         Möchtet ihr regelmässig über voty.ch informiert werden (ca. 2-3 mal pro
         Semester):
       </Text>
       <Text my={4}>
-        <Link href="/newsletter" passHref>
+        <Link href="/newsletter" passHref legacyBehavior>
           <Button width={["100%", "100%", "auto"]}>Newsletter anmelden</Button>
         </Link>
       </Text>

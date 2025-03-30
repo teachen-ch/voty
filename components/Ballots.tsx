@@ -500,13 +500,12 @@ export const PanelCode: React.FC<{
 }> = ({ team, hasRuns }) => {
   if (!team?.code || !hasRuns) return null;
   return (
-    <Text id="livepanel">
-      Seite für Live-Abstimmungen:{" "}
+    <Text id="livepanel">Seite für Live-Abstimmungen:{" "}
       <Link
         href="/panel/[code]/present"
         as={`/panel/${team.code}/present`}
         passHref
-      >
+        legacyBehavior>
         <Button>Code: {team.code}</Button>
       </Link>
     </Text>
