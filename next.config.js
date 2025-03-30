@@ -7,7 +7,6 @@ module.exports = withMDX({
   i18n: {
     locales: ["de", "fr", "it"],
     defaultLocale: "de",
-    localeDetection: true,
   },
   // Next 10 image conf: https://nextjs.org/docs/basic-features/image-optimization
   images: {
