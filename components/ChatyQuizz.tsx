@@ -93,11 +93,13 @@ export const ChatyAnswers: React.FC<
   );
 };
 
-export const ChatyQuizzCheck = ({
-  message,
-}: {
+type ChatyQuizzCheckProps = {
   children?: React.ReactNode | undefined;
   message: TMessage;
+};
+
+export const ChatyQuizzCheck: React.FC<ChatyQuizzCheckProps> = ({
+  message,
 }) => {
   const { quizz } = useContext(ChatyContext);
   const question = useMemo(() => quizz!.lastQuestion, [quizz]);

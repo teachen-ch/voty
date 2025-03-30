@@ -37,7 +37,10 @@ interface IQuestContext {
 
 export const QuestContext = React.createContext({} as IQuestContext);
 
-export const Quest: React.FC<React.PropsWithChildren<{ groups?: string }>> = ({ children, groups }) => {
+export const Quest: React.FC<React.PropsWithChildren<{ groups?: string }>> = ({
+  children,
+  groups,
+}) => {
   const user = useUser();
   const team = useTeam();
   const { card, title } = useContext(CardContext);
@@ -73,6 +76,7 @@ export const Quest: React.FC<React.PropsWithChildren<{ groups?: string }>> = ({ 
       {React.Children.map(children, (child) =>
         React.isValidElement(child)
           ? React.cloneElement(child, {
+              // @ts-ignore
               ix: ++questionIx,
             })
           : child
@@ -122,11 +126,9 @@ const QuestWork: WorkItem = ({ work }) => {
   );
 };
 
-export const Question: React.FC<React.PropsWithChildren<BoxProps & { ix?: string }>> = ({
-  ix,
-  children,
-  ...props
-}) => {
+export const Question: React.FC<
+  React.PropsWithChildren<BoxProps & { ix?: string }>
+> = ({ ix, children, ...props }) => {
   const otherChildren = React.Children.toArray(children);
   const first = otherChildren.shift();
   const [hint, setHint] = useState(false);
@@ -166,12 +168,16 @@ type AnswerProps = {
   answer?: any;
 };
 
-export const Textfield: React.FC<React.PropsWithChildren<AnswerProps &
-  TextareaProps & {
-    lines?: number;
-    placeholder?: string;
-    width?: string | number | Array<string | number>;
-  }>> = ({ id, lines = 2, ...props }) => {
+export const Textfield: React.FC<
+  React.PropsWithChildren<
+    AnswerProps &
+      TextareaProps & {
+        lines?: number;
+        placeholder?: string;
+        width?: string | number | Array<string | number>;
+      }
+  >
+> = ({ id, lines = 2, ...props }) => {
   const { answers, setAnswer, readOnly } = useContext(QuestContext);
 
   if (!id) return <Err msg="<Question/> ohne id" />;
@@ -192,11 +198,9 @@ export const Textfield: React.FC<React.PropsWithChildren<AnswerProps &
   );
 };
 
-export const MultiChoice: React.FC<React.PropsWithChildren<{ row?: boolean } & AnswerProps>> = ({
-  id,
-  children,
-  row,
-}) => {
+export const MultiChoice: React.FC<
+  React.PropsWithChildren<{ row?: boolean } & AnswerProps>
+> = ({ id, children, row }) => {
   const { answers, setAnswer, readOnly } = useContext(QuestContext);
   const [answered, setAnswered] = useState<number>();
 
@@ -219,6 +223,7 @@ export const MultiChoice: React.FC<React.PropsWithChildren<{ row?: boolean } & A
       {React.Children.map(children, (child, ix) =>
         React.isValidElement(child)
           ? React.cloneElement(child, {
+              // @ts-ignore
               setAnswer: readOnly ? undefined : () => doAnswer(ix + 1),
               answer: Number(answers[id]),
               answered,
@@ -230,13 +235,23 @@ export const MultiChoice: React.FC<React.PropsWithChildren<{ row?: boolean } & A
   );
 };
 
-export const Choice: React.FC<React.PropsWithChildren<{
+type ChoiceProps = {
   correct?: boolean;
   ix?: number;
   answer?: number;
   answered?: number;
   setAnswer?: () => void;
-}>> = ({ correct, ix, answer, answered, setAnswer = () => 0, children }) => {
+  children?: React.ReactNode;
+};
+
+export const Choice: React.FC<ChoiceProps> = ({
+  correct,
+  ix,
+  answer,
+  answered,
+  setAnswer = () => 0,
+  children,
+}) => {
   const color = answered === ix ? (correct ? "green" : "danger") : "white";
   return (
     <Label alignItems="center" mr={2} onClick={setAnswer} mb={2}>
@@ -258,10 +273,9 @@ interface OrderItemProps {
   commonProps: { readOnly?: boolean; correct: boolean };
 }
 
-export const Order: React.FC<React.PropsWithChildren<AnswerProps & { items: string[] }>> = ({
-  items,
-  id,
-}) => {
+export const Order: React.FC<
+  React.PropsWithChildren<AnswerProps & { items: string[] }>
+> = ({ items, id }) => {
   const { answers, setAnswer, readOnly } = useContext(QuestContext);
   const [current, setCurrent] = useState<readonly OrderItemType[]>([]);
   const [correct, setCorrect] = useState(false);
@@ -346,11 +360,9 @@ class OrderItem extends React.Component<OrderItemProps> {
   }
 }
 
-export const Choose: React.FC<React.PropsWithChildren<AnswerProps & SelectProps>> = ({
-  id,
-  children,
-  ...props
-}) => {
+export const Choose: React.FC<
+  React.PropsWithChildren<AnswerProps & SelectProps>
+> = ({ id, children, ...props }) => {
   const { answers, setAnswer, readOnly } = useContext(QuestContext);
 
   if (!id) return <Err msg="<Choose/> ohne id" />;

@@ -331,7 +331,7 @@ const RequestReset: React.FC<
       </Text>
       <QForm
         mutation={doRequestReset}
-        onSubmit={async (values: { email: string }) => {
+        onSubmit={async (values) => {
           if (mailSent) onCancel();
           else {
             await doRequestReset({

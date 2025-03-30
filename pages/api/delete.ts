@@ -36,7 +36,7 @@ export default async function deleteApi(
     res.send({ success: true });
   } catch (err) {
     console.error(err);
-    logger.error(err);
+    logger.error(String(err));
     res.send({ error: "Error.ServerError" });
   }
 }

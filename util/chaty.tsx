@@ -3,7 +3,7 @@ import {
   ChatyQuizzEvaluate,
   Quizz,
 } from "components/ChatyQuizz";
-import React, { createContext, ReactNode, useState } from "react";
+import React, { createContext, ReactNode } from "react";
 
 export enum Direction {
   "Incoming",
@@ -18,7 +18,9 @@ export type TMessage = {
   line: number;
   selected?: string;
   children?: React.ReactNode;
-  component?: React.Component;
+  component?:
+    | React.Component
+    | React.FC<React.PropsWithChildren<{ message: TMessage }>>;
 };
 
 export type IChatyContext = {
@@ -110,9 +112,9 @@ export function specialMessage(type: string, rest: string): React.ReactNode {
     case "QUESTION":
       return rest;
     case "CHECK":
-      return ChatyQuizzCheck;
+      return (ChatyQuizzCheck as unknown) as ReactNode;
     case "EVALUATE":
-      return ChatyQuizzEvaluate;
+      return (ChatyQuizzEvaluate as unknown) as ReactNode;
     case "BUTTON":
       return rest;
     case "CHATY":

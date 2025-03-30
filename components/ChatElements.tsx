@@ -134,7 +134,19 @@ const ParsedMessage: React.FC<
   if (message.selected) {
     message.message = message.selected;
   }
-  const Component = typeof message.children === "function" && message.children;
+
+  // type guard
+  const isCallableComponent = (
+    children:
+      | React.ReactNode
+      | React.FC<React.PropsWithChildren<{ message: TMessage }>>
+  ): children is React.FC<React.PropsWithChildren<{ message: TMessage }>> => {
+    return typeof children === "function";
+  };
+
+  const Component = isCallableComponent(message.children)
+    ? message.children
+    : null;
 
   return (
     <Message direction={message.direction}>
