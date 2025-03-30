@@ -1,12 +1,8 @@
-import * as React from "react";
-import * as Rebass from "rebass";
-import * as StyledSystem from "styled-system";
-
-export {};
-
-type Omit<T, K> = Pick<T, Exclude<keyof T, K>>;
-
 declare module "@rebass/forms" {
+  import * as React from "react";
+  import { BoxKnownProps } from "rebass";
+  import * as StyledComponents from "styled-components";
+
   interface BoxKnownProps
     extends Rebass.BaseProps,
       StyledSystem.SpaceProps,
@@ -87,4 +83,20 @@ declare module "@rebass/forms" {
   }
 
   export const Switch: React.ComponentType<SwitchProps>;
+
+  // The following overrides are concering this issue:
+  // https://github.com/rebassjs/rebass/issues/755#issuecomment-587250893
+
+  /* interface FormProps extends FormP {
+      css?: InterpolationWithTheme<any>;
+    } */
+  interface InputProps extends InputP {
+    css?: InterpolationWithTheme<any>;
+  }
+  interface LabelProps extends LabelP {
+    css?: InterpolationWithTheme<any>;
+  }
+  interface TextareaProps extends TextareaP {
+    css?: InterpolationWithTheme<any>;
+  }
 }

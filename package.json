@@ -75,7 +75,7 @@
     "recoil": "^0.7.7",
     "remark-gfm": "^1.0.0",
     "remark-images": "^2.0.0",
-    "theme-ui": "0.3.1",
+    "theme-ui": "0.17.2",
     "winston": "^3.3.3",
     "winston-mail": "^2.0.0",
     "yup": "0.29.3"
@@ -111,7 +111,6 @@
     "@types/nodemailer": "^6.4.1",
     "@types/qrcode.react": "^1.0.1",
     "@types/react": "^18.3.1",
-    "@types/theme-ui": "^0.3.7",
     "@types/winston-mail": "^1.5.1",
     "@typescript-eslint/eslint-plugin": "^4.27.0",
     "@typescript-eslint/parser": "^4.27.0",

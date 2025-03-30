@@ -3,8 +3,6 @@ import * as React from "react";
 import * as StyledComponents from "styled-components";
 import * as StyledSystem from "styled-system";
 
-type Omit<T, K> = Pick<T, Exclude<keyof T, K>>;
-
 declare module "rebass" {
   export interface BaseProps extends React.RefAttributes<any> {
     children?: React.ReactNode;
