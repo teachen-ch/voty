@@ -15,6 +15,8 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
+    // This will be needed for theme-ui > 3
+    // "jsxImportSource": "theme-ui",
     "baseUrl": ".",
     "rootDir": ".",
     "sourceMap": true,
@@ -23,6 +25,6 @@
     // eek. this breaks nexus: https://github.com/graphql-nexus/nexus/issues/1036
     // "types": ["cypress", "@testing-library/cypress"]
   },
-  "include": ["**/*.d.ts", "**/*.ts", "**/*.tsx", "./i18n/*.json"],
+  "include": ["**/*.d.ts", "**/*.ts", "**/*.tsx", "./i18n/*.json", "**/*.mdx"],
   "exclude": ["**/node_modules", "**/.*/", "./cypress/"]
 }
