@@ -112,6 +112,8 @@
     "@types/nodemailer": "^6.4.1",
     "@types/qrcode.react": "^1.0.1",
     "@types/react": "^18.3.1",
+    "@types/theme-ui": "^0.3.5",
+    "@types/theme-ui__components": "^0.3.0",
     "@types/winston-mail": "^1.5.1",
     "@typescript-eslint/eslint-plugin": "^4.27.0",
     "@typescript-eslint/parser": "^4.27.0",
