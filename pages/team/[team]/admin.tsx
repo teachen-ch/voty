@@ -24,7 +24,7 @@ import {
 } from "graphql/types";
 import { Nullable } from "simplytyped";
 import { Breadcrumb, A, Here } from "components/Breadcrumb";
-import { Spinner } from "theme-ui";
+import { Spinner } from "components/Spinner";
 import PanelPage from "./panel";
 import { TeacherCardList } from "components/Cards";
 import { Activities } from "components/Activities";

@@ -9,7 +9,7 @@ import { Role } from "graphql/types";
 import { Footer } from "components/Footer";
 import { TopBar } from "./TopBar";
 import IconClose from "../public/images/icon_close.svg";
-import { Spinner } from "theme-ui";
+import { Spinner } from "./Spinner";
 import { Info } from "./Info";
 import { useTr } from "util/translate";
 import Image from "next/legacy/image";
@@ -171,7 +171,7 @@ export const Container: React.FC<React.PropsWithChildren<FlexProps>> = (
 };
 
 export const Loading: React.FC<React.PropsWithChildren<unknown>> = () => (
-  <Spinner color="white" size={20} mr={3} />
+  <Spinner color="white" size={32} duration={750} mr={3} />
 );
 
 export const Err: React.FC<React.PropsWithChildren<{ msg?: string }>> = ({
