@@ -15,7 +15,7 @@ const isExcludedUrl = (url: string, patterns: RegExp[]): boolean => {
 
 type InitSettings = {
   url: string;
-  siteId: string | number;
+  siteId?: string | number;
   jsTrackerFile?: string;
   phpTrackerFile?: string;
   excludeUrlsPatterns?: RegExp[];
@@ -28,21 +28,17 @@ export function initStats({
   phpTrackerFile = "matomo.php",
   excludeUrlsPatterns = [],
 }: InitSettings): void {
-  const href = window?.location?.href;
-  if (
-    href &&
-    !href.includes("127.0.0.1") &&
-    !href.includes("localhost") &&
-    !href.includes("dev.voty.ch")
-  ) {
-    /* posthog.init("phc_qHg6fE4uFk6C2XSRZXe8wAX0xguk0XG5YTR53yBxTDP", {
-      api_host: "https://app.posthog.com",
-    }); */
+  if (!siteId) {
+    console.debug("Matomo disabled");
+    return;
   }
-
   window._paq = window._paq || [];
+  if (window._paq.length > 0) {
+    console.debug("matomo: already initialized");
+    return;
+  }
   if (!url) {
-    console.warn("Matomo disabled, please provide matomo url");
+    console.warn("Matomo disabled, please provide a matomo url");
     return;
   }
   let previousPath = "";

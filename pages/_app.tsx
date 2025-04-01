@@ -21,7 +21,7 @@ function MyApp({ Component, pageProps }: AppProps): ReactElement {
   useEffect(() => {
     initStats({
       url: "https://stats.teachen.ch",
-      siteId: process.env.NEXT_PUBLIC_STATS_ID || 2,
+      siteId: process.env.NEXT_PUBLIC_STATS_ID,
     });
   }, []);
   const apollo = useMemo(() => apolloGen({ locale: router.locale }), [
@@ -43,7 +43,9 @@ function MyApp({ Component, pageProps }: AppProps): ReactElement {
 }
 
 // this will wrap the MDX into a <Page> only if there is a heading (# title)
-const MDXWrapper: React.FC<React.PropsWithChildren<unknown>> = ({ children }) => {
+const MDXWrapper: React.FC<React.PropsWithChildren<unknown>> = ({
+  children,
+}) => {
   if (children && Array.isArray(children)) {
     let heading = "";
     const headings = children.filter((el: React.ReactNode) => {
