@@ -43,7 +43,7 @@
     "@rebass/forms": "^4.0.6",
     "apollo-server-micro": "^2.19.0",
     "bcryptjs": "^2.4.3",
-    "cookie": "^0.4.1",
+    "cookie": "^0.7.0",
     "dayjs": "^1.9.7",
     "formidable": "^3.2.4",
     "formik": "^2.1.5",
