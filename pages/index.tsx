@@ -240,8 +240,12 @@ export default function Home(): React.ReactElement {
           </Flex>
         </Box>
 
-        <Link href="/swiss-bulgaria">
-          <Flex justifyContent="center" mt={80}>
+        <H1 mt={6} mb={-5} textAlign="center">
+          Laufende Projekte
+        </H1>
+
+        <Link href="/swiss-bulgaria" passHref>
+          <Flex justifyContent="center" mt={0} sx={{ cursor: "pointer" }}>
             <Teaser>
               <TeaserImage
                 src="/images/illu-glas.svg"
