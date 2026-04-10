@@ -1,3 +1,10 @@
+# [1.92.0](https://github.com/teachen-ch/voty/compare/v1.91.0...v1.92.0) (2026-04-10)
+
+
+### Features
+
+* update to docker_compose_v2 ([4d9365b](https://github.com/teachen-ch/voty/commit/4d9365b50b8602ac01ef7df59aba7ba7c60d1173))
+
 # [1.91.0](https://github.com/teachen-ch/voty/compare/v1.90.2...v1.91.0) (2026-04-10)
 
 
