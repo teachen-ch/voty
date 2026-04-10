@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { Flex, Heading, Box, Text, Button } from "rebass";
+import { Flex, Heading, Box, Text, Button, Image } from "rebass";
 import { Background, Container, H1 } from "components/Page";
 import { Footer } from "components/Footer";
 import { TopBar } from "components/TopBar";
@@ -239,13 +239,48 @@ export default function Home(): React.ReactElement {
             </A>
           </Flex>
         </Box>
+
+        <Link href="/swiss-bulgaria">
+          <Flex justifyContent="center" mt={80}>
+            <Teaser>
+              <TeaserImage
+                src="/images/illu-glas.svg"
+                width={371}
+                height={239}
+                top={-60}
+              />
+              <TeaserText title="Projekt GLAS - Schweiz + Bulgarien">
+                Voty.ch arbeitet von 2025-2028 als Schweizer Partnerorganisation
+                im Projekt «GLAS» zusammen mit lokale NGOs in Bulgarien.
+                <br />
+                <LearnMore href="/swiss-bulgaria" />
+                <Box
+                  mt={8}
+                  backgroundColor={"primary"}
+                  p={2}
+                  sx={{ borderRadius: "15px" }}
+                >
+                  <Image
+                    src="/images/logo-ch-bul.png"
+                    width={"100%"}
+                    height={"auto"}
+                    alt="Projekt GLAS - Schweiz + Bulgarien"
+                  />
+                </Box>
+              </TeaserText>
+            </Teaser>
+          </Flex>
+        </Link>
         <Footer />
       </Container>
     </>
   );
 }
 
-const Teaser: React.FC<{ reverse?: boolean }> = ({ reverse, children }) => (
+export const Teaser: React.FC<{ reverse?: boolean }> = ({
+  reverse,
+  children,
+}) => (
   <Flex
     mt={[4, 4, 4, 6]}
     mx="auto"
@@ -262,9 +297,13 @@ const Teaser: React.FC<{ reverse?: boolean }> = ({ reverse, children }) => (
   </Flex>
 );
 
-const TeaserText: React.FC<{ title: string }> = ({ title, children }) => (
+export const TeaserText: React.FC<{ title: string; fontSize?: number[] }> = ({
+  title,
+  children,
+  fontSize = [2, 2, 3, 3],
+}) => (
   <Box width={["100%", "100%", "100%", "40%"]} px={[0, 0, 3]}>
-    <Text fontSize={[2, 2, 3, 3]} lineHeight="1.45em">
+    <Text fontSize={fontSize} lineHeight="1.45em">
       <Text color="primary" fontWeight="semi" fontSize={[2, 2, 4, 4]}>
         {title}
       </Text>
@@ -273,7 +312,7 @@ const TeaserText: React.FC<{ title: string }> = ({ title, children }) => (
   </Box>
 );
 
-const TeaserImage: React.FC<{
+export const TeaserImage: React.FC<{
   src: string;
   width: number;
   height: number;
@@ -296,7 +335,7 @@ const TeaserImage: React.FC<{
   </Box>
 );
 
-const LearnMore: React.FC<{ href: string }> = ({ href }) => (
+export const LearnMore: React.FC<{ href: string }> = ({ href }) => (
   <Link href={href} passHref>
     <Text fontWeight="semi" color="primary" variant="link">
       Mehr erfahren »»
