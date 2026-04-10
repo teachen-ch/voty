@@ -5,11 +5,10 @@
       command: docker system prune -a -f
     - name: Pull and start docker compose
       #notify: restart voty
-      docker_compose:
-        pull: "yes"
+      community.docker.docker_compose_v2:
+        pull: always
         project_src: "{{app_dir}}"
-        state: "present"
-        restarted: yes
+        state: present
 
     - name: Enable Web Backend Service
       service:
