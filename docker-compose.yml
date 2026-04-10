@@ -1,7 +1,7 @@
 # docker-compose.yml
 services:
   traefik:
-    image: traefik:latest
+    image: traefik:3.6
     container_name: traefik
     restart: always
     networks:
