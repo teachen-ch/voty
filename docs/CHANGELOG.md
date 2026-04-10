@@ -1,3 +1,10 @@
+# [1.93.0](https://github.com/teachen-ch/voty/compare/v1.92.0...v1.93.0) (2026-04-10)
+
+
+### Features
+
+* adapt glas page ([2c9d515](https://github.com/teachen-ch/voty/commit/2c9d5154c283f2f82fa615bf7bd2f29c0b8c2918))
+
 # [1.92.0](https://github.com/teachen-ch/voty/compare/v1.91.0...v1.92.0) (2026-04-10)
 
 
