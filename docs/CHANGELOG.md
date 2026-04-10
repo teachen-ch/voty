@@ -1,3 +1,15 @@
+# [1.91.0](https://github.com/teachen-ch/voty/compare/v1.90.2...v1.91.0) (2026-04-10)
+
+
+### Bug Fixes
+
+* pin traefik to 3.6, breaks with latest ([0e4590c](https://github.com/teachen-ch/voty/commit/0e4590cd887a6bf667eb53e55c3cb37b75a8048c))
+
+
+### Features
+
+* add glas project page ([c9cf1dc](https://github.com/teachen-ch/voty/commit/c9cf1dc4912fe90cce1017e4ece6f0bb904264e8))
+
 ## [1.90.2](https://github.com/teachen-ch/voty/compare/v1.90.1...v1.90.2) (2025-03-30)
 
 
