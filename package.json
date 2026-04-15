@@ -71,6 +71,7 @@
     "recoil": "^0.3.1",
     "remark-gfm": "^1.0.0",
     "remark-images": "^2.0.0",
+    "sharp": "^0.34.5",
     "theme-ui": "0.3.1",
     "winston": "^3.3.3",
     "winston-mail": "^2.0.0",

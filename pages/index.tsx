@@ -234,6 +234,8 @@ export default function Home(): React.ReactElement {
             >
               <NextImage
                 src={TweetClaude}
+                width={400}
+                height={278}
                 alt="Tweet Claude Longchamp – Tolle Möglichkeit, nutzen!"
               />
             </A>
@@ -281,10 +283,9 @@ export default function Home(): React.ReactElement {
   );
 }
 
-export const Teaser: React.FC<React.PropsWithChildren<{ reverse?: boolean }>> = ({
-  reverse,
-  children,
-}) => (
+export const Teaser: React.FC<
+  React.PropsWithChildren<{ reverse?: boolean }>
+> = ({ reverse, children }) => (
   <Flex
     mt={[4, 4, 4, 6]}
     mx="auto"
@@ -301,11 +302,9 @@ export const Teaser: React.FC<React.PropsWithChildren<{ reverse?: boolean }>> = 
   </Flex>
 );
 
-export const TeaserText: React.FC<React.PropsWithChildren<{ title: string; fontSize?: number[] }>> = ({
-  title,
-  children,
-  fontSize = [2, 2, 3, 3],
-}) => (
+export const TeaserText: React.FC<
+  React.PropsWithChildren<{ title: string; fontSize?: number[] }>
+> = ({ title, children, fontSize = [2, 2, 3, 3] }) => (
   <Box width={["100%", "100%", "100%", "40%"]} px={[0, 0, 3]}>
     <Text fontSize={fontSize} lineHeight="1.45em">
       <Text color="primary" fontWeight="semi" fontSize={[2, 2, 4, 4]}>
@@ -316,12 +315,14 @@ export const TeaserText: React.FC<React.PropsWithChildren<{ title: string; fontS
   </Box>
 );
 
-export const TeaserImage: React.FC<React.PropsWithChildren<{
-  src: string;
-  width: number;
-  height: number;
-  top?: number;
-}>> = ({ src, width, height, top }) => (
+export const TeaserImage: React.FC<
+  React.PropsWithChildren<{
+    src: string;
+    width: number;
+    height: number;
+    top?: number;
+  }>
+> = ({ src, width, height, top }) => (
   <Box width={["90%", "90%", "70%", "50%"]} mx="auto">
     <Box
       sx={{ position: "relative", marginTop: [0, 0, 0, top] }}
@@ -339,7 +340,9 @@ export const TeaserImage: React.FC<React.PropsWithChildren<{
   </Box>
 );
 
-export const LearnMore: React.FC<React.PropsWithChildren<{ href: string }>> = ({ href }) => (
+export const LearnMore: React.FC<React.PropsWithChildren<{ href: string }>> = ({
+  href,
+}) => (
   <Link href={href} passHref>
     <Text fontWeight="semi" color="primary" variant="link">
       Mehr erfahren »»
