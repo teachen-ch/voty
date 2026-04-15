@@ -1,4 +1,4 @@
-FROM node:16.16-alpine
+FROM node:20-alpine
 WORKDIR /usr/src/app
 RUN chown -R node:node /usr/src/app
 EXPOSE 3000

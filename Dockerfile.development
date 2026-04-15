@@ -1,5 +1,4 @@
-# Start from node.js v12
-FROM node:14
+FROM node:20
 WORKDIR /usr/src/app
 
 # Install app dependencies
