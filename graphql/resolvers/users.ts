@@ -112,7 +112,7 @@ function startJWTSession(user: User, ctx: Context): ResponseLogin {
   ]);
 
   const token: string = jwt.sign({ user: jwtUser }, secret, {
-    expiresIn: expires,
+    expiresIn: expires as any,
   });
 
   setRequestUser(user, ctx);

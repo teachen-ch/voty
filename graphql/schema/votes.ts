@@ -19,5 +19,29 @@ export const Response = builder.objectRef<{
   }),
 });
 
-// TODO Step 7: mutationField for:
-//   - vote (resolvers.ballots.vote), voteCode (resolvers.ballots.voteCode)
+import * as ballots from "../resolvers/ballots";
+
+builder.mutationField("vote", (t) =>
+  t.prismaField({
+    type: "Vote",
+    args: {
+      ballotId: t.arg.string({ required: true }),
+      vote: t.arg.int({ required: true }),
+    },
+    resolve: (_query, _root, args, ctx, info) =>
+      ballots.vote(_root, args, ctx, info) as any,
+  })
+);
+
+builder.mutationField("voteCode", (t) =>
+  t.field({
+    type: Response,
+    args: {
+      ballotRunId: t.arg.string({ required: true }),
+      vote: t.arg.int({ required: true }),
+      code: t.arg.string({ required: true }),
+    },
+    resolve: (_root, args, ctx, info) =>
+      ballots.voteCode(_root, args, ctx, info) as any,
+  })
+);

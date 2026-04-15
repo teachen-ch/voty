@@ -38,5 +38,35 @@ export const Card = builder.objectRef<{
   }),
 });
 
-// TODO Step 7: queryField/mutationField for:
-//   - cards (keywords/age/type args), setCards (teamId/cards args)
+import { TeamType } from "./teams";
+
+builder.queryField("cards", (t) =>
+  t.field({
+    type: [Card],
+    nullable: true,
+    args: {
+      keywords: t.arg.string(),
+      age: t.arg.string(),
+      type: t.arg.string(),
+    },
+    resolve: async (_root, args, ctx, info) => {
+      const { cards } = await import("../resolvers");
+      return cards.cards(_root, args, ctx, info) as any;
+    },
+  })
+);
+
+builder.mutationField("setCards", (t) =>
+  t.prismaField({
+    type: "Team",
+    args: {
+      teamId: t.arg.string({ required: true }),
+      cards: t.arg.string({ required: true }),
+    },
+    resolve: async (_query, _root, args, ctx, info) => {
+      const { cards } = await import("../resolvers");
+      return cards.setCards(_root, args, ctx, info) as any;
+    },
+  })
+);
+void TeamType;

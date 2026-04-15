@@ -2,14 +2,29 @@ type Activity {
   ballotId: String
   card: String
   id: Int
-  school: School
+  school: School!
   summary: String
-  team: Team
-  time: DateTime
-  type: ActivityType
-  user: User
-  visibility: Visibility
+  team: Team!
+  time: DateTime!
+  type: ActivityType!
+  user: User!
+  visibility: Visibility!
   workId: String
+}
+
+input ActivityCreateInput {
+  card: String
+  school: UserSchoolUpdateInput!
+  summary: String
+  team: UserSchoolUpdateInput!
+  type: ActivityType!
+  user: UserSchoolUpdateInput!
+  visibility: Visibility!
+}
+
+input ActivityOrderByInput {
+  id: SortOrder
+  time: SortOrder
 }
 
 enum ActivityType {
@@ -22,30 +37,76 @@ enum ActivityType {
   Work
 }
 
+input ActivityTypeFilter {
+  equals: ActivityType
+}
+
+input ActivityWhereInput {
+  ballot: IdRelationFilter
+  ballotId: StringFilter
+  card: StringFilter
+  id: IntFilter
+  schoolId: StringFilter
+  teamId: StringFilter
+  time: DateTimeFilter
+  type: ActivityTypeFilter
+  userId: StringFilter
+  workId: StringFilter
+}
+
 type Attachment {
-  createdAt: DateTime
-  file: String
-  id: ID
-  title: String
-  type: String
-  updatedAt: DateTime
-  user: User
+  createdAt: DateTime!
+  file: String!
+  id: ID!
+  title: String!
+  type: String!
+  updatedAt: DateTime!
+  user: User!
+}
+
+input AttachmentWhereInput {
+  card: StringFilter
+  discussionId: StringFilter
+  id: StringFilter
+  teamId: StringFilter
+  userId: StringFilter
+  workId: StringFilter
 }
 
 type Ballot {
-  body: String
+  body: String!
   canVote: Boolean
   canton: String
-  description: String
-  end: DateTime
+  description: String!
+  end: DateTime!
   hasVoted: Boolean
-  id: ID
-  originalLocale: String
+  id: ID!
+  originalLocale: String!
   schoolId: String
+  scope: BallotScope!
+  start: DateTime!
+  teamId: String
+  title: String!
+}
+
+input BallotCreateInput {
+  body: String
+  bodyde: String
+  bodyfr: String
+  bodyit: String
+  canton: String
+  description: String
+  descriptionde: String
+  descriptionfr: String
+  descriptionit: String
+  end: DateTime
+  originalLocale: String
   scope: BallotScope
   start: DateTime
-  teamId: String
   title: String
+  titlede: String
+  titlefr: String
+  titleit: String
 }
 
 type BallotResults {
@@ -56,11 +117,20 @@ type BallotResults {
 }
 
 type BallotRun {
-  ballotId: String
+  ballotId: String!
   end: DateTime
-  id: ID
+  id: ID!
   start: DateTime
-  team: Team
+  team: Team!
+}
+
+input BallotRunRelationFilter {
+  some: BallotRunWhereInput
+}
+
+input BallotRunWhereInput {
+  ballotId: StringFilter
+  teamId: StringFilter
 }
 
 enum BallotScope {
@@ -69,6 +139,41 @@ enum BallotScope {
   Public
   School
   Team
+}
+
+input BallotScopeFilter {
+  equals: BallotScope
+}
+
+input BallotUpdateInput {
+  body: StringFieldUpdateOperationsInput
+  bodyde: StringFieldUpdateOperationsInput
+  bodyfr: StringFieldUpdateOperationsInput
+  bodyit: StringFieldUpdateOperationsInput
+  canton: StringFieldUpdateOperationsInput
+  description: StringFieldUpdateOperationsInput
+  descriptionde: StringFieldUpdateOperationsInput
+  descriptionfr: StringFieldUpdateOperationsInput
+  descriptionit: StringFieldUpdateOperationsInput
+  end: DateTimeFieldUpdateOperationsInput2
+  start: DateTimeFieldUpdateOperationsInput
+  title: StringFieldUpdateOperationsInput
+  titlede: StringFieldUpdateOperationsInput
+  titlefr: StringFieldUpdateOperationsInput
+  titleit: StringFieldUpdateOperationsInput
+}
+
+input BallotWhereInput {
+  ballotRuns: BallotRunRelationFilter
+  canton: StringFilter
+  id: StringFilter
+  schoolId: StringFilter
+  scope: BallotScopeFilter
+  teamId: StringFilter
+}
+
+input BallotWhereUniqueInput {
+  id: String
 }
 
 type Card {
@@ -92,18 +197,42 @@ A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `dat
 """
 scalar DateTime
 
+input DateTimeFieldUpdateOperationsInput {
+  set: DateTime
+}
+
+input DateTimeFieldUpdateOperationsInput2 {
+  set: DateTime
+}
+
+input DateTimeFilter {
+  equals: DateTime
+  gt: DateTime
+  gte: DateTime
+  lt: DateTime
+  lte: DateTime
+}
+
 type Discussion {
-  attachments: [Attachment!]
+  attachments: [Attachment!]!
   ballotId: String
   card: String
   children: [Discussion!]
-  createdAt: DateTime
-  id: ID
-  reactions: [Reaction!]
-  text: String
-  title: String
-  updatedAt: DateTime
-  user: User
+  createdAt: DateTime!
+  id: ID!
+  reactions: [Reaction!]!
+  text: String!
+  title: String!
+  updatedAt: DateTime!
+  user: User!
+}
+
+input EnumGenderFieldUpdateOperationsInput {
+  set: Gender
+}
+
+input EnumRoleFieldUpdateOperationsInput {
+  set: Role
 }
 
 enum Gender {
@@ -111,6 +240,22 @@ enum Gender {
   Male
   Other
   Unkown
+}
+
+input IdRelationFilter {
+  id: StringFilter
+}
+
+input IntFieldUpdateOperationsInput {
+  set: Int
+}
+
+input IntFilter {
+  equals: Int
+  gt: Int
+  gte: Int
+  lt: Int
+  lte: Int
 }
 
 type InviteResponse {
@@ -125,7 +270,41 @@ The `JSON` scalar type represents JSON objects as specified by [ECMA-404](http:/
 """
 scalar Json
 
-type Mutation
+type Mutation {
+  acceptInvite(force: Boolean, invite: String!): Team!
+  addBallotRun(ballotId: String!, teamId: String!): BallotRun!
+  changePassword(password: String): ResponseLogin!
+  checkVerification(token: String): ResponseLogin!
+  createInvitedUser(email: String!, invite: String!, lastname: String, name: String, password: String): User!
+  createOneBallot(data: BallotCreateInput!): Ballot!
+  createOneSchool(data: SchoolCreateInput!): School!
+  createOneTeam(data: TeamCreateInput!): Team!
+  createUser(data: UserCreateInput!): User!
+  deleteAccount: Response!
+  deleteOneBallot(where: BallotWhereUniqueInput!): Ballot!
+  deleteOneSchool(where: SchoolWhereUniqueInput!): School!
+  deleteOneTeam(where: TeamWhereUniqueInput!): Team!
+  deleteUser(where: UserWhereUniqueInput!): User!
+  deleteWork(where: WorkWhereUniqueInput!): Work!
+  emailVerification(email: String!, purpose: String!): ResponseLogin!
+  endBallotRun(ballotRunId: String!): BallotRun!
+  inviteStudents(emails: [String!]!, team: String!): InviteResponse!
+  login(email: String!, password: String!): ResponseLogin!
+  magic(email: String!, redirect: String): Response!
+  postActivity(data: ActivityCreateInput!): Activity!
+  postDiscussion(ballotId: String, card: String, teamId: String!, text: String!, title: String!): Discussion!
+  postWork(data: WorkCreateInput!): Work!
+  removeBallotRun(ballotRunId: String!): Response!
+  setCards(cards: String!, teamId: String!): Team!
+  setNotes(notes: Json!, teamId: String!): Team!
+  setPrefs(prefs: Json!, teamId: String!): Team!
+  setSchool(school: String!): User!
+  startBallotRun(ballotRunId: String!): BallotRun!
+  updateOneBallot(data: BallotUpdateInput!, where: BallotWhereUniqueInput!): Ballot!
+  updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User!
+  vote(ballotId: String!, vote: Int!): Vote!
+  voteCode(ballotRunId: String!, code: String!, vote: Int!): Response!
+}
 
 type ProgressCard {
   done: [User!]
@@ -140,13 +319,33 @@ type ProgressStudent {
   id: String
 }
 
-type Query
+type Query {
+  activities(first: Int, last: Int, orderBy: [ActivityOrderByInput!], where: ActivityWhereInput): [Activity!]!
+  attachments(where: AttachmentWhereInput): [Attachment!]!
+  ballot(where: BallotWhereUniqueInput!): Ballot
+  ballots(where: BallotWhereInput): [Ballot!]!
+  cards(age: String, keywords: String, type: String): [Card!]
+  getBallotResults(ballotId: String!, ballotRunId: String, canton: String, schoolId: String, teamId: String): BallotResults
+  getBallotRuns(locale: String, teamId: String!): [BallotRun!]
+  getTeamDiscussions(ballotId: String, card: String, teamId: String): [Discussion!]
+  me: User
+  progress(teamId: String!): ResponseProgress!
+  school(where: SchoolWhereUniqueInput!): School
+  schools(where: SchoolWhereInput): [School!]!
+  stats(from: Float, to: Float): Stats!
+  swissvotes(hasPosters: Boolean, keywords: String, limit: Int, offset: Int, result: Int, sort: String, type: Int): [Swissvote!]
+  team(where: TeamWhereUniqueInput!): Team
+  teams(orderBy: [TeamOrderByInput!], where: TeamWhereInput): [Team!]!
+  user(where: UserWhereUniqueInput!): User
+  users(first: Int, last: Int, orderBy: [UserOrderByInput!], where: UserWhereInput): [User!]!
+  works(where: WorkWhereInput): [Work!]!
+}
 
 type Reaction {
   discussion: Discussion
   emoij: String
   id: ID
-  user: User
+  user: User!
 }
 
 type Response {
@@ -173,20 +372,59 @@ enum Role {
   User
 }
 
+input RoleFilter {
+  equals: Role
+}
+
 type School {
+  address: String!
+  canton: String!
+  city: String!
+  id: ID!
+  members: [User!]!
+  name: String!
+  teams: [Team!]!
+  type: String!
+  zip: String!
+}
+
+input SchoolCreateInput {
   address: String
   canton: String
   city: String
-  id: ID
-  members: [User!]
-  name: String
-  teams: [Team!]
+  name: String!
   type: String
   zip: String
 }
 
+input SchoolWhereInput {
+  canton: StringFilter
+  id: StringFilter
+  name: StringFilter
+}
+
+input SchoolWhereUniqueInput {
+  id: String
+}
+
+enum SortOrder {
+  asc
+  desc
+}
+
 type Stats {
   stats: Json
+}
+
+input StringFieldUpdateOperationsInput {
+  set: String
+}
+
+input StringFilter {
+  contains: String
+  equals: String
+  in: [String!]
+  notIn: [String!]
 }
 
 type Swissvote {
@@ -206,41 +444,119 @@ type Swissvote {
 }
 
 type Team {
-  ballots: [Ballot!]
-  cards: String
+  ballots: [Ballot!]!
+  cards: String!
   code: String
-  id: ID
+  id: ID!
   invite: String
-  members: [User!]
-  name: String
+  members: [User!]!
+  name: String!
   notes: Json
   prefs: Json
-  school: School
-  teacher: User
-  teacherId: String
+  school: School!
+  teacher: User!
+  teacherId: String!
+}
+
+input TeamCreateInput {
+  name: String!
+  school: UserSchoolUpdateInput!
+  teacher: UserSchoolUpdateInput!
+}
+
+input TeamOrderByInput {
+  createdAt: SortOrder
+  name: SortOrder
+}
+
+input TeamWhereInput {
+  id: StringFilter
+  name: StringFilter
+  schoolId: StringFilter
+  teacher: IdRelationFilter
+  teacherId: StringFilter
+}
+
+input TeamWhereUniqueInput {
+  code: String
+  id: String
+  invite: String
 }
 
 type User {
-  attachments: [Attachment!]
-  ballots: [Ballot!]
+  attachments: [Attachment!]!
+  ballots: [Ballot!]!
   campaign: String
-  createdAt: DateTime
-  discussions: [Discussion!]
+  createdAt: DateTime!
+  discussions: [Discussion!]!
   email: String
   emailVerified: DateTime
   gender: Gender
-  id: ID
+  id: ID!
   image: String
+  lastname: String
+  locale: String!
+  name: String
+  reactions: [Reaction!]!
+  role: Role!
+  school: School
+  shortname: String
+  teaches: [Team!]!
+  team: Team
+  year: Int
+}
+
+input UserConnectListInput {
+  connect: [UserWhereUniqueInput!]
+}
+
+input UserCreateInput {
+  campaign: String
+  email: String!
   lastname: String
   locale: String
   name: String
-  reactions: [Reaction!]
+  password: String
+  redirect: String
   role: Role
-  school: School
-  shortname: String
-  teaches: [Team!]
-  team: Team
-  year: Int
+}
+
+input UserOrderByInput {
+  createdAt: SortOrder
+  email: SortOrder
+  lastname: SortOrder
+  name: SortOrder
+  role: SortOrder
+  year: SortOrder
+}
+
+input UserSchoolUpdateInput {
+  connect: WhereByIdInput
+}
+
+input UserUpdateInput {
+  email: StringFieldUpdateOperationsInput
+  gender: EnumGenderFieldUpdateOperationsInput
+  lastname: StringFieldUpdateOperationsInput
+  name: StringFieldUpdateOperationsInput
+  role: EnumRoleFieldUpdateOperationsInput
+  school: UserSchoolUpdateInput
+  year: IntFieldUpdateOperationsInput
+}
+
+input UserWhereInput {
+  email: StringFilter
+  id: StringFilter
+  lastname: StringFilter
+  name: StringFilter
+  role: RoleFilter
+  schoolId: StringFilter
+  teamId: StringFilter
+}
+
+input UserWhereUniqueInput {
+  email: String
+  id: String
 }
 
 enum Visibility {
@@ -250,8 +566,12 @@ enum Visibility {
   Team
 }
 
+input VisibilityFilter {
+  equals: Visibility
+}
+
 type Vote {
-  ballot: Ballot
+  ballot: Ballot!
   verify: String
 }
 
@@ -263,14 +583,41 @@ enum VotingStatus {
   Voted
 }
 
+input WhereByIdInput {
+  id: String!
+}
+
 type Work {
-  attachments: [Attachment!]
+  attachments: [Attachment!]!
   card: String
   data: Json
-  id: ID
-  reactions: [Reaction!]
+  id: ID!
+  reactions: [Reaction!]!
+  text: String!
+  title: String!
+  updatedAt: DateTime!
+  users: [User!]!
+}
+
+input WorkCreateInput {
+  card: String
+  data: Json
+  school: UserSchoolUpdateInput
+  team: UserSchoolUpdateInput
   text: String
   title: String
-  updatedAt: DateTime
-  users: [User!]
+  users: UserConnectListInput
+  visibility: Visibility
+}
+
+input WorkWhereInput {
+  card: StringFilter
+  id: StringFilter
+  schoolId: StringFilter
+  teamId: StringFilter
+  visibility: VisibilityFilter
+}
+
+input WorkWhereUniqueInput {
+  id: String
 }

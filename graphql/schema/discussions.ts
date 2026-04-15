@@ -42,5 +42,35 @@ export const ReactionType = builder.prismaObject("Reaction", {
   }),
 });
 
-// TODO Step 7: queryField/mutationField for:
-//   - getTeamDiscussions, postDiscussion
+builder.queryField("getTeamDiscussions", (t) =>
+  t.field({
+    type: [DiscussionType],
+    nullable: true,
+    args: {
+      card: t.arg.string(),
+      ballotId: t.arg.string(),
+      teamId: t.arg.string(),
+    },
+    resolve: async (_root, args, ctx, info) => {
+      const { discussions } = await import("../resolvers");
+      return discussions.getTeamDiscussions(_root, args, ctx, info) as any;
+    },
+  })
+);
+
+builder.mutationField("postDiscussion", (t) =>
+  t.field({
+    type: DiscussionType,
+    args: {
+      card: t.arg.string(),
+      ballotId: t.arg.string(),
+      teamId: t.arg.string({ required: true }),
+      title: t.arg.string({ required: true }),
+      text: t.arg.string({ required: true }),
+    },
+    resolve: async (_root, args, ctx, info) => {
+      const { discussions } = await import("../resolvers");
+      return discussions.postDiscussion(_root, args, ctx, info) as any;
+    },
+  })
+);

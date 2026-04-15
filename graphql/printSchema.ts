@@ -14,6 +14,11 @@ import "./schema/teams";
 import "./schema/users";
 import "./schema/votes";
 import "./schema/works";
+import "./schema/crud";
+
+import { writeFileSync } from "fs";
 
 const schema = builder.toSchema();
-process.stdout.write(printSchema(lexicographicSortSchema(schema)));
+const sdl = printSchema(lexicographicSortSchema(schema));
+writeFileSync("graphql/api.graphql", sdl);
+process.stdout.write(`Wrote ${sdl.length} bytes to graphql/api.graphql\n`);

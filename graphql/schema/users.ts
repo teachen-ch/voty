@@ -53,9 +53,136 @@ export const ResponseLogin = builder
     }),
   });
 
-// TODO Step 7: port queryField/mutationField for:
-//   - me, createUser, updateUser, deleteUser, login, magic
-//   - emailVerification, checkVerification, changePassword
-//   - createInvitedUser, acceptInvite, setSchool, deleteAccount
-//
+import * as users from "../resolvers/users";
+import { Response } from "./votes";
+
+const UserCreateInput = builder.inputType("UserCreateInput", {
+  fields: (t) => ({
+    name: t.string(),
+    lastname: t.string(),
+    email: t.string({ required: true }),
+    password: t.string(),
+    role: t.field({ type: RoleEnum }),
+    locale: t.string(),
+    campaign: t.string(),
+    redirect: t.string(),
+  }),
+});
+
+builder.queryField("me", (t) =>
+  t.prismaField({
+    type: "User",
+    nullable: true,
+    resolve: (_query, _root, _args, ctx) => users.getUser(ctx) as any,
+  })
+);
+
+builder.mutationField("createUser", (t) =>
+  t.prismaField({
+    type: "User",
+    args: { data: t.arg({ type: UserCreateInput, required: true }) },
+    resolve: (_query, _root, args, ctx, info) =>
+      users.createUser(_root, args, ctx, info) as any,
+  })
+);
+
+builder.mutationField("login", (t) =>
+  t.field({
+    type: ResponseLogin,
+    args: {
+      email: t.arg.string({ required: true }),
+      password: t.arg.string({ required: true }),
+    },
+    resolve: (_root, args, ctx, info) =>
+      users.login(_root, args, ctx, info) as any,
+  })
+);
+
+builder.mutationField("magic", (t) =>
+  t.field({
+    type: Response,
+    args: {
+      email: t.arg.string({ required: true }),
+      redirect: t.arg.string(),
+    },
+    resolve: (_root, args, ctx, info) =>
+      users.magic(_root, args, ctx, info) as any,
+  })
+);
+
+builder.mutationField("emailVerification", (t) =>
+  t.field({
+    type: ResponseLogin,
+    args: {
+      email: t.arg.string({ required: true }),
+      purpose: t.arg.string({ required: true }),
+    },
+    resolve: (_root, args, ctx) =>
+      users.sendVerificationEmail(args.email, args.purpose, ctx.db) as any,
+  })
+);
+
+builder.mutationField("checkVerification", (t) =>
+  t.field({
+    type: ResponseLogin,
+    args: { token: t.arg.string() },
+    resolve: (_root, args, ctx, info) =>
+      users.checkVerification(_root, args, ctx, info) as any,
+  })
+);
+
+builder.mutationField("changePassword", (t) =>
+  t.field({
+    type: ResponseLogin,
+    args: { password: t.arg.string() },
+    resolve: (_root, args, ctx, info) =>
+      users.changePassword(_root, args, ctx, info) as any,
+  })
+);
+
+builder.mutationField("createInvitedUser", (t) =>
+  t.prismaField({
+    type: "User",
+    args: {
+      name: t.arg.string(),
+      lastname: t.arg.string(),
+      email: t.arg.string({ required: true }),
+      password: t.arg.string(),
+      invite: t.arg.string({ required: true }),
+    },
+    resolve: (_query, _root, args, ctx, info) =>
+      users.createInvitedUser(_root, args, ctx, info) as any,
+  })
+);
+
+builder.mutationField("acceptInvite", (t) =>
+  t.prismaField({
+    type: "Team",
+    args: {
+      invite: t.arg.string({ required: true }),
+      force: t.arg.boolean(),
+    },
+    resolve: (_query, _root, args, ctx, info) =>
+      users.acceptInvite(_root, args, ctx, info) as any,
+  })
+);
+
+builder.mutationField("setSchool", (t) =>
+  t.prismaField({
+    type: "User",
+    args: { school: t.arg.string({ required: true }) },
+    resolve: (_query, _root, args, ctx, info) =>
+      users.setSchool(_root, args, ctx, info) as any,
+  })
+);
+
+builder.mutationField("deleteAccount", (t) =>
+  t.field({
+    type: Response,
+    resolve: (_root, args, ctx, info) =>
+      users.deleteAccount(_root, args, ctx, info) as any,
+  })
+);
+
 // TODO Step 8: CRUD — user (findUnique), users (findMany + ordering + filtering)
+//   updateUser, deleteUser, createOneSchool, etc.

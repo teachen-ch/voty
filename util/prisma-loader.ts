@@ -33,7 +33,7 @@ export async function loadFixture(
 
 function parseYAML(filename: string) {
   const contents = fs.readFileSync(filename, "utf8");
-  const data = yaml.safeLoad(contents);
+  const data = yaml.load(contents);
   return data;
 }
 

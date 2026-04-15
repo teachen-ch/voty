@@ -6,5 +6,16 @@ export const Stats = builder.objectRef<{ stats?: unknown }>("Stats").implement({
   }),
 });
 
-// TODO Step 7: queryField for:
-//   - stats (from/to float args)
+import * as statsResolver from "../resolvers/stats";
+
+builder.queryField("stats", (t) =>
+  t.field({
+    type: Stats,
+    args: {
+      from: t.arg.float(),
+      to: t.arg.float(),
+    },
+    resolve: (_root, args, ctx, info) =>
+      statsResolver.stats(_root, args, ctx, info) as any,
+  })
+);

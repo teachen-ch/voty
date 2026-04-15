@@ -57,9 +57,76 @@ export const BallotResults = builder.objectRef<{
   }),
 });
 
-// TODO Step 7: queryField/mutationField for:
-//   - getBallotRuns, getBallotResults
-//   - addBallotRun, removeBallotRun, startBallotRun, endBallotRun
-//   - locale replacement wrapper around CRUD ballot/ballots
+import * as ballots from "../resolvers/ballots";
+import { Response } from "./votes";
+
+builder.queryField("getBallotRuns", (t) =>
+  t.field({
+    type: [BallotRunType],
+    nullable: true,
+    args: {
+      teamId: t.arg.string({ required: true }),
+      locale: t.arg.string(),
+    },
+    resolve: (_root, args, ctx, info) =>
+      ballots.getBallotRuns(_root, args, ctx, info) as any,
+  })
+);
+
+builder.queryField("getBallotResults", (t) =>
+  t.field({
+    type: BallotResults,
+    nullable: true,
+    args: {
+      ballotId: t.arg.string({ required: true }),
+      ballotRunId: t.arg.string(),
+      teamId: t.arg.string(),
+      schoolId: t.arg.string(),
+      canton: t.arg.string(),
+    },
+    resolve: (_root, args, ctx, info) =>
+      ballots.getBallotResults(_root, args, ctx, info) as any,
+  })
+);
+
+builder.mutationField("addBallotRun", (t) =>
+  t.prismaField({
+    type: "BallotRun",
+    args: {
+      ballotId: t.arg.string({ required: true }),
+      teamId: t.arg.string({ required: true }),
+    },
+    resolve: (_query, _root, args, ctx, info) =>
+      ballots.addBallotRun(_root, args, ctx, info) as any,
+  })
+);
+
+builder.mutationField("removeBallotRun", (t) =>
+  t.field({
+    type: Response,
+    args: { ballotRunId: t.arg.string({ required: true }) },
+    resolve: (_root, args, ctx, info) =>
+      ballots.removeBallotRun(_root, args, ctx, info) as any,
+  })
+);
+
+builder.mutationField("startBallotRun", (t) =>
+  t.prismaField({
+    type: "BallotRun",
+    args: { ballotRunId: t.arg.string({ required: true }) },
+    resolve: (_query, _root, args, ctx, info) =>
+      ballots.startBallotRun(_root, args, ctx, info) as any,
+  })
+);
+
+builder.mutationField("endBallotRun", (t) =>
+  t.prismaField({
+    type: "BallotRun",
+    args: { ballotRunId: t.arg.string({ required: true }) },
+    resolve: (_query, _root, args, ctx, info) =>
+      ballots.endBallotRun(_root, args, ctx, info) as any,
+  })
+);
+
 // TODO Step 8: CRUD ops — ballot, ballots (ordering + filtering + locale wrap),
 //   createOneBallot, updateOneBallot, deleteOneBallot

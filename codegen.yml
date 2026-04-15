@@ -9,6 +9,15 @@ generates:
       - "typescript-react-apollo"
       #- "typescript-document-nodes"
       - "fragment-matcher"
+    config:
+      reactApolloVersion: 3
+      withHooks: true
+      withHOC: false
+      withComponent: false
+      addDocBlocks: false
+      scalars:
+        DateTime: any
+        Json: any
   graphql/modules.d.ts:
     plugins:
       - "typescript-graphql-files-modules"

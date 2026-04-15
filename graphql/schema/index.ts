@@ -15,5 +15,6 @@ import "./teams";
 import "./users";
 import "./votes";
 import "./works";
+import "./crud";
 
 export const schema = applyMiddleware(builder.toSchema(), permissions);

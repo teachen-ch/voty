@@ -34,9 +34,9 @@ export default async function deleteApi(
     await prisma.attachment.delete({ where: { id } });
     await fs.rm(path.join(UPLOAD_FOLDER, attachment.file));
     res.send({ success: true });
-  } catch (err) {
+  } catch (err: any) {
     console.error(err);
-    logger.error(err);
+    logger.error(String(err));
     res.send({ error: "Error.ServerError" });
   }
 }

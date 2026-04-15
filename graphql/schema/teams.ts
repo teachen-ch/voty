@@ -95,7 +95,52 @@ export const ResponseProgress = builder
     }),
   });
 
-// TODO Step 7: queryField/mutationField for:
-//   - progress, inviteStudents, setPrefs, setNotes
+import * as teams from "../resolvers/teams";
+
+builder.queryField("progress", (t) =>
+  t.field({
+    type: ResponseProgress,
+    args: { teamId: t.arg.string({ required: true }) },
+    resolve: (_root, args, ctx, info) =>
+      teams.progress(_root, args, ctx, info) as any,
+  })
+);
+
+builder.mutationField("inviteStudents", (t) =>
+  t.field({
+    type: InviteResponse,
+    args: {
+      team: t.arg.string({ required: true }),
+      emails: t.arg.stringList({ required: true }),
+    },
+    resolve: (_root, args, ctx, info) =>
+      teams.inviteStudents(_root, args, ctx, info) as any,
+  })
+);
+
+builder.mutationField("setPrefs", (t) =>
+  t.prismaField({
+    type: "Team",
+    args: {
+      teamId: t.arg.string({ required: true }),
+      prefs: t.arg({ type: "Json", required: true }),
+    },
+    resolve: (_query, _root, args, ctx, info) =>
+      teams.setPrefs(_root, args, ctx, info) as any,
+  })
+);
+
+builder.mutationField("setNotes", (t) =>
+  t.prismaField({
+    type: "Team",
+    args: {
+      teamId: t.arg.string({ required: true }),
+      notes: t.arg({ type: "Json", required: true }),
+    },
+    resolve: (_query, _root, args, ctx, info) =>
+      teams.setNotes(_root, args, ctx, info) as any,
+  })
+);
+
 // TODO Step 8: CRUD — team, teams, createOneTeam (computed invite/code),
 //   deleteOneTeam

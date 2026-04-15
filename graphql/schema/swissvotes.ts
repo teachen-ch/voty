@@ -21,5 +21,22 @@ export const SwissvoteType = builder.prismaObject("Swissvote", {
   }),
 });
 
-// TODO Step 7: queryField for swissvotes — uses $queryRawUnsafe in resolver,
-//   arg list: keywords, type, result, hasPosters, limit, offset, sort
+import * as swissvotes from "../resolvers/swissvotes";
+
+builder.queryField("swissvotes", (t) =>
+  t.field({
+    type: [SwissvoteType],
+    nullable: true,
+    args: {
+      keywords: t.arg.string(),
+      type: t.arg.int(),
+      result: t.arg.int(),
+      hasPosters: t.arg.boolean(),
+      limit: t.arg.int(),
+      offset: t.arg.int(),
+      sort: t.arg.string(),
+    },
+    resolve: (_root, args, ctx, info) =>
+      swissvotes.swissvotes(_root, args, ctx, info) as any,
+  })
+);

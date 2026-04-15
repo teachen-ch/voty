@@ -233,7 +233,7 @@ type PostWorkHookType = (args: {
   card: string;
   title?: string;
   text?: string;
-  data?: Scalars["Json"];
+  data?: Scalars["Json"]["input"];
   users?: UserWhereUniqueInput[];
   visibility?: Visibility;
   setTrigger?: (n: number) => void;
@@ -252,7 +252,7 @@ export const usePostWork: PostWorkHookType = (args) => {
       variables: {
         data: {
           team: { connect: { id: team.id } },
-          school: { connect: { id: user?.school?.id } },
+          school: { connect: { id: user?.school?.id || "" } },
           users: { connect: users ? users : [{ id: user.id }] },
           title,
           text,

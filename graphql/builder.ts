@@ -23,6 +23,8 @@ export const builder = new SchemaBuilder<{
     Json: { Input: unknown; Output: unknown };
   };
 }>({
+  // @ts-expect-error — runtime-supported option missing from v4 type defs
+  defaultFieldNullability: false,
   plugins: [PrismaPlugin, PrismaUtils],
   prisma: {
     client: () => prisma,
