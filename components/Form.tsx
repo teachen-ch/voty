@@ -1,10 +1,13 @@
 import {
   Formik,
-  Form,
+  Form as FormikForm,
   useField,
   FormikFormProps,
   useFormikContext,
 } from "formik";
+const Form = FormikForm as unknown as React.FC<
+  React.PropsWithChildren<unknown>
+>;
 import { Text, Button, Box, BoxProps } from "rebass";
 import { Grid } from "theme-ui";
 import {
@@ -24,13 +27,11 @@ import { useTr } from "util/translate";
 
 export { Formik, Form, yup, Grid };
 
-export const Input: React.FC<
-  RebassInputProps & {
-    label: string;
-    area?: boolean;
-    setter?: (s: string) => void;
-  }
-> = ({ label, setter, area, ...props }) => {
+export const Input: React.FC<React.PropsWithChildren<RebassInputProps & {
+  label: string;
+  area?: boolean;
+  setter?: (s: string) => void;
+}>> = ({ label, setter, area, ...props }) => {
   const [field, meta] = useField<string>(props as any);
   const InputComponent = area ? Textarea : RebassInput;
   // TODO: this is a really hacky way to get values out of the form again
@@ -94,7 +95,7 @@ type QFormProps = FormikFormProps & {
   mutation: MutationFunction<any, any>;
 };
 
-export const QForm: React.FC<QFormProps> = ({ fields, mutation, ...props }) => {
+export const QForm: React.FC<React.PropsWithChildren<QFormProps>> = ({ fields, mutation, ...props }) => {
   // default onSubmit = execute mutation handler
   const doMutation = (values: Record<string, string | number>) =>
     mutation({ variables: omit(values, "submit") });
@@ -235,7 +236,7 @@ type RadioGroupProps = {
   name: string;
 };
 
-export const RadioGroup: React.FC<RadioGroupProps> = ({
+export const RadioGroup: React.FC<React.PropsWithChildren<RadioGroupProps>> = ({
   label,
   opts,
   ...props
@@ -265,7 +266,7 @@ export const RadioGroup: React.FC<RadioGroupProps> = ({
   );
 };
 
-export const Radio: React.FC<{ id: string; name: string; value: any }> = (
+export const Radio: React.FC<React.PropsWithChildren<{ id: string; name: string; value: any }>> = (
   props
 ) => {
   const [field] = useField(props);
@@ -277,7 +278,7 @@ type SelectProps = RebassSelectProps & {
   setter?: (s: string) => void;
 };
 
-export const Select: React.FC<SelectProps> = ({
+export const Select: React.FC<React.PropsWithChildren<SelectProps>> = ({
   label,
   defaultValue,
   ...props
@@ -314,7 +315,7 @@ type ErrorBoxProps = BoxProps & {
   error: string;
 };
 
-export const ErrorBox: React.FC<ErrorBoxProps> = ({ error, ...props }) => {
+export const ErrorBox: React.FC<React.PropsWithChildren<ErrorBoxProps>> = ({ error, ...props }) => {
   const tr = useTr();
   if (!error) return null;
   return (
@@ -337,7 +338,7 @@ export const ErrorBox: React.FC<ErrorBoxProps> = ({ error, ...props }) => {
   );
 };
 
-export const Submit: React.FC<{ label: string }> = ({ label }) => {
+export const Submit: React.FC<React.PropsWithChildren<{ label: string }>> = ({ label }) => {
   const context = useFormikContext();
   const tr = useTr();
   const submitting = context.isSubmitting;

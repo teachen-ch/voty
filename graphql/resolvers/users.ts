@@ -12,7 +12,7 @@ import { sendMail } from "../../util/email";
 import { randomBytes, createHash } from "crypto";
 import logger from "../../util/logger";
 import { Context } from "../context";
-import { FieldResolver } from "@nexus/schema";
+import { FieldResolver } from "../context";
 import { NextApiRequest } from "next";
 import { promises as fs } from "fs";
 import pick from "lodash/pick";
@@ -112,7 +112,7 @@ function startJWTSession(user: User, ctx: Context): ResponseLogin {
   ]);
 
   const token: string = jwt.sign({ user: jwtUser }, secret, {
-    expiresIn: expires,
+    expiresIn: expires as any,
   });
 
   setRequestUser(user, ctx);
@@ -425,7 +425,7 @@ export async function sendVerificationEmail(
     });
     logger.info(`Sending ${template} email to: ${email} `);
 
-    if (process.env.NODE_ENV !== "production") {
+    if (process.env.NODE_ENV !== "production" || process.env.CYPRESS) {
       await fs.writeFile("/tmp/voty-verification-url", url);
     }
 

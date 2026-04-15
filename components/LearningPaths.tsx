@@ -10,7 +10,7 @@ import Image from "next/image";
 import IconWatch from "../public/images/icon_watch.svg";
 import upperFirst from "lodash/upperFirst";
 
-export const LearningPath: React.FC<{ path: string; anon?: boolean }> = ({
+export const LearningPath: React.FC<React.PropsWithChildren<{ path: string; anon?: boolean }>> = ({
   path,
   anon,
 }) => {
@@ -64,7 +64,7 @@ export const LearningPath: React.FC<{ path: string; anon?: boolean }> = ({
   );
 };
 
-const CardDetail: React.FC<{ id: string; teamLink: string }> = ({
+const CardDetail: React.FC<React.PropsWithChildren<{ id: string; teamLink: string }>> = ({
   id,
   teamLink,
 }) => {
@@ -92,7 +92,7 @@ const CardDetail: React.FC<{ id: string; teamLink: string }> = ({
       <TDIcon mr={0}>
         <Image src={IconWatch} alt="" />
       </TDIcon>
-      <TD width="130px" fixed smHide>
+      <TD width={130} fixed smHide>
         {card?.duration}
       </TD>
       <TDImage src={getCardTypeIcon(card?.type)} />

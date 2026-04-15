@@ -110,7 +110,7 @@ export default function Projekt(): React.ReactElement {
   );
 }
 
-const LearnMore: React.FC<{ href: string }> = ({ href }) => (
+const LearnMore: React.FC<React.PropsWithChildren<{ href: string }>> = ({ href }) => (
   <Link href={href} target="_blank" rel="noopener noreferrer">
     <Text fontWeight="semi" color="primary" variant="link">
       Learn more »»
@@ -118,7 +118,7 @@ const LearnMore: React.FC<{ href: string }> = ({ href }) => (
   </Link>
 );
 
-const TeaserText: React.FC<{ title: string; fontSize?: number[] }> = ({
+const TeaserText: React.FC<React.PropsWithChildren<{ title: string; fontSize?: number[] }>> = ({
   title,
   children,
 }) => (
@@ -132,7 +132,7 @@ const TeaserText: React.FC<{ title: string; fontSize?: number[] }> = ({
   </Box>
 );
 
-const Teaser: React.FC<{ reverse?: boolean }> = ({ reverse, children }) => (
+const Teaser: React.FC<React.PropsWithChildren<{ reverse?: boolean }>> = ({ reverse, children }) => (
   <Flex
     mt={[2, 2, 2, 2]}
     flexWrap={["wrap", "wrap", "wrap", "nowrap"]}

@@ -1,6 +1,5 @@
 graphql/types.ts
 graphql/modules.d.ts
-graphql/nexus.ts
-graphql/nexus-plugin-prisma.ts
+graphql/pothos-types.ts
 .eslintrc.js
 coverage/

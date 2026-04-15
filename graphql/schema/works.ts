@@ -1,43 +1,18 @@
-import resolvers from "../resolvers";
-import { extendType, objectType } from "@nexus/schema";
+import { builder } from "../builder";
 
-export const Work = objectType({
-  name: "Work",
-  definition(t) {
-    t.nonNull.model.id();
-    t.nonNull.model.text();
-    t.nonNull.model.title();
-    t.model.data();
-    t.model.users();
-    t.model.attachments();
-    t.model.card();
-    t.model.updatedAt();
-    t.model.reactions();
-  },
+export const WorkType = builder.prismaObject("Work", {
+  fields: (t) => ({
+    id: t.exposeID("id"),
+    text: t.exposeString("text"),
+    title: t.exposeString("title"),
+    data: t.expose("data", { type: "Json", nullable: true }),
+    users: t.relation("users"),
+    attachments: t.relation("attachments"),
+    card: t.exposeString("card", { nullable: true }),
+    updatedAt: t.expose("updatedAt", { type: "DateTime" }),
+    reactions: t.relation("reactions"),
+  }),
 });
 
-export const WorksQueries = extendType({
-  type: "Query",
-  definition(t) {
-    t.crud.works({
-      ordering: true,
-      filtering: true,
-      alias: "works",
-      resolve: resolvers.works.works,
-    });
-  },
-});
-
-export const WorksMutations = extendType({
-  type: "Mutation",
-  definition(t) {
-    t.crud.createOneWork({
-      alias: "postWork",
-      resolve: resolvers.works.postWork,
-    });
-    t.crud.deleteOneWork({
-      alias: "deleteWork",
-      resolve: resolvers.works.deleteWork,
-    });
-  },
-});
+// TODO Step 8: CRUD — works (ordering + filtering), postWork (createOneWork
+//   alias), deleteWork (deleteOneWork alias)

@@ -1,42 +1,20 @@
-import resolvers from "../resolvers";
-import { extendType, objectType } from "@nexus/schema";
+import { builder, ActivityTypeEnum, VisibilityEnum } from "../builder";
 
-export const Activity = objectType({
-  name: "Activity",
-  definition(t) {
-    t.model.id();
-    t.model.type();
-    t.model.card();
-    t.model.ballotId();
-    t.model.workId();
-    t.model.summary();
-    t.model.user();
-    t.model.team();
-    t.model.school();
-    t.model.visibility();
-    t.model.time();
-  },
+export const ActivityType = builder.prismaObject("Activity", {
+  fields: (t) => ({
+    id: t.exposeInt("id", { nullable: true }),
+    type: t.field({ type: ActivityTypeEnum, resolve: (p) => p.type }),
+    card: t.exposeString("card", { nullable: true }),
+    ballotId: t.exposeString("ballotId", { nullable: true }),
+    workId: t.exposeString("workId", { nullable: true }),
+    summary: t.exposeString("summary", { nullable: true }),
+    user: t.relation("user"),
+    team: t.relation("team"),
+    school: t.relation("school"),
+    visibility: t.field({ type: VisibilityEnum, resolve: (p) => p.visibility }),
+    time: t.expose("time", { type: "DateTime" }),
+  }),
 });
 
-export const ActivitiesQueries = extendType({
-  type: "Query",
-  definition(t) {
-    t.crud.activities({
-      ordering: true,
-      filtering: true,
-      alias: "activities",
-      pagination: true,
-      resolve: resolvers.activities.activities,
-    });
-  },
-});
-
-export const ActivitiesMutations = extendType({
-  type: "Mutation",
-  definition(t) {
-    t.crud.createOneActivity({
-      alias: "postActivity",
-      resolve: resolvers.activities.postActivity,
-    });
-  },
-});
+// TODO Step 8: CRUD — activities (ordering + filtering + pagination, custom
+//   resolver wrap), postActivity (createOneActivity alias)

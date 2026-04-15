@@ -1,35 +1,18 @@
-import { extendType, objectType } from "@nexus/schema";
+import { builder } from "../builder";
 
-export const School = objectType({
-  name: "School",
-  definition(t) {
-    t.nonNull.model.id();
-    t.model.name();
-    t.model.type();
-    t.model.teams();
-    t.model.members();
-    t.model.address();
-    t.model.city();
-    t.model.zip();
-    t.model.canton();
-  },
+export const SchoolType = builder.prismaObject("School", {
+  fields: (t) => ({
+    id: t.exposeID("id"),
+    name: t.exposeString("name"),
+    type: t.exposeString("type"),
+    teams: t.relation("teams"),
+    members: t.relation("members"),
+    address: t.exposeString("address"),
+    city: t.exposeString("city"),
+    zip: t.exposeString("zip"),
+    canton: t.exposeString("canton"),
+  }),
 });
 
-export const SchoolsQueries = extendType({
-  type: "Query",
-  definition(t) {
-    t.crud.school();
-    t.crud.schools({
-      ordering: true,
-      filtering: true,
-    });
-  },
-});
-
-export const SchoolsMutations = extendType({
-  type: "Mutation",
-  definition(t) {
-    t.crud.createOneSchool();
-    t.crud.deleteOneSchool();
-  },
-});
+// TODO Step 8: CRUD — school, schools (ordering + filtering),
+//   createOneSchool, deleteOneSchool

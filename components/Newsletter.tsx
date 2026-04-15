@@ -3,7 +3,7 @@ import { Label, Input, Select } from "@rebass/forms";
 import { Grid } from "theme-ui";
 import { ReactElement } from "react";
 
-export const Newsletter: React.FC<{ campaign?: string; submit?: string }> = ({
+export const Newsletter: React.FC<React.PropsWithChildren<{ campaign?: string; submit?: string }>> = ({
   campaign,
   submit,
 }) => (
@@ -29,7 +29,7 @@ export const Newsletter: React.FC<{ campaign?: string; submit?: string }> = ({
   </form>
 );
 
-export const NewsletterSlim: React.FC<{ campaign?: string }> = ({
+export const NewsletterSlim: React.FC<React.PropsWithChildren<{ campaign?: string }>> = ({
   campaign,
 }) => (
   <form action="https://newsletter.teachen.ch/subscribe" method="POST">

@@ -196,7 +196,7 @@ type BallotsProps = {
   onClick: (ballot: BallotFieldsFragment) => void;
 };
 
-export const Ballots: React.FC<BallotsProps> = ({ where, onClick }) => {
+export const Ballots: React.FC<React.PropsWithChildren<BallotsProps>> = ({ where, onClick }) => {
   const ballotsQuery = useBallotsQuery({ variables: { where } });
 
   if (ballotsQuery.error) return <Err msg={ballotsQuery.error.message} />;
@@ -219,9 +219,9 @@ export const Ballots: React.FC<BallotsProps> = ({ where, onClick }) => {
   );
 };
 
-export const StudentListBallots: React.FC<{
+export const StudentListBallots: React.FC<React.PropsWithChildren<{
   teamId: string;
-}> = ({ teamId }) => {
+}>> = ({ teamId }) => {
   const router = useRouter();
   const where = { ballotRuns: { some: { teamId: { equals: teamId } } } };
   const ballotsQuery = useBallotsQuery({ variables: { where } });
@@ -255,13 +255,13 @@ export const StudentListBallots: React.FC<{
   );
 };
 
-export const Ballot: React.FC<{
+export const Ballot: React.FC<React.PropsWithChildren<{
   ballot: BallotFieldsFragment;
   buttonText?: string;
   buttonColor?: string;
   onButton?: (ballot: BallotFieldsFragment) => void;
   onDetail?: (ballot: BallotFieldsFragment) => void;
-}> = ({
+}>> = ({
   ballot,
   children,
   buttonText,
@@ -277,7 +277,7 @@ export const Ballot: React.FC<{
         </A>
         <Text mt={3}>{ballot.description}</Text>
         <Text fontSize={2} my={4}>
-          <Image src={IconCal} alt="Deadline" width="20px" height="20px" />{" "}
+          <Image src={IconCal} alt="Deadline" width={20} height={20} />{" "}
           &nbsp; Zeit: {formatFromTo(ballot.start, ballot.end)}
         </Text>
         {children}
@@ -321,10 +321,10 @@ export const getUserBallotStatus = (
   else return BallotStatus.Started;
 };
 
-export const SelectBallots: React.FC<{
+export const SelectBallots: React.FC<React.PropsWithChildren<{
   team: TeamTeacherFieldsFragment;
   scope: BallotScope;
-}> = ({ team, scope }) => {
+}>> = ({ team, scope }) => {
   const router = useRouter();
   const [doAddBallotRun, addMutation] = useAddBallotRunMutation();
   const [doRemoveBallotRun, removeMutation] = useRemoveBallotRunMutation();
@@ -387,7 +387,7 @@ export const SelectBallots: React.FC<{
         update: (cache, result) => {
           cache.modify({
             fields: {
-              getBallotRuns(existingRuns: BallotRunFieldsFragment[] = []) {
+              getBallotRuns(existingRuns: any = []) {
                 const newRun = cache.writeFragment({
                   data: result.data?.addBallotRun,
                   fragment: fragments.BallotRunFields,
@@ -425,7 +425,7 @@ export const SelectBallots: React.FC<{
                   sx={{ display: ["none", "none", "inline"] }}
                   color="white"
                 >
-                  <Image src={IconDeadline} height="20px" alt="Deadline" />
+                  <Image src={IconDeadline} height={20} alt="Deadline" />
                   &nbsp;
                   {formatDate(ballot.end)}
                 </Box>
@@ -435,8 +435,8 @@ export const SelectBallots: React.FC<{
                   <Image
                     src={IconResults}
                     alt="Resultate"
-                    width="20px"
-                    height="20px"
+                    width={20}
+                    height={20}
                     onClick={() => detailBallot(ballot.id)}
                   />
                 </Box>
@@ -448,8 +448,8 @@ export const SelectBallots: React.FC<{
                       src={IconCheckOn}
                       alt="ausgewählt"
                       data-cy="on"
-                      width="20px"
-                      height="20px"
+                      width={20}
+                      height={20}
                       className="pointer"
                     />
                   ) : (
@@ -457,8 +457,8 @@ export const SelectBallots: React.FC<{
                       src={IconCheckOff}
                       alt="abgewählt"
                       data-cy="off"
-                      width="20px"
-                      height="20px"
+                      width={20}
+                      height={20}
                       className="pointer"
                     />
                   )}
@@ -472,15 +472,15 @@ export const SelectBallots: React.FC<{
   );
 };
 
-export const BallotDetails: React.FC<{
+export const BallotDetails: React.FC<React.PropsWithChildren<{
   ballot: NonNullable<BallotQuery["ballot"]>;
-}> = ({ ballot, children }) => (
+}>> = ({ ballot, children }) => (
   <Card>
     <Text>
       <Text fontWeight="bold">{ballot.title}</Text>
       <Text mt={3}>{ballot.description}</Text>
       <Text fontSize={2} my={4}>
-        <img src="/images/icon_cal.svg" width="20px" alt="Zeit" /> &nbsp; Zeit:{" "}
+        <img src="/images/icon_cal.svg" width={20} alt="Zeit" /> &nbsp; Zeit:{" "}
         {formatFromTo(ballot.start, ballot.end)}
       </Text>
       {children}
@@ -494,10 +494,10 @@ export const BallotDetails: React.FC<{
   </Card>
 );
 
-export const PanelCode: React.FC<{
+export const PanelCode: React.FC<React.PropsWithChildren<{
   team: TeamTeacherFieldsFragment;
   hasRuns: boolean;
-}> = ({ team, hasRuns }) => {
+}>> = ({ team, hasRuns }) => {
   if (!team?.code || !hasRuns) return null;
   return (
     <Text id="livepanel">
@@ -506,6 +506,7 @@ export const PanelCode: React.FC<{
         href="/panel/[code]/present"
         as={`/panel/${team.code}/present`}
         passHref
+        legacyBehavior
       >
         <Button>Code: {team.code}</Button>
       </Link>

@@ -33,7 +33,7 @@ export const DELETE_ACCOUNT = gql`
   }
 `;
 
-const DeleteForm: React.FC<{ user: SessionUser }> = ({ user }) => {
+const DeleteForm: React.FC<React.PropsWithChildren<{ user: SessionUser }>> = ({ user }) => {
   const router = useRouter();
   const setAccessToken = useSetAccessToken();
   const setUser = useSetUser();
@@ -66,7 +66,7 @@ const DeleteForm: React.FC<{ user: SessionUser }> = ({ user }) => {
       <Box>
         <Text>
           Leider hat die Löschung nicht geklappt! Bitte nimm mit uns{" "}
-          <Link href="/kontakt" passHref>
+          <Link href="/kontakt" passHref legacyBehavior>
             <A>Kontakt</A>
           </Link>{" "}
           auf.

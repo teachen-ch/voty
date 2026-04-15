@@ -16,7 +16,16 @@ import CheckLogin from "./CheckLogin";
 import Image from "next/image";
 import IconOK from "../public/images/icon_user_ok.svg";
 import IconNOK from "../public/images/icon_user_nok.svg";
-import { Formik, Form, Field, ErrorMessage, useField } from "formik";
+import {
+  Formik,
+  Form as FormikForm,
+  Field,
+  ErrorMessage,
+  useField,
+} from "formik";
+const Form = FormikForm as unknown as React.FC<
+  React.PropsWithChildren<unknown>
+>;
 import { Grid } from "theme-ui";
 import { useTr } from "util/translate";
 import Link from "next/link";
@@ -135,12 +144,12 @@ interface IProfileForm {
   year?: number | null;
 }
 
-export const ProfileEdit: React.FC<{
+export const ProfileEdit: React.FC<React.PropsWithChildren<{
   user: SessionUser;
   editMode?: boolean;
   skipName?: boolean;
   onFinish?: () => void;
-}> = ({ user, editMode, onFinish, skipName }) => {
+}>> = ({ user, editMode, onFinish, skipName }) => {
   const [error, setError] = useState("");
   const [edit, setEdit] = useState(editMode);
   const setUser = useSetUser();
@@ -224,7 +233,7 @@ export const ProfileEdit: React.FC<{
         <Text fontSize={1} textAlign="left" sx={{ gridColumn: [0, 0, 2] }}>
           {tr(`Profile.Legal.${user?.role}`)}
 
-          <Link href="/datenschutz/" passHref>
+          <Link href="/datenschutz/" passHref legacyBehavior>
             <A target="_blank" variant="underline">
               {tr("Profile.DataLink")}
             </A>
@@ -299,7 +308,7 @@ export const ProfileEdit: React.FC<{
 
             <Text fontSize={1} textAlign="left" sx={{ gridColumn: [0, 0, 2] }}>
               {tr(`Profile.Legal.${user?.role}`)}
-              <Link href="/datenschutz/" passHref>
+              <Link href="/datenschutz/" passHref legacyBehavior>
                 <A target="_blank" variant="underline">
                   {tr("Profile.DataLink")}
                 </A>
@@ -319,7 +328,7 @@ type InputProps = {
   focus?: boolean;
 };
 
-export const Input: React.FC<InputProps> = ({
+export const Input: React.FC<React.PropsWithChildren<InputProps>> = ({
   label,
   name,
   placeholder,
@@ -349,7 +358,7 @@ export const Input: React.FC<InputProps> = ({
   );
 };
 
-export const FieldError: React.FC<{ name: string }> = ({ name }) => (
+export const FieldError: React.FC<React.PropsWithChildren<{ name: string }>> = ({ name }) => (
   <ErrorMessage name={name}>
     {(msg) => (
       <Text variant="fielderror" sx={{ gridColumn: [0, 0, 2] }}>
@@ -359,10 +368,10 @@ export const FieldError: React.FC<{ name: string }> = ({ name }) => (
   </ErrorMessage>
 );
 
-export const ShowField: React.FC<{
+export const ShowField: React.FC<React.PropsWithChildren<{
   label: string;
   value?: string | null | number;
-}> = ({ label, value }) => {
+}>> = ({ label, value }) => {
   return (
     <>
       <Text my={[0, 0, 1]} textAlign="left" pt={[0, 0, 2]}>

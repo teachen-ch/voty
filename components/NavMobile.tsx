@@ -18,7 +18,7 @@ import IconFaq from "../public/images/icon_faq.svg";
 
 import { Role } from "graphql/types";
 
-export const NavMobile: React.FC<{ user: SessionUser; color: string }> = ({
+export const NavMobile: React.FC<React.PropsWithChildren<{ user: SessionUser; color: string }>> = ({
   user,
   color,
 }) => {
@@ -124,7 +124,7 @@ export const NavMobile: React.FC<{ user: SessionUser; color: string }> = ({
   );
 };
 
-const MIcon: React.FC<{ src: string }> = ({ src }) => (
+const MIcon: React.FC<React.PropsWithChildren<{ src: string }>> = ({ src }) => (
   <Box mr={3} display="inline-block" verticalAlign="sub">
     <Image src={src} alt="" />
   </Box>

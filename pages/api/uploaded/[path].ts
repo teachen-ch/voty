@@ -32,7 +32,7 @@ export default async function uploadedApi(
     stream.on("end", () => res.end());
   } catch (err) {
     console.error(err);
-    logger.error(err);
+    logger.error(String(err));
     res.send({ error: "Error.ServerError" });
   }
 }

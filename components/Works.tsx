@@ -75,18 +75,16 @@ export const DELETE_WORK = gql`
   }
 `;
 
-export type WorkItem = React.FC<{ work: WorkFieldsFragment }>;
+export type WorkItem = React.FC<React.PropsWithChildren<{ work: WorkFieldsFragment }>>;
 
 // TODO: Rethink, whether we want to keep the where param
-export const Works: React.FC<
-  FlexProps & {
-    where?: WorkWhereInput;
-    card?: string;
-    items: WorkItem;
-    list?: React.FC;
-    trigger?: number;
-  }
-> = ({ where, items, list, trigger, card, ...props }) => {
+export const Works: React.FC<React.PropsWithChildren<FlexProps & {
+  where?: WorkWhereInput;
+  card?: string;
+  items: WorkItem;
+  list?: React.FC<React.PropsWithChildren<unknown>>;
+  trigger?: number;
+}>> = ({ where, items, list, trigger, card, ...props }) => {
   const team = useTeam();
   const user = useUser();
   const [doDeleteWork] = useDeleteWorkMutation();
@@ -99,20 +97,22 @@ export const Works: React.FC<
   if (card) where.card = { equals: card };
   const worksQuery = useWorksQuery({
     variables: { where },
-    onCompleted() {
-      // scroll to, and open work if page is called with hash #id
-      const id = document.location.hash.substring(1);
-      const el = document.getElementById(id);
-      if (el) {
-        el.scrollIntoView({ behavior: "smooth", block: "center" });
-        setActive(id);
-      }
-    },
   });
   const works = worksQuery.data?.works;
   const Comp = items;
   const ListComp = list || Flex;
   const [active, setActive] = useState("");
+
+  useEffect(() => {
+    if (!works) return;
+    // scroll to, and open work if page is called with hash #id
+    const id = document.location.hash.substring(1);
+    const el = document.getElementById(id);
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth", block: "center" });
+      setActive(id);
+    }
+  }, [works]);
 
   useEffect(() => {
     if (trigger) {
@@ -172,7 +172,7 @@ export const Works: React.FC<
             <Flex
               bg="darkgray"
               p={1}
-              height="40px"
+              height={40}
               px={"12px"}
               alignItems="center"
               sx={{ borderRadius: "5px" }}
@@ -215,7 +215,7 @@ export const Works: React.FC<
   );
 };
 
-export const WorkCard: React.FC<BoxProps> = ({ children, ...props }) => (
+export const WorkCard: React.FC<React.PropsWithChildren<BoxProps>> = ({ children, ...props }) => (
   <Box
     sx={{ borderRadius: 5 }}
     bg="lightgray"
@@ -233,7 +233,7 @@ type PostWorkHookType = (args: {
   card: string;
   title?: string;
   text?: string;
-  data?: Scalars["Json"];
+  data?: Scalars["Json"]["input"];
   users?: UserWhereUniqueInput[];
   visibility?: Visibility;
   setTrigger?: (n: number) => void;
@@ -252,7 +252,7 @@ export const usePostWork: PostWorkHookType = (args) => {
       variables: {
         data: {
           team: { connect: { id: team.id } },
-          school: { connect: { id: user?.school?.id } },
+          school: { connect: { id: user?.school?.id || "" } },
           users: { connect: users ? users : [{ id: user.id }] },
           title,
           text,
@@ -279,13 +279,13 @@ export const POST_WORK = gql`
   ${WorkFields}
 `;
 
-export const WorkSubmit: React.FC<{
+export const WorkSubmit: React.FC<React.PropsWithChildren<{
   title?: string;
   text?: string;
   data: any;
   visibility?: Visibility;
   setTrigger?: (n: number) => void;
-}> = ({ title, data, text, visibility: visibilityDefault, setTrigger }) => {
+}>> = ({ title, data, text, visibility: visibilityDefault, setTrigger }) => {
   const { card, title: cardTitle } = useContext(CardContext);
   const user = useUser();
   const team = useTeam();
@@ -329,10 +329,10 @@ export const WorkSubmit: React.FC<{
   );
 };
 
-export const Visible: React.FC<{
+export const Visible: React.FC<React.PropsWithChildren<{
   visibility?: Visibility;
   setVisibility: (v?: Visibility) => void;
-}> = ({ visibility, setVisibility }) => {
+}>> = ({ visibility, setVisibility }) => {
   return (
     <Flex my={3} flexWrap={["wrap", "wrap", "nowrap"]}>
       <Label>Veröffentlichen: </Label>
@@ -370,12 +370,10 @@ export const Visible: React.FC<{
   );
 };
 
-export const Authors: React.FC<
-  BoxProps & {
-    work?: WorkFieldsFragment;
-    setUsers: (u: Array<UserWhereUniqueInput>) => void;
-  }
-> = ({ work, setUsers, ...props }) => {
+export const Authors: React.FC<React.PropsWithChildren<BoxProps & {
+  work?: WorkFieldsFragment;
+  setUsers: (u: Array<UserWhereUniqueInput>) => void;
+}>> = ({ work, setUsers, ...props }) => {
   type U = Pick<User, "id" | "shortname">;
   const user = useUser();
   const team = useTeam();
@@ -487,7 +485,7 @@ export const Authors: React.FC<
             outline: "none",
             fontSize: 22,
           }}
-          width="100px"
+          width={100}
           placeholder="Suche nach Vorname…"
         />
         {matches.length > 0 && (

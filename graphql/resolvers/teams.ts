@@ -1,13 +1,26 @@
 import { createUser, connectUserTeam, extractName } from "./users";
-import { FieldResolver } from "@nexus/schema";
+import { FieldResolver } from "../context";
 import { Role, PrismaClient, Visibility, ActivityType } from "@prisma/client";
 import find from "lodash/find";
 import findIndex from "lodash/findIndex";
-import { User as PrismaUser } from "@prisma/client";
+import { User as PrismaUser, User } from "@prisma/client";
 import { fetchMails } from "../../util/imap";
 import logger from "../../util/logger";
 import { logActivity } from "./activities";
-import type { User, ProgressCard, ProgressStudent } from "graphql/types";
+
+// Local shapes for progress types — originally generated from SDL.
+// Keep in sync with graphql/schema/teams.ts ProgressCard/ProgressStudent.
+export type ProgressCard = {
+  id?: string | null;
+  done?: User[] | null;
+  due?: User[] | null;
+};
+export type ProgressStudent = {
+  id?: string | null;
+  email?: string | null;
+  done?: string[] | null;
+  due?: string[] | null;
+};
 
 export const inviteStudents: FieldResolver<
   "Mutation",
@@ -208,7 +221,7 @@ export const progress: FieldResolver<"Query", "progress"> = async (
     work.users.forEach((user) => {
       item?.done?.push((user as any) as User);
       const student = find(students, { id: user.id });
-      student?.done?.push(work.card);
+      if (work.card) student?.done?.push(work.card);
     });
   });
   // quite hacky type juggling...

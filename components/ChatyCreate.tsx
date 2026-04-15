@@ -8,11 +8,11 @@ import { UserWhereUniqueInput } from "graphql/types";
 import { Info } from "./Info";
 import { parseMessages } from "util/chaty";
 
-export const ChatyCreate: React.FC<{
+export const ChatyCreate: React.FC<React.PropsWithChildren<{
   title?: string;
   lines?: string;
   rows?: number;
-}> = ({ title: initialTitle, lines: initialLines, rows = 10 }) => {
+}>> = ({ title: initialTitle, lines: initialLines, rows = 10 }) => {
   const [title, setTitle] = useState("");
   const [lines, setLines] = useState(initialLines?.trim());
   const [error, setError] = useState("");

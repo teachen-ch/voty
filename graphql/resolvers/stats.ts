@@ -1,4 +1,4 @@
-import { FieldResolver } from "@nexus/schema";
+import { FieldResolver } from "../context";
 import { Role } from "@prisma/client";
 
 export const stats: FieldResolver<"Query", "stats"> = async (

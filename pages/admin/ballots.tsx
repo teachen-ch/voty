@@ -37,7 +37,7 @@ export default function BallotsPage(): ReactElement {
   );
 }
 
-const Results: React.FC<{ ballotId: string }> = ({ ballotId }) => {
+const Results: React.FC<React.PropsWithChildren<{ ballotId: string }>> = ({ ballotId }) => {
   const resultsQuery = useGetBallotResultsQuery({
     variables: { ballotId },
     skip: !ballotId,

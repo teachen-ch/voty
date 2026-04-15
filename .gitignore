@@ -11,9 +11,6 @@
 /.next/
 /out/
 
-# Nexus
-/.nexus
-
 # pg data directory from docker
 /data
 

@@ -1,4 +1,3 @@
-// @ts-nocheck
 // See here
 // https://github.com/rebassjs/rebass/issues/755#issuecomment-587250893
 
@@ -21,7 +20,11 @@ import {
 } from "@rebass/forms";
 
 declare module "rebass" {
+  interface BaseProps {
+    children?: React.ReactNode;
+  }
   interface BoxProps extends BoxP {
+    children?: React.ReactNode;
     as?: React.ElementType;
     textAlign?: string | string[];
     className?: string;

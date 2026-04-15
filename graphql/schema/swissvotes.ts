@@ -1,62 +1,42 @@
-import resolvers from "../resolvers";
-import {
-  extendType,
-  objectType,
-  stringArg,
-  intArg,
-  booleanArg,
-} from "@nexus/schema";
+import { builder } from "../builder";
 
-/*
-enum SwissvoteType {
-  "Obligatory" = 1,
-  "Faculative" = 2,
-  "Initiative" = 3,
-  "Counter" = 4,
-  "Tiebreak" = 5,
-}
-
-enum SwissvoteResult {
-  "No" = 0,
-  "Yes" = 1,
-  "NotRequired" = 3,
-}*/
-
-export const Swissvote = objectType({
-  name: "Swissvote",
-  definition(t) {
-    t.string("anr"); // anr
-    t.string("datum"); // datum
-    t.string("titel_kurz_d"); // titel_kurz_d
-    t.string("titel_off_d"); // titel_off_d
-    t.string("stichwort"); // stichwort
-    t.string("swissvoteslink"); // swissvotes link
-    t.int("rechtsform"); // rechtsform (1 - 5)
-    t.string("poster_ja"); // poster_ja
-    t.string("poster_nein"); // poster_nein
-    t.int("annahme"); // annahme (0: no, 1: yes)
-    t.int("volk"); // volk (0: no, 1: yes)
-    t.int("stand"); // stand (0: no, 1: yes, 3: not required)
-    t.string("kategorien"); // d1e1-d3e3
-  },
+export const SwissvoteType = builder.prismaObject("Swissvote", {
+  fields: (t) => ({
+    anr: t.exposeString("anr", { nullable: true }),
+    datum: t.string({
+      nullable: true,
+      resolve: (p) => (p.datum ? String(p.datum) : null),
+    }),
+    titel_kurz_d: t.exposeString("titel_kurz_d", { nullable: true }),
+    titel_off_d: t.exposeString("titel_off_d", { nullable: true }),
+    stichwort: t.exposeString("stichwort", { nullable: true }),
+    swissvoteslink: t.exposeString("swissvoteslink", { nullable: true }),
+    rechtsform: t.exposeInt("rechtsform", { nullable: true }),
+    poster_ja: t.exposeString("poster_ja", { nullable: true }),
+    poster_nein: t.exposeString("poster_nein", { nullable: true }),
+    annahme: t.exposeInt("annahme", { nullable: true }),
+    volk: t.exposeInt("volk", { nullable: true }),
+    stand: t.exposeInt("stand", { nullable: true }),
+    kategorien: t.exposeString("kategorien", { nullable: true }),
+  }),
 });
 
-export const SwissvotesQuery = extendType({
-  type: "Query",
-  definition(t) {
-    t.list.field("swissvotes", {
-      type: "Swissvote",
-      args: {
-        keywords: stringArg(),
-        type: intArg(),
-        result: intArg(),
-        hasPosters: booleanArg(),
-        limit: intArg(),
-        offset: intArg(),
-        sort: stringArg(),
-      },
-      resolve: (_root, args, ctx, info) =>
-        resolvers.swissvotes.swissvotes(_root, args, ctx, info),
-    });
-  },
-});
+import * as swissvotes from "../resolvers/swissvotes";
+
+builder.queryField("swissvotes", (t) =>
+  t.field({
+    type: [SwissvoteType],
+    nullable: true,
+    args: {
+      keywords: t.arg.string(),
+      type: t.arg.int(),
+      result: t.arg.int(),
+      hasPosters: t.arg.boolean(),
+      limit: t.arg.int(),
+      offset: t.arg.int(),
+      sort: t.arg.string(),
+    },
+    resolve: (_root, args, ctx, info) =>
+      swissvotes.swissvotes(_root, args, ctx, info) as any,
+  })
+);

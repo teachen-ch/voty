@@ -1,48 +1,47 @@
-import {
-  objectType,
-  mutationType,
-  stringArg,
-  intArg,
-  nonNull,
-} from "@nexus/schema";
-import resolvers from "../resolvers";
+import { builder } from "../builder";
 
-export const Vote = objectType({
-  name: "Vote",
-  definition(t) {
-    t.model.verify();
-    t.model.ballot();
-  },
+export const VoteType = builder.prismaObject("Vote", {
+  fields: (t) => ({
+    verify: t.exposeString("verify", { nullable: true }),
+    ballot: t.relation("ballot"),
+  }),
 });
 
-export const Response = objectType({
-  name: "Response",
-  definition(t) {
-    t.boolean("success");
-    t.boolean("error");
-    t.string("message");
-  },
+export const Response = builder.objectRef<{
+  success?: boolean;
+  error?: boolean;
+  message?: string;
+}>("Response").implement({
+  fields: (t) => ({
+    success: t.boolean({ nullable: true, resolve: (p) => p.success ?? null }),
+    error: t.boolean({ nullable: true, resolve: (p) => p.error ?? null }),
+    message: t.string({ nullable: true, resolve: (p) => p.message ?? null }),
+  }),
 });
 
-export const Mutation = mutationType({
-  definition(t) {
-    t.field("vote", {
-      type: "Vote",
-      args: {
-        ballotId: nonNull(stringArg()),
-        vote: nonNull(intArg()),
-      },
-      resolve: resolvers.ballots.vote,
-    });
+import * as ballots from "../resolvers/ballots";
 
-    t.field("voteCode", {
-      type: "Response",
-      args: {
-        ballotRunId: nonNull(stringArg()),
-        vote: nonNull(intArg()),
-        code: nonNull(stringArg()),
-      },
-      resolve: resolvers.ballots.voteCode,
-    });
-  },
-});
+builder.mutationField("vote", (t) =>
+  t.prismaField({
+    type: "Vote",
+    args: {
+      ballotId: t.arg.string({ required: true }),
+      vote: t.arg.int({ required: true }),
+    },
+    resolve: (_query, _root, args, ctx, info) =>
+      ballots.vote(_root, args, ctx, info) as any,
+  })
+);
+
+builder.mutationField("voteCode", (t) =>
+  t.field({
+    type: Response,
+    args: {
+      ballotRunId: t.arg.string({ required: true }),
+      vote: t.arg.int({ required: true }),
+      code: t.arg.string({ required: true }),
+    },
+    resolve: (_root, args, ctx, info) =>
+      ballots.voteCode(_root, args, ctx, info) as any,
+  })
+);

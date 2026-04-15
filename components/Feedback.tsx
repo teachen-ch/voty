@@ -11,9 +11,7 @@ import { Err } from "./Page";
 import NewWindow from "react-new-window";
 import { useUser } from "state/user";
 
-export const FeedbackText: React.FC<
-  BoxProps & { text?: string; quest?: string; card?: string }
-> = ({
+export const FeedbackText: React.FC<React.PropsWithChildren<BoxProps & { text?: string; quest?: string; card?: string }>> = ({
   text = "Hast du Fragen oder Verbesserungsvorschläge zu diesem Inhalt?",
   card,
   quest,
@@ -34,11 +32,11 @@ export const FeedbackText: React.FC<
   );
 };
 
-export const FeedbackForm: React.FC<{
+export const FeedbackForm: React.FC<React.PropsWithChildren<{
   doClose: () => void;
   card?: string;
   quest?: string;
-}> = ({ doClose, card, quest }) => {
+}>> = ({ doClose, card, quest }) => {
   const { card: cardFromContext } = useContext(CardContext);
   if (cardFromContext) card = cardFromContext;
   const user = useUser();
@@ -143,7 +141,7 @@ export const FeedbackForm: React.FC<{
   );
 };
 
-export const FeedbackPlain: React.FC<{ title?: string }> = ({ title }) => {
+export const FeedbackPlain: React.FC<React.PropsWithChildren<{ title?: string }>> = ({ title }) => {
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState("");
   const user = useUser();

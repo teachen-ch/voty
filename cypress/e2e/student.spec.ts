@@ -8,7 +8,7 @@ describe("Test Teacher Startpage", () => {
     cy.visit("/student");
     cy.contains("Bitte ergänze hier noch deine Angaben");
     cy.findByLabelText("Vorname:").clear().type("Student Two");
-    cy.findByLabelText("Jahrgang:").select("2004");
+    cy.findByLabelText("Jahrgang:").select(String(new Date().getFullYear() - 15));
     cy.contains("weiblich").click();
     cy.contains("Angaben speichern").click();
   });

@@ -19,7 +19,7 @@ async function run() {
     }
 
     process.exit();
-  } catch (err) {
+  } catch (err: any) {
     console.error("There was an error loading your data", err.message);
     process.exit(1);
   }

@@ -1,4 +1,4 @@
-export const DemocracyMap: React.FC = () => (
+export const DemocracyMap: React.FC<React.PropsWithChildren<unknown>> = () => (
   <iframe
     src="https://ourworldindata.org/grapher/age-of-democracies"
     loading="lazy"

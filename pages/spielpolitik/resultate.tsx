@@ -29,7 +29,7 @@ export default function ZDAResults(): React.ReactElement {
   );
 }
 
-export const ZDAResultPies: React.FC = () => {
+export const ZDAResultPies: React.FC<React.PropsWithChildren<unknown>> = () => {
   const ballotsQuery = useBallotsQuery({
     variables: { where: { scope: { equals: BallotScope.Public } } },
   });
@@ -46,7 +46,7 @@ export const ZDAResultPies: React.FC = () => {
   );
 };
 
-const Pie: React.FC<{ ballotId: string; title: string }> = ({
+const Pie: React.FC<React.PropsWithChildren<{ ballotId: string; title: string }>> = ({
   ballotId,
   title,
 }) => {

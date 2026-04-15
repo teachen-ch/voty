@@ -81,11 +81,11 @@ export default function UsersPage(): ReactElement {
   );
 }
 
-const UserAdminList: React.FC<{
+const UserAdminList: React.FC<React.PropsWithChildren<{
   orderBy: UserOrderByInput;
   filter: string;
   role?: Role;
-}> = ({ orderBy, filter, role }) => {
+}>> = ({ orderBy, filter, role }) => {
   const [selected, setSelected] = useState("");
   const usersQuery = useAdminUsersQuery({
     variables: {
@@ -119,9 +119,9 @@ const UserAdminList: React.FC<{
             onClick={() => setSelected(user.id)}
             bg={selected === user.id ? "primary" : "inherit"}
           >
-            <TD width="300px">{user.email}</TD>
-            <TD width="100px">{user.role}</TD>
-            <TD width="400px">
+            <TD width={300}>{user.email}</TD>
+            <TD width={100}>{user.role}</TD>
+            <TD width={400}>
               {user.team?.name ||
                 user.teaches?.map((team) => team.name).join(", ")}
               &nbsp;({user.school?.name || "???"})
@@ -131,7 +131,7 @@ const UserAdminList: React.FC<{
             />
           </TR>
           {selected === user.id && (
-            <TR bg="primary" height="80px">
+            <TR bg="primary" height={80}>
               <TD fontSize={[1, 1, 1]}>
                 {user.school?.zip}{" "}
                 {user.school?.city || "Keine Schule angegeben"}
