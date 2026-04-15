@@ -190,7 +190,7 @@ export default function Home(): React.ReactElement {
               Wer fällt die Entscheidungen an eurem Schulhaus? Dürfen
               Schülerinnen und Schüler mitreden und Vorschläge einbringen? Wir
               möchten gemeinsam testen, wie wir partizipative Prozesse und mehr
-              Demokratie in Schulhäuser bringen können.
+              Demokratie in Schulhäuser bringen können.{" "}
               <LearnMore href="/leben" />
               <Box mb={4} />
             </TeaserText>
