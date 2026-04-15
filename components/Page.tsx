@@ -39,7 +39,7 @@ export const AppPage: React.FC<React.PropsWithChildren<{
       <TopBar home />
       <Container pt={props.image ? 130 : [0, 0, 50]} color="white">
         <Head>
-          <title>voty.ch – {props.heading}</title>
+          <title>{`voty.ch – ${props.heading}`}</title>
         </Head>
         <Box
           as="main"

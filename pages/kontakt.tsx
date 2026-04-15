@@ -36,7 +36,7 @@ export default function Kontakt(): ReactElement {
         Semester):
       </Text>
       <Text my={4}>
-        <Link href="/newsletter" passHref>
+        <Link href="/newsletter" passHref legacyBehavior>
           <Button width={["100%", "100%", "auto"]}>Newsletter anmelden</Button>
         </Link>
       </Text>

@@ -141,7 +141,7 @@ export const ZDAPage: React.FC<React.PropsWithChildren<{
     minHeight="100vh"
   >
     <Head>
-      <title>voty.ch – {props.heading}</title>
+      <title>{`voty.ch – ${props.heading}`}</title>
     </Head>
     <Flex
       justifyContent="space-between"

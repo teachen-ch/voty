@@ -26,7 +26,7 @@ export const A: React.FC<React.PropsWithChildren<LinkProps & { locale?: string |
   const variant = props.variant || "underline";
   if (props.href) {
     return (
-      <Link href={props.href} locale={locale} passHref>
+      <Link href={props.href} locale={locale} passHref legacyBehavior>
         <RebassLink variant={variant} {...props}>
           {props.children}
         </RebassLink>

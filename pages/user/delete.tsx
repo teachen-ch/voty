@@ -66,7 +66,7 @@ const DeleteForm: React.FC<React.PropsWithChildren<{ user: SessionUser }>> = ({ 
       <Box>
         <Text>
           Leider hat die Löschung nicht geklappt! Bitte nimm mit uns{" "}
-          <Link href="/kontakt" passHref>
+          <Link href="/kontakt" passHref legacyBehavior>
             <A>Kontakt</A>
           </Link>{" "}
           auf.

@@ -246,7 +246,7 @@ export default function Home(): React.ReactElement {
           Laufende Projekte
         </H1>
 
-        <Link href="/swiss-bulgaria" passHref>
+        <Link href="/swiss-bulgaria" passHref legacyBehavior>
           <Flex justifyContent="center" mt={0} sx={{ cursor: "pointer" }}>
             <Teaser>
               <TeaserImage
@@ -343,7 +343,7 @@ export const TeaserImage: React.FC<
 export const LearnMore: React.FC<React.PropsWithChildren<{ href: string }>> = ({
   href,
 }) => (
-  <Link href={href} passHref>
+  <Link href={href} passHref legacyBehavior>
     <Text fontWeight="semi" color="primary" variant="link">
       Mehr erfahren »»
     </Text>

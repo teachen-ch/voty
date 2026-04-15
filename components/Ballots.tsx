@@ -506,6 +506,7 @@ export const PanelCode: React.FC<React.PropsWithChildren<{
         href="/panel/[code]/present"
         as={`/panel/${team.code}/present`}
         passHref
+        legacyBehavior
       >
         <Button>Code: {team.code}</Button>
       </Link>
