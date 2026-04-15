@@ -33,7 +33,7 @@ export const DELETE_ACCOUNT = gql`
   }
 `;
 
-const DeleteForm: React.FC<{ user: SessionUser }> = ({ user }) => {
+const DeleteForm: React.FC<React.PropsWithChildren<{ user: SessionUser }>> = ({ user }) => {
   const router = useRouter();
   const setAccessToken = useSetAccessToken();
   const setUser = useSetUser();

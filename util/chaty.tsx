@@ -17,7 +17,7 @@ export type TMessage = {
   type?: string;
   line: number;
   selected?: string;
-  children?: React.ReactNode;
+  children?: React.ReactNode | React.ComponentType<{ message: TMessage }>;
   component?: React.Component;
 };
 
@@ -86,7 +86,10 @@ export function parseMessage(lines: string, ix: number): TMessage {
   return { direction, message, type, line: ix, children };
 }
 
-export function specialMessage(type: string, rest: string): React.ReactNode {
+export function specialMessage(
+  type: string,
+  rest: string
+): React.ReactNode | React.ComponentType<{ message: TMessage }> {
   switch (type) {
     case "GIF":
     case "GIPHY": {

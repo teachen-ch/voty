@@ -31,14 +31,14 @@ export const ACTIVITIES = gql`
   }
 `;
 
-export const Activities: React.FC<{
+export const Activities: React.FC<React.PropsWithChildren<{
   card?: string;
   userId?: string;
   teamId?: string;
   schoolId?: string;
   ballotId?: string;
   before?: string; // Scalars["DateTime"]
-}> = ({ card, teamId, schoolId, ballotId, userId, before }) => (
+}>> = ({ card, teamId, schoolId, ballotId, userId, before }) => (
   <ActivitiesQuery
     where={{
       card: card ? { equals: card } : undefined,
@@ -52,12 +52,12 @@ export const Activities: React.FC<{
   />
 );
 
-export const ActivitiesQuery: React.FC<{
+export const ActivitiesQuery: React.FC<React.PropsWithChildren<{
   where: ActivityWhereInput;
   first?: number;
   teamId?: string;
   before?: string; // Scalars["DateTime"]
-}> = ({ where, first = 50, before, teamId }) => {
+}>> = ({ where, first = 50, before, teamId }) => {
   if (before) {
     where.time = { lt: before };
   }

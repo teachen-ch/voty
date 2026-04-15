@@ -89,7 +89,7 @@ export default function Login(): ReactElement {
   );
 }
 
-export const LoginForm: React.FC<{ initialEmail?: string }> = ({
+export const LoginForm: React.FC<React.PropsWithChildren<{ initialEmail?: string }>> = ({
   initialEmail,
 }) => {
   usePageEvent({ category: "Login", action: "Start" });
@@ -146,7 +146,7 @@ export const LoginForm: React.FC<{ initialEmail?: string }> = ({
   );
 };
 
-const LoginPasswordForm: React.FC<{ email: string }> = ({ email }) => {
+const LoginPasswordForm: React.FC<React.PropsWithChildren<{ email: string }>> = ({ email }) => {
   usePageEvent({ category: "Login", action: "Start" });
 
   const [emailError, setEmailError] = useState("");
@@ -306,7 +306,7 @@ function AfterLogin() {
   }
 }
 
-const RequestReset: React.FC<{ onCancel: () => void; email: string }> = ({
+const RequestReset: React.FC<React.PropsWithChildren<{ onCancel: () => void; email: string }>> = ({
   onCancel,
   email,
 }) => {

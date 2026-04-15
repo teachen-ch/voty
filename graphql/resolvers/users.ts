@@ -425,7 +425,7 @@ export async function sendVerificationEmail(
     });
     logger.info(`Sending ${template} email to: ${email} `);
 
-    if (process.env.NODE_ENV !== "production") {
+    if (process.env.NODE_ENV !== "production" || process.env.CYPRESS) {
       await fs.writeFile("/tmp/voty-verification-url", url);
     }
 

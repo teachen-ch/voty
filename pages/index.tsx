@@ -51,7 +51,7 @@ export default function Home(): React.ReactElement {
             mt={[2, 2, 3, 4]}
             px={4}
             sx={{ borderRadius: "25px" }}
-            width="600px"
+            width={600}
             maxWidth="80%"
           >
             Jetzt Klasse anmelden!
@@ -203,25 +203,25 @@ export default function Home(): React.ReactElement {
           p={0}
           width={["280px", "280px", "414px"]}
         >
-          <Flex bg="#C5CFD6" height="50px" pt={15}>
+          <Flex bg="#C5CFD6" height={50} pt={15}>
             <Box
               bg="#98AAB2"
-              width="20px"
-              height="20px"
+              width={20}
+              height={20}
               sx={{ borderRadius: "10px" }}
               ml={15}
             />
             <Box
               bg="#98AAB2"
-              width="20px"
-              height="20px"
+              width={20}
+              height={20}
               sx={{ borderRadius: "10px" }}
               ml={15}
             />
             <Box
               bg="#98AAB2"
-              width="20px"
-              height="20px"
+              width={20}
+              height={20}
               sx={{ borderRadius: "10px" }}
               ml={15}
             />
@@ -281,7 +281,7 @@ export default function Home(): React.ReactElement {
   );
 }
 
-export const Teaser: React.FC<{ reverse?: boolean }> = ({
+export const Teaser: React.FC<React.PropsWithChildren<{ reverse?: boolean }>> = ({
   reverse,
   children,
 }) => (
@@ -301,7 +301,7 @@ export const Teaser: React.FC<{ reverse?: boolean }> = ({
   </Flex>
 );
 
-export const TeaserText: React.FC<{ title: string; fontSize?: number[] }> = ({
+export const TeaserText: React.FC<React.PropsWithChildren<{ title: string; fontSize?: number[] }>> = ({
   title,
   children,
   fontSize = [2, 2, 3, 3],
@@ -316,12 +316,12 @@ export const TeaserText: React.FC<{ title: string; fontSize?: number[] }> = ({
   </Box>
 );
 
-export const TeaserImage: React.FC<{
+export const TeaserImage: React.FC<React.PropsWithChildren<{
   src: string;
   width: number;
   height: number;
   top?: number;
-}> = ({ src, width, height, top }) => (
+}>> = ({ src, width, height, top }) => (
   <Box width={["90%", "90%", "70%", "50%"]} mx="auto">
     <Box
       sx={{ position: "relative", marginTop: [0, 0, 0, top] }}
@@ -339,7 +339,7 @@ export const TeaserImage: React.FC<{
   </Box>
 );
 
-export const LearnMore: React.FC<{ href: string }> = ({ href }) => (
+export const LearnMore: React.FC<React.PropsWithChildren<{ href: string }>> = ({ href }) => (
   <Link href={href} passHref>
     <Text fontWeight="semi" color="primary" variant="link">
       Mehr erfahren »»

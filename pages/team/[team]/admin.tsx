@@ -242,7 +242,7 @@ export default function TeacherTeamPage(): React.ReactElement {
           </Button>
           <Text fontSize={[1, 1, 2]} sx={{ gridColumn: [0, 0, 2] }} mt={4}>
             <Box display="inline-block" mr={2}>
-              <Image src={IconHint} alt="Hinweis" height="24px" />
+              <Image src={IconHint} alt="Hinweis" height={24} />
             </Box>
             Alternativ kannst du auch mit einem{" "}
             <A
@@ -267,7 +267,7 @@ export default function TeacherTeamPage(): React.ReactElement {
   );
 }
 
-const InviteLink: React.FC<{ team: TeamTeacherFieldsFragment }> = ({
+const InviteLink: React.FC<React.PropsWithChildren<{ team: TeamTeacherFieldsFragment }>> = ({
   team,
 }) => {
   usePageEvent({ category: "Teacher", action: "InviteLink" });
@@ -302,7 +302,7 @@ const InviteLink: React.FC<{ team: TeamTeacherFieldsFragment }> = ({
       <Button fontSize={1} onClick={() => qrCode(url)}>
         <Box variant="centered">
           <Box display="inline-block" mr={2}>
-            <Image src={IconQR} height="25px" width="25px" alt="QR-Code" />
+            <Image src={IconQR} height={25} width={25} alt="QR-Code" />
           </Box>
           QR-Code
         </Box>

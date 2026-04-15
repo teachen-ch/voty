@@ -28,7 +28,7 @@ type LogoutButtonProps = ButtonProps & {
   onSuccess?: () => void;
 };
 
-export const LogoutButton: React.FC<LogoutButtonProps> = ({
+export const LogoutButton: React.FC<React.PropsWithChildren<LogoutButtonProps>> = ({
   onSuccess,
   ...props
 }) => {

@@ -5,7 +5,7 @@ import React, { ReactElement, ReactNode, useState } from "react";
 
 const glossary = parseGlossary();
 
-export const Glossary: React.FC = () => (
+export const Glossary: React.FC<React.PropsWithChildren<unknown>> = () => (
   <MDXProvider
     components={{
       h2: GlossaryTerm,
@@ -51,7 +51,7 @@ export const glossaryReplace = (
   return children;
 };
 
-export const GlossaryReplace: React.FC<{ bg?: string; color?: string }> = ({
+export const GlossaryReplace: React.FC<React.PropsWithChildren<{ bg?: string; color?: string }>> = ({
   bg = "#444",
   color = "#fff",
   children,
@@ -79,12 +79,12 @@ export const GlossaryReplace: React.FC<{ bg?: string; color?: string }> = ({
   return <>{deepReplace(children)}</>;
 };
 
-export const GlossaryLink: React.FC<{
+export const GlossaryLink: React.FC<React.PropsWithChildren<{
   term: string;
   text?: string;
   bg?: string;
   color?: string;
-}> = ({ term, text, bg = "lightgray", color = "black", children }) => {
+}>> = ({ term, text, bg = "lightgray", color = "black", children }) => {
   const [show, setShow] = useState(false);
   function toggle() {
     setShow(!show);
@@ -126,20 +126,20 @@ export const GlossaryLink: React.FC<{
   );
 };
 
-export const GlossaryEntry: React.FC<{ term: string }> = ({ term }) => (
+export const GlossaryEntry: React.FC<React.PropsWithChildren<{ term: string }>> = ({ term }) => (
   <>
     <GlossaryTerm>{term}</GlossaryTerm>
     <GlossaryText>{getGlossary(term)}</GlossaryText>
   </>
 );
 
-export const GlossaryTerm: React.FC = (props) => (
+export const GlossaryTerm: React.FC<React.PropsWithChildren<unknown>> = (props) => (
   <Heading mt={4} mb={2} fontSize={2} id={String(props.children)}>
     {props.children}
   </Heading>
 );
 
-export const GlossaryText: React.FC = (props) => (
+export const GlossaryText: React.FC<React.PropsWithChildren<unknown>> = (props) => (
   <Text fontSize={1} ml={0} pl={3} sx={{ borderLeft: "4px solid gray" }}>
     {props.children}
   </Text>

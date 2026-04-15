@@ -42,7 +42,7 @@ export const GET_SCHOOLS_WITH_MEMBERS = gql`
   ${SchoolFields}
 `;
 
-export const Schools: React.FC = () => {
+export const Schools: React.FC<React.PropsWithChildren<unknown>> = () => {
   const schoolsQuery = useSchoolsWithMembersQuery();
   const schools = schoolsQuery.data?.schools;
 
@@ -106,7 +106,7 @@ export const GET_SCHOOL_LIST = gql`
   ${SchoolFields}
 `;
 
-export const SelectSchool: React.FC = () => {
+export const SelectSchool: React.FC<React.PropsWithChildren<unknown>> = () => {
   const user = useUser();
   const setUser = useSetUser();
   const [edit, setEdit] = useState(false);

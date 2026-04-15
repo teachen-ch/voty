@@ -1,9 +1,7 @@
 import { useState } from "react";
 import { Box, BoxProps } from "rebass";
 
-export const SlideShow: React.FC<
-  BoxProps & { images: string[]; captions?: string[]; className?: string }
-> = ({ images, captions, className, ...props }) => {
+export const SlideShow: React.FC<React.PropsWithChildren<BoxProps & { images: string[]; captions?: string[]; className?: string }>> = ({ images, captions, className, ...props }) => {
   const [active, setActive] = useState<number>(
     0
   ); /* 
@@ -49,7 +47,7 @@ export const SlideShow: React.FC<
   );
 };
 
-export const Dot: React.FC<BoxProps> = (props) => (
+export const Dot: React.FC<React.PropsWithChildren<BoxProps>> = (props) => (
   <Box display="inline-block" {...props}>
     <svg width="32" height="32" xmlns="http://www.w3.org/2000/svg">
       <ellipse

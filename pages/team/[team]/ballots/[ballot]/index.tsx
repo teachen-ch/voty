@@ -83,12 +83,12 @@ export default function BallotPage(): ReactElement {
   );
 }
 
-export const VotyNow: React.FC<{
+export const VotyNow: React.FC<React.PropsWithChildren<{
   ballot: BallotQuery["ballot"];
   onSuccess: () => void;
   slim?: boolean;
   loginLink?: string;
-}> = ({ ballot, onSuccess, slim, loginLink = "/user/login" }) => {
+}>> = ({ ballot, onSuccess, slim, loginLink = "/user/login" }) => {
   const [error, setError] = useState("");
   const tr = useTr();
   const user = useUser();
@@ -141,13 +141,13 @@ export const VotyNow: React.FC<{
               <Flex justifyContent="space-around">
                 <A onClick={() => vote(ballot.id, 1)}>
                   <Flex flexDirection="column" alignItems="center">
-                    <Image src="/images/icon_yes.svg" height="50px" alt="Ja" />
+                    <Image src="/images/icon_yes.svg" height={50} alt="Ja" />
                     <Text mt={1}>{tr("VotyNow.Yes")}</Text>
                   </Flex>
                 </A>
                 <A onClick={() => vote(ballot.id, 2)}>
                   <Flex flexDirection="column" alignItems="center">
-                    <Image src="/images/icon_no.svg" height="50px" alt="Nein" />
+                    <Image src="/images/icon_no.svg" height={50} alt="Nein" />
                     <Text mt={1}>{tr("VotyNow.No")}</Text>
                   </Flex>
                 </A>
@@ -166,7 +166,7 @@ export const VotyNow: React.FC<{
   );
 };
 
-export const VotySuccess: React.FC<{ name: Nullable<string> }> = ({ name }) => (
+export const VotySuccess: React.FC<React.PropsWithChildren<{ name: Nullable<string> }>> = ({ name }) => (
   <>
     <Text mb={4}>
       Super, {name}, du hast nun anonym abgestimmt und deine Stimme wurde

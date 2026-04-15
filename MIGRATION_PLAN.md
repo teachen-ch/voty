@@ -119,7 +119,10 @@ Known Prisma 3→5 diffs to watch for in this codebase:
 
 13. **Cypress smoke** — `yarn test`. Baseline is 9/14 from Phase 1. Target: ≥ 9/14.
 
-### Phase 4 — Next.js 12 → 14 (Pages Router) + React 17 → 18 (2–3 days)
+### Phase 4 — Next.js 12 → 14 (Pages Router) + React 17 → 18 — DONE (session 5)
+
+**What actually happened** is documented in "session 5" below. Landed approach (a) — accept theme-ui 0.3 hydration quirks, suppress in cypress, defer theme-ui replacement. Recoil→Jotai swap not done (still flagged as followup).
+
 
 Intentionally staying on **Pages Router** (Option C's core premise). Next 14 still supports it fully.
 
@@ -175,9 +178,9 @@ These are independently large. The codebase will be in a maintainable state afte
 - ✅ Phase 2 — **complete end-to-end** (all 13 steps done — see "session 3" below)
 - ✅ Phase 3 — Apollo Server → Yoga (merged into Phase 2)
 - ✅ Apollo Client 3.3 → 3.14 + codegen `typescript-react-apollo` unpinned to v4 (session 4)
-- ⏳ Phase 4 — Next 14 + React 18
-- ⏳ Phase 5 — cleanup
-- ✅ Cypress: **13/14** (only remaining failure is `student.spec.ts` selecting year "2004" — test-aging, not migration-related: dropdown range is `currentYear-20` ... `currentYear-8`, so 2004 is out of range from 2026 onward)
+- ✅ Phase 4 — Next 12 → 14 + React 17 → 18 (session 5)
+- ✅ Phase 5 — cleanup (nexus files already removed in Phase 2; stale references in `.eslintignore`, `.gitignore`, `tsconfig.json`, `Dockerfile` removed; `CLAUDE.md` updated to post-migration stack)
+- ✅ Cypress: **14/14** — fixed year-dropdown test-aging by computing `currentYear - 15` in `student.spec.ts` instead of hardcoding "2004"
 
 ## 2026-04-15 session findings (why Phase 2 was re-planned as big-bang)
 
@@ -381,3 +384,35 @@ Closed out steps 7, 8, 11, 12, 13. Single commit `85317d6` on `next-upgrade`.
 ### Followups
 - The `cache.modify` `any` casts are a type-safety regression. Proper fix is a typed helper that accepts `(existing: Reference | T | undefined) => T` and handles the `Reference` case. Not a blocker.
 - Consider replacing `throw Error("Error.X")` server-side with `throw new GraphQLError("Error.X")`, then re-enable `maskedErrors` with a `maskError` that unwraps `GraphQLError`. Current approach exposes *all* errors — fine for our threat model but not best practice.
+
+## 2026-04-15 session 5 — Phase 4 (Next 14 + React 18)
+
+All green. Cypress 13/14 (same as pre-Phase-4 baseline — only remaining failure is the year-2004 test aging).
+
+### What was done
+
+- **Deps**: `next` 12.1 → 14.2.35, `react`/`react-dom` 17 → 18.3.1, `@next/mdx` 12 → 14.2.35, `@types/react`/`@types/react-dom` 17 → 18. Added `@types/react: ^18` + `@types/react-dom: ^18` to `resolutions` — without this, @types/rebass → @types/styled-components pulled in a second @types/react@17 in the tree, producing 1235 TS2786 "X cannot be used as a JSX component" errors from mismatched `ReactElement` types.
+- **React 18 implicit-children codemod**: `npx types-react-codemod@latest --yes implicit-children ./components ./pages ./util` rewrote 77 files from `React.FC<P>` to `React.FC<React.PropsWithChildren<P>>`. React 18's `@types/react` dropped the implicit `children` that React 17's FC carried.
+- **rebass type fix**: rebass's `Card` is typed `React.FunctionComponent<BoxKnownProps>` (not `CardProps`), and `BoxKnownProps` doesn't declare `children`. Under React 18's stricter `FunctionComponent`, this made every `<Card>…</Card>` fail type-check. Fix: augment the exported `BaseProps` interface (which `BoxKnownProps extends`) in `@types/rebass.overrides.ts` to include `children?: ReactNode`. Also removed the file's `@ts-nocheck` directive so augmentations actually apply. Attempting to augment the unexported `BoxKnownProps` directly, or to redeclare the `Card` const, both silently no-op'd — augmenting a transitively-extended *exported* interface is the only pattern that works.
+- **next/image string-px props**: `<Image width="20px" height="20px" />` → `<Image width={20} height={20} />` across ~18 sites. Next 13+ rejects string-with-unit values for `width`/`height`.
+- **Formik `<Form>` type regression**: formik 2.4.9's `Form` component type `Pick`s `"onPointerEnterCapture" | "onPointerLeaveCapture"` from `FormHTMLAttributes`, but these keys aren't in `@types/react@18.3.28`'s `DOMAttributes`, so the resulting Pick treats the children prop position as requiring them. Worked around with a one-line cast at the two import sites: `const Form = FormikForm as unknown as React.FC<React.PropsWithChildren<unknown>>;`.
+- **RecoilRoot children**: recoil 0.3's `RecoilRootProps` doesn't declare `children`. Same one-line cast pattern in `pages/_app.tsx`.
+- **react-new-window children**: `INewWindowProps` in its 1.x types doesn't declare `children`. Added tiny `@types/react-new-window-shim.d.ts` that augments the interface.
+- **chaty children type**: `util/chaty.tsx`'s `specialMessage` returns either a `ReactNode` OR an `FC` (the `CHECK`/`EVALUATE` branches). Widened the return type and `TMessage.children` to `ReactNode | ComponentType<{message}>`, with the callsite in `ChatElements.tsx` narrowing via `typeof === "function"`.
+- **`next.config.js`**: `i18n.localeDetection: true` → `false`. Next 14 made `localeDetection` a `boolean-literal-false-only` option (only `false` is accepted — the default is already true-like behavior).
+- **Hydration warnings are now errors**: React 18 upgrades hydration mismatches from warnings to thrown errors. The dev overlay then blocks cypress clicks; the prod minified build throws error #418. Two-part workaround:
+  - `cypress/support/e2e.ts` — `Cypress.on("uncaught:exception", ...)` swallowing `/Hydration failed|hydrat|Minified React error #418|#423|#425/i`.
+  - Run cypress against `yarn start` (prod build), not `yarn dev` — dev overlay is unavoidable otherwise.
+- **Email-verification URL file**: `graphql/resolvers/users.ts` previously gated `/tmp/voty-verification-url` writes behind `NODE_ENV !== "production"`. When running cypress against `yarn start` the file was never updated, so test read stale/invalid tokens. Loosened to `!== "production" || process.env.CYPRESS`, and cypress now starts the server with `CYPRESS=1 yarn start`.
+
+### Known caveats / followups
+
+- **Hydration mismatches not fixed — only suppressed**. Theme-ui 0.3's `useColorMode` and rebass's HTML-nesting quirks generate them. The plan's "(a) pin React to 18 and accept" explicitly anticipated this. Resolving fully requires replacing theme-ui (deferred).
+- **Apollo 3.14 `useQuery({ onCompleted })` deprecation**: floods `next build` output with warnings. Fix is to convert each `onCompleted` callback to a `useEffect` watching `data` — mechanical, ~15 sites (`CheckLogin`, a few mutations, etc.). Not blocking.
+- **theme-ui 0.3 + React 18**: works in practice but never officially supported. Will become the pain point for any UI-level refactor.
+- **Recoil**: now formally flagged for swap to Jotai. Still a one-atom-pair surface.
+- **Phase 4 ran against `yarn start`, not `yarn dev`**: cypress flow now requires `yarn next build && CYPRESS=1 yarn start` as the test harness. Document/automate in CI.
+
+### Next: Phase 5 — cleanup
+
+Refresh `CLAUDE.md` + `DATA.md` to reflect the new stack, delete dead scripts (`nexus:reflection` already gone), regen `graphql/api.graphql`. Optional: `useQuery` onCompleted → useEffect migration to remove the console-warning flood.

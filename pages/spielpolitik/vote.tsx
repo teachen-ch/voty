@@ -64,7 +64,7 @@ export default function ZDAVote(): React.ReactElement {
   );
 }
 
-const ZDAVoteTemplate: React.FC = ({ children }) => {
+const ZDAVoteTemplate: React.FC<React.PropsWithChildren<unknown>> = ({ children }) => {
   const tr = useTr();
   return (
     <ZDAFullPage heading={tr("ZDA.Header")}>
@@ -76,7 +76,7 @@ const ZDAVoteTemplate: React.FC = ({ children }) => {
   );
 };
 
-const ZDABallots: React.FC<{ scope: BallotScope; maxAge: number }> = ({
+const ZDABallots: React.FC<React.PropsWithChildren<{ scope: BallotScope; maxAge: number }>> = ({
   scope,
   maxAge,
 }) => {

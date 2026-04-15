@@ -66,7 +66,7 @@ export const REMOVE_ONE_BALLOT = gql`
   }
 `;
 
-export const CreateBallotForm: React.FC = () => {
+export const CreateBallotForm: React.FC<React.PropsWithChildren<unknown>> = () => {
   const [createOneBallot] = useCreateOneBallotMutation();
   return (
     <QForm

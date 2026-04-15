@@ -131,7 +131,7 @@ type TeamsProps = {
   teamClick: (team: TeamUserFieldsFragment) => void;
 };
 
-export const Teams: React.FC<TeamsProps> = ({ where, orderBy, teamClick }) => {
+export const Teams: React.FC<React.PropsWithChildren<TeamsProps>> = ({ where, orderBy, teamClick }) => {
   const teamsQuery = useTeamsQuery({ variables: { where, orderBy } });
   const teams = teamsQuery.data?.teams;
 
@@ -171,10 +171,10 @@ export const Teams: React.FC<TeamsProps> = ({ where, orderBy, teamClick }) => {
                 <td align="center">
                   {team.members ? <>{team.members.length}</> : "-"}
                 </td>
-                <td width="40px">
+                <td width={40}>
                   <A onClick={() => teamClick(team)}>
                     <Box variant="centered">
-                      <Image src={IconSuS} height="24px" alt="SuS" />
+                      <Image src={IconSuS} height={24} alt="SuS" />
                     </Box>
                   </A>
                 </td>
@@ -267,7 +267,7 @@ export function CreateTeamForm({
   );
 }
 
-export const DeleteTeamLink: React.FC<BoxProps & { teamId: string }> = ({
+export const DeleteTeamLink: React.FC<React.PropsWithChildren<BoxProps & { teamId: string }>> = ({
   teamId,
   ...props
 }) => {

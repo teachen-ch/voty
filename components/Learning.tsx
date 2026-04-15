@@ -27,7 +27,7 @@ type RefProps = {
   duration?: string;
 };
 
-export const Ref: React.FC<RefProps> = (props) => (
+export const Ref: React.FC<React.PropsWithChildren<RefProps>> = (props) => (
   <Box>
     <Show if={props.title}>
       <Heading mt={0}>{props.title}</Heading>
@@ -55,26 +55,26 @@ export const Ref: React.FC<RefProps> = (props) => (
   </Box>
 );
 
-export const Source: React.FC<{ href: string }> = (props) => {
+export const Source: React.FC<React.PropsWithChildren<{ href: string }>> = (props) => {
   const domain = props.href.replace(/^https?:\/\/(?:www\.)?(.*?)\/.*$/, "$1");
   const start = props.href.replace(/^(https?:\/\/(?:www\.)?).*/, "$1");
   return <a href={`${start}${domain}`}>{domain}</a>;
 };
 
-export const Show: React.FC<{ if: boolean | string | number | undefined }> = (
+export const Show: React.FC<React.PropsWithChildren<{ if: boolean | string | number | undefined }>> = (
   props
 ) => {
   if (props.if) return <>{props.children}</>;
   else return null;
 };
 
-export const Center: React.FC<FlexProps> = (props) => (
+export const Center: React.FC<React.PropsWithChildren<FlexProps>> = (props) => (
   <Flex justifyContent="center" {...props}>
     {props.children}
   </Flex>
 );
 
-export const Toggle: React.FC = (props) => {
+export const Toggle: React.FC<React.PropsWithChildren<unknown>> = (props) => {
   const [open, setOpen] = useState(false);
   return (
     <>
@@ -86,7 +86,7 @@ export const Toggle: React.FC = (props) => {
   );
 };
 
-export const Include: React.FC<{ toggle: boolean }> = (props) => {
+export const Include: React.FC<React.PropsWithChildren<{ toggle: boolean }>> = (props) => {
   const Wrapper = props.toggle ? Toggle : () => <div />;
   return (
     <Wrapper>
@@ -108,7 +108,7 @@ export const Include: React.FC<{ toggle: boolean }> = (props) => {
   );
 };
 
-export const Image: React.FC<ImageProps & { desc: string }> = (props) => (
+export const Image: React.FC<React.PropsWithChildren<ImageProps & { desc: string }>> = (props) => (
   <Box>
     {/* @ts-ignore */}
     <RImage {...props} alt={props.alt || props.desc} />
@@ -120,7 +120,7 @@ export const Image: React.FC<ImageProps & { desc: string }> = (props) => (
   </Box>
 );
 
-export const WarningGuest: React.FC<{ text: string }> = ({ text }) => {
+export const WarningGuest: React.FC<React.PropsWithChildren<{ text: string }>> = ({ text }) => {
   const user = useUser();
   if (!user) {
     return (

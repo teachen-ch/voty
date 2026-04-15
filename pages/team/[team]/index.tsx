@@ -30,7 +30,7 @@ export default function TeamHome(): React.ReactElement {
       </Breadcrumb>
 
       <Flex justifyContent="center" mt={-20} mb={0} maxWidth="80%">
-        <Image src={IconWelcome} width="350px" height="259px" alt="Welcome!" />
+        <Image src={IconWelcome} width={350} height={259} alt="Welcome!" />
       </Flex>
 
       <H2 mt={0}>Lerninhalte Klasse {team.name}</H2>
@@ -53,7 +53,7 @@ export default function TeamHome(): React.ReactElement {
   );
 }
 
-export const TeamAnonLogin: React.FC = () => (
+export const TeamAnonLogin: React.FC<React.PropsWithChildren<unknown>> = () => (
   <Box>
     <H2 mt={6}>Anmelden</H2>
     <Text mb={3} fontSize={2}>

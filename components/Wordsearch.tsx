@@ -31,7 +31,7 @@ enum State {
 
 const { abs, max, round } = Math;
 
-export const Wordsearch: React.FC<{ letters: string; solution: string }> = ({
+export const Wordsearch: React.FC<React.PropsWithChildren<{ letters: string; solution: string }>> = ({
   letters,
   solution,
 }) => {
@@ -42,11 +42,11 @@ export const Wordsearch: React.FC<{ letters: string; solution: string }> = ({
   ]);
   return <Puzzle board={board} solutions={solutions} />;
 };
-export const WordsearchGen: React.FC<{
+export const WordsearchGen: React.FC<React.PropsWithChildren<{
   words: string[];
   rows: number;
   cols: number;
-}> = ({ words, rows = 8, cols = 10 }) => {
+}>> = ({ words, rows = 8, cols = 10 }) => {
   const { board, solutions } = useMemo(
     () => generatePuzzle(rows, cols, words),
     [words, rows, cols]
@@ -54,7 +54,7 @@ export const WordsearchGen: React.FC<{
   return <Puzzle board={board} solutions={solutions} />;
 };
 
-const Puzzle: React.FC<{ board: Board; solutions: Word[] }> = ({
+const Puzzle: React.FC<React.PropsWithChildren<{ board: Board; solutions: Word[] }>> = ({
   board,
   solutions,
 }) => {
@@ -188,7 +188,7 @@ const Puzzle: React.FC<{ board: Board; solutions: Word[] }> = ({
   );
 };
 
-const Letterbox: React.FC<{ letter: string; state: State }> = ({
+const Letterbox: React.FC<React.PropsWithChildren<{ letter: string; state: State }>> = ({
   letter,
   state,
 }) => {
@@ -232,7 +232,7 @@ const Letterbox: React.FC<{ letter: string; state: State }> = ({
   );
 };
 
-const Score: React.FC<{ words: Word[]; last?: Word }> = ({ words }) => {
+const Score: React.FC<React.PropsWithChildren<{ words: Word[]; last?: Word }>> = ({ words }) => {
   const total = words.length;
   const solved = words.filter((word) => word.solved).length;
   if (total === solved) {

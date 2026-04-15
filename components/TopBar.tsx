@@ -7,7 +7,7 @@ import { NavMobile } from "./NavMobile";
 import { NavDesktop } from "./NavDesktop";
 import { useTheme } from "util/hooks";
 
-export const TopBar: React.FC<{ home?: boolean }> = ({ home }) => {
+export const TopBar: React.FC<React.PropsWithChildren<{ home?: boolean }>> = ({ home }) => {
   const user = useUser();
   const [loaded, setLoaded] = useState(false);
   const [colorMode, setColorMode] = useColorMode();
@@ -43,7 +43,7 @@ export const TopBar: React.FC<{ home?: boolean }> = ({ home }) => {
   return (
     <Flex
       bg={home ? "transparent" : "topbarColor"}
-      height="70px"
+      height={70}
       width="100%"
       justifyContent="center"
       color={home && light ? "white" : "#fff"}
