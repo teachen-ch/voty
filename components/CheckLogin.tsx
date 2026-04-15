@@ -52,18 +52,19 @@ export default function CheckLogin({
   const setUser = useSetUser();
   // check, whether there is already an active session
   // unless user is already set
-  useMeQuery({
+  const { data, called, loading: queryLoading } = useMeQuery({
     fetchPolicy: "network-only",
     // skip query if user is already defined
     skip: user ? true : false,
-    onCompleted: (data) => {
-      setUser(data?.me); // could be undefined!
-      setLoading(false);
-    },
   });
   useEffect(() => {
-    if (user) setLoading(false);
-  }, [user]);
+    if (user) {
+      setLoading(false);
+    } else if (called && !queryLoading) {
+      setUser(data?.me); // could be undefined!
+      setLoading(false);
+    }
+  }, [user, called, queryLoading, data, setUser]);
 
   if (loading) {
     return null;

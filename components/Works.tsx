@@ -97,20 +97,22 @@ export const Works: React.FC<React.PropsWithChildren<FlexProps & {
   if (card) where.card = { equals: card };
   const worksQuery = useWorksQuery({
     variables: { where },
-    onCompleted() {
-      // scroll to, and open work if page is called with hash #id
-      const id = document.location.hash.substring(1);
-      const el = document.getElementById(id);
-      if (el) {
-        el.scrollIntoView({ behavior: "smooth", block: "center" });
-        setActive(id);
-      }
-    },
   });
   const works = worksQuery.data?.works;
   const Comp = items;
   const ListComp = list || Flex;
   const [active, setActive] = useState("");
+
+  useEffect(() => {
+    if (!works) return;
+    // scroll to, and open work if page is called with hash #id
+    const id = document.location.hash.substring(1);
+    const el = document.getElementById(id);
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth", block: "center" });
+      setActive(id);
+    }
+  }, [works]);
 
   useEffect(() => {
     if (trigger) {
