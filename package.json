@@ -56,7 +56,7 @@
     "marked": "^4.0.10",
     "mjml": "^4.6.3",
     "mustache": "^4.1.0",
-    "next": "14.2.35",
+    "next": "15.5.15",
     "nodemailer": "6.9.9",
     "prismjs": "1.27.0",
     "qrcode.react": "^1.0.0",
