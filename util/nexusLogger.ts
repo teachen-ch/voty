@@ -1,4 +1,4 @@
-import { plugin } from "@nexus/schema";
+import { plugin } from "nexus";
 import logger from "util/logger";
 import { LOG_GRAPHQL, LOG_INPUT } from "../graphql/makeschema";
 

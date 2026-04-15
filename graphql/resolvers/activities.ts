@@ -1,4 +1,4 @@
-import { FieldResolver } from "@nexus/schema";
+import { FieldResolver } from "nexus";
 import { Activity, Prisma, Role } from "@prisma/client";
 import { Context } from "graphql/context";
 import truncate from "lodash/truncate";

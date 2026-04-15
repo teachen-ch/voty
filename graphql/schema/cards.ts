@@ -1,5 +1,5 @@
 import resolvers from "../resolvers";
-import { extendType, objectType, stringArg, nonNull } from "@nexus/schema";
+import { extendType, objectType, stringArg, nonNull } from "nexus";
 
 export const Card = objectType({
   name: "Card",

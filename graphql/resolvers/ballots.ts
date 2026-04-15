@@ -12,7 +12,7 @@ import { setCookie, getCookie } from "../../util/cookies";
 import {
   FieldResolver,
   RootValue,
-} from "@nexus/schema/dist/typegenTypeHelpers";
+} from "nexus/dist/typegenTypeHelpers";
 import { logActivity } from "./activities";
 
 export const canVote: FieldResolver<"Ballot", "canVote"> = async (

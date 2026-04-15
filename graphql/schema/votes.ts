@@ -4,7 +4,7 @@ import {
   stringArg,
   intArg,
   nonNull,
-} from "@nexus/schema";
+} from "nexus";
 import resolvers from "../resolvers";
 
 export const Vote = objectType({

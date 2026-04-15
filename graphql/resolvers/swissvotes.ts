@@ -1,4 +1,4 @@
-import { FieldResolver } from "@nexus/schema";
+import { FieldResolver } from "nexus";
 import { Swissvote } from "graphql/types";
 
 export const swissvotes: FieldResolver<"Query", "swissvotes"> = async (
@@ -35,6 +35,6 @@ export const swissvotes: FieldResolver<"Query", "swissvotes"> = async (
   else if (sort === "oldest") query += "ORDER BY datum ASC ";
   else query += "ORDER BY datum DESC ";
   query += `LIMIT ${limit ?? 20} OFFSET ${offset ?? 0}`;
-  const votes: Swissvote[] = await db.$queryRaw(query);
+  const votes: Swissvote[] = await db.$queryRawUnsafe(query);
   return votes;
 };

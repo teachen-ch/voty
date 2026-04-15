@@ -4,14 +4,14 @@
 type Activity {
   ballotId: String
   card: String
-  id: Int
-  school: School
+  id: Int!
+  school: School!
   summary: String
-  team: Team
-  time: DateTime
-  type: ActivityType
-  user: User
-  visibility: Visibility
+  team: Team!
+  time: DateTime!
+  type: ActivityType!
+  user: User!
+  visibility: Visibility!
   workId: String
 }
 
@@ -299,18 +299,28 @@ input ActivityListRelationFilter {
   some: ActivityWhereInput
 }
 
-input ActivityOrderByInput {
+input ActivityOrderByRelationAggregateInput {
+  _count: SortOrder
+}
+
+input ActivityOrderByWithRelationInput {
+  ballot: BallotOrderByWithRelationInput
   ballotId: SortOrder
   card: SortOrder
+  discussion: DiscussionOrderByWithRelationInput
   discussionId: SortOrder
   id: SortOrder
+  school: SchoolOrderByWithRelationInput
   schoolId: SortOrder
   summary: SortOrder
+  team: TeamOrderByWithRelationInput
   teamId: SortOrder
   time: SortOrder
   type: SortOrder
+  user: UserOrderByWithRelationInput
   userId: SortOrder
   visibility: SortOrder
+  work: WorkOrderByWithRelationInput
   workId: SortOrder
 }
 
@@ -637,12 +647,12 @@ input ActivityWhereUniqueInput {
 }
 
 type Attachment {
-  createdAt: DateTime
-  file: String
+  createdAt: DateTime!
+  file: String!
   id: String!
   title: String!
   type: String!
-  updatedAt: DateTime
+  updatedAt: DateTime!
   user: User!
 }
 
@@ -934,19 +944,29 @@ input AttachmentListRelationFilter {
   some: AttachmentWhereInput
 }
 
-input AttachmentOrderByInput {
+input AttachmentOrderByRelationAggregateInput {
+  _count: SortOrder
+}
+
+input AttachmentOrderByWithRelationInput {
+  ballot: BallotOrderByWithRelationInput
   ballotId: SortOrder
   card: SortOrder
   createdAt: SortOrder
+  discussion: DiscussionOrderByWithRelationInput
   discussionId: SortOrder
   file: SortOrder
   id: SortOrder
+  school: SchoolOrderByWithRelationInput
   schoolId: SortOrder
+  team: TeamOrderByWithRelationInput
   teamId: SortOrder
   title: SortOrder
   type: SortOrder
   updatedAt: SortOrder
+  user: UserOrderByWithRelationInput
   userId: SortOrder
+  work: WorkOrderByWithRelationInput
   workId: SortOrder
 }
 
@@ -1280,17 +1300,17 @@ input AttachmentWhereUniqueInput {
 }
 
 type Ballot {
-  body: String
+  body: String!
   canton: String
   canVote: Boolean
-  description: String
-  end: DateTime
+  description: String!
+  end: DateTime!
   hasVoted: Boolean
   id: String!
-  originalLocale: String
+  originalLocale: String!
   schoolId: String
-  scope: BallotScope
-  start: DateTime
+  scope: BallotScope!
+  start: DateTime!
   teamId: String
   title: String!
 }
@@ -1814,30 +1834,44 @@ input BallotListRelationFilter {
   some: BallotWhereInput
 }
 
-input BallotOrderByInput {
+input BallotOrderByRelationAggregateInput {
+  _count: SortOrder
+}
+
+input BallotOrderByWithRelationInput {
+  activity: ActivityOrderByRelationAggregateInput
+  attachments: AttachmentOrderByRelationAggregateInput
+  ballotRuns: BallotRunOrderByRelationAggregateInput
   body: SortOrder
   bodyde: SortOrder
   bodyfr: SortOrder
   bodyit: SortOrder
   canton: SortOrder
   createdAt: SortOrder
+  creator: UserOrderByWithRelationInput
   creatorId: SortOrder
   description: SortOrder
   descriptionde: SortOrder
   descriptionfr: SortOrder
   descriptionit: SortOrder
+  discussion: DiscussionOrderByRelationAggregateInput
   end: SortOrder
   id: SortOrder
+  options: OptionOrderByRelationAggregateInput
   originalLocale: SortOrder
+  school: SchoolOrderByWithRelationInput
   schoolId: SortOrder
   scope: SortOrder
   start: SortOrder
+  team: TeamOrderByWithRelationInput
   teamId: SortOrder
   title: SortOrder
   titlede: SortOrder
   titlefr: SortOrder
   titleit: SortOrder
   updatedAt: SortOrder
+  voted: VotedOrderByRelationAggregateInput
+  votes: VoteOrderByRelationAggregateInput
 }
 
 type BallotResults {
@@ -1852,7 +1886,7 @@ type BallotRun {
   end: DateTime
   id: String!
   start: DateTime
-  team: Team
+  team: Team!
 }
 
 input BallotRunBallotIdTeamIdCompoundUniqueInput {
@@ -1947,6 +1981,10 @@ input BallotRunListRelationFilter {
   every: BallotRunWhereInput
   none: BallotRunWhereInput
   some: BallotRunWhereInput
+}
+
+input BallotRunOrderByRelationAggregateInput {
+  _count: SortOrder
 }
 
 input BallotRunScalarWhereInput {
@@ -2753,7 +2791,7 @@ type Discussion {
   ballotId: String
   card: String
   children: [Discussion]
-  createdAt: DateTime
+  createdAt: DateTime!
   id: String!
   reactions(
     after: ReactionWhereUniqueInput
@@ -2763,7 +2801,7 @@ type Discussion {
   ): [Reaction!]!
   text: String!
   title: String!
-  updatedAt: DateTime
+  updatedAt: DateTime!
   user: User!
 }
 
@@ -3025,6 +3063,30 @@ input DiscussionListRelationFilter {
   every: DiscussionWhereInput
   none: DiscussionWhereInput
   some: DiscussionWhereInput
+}
+
+input DiscussionOrderByRelationAggregateInput {
+  _count: SortOrder
+}
+
+input DiscussionOrderByWithRelationInput {
+  Activity: ActivityOrderByRelationAggregateInput
+  attachments: AttachmentOrderByRelationAggregateInput
+  ballot: BallotOrderByWithRelationInput
+  ballotId: SortOrder
+  card: SortOrder
+  createdAt: SortOrder
+  id: SortOrder
+  reactions: ReactionOrderByRelationAggregateInput
+  school: SchoolOrderByWithRelationInput
+  schoolId: SortOrder
+  team: TeamOrderByWithRelationInput
+  teamId: SortOrder
+  text: SortOrder
+  title: SortOrder
+  updatedAt: SortOrder
+  user: UserOrderByWithRelationInput
+  userId: SortOrder
 }
 
 input DiscussionScalarWhereInput {
@@ -3385,6 +3447,14 @@ input DomainCreateWithoutTeamInput {
   schools: SchoolCreateNestedManyWithoutDomainInput
 }
 
+input DomainOrderByWithRelationInput {
+  approved: SortOrder
+  id: SortOrder
+  name: SortOrder
+  schools: SchoolOrderByRelationAggregateInput
+  Team: TeamOrderByRelationAggregateInput
+}
+
 input DomainUpdateOneWithoutSchoolsInput {
   connect: DomainWhereUniqueInput
   connectOrCreate: DomainCreateOrConnectWithoutSchoolsInput
@@ -3546,8 +3616,18 @@ The `JSON` scalar type represents JSON objects as specified by [ECMA-404](http:/
 scalar Json
 
 input JsonNullableFilter {
-  equals: Json
-  not: Json
+  equals: JsonNullValueFilter
+  not: JsonNullValueFilter
+}
+
+enum JsonNullValueFilter {
+  AnyNull
+  DbNull
+  JsonNull
+}
+
+enum JsonNullValueInput {
+  JsonNull
 }
 
 type Mutation {
@@ -3562,9 +3642,9 @@ type Mutation {
     name: String
     password: String
   ): User
-  createOneBallot(data: BallotCreateInput!): Ballot
-  createOneSchool(data: SchoolCreateInput!): School
-  createOneTeam(data: TeamCreateInput!): Team
+  createOneBallot(data: BallotCreateInput!): Ballot!
+  createOneSchool(data: SchoolCreateInput!): School!
+  createOneTeam(data: TeamCreateInput!): Team!
   createUser(data: UserCreateInput!): User
   deleteAccount: Response
   deleteOneBallot(where: BallotWhereUniqueInput!): Ballot
@@ -3577,7 +3657,7 @@ type Mutation {
   inviteStudents(emails: [String!]!, team: String!): InviteResponse
   login(email: String!, password: String!): ResponseLogin
   magic(email: String!, redirect: String): Response
-  postActivity(data: ActivityCreateInput!): Activity
+  postActivity(data: ActivityCreateInput!): Activity!
   postDiscussion(
     ballotId: String
     card: String
@@ -3585,7 +3665,7 @@ type Mutation {
     text: String!
     title: String!
   ): Discussion
-  postWork(data: WorkCreateInput!): Work
+  postWork(data: WorkCreateInput!): Work!
   removeBallotRun(ballotRunId: String!): Response
   setCards(cards: String!, teamId: String!): Team
   setNotes(notes: Json!, teamId: String!): Team
@@ -3738,6 +3818,11 @@ input NullableIntFieldUpdateOperationsInput {
   set: Int
 }
 
+enum NullableJsonNullValueInput {
+  DbNull
+  JsonNull
+}
+
 input NullableStringFieldUpdateOperationsInput {
   set: String
 }
@@ -3775,6 +3860,10 @@ input OptionListRelationFilter {
   every: OptionWhereInput
   none: OptionWhereInput
   some: OptionWhereInput
+}
+
+input OptionOrderByRelationAggregateInput {
+  _count: SortOrder
 }
 
 input OptionScalarWhereInput {
@@ -3863,7 +3952,7 @@ type Query {
     before: ActivityWhereUniqueInput
     first: Int
     last: Int
-    orderBy: [ActivityOrderByInput!]
+    orderBy: [ActivityOrderByWithRelationInput!]
     where: ActivityWhereInput
   ): [Activity!]!
   attachments(
@@ -3871,7 +3960,7 @@ type Query {
     before: AttachmentWhereUniqueInput
     first: Int
     last: Int
-    orderBy: [AttachmentOrderByInput!]
+    orderBy: [AttachmentOrderByWithRelationInput!]
     where: AttachmentWhereInput
   ): [Attachment!]!
   ballot(where: BallotWhereUniqueInput!): Ballot
@@ -3880,7 +3969,7 @@ type Query {
     before: BallotWhereUniqueInput
     first: Int
     last: Int
-    orderBy: [BallotOrderByInput!]
+    orderBy: [BallotOrderByWithRelationInput!]
     where: BallotWhereInput
   ): [Ballot!]!
   cards(age: String, keywords: String, type: String): [Card]
@@ -3905,7 +3994,7 @@ type Query {
     before: SchoolWhereUniqueInput
     first: Int
     last: Int
-    orderBy: [SchoolOrderByInput!]
+    orderBy: [SchoolOrderByWithRelationInput!]
     where: SchoolWhereInput
   ): [School!]!
   stats(from: Float, to: Float): Stats
@@ -3924,7 +4013,7 @@ type Query {
     before: TeamWhereUniqueInput
     first: Int
     last: Int
-    orderBy: [TeamOrderByInput!]
+    orderBy: [TeamOrderByWithRelationInput!]
     where: TeamWhereInput
   ): [Team!]!
   user(where: UserWhereUniqueInput!): User
@@ -3933,7 +4022,7 @@ type Query {
     before: UserWhereUniqueInput
     first: Int
     last: Int
-    orderBy: [UserOrderByInput!]
+    orderBy: [UserOrderByWithRelationInput!]
     where: UserWhereInput
   ): [User!]!
   works(
@@ -3941,7 +4030,7 @@ type Query {
     before: WorkWhereUniqueInput
     first: Int
     last: Int
-    orderBy: [WorkOrderByInput!]
+    orderBy: [WorkOrderByWithRelationInput!]
     where: WorkWhereInput
   ): [Work!]!
 }
@@ -3953,9 +4042,9 @@ enum QueryMode {
 
 type Reaction {
   discussion: Discussion
-  emoij: String
-  id: String
-  user: User
+  emoij: String!
+  id: String!
+  user: User!
 }
 
 input ReactionCreateManyDiscussionInput {
@@ -4079,6 +4168,10 @@ input ReactionListRelationFilter {
   every: ReactionWhereInput
   none: ReactionWhereInput
   some: ReactionWhereInput
+}
+
+input ReactionOrderByRelationAggregateInput {
+  _count: SortOrder
 }
 
 input ReactionScalarWhereInput {
@@ -4275,9 +4368,9 @@ enum Role {
 }
 
 type School {
-  address: String
-  canton: String
-  city: String
+  address: String!
+  canton: String!
+  city: String!
   id: String!
   members(
     after: UserWhereUniqueInput
@@ -4285,15 +4378,15 @@ type School {
     first: Int
     last: Int
   ): [User!]!
-  name: String
+  name: String!
   teams(
     after: TeamWhereUniqueInput
     before: TeamWhereUniqueInput
     first: Int
     last: Int
   ): [Team!]!
-  type: String
-  zip: String
+  type: String!
+  zip: String!
 }
 
 input SchoolCreateInput {
@@ -4638,14 +4731,28 @@ input SchoolListRelationFilter {
   some: SchoolWhereInput
 }
 
-input SchoolOrderByInput {
+input SchoolOrderByRelationAggregateInput {
+  _count: SortOrder
+}
+
+input SchoolOrderByWithRelationInput {
+  activity: ActivityOrderByRelationAggregateInput
   address: SortOrder
+  attachment: AttachmentOrderByRelationAggregateInput
+  ballots: BallotOrderByRelationAggregateInput
   canton: SortOrder
   city: SortOrder
+  discussion: DiscussionOrderByRelationAggregateInput
+  domain: DomainOrderByWithRelationInput
   domainId: SortOrder
   id: SortOrder
+  members: UserOrderByRelationAggregateInput
   name: SortOrder
+  teams: TeamOrderByRelationAggregateInput
   type: SortOrder
+  Vote: VoteOrderByRelationAggregateInput
+  Voted: VotedOrderByRelationAggregateInput
+  work: WorkOrderByRelationAggregateInput
   zip: SortOrder
 }
 
@@ -5127,11 +5234,11 @@ type Team {
     last: Int
   ): [User!]!
   name: String!
-  notes: Json
-  prefs: Json
-  school: School
-  teacher: User
-  teacherId: String
+  notes: Json!
+  prefs: Json!
+  school: School!
+  teacher: User!
+  teacherId: String!
 }
 
 input TeamCreateInput {
@@ -5146,8 +5253,8 @@ input TeamCreateInput {
   id: String
   members: UserCreateNestedManyWithoutTeamInput
   name: String!
-  notes: Json
-  prefs: Json
+  notes: JsonNullValueInput
+  prefs: JsonNullValueInput
   school: SchoolCreateNestedOneWithoutTeamsInput!
   teacher: UserCreateNestedOneWithoutTeachesInput!
   updatedAt: DateTime
@@ -5164,8 +5271,8 @@ input TeamCreateManyDomainInput {
   id: String
   invite: String
   name: String!
-  notes: Json
-  prefs: Json
+  notes: JsonNullValueInput
+  prefs: JsonNullValueInput
   schoolId: String!
   teacherId: String!
   updatedAt: DateTime
@@ -5185,8 +5292,8 @@ input TeamCreateManySchoolInput {
   id: String
   invite: String
   name: String!
-  notes: Json
-  prefs: Json
+  notes: JsonNullValueInput
+  prefs: JsonNullValueInput
   teacherId: String!
   updatedAt: DateTime
   year: Int
@@ -5205,8 +5312,8 @@ input TeamCreateManyTeacherInput {
   id: String
   invite: String
   name: String!
-  notes: Json
-  prefs: Json
+  notes: JsonNullValueInput
+  prefs: JsonNullValueInput
   schoolId: String!
   updatedAt: DateTime
   year: Int
@@ -5365,8 +5472,8 @@ input TeamCreateWithoutActivityInput {
   invite: String
   members: UserCreateNestedManyWithoutTeamInput
   name: String!
-  notes: Json
-  prefs: Json
+  notes: JsonNullValueInput
+  prefs: JsonNullValueInput
   school: SchoolCreateNestedOneWithoutTeamsInput!
   teacher: UserCreateNestedOneWithoutTeachesInput!
   updatedAt: DateTime
@@ -5389,8 +5496,8 @@ input TeamCreateWithoutAttachmentInput {
   invite: String
   members: UserCreateNestedManyWithoutTeamInput
   name: String!
-  notes: Json
-  prefs: Json
+  notes: JsonNullValueInput
+  prefs: JsonNullValueInput
   school: SchoolCreateNestedOneWithoutTeamsInput!
   teacher: UserCreateNestedOneWithoutTeachesInput!
   updatedAt: DateTime
@@ -5413,8 +5520,8 @@ input TeamCreateWithoutBallotRunsInput {
   invite: String
   members: UserCreateNestedManyWithoutTeamInput
   name: String!
-  notes: Json
-  prefs: Json
+  notes: JsonNullValueInput
+  prefs: JsonNullValueInput
   school: SchoolCreateNestedOneWithoutTeamsInput!
   teacher: UserCreateNestedOneWithoutTeachesInput!
   updatedAt: DateTime
@@ -5437,8 +5544,8 @@ input TeamCreateWithoutBallotsInput {
   invite: String
   members: UserCreateNestedManyWithoutTeamInput
   name: String!
-  notes: Json
-  prefs: Json
+  notes: JsonNullValueInput
+  prefs: JsonNullValueInput
   school: SchoolCreateNestedOneWithoutTeamsInput!
   teacher: UserCreateNestedOneWithoutTeachesInput!
   updatedAt: DateTime
@@ -5461,8 +5568,8 @@ input TeamCreateWithoutDiscussionInput {
   invite: String
   members: UserCreateNestedManyWithoutTeamInput
   name: String!
-  notes: Json
-  prefs: Json
+  notes: JsonNullValueInput
+  prefs: JsonNullValueInput
   school: SchoolCreateNestedOneWithoutTeamsInput!
   teacher: UserCreateNestedOneWithoutTeachesInput!
   updatedAt: DateTime
@@ -5485,8 +5592,8 @@ input TeamCreateWithoutDomainInput {
   invite: String
   members: UserCreateNestedManyWithoutTeamInput
   name: String!
-  notes: Json
-  prefs: Json
+  notes: JsonNullValueInput
+  prefs: JsonNullValueInput
   school: SchoolCreateNestedOneWithoutTeamsInput!
   teacher: UserCreateNestedOneWithoutTeachesInput!
   updatedAt: DateTime
@@ -5509,8 +5616,8 @@ input TeamCreateWithoutMembersInput {
   id: String
   invite: String
   name: String!
-  notes: Json
-  prefs: Json
+  notes: JsonNullValueInput
+  prefs: JsonNullValueInput
   school: SchoolCreateNestedOneWithoutTeamsInput!
   teacher: UserCreateNestedOneWithoutTeachesInput!
   updatedAt: DateTime
@@ -5534,8 +5641,8 @@ input TeamCreateWithoutSchoolInput {
   invite: String
   members: UserCreateNestedManyWithoutTeamInput
   name: String!
-  notes: Json
-  prefs: Json
+  notes: JsonNullValueInput
+  prefs: JsonNullValueInput
   teacher: UserCreateNestedOneWithoutTeachesInput!
   updatedAt: DateTime
   Vote: VoteCreateNestedManyWithoutTeamInput
@@ -5558,8 +5665,8 @@ input TeamCreateWithoutTeacherInput {
   invite: String
   members: UserCreateNestedManyWithoutTeamInput
   name: String!
-  notes: Json
-  prefs: Json
+  notes: JsonNullValueInput
+  prefs: JsonNullValueInput
   school: SchoolCreateNestedOneWithoutTeamsInput!
   updatedAt: DateTime
   Vote: VoteCreateNestedManyWithoutTeamInput
@@ -5582,8 +5689,8 @@ input TeamCreateWithoutVotedInput {
   invite: String
   members: UserCreateNestedManyWithoutTeamInput
   name: String!
-  notes: Json
-  prefs: Json
+  notes: JsonNullValueInput
+  prefs: JsonNullValueInput
   school: SchoolCreateNestedOneWithoutTeamsInput!
   teacher: UserCreateNestedOneWithoutTeachesInput!
   updatedAt: DateTime
@@ -5606,8 +5713,8 @@ input TeamCreateWithoutVoteInput {
   invite: String
   members: UserCreateNestedManyWithoutTeamInput
   name: String!
-  notes: Json
-  prefs: Json
+  notes: JsonNullValueInput
+  prefs: JsonNullValueInput
   school: SchoolCreateNestedOneWithoutTeamsInput!
   teacher: UserCreateNestedOneWithoutTeachesInput!
   updatedAt: DateTime
@@ -5630,8 +5737,8 @@ input TeamCreateWithoutWorkInput {
   invite: String
   members: UserCreateNestedManyWithoutTeamInput
   name: String!
-  notes: Json
-  prefs: Json
+  notes: JsonNullValueInput
+  prefs: JsonNullValueInput
   school: SchoolCreateNestedOneWithoutTeamsInput!
   teacher: UserCreateNestedOneWithoutTeachesInput!
   updatedAt: DateTime
@@ -5646,19 +5753,35 @@ input TeamListRelationFilter {
   some: TeamWhereInput
 }
 
-input TeamOrderByInput {
+input TeamOrderByRelationAggregateInput {
+  _count: SortOrder
+}
+
+input TeamOrderByWithRelationInput {
+  activity: ActivityOrderByRelationAggregateInput
+  attachment: AttachmentOrderByRelationAggregateInput
+  BallotRuns: BallotRunOrderByRelationAggregateInput
+  ballots: BallotOrderByRelationAggregateInput
   cards: SortOrder
   code: SortOrder
   createdAt: SortOrder
+  discussion: DiscussionOrderByRelationAggregateInput
+  domain: DomainOrderByWithRelationInput
   domainId: SortOrder
   id: SortOrder
   invite: SortOrder
+  members: UserOrderByRelationAggregateInput
   name: SortOrder
   notes: SortOrder
   prefs: SortOrder
+  school: SchoolOrderByWithRelationInput
   schoolId: SortOrder
+  teacher: UserOrderByWithRelationInput
   teacherId: SortOrder
   updatedAt: SortOrder
+  Vote: VoteOrderByRelationAggregateInput
+  Voted: VotedOrderByRelationAggregateInput
+  work: WorkOrderByRelationAggregateInput
   year: SortOrder
 }
 
@@ -5686,8 +5809,8 @@ input TeamUpdateManyMutationInput {
   id: StringFieldUpdateOperationsInput
   invite: NullableStringFieldUpdateOperationsInput
   name: StringFieldUpdateOperationsInput
-  notes: Json
-  prefs: Json
+  notes: JsonNullValueInput
+  prefs: JsonNullValueInput
   updatedAt: DateTimeFieldUpdateOperationsInput
   year: NullableIntFieldUpdateOperationsInput
 }
@@ -5842,8 +5965,8 @@ input TeamUpdateWithoutActivityInput {
   invite: NullableStringFieldUpdateOperationsInput
   members: UserUpdateManyWithoutTeamInput
   name: StringFieldUpdateOperationsInput
-  notes: Json
-  prefs: Json
+  notes: JsonNullValueInput
+  prefs: JsonNullValueInput
   school: SchoolUpdateOneRequiredWithoutTeamsInput
   teacher: UserUpdateOneRequiredWithoutTeachesInput
   updatedAt: DateTimeFieldUpdateOperationsInput
@@ -5866,8 +5989,8 @@ input TeamUpdateWithoutAttachmentInput {
   invite: NullableStringFieldUpdateOperationsInput
   members: UserUpdateManyWithoutTeamInput
   name: StringFieldUpdateOperationsInput
-  notes: Json
-  prefs: Json
+  notes: JsonNullValueInput
+  prefs: JsonNullValueInput
   school: SchoolUpdateOneRequiredWithoutTeamsInput
   teacher: UserUpdateOneRequiredWithoutTeachesInput
   updatedAt: DateTimeFieldUpdateOperationsInput
@@ -5890,8 +6013,8 @@ input TeamUpdateWithoutBallotRunsInput {
   invite: NullableStringFieldUpdateOperationsInput
   members: UserUpdateManyWithoutTeamInput
   name: StringFieldUpdateOperationsInput
-  notes: Json
-  prefs: Json
+  notes: JsonNullValueInput
+  prefs: JsonNullValueInput
   school: SchoolUpdateOneRequiredWithoutTeamsInput
   teacher: UserUpdateOneRequiredWithoutTeachesInput
   updatedAt: DateTimeFieldUpdateOperationsInput
@@ -5914,8 +6037,8 @@ input TeamUpdateWithoutBallotsInput {
   invite: NullableStringFieldUpdateOperationsInput
   members: UserUpdateManyWithoutTeamInput
   name: StringFieldUpdateOperationsInput
-  notes: Json
-  prefs: Json
+  notes: JsonNullValueInput
+  prefs: JsonNullValueInput
   school: SchoolUpdateOneRequiredWithoutTeamsInput
   teacher: UserUpdateOneRequiredWithoutTeachesInput
   updatedAt: DateTimeFieldUpdateOperationsInput
@@ -5938,8 +6061,8 @@ input TeamUpdateWithoutDiscussionInput {
   invite: NullableStringFieldUpdateOperationsInput
   members: UserUpdateManyWithoutTeamInput
   name: StringFieldUpdateOperationsInput
-  notes: Json
-  prefs: Json
+  notes: JsonNullValueInput
+  prefs: JsonNullValueInput
   school: SchoolUpdateOneRequiredWithoutTeamsInput
   teacher: UserUpdateOneRequiredWithoutTeachesInput
   updatedAt: DateTimeFieldUpdateOperationsInput
@@ -5962,8 +6085,8 @@ input TeamUpdateWithoutDomainInput {
   invite: NullableStringFieldUpdateOperationsInput
   members: UserUpdateManyWithoutTeamInput
   name: StringFieldUpdateOperationsInput
-  notes: Json
-  prefs: Json
+  notes: JsonNullValueInput
+  prefs: JsonNullValueInput
   school: SchoolUpdateOneRequiredWithoutTeamsInput
   teacher: UserUpdateOneRequiredWithoutTeachesInput
   updatedAt: DateTimeFieldUpdateOperationsInput
@@ -5986,8 +6109,8 @@ input TeamUpdateWithoutMembersInput {
   id: StringFieldUpdateOperationsInput
   invite: NullableStringFieldUpdateOperationsInput
   name: StringFieldUpdateOperationsInput
-  notes: Json
-  prefs: Json
+  notes: JsonNullValueInput
+  prefs: JsonNullValueInput
   school: SchoolUpdateOneRequiredWithoutTeamsInput
   teacher: UserUpdateOneRequiredWithoutTeachesInput
   updatedAt: DateTimeFieldUpdateOperationsInput
@@ -6011,8 +6134,8 @@ input TeamUpdateWithoutSchoolInput {
   invite: NullableStringFieldUpdateOperationsInput
   members: UserUpdateManyWithoutTeamInput
   name: StringFieldUpdateOperationsInput
-  notes: Json
-  prefs: Json
+  notes: JsonNullValueInput
+  prefs: JsonNullValueInput
   teacher: UserUpdateOneRequiredWithoutTeachesInput
   updatedAt: DateTimeFieldUpdateOperationsInput
   Vote: VoteUpdateManyWithoutTeamInput
@@ -6035,8 +6158,8 @@ input TeamUpdateWithoutTeacherInput {
   invite: NullableStringFieldUpdateOperationsInput
   members: UserUpdateManyWithoutTeamInput
   name: StringFieldUpdateOperationsInput
-  notes: Json
-  prefs: Json
+  notes: JsonNullValueInput
+  prefs: JsonNullValueInput
   school: SchoolUpdateOneRequiredWithoutTeamsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
   Vote: VoteUpdateManyWithoutTeamInput
@@ -6059,8 +6182,8 @@ input TeamUpdateWithoutVotedInput {
   invite: NullableStringFieldUpdateOperationsInput
   members: UserUpdateManyWithoutTeamInput
   name: StringFieldUpdateOperationsInput
-  notes: Json
-  prefs: Json
+  notes: JsonNullValueInput
+  prefs: JsonNullValueInput
   school: SchoolUpdateOneRequiredWithoutTeamsInput
   teacher: UserUpdateOneRequiredWithoutTeachesInput
   updatedAt: DateTimeFieldUpdateOperationsInput
@@ -6083,8 +6206,8 @@ input TeamUpdateWithoutVoteInput {
   invite: NullableStringFieldUpdateOperationsInput
   members: UserUpdateManyWithoutTeamInput
   name: StringFieldUpdateOperationsInput
-  notes: Json
-  prefs: Json
+  notes: JsonNullValueInput
+  prefs: JsonNullValueInput
   school: SchoolUpdateOneRequiredWithoutTeamsInput
   teacher: UserUpdateOneRequiredWithoutTeachesInput
   updatedAt: DateTimeFieldUpdateOperationsInput
@@ -6107,8 +6230,8 @@ input TeamUpdateWithoutWorkInput {
   invite: NullableStringFieldUpdateOperationsInput
   members: UserUpdateManyWithoutTeamInput
   name: StringFieldUpdateOperationsInput
-  notes: Json
-  prefs: Json
+  notes: JsonNullValueInput
+  prefs: JsonNullValueInput
   school: SchoolUpdateOneRequiredWithoutTeamsInput
   teacher: UserUpdateOneRequiredWithoutTeachesInput
   updatedAt: DateTimeFieldUpdateOperationsInput
@@ -6244,7 +6367,7 @@ type User {
     last: Int
   ): [Ballot!]!
   campaign: String
-  createdAt: DateTime
+  createdAt: DateTime!
   discussions(
     after: DiscussionWhereUniqueInput
     before: DiscussionWhereUniqueInput
@@ -6257,7 +6380,7 @@ type User {
   id: String!
   image: String
   lastname: String
-  locale: String
+  locale: String!
   name: String
   reactions(
     after: ReactionWhereUniqueInput
@@ -6737,10 +6860,18 @@ input UserListRelationFilter {
   some: UserWhereInput
 }
 
-input UserOrderByInput {
+input UserOrderByRelationAggregateInput {
+  _count: SortOrder
+}
+
+input UserOrderByWithRelationInput {
+  activity: ActivityOrderByRelationAggregateInput
+  attachments: AttachmentOrderByRelationAggregateInput
+  ballots: BallotOrderByRelationAggregateInput
   campaign: SortOrder
   canton: SortOrder
   createdAt: SortOrder
+  discussions: DiscussionOrderByRelationAggregateInput
   email: SortOrder
   emailVerified: SortOrder
   gender: SortOrder
@@ -6750,11 +6881,17 @@ input UserOrderByInput {
   locale: SortOrder
   name: SortOrder
   password: SortOrder
+  reactions: ReactionOrderByRelationAggregateInput
   role: SortOrder
+  school: SchoolOrderByWithRelationInput
   schoolId: SortOrder
+  teaches: TeamOrderByRelationAggregateInput
+  team: TeamOrderByWithRelationInput
   teamId: SortOrder
   updatedAt: SortOrder
   verified: SortOrder
+  voted: VotedOrderByRelationAggregateInput
+  work: WorkOrderByRelationAggregateInput
   year: SortOrder
 }
 
@@ -7339,7 +7476,7 @@ enum Visibility {
 }
 
 type Vote {
-  ballot: Ballot
+  ballot: Ballot!
   verify: String
 }
 
@@ -7653,6 +7790,10 @@ input VotedListRelationFilter {
   some: VotedWhereInput
 }
 
+input VotedOrderByRelationAggregateInput {
+  _count: SortOrder
+}
+
 input VotedScalarWhereInput {
   AND: [VotedScalarWhereInput!]
   ballotId: StringFilter
@@ -7846,6 +7987,10 @@ input VoteListRelationFilter {
   every: VoteWhereInput
   none: VoteWhereInput
   some: VoteWhereInput
+}
+
+input VoteOrderByRelationAggregateInput {
+  _count: SortOrder
 }
 
 input VoteScalarWhereInput {
@@ -8090,7 +8235,7 @@ type Work {
   ): [Reaction!]!
   text: String!
   title: String!
-  updatedAt: DateTime
+  updatedAt: DateTime!
   users(
     after: UserWhereUniqueInput
     before: UserWhereUniqueInput
@@ -8104,7 +8249,7 @@ input WorkCreateInput {
   attachments: AttachmentCreateNestedManyWithoutWorkInput
   card: String
   createdAt: DateTime
-  data: Json
+  data: NullableJsonNullValueInput
   id: String
   reactions: ReactionCreateNestedManyWithoutWorkInput
   school: SchoolCreateNestedOneWithoutWorkInput!
@@ -8119,7 +8264,7 @@ input WorkCreateInput {
 input WorkCreateManySchoolInput {
   card: String
   createdAt: DateTime
-  data: Json
+  data: NullableJsonNullValueInput
   id: String
   teamId: String!
   text: String
@@ -8136,7 +8281,7 @@ input WorkCreateManySchoolInputEnvelope {
 input WorkCreateManyTeamInput {
   card: String
   createdAt: DateTime
-  data: Json
+  data: NullableJsonNullValueInput
   id: String
   schoolId: String!
   text: String
@@ -8222,7 +8367,7 @@ input WorkCreateWithoutActivitiesInput {
   attachments: AttachmentCreateNestedManyWithoutWorkInput
   card: String
   createdAt: DateTime
-  data: Json
+  data: NullableJsonNullValueInput
   id: String
   reactions: ReactionCreateNestedManyWithoutWorkInput
   school: SchoolCreateNestedOneWithoutWorkInput!
@@ -8238,7 +8383,7 @@ input WorkCreateWithoutAttachmentsInput {
   activities: ActivityCreateNestedManyWithoutWorkInput
   card: String
   createdAt: DateTime
-  data: Json
+  data: NullableJsonNullValueInput
   id: String
   reactions: ReactionCreateNestedManyWithoutWorkInput
   school: SchoolCreateNestedOneWithoutWorkInput!
@@ -8255,7 +8400,7 @@ input WorkCreateWithoutReactionsInput {
   attachments: AttachmentCreateNestedManyWithoutWorkInput
   card: String
   createdAt: DateTime
-  data: Json
+  data: NullableJsonNullValueInput
   id: String
   school: SchoolCreateNestedOneWithoutWorkInput!
   team: TeamCreateNestedOneWithoutWorkInput!
@@ -8271,7 +8416,7 @@ input WorkCreateWithoutSchoolInput {
   attachments: AttachmentCreateNestedManyWithoutWorkInput
   card: String
   createdAt: DateTime
-  data: Json
+  data: NullableJsonNullValueInput
   id: String
   reactions: ReactionCreateNestedManyWithoutWorkInput
   team: TeamCreateNestedOneWithoutWorkInput!
@@ -8287,7 +8432,7 @@ input WorkCreateWithoutTeamInput {
   attachments: AttachmentCreateNestedManyWithoutWorkInput
   card: String
   createdAt: DateTime
-  data: Json
+  data: NullableJsonNullValueInput
   id: String
   reactions: ReactionCreateNestedManyWithoutWorkInput
   school: SchoolCreateNestedOneWithoutWorkInput!
@@ -8303,7 +8448,7 @@ input WorkCreateWithoutUsersInput {
   attachments: AttachmentCreateNestedManyWithoutWorkInput
   card: String
   createdAt: DateTime
-  data: Json
+  data: NullableJsonNullValueInput
   id: String
   reactions: ReactionCreateNestedManyWithoutWorkInput
   school: SchoolCreateNestedOneWithoutWorkInput!
@@ -8320,16 +8465,26 @@ input WorkListRelationFilter {
   some: WorkWhereInput
 }
 
-input WorkOrderByInput {
+input WorkOrderByRelationAggregateInput {
+  _count: SortOrder
+}
+
+input WorkOrderByWithRelationInput {
+  activities: ActivityOrderByRelationAggregateInput
+  attachments: AttachmentOrderByRelationAggregateInput
   card: SortOrder
   createdAt: SortOrder
   data: SortOrder
   id: SortOrder
+  reactions: ReactionOrderByRelationAggregateInput
+  school: SchoolOrderByWithRelationInput
   schoolId: SortOrder
+  team: TeamOrderByWithRelationInput
   teamId: SortOrder
   text: SortOrder
   title: SortOrder
   updatedAt: SortOrder
+  users: UserOrderByRelationAggregateInput
   visibility: SortOrder
 }
 
@@ -8352,7 +8507,7 @@ input WorkScalarWhereInput {
 input WorkUpdateManyMutationInput {
   card: NullableStringFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
-  data: Json
+  data: NullableJsonNullValueInput
   id: StringFieldUpdateOperationsInput
   text: StringFieldUpdateOperationsInput
   title: StringFieldUpdateOperationsInput
@@ -8450,7 +8605,7 @@ input WorkUpdateWithoutActivitiesInput {
   attachments: AttachmentUpdateManyWithoutWorkInput
   card: NullableStringFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
-  data: Json
+  data: NullableJsonNullValueInput
   id: StringFieldUpdateOperationsInput
   reactions: ReactionUpdateManyWithoutWorkInput
   school: SchoolUpdateOneRequiredWithoutWorkInput
@@ -8466,7 +8621,7 @@ input WorkUpdateWithoutAttachmentsInput {
   activities: ActivityUpdateManyWithoutWorkInput
   card: NullableStringFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
-  data: Json
+  data: NullableJsonNullValueInput
   id: StringFieldUpdateOperationsInput
   reactions: ReactionUpdateManyWithoutWorkInput
   school: SchoolUpdateOneRequiredWithoutWorkInput
@@ -8483,7 +8638,7 @@ input WorkUpdateWithoutReactionsInput {
   attachments: AttachmentUpdateManyWithoutWorkInput
   card: NullableStringFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
-  data: Json
+  data: NullableJsonNullValueInput
   id: StringFieldUpdateOperationsInput
   school: SchoolUpdateOneRequiredWithoutWorkInput
   team: TeamUpdateOneRequiredWithoutWorkInput
@@ -8499,7 +8654,7 @@ input WorkUpdateWithoutSchoolInput {
   attachments: AttachmentUpdateManyWithoutWorkInput
   card: NullableStringFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
-  data: Json
+  data: NullableJsonNullValueInput
   id: StringFieldUpdateOperationsInput
   reactions: ReactionUpdateManyWithoutWorkInput
   team: TeamUpdateOneRequiredWithoutWorkInput
@@ -8515,7 +8670,7 @@ input WorkUpdateWithoutTeamInput {
   attachments: AttachmentUpdateManyWithoutWorkInput
   card: NullableStringFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
-  data: Json
+  data: NullableJsonNullValueInput
   id: StringFieldUpdateOperationsInput
   reactions: ReactionUpdateManyWithoutWorkInput
   school: SchoolUpdateOneRequiredWithoutWorkInput
@@ -8531,7 +8686,7 @@ input WorkUpdateWithoutUsersInput {
   attachments: AttachmentUpdateManyWithoutWorkInput
   card: NullableStringFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
-  data: Json
+  data: NullableJsonNullValueInput
   id: StringFieldUpdateOperationsInput
   reactions: ReactionUpdateManyWithoutWorkInput
   school: SchoolUpdateOneRequiredWithoutWorkInput

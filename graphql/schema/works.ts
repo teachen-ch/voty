@@ -1,5 +1,5 @@
 import resolvers from "../resolvers";
-import { extendType, objectType } from "@nexus/schema";
+import { extendType, objectType } from "nexus";
 
 export const Work = objectType({
   name: "Work",

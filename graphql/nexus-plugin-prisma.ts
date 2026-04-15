@@ -3,10 +3,10 @@ import * as Prisma from '@prisma/client';
 
 // Pagination type
 type Pagination = {
-  first?: boolean
-  last?: boolean
-  before?: boolean
-  after?: boolean
+    first?: boolean
+    last?: boolean
+    before?: boolean
+    after?: boolean
 }
 
 // Prisma custom scalar names
@@ -37,7 +37,7 @@ interface NexusPrismaInputs {
   Query: {
     users: {
       filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'name' | 'email' | 'emailVerified' | 'verified' | 'lastname' | 'image' | 'campaign' | 'locale' | 'password' | 'gender' | 'year' | 'canton' | 'role' | 'school' | 'schoolId' | 'team' | 'teamId' | 'teaches' | 'ballots' | 'attachments' | 'discussions' | 'reactions' | 'voted' | 'activity' | 'work' | 'createdAt' | 'updatedAt'
-      ordering: 'id' | 'name' | 'email' | 'emailVerified' | 'verified' | 'lastname' | 'image' | 'campaign' | 'locale' | 'password' | 'gender' | 'year' | 'canton' | 'role' | 'schoolId' | 'teamId' | 'createdAt' | 'updatedAt'
+      ordering: 'id' | 'name' | 'email' | 'emailVerified' | 'verified' | 'lastname' | 'image' | 'campaign' | 'locale' | 'password' | 'gender' | 'year' | 'canton' | 'role' | 'school' | 'schoolId' | 'team' | 'teamId' | 'teaches' | 'ballots' | 'attachments' | 'discussions' | 'reactions' | 'voted' | 'activity' | 'work' | 'createdAt' | 'updatedAt'
     }
     verificationRequests: {
       filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'identifier' | 'token' | 'expires' | 'createdAt' | 'updatedAt'
@@ -45,55 +45,55 @@ interface NexusPrismaInputs {
     }
     teams: {
       filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'name' | 'invite' | 'code' | 'year' | 'cards' | 'prefs' | 'notes' | 'school' | 'schoolId' | 'teacher' | 'teacherId' | 'members' | 'ballots' | 'domain' | 'domainId' | 'BallotRuns' | 'Vote' | 'Voted' | 'discussion' | 'activity' | 'attachment' | 'work' | 'createdAt' | 'updatedAt'
-      ordering: 'id' | 'name' | 'invite' | 'code' | 'year' | 'cards' | 'prefs' | 'notes' | 'schoolId' | 'teacherId' | 'domainId' | 'createdAt' | 'updatedAt'
+      ordering: 'id' | 'name' | 'invite' | 'code' | 'year' | 'cards' | 'prefs' | 'notes' | 'school' | 'schoolId' | 'teacher' | 'teacherId' | 'members' | 'ballots' | 'domain' | 'domainId' | 'BallotRuns' | 'Vote' | 'Voted' | 'discussion' | 'activity' | 'attachment' | 'work' | 'createdAt' | 'updatedAt'
     }
     schools: {
       filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'name' | 'city' | 'canton' | 'zip' | 'address' | 'type' | 'domain' | 'domainId' | 'members' | 'teams' | 'ballots' | 'Vote' | 'Voted' | 'discussion' | 'activity' | 'attachment' | 'work'
-      ordering: 'id' | 'name' | 'city' | 'canton' | 'zip' | 'address' | 'type' | 'domainId'
+      ordering: 'id' | 'name' | 'city' | 'canton' | 'zip' | 'address' | 'type' | 'domain' | 'domainId' | 'members' | 'teams' | 'ballots' | 'Vote' | 'Voted' | 'discussion' | 'activity' | 'attachment' | 'work'
     }
     domains: {
       filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'name' | 'approved' | 'schools' | 'Team'
-      ordering: 'id' | 'name' | 'approved'
+      ordering: 'id' | 'name' | 'approved' | 'schools' | 'Team'
     }
     ballots: {
       filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'title' | 'titlede' | 'titlefr' | 'titleit' | 'description' | 'descriptionde' | 'descriptionfr' | 'descriptionit' | 'body' | 'bodyde' | 'bodyfr' | 'bodyit' | 'originalLocale' | 'start' | 'end' | 'scope' | 'canton' | 'school' | 'schoolId' | 'team' | 'teamId' | 'creator' | 'creatorId' | 'options' | 'voted' | 'votes' | 'attachments' | 'ballotRuns' | 'activity' | 'discussion' | 'createdAt' | 'updatedAt'
-      ordering: 'id' | 'title' | 'titlede' | 'titlefr' | 'titleit' | 'description' | 'descriptionde' | 'descriptionfr' | 'descriptionit' | 'body' | 'bodyde' | 'bodyfr' | 'bodyit' | 'originalLocale' | 'start' | 'end' | 'scope' | 'canton' | 'schoolId' | 'teamId' | 'creatorId' | 'createdAt' | 'updatedAt'
+      ordering: 'id' | 'title' | 'titlede' | 'titlefr' | 'titleit' | 'description' | 'descriptionde' | 'descriptionfr' | 'descriptionit' | 'body' | 'bodyde' | 'bodyfr' | 'bodyit' | 'originalLocale' | 'start' | 'end' | 'scope' | 'canton' | 'school' | 'schoolId' | 'team' | 'teamId' | 'creator' | 'creatorId' | 'options' | 'voted' | 'votes' | 'attachments' | 'ballotRuns' | 'activity' | 'discussion' | 'createdAt' | 'updatedAt'
     }
     ballotRuns: {
       filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'start' | 'end' | 'vote' | 'ballot' | 'ballotId' | 'team' | 'teamId'
-      ordering: 'id' | 'start' | 'end' | 'ballotId' | 'teamId'
+      ordering: 'id' | 'start' | 'end' | 'vote' | 'ballot' | 'ballotId' | 'team' | 'teamId'
     }
     options: {
       filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'vote' | 'title' | 'ballot' | 'ballotId'
-      ordering: 'id' | 'vote' | 'title' | 'ballotId'
+      ordering: 'id' | 'vote' | 'title' | 'ballot' | 'ballotId'
     }
     voteds: {
       filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'signature' | 'user' | 'userId' | 'ballot' | 'ballotId' | 'team' | 'teamId' | 'school' | 'schoolId'
-      ordering: 'id' | 'signature' | 'userId' | 'ballotId' | 'teamId' | 'schoolId'
+      ordering: 'id' | 'signature' | 'user' | 'userId' | 'ballot' | 'ballotId' | 'team' | 'teamId' | 'school' | 'schoolId'
     }
     votes: {
       filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'vote' | 'verify' | 'year' | 'canton' | 'schooltype' | 'locale' | 'ballot' | 'ballotId' | 'ballotRun' | 'ballotRunId' | 'team' | 'teamId' | 'school' | 'schoolId'
-      ordering: 'id' | 'vote' | 'verify' | 'year' | 'canton' | 'schooltype' | 'locale' | 'ballotId' | 'ballotRunId' | 'teamId' | 'schoolId'
+      ordering: 'id' | 'vote' | 'verify' | 'year' | 'canton' | 'schooltype' | 'locale' | 'ballot' | 'ballotId' | 'ballotRun' | 'ballotRunId' | 'team' | 'teamId' | 'school' | 'schoolId'
     }
     attachments: {
       filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'file' | 'title' | 'type' | 'card' | 'user' | 'userId' | 'team' | 'teamId' | 'school' | 'schoolId' | 'discussion' | 'discussionId' | 'ballot' | 'ballotId' | 'work' | 'workId' | 'createdAt' | 'updatedAt'
-      ordering: 'id' | 'file' | 'title' | 'type' | 'card' | 'userId' | 'teamId' | 'schoolId' | 'discussionId' | 'ballotId' | 'workId' | 'createdAt' | 'updatedAt'
+      ordering: 'id' | 'file' | 'title' | 'type' | 'card' | 'user' | 'userId' | 'team' | 'teamId' | 'school' | 'schoolId' | 'discussion' | 'discussionId' | 'ballot' | 'ballotId' | 'work' | 'workId' | 'createdAt' | 'updatedAt'
     }
     discussions: {
       filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'title' | 'text' | 'card' | 'user' | 'userId' | 'team' | 'teamId' | 'school' | 'schoolId' | 'ballot' | 'ballotId' | 'reactions' | 'attachments' | 'createdAt' | 'updatedAt' | 'Activity'
-      ordering: 'id' | 'title' | 'text' | 'card' | 'userId' | 'teamId' | 'schoolId' | 'ballotId' | 'createdAt' | 'updatedAt'
+      ordering: 'id' | 'title' | 'text' | 'card' | 'user' | 'userId' | 'team' | 'teamId' | 'school' | 'schoolId' | 'ballot' | 'ballotId' | 'reactions' | 'attachments' | 'createdAt' | 'updatedAt' | 'Activity'
     }
     works: {
       filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'title' | 'text' | 'data' | 'card' | 'visibility' | 'team' | 'teamId' | 'school' | 'schoolId' | 'users' | 'reactions' | 'attachments' | 'activities' | 'createdAt' | 'updatedAt'
-      ordering: 'id' | 'title' | 'text' | 'data' | 'card' | 'visibility' | 'teamId' | 'schoolId' | 'createdAt' | 'updatedAt'
+      ordering: 'id' | 'title' | 'text' | 'data' | 'card' | 'visibility' | 'team' | 'teamId' | 'school' | 'schoolId' | 'users' | 'reactions' | 'attachments' | 'activities' | 'createdAt' | 'updatedAt'
     }
     reactions: {
       filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'emoij' | 'stars' | 'feedback' | 'user' | 'userId' | 'discussion' | 'discussionId' | 'work' | 'workId' | 'createdAt' | 'updatedAt'
-      ordering: 'id' | 'emoij' | 'stars' | 'feedback' | 'userId' | 'discussionId' | 'workId' | 'createdAt' | 'updatedAt'
+      ordering: 'id' | 'emoij' | 'stars' | 'feedback' | 'user' | 'userId' | 'discussion' | 'discussionId' | 'work' | 'workId' | 'createdAt' | 'updatedAt'
     }
     activities: {
       filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'type' | 'visibility' | 'card' | 'summary' | 'user' | 'userId' | 'team' | 'teamId' | 'school' | 'schoolId' | 'discussion' | 'discussionId' | 'work' | 'workId' | 'ballot' | 'ballotId' | 'time'
-      ordering: 'id' | 'type' | 'visibility' | 'card' | 'summary' | 'userId' | 'teamId' | 'schoolId' | 'discussionId' | 'workId' | 'ballotId' | 'time'
+      ordering: 'id' | 'type' | 'visibility' | 'card' | 'summary' | 'user' | 'userId' | 'team' | 'teamId' | 'school' | 'schoolId' | 'discussion' | 'discussionId' | 'work' | 'workId' | 'ballot' | 'ballotId' | 'time'
     }
     swissvotes: {
       filtering: 'AND' | 'OR' | 'NOT' | 'anr' | 'datum' | 'titel_kurz_d' | 'titel_off_d' | 'stichwort' | 'swissvoteslink' | 'rechtsform' | 'poster_ja' | 'poster_nein' | 'annahme' | 'volk' | 'stand' | 'kategorien'
@@ -103,35 +103,35 @@ interface NexusPrismaInputs {
   User: {
     teaches: {
       filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'name' | 'invite' | 'code' | 'year' | 'cards' | 'prefs' | 'notes' | 'school' | 'schoolId' | 'teacher' | 'teacherId' | 'members' | 'ballots' | 'domain' | 'domainId' | 'BallotRuns' | 'Vote' | 'Voted' | 'discussion' | 'activity' | 'attachment' | 'work' | 'createdAt' | 'updatedAt'
-      ordering: 'id' | 'name' | 'invite' | 'code' | 'year' | 'cards' | 'prefs' | 'notes' | 'schoolId' | 'teacherId' | 'domainId' | 'createdAt' | 'updatedAt'
+      ordering: 'id' | 'name' | 'invite' | 'code' | 'year' | 'cards' | 'prefs' | 'notes' | 'school' | 'schoolId' | 'teacher' | 'teacherId' | 'members' | 'ballots' | 'domain' | 'domainId' | 'BallotRuns' | 'Vote' | 'Voted' | 'discussion' | 'activity' | 'attachment' | 'work' | 'createdAt' | 'updatedAt'
     }
     ballots: {
       filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'title' | 'titlede' | 'titlefr' | 'titleit' | 'description' | 'descriptionde' | 'descriptionfr' | 'descriptionit' | 'body' | 'bodyde' | 'bodyfr' | 'bodyit' | 'originalLocale' | 'start' | 'end' | 'scope' | 'canton' | 'school' | 'schoolId' | 'team' | 'teamId' | 'creator' | 'creatorId' | 'options' | 'voted' | 'votes' | 'attachments' | 'ballotRuns' | 'activity' | 'discussion' | 'createdAt' | 'updatedAt'
-      ordering: 'id' | 'title' | 'titlede' | 'titlefr' | 'titleit' | 'description' | 'descriptionde' | 'descriptionfr' | 'descriptionit' | 'body' | 'bodyde' | 'bodyfr' | 'bodyit' | 'originalLocale' | 'start' | 'end' | 'scope' | 'canton' | 'schoolId' | 'teamId' | 'creatorId' | 'createdAt' | 'updatedAt'
+      ordering: 'id' | 'title' | 'titlede' | 'titlefr' | 'titleit' | 'description' | 'descriptionde' | 'descriptionfr' | 'descriptionit' | 'body' | 'bodyde' | 'bodyfr' | 'bodyit' | 'originalLocale' | 'start' | 'end' | 'scope' | 'canton' | 'school' | 'schoolId' | 'team' | 'teamId' | 'creator' | 'creatorId' | 'options' | 'voted' | 'votes' | 'attachments' | 'ballotRuns' | 'activity' | 'discussion' | 'createdAt' | 'updatedAt'
     }
     attachments: {
       filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'file' | 'title' | 'type' | 'card' | 'user' | 'userId' | 'team' | 'teamId' | 'school' | 'schoolId' | 'discussion' | 'discussionId' | 'ballot' | 'ballotId' | 'work' | 'workId' | 'createdAt' | 'updatedAt'
-      ordering: 'id' | 'file' | 'title' | 'type' | 'card' | 'userId' | 'teamId' | 'schoolId' | 'discussionId' | 'ballotId' | 'workId' | 'createdAt' | 'updatedAt'
+      ordering: 'id' | 'file' | 'title' | 'type' | 'card' | 'user' | 'userId' | 'team' | 'teamId' | 'school' | 'schoolId' | 'discussion' | 'discussionId' | 'ballot' | 'ballotId' | 'work' | 'workId' | 'createdAt' | 'updatedAt'
     }
     discussions: {
       filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'title' | 'text' | 'card' | 'user' | 'userId' | 'team' | 'teamId' | 'school' | 'schoolId' | 'ballot' | 'ballotId' | 'reactions' | 'attachments' | 'createdAt' | 'updatedAt' | 'Activity'
-      ordering: 'id' | 'title' | 'text' | 'card' | 'userId' | 'teamId' | 'schoolId' | 'ballotId' | 'createdAt' | 'updatedAt'
+      ordering: 'id' | 'title' | 'text' | 'card' | 'user' | 'userId' | 'team' | 'teamId' | 'school' | 'schoolId' | 'ballot' | 'ballotId' | 'reactions' | 'attachments' | 'createdAt' | 'updatedAt' | 'Activity'
     }
     reactions: {
       filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'emoij' | 'stars' | 'feedback' | 'user' | 'userId' | 'discussion' | 'discussionId' | 'work' | 'workId' | 'createdAt' | 'updatedAt'
-      ordering: 'id' | 'emoij' | 'stars' | 'feedback' | 'userId' | 'discussionId' | 'workId' | 'createdAt' | 'updatedAt'
+      ordering: 'id' | 'emoij' | 'stars' | 'feedback' | 'user' | 'userId' | 'discussion' | 'discussionId' | 'work' | 'workId' | 'createdAt' | 'updatedAt'
     }
     voted: {
       filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'signature' | 'user' | 'userId' | 'ballot' | 'ballotId' | 'team' | 'teamId' | 'school' | 'schoolId'
-      ordering: 'id' | 'signature' | 'userId' | 'ballotId' | 'teamId' | 'schoolId'
+      ordering: 'id' | 'signature' | 'user' | 'userId' | 'ballot' | 'ballotId' | 'team' | 'teamId' | 'school' | 'schoolId'
     }
     activity: {
       filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'type' | 'visibility' | 'card' | 'summary' | 'user' | 'userId' | 'team' | 'teamId' | 'school' | 'schoolId' | 'discussion' | 'discussionId' | 'work' | 'workId' | 'ballot' | 'ballotId' | 'time'
-      ordering: 'id' | 'type' | 'visibility' | 'card' | 'summary' | 'userId' | 'teamId' | 'schoolId' | 'discussionId' | 'workId' | 'ballotId' | 'time'
+      ordering: 'id' | 'type' | 'visibility' | 'card' | 'summary' | 'user' | 'userId' | 'team' | 'teamId' | 'school' | 'schoolId' | 'discussion' | 'discussionId' | 'work' | 'workId' | 'ballot' | 'ballotId' | 'time'
     }
     work: {
       filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'title' | 'text' | 'data' | 'card' | 'visibility' | 'team' | 'teamId' | 'school' | 'schoolId' | 'users' | 'reactions' | 'attachments' | 'activities' | 'createdAt' | 'updatedAt'
-      ordering: 'id' | 'title' | 'text' | 'data' | 'card' | 'visibility' | 'teamId' | 'schoolId' | 'createdAt' | 'updatedAt'
+      ordering: 'id' | 'title' | 'text' | 'data' | 'card' | 'visibility' | 'team' | 'teamId' | 'school' | 'schoolId' | 'users' | 'reactions' | 'attachments' | 'activities' | 'createdAt' | 'updatedAt'
     }
   }
   VerificationRequest: {
@@ -140,123 +140,123 @@ interface NexusPrismaInputs {
   Team: {
     members: {
       filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'name' | 'email' | 'emailVerified' | 'verified' | 'lastname' | 'image' | 'campaign' | 'locale' | 'password' | 'gender' | 'year' | 'canton' | 'role' | 'school' | 'schoolId' | 'team' | 'teamId' | 'teaches' | 'ballots' | 'attachments' | 'discussions' | 'reactions' | 'voted' | 'activity' | 'work' | 'createdAt' | 'updatedAt'
-      ordering: 'id' | 'name' | 'email' | 'emailVerified' | 'verified' | 'lastname' | 'image' | 'campaign' | 'locale' | 'password' | 'gender' | 'year' | 'canton' | 'role' | 'schoolId' | 'teamId' | 'createdAt' | 'updatedAt'
+      ordering: 'id' | 'name' | 'email' | 'emailVerified' | 'verified' | 'lastname' | 'image' | 'campaign' | 'locale' | 'password' | 'gender' | 'year' | 'canton' | 'role' | 'school' | 'schoolId' | 'team' | 'teamId' | 'teaches' | 'ballots' | 'attachments' | 'discussions' | 'reactions' | 'voted' | 'activity' | 'work' | 'createdAt' | 'updatedAt'
     }
     ballots: {
       filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'title' | 'titlede' | 'titlefr' | 'titleit' | 'description' | 'descriptionde' | 'descriptionfr' | 'descriptionit' | 'body' | 'bodyde' | 'bodyfr' | 'bodyit' | 'originalLocale' | 'start' | 'end' | 'scope' | 'canton' | 'school' | 'schoolId' | 'team' | 'teamId' | 'creator' | 'creatorId' | 'options' | 'voted' | 'votes' | 'attachments' | 'ballotRuns' | 'activity' | 'discussion' | 'createdAt' | 'updatedAt'
-      ordering: 'id' | 'title' | 'titlede' | 'titlefr' | 'titleit' | 'description' | 'descriptionde' | 'descriptionfr' | 'descriptionit' | 'body' | 'bodyde' | 'bodyfr' | 'bodyit' | 'originalLocale' | 'start' | 'end' | 'scope' | 'canton' | 'schoolId' | 'teamId' | 'creatorId' | 'createdAt' | 'updatedAt'
+      ordering: 'id' | 'title' | 'titlede' | 'titlefr' | 'titleit' | 'description' | 'descriptionde' | 'descriptionfr' | 'descriptionit' | 'body' | 'bodyde' | 'bodyfr' | 'bodyit' | 'originalLocale' | 'start' | 'end' | 'scope' | 'canton' | 'school' | 'schoolId' | 'team' | 'teamId' | 'creator' | 'creatorId' | 'options' | 'voted' | 'votes' | 'attachments' | 'ballotRuns' | 'activity' | 'discussion' | 'createdAt' | 'updatedAt'
     }
     BallotRuns: {
       filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'start' | 'end' | 'vote' | 'ballot' | 'ballotId' | 'team' | 'teamId'
-      ordering: 'id' | 'start' | 'end' | 'ballotId' | 'teamId'
+      ordering: 'id' | 'start' | 'end' | 'vote' | 'ballot' | 'ballotId' | 'team' | 'teamId'
     }
     Vote: {
       filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'vote' | 'verify' | 'year' | 'canton' | 'schooltype' | 'locale' | 'ballot' | 'ballotId' | 'ballotRun' | 'ballotRunId' | 'team' | 'teamId' | 'school' | 'schoolId'
-      ordering: 'id' | 'vote' | 'verify' | 'year' | 'canton' | 'schooltype' | 'locale' | 'ballotId' | 'ballotRunId' | 'teamId' | 'schoolId'
+      ordering: 'id' | 'vote' | 'verify' | 'year' | 'canton' | 'schooltype' | 'locale' | 'ballot' | 'ballotId' | 'ballotRun' | 'ballotRunId' | 'team' | 'teamId' | 'school' | 'schoolId'
     }
     Voted: {
       filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'signature' | 'user' | 'userId' | 'ballot' | 'ballotId' | 'team' | 'teamId' | 'school' | 'schoolId'
-      ordering: 'id' | 'signature' | 'userId' | 'ballotId' | 'teamId' | 'schoolId'
+      ordering: 'id' | 'signature' | 'user' | 'userId' | 'ballot' | 'ballotId' | 'team' | 'teamId' | 'school' | 'schoolId'
     }
     discussion: {
       filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'title' | 'text' | 'card' | 'user' | 'userId' | 'team' | 'teamId' | 'school' | 'schoolId' | 'ballot' | 'ballotId' | 'reactions' | 'attachments' | 'createdAt' | 'updatedAt' | 'Activity'
-      ordering: 'id' | 'title' | 'text' | 'card' | 'userId' | 'teamId' | 'schoolId' | 'ballotId' | 'createdAt' | 'updatedAt'
+      ordering: 'id' | 'title' | 'text' | 'card' | 'user' | 'userId' | 'team' | 'teamId' | 'school' | 'schoolId' | 'ballot' | 'ballotId' | 'reactions' | 'attachments' | 'createdAt' | 'updatedAt' | 'Activity'
     }
     activity: {
       filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'type' | 'visibility' | 'card' | 'summary' | 'user' | 'userId' | 'team' | 'teamId' | 'school' | 'schoolId' | 'discussion' | 'discussionId' | 'work' | 'workId' | 'ballot' | 'ballotId' | 'time'
-      ordering: 'id' | 'type' | 'visibility' | 'card' | 'summary' | 'userId' | 'teamId' | 'schoolId' | 'discussionId' | 'workId' | 'ballotId' | 'time'
+      ordering: 'id' | 'type' | 'visibility' | 'card' | 'summary' | 'user' | 'userId' | 'team' | 'teamId' | 'school' | 'schoolId' | 'discussion' | 'discussionId' | 'work' | 'workId' | 'ballot' | 'ballotId' | 'time'
     }
     attachment: {
       filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'file' | 'title' | 'type' | 'card' | 'user' | 'userId' | 'team' | 'teamId' | 'school' | 'schoolId' | 'discussion' | 'discussionId' | 'ballot' | 'ballotId' | 'work' | 'workId' | 'createdAt' | 'updatedAt'
-      ordering: 'id' | 'file' | 'title' | 'type' | 'card' | 'userId' | 'teamId' | 'schoolId' | 'discussionId' | 'ballotId' | 'workId' | 'createdAt' | 'updatedAt'
+      ordering: 'id' | 'file' | 'title' | 'type' | 'card' | 'user' | 'userId' | 'team' | 'teamId' | 'school' | 'schoolId' | 'discussion' | 'discussionId' | 'ballot' | 'ballotId' | 'work' | 'workId' | 'createdAt' | 'updatedAt'
     }
     work: {
       filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'title' | 'text' | 'data' | 'card' | 'visibility' | 'team' | 'teamId' | 'school' | 'schoolId' | 'users' | 'reactions' | 'attachments' | 'activities' | 'createdAt' | 'updatedAt'
-      ordering: 'id' | 'title' | 'text' | 'data' | 'card' | 'visibility' | 'teamId' | 'schoolId' | 'createdAt' | 'updatedAt'
+      ordering: 'id' | 'title' | 'text' | 'data' | 'card' | 'visibility' | 'team' | 'teamId' | 'school' | 'schoolId' | 'users' | 'reactions' | 'attachments' | 'activities' | 'createdAt' | 'updatedAt'
     }
   }
   School: {
     members: {
       filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'name' | 'email' | 'emailVerified' | 'verified' | 'lastname' | 'image' | 'campaign' | 'locale' | 'password' | 'gender' | 'year' | 'canton' | 'role' | 'school' | 'schoolId' | 'team' | 'teamId' | 'teaches' | 'ballots' | 'attachments' | 'discussions' | 'reactions' | 'voted' | 'activity' | 'work' | 'createdAt' | 'updatedAt'
-      ordering: 'id' | 'name' | 'email' | 'emailVerified' | 'verified' | 'lastname' | 'image' | 'campaign' | 'locale' | 'password' | 'gender' | 'year' | 'canton' | 'role' | 'schoolId' | 'teamId' | 'createdAt' | 'updatedAt'
+      ordering: 'id' | 'name' | 'email' | 'emailVerified' | 'verified' | 'lastname' | 'image' | 'campaign' | 'locale' | 'password' | 'gender' | 'year' | 'canton' | 'role' | 'school' | 'schoolId' | 'team' | 'teamId' | 'teaches' | 'ballots' | 'attachments' | 'discussions' | 'reactions' | 'voted' | 'activity' | 'work' | 'createdAt' | 'updatedAt'
     }
     teams: {
       filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'name' | 'invite' | 'code' | 'year' | 'cards' | 'prefs' | 'notes' | 'school' | 'schoolId' | 'teacher' | 'teacherId' | 'members' | 'ballots' | 'domain' | 'domainId' | 'BallotRuns' | 'Vote' | 'Voted' | 'discussion' | 'activity' | 'attachment' | 'work' | 'createdAt' | 'updatedAt'
-      ordering: 'id' | 'name' | 'invite' | 'code' | 'year' | 'cards' | 'prefs' | 'notes' | 'schoolId' | 'teacherId' | 'domainId' | 'createdAt' | 'updatedAt'
+      ordering: 'id' | 'name' | 'invite' | 'code' | 'year' | 'cards' | 'prefs' | 'notes' | 'school' | 'schoolId' | 'teacher' | 'teacherId' | 'members' | 'ballots' | 'domain' | 'domainId' | 'BallotRuns' | 'Vote' | 'Voted' | 'discussion' | 'activity' | 'attachment' | 'work' | 'createdAt' | 'updatedAt'
     }
     ballots: {
       filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'title' | 'titlede' | 'titlefr' | 'titleit' | 'description' | 'descriptionde' | 'descriptionfr' | 'descriptionit' | 'body' | 'bodyde' | 'bodyfr' | 'bodyit' | 'originalLocale' | 'start' | 'end' | 'scope' | 'canton' | 'school' | 'schoolId' | 'team' | 'teamId' | 'creator' | 'creatorId' | 'options' | 'voted' | 'votes' | 'attachments' | 'ballotRuns' | 'activity' | 'discussion' | 'createdAt' | 'updatedAt'
-      ordering: 'id' | 'title' | 'titlede' | 'titlefr' | 'titleit' | 'description' | 'descriptionde' | 'descriptionfr' | 'descriptionit' | 'body' | 'bodyde' | 'bodyfr' | 'bodyit' | 'originalLocale' | 'start' | 'end' | 'scope' | 'canton' | 'schoolId' | 'teamId' | 'creatorId' | 'createdAt' | 'updatedAt'
+      ordering: 'id' | 'title' | 'titlede' | 'titlefr' | 'titleit' | 'description' | 'descriptionde' | 'descriptionfr' | 'descriptionit' | 'body' | 'bodyde' | 'bodyfr' | 'bodyit' | 'originalLocale' | 'start' | 'end' | 'scope' | 'canton' | 'school' | 'schoolId' | 'team' | 'teamId' | 'creator' | 'creatorId' | 'options' | 'voted' | 'votes' | 'attachments' | 'ballotRuns' | 'activity' | 'discussion' | 'createdAt' | 'updatedAt'
     }
     Vote: {
       filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'vote' | 'verify' | 'year' | 'canton' | 'schooltype' | 'locale' | 'ballot' | 'ballotId' | 'ballotRun' | 'ballotRunId' | 'team' | 'teamId' | 'school' | 'schoolId'
-      ordering: 'id' | 'vote' | 'verify' | 'year' | 'canton' | 'schooltype' | 'locale' | 'ballotId' | 'ballotRunId' | 'teamId' | 'schoolId'
+      ordering: 'id' | 'vote' | 'verify' | 'year' | 'canton' | 'schooltype' | 'locale' | 'ballot' | 'ballotId' | 'ballotRun' | 'ballotRunId' | 'team' | 'teamId' | 'school' | 'schoolId'
     }
     Voted: {
       filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'signature' | 'user' | 'userId' | 'ballot' | 'ballotId' | 'team' | 'teamId' | 'school' | 'schoolId'
-      ordering: 'id' | 'signature' | 'userId' | 'ballotId' | 'teamId' | 'schoolId'
+      ordering: 'id' | 'signature' | 'user' | 'userId' | 'ballot' | 'ballotId' | 'team' | 'teamId' | 'school' | 'schoolId'
     }
     discussion: {
       filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'title' | 'text' | 'card' | 'user' | 'userId' | 'team' | 'teamId' | 'school' | 'schoolId' | 'ballot' | 'ballotId' | 'reactions' | 'attachments' | 'createdAt' | 'updatedAt' | 'Activity'
-      ordering: 'id' | 'title' | 'text' | 'card' | 'userId' | 'teamId' | 'schoolId' | 'ballotId' | 'createdAt' | 'updatedAt'
+      ordering: 'id' | 'title' | 'text' | 'card' | 'user' | 'userId' | 'team' | 'teamId' | 'school' | 'schoolId' | 'ballot' | 'ballotId' | 'reactions' | 'attachments' | 'createdAt' | 'updatedAt' | 'Activity'
     }
     activity: {
       filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'type' | 'visibility' | 'card' | 'summary' | 'user' | 'userId' | 'team' | 'teamId' | 'school' | 'schoolId' | 'discussion' | 'discussionId' | 'work' | 'workId' | 'ballot' | 'ballotId' | 'time'
-      ordering: 'id' | 'type' | 'visibility' | 'card' | 'summary' | 'userId' | 'teamId' | 'schoolId' | 'discussionId' | 'workId' | 'ballotId' | 'time'
+      ordering: 'id' | 'type' | 'visibility' | 'card' | 'summary' | 'user' | 'userId' | 'team' | 'teamId' | 'school' | 'schoolId' | 'discussion' | 'discussionId' | 'work' | 'workId' | 'ballot' | 'ballotId' | 'time'
     }
     attachment: {
       filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'file' | 'title' | 'type' | 'card' | 'user' | 'userId' | 'team' | 'teamId' | 'school' | 'schoolId' | 'discussion' | 'discussionId' | 'ballot' | 'ballotId' | 'work' | 'workId' | 'createdAt' | 'updatedAt'
-      ordering: 'id' | 'file' | 'title' | 'type' | 'card' | 'userId' | 'teamId' | 'schoolId' | 'discussionId' | 'ballotId' | 'workId' | 'createdAt' | 'updatedAt'
+      ordering: 'id' | 'file' | 'title' | 'type' | 'card' | 'user' | 'userId' | 'team' | 'teamId' | 'school' | 'schoolId' | 'discussion' | 'discussionId' | 'ballot' | 'ballotId' | 'work' | 'workId' | 'createdAt' | 'updatedAt'
     }
     work: {
       filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'title' | 'text' | 'data' | 'card' | 'visibility' | 'team' | 'teamId' | 'school' | 'schoolId' | 'users' | 'reactions' | 'attachments' | 'activities' | 'createdAt' | 'updatedAt'
-      ordering: 'id' | 'title' | 'text' | 'data' | 'card' | 'visibility' | 'teamId' | 'schoolId' | 'createdAt' | 'updatedAt'
+      ordering: 'id' | 'title' | 'text' | 'data' | 'card' | 'visibility' | 'team' | 'teamId' | 'school' | 'schoolId' | 'users' | 'reactions' | 'attachments' | 'activities' | 'createdAt' | 'updatedAt'
     }
   }
   Domain: {
     schools: {
       filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'name' | 'city' | 'canton' | 'zip' | 'address' | 'type' | 'domain' | 'domainId' | 'members' | 'teams' | 'ballots' | 'Vote' | 'Voted' | 'discussion' | 'activity' | 'attachment' | 'work'
-      ordering: 'id' | 'name' | 'city' | 'canton' | 'zip' | 'address' | 'type' | 'domainId'
+      ordering: 'id' | 'name' | 'city' | 'canton' | 'zip' | 'address' | 'type' | 'domain' | 'domainId' | 'members' | 'teams' | 'ballots' | 'Vote' | 'Voted' | 'discussion' | 'activity' | 'attachment' | 'work'
     }
     Team: {
       filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'name' | 'invite' | 'code' | 'year' | 'cards' | 'prefs' | 'notes' | 'school' | 'schoolId' | 'teacher' | 'teacherId' | 'members' | 'ballots' | 'domain' | 'domainId' | 'BallotRuns' | 'Vote' | 'Voted' | 'discussion' | 'activity' | 'attachment' | 'work' | 'createdAt' | 'updatedAt'
-      ordering: 'id' | 'name' | 'invite' | 'code' | 'year' | 'cards' | 'prefs' | 'notes' | 'schoolId' | 'teacherId' | 'domainId' | 'createdAt' | 'updatedAt'
+      ordering: 'id' | 'name' | 'invite' | 'code' | 'year' | 'cards' | 'prefs' | 'notes' | 'school' | 'schoolId' | 'teacher' | 'teacherId' | 'members' | 'ballots' | 'domain' | 'domainId' | 'BallotRuns' | 'Vote' | 'Voted' | 'discussion' | 'activity' | 'attachment' | 'work' | 'createdAt' | 'updatedAt'
     }
   }
   Ballot: {
     options: {
       filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'vote' | 'title' | 'ballot' | 'ballotId'
-      ordering: 'id' | 'vote' | 'title' | 'ballotId'
+      ordering: 'id' | 'vote' | 'title' | 'ballot' | 'ballotId'
     }
     voted: {
       filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'signature' | 'user' | 'userId' | 'ballot' | 'ballotId' | 'team' | 'teamId' | 'school' | 'schoolId'
-      ordering: 'id' | 'signature' | 'userId' | 'ballotId' | 'teamId' | 'schoolId'
+      ordering: 'id' | 'signature' | 'user' | 'userId' | 'ballot' | 'ballotId' | 'team' | 'teamId' | 'school' | 'schoolId'
     }
     votes: {
       filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'vote' | 'verify' | 'year' | 'canton' | 'schooltype' | 'locale' | 'ballot' | 'ballotId' | 'ballotRun' | 'ballotRunId' | 'team' | 'teamId' | 'school' | 'schoolId'
-      ordering: 'id' | 'vote' | 'verify' | 'year' | 'canton' | 'schooltype' | 'locale' | 'ballotId' | 'ballotRunId' | 'teamId' | 'schoolId'
+      ordering: 'id' | 'vote' | 'verify' | 'year' | 'canton' | 'schooltype' | 'locale' | 'ballot' | 'ballotId' | 'ballotRun' | 'ballotRunId' | 'team' | 'teamId' | 'school' | 'schoolId'
     }
     attachments: {
       filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'file' | 'title' | 'type' | 'card' | 'user' | 'userId' | 'team' | 'teamId' | 'school' | 'schoolId' | 'discussion' | 'discussionId' | 'ballot' | 'ballotId' | 'work' | 'workId' | 'createdAt' | 'updatedAt'
-      ordering: 'id' | 'file' | 'title' | 'type' | 'card' | 'userId' | 'teamId' | 'schoolId' | 'discussionId' | 'ballotId' | 'workId' | 'createdAt' | 'updatedAt'
+      ordering: 'id' | 'file' | 'title' | 'type' | 'card' | 'user' | 'userId' | 'team' | 'teamId' | 'school' | 'schoolId' | 'discussion' | 'discussionId' | 'ballot' | 'ballotId' | 'work' | 'workId' | 'createdAt' | 'updatedAt'
     }
     ballotRuns: {
       filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'start' | 'end' | 'vote' | 'ballot' | 'ballotId' | 'team' | 'teamId'
-      ordering: 'id' | 'start' | 'end' | 'ballotId' | 'teamId'
+      ordering: 'id' | 'start' | 'end' | 'vote' | 'ballot' | 'ballotId' | 'team' | 'teamId'
     }
     activity: {
       filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'type' | 'visibility' | 'card' | 'summary' | 'user' | 'userId' | 'team' | 'teamId' | 'school' | 'schoolId' | 'discussion' | 'discussionId' | 'work' | 'workId' | 'ballot' | 'ballotId' | 'time'
-      ordering: 'id' | 'type' | 'visibility' | 'card' | 'summary' | 'userId' | 'teamId' | 'schoolId' | 'discussionId' | 'workId' | 'ballotId' | 'time'
+      ordering: 'id' | 'type' | 'visibility' | 'card' | 'summary' | 'user' | 'userId' | 'team' | 'teamId' | 'school' | 'schoolId' | 'discussion' | 'discussionId' | 'work' | 'workId' | 'ballot' | 'ballotId' | 'time'
     }
     discussion: {
       filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'title' | 'text' | 'card' | 'user' | 'userId' | 'team' | 'teamId' | 'school' | 'schoolId' | 'ballot' | 'ballotId' | 'reactions' | 'attachments' | 'createdAt' | 'updatedAt' | 'Activity'
-      ordering: 'id' | 'title' | 'text' | 'card' | 'userId' | 'teamId' | 'schoolId' | 'ballotId' | 'createdAt' | 'updatedAt'
+      ordering: 'id' | 'title' | 'text' | 'card' | 'user' | 'userId' | 'team' | 'teamId' | 'school' | 'schoolId' | 'ballot' | 'ballotId' | 'reactions' | 'attachments' | 'createdAt' | 'updatedAt' | 'Activity'
     }
   }
   BallotRun: {
     vote: {
       filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'vote' | 'verify' | 'year' | 'canton' | 'schooltype' | 'locale' | 'ballot' | 'ballotId' | 'ballotRun' | 'ballotRunId' | 'team' | 'teamId' | 'school' | 'schoolId'
-      ordering: 'id' | 'vote' | 'verify' | 'year' | 'canton' | 'schooltype' | 'locale' | 'ballotId' | 'ballotRunId' | 'teamId' | 'schoolId'
+      ordering: 'id' | 'vote' | 'verify' | 'year' | 'canton' | 'schooltype' | 'locale' | 'ballot' | 'ballotId' | 'ballotRun' | 'ballotRunId' | 'team' | 'teamId' | 'school' | 'schoolId'
     }
   }
   Option: {
@@ -274,33 +274,33 @@ interface NexusPrismaInputs {
   Discussion: {
     reactions: {
       filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'emoij' | 'stars' | 'feedback' | 'user' | 'userId' | 'discussion' | 'discussionId' | 'work' | 'workId' | 'createdAt' | 'updatedAt'
-      ordering: 'id' | 'emoij' | 'stars' | 'feedback' | 'userId' | 'discussionId' | 'workId' | 'createdAt' | 'updatedAt'
+      ordering: 'id' | 'emoij' | 'stars' | 'feedback' | 'user' | 'userId' | 'discussion' | 'discussionId' | 'work' | 'workId' | 'createdAt' | 'updatedAt'
     }
     attachments: {
       filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'file' | 'title' | 'type' | 'card' | 'user' | 'userId' | 'team' | 'teamId' | 'school' | 'schoolId' | 'discussion' | 'discussionId' | 'ballot' | 'ballotId' | 'work' | 'workId' | 'createdAt' | 'updatedAt'
-      ordering: 'id' | 'file' | 'title' | 'type' | 'card' | 'userId' | 'teamId' | 'schoolId' | 'discussionId' | 'ballotId' | 'workId' | 'createdAt' | 'updatedAt'
+      ordering: 'id' | 'file' | 'title' | 'type' | 'card' | 'user' | 'userId' | 'team' | 'teamId' | 'school' | 'schoolId' | 'discussion' | 'discussionId' | 'ballot' | 'ballotId' | 'work' | 'workId' | 'createdAt' | 'updatedAt'
     }
     Activity: {
       filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'type' | 'visibility' | 'card' | 'summary' | 'user' | 'userId' | 'team' | 'teamId' | 'school' | 'schoolId' | 'discussion' | 'discussionId' | 'work' | 'workId' | 'ballot' | 'ballotId' | 'time'
-      ordering: 'id' | 'type' | 'visibility' | 'card' | 'summary' | 'userId' | 'teamId' | 'schoolId' | 'discussionId' | 'workId' | 'ballotId' | 'time'
+      ordering: 'id' | 'type' | 'visibility' | 'card' | 'summary' | 'user' | 'userId' | 'team' | 'teamId' | 'school' | 'schoolId' | 'discussion' | 'discussionId' | 'work' | 'workId' | 'ballot' | 'ballotId' | 'time'
     }
   }
   Work: {
     users: {
       filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'name' | 'email' | 'emailVerified' | 'verified' | 'lastname' | 'image' | 'campaign' | 'locale' | 'password' | 'gender' | 'year' | 'canton' | 'role' | 'school' | 'schoolId' | 'team' | 'teamId' | 'teaches' | 'ballots' | 'attachments' | 'discussions' | 'reactions' | 'voted' | 'activity' | 'work' | 'createdAt' | 'updatedAt'
-      ordering: 'id' | 'name' | 'email' | 'emailVerified' | 'verified' | 'lastname' | 'image' | 'campaign' | 'locale' | 'password' | 'gender' | 'year' | 'canton' | 'role' | 'schoolId' | 'teamId' | 'createdAt' | 'updatedAt'
+      ordering: 'id' | 'name' | 'email' | 'emailVerified' | 'verified' | 'lastname' | 'image' | 'campaign' | 'locale' | 'password' | 'gender' | 'year' | 'canton' | 'role' | 'school' | 'schoolId' | 'team' | 'teamId' | 'teaches' | 'ballots' | 'attachments' | 'discussions' | 'reactions' | 'voted' | 'activity' | 'work' | 'createdAt' | 'updatedAt'
     }
     reactions: {
       filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'emoij' | 'stars' | 'feedback' | 'user' | 'userId' | 'discussion' | 'discussionId' | 'work' | 'workId' | 'createdAt' | 'updatedAt'
-      ordering: 'id' | 'emoij' | 'stars' | 'feedback' | 'userId' | 'discussionId' | 'workId' | 'createdAt' | 'updatedAt'
+      ordering: 'id' | 'emoij' | 'stars' | 'feedback' | 'user' | 'userId' | 'discussion' | 'discussionId' | 'work' | 'workId' | 'createdAt' | 'updatedAt'
     }
     attachments: {
       filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'file' | 'title' | 'type' | 'card' | 'user' | 'userId' | 'team' | 'teamId' | 'school' | 'schoolId' | 'discussion' | 'discussionId' | 'ballot' | 'ballotId' | 'work' | 'workId' | 'createdAt' | 'updatedAt'
-      ordering: 'id' | 'file' | 'title' | 'type' | 'card' | 'userId' | 'teamId' | 'schoolId' | 'discussionId' | 'ballotId' | 'workId' | 'createdAt' | 'updatedAt'
+      ordering: 'id' | 'file' | 'title' | 'type' | 'card' | 'user' | 'userId' | 'team' | 'teamId' | 'school' | 'schoolId' | 'discussion' | 'discussionId' | 'ballot' | 'ballotId' | 'work' | 'workId' | 'createdAt' | 'updatedAt'
     }
     activities: {
       filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'type' | 'visibility' | 'card' | 'summary' | 'user' | 'userId' | 'team' | 'teamId' | 'school' | 'schoolId' | 'discussion' | 'discussionId' | 'work' | 'workId' | 'ballot' | 'ballotId' | 'time'
-      ordering: 'id' | 'type' | 'visibility' | 'card' | 'summary' | 'userId' | 'teamId' | 'schoolId' | 'discussionId' | 'workId' | 'ballotId' | 'time'
+      ordering: 'id' | 'type' | 'visibility' | 'card' | 'summary' | 'user' | 'userId' | 'team' | 'teamId' | 'school' | 'schoolId' | 'discussion' | 'discussionId' | 'work' | 'workId' | 'ballot' | 'ballotId' | 'time'
     }
   }
   Reaction: {

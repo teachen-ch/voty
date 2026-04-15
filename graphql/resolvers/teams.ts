@@ -1,5 +1,5 @@
 import { createUser, connectUserTeam, extractName } from "./users";
-import { FieldResolver } from "@nexus/schema";
+import { FieldResolver } from "nexus";
 import { Role, PrismaClient, Visibility, ActivityType } from "@prisma/client";
 import find from "lodash/find";
 import findIndex from "lodash/findIndex";

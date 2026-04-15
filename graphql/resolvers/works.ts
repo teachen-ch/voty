@@ -1,4 +1,4 @@
-import { FieldResolver } from "@nexus/schema";
+import { FieldResolver } from "nexus";
 import { ActivityType, Role, Visibility } from "@prisma/client";
 import find from "lodash/find";
 import { logActivity } from "./activities";

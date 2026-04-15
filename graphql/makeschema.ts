@@ -1,4 +1,4 @@
-import { makeSchema } from "@nexus/schema";
+import { makeSchema } from "nexus";
 import prismaSingleton from "util/prisma";
 import { nexusPrisma } from "nexus-plugin-prisma";
 import { permissions } from "./permissions";

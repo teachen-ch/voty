@@ -5,7 +5,7 @@ import {
   stringArg,
   intArg,
   booleanArg,
-} from "@nexus/schema";
+} from "nexus";
 
 /*
 enum SwissvoteType {

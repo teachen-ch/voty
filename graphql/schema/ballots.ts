@@ -1,5 +1,5 @@
 import resolvers from "../resolvers";
-import { extendType, nonNull, objectType, stringArg } from "@nexus/schema";
+import { extendType, nonNull, objectType, stringArg } from "nexus";
 
 export const Ballot = objectType({
   name: "Ballot",

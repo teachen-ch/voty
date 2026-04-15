@@ -1,5 +1,5 @@
 import { Role, User, Visibility, ActivityType } from "@prisma/client";
-import { FieldResolver } from "@nexus/schema";
+import { FieldResolver } from "nexus";
 import { Context } from "../context";
 import { logActivity } from "./activities";
 

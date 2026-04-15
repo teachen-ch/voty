@@ -6,7 +6,7 @@ import {
   objectType,
   arg,
   stringArg,
-} from "@nexus/schema";
+} from "nexus";
 import { randomBytes } from "crypto";
 import random from "lodash/random";
 

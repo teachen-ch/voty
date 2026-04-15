@@ -3,8 +3,6 @@
  * Do not make changes to this file directly
  */
 
-import * as ContextModule from "./context";
-
 declare global {
   interface NexusGenCustomOutputProperties<TypeName extends string> {
     crud: NexusPrisma<TypeName, "crud">;
@@ -327,19 +325,29 @@ export interface NexusGenInputs {
     none?: NexusGenInputs["ActivityWhereInput"] | null; // ActivityWhereInput
     some?: NexusGenInputs["ActivityWhereInput"] | null; // ActivityWhereInput
   };
-  ActivityOrderByInput: {
+  ActivityOrderByRelationAggregateInput: {
     // input type
+    _count?: NexusGenEnums["SortOrder"] | null; // SortOrder
+  };
+  ActivityOrderByWithRelationInput: {
+    // input type
+    ballot?: NexusGenInputs["BallotOrderByWithRelationInput"] | null; // BallotOrderByWithRelationInput
     ballotId?: NexusGenEnums["SortOrder"] | null; // SortOrder
     card?: NexusGenEnums["SortOrder"] | null; // SortOrder
+    discussion?: NexusGenInputs["DiscussionOrderByWithRelationInput"] | null; // DiscussionOrderByWithRelationInput
     discussionId?: NexusGenEnums["SortOrder"] | null; // SortOrder
     id?: NexusGenEnums["SortOrder"] | null; // SortOrder
+    school?: NexusGenInputs["SchoolOrderByWithRelationInput"] | null; // SchoolOrderByWithRelationInput
     schoolId?: NexusGenEnums["SortOrder"] | null; // SortOrder
     summary?: NexusGenEnums["SortOrder"] | null; // SortOrder
+    team?: NexusGenInputs["TeamOrderByWithRelationInput"] | null; // TeamOrderByWithRelationInput
     teamId?: NexusGenEnums["SortOrder"] | null; // SortOrder
     time?: NexusGenEnums["SortOrder"] | null; // SortOrder
     type?: NexusGenEnums["SortOrder"] | null; // SortOrder
+    user?: NexusGenInputs["UserOrderByWithRelationInput"] | null; // UserOrderByWithRelationInput
     userId?: NexusGenEnums["SortOrder"] | null; // SortOrder
     visibility?: NexusGenEnums["SortOrder"] | null; // SortOrder
+    work?: NexusGenInputs["WorkOrderByWithRelationInput"] | null; // WorkOrderByWithRelationInput
     workId?: NexusGenEnums["SortOrder"] | null; // SortOrder
   };
   ActivityScalarWhereInput: {
@@ -1074,20 +1082,30 @@ export interface NexusGenInputs {
     none?: NexusGenInputs["AttachmentWhereInput"] | null; // AttachmentWhereInput
     some?: NexusGenInputs["AttachmentWhereInput"] | null; // AttachmentWhereInput
   };
-  AttachmentOrderByInput: {
+  AttachmentOrderByRelationAggregateInput: {
     // input type
+    _count?: NexusGenEnums["SortOrder"] | null; // SortOrder
+  };
+  AttachmentOrderByWithRelationInput: {
+    // input type
+    ballot?: NexusGenInputs["BallotOrderByWithRelationInput"] | null; // BallotOrderByWithRelationInput
     ballotId?: NexusGenEnums["SortOrder"] | null; // SortOrder
     card?: NexusGenEnums["SortOrder"] | null; // SortOrder
     createdAt?: NexusGenEnums["SortOrder"] | null; // SortOrder
+    discussion?: NexusGenInputs["DiscussionOrderByWithRelationInput"] | null; // DiscussionOrderByWithRelationInput
     discussionId?: NexusGenEnums["SortOrder"] | null; // SortOrder
     file?: NexusGenEnums["SortOrder"] | null; // SortOrder
     id?: NexusGenEnums["SortOrder"] | null; // SortOrder
+    school?: NexusGenInputs["SchoolOrderByWithRelationInput"] | null; // SchoolOrderByWithRelationInput
     schoolId?: NexusGenEnums["SortOrder"] | null; // SortOrder
+    team?: NexusGenInputs["TeamOrderByWithRelationInput"] | null; // TeamOrderByWithRelationInput
     teamId?: NexusGenEnums["SortOrder"] | null; // SortOrder
     title?: NexusGenEnums["SortOrder"] | null; // SortOrder
     type?: NexusGenEnums["SortOrder"] | null; // SortOrder
     updatedAt?: NexusGenEnums["SortOrder"] | null; // SortOrder
+    user?: NexusGenInputs["UserOrderByWithRelationInput"] | null; // UserOrderByWithRelationInput
     userId?: NexusGenEnums["SortOrder"] | null; // SortOrder
+    work?: NexusGenInputs["WorkOrderByWithRelationInput"] | null; // WorkOrderByWithRelationInput
     workId?: NexusGenEnums["SortOrder"] | null; // SortOrder
   };
   AttachmentScalarWhereInput: {
@@ -2102,31 +2120,51 @@ export interface NexusGenInputs {
     none?: NexusGenInputs["BallotWhereInput"] | null; // BallotWhereInput
     some?: NexusGenInputs["BallotWhereInput"] | null; // BallotWhereInput
   };
-  BallotOrderByInput: {
+  BallotOrderByRelationAggregateInput: {
     // input type
+    _count?: NexusGenEnums["SortOrder"] | null; // SortOrder
+  };
+  BallotOrderByWithRelationInput: {
+    // input type
+    activity?: NexusGenInputs["ActivityOrderByRelationAggregateInput"] | null; // ActivityOrderByRelationAggregateInput
+    attachments?:
+      | NexusGenInputs["AttachmentOrderByRelationAggregateInput"]
+      | null; // AttachmentOrderByRelationAggregateInput
+    ballotRuns?:
+      | NexusGenInputs["BallotRunOrderByRelationAggregateInput"]
+      | null; // BallotRunOrderByRelationAggregateInput
     body?: NexusGenEnums["SortOrder"] | null; // SortOrder
     bodyde?: NexusGenEnums["SortOrder"] | null; // SortOrder
     bodyfr?: NexusGenEnums["SortOrder"] | null; // SortOrder
     bodyit?: NexusGenEnums["SortOrder"] | null; // SortOrder
     canton?: NexusGenEnums["SortOrder"] | null; // SortOrder
     createdAt?: NexusGenEnums["SortOrder"] | null; // SortOrder
+    creator?: NexusGenInputs["UserOrderByWithRelationInput"] | null; // UserOrderByWithRelationInput
     creatorId?: NexusGenEnums["SortOrder"] | null; // SortOrder
     description?: NexusGenEnums["SortOrder"] | null; // SortOrder
     descriptionde?: NexusGenEnums["SortOrder"] | null; // SortOrder
     descriptionfr?: NexusGenEnums["SortOrder"] | null; // SortOrder
     descriptionit?: NexusGenEnums["SortOrder"] | null; // SortOrder
+    discussion?:
+      | NexusGenInputs["DiscussionOrderByRelationAggregateInput"]
+      | null; // DiscussionOrderByRelationAggregateInput
     end?: NexusGenEnums["SortOrder"] | null; // SortOrder
     id?: NexusGenEnums["SortOrder"] | null; // SortOrder
+    options?: NexusGenInputs["OptionOrderByRelationAggregateInput"] | null; // OptionOrderByRelationAggregateInput
     originalLocale?: NexusGenEnums["SortOrder"] | null; // SortOrder
+    school?: NexusGenInputs["SchoolOrderByWithRelationInput"] | null; // SchoolOrderByWithRelationInput
     schoolId?: NexusGenEnums["SortOrder"] | null; // SortOrder
     scope?: NexusGenEnums["SortOrder"] | null; // SortOrder
     start?: NexusGenEnums["SortOrder"] | null; // SortOrder
+    team?: NexusGenInputs["TeamOrderByWithRelationInput"] | null; // TeamOrderByWithRelationInput
     teamId?: NexusGenEnums["SortOrder"] | null; // SortOrder
     title?: NexusGenEnums["SortOrder"] | null; // SortOrder
     titlede?: NexusGenEnums["SortOrder"] | null; // SortOrder
     titlefr?: NexusGenEnums["SortOrder"] | null; // SortOrder
     titleit?: NexusGenEnums["SortOrder"] | null; // SortOrder
     updatedAt?: NexusGenEnums["SortOrder"] | null; // SortOrder
+    voted?: NexusGenInputs["VotedOrderByRelationAggregateInput"] | null; // VotedOrderByRelationAggregateInput
+    votes?: NexusGenInputs["VoteOrderByRelationAggregateInput"] | null; // VoteOrderByRelationAggregateInput
   };
   BallotRunBallotIdTeamIdCompoundUniqueInput: {
     // input type
@@ -2229,6 +2267,10 @@ export interface NexusGenInputs {
     every?: NexusGenInputs["BallotRunWhereInput"] | null; // BallotRunWhereInput
     none?: NexusGenInputs["BallotRunWhereInput"] | null; // BallotRunWhereInput
     some?: NexusGenInputs["BallotRunWhereInput"] | null; // BallotRunWhereInput
+  };
+  BallotRunOrderByRelationAggregateInput: {
+    // input type
+    _count?: NexusGenEnums["SortOrder"] | null; // SortOrder
   };
   BallotRunScalarWhereInput: {
     // input type
@@ -3431,6 +3473,32 @@ export interface NexusGenInputs {
     none?: NexusGenInputs["DiscussionWhereInput"] | null; // DiscussionWhereInput
     some?: NexusGenInputs["DiscussionWhereInput"] | null; // DiscussionWhereInput
   };
+  DiscussionOrderByRelationAggregateInput: {
+    // input type
+    _count?: NexusGenEnums["SortOrder"] | null; // SortOrder
+  };
+  DiscussionOrderByWithRelationInput: {
+    // input type
+    Activity?: NexusGenInputs["ActivityOrderByRelationAggregateInput"] | null; // ActivityOrderByRelationAggregateInput
+    attachments?:
+      | NexusGenInputs["AttachmentOrderByRelationAggregateInput"]
+      | null; // AttachmentOrderByRelationAggregateInput
+    ballot?: NexusGenInputs["BallotOrderByWithRelationInput"] | null; // BallotOrderByWithRelationInput
+    ballotId?: NexusGenEnums["SortOrder"] | null; // SortOrder
+    card?: NexusGenEnums["SortOrder"] | null; // SortOrder
+    createdAt?: NexusGenEnums["SortOrder"] | null; // SortOrder
+    id?: NexusGenEnums["SortOrder"] | null; // SortOrder
+    reactions?: NexusGenInputs["ReactionOrderByRelationAggregateInput"] | null; // ReactionOrderByRelationAggregateInput
+    school?: NexusGenInputs["SchoolOrderByWithRelationInput"] | null; // SchoolOrderByWithRelationInput
+    schoolId?: NexusGenEnums["SortOrder"] | null; // SortOrder
+    team?: NexusGenInputs["TeamOrderByWithRelationInput"] | null; // TeamOrderByWithRelationInput
+    teamId?: NexusGenEnums["SortOrder"] | null; // SortOrder
+    text?: NexusGenEnums["SortOrder"] | null; // SortOrder
+    title?: NexusGenEnums["SortOrder"] | null; // SortOrder
+    updatedAt?: NexusGenEnums["SortOrder"] | null; // SortOrder
+    user?: NexusGenInputs["UserOrderByWithRelationInput"] | null; // UserOrderByWithRelationInput
+    userId?: NexusGenEnums["SortOrder"] | null; // SortOrder
+  };
   DiscussionScalarWhereInput: {
     // input type
     AND?: NexusGenInputs["DiscussionScalarWhereInput"][] | null; // [DiscussionScalarWhereInput!]
@@ -3883,6 +3951,14 @@ export interface NexusGenInputs {
     name: string; // String!
     schools?: NexusGenInputs["SchoolCreateNestedManyWithoutDomainInput"] | null; // SchoolCreateNestedManyWithoutDomainInput
   };
+  DomainOrderByWithRelationInput: {
+    // input type
+    approved?: NexusGenEnums["SortOrder"] | null; // SortOrder
+    id?: NexusGenEnums["SortOrder"] | null; // SortOrder
+    name?: NexusGenEnums["SortOrder"] | null; // SortOrder
+    schools?: NexusGenInputs["SchoolOrderByRelationAggregateInput"] | null; // SchoolOrderByRelationAggregateInput
+    Team?: NexusGenInputs["TeamOrderByRelationAggregateInput"] | null; // TeamOrderByRelationAggregateInput
+  };
   DomainUpdateOneWithoutSchoolsInput: {
     // input type
     connect?: NexusGenInputs["DomainWhereUniqueInput"] | null; // DomainWhereUniqueInput
@@ -4030,8 +4106,8 @@ export interface NexusGenInputs {
   };
   JsonNullableFilter: {
     // input type
-    equals?: NexusGenScalars["Json"] | null; // Json
-    not?: NexusGenScalars["Json"] | null; // Json
+    equals?: NexusGenEnums["JsonNullValueFilter"] | null; // JsonNullValueFilter
+    not?: NexusGenEnums["JsonNullValueFilter"] | null; // JsonNullValueFilter
   };
   NestedBoolFilter: {
     // input type
@@ -4210,6 +4286,10 @@ export interface NexusGenInputs {
     every?: NexusGenInputs["OptionWhereInput"] | null; // OptionWhereInput
     none?: NexusGenInputs["OptionWhereInput"] | null; // OptionWhereInput
     some?: NexusGenInputs["OptionWhereInput"] | null; // OptionWhereInput
+  };
+  OptionOrderByRelationAggregateInput: {
+    // input type
+    _count?: NexusGenEnums["SortOrder"] | null; // SortOrder
   };
   OptionScalarWhereInput: {
     // input type
@@ -4420,6 +4500,10 @@ export interface NexusGenInputs {
     every?: NexusGenInputs["ReactionWhereInput"] | null; // ReactionWhereInput
     none?: NexusGenInputs["ReactionWhereInput"] | null; // ReactionWhereInput
     some?: NexusGenInputs["ReactionWhereInput"] | null; // ReactionWhereInput
+  };
+  ReactionOrderByRelationAggregateInput: {
+    // input type
+    _count?: NexusGenEnums["SortOrder"] | null; // SortOrder
   };
   ReactionScalarWhereInput: {
     // input type
@@ -5042,15 +5126,33 @@ export interface NexusGenInputs {
     none?: NexusGenInputs["SchoolWhereInput"] | null; // SchoolWhereInput
     some?: NexusGenInputs["SchoolWhereInput"] | null; // SchoolWhereInput
   };
-  SchoolOrderByInput: {
+  SchoolOrderByRelationAggregateInput: {
     // input type
+    _count?: NexusGenEnums["SortOrder"] | null; // SortOrder
+  };
+  SchoolOrderByWithRelationInput: {
+    // input type
+    activity?: NexusGenInputs["ActivityOrderByRelationAggregateInput"] | null; // ActivityOrderByRelationAggregateInput
     address?: NexusGenEnums["SortOrder"] | null; // SortOrder
+    attachment?:
+      | NexusGenInputs["AttachmentOrderByRelationAggregateInput"]
+      | null; // AttachmentOrderByRelationAggregateInput
+    ballots?: NexusGenInputs["BallotOrderByRelationAggregateInput"] | null; // BallotOrderByRelationAggregateInput
     canton?: NexusGenEnums["SortOrder"] | null; // SortOrder
     city?: NexusGenEnums["SortOrder"] | null; // SortOrder
+    discussion?:
+      | NexusGenInputs["DiscussionOrderByRelationAggregateInput"]
+      | null; // DiscussionOrderByRelationAggregateInput
+    domain?: NexusGenInputs["DomainOrderByWithRelationInput"] | null; // DomainOrderByWithRelationInput
     domainId?: NexusGenEnums["SortOrder"] | null; // SortOrder
     id?: NexusGenEnums["SortOrder"] | null; // SortOrder
+    members?: NexusGenInputs["UserOrderByRelationAggregateInput"] | null; // UserOrderByRelationAggregateInput
     name?: NexusGenEnums["SortOrder"] | null; // SortOrder
+    teams?: NexusGenInputs["TeamOrderByRelationAggregateInput"] | null; // TeamOrderByRelationAggregateInput
     type?: NexusGenEnums["SortOrder"] | null; // SortOrder
+    Vote?: NexusGenInputs["VoteOrderByRelationAggregateInput"] | null; // VoteOrderByRelationAggregateInput
+    Voted?: NexusGenInputs["VotedOrderByRelationAggregateInput"] | null; // VotedOrderByRelationAggregateInput
+    work?: NexusGenInputs["WorkOrderByRelationAggregateInput"] | null; // WorkOrderByRelationAggregateInput
     zip?: NexusGenEnums["SortOrder"] | null; // SortOrder
   };
   SchoolScalarWhereInput: {
@@ -5571,8 +5673,8 @@ export interface NexusGenInputs {
     id?: string | null; // String
     members?: NexusGenInputs["UserCreateNestedManyWithoutTeamInput"] | null; // UserCreateNestedManyWithoutTeamInput
     name: string; // String!
-    notes?: NexusGenScalars["Json"] | null; // Json
-    prefs?: NexusGenScalars["Json"] | null; // Json
+    notes?: NexusGenEnums["JsonNullValueInput"] | null; // JsonNullValueInput
+    prefs?: NexusGenEnums["JsonNullValueInput"] | null; // JsonNullValueInput
     school: NexusGenInputs["SchoolCreateNestedOneWithoutTeamsInput"]; // SchoolCreateNestedOneWithoutTeamsInput!
     teacher: NexusGenInputs["UserCreateNestedOneWithoutTeachesInput"]; // UserCreateNestedOneWithoutTeachesInput!
     updatedAt?: NexusGenScalars["DateTime"] | null; // DateTime
@@ -5589,8 +5691,8 @@ export interface NexusGenInputs {
     id?: string | null; // String
     invite?: string | null; // String
     name: string; // String!
-    notes?: NexusGenScalars["Json"] | null; // Json
-    prefs?: NexusGenScalars["Json"] | null; // Json
+    notes?: NexusGenEnums["JsonNullValueInput"] | null; // JsonNullValueInput
+    prefs?: NexusGenEnums["JsonNullValueInput"] | null; // JsonNullValueInput
     schoolId: string; // String!
     teacherId: string; // String!
     updatedAt?: NexusGenScalars["DateTime"] | null; // DateTime
@@ -5610,8 +5712,8 @@ export interface NexusGenInputs {
     id?: string | null; // String
     invite?: string | null; // String
     name: string; // String!
-    notes?: NexusGenScalars["Json"] | null; // Json
-    prefs?: NexusGenScalars["Json"] | null; // Json
+    notes?: NexusGenEnums["JsonNullValueInput"] | null; // JsonNullValueInput
+    prefs?: NexusGenEnums["JsonNullValueInput"] | null; // JsonNullValueInput
     teacherId: string; // String!
     updatedAt?: NexusGenScalars["DateTime"] | null; // DateTime
     year?: number | null; // Int
@@ -5630,8 +5732,8 @@ export interface NexusGenInputs {
     id?: string | null; // String
     invite?: string | null; // String
     name: string; // String!
-    notes?: NexusGenScalars["Json"] | null; // Json
-    prefs?: NexusGenScalars["Json"] | null; // Json
+    notes?: NexusGenEnums["JsonNullValueInput"] | null; // JsonNullValueInput
+    prefs?: NexusGenEnums["JsonNullValueInput"] | null; // JsonNullValueInput
     schoolId: string; // String!
     updatedAt?: NexusGenScalars["DateTime"] | null; // DateTime
     year?: number | null; // Int
@@ -5820,8 +5922,8 @@ export interface NexusGenInputs {
     invite?: string | null; // String
     members?: NexusGenInputs["UserCreateNestedManyWithoutTeamInput"] | null; // UserCreateNestedManyWithoutTeamInput
     name: string; // String!
-    notes?: NexusGenScalars["Json"] | null; // Json
-    prefs?: NexusGenScalars["Json"] | null; // Json
+    notes?: NexusGenEnums["JsonNullValueInput"] | null; // JsonNullValueInput
+    prefs?: NexusGenEnums["JsonNullValueInput"] | null; // JsonNullValueInput
     school: NexusGenInputs["SchoolCreateNestedOneWithoutTeamsInput"]; // SchoolCreateNestedOneWithoutTeamsInput!
     teacher: NexusGenInputs["UserCreateNestedOneWithoutTeachesInput"]; // UserCreateNestedOneWithoutTeachesInput!
     updatedAt?: NexusGenScalars["DateTime"] | null; // DateTime
@@ -5850,8 +5952,8 @@ export interface NexusGenInputs {
     invite?: string | null; // String
     members?: NexusGenInputs["UserCreateNestedManyWithoutTeamInput"] | null; // UserCreateNestedManyWithoutTeamInput
     name: string; // String!
-    notes?: NexusGenScalars["Json"] | null; // Json
-    prefs?: NexusGenScalars["Json"] | null; // Json
+    notes?: NexusGenEnums["JsonNullValueInput"] | null; // JsonNullValueInput
+    prefs?: NexusGenEnums["JsonNullValueInput"] | null; // JsonNullValueInput
     school: NexusGenInputs["SchoolCreateNestedOneWithoutTeamsInput"]; // SchoolCreateNestedOneWithoutTeamsInput!
     teacher: NexusGenInputs["UserCreateNestedOneWithoutTeachesInput"]; // UserCreateNestedOneWithoutTeachesInput!
     updatedAt?: NexusGenScalars["DateTime"] | null; // DateTime
@@ -5880,8 +5982,8 @@ export interface NexusGenInputs {
     invite?: string | null; // String
     members?: NexusGenInputs["UserCreateNestedManyWithoutTeamInput"] | null; // UserCreateNestedManyWithoutTeamInput
     name: string; // String!
-    notes?: NexusGenScalars["Json"] | null; // Json
-    prefs?: NexusGenScalars["Json"] | null; // Json
+    notes?: NexusGenEnums["JsonNullValueInput"] | null; // JsonNullValueInput
+    prefs?: NexusGenEnums["JsonNullValueInput"] | null; // JsonNullValueInput
     school: NexusGenInputs["SchoolCreateNestedOneWithoutTeamsInput"]; // SchoolCreateNestedOneWithoutTeamsInput!
     teacher: NexusGenInputs["UserCreateNestedOneWithoutTeachesInput"]; // UserCreateNestedOneWithoutTeachesInput!
     updatedAt?: NexusGenScalars["DateTime"] | null; // DateTime
@@ -5912,8 +6014,8 @@ export interface NexusGenInputs {
     invite?: string | null; // String
     members?: NexusGenInputs["UserCreateNestedManyWithoutTeamInput"] | null; // UserCreateNestedManyWithoutTeamInput
     name: string; // String!
-    notes?: NexusGenScalars["Json"] | null; // Json
-    prefs?: NexusGenScalars["Json"] | null; // Json
+    notes?: NexusGenEnums["JsonNullValueInput"] | null; // JsonNullValueInput
+    prefs?: NexusGenEnums["JsonNullValueInput"] | null; // JsonNullValueInput
     school: NexusGenInputs["SchoolCreateNestedOneWithoutTeamsInput"]; // SchoolCreateNestedOneWithoutTeamsInput!
     teacher: NexusGenInputs["UserCreateNestedOneWithoutTeachesInput"]; // UserCreateNestedOneWithoutTeachesInput!
     updatedAt?: NexusGenScalars["DateTime"] | null; // DateTime
@@ -5942,8 +6044,8 @@ export interface NexusGenInputs {
     invite?: string | null; // String
     members?: NexusGenInputs["UserCreateNestedManyWithoutTeamInput"] | null; // UserCreateNestedManyWithoutTeamInput
     name: string; // String!
-    notes?: NexusGenScalars["Json"] | null; // Json
-    prefs?: NexusGenScalars["Json"] | null; // Json
+    notes?: NexusGenEnums["JsonNullValueInput"] | null; // JsonNullValueInput
+    prefs?: NexusGenEnums["JsonNullValueInput"] | null; // JsonNullValueInput
     school: NexusGenInputs["SchoolCreateNestedOneWithoutTeamsInput"]; // SchoolCreateNestedOneWithoutTeamsInput!
     teacher: NexusGenInputs["UserCreateNestedOneWithoutTeachesInput"]; // UserCreateNestedOneWithoutTeachesInput!
     updatedAt?: NexusGenScalars["DateTime"] | null; // DateTime
@@ -5974,8 +6076,8 @@ export interface NexusGenInputs {
     invite?: string | null; // String
     members?: NexusGenInputs["UserCreateNestedManyWithoutTeamInput"] | null; // UserCreateNestedManyWithoutTeamInput
     name: string; // String!
-    notes?: NexusGenScalars["Json"] | null; // Json
-    prefs?: NexusGenScalars["Json"] | null; // Json
+    notes?: NexusGenEnums["JsonNullValueInput"] | null; // JsonNullValueInput
+    prefs?: NexusGenEnums["JsonNullValueInput"] | null; // JsonNullValueInput
     school: NexusGenInputs["SchoolCreateNestedOneWithoutTeamsInput"]; // SchoolCreateNestedOneWithoutTeamsInput!
     teacher: NexusGenInputs["UserCreateNestedOneWithoutTeachesInput"]; // UserCreateNestedOneWithoutTeachesInput!
     updatedAt?: NexusGenScalars["DateTime"] | null; // DateTime
@@ -6006,8 +6108,8 @@ export interface NexusGenInputs {
     id?: string | null; // String
     invite?: string | null; // String
     name: string; // String!
-    notes?: NexusGenScalars["Json"] | null; // Json
-    prefs?: NexusGenScalars["Json"] | null; // Json
+    notes?: NexusGenEnums["JsonNullValueInput"] | null; // JsonNullValueInput
+    prefs?: NexusGenEnums["JsonNullValueInput"] | null; // JsonNullValueInput
     school: NexusGenInputs["SchoolCreateNestedOneWithoutTeamsInput"]; // SchoolCreateNestedOneWithoutTeamsInput!
     teacher: NexusGenInputs["UserCreateNestedOneWithoutTeachesInput"]; // UserCreateNestedOneWithoutTeachesInput!
     updatedAt?: NexusGenScalars["DateTime"] | null; // DateTime
@@ -6039,8 +6141,8 @@ export interface NexusGenInputs {
     invite?: string | null; // String
     members?: NexusGenInputs["UserCreateNestedManyWithoutTeamInput"] | null; // UserCreateNestedManyWithoutTeamInput
     name: string; // String!
-    notes?: NexusGenScalars["Json"] | null; // Json
-    prefs?: NexusGenScalars["Json"] | null; // Json
+    notes?: NexusGenEnums["JsonNullValueInput"] | null; // JsonNullValueInput
+    prefs?: NexusGenEnums["JsonNullValueInput"] | null; // JsonNullValueInput
     teacher: NexusGenInputs["UserCreateNestedOneWithoutTeachesInput"]; // UserCreateNestedOneWithoutTeachesInput!
     updatedAt?: NexusGenScalars["DateTime"] | null; // DateTime
     Vote?: NexusGenInputs["VoteCreateNestedManyWithoutTeamInput"] | null; // VoteCreateNestedManyWithoutTeamInput
@@ -6071,8 +6173,8 @@ export interface NexusGenInputs {
     invite?: string | null; // String
     members?: NexusGenInputs["UserCreateNestedManyWithoutTeamInput"] | null; // UserCreateNestedManyWithoutTeamInput
     name: string; // String!
-    notes?: NexusGenScalars["Json"] | null; // Json
-    prefs?: NexusGenScalars["Json"] | null; // Json
+    notes?: NexusGenEnums["JsonNullValueInput"] | null; // JsonNullValueInput
+    prefs?: NexusGenEnums["JsonNullValueInput"] | null; // JsonNullValueInput
     school: NexusGenInputs["SchoolCreateNestedOneWithoutTeamsInput"]; // SchoolCreateNestedOneWithoutTeamsInput!
     updatedAt?: NexusGenScalars["DateTime"] | null; // DateTime
     Vote?: NexusGenInputs["VoteCreateNestedManyWithoutTeamInput"] | null; // VoteCreateNestedManyWithoutTeamInput
@@ -6103,8 +6205,8 @@ export interface NexusGenInputs {
     invite?: string | null; // String
     members?: NexusGenInputs["UserCreateNestedManyWithoutTeamInput"] | null; // UserCreateNestedManyWithoutTeamInput
     name: string; // String!
-    notes?: NexusGenScalars["Json"] | null; // Json
-    prefs?: NexusGenScalars["Json"] | null; // Json
+    notes?: NexusGenEnums["JsonNullValueInput"] | null; // JsonNullValueInput
+    prefs?: NexusGenEnums["JsonNullValueInput"] | null; // JsonNullValueInput
     school: NexusGenInputs["SchoolCreateNestedOneWithoutTeamsInput"]; // SchoolCreateNestedOneWithoutTeamsInput!
     teacher: NexusGenInputs["UserCreateNestedOneWithoutTeachesInput"]; // UserCreateNestedOneWithoutTeachesInput!
     updatedAt?: NexusGenScalars["DateTime"] | null; // DateTime
@@ -6135,8 +6237,8 @@ export interface NexusGenInputs {
     invite?: string | null; // String
     members?: NexusGenInputs["UserCreateNestedManyWithoutTeamInput"] | null; // UserCreateNestedManyWithoutTeamInput
     name: string; // String!
-    notes?: NexusGenScalars["Json"] | null; // Json
-    prefs?: NexusGenScalars["Json"] | null; // Json
+    notes?: NexusGenEnums["JsonNullValueInput"] | null; // JsonNullValueInput
+    prefs?: NexusGenEnums["JsonNullValueInput"] | null; // JsonNullValueInput
     school: NexusGenInputs["SchoolCreateNestedOneWithoutTeamsInput"]; // SchoolCreateNestedOneWithoutTeamsInput!
     teacher: NexusGenInputs["UserCreateNestedOneWithoutTeachesInput"]; // UserCreateNestedOneWithoutTeachesInput!
     updatedAt?: NexusGenScalars["DateTime"] | null; // DateTime
@@ -6167,8 +6269,8 @@ export interface NexusGenInputs {
     invite?: string | null; // String
     members?: NexusGenInputs["UserCreateNestedManyWithoutTeamInput"] | null; // UserCreateNestedManyWithoutTeamInput
     name: string; // String!
-    notes?: NexusGenScalars["Json"] | null; // Json
-    prefs?: NexusGenScalars["Json"] | null; // Json
+    notes?: NexusGenEnums["JsonNullValueInput"] | null; // JsonNullValueInput
+    prefs?: NexusGenEnums["JsonNullValueInput"] | null; // JsonNullValueInput
     school: NexusGenInputs["SchoolCreateNestedOneWithoutTeamsInput"]; // SchoolCreateNestedOneWithoutTeamsInput!
     teacher: NexusGenInputs["UserCreateNestedOneWithoutTeachesInput"]; // UserCreateNestedOneWithoutTeachesInput!
     updatedAt?: NexusGenScalars["DateTime"] | null; // DateTime
@@ -6182,20 +6284,42 @@ export interface NexusGenInputs {
     none?: NexusGenInputs["TeamWhereInput"] | null; // TeamWhereInput
     some?: NexusGenInputs["TeamWhereInput"] | null; // TeamWhereInput
   };
-  TeamOrderByInput: {
+  TeamOrderByRelationAggregateInput: {
     // input type
+    _count?: NexusGenEnums["SortOrder"] | null; // SortOrder
+  };
+  TeamOrderByWithRelationInput: {
+    // input type
+    activity?: NexusGenInputs["ActivityOrderByRelationAggregateInput"] | null; // ActivityOrderByRelationAggregateInput
+    attachment?:
+      | NexusGenInputs["AttachmentOrderByRelationAggregateInput"]
+      | null; // AttachmentOrderByRelationAggregateInput
+    BallotRuns?:
+      | NexusGenInputs["BallotRunOrderByRelationAggregateInput"]
+      | null; // BallotRunOrderByRelationAggregateInput
+    ballots?: NexusGenInputs["BallotOrderByRelationAggregateInput"] | null; // BallotOrderByRelationAggregateInput
     cards?: NexusGenEnums["SortOrder"] | null; // SortOrder
     code?: NexusGenEnums["SortOrder"] | null; // SortOrder
     createdAt?: NexusGenEnums["SortOrder"] | null; // SortOrder
+    discussion?:
+      | NexusGenInputs["DiscussionOrderByRelationAggregateInput"]
+      | null; // DiscussionOrderByRelationAggregateInput
+    domain?: NexusGenInputs["DomainOrderByWithRelationInput"] | null; // DomainOrderByWithRelationInput
     domainId?: NexusGenEnums["SortOrder"] | null; // SortOrder
     id?: NexusGenEnums["SortOrder"] | null; // SortOrder
     invite?: NexusGenEnums["SortOrder"] | null; // SortOrder
+    members?: NexusGenInputs["UserOrderByRelationAggregateInput"] | null; // UserOrderByRelationAggregateInput
     name?: NexusGenEnums["SortOrder"] | null; // SortOrder
     notes?: NexusGenEnums["SortOrder"] | null; // SortOrder
     prefs?: NexusGenEnums["SortOrder"] | null; // SortOrder
+    school?: NexusGenInputs["SchoolOrderByWithRelationInput"] | null; // SchoolOrderByWithRelationInput
     schoolId?: NexusGenEnums["SortOrder"] | null; // SortOrder
+    teacher?: NexusGenInputs["UserOrderByWithRelationInput"] | null; // UserOrderByWithRelationInput
     teacherId?: NexusGenEnums["SortOrder"] | null; // SortOrder
     updatedAt?: NexusGenEnums["SortOrder"] | null; // SortOrder
+    Vote?: NexusGenInputs["VoteOrderByRelationAggregateInput"] | null; // VoteOrderByRelationAggregateInput
+    Voted?: NexusGenInputs["VotedOrderByRelationAggregateInput"] | null; // VotedOrderByRelationAggregateInput
+    work?: NexusGenInputs["WorkOrderByRelationAggregateInput"] | null; // WorkOrderByRelationAggregateInput
     year?: NexusGenEnums["SortOrder"] | null; // SortOrder
   };
   TeamScalarWhereInput: {
@@ -6223,8 +6347,8 @@ export interface NexusGenInputs {
     id?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
     invite?: NexusGenInputs["NullableStringFieldUpdateOperationsInput"] | null; // NullableStringFieldUpdateOperationsInput
     name?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
-    notes?: NexusGenScalars["Json"] | null; // Json
-    prefs?: NexusGenScalars["Json"] | null; // Json
+    notes?: NexusGenEnums["JsonNullValueInput"] | null; // JsonNullValueInput
+    prefs?: NexusGenEnums["JsonNullValueInput"] | null; // JsonNullValueInput
     updatedAt?: NexusGenInputs["DateTimeFieldUpdateOperationsInput"] | null; // DateTimeFieldUpdateOperationsInput
     year?: NexusGenInputs["NullableIntFieldUpdateOperationsInput"] | null; // NullableIntFieldUpdateOperationsInput
   };
@@ -6436,8 +6560,8 @@ export interface NexusGenInputs {
     invite?: NexusGenInputs["NullableStringFieldUpdateOperationsInput"] | null; // NullableStringFieldUpdateOperationsInput
     members?: NexusGenInputs["UserUpdateManyWithoutTeamInput"] | null; // UserUpdateManyWithoutTeamInput
     name?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
-    notes?: NexusGenScalars["Json"] | null; // Json
-    prefs?: NexusGenScalars["Json"] | null; // Json
+    notes?: NexusGenEnums["JsonNullValueInput"] | null; // JsonNullValueInput
+    prefs?: NexusGenEnums["JsonNullValueInput"] | null; // JsonNullValueInput
     school?: NexusGenInputs["SchoolUpdateOneRequiredWithoutTeamsInput"] | null; // SchoolUpdateOneRequiredWithoutTeamsInput
     teacher?: NexusGenInputs["UserUpdateOneRequiredWithoutTeachesInput"] | null; // UserUpdateOneRequiredWithoutTeachesInput
     updatedAt?: NexusGenInputs["DateTimeFieldUpdateOperationsInput"] | null; // DateTimeFieldUpdateOperationsInput
@@ -6460,8 +6584,8 @@ export interface NexusGenInputs {
     invite?: NexusGenInputs["NullableStringFieldUpdateOperationsInput"] | null; // NullableStringFieldUpdateOperationsInput
     members?: NexusGenInputs["UserUpdateManyWithoutTeamInput"] | null; // UserUpdateManyWithoutTeamInput
     name?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
-    notes?: NexusGenScalars["Json"] | null; // Json
-    prefs?: NexusGenScalars["Json"] | null; // Json
+    notes?: NexusGenEnums["JsonNullValueInput"] | null; // JsonNullValueInput
+    prefs?: NexusGenEnums["JsonNullValueInput"] | null; // JsonNullValueInput
     school?: NexusGenInputs["SchoolUpdateOneRequiredWithoutTeamsInput"] | null; // SchoolUpdateOneRequiredWithoutTeamsInput
     teacher?: NexusGenInputs["UserUpdateOneRequiredWithoutTeachesInput"] | null; // UserUpdateOneRequiredWithoutTeachesInput
     updatedAt?: NexusGenInputs["DateTimeFieldUpdateOperationsInput"] | null; // DateTimeFieldUpdateOperationsInput
@@ -6484,8 +6608,8 @@ export interface NexusGenInputs {
     invite?: NexusGenInputs["NullableStringFieldUpdateOperationsInput"] | null; // NullableStringFieldUpdateOperationsInput
     members?: NexusGenInputs["UserUpdateManyWithoutTeamInput"] | null; // UserUpdateManyWithoutTeamInput
     name?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
-    notes?: NexusGenScalars["Json"] | null; // Json
-    prefs?: NexusGenScalars["Json"] | null; // Json
+    notes?: NexusGenEnums["JsonNullValueInput"] | null; // JsonNullValueInput
+    prefs?: NexusGenEnums["JsonNullValueInput"] | null; // JsonNullValueInput
     school?: NexusGenInputs["SchoolUpdateOneRequiredWithoutTeamsInput"] | null; // SchoolUpdateOneRequiredWithoutTeamsInput
     teacher?: NexusGenInputs["UserUpdateOneRequiredWithoutTeachesInput"] | null; // UserUpdateOneRequiredWithoutTeachesInput
     updatedAt?: NexusGenInputs["DateTimeFieldUpdateOperationsInput"] | null; // DateTimeFieldUpdateOperationsInput
@@ -6508,8 +6632,8 @@ export interface NexusGenInputs {
     invite?: NexusGenInputs["NullableStringFieldUpdateOperationsInput"] | null; // NullableStringFieldUpdateOperationsInput
     members?: NexusGenInputs["UserUpdateManyWithoutTeamInput"] | null; // UserUpdateManyWithoutTeamInput
     name?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
-    notes?: NexusGenScalars["Json"] | null; // Json
-    prefs?: NexusGenScalars["Json"] | null; // Json
+    notes?: NexusGenEnums["JsonNullValueInput"] | null; // JsonNullValueInput
+    prefs?: NexusGenEnums["JsonNullValueInput"] | null; // JsonNullValueInput
     school?: NexusGenInputs["SchoolUpdateOneRequiredWithoutTeamsInput"] | null; // SchoolUpdateOneRequiredWithoutTeamsInput
     teacher?: NexusGenInputs["UserUpdateOneRequiredWithoutTeachesInput"] | null; // UserUpdateOneRequiredWithoutTeachesInput
     updatedAt?: NexusGenInputs["DateTimeFieldUpdateOperationsInput"] | null; // DateTimeFieldUpdateOperationsInput
@@ -6532,8 +6656,8 @@ export interface NexusGenInputs {
     invite?: NexusGenInputs["NullableStringFieldUpdateOperationsInput"] | null; // NullableStringFieldUpdateOperationsInput
     members?: NexusGenInputs["UserUpdateManyWithoutTeamInput"] | null; // UserUpdateManyWithoutTeamInput
     name?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
-    notes?: NexusGenScalars["Json"] | null; // Json
-    prefs?: NexusGenScalars["Json"] | null; // Json
+    notes?: NexusGenEnums["JsonNullValueInput"] | null; // JsonNullValueInput
+    prefs?: NexusGenEnums["JsonNullValueInput"] | null; // JsonNullValueInput
     school?: NexusGenInputs["SchoolUpdateOneRequiredWithoutTeamsInput"] | null; // SchoolUpdateOneRequiredWithoutTeamsInput
     teacher?: NexusGenInputs["UserUpdateOneRequiredWithoutTeachesInput"] | null; // UserUpdateOneRequiredWithoutTeachesInput
     updatedAt?: NexusGenInputs["DateTimeFieldUpdateOperationsInput"] | null; // DateTimeFieldUpdateOperationsInput
@@ -6556,8 +6680,8 @@ export interface NexusGenInputs {
     invite?: NexusGenInputs["NullableStringFieldUpdateOperationsInput"] | null; // NullableStringFieldUpdateOperationsInput
     members?: NexusGenInputs["UserUpdateManyWithoutTeamInput"] | null; // UserUpdateManyWithoutTeamInput
     name?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
-    notes?: NexusGenScalars["Json"] | null; // Json
-    prefs?: NexusGenScalars["Json"] | null; // Json
+    notes?: NexusGenEnums["JsonNullValueInput"] | null; // JsonNullValueInput
+    prefs?: NexusGenEnums["JsonNullValueInput"] | null; // JsonNullValueInput
     school?: NexusGenInputs["SchoolUpdateOneRequiredWithoutTeamsInput"] | null; // SchoolUpdateOneRequiredWithoutTeamsInput
     teacher?: NexusGenInputs["UserUpdateOneRequiredWithoutTeachesInput"] | null; // UserUpdateOneRequiredWithoutTeachesInput
     updatedAt?: NexusGenInputs["DateTimeFieldUpdateOperationsInput"] | null; // DateTimeFieldUpdateOperationsInput
@@ -6580,8 +6704,8 @@ export interface NexusGenInputs {
     id?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
     invite?: NexusGenInputs["NullableStringFieldUpdateOperationsInput"] | null; // NullableStringFieldUpdateOperationsInput
     name?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
-    notes?: NexusGenScalars["Json"] | null; // Json
-    prefs?: NexusGenScalars["Json"] | null; // Json
+    notes?: NexusGenEnums["JsonNullValueInput"] | null; // JsonNullValueInput
+    prefs?: NexusGenEnums["JsonNullValueInput"] | null; // JsonNullValueInput
     school?: NexusGenInputs["SchoolUpdateOneRequiredWithoutTeamsInput"] | null; // SchoolUpdateOneRequiredWithoutTeamsInput
     teacher?: NexusGenInputs["UserUpdateOneRequiredWithoutTeachesInput"] | null; // UserUpdateOneRequiredWithoutTeachesInput
     updatedAt?: NexusGenInputs["DateTimeFieldUpdateOperationsInput"] | null; // DateTimeFieldUpdateOperationsInput
@@ -6605,8 +6729,8 @@ export interface NexusGenInputs {
     invite?: NexusGenInputs["NullableStringFieldUpdateOperationsInput"] | null; // NullableStringFieldUpdateOperationsInput
     members?: NexusGenInputs["UserUpdateManyWithoutTeamInput"] | null; // UserUpdateManyWithoutTeamInput
     name?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
-    notes?: NexusGenScalars["Json"] | null; // Json
-    prefs?: NexusGenScalars["Json"] | null; // Json
+    notes?: NexusGenEnums["JsonNullValueInput"] | null; // JsonNullValueInput
+    prefs?: NexusGenEnums["JsonNullValueInput"] | null; // JsonNullValueInput
     teacher?: NexusGenInputs["UserUpdateOneRequiredWithoutTeachesInput"] | null; // UserUpdateOneRequiredWithoutTeachesInput
     updatedAt?: NexusGenInputs["DateTimeFieldUpdateOperationsInput"] | null; // DateTimeFieldUpdateOperationsInput
     Vote?: NexusGenInputs["VoteUpdateManyWithoutTeamInput"] | null; // VoteUpdateManyWithoutTeamInput
@@ -6629,8 +6753,8 @@ export interface NexusGenInputs {
     invite?: NexusGenInputs["NullableStringFieldUpdateOperationsInput"] | null; // NullableStringFieldUpdateOperationsInput
     members?: NexusGenInputs["UserUpdateManyWithoutTeamInput"] | null; // UserUpdateManyWithoutTeamInput
     name?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
-    notes?: NexusGenScalars["Json"] | null; // Json
-    prefs?: NexusGenScalars["Json"] | null; // Json
+    notes?: NexusGenEnums["JsonNullValueInput"] | null; // JsonNullValueInput
+    prefs?: NexusGenEnums["JsonNullValueInput"] | null; // JsonNullValueInput
     school?: NexusGenInputs["SchoolUpdateOneRequiredWithoutTeamsInput"] | null; // SchoolUpdateOneRequiredWithoutTeamsInput
     updatedAt?: NexusGenInputs["DateTimeFieldUpdateOperationsInput"] | null; // DateTimeFieldUpdateOperationsInput
     Vote?: NexusGenInputs["VoteUpdateManyWithoutTeamInput"] | null; // VoteUpdateManyWithoutTeamInput
@@ -6653,8 +6777,8 @@ export interface NexusGenInputs {
     invite?: NexusGenInputs["NullableStringFieldUpdateOperationsInput"] | null; // NullableStringFieldUpdateOperationsInput
     members?: NexusGenInputs["UserUpdateManyWithoutTeamInput"] | null; // UserUpdateManyWithoutTeamInput
     name?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
-    notes?: NexusGenScalars["Json"] | null; // Json
-    prefs?: NexusGenScalars["Json"] | null; // Json
+    notes?: NexusGenEnums["JsonNullValueInput"] | null; // JsonNullValueInput
+    prefs?: NexusGenEnums["JsonNullValueInput"] | null; // JsonNullValueInput
     school?: NexusGenInputs["SchoolUpdateOneRequiredWithoutTeamsInput"] | null; // SchoolUpdateOneRequiredWithoutTeamsInput
     teacher?: NexusGenInputs["UserUpdateOneRequiredWithoutTeachesInput"] | null; // UserUpdateOneRequiredWithoutTeachesInput
     updatedAt?: NexusGenInputs["DateTimeFieldUpdateOperationsInput"] | null; // DateTimeFieldUpdateOperationsInput
@@ -6677,8 +6801,8 @@ export interface NexusGenInputs {
     invite?: NexusGenInputs["NullableStringFieldUpdateOperationsInput"] | null; // NullableStringFieldUpdateOperationsInput
     members?: NexusGenInputs["UserUpdateManyWithoutTeamInput"] | null; // UserUpdateManyWithoutTeamInput
     name?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
-    notes?: NexusGenScalars["Json"] | null; // Json
-    prefs?: NexusGenScalars["Json"] | null; // Json
+    notes?: NexusGenEnums["JsonNullValueInput"] | null; // JsonNullValueInput
+    prefs?: NexusGenEnums["JsonNullValueInput"] | null; // JsonNullValueInput
     school?: NexusGenInputs["SchoolUpdateOneRequiredWithoutTeamsInput"] | null; // SchoolUpdateOneRequiredWithoutTeamsInput
     teacher?: NexusGenInputs["UserUpdateOneRequiredWithoutTeachesInput"] | null; // UserUpdateOneRequiredWithoutTeachesInput
     updatedAt?: NexusGenInputs["DateTimeFieldUpdateOperationsInput"] | null; // DateTimeFieldUpdateOperationsInput
@@ -6701,8 +6825,8 @@ export interface NexusGenInputs {
     invite?: NexusGenInputs["NullableStringFieldUpdateOperationsInput"] | null; // NullableStringFieldUpdateOperationsInput
     members?: NexusGenInputs["UserUpdateManyWithoutTeamInput"] | null; // UserUpdateManyWithoutTeamInput
     name?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
-    notes?: NexusGenScalars["Json"] | null; // Json
-    prefs?: NexusGenScalars["Json"] | null; // Json
+    notes?: NexusGenEnums["JsonNullValueInput"] | null; // JsonNullValueInput
+    prefs?: NexusGenEnums["JsonNullValueInput"] | null; // JsonNullValueInput
     school?: NexusGenInputs["SchoolUpdateOneRequiredWithoutTeamsInput"] | null; // SchoolUpdateOneRequiredWithoutTeamsInput
     teacher?: NexusGenInputs["UserUpdateOneRequiredWithoutTeachesInput"] | null; // UserUpdateOneRequiredWithoutTeachesInput
     updatedAt?: NexusGenInputs["DateTimeFieldUpdateOperationsInput"] | null; // DateTimeFieldUpdateOperationsInput
@@ -7377,11 +7501,23 @@ export interface NexusGenInputs {
     none?: NexusGenInputs["UserWhereInput"] | null; // UserWhereInput
     some?: NexusGenInputs["UserWhereInput"] | null; // UserWhereInput
   };
-  UserOrderByInput: {
+  UserOrderByRelationAggregateInput: {
     // input type
+    _count?: NexusGenEnums["SortOrder"] | null; // SortOrder
+  };
+  UserOrderByWithRelationInput: {
+    // input type
+    activity?: NexusGenInputs["ActivityOrderByRelationAggregateInput"] | null; // ActivityOrderByRelationAggregateInput
+    attachments?:
+      | NexusGenInputs["AttachmentOrderByRelationAggregateInput"]
+      | null; // AttachmentOrderByRelationAggregateInput
+    ballots?: NexusGenInputs["BallotOrderByRelationAggregateInput"] | null; // BallotOrderByRelationAggregateInput
     campaign?: NexusGenEnums["SortOrder"] | null; // SortOrder
     canton?: NexusGenEnums["SortOrder"] | null; // SortOrder
     createdAt?: NexusGenEnums["SortOrder"] | null; // SortOrder
+    discussions?:
+      | NexusGenInputs["DiscussionOrderByRelationAggregateInput"]
+      | null; // DiscussionOrderByRelationAggregateInput
     email?: NexusGenEnums["SortOrder"] | null; // SortOrder
     emailVerified?: NexusGenEnums["SortOrder"] | null; // SortOrder
     gender?: NexusGenEnums["SortOrder"] | null; // SortOrder
@@ -7391,11 +7527,17 @@ export interface NexusGenInputs {
     locale?: NexusGenEnums["SortOrder"] | null; // SortOrder
     name?: NexusGenEnums["SortOrder"] | null; // SortOrder
     password?: NexusGenEnums["SortOrder"] | null; // SortOrder
+    reactions?: NexusGenInputs["ReactionOrderByRelationAggregateInput"] | null; // ReactionOrderByRelationAggregateInput
     role?: NexusGenEnums["SortOrder"] | null; // SortOrder
+    school?: NexusGenInputs["SchoolOrderByWithRelationInput"] | null; // SchoolOrderByWithRelationInput
     schoolId?: NexusGenEnums["SortOrder"] | null; // SortOrder
+    teaches?: NexusGenInputs["TeamOrderByRelationAggregateInput"] | null; // TeamOrderByRelationAggregateInput
+    team?: NexusGenInputs["TeamOrderByWithRelationInput"] | null; // TeamOrderByWithRelationInput
     teamId?: NexusGenEnums["SortOrder"] | null; // SortOrder
     updatedAt?: NexusGenEnums["SortOrder"] | null; // SortOrder
     verified?: NexusGenEnums["SortOrder"] | null; // SortOrder
+    voted?: NexusGenInputs["VotedOrderByRelationAggregateInput"] | null; // VotedOrderByRelationAggregateInput
+    work?: NexusGenInputs["WorkOrderByRelationAggregateInput"] | null; // WorkOrderByRelationAggregateInput
     year?: NexusGenEnums["SortOrder"] | null; // SortOrder
   };
   UserScalarWhereInput: {
@@ -8321,6 +8463,10 @@ export interface NexusGenInputs {
     none?: NexusGenInputs["VoteWhereInput"] | null; // VoteWhereInput
     some?: NexusGenInputs["VoteWhereInput"] | null; // VoteWhereInput
   };
+  VoteOrderByRelationAggregateInput: {
+    // input type
+    _count?: NexusGenEnums["SortOrder"] | null; // SortOrder
+  };
   VoteScalarWhereInput: {
     // input type
     AND?: NexusGenInputs["VoteScalarWhereInput"][] | null; // [VoteScalarWhereInput!]
@@ -8733,6 +8879,10 @@ export interface NexusGenInputs {
     none?: NexusGenInputs["VotedWhereInput"] | null; // VotedWhereInput
     some?: NexusGenInputs["VotedWhereInput"] | null; // VotedWhereInput
   };
+  VotedOrderByRelationAggregateInput: {
+    // input type
+    _count?: NexusGenEnums["SortOrder"] | null; // SortOrder
+  };
   VotedScalarWhereInput: {
     // input type
     AND?: NexusGenInputs["VotedScalarWhereInput"][] | null; // [VotedScalarWhereInput!]
@@ -8974,7 +9124,7 @@ export interface NexusGenInputs {
       | null; // AttachmentCreateNestedManyWithoutWorkInput
     card?: string | null; // String
     createdAt?: NexusGenScalars["DateTime"] | null; // DateTime
-    data?: NexusGenScalars["Json"] | null; // Json
+    data?: NexusGenEnums["NullableJsonNullValueInput"] | null; // NullableJsonNullValueInput
     id?: string | null; // String
     reactions?:
       | NexusGenInputs["ReactionCreateNestedManyWithoutWorkInput"]
@@ -8991,7 +9141,7 @@ export interface NexusGenInputs {
     // input type
     card?: string | null; // String
     createdAt?: NexusGenScalars["DateTime"] | null; // DateTime
-    data?: NexusGenScalars["Json"] | null; // Json
+    data?: NexusGenEnums["NullableJsonNullValueInput"] | null; // NullableJsonNullValueInput
     id?: string | null; // String
     teamId: string; // String!
     text?: string | null; // String
@@ -9008,7 +9158,7 @@ export interface NexusGenInputs {
     // input type
     card?: string | null; // String
     createdAt?: NexusGenScalars["DateTime"] | null; // DateTime
-    data?: NexusGenScalars["Json"] | null; // Json
+    data?: NexusGenEnums["NullableJsonNullValueInput"] | null; // NullableJsonNullValueInput
     id?: string | null; // String
     schoolId: string; // String!
     text?: string | null; // String
@@ -9108,7 +9258,7 @@ export interface NexusGenInputs {
       | null; // AttachmentCreateNestedManyWithoutWorkInput
     card?: string | null; // String
     createdAt?: NexusGenScalars["DateTime"] | null; // DateTime
-    data?: NexusGenScalars["Json"] | null; // Json
+    data?: NexusGenEnums["NullableJsonNullValueInput"] | null; // NullableJsonNullValueInput
     id?: string | null; // String
     reactions?:
       | NexusGenInputs["ReactionCreateNestedManyWithoutWorkInput"]
@@ -9128,7 +9278,7 @@ export interface NexusGenInputs {
       | null; // ActivityCreateNestedManyWithoutWorkInput
     card?: string | null; // String
     createdAt?: NexusGenScalars["DateTime"] | null; // DateTime
-    data?: NexusGenScalars["Json"] | null; // Json
+    data?: NexusGenEnums["NullableJsonNullValueInput"] | null; // NullableJsonNullValueInput
     id?: string | null; // String
     reactions?:
       | NexusGenInputs["ReactionCreateNestedManyWithoutWorkInput"]
@@ -9151,7 +9301,7 @@ export interface NexusGenInputs {
       | null; // AttachmentCreateNestedManyWithoutWorkInput
     card?: string | null; // String
     createdAt?: NexusGenScalars["DateTime"] | null; // DateTime
-    data?: NexusGenScalars["Json"] | null; // Json
+    data?: NexusGenEnums["NullableJsonNullValueInput"] | null; // NullableJsonNullValueInput
     id?: string | null; // String
     school: NexusGenInputs["SchoolCreateNestedOneWithoutWorkInput"]; // SchoolCreateNestedOneWithoutWorkInput!
     team: NexusGenInputs["TeamCreateNestedOneWithoutWorkInput"]; // TeamCreateNestedOneWithoutWorkInput!
@@ -9171,7 +9321,7 @@ export interface NexusGenInputs {
       | null; // AttachmentCreateNestedManyWithoutWorkInput
     card?: string | null; // String
     createdAt?: NexusGenScalars["DateTime"] | null; // DateTime
-    data?: NexusGenScalars["Json"] | null; // Json
+    data?: NexusGenEnums["NullableJsonNullValueInput"] | null; // NullableJsonNullValueInput
     id?: string | null; // String
     reactions?:
       | NexusGenInputs["ReactionCreateNestedManyWithoutWorkInput"]
@@ -9193,7 +9343,7 @@ export interface NexusGenInputs {
       | null; // AttachmentCreateNestedManyWithoutWorkInput
     card?: string | null; // String
     createdAt?: NexusGenScalars["DateTime"] | null; // DateTime
-    data?: NexusGenScalars["Json"] | null; // Json
+    data?: NexusGenEnums["NullableJsonNullValueInput"] | null; // NullableJsonNullValueInput
     id?: string | null; // String
     reactions?:
       | NexusGenInputs["ReactionCreateNestedManyWithoutWorkInput"]
@@ -9215,7 +9365,7 @@ export interface NexusGenInputs {
       | null; // AttachmentCreateNestedManyWithoutWorkInput
     card?: string | null; // String
     createdAt?: NexusGenScalars["DateTime"] | null; // DateTime
-    data?: NexusGenScalars["Json"] | null; // Json
+    data?: NexusGenEnums["NullableJsonNullValueInput"] | null; // NullableJsonNullValueInput
     id?: string | null; // String
     reactions?:
       | NexusGenInputs["ReactionCreateNestedManyWithoutWorkInput"]
@@ -9233,17 +9383,29 @@ export interface NexusGenInputs {
     none?: NexusGenInputs["WorkWhereInput"] | null; // WorkWhereInput
     some?: NexusGenInputs["WorkWhereInput"] | null; // WorkWhereInput
   };
-  WorkOrderByInput: {
+  WorkOrderByRelationAggregateInput: {
     // input type
+    _count?: NexusGenEnums["SortOrder"] | null; // SortOrder
+  };
+  WorkOrderByWithRelationInput: {
+    // input type
+    activities?: NexusGenInputs["ActivityOrderByRelationAggregateInput"] | null; // ActivityOrderByRelationAggregateInput
+    attachments?:
+      | NexusGenInputs["AttachmentOrderByRelationAggregateInput"]
+      | null; // AttachmentOrderByRelationAggregateInput
     card?: NexusGenEnums["SortOrder"] | null; // SortOrder
     createdAt?: NexusGenEnums["SortOrder"] | null; // SortOrder
     data?: NexusGenEnums["SortOrder"] | null; // SortOrder
     id?: NexusGenEnums["SortOrder"] | null; // SortOrder
+    reactions?: NexusGenInputs["ReactionOrderByRelationAggregateInput"] | null; // ReactionOrderByRelationAggregateInput
+    school?: NexusGenInputs["SchoolOrderByWithRelationInput"] | null; // SchoolOrderByWithRelationInput
     schoolId?: NexusGenEnums["SortOrder"] | null; // SortOrder
+    team?: NexusGenInputs["TeamOrderByWithRelationInput"] | null; // TeamOrderByWithRelationInput
     teamId?: NexusGenEnums["SortOrder"] | null; // SortOrder
     text?: NexusGenEnums["SortOrder"] | null; // SortOrder
     title?: NexusGenEnums["SortOrder"] | null; // SortOrder
     updatedAt?: NexusGenEnums["SortOrder"] | null; // SortOrder
+    users?: NexusGenInputs["UserOrderByRelationAggregateInput"] | null; // UserOrderByRelationAggregateInput
     visibility?: NexusGenEnums["SortOrder"] | null; // SortOrder
   };
   WorkScalarWhereInput: {
@@ -9266,7 +9428,7 @@ export interface NexusGenInputs {
     // input type
     card?: NexusGenInputs["NullableStringFieldUpdateOperationsInput"] | null; // NullableStringFieldUpdateOperationsInput
     createdAt?: NexusGenInputs["DateTimeFieldUpdateOperationsInput"] | null; // DateTimeFieldUpdateOperationsInput
-    data?: NexusGenScalars["Json"] | null; // Json
+    data?: NexusGenEnums["NullableJsonNullValueInput"] | null; // NullableJsonNullValueInput
     id?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
     text?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
     title?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
@@ -9411,7 +9573,7 @@ export interface NexusGenInputs {
     attachments?: NexusGenInputs["AttachmentUpdateManyWithoutWorkInput"] | null; // AttachmentUpdateManyWithoutWorkInput
     card?: NexusGenInputs["NullableStringFieldUpdateOperationsInput"] | null; // NullableStringFieldUpdateOperationsInput
     createdAt?: NexusGenInputs["DateTimeFieldUpdateOperationsInput"] | null; // DateTimeFieldUpdateOperationsInput
-    data?: NexusGenScalars["Json"] | null; // Json
+    data?: NexusGenEnums["NullableJsonNullValueInput"] | null; // NullableJsonNullValueInput
     id?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
     reactions?: NexusGenInputs["ReactionUpdateManyWithoutWorkInput"] | null; // ReactionUpdateManyWithoutWorkInput
     school?: NexusGenInputs["SchoolUpdateOneRequiredWithoutWorkInput"] | null; // SchoolUpdateOneRequiredWithoutWorkInput
@@ -9429,7 +9591,7 @@ export interface NexusGenInputs {
     activities?: NexusGenInputs["ActivityUpdateManyWithoutWorkInput"] | null; // ActivityUpdateManyWithoutWorkInput
     card?: NexusGenInputs["NullableStringFieldUpdateOperationsInput"] | null; // NullableStringFieldUpdateOperationsInput
     createdAt?: NexusGenInputs["DateTimeFieldUpdateOperationsInput"] | null; // DateTimeFieldUpdateOperationsInput
-    data?: NexusGenScalars["Json"] | null; // Json
+    data?: NexusGenEnums["NullableJsonNullValueInput"] | null; // NullableJsonNullValueInput
     id?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
     reactions?: NexusGenInputs["ReactionUpdateManyWithoutWorkInput"] | null; // ReactionUpdateManyWithoutWorkInput
     school?: NexusGenInputs["SchoolUpdateOneRequiredWithoutWorkInput"] | null; // SchoolUpdateOneRequiredWithoutWorkInput
@@ -9448,7 +9610,7 @@ export interface NexusGenInputs {
     attachments?: NexusGenInputs["AttachmentUpdateManyWithoutWorkInput"] | null; // AttachmentUpdateManyWithoutWorkInput
     card?: NexusGenInputs["NullableStringFieldUpdateOperationsInput"] | null; // NullableStringFieldUpdateOperationsInput
     createdAt?: NexusGenInputs["DateTimeFieldUpdateOperationsInput"] | null; // DateTimeFieldUpdateOperationsInput
-    data?: NexusGenScalars["Json"] | null; // Json
+    data?: NexusGenEnums["NullableJsonNullValueInput"] | null; // NullableJsonNullValueInput
     id?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
     school?: NexusGenInputs["SchoolUpdateOneRequiredWithoutWorkInput"] | null; // SchoolUpdateOneRequiredWithoutWorkInput
     team?: NexusGenInputs["TeamUpdateOneRequiredWithoutWorkInput"] | null; // TeamUpdateOneRequiredWithoutWorkInput
@@ -9466,7 +9628,7 @@ export interface NexusGenInputs {
     attachments?: NexusGenInputs["AttachmentUpdateManyWithoutWorkInput"] | null; // AttachmentUpdateManyWithoutWorkInput
     card?: NexusGenInputs["NullableStringFieldUpdateOperationsInput"] | null; // NullableStringFieldUpdateOperationsInput
     createdAt?: NexusGenInputs["DateTimeFieldUpdateOperationsInput"] | null; // DateTimeFieldUpdateOperationsInput
-    data?: NexusGenScalars["Json"] | null; // Json
+    data?: NexusGenEnums["NullableJsonNullValueInput"] | null; // NullableJsonNullValueInput
     id?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
     reactions?: NexusGenInputs["ReactionUpdateManyWithoutWorkInput"] | null; // ReactionUpdateManyWithoutWorkInput
     team?: NexusGenInputs["TeamUpdateOneRequiredWithoutWorkInput"] | null; // TeamUpdateOneRequiredWithoutWorkInput
@@ -9484,7 +9646,7 @@ export interface NexusGenInputs {
     attachments?: NexusGenInputs["AttachmentUpdateManyWithoutWorkInput"] | null; // AttachmentUpdateManyWithoutWorkInput
     card?: NexusGenInputs["NullableStringFieldUpdateOperationsInput"] | null; // NullableStringFieldUpdateOperationsInput
     createdAt?: NexusGenInputs["DateTimeFieldUpdateOperationsInput"] | null; // DateTimeFieldUpdateOperationsInput
-    data?: NexusGenScalars["Json"] | null; // Json
+    data?: NexusGenEnums["NullableJsonNullValueInput"] | null; // NullableJsonNullValueInput
     id?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
     reactions?: NexusGenInputs["ReactionUpdateManyWithoutWorkInput"] | null; // ReactionUpdateManyWithoutWorkInput
     school?: NexusGenInputs["SchoolUpdateOneRequiredWithoutWorkInput"] | null; // SchoolUpdateOneRequiredWithoutWorkInput
@@ -9502,7 +9664,7 @@ export interface NexusGenInputs {
     attachments?: NexusGenInputs["AttachmentUpdateManyWithoutWorkInput"] | null; // AttachmentUpdateManyWithoutWorkInput
     card?: NexusGenInputs["NullableStringFieldUpdateOperationsInput"] | null; // NullableStringFieldUpdateOperationsInput
     createdAt?: NexusGenInputs["DateTimeFieldUpdateOperationsInput"] | null; // DateTimeFieldUpdateOperationsInput
-    data?: NexusGenScalars["Json"] | null; // Json
+    data?: NexusGenEnums["NullableJsonNullValueInput"] | null; // NullableJsonNullValueInput
     id?: NexusGenInputs["StringFieldUpdateOperationsInput"] | null; // StringFieldUpdateOperationsInput
     reactions?: NexusGenInputs["ReactionUpdateManyWithoutWorkInput"] | null; // ReactionUpdateManyWithoutWorkInput
     school?: NexusGenInputs["SchoolUpdateOneRequiredWithoutWorkInput"] | null; // SchoolUpdateOneRequiredWithoutWorkInput
@@ -9586,6 +9748,9 @@ export interface NexusGenEnums {
     | "Work";
   BallotScope: "Cantonal" | "National" | "Public" | "School" | "Team";
   Gender: "Female" | "Male" | "Other" | "Unkown";
+  JsonNullValueFilter: "AnyNull" | "DbNull" | "JsonNull";
+  JsonNullValueInput: "JsonNull";
+  NullableJsonNullValueInput: "DbNull" | "JsonNull";
   QueryMode: "default" | "insensitive";
   Role: "Admin" | "Principal" | "Student" | "Teacher" | "User";
   SortOrder: "asc" | "desc";
@@ -9607,33 +9772,33 @@ export interface NexusGenObjects {
     // root type
     ballotId?: string | null; // String
     card?: string | null; // String
-    id?: number | null; // Int
+    id: number; // Int!
     summary?: string | null; // String
-    time?: NexusGenScalars["DateTime"] | null; // DateTime
-    type?: NexusGenEnums["ActivityType"] | null; // ActivityType
-    visibility?: NexusGenEnums["Visibility"] | null; // Visibility
+    time: NexusGenScalars["DateTime"]; // DateTime!
+    type: NexusGenEnums["ActivityType"]; // ActivityType!
+    visibility: NexusGenEnums["Visibility"]; // Visibility!
     workId?: string | null; // String
   };
   Attachment: {
     // root type
-    createdAt?: NexusGenScalars["DateTime"] | null; // DateTime
-    file?: string | null; // String
+    createdAt: NexusGenScalars["DateTime"]; // DateTime!
+    file: string; // String!
     id: string; // String!
     title: string; // String!
     type: string; // String!
-    updatedAt?: NexusGenScalars["DateTime"] | null; // DateTime
+    updatedAt: NexusGenScalars["DateTime"]; // DateTime!
   };
   Ballot: {
     // root type
-    body?: string | null; // String
+    body: string; // String!
     canton?: string | null; // String
-    description?: string | null; // String
-    end?: NexusGenScalars["DateTime"] | null; // DateTime
+    description: string; // String!
+    end: NexusGenScalars["DateTime"]; // DateTime!
     id: string; // String!
-    originalLocale?: string | null; // String
+    originalLocale: string; // String!
     schoolId?: string | null; // String
-    scope?: NexusGenEnums["BallotScope"] | null; // BallotScope
-    start?: NexusGenScalars["DateTime"] | null; // DateTime
+    scope: NexusGenEnums["BallotScope"]; // BallotScope!
+    start: NexusGenScalars["DateTime"]; // DateTime!
     teamId?: string | null; // String
     title: string; // String!
   };
@@ -9671,11 +9836,11 @@ export interface NexusGenObjects {
     // root type
     ballotId?: string | null; // String
     card?: string | null; // String
-    createdAt?: NexusGenScalars["DateTime"] | null; // DateTime
+    createdAt: NexusGenScalars["DateTime"]; // DateTime!
     id: string; // String!
     text: string; // String!
     title: string; // String!
-    updatedAt?: NexusGenScalars["DateTime"] | null; // DateTime
+    updatedAt: NexusGenScalars["DateTime"]; // DateTime!
   };
   InviteResponse: {
     // root type
@@ -9701,8 +9866,8 @@ export interface NexusGenObjects {
   Query: {};
   Reaction: {
     // root type
-    emoij?: string | null; // String
-    id?: string | null; // String
+    emoij: string; // String!
+    id: string; // String!
   };
   Response: {
     // root type
@@ -9722,13 +9887,13 @@ export interface NexusGenObjects {
   };
   School: {
     // root type
-    address?: string | null; // String
-    canton?: string | null; // String
-    city?: string | null; // String
+    address: string; // String!
+    canton: string; // String!
+    city: string; // String!
     id: string; // String!
-    name?: string | null; // String
-    type?: string | null; // String
-    zip?: string | null; // String
+    name: string; // String!
+    type: string; // String!
+    zip: string; // String!
   };
   Stats: {
     // root type
@@ -9757,21 +9922,21 @@ export interface NexusGenObjects {
     id: string; // String!
     invite?: string | null; // String
     name: string; // String!
-    notes?: NexusGenScalars["Json"] | null; // Json
-    prefs?: NexusGenScalars["Json"] | null; // Json
-    teacherId?: string | null; // String
+    notes: NexusGenScalars["Json"]; // Json!
+    prefs: NexusGenScalars["Json"]; // Json!
+    teacherId: string; // String!
   };
   User: {
     // root type
     campaign?: string | null; // String
-    createdAt?: NexusGenScalars["DateTime"] | null; // DateTime
+    createdAt: NexusGenScalars["DateTime"]; // DateTime!
     email?: string | null; // String
     emailVerified?: NexusGenScalars["DateTime"] | null; // DateTime
     gender?: NexusGenEnums["Gender"] | null; // Gender
     id: string; // String!
     image?: string | null; // String
     lastname?: string | null; // String
-    locale?: string | null; // String
+    locale: string; // String!
     name?: string | null; // String
     role: NexusGenEnums["Role"]; // Role!
     year?: number | null; // Int
@@ -9787,7 +9952,7 @@ export interface NexusGenObjects {
     id: string; // String!
     text: string; // String!
     title: string; // String!
-    updatedAt?: NexusGenScalars["DateTime"] | null; // DateTime
+    updatedAt: NexusGenScalars["DateTime"]; // DateTime!
   };
 }
 
@@ -9806,39 +9971,39 @@ export interface NexusGenFieldTypes {
     // field return type
     ballotId: string | null; // String
     card: string | null; // String
-    id: number | null; // Int
-    school: NexusGenRootTypes["School"] | null; // School
+    id: number; // Int!
+    school: NexusGenRootTypes["School"]; // School!
     summary: string | null; // String
-    team: NexusGenRootTypes["Team"] | null; // Team
-    time: NexusGenScalars["DateTime"] | null; // DateTime
-    type: NexusGenEnums["ActivityType"] | null; // ActivityType
-    user: NexusGenRootTypes["User"] | null; // User
-    visibility: NexusGenEnums["Visibility"] | null; // Visibility
+    team: NexusGenRootTypes["Team"]; // Team!
+    time: NexusGenScalars["DateTime"]; // DateTime!
+    type: NexusGenEnums["ActivityType"]; // ActivityType!
+    user: NexusGenRootTypes["User"]; // User!
+    visibility: NexusGenEnums["Visibility"]; // Visibility!
     workId: string | null; // String
   };
   Attachment: {
     // field return type
-    createdAt: NexusGenScalars["DateTime"] | null; // DateTime
-    file: string | null; // String
+    createdAt: NexusGenScalars["DateTime"]; // DateTime!
+    file: string; // String!
     id: string; // String!
     title: string; // String!
     type: string; // String!
-    updatedAt: NexusGenScalars["DateTime"] | null; // DateTime
+    updatedAt: NexusGenScalars["DateTime"]; // DateTime!
     user: NexusGenRootTypes["User"]; // User!
   };
   Ballot: {
     // field return type
-    body: string | null; // String
+    body: string; // String!
     canton: string | null; // String
     canVote: boolean | null; // Boolean
-    description: string | null; // String
-    end: NexusGenScalars["DateTime"] | null; // DateTime
+    description: string; // String!
+    end: NexusGenScalars["DateTime"]; // DateTime!
     hasVoted: boolean | null; // Boolean
     id: string; // String!
-    originalLocale: string | null; // String
+    originalLocale: string; // String!
     schoolId: string | null; // String
-    scope: NexusGenEnums["BallotScope"] | null; // BallotScope
-    start: NexusGenScalars["DateTime"] | null; // DateTime
+    scope: NexusGenEnums["BallotScope"]; // BallotScope!
+    start: NexusGenScalars["DateTime"]; // DateTime!
     teamId: string | null; // String
     title: string; // String!
   };
@@ -9855,7 +10020,7 @@ export interface NexusGenFieldTypes {
     end: NexusGenScalars["DateTime"] | null; // DateTime
     id: string; // String!
     start: NexusGenScalars["DateTime"] | null; // DateTime
-    team: NexusGenRootTypes["Team"] | null; // Team
+    team: NexusGenRootTypes["Team"]; // Team!
   };
   Card: {
     // field return type
@@ -9879,12 +10044,12 @@ export interface NexusGenFieldTypes {
     ballotId: string | null; // String
     card: string | null; // String
     children: Array<NexusGenRootTypes["Discussion"] | null> | null; // [Discussion]
-    createdAt: NexusGenScalars["DateTime"] | null; // DateTime
+    createdAt: NexusGenScalars["DateTime"]; // DateTime!
     id: string; // String!
     reactions: NexusGenRootTypes["Reaction"][]; // [Reaction!]!
     text: string; // String!
     title: string; // String!
-    updatedAt: NexusGenScalars["DateTime"] | null; // DateTime
+    updatedAt: NexusGenScalars["DateTime"]; // DateTime!
     user: NexusGenRootTypes["User"]; // User!
   };
   InviteResponse: {
@@ -9901,9 +10066,9 @@ export interface NexusGenFieldTypes {
     changePassword: NexusGenRootTypes["ResponseLogin"] | null; // ResponseLogin
     checkVerification: NexusGenRootTypes["ResponseLogin"] | null; // ResponseLogin
     createInvitedUser: NexusGenRootTypes["User"] | null; // User
-    createOneBallot: NexusGenRootTypes["Ballot"] | null; // Ballot
-    createOneSchool: NexusGenRootTypes["School"] | null; // School
-    createOneTeam: NexusGenRootTypes["Team"] | null; // Team
+    createOneBallot: NexusGenRootTypes["Ballot"]; // Ballot!
+    createOneSchool: NexusGenRootTypes["School"]; // School!
+    createOneTeam: NexusGenRootTypes["Team"]; // Team!
     createUser: NexusGenRootTypes["User"] | null; // User
     deleteAccount: NexusGenRootTypes["Response"] | null; // Response
     deleteOneBallot: NexusGenRootTypes["Ballot"] | null; // Ballot
@@ -9916,9 +10081,9 @@ export interface NexusGenFieldTypes {
     inviteStudents: NexusGenRootTypes["InviteResponse"] | null; // InviteResponse
     login: NexusGenRootTypes["ResponseLogin"] | null; // ResponseLogin
     magic: NexusGenRootTypes["Response"] | null; // Response
-    postActivity: NexusGenRootTypes["Activity"] | null; // Activity
+    postActivity: NexusGenRootTypes["Activity"]; // Activity!
     postDiscussion: NexusGenRootTypes["Discussion"] | null; // Discussion
-    postWork: NexusGenRootTypes["Work"] | null; // Work
+    postWork: NexusGenRootTypes["Work"]; // Work!
     removeBallotRun: NexusGenRootTypes["Response"] | null; // Response
     setCards: NexusGenRootTypes["Team"] | null; // Team
     setNotes: NexusGenRootTypes["Team"] | null; // Team
@@ -9968,9 +10133,9 @@ export interface NexusGenFieldTypes {
   Reaction: {
     // field return type
     discussion: NexusGenRootTypes["Discussion"] | null; // Discussion
-    emoij: string | null; // String
-    id: string | null; // String
-    user: NexusGenRootTypes["User"] | null; // User
+    emoij: string; // String!
+    id: string; // String!
+    user: NexusGenRootTypes["User"]; // User!
   };
   Response: {
     // field return type
@@ -9990,15 +10155,15 @@ export interface NexusGenFieldTypes {
   };
   School: {
     // field return type
-    address: string | null; // String
-    canton: string | null; // String
-    city: string | null; // String
+    address: string; // String!
+    canton: string; // String!
+    city: string; // String!
     id: string; // String!
     members: NexusGenRootTypes["User"][]; // [User!]!
-    name: string | null; // String
+    name: string; // String!
     teams: NexusGenRootTypes["Team"][]; // [Team!]!
-    type: string | null; // String
-    zip: string | null; // String
+    type: string; // String!
+    zip: string; // String!
   };
   Stats: {
     // field return type
@@ -10029,18 +10194,18 @@ export interface NexusGenFieldTypes {
     invite: string | null; // String
     members: NexusGenRootTypes["User"][]; // [User!]!
     name: string; // String!
-    notes: NexusGenScalars["Json"] | null; // Json
-    prefs: NexusGenScalars["Json"] | null; // Json
-    school: NexusGenRootTypes["School"] | null; // School
-    teacher: NexusGenRootTypes["User"] | null; // User
-    teacherId: string | null; // String
+    notes: NexusGenScalars["Json"]; // Json!
+    prefs: NexusGenScalars["Json"]; // Json!
+    school: NexusGenRootTypes["School"]; // School!
+    teacher: NexusGenRootTypes["User"]; // User!
+    teacherId: string; // String!
   };
   User: {
     // field return type
     attachments: NexusGenRootTypes["Attachment"][]; // [Attachment!]!
     ballots: NexusGenRootTypes["Ballot"][]; // [Ballot!]!
     campaign: string | null; // String
-    createdAt: NexusGenScalars["DateTime"] | null; // DateTime
+    createdAt: NexusGenScalars["DateTime"]; // DateTime!
     discussions: NexusGenRootTypes["Discussion"][]; // [Discussion!]!
     email: string | null; // String
     emailVerified: NexusGenScalars["DateTime"] | null; // DateTime
@@ -10048,7 +10213,7 @@ export interface NexusGenFieldTypes {
     id: string; // String!
     image: string | null; // String
     lastname: string | null; // String
-    locale: string | null; // String
+    locale: string; // String!
     name: string | null; // String
     reactions: NexusGenRootTypes["Reaction"][]; // [Reaction!]!
     role: NexusGenEnums["Role"]; // Role!
@@ -10060,7 +10225,7 @@ export interface NexusGenFieldTypes {
   };
   Vote: {
     // field return type
-    ballot: NexusGenRootTypes["Ballot"] | null; // Ballot
+    ballot: NexusGenRootTypes["Ballot"]; // Ballot!
     verify: string | null; // String
   };
   Work: {
@@ -10072,7 +10237,7 @@ export interface NexusGenFieldTypes {
     reactions: NexusGenRootTypes["Reaction"][]; // [Reaction!]!
     text: string; // String!
     title: string; // String!
-    updatedAt: NexusGenScalars["DateTime"] | null; // DateTime
+    updatedAt: NexusGenScalars["DateTime"]; // DateTime!
     users: NexusGenRootTypes["User"][]; // [User!]!
   };
 }
@@ -10529,7 +10694,7 @@ export interface NexusGenArgTypes {
       before?: NexusGenInputs["ActivityWhereUniqueInput"] | null; // ActivityWhereUniqueInput
       first?: number | null; // Int
       last?: number | null; // Int
-      orderBy?: NexusGenInputs["ActivityOrderByInput"][] | null; // [ActivityOrderByInput!]
+      orderBy?: NexusGenInputs["ActivityOrderByWithRelationInput"][] | null; // [ActivityOrderByWithRelationInput!]
       where?: NexusGenInputs["ActivityWhereInput"] | null; // ActivityWhereInput
     };
     attachments: {
@@ -10538,7 +10703,7 @@ export interface NexusGenArgTypes {
       before?: NexusGenInputs["AttachmentWhereUniqueInput"] | null; // AttachmentWhereUniqueInput
       first?: number | null; // Int
       last?: number | null; // Int
-      orderBy?: NexusGenInputs["AttachmentOrderByInput"][] | null; // [AttachmentOrderByInput!]
+      orderBy?: NexusGenInputs["AttachmentOrderByWithRelationInput"][] | null; // [AttachmentOrderByWithRelationInput!]
       where?: NexusGenInputs["AttachmentWhereInput"] | null; // AttachmentWhereInput
     };
     ballot: {
@@ -10551,7 +10716,7 @@ export interface NexusGenArgTypes {
       before?: NexusGenInputs["BallotWhereUniqueInput"] | null; // BallotWhereUniqueInput
       first?: number | null; // Int
       last?: number | null; // Int
-      orderBy?: NexusGenInputs["BallotOrderByInput"][] | null; // [BallotOrderByInput!]
+      orderBy?: NexusGenInputs["BallotOrderByWithRelationInput"][] | null; // [BallotOrderByWithRelationInput!]
       where?: NexusGenInputs["BallotWhereInput"] | null; // BallotWhereInput
     };
     cards: {
@@ -10593,7 +10758,7 @@ export interface NexusGenArgTypes {
       before?: NexusGenInputs["SchoolWhereUniqueInput"] | null; // SchoolWhereUniqueInput
       first?: number | null; // Int
       last?: number | null; // Int
-      orderBy?: NexusGenInputs["SchoolOrderByInput"][] | null; // [SchoolOrderByInput!]
+      orderBy?: NexusGenInputs["SchoolOrderByWithRelationInput"][] | null; // [SchoolOrderByWithRelationInput!]
       where?: NexusGenInputs["SchoolWhereInput"] | null; // SchoolWhereInput
     };
     stats: {
@@ -10621,7 +10786,7 @@ export interface NexusGenArgTypes {
       before?: NexusGenInputs["TeamWhereUniqueInput"] | null; // TeamWhereUniqueInput
       first?: number | null; // Int
       last?: number | null; // Int
-      orderBy?: NexusGenInputs["TeamOrderByInput"][] | null; // [TeamOrderByInput!]
+      orderBy?: NexusGenInputs["TeamOrderByWithRelationInput"][] | null; // [TeamOrderByWithRelationInput!]
       where?: NexusGenInputs["TeamWhereInput"] | null; // TeamWhereInput
     };
     user: {
@@ -10634,7 +10799,7 @@ export interface NexusGenArgTypes {
       before?: NexusGenInputs["UserWhereUniqueInput"] | null; // UserWhereUniqueInput
       first?: number | null; // Int
       last?: number | null; // Int
-      orderBy?: NexusGenInputs["UserOrderByInput"][] | null; // [UserOrderByInput!]
+      orderBy?: NexusGenInputs["UserOrderByWithRelationInput"][] | null; // [UserOrderByWithRelationInput!]
       where?: NexusGenInputs["UserWhereInput"] | null; // UserWhereInput
     };
     works: {
@@ -10643,7 +10808,7 @@ export interface NexusGenArgTypes {
       before?: NexusGenInputs["WorkWhereUniqueInput"] | null; // WorkWhereUniqueInput
       first?: number | null; // Int
       last?: number | null; // Int
-      orderBy?: NexusGenInputs["WorkOrderByInput"][] | null; // [WorkOrderByInput!]
+      orderBy?: NexusGenInputs["WorkOrderByWithRelationInput"][] | null; // [WorkOrderByWithRelationInput!]
       where?: NexusGenInputs["WorkWhereInput"] | null; // WorkWhereInput
     };
   };
@@ -10770,9 +10935,10 @@ export type NexusGenFeaturesConfig = {
 };
 
 export interface NexusGenTypes {
-  context: ContextModule.Context;
+  context: any;
   inputTypes: NexusGenInputs;
   rootTypes: NexusGenRootTypes;
+  inputTypeShapes: NexusGenInputs & NexusGenEnums & NexusGenScalars;
   argTypes: NexusGenArgTypes;
   fieldTypes: NexusGenFieldTypes;
   fieldTypeNames: NexusGenFieldTypeNames;
@@ -10806,77 +10972,15 @@ export interface NexusGenTypes {
 
 declare global {
   interface NexusGenPluginTypeConfig<TypeName extends string> {}
+  interface NexusGenPluginInputTypeConfig<TypeName extends string> {}
   interface NexusGenPluginFieldConfig<
     TypeName extends string,
     FieldName extends string
-  > {
-    /**
-     * Whether the type can be null
-     * @default (depends on whether nullability is configured in type or schema)
-     * @see declarativeWrappingPlugin
-     */
-    nullable?: boolean;
-    /**
-     * Whether the type is list of values, or just a single value.
-     * If list is true, we assume the type is a list. If list is an array,
-     * we'll assume that it's a list with the depth. The boolean indicates whether
-     * the type is required (non-null), where true = nonNull, false = nullable.
-     * @see declarativeWrappingPlugin
-     */
-    list?: true | boolean[];
-    /**
-     * Whether the type should be non null, `required: true` = `nullable: false`
-     * @default (depends on whether nullability is configured in type or schema)
-     * @see declarativeWrappingPlugin
-     */
-    required?: boolean;
-  }
+  > {}
   interface NexusGenPluginInputFieldConfig<
     TypeName extends string,
     FieldName extends string
-  > {
-    /**
-     * Whether the type can be null
-     * @default (depends on whether nullability is configured in type or schema)
-     * @see declarativeWrappingPlugin
-     */
-    nullable?: boolean;
-    /**
-     * Whether the type is list of values, or just a single value.
-     * If list is true, we assume the type is a list. If list is an array,
-     * we'll assume that it's a list with the depth. The boolean indicates whether
-     * the type is required (non-null), where true = nonNull, false = nullable.
-     * @see declarativeWrappingPlugin
-     */
-    list?: true | boolean[];
-    /**
-     * Whether the type should be non null, `required: true` = `nullable: false`
-     * @default (depends on whether nullability is configured in type or schema)
-     * @see declarativeWrappingPlugin
-     */
-    required?: boolean;
-  }
+  > {}
   interface NexusGenPluginSchemaConfig {}
-  interface NexusGenPluginArgConfig {
-    /**
-     * Whether the type can be null
-     * @default (depends on whether nullability is configured in type or schema)
-     * @see declarativeWrappingPlugin
-     */
-    nullable?: boolean;
-    /**
-     * Whether the type is list of values, or just a single value.
-     * If list is true, we assume the type is a list. If list is an array,
-     * we'll assume that it's a list with the depth. The boolean indicates whether
-     * the type is required (non-null), where true = nonNull, false = nullable.
-     * @see declarativeWrappingPlugin
-     */
-    list?: true | boolean[];
-    /**
-     * Whether the type should be non null, `required: true` = `nullable: false`
-     * @default (depends on whether nullability is configured in type or schema)
-     * @see declarativeWrappingPlugin
-     */
-    required?: boolean;
-  }
+  interface NexusGenPluginArgConfig {}
 }
