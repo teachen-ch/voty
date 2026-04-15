@@ -1,27 +1,15 @@
-import resolvers from "../resolvers";
-import { extendType, objectType } from "nexus";
+import { builder } from "../builder";
 
-export const Attachment = objectType({
-  name: "Attachment",
-  definition(t) {
-    t.nonNull.model.id();
-    t.model.file();
-    t.nonNull.model.title();
-    t.nonNull.model.user();
-    t.nonNull.model.type();
-
-    t.model.createdAt();
-    t.model.updatedAt();
-  },
+export const AttachmentType = builder.prismaObject("Attachment", {
+  fields: (t) => ({
+    id: t.exposeID("id"),
+    file: t.exposeString("file"),
+    title: t.exposeString("title"),
+    user: t.relation("user"),
+    type: t.exposeString("type"),
+    createdAt: t.expose("createdAt", { type: "DateTime" }),
+    updatedAt: t.expose("updatedAt", { type: "DateTime" }),
+  }),
 });
 
-export const AttachmentQueries = extendType({
-  type: "Query",
-  definition(t) {
-    t.crud.attachments({
-      ordering: true,
-      filtering: true,
-      resolve: resolvers.attachments.attachments,
-    });
-  },
-});
+// TODO Step 8: CRUD — attachments (ordering + filtering, custom resolver wrap)

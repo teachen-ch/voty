@@ -1,48 +1,23 @@
-import {
-  objectType,
-  mutationType,
-  stringArg,
-  intArg,
-  nonNull,
-} from "nexus";
-import resolvers from "../resolvers";
+import { builder } from "../builder";
 
-export const Vote = objectType({
-  name: "Vote",
-  definition(t) {
-    t.model.verify();
-    t.model.ballot();
-  },
+export const VoteType = builder.prismaObject("Vote", {
+  fields: (t) => ({
+    verify: t.exposeString("verify", { nullable: true }),
+    ballot: t.relation("ballot"),
+  }),
 });
 
-export const Response = objectType({
-  name: "Response",
-  definition(t) {
-    t.boolean("success");
-    t.boolean("error");
-    t.string("message");
-  },
+export const Response = builder.objectRef<{
+  success?: boolean;
+  error?: boolean;
+  message?: string;
+}>("Response").implement({
+  fields: (t) => ({
+    success: t.boolean({ nullable: true, resolve: (p) => p.success ?? null }),
+    error: t.boolean({ nullable: true, resolve: (p) => p.error ?? null }),
+    message: t.string({ nullable: true, resolve: (p) => p.message ?? null }),
+  }),
 });
 
-export const Mutation = mutationType({
-  definition(t) {
-    t.field("vote", {
-      type: "Vote",
-      args: {
-        ballotId: nonNull(stringArg()),
-        vote: nonNull(intArg()),
-      },
-      resolve: resolvers.ballots.vote,
-    });
-
-    t.field("voteCode", {
-      type: "Response",
-      args: {
-        ballotRunId: nonNull(stringArg()),
-        vote: nonNull(intArg()),
-        code: nonNull(stringArg()),
-      },
-      resolve: resolvers.ballots.voteCode,
-    });
-  },
-});
+// TODO Step 7: mutationField for:
+//   - vote (resolvers.ballots.vote), voteCode (resolvers.ballots.voteCode)

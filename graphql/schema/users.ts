@@ -1,163 +1,61 @@
-import { users } from "../resolvers";
-import {
-  stringArg,
-  objectType,
-  inputObjectType,
-  extendType,
-  nonNull,
-  booleanArg,
-  arg,
-} from "nexus";
+import { builder, RoleEnum, GenderEnum } from "../builder";
+// getShortname is imported directly (no MDX/content dependency in users.ts).
+import { getShortname } from "../resolvers/users";
 
-export const User = objectType({
-  name: "User",
-  definition(t) {
-    t.nonNull.model.id();
-    t.model.email();
-    t.model.name();
-    t.model.lastname();
-    t.field("shortname", { type: "String", resolve: users.shortname });
-    t.model.gender();
-    t.model.year();
-    t.model.emailVerified();
-    t.model.createdAt();
-    t.model.image();
-    t.nonNull.model.role();
-    t.model.locale();
-    t.model.campaign();
-    t.model.school();
-    t.model.team();
-    t.model.teaches();
-    t.model.ballots();
-    t.model.attachments();
-    t.model.discussions();
-    t.model.reactions();
-  },
+export const UserType = builder.prismaObject("User", {
+  fields: (t) => ({
+    id: t.exposeID("id"),
+    email: t.exposeString("email", { nullable: true }),
+    name: t.exposeString("name", { nullable: true }),
+    lastname: t.exposeString("lastname", { nullable: true }),
+    shortname: t.string({
+      nullable: true,
+      resolve: (parent) => getShortname(parent as any),
+    }),
+    gender: t.field({
+      type: GenderEnum,
+      nullable: true,
+      resolve: (parent) => parent.gender,
+    }),
+    year: t.exposeInt("year", { nullable: true }),
+    emailVerified: t.expose("emailVerified", {
+      type: "DateTime",
+      nullable: true,
+    }),
+    createdAt: t.expose("createdAt", { type: "DateTime" }),
+    image: t.exposeString("image", { nullable: true }),
+    role: t.field({
+      type: RoleEnum,
+      resolve: (parent) => parent.role,
+    }),
+    locale: t.exposeString("locale"),
+    campaign: t.exposeString("campaign", { nullable: true }),
+    school: t.relation("school", { nullable: true }),
+    team: t.relation("team", { nullable: true }),
+    teaches: t.relation("teaches"),
+    ballots: t.relation("ballots"),
+    attachments: t.relation("attachments"),
+    discussions: t.relation("discussions"),
+    reactions: t.relation("reactions"),
+  }),
 });
 
-export const ResponseLogin = objectType({
-  name: "ResponseLogin",
-  definition(t) {
-    t.string("token");
-    t.field("user", { type: "User" });
-  },
-});
+export const ResponseLogin = builder
+  .objectRef<{ token?: string | null; user?: unknown }>("ResponseLogin")
+  .implement({
+    fields: (t) => ({
+      token: t.string({ nullable: true, resolve: (p) => p.token ?? null }),
+      user: t.field({
+        type: UserType,
+        nullable: true,
+        resolve: (p) => p.user as any,
+      }),
+    }),
+  });
 
-export const UserCreateInput = inputObjectType({
-  name: "UserCreateInput",
-  definition(t) {
-    t.string("name"),
-      t.string("lastname"),
-      t.nonNull.string("email"),
-      t.string("password"),
-      t.field("role", { type: "Role" }),
-      t.string("locale"),
-      t.string("campaign"),
-      t.string("redirect");
-  },
-});
-
-export const UserQuery = extendType({
-  type: "Query",
-  definition(t) {
-    t.crud.user();
-    t.crud.users({
-      ordering: true,
-      filtering: true,
-    });
-    t.field("me", {
-      type: "User",
-      resolve: async (_root, args, ctx) => users.getUser(ctx),
-    });
-  },
-});
-
-export const UserMutation = extendType({
-  type: "Mutation",
-  definition(t) {
-    t.field("createUser", {
-      type: "User",
-      args: {
-        data: nonNull(arg({ type: "UserCreateInput" })),
-      },
-      resolve: users.createUser,
-    });
-    t.crud.updateOneUser({
-      alias: "updateUser",
-      resolve: users.updateUser,
-    });
-    t.crud.deleteOneUser({
-      alias: "deleteUser",
-      resolve: users.deleteUser,
-    });
-    t.field("login", {
-      type: "ResponseLogin",
-      args: {
-        email: nonNull(stringArg()),
-        password: nonNull(stringArg()),
-      },
-      resolve: users.login,
-    });
-    t.field("magic", {
-      type: "Response",
-      args: {
-        email: nonNull(stringArg()),
-        redirect: stringArg(),
-      },
-      resolve: users.magic,
-    });
-    t.field("emailVerification", {
-      type: "ResponseLogin",
-      args: {
-        email: nonNull(stringArg()),
-        purpose: nonNull(stringArg()),
-      },
-      resolve: async (_root, args, ctx) =>
-        users.sendVerificationEmail(args.email, args.purpose, ctx.db),
-    });
-    t.field("checkVerification", {
-      type: "ResponseLogin",
-      args: {
-        token: stringArg(),
-      },
-      resolve: users.checkVerification,
-    });
-    t.field("changePassword", {
-      type: "ResponseLogin",
-      args: {
-        password: stringArg(),
-      },
-      resolve: users.changePassword,
-    });
-    t.field("createInvitedUser", {
-      type: "User",
-      args: {
-        name: stringArg(),
-        lastname: stringArg(),
-        email: nonNull(stringArg()),
-        password: stringArg(),
-        invite: nonNull(stringArg()),
-      },
-      resolve: users.createInvitedUser,
-    });
-    t.field("acceptInvite", {
-      type: "Team",
-      args: {
-        invite: nonNull(stringArg()),
-        force: booleanArg(),
-      },
-      resolve: users.acceptInvite,
-    });
-    t.field("setSchool", {
-      type: "User",
-      args: {
-        school: nonNull(stringArg()),
-      },
-      resolve: users.setSchool,
-    });
-    t.field("deleteAccount", {
-      type: "Response",
-      resolve: users.deleteAccount,
-    });
-  },
-});
+// TODO Step 7: port queryField/mutationField for:
+//   - me, createUser, updateUser, deleteUser, login, magic
+//   - emailVerification, checkVerification, changePassword
+//   - createInvitedUser, acceptInvite, setSchool, deleteAccount
+//
+// TODO Step 8: CRUD — user (findUnique), users (findMany + ordering + filtering)

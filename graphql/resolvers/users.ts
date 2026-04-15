@@ -12,7 +12,7 @@ import { sendMail } from "../../util/email";
 import { randomBytes, createHash } from "crypto";
 import logger from "../../util/logger";
 import { Context } from "../context";
-import { FieldResolver } from "nexus";
+import { FieldResolver } from "../context";
 import { NextApiRequest } from "next";
 import { promises as fs } from "fs";
 import pick from "lodash/pick";

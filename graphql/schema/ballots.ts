@@ -1,133 +1,65 @@
-import resolvers from "../resolvers";
-import { extendType, nonNull, objectType, stringArg } from "nexus";
+import { builder, BallotScopeEnum } from "../builder";
 
-export const Ballot = objectType({
-  name: "Ballot",
-  definition(t) {
-    t.nonNull.model.id();
-    t.nonNull.model.title();
-    t.model.description();
-    t.model.body();
-    t.model.start();
-    t.model.end();
-    t.model.scope();
-    t.model.canton();
-    t.model.teamId();
-    t.model.schoolId();
-    t.model.originalLocale();
-    t.boolean("canVote", {
-      resolve: resolvers.ballots.canVote,
-    });
-    t.boolean("hasVoted", {
-      resolve: resolvers.ballots.hasVoted,
-    });
-  },
+export const BallotType = builder.prismaObject("Ballot", {
+  fields: (t) => ({
+    id: t.exposeID("id"),
+    title: t.exposeString("title"),
+    description: t.exposeString("description"),
+    body: t.exposeString("body"),
+    start: t.expose("start", { type: "DateTime" }),
+    end: t.expose("end", { type: "DateTime" }),
+    scope: t.field({ type: BallotScopeEnum, resolve: (p) => p.scope }),
+    canton: t.exposeString("canton", { nullable: true }),
+    teamId: t.exposeString("teamId", { nullable: true }),
+    schoolId: t.exposeString("schoolId", { nullable: true }),
+    originalLocale: t.exposeString("originalLocale"),
+    // TODO Step 7: wire canVote + hasVoted via resolvers.ballots.canVote /
+    //   hasVoted. Lazy-import the resolvers module inside the resolver fn so
+    //   that SDL printing does not pull MDX content through the resolver tree.
+    canVote: t.boolean({
+      nullable: true,
+      resolve: async (root, _args, ctx, info) => {
+        const { ballots } = await import("../resolvers");
+        return ballots.canVote(root as any, {}, ctx, info);
+      },
+    }),
+    hasVoted: t.boolean({
+      nullable: true,
+      resolve: async (root, _args, ctx, info) => {
+        const { ballots } = await import("../resolvers");
+        return ballots.hasVoted(root as any, {}, ctx, info);
+      },
+    }),
+  }),
 });
 
-export const BallotRun = objectType({
-  name: "BallotRun",
-  definition(t) {
-    t.nonNull.model.id();
-    t.nonNull.model.ballotId();
-    t.model.team();
-    t.model.start();
-    t.model.end();
-  },
+export const BallotRunType = builder.prismaObject("BallotRun", {
+  fields: (t) => ({
+    id: t.exposeID("id"),
+    ballotId: t.exposeString("ballotId"),
+    team: t.relation("team"),
+    start: t.expose("start", { type: "DateTime", nullable: true }),
+    end: t.expose("end", { type: "DateTime", nullable: true }),
+  }),
 });
 
-export const BallotResults = objectType({
-  name: "BallotResults",
-  definition(t) {
-    t.int("yes");
-    t.int("no");
-    t.int("abs");
-    t.int("total");
-  },
+export const BallotResults = builder.objectRef<{
+  yes?: number;
+  no?: number;
+  abs?: number;
+  total?: number;
+}>("BallotResults").implement({
+  fields: (t) => ({
+    yes: t.int({ nullable: true, resolve: (p) => p.yes ?? null }),
+    no: t.int({ nullable: true, resolve: (p) => p.no ?? null }),
+    abs: t.int({ nullable: true, resolve: (p) => p.abs ?? null }),
+    total: t.int({ nullable: true, resolve: (p) => p.total ?? null }),
+  }),
 });
 
-export const BallotsQueries = extendType({
-  type: "Query",
-  definition(t) {
-    t.crud.ballot({
-      async resolve(root, args, ctx, info, originalResolve) {
-        const locale = ctx.req.headers["accept-language"];
-        const ballot = await originalResolve(root, args, ctx, info);
-        resolvers.ballots.replaceLocale(ballot, locale);
-        return ballot;
-      },
-    });
-    t.crud.ballots({
-      async resolve(root, args, ctx, info, originalResolve) {
-        const locale = ctx.req.headers["accept-language"];
-        const ballots = await originalResolve(root, args, ctx, info);
-        ballots.forEach((ballot) => {
-          resolvers.ballots.replaceLocale(ballot, locale);
-        });
-        return ballots;
-      },
-      ordering: true,
-      filtering: true,
-    });
-    t.list.field("getBallotRuns", {
-      type: "BallotRun",
-      args: {
-        teamId: nonNull(stringArg()),
-        locale: stringArg(),
-      },
-      resolve: resolvers.ballots.getBallotRuns,
-    });
-
-    t.field("getBallotResults", {
-      type: "BallotResults",
-      args: {
-        ballotId: nonNull(stringArg()),
-        ballotRunId: stringArg(),
-        teamId: stringArg(),
-        schoolId: stringArg(),
-        canton: stringArg(),
-      },
-      resolve: resolvers.ballots.getBallotResults,
-    });
-  },
-});
-
-export const BallotsMutations = extendType({
-  type: "Mutation",
-  definition(t) {
-    t.crud.createOneBallot();
-    t.crud.updateOneBallot();
-    t.crud.deleteOneBallot();
-    t.field("addBallotRun", {
-      type: "BallotRun",
-      args: {
-        ballotId: nonNull(stringArg()),
-        teamId: nonNull(stringArg()),
-      },
-      resolve: resolvers.ballots.addBallotRun,
-    });
-
-    t.field("removeBallotRun", {
-      type: "Response",
-      args: {
-        ballotRunId: nonNull(stringArg()),
-      },
-      resolve: resolvers.ballots.removeBallotRun,
-    });
-
-    t.field("startBallotRun", {
-      type: "BallotRun",
-      args: {
-        ballotRunId: nonNull(stringArg()),
-      },
-      resolve: resolvers.ballots.startBallotRun,
-    });
-
-    t.field("endBallotRun", {
-      type: "BallotRun",
-      args: {
-        ballotRunId: nonNull(stringArg()),
-      },
-      resolve: resolvers.ballots.endBallotRun,
-    });
-  },
-});
+// TODO Step 7: queryField/mutationField for:
+//   - getBallotRuns, getBallotResults
+//   - addBallotRun, removeBallotRun, startBallotRun, endBallotRun
+//   - locale replacement wrapper around CRUD ballot/ballots
+// TODO Step 8: CRUD ops — ballot, ballots (ordering + filtering + locale wrap),
+//   createOneBallot, updateOneBallot, deleteOneBallot

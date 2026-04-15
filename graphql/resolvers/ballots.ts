@@ -9,10 +9,8 @@ import {
 } from "@prisma/client";
 import { randomBytes } from "crypto";
 import { setCookie, getCookie } from "../../util/cookies";
-import {
-  FieldResolver,
-  RootValue,
-} from "nexus/dist/typegenTypeHelpers";
+import { FieldResolver } from "../context";
+type RootValue<_T extends string> = any;
 import { logActivity } from "./activities";
 
 export const canVote: FieldResolver<"Ballot", "canVote"> = async (

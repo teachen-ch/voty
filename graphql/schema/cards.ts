@@ -1,52 +1,42 @@
-import resolvers from "../resolvers";
-import { extendType, objectType, stringArg, nonNull } from "nexus";
+import { builder } from "../builder";
 
-export const Card = objectType({
-  name: "Card",
-  definition(t) {
-    t.string("id");
-    t.string("title");
-    t.string("description");
-    t.string("duration");
-    t.string("age");
-    t.string("keywords");
-    t.string("type");
-    t.string("icon");
-    t.string("url");
-    t.string("source");
-    t.string("content");
-    t.boolean("discussion");
-    t.string("show");
-  },
+export const Card = builder.objectRef<{
+  id?: string;
+  title?: string;
+  description?: string;
+  duration?: string;
+  age?: string;
+  keywords?: string;
+  type?: string;
+  icon?: string;
+  url?: string;
+  source?: string;
+  content?: string;
+  discussion?: boolean;
+  show?: string;
+}>("Card").implement({
+  fields: (t) => ({
+    id: t.string({ nullable: true, resolve: (p) => p.id ?? null }),
+    title: t.string({ nullable: true, resolve: (p) => p.title ?? null }),
+    description: t.string({
+      nullable: true,
+      resolve: (p) => p.description ?? null,
+    }),
+    duration: t.string({ nullable: true, resolve: (p) => p.duration ?? null }),
+    age: t.string({ nullable: true, resolve: (p) => p.age ?? null }),
+    keywords: t.string({ nullable: true, resolve: (p) => p.keywords ?? null }),
+    type: t.string({ nullable: true, resolve: (p) => p.type ?? null }),
+    icon: t.string({ nullable: true, resolve: (p) => p.icon ?? null }),
+    url: t.string({ nullable: true, resolve: (p) => p.url ?? null }),
+    source: t.string({ nullable: true, resolve: (p) => p.source ?? null }),
+    content: t.string({ nullable: true, resolve: (p) => p.content ?? null }),
+    discussion: t.boolean({
+      nullable: true,
+      resolve: (p) => p.discussion ?? null,
+    }),
+    show: t.string({ nullable: true, resolve: (p) => p.show ?? null }),
+  }),
 });
 
-export const CardsQuery = extendType({
-  type: "Query",
-  definition(t) {
-    t.list.field("cards", {
-      type: "Card",
-      args: {
-        keywords: stringArg(),
-        age: stringArg(),
-        type: stringArg(),
-      },
-      resolve: (_root, args, ctx, info) =>
-        resolvers.cards.cards(_root, args, ctx, info),
-    });
-  },
-});
-
-export const CardsMutations = extendType({
-  type: "Mutation",
-  definition(t) {
-    t.field("setCards", {
-      type: "Team",
-      args: {
-        teamId: nonNull(stringArg()),
-        cards: nonNull(stringArg()),
-      },
-      resolve: (_root, args, ctx, info) =>
-        resolvers.cards.setCards(_root, args, ctx, info),
-    });
-  },
-});
+// TODO Step 7: queryField/mutationField for:
+//   - cards (keywords/age/type args), setCards (teamId/cards args)

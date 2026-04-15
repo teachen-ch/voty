@@ -1,8 +1,8 @@
-import { schema } from "../../graphql/makeschema";
-import { ApolloServer } from "apollo-server-micro";
+import { createYoga } from "graphql-yoga";
+import { schema } from "../../graphql/schema";
+import prisma from "../../util/prisma";
 import resolvers from "../../graphql/resolvers";
-import { PrismaClient } from "@prisma/client";
-import { NextApiRequest, NextApiResponse } from "next";
+import type { NextApiRequest, NextApiResponse } from "next";
 
 export const config = {
   api: {
@@ -10,20 +10,17 @@ export const config = {
   },
 };
 
-const prisma = new PrismaClient(/* { log: ["query"] } */);
-
-const server = new ApolloServer({
+export default createYoga<{
+  req: NextApiRequest;
+  res: NextApiResponse;
+}>({
   schema,
-  context: ({ req, res }: { req: NextApiRequest; res: NextApiResponse }) => {
-    return {
-      user: resolvers.users.getSessionUser(req),
-      db: prisma,
-      req: req,
-      res: res,
-    };
-  },
-});
-
-export default server.createHandler({
-  path: "/api/graphql",
+  graphqlEndpoint: "/api/graphql",
+  graphiql: process.env.NODE_ENV !== "production",
+  context: ({ req, res }) => ({
+    db: prisma,
+    user: resolvers.users.getSessionUser(req),
+    req,
+    res,
+  }),
 });

@@ -1,5 +1,21 @@
-import { FieldResolver } from "nexus";
-import { Card } from "graphql/types";
+import { FieldResolver } from "../context";
+// Card shape — was generated from SDL, now a local interface matching the
+// Nexus Card objectType. Keep in sync with graphql/schema/cards.ts.
+export type Card = {
+  id?: string | null;
+  title?: string | null;
+  description?: string | null;
+  duration?: string | null;
+  age?: string | null;
+  keywords?: string | null;
+  type?: string | null;
+  icon?: string | null;
+  url?: string | null;
+  source?: string | null;
+  content?: string | null;
+  discussion?: boolean | null;
+  show?: string | null;
+};
 import * as cardsData from "content/";
 import { Role } from "@prisma/client";
 import uniq from "lodash/uniq";

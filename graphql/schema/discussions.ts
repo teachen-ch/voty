@@ -1,70 +1,46 @@
-import resolvers from "../resolvers";
-import { extendType, objectType, nonNull, stringArg } from "nexus";
+import { builder } from "../builder";
 
-export const Discussion = objectType({
-  name: "Discussion",
-  definition(t) {
-    t.nonNull.model.id();
-    t.nonNull.model.title();
-    t.nonNull.model.text();
-    t.model.card();
-    t.model.ballotId();
-    t.nonNull.model.user();
-    t.list.field("children", {
-      type: "Discussion",
-      resolve: async (_root, args, ctx, info) =>
-        await resolvers.discussions.getTeamDiscussions(
-          _root,
-          { card: _root.card, ballotId: _root.ballotId },
-          ctx,
-          info
-        ),
-    });
-    t.model.reactions();
-    t.model.attachments();
-    t.model.createdAt();
-    t.model.updatedAt();
-  },
+export const DiscussionType = builder.prismaObject("Discussion", {
+  fields: (t) => ({
+    id: t.exposeID("id"),
+    title: t.exposeString("title"),
+    text: t.exposeString("text"),
+    card: t.exposeString("card", { nullable: true }),
+    ballotId: t.exposeString("ballotId", { nullable: true }),
+    user: t.relation("user"),
+    reactions: t.relation("reactions"),
+    attachments: t.relation("attachments"),
+    createdAt: t.expose("createdAt", { type: "DateTime" }),
+    updatedAt: t.expose("updatedAt", { type: "DateTime" }),
+  }),
 });
 
-export const Reaction = objectType({
-  name: "Reaction",
-  definition(t) {
-    t.model.id();
-    t.model.emoij();
-    t.model.user();
-    t.model.discussion();
-  },
+// Self-referential field — attached after declaration. Uses the resolver to
+// return nested discussion chains filtered by card/ballotId.
+builder.objectFields(DiscussionType, (t) => ({
+  children: t.field({
+    type: [DiscussionType],
+    nullable: true,
+    resolve: async (root: any, _args, ctx, info) => {
+      const { discussions } = await import("../resolvers");
+      return discussions.getTeamDiscussions(
+        root,
+        { card: root.card, ballotId: root.ballotId },
+        ctx,
+        info
+      ) as any;
+    },
+  }),
+}));
+
+export const ReactionType = builder.prismaObject("Reaction", {
+  fields: (t) => ({
+    id: t.exposeID("id", { nullable: true }),
+    emoij: t.exposeString("emoij", { nullable: true }),
+    user: t.relation("user"),
+    discussion: t.relation("discussion", { nullable: true }),
+  }),
 });
 
-export const DiscussionsQueries = extendType({
-  type: "Query",
-  definition(t) {
-    t.list.field("getTeamDiscussions", {
-      type: "Discussion",
-      args: {
-        card: stringArg(),
-        ballotId: stringArg(),
-        teamId: stringArg(),
-      },
-      resolve: resolvers.discussions.getTeamDiscussions,
-    });
-  },
-});
-
-export const DiscussionsMutations = extendType({
-  type: "Mutation",
-  definition(t) {
-    t.field("postDiscussion", {
-      type: "Discussion",
-      args: {
-        card: stringArg(),
-        ballotId: stringArg(),
-        teamId: nonNull(stringArg()),
-        title: nonNull(stringArg()),
-        text: nonNull(stringArg()),
-      },
-      resolve: resolvers.discussions.postDiscussion,
-    });
-  },
-});
+// TODO Step 7: queryField/mutationField for:
+//   - getTeamDiscussions, postDiscussion

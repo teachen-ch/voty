@@ -1,5 +1,5 @@
-import { FieldResolver } from "nexus";
-import { Swissvote } from "graphql/types";
+import { FieldResolver } from "../context";
+import type { Swissvote } from "@prisma/client";
 
 export const swissvotes: FieldResolver<"Query", "swissvotes"> = async (
   _root,
