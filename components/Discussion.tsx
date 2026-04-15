@@ -143,9 +143,7 @@ const PostDiscussion: React.FC<{
     update: (cache, result) => {
       cache.modify({
         fields: {
-          getTeamDiscussions(
-            existingDiscussions: typeof DiscussionFields[] = []
-          ) {
+          getTeamDiscussions(existingDiscussions: any = []) {
             const newDiscussion = cache.writeFragment({
               data: result.data?.postDiscussion,
               fragment: fragments.DiscussionFields,

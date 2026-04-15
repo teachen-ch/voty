@@ -172,11 +172,12 @@ These are independently large. The codebase will be in a maintainable state afte
 
 - ✅ Phase 0 — baseline tag
 - ✅ Phase 1 — Prisma 3 + nexus rename, native arm64 dev loop
-- 🟨 Phase 2 — **skeleton landed** (steps 1–6, 9, 10 done; 7, 8, 11, 12, 13 outstanding — see "session 2" below)
-- ⏳ Phase 3 — Apollo Server → Yoga (merged into Phase 2)
+- ✅ Phase 2 — **complete end-to-end** (all 13 steps done — see "session 3" below)
+- ✅ Phase 3 — Apollo Server → Yoga (merged into Phase 2)
+- ✅ Apollo Client 3.3 → 3.14 + codegen `typescript-react-apollo` unpinned to v4 (session 4)
 - ⏳ Phase 4 — Next 14 + React 18
 - ⏳ Phase 5 — cleanup
-- 🔧 Deferred — fix 5 failing Cypress specs; theme-ui / MDX / App Router replacement
+- ✅ Cypress: **13/14** (only remaining failure is `student.spec.ts` selecting year "2004" — test-aging, not migration-related: dropdown range is `currentYear-20` ... `currentYear-8`, so 2004 is out of range from 2026 onward)
 
 ## 2026-04-15 session findings (why Phase 2 was re-planned as big-bang)
 
@@ -329,3 +330,54 @@ Target: diff contains only field ordering / description / default-value cosmetic
 - **`computedInputs` equivalent in Pothos**: `createOneTeam` generated `invite`/`code` server-side in the Nexus plugin. In Pothos there's no direct equivalent — it must happen in the resolver wrapper before calling `prisma.team.create`.
 - **Relay-style connections vs simple lists**: nexus-plugin-prisma's findMany returned lists. Pothos's `prismaConnection` returns Relay connections by default. Use `builder.prismaObject`'s `findMany` mode (returns a plain list) to match the old SDL — otherwise every list query breaks its client shape.
 - **Input type naming**: Pothos-utils generates input types with slightly different naming than Nexus (e.g. `UserOrderByWithRelationInput` vs `UserOrderByInput`). Explicitly name inputs via the `name:` option on each `builder.prismaOrderBy/prismaWhere` call to match the old SDL.
+
+## 2026-04-15 session 3 — Phase 2 finished
+
+Closed out steps 7, 8, 11, 12, 13. Single commit `85317d6` on `next-upgrade`.
+
+### What was done
+
+- **Step 7 — custom queries/mutations wired**: every non-CRUD op from the deleted Nexus schema files ported into the existing scaffold under `graphql/schema/*`. Pattern: `builder.queryField` / `builder.mutationField` calling the existing `graphql/resolvers/*` functions (lazy `await import("../resolvers")` for files that pull MDX content).
+- **Step 8 — CRUD ops + inputs**: new file `graphql/schema/crud.ts` (~430 lines). Hand-crafted input types matching only the fields client `gql` ops actually reference — not the full Nexus surface. Covers `user`/`users`, `school`/`schools`, `team`/`teams` (with `computedInputs` invite/code injected in the create resolver), `ballot`/`ballots` (locale wrapper), `activities`, `attachments`, `works`. Forward refs avoided by using a flat `IdRelationFilter` shared shape (`{ id: StringFilter }`) instead of self-referential where inputs.
+- **Builder default nullability**: `defaultFieldNullability: false` set on `SchemaBuilder` (option works at runtime but missing from Pothos v4 type defs — `@ts-expect-error` annotated). Without this, every `t.expose`/`t.relation` defaults to nullable and 200+ frontend errors appear.
+- **printSchema buffering fix**: `process.stdout.write` was silently dropping output when `node` had stdout redirected. Switched to `fs.writeFileSync("graphql/api.graphql", ...)` directly. `yarn schema:print` no longer needs `>` redirection.
+- **Codegen modernisation (incidental but required)**: `@graphql-codegen/cli` 1.x doesn't run on Node 20 (`yargs.Parser.looksLikeNumber is not a function`). Upgraded to v5; bumped sibling plugins to v4 (`typescript`, `typescript-operations`, `fragment-matcher`, `typescript-graphql-files-modules` to v3). **Pinned `typescript-react-apollo` to 3.3.7** — v4.x emits SuspenseQuery hooks that need Apollo Client 3.8+; we're still on 3.3 so they don't compile. Removed the stale `yargs-parser: ^13.1.2` resolution and added `yargs-parser: ^21.1.1`.
+- **Codegen scalar mapping**: `scalars: { DateTime: any, Json: any }` in `codegen.yml`. Anything stricter (`DateTime: Date` or `string`) breaks date util signatures (`number`-typed) and stale dayjs call sites.
+- **Misc compile fixes** (long-standing, not migration-caused): `@types/jsonwebtoken` installed, `jwt.sign` `expiresIn` cast to `any`, `js-yaml.safeLoad` → `load`, three `catch (err)` annotated `: any`, `String(err)` for logger calls.
+
+### Current state
+
+- `yarn next build` — green.
+- `yarn check:ts` — 0 errors.
+- `yarn schema:print` — produces 624-line SDL (vs 8772 baseline; the gap is auto-generated Nexus CRUD inputs the client never used).
+- `yarn graphql` — produces `graphql/types.ts` + `graphql/modules.d.ts` cleanly.
+- Dev server boots; `/api/graphql` accepts queries; `graphql-shield` enforces auth as before.
+- **Cypress: 8/14 passing** vs Phase 1 baseline 9/14. One regression outstanding — to investigate alongside the 5 specs that already failed at Phase 1.
+
+### Known caveats / followups
+
+- **Pothos `defaultFieldNullability` typing**: the runtime accepts the option but Pothos v4's `SchemaBuilderOptions` type omits it. Either bump `@pothos/core` to a version that includes it, or accept the `@ts-expect-error`. Re-check on every Pothos upgrade — if the option is removed, all model fields silently flip to nullable.
+- **Apollo Client upgrade is a prerequisite for codegen v4 of `typescript-react-apollo`**: pinning at 3.3.7 is a deliberate ceiling. When upgrading Apollo to ≥ 3.8, unpin, re-run `yarn graphql`, expect `useXSuspenseQuery` hooks to start being emitted.
+- **`graphql/schema/crud.ts` is intentionally minimal**: input types reflect *current* client `gql` usage, not the full Prisma surface. Adding a new client query that uses, say, `User.activity` as a relation filter or a new `OrderBy` field will require widening the corresponding input. Pattern is mechanical — see how `BallotWhereInput.ballotRuns` was added.
+- **`computedInputs` for `createOneTeam`**: invite/code are injected in the resolver wrapper inside `crud.ts`. If `prisma.team.create` is ever called directly server-side (not through GraphQL), those defaults will be missing — currently no such call exists.
+- **Yoga request shape**: `getSessionUser` still reads `req.headers["x-access-token"]` (NextApiRequest-style). The Yoga handler in `pages/api/graphql.ts` casts the Fetch `Request` to that shape — works in practice but is type-fragile. If headers ever read as `undefined` post-upgrade, switch to `req.headers.get?.("x-access-token") ?? req.headers["x-access-token"]`.
+- **Cypress regression**: 8/14 vs 9/14. Quick triage path: run each previously-passing spec individually, diff the failure against `pre-phase-2` baseline videos. Most likely culprit is an SDL field that Pothos rendered slightly differently (nullability, scalar shape) and the test asserts on it.
+
+### Phase 4 prerequisites (to consider before starting Next 14)
+
+- ✅ Apollo Client 3.3 → 3.14.1 landed in session 4 — codegen `typescript-react-apollo` unpinned from 3.3.7 to 4.4.1.
+- Recoil 0.3 already pings React 18 incompat warnings under `defaultFieldNullability: false`'s slightly different render path — schedule the Jotai swap in the same PR as React 18.
+
+## 2026-04-15 session 4 — Apollo Client upgrade + Cypress regression triage
+
+- **Apollo Client 3.3.4 → 3.14.1**. Unpinned `@graphql-codegen/typescript-react-apollo` to v4.4.1 (the ceiling noted in session 3 is gone now that AC ≥ 3.8). Regen'd codegen cleanly.
+- **TS fallout (7 errors)**: 3.14 tightened `useQuery`'s return type to `InteropQueryResult<TData, TVars>` and `cache.modify`'s `Modifier<T>` now accepts `Reference | T`. Fixes:
+  - `util/hooks.ts` — `usePolling` typed against `{ startPolling, stopPolling }` shape instead of `QueryResult`.
+  - `components/Progress.tsx` — `Reload` typed against `Pick<QueryResult, ...>` subset.
+  - `components/{Schools,Teams,Ballots,Discussion}.tsx` — `cache.modify` field modifier params widened to `any` (fragment-array annotations no longer satisfy `Modifier<T>`).
+- **Cypress regression root cause found**: Yoga's default `maskedErrors: true` wraps resolver `throw Error("Error.UserPassword")` (and similar domain error codes) as `"Unexpected error."`, breaking every client-side `tr(error.message)` lookup. Fix: `maskedErrors: false` on `createYoga` in `pages/api/graphql.ts`. This also resolves the session-3 cypress regression (8/14 → 13/14).
+- **Cypress 13/14 passing**. Remaining failure is `student.spec.ts "asks student to fill in profile"` using `cy.select("2004")` against a dropdown whose range shifts with `new Date().getFullYear()`. Unrelated to migration — pre-existing test rot.
+
+### Followups
+- The `cache.modify` `any` casts are a type-safety regression. Proper fix is a typed helper that accepts `(existing: Reference | T | undefined) => T` and handles the `Reference` case. Not a blocker.
+- Consider replacing `throw Error("Error.X")` server-side with `throw new GraphQLError("Error.X")`, then re-enable `maskedErrors` with a `maskError` that unwraps `GraphQLError`. Current approach exposes *all* errors — fine for our threat model but not best practice.

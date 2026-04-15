@@ -197,7 +197,12 @@ const StudentProgress: React.FC<{
     </Fragment>
   );
 };
-const Reload: React.FC<{ query: QueryResult }> = ({ query }) => {
+const Reload: React.FC<{
+  query: Pick<
+    QueryResult,
+    "networkStatus" | "refetch" | "loading"
+  >;
+}> = ({ query }) => {
   const reloading = query.networkStatus === NetworkStatus.refetch;
   return (
     <A

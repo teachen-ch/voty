@@ -387,7 +387,7 @@ export const SelectBallots: React.FC<{
         update: (cache, result) => {
           cache.modify({
             fields: {
-              getBallotRuns(existingRuns: BallotRunFieldsFragment[] = []) {
+              getBallotRuns(existingRuns: any = []) {
                 const newRun = cache.writeFragment({
                   data: result.data?.addBallotRun,
                   fragment: fragments.BallotRunFields,

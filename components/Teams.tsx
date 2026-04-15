@@ -221,7 +221,7 @@ export function CreateTeamForm({
     update: (cache, result) => {
       cache.modify({
         fields: {
-          teams(existingTeams: typeof TeamTeacherFields[] = []) {
+          teams(existingTeams: any = []) {
             const newTeamRef = cache.writeFragment({
               data: result.data?.createOneTeam,
               fragment: fragments.TeamTeacherFields,

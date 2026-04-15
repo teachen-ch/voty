@@ -236,7 +236,7 @@ export function CreateSchool({
     update: (cache, result) => {
       cache.modify({
         fields: {
-          schools(existingSchools: typeof SchoolsDocument[] = []) {
+          schools(existingSchools: any = []) {
             const newSchoolRef = cache.writeFragment({
               data: result.data?.createOneSchool,
               fragment: gql`

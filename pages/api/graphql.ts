@@ -17,6 +17,7 @@ export default createYoga<{
   schema,
   graphqlEndpoint: "/api/graphql",
   graphiql: process.env.NODE_ENV !== "production",
+  maskedErrors: false,
   context: ({ req, res }) => ({
     db: prisma,
     user: resolvers.users.getSessionUser(req),
