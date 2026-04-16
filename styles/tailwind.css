@@ -1,0 +1,114 @@
+/*
+ * Tailwind 4 entrypoint — Phase 6 Track B0 (MIGRATION_PLAN.md).
+ *
+ * Both theme-ui/rebass and Tailwind coexist during Track B. To avoid visual
+ * regressions, we intentionally DO NOT import `tailwindcss/preflight.css`
+ * (Tailwind's base reset) — theme-ui and rebass currently own global base
+ * styling. Preflight will be added in Track B9 after theme-ui/rebass removal.
+ *
+ * Design tokens mirror styles/theme.ts (voty) and are surfaced as CSS custom
+ * properties + Tailwind utility classes. Keep in sync with styles/theme.ts
+ * and styles/aula_theme.ts until theme-ui is removed.
+ */
+
+@layer theme, base, components, utilities;
+
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/utilities.css" layer(utilities);
+
+/* `static` ensures these variables are always emitted even if no utility
+ * references them yet (during coexistence they can be used via `var(--...)`
+ * from existing theme-ui / plain CSS). Drop `static` in B9 if desired. */
+@theme static {
+  /* --- breakpoints (theme.ts: ["400px","600px","1200px","2000px"]) --- */
+  --breakpoint-sm: 400px;
+  --breakpoint-md: 600px;
+  --breakpoint-lg: 1200px;
+  --breakpoint-xl: 2000px;
+
+  /* --- colors (theme.ts .colors) --- */
+  --color-primary: #206dbb;
+  --color-blue2: #206dbb;
+  --color-blue3: #0c66c9;
+  --color-danger: #d90000;
+  --color-accent: #d90000;
+  --color-highlight: #dee4e7;
+  --color-textarea: #ffffff;
+  --color-muted: #ffffff;
+  --color-lightgray: #dee4e7;
+  --color-darkgray: rgba(0, 0, 0, 0.2);
+  --color-gray: #5a5a5a;
+  --color-success: #258f17;
+  --color-green: #258f17;
+
+  /* theme-ui "modes: light" (default) */
+  --color-bgcolor: #ffffff;
+  --color-topbar: #505050;
+  --color-panel: #e1e6ea;
+  --color-trcolor: #5a5a5a;
+
+  /* aula theme overrides — aula_theme.ts clones voty theme and changes these.
+   * Surfaced here so future B-phase migration of aula pages has token access.
+   * Applied via a `.theme-aula` root class (to be wired in B1 when we swap
+   * components/Theme.tsx). */
+  --color-aula-primary: #1a237e;
+  --color-aula-blue2: #1a237e;
+  --color-aula-success: rgb(0, 200, 83);
+  --color-aula-panel: #f0f0f0;
+
+  /* --- font families (theme.ts fonts) --- */
+  --font-body:
+    "Source Sans Pro", -apple-system, "Helvetica Neue", BlinkMacSystemFont,
+    Roboto, sans-serif;
+  --font-heading:
+    "Source Sans Pro", -apple-system, "Helvetica Neue", BlinkMacSystemFont,
+    Roboto, sans-serif;
+  --font-mono: monaco, "Consolas", "Lucida Console", monospace;
+  --font-aula: Montserrat, Arial, sans-serif;
+
+  /* --- font sizes (theme.ts fontSizes: [12,16,20,22,26,34,50,50,50])
+   * Keep index-based naming so theme-ui `fontSize={3}` maps 1:1 to `text-3`. */
+  --text-0: 12px;
+  --text-1: 16px;
+  --text-2: 20px;
+  --text-3: 22px;
+  --text-4: 26px;
+  --text-5: 34px;
+  --text-6: 50px;
+  --text-7: 50px;
+  --text-8: 50px;
+
+  /* --- spacing (theme.ts space: [0, 4, 8, 16, 32, 64, 128, 256])
+   * Index-based to match theme-ui `p={3}` → `p-3` (both 16px). */
+  --spacing-0: 0px;
+  --spacing-1: 4px;
+  --spacing-2: 8px;
+  --spacing-3: 16px;
+  --spacing-4: 32px;
+  --spacing-5: 64px;
+  --spacing-6: 128px;
+  --spacing-7: 256px;
+
+  /* --- border radii (theme.ts radii) --- */
+  --radius-default: 0px;
+  --radius-square: 0px;
+  --radius-card: 5px;
+  --radius-circle: 1000px;
+
+  /* --- shadows --- */
+  --shadow-card: 0 0 4px rgba(0, 0, 0, 0.125);
+
+  /* --- font weights (theme.ts fontWeights) --- */
+  --font-weight-body: 400;
+  --font-weight-semi: 600;
+  --font-weight-heading: 600;
+  --font-weight-bold: 600;
+  --font-weight-black: 900;
+
+  /* --- line heights --- */
+  --leading-body: 1.45;
+  --leading-heading: 1.15;
+
+  /* --- sizes (theme.ts sizes.avatar) --- */
+  --size-avatar: 48px;
+}

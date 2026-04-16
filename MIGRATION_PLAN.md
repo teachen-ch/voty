@@ -17,7 +17,7 @@ Chosen direction: **Pothos + GraphQL Yoga on the existing schema/resolver split,
 | 4     | Next 12 → 14, React 17 → 18                                       | ✅                 |
 | 5     | Cleanup, docs, `api.graphql` regen                                | ✅                 |
 | 6A    | MDX 1 → 3                                                         | ✅ (cypress re-run deferred) |
-| 6B    | theme-ui/rebass → Tailwind 4                                      | planned            |
+| 6B    | theme-ui/rebass → Tailwind 4                                      | in progress (B0 done) |
 
 **Cypress: 14/14** at end of Phase 5. Phase 6A passed manual smoke; Cypress re-run deferred to next session.
 
@@ -122,6 +122,24 @@ Landed in one session. `yarn next build` + `yarn check:ts` green; manual smoke o
 
 ### Track B — theme-ui 0.3 + rebass → Tailwind 4
 
+**B0 status (2026-04-16): DONE.** Infra landed; both systems coexist; build green, no visual change.
+
+**What was done in B0**
+
+- `yarn add -D tailwindcss@^4 @tailwindcss/postcss@^4` (→ 4.2.2).
+- New `postcss.config.mjs` with `@tailwindcss/postcss` plugin (Next 14 auto-discovers).
+- New `styles/tailwind.css`: imports `tailwindcss/theme.css` + `tailwindcss/utilities.css` layers **without** `tailwindcss/preflight.css` — theme-ui/rebass still own global base styles. A `@theme static { … }` block ports tokens from `styles/theme.ts` (breakpoints, colors, fonts, text sizes, spacing, radii, shadows, font-weights, leading, sizes) plus aula overrides from `styles/aula_theme.ts` as `--color-aula-*` / `--font-aula`. `static` keyword forces emission even before any utility references a token (so `var(--color-primary)` works from existing CSS during coexistence).
+- `pages/_app.tsx` imports `styles/tailwind.css` **before** `voty.css` / `aula.css` so existing stylesheets still win in specificity.
+- Incidental: `@types/lodash@^4.18.1` in `package.json` was unsatisfiable (latest published is `4.17.24`, lockfile resolved to that); dropped to `^4.17.1` to unblock `yarn install`.
+
+**Gate results:** `npx next build` green; `npx tsc --noEmit` clean; generated CSS bundle: ~8 kB (baseline was 0, shared-chunks total 2 kB → 3.4 kB). No components migrated yet. Rebass/theme-ui untouched. No visual change.
+
+**Notes for B1**
+
+- Token naming is index-based to match theme-ui indices: `p={3}` → `p-3` (both 16 px); `fontSize={2}` → `text-2` (20 px); etc. This makes sx → class migration mechanical.
+- Aula theme switching is deferred to B1/B2: current plan is to swap `components/Theme.tsx` to add/remove a `.theme-aula` root class and override the tokens under that selector (replace the `ThemeProvider` runtime).
+- Cypress re-assert (the Phase 5 14/14 gate) is still outstanding — skipped in this session because the local cypress binary fetch is blocked.
+
 **Why Tailwind 4:** modern, maintained, small runtime, good DX. Alternatives considered: theme-ui 0.16 (still semi-maintained but rebass is dead and replacing rebass is most of the work anyway), CSS Modules + vanilla extract (more boilerplate).
 
 **Target deps:** `tailwindcss@^4`, `@tailwindcss/postcss`, remove `theme-ui`, `@theme-ui/*`, `rebass`, `@rebass/forms`, `@types/theme-ui`, `@types/rebass`, `@types/rebass__forms`. Keep Formik + Yup.
@@ -139,7 +157,7 @@ Landed in one session. `yarn next build` + `yarn check:ts` green; manual smoke o
 
 This is **not** feasible in one sitting. Propose splitting into independently-landable PRs:
 
-1. **B0 — Infra + theme tokens (0.5–1 day):** install Tailwind 4, wire into `pages/_app.tsx` via `globals.css`, port theme tokens from `components/Theme.tsx` to `tailwind.config.ts`. No components migrated yet. Both systems coexist; theme-ui still active. Gate: `yarn next build` green, no visual change.
+1. **B0 — Infra + theme tokens (0.5–1 day):** ✅ done (2026-04-16). Installed `tailwindcss@4` + `@tailwindcss/postcss`, added `postcss.config.mjs`, created `styles/tailwind.css` with a `@theme static` block mirroring `styles/theme.ts` (+ aula deltas), imported before `voty.css`/`aula.css` in `_app.tsx`. No preflight. Build green, no visual change. See the B0 status block above for specifics.
 2. **B1 — Shared primitives (1–2 days):** create thin replacements for `Box`, `Flex`, `Text`, `Heading`, `Button`, `Card`, `Link` in `components/ui/`. Each is ~10 lines of Tailwind-classed `div`/`span` with `cva` for variants. Don't swap usage yet; just land the primitives.
 3. **B2–Bn — Component migration, one area at a time:** swap imports per area, delete theme-ui/rebass usage in that area, verify in browser. Suggested order (low-risk first):
    - B2: static content + layout (`Header`, `Footer`, `Page`, `Nav`).

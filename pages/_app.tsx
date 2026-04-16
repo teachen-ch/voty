@@ -1,3 +1,4 @@
+import "../styles/tailwind.css";
 import "../styles/voty.css";
 import "../styles/aula.css";
 
