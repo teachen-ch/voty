@@ -3,6 +3,7 @@ services:
   sut:
     image: "cypress/included:13.2.0"
     container_name: "app"
+    user: "0:0"
     env_file: ".env"
     environment:
       - DATABASE_URL=postgres://voty:voty@postgres:5432/voty
@@ -21,7 +22,10 @@ services:
     expose:
       - "3000"
     working_dir: "/usr/src/app"
-    entrypoint: ["yarn", "run", "ci:test"]
+    entrypoint:
+      - "sh"
+      - "-c"
+      - "chown -R 0:0 /usr/src/app && yarn run ci:test"
 
   postgres:
     image: "postgres:13-alpine"

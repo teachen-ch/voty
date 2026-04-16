@@ -1,5 +1,9 @@
 // eslint-disable-next-line
-const withMDX = require("@next/mdx")(/* { extension: /\.(md|mdx)$/,} */);
+const withMDX = require("@next/mdx")({
+  options: {
+    providerImportSource: "@mdx-js/react",
+  },
+});
 // eslint-disable-next-line
 module.exports = withMDX({
   pageExtensions: ["js", "jsx", "ts", "tsx", "md", "mdx"],
@@ -15,6 +19,13 @@ module.exports = withMDX({
     dangerouslyAllowSVG: true, // not a security risk, these are not user-generated
     deviceSizes: [400, 600, 1200, 2000],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
+  },
+  webpack(config) {
+    config.module.rules.push({
+      resourceQuery: /raw/,
+      type: "asset/source",
+    });
+    return config;
   },
   redirects() {
     return [
