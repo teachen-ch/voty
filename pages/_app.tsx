@@ -50,10 +50,13 @@ const MDXWrapper: React.FC<React.PropsWithChildren<unknown>> = ({ children }) =>
   if (children && Array.isArray(children)) {
     let heading = "";
     const headings = children.filter((el: React.ReactNode) => {
-      if (el && typeof el === "object" && "props" in el) {
-        if (!heading) heading = String(el.props.children);
-        return el.props.mdxType === "h1";
-      } else return false;
+      if (el && typeof el === "object" && "type" in el && "props" in el) {
+        if (el.type === "h1") {
+          if (!heading) heading = String((el as React.ReactElement).props.children);
+          return true;
+        }
+      }
+      return false;
     });
     if (headings.length > 0) {
       const childrenCopy = children.slice();

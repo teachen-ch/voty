@@ -1,7 +1,8 @@
 import { MDXProvider } from "@mdx-js/react";
 import { Heading, Link, Text } from "rebass";
 import Glossar from "pages/content/glossar.mdx";
-import React, { ReactElement, ReactNode, useState } from "react";
+import glossarSource from "pages/content/glossar.mdx?raw";
+import React, { ReactNode, useState } from "react";
 
 const glossary = parseGlossary();
 
@@ -154,20 +155,16 @@ function getGlossary(term: string) {
 function parseGlossary() {
   const glossary: Record<string, string> = {};
   let term = "";
-  const elements = Glossar({}).props.children as ReactElement[];
-  elements.map((el: ReactElement) => {
-    const { mdxType: type, children: text } = el.props;
-    if (type === "h2") {
-      term = text as string;
-      if (text) {
-        glossary[term] = "";
-      }
+  for (const line of glossarSource.split("\n")) {
+    const match = line.match(/^##\s+(.*)$/);
+    if (match) {
+      term = match[1].trim();
+      glossary[term] = "";
+    } else if (term && line.trim()) {
+      glossary[term] = glossary[term]
+        ? `${glossary[term]} ${line.trim()}`
+        : line.trim();
     }
-    if (type === "p") {
-      if (term) {
-        glossary[term] = text as string;
-      }
-    }
-  });
+  }
   return glossary;
 }
