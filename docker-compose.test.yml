@@ -1,7 +1,7 @@
 # docker-compose-test.yml
 services:
   sut:
-    image: "cypress/included:13.2.0"
+    image: "cypress/included:15.14.0"
     container_name: "app"
     user: "0:0"
     env_file: ".env"
