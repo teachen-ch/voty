@@ -28,10 +28,6 @@ Who decides at your school? Are students invited to propose initiatives and disc
 
 voty.ch is developed by the association Verein «voty.ch» (https://voty.ch/), a not-for-profit association founded in 2020. The voty.ch project was initially suppored by the PrototypeFund.ch in cooperation with [Mercator Switzerland](https://www.stiftung-mercator.ch) and [Open Data](https://opendata.ch).
 
-## Problems using Prisma?
-
-You will need to pin your node version to 16.16, as later versions change the JSON format and we currently cannot upgrade to the latest prisma versions.
-
 ## How to contribute
 
 We are currently in an early stage of the project. If you know teachers (e.g. history), who have experience in teaching democracy at school, then please [get in touch](https://voty.ch/kontakt). If you want to help out with content, we are very much open to your contributions. If you want to dive into the code, have a look at [our installation instructions](/docs/installation.md) and at our [tech stack](/docs/stack.md).
