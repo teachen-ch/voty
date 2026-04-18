@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { Box, Flex, Text } from "rebass";
+import { Box, Flex, Text } from "components/ui";
 import isEqual from "lodash/isEqual";
 import cloneDeep from "lodash/cloneDeep";
 import random from "lodash/random";
@@ -89,7 +89,6 @@ const Puzzle: React.FC<React.PropsWithChildren<{ board: Board; solutions: Word[]
   function isHighlighted(p: Point): boolean {
     if (isEqual(p, start)) return true;
     return hoverPixels ? hoverPixels[p.y][p.x] : false;
-    // return start && hover ? inLine(p, start, hover) : false;
   }
 
   function fillLine(from: Point, to: Point, pixels?: Pixels): Pixels {
@@ -167,7 +166,7 @@ const Puzzle: React.FC<React.PropsWithChildren<{ board: Board; solutions: Word[]
   }
 
   return (
-    <Flex flexDirection="column">
+    <Flex className="flex-col">
       {board.map((row, y) => (
         <Flex key={y}>
           {row.map((letter, x) => (
@@ -219,13 +218,8 @@ const Letterbox: React.FC<React.PropsWithChildren<{ letter: string; state: State
   }
   return (
     <Flex
-      bg={bg}
-      color={color}
-      sx={{ border, boxSizing: "border-box" }}
-      width={40}
-      height={40}
-      justifyContent="center"
-      alignItems="center"
+      className="justify-center items-center"
+      style={{ background: bg, color, border, boxSizing: "border-box", width: 40, height: 40 }}
     >
       {letter}
     </Flex>
@@ -237,14 +231,14 @@ const Score: React.FC<React.PropsWithChildren<{ words: Word[]; last?: Word }>> =
   const solved = words.filter((word) => word.solved).length;
   if (total === solved) {
     return (
-      <Box py={2}>
-        <Text fontWeight="bold">Yay! Alle Wörter gefunden!</Text>
+      <Box className="py-2">
+        <Text className="font-semibold">Yay! Alle Wörter gefunden!</Text>
       </Box>
     );
   } else {
     return (
-      <Box width="100%" py={2}>
-        <Text fontWeight="bold" fontSize={1}>
+      <Box className="w-full py-2">
+        <Text className="font-semibold text-sm">
           Es fehlen noch {total - solved} Wörter:
           <br />
           {words
@@ -257,7 +251,6 @@ const Score: React.FC<React.PropsWithChildren<{ words: Word[]; last?: Word }>> =
   }
 };
 
-// ABCD\n EFGH \n…
 function parseBoard(letters: string): Board {
   return letters
     .trim()
@@ -265,7 +258,6 @@ function parseBoard(letters: string): Board {
     .map((row) => row.split(""));
 }
 
-// 1,2-4,11 9,1-9,9
 function parseSolution(solution: string, board: Board): Word[] {
   return solution
     .trim()
@@ -278,7 +270,6 @@ function parseSolution(solution: string, board: Board): Word[] {
     });
 }
 
-// 1,2 ==> { x: 0, y: 1}
 function parsePoint(point: string): Point {
   const strings = point.split(",");
   const x = parseInt(strings[0]) - 1;

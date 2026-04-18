@@ -1,6 +1,6 @@
 import Head from "next/head";
 import { Page } from "components/Page";
-import { Heading, Text } from "rebass";
+import { Heading, Text } from "components/ui";
 import { ReactElement } from "react";
 import { A } from "components/Breadcrumb";
 import { Info } from "components/Info";
@@ -16,26 +16,26 @@ export default function Datenschutz(): ReactElement {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Heading as="h2">{tr("Privacy.IntroTitle")}</Heading>
-      <Text fontWeight="semi" fontSize={[2, 2, 3]}>
+      <Text className="font-semibold text-base sm:text-lg">
         {tr("Privacy.Intro")}
       </Text>
 
       <Info type="success">{tr("Privacy.Note")}</Info>
 
       <FR>
-        <Info type="important" my={6}>
+        <Info type="important" className="my-24">
           Malheureusement, ces textes n&apos;ont pas encore été traduits en
           français. Peux-tu nous aider ?
         </Info>
       </FR>
       <IT>
-        <Info type="important" my={6}>
+        <Info type="important" className="my-24">
           Purtroppo questi testi non sono ancora stati tradotti in italiano.
           Potrebbe aiutarci?
         </Info>
       </IT>
 
-      <Text fontSize={[2, 2, 2]}>
+      <div className="text-base">
         <Heading as="h2">
           Was für personenbezogenene Daten wir speichern (ohne Konto)
         </Heading>
@@ -125,12 +125,12 @@ export default function Datenschutz(): ReactElement {
           sicherheitsrelevanter Notwendigkeiten aufbewahren müssen.
         </Text>
         <Heading as="h2">Fragen oder Kommentare?</Heading>
-        <Text mb={5}>
+        <Text className="mb-16">
           Haben diese Datenschutz-Erklärungen noch Fragen offen gelassen oder
           hast du einen Kommentar dazu? Dann <A href="/kontakt">kontaktiere</A>{" "}
           uns!
         </Text>
-      </Text>
+      </div>
     </Page>
   );
 }

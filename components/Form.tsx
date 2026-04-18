@@ -5,20 +5,20 @@ import {
   FormikFormProps,
   useFormikContext,
 } from "formik";
-const Form = FormikForm as unknown as React.FC<
+const Form = (FormikForm as unknown) as React.FC<
   React.PropsWithChildren<unknown>
 >;
-import { Text, Button, Box, BoxProps } from "rebass";
-import { Grid } from "theme-ui";
 import {
-  Input as RebassInput,
-  Label as RebassLabel,
-  Select as RebassSelect,
-  InputProps as RebassInputProps,
-  SelectProps as RebassSelectProps,
-  Radio as RebassRadio,
-  Textarea,
-} from "@rebass/forms";
+  Text,
+  Button,
+  Box,
+  Grid,
+  Label,
+  Input as UIInput,
+  Select as UISelect,
+  Radio as UIRadio,
+  Textarea as UITextarea,
+} from "components/ui";
 import * as yup from "yup";
 import React, { useMemo } from "react";
 import omit from "lodash/omit";
@@ -27,15 +27,16 @@ import { useTr } from "util/translate";
 
 export { Formik, Form, yup, Grid };
 
-export const Input: React.FC<React.PropsWithChildren<RebassInputProps & {
-  label: string;
-  area?: boolean;
-  setter?: (s: string) => void;
-}>> = ({ label, setter, area, ...props }) => {
+export const Input: React.FC<
+  React.PropsWithChildren<
+    React.InputHTMLAttributes<HTMLInputElement> & {
+      label: string;
+      area?: boolean;
+      setter?: (s: string) => void;
+    }
+  >
+> = ({ label, setter, area, ...props }) => {
   const [field, meta] = useField<string>(props as any);
-  const InputComponent = area ? Textarea : RebassInput;
-  // TODO: this is a really hacky way to get values out of the form again
-  // e.g. on login.tsx email field
   const onChange = setter
     ? (evt: React.ChangeEvent<any>) => {
         setter(evt.target.value);
@@ -45,23 +46,32 @@ export const Input: React.FC<React.PropsWithChildren<RebassInputProps & {
 
   return (
     <>
-      <RebassLabel
-        sx={{ alignSelf: "center" }}
+      <Label
+        className="self-center"
         key={label}
         htmlFor={props.id || props.name}
       >
         {label}:
-      </RebassLabel>
-      <InputComponent
-        key={"i" + label}
-        id={props.id || props.name}
-        /* @ts-ignore */
-        onChange={onChange}
-        /* @ts-ignore */
-        onBlur={field.onBlur}
-        value={field.value}
-        {...props}
-      />
+      </Label>
+      {area ? (
+        <UITextarea
+          key={"i" + label}
+          id={props.id || props.name}
+          onChange={onChange}
+          onBlur={field.onBlur}
+          value={field.value}
+          {...(props as any)}
+        />
+      ) : (
+        <UIInput
+          key={"i" + label}
+          id={props.id || props.name}
+          onChange={onChange}
+          onBlur={field.onBlur}
+          value={field.value}
+          {...props}
+        />
+      )}
       {meta.touched && meta.error ? (
         <>
           <span />
@@ -95,8 +105,11 @@ type QFormProps = FormikFormProps & {
   mutation: MutationFunction<any, any>;
 };
 
-export const QForm: React.FC<React.PropsWithChildren<QFormProps>> = ({ fields, mutation, ...props }) => {
-  // default onSubmit = execute mutation handler
+export const QForm: React.FC<React.PropsWithChildren<QFormProps>> = ({
+  fields,
+  mutation,
+  ...props
+}) => {
   const doMutation = (values: Record<string, string | number>) =>
     mutation({ variables: omit(values, "submit") });
   const onSubmit = props.onSubmit ? props.onSubmit : doMutation;
@@ -221,7 +234,7 @@ export const QForm: React.FC<React.PropsWithChildren<QFormProps>> = ({ fields, m
       validateOnChange={false}
     >
       <Form>
-        <Grid gap={2} columns={[0, 0, "1fr 3fr"]}>
+        <Grid gap={2} columns="1fr 3fr">
           {fieldArr.map((field) => generateField(field))}
           {props.children}
         </Grid>
@@ -244,15 +257,15 @@ export const RadioGroup: React.FC<React.PropsWithChildren<RadioGroupProps>> = ({
   const [, meta] = useField(props.name);
   return (
     <>
-      <RebassLabel sx={{ alignSelf: "center" }} key={label}>
+      <Label className="self-center" key={label}>
         {label}:
-      </RebassLabel>
+      </Label>
       <Grid columns="1fr 1fr">
         {Object.keys(opts).map((name) => (
-          <RebassLabel sx={{ alignSelf: "center" }} key={name}>
+          <Label className="self-center" key={name}>
             <Radio id={label} name={props.name} value={name} />
             {opts[name]}
-          </RebassLabel>
+          </Label>
         ))}
       </Grid>
 
@@ -266,14 +279,14 @@ export const RadioGroup: React.FC<React.PropsWithChildren<RadioGroupProps>> = ({
   );
 };
 
-export const Radio: React.FC<React.PropsWithChildren<{ id: string; name: string; value: any }>> = (
-  props
-) => {
+export const Radio: React.FC<
+  React.PropsWithChildren<{ id: string; name: string; value: any }>
+> = (props) => {
   const [field] = useField(props);
-  return <RebassRadio id={props.id} {...field} />;
+  return <UIRadio id={props.id} {...field} />;
 };
 
-type SelectProps = RebassSelectProps & {
+type SelectProps = React.SelectHTMLAttributes<HTMLSelectElement> & {
   label: string;
   setter?: (s: string) => void;
 };
@@ -286,16 +299,15 @@ export const Select: React.FC<React.PropsWithChildren<SelectProps>> = ({
   const [field, meta] = useField<string | number>(props as any);
   return (
     <>
-      <RebassLabel
-        sx={{ alignSelf: "center" }}
+      <Label
+        className="self-center"
         key={label}
         htmlFor={props.id || props.name}
       >
         {label}:
-      </RebassLabel>
+      </Label>
 
-      {/* @ts-ignore */}
-      <RebassSelect
+      <UISelect
         id={props.id || props.name}
         {...field}
         value={field.value || defaultValue}
@@ -311,23 +323,22 @@ export const Select: React.FC<React.PropsWithChildren<SelectProps>> = ({
   );
 };
 
-type ErrorBoxProps = BoxProps & {
+type ErrorBoxProps = React.HTMLAttributes<HTMLDivElement> & {
   error: string;
 };
 
-export const ErrorBox: React.FC<React.PropsWithChildren<ErrorBoxProps>> = ({ error, ...props }) => {
+export const ErrorBox: React.FC<React.PropsWithChildren<ErrorBoxProps>> = ({
+  error,
+  className,
+  ...props
+}) => {
   const tr = useTr();
   if (!error) return null;
   return (
     <Box
-      pl={3}
-      py={2}
-      sx={{
-        gridColumn: [0, 0, 2],
-        borderLeftColor: "danger",
-        borderLeftStyle: "solid",
-        borderLeftWidth: 4,
-      }}
+      className={`pl-4 py-2 sm:col-start-2 border-l-4 border-l-danger ${
+        className ?? ""
+      }`}
       {...props}
     >
       <Text>
@@ -338,12 +349,14 @@ export const ErrorBox: React.FC<React.PropsWithChildren<ErrorBoxProps>> = ({ err
   );
 };
 
-export const Submit: React.FC<React.PropsWithChildren<{ label: string }>> = ({ label }) => {
+export const Submit: React.FC<React.PropsWithChildren<{ label: string }>> = ({
+  label,
+}) => {
   const context = useFormikContext();
   const tr = useTr();
   const submitting = context.isSubmitting;
   return (
-    <Button type="submit" disabled={submitting} sx={{ gridColumn: [0, 0, 2] }}>
+    <Button type="submit" disabled={submitting} className="sm:col-start-2">
       {submitting ? tr("Misc.Wait") : label}
     </Button>
   );

@@ -1,8 +1,8 @@
-import { Flex, Image, Box } from "rebass";
+import { Flex, Image, Box } from "components/ui";
 import { A } from "components/Breadcrumb";
 import { useUser } from "state/user";
 import { useState, useEffect, useRef } from "react";
-import { useColorMode } from "theme-ui";
+import { useColorMode } from "components/ui";
 import { NavMobile } from "./NavMobile";
 import { NavDesktop } from "./NavDesktop";
 import { useTheme } from "util/hooks";
@@ -28,57 +28,31 @@ export const TopBar: React.FC<React.PropsWithChildren<{ home?: boolean }>> = ({ 
     }
   }, []);
 
-  let cancel = useRef(0);
+  let cancel = useRef<number>();
 
-  // Delay showing of the login icons until user is loaded
   useEffect(() => {
     if (user === undefined) {
-      cancel.current = setTimeout(() => setLoaded(true), 500);
+      cancel.current = window.setTimeout(() => setLoaded(true), 500);
     } else {
       setLoaded(true);
     }
-    return () => clearTimeout(cancel.current);
+    return () => window.clearTimeout(cancel.current);
   }, [user]);
 
   return (
     <Flex
-      bg={home ? "transparent" : "topbarColor"}
-      height={70}
-      width="100%"
-      justifyContent="center"
-      color={home && light ? "white" : "#fff"}
-      fontSize={3}
-      px={[3, 3, 5, 0]}
-      sx={{ position: ["absolute", "absolute"], top: 0, zIndex: 10 }}
+      className={`h-[70px] w-full justify-center text-lg px-4 sm:px-16 md:px-0 absolute top-0 z-10 ${home ? "bg-transparent" : "bg-[#505050]"} ${home && light ? "text-black" : "text-white"}`}
     >
       {darkMode && (
         <Image
-          mx={"auto"}
-          ml={[20, 20, 0]}
-          mt={24}
           src={`/images/icon_${home && light ? "light" : "dark"}mode.svg`}
-          sx={{
-            position: "absolute",
-            cursor: "pointer",
-            flexGrow: 0,
-            opacity: 0.07,
-            flexShrink: 0,
-            transition: "0.4s ease-out",
-            ":hover": {
-              transform: "rotate(+180deg)",
-              opacity: 1,
-            },
-          }}
+          className="absolute cursor-pointer opacity-[0.07] transition-all duration-300 hover:rotate-180 hover:opacity-100 ml-5 sm:ml-0 mt-6"
           onClick={() => setColorMode(light ? "dark" : "light")}
           alt={light ? "Darkmode" : "Lightmode"}
         />
       )}
       <Flex
-        alignItems="flex-start"
-        justifyContent="space-between"
-        maxWidth="1160px"
-        pt="8px"
-        flex={1}
+        className="items-start justify-between max-w-[1160px] pt-2 flex-1"
       >
         <A href={aula ? "/aula" : "/"}>
           <Image
@@ -86,20 +60,13 @@ export const TopBar: React.FC<React.PropsWithChildren<{ home?: boolean }>> = ({ 
             alt=""
             width={aula ? 50 : 103}
             height={aula ? 50 : 40}
-            mt="10px"
-            sx={{
-              transition: "0.3s ",
-              ":hover": {
-                transform: "scale(1.05)",
-                opacity: 1,
-              },
-            }}
+            className="mt-[10px] transition-all duration-300 hover:scale-105"
           />
         </A>
-        <Box pt="10px" sx={{ display: ["none", "none", "block", "block"] }}>
+        <Box className="pt-[10px] hidden sm:block">
           <NavDesktop user={user} loaded={loaded} />
         </Box>
-        <Box pt="10px" sx={{ display: ["block", "block", "none", "none"] }}>
+        <Box className="pt-[10px] block sm:hidden">
           <NavMobile user={user} color={burgerColor} />
         </Box>
       </Flex>

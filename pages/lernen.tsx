@@ -2,7 +2,7 @@ import { SlideShow } from "components/SlideShow";
 import { A } from "components/Breadcrumb";
 import { InlineSignup } from "./user/signup";
 import { AppPage } from "components/Page";
-import { Text } from "rebass";
+import { Text } from "components/ui";
 
 export default function LernenPage(): React.ReactElement {
   return (
@@ -41,7 +41,7 @@ export default function LernenPage(): React.ReactElement {
         ).
       </Text>
       <SlideShow
-        mb={4}
+        className="mb-8 screenshot"
         images={[
           "/screens/voty_screen_cards.jpg",
           "/screens/voty_screen_lerninhalte.jpg",
@@ -54,7 +54,6 @@ export default function LernenPage(): React.ReactElement {
           "Der Chatbot «Chaty» erklärt Grundbegriffe der Demokratie",
           "Integrierte Suche mit Tausenden von historischen Wahlplakaten",
         ]}
-        className="screenshot"
       />
       Du unterrichtest politische Bildung und möchtest voty.ch im Unterricht
       einsetzen? Noch sind nicht alle Inhalte fertiggestellt aber wir freuen uns

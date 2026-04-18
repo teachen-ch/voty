@@ -1,6 +1,14 @@
-import { Box, Text, Button, Link, Flex } from "rebass";
+import {
+  Box,
+  Text,
+  Button,
+  Link,
+  Flex,
+  Input,
+  Label,
+  Textarea,
+} from "components/ui";
 import { useState } from "react";
-import { Input, Label, Textarea } from "@rebass/forms";
 import { UserWhereUniqueInput, Visibility } from "graphql/types";
 import {
   Authors,
@@ -15,10 +23,12 @@ import { Info } from "./Info";
 
 const MAX_CHARS = 140;
 
-export const Tweety: React.FC<React.PropsWithChildren<{
-  maxChars?: number;
-  placeholder?: string;
-}>> = ({
+export const Tweety: React.FC<
+  React.PropsWithChildren<{
+    maxChars?: number;
+    placeholder?: string;
+  }>
+> = ({
   maxChars = MAX_CHARS,
   placeholder = "Gib einen kurzen Text ein...",
 }) => {
@@ -46,36 +56,26 @@ export const Tweety: React.FC<React.PropsWithChildren<{
   }
   const success = state.called && !state.error;
   return (
-    <Box mt={4}>
+    <Box className="mt-8">
       {success ? (
         <Info>Erfolgreich gespeichert</Info>
       ) : (
         <>
-          <Label mt={4} fontWeight="semi">
-            Abstimmung / Thema
-          </Label>
+          <Label className="mt-8 font-semibold">Abstimmung / Thema</Label>
           <Input
             onChange={(e) => setTitle(e.target.value)}
             placeholder="Gib einen Titel ein"
           />
-          <Box bg="#fff" color="#000" mt={2}>
-            <Textarea
-              onChange={doChange}
-              rows={3}
-              pb={0}
-              placeholder={placeholder}
-            ></Textarea>
+          <Box className="bg-white text-black mt-2">
+            <Textarea onChange={doChange} rows={3} placeholder={placeholder} />
             <CharCounter chars={chars} max={maxChars} tweet={tweet} />
           </Box>
           <Visible setVisibility={setVisibility} visibility={visibility} />
-          <Label mb={2} mt={4}>
-            Erarbeitet durch:
-          </Label>
+          <Label className="mb-2 mt-8">Erarbeitet durch:</Label>
           <Flex>
             <Authors setUsers={setUsers} />
             <Button
-              ml={3}
-              sx={{ flexGrow: 0 }}
+              className="ml-4 grow-0"
               onClick={doPostWork}
               disabled={chars < 20 || chars > maxChars}
             >
@@ -86,16 +86,19 @@ export const Tweety: React.FC<React.PropsWithChildren<{
         </>
       )}
 
-      <Works card="tweety" mt={6} items={TweetyItem} trigger={trigger} />
+      <Works
+        card="tweety"
+        className="mt-32"
+        items={TweetyItem}
+        trigger={trigger}
+      />
     </Box>
   );
 };
 
-const CharCounter: React.FC<React.PropsWithChildren<{ chars: number; max: number; tweet: string }>> = ({
-  chars,
-  max,
-  tweet,
-}) => {
+const CharCounter: React.FC<
+  React.PropsWithChildren<{ chars: number; max: number; tweet: string }>
+> = ({ chars, max, tweet }) => {
   const over = chars > max;
   let text = "";
   const noHash = tweet.search(/[^\w]#\w\w+/) < 0;
@@ -107,44 +110,35 @@ const CharCounter: React.FC<React.PropsWithChildren<{ chars: number; max: number
   }
 
   return (
-    <Box pl={3} pb={2} mt={0} fontSize={1}>
-      <Text
-        variant="inline"
-        color={over ? "danger" : "#000"}
-        fontWeight={over ? "bold" : "normal"}
+    <Box className="pl-4 pb-2 mt-0 text-sm">
+      <span
+        className={`inline-block ${
+          over ? "text-danger font-semibold" : "text-black"
+        }`}
       >
         {text}
-      </Text>
+      </span>
       {noHash && chars > 50 && chars < max && (
-        <Text variant="inline">
+        <span className="inline-block">
           &nbsp;Fehlt noch ein{" "}
           <Link
             href="https://de.wikipedia.org/wiki/Hashtag"
             target="_blank"
-            variant="underline"
+            className="underline"
           >
             #hashtag
           </Link>
           ?
-        </Text>
+        </span>
       )}
     </Box>
   );
 };
 
-const TweetyCard: React.FC<React.PropsWithChildren<{ tweet: string; tags?: string }>> = ({
-  tweet,
-  tags,
-}) => (
-  <Box
-    bg="#fff"
-    color="#000"
-    sx={{
-      border: "1px solid lightgray",
-      borderRadius: 12,
-    }}
-    p={3}
-  >
+const TweetyCard: React.FC<
+  React.PropsWithChildren<{ tweet: string; tags?: string }>
+> = ({ tweet, tags }) => (
+  <Box className="bg-white text-black border border-[lightgray] rounded-[12px] p-4">
     <TwitterIcon />
     &nbsp;
     {tweet}
@@ -163,9 +157,7 @@ const TwitterIcon: React.FC<React.PropsWithChildren<unknown>> = () => (
 const TweetyItem: WorkItem = ({ work }) => {
   return (
     <WorkCard>
-      <Text mb={3} fontSize={1}>
-        Abstimmung / Thema: {work.title}
-      </Text>
+      <Text className="mb-4 text-sm">Abstimmung / Thema: {work.title}</Text>
       <TweetyCard tweet={work.text} />
     </WorkCard>
   );

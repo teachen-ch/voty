@@ -17,9 +17,9 @@ Chosen direction: **Pothos + GraphQL Yoga on the existing schema/resolver split,
 | 4     | Next 12 → 14, React 17 → 18                                       | ✅                 |
 | 5     | Cleanup, docs, `api.graphql` regen                                | ✅                 |
 | 6A    | MDX 1 → 3                                                         | ✅ (cypress re-run deferred) |
-| 6B    | theme-ui/rebass → Tailwind 4                                      | planned            |
+| 6B    | theme-ui/rebass → Tailwind 4                                      | ✅                 |
 
-**Cypress: 14/14** at end of Phase 5. Phase 6A passed manual smoke; Cypress re-run deferred to next session.
+**Cypress: 14/14** at end of Phase 5. Phase 6A + 6B passed build + TS; Cypress re-run deferred (run `yarn next build && CYPRESS=1 yarn start && yarn test`).
 
 ---
 

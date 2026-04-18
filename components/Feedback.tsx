@@ -1,9 +1,9 @@
-import { Input, Select, Textarea } from "@rebass/forms";
+import { Input, Select, Textarea } from "components/ui";
 import { useContext, useState } from "react";
-import { Box, Button, Text, Card, Flex, BoxProps } from "rebass";
+import { Box, Button, Text, Card, Flex } from "components/ui";
 import { authHeaders } from "util/apollo";
 import { A } from "./Breadcrumb";
-import { Grid } from "theme-ui";
+import { Grid } from "components/ui";
 import { CardContext, getCardTitle } from "./Cards";
 import { Info } from "./Info";
 import { Center } from "./Learning";
@@ -11,15 +11,24 @@ import { Err } from "./Page";
 import NewWindow from "react-new-window";
 import { useUser } from "state/user";
 
-export const FeedbackText: React.FC<React.PropsWithChildren<BoxProps & { text?: string; quest?: string; card?: string }>> = ({
+export const FeedbackText: React.FC<
+  React.PropsWithChildren<
+    React.HTMLAttributes<HTMLDivElement> & {
+      text?: string;
+      quest?: string;
+      card?: string;
+    }
+  >
+> = ({
   text = "Hast du Fragen oder Verbesserungsvorschläge zu diesem Inhalt?",
   card,
   quest,
+  className,
   ...props
 }) => {
   const [show, setShow] = useState(false);
   return (
-    <Box mt={5} fontSize={1} textAlign="center" {...props}>
+    <Box className={`mt-16 text-sm text-center ${className ?? ""}`} {...props}>
       <A onClick={() => setShow(!show)}>{text}</A>
       {show && (
         <FeedbackForm
@@ -32,11 +41,13 @@ export const FeedbackText: React.FC<React.PropsWithChildren<BoxProps & { text?: 
   );
 };
 
-export const FeedbackForm: React.FC<React.PropsWithChildren<{
-  doClose: () => void;
-  card?: string;
-  quest?: string;
-}>> = ({ doClose, card, quest }) => {
+export const FeedbackForm: React.FC<
+  React.PropsWithChildren<{
+    doClose: () => void;
+    card?: string;
+    quest?: string;
+  }>
+> = ({ doClose, card, quest }) => {
   const { card: cardFromContext } = useContext(CardContext);
   if (cardFromContext) card = cardFromContext;
   const user = useUser();
@@ -63,11 +74,11 @@ export const FeedbackForm: React.FC<React.PropsWithChildren<{
   }
   return (
     <NewWindow title="Feedback" name="feedback" center="screen">
-      <Card bg="lightgray" height="100%">
-        <Text fontWeight="semi" mt={3}>
+      <Card className="bg-highlight h-full">
+        <Text variant="semi" className="mt-4">
           Feedback für voty.ch
         </Text>
-        <Text color="gray" fontSize={1} mb={3}>
+        <Text className="text-gray text-sm mb-4">
           {user && `Von: ${user.email}`}
           <br />
           Thema: {getCardTitle(String(card)) || card}{" "}
@@ -79,7 +90,7 @@ export const FeedbackForm: React.FC<React.PropsWithChildren<{
               Das Feedback wurde erfolgreich abgeschickt. Herzlichen Dank!
             </Info>
             <Center>
-              <Button my={4} onClick={doClose} bg="primary">
+              <Button className="my-8 bg-primary" onClick={doClose}>
                 Schliessen
               </Button>
             </Center>
@@ -96,34 +107,36 @@ export const FeedbackForm: React.FC<React.PropsWithChildren<{
               <Input
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Deine Email"
+                className="mt-2"
               />
             )}
             <Input
               onChange={(e) => setTitle(e.target.value)}
               placeholder="Betreff..."
+              className="mt-2"
             />
-            <Box mt={2} />
+            <Box className="mt-2" />
             <Textarea
               onChange={(e) => setText(e.target.value)}
               rows={4}
-              fontSize={1}
+              className="text-sm"
             />
-            <Flex mt={2} justifyContent="space-between">
+            <Flex className="mt-2 justify-between">
               <Button
-                width="calc(50% - 4px)"
+                className="w-[calc(50%-4px)]"
                 onClick={doClose}
                 variant="secondary"
               >
                 Abbrechen
               </Button>
-              <Button width="calc(50% - 4px)" onClick={doSend}>
+              <Button className="w-[calc(50%-4px)]" onClick={doSend}>
                 Abschicken
               </Button>
             </Flex>
           </>
         )}
         <Err msg={error} />
-        <Text fontSize={1} fontStyle="italic" color="gray" mt={3}>
+        <Text className="text-sm italic text-gray mt-4">
           voty.ch wird als Open Education Content entwickelt. Der Progammcode
           und sämtliche Inhalte sind unter{" "}
           <a
@@ -141,7 +154,9 @@ export const FeedbackForm: React.FC<React.PropsWithChildren<{
   );
 };
 
-export const FeedbackPlain: React.FC<React.PropsWithChildren<{ title?: string }>> = ({ title }) => {
+export const FeedbackPlain: React.FC<
+  React.PropsWithChildren<{ title?: string }>
+> = ({ title }) => {
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState("");
   const user = useUser();
@@ -165,18 +180,18 @@ export const FeedbackPlain: React.FC<React.PropsWithChildren<{ title?: string }>
     return <Info type="info">Erfolgreich abgeschickt. Herzlichen Dank!</Info>;
   return (
     <>
-      <Text fontWeight="semi">{title} &nbsp;</Text>
-      <Text color="gray" fontSize={1}>
+      <Text variant="semi">{title} &nbsp;</Text>
+      <Text className="text-gray text-sm">
         {user && `Angemeldet als: ${user.email}`}
       </Text>
-      <Grid columns={[0, 0, "1fr 1fr"]}>
+      <Grid columns="1fr 1fr">
         {!user && (
           <Input
             onChange={(e) => setEmail(e.target.value)}
             placeholder="Deine Email"
           />
         )}
-        <Button width="calc(50%)" onClick={doSend}>
+        <Button className="w-1/2" onClick={doSend}>
           Anmelden
         </Button>
       </Grid>

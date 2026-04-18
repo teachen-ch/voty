@@ -1,13 +1,13 @@
-import { Input, Label } from "@rebass/forms";
+import { Input, Label } from "components/ui";
 import CheckLogin from "components/CheckLogin";
 import { ErrorBox } from "components/Form";
 import { Loading, LoggedInPage, Page } from "components/Page";
 import { Role, useChangePasswordMutation } from "graphql/types";
 import { useRouter } from "next/router";
 import { useState } from "react";
-import { Text, Button, Heading } from "rebass";
+import { Text, Button, Heading } from "components/ui";
 import { useSetAccessToken, useSetUser, useUser } from "state/user";
-import { Grid } from "theme-ui";
+import { Grid } from "components/ui";
 import { useQueryParam } from "util/hooks";
 import { getQueryParam, ensureSameDomain, isBrowser } from "util/isBrowser";
 import { trackEvent, usePageEvent } from "util/stats";
@@ -33,7 +33,6 @@ export default function VerifiedPage(): React.ReactElement {
   }
 
   const isTeacher = user?.role === Role.Teacher;
-  // token verification succeded, we have a session & user
   if (purpose === "verification") {
     trackEvent({ category: "Login", action: "EmailVerified" });
     if (redirect) {
@@ -41,7 +40,7 @@ export default function VerifiedPage(): React.ReactElement {
     } else {
       return (
         <LoggedInPage heading={tr("Verification.Title")}>
-          <Text mb={4}>
+          <Text className="mb-8">
             Super, deine Email-Adresse ist nun bestätigt.{" "}
             {isTeacher
               ? "Dein Konto für Lehrpersonen ist nun eröffnet und du bist bereits angemeldet."
@@ -108,7 +107,7 @@ function PasswordResetForm() {
     return (
       <>
         <Heading as="h2">Passwort geändert</Heading>
-        <Text mb={4}>Super, das hat geklappt.</Text>
+        <Text className="mb-8">Super, das hat geklappt.</Text>
         <Button onClick={() => router.replace(getStartpage(user?.role))}>
           Weiter geht&apos;s
         </Button>
@@ -118,8 +117,8 @@ function PasswordResetForm() {
   return (
     <>
       <Heading as="h2">Passwort ändern</Heading>
-      <Grid gap={2} columns={[0, 0, "2fr 3fr"]}>
-        <Label alignSelf="center">Neues Passwort:</Label>
+      <Grid gap={2} columns="2fr 3fr">
+        <Label style={{ alignSelf: "center" }}>Neues Passwort:</Label>
         <Input
           autoCapitalize="none"
           value={password}
@@ -129,7 +128,7 @@ function PasswordResetForm() {
             setPassword(event.currentTarget.value)
           }
         />
-        <Label alignSelf="center">Password wiederholen:</Label>
+        <Label style={{ alignSelf: "center" }}>Password wiederholen:</Label>
         <Input
           value={password2}
           name="password2"
@@ -140,7 +139,7 @@ function PasswordResetForm() {
         />
         <Button
           onClick={() => checkPasswords(password, password2)}
-          sx={{ gridColumn: [0, 0, 2] }}
+          style={{ gridColumn: "2" }}
         >
           Passwort ändern
         </Button>

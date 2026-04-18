@@ -1,5 +1,5 @@
 import { useSetCardsMutation } from "graphql/types";
-import { Box, Text, Button } from "rebass";
+import { Box, Text, Button } from "components/ui";
 import { useTeam } from "state/user";
 import { getCardMeta, getCardTypeIcon } from "./Cards";
 import { Err } from "./Page";
@@ -19,7 +19,6 @@ export const LearningPath: React.FC<React.PropsWithChildren<{ path: string; anon
   const [error, setError] = useState("");
   const [doSetCards, mutation] = useSetCardsMutation({
     onCompleted() {
-      // TODO: can we update the apollo team cache
       setSuccess(true);
     },
     onError(err) {
@@ -39,7 +38,7 @@ export const LearningPath: React.FC<React.PropsWithChildren<{ path: string; anon
   const teamLink = team ? `/team/${team?.id}` : "";
 
   return (
-    <Box py={3} px={3} mb={5} bg="darkgray">
+    <Box className="py-4 px-4 mb-16 bg-black/20">
       <Table>
         {cards.map((id) => (
           <CardDetail key={id} id={id} teamLink={teamLink} />
@@ -47,8 +46,7 @@ export const LearningPath: React.FC<React.PropsWithChildren<{ path: string; anon
       </Table>
       {!anon && (
         <Button
-          mt={3}
-          width="100%"
+          className="mt-4 w-full"
           onClick={addPath}
           disabled={mutation.loading}
         >
@@ -76,20 +74,22 @@ const CardDetail: React.FC<React.PropsWithChildren<{ id: string; teamLink: strin
       noHover
       key={id}
       onMouseOver={() => setDetails(true)}
-      height={details ? "60px" : "40px"}
       onMouseOut={() => setDetails(true)}
     >
       <TD flexy>
-        <A href={`${teamLink}/cards/${card.id}`} variant="link">
+        <A
+          href={`${teamLink}/cards/${card.id}`}
+          className="block truncate text-inherit"
+        >
           {card.title}
         </A>
         {details && (
-          <Text fontSize={1} overflow="show" wrap="wrap">
+          <Text className="text-sm truncate">
             {upperFirst(String(card.type))}: {card.description}
           </Text>
         )}
       </TD>
-      <TDIcon mr={0}>
+      <TDIcon>
         <Image src={IconWatch} alt="" />
       </TDIcon>
       <TD width={130} fixed smHide>

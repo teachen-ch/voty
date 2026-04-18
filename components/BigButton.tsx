@@ -1,26 +1,25 @@
-import { Button, ButtonProps, Text } from "rebass";
+import { Button } from "components/ui";
 
-export const BigButton: React.FC<React.PropsWithChildren<ButtonProps & {
+export const BigButton: React.FC<React.PropsWithChildren<{
   color: string;
   onClick?: () => void;
   width?: string;
-}>> = ({ color, onClick, width, ...props }) => (
+  className?: string;
+}>> = ({ color, onClick, width, className, ...props }) => (
   <Button
-    bg="white !important"
-    flex="1"
+    className={`bg-white! flex-1 ${className ?? ""}`}
+    style={{ width }}
     disabled={!onClick}
     onClick={onClick}
-    width={width}
-    {...props}
   >
-    <Text fontSize={[2, 2, 3]} color={color}>
+    <span className="text-base sm:text-lg" style={{ color }}>
       {props.children}
-    </Text>
+    </span>
   </Button>
 );
 
 export const BigGray: React.FC<React.PropsWithChildren<unknown>> = (props) => (
-  <BigButton color="gray" width="100%" my={1}>
+  <BigButton color="gray" width="100%" className="my-1">
     {props.children}
   </BigButton>
 );

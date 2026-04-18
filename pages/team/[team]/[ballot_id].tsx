@@ -1,5 +1,5 @@
 import { LoggedInPage, AppPage, ErrorPage } from "components/Page";
-import { Text, Box } from "rebass";
+import { Text, Box } from "components/ui";
 import { useRouter } from "next/router";
 import { Role, useBallotQuery, useGetBallotResultsQuery } from "graphql/types";
 import { BallotResults, VotyPie } from "components/BallotResults";
@@ -56,32 +56,29 @@ export default function TeacherBallotPage(): React.ReactElement {
         <Here>{ballot.title}</Here>
       </Breadcrumb>
       {!results?.total ? (
-        <Box bg="#fff" padding={4} color="gray" fontStyle="italic">
+        <Box className="bg-white p-8 text-gray italic">
           Hier werden später die Resultate deiner Klasse angezeigt
         </Box>
       ) : (
-        <Box my={4}>
-          <Text mb={4}>
+        <Box className="my-8">
+          <Text className="mb-8">
             Hier sind die aktuellen Resultate für die Klasse «{team.name}»:
           </Text>
           <BallotResults results={results} />
           {compare && compare.total && compare.total > 50 && (
-            <Box mt={3}>
-              <A onClick={() => setComparison(!comparison)} fontSize={2}>
+            <Box className="mt-4">
+              <A
+                onClick={() => setComparison(!comparison)}
+                className="text-base"
+              >
                 Vergleich mit allen Jugend-Stimmen auf voty.ch
               </A>
               {comparison && (
-                <Box textAlign="center" mt={4}>
-                  <Text fontWeight="semi">
+                <Box className="text-center mt-8">
+                  <Text variant="semi">
                     Aktuelles Zwischenresultat aller Jugend-Stimmen auf voty.ch
                   </Text>
-                  <Box
-                    mt={4}
-                    mx={"auto"}
-                    height={200}
-                    width={200}
-                    sx={{ backgroundColor: "#fff", borderRadius: 100 }}
-                  >
+                  <Box className="mt-8 mx-auto h-[200px] w-[200px] bg-white rounded-[100px]">
                     <VotyPie results={compare} />
                   </Box>
                 </Box>

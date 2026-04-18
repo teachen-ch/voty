@@ -1,5 +1,5 @@
 import { Loading, LoggedInPage } from "components/Page";
-import { Heading, Text, Button } from "rebass";
+import { Box, Heading, Text, Button } from "components/ui";
 import Link from "next/link";
 import { Ballot } from "components/Ballots";
 import {
@@ -44,7 +44,7 @@ export default function TeacherTest(): ReactElement {
   if (team === null) {
     return (
       <LoggedInPage heading="Demokratie testen" role={Role.Teacher}>
-        <Text mb={3}>Klasse wurde nicht gefunden.</Text>
+        <Text className="mb-4">Klasse wurde nicht gefunden.</Text>
         <Button onClick={() => router.push("/teacher/")}>Meine Klassen</Button>
       </LoggedInPage>
     );
@@ -128,16 +128,11 @@ const PanelCode: React.FC<React.PropsWithChildren<{
 }>> = ({ team, hasRuns }) => {
   if (!team?.code || !hasRuns) return null;
   return (
-    <Text id="livepanel">
+    <Box id="livepanel">
       Seite für Live-Abstimmungen:{" "}
-      <Link
-        href="/panel/[code]/present"
-        as={`/panel/${team.code}/present`}
-        passHref
-        legacyBehavior
-      >
+      <Link href={`/panel/${team.code}/present`}>
         <Button>Code: {team.code}</Button>
       </Link>
-    </Text>
+    </Box>
   );
 };

@@ -8,9 +8,7 @@ import {
   Flex,
   Button,
   Image as RImage,
-  ImageProps,
-  FlexProps,
-} from "rebass";
+} from "components/ui";
 import { useState } from "react";
 import { MDXProvider } from "@mdx-js/react";
 import { ReadMore } from "components/ReadMore";
@@ -30,7 +28,7 @@ type RefProps = {
 export const Ref: React.FC<React.PropsWithChildren<RefProps>> = (props) => (
   <Box>
     <Show if={props.title}>
-      <Heading mt={0}>{props.title}</Heading>
+      <Heading className="mt-0">{props.title}</Heading>
     </Show>
     <Show if={props.href}>
       <strong>Link: </strong>
@@ -48,7 +46,7 @@ export const Ref: React.FC<React.PropsWithChildren<RefProps>> = (props) => (
     </Show>
     {props.children}
     {props.source && (
-      <Box sx={{ textAlign: "right" }} fontSize={1}>
+      <Box className="text-right text-sm">
         ↪ Quelle: <Source href={props.source} />
       </Box>
     )}
@@ -68,9 +66,9 @@ export const Show: React.FC<React.PropsWithChildren<{ if: boolean | string | num
   else return null;
 };
 
-export const Center: React.FC<React.PropsWithChildren<FlexProps>> = (props) => (
-  <Flex justifyContent="center" {...props}>
-    {props.children}
+export const Center: React.FC<React.PropsWithChildren<{ className?: string }>> = ({ className, children, ...props }) => (
+  <Flex className={`justify-center ${className || ""}`} {...props}>
+    {children}
   </Flex>
 );
 
@@ -93,10 +91,10 @@ export const Include: React.FC<React.PropsWithChildren<{ toggle: boolean }>> = (
       <MDXProvider
         components={{
           // eslint-disable-next-line react/display-name
-          h1: (props) => <Heading mt={2}>{props.children}</Heading>,
+          h1: (props) => <Heading className="mt-2">{props.children}</Heading>,
           // eslint-disable-next-line react/display-name
           wrapper: (props) => (
-            <Box my={2} p={3} bg="white" color="black">
+            <Box className="my-2 p-4 bg-[#030303] text-white">
               {props.children}
             </Box>
           ),
@@ -108,12 +106,11 @@ export const Include: React.FC<React.PropsWithChildren<{ toggle: boolean }>> = (
   );
 };
 
-export const Image: React.FC<React.PropsWithChildren<ImageProps & { desc: string }>> = (props) => (
+export const Image: React.FC<React.PropsWithChildren<{ src?: string; alt?: string; desc?: string; className?: string }>> = (props) => (
   <Box>
-    {/* @ts-ignore */}
-    <RImage {...props} alt={props.alt || props.desc} />
+    <RImage src={props.src} alt={props.alt || props.desc || ""} className={props.className} />
     {props.desc && (
-      <Text fontSize={1} width="100%" textAlign="right">
+      <Text className="text-sm w-full text-right">
         {props.desc}
       </Text>
     )}

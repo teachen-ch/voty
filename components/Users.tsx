@@ -8,8 +8,8 @@ import {
   Role,
 } from "graphql/types";
 import { ReactElement, useState } from "react";
-import { Link as A, Box, Button, Text } from "rebass";
-import { Label, Input as RebassInput, Select } from "@rebass/forms";
+import { Link as A, Box, Button, Text } from "components/ui";
+import { Label, Input as UIInput, Select } from "components/ui";
 import { SessionUser, useSetUser } from "state/user";
 import { yup, ErrorBox } from "./Form";
 import CheckLogin from "./CheckLogin";
@@ -26,7 +26,7 @@ import {
 const Form = FormikForm as unknown as React.FC<
   React.PropsWithChildren<unknown>
 >;
-import { Grid } from "theme-ui";
+import { Grid } from "components/ui";
 import { useTr } from "util/translate";
 import Link from "next/link";
 
@@ -50,7 +50,7 @@ export const GET_USERS = gql`
 export const UPDATE_USER = gql`
 mutation updateUser($data: UserUpdateInput!, $where: UserWhereUniqueInput!) {
   updateUser(data: $data, where: $where) {
-    ...LoginFields 
+    ...LoginFields
   }
   ${CheckLogin.fragments.LoginFields}
 }
@@ -110,14 +110,14 @@ export function Users({
               </td>
               <td>
                 <A
-                  sx={{ display: ["none", "none", "inline"] }}
+                  className="hidden sm:inline"
                   href={`mailto:${user.email}`}
                 >
                   {user.email}
                 </A>
               </td>
               <td>
-                <Box variant="centered">
+                <div className="flex justify-center">
                   {user.emailVerified ? (
                     <Image src={IconOK} alt="Bestätigt" />
                   ) : (
@@ -127,7 +127,7 @@ export function Users({
                       onClick={() => doDeleteUser(user.id)}
                     />
                   )}
-                </Box>
+                </div>
               </td>
             </tr>
           ))
@@ -169,7 +169,6 @@ export const ProfileEdit: React.FC<React.PropsWithChildren<{
     user?.role === Role.Teacher || user?.role === Role.Principal;
   const isStudent = !isTeacher;
 
-  // for the year born dropdown: from around 6 - 20 years old
   const startYear = new Date().getFullYear() - (isStudent ? 20 : 100);
   const numYears = isStudent ? 12 : 90;
 
@@ -210,7 +209,7 @@ export const ProfileEdit: React.FC<React.PropsWithChildren<{
 
   if (!edit) {
     return (
-      <Grid gap={2} columns={[0, 0, "1fr 3fr"]}>
+      <Grid gap={2} columns="1fr 3fr">
         {!skipName && (
           <ShowField label={tr("Profile.Firstname")} value={user?.name} />
         )}
@@ -227,14 +226,14 @@ export const ProfileEdit: React.FC<React.PropsWithChildren<{
           />
         )}
         <ShowField label={tr("Profile.Email")} value={user?.email} />
-        <Button onClick={() => setEdit(true)} sx={{ gridColumn: [0, 0, 2] }}>
+        <Button onClick={() => setEdit(true)} className="sm:col-start-2">
           {tr("Profile.Edit")}
         </Button>
-        <Text fontSize={1} textAlign="left" sx={{ gridColumn: [0, 0, 2] }}>
+        <Text className="text-sm text-left sm:col-start-2">
           {tr(`Profile.Legal.${user?.role}`)}
 
-          <Link href="/datenschutz/" passHref legacyBehavior>
-            <A target="_blank" variant="underline">
+          <Link href="/datenschutz/" passHref>
+            <A target="_blank" className="underline">
               {tr("Profile.DataLink")}
             </A>
           </Link>
@@ -249,7 +248,7 @@ export const ProfileEdit: React.FC<React.PropsWithChildren<{
         validationSchema={validationSchema}
       >
         <Form>
-          <Grid gap={2} columns={[0, 0, "1fr 3fr"]}>
+          <Grid gap={2} columns="1fr 3fr">
             {!skipName && (
               <Input label="Vorname" name="name" placeholder="Vorname"></Input>
             )}
@@ -262,7 +261,7 @@ export const ProfileEdit: React.FC<React.PropsWithChildren<{
             )}
             {isStudent && (
               <>
-                <Label htmlFor="year" pt="6px">
+                <Label htmlFor="year" className="pt-[6px]">
                   {" "}
                   {tr("Profile.Year")}:
                 </Label>
@@ -275,7 +274,7 @@ export const ProfileEdit: React.FC<React.PropsWithChildren<{
                 </Field>
                 <FieldError name="year" />
                 <label htmlFor="gender">{tr("Profile.Gender")}:</label>
-                <Box id="gender" textAlign="left">
+                <Box id="gender" className="text-left">
                   <Grid columns="1fr 2fr" gap={0}>
                     <label>
                       <Field type="radio" name="gender" value={Gender.Female} />{" "}
@@ -301,15 +300,15 @@ export const ProfileEdit: React.FC<React.PropsWithChildren<{
             {isTeacher && (
               <ShowField label="Email" value="Kontaktiere uns für Änderungen" />
             )}
-            <Button type="submit" sx={{ gridColumn: [0, 0, 2] }} my={2}>
+            <Button type="submit" className="sm:col-start-2 my-2">
               {tr("Profile.Save")}
             </Button>
-            <ErrorBox error={error} my={4} />
+            <ErrorBox error={error} className="mb-8" />
 
-            <Text fontSize={1} textAlign="left" sx={{ gridColumn: [0, 0, 2] }}>
+            <Text className="text-sm text-left sm:col-start-2">
               {tr(`Profile.Legal.${user?.role}`)}
-              <Link href="/datenschutz/" passHref legacyBehavior>
-                <A target="_blank" variant="underline">
+              <Link href="/datenschutz/" passHref>
+                <A target="_blank" className="underline">
                   {tr("Profile.DataLink")}
                 </A>
               </Link>
@@ -337,11 +336,10 @@ export const Input: React.FC<React.PropsWithChildren<InputProps>> = ({
   const [field, meta] = useField<string>(name);
   return (
     <>
-      <Label sx={{ alignSelf: "center" }} htmlFor={name}>
+      <Label className="self-center" htmlFor={name}>
         {label}:
       </Label>
-      {/* @ts-ignore */}
-      <RebassInput
+      <UIInput
         {...field}
         id={name}
         placeholder={placeholder}
@@ -349,7 +347,7 @@ export const Input: React.FC<React.PropsWithChildren<InputProps>> = ({
       />
       {meta.touched && meta.error ? (
         <>
-          <Text variant="fielderror" sx={{ gridColumn: [0, 0, 2] }}>
+          <Text variant="fielderror" className="sm:col-start-2">
             {meta.error}
           </Text>
         </>
@@ -361,7 +359,7 @@ export const Input: React.FC<React.PropsWithChildren<InputProps>> = ({
 export const FieldError: React.FC<React.PropsWithChildren<{ name: string }>> = ({ name }) => (
   <ErrorMessage name={name}>
     {(msg) => (
-      <Text variant="fielderror" sx={{ gridColumn: [0, 0, 2] }}>
+      <Text variant="fielderror" className="sm:col-start-2">
         {msg}
       </Text>
     )}
@@ -374,10 +372,10 @@ export const ShowField: React.FC<React.PropsWithChildren<{
 }>> = ({ label, value }) => {
   return (
     <>
-      <Text my={[0, 0, 1]} textAlign="left" pt={[0, 0, 2]}>
+      <Text className="my-0 sm:my-1 text-left pt-0 sm:pt-2">
         {label}:
       </Text>
-      <Text my={1} py="7px" mb={[3, 3, 0]} fontSize={4} textAlign="left">
+      <Text className="my-1 py-[7px] mb-8 sm:mb-0 text-xl text-left">
         {value || "–"}
       </Text>
     </>

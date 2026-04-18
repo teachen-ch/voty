@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
-import { Text, TextProps } from "rebass";
+import { Text } from "components/ui";
+import { TextProps } from "components/ui";
 
 export const DE: React.FC<React.PropsWithChildren<TextProps>> = (props) => {
   const router = useRouter();

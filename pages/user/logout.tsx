@@ -1,7 +1,8 @@
 import { useSetAccessToken, useSetUser } from "../../state/user";
 import { useRouter } from "next/router";
 import { useEffect, useRef } from "react";
-import { Button, ButtonProps } from "rebass";
+import { Button } from "components/ui";
+import type { ButtonProps } from "components/ui";
 import { useApolloClient } from "@apollo/client";
 import { AppPage } from "components/Page";
 import { getQueryParam, ensureSameDomain } from "util/isBrowser";
@@ -40,14 +41,12 @@ export const LogoutButton: React.FC<React.PropsWithChildren<LogoutButtonProps>> 
   const client = useApolloClient();
 
   function onLogout() {
-    // clear apollo client local  cache
     void client.clearStore();
     if (onSuccess) {
       onSuccess();
     } else {
       void router.push("/");
     }
-    // otherwise we get flickering / page redrawing...
     setTimeout(() => {
       setAccessToken("");
       setUser(undefined);

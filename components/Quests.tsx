@@ -2,13 +2,11 @@ import {
   Label,
   Radio,
   Select,
-  SelectProps,
   Textarea,
-  TextareaProps,
-} from "@rebass/forms";
+} from "components/ui";
 import Image from "next/image";
 import { useCallback, useContext, useEffect, useMemo, useState } from "react";
-import { BoxProps, Button, Text, Flex, Box } from "rebass";
+import { Button, Text, Flex, Box } from "components/ui";
 import { useTeam, useUser } from "state/user";
 import { CardContext } from "./Cards";
 import React from "react";
@@ -80,7 +78,7 @@ export const Quest: React.FC<React.PropsWithChildren<{ groups?: string }>> = ({ 
       {team &&
         allowGroups(team, card, groups as AllowGroups) === AllowGroups.Yes && (
           <>
-            <Label mt={4} mb={2}>
+            <Label className="mt-8 mb-2">
               Erarbeitet durch:{" "}
             </Label>
             <Authors setUsers={setUsers} />
@@ -88,11 +86,10 @@ export const Quest: React.FC<React.PropsWithChildren<{ groups?: string }>> = ({ 
         )}
 
       {success ? (
-        <Info mb={6}>Antworten abgeschickt!</Info>
+        <Info className="mb-32">Antworten abgeschickt!</Info>
       ) : (
         <Button
-          mt={3}
-          mb={6}
+          className="mt-4 mb-32"
           onClick={doPostWork}
           disabled={Boolean(!user || !team)}
         >
@@ -116,43 +113,43 @@ const QuestWork: WorkItem = ({ work }) => {
       }}
     >
       <WorkCard>
-        <Box mt={-4}>{children}</Box>
+        <Box className="-mt-4">{children}</Box>
       </WorkCard>
     </QuestContext.Provider>
   );
 };
 
-export const Question: React.FC<React.PropsWithChildren<BoxProps & { ix?: string }>> = ({
+export const Question: React.FC<React.PropsWithChildren<{ className?: string; ix?: string }>> = ({
   ix,
   children,
-  ...props
+  className,
 }) => {
   const otherChildren = React.Children.toArray(children);
   const first = otherChildren.shift();
   const [hint, setHint] = useState(false);
   return (
-    <Box mt={4} {...props}>
-      <Flex mb={2}>
-        {ix && <CircleBullet value={ix} mr={3} />}
+    <Box className={`mt-8 ${className || ""}`}>
+      <Flex className="mb-2">
+        {ix && <CircleBullet value={ix} className="mr-4" />}
         <Box
-          flex={1}
+          className="flex-1"
           onMouseOver={() => setHint(true)}
           onMouseOut={() => setHint(false)}
         >
-          <Box mt={1} mb={3}>
+          <Box className="mt-1 mb-4">
             {first}
           </Box>
 
           <FeedbackText
-            sx={{
+            style={{
               position: "absolute",
               visibility: hint ? "inherit" : "hidden",
               right: "32px",
+              marginTop: -24,
+              textAlign: "right",
             }}
             text="Frage unklar?"
             quest={`Frage ${ix}`}
-            mt={-24}
-            textAlign="right"
           />
           {otherChildren}
         </Box>
@@ -166,12 +163,12 @@ type AnswerProps = {
   answer?: any;
 };
 
-export const Textfield: React.FC<React.PropsWithChildren<AnswerProps &
-  TextareaProps & {
-    lines?: number;
-    placeholder?: string;
-    width?: string | number | Array<string | number>;
-  }>> = ({ id, lines = 2, ...props }) => {
+export const Textfield: React.FC<React.PropsWithChildren<AnswerProps & {
+  lines?: number;
+  placeholder?: string;
+  width?: string | number | Array<string | number>;
+  className?: string;
+}>> = ({ id, lines = 2, ...props }) => {
   const { answers, setAnswer, readOnly } = useContext(QuestContext);
 
   if (!id) return <Err msg="<Question/> ohne id" />;
@@ -181,7 +178,6 @@ export const Textfield: React.FC<React.PropsWithChildren<AnswerProps &
   const text = String(answers[id] || "");
 
   return (
-    // @ts-ignore
     <Textarea
       value={text}
       onChange={(e: any) => setAnswer(id, e.target.value)}
@@ -211,10 +207,7 @@ export const MultiChoice: React.FC<React.PropsWithChildren<{ row?: boolean } & A
   }
   return (
     <Flex
-      mb={4}
-      flexDirection={row ? "row" : "column"}
-      justifyContent="flex-start"
-      flexWrap={["wrap", "wrap", "inherit"]}
+      className={`mb-8 justify-start flex-wrap sm:flex-nowrap ${row ? "flex-row" : "flex-col"}`}
     >
       {React.Children.map(children, (child, ix) =>
         React.isValidElement(child)
@@ -237,13 +230,14 @@ export const Choice: React.FC<React.PropsWithChildren<{
   answered?: number;
   setAnswer?: () => void;
 }>> = ({ correct, ix, answer, answered, setAnswer = () => 0, children }) => {
-  const color = answered === ix ? (correct ? "green" : "danger") : "white";
+  const colorClass =
+    answered === ix ? (correct ? "text-green" : "text-danger") : "";
   return (
-    <Label alignItems="center" mr={2} onClick={setAnswer} mb={2}>
-      <Radio checked={answer === ix} sx={{ fill: color }} mr={2} />
-      <Text flex={1} sx={{ flexGrow: 1 }}>
+    <Label className="items-center mr-2 mb-2 cursor-pointer" onClick={setAnswer}>
+      <Radio checked={answer === ix} className={`${colorClass} mr-2`} />
+      <span className="flex-1 grow">
         {children}
-      </Text>
+      </span>
     </Label>
   );
 };
@@ -274,7 +268,6 @@ export const Order: React.FC<React.PropsWithChildren<AnswerProps & { items: stri
     [items]
   );
 
-  // initial shuffle of the answers
   useEffect(() => {
     if (answers && answers[id]) {
       checkCorrect(answers[id]);
@@ -299,7 +292,7 @@ export const Order: React.FC<React.PropsWithChildren<AnswerProps & { items: stri
   }
 
   return (
-    <Table mb={4}>
+    <Table className="mb-8">
       <DraggableList<
         OrderItemType,
         { readOnly?: boolean; correct: boolean },
@@ -331,7 +324,7 @@ class OrderItem extends React.Component<OrderItemProps> {
         onMouseOut={() => this.setState({ over: false })}
       >
         {!(readOnly || correct) && (
-          <TDIcon {...dragHandleProps} sx={{ cursor: "grab" }}>
+          <TDIcon {...dragHandleProps} className="cursor-grab">
             <Image src={IconMove} alt="" />
           </TDIcon>
         )}
@@ -346,7 +339,7 @@ class OrderItem extends React.Component<OrderItemProps> {
   }
 }
 
-export const Choose: React.FC<React.PropsWithChildren<AnswerProps & SelectProps>> = ({
+export const Choose: React.FC<React.PropsWithChildren<AnswerProps & { className?: string; disabled?: boolean }>> = ({
   id,
   children,
   ...props
@@ -360,7 +353,6 @@ export const Choose: React.FC<React.PropsWithChildren<AnswerProps & SelectProps>
   const choice = String(answers[id] || "");
 
   return (
-    // @ts-ignore
     <Select
       value={choice}
       onChange={(e: any) => setAnswer(id, e.target.value)}

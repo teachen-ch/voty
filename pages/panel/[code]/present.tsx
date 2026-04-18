@@ -1,6 +1,6 @@
 import React, { ReactElement, useEffect } from "react";
 import { ErrorPage, LoadingPage, Container, Loading } from "components/Page";
-import { Heading, Box, Flex, Text, Button, Image } from "rebass";
+import { Heading, Box, Flex, Text, Button, Image } from "components/ui";
 import { Ballot, getBallotStatus, BallotStatus } from "components/Ballots";
 import { useRouter } from "next/router";
 import { BallotResults } from "components/BallotResults";
@@ -66,7 +66,7 @@ export default function PanelBallotsPresent(): ReactElement {
         )
       ) : (
         <>
-          <Text mb={4}>
+          <Text className="mb-8">
             Es wurden noch keine Abstimmungen wurden ausgewählt
           </Text>
           <A href={`/team/${team.id}`}>
@@ -75,18 +75,18 @@ export default function PanelBallotsPresent(): ReactElement {
         </>
       )}
       <Banner onClick={showQR}>
-        <Box ml="50px" mr="20px" fontSize={4}>
-          <Text fontWeight="normal">voty.ch/code</Text>
-          <Text>{code.replace(/(\d\d)(\d\d\d)(\d\d\d)/, "$1 $2 $3")}</Text>
+        <Box className="ml-[50px] mr-[20px] text-xl">
+          <span className="font-normal">voty.ch/code</span>
+          <span>{code.replace(/(\d\d)(\d\d\d)(\d\d\d)/, "$1 $2 $3")}</span>
         </Box>
       </Banner>
     </PanelPage>
   );
 }
 
-const BallotRunListing: React.FC<React.PropsWithChildren<{ ballotRun: BallotRunFieldsFragment }>> = ({
-  ballotRun,
-}) => {
+const BallotRunListing: React.FC<
+  React.PropsWithChildren<{ ballotRun: BallotRunFieldsFragment }>
+> = ({ ballotRun }) => {
   const tr = useTr();
   const ballotRunId = ballotRun.id;
   const ballotId = ballotRun.ballotId;
@@ -124,7 +124,7 @@ const BallotRunListing: React.FC<React.PropsWithChildren<{ ballotRun: BallotRunF
     else if (ballotRun.start && !ballotRun.end) await doEndRun();
   }
   return (
-    <Box key={ballotRun.id} mb={5}>
+    <Box key={ballotRun.id} className="mb-16">
       <Ballot
         ballot={ballot}
         buttonText={buttonText}
@@ -137,12 +137,12 @@ const BallotRunListing: React.FC<React.PropsWithChildren<{ ballotRun: BallotRunF
   );
 };
 
-const BallotRunDetail: React.FC<React.PropsWithChildren<{ ballotRun: BallotRunFieldsFragment }>> = ({
-  ballotRun,
-}) => {
+const BallotRunDetail: React.FC<
+  React.PropsWithChildren<{ ballotRun: BallotRunFieldsFragment }>
+> = ({ ballotRun }) => {
   return (
-    <Box id="results" mb={3}>
-      <Heading as="h2" mt={0} mb={4}>
+    <Box id="results" className="mb-4">
+      <Heading as="h2" className="mt-0 mb-8">
         {ballotRun.end ? "Endresultat:" : "Live-Resultat:"}
       </Heading>
       <Results ballotId={ballotRun.ballotId} ballotRunId={ballotRun.id} />
@@ -150,14 +150,11 @@ const BallotRunDetail: React.FC<React.PropsWithChildren<{ ballotRun: BallotRunFi
   );
 };
 
-const Results: React.FC<React.PropsWithChildren<{ ballotId: string; ballotRunId: string }>> = ({
-  ballotId,
-  ballotRunId,
-}) => {
+const Results: React.FC<
+  React.PropsWithChildren<{ ballotId: string; ballotRunId: string }>
+> = ({ ballotId, ballotRunId }) => {
   const resultsQuery = useGetBallotResultsQuery({
     variables: { ballotId, ballotRunId },
-    // had some issues with pollInterval when using next dev
-    // pollInterval: 5000,
   });
 
   const results = resultsQuery.data?.getBallotResults;
@@ -171,18 +168,15 @@ const Results: React.FC<React.PropsWithChildren<{ ballotId: string; ballotRunId:
   return <BallotResults results={results} />;
 };
 
-export const PanelPage: React.FC<React.PropsWithChildren<{ heading: string; teamId?: string }>> = (
-  props
-) => {
+export const PanelPage: React.FC<
+  React.PropsWithChildren<{ heading: string; teamId?: string }>
+> = (props) => {
   const votyLink = props.teamId ? `/team/${props.teamId}` : "/";
   return (
-    <Container mt={4}>
+    <Container className="mt-8">
       <Flex
-        justifyContent="space-between"
-        alignItems="center"
-        minWidth="min(100%, 800px)"
-        px={[3, 3, 0]}
-        mb={3}
+        className="justify-between items-center px-4 sm:px-0 mb-4"
+        style={{ minWidth: "min(100%, 800px)" }}
       >
         <A href={votyLink}>
           <Image src="/images/voty_logo.svg" alt="voty" width={103} />
@@ -197,27 +191,13 @@ export const PanelPage: React.FC<React.PropsWithChildren<{ heading: string; team
       </Flex>
       <Box
         as="main"
-        px={[3, 3, 4]}
-        py={4}
-        sx={{
-          minWidth: "min(100%, 800px)",
-          borderRadius: [0, 0, 5],
-          backgroundColor: "panelColor",
-        }}
-        maxWidth="800px"
-        minHeight="450px"
-        textAlign={["center", "center", "left"]}
+        className="px-4 sm:px-8 py-8 bg-panel min-h-[450px] text-center sm:text-left rounded-none sm:rounded-card"
+        style={{ minWidth: "min(100%, 800px)" }}
       >
-        <Heading
-          mt={0}
-          as="h1"
-          fontSize={[5, 5, "34px", "50px"]}
-          fontWeight="normal"
-          sx={{ borderBottom: "2px solid", borderColor: "black" }}
-        >
-          <Flex justifyContent="space-between">{props.heading}</Flex>
+        <Heading className="mt-0 text-2xl sm:text-[34px] md:text-[50px] font-normal border-b-2 border-black">
+          <Flex className="justify-between">{props.heading}</Flex>
         </Heading>
-        <Text>{props.children}</Text>
+        <Box>{props.children}</Box>
       </Box>
     </Container>
   );

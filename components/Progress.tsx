@@ -10,7 +10,7 @@ import { A } from "./Breadcrumb";
 import { getCardTitle } from "./Cards";
 import { Err, H3, Loading } from "./Page";
 import { Table, TD, TR } from "./Table";
-import { Flex, Box } from "rebass";
+import { Flex, Box } from "components/ui";
 import { Pill } from "./Misc";
 import Image from "next/image";
 import IconReload from "../public/images/icon_reload.svg";
@@ -39,9 +39,11 @@ export const PROGRESS = gql`
   }
 `;
 
-export const ShowProgress: React.FC<React.PropsWithChildren<{
-  team: TeamAnonFieldsFragment;
-}>> = ({ team }) => {
+export const ShowProgress: React.FC<
+  React.PropsWithChildren<{
+    team: TeamAnonFieldsFragment;
+  }>
+> = ({ team }) => {
   const queryProgress = useProgressQuery({
     variables: { teamId: team.id },
     notifyOnNetworkStatusChange: true,
@@ -56,7 +58,6 @@ export const ShowProgress: React.FC<React.PropsWithChildren<{
   const tStud = students?.length;
   const tCards = team.cards.split(" ").length;
 
-  // students and cards are readonly as query results
   const sortedStudents = students?.slice();
   sortedStudents?.sort((a, b) => (a?.due?.length || 0) - (b?.due?.length || 0));
 
@@ -66,7 +67,7 @@ export const ShowProgress: React.FC<React.PropsWithChildren<{
   return (
     <>
       <H3>Fortschritt nach Lerninhalten</H3>
-      <Box sx={{ position: "absolute", right: 32, marginTop: -32 }}>
+      <Box className="absolute right-8" style={{ marginTop: -32 }}>
         <Reload query={queryProgress} />
       </Box>
       <Table>
@@ -82,8 +83,8 @@ export const ShowProgress: React.FC<React.PropsWithChildren<{
         )}
       </Table>
 
-      <H3 mt={5}>Fortschritt nach SuS</H3>
-      <Box sx={{ position: "absolute", right: 32, marginTop: -32 }}>
+      <H3 className="mt-16">Fortschritt nach SuS</H3>
+      <Box className="absolute right-8" style={{ marginTop: -32 }}>
         <Reload query={queryProgress} />
       </Box>
       <Table>
@@ -102,10 +103,9 @@ export const ShowProgress: React.FC<React.PropsWithChildren<{
   );
 };
 
-const CardProgress: React.FC<React.PropsWithChildren<{ card: ProgressCard; total?: number }>> = ({
-  card,
-  total,
-}) => {
+const CardProgress: React.FC<
+  React.PropsWithChildren<{ card: ProgressCard; total?: number }>
+> = ({ card, total }) => {
   const [show, setShow] = useState(false);
   return (
     <Fragment>
@@ -120,11 +120,11 @@ const CardProgress: React.FC<React.PropsWithChildren<{ card: ProgressCard; total
         </TD>
       </TR>
       {show && (
-        <Box fontSize={1} textAlign="right">
+        <Box className="text-sm text-right">
           {card.done?.length === 0 ? (
             "Noch niemand hat diese Aufgabe erledigt"
           ) : (
-            <Flex flexWrap="wrap">
+            <Flex className="flex-wrap">
               {card.done?.map(
                 (user) =>
                   user && (
@@ -149,18 +149,20 @@ const CardProgress: React.FC<React.PropsWithChildren<{ card: ProgressCard; total
   );
 };
 
-const Email: React.FC<React.PropsWithChildren<{ student: { email?: string | null } }>> = ({
-  student,
-}) => (
-  <A href={`mailto:${student.email}?subject=voty.ch Aufgaben`} variant="link">
+const Email: React.FC<
+  React.PropsWithChildren<{ student: { email?: string | null } }>
+> = ({ student }) => (
+  <A href={`mailto:${student.email}?subject=voty.ch Aufgaben`}>
     {student.email}
   </A>
 );
 
-const StudentProgress: React.FC<React.PropsWithChildren<{
-  student: ProgressStudent;
-  total?: number;
-}>> = ({ student, total }) => {
+const StudentProgress: React.FC<
+  React.PropsWithChildren<{
+    student: ProgressStudent;
+    total?: number;
+  }>
+> = ({ student, total }) => {
   const [show, setShow] = useState(false);
   return (
     <Fragment>
@@ -175,11 +177,11 @@ const StudentProgress: React.FC<React.PropsWithChildren<{
         </TD>
       </TR>
       {show && (
-        <Box fontSize={1} textAlign="right">
+        <Box className="text-sm text-right">
           {student.done?.length === 0 ? (
             "Noch keine Aufgabe erledigt"
           ) : (
-            <Flex flexWrap="wrap">
+            <Flex className="flex-wrap">
               {student.done?.map((card, i) => (
                 <Pill key={i} bg="green">
                   {getCardTitle(String(card))}
@@ -197,23 +199,20 @@ const StudentProgress: React.FC<React.PropsWithChildren<{
     </Fragment>
   );
 };
-const Reload: React.FC<React.PropsWithChildren<{
-  query: Pick<
-    QueryResult,
-    "networkStatus" | "refetch" | "loading"
-  >;
-}>> = ({ query }) => {
+
+const Reload: React.FC<
+  React.PropsWithChildren<{
+    query: Pick<QueryResult, "networkStatus" | "refetch" | "loading">;
+  }>
+> = ({ query }) => {
   const reloading = query.networkStatus === NetworkStatus.refetch;
   return (
     <A
-      onClick={() => query.refetch()}
-      disabled={query.loading || reloading}
-      variant="hover"
-      fontSize="1"
-      color={reloading ? "gray" : ""}
+      onClick={query.loading || reloading ? undefined : () => query.refetch()}
+      className={`text-sm ${reloading ? "text-gray" : ""}`}
     >
       Aktualisieren
-      <Box display="inline-block" ml={2}>
+      <Box className="inline-block ml-2">
         <Image src={IconReload} alt="" />
       </Box>
     </A>

@@ -1,6 +1,6 @@
 import { Cards } from "components/Cards";
 import { AppPage, H2 } from "components/Page";
-import { Text } from "rebass";
+import { Text } from "components/ui";
 import { useState } from "react";
 import { A } from "components/Breadcrumb";
 
@@ -24,7 +24,7 @@ export default function CardsPublic(): React.ReactElement {
       wendet ihr können sich an eurer Schule Kinder und Jugendliche schon aktiv
       beteiligen. Ganz praktisch habt ihr also schon Erfahrung mit Demokratie
       gesammelt. Jetzt habt ihr die Möglichkeit, mehr zu den Hintergründen zu
-      lernen und dabei selbst aktiv zu werden. Los geht’s!
+      lernen und dabei selbst aktiv zu werden. Los geht&apos;s!
       <H2>Konzept</H2>
       <Text>
         Gemeinsam mit voty.ch aus der Schweiz laden wir euch ein, mehr rund um
@@ -36,7 +36,7 @@ export default function CardsPublic(): React.ReactElement {
         bereits aula nutzt, könnt ihr vieles davon auf der aula-Plattform
         erledigen.
       </Text>
-      <Text my={4}>
+      <Text className="my-8">
         <strong>Übrigens</strong>: Die interaktiven Teile von voty.ch könnt ihr
         als Klasse nutzen, wenn eure Lehrperson{" "}
         <A href="/user/signup">eure Klasse hier anmeldet</A>. an.

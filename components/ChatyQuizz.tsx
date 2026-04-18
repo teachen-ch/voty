@@ -4,19 +4,11 @@
  * any more readable. Sorry for that. We are looking for funding, so that we don't only
  * work during night shifts on this stuff. Thanks!
  */
-import {
-  clone,
-  cloneDeep,
-  findIndex,
-  pick,
-  random,
-  sample,
-  shuffle,
-} from "lodash";
+import { cloneDeep, findIndex, shuffle } from "lodash";
 import { useContext, useMemo, useState } from "react";
-import { Button, Text } from "rebass";
-import { Grid } from "theme-ui";
-import { ChatyContext, parseOptions, TMessage } from "util/chaty";
+import { Button, Text } from "components/ui";
+import { Grid } from "components/ui";
+import { ChatyContext, TMessage } from "util/chaty";
 import { isBrowser } from "util/isBrowser";
 
 export interface Quizz {
@@ -44,9 +36,11 @@ const replyCorrect = [
 ];
 const replyWrong = ["Nicht ganz.", "Nein... ", "Falsch: ", "Richtig wäre: "];
 
-export const ChatyAnswers: React.FC<React.PropsWithChildren<{
-  options: string[];
-}>> = ({ options: answers }) => {
+export const ChatyAnswers: React.FC<
+  React.PropsWithChildren<{
+    options: string[];
+  }>
+> = ({ options: answers }) => {
   const {
     line,
     messages,
@@ -74,26 +68,19 @@ export const ChatyAnswers: React.FC<React.PropsWithChildren<{
     selectOption(inputMessage!, `${answer!}(${emoji})`);
   }
   return (
-    <Grid
-      width="100%"
-      bg="lightgray"
-      p={2}
-      sx={{ borderTop: "1px solid lightgray" }}
-    >
+    <Grid className="w-full bg-highlight p-2 border-t border-highlight">
       {shuffled.map((o, i) => (
-        <Button key={i} onClick={() => answer(o)} flex={1}>
-          <Text fontSize={1} textAlign="left" width="100%">
-            {o}
-          </Text>
+        <Button key={i} onClick={() => answer(o)} className="flex-1">
+          <span className="text-sm text-left w-full">{o}</span>
         </Button>
       ))}
     </Grid>
   );
 };
 
-export const ChatyQuizzCheck: React.FC<React.PropsWithChildren<{ message: TMessage }>> = ({
-  message,
-}) => {
+export const ChatyQuizzCheck: React.FC<
+  React.PropsWithChildren<{ message: TMessage }>
+> = ({ message }) => {
   const { quizz } = useContext(ChatyContext);
   const question = useMemo(() => quizz!.lastQuestion, [quizz]);
   const q = quizz!.questions[question];
@@ -106,9 +93,9 @@ export const ChatyQuizzCheck: React.FC<React.PropsWithChildren<{ message: TMessa
   ]);
   return <div>{reply}</div>;
 };
-export const ChatyQuizzEvaluate: React.FC<React.PropsWithChildren<{ message: TMessage }>> = ({
-  message,
-}) => {
+export const ChatyQuizzEvaluate: React.FC<
+  React.PropsWithChildren<{ message: TMessage }>
+> = ({ message }) => {
   const replyTemplate = message.message!.replace("EVALUATE ", "");
   const reply = useEvaluateQuizz(replyTemplate);
   return <div>{reply}</div>;

@@ -1,8 +1,8 @@
-import { Input } from "@rebass/forms";
+import { Input } from "components/ui";
 import { Cards } from "components/Cards";
 import { Page } from "components/Page";
 import debounce from "lodash/debounce";
-import { Button, Text, Flex } from "rebass";
+import { Button, Text, Flex } from "components/ui";
 import { Filter } from "components/Swissvotes";
 import { useState } from "react";
 import { ListPaths } from "pages/team/[team]/select";
@@ -23,17 +23,17 @@ export default function CardsPublic(): React.ReactElement {
       Beta-Version zur Verfügung. Ohne Klassen-Login können aber keine Arbeiten
       hochgeladen oder Diskussionen geführt werden.
       <ListPaths anon={true} />
-      <Flex mt={4}>
+      <Flex className="mt-8">
         <Input
           onChange={debounce((evt) => setKeywords(evt.target.value), 300)}
           placeholder="Suche..."
-          flex={1}
+          className="flex-1"
         />
-        <Button ml={3} flex={0.3} mt={[0, 0, "4px"]}>
+        <Button className="ml-4 mt-0 sm:mt-1" style={{ flex: 0.3 }}>
           Suche
         </Button>
       </Flex>
-      <Text mb={3} mt={1} fontSize={1}>
+      <Text className="mb-4 mt-1 text-sm">
         Filtern nach Stufe: &nbsp; &nbsp;
         <Filter set={setAge} v={age} val={"Zyklus-2"} label="Zyklus-2" sep />
         <Filter set={setAge} v={age} val={"Sek-1"} label="Sek-1" sep />

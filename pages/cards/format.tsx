@@ -1,5 +1,5 @@
 import { H2, Page } from "components/Page";
-import { Button, Text, Flex } from "rebass";
+import { Button, Text, Flex } from "components/ui";
 import { useState } from "react";
 import Image from "next/image";
 import { A } from "components/Breadcrumb";
@@ -71,7 +71,7 @@ export default function CardsPublic(): React.ReactElement {
         Wenn du selber einen eigenen Chatbot entwickeln möchtest, dann klicke
         hier:
       </p>
-      <A mt={-1} mb={4} href="/cards/chaty_create">
+      <A className="mt-[-4px] mb-8 block" href="/cards/chaty_create">
         <Button>Eigenen Chatbot erstellen</Button>
       </A>
       <H2>Quizzes, Fragen, Tests</H2>
@@ -79,7 +79,7 @@ export default function CardsPublic(): React.ReactElement {
       Kontrollfragen hinzu. Dazu gibt es verschiedene Fragemodule:
       <Quest>
         <Question>
-          <Pill display="inline">TEXTFRAGE</Pill> Stelle eine Wissens- oder eine
+          <Pill>TEXTFRAGE</Pill> Stelle eine Wissens- oder eine
           Diskussionsfrage die Schüler*innen alleine oder in der Gruppe
           beantworten sollen.
           <Textfield
@@ -90,7 +90,7 @@ export default function CardsPublic(): React.ReactElement {
         </Question>
 
         <Question>
-          <Pill display="inline">MULTICHOICE</Pill> Schliesslich kannst du auch
+          <Pill>MULTICHOICE</Pill> Schliesslich kannst du auch
           Multiple-Choice Fragen stellen.
           <br />
           <br />
@@ -101,7 +101,7 @@ export default function CardsPublic(): React.ReactElement {
           </MultiChoice>
         </Question>
         <Question>
-          <Pill display="inline">REIHENFOLGE</Pill>Bei dieser Frage hier zum
+          <Pill>REIHENFOLGE</Pill>Bei dieser Frage hier zum
           Beispiel, musst du die Antworten in eine richtige Reihenfolge bringen:
           <Order
             id="3"

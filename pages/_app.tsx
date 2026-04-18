@@ -1,3 +1,4 @@
+import "../styles/globals.css";
 import "../styles/voty.css";
 import "../styles/aula.css";
 
@@ -11,10 +12,9 @@ const RecoilRoot = RecoilRootBase as React.FC<
 >;
 import { Header } from "components/Header";
 import { Page } from "components/Page";
-import { ReactElement, useEffect, useMemo } from "react";
+import { ReactElement, useEffect, useMemo, useState, useRef } from "react";
 import CheckLogin from "components/CheckLogin";
 import initStats from "util/stats";
-import remove from "lodash/remove";
 import { GlossaryReplace } from "components/Glossary";
 import { useRouter } from "next/router";
 import { Theme } from "components/Theme";
@@ -30,41 +30,53 @@ function MyApp({ Component, pageProps }: AppProps): ReactElement {
   const apollo = useMemo(() => apolloGen({ locale: router.locale }), [
     router.locale,
   ]);
+  const isMdx = router.pathname.startsWith("/content");
   return (
     <ApolloProvider client={apollo}>
       <RecoilRoot>
         <Theme>
-          <MDXProvider components={{ wrapper: MDXWrapper }}>
-            <CheckLogin />
-            <Header />
-            <Component {...pageProps} />
-          </MDXProvider>
+          <CheckLogin />
+          <Header />
+          {isMdx ? (
+            <MDXPageWrapper>
+              <Component {...pageProps} />
+            </MDXPageWrapper>
+          ) : (
+            <MDXProvider components={{}}>
+              <Component {...pageProps} />
+            </MDXProvider>
+          )}
         </Theme>
       </RecoilRoot>
     </ApolloProvider>
   );
 }
 
-// this will wrap the MDX into a <Page> only if there is a heading (# title)
-const MDXWrapper: React.FC<React.PropsWithChildren<unknown>> = ({ children }) => {
-  if (children && Array.isArray(children)) {
-    let heading = "";
-    const headings = children.filter((el: React.ReactNode) => {
-      if (el && typeof el === "object" && "type" in el && "props" in el) {
-        if (el.type === "h1") {
-          if (!heading) heading = String((el as React.ReactElement).props.children);
-          return true;
+// MDX 3 no longer applies components.wrapper automatically. For /content/* pages
+// we capture the first <h1> via a custom MDX component and use its text as the
+// page heading, rendering the rest of the MDX inside a <Page> wrapper.
+const MDXPageWrapper: React.FC<React.PropsWithChildren<unknown>> = ({ children }) => {
+  const [heading, setHeading] = useState("");
+  const captured = useRef(false);
+  const components = useMemo(
+    () => ({
+      h1: (props: React.HTMLAttributes<HTMLHeadingElement>) => {
+        if (!captured.current) {
+          captured.current = true;
+          setHeading(String(props.children ?? ""));
         }
-      }
-      return false;
-    });
-    if (headings.length > 0) {
-      const childrenCopy = children.slice();
-      remove(childrenCopy, headings[0]);
-      return <Page heading={heading}>{childrenCopy}</Page>;
-    }
-  }
-  return <GlossaryReplace>{children}</GlossaryReplace>;
+        return null;
+      },
+    }),
+    []
+  );
+  return (
+    <Page heading={heading}>
+      <MDXProvider components={components}>
+        <GlossaryReplace>{children}</GlossaryReplace>
+      </MDXProvider>
+    </Page>
+  );
 };
 
 export default MyApp;

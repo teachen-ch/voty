@@ -1,6 +1,6 @@
 import { Step } from "pages/abstimmen";
-import { Heading, Text } from "rebass";
-import { Box, Card, Image, Flex } from "rebass";
+import { Heading, Text } from "components/ui";
+import { Box, Card, Image, Flex } from "components/ui";
 import { A } from "components/Breadcrumb";
 import { CreateUserForm } from "pages/user/signup";
 import { SessionUser, useUser } from "state/user";
@@ -34,17 +34,13 @@ export default function ZDAAbstimmung(): React.ReactElement {
       <br />
       {user && <A href={voteLink}>{tr("ZDA.Start.GoVote")}</A>}
       {user && (
-        <A
-          href="/user/logout?redirect=/spielpolitik/"
-          as="button"
-          ml={[2, 2, 4]}
-        >
+        <A href="/user/logout?redirect=/spielpolitik/" className="ml-2 sm:ml-8">
           Logout
         </A>
       )}
       <br />
       <br />
-      <DE mt={4} fontSize={[1, 1, 2]}>
+      <DE className="mt-8 text-sm sm:text-base">
         <b>Initiativen «SpielPolitik!»</b>
         <br />
         <A href="/files/spielpolitik_de.pdf" target="_blank">
@@ -89,93 +85,58 @@ export default function ZDAAbstimmung(): React.ReactElement {
 export const Logos: React.FC<React.PropsWithChildren<unknown>> = () => {
   const router = useRouter();
   return (
-    <Flex justifyContent="space-around" alignItems="center" my={4}>
+    <Flex className="justify-around items-center my-8">
       <Image
         src={`/images/logo_spielpolitik_${router.locale}.png`}
-        maxWidth="25%"
-        width={100}
-        height={83}
+        className="max-w-[25%] w-[100px] h-[83px]"
         alt="Schulen nach Bern Logo"
       />
       <Image
         src="/images/voty_logo.svg"
-        maxWidth="25%"
-        width={100}
-        height={39}
+        className="max-w-[25%] w-[100px] h-[39px]"
         alt="voty.ch Logo"
       />
       <Image
         src="/images/logo_zda.svg"
-        maxWidth="25%"
-        width={100}
-        height={60}
+        className="max-w-[25%] w-[100px] h-[60px]"
         alt="Zentrum für Deomkratie ZDA Logo"
       />
     </Flex>
   );
 };
 
-export const ZDAFullPage: React.FC<React.PropsWithChildren<{
-  heading: string;
-  image?: string;
-}>> = ({ heading, image, children }) => (
+export const ZDAFullPage: React.FC<
+  React.PropsWithChildren<{
+    heading: string;
+    image?: string;
+  }>
+> = ({ heading, image, children }) => (
   <ZDAPage heading={heading} image={image}>
     <LanguageLinks />
-    <Heading mt={-3} fontSize={[4, 4, 5]}>
-      {heading}
-    </Heading>
+    <Heading className="mt-[-12px] text-xl sm:text-2xl">{heading}</Heading>
     {children}
   </ZDAPage>
 );
 
-export const ZDAPage: React.FC<React.PropsWithChildren<{
-  heading?: string;
-  image?: string;
-}>> = (props) => (
-  <Flex
-    bg="#3D4564"
-    mt={0}
-    pt={0}
-    flexDirection="column"
-    justifyContent="center"
-    minHeight="100vh"
-  >
+export const ZDAPage: React.FC<
+  React.PropsWithChildren<{
+    heading?: string;
+    image?: string;
+  }>
+> = (props) => (
+  <Flex className="bg-[#3D4564] mt-0 pt-0 flex-col justify-center min-h-screen">
     <Head>
       <title>{`voty.ch – ${props.heading}`}</title>
     </Head>
-    <Flex
-      justifyContent="space-between"
-      fontSize={1}
-      color="#fff"
-      width="100%"
-      px={3}
-      pt={2}
-    >
+    <Flex className="justify-between text-sm text-white w-full px-4 pt-2">
       <A href="https://schulen-nach-bern.ch">schulen-nach-bern.ch</A>
       <A href="/">voty.ch</A>
     </Flex>
-    <Flex
-      alignItems="center"
-      flexDirection="column"
-      flex={1}
-      mx={"auto"}
-      maxWidth={["100%", "100%", "100%", "1160px"]}
-    >
+    <Flex className="items-center flex-col flex-1 mx-auto max-w-full md:max-w-[1160px]">
       <Box
         as="main"
-        my={[2, 2, "50px"]}
-        mx={[1, 2, 3]}
-        px={[3, 3, 4]}
-        py="25px"
-        sx={{
-          borderRadius: [0, 0, 5],
-          backgroundColor: "panelColor",
-          position: "relative",
-        }}
-        minWidth="min(100%, 800px)"
-        width="100%"
-        maxWidth="800px"
-        minHeight="450px"
+        className="my-2 sm:my-[50px] mx-1 xs:mx-2 sm:mx-4 px-4 sm:px-8 py-[25px] bg-panel relative rounded-none sm:rounded-card min-h-[450px] w-full max-w-[800px]"
+        style={{ minWidth: "min(100%, 800px)" }}
       >
         {props.children}
       </Box>
@@ -187,7 +148,7 @@ function LanguageLinks() {
   const router = useRouter();
   const path = router.pathname;
   return (
-    <Text fontSize={1} mb={4}>
+    <Text className="text-sm mb-8">
       <A href={path} locale={false}>
         deutsch
       </A>
@@ -204,17 +165,16 @@ function LanguageLinks() {
 }
 
 export const ZDAFAQ: React.FC<React.PropsWithChildren<unknown>> = () => (
-  <Box className="faq" fontSize={1} textAlign="left" mt={5}>
-    <Flex justifyContent="center">
+  <Box className="faq text-sm text-left mt-16">
+    <Flex className="justify-center">
       <Image
         src="/images/header_m2.svg"
         alt="Abstimmen"
-        maxWidth={500}
-        alignSelf="center"
+        className="max-w-[500px] self-center"
       />
     </Flex>
     <DE>
-      <Heading as="h2" mt={3}>
+      <Heading as="h2" className="mt-4">
         Fragen und Antworten
       </Heading>
       <Title>Was ist «SpielPolitik!»?</Title>
@@ -267,7 +227,7 @@ export const ZDAFAQ: React.FC<React.PropsWithChildren<unknown>> = () => (
     </DE>
 
     <FR>
-      <Heading as="h2" mt={3}>
+      <Heading as="h2" className="mt-4">
         Questions et réponses
       </Heading>
       <Title>Qu&apos;est-ce que « Joue la politique !»?</Title>
@@ -309,12 +269,12 @@ export const ZDAFAQ: React.FC<React.PropsWithChildren<unknown>> = () => (
           schulen-nach-bern.ch/fr/inscription
         </A>{" "}
         tu trouveras les prochaines dates de « Joue la politique ! » et toutes
-        les informations nécessaires pour t’inscrire.
+        les informations nécessaires pour t&apos;inscrire.
       </Text>
     </FR>
 
     <IT>
-      <Heading as="h2" mt={3}>
+      <Heading as="h2" className="mt-4">
         Domande e risposte
       </Heading>
       <Title>Che cos&apos;è «Gioca alla politica»?</Title>
@@ -363,7 +323,7 @@ export const ZDAFAQ: React.FC<React.PropsWithChildren<unknown>> = () => (
 );
 
 const Title: React.FC<React.PropsWithChildren<unknown>> = (props) => (
-  <Heading as="h3" mt={3} fontSize={2}>
+  <Heading as="h3" className="mt-4 text-base">
     {props.children}
   </Heading>
 );

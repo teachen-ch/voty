@@ -1,14 +1,14 @@
 import { AppPage, H2 } from "components/Page";
 import { Info } from "components/Learning";
 import { ReadMore } from "components/ReadMore";
-import { Text, Card, Link as A, Box, Button, Image } from "rebass";
+import { Text, Card, Box, Button, Image } from "components/ui";
+import { A } from "components/Breadcrumb";
 import { Detail, Tag } from "./projekt";
 import { isMobile } from "util/isBrowser";
 import { useState } from "react";
 import { FeedbackText } from "components/Feedback";
 import { SlideShow } from "components/SlideShow";
-import { Label, Input } from "@rebass/forms";
-import { Grid } from "theme-ui";
+import { Label, Input, Grid } from "components/ui";
 import { GlossaryLink } from "components/Glossary";
 import { Team } from "components/Team";
 
@@ -32,14 +32,14 @@ export default function Fundraising(): React.ReactElement {
   if (!password || strHash(password) !== CORRECT) {
     return (
       <AppPage
-        heading="voty.ch – Demokratie an die Schule"
+        heading="voty.ch – Demokratie an die Schule"
         image="/images/header_m1.svg"
       >
-        <Text my={4}>Für diesen Bereich wird ein Passwort benötigt.</Text>
+        <Text className="my-8">Für diesen Bereich wird ein Passwort benötigt.</Text>
         <Label htmlFor="password">Passwort:</Label>
         <Grid columns="3fr 1fr">
           <Input type="text" onChange={(e) => setPassword(e.target.value)} />
-          <Button mt={"4px"} onClick={() => alert("Passwort überprüfen")}>
+          <Button className="mt-[4px]" onClick={() => alert("Passwort überprüfen")}>
             Prüfen
           </Button>
         </Grid>
@@ -54,8 +54,8 @@ export default function Fundraising(): React.ReactElement {
       heading="voty.ch – Demokratie an die Schule"
       image="/images/header_m1.svg"
     >
-      <Card fontSize={2}>
-        <Text fontWeight="normal" mt={4} mb={3}>
+      <Card className="text-base">
+        <Text className="font-normal mt-8 mb-6">
           Die Demokratie ist wohl eines der wichtigsten Güter der Schweiz. Aber
           wie ge­lingt es uns, Ju­gendliche dafür zu begeis­tern? Und wie können
           wir helfen, Themen wie die Demokratie in der Schule der Zukunft zu
@@ -67,20 +67,18 @@ export default function Fundraising(): React.ReactElement {
           den BNE-Themen (Bildung für nachhaltige Entwicklung) zu mehr Gewicht
           im Schulalltag verhelfen.
         </Text>
-        <Info pl={3} fontStyle="italic" fontSize={1}>
+        <Info className="pl-4 italic text-sm">
           Für Feedback und Anregungen zu dieser Seite sind wir sehr dankbar. Bei
           jedem Abschnitt hast du die Möglichkeit, uns eine{" "}
           <FeedbackText
-            display="inline-block"
+            className="inline-block"
             card="Fundraising"
-            mt={0}
-            text="Frage oder
-          Anmerkung"
+            text="Frage oder Anmerkung"
           />{" "}
           zu schicken.
         </Info>
         <Section title="Idee und Wirkung" id="idee">
-          <Text mb={4}>
+          <Text className="mb-8">
             Die Themen der nachhaltigen Entwicklung sind zwar im Lehrplan 21
             verankert, erhalten im Untericht aber oft nicht einen adäquaten
             Platz. Viele Lehrpersonen fühlen sich in den Inhalten nicht sicher
@@ -92,7 +90,7 @@ export default function Fundraising(): React.ReactElement {
             zeit- und ortsunabhängigen Lernens konnten kaum ausgeschöpft werden.
           </Text>
 
-          <Text mb={4}>
+          <Text className="mb-8">
             Aber gerade für die BNE-Themen bietet sich hier eine Chance: gut
             gemachte, interaktive Lehrmittel, welche ohne grossen
             Vorbereitungsaufwand im Unterricht einsatzbereit sind (auch im
@@ -115,7 +113,7 @@ export default function Fundraising(): React.ReactElement {
             Klassenzimmer als auch asynchron im Distance-Learning oder in
             Mischformen davon ablaufen wird.
           </Text>
-          <Text mb={4}>
+          <Text className="mb-8">
             Mit voty.ch möchten wir deshalb beginnen, diese Lücke zu schliessen.
             Wir möchten Themen spannend aufbereiten und für die hybride
             On-/Offline Schule bereitstellen. Wir entwickeln eine{" "}
@@ -135,10 +133,10 @@ export default function Fundraising(): React.ReactElement {
         </Section>
 
         <Section
-          title="Warum Demokratie – Aktueller Entwicklungsstand"
+          title="Warum Demokratie – Aktueller Entwicklungsstand"
           id="demokratie"
         >
-          <Text mb={4}>
+          <Text className="mb-8">
             Der PrototypeFund hat die Anschubfinanzierung dieses Projekt
             geleistet und wir sind ein motiviertes Team, welchem das Thema der
             Demokratie sehr am Herzen lieft. Wir sehen einen Handlungsbedarf:
@@ -148,7 +146,7 @@ export default function Fundraising(): React.ReactElement {
             Chance, ein Grundverständnis – und eine Passion – für unser
             Demokratie zu schaffen.
           </Text>
-          <Text mb={4}>
+          <Text className="mb-8">
             Innerhalb von wenigen Wochen haben wir deshalb eine Plattform
             entwickelt, ein Netzwerk mit Partnern geknüpft und sind bereits im
             November 2020 mit unserem ersten Modul «Demokratie Testen» live
@@ -166,7 +164,7 @@ export default function Fundraising(): React.ReactElement {
             alt="Abstimmen"
           />
           <figcaption>Screenshot voty.ch Abstimmungsmodul</figcaption>
-          <Text my={4}>
+          <Text className="my-8">
             Danach haben wir unseren Online-Werkzeugkasten für den politischen
             Unterricht aufgebaut. Mit interaktiven Modulen für Einzel- oder
             Gruppenarbeiten, Videos mit Quizzes, dem Chatbot «Chaty» und einer
@@ -179,7 +177,7 @@ export default function Fundraising(): React.ReactElement {
             geniessen.
           </Text>
           <SlideShow
-            mb={4}
+            className="mb-8 screenshot"
             images={[
               "/screens/voty_screen_cards.jpg",
               "/screens/voty_screen_lerninhalte.jpg",
@@ -192,9 +190,8 @@ export default function Fundraising(): React.ReactElement {
               "Der Chatbot «Chaty» erklärt Grundbegriffe der Demokratie",
               "Integrierte Suche mit Tausenden historischen Wahlplakaten",
             ]}
-            className="screenshot"
           />
-          <Info fontSize={1} pl={3}>
+          <Info className="text-sm pl-4">
             <strong>Kostenlose Lehrmittel?</strong> Der Einkauf von Lehrmitteln
             ist in der Schweiz sehr dezentral organisiert. Zudem hat eine
             Lehrperson nur sehr beschränkte Budgetkompetenz. Es reicht also
@@ -203,7 +200,7 @@ export default function Fundraising(): React.ReactElement {
             aus unserer Sicht in keinem Verhältnis zum Ertrag stehen.
           </Info>
           <ReadMore title="Mehr zu den drei Module von voty.ch">
-            <Text mt={4} color="#000">
+            <Text className="mt-8" style={{ color: "#000" }}>
               <strong>Modul «Demokratie verstehen»</strong>&nbsp;
               <Tag bg={"primary"}>Live seit Feb/21</Tag>
               <br />
@@ -211,7 +208,7 @@ export default function Fundraising(): React.ReactElement {
               interaktive Elemente zur Verfügung stellt, welche die
               Schweizerische Demokratie einfach und verständlich erklären.
               <Detail>
-                <Text my={3}>
+                <Text className="my-6">
                   Im ersten Modul stellen wir den Lehrer*Innen
                   Unterrichtsmaterialien zum Demokratieprozess in der Schweiz in
                   Form von verschiedenen Lernpfaden zur Verfügung. Dies sind zum
@@ -230,9 +227,9 @@ export default function Fundraising(): React.ReactElement {
                 </Text>
               </Detail>
             </Text>
-            <Text mt={4} id="module3" color="#000">
+            <Text className="mt-8" style={{ color: "#000" }} id="module3">
               <strong>
-                <A href="/abstimmung" variant="underline">
+                <A href="/abstimmung" className="underline">
                   Modul «Demokratie testen»
                 </A>
               </strong>
@@ -242,7 +239,7 @@ export default function Fundraising(): React.ReactElement {
               von den Schüler*Innen in der Klasse zuerst diskutiert und danach
               durchgeführt werden können.
               <Detail>
-                <Text my={3}>
+                <Text className="my-6">
                   Um die Theorie in die Praxis zu übertragen, wollen wir
                   Abstimmungen für die Jugendlichen erlebbar machen. Hierzu
                   werden die zu den nationalen Vorlagen aufbereiteten Inhalte
@@ -259,7 +256,7 @@ export default function Fundraising(): React.ReactElement {
                 </Text>
               </Detail>
             </Text>
-            <Text mt={4} color="#000">
+            <Text className="mt-8" style={{ color: "#000" }}>
               <strong>Modul «Demokratie erleben»</strong>&nbsp;
               <Tag>in&nbsp;Konzeption</Tag>
               <br />
@@ -267,7 +264,7 @@ export default function Fundraising(): React.ReactElement {
               ihre Schule einbringen können. Diese werden on- und offline
               diskutiert, ausgearbeitet und geprüft.
               <Detail>
-                <Text my={3}>
+                <Text className="my-6">
                   Das dritte Modul bringt den demokratischen
                   Entscheidungsprozess in die Schule. Schulleitung, Lehrerschaft
                   und Schüler*Innen führen gemeinsam einen offenen und kreativen
@@ -293,7 +290,7 @@ export default function Fundraising(): React.ReactElement {
         </Section>
 
         <Section title="Zielsetzung" id="ziele">
-          <Text mb={4}>
+          <Text className="mb-8">
             Zum einen möchten wir mit voty.ch einen Standard setzen für ein toll
             gemachtes hybrides Lehrmittel für politische Bildung und damit in
             den nächsten 3 Jahren mindestens{" "}
@@ -330,31 +327,29 @@ const Section: React.FC<React.PropsWithChildren<{ title: string; id: string }>> 
   const [show, setShow] = useState(false);
   return (
     <Box
-      mt={5}
+      className="mt-16"
       onMouseOver={() => setShow(true)}
       onMouseOut={() => setShow(false)}
     >
-      <Box mt={"-120px"} sx={{ position: "absolute" }} id={id}>
+      <Box className="mt-[-120px]" style={{ position: "absolute" }} id={id}>
         &nbsp;
       </Box>
       <Box
-        sx={{
+        className="text-sm mt-2"
+        style={{
           position: "absolute",
-          right: ["34px", "34px", "50px"],
+          right: "50px",
           visibility: show ? "visible" : "hidden",
           cursor: "pointer",
         }}
-        fontSize={1}
-        mt={2}
       >
         <FeedbackText
-          mt={0}
           text={isMobile() ? "Feedback" : "Feedback zu diesem Abschnitt"}
           card="Fundraising"
           quest={title}
         />
       </Box>
-      <H2 mt={0}>{title}</H2>
+      <H2 className="mt-0">{title}</H2>
       {children}
     </Box>
   );

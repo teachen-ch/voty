@@ -1,4 +1,4 @@
-import { Text } from "rebass";
+import { Text } from "components/ui";
 import { Page } from "components/Page";
 import { ReactElement } from "react";
 

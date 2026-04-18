@@ -1,58 +1,27 @@
-// import { motion, useViewportScroll, useTransform } from "framer-motion";
-import { Text, Link } from "rebass";
+import { Box, Link } from "components/ui";
 
 type BannerProps = {
   href?: string;
   onClick?: () => void;
   children: React.ReactNode;
 };
-export const Banner: React.FC<React.PropsWithChildren<BannerProps>> = ({ href, onClick, children }) => {
-  /*const { scrollYProgress } = useViewportScroll();
-  const opacity = useTransform(
-    scrollYProgress,
-    [0, 0.2, 0.4, 0.6, 0.8, 1],
-    [1, 1, 1, 1, 0.5, 0]
-  );*/
 
+export const Banner: React.FC<React.PropsWithChildren<BannerProps>> = ({
+  href,
+  onClick,
+  children,
+}) => {
   return (
-    /*
-    <motion.div
-      style={{ position: "fixed", opacity }}
-      whileHover={{ opacity: 0.7 }}
-    >*/
-    <Text color="white">
+    <Box className="text-white">
       <Link
-        bg="danger"
-        px="70px"
-        py={3}
-        pb={[55, 55, 3]}
-        sx={{
-          top: [null, null, 40],
-          left: [null, null, -95],
-          zIndex: 20,
-          bottom: [-18, -18, "inherit", "inherit"],
-          right: [-97, -97, "inherit", "inherit"],
-          position: "fixed",
-          maxWidth: ["290px", "290px", "353px"],
-          display: "block",
-          transform: "rotate(-45deg)",
-          boxShadow: [
-            "0 -2px 10px 0 #333",
-            "0 -2px 10px 0 #333",
-            "0 2px 10px 0 #333",
-          ],
-          ":hover": {
-            textDecoration: "none",
-            transform: "scale(2) translate(100px, 0px)",
-          },
-        }}
+        className="block fixed z-20 px-[70px] py-4 pb-[55px] sm:pb-4 bg-danger rotate-[-45deg] max-w-[290px] sm:max-w-[353px] bottom-[-18px] right-[-97px] sm:bottom-auto sm:right-auto sm:top-10 sm:left-[-95px] shadow-[0_-2px_10px_0_#333] sm:shadow-[0_2px_10px_0_#333] hover:no-underline hover:scale-[2] hover:translate-x-[100px]"
         href={href}
         onClick={onClick}
       >
-        <Text textAlign="center" fontWeight="bold" fontSize="17px">
+        <span className="block text-center font-bold text-[17px]">
           {children}
-        </Text>
+        </span>
       </Link>
-    </Text>
+    </Box>
   );
 };

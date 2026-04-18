@@ -1,13 +1,12 @@
 import { gql } from "@apollo/client";
 import { useTeam, useUser } from "state/user";
-import { Box, Text, Button, Flex } from "rebass";
+import { Box, Text, Button, Flex, Textarea } from "components/ui";
 import {
   DiscussionFieldsFragment,
   usePostDiscussionMutation,
   useGetTeamDiscussionsQuery,
 } from "graphql/types";
 import React, { useState } from "react";
-import { Textarea } from "@rebass/forms";
 import { Err } from "./Page";
 import { Pill } from "components/Misc";
 import { H2 } from "components/Page";
@@ -60,11 +59,13 @@ export const POST_DISCUSSION = gql`
   ${fragments.DiscussionFields}
 `;
 
-export const Discussion: React.FC<React.PropsWithChildren<{
-  card?: string;
-  ballotId?: string;
-  title?: string;
-}>> = ({ card, ballotId, title = "Klassendiskussion" }) => {
+export const Discussion: React.FC<
+  React.PropsWithChildren<{
+    card?: string;
+    ballotId?: string;
+    title?: string;
+  }>
+> = ({ card, ballotId, title = "Klassendiskussion" }) => {
   const user = useUser();
   const team = useTeam();
 
@@ -76,10 +77,10 @@ export const Discussion: React.FC<React.PropsWithChildren<{
 
   if (!team) return null;
   return (
-    <Box className="discussion" id="discussion" mt={6}>
+    <Box className="discussion mt-32" id="discussion">
       {title && <H2>{title}</H2>}
 
-      <Box my={3}>
+      <Box className="my-4">
         {discussions && discussions.length > 0
           ? discussions.map(
               (discussion) =>
@@ -98,34 +99,33 @@ export const Discussion: React.FC<React.PropsWithChildren<{
   );
 };
 
-const DiscussionDetail: React.FC<React.PropsWithChildren<{
-  discussion: DiscussionFieldsFragment;
-  userId: string;
-}>> = ({ discussion, userId }) => {
+const DiscussionDetail: React.FC<
+  React.PropsWithChildren<{
+    discussion: DiscussionFieldsFragment;
+    userId: string;
+  }>
+> = ({ discussion, userId }) => {
   const isMe = discussion.user.id === userId;
   return (
     <Flex
-      className="discussion"
-      mb={2}
-      pb={2}
-      sx={{ borderBottom: "1px solid", borderColor: "trColor" }}
-      fontSize={2}
-      alignItems="flex-start"
-      flexDirection={isMe ? "row-reverse" : "inherit"}
-      textAlign={isMe ? "right" : "left"}
+      className={`discussion mb-2 pb-2 border-b border-trColor text-base items-start ${
+        isMe ? "flex-row-reverse text-right" : "flex-row text-left"
+      }`}
     >
-      <Pill sx={{ flexShrink: 0, borderRadius: 20 }} ml={isMe ? 2 : 0}>
+      <Pill className={`shrink-0 rounded-[20px] ${isMe ? "ml-2" : ""}`}>
         {isMe ? "Ich" : discussion.user.shortname}
       </Pill>
-      <Text pt="6px">{discussion.text}</Text>
+      <Text className="pt-[6px]">{discussion.text}</Text>
     </Flex>
   );
 };
 
-const PostDiscussion: React.FC<React.PropsWithChildren<{
-  card?: string;
-  ballotId?: string;
-}>> = ({ card, ballotId }) => {
+const PostDiscussion: React.FC<
+  React.PropsWithChildren<{
+    card?: string;
+    ballotId?: string;
+  }>
+> = ({ card, ballotId }) => {
   const [success, setSuccess] = useState(false);
   const [text, setText] = useState("");
   const [open, setOpen] = useState(false);
@@ -171,12 +171,7 @@ const PostDiscussion: React.FC<React.PropsWithChildren<{
 
   if (success) {
     return (
-      <Flex
-        justifyContent="space-between"
-        alignItems="center"
-        mt={5}
-        flexWrap="wrap"
-      >
+      <Flex className="justify-between items-center mt-16 flex-wrap">
         Diskussionsbeitrag abgeschickt!
         <Button onClick={() => setSuccess(false)}>Neuer Beitrag</Button>
       </Flex>
@@ -185,7 +180,7 @@ const PostDiscussion: React.FC<React.PropsWithChildren<{
 
   if (!open) {
     return (
-      <Button width="100%" onClick={() => setOpen(true)}>
+      <Button className="w-full" onClick={() => setOpen(true)}>
         Neuer Diskussionsbeitrag
       </Button>
     );
@@ -194,17 +189,14 @@ const PostDiscussion: React.FC<React.PropsWithChildren<{
   return (
     <Box id="postDiscussion">
       <Textarea
-        mt={3}
+        className="mt-4 bg-textarea border-white placeholder:text-white text-sm sm:text-base"
         value={text}
-        bg="textarea"
-        sx={{ border: "white", "::placeholder": { color: "#fff" } }}
         onChange={(evt) => setText(evt.target.value)}
-        fontSize={[1, 1, 2]}
         rows={2}
         placeholder="Mein Kommentar..."
       />
-      <Flex width="100%" justifyContent="space-between" mt={2}>
-        <Button variant="text" onClick={() => setOpen(false)} mr={3}>
+      <Flex className="w-full justify-between mt-2">
+        <Button variant="text" onClick={() => setOpen(false)} className="mr-4">
           Abbrechen
         </Button>
         <Button onClick={onSubmit}>Beitrag&nbsp;abschicken</Button>

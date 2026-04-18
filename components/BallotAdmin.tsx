@@ -1,6 +1,6 @@
 import { gql, useApolloClient } from "@apollo/client";
 
-import { Text, Link as A, Button, Card, Box, Flex } from "rebass";
+import { Text, Link as A, Button, Card, Box, Flex } from "components/ui";
 import {
   BallotWhereInput,
   useBallotsQuery,

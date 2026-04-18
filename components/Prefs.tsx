@@ -1,10 +1,10 @@
 import { gql } from "@apollo/client";
-import { Label, Select } from "@rebass/forms";
+import { Label, Select } from "components/ui";
 import { TeamAnonFieldsFragment, useSetPrefsMutation } from "graphql/types";
 import cloneDeep from "lodash/cloneDeep";
 import { useState } from "react";
-import { Box, Button } from "rebass";
-import { Grid } from "theme-ui";
+import { Box, Button } from "components/ui";
+import { Grid } from "components/ui";
 import { A } from "./Breadcrumb";
 import { Err } from "./Page";
 import { fragments } from "./Teams";
@@ -21,10 +21,12 @@ export const SET_PREFS = gql`
   ${fragments.TeamTeacherFields}
 `;
 
-export const EditTeamPrefs: React.FC<React.PropsWithChildren<{
-  team: TeamAnonFieldsFragment;
-  card?: string;
-}>> = ({ team, card }) => {
+export const EditTeamPrefs: React.FC<
+  React.PropsWithChildren<{
+    team: TeamAnonFieldsFragment;
+    card?: string;
+  }>
+> = ({ team, card }) => {
   const [show, setShow] = useState(false);
   const [error, setError] = useState("");
   const [prefs, setPrefs] = useState<Record<string, any>>(team.prefs);
@@ -54,16 +56,16 @@ export const EditTeamPrefs: React.FC<React.PropsWithChildren<{
 
   return (
     <Box>
-      <A onClick={() => setShow(!show)} mx={8}>
+      <A onClick={() => setShow(!show)} className="ml-8">
         {card
           ? "Anpassen"
           : `Klassen-Einstellungen${isMobile() ? "" : " bearbeiten"}`}
-        <Box ml={2} display="inline-block">
+        <Box className="ml-2 inline-block">
           <Image src={IconPrefs} width="16" height="16" alt="" />
         </Box>
       </A>
       {show && (
-        <Box mt={3} textAlign="left" fontStyle="normal">
+        <Box className="mt-4 text-left" style={{ fontStyle: "normal" }}>
           <Label>
             Bereits eingegebene Arbeiten der ganzen Klasse anzeigen:
           </Label>
@@ -75,7 +77,7 @@ export const EditTeamPrefs: React.FC<React.PropsWithChildren<{
             <option value="after">Nach eigener Abgabe</option>
             <option value="never">Nie</option>
           </Select>
-          <Label mt={3}>Gruppenarbeiten ermöglichen:</Label>
+          <Label className="mt-4">Gruppenarbeiten ermöglichen:</Label>
           <Select
             value={getPref("allowGroups")}
             onChange={(e) => setPref("allowGroups", e.target.value)}
@@ -83,7 +85,7 @@ export const EditTeamPrefs: React.FC<React.PropsWithChildren<{
             <option value="">Ja</option>
             <option value="no">Nein</option>
           </Select>
-          <Grid columns={"1fr 1fr"} mt={3}>
+          <Grid columns="1fr 1fr" gap={3} className="mt-4">
             <Button variant="secondary" onClick={() => setShow(false)}>
               Abbrechen
             </Button>

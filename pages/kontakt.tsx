@@ -1,5 +1,5 @@
 import { Page } from "components/Page";
-import { Text, Button } from "rebass";
+import { Box, Text, Button } from "components/ui";
 import { ReactElement } from "react";
 import Link from "next/link";
 
@@ -11,7 +11,7 @@ export default function Kontakt(): ReactElement {
   return (
     <Page heading="Kontakt &amp; Impressum">
       <Text>voty.ch ist ein Projekt des Non-Profit Vereins «voty.ch».</Text>
-      <pre>
+      <pre className="mt-4">
         Verein voty.ch
         <br />
         Effingerstrasse 10
@@ -25,21 +25,21 @@ export default function Kontakt(): ReactElement {
         Möchtet ihr mit uns Kontakt aufnehmen? Wir freuen uns auf Feedback,
         Anregungen und Fragen zu voty.ch:
       </Text>
-      <Text my={4}>
-        <Button onClick={sendMail} width={["100%", "100%", "auto"]}>
+      <Box className="my-8">
+        <Button onClick={sendMail} className="w-full sm:w-auto">
           Email schreiben
         </Button>
-      </Text>
+      </Box>
 
-      <Text mt={5}>
+      <Text className="mt-16">
         Möchtet ihr regelmässig über voty.ch informiert werden (ca. 2-3 mal pro
         Semester):
       </Text>
-      <Text my={4}>
-        <Link href="/newsletter" passHref legacyBehavior>
-          <Button width={["100%", "100%", "auto"]}>Newsletter anmelden</Button>
+      <Box className="my-8">
+        <Link href="/newsletter">
+          <Button className="w-full sm:w-auto">Newsletter anmelden</Button>
         </Link>
-      </Text>
+      </Box>
     </Page>
   );
 }

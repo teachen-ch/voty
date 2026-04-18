@@ -1,14 +1,11 @@
-import { Button } from "rebass";
-import { Label, Input, Select } from "@rebass/forms";
-import { Grid } from "theme-ui";
+import { Button, Label, Input, Select, Grid } from "components/ui";
 import { ReactElement } from "react";
 
-export const Newsletter: React.FC<React.PropsWithChildren<{ campaign?: string; submit?: string }>> = ({
-  campaign,
-  submit,
-}) => (
+export const Newsletter: React.FC<
+  React.PropsWithChildren<{ campaign?: string; submit?: string }>
+> = ({ campaign, submit }) => (
   <form action="https://newsletter.teachen.ch/subscribe" method="POST">
-    <Grid gap={2} py={4} columns={[0, 0, "1fr 3fr"]}>
+    <Grid gap={2} columns="1fr 3fr" className="py-8">
       <Field id="Vorname" label="Vorname" />
       <Field id="name" label="Nachname" />
       <Field id="email" label="Email" placeholder="name@meineschule.ch" />
@@ -29,23 +26,20 @@ export const Newsletter: React.FC<React.PropsWithChildren<{ campaign?: string; s
   </form>
 );
 
-export const NewsletterSlim: React.FC<React.PropsWithChildren<{ campaign?: string }>> = ({
-  campaign,
-}) => (
+export const NewsletterSlim: React.FC<
+  React.PropsWithChildren<{ campaign?: string }>
+> = ({ campaign }) => (
   <form action="https://newsletter.teachen.ch/subscribe" method="POST">
-    <Label htmlFor="email" mb={2}>
+    <Label htmlFor="email" className="mb-2 block">
       Ihre Email:
     </Label>
 
-    <Grid gap={2} columns={[0, 0, "3fr 1fr"]}>
+    <Grid gap={2} columns="3fr 1fr">
       <Input
         name="email"
         id="email"
         placeholder="name@meineschule.ch"
-        bg="lightgray"
-        sx={{ "::placeholder": { color: "#fff" } }}
-        mb="0px !important"
-        mt="0 !important"
+        className="bg-highlight placeholder:text-white"
       />
       <input type="hidden" name="Funktion" value="Lehrer*in" />
       <input type="hidden" name="Kampagne" value={campaign} />
@@ -67,7 +61,7 @@ export function Field({
 }): ReactElement {
   return (
     <>
-      <Label htmlFor={id} alignSelf="center">
+      <Label htmlFor={id} className="self-center">
         {label}:
       </Label>
       <Input type="text" name={id} id={id} placeholder={placeholder} />
@@ -83,7 +77,7 @@ export function Submit({
   value: string;
 }): ReactElement {
   return (
-    <Button type="submit" name={name} sx={{ gridColumn: [0, 0, 2] }}>
+    <Button type="submit" name={name} className="sm:col-start-2">
       {value}
     </Button>
   );
@@ -100,10 +94,10 @@ export function SelectField({
 }): ReactElement {
   return (
     <>
-      <Label htmlFor={id} mt={2}>
+      <Label htmlFor={id} className="mt-2 block">
         {label}:
       </Label>
-      <Select name={id} id={id} sx={{ width: "100%" }}>
+      <Select name={id} id={id} className="w-full">
         {children}
       </Select>
     </>

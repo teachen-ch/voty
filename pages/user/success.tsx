@@ -1,4 +1,4 @@
-import { Heading, Text, Flex, Button } from "rebass";
+import { Heading, Text, Flex, Button } from "components/ui";
 import { useState, ReactElement } from "react";
 import { ErrorBox } from "../../components/Form";
 import { SessionUser } from "state/user";
@@ -33,18 +33,17 @@ export default function Success({
   }
   return (
     <Flex
-      flexDirection="column"
-      minHeight="450px"
-      sx={{ background: 'url("/images/voty_welcome.svg") center no-repeat' }}
+      className="flex-col min-h-[450px]"
+      style={{ background: 'url("/images/voty_welcome.svg") center no-repeat' }}
     >
       <DE>
-        <Heading mt={0}>Hallo {user?.name}</Heading>
+        <Heading className="mt-0">Hallo {user?.name}</Heading>
         <Text>
           Dein Konto wurde erstellt und wir haben ein Email an die Adresse «
           {user?.email}» geschickt. Bitte öffne den Link in diesem Email, um
           dich anzumelden.
         </Text>
-        <Text my={4}>
+        <Text className="my-8">
           <strong>Keine Email erhalten?</strong> Bitte überprüfe deine Email
           Adresse auf Tippfehler ({user?.email}) und schau im Spam-Ordner nach.
         </Text>
@@ -62,12 +61,12 @@ export default function Success({
       </DE>
 
       <FR>
-        <Heading mt={0}>Bonjour {user?.name}</Heading>
+        <Heading className="mt-0">Bonjour {user?.name}</Heading>
         <Text>
           Ton compte a été créé et nous avons envoyé un e-mail à {user?.email}.
           Ouvre le lien dans l&apos;e-mail pour t&apos;inscrire.
         </Text>
-        <Text my={4}>
+        <Text className="my-8">
           <strong>Aucun e-mail reçu ?</strong> Vérifie que ton adresse e-mail ne
           contient pas de fautes de frappe ({user?.email}) et vérifie ton
           dossier spam.
@@ -86,12 +85,12 @@ export default function Success({
       </FR>
 
       <IT>
-        <Heading mt={0}>Ciao {user?.name}</Heading>
+        <Heading className="mt-0">Ciao {user?.name}</Heading>
         <Text>
           Tuo account è stato creato e abbiamo inviato una mail a «{user?.email}
           » Per favore apri il link in questa e-mail per registrarti.
         </Text>
-        <Text my={4}>
+        <Text className="my-8">
           <strong>Non hai ricevuto un&apos;email?</strong> Controlla che il tuo
           indirizzo e-mail non contenga errori di battitura ({user?.email}) e
           controlla la cartella dello spam.

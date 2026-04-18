@@ -4,7 +4,7 @@ import { A, Breadcrumb, Here } from "components/Breadcrumb";
 import { Role, useStatsQuery } from "graphql/types";
 import { gql } from "@apollo/client";
 import date from "util/date";
-import { Text } from "rebass";
+import { Text } from "components/ui";
 
 export const STATS = gql`
   query stats($from: Float, $to: Float) {
@@ -38,7 +38,7 @@ export default function StatsPage(): ReactElement {
         <Here>Statistiken</Here>
       </Breadcrumb>
 
-      <Text fontSize={1} mb={3}>
+      <Text className="text-sm mb-4">
         <Filter set={() => allTime()} l="Immer" sf={sf} f={f} sep />
         <Filter set={() => lastDays(7)} l="-7 Tage" sf={sf} f={f} sep />
         <Filter set={() => lastDays(14)} l="-14 Tage" sf={sf} f={f} sep />
@@ -102,7 +102,7 @@ const Filter: React.FC<React.PropsWithChildren<{
         set();
         sf(l);
       }}
-      sx={{
+      style={{
         fontWeight: f === l ? "bold" : "normal",
         textDecoration: f === l ? "underline" : "none",
       }}

@@ -1,14 +1,13 @@
 import { Page } from "components/Page";
-import { Flex, Heading } from "rebass";
+import { Flex, Heading } from "components/ui";
 import { ReactElement } from "react";
 
 export default function NewsletterConfirmed(): ReactElement {
   return (
     <Page heading="Newsletter-Anmeldung">
       <Flex
-        flexDirection="column"
-        minHeight="450px"
-        sx={{ background: 'url("/images/voty_welcome.svg") center no-repeat' }}
+        className="flex-col min-h-[450px]"
+        style={{ background: 'url("/images/voty_welcome.svg") center no-repeat' }}
       >
         <Heading as="h2" id="newsletter">
           ✅ Super, deine Newsletter-Anmeldung ist jetzt bestätigt!

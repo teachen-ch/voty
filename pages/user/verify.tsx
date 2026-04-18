@@ -1,7 +1,8 @@
 import { useRouter } from "next/router";
+import NextLink from "next/link";
 import { useApolloClient, gql } from "@apollo/client";
 import { useState, useEffect } from "react";
-import { Text, Button, Heading } from "rebass";
+import { Text, Button, Heading } from "components/ui";
 import { AppPage, Loading } from "components/Page";
 import { useQueryParam } from "util/hooks";
 import { useSetAccessToken, useSetUser } from "../../state/user";
@@ -45,13 +46,11 @@ export default function VerifyPage(): React.ReactElement {
 
   useEffect(() => {
     if (token) {
-      // first logout current user, as doVerification will auto-login user based on token
       void client.clearStore();
       setAccessToken("");
       setUser(undefined);
       void doVerification({ variables: { token } });
     }
-    // adding additional deps kills the redirect
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [token]);
 
@@ -69,10 +68,13 @@ export default function VerifyPage(): React.ReactElement {
         onClose={() => void router.push("/")}
       >
         <Heading as="h2">{tr("Misc.ErrorTitle")}</Heading>
-        <Text mb={4}>{error}</Text>
-        <Button as="a" href="/user/login">
+        <Text className="mb-8">{error}</Text>
+        <NextLink
+          href="/user/login"
+          className="inline-flex items-center justify-center cursor-pointer font-semibold rounded-card min-h-[40px] leading-none font-body text-base bg-primary text-white px-4"
+        >
           {tr("Misc.Back")}
-        </Button>
+        </NextLink>
       </AppPage>
     );
   }

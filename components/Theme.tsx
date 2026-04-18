@@ -1,19 +1,21 @@
-import React, { useEffect, useState } from "react";
-import votyTheme from "styles/theme";
-import aulaTheme from "styles/aula_theme";
-import { ThemeProvider } from "theme-ui";
+import React, { useEffect } from "react";
 import { useRouter } from "next/router";
 import { useTheme } from "util/hooks";
 
-export const Theme: React.FC<React.PropsWithChildren<{ chilren?: React.ReactNode }>> = ({
+export const Theme: React.FC<React.PropsWithChildren<unknown>> = ({
   children,
 }) => {
   const themeName = useTheme();
-  const theme = themeName === "aula" ? aulaTheme : votyTheme;
   const router = useRouter();
 
   useEffect(() => {
-    if (themeName === "aula" && router.pathname == "/") router.replace("/aula");
+    if (themeName === "aula") {
+      document.body.classList.add("theme-aula");
+      router.pathname === "/" && router.replace("/aula");
+    } else {
+      document.body.classList.remove("theme-aula");
+    }
   }, [themeName, router]);
-  return <ThemeProvider theme={theme}>{children}</ThemeProvider>;
+
+  return <>{children}</>;
 };

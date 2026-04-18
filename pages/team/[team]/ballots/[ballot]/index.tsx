@@ -1,5 +1,5 @@
 import { AppPage, LoggedInPage, ErrorPage } from "components/Page";
-import { Text, Box, Image, Button, Flex } from "rebass";
+import { Text, Box, Image, Button, Flex } from "components/ui";
 import { useRouter } from "next/router";
 import { useUser } from "state/user";
 import { useBallotQuery, BallotQuery, useVoteMutation } from "graphql/types";
@@ -47,8 +47,7 @@ export default function BallotPage(): ReactElement {
         </Breadcrumb>
         <VotySuccess name={user?.name} />
         <Button
-          mt={3}
-          width="100%"
+          className="mt-4 w-full"
           onClick={() => {
             window.scrollTo(0, 0);
             void router.push("/student/");
@@ -83,12 +82,14 @@ export default function BallotPage(): ReactElement {
   );
 }
 
-export const VotyNow: React.FC<React.PropsWithChildren<{
-  ballot: BallotQuery["ballot"];
-  onSuccess: () => void;
-  slim?: boolean;
-  loginLink?: string;
-}>> = ({ ballot, onSuccess, slim, loginLink = "/user/login" }) => {
+export const VotyNow: React.FC<
+  React.PropsWithChildren<{
+    ballot: BallotQuery["ballot"];
+    onSuccess: () => void;
+    slim?: boolean;
+    loginLink?: string;
+  }>
+> = ({ ballot, onSuccess, slim, loginLink = "/user/login" }) => {
   const [error, setError] = useState("");
   const tr = useTr();
   const user = useUser();
@@ -130,50 +131,61 @@ export const VotyNow: React.FC<React.PropsWithChildren<{
   }
 
   return (
-    <Text sx={{ margin: "0 auto" }}>
-      <Box variant="centered">
-        <Box width={["100%", "100%", 400]}>
+    <Box className="mx-auto">
+      <Box className="flex justify-center">
+        <Box className="w-full sm:w-100">
           {!slim && (
             <img src={`/images/voty_now.svg`} alt="Abstimmen" width="100%" />
           )}
-          <Box px={[0, 0, 2]} mt={10}>
-            <Box fontSize={2}>
-              <Flex justifyContent="space-around">
+          <Box className="px-0 sm:px-2 mt-8">
+            <Box className="text-base">
+              <Flex className="justify-around">
                 <A onClick={() => vote(ballot.id, 1)}>
-                  <Flex flexDirection="column" alignItems="center">
+                  <Flex className="flex-col items-center">
                     <Image src="/images/icon_yes.svg" height={50} alt="Ja" />
-                    <Text mt={1}>{tr("VotyNow.Yes")}</Text>
+                    <span className="mt-1 text-sm md:text-base">
+                      {tr("VotyNow.Yes")}
+                    </span>
                   </Flex>
                 </A>
                 <A onClick={() => vote(ballot.id, 2)}>
-                  <Flex flexDirection="column" alignItems="center">
-                    <Image src="/images/icon_no.svg" height={50} alt="Nein" />
-                    <Text mt={1}>{tr("VotyNow.No")}</Text>
+                  <Flex className="flex-col items-center">
+                    <Image
+                      src="/images/icon_no.svg"
+                      width={26}
+                      height={50}
+                      alt="Nein"
+                    />
+                    <span className="mt-1 text-sm md:text-base">
+                      {tr("VotyNow.No")}
+                    </span>
                   </Flex>
                 </A>
               </Flex>
-              <Box variant="centered" mt={3} mb={4}>
-                <A onClick={() => vote(ballot.id, 0)} variant="underline">
-                  <Text fontSize={1}>{tr("VotyNow.Abstain")}</Text>
+              <Box className="flex justify-center mt-4 mb-8">
+                <A onClick={() => vote(ballot.id, 0)} className="underline">
+                  <span className="text-sm">{tr("VotyNow.Abstain")}</span>
                 </A>
               </Box>
-              <ErrorBox my={2} error={error} />
+              <ErrorBox className="my-2" error={error} />
             </Box>
           </Box>
         </Box>
       </Box>
-    </Text>
+    </Box>
   );
 };
 
-export const VotySuccess: React.FC<React.PropsWithChildren<{ name: Nullable<string> }>> = ({ name }) => (
+export const VotySuccess: React.FC<
+  React.PropsWithChildren<{ name: Nullable<string> }>
+> = ({ name }) => (
   <>
-    <Text mb={4}>
+    <Text className="mb-8">
       Super, {name}, du hast nun anonym abgestimmt und deine Stimme wurde
       gezählt. Die Resultate der Abstimmung könnt ihr mit eurer Lehrperson
       ansehen und besprechen.
     </Text>
-    <Box textAlign="center">
+    <Box className="text-center">
       <img
         src="/images/voty_success.svg"
         alt="Juhee"

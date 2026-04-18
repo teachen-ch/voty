@@ -1,8 +1,8 @@
 import { gql } from "@apollo/client";
 import { useUser, useSetUser } from "../state/user";
-import { Flex, Text, Button, Box } from "rebass";
+import { Flex, Text, Button, Box } from "components/ui";
 import omit from "lodash/omit";
-import { Grid } from "theme-ui";
+import { Grid } from "components/ui";
 import { QForm, ErrorBox } from "./Form";
 import { ShowField } from "./Users";
 import { cantonCodes } from "../util/cantons";
@@ -124,12 +124,12 @@ export const SelectSchool: React.FC<React.PropsWithChildren<unknown>> = () => {
 
   if (user.school && !edit) {
     return (
-      <Grid gap={2} columns={[0, 0, "1fr 3fr"]}>
+      <Grid gap={2} columns="1fr 3fr">
         <ShowField
           label="Schule"
           value={`${user.school.name}, ${user.school.city}`}
         />
-        <Button onClick={() => setEdit(true)} sx={{ gridColumn: [0, 0, 2] }}>
+        <Button onClick={() => setEdit(true)} className="sm:col-start-2">
           Andere Schule auswählen
         </Button>
       </Grid>
@@ -185,14 +185,14 @@ export const SelectSchool: React.FC<React.PropsWithChildren<unknown>> = () => {
               setUserSchool({ variables: { school: String(values.school) } })
             }
           >
-            <Flex sx={{ gridColumn: [0, 0, 2] }} justifyContent="space-between">
+            <Flex className="sm:col-start-2 justify-between">
               <Button onClick={() => setEdit(false)} variant="text">
                 Abbrechen
               </Button>
               <Button
                 onClick={() => setCreate(true)}
                 variant="text"
-                width="200%"
+                className="w-[200%]"
               >
                 Neue Schule erfassen
               </Button>
@@ -308,11 +308,11 @@ export function CreateSchool({
         <Button
           onClick={onCancel}
           variant="text"
-          sx={{ gridColumn: [0, 0, 2] }}
+          className="sm:col-start-2"
         >
           Abbrechen
         </Button>
-        <ErrorBox error={error} my={4} />
+        <ErrorBox error={error} className="mb-8" />
       </QForm>
     </Box>
   );

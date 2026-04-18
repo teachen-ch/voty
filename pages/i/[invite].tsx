@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import { AppPage, Err } from "../../components/Page";
 import { gql } from "@apollo/client";
 import { ErrorBox } from "../../components/Form";
-import { Heading, Box, Button, Text } from "rebass";
+import { Heading, Box, Button, Text } from "components/ui";
 import { useState } from "react";
 import { CreateUserForm } from "../user/signup";
 import Success from "../user/success";
@@ -84,7 +84,7 @@ const Invite: React.FC<React.PropsWithChildren<unknown>> = () => {
   if (teamQuery.error || !team) {
     return (
       <AppPage heading="Fehler">
-        <Box minHeight="400px">
+        <Box className="min-h-[400px]">
           Diese Einladung ist nicht (mehr) gültig. Bitte sprich mit Deiner
           Lehrperson.
           {teamQuery.error?.message && (
@@ -117,7 +117,7 @@ const Invite: React.FC<React.PropsWithChildren<unknown>> = () => {
         Einladung für die Klasse «{team.name}» in der Schule «
         {team.school?.name}»
       </Heading>
-      <Text mb={3} fontSize={[2, 2, 3]}>
+      <Text className="mb-4 text-base sm:text-lg">
         Erstelle einen neuen Schüler*innen Account für voty.ch. Bitte nutze die
         Email-Adresse deiner Schule.
       </Text>
@@ -130,7 +130,7 @@ const Invite: React.FC<React.PropsWithChildren<unknown>> = () => {
         omitLastname
         defaultRole="Student"
       >
-        <ErrorBox error={error} mb={4} />
+        <ErrorBox error={error} className="mb-8" />
       </CreateUserForm>
     </AppPage>
   );
@@ -165,7 +165,7 @@ const AcceptInvite: React.FC<React.PropsWithChildren<AcceptInviteProps>> = ({ in
   if (success) {
     return (
       <>
-        <Text my={4}>du bist nun angemeldet in der Klasse «{team.name}»</Text>
+        <Text className="my-8">du bist nun angemeldet in der Klasse «{team.name}»</Text>
         <Button onClick={() => router.push("/")}>Weiter geht&apos;s</Button>
       </>
     );
@@ -180,7 +180,7 @@ const AcceptInvite: React.FC<React.PropsWithChildren<AcceptInviteProps>> = ({ in
           Einladung für die Klasse «{team.name}» in der Schule «
           {team.school?.name}»
         </Heading>
-        <Text mb={3} fontSize={[2, 2, 3]}>
+        <Text className="mb-4 text-base sm:text-lg">
           Erstelle einen neuen Schüler*innen Account für voty.ch. Bitte nutze
           die Email-Adresse deiner Schule.
         </Text>
@@ -215,7 +215,7 @@ const AcceptInvite: React.FC<React.PropsWithChildren<AcceptInviteProps>> = ({ in
       <Text>
         Einladung für Klasse «{team.name}» in der Schule «{team.school?.name}»
       </Text>
-      <Button my={4} onClick={() => doAcceptInvite()}>
+      <Button className="my-8" onClick={() => doAcceptInvite()}>
         Einladung annehmen
       </Button>
       <ErrorBox error={error} />

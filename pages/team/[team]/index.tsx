@@ -1,5 +1,5 @@
 import { AppPage, H2 } from "components/Page";
-import { Box, Flex, Text } from "rebass";
+import { Box, Flex, Text } from "components/ui";
 import { Breadcrumb, Here } from "components/Breadcrumb";
 import { StudentCardList } from "components/Cards";
 import { StudentListBallots } from "components/Ballots";
@@ -22,41 +22,40 @@ export default function TeamHome(): React.ReactElement {
     return <AppPage heading="" />;
   }
 
-  // this is the anonymous view
   return (
     <AppPage heading={`Klasse (${team.name})`}>
       <Breadcrumb>
         <Here>Klasse «{team.name}»</Here>
       </Breadcrumb>
 
-      <Flex justifyContent="center" mt={-20} mb={0} maxWidth="80%">
+      <Flex className="justify-center mt-[-20px] mb-0 max-w-[80%]">
         <Image src={IconWelcome} width={350} height={259} alt="Welcome!" />
       </Flex>
 
-      <H2 mt={0}>Lerninhalte Klasse {team.name}</H2>
-      <Text mb={4} fontSize={2}>
+      <H2 className="mt-0">Lerninhalte Klasse {team.name}</H2>
+      <Text className="mb-8 text-base">
         Diese Lerninhalte werden in der Klasse bearbeitet:
       </Text>
       <StudentCardList teamCards={String(team.cards)} teamId={team.id} />
-      <Box mt={6} />
+      <Box className="mt-24" />
 
       <H2>Abstimmungen Klasse {team.name}</H2>
-      <Text fontSize={2} mb={4}>
+      <Text className="text-base mb-8">
         Diese Abstimmungen sind für die Klasse verfügbar:
       </Text>
       <StudentListBallots teamId={team.id} />
 
       <TeamAnonLogin />
 
-      <Box mb={4} />
+      <Box className="mb-8" />
     </AppPage>
   );
 }
 
 export const TeamAnonLogin: React.FC<React.PropsWithChildren<unknown>> = () => (
   <Box>
-    <H2 mt={6}>Anmelden</H2>
-    <Text mb={3} fontSize={2}>
+    <H2 className="mt-24">Anmelden</H2>
+    <Text className="mb-4 text-base">
       Um Diskussionen und Aktivitäten der Klasse anzuzeigen musst du dich
       anmelden:
     </Text>

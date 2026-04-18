@@ -1,6 +1,6 @@
 import { Loading } from "components/Page";
 import { BallotScope, Role, useUserBallotsQuery } from "graphql/types";
-import { Box, Button, Card, Flex, Heading, Image, Text } from "rebass";
+import { Box, Button, Card, Flex, Heading, Image, Text } from "components/ui";
 import { Logos, ZDAFullPage, ZDAFAQ } from "./index";
 import { useState } from "react";
 import { getUserBallotStatus } from "components/Ballots";
@@ -19,12 +19,11 @@ export default function ZDAVote(): React.ReactElement {
   const tr = useTr();
   const user = useUser();
 
-  // ask for demographics on first login
   if (user?.year === null && user?.role === Role.Student) {
     return (
       <ZDAVoteTemplate>
         {tr("ZDA.Vote.Intro")}
-        <Text my={2} mt={4}>
+        <Text className="my-2 mt-8">
           {tr("Profile.Intro")}
         </Text>
         <ProfileEdit user={user} editMode={true} skipName />
@@ -34,28 +33,28 @@ export default function ZDAVote(): React.ReactElement {
   return (
     <ZDAVoteTemplate>
       {tr("ZDA.Vote.Intro")}
-      <Flex justifyContent="space-between" alignItems="flex-end">
-        <Heading fontSize={[2, 2, 3]}>{tr("ZDA.Vote.Header1")}</Heading>
+      <Flex className="justify-between items-end">
+        <Heading className="text-base sm:text-lg">{tr("ZDA.Vote.Header1")}</Heading>
         <Image
           src="/images/logo_schulen_nach_bern2.png"
           width={100}
           height={45}
-          mb={2}
+          className="mb-2"
           alt="Schulen nach Bern Logo"
         />
       </Flex>
-      <Box height={2} bg="#000" />
+      <Box className="h-[2px] bg-black" />
       <ZDAResultPies />
 
-      <Flex justifyContent="space-between" alignItems="flex-end">
-        <Heading mt={5} fontSize={[2, 2, 3]}>
+      <Flex className="justify-between items-end">
+        <Heading className="mt-16 text-base sm:text-lg">
           {tr("ZDA.Vote.Header2")}
         </Heading>
         <Image
           src="/images/easyvote.png"
           width={100}
           height={36}
-          mb={2}
+          className="mb-2"
           alt="EasyVote Logo"
         />
       </Flex>
@@ -70,7 +69,7 @@ const ZDAVoteTemplate: React.FC<React.PropsWithChildren<unknown>> = ({ children 
     <ZDAFullPage heading={tr("ZDA.Header")}>
       {children}
       <ZDAFAQ />
-      <Box mt={5}></Box>
+      <Box className="mt-16" />
       <Logos />
     </ZDAFullPage>
   );
@@ -91,7 +90,6 @@ const ZDABallots: React.FC<React.PropsWithChildren<{ scope: BallotScope; maxAge:
     },
   });
 
-  // only show ballots with end-date less than maxAge days ago
   const old = maxAge * 24 * 60 * 60 * 1000;
   const ballots = maxAge
     ? ballotsQuery.data?.ballots.filter(
@@ -116,22 +114,17 @@ const ZDABallots: React.FC<React.PropsWithChildren<{ scope: BallotScope; maxAge:
 
   return (
     <Box
-      mt={-1}
+      className="mt-[-4px]"
       id="ballots"
       style={{ borderTop: "2px solid", borderBottom: "1px solid" }}
     >
       {ballots.map((ballot) => (
         <Box
           key={ballot.id}
-          width="100%"
+          className="w-full py-2"
           style={{ borderBottom: "1px solid" }}
-          py={2}
         >
-          <Flex
-            flexDirection={["column", "column", "row"]}
-            justifyContent={["space-between"]}
-            alignItems={["", "", "center"]}
-          >
+          <Flex className="flex-col sm:flex-row justify-between sm:items-center">
             <Text>{ballot.title}</Text>
             {ballot.canVote ? (
               <Button
@@ -143,17 +136,17 @@ const ZDABallots: React.FC<React.PropsWithChildren<{ scope: BallotScope; maxAge:
                   : tr("ZDA.Vote.VoteNow")}
               </Button>
             ) : (
-              <Text fontSize={1}>{tr(getUserBallotStatus(ballot))}</Text>
+              <Text className="text-sm">{tr(getUserBallotStatus(ballot))}</Text>
             )}
           </Flex>
 
           {detail == ballot.id && (
             <Card>
-              <Heading mt={0}>{ballot.title}</Heading>
-              <Text fontSize={[1, 2, 2]}>
+              <Heading className="mt-0">{ballot.title}</Heading>
+              <Box className="text-sm xs:text-base">
                 {ballot.description}
                 <Detail>
-                  <Box fontSize={1} mb={4}>
+                  <Box className="text-sm mb-8">
                     <Markdown>{ballot.body}</Markdown>
                   </Box>
                 </Detail>
@@ -163,7 +156,7 @@ const ZDABallots: React.FC<React.PropsWithChildren<{ scope: BallotScope; maxAge:
                   onSuccess={successVoted}
                   loginLink="/spielpolitik"
                 />
-              </Text>
+              </Box>
             </Card>
           )}
         </Box>

@@ -6,7 +6,7 @@ import { Role } from "graphql/types";
 import { Discussion } from "components/Discussion";
 import { useQueryParam } from "util/hooks";
 import { FeedbackText } from "components/Feedback";
-import { Text } from "rebass";
+import { Text } from "components/ui";
 import {
   EditTeamPrefs,
   allowGroups,
@@ -67,11 +67,7 @@ export default function CardPage(): React.ReactElement {
       <ShowNote card={key} team={team} teacher={user?.role === Role.Teacher} />
       <Card id={key} />
       <Text
-        fontSize={1}
-        fontStyle="italic"
-        mt={4}
-        textAlign="center"
-        width="100%"
+        className="text-sm italic mt-8 text-center w-full"
       >
         {ShowWorkText[showWorks(team, key)]}
         {". "}

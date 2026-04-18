@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import QRCode from "qrcode.react";
 import Head from "next/head";
-import { Box } from "rebass";
+import { Box } from "components/ui";
 export default function QRPage(): React.ReactElement {
   const router = useRouter();
   const url = String(router.query.url);
@@ -11,7 +11,7 @@ export default function QRPage(): React.ReactElement {
       <Head>
         <title>QR-Code Einladung</title>
       </Head>
-      <Box p={3} variant="centered">
+      <Box className="p-4 flex justify-center">
         <QRCode
           value={url}
           renderAs="svg"

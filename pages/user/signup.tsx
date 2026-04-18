@@ -1,5 +1,5 @@
 import { AppPage } from "components/Page";
-import { Text, Button, Heading, Card } from "rebass";
+import { Text, Button, Heading, Card } from "components/ui";
 import { gql } from "@apollo/client";
 import { useState, ReactElement, Dispatch, SetStateAction } from "react";
 import { useRouter } from "next/router";
@@ -10,7 +10,6 @@ import { Role, useCreateUserMutation } from "graphql/types";
 import Success from "./success";
 import { useTr } from "util/translate";
 
-// TODO use fragment for ./successlds
 export const CREATE_USER = gql`
   mutation createUser($data: UserCreateInput!) {
     createUser(data: $data) {
@@ -40,7 +39,7 @@ export default function Signup(): ReactElement {
       heading="Neue Klasse anmelden"
       onClose={() => void router.push("/")}
     >
-      <Text mb={4}>
+      <Text className="mb-8">
         Du bist eine Lehrperson und möchtest mit deinen Klassen auf voty.ch
         abstimmen oder das Online-Lehrmittel benutzen? Eröffne hier ein
         kostenloses Konto:
@@ -131,8 +130,6 @@ export const CreateUserForm: React.FC<React.PropsWithChildren<{
       required: true,
       validate: yup.string().min(6, "Dein Passwort ist etwas sehr kurz..."),
     },
-    // watch out: password2 would also be sent to server which barks
-    //password2: yup.string().oneOf([yup.ref('password'), null], 'Passwords must match')
     role: {
       type: props.omitRole ? "hidden" : "select",
       label: tr("Signup.labelRole"),
@@ -180,12 +177,12 @@ export const CreateUserForm: React.FC<React.PropsWithChildren<{
 
   return (
     <QForm mutation={doCreateUser} onSubmit={onSubmit} fields={fields}>
-      <ErrorBox error={error} my={4} />
+      <ErrorBox error={error} className="my-8" />
       {showLogin && (
         <Button
           onClick={() => router.push("/user/login")}
           variant="text"
-          sx={{ gridColumn: [0, 0, 2] }}
+          style={{ gridColumn: "2" }}
         >
           Möchstest du dich anmelden?
         </Button>
@@ -194,9 +191,8 @@ export const CreateUserForm: React.FC<React.PropsWithChildren<{
         <Button
           onClick={() => router.push("/user/login")}
           variant="text"
-          my={2}
-          textAlign="right"
-          sx={{ gridColumn: [0, 0, 2] }}
+          className="my-2 text-right"
+          style={{ gridColumn: "2" }}
         >
           Ich habe bereits ein Konto
         </Button>

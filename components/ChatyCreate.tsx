@@ -1,6 +1,6 @@
-import { Input, Label, Textarea } from "@rebass/forms";
+import { Input, Label, Textarea } from "components/ui";
 import { useState } from "react";
-import { Box, Button } from "rebass";
+import { Box, Button } from "components/ui";
 import { Chaty } from "./Chaty";
 import { Err } from "components/Page";
 import { Authors, usePostWork, WorkItem, Works } from "./Works";
@@ -44,17 +44,16 @@ export const ChatyCreate: React.FC<React.PropsWithChildren<{
 
   const success = state.called && !state.error;
   return (
-    <Box mt={4}>
+    <Box className="mt-8">
       <Label>Titel deines Chats:</Label>
       <Input
         placeholder={initialTitle}
         value={title}
         onChange={(e) => setTitle(e.target.value)}
-      ></Input>
-      <Label mt={3}>Chatverlauf:</Label>
+      />
+      <Label className="mt-4">Chatverlauf:</Label>
       <Textarea
-        sx={{ fontFamily: "monospace", lineHeight: "2em" }}
-        fontSize="14px !important"
+        className="font-mono leading-[2em] text-[14px]"
         value={lines}
         wrap="off"
         onChange={(e) => changeLines(e.target.value)}
@@ -66,19 +65,19 @@ export const ChatyCreate: React.FC<React.PropsWithChildren<{
         <>
           <Chaty slim title={title} lines={String(lines)} speed={5} />
 
-          <Label mt={4}>Erarbeitet durch:</Label>
+          <Label className="mt-8">Erarbeitet durch:</Label>
           <Authors setUsers={setUsers} />
           {success ? (
             <Info>Erfolgreich abgeschickt!</Info>
           ) : (
-            <Button mt={3} onClick={doPostWork}>
+            <Button className="mt-4" onClick={doPostWork}>
               Abschicken
             </Button>
           )}
         </>
       )}
       <Works
-        mt={5}
+        className="mt-16"
         card="chaty_create"
         items={ChatyItem}
         trigger={trigger}

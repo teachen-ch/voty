@@ -1,5 +1,5 @@
 import { AppPage } from "components/Page";
-import { Heading, Button, Text, Card, Link as A } from "rebass";
+import { Box, Heading, Button, Text, Card, Link as A } from "components/ui";
 import React, { useState } from "react";
 import { useRouter } from "next/router";
 import { Center } from "components/Learning";
@@ -14,13 +14,13 @@ export default function Projekt(): React.ReactElement {
       heading="voty.ch – Ein Projekt zur Förderung der Demokratie an den Schulen"
       image="/images/header_m1.svg"
     >
-      <Card fontSize={2}>
-        <Text fontWeight="semi">
+      <Card>
+        <Text variant="semi">
           Die Demokratie ist eines der wohl wichtigsten Güter der Schweiz. Aber
           wie ge­lingt es uns, die Ju­gendlichen für die Demo­kratie zu
           begeis­tern?
         </Text>
-        <Text mt={4}>
+        <Text className="mt-8">
           Wir glauben, dass ein demokratisches Verständnis nur durch
           demokratische Praxis erreicht werden kann. Deshalb möchten wir mit
           voty.ch bereits in der Schule eine Basis für das Demokratieverständnis
@@ -34,8 +34,8 @@ export default function Projekt(): React.ReactElement {
           De­mo­kratie­förderung an Schulen in der Schweiz bestehend aus drei
           Modulen:
         </Text>
-        <Text mt={4}>
-          <A href="/lernen" fontWeight="bold" variant="underline">
+        <Text className="mt-8">
+          <A href="/lernen" className="font-bold underline">
             Modul «Demokratie verstehen»
           </A>
           &nbsp;
@@ -45,7 +45,7 @@ export default function Projekt(): React.ReactElement {
           interaktive Elemente zur Verfügung stellt, welche die Schweizerische
           Demokratie einfach und verständlich erklären.
           <Detail>
-            <Text my={3}>
+            <Box className="my-4">
               Im ersten Modul stellen wir den Lehrer*Innen
               Unterrichtsmaterialien zum Demokratieprozess in der Schweiz in
               Form von verschiedenen Lernpfaden zur Verfügung. Dies sind zum
@@ -54,20 +54,23 @@ export default function Projekt(): React.ReactElement {
               E-Learning-Elemente. Mittels diesen Komponenten möchten wir das
               Thema der Zielgruppe (12 bis 18 Jahre) zusammen mit einfachen
               Beispielen und illustrativen Erklärungen näher bringen.
-            </Text>
-            <Text>
+            </Box>
+            <Box>
               Das Modul soll nicht theoretisch bleiben, sondern ist mit den
               beiden anderen Modulen verknüpft. So lernen die Jugendlichen die
               Begriffe in einem konkreten Kontext kennen und erleben den Prozess
               hautnah.
-            </Text>
-            <Button mt={3} onClick={() => router.push("/anmelden")}>
+            </Box>
+            <Button
+              className="mt-4"
+              onClick={() => router.push("/user/signup")}
+            >
               Jetzt anmelden
             </Button>
           </Detail>
         </Text>
-        <Text mt={4}>
-          <A href="/abstimmung" variant="underline" fontWeight="bold">
+        <Text className="mt-8">
+          <A href="/abstimmung" className="underline font-bold">
             Modul «Demokratie testen»
           </A>
           &nbsp;
@@ -76,7 +79,7 @@ export default function Projekt(): React.ReactElement {
           den Schüler*Innen in der Klasse zuerst diskutiert und danach
           durchgeführt werden können.
           <Detail>
-            <Text my={3}>
+            <Box className="my-4">
               Um die Theorie in die Praxis zu übertragen, wollen wir
               Abstimmungen für die Jugendlichen erlebbar machen. Hierzu werden
               die zu den nationalen Vorlagen aufbereiteten Inhalte von
@@ -85,17 +88,17 @@ export default function Projekt(): React.ReactElement {
               erhalten die Schüler*Innen die Möglichkeit, mittels der
               Abstimmungsfunktion des Moduls selber an diesen Abstimmungen
               teilzunehmen.{" "}
-            </Text>
-            <Text>
+            </Box>
+            <Box>
               Die Schülerinnen und Schüler lernen so in diesen Probeläufen den
               politischen Prozess kennen und setzen sich mit der Theorie und der
               Praxis der Demokratie auseinander.
-            </Text>
+            </Box>
           </Detail>
         </Text>
 
-        <Text mt={4} id="modul3">
-          <A href="/leben" variant="underline" fontWeight="bold">
+        <Text className="mt-8" id="modul3">
+          <A href="/leben" className="underline font-bold">
             Modul «Demokratie leben»
           </A>
           &nbsp;
@@ -105,7 +108,7 @@ export default function Projekt(): React.ReactElement {
           Schule einbringen können. Diese werden on- und offline diskutiert,
           ausgearbeitet und geprüft.
           <Detail>
-            <Text my={3}>
+            <Box className="my-4">
               Das dritte Modul bringt den demokratischen Entscheidungsprozess in
               die Schule. Schulleitung, Lehrerschaft und Schüler*Innen führen
               gemeinsam einen offenen und kreativen Dialog über schulinterne
@@ -118,17 +121,17 @@ export default function Projekt(): React.ReactElement {
               Abstimmung und wird bei einer Annahme realisiert. Dabei werden die
               Schüler*Innen didaktisch begleitet, um den Prozess gemeinsam zu
               reflektieren.
-            </Text>
-            <Text>
+            </Box>
+            <Box>
               Das Modul fördert die Kompetenzen Kommunikation, Kollaboration und
               kritisches Denken und soll die Lust und Freude an demokratischer
               Partizipation wecken.
-            </Text>
+            </Box>
           </Detail>
         </Text>
         <HideFeature id="demo">
           <Center>
-            <Button mt={4} onClick={() => router.push("/demo")}>
+            <Button className="mt-8" onClick={() => router.push("/demo")}>
               Auf demo.voty.ch testen?
             </Button>
           </Center>
@@ -148,7 +151,7 @@ export default function Projekt(): React.ReactElement {
           politischen Meinungsäusserung auf unserer Plattform. Deshalb setzen
           wir alles daran, dass die bei uns gespeicherten Daten nach aktuellen
           Standards gesichert. Weitere Informationen zum Datenschutz findest Du{" "}
-          <A href="/datenschutz" variant="underline">
+          <A href="/datenschutz" className="underline">
             hier
           </A>
           .
@@ -164,7 +167,7 @@ export default function Projekt(): React.ReactElement {
         <Text>
           Du bist am Projekt interessiert, hast Fragen, Anregungen oder ihr
           möchtet als Pilotklasse am Projekt teilnehmen? Wir freuen uns auf eine{" "}
-          <A href="/kontakt" variant="underline">
+          <A href="/kontakt" className="underline">
             Kontaktaufnahme
           </A>
         </Text>
@@ -175,26 +178,31 @@ export default function Projekt(): React.ReactElement {
   );
 }
 
-export const Tag: React.FC<React.PropsWithChildren<{ bg?: string }>> = ({ children, bg }) => (
+export const Tag: React.FC<React.PropsWithChildren<{ bg?: string }>> = ({
+  children,
+  bg,
+}) => (
   <Text
-    fontSize={1}
-    bg={bg || "rgb(187, 187, 187)"}
-    sx={{ borderRadius: 0, display: "inline" }}
-    color="#fff"
-    px={2}
-    py={"2px"}
+    as="span"
+    className="text-sm inline rounded-none text-white px-2 py-[2px]"
+    style={{
+      backgroundColor:
+        bg === "primary" ? "var(--color-primary)" : bg || "rgb(187, 187, 187)",
+    }}
   >
     {children}
   </Text>
 );
 
-export const Detail: React.FC<React.PropsWithChildren<unknown>> = ({ children }) => {
+export const Detail: React.FC<React.PropsWithChildren<unknown>> = ({
+  children,
+}) => {
   const [open, setOpen] = useState(false);
   const tr = useTr();
   return (
-    <Text sx={{ display: "inline" }}>
+    <Text as="span" className="inline">
       &nbsp;{" "}
-      <A onClick={() => setOpen(!open)} variant="underline">
+      <A onClick={() => setOpen(!open)} className="underline cursor-pointer">
         {open ? tr("Misc.DetailOpen") : tr("Misc.DetailClosed")}
       </A>
       {open && children}

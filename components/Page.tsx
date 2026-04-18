@@ -1,24 +1,33 @@
-import { Flex, Box, Heading, Text, Link as A, HeadingProps } from "rebass";
+import {
+  Flex,
+  Box,
+  Heading,
+  Text,
+  Link as A,
+  HeadingProps,
+} from "components/ui";
+import { cn } from "util/cn";
 import Head from "next/head";
 import { useUser } from "state/user";
 import { LoginForm } from "pages/user/login";
 import React, { ReactNode } from "react";
 import CheckLogin from "./CheckLogin";
-import { FlexProps, Image as RImage } from "rebass";
+import { Spinner } from "components/ui";
 import { Role } from "graphql/types";
 import { Footer } from "components/Footer";
 import { TopBar } from "./TopBar";
 import IconClose from "../public/images/icon_close.svg";
-import { Spinner } from "theme-ui";
 import { Info } from "./Info";
 import { useTr } from "util/translate";
 import Image from "next/image";
 
-export const Page: React.FC<React.PropsWithChildren<{
-  children?: React.ReactNode;
-  heading?: string;
-  bgImages?: string[];
-}>> = ({ heading, bgImages, children }) => {
+export const Page: React.FC<
+  React.PropsWithChildren<{
+    children?: React.ReactNode;
+    heading?: string;
+    bgImages?: string[];
+  }>
+> = ({ heading, bgImages, children }) => {
   return (
     <AppPage heading={heading} bgImages={bgImages}>
       {children}
@@ -26,63 +35,41 @@ export const Page: React.FC<React.PropsWithChildren<{
   );
 };
 
-export const AppPage: React.FC<React.PropsWithChildren<{
-  image?: string;
-  bgImages?: string[];
-  heading?: string;
-  onClose?: () => void;
-}>> = (props) => {
+export const AppPage: React.FC<
+  React.PropsWithChildren<{
+    image?: string;
+    bgImages?: string[];
+    heading?: string;
+    onClose?: () => void;
+  }>
+> = (props) => {
   const bgImages = props.bgImages || [];
   return (
     <>
       <Background bgImages={bgImages} />
       <TopBar home />
-      <Container pt={props.image ? 130 : [0, 0, 50]} color="white">
+      <Container className={props.image ? "pt-30" : "pt-0 sm:pt-10"}>
         <Head>
           <title>{`voty.ch – ${props.heading}`}</title>
         </Head>
-        <Box
-          as="main"
-          px={[3, 3, 4]}
-          py="25px"
-          sx={{
-            borderRadius: [0, 0, 5],
-            backgroundColor: "panelColor",
-            position: "relative",
-          }}
-          minWidth="min(100%, 800px)"
-          width="100%"
-          maxWidth="800px"
-          minHeight="450px"
-        >
-          {props.image && <RImage src={props.image} width="100%" mt={-150} />}
+        <main className="px-4 sm:px-8 py-6 sm:rounded-card bg-panel relative min-w-[min(100%,800px)] w-full max-w-200 min-h-112.5">
+          {props.image && (
+            <img
+              src={props.image}
+              alt=""
+              style={{ width: "100%", marginTop: "-150px" }}
+            />
+          )}
           {props.heading && (
-            <H1
-              mt={0}
-              mb={3}
-              fontSize={[5, 5, "34px", "50px"]}
-              fontWeight="black"
-              sx={{ textDecoration: "underline" }}
-            >
-              <Flex justifyContent="space-between">
+            <H1 className="mt-0 mb-4 text-2xl sm:text-[34px] md:text-[50px] font-black underline">
+              <Flex className="justify-between">
                 {props.heading}
                 {props.onClose && (
                   <A
                     onClick={props.onClose}
-                    sx={{
-                      position: "relative",
-                      right: 0,
-                      display: ["none", "none", "block"],
-                    }}
+                    className="hidden sm:block relative right-0"
                   >
-                    <Box
-                      color="white"
-                      sx={{
-                        opacity: 0.2,
-                        transition: "0.4s ease-out",
-                        ":hover": { opacity: 1.0, transform: "rotate(-90deg)" },
-                      }}
-                    >
+                    <Box className="text-white opacity-20 transition-[0.4s_ease-out] hover:opacity-100 hover:rotate-[-90deg]">
                       <Image
                         src={IconClose}
                         alt="schliessen"
@@ -96,20 +83,22 @@ export const AppPage: React.FC<React.PropsWithChildren<{
             </H1>
           )}
           {props.children}
-        </Box>
-        <Footer />
+        </main>
       </Container>
+      <Footer />
     </>
   );
 };
 
-export const LoggedInPage: React.FC<React.PropsWithChildren<{
-  role?: Role;
-  children?: ReactNode;
-  heading?: string;
-  image?: string;
-  bgImages?: string[];
-}>> = ({ role, children, heading, bgImages, image }) => {
+export const LoggedInPage: React.FC<
+  React.PropsWithChildren<{
+    role?: Role;
+    children?: ReactNode;
+    heading?: string;
+    image?: string;
+    bgImages?: string[];
+  }>
+> = ({ role, children, heading, bgImages, image }) => {
   const user = useUser();
   const allowed = role
     ? user?.role === role || user?.role === Role.Admin
@@ -125,7 +114,7 @@ export const LoggedInPage: React.FC<React.PropsWithChildren<{
     return (
       <AppPage heading={heading} bgImages={bgImages} image={image}>
         <CheckLogin>
-          <Text my={4}>
+          <Text className="my-8">
             Diese Seite benötigt eine Anmeldung
             {role && ` als ${getRoleName(role)}`}.
           </Text>
@@ -145,28 +134,29 @@ function getRoleName(role: Role): string {
   return translations[String(role)] || String(role);
 }
 
-export const Container: React.FC<React.PropsWithChildren<FlexProps>> = (props) => {
+export const Container: React.FC<
+  React.PropsWithChildren<React.HTMLAttributes<HTMLDivElement>>
+> = ({ className, children, ...props }) => {
   return (
-    <>
-      <Flex mt={70} px={[0, 0, 3, 4]} justifyContent="center" {...props}>
-        <Flex
-          alignItems="center"
-          flexDirection="column"
-          flex={1}
-          maxWidth={["100%", "100%", "100%", "1160px"]}
-        >
-          {props.children}
-        </Flex>
+    <Flex
+      className={`mt-20 px-4 sm:px-4 md:px-8 justify-center ${className ?? ""}`}
+      {...props}
+    >
+      <Flex className="items-center flex-col flex-1 max-w-full md:max-w-290">
+        {children}
       </Flex>
-    </>
+    </Flex>
   );
 };
 
 export const Loading: React.FC<React.PropsWithChildren<unknown>> = () => (
-  <Spinner color="white" size={20} mr={3} />
+  <Spinner color="white" size={20} className="mr-4" />
 );
 
-export const Err: React.FC<React.PropsWithChildren<{ msg?: string }>> = ({ msg, children }) => {
+export const Err: React.FC<React.PropsWithChildren<{ msg?: string }>> = ({
+  msg,
+  children,
+}) => {
   const tr = useTr();
   return msg || children ? (
     <Info type="important">
@@ -176,92 +166,94 @@ export const Err: React.FC<React.PropsWithChildren<{ msg?: string }>> = ({ msg, 
   ) : null;
 };
 
-export const ErrorPage: React.FC<React.PropsWithChildren<unknown>> = (props) => (
+export const ErrorPage: React.FC<React.PropsWithChildren<unknown>> = (
+  props
+) => (
   <Page heading="Fehler">
     <Heading as="h2">Oh je, es ist ein Fehler aufgetreten</Heading>
     <Text>{props.children}</Text>
   </Page>
 );
 
-export const LoadingPage: React.FC<React.PropsWithChildren<unknown>> = (props) => (
+export const LoadingPage: React.FC<React.PropsWithChildren<unknown>> = (
+  props
+) => (
   <Page heading="Seite wird geladen...">
     <Text>{props.children}</Text>
   </Page>
 );
 
-export const Background: React.FC<React.PropsWithChildren<{ bgImages: string[]; start?: boolean }>> = (
-  props
-) => {
-  // const gradient = "linear-gradient(180deg, rgb(2,11,20) 0%, rgb(31,47,65))";
-  // `url("/images/${img}"), ${gradient}`);
-  const bgImagesUrl = props.bgImages.map((img) => `url("/images/${img}")`);
+export const Background: React.FC<
+  React.PropsWithChildren<{ bgImages: string[]; start?: boolean }>
+> = (props) => {
+  const bgImagesUrl = props.bgImages
+    .map((img) => `url("/images/${img}")`)
+    .join(", ");
   return (
     <Box
-      sx={{
-        position: "fixed",
-        top: 0,
-        zIndex: -1,
-        width: "100%",
-        height: "100%",
-        backgroundImage: bgImagesUrl,
-        backgroundAttachment: "absolute",
+      className="fixed top-0 -z-10 w-full h-full bg-white"
+      style={{
+        backgroundImage: bgImagesUrl || undefined,
+        backgroundAttachment: "scroll",
         backgroundPositionY: 0,
         backgroundSize: "100%",
         backgroundPositionX: "center",
-        backgroundColor: "bgcolor",
       }}
     />
   );
 };
 
-export const H1: React.FC<React.PropsWithChildren<HeadingProps>> = (props) => (
-  <Heading
-    as="h1"
-    fontWeight="black"
-    fontSize={[4, 4, 5, 6]}
-    color="blue2"
-    mt={6}
-    mb={0}
+export const H1: React.FC<
+  React.PropsWithChildren<React.HTMLAttributes<HTMLHeadingElement>>
+> = ({ className, children, ...props }) => (
+  <h1
+    className={cn(
+      "font-heading leading-[1.15] font-black text-xl sm:text-2xl md:text-3xl text-blue2 mt-32 mb-0",
+      className
+    )}
     {...props}
   >
-    {props.children}
-  </Heading>
+    {children}
+  </h1>
 );
 
 export const H2: React.FC<React.PropsWithChildren<HeadingProps>> = (props) => (
-  <Heading as="h2" variant="panelheading" {...props}>
+  <Heading variant="panelheading" {...props}>
     {props.children}
   </Heading>
 );
 
-export const H3: React.FC<React.PropsWithChildren<HeadingProps>> = (props) => (
-  <Heading
-    as="h3"
-    fontSize={[3, 3, 3]}
-    variant="panelheading"
-    sx={{ borderBottom: "none" }}
+export const H3: React.FC<
+  React.PropsWithChildren<React.HTMLAttributes<HTMLHeadingElement>>
+> = ({ className, children, ...props }) => (
+  <h3
+    className={cn(
+      "font-heading leading-[1.15] font-semibold text-blue2 mt-8 pb-1 mb-2 text-lg border-b-0",
+      className
+    )}
     {...props}
   >
-    {props.children}
-  </Heading>
+    {children}
+  </h3>
 );
 
-export const H4: React.FC<React.PropsWithChildren<HeadingProps>> = (props) => (
-  <Heading
-    as="h4"
-    fontSize={[3, 3, 3]}
-    variant="panelheading"
-    sx={{ borderBottom: "none" }}
+export const H4: React.FC<
+  React.PropsWithChildren<React.HTMLAttributes<HTMLHeadingElement>>
+> = ({ className, children, ...props }) => (
+  <h4
+    className={cn(
+      "font-heading leading-[1.15] font-semibold text-blue2 mt-8 pb-1 mb-2 text-lg border-b-0",
+      className
+    )}
     {...props}
   >
-    {props.children}
-  </Heading>
+    {children}
+  </h4>
 );
 
-export const ShowFor: React.FC<React.PropsWithChildren<{ role: Role | string }>> = ({
-  role,
-  children,
-}) => {
+export const ShowFor: React.FC<
+  React.PropsWithChildren<{ role: Role | string }>
+> = ({ role, children }) => {
   const user = useUser();
   if (user?.role == role || user?.role == Role.Admin) {
     return <>{children}</>;

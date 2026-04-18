@@ -1,5 +1,5 @@
 import { Page } from "components/Page";
-import { Button, Text } from "rebass";
+import { Button, Text } from "components/ui";
 import { ReactElement } from "react";
 
 export default function Impressum(): ReactElement {
@@ -10,7 +10,7 @@ export default function Impressum(): ReactElement {
   return (
     <Page heading="Impressum">
       <Text>voty.ch ist ein Projekt des Non-Profit Vereins «voty.ch».</Text>
-      <pre>
+      <pre className="mt-4">
         Verein voty.ch
         <br />
         Effingerstrasse 10
@@ -20,7 +20,7 @@ export default function Impressum(): ReactElement {
         <br />
         Geschäftsleiter: Stefan Niederhauser
       </pre>
-      <Text my={5}>
+      <Text className="my-16">
         <Button onClick={sendMail}>Email senden</Button>
       </Text>
     </Page>
