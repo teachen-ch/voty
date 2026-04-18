@@ -6,10 +6,6 @@ import { ApolloProvider } from "@apollo/client";
 import { MDXProvider } from "@mdx-js/react";
 import { AppProps } from "next/app";
 import apolloGen from "util/apollo";
-import { RecoilRoot as RecoilRootBase } from "recoil";
-const RecoilRoot = RecoilRootBase as React.FC<
-  React.PropsWithChildren<unknown>
->;
 import { Header } from "components/Header";
 import { Page } from "components/Page";
 import { ReactElement, useEffect, useMemo, useState, useRef } from "react";
@@ -33,21 +29,19 @@ function MyApp({ Component, pageProps }: AppProps): ReactElement {
   const isMdx = router.pathname.startsWith("/content");
   return (
     <ApolloProvider client={apollo}>
-      <RecoilRoot>
-        <Theme>
-          <CheckLogin />
-          <Header />
-          {isMdx ? (
-            <MDXPageWrapper>
-              <Component {...pageProps} />
-            </MDXPageWrapper>
-          ) : (
-            <MDXProvider components={{}}>
-              <Component {...pageProps} />
-            </MDXProvider>
-          )}
-        </Theme>
-      </RecoilRoot>
+      <Theme>
+        <CheckLogin />
+        <Header />
+        {isMdx ? (
+          <MDXPageWrapper>
+            <Component {...pageProps} />
+          </MDXPageWrapper>
+        ) : (
+          <MDXProvider components={{}}>
+            <Component {...pageProps} />
+          </MDXProvider>
+        )}
+      </Theme>
     </ApolloProvider>
   );
 }
