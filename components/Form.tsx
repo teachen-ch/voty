@@ -178,7 +178,9 @@ export const QForm: React.FC<QFormProps> = ({
     }
     return {
       fieldArr,
-      schema: z.object(shape),
+      // passthrough() so hidden + submit fields (not in `shape`) aren't stripped
+      // out by zodResolver before RHF hands them to onSubmit.
+      schema: z.object(shape).passthrough(),
       defaults,
     };
   }, [fields]);
