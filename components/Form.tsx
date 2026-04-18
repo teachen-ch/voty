@@ -5,7 +5,7 @@ import {
   FormikFormProps,
   useFormikContext,
 } from "formik";
-const Form = (FormikForm as unknown) as React.FC<
+const Form = FormikForm as unknown as React.FC<
   React.PropsWithChildren<unknown>
 >;
 import {
