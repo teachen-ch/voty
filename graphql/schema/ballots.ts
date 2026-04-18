@@ -92,6 +92,7 @@ builder.queryField("getBallotResults", (t) =>
 builder.mutationField("addBallotRun", (t) =>
   t.prismaField({
     type: "BallotRun",
+    authScopes: { teacher: true },
     args: {
       ballotId: t.arg.string({ required: true }),
       teamId: t.arg.string({ required: true }),
@@ -104,6 +105,7 @@ builder.mutationField("addBallotRun", (t) =>
 builder.mutationField("removeBallotRun", (t) =>
   t.field({
     type: Response,
+    authScopes: { teacher: true },
     args: { ballotRunId: t.arg.string({ required: true }) },
     resolve: (_root, args, ctx, info) =>
       ballots.removeBallotRun(_root, args, ctx, info) as any,
@@ -113,6 +115,7 @@ builder.mutationField("removeBallotRun", (t) =>
 builder.mutationField("startBallotRun", (t) =>
   t.prismaField({
     type: "BallotRun",
+    authScopes: { teacher: true },
     args: { ballotRunId: t.arg.string({ required: true }) },
     resolve: (_query, _root, args, ctx, info) =>
       ballots.startBallotRun(_root, args, ctx, info) as any,
@@ -122,6 +125,7 @@ builder.mutationField("startBallotRun", (t) =>
 builder.mutationField("endBallotRun", (t) =>
   t.prismaField({
     type: "BallotRun",
+    authScopes: { teacher: true },
     args: { ballotRunId: t.arg.string({ required: true }) },
     resolve: (_query, _root, args, ctx, info) =>
       ballots.endBallotRun(_root, args, ctx, info) as any,

@@ -46,6 +46,7 @@ builder.queryField("getTeamDiscussions", (t) =>
   t.field({
     type: [DiscussionType],
     nullable: true,
+    authScopes: { loggedIn: true },
     args: {
       card: t.arg.string(),
       ballotId: t.arg.string(),
@@ -61,6 +62,7 @@ builder.queryField("getTeamDiscussions", (t) =>
 builder.mutationField("postDiscussion", (t) =>
   t.field({
     type: DiscussionType,
+    authScopes: { loggedIn: true },
     args: {
       card: t.arg.string(),
       ballotId: t.arg.string(),

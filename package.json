@@ -32,8 +32,7 @@
     "check:ts": "tsc --noEmit",
     "schema:print": "tsx graphql/printSchema.ts",
     "lint": "next lint",
-    "semantic-release": "semantic-release",
-    "postinstall": "patch-package"
+    "semantic-release": "semantic-release"
   },
   "dependencies": {
     "@apollo/client": "^3.14.1",
@@ -49,10 +48,8 @@
     "dayjs": "^1.11.20",
     "formidable": "^3.5.4",
     "graphql": "^16",
-    "graphql-middleware": "^4.0.3",
     "graphql-request": "^3.7.0",
     "graphql-scalars": "^1.25.0",
-    "graphql-shield": "^7.6.5",
     "imap-simple": "^5.1.0",
     "jotai": "^2.19.1",
     "jsonwebtoken": "^9.0.3",
@@ -95,6 +92,7 @@
     "@pothos/core": "^4",
     "@pothos/plugin-prisma": "^4",
     "@pothos/plugin-prisma-utils": "^1",
+    "@pothos/plugin-scope-auth": "^4.1.6",
     "@semantic-release/changelog": "^5.0.1",
     "@semantic-release/commit-analyzer": "^8.0.1",
     "@semantic-release/git": "^9.0.0",
@@ -132,8 +130,6 @@
     "graphql-yoga": "^5",
     "js-yaml": "^3.14.1",
     "nyc": "^15.1.0",
-    "patch-package": "^8.0.1",
-    "postinstall-postinstall": "^2.1.0",
     "prettier": "^2.1.2",
     "prisma": "^6",
     "prisma-generator-pothos-codegen": "^0.7.2",

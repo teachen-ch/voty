@@ -6,7 +6,7 @@ export const SchoolType = builder.prismaObject("School", {
     name: t.exposeString("name"),
     type: t.exposeString("type"),
     teams: t.relation("teams"),
-    members: t.relation("members"),
+    members: t.relation("members", { authScopes: { admin: true } }),
     address: t.exposeString("address"),
     city: t.exposeString("city"),
     zip: t.exposeString("zip"),

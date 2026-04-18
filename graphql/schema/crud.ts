@@ -13,6 +13,7 @@ import { BallotType } from "./ballots";
 import { WorkType } from "./works";
 import { ActivityType as ActivityT } from "./activities";
 import { AttachmentType } from "./attachments";
+import { canReadUser, canUpdateUser } from "../auth";
 
 // ---------- shared filter scaffolding ----------
 
@@ -127,6 +128,7 @@ builder.queryField("user", (t) =>
   t.prismaField({
     type: "User",
     nullable: true,
+    authScopes: canReadUser,
     args: { where: t.arg({ type: UserWhereUniqueInput, required: true }) },
     resolve: (query, _root, args, ctx) =>
       ctx.db.user.findUnique({ ...query, where: args.where as any }),
@@ -136,6 +138,7 @@ builder.queryField("user", (t) =>
 builder.queryField("users", (t) =>
   t.prismaField({
     type: ["User"],
+    authScopes: { teacher: true },
     args: {
       where: t.arg({ type: UserWhereInput }),
       orderBy: t.arg({ type: [UserOrderByInput] }),
@@ -155,6 +158,7 @@ builder.queryField("users", (t) =>
 builder.mutationField("updateUser", (t) =>
   t.prismaField({
     type: "User",
+    authScopes: canUpdateUser,
     args: {
       data: t.arg({ type: UserUpdateInput, required: true }),
       where: t.arg({ type: UserWhereUniqueInput, required: true }),
@@ -169,6 +173,7 @@ builder.mutationField("updateUser", (t) =>
 builder.mutationField("deleteUser", (t) =>
   t.prismaField({
     type: "User",
+    authScopes: { teacher: true },
     args: { where: t.arg({ type: UserWhereUniqueInput, required: true }) },
     resolve: async (_query, _root, args, ctx, info) => {
       const { users } = await import("../resolvers");
@@ -215,6 +220,7 @@ builder.queryField("school", (t) =>
 builder.queryField("schools", (t) =>
   t.prismaField({
     type: ["School"],
+    authScopes: { loggedIn: true },
     args: { where: t.arg({ type: SchoolWhereInput }) },
     resolve: (query, _root, args, ctx) =>
       ctx.db.school.findMany({
@@ -227,6 +233,7 @@ builder.queryField("schools", (t) =>
 builder.mutationField("createOneSchool", (t) =>
   t.prismaField({
     type: "School",
+    authScopes: { teacher: true },
     args: { data: t.arg({ type: SchoolCreateInput, required: true }) },
     resolve: (query, _root, args, ctx) =>
       ctx.db.school.create({ ...query, data: args.data as any }),
@@ -236,6 +243,7 @@ builder.mutationField("createOneSchool", (t) =>
 builder.mutationField("deleteOneSchool", (t) =>
   t.prismaField({
     type: "School",
+    authScopes: { admin: true },
     args: { where: t.arg({ type: SchoolWhereUniqueInput, required: true }) },
     resolve: (query, _root, args, ctx) =>
       ctx.db.school.delete({ ...query, where: args.where as any }),
@@ -296,6 +304,7 @@ builder.queryField("team", (t) =>
 builder.queryField("teams", (t) =>
   t.prismaField({
     type: ["Team"],
+    authScopes: { loggedIn: true },
     args: {
       where: t.arg({ type: TeamWhereInput }),
       orderBy: t.arg({ type: [TeamOrderByInput] }),
@@ -312,6 +321,7 @@ builder.queryField("teams", (t) =>
 builder.mutationField("createOneTeam", (t) =>
   t.prismaField({
     type: "Team",
+    authScopes: { teacher: true },
     args: { data: t.arg({ type: TeamCreateInput, required: true }) },
     resolve: (query, _root, args, ctx) =>
       ctx.db.team.create({
@@ -328,6 +338,7 @@ builder.mutationField("createOneTeam", (t) =>
 builder.mutationField("deleteOneTeam", (t) =>
   t.prismaField({
     type: "Team",
+    authScopes: { teacher: true },
     args: { where: t.arg({ type: TeamWhereUniqueInput, required: true }) },
     resolve: async (_query, _root, args, ctx, info) => {
       const { teams } = await import("../resolvers");
@@ -451,6 +462,7 @@ builder.queryField("ballots", (t) =>
 builder.mutationField("createOneBallot", (t) =>
   t.prismaField({
     type: "Ballot",
+    authScopes: { admin: true },
     args: { data: t.arg({ type: BallotCreateInput, required: true }) },
     resolve: (query, _root, args, ctx) =>
       ctx.db.ballot.create({
@@ -467,6 +479,7 @@ builder.mutationField("createOneBallot", (t) =>
 builder.mutationField("updateOneBallot", (t) =>
   t.prismaField({
     type: "Ballot",
+    authScopes: { admin: true },
     args: {
       data: t.arg({ type: BallotUpdateInput, required: true }),
       where: t.arg({ type: BallotWhereUniqueInput, required: true }),
@@ -483,6 +496,7 @@ builder.mutationField("updateOneBallot", (t) =>
 builder.mutationField("deleteOneBallot", (t) =>
   t.prismaField({
     type: "Ballot",
+    authScopes: { admin: true },
     args: { where: t.arg({ type: BallotWhereUniqueInput, required: true }) },
     resolve: (query, _root, args, ctx) =>
       ctx.db.ballot.delete({ ...query, where: args.where as any }),
@@ -518,6 +532,7 @@ const ActivityOrderByInput = builder.inputType("ActivityOrderByInput", {
 builder.queryField("activities", (t) =>
   t.prismaField({
     type: [ActivityT],
+    authScopes: { loggedIn: true },
     args: {
       where: t.arg({ type: ActivityWhereInput }),
       orderBy: t.arg({ type: [ActivityOrderByInput] }),
@@ -552,6 +567,7 @@ const ActivityCreateInput = builder.inputType("ActivityCreateInput", {
 builder.mutationField("postActivity", (t) =>
   t.prismaField({
     type: ActivityT,
+    authScopes: { loggedIn: true },
     args: { data: t.arg({ type: ActivityCreateInput, required: true }) },
     resolve: async (_query, _root, args, ctx, info) => {
       const { activities } = await import("../resolvers");
@@ -576,6 +592,7 @@ const AttachmentWhereInput = builder.inputType("AttachmentWhereInput", {
 builder.queryField("attachments", (t) =>
   t.prismaField({
     type: [AttachmentType],
+    authScopes: { loggedIn: true },
     args: { where: t.arg({ type: AttachmentWhereInput }) },
     resolve: async (_query, _root, args, ctx, info) => {
       const { attachments } = await import("../resolvers");
@@ -622,6 +639,7 @@ const WorkCreateInput = builder.inputType("WorkCreateInput", {
 builder.queryField("works", (t) =>
   t.prismaField({
     type: [WorkType],
+    authScopes: { loggedIn: true },
     args: { where: t.arg({ type: WorkWhereInput }) },
     resolve: async (_query, _root, args, ctx, info) => {
       const { works } = await import("../resolvers");
@@ -633,6 +651,7 @@ builder.queryField("works", (t) =>
 builder.mutationField("postWork", (t) =>
   t.prismaField({
     type: WorkType,
+    authScopes: { loggedIn: true },
     args: { data: t.arg({ type: WorkCreateInput, required: true }) },
     resolve: async (_query, _root, args, ctx, info) => {
       const { works } = await import("../resolvers");
@@ -644,6 +663,7 @@ builder.mutationField("postWork", (t) =>
 builder.mutationField("deleteWork", (t) =>
   t.prismaField({
     type: WorkType,
+    authScopes: { loggedIn: true },
     args: { where: t.arg({ type: WorkWhereUniqueInput, required: true }) },
     resolve: async (_query, _root, args, ctx, info) => {
       const { works } = await import("../resolvers");

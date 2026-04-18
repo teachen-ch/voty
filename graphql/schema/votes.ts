@@ -1,6 +1,7 @@
 import { builder } from "../builder";
 
 export const VoteType = builder.prismaObject("Vote", {
+  authScopes: { loggedIn: true },
   fields: (t) => ({
     verify: t.exposeString("verify", { nullable: true }),
     ballot: t.relation("ballot"),
@@ -24,6 +25,7 @@ import * as ballots from "../resolvers/ballots";
 builder.mutationField("vote", (t) =>
   t.prismaField({
     type: "Vote",
+    authScopes: { loggedIn: true },
     args: {
       ballotId: t.arg.string({ required: true }),
       vote: t.arg.int({ required: true }),

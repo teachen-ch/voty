@@ -11,6 +11,7 @@ import * as statsResolver from "../resolvers/stats";
 builder.queryField("stats", (t) =>
   t.field({
     type: Stats,
+    authScopes: { admin: true },
     args: {
       from: t.arg.float(),
       to: t.arg.float(),
