@@ -21,10 +21,10 @@ jobs:
       - name: Checkout latest version
         uses: actions/checkout@v5
 
-      - name: Use Node.js 24
+      - name: Use Node.js 22
         uses: actions/setup-node@v5
         with:
-          node-version: 24
+          node-version: 22
 
       # This is only needed for semantic-release 🤔
       - name: Install Node Modules
