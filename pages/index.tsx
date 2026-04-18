@@ -275,12 +275,14 @@ export const TeaserImage: React.FC<
     width: number;
     height: number;
     className?: string;
+    top?: number;
   }>
-> = ({ src, width, height, className }) => (
+> = ({ src, width, height, className, top }) => (
   <Box
     className={`w-[90%] sm:w-[70%] md:w-[50%] mx-auto flex flex-col md:flex-row ${
       className ?? ""
     }`}
+    style={top !== undefined ? { position: "relative", top: `${top}px` } : undefined}
   >
     <Box className="mx-0 sm:mx-2 mb-8">
       <NextImage src={src} width={width} height={height} alt="Teaser-Bild" />

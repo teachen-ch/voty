@@ -17,7 +17,7 @@ const Video: React.FC<React.PropsWithChildren<VideoProps>> = (props) => {
 
   return (
     <ReactPlayer
-      url={props.url}
+      src={props.url}
       controls={true}
       light={true}
       playIcon={<Play />}

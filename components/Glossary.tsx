@@ -1,10 +1,8 @@
 import { MDXProvider } from "@mdx-js/react";
 import { Heading, Link, Text } from "components/ui";
 import Glossar from "pages/content/glossar.mdx";
-import glossarSource from "pages/content/glossar.mdx?raw";
-import React, { ReactNode, useState } from "react";
-
-const glossary = parseGlossary();
+import { glossaryData as glossary } from "util/glossar-data";
+import React, { ReactElement, ReactNode, useState } from "react";
 
 export const Glossary: React.FC<React.PropsWithChildren<unknown>> = () => (
   <MDXProvider
@@ -60,12 +58,13 @@ export const GlossaryReplace: React.FC<React.PropsWithChildren<{ bg?: string; co
         if (!child || typeof child === "number") return child;
         if (typeof child === "string") return glossaryReplace(child, bg, color);
         if (typeof child === "object" && "props" in child) {
-          if (child.props.children) {
-            const children = deepReplace(child.props.children);
-            return React.cloneElement(child, { children });
+          const element = child as ReactElement<{ children?: ReactNode }>;
+          if (element.props.children) {
+            const children = deepReplace(element.props.children);
+            return React.cloneElement(element, { children });
           }
-          if (typeof child.type === "function") {
-            return child;
+          if (typeof element.type === "function") {
+            return element;
           }
         }
         return child;
@@ -114,13 +113,13 @@ export const GlossaryEntry: React.FC<React.PropsWithChildren<{ term: string }>> 
   </>
 );
 
-export const GlossaryTerm: React.FC<React.PropsWithChildren<unknown>> = (props) => (
+export const GlossaryTerm = (props: { children?: ReactNode }): ReactNode => (
   <Heading className="mt-8 mb-2 text-base" id={String(props.children)}>
     {props.children}
   </Heading>
 );
 
-export const GlossaryText: React.FC<React.PropsWithChildren<unknown>> = (props) => (
+export const GlossaryText = (props: { children?: ReactNode }): ReactNode => (
   <Text className="text-sm ml-0 pl-4 border-l-4 border-l-gray-400">
     {props.children}
   </Text>
@@ -130,21 +129,4 @@ function getGlossary(term: string) {
   const missing =
     "Dieser Eintrag wurde im Glossar noch nicht erfasst. Magst du den Begriff in 1-2 Sätzen erklären 👉 glossar@voty.ch";
   return glossary[term] || missing;
-}
-
-function parseGlossary() {
-  const glossary: Record<string, string> = {};
-  let term = "";
-  for (const line of glossarSource.split("\n")) {
-    const match = line.match(/^##\s+(.*)$/);
-    if (match) {
-      term = match[1].trim();
-      glossary[term] = "";
-    } else if (term && line.trim()) {
-      glossary[term] = glossary[term]
-        ? `${glossary[term]} ${line.trim()}`
-        : line.trim();
-    }
-  }
-  return glossary;
 }

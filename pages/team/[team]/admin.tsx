@@ -276,7 +276,7 @@ const InviteLink: React.FC<
     return null;
   }
 
-  function copyInvite(ref: RefObject<HTMLInputElement>) {
+  function copyInvite(ref: RefObject<HTMLInputElement | null>) {
     if (ref && ref.current) {
       ref.current.select();
       document.execCommand("copy");

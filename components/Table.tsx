@@ -74,7 +74,8 @@ export const TD: React.FC<
 
 export const TDImage: React.FC<
   React.PropsWithChildren<
-    React.ImgHTMLAttributes<HTMLImageElement> & {
+    Omit<React.ImgHTMLAttributes<HTMLImageElement>, "src"> & {
+      src?: string;
       smHide?: boolean;
       light?: boolean;
       mr?: number | string;

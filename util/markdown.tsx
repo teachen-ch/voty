@@ -5,13 +5,13 @@ import remarkImage from "remark-images";
 
 export const MarkdownNew: React.FC<React.PropsWithChildren<{ children?: string }>> = ({ children }) => (
   <ReactMarkdown
-    plugins={[gfm, remarkImage]}
-    renderers={{
+    remarkPlugins={[gfm, remarkImage]}
+    components={{
       // eslint-disable-next-line react/display-name
-      image: ({ src, alt }: { src: string; alt: string }) => (
+      img: ({ src, alt }) => (
         <Image
           className="max-h-[300px] max-w-full border-[10px] border-white rounded-[10px] mb-2 block"
-          src={src}
+          src={typeof src === "string" ? src : undefined}
           alt={alt}
         />
       ),

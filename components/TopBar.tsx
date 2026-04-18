@@ -28,7 +28,7 @@ export const TopBar: React.FC<React.PropsWithChildren<{ home?: boolean }>> = ({ 
     }
   }, []);
 
-  let cancel = useRef<number>();
+  let cancel = useRef<number | undefined>(undefined);
 
   useEffect(() => {
     if (user === undefined) {

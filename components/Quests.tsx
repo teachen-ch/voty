@@ -69,7 +69,7 @@ export const Quest: React.FC<React.PropsWithChildren<{ groups?: string }>> = ({ 
   return (
     <QuestContext.Provider value={context}>
       {React.Children.map(children, (child) =>
-        React.isValidElement(child)
+        React.isValidElement<{ ix?: number }>(child)
           ? React.cloneElement(child, {
               ix: ++questionIx,
             })
@@ -210,7 +210,12 @@ export const MultiChoice: React.FC<React.PropsWithChildren<{ row?: boolean } & A
       className={`mb-8 justify-start flex-wrap sm:flex-nowrap ${row ? "flex-row" : "flex-col"}`}
     >
       {React.Children.map(children, (child, ix) =>
-        React.isValidElement(child)
+        React.isValidElement<{
+          setAnswer?: () => void;
+          answer?: number;
+          answered?: number;
+          ix?: number;
+        }>(child)
           ? React.cloneElement(child, {
               setAnswer: readOnly ? undefined : () => doAnswer(ix + 1),
               answer: Number(answers[id]),

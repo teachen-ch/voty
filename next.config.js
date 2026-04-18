@@ -14,18 +14,12 @@ module.exports = withMDX({
     defaultLocale: "de",
     localeDetection: false,
   },
-  // Next 10 image conf: https://nextjs.org/docs/basic-features/image-optimization
+  // Next 16 image conf: https://nextjs.org/docs/basic-features/image-optimization
   images: {
     dangerouslyAllowSVG: true, // not a security risk, these are not user-generated
     deviceSizes: [400, 600, 1200, 2000],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
-  },
-  webpack(config) {
-    config.module.rules.push({
-      resourceQuery: /raw/,
-      type: "asset/source",
-    });
-    return config;
+    localPatterns: [{ pathname: "/**", search: "" }],
   },
   redirects() {
     return [

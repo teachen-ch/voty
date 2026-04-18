@@ -3,8 +3,3 @@ declare module "*.mdx" {
   export const meta: Record<string, any>;
   export default MDXComponent;
 }
-
-declare module "*.mdx?raw" {
-  const content: string;
-  export default content;
-}
