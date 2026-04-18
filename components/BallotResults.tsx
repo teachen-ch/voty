@@ -2,7 +2,10 @@ import { Text, Box, Flex } from "components/ui";
 
 import { Grid } from "components/ui";
 import { PieChart } from "react-minimal-pie-chart";
-import { LabelRenderFunction } from "react-minimal-pie-chart/types/commonTypes";
+import type {
+  BaseDataEntry,
+  LabelRenderFunction,
+} from "react-minimal-pie-chart/types/commonTypes";
 import { BallotResults as BallotResultsType } from "graphql/types";
 import type { Nullable } from "simplytyped";
 import { Info } from "./Info";
@@ -69,7 +72,7 @@ export const VotyPie: React.FC<React.PropsWithChildren<{
     });
   }
 
-  const pieLabel: LabelRenderFunction = (props) => {
+  const pieLabel: LabelRenderFunction<BaseDataEntry> = (props) => {
     const { title, percentage, color } = props.dataEntry;
     const x = 50;
     const y = results.abs ? 50 : 55;

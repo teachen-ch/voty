@@ -1,7 +1,7 @@
 {
   "name": "voty",
   "engines": {
-    "node": ">=20"
+    "node": ">=24"
   },
   "version": "1.3.0-development",
   "private": true,
@@ -46,7 +46,7 @@
     "clsx": "^2.1.1",
     "cookie": "^0.7.0",
     "dayjs": "^1.11.20",
-    "formidable": "3.2.4",
+    "formidable": "^3.5.4",
     "graphql": "^16",
     "graphql-middleware": "^4.0.3",
     "graphql-request": "^3.7.0",
@@ -68,7 +68,7 @@
     "react-draggable-list": "^4.2.1",
     "react-hook-form": "^7.72.1",
     "react-markdown": "^9",
-    "react-minimal-pie-chart": "8.1.0",
+    "react-minimal-pie-chart": "^8.4.1",
     "react-new-window": "^1",
     "react-player": "^3",
     "remark-gfm": "^1.0.0",
@@ -104,14 +104,14 @@
     "@types/bcrypt": "^3.0.1",
     "@types/bcryptjs": "^2.4.6",
     "@types/cookie": "^0.4.1",
-    "@types/formidable": "1.0.31",
+    "@types/formidable": "^3.5.1",
     "@types/imap-simple": "^4.2.10",
     "@types/jsonwebtoken": "^9.0.10",
     "@types/lodash": "^4.17.0",
     "@types/mdx": "^2.0.13",
     "@types/mjml": "^4.7.4",
     "@types/mustache": "^4.2.6",
-    "@types/node": "^20",
+    "@types/node": "^24",
     "@types/nodemailer": "^6.4.23",
     "@types/react": "^19",
     "@types/react-dom": "^19",

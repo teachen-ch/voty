@@ -1,5 +1,5 @@
 import { PrismaClient, Attachment } from "@prisma/client";
-import { IncomingForm, File, Files } from "formidable";
+import { IncomingForm, File, Fields, Files } from "formidable";
 import { getSessionUser, getShortname } from "graphql/resolvers/users";
 import { NextApiRequest, NextApiResponse } from "next";
 import logger from "util/logger";
@@ -31,26 +31,24 @@ export default async function uploadApi(
     }
 
     const { fields, files: inFiles } = await formParse(req);
-    if (typeof fields.card === "object") throw new Error("cannot be array");
-    if (typeof fields.team === "object") throw new Error("cannot be array");
-    if (typeof fields.discussion === "object")
-      throw new Error("cannot be array");
+    const card = fields.card?.[0];
+    const teamField = fields.team?.[0];
+    const discussion = fields.discussion?.[0];
 
     const attachments: Record<string, Attachment> = {};
     const files: Record<string, File> = {};
     for (const fieldname in inFiles) {
-      const file = inFiles[fieldname];
-      const path = file.path.replace(UPLOAD_FOLDER, "");
+      const file = inFiles[fieldname]?.[0];
+      if (!file) continue;
+      const path = file.filepath.replace(UPLOAD_FOLDER, "");
       const attachment = await prisma.attachment.create({
         data: {
           file: path,
-          card: fields.card,
-          title: file.name,
-          type: file.type,
-          discussion: fields.discussion
-            ? { connect: { id: fields.discussion } }
-            : undefined,
-          team: { connect: { id: user.teamId || fields.team } },
+          card,
+          title: file.originalFilename ?? undefined,
+          type: file.mimetype ?? undefined,
+          discussion: discussion ? { connect: { id: discussion } } : undefined,
+          team: { connect: { id: user.teamId || teamField } },
           user: { connect: { id: user.id } },
           school: user.schoolId
             ? { connect: { id: user.schoolId } }
@@ -77,21 +75,14 @@ export default async function uploadApi(
 }
 
 function formParse(
-  req: NextApiRequest,
-  opts?: any
-): Promise<{ fields: Record<string, string | string[]>; files: Files }> {
+  req: NextApiRequest
+): Promise<{ fields: Fields; files: Files }> {
   return new Promise(function (resolve, reject) {
-    const form = new IncomingForm(opts);
-    form.uploadDir = UPLOAD_FOLDER;
-    form.keepExtensions = true;
-    form.maxFileSize = MAX_UPLOAD_MB * 1024 * 1024;
-    // TODO: check whether we want to do mime-type checking. currently broken
-    /* form.onPart = (part: Part) => {
-      if (!part.mime || allowedTypes.indexOf(part.mime) === -1) {
-        throw new Error("Filetype not supported");
-      }
-      form.handlePart(part);
-    }; */
+    const form = new IncomingForm({
+      uploadDir: UPLOAD_FOLDER,
+      keepExtensions: true,
+      maxFileSize: MAX_UPLOAD_MB * 1024 * 1024,
+    });
     form.parse(req, function (err, fields, files) {
       if (err) return reject(err);
       resolve({ fields, files });
