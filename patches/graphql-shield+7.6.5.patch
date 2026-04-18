@@ -1,0 +1,25 @@
+diff --git a/node_modules/graphql-shield/cjs/rules.js b/node_modules/graphql-shield/cjs/rules.js
+index b13a5cb..43af62c 100644
+--- a/node_modules/graphql-shield/cjs/rules.js
++++ b/node_modules/graphql-shield/cjs/rules.js
+@@ -4,7 +4,7 @@ exports.RuleFalse = exports.RuleTrue = exports.RuleNot = exports.RuleRace = expo
+ const tslib_1 = require("tslib");
+ const Yup = tslib_1.__importStar(require("yup"));
+ const utils_js_1 = require("./utils.js");
+-const util_1 = require("util");
++const util_1 = { isUndefined: (v) => v === undefined };
+ class Rule {
+     constructor(name, func, constructorOptions) {
+         const options = this.normalizeOptions(constructorOptions);
+diff --git a/node_modules/graphql-shield/esm/rules.js b/node_modules/graphql-shield/esm/rules.js
+index 70530da..e76871e 100644
+--- a/node_modules/graphql-shield/esm/rules.js
++++ b/node_modules/graphql-shield/esm/rules.js
+@@ -1,6 +1,6 @@
+ import * as Yup from 'yup';
+ import { isLogicRule } from './utils.js';
+-import { isUndefined } from 'util';
++const isUndefined = (v) => v === undefined;
+ export class Rule {
+     constructor(name, func, constructorOptions) {
+         const options = this.normalizeOptions(constructorOptions);
