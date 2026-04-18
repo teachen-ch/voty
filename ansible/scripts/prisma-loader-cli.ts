@@ -9,7 +9,7 @@ void run();
 
 async function run() {
   try {
-    const argv = cliOptions();
+    const argv = await cliOptions();
     // eslint-disable-next-line @typescript-eslint/unbound-method
     const logger = argv.quiet ? () => 0 : cons.log;
 

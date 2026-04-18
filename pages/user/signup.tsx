@@ -3,7 +3,7 @@ import { Text, Button, Heading, Card } from "components/ui";
 import { gql } from "@apollo/client";
 import { useState, ReactElement, Dispatch, SetStateAction } from "react";
 import { useRouter } from "next/router";
-import { QForm, yup, ErrorBox } from "../../components/Form";
+import { QForm, z, ErrorBox } from "../../components/Form";
 import omit from "lodash/omit";
 import { SessionUser, useUser } from "state/user";
 import { Role, useCreateUserMutation } from "graphql/types";
@@ -115,7 +115,7 @@ export const CreateUserForm: React.FC<React.PropsWithChildren<{
     name: {
       label: "Vorname",
       required: true,
-      validate: yup.string().min(3, "Dein Vorname ist etwas kurz"),
+      validate: z.string().min(3, "Dein Vorname ist etwas kurz"),
     },
     lastname: { label: "Nachname", required: true },
     email: {
@@ -128,7 +128,7 @@ export const CreateUserForm: React.FC<React.PropsWithChildren<{
       label: "Passwort",
       type: "password",
       required: true,
-      validate: yup.string().min(6, "Dein Passwort ist etwas sehr kurz..."),
+      validate: z.string().min(6, "Dein Passwort ist etwas sehr kurz..."),
     },
     role: {
       type: props.omitRole ? "hidden" : "select",
