@@ -184,7 +184,7 @@
     "ansi-regex": "^5.0.1",
     "nth-check": "^2.0.1",
     "url-parse": "^1.5.2",
-    "css-what": "^5.0.1",
+    "css-what": "^6.1.0",
     "glob-parent": "^5.1.2",
     "hosted-git-info": "^3.0.8",
     "trim": "^0.0.3",
