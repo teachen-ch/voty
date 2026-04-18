@@ -19,8 +19,9 @@ Chosen direction: **Pothos + GraphQL Yoga on the existing schema/resolver split,
 | 6A    | MDX 1 → 3                                                         | ✅ (cypress re-run deferred) |
 | 6B    | theme-ui/rebass → Tailwind 4                                      | ✅                 |
 | 7A    | Next 14 → 16, React 18 → 19, Recoil → Jotai                        | ✅ (cypress 14/14) |
+| 7B    | Prisma 5 → 6, Cypress 13 → 15, Formik/Yup → react-hook-form/zod    | ✅ (cypress 38/38) |
 
-**Cypress: 14/14** at end of Phase 5, and re-asserted at end of Phase 7A.
+**Cypress: 14/14** at end of Phase 5, re-asserted at Phase 7A, and **38/38** at end of Phase 7B (includes the 24-route hydration smoke spec added during 7A).
 
 ---
 
@@ -216,11 +217,40 @@ Landed on the `tailwind` branch as three commits after Track B merged: (1) Recoi
 
 ---
 
-## Deferred beyond Phase 7A
+## Phase 7B — Prisma 6, Cypress 15, Formik+Yup → react-hook-form+zod — DONE (2026-04-18)
 
-- Pages Router → App Router / RSC refactor (see above for i18n constraint).
+Landed as three commits on `tailwind` immediately after Phase 7A.
+
+**What was done**
+
+- `@prisma/client` + `prisma` 5 → 6.19.3. Regenerated Prisma client and `graphql/pothos-types.ts` cleanly (no application code change). `prisma-generator-pothos-codegen@0.7.2` still declares a `@prisma/client@^5` peer — harmless warning.
+- `cypress` 13 → 15 + `@testing-library/cypress` to latest. Zero config/spec churn; 38/38 unchanged.
+- `formik` + `yup` removed → `react-hook-form@7` + `zod@4` + `@hookform/resolvers`. `components/Form.tsx` rewritten internally; `QForm({ fields, mutation, onSubmit })` consumer API kept stable. `components/Users.tsx` (the only other direct formik consumer) rewritten end-to-end.
+- Dropped the `FormikForm as unknown as React.FC<PropsWithChildren<unknown>>` cast (Phase-4 scaffold — formik 2 never supplied `children` on `<Form>`).
+- Added missing `@types/yargs` and awaited `yargs.argv` (modern yargs returns a Promise) in `ansible/scripts/prisma-loader-cli.ts`.
+
+**Main challenges / non-obvious learnings**
+
+1. **zod + RHF type plumbing.** `zodResolver(schema)` is picky about the schema's inferred type matching `useForm<T>()`'s generic. Passing the schema through a component prop as `z.ZodTypeAny` loses that link and the resolver overloads reject it. Fix in `Users.tsx` was to widen the prop to `z.ZodType<IProfileForm>` and cast at the two boundaries — inlining the resolver would be cleaner if the schema weren't branchy (teacher vs student).
+2. **Formik `validate` field → zod equivalents.** The `QFormField.validate` hook in `components/Form.tsx` used to accept `yup.StringSchema | yup.NumberSchema`. Changed to `z.ZodTypeAny`. Callers switch one word: `yup.string().min(3, "msg")` → `z.string().min(3, "msg")`. Only one such call existed in the whole codebase (`pages/user/signup.tsx`).
+3. **"required" semantics differ.** Yup's `.required("msg")` means non-empty; zod's `.min(1, "msg")` is the string equivalent. For other types (number, union), `.refine((v) => v !== "" && v !== null && v !== undefined, { message: "..." })` is the most portable.
+4. **Optional strings.** `z.string().optional().or(z.literal(""))` is the pattern that makes an empty string valid (matches yup's non-required default behavior). Without it, an empty input produces a type error on submit for schemas that expect `string | undefined`.
+5. **Radio + select ergonomics on RHF.** Unlike formik's `<Field type="radio" name="gender" value={X}/>` auto-wiring, RHF wants `{...register("gender")} value={X}` spread onto a native `<input type="radio">` (same `name` across all four radios; RHF handles the group). Native `<select {...register("year")}>` replaces `<Field as={Select} name="year">`.
+6. **Yargs type regression.** `@types/yargs` had previously been implicit or bundled; a recent peer-dep reshuffle (Prisma 6 chain?) dropped it. Also, modern yargs types make `argv` a `… | Promise<…>` — the prisma-loader CLI had to `await cliOptions()`.
+
+**Phase 7B followups (small)**
+
+- `prisma-generator-pothos-codegen` peer warns for `@prisma/client@^5`. No observed problem at runtime; file an issue upstream or pin a minor version when they publish 0.8.x.
+- `QForm`'s generics are still loose (`mutation: MutationFunction<any, any>`). If we ever want type-safe variables inference, turn `QForm` into a generic over the GraphQL mutation types — biggish refactor for small gain.
+- The single `zodResolver(schema as any)` cast in `ProfileForm` is the only `any` added; could be tightened by inlining resolver construction per branch.
+
+---
+
+## Deferred beyond Phase 7B
+
+- Pages Router → App Router / RSC refactor (see Phase 7A for the i18n constraint).
 - Visual regression harness (Percy/Chromatic).
-- Formik → react-hook-form.
+- ESLint 7 → 9 flat-config + eslint-config-next 11 → 16.
 
 ---
 
