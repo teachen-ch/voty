@@ -31,8 +31,7 @@
     "graphql": "graphql-codegen --config codegen.yml",
     "check:ts": "tsc --noEmit",
     "schema:print": "tsx graphql/printSchema.ts",
-    "lint": "next lint",
-    "semantic-release": "semantic-release"
+    "lint": "next lint"
   },
   "dependencies": {
     "@apollo/client": "^3.14.1",
@@ -52,7 +51,6 @@
     "dayjs": "^1.11.20",
     "formidable": "^3.5.4",
     "graphql": "^16",
-    "graphql-request": "^3.7.0",
     "graphql-scalars": "^1.25.0",
     "graphql-yoga": "^5",
     "imap-simple": "^5.1.0",
@@ -60,7 +58,7 @@
     "jsonwebtoken": "^9.0.3",
     "lodash": "^4.17.21",
     "marked": "^4.0.10",
-    "mjml": "^4.18.0",
+    "mjml": "^5",
     "mustache": "^4.2.0",
     "next": "^16",
     "nodemailer": "^8.0.5",
@@ -94,11 +92,6 @@
     "@graphql-codegen/typescript-operations": "^4",
     "@graphql-codegen/typescript-react-apollo": "^4",
     "@istanbuljs/nyc-config-typescript": "^1.0.2",
-    "@semantic-release/changelog": "^5.0.1",
-    "@semantic-release/commit-analyzer": "^8.0.1",
-    "@semantic-release/git": "^9.0.0",
-    "@semantic-release/github": "^7.2.0",
-    "@semantic-release/release-notes-generator": "^9.0.1",
     "@tailwindcss/postcss": "^4.2.2",
     "@testing-library/cypress": "^10.1.0",
     "@types/bcrypt": "^3.0.1",
@@ -133,7 +126,6 @@
     "prettier": "^2.1.2",
     "prisma": "^6",
     "prisma-generator-pothos-codegen": "^0.7.2",
-    "semantic-release": "^17.3.7",
     "simplytyped": "^3.3.0",
     "tailwindcss": "^4.2.2",
     "ts-node": "^9.1.1",
@@ -148,25 +140,6 @@
   "release": {
     "branches": [
       "main"
-    ],
-    "plugins": [
-      "@semantic-release/commit-analyzer",
-      "@semantic-release/release-notes-generator",
-      [
-        "@semantic-release/changelog",
-        {
-          "changelogFile": "docs/CHANGELOG.md"
-        }
-      ],
-      [
-        "@semantic-release/git",
-        {
-          "assets": [
-            "docs/CHANGELOG.md",
-            "package.json"
-          ]
-        }
-      ]
     ]
   },
   "resolutions": {

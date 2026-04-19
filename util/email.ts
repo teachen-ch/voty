@@ -85,7 +85,7 @@ async function renderTemplate(
     text = mjml.replace(/<\/?[^>]+(>|$)/g, "");
   }
 
-  const { html, errors } = mjml2html(Mustache.render(mjml, data));
+  const { html, errors } = await mjml2html(Mustache.render(mjml, data));
   if (errors.length) {
     throw new Error(String(errors));
   }
