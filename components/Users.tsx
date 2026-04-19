@@ -6,6 +6,7 @@ import {
   User,
   Gender,
   Role,
+  UserUpdateInput,
 } from "graphql/types";
 import { ReactElement, useState } from "react";
 import { Link as A, Box, Button, Text } from "components/ui";
@@ -170,16 +171,19 @@ export const ProfileEdit: React.FC<React.PropsWithChildren<{
   const numYears = isStudent ? 12 : 90;
 
   async function onSubmit(values: IProfileForm) {
+    // Only include fields the active form actually registered: RHF drops
+    // unregistered fields from `values`, so sending `{ set: undefined }`
+    // serializes to `{}` and trips Prisma's StringFieldUpdateOperationsInput.
+    const data: UserUpdateInput = {};
+    if (values.name !== undefined) data.name = { set: values.name };
+    if (values.lastname !== undefined)
+      data.lastname = { set: values.lastname };
+    if (values.year !== undefined && values.year !== null && String(values.year) !== "")
+      data.year = { set: parseInt(String(values.year)) };
+    if (values.gender)
+      data.gender = { set: values.gender };
     await doUpdateUser({
-      variables: {
-        where: { id: user?.id },
-        data: {
-          name: { set: values.name },
-          lastname: { set: values.lastname },
-          year: { set: parseInt(String(values.year)) },
-          gender: { set: values.gender },
-        },
-      },
+      variables: { where: { id: user?.id }, data },
     });
   }
 
