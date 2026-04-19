@@ -1,9 +1,4 @@
-import {
-  Label,
-  Radio,
-  Select,
-  Textarea,
-} from "components/ui";
+import { Label, Radio, Select, Textarea } from "components/ui";
 import Image from "next/image";
 import { useCallback, useContext, useEffect, useMemo, useState } from "react";
 import { Button, Text, Flex, Box } from "components/ui";
@@ -35,7 +30,10 @@ interface IQuestContext {
 
 export const QuestContext = React.createContext({} as IQuestContext);
 
-export const Quest: React.FC<React.PropsWithChildren<{ groups?: string }>> = ({ children, groups }) => {
+export const Quest: React.FC<React.PropsWithChildren<{ groups?: string }>> = ({
+  children,
+  groups,
+}) => {
   const user = useUser();
   const team = useTeam();
   const { card, title } = useContext(CardContext);
@@ -78,9 +76,7 @@ export const Quest: React.FC<React.PropsWithChildren<{ groups?: string }>> = ({ 
       {team &&
         allowGroups(team, card, groups as AllowGroups) === AllowGroups.Yes && (
           <>
-            <Label className="mt-8 mb-2">
-              Erarbeitet durch:{" "}
-            </Label>
+            <Label className="mt-8 mb-2">Erarbeitet durch: </Label>
             <Authors setUsers={setUsers} />
           </>
         )}
@@ -96,7 +92,12 @@ export const Quest: React.FC<React.PropsWithChildren<{ groups?: string }>> = ({ 
           Abschicken
         </Button>
       )}
-      <Works card={card} items={QuestWork} trigger={trigger}></Works>
+      <Works
+        flexDirection="column"
+        card={card}
+        items={QuestWork}
+        trigger={trigger}
+      ></Works>
     </QuestContext.Provider>
   );
 };
@@ -119,11 +120,9 @@ const QuestWork: WorkItem = ({ work }) => {
   );
 };
 
-export const Question: React.FC<React.PropsWithChildren<{ className?: string; ix?: string }>> = ({
-  ix,
-  children,
-  className,
-}) => {
+export const Question: React.FC<
+  React.PropsWithChildren<{ className?: string; ix?: string }>
+> = ({ ix, children, className }) => {
   const otherChildren = React.Children.toArray(children);
   const first = otherChildren.shift();
   const [hint, setHint] = useState(false);
@@ -136,9 +135,7 @@ export const Question: React.FC<React.PropsWithChildren<{ className?: string; ix
           onMouseOver={() => setHint(true)}
           onMouseOut={() => setHint(false)}
         >
-          <Box className="mt-1 mb-4">
-            {first}
-          </Box>
+          <Box className="mt-1 mb-4">{first}</Box>
 
           <FeedbackText
             style={{
@@ -163,12 +160,16 @@ type AnswerProps = {
   answer?: any;
 };
 
-export const Textfield: React.FC<React.PropsWithChildren<AnswerProps & {
-  lines?: number;
-  placeholder?: string;
-  width?: string | number | Array<string | number>;
-  className?: string;
-}>> = ({ id, lines = 2, ...props }) => {
+export const Textfield: React.FC<
+  React.PropsWithChildren<
+    AnswerProps & {
+      lines?: number;
+      placeholder?: string;
+      width?: string | number | Array<string | number>;
+      className?: string;
+    }
+  >
+> = ({ id, lines = 2, ...props }) => {
   const { answers, setAnswer, readOnly } = useContext(QuestContext);
 
   if (!id) return <Err msg="<Question/> ohne id" />;
@@ -188,11 +189,9 @@ export const Textfield: React.FC<React.PropsWithChildren<AnswerProps & {
   );
 };
 
-export const MultiChoice: React.FC<React.PropsWithChildren<{ row?: boolean } & AnswerProps>> = ({
-  id,
-  children,
-  row,
-}) => {
+export const MultiChoice: React.FC<
+  React.PropsWithChildren<{ row?: boolean } & AnswerProps>
+> = ({ id, children, row }) => {
   const { answers, setAnswer, readOnly } = useContext(QuestContext);
   const [answered, setAnswered] = useState<number>();
 
@@ -207,7 +206,9 @@ export const MultiChoice: React.FC<React.PropsWithChildren<{ row?: boolean } & A
   }
   return (
     <Flex
-      className={`mb-8 justify-start flex-wrap sm:flex-nowrap ${row ? "flex-row" : "flex-col"}`}
+      className={`mb-8 justify-start flex-wrap sm:flex-nowrap ${
+        row ? "flex-row" : "flex-col"
+      }`}
     >
       {React.Children.map(children, (child, ix) =>
         React.isValidElement<{
@@ -228,21 +229,24 @@ export const MultiChoice: React.FC<React.PropsWithChildren<{ row?: boolean } & A
   );
 };
 
-export const Choice: React.FC<React.PropsWithChildren<{
-  correct?: boolean;
-  ix?: number;
-  answer?: number;
-  answered?: number;
-  setAnswer?: () => void;
-}>> = ({ correct, ix, answer, answered, setAnswer = () => 0, children }) => {
+export const Choice: React.FC<
+  React.PropsWithChildren<{
+    correct?: boolean;
+    ix?: number;
+    answer?: number;
+    answered?: number;
+    setAnswer?: () => void;
+  }>
+> = ({ correct, ix, answer, answered, setAnswer = () => 0, children }) => {
   const colorClass =
     answered === ix ? (correct ? "text-green" : "text-danger") : "";
   return (
-    <Label className="items-center mr-2 mb-2 cursor-pointer" onClick={setAnswer}>
+    <Label
+      className="flex leading-none items-center mr-2 mb-2 cursor-pointer"
+      onClick={setAnswer}
+    >
       <Radio checked={answer === ix} className={`${colorClass} mr-2`} />
-      <span className="flex-1 grow">
-        {children}
-      </span>
+      <span className="flex-1 grow">{children}</span>
     </Label>
   );
 };
@@ -257,10 +261,9 @@ interface OrderItemProps {
   commonProps: { readOnly?: boolean; correct: boolean };
 }
 
-export const Order: React.FC<React.PropsWithChildren<AnswerProps & { items: string[] }>> = ({
-  items,
-  id,
-}) => {
+export const Order: React.FC<
+  React.PropsWithChildren<AnswerProps & { items: string[] }>
+> = ({ items, id }) => {
   const { answers, setAnswer, readOnly } = useContext(QuestContext);
   const [current, setCurrent] = useState<readonly OrderItemType[]>([]);
   const [correct, setCorrect] = useState(false);
@@ -344,11 +347,11 @@ class OrderItem extends React.Component<OrderItemProps> {
   }
 }
 
-export const Choose: React.FC<React.PropsWithChildren<AnswerProps & { className?: string; disabled?: boolean }>> = ({
-  id,
-  children,
-  ...props
-}) => {
+export const Choose: React.FC<
+  React.PropsWithChildren<
+    AnswerProps & { className?: string; disabled?: boolean }
+  >
+> = ({ id, children, ...props }) => {
   const { answers, setAnswer, readOnly } = useContext(QuestContext);
 
   if (!id) return <Err msg="<Choose/> ohne id" />;

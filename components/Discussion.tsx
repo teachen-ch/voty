@@ -189,7 +189,7 @@ const PostDiscussion: React.FC<
   return (
     <Box id="postDiscussion">
       <Textarea
-        className="mt-4 bg-textarea border-white placeholder:text-white text-sm sm:text-base"
+        className="mt-4 bg-white border-white placeholder:text-gray-500 text-sm sm:text-base"
         value={text}
         onChange={(evt) => setText(evt.target.value)}
         rows={2}

@@ -225,15 +225,15 @@ export default function TeacherTeamPage(): React.ReactElement {
             placeholder="name1@schule.ch, name2@schule; name3.schule.ch; ..."
           />
           <Button
-            className="my-2 w-full text-nowrap"
+            className="my-2 w-full flex gap-3"
             onClick={() => inviteStudents(team)}
             disabled={!matches || inviteQuery.loading}
           >
             {inviteQuery.loading ? (
-              <span>
-                <Spinner className="text-gray mr-4" size={20} />
+              <>
+                <Spinner className="inline-block text-gray" size={20} />
                 Bitte warten...
-              </span>
+              </>
             ) : (
               `${matches ? matches : ""} Einladungen verschicken`
             )}
@@ -294,20 +294,19 @@ const InviteLink: React.FC<
   }
 
   return (
-    <Grid className="my-2 gap-4" columns="2fr 3fr 2fr">
+    <Grid className="my-4 gap-4" columns="2fr 5fr 2fr">
       <Label className="text-sm" style={{ alignSelf: "center" }}>
         Einladungslink:
       </Label>
       <Input ref={inviteRef} readOnly className="text-sm" value={url} />
-      <Button className="text-sm" onClick={() => qrCode(url)}>
-        <Box className="flex justify-center">
-          <Box className="inline-block mr-2">
-            <Image src={IconQR} height={25} width={25} alt="QR-Code" />
-          </Box>
-          QR-Code
-        </Box>
+      <Button
+        className="text-sm flex justify-center gap-2 text-nowrap"
+        onClick={() => qrCode(url)}
+      >
+        <Image src={IconQR} height={25} width={25} alt="QR-Code" />
+        QR-Code
       </Button>
-      <Text className="text-sm" style={{ gridColumn: 2, marginTop: "-10px" }}>
+      <Text className="text-sm col-start-2">
         {status ? (
           status
         ) : (
