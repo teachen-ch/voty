@@ -7,7 +7,7 @@ import { useRouter } from "next/router";
 import NextImage from "next/image";
 import Link from "next/link";
 import TweetClaude from "../public/images/tweet_claude_longchamp.png";
-import { A } from "components/Breadcrumb";
+import { A } from "components/A";
 import { useTheme } from "util/hooks";
 
 export default function Home(): React.ReactElement {
@@ -208,37 +208,36 @@ export default function Home(): React.ReactElement {
 
         <H1 className="mt-24 -mb-5 text-center">Laufende Projekte</H1>
 
-        <Link href="/swiss-bulgaria" passHref legacyBehavior>
-          <Flex className="justify-center mt-0 cursor-pointer">
-            <Teaser>
-              <TeaserImage
-                src="/images/illu-glas.svg"
-                width={371}
-                height={239}
-                className="md:-mt-16"
-              />
-              <TeaserText title="Projekt GLAS - Schweiz + Bulgarien">
-                Voty.ch arbeitet von 2025-2028 als Schweizer Partnerorganisation
-                im Projekt «GLAS» zusammen mit lokale NGOs in Bulgarien.
-                <br />
-                <LearnMore href="/swiss-bulgaria" />
-                <Box
-                  className="mt-8 p-2"
-                  style={{
-                    backgroundColor: "var(--color-primary)",
-                    borderRadius: "15px",
-                  }}
-                >
-                  <Image
-                    src="/images/logo-ch-bul.png"
-                    className="w-full h-auto"
-                    alt="Projekt GLAS - Schweiz + Bulgarien"
-                  />
-                </Box>
-              </TeaserText>
-            </Teaser>
-          </Flex>
-        </Link>
+        <Flex className="justify-center mt-0">
+          <Teaser>
+            <TeaserImage
+              src="/images/illu-glas.svg"
+              width={371}
+              height={239}
+              className="md:-mt-16"
+            />
+            <TeaserText title="Projekt GLAS - Schweiz + Bulgarien">
+              Voty.ch arbeitet von 2025-2028 als Schweizer Partnerorganisation
+              im Projekt «GLAS» zusammen mit lokale NGOs in Bulgarien.
+              <br />
+              <LearnMore href="/swiss-bulgaria" />
+              <Link
+                href="/swiss-bulgaria"
+                className="block mt-8 p-2"
+                style={{
+                  backgroundColor: "var(--color-primary)",
+                  borderRadius: "15px",
+                }}
+              >
+                <Image
+                  src="/images/logo-ch-bul.png"
+                  className="w-full h-auto"
+                  alt="Projekt GLAS - Schweiz + Bulgarien"
+                />
+              </Link>
+            </TeaserText>
+          </Teaser>
+        </Flex>
       </Container>
       <Footer />
     </>

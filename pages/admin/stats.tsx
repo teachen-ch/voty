@@ -1,6 +1,7 @@
 import { Err, Loading, LoggedInPage } from "../../components/Page";
 import { ReactElement, useState } from "react";
-import { A, Breadcrumb, Here } from "components/Breadcrumb";
+import { Breadcrumb, Here } from "components/Breadcrumb";
+import { A } from "components/A";
 import { Role, useStatsQuery } from "graphql/types";
 import { gql } from "@apollo/client";
 import date from "util/date";

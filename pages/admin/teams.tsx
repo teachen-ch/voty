@@ -1,7 +1,8 @@
 import { LoggedInPage } from "../../components/Page";
 import { Teams } from "../../components/Teams";
 import { ReactElement } from "react";
-import { A, Breadcrumb, Here } from "components/Breadcrumb";
+import { Breadcrumb, Here } from "components/Breadcrumb";
+import { A } from "components/A";
 import { useRouter } from "next/router";
 import { SortOrder, TeamOrderByInput } from "graphql/types";
 

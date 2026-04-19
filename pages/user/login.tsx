@@ -16,7 +16,7 @@ import {
 } from "graphql/types";
 import { isBrowser } from "util/isBrowser";
 import { Input, Label } from "components/ui";
-import { A } from "components/Breadcrumb";
+import { A } from "components/A";
 
 export const LOGIN = gql`
   mutation login($email: String!, $password: String!) {

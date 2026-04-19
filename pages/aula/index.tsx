@@ -2,7 +2,7 @@ import { Cards } from "components/Cards";
 import { AppPage, H2 } from "components/Page";
 import { Text } from "components/ui";
 import { useState } from "react";
-import { A } from "components/Breadcrumb";
+import { A } from "components/A";
 
 export default function CardsPublic(): React.ReactElement {
   const [keywords, setKeywords] = useState("aula");

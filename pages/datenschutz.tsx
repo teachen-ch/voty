@@ -2,7 +2,7 @@ import Head from "next/head";
 import { Page } from "components/Page";
 import { Heading, Text } from "components/ui";
 import { ReactElement } from "react";
-import { A } from "components/Breadcrumb";
+import { A } from "components/A";
 import { Info } from "components/Info";
 import { FR, IT } from "components/Translated";
 import { useTr } from "util/translate";

@@ -3,14 +3,16 @@ import { Image } from "components/ui";
 import gfm from "remark-gfm";
 import remarkImage from "remark-images";
 
-export const MarkdownNew: React.FC<React.PropsWithChildren<{ children?: string }>> = ({ children }) => (
+export const MarkdownNew: React.FC<
+  React.PropsWithChildren<{ children?: string }>
+> = ({ children }) => (
   <ReactMarkdown
     remarkPlugins={[gfm, remarkImage]}
     components={{
       // eslint-disable-next-line react/display-name
       img: ({ src, alt }) => (
         <Image
-          className="max-h-[300px] max-w-full border-[10px] border-white rounded-[10px] mb-2 block"
+          className="max-h-75 max-w-full border-10 border-white rounded-[10px] mb-2 block"
           src={typeof src === "string" ? src : undefined}
           alt={alt}
         />
@@ -24,7 +26,9 @@ export const MarkdownNew: React.FC<React.PropsWithChildren<{ children?: string }
 // We should replace this with MarkdownNew, as it uses dangerouslySetInnerHTML...
 // But it is still used by chaty and a few other places
 
-export const Markdown: React.FC<React.PropsWithChildren<unknown>> = ({ children }) => (
+export const Markdown: React.FC<React.PropsWithChildren<unknown>> = ({
+  children,
+}) => (
   <div
     dangerouslySetInnerHTML={parseMarkdownInner(String(children))}
     style={{ textAlign: "left" }}

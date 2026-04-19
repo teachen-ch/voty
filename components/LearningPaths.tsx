@@ -5,7 +5,7 @@ import { getCardMeta, getCardTypeIcon } from "./Cards";
 import { Err } from "./Page";
 import { Table, TD, TDIcon, TDImage, TR } from "./Table";
 import { useState } from "react";
-import { A } from "./Breadcrumb";
+import { A } from "./A";
 import Image from "next/image";
 import IconWatch from "../public/images/icon_watch.svg";
 import upperFirst from "lodash/upperFirst";

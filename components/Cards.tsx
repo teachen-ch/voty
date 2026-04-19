@@ -20,7 +20,7 @@ import truncate from "lodash/truncate";
 import without from "lodash/without";
 import DraggableList from "react-draggable-list";
 import { OneRowTable, Table, TD, TDIcon, TDImage, TR } from "./Table";
-import { A } from "./Breadcrumb";
+import { A } from "./A";
 import Image from "next/image";
 import IconTrash from "../public/images/icon_trash.svg";
 import IconWatch from "../public/images/icon_watch.svg";

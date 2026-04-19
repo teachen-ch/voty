@@ -18,7 +18,7 @@ export const Info: React.FC<
 > = ({ type = "default", className, children, ...props }) => (
   <Card
     className={cn(
-      "py-2 my-8 px-8 text-base border-l-[10px] border-l-solid",
+      "py-2 my-8 px-8 text-base border-l-10 border-l-solid",
       typeColors[type],
       className
     )}

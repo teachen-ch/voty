@@ -2,7 +2,7 @@ import { Input, Select, Textarea } from "components/ui";
 import { useContext, useState } from "react";
 import { Box, Button, Text, Card, Flex } from "components/ui";
 import { authHeaders } from "util/apollo";
-import { A } from "./Breadcrumb";
+import { A } from "./A";
 import { Grid } from "components/ui";
 import { CardContext, getCardTitle } from "./Cards";
 import { Info } from "./Info";

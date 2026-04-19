@@ -9,7 +9,8 @@ import {
   UserUpdateInput,
 } from "graphql/types";
 import { ReactElement, useState } from "react";
-import { Link as A, Box, Button, Text } from "components/ui";
+import { Box, Button, Text } from "components/ui";
+import { A } from "components/A";
 import { Label, Input as UIInput, Select } from "components/ui";
 import { SessionUser, useSetUser } from "state/user";
 import { z, ErrorBox } from "./Form";
@@ -26,7 +27,6 @@ import {
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Grid } from "components/ui";
 import { useTr } from "util/translate";
-import Link from "next/link";
 
 export const GET_USERS = gql`
   query users($where: UserWhereInput) {
@@ -244,11 +244,9 @@ export const ProfileEdit: React.FC<React.PropsWithChildren<{
         <Text className="text-sm text-left sm:col-start-2">
           {tr(`Profile.Legal.${user?.role}`)}
 
-          <Link href="/datenschutz/" passHref>
-            <A target="_blank" className="underline">
-              {tr("Profile.DataLink")}
-            </A>
-          </Link>
+          <A href="/datenschutz/" target="_blank" className="underline">
+            {tr("Profile.DataLink")}
+          </A>
         </Text>
       </Grid>
     );
@@ -363,11 +361,9 @@ const ProfileForm: React.FC<{
 
           <Text className="text-sm text-left sm:col-start-2">
             {tr(`Profile.Legal.${user?.role}`)}
-            <Link href="/datenschutz/" passHref>
-              <A target="_blank" className="underline">
-                {tr("Profile.DataLink")}
-              </A>
-            </Link>
+            <A href="/datenschutz/" target="_blank" className="underline">
+              {tr("Profile.DataLink")}
+            </A>
           </Text>
         </Grid>
       </form>

@@ -62,8 +62,8 @@ export const TD: React.FC<
   <div
     {...props}
     className={`px-2 ${smHide ? "hidden sm:block" : "block"} ${
-      flexy ? "flex-grow min-w-0" : "flex-grow-0"
-    } ${fixed ? "flex-shrink-0" : "flex-shrink"} ${className ?? ""}`}
+      flexy ? "grow min-w-0" : "grow-0"
+    } ${fixed ? "shrink-0" : "shrink"} ${className ?? ""}`}
     style={{ width: width as any, textAlign: textAlign as any }}
   >
     <Text className="whitespace-nowrap overflow-hidden text-ellipsis">
@@ -87,7 +87,7 @@ export const TDImage: React.FC<
   const dark = colorMode === "dark";
   return (
     <Image
-      className={`self-center mx-2 flex-shrink-0 ${
+      className={`self-center mx-2 shrink-0 ${
         smHide ? "hidden sm:block" : "block"
       } ${dark || light ? "invert" : ""} ${className ?? ""}`}
       style={{
@@ -116,7 +116,7 @@ export const TDIcon: React.FC<
   >
 > = ({ smHide, children, className, ...props }) => (
   <div
-    className={`mx-2 flex-shrink-0 flex-grow-0 ${
+    className={`mx-2 shrink-0 grow-0 ${
       smHide ? "hidden sm:block" : "block"
     } ${props.onClick ? "cursor-pointer" : ""} ${className ?? ""}`}
     {...props}

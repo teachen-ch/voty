@@ -94,7 +94,7 @@ export const Text = React.forwardRef<
 
 // ─── Heading ──────────────────────────────────────────────────────────────────
 
-const headingVariants = cva("font-heading leading-[1.15]", {
+const headingVariants = cva("font-heading leading-heading", {
   variants: {
     variant: {
       default: "font-semibold mt-8 mb-[0.5em]",
@@ -414,7 +414,7 @@ export const Radio = React.forwardRef<HTMLInputElement, RadioProps>(
       type="radio"
       className={cn(
         "appearance-none cursor-pointer align-middle relative w-5 h-5 border-2 border-current rounded-full",
-        "checked:before:content-[''] checked:before:absolute checked:before:inset-[2px] checked:before:rounded-full checked:before:bg-current",
+        "checked:before:content-[''] checked:before:absolute checked:before:inset-0.5 checked:before:rounded-full checked:before:bg-current",
         className
       )}
       {...props}

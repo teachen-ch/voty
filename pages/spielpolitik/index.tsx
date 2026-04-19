@@ -1,7 +1,7 @@
 import { Step } from "pages/abstimmen";
 import { Heading, Text } from "components/ui";
 import { Box, Card, Image, Flex } from "components/ui";
-import { A } from "components/Breadcrumb";
+import { A } from "components/A";
 import { CreateUserForm } from "pages/user/signup";
 import { SessionUser, useUser } from "state/user";
 import { useState } from "react";

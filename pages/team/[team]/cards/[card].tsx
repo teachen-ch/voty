@@ -1,7 +1,8 @@
 import { Loading, ErrorPage, AppPage, ShowFor } from "components/Page";
 import { Card, getCardMeta } from "components/Cards";
 import { useTeamAnon, useUser } from "state/user";
-import { A, Breadcrumb, Here } from "components/Breadcrumb";
+import { Breadcrumb, Here } from "components/Breadcrumb";
+import { A } from "components/A";
 import { Role } from "graphql/types";
 import { Discussion } from "components/Discussion";
 import { useQueryParam } from "util/hooks";

@@ -4,7 +4,8 @@ import { useRouter } from "next/router";
 import { SelectBallots } from "components/Ballots";
 import { usePageEvent } from "util/stats";
 import { Role, useTeamTeacherQuery } from "graphql/types";
-import { Breadcrumb, A, Here } from "components/Breadcrumb";
+import { Breadcrumb, Here } from "components/Breadcrumb";
+import { A } from "components/A";
 import { BallotScope } from "graphql/types";
 
 export default function PanelPage(): React.ReactElement {

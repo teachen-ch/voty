@@ -1,5 +1,5 @@
 import { Flex, Text, Box } from "components/ui";
-import { A } from "components/Breadcrumb";
+import { A } from "components/A";
 import Image from "next/image";
 import IconRegister from "../public/images/icon_register_b.svg";
 import IconLogin from "../public/images/icon_login_b.svg";

@@ -12,7 +12,7 @@ export const ChatContainer: React.FC<React.PropsWithChildren<unknown>> = ({
 }) => (
   <Box style={{ height: 480 }}>
     <Flex
-      className="flex-col w-full bg-white text-black sm:rounded-card sm:absolute fixed bottom-0 top-0 sm:static z-100 sm:z-0"
+      className="flex-col w-full bg-white text-black sm:rounded-card sm:absolute fixed bottom-0 top-0 z-100 sm:z-0"
       style={{ height: 480 }}
     >
       {children}
@@ -58,7 +58,7 @@ export const Message: React.FC<
   const out = direction === Direction.Outgoing;
   return (
     <Box
-      className={`max-w-[80%] py-[6px] px-[12px] mb-4 text-sm rounded-[14px] ${
+      className={`max-w-[80%] py-1.5 px-3 mb-4 text-sm rounded-[14px] ${
         out
           ? "self-end bg-[#206DBB] text-white"
           : "self-start bg-[#E9E9EB] text-black"
@@ -112,7 +112,7 @@ const ParsedMessage: React.FC<
 const Info: React.FC<React.PropsWithChildren<{ model: TMessage }>> = ({
   model,
 }) => (
-  <Box className="mb-4 mx-8 py-4 px-4 bg-highlight text-gray text-sm rounded-[8px] max-w-[350px]">
+  <Box className="mb-4 mx-8 py-4 px-4 bg-highlight text-gray text-sm rounded-lg max-w-87.5">
     <Markdown>{model.message}</Markdown>
   </Box>
 );
@@ -146,17 +146,17 @@ export const ChatyNext: React.FC<
   const { inputMessage, selectOption } = useContext(ChatyContext);
   return (
     <InputBox>
-      <Text className="pl-2 flex-1 text-black font-semibold min-w-[300px] my-2 sm:my-0 sm:rounded-b-[5px]">
+      <Text className="pl-2 flex-1 text-black font-semibold min-w-75 my-2 sm:my-0 sm:rounded-b-card">
         Weiter zu «{getCardTitle(String(inputMessage?.message))}»?
       </Text>
       <Button
-        className="ml-2 mr-4 w-[150px]"
+        className="ml-2 mr-4 w-37.5"
         onClick={() => selectOption(inputMessage!, "Nein")}
       >
         Nein
       </Button>
       <Button
-        className="w-[150px]"
+        className="w-37.5"
         onClick={() => nextChaty(String(inputMessage?.message))}
       >
         Ja
@@ -168,7 +168,7 @@ export const ChatyNext: React.FC<
 export const TypingIndicator: React.FC<
   React.PropsWithChildren<unknown>
 > = () => (
-  <Box className="-mt-[25px] ml-1 text-xl">
+  <Box className="-mt-6.25 ml-1 text-xl">
     <GlowDot delay={0} />
     <GlowDot delay={0.2} />
     <GlowDot delay={0.4} />

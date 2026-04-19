@@ -5,11 +5,11 @@ import {
   useSetUser,
   useSetAccessToken,
 } from "state/user";
-import { Heading, Text, Box, Button, Link as A } from "components/ui";
+import { Heading, Text, Box, Button } from "components/ui";
 import { Page } from "components/Page";
 import { useDeleteAccountMutation } from "graphql/types";
 import { useRouter } from "next/router";
-import Link from "next/link";
+import { A } from "components/A";
 import { gql } from "@apollo/client";
 import { Grid } from "components/ui";
 
@@ -68,9 +68,7 @@ const DeleteForm: React.FC<React.PropsWithChildren<{ user: SessionUser }>> = ({
       <Box>
         <Text>
           Leider hat die Löschung nicht geklappt! Bitte nimm mit uns{" "}
-          <Link href="/kontakt" passHref>
-            <A>Kontakt</A>
-          </Link>{" "}
+          <A href="/kontakt">Kontakt</A>{" "}
           auf.
         </Text>
       </Box>

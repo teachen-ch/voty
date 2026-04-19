@@ -14,7 +14,7 @@ export const Banner: React.FC<React.PropsWithChildren<BannerProps>> = ({
   return (
     <Box className="text-white">
       <Link
-        className="block fixed z-20 px-[70px] py-4 pb-[55px] sm:pb-4 bg-danger rotate-[-45deg] max-w-[290px] sm:max-w-[353px] bottom-[-18px] right-[-97px] sm:bottom-auto sm:right-auto sm:top-10 sm:left-[-95px] shadow-[0_-2px_10px_0_#333] sm:shadow-[0_2px_10px_0_#333] hover:no-underline hover:scale-[2] hover:translate-x-[100px]"
+        className="block fixed z-20 px-17.5 py-4 pb-13.75 sm:pb-4 bg-danger -rotate-45 max-w-72.5 sm:max-w-88.25 -bottom-4.5 -right-24.25 sm:bottom-auto sm:right-auto sm:top-10 sm:-left-23.75 shadow-[0_-2px_10px_0_#333] sm:shadow-[0_2px_10px_0_#333] hover:no-underline hover:scale-[2] hover:translate-x-25"
         href={href}
         onClick={onClick}
       >

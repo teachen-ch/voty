@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Box, Flex } from "components/ui";
 import { SessionUser } from "state/user";
-import { A } from "./Breadcrumb";
+import { A } from "./A";
 import Image from "next/image";
 import IconLogout from "../public/images/icon_logout.svg";
 import IconHome from "../public/images/icon_home.svg";
@@ -34,15 +34,15 @@ export const NavMobile: React.FC<
             className="fixed top-0 left-0 w-[20%] h-full bg-[rgba(0,0,0,0.6)]"
             onClick={() => setOpen(false)}
           />
-          <Box className="fixed top-0 right-0 w-[80%] h-full text-lg overflow-scroll z-[99] bg-primary">
+          <Box className="fixed top-0 right-0 w-[80%] h-full text-lg overflow-scroll z-99 bg-primary">
             <Box className="text-right">
               <A onClick={() => setOpen(false)}>
-                <Box className="w-[30px] h-[30px] pt-[18px] pr-[18px]">
+                <Box className="w-7.5 h-7.5 pt-4.5 pr-4.5">
                   <Image src={IconCross} alt="schliessen" />
                 </Box>
               </A>
             </Box>
-            <Box className="pl-8 leading-[55px] font-semibold">
+            <Box className="pl-8 leading-13.75 font-semibold">
               <A href="/">
                 <MIcon src={IconHome} />
                 Startseite

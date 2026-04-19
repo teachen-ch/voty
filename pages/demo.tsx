@@ -18,7 +18,7 @@ export default function DemoPage(): ReactElement {
           Demo-Server kann gelegentlich nicht verfügbar oder instabil sein.
         </Text>
 
-        <Box className="bg-[darkgray] p-4 leading-[1.5] mt-8">
+        <Box className="bg-[darkgray] p-4 leading-normal mt-8">
           <Text>
             Email:{" "}
             <Text as="span" className="ml-4 inline-block font-mono">
@@ -46,7 +46,7 @@ export default function DemoPage(): ReactElement {
           Mit folgendem Konto erfolgt eine Anmeldung als Schüler*in:
         </Text>
 
-        <Box className="bg-[darkgray] p-4 leading-[1.5]">
+        <Box className="bg-[darkgray] p-4 leading-normal">
           <Text>
             Email:{" "}
             <Text as="span" className="ml-4 inline-block font-mono">

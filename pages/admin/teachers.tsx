@@ -3,7 +3,8 @@ import { LoggedInPage } from "../../components/Page";
 import React, { ReactElement } from "react";
 import { useTeachersQuery, Role, TeachersQuery } from "graphql/types";
 import { Box, Image } from "components/ui";
-import { Breadcrumb, A, Here } from "components/Breadcrumb";
+import { Breadcrumb, Here } from "components/Breadcrumb";
+import { A } from "components/A";
 import { ReadMore } from "components/ReadMore";
 
 export const GET_TEACHERS = gql`

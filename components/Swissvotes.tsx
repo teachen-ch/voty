@@ -9,7 +9,7 @@ import { Checkbox, Input, Label, Select, Textarea } from "components/ui";
 import { Box, Link, Text, Flex, Button } from "components/ui";
 import { Err, ErrorPage, Loading } from "./Page";
 import { useState, Dispatch, SetStateAction, useEffect } from "react";
-import { A } from "./Breadcrumb";
+import { A } from "./A";
 import { formatYear } from "util/date";
 import { CircleBullet } from "components/Misc";
 import { Authors, usePostWork, WorkCard, WorkItem, Works } from "./Works";

@@ -1,5 +1,5 @@
 import { Flex, Image, Box } from "components/ui";
-import { A } from "components/Breadcrumb";
+import { A } from "components/A";
 import { useUser } from "state/user";
 import { useState, useEffect, useRef } from "react";
 import { useColorMode } from "components/ui";

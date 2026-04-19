@@ -2,7 +2,7 @@ import { AppPage, H2 } from "components/Page";
 import { Info } from "components/Learning";
 import { ReadMore } from "components/ReadMore";
 import { Text, Card, Box, Button, Image } from "components/ui";
-import { A } from "components/Breadcrumb";
+import { A } from "components/A";
 import { Detail, Tag } from "./projekt";
 import { isMobile } from "util/isBrowser";
 import { useState } from "react";

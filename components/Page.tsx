@@ -69,7 +69,7 @@ export const AppPage: React.FC<
                     onClick={props.onClose}
                     className="hidden sm:block relative right-0"
                   >
-                    <Box className="text-white opacity-20 transition-[0.4s_ease-out] hover:opacity-100 hover:rotate-[-90deg]">
+                    <Box className="text-white opacity-20 transition-[0.4s_ease-out] hover:opacity-100 hover:-rotate-90">
                       <Image
                         src={IconClose}
                         alt="schliessen"
@@ -208,7 +208,7 @@ export const H1: React.FC<
 > = ({ className, children, ...props }) => (
   <h1
     className={cn(
-      "font-heading leading-[1.15] font-black text-xl sm:text-2xl md:text-3xl text-blue2 mt-32 mb-0",
+      "font-heading leading-heading font-black text-xl sm:text-2xl md:text-3xl text-blue2 mt-32 mb-0",
       className
     )}
     {...props}
@@ -228,7 +228,7 @@ export const H3: React.FC<
 > = ({ className, children, ...props }) => (
   <h3
     className={cn(
-      "font-heading leading-[1.15] font-semibold text-blue2 mt-8 pb-1 mb-2 text-lg border-b-0",
+      "font-heading leading-heading font-semibold text-blue2 mt-8 pb-1 mb-2 text-lg border-b-0",
       className
     )}
     {...props}
@@ -242,7 +242,7 @@ export const H4: React.FC<
 > = ({ className, children, ...props }) => (
   <h4
     className={cn(
-      "font-heading leading-[1.15] font-semibold text-blue2 mt-8 pb-1 mb-2 text-lg border-b-0",
+      "font-heading leading-heading font-semibold text-blue2 mt-8 pb-1 mb-2 text-lg border-b-0",
       className
     )}
     {...props}

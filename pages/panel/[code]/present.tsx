@@ -4,7 +4,7 @@ import { Heading, Box, Flex, Text, Button, Image } from "components/ui";
 import { Ballot, getBallotStatus, BallotStatus } from "components/Ballots";
 import { useRouter } from "next/router";
 import { BallotResults } from "components/BallotResults";
-import { A } from "components/Breadcrumb";
+import { A } from "components/A";
 import {
   useGetBallotRunsQuery,
   useTeamByCodeQuery,

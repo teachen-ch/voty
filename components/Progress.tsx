@@ -6,7 +6,7 @@ import {
   useProgressQuery,
 } from "graphql/types";
 import { Fragment, useState } from "react";
-import { A } from "./Breadcrumb";
+import { A } from "./A";
 import { getCardTitle } from "./Cards";
 import { Err, H3, Loading } from "./Page";
 import { Table, TD, TR } from "./Table";

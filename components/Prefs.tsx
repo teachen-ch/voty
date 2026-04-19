@@ -5,7 +5,7 @@ import cloneDeep from "lodash/cloneDeep";
 import { useState } from "react";
 import { Box, Button } from "components/ui";
 import { Grid } from "components/ui";
-import { A } from "./Breadcrumb";
+import { A } from "./A";
 import { Err } from "./Page";
 import { fragments } from "./Teams";
 import IconPrefs from "../public/images/icon_prefs.svg";

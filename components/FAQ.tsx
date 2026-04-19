@@ -1,6 +1,6 @@
 import { Text, Box, Link } from "components/ui";
 import { H3 } from "components/Page";
-import { A } from "components/Breadcrumb";
+import { A } from "components/A";
 import { HideFeature } from "./HideFeature";
 
 export const FAQ: React.FC<React.PropsWithChildren<unknown>> = () => (

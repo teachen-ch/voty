@@ -1,6 +1,6 @@
 import { Flex, Box } from "components/ui";
 import { H3 } from "components/Page";
-import { A } from "./Breadcrumb";
+import { A } from "./A";
 
 export const Footer: React.FC<React.PropsWithChildren<unknown>> = () => {
   return (

@@ -1,5 +1,5 @@
 import { SlideShow } from "components/SlideShow";
-import { A } from "components/Breadcrumb";
+import { A } from "components/A";
 import { InlineSignup } from "./user/signup";
 import { AppPage } from "components/Page";
 import { Text } from "components/ui";

@@ -1,6 +1,6 @@
 import { AppPage } from "components/Page";
 import { Heading, Text, Card, Flex, Box } from "components/ui";
-import { A } from "components/Breadcrumb";
+import { A } from "components/A";
 import React from "react";
 import { useRouter } from "next/router";
 import { TeaserImage } from "pages";

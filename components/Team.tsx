@@ -1,5 +1,5 @@
 import { Box, Flex, Image, Text } from "components/ui";
-import { A } from "./Breadcrumb";
+import { A } from "./A";
 
 export const Team: React.FC<React.PropsWithChildren<unknown>> = () => {
   return (

@@ -1,6 +1,7 @@
 import { Err, H1, Loading, LoggedInPage } from "../../components/Page";
 import { ReactElement, useState } from "react";
-import { A, Breadcrumb, Here } from "components/Breadcrumb";
+import { Breadcrumb, Here } from "components/Breadcrumb";
+import { A } from "components/A";
 import { Role, useBallotsQuery, useGetBallotResultsQuery } from "graphql/types";
 import { BallotResults } from "components/BallotResults";
 import { Card } from "components/ui";

@@ -2,7 +2,7 @@ import { H2, Page } from "components/Page";
 import { Button, Text, Flex } from "components/ui";
 import { useState } from "react";
 import Image from "next/image";
-import { A } from "components/Breadcrumb";
+import { A } from "components/A";
 import {
   Choice,
   MultiChoice,

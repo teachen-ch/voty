@@ -30,7 +30,8 @@ import {
   Role,
 } from "graphql/types";
 import { Nullable } from "simplytyped";
-import { Breadcrumb, A, Here } from "components/Breadcrumb";
+import { Breadcrumb, Here } from "components/Breadcrumb";
+import { A } from "components/A";
 import PanelPage from "./panel";
 import { TeacherCardList } from "components/Cards";
 import { Activities } from "components/Activities";

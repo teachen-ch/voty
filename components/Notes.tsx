@@ -1,6 +1,6 @@
 import { gql } from "@apollo/client";
 import { TeamAnonFieldsFragment, useSetNotesMutation } from "graphql/types";
-import { A } from "./Breadcrumb";
+import { A } from "./A";
 import { Info } from "./Info";
 import { fragments } from "./Teams";
 import { Flex, Text } from "components/ui";
