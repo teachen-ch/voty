@@ -343,9 +343,9 @@ export const Visible: React.FC<
   }>
 > = ({ visibility, setVisibility }) => {
   return (
-    <Flex className="my-4 flex-wrap sm:flex-nowrap">
+    <Flex className="my-4 gap-4 flex-wrap sm:flex-nowrap">
       <Label>Veröffentlichen: </Label>
-      <Label className="items-center">
+      <Label className="items-center flex gap-1">
         <Radio
           name="vis"
           checked={visibility === Visibility.Team}
@@ -355,7 +355,7 @@ export const Visible: React.FC<
         />
         In der Klasse
       </Label>
-      <Label className="items-center">
+      <Label className="items-center flex gap-1">
         <Radio
           name="vis"
           checked={visibility === Visibility.School}
@@ -365,7 +365,7 @@ export const Visible: React.FC<
         />
         in der Schule
       </Label>
-      <Label className="items-center">
+      <Label className="items-center flex gap-1">
         <Radio
           name="vis"
           checked={visibility === Visibility.Public}

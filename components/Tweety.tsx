@@ -91,6 +91,7 @@ export const Tweety: React.FC<
         className="mt-32"
         items={TweetyItem}
         trigger={trigger}
+        flexDirection="column"
       />
     </Box>
   );
