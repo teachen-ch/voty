@@ -4,6 +4,7 @@ import { format as uformat } from "util";
 
 const env = process.env.NODE_ENV;
 const prod = env === "production";
+const cypress = process.env.CYPRESS != null;
 
 const mailConfig = {
   host: process.env.SMTP_HOST,
@@ -84,7 +85,7 @@ const mailLogger: any = new WinstonMail.Mail({
 
 logger.add(fileLogger);
 
-if (env === "production") {
+if (env === "production" && !cypress) {
   logger.add(mailLogger);
   logger.add(jsonLogger);
   logger.exceptions.handle(mailLogger);
