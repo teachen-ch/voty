@@ -1,4 +1,4 @@
-import { Box, Button, Text } from "rebass";
+import { Box, Button, Text } from "components/ui";
 import { HideFeature } from "components/HideFeature";
 import { Page } from "components/Page";
 import { ReactElement } from "react";
@@ -13,27 +13,26 @@ export default function DemoPage(): ReactElement {
           unserem Demo-Server an.
         </Text>
 
-        <Text fontSize={1}>
+        <Text className="text-sm">
           <b>Achtung:</b> sämtliche Inhalte werden jede Nacht gelöscht und der
           Demo-Server kann gelegentlich nicht verfügbar oder instabil sein.
         </Text>
 
-        <Box bg="darkgray" padding={3} lineHeight={1.5} mt={4}>
+        <Box className="bg-[darkgray] p-4 leading-normal mt-8">
           <Text>
             Email:{" "}
-            <Text ml={3} variant="inline" fontFamily="monospace">
+            <Text as="span" className="ml-4 inline-block font-mono">
               teacher@teachen.ch
             </Text>
           </Text>
           <Text>
             Passwort:{" "}
-            <Text ml={3} variant="inline" fontFamily="monospace">
+            <Text as="span" className="ml-4 inline-block font-mono">
               teachen
             </Text>
           </Text>
           <Button
-            mt={4}
-            width="100%"
+            className="mt-8 w-full"
             onClick={() =>
               (document.location.href =
                 "https://demo.voty.ch/user/login?email=teacher@teachen.ch")
@@ -43,26 +42,25 @@ export default function DemoPage(): ReactElement {
           </Button>
         </Box>
 
-        <Text mt={4}>
+        <Text className="mt-8">
           Mit folgendem Konto erfolgt eine Anmeldung als Schüler*in:
         </Text>
 
-        <Box bg="darkgray" padding={3} lineHeight={1.5}>
+        <Box className="bg-[darkgray] p-4 leading-normal">
           <Text>
             Email:{" "}
-            <Text ml={3} variant="inline" fontFamily="monospace">
+            <Text as="span" className="ml-4 inline-block font-mono">
               student@teachen.ch
             </Text>
           </Text>
           <Text>
             Passwort:{" "}
-            <Text ml={3} variant="inline" fontFamily="monospace">
+            <Text as="span" className="ml-4 inline-block font-mono">
               teachen
             </Text>
           </Text>
           <Button
-            mt={4}
-            width="100%"
+            className="mt-8 w-full"
             onClick={() =>
               (document.location.href =
                 "https://demo.voty.ch/user/login?email=student@teachen.ch")

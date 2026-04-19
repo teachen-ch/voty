@@ -3,7 +3,7 @@ import { AppPage } from "components/Page";
 import { gql, useMutation } from "@apollo/client";
 import { Info } from "components/Info";
 import React, { useState, ReactElement } from "react";
-import { Text, Button, Heading, Flex } from "rebass";
+import { Text, Button, Heading, Flex } from "components/ui";
 import { QForm, ErrorBox, Grid } from "components/Form";
 import CheckLogin from "components/CheckLogin";
 import { usePageEvent, trackEvent } from "util/stats";
@@ -15,8 +15,8 @@ import {
   useMagicMutation,
 } from "graphql/types";
 import { isBrowser } from "util/isBrowser";
-import { Input, Label } from "@rebass/forms";
-import { A } from "components/Breadcrumb";
+import { Input, Label } from "components/ui";
+import { A } from "components/A";
 
 export const LOGIN = gql`
   mutation login($email: String!, $password: String!) {
@@ -69,7 +69,6 @@ export default function Login(): ReactElement {
   const router = useRouter();
   let email = "";
 
-  // this is a quick hack until we can use https://github.com/vercel/next.js/issues/8259
   if (isBrowser() && window.location.search.indexOf("email=")) {
     email = window.location.search.substring(7);
   }
@@ -80,7 +79,7 @@ export default function Login(): ReactElement {
 
   return (
     <AppPage heading="Anmelden" onClose={() => void router.push("/")}>
-      <Text mb={3}>
+      <Text className="mb-8">
         Du hast bereits ein Konto bei voty.ch? Dann kannst Du dich hier mit
         deiner Schul-Emailadresse anmelden:
       </Text>
@@ -89,9 +88,9 @@ export default function Login(): ReactElement {
   );
 }
 
-export const LoginForm: React.FC<React.PropsWithChildren<{ initialEmail?: string }>> = ({
-  initialEmail,
-}) => {
+export const LoginForm: React.FC<
+  React.PropsWithChildren<{ initialEmail?: string }>
+> = ({ initialEmail }) => {
   usePageEvent({ category: "Login", action: "Start" });
   const router = useRouter();
   const loc = typeof document !== "undefined" ? document.location.href : "";
@@ -118,7 +117,7 @@ export const LoginForm: React.FC<React.PropsWithChildren<{ initialEmail?: string
           Yay! Wir haben dir ein Email an «{email}» geschickt mit einem
           Login-Link. Schau in deiner Inbox nach!
         </Info>
-        <A onClick={router.reload} fontSize={1}>
+        <A onClick={router.reload} className="text-sm">
           Zurück
         </A>
       </>
@@ -126,8 +125,8 @@ export const LoginForm: React.FC<React.PropsWithChildren<{ initialEmail?: string
   if (exists && !magic) return <LoginPasswordForm email={email} />;
 
   return (
-    <Grid gap={2} columns={[0, 0, "1fr 3fr 1fr"]} mt={3}>
-      <Label htmlFor="email" sx={{ alignSelf: "center" }}>
+    <Grid gap={2} columns="1fr 3fr 1fr" className="mt-4">
+      <Label htmlFor="email" style={{ alignSelf: "center" }}>
         Email:{" "}
       </Label>
       <Input
@@ -136,7 +135,7 @@ export const LoginForm: React.FC<React.PropsWithChildren<{ initialEmail?: string
         onKeyUp={(e) => e.key === "Enter" && checkExists()}
         placeholder="name@meineschule.ch"
       />
-      <Button onClick={checkExists} my={1}>
+      <Button onClick={checkExists} className="">
         Anmelden
       </Button>
       {exists === false && (
@@ -146,7 +145,9 @@ export const LoginForm: React.FC<React.PropsWithChildren<{ initialEmail?: string
   );
 };
 
-const LoginPasswordForm: React.FC<React.PropsWithChildren<{ email: string }>> = ({ email }) => {
+const LoginPasswordForm: React.FC<
+  React.PropsWithChildren<{ email: string }>
+> = ({ email }) => {
   usePageEvent({ category: "Login", action: "Start" });
 
   const [emailError, setEmailError] = useState("");
@@ -198,13 +199,13 @@ const LoginPasswordForm: React.FC<React.PropsWithChildren<{ email: string }>> = 
   }
 
   return (
-    <Grid gap={2} columns={[0, 0, "1fr 3fr 1fr"]} mt={3}>
-      <Label htmlFor="email" sx={{ alignSelf: "center" }}>
+    <Grid gap={2} columns="1fr 3fr 1fr" className="mt-4">
+      <Label htmlFor="email" style={{ alignSelf: "center" }}>
         Email:
       </Label>
       <A onClick={router.reload}>{email}</A>
       <Text />
-      <Label htmlFor="email" sx={{ alignSelf: "center" }}>
+      <Label htmlFor="email" style={{ alignSelf: "center" }}>
         Passwort:
       </Label>
       <input type="hidden" name="email" value={email} />
@@ -215,15 +216,11 @@ const LoginPasswordForm: React.FC<React.PropsWithChildren<{ email: string }>> = 
         onKeyUp={(e) => e.key === "Enter" && checkLogin()}
         onChange={(e) => setPassword(e.target.value)}
       />
-      <Button onClick={checkLogin} my={1}>
-        Anmelden
-      </Button>
+      <Button onClick={checkLogin}>Anmelden</Button>
       <ErrorBox error={error} />
       <Flex
-        my={2}
-        sx={{ gridColumn: [0, 0, 2] }}
-        justifyContent="space-between"
-        flexWrap="wrap"
+        className="my-2 justify-between flex-wrap"
+        style={{ gridColumn: "2" }}
       >
         <Button onClick={() => setRequestReset(email)} variant="text">
           Passwort vergessen?
@@ -252,7 +249,7 @@ export function VerificationForm({ email }: { email: string }): ReactElement {
   return (
     <>
       <Heading as="h2">Email bestätigen</Heading>
-      <Text mb={4}>
+      <Text className="mb-8">
         Deine Email-Adresse «{email}» wurde noch nicht bestätigt. Bitte klicke
         auf den Link im Aktivierungs-Email.
       </Text>
@@ -261,7 +258,7 @@ export function VerificationForm({ email }: { email: string }): ReactElement {
         onClick={() =>
           doVerification({ variables: { email, purpose: "verification" } })
         }
-        my={3}
+        className="my-4"
         disabled={mailSent || request.loading}
         variant={"text"}
       >
@@ -306,10 +303,9 @@ function AfterLogin() {
   }
 }
 
-const RequestReset: React.FC<React.PropsWithChildren<{ onCancel: () => void; email: string }>> = ({
-  onCancel,
-  email,
-}) => {
+const RequestReset: React.FC<
+  React.PropsWithChildren<{ onCancel: () => void; email: string }>
+> = ({ onCancel, email }) => {
   const [mailSent, setMailSent] = useState(false);
   const [error, setError] = useState("");
   const [doRequestReset] = useEmailVerificationMutation({
@@ -325,7 +321,7 @@ const RequestReset: React.FC<React.PropsWithChildren<{ onCancel: () => void; ema
 
   return (
     <>
-      <Text mb={4}>
+      <Text className="mb-8">
         <strong>Passwort zurücksetzen?</strong> Wir schicken Dir ein Email!
       </Text>
       <QForm
@@ -355,14 +351,13 @@ const RequestReset: React.FC<React.PropsWithChildren<{ onCancel: () => void; ema
         <Button
           onClick={onCancel}
           variant="text"
-          my={3}
-          sx={{ gridColumn: [0, 0, 2] }}
+          className="my-4 col-start-2 justify-start"
         >
           Abbrechen
         </Button>
-        <ErrorBox error={error} sx={{ gridColumn: [0, 0, 2] }} />
+        <ErrorBox error={error} style={{ gridColumn: "2" }} />
         {mailSent && (
-          <Text sx={{ gridColumn: [0, 0, 2] }}>
+          <Text style={{ gridColumn: "2" }}>
             Falls ein Konto unter dieser E-Mail existiert, haben wir Dir ein
             Email geschickt
           </Text>

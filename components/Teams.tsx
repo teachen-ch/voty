@@ -1,6 +1,6 @@
 import { gql } from "@apollo/client";
 import { useUser } from "../state/user";
-import { Text, Box, Link as A, Button, BoxProps } from "rebass";
+import { Text, Box, Link as A, Button } from "components/ui";
 import { QForm, ErrorBox } from "./Form";
 import { useState, ReactElement } from "react";
 import IconSuS from "../public/images/icon_sus.svg";
@@ -144,13 +144,13 @@ export const Teams: React.FC<React.PropsWithChildren<TeamsProps>> = ({ where, or
 
   return (
     <div className="teams">
-      <table width="100%">
+      <table>
         <thead>
           <tr>
-            <th align="left">Klasse</th>
-            <th align="left">Schule</th>
-            <th align="center">SuS</th>
-            <th align="left"></th>
+            <th>Klasse</th>
+            <th>Schule</th>
+            <th className="text-center">SuS</th>
+            <th></th>
           </tr>
         </thead>
 
@@ -161,21 +161,25 @@ export const Teams: React.FC<React.PropsWithChildren<TeamsProps>> = ({ where, or
             </tr>
           ) : (
             teams?.map((team) => (
-              <tr key={team.id} onClick={() => teamClick(team)}>
+              <tr
+                key={team.id}
+                onClick={() => teamClick(team)}
+                className="cursor-pointer"
+              >
                 <td style={{ maxWidth: "100px" }}>
                   <A onClick={() => teamClick(team)}>{team.name}</A>
                 </td>
                 <td style={{ maxWidth: "100px" }}>
                   {team.school?.name} ({team.school?.city})
                 </td>
-                <td align="center">
+                <td className="text-center">
                   {team.members ? <>{team.members.length}</> : "-"}
                 </td>
                 <td width={40}>
                   <A onClick={() => teamClick(team)}>
-                    <Box variant="centered">
+                    <div className="flex justify-center">
                       <Image src={IconSuS} height={24} alt="SuS" />
-                    </Box>
+                    </div>
                   </A>
                 </td>
               </tr>
@@ -260,14 +264,14 @@ export function CreateTeamForm({
       }}
     >
       <ErrorBox error={error} />
-      <Button variant="text" onClick={onCancel} sx={{ gridColumn: [0, 0, 2] }}>
+      <Button variant="text" onClick={onCancel} className="sm:col-start-2">
         Abbrechen
       </Button>
     </QForm>
   );
 }
 
-export const DeleteTeamLink: React.FC<React.PropsWithChildren<BoxProps & { teamId: string }>> = ({
+export const DeleteTeamLink: React.FC<React.PropsWithChildren<React.HTMLAttributes<HTMLDivElement> & { teamId: string }>> = ({
   teamId,
   ...props
 }) => {

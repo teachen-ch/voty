@@ -1,10 +1,11 @@
 import SchemaBuilder from "@pothos/core";
 import PrismaPlugin from "@pothos/plugin-prisma";
 import PrismaUtils from "@pothos/plugin-prisma-utils";
+import ScopeAuthPlugin from "@pothos/plugin-scope-auth";
 import { DateTimeResolver, JSONObjectResolver } from "graphql-scalars";
 import { GraphQLScalarType } from "graphql";
 import prisma from "../util/prisma";
-import { Prisma } from "@prisma/client";
+import { Prisma, Role } from "@prisma/client";
 import type PrismaTypes from "./pothos-types";
 import type { Context } from "./context";
 
@@ -18,6 +19,11 @@ const JsonScalar = new GraphQLScalarType({
 export const builder = new SchemaBuilder<{
   Context: Context;
   PrismaTypes: PrismaTypes;
+  AuthScopes: {
+    loggedIn: boolean;
+    teacher: boolean;
+    admin: boolean;
+  };
   Scalars: {
     DateTime: { Input: Date; Output: Date };
     Json: { Input: unknown; Output: unknown };
@@ -25,7 +31,18 @@ export const builder = new SchemaBuilder<{
 }>({
   // @ts-expect-error — runtime-supported option missing from v4 type defs
   defaultFieldNullability: false,
-  plugins: [PrismaPlugin, PrismaUtils],
+  // ScopeAuthPlugin must precede other plugins per Pothos docs.
+  plugins: [ScopeAuthPlugin, PrismaPlugin, PrismaUtils],
+  scopeAuth: {
+    authScopes: (ctx) => ({
+      loggedIn: !!ctx.user,
+      teacher:
+        ctx.user?.role === Role.Teacher ||
+        ctx.user?.role === Role.Principal ||
+        ctx.user?.role === Role.Admin,
+      admin: ctx.user?.role === Role.Admin,
+    }),
+  },
   prisma: {
     client: () => prisma,
     dmmf: Prisma.dmmf,
@@ -41,13 +58,7 @@ builder.queryType({});
 builder.mutationType({});
 
 // Prisma enums — expose as GraphQL enums so client types match
-import {
-  Role,
-  Gender,
-  BallotScope,
-  Visibility,
-  ActivityType,
-} from "@prisma/client";
+import { Gender, BallotScope, Visibility, ActivityType } from "@prisma/client";
 
 export const RoleEnum = builder.enumType(Role, { name: "Role" });
 export const GenderEnum = builder.enumType(Gender, { name: "Gender" });

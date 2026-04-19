@@ -5,7 +5,14 @@ import {
   useCardsQuery,
   useSetCardsMutation,
 } from "graphql/types";
-import { Flex, Box, Image as RImage, Text, Heading, Button } from "rebass";
+import {
+  Flex,
+  Box,
+  Image as RImage,
+  Text,
+  Heading,
+  Button,
+} from "components/ui";
 import { Loading } from "components/Page";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
@@ -13,7 +20,7 @@ import truncate from "lodash/truncate";
 import without from "lodash/without";
 import DraggableList from "react-draggable-list";
 import { OneRowTable, Table, TD, TDIcon, TDImage, TR } from "./Table";
-import { A } from "./Breadcrumb";
+import { A } from "./A";
 import Image from "next/image";
 import IconTrash from "../public/images/icon_trash.svg";
 import IconWatch from "../public/images/icon_watch.svg";
@@ -55,15 +62,17 @@ export type CardsQuery = {
   age?: string;
 };
 
-export const Cards: React.FC<React.PropsWithChildren<{
-  keywords?: string;
-  age?: string;
-  selected?: boolean;
-  type?: string;
-  teamId?: string;
-  teamCards?: string;
-  resetFilters: () => void;
-}>> = (props) => {
+export const Cards: React.FC<
+  React.PropsWithChildren<{
+    keywords?: string;
+    age?: string;
+    selected?: boolean;
+    type?: string;
+    teamId?: string;
+    teamCards?: string;
+    resetFilters: () => void;
+  }>
+> = (props) => {
   const cardsQuery = useCardsQuery({ variables: props });
   const cards = cardsQuery.data?.cards;
 
@@ -82,7 +91,7 @@ export const Cards: React.FC<React.PropsWithChildren<{
     );
   }
   return (
-    <Flex flexWrap="wrap" mx="-8px">
+    <Flex className="flex-wrap -mx-2">
       {cards?.map(
         (card) =>
           card && (
@@ -98,11 +107,13 @@ export const Cards: React.FC<React.PropsWithChildren<{
   );
 };
 
-export const CardItem: React.FC<React.PropsWithChildren<{
-  card: CardType;
-  teamCards?: string;
-  teamId?: string;
-}>> = ({ card, teamCards, teamId }) => {
+export const CardItem: React.FC<
+  React.PropsWithChildren<{
+    card: CardType;
+    teamCards?: string;
+    teamId?: string;
+  }>
+> = ({ card, teamCards, teamId }) => {
   const router = useRouter();
   const cardsList = teamCards ? teamCards.split(" ") : [];
   const id = String(card.id);
@@ -122,54 +133,52 @@ export const CardItem: React.FC<React.PropsWithChildren<{
     if (cards.split(" ").length > 1) window.scrollBy(0, selected ? -40 : 40);
   }
   const link = teamId ? `/team/${teamId}/cards/${id}` : `/cards/${id}`;
-  const bgColor = selected ? "blue2" : aula ? "#69F0AE" : "blue3";
+  const bgColor = selected
+    ? "var(--color-blue2)"
+    : aula
+    ? "#69F0AE"
+    : "var(--color-blue3, #4a90d9)";
   const bgImage = `/images/bg_${card.icon || card.type}.svg`;
 
   return (
     <Box
-      width={["calc(50% - 16px)", "calc(50% - 16px)", "calc(33.3333% - 16px)"]}
-      mx="8px"
-      sx={{
+      className="mx-2 p-4 mb-4 text-white"
+      style={{
+        width: "calc(33.3333% - 16px)",
         background: `url(${bgImage}) center no-repeat`,
         backgroundColor: bgColor,
       }}
-      color="#fff"
-      p={3}
-      mb={3}
     >
       <Flex
-        flexDirection="column"
-        justifyContent="space-between"
-        height="100%"
-        fontSize={1}
-        color={aula ? "blue2" : "black"}
+        className="flex-col justify-between h-full text-sm"
+        style={{ color: aula ? "var(--color-blue2)" : "white" }}
       >
         <Heading
-          as="h3"
-          mt={0}
-          fontSize={String(card.title).length > 30 ? "20px" : "20px"}
-          fontWeight={aula ? "bold" : "normal"}
-          sx={{ cursor: "pointer" }}
+          as="h2"
+          className="mt-0 cursor-pointer text-[20px]"
+          style={{ fontWeight: aula ? "bold" : "normal" }}
           onClick={() => router.push(link)}
         >
           {card.title}
         </Heading>
-        <Text mb={2} sx={{ hyphens: "auto" }}>
+        <Text
+          className="mb-2"
+          style={{ hyphens: "auto" } as React.CSSProperties}
+        >
           {truncate(String(card.description), { length: 75 })}
         </Text>
-        <Flex justifyContent="space-between" alignItems="flex-end" mt={2}>
-          <Text mr={2}>
+        <Flex className="justify-between items-end mt-2">
+          <Text className="mr-2">
             <strong>Alter:</strong> {card.age}
             <br />
             <strong>Dauer:</strong> {card.duration}
           </Text>
           {teamId ? (
-            <Box textAlign="right" sx={{ flexShrink: 0, cursor: "pointer" }}>
+            <Box className="text-right shrink-0 cursor-pointer">
               <RImage
                 src="/images/icon_preview.svg"
                 onClick={() => router.push(link)}
-                mb={2}
-                display="block"
+                className="mb-2 block"
               />
               {selected ? (
                 <Image src={IconCheck} onClick={doSelect} alt="Abwählen" />
@@ -184,10 +193,12 @@ export const CardItem: React.FC<React.PropsWithChildren<{
   );
 };
 
-export const StudentCardList: React.FC<React.PropsWithChildren<{
-  teamCards: string;
-  teamId: string;
-}>> = ({ teamCards, teamId }) => {
+export const StudentCardList: React.FC<
+  React.PropsWithChildren<{
+    teamCards: string;
+    teamId: string;
+  }>
+> = ({ teamCards, teamId }) => {
   const router = useRouter();
   if (!teamCards) {
     return (
@@ -202,14 +213,8 @@ export const StudentCardList: React.FC<React.PropsWithChildren<{
           <Flex
             key={id}
             onClick={() => router.push(`/team/${teamId}/cards/${id}`)}
-            alignItems="center"
-            bg="primary"
-            mb={3}
-            px={3}
-            height={76}
-            fontWeight="semi"
-            sx={{ ":hover": { bg: "primary" }, cursor: "pointer" }}
-            color="#fff"
+            className="items-center bg-primary mb-4 px-4 font-semibold cursor-pointer hover:bg-primary text-white"
+            style={{ height: 76 }}
           >
             <TDImage
               src={getCardIcon(card?.icon, card?.type)}
@@ -225,10 +230,12 @@ export const StudentCardList: React.FC<React.PropsWithChildren<{
   );
 };
 
-export const TeacherCardList: React.FC<React.PropsWithChildren<{
-  teamCards: string;
-  teamId: string;
-}>> = ({ teamCards, teamId }) => {
+export const TeacherCardList: React.FC<
+  React.PropsWithChildren<{
+    teamCards: string;
+    teamId: string;
+  }>
+> = ({ teamCards, teamId }) => {
   if (!teamCards) {
     return <OneRowTable text="Noch keine Inhalte ausgewählt" />;
   }
@@ -239,7 +246,7 @@ export const TeacherCardList: React.FC<React.PropsWithChildren<{
         return (
           <TR key={id} href={`/team/${teamId}/cards/${id}`}>
             <TD flexy>{card?.title}</TD>
-            <TDIcon mr={0}>
+            <TDIcon>
               <Image src={IconWatch} alt="" />
             </TDIcon>
             <TD width={180} smHide>
@@ -269,10 +276,12 @@ interface CardAdminProps {
   commonProps: { doDelete: (id: string) => void };
 }
 
-export const EditCardList: React.FC<React.PropsWithChildren<{
-  teamCards: string;
-  teamId: string;
-}>> = ({ teamCards, teamId }) => {
+export const EditCardList: React.FC<
+  React.PropsWithChildren<{
+    teamCards: string;
+    teamId: string;
+  }>
+> = ({ teamCards, teamId }) => {
   const [cards, setCards] = useState<readonly CardAdminType[]>([]);
   const [doSetCards] = useSetCardsMutation();
 
@@ -341,18 +350,15 @@ class CardAdminItem extends React.Component<CardAdminProps> {
         onMouseOver={() => this.setState({ over: true })}
         onMouseOut={() => this.setState({ over: false })}
       >
-        <TDIcon {...dragHandleProps} sx={{ cursor: "grab" }}>
+        <TDIcon {...dragHandleProps} className="cursor-grab">
           <Image src={IconMove} alt="" />
         </TDIcon>
         <TD flexy>
-          <A
-            href={item.link}
-            sx={{ textDecoration: "none", borderBottom: "none" }}
-          >
+          <A href={item.link} className="no-underline border-b-0">
             {item.title}
           </A>
         </TD>
-        <TDIcon smHide mr={0}>
+        <TDIcon smHide>
           <Image src={IconWatch} alt="" />
         </TDIcon>
 
@@ -378,21 +384,24 @@ interface ICardContext {
 
 export const CardContext = React.createContext({} as ICardContext);
 
-export const Card: React.FC<React.PropsWithChildren<{ id: string }>> = ({ id }) => {
+export const Card: React.FC<React.PropsWithChildren<{ id: string }>> = ({
+  id,
+}) => {
   const Comp = getCard(id);
   const title = getCardTitle(id);
-  // use useState for context, otherwise childs will always be rerendered
   const [context] = useState<ICardContext>({ card: id, title });
   return (
     <CardContext.Provider value={context}>
-      <Text fontSize={2} textAlign="left">
+      <Box className="text-base text-left">
         <Comp />
-      </Text>
+      </Box>
     </CardContext.Provider>
   );
 };
 
-export function getCard(id: string): React.FC<React.PropsWithChildren<unknown>> {
+export function getCard(
+  id: string
+): React.FC<React.PropsWithChildren<unknown>> {
   // @ts-ignore TODO, not sure how to beter do the lookup here
   return cards[id].default as React.FC<React.PropsWithChildren<unknown>>;
 }

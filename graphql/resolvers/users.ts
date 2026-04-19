@@ -167,12 +167,9 @@ export const createUser: FieldResolver<"Mutation", "createUser"> = async (
     if (role === Role.Teacher)
       logger.mail(`New user created: ${name} ${lastname} <${email}>: ${role}`);
 
-    // TODO: we need some cleanup here...
-    // currently, we need to setRequestUser in order to return to the just created user
-    // his own data. This goes through graphql-shield which will then check in the header
-    // for a user.
-    // However: if a logged-in teacher creates student-users, this same method here will be used
-    // and we don't want to change the request header in this case...
+    // setRequestUser so the just-created user can read their own data through
+    // Pothos scope-auth (reads ctx.user). Skip when a logged-in teacher is
+    // creating student accounts — we don't want to hijack their session.
     const loggedIn = getRequestUser(ctx);
     if (!loggedIn) {
       setRequestUser(user, ctx);

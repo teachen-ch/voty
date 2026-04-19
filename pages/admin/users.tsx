@@ -9,10 +9,10 @@ import {
 } from "graphql/types";
 import { gql } from "@apollo/client";
 import { OneRowTable, Table, TD, TDImage, TR } from "components/Table";
-import { Input } from "@rebass/forms";
+import { Input } from "components/ui";
 import debounce from "lodash/debounce";
-import { Select } from "@rebass/forms";
-import { Button } from "rebass";
+import { Select } from "components/ui";
+import { Button } from "components/ui";
 
 export const GET_ADMIN_USERS = gql`
   query adminUsers(
@@ -63,7 +63,7 @@ export default function UsersPage(): ReactElement {
         onChange={(e) =>
           setRole(Role[e.currentTarget.value as keyof typeof Role])
         }
-        mb={4}
+        className="mb-8"
       >
         <option value={""}>-- Alle Rollen --</option>
         <option value={Role.Teacher}>Lehrperson</option>
@@ -81,11 +81,13 @@ export default function UsersPage(): ReactElement {
   );
 }
 
-const UserAdminList: React.FC<React.PropsWithChildren<{
-  orderBy: UserOrderByInput;
-  filter: string;
-  role?: Role;
-}>> = ({ orderBy, filter, role }) => {
+const UserAdminList: React.FC<
+  React.PropsWithChildren<{
+    orderBy: UserOrderByInput;
+    filter: string;
+    role?: Role;
+  }>
+> = ({ orderBy, filter, role }) => {
   const [selected, setSelected] = useState("");
   const usersQuery = useAdminUsersQuery({
     variables: {
@@ -117,7 +119,10 @@ const UserAdminList: React.FC<React.PropsWithChildren<{
           <TR
             key={user.id}
             onClick={() => setSelected(user.id)}
-            bg={selected === user.id ? "primary" : "inherit"}
+            style={{
+              backgroundColor:
+                selected === user.id ? "var(--color-primary)" : "inherit",
+            }}
           >
             <TD width={300}>{user.email}</TD>
             <TD width={100}>{user.role}</TD>
@@ -131,8 +136,8 @@ const UserAdminList: React.FC<React.PropsWithChildren<{
             />
           </TR>
           {selected === user.id && (
-            <TR bg="primary" height={80}>
-              <TD fontSize={[1, 1, 1]}>
+            <TR style={{ backgroundColor: "var(--color-primary)", height: 80 }}>
+              <TD className="text-sm">
                 {user.school?.zip}{" "}
                 {user.school?.city || "Keine Schule angegeben"}
                 <br />
@@ -141,8 +146,7 @@ const UserAdminList: React.FC<React.PropsWithChildren<{
               <TD>
                 <Button
                   onClick={() => deleteUser(user.id)}
-                  bg="gray"
-                  sx={{ ":hover": { bg: "danger" } }}
+                  className="bg-gray hover:bg-danger"
                 >
                   Löschen
                 </Button>

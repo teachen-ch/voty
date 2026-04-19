@@ -1,10 +1,11 @@
 import { H3, LoggedInPage, ShowFor } from "components/Page";
 import { Cards, EditCardList } from "components/Cards";
-import { Input } from "@rebass/forms";
-import { Flex, Button, Text, Box } from "rebass";
+import { Input } from "components/ui";
+import { Flex, Button, Text, Box } from "components/ui";
 import React, { useState } from "react";
 import { useRouter } from "next/router";
-import { A, Breadcrumb, Here } from "components/Breadcrumb";
+import { Breadcrumb, Here } from "components/Breadcrumb";
+import { A } from "components/A";
 import debounce from "lodash/debounce";
 import { Filter } from "components/Swissvotes";
 import { useTeam } from "state/user";
@@ -23,7 +24,7 @@ export default function SelectCardsPage(): React.ReactElement {
   if (!team) {
     return (
       <LoggedInPage heading="Detailansicht Klasse" role={Role.Teacher}>
-        <Text mb={3}>Klasse wurde nicht gefunden.</Text>
+        <Text className="mb-4">Klasse wurde nicht gefunden.</Text>
         <Button onClick={() => router.push("/teacher/")}>Meine Klassen</Button>
       </LoggedInPage>
     );
@@ -45,26 +46,24 @@ export default function SelectCardsPage(): React.ReactElement {
 
       <H3>Folgende Lerninhalte sind ausgewählt</H3>
       <EditCardList teamCards={team.cards} teamId={team.id} />
-      <Text my={2} textAlign="right" fontSize={1}>
+      <Text className="my-2 text-right text-sm">
         <EditTeamPrefs team={team} />
       </Text>
       <ShowFor role="Admin">
-        <Text mt={2} fontSize={1} textAlign="right">
+        <Text className="mt-2 text-sm text-right">
           <A onClick={() => alert(team.cards)}>Pfad anzeigen</A>
         </Text>
       </ShowFor>
-      <H3 mt={5}>Weitere Lerninhalte hinzufügen</H3>
+      <H3 className="mt-16">Weitere Lerninhalte hinzufügen</H3>
       <Flex>
         <Input
           onChange={debounce((evt) => setKeywords(evt.target.value), 300)}
           placeholder="Suche..."
-          flex={1}
+          className="flex-1"
         />
-        <Button ml={3} width="calc(34% - 16px)" mt={[0, 0, "4px"]}>
-          Suchen
-        </Button>
+        <Button className="ml-4 px-20">Suchen</Button>
       </Flex>
-      <Text mb={4} mt="24px" fontSize={1}>
+      <Text className="mb-8 mt-6 text-sm">
         Filtern nach Stufe: &nbsp; &nbsp;
         <Filter set={setAge} v={age} val={"Zyklus-2"} label="Zyklus-2" sep />
         <Filter set={setAge} v={age} val={"Sek-1"} label="Sek-1" sep />
@@ -87,9 +86,11 @@ export default function SelectCardsPage(): React.ReactElement {
   );
 }
 
-export const ListPaths: React.FC<React.PropsWithChildren<{ anon?: boolean }>> = ({ anon }) => (
-  <Box mt={4}>
-    <Text fontSize={2} mb={3}>
+export const ListPaths: React.FC<
+  React.PropsWithChildren<{ anon?: boolean }>
+> = ({ anon }) => (
+  <Box className="mt-8">
+    <Text className="text-base mb-4">
       Wähle entweder einen vorgeschlagenen Lernpfad für deine Klasse oder stelle
       die Inhalte frei zusammen.
     </Text>
@@ -103,7 +104,7 @@ export const ListPaths: React.FC<React.PropsWithChildren<{ anon?: boolean }>> = 
         path="srf_abstimmen passion srf_regieren srf_wahlen chaty_initiativen chaty_referendum swissvotes_themen plakate plakat_gestalten tweety"
       />
     </ReadMore>
-    <Box mt={3} />
+    <Box className="mt-4" />
     <ReadMore
       title="Lernpfad Berufsschule (12-16 Lektionen)"
       bg="darkgray"

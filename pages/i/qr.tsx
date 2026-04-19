@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
-import QRCode from "qrcode.react";
+import { QRCodeSVG } from "qrcode.react";
 import Head from "next/head";
-import { Box } from "rebass";
+import { Box } from "components/ui";
 export default function QRPage(): React.ReactElement {
   const router = useRouter();
   const url = String(router.query.url);
@@ -11,18 +11,18 @@ export default function QRPage(): React.ReactElement {
       <Head>
         <title>QR-Code Einladung</title>
       </Head>
-      <Box p={3} variant="centered">
-        <QRCode
+      <Box className="p-4 flex justify-center">
+        <QRCodeSVG
           value={url}
-          renderAs="svg"
           bgColor="white"
           fgColor="black"
-          width="90vw"
-          height="90vh"
+          size={512}
+          style={{ width: "90vw", height: "90vh", maxWidth: 512, maxHeight: 512 }}
           imageSettings={{
             src: "/apple-touch-icon.png",
             width: 24,
             height: 24,
+            excavate: true,
           }}
         />
       </Box>

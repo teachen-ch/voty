@@ -1,22 +1,20 @@
 import ReactMarkdown from "react-markdown";
-import { Image } from "rebass";
+import { Image } from "components/ui";
 import gfm from "remark-gfm";
 import remarkImage from "remark-images";
 
-export const MarkdownNew: React.FC<React.PropsWithChildren<{ children?: string }>> = ({ children }) => (
+export const MarkdownNew: React.FC<
+  React.PropsWithChildren<{ children?: string }>
+> = ({ children }) => (
   <ReactMarkdown
-    plugins={[gfm, remarkImage]}
-    renderers={{
+    remarkPlugins={[gfm, remarkImage]}
+    components={{
       // eslint-disable-next-line react/display-name
-      image: ({ src, alt }: { src: string; alt: string }) => (
+      img: ({ src, alt }) => (
         <Image
-          maxHeight="300px"
-          maxWidth="100%"
-          sx={{ border: "10px solid white", borderRadius: 10 }}
-          src={src}
+          className="max-h-75 max-w-full border-10 border-white rounded-[10px] mb-2 block"
+          src={typeof src === "string" ? src : undefined}
           alt={alt}
-          mb={2}
-          display="block"
         />
       ),
     }}
@@ -28,7 +26,9 @@ export const MarkdownNew: React.FC<React.PropsWithChildren<{ children?: string }
 // We should replace this with MarkdownNew, as it uses dangerouslySetInnerHTML...
 // But it is still used by chaty and a few other places
 
-export const Markdown: React.FC<React.PropsWithChildren<unknown>> = ({ children }) => (
+export const Markdown: React.FC<React.PropsWithChildren<unknown>> = ({
+  children,
+}) => (
   <div
     dangerouslySetInnerHTML={parseMarkdownInner(String(children))}
     style={{ textAlign: "left" }}
@@ -56,7 +56,6 @@ function parseMarkdown(str: string): string {
     /\[(.*?)\]\((.*?)\)/g,
     "<a href='$2' target='_blank'>$1</a>"
   );
-  // direct image urls:
   str = str.replace(
     /(https?:\/\/.*?(?:jpe?g|png|gif))/gim,
     "<img src='$1' class='markdownImage'/>"

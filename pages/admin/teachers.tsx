@@ -1,9 +1,10 @@
 import { gql } from "@apollo/client";
 import { LoggedInPage } from "../../components/Page";
-import React, { ReactElement, useState } from "react";
+import React, { ReactElement } from "react";
 import { useTeachersQuery, Role, TeachersQuery } from "graphql/types";
-import { Box, Image } from "rebass";
-import { Breadcrumb, A, Here } from "components/Breadcrumb";
+import { Box, Image } from "components/ui";
+import { Breadcrumb, Here } from "components/Breadcrumb";
+import { A } from "components/A";
 import { ReadMore } from "components/ReadMore";
 
 export const GET_TEACHERS = gql`
@@ -86,7 +87,7 @@ export function Teachers({
               ))}
             </td>
             <td>
-              <Box variant="centered">
+              <Box className="flex justify-center">
                 {user.emailVerified ? (
                   <Image src="/images/icon_user_ok.svg" alt="Bestätigt" />
                 ) : (
@@ -112,7 +113,7 @@ export function Export({
   if (!users) return null;
   return (
     <ReadMore title="Emails exportieren" fontSize={1} bg="transparent">
-      <Box fontSize={1} p={2} bg="#fff">
+      <Box className="text-sm p-2 bg-white">
         <pre>
           {users.map((user) => (user.emailVerified ? user.email + "\n" : ""))}
         </pre>

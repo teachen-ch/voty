@@ -1,4 +1,4 @@
-import { Box, Button, Flex, Text } from "rebass";
+import { Box, Button, Flex, Text } from "components/ui";
 import { Markdown } from "util/markdown";
 import { GlossaryReplace } from "./Glossary";
 import React, { useContext } from "react";
@@ -7,44 +7,28 @@ import IconBack from "../public/images/icon_back_white.svg";
 import { getCardTitle } from "./Cards";
 import { ChatyContext, Direction, TMessage } from "util/chaty";
 
-export const ChatContainer: React.FC<React.PropsWithChildren<unknown>> = ({ children }) => (
-  <Box height={480}>
+export const ChatContainer: React.FC<React.PropsWithChildren<unknown>> = ({
+  children,
+}) => (
+  <Box style={{ height: 480 }}>
     <Flex
-      flexDirection="column"
-      width={["100%", "100%", "calc(100% - 64px)"]}
-      height={["auto", "auto", "480px"]}
-      ml={[-3, -3, 0]}
-      bg="#fff"
-      color="#000"
-      sx={{
-        borderRadius: [0, 0, 5],
-        position: ["fixed", "fixed", "absolute", "absolute"],
-        bottom: [0, 0, "inherit"],
-        top: [0, 0, "inherit"],
-        zIndex: [100, 100, 0, 0],
-      }}
+      className="flex-col w-full bg-white text-black sm:rounded-card sm:absolute fixed bottom-0 top-0 z-100 sm:z-0"
+      style={{ height: 480 }}
     >
       {children}
     </Flex>
   </Box>
 );
 
-export const ChatHeader: React.FC<React.PropsWithChildren<{ title?: string; onClick: () => void }>> = ({
-  title,
-  onClick,
-}) => (
+export const ChatHeader: React.FC<
+  React.PropsWithChildren<{ title?: string; onClick: () => void }>
+> = ({ title, onClick }) => (
   <Flex
-    display={["inherit", "inherit", "none"]}
-    bg="#494A4B"
-    color="#fff"
-    p={3}
-    alignItems="center"
-    justifyContent="space-between"
-    sx={{ borderBottom: "2px solid #ccc" }}
-    height={70}
+    className="sm:hidden bg-[#494A4B] text-white p-4 items-center justify-between border-b-2 border-[#ccc]"
+    style={{ height: 70 }}
   >
     {onClick && (
-      <Box display="inline-block" mr={2}>
+      <Box className="inline-block mr-2">
         <Image
           src={IconBack}
           onClick={onClick}
@@ -53,9 +37,7 @@ export const ChatHeader: React.FC<React.PropsWithChildren<{ title?: string; onCl
         />
       </Box>
     )}
-    <Text fontWeight="bold" textAlign="left" sx={{ flexGrow: 1 }}>
-      {title}
-    </Text>
+    <p className="font-semibold text-left grow m-0">{title}</p>
   </Flex>
 );
 
@@ -64,60 +46,40 @@ export const MessageList = React.forwardRef<
   { children: React.ReactNode }
 >(function ML({ children }, ref) {
   return (
-    <Flex
-      p={3}
-      flexDirection="column"
-      overflow="scroll"
-      flex="1"
-      ref={ref}
-      sx={{ position: "relative" }}
-    >
+    <Flex className="p-4 flex-col overflow-scroll flex-1 relative" ref={ref}>
       {children}
     </Flex>
   );
 });
 
-export const Message: React.FC<React.PropsWithChildren<{ direction?: Direction }>> = ({
-  direction,
-  children,
-}) => {
+export const Message: React.FC<
+  React.PropsWithChildren<{ direction?: Direction }>
+> = ({ direction, children }) => {
   const out = direction === Direction.Outgoing;
-  const bg = out ? "#206DBB" : "#E9E9EB";
-  const color = out ? "#fff" : "#000";
   return (
     <Box
-      alignSelf={out ? "flex-end" : "flex-start"}
-      maxWidth="80%"
-      color={color}
-      py="6px"
-      px="12px"
-      mb={3}
-      bg={bg}
-      fontSize={1}
-      sx={{ borderRadius: 14 }}
+      className={`max-w-[80%] py-1.5 px-3 mb-4 text-sm rounded-[14px] ${
+        out
+          ? "self-end bg-[#206DBB] text-white"
+          : "self-start bg-[#E9E9EB] text-black"
+      }`}
     >
       {children}
     </Box>
   );
 };
 
-export const InputBox: React.FC<React.PropsWithChildren<unknown>> = ({ children }) => (
-  <Flex
-    flexDirection="row"
-    flexWrap="wrap"
-    alignItems="center"
-    width="100%"
-    bg="lightgray"
-    p={2}
-    sx={{ borderTop: "1px solid lightgray" }}
-  >
+export const InputBox: React.FC<React.PropsWithChildren<unknown>> = ({
+  children,
+}) => (
+  <Flex className="flex-row flex-wrap items-center w-full bg-highlight p-2 border-t border-highlight">
     {children}
   </Flex>
 );
 
-export const MessageOrInfo: React.FC<React.PropsWithChildren<{ model: TMessage; is: string }>> = ({
-  model,
-}) =>
+export const MessageOrInfo: React.FC<
+  React.PropsWithChildren<{ model: TMessage; is: string }>
+> = ({ model }) =>
   model.direction === Direction.Info ? (
     <GlossaryReplace bg="#444" color="#fff">
       <Info model={model} />
@@ -126,7 +88,9 @@ export const MessageOrInfo: React.FC<React.PropsWithChildren<{ model: TMessage; 
     <ParsedMessage message={model} />
   );
 
-const ParsedMessage: React.FC<React.PropsWithChildren<{ message: TMessage }>> = ({ message }) => {
+const ParsedMessage: React.FC<
+  React.PropsWithChildren<{ message: TMessage }>
+> = ({ message }) => {
   if (message.selected) {
     message.message = message.selected;
   }
@@ -145,25 +109,19 @@ const ParsedMessage: React.FC<React.PropsWithChildren<{ message: TMessage }>> = 
   );
 };
 
-const Info: React.FC<React.PropsWithChildren<{ model: TMessage }>> = ({ model }) => (
-  <Box
-    mb={3}
-    mx={4}
-    py={3}
-    px={3}
-    bg="lightgray"
-    color="gray"
-    fontSize={1}
-    sx={{ borderRadius: 8 }}
-    maxWidth="350px"
-  >
+const Info: React.FC<React.PropsWithChildren<{ model: TMessage }>> = ({
+  model,
+}) => (
+  <Box className="mb-4 mx-8 py-4 px-4 bg-highlight text-gray text-sm rounded-lg max-w-87.5">
     <Markdown>{model.message}</Markdown>
   </Box>
 );
 
-export const ChatyMenu: React.FC<React.PropsWithChildren<{
-  options: string[];
-}>> = ({ options }) => {
+export const ChatyMenu: React.FC<
+  React.PropsWithChildren<{
+    options: string[];
+  }>
+> = ({ options }) => {
   const { inputMessage, selectOption } = useContext(ChatyContext);
   return (
     <InputBox>
@@ -171,43 +129,34 @@ export const ChatyMenu: React.FC<React.PropsWithChildren<{
         <Button
           key={i}
           onClick={() => selectOption(inputMessage!, o)}
-          ml={i && 2}
-          flex={1}
+          className={`flex-1 ${i ? "ml-2" : ""}`}
         >
-          <Text fontSize={1}>{o}</Text>
+          <span className="text-sm">{o}</span>
         </Button>
       ))}
     </InputBox>
   );
 };
 
-export const ChatyNext: React.FC<React.PropsWithChildren<{
-  nextChaty: (topic: string) => void;
-}>> = ({ nextChaty }) => {
+export const ChatyNext: React.FC<
+  React.PropsWithChildren<{
+    nextChaty: (topic: string) => void;
+  }>
+> = ({ nextChaty }) => {
   const { inputMessage, selectOption } = useContext(ChatyContext);
   return (
     <InputBox>
-      <Text
-        pl={2}
-        flex={1}
-        color="#000"
-        fontWeight="semi"
-        minWidth="300px"
-        my={[2, 2, 0]}
-        sx={{ borderRadius: [0, 0, "0px 0px 5px 5px"] }}
-      >
+      <Text className="pl-2 flex-1 text-black font-semibold min-w-75 my-2 sm:my-0 sm:rounded-b-card">
         Weiter zu «{getCardTitle(String(inputMessage?.message))}»?
       </Text>
       <Button
-        ml={2}
-        mr={3}
-        width={150}
+        className="ml-2 mr-4 w-37.5"
         onClick={() => selectOption(inputMessage!, "Nein")}
       >
         Nein
       </Button>
       <Button
-        width={150}
+        className="w-37.5"
         onClick={() => nextChaty(String(inputMessage?.message))}
       >
         Ja
@@ -216,20 +165,23 @@ export const ChatyNext: React.FC<React.PropsWithChildren<{
   );
 };
 
-export const TypingIndicator: React.FC<React.PropsWithChildren<unknown>> = () => (
-  <Box mt={-25} ml={1} fontSize={4}>
+export const TypingIndicator: React.FC<
+  React.PropsWithChildren<unknown>
+> = () => (
+  <Box className="-mt-6.25 ml-1 text-xl">
     <GlowDot delay={0} />
     <GlowDot delay={0.2} />
     <GlowDot delay={0.4} />
   </Box>
 );
 
-const GlowDot: React.FC<React.PropsWithChildren<{ delay: number }>> = ({ delay }) => (
-  <Text
-    color="primary"
-    variant="inline"
-    sx={{ animation: `glowDot 0.5s linear ${delay}s infinite alternate` }}
+const GlowDot: React.FC<React.PropsWithChildren<{ delay: number }>> = ({
+  delay,
+}) => (
+  <span
+    className="inline-block text-primary"
+    style={{ animation: `glowDot 0.5s linear ${delay}s infinite alternate` }}
   >
     .
-  </Text>
+  </span>
 );

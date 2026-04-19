@@ -1,14 +1,12 @@
-import { Flex, Button } from "rebass";
+import { Flex, Button } from "components/ui";
 import { useRouter } from "next/router";
 
 type NavigationProps = { admin?: boolean };
 
-export const Navigation: React.FC<React.PropsWithChildren<NavigationProps>> = ({ children }) => {
-  return (
-    <Flex flexDirection="row" flexWrap="wrap" m={-1}>
-      {children}
-    </Flex>
-  );
+export const Navigation: React.FC<React.PropsWithChildren<NavigationProps>> = ({
+  children,
+}) => {
+  return <Flex className="flex-row flex-wrap -m-1">{children}</Flex>;
 };
 
 export type RouteProps = {
@@ -21,10 +19,9 @@ export type RouteProps = {
 export const Route: React.FC<React.PropsWithChildren<RouteProps>> = (props) => {
   const router = useRouter();
   const as = props.as || props.href;
-  let variant = props.disabled ? "muted" : "primary";
-
   const path = router.pathname;
-  if (path === props.href) variant = "danger";
+  const isActive = path === props.href;
+  const isDisabled = props.disabled;
 
   function onClick() {
     if (!props.disabled && path != props.href) {
@@ -34,11 +31,11 @@ export const Route: React.FC<React.PropsWithChildren<RouteProps>> = (props) => {
 
   return (
     <Button
-      m={1}
-      variant={variant}
+      className={`m-1 min-w-[24%] text-sm sm:text-base ${
+        isActive ? "bg-danger" : isDisabled ? "bg-white text-gray-600" : ""
+      }`}
+      variant={isDisabled ? "muted" : "primary"}
       onClick={onClick}
-      minWidth="24%"
-      fontSize={[1, 1, 2]}
     >
       {props.label}
     </Button>

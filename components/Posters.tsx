@@ -1,6 +1,6 @@
 import { Swissvote, useSwissvotesQuery } from "graphql/types";
-import { Input } from "@rebass/forms";
-import { Box, Link, Text, Flex, Button, Image } from "rebass";
+import { Input } from "components/ui";
+import { Box, Link, Text, Flex, Button, Image } from "components/ui";
 import { ErrorPage, Loading } from "./Page";
 import { useState } from "react";
 import { formatYear } from "util/date";
@@ -15,17 +15,15 @@ export const Posters: React.FC<React.PropsWithChildren<unknown>> = () => {
   const limit = 20;
   return (
     <>
-      <Flex mt={4}>
+      <Flex className="mt-8">
         <Input
           onChange={debounce((evt) => setKeywords(evt.target.value), 300)}
           placeholder="Suche..."
-          flex={1}
+          className="flex-1"
         />
-        <Button ml={3} flex={0.3} mt={[0, 0, "4px"]}>
-          Suche
-        </Button>
+        <Button className="ml-4 flex-[0.3] mt-0 sm:mt-1">Suche</Button>
       </Flex>
-      <Text mb={4} mt={2} fontSize={1}>
+      <Text className="mb-8 mt-2 text-sm">
         Filtern nach: <Filter set={setYes} v={yes} val={"JA"} label="JA" sep />
         <Filter set={setYes} v={yes} val={"NEIN"} label="NEIN" />
       </Text>
@@ -33,11 +31,11 @@ export const Posters: React.FC<React.PropsWithChildren<unknown>> = () => {
         query={{ keywords, limit, offset, hasPosters: true }}
         yes={yes}
       />
-      <Flex justifyContent="space-between" mt={2}>
-        <Link onClick={() => setOffset(offset - limit)} fontSize={1}>
+      <Flex className="justify-between mt-2">
+        <Link onClick={() => setOffset(offset - limit)} className="text-sm">
           {offset > 0 ? "Neuere Plakate anzeigen" : ""}
         </Link>
-        <Link onClick={() => setOffset(offset + limit)} fontSize={1}>
+        <Link onClick={() => setOffset(offset + limit)} className="text-sm">
           {offset < 650 ? "Ältere Plakate anzeigen" : ""}
         </Link>
       </Flex>
@@ -45,18 +43,17 @@ export const Posters: React.FC<React.PropsWithChildren<unknown>> = () => {
   );
 };
 
-export const RandomPosters: React.FC<React.PropsWithChildren<{ amount?: number }>> = ({
-  amount = 10,
-}) => {
+export const RandomPosters: React.FC<
+  React.PropsWithChildren<{ amount?: number }>
+> = ({ amount = 10 }) => {
   return (
     <PosterList query={{ hasPosters: true, sort: "random", limit: amount }} />
   );
 };
 
-export const PosterList: React.FC<React.PropsWithChildren<{ query: VotesQuery; yes?: string }>> = ({
-  query,
-  yes,
-}) => {
+export const PosterList: React.FC<
+  React.PropsWithChildren<{ query: VotesQuery; yes?: string }>
+> = ({ query, yes }) => {
   const swissvotesQuery = useSwissvotesQuery({
     variables: query,
   });
@@ -67,14 +64,17 @@ export const PosterList: React.FC<React.PropsWithChildren<{ query: VotesQuery; y
     return <ErrorPage>{swissvotesQuery.error.message}</ErrorPage>;
 
   if (!swissvotes || swissvotes.length === 0)
-    return <Box my={4}>Nichts gefunden…</Box>;
+    return <Box className="my-8">Nichts gefunden…</Box>;
 
   const onlyYes = yes === "JA";
   const onlyNo = yes === "NEIN";
 
   return (
     <>
-      <Box sx={{ columnCount: [2, 2, 3], columnGap: "8px" }} mt={3}>
+      <Box
+        style={{ columnCount: 3, columnGap: "8px" }}
+        className="mt-4 [column-count:2] sm:[column-count:3]"
+      >
         {swissvotes?.map((vote) => {
           if (!vote) return null;
           const posters: string[] = [];
@@ -95,44 +95,29 @@ export const PosterList: React.FC<React.PropsWithChildren<{ query: VotesQuery; y
   );
 };
 
-export const Poster: React.FC<React.PropsWithChildren<{ vote: Swissvote; image: string }>> = ({
-  vote,
-  image,
-}) => {
+export const Poster: React.FC<
+  React.PropsWithChildren<{ vote: Swissvote; image: string }>
+> = ({ vote, image }) => {
   const [hover, setHover] = useState(false);
   const copyright = image.replace(/.*:\/\/(?:www\.)?(.*?)\/.*/, "$1");
   return (
-    <Box
-      width="calc(100% - 8px)"
-      mb={3}
-      bg="#fff"
-      p={2}
-      sx={{ position: "relative" }}
-    >
+    <Box className="w-[calc(100%-8px)] mb-4 bg-white p-2 relative">
       {hover && (
         <Box
-          sx={{ position: "absolute", hyphens: "auto", cursor: "pointer" }}
-          bg="rgba(1,1,1,0.5)"
-          color="#fff"
-          p={2}
-          width="calc(100%  - 16px)"
-          height="calc(100% - 16px)"
+          className="absolute cursor-pointer bg-[rgba(1,1,1,0.5)] text-white p-2 w-[calc(100%-16px)] h-[calc(100%-16px)]"
+          style={{ hyphens: "auto" }}
           onMouseOut={() => setHover(false)}
           onClick={() =>
             vote.swissvoteslink && window.open(vote.swissvoteslink, "_blank")
           }
         >
-          <Text
-            fontWeight="semi"
-            fontSize={[1, 1, 2]}
-            sx={{ wordWrap: "break-word" }}
-          >
+          <Text className="font-semibold text-sm sm:text-base wrap-break-word">
             {vote.titel_kurz_d}
           </Text>
-          <Text fontSize={1} my={2}>
+          <Text className="text-sm my-2">
             Jahr: {vote.datum && formatYear(vote.datum)}
           </Text>
-          <Text fontSize={1}>&copy; {copyright}</Text>
+          <Text className="text-sm">&copy; {copyright}</Text>
         </Box>
       )}
       <Image src={image} onMouseOver={() => setHover(true)} alt="Plakat" />

@@ -1,5 +1,5 @@
 import { LoggedInPage } from "components/Page";
-import { Heading } from "rebass";
+import { Heading } from "components/ui";
 import { Ballots } from "components/Ballots";
 import { BallotFieldsFragment, BallotScope } from "graphql/types";
 import { useRouter } from "next/router";

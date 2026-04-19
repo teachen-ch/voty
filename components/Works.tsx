@@ -13,7 +13,7 @@ import {
   useDeleteWorkMutation,
 } from "graphql/types";
 import { AttachmentFields } from "components/Uploader";
-import { Flex, Text, FlexProps, Box, BoxProps, Button } from "rebass";
+import { Flex, Text, Box, Button, Label, Radio } from "components/ui";
 import { useTeam, useUser } from "state/user";
 import {
   ChangeEvent,
@@ -32,7 +32,6 @@ import Image from "next/image";
 import IconPlus from "../public/images/icon_plus.svg";
 import IconMinus from "../public/images/icon_minus.svg";
 import IconTrash from "../public/images/icon_trash.svg";
-import { Label, Radio } from "@rebass/forms";
 import { formatDate } from "util/date";
 import { Pill } from "./Misc";
 import { CardContext } from "./Cards";
@@ -75,16 +74,32 @@ export const DELETE_WORK = gql`
   }
 `;
 
-export type WorkItem = React.FC<React.PropsWithChildren<{ work: WorkFieldsFragment }>>;
+export type WorkItem = React.FC<
+  React.PropsWithChildren<{ work: WorkFieldsFragment }>
+>;
 
-// TODO: Rethink, whether we want to keep the where param
-export const Works: React.FC<React.PropsWithChildren<FlexProps & {
-  where?: WorkWhereInput;
-  card?: string;
-  items: WorkItem;
-  list?: React.FC<React.PropsWithChildren<unknown>>;
-  trigger?: number;
-}>> = ({ where, items, list, trigger, card, ...props }) => {
+export const Works: React.FC<
+  React.PropsWithChildren<{
+    where?: WorkWhereInput;
+    card?: string;
+    items: WorkItem;
+    list?: React.FC<React.PropsWithChildren<{ className?: string }>>;
+    trigger?: number;
+    className?: string;
+    flexDirection?: string;
+    mt?: number | string;
+  }>
+> = ({
+  where,
+  items,
+  list,
+  trigger,
+  card,
+  className,
+  flexDirection,
+  mt,
+  ...props
+}) => {
   const team = useTeam();
   const user = useUser();
   const [doDeleteWork] = useDeleteWorkMutation();
@@ -105,7 +120,6 @@ export const Works: React.FC<React.PropsWithChildren<FlexProps & {
 
   useEffect(() => {
     if (!works) return;
-    // scroll to, and open work if page is called with hash #id
     const id = document.location.hash.substring(1);
     const el = document.getElementById(id);
     if (el) {
@@ -123,11 +137,8 @@ export const Works: React.FC<React.PropsWithChildren<FlexProps & {
   if (worksQuery.loading) return <Loading />;
   if (!works) return null;
 
-  // check permissions and teacher preferences for showWorks
   if (team && card) {
     if (!user) return null;
-    // Not part of class or teacher or admin?
-    // this is already checked in the backend. not sure why we check again
     if (
       team.id !== user.team?.id &&
       team.teacher?.id !== user.id &&
@@ -136,11 +147,9 @@ export const Works: React.FC<React.PropsWithChildren<FlexProps & {
       return null;
     const isTeacher = user.role === Role.Teacher;
 
-    // pref "Never": never show works to class
     const show = showWorks(team, card);
     if (show === ShowWorks.Never && !isTeacher) return null;
 
-    // pref "After": show only after submitted own work
     let submitted = false;
     works.forEach((work) => {
       const authorIds = work.users.map((user) => user.id);
@@ -160,40 +169,39 @@ export const Works: React.FC<React.PropsWithChildren<FlexProps & {
     }
   }
 
-  const flexProps = omit(props, "children", "ref");
+  const mtClass = mt !== undefined ? `mt-${mt}` : "";
+  const dirClass = flexDirection === "column" ? "flex-col" : "";
+
   return (
-    <ListComp flexDirection="column" {...flexProps}>
-      {works.length > 0 && <Text fontWeight="bold">Arbeiten zum Thema:</Text>}
+    <ListComp className={`flex ${mtClass} ${dirClass} ${className || ""}`}>
+      {works.length > 0 && (
+        <Text className="font-semibold">Arbeiten zum Thema:</Text>
+      )}
       {works?.map((work) => {
         const canDelete =
           user?.role === Role.Teacher || find(work.users, { id: user?.id });
         return (
-          <Box key={work.id} mt={2} id={work.id}>
+          <Box key={work.id} className="mt-2" id={work.id}>
             <Flex
-              bg="darkgray"
-              p={1}
-              height={40}
-              px={"12px"}
-              alignItems="center"
-              sx={{ borderRadius: "5px" }}
-              justifyContent="space-between"
+              className="bg-black/20 p-1 px-3 items-center rounded-card justify-between cursor-pointer"
+              style={{ height: 40 }}
               onClick={() => setActive(active === work.id ? "" : work.id)}
             >
               {active === work.id ? (
-                <Box display="inline" mr={2} mt={2}>
+                <Box className="inline">
                   <Image src={IconMinus} alt="Schliessen" />
                 </Box>
               ) : (
-                <Box display="inline" mr={2} mt={2}>
+                <Box className="inline mr-2">
                   <Image src={IconPlus} alt="Öffnen" />
                 </Box>
               )}
-              <Text sx={{ cursor: "pointer" }} fontSize={[1, 1, 2]} flex={1}>
+              <Text className="cursor-pointer text-sm sm:text-base flex-1">
                 <b>{work.users?.map((u) => u.shortname).join(", ")}:</b> «
                 {truncate(work.title, { length: 35 }) || "ohne Titel"}»
-                <Text ml={3} variant="inline" fontSize={1}>
+                <span className="ml-4 text-sm inline-block">
                   ({formatDate(work.updatedAt)})
-                </Text>
+                </span>
               </Text>
               {canDelete && (
                 <Image
@@ -207,7 +215,7 @@ export const Works: React.FC<React.PropsWithChildren<FlexProps & {
                 />
               )}
             </Flex>
-            <Box pl={0}>{active === work.id && <Comp work={work} />}</Box>
+            <Box>{active === work.id && <Comp work={work} />}</Box>
           </Box>
         );
       })}
@@ -215,15 +223,14 @@ export const Works: React.FC<React.PropsWithChildren<FlexProps & {
   );
 };
 
-export const WorkCard: React.FC<React.PropsWithChildren<BoxProps>> = ({ children, ...props }) => (
+export const WorkCard: React.FC<
+  React.PropsWithChildren<{ className?: string; style?: React.CSSProperties }>
+> = ({ children, className, style }) => (
   <Box
-    sx={{ borderRadius: 5 }}
-    bg="lightgray"
-    fontSize={[1, 1, 2]}
-    color="#000"
-    p={3}
-    my={3}
-    {...props}
+    className={`rounded-card bg-highlight text-sm sm:text-base text-black p-4 my-4 ${
+      className || ""
+    }`}
+    style={style}
   >
     {children}
   </Box>
@@ -262,7 +269,6 @@ export const usePostWork: PostWorkHookType = (args) => {
         },
       },
     });
-    // this can be used to refetch <Works trigger={trigger}/>
     if (setTrigger) setTrigger(1);
     return result;
   }
@@ -279,13 +285,15 @@ export const POST_WORK = gql`
   ${WorkFields}
 `;
 
-export const WorkSubmit: React.FC<React.PropsWithChildren<{
-  title?: string;
-  text?: string;
-  data: any;
-  visibility?: Visibility;
-  setTrigger?: (n: number) => void;
-}>> = ({ title, data, text, visibility: visibilityDefault, setTrigger }) => {
+export const WorkSubmit: React.FC<
+  React.PropsWithChildren<{
+    title?: string;
+    text?: string;
+    data: any;
+    visibility?: Visibility;
+    setTrigger?: (n: number) => void;
+  }>
+> = ({ title, data, text, visibility: visibilityDefault, setTrigger }) => {
   const { card, title: cardTitle } = useContext(CardContext);
   const user = useUser();
   const team = useTeam();
@@ -311,15 +319,14 @@ export const WorkSubmit: React.FC<React.PropsWithChildren<{
       )}
       {team && allowGroups(team, card) === AllowGroups.Yes && (
         <>
-          <Label mt={3}>Erarbeitet durch:</Label>
+          <Label className="mt-4">Erarbeitet durch:</Label>
           <Authors setUsers={setUsers} />
         </>
       )}
       <Button
-        mt={3}
-        width="100%"
+        className="mt-4 w-full"
         onClick={doPostWork}
-        label="Abschicken"
+        aria-label="Abschicken"
         disabled={Boolean(!user || !team)}
       >
         Abschicken
@@ -329,40 +336,42 @@ export const WorkSubmit: React.FC<React.PropsWithChildren<{
   );
 };
 
-export const Visible: React.FC<React.PropsWithChildren<{
-  visibility?: Visibility;
-  setVisibility: (v?: Visibility) => void;
-}>> = ({ visibility, setVisibility }) => {
+export const Visible: React.FC<
+  React.PropsWithChildren<{
+    visibility?: Visibility;
+    setVisibility: (v?: Visibility) => void;
+  }>
+> = ({ visibility, setVisibility }) => {
   return (
-    <Flex my={3} flexWrap={["wrap", "wrap", "nowrap"]}>
+    <Flex className="my-4 flex-wrap sm:flex-nowrap">
       <Label>Veröffentlichen: </Label>
-      <Label alignItems="center">
+      <Label className="items-center">
         <Radio
           name="vis"
           checked={visibility === Visibility.Team}
           onChange={() => setVisibility(Visibility.Team)}
           value={visibility}
-          sx={{ fill: "white" }}
+          className="fill-white"
         />
         In der Klasse
       </Label>
-      <Label alignItems="center">
+      <Label className="items-center">
         <Radio
           name="vis"
           checked={visibility === Visibility.School}
           onChange={() => setVisibility(Visibility.School)}
           value={visibility}
-          sx={{ fill: "white" }}
+          className="fill-white"
         />
         in der Schule
       </Label>
-      <Label alignItems="center">
+      <Label className="items-center">
         <Radio
           name="vis"
           checked={visibility === Visibility.Public}
           onChange={() => setVisibility(Visibility.Public)}
           value={visibility}
-          sx={{ fill: "white" }}
+          className="fill-white"
         />
         öffentlich
       </Label>
@@ -370,10 +379,13 @@ export const Visible: React.FC<React.PropsWithChildren<{
   );
 };
 
-export const Authors: React.FC<React.PropsWithChildren<BoxProps & {
-  work?: WorkFieldsFragment;
-  setUsers: (u: Array<UserWhereUniqueInput>) => void;
-}>> = ({ work, setUsers, ...props }) => {
+export const Authors: React.FC<
+  React.PropsWithChildren<{
+    work?: WorkFieldsFragment;
+    setUsers: (u: Array<UserWhereUniqueInput>) => void;
+    className?: string;
+  }>
+> = ({ work, setUsers, className }) => {
   type U = Pick<User, "id" | "shortname">;
   const user = useUser();
   const team = useTeam();
@@ -403,11 +415,7 @@ export const Authors: React.FC<React.PropsWithChildren<BoxProps & {
   }, [updateUsers, user, work]);
 
   if (!user || !team)
-    return (
-      <Text fontSize={1} fontStyle="italic">
-        Nicht eingeloggt
-      </Text>
-    );
+    return <Text className="text-sm italic">Nicht eingeloggt</Text>;
   const teamUsers = team?.members;
 
   function doSearch(evt: ChangeEvent<HTMLInputElement>) {
@@ -451,21 +459,15 @@ export const Authors: React.FC<React.PropsWithChildren<BoxProps & {
       return alert("Du kannst dich selber nicht entfernen");
     if (find(authors, (a) => a.id === author.id)) {
       remove(authors, author);
-      setAuthors(authors.slice());
-      setUsers(authors.slice());
+      updateUsers(authors.slice());
     }
   }
 
   return (
-    <Box {...props} flex={1}>
+    <Box className={`flex-1 ${className || ""}`}>
       <Flex
-        flexWrap="wrap"
-        bg="#fff"
-        flexGrow={1}
-        py={"2px"}
-        px={2}
+        className="flex-wrap bg-white grow py-1 px-2 rounded-card cursor-text"
         onClick={() => inputRef.current?.focus()}
-        sx={{ borderRadius: "5px" }}
       >
         {authors.map((author) => (
           <Pill
@@ -489,7 +491,7 @@ export const Authors: React.FC<React.PropsWithChildren<BoxProps & {
           placeholder="Suche nach Vorname…"
         />
         {matches.length > 0 && (
-          <Flex mt={2} width="100%">
+          <Flex className="mt-2 w-full">
             {matches.map((author) => (
               <Pill key={author.id} bg="gray" onClick={() => addAuthor(author)}>
                 {author.shortname}

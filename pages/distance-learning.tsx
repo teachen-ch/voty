@@ -2,7 +2,7 @@ import { Info } from "components/Learning";
 import { NewsletterSlim } from "components/Newsletter";
 import { AppPage } from "components/Page";
 import { SlideShow } from "components/SlideShow";
-import { Text } from "rebass";
+import { Text } from "components/ui";
 
 export default function DistanceLearningBlog(): React.ReactElement {
   return (
@@ -10,7 +10,7 @@ export default function DistanceLearningBlog(): React.ReactElement {
       heading="Wie sehen gute Lehrmittel für Distance Learning aus?"
       image="/images/header_m1.svg"
     >
-      <Text fontWeight="bold">
+      <Text className="font-bold">
         Als im Frühling 2020 die Schulen geschlossen wurden war Improvisation
         das Gebot der Stunde. Buchseiten wurde fotografiert, E-Learning Angebote
         für den Selbstunterricht wurden verteilt, kreative Aufgaben wurden
@@ -18,7 +18,7 @@ export default function DistanceLearningBlog(): React.ReactElement {
         «Distributed Class» optimal unterstützen?
       </Text>
       <SlideShow
-        mb={4}
+        className="mb-8 screenshot"
         images={[
           "/screens/voty_screen_cards.jpg",
           "/screens/voty_screen_lerninhalte.jpg",
@@ -31,7 +31,6 @@ export default function DistanceLearningBlog(): React.ReactElement {
           "Der Chatbot «Chaty» erklärt Grundbegriffe der Demokratie",
           "Integrierte Suche mit Tausenden historischen Wahlplakaten",
         ]}
-        className="screenshot"
       />
       <Text>
         Der Trend zu mehr «Home Office» und zu «Distributed Teams» wird die
@@ -41,7 +40,7 @@ export default function DistanceLearningBlog(): React.ReactElement {
         Kombination beider Welten (Online + Klassenzimmer) wäre optimal. Aber
         solche Szenarien benötigen auch neue Lehrmittel und Unterrichtsmethoden.
       </Text>
-      <Text mt={4}>
+      <Text className="mt-8">
         Wir haben den Anspruch, voty.ch als hybride Platform zu entwickeln. Wenn
         morgen die Schulen schliessen, kann der Demokratie-Unterricht zu 100%
         online stattfinden. Aber auch sonst sollen Schüler*innen wo möglich im
@@ -58,7 +57,7 @@ export default function DistanceLearningBlog(): React.ReactElement {
         className="screenshot"
         alt="Aktivitäten"
       />
-      <Info type="info" py={3}>
+      <Info type="info" className="py-4">
         Möchten sie unsere Lerninhalte mit ihrer Klasse im Distance Learning
         oder im Klassenzimmer testen? Tragen sie sich ein auf unser Liste ein
         und wir melden uns gerne bei Ihnen:

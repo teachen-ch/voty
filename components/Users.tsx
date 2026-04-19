@@ -6,29 +6,27 @@ import {
   User,
   Gender,
   Role,
+  UserUpdateInput,
 } from "graphql/types";
 import { ReactElement, useState } from "react";
-import { Link as A, Box, Button, Text } from "rebass";
-import { Label, Input as RebassInput, Select } from "@rebass/forms";
+import { Box, Button, Text } from "components/ui";
+import { A } from "components/A";
+import { Label, Input as UIInput, Select } from "components/ui";
 import { SessionUser, useSetUser } from "state/user";
-import { yup, ErrorBox } from "./Form";
+import { z, ErrorBox } from "./Form";
 import CheckLogin from "./CheckLogin";
 import Image from "next/image";
 import IconOK from "../public/images/icon_user_ok.svg";
 import IconNOK from "../public/images/icon_user_nok.svg";
 import {
-  Formik,
-  Form as FormikForm,
-  Field,
-  ErrorMessage,
-  useField,
-} from "formik";
-const Form = FormikForm as unknown as React.FC<
-  React.PropsWithChildren<unknown>
->;
-import { Grid } from "theme-ui";
+  useForm,
+  FormProvider,
+  useFormContext,
+  SubmitHandler,
+} from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Grid } from "components/ui";
 import { useTr } from "util/translate";
-import Link from "next/link";
 
 export const GET_USERS = gql`
   query users($where: UserWhereInput) {
@@ -50,7 +48,7 @@ export const GET_USERS = gql`
 export const UPDATE_USER = gql`
 mutation updateUser($data: UserUpdateInput!, $where: UserWhereUniqueInput!) {
   updateUser(data: $data, where: $where) {
-    ...LoginFields 
+    ...LoginFields
   }
   ${CheckLogin.fragments.LoginFields}
 }
@@ -110,14 +108,14 @@ export function Users({
               </td>
               <td>
                 <A
-                  sx={{ display: ["none", "none", "inline"] }}
+                  className="hidden sm:inline"
                   href={`mailto:${user.email}`}
                 >
                   {user.email}
                 </A>
               </td>
               <td>
-                <Box variant="centered">
+                <div className="flex justify-center">
                   {user.emailVerified ? (
                     <Image src={IconOK} alt="Bestätigt" />
                   ) : (
@@ -127,7 +125,7 @@ export function Users({
                       onClick={() => doDeleteUser(user.id)}
                     />
                   )}
-                </Box>
+                </div>
               </td>
             </tr>
           ))
@@ -169,21 +167,23 @@ export const ProfileEdit: React.FC<React.PropsWithChildren<{
     user?.role === Role.Teacher || user?.role === Role.Principal;
   const isStudent = !isTeacher;
 
-  // for the year born dropdown: from around 6 - 20 years old
   const startYear = new Date().getFullYear() - (isStudent ? 20 : 100);
   const numYears = isStudent ? 12 : 90;
 
   async function onSubmit(values: IProfileForm) {
+    // Only include fields the active form actually registered: RHF drops
+    // unregistered fields from `values`, so sending `{ set: undefined }`
+    // serializes to `{}` and trips Prisma's StringFieldUpdateOperationsInput.
+    const data: UserUpdateInput = {};
+    if (values.name !== undefined) data.name = { set: values.name };
+    if (values.lastname !== undefined)
+      data.lastname = { set: values.lastname };
+    if (values.year !== undefined && values.year !== null && String(values.year) !== "")
+      data.year = { set: parseInt(String(values.year)) };
+    if (values.gender)
+      data.gender = { set: values.gender };
     await doUpdateUser({
-      variables: {
-        where: { id: user?.id },
-        data: {
-          name: { set: values.name },
-          lastname: { set: values.lastname },
-          year: { set: parseInt(String(values.year)) },
-          gender: { set: values.gender },
-        },
-      },
+      variables: { where: { id: user?.id }, data },
     });
   }
 
@@ -194,23 +194,34 @@ export const ProfileEdit: React.FC<React.PropsWithChildren<{
     gender: user?.gender,
   };
 
-  let validationSchema: yup.ObjectSchema;
-  if (isTeacher) {
-    validationSchema = yup.object().shape({
-      name: skipName ? yup.string() : yup.string().required(tr("Pflichtfeld")),
-      lastname: yup.string().nullable(),
-    });
-  } else {
-    validationSchema = yup.object().shape({
-      name: skipName ? yup.string() : yup.string().required(tr("Pflichtfeld")),
-      year: yup.string().nullable().required(tr("Profile.RequiredError")),
-      gender: yup.string().nullable().required(tr("Profile.RequiredError")),
-    });
-  }
+  const nameField = skipName
+    ? z.string().optional()
+    : z.string().min(1, tr("Pflichtfeld"));
+  const teacherSchema = z.object({
+    name: nameField,
+    lastname: z.string().nullable().optional(),
+  });
+  const studentSchema = z.object({
+    name: nameField,
+    year: z
+      .union([z.string().min(1), z.number()])
+      .refine((v) => v !== "" && v !== null && v !== undefined, {
+        message: tr("Profile.RequiredError"),
+      }),
+    gender: z
+      .string()
+      .min(1, tr("Profile.RequiredError"))
+      .refine((v) => v !== null && v !== "", {
+        message: tr("Profile.RequiredError"),
+      }),
+  });
+  const validationSchema = (isTeacher
+    ? teacherSchema
+    : studentSchema) as unknown as z.ZodType<IProfileForm>;
 
   if (!edit) {
     return (
-      <Grid gap={2} columns={[0, 0, "1fr 3fr"]}>
+      <Grid gap={2} columns="1fr 3fr">
         {!skipName && (
           <ShowField label={tr("Profile.Firstname")} value={user?.name} />
         )}
@@ -227,98 +238,137 @@ export const ProfileEdit: React.FC<React.PropsWithChildren<{
           />
         )}
         <ShowField label={tr("Profile.Email")} value={user?.email} />
-        <Button onClick={() => setEdit(true)} sx={{ gridColumn: [0, 0, 2] }}>
+        <Button onClick={() => setEdit(true)} className="sm:col-start-2">
           {tr("Profile.Edit")}
         </Button>
-        <Text fontSize={1} textAlign="left" sx={{ gridColumn: [0, 0, 2] }}>
+        <Text className="text-sm text-left sm:col-start-2">
           {tr(`Profile.Legal.${user?.role}`)}
 
-          <Link href="/datenschutz/" passHref legacyBehavior>
-            <A target="_blank" variant="underline">
-              {tr("Profile.DataLink")}
-            </A>
-          </Link>
+          <A href="/datenschutz/" target="_blank" className="underline">
+            {tr("Profile.DataLink")}
+          </A>
         </Text>
       </Grid>
     );
   } else {
     return (
-      <Formik
-        initialValues={initialValues}
+      <ProfileForm
+        defaults={initialValues}
+        schema={validationSchema}
         onSubmit={onSubmit}
-        validationSchema={validationSchema}
-      >
-        <Form>
-          <Grid gap={2} columns={[0, 0, "1fr 3fr"]}>
-            {!skipName && (
-              <Input label="Vorname" name="name" placeholder="Vorname"></Input>
-            )}
-            {!skipName && isTeacher && (
-              <Input
-                label="Nachname"
-                name="lastname"
-                placeholder="Nachname"
-              ></Input>
-            )}
-            {isStudent && (
-              <>
-                <Label htmlFor="year" pt="6px">
-                  {" "}
-                  {tr("Profile.Year")}:
-                </Label>
-                <Field as={Select} id="year" name="year" value={user?.year}>
-                  <option value={undefined}>{tr("Profile.Choose")}</option>
-                  {[...Array(numYears).keys()].map((i) => (
-                    <option key={i}>{startYear + (numYears - i)}</option>
-                  ))}
-                  <option value={0}>{tr("Profile.Skip")}</option>
-                </Field>
-                <FieldError name="year" />
-                <label htmlFor="gender">{tr("Profile.Gender")}:</label>
-                <Box id="gender" textAlign="left">
-                  <Grid columns="1fr 2fr" gap={0}>
-                    <label>
-                      <Field type="radio" name="gender" value={Gender.Female} />{" "}
-                      {tr("Profile.Female")}
-                    </label>
-                    <label>
-                      <Field type="radio" name="gender" value={Gender.Male} />{" "}
-                      {tr("Profile.Male")}
-                    </label>
-                    <label>
-                      <Field type="radio" name="gender" value={Gender.Other} />{" "}
-                      {tr("Profile.Other")}
-                    </label>
-                    <label>
-                      <Field type="radio" name="gender" value={Gender.Unkown} />{" "}
-                      {tr("Profile.Skip")}
-                    </label>
-                  </Grid>
-                </Box>
-                <FieldError name="gender" />
-              </>
-            )}
-            {isTeacher && (
-              <ShowField label="Email" value="Kontaktiere uns für Änderungen" />
-            )}
-            <Button type="submit" sx={{ gridColumn: [0, 0, 2] }} my={2}>
-              {tr("Profile.Save")}
-            </Button>
-            <ErrorBox error={error} my={4} />
-
-            <Text fontSize={1} textAlign="left" sx={{ gridColumn: [0, 0, 2] }}>
-              {tr(`Profile.Legal.${user?.role}`)}
-              <Link href="/datenschutz/" passHref legacyBehavior>
-                <A target="_blank" variant="underline">
-                  {tr("Profile.DataLink")}
-                </A>
-              </Link>
-            </Text>
-          </Grid>
-        </Form>
-      </Formik>
+        isStudent={isStudent}
+        isTeacher={isTeacher}
+        skipName={skipName}
+        startYear={startYear}
+        numYears={numYears}
+        error={error}
+        user={user}
+      />
     );
   }
+};
+
+const ProfileForm: React.FC<{
+  defaults: IProfileForm;
+  schema: z.ZodType<IProfileForm>;
+  onSubmit: (values: IProfileForm) => Promise<void> | void;
+  isStudent: boolean;
+  isTeacher: boolean;
+  skipName?: boolean;
+  startYear: number;
+  numYears: number;
+  error: string;
+  user: SessionUser;
+}> = ({
+  defaults,
+  schema,
+  onSubmit,
+  isStudent,
+  isTeacher,
+  skipName,
+  startYear,
+  numYears,
+  error,
+  user,
+}) => {
+  const tr = useTr();
+  const methods = useForm<IProfileForm>({
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    resolver: zodResolver(schema as any),
+    defaultValues: defaults,
+  });
+  const submit: SubmitHandler<IProfileForm> = (values) => onSubmit(values);
+  const {
+    register,
+    formState: { errors },
+  } = methods;
+
+  return (
+    <FormProvider {...methods}>
+      <form onSubmit={methods.handleSubmit(submit)}>
+        <Grid gap={2} columns="1fr 3fr">
+          {!skipName && (
+            <Input label="Vorname" name="name" placeholder="Vorname" />
+          )}
+          {!skipName && isTeacher && (
+            <Input label="Nachname" name="lastname" placeholder="Nachname" />
+          )}
+          {isStudent && (
+            <>
+              <Label htmlFor="year" className="pt-[6px]">
+                {" "}
+                {tr("Profile.Year")}:
+              </Label>
+              <Select id="year" {...register("year")} defaultValue={user?.year ?? ""}>
+                <option value="">{tr("Profile.Choose")}</option>
+                {[...Array(numYears).keys()].map((i) => (
+                  <option key={i}>{startYear + (numYears - i)}</option>
+                ))}
+                <option value={0}>{tr("Profile.Skip")}</option>
+              </Select>
+              <FieldError message={errors.year?.message as string | undefined} />
+              <label htmlFor="gender">{tr("Profile.Gender")}:</label>
+              <Box id="gender" className="text-left">
+                <Grid columns="1fr 2fr" gap={0}>
+                  <label>
+                    <input type="radio" {...register("gender")} value={Gender.Female} />{" "}
+                    {tr("Profile.Female")}
+                  </label>
+                  <label>
+                    <input type="radio" {...register("gender")} value={Gender.Male} />{" "}
+                    {tr("Profile.Male")}
+                  </label>
+                  <label>
+                    <input type="radio" {...register("gender")} value={Gender.Other} />{" "}
+                    {tr("Profile.Other")}
+                  </label>
+                  <label>
+                    <input type="radio" {...register("gender")} value={Gender.Unkown} />{" "}
+                    {tr("Profile.Skip")}
+                  </label>
+                </Grid>
+              </Box>
+              <FieldError message={errors.gender?.message as string | undefined} />
+            </>
+          )}
+          {isTeacher && (
+            <ShowField label="Email" value="Kontaktiere uns für Änderungen" />
+          )}
+          <Button type="submit" className="sm:col-start-2 my-2">
+            {tr("Profile.Save")}
+          </Button>
+          <ErrorBox error={error} className="mb-8" />
+
+          <Text className="text-sm text-left sm:col-start-2">
+            {tr(`Profile.Legal.${user?.role}`)}
+            <A href="/datenschutz/" target="_blank" className="underline">
+              {tr("Profile.DataLink")}
+            </A>
+          </Text>
+        </Grid>
+      </form>
+    </FormProvider>
+  );
 };
 
 type InputProps = {
@@ -334,23 +384,23 @@ export const Input: React.FC<React.PropsWithChildren<InputProps>> = ({
   placeholder,
   focus,
 }) => {
-  const [field, meta] = useField<string>(name);
+  const { register, formState } = useFormContext();
+  const error = formState.errors[name]?.message as string | undefined;
   return (
     <>
-      <Label sx={{ alignSelf: "center" }} htmlFor={name}>
+      <Label className="self-center" htmlFor={name}>
         {label}:
       </Label>
-      {/* @ts-ignore */}
-      <RebassInput
-        {...field}
+      <UIInput
         id={name}
         placeholder={placeholder}
         autoFocus={focus}
+        {...register(name)}
       />
-      {meta.touched && meta.error ? (
+      {error ? (
         <>
-          <Text variant="fielderror" sx={{ gridColumn: [0, 0, 2] }}>
-            {meta.error}
+          <Text variant="fielderror" className="sm:col-start-2">
+            {error}
           </Text>
         </>
       ) : null}
@@ -358,15 +408,12 @@ export const Input: React.FC<React.PropsWithChildren<InputProps>> = ({
   );
 };
 
-export const FieldError: React.FC<React.PropsWithChildren<{ name: string }>> = ({ name }) => (
-  <ErrorMessage name={name}>
-    {(msg) => (
-      <Text variant="fielderror" sx={{ gridColumn: [0, 0, 2] }}>
-        {msg}
-      </Text>
-    )}
-  </ErrorMessage>
-);
+export const FieldError: React.FC<{ message?: string }> = ({ message }) =>
+  message ? (
+    <Text variant="fielderror" className="sm:col-start-2">
+      {message}
+    </Text>
+  ) : null;
 
 export const ShowField: React.FC<React.PropsWithChildren<{
   label: string;
@@ -374,10 +421,10 @@ export const ShowField: React.FC<React.PropsWithChildren<{
 }>> = ({ label, value }) => {
   return (
     <>
-      <Text my={[0, 0, 1]} textAlign="left" pt={[0, 0, 2]}>
+      <Text className="my-0 sm:my-1 text-left pt-0 sm:pt-2">
         {label}:
       </Text>
-      <Text my={1} py="7px" mb={[3, 3, 0]} fontSize={4} textAlign="left">
+      <Text className="my-1 py-[7px] mb-8 sm:mb-0 text-xl text-left">
         {value || "–"}
       </Text>
     </>

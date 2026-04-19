@@ -1,63 +1,37 @@
 import { useRouter } from "next/router";
-import {
-  Flex,
-  FlexProps,
-  Image,
-  ImageProps,
-  BoxProps,
-  Text,
-  Box,
-} from "rebass";
-import { useColorMode } from "theme-ui";
+import { Flex, Image, Text, Box, useColorMode } from "components/ui";
 import { Center } from "./Learning";
 
-export const Table: React.FC<React.PropsWithChildren<BoxProps>> = ({
-  id,
-  fontSize = [1, 1, 2],
-  children,
-  ...props
-}) => {
+export const Table: React.FC<
+  React.PropsWithChildren<
+    React.HTMLAttributes<HTMLDivElement> & { fontSize?: string | string[] }
+  >
+> = ({ id, children, className, ...props }) => {
   return (
-    <Box
+    <div
       id={id}
-      fontSize={fontSize}
-      sx={{
-        borderBottom: "2px solid",
-        borderTop: "2px solid",
-        borderColor: "white",
-      }}
+      className={`text-sm sm:text-base border-b-2 border-t-2 border-current ${
+        className ?? ""
+      }`}
       {...props}
     >
       {children}
-    </Box>
+    </div>
   );
 };
 
-export const TR: React.FC<React.PropsWithChildren<FlexProps & { href?: string; noHover?: boolean }>> = ({
-  href,
-  noHover,
-  ...props
-}) => {
+export const TR: React.FC<
+  React.PropsWithChildren<
+    React.HTMLAttributes<HTMLDivElement> & { href?: string; noHover?: boolean }
+  >
+> = ({ href, noHover, className, ...props }) => {
   const router = useRouter();
   return (
     <Flex
-      flexDirection="row"
-      justifyContent="space-between"
-      alignItems="center"
-      flexWrap="nowrap"
-      height={40}
+      className={`flex-row justify-between items-center flex-nowrap min-h-10 py-1 border-b border-gray ${
+        noHover ? "" : "hover:bg-primary hover:text-white"
+      } ${href ? "cursor-pointer" : ""} ${className ?? ""}`}
       onClick={href ? () => router.push(href) : undefined}
-      sx={{
-        borderBottom: "1px solid",
-        borderColor: "trColor",
-        ":hover": noHover
-          ? undefined
-          : {
-              bg: "primary",
-              color: "#fff",
-            },
-        cursor: href ? "pointer" : "inherit",
-      }}
       {...props}
     >
       {props.children}
@@ -65,66 +39,95 @@ export const TR: React.FC<React.PropsWithChildren<FlexProps & { href?: string; n
   );
 };
 
-export const TD: React.FC<React.PropsWithChildren<BoxProps & { smHide?: boolean; flexy?: boolean; fixed?: boolean }>> = ({ flexy, smHide, fixed, children, ...props }) => (
-  <Box
-    {...props}
-    px={2}
-    display={smHide ? ["none", "none", "block"] : "block"}
-    sx={{
-      flexShrink: fixed ? 0 : 1,
-      flexGrow: flexy ? 1 : 0,
-    }}
+export const TD: React.FC<
+  React.PropsWithChildren<
+    React.HTMLAttributes<HTMLDivElement> & {
+      smHide?: boolean;
+      flexy?: boolean;
+      fixed?: boolean;
+      width?: number | string;
+      textAlign?: string;
+    }
   >
-    <Text
-      sx={{
-        whiteSpace: "nowrap",
-        overflow: "hidden",
-        textOverflow: "ellipsis",
-      }}
-    >
+> = ({
+  flexy,
+  smHide,
+  fixed,
+  children,
+  className,
+  width,
+  textAlign,
+  ...props
+}) => (
+  <div
+    {...props}
+    className={`px-2 ${smHide ? "hidden sm:block" : "block"} ${
+      flexy ? "grow min-w-0" : "grow-0"
+    } ${fixed ? "shrink-0" : "shrink"} ${className ?? ""}`}
+    style={{ width: width as any, textAlign: textAlign as any }}
+  >
+    <Text className="whitespace-nowrap overflow-hidden text-ellipsis">
       {children}
     </Text>
-  </Box>
+  </div>
 );
 
-export const TDImage: React.FC<React.PropsWithChildren<ImageProps & { smHide?: boolean; light?: boolean }>> = ({ smHide, light, ...props }) => {
+export const TDImage: React.FC<
+  React.PropsWithChildren<
+    Omit<React.ImgHTMLAttributes<HTMLImageElement>, "src"> & {
+      src?: string;
+      smHide?: boolean;
+      light?: boolean;
+      mr?: number | string;
+      ml?: number | string;
+    }
+  >
+> = ({ smHide, light, className, mr, ml, ...props }) => {
   const [colorMode] = useColorMode();
   const dark = colorMode === "dark";
   return (
     <Image
-      alignSelf="center"
-      mx={2}
-      display={smHide ? ["none", "none", "block"] : "block"}
-      sx={{ flexShrink: 0, filter: dark || light ? "invert(100)" : "none" }}
+      className={`self-center mx-2 shrink-0 ${
+        smHide ? "hidden sm:block" : "block"
+      } ${dark || light ? "invert" : ""} ${className ?? ""}`}
+      style={{
+        marginRight:
+          mr !== undefined
+            ? typeof mr === "number"
+              ? `${mr * 4}px`
+              : mr
+            : undefined,
+        marginLeft:
+          ml !== undefined
+            ? typeof ml === "number"
+              ? `${ml * 4}px`
+              : ml
+            : undefined,
+      }}
       alt=""
       {...props}
     />
   );
 };
 
-export const TDIcon: React.FC<React.PropsWithChildren<BoxProps & { smHide?: boolean }>> = ({
-  smHide,
-  children,
-  ...props
-}) => (
-  <Box
-    mx={2}
-    display={smHide ? ["none", "none", "block"] : "block"}
-    sx={{
-      flexShrink: 0,
-      flexGrow: 0,
-      cursor: props.onClick ? "pointer" : "inherit",
-    }}
+export const TDIcon: React.FC<
+  React.PropsWithChildren<
+    React.HTMLAttributes<HTMLDivElement> & { smHide?: boolean }
+  >
+> = ({ smHide, children, className, ...props }) => (
+  <div
+    className={`mx-2 shrink-0 grow-0 ${
+      smHide ? "hidden sm:block" : "block"
+    } ${props.onClick ? "cursor-pointer" : ""} ${className ?? ""}`}
     {...props}
   >
     <Center>{children}</Center>
-  </Box>
+  </div>
 );
 
-export const OneRowTable: React.FC<React.PropsWithChildren<{ text?: string }>> = ({
-  text,
-  children,
-}) => (
+export const OneRowTable: React.FC<
+  React.PropsWithChildren<{ text?: string }>
+> = ({ text, children }) => (
   <Table>
     <TR>
       <TD>{text ? text : children}</TD>

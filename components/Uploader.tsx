@@ -7,7 +7,8 @@ import {
 } from "graphql/types";
 import { useRouter } from "next/router";
 import { useContext, useRef, useState } from "react";
-import { Box, Flex, Text, Image, BoxProps, Button } from "rebass";
+import { Box, Flex, Text, Image } from "components/ui";
+import { Button } from "components/ui";
 import { useUser } from "state/user";
 import { authHeaders } from "util/apollo";
 import { useTr } from "util/translate";
@@ -17,10 +18,14 @@ import { Err, Loading } from "./Page";
 import Video from "./Video";
 import { Authors, usePostWork, WorkCard, WorkItem, Works } from "./Works";
 import { Info } from "./Info";
-import { Input, Label } from "@rebass/forms";
+import { Input, Label } from "components/ui";
 import { CardContext } from "./Cards";
 
-export const UploadWork: React.FC<React.PropsWithChildren<BoxProps & { prompt: string }>> = (props) => {
+export const UploadWork: React.FC<
+  React.PropsWithChildren<
+    React.HTMLAttributes<HTMLDivElement> & { prompt: string }
+  >
+> = (props) => {
   const { card } = useContext(CardContext);
   const [title, setTitle] = useState("");
   const [users, setUsers] = useState<UserWhereUniqueInput[]>();
@@ -52,21 +57,17 @@ export const UploadWork: React.FC<React.PropsWithChildren<BoxProps & { prompt: s
             resultCallback={setAttachments}
           />
 
-          <Label mt={3} mb={2}>
-            Titel:
-          </Label>
+          <Label className="mt-4 mb-2">Titel:</Label>
           <Input
             name="title"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
           />
-          <Label mt={3}>Erarbeitet durch:</Label>
+          <Label className="mt-4">Erarbeitet durch:</Label>
           <Authors setUsers={setUsers} />
           <Button
-            mt={3}
-            width="100%"
+            className="mt-4 w-full"
             onClick={doPostWork}
-            label="Abschicken"
             disabled={!Object.keys(attachments).length}
           >
             Abschicken
@@ -86,7 +87,7 @@ const UploadItem: WorkItem = ({ work }) => {
   >;
   return (
     <WorkCard>
-      <Flex mx={-2} flexWrap="wrap" mt={2}>
+      <Flex className="-mx-2 flex-wrap mt-2">
         {Object.keys(attachments).map((key) => (
           <Attachment key={key} attachment={attachments[key]} hideUser />
         ))}
@@ -95,15 +96,17 @@ const UploadItem: WorkItem = ({ work }) => {
   );
 };
 
-export const UploadArea: React.FC<React.PropsWithChildren<{
-  prompt: string;
-  width?: string;
-  card?: string;
-  discussion?: string;
-  resultCallback?: (
-    attachments: Record<string, AttachmentFieldsFragment>
-  ) => void;
-}>> = ({ prompt, width = "100%", card, discussion, resultCallback }) => {
+export const UploadArea: React.FC<
+  React.PropsWithChildren<{
+    prompt: string;
+    width?: string;
+    card?: string;
+    discussion?: string;
+    resultCallback?: (
+      attachments: Record<string, AttachmentFieldsFragment>
+    ) => void;
+  }>
+> = ({ prompt, width = "100%", card, discussion, resultCallback }) => {
   const [drag, setDrag] = useState(false);
   const [uploading, setUploading] = useState(false);
   const [files, setFiles] = useState<Record<string, File>>();
@@ -111,7 +114,6 @@ export const UploadArea: React.FC<React.PropsWithChildren<{
   const [error, setError] = useState("");
   const router = useRouter();
   const tr = useTr();
-  // TODO: this relies on Uploader being called from /pages/team/[id]/...
   const team = String(router.query.team);
   const fields: Record<string, string> = { team };
   if (card) fields.card = card;
@@ -172,12 +174,10 @@ export const UploadArea: React.FC<React.PropsWithChildren<{
       onDragLeave={dragExit}
       onDrop={doDrop}
       onClick={() => fileInput.current?.click()}
-      bg={drag ? "danger" : "primary"}
-      height={80}
-      width={width}
-      justifyContent="center"
-      alignItems="center"
-      sx={{ cursor: "pointer" }}
+      className={`h-[80px] justify-center items-center cursor-pointer ${
+        drag ? "bg-danger" : "bg-primary"
+      }`}
+      style={{ width }}
     >
       <input
         type="file"
@@ -186,7 +186,7 @@ export const UploadArea: React.FC<React.PropsWithChildren<{
         style={{ display: "none" }}
       />
       <Center>
-        <Text fontWeight="bold" fontSize={4} color="#fff" textAlign="center">
+        <Text className="font-semibold text-xl text-white text-center">
           {uploading ? <Loading /> : null}
           {files && Object.keys(files).length ? (
             <Preview files={files} doDelete={doDelete} />
@@ -200,10 +200,12 @@ export const UploadArea: React.FC<React.PropsWithChildren<{
   );
 };
 
-const Preview: React.FC<React.PropsWithChildren<{
-  files: Record<string, File>;
-  doDelete: (id: string) => void;
-}>> = ({ files, doDelete }) => {
+const Preview: React.FC<
+  React.PropsWithChildren<{
+    files: Record<string, File>;
+    doDelete: (id: string) => void;
+  }>
+> = ({ files, doDelete }) => {
   return (
     <Flex>
       {Object.keys(files).map((id) => (
@@ -213,32 +215,26 @@ const Preview: React.FC<React.PropsWithChildren<{
   );
 };
 
-const PreviewFile: React.FC<React.PropsWithChildren<{
-  id: string;
-  file: File;
-  doDelete: (id: string) => void;
-}>> = ({ id, file, doDelete }) => {
+const PreviewFile: React.FC<
+  React.PropsWithChildren<{
+    id: string;
+    file: File;
+    doDelete: (id: string) => void;
+  }>
+> = ({ id, file, doDelete }) => {
   return (
-    <Flex
-      bg="#fff"
-      color="#000"
-      height={50}
-      alignItems="center"
-      px={3}
-      mx={3}
-      sx={{ borderRadius: "8px" }}
-    >
-      <Text fontSize={1}>
+    <Flex className="bg-white text-black h-[50px] items-center px-4 mx-4 rounded-[8px]">
+      <Text className="text-sm">
         {file.name}{" "}
-        <CircleBullet
-          value="x"
-          bg="lightgray"
-          onClick={(evt: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-            evt.preventDefault();
-            evt.stopPropagation();
+        <span
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
             doDelete(id);
           }}
-        />
+        >
+          <CircleBullet value="x" bg="lightgray" />
+        </span>
       </Text>
     </Flex>
   );
@@ -267,7 +263,9 @@ export const GET_ATTACHMENTS = gql`
   ${AttachmentFields}
 `;
 
-export const Uploaded: React.FC<React.PropsWithChildren<{ card: string }>> = ({ card }) => {
+export const Uploaded: React.FC<React.PropsWithChildren<{ card: string }>> = ({
+  card,
+}) => {
   const attachmentsQuery = useAttachmentsQuery({
     variables: { where: { card: { equals: card } } },
   });
@@ -275,7 +273,7 @@ export const Uploaded: React.FC<React.PropsWithChildren<{ card: string }>> = ({ 
   if (attachmentsQuery.loading) return <Loading />;
 
   return (
-    <Flex mx={-2} flexWrap="wrap" mt={2}>
+    <Flex className="-mx-2 flex-wrap mt-2">
       {attachments &&
         attachments.map((attachment) => (
           <Attachment
@@ -288,11 +286,13 @@ export const Uploaded: React.FC<React.PropsWithChildren<{ card: string }>> = ({ 
   );
 };
 
-export const Attachment: React.FC<React.PropsWithChildren<{
-  attachment: AttachmentFieldsFragment;
-  hideUser?: boolean;
-  refetch?: () => void;
-}>> = ({ attachment, refetch, hideUser }) => {
+export const Attachment: React.FC<
+  React.PropsWithChildren<{
+    attachment: AttachmentFieldsFragment;
+    hideUser?: boolean;
+    refetch?: () => void;
+  }>
+> = ({ attachment, refetch, hideUser }) => {
   const user = useUser();
   const tr = useTr();
   function canDelete() {
@@ -311,10 +311,10 @@ export const Attachment: React.FC<React.PropsWithChildren<{
     }
   }
   return (
-    <Box bg="#fff" p={2} m={2} width="calc(33.3333% - 16px)">
-      <Text fontSize={1} color="#000" sx={{ position: "relative" }}>
+    <Box className="bg-white p-2 m-2 w-[calc(33.3333%-16px)]">
+      <Text className="text-sm text-black relative">
         {canDelete() && !hideUser && (
-          <Box sx={{ position: "absolute", right: -2 }} p={2}>
+          <Box className="absolute right-[-2px] p-2">
             <CircleBullet
               onClick={doDelete}
               value="x"
@@ -324,7 +324,7 @@ export const Attachment: React.FC<React.PropsWithChildren<{
           </Box>
         )}
         {getAttachmentPreview(attachment)}
-        <Text sx={{ overflow: "hidden", textOverflow: "ellipsis" }}>
+        <Text className="overflow-hidden text-ellipsis">
           «{attachment.title}»{!hideUser && `von ${attachment.user.shortname}`}
         </Text>
       </Text>
@@ -343,7 +343,7 @@ function getAttachmentPreview(
         <Image
           src={url}
           alt={attachment.title}
-          sx={{ cursor: "pointer" }}
+          className="cursor-pointer"
           onClick={() => window.open(url, "_blank")}
         />
       );
@@ -352,12 +352,10 @@ function getAttachmentPreview(
     default:
       return (
         <Box
-          sx={{ border: "4px solid gray", borderRadius: 5, cursor: "pointer" }}
-          bg="lightgray"
-          py={4}
+          className="border-4 border-gray-400 rounded-card cursor-pointer bg-highlight py-8"
           onClick={() => window.open(url, "_blank")}
         >
-          <Text textAlign="center" fontWeight="bold" color="gray">
+          <Text className="text-center font-semibold text-gray-600">
             Dokument herunterladen
           </Text>
         </Box>

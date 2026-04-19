@@ -1,70 +1,64 @@
-import { Text, Flex, BoxProps, Box, TextProps } from "rebass";
+import { Flex } from "components/ui";
 import React from "react";
 import isFunction from "lodash/isFunction";
 import Image from "next/image";
 import IconX from "../public/images/icon_x.svg";
 
-export const CircleBullet: React.FC<React.PropsWithChildren<TextProps & {
-  value: string | number;
-  bg?: string;
-  color?: string;
-}>> = ({ value, bg = "#fff", color = "gray", ...props }) => (
-  // @ts-ignore
-  (<Text
-    fontWeight="bold"
-    fontSize={2}
-    display="inline-block"
-    sx={{
-      borderRadius: 25,
-      cursor: props.onClick ? "pointer" : "inherit",
-      flexShrink: 0,
-    }}
-    bg={bg}
-    color={color}
-    mr={2}
-    p={1}
-    width={35}
-    height={35}
-    textAlign="center"
-    {...props}
+export const CircleBullet: React.FC<
+  React.PropsWithChildren<{
+    value: string | number;
+    bg?: string;
+    color?: string;
+    className?: string;
+    onClick?: () => void;
+  }>
+> = ({ value, bg = "#fff", color = "gray", className, onClick }) => (
+  <span
+    className={`font-semibold text-base inline-block rounded-[25px] shrink-0 mr-2 p-1 size-8 text-center ${
+      onClick ? "cursor-pointer" : ""
+    } ${className ?? ""}`}
+    style={{ backgroundColor: bg, color }}
+    onClick={onClick}
   >
     {value}
-  </Text>)
+  </span>
 );
 
-export const Pill: React.FC<React.PropsWithChildren<BoxProps & {
-  deleteLink?: boolean | (() => void);
-}>> = ({
+export const Pill: React.FC<
+  React.PropsWithChildren<{
+    deleteLink?: boolean | (() => void);
+    bg?: string;
+    color?: string;
+    onClick?: React.MouseEventHandler<HTMLDivElement>;
+    className?: string;
+  }>
+> = ({
   deleteLink,
-  bg = "primary",
+  bg = "var(--color-primary)",
   color = "#fff",
   children,
   onClick,
+  className,
   ...props
 }) => (
   <Flex
-    bg={bg}
-    color={color}
-    alignItems="center"
-    px="12px"
-    py="4px"
-    mr={2}
-    my={1}
-    fontSize={1}
-    sx={{ borderRadius: 20, cursor: onClick ? "pointer" : "inherit" }}
+    className={`items-center px-3 py-1 mr-2 my-1 text-sm rounded-[20px] ${
+      onClick ? "cursor-pointer" : ""
+    } ${className ?? ""}`}
+    style={{ backgroundColor: bg, color }}
     onClick={onClick}
     {...props}
   >
-    <Text>{children}</Text>
+    <span>{children}</span>
     {deleteLink && isFunction(deleteLink) && (
-      <Box display="inline-block" ml={2} mb={-2} color="#fff">
+      <span className="inline-block ml-1 -mr-1 text-white">
         <Image
           src={IconX}
           onClick={deleteLink}
           className="pointer white"
           alt="Löschen"
         />
-      </Box>
+      </span>
     )}
   </Flex>
 );

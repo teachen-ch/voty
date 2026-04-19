@@ -1,20 +1,42 @@
 import { builder } from "../builder";
 import { UserType } from "./users";
+import { isTeamTeacherOrAdmin, isTeamMemberOrAdmin } from "../auth";
 
 export const TeamType = builder.prismaObject("Team", {
+  // Unlisted fields default to loggedIn (matches permissions.ts "*": isUser).
+  authScopes: { loggedIn: true },
   fields: (t) => ({
-    id: t.exposeID("id"),
-    name: t.exposeString("name"),
-    invite: t.exposeString("invite", { nullable: true }),
-    code: t.exposeString("code", { nullable: true }),
-    prefs: t.expose("prefs", { type: "Json", nullable: true }),
-    notes: t.expose("notes", { type: "Json", nullable: true }),
-    school: t.relation("school"),
+    id: t.exposeID("id", { skipTypeScopes: true }),
+    name: t.exposeString("name", { skipTypeScopes: true }),
+    invite: t.exposeString("invite", {
+      nullable: true,
+      skipTypeScopes: true,
+      authScopes: isTeamTeacherOrAdmin,
+    }),
+    code: t.exposeString("code", {
+      nullable: true,
+      skipTypeScopes: true,
+      authScopes: isTeamTeacherOrAdmin,
+    }),
+    prefs: t.expose("prefs", {
+      type: "Json",
+      nullable: true,
+      skipTypeScopes: true,
+    }),
+    notes: t.expose("notes", {
+      type: "Json",
+      nullable: true,
+      skipTypeScopes: true,
+    }),
+    school: t.relation("school", { skipTypeScopes: true }),
     teacher: t.relation("teacher"),
-    teacherId: t.exposeString("teacherId"),
-    members: t.relation("members"),
+    teacherId: t.exposeString("teacherId", { skipTypeScopes: true }),
+    members: t.relation("members", {
+      skipTypeScopes: true,
+      authScopes: isTeamMemberOrAdmin,
+    }),
     ballots: t.relation("ballots"),
-    cards: t.exposeString("cards"),
+    cards: t.exposeString("cards", { skipTypeScopes: true }),
   }),
 });
 
@@ -100,6 +122,7 @@ import * as teams from "../resolvers/teams";
 builder.queryField("progress", (t) =>
   t.field({
     type: ResponseProgress,
+    authScopes: { teacher: true },
     args: { teamId: t.arg.string({ required: true }) },
     resolve: (_root, args, ctx, info) =>
       teams.progress(_root, args, ctx, info) as any,
@@ -109,6 +132,7 @@ builder.queryField("progress", (t) =>
 builder.mutationField("inviteStudents", (t) =>
   t.field({
     type: InviteResponse,
+    authScopes: { teacher: true },
     args: {
       team: t.arg.string({ required: true }),
       emails: t.arg.stringList({ required: true }),
@@ -121,6 +145,7 @@ builder.mutationField("inviteStudents", (t) =>
 builder.mutationField("setPrefs", (t) =>
   t.prismaField({
     type: "Team",
+    authScopes: { teacher: true },
     args: {
       teamId: t.arg.string({ required: true }),
       prefs: t.arg({ type: "Json", required: true }),
@@ -133,6 +158,7 @@ builder.mutationField("setPrefs", (t) =>
 builder.mutationField("setNotes", (t) =>
   t.prismaField({
     type: "Team",
+    authScopes: { teacher: true },
     args: {
       teamId: t.arg.string({ required: true }),
       notes: t.arg({ type: "Json", required: true }),

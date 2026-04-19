@@ -1,12 +1,12 @@
 import { Info } from "components/Learning";
 import { NewsletterSlim } from "components/Newsletter";
 import { AppPage, H2 } from "components/Page";
-import { Text } from "rebass";
+import { Text } from "components/ui";
 
 export default function LebenPage(): React.ReactElement {
   return (
     <AppPage
-      heading="Demokratie leben – an der Schule"
+      heading="Demokratie leben – an der Schule"
       image="/images/aula_header_m3.svg"
     >
       <Text>
@@ -31,7 +31,7 @@ export default function LebenPage(): React.ReactElement {
         Schüler*Innen didaktisch begleitet, um den Prozess gemeinsam zu
         reflektieren.
       </Text>
-      <Info type="info" py={3}>
+      <Info type="info" className="py-4">
         Wollen Sie an ihrer Schule partizipative Prozessen einzuführen? Dann
         melden Sie sich gerne bei uns!
         <br />

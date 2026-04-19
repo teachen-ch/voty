@@ -1,0 +1,182 @@
+@import "tailwindcss";
+
+/* aula subdomain overrides applied via <body class="theme-aula"> set in Theme.tsx */
+.theme-aula {
+  --color-primary: #1a237e;
+  --color-blue2: #1a237e;
+  --color-success: rgb(0, 200, 83);
+  --color-green: rgb(0, 200, 83);
+  --color-panel: #f0f0f0;
+  --font-body: Montserrat, Arial, sans-serif;
+  --font-heading: Montserrat, Arial, sans-serif;
+
+  /* Smaller font scale: voty [12,16,20,22,26,34,50] → aula [10,14,18,20,24,30,40] */
+  --text-xs: 10px;
+  --text-sm: 14px;
+  --text-base: 18px;
+  --text-lg: 20px;
+  --text-xl: 24px;
+  --text-2xl: 30px;
+  --text-3xl: 40px;
+}
+
+.theme-aula h1,
+.theme-aula h2,
+.theme-aula h3,
+.theme-aula h4,
+.theme-aula h5,
+.theme-aula h6 {
+  font-weight: 300;
+  color: var(--color-primary);
+}
+
+@theme {
+  /* Breakpoints — match voty's existing responsive steps */
+  --breakpoint-xs: 400px;
+  --breakpoint-sm: 600px;
+  --breakpoint-md: 1200px;
+  --breakpoint-lg: 2000px;
+
+  /* Brand colors */
+  --color-primary: #206dbb;
+  --color-blue2: #206dbb;
+  --color-blue3: #0c66c9;
+  --color-danger: #d90000;
+  --color-accent: #d90000;
+  --color-highlight: #dee4e7;
+  --color-lightgray: #dee4e7;
+  --color-darkgray: rgba(0, 0, 0, 0.2);
+  --color-gray: #5a5a5a;
+  --color-success: #258f17;
+  --color-green: #258f17;
+  --color-panel: #e1e6ea;
+
+  /* Fonts */
+  --font-body: "Source Sans Pro", -apple-system, "Helvetica Neue",
+    BlinkMacSystemFont, Roboto, sans-serif;
+  --font-heading: "Source Sans Pro", -apple-system, "Helvetica Neue",
+    BlinkMacSystemFont, Roboto, sans-serif;
+  --font-mono: monaco, "Consolas", "Lucida Console", monospace;
+
+  /* Font sizes — mirrors theme-ui fontSizes index */
+  --text-xs: 12px;
+  --text-sm: 16px;
+  --text-base: 20px;
+  --text-lg: 22px;
+  --text-xl: 26px;
+  --text-2xl: 34px;
+  --text-3xl: 50px;
+
+  /* Font weights */
+  --font-weight-semi: 600;
+  --font-weight-black: 900;
+
+  /* Line heights */
+  --leading-body: 1.45;
+  --leading-heading: 1.15;
+
+  /* Border radius */
+  --radius-card: 5px;
+  --radius-circle: 1000px;
+
+  /* Shadows */
+  --shadow-card: 0 0 4px rgba(0, 0, 0, 0.125);
+}
+
+/*
+  Root typography. The old theme-ui root applied font-family/weight/line-height
+  to the document and a responsive base font-size ([2, 2, 3] => 20px / 20px / 22px).
+  Without these, Tailwind's preflight leaves the browser default serif + 16px.
+*/
+@layer base {
+  html {
+    background: white;
+  }
+
+  body {
+    font-family: var(--font-body);
+    font-weight: 400;
+    line-height: var(--leading-body);
+    font-size: var(--text-base);
+    color: #030303;
+  }
+
+  @media (min-width: 600px) {
+    body {
+      font-size: var(--text-lg);
+    }
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-heading);
+    line-height: var(--leading-heading);
+  }
+
+  a {
+    color: inherit;
+    cursor: pointer;
+  }
+  a:visited {
+    color: inherit;
+  }
+
+  img {
+    max-width: 100%;
+  }
+
+  strong {
+    font-weight: 600;
+  }
+
+  hr {
+    border-color: currentColor;
+    border-top-width: 2px;
+    border-style: solid;
+  }
+
+  /* Port of theme-ui global table styles (styles.table/th/tr/td). */
+  table {
+    border-collapse: separate;
+    border-spacing: 0;
+    width: 100%;
+    text-align: left;
+    font-size: var(--text-base);
+    border-bottom: 2px solid currentColor;
+  }
+
+  th {
+    padding: 4px 8px;
+    border-bottom: 2px solid currentColor;
+  }
+
+  tr {
+    height: 40px;
+  }
+
+  tbody tr:hover {
+    background-color: var(--color-primary);
+    color: #fff;
+  }
+
+  td {
+    padding: 0 4px;
+    border-bottom: 1px solid var(--color-gray);
+  }
+
+  @media (min-width: 600px) {
+    td {
+      padding: 0 8px;
+    }
+  }
+}
+
+@layer components {
+  .footer-link {
+    @apply text-[#666] underline!;
+  }
+}

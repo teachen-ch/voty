@@ -1,6 +1,6 @@
 import { gql, useApolloClient } from "@apollo/client";
 
-import { Text, Link as A, Button, Card, Box, Flex } from "rebass";
+import { Text, Link as A, Button, Card, Box, Flex } from "components/ui";
 import {
   BallotWhereInput,
   useBallotsQuery,
@@ -196,7 +196,10 @@ type BallotsProps = {
   onClick: (ballot: BallotFieldsFragment) => void;
 };
 
-export const Ballots: React.FC<React.PropsWithChildren<BallotsProps>> = ({ where, onClick }) => {
+export const Ballots: React.FC<React.PropsWithChildren<BallotsProps>> = ({
+  where,
+  onClick,
+}) => {
   const ballotsQuery = useBallotsQuery({ variables: { where } });
 
   if (ballotsQuery.error) return <Err msg={ballotsQuery.error.message} />;
@@ -219,9 +222,11 @@ export const Ballots: React.FC<React.PropsWithChildren<BallotsProps>> = ({ where
   );
 };
 
-export const StudentListBallots: React.FC<React.PropsWithChildren<{
-  teamId: string;
-}>> = ({ teamId }) => {
+export const StudentListBallots: React.FC<
+  React.PropsWithChildren<{
+    teamId: string;
+  }>
+> = ({ teamId }) => {
   const router = useRouter();
   const where = { ballotRuns: { some: { teamId: { equals: teamId } } } };
   const ballotsQuery = useBallotsQuery({ variables: { where } });
@@ -232,22 +237,16 @@ export const StudentListBallots: React.FC<React.PropsWithChildren<{
     return <OneRowTable text="Noch keine Abstimmungen erfasst" />;
 
   return (
-    <Box color="#fff">
+    <Box className="text-white">
       {ballotsQuery.data.ballots.map((ballot) => (
         <Flex
           key={ballot.id}
           onClick={() =>
             void router.push(`/team/${teamId}/ballots/${ballot.id}`)
           }
-          alignItems="center"
-          bg="primary"
-          mb={3}
-          px={3}
-          height={76}
-          fontWeight="semi"
-          sx={{ ":hover": { bg: "primary" }, cursor: "pointer" }}
+          className="items-center bg-primary mb-4 px-4 h-20 font-semibold hover:bg-primary cursor-pointer"
         >
-          <TDImage src="/images/card_ballot.svg" mr={3} ml={0} light />
+          <TDImage src="/images/card_ballot.svg" className="mr-4 ml-0" light />
           {ballot.title}
         </Flex>
       ))}
@@ -255,13 +254,15 @@ export const StudentListBallots: React.FC<React.PropsWithChildren<{
   );
 };
 
-export const Ballot: React.FC<React.PropsWithChildren<{
-  ballot: BallotFieldsFragment;
-  buttonText?: string;
-  buttonColor?: string;
-  onButton?: (ballot: BallotFieldsFragment) => void;
-  onDetail?: (ballot: BallotFieldsFragment) => void;
-}>> = ({
+export const Ballot: React.FC<
+  React.PropsWithChildren<{
+    ballot: BallotFieldsFragment;
+    buttonText?: string;
+    buttonColor?: string;
+    onButton?: (ballot: BallotFieldsFragment) => void;
+    onDetail?: (ballot: BallotFieldsFragment) => void;
+  }>
+> = ({
   ballot,
   children,
   buttonText,
@@ -272,20 +273,23 @@ export const Ballot: React.FC<React.PropsWithChildren<{
   return (
     <div className="ballot">
       <Card>
-        <A variant="bold" onClick={() => onDetail && onDetail(ballot)}>
+        <A
+          className="font-semibold"
+          onClick={() => onDetail && onDetail(ballot)}
+        >
           {ballot.title}
         </A>
-        <Text mt={3}>{ballot.description}</Text>
-        <Text fontSize={2} my={4}>
-          <Image src={IconCal} alt="Deadline" width={20} height={20} />{" "}
-          &nbsp; Zeit: {formatFromTo(ballot.start, ballot.end)}
-        </Text>
+        <Text className="mt-4">{ballot.description}</Text>
+        <Box className="text-base my-8">
+          <Image src={IconCal} alt="Deadline" width={20} height={20} /> &nbsp;
+          Zeit: {formatFromTo(ballot.start, ballot.end)}
+        </Box>
         {children}
         {buttonText && (
           <Button
             onClick={() => onButton && onButton(ballot)}
-            bg={buttonColor}
-            width="100%"
+            style={buttonColor ? { backgroundColor: buttonColor } : undefined}
+            className="w-full"
           >
             {buttonText}
           </Button>
@@ -321,10 +325,12 @@ export const getUserBallotStatus = (
   else return BallotStatus.Started;
 };
 
-export const SelectBallots: React.FC<React.PropsWithChildren<{
-  team: TeamTeacherFieldsFragment;
-  scope: BallotScope;
-}>> = ({ team, scope }) => {
+export const SelectBallots: React.FC<
+  React.PropsWithChildren<{
+    team: TeamTeacherFieldsFragment;
+    scope: BallotScope;
+  }>
+> = ({ team, scope }) => {
   const router = useRouter();
   const [doAddBallotRun, addMutation] = useAddBallotRunMutation();
   const [doRemoveBallotRun, removeMutation] = useRemoveBallotRunMutation();
@@ -404,7 +410,6 @@ export const SelectBallots: React.FC<React.PropsWithChildren<{
 
   if (!ballots || ballotRunsQuery.loading) return <Loading />;
 
-  // only show ballots with end-date less than 45 days ago
   const old = 45 * 24 * 60 * 60 * 1000;
   const currentBallots = ballots.filter(
     (ballot) => new Date(ballot.end).getTime() > Date.now() - old
@@ -412,7 +417,7 @@ export const SelectBallots: React.FC<React.PropsWithChildren<{
 
   return (
     <>
-      <table id="ballots" style={{ borderTop: "2px solid" }}>
+      <table id="ballots" className="border-t-2 border-current">
         <tbody>
           {currentBallots.map((ballot) => (
             <tr key={ballot.id}>
@@ -420,18 +425,14 @@ export const SelectBallots: React.FC<React.PropsWithChildren<{
                 <A onClick={() => detailBallot(ballot.id)}>{ballot.title}</A>
               </td>
               <td>
-                <Box
-                  variant="centered"
-                  sx={{ display: ["none", "none", "inline"] }}
-                  color="white"
-                >
+                <div className="hidden sm:flex items-center whitespace-nowrap">
                   <Image src={IconDeadline} height={20} alt="Deadline" />
                   &nbsp;
                   {formatDate(ballot.end)}
-                </Box>
+                </div>
               </td>
               <td>
-                <Box variant="centered">
+                <div className="flex justify-center">
                   <Image
                     src={IconResults}
                     alt="Resultate"
@@ -439,10 +440,10 @@ export const SelectBallots: React.FC<React.PropsWithChildren<{
                     height={20}
                     onClick={() => detailBallot(ballot.id)}
                   />
-                </Box>
+                </div>
               </td>
               <td onClick={(evt) => toggleBallot(ballot.id, team.id, evt)}>
-                <Box variant="centered">
+                <div className="flex justify-center">
                   {find(ballotRuns, { ballotId: ballot.id }) ? (
                     <Image
                       src={IconCheckOn}
@@ -462,7 +463,7 @@ export const SelectBallots: React.FC<React.PropsWithChildren<{
                       className="pointer"
                     />
                   )}
-                </Box>
+                </div>
               </td>
             </tr>
           ))}
@@ -472,44 +473,48 @@ export const SelectBallots: React.FC<React.PropsWithChildren<{
   );
 };
 
-export const BallotDetails: React.FC<React.PropsWithChildren<{
-  ballot: NonNullable<BallotQuery["ballot"]>;
-}>> = ({ ballot, children }) => (
+export const BallotDetails: React.FC<
+  React.PropsWithChildren<{
+    ballot: NonNullable<BallotQuery["ballot"]>;
+  }>
+> = ({ ballot, children }) => (
   <Card>
-    <Text>
-      <Text fontWeight="bold">{ballot.title}</Text>
-      <Text mt={3}>{ballot.description}</Text>
-      <Text fontSize={2} my={4}>
-        <img src="/images/icon_cal.svg" width={20} alt="Zeit" /> &nbsp; Zeit:{" "}
-        {formatFromTo(ballot.start, ballot.end)}
-      </Text>
+    <Box>
+      <Text className="font-semibold">{ballot.title}</Text>
+      <Text className="mt-4">{ballot.description}</Text>
+      <Box className="flex items-center gap-1 text-base my-8 text-nowrap">
+        <img
+          src="/images/icon_cal.svg"
+          width={20}
+          alt="Zeit"
+          className="inline-block"
+        />
+        &nbsp;Zeit: {formatFromTo(ballot.start, ballot.end)}
+      </Box>
       {children}
       {ballot.scope === BallotScope.National && (
-        <Text textAlign="center" mt={3}>
+        <Box className="text-center mt-4">
           <img width={150} src="/images/easyvote.png" alt="EasyVote" />
-        </Text>
+        </Box>
       )}
       <Markdown>{ballot.body}</Markdown>
-    </Text>
+    </Box>
   </Card>
 );
 
-export const PanelCode: React.FC<React.PropsWithChildren<{
-  team: TeamTeacherFieldsFragment;
-  hasRuns: boolean;
-}>> = ({ team, hasRuns }) => {
+export const PanelCode: React.FC<
+  React.PropsWithChildren<{
+    team: TeamTeacherFieldsFragment;
+    hasRuns: boolean;
+  }>
+> = ({ team, hasRuns }) => {
   if (!team?.code || !hasRuns) return null;
   return (
-    <Text id="livepanel">
+    <Box id="livepanel">
       Seite für Live-Abstimmungen:{" "}
-      <Link
-        href="/panel/[code]/present"
-        as={`/panel/${team.code}/present`}
-        passHref
-        legacyBehavior
-      >
+      <Link href={`/panel/${team.code}/present`}>
         <Button>Code: {team.code}</Button>
       </Link>
-    </Text>
+    </Box>
   );
 };

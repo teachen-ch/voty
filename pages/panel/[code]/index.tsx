@@ -1,5 +1,5 @@
 import { ErrorPage, LoadingPage } from "components/Page";
-import { Text, Box, Image, Flex, Card, Button, Link as A } from "rebass";
+import { Text, Box, Image, Flex, Card, Button, Link as A } from "components/ui";
 import { useRouter } from "next/router";
 import React, { ReactElement, useState } from "react";
 import {
@@ -61,7 +61,7 @@ export default function PanelBallots(): ReactElement {
               )
           )
         : "Keine Abstimmungen gefunden."}
-      <Box mt={300} />
+      <Box className="mt-[300px]" />
     </PanelPage>
   );
 }
@@ -79,8 +79,8 @@ const BallotRunDetail: React.FC<React.PropsWithChildren<{
   if (!ballotRun || !ballot) return null;
 
   return (
-    <Card key={ballotRun.id} py={3}>
-      <Text fontWeight="bold" fontSize="24px" lineHeight="24px">
+    <Card key={ballotRun.id} className="py-4">
+      <Text className="font-bold text-[24px] leading-[24px]">
         {ballot.title}
       </Text>
       <VoteCode
@@ -122,7 +122,7 @@ const VoteCode: React.FC<React.PropsWithChildren<{
     return (
       <Flex>
         <BigGray>Abstimmung noch nicht gestartet </BigGray>
-        <Button onClick={() => refetch()} fontSize={2}>
+        <Button onClick={() => refetch()} className="text-base">
           Seite Aktualisieren
         </Button>
       </Flex>
@@ -135,49 +135,49 @@ const VoteCode: React.FC<React.PropsWithChildren<{
   }
 
   return (
-    <Text sx={{ margin: "0 auto" }}>
-      <Box variant="centered">
-        <Box width={["100%", "100%", 400]}>
+    <Box className="mx-auto">
+      <Box className="flex justify-center">
+        <Box className="w-full sm:w-[400px]">
           <img src="/images/voty_now.svg" alt="Abstimmen" width="100%" />
-          <Box px={[0, 0, 2]} mt={[-10]}>
-            <Box fontSize={2}>
-              <Flex justifyContent="space-around">
+          <Box className="px-0 sm:px-2 mt-[-10px]">
+            <Box className="text-base">
+              <Flex className="justify-around">
                 <A onClick={() => vote(ballotRun.id, code, 1)}>
-                  <Flex flexDirection="column" alignItems="center">
+                  <Flex className="flex-col items-center">
                     <Image src="/images/icon_yes.svg" height={50} alt="Ja" />
-                    <Text mt={1}>Ja, ich stimme zu</Text>
+                    <span className="mt-1">Ja, ich stimme zu</span>
                   </Flex>
                 </A>
                 <A onClick={() => vote(ballotRun.id, code, 2)}>
-                  <Flex flexDirection="column" alignItems="center">
+                  <Flex className="flex-col items-center">
                     <Image src="/images/icon_no.svg" height={50} alt="Nein" />
-                    <Text mt={1}>Nein, ich lehne ab</Text>
+                    <span className="mt-1">Nein, ich lehne ab</span>
                   </Flex>
                 </A>
               </Flex>
-              <Box variant="centered" mt={3} mb={4}>
+              <Box className="flex justify-center mt-4 mb-8">
                 <A
                   onClick={() => vote(ballotRun.id, code, 0)}
-                  variant="underline"
+                  className="underline"
                 >
-                  <Text fontSize={1}>Ich möchte mich der Stimme enthalten</Text>
+                  <span className="text-sm">Ich möchte mich der Stimme enthalten</span>
                 </A>
               </Box>
-              <ErrorBox my={2} error={error} />
+              <ErrorBox className="my-2" error={error} />
             </Box>
           </Box>
         </Box>
       </Box>
-    </Text>
+    </Box>
   );
 };
 
 const VotySuccess: React.FC<React.PropsWithChildren<unknown>> = () => (
   <>
-    <Text mb={4}>
+    <Text className="mb-8">
       Super, du hast nun anonym abgestimmt und deine Stimme wurde gezählt.
     </Text>
-    <Box textAlign="center">
+    <Box className="text-center">
       <img
         src="/images/voty_success.svg"
         alt="Juhee"

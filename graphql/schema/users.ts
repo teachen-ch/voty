@@ -1,13 +1,21 @@
 import { builder, RoleEnum, GenderEnum } from "../builder";
 // getShortname is imported directly (no MDX/content dependency in users.ts).
 import { getShortname } from "../resolvers/users";
+import { canViewUserDetails } from "../auth";
 
 export const UserType = builder.prismaObject("User", {
+  authScopes: { loggedIn: true },
   fields: (t) => ({
     id: t.exposeID("id"),
-    email: t.exposeString("email", { nullable: true }),
+    email: t.exposeString("email", {
+      nullable: true,
+      authScopes: canViewUserDetails,
+    }),
     name: t.exposeString("name", { nullable: true }),
-    lastname: t.exposeString("lastname", { nullable: true }),
+    lastname: t.exposeString("lastname", {
+      nullable: true,
+      authScopes: canViewUserDetails,
+    }),
     shortname: t.string({
       nullable: true,
       resolve: (parent) => getShortname(parent as any),
@@ -22,7 +30,10 @@ export const UserType = builder.prismaObject("User", {
       type: "DateTime",
       nullable: true,
     }),
-    createdAt: t.expose("createdAt", { type: "DateTime" }),
+    createdAt: t.expose("createdAt", {
+      type: "DateTime",
+      authScopes: { admin: true },
+    }),
     image: t.exposeString("image", { nullable: true }),
     role: t.field({
       type: RoleEnum,
@@ -33,10 +44,14 @@ export const UserType = builder.prismaObject("User", {
     school: t.relation("school", { nullable: true }),
     team: t.relation("team", { nullable: true }),
     teaches: t.relation("teaches"),
-    ballots: t.relation("ballots"),
-    attachments: t.relation("attachments"),
-    discussions: t.relation("discussions"),
-    reactions: t.relation("reactions"),
+    ballots: t.relation("ballots", { authScopes: canViewUserDetails }),
+    attachments: t.relation("attachments", {
+      authScopes: canViewUserDetails,
+    }),
+    discussions: t.relation("discussions", {
+      authScopes: canViewUserDetails,
+    }),
+    reactions: t.relation("reactions", { authScopes: canViewUserDetails }),
   }),
 });
 
@@ -134,6 +149,7 @@ builder.mutationField("checkVerification", (t) =>
 builder.mutationField("changePassword", (t) =>
   t.field({
     type: ResponseLogin,
+    authScopes: { loggedIn: true },
     args: { password: t.arg.string() },
     resolve: (_root, args, ctx, info) =>
       users.changePassword(_root, args, ctx, info) as any,
@@ -158,6 +174,7 @@ builder.mutationField("createInvitedUser", (t) =>
 builder.mutationField("acceptInvite", (t) =>
   t.prismaField({
     type: "Team",
+    authScopes: { loggedIn: true },
     args: {
       invite: t.arg.string({ required: true }),
       force: t.arg.boolean(),
@@ -170,6 +187,7 @@ builder.mutationField("acceptInvite", (t) =>
 builder.mutationField("setSchool", (t) =>
   t.prismaField({
     type: "User",
+    authScopes: { loggedIn: true },
     args: { school: t.arg.string({ required: true }) },
     resolve: (_query, _root, args, ctx, info) =>
       users.setSchool(_root, args, ctx, info) as any,
@@ -179,6 +197,7 @@ builder.mutationField("setSchool", (t) =>
 builder.mutationField("deleteAccount", (t) =>
   t.field({
     type: Response,
+    authScopes: { loggedIn: true },
     resolve: (_root, args, ctx, info) =>
       users.deleteAccount(_root, args, ctx, info) as any,
   })

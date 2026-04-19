@@ -1,4 +1,4 @@
-import { atom, useRecoilValue, useSetRecoilState } from "recoil";
+import { atom, useAtomValue, useSetAtom } from "jotai";
 import {
   LoginFieldsFragment,
   TeamAnonFieldsFragment,
@@ -13,22 +13,16 @@ export type SessionUser = LoginFieldsFragment | undefined | null;
 export type SessionTeam = TeamUserFieldsFragment | undefined | null;
 export type AnonTeam = TeamAnonFieldsFragment | undefined | null;
 
-const accessTokenState = atom({
-  key: "accessTokenState",
-  default: "",
-});
+const accessTokenState = atom<string>("");
 
-const userState = atom({
-  key: "user",
-  default: undefined as SessionUser | undefined,
-});
+const userState = atom<SessionUser | undefined>(undefined);
 
 export function useAccessToken(): string {
-  return useRecoilValue(accessTokenState);
+  return useAtomValue(accessTokenState);
 }
 
 export function useSetAccessToken(): (token: string) => void {
-  const setState = useSetRecoilState(accessTokenState);
+  const setState = useSetAtom(accessTokenState);
   return (token: string) => {
     if (token) {
       localStorage.setItem("@token", token);
@@ -40,11 +34,11 @@ export function useSetAccessToken(): (token: string) => void {
 }
 
 export function useUser(): SessionUser {
-  return useRecoilValue(userState);
+  return useAtomValue(userState);
 }
 
 export function useSetUser(): (user: SessionUser) => void {
-  const setState = useSetRecoilState(userState);
+  const setState = useSetAtom(userState);
   return (user: SessionUser | undefined) => {
     setState(user);
     if (user) {

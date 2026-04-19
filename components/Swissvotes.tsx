@@ -5,11 +5,11 @@ import {
   UserWhereUniqueInput,
   useSwissvotesQuery,
 } from "graphql/types";
-import { Checkbox, Input, Label, Select, Textarea } from "@rebass/forms";
-import { Box, Link, Text, Flex, Button } from "rebass";
+import { Checkbox, Input, Label, Select, Textarea } from "components/ui";
+import { Box, Link, Text, Flex, Button } from "components/ui";
 import { Err, ErrorPage, Loading } from "./Page";
 import { useState, Dispatch, SetStateAction, useEffect } from "react";
-import { A } from "./Breadcrumb";
+import { A } from "./A";
 import { formatYear } from "util/date";
 import { CircleBullet } from "components/Misc";
 import { Authors, usePostWork, WorkCard, WorkItem, Works } from "./Works";
@@ -56,18 +56,19 @@ export const SEARCH_SWISSVOTES = gql`
 
 type VoteType = ArrayElement<SwissvotesQuery["swissvotes"]>;
 
-export const Swissvotes: React.FC<React.PropsWithChildren<{
-  votes?: VoteType[];
-  setVotes?: (votes: VoteType[]) => void;
-  limit?: number;
-  keyword?: string;
-}>> = ({ votes, setVotes, limit = 15, keyword = "" }) => {
+export const Swissvotes: React.FC<
+  React.PropsWithChildren<{
+    votes?: VoteType[];
+    setVotes?: (votes: VoteType[]) => void;
+    limit?: number;
+    keyword?: string;
+  }>
+> = ({ votes, setVotes, limit = 15, keyword = "" }) => {
   const [keywords, setKeywords] = useState(keyword);
   const [type, setType] = useState<number | undefined>();
   const [result, setResult] = useState<number | undefined>();
   const [offset, setOffset] = useState(0);
 
-  // reset the pagination offset when changing query parameters
   useEffect(() => {
     setOffset(0);
   }, [type, result, keywords]);
@@ -83,19 +84,16 @@ export const Swissvotes: React.FC<React.PropsWithChildren<{
 
   return (
     <Box>
-      <Flex mt={4}>
+      <Flex className="mt-8">
         <Input
           value={keywords}
-          // TODO: debouncing does not work here
           onChange={(evt) => setKeywords(evt.target.value)}
           placeholder="Suche..."
-          flex={1}
+          className="flex-1"
         />
-        <Button ml={3} flex={0.3} mt={[0, 0, "4px"]}>
-          Suche
-        </Button>
+        <Button className="ml-4 flex-[0.3] mt-0 sm:mt-1">Suche</Button>
       </Flex>
-      <Text mb={4} mt={2} fontSize={1}>
+      <Text className="mb-8 mt-2 text-sm">
         Filtern nach:{" "}
         <Filter set={setType} v={type} val={3} label="Initiativen" sep />
         <Filter set={setType} v={type} val={1} label="Obl. Referenden" sep />
@@ -109,11 +107,11 @@ export const Swissvotes: React.FC<React.PropsWithChildren<{
         query={{ keywords, type, result, offset, limit }}
         resetFilters={resetFilters}
       />
-      <Flex justifyContent="space-between" mt={3}>
-        <Link onClick={() => setOffset(offset - limit)} fontSize={1}>
+      <Flex className="justify-between mt-4">
+        <Link onClick={() => setOffset(offset - limit)} className="text-sm">
           {offset >= limit ? "Neuere Abstimmungen anzeigen …" : ""}
         </Link>
-        <Link onClick={() => setOffset(offset + limit)} fontSize={1}>
+        <Link onClick={() => setOffset(offset + limit)} className="text-sm">
           {offset < 650 ? "… Ältere Abstimmungen anzeigen" : ""}
         </Link>
       </Flex>
@@ -121,7 +119,9 @@ export const Swissvotes: React.FC<React.PropsWithChildren<{
   );
 };
 
-export const SwissvotesTopics: React.FC<React.PropsWithChildren<unknown>> = () => {
+export const SwissvotesTopics: React.FC<
+  React.PropsWithChildren<unknown>
+> = () => {
   const [topic, setTopic] = useState("");
   const [votes, setVotes] = useState<VoteType[]>([]);
   const [text, setText] = useState("");
@@ -143,7 +143,7 @@ export const SwissvotesTopics: React.FC<React.PropsWithChildren<unknown>> = () =
 
   return (
     <Box>
-      <Text mb={3}>
+      <Text className="my-4">
         <CircleBullet value={1} />
         Wählt ein Thema aus, über das ihr recherchieren möchtet:
       </Text>
@@ -156,8 +156,8 @@ export const SwissvotesTopics: React.FC<React.PropsWithChildren<unknown>> = () =
         <option>Armee</option>
       </Select>
       {topic && (
-        <Box mt={4}>
-          <Text mb={-20}>
+        <Box className="mt-8">
+          <Text style={{ marginBottom: -20 }}>
             <CircleBullet value={2} /> Sucht hier in der Swissvotes Datenbank,
             zu was die Schweiz über das Thema «{topic}» abgestimmt hat und wählt
             drei Initiativen aus, die euch wichtig erscheinen:
@@ -171,10 +171,8 @@ export const SwissvotesTopics: React.FC<React.PropsWithChildren<unknown>> = () =
         </Box>
       )}
       {votes.length ? (
-        <Box mt={4}>
-          <Text mb={2} fontWeight="bold">
-            Ausgewählte Abstimmungen:{" "}
-          </Text>
+        <Box className="mt-8">
+          <Text className="font-semibold">Ausgewählte Abstimmungen: </Text>
           <Table>
             {votes?.map(
               (vote) =>
@@ -188,7 +186,7 @@ export const SwissvotesTopics: React.FC<React.PropsWithChildren<unknown>> = () =
                 )
             )}
           </Table>
-          <Text mt={4}>
+          <Text className="mt-8">
             <CircleBullet value={3} />
             Nun begründet, warum ihr diese Abstimmungen wichtig findet und was
             euch bei der Recherche aufgefallen ist. Über welche Abstimmungen
@@ -198,12 +196,12 @@ export const SwissvotesTopics: React.FC<React.PropsWithChildren<unknown>> = () =
               onChange={(e) => setText(e.target.value)}
               rows={8}
             />
-            <Label mt={3}>Erarbeitet durch:</Label>
+            <Label className="mt-4">Erarbeitet durch:</Label>
             <Authors setUsers={setUsers} />
             {success ? (
-              <Text mt={3}>Die Arbeit wurde gespeichert!</Text>
+              <Text className="mt-4">Die Arbeit wurde gespeichert!</Text>
             ) : (
-              <Button mt={3} onClick={doPostWork}>
+              <Button className="mt-4" onClick={doPostWork}>
                 Abschicken
               </Button>
             )}
@@ -226,35 +224,34 @@ export const SwissvotesTopics: React.FC<React.PropsWithChildren<unknown>> = () =
 const SwissvotesItem: WorkItem = ({ work }) => {
   return (
     <WorkCard>
-      <Text mb={2} fontWeight="semi">
-        Thema: {work.data?.topic}
-      </Text>
-      <Table sx={{ border: "none", borderTop: "1px solid gray" }}>
+      <Text className="mb-2 font-semibold">Thema: {work.data?.topic}</Text>
+      <Table className="border-none border-t border-gray-400">
         {(work.data?.votes as VoteType[]).map(
           (vote) => vote && <Vote key={vote.anr} vote={vote} />
         )}
       </Table>
-      <Text mt={3}>
+      <Text className="mt-4">
         <Markdown>{work.data?.text}</Markdown>
       </Text>
     </WorkCard>
   );
 };
 
-export const Filter: React.FC<React.PropsWithChildren<{
-  set: Dispatch<SetStateAction<any>>;
-  v: string | number | undefined;
-  val: string | number | undefined;
-  label: string;
-  sep?: boolean;
-}>> = ({ set, v, val, label, sep }) => (
+export const Filter: React.FC<
+  React.PropsWithChildren<{
+    set: Dispatch<SetStateAction<any>>;
+    v: string | number | undefined;
+    val: string | number | undefined;
+    label: string;
+    sep?: boolean;
+  }>
+> = ({ set, v, val, label, sep }) => (
   <>
     <A
       onClick={() => (v === val ? set(undefined) : set(val))}
-      sx={{
-        fontWeight: val === v ? "bold" : "normal",
-        textDecoration: val === v ? "underline" : "none",
-      }}
+      className={`${
+        val === v ? "font-semibold underline" : "font-normal no-underline"
+      }`}
     >
       {label}
     </A>
@@ -272,12 +269,14 @@ export type VotesQuery = {
   hasPosters?: boolean;
 };
 
-export const VotesList: React.FC<React.PropsWithChildren<{
-  query: VotesQuery;
-  resetFilters: () => void;
-  votes?: VoteType[];
-  setVotes?: (votes: VoteType[]) => void;
-}>> = ({ query, resetFilters, votes, setVotes }) => {
+export const VotesList: React.FC<
+  React.PropsWithChildren<{
+    query: VotesQuery;
+    resetFilters: () => void;
+    votes?: VoteType[];
+    setVotes?: (votes: VoteType[]) => void;
+  }>
+> = ({ query, resetFilters, votes, setVotes }) => {
   const swissvotesQuery = useSwissvotesQuery({
     variables: query,
   });
@@ -289,8 +288,8 @@ export const VotesList: React.FC<React.PropsWithChildren<{
 
   if (!swissvotes || swissvotes.length === 0)
     return (
-      <Box my={4}>
-        <Text mb={2}>Nichts gefunden…</Text>
+      <Box className="my-8">
+        <Text className="mb-2">Nichts gefunden…</Text>
         <Button onClick={resetFilters}>Filter löschen</Button>
       </Box>
     );
@@ -312,11 +311,13 @@ export const VotesList: React.FC<React.PropsWithChildren<{
   );
 };
 
-export const Vote: React.FC<React.PropsWithChildren<{
-  vote: Swissvote;
-  votes?: VoteType[];
-  setVotes?: (votes: VoteType[]) => void;
-}>> = ({ vote, votes, setVotes }) => {
+export const Vote: React.FC<
+  React.PropsWithChildren<{
+    vote: Swissvote;
+    votes?: VoteType[];
+    setVotes?: (votes: VoteType[]) => void;
+  }>
+> = ({ vote, votes, setVotes }) => {
   function isSelected(vote: VoteType) {
     return find(votes, vote) ? true : false;
   }
@@ -335,7 +336,7 @@ export const Vote: React.FC<React.PropsWithChildren<{
     <TR>
       {setVotes && (
         <TD fixed onClick={() => doSelect(vote)}>
-          <Checkbox bg="#fff" checked={isSelected(vote)} color="primary" />
+          <Checkbox className="bg-white" checked={isSelected(vote)} />
         </TD>
       )}
       <TD fixed>{vote.datum && formatYear(vote.datum)}</TD>

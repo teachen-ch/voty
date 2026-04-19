@@ -1,30 +1,22 @@
 import { useState } from "react";
-import { Box, BoxProps } from "rebass";
+import { Box } from "components/ui";
 
-export const SlideShow: React.FC<React.PropsWithChildren<BoxProps & { images: string[]; captions?: string[]; className?: string }>> = ({ images, captions, className, ...props }) => {
-  const [active, setActive] = useState<number>(
-    0
-  ); /* 
-  const [cancel, setCancel] = useState<number>(0);
+type SlideShowProps = React.HTMLAttributes<HTMLDivElement> & {
+  images: string[];
+  captions?: string[];
+};
 
-  const TIMEOUT = 2000;
-
-  useEffect(() => {
-    setCancel(setTimeout(nextImage, TIMEOUT));
-    return () => {
-      if (cancel) clearTimeout(cancel);
-    };
-  }, []);
-
-  function nextImage() {
-    setActive((active + 1) % images.length);
-    setCancel(setTimeout(nextImage, TIMEOUT));
-  } */
+export const SlideShow: React.FC<React.PropsWithChildren<SlideShowProps>> = ({
+  images,
+  captions,
+  className,
+  ...props
+}) => {
+  const [active, setActive] = useState<number>(0);
   return (
-    <Box {...props} textAlign="center">
+    <Box {...props} className={`text-center ${className ?? ""}`}>
       <img
         src={images[active]}
-        className={className}
         style={{ cursor: "pointer" }}
         onClick={() => setActive((active + 1) % images.length)}
         alt=""
@@ -33,22 +25,21 @@ export const SlideShow: React.FC<React.PropsWithChildren<BoxProps & { images: st
       {images.length > 1 &&
         images.map((image, ix) => (
           <Dot
-            mt={-3}
             key={image}
-            color={ix === active ? "primary" : "white"}
-            onClick={() => {
-              // clearTimeout(cancel);
-              setActive(ix);
-            }}
-            sx={{ cursor: "pointer" }}
+            className={`-mt-3 cursor-pointer ${
+              ix === active ? "text-primary" : "text-white"
+            }`}
+            onClick={() => setActive(ix)}
           />
         ))}
     </Box>
   );
 };
 
-export const Dot: React.FC<React.PropsWithChildren<BoxProps>> = (props) => (
-  <Box display="inline-block" {...props}>
+export const Dot: React.FC<
+  React.PropsWithChildren<React.HTMLAttributes<HTMLDivElement>>
+> = ({ className, ...props }) => (
+  <Box className={`inline-block ${className ?? ""}`} {...props}>
     <svg width="32" height="32" xmlns="http://www.w3.org/2000/svg">
       <ellipse
         ry="6"

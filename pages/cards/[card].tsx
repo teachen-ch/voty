@@ -1,4 +1,5 @@
-import { A, Breadcrumb, Here } from "components/Breadcrumb";
+import { Breadcrumb, Here } from "components/Breadcrumb";
+import { A } from "components/A";
 import { Card, getCardMeta } from "components/Cards";
 import { AppPage, ErrorPage, Loading, Page } from "components/Page";
 import { useQueryParam, useTheme } from "util/hooks";

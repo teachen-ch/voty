@@ -1,8 +1,15 @@
 import { H2, LoggedInPage, ShowFor } from "components/Page";
-import { Box, Text, Button } from "rebass";
+import {
+  Box,
+  Text,
+  Button,
+  Grid,
+  Label,
+  Input,
+  Textarea,
+  Spinner,
+} from "components/ui";
 import { Users } from "components/Users";
-import { Input, Textarea } from "@rebass/forms";
-import { Grid, Label } from "theme-ui";
 import { useRef, useState, RefObject } from "react";
 import { useRouter } from "next/router";
 import uniq from "lodash/uniq";
@@ -23,14 +30,13 @@ import {
   Role,
 } from "graphql/types";
 import { Nullable } from "simplytyped";
-import { Breadcrumb, A, Here } from "components/Breadcrumb";
-import { Spinner } from "theme-ui";
+import { Breadcrumb, Here } from "components/Breadcrumb";
+import { A } from "components/A";
 import PanelPage from "./panel";
 import { TeacherCardList } from "components/Cards";
 import { Activities } from "components/Activities";
 import IconQR from "../../../public/images/icon_qr_white.svg";
 import { BallotScope } from "graphql/types";
-// import { usePolling } from "util/hooks";
 
 export const INVITE_STUDENTS = gql`
   mutation inviteStudents($team: String!, $emails: [String!]!) {
@@ -54,7 +60,6 @@ export default function TeacherTeamPage(): React.ReactElement {
     variables: { where: { id } },
     skip: !id,
   });
-  // usePolling(teamQuery);
   const [emails, setEmails] = useState<string[]>([]);
   const [matches, setMatches] = useState<number | undefined>();
   const [showInvite, setShowInvite] = useState(false);
@@ -109,7 +114,7 @@ export default function TeacherTeamPage(): React.ReactElement {
   if (!team) {
     return (
       <LoggedInPage heading="Detailansicht Klasse" role={Role.Teacher}>
-        <Text mb={3}>Klasse wurde nicht gefunden.</Text>
+        <Text className="mb-6">Klasse wurde nicht gefunden.</Text>
         <Button onClick={() => router.push("/teacher/")}>Meine Klassen</Button>
       </LoggedInPage>
     );
@@ -132,37 +137,36 @@ export default function TeacherTeamPage(): React.ReactElement {
       </Breadcrumb>
       <HideFeature id="cards">
         <H2>Lerninhalte Klasse {team.name}</H2>
-        <Text mb={4} fontSize={2}>
+        <Text className="mb-8 text-base">
           Hier siehst du die Lerninhalte, welche bereits ausgewählt sind und
           deinen Schüler*innen auf der Klassenseite angezeigt werden.
         </Text>
         <TeacherCardList teamCards={team.cards} teamId={team.id} />
         <Button
-          mt={3}
+          className="mt-4 w-full"
           onClick={() => router.push(`/team/${team.id}/select`)}
-          width="100%"
         >
           Lerninhalte hinzufügen
         </Button>
         {team.cards && (
           <>
-            <Box sx={{ position: "absolute" }}>
-              <A href={`/team/${team.id}/progress`} fontSize={1}>
-                <Box display="inline-block" mr={2}>
+            <Box style={{ position: "absolute" }}>
+              <A href={`/team/${team.id}/progress`} className="text-sm">
+                <Box className="inline-block mr-2">
                   <Image src={IconProgress} alt="" />
                 </Box>
                 Fortschritt der Klasse
               </A>
             </Box>
-            <Box fontSize={1} textAlign="right" mt={"5px"}>
+            <Box className="text-sm text-right mt-[5px]">
               <EditTeamPrefs team={team} />
             </Box>
           </>
         )}
-        <Box mt={6} />
+        <Box className="mt-24" />
       </HideFeature>
       <H2>Abstimmungen Klasse {team.name}</H2>
-      <Text fontSize={2} mb={4}>
+      <Text className="text-base mb-8">
         Wähle aus der Liste die Abstimmungen aus, welche deinen Schüler*innen
         auf der Klassenseite angezeigt werden sollen. Nach der Abstimmung kannst
         du hier auch die Abstimmungsresultate deiner Klasse zeigen.
@@ -171,16 +175,16 @@ export default function TeacherTeamPage(): React.ReactElement {
       <SelectBallots team={team} scope={BallotScope.National} />
 
       <HideFeature id="activities">
-        <H2 mt={6}>Aktivitäten Klasse {team.name}</H2>
-        <Text mb={4} fontSize={2}>
+        <H2 className="mt-24">Aktivitäten Klasse {team.name}</H2>
+        <Text className="mb-8 text-base">
           Hier siehst du alle Aktivitäten, Uploads und Diskussionen der Klasse{" "}
           {team.name}.
         </Text>
         <Activities teamId={team.id} />
       </HideFeature>
-      <H2 mt={6}>Schülerinnen und Schüler</H2>
+      <H2 className="mt-24">Schülerinnen und Schüler</H2>
       {!team.members.length ? (
-        <Text fontSize={2}>
+        <Text className="text-base">
           Hier kannst du deine Schüler*innen auf die Klassenseite von voty.ch
           einladen. Kopiere einfach alle Email-Adressen auf einmal (aus Mail
           oder Excel) in untenstehende Feld. Hast du eine zweite Email-Adresse?
@@ -188,7 +192,7 @@ export default function TeacherTeamPage(): React.ReactElement {
         </Text>
       ) : (
         <>
-          <Text fontSize={2} mb={4}>
+          <Text className="text-base mb-8">
             Diese Einladungen wurden bereits verschickt. Hier siehst du auch,
             wer die Einladung bereits akzeptiert hat.
           </Text>
@@ -211,65 +215,60 @@ export default function TeacherTeamPage(): React.ReactElement {
       )}
       {!team.members.length || showInvite ? (
         <>
-          <Text mt={4} fontSize={2} fontWeight="semi">
+          <Text className="mt-8 text-base font-semibold">
             {team.members.length ? "Weitere" : ""} Schüler*innen einladen:
           </Text>
           <Textarea
-            mt={3}
             value={importEmails}
-            sx={{ border: "white" }}
+            style={{ border: "white" }}
             onChange={checkEmails}
-            fontSize={1}
-            height="auto"
             rows={2}
             placeholder="name1@schule.ch, name2@schule; name3.schule.ch; ..."
           />
           <Button
-            my={2}
+            className="my-2 w-full flex gap-3"
             onClick={() => inviteStudents(team)}
             disabled={!matches || inviteQuery.loading}
-            width="100%"
-            bg="primary"
           >
             {inviteQuery.loading ? (
-              <Text>
-                <Spinner color="gray" size={20} mr={3} />
+              <>
+                <Spinner className="inline-block text-gray" size={20} />
                 Bitte warten...
-              </Text>
+              </>
             ) : (
               `${matches ? matches : ""} Einladungen verschicken`
             )}
           </Button>
-          <Text fontSize={[1, 1, 2]} sx={{ gridColumn: [0, 0, 2] }} mt={4}>
-            <Box display="inline-block" mr={2}>
+          <Box className="text-sm mt-8" style={{ gridColumn: 2 }}>
+            <Box className="inline-block mr-2">
               <Image src={IconHint} alt="Hinweis" height={24} />
             </Box>
             Alternativ kannst du auch mit einem{" "}
             <A
               onClick={() => setShowInviteLink(!showInviteLink)}
-              variant="underline"
+              className="underline"
             >
               Einladungslink oder QR-Code
             </A>{" "}
             einladen
-          </Text>
+          </Box>
           {showInviteLink && <InviteLink team={team} />}
         </>
       ) : (
-        <Button onClick={() => setShowInvite(true)} width="100%" mt={3}>
+        <Button className="w-full mt-4" onClick={() => setShowInvite(true)}>
           Weitere Schüler*innen einladen
         </Button>
       )}
       <ShowFor role="admin">
-        <DeleteTeamLink teamId={team.id} textAlign="right" fontSize={1} />
+        <DeleteTeamLink teamId={team.id} className="text-right text-sm" />
       </ShowFor>
     </LoggedInPage>
   );
 }
 
-const InviteLink: React.FC<React.PropsWithChildren<{ team: TeamTeacherFieldsFragment }>> = ({
-  team,
-}) => {
+const InviteLink: React.FC<
+  React.PropsWithChildren<{ team: TeamTeacherFieldsFragment }>
+> = ({ team }) => {
   usePageEvent({ category: "Teacher", action: "InviteLink" });
   const inviteRef = useRef<HTMLInputElement>(null);
   const url = `${document?.location.origin}/i/${team.invite}`;
@@ -278,7 +277,7 @@ const InviteLink: React.FC<React.PropsWithChildren<{ team: TeamTeacherFieldsFrag
     return null;
   }
 
-  function copyInvite(ref: RefObject<HTMLInputElement>) {
+  function copyInvite(ref: RefObject<HTMLInputElement | null>) {
     if (ref && ref.current) {
       ref.current.select();
       document.execCommand("copy");
@@ -296,18 +295,19 @@ const InviteLink: React.FC<React.PropsWithChildren<{ team: TeamTeacherFieldsFrag
   }
 
   return (
-    <Grid my={2} gap={3} columns={[0, 0, "2fr 3fr 2fr"]}>
-      <Label sx={{ alignSelf: "center", fontSize: 1 }}>Einladungslink:</Label>
-      <Input ref={inviteRef} readOnly fontSize={1} value={url} />
-      <Button fontSize={1} onClick={() => qrCode(url)}>
-        <Box variant="centered">
-          <Box display="inline-block" mr={2}>
-            <Image src={IconQR} height={25} width={25} alt="QR-Code" />
-          </Box>
-          QR-Code
-        </Box>
+    <Grid className="my-4 gap-4" columns="2fr 5fr 2fr">
+      <Label className="text-sm" style={{ alignSelf: "center" }}>
+        Einladungslink:
+      </Label>
+      <Input ref={inviteRef} readOnly className="text-sm" value={url} />
+      <Button
+        className="text-sm flex justify-center gap-2 text-nowrap"
+        onClick={() => qrCode(url)}
+      >
+        <Image src={IconQR} height={25} width={25} alt="QR-Code" />
+        QR-Code
       </Button>
-      <Text fontSize={1} sx={{ gridColumn: [0, 0, 2] }} mt="-10px">
+      <Text className="text-sm col-start-2">
         {status ? (
           status
         ) : (

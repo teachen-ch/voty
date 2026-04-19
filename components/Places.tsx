@@ -1,5 +1,5 @@
-import { Input, InputProps } from "@rebass/forms";
-import { Box, Text } from "rebass";
+import { Input, InputProps } from "components/ui";
+import { Box, Text } from "components/ui";
 import type { Zip } from "util/places";
 import { useState } from "react";
 import debounce from "lodash/debounce";

@@ -37,7 +37,7 @@ export const Activities: React.FC<React.PropsWithChildren<{
   teamId?: string;
   schoolId?: string;
   ballotId?: string;
-  before?: string; // Scalars["DateTime"]
+  before?: string;
 }>> = ({ card, teamId, schoolId, ballotId, userId, before }) => (
   <ActivitiesQuery
     where={{
@@ -56,7 +56,7 @@ export const ActivitiesQuery: React.FC<React.PropsWithChildren<{
   where: ActivityWhereInput;
   first?: number;
   teamId?: string;
-  before?: string; // Scalars["DateTime"]
+  before?: string;
 }>> = ({ where, first = 50, before, teamId }) => {
   if (before) {
     where.time = { lt: before };
@@ -64,7 +64,6 @@ export const ActivitiesQuery: React.FC<React.PropsWithChildren<{
   const activitiesQuery = useActivitiesQuery({
     variables: { where, orderBy: [{ time: SortOrder.Desc }], first },
     fetchPolicy: "cache-and-network",
-    // pollInterval: 10000,
   });
   const activities = activitiesQuery.data?.activities;
   if (activitiesQuery.loading) return <Loading />;
@@ -72,17 +71,14 @@ export const ActivitiesQuery: React.FC<React.PropsWithChildren<{
 
   return (
     <Table
-      fontSize={[1, 1, 2]}
-      maxHeight={145}
-      overflow="scroll"
-      overflowX="hidden"
+      className="text-sm sm:text-base max-h-[145px] overflow-scroll overflow-x-hidden"
     >
       {activities?.map((act) => {
         const link = getActivityLink(act, teamId);
         const text = getActivityText(act);
         return (
           <TR key={String(act.time)} href={link}>
-            <TD width={[75, 75, 90]} fixed>
+            <TD width={90} fixed>
               {isToday(act.time) ? formatTime(act.time) : formatDate(act.time)}
             </TD>
             <TD flexy>

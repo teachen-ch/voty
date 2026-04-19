@@ -5,13 +5,13 @@ import {
   useSetUser,
   useSetAccessToken,
 } from "state/user";
-import { Heading, Text, Box, Button, Link as A } from "rebass";
+import { Heading, Text, Box, Button } from "components/ui";
 import { Page } from "components/Page";
 import { useDeleteAccountMutation } from "graphql/types";
 import { useRouter } from "next/router";
-import Link from "next/link";
+import { A } from "components/A";
 import { gql } from "@apollo/client";
-import { Grid } from "theme-ui";
+import { Grid } from "components/ui";
 
 export default function Delete(): ReactElement {
   const user = useUser();
@@ -33,7 +33,9 @@ export const DELETE_ACCOUNT = gql`
   }
 `;
 
-const DeleteForm: React.FC<React.PropsWithChildren<{ user: SessionUser }>> = ({ user }) => {
+const DeleteForm: React.FC<React.PropsWithChildren<{ user: SessionUser }>> = ({
+  user,
+}) => {
   const router = useRouter();
   const setAccessToken = useSetAccessToken();
   const setUser = useSetUser();
@@ -56,7 +58,7 @@ const DeleteForm: React.FC<React.PropsWithChildren<{ user: SessionUser }>> = ({ 
     return (
       <Box>
         <Text>Dein Konto wurde erfolgreich gelöscht.</Text>
-        <Text fontSize={6}>👋</Text>
+        <Text className="text-3xl">👋</Text>
       </Box>
     );
   }
@@ -66,9 +68,7 @@ const DeleteForm: React.FC<React.PropsWithChildren<{ user: SessionUser }>> = ({ 
       <Box>
         <Text>
           Leider hat die Löschung nicht geklappt! Bitte nimm mit uns{" "}
-          <Link href="/kontakt" passHref legacyBehavior>
-            <A>Kontakt</A>
-          </Link>{" "}
+          <A href="/kontakt">Kontakt</A>{" "}
           auf.
         </Text>
       </Box>
@@ -82,11 +82,11 @@ const DeleteForm: React.FC<React.PropsWithChildren<{ user: SessionUser }>> = ({ 
         auf voty.ch mitmachst! Möchtest du wirklich dein Konto mit der Email «
         {user?.email}» endgültig löschen?
       </Text>
-      <Grid my={4} columns={[0, 0, "1fr 1fr"]}>
+      <Grid className="my-8" columns="1fr 1fr">
         <Button onClick={() => router.push("/user/profile")}>
           Ich bleibe auf voty.ch!
         </Button>
-        <Button onClick={() => doDeleteAccount()} bg="danger">
+        <Button onClick={() => doDeleteAccount()} className="bg-danger">
           Mein Konto löschen
         </Button>
       </Grid>

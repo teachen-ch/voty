@@ -14,7 +14,7 @@ import {
   ChatyMenu,
   ChatyNext,
 } from "components/ChatElements";
-import { Box, Button, Text, Link } from "rebass";
+import { Box, Button, Text, Link } from "components/ui";
 import {
   useCallback,
   useContext,
@@ -38,13 +38,15 @@ import {
 const WAIT = 50;
 const MAX_WAIT = 3000;
 
-export const Chaty: React.FC<React.PropsWithChildren<{
-  lines: string;
-  title?: string;
-  speed?: number;
-  slim?: boolean;
-  quickShow?: boolean;
-}>> = ({ lines, title, speed = 1, slim = false, quickShow = true }) => {
+export const Chaty: React.FC<
+  React.PropsWithChildren<{
+    lines: string;
+    title?: string;
+    speed?: number;
+    slim?: boolean;
+    quickShow?: boolean;
+  }>
+> = ({ lines, title, speed = 1, slim = false, quickShow = true }) => {
   const [reset, setReset] = useState(0);
   const messages = useMemo(() => parseMessages(lines), [lines]);
   const [show, setShow] = useState<TMessage[]>([]);
@@ -52,7 +54,9 @@ export const Chaty: React.FC<React.PropsWithChildren<{
   const [started, setStarted] = useState(false);
   const [finished, setFinished] = useState(false);
   const [inputMessage, setInputMessage] = useState<TMessage>();
-  const [cancel, setCancel] = useState(0);
+  const [cancel, setCancel] = useState<ReturnType<typeof setTimeout> | null>(
+    null
+  );
   const [showAll, setShowAll] = useState(false);
   const [line, setLine] = useState(0);
   const storedQuizz = useMemo(() => loadQuizz(), []);
@@ -106,10 +110,11 @@ export const Chaty: React.FC<React.PropsWithChildren<{
   }
 
   useEffect(() => {
-    return () => clearTimeout(cancel);
+    return () => {
+      if (cancel) clearTimeout(cancel);
+    };
   }, [cancel]);
 
-  // scroll to bottom on every new message
   useEffect(() => {
     if (started && !showAll) {
       const c = setTimeout(
@@ -127,29 +132,30 @@ export const Chaty: React.FC<React.PropsWithChildren<{
   if (!started) {
     return (
       <WorkCard
-        sx={{
-          background: slim
-            ? ""
-            : "url('/content/chaty.svg') center top no-repeat",
-          backgroundSize: ["100%", "100%", "100%"],
-          borderRadius: 5,
-        }}
-        bg="#fff"
-        color="#000"
-        height={["auto", "auto", slim ? 160 : 480]}
+        className="bg-white text-black"
+        style={
+          {
+            background: slim
+              ? ""
+              : "url('/content/chaty.svg') center top no-repeat",
+            backgroundSize: "100%",
+            borderRadius: 5,
+            height: slim ? "auto" : 480,
+          } as React.CSSProperties
+        }
       >
-        <Box textAlign="center" pt={[130, 130, slim ? 0 : 330]}>
-          <Button mt={4} onClick={() => doChat()} width={250}>
+        <Box className="text-center" style={{ paddingTop: slim ? 0 : 330 }}>
+          <Button className="mt-4 w-60" onClick={() => doChat()}>
             Chat starten
           </Button>
           {quickShow && (
-            <Text mt={3} fontSize={1}>
+            <Text className="mt-4 text-sm">
               <Link
                 onClick={() => {
                   setShowAll(true);
                   doChat(messages.length - 1);
                 }}
-                variant="underline"
+                className="underline"
               >
                 Den ganzen Chat anzeigen
               </Link>
@@ -161,7 +167,7 @@ export const Chaty: React.FC<React.PropsWithChildren<{
   }
 
   function resetChat() {
-    clearTimeout(cancel);
+    cancel && clearTimeout(cancel);
     setStarted(false);
     setFinished(false);
     setTyping(false);
@@ -190,7 +196,7 @@ export const Chaty: React.FC<React.PropsWithChildren<{
           ))}
           {typing ? <TypingIndicator /> : null}
           {finished ? (
-            <Button mt={3} width="100%" onClick={() => resetChat()}>
+            <Button className="mt-4 w-full" onClick={() => resetChat()}>
               Fertig
             </Button>
           ) : (
@@ -231,7 +237,7 @@ const ShowInput: React.FC<React.PropsWithChildren<unknown>> = () => {
   return (
     <InputBox>
       <Button
-        width="100%"
+        className="w-full"
         onClick={() => selectOption(inputMessage, String(inputMessage.message))}
       >
         {inputMessage.message}

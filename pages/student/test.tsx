@@ -1,5 +1,5 @@
 import { LoggedInPage } from "components/Page";
-import { Text, Heading, Box, Card, Button, Image } from "rebass";
+import { Text, Heading, Box, Card, Button, Image } from "components/ui";
 import { ReadMore } from "components/ReadMore";
 import { useUser, SessionUser } from "state/user";
 import React, { useState } from "react";
@@ -51,7 +51,7 @@ const ShowBallots: React.FC<React.PropsWithChildren<{ user: SessionUser }>> = ({
           ? ballotRuns.map(
               (run) => run && <BallotRunDetail run={run} key={run.id} />
             )
-          : null //<AllBallots/>
+          : null
       }
     </Box>
   );
@@ -102,34 +102,34 @@ export const Ballot: React.FC<React.PropsWithChildren<{
   return (
     <div className="ballot">
       <Card>
-        <Text fontWeight="bold" mt={2} fontSize="24px" lineHeight="24px">
+        <Text className="font-bold mt-2 text-[24px] leading-[24px]">
           {ballot.title}
         </Text>
         {success ? (
           <VotySuccess name={user?.name} />
         ) : (
           <>
-            <Text mt={3}>{ballot.description}</Text>
-            <Text textAlign="center" my={3}>
+            <Text className="mt-4">{ballot.description}</Text>
+            <Box className="text-center my-4">
               <Image
-                width={["100px", "100px", "150px"]}
+                className="w-[100px] sm:w-[150px]"
                 src="/images/easyvote.png"
                 alt="Informationen von EasyVote"
               />
-            </Text>
+            </Box>
             <ReadMore title="Nochmals genauer informieren" hidePlus>
               <Markdown>{ballot.body}</Markdown>
             </ReadMore>
             {voty ? (
               <>
-                <Text fontWeight="semi" mt={4}>
+                <Text variant="semi" className="mt-8">
                   Jetzt bist du dran! Hast du Dir eine Meinung gebildet? Was
                   stimmst Du?
                 </Text>
                 <VotyNow ballot={ballot} onSuccess={() => setSuccess(true)} />
               </>
             ) : (
-              <Button mt={3} onClick={() => setVoty(true)} width="100%">
+              <Button className="mt-4 w-full" onClick={() => setVoty(true)}>
                 Jetzt abstimmen
               </Button>
             )}

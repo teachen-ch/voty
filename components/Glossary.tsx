@@ -1,10 +1,8 @@
 import { MDXProvider } from "@mdx-js/react";
-import { Heading, Link, Text } from "rebass";
+import { Heading, Link, Text } from "components/ui";
 import Glossar from "pages/content/glossar.mdx";
-import glossarSource from "pages/content/glossar.mdx?raw";
-import React, { ReactNode, useState } from "react";
-
-const glossary = parseGlossary();
+import { glossaryData as glossary } from "util/glossar-data";
+import React, { ReactElement, ReactNode, useState } from "react";
 
 export const Glossary: React.FC<React.PropsWithChildren<unknown>> = () => (
   <MDXProvider
@@ -26,7 +24,6 @@ export const glossaryReplace = (
   bg?: string,
   color?: string
 ): ReactNode => {
-  // can't use \w, as it does not catch umlauts: [\u00C0-\u017FA-Za-z]
   const searchTerm = RegExp(/\B@([\u00C0-\u017FA-Za-z]+)(?:\((.*?)\))?/);
   if (!searchTerm.exec(str)) {
     return str;
@@ -34,9 +31,7 @@ export const glossaryReplace = (
   const children = [];
   let match: RegExpMatchArray | null;
   while ((match = searchTerm.exec(str))) {
-    // push everything before match as a string
     children.push(str.substr(0, match.index));
-    // push a generated link with the match
     children.push(
       <GlossaryLink
         bg={bg}
@@ -45,7 +40,6 @@ export const glossaryReplace = (
         text={match[2] || match[1]}
       />
     );
-    // continue with rest of the string after match
     str = str.substr(Number(match.index) + match[0].length);
   }
   children.push(str);
@@ -64,14 +58,13 @@ export const GlossaryReplace: React.FC<React.PropsWithChildren<{ bg?: string; co
         if (!child || typeof child === "number") return child;
         if (typeof child === "string") return glossaryReplace(child, bg, color);
         if (typeof child === "object" && "props" in child) {
-          if (child.props.children) {
-            const children = deepReplace(child.props.children);
-            return React.cloneElement(child, { children });
+          const element = child as ReactElement<{ children?: ReactNode }>;
+          if (element.props.children) {
+            const children = deepReplace(element.props.children);
+            return React.cloneElement(element, { children });
           }
-          if (typeof child.type === "function") {
-            // TODO: this does not work yet, e.g. with MDX files
-            // do we have to evalute the function?
-            return child;
+          if (typeof element.type === "function") {
+            return element;
           }
         }
         return child;
@@ -92,38 +85,24 @@ export const GlossaryLink: React.FC<React.PropsWithChildren<{
   }
 
   return (
-    <Text as="span" display="inline-block">
+    <span className="inline-block">
       <Link
         onClick={toggle}
         onMouseOver={toggle}
         onMouseOut={() => setShow(false)}
-        sx={{
-          borderBottom: "1px dotted",
-          textDecoration: "none !important",
-          ":hover": {
-            borderBottom: "1px solid",
-            borderBottomColor: bg,
-          },
-        }}
+        className="border-b border-dotted no-underline! hover:border-b hover:border-solid"
+        style={{ borderBottomColor: show ? bg : undefined }}
       >
         {text || term}
       </Link>
-      <Text
-        as="span"
-        mx={[3, 3, 4]}
-        display={show ? "block" : "none"}
-        sx={{ position: "absolute", zIndex: 10, left: [0, 0] }}
-        bg={bg}
-        color={color}
-        mt={1}
-        p={3}
-        fontSize={1}
-        width={["calc(100% - 32px)", "calc(100% - 32px)", "calc(100% - 64px)"]}
+      <span
+        className={`mx-4 sm:mx-8 ${show ? "block" : "hidden"} absolute z-10 left-0 mt-1 p-4 text-sm w-[calc(100%-32px)] sm:w-[calc(100%-64px)]`}
+        style={{ backgroundColor: bg, color }}
       >
         <b>{term}: </b>
         {children || getGlossary(term)}
-      </Text>
-    </Text>
+      </span>
+    </span>
   );
 };
 
@@ -134,14 +113,14 @@ export const GlossaryEntry: React.FC<React.PropsWithChildren<{ term: string }>> 
   </>
 );
 
-export const GlossaryTerm: React.FC<React.PropsWithChildren<unknown>> = (props) => (
-  <Heading mt={4} mb={2} fontSize={2} id={String(props.children)}>
+export const GlossaryTerm = (props: { children?: ReactNode }): ReactNode => (
+  <Heading className="mt-8 mb-2 text-base" id={String(props.children)}>
     {props.children}
   </Heading>
 );
 
-export const GlossaryText: React.FC<React.PropsWithChildren<unknown>> = (props) => (
-  <Text fontSize={1} ml={0} pl={3} sx={{ borderLeft: "4px solid gray" }}>
+export const GlossaryText = (props: { children?: ReactNode }): ReactNode => (
+  <Text className="text-sm ml-0 pl-4 border-l-4 border-l-gray-400">
     {props.children}
   </Text>
 );
@@ -150,21 +129,4 @@ function getGlossary(term: string) {
   const missing =
     "Dieser Eintrag wurde im Glossar noch nicht erfasst. Magst du den Begriff in 1-2 Sätzen erklären 👉 glossar@voty.ch";
   return glossary[term] || missing;
-}
-
-function parseGlossary() {
-  const glossary: Record<string, string> = {};
-  let term = "";
-  for (const line of glossarSource.split("\n")) {
-    const match = line.match(/^##\s+(.*)$/);
-    if (match) {
-      term = match[1].trim();
-      glossary[term] = "";
-    } else if (term && line.trim()) {
-      glossary[term] = glossary[term]
-        ? `${glossary[term]} ${line.trim()}`
-        : line.trim();
-    }
-  }
-  return glossary;
 }

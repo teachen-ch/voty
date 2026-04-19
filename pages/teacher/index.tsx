@@ -1,6 +1,6 @@
 import { useUser } from "state/user";
 import { LoggedInPage } from "components/Page";
-import { Box, Button, Text } from "rebass";
+import { Box, Button, Text } from "components/ui";
 import { Teams, CreateTeamForm } from "components/Teams";
 import { useState, ReactElement } from "react";
 import { useRouter } from "next/router";
@@ -21,7 +21,9 @@ export default function TeacherHome(): ReactElement {
   if (user?.school === null) {
     return (
       <LoggedInPage heading="Willkommen auf voty.ch" role={Role.Teacher}>
-        <Text mb={3}>Wähle zuerst deine Schule aus oder erfasse eine Neue</Text>
+        <Text className="mb-4">
+          Wähle zuerst deine Schule aus oder erfasse eine Neue
+        </Text>
         <SelectSchool />
       </LoggedInPage>
     );
@@ -32,15 +34,15 @@ export default function TeacherHome(): ReactElement {
       <Breadcrumb>
         <Here>Meine Klassen</Here>
       </Breadcrumb>
-      <Text fontWeight="bold">Willkommen {user && user.name}</Text>
-      <Text mb={4}>Hier siehst du eine Übersicht deiner Klassen</Text>
+      <Text className="font-bold">Willkommen {user && user.name}</Text>
+      <Text className="mb-8">Hier siehst du eine Übersicht deiner Klassen</Text>
       <Teams
         where={{ teacher: { id: { equals: user?.id } } }}
         teamClick={(team) => teamDetail(team.id)}
       />
-      <Box mt={4} minHeight="175px">
+      <Box className="mt-8 min-h-40">
         {success && (
-          <Text mb={4}>
+          <Text className="mb-8">
             Die neue Klasse wurde erfolgreich erstellt. Du kannst diese nun in
             der Tabelle anwählen um Schüler*innen hinzuzufügen und Abstimmungen
             auszuwählen.
@@ -55,7 +57,7 @@ export default function TeacherHome(): ReactElement {
             onCancel={() => setShowForm(false)}
           />
         ) : (
-          <Button onClick={() => setShowForm(!showForm)} width="100%">
+          <Button className="w-full" onClick={() => setShowForm(!showForm)}>
             Neue Klasse erfassen
           </Button>
         )}

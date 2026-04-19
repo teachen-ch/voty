@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { Box, Flex, Text } from "rebass";
+import { Box, Flex } from "components/ui";
 import { SessionUser } from "state/user";
-import { A } from "./Breadcrumb";
+import { A } from "./A";
 import Image from "next/image";
 import IconLogout from "../public/images/icon_logout.svg";
 import IconHome from "../public/images/icon_home.svg";
@@ -18,60 +18,44 @@ import IconFaq from "../public/images/icon_faq.svg";
 
 import { Role } from "graphql/types";
 
-export const NavMobile: React.FC<React.PropsWithChildren<{ user: SessionUser; color: string }>> = ({
-  user,
-  color,
-}) => {
+export const NavMobile: React.FC<
+  React.PropsWithChildren<{ user: SessionUser; color: string }>
+> = ({ user, color }) => {
   const [open, setOpen] = useState(false);
   const isTeacher = user?.role === Role.Teacher;
   return (
-    <Flex color="#fff" pt={1}>
-      <A onClick={() => setOpen(!open)} color={color} variant="link">
-        <Image src={IconBurger} alt="Menu" width="33" height="27" />
+    <Flex className="text-white pt-1">
+      <A onClick={() => setOpen(!open)} color={color}>
+        <Image src={IconBurger} alt="Menu" width={33} height={27} />
       </A>
       {open && (
         <>
           <Box
-            bg="rgba(0,0,0,0.6)"
-            width="20%"
-            height="100%"
+            className="fixed top-0 left-0 w-[20%] h-full bg-[rgba(0,0,0,0.6)]"
             onClick={() => setOpen(false)}
-            sx={{ position: "fixed", top: 0, left: 0 }}
-          ></Box>
-          <Box
-            bg="primary"
-            width="80%"
-            height="100%"
-            fontSize={[3, 4]}
-            sx={{
-              position: "fixed",
-              top: 0,
-              right: 0,
-              zIndex: 99,
-              overflow: "scroll",
-            }}
-          >
-            <Text textAlign="right">
-              <A onClick={() => setOpen(false)} variant="link">
-                <Box width="30" height="30" pt="18px" pr="18px">
+          />
+          <Box className="fixed top-0 right-0 w-[80%] h-full text-lg overflow-scroll z-99 bg-primary">
+            <Box className="text-right">
+              <A onClick={() => setOpen(false)}>
+                <Box className="w-7.5 h-7.5 pt-4.5 pr-4.5">
                   <Image src={IconCross} alt="schliessen" />
                 </Box>
               </A>
-            </Text>
-            <Text pl={4} lineHeight="55px" fontWeight="semi">
-              <A href="/" variant="link">
+            </Box>
+            <Box className="pl-8 leading-13.75 font-semibold">
+              <A href="/">
                 <MIcon src={IconHome} />
                 Startseite
               </A>
               <hr />
               {!user ? (
                 <nav>
-                  <A href="/user/signup" variant="link">
+                  <A href="/user/signup">
                     <MIcon src={IconRegister} />
                     Klasse anmelden
                   </A>
                   <br />
-                  <A href="/user/login" variant="link">
+                  <A href="/user/login">
                     <MIcon src={IconLogin} />
                     Login
                   </A>
@@ -79,17 +63,17 @@ export const NavMobile: React.FC<React.PropsWithChildren<{ user: SessionUser; co
                 </nav>
               ) : (
                 <nav>
-                  <A href="/user/login" variant="link">
+                  <A href="/user/login">
                     <MIcon src={IconClasses} />
                     {isTeacher ? "Meine Klassen" : "Meine Klasse"}
                   </A>
                   <br />
-                  <A href="/user/profile" variant="link">
+                  <A href="/user/profile">
                     <MIcon src={IconAccount} />
                     Mein Profil
                   </A>
                   <br />
-                  <A href="/user/logout" variant="link">
+                  <A href="/user/logout">
                     <MIcon src={IconLogout} />
                     Abmelden
                   </A>
@@ -97,26 +81,26 @@ export const NavMobile: React.FC<React.PropsWithChildren<{ user: SessionUser; co
                 </nav>
               )}
               <hr />
-              <A href="/faq" variant="link">
+              <A href="/faq">
                 <MIcon src={IconFaq} />
                 Häufige Fragen
               </A>
               <br />
-              <A href="/team-voty" variant="link">
+              <A href="/team-voty">
                 <MIcon src={IconTeam} />
                 Team
               </A>
               <hr />
-              <A href="/newsletter" variant="link">
+              <A href="/newsletter">
                 <MIcon src={IconNewsletter} />
                 Newsletter
               </A>
               <br />
-              <A href="/impressum" variant="link">
+              <A href="/impressum">
                 <MIcon src={IconImpressum} />
                 Impressum
               </A>
-            </Text>
+            </Box>
           </Box>
         </>
       )}
@@ -125,7 +109,7 @@ export const NavMobile: React.FC<React.PropsWithChildren<{ user: SessionUser; co
 };
 
 const MIcon: React.FC<React.PropsWithChildren<{ src: string }>> = ({ src }) => (
-  <Box mr={3} display="inline-block" verticalAlign="sub">
+  <Box className="mr-4 inline-block align-sub">
     <Image src={src} alt="" />
   </Box>
 );

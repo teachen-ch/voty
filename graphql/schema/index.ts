@@ -1,6 +1,4 @@
 import { builder } from "../builder";
-import { applyMiddleware } from "graphql-middleware";
-import { permissions } from "../permissions";
 
 // Importing each module registers its types with the shared builder.
 import "./activities";
@@ -17,4 +15,4 @@ import "./votes";
 import "./works";
 import "./crud";
 
-export const schema = applyMiddleware(builder.toSchema(), permissions);
+export const schema = builder.toSchema();

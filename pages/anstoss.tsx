@@ -1,6 +1,6 @@
 import { FeedbackPlain } from "components/Feedback";
 import { Info, Center } from "components/Learning";
-import { Image, Heading, Text } from "rebass";
+import { Box, Image, Heading, Text } from "components/ui";
 import { Page } from "components/Page";
 import { ReactElement } from "react";
 
@@ -23,7 +23,7 @@ export default function AnstossPage(): ReactElement {
 
       <FeedbackPlain title="Ja, wir wären gern dabei:" />
 
-      <Text fontSize={1} mt={4} mb={5}>
+      <Box className="text-sm mt-8 mb-16">
         <Text as="p">
           Liebe Schülerinnen und Schüler, liebe Lehrerinnen und Lehrer
         </Text>
@@ -72,7 +72,7 @@ export default function AnstossPage(): ReactElement {
         <Text as="p">Wir freuen uns auf die Bewerbungen!</Text>
 
         <Text as="p">Eure Teams von voty.ch und aula.de</Text>
-      </Text>
+      </Box>
 
       <FeedbackPlain title="Ja, wir wären gern dabei:" />
     </Page>

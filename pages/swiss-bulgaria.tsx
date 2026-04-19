@@ -1,5 +1,6 @@
 import { AppPage } from "components/Page";
-import { Heading, Text, Card, Flex, Link, Box } from "rebass";
+import { Heading, Text, Card, Flex, Box } from "components/ui";
+import { A } from "components/A";
 import React from "react";
 import { useRouter } from "next/router";
 import { TeaserImage } from "pages";
@@ -11,8 +12,8 @@ export default function Projekt(): React.ReactElement {
       heading="Projekt GLAS – Civic Education in Bulgarien"
       image="/images/header_m2.svg"
     >
-      <Card fontSize={2}>
-        <Text fontWeight="semi">
+      <Card className="text-base">
+        <Text className="font-semibold">
           Mit Unterstützung des{" "}
           <a href="https://www.eda.admin.ch/countries/bulgaria/en/home/schweizer-beitrag/second-swiss-contribution.html">
             EDA
@@ -28,21 +29,16 @@ export default function Projekt(): React.ReactElement {
           <br />
           <br />
         </Text>
-        <Heading as="h2">Vorstellung der bulgarischen Partner</Heading>
-        <Flex
-          mt={80}
-          width={["100%", "100%", "80%", "100%"]}
-          maxWidth="1160px"
-          flexDirection="column"
-          alignItems="center"
-          justifyContent="center"
-        >
+        <Heading as="h2" className="text-xl">
+          Vorstellung der bulgarischen Partner
+        </Heading>
+        <Flex className="mt-20 flex-col items-center justify-center">
           <Teaser>
             <TeaserImage
               src="/images/illu-teach-for-bulgaria.svg"
               width={571}
               height={539}
-              top={-30}
+              top={-20}
             />
             <TeaserText title="TEACH FOR BULGARIA">
               We believe that investing in people is the most sustainable way to
@@ -66,7 +62,7 @@ export default function Projekt(): React.ReactElement {
               src="/images/illu-sofia-platform.svg"
               width={571}
               height={539}
-              top={-20}
+              top={10}
             />
           </Teaser>
 
@@ -75,7 +71,7 @@ export default function Projekt(): React.ReactElement {
               src="/images/illu-amalipe.svg"
               width={571}
               height={539}
-              top={-20}
+              top={20}
             />
             <TeaserText title="AMALIPE">
               Our mission is to stimulate the modernization and empowerment of
@@ -110,40 +106,37 @@ export default function Projekt(): React.ReactElement {
   );
 }
 
-const LearnMore: React.FC<React.PropsWithChildren<{ href: string }>> = ({ href }) => (
-  <Link href={href} target="_blank" rel="noopener noreferrer">
-    <Text fontWeight="semi" color="primary" variant="link">
-      Learn more »»
-    </Text>
-  </Link>
+const LearnMore: React.FC<React.PropsWithChildren<{ href: string }>> = ({
+  href,
+}) => (
+  <A
+    href={href}
+    target="_blank"
+    rel="noopener noreferrer"
+    className="font-semibold text-primary underline  whitespace-nowrap"
+  >
+    Learn more »»
+  </A>
 );
 
-const TeaserText: React.FC<React.PropsWithChildren<{ title: string; fontSize?: number[] }>> = ({
-  title,
-  children,
-}) => (
-  <Box width={["100%", "100%", "100%", "100%"]} px={[0, 0, 3]}>
-    <Text fontSize={[1, 1, 1, 1]} lineHeight="1.45em">
-      <Text color="primary" fontWeight="semi" fontSize={[2, 2, 4, 4]} mb={1}>
-        {title}
-      </Text>
-      {children}
-    </Text>
+const TeaserText: React.FC<
+  React.PropsWithChildren<{ title: string; fontSize?: number[] }>
+> = ({ title, children }) => (
+  <Box className="w-full px-0 sm:px-4 text-sm leading-[1.45em]">
+    <p className="text-primary font-semibold text-base sm:text-xl mb-1">
+      {title}
+    </p>
+    {children}
   </Box>
 );
 
-const Teaser: React.FC<React.PropsWithChildren<{ reverse?: boolean }>> = ({ reverse, children }) => (
-  <Flex
-    mt={[2, 2, 2, 2]}
-    flexWrap={["wrap", "wrap", "wrap", "nowrap"]}
-    flexDirection={
-      reverse
-        ? ["column-reverse", "column-reverse", "column-reverse", "row"]
-        : undefined
-    }
-  >
-    {reverse && <Box width={[0, 0, 0, 0]} />}
+const Teaser: React.FC<React.PropsWithChildren<{ reverse?: boolean }>> = ({
+  reverse,
+  children,
+}) => (
+  <Flex className="flex flex-col md:flex-row mt-2 flex-wrap md:flex-nowrap">
+    {reverse && <Box className="w-0" />}
     {children}
-    {!reverse && <Box width={[0, 0, 0, 0]} />}
+    {!reverse && <Box className="w-0" />}
   </Flex>
 );

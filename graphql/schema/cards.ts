@@ -59,6 +59,7 @@ builder.queryField("cards", (t) =>
 builder.mutationField("setCards", (t) =>
   t.prismaField({
     type: "Team",
+    authScopes: { teacher: true },
     args: {
       teamId: t.arg.string({ required: true }),
       cards: t.arg.string({ required: true }),

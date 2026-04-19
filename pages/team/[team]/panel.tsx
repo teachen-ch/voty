@@ -1,12 +1,12 @@
 import { LoggedInPage } from "components/Page";
-import { Heading, Box, Text, Button } from "rebass";
+import { Heading, Box, Text, Button } from "components/ui";
 import { useRouter } from "next/router";
 import { SelectBallots } from "components/Ballots";
 import { usePageEvent } from "util/stats";
 import { Role, useTeamTeacherQuery } from "graphql/types";
-import { Breadcrumb, A, Here } from "components/Breadcrumb";
+import { Breadcrumb, Here } from "components/Breadcrumb";
+import { A } from "components/A";
 import { BallotScope } from "graphql/types";
-// import { usePolling } from "util/hooks";
 
 export default function PanelPage(): React.ReactElement {
   usePageEvent({ category: "Teacher", action: "Admin" });
@@ -16,7 +16,6 @@ export default function PanelPage(): React.ReactElement {
     variables: { where: { id } },
     skip: !id,
   });
-  // usePolling(teamQuery);
 
   if (teamQuery.loading) {
     return (
@@ -43,13 +42,13 @@ export default function PanelPage(): React.ReactElement {
       <Heading as="h3">
         Folgende Abstimmungen sind für das Panel verfügbar
       </Heading>
-      <Text fontSize={2} mb={3}>
+      <Text className="text-base mb-4">
         Wähle hier aus der Liste die Abstimmungen aus, über welche im Panel
         diskutiert wird. Hier können später auch die Resultate angezeigt werden.
       </Text>
       <SelectBallots team={team} scope={BallotScope.National} />
 
-      <Box mt={4} />
+      <Box className="mt-8" />
 
       <A href={`/panel/${team.code}/present`}>
         <Button>Panel präsentieren</Button>

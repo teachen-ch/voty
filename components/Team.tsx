@@ -1,10 +1,10 @@
-import { Text, Flex, Image } from "rebass";
-import { A } from "./Breadcrumb";
+import { Box, Flex, Image, Text } from "components/ui";
+import { A } from "./A";
 
 export const Team: React.FC<React.PropsWithChildren<unknown>> = () => {
   return (
-    <Text fontSize={2}>
-      <Flex mx={-3} flexWrap="wrap">
+    <Box className="text-base">
+      <Flex className="flex-wrap -mx-4">
         <Person
           name="Stefan Niederhauser"
           href="https://linkedin.com/in/sniederhauser"
@@ -55,52 +55,39 @@ export const Team: React.FC<React.PropsWithChildren<unknown>> = () => {
           als Mittel zum Zweck!
         </Person>
       </Flex>
-    </Text>
+    </Box>
   );
 };
 
-export const Person: React.FC<React.PropsWithChildren<{
-  href: string;
-  name: string;
-  role: string;
-  org: string;
-  image: string;
-}>> = (props) => (
-  <Flex
-    flexDirection="column"
-    m={3}
-    justifyContent="flex-start"
-    alignItems="center"
-    width={["39%", "39%", "20.5%"]}
-  >
+export const Person: React.FC<
+  React.PropsWithChildren<{
+    href: string;
+    name: string;
+    role: string;
+    org: string;
+    image: string;
+  }>
+> = (props) => (
+  <Flex className="flex-col m-4 justify-start items-center w-[39%] sm:w-[20.5%]">
     <Image
       src={props.image}
-      mb={3}
-      sx={{
-        borderRadius: 100,
-        transition: "transform .6s ease-in-out",
-        ":hover": {
-          transform: "rotate(360deg)",
-        },
-      }}
+      className="mb-4 rounded-full transition-transform duration-600 ease-in-out hover:rotate-360"
       alt="Portrait"
     />
-    <Text fontSize={1} textAlign="center">
-      <Text>
+    <Box className="text-sm text-center">
+      <p>
         <strong>{props.name}</strong>
-      </Text>
-      <Text>
+      </p>
+      <p>
         (
-        <A href={props.href} target="_blank" variant="underline">
+        <A href={props.href} target="_blank" className="underline">
           {props.org}
         </A>
         )
-      </Text>
-      <Text>{props.role}</Text>
-      <hr />
-      <Text textAlign="left" fontSize={"13px"}>
-        {props.children}
-      </Text>
-    </Text>
+      </p>
+      <p>{props.role}</p>
+      <hr className="my-3 bg-gray-300" />
+      <p className="text-left text-[13px]">{props.children}</p>
+    </Box>
   </Flex>
 );

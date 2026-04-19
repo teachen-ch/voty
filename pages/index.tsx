@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { Flex, Heading, Box, Text, Button, Image } from "rebass";
+import { Flex, Heading, Box, Text, Button, Image } from "components/ui";
 import { Background, Container, H1 } from "components/Page";
 import { Footer } from "components/Footer";
 import { TopBar } from "components/TopBar";
@@ -7,7 +7,7 @@ import { useRouter } from "next/router";
 import NextImage from "next/image";
 import Link from "next/link";
 import TweetClaude from "../public/images/tweet_claude_longchamp.png";
-import { A } from "components/Breadcrumb";
+import { A } from "components/A";
 import { useTheme } from "util/hooks";
 
 export default function Home(): React.ReactElement {
@@ -23,81 +23,60 @@ export default function Home(): React.ReactElement {
 
       <Background bgImages={[]} />
       <TopBar home />
-      <Container as="main" px={[3, 3, 3, 0]} pt={[30, 35, 30, 30, 40]}>
-        <H1 mt={0} fontSize={["10vw", "10vw", 50, 60, 76]} textAlign="center">
-          <Text
-            lineHeight={1}
-            fontSize={["15vw", "15vw", 90, 100, 126]}
-            fontWeight="black"
-          >
+      <Container>
+        <H1 className="mt-6 text-center text-[10vw] sm:text-[50px] md:text-[60px] lg:text-[76px]">
+          <span className="block leading-none font-black text-[15vw] sm:text-[90px] md:text-[100px] lg:text-[126px]">
             Demokratie
-          </Text>{" "}
+          </span>
           an die Schule!
         </H1>
-        <Box
-          mt={[0, 0, -20, -30, -50]}
-          maxWidth={["100%", "100%", "80%", "80%", "100%"]}
-        >
+        <Box className="mt-0 sm:-mt-5 md:-mt-7.5 lg:-mt-12.5 md:max-w-[80%]">
           <NextImage
             src="/images/start_intro.svg"
             width={934}
             height={513}
-            alt="voty.ch – Online Demokratie Lehrnmittel"
+            alt="voty.ch – Online Demokratie Lehrnmittel"
           />
         </Box>
-        <Box maxWidth="800px" width="100%" textAlign="center">
+        <Box className="max-w-200 w-full text-center">
           <Button
             onClick={() => router.push("/user/signup")}
-            mt={[2, 2, 3, 4]}
-            px={4}
-            sx={{ borderRadius: "25px" }}
-            width={600}
-            maxWidth="80%"
+            className="mt-2 sm:mt-4 md:mt-8 px-8 py-2 rounded-full w-150 max-w-[80%] leading-none"
           >
             Jetzt Klasse anmelden!
           </Button>
 
           <Heading
             as="h2"
-            fontSize={["30px", "30px", "40px"]}
-            mt={[4, 4, 5]}
-            color="primary"
+            className="text-[30px] sm:text-[40px] mt-8 sm:mt-16 text-primary"
           >
             Jugendliche stimmen ab
           </Heading>
-          <Flex mb={[4, 4, 5]} justifyContent="space-around">
-            <Text lineHeight="1.5em" fontSize={[2, 2, 3]}>
+          <Flex className="mb-8 sm:mb-16 justify-around">
+            <Text className="leading-[1.5em] text-base sm:text-lg">
               Die Demokratie ist eines der wohl wichtigsten Güter der Schweiz.
               Aber wie ge­lingt es uns, die Ju­gendlichen für die Demo­kratie zu
               begeis­tern?
             </Text>
           </Flex>
 
-          <Flex justifyContent="space-between" flexWrap="wrap">
+          <Flex className="justify-between flex-wrap">
             <Button
-              mb={2}
+              className="mb-2 w-full sm:w-[calc(50%-8px)]"
               onClick={() => router.push("/projekt")}
-              width={["100%", "100%", "calc(50% - 8px)"]}
             >
               Weitere Infos zum Projekt
             </Button>
             <Button
-              mb={2}
+              className="mb-2 w-full sm:w-[calc(50%-8px)]"
               onClick={() => router.push("/newsletter")}
-              width={["100%", "100%", "calc(50% - 8px)"]}
             >
               Newsletter abonnieren
             </Button>
           </Flex>
         </Box>
-        <Flex
-          width={["100%", "100%", "80%", "100%"]}
-          maxWidth="1160px"
-          flexDirection="column"
-          alignItems="center"
-          justifyContent="center"
-        >
-          <H1 mt={[5, 5, 6]} width="100%" textAlign="center">
+        <Flex className="flex-col items-center justify-center max-w-290 w-full sm:w-[80%] md:w-full">
+          <H1 className="mt-16 sm:mt-32 w-full text-center">
             Modul 1 – Demokratie verstehen
           </H1>
           <Teaser>
@@ -105,7 +84,7 @@ export default function Home(): React.ReactElement {
               src="/images/start_teaser_m1a.svg"
               width={571}
               height={539}
-              top={-150}
+              className="md:-mt-30"
             />
             <TeaserText title="Ein Grundverständnis für Demokratie schaffen">
               Wir glauben, dass ein demokratisches Verständnis nur durch
@@ -129,20 +108,11 @@ export default function Home(): React.ReactElement {
               src={`/images/${aulaPrefix}start_teaser_m1b.svg`}
               width={629}
               height={535}
-              top={-120}
+              className="md:-mt-24"
             />
           </Teaser>
 
-          {/* ## Wie sehen gute Lehrmittel für Distance Learning aus?
-              Als im Frühling 2020 die
-              Schulen geschlossen wurden war Improvisation das Gebot der Stunde.
-              Buchseiten wurde fotografiert, E-Learning Angebote für den
-              Selbstunterricht wurden verteilt, kreative Aufgaben wurden
-              erfunden. Aber wie sehen Lehrmittel aus, die den Lernprozess einer
-              «Distributed Class» optimal unterstützen?{" "}
-          <LearnMore href="/distance-learning" />*/}
-
-          <H1 mt={[5, 5, 6]} width="100%" textAlign="center">
+          <H1 className="mt-16 sm:mt-32 w-full text-center">
             Modul 2 – Demokratie testen
           </H1>
           <Teaser>
@@ -150,7 +120,7 @@ export default function Home(): React.ReactElement {
               src={`/images/${aulaPrefix}start_teaser_m2a.svg`}
               width={609}
               height={536}
-              top={-150}
+              className="md:-mt-24"
             />
             <TeaserText title="Auch die Jugend hat eine Meinung">
               Im Vergleich zu älteren Generationen stimmen junge Menschen halb
@@ -171,11 +141,11 @@ export default function Home(): React.ReactElement {
               src="/images/start_teaser_m2b.svg"
               width={597}
               height={529}
-              top={-120}
+              className="md:-mt-20"
             />
           </Teaser>
 
-          <H1 mt={[5, 5, 6]} width="100%" textAlign="center">
+          <H1 className="mt-16 sm:mt-32 w-full text-center">
             Modul 3 – Demokratie leben
           </H1>
 
@@ -184,7 +154,6 @@ export default function Home(): React.ReactElement {
               src={`/images/${aulaPrefix}start_teaser_m3.svg`}
               width={636}
               height={589}
-              top={-60}
             />
             <TeaserText title="Wer entscheidet an euer Schule?">
               Wer fällt die Entscheidungen an eurem Schulhaus? Dürfen
@@ -192,41 +161,36 @@ export default function Home(): React.ReactElement {
               möchten gemeinsam testen, wie wir partizipative Prozesse und mehr
               Demokratie in Schulhäuser bringen können.{" "}
               <LearnMore href="/leben" />
-              <Box mb={4} />
+              <Box className="mb-8" />
             </TeaserText>
           </Teaser>
         </Flex>
         <Box
-          mt={6}
-          sx={{ border: "6px solid #C5CFD6", borderRadius: "20px" }}
-          bg="#C5CFD6"
-          p={0}
-          width={["280px", "280px", "414px"]}
+          className="mt-24 p-0 w-70 sm:w-103.5"
+          style={{
+            border: "6px solid #C5CFD6",
+            borderRadius: "20px",
+            backgroundColor: "#C5CFD6",
+          }}
         >
-          <Flex bg="#C5CFD6" height={50} pt={15}>
+          <Flex
+            className="h-12.5 pt-3.75"
+            style={{ backgroundColor: "#C5CFD6" }}
+          >
             <Box
-              bg="#98AAB2"
-              width={20}
-              height={20}
-              sx={{ borderRadius: "10px" }}
-              ml={15}
+              className="w-5 h-5 ml-3.75"
+              style={{ backgroundColor: "#98AAB2", borderRadius: "10px" }}
             />
             <Box
-              bg="#98AAB2"
-              width={20}
-              height={20}
-              sx={{ borderRadius: "10px" }}
-              ml={15}
+              className="w-5 h-5 ml-3.75"
+              style={{ backgroundColor: "#98AAB2", borderRadius: "10px" }}
             />
             <Box
-              bg="#98AAB2"
-              width={20}
-              height={20}
-              sx={{ borderRadius: "10px" }}
-              ml={15}
+              className="w-5 h-5 ml-3.75"
+              style={{ backgroundColor: "#98AAB2", borderRadius: "10px" }}
             />
           </Flex>
-          <Flex justifyContent="center" mb={-2}>
+          <Flex className="justify-center">
             <A
               href="https://twitter.com/claudelongchamp/status/1360190735212032001?ref_src=twsrc%5Etfw%7Ctwcamp%5Etweetembed%7Ctwterm%5E1360190735212032001%7Ctwgr%5E%7Ctwcon%5Es1_&ref_url=https%3A%2F%2Fdev.voty.ch%2F"
               target="_blank"
@@ -236,49 +200,46 @@ export default function Home(): React.ReactElement {
                 src={TweetClaude}
                 width={400}
                 height={278}
-                alt="Tweet Claude Longchamp – Tolle Möglichkeit, nutzen!"
+                alt="Tweet Claude Longchamp – Tolle Möglichkeit, nutzen!"
               />
             </A>
           </Flex>
         </Box>
 
-        <H1 mt={6} mb={-5} textAlign="center">
-          Laufende Projekte
-        </H1>
+        <H1 className="mt-24 -mb-5 text-center">Laufende Projekte</H1>
 
-        <Link href="/swiss-bulgaria" passHref legacyBehavior>
-          <Flex justifyContent="center" mt={0} sx={{ cursor: "pointer" }}>
-            <Teaser>
-              <TeaserImage
-                src="/images/illu-glas.svg"
-                width={371}
-                height={239}
-                top={-60}
-              />
-              <TeaserText title="Projekt GLAS - Schweiz + Bulgarien">
-                Voty.ch arbeitet von 2025-2028 als Schweizer Partnerorganisation
-                im Projekt «GLAS» zusammen mit lokale NGOs in Bulgarien.
-                <br />
-                <LearnMore href="/swiss-bulgaria" />
-                <Box
-                  mt={8}
-                  backgroundColor={"primary"}
-                  p={2}
-                  sx={{ borderRadius: "15px" }}
-                >
-                  <Image
-                    src="/images/logo-ch-bul.png"
-                    width={"100%"}
-                    height={"auto"}
-                    alt="Projekt GLAS - Schweiz + Bulgarien"
-                  />
-                </Box>
-              </TeaserText>
-            </Teaser>
-          </Flex>
-        </Link>
-        <Footer />
+        <Flex className="justify-center mt-0">
+          <Teaser>
+            <TeaserImage
+              src="/images/illu-glas.svg"
+              width={371}
+              height={239}
+              className="md:-mt-16"
+            />
+            <TeaserText title="Projekt GLAS - Schweiz + Bulgarien">
+              Voty.ch arbeitet von 2025-2028 als Schweizer Partnerorganisation
+              im Projekt «GLAS» zusammen mit lokale NGOs in Bulgarien.
+              <br />
+              <LearnMore href="/swiss-bulgaria" />
+              <Link
+                href="/swiss-bulgaria"
+                className="block mt-8 p-2"
+                style={{
+                  backgroundColor: "var(--color-primary)",
+                  borderRadius: "15px",
+                }}
+              >
+                <Image
+                  src="/images/logo-ch-bul.png"
+                  className="w-full h-auto"
+                  alt="Projekt GLAS - Schweiz + Bulgarien"
+                />
+              </Link>
+            </TeaserText>
+          </Teaser>
+        </Flex>
       </Container>
+      <Footer />
     </>
   );
 }
@@ -286,32 +247,24 @@ export default function Home(): React.ReactElement {
 export const Teaser: React.FC<
   React.PropsWithChildren<{ reverse?: boolean }>
 > = ({ reverse, children }) => (
-  <Flex
-    mt={[4, 4, 4, 6]}
-    mx="auto"
-    flexWrap={["wrap", "wrap", "wrap", "nowrap"]}
-    flexDirection={
-      reverse
-        ? ["column-reverse", "column-reverse", "column-reverse", "row"]
-        : undefined
-    }
-  >
-    {reverse && <Box width={[0, 0, 0, "10%"]} />}
+  <Flex className="flex flex-row mt-8 md:mt-24 mx-auto flex-wrap md:flex-nowrap">
+    {reverse && <Box className="w-0 md:w-[10%]" />}
     {children}
-    {!reverse && <Box width={[0, 0, 0, "10%"]} />}
+    {!reverse && <Box className="w-0 md:w-[10%]" />}
   </Flex>
 );
 
 export const TeaserText: React.FC<
   React.PropsWithChildren<{ title: string; fontSize?: number[] }>
-> = ({ title, children, fontSize = [2, 2, 3, 3] }) => (
-  <Box width={["100%", "100%", "100%", "40%"]} px={[0, 0, 3]}>
-    <Text fontSize={fontSize} lineHeight="1.45em">
-      <Text color="primary" fontWeight="semi" fontSize={[2, 2, 4, 4]}>
-        {title}
-      </Text>
-      {children}
+> = ({ title, children }) => (
+  <Box className="w-full md:w-[40%] px-0 sm:px-4 text-base sm:text-lg leading-[1.45em]">
+    <Text
+      as="span"
+      className="block text-primary font-semibold text-base sm:text-xl"
+    >
+      {title}
     </Text>
+    {children}
   </Box>
 );
 
@@ -320,22 +273,18 @@ export const TeaserImage: React.FC<
     src: string;
     width: number;
     height: number;
+    className?: string;
     top?: number;
   }>
-> = ({ src, width, height, top }) => (
-  <Box width={["90%", "90%", "70%", "50%"]} mx="auto">
-    <Box
-      sx={{ position: "relative", marginTop: [0, 0, 0, top] }}
-      mx={[0, 0, 2]}
-      mb={4}
-    >
-      <NextImage
-        src={src}
-        width={width}
-        height={height}
-        layout="responsive"
-        alt="Teaser-Bild"
-      />
+> = ({ src, width, height, className, top }) => (
+  <Box
+    className={`w-[90%] sm:w-[70%] md:w-[50%] mx-auto flex flex-col md:flex-row ${
+      className ?? ""
+    }`}
+    style={top !== undefined ? { position: "relative", top: `${top}px` } : undefined}
+  >
+    <Box className="mx-0 sm:mx-2 mb-8">
+      <NextImage src={src} width={width} height={height} alt="Teaser-Bild" />
     </Box>
   </Box>
 );
@@ -343,9 +292,10 @@ export const TeaserImage: React.FC<
 export const LearnMore: React.FC<React.PropsWithChildren<{ href: string }>> = ({
   href,
 }) => (
-  <Link href={href} passHref legacyBehavior>
-    <Text fontWeight="semi" color="primary" variant="link">
-      Mehr erfahren »»
-    </Text>
+  <Link
+    href={href}
+    className="font-semibold text-primary underline whitespace-nowrap"
+  >
+    Mehr erfahren »»
   </Link>
 );

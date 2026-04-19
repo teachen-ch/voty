@@ -1,8 +1,11 @@
-import { Text, Box, Flex } from "rebass";
+import { Text, Box, Flex } from "components/ui";
 
-import { Grid } from "theme-ui";
+import { Grid } from "components/ui";
 import { PieChart } from "react-minimal-pie-chart";
-import { LabelRenderFunction } from "react-minimal-pie-chart/types/commonTypes";
+import type {
+  BaseDataEntry,
+  LabelRenderFunction,
+} from "react-minimal-pie-chart/types/commonTypes";
 import { BallotResults as BallotResultsType } from "graphql/types";
 import type { Nullable } from "simplytyped";
 import { Info } from "./Info";
@@ -15,12 +18,6 @@ export const BallotResults: React.FC<React.PropsWithChildren<{
   if (!results) return null;
   if (!results.total) return <Text>Noch keine Stimmen</Text>;
 
-  // we used to not show results if there was only one answer...
-  // let nullOptions = 0;
-  // if (!results.yes) nullOptions++;
-  // if (!results.no) nullOptions++;
-  // if (!results.abs) nullOptions++;
-  // ensure we only show results, once we don't mess with anonymization
   if (results.total < 5 && isProd())
     return (
       <Info type="important">
@@ -34,17 +31,15 @@ export const BallotResults: React.FC<React.PropsWithChildren<{
 
   return (
     <div className="results">
-      <Grid columns={[0, 0, "1fr 1fr"]}>
-        <Flex justifyItems="center" flex={1} justifySelf="center">
+      <Grid columns="1fr 1fr">
+        <Flex className="justify-center flex-1 justify-self-center">
           <Box
-            height={200}
-            width={200}
-            sx={{ backgroundColor: "#fff", borderRadius: 100 }}
+            className="h-[200px] w-[200px] bg-white rounded-full"
           >
             <VotyPie results={results} />
           </Box>
         </Flex>
-        <Box mb={2}>
+        <Box className="mb-2">
           <Grid columns="2fr 3fr" gap={2}>
             <Text>Ja:</Text>
             <Text>{votes(results.yes)}</Text>
@@ -77,7 +72,7 @@ export const VotyPie: React.FC<React.PropsWithChildren<{
     });
   }
 
-  const pieLabel: LabelRenderFunction = (props) => {
+  const pieLabel: LabelRenderFunction<BaseDataEntry> = (props) => {
     const { title, percentage, color } = props.dataEntry;
     const x = 50;
     const y = results.abs ? 50 : 55;

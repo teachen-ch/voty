@@ -1,7 +1,7 @@
 import { Glossary, GlossaryReplace } from "components/Glossary";
 import { Page } from "components/Page";
 import { Info } from "components/Info";
-import { A } from "components/Breadcrumb";
+import { A } from "components/A";
 
 export default function GlossaryPage(): React.ReactElement {
   function sendMail() {

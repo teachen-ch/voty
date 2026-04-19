@@ -1,11 +1,11 @@
 import { gql } from "@apollo/client";
 import { TeamAnonFieldsFragment, useSetNotesMutation } from "graphql/types";
-import { A } from "./Breadcrumb";
+import { A } from "./A";
 import { Info } from "./Info";
 import { fragments } from "./Teams";
-import { Flex, Text } from "rebass";
+import { Flex, Text } from "components/ui";
 import { useState } from "react";
-import { Textarea } from "@rebass/forms";
+import { Textarea } from "components/ui";
 import clone from "lodash/clone";
 
 export const SET_NOTES = gql`
@@ -17,11 +17,13 @@ export const SET_NOTES = gql`
   ${fragments.TeamTeacherFields}
 `;
 
-export const ShowNote: React.FC<React.PropsWithChildren<{
-  team: TeamAnonFieldsFragment;
-  card: string;
-  teacher?: boolean;
-}>> = ({ team, card, teacher }) => {
+export const ShowNote: React.FC<
+  React.PropsWithChildren<{
+    team: TeamAnonFieldsFragment;
+    card: string;
+    teacher?: boolean;
+  }>
+> = ({ team, card, teacher }) => {
   const [edit, setEdit] = useState(false);
 
   if (edit) {
@@ -30,7 +32,7 @@ export const ShowNote: React.FC<React.PropsWithChildren<{
   if (!team.notes[card]) {
     if (teacher) {
       return (
-        <Text textAlign="right" fontSize={1}>
+        <Text className="text-right text-sm">
           <A onClick={() => setEdit(true)}>Klassennotiz hinzufügen</A>
         </Text>
       );
@@ -40,10 +42,10 @@ export const ShowNote: React.FC<React.PropsWithChildren<{
   }
   return (
     <Info>
-      <Flex justifyContent="space-between">
-        <Text fontWeight="bold">Klassennotiz der Lehrperson:</Text>
+      <Flex className="justify-between">
+        <Text className="font-semibold">Klassennotiz der Lehrperson:</Text>
         {teacher && (
-          <Text mt={2} textAlign="right" fontSize={1}>
+          <Text className="mt-2 text-right text-sm">
             <A onClick={() => setEdit(true)}>Klassennotiz bearbeiten</A>
           </Text>
         )}
@@ -53,11 +55,13 @@ export const ShowNote: React.FC<React.PropsWithChildren<{
   );
 };
 
-export const EditNote: React.FC<React.PropsWithChildren<{
-  team: TeamAnonFieldsFragment;
-  card: string;
-  close: () => void;
-}>> = ({ team, card, close }) => {
+export const EditNote: React.FC<
+  React.PropsWithChildren<{
+    team: TeamAnonFieldsFragment;
+    card: string;
+    close: () => void;
+  }>
+> = ({ team, card, close }) => {
   const [note, setNote] = useState(team.notes[card] as string);
   const [doSetNotes] = useSetNotesMutation();
 
@@ -74,17 +78,18 @@ export const EditNote: React.FC<React.PropsWithChildren<{
     }
   }
   return (
-    <Info fontSize={1}>
-      <Text fontWeight="bold">Klassennotiz für alle Schüler*innen:</Text>
+    <Info className="text-sm">
+      <Text className="font-semibold">
+        Klassennotiz für alle Schüler*innen:
+      </Text>
       <Textarea
         autoFocus
-        bg="lightgray"
+        className="bg-highlight"
         value={note}
-        fontSize={1}
         rows={4}
         onChange={(e) => setNote(e.target.value)}
       />
-      <Flex justifyContent="space-between">
+      <Flex className="justify-between">
         <A onClick={close}>Abbrechen</A>
         <A onClick={doDelete}>Notiz löschen</A>
         <A onClick={() => doSave(note)}>Speichern</A>
