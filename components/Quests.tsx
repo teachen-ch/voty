@@ -184,6 +184,7 @@ export const Textfield: React.FC<
       onChange={(e: any) => setAnswer(id, e.target.value)}
       rows={lines}
       readOnly={readOnly}
+      className="my-1"
       {...props}
     />
   );
