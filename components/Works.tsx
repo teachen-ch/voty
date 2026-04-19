@@ -173,7 +173,7 @@ export const Works: React.FC<
   const dirClass = flexDirection === "column" ? "flex-col" : "";
 
   return (
-    <ListComp className={`${mtClass} ${dirClass} ${className || ""}`.trim()}>
+    <ListComp className={`flex ${mtClass} ${dirClass} ${className || ""}`}>
       {works.length > 0 && (
         <Text className="font-semibold">Arbeiten zum Thema:</Text>
       )}
@@ -183,16 +183,16 @@ export const Works: React.FC<
         return (
           <Box key={work.id} className="mt-2" id={work.id}>
             <Flex
-              className="bg-black/20 p-1 px-[12px] items-center rounded-card justify-between cursor-pointer"
+              className="bg-black/20 p-1 px-3 items-center rounded-card justify-between cursor-pointer"
               style={{ height: 40 }}
               onClick={() => setActive(active === work.id ? "" : work.id)}
             >
               {active === work.id ? (
-                <Box className="inline mr-2 mt-2">
+                <Box className="inline">
                   <Image src={IconMinus} alt="Schliessen" />
                 </Box>
               ) : (
-                <Box className="inline mr-2 mt-2">
+                <Box className="inline mr-2">
                   <Image src={IconPlus} alt="Öffnen" />
                 </Box>
               )}
@@ -459,15 +459,14 @@ export const Authors: React.FC<
       return alert("Du kannst dich selber nicht entfernen");
     if (find(authors, (a) => a.id === author.id)) {
       remove(authors, author);
-      setAuthors(authors.slice());
-      setUsers(authors.slice());
+      updateUsers(authors.slice());
     }
   }
 
   return (
     <Box className={`flex-1 ${className || ""}`}>
       <Flex
-        className="flex-wrap bg-white grow py-[2px] px-2 rounded-card cursor-text"
+        className="flex-wrap bg-white grow py-1 px-2 rounded-card cursor-text"
         onClick={() => inputRef.current?.focus()}
       >
         {authors.map((author) => (
