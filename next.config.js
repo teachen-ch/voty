@@ -6,6 +6,7 @@ const withMDX = require("@next/mdx")({
 });
 // eslint-disable-next-line
 module.exports = withMDX({
+  devIndicators: false,
   pageExtensions: ["js", "jsx", "ts", "tsx", "md", "mdx"],
   reactStrictMode: true,
   // i18n
