@@ -6,7 +6,7 @@ EXPOSE 3000
 USER node
 COPY --chown=node:node . .
 # Runs yarn install, generates Prisma client, and next build
-RUN yarn run ci:release
+RUN yarn run ci:release && rm -rf .next/cache
 CMD [ "yarn", "run", "start"]
 
 
