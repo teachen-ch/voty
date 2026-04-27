@@ -1,0 +1,11 @@
+# PocketBase
+pb/pb_data/
+pb/civictools
+
+# Frontend
+frontend/node_modules/
+frontend/dist/
+
+# Misc
+.env
+.env.local
