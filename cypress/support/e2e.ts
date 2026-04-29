@@ -13,6 +13,4 @@
 // https://on.cypress.io/configuration
 // ***********************************************************
 
-// TODO: Disabled code coverage after upgrade to 7.1 as it didn't run on CI/CD anymore
-// import "@cypress/code-coverage/support";
 import "./commands";

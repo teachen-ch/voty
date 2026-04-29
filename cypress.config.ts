@@ -6,9 +6,6 @@ export default defineConfig({
   env: {
     USER: "teacher@teachen.ch",
     PASS: "teachen",
-    codeCoverage: {
-      url: "/api/__coverage__",
-    },
   },
   video: true,
   videoCompression: 0,

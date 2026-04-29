@@ -5,7 +5,7 @@ import { PieChart } from "react-minimal-pie-chart";
 import type {
   BaseDataEntry,
   LabelRenderFunction,
-} from "react-minimal-pie-chart/types/commonTypes";
+} from "react-minimal-pie-chart/dist/commonTypes";
 import { BallotResults as BallotResultsType } from "graphql/types";
 import type { Nullable } from "simplytyped";
 import { Info } from "./Info";

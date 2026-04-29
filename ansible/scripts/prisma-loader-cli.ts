@@ -1,8 +1,8 @@
-#!node_modules/.bin/ts-node
+#!node_modules/.bin/tsx
 import yargs from "yargs";
+import { hideBin } from "yargs/helpers";
 import { loadFixture } from "../../util/prisma-loader";
 
-// working around pre-commit git hooks...
 const cons = console;
 
 void run();
@@ -10,7 +10,6 @@ void run();
 async function run() {
   try {
     const argv = await cliOptions();
-    // eslint-disable-next-line @typescript-eslint/unbound-method
     const logger = argv.quiet ? () => 0 : cons.log;
 
     for (let i = 0; i < argv._.length; ++i) {
@@ -26,7 +25,7 @@ async function run() {
 }
 
 function cliOptions() {
-  return yargs
+  return yargs(hideBin(process.argv))
     .usage(
       "npx prisma-loader data.yml    Load data from YAML-file into Prisma schema"
     )

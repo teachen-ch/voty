@@ -21,15 +21,6 @@ module.exports = (
   on: Cypress.PluginEvents,
   config: Cypress.PluginConfigOptions
 ) => {
-  // test coverage using istanbul
-  // @ts-ignore
-  // eslint-disable-next-line
-  // TODO: Disabled code coverage after upgrade to 7.1 as it didn't run on CI/CD anymore
-  // TODO: Also see support/index.ts
-  // require("@cypress/code-coverage/task")(on, config);
-
-  // `on` is used to hook into various events Cypress emits
-  // `config` is the resolved Cypress config
   on("task", {
     async prismaLoader(fixtureFile) {
       const file = `${config.fixturesFolder}/${fixtureFile}`;
