@@ -1,21 +1,29 @@
 import { useEffect, useState } from 'preact/hooks'
 import { useLocation } from 'wouter'
-import { useTranslation } from 'react-i18next'
 import { pb } from '../pb'
-import { teacher, currentRoom, stickyNotes, applyNoteEvent, cacheParticipants } from '../store'
+import { teacher, currentRoom, stickyNotes, applyNoteEvent, cacheParticipants, participantColor } from '../store'
+import { useCursors } from '../hooks/useCursors'
+import { InfiniteCanvas } from '../components/InfiniteCanvas'
+import { FloatingToolbar } from '../components/FloatingToolbar'
+import { UserBar } from '../components/UserBar'
+import { RoomHeader } from '../components/RoomHeader'
+import { ZoomControls } from '../components/ZoomControls'
 import type { RecordModel } from 'pocketbase'
-import { StickyBoard } from '../components/StickyBoard'
-import { ShareLink } from '../components/ShareLink'
 
 interface Props {
   roomId: string
 }
 
 export function Room({ roomId }: Props) {
-  const { t } = useTranslation()
   const [room, setRoom] = useState<RecordModel | null>(null)
-  const [participantId, setParticipantId] = useState<string | null>(null)
+  const [participantId, setParticipantId] = useState('')
   const [, navigate] = useLocation()
+
+  const teacherRecord = teacher.value
+  const nickname = (teacherRecord?.name as string) || (teacherRecord?.email as string) || 'Teacher'
+  const myColor = participantColor(participantId || 'teacher')
+
+  useCursors(roomId, participantId, nickname, myColor)
 
   useEffect(() => {
     pb.collection('rooms')
@@ -24,10 +32,7 @@ export function Room({ roomId }: Props) {
       .catch(() => navigate('/dashboard'))
 
     pb.collection('rooms').subscribe(roomId, e => {
-      if (e.action === 'update') {
-        setRoom(e.record)
-        currentRoom.value = e.record
-      }
+      if (e.action === 'update') { setRoom(e.record); currentRoom.value = e.record }
     })
 
     pb.collection('sticky_notes')
@@ -43,21 +48,14 @@ export function Room({ roomId }: Props) {
       .getList(1, 200, { filter: `room = "${roomId}"` })
       .then(res => cacheParticipants(res.items))
 
-    const teacherId = teacher.value?.id
+    const teacherId = teacherRecord?.id
     if (teacherId) {
-      const nickname = (teacher.value?.name as string) || (teacher.value?.email as string) || 'Teacher'
       pb.collection('participants')
         .getFirstListItem(`room = "${roomId}" && user = "${teacherId}"`)
         .catch(() => pb.collection('participants').create({
-          room: roomId,
-          nickname,
-          role: 'teacher',
-          user: teacherId,
+          room: roomId, nickname, role: 'teacher', user: teacherId,
         }))
-        .then(p => {
-          setParticipantId(p.id)
-          cacheParticipants([p])
-        })
+        .then(p => { setParticipantId(p.id); cacheParticipants([p]) })
     }
 
     return () => {
@@ -66,42 +64,20 @@ export function Room({ roomId }: Props) {
     }
   }, [roomId])
 
-  async function toggleSticky() {
-    if (!room) return
-    await pb.collection('rooms').update(roomId, {
-      sticky_notes_enabled: !room.sticky_notes_enabled,
-    })
-  }
-
-  if (!room) return <div class="page"><p>{t('room.loading')}</p></div>
+  if (!room) return null
 
   return (
-    <div class="p-4">
-      <div class="flex items-center gap-3 mb-4 flex-wrap">
-        <button class="secondary" onClick={() => navigate('/dashboard')}>{t('room.back')}</button>
-        <h1 class="mb-0 flex-1">{room.name}</h1>
-        <ShareLink roomId={roomId} />
-      </div>
-
-      <div class="flex gap-2 mb-4">
-        <label class="flex items-center gap-1.5 cursor-pointer">
-          <input
-            type="checkbox"
-            checked={room.sticky_notes_enabled}
-            onChange={toggleSticky}
-            class="w-auto"
-          />
-          {t('room.stickyEnabled')}
-        </label>
-      </div>
-
-      {room.sticky_notes_enabled ? (
-        <StickyBoard roomId={roomId} participantId={participantId ?? ''} isTeacher={true} />
-      ) : (
-        <div class="card text-slate-500">
-          {t('room.stickyDisabledHint')}
-        </div>
-      )}
+    <div class="fixed inset-0 overflow-hidden">
+      <InfiniteCanvas
+        roomId={roomId}
+        participantId={participantId}
+        isTeacher={true}
+        stickyEnabled={true}
+      />
+      <UserBar nickname={nickname} role="teacher" participantId={participantId} />
+      <RoomHeader roomName={room.name as string} roomId={roomId} />
+      <FloatingToolbar />
+      <ZoomControls />
     </div>
   )
 }

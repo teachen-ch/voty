@@ -69,3 +69,27 @@ export function applyNoteEvent(action: string, record: RecordModel) {
     stickyNotes.value = stickyNotes.value.filter(n => n.id !== record.id)
   }
 }
+
+export interface CanvasTransform {
+  x: number
+  y: number
+  scale: number
+}
+
+export const canvasTransform = signal<CanvasTransform>({ x: 0, y: 0, scale: 1 })
+
+export type Tool = 'select' | 'sticky'
+export const activeTool = signal<Tool>('select')
+
+const CURSOR_COLORS = [
+  '#7c3aed', '#2563eb', '#059669', '#d97706',
+  '#dc2626', '#db2777', '#0891b2', '#65a30d',
+]
+
+export function participantColor(id: string): string {
+  let hash = 0
+  for (let i = 0; i < id.length; i++) {
+    hash = (hash * 31 + id.charCodeAt(i)) & 0x7fffffff
+  }
+  return CURSOR_COLORS[hash % CURSOR_COLORS.length]
+}

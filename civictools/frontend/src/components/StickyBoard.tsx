@@ -48,7 +48,6 @@ export function StickyBoard({ roomId, participantId, isTeacher }: Props) {
           <StickyNote
             key={note.id}
             note={note}
-            boardRef={boardRef}
             isTeacher={isTeacher}
             currentParticipantId={participantId}
           />

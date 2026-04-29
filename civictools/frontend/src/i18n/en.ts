@@ -22,7 +22,9 @@ const en = {
     back: '← Rooms',
     loading: 'Loading…',
     stickyEnabled: 'Sticky notes enabled',
-    stickyDisabledHint: 'Enable sticky notes above to let students place notes.',
+    stickyDisabledHint: 'Enable sticky notes to let students place notes.',
+    live: 'Live',
+    online: 'online',
   },
   join: {
     title: 'Join',

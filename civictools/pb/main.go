@@ -26,6 +26,7 @@ func main() {
 		if err := syncKeycloakOIDC(app); err != nil {
 			log.Printf("warn: keycloak OIDC sync skipped: %v", err)
 		}
+		registerCursorWS(se)
 		serveStatic(se)
 		return se.Next()
 	})

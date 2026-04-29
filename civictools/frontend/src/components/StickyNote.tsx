@@ -1,12 +1,10 @@
 import { useEffect, useRef, useState } from 'preact/hooks'
-import type { RefObject } from 'preact'
 import { pb } from '../pb'
-import { participantCache, getParticipantName } from '../store'
+import { participantCache, getParticipantName, canvasTransform } from '../store'
 import type { RecordModel } from 'pocketbase'
 
 interface Props {
   note: RecordModel
-  boardRef: RefObject<HTMLDivElement>
   isTeacher: boolean
   currentParticipantId: string
 }
@@ -18,7 +16,7 @@ interface DragState {
   origY: number
 }
 
-export function StickyNote({ note, boardRef, isTeacher, currentParticipantId }: Props) {
+export function StickyNote({ note, isTeacher, currentParticipantId }: Props) {
   const noteRef = useRef<HTMLDivElement>(null)
   const drag = useRef<DragState | null>(null)
   const [pos, setPos] = useState({ x: note.pos_x as number, y: note.pos_y as number })
@@ -49,13 +47,11 @@ export function StickyNote({ note, boardRef, isTeacher, currentParticipantId }: 
   }
 
   function onPointerMove(e: PointerEvent) {
-    if (!drag.current || !boardRef.current) return
-    const rect = boardRef.current.getBoundingClientRect()
-    const dx = ((e.clientX - drag.current.startX) / rect.width) * 100
-    const dy = ((e.clientY - drag.current.startY) / rect.height) * 100
+    if (!drag.current) return
+    const { scale } = canvasTransform.value
     setPos({
-      x: Math.min(90, Math.max(0, drag.current.origX + dx)),
-      y: Math.min(85, Math.max(0, drag.current.origY + dy)),
+      x: drag.current.origX + (e.clientX - drag.current.startX) / scale,
+      y: drag.current.origY + (e.clientY - drag.current.startY) / scale,
     })
   }
 
@@ -79,13 +75,14 @@ export function StickyNote({ note, boardRef, isTeacher, currentParticipantId }: 
   return (
     <div
       ref={noteRef}
+      data-note="1"
       onPointerDown={onPointerDown}
       onPointerMove={onPointerMove}
       onPointerUp={onPointerUp}
       class="absolute w-[160px] min-h-[120px] p-2 rounded cursor-grab select-none touch-none flex flex-col gap-1 shadow-[2px_3px_8px_rgba(0,0,0,0.15)]"
       style={{
-        left: `${pos.x}%`,
-        top: `${pos.y}%`,
+        left: `${pos.x}px`,
+        top: `${pos.y}px`,
         background: note.color as string,
       }}
     >

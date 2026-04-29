@@ -1,19 +1,31 @@
 import { useEffect } from 'preact/hooks'
 import { useLocation } from 'wouter'
-import { useTranslation } from 'react-i18next'
 import { pb } from '../pb'
-import { studentSession, currentRoom, stickyNotes, applyNoteEvent, clearStudentSession, cacheParticipants } from '../store'
-import { StickyBoard } from '../components/StickyBoard'
+import {
+  studentSession, currentRoom, stickyNotes, applyNoteEvent,
+  clearStudentSession, cacheParticipants, participantColor,
+} from '../store'
+import { useCursors } from '../hooks/useCursors'
+import { InfiniteCanvas } from '../components/InfiniteCanvas'
+import { FloatingToolbar } from '../components/FloatingToolbar'
+import { UserBar } from '../components/UserBar'
+import { RoomHeader } from '../components/RoomHeader'
+import { ZoomControls } from '../components/ZoomControls'
 
 interface Props {
   roomId: string
 }
 
 export function StudentRoom({ roomId }: Props) {
-  const { t } = useTranslation()
   const session = studentSession.value
   const room = currentRoom.value
   const [, navigate] = useLocation()
+
+  const participantId = session?.participantId ?? ''
+  const nickname = session?.nickname ?? ''
+  const myColor = participantColor(participantId || nickname)
+
+  useCursors(roomId, participantId, nickname, myColor)
 
   useEffect(() => {
     if (!session) { navigate(`/join/${roomId}`); return }
@@ -46,32 +58,26 @@ export function StudentRoom({ roomId }: Props) {
     }
   }, [roomId])
 
-  function leave() {
-    clearStudentSession()
-    navigate(`/join/${roomId}`)
-  }
-
   if (!session) return null
 
   return (
-    <div class="p-4">
-      <div class="flex items-center gap-3 mb-4">
-        <h1 class="mb-0 flex-1">{room?.name ?? '…'}</h1>
-        <span class="text-slate-500 text-sm">
-          {t('student.youAre')} <strong>{session.nickname}</strong>
-        </span>
-        <button class="secondary" onClick={leave}>{t('student.leave')}</button>
-      </div>
-
-      {!room ? (
-        <p>{t('student.connecting')}</p>
-      ) : room.sticky_notes_enabled ? (
-        <StickyBoard roomId={roomId} participantId={session.participantId ?? ''} isTeacher={false} />
-      ) : (
-        <div class="card text-slate-500">
-          {t('student.waitingSticky')}
-        </div>
-      )}
+    <div class="fixed inset-0 overflow-hidden">
+      <InfiniteCanvas
+        roomId={roomId}
+        participantId={participantId}
+        isTeacher={false}
+        stickyEnabled={room?.sticky_notes_enabled as boolean ?? false}
+      />
+      <UserBar nickname={nickname} role="student" participantId={participantId} />
+      {room && <RoomHeader roomName={room.name as string} roomId={roomId} />}
+      <FloatingToolbar />
+      <ZoomControls />
+      <button
+        class="fixed bottom-4 left-4 z-50 secondary text-sm"
+        onClick={() => { clearStudentSession(); navigate(`/join/${roomId}`) }}
+      >
+        Leave
+      </button>
     </div>
   )
 }
