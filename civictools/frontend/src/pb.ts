@@ -1,5 +1,7 @@
-import PocketBase from 'pocketbase'
+import PocketBase from "pocketbase";
 
-export const pb = new PocketBase(import.meta.env.VITE_PB_URL || window.location.origin)
+export const pb = new PocketBase(
+  import.meta.env.VITE_PB_URL || window.location.origin
+);
 
-export type { RecordModel } from 'pocketbase'
+export type { RecordModel } from "pocketbase";

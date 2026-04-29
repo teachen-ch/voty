@@ -1,24 +1,24 @@
-import { useState } from 'preact/hooks'
-import { useTranslation } from 'react-i18next'
+import { useState } from "preact/hooks";
+import { useTranslation } from "react-i18next";
 
 interface Props {
-  roomId: string
+  roomId: string;
 }
 
 export function ShareLink({ roomId }: Props) {
-  const { t } = useTranslation()
-  const [copied, setCopied] = useState(false)
-  const url = `${window.location.origin}/join/${roomId}`
+  const { t } = useTranslation();
+  const [copied, setCopied] = useState(false);
+  const url = `${window.location.origin}/join/${roomId}`;
 
   async function copy() {
-    await navigator.clipboard.writeText(url)
-    setCopied(true)
-    setTimeout(() => setCopied(false), 2000)
+    await navigator.clipboard.writeText(url);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
   }
 
   return (
-    <button class="secondary" onClick={copy} title={url}>
-      {copied ? t('shareLink.copied') : t('shareLink.copy')}
+    <button className="secondary" onClick={copy} title={url}>
+      {copied ? t("shareLink.copied") : t("shareLink.copy")}
     </button>
-  )
+  );
 }

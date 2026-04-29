@@ -1,10 +1,10 @@
-import { Route, Switch, Redirect } from 'wouter'
-import { isTeacher, studentSession } from './store'
-import { Login } from './pages/Login'
-import { Dashboard } from './pages/Dashboard'
-import { Room } from './pages/Room'
-import { Join } from './pages/Join'
-import { StudentRoom } from './pages/StudentRoom'
+import { Route, Switch, Redirect } from "wouter";
+import { isTeacher, studentSession } from "./store";
+import { Login } from "./pages/Login";
+import { Dashboard } from "./pages/Dashboard";
+import { Room } from "./pages/Room";
+import { Join } from "./pages/Join";
+import { StudentRoom } from "./pages/StudentRoom";
 
 export function App() {
   return (
@@ -35,8 +35,12 @@ export function App() {
         }
       </Route>
       <Route>
-        {isTeacher.value ? <Redirect to="/dashboard" /> : <Redirect to="/login" />}
+        {isTeacher.value ? (
+          <Redirect to="/dashboard" />
+        ) : (
+          <Redirect to="/login" />
+        )}
       </Route>
     </Switch>
-  )
+  );
 }
