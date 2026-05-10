@@ -1,3 +1,5 @@
+import { TEST_USER, TEST_PASS } from "../support/commands";
+
 describe("Test Login Page", () => {
   beforeEach(() => {
     cy.task("prismaLoader", "testdb.yml");
@@ -6,9 +8,9 @@ describe("Test Login Page", () => {
     cy.visit("/");
     cy.contains("Login").click();
     cy.url().should("include", "/user/login");
-    cy.findByLabelText("Email:").type(Cypress.env("USER"));
+    cy.findByLabelText("Email:").type(TEST_USER);
     cy.get("button").contains("Anmelden").click();
-    cy.findByLabelText("Passwort:").type(Cypress.env("PASS"), { log: false });
+    cy.findByLabelText("Passwort:").type(TEST_PASS, { log: false });
     cy.get("button").contains("Anmelden").click();
     cy.url().should("include", "/teacher");
     cy.contains("Mein Konto").click();
@@ -19,7 +21,7 @@ describe("Test Login Page", () => {
 
   it("shows an error with wrong password", () => {
     cy.visit("/user/login");
-    cy.findByLabelText("Email:").type(Cypress.env("USER"));
+    cy.findByLabelText("Email:").type(TEST_USER);
     cy.get("button").contains("Anmelden").click();
     cy.findByLabelText("Passwort:").type("wrongpass");
     cy.get("button").contains("Anmelden").click();

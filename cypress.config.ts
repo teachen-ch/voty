@@ -3,10 +3,6 @@ import { defineConfig } from "cypress";
 export default defineConfig({
   allowCypressEnv: false,
   defaultCommandTimeout: 10000,
-  env: {
-    USER: "teacher@teachen.ch",
-    PASS: "teachen",
-  },
   video: true,
   videoCompression: 0,
   projectId: "19hfnd",

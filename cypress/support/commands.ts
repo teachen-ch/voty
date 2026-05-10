@@ -26,6 +26,9 @@
 
 import "@testing-library/cypress/add-commands";
 
+export const TEST_USER = "teacher@teachen.ch";
+export const TEST_PASS = "teachen";
+
 // Must be declared globally to be detected by typescript (allows import/export)
 declare global {
   namespace Cypress {
@@ -43,8 +46,8 @@ declare global {
 Cypress.Commands.add(
   "login",
   (email?: string, password?: string, failed = 0): void => {
-    email = email || String(Cypress.env("USER"));
-    password = password || String(Cypress.env("PASS"));
+    email = email || TEST_USER;
+    password = password || TEST_PASS;
     if (failed > 5) return;
     // not sure we can use the new cypress api here, as reset-db will invalidate tokens
     // cy.session([email, password], () => {
