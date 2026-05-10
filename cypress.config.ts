@@ -1,7 +1,7 @@
 import { defineConfig } from "cypress";
 
 export default defineConfig({
-  experimentalStudio: true,
+  allowCypressEnv: false,
   defaultCommandTimeout: 10000,
   env: {
     USER: "teacher@teachen.ch",
