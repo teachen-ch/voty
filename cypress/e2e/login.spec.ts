@@ -1,4 +1,4 @@
-import { TEST_USER, TEST_PASS } from "../support/commands";
+import { TEST_USER, TEST_PASS } from "../support/constants";
 
 describe("Test Login Page", () => {
   beforeEach(() => {

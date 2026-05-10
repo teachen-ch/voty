@@ -26,8 +26,7 @@
 
 import "@testing-library/cypress/add-commands";
 
-export const TEST_USER = "teacher@teachen.ch";
-export const TEST_PASS = "teachen";
+export { TEST_USER, TEST_PASS } from "./constants";
 
 // Must be declared globally to be detected by typescript (allows import/export)
 declare global {
