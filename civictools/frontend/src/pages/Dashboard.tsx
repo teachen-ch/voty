@@ -50,7 +50,7 @@ export function Dashboard() {
     <div className="page">
       <div className="flex justify-between items-center mb-6">
         <h1 className="mb-0">{t("dashboard.title")}</h1>
-        <button className="secondary" onClick={logout}>
+        <button className="btn secondary" onClick={logout}>
           {t("dashboard.logout")}
         </button>
       </div>
@@ -62,7 +62,7 @@ export function Dashboard() {
           placeholder={t("dashboard.namePlaceholder")}
           className="flex-1"
         />
-        <button type="submit" disabled={creating}>
+        <button className="btn" type="submit" disabled={creating}>
           {creating ? t("dashboard.creating") : t("dashboard.create")}
         </button>
       </form>
@@ -76,7 +76,10 @@ export function Dashboard() {
           <div key={room.id} className="card flex items-center gap-3">
             <span className="flex-1 font-medium">{room.name}</span>
             <ShareLink roomId={room.id} />
-            <button onClick={() => navigate(`/room/${room.id}`)}>
+            <button
+              className="btn"
+              onClick={() => navigate(`/room/${room.id}`)}
+            >
               {t("dashboard.open")}
             </button>
           </div>

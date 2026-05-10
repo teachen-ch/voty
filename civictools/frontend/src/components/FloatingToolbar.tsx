@@ -1,3 +1,4 @@
+import { JSX } from "preact/jsx-runtime";
 import { activeTool } from "../store";
 import type { Tool } from "../store";
 
@@ -81,12 +82,12 @@ export function FloatingToolbar() {
               if (enabled) activeTool.value = id as Tool;
             }}
             className={[
-              "w-10 h-10 rounded-xl flex items-center justify-center transition-colors",
+              "size-12 rounded-xl flex items-center justify-center transition-colors bg-white",
               isActive
-                ? "bg-blue-100 text-blue-700"
+                ? "bg-blue-100! text-blue-700"
                 : enabled
                   ? "text-slate-600 hover:bg-slate-100"
-                  : "text-slate-300 cursor-not-allowed",
+                  : "text-slate-400 cursor-not-allowed",
             ].join(" ")}
           >
             <Icon />

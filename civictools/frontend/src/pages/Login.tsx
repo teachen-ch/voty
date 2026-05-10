@@ -78,7 +78,7 @@ export function Login() {
             required
           />
           {error && <p className="error">{error}</p>}
-          <button type="submit" disabled={loading}>
+          <button className="btn" type="submit" disabled={loading}>
             {loading ? t("login.submitting") : t("login.submit")}
           </button>
         </form>
@@ -90,7 +90,7 @@ export function Login() {
             <button
               onClick={handleKeycloakLogin}
               disabled={loading}
-              className="w-full"
+              className="btn w-full"
             >
               {t("login.keycloak")}
             </button>

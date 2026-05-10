@@ -89,7 +89,7 @@ export function StudentRoom({ roomId }: Props) {
       <FloatingToolbar />
       <ZoomControls />
       <button
-        className="fixed bottom-4 left-4 z-50 secondary text-sm"
+        className="btn secondary fixed bottom-4 left-4 z-50 text-sm"
         onClick={() => {
           clearStudentSession();
           navigate(`/join/${roomId}`);
