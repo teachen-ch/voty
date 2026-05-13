@@ -26,7 +26,7 @@
     "init:db": "npx prisma migrate dev --preview-feature",
     "reset:db": "tsx ansible/scripts/prisma-loader-cli.ts cypress/fixtures/testdb.yml",
     "load:db": "tsx ansible/scripts/prisma-loader-cli.ts",
-    "ci:test": "yarn ci:release && yarn init:db && yarn start:test && dotenv -- cypress run --record",
+    "ci:test": "yarn ci:release && yarn init:db && yarn start:test && dotenv -- sh -c 'cypress run ${CYPRESS_RECORD_KEY:+--record}'",
     "ci:release": "yarn install --frozen-lockfile && npx prisma generate && yarn run build",
     "graphql": "graphql-codegen --config codegen.yml",
     "check:ts": "tsc --noEmit",

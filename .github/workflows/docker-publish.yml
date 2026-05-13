@@ -14,16 +14,22 @@ on:
 env:
   IMAGE_NAME: voty
 
+permissions:
+  contents: read
+
 jobs:
   buildpush:
     runs-on: ubuntu-latest
     if: github.event_name != 'pull_request'
+    permissions:
+      contents: write   # semantic-release creates tags/releases
+      packages: write   # push image to GitHub Packages
     steps:
       - name: Checkout latest version
-        uses: actions/checkout@v5
+        uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
 
       - name: Use Node.js 24
-        uses: actions/setup-node@v5
+        uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5
         with:
           node-version: 24
 
@@ -67,16 +73,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout latest version
-        uses: actions/checkout@v5
+        uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
         with:
           persist-credentials: false
       - name: Cache next build artefacts
-        uses: actions/cache@v5
+        uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5
         with:
           path: ${{ github.workspace }}/.next/cache
           key: ${{ runner.os }}-nextjs-${{ hashFiles('**/yarn.lock') }}
       - name: Run Tests
         run: docker compose -f docker-compose.test.yml up --build --abort-on-container-exit
         env:
+          # Empty on fork/Dependabot PRs — script omits --record when unset.
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -7,8 +7,7 @@ services:
     env_file: ".env"
     environment:
       - DATABASE_URL=postgres://voty:voty@postgres:5432/voty
-      - CYPRESS_RECORD_KEY # pass on from GitHub-Actions or cmdline
-      - GITHUB_TOKEN # pass on from GitHub-Actions or cmdline
+      - CYPRESS_RECORD_KEY # pass on from GitHub-Actions or cmdline (optional)
       - NODE_ENV=test
       - PORT=3000
       - NEXT_TELEMETRY_DISABLED=1
