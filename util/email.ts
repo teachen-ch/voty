@@ -31,7 +31,11 @@ export async function sendMail(args: {
   const { html, text } = await renderTemplate(template, locale, data);
 
   // No email configured
-  if (!process.env.SMTP_PASSWORD || process.env.NODE_ENV === "test") {
+  if (
+    !process.env.SMTP_PASSWORD ||
+    process.env.NODE_ENV === "test" ||
+    process.env.CYPRESS === "1"
+  ) {
     logger.info(
       `Writing mail to ${to} into temp file: /tmp/voty-verification-url`
     );
