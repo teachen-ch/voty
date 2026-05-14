@@ -140,6 +140,9 @@
     "node-fetch": "2.7.0",
     "postcss": "^8.5.8",
     "js-yaml": "^4.1.0",
-    "semver": "^7.7.3"
+    "semver": "^7.7.3",
+    "eslint/**/minimatch": "3.1.5",
+    "eslint-config-next/**/minimatch": "3.1.5",
+    "@divyenduz/ts-graphql-plugin/**/minimatch": "3.1.5"
   }
 }
