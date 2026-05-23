@@ -1,4 +1,8 @@
-import { serialize, parse, SerializeOptions } from "cookie";
+import {
+  serialize,
+  parse,
+  SerializeOptions as CookieSerializeOptions,
+} from "cookie";
 import { NextApiResponse, NextApiRequest } from "next";
 import { isBrowser } from "./isBrowser";
 
@@ -9,7 +13,7 @@ export function setCookie(
   res: NextApiResponse,
   name: string,
   value: string | Record<string, any> | undefined,
-  options: SerializeOptions = {}
+  options: CookieSerializeOptions = {}
 ): void {
   const stringValue =
     typeof value === "string" ? value : "j:" + JSON.stringify(value);
