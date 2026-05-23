@@ -69,6 +69,30 @@ jobs:
           docker tag $IMAGE_NAME $IMAGE_ID:$VERSION
           docker push $IMAGE_ID:$VERSION
 
+  buildpush-civictools:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout latest version
+        uses: actions/checkout@v5
+
+      - name: Build image
+        run: docker build civictools --file civictools/Dockerfile --tag civictools
+
+      - name: Log into registry
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login docker.pkg.github.com -u ${{ github.actor }} --password-stdin
+
+      - name: Push image
+        run: |
+          IMAGE_ID=docker.pkg.github.com/${{ github.repository }}/civictools
+          IMAGE_ID=$(echo $IMAGE_ID | tr '[A-Z]' '[a-z]')
+
+          VERSION=$(echo "${{ github.ref }}" | sed -e 's,.*/\(.*\),\1,')
+          [[ "${{ github.ref }}" == "refs/tags/"* ]] && VERSION=$(echo $VERSION | sed -e 's/^v//')
+          [ "$VERSION" == "main" ] && VERSION=latest
+
+          docker tag civictools $IMAGE_ID:$VERSION
+          docker push $IMAGE_ID:$VERSION
+
   test:
     runs-on: ubuntu-latest
     steps:

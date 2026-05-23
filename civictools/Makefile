@@ -20,7 +20,7 @@ build-pb:
 
 build: build-fe build-pb
 
-docker-up: build-fe
+docker-up:
 	docker compose up --build -d
 
 docker-down:

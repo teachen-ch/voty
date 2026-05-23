@@ -71,6 +71,23 @@ services:
       - "3000"
     command: npm run start
 
+  civictools:
+    container_name: "civictools"
+    env_file: ".env"
+    image: docker.pkg.github.com/teachen-ch/voty/civictools
+    restart: always
+    volumes:
+      - ./pb_data:/app/pb/pb_data
+    expose:
+      - "8090"
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.civictools.rule=Host(`tools.voty.ch`)
+      - traefik.http.routers.civictools.entrypoints=websecure
+      - traefik.http.routers.civictools.tls=true
+      - traefik.http.routers.civictools.tls.certresolver=votyresolver
+      - traefik.http.services.civictools.loadbalancer.server.port=8090
+
   postgres:
     image: "postgres:13-alpine"
     container_name: "postgres"
