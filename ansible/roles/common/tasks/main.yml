@@ -5,18 +5,15 @@
   block:
     - name: Update and upgrade packages
       package: { upgrade: "yes", update_cache: "yes" }
+    - name: Set up Docker apt repository
+      include_tasks: docker-repo.yml
+      when: ansible_os_family == 'Debian'
     - name: Install backend modules
       package:
-        name:
-          - python3
-          - webhook
-          - "{{ python3_pip }}"
-          - "{{ docker_pkg }}"
+        name: "{{ ['python3', 'webhook', python3_pip] + (docker_pkg if docker_pkg is sequence and docker_pkg is not string else [docker_pkg]) }}"
     - name: Install Docker Modules for Python
-      pip:
-        name:
-          - docker
-          - docker-compose
+      package:
+        name: "{{ ['py3-docker'] if ansible_os_family == 'Alpine' else ['python3-docker'] }}"
     - name: Add voty user
       user: { name: voty }
     - name: Create Backend Root Directory
@@ -34,14 +31,6 @@
         }
     - name: Enable Docker Service
       service: { name: docker, enabled: yes, state: started }
-    - name: Login to docker registry (GitHub Packages)
-      ### this is an ugly hack using a personal access token with read-only reg access
-      # see https://github.community/t/download-from-github-package-registry-without-authentication/14407/44
-      docker_login:
-        registry: "ghcr.io"
-        username: "stefannn"
-        password: "\u0032\u0031\u0038\u0062\u0064\u0066\u0065\u0038\u0065\u0035\u0039\u0036\u0063\u0037\u0065\u0064\u0036\u0035\u0031\u0062\u0030\u0036\u0034\u0030\u0066\u0062\u0061\u0064\u0066\u0033\u0064\u0032\u0037\u0063\u0037\u0061\u0062\u0030\u0065\u0034"
-
   become: yes
   become_method: sudo
 - name: Configure voty service

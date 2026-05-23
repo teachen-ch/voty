@@ -1,6 +1,11 @@
 test: Ubuntu
 python3_pip: python3-pip
-docker_pkg: docker.io
+docker_pkg:
+  - docker-ce
+  - docker-ce-cli
+  - containerd.io
+  - docker-buildx-plugin
+  - docker-compose-plugin
 nginx_sites: /etc/nginx/sites-enabled
 nginx_conf: nginx-ubuntu.conf
 service_dest: /etc/systemd/system/voty.service

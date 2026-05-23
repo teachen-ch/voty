@@ -22,11 +22,11 @@ WorkingDirectory={{ app_dir }}
 LimitNOFILE=32768
 
 # Remove old containers, images and volumes
-ExecStartPre=docker-compose down -v
-ExecStartPre=docker-compose rm -v
-# Start / Stop docker-compose
-ExecStart=docker-compose up
-ExecStop=docker-compose down
+ExecStartPre=docker compose down -v
+ExecStartPre=docker compose rm -v
+# Start / Stop docker compose
+ExecStart=docker compose up
+ExecStop=docker compose down
 
 Restart=on-failure
 RestartSec=20s
