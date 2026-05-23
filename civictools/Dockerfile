@@ -7,7 +7,7 @@ COPY frontend/ ./
 RUN npm run build
 
 # Build Go binary (embeds PocketBase + migrations)
-FROM golang:1.22-alpine AS backend
+FROM golang:1.25-alpine AS backend
 WORKDIR /build
 COPY pb/go.mod pb/go.sum ./
 RUN go mod download

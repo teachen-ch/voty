@@ -18,6 +18,9 @@ Type=simple
 User=root
 WorkingDirectory={{ app_dir }}
 
+# For PocketBase concurrency
+LimitNOFILE=32768
+
 # Remove old containers, images and volumes
 ExecStartPre=docker-compose down -v
 ExecStartPre=docker-compose rm -v
