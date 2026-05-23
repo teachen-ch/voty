@@ -31,6 +31,8 @@ func main() {
 		return se.Next()
 	})
 
+	registerRoomHooks(app)
+
 	if err := app.Start(); err != nil {
 		log.Fatal(err)
 	}

@@ -70,14 +70,6 @@ export function Room({ roomId }: Props) {
     if (teacherId) {
       pb.collection("participants")
         .getFirstListItem(`room = "${roomId}" && user = "${teacherId}"`)
-        .catch(() =>
-          pb.collection("participants").create({
-            room: roomId,
-            nickname,
-            role: "teacher",
-            user: teacherId,
-          })
-        )
         .then((p) => {
           setParticipantId(p.id);
           cacheParticipants([p]);
