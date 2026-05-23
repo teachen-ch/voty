@@ -1,0 +1,41 @@
+@import "tailwindcss";
+
+@layer base {
+  body {
+    @apply bg-slate-50 text-slate-800 font-sans;
+  }
+  a {
+    @apply text-blue-600;
+  }
+  h1 {
+    @apply m-0 mb-5 text-[1.375rem] font-bold;
+  }
+  h2 {
+    @apply m-0 mb-4 text-lg font-semibold;
+  }
+  input,
+  textarea {
+    @apply py-2 px-2.5 border border-slate-300 rounded text-sm font-[inherit] w-full focus:outline focus:outline-blue-600 focus:border-transparent;
+  }
+  .btn {
+    @apply cursor-pointer py-1.5 px-3.5 bg-blue-600 text-white border-none rounded text-sm hover:bg-blue-700 disabled:opacity-60;
+  }
+}
+
+@layer components {
+  .page {
+    @apply max-w-180 mx-auto py-8 px-4;
+  }
+  .card {
+    @apply bg-white border border-slate-200 rounded-[0.625rem] p-5;
+  }
+  .error {
+    @apply text-red-500 text-sm;
+  }
+  .secondary {
+    @apply bg-slate-200 text-slate-800 hover:bg-slate-300;
+  }
+  .danger {
+    @apply bg-red-500 hover:bg-red-600;
+  }
+}

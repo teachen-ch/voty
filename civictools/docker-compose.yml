@@ -1,0 +1,13 @@
+services:
+  pocketbase:
+    build:
+      context: .
+    container_name: civictools-pb
+    restart: unless-stopped
+    ports:
+      - "8090:8090"
+    volumes:
+      - ./pb/pb_data:/app/pb/pb_data
+    environment:
+      - PB_ADMIN_EMAIL=${PB_ADMIN_EMAIL:-admin@civictools.local}
+      - PB_ADMIN_PASSWORD=${PB_ADMIN_PASSWORD:-changeme123}
