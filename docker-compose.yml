@@ -76,6 +76,8 @@ services:
     env_file: ".env"
     image: docker.pkg.github.com/teachen-ch/voty/civictools
     restart: always
+    environment:
+      - GOMEMLIMIT=512MiB
     volumes:
       - ./pb_data:/app/pb/pb_data
     expose:
