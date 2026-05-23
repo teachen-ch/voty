@@ -1,19 +1,21 @@
 ---
-- include_tasks: include-vars.yml
-
 - name: Install Software and Add User
   block:
     - name: Update and upgrade packages
-      package: { upgrade: "yes", update_cache: "yes" }
+      apt: { upgrade: "yes", update_cache: "yes" }
     - name: Set up Docker apt repository
       include_tasks: docker-repo.yml
-      when: ansible_os_family == 'Debian'
     - name: Install backend modules
-      package:
-        name: "{{ ['python3', 'webhook', python3_pip] + (docker_pkg if docker_pkg is sequence and docker_pkg is not string else [docker_pkg]) }}"
-    - name: Install Docker Modules for Python
-      package:
-        name: "{{ ['py3-docker'] if ansible_os_family == 'Alpine' else ['python3-docker'] }}"
+      apt:
+        name:
+          - python3
+          - python3-docker
+          - webhook
+          - docker-ce
+          - docker-ce-cli
+          - containerd.io
+          - docker-buildx-plugin
+          - docker-compose-plugin
     - name: Add voty user
       user: { name: voty }
     - name: Create Backend Root Directory
@@ -22,22 +24,22 @@
       file: { path: "{{app_dir}}/nginx", owner: voty, state: directory }
     - name: Create Maintenance-Site Directory
       file: { path: "{{app_dir}}/maintenance", owner: voty, state: directory }
-
     - name: Copy maintenance.html
       template:
-        {
-          src: "maintenance.html",
-          dest: "{{app_dir}}/maintenance/maintenance.html",
-        }
+        src: maintenance.html
+        dest: "{{app_dir}}/maintenance/maintenance.html"
     - name: Enable Docker Service
       service: { name: docker, enabled: yes, state: started }
   become: yes
   become_method: sudo
+
 - name: Configure voty service
   block:
     - name: Create voty Service Configuration
       template:
-        { src: "{{service_template}}", dest: "{{service_dest}}", mode: 0755 }
+        src: voty.service.j2
+        dest: /etc/systemd/system/voty.service
+        mode: "0755"
       notify: reload systemd
     - name: Flush Handlers
       meta: flush_handlers
@@ -48,21 +50,18 @@
   block:
     - name: Copy docker-compose file for Backend
       template:
-        {
-          src: "../docker-compose.yml",
-          dest: "{{app_dir}}/docker-compose.yml",
-          mode: 0600,
-        }
-
+        src: ../docker-compose.yml
+        dest: "{{app_dir}}/docker-compose.yml"
+        mode: "0600"
     - name: Copy nginx config
       template:
-        {
-          src: "../nginx/default.conf",
-          dest: "{{app_dir}}/nginx/default.conf",
-          mode: 0600,
-        }
+        src: ../nginx/default.conf
+        dest: "{{app_dir}}/nginx/default.conf"
+        mode: "0600"
     - name: Create .env file for Backend
-      template: { src: "{{ env_file }}", dest: "{{app_dir}}/.env", mode: 0600 }
-
+      template:
+        src: "{{ env_file }}"
+        dest: "{{app_dir}}/.env"
+        mode: "0600"
   become: yes
   become_user: voty
