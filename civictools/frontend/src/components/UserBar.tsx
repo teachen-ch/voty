@@ -25,7 +25,7 @@ export function UserBar({ nickname, role, participantId }: Props) {
   const overflow = others.length - shown.length;
 
   return (
-    <div className="fixed left-4 top-4 flex items-center gap-2 z-50">
+    <div className="hidden sm:flex fixed left-4 top-4 items-center gap-2 z-50">
       <div className="flex items-center gap-2 bg-white rounded-2xl shadow border border-slate-200 px-3 py-2">
         <div
           className="w-8 h-8 rounded-full flex items-center justify-center text-white text-xs font-bold shrink-0"

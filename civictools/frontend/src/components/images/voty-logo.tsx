@@ -1,6 +1,6 @@
-import { PropsWithChildren } from "react-dom/src";
+import type { JSX } from "preact";
 
-export function VotyLogo(props: PropsWithChildren) {
+export function VotyLogo(props: JSX.SVGAttributes<SVGSVGElement>) {
   return (
     <svg width="420px" height="164px" viewBox="0 0 420 164" {...props}>
       <title>voty_logo</title>

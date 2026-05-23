@@ -1,17 +1,12 @@
 import { useEffect } from "preact/hooks";
 import { useLocation } from "wouter";
 import { pb } from "../pb";
-import {
-  studentSession,
-  currentRoom,
-  stickyNotes,
-  applyNoteEvent,
-  clearStudentSession,
-  cacheParticipants,
-  participantColor,
-} from "../store";
+import { studentSession, currentRoom, participantColor } from "../store";
 import { useCursors } from "../hooks/useCursors";
+import { useRoomData } from "../hooks/useRoomData";
+import { useIsMobile } from "../hooks/useIsMobile";
 import { InfiniteCanvas } from "../components/InfiniteCanvas";
+import { MobileRoomView } from "../components/MobileRoomView";
 import { FloatingToolbar } from "../components/FloatingToolbar";
 import { UserBar } from "../components/UserBar";
 import { RoomHeader } from "../components/RoomHeader";
@@ -30,7 +25,11 @@ export function StudentRoom({ roomId }: Props) {
   const nickname = session?.nickname ?? "";
   const myColor = participantColor(participantId || nickname);
 
+  const isMobile = useIsMobile();
+  const stickyEnabled = (room?.sticky_notes_enabled as boolean) ?? false;
+
   useCursors(roomId, participantId, nickname, myColor);
+  useRoomData(roomId);
 
   useEffect(() => {
     if (!session) {
@@ -49,24 +48,8 @@ export function StudentRoom({ roomId }: Props) {
       if (e.action === "update") currentRoom.value = e.record;
     });
 
-    pb.collection("sticky_notes")
-      .getList(1, 500, { filter: `room = "${roomId}"` })
-      .then((res) => {
-        stickyNotes.value = res.items;
-      });
-
-    pb.collection("sticky_notes").subscribe("*", (e) => {
-      if (e.record.room !== roomId) return;
-      applyNoteEvent(e.action, e.record);
-    });
-
-    pb.collection("participants")
-      .getList(1, 200, { filter: `room = "${roomId}"` })
-      .then((res) => cacheParticipants(res.items));
-
     return () => {
       pb.collection("rooms").unsubscribe(roomId);
-      pb.collection("sticky_notes").unsubscribe("*");
     };
   }, [roomId]);
 
@@ -74,26 +57,40 @@ export function StudentRoom({ roomId }: Props) {
 
   return (
     <div className="fixed inset-0 overflow-hidden">
-      <InfiniteCanvas
-        roomId={roomId}
-        participantId={participantId}
-        isTeacher={false}
-        stickyEnabled={(room?.sticky_notes_enabled as boolean) ?? false}
-      />
+      {isMobile ? (
+        <MobileRoomView
+          roomId={roomId}
+          participantId={participantId}
+          isTeacher={false}
+          stickyEnabled={stickyEnabled}
+        />
+      ) : (
+        <>
+          <InfiniteCanvas
+            roomId={roomId}
+            participantId={participantId}
+            isTeacher={false}
+            stickyEnabled={stickyEnabled}
+          />
+          <FloatingToolbar isTeacher={false} />
+          <ZoomControls />
+        </>
+      )}
       <UserBar
         nickname={nickname}
         role="student"
         participantId={participantId}
       />
-      {room && <RoomHeader roomName={room.name as string} roomId={roomId} />}
-      <FloatingToolbar />
-      <ZoomControls />
+      {room && (
+        <RoomHeader
+          roomName={room.name as string}
+          roomId={roomId}
+          isTeacher={false}
+        />
+      )}
       <button
         className="btn secondary fixed bottom-4 left-4 z-50 text-sm"
-        onClick={() => {
-          clearStudentSession();
-          navigate(`/join/${roomId}`);
-        }}
+        onClick={() => navigate(`/join/${roomId}`)}
       >
         Leave
       </button>

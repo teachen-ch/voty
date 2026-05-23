@@ -4,14 +4,18 @@ import { pb } from "../pb";
 import {
   teacher,
   currentRoom,
-  stickyNotes,
-  applyNoteEvent,
   cacheParticipants,
   participantColor,
 } from "../store";
 import { useCursors } from "../hooks/useCursors";
+import { useRoomData } from "../hooks/useRoomData";
+import { useIsMobile } from "../hooks/useIsMobile";
 import { InfiniteCanvas } from "../components/InfiniteCanvas";
+import { MobileRoomView } from "../components/MobileRoomView";
 import { FloatingToolbar } from "../components/FloatingToolbar";
+import { DiscussionPromptModal } from "../components/DiscussionPromptModal";
+import { VotingPromptModal } from "../components/VotingPromptModal";
+import { TimerPromptModal } from "../components/TimerPromptModal";
 import { UserBar } from "../components/UserBar";
 import { RoomHeader } from "../components/RoomHeader";
 import { ZoomControls } from "../components/ZoomControls";
@@ -33,7 +37,10 @@ export function Room({ roomId }: Props) {
     "Teacher";
   const myColor = participantColor(participantId || "teacher");
 
+  const isMobile = useIsMobile();
+
   useCursors(roomId, participantId, nickname, myColor);
+  useRoomData(roomId);
 
   useEffect(() => {
     pb.collection("rooms")
@@ -51,21 +58,6 @@ export function Room({ roomId }: Props) {
       }
     });
 
-    pb.collection("sticky_notes")
-      .getList(1, 500, { filter: `room = "${roomId}"` })
-      .then((res) => {
-        stickyNotes.value = res.items;
-      });
-
-    pb.collection("sticky_notes").subscribe("*", (e) => {
-      if (e.record.room !== roomId) return;
-      applyNoteEvent(e.action, e.record);
-    });
-
-    pb.collection("participants")
-      .getList(1, 200, { filter: `room = "${roomId}"` })
-      .then((res) => cacheParticipants(res.items));
-
     const teacherId = teacherRecord?.id;
     if (teacherId) {
       pb.collection("participants")
@@ -78,7 +70,6 @@ export function Room({ roomId }: Props) {
 
     return () => {
       pb.collection("rooms").unsubscribe(roomId);
-      pb.collection("sticky_notes").unsubscribe("*");
     };
   }, [roomId]);
 
@@ -86,20 +77,34 @@ export function Room({ roomId }: Props) {
 
   return (
     <div className="fixed inset-0 overflow-hidden">
-      <InfiniteCanvas
-        roomId={roomId}
-        participantId={participantId}
-        isTeacher={true}
-        stickyEnabled={true}
-      />
+      {isMobile ? (
+        <MobileRoomView
+          roomId={roomId}
+          participantId={participantId}
+          isTeacher={true}
+          stickyEnabled={true}
+        />
+      ) : (
+        <>
+          <InfiniteCanvas
+            roomId={roomId}
+            participantId={participantId}
+            isTeacher={true}
+            stickyEnabled={true}
+          />
+          <FloatingToolbar isTeacher={true} />
+          <ZoomControls />
+        </>
+      )}
       <UserBar
         nickname={nickname}
         role="teacher"
         participantId={participantId}
       />
       <RoomHeader roomName={room.name as string} roomId={roomId} />
-      <FloatingToolbar />
-      <ZoomControls />
+      <DiscussionPromptModal roomId={roomId} />
+      <VotingPromptModal roomId={roomId} />
+      <TimerPromptModal roomId={roomId} />
     </div>
   );
 }

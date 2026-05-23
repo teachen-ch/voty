@@ -91,6 +91,89 @@ export const canvasTransform = signal<CanvasTransform>({
 export type Tool = "select" | "sticky";
 export const activeTool = signal<Tool>("select");
 
+export const discussionModal = signal<{ board?: RecordModel } | null>(null);
+export const votingModal = signal<{ voting?: RecordModel } | null>(null);
+export const timerModal = signal<{ timer?: RecordModel } | null>(null);
+
+export const votings = signal<RecordModel[]>([]);
+export const participantVotes = signal<RecordModel[]>([]);
+export const timers = signal<RecordModel[]>([]);
+
+export function applyVotingEvent(action: string, record: RecordModel) {
+  if (action === "create" || action === "update") {
+    votings.value = upsertBy(votings.value, record);
+  } else if (action === "delete") {
+    votings.value = votings.value.filter((v) => v.id !== record.id);
+    participantVotes.value = participantVotes.value.filter(
+      (pv) => pv.voting !== record.id
+    );
+  }
+}
+
+export function applyParticipantVoteEvent(action: string, record: RecordModel) {
+  if (action === "create" || action === "update") {
+    participantVotes.value = upsertBy(participantVotes.value, record);
+  } else if (action === "delete") {
+    participantVotes.value = participantVotes.value.filter(
+      (pv) => pv.id !== record.id
+    );
+  }
+}
+
+export function applyTimerEvent(action: string, record: RecordModel) {
+  if (action === "create" || action === "update") {
+    timers.value = upsertBy(timers.value, record);
+  } else if (action === "delete") {
+    timers.value = timers.value.filter((t) => t.id !== record.id);
+  }
+}
+
+export const discussionBoards = signal<RecordModel[]>([]);
+export const argumentRecords = signal<RecordModel[]>([]);
+export const argumentVotes = signal<RecordModel[]>([]);
+
+function upsertBy<T extends RecordModel>(list: T[], rec: T): T[] {
+  const i = list.findIndex((r) => r.id === rec.id);
+  if (i < 0) return [...list, rec];
+  const copy = list.slice();
+  copy[i] = rec;
+  return copy;
+}
+
+export function applyDiscussionBoardEvent(action: string, record: RecordModel) {
+  if (action === "create" || action === "update") {
+    discussionBoards.value = upsertBy(discussionBoards.value, record);
+  } else if (action === "delete") {
+    discussionBoards.value = discussionBoards.value.filter(
+      (b) => b.id !== record.id
+    );
+    argumentRecords.value = argumentRecords.value.filter(
+      (a) => a.discussion_board !== record.id
+    );
+  }
+}
+
+export function applyArgumentEvent(action: string, record: RecordModel) {
+  if (action === "create" || action === "update") {
+    argumentRecords.value = upsertBy(argumentRecords.value, record);
+  } else if (action === "delete") {
+    argumentRecords.value = argumentRecords.value.filter(
+      (a) => a.id !== record.id
+    );
+    argumentVotes.value = argumentVotes.value.filter(
+      (v) => v.argument !== record.id
+    );
+  }
+}
+
+export function applyArgumentVoteEvent(action: string, record: RecordModel) {
+  if (action === "create" || action === "update") {
+    argumentVotes.value = upsertBy(argumentVotes.value, record);
+  } else if (action === "delete") {
+    argumentVotes.value = argumentVotes.value.filter((v) => v.id !== record.id);
+  }
+}
+
 const CURSOR_COLORS = [
   "#7c3aed",
   "#2563eb",

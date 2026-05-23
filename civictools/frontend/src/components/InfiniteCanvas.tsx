@@ -1,8 +1,18 @@
 import { useRef, useLayoutEffect } from "preact/hooks";
 import { pb } from "../pb";
-import { stickyNotes, canvasTransform, activeTool } from "../store";
+import {
+  stickyNotes,
+  canvasTransform,
+  activeTool,
+  discussionBoards,
+  votings,
+  timers,
+} from "../store";
 import { remoteCursors } from "../hooks/useCursors";
 import { StickyNote } from "./StickyNote";
+import { DiscussionBoard } from "./DiscussionBoard";
+import { VotingBoard } from "./VotingBoard";
+import { TimerBoard } from "./TimerBoard";
 
 const NOTE_COLORS = [
   "#fef08a",
@@ -139,6 +149,25 @@ export function InfiniteCanvas({
             isTeacher={isTeacher}
             currentParticipantId={participantId}
           />
+        ))}
+        {discussionBoards.value.map((board) => (
+          <DiscussionBoard
+            key={board.id}
+            board={board}
+            isTeacher={isTeacher}
+            currentParticipantId={participantId}
+          />
+        ))}
+        {votings.value.map((voting) => (
+          <VotingBoard
+            key={voting.id}
+            voting={voting}
+            isTeacher={isTeacher}
+            currentParticipantId={participantId}
+          />
+        ))}
+        {timers.value.map((timer) => (
+          <TimerBoard key={timer.id} timer={timer} isTeacher={isTeacher} />
         ))}
       </div>
 

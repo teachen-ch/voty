@@ -20,12 +20,6 @@ export function Join({ roomId }: Props) {
   const [, navigate] = useLocation();
 
   useEffect(() => {
-    const s = studentSession.value;
-    if (s?.roomId === roomId && s?.participantId) {
-      navigate(`/s/${roomId}`);
-      return;
-    }
-
     pb.collection("rooms")
       .getOne(roomId)
       .then((r) => setRoom(r))
@@ -38,6 +32,17 @@ export function Join({ roomId }: Props) {
     if (!name) return;
     setJoining(true);
     try {
+      const existing = studentSession.value;
+      if (existing?.roomId === roomId && existing.participantId) {
+        if (existing.nickname !== name) {
+          await pb
+            .collection("participants")
+            .update(existing.participantId, { nickname: name });
+        }
+        setStudentSession({ ...existing, nickname: name });
+        navigate(`/s/${roomId}`);
+        return;
+      }
       const record = await pb.collection("participants").create({
         room: roomId,
         nickname: name,
