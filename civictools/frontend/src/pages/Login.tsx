@@ -3,6 +3,7 @@ import { useLocation } from "wouter";
 import { useTranslation } from "react-i18next";
 import { pb } from "../pb";
 import { teacher } from "../store";
+import { Header } from "../components/Header";
 import type { RecordModel } from "pocketbase";
 
 export function Login() {
@@ -63,9 +64,10 @@ export function Login() {
   }
 
   return (
-    <div className="page max-w-100">
-      <h1>{t("appName")}</h1>
-      <div className="card">
+    <div className="page max-w-2xl">
+      <Header />
+      <h1 className="text-center mt-20">{t("login.welcome")}</h1>
+      <div className="card max-w-100 mx-auto">
         <h2>{t("login.title")}</h2>
         <form onSubmit={handleSubmit} className="flex flex-col gap-3">
           <input

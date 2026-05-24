@@ -1,6 +1,15 @@
 const en = {
   appName: "CivicTools",
+  header: {
+    brand: "Voty CivicTools",
+  },
+  breadcrumb: {
+    home: "Home",
+    signIn: "Sign in",
+    templates: "See all templates",
+  },
   login: {
+    welcome: "Welcome",
     title: "Teacher Login",
     email: "Email",
     password: "Password",
@@ -17,6 +26,7 @@ const en = {
     creating: "Creating…",
     empty: "No rooms yet. Create one above.",
     open: "Open",
+    chooseTemplate: "Choose from templates…",
   },
   room: {
     back: "← Rooms",

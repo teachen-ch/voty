@@ -1,10 +1,30 @@
 import { useEffect, useState } from "preact/hooks";
-import { useLocation } from "wouter";
+import { Link, useLocation } from "wouter";
 import { useTranslation } from "react-i18next";
 import { pb } from "../pb";
 import { renderMarkdown } from "../util/markdown";
 import { isTeacher } from "../store";
+import { Header } from "../components/Header";
 import type { RecordModel } from "pocketbase";
+
+function Breadcrumb() {
+  const { t } = useTranslation();
+  return (
+    <nav className="text-sm text-slate-500 mb-4 flex gap-2">
+      {isTeacher.value && (
+        <>
+          <Link href="/dashboard" className="text-blue-600 hover:underline">
+            {t("breadcrumb.home")}
+          </Link>
+          <span>/</span>
+        </>
+      )}
+      <Link href="/templates" className="text-blue-600 hover:underline">
+        {t("breadcrumb.templates")}
+      </Link>
+    </nav>
+  );
+}
 
 type Outline = {
   discussions: RecordModel[];
@@ -78,6 +98,8 @@ export function CopyTemplate({ slug }: { slug: string }) {
   if (error) {
     return (
       <div className="page max-w-2xl">
+        <Header />
+        <Breadcrumb />
         <p className="error">{error}</p>
       </div>
     );
@@ -86,6 +108,8 @@ export function CopyTemplate({ slug }: { slug: string }) {
   if (!template || !outline) {
     return (
       <div className="page max-w-2xl">
+        <Header />
+        <Breadcrumb />
         <p>{t("room.loading")}</p>
       </div>
     );
@@ -99,6 +123,8 @@ export function CopyTemplate({ slug }: { slug: string }) {
 
   return (
     <div className="page max-w-2xl">
+      <Header />
+      <Breadcrumb />
       <h1>{template.name}</h1>
       {template.description && (
         <div

@@ -1,9 +1,10 @@
 import { useEffect, useState } from "preact/hooks";
-import { useLocation } from "wouter";
+import { Link, useLocation } from "wouter";
 import { useTranslation } from "react-i18next";
 import { pb } from "../pb";
 import type { RecordModel } from "pocketbase";
 import { ShareLink } from "../components/ShareLink";
+import { Header } from "../components/Header";
 
 export function Dashboard() {
   const { t } = useTranslation();
@@ -41,21 +42,12 @@ export function Dashboard() {
     }
   }
 
-  function logout() {
-    pb.authStore.clear();
-    navigate("/login");
-  }
-
   return (
     <div className="page">
-      <div className="flex justify-between items-center mb-6">
-        <h1 className="mb-0">{t("dashboard.title")}</h1>
-        <button className="btn secondary" onClick={logout}>
-          {t("dashboard.logout")}
-        </button>
-      </div>
+      <Header />
+      <h1>{t("dashboard.title")}</h1>
 
-      <form onSubmit={createRoom} className="flex gap-2 mb-6">
+      <form onSubmit={createRoom} className="flex gap-2 mb-2">
         <input
           value={roomName}
           onInput={(e) => setRoomName(e.currentTarget.value)}
@@ -66,6 +58,14 @@ export function Dashboard() {
           {creating ? t("dashboard.creating") : t("dashboard.create")}
         </button>
       </form>
+      <div className="mb-6">
+        <Link
+          href="/templates"
+          className="text-sm text-blue-600 hover:underline"
+        >
+          {t("dashboard.chooseTemplate")}
+        </Link>
+      </div>
 
       {rooms.length === 0 && (
         <p className="text-slate-500">{t("dashboard.empty")}</p>
