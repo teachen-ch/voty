@@ -7,15 +7,36 @@ Provisions and deploys voty.ch.
 **Ubuntu 24.04 LTS (noble) only.** The playbooks assume:
 
 - `apt` package manager
-- `systemd`
-- Docker Engine + Compose v2 plugin installed from Docker's official apt repo
-  (`download.docker.com/linux/ubuntu`) — Ubuntu's `docker.io` is *not* used
+- `systemd` with user linger enabled for the `app` user
+- Docker Engine + Compose v2 plugin from Docker's official apt repo
+  (`download.docker.com/linux/ubuntu`) running in **rootless mode** as `app`
+  — repo setup and package installation is handled entirely by `bootstrap.sh`
 - `python3-docker` (apt) — no pip / PEP 668 workarounds
-- cron drop-in dirs `/etc/cron.daily` and `/etc/cron.hourly`
+- User crontab for scheduled backups (no `/etc/cron.daily`)
+
+The `app` user has no sudo access. All service management happens via
+`systemctl --user`. Port binding below 1024 is enabled via
+`net.ipv4.ip_unprivileged_port_start=80` (set by `bootstrap.sh`).
 
 Earlier revisions templated these per-OS (Alpine vs Ubuntu) via `ansible/vars/`.
 That branching has been removed; if you need to support another distro, restore
 per-OS vars rather than scattering `when:` clauses.
+
+## First-time server setup
+
+Run `ansible/scripts/bootstrap.sh` once as root on the fresh instance. It
+installs packages, creates the `app` user, copies the SSH key, enables linger,
+sets the unprivileged port sysctl, and installs rootless Docker:
+
+```bash
+# If your SSH key is already on ubuntu@, copy it to root and run:
+bash ansible/scripts/bootstrap.sh
+
+# Or pass the public key explicitly:
+bash ansible/scripts/bootstrap.sh "ssh-ed25519 AAAA..."
+```
+
+After that, all Ansible runs connect as `app` with no sudo required.
 
 ## Inventories
 

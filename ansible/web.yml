@@ -1,7 +1,6 @@
 ---
 # Target: Ubuntu 24.04 LTS (noble). See ansible/README.md.
 - hosts: web
-  become: yes
   roles:
     - role: common
       tags: common

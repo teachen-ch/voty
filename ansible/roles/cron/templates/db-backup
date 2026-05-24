@@ -10,8 +10,8 @@ import re
 
 DAYS = 14  # remove older backups
 CONTAINER = "postgres"
-BACKUPROOT = "/voty/backup"
-ENV_FILE = "/voty/.env"
+BACKUPROOT = "{{ app_dir }}/backup"
+ENV_FILE = "{{ app_dir }}/.env"
 HOSTNAME = os.uname()[1]
 
 

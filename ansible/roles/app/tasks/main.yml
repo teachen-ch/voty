@@ -1,16 +1,22 @@
 ---
 - name: Pull and Deploy Docker Image
+  environment:
+    DOCKER_HOST: "{{ docker_host }}"
+    XDG_RUNTIME_DIR: "/run/user/{{ ansible_user_uid }}"
   block:
     - name: Clean up old docker files
       command: docker system prune -a -f
+
     - name: Pull and start docker compose
-      #notify: restart voty
       community.docker.docker_compose_v2:
         pull: always
-        project_src: "{{app_dir}}"
+        project_src: "{{ app_dir }}"
         state: present
+        docker_host: "{{ docker_host }}"
 
-    - name: Enable Web Backend Service
-      service: { name: voty, enabled: yes, state: restarted }
-  become: yes
-  become_method: sudo
+    - name: Enable and restart voty service
+      systemd:
+        name: voty
+        scope: user
+        enabled: yes
+        state: restarted

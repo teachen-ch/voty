@@ -2,3 +2,4 @@ server_name: voty.ch
 certificates: Host(`voty.ch`) ||  Host(`www.voty.ch`)
 env_file: ../.env.production
 cache_time: 15m
+civictools_host: tools.voty.ch

@@ -1,14 +1,15 @@
 ---
-# handlers
-- name: restart nginx
-  service:
-    name: nginx
-    state: restarted
-- name: reload systemd
-  command: systemctl daemon-reload
-  become: yes
-  become_method: sudo
+- name: reload user systemd
+  systemd:
+    daemon_reload: yes
+    scope: user
+  environment:
+    XDG_RUNTIME_DIR: "/run/user/{{ ansible_user_uid }}"
+
 - name: restart voty
-  service:
+  systemd:
     name: voty
+    scope: user
     state: restarted
+  environment:
+    XDG_RUNTIME_DIR: "/run/user/{{ ansible_user_uid }}"

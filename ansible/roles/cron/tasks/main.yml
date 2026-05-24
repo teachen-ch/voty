@@ -1,13 +1,27 @@
 ---
-- name: Install cron jobs on server
+- name: Install cron jobs
   block:
-    - name: Create Backup Directory
-      file: { path: "/voty/backup", owner: voty, state: directory }
-    - name: Copy db backup script into cron.daily
+    - name: Create backup directory
+      file:
+        path: "{{ app_dir }}/backup"
+        state: directory
+        mode: "0750"
+
+    - name: Copy db backup script
       template:
-        { src: db-backup, dest: "/etc/cron.daily/db-backup", mode: "0700" }
-    - name: Copy db backup script into cron.hourly
-      template:
-        { src: db-backup, dest: "/etc/cron.hourly/db-latest", mode: "0700" }
-  become: yes
-  become_method: sudo
+        src: db-backup
+        dest: "{{ app_dir }}/db-backup"
+        mode: "0750"
+
+    - name: Schedule nightly db backup (2am)
+      cron:
+        name: voty-db-backup-daily
+        minute: "0"
+        hour: "2"
+        job: "{{ app_dir }}/db-backup"
+
+    - name: Schedule hourly db backup
+      cron:
+        name: voty-db-backup-hourly
+        minute: "0"
+        job: "{{ app_dir }}/db-backup"

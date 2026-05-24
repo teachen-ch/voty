@@ -1,8 +1,8 @@
 [
   {
     "id": "deploy-hook",
-    "execute-command": "/voty/deploy-hook.sh",
-    "command-working-directory": "/voty",
+    "execute-command": "/home/app/voty/deploy-hook.sh",
+    "command-working-directory": "/home/app/voty",
     "response-message": "Fresh as a baby!",
     "trigger-rule": {
       "and": [

@@ -1,2 +1,5 @@
-app_dir: /voty
+app_dir: /home/app/voty
 server_name: voty.ch
+docker_host: "unix:///run/user/{{ ansible_user_uid }}/docker.sock"
+docker_socket: "/run/user/{{ ansible_user_uid }}/docker.sock"
+civictools_host: tools.voty.ch

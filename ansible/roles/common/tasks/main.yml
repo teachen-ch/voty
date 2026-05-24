@@ -1,67 +1,60 @@
 ---
-- name: Install Software and Add User
-  block:
-    - name: Update and upgrade packages
-      apt: { upgrade: "yes", update_cache: "yes" }
-    - name: Set up Docker apt repository
-      include_tasks: docker-repo.yml
-    - name: Install backend modules
-      apt:
-        name:
-          - python3
-          - python3-docker
-          - webhook
-          - docker-ce
-          - docker-ce-cli
-          - containerd.io
-          - docker-buildx-plugin
-          - docker-compose-plugin
-    - name: Add voty user
-      user: { name: voty }
-    - name: Create Backend Root Directory
-      file: { path: "{{app_dir}}", owner: voty, state: directory }
-    - name: Create Nginx Directory
-      file: { path: "{{app_dir}}/nginx", owner: voty, state: directory }
-    - name: Create Maintenance-Site Directory
-      file: { path: "{{app_dir}}/maintenance", owner: voty, state: directory }
-    - name: Copy maintenance.html
-      template:
-        src: maintenance.html
-        dest: "{{app_dir}}/maintenance/maintenance.html"
-    - name: Enable Docker Service
-      service: { name: docker, enabled: yes, state: started }
-  become: yes
-  become_method: sudo
+- name: Create app directories
+  file:
+    path: "{{ item }}"
+    state: directory
+    mode: "0750"
+  loop:
+    - "{{ app_dir }}"
+    - "{{ app_dir }}/nginx"
+    - "{{ app_dir }}/maintenance"
+    - "{{ app_dir }}/traefik/acme"
+    - "{{ app_dir }}/traefik/logs"
+    - "{{ app_dir }}/traefik/rules"
+    - "{{ app_dir }}/traefik/shared"
 
-- name: Configure voty service
+- name: Initialise acme.json (Traefik requires mode 600; never overwrite existing)
+  copy:
+    content: "{}"
+    dest: "{{ app_dir }}/traefik/acme/acme.json"
+    mode: "0600"
+    force: no
+
+- name: Copy maintenance.html
+  template:
+    src: maintenance.html
+    dest: "{{ app_dir }}/maintenance/maintenance.html"
+
+- name: Configure voty user service
   block:
-    - name: Create voty Service Configuration
+    - name: Create user systemd directory
+      file:
+        path: "{{ ansible_env.HOME }}/.config/systemd/user"
+        state: directory
+        mode: "0755"
+    - name: Install voty service unit
       template:
         src: voty.service.j2
-        dest: /etc/systemd/system/voty.service
-        mode: "0755"
-      notify: reload systemd
-    - name: Flush Handlers
+        dest: "{{ ansible_env.HOME }}/.config/systemd/user/voty.service"
+        mode: "0644"
+      notify: reload user systemd
+    - name: Flush handlers
       meta: flush_handlers
-  become: yes
-  become_method: sudo
 
-- name: Deploy config files for Web Frontend
+- name: Deploy config files
   block:
-    - name: Copy docker-compose file for Backend
+    - name: Copy docker-compose file
       template:
         src: ../docker-compose.yml
-        dest: "{{app_dir}}/docker-compose.yml"
+        dest: "{{ app_dir }}/docker-compose.yml"
         mode: "0600"
     - name: Copy nginx config
       template:
         src: ../nginx/default.conf
-        dest: "{{app_dir}}/nginx/default.conf"
+        dest: "{{ app_dir }}/nginx/default.conf"
         mode: "0600"
-    - name: Create .env file for Backend
+    - name: Create .env file
       template:
         src: "{{ env_file }}"
-        dest: "{{app_dir}}/.env"
+        dest: "{{ app_dir }}/.env"
         mode: "0600"
-  become: yes
-  become_user: voty

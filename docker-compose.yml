@@ -22,7 +22,7 @@ services:
       # - "--certificatesResolvers.votyresolver.acme.caServer=https://acme-staging-v02.api.letsencrypt.org/directory"
     volumes:
       - ./traefik/rules:/rules
-      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - {{ docker_socket }}:/var/run/docker.sock:ro
       - ./traefik/acme:/etc/traefik/acme
       - ./traefik/logs:/var/log/traefik
       - ./traefik/shared:/shared
@@ -39,6 +39,7 @@ services:
       - traefik
     volumes:
       - ./nginx:/etc/nginx/conf.d
+      - ./maintenance:/voty/maintenance
     command: ["nginx", "-g", "daemon off;"]
     labels:
       - traefik.enable=true
@@ -84,7 +85,7 @@ services:
       - "8090"
     labels:
       - traefik.enable=true
-      - traefik.http.routers.civictools.rule=Host(`tools.voty.ch`)
+      - traefik.http.routers.civictools.rule=Host(`{{ civictools_host }}`)
       - traefik.http.routers.civictools.entrypoints=websecure
       - traefik.http.routers.civictools.tls=true
       - traefik.http.routers.civictools.tls.certresolver=votyresolver

@@ -1,3 +1,3 @@
 [web]
-voty.ch			ansible_user=root
+voty.ch			ansible_user=app
 

@@ -1,12 +1,11 @@
 ---
 - name: Pull and redeploy civictools container
-  block:
-    - name: Pull latest civictools image and recreate service
-      community.docker.docker_compose_v2:
-        project_src: "{{ app_dir }}"
-        services: [civictools]
-        pull: always
-        state: present
-        recreate: always
-  become: yes
-  become_method: sudo
+  community.docker.docker_compose_v2:
+    project_src: "{{ app_dir }}"
+    services: [civictools]
+    pull: always
+    state: present
+    recreate: always
+    docker_host: "{{ docker_host }}"
+  environment:
+    XDG_RUNTIME_DIR: "/run/user/{{ ansible_user_uid }}"
