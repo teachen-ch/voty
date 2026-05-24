@@ -14,6 +14,12 @@ export function Login() {
   const [oidcEnabled, setOidcEnabled] = useState(false);
   const [, navigate] = useLocation();
 
+  function nextTarget(): string {
+    const next = new URLSearchParams(window.location.search).get("next");
+    if (next && next.startsWith("/")) return next;
+    return "/dashboard";
+  }
+
   useEffect(() => {
     pb.collection("users")
       .listAuthMethods()
@@ -32,7 +38,7 @@ export function Login() {
         .collection("users")
         .authWithPassword(email, password);
       teacher.value = auth.record as RecordModel;
-      navigate("/dashboard");
+      navigate(nextTarget());
     } catch (err: unknown) {
       setError(err instanceof Error ? err.message : "Login failed");
     } finally {
@@ -48,7 +54,7 @@ export function Login() {
         .collection("users")
         .authWithOAuth2({ provider: "oidc" });
       teacher.value = auth.record as RecordModel;
-      navigate("/dashboard");
+      navigate(nextTarget());
     } catch (err: unknown) {
       setError(err instanceof Error ? err.message : "Login failed");
     } finally {

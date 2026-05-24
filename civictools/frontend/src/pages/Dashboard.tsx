@@ -17,7 +17,7 @@ export function Dashboard() {
     if (!id) return;
     pb.collection("rooms")
       .getList(1, 50, {
-        filter: `teacher = "${id}"`,
+        filter: `teacher = "${id}" && is_template != true`,
         sort: "-created",
       })
       .then((res) => setRooms(res.items))

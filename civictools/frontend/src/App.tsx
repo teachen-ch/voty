@@ -5,6 +5,8 @@ import { Dashboard } from "./pages/Dashboard";
 import { Room } from "./pages/Room";
 import { Join } from "./pages/Join";
 import { StudentRoom } from "./pages/StudentRoom";
+import { CopyTemplate } from "./pages/CopyTemplate";
+import { Templates } from "./pages/Templates";
 
 export function App() {
   return (
@@ -24,6 +26,10 @@ export function App() {
       </Route>
       <Route path="/join/:id">
         {(params: { id: string }) => <Join roomId={params.id} />}
+      </Route>
+      <Route path="/templates" component={Templates} />
+      <Route path="/copy/:slug">
+        {(params: { slug: string }) => <CopyTemplate slug={params.slug} />}
       </Route>
       <Route path="/s/:id">
         {(params: { id: string }) =>

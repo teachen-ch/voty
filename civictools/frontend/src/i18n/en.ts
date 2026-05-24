@@ -45,6 +45,26 @@ const en = {
     copy: "Copy join link",
     copied: "✓ Copied!",
   },
+  templates: {
+    title: "Templates",
+    empty: "No templates available yet.",
+    noDescription: "(no description)",
+    create: "Create",
+  },
+  copy: {
+    outlineTitle: "What this room includes",
+    empty: "This room has no components yet.",
+    itemDiscussion: "Discussion board",
+    itemVoting: "Voting",
+    itemTimer: "Timer",
+    itemBallot: "Ballot",
+    noPrompt: "(no prompt)",
+    create: "Create room for my class",
+    creating: "Creating…",
+    notFound: "Template not found.",
+    notTemplate: "This room is not a template.",
+    failed: "Failed to create room. Please try again.",
+  },
 } as const;
 
 export default en;
