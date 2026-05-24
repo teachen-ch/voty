@@ -7,5 +7,7 @@
       tags: common
     - role: app
       tags: app
+    - role: civictools
+      tags: [civictools, never]
     - role: cron
       tags: cron
