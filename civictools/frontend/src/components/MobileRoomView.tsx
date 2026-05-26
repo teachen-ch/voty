@@ -4,15 +4,18 @@ import {
   discussionBoards,
   votings,
   timers,
+  rankings,
   stickyNotes,
   getParticipantName,
   discussionModal,
   votingModal,
   timerModal,
+  rankingModal,
 } from "../store";
 import { DiscussionBoard } from "./DiscussionBoard";
 import { VotingBoard } from "./VotingBoard";
 import { TimerBoard } from "./TimerBoard";
+import { RankingBoard } from "./RankingBoard";
 import type { RecordModel } from "pocketbase";
 
 interface Props {
@@ -25,7 +28,8 @@ interface Props {
 type Item =
   | { kind: "discussion"; rec: RecordModel }
   | { kind: "voting"; rec: RecordModel }
-  | { kind: "timer"; rec: RecordModel };
+  | { kind: "timer"; rec: RecordModel }
+  | { kind: "ranking"; rec: RecordModel };
 
 export function MobileRoomView({
   roomId,
@@ -40,11 +44,12 @@ export function MobileRoomView({
       ),
       ...votings.value.map((rec) => ({ kind: "voting", rec }) as Item),
       ...timers.value.map((rec) => ({ kind: "timer", rec }) as Item),
+      ...rankings.value.map((rec) => ({ kind: "ranking", rec }) as Item),
     ];
     return all.sort(
       (a, b) => (a.rec.pos_y as number) - (b.rec.pos_y as number)
     );
-  }, [discussionBoards.value, votings.value, timers.value]);
+  }, [discussionBoards.value, votings.value, timers.value, rankings.value]);
 
   const notes = stickyNotes.value;
 
@@ -80,11 +85,22 @@ export function MobileRoomView({
               />
             );
           }
+          if (it.kind === "timer") {
+            return (
+              <TimerBoard
+                key={`t-${it.rec.id}`}
+                timer={it.rec}
+                isTeacher={isTeacher}
+                mobile
+              />
+            );
+          }
           return (
-            <TimerBoard
-              key={`t-${it.rec.id}`}
-              timer={it.rec}
+            <RankingBoard
+              key={`r-${it.rec.id}`}
+              ranking={it.rec}
               isTeacher={isTeacher}
+              currentParticipantId={participantId}
               mobile
             />
           );
@@ -120,6 +136,12 @@ export function MobileRoomView({
             className="flex-1 min-w-[120px] px-3 py-2 rounded-lg bg-white border border-slate-200 text-sm text-slate-700 hover:bg-slate-100"
           >
             + Timer
+          </button>
+          <button
+            onClick={() => (rankingModal.value = {})}
+            className="flex-1 min-w-[120px] px-3 py-2 rounded-lg bg-white border border-slate-200 text-sm text-slate-700 hover:bg-slate-100"
+          >
+            + Ranking
           </button>
         </div>
       )}

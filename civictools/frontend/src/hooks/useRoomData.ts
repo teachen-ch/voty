@@ -15,6 +15,10 @@ import {
   applyParticipantVoteEvent,
   timers,
   applyTimerEvent,
+  rankings,
+  rankingResponses,
+  applyRankingEvent,
+  applyRankingResponseEvent,
   cacheParticipants,
 } from "../store";
 
@@ -99,6 +103,32 @@ export function useRoomData(roomId: string) {
       applyTimerEvent(e.action, e.record);
     });
 
+    pb.collection("rankings")
+      .getList(1, 200, { filter: `room = "${roomId}"` })
+      .then(async (res) => {
+        rankings.value = res.items;
+        const ids = res.items.map((r) => r.id);
+        if (ids.length === 0) {
+          rankingResponses.value = [];
+          return;
+        }
+        const respRes = await pb
+          .collection("ranking_responses")
+          .getList(1, 5000, {
+            filter: ids.map((id) => `ranking = "${id}"`).join(" || "),
+            requestKey: `ranking_responses_${roomId}`,
+          });
+        rankingResponses.value = respRes.items;
+      });
+
+    pb.collection("rankings").subscribe("*", (e) => {
+      if (e.record.room && e.record.room !== roomId) return;
+      applyRankingEvent(e.action, e.record);
+    });
+    pb.collection("ranking_responses").subscribe("*", (e) => {
+      applyRankingResponseEvent(e.action, e.record);
+    });
+
     pb.collection("participants")
       .getList(1, 200, { filter: `room = "${roomId}"` })
       .then((res) => cacheParticipants(res.items));
@@ -111,6 +141,8 @@ export function useRoomData(roomId: string) {
       pb.collection("votings").unsubscribe("*");
       pb.collection("participant_votes").unsubscribe("*");
       pb.collection("timers").unsubscribe("*");
+      pb.collection("rankings").unsubscribe("*");
+      pb.collection("ranking_responses").unsubscribe("*");
     };
   }, [roomId]);
 }

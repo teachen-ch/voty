@@ -7,12 +7,14 @@ import {
   discussionBoards,
   votings,
   timers,
+  rankings,
 } from "../store";
 import { remoteCursors } from "../hooks/useCursors";
 import { StickyNote } from "./StickyNote";
 import { DiscussionBoard } from "./DiscussionBoard";
 import { VotingBoard } from "./VotingBoard";
 import { TimerBoard } from "./TimerBoard";
+import { RankingBoard } from "./RankingBoard";
 
 const NOTE_COLORS = [
   "#fef08a",
@@ -168,6 +170,14 @@ export function InfiniteCanvas({
         ))}
         {timers.value.map((timer) => (
           <TimerBoard key={timer.id} timer={timer} isTeacher={isTeacher} />
+        ))}
+        {rankings.value.map((ranking) => (
+          <RankingBoard
+            key={ranking.id}
+            ranking={ranking}
+            isTeacher={isTeacher}
+            currentParticipantId={participantId}
+          />
         ))}
       </div>
 

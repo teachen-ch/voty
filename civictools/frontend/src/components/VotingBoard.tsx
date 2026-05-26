@@ -170,9 +170,13 @@ export function VotingBoard({
           ) : (
             <span className="text-slate-400 italic">(no question)</span>
           )}
-          {closed && (
-            <span className="inline-block text-[10px] uppercase tracking-wide font-semibold text-rose-600 bg-rose-50 border border-rose-200 rounded px-1.5 py-0.5 align-middle">
+          {closed ? (
+            <span className="inline-block text-[10px] uppercase tracking-wide font-semibold text-slate-400 bg-slate-100 border border-slate-200 rounded px-1.5 py-0.5 align-middle">
               Closed
+            </span>
+          ) : (
+            <span className="inline-block text-[10px] uppercase tracking-wide font-semibold text-emerald-700 bg-emerald-50 border border-emerald-200 rounded px-1.5 py-0.5 align-middle">
+              Open
             </span>
           )}
         </div>
@@ -250,40 +254,46 @@ export function VotingBoard({
           onPointerDown={(e) => e.stopPropagation()}
           className="p-3 flex flex-col gap-2"
         >
-          {options.map((label, i) => {
-            const isMine = (myVote?.option as number | undefined) === i;
-            const count = counts[i];
-            const pct = total > 0 ? Math.round((count / total) * 100) : 0;
-            return (
-              <button
-                key={i}
-                onClick={() => castVote(i)}
-                disabled={closed && !isTeacher}
-                className={
-                  "relative w-full text-left px-3 py-2 rounded-lg border transition-colors overflow-hidden " +
-                  (isMine
-                    ? "border-blue-400 bg-blue-50 text-blue-900"
-                    : "border-slate-200 bg-white hover:bg-slate-50 text-slate-800") +
-                  (closed ? " opacity-90 cursor-default" : " cursor-pointer")
-                }
-              >
-                {showResults && (
-                  <div
-                    className="absolute inset-y-0 left-0 bg-blue-100/60"
-                    style={{ width: `${pct}%` }}
-                  />
-                )}
-                <div className="relative flex items-center justify-between gap-2 text-sm font-medium">
-                  <span className="truncate">{label}</span>
+          <div
+            className={
+              closed && !isTeacher ? "opacity-40 pointer-events-none" : ""
+            }
+          >
+            {options.map((label, i) => {
+              const isMine = (myVote?.option as number | undefined) === i;
+              const count = counts[i];
+              const pct = total > 0 ? Math.round((count / total) * 100) : 0;
+              return (
+                <button
+                  key={i}
+                  onClick={() => castVote(i)}
+                  disabled={closed && !isTeacher}
+                  className={
+                    "relative w-full text-left px-3 py-2 rounded-lg border transition-colors overflow-hidden mb-2 " +
+                    (isMine
+                      ? "border-blue-400 bg-blue-50 text-blue-900"
+                      : "border-slate-200 bg-white hover:bg-slate-50 text-slate-800") +
+                    (closed ? " cursor-default" : " cursor-pointer")
+                  }
+                >
                   {showResults && (
-                    <span className="tabular-nums text-xs text-slate-600">
-                      {count} · {pct}%
-                    </span>
+                    <div
+                      className="absolute inset-y-0 left-0 bg-blue-100/60"
+                      style={{ width: `${pct}%` }}
+                    />
                   )}
-                </div>
-              </button>
-            );
-          })}
+                  <div className="relative flex items-center justify-between gap-2 text-sm font-medium">
+                    <span className="truncate">{label}</span>
+                    {showResults && (
+                      <span className="tabular-nums text-xs text-slate-600">
+                        {count} · {pct}%
+                      </span>
+                    )}
+                  </div>
+                </button>
+              );
+            })}
+          </div>
 
           <div className="flex items-center justify-between mt-1 text-[11px] text-slate-500">
             <span>
@@ -306,7 +316,7 @@ export function VotingBoard({
                       : "text-rose-600 hover:text-rose-800")
                   }
                 >
-                  {closed ? "Reopen" : "Close voting"}
+                  {closed ? "Start voting" : "Close voting"}
                 </button>
               </div>
             )}

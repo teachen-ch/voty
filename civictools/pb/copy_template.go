@@ -65,8 +65,10 @@ func registerCopyTemplate(app *pocketbase.PocketBase) {
 					[]string{"prompt", "pos_x", "pos_y", "options"}); err != nil {
 					return err
 				}
-				if err := copyChildren(txApp, "votings", templateId, newRoom.Id,
-					[]string{"prompt", "options", "config", "pos_x", "pos_y"}); err != nil {
+				if err := copyVotingsOrRankings(txApp, "votings", templateId, newRoom.Id); err != nil {
+					return err
+				}
+				if err := copyVotingsOrRankings(txApp, "rankings", templateId, newRoom.Id); err != nil {
 					return err
 				}
 				if err := copyChildren(txApp, "timers", templateId, newRoom.Id,
@@ -105,6 +107,36 @@ func copyChildren(app core.App, collection, fromRoom, toRoom string, fields []st
 		for _, f := range fields {
 			dst.Set(f, src.Get(f))
 		}
+		if err := app.Save(dst); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+// copyVotingsOrRankings copies votings or rankings but always forces closed:true
+// so copied rooms start in a neutral state regardless of the template's live state.
+func copyVotingsOrRankings(app core.App, collection, fromRoom, toRoom string) error {
+	col, err := app.FindCollectionByNameOrId(collection)
+	if err != nil {
+		// collection may not exist yet (e.g. rankings on older DB) — skip silently
+		return nil
+	}
+	records, err := app.FindRecordsByFilter(col.Id, "room = {:room}", "", 0, 0,
+		map[string]any{"room": fromRoom})
+	if err != nil {
+		return err
+	}
+	closedConfig := map[string]any{"closed": true, "show_results": false}
+	for _, src := range records {
+		dst := core.NewRecord(col)
+		dst.Set("room", toRoom)
+		dst.Set("prompt", src.GetString("prompt"))
+		dst.Set("question", src.GetString("question"))
+		dst.Set("options", src.Get("options"))
+		dst.Set("config", closedConfig)
+		dst.Set("pos_x", src.Get("pos_x"))
+		dst.Set("pos_y", src.Get("pos_y"))
 		if err := app.Save(dst); err != nil {
 			return err
 		}

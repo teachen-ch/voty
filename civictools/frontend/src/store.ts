@@ -103,6 +103,7 @@ export const activeTool = signal<Tool>("select");
 export const discussionModal = signal<{ board?: RecordModel } | null>(null);
 export const votingModal = signal<{ voting?: RecordModel } | null>(null);
 export const timerModal = signal<{ timer?: RecordModel } | null>(null);
+export const rankingModal = signal<{ ranking?: RecordModel } | null>(null);
 
 export const votings = signal<RecordModel[]>([]);
 export const participantVotes = signal<RecordModel[]>([]);
@@ -134,6 +135,30 @@ export function applyTimerEvent(action: string, record: RecordModel) {
     timers.value = upsertBy(timers.value, record);
   } else if (action === "delete") {
     timers.value = timers.value.filter((t) => t.id !== record.id);
+  }
+}
+
+export const rankings = signal<RecordModel[]>([]);
+export const rankingResponses = signal<RecordModel[]>([]);
+
+export function applyRankingEvent(action: string, record: RecordModel) {
+  if (action === "create" || action === "update") {
+    rankings.value = upsertBy(rankings.value, record);
+  } else if (action === "delete") {
+    rankings.value = rankings.value.filter((r) => r.id !== record.id);
+    rankingResponses.value = rankingResponses.value.filter(
+      (r) => r.ranking !== record.id
+    );
+  }
+}
+
+export function applyRankingResponseEvent(action: string, record: RecordModel) {
+  if (action === "create" || action === "update") {
+    rankingResponses.value = upsertBy(rankingResponses.value, record);
+  } else if (action === "delete") {
+    rankingResponses.value = rankingResponses.value.filter(
+      (r) => r.id !== record.id
+    );
   }
 }
 

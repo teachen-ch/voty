@@ -29,6 +29,7 @@ function Breadcrumb() {
 type Outline = {
   discussions: RecordModel[];
   votings: RecordModel[];
+  rankings: RecordModel[];
   timers: RecordModel[];
   ballots: RecordModel[];
 };
@@ -57,16 +58,22 @@ export function CopyTemplate({ slug }: { slug: string }) {
           .collection("rooms")
           .getFirstListItem(`slug = "${slug}" && is_template = true`);
         const filter = `room = "${room.id}"`;
-        const [discussions, votings, timers, ballots] = await Promise.all([
-          pb.collection("discussion_boards").getFullList({ filter }),
-          pb.collection("votings").getFullList({ filter }),
-          pb.collection("timers").getFullList({ filter }),
-          pb.collection("ballots").getFullList({ filter }),
-        ]);
+        const [discussions, votings, rankings, timers, ballots] =
+          await Promise.all([
+            pb.collection("discussion_boards").getFullList({ filter }),
+            pb
+              .collection("votings")
+              .getFullList({ filter, requestKey: `votings_${room.id}` }),
+            pb
+              .collection("rankings")
+              .getFullList({ filter, requestKey: `rankings_${room.id}` }),
+            pb.collection("timers").getFullList({ filter }),
+            pb.collection("ballots").getFullList({ filter }),
+          ]);
         if (cancelled) return;
         setTemplate(room);
         setRoomName(room.name as string);
-        setOutline({ discussions, votings, timers, ballots });
+        setOutline({ discussions, votings, rankings, timers, ballots });
       } catch {
         if (!cancelled) setError(t("copy.notFound"));
       }
@@ -124,6 +131,7 @@ export function CopyTemplate({ slug }: { slug: string }) {
   const empty =
     outline.discussions.length === 0 &&
     outline.votings.length === 0 &&
+    outline.rankings.length === 0 &&
     outline.timers.length === 0 &&
     outline.ballots.length === 0;
 
@@ -158,6 +166,12 @@ export function CopyTemplate({ slug }: { slug: string }) {
             <li key={v.id} className="card">
               <strong>{t("copy.itemVoting")}:</strong>{" "}
               {v.prompt || <em>{t("copy.noPrompt")}</em>}
+            </li>
+          ))}
+          {outline.rankings.map((r) => (
+            <li key={r.id} className="card">
+              <strong>{t("copy.itemRanking")}:</strong>{" "}
+              {r.question || <em>{t("copy.noPrompt")}</em>}
             </li>
           ))}
           {outline.timers.map((tm) => (

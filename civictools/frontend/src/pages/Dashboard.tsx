@@ -174,7 +174,7 @@ export function Dashboard() {
             return (
               <div key={room.id} className="card flex items-center gap-3">
                 <span
-                  className={`shrink-0 inline-flex items-center gap-1.5 text-xs font-medium rounded-full px-2.5 py-1 ${
+                  className={`w-14 shrink-0 inline-flex justify-center items-center gap-1.5 text-xs font-medium rounded-full px-2.5 py-1 ${
                     live
                       ? "bg-emerald-50 text-emerald-700 border border-emerald-200"
                       : "bg-slate-100 text-slate-500"

@@ -1,28 +1,28 @@
 import { useEffect, useState } from "preact/hooks";
 import { pb } from "../pb";
-import { canvasTransform, votingModal } from "../store";
+import { canvasTransform, rankingModal } from "../store";
 
-const DEFAULT_OPTIONS = ["Yes", "No"];
-const MAX_OPTIONS = 4;
+const DEFAULT_OPTIONS = ["Option A", "Option B", "Option C"];
+const MAX_OPTIONS = 8;
 const BOARD_WIDTH = 460;
-const BOARD_HEIGHT_ESTIMATE = 260;
+const BOARD_HEIGHT_ESTIMATE = 320;
 
 interface Props {
   roomId: string;
 }
 
-export function VotingPromptModal({ roomId }: Props) {
-  const state = votingModal.value;
-  const editing = state?.voting;
+export function RankingPromptModal({ roomId }: Props) {
+  const state = rankingModal.value;
+  const editing = state?.ranking;
 
-  const [prompt, setPrompt] = useState("");
+  const [question, setQuestion] = useState("");
   const [options, setOptions] = useState<string[]>([...DEFAULT_OPTIONS]);
   const [submitting, setSubmitting] = useState(false);
 
   useEffect(() => {
     if (!state) return;
     if (editing) {
-      setPrompt((editing.prompt as string) ?? "");
+      setQuestion((editing.question as string) ?? "");
       const opts = editing.options;
       setOptions(
         Array.isArray(opts) && opts.length > 0
@@ -30,14 +30,14 @@ export function VotingPromptModal({ roomId }: Props) {
           : [...DEFAULT_OPTIONS]
       );
     } else {
-      setPrompt("");
+      setQuestion("");
       setOptions([...DEFAULT_OPTIONS]);
     }
     setSubmitting(false);
   }, [state]);
 
   function close() {
-    votingModal.value = null;
+    rankingModal.value = null;
   }
 
   function updateOption(i: number, v: string) {
@@ -60,8 +60,8 @@ export function VotingPromptModal({ roomId }: Props) {
 
     try {
       if (editing) {
-        await pb.collection("votings").update(editing.id, {
-          prompt: prompt.trim(),
+        await pb.collection("rankings").update(editing.id, {
+          question: question.trim(),
           options: cleanOptions,
         });
       } else {
@@ -69,9 +69,9 @@ export function VotingPromptModal({ roomId }: Props) {
         const wx = (window.innerWidth / 2 - x) / scale - BOARD_WIDTH / 2;
         const wy =
           (window.innerHeight / 2 - y) / scale - BOARD_HEIGHT_ESTIMATE / 2;
-        await pb.collection("votings").create({
+        await pb.collection("rankings").create({
           room: roomId,
-          prompt: prompt.trim(),
+          question: question.trim(),
           options: cleanOptions,
           config: { closed: true, show_results: false },
           pos_x: wx,
@@ -99,7 +99,7 @@ export function VotingPromptModal({ roomId }: Props) {
       >
         <div className="flex items-center justify-between">
           <h2 className="text-lg font-semibold">
-            {editing ? "Edit voting" : "New voting"}
+            {editing ? "Edit ranking" : "New ranking"}
           </h2>
           <button
             type="button"
@@ -116,10 +116,10 @@ export function VotingPromptModal({ roomId }: Props) {
           </span>
           <textarea
             autoFocus
-            value={prompt}
-            onInput={(e) => setPrompt(e.currentTarget.value)}
-            placeholder="What should the class vote on?"
-            className="w-full border border-slate-300 rounded p-2 text-sm resize-y min-h-24 focus:outline-none focus:ring-2 focus:ring-blue-200"
+            value={question}
+            onInput={(e) => setQuestion(e.currentTarget.value)}
+            placeholder="What should students rank?"
+            className="w-full border border-slate-300 rounded p-2 text-sm resize-y min-h-20 focus:outline-none focus:ring-2 focus:ring-blue-200"
           />
         </label>
 
@@ -129,6 +129,9 @@ export function VotingPromptModal({ roomId }: Props) {
           </span>
           {options.map((opt, i) => (
             <div key={i} className="flex items-center gap-2">
+              <span className="text-xs text-slate-400 w-5 text-right shrink-0">
+                {i + 1}.
+              </span>
               <input
                 value={opt}
                 onInput={(e) => updateOption(i, e.currentTarget.value)}
