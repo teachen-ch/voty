@@ -18,8 +18,8 @@ export function Dashboard() {
     if (!id) return;
     pb.collection("rooms")
       .getList(1, 50, {
-        filter: `teacher = "${id}" && is_template != true`,
-        sort: "-created",
+        filter: `teacher = "${id}"`,
+        sort: "is_template,name",
       })
       .then((res) => setRooms(res.items))
       .catch((err) => console.error("Failed to load rooms:", err));
@@ -75,7 +75,12 @@ export function Dashboard() {
         {rooms.map((room) => (
           <div key={room.id} className="card flex items-center gap-3">
             <span className="flex-1 font-medium">{room.name}</span>
-            <ShareLink roomId={room.id} />
+            {room.is_template && (
+              <span className="text-xs bg-amber-100 text-amber-700 border border-amber-200 rounded px-1.5 py-0.5">
+                {t("dashboard.templateBadge")}
+              </span>
+            )}
+            {!room.is_template && <ShareLink roomId={room.id} />}
             <button
               className="btn"
               onClick={() => navigate(`/room/${room.id}`)}

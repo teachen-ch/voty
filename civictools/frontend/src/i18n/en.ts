@@ -27,6 +27,7 @@ const en = {
     empty: "No rooms yet. Create one above.",
     open: "Open",
     chooseTemplate: "Choose from templates…",
+    templateBadge: "Template",
   },
   room: {
     back: "← Rooms",
