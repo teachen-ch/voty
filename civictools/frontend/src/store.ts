@@ -43,6 +43,15 @@ export function clearStudentSession() {
 export const currentRoom = signal<RecordModel | null>(null);
 export const stickyNotes = signal<RecordModel[]>([]);
 
+export interface PresenceEntry {
+  participantId: string;
+  nickname: string;
+}
+
+// Live roster of participants currently connected to the room (from the cursor
+// WebSocket hub). Reflects real-time joins and disconnects.
+export const presence = signal<PresenceEntry[]>([]);
+
 export const participantCache = signal<Map<string, RecordModel>>(new Map());
 
 export function cacheParticipants(list: RecordModel[]) {

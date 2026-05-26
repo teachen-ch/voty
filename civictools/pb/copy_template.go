@@ -1,6 +1,8 @@
 package main
 
 import (
+	"strings"
+
 	"github.com/pocketbase/pocketbase"
 	"github.com/pocketbase/pocketbase/apis"
 	"github.com/pocketbase/pocketbase/core"
@@ -19,6 +21,12 @@ func registerCopyTemplate(app *pocketbase.PocketBase) {
 				return router.NewBadRequestError("missing slug", nil)
 			}
 
+			body := struct {
+				Name string `json:"name"`
+			}{}
+			_ = re.BindBody(&body)
+			roomName := strings.TrimSpace(body.Name)
+
 			tpl, err := re.App.FindFirstRecordByFilter(
 				"rooms",
 				"slug = {:slug} && is_template = true",
@@ -36,8 +44,13 @@ func registerCopyTemplate(app *pocketbase.PocketBase) {
 					return err
 				}
 
+				name := roomName
+				if name == "" {
+					name = tpl.GetString("name")
+				}
+
 				newRoom := core.NewRecord(roomsCol)
-				newRoom.Set("name", tpl.GetString("name"))
+				newRoom.Set("name", name)
 				newRoom.Set("teacher", re.Auth.Id)
 				newRoom.Set("sticky_notes_enabled", tpl.GetBool("sticky_notes_enabled"))
 				newRoom.Set("ballots_enabled", tpl.GetBool("ballots_enabled"))

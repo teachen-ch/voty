@@ -47,6 +47,7 @@ export function CopyTemplate({ slug }: { slug: string }) {
   const [outline, setOutline] = useState<Outline | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [copying, setCopying] = useState(false);
+  const [roomName, setRoomName] = useState("");
 
   useEffect(() => {
     let cancelled = false;
@@ -64,6 +65,7 @@ export function CopyTemplate({ slug }: { slug: string }) {
         ]);
         if (cancelled) return;
         setTemplate(room);
+        setRoomName(room.name as string);
         setOutline({ discussions, votings, timers, ballots });
       } catch {
         if (!cancelled) setError(t("copy.notFound"));
@@ -84,7 +86,11 @@ export function CopyTemplate({ slug }: { slug: string }) {
     try {
       const res = await fetch(`/api/civictools/copy/${slug}`, {
         method: "POST",
-        headers: { Authorization: pb.authStore.token },
+        headers: {
+          Authorization: pb.authStore.token,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ name: roomName.trim() }),
       });
       if (!res.ok) throw new Error(String(res.status));
       const data = (await res.json()) as { id: string };
@@ -169,7 +175,24 @@ export function CopyTemplate({ slug }: { slug: string }) {
         </ul>
       )}
 
-      <button className="btn w-full" onClick={handleCopy} disabled={copying}>
+      <label className="block mb-4">
+        <span className="text-sm font-medium text-slate-700">
+          {t("copy.nameLabel")} <span className="text-red-500">*</span>
+        </span>
+        <input
+          required
+          value={roomName}
+          onInput={(e) => setRoomName(e.currentTarget.value)}
+          placeholder={t("copy.namePlaceholder")}
+          className="w-full mt-1"
+        />
+      </label>
+
+      <button
+        className="btn w-full"
+        onClick={handleCopy}
+        disabled={copying || !roomName.trim()}
+      >
         {copying ? t("copy.creating") : t("copy.create")}
       </button>
     </div>

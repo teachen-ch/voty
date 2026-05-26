@@ -1,4 +1,4 @@
-import { participantCache } from "../store";
+import { presence } from "../store";
 import { VotyLogo } from "./images/voty-logo";
 import { ShareLink } from "./ShareLink";
 
@@ -9,7 +9,7 @@ interface Props {
 }
 
 export function RoomHeader({ roomName, roomId, isTeacher = true }: Props) {
-  const count = participantCache.value.size;
+  const count = presence.value.length;
 
   return (
     <div className="fixed top-3 inset-x-3 sm:left-auto sm:right-4 sm:top-4 sm:inset-x-auto flex items-center z-50">
