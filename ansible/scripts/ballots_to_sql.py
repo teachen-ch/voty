@@ -20,16 +20,16 @@ def load_yaml(filename):
         data = yaml.safe_load(file)
 
     # SQL insert statement template
-    sql_template = 'INSERT INTO public.ballots (id, title, description, body, start, "end", scope, canton, school_id, team_id, creator_id, created_at, updated_at, original_locale, titlede, titlefr, titleit, descriptionde, descriptionfr, descriptionit, bodyde, bodyfr, bodyit) VALUES'
+    sql_statement = 'INSERT INTO public.ballots (id, title, description, body, start, "end", scope, canton, school_id, team_id, creator_id, created_at, updated_at, original_locale, titlede, titlefr, titleit, descriptionde, descriptionfr, descriptionit, bodyde, bodyfr, bodyit) VALUES'
 
     # Process each ballot entry
     for idx, ballot in enumerate(data["ballot"]):
         values = f"({pg_literal(uuid.uuid4())}, {pg_literal('')}, {pg_literal('')}, {pg_literal('')}, {pg_literal(ballot['start'])}, {pg_literal(ballot['end'])}, {pg_literal(ballot['scope'])}, NULL, NULL, NULL, NULL, {pg_literal('2024-02-05 07:45:29.262')}, {pg_literal('2024-02-05 07:45:29.258')}, {pg_literal('de')}, {pg_literal(ballot['titlede'])}, {pg_literal('')}, {pg_literal('')}, {pg_literal(ballot['descriptionde'])}, {pg_literal('')}, {pg_literal('')}, {pg_literal(ballot['bodyde'])}, {pg_literal('')}, {pg_literal('')})"
 
-        if idx == 0:
-            sql_statement = f"{sql_template} {values}"
-        else:
-            sql_statement += f", {values}"  # type: ignore
+        sql_statement += f" {values},"
+
+    sql_statement = sql_statement.rstrip(",")  # Remove the trailing comma
+    sql_statement += ";"
 
     output = filename.replace(".yml", ".sql")
     with open(output, "w") as file:
