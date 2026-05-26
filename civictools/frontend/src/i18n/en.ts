@@ -54,6 +54,7 @@ const en = {
   },
   shareLink: {
     copy: "Copy join link",
+    copyMobile: "Join Link",
     copied: "✓ Copied!",
   },
   templates: {

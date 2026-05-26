@@ -18,7 +18,14 @@ export function ShareLink({ roomId }: Props) {
 
   return (
     <button className="btn secondary" onClick={copy} title={url}>
-      {copied ? t("shareLink.copied") : t("shareLink.copy")}
+      {copied ? (
+        t("shareLink.copied")
+      ) : (
+        <>
+          <span className="hidden sm:inline">{t("shareLink.copy")}</span>
+          <span className="sm:hidden">{t("shareLink.copyMobile")}</span>
+        </>
+      )}
     </button>
   );
 }
