@@ -13,13 +13,13 @@ function Breadcrumb() {
     <nav className="text-sm text-slate-500 mb-4 flex gap-2">
       {isTeacher.value && (
         <>
-          <Link href="/dashboard" className="text-blue-600 hover:underline">
+          <Link href="/dashboard" className="text-primary-600 hover:underline">
             {t("breadcrumb.home")}
           </Link>
           <span>/</span>
         </>
       )}
-      <Link href="/templates" className="text-blue-600 hover:underline">
+      <Link href="/templates" className="text-primary-600 hover:underline">
         {t("breadcrumb.templates")}
       </Link>
     </nav>

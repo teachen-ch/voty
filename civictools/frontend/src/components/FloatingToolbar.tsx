@@ -154,7 +154,7 @@ export function FloatingToolbar({ isTeacher }: Props) {
               className={[
                 "size-10 rounded-xl flex items-center justify-center transition-colors",
                 isActive
-                  ? "bg-blue-100! text-blue-700"
+                  ? "bg-primary-100! text-primary-700"
                   : "bg-white text-black hover:bg-slate-100",
               ].join(" ")}
             >

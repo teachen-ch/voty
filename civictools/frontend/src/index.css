@@ -1,11 +1,28 @@
 @import "tailwindcss";
 
+@theme {
+  --color-primary-50: color-mix(in oklab, var(--primary) 8%, white);
+  --color-primary-100: color-mix(in oklab, var(--primary) 18%, white);
+  --color-primary-200: color-mix(in oklab, var(--primary) 35%, white);
+  --color-primary-400: color-mix(in oklab, var(--primary) 65%, white);
+  --color-primary-600: var(--primary);
+  --color-primary-700: color-mix(in oklab, var(--primary) 85%, black);
+  --color-primary-800: color-mix(in oklab, var(--primary) 70%, black);
+  --color-primary-900: color-mix(in oklab, var(--primary) 55%, black);
+  --color-secondary: var(--secondary);
+}
+
+:root {
+  --primary: #386bb5;
+  --secondary: #8bb9c0;
+}
+
 @layer base {
   body {
     @apply bg-slate-50 text-slate-800 font-sans;
   }
   a {
-    @apply text-blue-600;
+    @apply text-primary-600;
   }
   h1 {
     @apply m-0 mb-5 text-[1.375rem] font-bold;
@@ -15,10 +32,10 @@
   }
   input,
   textarea {
-    @apply py-2 px-2.5 border border-slate-300 rounded text-sm font-[inherit] w-full focus:outline focus:outline-blue-600 focus:border-transparent;
+    @apply py-2 px-2.5 border border-slate-300 rounded text-sm font-[inherit] w-full focus:outline focus:outline-primary-600 focus:border-transparent;
   }
   .btn {
-    @apply cursor-pointer py-1.5 px-3.5 bg-blue-600 text-white border-none rounded text-sm hover:bg-blue-700 disabled:opacity-60;
+    @apply cursor-pointer py-1.5 px-3.5 bg-primary-600 text-white border-none rounded text-sm hover:bg-primary-700 disabled:opacity-60;
   }
 }
 

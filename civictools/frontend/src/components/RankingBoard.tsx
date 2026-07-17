@@ -403,7 +403,7 @@ export function RankingBoard({
                   }}
                   onPointerDown={(e) => e.stopPropagation()}
                   title="Edit ranking"
-                  className="text-slate-400 hover:text-blue-600 px-1"
+                  className="text-slate-400 hover:text-primary-600 px-1"
                 >
                   <svg
                     width="14"
@@ -562,7 +562,7 @@ export function RankingBoard({
                   <button
                     onClick={submitRanking}
                     disabled={submitting}
-                    className="mt-1 w-full py-2 rounded-lg bg-blue-600 text-white text-sm font-medium hover:bg-blue-700 disabled:opacity-50 transition-colors"
+                    className="mt-1 w-full py-2 rounded-lg bg-primary-600 text-white text-sm font-medium hover:bg-primary-700 disabled:opacity-50 transition-colors"
                   >
                     {submitting ? "Submitting…" : "Submit ranking"}
                   </button>

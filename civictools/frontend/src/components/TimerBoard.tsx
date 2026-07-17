@@ -190,7 +190,7 @@ export function TimerBoard({ timer, isTeacher, mobile = false }: Props) {
                 }}
                 onPointerDown={(e) => e.stopPropagation()}
                 title="Edit duration"
-                className="text-slate-400 hover:text-blue-600 px-1"
+                className="text-slate-400 hover:text-primary-600 px-1"
               >
                 <svg
                   width="14"

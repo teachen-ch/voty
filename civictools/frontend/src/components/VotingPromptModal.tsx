@@ -119,7 +119,7 @@ export function VotingPromptModal({ roomId }: Props) {
             value={prompt}
             onInput={(e) => setPrompt(e.currentTarget.value)}
             placeholder="What should the class vote on?"
-            className="w-full border border-slate-300 rounded p-2 text-sm resize-y min-h-24 focus:outline-none focus:ring-2 focus:ring-blue-200"
+            className="w-full border border-slate-300 rounded p-2 text-sm resize-y min-h-24 focus:outline-none focus:ring-2 focus:ring-primary-200"
           />
         </label>
 
@@ -133,7 +133,7 @@ export function VotingPromptModal({ roomId }: Props) {
                 value={opt}
                 onInput={(e) => updateOption(i, e.currentTarget.value)}
                 placeholder={`Option ${i + 1}`}
-                className="flex-1 border border-slate-300 rounded px-2 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-200"
+                className="flex-1 border border-slate-300 rounded px-2 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary-200"
               />
               {options.length > 2 && (
                 <button
@@ -151,7 +151,7 @@ export function VotingPromptModal({ roomId }: Props) {
             <button
               type="button"
               onClick={addOption}
-              className="self-start text-sm text-blue-600 hover:text-blue-800"
+              className="self-start text-sm text-primary-600 hover:text-primary-800"
             >
               + Add option
             </button>
@@ -169,7 +169,7 @@ export function VotingPromptModal({ roomId }: Props) {
           <button
             type="submit"
             disabled={submitting}
-            className="px-4 py-1.5 rounded text-sm bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50"
+            className="px-4 py-1.5 rounded text-sm bg-primary-600 text-white hover:bg-primary-700 disabled:opacity-50"
           >
             {submitting ? "Saving…" : editing ? "Save" : "Add"}
           </button>

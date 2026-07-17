@@ -15,7 +15,7 @@ export function renderMarkdown(src: string): string {
     .replace(/`([^`\n]+)`/g, "<code>$1</code>")
     .replace(
       /\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g,
-      '<a href="$2" target="_blank" rel="noopener noreferrer" class="underline text-blue-600">$1</a>'
+      '<a href="$2" target="_blank" rel="noopener noreferrer" class="underline text-primary-600">$1</a>'
     );
   return inline
     .split(/\n{2,}/)

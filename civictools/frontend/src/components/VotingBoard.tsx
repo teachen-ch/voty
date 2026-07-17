@@ -191,7 +191,7 @@ export function VotingBoard({
                 }}
                 onPointerDown={(e) => e.stopPropagation()}
                 title="Edit voting"
-                className="text-slate-400 hover:text-blue-600 px-1"
+                className="text-slate-400 hover:text-primary-600 px-1"
               >
                 <svg
                   width="14"
@@ -271,14 +271,14 @@ export function VotingBoard({
                   className={
                     "relative w-full text-left px-3 py-2 rounded-lg border transition-colors overflow-hidden mb-2 " +
                     (isMine
-                      ? "border-blue-400 bg-blue-50 text-blue-900"
+                      ? "border-primary-400 bg-primary-50 text-primary-900"
                       : "border-slate-200 bg-white hover:bg-slate-50 text-slate-800") +
                     (closed ? " cursor-default" : " cursor-pointer")
                   }
                 >
                   {showResults && (
                     <div
-                      className="absolute inset-y-0 left-0 bg-blue-100/60"
+                      className="absolute inset-y-0 left-0 bg-primary-100/60"
                       style={{ width: `${pct}%` }}
                     />
                   )}

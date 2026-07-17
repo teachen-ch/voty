@@ -122,7 +122,7 @@ export function TimerPromptModal({ roomId }: Props) {
               setError("");
             }}
             placeholder="5:00"
-            className="w-full border border-slate-300 rounded p-2 text-lg tabular-nums focus:outline-none focus:ring-2 focus:ring-blue-200"
+            className="w-full border border-slate-300 rounded p-2 text-lg tabular-nums focus:outline-none focus:ring-2 focus:ring-primary-200"
           />
           {error && <span className="text-xs text-rose-600">{error}</span>}
           {editing && (
@@ -143,7 +143,7 @@ export function TimerPromptModal({ roomId }: Props) {
           <button
             type="submit"
             disabled={submitting}
-            className="px-4 py-1.5 rounded text-sm bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50"
+            className="px-4 py-1.5 rounded text-sm bg-primary-600 text-white hover:bg-primary-700 disabled:opacity-50"
           >
             {submitting ? "Saving…" : editing ? "Save" : "Add"}
           </button>

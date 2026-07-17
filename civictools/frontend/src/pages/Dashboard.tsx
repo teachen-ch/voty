@@ -121,7 +121,7 @@ export function Dashboard() {
               onClick={startNaming}
               className="text-left flex flex-col h-full cursor-pointer"
             >
-              <span className="self-start text-xs font-medium bg-blue-100 text-blue-700 rounded-full px-2.5 py-0.5">
+              <span className="self-start text-xs font-medium bg-primary-100 text-primary-700 rounded-full px-2.5 py-0.5">
                 {t("dashboard.blankBadge")}
               </span>
               <span className="font-semibold mt-3">
@@ -155,7 +155,7 @@ export function Dashboard() {
       <div className="mt-2 mb-8">
         <Link
           href="/templates"
-          className="text-sm text-blue-600 hover:underline"
+          className="text-sm text-primary-600 hover:underline"
         >
           {t("dashboard.browseAll")}
         </Link>

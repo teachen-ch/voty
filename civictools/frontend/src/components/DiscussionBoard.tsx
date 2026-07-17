@@ -153,7 +153,7 @@ export function DiscussionBoard({
               onInput={(e) => setPromptDraft(e.currentTarget.value)}
               onBlur={savePrompt}
               placeholder="Discussion prompt (markdown supported)…"
-              className="w-full bg-white border border-slate-300 rounded p-2 text-sm resize-y min-h-16 focus:outline-none focus:ring-2 focus:ring-blue-200"
+              className="w-full bg-white border border-slate-300 rounded p-2 text-sm resize-y min-h-16 focus:outline-none focus:ring-2 focus:ring-primary-200"
             />
           ) : (
             <div
@@ -191,7 +191,7 @@ export function DiscussionBoard({
                 }}
                 onPointerDown={(e) => e.stopPropagation()}
                 title="Edit prompt & options"
-                className="text-slate-400 hover:text-blue-600 px-1"
+                className="text-slate-400 hover:text-primary-600 px-1"
               >
                 <svg
                   width="14"
@@ -435,7 +435,7 @@ function ArgumentCard({
                 e.stopPropagation();
                 setExpanded((v) => !v);
               }}
-              className="text-[11px] text-blue-600 hover:underline mt-0.5"
+              className="text-[11px] text-primary-600 hover:underline mt-0.5"
             >
               {expanded ? "Show less" : "Show more"}
             </button>
@@ -463,7 +463,7 @@ function ArgumentCard({
             className={
               "flex items-center gap-1 rounded px-1.5 py-0.5 border " +
               (myVote
-                ? "bg-blue-50 border-blue-200 text-blue-700"
+                ? "bg-primary-50 border-primary-200 text-primary-700"
                 : "bg-white border-slate-200 hover:bg-slate-50 text-slate-600")
             }
           >

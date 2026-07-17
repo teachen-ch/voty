@@ -2,7 +2,7 @@ import { useTranslation } from "react-i18next";
 import { useLocation } from "wouter";
 import { pb } from "../pb";
 import { isTeacher } from "../store";
-import votyLogo from "../assets/voty_logo.svg";
+import { Logo } from "./Logo";
 
 export function Header() {
   const { t } = useTranslation();
@@ -17,22 +17,19 @@ export function Header() {
     <div className="mb-6">
       <div className="flex items-center justify-between pb-2">
         <div className="flex items-center gap-1">
-          <img src={votyLogo} alt="voty" className="h-8 w-auto" />
-          <span className="text-sm font-semibold text-black">
-            {t("appName")}
-          </span>
+          <Logo className="h-8 w-auto" />
         </div>
         <div className="text-sm">
           {isTeacher.value ? (
             <button
               type="button"
               onClick={logout}
-              className="text-blue-600 hover:underline"
+              className="text-primary-600 hover:underline"
             >
               {t("dashboard.logout")}
             </button>
           ) : (
-            <a href="/login" className="text-blue-600 hover:underline">
+            <a href="/login" className="text-primary-600 hover:underline">
               {t("breadcrumb.signIn")}
             </a>
           )}

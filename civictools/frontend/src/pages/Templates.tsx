@@ -35,7 +35,7 @@ export function Templates() {
       <Header />
       {isTeacher.value && (
         <nav className="text-sm text-slate-500 mb-4">
-          <Link href="/dashboard" className="text-blue-600 hover:underline">
+          <Link href="/dashboard" className="text-primary-600 hover:underline">
             {t("breadcrumb.home")}
           </Link>
         </nav>

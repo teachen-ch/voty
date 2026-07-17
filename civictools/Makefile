@@ -3,7 +3,7 @@
 dev:
 	@trap 'kill 0' INT; \
 	(cd pb && go run . serve --dev) & \
-	(cd frontend && npm run dev) & \
+	(cd frontend && npm run dev -- --host) & \
 	wait
 
 dev-pb:
