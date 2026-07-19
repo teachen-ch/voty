@@ -9866,9 +9866,9 @@ sync-fetch@0.6.0-2:
     whatwg-mimetype "^4.0.0"
 
 systeminformation@^5.31.1:
-  version "5.31.6"
-  resolved "https://registry.yarnpkg.com/systeminformation/-/systeminformation-5.31.6.tgz#2da4979a7262974fd068a3a306ded30aed6127c0"
-  integrity sha512-Uv2b2uGGM6ns+26czgW2cYRabYdnswM0ddSOOlryHOaelzsmDSet1iM/NT7VOYxW8x/BW+HkY+b1Ve2pLTSGSA==
+  version "5.32.0"
+  resolved "https://registry.yarnpkg.com/systeminformation/-/systeminformation-5.32.0.tgz#062e03e413cf32525fc58093f55905c6088b5677"
+  integrity sha512-7gfXs43T91miPxxTTtrYitotR/8MPsI2gy3XgUMs6kmOE/JCVqZp6nJpx4XkSutoSqDh6+Y2ovvb2A3RQCR+8w==
 
 table@^6.0.9:
   version "6.7.1"
