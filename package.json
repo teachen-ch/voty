@@ -61,7 +61,7 @@
     "mjml": "^5.1.0",
     "mustache": "^4.2.0",
     "next": "^16",
-    "nodemailer": "^8.0.7",
+    "nodemailer": "^9.0.1",
     "prismjs": "^1.30.0",
     "qrcode.react": "^4",
     "react": "^19",
