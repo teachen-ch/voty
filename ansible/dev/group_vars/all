@@ -2,4 +2,4 @@ server_name: dev.voty.ch
 certificates: Host(`dev.voty.ch`)
 env_file: ../.env.development
 cache_time: 1m
-civictools_host: dev-tools.voty.ch
+civictools_host_rule: Host(`dev-tools.voty.ch`)

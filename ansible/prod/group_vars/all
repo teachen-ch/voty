@@ -2,4 +2,12 @@ server_name: voty.ch
 certificates: Host(`voty.ch`) ||  Host(`www.voty.ch`)
 env_file: ../.env.production
 cache_time: 15m
-civictools_host: tools.voty.ch
+civictools_host_rule: >-
+  Host(`prepodavame.voty.ch`) ||
+  Host(`grajdansko.voty.ch`) ||
+  Host(`app.prepodavame.bg`) ||
+  Host(`tools.prepodavame.bg`) ||
+  Host(`civic-tools.prepodavame.bg`) ||
+  Host(`app.grajdansko.bg`) ||
+  Host(`tools.grajdansko.bg`) ||
+  Host(`civic-tools.grajdansko.bg`)
