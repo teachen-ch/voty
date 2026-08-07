@@ -11,6 +11,7 @@ export function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
+  const [passwordResetSent, setPasswordResetSent] = useState(false);
   const [loading, setLoading] = useState(false);
   const [oidcEnabled, setOidcEnabled] = useState(false);
   const [, navigate] = useLocation();
@@ -33,6 +34,7 @@ export function Login() {
   async function handleSubmit(e: Event) {
     e.preventDefault();
     setError(null);
+    setPasswordResetSent(false);
     setLoading(true);
     try {
       const auth = await pb
@@ -42,6 +44,25 @@ export function Login() {
       navigate(nextTarget());
     } catch (err: unknown) {
       setError(err instanceof Error ? err.message : "Login failed");
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  async function handleForgotPassword() {
+    setError(null);
+    setPasswordResetSent(false);
+    if (!email.trim()) {
+      setError(t("login.emailRequired"));
+      return;
+    }
+
+    setLoading(true);
+    try {
+      await pb.collection("users").requestPasswordReset(email.trim());
+      setPasswordResetSent(true);
+    } catch (err: unknown) {
+      setError(err instanceof Error ? err.message : t("login.resetFailed"));
     } finally {
       setLoading(false);
     }
@@ -86,9 +107,22 @@ export function Login() {
             required
           />
           {error && <p className="error">{error}</p>}
-          <button className="btn" type="submit" disabled={loading}>
+          <button className="btn py-2" type="submit" disabled={loading}>
             {loading ? t("login.submitting") : t("login.submit")}
           </button>
+          <button
+            type="button"
+            onClick={handleForgotPassword}
+            disabled={loading}
+            className="text-sm text-primary-600 hover:underline self-center cursor-pointer disabled:opacity-60"
+          >
+            {t("login.forgotPassword")}
+          </button>
+          {passwordResetSent && (
+            <p className="text-center text-sm text-emerald-600" role="status">
+              {t("login.resetSent")}
+            </p>
+          )}
         </form>
         {oidcEnabled && (
           <>

@@ -33,6 +33,13 @@ func main() {
 
 	registerRoomHooks(app)
 	registerCopyTemplate(app)
+	registerAdminUI(app)
+	app.OnServe().BindFunc(func(se *core.ServeEvent) error {
+		if err := configureAuthEmailTemplates(app); err != nil {
+			return err
+		}
+		return se.Next()
+	})
 
 	if err := app.Start(); err != nil {
 		log.Fatal(err)

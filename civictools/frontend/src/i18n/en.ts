@@ -15,6 +15,11 @@ const en = {
     password: "Password",
     submit: "Login",
     submitting: "Logging in…",
+    forgotPassword: "Forgot your password?",
+    emailRequired: "Enter your email address first.",
+    resetSent:
+      "If an account exists for this email, a reset link has been sent.",
+    resetFailed: "Could not send the password reset email.",
     or: "or",
     keycloak: "Login with Keycloak",
   },
