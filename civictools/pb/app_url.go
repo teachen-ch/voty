@@ -36,15 +36,15 @@ func configureDynamicAppURL(app core.App) {
 
 	app.OnRecordRequestPasswordResetRequest().BindFunc(func(e *core.RecordRequestPasswordResetRequestEvent) error {
 		update(e.Request)
-		return nil
+		return e.Next()
 	})
 	app.OnRecordRequestVerificationRequest().BindFunc(func(e *core.RecordRequestVerificationRequestEvent) error {
 		update(e.Request)
-		return nil
+		return e.Next()
 	})
 	app.OnRecordRequestEmailChangeRequest().BindFunc(func(e *core.RecordRequestEmailChangeRequestEvent) error {
 		update(e.Request)
-		return nil
+		return e.Next()
 	})
 }
 
