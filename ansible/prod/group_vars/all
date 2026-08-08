@@ -2,9 +2,20 @@ server_name: voty.ch
 certificates: Host(`voty.ch`) ||  Host(`www.voty.ch`)
 env_file: ../.env.production
 cache_time: 15m
+civictools_dynamic_app_url: true
+civictools_allowed_hosts:
+  - prepodavame.voty.ch
+  - grajdansko.voty.ch
+  - app.prepodavame.bg
+  - tools.prepodavame.bg
+  - civic-tools.prepodavame.bg
+  - app.grajdansko.bg
+  - tools.grajdansko.bg
+  - civic-tools.grajdansko.bg
 civictools_host_rule: >-
   Host(`prepodavame.voty.ch`) ||
-  Host(`grajdansko.voty.ch`) ||
+  Host(`grajdansko.voty.ch`)
+UNUSED_commented_hosts: >-
   Host(`app.prepodavame.bg`) ||
   Host(`tools.prepodavame.bg`) ||
   Host(`civic-tools.prepodavame.bg`) ||

@@ -34,6 +34,7 @@ func main() {
 	registerRoomHooks(app)
 	registerCopyTemplate(app)
 	registerAdminUI(app)
+	configureDynamicAppURL(app)
 	app.OnServe().BindFunc(func(se *core.ServeEvent) error {
 		if err := configureAuthEmailTemplates(app); err != nil {
 			return err

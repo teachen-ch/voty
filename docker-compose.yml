@@ -79,6 +79,8 @@ services:
     restart: always
     environment:
       - GOMEMLIMIT=512MiB
+      - CIVICTOOLS_DYNAMIC_APP_URL={{ civictools_dynamic_app_url }}
+      - CIVICTOOLS_ALLOWED_HOSTS={{ civictools_allowed_hosts | join(',') }}
     volumes:
       - ./pb_data:/app/pb/pb_data
     expose:

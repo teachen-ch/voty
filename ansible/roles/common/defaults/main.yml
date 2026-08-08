@@ -3,3 +3,5 @@ server_name: voty.ch
 docker_host: "unix:///run/user/{{ ansible_user_uid }}/docker.sock"
 docker_socket: "/run/user/{{ ansible_user_uid }}/docker.sock"
 civictools_host_rule: Host(`tools.voty.ch`)
+civictools_dynamic_app_url: false
+civictools_allowed_hosts: []
