@@ -84,6 +84,7 @@ export function Dashboard() {
         teacher: pb.authStore.model?.id,
         sticky_notes_enabled: false,
         ballots_enabled: false,
+        interactions_locked: false,
       });
       navigate(`/room/${record.id}`);
     } finally {

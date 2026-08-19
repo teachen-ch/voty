@@ -23,6 +23,7 @@ interface Props {
   participantId: string;
   isTeacher: boolean;
   stickyEnabled: boolean;
+  interactionsLocked?: boolean;
 }
 
 type Item =
@@ -36,6 +37,7 @@ export function MobileRoomView({
   participantId,
   isTeacher,
   stickyEnabled,
+  interactionsLocked = false,
 }: Props) {
   const items = useMemo<Item[]>(() => {
     const all: Item[] = [
@@ -54,7 +56,12 @@ export function MobileRoomView({
   const notes = stickyNotes.value;
 
   return (
-    <div className="fixed inset-0 overflow-y-auto bg-slate-50">
+    <div
+      className="fixed inset-0 overflow-y-auto bg-slate-50"
+      style={{
+        pointerEvents: interactionsLocked && !isTeacher ? "none" : "auto",
+      }}
+    >
       <div className="flex flex-col gap-3 p-3 pt-28 pb-24 max-w-2xl mx-auto">
         {items.length === 0 && notes.length === 0 && (
           <div className="text-center text-slate-400 italic py-12 text-sm">

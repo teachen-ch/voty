@@ -5,8 +5,11 @@ import {
   timerModal,
   votingModal,
   rankingModal,
+  currentRoom,
 } from "../store";
 import type { Tool } from "../store";
+import { pb } from "../pb";
+import { useState } from "preact/hooks";
 import { useTranslation } from "react-i18next";
 
 function CursorIcon() {
@@ -103,6 +106,24 @@ function TimerIcon() {
   );
 }
 
+function LockIcon() {
+  return (
+    <svg
+      width="20"
+      height="20"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <rect x="4" y="10" width="16" height="11" rx="2" />
+      <path d="M8 10V7a4 4 0 0 1 8 0v3" />
+    </svg>
+  );
+}
+
 function Tooltip({ label }: { label: string }) {
   return (
     <div className="absolute right-full top-1/2 -translate-y-1/2 mr-3 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-150 z-50">
@@ -139,6 +160,28 @@ const TOOL_BUTTONS: Array<{
 
 export function FloatingToolbar({ isTeacher }: Props) {
   const { t } = useTranslation();
+  const [confirmLock, setConfirmLock] = useState(false);
+  const locked = (currentRoom.value?.interactions_locked as boolean) ?? false;
+
+  async function toggleLock() {
+    const room = currentRoom.value;
+    if (!room) return;
+    if (locked) {
+      await pb
+        .collection("rooms")
+        .update(room.id, { interactions_locked: false });
+    } else {
+      setConfirmLock(true);
+    }
+  }
+
+  async function confirmLockRoom() {
+    const room = currentRoom.value;
+    if (!room) return;
+    await pb.collection("rooms").update(room.id, { interactions_locked: true });
+    setConfirmLock(false);
+  }
+
   return (
     <div
       className="fixed right-4 top-1/2 -translate-y-1/2 bg-white rounded-2xl shadow-lg border border-slate-200 flex flex-col p-1 gap-0.5 z-50"
@@ -206,7 +249,46 @@ export function FloatingToolbar({ isTeacher }: Props) {
             </button>
             <Tooltip label={t("toolbar.ranking")} />
           </div>
+          <div className="relative group mt-1 border-t border-slate-200 pt-1">
+            <button
+              title="Lock student interactions"
+              onClick={toggleLock}
+              className={`size-10 rounded-xl flex items-center justify-center transition-colors ${locked ? "bg-red-100! text-red-700" : "bg-white text-black hover:bg-slate-100"}`}
+            >
+              <LockIcon />
+            </button>
+            <Tooltip label="Lock student interactions" />
+          </div>
         </>
+      )}
+      {confirmLock && (
+        <div
+          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/50 p-4"
+          onClick={() => setConfirmLock(false)}
+        >
+          <div
+            className="bg-white rounded-2xl shadow-xl p-6 max-w-sm flex flex-col gap-4"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <h2 className="text-lg font-semibold">
+              Lock all interactions for students?
+            </h2>
+            <div className="flex justify-end gap-2">
+              <button
+                className="btn secondary"
+                onClick={() => setConfirmLock(false)}
+              >
+                Cancel
+              </button>
+              <button
+                className="btn bg-red-600! text-white!"
+                onClick={confirmLockRoom}
+              >
+                Lock interactions
+              </button>
+            </div>
+          </div>
+        </div>
       )}
     </div>
   );

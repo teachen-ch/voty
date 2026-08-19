@@ -63,6 +63,7 @@ export function StudentRoom({ roomId }: Props) {
           participantId={participantId}
           isTeacher={false}
           stickyEnabled={stickyEnabled}
+          interactionsLocked={(room?.interactions_locked as boolean) ?? false}
         />
       ) : (
         <>
@@ -71,6 +72,7 @@ export function StudentRoom({ roomId }: Props) {
             participantId={participantId}
             isTeacher={false}
             stickyEnabled={stickyEnabled}
+            interactionsLocked={(room?.interactions_locked as boolean) ?? false}
           />
           <FloatingToolbar isTeacher={false} />
           <ZoomControls />

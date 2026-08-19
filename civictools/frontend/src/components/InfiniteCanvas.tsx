@@ -34,6 +34,7 @@ interface Props {
   participantId: string;
   isTeacher: boolean;
   stickyEnabled: boolean;
+  interactionsLocked?: boolean;
 }
 
 export function InfiniteCanvas({
@@ -41,6 +42,7 @@ export function InfiniteCanvas({
   participantId,
   isTeacher,
   stickyEnabled,
+  interactionsLocked = false,
 }: Props) {
   const containerRef = useRef<HTMLDivElement>(null);
   const panRef = useRef<{
@@ -66,6 +68,7 @@ export function InfiniteCanvas({
 
   function onPointerDown(e: PointerEvent) {
     if (activeTool.value !== "select") return;
+    if (interactionsLocked && !isTeacher) return;
     panRef.current = {
       sx: e.clientX,
       sy: e.clientY,
@@ -101,6 +104,7 @@ export function InfiniteCanvas({
 
   async function onClick(e: MouseEvent) {
     if (activeTool.value !== "sticky") return;
+    if (interactionsLocked && !isTeacher) return;
     if (!stickyEnabled && !isTeacher) return;
     if ((e.target as Element).closest("[data-note]")) return;
     const { x, y, scale } = canvasTransform.value;
@@ -126,7 +130,10 @@ export function InfiniteCanvas({
     <div
       ref={containerRef}
       className="absolute inset-0 overflow-hidden"
-      style={{ cursor: activeTool.value === "sticky" ? "crosshair" : "grab" }}
+      style={{
+        cursor: activeTool.value === "sticky" ? "crosshair" : "grab",
+        pointerEvents: interactionsLocked && !isTeacher ? "none" : "auto",
+      }}
       onPointerDown={onPointerDown}
       onPointerMove={onPointerMove}
       onPointerUp={onPointerUp}
