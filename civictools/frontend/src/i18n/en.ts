@@ -86,6 +86,9 @@ const en = {
     copy: "Copy join link",
     copyMobile: "Join Link",
     copied: "✓ Copied!",
+    showQr: "Show QR code",
+    qrTitle: "Join this room",
+    qrLoading: "Creating QR code…",
   },
   templates: {
     title: "Templates",
