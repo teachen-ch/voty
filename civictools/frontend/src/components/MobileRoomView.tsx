@@ -11,6 +11,7 @@ import {
   votingModal,
   timerModal,
   rankingModal,
+  currentRoom,
 } from "../store";
 import { DiscussionBoard } from "./DiscussionBoard";
 import { VotingBoard } from "./VotingBoard";
@@ -39,6 +40,9 @@ export function MobileRoomView({
   stickyEnabled,
   interactionsLocked = false,
 }: Props) {
+  const roomLocked =
+    (currentRoom.value?.interactions_locked as boolean | undefined) ??
+    interactionsLocked;
   const items = useMemo<Item[]>(() => {
     const all: Item[] = [
       ...discussionBoards.value.map(
@@ -59,7 +63,7 @@ export function MobileRoomView({
     <div
       className="fixed inset-0 overflow-y-auto bg-slate-50"
       style={{
-        pointerEvents: interactionsLocked && !isTeacher ? "none" : "auto",
+        pointerEvents: roomLocked && !isTeacher ? "none" : "auto",
       }}
     >
       <div className="flex flex-col gap-3 p-3 pt-28 pb-24 max-w-2xl mx-auto">

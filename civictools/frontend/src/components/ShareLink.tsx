@@ -33,7 +33,7 @@ export function ShareLink({ roomId, dashboard = false }: Props) {
       className="flex items-center gap-2"
     >
       <button
-        className="btn secondary px-2"
+        className="btn! bg-transparent! text-slate-700! hover:bg-slate-100! border-0! shadow-none! px-1.5!"
         onClick={() => setShowQr(true)}
         title={t("shareLink.showQr")}
         aria-label={t("shareLink.showQr")}

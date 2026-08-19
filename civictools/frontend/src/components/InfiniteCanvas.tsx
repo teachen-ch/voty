@@ -9,6 +9,7 @@ import {
   timers,
   rankings,
   showRemoteCursors,
+  currentRoom,
 } from "../store";
 import { remoteCursors } from "../hooks/useCursors";
 import { StickyNote } from "./StickyNote";
@@ -44,6 +45,9 @@ export function InfiniteCanvas({
   stickyEnabled,
   interactionsLocked = false,
 }: Props) {
+  const roomLocked =
+    (currentRoom.value?.interactions_locked as boolean | undefined) ??
+    interactionsLocked;
   const containerRef = useRef<HTMLDivElement>(null);
   const panRef = useRef<{
     sx: number;
@@ -68,7 +72,7 @@ export function InfiniteCanvas({
 
   function onPointerDown(e: PointerEvent) {
     if (activeTool.value !== "select") return;
-    if (interactionsLocked && !isTeacher) return;
+    if (roomLocked && !isTeacher) return;
     panRef.current = {
       sx: e.clientX,
       sy: e.clientY,
@@ -104,7 +108,7 @@ export function InfiniteCanvas({
 
   async function onClick(e: MouseEvent) {
     if (activeTool.value !== "sticky") return;
-    if (interactionsLocked && !isTeacher) return;
+    if (roomLocked && !isTeacher) return;
     if (!stickyEnabled && !isTeacher) return;
     if ((e.target as Element).closest("[data-note]")) return;
     const { x, y, scale } = canvasTransform.value;
@@ -132,7 +136,7 @@ export function InfiniteCanvas({
       className="absolute inset-0 overflow-hidden"
       style={{
         cursor: activeTool.value === "sticky" ? "crosshair" : "grab",
-        pointerEvents: interactionsLocked && !isTeacher ? "none" : "auto",
+        pointerEvents: roomLocked && !isTeacher ? "none" : "auto",
       }}
       onPointerDown={onPointerDown}
       onPointerMove={onPointerMove}

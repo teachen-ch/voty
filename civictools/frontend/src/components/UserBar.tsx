@@ -97,7 +97,7 @@ export function UserBar({ nickname, role, participantId }: Props) {
           showRemoteCursors.value ? "Hide other cursors" : "Show other cursors"
         }
         onClick={() => (showRemoteCursors.value = !showRemoteCursors.value)}
-        className={`w-10 h-10 rounded-full shadow border flex items-center justify-center transition-colors ${showRemoteCursors.value ? "bg-white border-slate-200 text-slate-500 hover:text-slate-800" : "bg-slate-700 border-slate-700 text-white"}`}
+        className={`w-8 h-8 flex items-center justify-center transition-colors ${showRemoteCursors.value ? "bg-transparent text-slate-500 hover:text-slate-800" : "bg-transparent text-slate-700"}`}
       >
         <svg
           width="19"

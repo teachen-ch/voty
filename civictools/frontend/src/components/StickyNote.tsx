@@ -4,6 +4,7 @@ import {
   participantCache,
   getParticipantName,
   canvasTransform,
+  currentRoom,
 } from "../store";
 import type { RecordModel } from "pocketbase";
 
@@ -28,6 +29,7 @@ interface ResizeState {
 }
 
 export function StickyNote({ note, isTeacher, currentParticipantId }: Props) {
+  const locked = !isTeacher && !!currentRoom.value?.interactions_locked;
   const noteRef = useRef<HTMLDivElement>(null);
   const drag = useRef<DragState | null>(null);
   const resize = useRef<ResizeState | null>(null);
@@ -64,6 +66,7 @@ export function StickyNote({ note, isTeacher, currentParticipantId }: Props) {
   }, [participantCache.value, pid]);
 
   function onPointerDown(e: PointerEvent) {
+    if (locked) return;
     e.stopPropagation();
     e.preventDefault();
     noteRef.current!.setPointerCapture(e.pointerId);
@@ -93,6 +96,7 @@ export function StickyNote({ note, isTeacher, currentParticipantId }: Props) {
   }
 
   function onResizePointerDown(e: PointerEvent) {
+    if (locked) return;
     e.stopPropagation();
     e.preventDefault();
     noteRef.current!.setPointerCapture(e.pointerId);
@@ -128,6 +132,7 @@ export function StickyNote({ note, isTeacher, currentParticipantId }: Props) {
   }
 
   async function updateContent(content: string) {
+    if (locked) return;
     await pb.collection("sticky_notes").update(note.id, { content });
   }
 
@@ -156,33 +161,27 @@ export function StickyNote({ note, isTeacher, currentParticipantId }: Props) {
     >
       <textarea
         value={note.content as string}
+        readOnly={locked}
         onInput={(e) => updateContent(e.currentTarget.value)}
         onPointerDown={(e) => e.stopPropagation()}
         placeholder="Type here…"
         className="flex-1 bg-transparent border-0 resize-none text-[13px] p-0 min-h-17.5 cursor-text focus:outline-none"
         style={{ font: "inherit" }}
       />
+      {(isTeacher || isOwner) && (
+        <button
+          onClick={deleteNote}
+          onPointerDown={(e) => e.stopPropagation()}
+          className="absolute top-1 right-1 w-5 h-5 flex items-center justify-center text-xs rounded bg-black/10 hover:bg-black/20"
+          aria-label="Delete note"
+        >
+          ×
+        </button>
+      )}
       <div className="flex justify-between items-center">
         <small className="opacity-60 text-[11px]">
           {getParticipantName(note.participant as string)}
         </small>
-        {(isTeacher || isOwner) && (
-          <button
-            onClick={deleteNote}
-            onPointerDown={(e) => e.stopPropagation()}
-            style={{
-              padding: "1px 5px",
-              fontSize: 11,
-              background: "rgba(0,0,0,0.1)",
-              color: "inherit",
-              border: "none",
-              borderRadius: 3,
-              cursor: "pointer",
-            }}
-          >
-            ×
-          </button>
-        )}
       </div>
       <div
         aria-label="Resize note"
