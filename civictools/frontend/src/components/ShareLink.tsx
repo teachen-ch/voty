@@ -4,9 +4,10 @@ import QRCode from "qrcode";
 
 interface Props {
   roomId: string;
+  dashboard?: boolean;
 }
 
-export function ShareLink({ roomId }: Props) {
+export function ShareLink({ roomId, dashboard = false }: Props) {
   const { t } = useTranslation();
   const [copied, setCopied] = useState(false);
   const [showQr, setShowQr] = useState(false);
@@ -27,7 +28,10 @@ export function ShareLink({ roomId }: Props) {
   }
 
   return (
-    <>
+    <div
+      data-dashboard-share-link={dashboard ? "true" : undefined}
+      className="flex items-center gap-2"
+    >
       <button
         className="btn secondary px-2"
         onClick={() => setShowQr(true)}
@@ -90,6 +94,6 @@ export function ShareLink({ roomId }: Props) {
           </div>
         </div>
       )}
-    </>
+    </div>
   );
 }

@@ -207,7 +207,7 @@ export function Dashboard() {
                         })}
                   </span>
                 </div>
-                <ShareLink roomId={room.id} />
+                <ShareLink roomId={room.id} dashboard />
                 <button
                   className="btn"
                   onClick={() => navigate(`/room/${room.id}`)}
