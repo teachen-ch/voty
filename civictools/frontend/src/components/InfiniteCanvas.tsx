@@ -42,7 +42,6 @@ export function InfiniteCanvas({
   roomId,
   participantId,
   isTeacher,
-  stickyEnabled,
   interactionsLocked = false,
 }: Props) {
   const roomLocked =
@@ -107,9 +106,8 @@ export function InfiniteCanvas({
   }
 
   async function onClick(e: MouseEvent) {
-    if (activeTool.value !== "sticky") return;
+    if (activeTool.value !== "sticky" || !isTeacher) return;
     if (roomLocked && !isTeacher) return;
-    if (!stickyEnabled && !isTeacher) return;
     if ((e.target as Element).closest("[data-note]")) return;
     const { x, y, scale } = canvasTransform.value;
     const wx = (e.clientX - x) / scale;
@@ -159,12 +157,7 @@ export function InfiniteCanvas({
         }}
       >
         {stickyNotes.value.map((note) => (
-          <StickyNote
-            key={note.id}
-            note={note}
-            isTeacher={isTeacher}
-            currentParticipantId={participantId}
-          />
+          <StickyNote key={note.id} note={note} isTeacher={isTeacher} />
         ))}
         {discussionBoards.value.map((board) => (
           <DiscussionBoard

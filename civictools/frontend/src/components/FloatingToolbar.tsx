@@ -196,26 +196,28 @@ export function FloatingToolbar({ isTeacher }: Props) {
         className="fixed right-4 top-1/2 -translate-y-1/2 bg-white rounded-2xl shadow-lg border border-slate-200 flex flex-col p-1 gap-0.5 z-50"
         style={{ minWidth: 44 }}
       >
-        {TOOL_BUTTONS.map(({ id, labelKey, Icon }) => {
-          const isActive = activeTool.value === id;
-          return (
-            <div key={id} className="relative group">
-              <button
-                title={t(labelKey)}
-                onClick={() => (activeTool.value = id)}
-                className={[
-                  "size-10 rounded-xl flex items-center justify-center transition-colors",
-                  isActive
-                    ? "bg-primary-100! text-primary-700"
-                    : "bg-white text-black hover:bg-slate-100",
-                ].join(" ")}
-              >
-                <Icon />
-              </button>
-              <Tooltip label={t(labelKey)} />
-            </div>
-          );
-        })}
+        {TOOL_BUTTONS.filter(({ id }) => isTeacher || id === "select").map(
+          ({ id, labelKey, Icon }) => {
+            const isActive = activeTool.value === id;
+            return (
+              <div key={id} className="relative group">
+                <button
+                  title={t(labelKey)}
+                  onClick={() => (activeTool.value = id)}
+                  className={[
+                    "size-10 rounded-xl flex items-center justify-center transition-colors",
+                    isActive
+                      ? "bg-primary-100! text-primary-700"
+                      : "bg-white text-black hover:bg-slate-100",
+                  ].join(" ")}
+                >
+                  <Icon />
+                </button>
+                <Tooltip label={t(labelKey)} />
+              </div>
+            );
+          }
+        )}
         {isTeacher && (
           <>
             <div className="relative group">

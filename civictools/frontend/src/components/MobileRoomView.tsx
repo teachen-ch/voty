@@ -37,7 +37,6 @@ export function MobileRoomView({
   roomId,
   participantId,
   isTeacher,
-  stickyEnabled,
   interactionsLocked = false,
 }: Props) {
   const roomLocked =
@@ -122,7 +121,6 @@ export function MobileRoomView({
             roomId={roomId}
             participantId={participantId}
             isTeacher={isTeacher}
-            stickyEnabled={stickyEnabled}
             notes={notes}
           />
         )}
@@ -173,17 +171,15 @@ function MobileNotesSection({
   roomId,
   participantId,
   isTeacher,
-  stickyEnabled,
   notes,
 }: {
   roomId: string;
   participantId: string;
   isTeacher: boolean;
-  stickyEnabled: boolean;
   notes: RecordModel[];
 }) {
   const [collapsed, setCollapsed] = useState(false);
-  const canAdd = isTeacher || stickyEnabled;
+  const canAdd = isTeacher;
 
   async function addNote() {
     if (!canAdd) return;
@@ -240,12 +236,7 @@ function MobileNotesSection({
       {!collapsed && (
         <div className="p-3 grid grid-cols-2 gap-2">
           {notes.map((n) => (
-            <MobileNote
-              key={n.id}
-              note={n}
-              isTeacher={isTeacher}
-              currentParticipantId={participantId}
-            />
+            <MobileNote key={n.id} note={n} isTeacher={isTeacher} />
           ))}
         </div>
       )}
@@ -256,14 +247,12 @@ function MobileNotesSection({
 function MobileNote({
   note,
   isTeacher,
-  currentParticipantId,
 }: {
   note: RecordModel;
   isTeacher: boolean;
-  currentParticipantId: string;
 }) {
-  const isOwner = note.participant === currentParticipantId;
   async function updateContent(content: string) {
+    if (!isTeacher) return;
     await pb.collection("sticky_notes").update(note.id, { content });
   }
   async function deleteNote() {
@@ -280,13 +269,13 @@ function MobileNote({
         placeholder="Type here…"
         className="flex-1 bg-transparent border-0 resize-none text-[13px] p-0 min-h-16 focus:outline-none"
         style={{ font: "inherit" }}
-        readOnly={!isOwner && !isTeacher}
+        readOnly={!isTeacher}
       />
       <div className="flex justify-between items-center">
         <small className="opacity-60 text-[11px]">
           {getParticipantName(note.participant as string)}
         </small>
-        {(isTeacher || isOwner) && (
+        {isTeacher && (
           <button
             onClick={deleteNote}
             style={{

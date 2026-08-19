@@ -11,7 +11,6 @@ import type { RecordModel } from "pocketbase";
 interface Props {
   note: RecordModel;
   isTeacher: boolean;
-  currentParticipantId: string;
 }
 
 interface DragState {
@@ -28,7 +27,7 @@ interface ResizeState {
   origHeight: number;
 }
 
-export function StickyNote({ note, isTeacher, currentParticipantId }: Props) {
+export function StickyNote({ note, isTeacher }: Props) {
   const locked = !isTeacher && !!currentRoom.value?.interactions_locked;
   const noteRef = useRef<HTMLDivElement>(null);
   const drag = useRef<DragState | null>(null);
@@ -66,7 +65,7 @@ export function StickyNote({ note, isTeacher, currentParticipantId }: Props) {
   }, [participantCache.value, pid]);
 
   function onPointerDown(e: PointerEvent) {
-    if (locked) return;
+    if (locked || !isTeacher) return;
     e.stopPropagation();
     e.preventDefault();
     noteRef.current!.setPointerCapture(e.pointerId);
@@ -96,7 +95,7 @@ export function StickyNote({ note, isTeacher, currentParticipantId }: Props) {
   }
 
   function onResizePointerDown(e: PointerEvent) {
-    if (locked) return;
+    if (locked || !isTeacher) return;
     e.stopPropagation();
     e.preventDefault();
     noteRef.current!.setPointerCapture(e.pointerId);
@@ -132,7 +131,7 @@ export function StickyNote({ note, isTeacher, currentParticipantId }: Props) {
   }
 
   async function updateContent(content: string) {
-    if (locked) return;
+    if (locked || !isTeacher) return;
     await pb.collection("sticky_notes").update(note.id, { content });
   }
 
@@ -140,8 +139,6 @@ export function StickyNote({ note, isTeacher, currentParticipantId }: Props) {
     e.stopPropagation();
     await pb.collection("sticky_notes").delete(note.id);
   }
-
-  const isOwner = note.participant === currentParticipantId;
 
   return (
     <div
@@ -161,14 +158,14 @@ export function StickyNote({ note, isTeacher, currentParticipantId }: Props) {
     >
       <textarea
         value={note.content as string}
-        readOnly={locked}
+        readOnly={locked || !isTeacher}
         onInput={(e) => updateContent(e.currentTarget.value)}
         onPointerDown={(e) => e.stopPropagation()}
         placeholder="Type here…"
         className="flex-1 bg-transparent border-0 resize-none text-[13px] p-0 min-h-17.5 cursor-text focus:outline-none"
         style={{ font: "inherit" }}
       />
-      {(isTeacher || isOwner) && (
+      {isTeacher && (
         <button
           onClick={deleteNote}
           onPointerDown={(e) => e.stopPropagation()}
