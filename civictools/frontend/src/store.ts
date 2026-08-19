@@ -51,6 +51,7 @@ export interface PresenceEntry {
 // Live roster of participants currently connected to the room (from the cursor
 // WebSocket hub). Reflects real-time joins and disconnects.
 export const presence = signal<PresenceEntry[]>([]);
+export const showRemoteCursors = signal(true);
 
 export const participantCache = signal<Map<string, RecordModel>>(new Map());
 

@@ -8,6 +8,7 @@ import {
   votings,
   timers,
   rankings,
+  showRemoteCursors,
 } from "../store";
 import { remoteCursors } from "../hooks/useCursors";
 import { StickyNote } from "./StickyNote";
@@ -117,7 +118,9 @@ export function InfiniteCanvas({
   }
 
   const { x, y, scale } = canvasTransform.value;
-  const cursors = Array.from(remoteCursors.value.values());
+  const cursors = showRemoteCursors.value
+    ? Array.from(remoteCursors.value.values())
+    : [];
 
   return (
     <div
