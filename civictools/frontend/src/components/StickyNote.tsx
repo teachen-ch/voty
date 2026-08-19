@@ -32,6 +32,10 @@ export function StickyNote({ note, isTeacher }: Props) {
   const noteRef = useRef<HTMLDivElement>(null);
   const drag = useRef<DragState | null>(null);
   const resize = useRef<ResizeState | null>(null);
+  const resizeSize = useRef({
+    width: (note.width as number) || 160,
+    height: (note.height as number) || 120,
+  });
   const [pos, setPos] = useState({
     x: note.pos_x as number,
     y: note.pos_y as number,
@@ -98,18 +102,19 @@ export function StickyNote({ note, isTeacher }: Props) {
     if (locked || !isTeacher) return;
     e.stopPropagation();
     e.preventDefault();
-    noteRef.current!.setPointerCapture(e.pointerId);
+    (e.currentTarget as HTMLElement).setPointerCapture(e.pointerId);
     resize.current = {
       startX: e.clientX,
       startY: e.clientY,
       origWidth: size.width,
       origHeight: size.height,
     };
+    resizeSize.current = size;
   }
 
   function onResizePointerMove(e: PointerEvent) {
     if (!resize.current) return;
-    setSize({
+    const nextSize = {
       width: Math.max(
         120,
         resize.current.origWidth + e.clientX - resize.current.startX
@@ -118,15 +123,18 @@ export function StickyNote({ note, isTeacher }: Props) {
         90,
         resize.current.origHeight + e.clientY - resize.current.startY
       ),
-    });
+    };
+    resizeSize.current = nextSize;
+    setSize(nextSize);
   }
 
   async function onResizePointerUp() {
     if (!resize.current) return;
     resize.current = null;
+    const finalSize = resizeSize.current;
     await pb.collection("sticky_notes").update(note.id, {
-      width: size.width,
-      height: size.height,
+      width: finalSize.width,
+      height: finalSize.height,
     });
   }
 
@@ -186,8 +194,26 @@ export function StickyNote({ note, isTeacher }: Props) {
         onPointerMove={onResizePointerMove}
         onPointerUp={onResizePointerUp}
         onPointerCancel={onResizePointerUp}
-        className="absolute bottom-0 right-0 w-4 h-4 cursor-se-resize"
-      />
+        className="group/resize absolute bottom-0 right-0 w-5 h-5 cursor-se-resize flex items-end justify-end"
+      >
+        <svg
+          aria-hidden="true"
+          width="14"
+          height="14"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          className="opacity-0 group-hover/resize:opacity-70 transition-opacity"
+        >
+          <path d="M15 3h6v6" />
+          <path d="M9 21H3v-6" />
+          <path d="m21 3-7 7" />
+          <path d="m3 21 7-7" />
+        </svg>
+      </div>
     </div>
   );
 }
