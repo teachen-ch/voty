@@ -10,6 +10,7 @@ import {
   rankings,
   showRemoteCursors,
   currentRoom,
+  stickyColorIndex,
 } from "../store";
 import { remoteCursors } from "../hooks/useCursors";
 import { StickyNote } from "./StickyNote";
@@ -18,14 +19,6 @@ import { VotingBoard } from "./VotingBoard";
 import { TimerBoard } from "./TimerBoard";
 import { RankingBoard } from "./RankingBoard";
 
-const NOTE_COLORS = [
-  "#fef08a",
-  "#bbf7d0",
-  "#bfdbfe",
-  "#fecaca",
-  "#e9d5ff",
-  "#fed7aa",
-];
 const WORLD_SIZE = 32000;
 const INIT_X = 3000;
 const INIT_Y = 2000;
@@ -119,7 +112,7 @@ export function InfiniteCanvas({
       pos_y: wy,
       width: 160,
       height: 120,
-      color: NOTE_COLORS[Math.floor(Math.random() * NOTE_COLORS.length)],
+      color_index: stickyColorIndex.value,
       participant: participantId,
     });
   }
@@ -164,7 +157,11 @@ export function InfiniteCanvas({
               pointerEvents: roomLocked && !isTeacher ? "none" : "auto",
             }}
           >
-            <StickyNote note={note} isTeacher={isTeacher} />
+            <StickyNote
+              note={note}
+              isTeacher={isTeacher}
+              currentParticipantId={participantId}
+            />
           </div>
         ))}
         {discussionBoards.value.map((board) => (

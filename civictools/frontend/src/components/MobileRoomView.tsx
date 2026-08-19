@@ -12,6 +12,7 @@ import {
   timerModal,
   rankingModal,
   currentRoom,
+  stickyColorIndex,
 } from "../store";
 import { DiscussionBoard } from "./DiscussionBoard";
 import { VotingBoard } from "./VotingBoard";
@@ -176,15 +177,6 @@ export function MobileRoomView({
   );
 }
 
-const NOTE_COLORS = [
-  "#fef08a",
-  "#bbf7d0",
-  "#bfdbfe",
-  "#fecaca",
-  "#e9d5ff",
-  "#fed7aa",
-];
-
 function MobileNotesSection({
   roomId,
   participantId,
@@ -208,7 +200,7 @@ function MobileNotesSection({
       pos_y: 2000,
       width: 160,
       height: 120,
-      color: NOTE_COLORS[Math.floor(Math.random() * NOTE_COLORS.length)],
+      color_index: stickyColorIndex.value,
       participant: participantId,
     });
   }

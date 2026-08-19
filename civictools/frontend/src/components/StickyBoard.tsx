@@ -1,17 +1,9 @@
 import { useRef } from "preact/hooks";
 import { useTranslation } from "react-i18next";
 import { pb } from "../pb";
+import { stickyColorIndex } from "../store";
 import { stickyNotes } from "../store";
 import { StickyNote } from "./StickyNote";
-
-const COLORS = [
-  "#fef08a",
-  "#bbf7d0",
-  "#bfdbfe",
-  "#fecaca",
-  "#e9d5ff",
-  "#fed7aa",
-];
 
 interface Props {
   roomId: string;
@@ -35,7 +27,6 @@ export function StickyBoard({ roomId, participantId, isTeacher }: Props) {
       85,
       Math.max(0, ((e.clientY - rect.top) / rect.height) * 100)
     );
-    const color = COLORS[Math.floor(Math.random() * COLORS.length)];
 
     await pb.collection("sticky_notes").create({
       room: roomId,
@@ -44,7 +35,7 @@ export function StickyBoard({ roomId, participantId, isTeacher }: Props) {
       pos_y,
       width: 160,
       height: 120,
-      color,
+      color_index: stickyColorIndex.value,
       participant: participantId,
     });
   }

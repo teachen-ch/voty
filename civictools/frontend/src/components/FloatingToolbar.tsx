@@ -11,6 +11,8 @@ import type { Tool } from "../store";
 import { pb } from "../pb";
 import { useState } from "preact/hooks";
 import { useTranslation } from "react-i18next";
+import { STICKY_COLORS } from "../stickyColors";
+import { stickyColorIndex } from "../store";
 
 function CursorIcon() {
   return (
@@ -161,6 +163,7 @@ const TOOL_BUTTONS: Array<{
 export function FloatingToolbar({ isTeacher }: Props) {
   const { t } = useTranslation();
   const [confirmLock, setConfirmLock] = useState(false);
+  const [showStickyPalette, setShowStickyPalette] = useState(false);
   const locked = (currentRoom.value?.interactions_locked as boolean) ?? false;
 
   async function toggleLock() {
@@ -203,7 +206,10 @@ export function FloatingToolbar({ isTeacher }: Props) {
               <div key={id} className="relative group">
                 <button
                   title={t(labelKey)}
-                  onClick={() => (activeTool.value = id)}
+                  onClick={() => {
+                    activeTool.value = id;
+                    setShowStickyPalette(id === "sticky" && !showStickyPalette);
+                  }}
                   className={[
                     "size-10 rounded-xl flex items-center justify-center transition-colors",
                     isActive
@@ -273,6 +279,25 @@ export function FloatingToolbar({ isTeacher }: Props) {
           </>
         )}
       </div>
+      {showStickyPalette && isTeacher && (
+        <div className="fixed right-20 top-1/2 -translate-y-1/2 z-50 bg-white rounded-2xl shadow-lg border border-slate-200 p-2 flex flex-col gap-2">
+          {STICKY_COLORS.map((color, index) => (
+            <button
+              key={color}
+              type="button"
+              aria-label={`Choose sticky note color ${index + 1}`}
+              title={`Color ${index + 1}`}
+              onClick={() => {
+                stickyColorIndex.value = index;
+                activeTool.value = "sticky";
+                setShowStickyPalette(false);
+              }}
+              className={`size-8 rounded-lg border-2 transition-transform hover:scale-110 ${stickyColorIndex.value === index ? "border-slate-700" : "border-transparent"}`}
+              style={{ backgroundColor: color }}
+            />
+          ))}
+        </div>
+      )}
       {confirmLock && (
         <div
           className="fixed inset-0 z-[100] flex items-center justify-center bg-black/50 p-4"

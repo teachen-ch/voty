@@ -100,6 +100,7 @@ export const canvasTransform = signal<CanvasTransform>({
 
 export type Tool = "select" | "sticky";
 export const activeTool = signal<Tool>("select");
+export const stickyColorIndex = signal(0);
 
 export const discussionModal = signal<{ board?: RecordModel } | null>(null);
 export const votingModal = signal<{ voting?: RecordModel } | null>(null);

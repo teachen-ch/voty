@@ -6,11 +6,13 @@ import {
   canvasTransform,
   currentRoom,
 } from "../store";
+import { getStickyColorIndex, STICKY_COLORS } from "../stickyColors";
 import type { RecordModel } from "pocketbase";
 
 interface Props {
   note: RecordModel;
   isTeacher: boolean;
+  currentParticipantId: string;
 }
 
 interface DragState {
@@ -27,11 +29,19 @@ interface ResizeState {
   origHeight: number;
 }
 
-export function StickyNote({ note, isTeacher }: Props) {
+interface CopyDragState {
+  startX: number;
+  startY: number;
+  origX: number;
+  origY: number;
+}
+
+export function StickyNote({ note, isTeacher, currentParticipantId }: Props) {
   const locked = !isTeacher && !!currentRoom.value?.interactions_locked;
   const noteRef = useRef<HTMLDivElement>(null);
   const drag = useRef<DragState | null>(null);
   const resize = useRef<ResizeState | null>(null);
+  const copyDrag = useRef<CopyDragState | null>(null);
   const resizeSize = useRef({
     width: (note.width as number) || 160,
     height: (note.height as number) || 120,
@@ -54,6 +64,10 @@ export function StickyNote({ note, isTeacher }: Props) {
   });
   const [content, setContent] = useState(note.content as string);
   const [fontSize, setFontSize] = useState(13);
+  const [copyPos, setCopyPos] = useState({
+    x: note.pos_x as number,
+    y: note.pos_y as number,
+  });
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   useEffect(() => {
@@ -95,6 +109,16 @@ export function StickyNote({ note, isTeacher }: Props) {
     e.stopPropagation();
     e.preventDefault();
     noteRef.current!.setPointerCapture(e.pointerId);
+    if (e.altKey) {
+      copyDrag.current = {
+        startX: e.clientX,
+        startY: e.clientY,
+        origX: note.pos_x as number,
+        origY: note.pos_y as number,
+      };
+      setCopyPos({ x: note.pos_x as number, y: note.pos_y as number });
+      return;
+    }
     drag.current = {
       startX: e.clientX,
       startY: e.clientY,
@@ -104,6 +128,18 @@ export function StickyNote({ note, isTeacher }: Props) {
   }
 
   function onPointerMove(e: PointerEvent) {
+    if (copyDrag.current) {
+      const { scale } = canvasTransform.value;
+      setCopyPos({
+        x:
+          copyDrag.current.origX +
+          (e.clientX - copyDrag.current.startX) / scale,
+        y:
+          copyDrag.current.origY +
+          (e.clientY - copyDrag.current.startY) / scale,
+      });
+      return;
+    }
     if (!drag.current) return;
     const { scale } = canvasTransform.value;
     setPos({
@@ -113,6 +149,20 @@ export function StickyNote({ note, isTeacher }: Props) {
   }
 
   async function onPointerUp() {
+    if (copyDrag.current) {
+      copyDrag.current = null;
+      await pb.collection("sticky_notes").create({
+        room: note.room,
+        content,
+        pos_x: copyPos.x,
+        pos_y: copyPos.y,
+        width: size.width,
+        height: size.height,
+        color_index: getStickyColorIndex(note),
+        participant: currentParticipantId,
+      });
+      return;
+    }
     if (!drag.current) return;
     drag.current = null;
     await pb
@@ -183,7 +233,7 @@ export function StickyNote({ note, isTeacher }: Props) {
         top: `${pos.y}px`,
         width: `${size.width}px`,
         height: `${size.height}px`,
-        background: note.color as string,
+        background: STICKY_COLORS[getStickyColorIndex(note)],
       }}
     >
       <textarea
@@ -228,6 +278,27 @@ export function StickyNote({ note, isTeacher }: Props) {
           <circle cx="4" cy="10" r="1" />
           <circle cx="10" cy="10" r="1" />
         </svg>
+      )}
+      {copyDrag.current && (
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute rounded p-2 flex flex-col gap-1 shadow-[2px_3px_8px_rgba(0,0,0,0.15)] opacity-80"
+          style={{
+            left: `${copyPos.x - pos.x}px`,
+            top: `${copyPos.y - pos.y}px`,
+            width: `${size.width}px`,
+            height: `${size.height}px`,
+            background: STICKY_COLORS[getStickyColorIndex(note)],
+            border: "2px dashed rgba(0,0,0,0.25)",
+          }}
+        >
+          <div
+            className="flex-1 whitespace-pre-wrap break-words overflow-hidden"
+            style={{ fontSize: `${fontSize}px`, lineHeight: 1.15 }}
+          >
+            {content}
+          </div>
+        </div>
       )}
       <div
         aria-label="Resize note"
