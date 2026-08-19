@@ -7,20 +7,9 @@ civictools_allowed_hosts:
   - tools.voty.ch
   - prepodavame.voty.ch
   - grajdansko.voty.ch
-  - app.prepodavame.bg
-  - tools.prepodavame.bg
-  - civic-tools.prepodavame.bg
-  - app.grajdansko.bg
-  - tools.grajdansko.bg
-  - civic-tools.grajdansko.bg
+  - glas.prepodavame.bg
 civictools_host_rule: >-
   Host(`tools.voty.ch`) ||
   Host(`prepodavame.voty.ch`) ||
-  Host(`grajdansko.voty.ch`)
-UNUSED_commented_hosts: >-
-  Host(`app.prepodavame.bg`) ||
-  Host(`tools.prepodavame.bg`) ||
-  Host(`civic-tools.prepodavame.bg`) ||
-  Host(`app.grajdansko.bg`) ||
-  Host(`tools.grajdansko.bg`) ||
-  Host(`civic-tools.grajdansko.bg`)
+  Host(`grajdansko.voty.ch`) ||
+  Host(`glas.prepodavame.bg`)
