@@ -152,7 +152,7 @@ export function DiscussionBoard({
               onPointerDown={(e) => e.stopPropagation()}
               onInput={(e) => setPromptDraft(e.currentTarget.value)}
               onBlur={savePrompt}
-              placeholder="Discussion prompt (markdown supported)…"
+              placeholder="Discussion prompt…"
               className="w-full bg-white border border-slate-300 rounded p-2 text-sm resize-y min-h-16 focus:outline-none focus:ring-2 focus:ring-primary-200"
             />
           ) : (

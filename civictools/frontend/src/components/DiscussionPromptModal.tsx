@@ -112,9 +112,7 @@ export function DiscussionPromptModal({ roomId }: Props) {
         </div>
 
         <label className="flex flex-col gap-1">
-          <span className="text-sm font-medium text-slate-700">
-            Prompt (markdown supported)
-          </span>
+          <span className="text-sm font-medium text-slate-700">Prompt</span>
           <textarea
             autoFocus
             value={prompt}
