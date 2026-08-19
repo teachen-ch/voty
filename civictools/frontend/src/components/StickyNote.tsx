@@ -155,7 +155,7 @@ export function StickyNote({ note, isTeacher }: Props) {
       onPointerDown={onPointerDown}
       onPointerMove={onPointerMove}
       onPointerUp={onPointerUp}
-      className="absolute p-2 rounded cursor-grab select-none touch-none flex flex-col gap-1 shadow-[2px_3px_8px_rgba(0,0,0,0.15)]"
+      className="group absolute p-2 rounded cursor-grab select-none touch-none flex flex-col gap-1 shadow-[2px_3px_8px_rgba(0,0,0,0.15)]"
       style={{
         left: `${pos.x}px`,
         top: `${pos.y}px`,
@@ -188,6 +188,21 @@ export function StickyNote({ note, isTeacher }: Props) {
           {getParticipantName(note.participant as string)}
         </small>
       </div>
+      {isTeacher && (
+        <svg
+          aria-hidden="true"
+          width="14"
+          height="14"
+          viewBox="0 0 14 14"
+          fill="currentColor"
+          className="pointer-events-none absolute bottom-1 left-1 opacity-0 transition-opacity group-hover:opacity-50"
+        >
+          <circle cx="4" cy="4" r="1" />
+          <circle cx="10" cy="4" r="1" />
+          <circle cx="4" cy="10" r="1" />
+          <circle cx="10" cy="10" r="1" />
+        </svg>
+      )}
       <div
         aria-label="Resize note"
         onPointerDown={onResizePointerDown}
