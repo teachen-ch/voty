@@ -61,9 +61,7 @@ export function MobileRoomView({
   return (
     <div
       className="fixed inset-0 overflow-y-auto bg-slate-50"
-      style={{
-        pointerEvents: roomLocked && !isTeacher ? "none" : "auto",
-      }}
+      style={{ pointerEvents: "auto" }}
     >
       <div className="flex flex-col gap-3 p-3 pt-28 pb-24 max-w-2xl mx-auto">
         {items.length === 0 && notes.length === 0 && (
@@ -75,44 +73,64 @@ export function MobileRoomView({
         {items.map((it) => {
           if (it.kind === "discussion") {
             return (
-              <DiscussionBoard
+              <div
                 key={`d-${it.rec.id}`}
-                board={it.rec}
-                isTeacher={isTeacher}
-                currentParticipantId={participantId}
-                mobile
-              />
+                style={{
+                  pointerEvents: roomLocked && !isTeacher ? "none" : "auto",
+                }}
+              >
+                <DiscussionBoard
+                  board={it.rec}
+                  isTeacher={isTeacher}
+                  currentParticipantId={participantId}
+                  mobile
+                />
+              </div>
             );
           }
           if (it.kind === "voting") {
             return (
-              <VotingBoard
+              <div
                 key={`v-${it.rec.id}`}
-                voting={it.rec}
-                isTeacher={isTeacher}
-                currentParticipantId={participantId}
-                mobile
-              />
+                style={{
+                  pointerEvents: roomLocked && !isTeacher ? "none" : "auto",
+                }}
+              >
+                <VotingBoard
+                  voting={it.rec}
+                  isTeacher={isTeacher}
+                  currentParticipantId={participantId}
+                  mobile
+                />
+              </div>
             );
           }
           if (it.kind === "timer") {
             return (
-              <TimerBoard
+              <div
                 key={`t-${it.rec.id}`}
-                timer={it.rec}
-                isTeacher={isTeacher}
-                mobile
-              />
+                style={{
+                  pointerEvents: roomLocked && !isTeacher ? "none" : "auto",
+                }}
+              >
+                <TimerBoard timer={it.rec} isTeacher={isTeacher} mobile />
+              </div>
             );
           }
           return (
-            <RankingBoard
+            <div
               key={`r-${it.rec.id}`}
-              ranking={it.rec}
-              isTeacher={isTeacher}
-              currentParticipantId={participantId}
-              mobile
-            />
+              style={{
+                pointerEvents: roomLocked && !isTeacher ? "none" : "auto",
+              }}
+            >
+              <RankingBoard
+                ranking={it.rec}
+                isTeacher={isTeacher}
+                currentParticipantId={participantId}
+                mobile
+              />
+            </div>
           );
         })}
 

@@ -136,7 +136,7 @@ export function InfiniteCanvas({
       className="absolute inset-0 overflow-hidden"
       style={{
         cursor: activeTool.value === "sticky" ? "crosshair" : "grab",
-        pointerEvents: roomLocked && !isTeacher ? "none" : "auto",
+        pointerEvents: "auto",
       }}
       onPointerDown={onPointerDown}
       onPointerMove={onPointerMove}
@@ -159,34 +159,66 @@ export function InfiniteCanvas({
         }}
       >
         {stickyNotes.value.map((note) => (
-          <StickyNote key={note.id} note={note} isTeacher={isTeacher} />
+          <div
+            key={note.id}
+            style={{
+              pointerEvents: roomLocked && !isTeacher ? "none" : "auto",
+            }}
+          >
+            <StickyNote note={note} isTeacher={isTeacher} />
+          </div>
         ))}
         {discussionBoards.value.map((board) => (
-          <DiscussionBoard
+          <div
             key={board.id}
-            board={board}
-            isTeacher={isTeacher}
-            currentParticipantId={participantId}
-          />
+            style={{
+              pointerEvents: roomLocked && !isTeacher ? "none" : "auto",
+            }}
+          >
+            <DiscussionBoard
+              board={board}
+              isTeacher={isTeacher}
+              currentParticipantId={participantId}
+            />
+          </div>
         ))}
         {votings.value.map((voting) => (
-          <VotingBoard
+          <div
             key={voting.id}
-            voting={voting}
-            isTeacher={isTeacher}
-            currentParticipantId={participantId}
-          />
+            style={{
+              pointerEvents: roomLocked && !isTeacher ? "none" : "auto",
+            }}
+          >
+            <VotingBoard
+              voting={voting}
+              isTeacher={isTeacher}
+              currentParticipantId={participantId}
+            />
+          </div>
         ))}
         {timers.value.map((timer) => (
-          <TimerBoard key={timer.id} timer={timer} isTeacher={isTeacher} />
+          <div
+            key={timer.id}
+            style={{
+              pointerEvents: roomLocked && !isTeacher ? "none" : "auto",
+            }}
+          >
+            <TimerBoard timer={timer} isTeacher={isTeacher} />
+          </div>
         ))}
         {rankings.value.map((ranking) => (
-          <RankingBoard
+          <div
             key={ranking.id}
-            ranking={ranking}
-            isTeacher={isTeacher}
-            currentParticipantId={participantId}
-          />
+            style={{
+              pointerEvents: roomLocked && !isTeacher ? "none" : "auto",
+            }}
+          >
+            <RankingBoard
+              ranking={ranking}
+              isTeacher={isTeacher}
+              currentParticipantId={participantId}
+            />
+          </div>
         ))}
       </div>
 

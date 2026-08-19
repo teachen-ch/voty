@@ -27,6 +27,7 @@ export function StudentRoom({ roomId }: Props) {
 
   const isMobile = useIsMobile();
   const stickyEnabled = (room?.sticky_notes_enabled as boolean) ?? false;
+  const interactionsLocked = (room?.interactions_locked as boolean) ?? false;
 
   useCursors(roomId, participantId, nickname, myColor);
   useRoomData(roomId);
@@ -91,11 +92,29 @@ export function StudentRoom({ roomId }: Props) {
         />
       )}
       <button
-        className="btn secondary fixed bottom-4 left-4 z-50 text-sm"
+        className={`btn secondary fixed bottom-4 z-50 text-sm ${interactionsLocked ? "left-28" : "left-4"}`}
         onClick={() => navigate(`/join/${roomId}`)}
       >
         Leave
       </button>
+      {interactionsLocked && (
+        <div
+          aria-label="Interactions locked"
+          title="Interactions locked"
+          className="fixed bottom-4 left-4 z-50 pointer-events-none text-white drop-shadow-[0_3px_6px_rgba(0,0,0,0.55)]"
+        >
+          <svg
+            width="80"
+            height="80"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+            aria-hidden="true"
+          >
+            <rect x="4" y="10" width="16" height="11" rx="2" />
+            <path d="M8 10V7a4 4 0 0 1 8 0v3h-2V7a2 2 0 0 0-4 0v3z" />
+          </svg>
+        </div>
+      )}
     </div>
   );
 }
