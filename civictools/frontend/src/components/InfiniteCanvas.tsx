@@ -118,6 +118,8 @@ export function InfiniteCanvas({
       content: "",
       pos_x: wx,
       pos_y: wy,
+      width: 160,
+      height: 120,
       color: NOTE_COLORS[Math.floor(Math.random() * NOTE_COLORS.length)],
       participant: participantId,
     });

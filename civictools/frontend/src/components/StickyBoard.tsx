@@ -42,6 +42,8 @@ export function StickyBoard({ roomId, participantId, isTeacher }: Props) {
       content: "",
       pos_x,
       pos_y,
+      width: 160,
+      height: 120,
       color,
       participant: participantId,
     });

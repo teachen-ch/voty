@@ -194,26 +194,8 @@ export function StickyNote({ note, isTeacher }: Props) {
         onPointerMove={onResizePointerMove}
         onPointerUp={onResizePointerUp}
         onPointerCancel={onResizePointerUp}
-        className="group/resize absolute bottom-0 right-0 w-5 h-5 cursor-se-resize flex items-end justify-end"
-      >
-        <svg
-          aria-hidden="true"
-          width="14"
-          height="14"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          className="opacity-0 group-hover/resize:opacity-70 transition-opacity"
-        >
-          <path d="M15 3h6v6" />
-          <path d="M9 21H3v-6" />
-          <path d="m21 3-7 7" />
-          <path d="m3 21 7-7" />
-        </svg>
-      </div>
+        className="absolute bottom-0 right-0 w-5 h-5 cursor-se-resize"
+      />
     </div>
   );
 }

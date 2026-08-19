@@ -188,6 +188,8 @@ function MobileNotesSection({
       content: "",
       pos_x: 3000,
       pos_y: 2000,
+      width: 160,
+      height: 120,
       color: NOTE_COLORS[Math.floor(Math.random() * NOTE_COLORS.length)],
       participant: participantId,
     });
