@@ -71,7 +71,6 @@ export function InfiniteCanvas({
 
   function onPointerDown(e: PointerEvent) {
     if (activeTool.value !== "select") return;
-    if (roomLocked && !isTeacher) return;
     panRef.current = {
       sx: e.clientX,
       sy: e.clientY,

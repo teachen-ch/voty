@@ -92,7 +92,7 @@ export function StudentRoom({ roomId }: Props) {
         />
       )}
       <button
-        className={`btn secondary fixed bottom-4 z-50 text-sm ${interactionsLocked ? "left-28" : "left-4"}`}
+        className="btn secondary fixed bottom-4 left-4 z-50 text-sm"
         onClick={() => navigate(`/join/${roomId}`)}
       >
         Leave
@@ -101,7 +101,7 @@ export function StudentRoom({ roomId }: Props) {
         <div
           aria-label="Interactions locked"
           title="Interactions locked"
-          className="fixed bottom-4 left-4 z-50 pointer-events-none text-white drop-shadow-[0_3px_6px_rgba(0,0,0,0.55)]"
+          className="fixed bottom-16 left-4 z-50 pointer-events-none text-white drop-shadow-[0_3px_6px_rgba(0,0,0,0.55)]"
         >
           <svg
             width="80"
