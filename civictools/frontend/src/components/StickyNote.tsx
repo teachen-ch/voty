@@ -77,7 +77,7 @@ export function StickyNote({ note, isTeacher }: Props) {
     // notes use the available space while long notes remain readable.
     let fitted = 36;
     textarea.style.fontSize = `${fitted}px`;
-    while (fitted > 10 && textarea.scrollHeight > textarea.clientHeight) {
+    while (fitted > 6 && textarea.scrollHeight > textarea.clientHeight) {
       fitted -= 1;
       textarea.style.fontSize = `${fitted}px`;
     }
@@ -196,7 +196,7 @@ export function StickyNote({ note, isTeacher }: Props) {
         }}
         onPointerDown={(e) => e.stopPropagation()}
         placeholder="Type here…"
-        className="flex-1 bg-transparent border-0 resize-none p-0 min-h-17.5 cursor-text focus:outline-none overflow-hidden"
+        className="flex-1 min-h-0 shrink bg-transparent border-0 resize-none p-0 cursor-text focus:outline-none overflow-hidden"
         style={{ font: "inherit", fontSize: `${fontSize}px`, lineHeight: 1.15 }}
       />
       {isTeacher && (
@@ -209,7 +209,7 @@ export function StickyNote({ note, isTeacher }: Props) {
           ×
         </button>
       )}
-      <div className="flex justify-between items-center">
+      <div className="flex shrink-0 justify-between items-center">
         <small className="opacity-60 text-[11px]">
           {getParticipantName(note.participant as string)}
         </small>
