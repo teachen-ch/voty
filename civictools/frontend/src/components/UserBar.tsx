@@ -20,7 +20,8 @@ export function UserBar({ nickname, role, participantId }: Props) {
   const others = presence.value.filter(
     (p) => p.participantId !== participantId
   );
-  const shown = others.slice(0, 4);
+  const compact = others.length > 5;
+  const shown = compact ? others.slice(0, 4) : others;
   const overflow = others.length - shown.length;
   const isTeacher = role === "teacher";
 
@@ -59,27 +60,54 @@ export function UserBar({ nickname, role, participantId }: Props) {
       )}
 
       {others.length > 0 && (
-        <div className="flex items-center bg-white rounded-2xl shadow border border-slate-200 px-2 py-2 gap-1">
-          {shown.map((p) => (
-            <div key={p.participantId} className="relative group">
-              <div
-                className="w-7 h-7 rounded-full flex items-center justify-center text-white text-[10px] font-bold"
-                style={{ background: participantColor(p.participantId) }}
-              >
-                {initials(p.nickname)}
+        <div
+          className={`group flex items-center bg-white rounded-2xl shadow border border-slate-200 px-2 py-2 gap-1 ${compact ? "hover:gap-1.5" : ""}`}
+        >
+          <div
+            className={
+              compact
+                ? "flex items-center gap-1 group-hover:hidden"
+                : "contents"
+            }
+          >
+            {shown.map((p) => (
+              <Avatar key={p.participantId} participant={p} />
+            ))}
+            {overflow > 0 && (
+              <div className="w-7 h-7 rounded-full flex items-center justify-center bg-slate-200 text-slate-600 text-[10px] font-bold">
+                +{overflow}
               </div>
-              <div className="pointer-events-none absolute left-1/2 -translate-x-1/2 top-full mt-1.5 opacity-0 group-hover:opacity-100 transition-opacity bg-slate-700 text-white text-xs rounded px-2 py-1 whitespace-nowrap z-10">
-                {p.nickname}
-              </div>
-            </div>
-          ))}
-          {overflow > 0 && (
-            <div className="w-7 h-7 rounded-full flex items-center justify-center bg-slate-200 text-slate-600 text-[10px] font-bold">
-              +{overflow}
+            )}
+          </div>
+          {compact && (
+            <div className="hidden group-hover:flex items-center gap-1">
+              {others.map((p) => (
+                <Avatar key={p.participantId} participant={p} />
+              ))}
             </div>
           )}
         </div>
       )}
+    </div>
+  );
+}
+
+function Avatar({
+  participant,
+}: {
+  participant: (typeof presence.value)[number];
+}) {
+  return (
+    <div className="relative group/avatar">
+      <div
+        className="w-7 h-7 rounded-full flex items-center justify-center text-white text-[10px] font-bold"
+        style={{ background: participantColor(participant.participantId) }}
+      >
+        {initials(participant.nickname)}
+      </div>
+      <div className="pointer-events-none absolute left-1/2 -translate-x-1/2 top-full mt-1.5 opacity-0 group-hover/avatar:opacity-100 transition-opacity bg-slate-700 text-white text-xs rounded px-2 py-1 whitespace-nowrap z-10">
+        {participant.nickname}
+      </div>
     </div>
   );
 }
