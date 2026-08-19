@@ -20,9 +20,17 @@ interface DragState {
   origY: number;
 }
 
+interface ResizeState {
+  startX: number;
+  startY: number;
+  origWidth: number;
+  origHeight: number;
+}
+
 export function StickyNote({ note, isTeacher, currentParticipantId }: Props) {
   const noteRef = useRef<HTMLDivElement>(null);
   const drag = useRef<DragState | null>(null);
+  const resize = useRef<ResizeState | null>(null);
   const [pos, setPos] = useState({
     x: note.pos_x as number,
     y: note.pos_y as number,
@@ -30,10 +38,24 @@ export function StickyNote({ note, isTeacher, currentParticipantId }: Props) {
   const [, forceUpdate] = useState(0);
 
   useEffect(() => {
-    if (!drag.current) {
+    if (!drag.current && !resize.current) {
       setPos({ x: note.pos_x as number, y: note.pos_y as number });
     }
   }, [note.pos_x, note.pos_y]);
+
+  const [size, setSize] = useState({
+    width: (note.width as number) || 160,
+    height: (note.height as number) || 120,
+  });
+
+  useEffect(() => {
+    if (!resize.current) {
+      setSize({
+        width: (note.width as number) || 160,
+        height: (note.height as number) || 120,
+      });
+    }
+  }, [note.width, note.height]);
 
   const pid = note.participant as string | undefined;
   useEffect(() => {
@@ -70,6 +92,41 @@ export function StickyNote({ note, isTeacher, currentParticipantId }: Props) {
       .update(note.id, { pos_x: pos.x, pos_y: pos.y });
   }
 
+  function onResizePointerDown(e: PointerEvent) {
+    e.stopPropagation();
+    e.preventDefault();
+    noteRef.current!.setPointerCapture(e.pointerId);
+    resize.current = {
+      startX: e.clientX,
+      startY: e.clientY,
+      origWidth: size.width,
+      origHeight: size.height,
+    };
+  }
+
+  function onResizePointerMove(e: PointerEvent) {
+    if (!resize.current) return;
+    setSize({
+      width: Math.max(
+        120,
+        resize.current.origWidth + e.clientX - resize.current.startX
+      ),
+      height: Math.max(
+        90,
+        resize.current.origHeight + e.clientY - resize.current.startY
+      ),
+    });
+  }
+
+  async function onResizePointerUp() {
+    if (!resize.current) return;
+    resize.current = null;
+    await pb.collection("sticky_notes").update(note.id, {
+      width: size.width,
+      height: size.height,
+    });
+  }
+
   async function updateContent(content: string) {
     await pb.collection("sticky_notes").update(note.id, { content });
   }
@@ -88,10 +145,12 @@ export function StickyNote({ note, isTeacher, currentParticipantId }: Props) {
       onPointerDown={onPointerDown}
       onPointerMove={onPointerMove}
       onPointerUp={onPointerUp}
-      className="absolute w-[160px] min-h-[120px] p-2 rounded cursor-grab select-none touch-none flex flex-col gap-1 shadow-[2px_3px_8px_rgba(0,0,0,0.15)]"
+      className="absolute p-2 rounded cursor-grab select-none touch-none flex flex-col gap-1 shadow-[2px_3px_8px_rgba(0,0,0,0.15)]"
       style={{
         left: `${pos.x}px`,
         top: `${pos.y}px`,
+        width: `${size.width}px`,
+        height: `${size.height}px`,
         background: note.color as string,
       }}
     >
@@ -125,6 +184,14 @@ export function StickyNote({ note, isTeacher, currentParticipantId }: Props) {
           </button>
         )}
       </div>
+      <div
+        aria-label="Resize note"
+        onPointerDown={onResizePointerDown}
+        onPointerMove={onResizePointerMove}
+        onPointerUp={onResizePointerUp}
+        onPointerCancel={onResizePointerUp}
+        className="absolute bottom-0 right-0 w-4 h-4 cursor-se-resize"
+      />
     </div>
   );
 }
