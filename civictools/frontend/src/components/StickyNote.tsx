@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "preact/hooks";
+import { useEffect, useLayoutEffect, useRef, useState } from "preact/hooks";
 import { pb } from "../pb";
 import {
   participantCache,
@@ -52,6 +52,9 @@ export function StickyNote({ note, isTeacher }: Props) {
     width: (note.width as number) || 160,
     height: (note.height as number) || 120,
   });
+  const [content, setContent] = useState(note.content as string);
+  const [fontSize, setFontSize] = useState(13);
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   useEffect(() => {
     if (!resize.current) {
@@ -61,6 +64,25 @@ export function StickyNote({ note, isTeacher }: Props) {
       });
     }
   }, [note.width, note.height]);
+
+  useEffect(() => {
+    setContent(note.content as string);
+  }, [note.content]);
+
+  useLayoutEffect(() => {
+    const textarea = textareaRef.current;
+    if (!textarea) return;
+
+    // Measure the real wrapped textarea content from large to small, so short
+    // notes use the available space while long notes remain readable.
+    let fitted = 36;
+    textarea.style.fontSize = `${fitted}px`;
+    while (fitted > 10 && textarea.scrollHeight > textarea.clientHeight) {
+      fitted -= 1;
+      textarea.style.fontSize = `${fitted}px`;
+    }
+    setFontSize(fitted);
+  }, [content, size.width, size.height]);
 
   const pid = note.participant as string | undefined;
   useEffect(() => {
@@ -165,13 +187,17 @@ export function StickyNote({ note, isTeacher }: Props) {
       }}
     >
       <textarea
-        value={note.content as string}
+        ref={textareaRef}
+        value={content}
         readOnly={locked || !isTeacher}
-        onInput={(e) => updateContent(e.currentTarget.value)}
+        onInput={(e) => {
+          setContent(e.currentTarget.value);
+          updateContent(e.currentTarget.value);
+        }}
         onPointerDown={(e) => e.stopPropagation()}
         placeholder="Type here…"
-        className="flex-1 bg-transparent border-0 resize-none text-[13px] p-0 min-h-17.5 cursor-text focus:outline-none"
-        style={{ font: "inherit" }}
+        className="flex-1 bg-transparent border-0 resize-none p-0 min-h-17.5 cursor-text focus:outline-none overflow-hidden"
+        style={{ font: "inherit", fontSize: `${fontSize}px`, lineHeight: 1.15 }}
       />
       {isTeacher && (
         <button
