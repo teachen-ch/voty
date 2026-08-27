@@ -3,6 +3,7 @@ import { useLocation } from "wouter";
 import { pb } from "../pb";
 import { isTeacher } from "../store";
 import { Logo } from "./Logo";
+import { LanguageToggle } from "./LanguageToggle";
 
 export function Header() {
   const { t } = useTranslation();
@@ -19,7 +20,8 @@ export function Header() {
         <div className="flex items-center gap-1">
           <Logo className="h-8 w-auto" />
         </div>
-        <div className="text-sm">
+        <div className="flex items-center gap-3 text-sm">
+          <LanguageToggle />
           {isTeacher.value ? (
             <button
               type="button"
