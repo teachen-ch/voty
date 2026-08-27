@@ -7,6 +7,7 @@ export interface Tenant {
   name: string;
   primary: string;
   secondary: string;
+  locale: "en" | "bg";
   logo?: string;
 }
 
@@ -16,6 +17,7 @@ const TENANTS: Tenant[] = [
     name: "Преподаваме",
     primary: "#053264",
     secondary: "#fafadc",
+    locale: "bg",
     logo: prepodavameLogo,
   },
   {
@@ -23,6 +25,7 @@ const TENANTS: Tenant[] = [
     name: "Гражданско",
     primary: "#D93250",
     secondary: "#384CBB",
+    locale: "bg",
     logo: grajdanskoLogo,
   },
   {
@@ -30,6 +33,7 @@ const TENANTS: Tenant[] = [
     name: "voty",
     primary: "#386BB5",
     secondary: "#8BB9C0",
+    locale: "en",
     logo: votyLogo,
   },
 ];

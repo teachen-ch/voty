@@ -3,6 +3,7 @@ import { initReactI18next } from "react-i18next";
 import en from "./en";
 import de from "./de";
 import bg from "./bg";
+import { tenant } from "../tenant";
 
 i18n.use(initReactI18next).init({
   resources: {
@@ -10,7 +11,7 @@ i18n.use(initReactI18next).init({
     de: { translation: de },
     bg: { translation: bg },
   },
-  lng: "en",
+  lng: tenant.locale,
   fallbackLng: "en",
   interpolation: { escapeValue: false },
 });
