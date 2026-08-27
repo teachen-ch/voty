@@ -67,6 +67,11 @@ const en = {
     live: "Live",
     online: "online",
   },
+  userBar: {
+    teacher: "Teacher",
+    student: "Student",
+    you: "You",
+  },
   join: {
     title: "Join",
     nicknamePlaceholder: "Your nickname",
@@ -103,6 +108,12 @@ const en = {
     voting: "Voting",
     timer: "Timer",
     ranking: "Ranking",
+  },
+  widget: {
+    timer: "Timer",
+    reset: "Reset",
+    pro: "Pro",
+    contra: "Contra",
   },
   copy: {
     outlineTitle: "What this room includes",

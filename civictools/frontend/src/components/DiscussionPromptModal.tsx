@@ -1,8 +1,8 @@
 import { useEffect, useState } from "preact/hooks";
+import { useTranslation } from "react-i18next";
 import { pb } from "../pb";
 import { canvasTransform, discussionModal } from "../store";
 
-const DEFAULT_OPTIONS = ["Pro", "Contra"];
 const MAX_OPTIONS = 4;
 const BOARD_WIDTH = 520;
 const BOARD_HEIGHT_ESTIMATE = 220;
@@ -12,11 +12,13 @@ interface Props {
 }
 
 export function DiscussionPromptModal({ roomId }: Props) {
+  const { t } = useTranslation();
+  const defaultOptions = [t("widget.pro"), t("widget.contra")];
   const state = discussionModal.value;
   const editing = state?.board;
 
   const [prompt, setPrompt] = useState("");
-  const [options, setOptions] = useState<string[]>([...DEFAULT_OPTIONS]);
+  const [options, setOptions] = useState<string[]>(defaultOptions);
   const [submitting, setSubmitting] = useState(false);
 
   useEffect(() => {
@@ -27,11 +29,11 @@ export function DiscussionPromptModal({ roomId }: Props) {
       setOptions(
         Array.isArray(opts) && opts.length > 0
           ? (opts as string[])
-          : [...DEFAULT_OPTIONS]
+          : defaultOptions
       );
     } else {
       setPrompt("");
-      setOptions([...DEFAULT_OPTIONS]);
+      setOptions(defaultOptions);
     }
     setSubmitting(false);
   }, [state]);

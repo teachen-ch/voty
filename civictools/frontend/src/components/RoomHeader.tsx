@@ -1,4 +1,5 @@
 import { presence } from "../store";
+import { useTranslation } from "react-i18next";
 import { Logo } from "./Logo";
 import { ShareLink } from "./ShareLink";
 
@@ -9,6 +10,7 @@ interface Props {
 }
 
 export function RoomHeader({ roomName, roomId, isTeacher = true }: Props) {
+  const { t } = useTranslation();
   const count = presence.value.length;
 
   return (
@@ -22,9 +24,9 @@ export function RoomHeader({ roomName, roomId, isTeacher = true }: Props) {
         <div className="w-px h-5 bg-slate-200 shrink-0" />
         <div className="flex items-center gap-1.5 text-[12px] text-slate-500 shrink-0">
           <span className="w-2 h-2 rounded-full bg-emerald-400 inline-block" />
-          <span className="hidden sm:inline">live · </span>
+          <span className="hidden sm:inline">{t("room.live")} · </span>
           {count}
-          <span className="hidden sm:inline"> online</span>
+          <span className="hidden sm:inline"> {t("room.online")}</span>
         </div>
         {isTeacher && <ShareLink roomId={roomId} />}
       </div>

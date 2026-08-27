@@ -5,6 +5,7 @@ import {
   useRef,
   useState,
 } from "preact/hooks";
+import { useTranslation } from "react-i18next";
 import { pb } from "../pb";
 import {
   argumentRecords,
@@ -31,6 +32,7 @@ export function DiscussionBoard({
   currentParticipantId,
   mobile = false,
 }: Props) {
+  const { t } = useTranslation();
   const ref = useRef<HTMLDivElement>(null);
   const [collapsed, setCollapsed] = useState(false);
   const drag = useRef<{
@@ -62,8 +64,14 @@ export function DiscussionBoard({
 
   const rawOptions = board.options;
   const options: string[] = Array.isArray(rawOptions)
-    ? (rawOptions as string[])
-    : ["Pro", "Contra"];
+    ? (rawOptions as string[]).map((option) =>
+        option === "Pro"
+          ? t("widget.pro")
+          : option === "Contra"
+            ? t("widget.contra")
+            : option
+      )
+    : [t("widget.pro"), t("widget.contra")];
 
   function onHeaderPointerDown(e: PointerEvent) {
     if (mobile) return;

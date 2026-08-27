@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "preact/hooks";
+import { useTranslation } from "react-i18next";
 import { pb } from "../pb";
 import { canvasTransform, timerModal } from "../store";
 import type { RecordModel } from "pocketbase";
@@ -26,6 +27,7 @@ function parseDate(v: unknown): number | null {
 }
 
 export function TimerBoard({ timer, isTeacher, mobile = false }: Props) {
+  const { t } = useTranslation();
   const ref = useRef<HTMLDivElement>(null);
   const [collapsed, setCollapsed] = useState(false);
   const drag = useRef<{
@@ -177,7 +179,7 @@ export function TimerBoard({ timer, isTeacher, mobile = false }: Props) {
         }
       >
         <span className="text-xs font-medium text-slate-500 uppercase tracking-wide">
-          Timer
+          {t("widget.timer")}
         </span>
         <div className="shrink-0 flex items-center gap-1">
           {isTeacher && (
@@ -309,7 +311,7 @@ export function TimerBoard({ timer, isTeacher, mobile = false }: Props) {
                   onClick={reset}
                   className="px-3 py-1 rounded bg-slate-600 text-white text-sm hover:bg-slate-700"
                 >
-                  Reset
+                  {t("widget.reset")}
                 </button>
               )}
             </div>

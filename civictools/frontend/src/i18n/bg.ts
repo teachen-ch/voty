@@ -39,7 +39,7 @@ const bg = {
     browseAll: "Разгледайте всички шаблони →",
     continueRoom: "Продължете работа в стая",
     live: "на живо",
-    idle: "неактивна",
+    idle: "в покой",
     onlineCount_one: "{{count}} участник онлайн",
     onlineCount_other: "{{count}} участници онлайн",
     startedAgo: "стартирана {{when}}",
@@ -66,6 +66,11 @@ const bg = {
     live: "На живо",
     online: "онлайн",
   },
+  userBar: {
+    teacher: "Учител",
+    student: "Ученик",
+    you: "Вие",
+  },
   join: {
     title: "Присъединяване",
     nicknamePlaceholder: "Вашият псевдоним",
@@ -82,7 +87,7 @@ const bg = {
     hint: "Кликнете върху дъската, за да добавите бележка. Плъзнете я, за да я преместите.",
   },
   shareLink: {
-    copy: "Копирай връзката за присъединяване",
+    copy: "Копирай връзката",
     copyMobile: "Връзка за присъединяване",
     copied: "✓ Копирано!",
     showQr: "Покажи QR код",
@@ -102,6 +107,12 @@ const bg = {
     voting: "Гласуване",
     timer: "Таймер",
     ranking: "Класиране",
+  },
+  widget: {
+    timer: "Таймер",
+    reset: "Нулирай",
+    pro: "За",
+    contra: "Против",
   },
   copy: {
     outlineTitle: "Какво включва тази стая",

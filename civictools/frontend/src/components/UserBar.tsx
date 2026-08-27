@@ -1,4 +1,5 @@
 import { Link } from "wouter";
+import { useTranslation } from "react-i18next";
 import { presence, participantColor, showRemoteCursors } from "../store";
 
 interface Props {
@@ -16,6 +17,7 @@ function initials(name: string): string {
 }
 
 export function UserBar({ nickname, role, participantId }: Props) {
+  const { t } = useTranslation();
   const color = participantColor(participantId);
   const others = presence.value.filter(
     (p) => p.participantId !== participantId
@@ -36,7 +38,13 @@ export function UserBar({ nickname, role, participantId }: Props) {
       <div className="leading-tight">
         <div className="text-sm font-semibold text-slate-800">{nickname}</div>
         <div className="text-[11px] text-slate-400">
-          {isTeacher ? "Teacher · Du" : "Student"}
+          {isTeacher ? (
+            <>
+              {t("userBar.teacher")} · {t("userBar.you")}
+            </>
+          ) : (
+            t("userBar.student")
+          )}
         </div>
       </div>
     </>
