@@ -20,7 +20,7 @@ export function LanguageToggle() {
             onClick={() => changeLocale(locale)}
             aria-current={currentLocale === locale ? "true" : undefined}
             className={`cursor-pointer hover:underline ${
-              currentLocale === locale ? "font-semibold italic" : ""
+              currentLocale === locale ? "" : "text-gray-400"
             }`}
           >
             {locale}
