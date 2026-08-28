@@ -1,12 +1,12 @@
 import { Swissvote, useSwissvotesQuery } from "graphql/types";
 import { Input } from "components/ui";
-import { Box, Link, Text, Flex, Button, Image } from "components/ui";
+import { Box, Link, Text, Flex, Button, Image, Heading } from "components/ui";
 import { ErrorPage, Loading } from "./Page";
-import { useState } from "react";
-import { formatYear } from "util/date";
+import { useEffect, useState } from "react";
+import date, { formatYear } from "util/date";
 import debounce from "lodash/debounce";
 import random from "lodash/random";
-import { Filter, VotesQuery } from "./Swissvotes";
+import { Filter, getVoteResult, getVoteType, VotesQuery } from "./Swissvotes";
 
 export const Posters: React.FC<React.PropsWithChildren<unknown>> = () => {
   const [keywords, setKeywords] = useState("");
@@ -77,17 +77,30 @@ export const PosterList: React.FC<
       >
         {swissvotes?.map((vote) => {
           if (!vote) return null;
-          const posters: string[] = [];
+          const posters: { image: string; position: "JA" | "NEIN" }[] = [];
           if (vote.poster_ja && !onlyNo) {
             const ja = vote.poster_ja.split(" ");
-            posters.push(ja[random(0, ja.length - 1)]);
+            posters.push({
+              image: ja[random(0, ja.length - 1)],
+              position: "JA",
+            });
           }
           if (vote.poster_nein && !onlyYes) {
             const nein = vote.poster_nein.split(" ");
-            posters.push(nein[random(0, nein.length - 1)]);
+            posters.push({
+              image: nein[random(0, nein.length - 1)],
+              position: "NEIN",
+            });
           }
           if (posters.length > 0) {
-            return posters.map((p) => <Poster key={p} vote={vote} image={p} />);
+            return posters.map((p) => (
+              <Poster
+                key={`${p.image}-${p.position}`}
+                vote={vote}
+                image={p.image}
+                position={p.position}
+              />
+            ));
           } else return null;
         })}
       </Box>
@@ -96,31 +109,119 @@ export const PosterList: React.FC<
 };
 
 export const Poster: React.FC<
-  React.PropsWithChildren<{ vote: Swissvote; image: string }>
-> = ({ vote, image }) => {
+  React.PropsWithChildren<{
+    vote: Swissvote;
+    image: string;
+    position: "JA" | "NEIN";
+  }>
+> = ({ vote, image, position }) => {
   const [hover, setHover] = useState(false);
+  const [open, setOpen] = useState(false);
   const copyright = image.replace(/.*:\/\/(?:www\.)?(.*?)\/.*/, "$1");
+
+  useEffect(() => {
+    if (!open) return;
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setOpen(false);
+    };
+    document.addEventListener("keydown", closeOnEscape);
+    return () => document.removeEventListener("keydown", closeOnEscape);
+  }, [open]);
+
+  async function downloadPoster() {
+    const filename = `voty-${vote.anr}-${position.toLowerCase()}.jpg`;
+    try {
+      const response = await fetch(image);
+      if (!response.ok) throw new Error("Image download failed");
+      const blobUrl = URL.createObjectURL(await response.blob());
+      const link = document.createElement("a");
+      link.href = blobUrl;
+      link.download = filename;
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      URL.revokeObjectURL(blobUrl);
+    } catch {
+      const link = document.createElement("a");
+      link.href = image;
+      link.download = filename;
+      link.target = "_blank";
+      link.rel = "noreferrer";
+      link.click();
+    }
+  }
+
   return (
-    <Box className="w-[calc(100%-8px)] mb-4 bg-white p-2 relative">
-      {hover && (
+    <>
+      <Box className="w-[calc(100%-8px)] mb-4 bg-white p-2 relative">
+        {hover && (
+          <Box
+            className="absolute cursor-pointer bg-[rgba(1,1,1,0.5)] text-white p-2 w-[calc(100%-16px)] h-[calc(100%-16px)]"
+            style={{ hyphens: "auto" }}
+            onMouseOut={() => setHover(false)}
+            onClick={() => setOpen(true)}
+          >
+            <Text className="font-semibold text-sm sm:text-base wrap-break-word">
+              {vote.titel_kurz_d}
+            </Text>
+            <Text className="text-sm my-2">
+              Jahr: {vote.datum && formatYear(vote.datum)}
+            </Text>
+            <Text className="text-sm">&copy; {copyright}</Text>
+          </Box>
+        )}
+        <Image src={image} onMouseOver={() => setHover(true)} alt="Plakat" />
+      </Box>
+      {open && (
         <Box
-          className="absolute cursor-pointer bg-[rgba(1,1,1,0.5)] text-white p-2 w-[calc(100%-16px)] h-[calc(100%-16px)]"
-          style={{ hyphens: "auto" }}
-          onMouseOut={() => setHover(false)}
-          onClick={() =>
-            vote.swissvoteslink && window.open(vote.swissvoteslink, "_blank")
-          }
+          role="dialog"
+          aria-modal="true"
+          aria-label={vote.titel_kurz_d || "Plakat"}
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4 sm:p-8"
+          onClick={() => setOpen(false)}
         >
-          <Text className="font-semibold text-sm sm:text-base wrap-break-word">
-            {vote.titel_kurz_d}
-          </Text>
-          <Text className="text-sm my-2">
-            Jahr: {vote.datum && formatYear(vote.datum)}
-          </Text>
-          <Text className="text-sm">&copy; {copyright}</Text>
+          <Box
+            className="relative flex max-h-full w-full max-w-4xl flex-col overflow-auto rounded-card bg-gray-900 p-4 pb-20 text-white sm:p-6 sm:pb-20"
+            onClick={(event) => event.stopPropagation()}
+          >
+            <Button
+              variant="secondary"
+              aria-label="Schliessen"
+              className="absolute right-4 top-4 z-10 min-h-8 px-3"
+              onClick={() => setOpen(false)}
+            >
+              ×
+            </Button>
+            <Image
+              src={image}
+              alt={vote.titel_kurz_d || "Plakat"}
+              className="mx-auto max-h-[65vh] w-auto object-contain rounded border border-white"
+            />
+            <Box className="mt-4 border-t border-gray-500 pt-4">
+              <Heading className="mt-0 pr-10 text-lg">
+                {vote.titel_kurz_d} ({getVoteType(vote.rechtsform) || "–"},{" "}
+                {vote.datum ? date(vote.datum).format("DD.MM.YYYY") : "–"})
+              </Heading>
+              <Text>
+                Plakat: {position}. Abstimmungsresultat:{" "}
+                {getVoteResult(vote.annahme)}
+              </Text>
+              <Button className="mt-4" onClick={downloadPoster}>
+                Bild herunterladen
+              </Button>
+              <Button
+                className="absolute bottom-4 right-4 sm:bottom-6 sm:right-6"
+                onClick={() =>
+                  vote.swissvoteslink &&
+                  window.open(vote.swissvoteslink, "_blank")
+                }
+              >
+                Infos auf Swissvotes.ch
+              </Button>
+            </Box>
+          </Box>
         </Box>
       )}
-      <Image src={image} onMouseOver={() => setHover(true)} alt="Plakat" />
-    </Box>
+    </>
   );
 };
