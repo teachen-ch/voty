@@ -65,8 +65,9 @@ def intNone(val):
 
 print("2) Downloading and parsing latest swissvotes_dataset.csv")
 # Load in the data
-votes = pd.read_csv(DOWNLOAD_URL, encoding='iso-8859-1',
-                    delimiter=';', parse_dates=['datum'],
+# Swissvotes currently publishes UTF-8 CSV with a BOM. Using utf-8-sig removes it from the first column name.
+votes = pd.read_csv(DOWNLOAD_URL, encoding='utf-8-sig',
+                    delimiter=';', parse_dates=['datum'], dayfirst=True,
                     converters={'anr': str, 'rechtsform': intNone, 'annahme': intNone, 'volk': intNone, 'stand': intNone})
 
 # votes.dropna(how='all', axis=1, inplace=True)
