@@ -1,5 +1,5 @@
 import votyLogo from "./assets/voty_logo.svg";
-import prepodavameLogo from "./assets/prepodavame_logo.svg";
+import prepodavameLogo from "./assets/prepodavame_logo.png";
 import grajdanskoLogo from "./assets/grajdansko_logo.png";
 
 export interface Tenant {
