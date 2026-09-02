@@ -15,8 +15,8 @@ export function Login() {
   const [passwordResetSent, setPasswordResetSent] = useState(false);
   const [loading, setLoading] = useState(false);
   const [oidcEnabled, setOidcEnabled] = useState(false);
+  const [oidcProvider, setOidcProvider] = useState<string | null>(null);
   const [, navigate] = useLocation();
-  const oidcProvider = tenant.oidcProvider;
 
   function nextTarget(): string {
     const next = new URLSearchParams(window.location.search).get("next");
@@ -27,12 +27,13 @@ export function Login() {
   useEffect(() => {
     pb.collection("users")
       .listAuthMethods()
-      .then((m) =>
-        setOidcEnabled(
-          oidcProvider !== undefined &&
-            m.oauth2.providers.some((p) => p.name === oidcProvider)
-        )
-      )
+      .then((m) => {
+        const provider = m.oauth2.providers.find(
+          (p) => p.displayName === tenant.oidcDisplayName
+        );
+        setOidcProvider(provider?.name ?? null);
+        setOidcEnabled(provider !== undefined);
+      })
       .catch(() => {});
   }, []);
 

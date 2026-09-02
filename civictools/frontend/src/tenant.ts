@@ -9,7 +9,7 @@ export interface Tenant {
   secondary: string;
   locale: "en" | "bg";
   logo?: string;
-  oidcProvider?: string;
+  oidcDisplayName?: string;
 }
 
 const TENANTS: Tenant[] = [
@@ -20,7 +20,7 @@ const TENANTS: Tenant[] = [
     secondary: "#fafadc",
     locale: "bg",
     logo: prepodavameLogo,
-    oidcProvider: "prepodavame",
+    oidcDisplayName: "prepodavame",
   },
   {
     id: "grajdansko",
