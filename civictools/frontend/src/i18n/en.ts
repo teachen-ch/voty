@@ -21,7 +21,7 @@ const en = {
       "If an account exists for this email, a reset link has been sent.",
     resetFailed: "Could not send the password reset email.",
     or: "or",
-    keycloak: "Login with Keycloak",
+    oidc: "Login with {{tenant}}",
   },
   dashboard: {
     title: "My Rooms",

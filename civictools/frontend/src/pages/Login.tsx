@@ -3,6 +3,7 @@ import { useLocation } from "wouter";
 import { useTranslation } from "react-i18next";
 import { pb } from "../pb";
 import { teacher } from "../store";
+import { tenant } from "../tenant";
 import { Header } from "../components/Header";
 import type { RecordModel } from "pocketbase";
 
@@ -15,6 +16,7 @@ export function Login() {
   const [loading, setLoading] = useState(false);
   const [oidcEnabled, setOidcEnabled] = useState(false);
   const [, navigate] = useLocation();
+  const oidcProvider = tenant.oidcProvider;
 
   function nextTarget(): string {
     const next = new URLSearchParams(window.location.search).get("next");
@@ -26,7 +28,10 @@ export function Login() {
     pb.collection("users")
       .listAuthMethods()
       .then((m) =>
-        setOidcEnabled(m.oauth2.providers.some((p) => p.name === "oidc"))
+        setOidcEnabled(
+          oidcProvider !== undefined &&
+            m.oauth2.providers.some((p) => p.name === oidcProvider)
+        )
       )
       .catch(() => {});
   }, []);
@@ -68,13 +73,14 @@ export function Login() {
     }
   }
 
-  async function handleKeycloakLogin() {
+  async function handleOidcLogin() {
+    if (!oidcProvider) return;
     setError(null);
     setLoading(true);
     try {
       const auth = await pb
         .collection("users")
-        .authWithOAuth2({ provider: "oidc" });
+        .authWithOAuth2({ provider: oidcProvider });
       teacher.value = auth.record as RecordModel;
       navigate(nextTarget());
     } catch (err: unknown) {
@@ -90,6 +96,29 @@ export function Login() {
       <h1 className="text-center mt-20">{t("login.welcome")}</h1>
       <div className="card max-w-100 mx-auto">
         <h2>{t("login.title")}</h2>
+        {oidcEnabled && (
+          <>
+            <button
+              type="button"
+              onClick={handleOidcLogin}
+              disabled={loading}
+              className="btn w-full py-2"
+            >
+              {t("login.oidc", { tenant: tenant.name })}
+            </button>
+            <div className="flex items-center gap-3 my-4 text-gray-400 text-[13px]">
+              <span
+                className="flex-1 border-t border-slate-200"
+                aria-hidden="true"
+              />
+              <span>{t("login.or")}</span>
+              <span
+                className="flex-1 border-t border-slate-200"
+                aria-hidden="true"
+              />
+            </div>
+          </>
+        )}
         <form onSubmit={handleSubmit} className="flex flex-col gap-3">
           <input
             type="email"
@@ -124,20 +153,6 @@ export function Login() {
             </p>
           )}
         </form>
-        {oidcEnabled && (
-          <>
-            <p className="text-center my-3 text-gray-400 text-[13px]">
-              {t("login.or")}
-            </p>
-            <button
-              onClick={handleKeycloakLogin}
-              disabled={loading}
-              className="btn w-full"
-            >
-              {t("login.keycloak")}
-            </button>
-          </>
-        )}
       </div>
     </div>
   );
