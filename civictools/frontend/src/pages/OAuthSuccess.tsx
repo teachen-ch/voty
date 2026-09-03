@@ -1,4 +1,10 @@
+import { useEffect } from "preact/hooks";
+
 export function OAuthSuccess() {
+  useEffect(() => {
+    window.close();
+  }, []);
+
   return (
     <main className="min-h-screen flex items-center justify-center">
       <svg
