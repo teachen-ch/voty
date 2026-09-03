@@ -7,11 +7,13 @@ import { Join } from "./pages/Join";
 import { StudentRoom } from "./pages/StudentRoom";
 import { CopyTemplate } from "./pages/CopyTemplate";
 import { Templates } from "./pages/Templates";
+import { OAuthSuccess } from "./pages/OAuthSuccess";
 
 export function App() {
   return (
     <Switch>
       <Route path="/login" component={Login} />
+      <Route path="/oauth-success" component={OAuthSuccess} />
       <Route path="/dashboard">
         {isTeacher.value ? <Dashboard /> : <Redirect to="/login" />}
       </Route>
