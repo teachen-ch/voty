@@ -78,13 +78,41 @@ export function Login() {
     if (!oidcProvider) return;
     setError(null);
     setLoading(true);
+
+    // Open the blank window synchronously from the click handler so popup
+    // blockers (especially Safari) allow it. PocketBase navigates it once the
+    // OAuth URL has been prepared.
+    const isMobile = window.matchMedia(
+      "(max-width: 640px), (pointer: coarse)"
+    ).matches;
+    const width = isMobile ? window.screen.availWidth : 550;
+    const height = isMobile ? window.screen.availHeight : 780;
+    const left = isMobile
+      ? window.screen.availLeft
+      : window.screenX + (window.outerWidth - width) / 2;
+    const top = isMobile
+      ? window.screen.availTop
+      : window.screenY + (window.outerHeight - height) / 2;
+    const popup = window.open(
+      "about:blank",
+      "oauth_popup",
+      `width=${width},height=${height},top=${top},left=${left},resizable,menubar=no`
+    );
+
     try {
-      const auth = await pb
-        .collection("users")
-        .authWithOAuth2({ provider: oidcProvider });
+      const auth = await pb.collection("users").authWithOAuth2({
+        provider: oidcProvider,
+        urlCallback: (url) => {
+          if (!popup) {
+            throw new Error("Could not open the OAuth login window");
+          }
+          popup.location.href = url;
+        },
+      });
       teacher.value = auth.record as RecordModel;
       navigate(nextTarget());
     } catch (err: unknown) {
+      popup?.close();
       setError(err instanceof Error ? err.message : "Login failed");
     } finally {
       setLoading(false);
