@@ -77,7 +77,6 @@ export function Login() {
   async function handleOidcLogin() {
     if (!oidcProvider) return;
     setError(null);
-    setLoading(true);
 
     // Open the blank window synchronously from the click handler so popup
     // blockers (especially Safari) allow it. PocketBase navigates it once the
@@ -114,8 +113,6 @@ export function Login() {
     } catch (err: unknown) {
       popup?.close();
       setError(err instanceof Error ? err.message : "Login failed");
-    } finally {
-      setLoading(false);
     }
   }
 
@@ -130,7 +127,6 @@ export function Login() {
             <button
               type="button"
               onClick={handleOidcLogin}
-              disabled={loading}
               className="btn w-full py-2"
             >
               {t("login.oidc", { tenant: tenant.name })}
