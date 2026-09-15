@@ -20,6 +20,7 @@ import { RankingPromptModal } from "../components/RankingPromptModal";
 import { UserBar } from "../components/UserBar";
 import { RoomHeader } from "../components/RoomHeader";
 import { ZoomControls } from "../components/ZoomControls";
+import { IntroModal } from "../components/IntroModal";
 import type { RecordModel } from "pocketbase";
 
 interface Props {
@@ -103,6 +104,7 @@ export function Room({ roomId }: Props) {
         participantId={participantId}
       />
       <RoomHeader roomName={room.name as string} roomId={roomId} />
+      <IntroModal screen="room" />
       <DiscussionPromptModal roomId={roomId} />
       <VotingPromptModal roomId={roomId} />
       <TimerPromptModal roomId={roomId} />

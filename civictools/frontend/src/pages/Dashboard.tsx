@@ -5,6 +5,7 @@ import { pb } from "../pb";
 import type { RecordModel } from "pocketbase";
 import { ShareLink } from "../components/ShareLink";
 import { Header } from "../components/Header";
+import { IntroModal } from "../components/IntroModal";
 import { timeSince, lastOpenedLabel } from "../util/time";
 
 interface Presence {
@@ -95,6 +96,7 @@ export function Dashboard() {
   return (
     <div className="page">
       <Header />
+      <IntroModal screen="dashboard" />
       <h1>{t("dashboard.title")}</h1>
 
       <h2 className="text-lg font-semibold mt-4 mb-3">

@@ -12,6 +12,7 @@ import { FloatingToolbar } from "../components/FloatingToolbar";
 import { UserBar } from "../components/UserBar";
 import { RoomHeader } from "../components/RoomHeader";
 import { ZoomControls } from "../components/ZoomControls";
+import { IntroModal } from "../components/IntroModal";
 
 interface Props {
   roomId: string;
@@ -93,6 +94,7 @@ export function StudentRoom({ roomId }: Props) {
           isTeacher={false}
         />
       )}
+      <IntroModal screen="room" />
       <button
         className="btn secondary fixed bottom-4 left-4 z-50 text-sm"
         onClick={() => navigate(`/join/${roomId}`)}

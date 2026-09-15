@@ -16,6 +16,30 @@ const en = {
     expand: "Expand",
     collapse: "Collapse",
   },
+  intro: {
+    eyebrow: "CivicTools",
+    dashboardTitle: "Welcome to the civic toolbox for {{tenant}}",
+    dashboardLead:
+      "Create engaging rooms for exploring democracy and civic participation with your class.",
+    dashboardStep1:
+      "Create interactive rooms and work with your class on topics that matter.",
+    dashboardStep2:
+      "Explore ready-made templates designed to complement {{tenant}} courses.",
+    dashboardStep3:
+      "Or start from scratch with a simple set of flexible tools.",
+    dashboardStep4:
+      "When your room is ready, share its link or QR code with your class.",
+    roomTitle: "Welcome to your room",
+    roomLead: "A few ideas to help you get started:",
+    roomStep1:
+      "Find the tools on the right. Try them out and move them around the canvas.",
+    roomStep2: "Customize each tool to fit your lesson and your class.",
+    roomStep3:
+      "Share this room’s link with your phone to preview the student view.",
+    roomStep4:
+      "You can lock the room at any time so students cannot interact with its content.",
+    continue: "Let’s get started",
+  },
   breadcrumb: {
     home: "Home",
     signIn: "Sign in",
