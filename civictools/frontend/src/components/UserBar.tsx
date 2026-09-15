@@ -1,6 +1,6 @@
 import { Link } from "wouter";
 import { useTranslation } from "react-i18next";
-import { presence, participantColor, showRemoteCursors } from "../store";
+import { presence, participantColor } from "../store";
 
 interface Props {
   nickname: string;
@@ -96,41 +96,6 @@ export function UserBar({ nickname, role, participantId }: Props) {
           )}
         </div>
       )}
-      <button
-        type="button"
-        title={
-          showRemoteCursors.value ? "Hide other cursors" : "Show other cursors"
-        }
-        aria-label={
-          showRemoteCursors.value ? "Hide other cursors" : "Show other cursors"
-        }
-        onClick={() => (showRemoteCursors.value = !showRemoteCursors.value)}
-        className={`w-8 h-8 flex items-center justify-center transition-colors ${showRemoteCursors.value ? "bg-transparent text-slate-500 hover:text-slate-800" : "bg-transparent text-slate-700"}`}
-      >
-        <svg
-          width="19"
-          height="19"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="1.8"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        >
-          {showRemoteCursors.value ? (
-            <>
-              <path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6S2 12 2 12Z" />
-              <circle cx="12" cy="12" r="2.5" />
-            </>
-          ) : (
-            <>
-              <path d="m3 3 18 18" />
-              <path d="M10.6 6.2A10.7 10.7 0 0 1 12 6c6.5 0 10 6 10 6a18.2 18.2 0 0 1-3.2 3.6" />
-              <path d="M6.2 6.3C3.4 8.1 2 12 2 12s3.5 6 10 6c1 0 1.9-.1 2.8-.4" />
-            </>
-          )}
-        </svg>
-      </button>
     </div>
   );
 }

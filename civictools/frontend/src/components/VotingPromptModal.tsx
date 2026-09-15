@@ -1,8 +1,8 @@
 import { useEffect, useState } from "preact/hooks";
+import { useTranslation } from "react-i18next";
 import { pb } from "../pb";
 import { canvasTransform, votingModal } from "../store";
 
-const DEFAULT_OPTIONS = ["Yes", "No"];
 const MAX_OPTIONS = 4;
 const BOARD_WIDTH = 460;
 const BOARD_HEIGHT_ESTIMATE = 260;
@@ -12,11 +12,13 @@ interface Props {
 }
 
 export function VotingPromptModal({ roomId }: Props) {
+  const { t } = useTranslation();
+  const defaultOptions = [t("voting.defaultYes"), t("voting.defaultNo")];
   const state = votingModal.value;
   const editing = state?.voting;
 
   const [prompt, setPrompt] = useState("");
-  const [options, setOptions] = useState<string[]>([...DEFAULT_OPTIONS]);
+  const [options, setOptions] = useState<string[]>(defaultOptions);
   const [submitting, setSubmitting] = useState(false);
 
   useEffect(() => {
@@ -27,11 +29,11 @@ export function VotingPromptModal({ roomId }: Props) {
       setOptions(
         Array.isArray(opts) && opts.length > 0
           ? (opts as string[])
-          : [...DEFAULT_OPTIONS]
+          : defaultOptions
       );
     } else {
       setPrompt("");
-      setOptions([...DEFAULT_OPTIONS]);
+      setOptions(defaultOptions);
     }
     setSubmitting(false);
   }, [state]);
@@ -99,7 +101,7 @@ export function VotingPromptModal({ roomId }: Props) {
       >
         <div className="flex items-center justify-between">
           <h2 className="text-lg font-semibold">
-            {editing ? "Edit voting" : "New voting"}
+            {editing ? t("voting.editTitle") : t("voting.newTitle")}
           </h2>
           <button
             type="button"
@@ -111,33 +113,35 @@ export function VotingPromptModal({ roomId }: Props) {
         </div>
 
         <label className="flex flex-col gap-1">
-          <span className="text-sm font-medium text-slate-700">Question</span>
+          <span className="text-sm font-medium text-slate-700">
+            {t("common.question")}
+          </span>
           <textarea
             autoFocus
             value={prompt}
             onInput={(e) => setPrompt(e.currentTarget.value)}
-            placeholder="What should the class vote on?"
+            placeholder={t("voting.questionPlaceholder")}
             className="w-full border border-slate-300 rounded p-2 text-sm resize-y min-h-24 focus:outline-none focus:ring-2 focus:ring-primary-200"
           />
         </label>
 
         <div className="flex flex-col gap-2">
           <span className="text-sm font-medium text-slate-700">
-            Options ({options.length}/{MAX_OPTIONS})
+            {t("common.options", { count: options.length, max: MAX_OPTIONS })}
           </span>
           {options.map((opt, i) => (
             <div key={i} className="flex items-center gap-2">
               <input
                 value={opt}
                 onInput={(e) => updateOption(i, e.currentTarget.value)}
-                placeholder={`Option ${i + 1}`}
+                placeholder={t("common.option", { number: i + 1 })}
                 className="flex-1 border border-slate-300 rounded px-2 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary-200"
               />
               {options.length > 2 && (
                 <button
                   type="button"
                   onClick={() => removeOption(i)}
-                  title="Remove option"
+                  title={t("common.removeOption")}
                   className="text-slate-400 hover:text-red-600 px-2"
                 >
                   ×
@@ -151,7 +155,7 @@ export function VotingPromptModal({ roomId }: Props) {
               onClick={addOption}
               className="self-start text-sm text-primary-600 hover:text-primary-800"
             >
-              + Add option
+              + {t("common.addOption")}
             </button>
           )}
         </div>
@@ -162,14 +166,18 @@ export function VotingPromptModal({ roomId }: Props) {
             onClick={close}
             className="px-3 py-1.5 rounded text-sm text-slate-600 hover:bg-slate-100"
           >
-            Cancel
+            {t("common.cancel")}
           </button>
           <button
             type="submit"
             disabled={submitting}
             className="px-4 py-1.5 rounded text-sm bg-primary-600 text-white hover:bg-primary-700 disabled:opacity-50"
           >
-            {submitting ? "Saving…" : editing ? "Save" : "Add"}
+            {submitting
+              ? t("common.saving")
+              : editing
+                ? t("common.save")
+                : t("common.add")}
           </button>
         </div>
       </form>

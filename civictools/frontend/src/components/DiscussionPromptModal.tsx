@@ -102,7 +102,7 @@ export function DiscussionPromptModal({ roomId }: Props) {
       >
         <div className="flex items-center justify-between">
           <h2 className="text-lg font-semibold">
-            {editing ? "Edit discussion board" : "New discussion board"}
+            {editing ? t("discussion.editTitle") : t("discussion.newTitle")}
           </h2>
           <button
             type="button"
@@ -114,33 +114,35 @@ export function DiscussionPromptModal({ roomId }: Props) {
         </div>
 
         <label className="flex flex-col gap-1">
-          <span className="text-sm font-medium text-slate-700">Prompt</span>
+          <span className="text-sm font-medium text-slate-700">
+            {t("discussion.prompt")}
+          </span>
           <textarea
             autoFocus
             value={prompt}
             onInput={(e) => setPrompt(e.currentTarget.value)}
-            placeholder="What should the class discuss?"
+            placeholder={t("discussion.promptPlaceholder")}
             className="w-full border border-slate-300 rounded p-2 text-sm resize-y min-h-24 focus:outline-none focus:ring-2 focus:ring-primary-200"
           />
         </label>
 
         <div className="flex flex-col gap-2">
           <span className="text-sm font-medium text-slate-700">
-            Options ({options.length}/{MAX_OPTIONS})
+            {t("common.options", { count: options.length, max: MAX_OPTIONS })}
           </span>
           {options.map((opt, i) => (
             <div key={i} className="flex items-center gap-2">
               <input
                 value={opt}
                 onInput={(e) => updateOption(i, e.currentTarget.value)}
-                placeholder={`Option ${i + 1}`}
+                placeholder={t("common.option", { number: i + 1 })}
                 className="flex-1 border border-slate-300 rounded px-2 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary-200"
               />
               {options.length > 1 && (
                 <button
                   type="button"
                   onClick={() => removeOption(i)}
-                  title="Remove option"
+                  title={t("common.removeOption")}
                   className="text-slate-400 hover:text-red-600 px-2"
                 >
                   ×
@@ -154,13 +156,12 @@ export function DiscussionPromptModal({ roomId }: Props) {
               onClick={addOption}
               className="self-start text-sm text-primary-600 hover:text-primary-800"
             >
-              + Add option
+              + {t("common.addOption")}
             </button>
           )}
           {editing && (
             <p className="text-[11px] text-slate-500 italic">
-              Existing arguments in removed columns will be hidden but not
-              deleted.
+              {t("discussion.removedOptionsHint")}
             </p>
           )}
         </div>
@@ -171,14 +172,18 @@ export function DiscussionPromptModal({ roomId }: Props) {
             onClick={close}
             className="px-3 py-1.5 rounded text-sm text-slate-600 hover:bg-slate-100"
           >
-            Cancel
+            {t("common.cancel")}
           </button>
           <button
             type="submit"
             disabled={submitting}
             className="px-4 py-1.5 rounded text-sm bg-primary-600 text-white hover:bg-primary-700 disabled:opacity-50"
           >
-            {submitting ? "Saving…" : editing ? "Save" : "Add"}
+            {submitting
+              ? t("common.saving")
+              : editing
+                ? t("common.save")
+                : t("common.add")}
           </button>
         </div>
       </form>

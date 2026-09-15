@@ -16,7 +16,7 @@ export function RoomHeader({ roomName, roomId, isTeacher = true }: Props) {
   return (
     <div className="fixed top-3 inset-x-3 sm:left-auto sm:right-4 sm:top-4 sm:inset-x-auto flex items-center z-50">
       <div className="flex items-center gap-2 sm:gap-3 bg-white rounded-2xl shadow border border-slate-200 px-3 sm:px-4 py-2 w-full sm:w-auto min-w-0">
-        <Logo className="w-10 sm:w-12 h-7 sm:h-8 shrink-0" />
+        <Logo className="h-7 sm:h-8 w-auto shrink-0" />
         <div className="w-px h-5 bg-slate-200 shrink-0" />
         <span className="text-sm font-semibold text-slate-800 truncate min-w-0">
           {roomName}

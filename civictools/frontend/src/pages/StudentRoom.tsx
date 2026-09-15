@@ -1,5 +1,6 @@
 import { useEffect } from "preact/hooks";
 import { useLocation } from "wouter";
+import { useTranslation } from "react-i18next";
 import { pb } from "../pb";
 import { studentSession, currentRoom, participantColor } from "../store";
 import { useCursors } from "../hooks/useCursors";
@@ -17,6 +18,7 @@ interface Props {
 }
 
 export function StudentRoom({ roomId }: Props) {
+  const { t } = useTranslation();
   const session = studentSession.value;
   const room = currentRoom.value;
   const [, navigate] = useLocation();
@@ -95,7 +97,7 @@ export function StudentRoom({ roomId }: Props) {
         className="btn secondary fixed bottom-4 left-4 z-50 text-sm"
         onClick={() => navigate(`/join/${roomId}`)}
       >
-        Leave
+        {t("student.leave")}
       </button>
       {interactionsLocked && (
         <div

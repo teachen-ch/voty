@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "preact/hooks";
+import { useTranslation } from "react-i18next";
 import { pb } from "../pb";
 import { canvasTransform, participantVotes, votingModal } from "../store";
 import { renderMarkdown } from "../util/markdown";
@@ -24,6 +25,7 @@ export function VotingBoard({
   currentParticipantId,
   mobile = false,
 }: Props) {
+  const { t } = useTranslation();
   const ref = useRef<HTMLDivElement>(null);
   const [collapsed, setCollapsed] = useState(false);
   const drag = useRef<{
@@ -131,7 +133,7 @@ export function VotingBoard({
 
   async function deleteVoting(e: MouseEvent) {
     e.stopPropagation();
-    if (!confirm("Delete this voting and all votes?")) return;
+    if (!confirm(t("voting.confirmDelete"))) return;
     await pb.collection("votings").delete(voting.id);
   }
 
@@ -168,15 +170,17 @@ export function VotingBoard({
               }}
             />
           ) : (
-            <span className="text-slate-400 italic">(no question)</span>
+            <span className="text-slate-400 italic">
+              {t("voting.noQuestion")}
+            </span>
           )}
           {closed ? (
             <span className="inline-block text-[10px] uppercase tracking-wide font-semibold text-slate-400 bg-slate-100 border border-slate-200 rounded px-1.5 py-0.5 align-middle">
-              Closed
+              {t("voting.closed")}
             </span>
           ) : (
             <span className="inline-block text-[10px] uppercase tracking-wide font-semibold text-emerald-700 bg-emerald-50 border border-emerald-200 rounded px-1.5 py-0.5 align-middle">
-              Open
+              {t("voting.open")}
             </span>
           )}
         </div>
@@ -190,7 +194,7 @@ export function VotingBoard({
                   votingModal.value = { voting };
                 }}
                 onPointerDown={(e) => e.stopPropagation()}
-                title="Edit voting"
+                title={t("voting.edit")}
                 className="text-slate-400 hover:text-primary-600 px-1"
               >
                 <svg
@@ -211,7 +215,7 @@ export function VotingBoard({
                 data-no-drag
                 onClick={deleteVoting}
                 onPointerDown={(e) => e.stopPropagation()}
-                title="Delete voting"
+                title={t("voting.delete")}
                 className="text-slate-400 hover:text-red-600 text-lg leading-none px-1"
               >
                 ×
@@ -225,7 +229,7 @@ export function VotingBoard({
                 e.stopPropagation();
                 setCollapsed((c) => !c);
               }}
-              title={collapsed ? "Expand" : "Collapse"}
+              title={collapsed ? t("common.expand") : t("common.collapse")}
               className="text-slate-500 hover:text-slate-900 px-1"
             >
               <svg
@@ -296,16 +300,16 @@ export function VotingBoard({
           </div>
 
           <div className="flex items-center justify-between mt-1 text-[11px] text-slate-500">
-            <span>
-              {total} vote{total === 1 ? "" : "s"}
-            </span>
+            <span>{t("voting.votes", { count: total })}</span>
             {isTeacher && (
               <div className="flex items-center gap-2">
                 <button
                   onClick={toggleResults}
                   className="text-slate-600 hover:text-slate-900 underline"
                 >
-                  {showResults ? "Hide results" : "Show results"}
+                  {showResults
+                    ? t("voting.hideResults")
+                    : t("voting.showResults")}
                 </button>
                 <button
                   onClick={toggleClosed}
@@ -316,7 +320,7 @@ export function VotingBoard({
                       : "text-rose-600 hover:text-rose-800")
                   }
                 >
-                  {closed ? "Start voting" : "Close voting"}
+                  {closed ? t("voting.start") : t("voting.close")}
                 </button>
               </div>
             )}

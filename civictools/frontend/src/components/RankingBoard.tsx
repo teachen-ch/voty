@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "preact/hooks";
+import { useTranslation } from "react-i18next";
 import { pb } from "../pb";
 import { canvasTransform, rankingModal, rankingResponses } from "../store";
 import { renderMarkdown } from "../util/markdown";
@@ -64,6 +65,7 @@ export function RankingBoard({
   currentParticipantId,
   mobile = false,
 }: Props) {
+  const { t } = useTranslation();
   const boardRef = useRef<HTMLDivElement>(null);
   const listRef = useRef<HTMLDivElement>(null);
   const ghostRef = useRef<HTMLDivElement>(null);
@@ -278,7 +280,7 @@ export function RankingBoard({
   }
   async function deleteRanking(e: MouseEvent) {
     e.stopPropagation();
-    if (!confirm("Delete this ranking and all responses?")) return;
+    if (!confirm(t("ranking.confirmDelete"))) return;
     await pb.collection("rankings").delete(ranking.id);
   }
 
@@ -380,15 +382,17 @@ export function RankingBoard({
                 }}
               />
             ) : (
-              <span className="text-slate-400 italic">(no question)</span>
+              <span className="text-slate-400 italic">
+                {t("ranking.noQuestion")}
+              </span>
             )}
             {closed ? (
               <span className="inline-block text-[10px] uppercase tracking-wide font-semibold text-slate-400 bg-slate-100 border border-slate-200 rounded px-1.5 py-0.5 align-middle">
-                Closed
+                {t("ranking.closed")}
               </span>
             ) : (
               <span className="inline-block text-[10px] uppercase tracking-wide font-semibold text-emerald-700 bg-emerald-50 border border-emerald-200 rounded px-1.5 py-0.5 align-middle">
-                Open
+                {t("ranking.open")}
               </span>
             )}
           </div>
@@ -402,7 +406,7 @@ export function RankingBoard({
                     rankingModal.value = { ranking };
                   }}
                   onPointerDown={(e) => e.stopPropagation()}
-                  title="Edit ranking"
+                  title={t("ranking.edit")}
                   className="text-slate-400 hover:text-primary-600 px-1"
                 >
                   <svg
@@ -423,7 +427,7 @@ export function RankingBoard({
                   data-no-drag
                   onClick={deleteRanking}
                   onPointerDown={(e) => e.stopPropagation()}
-                  title="Delete ranking"
+                  title={t("ranking.delete")}
                   className="text-slate-400 hover:text-red-600 text-lg leading-none px-1"
                 >
                   ×
@@ -437,7 +441,7 @@ export function RankingBoard({
                   e.stopPropagation();
                   setCollapsed((c) => !c);
                 }}
-                title={collapsed ? "Expand" : "Collapse"}
+                title={collapsed ? t("common.expand") : t("common.collapse")}
                 className="text-slate-500 hover:text-slate-900 px-1"
               >
                 <svg
@@ -484,7 +488,7 @@ export function RankingBoard({
                       {label}
                     </span>
                     <span className="text-xs text-slate-400 tabular-nums">
-                      avg {avg.toFixed(1)}
+                      {t("ranking.average", { value: avg.toFixed(1) })}
                     </span>
                   </div>
                 ))}
@@ -534,7 +538,7 @@ export function RankingBoard({
                         </span>
                         {submitted && (
                           <span className="text-xs text-slate-400">
-                            your rank: {position + 1}
+                            {t("ranking.yourRank", { rank: position + 1 })}
                           </span>
                         )}
                         {canInteract && (
@@ -564,34 +568,33 @@ export function RankingBoard({
                     disabled={submitting}
                     className="mt-1 w-full py-2 rounded-lg bg-primary-600 text-white text-sm font-medium hover:bg-primary-700 disabled:opacity-50 transition-colors"
                   >
-                    {submitting ? "Submitting…" : "Submit ranking"}
+                    {submitting ? t("ranking.submitting") : t("ranking.submit")}
                   </button>
                 )}
                 {!isTeacher && submitted && (
                   <p className="text-center text-xs text-slate-400 mt-1">
-                    ✓ Ranking submitted
+                    ✓ {t("ranking.submitted")}
                   </p>
                 )}
                 {!isTeacher && closed && !submitted && (
                   <p className="text-center text-xs text-rose-400 mt-1">
-                    This ranking is closed.
+                    {t("ranking.closedMessage")}
                   </p>
                 )}
               </>
             )}
 
             <div className="flex items-center justify-between mt-1 text-[11px] text-slate-500">
-              <span>
-                {responses.length} student{responses.length === 1 ? "" : "s"}{" "}
-                ranked
-              </span>
+              <span>{t("ranking.responses", { count: responses.length })}</span>
               {isTeacher && (
                 <div className="flex items-center gap-2">
                   <button
                     onClick={toggleResults}
                     className="text-slate-600 hover:text-slate-900 underline"
                   >
-                    {showResults ? "Hide results" : "Show results"}
+                    {showResults
+                      ? t("ranking.hideResults")
+                      : t("ranking.showResults")}
                   </button>
                   <button
                     onClick={toggleClosed}
@@ -602,7 +605,7 @@ export function RankingBoard({
                         : "text-rose-600 hover:text-rose-800")
                     }
                   >
-                    {closed ? "Start ranking" : "Close ranking"}
+                    {closed ? t("ranking.start") : t("ranking.close")}
                   </button>
                 </div>
               )}

@@ -6,6 +6,7 @@ import {
   votingModal,
   rankingModal,
   currentRoom,
+  showRemoteCursors,
 } from "../store";
 import type { Tool } from "../store";
 import { pb } from "../pb";
@@ -126,6 +127,56 @@ function LockIcon() {
   );
 }
 
+function CursorVisibilityIcon() {
+  return (
+    <svg
+      width="20"
+      height="20"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      {showRemoteCursors.value ? (
+        <>
+          <path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6S2 12 2 12Z" />
+          <circle cx="12" cy="12" r="2.5" />
+        </>
+      ) : (
+        <>
+          <path d="m3 3 18 18" />
+          <path d="M10.6 6.2A10.7 10.7 0 0 1 12 6c6.5 0 10 6 10 6a18.2 18.2 0 0 1-3.2 3.6" />
+          <path d="M6.2 6.3C3.4 8.1 2 12 2 12s3.5 6 10 6c1 0 1.9-.1 2.8-.4" />
+        </>
+      )}
+    </svg>
+  );
+}
+
+function CursorVisibilityControl() {
+  const { t } = useTranslation();
+  const label = t(
+    showRemoteCursors.value ? "toolbar.hideCursors" : "toolbar.showCursors"
+  );
+
+  return (
+    <div className="relative group">
+      <button
+        type="button"
+        title={label}
+        aria-label={label}
+        onClick={() => (showRemoteCursors.value = !showRemoteCursors.value)}
+        className="size-10 rounded-xl flex items-center justify-center bg-white text-black hover:bg-slate-100 transition-colors"
+      >
+        <CursorVisibilityIcon />
+      </button>
+      <Tooltip label={label} />
+    </div>
+  );
+}
+
 function Tooltip({ label }: { label: string }) {
   return (
     <div className="absolute right-full top-1/2 -translate-y-1/2 mr-3 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-150 z-50">
@@ -224,6 +275,11 @@ export function FloatingToolbar({ isTeacher }: Props) {
             );
           }
         )}
+        {!isTeacher && (
+          <div className="relative group mt-1 border-t border-slate-200 pt-1">
+            <CursorVisibilityControl />
+          </div>
+        )}
         {isTeacher && (
           <>
             <div className="relative group">
@@ -266,15 +322,18 @@ export function FloatingToolbar({ isTeacher }: Props) {
               </button>
               <Tooltip label={t("toolbar.ranking")} />
             </div>
-            <div className="relative group mt-1 border-t border-slate-200 pt-1">
-              <button
-                title="Lock student interactions"
-                onClick={toggleLock}
-                className={`size-10 rounded-xl flex items-center justify-center transition-colors ${locked ? "bg-red-100! text-red-700" : "bg-white text-black hover:bg-slate-100"}`}
-              >
-                <LockIcon />
-              </button>
-              <Tooltip label="Lock student interactions" />
+            <div className="mt-1 border-t border-slate-200 pt-1">
+              <CursorVisibilityControl />
+              <div className="relative group">
+                <button
+                  title="Lock student interactions"
+                  onClick={toggleLock}
+                  className={`size-10 rounded-xl flex items-center justify-center transition-colors ${locked ? "bg-red-100! text-red-700" : "bg-white text-black hover:bg-slate-100"}`}
+                >
+                  <LockIcon />
+                </button>
+                <Tooltip label="Lock student interactions" />
+              </div>
             </div>
           </>
         )}

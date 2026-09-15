@@ -113,7 +113,7 @@ export function DiscussionBoard({
 
   async function deleteBoard(e: MouseEvent) {
     e.stopPropagation();
-    if (!confirm("Delete this discussion board and all arguments?")) return;
+    if (!confirm(t("discussion.confirmDelete"))) return;
     await pb.collection("discussion_boards").delete(board.id);
   }
 
@@ -160,7 +160,7 @@ export function DiscussionBoard({
               onPointerDown={(e) => e.stopPropagation()}
               onInput={(e) => setPromptDraft(e.currentTarget.value)}
               onBlur={savePrompt}
-              placeholder="Discussion prompt…"
+              placeholder={t("discussion.promptPlaceholder")}
               className="w-full bg-white border border-slate-300 rounded p-2 text-sm resize-y min-h-16 focus:outline-none focus:ring-2 focus:ring-primary-200"
             />
           ) : (
@@ -181,8 +181,8 @@ export function DiscussionBoard({
               ) : (
                 <span className="text-slate-400 italic">
                   {isTeacher
-                    ? "Click to set discussion prompt…"
-                    : "(no prompt yet)"}
+                    ? t("discussion.clickToSetPrompt")
+                    : t("discussion.noPromptYet")}
                 </span>
               )}
             </div>
@@ -198,7 +198,7 @@ export function DiscussionBoard({
                   discussionModal.value = { board };
                 }}
                 onPointerDown={(e) => e.stopPropagation()}
-                title="Edit prompt & options"
+                title={t("discussion.editPrompt")}
                 className="text-slate-400 hover:text-primary-600 px-1"
               >
                 <svg
@@ -219,7 +219,7 @@ export function DiscussionBoard({
                 data-no-drag
                 onClick={deleteBoard}
                 onPointerDown={(e) => e.stopPropagation()}
-                title="Delete board"
+                title={t("discussion.deleteBoard")}
                 className="text-slate-400 hover:text-red-600 text-lg leading-none px-1"
               >
                 ×
@@ -233,7 +233,7 @@ export function DiscussionBoard({
                 e.stopPropagation();
                 setCollapsed((c) => !c);
               }}
-              title={collapsed ? "Expand" : "Collapse"}
+              title={collapsed ? t("common.expand") : t("common.collapse")}
               className="text-slate-500 hover:text-slate-900 px-1"
             >
               <svg
@@ -270,7 +270,7 @@ export function DiscussionBoard({
           {options.map((label, i) => (
             <ArgumentColumn
               key={i}
-              title={label || `Option ${i + 1}`}
+              title={label || t("common.option", { number: i + 1 })}
               toneIndex={i}
               args={args.filter((a) => (a.option_index as number) === i)}
               onAdd={() => addArgument(i)}
@@ -308,6 +308,7 @@ function ArgumentColumn({
   currentParticipantId,
   isTeacher,
 }: ColProps) {
+  const { t } = useTranslation();
   const tone = COLUMN_TONES[toneIndex % COLUMN_TONES.length];
   const headerBg = tone.bg;
   const headerText = tone.text;
@@ -322,7 +323,7 @@ function ArgumentColumn({
           data-no-drag
           onClick={onAdd}
           onPointerDown={(e) => e.stopPropagation()}
-          title={`Add ${title.toLowerCase()} argument`}
+          title={t("discussion.addArgument", { option: title.toLowerCase() })}
           className="size-6 rounded-full bg-white text-slate-600 hover:text-slate-900 shadow-sm border border-slate-200 flex items-center justify-center text-base leading-none"
         >
           +
@@ -331,7 +332,7 @@ function ArgumentColumn({
       <div className="flex flex-col gap-1.5 p-2">
         {args.length === 0 && (
           <div className="text-[11px] text-slate-400 italic">
-            No arguments yet.
+            {t("discussion.noArguments")}
           </div>
         )}
         {args.map((a) => (
@@ -356,6 +357,7 @@ function ArgumentCard({
   currentParticipantId: string;
   isTeacher: boolean;
 }) {
+  const { t } = useTranslation();
   const isOwner = arg.participant === currentParticipantId;
   const [editing, setEditing] = useState(
     (arg.text as string) === "" && isOwner
@@ -417,7 +419,7 @@ function ArgumentCard({
           value={draft}
           onInput={(e) => setDraft(e.currentTarget.value)}
           onBlur={saveText}
-          placeholder="Your argument…"
+          placeholder={t("discussion.argumentPlaceholder")}
           className="w-full bg-transparent border-0 resize-none text-[13px] p-0 min-h-10 focus:outline-none"
         />
       ) : (
@@ -433,7 +435,7 @@ function ArgumentCard({
           >
             {arg.text || (
               <span className="text-slate-400 italic">
-                {isOwner ? "Click to write…" : "(empty)"}
+                {isOwner ? t("discussion.clickToWrite") : t("discussion.empty")}
               </span>
             )}
           </div>
@@ -445,7 +447,7 @@ function ArgumentCard({
               }}
               className="text-[11px] text-primary-600 hover:underline mt-0.5"
             >
-              {expanded ? "Show less" : "Show more"}
+              {expanded ? t("discussion.showLess") : t("discussion.showMore")}
             </button>
           )}
         </div>
@@ -458,7 +460,7 @@ function ArgumentCard({
           {(isTeacher || isOwner) && (
             <button
               onClick={deleteArg}
-              title="Delete argument"
+              title={t("discussion.deleteArgument")}
               className="text-slate-400 hover:text-red-600 px-1"
             >
               ×
@@ -467,7 +469,7 @@ function ArgumentCard({
           <button
             onClick={toggleVote}
             disabled={!currentParticipantId}
-            title={myVote ? "Remove your vote" : "Thumb up"}
+            title={t(myVote ? "discussion.removeVote" : "discussion.thumbsUp")}
             className={
               "flex items-center gap-1 rounded px-1.5 py-0.5 border " +
               (myVote

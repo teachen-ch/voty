@@ -1,4 +1,5 @@
 import { useEffect, useState } from "preact/hooks";
+import { useTranslation } from "react-i18next";
 import { pb } from "../pb";
 import { canvasTransform, timerModal } from "../store";
 
@@ -28,6 +29,7 @@ function parseMMSS(str: string): number | null {
 }
 
 export function TimerPromptModal({ roomId }: Props) {
+  const { t } = useTranslation();
   const state = timerModal.value;
   const editing = state?.timer;
 
@@ -54,7 +56,7 @@ export function TimerPromptModal({ roomId }: Props) {
     e.preventDefault();
     const duration = parseMMSS(value);
     if (duration === null || duration <= 0) {
-      setError("Enter duration as MM:SS or minutes (e.g. 5 or 5:00)");
+      setError(t("timer.durationError"));
       return;
     }
     setSubmitting(true);
@@ -99,7 +101,7 @@ export function TimerPromptModal({ roomId }: Props) {
       >
         <div className="flex items-center justify-between">
           <h2 className="text-lg font-semibold">
-            {editing ? "Edit timer" : "New timer"}
+            {editing ? t("timer.editTitle") : t("timer.newTitle")}
           </h2>
           <button
             type="button"
@@ -112,7 +114,7 @@ export function TimerPromptModal({ roomId }: Props) {
 
         <label className="flex flex-col gap-1">
           <span className="text-sm font-medium text-slate-700">
-            Duration (MM:SS)
+            {t("timer.duration")}
           </span>
           <input
             autoFocus
@@ -127,7 +129,7 @@ export function TimerPromptModal({ roomId }: Props) {
           {error && <span className="text-xs text-rose-600">{error}</span>}
           {editing && (
             <span className="text-[11px] text-slate-500 italic">
-              Saving resets the timer.
+              {t("timer.resetHint")}
             </span>
           )}
         </label>
@@ -138,14 +140,18 @@ export function TimerPromptModal({ roomId }: Props) {
             onClick={close}
             className="px-3 py-1.5 rounded text-sm text-slate-600 hover:bg-slate-100"
           >
-            Cancel
+            {t("common.cancel")}
           </button>
           <button
             type="submit"
             disabled={submitting}
             className="px-4 py-1.5 rounded text-sm bg-primary-600 text-white hover:bg-primary-700 disabled:opacity-50"
           >
-            {submitting ? "Saving…" : editing ? "Save" : "Add"}
+            {submitting
+              ? t("common.saving")
+              : editing
+                ? t("common.save")
+                : t("common.add")}
           </button>
         </div>
       </form>

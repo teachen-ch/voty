@@ -148,7 +148,7 @@ export function TimerBoard({ timer, isTeacher, mobile = false }: Props) {
 
   async function deleteTimer(e: MouseEvent) {
     e.stopPropagation();
-    if (!confirm("Delete this timer?")) return;
+    if (!confirm(t("timer.confirmDelete"))) return;
     await pb.collection("timers").delete(timer.id);
   }
 
@@ -191,7 +191,7 @@ export function TimerBoard({ timer, isTeacher, mobile = false }: Props) {
                   timerModal.value = { timer };
                 }}
                 onPointerDown={(e) => e.stopPropagation()}
-                title="Edit duration"
+                title={t("timer.editDuration")}
                 className="text-slate-400 hover:text-primary-600 px-1"
               >
                 <svg
@@ -212,7 +212,7 @@ export function TimerBoard({ timer, isTeacher, mobile = false }: Props) {
                 data-no-drag
                 onClick={deleteTimer}
                 onPointerDown={(e) => e.stopPropagation()}
-                title="Delete timer"
+                title={t("timer.delete")}
                 className="text-slate-400 hover:text-red-600 text-lg leading-none px-1"
               >
                 ×
@@ -226,7 +226,7 @@ export function TimerBoard({ timer, isTeacher, mobile = false }: Props) {
                 e.stopPropagation();
                 setCollapsed((c) => !c);
               }}
-              title={collapsed ? "Expand" : "Collapse"}
+              title={collapsed ? t("common.expand") : t("common.collapse")}
               className="text-slate-500 hover:text-slate-900 px-1"
             >
               <svg
@@ -271,7 +271,7 @@ export function TimerBoard({ timer, isTeacher, mobile = false }: Props) {
                   onClick={start}
                   className="px-3 py-1 rounded bg-emerald-600 text-white text-sm hover:bg-emerald-700"
                 >
-                  Start
+                  {t("timer.start")}
                 </button>
               )}
               {running && (
@@ -280,13 +280,13 @@ export function TimerBoard({ timer, isTeacher, mobile = false }: Props) {
                     onClick={pause}
                     className="px-3 py-1 rounded bg-amber-500 text-white text-sm hover:bg-amber-600"
                   >
-                    Pause
+                    {t("timer.pause")}
                   </button>
                   <button
                     onClick={stop}
                     className="px-3 py-1 rounded bg-rose-600 text-white text-sm hover:bg-rose-700"
                   >
-                    Stop
+                    {t("timer.stop")}
                   </button>
                 </>
               )}
@@ -296,13 +296,13 @@ export function TimerBoard({ timer, isTeacher, mobile = false }: Props) {
                     onClick={resume}
                     className="px-3 py-1 rounded bg-emerald-600 text-white text-sm hover:bg-emerald-700"
                   >
-                    Resume
+                    {t("timer.resume")}
                   </button>
                   <button
                     onClick={stop}
                     className="px-3 py-1 rounded bg-rose-600 text-white text-sm hover:bg-rose-700"
                   >
-                    Stop
+                    {t("timer.stop")}
                   </button>
                 </>
               )}
