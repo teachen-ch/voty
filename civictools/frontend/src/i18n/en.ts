@@ -39,7 +39,6 @@ const en = {
     roomStep4:
       "You can lock the room at any time so students cannot interact with its content.",
     continue: "Let’s get started",
-    documentation: "Documentation",
   },
   breadcrumb: {
     home: "Home",
@@ -78,6 +77,7 @@ const en = {
     templateTag: "template",
     browseAll: "Browse all templates →",
     continueRoom: "Continue a room",
+    howItWorks: "How it works",
     live: "live",
     idle: "idle",
     onlineCount_one: "{{count}} online",

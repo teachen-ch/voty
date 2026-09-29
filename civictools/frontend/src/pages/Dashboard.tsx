@@ -7,6 +7,7 @@ import { ShareLink } from "../components/ShareLink";
 import { Header } from "../components/Header";
 import { IntroModal } from "../components/IntroModal";
 import { timeSince, lastOpenedLabel } from "../util/time";
+import { tenant } from "../tenant";
 
 interface Presence {
   online: number;
@@ -164,11 +165,38 @@ export function Dashboard() {
         </Link>
       </div>
 
-      <h2 className="text-lg font-semibold mb-3">
-        {t("dashboard.continueRoom")}
-      </h2>
+      <div className="mb-3 flex items-center justify-between gap-4">
+        <h2 className="text-lg font-semibold">
+          {t("dashboard.continueRoom")}
+        </h2>
+        {tenant.docLink && (
+          <a
+            href={tenant.docLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-sm text-primary-600 hover:underline"
+          >
+            {t("dashboard.howItWorks")}
+          </a>
+        )}
+      </div>
       {rooms.length === 0 ? (
-        <p className="text-slate-500">{t("dashboard.empty")}</p>
+        <p className="text-slate-500">
+          {t("dashboard.empty")}
+          {tenant.docLink && (
+            <>
+              {" "}
+              <a
+                href={tenant.docLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-primary-600 hover:underline"
+              >
+                {t("dashboard.howItWorks")}
+              </a>
+            </>
+          )}
+        </p>
       ) : (
         <div className="flex flex-col gap-2.5">
           {rooms.map((room) => {
