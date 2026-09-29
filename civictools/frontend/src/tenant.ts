@@ -10,6 +10,7 @@ export interface Tenant {
   locale: "en" | "bg";
   logo?: string;
   oidcDisplayName?: string;
+  docLink?: string;
 }
 
 const TENANTS: Tenant[] = [
@@ -21,6 +22,7 @@ const TENANTS: Tenant[] = [
     locale: "bg",
     logo: prepodavameLogo,
     oidcDisplayName: "prepodavame",
+    docLink: "https://prepodavame.bg/glas/",
   },
   {
     id: "grajdansko",
@@ -29,6 +31,7 @@ const TENANTS: Tenant[] = [
     secondary: "#384CBB",
     locale: "bg",
     logo: grajdanskoLogo,
+    docLink: "https://prepodavame.bg/glas/",
   },
   {
     id: "voty",

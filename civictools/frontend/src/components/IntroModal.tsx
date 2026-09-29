@@ -83,13 +83,25 @@ export function IntroModal({ screen }: Props) {
             ))}
           </div>
 
-          <button
-            type="button"
-            onClick={close}
-            className="mt-10 rounded-xl bg-white px-5 py-2.5 text-sm font-semibold text-primary-700 shadow-sm transition hover:bg-white/90 cursor-pointer"
-          >
-            {t("intro.continue")}
-          </button>
+          <div className="mt-10 flex flex-wrap gap-3">
+            <button
+              type="button"
+              onClick={close}
+              className="rounded-xl bg-white px-5 py-2.5 text-sm font-semibold text-primary-700 shadow-sm transition hover:bg-white/90 cursor-pointer"
+            >
+              {t("intro.continue")}
+            </button>
+            {tenant.docLink && (
+              <a
+                href={tenant.docLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="rounded-xl border border-white/70 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-white/10"
+              >
+                {t("intro.documentation")}
+              </a>
+            )}
+          </div>
         </div>
       </div>
     </div>

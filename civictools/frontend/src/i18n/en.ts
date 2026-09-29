@@ -39,6 +39,7 @@ const en = {
     roomStep4:
       "You can lock the room at any time so students cannot interact with its content.",
     continue: "Let’s get started",
+    documentation: "Documentation",
   },
   breadcrumb: {
     home: "Home",
