@@ -55,7 +55,7 @@ const en = {
     forgotPassword: "Forgot your password?",
     emailRequired: "Enter your email address first.",
     resetSent:
-      "If an account exists for this email, a reset link has been sent.",
+      "If an account exists for this email, we have just sent you a reset link.",
     resetFailed: "Could not send the password reset email.",
     or: "or",
     oidc: "Login with {{tenant}}",
