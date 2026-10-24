@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:1.7
 
-FROM node:24-alpine AS builder
+FROM node:24.22.1-alpine AS builder
 WORKDIR /usr/src/app
 RUN apk add --no-cache git
 COPY package.json yarn.lock ./
@@ -11,7 +11,7 @@ RUN npx prisma generate \
  && rm -rf .next/cache
 
 
-FROM node:24-alpine AS runner
+FROM node:24.22.1-alpine AS runner
 WORKDIR /usr/src/app
 ENV NODE_ENV=production
 RUN chown -R node:node /usr/src/app
