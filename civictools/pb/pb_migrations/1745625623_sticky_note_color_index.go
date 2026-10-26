@@ -1,8 +1,8 @@
 package pb_migrations
 
 import (
-	"github.com/pocketbase/pocketbase/core"
-	m "github.com/pocketbase/pocketbase/migrations"
+	"ganigeorgiev.com/pocketbase/pocketbase/core"
+	m "ganigeorgiev.com/pocketbase/pocketbase/migrations"
 )
 
 var stickyPalette = []string{"#fef08a", "#bbf7d0", "#bfdbfe", "#fecaca", "#e9d5ff"}

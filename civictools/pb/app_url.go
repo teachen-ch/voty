@@ -6,7 +6,7 @@ import (
 	"os"
 	"strings"
 
-	"github.com/pocketbase/pocketbase/core"
+	"ganigeorgiev.com/pocketbase/pocketbase/core"
 )
 
 // configureDynamicAppURL makes auth emails use the public hostname that made

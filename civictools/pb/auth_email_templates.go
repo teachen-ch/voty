@@ -3,8 +3,8 @@ package main
 import (
 	"strings"
 
-	"github.com/pocketbase/pocketbase"
-	"github.com/pocketbase/pocketbase/core"
+	"ganigeorgiev.com/pocketbase/pocketbase"
+	"ganigeorgiev.com/pocketbase/pocketbase/core"
 )
 
 // configureAuthEmailTemplates changes PocketBase's built-in auth links from
