@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# nightly DB backups dumped to SFTP server
+# nightly encrypted DB backups dumped to SFTP server
 
 from datetime import datetime
 from ftplib import FTP_TLS
@@ -8,11 +8,12 @@ import sys
 import time
 import re
 
-DAYS = 14  # remove older backups
+DAYS = 10  # keep backups for this many days
 CONTAINER = "postgres"
 BACKUPROOT = "{{ app_dir }}/backup"
 ENV_FILE = "{{ app_dir }}/.env"
 HOSTNAME = os.uname()[1]
+BACKUP_PATTERN = re.compile(r'-(\d{4}-\d{2}-\d{2}-\d{2}h\d{2}m)\.sql\.gz\.enc$')
 
 
 def readEnv(envFile):
@@ -30,9 +31,14 @@ if (not 'BACKUP_SERVER' in env):
     print("Skipping backup, as BACKUP_SERVER is not defined")
     sys.exit(0)
 
+if (not 'BACKUP_ENCRYPTION_PASSWORD' in env):
+    print("Error: BACKUP_ENCRYPTION_PASSWORD is not defined, refusing to upload unencrypted backup")
+    sys.exit(1)
+
 BACKUP_SERVER = env['BACKUP_SERVER']
 BACKUP_USER = env['BACKUP_USER']
 BACKUP_PASS = env['BACKUP_PASS']
+os.environ['BACKUP_ENCRYPTION_PASSWORD'] = env['BACKUP_ENCRYPTION_PASSWORD']
 DATABASE_URL = env['DATABASE_URL']
 
 match = re.match(r'.*//(.*?)\:(.*?)@(.*?)\/(.*)', DATABASE_URL)
@@ -49,15 +55,21 @@ DB_NAME = db[3]
 # generate backup filename
 dateStr = datetime.now().strftime("%Y-%m-%d-%Hh%Mm")
 fileName = "%s-%s-%s.sql.gz" % (DB_NAME, HOSTNAME, dateStr)
+dumpPath = os.path.join(BACKUPROOT, fileName)
+encFileName = fileName + ".enc"
+encPath = os.path.join(BACKUPROOT, encFileName)
 
-# Run db dump over docker
+# Run db dump over docker, then encrypt and drop the plaintext dump
 dbCmd = "pg_dump -U %s %s  --clean" % (DB_USER, DB_NAME)
-cmd = "docker exec %s %s | gzip -9 > %s/%s" % (
-    CONTAINER, dbCmd, BACKUPROOT, fileName)
+dumpCmd = "docker exec %s %s | gzip -9 > %s" % (CONTAINER, dbCmd, dumpPath)
+encCmd = "openssl enc -aes-256-cbc -pbkdf2 -iter 600000 -salt -pass env:BACKUP_ENCRYPTION_PASSWORD -in %s -out %s" % (
+    dumpPath, encPath)
 
-code = os.system(cmd)
+code = os.system(dumpCmd) or os.system(encCmd)
+if (os.path.exists(dumpPath)):
+    os.remove(dumpPath)
 if (code != 0):
-    print("Error: could not run pg_dump via docker")
+    print("Error: could not create encrypted db backup")
     sys.exit(code)
 
 
@@ -65,12 +77,19 @@ if (code != 0):
 ftps = FTP_TLS(BACKUP_SERVER)
 ftps.login(BACKUP_USER, BACKUP_PASS)
 ftps.prot_p()
-file = open(os.path.join(BACKUPROOT, fileName), 'rb')
-ftps.storbinary('STOR '+fileName, file, blocksize=8192)
+file = open(encPath, 'rb')
+ftps.storbinary('STOR '+encFileName, file, blocksize=8192)
 file.close()
 
+# Remove old backups, remote and local
+cutoff = datetime.fromtimestamp(time.time() - DAYS * 86400).strftime("%Y-%m-%d-%Hh%Mm")
+for remote in ftps.nlst():
+    match = BACKUP_PATTERN.search(remote)
+    if (match and match.group(1) < cutoff):
+        ftps.delete(remote)
+ftps.quit()
+
 now = time.time()
-# Remove old backups
 for filename in os.listdir(BACKUPROOT):
     if os.path.getmtime(os.path.join(BACKUPROOT, filename)) < now - DAYS * 86400:
         if os.path.isfile(os.path.join(BACKUPROOT, filename)):

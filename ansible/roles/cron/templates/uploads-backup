@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# nightly dumps of /voty/uploads folder to SFTP server
+# nightly encrypted dumps of uploads folder to SFTP server
 
 from datetime import datetime
 from ftplib import FTP_TLS
@@ -8,12 +8,13 @@ import sys
 import time
 import re
 
-DAYS = 7  # remove older backups
-ROOT = "/voty/"
-BACKUPS = "backup/"
+DAYS = 10  # keep backups for this many days
+ROOT = "{{ app_dir }}/"
+BACKUPROOT = ROOT + "backup/"
 UPLOADS = "uploads/"
 ENV_FILE = ROOT + ".env"
 HOSTNAME = os.uname()[1]
+BACKUP_PATTERN = re.compile(r'-(\d{4}-\d{2}-\d{2}-\d{2}h\d{2}m)\.tgz\.enc$')
 
 
 def readEnv(envFile):
@@ -31,31 +32,52 @@ if (not 'BACKUP_SERVER' in env):
     print("Skipping backup, as BACKUP_SERVER is not defined")
     sys.exit(0)
 
+if (not 'BACKUP_ENCRYPTION_PASSWORD' in env):
+    print("Error: BACKUP_ENCRYPTION_PASSWORD is not defined, refusing to upload unencrypted backup")
+    sys.exit(1)
+
 BACKUP_SERVER = env['BACKUP_SERVER']
 BACKUP_USER = env['BACKUP_USER']
 BACKUP_PASS = env['BACKUP_PASS']
+os.environ['BACKUP_ENCRYPTION_PASSWORD'] = env['BACKUP_ENCRYPTION_PASSWORD']
 
 # generate backup filename
 dateStr = datetime.now().strftime("%Y-%m-%d-%Hh%Mm")
 fileName = "uploads-%s-%s.tgz" % (HOSTNAME, dateStr)
+tarPath = BACKUPROOT + fileName
+encFileName = fileName + ".enc"
+encPath = BACKUPROOT + encFileName
 
-cmd = "cd %s && tar -czf %s%s %s" % (ROOT, BACKUPS, fileName, UPLOADS)
+# Archive and encrypt, then drop the plaintext archive
+tarCmd = "tar -czf %s -C %s %s" % (tarPath, ROOT, UPLOADS)
+encCmd = "openssl enc -aes-256-cbc -pbkdf2 -iter 600000 -salt -pass env:BACKUP_ENCRYPTION_PASSWORD -in %s -out %s" % (
+    tarPath, encPath)
 
-code = os.system(cmd)
+code = os.system(tarCmd) or os.system(encCmd)
+if (os.path.exists(tarPath)):
+    os.remove(tarPath)
 if (code != 0):
-    print("Error: could not run create backup")
+    print("Error: could not create encrypted uploads backup")
     sys.exit(code)
 
-
-cmd = "cp %s %suploads-prod-latest.tgz" % (ROOT+BACKUPS+fileName, ROOT+BACKUPS)
-os.system(cmd)
-
-# Upload latest file via FTPES
+# Upload file via FTPES
 ftps = FTP_TLS(BACKUP_SERVER)
 ftps.login(BACKUP_USER, BACKUP_PASS)
 ftps.prot_p()
-file = open(os.path.join(ROOT + BACKUPS, fileName), 'rb')
-ftps.storbinary('STOR '+fileName, file, blocksize=8192)
-file = open(os.path.join(ROOT + BACKUPS, "uploads-prod-latest.tgz"), 'rb')
-ftps.storbinary('STOR uploads-prod-latest.tgz', file, blocksize=8192)
+file = open(encPath, 'rb')
+ftps.storbinary('STOR '+encFileName, file, blocksize=8192)
 file.close()
+
+# Remove old backups, remote and local
+cutoff = datetime.fromtimestamp(time.time() - DAYS * 86400).strftime("%Y-%m-%d-%Hh%Mm")
+for remote in ftps.nlst():
+    match = BACKUP_PATTERN.search(remote)
+    if (match and match.group(1) < cutoff):
+        ftps.delete(remote)
+ftps.quit()
+
+now = time.time()
+for filename in os.listdir(BACKUPROOT):
+    if os.path.getmtime(os.path.join(BACKUPROOT, filename)) < now - DAYS * 86400:
+        if os.path.isfile(os.path.join(BACKUPROOT, filename)):
+            os.remove(os.path.join(BACKUPROOT, filename))

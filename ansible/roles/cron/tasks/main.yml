@@ -13,6 +13,32 @@
         dest: "{{ app_dir }}/db-backup"
         mode: "0750"
 
+    - name: Copy uploads backup script
+      template:
+        src: uploads-backup
+        dest: "{{ app_dir }}/uploads-backup"
+        mode: "0750"
+
+    - name: Copy inactive users cleanup script
+      copy:
+        src: "{{ playbook_dir }}/scripts/anonymize-inactive-users.sql"
+        dest: "{{ app_dir }}/anonymize-inactive-users.sql"
+        mode: "0640"
+
+    - name: Copy inactive users cleanup wrapper
+      template:
+        src: anonymize-inactive-users
+        dest: "{{ app_dir }}/anonymize-inactive-users"
+        mode: "0750"
+
+    - name: Schedule monthly inactive users cleanup (1st, 3am)
+      cron:
+        name: voty-anonymize-inactive-users
+        minute: "0"
+        hour: "3"
+        day: "1"
+        job: "{{ app_dir }}/anonymize-inactive-users >> {{ app_dir }}/anonymize-inactive-users.log 2>&1"
+
     - name: Schedule nightly db backup (2am)
       cron:
         name: voty-db-backup-daily
@@ -20,8 +46,14 @@
         hour: "2"
         job: "{{ app_dir }}/db-backup"
 
-    - name: Schedule hourly db backup
+    - name: Schedule nightly uploads backup (2:30am)
+      cron:
+        name: voty-uploads-backup-daily
+        minute: "30"
+        hour: "2"
+        job: "{{ app_dir }}/uploads-backup"
+
+    - name: Remove hourly db backup
       cron:
         name: voty-db-backup-hourly
-        minute: "0"
-        job: "{{ app_dir }}/db-backup"
+        state: absent

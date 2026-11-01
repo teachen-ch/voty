@@ -1,6 +1,21 @@
 # Backup and Restore
 
-The data of the production database is backed up on a daily basis (full sql format) as well as every 15 minutes in pg_dump custom format (`-F c`). If you need to restore the content to either a development or a failover environment, then take the following steps.
+Production runs two nightly cron jobs on the host (`ansible/roles/cron`):
+
+- `db-backup` at 02:00: `pg_dump` (sql, gzipped) → `voty-voty-prod-YYYY-MM-DD-HHhMMm.sql.gz.enc`
+- `uploads-backup` at 02:30: `uploads/` (tgz) → `uploads-voty-prod-YYYY-MM-DD-HHhMMm.tgz.enc`
+
+Both are encrypted with AES-256 (`openssl enc -aes-256-cbc -pbkdf2 -iter 600000`) using `BACKUP_ENCRYPTION_PASSWORD` from `.env`, uploaded via FTPES, and kept for 10 days (remote and local).
+
+To decrypt a backup (set the password from `.env` first):
+
+```
+export BACKUP_ENCRYPTION_PASSWORD='...'
+openssl enc -d -aes-256-cbc -pbkdf2 -iter 600000 -pass env:BACKUP_ENCRYPTION_PASSWORD \
+  -in voty-voty-prod-YYYY-MM-DD-HHhMMm.sql.gz.enc -out voty-voty-prod.sql.gz
+```
+
+If you need to restore the content to either a development or a failover environment, then take the following steps.
 
 ```
 # Download latest voty-prod-latest-data.dump to /tmp/

@@ -101,7 +101,10 @@ export const login: FieldResolver<"Mutation", "login"> = async (
   return startJWTSession(user, ctx);
 };
 
-function startJWTSession(user: User, ctx: Context): ResponseLogin {
+async function startJWTSession(
+  user: User,
+  ctx: Context
+): Promise<ResponseLogin> {
   const jwtUser: JWTUser = pick(user, [
     "id",
     "email",
@@ -115,8 +118,12 @@ function startJWTSession(user: User, ctx: Context): ResponseLogin {
     expiresIn: expires as any,
   });
 
-  setRequestUser(user, ctx);
-  return { token, user };
+  const updated = await ctx.db.user.update({
+    where: { id: user.id },
+    data: { lastLoginAt: new Date() },
+  });
+  setRequestUser(updated, ctx);
+  return { token, user: updated };
 }
 
 export function setRequestUser(user: User, ctx: Context): void {
