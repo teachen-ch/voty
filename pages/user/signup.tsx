@@ -19,6 +19,23 @@ export const CREATE_USER = gql`
       shortname
       lastname
       role
+      gender
+      year
+      school {
+        id
+        name
+        city
+      }
+      team {
+        id
+        name
+        cards
+        teacher {
+          id
+          name
+          shortname
+        }
+      }
     }
   }
 `;

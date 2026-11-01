@@ -18,6 +18,10 @@ generates:
       scalars:
         DateTime: any
         Json: any
+      # The v6 operations plugin re-emits schema types by default, which
+      # duplicates the definitions the typescript plugin writes above. Point
+      # it at the same output file so it references those types instead.
+      importSchemaTypesFrom: "graphql/types"
   graphql/modules.d.ts:
     plugins:
       - "typescript-graphql-files-modules"

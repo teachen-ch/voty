@@ -86,12 +86,24 @@ export const SET_USER_SCHOOL = gql`
       role
       email
       lastname
+      gender
+      year
       school {
         id
         name
         type
         city
         zip
+      }
+      team {
+        id
+        name
+        cards
+        teacher {
+          id
+          name
+          shortname
+        }
       }
     }
   }

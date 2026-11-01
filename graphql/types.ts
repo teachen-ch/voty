@@ -1,12 +1,13 @@
+/** Internal type. DO NOT USE DIRECTLY. */
+type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
+/** Internal type. DO NOT USE DIRECTLY. */
+export type Incremental<T> = T | { [P in keyof T]?: P extends ' $fragmentName' | '__typename' ? T[P] : never };
+import type * as Types from './types';
+
 import { gql } from '@apollo/client';
 import * as Apollo from '@apollo/client';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
-export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
-export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
-export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
-export type MakeEmpty<T extends { [key: string]: unknown }, K extends keyof T> = { [_ in K]?: never };
-export type Incremental<T> = T | { [P in keyof T]?: P extends ' $fragmentName' | '__typename' ? T[P] : never };
 const defaultOptions = {} as const;
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
@@ -954,456 +955,456 @@ export type WorkWhereUniqueInput = {
 };
 
 export type ActivitiesQueryVariables = Exact<{
-  where?: InputMaybe<ActivityWhereInput>;
-  orderBy?: InputMaybe<Array<ActivityOrderByInput> | ActivityOrderByInput>;
-  first?: InputMaybe<Scalars['Int']['input']>;
+  where?: Types.ActivityWhereInput | null | undefined;
+  orderBy?: Array<Types.ActivityOrderByInput> | Types.ActivityOrderByInput | null | undefined;
+  first?: number | null | undefined;
 }>;
 
 
-export type ActivitiesQuery = { __typename?: 'Query', activities: Array<{ __typename?: 'Activity', type: ActivityType, card?: string | null, summary?: string | null, ballotId?: string | null, workId?: string | null, time: any, user: { __typename?: 'User', shortname?: string | null } }> };
+export type ActivitiesQuery = { activities: Array<{ type: Types.ActivityType, card: string | null, summary: string | null, ballotId: string | null, workId: string | null, time: any, user: { shortname: string | null } }> };
 
 export type CreateOneBallotMutationVariables = Exact<{
-  data: BallotCreateInput;
+  data: Types.BallotCreateInput;
 }>;
 
 
-export type CreateOneBallotMutation = { __typename?: 'Mutation', createOneBallot: { __typename?: 'Ballot', id: string, title: string, description: string, body: string, start: any, end: any, scope: BallotScope, canton?: string | null } };
+export type CreateOneBallotMutation = { createOneBallot: { id: string, title: string, description: string, body: string, start: any, end: any, scope: Types.BallotScope, canton: string | null } };
 
 export type UpdateOneBallotMutationVariables = Exact<{
-  data: BallotUpdateInput;
-  where: BallotWhereUniqueInput;
+  data: Types.BallotUpdateInput;
+  where: Types.BallotWhereUniqueInput;
 }>;
 
 
-export type UpdateOneBallotMutation = { __typename?: 'Mutation', updateOneBallot: { __typename?: 'Ballot', id: string, title: string, description: string, body: string, start: any, end: any, scope: BallotScope, canton?: string | null } };
+export type UpdateOneBallotMutation = { updateOneBallot: { id: string, title: string, description: string, body: string, start: any, end: any, scope: Types.BallotScope, canton: string | null } };
 
 export type DeleteOneBallotMutationVariables = Exact<{
-  where: BallotWhereUniqueInput;
+  where: Types.BallotWhereUniqueInput;
 }>;
 
 
-export type DeleteOneBallotMutation = { __typename?: 'Mutation', deleteOneBallot: { __typename?: 'Ballot', id: string } };
+export type DeleteOneBallotMutation = { deleteOneBallot: { id: string } };
 
-export type BallotFieldsFragment = { __typename?: 'Ballot', id: string, title: string, description: string, body: string, start: any, end: any, scope: BallotScope, canton?: string | null };
+export type BallotFieldsFragment = { id: string, title: string, description: string, body: string, start: any, end: any, scope: Types.BallotScope, canton: string | null };
 
-export type UserBallotFieldsFragment = { __typename?: 'Ballot', canVote?: boolean | null, hasVoted?: boolean | null, id: string, title: string, description: string, body: string, start: any, end: any, scope: BallotScope, canton?: string | null };
+export type UserBallotFieldsFragment = { canVote: boolean | null, hasVoted: boolean | null, id: string, title: string, description: string, body: string, start: any, end: any, scope: Types.BallotScope, canton: string | null };
 
-export type BallotRunFieldsFragment = { __typename?: 'BallotRun', id: string, start?: any | null, end?: any | null, ballotId: string };
+export type BallotRunFieldsFragment = { id: string, start: any, end: any, ballotId: string };
 
 export type BallotsQueryVariables = Exact<{
-  where?: InputMaybe<BallotWhereInput>;
+  where?: Types.BallotWhereInput | null | undefined;
 }>;
 
 
-export type BallotsQuery = { __typename?: 'Query', ballots: Array<{ __typename?: 'Ballot', id: string, title: string, description: string, body: string, start: any, end: any, scope: BallotScope, canton?: string | null }> };
+export type BallotsQuery = { ballots: Array<{ id: string, title: string, description: string, body: string, start: any, end: any, scope: Types.BallotScope, canton: string | null }> };
 
 export type UserBallotsQueryVariables = Exact<{
-  where?: InputMaybe<BallotWhereInput>;
+  where?: Types.BallotWhereInput | null | undefined;
 }>;
 
 
-export type UserBallotsQuery = { __typename?: 'Query', ballots: Array<{ __typename?: 'Ballot', canVote?: boolean | null, hasVoted?: boolean | null, id: string, title: string, description: string, body: string, start: any, end: any, scope: BallotScope, canton?: string | null }> };
+export type UserBallotsQuery = { ballots: Array<{ canVote: boolean | null, hasVoted: boolean | null, id: string, title: string, description: string, body: string, start: any, end: any, scope: Types.BallotScope, canton: string | null }> };
 
 export type BallotQueryVariables = Exact<{
-  where: BallotWhereUniqueInput;
+  where: Types.BallotWhereUniqueInput;
 }>;
 
 
-export type BallotQuery = { __typename?: 'Query', ballot?: { __typename?: 'Ballot', canVote?: boolean | null, hasVoted?: boolean | null, id: string, title: string, description: string, body: string, start: any, end: any, scope: BallotScope, canton?: string | null } | null };
+export type BallotQuery = { ballot: { canVote: boolean | null, hasVoted: boolean | null, id: string, title: string, description: string, body: string, start: any, end: any, scope: Types.BallotScope, canton: string | null } | null };
 
 export type GetBallotRunsQueryVariables = Exact<{
-  teamId: Scalars['String']['input'];
+  teamId: string;
 }>;
 
 
-export type GetBallotRunsQuery = { __typename?: 'Query', getBallotRuns?: Array<{ __typename?: 'BallotRun', id: string, start?: any | null, end?: any | null, ballotId: string }> | null };
+export type GetBallotRunsQuery = { getBallotRuns: Array<{ id: string, start: any, end: any, ballotId: string }> | null };
 
 export type AddBallotRunMutationVariables = Exact<{
-  ballotId: Scalars['String']['input'];
-  teamId: Scalars['String']['input'];
+  ballotId: string;
+  teamId: string;
 }>;
 
 
-export type AddBallotRunMutation = { __typename?: 'Mutation', addBallotRun: { __typename?: 'BallotRun', id: string, start?: any | null, end?: any | null, ballotId: string } };
+export type AddBallotRunMutation = { addBallotRun: { id: string, start: any, end: any, ballotId: string } };
 
 export type RemoveBallotRunMutationVariables = Exact<{
-  ballotRunId: Scalars['String']['input'];
+  ballotRunId: string;
 }>;
 
 
-export type RemoveBallotRunMutation = { __typename?: 'Mutation', removeBallotRun: { __typename?: 'Response', success?: boolean | null, error?: boolean | null, message?: string | null } };
+export type RemoveBallotRunMutation = { removeBallotRun: { success: boolean | null, error: boolean | null, message: string | null } };
 
 export type StartBallotRunMutationVariables = Exact<{
-  ballotRunId: Scalars['String']['input'];
+  ballotRunId: string;
 }>;
 
 
-export type StartBallotRunMutation = { __typename?: 'Mutation', startBallotRun: { __typename?: 'BallotRun', id: string, start?: any | null, end?: any | null, ballotId: string } };
+export type StartBallotRunMutation = { startBallotRun: { id: string, start: any, end: any, ballotId: string } };
 
 export type EndBallotRunMutationVariables = Exact<{
-  ballotRunId: Scalars['String']['input'];
+  ballotRunId: string;
 }>;
 
 
-export type EndBallotRunMutation = { __typename?: 'Mutation', endBallotRun: { __typename?: 'BallotRun', id: string, start?: any | null, end?: any | null, ballotId: string } };
+export type EndBallotRunMutation = { endBallotRun: { id: string, start: any, end: any, ballotId: string } };
 
 export type VoteMutationVariables = Exact<{
-  ballotId: Scalars['String']['input'];
-  vote: Scalars['Int']['input'];
+  ballotId: string;
+  vote: number;
 }>;
 
 
-export type VoteMutation = { __typename?: 'Mutation', vote: { __typename?: 'Vote', verify?: string | null, ballot: { __typename?: 'Ballot', id: string, canVote?: boolean | null, hasVoted?: boolean | null } } };
+export type VoteMutation = { vote: { verify: string | null, ballot: { id: string, canVote: boolean | null, hasVoted: boolean | null } } };
 
 export type VoteCodeMutationVariables = Exact<{
-  code: Scalars['String']['input'];
-  ballotRunId: Scalars['String']['input'];
-  vote: Scalars['Int']['input'];
+  code: string;
+  ballotRunId: string;
+  vote: number;
 }>;
 
 
-export type VoteCodeMutation = { __typename?: 'Mutation', voteCode: { __typename?: 'Response', success?: boolean | null, error?: boolean | null, message?: string | null } };
+export type VoteCodeMutation = { voteCode: { success: boolean | null, error: boolean | null, message: string | null } };
 
 export type GetBallotResultsQueryVariables = Exact<{
-  ballotId: Scalars['String']['input'];
-  ballotRunId?: InputMaybe<Scalars['String']['input']>;
-  teamId?: InputMaybe<Scalars['String']['input']>;
-  schoolId?: InputMaybe<Scalars['String']['input']>;
-  canton?: InputMaybe<Scalars['String']['input']>;
+  ballotId: string;
+  ballotRunId?: string | null | undefined;
+  teamId?: string | null | undefined;
+  schoolId?: string | null | undefined;
+  canton?: string | null | undefined;
 }>;
 
 
-export type GetBallotResultsQuery = { __typename?: 'Query', getBallotResults?: { __typename?: 'BallotResults', yes?: number | null, no?: number | null, abs?: number | null, total?: number | null } | null };
+export type GetBallotResultsQuery = { getBallotResults: { yes: number | null, no: number | null, abs: number | null, total: number | null } | null };
 
 export type CardsQueryVariables = Exact<{
-  keywords?: InputMaybe<Scalars['String']['input']>;
-  age?: InputMaybe<Scalars['String']['input']>;
-  type?: InputMaybe<Scalars['String']['input']>;
+  keywords?: string | null | undefined;
+  age?: string | null | undefined;
+  type?: string | null | undefined;
 }>;
 
 
-export type CardsQuery = { __typename?: 'Query', cards?: Array<{ __typename?: 'Card', id?: string | null, title?: string | null, description?: string | null, duration?: string | null, keywords?: string | null, type?: string | null, icon?: string | null, url?: string | null, source?: string | null, content?: string | null, age?: string | null, discussion?: boolean | null }> | null };
+export type CardsQuery = { cards: Array<{ id: string | null, title: string | null, description: string | null, duration: string | null, keywords: string | null, type: string | null, icon: string | null, url: string | null, source: string | null, content: string | null, age: string | null, discussion: boolean | null }> | null };
 
 export type SetCardsMutationVariables = Exact<{
-  teamId: Scalars['String']['input'];
-  cards: Scalars['String']['input'];
+  teamId: string;
+  cards: string;
 }>;
 
 
-export type SetCardsMutation = { __typename?: 'Mutation', setCards: { __typename?: 'Team', id: string, cards: string } };
+export type SetCardsMutation = { setCards: { id: string, cards: string } };
 
-export type LoginFieldsFragment = { __typename?: 'User', id: string, name?: string | null, lastname?: string | null, shortname?: string | null, gender?: Gender | null, year?: number | null, role: Role, email?: string | null, school?: { __typename?: 'School', id: string, name: string, city: string } | null, team?: { __typename?: 'Team', id: string, name: string, cards: string, teacher: { __typename?: 'User', id: string, name?: string | null, shortname?: string | null } } | null };
+export type LoginFieldsFragment = { id: string, name: string | null, lastname: string | null, shortname: string | null, gender: Types.Gender | null, year: number | null, role: Types.Role, email: string | null, school: { id: string, name: string, city: string } | null, team: { id: string, name: string, cards: string, teacher: { id: string, name: string | null, shortname: string | null } } | null };
 
 export type MeQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type MeQuery = { __typename?: 'Query', me?: { __typename?: 'User', id: string, name?: string | null, lastname?: string | null, shortname?: string | null, gender?: Gender | null, year?: number | null, role: Role, email?: string | null, school?: { __typename?: 'School', id: string, name: string, city: string } | null, team?: { __typename?: 'Team', id: string, name: string, cards: string, teacher: { __typename?: 'User', id: string, name?: string | null, shortname?: string | null } } | null } | null };
+export type MeQuery = { me: { id: string, name: string | null, lastname: string | null, shortname: string | null, gender: Types.Gender | null, year: number | null, role: Types.Role, email: string | null, school: { id: string, name: string, city: string } | null, team: { id: string, name: string, cards: string, teacher: { id: string, name: string | null, shortname: string | null } } | null } | null };
 
-export type DiscussionFieldsFragment = { __typename?: 'Discussion', id: string, title: string, text: string, card?: string | null, ballotId?: string | null, createdAt: any, updatedAt: any, user: { __typename?: 'User', id: string, shortname?: string | null } };
+export type DiscussionFieldsFragment = { id: string, title: string, text: string, card: string | null, ballotId: string | null, createdAt: any, updatedAt: any, user: { id: string, shortname: string | null } };
 
 export type GetTeamDiscussionsQueryVariables = Exact<{
-  card?: InputMaybe<Scalars['String']['input']>;
-  ballotId?: InputMaybe<Scalars['String']['input']>;
-  teamId?: InputMaybe<Scalars['String']['input']>;
+  card?: string | null | undefined;
+  ballotId?: string | null | undefined;
+  teamId?: string | null | undefined;
 }>;
 
 
-export type GetTeamDiscussionsQuery = { __typename?: 'Query', getTeamDiscussions?: Array<{ __typename?: 'Discussion', id: string, title: string, text: string, card?: string | null, ballotId?: string | null, createdAt: any, updatedAt: any, user: { __typename?: 'User', id: string, shortname?: string | null } }> | null };
+export type GetTeamDiscussionsQuery = { getTeamDiscussions: Array<{ id: string, title: string, text: string, card: string | null, ballotId: string | null, createdAt: any, updatedAt: any, user: { id: string, shortname: string | null } }> | null };
 
 export type PostDiscussionMutationVariables = Exact<{
-  card?: InputMaybe<Scalars['String']['input']>;
-  ballotId?: InputMaybe<Scalars['String']['input']>;
-  text: Scalars['String']['input'];
-  title: Scalars['String']['input'];
-  teamId: Scalars['String']['input'];
+  card?: string | null | undefined;
+  ballotId?: string | null | undefined;
+  text: string;
+  title: string;
+  teamId: string;
 }>;
 
 
-export type PostDiscussionMutation = { __typename?: 'Mutation', postDiscussion: { __typename?: 'Discussion', id: string, title: string, text: string, card?: string | null, ballotId?: string | null, createdAt: any, updatedAt: any, user: { __typename?: 'User', id: string, shortname?: string | null } } };
+export type PostDiscussionMutation = { postDiscussion: { id: string, title: string, text: string, card: string | null, ballotId: string | null, createdAt: any, updatedAt: any, user: { id: string, shortname: string | null } } };
 
 export type SetNotesMutationVariables = Exact<{
-  teamId: Scalars['String']['input'];
-  notes: Scalars['Json']['input'];
+  teamId: string;
+  notes: any;
 }>;
 
 
-export type SetNotesMutation = { __typename?: 'Mutation', setNotes: { __typename?: 'Team', invite?: string | null, code?: string | null, id: string, name: string, cards: string, prefs?: any | null, notes?: any | null, teacherId: string, members: Array<{ __typename?: 'User', email?: string | null, emailVerified?: any | null, id: string, name?: string | null, shortname?: string | null }>, teacher: { __typename?: 'User', id: string, shortname?: string | null }, school: { __typename?: 'School', id: string, name: string, city: string } } };
+export type SetNotesMutation = { setNotes: { invite: string | null, code: string | null, id: string, name: string, cards: string, prefs: any, notes: any, teacherId: string, members: Array<{ email: string | null, emailVerified: any, id: string, name: string | null, shortname: string | null }>, teacher: { id: string, shortname: string | null }, school: { id: string, name: string, city: string } } };
 
 export type SetPrefsMutationVariables = Exact<{
-  teamId: Scalars['String']['input'];
-  prefs: Scalars['Json']['input'];
+  teamId: string;
+  prefs: any;
 }>;
 
 
-export type SetPrefsMutation = { __typename?: 'Mutation', setPrefs: { __typename?: 'Team', invite?: string | null, code?: string | null, id: string, name: string, cards: string, prefs?: any | null, notes?: any | null, teacherId: string, members: Array<{ __typename?: 'User', email?: string | null, emailVerified?: any | null, id: string, name?: string | null, shortname?: string | null }>, teacher: { __typename?: 'User', id: string, shortname?: string | null }, school: { __typename?: 'School', id: string, name: string, city: string } } };
+export type SetPrefsMutation = { setPrefs: { invite: string | null, code: string | null, id: string, name: string, cards: string, prefs: any, notes: any, teacherId: string, members: Array<{ email: string | null, emailVerified: any, id: string, name: string | null, shortname: string | null }>, teacher: { id: string, shortname: string | null }, school: { id: string, name: string, city: string } } };
 
 export type ProgressQueryVariables = Exact<{
-  teamId: Scalars['String']['input'];
+  teamId: string;
 }>;
 
 
-export type ProgressQuery = { __typename?: 'Query', progress: { __typename?: 'ResponseProgress', cards?: Array<{ __typename?: 'ProgressCard', id?: string | null, done?: Array<{ __typename?: 'User', id: string, email?: string | null }> | null, due?: Array<{ __typename?: 'User', id: string, email?: string | null }> | null }> | null, students?: Array<{ __typename?: 'ProgressStudent', id?: string | null, email?: string | null, done?: Array<string> | null, due?: Array<string> | null }> | null } };
+export type ProgressQuery = { progress: { cards: Array<{ id: string | null, done: Array<{ id: string, email: string | null }> | null, due: Array<{ id: string, email: string | null }> | null }> | null, students: Array<{ id: string | null, email: string | null, done: Array<string> | null, due: Array<string> | null }> | null } };
 
-export type SchoolFieldsFragment = { __typename?: 'School', id: string, name: string, type: string, city: string, zip: string, canton: string };
+export type SchoolFieldsFragment = { id: string, name: string, type: string, city: string, zip: string, canton: string };
 
 export type SchoolsWithMembersQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type SchoolsWithMembersQuery = { __typename?: 'Query', schools: Array<{ __typename?: 'School', id: string, name: string, type: string, city: string, zip: string, canton: string, members: Array<{ __typename?: 'User', id: string, name?: string | null, lastname?: string | null }> }> };
+export type SchoolsWithMembersQuery = { schools: Array<{ id: string, name: string, type: string, city: string, zip: string, canton: string, members: Array<{ id: string, name: string | null, lastname: string | null }> }> };
 
 export type SetSchoolMutationVariables = Exact<{
-  school: Scalars['String']['input'];
+  school: string;
 }>;
 
 
-export type SetSchoolMutation = { __typename?: 'Mutation', setSchool: { __typename?: 'User', id: string, name?: string | null, shortname?: string | null, role: Role, email?: string | null, lastname?: string | null, school?: { __typename?: 'School', id: string, name: string, type: string, city: string, zip: string } | null } };
+export type SetSchoolMutation = { setSchool: { id: string, name: string | null, shortname: string | null, role: Types.Role, email: string | null, lastname: string | null, gender: Types.Gender | null, year: number | null, school: { id: string, name: string, type: string, city: string, zip: string } | null, team: { id: string, name: string, cards: string, teacher: { id: string, name: string | null, shortname: string | null } } | null } };
 
 export type SchoolsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type SchoolsQuery = { __typename?: 'Query', schools: Array<{ __typename?: 'School', id: string, name: string, type: string, city: string, zip: string, canton: string }> };
+export type SchoolsQuery = { schools: Array<{ id: string, name: string, type: string, city: string, zip: string, canton: string }> };
 
 export type CreateOneSchoolMutationVariables = Exact<{
-  data: SchoolCreateInput;
+  data: Types.SchoolCreateInput;
 }>;
 
 
-export type CreateOneSchoolMutation = { __typename?: 'Mutation', createOneSchool: { __typename?: 'School', id: string, name: string, address: string, zip: string, city: string, canton: string } };
+export type CreateOneSchoolMutation = { createOneSchool: { id: string, name: string, address: string, zip: string, city: string, canton: string } };
 
-export type NewSchoolFragment = { __typename?: 'School', name: string, address: string, zip: string, city: string, canton: string };
+export type NewSchoolFragment = { name: string, address: string, zip: string, city: string, canton: string };
 
 export type SwissvotesQueryVariables = Exact<{
-  keywords?: InputMaybe<Scalars['String']['input']>;
-  type?: InputMaybe<Scalars['Int']['input']>;
-  result?: InputMaybe<Scalars['Int']['input']>;
-  hasPosters?: InputMaybe<Scalars['Boolean']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  sort?: InputMaybe<Scalars['String']['input']>;
+  keywords?: string | null | undefined;
+  type?: number | null | undefined;
+  result?: number | null | undefined;
+  hasPosters?: boolean | null | undefined;
+  offset?: number | null | undefined;
+  limit?: number | null | undefined;
+  sort?: string | null | undefined;
 }>;
 
 
-export type SwissvotesQuery = { __typename?: 'Query', swissvotes?: Array<{ __typename?: 'Swissvote', anr?: string | null, datum?: string | null, titel_kurz_d?: string | null, titel_off_d?: string | null, stichwort?: string | null, swissvoteslink?: string | null, rechtsform?: number | null, poster_ja?: string | null, poster_nein?: string | null, annahme?: number | null, volk?: number | null, stand?: number | null, kategorien?: string | null }> | null };
+export type SwissvotesQuery = { swissvotes: Array<{ anr: string | null, datum: string | null, titel_kurz_d: string | null, titel_off_d: string | null, stichwort: string | null, swissvoteslink: string | null, rechtsform: number | null, poster_ja: string | null, poster_nein: string | null, annahme: number | null, volk: number | null, stand: number | null, kategorien: string | null }> | null };
 
-export type TeamAnonFieldsFragment = { __typename?: 'Team', id: string, name: string, cards: string, prefs?: any | null, notes?: any | null, teacherId: string, school: { __typename?: 'School', id: string, name: string, city: string } };
+export type TeamAnonFieldsFragment = { id: string, name: string, cards: string, prefs: any, notes: any, teacherId: string, school: { id: string, name: string, city: string } };
 
-export type TeamUserFieldsFragment = { __typename?: 'Team', id: string, name: string, cards: string, prefs?: any | null, notes?: any | null, teacherId: string, members: Array<{ __typename?: 'User', id: string, name?: string | null, shortname?: string | null }>, teacher: { __typename?: 'User', id: string, shortname?: string | null }, school: { __typename?: 'School', id: string, name: string, city: string } };
+export type TeamUserFieldsFragment = { id: string, name: string, cards: string, prefs: any, notes: any, teacherId: string, members: Array<{ id: string, name: string | null, shortname: string | null }>, teacher: { id: string, shortname: string | null }, school: { id: string, name: string, city: string } };
 
-export type TeamTeacherFieldsFragment = { __typename?: 'Team', invite?: string | null, code?: string | null, id: string, name: string, cards: string, prefs?: any | null, notes?: any | null, teacherId: string, members: Array<{ __typename?: 'User', email?: string | null, emailVerified?: any | null, id: string, name?: string | null, shortname?: string | null }>, teacher: { __typename?: 'User', id: string, shortname?: string | null }, school: { __typename?: 'School', id: string, name: string, city: string } };
+export type TeamTeacherFieldsFragment = { invite: string | null, code: string | null, id: string, name: string, cards: string, prefs: any, notes: any, teacherId: string, members: Array<{ email: string | null, emailVerified: any, id: string, name: string | null, shortname: string | null }>, teacher: { id: string, shortname: string | null }, school: { id: string, name: string, city: string } };
 
 export type TeamsQueryVariables = Exact<{
-  where?: InputMaybe<TeamWhereInput>;
-  orderBy?: InputMaybe<Array<TeamOrderByInput> | TeamOrderByInput>;
+  where?: Types.TeamWhereInput | null | undefined;
+  orderBy?: Array<Types.TeamOrderByInput> | Types.TeamOrderByInput | null | undefined;
 }>;
 
 
-export type TeamsQuery = { __typename?: 'Query', teams: Array<{ __typename?: 'Team', invite?: string | null, code?: string | null, id: string, name: string, cards: string, prefs?: any | null, notes?: any | null, teacherId: string, members: Array<{ __typename?: 'User', email?: string | null, emailVerified?: any | null, id: string, name?: string | null, shortname?: string | null }>, teacher: { __typename?: 'User', id: string, shortname?: string | null }, school: { __typename?: 'School', id: string, name: string, city: string } }> };
+export type TeamsQuery = { teams: Array<{ invite: string | null, code: string | null, id: string, name: string, cards: string, prefs: any, notes: any, teacherId: string, members: Array<{ email: string | null, emailVerified: any, id: string, name: string | null, shortname: string | null }>, teacher: { id: string, shortname: string | null }, school: { id: string, name: string, city: string } }> };
 
 export type TeamAnonQueryVariables = Exact<{
-  where: TeamWhereUniqueInput;
+  where: Types.TeamWhereUniqueInput;
 }>;
 
 
-export type TeamAnonQuery = { __typename?: 'Query', team?: { __typename?: 'Team', id: string, name: string, cards: string, prefs?: any | null, notes?: any | null, teacherId: string, school: { __typename?: 'School', id: string, name: string, city: string } } | null };
+export type TeamAnonQuery = { team: { id: string, name: string, cards: string, prefs: any, notes: any, teacherId: string, school: { id: string, name: string, city: string } } | null };
 
 export type TeamUserQueryVariables = Exact<{
-  where: TeamWhereUniqueInput;
+  where: Types.TeamWhereUniqueInput;
 }>;
 
 
-export type TeamUserQuery = { __typename?: 'Query', team?: { __typename?: 'Team', id: string, name: string, cards: string, prefs?: any | null, notes?: any | null, teacherId: string, members: Array<{ __typename?: 'User', id: string, name?: string | null, shortname?: string | null }>, teacher: { __typename?: 'User', id: string, shortname?: string | null }, school: { __typename?: 'School', id: string, name: string, city: string } } | null };
+export type TeamUserQuery = { team: { id: string, name: string, cards: string, prefs: any, notes: any, teacherId: string, members: Array<{ id: string, name: string | null, shortname: string | null }>, teacher: { id: string, shortname: string | null }, school: { id: string, name: string, city: string } } | null };
 
 export type TeamTeacherQueryVariables = Exact<{
-  where: TeamWhereUniqueInput;
+  where: Types.TeamWhereUniqueInput;
 }>;
 
 
-export type TeamTeacherQuery = { __typename?: 'Query', team?: { __typename?: 'Team', invite?: string | null, code?: string | null, id: string, name: string, cards: string, prefs?: any | null, notes?: any | null, teacherId: string, members: Array<{ __typename?: 'User', email?: string | null, emailVerified?: any | null, id: string, name?: string | null, shortname?: string | null }>, teacher: { __typename?: 'User', id: string, shortname?: string | null }, school: { __typename?: 'School', id: string, name: string, city: string } } | null };
+export type TeamTeacherQuery = { team: { invite: string | null, code: string | null, id: string, name: string, cards: string, prefs: any, notes: any, teacherId: string, members: Array<{ email: string | null, emailVerified: any, id: string, name: string | null, shortname: string | null }>, teacher: { id: string, shortname: string | null }, school: { id: string, name: string, city: string } } | null };
 
 export type TeamByInviteQueryVariables = Exact<{
-  invite: Scalars['String']['input'];
+  invite: string;
 }>;
 
 
-export type TeamByInviteQuery = { __typename?: 'Query', team?: { __typename?: 'Team', id: string, name: string, cards: string, prefs?: any | null, notes?: any | null, teacherId: string, school: { __typename?: 'School', id: string, name: string, city: string } } | null };
+export type TeamByInviteQuery = { team: { id: string, name: string, cards: string, prefs: any, notes: any, teacherId: string, school: { id: string, name: string, city: string } } | null };
 
 export type TeamByCodeQueryVariables = Exact<{
-  code: Scalars['String']['input'];
+  code: string;
 }>;
 
 
-export type TeamByCodeQuery = { __typename?: 'Query', team?: { __typename?: 'Team', id: string, name: string, cards: string, prefs?: any | null, notes?: any | null, teacherId: string, school: { __typename?: 'School', id: string, name: string, city: string } } | null };
+export type TeamByCodeQuery = { team: { id: string, name: string, cards: string, prefs: any, notes: any, teacherId: string, school: { id: string, name: string, city: string } } | null };
 
 export type DeleteOneTeamMutationVariables = Exact<{
-  where: TeamWhereUniqueInput;
+  where: Types.TeamWhereUniqueInput;
 }>;
 
 
-export type DeleteOneTeamMutation = { __typename?: 'Mutation', deleteOneTeam: { __typename?: 'Team', id: string } };
+export type DeleteOneTeamMutation = { deleteOneTeam: { id: string } };
 
 export type CreateOneTeamMutationVariables = Exact<{
-  name: Scalars['String']['input'];
-  school: Scalars['String']['input'];
-  teacher: Scalars['String']['input'];
+  name: string;
+  school: string;
+  teacher: string;
 }>;
 
 
-export type CreateOneTeamMutation = { __typename?: 'Mutation', createOneTeam: { __typename?: 'Team', invite?: string | null, code?: string | null, id: string, name: string, cards: string, prefs?: any | null, notes?: any | null, teacherId: string, members: Array<{ __typename?: 'User', email?: string | null, emailVerified?: any | null, id: string, name?: string | null, shortname?: string | null }>, teacher: { __typename?: 'User', id: string, shortname?: string | null }, school: { __typename?: 'School', id: string, name: string, city: string } } };
+export type CreateOneTeamMutation = { createOneTeam: { invite: string | null, code: string | null, id: string, name: string, cards: string, prefs: any, notes: any, teacherId: string, members: Array<{ email: string | null, emailVerified: any, id: string, name: string | null, shortname: string | null }>, teacher: { id: string, shortname: string | null }, school: { id: string, name: string, city: string } } };
 
-export type AttachmentFieldsFragment = { __typename?: 'Attachment', id: string, file: string, title: string, type: string, user: { __typename?: 'User', id: string, shortname?: string | null, name?: string | null } };
+export type AttachmentFieldsFragment = { id: string, file: string, title: string, type: string, user: { id: string, shortname: string | null, name: string | null } };
 
 export type AttachmentsQueryVariables = Exact<{
-  where?: InputMaybe<AttachmentWhereInput>;
+  where?: Types.AttachmentWhereInput | null | undefined;
 }>;
 
 
-export type AttachmentsQuery = { __typename?: 'Query', attachments: Array<{ __typename?: 'Attachment', id: string, file: string, title: string, type: string, user: { __typename?: 'User', id: string, shortname?: string | null, name?: string | null } }> };
+export type AttachmentsQuery = { attachments: Array<{ id: string, file: string, title: string, type: string, user: { id: string, shortname: string | null, name: string | null } }> };
 
 export type UsersQueryVariables = Exact<{
-  where?: InputMaybe<UserWhereInput>;
+  where?: Types.UserWhereInput | null | undefined;
 }>;
 
 
-export type UsersQuery = { __typename?: 'Query', users: Array<{ __typename?: 'User', id: string, shortname?: string | null, team?: { __typename?: 'Team', id: string, name: string, school: { __typename?: 'School', id: string, name: string } } | null }> };
+export type UsersQuery = { users: Array<{ id: string, shortname: string | null, team: { id: string, name: string, school: { id: string, name: string } } | null }> };
 
 export type UpdateUserMutationVariables = Exact<{
-  data: UserUpdateInput;
-  where: UserWhereUniqueInput;
+  data: Types.UserUpdateInput;
+  where: Types.UserWhereUniqueInput;
 }>;
 
 
-export type UpdateUserMutation = { __typename?: 'Mutation', updateUser: { __typename?: 'User', id: string, name?: string | null, lastname?: string | null, shortname?: string | null, gender?: Gender | null, year?: number | null, role: Role, email?: string | null, school?: { __typename?: 'School', id: string, name: string, city: string } | null, team?: { __typename?: 'Team', id: string, name: string, cards: string, teacher: { __typename?: 'User', id: string, name?: string | null, shortname?: string | null } } | null } };
+export type UpdateUserMutation = { updateUser: { id: string, name: string | null, lastname: string | null, shortname: string | null, gender: Types.Gender | null, year: number | null, role: Types.Role, email: string | null, school: { id: string, name: string, city: string } | null, team: { id: string, name: string, cards: string, teacher: { id: string, name: string | null, shortname: string | null } } | null } };
 
 export type DeleteUserMutationVariables = Exact<{
-  where: UserWhereUniqueInput;
+  where: Types.UserWhereUniqueInput;
 }>;
 
 
-export type DeleteUserMutation = { __typename?: 'Mutation', deleteUser: { __typename?: 'User', id: string, shortname?: string | null } };
+export type DeleteUserMutation = { deleteUser: { id: string, shortname: string | null } };
 
-export type WorkFieldsFragment = { __typename?: 'Work', id: string, card?: string | null, title: string, text: string, data?: any | null, updatedAt: any, users: Array<{ __typename?: 'User', id: string, name?: string | null, shortname?: string | null }>, attachments: Array<{ __typename?: 'Attachment', id: string, file: string, title: string, type: string, user: { __typename?: 'User', id: string, shortname?: string | null, name?: string | null } }> };
+export type WorkFieldsFragment = { id: string, card: string | null, title: string, text: string, data: any, updatedAt: any, users: Array<{ id: string, name: string | null, shortname: string | null }>, attachments: Array<{ id: string, file: string, title: string, type: string, user: { id: string, shortname: string | null, name: string | null } }> };
 
 export type WorksQueryVariables = Exact<{
-  where?: InputMaybe<WorkWhereInput>;
+  where?: Types.WorkWhereInput | null | undefined;
 }>;
 
 
-export type WorksQuery = { __typename?: 'Query', works: Array<{ __typename?: 'Work', id: string, card?: string | null, title: string, text: string, data?: any | null, updatedAt: any, users: Array<{ __typename?: 'User', id: string, name?: string | null, shortname?: string | null }>, attachments: Array<{ __typename?: 'Attachment', id: string, file: string, title: string, type: string, user: { __typename?: 'User', id: string, shortname?: string | null, name?: string | null } }> }> };
+export type WorksQuery = { works: Array<{ id: string, card: string | null, title: string, text: string, data: any, updatedAt: any, users: Array<{ id: string, name: string | null, shortname: string | null }>, attachments: Array<{ id: string, file: string, title: string, type: string, user: { id: string, shortname: string | null, name: string | null } }> }> };
 
 export type DeleteWorkMutationVariables = Exact<{
-  where: WorkWhereUniqueInput;
+  where: Types.WorkWhereUniqueInput;
 }>;
 
 
-export type DeleteWorkMutation = { __typename?: 'Mutation', deleteWork: { __typename?: 'Work', id: string } };
+export type DeleteWorkMutation = { deleteWork: { id: string } };
 
 export type PostWorkMutationVariables = Exact<{
-  data: WorkCreateInput;
+  data: Types.WorkCreateInput;
 }>;
 
 
-export type PostWorkMutation = { __typename?: 'Mutation', postWork: { __typename?: 'Work', id: string, card?: string | null, title: string, text: string, data?: any | null, updatedAt: any, users: Array<{ __typename?: 'User', id: string, name?: string | null, shortname?: string | null }>, attachments: Array<{ __typename?: 'Attachment', id: string, file: string, title: string, type: string, user: { __typename?: 'User', id: string, shortname?: string | null, name?: string | null } }> } };
+export type PostWorkMutation = { postWork: { id: string, card: string | null, title: string, text: string, data: any, updatedAt: any, users: Array<{ id: string, name: string | null, shortname: string | null }>, attachments: Array<{ id: string, file: string, title: string, type: string, user: { id: string, shortname: string | null, name: string | null } }> } };
 
 export type StatsQueryVariables = Exact<{
-  from?: InputMaybe<Scalars['Float']['input']>;
-  to?: InputMaybe<Scalars['Float']['input']>;
+  from?: number | null | undefined;
+  to?: number | null | undefined;
 }>;
 
 
-export type StatsQuery = { __typename?: 'Query', stats: { __typename?: 'Stats', stats?: any | null } };
+export type StatsQuery = { stats: { stats: any } };
 
 export type TeachersQueryVariables = Exact<{
-  where?: InputMaybe<UserWhereInput>;
+  where?: Types.UserWhereInput | null | undefined;
 }>;
 
 
-export type TeachersQuery = { __typename?: 'Query', users: Array<{ __typename?: 'User', id: string, name?: string | null, lastname?: string | null, shortname?: string | null, email?: string | null, emailVerified?: any | null, createdAt: any, school?: { __typename?: 'School', id: string, name: string, city: string, zip: string } | null, teaches: Array<{ __typename?: 'Team', name: string, id: string }> }> };
+export type TeachersQuery = { users: Array<{ id: string, name: string | null, lastname: string | null, shortname: string | null, email: string | null, emailVerified: any, createdAt: any, school: { id: string, name: string, city: string, zip: string } | null, teaches: Array<{ name: string, id: string }> }> };
 
 export type AdminUsersQueryVariables = Exact<{
-  where?: InputMaybe<UserWhereInput>;
-  orderBy?: InputMaybe<Array<UserOrderByInput> | UserOrderByInput>;
-  first?: InputMaybe<Scalars['Int']['input']>;
+  where?: Types.UserWhereInput | null | undefined;
+  orderBy?: Array<Types.UserOrderByInput> | Types.UserOrderByInput | null | undefined;
+  first?: number | null | undefined;
 }>;
 
 
-export type AdminUsersQuery = { __typename?: 'Query', users: Array<{ __typename?: 'User', id: string, shortname?: string | null, name?: string | null, gender?: Gender | null, year?: number | null, lastname?: string | null, createdAt: any, email?: string | null, emailVerified?: any | null, role: Role, school?: { __typename?: 'School', id: string, name: string, zip: string, city: string } | null, teaches: Array<{ __typename?: 'Team', id: string, name: string }>, team?: { __typename?: 'Team', id: string, name: string } | null }> };
+export type AdminUsersQuery = { users: Array<{ id: string, shortname: string | null, name: string | null, gender: Types.Gender | null, year: number | null, lastname: string | null, createdAt: any, email: string | null, emailVerified: any, role: Types.Role, school: { id: string, name: string, zip: string, city: string } | null, teaches: Array<{ id: string, name: string }>, team: { id: string, name: string } | null }> };
 
 export type CreateInvitedUserMutationVariables = Exact<{
-  invite: Scalars['String']['input'];
-  name?: InputMaybe<Scalars['String']['input']>;
-  lastname?: InputMaybe<Scalars['String']['input']>;
-  email: Scalars['String']['input'];
-  password?: InputMaybe<Scalars['String']['input']>;
+  invite: string;
+  name?: string | null | undefined;
+  lastname?: string | null | undefined;
+  email: string;
+  password?: string | null | undefined;
 }>;
 
 
-export type CreateInvitedUserMutation = { __typename?: 'Mutation', createInvitedUser: { __typename?: 'User', id: string, name?: string | null, lastname?: string | null, shortname?: string | null, gender?: Gender | null, year?: number | null, role: Role, email?: string | null, school?: { __typename?: 'School', id: string, name: string, city: string } | null, team?: { __typename?: 'Team', id: string, name: string, cards: string, teacher: { __typename?: 'User', id: string, name?: string | null, shortname?: string | null } } | null } };
+export type CreateInvitedUserMutation = { createInvitedUser: { id: string, name: string | null, lastname: string | null, shortname: string | null, gender: Types.Gender | null, year: number | null, role: Types.Role, email: string | null, school: { id: string, name: string, city: string } | null, team: { id: string, name: string, cards: string, teacher: { id: string, name: string | null, shortname: string | null } } | null } };
 
 export type AcceptInviteMutationVariables = Exact<{
-  invite: Scalars['String']['input'];
-  force?: InputMaybe<Scalars['Boolean']['input']>;
+  invite: string;
+  force?: boolean | null | undefined;
 }>;
 
 
-export type AcceptInviteMutation = { __typename?: 'Mutation', acceptInvite: { __typename?: 'Team', id: string, name: string, school: { __typename?: 'School', id: string, name: string, city: string } } };
+export type AcceptInviteMutation = { acceptInvite: { id: string, name: string, school: { id: string, name: string, city: string } } };
 
 export type InviteStudentsMutationVariables = Exact<{
-  team: Scalars['String']['input'];
-  emails: Array<Scalars['String']['input']> | Scalars['String']['input'];
+  team: string;
+  emails: Array<string> | string;
 }>;
 
 
-export type InviteStudentsMutation = { __typename?: 'Mutation', inviteStudents: { __typename?: 'InviteResponse', created?: Array<string> | null, failed?: Array<string> | null, duplicated?: Array<string> | null, team?: { __typename?: 'Team', invite?: string | null, code?: string | null, id: string, name: string, cards: string, prefs?: any | null, notes?: any | null, teacherId: string, members: Array<{ __typename?: 'User', email?: string | null, emailVerified?: any | null, id: string, name?: string | null, shortname?: string | null }>, teacher: { __typename?: 'User', id: string, shortname?: string | null }, school: { __typename?: 'School', id: string, name: string, city: string } } | null } };
+export type InviteStudentsMutation = { inviteStudents: { created: Array<string> | null, failed: Array<string> | null, duplicated: Array<string> | null, team: { invite: string | null, code: string | null, id: string, name: string, cards: string, prefs: any, notes: any, teacherId: string, members: Array<{ email: string | null, emailVerified: any, id: string, name: string | null, shortname: string | null }>, teacher: { id: string, shortname: string | null }, school: { id: string, name: string, city: string } } | null } };
 
 export type DeleteAccountMutationVariables = Exact<{ [key: string]: never; }>;
 
 
-export type DeleteAccountMutation = { __typename?: 'Mutation', deleteAccount: { __typename?: 'Response', success?: boolean | null, error?: boolean | null, message?: string | null } };
+export type DeleteAccountMutation = { deleteAccount: { success: boolean | null, error: boolean | null, message: string | null } };
 
 export type LoginMutationVariables = Exact<{
-  email: Scalars['String']['input'];
-  password: Scalars['String']['input'];
+  email: string;
+  password: string;
 }>;
 
 
-export type LoginMutation = { __typename?: 'Mutation', login: { __typename?: 'ResponseLogin', token?: string | null, user?: { __typename?: 'User', id: string, name?: string | null, lastname?: string | null, shortname?: string | null, gender?: Gender | null, year?: number | null, role: Role, email?: string | null, school?: { __typename?: 'School', id: string, name: string, city: string } | null, team?: { __typename?: 'Team', id: string, name: string, cards: string, teacher: { __typename?: 'User', id: string, name?: string | null, shortname?: string | null } } | null } | null } };
+export type LoginMutation = { login: { token: string | null, user: { id: string, name: string | null, lastname: string | null, shortname: string | null, gender: Types.Gender | null, year: number | null, role: Types.Role, email: string | null, school: { id: string, name: string, city: string } | null, team: { id: string, name: string, cards: string, teacher: { id: string, name: string | null, shortname: string | null } } | null } | null } };
 
 export type EmailVerificationMutationVariables = Exact<{
-  email: Scalars['String']['input'];
-  purpose: Scalars['String']['input'];
+  email: string;
+  purpose: string;
 }>;
 
 
-export type EmailVerificationMutation = { __typename?: 'Mutation', emailVerification: { __typename?: 'ResponseLogin', token?: string | null, user?: { __typename?: 'User', id: string, name?: string | null, lastname?: string | null, shortname?: string | null, gender?: Gender | null, year?: number | null, role: Role, email?: string | null, school?: { __typename?: 'School', id: string, name: string, city: string } | null, team?: { __typename?: 'Team', id: string, name: string, cards: string, teacher: { __typename?: 'User', id: string, name?: string | null, shortname?: string | null } } | null } | null } };
+export type EmailVerificationMutation = { emailVerification: { token: string | null, user: { id: string, name: string | null, lastname: string | null, shortname: string | null, gender: Types.Gender | null, year: number | null, role: Types.Role, email: string | null, school: { id: string, name: string, city: string } | null, team: { id: string, name: string, cards: string, teacher: { id: string, name: string | null, shortname: string | null } } | null } | null } };
 
 export type ChangePasswordMutationVariables = Exact<{
-  password: Scalars['String']['input'];
+  password: string;
 }>;
 
 
-export type ChangePasswordMutation = { __typename?: 'Mutation', changePassword: { __typename?: 'ResponseLogin', token?: string | null, user?: { __typename?: 'User', id: string, name?: string | null, lastname?: string | null, shortname?: string | null, gender?: Gender | null, year?: number | null, role: Role, email?: string | null, school?: { __typename?: 'School', id: string, name: string, city: string } | null, team?: { __typename?: 'Team', id: string, name: string, cards: string, teacher: { __typename?: 'User', id: string, name?: string | null, shortname?: string | null } } | null } | null } };
+export type ChangePasswordMutation = { changePassword: { token: string | null, user: { id: string, name: string | null, lastname: string | null, shortname: string | null, gender: Types.Gender | null, year: number | null, role: Types.Role, email: string | null, school: { id: string, name: string, city: string } | null, team: { id: string, name: string, cards: string, teacher: { id: string, name: string | null, shortname: string | null } } | null } | null } };
 
 export type MagicMutationVariables = Exact<{
-  email: Scalars['String']['input'];
-  redirect?: InputMaybe<Scalars['String']['input']>;
+  email: string;
+  redirect?: string | null | undefined;
 }>;
 
 
-export type MagicMutation = { __typename?: 'Mutation', magic: { __typename?: 'Response', success?: boolean | null, error?: boolean | null, message?: string | null } };
+export type MagicMutation = { magic: { success: boolean | null, error: boolean | null, message: string | null } };
 
 export type CreateUserMutationVariables = Exact<{
-  data: UserCreateInput;
+  data: Types.UserCreateInput;
 }>;
 
 
-export type CreateUserMutation = { __typename?: 'Mutation', createUser: { __typename?: 'User', id: string, name?: string | null, email?: string | null, shortname?: string | null, lastname?: string | null, role: Role } };
+export type CreateUserMutation = { createUser: { id: string, name: string | null, email: string | null, shortname: string | null, lastname: string | null, role: Types.Role, gender: Types.Gender | null, year: number | null, school: { id: string, name: string, city: string } | null, team: { id: string, name: string, cards: string, teacher: { id: string, name: string | null, shortname: string | null } } | null } };
 
 export type CheckVerificationMutationVariables = Exact<{
-  token: Scalars['String']['input'];
+  token: string;
 }>;
 
 
-export type CheckVerificationMutation = { __typename?: 'Mutation', checkVerification: { __typename?: 'ResponseLogin', token?: string | null } };
+export type CheckVerificationMutation = { checkVerification: { token: string | null } };
 
 export const BallotFieldsFragmentDoc = gql`
     fragment BallotFields on Ballot {
@@ -2123,12 +2124,24 @@ export const SetSchoolDocument = gql`
     role
     email
     lastname
+    gender
+    year
     school {
       id
       name
       type
       city
       zip
+    }
+    team {
+      id
+      name
+      cards
+      teacher {
+        id
+        name
+        shortname
+      }
     }
   }
 }
@@ -2845,6 +2858,23 @@ export const CreateUserDocument = gql`
     shortname
     lastname
     role
+    gender
+    year
+    school {
+      id
+      name
+      city
+    }
+    team {
+      id
+      name
+      cards
+      teacher {
+        id
+        name
+        shortname
+      }
+    }
   }
 }
     `;

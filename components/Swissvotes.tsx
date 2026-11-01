@@ -1,6 +1,5 @@
 import { gql } from "@apollo/client";
 import {
-  Swissvote,
   SwissvotesQuery,
   UserWhereUniqueInput,
   useSwissvotesQuery,
@@ -313,7 +312,7 @@ export const VotesList: React.FC<
 
 export const Vote: React.FC<
   React.PropsWithChildren<{
-    vote: Swissvote;
+    vote: VoteType;
     votes?: VoteType[];
     setVotes?: (votes: VoteType[]) => void;
   }>

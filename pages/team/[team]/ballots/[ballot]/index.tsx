@@ -2,7 +2,11 @@ import { AppPage, LoggedInPage, ErrorPage } from "components/Page";
 import { Text, Box, Image, Button, Flex } from "components/ui";
 import { useRouter } from "next/router";
 import { useUser } from "state/user";
-import { useBallotQuery, BallotQuery, useVoteMutation } from "graphql/types";
+import {
+  useBallotQuery,
+  BallotFieldsFragment,
+  useVoteMutation,
+} from "graphql/types";
 import { useState, ReactElement } from "react";
 import { ErrorBox } from "components/Form";
 import { Info } from "components/Info";
@@ -83,9 +87,14 @@ export default function BallotPage(): ReactElement {
   );
 }
 
+export type VotyBallot = BallotFieldsFragment & {
+  canVote?: boolean | null;
+  hasVoted?: boolean | null;
+};
+
 export const VotyNow: React.FC<
   React.PropsWithChildren<{
-    ballot: BallotQuery["ballot"];
+    ballot: VotyBallot;
     onSuccess: () => void;
     slim?: boolean;
     loginLink?: string;

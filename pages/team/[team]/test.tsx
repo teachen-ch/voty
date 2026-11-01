@@ -13,17 +13,22 @@ import {
   Role,
   useBallotQuery,
   BallotRunFieldsFragment,
+  useTeamTeacherQuery,
 } from "graphql/types";
 import { useRouter } from "next/router";
 import { ReactElement } from "react";
 import find from "lodash/find";
 import { usePageEvent, trackEvent } from "util/stats";
-import { useTeam } from "state/user";
 
 export default function TeacherTest(): ReactElement {
   usePageEvent({ category: "Teacher", action: "Ballots" });
   const router = useRouter();
-  const team = useTeam();
+  const id = String(router.query.team);
+  const teamQuery = useTeamTeacherQuery({
+    variables: { where: { id } },
+    skip: !id,
+  });
+  const team = teamQuery.data?.team;
   const [doAddBallotRun] = useAddBallotRunMutation();
 
   const ballotRunsQuery = useGetBallotRunsQuery({
@@ -41,7 +46,7 @@ export default function TeacherTest(): ReactElement {
     ? ballots.filter(({ id }) => !find(ballotRuns, { ballot: { id } }))
     : [];
 
-  if (team === null) {
+  if (teamQuery.data && !team) {
     return (
       <LoggedInPage heading="Demokratie testen" role={Role.Teacher}>
         <Text className="mb-4">Klasse wurde nicht gefunden.</Text>

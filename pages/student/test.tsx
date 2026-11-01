@@ -5,14 +5,17 @@ import { useUser, SessionUser } from "state/user";
 import React, { useState } from "react";
 import {
   BallotScope,
-  BallotFieldsFragment,
   useGetBallotRunsQuery,
   useBallotsQuery,
   useBallotQuery,
   BallotRunFieldsFragment,
 } from "graphql/types";
 import { Markdown } from "util/markdown";
-import { VotyNow, VotySuccess } from "pages/team/[team]/ballots/[ballot]";
+import {
+  VotyNow,
+  VotySuccess,
+  VotyBallot,
+} from "pages/team/[team]/ballots/[ballot]";
 import { OneRowTable } from "components/Table";
 
 export default function StudentTest(): React.ReactElement {
@@ -94,7 +97,7 @@ export const AllBallots: React.FC<React.PropsWithChildren<unknown>> = () => {
 };
 
 export const Ballot: React.FC<React.PropsWithChildren<{
-  ballot: BallotFieldsFragment;
+  ballot: VotyBallot;
 }>> = ({ ballot }) => {
   const [voty, setVoty] = useState(false);
   const [success, setSuccess] = useState(false);
