@@ -114,3 +114,34 @@ jobs:
         env:
           # Empty on fork/Dependabot PRs — script omits --record when unset.
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+
+  civictools-e2e:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+
+      - name: Set up Go
+        uses: actions/setup-go@v6
+        with:
+          go-version: "1.27.x"
+          cache-dependency-path: civictools/pb/go.sum
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: 24.22.1
+          cache: npm
+          cache-dependency-path: civictools/frontend/package-lock.json
+
+      - name: Install frontend dependencies
+        working-directory: civictools/frontend
+        run: npm ci
+
+      - name: Install Playwright Chromium
+        working-directory: civictools/frontend
+        run: npx playwright install --with-deps chromium
+
+      - name: Run CivicTools end-to-end flow
+        working-directory: civictools/frontend
+        run: npm run test:e2e

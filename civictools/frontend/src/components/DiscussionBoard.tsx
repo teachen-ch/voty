@@ -324,6 +324,9 @@ function ArgumentColumn({
           onClick={onAdd}
           onPointerDown={(e) => e.stopPropagation()}
           title={t("discussion.addArgument", { option: title.toLowerCase() })}
+          aria-label={t("discussion.addArgument", {
+            option: title.toLowerCase(),
+          })}
           className="size-6 rounded-full bg-white text-slate-600 hover:text-slate-900 shadow-sm border border-slate-200 flex items-center justify-center text-base leading-none"
         >
           +

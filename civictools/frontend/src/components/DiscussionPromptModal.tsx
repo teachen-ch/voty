@@ -1,4 +1,4 @@
-import { useEffect, useState } from "preact/hooks";
+import { useLayoutEffect, useState } from "preact/hooks";
 import { useTranslation } from "react-i18next";
 import { pb } from "../pb";
 import { canvasTransform, discussionModal } from "../store";
@@ -21,7 +21,7 @@ export function DiscussionPromptModal({ roomId }: Props) {
   const [options, setOptions] = useState<string[]>(defaultOptions);
   const [submitting, setSubmitting] = useState(false);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (!state) return;
     if (editing) {
       setPrompt((editing.prompt as string) ?? "");

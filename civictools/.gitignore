@@ -1,10 +1,13 @@
 # PocketBase
 pb/pb_data/
+pb/pb_data_e2e/
 pb/civictools
 
 # Frontend
 frontend/node_modules/
 frontend/dist/
+frontend/test-results/
+frontend/playwright-report/
 
 # Misc
 .env

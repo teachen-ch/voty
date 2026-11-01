@@ -6,6 +6,9 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
+    "test:e2e": "playwright test",
+    "test:e2e:ui": "playwright test --ui",
+    "seed:e2e": "node e2e/seed.mjs",
     "lint": "eslint src",
     "format": "prettier --write src",
     "check": "prettier --check src && eslint src"
@@ -22,6 +25,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
+    "@playwright/test": "^1.64.1",
     "@preact/preset-vite": "^2.9.4",
     "@tailwindcss/vite": "^4.2.4",
     "eslint": "^10.2.1",

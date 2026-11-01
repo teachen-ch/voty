@@ -1,5 +1,15 @@
 # CivicTools
 
+## End-to-end tests
+
+The Playwright suite covers teacher login, room creation, a pro/con discussion,
+and a student joining from a separate browser context and adding an argument.
+Run `cd frontend && npx playwright install chromium` once, then
+`cd frontend && npm run test:e2e`. It starts an isolated PocketBase database,
+seeds the fixed local E2E teacher account, and starts the app. The same command
+runs in the GitHub Actions `civictools-e2e` job. Use `npm run seed:e2e` to seed
+the E2E teacher into an already-running test instance.
+
 ## PocketBase admin UI
 
 The PocketBase admin UI is available at `/pb/` (for example,
