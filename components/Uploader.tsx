@@ -336,7 +336,8 @@ function getAttachmentPreview(
   attachment: AttachmentFieldsFragment
 ): React.ReactElement {
   const type = attachment.type.split("/")[0];
-  const url = `/api/uploaded/${attachment.file}`;
+  // stored paths may be absolute (legacy rows); only the file name matters
+  const url = `/api/uploaded/${attachment.file.split("/").pop()}`;
   switch (type) {
     case "image":
       return (
@@ -382,8 +383,14 @@ export async function doUploadFiles(
     alert(
       "Diese Datei ist leider grösser als 30 Megabytes, das ist mir zu gross, sorry!"
     );
+    return {};
   }
-  return (await result.json()) as Promise<Record<string, any>>;
+  try {
+    return (await result.json()) as Promise<Record<string, any>>;
+  } catch {
+    // e.g. an error page from a proxy, which is not JSON
+    return { error: "Error.ServerError" };
+  }
 }
 
 export async function doDeleteFile(id: string): Promise<Record<string, any>> {

@@ -15,10 +15,8 @@ export default async function uploadedApi(
   }>
 ): Promise<void> {
   try {
-    const file = req.url?.replace("/api/uploaded/", "");
+    const file = path.basename(String(req.query.path ?? ""));
     if (!file) return res.send({ error: "Error.MissingParameter" });
-    if (file.startsWith("/") || file.indexOf("..") >= 0)
-      return res.send({ error: "Error.MissingParameter" });
 
     const attachment = await prisma.attachment.findUnique({ where: { file } });
     if (!attachment) return res.send({ error: "Error.NotFound" });

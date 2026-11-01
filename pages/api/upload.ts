@@ -2,6 +2,7 @@ import { PrismaClient, Attachment } from "@prisma/client";
 import { IncomingForm, File, Fields, Files } from "formidable";
 import { getSessionUser, getShortname } from "graphql/resolvers/users";
 import { NextApiRequest, NextApiResponse } from "next";
+import path from "path";
 import logger from "util/logger";
 
 export const config = {
@@ -40,10 +41,11 @@ export default async function uploadApi(
     for (const fieldname in inFiles) {
       const file = inFiles[fieldname]?.[0];
       if (!file) continue;
-      const path = file.filepath.replace(UPLOAD_FOLDER, "");
+      // formidable returns an absolute path; only the file name is stored
+      const filename = path.basename(file.filepath);
       const attachment = await prisma.attachment.create({
         data: {
-          file: path,
+          file: filename,
           card,
           title: file.originalFilename ?? undefined,
           type: file.mimetype ?? undefined,
@@ -66,11 +68,14 @@ export default async function uploadApi(
       attachments[attachment.id] = attachment;
     }
     res.send({ success: true, files, attachments });
-  } catch (err) {
+  } catch (err: any) {
     console.error(err);
     logger.error(String(err));
+    // formidable reports an oversized upload with httpCode 413
+    if (err?.httpCode === 413) {
+      return res.status(413).send({ error: "Error.FileTooLarge" });
+    }
     res.send({ error: "Error.ServerError" });
-    res.end();
   }
 }
 

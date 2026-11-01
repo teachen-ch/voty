@@ -102,6 +102,7 @@
     "DuplicateEmail": "Für diese Email-Adresse gibt es bereits ein Konto",
     "EmailNotFound": "Email-Adresse wurde nicht gefunden",
     "EmailNotVerified": "Deine Email-Adresse ist noch nicht bestätigt",
+    "FileTooLarge": "Diese Datei ist leider grösser als 30 Megabytes, das ist mir zu gross, sorry!",
     "GenericError": "Es ist ein Fehler aufgetreten",
     "InvalidVerificationLink": "Dieser Email-Link ist leider nicht mehr gültig!",
     "InviteNotFound": "Die Einladung wurde nicht gefunden",

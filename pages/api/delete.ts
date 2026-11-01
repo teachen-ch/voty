@@ -32,7 +32,7 @@ export default async function deleteApi(
       return res.send({ error: "Error.NoPermission" });
 
     await prisma.attachment.delete({ where: { id } });
-    await fs.rm(path.join(UPLOAD_FOLDER, attachment.file));
+    await fs.rm(path.join(UPLOAD_FOLDER, path.basename(attachment.file)));
     res.send({ success: true });
   } catch (err: any) {
     console.error(err);
