@@ -13,6 +13,30 @@
     - "{{ app_dir }}/traefik/rules"
     - "{{ app_dir }}/traefik/shared"
 
+- name: Create uploads and logs directories
+  file:
+    path: "{{ item }}"
+    state: directory
+  loop:
+    - "{{ app_dir }}/uploads"
+    - "{{ app_dir }}/logs"
+
+# The app container runs as uid/gid 1000 (node) but the bind-mounted uploads
+# and logs dirs are owned by the host user, which rootless Docker maps to
+# container uid 0 — so the app cannot write to them. Chown from inside a root
+# container so the ids are translated for us.
+- name: Make uploads and logs writable by the app container user
+  shell: >-
+    docker run --rm
+    -v "{{ app_dir }}/uploads:/uploads"
+    -v "{{ app_dir }}/logs:/logs"
+    --entrypoint /bin/sh nginx:alpine
+    -c "chown -R 1000:1000 /uploads /logs"
+  environment:
+    DOCKER_HOST: "{{ docker_host }}"
+    XDG_RUNTIME_DIR: "/run/user/{{ ansible_user_uid }}"
+  changed_when: false
+
 - name: Initialise acme.json (Traefik requires mode 600; never overwrite existing)
   copy:
     content: "{}"
