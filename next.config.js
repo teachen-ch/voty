@@ -17,7 +17,7 @@ module.exports = withMDX({
   },
   // Next 16 image conf: https://nextjs.org/docs/basic-features/image-optimization
   images: {
-    dangerouslyAllowSVG: true, // not a security risk, these are not user-generated
+    dangerouslyAllowSVG: false,
     deviceSizes: [400, 600, 1200, 2000],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
     localPatterns: [{ pathname: "/**", search: "" }],
