@@ -4,6 +4,9 @@ services:
     image: traefik:3.6
     container_name: traefik
     restart: always
+    sysctls:
+      # CVE-2026-98432: no MPTCP listeners (Go opens them by default) until the kernel is patched
+      - net.mptcp.enabled=0
     depends_on:
       - docker-proxy
     networks:
@@ -92,6 +95,8 @@ services:
     env_file: ".env"
     image: ghcr.io/teachen-ch/voty/civictools
     restart: always
+    sysctls:
+      - net.mptcp.enabled=0
     environment:
       - GOMEMLIMIT=512MiB
       - CIVICTOOLS_DYNAMIC_APP_URL={{ civictools_dynamic_app_url }}

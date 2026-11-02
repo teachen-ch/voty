@@ -18,7 +18,7 @@ Civic education platform for Swiss schools. Teachers create classes, assign curr
 - Uploads: formidable → local `uploads/`
 - Node: 24 (`engines: ">=24"`)
 - Tests: Cypress 15 — run against `CYPRESS=1 yarn start` (prod build), not dev
-- Deploy: Ansible playbooks, docker-compose
+- Deploy: Ansible playbooks, docker-compose. There is one host (`voty-prod`): `voty.ch` and `dev.voty.ch` are the same machine and the same stack, so `yarn deploy:dev` redeploys production with `.env.development`
 
 ## Directory layout
 

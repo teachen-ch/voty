@@ -40,7 +40,9 @@ After that, all Ansible runs connect as `app` with no sudo required.
 
 ## Inventories
 
-- `dev/` — development host (`.env.development`)
+- `dev/` — `.env.development`. `dev.voty.ch` resolves to the same host
+  (`voty-prod`) and uses the same `app_dir`, so a dev deploy replaces the
+  production containers with the development env
 - `prod/` — production: `voty.ch` (`.env.production`)
 - `backup/` — backup host (`.env.backup`)
 

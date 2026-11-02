@@ -4,6 +4,8 @@ Our CI/CD pipelines runs on GitHub Actions. On each commit, .github/workflows/do
 
 ## Deploying to the Development Environment
 
+`dev.voty.ch` is the same host and the same docker stack as production (`voty.ch`, hostname `voty-prod`); only the env file and the Traefik host rules differ. Running the dev deploy therefore replaces the production containers with the development configuration.
+
 ```
 yarn run migrate:dev
 yarn run deploy:dev

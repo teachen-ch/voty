@@ -64,3 +64,67 @@
     name: fail2ban
     enabled: yes
     state: started
+
+# CVE-2026-98432: the IPv4 TCP handshake use-after-free is reachable through
+# SYN options, so drop inbound TCP packets whose IPv4 header carries any.
+# Interim mitigation only — remove the unit once the fixed kernel is running.
+- name: Install nftables
+  apt:
+    name: nftables
+    state: present
+    update_cache: yes
+    cache_valid_time: 3600
+
+- name: Create nftables include directory
+  file:
+    path: /etc/nftables.d
+    state: directory
+    mode: "0755"
+
+- name: Deploy CVE-2026-98432 nftables ruleset
+  copy:
+    dest: /etc/nftables.d/cve-2026-98432.nft
+    mode: "0644"
+    content: |
+      table ip cve_2026_98432 {
+        chain pre {
+          type filter hook prerouting priority -300; policy accept;
+          meta l4proto tcp ip hdrlength gt 5 counter drop
+        }
+      }
+
+- name: Deploy CVE-2026-98432 systemd unit
+  copy:
+    dest: /etc/systemd/system/cve-2026-98432.service
+    mode: "0644"
+    content: |
+      [Unit]
+      Description=Drop IPv4 TCP packets with IP options (CVE-2026-98432 mitigation)
+      After=network-pre.target
+
+      [Service]
+      Type=oneshot
+      RemainAfterExit=yes
+      ExecStartPre=-/usr/sbin/nft delete table ip cve_2026_98432
+      ExecStart=/usr/sbin/nft -f /etc/nftables.d/cve-2026-98432.nft
+      ExecStop=/usr/sbin/nft delete table ip cve_2026_98432
+
+      [Install]
+      WantedBy=multi-user.target
+
+- name: Enable CVE-2026-98432 mitigation
+  systemd:
+    name: cve-2026-98432
+    daemon_reload: yes
+    enabled: yes
+    state: started
+
+# Covers the host netns (rootlesskit holds :80/:443 there); containers get
+# their own sysctl because new network namespaces start with MPTCP enabled.
+- name: Disable multipath TCP on the host
+  sysctl:
+    name: net.mptcp.enabled
+    value: "0"
+    sysctl_file: /etc/sysctl.d/90-disable-mptcp.conf
+    state: present
+    reload: yes
