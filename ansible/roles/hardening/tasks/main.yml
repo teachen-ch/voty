@@ -1,0 +1,66 @@
+---
+- name: Install firewall and intrusion prevention packages
+  apt:
+    name:
+      - ufw
+      - fail2ban
+    state: present
+    update_cache: yes
+    cache_valid_time: 3600
+
+- name: Harden sshd
+  copy:
+    dest: /etc/ssh/sshd_config.d/99-hardening.conf
+    mode: "0644"
+    content: |
+      PermitRootLogin no
+      X11Forwarding no
+      MaxAuthTries 3
+      AllowUsers ubuntu app
+  notify: restart ssh
+
+- name: Validate sshd configuration
+  command: sshd -t
+  changed_when: false
+
+- name: Allow SSH before enabling the firewall
+  community.general.ufw:
+    rule: limit
+    port: "22"
+    proto: tcp
+
+- name: Allow HTTP and HTTPS
+  community.general.ufw:
+    rule: allow
+    port: "{{ item }}"
+    proto: tcp
+  loop:
+    - "80"
+    - "443"
+
+- name: Default-deny incoming traffic
+  community.general.ufw:
+    direction: incoming
+    policy: deny
+
+- name: Enable UFW
+  community.general.ufw:
+    state: enabled
+
+- name: Configure fail2ban sshd jail
+  copy:
+    dest: /etc/fail2ban/jail.d/sshd.local
+    mode: "0644"
+    content: |
+      [sshd]
+      enabled = true
+      maxretry = 5
+      findtime = 10m
+      bantime = 1h
+  notify: restart fail2ban
+
+- name: Enable and start fail2ban
+  systemd:
+    name: fail2ban
+    enabled: yes
+    state: started

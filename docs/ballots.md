@@ -45,7 +45,7 @@ Review the YAML and generated SQL and get explicit confirmation before changing 
 The `app` container’s `./psql` helper opens an interactive TTY, which makes it unsuitable for reliable automation or redirected input. Run `psql` directly in the PostgreSQL container and pass the SQL on standard input instead:
 
 ```sh
-ssh app@prod 'docker exec -i postgres psql "postgres://voty:voty@postgres/voty"' \
+ssh app@prod 'docker exec -i postgres psql -U voty -d voty' \
   < backup/voty-ballots-YYYY-qX.sql
 ```
 

@@ -1,4 +1,0 @@
-- hosts: web
-  roles:
-    - role: pull
-      tags: pull

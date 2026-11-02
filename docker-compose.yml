@@ -4,12 +4,15 @@ services:
     image: traefik:3.6
     container_name: traefik
     restart: always
+    depends_on:
+      - docker-proxy
     networks:
       default:
     command:
       - "--log.level=info"
       - "--log.filePath=/var/log/traefik/traefik.log"
       - "--providers.docker=true"
+      - "--providers.docker.endpoint=tcp://docker-proxy:2375"
       - "--providers.docker.exposedbydefault=false"
       - "--entrypoints.web.address=:80"
       - "--entrypoints.websecure.address=:443"
@@ -22,13 +25,26 @@ services:
       # - "--certificatesResolvers.votyresolver.acme.caServer=https://acme-staging-v02.api.letsencrypt.org/directory"
     volumes:
       - ./traefik/rules:/rules
-      - {{ docker_socket }}:/var/run/docker.sock:ro
       - ./traefik/acme:/etc/traefik/acme
       - ./traefik/logs:/var/log/traefik
       - ./traefik/shared:/shared
     ports:
       - "80:80"
       - "443:443"
+
+  docker-proxy:
+    container_name: "docker-proxy"
+    image: tecnativa/docker-socket-proxy:0.3.0
+    restart: always
+    environment:
+      CONTAINERS: 1
+      EVENTS: 1
+      NETWORKS: 1
+      POST: 0
+    volumes:
+      - {{ docker_socket }}:/var/run/docker.sock:ro
+    expose:
+      - "2375"
 
   nginx:
     container_name: "nginx"
@@ -61,7 +77,6 @@ services:
     depends_on:
       - postgres
     environment:
-      DATABASE_URL: postgres://voty:voty@postgres:5432/voty
       NODE_ENV: production
       PORT: 3000
       NEXT_TELEMETRY_DISABLED: 1
@@ -94,14 +109,15 @@ services:
       - traefik.http.services.civictools.loadbalancer.server.port=8090
 
   postgres:
-    image: "postgres:13-alpine"
+    image: "postgres:17-alpine"
     container_name: "postgres"
+    restart: always
     expose:
       - "5432"
     volumes:
       - ./data:/var/lib/postgresql/data
     environment:
       POSTGRES_USER: voty
-      POSTGRES_PASSWORD: voty
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       POSTGRES_DB: voty
     # command: postgres -c archive_mode=on -c archive_timeout=600

@@ -43,7 +43,6 @@ After that, all Ansible runs connect as `app` with no sudo required.
 - `dev/` — development host (`.env.development`)
 - `prod/` — production: `voty.ch` (`.env.production`)
 - `backup/` — backup host (`.env.backup`)
-- `v6/` — legacy
 
 Each inventory has `group_vars/all` defining `env_file` (path to the `.env`
 template, relative to `ansible/`).
@@ -59,6 +58,9 @@ ansible-playbook -i ansible/prod ansible/site.yml --tags app
 
 # Re-copy compose/nginx/.env without re-pulling
 ansible-playbook -i ansible/prod ansible/site.yml --tags common
+
+# Host hardening: ufw, fail2ban, sshd (runs as ubuntu with sudo, not app)
+ansible-playbook -i ansible/prod ansible/hardening.yml -e ansible_user=ubuntu --become
 ```
 
 `site.yml` → `web.yml` runs three roles: `common` (system packages, Docker repo,
