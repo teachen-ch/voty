@@ -33,6 +33,7 @@ func main() {
 	})
 
 	registerRoomHooks(app)
+	registerParticipantHooks(app)
 	registerCopyTemplate(app)
 	registerAdminUI(app)
 	configureDynamicAppURL(app)

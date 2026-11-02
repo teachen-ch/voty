@@ -43,17 +43,18 @@ export function Join({ roomId }: Props) {
         navigate(`/s/${roomId}`);
         return;
       }
+      const sessionToken = crypto.randomUUID();
       const record = await pb.collection("participants").create({
         room: roomId,
         nickname: name,
-        session_token: crypto.randomUUID(),
+        session_token: sessionToken,
         role: "student",
       });
       setStudentSession({
         nickname: name,
         roomId,
         participantId: record.id,
-        sessionToken: record["session_token"] as string,
+        sessionToken,
       });
       navigate(`/s/${roomId}`);
     } finally {
