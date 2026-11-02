@@ -280,10 +280,10 @@ export const Ballot: React.FC<
           {ballot.title}
         </A>
         <Text className="mt-4">{ballot.description}</Text>
-        <Box className="text-base my-8">
-          <Image src={IconCal} alt="Deadline" width={20} height={20} /> &nbsp;
-          Zeit: {formatFromTo(ballot.start, ballot.end)}
-        </Box>
+        <Flex className="items-center gap-2 text-base my-8">
+          <Image src={IconCal} alt="Zeit" width={20} height={20} />
+          <span>Zeit: {formatFromTo(ballot.start, ballot.end)}</span>
+        </Flex>
         {children}
         {buttonText && (
           <Button

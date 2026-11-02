@@ -452,6 +452,7 @@ builder.queryField("ballots", (t) =>
       const list = await ctx.db.ballot.findMany({
         ...query,
         where: (args.where as any) ?? undefined,
+        orderBy: { start: "desc" },
       });
       for (const b of list) await ballotLocale(ctx, b);
       return list;

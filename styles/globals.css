@@ -179,4 +179,24 @@
   .footer-link {
     @apply text-[#666] underline!;
   }
+
+  /* Output of util/markdown.tsx — preflight resets headings to plain body text */
+  .markdown h1 {
+    @apply font-heading leading-heading font-black text-2xl mt-8 mb-2;
+  }
+
+  .markdown h2 {
+    @apply font-heading leading-heading font-black text-xl mt-8 mb-2;
+  }
+
+  .markdown h3,
+  .markdown h4,
+  .markdown h5,
+  .markdown h6 {
+    @apply font-heading leading-heading font-semibold text-lg mt-8 mb-2;
+  }
+
+  .markdown > :first-child {
+    @apply mt-0;
+  }
 }

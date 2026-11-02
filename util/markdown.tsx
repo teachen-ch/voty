@@ -30,6 +30,7 @@ export const Markdown: React.FC<React.PropsWithChildren<unknown>> = ({
   children,
 }) => (
   <div
+    className="markdown"
     dangerouslySetInnerHTML={parseMarkdownInner(String(children))}
     style={{ textAlign: "left" }}
   />
