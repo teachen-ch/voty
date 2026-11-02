@@ -3,9 +3,15 @@ import { NextApiRequest, NextApiResponse } from "next";
 import logger from "util/logger";
 import path from "path";
 import { PrismaClient } from "@prisma/client";
+import { allowedTypes } from "../upload";
 
 const prisma = new PrismaClient();
 const UPLOAD_FOLDER = process.env.UPLOAD_FOLDER || "uploads/";
+
+function isInlineType(type?: string | null): boolean {
+  if (!type || !allowedTypes.includes(type)) return false;
+  return /^(image|video|audio)\//.test(type) || type === "application/pdf";
+}
 
 export default async function uploadedApi(
   req: NextApiRequest,
@@ -25,7 +31,14 @@ export default async function uploadedApi(
     if (!fs.existsSync(full)) return res.send({ error: "Error.NotFound" });
     const stream = fs.createReadStream(full);
 
-    res.setHeader("Content-Type", attachment.type);
+    res.setHeader("X-Content-Type-Options", "nosniff");
+    if (isInlineType(attachment.type)) {
+      res.setHeader("Content-Type", attachment.type as string);
+    } else {
+      const name = encodeURIComponent(attachment.title ?? file);
+      res.setHeader("Content-Type", "application/octet-stream");
+      res.setHeader("Content-Disposition", `attachment; filename*=UTF-8''${name}`);
+    }
     stream.pipe(res);
     stream.on("end", () => res.end());
   } catch (err) {

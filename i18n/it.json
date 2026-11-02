@@ -73,6 +73,8 @@
     "Abstain": "Abstenuto"
   },
   "Error": {
+    "FileType": "Questo tipo di file non è consentito",
+    "TooManyRequests": "Troppi tentativi, attendi un momento",
     "CreateUser": "L'account non può essere creato",
     "GenericError": "Si è verificato un errore",
     "InvalidVerificationLink": "Questo link e-mail purtroppo non è più valido!",

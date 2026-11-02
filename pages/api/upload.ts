@@ -2,6 +2,7 @@ import { PrismaClient, Attachment } from "@prisma/client";
 import { IncomingForm, File, Fields, Files } from "formidable";
 import { getSessionUser, getShortname } from "graphql/resolvers/users";
 import { NextApiRequest, NextApiResponse } from "next";
+import { promises as fs } from "fs";
 import path from "path";
 import logger from "util/logger";
 
@@ -35,12 +36,18 @@ export default async function uploadApi(
     const card = fields.card?.[0];
     const teamField = fields.team?.[0];
     const discussion = fields.discussion?.[0];
+    const received = Object.values(inFiles).flatMap((list) => list ?? []);
+
+    if (!user.teamId || (teamField && teamField !== user.teamId)) {
+      return rejectUpload(res, received, 403, "Error.NoPermission");
+    }
+    if (received.some((file) => !allowedTypes.includes(file.mimetype ?? ""))) {
+      return rejectUpload(res, received, 415, "Error.FileType");
+    }
 
     const attachments: Record<string, Attachment> = {};
     const files: Record<string, File> = {};
-    for (const fieldname in inFiles) {
-      const file = inFiles[fieldname]?.[0];
-      if (!file) continue;
+    for (const file of received) {
       // formidable returns an absolute path; only the file name is stored
       const filename = path.basename(file.filepath);
       const attachment = await prisma.attachment.create({
@@ -50,7 +57,7 @@ export default async function uploadApi(
           title: file.originalFilename ?? undefined,
           type: file.mimetype ?? undefined,
           discussion: discussion ? { connect: { id: discussion } } : undefined,
-          team: { connect: { id: user.teamId || teamField } },
+          team: { connect: { id: user.teamId } },
           user: { connect: { id: user.id } },
           school: user.schoolId
             ? { connect: { id: user.schoolId } }
@@ -77,6 +84,18 @@ export default async function uploadApi(
     }
     res.send({ error: "Error.ServerError" });
   }
+}
+
+async function rejectUpload(
+  res: NextApiResponse,
+  received: File[],
+  status: number,
+  error: string
+): Promise<void> {
+  await Promise.all(
+    received.map((file) => fs.unlink(file.filepath).catch(() => undefined))
+  );
+  res.status(status).send({ error });
 }
 
 function formParse(

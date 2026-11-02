@@ -22,6 +22,19 @@ module.exports = withMDX({
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
     localPatterns: [{ pathname: "/**", search: "" }],
   },
+  headers() {
+    return [
+      {
+        source: "/:path*",
+        headers: [
+          { key: "Strict-Transport-Security", value: "max-age=31536000" },
+          { key: "X-Content-Type-Options", value: "nosniff" },
+          { key: "X-Frame-Options", value: "SAMEORIGIN" },
+          { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
+        ],
+      },
+    ];
+  },
   redirects() {
     return [
       {

@@ -102,6 +102,8 @@
     "Permission": "Tu n'a pas le droit de voter"
   },
   "Error": {
+    "FileType": "Ce type de fichier n'est pas autorisé",
+    "TooManyRequests": "Trop de tentatives, veuillez patienter un instant",
     "CreateUser": "Le compte ne peut pas être créé",
     "GenericError": "Une erreur s'est produite",
     "InvalidVerificationLink": "Ce lien e-mail n'est malheureusement plus valide ! ",

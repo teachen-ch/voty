@@ -19,15 +19,24 @@ import pick from "lodash/pick";
 import upperFirst from "lodash/upperFirst";
 import { logActivity } from "./activities";
 import { translate } from "util/translate";
+import { clientIp, rateLimit } from "util/rateLimit";
 
-let secret = process.env.SESSION_SECRET || "";
-if (!secret) console.error("No SESSION_SECRET defined in .env");
 const expires = process.env.SESSION_EXPIRES || "1d";
+let devSecret: string | undefined;
 
-if (!secret) {
-  logger.warn(".env.SESSION_SECRET is not defined! using random secret");
-  secret = randomBytes(32).toString("hex");
+function getSecret(): string {
+  const secret = process.env.SESSION_SECRET;
+  if (secret) return secret;
+  if (process.env.NODE_ENV === "production")
+    throw new Error("SESSION_SECRET is not defined");
+  if (!devSecret) {
+    logger.warn("SESSION_SECRET is not defined! using random dev secret");
+    devSecret = randomBytes(32).toString("hex");
+  }
+  return devSecret;
 }
+
+const LOGIN_WINDOW_MS = 15 * 60 * 1000;
 
 type ResponseLogin = {
   error?: string;
@@ -57,6 +66,11 @@ export const magic: FieldResolver<"Mutation", "magic"> = async (
   ctx: Context
 ) => {
   const { email, redirect } = args;
+  if (
+    !rateLimit(`magic:ip:${clientIp(ctx.req)}`, 20, LOGIN_WINDOW_MS) ||
+    !rateLimit(`magic:email:${email.toLowerCase()}`, 5, LOGIN_WINDOW_MS)
+  )
+    throw Error("Error.TooManyRequests");
   const user = await ctx.db.user.findUnique({
     where: { email: email.toLowerCase() },
   });
@@ -75,6 +89,11 @@ export const login: FieldResolver<"Mutation", "login"> = async (
   args,
   ctx: Context
 ): Promise<ResponseLogin> => {
+  if (
+    !rateLimit(`login:ip:${clientIp(ctx.req)}`, 30, LOGIN_WINDOW_MS) ||
+    !rateLimit(`login:email:${args.email?.toLowerCase()}`, 10, LOGIN_WINDOW_MS)
+  )
+    throw Error("Error.TooManyRequests");
   const user = await ctx.db.user.findUnique({
     where: { email: args.email?.toLowerCase() },
   });
@@ -114,7 +133,7 @@ async function startJWTSession(
     "locale",
   ]);
 
-  const token: string = jwt.sign({ user: jwtUser }, secret, {
+  const token: string = jwt.sign({ user: jwtUser }, getSecret(), {
     expiresIn: expires as any,
   });
 
@@ -140,6 +159,8 @@ export const createUser: FieldResolver<"Mutation", "createUser"> = async (
   ctx: Context
 ) => {
   try {
+    if (!rateLimit(`createUser:ip:${clientIp(ctx.req)}`, 10, 60 * 60 * 1000))
+      throw new Error("Error.TooManyRequests");
     const { password, role, campaign, locale, redirect } = args.data;
     let { name, lastname } = args.data;
     const email = args.data.email?.toLowerCase();
@@ -364,7 +385,7 @@ type JWTSession = {
 
 export function verifyJWT(token: string): JWTSession | undefined {
   try {
-    const result = jwt.verify(token, secret, { algorithms: ["HS256"] });
+    const result = jwt.verify(token, getSecret(), { algorithms: ["HS256"] });
     if (typeof result !== "object") {
       throw new Error("JWT Token was string instead of object");
     }
@@ -447,7 +468,7 @@ async function createVerificationToken(
   const maxAge = 24 * 60 * 60 * 1000;
   const expires = new Date(Date.now() + maxAge);
   const token = randomBytes(32).toString("hex");
-  const hashed = createHash("sha256").update(`${token}${secret}`).digest("hex");
+  const hashed = createHash("sha256").update(`${token}${getSecret()}`).digest("hex");
   await prisma.verificationRequest.create({
     data: {
       identifier,
@@ -529,7 +550,7 @@ export const changePassword: FieldResolver<
 };
 
 async function verifyToken(token: string, prisma: PrismaClient) {
-  const hashed = createHash("sha256").update(`${token}${secret}`).digest("hex");
+  const hashed = createHash("sha256").update(`${token}${getSecret()}`).digest("hex");
   const found = await prisma.verificationRequest.findUnique({
     where: { token: hashed },
   });

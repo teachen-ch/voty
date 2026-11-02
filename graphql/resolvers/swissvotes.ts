@@ -1,3 +1,4 @@
+import { Prisma } from "@prisma/client";
 import { FieldResolver } from "../context";
 import type { Swissvote } from "@prisma/client";
 
@@ -7,34 +8,33 @@ export const swissvotes: FieldResolver<"Query", "swissvotes"> = async (
   ctx
 ) => {
   const { keywords, type, result, hasPosters, limit, offset, sort } = args;
-  const db = ctx.db;
-  let query = "SELECT * FROM swissvotes WHERE ";
+  const conditions: Prisma.Sql[] = [Prisma.sql`TRUE`];
   if (keywords) {
-    // sanitize keywords
-    let words = keywords.replace(/[$<>\\'"%]/g, "");
-    words = keywords.replace(/\*/g, "%");
-    for (const word of words.split(/[\s.,-:]+/)) {
-      query += "(";
-      for (const field of ["titel_kurz_d", "stichwort", "kategorien"]) {
-        query += `${field} ILIKE '%${word}%' OR `;
-      }
-      query += "FALSE) AND ";
+    const words = keywords
+      .replace(/\*/g, "%")
+      .split(/[\s.,:-]+/)
+      .filter(Boolean);
+    for (const word of words) {
+      const pattern = `%${word}%`;
+      conditions.push(
+        Prisma.sql`(titel_kurz_d ILIKE ${pattern} OR stichwort ILIKE ${pattern} OR kategorien ILIKE ${pattern})`
+      );
     }
   }
-  if (type !== undefined) {
-    query += `rechtsform=${type} AND `;
-  }
-  if (result !== undefined) {
-    query += `annahme='${result}' AND `;
-  }
-  if (hasPosters) {
-    query += `(LENGTH (poster_ja ) > 1 OR (LENGTH (poster_nein) > 1)) AND `;
-  }
-  query += "TRUE ";
-  if (sort === "random") query += "ORDER BY RANDOM() ";
-  else if (sort === "oldest") query += "ORDER BY datum ASC ";
-  else query += "ORDER BY datum DESC ";
-  query += `LIMIT ${limit ?? 20} OFFSET ${offset ?? 0}`;
-  const votes: Swissvote[] = await db.$queryRawUnsafe(query);
-  return votes;
+  if (type != null) conditions.push(Prisma.sql`rechtsform = ${type}`);
+  if (result != null) conditions.push(Prisma.sql`annahme = ${result}`);
+  if (hasPosters)
+    conditions.push(
+      Prisma.sql`(LENGTH(poster_ja) > 1 OR LENGTH(poster_nein) > 1)`
+    );
+  const where = Prisma.join(conditions, " AND ");
+  const orderBy =
+    sort === "random"
+      ? Prisma.sql`RANDOM()`
+      : sort === "oldest"
+      ? Prisma.sql`datum ASC`
+      : Prisma.sql`datum DESC`;
+  return ctx.db.$queryRaw<Swissvote[]>(
+    Prisma.sql`SELECT * FROM swissvotes WHERE ${where} ORDER BY ${orderBy} LIMIT ${limit ?? 20} OFFSET ${offset ?? 0}`
+  );
 };
