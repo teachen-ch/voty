@@ -107,5 +107,4 @@ See MIGRATION_PLAN.md for the migration history and remaining followups.
 ### Important points for Agents
 
 - Unless instructed otherwise, do your changes directly on branch main
-- Never access the database on production
 - Be very lean with comments, only where they truly add value
