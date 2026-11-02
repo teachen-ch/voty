@@ -12,7 +12,7 @@ export const ChatContainer: React.FC<React.PropsWithChildren<unknown>> = ({
 }) => (
   <Box style={{ height: 480 }}>
     <Flex
-      className="flex-col w-full bg-white text-black sm:rounded-card sm:absolute fixed bottom-0 top-0 z-100 sm:z-0"
+      className="flex-col w-full bg-white text-black sm:rounded-card sm:absolute sm:left-8 sm:right-8 sm:top-6 sm:w-auto fixed bottom-0 top-0 z-100 sm:z-0"
       style={{ height: 480 }}
     >
       {children}
