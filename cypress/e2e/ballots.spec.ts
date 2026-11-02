@@ -9,13 +9,13 @@ describe("Test Ballots", () => {
     cy.contains("Class 1").click();
     cy.contains("Abstimmungen");
 
-    // select first, then select and de-select last ballot
-    cy.get("#ballots tr:first td:last").click();
-    cy.get("#ballots tr:first td:last img[alt='ausgewählt']");
-    cy.get("#ballots tr:last td:last").click();
-    cy.get("#ballots tr:last td:last img[alt='ausgewählt']");
-    cy.get("#ballots tr:last td:last").click();
-    cy.get("#ballots tr:last td:last img[alt='abgewählt']");
+    // select one ballot, then select and de-select another
+    cy.get("#ballots tr:contains('Testinitiative') [data-cy=off]").click();
+    cy.get("#ballots tr:contains('Testinitiative') [data-cy=on]");
+    cy.get("#ballots tr:contains('Zukunftsinitiative') [data-cy=off]").click();
+    cy.get("#ballots tr:contains('Zukunftsinitiative') [data-cy=on]");
+    cy.get("#ballots tr:contains('Zukunftsinitiative') [data-cy=on]").click();
+    cy.get("#ballots tr:contains('Zukunftsinitiative') [data-cy=off]");
 
     // login as student and vote
     cy.login("student@teachen.ch", "teachen");

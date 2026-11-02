@@ -3,10 +3,9 @@ import { promises as fs } from "fs";
 import { getSessionUser } from "graphql/resolvers/users";
 import { NextApiRequest, NextApiResponse } from "next";
 import logger from "util/logger";
-import path from "path";
+import { uploadPath } from "util/uploads";
 
 const prisma = new PrismaClient();
-const UPLOAD_FOLDER = process.env.UPLOAD_FOLDER || "uploads/";
 
 export default async function deleteApi(
   req: NextApiRequest,
@@ -32,7 +31,7 @@ export default async function deleteApi(
       return res.send({ error: "Error.NoPermission" });
 
     await prisma.attachment.delete({ where: { id } });
-    await fs.rm(path.join(UPLOAD_FOLDER, path.basename(attachment.file)));
+    await fs.rm(uploadPath(attachment.file));
     res.send({ success: true });
   } catch (err: any) {
     console.error(err);

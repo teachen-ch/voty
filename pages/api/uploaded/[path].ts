@@ -4,9 +4,9 @@ import logger from "util/logger";
 import path from "path";
 import { PrismaClient } from "@prisma/client";
 import { allowedTypes } from "../upload";
+import { uploadPath } from "util/uploads";
 
 const prisma = new PrismaClient();
-const UPLOAD_FOLDER = process.env.UPLOAD_FOLDER || "uploads/";
 
 function isInlineType(type?: string | null): boolean {
   if (!type || !allowedTypes.includes(type)) return false;
@@ -27,7 +27,7 @@ export default async function uploadedApi(
     const attachment = await prisma.attachment.findUnique({ where: { file } });
     if (!attachment) return res.send({ error: "Error.NotFound" });
 
-    const full = path.join(UPLOAD_FOLDER, file);
+    const full = uploadPath(file);
     if (!fs.existsSync(full)) return res.send({ error: "Error.NotFound" });
     const stream = fs.createReadStream(full);
 

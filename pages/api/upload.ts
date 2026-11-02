@@ -5,6 +5,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { promises as fs } from "fs";
 import path from "path";
 import logger from "util/logger";
+import { UPLOAD_DIR } from "util/uploads";
 
 export const config = {
   api: {
@@ -13,7 +14,6 @@ export const config = {
 };
 
 const MAX_UPLOAD_MB = 30;
-const UPLOAD_FOLDER = process.env.UPLOAD_FOLDER || "uploads/";
 const prisma = new PrismaClient();
 
 export default async function uploadApi(
@@ -103,7 +103,7 @@ function formParse(
 ): Promise<{ fields: Fields; files: Files }> {
   return new Promise(function (resolve, reject) {
     const form = new IncomingForm({
-      uploadDir: UPLOAD_FOLDER,
+      uploadDir: UPLOAD_DIR,
       keepExtensions: true,
       maxFileSize: MAX_UPLOAD_MB * 1024 * 1024,
     });
