@@ -207,9 +207,13 @@ export const Ballots: React.FC<React.PropsWithChildren<BallotsProps>> = ({
   if (!ballotsQuery.data?.ballots?.length)
     return <OneRowTable text="Noch keine Abstimmungen erfasst" />;
 
+  const ballots = [...ballotsQuery.data.ballots].sort(
+    (a, b) => new Date(b.start).getTime() - new Date(a.start).getTime()
+  );
+
   return (
     <>
-      {ballotsQuery.data.ballots.map((ballot) => (
+      {ballots.map((ballot) => (
         <Ballot
           key={ballot.id}
           ballot={ballot}
