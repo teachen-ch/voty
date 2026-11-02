@@ -1,6 +1,6 @@
 const bg = {
   appName: "CivicTools",
-  header: { brand: "Voty CivicTools" },
+  header: { brand: "voty CivicTools" },
   common: {
     question: "Въпрос",
     options: "Опции ({{count}}/{{max}})",
