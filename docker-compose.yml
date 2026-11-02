@@ -53,6 +53,7 @@ services:
     container_name: "nginx"
     env_file: ".env"
     image: nginx:alpine
+    restart: always
     depends_on:
       - app
       - traefik
