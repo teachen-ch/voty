@@ -29,6 +29,10 @@ const RANK_COLORS = [
   "#EC4899",
   "#06B6D4",
   "#EF4444",
+  "#84CC16",
+  "#0EA5E9",
+  "#F97316",
+  "#A855F7",
 ];
 
 function optionColor(optIdx: number) {
@@ -122,6 +126,17 @@ export function RankingBoard({
     setOrder(initialOrder);
     setSubmitted(false);
   }, [options.length, ranking.id]);
+
+  const hadResponse = useRef(false);
+  useEffect(() => {
+    if (myResponse) {
+      hadResponse.current = true;
+    } else if (hadResponse.current) {
+      hadResponse.current = false;
+      setOrder(initialOrder);
+      setSubmitted(false);
+    }
+  }, [!!myResponse]);
 
   useEffect(() => {
     if (!myResponse) return;
@@ -272,6 +287,15 @@ export function RankingBoard({
     await pb
       .collection("rankings")
       .update(ranking.id, { config: { ...config, closed: !closed } });
+  }
+  async function restartRanking() {
+    if (!confirm(t("ranking.confirmRestart"))) return;
+    await Promise.all(
+      responses.map((r) => pb.collection("ranking_responses").delete(r.id))
+    );
+    await pb.collection("rankings").update(ranking.id, {
+      config: { ...config, closed: false, show_results: false },
+    });
   }
   async function toggleResults() {
     await pb.collection("rankings").update(ranking.id, {
@@ -595,6 +619,12 @@ export function RankingBoard({
                     {showResults
                       ? t("ranking.hideResults")
                       : t("ranking.showResults")}
+                  </button>
+                  <button
+                    onClick={restartRanking}
+                    className="text-slate-600 hover:text-slate-900 underline"
+                  >
+                    {t("ranking.restart")}
                   </button>
                   <button
                     onClick={toggleClosed}

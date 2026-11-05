@@ -163,6 +163,9 @@ const en = {
     hideResults: "Hide results",
     start: "Start voting",
     close: "Close voting",
+    restart: "Restart",
+    confirmRestart:
+      "Restart this voting? All votes will be deleted and voting reopens.",
   },
   ranking: {
     newTitle: "New ranking",
@@ -187,6 +190,9 @@ const en = {
     hideResults: "Hide results",
     start: "Start ranking",
     close: "Close ranking",
+    restart: "Restart",
+    confirmRestart:
+      "Restart this ranking? All responses will be deleted and ranking reopens.",
   },
   timer: {
     editTitle: "Edit timer",

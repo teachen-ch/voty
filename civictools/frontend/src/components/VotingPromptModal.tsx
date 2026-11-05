@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import { pb } from "../pb";
 import { canvasTransform, votingModal } from "../store";
 
-const MAX_OPTIONS = 4;
+const MAX_OPTIONS = 6;
 const BOARD_WIDTH = 460;
 const BOARD_HEIGHT_ESTIMATE = 260;
 
@@ -97,7 +97,7 @@ export function VotingPromptModal({ roomId }: Props) {
       <form
         onClick={(e) => e.stopPropagation()}
         onSubmit={submit}
-        className="bg-white rounded-xl shadow-xl w-full max-w-lg p-5 flex flex-col gap-4"
+        className="bg-white rounded-xl shadow-xl w-full max-w-lg max-h-full p-5 flex flex-col gap-4"
       >
         <div className="flex items-center justify-between">
           <h2 className="text-lg font-semibold">
@@ -125,7 +125,7 @@ export function VotingPromptModal({ roomId }: Props) {
           />
         </label>
 
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-2 min-h-0 overflow-y-auto">
           <span className="text-sm font-medium text-slate-700">
             {t("common.options", { count: options.length, max: MAX_OPTIONS })}
           </span>

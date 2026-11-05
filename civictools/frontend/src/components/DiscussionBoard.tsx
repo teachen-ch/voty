@@ -24,7 +24,8 @@ interface Props {
   mobile?: boolean;
 }
 
-const BOARD_WIDTH = 520;
+const MIN_BOARD_WIDTH = 520;
+const COLUMN_WIDTH = 130;
 
 export function DiscussionBoard({
   board,
@@ -141,7 +142,11 @@ export function DiscussionBoard({
       style={
         mobile
           ? undefined
-          : { left: `${pos.x}px`, top: `${pos.y}px`, width: BOARD_WIDTH }
+          : {
+              left: `${pos.x}px`,
+              top: `${pos.y}px`,
+              width: Math.max(MIN_BOARD_WIDTH, options.length * COLUMN_WIDTH),
+            }
       }
     >
       <div
@@ -298,6 +303,10 @@ const COLUMN_TONES = [
   { bg: "bg-rose-50", text: "text-rose-700" },
   { bg: "bg-sky-50", text: "text-sky-700" },
   { bg: "bg-amber-50", text: "text-amber-700" },
+  { bg: "bg-violet-50", text: "text-violet-700" },
+  { bg: "bg-teal-50", text: "text-teal-700" },
+  { bg: "bg-orange-50", text: "text-orange-700" },
+  { bg: "bg-fuchsia-50", text: "text-fuchsia-700" },
 ];
 
 function ArgumentColumn({

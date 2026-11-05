@@ -125,6 +125,16 @@ export function VotingBoard({
       .update(voting.id, { config: { ...config, closed: !closed } });
   }
 
+  async function restartVoting() {
+    if (!confirm(t("voting.confirmRestart"))) return;
+    await Promise.all(
+      votes.map((v) => pb.collection("participant_votes").delete(v.id))
+    );
+    await pb.collection("votings").update(voting.id, {
+      config: { ...config, closed: false, show_results: false },
+    });
+  }
+
   async function toggleResults() {
     await pb.collection("votings").update(voting.id, {
       config: { ...config, show_results: !showResults },
@@ -310,6 +320,12 @@ export function VotingBoard({
                   {showResults
                     ? t("voting.hideResults")
                     : t("voting.showResults")}
+                </button>
+                <button
+                  onClick={restartVoting}
+                  className="text-slate-600 hover:text-slate-900 underline"
+                >
+                  {t("voting.restart")}
                 </button>
                 <button
                   onClick={toggleClosed}
