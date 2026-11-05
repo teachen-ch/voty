@@ -20,6 +20,8 @@ import {
   applyRankingEvent,
   applyRankingResponseEvent,
   cacheParticipants,
+  mediaItems,
+  applyMediaEvent,
 } from "../store";
 
 export function useRoomData(roomId: string) {
@@ -129,6 +131,14 @@ export function useRoomData(roomId: string) {
       applyRankingResponseEvent(e.action, e.record);
     });
 
+    pb.collection("media_items")
+      .getList(1, 200, { filter: `room = "${roomId}"` })
+      .then((res) => (mediaItems.value = res.items));
+    pb.collection("media_items").subscribe("*", (e) => {
+      if (e.record.room && e.record.room !== roomId) return;
+      applyMediaEvent(e.action, e.record);
+    });
+
     pb.collection("participants")
       .getList(1, 200, { filter: `room = "${roomId}"` })
       .then((res) => cacheParticipants(res.items));
@@ -143,6 +153,7 @@ export function useRoomData(roomId: string) {
       pb.collection("timers").unsubscribe("*");
       pb.collection("rankings").unsubscribe("*");
       pb.collection("ranking_responses").unsubscribe("*");
+      pb.collection("media_items").unsubscribe("*");
     };
   }, [roomId]);
 }

@@ -5,6 +5,7 @@ import { pb } from "../pb";
 import { renderMarkdown } from "../util/markdown";
 import { Header } from "../components/Header";
 import { isTeacher } from "../store";
+import { tenant } from "../tenant";
 import type { RecordModel } from "pocketbase";
 
 export function Templates() {
@@ -14,7 +15,7 @@ export function Templates() {
   useEffect(() => {
     pb.collection("rooms")
       .getFullList({
-        filter: `is_template = true && slug != ""`,
+        filter: `is_template = true && slug != "" && tenant = "${tenant.id}"`,
         sort: "-created",
       })
       .then(setTemplates)

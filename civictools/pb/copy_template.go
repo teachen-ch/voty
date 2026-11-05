@@ -1,11 +1,13 @@
 package main
 
 import (
+	"io"
 	"strings"
 
 	"ganigeorgiev.com/pocketbase/pocketbase"
 	"ganigeorgiev.com/pocketbase/pocketbase/apis"
 	"ganigeorgiev.com/pocketbase/pocketbase/core"
+	"ganigeorgiev.com/pocketbase/pocketbase/tools/filesystem"
 	"ganigeorgiev.com/pocketbase/pocketbase/tools/router"
 )
 
@@ -22,7 +24,8 @@ func registerCopyTemplate(app *pocketbase.PocketBase) {
 			}
 
 			body := struct {
-				Name string `json:"name"`
+				Name   string `json:"name"`
+				Tenant string `json:"tenant"`
 			}{}
 			_ = re.BindBody(&body)
 			roomName := strings.TrimSpace(body.Name)
@@ -36,6 +39,10 @@ func registerCopyTemplate(app *pocketbase.PocketBase) {
 				return router.NewNotFoundError("template not found", nil)
 			}
 			templateId := tpl.Id
+			roomTenant := strings.TrimSpace(body.Tenant)
+			if roomTenant == "" {
+				roomTenant = tpl.GetString("tenant")
+			}
 
 			var newRoomId string
 			err = re.App.RunInTransaction(func(txApp core.App) error {
@@ -55,6 +62,7 @@ func registerCopyTemplate(app *pocketbase.PocketBase) {
 				newRoom.Set("sticky_notes_enabled", tpl.GetBool("sticky_notes_enabled"))
 				newRoom.Set("ballots_enabled", tpl.GetBool("ballots_enabled"))
 				newRoom.Set("is_template", false)
+				newRoom.Set("tenant", roomTenant)
 				newRoom.Set("description", "")
 				if err := txApp.Save(newRoom); err != nil {
 					return err
@@ -76,6 +84,9 @@ func registerCopyTemplate(app *pocketbase.PocketBase) {
 					return err
 				}
 				if err := copyBallots(txApp, templateId, newRoom.Id); err != nil {
+					return err
+				}
+				if err := copyMedia(txApp, templateId, newRoom.Id); err != nil {
 					return err
 				}
 				return nil
@@ -160,6 +171,51 @@ func copyBallots(app core.App, fromRoom, toRoom string) error {
 		dst.Set("question", src.GetString("question"))
 		dst.Set("options", src.Get("options"))
 		dst.Set("active", false)
+		if err := app.Save(dst); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func copyMedia(app core.App, fromRoom, toRoom string) error {
+	col, err := app.FindCollectionByNameOrId("media_items")
+	if err != nil {
+		return nil
+	}
+	records, err := app.FindRecordsByFilter(col.Id, "room = {:room}", "", 0, 0,
+		map[string]any{"room": fromRoom})
+	if err != nil {
+		return err
+	}
+	fsys, err := app.NewFilesystem()
+	if err != nil {
+		return err
+	}
+	defer fsys.Close()
+
+	for _, src := range records {
+		dst := core.NewRecord(col)
+		dst.Set("room", toRoom)
+		for _, f := range []string{"kind", "url", "embed_url", "description", "aspect_ratio", "width", "pos_x", "pos_y"} {
+			dst.Set(f, src.Get(f))
+		}
+		if name := src.GetString("file"); name != "" {
+			r, err := fsys.GetReader(src.BaseFilesPath() + "/" + name)
+			if err != nil {
+				return err
+			}
+			data, err := io.ReadAll(r)
+			r.Close()
+			if err != nil {
+				return err
+			}
+			f, err := filesystem.NewFileFromBytes(data, name)
+			if err != nil {
+				return err
+			}
+			dst.Set("file", f)
+		}
 		if err := app.Save(dst); err != nil {
 			return err
 		}

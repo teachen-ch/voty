@@ -5,6 +5,8 @@ import {
   timerModal,
   votingModal,
   rankingModal,
+  mediaModal,
+  isEditor,
   currentRoom,
   showRemoteCursors,
 } from "../store";
@@ -86,6 +88,25 @@ function RankingIcon() {
       strokeLinejoin="round"
     >
       <path d="M3 4h10M3 8h7M3 12h4" />
+    </svg>
+  );
+}
+
+function MediaIcon() {
+  return (
+    <svg
+      width="20"
+      height="20"
+      viewBox="0 0 16 16"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <rect x="2" y="2.5" width="12" height="11" rx="1.5" />
+      <circle cx="5.5" cy="6" r="1" />
+      <path d="M2.5 12l3.5-3.5 2.5 2.5 2-2 3 3" />
     </svg>
   );
 }
@@ -322,6 +343,19 @@ export function FloatingToolbar({ isTeacher }: Props) {
               </button>
               <Tooltip label={t("toolbar.ranking")} />
             </div>
+            {isEditor.value && (
+              <div className="relative group">
+                <button
+                  title={t("toolbar.media")}
+                  aria-label={t("toolbar.media")}
+                  onClick={() => (mediaModal.value = true)}
+                  className="size-10 rounded-xl flex items-center justify-center bg-white text-black hover:bg-slate-100 transition-colors"
+                >
+                  <MediaIcon />
+                </button>
+                <Tooltip label={t("toolbar.media")} />
+              </div>
+            )}
             <div className="mt-1 border-t border-slate-200 pt-1">
               <CursorVisibilityControl />
               <div className="relative group">

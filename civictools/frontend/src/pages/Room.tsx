@@ -17,6 +17,7 @@ import { DiscussionPromptModal } from "../components/DiscussionPromptModal";
 import { VotingPromptModal } from "../components/VotingPromptModal";
 import { TimerPromptModal } from "../components/TimerPromptModal";
 import { RankingPromptModal } from "../components/RankingPromptModal";
+import { MediaPromptModal } from "../components/MediaPromptModal";
 import { UserBar } from "../components/UserBar";
 import { RoomHeader } from "../components/RoomHeader";
 import { ZoomControls } from "../components/ZoomControls";
@@ -109,6 +110,7 @@ export function Room({ roomId }: Props) {
       <VotingPromptModal roomId={roomId} />
       <TimerPromptModal roomId={roomId} />
       <RankingPromptModal roomId={roomId} />
+      <MediaPromptModal roomId={roomId} />
     </div>
   );
 }

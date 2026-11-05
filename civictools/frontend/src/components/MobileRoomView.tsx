@@ -5,6 +5,7 @@ import {
   votings,
   timers,
   rankings,
+  mediaItems,
   stickyNotes,
   getParticipantName,
   discussionModal,
@@ -18,6 +19,7 @@ import { DiscussionBoard } from "./DiscussionBoard";
 import { VotingBoard } from "./VotingBoard";
 import { TimerBoard } from "./TimerBoard";
 import { RankingBoard } from "./RankingBoard";
+import { MediaBoard } from "./MediaBoard";
 import type { RecordModel } from "pocketbase";
 
 interface Props {
@@ -32,7 +34,8 @@ type Item =
   | { kind: "discussion"; rec: RecordModel }
   | { kind: "voting"; rec: RecordModel }
   | { kind: "timer"; rec: RecordModel }
-  | { kind: "ranking"; rec: RecordModel };
+  | { kind: "ranking"; rec: RecordModel }
+  | { kind: "media"; rec: RecordModel };
 
 export function MobileRoomView({
   roomId,
@@ -51,11 +54,18 @@ export function MobileRoomView({
       ...votings.value.map((rec) => ({ kind: "voting", rec }) as Item),
       ...timers.value.map((rec) => ({ kind: "timer", rec }) as Item),
       ...rankings.value.map((rec) => ({ kind: "ranking", rec }) as Item),
+      ...mediaItems.value.map((rec) => ({ kind: "media", rec }) as Item),
     ];
     return all.sort(
       (a, b) => (a.rec.pos_y as number) - (b.rec.pos_y as number)
     );
-  }, [discussionBoards.value, votings.value, timers.value, rankings.value]);
+  }, [
+    discussionBoards.value,
+    votings.value,
+    timers.value,
+    rankings.value,
+    mediaItems.value,
+  ]);
 
   const notes = stickyNotes.value;
 
@@ -116,6 +126,16 @@ export function MobileRoomView({
               >
                 <TimerBoard timer={it.rec} isTeacher={isTeacher} mobile />
               </div>
+            );
+          }
+          if (it.kind === "media") {
+            return (
+              <MediaBoard
+                key={`m-${it.rec.id}`}
+                item={it.rec}
+                isTeacher={false}
+                mobile
+              />
             );
           }
           return (

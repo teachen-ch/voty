@@ -8,6 +8,8 @@ import { Header } from "../components/Header";
 import { IntroModal } from "../components/IntroModal";
 import { timeSince, lastOpenedLabel } from "../util/time";
 import { tenant } from "../tenant";
+import { isEditor } from "../store";
+import { TemplateModal } from "../components/TemplateModal";
 
 interface Presence {
   online: number;
@@ -22,6 +24,7 @@ export function Dashboard() {
   const [naming, setNaming] = useState(false);
   const [roomName, setRoomName] = useState("");
   const [creating, setCreating] = useState(false);
+  const [templateRoom, setTemplateRoom] = useState<RecordModel | null>(null);
   const nameInput = useRef<HTMLInputElement>(null);
   const [, navigate] = useLocation();
 
@@ -30,7 +33,7 @@ export function Dashboard() {
     if (!id) return;
     pb.collection("rooms")
       .getList(1, 100, {
-        filter: `teacher = "${id}" && is_template = false`,
+        filter: `teacher = "${id}"`,
         sort: "-last_active,-updated",
         requestKey: "dashboard-rooms",
       })
@@ -39,7 +42,7 @@ export function Dashboard() {
 
     pb.collection("rooms")
       .getList(1, 6, {
-        filter: `is_template = true && slug != ""`,
+        filter: `is_template = true && slug != "" && tenant = "${tenant.id}"`,
         sort: "-created",
         requestKey: "dashboard-templates",
       })
@@ -71,6 +74,16 @@ export function Dashboard() {
     };
   }, [rooms]);
 
+  function onTemplateSaved(room: RecordModel) {
+    setRooms((list) => list.map((r) => (r.id === room.id ? room : r)));
+    setTemplates((list) => {
+      const rest = list.filter((r) => r.id !== room.id);
+      return room.is_template && room.slug && room.tenant === tenant.id
+        ? [room, ...rest]
+        : rest;
+    });
+  }
+
   function startNaming() {
     setNaming(true);
     setTimeout(() => nameInput.current?.focus(), 0);
@@ -84,6 +97,7 @@ export function Dashboard() {
       const record = await pb.collection("rooms").create({
         name: roomName.trim(),
         teacher: pb.authStore.model?.id,
+        tenant: tenant.id,
         sticky_notes_enabled: false,
         ballots_enabled: false,
         interactions_locked: false,
@@ -166,9 +180,7 @@ export function Dashboard() {
       </div>
 
       <div className="mb-3 flex items-center justify-between gap-4">
-        <h2 className="text-lg font-semibold">
-          {t("dashboard.continueRoom")}
-        </h2>
+        <h2 className="text-lg font-semibold">{t("dashboard.continueRoom")}</h2>
         {tenant.docLink && (
           <a
             href={tenant.docLink}
@@ -238,7 +250,23 @@ export function Dashboard() {
                         })}
                   </span>
                 </div>
-                <ShareLink roomId={room.id} dashboard />
+                {isEditor.value ? (
+                  <>
+                    <ShareLink roomId={room.id} dashboard qrOnly />
+                    <button
+                      className={
+                        room.is_template
+                          ? "btn bg-emerald-600! hover:bg-emerald-700!"
+                          : "btn secondary"
+                      }
+                      onClick={() => setTemplateRoom(room)}
+                    >
+                      {t("template.button")}
+                    </button>
+                  </>
+                ) : (
+                  <ShareLink roomId={room.id} dashboard />
+                )}
                 <button
                   className="btn"
                   onClick={() => navigate(`/room/${room.id}`)}
@@ -249,6 +277,13 @@ export function Dashboard() {
             );
           })}
         </div>
+      )}
+      {templateRoom && (
+        <TemplateModal
+          room={templateRoom}
+          onClose={() => setTemplateRoom(null)}
+          onSaved={onTemplateSaved}
+        />
       )}
     </div>
   );

@@ -8,6 +8,7 @@ import {
   votings,
   timers,
   rankings,
+  mediaItems,
   showRemoteCursors,
   currentRoom,
   stickyColorIndex,
@@ -18,6 +19,7 @@ import { DiscussionBoard } from "./DiscussionBoard";
 import { VotingBoard } from "./VotingBoard";
 import { TimerBoard } from "./TimerBoard";
 import { RankingBoard } from "./RankingBoard";
+import { MediaBoard } from "./MediaBoard";
 
 const WORLD_SIZE = 32000;
 const INIT_X = 3000;
@@ -150,6 +152,16 @@ export function InfiniteCanvas({
           backgroundSize: "24px 24px",
         }}
       >
+        {mediaItems.value.map((item) => (
+          <div
+            key={item.id}
+            style={{
+              pointerEvents: roomLocked && !isTeacher ? "none" : "auto",
+            }}
+          >
+            <MediaBoard item={item} isTeacher={isTeacher} />
+          </div>
+        ))}
         {stickyNotes.value.map((note) => (
           <div
             key={note.id}

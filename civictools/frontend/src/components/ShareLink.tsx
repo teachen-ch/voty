@@ -5,9 +5,14 @@ import QRCode from "qrcode";
 interface Props {
   roomId: string;
   dashboard?: boolean;
+  qrOnly?: boolean;
 }
 
-export function ShareLink({ roomId, dashboard = false }: Props) {
+export function ShareLink({
+  roomId,
+  dashboard = false,
+  qrOnly = false,
+}: Props) {
   const { t } = useTranslation();
   const [copied, setCopied] = useState(false);
   const [showQr, setShowQr] = useState(false);
@@ -49,16 +54,18 @@ export function ShareLink({ roomId, dashboard = false }: Props) {
           <path d="M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4zM14 14h2v2h-2zM18 14h2v6h-6v-2h4z" />
         </svg>
       </button>
-      <button className="btn secondary" onClick={copy} title={url}>
-        {copied ? (
-          t("shareLink.copied")
-        ) : (
-          <>
-            <span className="hidden sm:inline">{t("shareLink.copy")}</span>
-            <span className="sm:hidden">{t("shareLink.copyMobile")}</span>
-          </>
-        )}
-      </button>
+      {!qrOnly && (
+        <button className="btn secondary" onClick={copy} title={url}>
+          {copied ? (
+            t("shareLink.copied")
+          ) : (
+            <>
+              <span className="hidden sm:inline">{t("shareLink.copy")}</span>
+              <span className="sm:hidden">{t("shareLink.copyMobile")}</span>
+            </>
+          )}
+        </button>
+      )}
       {showQr && (
         <div
           className="fixed inset-0 z-[100] flex items-center justify-center bg-black/50 p-4"

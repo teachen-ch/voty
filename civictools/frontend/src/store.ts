@@ -11,6 +11,13 @@ pb.authStore.onChange((_, model) => {
 });
 
 export const isTeacher = computed(() => teacher.value !== null);
+export const isEditor = computed(() => teacher.value?.editor === true);
+
+if (pb.authStore.isValid && pb.authStore.model?.collectionName === "users") {
+  pb.collection("users")
+    .authRefresh()
+    .catch(() => {});
+}
 
 export interface StudentSession {
   nickname: string;
@@ -101,6 +108,17 @@ export const canvasTransform = signal<CanvasTransform>({
 export type Tool = "select" | "sticky";
 export const activeTool = signal<Tool>("select");
 export const stickyColorIndex = signal(0);
+
+export const mediaModal = signal<boolean>(false);
+export const mediaItems = signal<RecordModel[]>([]);
+
+export function applyMediaEvent(action: string, record: RecordModel) {
+  if (action === "create" || action === "update") {
+    mediaItems.value = upsertBy(mediaItems.value, record);
+  } else if (action === "delete") {
+    mediaItems.value = mediaItems.value.filter((m) => m.id !== record.id);
+  }
+}
 
 export const discussionModal = signal<{ board?: RecordModel } | null>(null);
 export const votingModal = signal<{ voting?: RecordModel } | null>(null);

@@ -26,6 +26,9 @@ func main() {
 		if err := syncKeycloakOIDC(app); err != nil {
 			log.Printf("warn: keycloak OIDC sync skipped: %v", err)
 		}
+		if err := configureS3(app); err != nil {
+			log.Printf("warn: S3 config skipped: %v", err)
+		}
 		registerOAuthRedirect(se)
 		registerCursorWS(se)
 		serveStatic(se)
@@ -34,6 +37,7 @@ func main() {
 
 	registerRoomHooks(app)
 	registerParticipantHooks(app)
+	registerMediaHooks(app)
 	registerCopyTemplate(app)
 	registerAdminUI(app)
 	configureDynamicAppURL(app)

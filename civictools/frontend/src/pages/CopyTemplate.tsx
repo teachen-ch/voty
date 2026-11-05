@@ -2,6 +2,7 @@ import { useEffect, useState } from "preact/hooks";
 import { Link, useLocation } from "wouter";
 import { useTranslation } from "react-i18next";
 import { pb } from "../pb";
+import { tenant } from "../tenant";
 import { renderMarkdown } from "../util/markdown";
 import { isTeacher } from "../store";
 import { Header } from "../components/Header";
@@ -97,7 +98,7 @@ export function CopyTemplate({ slug }: { slug: string }) {
           Authorization: pb.authStore.token,
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ name: roomName.trim() }),
+        body: JSON.stringify({ name: roomName.trim(), tenant: tenant.id }),
       });
       if (!res.ok) throw new Error(String(res.status));
       const data = (await res.json()) as { id: string };
