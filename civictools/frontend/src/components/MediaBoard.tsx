@@ -130,7 +130,7 @@ export function MediaBoard({ item, isTeacher, mobile = false }: Props) {
         aria-label={label}
         loading="lazy"
         referrerpolicy="strict-origin-when-cross-origin"
-        sandbox="allow-scripts allow-same-origin allow-presentation allow-popups"
+        sandbox="allow-scripts allow-same-origin allow-popups"
         allow="fullscreen; picture-in-picture; encrypted-media"
         allowFullScreen
         className="w-full h-full block border-0"
@@ -185,6 +185,7 @@ export function MediaBoard({ item, isTeacher, mobile = false }: Props) {
           <button
             type="button"
             onClick={remove}
+            onPointerDown={(e) => e.stopPropagation()}
             title={t("media.delete")}
             aria-label={t("media.delete")}
             className="ml-1 size-6 rounded bg-slate-800/80 text-white hover:bg-red-600 flex items-center justify-center text-sm leading-none"
