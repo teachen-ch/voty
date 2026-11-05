@@ -45,8 +45,7 @@ Review the YAML and generated SQL and get explicit confirmation before changing 
 The `app` container’s `./psql` helper opens an interactive TTY, which makes it unsuitable for reliable automation or redirected input. Run `psql` directly in the PostgreSQL container and pass the SQL on standard input instead:
 
 ```sh
-ssh app@prod 'docker exec -i postgres psql -U voty -d voty' \
-  < backup/voty-ballots-YYYY-qX.sql
+ssh app@prod 'docker exec -i postgres psql -U voty -d voty' < backup/voty-ballots-2026-q4.sql
 ```
 
 The command should finish with an `INSERT 0 N` response, where `N` is the number of ballots in the YAML. If it fails, stop and investigate; do not blindly rerun because the generated SQL uses new UUIDs and could insert duplicates.
