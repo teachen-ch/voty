@@ -101,6 +101,7 @@ export function Login() {
     try {
       const auth = await pb.collection("users").authWithOAuth2({
         provider: oidcProvider,
+        createData: { tenant: tenant.id },
         urlCallback: (url) => {
           if (!popup) {
             throw new Error("Could not open the OAuth login window");

@@ -1,3 +1,4 @@
+import { tenant } from "../tenant";
 import { useEffect, useState } from "preact/hooks";
 import { useLocation } from "wouter";
 import { useTranslation } from "react-i18next";
@@ -49,6 +50,7 @@ export function Join({ roomId }: Props) {
         nickname: name,
         session_token: sessionToken,
         role: "student",
+        tenant: tenant.id,
       });
       setStudentSession({
         nickname: name,
