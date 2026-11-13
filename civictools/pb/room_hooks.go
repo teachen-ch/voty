@@ -125,7 +125,8 @@ func canManageRoom(user, room *core.Record) bool {
 func registerSharedTemplates(app *pocketbase.PocketBase) {
 	app.OnRecordEnrich("rooms").BindFunc(func(e *core.RecordEnrichEvent) error {
 		auth := e.RequestInfo.Auth
-		if auth != nil && auth.GetBool("editor") && e.Record.GetBool("is_template") {
+		if auth != nil && auth.GetBool("editor") && e.Record.GetBool("is_template") &&
+			auth.GetString("tenant") != "" && auth.GetString("tenant") == e.Record.GetString("tenant") {
 			name := ""
 			if owner, err := e.App.FindRecordById("users", e.Record.GetString("teacher")); err == nil {
 				name = owner.GetString("name")

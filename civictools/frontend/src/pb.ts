@@ -7,7 +7,7 @@ export const pb = new PocketBase(
 pb.beforeSend = (url, options) => {
   const token = studentSessionToken();
   if (token) {
-    options.headers = { ...options.headers, "X-Session-Token": token };
+    options.headers = { "X-Session-Token": token, ...options.headers };
   }
   return { url, options };
 };

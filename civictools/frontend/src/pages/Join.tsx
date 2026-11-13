@@ -45,13 +45,12 @@ export function Join({ roomId }: Props) {
         return;
       }
       const sessionToken = crypto.randomUUID();
-      const record = await pb.collection("participants").create({
-        room: roomId,
-        nickname: name,
-        session_token: sessionToken,
-        role: "student",
-        tenant: tenant.id,
-      });
+      const record = await pb
+        .collection("participants")
+        .create(
+          { room: roomId, nickname: name, role: "student", tenant: tenant.id },
+          { headers: { "X-Session-Token": sessionToken } }
+        );
       setStudentSession({
         nickname: name,
         roomId,

@@ -41,6 +41,7 @@ func main() {
 	registerCopyTemplate(app)
 	registerSharedTemplates(app)
 	registerStats(app)
+	registerSessionTokenChecks(app)
 	registerAdminUI(app)
 	configureDynamicAppURL(app)
 	app.OnServe().BindFunc(func(se *core.ServeEvent) error {
