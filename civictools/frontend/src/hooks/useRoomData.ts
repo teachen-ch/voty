@@ -1,5 +1,5 @@
 import { useEffect } from "preact/hooks";
-import { pb } from "../pb";
+import { pb, subscribeRoom } from "../pb";
 import {
   stickyNotes,
   applyNoteEvent,
@@ -29,7 +29,7 @@ export function useRoomData(roomId: string) {
     pb.collection("sticky_notes")
       .getList(1, 500, { filter: `room = "${roomId}"` })
       .then((res) => (stickyNotes.value = res.items));
-    pb.collection("sticky_notes").subscribe("*", (e) => {
+    subscribeRoom("sticky_notes", roomId, (e) => {
       if (e.record.room !== roomId) return;
       applyNoteEvent(e.action, e.record);
     });
@@ -61,14 +61,14 @@ export function useRoomData(roomId: string) {
         argumentVotes.value = voteRes.items;
       });
 
-    pb.collection("discussion_boards").subscribe("*", (e) => {
+    subscribeRoom("discussion_boards", roomId, (e) => {
       if (e.record.room && e.record.room !== roomId) return;
       applyDiscussionBoardEvent(e.action, e.record);
     });
-    pb.collection("arguments").subscribe("*", (e) => {
+    subscribeRoom("arguments", roomId, (e) => {
       applyArgumentEvent(e.action, e.record);
     });
-    pb.collection("argument_votes").subscribe("*", (e) => {
+    subscribeRoom("argument_votes", roomId, (e) => {
       applyArgumentVoteEvent(e.action, e.record);
     });
 
@@ -89,18 +89,18 @@ export function useRoomData(roomId: string) {
         participantVotes.value = voteRes.items;
       });
 
-    pb.collection("votings").subscribe("*", (e) => {
+    subscribeRoom("votings", roomId, (e) => {
       if (e.record.room && e.record.room !== roomId) return;
       applyVotingEvent(e.action, e.record);
     });
-    pb.collection("participant_votes").subscribe("*", (e) => {
+    subscribeRoom("participant_votes", roomId, (e) => {
       applyParticipantVoteEvent(e.action, e.record);
     });
 
     pb.collection("timers")
       .getList(1, 200, { filter: `room = "${roomId}"` })
       .then((res) => (timers.value = res.items));
-    pb.collection("timers").subscribe("*", (e) => {
+    subscribeRoom("timers", roomId, (e) => {
       if (e.record.room && e.record.room !== roomId) return;
       applyTimerEvent(e.action, e.record);
     });
@@ -123,18 +123,18 @@ export function useRoomData(roomId: string) {
         rankingResponses.value = respRes.items;
       });
 
-    pb.collection("rankings").subscribe("*", (e) => {
+    subscribeRoom("rankings", roomId, (e) => {
       if (e.record.room && e.record.room !== roomId) return;
       applyRankingEvent(e.action, e.record);
     });
-    pb.collection("ranking_responses").subscribe("*", (e) => {
+    subscribeRoom("ranking_responses", roomId, (e) => {
       applyRankingResponseEvent(e.action, e.record);
     });
 
     pb.collection("media_items")
       .getList(1, 200, { filter: `room = "${roomId}"` })
       .then((res) => (mediaItems.value = res.items));
-    pb.collection("media_items").subscribe("*", (e) => {
+    subscribeRoom("media_items", roomId, (e) => {
       if (e.record.room && e.record.room !== roomId) return;
       applyMediaEvent(e.action, e.record);
     });

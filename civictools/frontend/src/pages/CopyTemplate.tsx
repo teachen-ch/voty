@@ -1,7 +1,7 @@
 import { useEffect, useState } from "preact/hooks";
 import { Link, useLocation } from "wouter";
 import { useTranslation } from "react-i18next";
-import { pb } from "../pb";
+import { pb, roomHeaders } from "../pb";
 import { tenant } from "../tenant";
 import { renderMarkdown } from "../util/markdown";
 import { isTeacher } from "../store";
@@ -59,17 +59,22 @@ export function CopyTemplate({ slug }: { slug: string }) {
           .collection("rooms")
           .getFirstListItem(`slug = "${slug}" && is_template = true`);
         const filter = `room = "${room.id}"`;
+        const headers = roomHeaders(room.id);
         const [discussions, votings, rankings, timers, ballots] =
           await Promise.all([
-            pb.collection("discussion_boards").getFullList({ filter }),
-            pb
-              .collection("votings")
-              .getFullList({ filter, requestKey: `votings_${room.id}` }),
-            pb
-              .collection("rankings")
-              .getFullList({ filter, requestKey: `rankings_${room.id}` }),
-            pb.collection("timers").getFullList({ filter }),
-            pb.collection("ballots").getFullList({ filter }),
+            pb.collection("discussion_boards").getFullList({ filter, headers }),
+            pb.collection("votings").getFullList({
+              filter,
+              headers,
+              requestKey: `votings_${room.id}`,
+            }),
+            pb.collection("rankings").getFullList({
+              filter,
+              headers,
+              requestKey: `rankings_${room.id}`,
+            }),
+            pb.collection("timers").getFullList({ filter, headers }),
+            pb.collection("ballots").getFullList({ filter, headers }),
           ]);
         if (cancelled) return;
         setTemplate(room);

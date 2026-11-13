@@ -74,6 +74,22 @@ test("teacher creates a discussion and a student contributes", async ({
           "A park gives families a place to spend time outdoors."
         )
       ).toBeVisible();
+      await expect(
+        teacherPage.getByText(
+          "A park gives families a place to spend time outdoors."
+        )
+      ).toBeVisible();
+
+      const roomId = studentUrl.split("/").pop()!;
+      const participantsUrl = `/api/collections/participants/records?filter=${encodeURIComponent(`room="${roomId}"`)}`;
+      const unscoped = await studentPage.request.get(participantsUrl);
+      expect((await unscoped.json()).totalItems).toBe(0);
+      const scoped = await studentPage.request.get(participantsUrl, {
+        headers: { "X-Room-Id": roomId },
+      });
+      const body = await scoped.json();
+      expect(body.totalItems).toBeGreaterThan(0);
+      expect(JSON.stringify(body)).not.toContain("session_token");
     } finally {
       await studentContext.close();
     }
