@@ -7,6 +7,7 @@ import { Join } from "./pages/Join";
 import { StudentRoom } from "./pages/StudentRoom";
 import { CopyTemplate } from "./pages/CopyTemplate";
 import { Templates } from "./pages/Templates";
+import { Stats } from "./pages/Stats";
 import { OAuthSuccess } from "./pages/OAuthSuccess";
 
 export function App() {
@@ -30,6 +31,9 @@ export function App() {
         {(params: { id: string }) => <Join roomId={params.id} />}
       </Route>
       <Route path="/templates" component={Templates} />
+      <Route path="/stats">
+        {isTeacher.value ? <Stats /> : <Redirect to="/login" />}
+      </Route>
       <Route path="/copy/:slug">
         {(params: { slug: string }) => <CopyTemplate slug={params.slug} />}
       </Route>

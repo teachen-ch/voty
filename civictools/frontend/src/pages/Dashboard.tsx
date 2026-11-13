@@ -421,9 +421,17 @@ export function Dashboard() {
       )}
       {managesTemplates && (
         <section className="mt-10">
-          <h2 className="text-lg font-semibold mb-1!">
-            {t("dashboard.manageTemplates", { tenant: tenant.name })}
-          </h2>
+          <div className="flex items-center justify-between gap-4 mb-1">
+            <h2 className="text-lg font-semibold m-0!">
+              {t("dashboard.manageTemplates", { tenant: tenant.name })}
+            </h2>
+            <Link
+              href="/stats"
+              className="text-sm text-primary-600 hover:underline shrink-0"
+            >
+              {t("dashboard.stats")}
+            </Link>
+          </div>
           <p className="text-sm text-slate-500 mt-0 mb-3">
             {t("dashboard.manageTemplatesHint", { tenant: tenant.name })}
           </p>

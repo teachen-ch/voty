@@ -63,6 +63,7 @@ func registerCopyTemplate(app *pocketbase.PocketBase) {
 				newRoom.Set("ballots_enabled", tpl.GetBool("ballots_enabled"))
 				newRoom.Set("is_template", false)
 				newRoom.Set("tenant", roomTenant)
+				newRoom.Set("source_template", templateId)
 				newRoom.Set("description", "")
 				if err := txApp.Save(newRoom); err != nil {
 					return err

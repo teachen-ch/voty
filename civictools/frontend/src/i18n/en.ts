@@ -62,6 +62,7 @@ const en = {
     oidc: "Login with {{tenant}}",
   },
   dashboard: {
+    stats: "Statistics →",
     tenantMismatch:
       "Your editor account belongs to the tenant “{{userTenant}}”, so you cannot manage {{tenant}} templates here.",
     actions: "Actions",
@@ -319,6 +320,21 @@ const en = {
     confirm: "Delete",
     deleting: "Deleting…",
     failed: "Could not delete the room. Please try again.",
+  },
+  stats: {
+    title: "{{tenant}} statistics",
+    failed: "Could not load statistics.",
+    teachers: "Teachers",
+    rooms: "Rooms",
+    students: "Students",
+    active30_one: "{{count}} active in the last 30 days",
+    active30_other: "{{count}} active in the last 30 days",
+    templates: "Template usage",
+    templatesHint:
+      "How often teachers created a room from each template, and how many students joined those rooms. Counted since template tracking was added.",
+    template: "Template",
+    copies: "Rooms created",
+    lastCopied: "Last used",
   },
   widget: {
     timer: "Timer",
