@@ -65,6 +65,12 @@ export function Room({ roomId }: Props) {
     if (teacherId) {
       pb.collection("participants")
         .getFirstListItem(`room = "${roomId}" && user = "${teacherId}"`)
+        .catch(() =>
+          pb.send<RecordModel>(
+            `/api/civictools/rooms/${roomId}/teacher-participant`,
+            { method: "POST" }
+          )
+        )
         .then((p) => {
           setParticipantId(p.id);
           cacheParticipants([p]);
@@ -104,7 +110,11 @@ export function Room({ roomId }: Props) {
         role="teacher"
         participantId={participantId}
       />
-      <RoomHeader roomName={room.name as string} roomId={roomId} />
+      <RoomHeader
+        roomName={room.name as string}
+        roomId={roomId}
+        locked={room.template_locked === true}
+      />
       <IntroModal screen="room" />
       <DiscussionPromptModal roomId={roomId} />
       <VotingPromptModal roomId={roomId} />

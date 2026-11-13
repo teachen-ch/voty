@@ -8,6 +8,59 @@ interface Props {
   qrOnly?: boolean;
 }
 
+export function joinUrl(roomId: string) {
+  return `${window.location.origin}/join/${roomId}`;
+}
+
+export function QrModal({
+  url,
+  onClose,
+}: {
+  url: string;
+  onClose: () => void;
+}) {
+  const { t } = useTranslation();
+  const [qr, setQr] = useState<string | null>(null);
+
+  useEffect(() => {
+    QRCode.toDataURL(url, { width: 420, margin: 2 })
+      .then(setQr)
+      .catch(() => setQr(null));
+  }, [url]);
+
+  return (
+    <div
+      className="fixed inset-0 z-[100] flex items-center justify-center bg-black/50 p-4"
+      onClick={onClose}
+    >
+      <div
+        role="dialog"
+        aria-modal="true"
+        aria-label={t("shareLink.qrTitle")}
+        className="bg-white rounded-2xl shadow-xl p-6 max-w-[min(90vw,520px)] flex flex-col items-center gap-4"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="flex items-center justify-between w-full gap-4">
+          <h2 className="text-lg font-semibold">{t("shareLink.qrTitle")}</h2>
+          <button
+            className="text-2xl leading-none text-slate-500"
+            onClick={onClose}
+            aria-label="Close"
+          >
+            ×
+          </button>
+        </div>
+        {qr ? (
+          <img src={qr} alt={url} className="w-[min(75vw,420px)] h-auto" />
+        ) : (
+          <p>{t("shareLink.qrLoading")}</p>
+        )}
+        <p className="text-sm text-slate-500 break-all text-center">{url}</p>
+      </div>
+    </div>
+  );
+}
+
 export function ShareLink({
   roomId,
   dashboard = false,
@@ -16,15 +69,7 @@ export function ShareLink({
   const { t } = useTranslation();
   const [copied, setCopied] = useState(false);
   const [showQr, setShowQr] = useState(false);
-  const [qr, setQr] = useState<string | null>(null);
-  const url = `${window.location.origin}/join/${roomId}`;
-
-  useEffect(() => {
-    if (!showQr) return;
-    QRCode.toDataURL(url, { width: 420, margin: 2 })
-      .then(setQr)
-      .catch(() => setQr(null));
-  }, [showQr, url]);
+  const url = joinUrl(roomId);
 
   async function copy() {
     await navigator.clipboard.writeText(url);
@@ -66,41 +111,7 @@ export function ShareLink({
           )}
         </button>
       )}
-      {showQr && (
-        <div
-          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/50 p-4"
-          onClick={() => setShowQr(false)}
-        >
-          <div
-            role="dialog"
-            aria-modal="true"
-            aria-label={t("shareLink.qrTitle")}
-            className="bg-white rounded-2xl shadow-xl p-6 max-w-[min(90vw,520px)] flex flex-col items-center gap-4"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <div className="flex items-center justify-between w-full gap-4">
-              <h2 className="text-lg font-semibold">
-                {t("shareLink.qrTitle")}
-              </h2>
-              <button
-                className="text-2xl leading-none text-slate-500"
-                onClick={() => setShowQr(false)}
-                aria-label="Close"
-              >
-                ×
-              </button>
-            </div>
-            {qr ? (
-              <img src={qr} alt={url} className="w-[min(75vw,420px)] h-auto" />
-            ) : (
-              <p>{t("shareLink.qrLoading")}</p>
-            )}
-            <p className="text-sm text-slate-500 break-all text-center">
-              {url}
-            </p>
-          </div>
-        </div>
-      )}
+      {showQr && <QrModal url={url} onClose={() => setShowQr(false)} />}
     </div>
   );
 }

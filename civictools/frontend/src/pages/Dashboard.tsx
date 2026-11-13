@@ -3,13 +3,24 @@ import { Link, useLocation } from "wouter";
 import { useTranslation } from "react-i18next";
 import { pb } from "../pb";
 import type { RecordModel } from "pocketbase";
-import { ShareLink } from "../components/ShareLink";
+import { ShareLink, QrModal, joinUrl } from "../components/ShareLink";
+import { ActionMenu, type MenuItem } from "../components/ActionMenu";
 import { Header } from "../components/Header";
 import { IntroModal } from "../components/IntroModal";
 import { timeSince, lastOpenedLabel } from "../util/time";
 import { tenant } from "../tenant";
-import { isEditor } from "../store";
+import { isEditor, teacher } from "../store";
 import { TemplateModal } from "../components/TemplateModal";
+import { DeleteRoomModal } from "../components/DeleteRoomModal";
+import {
+  LinkIcon,
+  LockIcon,
+  OpenIcon,
+  QrIcon,
+  SettingsIcon,
+  TemplateIcon,
+  TrashIcon,
+} from "../components/Icons";
 
 interface Presence {
   online: number;
@@ -20,15 +31,22 @@ export function Dashboard() {
   const { t } = useTranslation();
   const [rooms, setRooms] = useState<RecordModel[]>([]);
   const [templates, setTemplates] = useState<RecordModel[]>([]);
+  const [managed, setManaged] = useState<RecordModel[]>([]);
   const [presence, setPresence] = useState<Record<string, Presence>>({});
   const [naming, setNaming] = useState(false);
   const [roomName, setRoomName] = useState("");
   const [creating, setCreating] = useState(false);
   const [templateRoom, setTemplateRoom] = useState<RecordModel | null>(null);
+  const [deleteRoom, setDeleteRoom] = useState<RecordModel | null>(null);
+  const [qrRoom, setQrRoom] = useState<string | null>(null);
+  const [toast, setToast] = useState<string | null>(null);
   const nameInput = useRef<HTMLInputElement>(null);
   const [, navigate] = useLocation();
 
-  useEffect(() => {
+  const managesTemplates =
+    isEditor.value && teacher.value?.tenant === tenant.id;
+
+  function load() {
     const id = pb.authStore.model?.id;
     if (!id) return;
     pb.collection("rooms")
@@ -48,7 +66,114 @@ export function Dashboard() {
       })
       .then((res) => setTemplates(res.items))
       .catch(() => setTemplates([]));
-  }, []);
+
+    if (managesTemplates) {
+      pb.collection("rooms")
+        .getList(1, 200, {
+          filter: `is_template = true && tenant = "${tenant.id}"`,
+          sort: "name",
+          requestKey: "dashboard-managed",
+        })
+        .then((res) => setManaged(res.items))
+        .catch(() => setManaged([]));
+    }
+  }
+
+  useEffect(load, [managesTemplates]);
+
+  function rowStart(room: RecordModel) {
+    if (room.template_locked) {
+      return (
+        <span
+          className="p-1.5 text-amber-600"
+          title={t("template.lockedTitle")}
+          aria-label={t("template.lockedTitle")}
+        >
+          <LockIcon />
+        </span>
+      );
+    }
+    return (
+      <button
+        className="btn! bg-transparent! text-slate-500! hover:text-red-600! hover:bg-red-50! p-1.5! rounded opacity-0 group-hover:opacity-100 focus-visible:opacity-100 pointer-coarse:opacity-100 transition-opacity"
+        title={t("deleteRoom.button")}
+        aria-label={t("deleteRoom.button")}
+        onClick={() => setDeleteRoom(room)}
+      >
+        <TrashIcon />
+      </button>
+    );
+  }
+
+  function deleteItem(room: RecordModel): MenuItem {
+    return room.template_locked
+      ? {
+          label: t("template.locked"),
+          icon: <LockIcon size={16} />,
+          disabled: true,
+        }
+      : {
+          label: t("deleteRoom.button"),
+          icon: <TrashIcon size={16} />,
+          danger: true,
+          onClick: () => setDeleteRoom(room),
+        };
+  }
+
+  async function copyLink(roomId: string) {
+    await navigator.clipboard.writeText(joinUrl(roomId));
+    setToast(t("shareLink.copied"));
+    setTimeout(() => setToast(null), 2000);
+  }
+
+  function roomMenu(room: RecordModel): MenuItem[] {
+    const items: MenuItem[] = [
+      {
+        label: t("dashboard.open"),
+        icon: <OpenIcon size={16} />,
+        onClick: () => navigate(`/room/${room.id}`),
+      },
+      {
+        label: t("shareLink.showQr"),
+        icon: <QrIcon size={16} />,
+        onClick: () => setQrRoom(room.id),
+      },
+      {
+        label: t("shareLink.copy"),
+        icon: <LinkIcon size={16} />,
+        onClick: () => copyLink(room.id),
+      },
+    ];
+    if (isEditor.value) {
+      items.push({
+        label: room.is_template ? t("template.title") : t("template.promote"),
+        icon: <TemplateIcon size={16} />,
+        onClick: () => setTemplateRoom(room),
+      });
+    }
+    items.push(deleteItem(room));
+    return items;
+  }
+
+  function templateMenu(room: RecordModel): MenuItem[] {
+    return [
+      {
+        label: room.template_locked ? t("dashboard.view") : t("dashboard.edit"),
+        icon: <OpenIcon size={16} />,
+        onClick: () => navigate(`/room/${room.id}`),
+      },
+      {
+        label: t("template.settings"),
+        icon: <SettingsIcon size={16} />,
+        onClick: () => setTemplateRoom(room),
+      },
+      deleteItem(room),
+    ];
+  }
+
+  const myRooms = managesTemplates
+    ? rooms.filter((r) => !(r.is_template && r.tenant === tenant.id))
+    : rooms;
 
   useEffect(() => {
     if (rooms.length === 0) return;
@@ -74,14 +199,8 @@ export function Dashboard() {
     };
   }, [rooms]);
 
-  function onTemplateSaved(room: RecordModel) {
-    setRooms((list) => list.map((r) => (r.id === room.id ? room : r)));
-    setTemplates((list) => {
-      const rest = list.filter((r) => r.id !== room.id);
-      return room.is_template && room.slug && room.tenant === tenant.id
-        ? [room, ...rest]
-        : rest;
-    });
+  function onTemplateSaved() {
+    load();
   }
 
   function startNaming() {
@@ -192,7 +311,7 @@ export function Dashboard() {
           </a>
         )}
       </div>
-      {rooms.length === 0 ? (
+      {myRooms.length === 0 ? (
         <p className="text-slate-500">
           {t("dashboard.empty")}
           {tenant.docLink && (
@@ -211,16 +330,19 @@ export function Dashboard() {
         </p>
       ) : (
         <div className="flex flex-col gap-2.5">
-          {rooms.map((room) => {
+          {myRooms.map((room) => {
             const p = presence[room.id];
             const live = p && p.online > 0;
             return (
-              <div key={room.id} className="card flex items-center gap-3">
+              <div
+                key={room.id}
+                className="card group flex items-center gap-3 max-sm:p-4!"
+              >
                 <span
-                  className={`text-nowrap shrink-0 inline-flex justify-center items-center gap-1.5 text-xs font-medium rounded-full px-2.5 py-1 ${
+                  className={`text-nowrap shrink-0 justify-center items-center gap-1.5 text-xs font-medium rounded-full px-2.5 py-1 ${
                     live
-                      ? "bg-emerald-50 text-emerald-700 border border-emerald-200"
-                      : "bg-slate-100 text-slate-500"
+                      ? "inline-flex bg-emerald-50 text-emerald-700 border border-emerald-200"
+                      : "hidden sm:inline-flex bg-slate-100 text-slate-500"
                   }`}
                 >
                   {live && (
@@ -250,39 +372,144 @@ export function Dashboard() {
                         })}
                   </span>
                 </div>
-                {isEditor.value ? (
-                  <>
-                    <ShareLink roomId={room.id} dashboard qrOnly />
+                <div className="hidden sm:flex items-center gap-3">
+                  <div className="flex items-center">
+                    {rowStart(room)}
+                    <ShareLink
+                      roomId={room.id}
+                      dashboard
+                      qrOnly={isEditor.value}
+                    />
+                  </div>
+                  {isEditor.value && (
                     <button
                       className={
                         room.is_template
-                          ? "btn bg-emerald-600! hover:bg-emerald-700!"
+                          ? "btn bg-violet-600! hover:bg-violet-700!"
                           : "btn secondary"
                       }
+                      title={t("template.promoteTitle")}
                       onClick={() => setTemplateRoom(room)}
                     >
-                      {t("template.button")}
+                      {room.is_template
+                        ? t("template.button")
+                        : t("template.promote")}
                     </button>
-                  </>
-                ) : (
-                  <ShareLink roomId={room.id} dashboard />
-                )}
-                <button
-                  className="btn"
-                  onClick={() => navigate(`/room/${room.id}`)}
-                >
-                  {t("dashboard.open")}
-                </button>
+                  )}
+                  <button
+                    className="btn"
+                    onClick={() => navigate(`/room/${room.id}`)}
+                  >
+                    {t("dashboard.open")}
+                  </button>
+                </div>
+                <div className="sm:hidden">
+                  <ActionMenu items={roomMenu(room)} />
+                </div>
               </div>
             );
           })}
         </div>
+      )}
+      {managesTemplates && (
+        <section className="mt-10">
+          <h2 className="text-lg font-semibold mb-1!">
+            {t("dashboard.manageTemplates", { tenant: tenant.name })}
+          </h2>
+          <p className="text-sm text-slate-500 mt-0 mb-3">
+            {t("dashboard.manageTemplatesHint", { tenant: tenant.name })}
+          </p>
+          {managed.length === 0 ? (
+            <p className="text-slate-500">{t("dashboard.noManaged")}</p>
+          ) : (
+            <div className="flex flex-col gap-2.5">
+              {managed.map((room) => {
+                const mine = room.teacher === pb.authStore.model?.id;
+                return (
+                  <div
+                    key={room.id}
+                    className="card group flex items-center gap-3 max-sm:p-4!"
+                  >
+                    <span className="shrink-0 hidden sm:inline-flex items-center gap-1 text-xs font-medium bg-violet-100 text-violet-700 rounded-full px-2.5 py-1">
+                      {room.template_locked && <LockIcon size={12} />}
+                      {t("dashboard.templateTag")}
+                    </span>
+                    <div className="flex-1 min-w-0">
+                      <Link
+                        href={`/room/${room.id}`}
+                        className="font-semibold text-slate-800 hover:underline flex items-center gap-1.5 min-w-0"
+                      >
+                        {room.template_locked && (
+                          <LockIcon
+                            size={14}
+                            className="sm:hidden shrink-0 text-amber-600"
+                          />
+                        )}
+                        <span className="truncate">{room.name}</span>
+                      </Link>
+                      <span className="text-sm text-slate-500">
+                        {mine
+                          ? t("template.byYou")
+                          : t("template.by", {
+                              owner: (room.owner_name as string) || "?",
+                            })}
+                        {" · "}
+                        {t("dashboard.edited", {
+                          when: lastOpenedLabel(room.updated as string, t),
+                        })}
+                      </span>
+                    </div>
+                    <div className="hidden sm:flex items-center gap-3">
+                      {rowStart(room)}
+                      <button
+                        className="btn secondary"
+                        onClick={() => setTemplateRoom(room)}
+                      >
+                        {t("template.settings")}
+                      </button>
+                      <button
+                        className="btn"
+                        onClick={() => navigate(`/room/${room.id}`)}
+                      >
+                        {room.template_locked
+                          ? t("dashboard.view")
+                          : t("dashboard.edit")}
+                      </button>
+                    </div>
+                    <div className="sm:hidden">
+                      <ActionMenu items={templateMenu(room)} />
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          )}
+        </section>
       )}
       {templateRoom && (
         <TemplateModal
           room={templateRoom}
           onClose={() => setTemplateRoom(null)}
           onSaved={onTemplateSaved}
+          onCopied={load}
+        />
+      )}
+      {qrRoom && (
+        <QrModal url={joinUrl(qrRoom)} onClose={() => setQrRoom(null)} />
+      )}
+      {toast && (
+        <div
+          role="status"
+          className="fixed left-1/2 -translate-x-1/2 bottom-[calc(1.5rem+env(safe-area-inset-bottom,0px))] z-[110] bg-slate-800 text-white text-sm rounded-full px-4 py-2 shadow-lg"
+        >
+          {toast}
+        </div>
+      )}
+      {deleteRoom && (
+        <DeleteRoomModal
+          room={deleteRoom}
+          onClose={() => setDeleteRoom(null)}
+          onDeleted={load}
         />
       )}
     </div>

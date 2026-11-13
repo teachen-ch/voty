@@ -39,6 +39,7 @@ func main() {
 	registerParticipantHooks(app)
 	registerMediaHooks(app)
 	registerCopyTemplate(app)
+	registerSharedTemplates(app)
 	registerAdminUI(app)
 	configureDynamicAppURL(app)
 	app.OnServe().BindFunc(func(se *core.ServeEvent) error {
