@@ -152,7 +152,7 @@ export function MediaBoard({ item, isTeacher, mobile = false }: Props) {
   if (mobile) {
     return (
       <div
-        className="rounded-xl overflow-hidden bg-white shadow-sm border border-slate-200"
+        className="rounded-xl overflow-hidden"
         style={{ aspectRatio: String(aspect) }}
       >
         {content}
@@ -194,7 +194,7 @@ export function MediaBoard({ item, isTeacher, mobile = false }: Props) {
           </button>
         </div>
       )}
-      <div className="w-full h-full rounded-lg overflow-hidden bg-white shadow-[3px_4px_14px_rgba(0,0,0,0.18)] border border-slate-200">
+      <div className="w-full h-full rounded-lg overflow-hidden">
         {content}
         {busy && <div className="absolute inset-0" />}
       </div>
