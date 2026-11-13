@@ -2,6 +2,7 @@ const bg = {
   appName: "CivicTools",
   header: { brand: "voty CivicTools" },
   common: {
+    close: "Затвори",
     question: "Въпрос",
     options: "Опции ({{count}}/{{max}})",
     option: "Опция {{number}}",
@@ -59,6 +60,8 @@ const bg = {
     oidc: "Вход с {{tenant}}",
   },
   dashboard: {
+    tenantMismatch:
+      "Вашият редакторски акаунт принадлежи на „{{userTenant}}“, затова тук не можете да управлявате шаблоните на {{tenant}}.",
     actions: "Действия",
     view: "Преглед",
     manageTemplates: "Шаблони на {{tenant}}",
@@ -268,6 +271,8 @@ const bg = {
     image: "Изображение",
   },
   template: {
+    name: "Заглавие",
+    unlock: "Отключи",
     lock: "Заключи шаблона",
     lockHint:
       "Защитава шаблона от случайни промени. Докато е заключен, никой не може да го редактира, премахва или изтрива.",

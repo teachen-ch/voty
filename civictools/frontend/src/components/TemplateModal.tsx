@@ -19,6 +19,7 @@ export function TemplateModal({ room, onClose, onSaved, onCopied }: Props) {
   const owner = (room.owner_name as string) || "?";
   const wasLocked = room.template_locked === true;
   const [locked, setLocked] = useState(wasLocked);
+  const [name, setName] = useState((room.name as string) || "");
   const [description, setDescription] = useState(
     (room.description as string) || ""
   );
@@ -72,9 +73,11 @@ export function TemplateModal({ room, onClose, onSaved, onCopied }: Props) {
 
   function submit(e: Event) {
     e.preventDefault();
-    if (!isTemplate) update({ description, is_template: true });
+    if (wasLocked && locked) return onClose();
+    const fields = { name: name.trim() || room.name, description };
+    if (!isTemplate) update({ ...fields, is_template: true });
     else if (wasLocked) update({ template_locked: locked });
-    else update({ description, template_locked: locked });
+    else update({ ...fields, template_locked: locked });
   }
 
   const link = `${window.location.origin}/copy/${room.slug}`;
@@ -93,11 +96,11 @@ export function TemplateModal({ room, onClose, onSaved, onCopied }: Props) {
           <h2 className="text-lg font-semibold m-0!">
             {isTemplate ? t("template.title") : t("template.promoteTitle")}
           </h2>
-          <p className="text-sm text-slate-500 mt-1 mb-0">
-            {room.name}
-            {isTemplate &&
-              ` · ${isOwner ? t("template.byYou") : t("template.by", { owner })}`}
-          </p>
+          {isTemplate && (
+            <p className="text-sm text-slate-500 mt-1 mb-0">
+              {isOwner ? t("template.byYou") : t("template.by", { owner })}
+            </p>
+          )}
         </div>
 
         {!isTemplate && (
@@ -105,6 +108,18 @@ export function TemplateModal({ room, onClose, onSaved, onCopied }: Props) {
             {t("template.promoteHint", { tenant: tenant.name })}
           </p>
         )}
+
+        <label className="flex flex-col gap-1">
+          <span className="text-sm font-medium text-slate-700">
+            {t("template.name")}
+          </span>
+          <input
+            value={name}
+            disabled={wasLocked}
+            required
+            onInput={(e) => setName(e.currentTarget.value)}
+          />
+        </label>
 
         <label className="flex flex-col gap-1">
           <span className="text-sm font-medium text-slate-700">
@@ -150,20 +165,30 @@ export function TemplateModal({ room, onClose, onSaved, onCopied }: Props) {
         {error && <p className="error m-0">{t("template.failed")}</p>}
 
         <div className="flex justify-end gap-2">
-          <button
-            type="button"
-            onClick={onClose}
-            className="px-3 py-1.5 rounded text-sm text-slate-600 hover:bg-slate-100"
-          >
-            {t("common.cancel")}
-          </button>
-          <button type="submit" disabled={saving} className="btn">
-            {saving
-              ? t("common.saving")
-              : isTemplate
-                ? t("common.save")
-                : t("template.publish")}
-          </button>
+          {wasLocked && locked ? (
+            <button type="button" onClick={onClose} className="btn secondary">
+              {t("common.close")}
+            </button>
+          ) : (
+            <>
+              <button
+                type="button"
+                onClick={onClose}
+                className="px-3 py-1.5 rounded text-sm text-slate-600 hover:bg-slate-100"
+              >
+                {t("common.cancel")}
+              </button>
+              <button type="submit" disabled={saving} className="btn">
+                {saving
+                  ? t("common.saving")
+                  : !isTemplate
+                    ? t("template.publish")
+                    : wasLocked
+                      ? t("template.unlock")
+                      : t("common.save")}
+              </button>
+            </>
+          )}
         </div>
 
         {isTemplate && !wasLocked && (

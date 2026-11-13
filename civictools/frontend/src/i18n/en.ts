@@ -4,6 +4,7 @@ const en = {
     brand: "Voty CivicTools",
   },
   common: {
+    close: "Close",
     question: "Question",
     options: "Options ({{count}}/{{max}})",
     option: "Option {{number}}",
@@ -61,6 +62,8 @@ const en = {
     oidc: "Login with {{tenant}}",
   },
   dashboard: {
+    tenantMismatch:
+      "Your editor account belongs to the tenant “{{userTenant}}”, so you cannot manage {{tenant}} templates here.",
     actions: "Actions",
     view: "View",
     manageTemplates: "{{tenant}} templates",
@@ -267,6 +270,8 @@ const en = {
     image: "Image",
   },
   template: {
+    name: "Title",
+    unlock: "Unlock",
     lock: "Lock template",
     lockHint:
       "Protects the template from accidental changes. While locked, nobody can edit, remove or delete it.",

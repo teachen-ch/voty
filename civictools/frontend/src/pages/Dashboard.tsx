@@ -411,6 +411,14 @@ export function Dashboard() {
           })}
         </div>
       )}
+      {isEditor.value && !managesTemplates && (
+        <p className="mt-10 text-sm rounded-lg p-3 bg-amber-50 border border-amber-200 text-amber-900">
+          {t("dashboard.tenantMismatch", {
+            tenant: tenant.name,
+            userTenant: (teacher.value?.tenant as string) || "–",
+          })}
+        </p>
+      )}
       {managesTemplates && (
         <section className="mt-10">
           <h2 className="text-lg font-semibold mb-1!">
