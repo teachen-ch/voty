@@ -6,6 +6,15 @@
   environment:
     XDG_RUNTIME_DIR: "/run/user/{{ ansible_user_uid }}"
 
+# Must stay above "restart voty": handlers run in definition order.
+- name: restart docker
+  systemd:
+    name: docker
+    scope: user
+    state: restarted
+  environment:
+    XDG_RUNTIME_DIR: "/run/user/{{ ansible_user_uid }}"
+
 - name: restart voty
   systemd:
     name: voty

@@ -36,7 +36,10 @@ bash ansible/scripts/bootstrap.sh
 bash ansible/scripts/bootstrap.sh "ssh-ed25519 AAAA..."
 ```
 
-After that, all Ansible runs connect as `app` with no sudo required.
+After that, run `hardening.yml` (see below) before the first `site.yml`: it loads
+the `br_netfilter` module that the Docker daemon config relies on to pass client
+IPs through to Traefik. All other Ansible runs connect as `app` with no sudo
+required.
 
 ## Inventories
 
@@ -60,6 +63,9 @@ ansible-playbook -i ansible/prod ansible/site.yml --tags app
 
 # Re-copy compose/nginx/.env without re-pulling
 ansible-playbook -i ansible/prod ansible/site.yml --tags common
+
+# Only the Docker daemon config (restarts all containers if it changed)
+ansible-playbook -i ansible/prod ansible/site.yml --tags docker
 
 # Host hardening: ufw, fail2ban, sshd (runs as ubuntu with sudo, not app)
 ansible-playbook -i ansible/prod ansible/hardening.yml -e ansible_user=ubuntu --become

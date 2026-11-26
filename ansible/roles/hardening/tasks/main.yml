@@ -128,3 +128,19 @@
     sysctl_file: /etc/sysctl.d/90-disable-mptcp.conf
     state: present
     reload: yes
+
+# Rootless Docker without userland-proxy (see roles/common) needs br_netfilter.
+- name: Load br_netfilter so containers see client source IPs
+  tags: source-ip
+  block:
+    - name: Load br_netfilter on boot
+      copy:
+        dest: /etc/modules-load.d/docker.conf
+        mode: "0644"
+        content: |
+          br_netfilter
+
+    - name: Load br_netfilter now
+      community.general.modprobe:
+        name: br_netfilter
+        state: present

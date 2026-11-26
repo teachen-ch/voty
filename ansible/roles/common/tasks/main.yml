@@ -82,3 +82,23 @@
         src: "{{ env_file }}"
         dest: "{{ app_dir }}/.env"
         mode: "0600"
+
+# userland-proxy hides client IPs from Traefik, so all users would share one rate limit.
+# Changing this restarts Docker and every container.
+- name: Configure rootless Docker daemon
+  tags: docker
+  block:
+    - name: Create Docker config directory
+      file:
+        path: "{{ ansible_env.HOME }}/.config/docker"
+        state: directory
+        mode: "0755"
+    - name: Disable userland-proxy
+      copy:
+        dest: "{{ ansible_env.HOME }}/.config/docker/daemon.json"
+        mode: "0644"
+        content: |
+          {"userland-proxy": false}
+      notify:
+        - restart docker
+        - restart voty
