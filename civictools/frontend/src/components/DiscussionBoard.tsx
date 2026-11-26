@@ -6,7 +6,7 @@ import {
   useState,
 } from "preact/hooks";
 import { useTranslation } from "react-i18next";
-import { pb } from "../pb";
+import { pb, withRetry } from "../pb";
 import {
   argumentRecords,
   argumentVotes,
@@ -262,6 +262,11 @@ export function DiscussionBoard({
         </div>
       </div>
 
+      {!collapsed && !isTeacher && (
+        <p className="px-3 py-1.5 text-xs text-slate-500 border-b border-slate-200">
+          {t("discussion.hint")}
+        </p>
+      )}
       {!collapsed && (
         <div
           onPointerDown={(e) => e.stopPropagation()}
@@ -410,12 +415,14 @@ function ArgumentCard({
     e.stopPropagation();
     if (!currentParticipantId) return;
     if (myVote) {
-      await pb.collection("argument_votes").delete(myVote.id);
+      await withRetry(() => pb.collection("argument_votes").delete(myVote.id));
     } else {
-      await pb.collection("argument_votes").create({
-        argument: arg.id,
-        participant: currentParticipantId,
-      });
+      await withRetry(() =>
+        pb.collection("argument_votes").create({
+          argument: arg.id,
+          participant: currentParticipantId,
+        })
+      );
     }
   }
 

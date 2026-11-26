@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import { pb } from "../pb";
 import { canvasTransform, rankingModal } from "../store";
 
-const MAX_OPTIONS = 12;
+const MAX_OPTIONS = 30;
 const BOARD_WIDTH = 460;
 const BOARD_HEIGHT_ESTIMATE = 320;
 

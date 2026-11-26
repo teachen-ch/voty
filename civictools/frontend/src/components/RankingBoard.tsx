@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "preact/hooks";
+import { createPortal } from "react-dom";
 import { useTranslation } from "react-i18next";
 import { pb } from "../pb";
 import { canvasTransform, rankingModal, rankingResponses } from "../store";
@@ -333,44 +334,47 @@ export function RankingBoard({
 
   return (
     <>
-      {/* Ghost — fixed, follows pointer during drag */}
-      <div
-        ref={ghostRef}
-        style={{
-          position: "fixed",
-          display: "none",
-          zIndex: 9999,
-          pointerEvents: "none",
-          boxShadow: "0 8px 24px rgba(0,0,0,0.18)",
-          borderRadius: "0.5rem",
-          border: "1px solid #cbd5e1",
-          background: "white",
-          alignItems: "center",
-          gap: "0.75rem",
-          padding: "0.625rem 0.75rem",
-          opacity: 0.92,
-        }}
-      >
-        <span
-          ref={ghostCircleRef}
+      {/* Ghost — portaled to body so the canvas transform doesn't offset it */}
+      {createPortal(
+        <div
+          ref={ghostRef}
           style={{
-            flexShrink: 0,
-            width: 28,
-            height: 28,
-            borderRadius: "50%",
-            display: "flex",
+            position: "fixed",
+            display: "none",
+            zIndex: 9999,
+            pointerEvents: "none",
+            boxShadow: "0 8px 24px rgba(0,0,0,0.18)",
+            borderRadius: "0.5rem",
+            border: "1px solid #cbd5e1",
+            background: "white",
             alignItems: "center",
-            justifyContent: "center",
-            fontSize: 12,
-            fontWeight: 700,
-            color: "white",
+            gap: "0.75rem",
+            padding: "0.625rem 0.75rem",
+            opacity: 0.92,
           }}
-        />
-        <span
-          ref={ghostLabelRef}
-          style={{ flex: 1, fontSize: 14, color: "#1e293b" }}
-        />
-      </div>
+        >
+          <span
+            ref={ghostCircleRef}
+            style={{
+              flexShrink: 0,
+              width: 28,
+              height: 28,
+              borderRadius: "50%",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              fontSize: 12,
+              fontWeight: 700,
+              color: "white",
+            }}
+          />
+          <span
+            ref={ghostLabelRef}
+            style={{ flex: 1, fontSize: 14, color: "#1e293b" }}
+          />
+        </div>,
+        document.body
+      )}
 
       {/* Board */}
       <div
@@ -494,6 +498,9 @@ export function RankingBoard({
             onPointerDown={(e) => e.stopPropagation()}
             className="p-3 flex flex-col gap-2"
           >
+            {!isTeacher && canInteract && !(showResults && sortedByAvg) && (
+              <p className="text-xs text-slate-500">{t("ranking.hint")}</p>
+            )}
             {/* Results view */}
             {showResults && sortedByAvg ? (
               <>

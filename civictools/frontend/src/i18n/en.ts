@@ -135,6 +135,7 @@ const en = {
     waitingSticky: "Waiting for your teacher to enable sticky notes…",
   },
   discussion: {
+    hint: "Press + in a column to add an argument. Click the thumbs up to support one.",
     newTitle: "New discussion board",
     editTitle: "Edit discussion board",
     prompt: "Prompt",
@@ -158,6 +159,7 @@ const en = {
     showLess: "Show less",
   },
   voting: {
+    hint: "Click the option you vote for. Click again to change it.",
     newTitle: "New voting",
     editTitle: "Edit voting",
     questionPlaceholder: "What should the class vote on?",
@@ -180,6 +182,7 @@ const en = {
       "Restart this voting? All votes will be deleted and voting reopens.",
   },
   ranking: {
+    hint: "Drag an option up or down to put it in your order, then press Submit.",
     newTitle: "New ranking",
     editTitle: "Edit ranking",
     questionPlaceholder: "What should students rank?",

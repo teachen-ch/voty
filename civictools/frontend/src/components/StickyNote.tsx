@@ -79,9 +79,23 @@ export function StickyNote({ note, isTeacher, currentParticipantId }: Props) {
     }
   }, [note.width, note.height]);
 
+  const saveTimer = useRef<number | undefined>(undefined);
+  const pendingContent = useRef<string | null>(null);
+
   useEffect(() => {
+    if (document.activeElement === textareaRef.current) return;
     setContent(note.content as string);
   }, [note.content]);
+
+  function flushContent() {
+    window.clearTimeout(saveTimer.current);
+    if (pendingContent.current === null) return;
+    const next = pendingContent.current;
+    pendingContent.current = null;
+    updateContent(next).catch(() => {});
+  }
+
+  useEffect(() => flushContent, []);
 
   useLayoutEffect(() => {
     const textarea = textareaRef.current;
@@ -242,7 +256,13 @@ export function StickyNote({ note, isTeacher, currentParticipantId }: Props) {
         readOnly={locked || !isTeacher}
         onInput={(e) => {
           setContent(e.currentTarget.value);
-          updateContent(e.currentTarget.value);
+          pendingContent.current = e.currentTarget.value;
+          window.clearTimeout(saveTimer.current);
+          saveTimer.current = window.setTimeout(flushContent, 500);
+        }}
+        onBlur={() => {
+          flushContent();
+          setContent(note.content as string);
         }}
         onPointerDown={(e) => e.stopPropagation()}
         placeholder="Type here…"

@@ -268,6 +268,9 @@ export function VotingBoard({
           onPointerDown={(e) => e.stopPropagation()}
           className="p-3 flex flex-col gap-2"
         >
+          {!isTeacher && !closed && (
+            <p className="text-xs text-slate-500">{t("voting.hint")}</p>
+          )}
           <div
             className={
               closed && !isTeacher ? "opacity-40 pointer-events-none" : ""

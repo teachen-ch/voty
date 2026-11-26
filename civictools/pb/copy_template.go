@@ -74,6 +74,10 @@ func registerCopyTemplate(app *pocketbase.PocketBase) {
 					[]string{"prompt", "pos_x", "pos_y", "options"}); err != nil {
 					return err
 				}
+				if err := copyChildren(txApp, "sticky_notes", templateId, newRoom.Id,
+					[]string{"content", "pos_x", "pos_y", "width", "height", "color_index", "color"}); err != nil {
+					return err
+				}
 				if err := copyVotingsOrRankings(txApp, "votings", templateId, newRoom.Id); err != nil {
 					return err
 				}

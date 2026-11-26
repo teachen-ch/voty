@@ -46,3 +46,20 @@ function studentSessionToken(): string | undefined {
 }
 
 export type { RecordModel } from "pocketbase";
+
+export async function withRetry<T>(
+  fn: () => Promise<T>,
+  attempts = 6
+): Promise<T> {
+  for (let i = 0; ; i++) {
+    try {
+      return await fn();
+    } catch (err) {
+      if ((err as { status?: number }).status !== 429 || i >= attempts - 1)
+        throw err;
+      await new Promise((r) =>
+        setTimeout(r, 300 * 2 ** i * (0.5 + Math.random()))
+      );
+    }
+  }
+}
